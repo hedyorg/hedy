@@ -27,40 +27,49 @@ function builtinRead(x) {
 // configure the output function
 // call Sk.importMainWithBody()
 
-function createHeader(){
-    header = 'x = 12\n';
-    header += 'from lark import Lark\n';
-    return header;
-}
 
-function runit() { 
-   var prog = document.getElementById("yourcode").value; 
-   header = createHeader();
-   code = header + prog;
-   console.log(code);
-   var mypre = document.getElementById("output"); 
-   mypre.innerHTML = ''; 
-   Sk.pre = "output";
-   Sk.configure({output:outf, read:builtinRead}); 
-   (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
-   var myPromise = Sk.misceval.asyncToPromise(function() {
-       return Sk.importMainWithBody("<stdin>", false, code, true);
-   });
-   myPromise.then(function(mod) {
-       console.log('success');
-   },
-       function(err) {
-       console.log(err.toString());
-   });
+
+function runit() {
+
+   var prog = document.getElementById("yourcode").value;
+   url = "/parse/?code=" + prog;
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET', url, true);
+   xhr.send();
+
+   function processRequest(e) {
+   if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = JSON.parse(xhr.responseText);
+        code = response["Code"]};
+        console.log(code);
+        var mypre = document.getElementById("output");
+        mypre.innerHTML = '';
+        Sk.pre = "output";
+        Sk.configure({output:outf, read:builtinRead});
+        var myPromise = Sk.misceval.asyncToPromise(function() {
+           return Sk.importMainWithBody("<stdin>", false, code, true);
+        });
+        myPromise.then(function(mod) {
+           console.log('success');
+        },
+           function(err) {
+           console.log(err.toString());
+        });
+
+
+   }
+
+   xhr.onreadystatechange = processRequest;
+
+
 } 
 </script> 
 
-<h3>Try This</h3> 
+<h3>Welkom by Hedy!</h3>
 <form> 
 <textarea id="yourcode" cols="40" rows="10">
-print(12)
-print(x)
-</textarea><br /> 
+print Hallo hoe heet jij
+</textarea><br />
 <button type="button" onclick="runit()">Run</button> 
 </form> 
 <pre id="output" ></pre> 
