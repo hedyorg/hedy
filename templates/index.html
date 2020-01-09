@@ -4,7 +4,14 @@
 <script src="skulpt.min.js" type="text/javascript"></script> 
 <script src="skulpt-stdlib.js" type="text/javascript"></script> 
 
-</head> 
+<title>Leer programmeren met Hedy</title>
+<style type="text/css" media="screen">
+      #editor { 
+         width: 400px;
+         height: 200px;
+      }
+</style>
+</head>
 
 <body> 
 
@@ -27,11 +34,25 @@ function builtinRead(x) {
 // configure the output function
 // call Sk.importMainWithBody()
 
+function print_demo() {
+   var editor = ace.edit("editor");
+   editor.setValue("print Hallo welkom bij Hedy");
 
+}
+
+function ask_demo() {
+   var editor = ace.edit("editor");
+   editor.setValue("ask Wat is je lievelingskleur");
+
+}
 
 function runit() {
 
-   var prog = document.getElementById("yourcode").value;
+   // var prog = document.getElementById("editor").value;
+
+   var editor = ace.edit("editor");
+   var prog = editor.getValue();
+
    var url = "/parse/?code=" + prog;
    var xhr = new XMLHttpRequest();
    xhr.open('GET', url, true);
@@ -64,15 +85,32 @@ function runit() {
 } 
 </script> 
 
-<h3>Welkom by Hedy!</h3>
-<form> 
-<textarea id="yourcode" cols="40" rows="10">
-print Hallo hoe heet jij
-</textarea><br />
-<button type="button" onclick="runit()">Run</button> 
-</form> 
-<pre id="output" ></pre> 
+<h3>Hedy: Level 1</h3>
+In Level 1 kun je deze commando's gebruiken:<br>
+<ul>
+   <li>Iets printen met print. Bijvoorbeeld: print Hallo welkom bij Hedy<button type="button" onclick="print_demo()">Probeer dit</button> </li>
+   <li>Iets vragen met ask. Bijvoorbeeld: ask Wat is je lievelingskleur<button type="button" onclick="ask_demo()">Probeer dit</button></li>
+ </ul>
 
+
+<div id="editor">print Hallo wereld</div>
+<br>
+
+<script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+   var editor = ace.edit("editor");
+   editor.setTheme("ace/theme/monokai");
+   // editor.session.setMode("ace/mode/javascript");
+</script>
+
+
+
+
+<form> 
+<button type="button" onclick="runit()">Voer de code uit</button> 
+</form> 
+
+<pre id="output" ></pre> 
 </body> 
 
 </html> 
