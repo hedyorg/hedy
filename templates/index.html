@@ -38,25 +38,24 @@ function runit() {
    xhr.send();
 
    function processRequest(e) {
-   if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = JSON.parse(xhr.responseText);
-        var code = response["Code"]};
-        console.log(code);
-        var mypre = document.getElementById("output");
-        mypre.innerHTML = '';
-        Sk.pre = "output";
-        Sk.configure({output:outf, read:builtinRead});
-        var myPromise = Sk.misceval.asyncToPromise(function() {
-           return Sk.importMainWithBody("<stdin>", false, code, true);
-        });
-        myPromise.then(function(mod) {
-           console.log('success');
-        },
-           function(err) {
-           console.log(err.toString());
-        });
-
-
+      if (xhr.readyState == 4 && xhr.status == 200) {
+         var response = JSON.parse(xhr.responseText);
+         var code = response["Code"];
+         console.log(code);
+         var mypre = document.getElementById("output");
+         mypre.innerHTML = '';
+         Sk.pre = "output";
+         Sk.configure({ output: outf, read: builtinRead });
+         var myPromise = Sk.misceval.asyncToPromise(function () {
+            return Sk.importMainWithBody("<stdin>", false, code, true);
+         });
+         myPromise.then(function (mod) {
+            console.log('success');
+         },
+            function (err) {
+               console.log(err.toString());
+            });
+      }
    }
 
    xhr.onreadystatechange = processRequest;
