@@ -32,7 +32,7 @@ function builtinRead(x) {
 function runit() {
 
    var prog = document.getElementById("yourcode").value;
-   url = "/parse/?code=" + prog;
+   var url = "/parse/?code=" + prog;
    var xhr = new XMLHttpRequest();
    xhr.open('GET', url, true);
    xhr.send();
@@ -40,7 +40,7 @@ function runit() {
    function processRequest(e) {
    if (xhr.readyState == 4 && xhr.status == 200) {
         var response = JSON.parse(xhr.responseText);
-        code = response["Code"]};
+        var code = response["Code"]};
         console.log(code);
         var mypre = document.getElementById("output");
         mypre.innerHTML = '';
