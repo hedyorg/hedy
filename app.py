@@ -39,6 +39,7 @@ def respond():
     # code passen
 
     print(repr(response))
+    return jsonify(response)
 
     str_versie = str(response)
     str_versie = str_versie.replace("'Code'",'"Code"')
