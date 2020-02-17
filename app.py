@@ -37,6 +37,9 @@ def respond():
     # er is trouwens niet eens perse JSON nodig we kunnen ook wel een string met
     # code passen
 
+    print(repr(response))
+    return jsonify(response)
+
     str_versie = str(response)
     str_versie = str_versie.replace("'Code'",'"Code"')
     return str_versie
