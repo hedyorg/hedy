@@ -23,7 +23,8 @@ def respond():
         try:
             result = hedy.transpile(lines)
             response["Code"] = result
-        except:
+        except Exception as e:
+            print(e)
             print(f"error transpiling {lines}")
 
     # Return the response in json format
