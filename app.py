@@ -23,29 +23,17 @@ def respond():
         try:
             result = hedy.transpile(lines)
             response["Code"] = result
-        except:
+        except Exception as E:
             print(f"error transpiling {lines}")
+            response["Error"] = str(E)
 
-    # Return the response in json format
-    # origineel gebruikte we de eerste dat werkt opeens niet meer om
-    # onduidelijke redenen! Het heeft vermoedelijk iets met strings en "" te maken
-    # json_version_2 = jsonify(response) <- dit was het origineel
-    # ook direct dumpen doet het niet
-    # json_version = json.dump(response) <- ook foutmelding!
-    # dus maken we er maar even met de hand geldige JSON van met str() Niet echt ideaal zo!!
-
-    # er is trouwens niet eens perse JSON nodig we kunnen ook wel een string met
-    # code passen
-
-    str_versie = str(response)
-    str_versie = str_versie.replace("'Code'",'"Code"')
-    return str_versie
+    return jsonify(response)
 
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
 
-# A welcome message to test our server
+# routing to index.html
 @app.route('/')
 def index():
     return render_template("index.html")

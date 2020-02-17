@@ -30,7 +30,7 @@ def transpile(input_string):
     else:
         raise Exception('First word is not a command')
 
-    parameter = flatten_test(tree.children[0])
+    parameter = str(flatten_test(tree.children[0]))
     return command + "('" + parameter + "')"
 
 def execute(input_string):
