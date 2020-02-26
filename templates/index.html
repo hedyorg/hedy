@@ -1,27 +1,22 @@
-<html> 
-<head> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script> 
-<script src="skulpt.min.js" type="text/javascript"></script> 
-<script src="skulpt-stdlib.js" type="text/javascript"></script> 
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+<script src="skulpt.min.js" type="text/javascript"></script>
+<script src="skulpt-stdlib.js" type="text/javascript"></script>
 
 <title>Leer programmeren met Hedy</title>
-<style type="text/css" media="screen">
-      #editor { 
-         width: 400px;
-         height: 200px;
-      }
-</style>
+<link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 
-<body> 
+<body>
 
-<script type="text/javascript"> 
+<script type="text/javascript">
 // output functions are configurable.  This one just appends some text
 // to a pre element.
-function outf(text) { 
-    var mypre = document.getElementById("output"); 
-    mypre.innerHTML = mypre.innerHTML + text; 
-} 
+function outf(text) {
+    var mypre = document.getElementById("output");
+    mypre.innerHTML = mypre.innerHTML + text;
+}
 function builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
             throw "File not found: '" + x + "'";
@@ -46,6 +41,15 @@ function ask_demo() {
 
 }
 
+function asyncInput() {
+   console.log('asyncinput');
+   return new Promise(ok => {
+      window.setTimeout(function() {
+         ok('hallo');
+      }, 500);
+   });
+}
+
 function runit() {
 
    // var prog = document.getElementById("editor").value;
@@ -68,7 +72,12 @@ function runit() {
          var mypre = document.getElementById("output");
          mypre.innerHTML = '';
          Sk.pre = "output";
-         Sk.configure({ output: outf, read: builtinRead });
+         Sk.configure({
+            output: outf,
+            read: builtinRead,
+            inputfun: asyncInput,
+            inputfunTakesPrompt: true,
+         });
          var myPromise = Sk.misceval.asyncToPromise(function () {
             return Sk.importMainWithBody("<stdin>", false, code, true);
          });
@@ -84,36 +93,44 @@ function runit() {
    xhr.onreadystatechange = processRequest;
 
 
-} 
-</script> 
-
-<h3>Hedy: Level 1</h3>
-In Level 1 kun je deze commando's gebruiken:<br>
-<ul>
-   <li>Iets printen met print. Bijvoorbeeld: print Hallo welkom bij Hedy<button type="button" onclick="print_demo()">Probeer dit</button> </li>
-   <li>Iets vragen met ask. Bijvoorbeeld: ask Wat is je lievelingskleur<button type="button" onclick="ask_demo()">Probeer dit</button></li>
- </ul>
-
-
-<div id="editor">print Hallo wereld</div>
-<br>
-
-<script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-   var editor = ace.edit("editor");
-   editor.setTheme("ace/theme/monokai");
-   // editor.session.setMode("ace/mode/javascript");
+}
 </script>
 
+<div class="container">
+   <div class="col">
+      <h3>Hedy: Level 1</h3>
+      In Level 1 kun je deze commando's gebruiken:<br>
+      <ul>
+         <li>Iets printen met print. Bijvoorbeeld: print Hallo welkom bij Hedy<button type="button"
+               onclick="print_demo()">Probeer dit</button> </li>
+         <li>Iets vragen met ask. Bijvoorbeeld: ask Wat is je lievelingskleur<button type="button"
+               onclick="ask_demo()">Probeer dit</button></li>
+      </ul>
 
 
+      <div id="editor">print Hallo wereld</div>
+      <br>
 
-<form> 
-<button type="button" onclick="runit()">Voer de code uit</button> 
-</form> 
+      <script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
+      <script>
+         var editor = ace.edit("editor");
+         editor.setTheme("ace/theme/monokai");
+         // editor.session.setMode("ace/mode/javascript");
+      </script>
 
-<pre id="output" ></pre>
-Latest deploy: Feb 17th, 2020
-</body> 
+      <form>
+         <button type="button" onclick="runit()">Voer de code uit</button>
+      </form>
 
-</html> 
+      Latest deploy: Feb 17th, 2020
+
+   </div>
+   <div class="col">
+      <pre id="output">
+      </pre>
+   </div>
+</div>
+
+</body>
+
+</html>
