@@ -5,8 +5,23 @@ import json
 from flask import Flask, request, jsonify, render_template
 app = Flask(__name__, static_url_path='')
 
+@app.route('/levels-text/', methods=['GET'])
+def levels():
+    level = request.args.get("level", None)
+
+    #read levels from file
+    try:
+        file = open("levels-text.json", "r")
+        contents = str(file.read())
+        response = (json.loads(contents))
+    except Exception as E:
+            print(f"error opening level {level}")
+            response["Error"] = str(E)
+    return jsonify(response)
+
+
 @app.route('/parse/', methods=['GET'])
-def respond():
+def parse():
     # Retrieve the name from url parameter
     lines = request.args.get("code", None)
 
