@@ -1,9 +1,5 @@
 <html> 
 <head> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script> 
-<script src="skulpt.min.js" type="text/javascript"></script> 
-<script src="skulpt-stdlib.js" type="text/javascript"></script> 
-
 <title>Leer programmeren met Hedy</title>
 <style type="text/css" media="screen">
       #editor { 
@@ -14,104 +10,24 @@
 </head>
 
 <body> 
-
-<script type="text/javascript"> 
-// output functions are configurable.  This one just appends some text
-// to a pre element.
-function outf(text) { 
-    var mypre = document.getElementById("output"); 
-    mypre.innerHTML = mypre.innerHTML + text; 
-} 
-function builtinRead(x) {
-    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-            throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
-}
-
-// Here's everything you need to run a python program in skulpt
-// grab the code from your textarea
-// get a reference to your pre element for output
-// configure the output function
-// call Sk.importMainWithBody()
-
-function print_demo() {
-   var editor = ace.edit("editor");
-   editor.setValue("print Hallo welkom bij Hedy");
-
-}
-
-function ask_demo() {
-   var editor = ace.edit("editor");
-   editor.setValue("ask Wat is je lievelingskleur");
-
-}
-
-function runit() {
-
-   // var prog = document.getElementById("editor").value;
-
-   var editor = ace.edit("editor");
-   var prog = editor.getValue();
-
-   var url = "/parse/?code=" + prog;
-   var xhr = new XMLHttpRequest();
-   xhr.open('GET', url, true);
-   xhr.send();
-
-   function processRequest(e) {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-         var response = JSON.parse(xhr.responseText);
-         var code = response["Code"];
-         console.log(code);
-         var mypre = document.getElementById("output");
-         mypre.innerHTML = '';
-         Sk.pre = "output";
-         Sk.configure({ output: outf, read: builtinRead });
-         var myPromise = Sk.misceval.asyncToPromise(function () {
-            return Sk.importMainWithBody("<stdin>", false, code, true);
-         });
-         myPromise.then(function (mod) {
-            console.log('success');
-         },
-            function (err) {
-               console.log(err.toString());
-            });
-      }
-   }
-
-   xhr.onreadystatechange = processRequest;
-
-
-} 
-</script> 
-
 <h3>Hedy: Level 1</h3>
 In Level 1 kun je deze commando's gebruiken:<br>
 <ul>
    <li>Iets printen met print. Bijvoorbeeld: print Hallo welkom bij Hedy<button type="button" onclick="print_demo()">Probeer dit</button> </li>
    <li>Iets vragen met ask. Bijvoorbeeld: ask Wat is je lievelingskleur<button type="button" onclick="ask_demo()">Probeer dit</button></li>
  </ul>
-
-
 <div id="editor">print Hallo wereld</div>
 <br>
-
-<script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-   var editor = ace.edit("editor");
-   editor.setTheme("ace/theme/monokai");
-   // editor.session.setMode("ace/mode/javascript");
-</script>
-
-
-
-
 <form> 
 <button type="button" onclick="runit()">Voer de code uit</button> 
 </form> 
-
 <pre id="output" ></pre>
 Latest deploy: Feb 17th, 2020
-</body> 
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script> 
+<script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="vender/skulpt.min.js" type="text/javascript"></script> 
+<script src="vender/skulpt-stdlib.js" type="text/javascript"></script> 
+<script src="js/app.js" type="text/javascript"></script> 
+</body> 
 </html> 

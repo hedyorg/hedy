@@ -1,0 +1,10 @@
+start: "print " text -> print
+                      | "ask " text -> ask
+                      | "echo" -> echo
+                      |  text " " text -> invalid
+
+                text: (LETTER | DIGIT | WS_INLINE)+
+
+                %import common.LETTER   // imports from terminal library
+                %import common.DIGIT   // imports from terminal library
+                %import common.WS_INLINE   // imports from terminal library

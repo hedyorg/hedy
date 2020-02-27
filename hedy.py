@@ -1,17 +1,10 @@
 from lark import Lark
 
-def create_parser_level_1():
+def create_parser(level):
+    file = open("grammars/level" + str(level) + ".txt", "r")
+    grammar = file.read()
     #note that the order matters here, so print is tried first, then ask, then text (error)
-    return Lark('''start: "print " text -> print
-                      | "ask " text -> ask
-                      |  text " " text -> invalid
-
-                text: (LETTER | DIGIT | WS_INLINE)+
-
-                %import common.LETTER   // imports from terminal library
-                %import common.DIGIT   // imports from terminal library
-                %import common.WS_INLINE   // imports from terminal library
-             ''')
+    return Lark(grammar)
 
 def flatten_test(tree):
     if tree.data == 'text':
@@ -20,13 +13,24 @@ def flatten_test(tree):
         raise Exception('Attemping to print or ask non-text element')
 
 
-def transpile(input_string):
-    parser_level_1 = create_parser_level_1()
+def transpile(input_string, level):
+    return transpile_command(input_string, level)
+
+def transpile_command(input_string, level):
+    parser_level_1 = create_parser(level)
     tree = parser_level_1.parse(input_string)
+
     if tree.data == 'print':
         command = 'print'
+        parameter = str(flatten_test(tree.children[0]))
+        return command + "('" + parameter + "')"
+    elif tree.data == 'echo':
+        command = 'print(answer)'
+        return command
     elif tree.data == 'ask':
-        command = 'input'
+        parameter = str(flatten_test(tree.children[0]))
+        command = 'answer = input'
+        return command + "('" + parameter + "')"
     else:
         raise Exception('First word is not a command')
 

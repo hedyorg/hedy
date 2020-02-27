@@ -14,6 +14,7 @@ def levels():
         file = open("levels-text.json", "r")
         contents = str(file.read())
         response = (json.loads(contents))
+        file.close()
     except Exception as E:
             print(f"error opening level {level}")
             response["Error"] = str(E)
