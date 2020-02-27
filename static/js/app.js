@@ -32,7 +32,7 @@ function ask_demo() {
 
 }
 
-function runit() {
+function runit(level) {
 
    // var prog = document.getElementById("editor").value;
 
@@ -41,7 +41,9 @@ function runit() {
 
    console.log('Origineel programma:\n', prog);
 
-   var url = "/parse/?code=" + encodeURIComponent(prog);
+   var url = "/parse/?level=" + level.toString() + "&code=" + encodeURIComponent(prog);
+   console.log('URL:\n', url);
+   
    var xhr = new XMLHttpRequest();
    xhr.open('GET', url, true);
    xhr.send();
@@ -50,7 +52,7 @@ function runit() {
       if (xhr.readyState == 4 && xhr.status == 200) {
          var response = JSON.parse(xhr.responseText);
          var code = response["Code"];
-         console.log('Veraald programma:\n', code);
+         console.log('Vertaald programma:\n', code);
          var mypre = document.getElementById("output");
          mypre.innerHTML = '';
          Sk.pre = "output";

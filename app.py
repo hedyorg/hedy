@@ -25,6 +25,7 @@ def levels():
 def parse():
     # Retrieve the name from url parameter
     lines = request.args.get("code", None)
+    level = request.args.get("level", None)
 
     # For debugging
     print(f"got code {lines}")
@@ -37,7 +38,7 @@ def parse():
     # is so, parse
     else:
         try:
-            result = hedy.transpile(lines)
+            result = hedy.transpile(lines, level)
             response["Code"] = result
         except Exception as E:
             print(f"error transpiling {lines}")
