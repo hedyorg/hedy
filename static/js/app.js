@@ -40,7 +40,7 @@ function runit(level) {
       }
     }).fail(function(err) {
       console.error(err);
-      error.show('We konden niet goed met de server praten', `${err}`);
+      error.show('We konden niet goed met de server praten', JSON.stringify(err));
     });
 
   } catch (e) {
@@ -62,7 +62,7 @@ function runPythonProgram(code) {
     console.log('Programma klaar');
   }).catch(function(err) {
     console.log(err);
-    addToOutput(err.toString(), 'red');
+    addToOutput(JSON.stringify(err), 'red');
   });
 
   function addToOutput(text, color) {
