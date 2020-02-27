@@ -1,6 +1,8 @@
 # Hedy
 Hedy is a gradual programming language aimed at teaching programming and teaching Python. It teaches using different levels. The first level kust offers printing and asking for input. This level is meant to introduce learners to the idea of a progamming language, and the environment. From there, Hedy builds up to include more complex syntax and additional concepts.
 
+The latest version of Hedy can be found at [hedy-beta.herokuapp.com](https://hedy-beta.herokuapp.com).
+
 
 Design Goals & Principles
 ==============================
@@ -188,35 +190,7 @@ up to now was done with the keyword [`at`], following Design Goal 2.
 In the final level Hedy becomes a subset of Python by replacing the word
 [`is`] in assignment and equality checks by [`=`] and [`==`].
 
-Usage
------
+Contributing
+------------
 
-If you want to use Hedy, visit
-[hedy-beta.herokuapp.com](https://hedy-beta.herokuapp.com). To work on this
-locally, do the following:
-
-
-```
-$ python3 -m venv .env
-$ source .env/bin/activate
-(.env)$ pip install -r requirements.txt
-
-$ python3 app.py
-```
-
-Pre-release environment
------------------------
-
-The contents of branch `master` are always available on
-[hedy-beta.herokuapp.com](https://hedy-beta.herokuapp.com).
-
-The contents of branch `development` are available on
-[hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com). This
-branch should be treated as read-only, and is forcibly overwritten
-to test feature branches locally on the alpha environment.
-
-To push the current commit to the Alpha environment on Heroku:
-
-```
-$ git push -f origin HEAD:development
-```
+Contribution instructions have been moved to [CONTRIBUTING.md](CONTRIBUTING.md).
