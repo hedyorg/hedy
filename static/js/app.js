@@ -54,7 +54,12 @@ function runPythonProgram(code) {
   outputDiv.empty();
 
   Sk.pre = "output";
-  Sk.configure({ output: outf, read: builtinRead });
+  Sk.configure({
+    output: outf,
+    read: builtinRead,
+    inputfun: inputFromBox,
+    inputfunTakesPrompt: true,
+  });
 
   Sk.misceval.asyncToPromise(function () {
     return Sk.importMainWithBody("<stdin>", false, code, true);
@@ -79,6 +84,25 @@ function runPythonProgram(code) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
         throw "File not found: '" + x + "'";
     return Sk.builtinFiles["files"][x];
+  }
+
+  function inputFromBox(prompt) {
+    return new Promise(function(ok) {
+      addToOutput(prompt + '\n', 'white');
+      const input = $('<input>').attr('placeholder', 'Typ hier je antwoord').appendTo(outputDiv).focus();
+
+      // When enter is pressed, turn the input box into a regular
+      // span and resolve the promise
+      input.on('keypress', function(e) {
+        if (e.which == 13 /* ENTER */) {
+          const text = input.val();
+
+          input.remove();
+          addToOutput(text + '\n', 'yellow');
+          ok(text);
+        }
+      });
+    });
   }
 }
 
