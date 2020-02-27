@@ -2,7 +2,7 @@ import hedy
 import json
 
 # app.py
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 app = Flask(__name__, static_url_path='')
 
 @app.route('/levels-text/', methods=['GET'])
@@ -54,7 +54,7 @@ def parse():
 # routing to index.html
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return open("static/index.html").read()
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
