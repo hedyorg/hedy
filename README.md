@@ -58,8 +58,8 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
     independently. We anticipate that when the initial syntax is simple,
     allowing novices to create a fun and meaningful program, they will
     later have more motivation to learn the details of the syntax.
-    
-    
+
+
 Levels
 ------
 
@@ -188,3 +188,35 @@ up to now was done with the keyword [`at`], following Design Goal 2.
 In the final level Hedy becomes a subset of Python by replacing the word
 [`is`] in assignment and equality checks by [`=`] and [`==`].
 
+Usage
+-----
+
+If you want to use Hedy, visit
+[hedy-beta.herokuapp.com](https://hedy-beta.herokuapp.com). To work on this
+locally, do the following:
+
+
+```
+$ python3 -m venv .env
+$ source .env/bin/activate
+(.env)$ pip install -r requirements.txt
+
+$ python3 app.py
+```
+
+Pre-release environment
+-----------------------
+
+The contents of branch `master` are always available on
+[hedy-beta.herokuapp.com](https://hedy-beta.herokuapp.com).
+
+The contents of branch `development` are available on
+[hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com). This
+branch should be treated as read-only, and is forcibly overwritten
+to test feature branches locally on the alpha environment.
+
+To push the current commit to the Alpha environment on Heroku:
+
+```
+$ git push -f origin HEAD:development
+```
