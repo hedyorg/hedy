@@ -18,6 +18,11 @@ function ask_demo() {
   editor.setValue("ask Wat is je lievelingskleur");
 }
 
+function echo_demo() {
+  var editor = ace.edit("editor");
+  editor.setValue("echo je lievelingskleur is ");
+}
+
 function runit(level) {
   error.hide();
   try {

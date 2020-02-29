@@ -1,9 +1,10 @@
 start: program
 program: command | command NEWLINE program
 command: inner_command -> command
-inner_command: "print " text -> print
+inner_command:   "print " text -> print
                | "ask " text -> ask
                | "echo " text -> echo
+               | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
                |  text " " text -> invalid
 
 PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
