@@ -21,9 +21,17 @@ class TestLevel1(unittest.TestCase):
         result = hedy.transpile("print Hallo welkom bij Hedy\nprint Mooi hoor", 1)
         self.assertEqual(result, "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')")
 
+    def test_transpile_three_lines_1(self):
+        input = """print Hallo
+ask Wat is je lievelingskleur
+echo je lievelingskleur is"""
+        result = hedy.transpile(input, 1)
+        self.assertEqual(result, "print('Hallo')\nanswer = input('Wat is je lievelingskleur')\nprint('je lievelingskleur is' + answer)")
+
+
     def test_transpile_echo_1(self):
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 1)
-        self.assertEqual(result, "print('Jouw lievelingskleur is dus... ' + answer)")
+        self.assertEqual(result, "print('Jouw lievelingskleur is dus...' + answer)")
 
 # ------ tests level 2 -------
 
@@ -49,7 +57,7 @@ class TestLevel1(unittest.TestCase):
 
     def test_transpile_echo_2(self):
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
-        self.assertEqual(result, "print('Jouw lievelingskleur is dus... ' + answer)")
+        self.assertEqual(result, "print('Jouw lievelingskleur is dus...' + answer)")
 
     def test_transpile_assign_2(self):
         result = hedy.transpile("naam is Felienne", 2)

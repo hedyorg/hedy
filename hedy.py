@@ -4,11 +4,14 @@ from lark import Tree, Transformer
 class AllCommands(Transformer):
     #creates a list of all commands in a tree for further processing
     # they either come
-    def program(self, args): #form a command directly
-        if len(args) == 1:
-            return args
-        else: #or from a nested command
-            return [args[0]] + [args[2][0]]
+    def program(self, args):
+        commands = []
+        for c in args:
+            if c != '\n': #niet elegant, eigenlij willen we die NEWLINE niet in de parsetree natuurlijk, maar voor nu ok
+                commands.append(c)
+        return commands
+    def command(self, args):
+        return args
 
 class FlattenText(Transformer):
     #flattens arguments of code for more easy debugging
@@ -34,6 +37,7 @@ class AllCommandsAssignments(Transformer):
 def all_commands(tree):
     flattened_tree = FlattenText().transform(tree)
     commands = AllCommands().transform(flattened_tree)
+    commands = [x for [x] in commands]
     return commands
 
 def all_assignments(tree):
@@ -84,7 +88,6 @@ def transpile(input_string, level):
 # deze transpile moet natuurlijk ook een transformer worden
 # op een dag :)
 def transpile_command(tree, level):
-    tree = tree.children[0] #get the child of the command rule
     parameter = tree.children[0]
     if tree.data == 'print':
         command = 'print'
@@ -98,7 +101,7 @@ def transpile_command(tree, level):
                 return command + "('" + parameter + "')"
     elif tree.data == 'echo':
         command = 'print'
-        return command + "('" + parameter + " ' + answer)"
+        return command + "('" + parameter + "' + answer)"
     elif tree.data == 'ask':
         command = 'answer = input'
         return command + "('" + parameter + "')"

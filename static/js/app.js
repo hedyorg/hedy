@@ -20,7 +20,7 @@ function ask_demo() {
 
 function echo_demo() {
   var editor = ace.edit("editor");
-  editor.setValue("echo je lievelingskleur is ");
+  editor.setValue("ask Wat is je lievelingskleur\necho je lievelingskleur is ");
 }
 
 function runit(level) {

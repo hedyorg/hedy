@@ -1,5 +1,5 @@
 start: program
-program: command | command NEWLINE program
+program: command (NEWLINE command)*
 command: inner_command -> command
 inner_command: "print " text -> print
                | "ask " text -> ask
