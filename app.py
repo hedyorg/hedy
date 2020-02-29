@@ -3,7 +3,10 @@ import json
 
 # app.py
 from flask import Flask, request, jsonify
+from flask_compress import Compress
+
 app = Flask(__name__, static_url_path='')
+Compress(app)
 
 @app.route('/levels-text/', methods=['GET'])
 def levels():
