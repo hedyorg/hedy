@@ -62,7 +62,7 @@ function runPythonProgram(code) {
   Sk.configure({
     output: outf,
     read: builtinRead,
-    inputfun: inputFromBox,
+    inputfun: inputFromModal,
     inputfunTakesPrompt: true,
   });
 
@@ -91,7 +91,13 @@ function runPythonProgram(code) {
     return Sk.builtinFiles["files"][x];
   }
 
-  function inputFromBox(prompt) {
+  /**
+   * Get the input inline in the terminal
+   *
+   * Render the prompt to the terminal, add an inputbox where the user can
+   * type, and replace the inputbox with static text after they hit enter.
+   */
+  function inputFromTerminal(prompt) {
     return new Promise(function(ok) {
       addToOutput(prompt + '\n', 'white');
       const input = $('<input>').attr('placeholder', 'Typ hier je antwoord').appendTo(outputDiv).focus();
@@ -107,6 +113,24 @@ function runPythonProgram(code) {
           ok(text);
         }
       });
+    });
+  }
+
+  function inputFromModal(prompt) {
+    return new Promise(function(ok) {
+      const input = $('#ask-modal input[type="text"]');
+      $('#ask-modal .caption').text(prompt);
+      input.val('');
+      setTimeout(function() {
+        input.focus();
+      }, 0);
+      $('#ask-modal form').one('submit', function(event) {
+        event.preventDefault();
+        $('#ask-modal').hide();
+        ok(input.val());
+        return false;
+      });
+      $('#ask-modal').show();
     });
   }
 }
