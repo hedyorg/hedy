@@ -5,7 +5,7 @@ module.exports = {
     screens: {
       // We only need a few breakpoints
       sm: '640px',
-      // md: '768px',
+      lg: '1024px',
     },
   },
   variants: {},

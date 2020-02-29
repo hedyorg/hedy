@@ -13,49 +13,50 @@
     <div>
       In Level 1 kun je deze commando's gebruiken:
 
-      <!-- print demo -->
-      <div class="w-1/2 border-l-2 border-t-1 hover:bg-gray-200 border-purple justify-between flex my-2 shadow-md p-3 pl-5">
-        <div class="flex-grow">
-          <div class="font-thin text-xl">
-            Iets printen met print
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- print demo -->
+        <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between flex my-2 shadow-md p-3 pl-5">
+          <div class="flex-grow">
+            <div class="font-thin text-xl">
+              Iets printen met print
+            </div>
+            Bijvoorbeeld: <tt>print Hallo welkom bij Hedy!</tt>
           </div>
-          Bijvoorbeeld: <tt>print Hallo welkom bij Hedy!</tt>
+          <button class="btn block flex-none self-end" onclick="print_demo()">Probeer dit</button>
         </div>
-        <button class="btn block flex-none self-end" onclick="print_demo()">Probeer dit</button>
-      </div>
 
-      <!-- ask demo -->
-      <div class="w-1/2 border-l-2 border-t-1 hover:bg-gray-200 border-purple justify-between flex my-2 shadow-md p-3 pl-5">
-        <div class="flex-grow">
-          <div class="font-thin text-xl">
-            Iets vragen met ask
+        <!-- ask demo -->
+        <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between flex my-2 shadow-md p-3 pl-5">
+          <div class="flex-grow">
+            <div class="font-thin text-xl">
+              Iets vragen met ask
+            </div>
+            Bijvoorbeeld: <tt>ask Wat is je lievelingskleur?</tt>
           </div>
-          Bijvoorbeeld: <tt>ask Wat is je lievelingskleur?</tt>
+          <button class="btn block flex-none self-end" onclick="ask_demo()">Probeer dit</button>
         </div>
-        <button class="btn block flex-none self-end" onclick="ask_demo()">Probeer dit</button>
-      </div>
 
-      <!-- echo demo -->
-      <div class="w-1/2 border-l-2 border-t-1 hover:bg-gray-200 border-purple justify-between flex my-2 shadow-md p-3 pl-5">
-        <div class="flex-grow">
-          <div class="font-thin text-xl">
-            Herhalen wat bij ask is ingetypt
+        <!-- echo demo -->
+        <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between flex my-2 shadow-md p-3 pl-5">
+          <div class="flex-grow">
+            <div class="font-thin text-xl">
+              Herhalen wat bij ask is ingetypt
+            </div>
+            Bijvoorbeeld: <tt>echo dus je lievelingskleur is...</tt>
           </div>
-          Bijvoorbeeld: <tt>echo dus je lievelingskleur is...</tt>
+          <button class="btn block flex-none self-end" onclick="echo_demo()">Probeer dit</button>
         </div>
-        <button class="btn block flex-none self-end" onclick="echo_demo()">Probeer dit</button>
       </div>
-
-
     </div>
-    <div class="flex mt-10">
-      <div class="flex-1 sm:w-full">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+      <div>
         <div id="editor" class="w-full h-48 text-lg rounded">print Hallo wereld</div>
         <br>
         <button class="green-btn" onclick="runit(1)">Voer de code uit</button>
       </div>
-      <div class="flex-1 sm:w-full">
-        <div id="output" class="rounded ml-5 p-2 px-3 bg-gray-900 color-white w-full h-48 text-lg">
+      <div>
+        <div id="output" class="rounded p-2 px-3 bg-gray-900 color-white w-full h-48 text-lg">
         </div>
       </div>
     </div>
