@@ -51,12 +51,27 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
       <div>
-        <div id="editor" class="w-full h-48 text-lg rounded">print Hallo wereld</div>
+        <div id="editor" class="w-full h-64 text-lg rounded">print Hallo wereld</div>
         <br>
         <button class="green-btn" onclick="runit(1)">Voer de code uit</button>
       </div>
-      <div>
-        <div id="output" class="rounded p-2 px-3 bg-gray-900 color-white w-full h-48 text-lg">
+      <div class="h-64 flex flex-col">
+        <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
+        <div id="inline-modal" class="flex-0" style="display: none">
+          <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
+            <!--Title-->
+            <div class="flex justify-between items-center">
+              <p class="text-2xl font-bold caption">Header</p>
+            </div>
+            <!--Body-->
+            <form>
+              <div class="my-2 flex">
+                <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4"
+                  placeholder="Vul hier je antwoord in...">
+                <input type="submit" class="green-btn ml-3" value="Invullen"></p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -78,10 +93,8 @@
   </div>
 
   <!-- Modal -->
-  <div id="ask-modal" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
-  style="background: rgba(0,0,0,.7); display: none;">
-  <div
-    class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+  <div id="ask-modal" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7); display: none;">
+  <div class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
     <div class="modal-content py-4 text-left px-6">
       <!--Title-->
       <div class="flex justify-between items-center pb-3">

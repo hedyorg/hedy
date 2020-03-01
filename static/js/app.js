@@ -62,7 +62,7 @@ function runPythonProgram(code) {
   Sk.configure({
     output: outf,
     read: builtinRead,
-    inputfun: inputFromModal,
+    inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
   });
 
@@ -131,6 +131,24 @@ function runPythonProgram(code) {
         return false;
       });
       $('#ask-modal').show();
+    });
+  }
+
+  function inputFromInlineModal(prompt) {
+    return new Promise(function(ok) {
+      const input = $('#inline-modal input[type="text"]');
+      $('#inline-modal .caption').text(prompt);
+      input.val('');
+      setTimeout(function() {
+        input.focus();
+      }, 0);
+      $('#inline-modal form').one('submit', function(event) {
+        event.preventDefault();
+        $('#inline-modal').hide();
+        ok(input.val());
+        return false;
+      });
+      $('#inline-modal').show();
     });
   }
 }
