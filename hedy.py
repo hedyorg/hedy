@@ -21,10 +21,12 @@ class AllCommandsAssignments(Transformer):
     #returns only assignments
     def program(self, args):
         if len(args) == 1:
-            #alleen assignments teruggeven (de rest bottom up 'opeten' en dan in de twee tak samenvoegen'
-            assign_child = args[0].children[0]
-            if assign_child.data == 'assign':
-                return [assign_child.children[0], assign_child.children[1]]
+            #alleen assignments teruggeven (de rest bottom up 'opeten' en dan in de twee takken samenvoegen'
+            maybe_assign_child = args[0].children[0]
+            if type(maybe_assign_child) == str:
+                pass #this is not assignment, don't return
+            elif maybe_assign_child.data == 'assign':
+                return [maybe_assign_child.children[0], maybe_assign_child.children[1]]
         else:
             list_of_not_none_arguments = []
             if not args[0] is None:
@@ -36,7 +38,6 @@ class AllCommandsAssignments(Transformer):
 def all_commands(tree):
     flattened_tree = FlattenText().transform(tree)
     commands = AllCommands().transform(flattened_tree)
-    commands = [x for [x] in commands]
     return commands
 
 def all_assignments(tree):

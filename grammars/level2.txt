@@ -1,6 +1,6 @@
 start: program
 program: command ("\n" command)*
-command:  "print " text -> print
+command: "print " text -> print
                | "ask " text -> ask
                | "echo " text -> echo
                | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'

@@ -1,7 +1,6 @@
 start: program
 program: command ("\n" command)*
-command: inner_command -> command
-inner_command: "print " text -> print
+command: "print " text -> print
                | "ask " text -> ask
                | "echo " text -> echo
                |  text " " text -> invalid
