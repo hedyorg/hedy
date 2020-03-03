@@ -3,11 +3,10 @@ from lark import Tree, Transformer
 
 class AllCommands(Transformer):
     #creates a list of all commands in a tree for further processing
-    # they either come
+    # it removes command and program nodes
     def program(self, args):
         commands = []
         for c in args:
-            if c != '\n': #niet elegant, eigenlij willen we die NEWLINE niet in de parsetree natuurlijk, maar voor nu ok
                 commands.append(c)
         return commands
     def command(self, args):
@@ -101,7 +100,7 @@ def transpile_command(tree, level):
                 return command + "('" + parameter + "')"
     elif tree.data == 'echo':
         command = 'print'
-        return command + "('" + parameter + "' + answer)"
+        return command + "('" + parameter + " ' + answer)"
     elif tree.data == 'ask':
         command = 'answer = input'
         return command + "('" + parameter + "')"

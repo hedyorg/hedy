@@ -84,7 +84,7 @@ favorite animal, fulfilling Design Goal 6.
 
 ### Level 2: Variables with is: numbers and lists
 
-At the second level, variables as added to the syntax. Defining a
+At the second level, variables are added to the syntax. Defining a
 variable is done with the word [`is`] rather than the equals symbol
 fulfilling Design Goal 3 and Design Goal 4. We also add the option to
 create lists and retrieve elements, including random elements from lists
