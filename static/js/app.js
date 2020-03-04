@@ -12,7 +12,7 @@ function print_demo(level) {
 
   if (level == 1 || level == 2){
     var editor = ace.edit("editor");
-    editor.setValue("print Hallo welkom bij Hedy");
+    editor.setValue("print Hallo welkom bij Hedy!");
   }
 
 }
@@ -30,14 +30,14 @@ function is_demo(level) {
 function echo_demo(level) {
   if (level == 1 || level == 2){
     var editor = ace.edit("editor");
-    editor.setValue("ask Wat is je lievelingskleur\necho je lievelingskleur is");
+    editor.setValue("ask Wat is je lievelingskleur?\necho je lievelingskleur is");
   }
 }
 
 function ask_demo(level) {
   if (level == 1 || level == 2){
     var editor = ace.edit("editor");
-    editor.setValue("ask Wat is je lievelingskleur");
+    editor.setValue("ask Wat is je lievelingskleur?");
   }
 }
 
