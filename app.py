@@ -55,9 +55,16 @@ def parse():
 # for now we do not need a post but I am leaving it in for a potential future
 
 # routing to index.html
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return open("static/index.html").read()
+    level = request.args.get("level", None)
+    print(level)
+    if level == None or level == '1':
+        return open("static/index.html").read()
+    elif level == '2':
+        return open("static/index-2.html").read()
+
+
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support

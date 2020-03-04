@@ -8,19 +8,42 @@ editor.setTheme("ace/theme/monokai");
 // configure the output function
 // call Sk.importMainWithBody()
 
-function print_demo() {
-  var editor = ace.edit("editor");
-  editor.setValue("print Hallo welkom bij Hedy");
+function print_demo(level) {
+
+  if (level == 1 || level == 2){
+    var editor = ace.edit("editor");
+    editor.setValue("print Hallo welkom bij Hedy");
+  }
+
 }
 
-function ask_demo() {
-  var editor = ace.edit("editor");
-  editor.setValue("ask Wat is je lievelingskleur");
+function is_demo(level) {
+  if (level == 1){
+    console.log('A demo is tried for is at a level where it is not yet available');
+  }
+  if (level == 2){
+      var editor = ace.edit("editor");
+      editor.setValue("naam is Hedy");
+  }
 }
 
-function echo_demo() {
-  var editor = ace.edit("editor");
-  editor.setValue("ask Wat is je lievelingskleur\necho je lievelingskleur is ");
+function echo_demo(level) {
+  if (level == 1 || level == 2){
+    var editor = ace.edit("editor");
+    editor.setValue("ask Wat is je lievelingskleur\necho je lievelingskleur is");
+  }
+}
+
+function ask_demo(level) {
+  if (level == 1 || level == 2){
+    var editor = ace.edit("editor");
+    editor.setValue("ask Wat is je lievelingskleur");
+  }
+}
+
+function goto(level) {
+    window.location.href = '/?level=' + level.toString();
+    console.log('going to' + '/level=' + level.toString());
 }
 
 function runit(level) {

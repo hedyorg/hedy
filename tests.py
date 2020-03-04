@@ -44,15 +44,15 @@ class TestsLevel2(unittest.TestCase):
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 2)
-        self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
+        self.assertEqual(result, "print('Hallo '+'welkom '+'bij '+'Hedy '+'! ')")
 
     def test_transpile_ask(self):
         result = hedy.transpile("ask wat is je lievelingskleur?", 2)
         self.assertEqual(result, "answer = input('wat is je lievelingskleur?')")
 
     def test_transpile_print_multiple_lines(self):
-        result = hedy.transpile("print Hallo welkom bij Hedy\nprint Mooi hoor", 2)
-        self.assertEqual(result, "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')")
+        result = hedy.transpile("print Hallo welkom bij Hedy!\nprint Mooi hoor", 2)
+        self.assertEqual(result, "print('Hallo '+'welkom '+'bij '+'Hedy '+'! ')\nprint('Mooi '+'hoor ')")
 
     def test_transpile_echo(self):
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
@@ -68,11 +68,23 @@ class TestsLevel2(unittest.TestCase):
 
     def test_transpile_assign_and_print(self):
         result = hedy.transpile("naam is Felienne\nprint naam", 2)
-        self.assertEqual(result, "naam = 'Felienne'\nprint(naam)")
+        self.assertEqual(result, "naam = 'Felienne'\nprint(naam+' ')")
+
+    def test_transpile_assign_and_print_more_words(self):
+        result = hedy.transpile("naam is Felienne\nprint hallo naam", 2)
+        self.assertEqual(result, "naam = 'Felienne'\nprint('hallo '+naam+' ')")
+
+    def test_transpile_assign_and_print_punctuation(self):
+        result = hedy.transpile("naam is Hedy\nprint Hallo naam!", 2)
+        self.assertEqual(result, "naam = 'Hedy'\nprint('Hallo '+naam+'! ')")
+
+    def test_transpile_assign_and_print_in_sentence(self):
+        result = hedy.transpile("naam is Hedy\nprint naam is jouw voornaam", 2)
+        self.assertEqual(result, "naam = 'Hedy'\nprint(naam+' '+'is '+'jouw '+'voornaam ')")
 
     def test_transpile_assign_and_print_something_else(self):
         result = hedy.transpile("naam is Felienne\nprint Hallo", 2)
-        self.assertEqual(result, "naam = 'Felienne'\nprint('Hallo')")
+        self.assertEqual(result, "naam = 'Felienne'\nprint('Hallo ')")
 
 if __name__ == '__main__':
     unittest.main()

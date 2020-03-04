@@ -9,9 +9,9 @@
 
 <body class="bg-gray-400">
   <div class="container mx-auto bg-gray-100 px-8 py-4 min-h-screen shadow-md">
-    <h2>Hedy: Level 1</h2>
+    <h2>Hedy: Level 2</h2>
     <div>
-      In Level 1 kun je deze commando's gebruiken:
+      In Level 2 kun je deze commando's gebruiken:
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <!-- print demo -->
@@ -22,7 +22,7 @@
             </div>
             Bijvoorbeeld: <tt>print Hallo welkom bij Hedy!</tt>
           </div>
-          <button class="btn block flex-none self-end" onclick="print_demo(1)">Probeer dit</button>
+          <button class="btn block flex-none self-end" onclick="print_demo(2)">Probeer dit</button>
         </div>
 
         <!-- ask demo -->
@@ -33,7 +33,7 @@
             </div>
             Bijvoorbeeld: <tt>ask Wat is je lievelingskleur?</tt>
           </div>
-          <button class="btn block flex-none self-end" onclick="ask_demo(1)">Probeer dit</button>
+          <button class="btn block flex-none self-end" onclick="ask_demo(2)">Probeer dit</button>
         </div>
 
         <!-- echo demo -->
@@ -44,8 +44,21 @@
             </div>
             Bijvoorbeeld: <tt>echo dus je lievelingskleur is...</tt>
           </div>
-          <button class="btn block flex-none self-end" onclick="echo_demo(1)">Probeer dit</button>
+          <button class="btn block flex-none self-end" onclick="echo_demo(2)">Probeer dit</button>
         </div>
+
+        <!-- is demo -->
+        <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between flex my-2 shadow-md p-3 pl-5">
+          <div class="flex-grow">
+            <div class="font-thin text-xl">
+              Een stukje tekst een naam geven
+            </div>
+            Bijvoorbeeld: <tt>naam is Hedy</tt>
+          </div>
+          <button class="btn block flex-none self-end" onclick="is_demo(2)">Probeer dit</button>
+        </div>
+
+
       </div>
     </div>
 
@@ -53,8 +66,7 @@
       <div>
         <div id="editor" class="w-full h-64 text-lg rounded">print Hallo wereld</div>
         <br>
-        <button class="green-btn" onclick="runit(1)">Voer de code uit</button>
-        <button class="green-btn" onclick="goto(2)">Ga naar level 2</button>
+        <button class="green-btn" onclick="runit(2)">Voer de code uit</button>
       </div>
       <div class="h-64 flex flex-col">
         <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>

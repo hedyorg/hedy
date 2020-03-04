@@ -28,12 +28,7 @@ class AllCommandsAssignments(Transformer):
             elif maybe_assign_child.data == 'assign':
                 return [maybe_assign_child.children[0], maybe_assign_child.children[1]]
         else:
-            list_of_not_none_arguments = []
-            if not args[0] is None:
-                list_of_not_none_arguments.append(args[0])
-            if not args[2] is None:
-                list_of_not_none_arguments.append(args[2][0])
-            return [(a.children[0]).children for a in list_of_not_none_arguments if a.children[0].data == 'assign']
+            return [a.children for a in args if a.data == 'assign']
 
 def all_commands(tree):
     flattened_tree = FlattenText().transform(tree)
@@ -78,16 +73,14 @@ def transpile(input_string, level):
         python_lines = [transpile_command(c, level) for c in commands]
         return '\n'.join(python_lines)
     elif level == 2:
-        lookup = all_assignments(program_root)
-        global table
-        table = lookup
+        lookup_table = all_assignments(program_root)
         commands = all_commands(program_root)
-        python_lines = [transpile_command(c, level) for c in commands]
+        python_lines = [transpile_command(c, level, lookup_table) for c in commands]
         return '\n'.join(python_lines)
 
 # deze transpile moet natuurlijk ook een transformer worden
 # op een dag :)
-def transpile_command(tree, level):
+def transpile_command(tree, level, lookup_table = None):
     parameter = tree.children[0]
     if tree.data == 'print':
         command = 'print'
@@ -95,10 +88,23 @@ def transpile_command(tree, level):
             return command + "('" + parameter + "')"
         elif level == 2:
             #in level 2 moeten we gaan opzoeken of er een var of een str geprint wordt
-            if parameter in table:
-                return command + "(" + parameter + ")"
-            else:
-                return command + "('" + parameter + "')"
+
+            # special case for ! and ?, we add a space before so they are matched separately and can be placed behind var name
+            parameter = parameter.replace('?', ' ?')
+            parameter = parameter.replace('!', ' !')
+            parameter = parameter.replace('.', ' .')
+            all_arguments = parameter.split(' ')
+            all_arguments_converted = []
+            for argument in all_arguments:
+                if argument in lookup_table:
+                    all_arguments_converted.append(argument + "+' '")
+                else:
+                    all_arguments_converted.append("'" + argument + " '")
+            parameter_list = '+'.join(all_arguments_converted)
+            parameter_list = parameter_list.replace("' '+'? '", "'? '")
+            parameter_list = parameter_list.replace("' '+'. '", "'. '")
+            parameter_list = parameter_list.replace("' '+'! '", "'! '")
+            return command + '(' + parameter_list + ')'
     elif tree.data == 'echo':
         command = 'print'
         return command + "('" + parameter + " ' + answer)"
