@@ -11,13 +11,23 @@ class AllCommands(Transformer):
         return commands
     def command(self, args):
         return args
+    def text(self, args):
+        return Tree('text', ''.join([str(c) for c in args]))
+    def var(self, args):
+        return Tree('var', ''.join([str(c) for c in args]))
+    def punctuation(self, args):
+        return Tree('punctuation', ''.join([str(c) for c in args]))
+
+
 
 class FlattenText(Transformer):
-    #flattens arguments of code for more easy debugging
+    #flattens arguments of text, var and punctuation for more easy debugging
     def text(self, args):
-            return ''.join([str(c) for c in args])
+            return Tree('text', ''.join([str(c) for c in args]))
     def var(self, args):
             return Tree('var', ''.join([str(c) for c in args]))
+    def punctuation(self, args):
+            return Tree('punctuation', ''.join([str(c) for c in args]))
 
 class AllCommandsAssignments(Transformer):
     #returns only assignments
@@ -31,6 +41,12 @@ class AllCommandsAssignments(Transformer):
                 return [maybe_assign_child.children[0], maybe_assign_child.children[1]]
         else:
             return [a.children for a in args if a.data == 'assign']
+    def text(self, args):
+            return Tree('text', ''.join([str(c) for c in args]))
+    def var(self, args):
+            return Tree('var', ''.join([str(c) for c in args]))
+    def punctuation(self, args):
+            return Tree('punctuation', ''.join([str(c) for c in args]))
 
 def all_commands(tree):
     flattened_tree = FlattenText().transform(tree)
@@ -88,50 +104,62 @@ def transpile(input_string, level):
 # deze transpile moet natuurlijk ook een transformer worden
 # op een dag :)
 def transpile_command(tree, level, lookup_table = None):
+
     if tree.data == 'print':
         command = 'print'
         if level == 1:
-            parameter = tree.children[0]
+            parameter = tree.children[0].children
             return command + "('" + parameter + "')"
         elif level == 2:
-            parameter = tree.children[0]
+            all_arguments = tree.children
+
             #in level 2 moeten we gaan opzoeken of er een var of een str geprint wordt
 
-            # special case for ! and ?, we add a space before so they are matched separately and can be placed behind var name
-            parameter = parameter.replace('?', ' ?')
-            parameter = parameter.replace('!', ' !')
-            parameter = parameter.replace('.', ' .')
-            all_arguments = parameter.split(' ') #dit moeten we ook in de grammar oplossen hoor
             all_arguments_converted = []
+            i = 0
             for argument in all_arguments:
-                if argument in lookup_table:
-                    all_arguments_converted.append(argument + "+' '")
+                if i == len(all_arguments)-1 or all_arguments[i+1].data == 'punctuation':
+                    space = ''
                 else:
-                    all_arguments_converted.append("'" + argument + " '")
+                    space = "+' '"
+                if argument in lookup_table:
+                    all_arguments_converted.append(argument.children + space)
+                else:
+                    all_arguments_converted.append("'" + argument.children + "'" + space)
+                i = i + 1
             parameter_list = '+'.join(all_arguments_converted)
-            parameter_list = parameter_list.replace("' '+'? '", "'? '")
-            parameter_list = parameter_list.replace("' '+'. '", "'. '")
-            parameter_list = parameter_list.replace("' '+'! '", "'! '")
             return command + '(' + parameter_list + ')'
         elif level == 3:
             parameters = []
             for child in tree.children:
-                if type(child) == str:
-                    parameters.append("'"+child+" '")
+                if child.data == 'text':
+                    parameters.append("'"+child.children+" '")
                 else:
                     parameters.append("".join(child.children))
             return command + '(' + '+'.join(parameters) + ')'
     elif tree.data == 'echo':
-        parameter = tree.children[0]
-        command = 'print'
-        return command + "('" + parameter + " ' + answer)"
+        if level == 1:
+            command = 'print'
+            all_parameters = []
+            for child in tree.children:
+                all_parameters.append("'"+child.children+"'")
+            return command + "(" + '+'.join(all_parameters) + "+ ' '" + " + answer)"
+        elif level == 2:
+            command = 'print'
+            all_parameters = []
+            for child in tree.children:
+                all_parameters.append("'"+child.children+"'")
+            return command + "(" + '+'.join(all_parameters) + "+ ' '" + " + answer)"
+
     elif tree.data == 'ask':
-        parameter = tree.children[0]
+        all_parameters = []
+        for child in tree.children:
+            all_parameters.append("'"+child.children+"'")
         command = 'answer = input'
-        return command + "('" + parameter + "')"
+        return command + "(" + '+'.join(all_parameters) + ")"
     elif tree.data == 'assign':
-        parameter = tree.children[0]
-        value = tree.children[1]
+        parameter = tree.children[0].children
+        value = tree.children[1].children
         return parameter + " = '" + value + "'"
     elif tree.data == 'wronglevel':
         raise Exception("Don't forget the quotation marks around text in level 3!")

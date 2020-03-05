@@ -1,13 +1,16 @@
 start: program
 program: command ("\n" command)*
-command: "print " text -> print
-               | "ask " text -> ask
-               | "echo " text -> echo
-               | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
-               |  text " " text -> invalid
+command: "print " textwithout (" " textwithout|punctuation)*  -> print
+         | "ask " textwithspaces punctuation* -> ask
+         | "echo " textwithspaces punctuation* -> echo
+         | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
+         |  text " " text -> invalid
 
-PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
-text: (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+
+punctuation : PUNCTUATION -> punctuation
+textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
+text: (LETTER | DIGIT | punctuation | WS_INLINE)+
+textwithout: (LETTER | DIGIT)+ -> text
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library

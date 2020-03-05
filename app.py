@@ -1,5 +1,6 @@
 import hedy
 import json
+import datetime
 
 # app.py
 from flask import Flask, request, jsonify, render_template
@@ -84,7 +85,9 @@ def index():
     if next_level_available:
         nextlevel = level + 1
 
-    return render_template("index.html", level=level, nextlevel = nextlevel, commands = commands)
+        latest = 'March 5th'
+
+    return render_template("index.html", level=level, nextlevel = nextlevel, commands = commands, latest = latest)
 
 
 
