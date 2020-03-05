@@ -1,0 +1,20 @@
+#!/bin/bash
+set -eu
+
+if ! which tailwindcss > /dev/null; then
+  echo "This script needs Tailwind installed." >&2
+  echo "Run 'npm install -g tailwindcss' and try again." >&2
+  exit 1
+fi
+
+if ! which minify > /dev/null; then
+  echo "This script needs minify installed." >&2
+  echo "Run 'npm install -g minify' and try again." >&2
+  exit 1
+fi
+
+cd $(dirname $0)
+
+tailwindcss build styles.css -o ../static/css/generated.css
+minify ../static/css/generated.css > ../static/css/generated.css.min
+mv ../static/css/generated.css{.min,}

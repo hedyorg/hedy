@@ -1,117 +1,108 @@
-<html> 
-<head> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script> 
-<script src="skulpt.min.js" type="text/javascript"></script> 
-<script src="skulpt-stdlib.js" type="text/javascript"></script> 
+<!doctype html>
+<html>
 
-<title>Leer programmeren met Hedy</title>
-<style type="text/css" media="screen">
-      #editor { 
-         width: 400px;
-         height: 200px;
-      }
-</style>
+<head>
+  <title>Leer programmeren met Hedy</title>
+  <link rel="stylesheet" href="css/generated.css">
+  <link rel="stylesheet" href="css/additional.css">
 </head>
 
-<body> 
+<body class="bg-gray-400">
+  <div class="container mx-auto bg-gray-100 px-8 py-4 min-h-screen shadow-md">
+    <h2>Hedy: Level {{ level }}</h2>
+    <div>
+      In Level {{ level }} kun je deze commando's gebruiken:
 
-<script type="text/javascript"> 
-// output functions are configurable.  This one just appends some text
-// to a pre element.
-function outf(text) { 
-    var mypre = document.getElementById("output"); 
-    mypre.innerHTML = mypre.innerHTML + text; 
-} 
-function builtinRead(x) {
-    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-            throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
-}
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-// Here's everything you need to run a python program in skulpt
-// grab the code from your textarea
-// get a reference to your pre element for output
-// configure the output function
-// call Sk.importMainWithBody()
-
-function print_demo() {
-   var editor = ace.edit("editor");
-   editor.setValue("print Hallo welkom bij Hedy");
-
-}
-
-function ask_demo() {
-   var editor = ace.edit("editor");
-   editor.setValue("ask Wat is je lievelingskleur");
-
-}
-
-function runit() {
-
-   // var prog = document.getElementById("editor").value;
-
-   var editor = ace.edit("editor");
-   var prog = editor.getValue();
-
-   var url = "/parse/?code=" + prog;
-   var xhr = new XMLHttpRequest();
-   xhr.open('GET', url, true);
-   xhr.send();
-
-   function processRequest(e) {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-         var response = JSON.parse(xhr.responseText);
-         var code = response["Code"];
-         console.log(code);
-         var mypre = document.getElementById("output");
-         mypre.innerHTML = '';
-         Sk.pre = "output";
-         Sk.configure({ output: outf, read: builtinRead });
-         var myPromise = Sk.misceval.asyncToPromise(function () {
-            return Sk.importMainWithBody("<stdin>", false, code, true);
-         });
-         myPromise.then(function (mod) {
-            console.log('success');
-         },
-            function (err) {
-               console.log(err.toString());
-            });
-      }
-   }
-
-   xhr.onreadystatechange = processRequest;
-
-
-} 
-</script> 
-
-<h3>Hedy: Level 1</h3>
-In Level 1 kun je deze commando's gebruiken:<br>
-<ul>
-   <li>Iets printen met print. Bijvoorbeeld: print Hallo welkom bij Hedy<button type="button" onclick="print_demo()">Probeer dit</button> </li>
-   <li>Iets vragen met ask. Bijvoorbeeld: ask Wat is je lievelingskleur<button type="button" onclick="ask_demo()">Probeer dit</button></li>
- </ul>
-
-
-<div id="editor">print Hallo wereld</div>
-<br>
-
-<script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-   var editor = ace.edit("editor");
-   editor.setTheme("ace/theme/monokai");
-   // editor.session.setMode("ace/mode/javascript");
-</script>
+        {% for command in commands %}
+              <!-- """+commando[0]+""" demo -->
+            <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between flex my-2 shadow-md p-3 pl-5">
+              <div class="flex-grow">
+                <div class="font-thin text-xl">
+                  {{ command.explanation }}
+                </div>
+                {{ command.example }}</tt>
+              </div>
+              <button class="btn block flex-none self-end" onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue("{{ command.demo_code }}")};show_demo()'>Probeer dit</button>
 
 
 
+            </div>
+        {% endfor %}
+      </div>
+    </div>
 
-<form> 
-<button type="button" onclick="runit()">Voer de code uit</button> 
-</form> 
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+      <div>
+        <div id="editor" class="w-full h-64 text-lg rounded">print Hallo wereld</div>
+        <br>
+        <button class="green-btn" onclick="runit({{ level }})">Voer de code uit</button>
+        <button class="green-btn" onclick="goto({{ nextlevel }})">Ga naar level {{ nextlevel }} </button>
+      </div>
+      <div class="h-64 flex flex-col">
+        <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
+        <div id="inline-modal" class="flex-0" style="display: none">
+          <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
+            <!--Title-->
+            <div class="flex justify-between items-center">
+              <p class="text-2xl font-bold caption">Header</p>
+            </div>
+            <!--Body-->
+            <form>
+              <div class="my-2 flex">
+                <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4"
+                  placeholder="Vul hier je antwoord in...">
+                <input type="submit" class="green-btn ml-3" value="Invullen"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<pre id="output" ></pre>
-Latest deploy: Feb 17th, 2020
-</body> 
 
-</html> 
+
+    <!-- errorbox -->
+    <div id="errorbox" class="mt-10 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+      <div class="flex">
+        <div class="py-1"><svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+        <div>
+          <p class="caption font-bold">Oops</p>
+          <p class="details text-sm">An error occurred.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-sm mt-10 mr-5 font-thin">
+      Latest update: March 4th, 2020
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="ask-modal" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7); display: none;">
+  <div class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+    <div class="modal-content py-4 text-left px-6">
+      <!--Title-->
+      <div class="flex justify-between items-center pb-3">
+        <p class="text-2xl font-bold caption">Header</p>
+      </div>
+      <!--Body-->
+      <form>
+        <div class="my-5 flex">
+          <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="Vul hier je antwoord in...">
+          <input type="submit" class="green-btn ml-3" value="Invullen"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+  <script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="vendor/skulpt.min.js" type="text/javascript"></script>
+  <script src="vendor/skulpt-stdlib.js" type="text/javascript"></script>
+  <script src="js/app.js" type="text/javascript"></script>
+</body>
+
+</html>

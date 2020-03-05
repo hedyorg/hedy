@@ -1,0 +1,18 @@
+start: program
+program: command ("\n" command)*
+command: "print " textwithout -> wronglevel
+         |"print " ( text | var) (" " ( text | var))*  -> print
+         | "ask " textwithout -> ask
+         | "echo " textwithout -> echo
+         | textwithout " is " textwithout -> assign
+         | text " " text -> invalid
+
+var: LETTER+ -> var
+PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
+text: ("'" (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ "'") -> text
+textwithout: (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ -> text
+
+%import common.LETTER   // imports from terminal library
+%import common.DIGIT   // imports from terminal library
+%import common.WS_INLINE   // imports from terminal library
+%import common.NEWLINE   // imports from terminal library
