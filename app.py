@@ -59,7 +59,7 @@ def parse():
 @app.route('/', methods=['GET'])
 def index():
     level = request.args.get("level", 1)
-    print(level)
+    level = int(level)
 
     try:
         file = open("static/levels.json", "r")
@@ -71,11 +71,20 @@ def index():
         response["Error"] = str(E)
 
     commands = ''
+    maxlevel = 0
     for json_level in response:
-        if json_level['Level'] == str(level):
+        int_level = int(json_level['Level'])
+        if int_level > maxlevel:
+            maxlevel = int_level
+        if int_level == level:
             commands = json_level['Commands']
 
-    return render_template("index.html", level=level, nextlevel = str(int(level) + 1), commands = commands)
+    next_level_available = level != maxlevel
+    nextlevel = None
+    if next_level_available:
+        nextlevel = level + 1
+
+    return render_template("index.html", level=level, nextlevel = nextlevel, commands = commands)
 
 
 

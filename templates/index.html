@@ -38,7 +38,9 @@
         <div id="editor" class="w-full h-64 text-lg rounded">print Hallo wereld</div>
         <br>
         <button class="green-btn" onclick="runit({{ level }})">Voer de code uit</button>
+        {% if nextlevel %}
         <button class="green-btn" onclick="goto({{ nextlevel }})">Ga naar level {{ nextlevel }} </button>
+        {% endif %}
       </div>
       <div class="h-64 flex flex-col">
         <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
