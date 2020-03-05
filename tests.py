@@ -1,6 +1,26 @@
 import unittest
 import hedy
 import json
+import sys
+import io
+from contextlib import contextmanager
+
+#this code let's us capture std out to also execute the generated Python
+# and check its output
+@contextmanager
+def captured_output():
+    new_out, new_err = io.StringIO(), io.StringIO()
+    old_out, old_err = sys.stdout, sys.stderr
+    try:
+        sys.stdout, sys.stderr = new_out, new_err
+        yield sys.stdout, sys.stderr
+    finally:
+        sys.stdout, sys.stderr = old_out, old_err
+
+def run_code(code):
+    with captured_output() as (out, err):
+        exec(code)
+    return out.getvalue().strip()
 
 class TestsLevel1(unittest.TestCase):
 
@@ -12,6 +32,7 @@ class TestsLevel1(unittest.TestCase):
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
         self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
+        self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
 
     def test_transpile_ask(self):
         result = hedy.transpile("ask wat is je lievelingskleur?", 1)
@@ -53,6 +74,8 @@ class TestsLevel2(unittest.TestCase):
     def test_transpile_print_multiple_lines(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!\nprint Mooi hoor", 2)
         self.assertEqual(result, "print('Hallo '+'welkom '+'bij '+'Hedy '+'! ')\nprint('Mooi '+'hoor ')")
+        self.assertEqual(run_code(result), "Hallo welkom bij Hedy ! \nMooi hoor")
+
 
     def test_transpile_echo(self):
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
