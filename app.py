@@ -75,7 +75,7 @@ def index():
         if json_level['Level'] == str(level):
             commands = json_level['Commands']
 
-    return render_template("index.html", level=level, commands = commands)
+    return render_template("index.html", level=level, nextlevel = str(int(level) + 1), commands = commands)
 
 
 

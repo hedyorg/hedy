@@ -86,6 +86,34 @@ class TestsLevel2(unittest.TestCase):
         result = hedy.transpile("naam is Felienne\nprint Hallo", 2)
         self.assertEqual(result, "naam = 'Felienne'\nprint('Hallo ')")
 
+class TestsLevel3(unittest.TestCase):
+    def test_transpile_other(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("abc felienne 123", 3)
+            self.assertEqual(str(context), 'First word is not a command')
+
+    def test_transpile_print_level_2(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("print felienne 123", 3)
+            self.assertEqual(str(context), 'First word is not a command') #hier moet nog we een andere foutmelding komen!
+
+    def test_print_level_3(self):
+        result = hedy.transpile("print 'ik heet henk'", 3)
+        self.assertEqual(result, "print('ik heet henk ')")
+
+    def test_print_with_var_level_3(self):
+        result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 3)
+        self.assertEqual(result, "naam = 'Hedy'\nprint('ik heet '+naam)")
+
+    def test_transpile_print(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("print Hallo welkom bij Hedy!", 3)
+            self.assertEqual(str(result), "Don't forget the quotation marks around text in level 3!")
+
+        # def test_assign_and_print(self):
+        #     result = hedy.transpile('naam is Hedy\nprint "ik heet" naam', 3)
+        #     self.assertEqual(result, "naam = 'Hedy'\nprint('ik heet'+naam)")
+
 if __name__ == '__main__':
     unittest.main()
 
