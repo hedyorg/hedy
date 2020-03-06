@@ -85,7 +85,7 @@ def index():
     if next_level_available:
         nextlevel = level + 1
 
-        latest = 'March 5th'
+    latest = 'March 5th'
 
     return render_template("index.html", level=level, nextlevel = nextlevel, commands = commands, latest = latest)
 
