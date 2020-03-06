@@ -161,6 +161,10 @@ def transpile_command(tree, level, lookup_table = None):
         parameter = tree.children[0].children
         value = tree.children[1].children
         return parameter + " = '" + value + "'"
+    elif tree.data == 'assign_list':
+        parameter = tree.children[0].children
+        values = ["'" + a.children + "'" for a in tree.children[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
     elif tree.data == 'wronglevel':
         raise Exception("Don't forget the quotation marks around text in level 3!")
     else:
