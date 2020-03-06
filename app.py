@@ -1,6 +1,6 @@
 import hedy
 import json
-import datetime
+from datetime import datetime
 
 # app.py
 from flask import Flask, request, jsonify, render_template
@@ -8,6 +8,18 @@ from flask_compress import Compress
 
 app = Flask(__name__, static_url_path='')
 Compress(app)
+
+@app.route('/show-logs/', methods = ['GET'])
+def show():
+    try:
+        file = open("logs.txt", "r")
+        contents = str(file.read())
+        response = (json.loads(contents))
+        file.close()
+    except Exception as E:
+            print(f"error opening logs")
+            response["Error"] = str(E)
+    return jsonify(response)
 
 @app.route('/levels-text/', methods=['GET'])
 def levels():
@@ -28,24 +40,40 @@ def levels():
 @app.route('/parse/', methods=['GET'])
 def parse():
     # Retrieve the name from url parameter
-    lines = request.args.get("code", None)
+    code = request.args.get("code", None)
     level = request.args.get("level", None)
 
+    try:
+        data = {'date': str(datetime.now()), 'level' : level, 'code':code}
+        file = open("logs.txt", "r")
+        contents = file.read()
+        file.close()
+        lines = list(json.loads(contents))
+        lines.append(data)
+
+        file = open("logs.txt", "w")
+        file.write(json.dumps(lines))
+        file.close()
+
+    except Exception as E:
+        #if logging fails, that is not a real issue, no except for now
+        pass
+
     # For debugging
-    print(f"got code {lines}")
+    print(f"got code {code}")
 
     response = {}
 
     # Check if user sent code
-    if not lines:
+    if not code:
         response["Error"] = "no code found, please send code."
     # is so, parse
     else:
         try:
-            result = hedy.transpile(lines, level)
+            result = hedy.transpile(code, level)
             response["Code"] = result
         except Exception as E:
-            print(f"error transpiling {lines}")
+            print(f"error transpiling {code}")
             response["Error"] = str(E)
 
     return jsonify(response)
