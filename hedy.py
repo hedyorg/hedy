@@ -28,6 +28,8 @@ class FlattenText(Transformer):
             return Tree('var', ''.join([str(c) for c in args]))
     def punctuation(self, args):
             return Tree('punctuation', ''.join([str(c) for c in args]))
+    def index(self, args):
+            return ''.join([str(c) for c in args])
 
 class AllCommandsAssignments(Transformer):
     #returns only assignments
@@ -39,14 +41,18 @@ class AllCommandsAssignments(Transformer):
                 pass #this is not assignment, don't return
             elif maybe_assign_child.data == 'assign':
                 return [maybe_assign_child.children[0], maybe_assign_child.children[1]]
+            elif maybe_assign_child.data == 'assign_list':
+                pass
         else:
-            return [a.children for a in args if a.data == 'assign']
+            return [a.children for a in args if a.data == 'assign' or a.data == 'assign_list']
     def text(self, args):
             return Tree('text', ''.join([str(c) for c in args]))
     def var(self, args):
             return Tree('var', ''.join([str(c) for c in args]))
     def punctuation(self, args):
             return Tree('punctuation', ''.join([str(c) for c in args]))
+    def index(self, args):
+            return ''.join([str(c) for c in args])
 
 def all_commands(tree):
     flattened_tree = FlattenText().transform(tree)
@@ -59,7 +65,7 @@ def all_assignments(tree):
     variables = {}
     if assignments is not None:
         for a in assignments:
-            variables[a[0]] = a[1]
+            variables[a[0]] = a[1:]
 
     return variables #leeg dus als er geen assignments gevonden zijn
 
@@ -99,7 +105,7 @@ def transpile(input_string, level):
         lookup_table = all_assignments(program_root)
         commands = all_commands(program_root)
         python_lines = [transpile_command(c, level, lookup_table) for c in commands]
-        return '\n'.join(python_lines)
+        return 'import random\n'+'\n'.join(python_lines)
 
 # deze transpile moet natuurlijk ook een transformer worden
 # op een dag :)
@@ -134,6 +140,11 @@ def transpile_command(tree, level, lookup_table = None):
             for child in tree.children:
                 if child.data == 'text':
                     parameters.append("'"+child.children+" '")
+                elif child.data == 'list_access':
+                    if type(child.children[1]) == Tree:
+                        parameters.append('random.choice(' + child.children[0].children + ')')
+                    else:
+                        parameters.append(child.children[0].children + '[' + child.children[1] + ']')
                 else:
                     parameters.append("".join(child.children))
             return command + '(' + '+'.join(parameters) + ')'

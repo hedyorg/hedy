@@ -1,6 +1,6 @@
 start: program
 program: command ("\n" command)*
-command: "print " (quoted_text | var) (" " (quoted_text | var))*  -> print
+command: "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*  -> print
          | "ask " textwithspaces punctuation* -> ask
          | "echo " textwithspaces punctuation* -> echo
          | text " is " text ((", "|",") text)+  -> assign_list
@@ -8,6 +8,9 @@ command: "print " (quoted_text | var) (" " (quoted_text | var))*  -> print
 
 
 var: LETTER+ -> var
+list_access : var " at " (index | random) -> list_access
+index : DIGIT+
+random : "random"
 punctuation : PUNCTUATION -> punctuation
 textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
 quoted_text: "'" (LETTER | DIGIT | punctuation | WS_INLINE)+ "'" -> text
