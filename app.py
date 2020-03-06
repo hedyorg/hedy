@@ -1,5 +1,6 @@
 import hedy
 import json
+from flask import request
 from datetime import datetime
 
 # app.py
@@ -44,7 +45,7 @@ def parse():
     level = request.args.get("level", None)
 
     try:
-        data = {'date': str(datetime.now()), 'level' : level, 'code':code}
+        data = {'ip': request.remote_addr, 'date': str(datetime.now()), 'level' : level, 'code':code}
         file = open("logs.txt", "r")
         contents = file.read()
         file.close()
