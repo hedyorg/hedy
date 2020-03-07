@@ -1,5 +1,7 @@
 import hedy
 import json
+import os
+import requests
 from flask import request
 from datetime import datetime
 
@@ -9,22 +11,6 @@ from flask_compress import Compress
 
 app = Flask(__name__, static_url_path='')
 Compress(app)
-
-@app.route('/show-logs/', methods = ['GET'])
-def show():
-    try:
-        file = open("logs.txt", "r")
-        contents = str(file.read())
-        response = (json.loads(contents))
-        file.close()
-    except Exception as E:
-        #create log file
-        file = open("logs.txt", "w")
-        file.write('[]')
-        file.close()
-        print(f"error opening logs")
-        response["Error"] = str(E)
-    return jsonify(response)
 
 @app.route('/levels-text/', methods=['GET'])
 def levels():
@@ -48,21 +34,7 @@ def parse():
     code = request.args.get("code", None)
     level = request.args.get("level", None)
 
-    try:
-        data = {'ip': request.remote_addr, 'date': str(datetime.now()), 'level' : level, 'code':code}
-        file = open("logs.txt", "r")
-        contents = file.read()
-        file.close()
-        lines = list(json.loads(contents))
-        lines.append(data)
-
-        file = open("logs.txt", "w")
-        file.write(json.dumps(lines))
-        file.close()
-
-    except Exception as E:
-        #if logging fails, that is not a real issue, no except for now
-        pass
+    log_to_jsonbin(code, level)
 
     # For debugging
     print(f"got code {code}")
@@ -83,6 +55,30 @@ def parse():
 
     return jsonify(response)
 
+
+def log_to_jsonbin(code, level):
+    # log all info to jsonbin
+    try:
+        data = {'ip': request.remote_addr, 'date': str(datetime.now()), 'level': level, 'code': code}
+        key = os.getenv('JSONBIN_SECRET_KEY')
+        collection = os.getenv('JSONBIN_COLLECTION_ID')
+        if key is None:
+            print(
+                'If you want to log all parse attempts to jsonbin, create a secret key and store it in the environment in your editor')
+        else:
+            url = 'https://api.jsonbin.io/b'
+            headers = {
+                'Content-Type': 'application/json',
+                'secret-key': key,
+                'collection-id': collection
+            }
+
+            requests.post(url, json=data, headers=headers)
+
+
+    except Exception as E:
+        # if logging fails, that is not a real issue, no except for now
+        pass
 
 
 # @app.route('/post/', methods=['POST'])
@@ -113,6 +109,7 @@ def index():
         if int_level == level:
             commands = json_level['Commands']
             introtext = json_level['Intro_text']
+            startcode = json_level['Start_code']
 
     next_level_available = level != maxlevel
     nextlevel = None
@@ -121,7 +118,7 @@ def index():
 
     latest = 'March 7th'
 
-    return render_template("index.html", introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
+    return render_template("index.html", startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
 
 
 
