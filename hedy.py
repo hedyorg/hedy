@@ -31,38 +31,42 @@ class FlattenText(Transformer):
 
 class AllCommandsAssignments(FlattenText):
     #returns only assignments
-    #todo could be made simpler by transforming assogns directly
     def program(self, args):
-        if len(args) != 1:
-            assign_args = [a for a in args if a.data == 'assign' or a.data == 'assign_list']
-            if assign_args == []:
-                return []
+        flattened_args = []
+        for a in args:
+            if type(a) == list:
+                for x in a:
+                    flattened_args.append(x)
             else:
-                return [[a.children for a in assign_args[0].children]]
+                flattened_args.append(a)
+        return flattened_args
+    def print(self, args):
+        return args
+    def command(self, args):
+        return args
+    def assign(self, args):
+        return args[0].children
+    def assign_list(self, args):
+        return args[0].children
+    def list_access(self, args):
+        if type(args[1]) == Tree:
+            return 'random.choice(' + args[0].children + ')'
+        else:
+            return args[0].children + '[' + args[1] + ']'
 
 def all_commands(tree):
     commands = AllCommands().transform(tree)
     return commands
 
 def all_assignments(tree):
+    flat = FlattenText().transform(tree)
     assignments = AllCommandsAssignments().transform(tree)
-    variables = {}
-    if assignments is not None:
-        for a in assignments:
-            variables[a[0]] = a[1]
-
-    return variables #leeg dus als er geen assignments gevonden zijn
+    return assignments #leeg dus als er geen assignments gevonden zijn
 
 def create_parser(level):
     with open("grammars/level" + str(level) + ".txt", "r") as file:
         grammar = file.read()
     return Lark(grammar)
-
-def flatten_test(tree):
-    if tree.data == 'text':
-        return ''.join([str(c) for c in tree.children])
-    else:
-        raise Exception('Attemping to print or ask non-text element')
 
 class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
@@ -87,6 +91,8 @@ class ConvertToPython_1(Transformer):
         return ''.join([str(c) for c in args])
 
 class ConvertToPython_2(ConvertToPython_1):
+    def var(self, args):
+        return ''.join([str(c) for c in args])
     def print(self, args):
         all_arguments_converted = []
         i = 0
@@ -105,25 +111,22 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         return parameter + " = '" + value + "'"
-
-class ConvertToPython_3(ConvertToPython_2):
-    def text(self, args):
-        return ''.join([str(c) for c in args])
-    def var(self, args):
-        return ''.join([str(c) for c in args])
-    def print(self, args):
-        #opzoeken is nu niet meer nodig
-        return "print(" + '+'.join(args) + ')'
     def list_access(self, args):
         if args[1].data == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1].children[0] + ']'
-
     def assign_list(self, args):
         parameter = args[0]
         values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
+
+class ConvertToPython_3(ConvertToPython_2):
+    def text(self, args):
+        return ''.join([str(c) for c in args])
+    def print(self, args):
+        #opzoeken is nu niet meer nodig
+        return "print(" + '+'.join(args) + ')'
 
 
 def transpile(input_string, level):
@@ -136,7 +139,8 @@ def transpile(input_string, level):
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 2:
-        python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
+        python = 'import random\n'
+        python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 3:
         python = 'import random\n'
         python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)

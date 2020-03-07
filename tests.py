@@ -63,49 +63,65 @@ class TestsLevel2(unittest.TestCase):
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 2)
-        self.assertEqual(result, "print('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')")
+        self.assertEqual(result, "import random\nprint('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')")
 
     def test_transpile_ask(self):
         result = hedy.transpile("ask wat is je lievelingskleur?", 2)
-        self.assertEqual(result, "answer = input('wat is je lievelingskleur'+'?')")
+        self.assertEqual(result, "import random\nanswer = input('wat is je lievelingskleur'+'?')")
 
     def test_transpile_print_multiple_lines(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!\nprint Mooi hoor", 2)
-        self.assertEqual(result, "print('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')\nprint('Mooi'+' '+'hoor')")
+        self.assertEqual(result, "import random\nprint('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')\nprint('Mooi'+' '+'hoor')")
         self.assertEqual(run_code(result), "Hallo welkom bij Hedy!\nMooi hoor")
 
 
     def test_transpile_echo(self):
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
-        self.assertEqual(result, "print('Jouw lievelingskleur is dus'+'.'+'.'+'.' + answer)")
+        self.assertEqual(result, "import random\nprint('Jouw lievelingskleur is dus'+'.'+'.'+'.' + answer)")
 
     def test_transpile_assign(self):
         result = hedy.transpile("naam is Felienne", 2)
-        self.assertEqual(result, "naam = 'Felienne'")
+        self.assertEqual(result, "import random\nnaam = 'Felienne'")
 
     def test_transpile_assign_2_integer(self):
         result = hedy.transpile("naam is 14", 2)
-        self.assertEqual(result, "naam = '14'")
+        self.assertEqual(result, "import random\nnaam = '14'")
 
     def test_transpile_assign_and_print(self):
         result = hedy.transpile("naam is Felienne\nprint naam", 2)
-        self.assertEqual(result, "naam = 'Felienne'\nprint(naam)")
+        self.assertEqual(result, "import random\nnaam = 'Felienne'\nprint(naam)")
 
     def test_transpile_assign_and_print_more_words(self):
         result = hedy.transpile("naam is Felienne\nprint hallo naam", 2)
-        self.assertEqual(result, "naam = 'Felienne'\nprint('hallo'+' '+naam)")
+        self.assertEqual(result, "import random\nnaam = 'Felienne'\nprint('hallo'+' '+naam)")
 
     def test_transpile_assign_and_print_punctuation(self):
         result = hedy.transpile("naam is Hedy\nprint Hallo naam!", 2)
-        self.assertEqual(result, "naam = 'Hedy'\nprint('Hallo'+' '+naam+'!')")
+        self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('Hallo'+' '+naam+'!')")
 
     def test_transpile_assign_and_print_in_sentence(self):
         result = hedy.transpile("naam is Hedy\nprint naam is jouw voornaam", 2)
-        self.assertEqual(result, "naam = 'Hedy'\nprint(naam+' '+'is'+' '+'jouw'+' '+'voornaam')")
+        self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint(naam+' '+'is'+' '+'jouw'+' '+'voornaam')")
 
     def test_transpile_assign_and_print_something_else(self):
         result = hedy.transpile("naam is Felienne\nprint Hallo", 2)
-        self.assertEqual(result, "naam = 'Felienne'\nprint('Hallo')")
+        self.assertEqual(result, "import random\nnaam = 'Felienne'\nprint('Hallo')")
+
+    def test_set_list_var(self):
+        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe", 2)
+        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']")
+
+    def test_print_with_list_var(self):
+        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at 1", 2)
+        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[1])")
+        self.assertEqual(run_code(result), "Kat")
+
+
+    def test_print_with_list_var_random(self):
+        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", 2)
+        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
+        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+
 
 class TestsLevel3(unittest.TestCase):
     def test_transpile_other(self):
@@ -126,20 +142,6 @@ class TestsLevel3(unittest.TestCase):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 3)
         self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
 
-    def test_set_list_var(self):
-        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe", 3)
-        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']")
-
-    def test_print_with_list_var(self):
-        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at 1", 3)
-        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[1])")
-        self.assertEqual(run_code(result), "Kat")
-
-
-    def test_print_with_list_var_random(self):
-        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", 3)
-        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
-        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
 
 if __name__ == '__main__':

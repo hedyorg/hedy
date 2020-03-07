@@ -18,8 +18,12 @@ def show():
         response = (json.loads(contents))
         file.close()
     except Exception as E:
-            print(f"error opening logs")
-            response["Error"] = str(E)
+        #create log file
+        file = open("logs.txt", "w")
+        file.write('[]')
+        file.close()
+        print(f"error opening logs")
+        response["Error"] = str(E)
     return jsonify(response)
 
 @app.route('/levels-text/', methods=['GET'])
@@ -108,15 +112,16 @@ def index():
             maxlevel = int_level
         if int_level == level:
             commands = json_level['Commands']
+            introtext = json_level['Intro_text']
 
     next_level_available = level != maxlevel
     nextlevel = None
     if next_level_available:
         nextlevel = level + 1
 
-    latest = 'March 5th'
+    latest = 'March 7th'
 
-    return render_template("index.html", level=level, nextlevel = nextlevel, commands = commands, latest = latest)
+    return render_template("index.html", introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
 
 
 

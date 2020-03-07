@@ -1,6 +1,8 @@
 [
     {
         "Level": "1",
+        "Language" : "Nl",
+        "Intro_text" : "In Level 1 kun je deze commando's gebruiken:",
         "Available": true,
         "Commands" : [
         {
@@ -22,54 +24,15 @@
         ]
     }, {
         "Level": "2",
+        "Language" : "Nl",
+        "Intro_text" : "Alle commando's van Level 1 doen het nog. Ook kun je in Level 2 kun je deze nieuwe commando's gebruiken:",
         "Available": true,
         "Commands" : [
-        {
-            "name": "print",
-            "explanation": "Iets printen met print.",
-            "example": "Bijvoorbeeld: print Hallo welkom bij Hedy.",
-            "demo_code": "print Hallo welkom bij Hedy!"
-        }, {
-            "name": "ask",
-            "explanation": "Iets vragen met ask.",
-            "example": "Bijvoorbeeld: ask Wat is je lievelingskleur?.",
-            "demo_code": "ask Wat is je lievelingskleur?"
-        }, {
-            "name": "echo",
-            "explanation": "Iets herhalen dat is ingetypt met echo.",
-            "example": "Bijvoorbeeld: echo dus je lievelingskleur is",
-            "demo_code": "ask Wat is je lievelingskleur?\\necho dus je lievelingskleur is..."
-        }, {
+         {
             "name": "is",
             "explanation": "Een woord een naam geven",
             "example": "Bijvoorbeeld: naam is Hedy.",
             "demo_code": "naam is Hedy\\nprint ik heet naam"
-        }
-        ]
-    }, {
-        "Level": "3",
-        "Available": true,
-        "Commands" : [
-        {
-            "name": "print",
-            "explanation": "Iets letterlijk printen met print.",
-            "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
-            "demo_code": "print 'Hallo welkom bij Hedy'"
-        }, {
-            "name": "is",
-            "explanation": "Een stukje tekst een naam geven",
-            "example": "Bijvoorbeeld: naam is Hedy.",
-            "demo_code": "naam is Hedy\\nprint 'ik heet' naam"
-        }, {
-            "name": "ask",
-            "explanation": "Iets vragen met ask.",
-            "example": "Bijvoorbeeld: ask Wat is je lievelingskleur.",
-            "demo_code": "ask Wat is je lievelingskleur"
-        }, {
-            "name": "echo",
-            "explanation": "Iets herhalen dat is ingetypt met echo.",
-            "example": "Bijvoorbeeld: echo dus je lievelingskleur is",
-            "demo_code": "ask Wat is je lievelingskleur\\necho dus je lievelingskleur is"
         }, {
             "name": "is_list",
             "explanation": "Een groep woorden samen een naam geven",
@@ -79,12 +42,30 @@
             "name": "kies",
             "explanation": "Iets uit een groep woorden kiezen met at ",
             "example": "Bijvoorbeeld: dieren is hond, kat, kangoeroe.",
-            "demo_code": "dieren is hond, kat, kangoeroe\nprint dieren at 2"
+            "demo_code": "dieren is hond, kat, kangoeroe\\nprint dieren at 2"
         }, {
             "name": "kies",
             "explanation": "Iets willekeurigs uit een groep woorden kiezen met at en random ",
             "example": "Bijvoorbeeld: dieren is hond, kat, kangoeroe.",
-            "demo_code": "dieren is hond, kat, kangoeroe\nprint dieren at random"
+            "demo_code": "dieren is hond, kat, kangoeroe\\nprint dieren at random"
+        }
+        ]
+    }, {
+        "Level": "3",
+        "Language" : "Nl",
+        "Intro_text" : "Let op! Vanaf nu moet je tekst die je letterlijk wilt printen tussen aanhalingstekens zetten!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets letterlijk printen met print.",
+            "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
+            "demo_code": "print 'Hallo welkom bij Hedy'"
+        }, {
+            "name": "is",
+            "explanation": "Een stukje tekst een naam geven en printen zonder aanhalingstekens",
+            "example": "Bijvoorbeeld: naam is Hedy.",
+            "demo_code": "naam is Hedy\\nprint 'ik heet ' naam"
         }
         ]
     }
