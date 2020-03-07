@@ -120,11 +120,11 @@ class TestsLevel3(unittest.TestCase):
 
     def test_print(self):
         result = hedy.transpile("print 'ik heet henk'", 3)
-        self.assertEqual(result, "import random\nprint('ik heet henk ')")
+        self.assertEqual(result, "import random\nprint('ik heet henk')")
 
     def test_print_with_var(self):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 3)
-        self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet '+naam)")
+        self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
 
     def test_set_list_var(self):
         result = hedy.transpile("dieren is Hond, Kat, Kangoeroe", 3)

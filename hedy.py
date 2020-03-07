@@ -65,6 +65,10 @@ def flatten_test(tree):
         raise Exception('Attemping to print or ask non-text element')
 
 class ConvertToPython_1(Transformer):
+    def __init__(self, punctuation_symbols, lookup):
+        self.punctuation_symbols = punctuation_symbols
+        self.lookup = lookup
+
     def program(self, args):
         return '\n'.join([str(c) for c in args])
     def command(self, args):
@@ -87,11 +91,11 @@ class ConvertToPython_2(ConvertToPython_1):
         all_arguments_converted = []
         i = 0
         for argument in args:
-            if i == len(args)-1 or args[i+1] in punctuation:
+            if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
             else:
                 space = "+' '"
-            if argument in lookup_table:
+            if argument in self.lookup:
                 all_arguments_converted.append(argument + space)
             else:
                 all_arguments_converted.append("'" + argument + "'" + space)
@@ -102,119 +106,41 @@ class ConvertToPython_2(ConvertToPython_1):
         value = args[1]
         return parameter + " = '" + value + "'"
 
+class ConvertToPython_3(ConvertToPython_2):
+    def text(self, args):
+        return ''.join([str(c) for c in args])
+    def var(self, args):
+        return ''.join([str(c) for c in args])
+    def print(self, args):
+        #opzoeken is nu niet meer nodig
+        return "print(" + '+'.join(args) + ')'
+    def list_access(self, args):
+        if args[1].data == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            return args[0] + '[' + args[1].children[0] + ']'
+
+    def assign_list(self, args):
+        parameter = args[0]
+        values = ["'" + a + "'" for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+
 
 def transpile(input_string, level):
-    global lookup_table
-    global punctuation
-    punctuation = ['!', '?', '.']
+    punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = create_parser(level)
     program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
     lookup_table = all_assignments(program_root)
     flattened_tree = FlattenText().transform(program_root)
     if level == 1:
-        python = ConvertToPython_1().transform(program_root)
+        python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 2:
-        python = ConvertToPython_2().transform(program_root)
-    return python
-
-
-def transpile_old(input_string, level):
-    level = int(level)
-    parser = create_parser(level)
-    program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
-    python = ''
-    if level == 1:
-        commands = all_commands(program_root)
-        python_lines = [transpile_command(c, level) for c in commands]
-        return '\n'.join(python_lines)
-    elif level == 2:
-        lookup_table = all_assignments(program_root)
-        commands = all_commands(program_root)
-        python_lines = [transpile_command(c, level, lookup_table) for c in commands]
-        return '\n'.join(python_lines)
+        python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 3:
-        lookup_table = all_assignments(program_root)
-        commands = all_commands(program_root)
-        python_lines = [transpile_command(c, level, lookup_table) for c in commands]
-        return 'import random\n'+'\n'.join(python_lines)
-
-# deze transpile moet natuurlijk ook een transformer worden
-# op een dag :)
-def transpile_command(tree, level, lookup_table = None):
-
-    if tree.data == 'print':
-        command = 'print'
-        if level == 1:
-            parameter = tree.children[0].children
-            return command + "('" + parameter + "')"
-        elif level == 2:
-            all_arguments = tree.children
-
-            #in level 2 moeten we gaan opzoeken of er een var of een str geprint wordt
-
-            all_arguments_converted = []
-            i = 0
-            for argument in all_arguments:
-                if i == len(all_arguments)-1 or all_arguments[i+1].data == 'punctuation':
-                    space = ''
-                else:
-                    space = "+' '"
-                if argument in lookup_table:
-                    all_arguments_converted.append(argument.children + space)
-                else:
-                    all_arguments_converted.append("'" + argument.children + "'" + space)
-                i = i + 1
-            parameter_list = '+'.join(all_arguments_converted)
-            return command + '(' + parameter_list + ')'
-        elif level == 3:
-            parameters = []
-            for child in tree.children:
-                if child.data == 'text':
-                    parameters.append("'"+child.children+" '")
-                elif child.data == 'list_access':
-                    if type(child.children[1]) == Tree:
-                        parameters.append('random.choice(' + child.children[0].children + ')')
-                    else:
-                        parameters.append(child.children[0].children + '[' + child.children[1] + ']')
-                else:
-                    parameters.append("".join(child.children))
-            return command + '(' + '+'.join(parameters) + ')'
-    elif tree.data == 'echo':
-        if level == 1:
-            command = 'print'
-            all_parameters = []
-            for child in tree.children:
-                all_parameters.append("'"+child.children+"'")
-            return command + "(" + '+'.join(all_parameters) + "+ ' '" + " + answer)"
-        elif level == 2:
-            command = 'print'
-            all_parameters = []
-            for child in tree.children:
-                all_parameters.append("'"+child.children+"'")
-            return command + "(" + '+'.join(all_parameters) + "+ ' '" + " + answer)"
-
-    elif tree.data == 'ask':
-        all_parameters = []
-        for child in tree.children:
-            all_parameters.append("'"+child.children+"'")
-        command = 'answer = input'
-        return command + "(" + '+'.join(all_parameters) + ")"
-    elif tree.data == 'assign':
-        parameter = tree.children[0].children
-        value = tree.children[1].children
-        return parameter + " = '" + value + "'"
-    elif tree.data == 'assign_list':
-        parameter = tree.children[0].children
-        values = ["'" + a.children + "'" for a in tree.children[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
-    elif tree.data == 'wronglevel':
-        raise Exception("Don't forget the quotation marks around text in level 3!")
-    else:
-        raise Exception('First word is not a command')
-
-    parameter = str(flatten_test(tree.children[0]))
-    return command + "('" + parameter + "')"
+        python = 'import random\n'
+        python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+    return python
 
 def execute(input_string):
     python = transpile(input_string)
