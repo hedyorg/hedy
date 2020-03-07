@@ -4,13 +4,20 @@ import os
 import requests
 from flask import request
 from datetime import datetime
+import jsonbin
+import logging
 
 # app.py
 from flask import Flask, request, jsonify, render_template
 from flask_compress import Compress
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='[%(asctime)s] %(levelname)-8s: %(message)s')
+
 app = Flask(__name__, static_url_path='')
 Compress(app)
+logger = jsonbin.JsonBinLogger.from_env_vars()
 
 @app.route('/levels-text/', methods=['GET'])
 def levels():
@@ -58,28 +65,13 @@ def parse():
 
 def log_to_jsonbin(code, level):
     # log all info to jsonbin
-    try:
-        data = {'ip': request.remote_addr, 'date': str(datetime.now()), 'level': level, 'code': code}
-        key = os.getenv('JSONBIN_SECRET_KEY')
-        collection = os.getenv('JSONBIN_COLLECTION_ID')
-        if key is None:
-            print(
-                'If you want to log all parse attempts to jsonbin, create a secret key and store it in the environment in your editor')
-        else:
-            url = 'https://api.jsonbin.io/b'
-            headers = {
-                'Content-Type': 'application/json',
-                'secret-key': key,
-                'collection-id': collection
-            }
-
-            requests.post(url, json=data, headers=headers)
-
-
-    except Exception as E:
-        # if logging fails, that is not a real issue, no except for now
-        pass
-
+    data = {
+        'ip': request.remote_addr,
+        'date': str(datetime.now()),
+        'level': level,
+        'code': code
+    }
+    logger.log(data)
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
@@ -119,9 +111,6 @@ def index():
     latest = 'March 7th'
 
     return render_template("index.html", startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
-
-
-
 
 
 if __name__ == '__main__':
