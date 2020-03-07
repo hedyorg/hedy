@@ -18,8 +18,6 @@ class AllCommands(Transformer):
     def punctuation(self, args):
         return Tree('punctuation', ''.join([str(c) for c in args]))
 
-
-
 class FlattenText(Transformer):
     #flattens arguments of text, var and punctuation for more easy debugging
     def text(self, args):
@@ -31,54 +29,34 @@ class FlattenText(Transformer):
     def index(self, args):
             return ''.join([str(c) for c in args])
 
-class AllCommandsAssignments(Transformer):
+class AllCommandsAssignments(FlattenText):
     #returns only assignments
+    #todo could be made simpler by transforming assogns directly
     def program(self, args):
-        if len(args) == 1:
-            #alleen assignments teruggeven (de rest bottom up 'opeten' en dan in de twee takken samenvoegen'
-            maybe_assign_child = args[0].children[0]
-            if type(maybe_assign_child) == str:
-                pass #this is not assignment, don't return
-            elif maybe_assign_child.data == 'assign':
-                return [maybe_assign_child.children[0], maybe_assign_child.children[1]]
-            elif maybe_assign_child.data == 'assign_list':
-                pass
-        else:
-            return [a.children for a in args if a.data == 'assign' or a.data == 'assign_list']
-    def text(self, args):
-            return Tree('text', ''.join([str(c) for c in args]))
-    def var(self, args):
-            return Tree('var', ''.join([str(c) for c in args]))
-    def punctuation(self, args):
-            return Tree('punctuation', ''.join([str(c) for c in args]))
-    def index(self, args):
-            return ''.join([str(c) for c in args])
+        if len(args) != 1:
+            assign_args = [a for a in args if a.data == 'assign' or a.data == 'assign_list']
+            if assign_args == []:
+                return []
+            else:
+                return [[a.children for a in assign_args[0].children]]
 
 def all_commands(tree):
-    flattened_tree = FlattenText().transform(tree)
-    commands = AllCommands().transform(flattened_tree)
+    commands = AllCommands().transform(tree)
     return commands
 
 def all_assignments(tree):
-    flattened_tree = FlattenText().transform(tree)
-    assignments = AllCommandsAssignments().transform(flattened_tree)
+    assignments = AllCommandsAssignments().transform(tree)
     variables = {}
     if assignments is not None:
         for a in assignments:
-            variables[a[0]] = a[1:]
+            variables[a[0]] = a[1]
 
     return variables #leeg dus als er geen assignments gevonden zijn
 
-
-
 def create_parser(level):
-    #note that the order matters here, so print is tried first, then ask, then text (error)
-
     with open("grammars/level" + str(level) + ".txt", "r") as file:
         grammar = file.read()
-
     return Lark(grammar)
-
 
 def flatten_test(tree):
     if tree.data == 'text':
@@ -86,8 +64,62 @@ def flatten_test(tree):
     else:
         raise Exception('Attemping to print or ask non-text element')
 
+class ConvertToPython_1(Transformer):
+    def program(self, args):
+        return '\n'.join([str(c) for c in args])
+    def command(self, args):
+        return args
+    def text(self, args):
+        return ''.join([str(c) for c in args])
+    def print(self, args):
+        return "print('" + args[0] + "')"
+    def echo(self, args):
+        all_parameters = ["'" + a + "'" for a in args]
+        return "print(" + '+'.join(all_parameters) + " + answer)"
+    def ask(self, args):
+        all_parameters = ["'" + a + "'" for a in args]
+        return 'answer = input(' + '+'.join(all_parameters) + ")"
+    def punctuation(self, args):
+        return ''.join([str(c) for c in args])
+
+class ConvertToPython_2(ConvertToPython_1):
+    def print(self, args):
+        all_arguments_converted = []
+        i = 0
+        for argument in args:
+            if i == len(args)-1 or args[i+1] in punctuation:
+                space = ''
+            else:
+                space = "+' '"
+            if argument in lookup_table:
+                all_arguments_converted.append(argument + space)
+            else:
+                all_arguments_converted.append("'" + argument + "'" + space)
+            i = i + 1
+        return 'print(' + '+'.join(all_arguments_converted) + ')'
+    def assign(self, args):
+        parameter = args[0]
+        value = args[1]
+        return parameter + " = '" + value + "'"
+
 
 def transpile(input_string, level):
+    global lookup_table
+    global punctuation
+    punctuation = ['!', '?', '.']
+    level = int(level)
+    parser = create_parser(level)
+    program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
+    lookup_table = all_assignments(program_root)
+    flattened_tree = FlattenText().transform(program_root)
+    if level == 1:
+        python = ConvertToPython_1().transform(program_root)
+    elif level == 2:
+        python = ConvertToPython_2().transform(program_root)
+    return python
+
+
+def transpile_old(input_string, level):
     level = int(level)
     parser = create_parser(level)
     program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
