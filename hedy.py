@@ -1,5 +1,6 @@
 from lark import Lark
 from lark import Tree, Transformer
+from lark.indenter import Indenter
 
 class AllCommands(Transformer):
     #creates a list of all commands in a tree for further processing
@@ -62,6 +63,10 @@ def all_assignments(tree):
     flat = FlattenText().transform(tree)
     assignments = AllCommandsAssignments().transform(tree)
     return assignments #leeg dus als er geen assignments gevonden zijn
+
+def create_grammar(level):
+    with open("grammars/level" + str(level) + ".txt", "r") as file:
+        return file.read() 
 
 def create_parser(level):
     with open("grammars/level" + str(level) + ".txt", "r") as file:
@@ -128,6 +133,96 @@ class ConvertToPython_3(ConvertToPython_2):
         #opzoeken is nu niet meer nodig
         return "print(" + '+'.join(args) + ')'
 
+class ConvertToPython(Transformer):
+    indent_level = 0
+
+    def start(self, args): 
+        return "".join(args)
+
+    def statement(self, args):
+        return "".join([self.indent_level * "\t" + x + ("\n" if x[-1] != '\n' else "") for x in args if x != ""]) 
+
+    def if_statement(self, args): 
+        return "if " + args[0] + ":\n" + "".join(args[1:])
+
+    def elif_statement(self, args): 
+        return "elif " + args[0] + ":\n" + "".join(args[1:]) 
+
+    def else_statement(self, args): 
+        return "else:\n" + "".join(args) 
+
+    def repeat(self, args): 
+        return "for _ in range(" +args[0] + "):\n" + "".join(args[1:])
+
+    def ranged_loop(self, args):
+        return "for " + args[0] + " in range(" + args[1] + "," + args[2] +  "):\n" + "".join(args[3:])
+
+    def assignment(self, args): 
+        return args[0] + "=" + args[1]
+
+    def eq(self, args): 
+        return args[0] + "==" + args[1]
+
+    def ne(self, args): 
+        return args[0] + "!=" + args[1]
+
+    def le(self, args): 
+        return args[0] + "<=" + args[1]
+
+    def ge(self, args): 
+        return args[0] + ">=" + args[1]
+
+    def lt(self, args): 
+        return args[0] + "<" + args[1]
+
+    def gt(self, args): 
+        return args[0] + ">" + args[1] 
+
+    def addition(self, args): 
+        return args[0] + "+" + args[1] 
+
+    def substraction(self, args): 
+        return args[0] + "-" + args[1] 
+
+    def multiplication(self, args): 
+        return args[0] + "*" + args[1] 
+
+    def division(self, args): 
+        return args[0] + "/" + args[1] 
+
+    def list(self, args): 
+        return str(args)
+
+    def function_call(self, args): # TODO: handle builtin functions 
+        return args[0] + "(" + ", ".join(args[1:]) + ")"
+
+    def INTEGER(self, args): 
+        return str(args.value)
+
+    def FLOAT(self, args): 
+        return str(args.value)
+
+    def NAME(self, args): 
+        return str(args.value)
+
+    def STRING(self, args): 
+        return args.value
+
+    def INDENT(self, args): 
+        self.indent_level += 1 
+        return "" 
+
+    def DEDENT(self, args): 
+        self.indent_level -= 1
+        return "" 
+
+class BasicIndenter(Indenter):
+    NL_type = "_EOL"
+    OPEN_PAREN_types = []
+    CLOSE_PAREN_types = []
+    INDENT_type = "INDENT"
+    DEDENT_type = "DEDENT"
+    tab_len = 4 
 
 def transpile(input_string, level):
     punctuation_symbols = ['!', '?', '.']
@@ -137,13 +232,31 @@ def transpile(input_string, level):
     lookup_table = all_assignments(program_root)
     flattened_tree = FlattenText().transform(program_root)
     if level == 1:
+        parser = create_parser(level)
+        program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
+        lookup_table = all_assignments(program_root)
+        flattened_tree = FlattenText().transform(program_root) 
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 2:
+        parser = create_parser(level)
+        program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
+        lookup_table = all_assignments(program_root)
+        flattened_tree = FlattenText().transform(program_root) 
         python = 'import random\n'
         python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 3:
+        parser = create_parser(level)
+        program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
+        lookup_table = all_assignments(program_root)
+        flattened_tree = FlattenText().transform(program_root) 
+
         python = 'import random\n'
         python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+    elif level == 13: 
+        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True) 
+        python = 'import random\n' 
+        python += ConvertToPython().transform(parser.parse(input_string + '\n')) #TODO: temporary fix, statements have to end with _EOL
+
     return python
 
 def execute(input_string):
