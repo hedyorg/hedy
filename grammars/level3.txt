@@ -1,18 +1,27 @@
 start: program
 program: command ("\n" command)*
-command: "print " textwithout -> wronglevel
-         |"print " ( text | var) (" " ( text | var))*  -> print
-         | "ask " textwithout -> ask
-         | "echo " textwithout -> echo
-         | textwithout " is " textwithout -> assign
-         | text " " text -> invalid
+command: "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*  -> print
+         | "ask " textwithspaces punctuation* -> ask
+         | "echo " textwithspaces punctuation* -> echo
+         | text " is " text ((", "|",") text)+  -> assign_list
+         | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
+
 
 var: LETTER+ -> var
-PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
-text: ("'" (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ "'") -> text
-textwithout: (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ -> text
+list_access : var " at " (index | random) -> list_access
+index : DIGIT+
+random : "random"
+punctuation : PUNCTUATION -> punctuation
+textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
+quoted_text: QUOTE (LETTER | DIGIT | punctuation | WS_INLINE)+ QUOTE -> text
+QUOTE : "'"
+text: (LETTER | DIGIT)+ -> text
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library
 %import common.WS_INLINE   // imports from terminal library
 %import common.NEWLINE   // imports from terminal library
+
+
+

@@ -11,7 +11,7 @@
   <div class="container mx-auto bg-gray-100 px-8 py-4 min-h-screen shadow-md">
     <h2>Hedy: Level {{ level }}</h2>
     <div>
-      In Level {{ level }} kun je deze commando's gebruiken:
+      {{introtext}}
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
@@ -35,10 +35,12 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
       <div>
-        <div id="editor" class="w-full h-64 text-lg rounded">print Hallo wereld</div>
+        <div id="editor" class="w-full h-64 text-lg rounded">{{startcode}}</div>
         <br>
         <button class="green-btn" onclick="runit({{ level }})">Voer de code uit</button>
+        {% if nextlevel %}
         <button class="green-btn" onclick="goto({{ nextlevel }})">Ga naar level {{ nextlevel }} </button>
+        {% endif %}
       </div>
       <div class="h-64 flex flex-col">
         <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
@@ -75,7 +77,7 @@
     </div>
 
     <div class="text-sm mt-10 mr-5 font-thin">
-      Latest update: March 4th, 2020
+      Latest update: {{latest}}
     </div>
   </div>
 

@@ -82,8 +82,7 @@ with what the role of the keyword is in the code than with what it
 programs can be created in which a user is asked for a name or a
 favorite animal, fulfilling Design Goal 6.
 
-### Level 2: Variables with is: numbers and lists
-
+### Level 2: Variables with is
 At the second level, variables are added to the syntax. Defining a
 variable is done with the word [`is`] rather than the equals symbol
 fulfilling Design Goal 3 and Design Goal 4. We also add the option to
@@ -94,8 +93,7 @@ programs such as a guessing game, a story with random elements, which is
 an assignment from [**Python in de klas**(Python in the
 classroom)[^2] ], or a customized dice.
 
-### Level 3: Quotation marks and types
-
+###Level 3: Quotation marks and types
 In Level 3 the first syntactic element is introduced: the use of
 quotation marks to distinguish between strings and text. In teaching
 novices we have seen that this distinction can be confusing for a long
@@ -104,10 +102,9 @@ computers need information about the types of variables. This level is
 thus an interesting combination of explaining syntax and explaining
 programming concepts, which underlines their interdependency. The
 variable syntax using [`is`] remains unchanged, meaning that learners
-can now use both [`number is 12`] and [`name is `].
+can now use both [`number is 12`] and [`name is Hedy`].
 
 ### Level 4: Calculations
-
 In Level 4, students learn to calculate with variables, so addition,
 multiplication, subtraction and division are introduced. While this
 might seem like a simple step, our experience taught us that the use of
