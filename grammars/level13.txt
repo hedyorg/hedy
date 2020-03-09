@@ -12,7 +12,7 @@ else_statement: "else" ":" _EOL INDENT statement+ DEDENT
 
 repeat: "repeat" expression "times" ":" _EOL INDENT statement+ DEDENT
 
-ranged_loop: "for" NAME "in" "range" expression "to" expression _EOL INDENT statement+ DEDENT
+ranged_loop: "for" NAME "in" "range" "(" expression "," expression ")" ":" _EOL INDENT statement+ DEDENT
 
 assignment: NAME "=" expression 
 

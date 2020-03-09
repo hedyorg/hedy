@@ -2,17 +2,17 @@ start: _EOL* statement+
 
 statement: if_statement elif_statement* else_statement?
          | repeat
-         | ranged_loop
+         | ranged_loop 
          | assignment _EOL+
          | expression _EOL+ 
 
-if_statement: "if" expression ":" _EOL INDENT statement+ DEDENT
-elif_statement: "elif" expression ":" _EOL INDENT statement+ DEDENT
-else_statement: "else" ":" _EOL INDENT statement+ DEDENT 
+if_statement: "if" expression _EOL INDENT statement+ DEDENT
+elif_statement: "elif" expression _EOL INDENT statement+ DEDENT
+else_statement: "else" _EOL INDENT statement+ DEDENT 
 
-repeat: "repeat" expression "times" ":" _EOL INDENT statement+ DEDENT
+repeat: "repeat" expression "times" _EOL INDENT statement+ DEDENT
 
-ranged_loop: "for" NAME "in" "range" "(" expression "," expression ")" ":" _EOL INDENT statement+ DEDENT
+ranged_loop: "for" NAME "in" "range" expression "to" expression _EOL INDENT statement+ DEDENT
 
 assignment: NAME "is" expression 
 
@@ -33,15 +33,14 @@ assignment: NAME "is" expression
     | product "/" atom -> division
     | product "%" atom -> modulo
 
-?atom: NAME 
+?atom: NAME
       | INTEGER
       | FLOAT
       | STRING
       | "[" (expression? | (expression ",")+ expression) "]" -> list 
       | "(" expression? ")" 
-      | NAME "(" (expression? | (expression ",")+ expression) ")" -> function_call 
-      | NAME "[" (expression)  "]" -> list_access
-
+      | NAME (expression? | (expression ",")+ expression) -> function_call 
+      | NAME "at" expression -> list_access
 
 _EOL: /(\r?\n[\t ]*)+/
 
