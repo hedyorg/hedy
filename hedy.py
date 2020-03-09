@@ -158,52 +158,52 @@ class ConvertToPython(Transformer):
         return "for " + args[0] + " in range(" + args[1] + "," + args[2] +  "):\n" + "".join(args[3:])
 
     def assignment(self, args): 
-        return args[0] + "=" + args[1]
+        return args[0] + "=" + str(args[1])
 
     def eq(self, args): 
-        return args[0] + "==" + args[1]
+        return str(args[0]) + "==" + str(args[1])
 
     def ne(self, args): 
-        return args[0] + "!=" + args[1]
+        return str(args[0]) + "!=" + str(args[1])
 
     def le(self, args): 
-        return args[0] + "<=" + args[1]
+        return str(args[0]) + "<=" + str(args[1])
 
     def ge(self, args): 
-        return args[0] + ">=" + args[1]
+        return str(args[0]) + ">=" + str(args[1])
 
     def lt(self, args): 
-        return args[0] + "<" + args[1]
+        return str(args[0]) + "<" + str(args[1])
 
     def gt(self, args): 
-        return args[0] + ">" + args[1] 
+        return str(args[0]) + ">" + str(args[1])
 
     def addition(self, args): 
-        return args[0] + "+" + args[1] 
+        return str(args[0]) + "+" + str(args[1])
 
     def substraction(self, args): 
-        return args[0] + "-" + args[1] 
+        return str(args[0]) + "-" + str(args[1])
 
     def multiplication(self, args): 
-        return args[0] + "*" + args[1] 
+        return str(args[0]) + "*" + str(args[1])
 
     def division(self, args): 
-        return args[0] + "/" + args[1] 
+        return str(args[0]) + "/" + str(args[1])
 
     def list(self, args): 
         return str(args)
 
     def list_access(self, args):
-        return  args[0] + "[" + args[1] + "]" if args[1] != "random" else "random.choice(" + args[0] + ")"
+        return  args[0] + "[" + str(args[1]) + "]" if args[1] != "random" else "random.choice(" + str(args[0]) + ")"
 
-    def function_call(self, args): # TODO: handle builtin functions 
+    def function_call(self, args):
         return args[0] + "(" + ", ".join(args[1:]) + ")"
 
     def INTEGER(self, args): 
-        return str(args.value)
+        return int(args.value)
 
     def FLOAT(self, args): 
-        return str(args.value)
+        return float(args.value)
 
     def NAME(self, args): 
         return str(args.value)
@@ -229,7 +229,7 @@ class BasicIndenter(Indenter):
 
 def transpile(input_string, level): 
     level = int(level)
-    level = 10
+
     if level == 1:
         punctuation_symbols = ['!', '?', '.']
         parser = create_parser(level)
@@ -254,7 +254,7 @@ def transpile(input_string, level):
 
         python = 'import random\n'
         python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
-    elif level >= 10: 
+    elif level >= 8 or level == 4: 
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True) 
         python = 'import random\n' 
         python += ConvertToPython().transform(parser.parse(input_string + '\n')) #TODO: temporary fix, statements have to end with _EOL
