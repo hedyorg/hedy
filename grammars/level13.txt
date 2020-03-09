@@ -40,7 +40,7 @@ assignment: NAME "=" expression
       | "[" (expression? | (expression ",")+ expression) "]" -> list 
       | "(" expression? ")" 
       | NAME "(" (expression? | (expression ",")+ expression) ")" -> function_call 
-      | NAME "[" (expression)  "]" -> list_access
+      | NAME "[" expression "]" -> list_access
 
 
 _EOL: /(\r?\n[\t ]*)+/
