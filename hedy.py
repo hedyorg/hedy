@@ -224,20 +224,17 @@ class BasicIndenter(Indenter):
     DEDENT_type = "DEDENT"
     tab_len = 4 
 
-def transpile(input_string, level):
-    punctuation_symbols = ['!', '?', '.']
+def transpile(input_string, level): 
     level = int(level)
-    parser = create_parser(level)
-    program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
-    lookup_table = all_assignments(program_root)
-    flattened_tree = FlattenText().transform(program_root)
     if level == 1:
+        punctuation_symbols = ['!', '?', '.']
         parser = create_parser(level)
         program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
         lookup_table = all_assignments(program_root)
         flattened_tree = FlattenText().transform(program_root) 
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 2:
+        punctuation_symbols = ['!', '?', '.']
         parser = create_parser(level)
         program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
         lookup_table = all_assignments(program_root)
@@ -245,6 +242,7 @@ def transpile(input_string, level):
         python = 'import random\n'
         python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
     elif level == 3:
+        punctuation_symbols = ['!', '?', '.']
         parser = create_parser(level)
         program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
         lookup_table = all_assignments(program_root)
@@ -252,7 +250,7 @@ def transpile(input_string, level):
 
         python = 'import random\n'
         python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
-    elif level == 13: 
+    elif level >= 10: 
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True) 
         python = 'import random\n' 
         python += ConvertToPython().transform(parser.parse(input_string + '\n')) #TODO: temporary fix, statements have to end with _EOL
