@@ -193,6 +193,9 @@ class ConvertToPython(Transformer):
     def list(self, args): 
         return str(args)
 
+    def list_access(self, args):
+        return  args[0] + "[" + args[1] + "]" if args[1] != "random" else "random.choice(" + args[0] + ")"
+
     def function_call(self, args): # TODO: handle builtin functions 
         return args[0] + "(" + ", ".join(args[1:]) + ")"
 
@@ -226,6 +229,7 @@ class BasicIndenter(Indenter):
 
 def transpile(input_string, level): 
     level = int(level)
+    level = 10
     if level == 1:
         punctuation_symbols = ['!', '?', '.']
         parser = create_parser(level)
@@ -254,6 +258,7 @@ def transpile(input_string, level):
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True) 
         python = 'import random\n' 
         python += ConvertToPython().transform(parser.parse(input_string + '\n')) #TODO: temporary fix, statements have to end with _EOL
+        print(python)
 
     return python
 
