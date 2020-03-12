@@ -82,26 +82,34 @@ def log_to_jsonbin(code, level):
 def index():
     level = request.args.get("level", 1)
     level = int(level)
+    lang = request.args.get("lang", 'Nl')
 
     try:
         file = open("static/levels.json", "r")
         contents = str(file.read())
-        response = (json.loads(contents))
+        response_levels = (json.loads(contents))
+        file.close()
+        file = open("static/texts.json", "r")
+        contents = str(file.read())
+        response_texts = (json.loads(contents))
         file.close()
     except Exception as E:
         print(f"error opening level {level}")
-        response["Error"] = str(E)
+        response_levels["Error"] = str(E)
 
-    commands = ''
-    maxlevel = 0
-    for json_level in response:
-        int_level = int(json_level['Level'])
-        if int_level > maxlevel:
-            maxlevel = int_level
-        if int_level == level:
-            commands = json_level['Commands']
-            introtext = json_level['Intro_text']
-            startcode = json_level['Start_code']
+    response_texts_lang = [r for r in response_texts if r['Language'] == lang][0]
+    page_title = response_texts_lang['Page_Title']
+    run_button = response_texts_lang['Run_code_button']
+    advance_button = response_texts_lang['Advance_button']
+    enter_text = response_texts_lang['Enter_Text']
+    enter = response_texts_lang['Enter']
+
+    level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
+    maxlevel = max(int(r['Level']) for r in response_levels)
+
+    commands = level_and_lang_dict['Commands']
+    introtext = level_and_lang_dict['Intro_text']
+    startcode = level_and_lang_dict['Start_code']
 
     next_level_available = level != maxlevel
     nextlevel = None
@@ -110,7 +118,7 @@ def index():
 
     latest = 'March 7th'
 
-    return render_template("index.html", startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
+    return render_template("index.html", page_title = page_title, enter_text = enter_text, enter = enter, run_button = run_button, advance_button = advance_button, startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
 
 
 if __name__ == '__main__':

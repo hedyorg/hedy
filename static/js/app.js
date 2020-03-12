@@ -42,8 +42,13 @@ function ask_demo(level) {
 }
 
 function goto(level) {
-    window.location.href = '/?level=' + level.toString();
-    console.log('going to' + '/level=' + level.toString());
+    var urlParams = new URLSearchParams(window.location.search);
+    var lang = urlParams.get('lang');
+    var url = '/?level=' + level.toString();
+    if (lang){
+      url += '&lang=' + lang;
+    }
+    window.location.href = url;
 }
 
 function runit(level) {
