@@ -116,9 +116,28 @@ def index():
     if next_level_available:
         nextlevel = level + 1
 
-    latest = 'March 7th'
+    latest = 'March 13th'
 
     return render_template("index.html", page_title = page_title, enter_text = enter_text, enter = enter, run_button = run_button, advance_button = advance_button, startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
+
+@app.route('/error_messages.js', methods=['GET'])
+def error():
+    lang = request.args.get("lang", 'Nl')
+    try:
+        file = open("static/texts.json", "r")
+        contents = str(file.read())
+        response = (json.loads(contents))
+        file.close()
+    except Exception as E:
+        print(f"error opening texts.json")
+        response["Error"] = str(E)
+
+    response_texts_lang = [r for r in response if r['Language'] == lang][0]
+    transpile_error = '"' + response_texts_lang['Transpile_error'] + '"'
+    connection_error = '"' + response_texts_lang['Connection_error'] + '"'
+    other_error = '"' + response_texts_lang['Other_error'] + '"'
+
+    return render_template("error_messages.js", transpile_error = transpile_error, connection_error = connection_error, other_error = other_error)
 
 
 if __name__ == '__main__':

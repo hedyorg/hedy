@@ -37,9 +37,9 @@
       <div>
         <div id="editor" class="w-full h-64 text-lg rounded">{{startcode}}</div>
         <br>
-        <button class="green-btn" onclick="runit({{ level }})">{{run_button}}</button>
+        <button class="green-btn" onclick="runit({{ level }}, {{ lang }})">{{run_button}}</button>
         {% if nextlevel %}
-        <button class="green-btn" onclick="goto({{ nextlevel }})">{{advance_button}} {{ nextlevel }} </button>
+        <button class="green-btn" onclick="goto({{ nextlevel }} , {{ lang }})">{{advance_button}} {{ nextlevel }} </button>
         {% endif %}
       </div>
       <div class="h-64 flex flex-col">

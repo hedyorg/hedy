@@ -41,9 +41,7 @@ function ask_demo(level) {
   }
 }
 
-function goto(level) {
-    var urlParams = new URLSearchParams(window.location.search);
-    var lang = urlParams.get('lang');
+function goto(level, lang) {
     var url = '/?level=' + level.toString();
     if (lang){
       url += '&lang=' + lang;
@@ -51,15 +49,20 @@ function goto(level) {
     window.location.href = url;
 }
 
-function runit(level) {
+function runit(level, lang) {
   error.hide();
   try {
-    // var prog = document.getElementById("editor").value;
+    x = $.getJSON('/error_messages.js', {
+      lang: lang,
+    }).done(function(response) {
+      console.log('Response', response);
+      error_messages = response;
+    });
 
     var editor = ace.edit("editor");
     var prog = editor.getValue();
 
-    console.log('Origineel programma:\n', prog);
+    console.log('Original program:\n', prog);
 
     $.getJSON('/parse/', {
       level: level.toString(),
@@ -97,7 +100,7 @@ function runPythonProgram(code) {
   Sk.misceval.asyncToPromise(function () {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
-    console.log('Programma klaar');
+    console.log('Program executed');
   }).catch(function(err) {
     console.log(err);
     addToOutput(JSON.stringify(err), 'red');
