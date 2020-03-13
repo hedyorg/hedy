@@ -118,7 +118,7 @@ def index():
 
     latest = 'March 13th'
 
-    return render_template("index.html", page_title = page_title, enter_text = enter_text, enter = enter, run_button = run_button, advance_button = advance_button, startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
+    return render_template("index.html", lang = lang, page_title = page_title, enter_text = enter_text, enter = enter, run_button = run_button, advance_button = advance_button, startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():

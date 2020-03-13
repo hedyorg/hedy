@@ -37,9 +37,9 @@
       <div>
         <div id="editor" class="w-full h-64 text-lg rounded">{{startcode}}</div>
         <br>
-        <button class="green-btn" onclick="runit({{ level }}, {{ lang }})">{{run_button}}</button>
+        <button class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_button}}</button>
         {% if nextlevel %}
-        <button class="green-btn" onclick="goto({{ nextlevel }} , {{ lang }})">{{advance_button}} {{ nextlevel }} </button>
+        <button class="green-btn" onclick="goto({{ nextlevel }} , '{{ lang }}')">{{advance_button}} {{ nextlevel }} </button>
         {% endif %}
       </div>
       <div class="h-64 flex flex-col">
@@ -81,29 +81,11 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div id="ask-modal" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7); display: none;">
-  <div class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-    <div class="modal-content py-4 text-left px-6">
-      <!--Title-->
-      <div class="flex justify-between items-center pb-3">
-        <p class="text-2xl font-bold caption">Header</p>
-      </div>
-      <!--Body-->
-      <form>
-        <div class="my-5 flex">
-          <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="Vul hier je antwoord in...">
-          <input type="submit" class="green-btn ml-3" value="Invullen"></p>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
   <script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="vendor/skulpt.min.js" type="text/javascript"></script>
   <script src="vendor/skulpt-stdlib.js" type="text/javascript"></script>
+  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
   <script src="js/app.js" type="text/javascript"></script>
 </body>
 

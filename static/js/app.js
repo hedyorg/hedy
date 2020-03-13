@@ -52,13 +52,6 @@ function goto(level, lang) {
 function runit(level, lang) {
   error.hide();
   try {
-    x = $.getJSON('/error_messages.js', {
-      lang: lang,
-    }).done(function(response) {
-      console.log('Response', response);
-      error_messages = response;
-    });
-
     var editor = ace.edit("editor");
     var prog = editor.getValue();
 
@@ -70,18 +63,18 @@ function runit(level, lang) {
     }).done(function(response) {
       console.log('Response', response);
       if (response.Error) {
-        error.show('De server kon het programma niet vertalen', response.Error);
+        error.show(ErrorMessages.Transpile_error, response.Error);
       } else {
         runPythonProgram(response.Code);
       }
     }).fail(function(err) {
       console.error(err);
-      error.show('We konden niet goed met de server praten', JSON.stringify(err));
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
     });
 
   } catch (e) {
     console.error(e);
-    error.show('Misschien hebben wij een klein programmeerfoutje gemaakt', e.message);
+    error.show(ErrorMessages.Other_error, e.message);
   }
 }
 
@@ -144,24 +137,6 @@ function runPythonProgram(code) {
           ok(text);
         }
       });
-    });
-  }
-
-  function inputFromModal(prompt) {
-    return new Promise(function(ok) {
-      const input = $('#ask-modal input[type="text"]');
-      $('#ask-modal .caption').text(prompt);
-      input.val('');
-      setTimeout(function() {
-        input.focus();
-      }, 0);
-      $('#ask-modal form').one('submit', function(event) {
-        event.preventDefault();
-        $('#ask-modal').hide();
-        ok(input.val());
-        return false;
-      });
-      $('#ask-modal').show();
     });
   }
 
