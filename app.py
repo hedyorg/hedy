@@ -89,20 +89,13 @@ def index():
     arguments_dict['lang'] = lang
 
     try:
-        file = open("static/levels.json", "r")
-        contents = str(file.read())
-        response_levels = (json.loads(contents))
-        file.close()
-        file = open("static/texts.json", "r")
-        contents = str(file.read())
-        response_texts = (json.loads(contents))
-        file.close()
+        with open("static/levels.json", "r") as file:
+            response_levels = json.load(file)
+        response_texts_lang = load_language(lang)
     except Exception as E:
         print(f"error opening level {level}")
         response_levels["Error"] = str(E)
 
-
-    response_texts_lang = [r for r in response_texts if r['Language'] == lang][0]
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
@@ -126,18 +119,24 @@ def index():
 def error():
     lang = request.args.get("lang", 'Nl')
     try:
-        with open("static/texts.json", "r") as file:
-            response = json.load(file)
-
-        lang_texts = [r for r in response if r['Language'] == lang][0]
+        lang_texts = load_language(lang)
         error_messages = lang_texts["ClientErrorMessages"]
-        print(error_messages)
     except Exception as E:
         print(f"error opening texts.json")
         error_messages = {"Error": str(E)}
 
     return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
+
+def load_language(lang):
+    """Load the texts for the given language.
+
+    If the language is unknown, default to English.
+    """
+    with open("static/texts.json", "r") as file:
+        texts_file = json.load(file)
+    texts = texts_file.get(lang.lowercase())
+    return texts if texts else texts_file.get('en')
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
