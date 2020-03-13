@@ -57,8 +57,7 @@ def parse():
             result = hedy.transpile(code, level)
             response["Code"] = result
         except hedy.HedyException as E:
-            lang = request.args.get("lang", 'Nl')
-            texts = load_texts(lang)
+            texts = load_texts()
             error_template = texts['HedyErrorMessages'][E.error_code]
             response["Error"] = error_template.format(**E.arguments)
         except Exception as E:
@@ -87,7 +86,7 @@ def log_to_jsonbin(code, level):
 def index():
     level = request.args.get("level", 1)
     level = int(level)
-    lang = request.args.get("lang", 'Nl')
+    lang = requested_lang()
 
     arguments_dict = {}
     arguments_dict['level'] = level
@@ -96,7 +95,7 @@ def index():
     try:
         with open("static/levels.json", "r") as file:
             response_levels = json.load(file)
-        response_texts_lang = load_texts(lang)
+        response_texts_lang = load_texts()
     except Exception as E:
         print(f"error opening level {level}")
         return jsonify({"Error": str(E)})
@@ -122,9 +121,8 @@ def index():
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
-    lang = request.args.get("lang", 'Nl')
     try:
-        lang_texts = load_texts(lang)
+        lang_texts = load_texts()
         error_messages = lang_texts["ClientErrorMessages"]
     except Exception as E:
         print(f"error opening texts.json")
@@ -139,14 +137,20 @@ def internal_error(exception):
     print(traceback.format_exc())
     return "500 error caught"
 
-def load_texts(lang):
+
+def requested_lang():
+    """Return the user's requested language code."""
+    return request.args.get("lang", 'Nl')
+
+
+def load_texts():
     """Load the texts for the given language.
 
     If the language is unknown, default to English.
     """
     with open("static/texts.json", "r") as file:
         texts_file = json.load(file)
-    texts = texts_file.get(lang.lower())
+    texts = texts_file.get(requested_lang().lower())
     return texts if texts else texts_file.get('en')
 
 if __name__ == '__main__':
