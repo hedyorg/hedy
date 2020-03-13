@@ -84,6 +84,10 @@ def index():
     level = int(level)
     lang = request.args.get("lang", 'Nl')
 
+    arguments_dict = {}
+    arguments_dict['level'] = level
+    arguments_dict['lang'] = lang
+
     try:
         file = open("static/levels.json", "r")
         contents = str(file.read())
@@ -97,28 +101,26 @@ def index():
         print(f"error opening level {level}")
         response_levels["Error"] = str(E)
 
+
     response_texts_lang = [r for r in response_texts if r['Language'] == lang][0]
-    page_title = response_texts_lang['Page_Title']
-    run_button = response_texts_lang['Run_code_button']
-    advance_button = response_texts_lang['Advance_button']
-    enter_text = response_texts_lang['Enter_Text']
-    enter = response_texts_lang['Enter']
+    arguments_dict['page_title'] = response_texts_lang['Page_Title']
+    arguments_dict['run_button'] = response_texts_lang['Run_code_button']
+    arguments_dict['advance_button'] = response_texts_lang['Advance_button']
+    arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
+    arguments_dict['enter'] = response_texts_lang['Enter']
 
     level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
     maxlevel = max(int(r['Level']) for r in response_levels)
 
-    commands = level_and_lang_dict['Commands']
-    introtext = level_and_lang_dict['Intro_text']
-    startcode = level_and_lang_dict['Start_code']
+    arguments_dict['commands'] = level_and_lang_dict['Commands']
+    arguments_dict['introtext'] = level_and_lang_dict['Intro_text']
+    arguments_dict['startcode'] = level_and_lang_dict['Start_code']
 
     next_level_available = level != maxlevel
-    nextlevel = None
-    if next_level_available:
-        nextlevel = level + 1
+    arguments_dict['nextlevel'] = level + 1 if next_level_available else None
+    arguments_dict['latest'] = 'March 13th'
 
-    latest = 'March 13th'
-
-    return render_template("index.html", lang = lang, page_title = page_title, enter_text = enter_text, enter = enter, run_button = run_button, advance_button = advance_button, startcode = startcode, introtext = introtext, level=level, nextlevel = nextlevel, commands = commands, latest = latest)
+    return render_template("index.html", **arguments_dict)
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
