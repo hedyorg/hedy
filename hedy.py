@@ -151,7 +151,7 @@ def transpile(input_string, level):
     lookup_table = all_assignments(program_root)
     flattened_tree = FlattenText().transform(program_root)
     is_valid = IsValid().transform(program_root)
-    if is_valid[0][0]:
+    if type(is_valid[0]) == Tree:
         if level == 1:
             python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
         elif level == 2:
