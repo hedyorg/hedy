@@ -126,20 +126,17 @@ def index():
 def error():
     lang = request.args.get("lang", 'Nl')
     try:
-        file = open("static/texts.json", "r")
-        contents = str(file.read())
-        response = (json.loads(contents))
-        file.close()
+        with open("static/texts.json", "r") as file:
+            response = json.load(file)
+
+        lang_texts = [r for r in response if r['Language'] == lang][0]
+        error_messages = lang_texts["ErrorMessages"]
+        print(error_messages)
     except Exception as E:
         print(f"error opening texts.json")
-        response["Error"] = str(E)
+        error_messages = {"Error": str(E)}
 
-    response_texts_lang = [r for r in response if r['Language'] == lang][0]
-    transpile_error = '"' + response_texts_lang['Transpile_error'] + '"'
-    connection_error = '"' + response_texts_lang['Connection_error'] + '"'
-    other_error = '"' + response_texts_lang['Other_error'] + '"'
-
-    return render_template("error_messages.js", transpile_error = transpile_error, connection_error = connection_error, other_error = other_error)
+    return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
 
 if __name__ == '__main__':

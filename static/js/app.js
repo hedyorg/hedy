@@ -96,8 +96,23 @@ function runPythonProgram(code) {
     console.log('Program executed');
   }).catch(function(err) {
     console.log(err);
-    addToOutput(JSON.stringify(err), 'red');
+    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+    error.show(ErrorMessages.Execute_error, errorMessage);
   });
+
+  /**
+   * Get the error messages from a Skulpt error
+   *
+   * They look like this:
+   *
+   * {"args":{"v":[{"v":"name 'name' is not defined"}]},"traceback":[{"lineno":3,"colno":0,"filename":"<stdin>.py"}]}
+   *
+   * Don't know why, so let's be defensive about it.
+   */
+  function errorMessageFromSkulptError(err) {
+    const message = err.args && err.args.v && err.args.v[0] && err.args.v[0].v;
+    return message;
+  }
 
   function addToOutput(text, color) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
