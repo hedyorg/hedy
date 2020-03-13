@@ -1,5 +1,11 @@
 from lark import Lark
-from lark import Tree, Transformer
+from lark import Tree, Transformer, Visitor
+
+class HedyException(Exception):
+    def __init__(self, message, **arguments):
+        self.error_code = message
+        self.arguments = arguments
+
 
 class AllCommands(Transformer):
     #creates a list of all commands in a tree for further processing
@@ -64,9 +70,17 @@ def all_assignments(tree):
     return assignments #leeg dus als er geen assignments gevonden zijn
 
 def create_parser(level):
-    with open("grammars/level" + str(level) + ".txt", "r") as file:
+    with open(f"grammars/level{str(level)}.txt", "r") as file:
         grammar = file.read()
     return Lark(grammar)
+
+class IsValid(Transformer):
+    def program(self, args):
+        return args
+    def invalid(self, args):
+        return False, ''.join([c for c in args[0].children])
+
+
 
 class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
@@ -136,15 +150,20 @@ def transpile(input_string, level):
     program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
     lookup_table = all_assignments(program_root)
     flattened_tree = FlattenText().transform(program_root)
-    if level == 1:
-        python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
-    elif level == 2:
-        python = 'import random\n'
-        python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
-    elif level == 3:
-        python = 'import random\n'
-        python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
-    return python
+    is_valid = IsValid().transform(program_root)
+    if is_valid[0][0]:
+        if level == 1:
+            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
+        elif level == 2:
+            python = 'import random\n'
+            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
+        elif level == 3:
+            python = 'import random\n'
+            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+        return python
+    else:
+        invalid_command = is_valid[0][1]
+        raise HedyException('Invalid', command=invalid_command, level=level)
 
 def execute(input_string):
     python = transpile(input_string)

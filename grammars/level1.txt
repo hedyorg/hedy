@@ -3,10 +3,11 @@ program: command ("\n" command)*
 command: "print " text -> print
                | "ask " text -> ask
                | "echo " text -> echo
-               |  text " " text -> invalid
+               |  textwithoutspaces " " text -> invalid
 
 PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
 text: (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+
+textwithoutspaces: (LETTER | DIGIT)+ -> text
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library

@@ -56,6 +56,11 @@ def parse():
         try:
             result = hedy.transpile(code, level)
             response["Code"] = result
+        except hedy.HedyException as E:
+            lang = request.args.get("lang", 'Nl')
+            texts = load_texts(lang)
+            error_template = texts['HedyErrorMessages'][E.error_code]
+            response["Error"] = error_template.format(**E.arguments)
         except Exception as E:
             print(f"error transpiling {code}")
             response["Error"] = str(E)
@@ -91,7 +96,7 @@ def index():
     try:
         with open("static/levels.json", "r") as file:
             response_levels = json.load(file)
-        response_texts_lang = load_language(lang)
+        response_texts_lang = load_texts(lang)
     except Exception as E:
         print(f"error opening level {level}")
         return jsonify({"Error": str(E)})
@@ -119,7 +124,7 @@ def index():
 def error():
     lang = request.args.get("lang", 'Nl')
     try:
-        lang_texts = load_language(lang)
+        lang_texts = load_texts(lang)
         error_messages = lang_texts["ClientErrorMessages"]
     except Exception as E:
         print(f"error opening texts.json")
@@ -134,7 +139,7 @@ def internal_error(exception):
     print(traceback.format_exc())
     return "500 error caught"
 
-def load_language(lang):
+def load_texts(lang):
     """Load the texts for the given language.
 
     If the language is unknown, default to English.

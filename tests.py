@@ -27,7 +27,8 @@ class TestsLevel1(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 1)
-            self.assertEqual(str(context), 'First word is not a command')
+
+        self.assertEqual(str(context.exception), 'abc is not a Hedy level 1 command. Try input, ask or print')
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
