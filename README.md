@@ -187,7 +187,7 @@ up to now was done with the keyword [`at`], following Design Goal 2.
 In the final level Hedy becomes a subset of Python by replacing the word
 [`is`] in assignment and equality checks by [`=`] and [`==`].
 
-Contributing
+Want to help improve Hedy?
 ------------
 
-Contribution instructions have been moved to [CONTRIBUTING.md](CONTRIBUTING.md).
+See how we can use your help here: [CONTRIBUTING.md](CONTRIBUTING.md).
