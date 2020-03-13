@@ -130,7 +130,7 @@ def error():
             response = json.load(file)
 
         lang_texts = [r for r in response if r['Language'] == lang][0]
-        error_messages = lang_texts["ErrorMessages"]
+        error_messages = lang_texts["ClientErrorMessages"]
         print(error_messages)
     except Exception as E:
         print(f"error opening texts.json")
