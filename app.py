@@ -94,7 +94,7 @@ def index():
         response_texts_lang = load_language(lang)
     except Exception as E:
         print(f"error opening level {level}")
-        response_levels["Error"] = str(E)
+        return jsonify({"Error": str(E)})
 
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
@@ -128,6 +128,12 @@ def error():
     return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
 
+@app.errorhandler(500)
+def internal_error(exception):
+    import traceback
+    print(traceback.format_exc())
+    return "500 error caught"
+
 def load_language(lang):
     """Load the texts for the given language.
 
@@ -135,7 +141,7 @@ def load_language(lang):
     """
     with open("static/texts.json", "r") as file:
         texts_file = json.load(file)
-    texts = texts_file.get(lang.lowercase())
+    texts = texts_file.get(lang.lower())
     return texts if texts else texts_file.get('en')
 
 if __name__ == '__main__':
