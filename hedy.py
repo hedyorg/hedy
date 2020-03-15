@@ -84,21 +84,21 @@ class IsValid(Transformer):
         arguments_of_false_nodes = [x[1] for x in args if not x[0]]
         return all(bool_arguments), arguments_of_false_nodes
     def program(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def command(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def ask(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def print(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def echo(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def assign(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def assign_list(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
     def list_access(self, args):
-        return self.pass_arguments(self, args)
+        return self.pass_arguments(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
@@ -290,12 +290,15 @@ def transpile(input_string, level):
         if is_valid[0]:
             if level == 1:
                 python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
+                return python
             elif level == 2:
                 python = 'import random\n'
                 python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
+                return python
             elif level == 3:
                 python = 'import random\n'
                 python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+                return python
         else:
             invalid_command = is_valid[1]
             raise HedyException('Invalid', command=invalid_command, level=level)

@@ -31,11 +31,11 @@ Voor alle volgende regels:
 
 ### Voorbeeld Hedy code
 
-* ask De hoofdpersoon van dit verhaal is ...
-* print De hoofdpersoon gaat nu in het bos lopen
-* echo Hij is wel een beetje bang die ...
-* print Overal hoort hij gekke geluiden
-* print Hij is bang dat dit een spookbos is
+* `ask De hoofdpersoon van dit verhaal is ...`
+* `print De hoofdpersoon gaat nu in het bos lopen`
+* `echo Hij is wel een beetje bang die ...`
+* `print Overal hoort hij gekke geluiden`
+* `print Hij is bang dat dit een spookbos is`
 
 
 ## Een simpel verhaal
