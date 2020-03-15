@@ -1,5 +1,6 @@
 import threading
 import os
+import json
 import queue
 import requests
 import logging
@@ -48,12 +49,23 @@ class JsonBinLogger:
             obj = self.queue.get()
 
             try:
-                requests.post('https://api.jsonbin.io/b', json=obj, headers={
+                response = requests.post('https://api.jsonbin.io/b', json=obj, headers={
                     'Content-Type': 'application/json',
                     'secret-key': self.secret_key,
                     'collection-id': self.collection_id,
                 })
-                logger.info('Posted to jsonbin.')
+
+                # Try to read the response as JSON
+                try:
+                    resp = json.loads(response.text)
+
+                    if resp['success']:
+                        logger.info('Posted to jsonbin')
+                    else:
+                        logger.warning('Posting to jsonbin failed: ' + resp['message'])
+                except Exception as e:
+                    # Not JSON or no success field
+                    logger.warning(f'Posting to jsonbin failed: {response.text}')
             except Exception as e:
                 logger.exception(f'Error posting to jsonbin.')
 
