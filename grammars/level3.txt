@@ -13,7 +13,7 @@ index : DIGIT+
 random : "random"
 punctuation : PUNCTUATION -> punctuation
 textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
-quoted_text: QUOTE (LETTER | DIGIT | punctuation | WS_INLINE)+ QUOTE -> text
+quoted_text: QUOTE (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ QUOTE -> text
 QUOTE : "'"
 text: (LETTER | DIGIT)+ -> text
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree

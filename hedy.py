@@ -28,13 +28,13 @@ class AllCommands(Transformer):
 class FlattenText(Transformer):
     #flattens arguments of text, var and punctuation for more easy debugging
     def text(self, args):
-            return Tree('text', ''.join([str(c) for c in args]))
+        return Tree('text', ''.join([str(c) for c in args]))
     def var(self, args):
-            return Tree('var', ''.join([str(c) for c in args]))
+        return Tree('var', ''.join([str(c) for c in args]))
     def punctuation(self, args):
-            return Tree('punctuation', ''.join([str(c) for c in args]))
+        return Tree('punctuation', ''.join([str(c) for c in args]))
     def index(self, args):
-            return ''.join([str(c) for c in args])
+        return ''.join([str(c) for c in args])
 
 class AllCommandsAssignments(FlattenText):
     #returns only assignments
@@ -281,8 +281,7 @@ def transpile(input_string, level):
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = create_parser(level)
-        program_root = parser.parse(input_string).children[
-            0]  # getting rid of the root could also be done in the transformer would be nicer
+        program_root = parser.parse(input_string).children[0]  # getting rid of the root could also be done in the transformer would be nicer
         lookup_table = all_assignments(program_root)
         flattened_tree = FlattenText().transform(program_root)
         is_valid = IsValid().transform(program_root)
