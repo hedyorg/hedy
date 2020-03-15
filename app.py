@@ -7,6 +7,7 @@ import logging
 import os
 import requests
 import uuid
+from flaskext.markdown import Markdown
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session
@@ -22,6 +23,7 @@ app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = uuid.uuid4().hex
 
 Compress(app)
+Markdown(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
 
 @app.route('/levels-text/', methods=['GET'])
@@ -98,9 +100,7 @@ def report_error():
 @app.route('/', methods=['GET'])
 def index():
     session_id()  # Run this for the side effect of generating a session ID
-
-    level = request.args.get("level", 1)
-    level = int(level)
+    level = requested_level()
     lang = requested_lang()
 
     arguments_dict = {}
@@ -134,6 +134,20 @@ def index():
 
     return render_template("index.html", **arguments_dict)
 
+# routing to docs.html
+@app.route('/docs.html', methods=['GET'])
+def docs():
+    level = request.args.get("level", 1)
+    lang = requested_lang()
+
+    arguments_dict = {}
+    arguments_dict['level'] = level
+    arguments_dict['pagetitle'] = f'Level{level}'
+
+    arguments_dict['mkd'] = load_docs()
+
+    return render_template("docs_per_level.html", **arguments_dict)
+
 @app.route('/error_messages.js', methods=['GET'])
 def error():
     try:
@@ -162,8 +176,21 @@ def session_id():
 
 def requested_lang():
     """Return the user's requested language code."""
-    return request.args.get("lang", 'Nl')
+    return request.args.get("lang", 'nl')
 
+def requested_level():
+    """Return the user's requested level."""
+    return int(request.args.get("level", 1))
+
+def load_docs():
+    """Load the markdown docs for the given language and level. """
+    lang = requested_lang()
+    level = requested_level()
+
+    with open(f'static/{lang}-level{level}.md', "r") as file:
+        markdown = file.read()
+
+    return markdown if markdown else f'No docs available for {lang} at level {level}'
 
 def load_texts():
     """Load the texts for the given language.
