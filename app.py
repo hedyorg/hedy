@@ -1,3 +1,4 @@
+# coding=utf-8
 import datetime
 from functools import wraps
 import hedy
@@ -8,10 +9,17 @@ import os
 import requests
 import uuid
 from flaskext.markdown import Markdown
+from werkzeug.urls import url_encode
+
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session
 from flask_compress import Compress
+
+ALL_LANGUAGES = {
+    'en': '🇺🇸',
+    'nl': '🇳🇱',
+}
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -196,6 +204,35 @@ def load_docs():
         markdown = file.read()
 
     return markdown if markdown else f'No docs available for {lang} at level {level}'
+
+
+@app.template_global()
+def current_language():
+    return make_lang_obj(requested_lang())
+
+
+@app.template_global()
+def other_languages():
+    cl = requested_lang()
+    return [make_lang_obj(l) for l in ALL_LANGUAGES.keys() if l != cl]
+
+
+def make_lang_obj(lang):
+    """Make a language object for a given language."""
+    return {
+        'sym': ALL_LANGUAGES[lang],
+        'lang': lang
+    }
+
+
+@app.template_global()
+def modify_query(**new_values):
+    args = request.args.copy()
+
+    for key, value in new_values.items():
+        args[key] = value
+
+    return '{}?{}'.format(request.path, url_encode(args))
 
 def load_texts():
     """Load the texts for the given language.
