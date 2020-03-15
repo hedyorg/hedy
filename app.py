@@ -158,7 +158,6 @@ def docs():
     response_texts_lang = load_texts()
 
     arguments_dict = {}
-    arguments_dict = {}
     arguments_dict['level'] = level
     arguments_dict['pagetitle'] = f'Level{level}'
     arguments_dict['lang'] = lang

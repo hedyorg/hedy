@@ -6,14 +6,19 @@ Opdrachten voor level 2.
 In Level 2 kunnen we iets nieuws doen, namelijk lijstjes invoeren en daar dingen uit kiezen.
 Zo kun je bijvoorbeeld zelf een steen, schaar, papier spel maken.
 Dat doe je zo:
+
 * `keuzes = steen, schaar, papier`
 * `print keuzes at random`
 
-Random (je zegt ren-dom) is het Engelse woord voor willekeurig. Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
+Random (je zegt ren-dom) is het Engelse woord voor willekeurig. 
+
+## Maak dobbelsteen na
+Je kunt ook een dobbelsteen maken. Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
 Zitten daar spelletjes tussen met een (speciale) dobbelsteen? Die kun je ook namaken met deze code. Bijvoorbeeld de dobbelsteen van het spelletje Regenwormen met daarop de getallen 1 tot en met 5 en een regemworm.
 ![Dobbelsteen van regenwormen met 1 tot en met 5 en een regenworm erop](https://cdn.anyfinder.eu/assets/5b64147d2864c61f08bdd4fb85c70d4d26e2b8d7774dc20edabeb13c9391c327?output=webp "Regenwormen")
 
 Die maak je zo:
+
 * `keuzes = 1, 2, 3, 4, 5, regenworm`
 * `print keuzes at random`
 
@@ -25,6 +30,7 @@ Iets uitkiezen hoeft natuurlijk niet voor een spelletje te zijn. Misschien wil j
 Ook dat kun jij nu programmeren!
 
 Dat doe je zo:
+
 * `mensen = mama, papa, Emma, Sophie`
 * `print mensen at random`
 
