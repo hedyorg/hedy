@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from functools import wraps
 import hedy
 import json
@@ -25,6 +25,9 @@ app.config['SECRET_KEY'] = uuid.uuid4().hex
 Compress(app)
 Markdown(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
+
+if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
+    logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 @app.route('/levels-text/', methods=['GET'])
 def levels():
@@ -71,10 +74,11 @@ def parse():
 
     logger.log({
         'session': session_id(),
-        'date': str(datetime.now()),
+        'date': str(datetime.datetime.now()),
         'level': level,
         'code': code,
-        'server_error': response.get('Error')
+        'server_error': response.get('Error'),
+        'version': version(),
     })
 
     return jsonify(response)
@@ -85,10 +89,11 @@ def report_error():
 
     logger.log({
         'session': session_id(),
-        'date': str(datetime.now()),
+        'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
         'code': post_body.get('code'),
-        'client_error': post_body.get('client_error')
+        'client_error': post_body.get('client_error'),
+        'version': version(),
     })
 
 
@@ -130,7 +135,7 @@ def index():
 
     next_level_available = level != maxlevel
     arguments_dict['nextlevel'] = level + 1 if next_level_available else None
-    arguments_dict['latest'] = 'March 13th'
+    arguments_dict['latest'] = version()
 
     return render_template("index.html", **arguments_dict)
 
@@ -201,6 +206,25 @@ def load_texts():
         texts_file = json.load(file)
     texts = texts_file.get(requested_lang().lower())
     return texts if texts else texts_file.get('en')
+
+
+def no_none_sense(d):
+    """Remove all None values from a dict."""
+    return {k: v for k, v in d.items() if v is not None}
+
+
+def version():
+    """Get the version from the Heroku environment variables."""
+    if not os.getenv('DYNO'):
+        # Not on Heroku
+        return 'DEV'
+
+    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+
+    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
+    return the_date.strftime('%b %d') + f' ({commit})'
+
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
