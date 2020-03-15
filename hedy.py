@@ -51,6 +51,11 @@ class AllCommandsAssignments(FlattenText):
         return args
     def command(self, args):
         return args
+    def ask(self, args):
+        #todo: this also uses this arg for level 1, where it should not be used
+        #(since then it has no var as 1st argument)
+        #we should actually loop the level in here to distinguish on
+        return args[0].children
     def assign(self, args):
         return args[0].children
     def assign_list(self, args):
@@ -83,6 +88,8 @@ class IsValid(Transformer):
         bool_arguments = [x[0] for x in args]
         arguments_of_false_nodes = [x[1] for x in args if not x[0]]
         return all(bool_arguments), arguments_of_false_nodes
+
+    #would be lovely if there was some sort of default rule! Not sure Lark supports that
     def program(self, args):
         return self.pass_arguments(args)
     def command(self, args):
@@ -157,6 +164,10 @@ class ConvertToPython_2(ConvertToPython_1):
                 all_arguments_converted.append("'" + argument + "'" + space)
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
+    def ask(self, args):
+        var = args[0]
+        all_parameters = ["'" + a + "'" for a in args[1:]]
+        return f'{var} = input(' + '+'.join(all_parameters) + ")"
     def assign(self, args):
         parameter = args[0]
         value = args[1]

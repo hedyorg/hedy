@@ -69,18 +69,18 @@ class TestsLevel2(unittest.TestCase):
         self.assertEqual(result, "import random\nprint('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')")
 
     def test_transpile_ask(self):
-        result = hedy.transpile("ask wat is je lievelingskleur?", 2)
-        self.assertEqual(result, "import random\nanswer = input('wat is je lievelingskleur'+'?')")
+        result = hedy.transpile("kleur is ask wat is je lievelingskleur?", 2)
+        self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')")
+
+    def test_transpile_ask_with_print(self):
+        result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint kleur!", 2)
+        self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')\nprint(kleur+'!')")
+
 
     def test_transpile_print_multiple_lines(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!\nprint Mooi hoor", 2)
         self.assertEqual(result, "import random\nprint('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')\nprint('Mooi'+' '+'hoor')")
         self.assertEqual(run_code(result), "Hallo welkom bij Hedy!\nMooi hoor")
-
-
-    def test_transpile_echo(self):
-        result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
-        self.assertEqual(result, "import random\nprint('Jouw lievelingskleur is dus'+'.'+'.'+'.' + answer)")
 
     def test_transpile_assign(self):
         result = hedy.transpile("naam is Felienne", 2)

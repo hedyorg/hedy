@@ -61,16 +61,19 @@ Nu jij!
 Regel 1: typ: `naam is` en daarachter de naam van jouw hoofdpersoon
 Voor alle volgende regels:
 Type `print` en dan de regel die je verzonnen hebt
-### Voorbeeld Hedy code
 
+### Voorbeeld Hedy code
 * `naam is Bert`
 * `print naam gaat nu in het bos lopen`
 * `echo naam is wel een beetje bang`
 * `print Overal hoort hij gekke geluiden`
 * `print naam is bang dat dit een spookbos is`
 
+### Een interactief verhaal
+Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Veranderd daarvoor de eerste regel van je programma `naam is Henk` in `naam is ask Wat is de naam van je hoofdrolspeler?`
+Als je het programma nu uitvoert kun je steeds een andere naam kiezen zonder de code te veranderen.
 
-### Er is nu wel een probleempje!
+### Er is nu wel een probleempje...!
 Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat? Bijv. `print mijn naam is naam`.
 Probeer het maar eens als je dat nog niet gedaan had.
 Dat werkt niet goed! Dan krijg je: mijn Henk is Henk. Dat kun je in Level 3 oplossen. Klik maar door als je deze drie opdrachten af hebt.

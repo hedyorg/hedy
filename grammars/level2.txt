@@ -1,8 +1,7 @@
 start: program
 program: command ("\n" command)*
 command: "print " ( list_access | (text punctuation)| text) (" " ( list_access | (text punctuation)| text) )*  -> print
-         | "ask " textwithspaces punctuation* -> ask
-         | "echo " textwithspaces punctuation* -> echo
+         | text " is ask " textwithspaces punctuation* -> ask
          | text " is " text ((", "|",") text)+  -> assign_list
          | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
          | text " " textwithspaces -> invalid
