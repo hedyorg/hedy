@@ -46,8 +46,6 @@ def parse():
     code = request.args.get("code", None)
     level = request.args.get("level", None)
 
-    log_to_jsonbin(session_id(), code, level)
-
     # For debugging
     print(f"got code {code}")
 
@@ -69,16 +67,19 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
 
+    log_to_jsonbin(session_id(), code, level, response.get('Error'))
+
     return jsonify(response)
 
 
-def log_to_jsonbin(session_id, code, level):
+def log_to_jsonbin(session_id, code, level, server_error):
     # log all info to jsonbin
     data = {
         'session': session_id,
         'date': str(datetime.now()),
         'level': level,
-        'code': code
+        'code': code,
+        'server_error': server_error
     }
     logger.log(data)
 
