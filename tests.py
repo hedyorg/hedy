@@ -125,7 +125,6 @@ class TestsLevel2(unittest.TestCase):
         self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
         self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
-
 class TestsLevel3(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
@@ -145,6 +144,17 @@ class TestsLevel3(unittest.TestCase):
     def test_print_with_var(self):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 3)
         self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
+
+class TestsLevel4(unittest.TestCase):
+    def test_simple_calculation(self):
+        result = hedy.transpile("nummer is 4 + 5", 4)
+        self.assertEqual('import random\nnummer=4+5\n', result)
+
+    def test_calculation_and_printing(self):
+        result = hedy.transpile("nummer is 4 + 5\nprint nummer", 4)
+        self.assertEqual('import random\nnummer=4+5\nprint(nummer)\n', result)
+        self.assertEqual(run_code(result), "9")
+
 
 
 

@@ -1,5 +1,6 @@
 from lark import Lark
 from lark import Tree, Transformer, Visitor
+from lark.indenter import Indenter
 
 class HedyException(Exception):
     def __init__(self, message, **arguments):
@@ -78,38 +79,28 @@ class IsValid(Transformer):
     # all rules are valid except for the invalid production rule
     # used to generate more informative error messages
     # tree is transformed to a node of [Bool, args]
-    def program(self, args):
+    def pass_arguments(self, args):
         bool_arguments = [x[0] for x in args]
         arguments_of_false_nodes = [x[1] for x in args if not x[0]]
         return all(bool_arguments), arguments_of_false_nodes
+    def program(self, args):
+        return self.pass_arguments(self, args)
     def command(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
     def ask(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
     def print(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
     def echo(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
     def assign(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
     def assign_list(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
     def list_access(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments = [x[1] for x in args]
-        return all(bool_arguments), arguments
+        return self.pass_arguments(self, args)
+
+    #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
     def index(self, args):
@@ -187,28 +178,138 @@ class ConvertToPython_3(ConvertToPython_2):
         #opzoeken is nu niet meer nodig
         return "print(" + '+'.join(args) + ')'
 
+class ConvertToPython(Transformer):
+    indent_level = 0
+
+    def start(self, args):
+        return "".join(args)
+
+    def statement(self, args):
+        return "".join([self.indent_level * "\t" + x + ("\n" if x[-1] != '\n' else "") for x in args if x != ""])
+
+    def if_statement(self, args):
+        return "if " + args[0] + ":\n" + "".join(args[1:])
+
+    def elif_statement(self, args):
+        return "elif " + args[0] + ":\n" + "".join(args[1:])
+
+    def else_statement(self, args):
+        return "else:\n" + "".join(args)
+
+    def repeat(self, args):
+        return "for _ in range(" +args[0] + "):\n" + "".join(args[1:])
+
+    def ranged_loop(self, args):
+        return "for " + args[0] + " in range(" + args[1] + "," + args[2] +  "):\n" + "".join(args[3:])
+
+    def assignment(self, args):
+        return args[0] + "=" + str(args[1])
+
+    def eq(self, args):
+        return str(args[0]) + "==" + str(args[1])
+
+    def ne(self, args):
+        return str(args[0]) + "!=" + str(args[1])
+
+    def le(self, args):
+        return str(args[0]) + "<=" + str(args[1])
+
+    def ge(self, args):
+        return str(args[0]) + ">=" + str(args[1])
+
+    def lt(self, args):
+        return str(args[0]) + "<" + str(args[1])
+
+    def gt(self, args):
+        return str(args[0]) + ">" + str(args[1])
+
+    def addition(self, args):
+        return str(args[0]) + "+" + str(args[1])
+
+    def substraction(self, args):
+        return str(args[0]) + "-" + str(args[1])
+
+    def multiplication(self, args):
+        return str(args[0]) + "*" + str(args[1])
+
+    def division(self, args):
+        return str(args[0]) + "/" + str(args[1])
+
+    def list(self, args):
+        return str(args)
+
+    def list_access(self, args):
+        return  args[0] + "[" + str(args[1]) + "]" if args[1] != "random" else "random.choice(" + str(args[0]) + ")"
+
+    def function_call(self, args):
+        return args[0] + "(" + ", ".join(args[1:]) + ")"
+
+    def INTEGER(self, args):
+        return int(args.value)
+
+    def FLOAT(self, args):
+        return float(args.value)
+
+    def NAME(self, args):
+        return str(args.value)
+
+    def STRING(self, args):
+        return args.value
+
+    def INDENT(self, args):
+        self.indent_level += 1
+        return ""
+
+    def DEDENT(self, args):
+        self.indent_level -= 1
+        return ""
+
+class BasicIndenter(Indenter):
+    NL_type = "_EOL"
+    OPEN_PAREN_types = []
+    CLOSE_PAREN_types = []
+    INDENT_type = "INDENT"
+    DEDENT_type = "DEDENT"
+    tab_len = 4
+
+def create_grammar(level):
+    with open("grammars/level" + str(level) + ".txt", "r") as file:
+        return file.read()
 
 def transpile(input_string, level):
-    punctuation_symbols = ['!', '?', '.']
-    level = int(level)
-    parser = create_parser(level)
-    program_root = parser.parse(input_string).children[0] #getting rid of the root could also be done in the transformer would be nicer
-    lookup_table = all_assignments(program_root)
-    flattened_tree = FlattenText().transform(program_root)
-    is_valid = IsValid().transform(program_root)
-    if is_valid[0]:
-        if level == 1:
-            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
-        elif level == 2:
-            python = 'import random\n'
-            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
-        elif level == 3:
-            python = 'import random\n'
-            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+    if level <= 3:
+        punctuation_symbols = ['!', '?', '.']
+        level = int(level)
+        parser = create_parser(level)
+        program_root = parser.parse(input_string).children[
+            0]  # getting rid of the root could also be done in the transformer would be nicer
+        lookup_table = all_assignments(program_root)
+        flattened_tree = FlattenText().transform(program_root)
+        is_valid = IsValid().transform(program_root)
+
+        if is_valid[0]:
+            if level == 1:
+                python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
+            elif level == 2:
+                python = 'import random\n'
+                python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
+            elif level == 3:
+                python = 'import random\n'
+                python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+        else:
+            invalid_command = is_valid[1]
+            raise HedyException('Invalid', command=invalid_command, level=level)
+
+    #todo: we need to be able to 'valid check' levels 4 to 8 also, skipping for now (requires changes to grammar)
+    elif level >= 8 or level == 4:
+        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
+        python = 'import random\n'
+        python += ConvertToPython().transform(
+            parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
+        print(python)
         return python
     else:
-        invalid_command = is_valid[1]
-        raise HedyException('Invalid', command=invalid_command, level=level)
+        raise Exception('Levels 5 to 7 are not implemented yet')
 
 def execute(input_string):
     python = transpile(input_string)
