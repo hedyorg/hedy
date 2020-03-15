@@ -1,0 +1,57 @@
+start: _EOL* statement+
+
+statement: if_statement elif_statement* else_statement?
+         | repeat
+         | ranged_loop
+         | assignment _EOL+
+         | expression _EOL+ 
+
+if_statement: "if" expression ":" _EOL INDENT statement+ DEDENT
+elif_statement: "elif" expression ":" _EOL INDENT statement+ DEDENT
+else_statement: "else" ":" _EOL INDENT statement+ DEDENT 
+
+repeat: "repeat" expression "times" ":" _EOL INDENT statement+ DEDENT
+
+ranged_loop: "for" NAME "in" "range" "(" expression "," expression ")" ":" _EOL INDENT statement+ DEDENT
+
+assignment: NAME "is" expression 
+
+?expression: sum
+           | expression "="  sum -> eq
+           | expression "!=" sum -> ne
+           | expression "<=" sum -> le
+           | expression ">=" sum -> ge
+           | expression "<"  sum -> lt
+           | expression ">"  sum -> gt
+
+?sum: product
+   | sum "+" product -> addition
+   | sum "-" product -> substraction
+
+?product: atom
+    | product "*" atom -> multiplication
+    | product "/" atom -> division
+    | product "%" atom -> modulo
+
+?atom: NAME 
+      | INTEGER
+      | FLOAT
+      | STRING
+      | "[" (expression? | (expression ",")+ expression) "]" -> list 
+      | "(" expression? ")" 
+      | NAME "(" (expression? | (expression ",")+ expression) ")" -> function_call 
+      | NAME "[" (expression)  "]" -> list_access
+
+
+_EOL: /(\r?\n[\t ]*)+/
+
+%import common.WS_INLINE
+%import common.SIGNED_INT -> INTEGER
+%import common.FLOAT -> FLOAT
+%import common.CNAME -> NAME
+%import common._STRING_ESC_INNER
+%import common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
+
+%declare INDENT DEDENT
+
+%ignore WS_INLINE 
