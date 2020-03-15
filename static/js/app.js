@@ -52,21 +52,26 @@ function goto(level, lang) {
 function runit(level, lang) {
   error.hide();
   try {
+    level = level.toString();
     var editor = ace.edit("editor");
-    var prog = editor.getValue();
+    var code = editor.getValue();
 
-    console.log('Original program:\n', prog);
+    console.log('Original program:\n', code);
 
     $.getJSON('/parse/', {
-      level: level.toString(),
-      code: prog,
+      level: level,
+      code: code,
     }).done(function(response) {
       console.log('Response', response);
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
-      } else {
-        runPythonProgram(response.Code);
+        return;
       }
+
+      runPythonProgram(response.Code).catch(function(err) {
+        error.show(ErrorMessages.Execute_error, err.message);
+        reportClientError(level, code, err.message);
+      });
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
@@ -76,6 +81,23 @@ function runit(level, lang) {
     console.error(e);
     error.show(ErrorMessages.Other_error, e.message);
   }
+}
+
+/**
+ * Do a POST with the error to the server so we can log it
+ */
+function reportClientError(level, code, client_error) {
+  $.ajax({
+    type: 'POST',
+    url: '/report_error',
+    data: JSON.stringify({
+      level: level,
+      code: code,
+      client_error: client_error,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  });
 }
 
 function runPythonProgram(code) {
@@ -90,14 +112,15 @@ function runPythonProgram(code) {
     inputfunTakesPrompt: true,
   });
 
-  Sk.misceval.asyncToPromise(function () {
+  return Sk.misceval.asyncToPromise(function () {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
     console.log('Program executed');
   }).catch(function(err) {
+    // Extract error message from error
     console.log(err);
     const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
-    error.show(ErrorMessages.Execute_error, errorMessage);
+    throw new Error(errorMessage);
   });
 
   /**

@@ -67,21 +67,28 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
 
-    log_to_jsonbin(session_id(), code, level, response.get('Error'))
-
-    return jsonify(response)
-
-
-def log_to_jsonbin(session_id, code, level, server_error):
-    # log all info to jsonbin
-    data = {
-        'session': session_id,
+    logger.log({
+        'session': session_id(),
         'date': str(datetime.now()),
         'level': level,
         'code': code,
-        'server_error': server_error
-    }
-    logger.log(data)
+        'server_error': response.get('Error')
+    })
+
+    return jsonify(response)
+
+@app.route('/report_error', methods=['POST'])
+def report_error():
+    post_body = request.json
+
+    logger.log({
+        'session': session_id(),
+        'date': str(datetime.now()),
+        'level': post_body.get('level'),
+        'code': post_body.get('code'),
+        'client_error': post_body.get('client_error')
+    })
+
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
