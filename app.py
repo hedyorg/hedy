@@ -188,8 +188,15 @@ def session_id():
 
 
 def requested_lang():
-    """Return the user's requested language code."""
-    return request.args.get("lang", 'nl')
+    """Return the user's requested language code.
+
+    If not in the request parameters, use the browser's accept-languages
+    header to do language negotiation.
+    """
+    lang = request.args.get("lang")
+    if lang: return lang
+
+    return request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
 
 def requested_level():
     """Return the user's requested level."""
