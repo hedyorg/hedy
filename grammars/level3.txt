@@ -5,7 +5,7 @@ command: "print " (quoted_text | list_access | var) (" " (quoted_text | list_acc
          | "echo " textwithspaces punctuation* -> echo
          | text " is " text ((", "|",") text)+  -> assign_list
          | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
-
+         | text " " textwithspaces -> invalid
 
 var: LETTER+ -> var
 list_access : var " at " (index | random) -> list_access

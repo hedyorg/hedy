@@ -75,10 +75,55 @@ def create_parser(level):
     return Lark(grammar)
 
 class IsValid(Transformer):
+    # all rules are valid except for the invalid production rule
+    # used to generate more informative error messages
+    # tree is transformed to a node of [Bool, args]
     def program(self, args):
-        return args
+        bool_arguments = [x[0] for x in args]
+        arguments_of_false_nodes = [x[1] for x in args if not x[0]]
+        return all(bool_arguments), arguments_of_false_nodes
+    def command(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def ask(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def print(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def echo(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def assign(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def assign_list(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def list_access(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments = [x[1] for x in args]
+        return all(bool_arguments), arguments
+    def random(self, args):
+        return True, 'random'
+    def index(self, args):
+        return True, ''.join([str(c) for c in args])
+    def var(self, args):
+        return all(args), ''.join([c for c in args])
+    def text(self, args):
+        return all(args), ''.join([c for c in args])
+    def punctuation(self, args):
+        return True, ''.join([c for c in args])
     def invalid(self, args):
-        return False, ''.join([c for c in args[0].children])
+        # return the first argument to place in the error message
+        # TODO: this will not work for misspelling 'at', needs to be improved!
+        return False, args[0][1]
 
 
 
@@ -151,7 +196,7 @@ def transpile(input_string, level):
     lookup_table = all_assignments(program_root)
     flattened_tree = FlattenText().transform(program_root)
     is_valid = IsValid().transform(program_root)
-    if type(is_valid[0]) == Tree:
+    if is_valid[0]:
         if level == 1:
             python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
         elif level == 2:
@@ -162,7 +207,7 @@ def transpile(input_string, level):
             python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
         return python
     else:
-        invalid_command = is_valid[0][1]
+        invalid_command = is_valid[1]
         raise HedyException('Invalid', command=invalid_command, level=level)
 
 def execute(input_string):

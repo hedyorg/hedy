@@ -60,7 +60,9 @@ class TestsLevel2(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 2)
-            self.assertEqual(str(context), 'First word is not a command')
+            x = result
+
+        self.assertEqual(str(context.exception), 'Invalid')
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 2)
@@ -128,7 +130,8 @@ class TestsLevel3(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 3)
-            self.assertEqual(str(context), 'First word is not a command')
+
+        self.assertEqual(str(context.exception), 'Invalid')
 
     def test_transpile_print_level_2(self):
         with self.assertRaises(Exception) as context:
