@@ -4,7 +4,7 @@ Opdrachten voor level 1.
 
 ## Een verhaal
 
-In Level 1 kun je van alles maken, bijvoorbeeld een verhaal met steeds een andere hoofdpersoon.
+In Level 1 kun je bijvoorbeeld een verhaal met steeds een andere hoofdpersoon die je zelf invoert.
 
 ###Voorbeeld
 Dit is mijn verhaal, op de puntjes komt straks de hoofdpersoon te staan die jij kiest.
@@ -38,6 +38,6 @@ Voor alle volgende regels:
 * `print Hij is bang dat dit een spookbos is`
 
 
-## Een simpel verhaal
+### Een simpel verhaal
 Vind je het jammer dat je nu alleen zinnen kan maken waarin de hoofdpersoon op het einde van de zin staat?
 Ga dan na het oefenen met dit verhaal door naar level 2 en dan level 3, dan kun je steeds ingewikkeldere programma's maken.
