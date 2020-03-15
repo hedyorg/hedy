@@ -129,6 +129,8 @@ def index():
         return jsonify({"Error": str(E)})
 
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
+    arguments_dict['code_title'] = response_texts_lang['Code']
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
     arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
@@ -144,18 +146,25 @@ def index():
     next_level_available = level != maxlevel
     arguments_dict['nextlevel'] = level + 1 if next_level_available else None
     arguments_dict['latest'] = version()
+    arguments_dict['selected_page'] = 'code'
 
     return render_template("index.html", **arguments_dict)
 
 # routing to docs.html
-@app.route('/docs.html', methods=['GET'])
+@app.route('/docs', methods=['GET'])
 def docs():
     level = request.args.get("level", 1)
     lang = requested_lang()
+    response_texts_lang = load_texts()
 
+    arguments_dict = {}
     arguments_dict = {}
     arguments_dict['level'] = level
     arguments_dict['pagetitle'] = f'Level{level}'
+    arguments_dict['lang'] = lang
+    arguments_dict['code_title'] = response_texts_lang['Code']
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
+    arguments_dict['selected_page'] = 'docs'
 
     arguments_dict['mkd'] = load_docs()
 
@@ -207,10 +216,13 @@ def load_docs():
     lang = requested_lang()
     level = requested_level()
 
-    with open(f'static/{lang}-level{level}.md', "r") as file:
-        markdown = file.read()
+    try:
+        with open(f'docs/{lang}-level{level}.md', "r") as file:
+            markdown = file.read()
 
-    return markdown if markdown else f'No docs available for {lang} at level {level}'
+        return markdown
+    except IOError as e:
+        return f'No docs available for {lang} at level {level}'
 
 
 @app.template_global()
