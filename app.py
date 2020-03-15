@@ -1,14 +1,15 @@
+from datetime import datetime
+from functools import wraps
 import hedy
 import json
-import os
-import requests
-from flask import request
-from datetime import datetime
 import jsonbin
 import logging
+import os
+import requests
+import uuid
 
 # app.py
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session
 from flask_compress import Compress
 
 logging.basicConfig(
@@ -16,6 +17,10 @@ logging.basicConfig(
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
 
 app = Flask(__name__, static_url_path='')
+
+# Unique random key for sessions
+app.config['SECRET_KEY'] = uuid.uuid4().hex
+
 Compress(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
 
@@ -41,7 +46,7 @@ def parse():
     code = request.args.get("code", None)
     level = request.args.get("level", None)
 
-    log_to_jsonbin(code, level)
+    log_to_jsonbin(session_id(), code, level)
 
     # For debugging
     print(f"got code {code}")
@@ -67,10 +72,10 @@ def parse():
     return jsonify(response)
 
 
-def log_to_jsonbin(code, level):
+def log_to_jsonbin(session_id, code, level):
     # log all info to jsonbin
     data = {
-        'ip': request.remote_addr,
+        'session': session_id,
         'date': str(datetime.now()),
         'level': level,
         'code': code
@@ -84,6 +89,8 @@ def log_to_jsonbin(code, level):
 @app.route('/index.html', methods=['GET'])
 @app.route('/', methods=['GET'])
 def index():
+    session_id()  # Run this for the side effect of generating a session ID
+
     level = request.args.get("level", 1)
     level = int(level)
     lang = requested_lang()
@@ -135,7 +142,14 @@ def error():
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return "500 error caught"
+    return "<h1>500 Internal Server Error</h1>"
+
+
+def session_id():
+    """Returns or sets the current session ID."""
+    if 'session_id' not in session:
+        session['session_id'] = uuid.uuid4().hex
+    return session['session_id']
 
 
 def requested_lang():
