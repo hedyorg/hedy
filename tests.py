@@ -138,6 +138,10 @@ class TestsLevel3(unittest.TestCase):
             self.assertEqual(str(context), 'First word is not a command') #hier moet nog we een andere foutmelding komen!
 
     def test_print(self):
+        result = hedy.transpile("print 'hallo wereld!'", 3)
+        self.assertEqual(result, "import random\nprint('hallo wereld!')")
+
+    def test_print_2(self):
         result = hedy.transpile("print 'ik heet henk'", 3)
         self.assertEqual(result, "import random\nprint('ik heet henk')")
 
