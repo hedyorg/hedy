@@ -1,37 +1,5 @@
-<!doctype html>
-<html>
-
-<head>
-  <title>{{page_title}}</title>
-  <link rel="stylesheet" href="css/generated.css">
-  <link rel="stylesheet" href="css/additional.css">
-</head>
-
-<body class="bg-gray-400">
-  <div class="container mx-auto bg-gray-100 min-h-screen shadow-md">
-    <nav class="bg-blue-500 px-8 shadow-sm text-white">
-      <div class="-mb-px flex">
-        <div class="tracking-wide text-xl font-thin py-2 mr-8">
-          Hedy
-        </div>
-        <a class="no-underline border-b-4 border-white tracking-wide font-bold px-4 py-3 mr-8" href="/">
-          Home
-        </a>
-        <div class="dropdown inline-block relative ml-auto py-2">
-          <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
-            <span class="mr-1">{{ current_language().sym }}</span>
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
-          </button>
-          <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1">
-            {% for lang in other_languages() %}
-            <li><a class="hover:bg-blue-700 py-2 px-4 block whitespace-no-wrap" href="{{ modify_query(lang=lang.lang) }}">{{ lang.sym }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="px-8 py-4">
-      <h2>Hedy: Level {{ level }}</h2>
+{% extends "layout.html" %}
+{% block body %}
       <div>
         {{introtext}}
 
@@ -87,8 +55,6 @@
         </div>
       </div>
 
-
-
       <!-- errorbox -->
       <div id="errorbox" class="mt-10 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md"
         role="alert" style="display: none;">
@@ -108,15 +74,12 @@
       <div class="text-sm mt-10 mr-5 font-thin">
         Latest update: {{latest}}
       </div>
-    </div>
-    </div>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
-    <script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="vendor/skulpt.min.js" type="text/javascript"></script>
-    <script src="vendor/skulpt-stdlib.js" type="text/javascript"></script>
-    <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
-    <script src="js/app.js" type="text/javascript"></script>
-    </body>
-
-    </html>
+{% endblock %}
+{% block scripts %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+  <script src="https://pagecdn.io/lib/ace/1.4.7/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="vendor/skulpt.min.js" type="text/javascript"></script>
+  <script src="vendor/skulpt-stdlib.js" type="text/javascript"></script>
+  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
+  <script src="js/app.js" type="text/javascript"></script>
+{% endblock %}

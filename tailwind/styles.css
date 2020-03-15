@@ -1,7 +1,55 @@
 @tailwind base;
 
-h2 {
+h1 {
   @apply font-thin text-4xl;
+}
+
+h2 {
+  @apply font-bold text-2xl;
+}
+
+h3 {
+  @apply font-bold text-xl;
+}
+
+/* Styles only for use in MarkDown blocks */
+.markdown {
+  @apply text-xl text-gray-800 leading-normal;
+}
+
+.markdown > * + *,  .markdown li + li, .markdown li > p + p {
+  @apply my-2;
+}
+.markdown strong {
+  @apply text-black font-bold;
+}
+.markdown a {
+  @apply text-black font-semibold;
+}
+.markdown strong a {
+  @apply font-bold;
+}
+.markdown h2 {
+  @apply font-serif;
+  @apply leading-tight text-2xl font-bold text-black mb-2 mt-10;
+}
+.markdown h3 {
+  @apply font-serif;
+  @apply leading-tight text-xl font-bold text-black mt-8 mb-1;
+}
+.markdown code {
+  @apply font-mono text-sm inline bg-gray-200 rounded py-2 px-3;
+  @apply text-red-600;
+}
+.markdown pre {
+  @apply block bg-gray-400 p-4 rounded;
+  @apply text-red-600;
+}
+.markdown blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic;
+}
+.markdown ul, .markdown ol {
+  @apply pl-5 list-disc;
 }
 
 @tailwind components;

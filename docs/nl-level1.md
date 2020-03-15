@@ -17,7 +17,7 @@ Dit is mijn verhaal, op de puntjes komt straks de hoofdpersoon te staan die jij 
 
 ### Opdracht
 
-Nu jij! 
+Nu jij!
 
 1. Schrijf een verhaal van een paar zinnen over jouw hoofdpersoon.
 2. Waar de naam van je hoofdpersoon komt, zet je even ... (zie voorbeeld)
@@ -25,7 +25,9 @@ Nu jij!
 4. Vertaal je verhaal nu naar Hedy code, dat doe je zo:
 
 Regel 1: typ: `ask wat is de hoofdpersoon van jouw verhaal`
+
 Voor alle volgende regels:
+
 * Staan er stipjes in de regel, typ `echo` en dan jouw zin
 * Staan er geen stipjes in de regel, typ dan `print` en dan jouw zin
 
