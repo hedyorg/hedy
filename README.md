@@ -12,7 +12,7 @@ Design Goals
 
 The overarching goal of Hedy is to successively add syntactic complexity to a Python-like language, until novices have mastered Python itself. To reach that goal, Hedy follows these design principles:
 
-1.  **Concepts are offered in least three times in different forms** Research from writing
+1.  **Concepts are offered at least three times in different forms** Research from writing
     education [@simon_langue_1973; @fayol_etude_1989] has shown that it
     is needed to offer concept in different forms over a long period of
     time. Furthermore it has been shown that a word needs to be read 7
