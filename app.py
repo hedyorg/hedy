@@ -132,6 +132,7 @@ def index():
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['contact'] = response_texts_lang['Contact']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
     arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
@@ -165,6 +166,7 @@ def docs():
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['contact'] = response_texts_lang['Contact']
     arguments_dict['selected_page'] = 'docs'
 
     arguments_dict['mkd'] = load_docs()
@@ -186,10 +188,32 @@ def video():
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['contact'] = response_texts_lang['Contact']
 
     arguments_dict['mkd'] = load_video()
 
     return render_template("video_per_level.html", **arguments_dict)
+
+# routing to contact.html
+@app.route('/contact', methods=['GET'])
+def contact():
+    level = request.args.get("level", 1)
+    lang = requested_lang()
+    response_texts_lang = load_texts()
+
+    arguments_dict = {}
+    arguments_dict['level'] = level
+    arguments_dict['pagetitle'] = f'Level{level}'
+    arguments_dict['lang'] = lang
+    arguments_dict['selected_page'] = 'video'
+    arguments_dict['code_title'] = response_texts_lang['Code']
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
+    arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['contact'] = response_texts_lang['Contact']
+
+    arguments_dict['mkd'] = load_contact()
+
+    return render_template("contact.html", **arguments_dict)
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
@@ -231,6 +255,19 @@ def requested_lang():
 def requested_level():
     """Return the user's requested level."""
     return int(request.args.get("level", 1))
+
+
+def load_contact():
+    """Load the markdown docs for the given language and level. """
+    lang = requested_lang()
+
+    try:
+        with open(f'docs/contact-{lang}.md', "r") as file:
+            markdown = file.read()
+
+        return markdown
+    except IOError as e:
+        return f'No contact info available for {lang}'
 
 def load_docs():
     """Load the markdown docs for the given language and level. """

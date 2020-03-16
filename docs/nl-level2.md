@@ -62,7 +62,7 @@ Type `print` en dan de regel die je verzonnen hebt
 ### Voorbeeld Hedy code
 * `naam is Bert`
 * `print naam gaat nu in het bos lopen`
-* `echo naam is wel een beetje bang`
+* `print naam is wel een beetje bang`
 * `print Overal hoort hij gekke geluiden`
 * `print naam is bang dat dit een spookbos is`
 

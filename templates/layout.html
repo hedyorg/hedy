@@ -28,6 +28,9 @@
         <a class="no-underline {% if selected_page == 'video' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/video?lang={{lang}}&level={{level}}">
           {{ video_title }}
         </a>
+        <a class="no-underline {% if selected_page == 'contact' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/contact?lang={{lang}}&level={{level}}">
+          {{ contact }}
+        </a>
         <div class="dropdown inline-block relative ml-auto py-2">
           <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
             <span class="mr-1">{{ current_language().sym }}</span>
