@@ -1,40 +1,37 @@
-# Level 2
 
-Opdrachten voor level 2.
-
-## Steen, schaar, papier
+# Steen, schaar, papier
 In Level 2 kunnen we iets nieuws doen, namelijk lijstjes invoeren en daar dingen uit kiezen.
 Zo kun je bijvoorbeeld zelf een steen, schaar, papier spel maken.
 Dat doe je zo:
 
-* `keuzes = steen, schaar, papier`
+* `keuzes is steen, schaar, papier`
 * `print keuzes at random`
 
 Random (je zegt ren-dom) is het Engelse woord voor willekeurig. 
 
-## Maak dobbelsteen na
+# Maak dobbelsteen na
 Je kunt ook een dobbelsteen maken. Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
 Zitten daar spelletjes tussen met een (speciale) dobbelsteen? Die kun je ook namaken met deze code. Bijvoorbeeld de dobbelsteen van het spelletje Regenwormen met daarop de getallen 1 tot en met 5 en een regemworm.
 ![Dobbelsteen van regenwormen met 1 tot en met 5 en een regenworm erop](https://cdn.anyfinder.eu/assets/5b64147d2864c61f08bdd4fb85c70d4d26e2b8d7774dc20edabeb13c9391c327?output=webp "Regenwormen")
 
 Die maak je zo:
 
-* `keuzes = 1, 2, 3, 4, 5, regenworm`
+* `keuzes is 1, 2, 3, 4, 5, regenworm`
 * `print keuzes at random`
 
 Maak jij nu een dobbelsteen na?
 
-## Wie doet de afwas?
+# Wie doet de afwas?
 
 Iets uitkiezen hoeft natuurlijk niet voor een spelletje te zijn. Misschien wil je de computer heel eerlijk laten kiezen wie vandaag de afwas moet doen of de kattenbak moet verschonen.
 Ook dat kun jij nu programmeren!
 
 Dat doe je zo:
 
-* `mensen = mama, papa, Emma, Sophie`
+* `mensen is mama, papa, Emma, Sophie`
 * `print mensen at random`
 
-## Een beter verhaal
+# Een beter verhaal
 
 Wat je ook kunt doet is je verhaal leuker maken, omdat de naam van je hoofdpersoon nu overal in de zin moet staan.
 Je moet daar wel een klein beetje extra voor programmeren.
@@ -70,7 +67,7 @@ Type `print` en dan de regel die je verzonnen hebt
 * `print naam is bang dat dit een spookbos is`
 
 ### Een interactief verhaal
-Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Veranderd daarvoor de eerste regel van je programma `naam is Henk` in `naam is ask Wat is de naam van je hoofdrolspeler?`
+Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Verander daarvoor de eerste regel van je programma `naam is Henk` in `naam is ask Wat is de naam van je hoofdrolspeler?`
 Als je het programma nu uitvoert kun je steeds een andere naam kiezen zonder de code te veranderen.
 
 ### Er is nu wel een probleempje...!

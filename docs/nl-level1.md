@@ -1,8 +1,4 @@
-# Level 1
-
-Opdrachten voor level 1.
-
-## Een verhaal
+# Een verhaal
 
 In Level 1 kun je bijvoorbeeld een verhaal met steeds een andere hoofdpersoon die je zelf invoert.
 
