@@ -19,6 +19,7 @@ from flask_compress import Compress
 ALL_LANGUAGES = {
     'en': '🇺🇸',
     'nl': '🇳🇱',
+    'es': '🇪🇸',
 }
 
 logging.basicConfig(
