@@ -133,7 +133,72 @@
             "demo_code": "name is Hedy\\nprint 'my name is ' name"
         }
         ]
+    }, {
+        "Level": "1",
+        "Language" : "es",
+        "Intro_text" : "En el nivel 1 puedes usar estos comandos",
+        "Available": true,
+        "Start_code": "print hola mundo!",
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Imprimir algo con print.",
+            "example": "Ejemplo: print Hola bienvenido a Hedy!",
+            "demo_code": "print Hola bienvenido a Hedy!"
+        }, {
+            "name": "ask",
+            "explanation": "Pregunta algo con ask.",
+            "example": "Ejemplo: ask Cuál es tu color favorito?",
+            "demo_code": "ask Cuál es tu color favorito?"
+        }, {
+            "name": "echo",
+            "explanation": "Repita algo usando echo.",
+            "example": "Ejemplo: echo entonces su color favorito es...",
+            "demo_code": "ask Cuál es tu color favorito?\\necho entonces su color favorito es..."
+        }
+        ]
+    }, {
+        "Level": "2",
+        "Language" : "es",
+        "Intro_text" : "Todos los comandos de Nivel 1 aún funcionan. Ahora también puede usar estos nuevos comandos:",
+        "Start_code": "print hola mundo!",
+        "Available": true,
+        "Commands" : [
+         {
+            "name": "is",
+            "explanation": "Dar un nombre a una palabra para usar en el programa con is.",
+            "example": "Ejemplo: nombre is Hedy",
+            "demo_code": "nombre is Hedy\\nprint Bienvenido nombre"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask. Cuidado! Ask necesita un nombre ahora.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "ask color is Cuál es tu color favorito?\\nprint Tu favorito es color!"
+        }, {
+            "name": "choose_random",
+            "explanation": "Seleccionar una palabra aleatoria usando at y random.",
+            "example": "Ejemplo: animales is perro, gato, canguro",
+            "demo_code": "animales is perro, gato, canguro\\nprint animales at random"
+        }
+        ]
+    }, {
+        "Level": "3",
+        "Language" : "es",
+        "Start_code": "print 'Hola mundo'",
+        "Intro_text" : "Ask y echo funcionan como en nivel 2. Desde ahora cuando deseas imprimir un texto literal debes usar las comillas simples",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Para imprimir un texto literal con el comando print debes usar las comillas simples.",
+            "example": "Ejemplo: print 'Hola bienvenido a Hedy.'",
+            "demo_code": "print 'Hola bienvenido a Hedy.'"
+        }, {
+            "name": "is",
+            "explanation": "Dar un nombre al texto y imprimir sin comillas simples.",
+            "example": "Ejemplo: nombre is Hedy",
+            "demo_code": "nombre is Hedy\\nprint 'Mi nombre es ' nombre"
+        }
+        ]
     }
 ]
-
-
