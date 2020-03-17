@@ -18,10 +18,10 @@ QUOTE : "'"
 text: (LETTER | DIGIT)+ -> text
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
-%import common.LETTER   // imports from terminal library
-%import common.DIGIT   // imports from terminal library
-%import common.WS_INLINE   // imports from terminal library
-%import common.NEWLINE   // imports from terminal library
+%import .grammars.common.LETTER   // imports from terminal library
+%import .grammars.common.DIGIT   // imports from terminal library
+%import .grammars.common.WS_INLINE   // imports from terminal library
+%import .grammars.common.NEWLINE   // imports from terminal library
 
 
 

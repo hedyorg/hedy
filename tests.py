@@ -54,6 +54,10 @@ echo je lievelingskleur is"""
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 1)
         self.assertEqual(result, "print('Jouw lievelingskleur is dus...' + answer)")
 
+    def test_transpile_unicode(self):
+        result = hedy.transpile("print Héllo", 1)
+        self.assertEqual(result, "print('Héllo')")
+
 class TestsLevel2(unittest.TestCase):
 
     # some commands should not change:
@@ -71,11 +75,14 @@ class TestsLevel2(unittest.TestCase):
     def test_transpile_ask(self):
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?", 2)
         self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')")
+    
+    def test_transpile_ask_unicode(self):
+        result = hedy.transpile("é is ask é?", 2)
+        self.assertEqual(result, "import random\né = input('é'+'?')")
 
     def test_transpile_ask_with_print(self):
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint kleur!", 2)
         self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')\nprint(kleur+'!')")
-
 
     def test_transpile_print_multiple_lines(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!\nprint Mooi hoor", 2)

@@ -45,12 +45,12 @@ assignment: NAME "=" expression
 
 _EOL: /(\r?\n[\t ]*)+/
 
-%import common.WS_INLINE
-%import common.SIGNED_INT -> INTEGER
-%import common.FLOAT -> FLOAT
-%import common.CNAME -> NAME
-%import common._STRING_ESC_INNER
-%import common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
+%import .grammars.common.WS_INLINE
+%import .grammars.common.SIGNED_INT -> INTEGER
+%import .grammars.common.FLOAT -> FLOAT
+%import .grammars.common.CNAME -> NAME
+%import .grammars.common._STRING_ESC_INNER
+%import .grammars.common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
 
 %declare INDENT DEDENT
 
