@@ -134,6 +134,7 @@ def index():
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
     arguments_dict['contact'] = response_texts_lang['Contact']
+    arguments_dict['try_button'] = response_texts_lang['Try_button']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
     arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
