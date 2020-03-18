@@ -11,9 +11,9 @@ This is my story, on the dots the main character that you choose will be placed 
 * He hears crazy sounds everywhere
 * He is afraid this is a ghost forest
 
-### Order
+### Assignment
 
-Now you!
+Now you can try yourself.
 
 1. Write a story of a few sentences about your main character.
 2. Where the name of your main character should be placed, just put ... (see example)
@@ -24,7 +24,7 @@ Line 1: type "ask what is the main character of your story"
 
 For all of the following lines:
 
-* There are dots in the line, type `echo` followed by your sentence
+* If there are dots in the line, type `echo` followed by your sentence
 * If there are no dots in the line, type `print` followed by your sentence
 
 ### Example Hedy code
@@ -38,5 +38,5 @@ For all of the following lines:
 
 
 ### A simple story
-What a pity that you can now only create sentences in which the main character is at the end of the sentence?
+It is a bit of a pity that you can now only create sentences in which the main character is at the end of the sentence right?
 Then, after practicing this story, proceed to level 2 and then level 3, where you can create more and more complicated programs.
