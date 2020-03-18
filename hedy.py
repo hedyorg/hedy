@@ -319,7 +319,6 @@ def transpile(input_string, level):
         python = 'import random\n'
         python += ConvertToPython().transform(
             parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
-        print(python)
         return python
     else:
         raise Exception('Levels 5 to 7 are not implemented yet')
