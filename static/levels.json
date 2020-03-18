@@ -183,7 +183,7 @@
             "name": "ask",
             "explanation": "Preguntar algo con ask. Cuidado! Ask necesita un nombre ahora.",
             "example": "Ejemplo: color is ask Cuál es tu color favorito?",
-            "demo_code": "color is ask Cuál es tu color favorito?\\nprint Tu favorito es color!"
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint Tu favorito es color"
         }, {
             "name": "choose_random",
             "explanation": "Seleccionar una palabra aleatoria usando at y random.",
@@ -195,7 +195,7 @@
         "Level": "3",
         "Language" : "es",
         "Start_code": "print 'Hola mundo'",
-        "Intro_text" : "Ask y echo funcionan como en nivel 2. Desde ahora cuando deseas imprimir un texto literal debes usar las comillas simples",
+        "Intro_text" : "Ask todavía funciona en nivel 3. Desde ahora cuando deseas imprimir un texto literal debes usar las comillas simples. Echo no necesitas usarlo más.",
         "Available": true,
         "Commands" : [
         {
@@ -208,6 +208,11 @@
             "explanation": "Dar un nombre al texto y imprimir sin comillas simples.",
             "example": "Ejemplo: nombre is Hedy",
             "demo_code": "nombre is Hedy\\nprint 'Mi nombre es ' nombre"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask. Cuidado! Imprimir ahora necesita las comillas simples.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
         }
         ]
     }
