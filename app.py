@@ -266,10 +266,12 @@ def load_contact():
     try:
         with open(f'docs/contact-{lang}.md', "r") as file:
             markdown = file.read()
-
         return markdown
-    except IOError as e:
-        return f'No contact info available for {lang}'
+
+    except IOError as e: #if no contact info is available, fall back to En version
+        with open(f'docs/contact-en.md', "r") as file:
+            markdown = file.read()
+            return markdown
 
 def load_docs():
     """Load the markdown docs for the given language and level. """
@@ -282,7 +284,7 @@ def load_docs():
 
         return markdown
     except IOError as e:
-        return f'No docs available for {lang} at level {level}'
+        return f'No documentation available for language {lang} at Level {level}. You might want to translate this yourself via our GitHub repo?'
 
 def load_video():
     """Load the markdown video document for the given language and level. """
