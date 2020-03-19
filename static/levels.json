@@ -72,6 +72,30 @@
         }
         ]
     }, {
+        "Level": "4",
+        "Language" : "nl",
+        "Start_code": "naam is ask hoe heet jij?\nif naam is Hedy print 'leuk' else print 'minder leuk!'",
+        "Intro_text" : "ask en print werken nog zoals in level 3. Maar in Level 4 is er iets nieuws, de if!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets letterlijk printen met print.",
+            "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
+            "demo_code": "print 'Hallo welkom bij Hedy'"
+        }, {
+            "name": "ask",
+            "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
+            "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
+        }, {
+            "name": "if",
+            "explanation": "Een keuze maken",
+            "example": "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
+        }
+        ]
+    }, {
         "Level": "1",
         "Language" : "en",
         "Intro_text" : "In Level 1 you can use these commands",

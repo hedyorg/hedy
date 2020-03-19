@@ -66,8 +66,8 @@ Levels
 ------
 
 In its current form, Hedy consists of 13 different levels. The levels
-follow the lesson series [**Python in de klas**(Python in the
-classroom)[^1] ]in such a way that these existing lessons can be
+follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
+("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
 
 ### Level 1: Printing and input
@@ -90,8 +90,8 @@ create lists and retrieve elements, including random elements from lists
 with [`at`]. Adding lists and especially adding the option to select a
 random item from a list allows for the creation of more interesting
 programs such as a guessing game, a story with random elements, which is
-an assignment from [**Python in de klas**(Python in the
-classroom)[^2] ], or a customized dice.
+an assignment from [**Python in de klas**](http://pythonindeklas.nl/)
+("Python in the classroom"), or a customized dice.
 
 ###Level 3: Quotation marks and types
 In Level 3 the first syntactic element is introduced: the use of
@@ -104,15 +104,7 @@ programming concepts, which underlines their interdependency. The
 variable syntax using [`is`] remains unchanged, meaning that learners
 can now use both [`number is 12`] and [`name is Hedy`].
 
-### Level 4: Calculations
-In Level 4, students learn to calculate with variables, so addition,
-multiplication, subtraction and division are introduced. While this
-might seem like a simple step, our experience taught us that the use of
-[`*`] for multiplication, rather than $\times$, and the use of a
-period rather than a comma as decimal separator for non-US students is a
-steep learning curve and should be treated as a separate learning goal.
-
-### Level 5: Selection with if and else flat
+### Level 4: Selection with if and else flat
 
 In Level 5, selection with the if statement is introduced, but the
 syntax is ‘flat’, i.e. placed on one line, resembling a regular syntax
@@ -122,7 +114,7 @@ Else statements are also included, and are also placed on one line,
 using the keyword [`else`]:\
 [`if name is print else print `].
 
-### Level 6: Repetition with repeat x times
+### Level 5: Repetition with repeat x times
 
 In working with non-English native Python novices. Research has found
 the keyword [`for`] to be a confusing word for repetition, especially
@@ -131,6 +123,16 @@ first simplest form, according to Design Goal 2, we opt to use
 Quorum [@stefik_quorum_2017] syntax [`repeat x times`]. In this
 initial form, like the if the syntax is placed on one line:\
 [`repeat 5 times print `]
+
+### Level 6: Calculations
+Note: this level was originally planed as 4, is now moved up to 6. Might be moved to another place based on experiences of kids testing now.
+In Level 4, students learn to calculate with variables, so addition,
+multiplication, subtraction and division are introduced. While this
+might seem like a simple step, our experience taught us that the use of
+[`*`] for multiplication, rather than $\times$, and the use of a
+period rather than a comma as decimal separator for non-US students is a
+steep learning curve and should be treated as a separate learning goal.
+
 
 ### Level 7: Code blocks
 

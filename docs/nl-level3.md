@@ -19,8 +19,8 @@ In Level 3 kunnen we ook weer steen schaar papier programmeren. Maar als je er t
 Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig. 
 
 # Maak dobbelsteen na
-Je kunt ook in Level 3 weer een dobbelsteen maken. Je kunt trouwens ook zinnen maken met de dobbelwaarde in de zin.
-Die van Regenwormen maak je zo, in een mooie zin (met aanhalingstekens natuurlijk)
+Je kunt ook in Level 3 weer een dobbelsteen maken. Je kunt nu ook zinnen maken met de dobbelwaarde in de zin.
+Die van Regenwormen maak je zo, in een mooie zin (met aanhalingstekens natuurlijk).
 
 * `keuzes is 1, 2, 3, 4, 5, regenworm`
 * `print 'je hebt ' keuzes at random ' gegooid'`
