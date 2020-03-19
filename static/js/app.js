@@ -1,45 +1,8 @@
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-// editor.session.setMode("ace/mode/javascript");
-
-// Here's everything you need to run a python program in skulpt
-// grab the code from your textarea
-// get a reference to your pre element for output
-// configure the output function
-// call Sk.importMainWithBody()
-
-function print_demo(level) {
-
-  if (level == 1 || level == 2){
-    var editor = ace.edit("editor");
-    editor.setValue("print Hallo welkom bij Hedy!");
-  }
-
-}
-
-function is_demo(level) {
-  if (level == 1){
-    console.log('A demo is tried for is at a level where it is not yet available');
-  }
-  if (level == 2){
-      var editor = ace.edit("editor");
-      editor.setValue("naam is Hedy");
-  }
-}
-
-function echo_demo(level) {
-  if (level == 1 || level == 2){
-    var editor = ace.edit("editor");
-    editor.setValue("ask Wat is je lievelingskleur?\necho je lievelingskleur is");
-  }
-}
-
-function ask_demo(level) {
-  if (level == 1 || level == 2){
-    var editor = ace.edit("editor");
-    editor.setValue("ask Wat is je lievelingskleur?");
-  }
-}
+(function() {
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  // editor.session.setMode("ace/mode/javascript");
+})();
 
 function goto(level, lang) {
     var url = '/?level=' + level.toString();
