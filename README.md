@@ -66,8 +66,8 @@ Levels
 ------
 
 In its current form, Hedy consists of 13 different levels. The levels
-follow the lesson series [**Python in de klas**(Python in the
-classroom)[^1] ]in such a way that these existing lessons can be
+follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
+("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
 
 ### Level 1: Printing and input
@@ -90,8 +90,8 @@ create lists and retrieve elements, including random elements from lists
 with [`at`]. Adding lists and especially adding the option to select a
 random item from a list allows for the creation of more interesting
 programs such as a guessing game, a story with random elements, which is
-an assignment from [**Python in de klas**(Python in the
-classroom)[^2] ], or a customized dice.
+an assignment from [**Python in de klas**](http://pythonindeklas.nl/)
+("Python in the classroom"), or a customized dice.
 
 ###Level 3: Quotation marks and types
 In Level 3 the first syntactic element is introduced: the use of

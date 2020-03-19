@@ -130,6 +130,7 @@ def index():
         return jsonify({"Error": str(E)})
 
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
+    arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
@@ -165,6 +166,7 @@ def docs():
     arguments_dict['level'] = level
     arguments_dict['pagetitle'] = f'Level{level}'
     arguments_dict['lang'] = lang
+    arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
@@ -187,6 +189,7 @@ def video():
     arguments_dict['pagetitle'] = f'Level{level}'
     arguments_dict['lang'] = lang
     arguments_dict['selected_page'] = 'video'
+    arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
@@ -208,6 +211,7 @@ def contact():
     arguments_dict['pagetitle'] = f'Level{level}'
     arguments_dict['lang'] = lang
     arguments_dict['selected_page'] = 'video'
+    arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs']
     arguments_dict['video_title'] = response_texts_lang['Video']
