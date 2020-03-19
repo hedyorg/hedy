@@ -33,7 +33,7 @@ Dat doe je zo:
 
 # Een beter verhaal
 
-Wat je ook kunt doet is je verhaal leuker maken, omdat de naam van je hoofdpersoon nu overal in de zin moet staan.
+Wat je ook kunt doen is je verhaal leuker maken, omdat de naam van je hoofdpersoon nu overal in de zin moet staan.
 Je moet daar wel een klein beetje extra voor programmeren.
 
 
