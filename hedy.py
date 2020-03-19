@@ -60,6 +60,8 @@ class AllCommandsAssignments(FlattenText):
         return args[0].children
     def assign_list(self, args):
         return args[0].children
+    def list_access_var(self, args):
+        return args[0].children
     def list_access(self, args):
         if type(args[1]) == Tree:
             return 'random.choice(' + args[0].children + ')'
@@ -106,6 +108,15 @@ class IsValid(Transformer):
         return self.pass_arguments(args)
     def list_access(self, args):
         return self.pass_arguments(args)
+    #level 4 commands
+    def list_access_var(self, args):
+        return self.pass_arguments(args)
+    def ifs(self, args):
+        return self.pass_arguments(args)
+    def ifelse(self, args):
+        return self.pass_arguments(args)
+    def equality_check(self, args):
+        return self.pass_arguments(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
@@ -122,7 +133,6 @@ class IsValid(Transformer):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
-
 
 
 class ConvertToPython_1(Transformer):
@@ -182,12 +192,35 @@ class ConvertToPython_2(ConvertToPython_1):
         values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
 
+
+#TODO: lookuptable and punctuation chars not be needed for level2 and up anymore, could be removed
 class ConvertToPython_3(ConvertToPython_2):
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
         #opzoeken is nu niet meer nodig
         return "print(" + '+'.join(args) + ')'
+
+class ConvertToPython_4(ConvertToPython_3):
+    def list_access_var(self, args):
+        var = args[0]
+        if args[2].data == 'random':
+            return var + '=random.choice(' + args[1] + ')'
+        else:
+            return var + '=' + args[1] + '[' + args[2].children[0] + ']'
+    def ifs(self, args):
+        return f"""if {args[0]}:
+  {args[1]}"""
+    def equality_check(self, args):
+        if len(args) == 2:
+            return f"{args[0]} == '{args[1]}'" #no and statements
+        else:
+            return f"{args[0]} == '{args[1]}' and {args[2]}"
+    def ifelse(self, args):
+        return f"""if {args[0]}:
+  {args[1]}
+else:
+  {args[2]}"""
 
 class ConvertToPython(Transformer):
     indent_level = 0
@@ -288,7 +321,7 @@ def create_grammar(level):
         return file.read()
 
 def transpile(input_string, level):
-    if level <= 3:
+    if level <= 4:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = create_parser(level)
@@ -309,12 +342,16 @@ def transpile(input_string, level):
                 python = 'import random\n'
                 python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
                 return python
+            elif level == 4:
+                python = 'import random\n'
+                python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(program_root)
+                return python
         else:
             invalid_command = is_valid[1]
             raise HedyException('Invalid', command=invalid_command, level=level)
 
-    #todo: we need to be able to 'valid check' levels 4 to 8 also, skipping for now (requires changes to grammar)
-    elif level >= 8 or level == 4:
+    #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
+    elif level >= 6:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         python = 'import random\n'
         python += ConvertToPython().transform(

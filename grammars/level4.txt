@@ -1,48 +1,35 @@
-start: _EOL* statement+
+start: program
+program: command ("\n" command)*
+command: "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*  -> print
+         | "if " equality_check " " command " else " command -> ifelse
+         | "if " equality_check " " command -> ifs //if cannot be used in Python, hence ifs
+         | text " is ask " textwithspaces punctuation* -> ask
+         | text " is " text ((", "|",") text)+  -> assign_list
+         | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
+         | text " is " var " at " (index | random) -> list_access_var
+         | text " " textwithspaces -> invalid
 
-statement: function_call
-         | assignment _EOL+
-         | expression _EOL+
+//TODO: I don't like the " " and "print " in the commands
+//would rather have them here but I am unsure how to stop hem from appearing in the tree that way
+//leaving as such for now
 
-function_call: NAME expression _EOL+
+equality_check: text " is " text (" and " equality_check)* -> equality_check
+var: LETTER+ -> var //TODO: should be used in assign too?
+list_access : var " at " (index | random) -> list_access
 
-assignment: NAME "is" expression
+index : DIGIT+
+random : "random"
+punctuation : PUNCTUATION -> punctuation
+textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
+quoted_text: QUOTE (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ QUOTE -> text
+QUOTE : "'"
+text: (LETTER | DIGIT)+ -> text
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
-?expression: sum
-           | expression "="  sum -> eq
-           | expression "!=" sum -> ne
-           | expression "<=" sum -> le
-           | expression ">=" sum -> ge
-           | expression "<"  sum -> lt
-           | expression ">"  sum -> gt
-
-?sum: product
-   | sum "+" product -> addition
-   | sum "-" product -> substraction
-
-?product: atom
-    | product "*" atom -> multiplication
-    | product "/" atom -> division
-    | product "%" atom -> modulo
-
-?atom: NAME 
-      | INTEGER
-      | FLOAT
-      | STRING
-      | "[" (expression? | (expression ",")+ expression) "]" -> list 
-      | "(" expression? ")" 
-      | NAME "at" expression -> list_access // TODO: shift reduce errors
+%import common.LETTER   // imports from terminal library
+%import common.DIGIT   // imports from terminal library
+%import common.WS_INLINE   // imports from terminal library
+%import common.NEWLINE   // imports from terminal library
 
 
-_EOL: /(\r?\n[\t ]*)+/
 
-%import common.WS_INLINE
-%import common.SIGNED_INT -> INTEGER
-%import common.FLOAT -> FLOAT
-%import common.CNAME -> NAME
-%import common._STRING_ESC_INNER
-%import common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
-
-%declare INDENT DEDENT
-
-%ignore WS_INLINE 
