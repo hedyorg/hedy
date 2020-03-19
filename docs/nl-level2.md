@@ -37,7 +37,7 @@ Wat je ook kunt doet is je verhaal leuker maken, omdat de naam van je hoofdperso
 Je moet daar wel een klein beetje extra voor programmeren.
 
 
-###Voorbeeld
+### Voorbeeld
 Dit is mijn verhaal, nu komt de hoofdpersoon die jij kiest steeds op de plek van naam te staan.
 
 * De hoofdpersoon van dit verhaal is naam
