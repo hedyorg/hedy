@@ -2,14 +2,30 @@
   var editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   // editor.session.setMode("ace/mode/javascript");
+
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+    const level = queryParam('level') || '1';
+    const levelKey = 'level_' + level + '_code';
+
+    // On page load, if we have a saved program, load it
+    if (storage.getItem(levelKey)) {
+      editor.setValue(storage.getItem(levelKey), 1);
+    }
+
+    // When the user exits the editor, save what we have.
+    editor.on('blur', function(e) {
+      storage.setItem(levelKey, editor.getValue());
+    });
+  }
 })();
 
 function goto(level, lang) {
-    var url = '/?level=' + level.toString();
-    if (lang){
-      url += '&lang=' + lang;
-    }
-    window.location.href = url;
+    window.location.href = buildUrl('/', {
+      level: level,
+      lang: lang
+    });
 }
 
 function runit(level, lang) {
@@ -171,3 +187,19 @@ var error = {
     $('#errorbox').show();
   }
 };
+
+function queryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+function buildUrl(url, params) {
+  const clauses = [];
+  for (let key in params) {
+    const value = params[key];
+    if (value !== undefined && value !== '') {
+      clauses.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    }
+  }
+  return url + (clauses.length > 0 ? '?' + clauses.join('&') : '');
+}
