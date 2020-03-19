@@ -14,12 +14,12 @@ Esta es mi historia. Los puntos se remplazarán por el personaje principal que t
 
 ### Tarea
 
-Ahora tú!
+¡Ahora tú!
 
 1. Escribe una historia corta sobre tu personaje principal.
 2. Donde viene el nombre de tu personaje principal, solo pon ... (ver ejemplo).
 3. También puede haber oraciones en la historia que no contienen un personaje principal.
-4. Ahora traduzca su historia al código Hedy. Cada oración es una linea. Así es como:
+4. Ahora traduzca tu historia al código Hedy. Cada oración es una linea. Así es como:
 
 Línea 1:
 
