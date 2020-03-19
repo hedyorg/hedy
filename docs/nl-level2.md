@@ -11,7 +11,7 @@ Random (je zegt ren-dom) is het Engelse woord voor willekeurig.
 
 # Maak dobbelsteen na
 Je kunt ook een dobbelsteen maken. Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
-Zitten daar spelletjes tussen met een (speciale) dobbelsteen? Die kun je ook namaken met deze code. Bijvoorbeeld de dobbelsteen van het spelletje Regenwormen met daarop de getallen 1 tot en met 5 en een regemworm.
+Zitten daar spelletjes tussen met een (speciale) dobbelsteen? Die kun je ook namaken met deze code. Bijvoorbeeld de dobbelsteen van het spelletje Regenwormen met daarop de getallen 1 tot en met 5 en een regenworm.
 ![Dobbelsteen van regenwormen met 1 tot en met 5 en een regenworm erop](https://cdn.anyfinder.eu/assets/5b64147d2864c61f08bdd4fb85c70d4d26e2b8d7774dc20edabeb13c9391c327?output=webp "Regenwormen")
 
 Die maak je zo:
