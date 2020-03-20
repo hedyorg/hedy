@@ -1,5 +1,5 @@
 start: program
-program: command ("\n" command)*
+program: command ("\n"+ command)* "\n"*
 command: "print " ( list_access | (text punctuation)| text) (" " ( list_access | (text punctuation)| text) )*  -> print
          | text " is ask " textwithspaces punctuation* -> ask
          | text " is " text ((", "|",") text)+  -> assign_list

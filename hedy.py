@@ -8,6 +8,7 @@ class HedyException(Exception):
         self.arguments = arguments
 
 
+
 class AllCommands(Transformer):
     #creates a list of all commands in a tree for further processing
     # it removes command and program nodes
@@ -325,9 +326,14 @@ def transpile(input_string, level):
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = create_parser(level)
-        program_root = parser.parse(input_string).children[0]  # getting rid of the root could also be done in the transformer would be nicer
-        lookup_table = all_assignments(program_root)
-        flattened_tree = FlattenText().transform(program_root)
+        try:
+            program_root = parser.parse(input_string).children[0]  # getting rid of the root could also be done in the transformer would be nicer
+            lookup_table = all_assignments(program_root)
+            flattened_tree = FlattenText().transform(program_root)
+        except Exception as e:
+            # TODO: here we could translate Lark error messages into more sensible texts!
+            raise HedyException('Parse', level=level, parse_error=e.args[0])
+
         is_valid = IsValid().transform(program_root)
 
         if is_valid[0]:
@@ -359,6 +365,7 @@ def transpile(input_string, level):
         return python
     else:
         raise Exception('Levels 5 to 7 are not implemented yet')
+
 
 def execute(input_string):
     python = transpile(input_string)

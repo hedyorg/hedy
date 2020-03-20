@@ -27,13 +27,16 @@ class TestsLevel1(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 1)
-
         self.assertEqual(str(context.exception), 'Invalid')
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
         self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
         self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
+
+    def test_transpile_empty(self):
+        with self.assertRaises(hedy.HedyException) as context:
+            result = hedy.transpile("", 1)
 
     def test_transpile_ask(self):
         result = hedy.transpile("ask wat is je lievelingskleur?", 1)

@@ -1,5 +1,5 @@
 start: program
-program: command ("\n" command)*
+program: command ("\n"+ command)* "\n"*
 command: "print " text -> print
                | "ask " text -> ask
                | "echo " text -> echo
