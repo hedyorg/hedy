@@ -11,7 +11,7 @@ Random (je zegt ren-dom) is het Engelse woord voor willekeurig.
 
 # Maak dobbelsteen na
 Je kunt ook een dobbelsteen maken. Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
-Zitten daar spelletjes tussen met een (speciale) dobbelsteen? Die kun je ook namaken met deze code. Bijvoorbeeld de dobbelsteen van het spelletje Regenwormen met daarop de getallen 1 tot en met 5 en een regemworm.
+Zitten daar spelletjes tussen met een (speciale) dobbelsteen? Die kun je ook namaken met deze code. Bijvoorbeeld de dobbelsteen van het spelletje Regenwormen met daarop de getallen 1 tot en met 5 en een regenworm.
 ![Dobbelsteen van regenwormen met 1 tot en met 5 en een regenworm erop](https://cdn.anyfinder.eu/assets/5b64147d2864c61f08bdd4fb85c70d4d26e2b8d7774dc20edabeb13c9391c327?output=webp "Regenwormen")
 
 Die maak je zo:
@@ -33,11 +33,11 @@ Dat doe je zo:
 
 # Een beter verhaal
 
-Wat je ook kunt doet is je verhaal leuker maken, omdat de naam van je hoofdpersoon nu overal in de zin moet staan.
+Wat je ook kunt doen is je verhaal leuker maken, omdat de naam van je hoofdpersoon nu overal in de zin moet staan.
 Je moet daar wel een klein beetje extra voor programmeren.
 
 
-###Voorbeeld
+### Voorbeeld
 Dit is mijn verhaal, nu komt de hoofdpersoon die jij kiest steeds op de plek van naam te staan.
 
 * De hoofdpersoon van dit verhaal is naam
