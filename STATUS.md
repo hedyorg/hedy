@@ -21,7 +21,6 @@ The specific contact info per language is found [here](/docs), in the contact-LA
 
 ## Levels - practice page
 To be found [here](/static), in the json files. 
-Note! Level 1-3 is in the levels.json; level4 is in level4.json. 
 
 |  |NL|EN|ES|..|
 |--|--|--|--|--|
