@@ -239,5 +239,29 @@
             "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
         }
         ]
+    }, {
+        "Level": "4",
+        "Language" : "es",
+        "Start_code": "nombre is ask Cómo te llamas?\nif nombre is Hedy print 'divertido' else print 'menos divertido!'",
+        "Intro_text" : "ask y print funcionan como en nivel 3. ¡Pero en nivel 4 hay algo nuevo, el if!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Para imprimir un texto literal con el comando print.",
+            "example": "Ejemplo: print 'Hola bienvenido a Hedy.'",
+            "demo_code": "print 'Hola bienvenido a Hedy.'"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask. Cuidado! Imprimir ahora necesita las comillas simples.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
+        }, {
+            "name": "if",
+            "explanation": "Tomar una decisión",
+            "example": "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nif color is verde print 'bonito!' else print 'no es tan bonito'"
+        }
+        ]
     }
 ]
