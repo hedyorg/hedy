@@ -34,6 +34,11 @@ class TestsLevel1(unittest.TestCase):
         self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
         self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
 
+    def test_lines_may_end_in_spaces(self):
+        result = hedy.transpile("print Hallo welkom bij Hedy! ", 1)
+        self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
+        self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
+
     def test_transpile_empty(self):
         with self.assertRaises(hedy.HedyException) as context:
             result = hedy.transpile("", 1)
@@ -214,6 +219,35 @@ if computerkeuze == 'schaar' and jouwkeuze == 'steen':
   print('jij wint')"""
         self.assertEqual(expected_result, result)
         self.assertEqual(run_code(result),'jij wint')
+
+
+class TestsLevel5(unittest.TestCase):
+    #print should still work
+    def test_print_with_var(self):
+        result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 5)
+        self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
+
+    #todo: a few more things repeated from 4 here?
+
+    #now add repeat
+    def test_repeat_basic_print(self):
+        result = hedy.transpile("repeat 5 times print 'me wants a cookie!'", 5)
+        self.assertEqual(result, """import random
+for i in range(5):
+  print('me wants a cookie!')""")
+        self.assertEqual(run_code(result),'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+
+    def test_repeat_nested_in_if(self):
+        result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'", 5)
+        self.assertEqual(result, """import random
+kleur = input('Wat is je lievelingskleur'+'?')
+if kleur == 'groen':
+  for i in range(3):
+    print('mooi!')""")
+
+
+
+
 
 
 # class TestsLevel6(unittest.TestCase):

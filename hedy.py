@@ -36,6 +36,8 @@ class FlattenText(Transformer):
         return Tree('punctuation', ''.join([str(c) for c in args]))
     def index(self, args):
         return ''.join([str(c) for c in args])
+    def counter(self, args):
+        return Tree('counter', ''.join([str(c) for c in args]))
 
 class AllCommandsAssignments(FlattenText):
     #returns only assignments
@@ -118,6 +120,9 @@ class IsValid(Transformer):
         return self.pass_arguments(args)
     def equality_check(self, args):
         return self.pass_arguments(args)
+    #level 5 command
+    def repeat(self, args):
+        return self.pass_arguments(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
@@ -129,6 +134,8 @@ class IsValid(Transformer):
     def text(self, args):
         return all(args), ''.join([c for c in args])
     def punctuation(self, args):
+        return True, ''.join([c for c in args])
+    def counter(self, args):
         return True, ''.join([c for c in args])
     def invalid(self, args):
         # return the first argument to place in the error message
@@ -202,6 +209,10 @@ class ConvertToPython_3(ConvertToPython_2):
         #opzoeken is nu niet meer nodig
         return "print(" + '+'.join(args) + ')'
 
+def indent(s):
+    lines = s.split('\n')
+    return '\n'.join(['  ' + l for l in lines])
+
 class ConvertToPython_4(ConvertToPython_3):
     def list_access_var(self, args):
         var = args[0]
@@ -211,7 +222,7 @@ class ConvertToPython_4(ConvertToPython_3):
             return var + '=' + args[1] + '[' + args[2].children[0] + ']'
     def ifs(self, args):
         return f"""if {args[0]}:
-  {args[1]}"""
+{indent(args[1])}"""
     def equality_check(self, args):
         if len(args) == 2:
             return f"{args[0]} == '{args[1]}'" #no and statements
@@ -219,9 +230,16 @@ class ConvertToPython_4(ConvertToPython_3):
             return f"{args[0]} == '{args[1]}' and {args[2]}"
     def ifelse(self, args):
         return f"""if {args[0]}:
-  {args[1]}
+{indent(args[1])}
 else:
-  {args[2]}"""
+{indent(args[2])}"""
+
+class ConvertToPython_5(ConvertToPython_4):
+    def repeat(self, args):
+        times = args[0].children[0]
+        command = args[1]
+        return f"""for i in range({times}):
+{indent(command)}"""
 
 class ConvertToPython(Transformer):
     indent_level = 0
@@ -322,7 +340,7 @@ def create_grammar(level):
         return file.read()
 
 def transpile(input_string, level):
-    if level <= 4:
+    if level <= 5:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = create_parser(level)
@@ -351,6 +369,10 @@ def transpile(input_string, level):
             elif level == 4:
                 python = 'import random\n'
                 python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(program_root)
+                return python
+            elif level == 5:
+                python = 'import random\n'
+                python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(program_root)
                 return python
         else:
             invalid_command = is_valid[1]

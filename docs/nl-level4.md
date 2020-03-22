@@ -54,11 +54,12 @@ Maak een verhaal met twee eindes, bijvoorbeeld zo:
 * Ze komt een monster tegen
 
 Goed einde:
+
 * Ze pakt haar zwaard en het monster rent snel weg
 
 Slecht einde
-* Het monster eet de prinses op
 
+* Het monster eet de prinses op
 
 ### Opdracht
 

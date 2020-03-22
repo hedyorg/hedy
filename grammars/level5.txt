@@ -1,6 +1,7 @@
 start: program
 program: command (" ")* ("\n"+ command (" ")*)* "\n"* //lines may end on spaces and might be separated by many newlines
-command: "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*  -> print
+command: "repeat " counter " times " command -> repeat
+         | "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*  -> print
          | "if " equality_check " " command " else " command -> ifelse
          | "if " equality_check " " command -> ifs //if cannot be used in Python, hence ifs
          | text " is ask " textwithspaces punctuation* -> ask
@@ -12,6 +13,8 @@ command: "print " (quoted_text | list_access | var) (" " (quoted_text | list_acc
 //TODO: I don't like the " " and "print " in the commands
 //would rather have them here but I am unsure how to stop hem from appearing in the tree that way
 //leaving as such for now
+
+counter: DIGIT+ -> counter
 
 equality_check: text " is " text (" and " equality_check)* -> equality_check
 var: LETTER+ -> var //TODO: should be used in assign too?
