@@ -89,6 +89,7 @@ function runPythonProgram(code) {
     read: builtinRead,
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
+    __future__: Sk.python3
   });
 
   return Sk.misceval.asyncToPromise(function () {
