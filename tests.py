@@ -1,6 +1,5 @@
 import unittest
 import hedy
-import json
 import sys
 import io
 from contextlib import contextmanager
@@ -33,6 +32,10 @@ class TestsLevel1(unittest.TestCase):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
         self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
         self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
+
+    def test_transpile_ask_Spanish(self):
+        result = hedy.transpile("ask ask Cuál es tu color favorito?", 1)
+        self.assertEqual(result, "answer = input('ask Cuál es tu color favorito?')")
 
     def test_lines_may_end_in_spaces(self):
         result = hedy.transpile("print Hallo welkom bij Hedy! ", 1)
@@ -72,6 +75,11 @@ class TestsLevel2(unittest.TestCase):
 
         self.assertEqual(str(context.exception), 'Invalid')
 
+    def test_transpile_ask_Spanish(self):
+        result = hedy.transpile("ask ask Cuál es tu color favorito?", 2)
+        self.assertEqual(result, "answer = input('ask Cuál es tu color favorito?')")
+
+
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 2)
         self.assertEqual(result, "import random\nprint('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')")
@@ -79,6 +87,10 @@ class TestsLevel2(unittest.TestCase):
     def test_transpile_ask(self):
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?", 2)
         self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')")
+
+    def test_transpile_ask_Spanish(self):
+        result = hedy.transpile("color is ask ask Cuál es tu color favorito?", 2)
+        self.assertEqual(result, "import random\ncolor = input('ask Cuál es tu color favorito'+'?')")
 
     def test_transpile_ask_with_print(self):
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint kleur!", 2)
@@ -137,7 +149,6 @@ class TestsLevel3(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 3)
-
         self.assertEqual(str(context.exception), 'Invalid')
 
     def test_transpile_print_level_2(self):
@@ -148,6 +159,14 @@ class TestsLevel3(unittest.TestCase):
     def test_print(self):
         result = hedy.transpile("print 'hallo wereld!'", 3)
         self.assertEqual(result, "import random\nprint('hallo wereld!')")
+
+    def test_print_Spanish(self):
+        result = hedy.transpile("print 'Cuál es tu color favorito?'", 3)
+        self.assertEqual(result, "import random\nprint('Cuál es tu color favorito?')")
+
+    def test_transpile_ask_Spanish(self):
+        result = hedy.transpile("color is ask Cuál es tu color favorito?", 3)
+        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito'+'?')")
 
     def test_print_2(self):
         result = hedy.transpile("print 'ik heet henk'", 3)
@@ -173,10 +192,18 @@ class TestsLevel4(unittest.TestCase):
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint 'jouw lievelingskleur is dus' kleur '!'", 4)
         self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')\nprint('jouw lievelingskleur is dus'+kleur+'!')")
 
+    def test_transpile_ask_Spanish(self):
+        result = hedy.transpile("color is ask Cuál es tu color favorito?", 4)
+        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito'+'?')")
+
     def test_save_list_access_to_var(self):
         result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\ndier is dieren at random\nprint dier", 4)
         self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\ndier=random.choice(dieren)\nprint(dier)")
         self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+
+    def test_print_Spanish(self):
+        result = hedy.transpile("print 'Cuál es tu color favorito?'", 4)
+        self.assertEqual(result, "import random\nprint('Cuál es tu color favorito?')")
 
     #now adds if
     def test_print_if_else(self):
@@ -226,6 +253,14 @@ class TestsLevel5(unittest.TestCase):
     def test_print_with_var(self):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 5)
         self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
+
+    def test_print_Spanish(self):
+        result = hedy.transpile("print 'Cuál es tu color favorito?'", 5)
+        self.assertEqual(result, "import random\nprint('Cuál es tu color favorito?')")
+
+    def test_transpile_ask_Spanish(self):
+        result = hedy.transpile("color is ask Cuál es tu color favorito?", 5)
+        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito'+'?')")
 
     #todo: a few more things repeated from 4 here?
 

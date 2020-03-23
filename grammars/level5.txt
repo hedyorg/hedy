@@ -10,6 +10,8 @@ command: "repeat " counter " times " command -> repeat
          | text " is " var " at " (index | random) -> list_access_var
          | text " " textwithspaces -> invalid
 
+ACCENTED_LETTER: "á" | "é" | "ó"
+
 //TODO: I don't like the " " and "print " in the commands
 //would rather have them here but I am unsure how to stop hem from appearing in the tree that way
 //leaving as such for now
@@ -23,10 +25,10 @@ list_access : var " at " (index | random) -> list_access
 index : DIGIT+
 random : "random"
 punctuation : PUNCTUATION -> punctuation
-textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
-quoted_text: QUOTE (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ QUOTE -> text
+textwithspaces: (LETTER | ACCENTED_LETTER | DIGIT | WS_INLINE)+ -> text
+quoted_text: QUOTE (LETTER | ACCENTED_LETTER | DIGIT | PUNCTUATION | WS_INLINE)+ QUOTE -> text
 QUOTE : "'"
-text: (LETTER | DIGIT)+ -> text
+text: (LETTER | ACCENTED_LETTER | DIGIT)+ -> text
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
 %import common.LETTER   // imports from terminal library

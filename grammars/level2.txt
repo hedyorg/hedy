@@ -6,13 +6,15 @@ command: "print " ( list_access | (text punctuation)| text) (" " ( list_access |
          | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
          | text " " textwithspaces -> invalid
 
+ACCENTED_LETTER: "á" | "é" | "ó"
+
 var: LETTER+ -> var
 list_access : var " at " (index | random) -> list_access
 index : DIGIT+
 random : "random"
 punctuation : PUNCTUATION -> punctuation
-textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
-text: (LETTER | DIGIT)+ -> text
+textwithspaces: (LETTER | ACCENTED_LETTER | DIGIT | WS_INLINE)+ -> text
+text: (LETTER | ACCENTED_LETTER | DIGIT)+ -> text
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
 %import common.LETTER   // imports from terminal library

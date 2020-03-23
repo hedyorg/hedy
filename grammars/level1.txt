@@ -6,9 +6,10 @@ command: "print " text -> print
                |  textwithoutspaces " " text -> invalid
 
 PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
-text: (LETTER | DIGIT | PUNCTUATION | WS_INLINE)+
+text: (LETTER | DIGIT | PUNCTUATION | WS_INLINE | ACCENTED_LETTER)+
 textwithoutspaces: (LETTER | DIGIT)+ -> text
 
+ACCENTED_LETTER: "á" | "é" | "ó"
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library
