@@ -6,8 +6,7 @@ Hier vind je weer een aantal opdrachten om mee aan de slag te gaan.
 Je kunt ook in Level 5 weer een dobbelsteen maken, maar nu kun je een heel handje dobbelstenen rollen. Bijv zo:
 
 * `keuzes is 1, 2, 3, 4, 5, regenworm`
-* `worp is keuzes at random`
-* `repeat 5 8 times print 'je hebt ' keuzes at random ' gegooid'`
+* `repeat 5 times print 'je hebt ' keuzes at random ' gegooid'`
 
 Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken.
 
