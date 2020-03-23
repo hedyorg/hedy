@@ -72,7 +72,7 @@ def parse():
     else:
         try:
             result = hedy.transpile(code, level)
-            response["Code"] = result
+            response["Code"] = "# coding=utf8\n" + result
         except hedy.HedyException as E:
             texts = load_texts()
             error_template = texts['HedyErrorMessages'][E.error_code]

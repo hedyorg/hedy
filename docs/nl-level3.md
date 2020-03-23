@@ -64,7 +64,7 @@ Type `print` en dan de regel die je verzonnen hebt, maar let op! naam doe je nie
 * `naam is Bert`
 * `print 'De naam van mijn hoofdpersoon' is naam`
 * `print naam ' gaat nu in het bos lopen'`
-* `echo naam ' is wel een beetje bang'`
+* `print naam ' is wel een beetje bang'`
 * `print 'Overal hoort ' naam ' gekke geluiden'`
 * `print naam ' is bang dat dit een spookbos is'`
 

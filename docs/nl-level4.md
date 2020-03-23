@@ -20,8 +20,8 @@ Hier is het begin van het programma, maak jij de regels zelf af?
 * `jouwkeuze is ask wat kies jij?`
 * `keuzes is steen, schaar, papier`
 * `computerkeuze is keuzes at random`
-* `if computerkeuze is schaar and jouw_keuze is papier print 'de computer wint'`
-* `if computerkeuze is schaar and jouw_keuze is steen print 'jij wint'`
+* `if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'`
+* `if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'`
 
 Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig; and is het Engelse woord voor en.
 
