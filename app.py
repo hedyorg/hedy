@@ -105,6 +105,8 @@ def report_error():
         'version': version(),
     })
 
+    return 'logged'
+
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
