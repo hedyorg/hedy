@@ -236,7 +236,7 @@ else:
 
 class ConvertToPython_5(ConvertToPython_4):
     def repeat(self, args):
-        times = args[0].children[0]
+        times = ''.join(args[0].children)
         command = args[1]
         return f"""for i in range({times}):
 {indent(command)}"""

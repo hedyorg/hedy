@@ -280,6 +280,12 @@ if kleur == 'groen':
   for i in range(3):
     print('mooi!')""")
 
+    def test_repeat_over_9_times(self):
+        result = hedy.transpile("repeat 10 times print 'me wants a cookie!'", 5)
+        self.assertEqual(result, """import random
+for i in range(10):
+  print('me wants a cookie!')""")
+        self.assertEqual(run_code(result),'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
 
 
