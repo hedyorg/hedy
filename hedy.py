@@ -165,6 +165,12 @@ class ConvertToPython_1(Transformer):
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
 
+def wrap_non_var_in_quotes(argument, lookup):
+    if argument in lookup:
+        return argument
+    else:
+        return "'" + argument + "'"
+
 class ConvertToPython_2(ConvertToPython_1):
     def var(self, args):
         return ''.join([str(c) for c in args])
@@ -176,10 +182,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 space = ''
             else:
                 space = "+' '"
-            if argument in self.lookup:
-                all_arguments_converted.append(argument + space)
-            else:
-                all_arguments_converted.append("'" + argument + "'" + space)
+            all_arguments_converted.append(wrap_non_var_in_quotes(argument, self.lookup) + space)
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
     def ask(self, args):
@@ -224,10 +227,12 @@ class ConvertToPython_4(ConvertToPython_3):
         return f"""if {args[0]}:
 {indent(args[1])}"""
     def equality_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
         if len(args) == 2:
-            return f"{args[0]} == '{args[1]}'" #no and statements
+            return f"{arg0} == {arg1}" #no and statements
         else:
-            return f"{args[0]} == '{args[1]}' and {args[2]}"
+            return f"{arg0} == {arg1} and {args[2]}"
     def ifelse(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}

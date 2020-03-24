@@ -247,6 +247,18 @@ if computerkeuze == 'schaar' and jouwkeuze == 'steen':
         self.assertEqual(expected_result, result)
         self.assertEqual(run_code(result),'jij wint')
 
+    def test_print_if_with_var(self):
+        result = hedy.transpile("""jouwkeuze is schaar
+computerkeuze is schaar
+if computerkeuze is jouwkeuze print 'gelijkspel!'""", 4)
+
+        expected_result = """import random
+jouwkeuze = 'schaar'
+computerkeuze = 'schaar'
+if computerkeuze == jouwkeuze:
+  print('gelijkspel!')"""
+        self.assertEqual(expected_result, result)
+        self.assertEqual(run_code(result),'gelijkspel!')
 
 class TestsLevel5(unittest.TestCase):
     #print should still work
