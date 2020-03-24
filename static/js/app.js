@@ -40,6 +40,7 @@ function runit(level, lang) {
     $.getJSON('/parse/', {
       level: level,
       code: code,
+      lang: lang
     }).done(function(response) {
       console.log('Response', response);
       if (response.Error) {
