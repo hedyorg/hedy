@@ -85,6 +85,7 @@ def parse():
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
+        'lang': requested_lang(),
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
