@@ -2,20 +2,17 @@ start: _EOL* statement+
 
 statement: if_statement elif_statement* else_statement?
          | repeat
-         | ranged_loop
          | assignment _EOL+
          | print _EOL+
          | echo _EOL+
 
-if_statement: "if" expression ":" _EOL INDENT statement+ DEDENT
-elif_statement: "elif" expression ":" _EOL INDENT statement+ DEDENT
-else_statement: "else" ":" _EOL INDENT statement+ DEDENT 
+if_statement: "if" expression _EOL INDENT statement+ DEDENT
+elif_statement: "elif" expression _EOL INDENT statement+ DEDENT
+else_statement: "else" _EOL INDENT statement+ DEDENT 
 
-repeat: "repeat" expression "times" ":" _EOL INDENT statement+ DEDENT
+repeat: "repeat" expression "times" _EOL INDENT statement+ DEDENT
 
-ranged_loop: "for" NAME "in" "range" expression "to" expression ":" _EOL INDENT statement+ DEDENT
-
-assignment: NAME "is" expression 
+assignment: NAME "is" expression
           | ask
 
 ?expression: sum
