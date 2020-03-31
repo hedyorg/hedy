@@ -1,0 +1,48 @@
+start: _EOL* statement+
+
+statement: function_call
+         | assignment _EOL+
+         | expression _EOL+
+
+function_call: NAME expression _EOL+
+
+assignment: NAME "is" expression
+
+?expression: sum
+           | expression "="  sum -> eq
+           | expression "!=" sum -> ne
+           | expression "<=" sum -> le
+           | expression ">=" sum -> ge
+           | expression "<"  sum -> lt
+           | expression ">"  sum -> gt
+
+?sum: product
+   | sum "+" product -> addition
+   | sum "-" product -> substraction
+
+?product: atom
+    | product "*" atom -> multiplication
+    | product "/" atom -> division
+    | product "%" atom -> modulo
+
+?atom: NAME 
+      | INTEGER
+      | FLOAT
+      | STRING
+      | "[" (expression? | (expression ",")+ expression) "]" -> list 
+      | "(" expression? ")" 
+      | NAME "at" expression -> list_access // TODO: shift reduce errors
+
+
+_EOL: /(\r?\n[\t ]*)+/
+
+%import common.WS_INLINE
+%import common.SIGNED_INT -> INTEGER
+%import common.FLOAT -> FLOAT
+%import common.CNAME -> NAME
+%import common._STRING_ESC_INNER
+%import common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
+
+%declare INDENT DEDENT
+
+%ignore WS_INLINE 

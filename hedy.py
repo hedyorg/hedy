@@ -36,8 +36,11 @@ class FlattenText(Transformer):
         return Tree('punctuation', ''.join([str(c) for c in args]))
     def index(self, args):
         return ''.join([str(c) for c in args])
-    def counter(self, args):
-        return Tree('counter', ''.join([str(c) for c in args]))
+    #level 5
+    def number(self, args):
+        return Tree('number', ''.join([str(c) for c in args]))
+
+
 
 class AllCommandsAssignments(FlattenText):
     #returns only assignments
@@ -105,9 +108,12 @@ class IsValid(Transformer):
         return self.pass_arguments(args)
     def echo(self, args):
         return self.pass_arguments(args)
+
     def assign(self, args):
         return self.pass_arguments(args)
     def assign_list(self, args):
+        return self.pass_arguments(args)
+    def assign_sum(self, args):
         return self.pass_arguments(args)
     def list_access(self, args):
         return self.pass_arguments(args)
@@ -124,18 +130,32 @@ class IsValid(Transformer):
     def repeat(self, args):
         return self.pass_arguments(args)
 
+    #level 6
+    def addition(self, args):
+        return self.pass_arguments(args)
+    def substraction(self, args):
+        return self.pass_arguments(args)
+    def multiplication(self, args):
+        return self.pass_arguments(args)
+    def division(self, args):
+        return self.pass_arguments(args)
+
+    #leafs with tokens need to be all true
+    def var(self, args):
+        return all(args), ''.join([c for c in args])
+    def text(self, args):
+        return all(args), ''.join([c for c in args])
+    def addition(self, args):
+        return all(args), ''.join([c[1] for c in args])
+
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
     def index(self, args):
         return True, ''.join([str(c) for c in args])
-    def var(self, args):
-        return all(args), ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
     def punctuation(self, args):
         return True, ''.join([c for c in args])
-    def counter(self, args):
+    def number(self, args):
         return True, ''.join([c for c in args])
     def invalid(self, args):
         # return the first argument to place in the error message
@@ -240,11 +260,59 @@ else:
 {indent(args[2])}"""
 
 class ConvertToPython_5(ConvertToPython_4):
+    def number(self, args):
+        return ''.join(args)
+
     def repeat(self, args):
-        times = ''.join(args[0].children)
+        times = ''.join(args[0])
         command = args[1]
         return f"""for i in range({times}):
 {indent(command)}"""
+
+class ConvertToPython_6(ConvertToPython_5):
+
+    def print(self, args):
+        #force all to be printed as strings (since there can not be int arguments)
+        args_new = []
+        for a in args:
+            if type(a) is Tree:
+                args_new.append(f'str({a.children})')
+            elif "'" not in a:
+                args_new.append(f'str({a})')
+            else:
+                args_new.append(a)
+
+        return "print(" + '+'.join(args_new) + ')'
+
+    #we can now have ints as types so chck must force str
+    def equality_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) == str({arg1})" #no and statements
+        else:
+            return f"str({arg0}) == str({arg1}) and {args[2]}"
+
+    def assign(self, args):
+        parameter = args[0]
+        value = args[1]
+        if type(value) is Tree:
+            return parameter + " = " + value.children
+        else:
+            return parameter + " = '" + value + "'"
+
+    def addition(self, args):
+        return Tree('sum', f'int({str(args[0])}) + int({str(args[1])})')
+
+    def substraction(self, args):
+        return Tree('sum', f'int({str(args[0])}) - int({str(args[1])})')
+
+    def multiplication(self, args):
+        return Tree('sum', f'int({str(args[0])}) * int({str(args[1])})')
+
+    def division(self, args):
+        return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
+
 
 class ConvertToPython(Transformer):
     indent_level = 0
@@ -291,17 +359,18 @@ class ConvertToPython(Transformer):
     def gt(self, args):
         return str(args[0]) + ">" + str(args[1])
 
-    def addition(self, args):
-        return str(args[0]) + "+" + str(args[1])
-
-    def substraction(self, args):
-        return str(args[0]) + "-" + str(args[1])
-
-    def multiplication(self, args):
-        return str(args[0]) + "*" + str(args[1])
-
-    def division(self, args):
-        return str(args[0]) + "/" + str(args[1])
+    # migrated to level 6
+    # def addition(self, args):
+    #     return str(args[0]) + "+" + str(args[1])
+    #
+    # def substraction(self, args):
+    #     return str(args[0]) + "-" + str(args[1])
+    #
+    # def multiplication(self, args):
+    #     return str(args[0]) + "*" + str(args[1])
+    #
+    # def division(self, args):
+    #     return str(args[0]) + "/" + str(args[1])
 
     def list(self, args):
         return str(args)
@@ -345,7 +414,7 @@ def create_grammar(level):
         return file.read()
 
 def transpile(input_string, level):
-    if level <= 5:
+    if level <= 6:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = create_parser(level)
@@ -379,12 +448,16 @@ def transpile(input_string, level):
                 python = 'import random\n'
                 python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(program_root)
                 return python
+            elif level == 6:
+                python = 'import random\n'
+                python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(program_root)
+                return python
         else:
             invalid_command = is_valid[1]
             raise HedyException('Invalid', command=invalid_command, level=level)
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
-    elif level >= 6:
+    elif level > 6:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         python = 'import random\n'
         python += ConvertToPython().transform(

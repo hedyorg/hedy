@@ -95,37 +95,62 @@
             "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
         }
         ]
-    }, {
+    },
+    {
         "Level": "5",
-        "Language" : "nl",
+        "Language": "nl",
         "Start_code": "repeat 3 times print 'Hedy is leuk!'",
-        "Intro_text" : "ask, print en if werken nog zoals in level 4. Maar in Level 5 is er iets nieuws: de repeat. Met repeat kun je codes een aantal keer herhalen.",
+        "Intro_text": "ask, print en if werken nog zoals in level 4. Maar in Level 5 is er iets nieuws: de repeat. Met repeat kun je codes een aantal keer herhalen.",
+        "Available": true,
+        "Commands": [
+            {
+                "name": "print",
+                "explanation": "Iets letterlijk printen met print.",
+                "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
+                "demo_code": "print 'Hallo welkom bij Hedy'"
+            },
+            {
+                "name": "ask",
+                "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
+                "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
+                "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
+            },
+            {
+                "name": "if",
+                "explanation": "Een keuze maken",
+                "example": "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'",
+                "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
+            },
+            {
+                "name": "repeat",
+                "explanation": "Herhalen en if samen",
+                "example": "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'",
+                "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+            }
+        ]
+    },{
+        "Level": "6",
+        "Language" : "nl",
+        "Start_code": "print '5 * 5 is ' 5 * 5",
+        "Intro_text" : "ask, print, if en repeat werken nog zoals in level 4 en 5. Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen. ",
         "Available": true,
         "Commands" : [
         {
             "name": "print",
             "explanation": "Iets letterlijk printen met print.",
-            "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
-            "demo_code": "print 'Hallo welkom bij Hedy'"
+            "example": "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5",
+            "demo_code": "print '5 keer 5 is ' 5 * 5"
         }, {
-            "name": "ask",
+            "name": "ask en if samen met rekenen",
             "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
-            "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
-            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
+            "example": "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?",
+            "demo_code": "antwoord is ask Hoeveel is 10 plus 10?\\nif antwoord is 20 print 'Goedzo!' else print 'Foutje'"
         }, {
-            "name": "if",
-            "explanation": "Een keuze maken",
-            "example": "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'",
-            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
-        }
-        , {
             "name": "repeat",
             "explanation": "Herhalen en if samen",
             "example": "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'",
             "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         }
-
-
         ]
     }, {
         "Level": "1",

@@ -22,11 +22,11 @@ Dat doe je zo:
 
 In liedjes zit vaak veel herhaling. Denk maar aan Baby Shark! Ze zingen steeds hetzelfde:
 
-* `print 'Baby Shark tututudutudu`
-* `print 'Baby Shark tututudutudu`
-* `print 'Baby Shark tututudutudu`
-* `print 'Baby Shark`
+* `print 'Baby Shark tututudutudu'`
+* `print 'Baby Shark tututudutudu'`
+* `print 'Baby Shark tututudutudu'`
+* `print 'Baby Shark'`
 
 Dat kun je nu veel korter progammeren, zo:
-* `repeat 3 times print 'Baby Shark tututudutudu`
-* `print 'Baby Shark`
+* `repeat 3 times print 'Baby Shark tututudutudu'`
+* `print 'Baby Shark'`

@@ -71,8 +71,6 @@ class TestsLevel2(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 2)
-            x = result
-
         self.assertEqual(str(context.exception), 'Invalid')
 
     def test_transpile_ask_Spanish(self):
@@ -299,21 +297,56 @@ for i in range(10):
   print('me wants a cookie!')""")
         self.assertEqual(run_code(result),'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
+class TestsLevel6(unittest.TestCase):
+    def test_print_with_var(self):
+        result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 6)
+        self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
+
+    def test_repeat_nested_in_if(self):
+            result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'", 6)
+            self.assertEqual(result, """import random
+kleur = input('Wat is je lievelingskleur'+'?')
+if str(kleur) == str('groen'):
+  for i in range(3):
+    print('mooi!')""")
+
+    #new tests for calculations
+    def test_simple_calculation(self):
+        result = hedy.transpile("nummer is 4 + 5", 6)
+        self.assertEqual('import random\nnummer = int(4) + int(5)', result)
+
+    def test_calculation_and_printing(self):
+        result = hedy.transpile("nummer is 4 + 5\nprint nummer", 6)
+        self.assertEqual('import random\nnummer = int(4) + int(5)\nprint(str(nummer))', result)
+        self.assertEqual(run_code(result), "9")
+
+    def test_calculation_with_vars(self):
+        result = hedy.transpile("""nummer is 5
+nummertwee is 6
+getal is nummer * nummertwee
+print getal""", 6)
+        self.assertEqual("""import random
+nummer = '5'
+nummertwee = '6'
+getal = int(nummer) * int(nummertwee)
+print(str(getal))""", result)
+        self.assertEqual(run_code(result), "30")
+
+    def test_print_calculation_directly(self):
+        result = hedy.transpile("""nummer is 5
+nummertwee is 6
+print nummer * nummertwee""", 6)
+        self.assertEqual("""import random
+nummer = '5'
+nummertwee = '6'
+print(str(int(nummer) * int(nummertwee)))""", result)
+        self.assertEqual(run_code(result), "30")
 
 
 
 
-# class TestsLevel6(unittest.TestCase):
-#     def test_simple_calculation(self):
-#         result = hedy.transpile("nummer is 4 + 5", 6)
-#         self.assertEqual('import random\nnummer=4+5\n', result)
-#
-#     def test_calculation_and_printing(self):
-#         result = hedy.transpile("nummer is 4 + 5\nprint nummer", 6)
-#         self.assertEqual('import random\nnummer=4+5\nprint(nummer)\n', result)
-#         self.assertEqual(run_code(result), "9")
-#
-#
+
+
 
 
 if __name__ == '__main__':
