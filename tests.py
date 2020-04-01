@@ -373,7 +373,7 @@ print(str(int(nummer) * int(nummertwee)))""", result)
 #         self.assertEqual(run_code(result),'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 #
 #
-# 
+#
 
 
 if __name__ == '__main__':

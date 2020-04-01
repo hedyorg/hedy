@@ -12,12 +12,15 @@ Zo doe je dat voor 1 dobbelsteen:
 
 1 `keuzes is 1, 2, 3, 4, 5, regenworm`
 
-2 `worp is keuzes at random`
+2 `punten is 0`
 
-3 `print 'je gooide ' worp`
+3 `worp is keuzes at random`
 
-4 `if worp is regenworm punten is punten + 5 else punten is punten + worp`
+4 `print 'je gooide ' worp`
 
+5 `if worp is regenworm punten is punten + 5 else punten is punten + worp`
+
+6 `print 'dat zijn dan ' punten`
 Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen?
 Lukt het niet, bekijk dan de uitlegvideo om te zien hoe je de code afmaakt voor meer dobbelstenen.
 
