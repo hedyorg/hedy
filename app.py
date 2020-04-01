@@ -135,8 +135,8 @@ def index():
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['contact'] = response_texts_lang['Contact']
     arguments_dict['try_button'] = response_texts_lang['Try_button']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
@@ -171,8 +171,8 @@ def docs():
     arguments_dict['lang'] = lang
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['contact'] = response_texts_lang['Contact']
     arguments_dict['selected_page'] = 'docs'
 
@@ -194,8 +194,8 @@ def video():
     arguments_dict['selected_page'] = 'video'
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['contact'] = response_texts_lang['Contact']
 
     arguments_dict['mkd'] = load_video()
@@ -216,8 +216,8 @@ def contact():
     arguments_dict['selected_page'] = 'video'
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['contact'] = response_texts_lang['Contact']
 
     arguments_dict['mkd'] = load_contact()
