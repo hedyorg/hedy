@@ -145,7 +145,7 @@ def index():
     arguments_dict['enter'] = response_texts_lang['Enter']
 
     level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
-    maxlevel = max(int(r['Level']) for r in response_levels)
+    maxlevel = max(int(r['Level']) for r in response_levels if r['Language'] == lang)
 
     arguments_dict['commands'] = level_and_lang_dict['Commands']
     arguments_dict['introtext'] = level_and_lang_dict['Intro_text']

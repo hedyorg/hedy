@@ -1,27 +1,22 @@
 start: _EOL* statement+
 
-statement: if_statement elif_statement* else_statement?
+statement: if_statement else_statement?
          | repeat
          | assignment _EOL+
          | print _EOL+
-         | echo _EOL+
 
-if_statement: "if" expression _EOL INDENT statement+ DEDENT
-elif_statement: "elif" expression _EOL INDENT statement+ DEDENT
-else_statement: "else" _EOL INDENT statement+ DEDENT 
+if_statement: "if " equality_check _EOL INDENT statement+ DEDENT
+else_statement: " else " _EOL INDENT statement+ DEDENT
+equality_check: text " is " text (" and " equality_check)* -> equality_check
 
-repeat: "repeat" expression "times" _EOL INDENT statement+ DEDENT
+repeat: "repeat" number "times" _EOL INDENT statement+ DEDENT
 
-assignment: NAME "is" expression
+assignment: NAME "is" sum
           | ask
 
-?expression: sum
-           | expression "="  sum -> eq
-           | expression "!=" sum -> ne
-           | expression "<=" sum -> le
-           | expression ">=" sum -> ge
-           | expression "<"  sum -> lt
-           | expression ">"  sum -> gt
+
+print: "print" sum+
+ask: text " is ask " sum -> ask
 
 ?sum: product
    | sum "+" product -> addition
@@ -35,26 +30,36 @@ assignment: NAME "is" expression
 ?atom: NAME 
       | INTEGER
       | FLOAT
-      | STRING
-      | "[" (expression? | (expression ",")+ expression) "]" -> list 
-      | "(" expression? ")" 
+      | string
       | NAME "at" atom -> list_access
 
-print: "print" expression+
-echo: "echo" expression+
-ask: "ask" expression+
 
-_EOL: /(\r?\n[\t ]*)+/ 
+number: INTEGER -> number
+text: (LETTER | DIGIT)+ -> text //TODO accents need to be brought back
 
+
+
+punctuation : PUNCTUATION -> punctuation
+textwithspaces: (LETTER | DIGIT | WS_INLINE)+ -> text
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+
+_EOL: /(\r?\n[\t ]*)+/
+
+string: QUOTE (LETTER | DIGIT | WS_INLINE)+ QUOTE -> text
+
+QUOTE : "'"
+
+%import common.LETTER   // imports from terminal library
+%import common.DIGIT   // imports from terminal library
 %import common.WS_INLINE
 %import common.SIGNED_INT -> INTEGER
 %import common.FLOAT -> FLOAT
 %import common.CNAME -> NAME
 %import common._STRING_ESC_INNER
-%import common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
+
 
 %declare INDENT DEDENT
 
-%ignore WS_INLINE 
+
 
 

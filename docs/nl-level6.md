@@ -1,7 +1,7 @@
 In level 6 komen er weer een nieuwe codes bij, je kunt nu namelijk gaan rekenen in je code.
 
 De plus is makkelijk, die schrijf je zoals bij rekenen: 5 + 5 bijvoorbeeld. De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-Daarom doen we de keer met het sterretje boven de 8: 5 * 5. Lees dat maar als 5 * 5 dan onthoud je het het makkeljkst.
+Daarom doen we de keer met het sterretje boven de 8: 5 * 5. Lees dat maar als 5 keer 5 dan onthoud je het het makkeljkst.
 
 Hier vind je weer een aantal opdrachten om mee aan de slag te gaan.
 
@@ -29,7 +29,7 @@ Je kunt de sommen zelf verzinnen, bijv zo:
 * `goedeantwoord is 11 * 27`
 * `print 'Hoeveel is 11 keer 27?'`
 * `antwoord is ask Weet jij het antwoord?`
-* `if antwoord is goedeantwoord print 'goedzo' else print 'foutje! het was ' goedeantwoord`
+* `if antwoord is goedeantwoord print 'goedzo' else print 'Foutje! Het was ' goedeantwoord`
 
 Maar je kunt ook de computer zelf willekeurige sommen laten maken met random.
 

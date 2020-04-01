@@ -313,6 +313,22 @@ class ConvertToPython_6(ConvertToPython_5):
     def division(self, args):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
 
+class ConvertToPython_7(ConvertToPython_6):
+    indent_level = 0
+
+    def INDENT(self, args):
+        self.indent_level += 1
+        return ""
+
+    def DEDENT(self, args):
+        self.indent_level -= 1
+        return ""
+
+    def command(self, args):
+        return "".join([self.indent_level * "\t" + x + ("\n" if x[-1] != '\n' else "") for x in args if x != ""])
+
+    def repeat(self, args):
+        return "for i in range(" +args[0] + "):\n" + "".join(args[1:])
 
 class ConvertToPython(Transformer):
     indent_level = 0
@@ -333,7 +349,7 @@ class ConvertToPython(Transformer):
         return "else:\n" + "".join(args)
 
     def repeat(self, args):
-        return "for _ in range(" +args[0] + "):\n" + "".join(args[1:])
+        return "for i in range(" +args[0] + "):\n" + "".join(args[1:])
 
     def ranged_loop(self, args):
         return "for " + args[0] + " in range(" + args[1] + "," + args[2] +  "):\n" + "".join(args[3:])
@@ -341,23 +357,24 @@ class ConvertToPython(Transformer):
     def assignment(self, args):
         return args[0] + "=" + str(args[1])
 
-    def eq(self, args):
-        return str(args[0]) + "==" + str(args[1])
-
-    def ne(self, args):
-        return str(args[0]) + "!=" + str(args[1])
-
-    def le(self, args):
-        return str(args[0]) + "<=" + str(args[1])
-
-    def ge(self, args):
-        return str(args[0]) + ">=" + str(args[1])
-
-    def lt(self, args):
-        return str(args[0]) + "<" + str(args[1])
-
-    def gt(self, args):
-        return str(args[0]) + ">" + str(args[1])
+    # for now. expressions to Bool are not implemented (not sure we'd need them until 13)
+    # def eq(self, args):
+    #     return str(args[0]) + "==" + str(args[1])
+    #
+    # def ne(self, args):
+    #     return str(args[0]) + "!=" + str(args[1])
+    #
+    # def le(self, args):
+    #     return str(args[0]) + "<=" + str(args[1])
+    #
+    # def ge(self, args):
+    #     return str(args[0]) + ">=" + str(args[1])
+    #
+    # def lt(self, args):
+    #     return str(args[0]) + "<" + str(args[1])
+    #
+    # def gt(self, args):
+    #     return str(args[0]) + ">" + str(args[1])
 
     # migrated to level 6
     # def addition(self, args):
@@ -417,9 +434,10 @@ def transpile(input_string, level):
     if level <= 6:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
-        parser = create_parser(level)
+        parser = Lark(create_grammar(level))
+
         try:
-            program_root = parser.parse(input_string).children[0]  # getting rid of the root could also be done in the transformer would be nicer
+            program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
             lookup_table = all_assignments(program_root)
             flattened_tree = FlattenText().transform(program_root)
         except Exception as e:
@@ -457,14 +475,17 @@ def transpile(input_string, level):
             raise HedyException('Invalid', command=invalid_command, level=level)
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
-    elif level > 6:
+    elif level >= 7:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
-        python = 'import random\n'
-        python += ConvertToPython().transform(
-            parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
-        return python
+        punctuation_symbols = ['!', '?', '.']
+        program_root = parser.parse(input_string + '\n')  # TODO: temporary fix, statements have to end with _EOL
+        lookup_table = all_assignments(program_root)
+        if level == 7:
+            python = 'import random\n'
+            python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(program_root)
+            return python
     else:
-        raise Exception('Levels 5 to 7 are not implemented yet')
+        raise Exception('Levels over 7 are not implemented yet')
 
 
 def execute(input_string):

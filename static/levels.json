@@ -23,7 +23,8 @@
             "demo_code": "ask Wat is je lievelingskleur?\\necho dus je lievelingskleur is..."
         }
         ]
-    }, {
+    },
+    {
         "Level": "2",
         "Language" : "nl",
         "Intro_text" : "Print werkt nog zoals in Level 1, maar let op! Ask werkt nu een klein beetje anders. In Level 2 kun je ook deze commando's gebruiken:",
@@ -47,7 +48,8 @@
             "demo_code": "dieren is hond, kat, kangoeroe\\nprint dieren at random"
         }
         ]
-    }, {
+    },
+    {
         "Level": "3",
         "Language" : "nl",
         "Start_code": "print 'hallo wereld'",
@@ -71,7 +73,8 @@
             "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
         }
         ]
-    }, {
+    },
+    {
         "Level": "4",
         "Language" : "nl",
         "Start_code": "naam is ask hoe heet jij?\nif naam is Hedy print 'leuk' else print 'minder leuk!'",
@@ -128,7 +131,8 @@
                 "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
             }
         ]
-    },{
+    },
+    {
         "Level": "6",
         "Language" : "nl",
         "Start_code": "print '5 keer 5 is ' 5 * 5",
@@ -142,7 +146,7 @@
             "demo_code": "print '5 keer 5 is ' 5 * 5"
         }, {
             "name": "ask en if samen met rekenen",
-            "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
+            "explanation": "Het antwoord van een som vragen met ask en kijken of het goed is. Maar let op! Print moet nog steeds met een aanhalingsteken.",
             "example": "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?",
             "demo_code": "antwoord is ask Hoeveel is 10 plus 10?\\nif antwoord is 20 print 'Goedzo!' else print 'Foutje'"
         }, {
@@ -152,7 +156,8 @@
             "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         }
         ]
-    }, {
+    },
+    {
         "Level": "1",
         "Language" : "en",
         "Intro_text" : "In Level 1 you can use these commands",
@@ -176,7 +181,8 @@
             "demo_code": "ask What is your favorite color?\\necho so your favorite color is..."
         }
         ]
-    }, {
+    },
+    {
         "Level": "2",
         "Language" : "en",
         "Intro_text" : "All Level 1 commands still work. You can now also use these commands:",
@@ -200,7 +206,8 @@
             "demo_code": "animals is dog, cat, kangaroo\\nprint animals at random"
         }
         ]
-    }, {
+    },
+    {
         "Level": "3",
         "Language" : "en",
         "Start_code": "print 'Hello world'",
@@ -224,7 +231,90 @@
             "demo_code": "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
         }
         ]
-    }, {
+    },
+    {
+        "Level": "4",
+        "Language" : "en",
+        "Start_code": "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'",
+        "Intro_text" : "ask en printwork exactly like they did in Level 3. Level 4 adds the if statement!",
+        "Available": true,
+        "Commands" : [
+            {
+                "name": "print",
+                "explanation": "Print exactly using quotation marks",
+                "example": "Example: print 'Hello welcome to Hedy.'",
+                "demo_code": "print 'Hello welcome to Hedy.'"
+            }, {
+                "name": "ask",
+                "explanation": "Ask something with ask. Beware! Print not needs quotations marks.",
+                "example": "Example: color is ask What is your favorite color?",
+                "demo_code": "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+            }, {
+                "name": "if",
+                "explanation": "Make a choice",
+                "example": "Example: if color is green print 'pretty!' else print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green print 'pretty!' else print 'meh'"
+            }
+        ]
+    },
+    {
+        "Level": "5",
+        "Language": "en",
+        "Start_code": "repeat 3 times print 'Hedy is fun!'",
+        "Intro_text": "ask, print en if work exactly like they did in Level 4. But Level 5 adds the repeat command. Repeat can be used to execute a line of code multiple times.",
+        "Available": true,
+        "Commands": [
+            {
+                "name": "print",
+                "explanation": "Print exactly using quotation marks",
+                "example": "Example: print 'Hello welcome to Hedy.'",
+                "demo_code": "print 'Hello welcome to Hedy.'"
+            }, {
+                "name": "ask",
+                "explanation": "Ask something with ask. Beware! Print not needs quotations marks.",
+                "example": "Example: color is ask What is your favorite color?",
+                "demo_code": "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+            }, {
+                "name": "if",
+                "explanation": "Make a choice",
+                "example": "Example: if color is green print 'pretty!' else print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green print 'pretty!' else print 'meh'"
+            },
+            {
+                "name": "repeat",
+                "explanation": "Repeat and if combined",
+                "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+            }
+        ]
+    },
+    {
+        "Level": "6",
+        "Language" : "en",
+        "Start_code": "print '5 times 5 is ' 5 * 5",
+        "Intro_text" : "ask, print, if en repeat are still the same as in Level 4 en 5. Level 6 adds something new... You can now calculate. ",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Print exactly using quotation marks",
+            "example": "Example: print '5 times 5 is ' 5 * 5",
+            "demo_code": "print '5 times 5 is ' 5 * 5"
+        }, {
+            "name": "ask en if with calculations",
+            "explanation": "Ask for a calculation and compare with if. Beware: Print still needs quotation marks.",
+            "example": "Bijvoorbeeld: answer is ask What is 10 plus 10?",
+            "demo_code": "answer is ask What is 10 plus 10?\\nif answer is 20 print 'Yes!' else print 'Oops'"
+        }, {
+                "name": "repeat",
+                "explanation": "Repeat and if combined",
+                "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+            }
+        ]
+    },
+
+    {
         "Level": "1",
         "Language" : "es",
         "Intro_text" : "En el nivel 1 puedes usar estos comandos",
@@ -248,7 +338,8 @@
             "demo_code": "ask Cuál es tu color favorito?\\necho entonces su color favorito es..."
         }
         ]
-    }, {
+    },
+    {
         "Level": "2",
         "Language" : "es",
         "Intro_text" : "Todos los comandos de Nivel 1 aún funcionan. Ahora también puede usar estos nuevos comandos:",
@@ -272,7 +363,8 @@
             "demo_code": "animales is perro, gato, canguro\\nprint animales at random"
         }
         ]
-    }, {
+    },
+    {
         "Level": "3",
         "Language" : "es",
         "Start_code": "print 'Hola mundo'",
@@ -296,7 +388,8 @@
             "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
         }
         ]
-    }, {
+    },
+    {
         "Level": "4",
         "Language" : "es",
         "Start_code": "nombre is ask Cómo te llamas?\nif nombre is Hedy print 'divertido' else print 'menos divertido!'",
@@ -320,7 +413,8 @@
             "demo_code": "color is ask Cuál es tu color favorito?\\nif color is verde print 'bonito!' else print 'no es tan bonito'"
         }
         ]
-    }, {
+    },
+    {
         "Level": "5",
         "Language" : "es",
         "Start_code": "repeat 3 times print 'Hedy esta divertido!'",
