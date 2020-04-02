@@ -482,8 +482,9 @@ def transpile(input_string, level):
         lookup_table = all_assignments(program_root)
         if level == 7:
             python = 'import random\n'
-            python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(program_root)
-            return python
+            result = ConvertToPython_7(punctuation_symbols, lookup_table).transform(program_root)
+
+            return python + result
     else:
         raise Exception('Levels over 7 are not implemented yet')
 
