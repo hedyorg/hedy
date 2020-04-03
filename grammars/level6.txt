@@ -13,6 +13,9 @@ program: command (" ")* ("\n"+ command (" ")*)* "\n"* //lines may end on spaces 
 print : "print " (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*
 ask : var " is ask " textwithspaces*
 assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
+
+//TODO: sum needs to be expression here too (like in 7 and up)
+
 assign : var " is " sum
 invalid: /^(?!(repeat|print|if|and )).+/ //everything that is not the start of a regular command
 
@@ -26,7 +29,6 @@ equality_check: textwithoutspaces " is " textwithoutspaces (" and " equality_che
 repeat: "repeat " NUMBER " times " command
 
 //new for level 6
-//TODO: spaces
 ?sum: product
    | sum " "* "+" " "* product -> addition
    | sum " "* "-" " "* product -> substraction
@@ -35,7 +37,7 @@ repeat: "repeat " NUMBER " times " command
     | product " "* " * " " "* atom -> multiplication
     | product " "* " / " " "* atom -> division
 
-?atom: NUMBER | textwithoutspaces
+?atom: NUMBER | textwithoutspaces //TODO: means we cannot assign strings with spaces? would we want that?
 
 
 var: NAME -> var

@@ -316,24 +316,31 @@ class ConvertToPython_6(ConvertToPython_5):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
 
 class ConvertToPython_7(ConvertToPython_6):
-    indent_level = 0
+    def __init__(self, punctuation_symbols, lookup, indent_level):
+        self.punctuation_symbols = punctuation_symbols
+        self.lookup = lookup
+        self.indent_level = indent_level
 
-    def INDENT(self, args):
+    def indent(self, args):
         self.indent_level += 1
         return ""
 
-    def DEDENT(self, args):
+    def dedent(self, args):
         self.indent_level -= 1
         return ""
 
     def command(self, args):
-        return "".join([self.indent_level * "\t" + x + ("\n" if x[-1] != '\n' else "") for x in args if x != ""])
+        return "".join([self.indent_level * "    " + x for x in args if x != ""])
 
     def repeat(self, args):
-        return "for i in range(" +args[0] + "):\n" + "".join(args[1:])
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        return "for i in range(" +args[0] + "):\n" + "\n".join(args[1:])
+
+    def ifs(self, args):
+        args = [a for a in args if a != ""] # filter out in|dedent tokens
+        return "if " + args[0] + ":\n" + "\n".join(args[1:])
 
 class ConvertToPython(Transformer):
-    indent_level = 0
 
     def start(self, args):
         return "".join(args)
@@ -480,11 +487,12 @@ def transpile(input_string, level):
     elif level >= 7:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         punctuation_symbols = ['!', '?', '.']
-        program_root = parser.parse(input_string + '\n')  # TODO: temporary fix, statements have to end with _EOL
+        program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
+        flattened_tree = FlattenText().transform(program_root)
         lookup_table = all_assignments(program_root)
         if level == 7:
             python = 'import random\n'
-            result = ConvertToPython_7(punctuation_symbols, lookup_table).transform(program_root)
+            result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
 
             return python + result
     else:
