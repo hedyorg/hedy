@@ -203,9 +203,13 @@ print('ik heet henk')""")
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint 'jouw lievelingskleur is dus' kleur '!'", 3)
         self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur?')\nprint('jouw lievelingskleur is dus'+kleur+'!')")
 
-
 class TestsLevel4(unittest.TestCase):
-    #ask and print should still work as in level 4
+    #invalid, ask and print should still work as in level 4
+    def test_transpile_other(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("abc felienne 123", 4)
+        self.assertEqual(str(context.exception), 'Invalid')
+
     def test_print_with_var(self):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 4)
         self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
@@ -218,11 +222,11 @@ class TestsLevel4(unittest.TestCase):
 
     def test_transpile_ask_with_print(self):
         result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint 'jouw lievelingskleur is dus' kleur '!'", 4)
-        self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur'+'?')\nprint('jouw lievelingskleur is dus'+kleur+'!')")
+        self.assertEqual(result, "import random\nkleur = input('wat is je lievelingskleur?')\nprint('jouw lievelingskleur is dus'+kleur+'!')")
 
     def test_transpile_ask_Spanish(self):
         result = hedy.transpile("color is ask Cuál es tu color favorito?", 4)
-        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito'+'?')")
+        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito?')")
 
     def test_save_list_access_to_var(self):
         result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\ndier is dieren at random\nprint dier", 4)
@@ -262,7 +266,7 @@ else:
         self.assertEqual(expected_result, result)
 
     #steen schaar papier
-    def test_print_if_else_with_ask(self):
+    def test_print_if_else_with_and_var(self):
         result = hedy.transpile("""jouwkeuze is steen
 computerkeuze is schaar
 if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'""", 4)
@@ -304,7 +308,12 @@ class TestsLevel5(unittest.TestCase):
 
     def test_transpile_ask_Spanish(self):
         result = hedy.transpile("color is ask Cuál es tu color favorito?", 5)
-        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito'+'?')")
+        self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito?')")
+
+    def test_transpile_other(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("abc felienne 123", 5)
+        self.assertEqual(str(context.exception), 'Invalid')
 
     #todo: a few more things repeated from 4 here?
 
@@ -319,7 +328,7 @@ for i in range(5):
     def test_repeat_nested_in_if(self):
         result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'", 5)
         self.assertEqual(result, """import random
-kleur = input('Wat is je lievelingskleur'+'?')
+kleur = input('Wat is je lievelingskleur?')
 if kleur == 'groen':
   for i in range(3):
     print('mooi!')""")
@@ -339,7 +348,7 @@ class TestsLevel6(unittest.TestCase):
     def test_repeat_nested_in_if(self):
             result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'", 6)
             self.assertEqual(result, """import random
-kleur = input('Wat is je lievelingskleur'+'?')
+kleur = input('Wat is je lievelingskleur?')
 if str(kleur) == str('groen'):
   for i in range(3):
     print('mooi!')""")
@@ -366,7 +375,7 @@ getal = int(nummer) * int(nummertwee)
 print(str(getal))""", result)
         self.assertEqual(run_code(result), "30")
 
-    def test_print_calculation_directly(self):
+    def test_print_calculation_times_directly(self):
         result = hedy.transpile("""nummer is 5
 nummertwee is 6
 print nummer * nummertwee""", 6)
@@ -375,6 +384,17 @@ nummer = '5'
 nummertwee = '6'
 print(str(int(nummer) * int(nummertwee)))""", result)
         self.assertEqual(run_code(result), "30")
+
+    def test_print_calculation_divide_directly(self):
+        result = hedy.transpile("""nummer is 5
+nummertwee is 6
+print nummer / nummertwee""", 6)
+        self.assertEqual("""import random
+nummer = '5'
+nummertwee = '6'
+print(str(int(nummer) // int(nummertwee)))""", result)
+        self.assertEqual(run_code(result), "0")
+
 
 
 # class TestsLevel7(unittest.TestCase):

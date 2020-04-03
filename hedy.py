@@ -146,7 +146,7 @@ class IsValid(Transformer):
     def text(self, args):
         return all(args), ''.join([c for c in args])
     def addition(self, args):
-        return all(args), ''.join([c[1] for c in args])
+        return all(args), ''.join([c for c in args])
 
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
