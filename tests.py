@@ -358,6 +358,10 @@ if str(kleur) == str('groen'):
         result = hedy.transpile("nummer is 4 + 5", 6)
         self.assertEqual('import random\nnummer = int(4) + int(5)', result)
 
+    def test_simple_calculation(self):
+        result = hedy.transpile("nummer is 4+5", 6)
+        self.assertEqual('import random\nnummer = int(4) + int(5)', result)
+
     def test_calculation_and_printing(self):
         result = hedy.transpile("nummer is 4 + 5\nprint nummer", 6)
         self.assertEqual('import random\nnummer = int(4) + int(5)\nprint(str(nummer))', result)

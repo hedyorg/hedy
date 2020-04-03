@@ -26,13 +26,14 @@ equality_check: textwithoutspaces " is " textwithoutspaces (" and " equality_che
 repeat: "repeat " NUMBER " times " command
 
 //new for level 6
+//TODO: spaces
 ?sum: product
-   | sum " + " product -> addition
-   | sum " - " product -> substraction
+   | sum " "* "+" " "* product -> addition
+   | sum " "* "-" " "* product -> substraction
 
 ?product: atom
-    | product " * " atom -> multiplication
-    | product " / " atom -> division
+    | product " "* " * " " "* atom -> multiplication
+    | product " "* " / " " "* atom -> division
 
 ?atom: NUMBER | textwithoutspaces
 
