@@ -2,6 +2,8 @@ from lark import Lark
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
 
+reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
+
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
@@ -193,7 +195,7 @@ def wrap_non_var_in_quotes(argument, lookup):
 
 class ConvertToPython_2(ConvertToPython_1):
     def var(self, args):
-        return ''.join([str(c) for c in args])
+        return ''.join(["_" + str(c) if c in reserved_words else str(c) for c in args])
     def print(self, args):
         all_arguments_converted = []
         i = 0

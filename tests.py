@@ -137,11 +137,17 @@ class TestsLevel2(unittest.TestCase):
         self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[1])")
         self.assertEqual(run_code(result), "Kat")
 
-
     def test_print_with_list_var_random(self):
         result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", 2)
         self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
         self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+
+    def test_failing_car_program(self):
+        #note: this the right order for assert: expected, actual
+        result = hedy.transpile("""naam is ask wat is de naam van de hoofdpersoon
+print naam doet mee aan een race hij krijgt een willekeurige auto""",2)
+        self.assertEqual("import random\nnaam = input('wat is de naam van de hoofdpersoon')\nprint(naam+' '+'doet'+' '+'mee'+' '+'aan'+' '+'een'+' '+'race'+' '+'hij'+' '+'krijgt'+' '+'een'+' '+'willekeurige'+' '+'auto')",result)
+
 
 class TestsLevel3(unittest.TestCase):
     def test_transpile_other(self):
@@ -167,9 +173,12 @@ class TestsLevel3(unittest.TestCase):
         self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet \\'')")
 
     def test_name_with_underscore(self):
-        result = hedy.transpile("voor_naam is Hedy\nprint 'ik heet \\''",3)
-        self.assertEqual(result, "import random\nvoor_naam = 'Hedy'\nprint('ik heet \\'')")
+        result = hedy.transpile("voor_naam is Hedy\nprint 'ik heet '",3)
+        self.assertEqual(result, "import random\nvoor_naam = 'Hedy'\nprint('ik heet ')")
 
+    def test_name_that_is_keyword(self):
+        result = hedy.transpile("for is Hedy\nprint 'ik heet ' for ",3)
+        self.assertEqual(result, "import random\n_for = 'Hedy'\nprint('ik heet '+_for)")
 
     def test_print_Spanish(self):
         result = hedy.transpile("print 'Cuál es tu color favorito?'", 3)
