@@ -148,6 +148,9 @@ class TestsLevel2(unittest.TestCase):
 print naam doet mee aan een race hij krijgt een willekeurige auto""",2)
         self.assertEqual("import random\nnaam = input('wat is de naam van de hoofdpersoon')\nprint(naam+' '+'doet'+' '+'mee'+' '+'aan'+' '+'een'+' '+'race'+' '+'hij'+' '+'krijgt'+' '+'een'+' '+'willekeurige'+' '+'auto')",result)
 
+    def test_windows_line_endings(self):
+        result = hedy.transpile("print hallo\r\nprint allemaal", 2)
+        self.assertEqual("import random\nprint('hallo')\nprint('allemaal')", result)
 
 class TestsLevel3(unittest.TestCase):
     def test_transpile_other(self):
