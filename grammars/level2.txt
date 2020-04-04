@@ -1,10 +1,12 @@
 start: program
-program: command (" ")* ("\n"+ command (" ")*)* "\n"* //lines may end on spaces and might be separated by many newlines
+program: command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 command: "print " ( list_access | (text punctuation)| text) (" " ( list_access | (text punctuation)| text) )*  -> print
          | text " is ask " textwithspaces punctuation* -> ask
          | text " is " text ((", "|",") text)+  -> assign_list
          | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
          | text " " textwithspaces -> invalid
+
+_EOL: "\r"?"\n"
 
 ACCENTED_LETTER: "á" | "é" | "ó"
 
