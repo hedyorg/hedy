@@ -1,5 +1,5 @@
 start: program
-program: command (" ")* ("\n"+ command (" ")*)* "\n"* //lines may end on spaces and might be separated by many newlines
+program: command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
          | ifelse
          | ifs
@@ -8,6 +8,8 @@ program: command (" ")* ("\n"+ command (" ")*)* "\n"* //lines may end on spaces 
          | list_access_var
          | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
          | invalid
+
+_EOL: "\r"?"\n"
 
 print : "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*
 ask : var " is ask " textwithspaces*
