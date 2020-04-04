@@ -215,15 +215,16 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         return parameter + " = '" + value + "'"
+    def assign_list(self, args):
+        parameter = args[0]
+        values = ["'" + a + "'" for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+
     def list_access(self, args):
         if args[1].data == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1].children[0] + ']'
-    def assign_list(self, args):
-        parameter = args[0]
-        values = ["'" + a + "'" for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
 
 
 #TODO: lookuptable and punctuation chars not be needed for level2 and up anymore, could be removed
@@ -296,12 +297,18 @@ class ConvertToPython_6(ConvertToPython_5):
             return f"str({arg0}) == str({arg1}) and {args[2]}"
 
     def assign(self, args):
-        parameter = args[0]
-        value = args[1]
-        if type(value) is Tree:
-            return parameter + " = " + value.children
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                return parameter + " = '" + value + "'"
         else:
-            return parameter + " = '" + value + "'"
+            parameter = args[0]
+            values = ["'" + a + "'" for a in args[1:]]
+            return parameter + " = [" + ", ".join(values) + "]"
+
 
     def addition(self, args):
         return Tree('sum', f'int({str(args[0])}) + int({str(args[1])})')
@@ -339,6 +346,10 @@ class ConvertToPython_7(ConvertToPython_6):
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
         return "if " + args[0] + ":\n" + "\n".join(args[1:])
+
+    def elses(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        return "\nelse:\n" + "\n".join(args)
 
 class ConvertToPython(Transformer):
 

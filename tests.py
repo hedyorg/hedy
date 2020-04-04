@@ -21,6 +21,28 @@ def run_code(code):
         exec(code)
     return out.getvalue().strip()
 
+
+class TestsMultipleLevels(unittest.TestCase):
+    max_level = 7
+
+    def test_print_with_list_var_random(self):
+        # min_level = 2
+        # max_level = 5
+        # for i in range(min_level, max_level + 1):
+        #     result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
+        #     self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
+        #     self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+        #     print('Passed at level ', i)
+
+        min_level = 6
+        max_level = 7
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
+            self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+
 class TestsLevel1(unittest.TestCase):
 
     def test_transpile_other(self):
@@ -137,10 +159,7 @@ class TestsLevel2(unittest.TestCase):
         self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[1])")
         self.assertEqual(run_code(result), "Kat")
 
-    def test_print_with_list_var_random(self):
-        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", 2)
-        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
-        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+
 
     def test_failing_car_program(self):
         #note: this the right order for assert: expected, actual
@@ -354,6 +373,10 @@ class TestsLevel6(unittest.TestCase):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 6)
         self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
 
+    def test_transpile_ask(self):
+        result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 6)
+        self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
+
     def test_repeat_nested_in_if(self):
             result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'", 6)
             self.assertEqual(result, """import random
@@ -417,6 +440,10 @@ class TestsLevel7(unittest.TestCase):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 7)
         self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
 
+    def test_transpile_ask(self):
+        result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 7)
+        self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
+
     def test_if_with_indent(self):
         result = hedy.transpile("""naam is Hedy
 if naam is Hedy
@@ -444,6 +471,23 @@ if str(kleur) == str('groen'):
     for i in range(3):
         print('mooi')""")
 
+    def test_if_else(self):
+        result = hedy.transpile("""antwoord is ask Hoeveel is 10 plus 10?
+if antwoord is 20
+    print 'Goedzo!'
+    print 'Het antwoord was inderdaad ' antwoord
+else
+    print 'Foutje'
+    print 'Het antwoord moest zijn ' antwoord""", 7)
+
+        self.assertEqual("""import random
+antwoord = input('Hoeveel is 10 plus 10?')
+if str(antwoord) == str('20'):
+    print('Goedzo!')
+    print('Het antwoord was inderdaad '+str(antwoord))
+else:
+    print('Foutje')
+    print('Het antwoord moest zijn '+str(antwoord))""",result)
 
     def test_repeat_basic_print(self):
         result = hedy.transpile("""repeat 5 times
