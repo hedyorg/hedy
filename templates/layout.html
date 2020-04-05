@@ -18,8 +18,13 @@
           </a>
         </div>
 
-      {% block menu %}
-      {% endblock %}
+        {% block menu %}
+        {% for item in menu %}
+        <a class="no-underline font-slab border-b-4 {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} tracking-wide text-xl px-4 py-3 mr-4" href="{{item.href}}?lang={{lang}}">
+          {{ item.caption }}
+        </a>
+        {% endfor %}
+        {% endblock %}
 
         <div class="dropdown inline-block relative ml-auto py-2 z-50">
           <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
@@ -34,7 +39,7 @@
         </div>
       </div>
     </nav>
-    <div class="px-8 py-4 pt-12">
+    <div class="px-8 py-12">
       {% block body %}
       {% endblock %}
     </div>

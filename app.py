@@ -25,6 +25,11 @@ ALL_LANGUAGES = {
     'es': '🇪🇸',
 }
 
+# Load main menu (do it once, can be cached)
+with open(f'main/menu.json', 'r') as f:
+    main_menu_json = json.load(f)
+
+
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
@@ -137,8 +142,8 @@ def index():
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
+    arguments_dict['video_title'] = response_texts_lang['Video']
     arguments_dict['try_button'] = response_texts_lang['Try_button']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
@@ -156,6 +161,7 @@ def index():
     arguments_dict['nextlevel'] = level + 1 if next_level_available else None
     arguments_dict['latest'] = version()
     arguments_dict['selected_page'] = 'code'
+    arguments_dict['menu'] = render_main_menu('hedy')
 
     return render_template("code-page.html", **arguments_dict)
 
@@ -172,11 +178,12 @@ def docs():
     arguments_dict['lang'] = lang
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
+    arguments_dict['video_title'] = response_texts_lang['Video']
     arguments_dict['selected_page'] = 'docs'
 
     arguments_dict['mkd'] = load_docs()
+    arguments_dict['menu'] = render_main_menu('hedy')
 
     return render_template("per-level-text.html", **arguments_dict)
 
@@ -194,10 +201,11 @@ def video():
     arguments_dict['selected_page'] = 'video'
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
+    arguments_dict['video_title'] = response_texts_lang['Video']
 
     arguments_dict['mkd'] = load_video()
+    arguments_dict['menu'] = render_main_menu('hedy')
 
     return render_template("per-level-text.html", **arguments_dict)
 
@@ -223,31 +231,24 @@ def internal_error(exception):
 @app.route('/index.html')
 @app.route('/')
 def default_landing_page():
-    return landing_page('start')
+    return main_page('start')
 
 @app.route('/<page>')
-def landing_page(page):
+def main_page(page):
     lang = requested_lang()
     effective_lang = lang
 
     # Default to English if requested language is not available
-    if not path.isfile(f'landing/{page}-{effective_lang}.md'):
+    if not path.isfile(f'main/{page}-{effective_lang}.md'):
         effective_lang = 'en'
 
-    with open(f'landing/{page}-{effective_lang}.md', 'r') as f:
+    with open(f'main/{page}-{effective_lang}.md', 'r') as f:
         contents = f.read()
-
-    with open(f'landing/landing.json', 'r') as f:
-        landing_json = json.load(f)
-
-    menu = [
-        dict(caption=item[effective_lang], id=item['_'], selected=(page == item['_']))
-        for item in landing_json['nav']
-    ]
 
     front_matter, markdown = split_markdown_front_matter(contents)
 
-    return render_template('landing-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
+    menu = render_main_menu(page)
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
 
 def session_id():
     """Returns or sets the current session ID."""
@@ -364,6 +365,15 @@ def split_markdown_front_matter(md):
     front_matter = yaml.safe_load(parts[0]) or {}
     return front_matter, parts[1]
 
+
+def render_main_menu(current_page):
+    """Render a list of (caption, href, selected, color) from the main menu."""
+    return [dict(
+        caption=item.get(requested_lang(), item.get('en', '???')),
+        href='/' + item['_'],
+        selected=(current_page == item['_']),
+        accent_color=item.get('accent_color', 'white')
+    ) for item in main_menu_json['nav']]
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
