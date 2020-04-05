@@ -1,5 +1,9 @@
 @tailwind base;
 
+.font-slab {
+  font-family: 'Zilla Slab', serif;
+}
+
 h1 {
   @apply font-thin text-4xl;
 }
@@ -26,7 +30,7 @@ h3 {
   @apply text-xl text-gray-800 leading-normal;
 }
 
-.markdown > * + *,  .markdown li + li, .markdown li > p + p {
+.markdown li + li, .markdown li > p + p {
   @apply my-2;
 }
 .markdown strong {
@@ -39,12 +43,12 @@ h3 {
   @apply font-bold;
 }
 h2 {
-  @apply font-serif;
-  @apply leading-tight text-2xl font-bold mb-2 mt-10;
+  @apply font-slab font-medium text-blue-500;
+  @apply leading-tight text-2xl mb-2 mt-10;
 }
 h3 {
-  @apply font-serif;
-  @apply leading-tight text-xl font-bold mt-8 mb-1;
+  @apply font-slab font-bold text-blue-700 italic;
+  @apply leading-tight text-xl mt-8 mb-1;
 }
 .markdown code {
   @apply font-mono text-sm inline bg-gray-200 rounded py-2 px-3;
