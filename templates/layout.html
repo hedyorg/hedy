@@ -3,17 +3,18 @@
 
 <head>
   <title>{{page_title}}</title>
-  <link rel="stylesheet" href="css/generated.css">
-  <link rel="stylesheet" href="css/additional.css">
+  <link rel="stylesheet" href="/css/generated.css">
+  <link rel="stylesheet" href="/css/additional.css">
 </head>
 
 <body class="bg-gray-400">
   <div class="container mx-auto bg-gray-100 min-h-screen shadow-md">
     <nav class="bg-blue-500 px-8 shadow-sm text-white">
       <div class="-mb-px flex">
+      {% block menu %}
         <div class="py-1 mr-6 mt-1">
           <a href="/?lang={{lang}}&level=1">
-            <img src="images/Home_Icon.svg" style="width: 2em;">
+            <img src="/images/Home_Icon.svg" style="width: 2em;">
           </a>
         </div>
         <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1">
@@ -28,10 +29,8 @@
         <a class="no-underline {% if selected_page == 'video' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/video?lang={{lang}}&level={{level}}">
           {{ video_title }}
         </a>
-        <a class="no-underline {% if selected_page == 'contact' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/contact?lang={{lang}}&level={{level}}">
-          {{ contact }}
-        </a>
-        <div class="dropdown inline-block relative ml-auto py-2">
+      {% endblock %}
+        <div class="dropdown inline-block relative ml-auto py-2 z-50">
           <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
             <span class="mr-1">{{ current_language().sym }}</span>
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>

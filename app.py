@@ -6,8 +6,11 @@ import json
 import jsonbin
 import logging
 import os
+from os import path
+import re
 import requests
 import uuid
+import yaml
 from flaskext.markdown import Markdown
 from werkzeug.urls import url_encode
 
@@ -137,7 +140,6 @@ def index():
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['contact'] = response_texts_lang['Contact']
     arguments_dict['try_button'] = response_texts_lang['Try_button']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
@@ -173,7 +175,6 @@ def docs():
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['contact'] = response_texts_lang['Contact']
     arguments_dict['selected_page'] = 'docs'
 
     arguments_dict['mkd'] = load_docs()
@@ -196,33 +197,11 @@ def video():
     arguments_dict['code_title'] = response_texts_lang['Code']
     arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
     arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['contact'] = response_texts_lang['Contact']
 
     arguments_dict['mkd'] = load_video()
 
     return render_template("video_per_level.html", **arguments_dict)
 
-# routing to contact.html
-@app.route('/contact', methods=['GET'])
-def contact():
-    level = request.args.get("level", 1)
-    lang = requested_lang()
-    response_texts_lang = load_texts()
-
-    arguments_dict = {}
-    arguments_dict['level'] = level
-    arguments_dict['pagetitle'] = f'Level{level}'
-    arguments_dict['lang'] = lang
-    arguments_dict['selected_page'] = 'video'
-    arguments_dict['level_title'] = response_texts_lang['Level']
-    arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['video_title'] = response_texts_lang['Video'] + ' - ' + response_texts_lang['Level'] + ' ' + str(level)
-    arguments_dict['contact'] = response_texts_lang['Contact']
-
-    arguments_dict['mkd'] = load_contact()
-
-    return render_template("contact.html", **arguments_dict)
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
@@ -242,6 +221,33 @@ def internal_error(exception):
     print(traceback.format_exc())
     return "<h1>500 Internal Server Error</h1>"
 
+@app.route('/landing')
+def default_landing_page():
+    return landing_page('start')
+
+@app.route('/landing/<page>')
+def landing_page(page):
+    lang = requested_lang()
+    effective_lang = lang
+
+    # Default to English if requested language is not available
+    if not path.isfile(f'landing/{page}-{effective_lang}.md'):
+        effective_lang = 'en'
+
+    with open(f'landing/{page}-{effective_lang}.md', 'r') as f:
+        contents = f.read()
+
+    with open(f'landing/landing.json', 'r') as f:
+        landing_json = json.load(f)
+
+    menu = [
+        dict(caption=item[effective_lang], id=item['_'], selected=(page == item['_']))
+        for item in landing_json['nav']
+    ]
+
+    front_matter, markdown = split_markdown_front_matter(contents)
+
+    return render_template('text-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
 
 def session_id():
     """Returns or sets the current session ID."""
@@ -265,20 +271,6 @@ def requested_level():
     """Return the user's requested level."""
     return int(request.args.get("level", 1))
 
-
-def load_contact():
-    """Load the markdown docs for the given language and level. """
-    lang = requested_lang()
-
-    try:
-        with open(f'docs/contact-{lang}.md', "r") as file:
-            markdown = file.read()
-        return markdown
-
-    except IOError as e: #if no contact info is available, fall back to En version
-        with open(f'docs/contact-en.md', "r") as file:
-            markdown = file.read()
-            return markdown
 
 def load_docs():
     """Load the markdown docs for the given language and level. """
@@ -362,6 +354,15 @@ def version():
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
     return the_date.strftime('%b %d') + f' ({commit})'
+
+
+def split_markdown_front_matter(md):
+    parts = re.split('^---', md, 1, re.M)
+    if len(parts) == 1:
+        return {}, md
+    # safe_load returns 'None' if the string is empty
+    front_matter = yaml.safe_load(parts[0]) or {}
+    return front_matter, parts[1]
 
 
 if __name__ == '__main__':

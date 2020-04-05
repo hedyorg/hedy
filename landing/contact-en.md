@@ -1,3 +1,5 @@
+page_title: Contact — Hedy
+---
 # Do you like Hedy?
 
 We love to hear from you!
