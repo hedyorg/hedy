@@ -14,23 +14,23 @@ repeat: "repeat " number " times" _EOL indent command+ dedent
 assign : var " is " expression ((", "|",") expression)*
 
 
-print: "print " (quoted_text | var_access) (" " (quoted_text | var_access))*
+print: "print " (quoted_text | expression) (" " (quoted_text | expression))*
 ask: var " is ask " textwithspaces -> ask
 
 var_access : var (" at " (index | random))? -> var_access
 index : NUMBER
-random : "random"
+?random : "random"
 
 indent: INDENT -> indent
 dedent: DEDENT -> dedent
 
 ?expression: product
-   | expression "+" product -> addition
-   | expression "-" product -> substraction
+    | expression " "* "+" " "* product -> addition
+    | expression " "* "-" " "* product -> substraction
 
 ?product: atom
-    | product "*" atom -> multiplication
-    | product "/" atom -> division
+    | product " "* " * " " "* atom -> multiplication
+    | product " "* " / " " "* atom -> division
 
 ?atom: number | var_access
 

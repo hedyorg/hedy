@@ -158,8 +158,8 @@
     },
     {   "Level": "7",
         "Language" : "nl",
-        "Start_code": "repeat 5 times\n    print 'Hallo allemaal'\n    print 'Dit wordt allemaal 5 keer gehaald'",
-        "Intro_text" : "ask en print werken nog zoals eerst, maar if en repeat zijn nu veranderd! Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel <i>inspringen</i>, dat betekent dat ze moeten beginnen met vier spaties. Ook als je 1 regel wilt herhalen moet je inspringen! ",
+        "Start_code": "repeat 5 times\n    print 'Hallo allemaal'\n    print 'Dit wordt allemaal 5 keer herhaald'",
+        "Intro_text" : "ask en print werken nog zoals eerst, maar if en repeat zijn nu veranderd! Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen, dat betekent dat ze moeten beginnen met vier spaties. Ook als je 1 regel wilt herhalen moet je inspringen! Als je een repeat en een if samen gebruikt moet je steeds opnieuw inspringen.",
         "Available": true,
         "Commands" : [
         {
@@ -173,10 +173,10 @@
             "example": "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?",
             "demo_code": "antwoord is ask Hoeveel is 10 plus 10?\\nif antwoord is 20\\n    print 'Goedzo!'\\n    print 'Het antwoord was inderdaad ' antwoord\\nelse\\n    print 'Foutje'\\n    print 'Het antwoord moest zijn ' antwoord"
         }, {
-            "name": "repeat",
-            "explanation": "repeat met meerdere regels",
+            "name": "if en repeat samen",
+            "explanation": "repeat en if samen",
             "example": "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'",
-            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen\\n    repeat 3 times\\n        print 'mooi!'\\nelse\\n    repeat 5 times\\n        print 'niet zo mooi'"
         }
         ]
     },
@@ -326,14 +326,38 @@
         }, {
             "name": "ask en if with calculations",
             "explanation": "Ask for a calculation and compare with if. Beware: Print still needs quotation marks.",
-            "example": "Bijvoorbeeld: answer is ask What is 10 plus 10?",
+            "example": "Example: answer is ask What is 10 plus 10?",
             "demo_code": "answer is ask What is 10 plus 10?\\nif answer is 20 print 'Yes!' else print 'Oops'"
         }, {
-                "name": "repeat",
-                "explanation": "Repeat and if combined",
-                "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
-                "demo_code": "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+            "name": "repeat",
+            "explanation": "Repeat and if combined",
+            "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+            "demo_code": "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
             }
+        ]
+    },
+    {   "Level": "7",
+        "Language" : "en",
+        "Start_code": "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'",
+        "Intro_text" : "ask and print still work as you know them. But if and repeat have changed! You can now execute groups of code together, but you will have to indent the code. That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line. If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Print something. Remember to use a quotation mark for literal printing.",
+            "example": "Example: print '5 keer 5 is ' 5 * 5",
+            "demo_code": "print '5 times 5 is ' 5 * 5"
+        }, {
+            "name": "if with multiple lines",
+            "explanation": "Ask for the answer to a sum and check if it is correct. We can now print 2 lines.",
+            "example": "Example: answer is ask What is 5 plus 5?",
+            "demo_code": "answer is ask What is 5 plus 5?\\nif answer is 10\\n    print 'Well done!'\\n    print 'Indeed, the answer was ' answer\\nelse\\n    print 'Oops!'\\n    print 'Ths answer is ' answer"
+        }, {
+            "name": "if en repeat combined",
+            "explanation": "if en repeat combined",
+            "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+            "demo_code": "color is ask What is your favorite color?\\nif color is green\\n    repeat 3 times\\n        print 'pretty!'\\nelse\\n    repeat 5 times\\n        print 'meh'"
+        }
         ]
     },
     {

@@ -22,17 +22,17 @@ def run_code(code):
     return out.getvalue().strip()
 
 
-class TestsMultipleLevels(unittest.TestCase):
+class TestsForMultipleLevels(unittest.TestCase):
     max_level = 7
 
     def test_print_with_list_var_random(self):
-        # min_level = 2
-        # max_level = 5
-        # for i in range(min_level, max_level + 1):
-        #     result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
-        #     self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
-        #     self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-        #     print('Passed at level ', i)
+        min_level = 2
+        max_level = 5
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
+            self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
 
         min_level = 6
         max_level = 7
@@ -41,6 +41,16 @@ class TestsMultipleLevels(unittest.TestCase):
             self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
+
+    # def test_print_undefined_var(self):
+    #     min_level = 7
+    #
+    #     for i in range(min_level, self.max_level + 1):
+    #         with self.assertRaises(Exception) as context:
+    #             result = hedy.transpile("print naam", i)
+    #         self.assertEqual(str(context.exception), 'VarUndefined')
+    #         print('Passed at level ', i)
+
 
 
 class TestsLevel1(unittest.TestCase):
@@ -442,6 +452,17 @@ class TestsLevel7(unittest.TestCase):
     def test_print_with_var(self):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 7)
         self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
+
+    def test_print_calculation_times_directly(self):
+        result = hedy.transpile("""nummer is 5
+nummertwee is 6
+print nummer * nummertwee""", 7)
+        self.assertEqual("""import random
+nummer = '5'
+nummertwee = '6'
+print(str(int(nummer) * int(nummertwee)))""", result)
+        self.assertEqual(run_code(result), "30")
+
 
     def test_transpile_ask(self):
         result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 7)

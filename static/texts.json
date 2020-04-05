@@ -19,7 +19,8 @@
         },
         "HedyErrorMessages": {
             "Invalid": "{command} is geen command in Hedy level {level}.",
-            "Parse": "De code die jij intypte is geen geldige Hedy code. De foutmelding is: {parse_error}"
+            "Parse": "De code die jij intypte is geen geldige Hedy code. De foutmelding is: {parse_error}.",
+            "VarUndefined": "Je probeerde de naam {name} te printen, maar die heb je niet ingesteld."
         }
     },
     "en": {
@@ -42,7 +43,9 @@
         },
         "HedyErrorMessages": {
             "Invalid": "{command} is not a Hedy level {level} command.",
-            "Parse": "The code you entered is not valid Hedy code"
+            "Parse": "The code you entered is not valid Hedy code. The error is: {parse_error}.",
+            "VarUndefined": "You tried to print {name}, but you did not instantiate it."
+
         }
     },
     "es": {
@@ -65,7 +68,8 @@
         },
         "HedyErrorMessages": {
             "Invalid": "{command} no es un comando de Hedy en nivel {level}.",
-            "Parse": "El servidor no puede traducir este programa de Hedy a Python."
+            "Parse": "El servidor no puede traducir este programa de Hedy a Python. Error: {parse_error}",
+            "VarUndefined": "Intentaste imprimir {name}, pero no lo instanciaste."
         }
     }
 }

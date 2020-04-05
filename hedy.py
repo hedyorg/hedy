@@ -1,4 +1,5 @@
 from lark import Lark
+from lark.exceptions import VisitError
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
 
@@ -58,7 +59,14 @@ class AllCommandsAssignments(FlattenText):
     def print(self, args):
         return args
     def command(self, args):
-        return args
+        flattened_args = []
+        for a in args:
+            if type(a) == list:
+                for x in a:
+                    flattened_args.append(x)
+            else:
+                flattened_args.append(a)
+        return flattened_args
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
         #(since then it has no var as 1st argument)
@@ -69,6 +77,8 @@ class AllCommandsAssignments(FlattenText):
     def assign_list(self, args):
         return args[0].children
     def list_access_var(self, args):
+        return args[0].children
+    def var_access(self,args):
         return args[0].children
     def list_access(self, args):
         if type(args[1]) == Tree:
@@ -306,7 +316,7 @@ class ConvertToPython_6(ConvertToPython_5):
                 return parameter + " = '" + value + "'"
         else:
             parameter = args[0]
-            values = ["'" + a + "'" for a in args[1:]]
+            values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
 
@@ -350,6 +360,37 @@ class ConvertToPython_7(ConvertToPython_6):
     def elses(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         return "\nelse:\n" + "\n".join(args)
+
+    def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing exprestions directly
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                if "'" in value:
+                    return parameter + " = " + value
+                else:
+                    return parameter + " = '" + value + "'"
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
+
+    def var_access(self, args):
+        if len(args) == 1: #accessing a var
+            return wrap_non_var_in_quotes(args[0], self.lookup)
+            # this was used to produce better error messages, but needs more work
+            # (because plain text strings are now also var_access and not textwithoutspaces
+            # since we no longer have priority rules
+            # if args[0] in self.lookup:
+            #     return args[0]
+            # else:
+            #     raise HedyException('VarUndefined', level=7, name=args[0])
+        else:
+        # dit was list_access
+            return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
+
 
 class ConvertToPython(Transformer):
 
@@ -502,10 +543,12 @@ def transpile(input_string, level):
         flattened_tree = FlattenText().transform(program_root)
         lookup_table = all_assignments(program_root)
         if level == 7:
-            python = 'import random\n'
-            result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
-
-            return python + result
+            try:
+                python = 'import random\n'
+                result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
+                return python + result
+            except VisitError as E:
+                raise E.orig_exc
     else:
         raise Exception('Levels over 7 are not implemented yet')
 
