@@ -340,92 +340,143 @@ class ConvertToPython_7(ConvertToPython_6):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
         return "if " + args[0] + ":\n" + "\n".join(args[1:])
 
-class ConvertToPython(Transformer):
+# Custom transformer that can both be used bottom-up or top-down
+class ConvertTo():
+    def __default_child_call(self, name, children):
+        return self._call_children(children)
 
-    def start(self, args):
+    def _call_children(self, children):
+        result = []
+        for x in children:
+            if type(x) == Tree:
+                try:
+                    method = getattr(self, x.data)
+                except AttributeError:
+                    result.append(self.__default_child_call(x.data, x.children))
+                else:
+                    result.append(method(x.children))
+            else:
+                result.append(x)
+        return result
+
+    def transform(self, tree):
+            return getattr(self, tree.data)(tree.children)
+
+class ConvertToPython(ConvertTo):
+    def __init__(self, indent_level = 0):
+        self.indent_level = indent_level
+
+    def _generate_indentation(self):
+        return self.indent_level * "    "
+
+    def start(self, children):
+        return "".join(self._call_children(children))
+    
+    def statement(self, children):
+        args = self._call_children(children)
+        return "".join([self._generate_indentation() + x for x in args])
+
+    def statement_block(self, children):
+        self.indent_level += 1
+        args = self._call_children(children)
+        self.indent_level -= 1
         return "".join(args)
 
-    def statement(self, args):
-        return "".join([self.indent_level * "\t" + x + ("\n" if x[-1] != '\n' else "") for x in args if x != ""])
+    def if_statement(self, children):
+        args = self._call_children(children)
+        return "if " + args[0] + ":\n" + args[1]
 
-    def if_statement(self, args):
-        return "if " + args[0] + ":\n" + "".join(args[1:])
+    def elif_statement(self, children):
+        args = self._call_children(children)
+        return "elif " + args[0] + ":\n" + args[1]
 
-    def elif_statement(self, args):
-        return "elif " + args[0] + ":\n" + "".join(args[1:])
+    def else_statement(self, children):
+        args = self._call_children(children)
+        return "else:\n" + args[0]
 
-    def else_statement(self, args):
-        return "else:\n" + "".join(args)
+    def repeat(self, children):
+        args = self._call_children(children)
+        return "for _ in range(" + args[0] + "):\n" + args[1]
 
-    def repeat(self, args):
-        return "for i in range(" +args[0] + "):\n" + "".join(args[1:])
+    def ranged_loop(self, children):
+        args = self._call_children(children)
+        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] +  "):\n" + args[3]
 
-    def ranged_loop(self, args):
-        return "for " + args[0] + " in range(" + args[1] + "," + args[2] +  "):\n" + "".join(args[3:])
+    def assignment(self, children):
+        args = self._call_children(children)
+        return args[0] + " = " + args[1] + "\n"
 
-    def assignment(self, args):
-        return args[0] + "=" + str(args[1])
+    def eq(self, children):
+        args = self._call_children(children)
+        return args[0] + " == " + args[1]
 
-    # for now. expressions to Bool are not implemented (not sure we'd need them until 13)
-    # def eq(self, args):
-    #     return str(args[0]) + "==" + str(args[1])
-    #
-    # def ne(self, args):
-    #     return str(args[0]) + "!=" + str(args[1])
-    #
-    # def le(self, args):
-    #     return str(args[0]) + "<=" + str(args[1])
-    #
-    # def ge(self, args):
-    #     return str(args[0]) + ">=" + str(args[1])
-    #
-    # def lt(self, args):
-    #     return str(args[0]) + "<" + str(args[1])
-    #
-    # def gt(self, args):
-    #     return str(args[0]) + ">" + str(args[1])
+    def ne(self, children):
+        args = self._call_children(children)
+        return args[0] + " != " + args[1]
 
-    # migrated to level 6
-    # def addition(self, args):
-    #     return str(args[0]) + "+" + str(args[1])
-    #
-    # def substraction(self, args):
-    #     return str(args[0]) + "-" + str(args[1])
-    #
-    # def multiplication(self, args):
-    #     return str(args[0]) + "*" + str(args[1])
-    #
-    # def division(self, args):
-    #     return str(args[0]) + "/" + str(args[1])
+    def le(self, children):
+        args = self._call_children(children)
+        return args[0] + " <= " + args[1]
 
-    def list(self, args):
-        return str(args)
+    def ge(self, children):
+        args = self._call_children(children)
+        return args[0] + " >= " + args[1]
 
-    def list_access(self, args):
-        return  args[0] + "[" + str(args[1]) + "]" if args[1] != "random" else "random.choice(" + str(args[0]) + ")"
+    def lt(self, children):
+        args = self._call_children(children)
+        return args[0] + " < " + args[1]
 
-    def function_call(self, args):
-        return args[0] + "(" + ", ".join(args[1:]) + ")"
+    def gt(self, children):
+        args = self._call_children(children)
+        return args[0] + " > " + args[1]
 
-    def INTEGER(self, args):
-        return int(args.value)
+    def addition(self, children):
+        args = self._call_children(children)
+        return args[0] + " + " + args[1]
 
-    def FLOAT(self, args):
-        return float(args.value)
+    def substraction(self, children):
+        args = self._call_children(children)
+        return args[0] + " - " + args[1]
 
-    def NAME(self, args):
-        return str(args.value)
+    def multiplication(self, children):
+        args = self._call_children(children)
+        return args[0] + " * " + args[1]
 
-    def STRING(self, args):
-        return args.value
+    def division(self, children):
+        args = self._call_children(children)
+        return args[0] + " / " + args[1]
 
-    def INDENT(self, args):
-        self.indent_level += 1
-        return ""
+    def modulo(self, children):
+        args = self._call_children(children)
+        return args[0] + " % " + args[1]
 
-    def DEDENT(self, args):
-        self.indent_level -= 1
-        return ""
+    def unary_plus(self, children):
+        args = self._call_children(children)
+        return args[0]
+    
+    def unary_minus(self, children):
+        args = self._call_children(children)
+        return "-" + args[0]
+
+    def parenthesis(self, children):
+        args = self._call_children(children)
+        return "(" + args[0] + ")"
+
+    def list_access(self, children):
+        args = self._call_children(children)
+        return args[0] + "[" + args[1] + "]" if args[1] != "random" else "random.choice(" + args[0] + ")"
+
+    def list(self, children):
+        args = self._call_children(children)
+        return "[" + ", ".join(args) + "]"
+
+    def print(self, children):
+        args = self._call_children(children)
+        return "print("  + ", ".join(args) + ")\n"
+
+    def ask(self, children):
+        args = self._call_children(children)
+        return "input("  + " + ".join(args) + ")"
 
 class BasicIndenter(Indenter):
     NL_type = "_EOL"
@@ -433,6 +484,14 @@ class BasicIndenter(Indenter):
     CLOSE_PAREN_types = []
     INDENT_type = "INDENT"
     DEDENT_type = "DEDENT"
+    tab_len = 4
+
+class BasicIndenter2(Indenter):
+    NL_type = "_EOL"
+    OPEN_PAREN_types = []
+    CLOSE_PAREN_types = []
+    INDENT_type = "_INDENT"
+    DEDENT_type = "_DEDENT"
     tab_len = 4
 
 def create_grammar(level):
@@ -484,19 +543,22 @@ def transpile(input_string, level):
             raise HedyException('Invalid', command=invalid_command, level=level)
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
-    elif level >= 7:
+    elif level == 7:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
         flattened_tree = FlattenText().transform(program_root)
         lookup_table = all_assignments(program_root)
-        if level == 7:
-            python = 'import random\n'
-            result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
-
-            return python + result
+        python = 'import random\n'
+        result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
+        return python + result
+    elif level >= 8 and level <= 13:
+        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True) 
+        python = 'import random\n'
+        python += ConvertToPython().transform(parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
+        return python
     else:
-        raise Exception('Levels over 7 are not implemented yet')
+        raise Exception('Levels over 13 are not implemented yet')
 
 
 def execute(input_string):
