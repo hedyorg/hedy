@@ -467,7 +467,981 @@ for i in range(5):
     print('me wants a cookie!')""")
         # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
 
+class TestsLevel8(unittest.TestCase):
+    def test_list(self):
+        result = hedy.transpile("""
+a is 1, 2
+a is a at random
+""", 8)
+        self.assertEqual(result, """import random
+a = [1, 2]
+a = random.choice(a)
+""")
 
+    def test_valid_assignments(self):
+        result = hedy.transpile("""
+a is 8
+a is 88
+b is ""
+b is 'string'
+b is "string"
+c is 1.2
+c is 10e10
+list is 1, 2, 3, 4
+d is list at a
+d is list at random
+e is ask
+e is ask "what " a " je lievelingskleur"
+"""
+, 8)
+        self.assertEqual(result, """import random
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = [1, 2, 3, 4]
+d = list[a]
+d = random.choice(list)
+e = input()
+e = input("what " + a + " je lievelingskleur")
+""")
+
+    def test_calculations(self):
+        result = hedy.transpile("""
+a is 2 = 2
+a is 2 < 2
+a is 2 > 2
+a is 2 <= 2
+a is 2 >= 2
+a is 2 + 2
+a is 2 - 2
+a is 2 * 2
+a is 2 / 2
+a is 2 % 2
+a is 2 + 2 * 8
+a is (2 + 2) * 8
+a is 2 - -2
+a is a - -a
+a is a at a + 2 * 3
+""", 8)
+        self.assertEqual(result, """import random
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""")
+
+    # TODO: test echo
+    def test_builtin_functions(self):
+        result = hedy.transpile("""
+print
+print "string" 1 a -1 2.8
+a is ask
+a is ask "string" 1 a -1 2.8
+
+""", 8)
+        self.assertEqual(result, """import random
+print()
+print("string", 1, a, -1, 2.8)
+a = input()
+a = input("string" + 1 + a + -1 + 2.8)
+""")
+
+    def test_repeat(self):
+        result = hedy.transpile("""
+repeat 5 * 2 times
+    a is a + 2
+    b is b + 2
+""", 8)
+        self.assertEqual(result, """import random
+for _ in range(5 * 2):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range 2 to 4
+    a is a + 2
+    b is b + 2
+""", 8)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+if a = 1
+    x is 2
+elif a = 2
+    x is 22
+else
+    x is 222
+""", 8)
+        self.assertEqual(result, """import random
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""")
+
+    def test_nesting(self):
+        result = hedy.transpile("""
+repeat 2 times
+    for a in range 1 to 2
+        if a = 1
+            if a = 2
+                x is 2
+            else
+                x is 22
+        else
+            x is 222
+
+""", 8)
+        self.assertEqual(result, """import random
+for _ in range(2):
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""")
+
+class TestsLevel9(unittest.TestCase):
+    def test_list(self):
+        result = hedy.transpile("""
+a is 1, 2
+a is a at random
+""", 9)
+        self.assertEqual(result, """import random
+a = [1, 2]
+a = random.choice(a)
+""")
+
+    def test_valid_assignments(self):
+        result = hedy.transpile("""
+a is 8
+a is 88
+b is ""
+b is 'string'
+b is "string"
+c is 1.2
+c is 10e10
+list is 1, 2, 3, 4
+d is list at a
+d is list at random
+e is ask
+e is ask "what " a " je lievelingskleur"
+"""
+, 9)
+        self.assertEqual(result, """import random
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = [1, 2, 3, 4]
+d = list[a]
+d = random.choice(list)
+e = input()
+e = input("what " + a + " je lievelingskleur")
+""")
+
+    def test_calculations(self):
+        result = hedy.transpile("""
+a is 2 = 2
+a is 2 < 2
+a is 2 > 2
+a is 2 <= 2
+a is 2 >= 2
+a is 2 + 2
+a is 2 - 2
+a is 2 * 2
+a is 2 / 2
+a is 2 % 2
+a is 2 + 2 * 8
+a is (2 + 2) * 8
+a is 2 - -2
+a is a - -a
+a is a at a + 2 * 3
+""", 9)
+        self.assertEqual(result, """import random
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""")
+
+    # TODO: test echo
+    def test_builtin_functions(self):
+        result = hedy.transpile("""
+print
+print "string" 1 a -1 2.8
+a is ask
+a is ask "string" 1 a -1 2.8
+""", 9)
+        self.assertEqual(result, """import random
+print()
+print("string", 1, a, -1, 2.8)
+a = input()
+a = input("string" + 1 + a + -1 + 2.8)
+""")
+
+    def test_repeat(self):
+        result = hedy.transpile("""
+repeat 5 * 2 times:
+    a is a + 2
+    b is b + 2
+""", 9)
+        self.assertEqual(result, """import random
+for _ in range(5 * 2):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range 2 to 4:
+    a is a + 2
+    b is b + 2
+""", 9)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+if a = 1:
+    x is 2
+elif a = 2:
+    x is 22
+else:
+    x is 222
+""", 9)
+        self.assertEqual(result, """import random
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""")
+
+    def test_nesting(self):
+        result = hedy.transpile("""
+repeat 2 times:
+    for a in range 1 to 2:
+        if a = 1:
+            if a = 2:
+                x is 2
+            else:
+                x is 22
+        else:
+            x is 222
+
+""", 9)
+        self.assertEqual(result, """import random
+for _ in range(2):
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""") 
+
+class TestsLevel10(unittest.TestCase):
+    def test_list(self):
+        result = hedy.transpile("""
+a is 1, 2
+a is a at random
+""", 10)
+        self.assertEqual(result, """import random
+a = [1, 2]
+a = random.choice(a)
+""")
+
+    def test_valid_assignments(self):
+        result = hedy.transpile("""
+a is 8
+a is 88
+b is ""
+b is 'string'
+b is "string"
+c is 1.2
+c is 10e10
+list is 1, 2, 3, 4
+d is list at a
+d is list at random
+e is ask
+e is ask "what " a " je lievelingskleur"
+"""
+, 10)
+        self.assertEqual(result, """import random
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = [1, 2, 3, 4]
+d = list[a]
+d = random.choice(list)
+e = input()
+e = input("what " + a + " je lievelingskleur")
+""")
+
+    def test_calculations(self):
+        result = hedy.transpile("""
+a is 2 = 2
+a is 2 < 2
+a is 2 > 2
+a is 2 <= 2
+a is 2 >= 2
+a is 2 + 2
+a is 2 - 2
+a is 2 * 2
+a is 2 / 2
+a is 2 % 2
+a is 2 + 2 * 8
+a is (2 + 2) * 8
+a is 2 - -2
+a is a - -a
+a is a at a + 2 * 3
+""", 10)
+        self.assertEqual(result, """import random
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""")
+
+    # TODO: test echo
+    def test_builtin_functions(self):
+        result = hedy.transpile("""
+print
+print "string" 1 a -1 2.8
+a is ask
+a is ask "string" 1 a -1 2.8
+
+""", 10)
+        self.assertEqual(result, """import random
+print()
+print("string", 1, a, -1, 2.8)
+a = input()
+a = input("string" + 1 + a + -1 + 2.8)
+""")
+
+    def test_repeat(self):
+        result = hedy.transpile("""
+repeat 5 * 2 times:
+    a is a + 2
+    b is b + 2
+""", 10)
+        self.assertEqual(result, """import random
+for _ in range(5 * 2):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range 2 to 4:
+    a is a + 2
+    b is b + 2
+""", 10)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+if a = 1:
+    x is 2
+elif a = 2:
+    x is 22
+else:
+    x is 222
+""", 10)
+        self.assertEqual(result, """import random
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""")
+
+    def test_nesting(self):
+        result = hedy.transpile("""
+repeat 2 times:
+    for a in range 1 to 2:
+        if a = 1:
+            if a = 2:
+                x is 2
+            else:
+                x is 22
+        else:
+            x is 222
+
+""", 10)
+        self.assertEqual(result, """import random
+for _ in range(2):
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""")
+
+class TestsLevel11(unittest.TestCase):
+    def test_list(self):
+        result = hedy.transpile("""
+a is 1, 2
+a is a at random
+""", 11)
+        self.assertEqual(result, """import random
+a = [1, 2]
+a = random.choice(a)
+""")
+
+    def test_valid_assignments(self):
+        result = hedy.transpile("""
+a is 8
+a is 88
+b is ""
+b is 'string'
+b is "string"
+c is 1.2
+c is 10e10
+list is 1, 2, 3, 4
+d is list at a
+d is list at random
+e is ask()
+e is ask("what ", a, " je lievelingskleur")
+"""
+, 11)
+        self.assertEqual(result, """import random
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = [1, 2, 3, 4]
+d = list[a]
+d = random.choice(list)
+e = input()
+e = input("what " + a + " je lievelingskleur")
+""")
+
+    def test_calculations(self):
+        result = hedy.transpile("""
+a is 2 = 2
+a is 2 < 2
+a is 2 > 2
+a is 2 <= 2
+a is 2 >= 2
+a is 2 + 2
+a is 2 - 2
+a is 2 * 2
+a is 2 / 2
+a is 2 % 2
+a is 2 + 2 * 8
+a is (2 + 2) * 8
+a is 2 - -2
+a is a - -a
+a is a at a + 2 * 3
+""", 11)
+        self.assertEqual(result, """import random
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""")
+
+    # TODO: test echo
+    def test_builtin_functions(self):
+        result = hedy.transpile("""
+print()
+print("string", 1, a, -1, 2.8)
+a is ask()
+a is ask("string", 1, a, -1, 2.8)
+
+""", 11)
+        self.assertEqual(result, """import random
+print()
+print("string", 1, a, -1, 2.8)
+a = input()
+a = input("string" + 1 + a + -1 + 2.8)
+""")
+
+    def test_repeat(self):
+        result = hedy.transpile("""
+repeat 5 * 2 times:
+    a is a + 2
+    b is b + 2
+""", 11)
+        self.assertEqual(result, """import random
+for _ in range(5 * 2):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range(2, 4):
+    a is a + 2
+    b is b + 2
+""", 11)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+if a = 1:
+    x is 2
+elif a = 2:
+    x is 22
+else:
+    x is 222
+""", 11)
+        self.assertEqual(result, """import random
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""")
+
+    def test_nesting(self):
+        result = hedy.transpile("""
+repeat 2 times:
+    for a in range(1, 2):
+        if a = 1:
+            if a = 2:
+                x is 2
+            else:
+                x is 22
+        else:
+            x is 222
+
+""", 11)
+        self.assertEqual(result, """import random
+for _ in range(2):
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""")
+
+class TestsLevel12(unittest.TestCase):
+    def test_list(self):
+        result = hedy.transpile("""
+a is []
+a is [1]
+a is [1, 2]
+a is a[random]
+""", 12)
+        self.assertEqual(result, """import random
+a = []
+a = [1]
+a = [1, 2]
+a = random.choice(a)
+""")
+
+    def test_valid_assignments(self):
+        result = hedy.transpile("""
+a is 8
+a is 88
+b is ""
+b is 'string'
+b is "string"
+c is 1.2
+c is 10e10
+list is []
+list is [1, 2, 3, 4]
+d is list[a]
+d is list[random]
+e is ask()
+e is ask("what ", a, " je lievelingskleur")
+"""
+, 12)
+        self.assertEqual(result, """import random
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = []
+list = [1, 2, 3, 4]
+d = list[a]
+d = random.choice(list)
+e = input()
+e = input("what " + a + " je lievelingskleur")
+""")
+
+    def test_calculations(self):
+        result = hedy.transpile("""
+a is 2 = 2
+a is 2 < 2
+a is 2 > 2
+a is 2 <= 2
+a is 2 >= 2
+a is 2 + 2
+a is 2 - 2
+a is 2 * 2
+a is 2 / 2
+a is 2 % 2
+a is 2 + 2 * 8
+a is (2 + 2) * 8
+a is 2 - -2
+a is a - -a
+a is a[a] + 2 * 3
+""", 12)
+        self.assertEqual(result, """import random
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""")
+
+    # TODO: test echo
+    def test_builtin_functions(self):
+        result = hedy.transpile("""
+print()
+print("string", 1, a, -1, 2.8)
+a is ask()
+a is ask("string", 1, a, -1, 2.8)
+
+""", 12)
+        self.assertEqual(result, """import random
+print()
+print("string", 1, a, -1, 2.8)
+a = input()
+a = input("string" + 1 + a + -1 + 2.8)
+""")
+
+    def test_repeat(self):
+        result = hedy.transpile("""
+repeat 5 * 2 times:
+    a is a + 2
+    b is b + 2
+""", 12)
+        self.assertEqual(result, """import random
+for _ in range(5 * 2):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range(2, 4):
+    a is a + 2
+    b is b + 2
+""", 12)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+if a = 1:
+    x is 2
+elif a = 2:
+    x is 22
+else:
+    x is 222
+""", 12)
+        self.assertEqual(result, """import random
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""")
+
+    def test_nesting(self):
+        result = hedy.transpile("""
+repeat 2 times:
+    for a in range(1, 2):
+        if a = 1:
+            if a = 2:
+                x is 2
+            else:
+                x is 22
+        else:
+            x is 222
+
+""", 12)
+        self.assertEqual(result, """import random
+for _ in range(2):
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""")
+
+class TestsLevel13(unittest.TestCase):
+    def test_list(self):
+        result = hedy.transpile("""
+a = []
+a = [1]
+a = [1, 2]
+a = a[random]
+""", 13)
+        self.assertEqual(result, """import random
+a = []
+a = [1]
+a = [1, 2]
+a = random.choice(a)
+""")
+
+    def test_valid_assignments(self):
+        result = hedy.transpile("""
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = []
+list = [1, 2, 3, 4]
+d = list[a]
+d = list[random]
+e = ask()
+e = ask("what ", a, " je lievelingskleur")
+"""
+, 13)
+        self.assertEqual(result, """import random
+a = 8
+a = 88
+b = ""
+b = 'string'
+b = "string"
+c = 1.2
+c = 10e10
+list = []
+list = [1, 2, 3, 4]
+d = list[a]
+d = random.choice(list)
+e = input()
+e = input("what " + a + " je lievelingskleur")
+""")
+
+    def test_calculations(self):
+        result = hedy.transpile("""
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""", 13)
+        self.assertEqual(result, """import random
+a = 2 == 2
+a = 2 < 2
+a = 2 > 2
+a = 2 <= 2
+a = 2 >= 2
+a = 2 + 2
+a = 2 - 2
+a = 2 * 2
+a = 2 / 2
+a = 2 % 2
+a = 2 + 2 * 8
+a = (2 + 2) * 8
+a = 2 - -2
+a = a - -a
+a = a[a] + 2 * 3
+""")
+
+    # TODO: test echo
+    def test_builtin_functions(self):
+        result = hedy.transpile("""
+print()
+print("string", 1, a, -1, 2.8)
+a = ask()
+a = ask("string", 1, a, -1, 2.8)
+
+""", 13)
+        self.assertEqual(result, """import random
+print()
+print("string", 1, a, -1, 2.8)
+a = input()
+a = input("string" + 1 + a + -1 + 2.8)
+""")
+
+    def test_repeat(self):
+        result = hedy.transpile("""
+repeat 5 * 2 times:
+    a = a + 2
+    b = b + 2
+""", 13)
+        self.assertEqual(result, """import random
+for _ in range(5 * 2):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""", 13)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+    a = a + 2
+    b = b + 2
+""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""", 13)
+        self.assertEqual(result, """import random
+if a == 1:
+    x = 2
+elif a == 2:
+    x = 22
+else:
+    x = 222
+""")
+
+    def test_nesting(self):
+        result = hedy.transpile("""
+repeat 2 times:
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""", 13)
+        self.assertEqual(result, """import random
+for _ in range(2):
+    for a in range(1, 2):
+        if a == 1:
+            if a == 2:
+                x = 2
+            else:
+                x = 22
+        else:
+            x = 222
+""")
 
 
 
