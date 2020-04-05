@@ -116,8 +116,7 @@ def report_error():
 # for now we do not need a post but I am leaving it in for a potential future
 
 # routing to index.html
-@app.route('/index.html', methods=['GET'])
-@app.route('/', methods=['GET'])
+@app.route('/hedy', methods=['GET'])
 def index():
     session_id()  # Run this for the side effect of generating a session ID
     level = requested_level()
@@ -158,10 +157,10 @@ def index():
     arguments_dict['latest'] = version()
     arguments_dict['selected_page'] = 'code'
 
-    return render_template("index.html", **arguments_dict)
+    return render_template("code-page.html", **arguments_dict)
 
 # routing to docs.html
-@app.route('/docs', methods=['GET'])
+@app.route('/hedy/docs', methods=['GET'])
 def docs():
     level = request.args.get("level", 1)
     lang = requested_lang()
@@ -179,10 +178,10 @@ def docs():
 
     arguments_dict['mkd'] = load_docs()
 
-    return render_template("docs_per_level.html", **arguments_dict)
+    return render_template("per-level-text.html", **arguments_dict)
 
 # routing to video.html
-@app.route('/video', methods=['GET'])
+@app.route('/hedy/video', methods=['GET'])
 def video():
     level = request.args.get("level", 1)
     lang = requested_lang()
@@ -200,7 +199,7 @@ def video():
 
     arguments_dict['mkd'] = load_video()
 
-    return render_template("video_per_level.html", **arguments_dict)
+    return render_template("per-level-text.html", **arguments_dict)
 
 
 @app.route('/error_messages.js', methods=['GET'])
@@ -221,11 +220,12 @@ def internal_error(exception):
     print(traceback.format_exc())
     return "<h1>500 Internal Server Error</h1>"
 
-@app.route('/landing')
+@app.route('/index.html')
+@app.route('/')
 def default_landing_page():
     return landing_page('start')
 
-@app.route('/landing/<page>')
+@app.route('/<page>')
 def landing_page(page):
     lang = requested_lang()
     effective_lang = lang
@@ -247,7 +247,7 @@ def landing_page(page):
 
     front_matter, markdown = split_markdown_front_matter(contents)
 
-    return render_template('text-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
+    return render_template('landing-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
 
 def session_id():
     """Returns or sets the current session ID."""

@@ -6,7 +6,7 @@ page_title: Welkom bij Hedy!
 <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Een graduele programeertaal</h2>
 
 <div style="position: absolute; left: 75%; top: 40%;">
-<a class="green-btn text-white px-8 py-4" href="/">Begin met Hedy</a>
+<a class="green-btn text-white px-8 py-4" href="/hedy">Begin met Hedy</a>
 </div>
 
 </div>

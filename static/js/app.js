@@ -22,7 +22,7 @@
 })();
 
 function goto(level, lang) {
-    window.location.href = buildUrl('/', {
+    window.location.href = buildUrl('/hedy', {
       level: level,
       lang: lang
     });
