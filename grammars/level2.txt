@@ -1,5 +1,5 @@
 start: program
-program: command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 command: "print " ( list_access | (text punctuation)| text) (" " ( list_access | (text punctuation)| text) )*  -> print
          | text " is ask " textwithspaces punctuation* -> ask
          | text " is " text ((", "|",") text)+  -> assign_list
