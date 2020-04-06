@@ -269,17 +269,11 @@ class ConvertToPython_4(ConvertToPython_3):
 else:
 {indent(args[2])}"""
     def condition(self, args):
-        if len(args) == 1:
-            return args[0]
-        else:
-            return f"{args[0]} and {args[1]}"
+        return ' and '.join(args)
     def equality_check(self, args):
         arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
         arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
-        if len(args) == 2:
-            return f"{arg0} == {arg1}" #no and statements
-        else:
-            return f"{arg0} == {arg1} and {args[2]}"
+        return f"{arg0} == {arg1}" #no and statements
     def in_list_check(self, args):
         arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
         arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
