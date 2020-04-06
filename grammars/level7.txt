@@ -7,12 +7,13 @@ command: ifs elses?
          | print _EOL+
          | ask _EOL+
 
-ifs: "if " equality_check _EOL indent command+ dedent
+ifs: "if " condition _EOL indent command+ dedent
 elses: "else" _EOL indent command+ dedent
-equality_check: text " is " text (" and " equality_check)* -> equality_check
+condition: (equality_check|in_list_check) (" and " condition)*
 repeat: "repeat " number " times" _EOL indent command+ dedent
 assign : var " is " expression ((", "|",") expression)*
-
+equality_check: textwithoutspaces " is " textwithoutspaces
+in_list_check: textwithoutspaces " in " var
 
 print: "print " (quoted_text | expression) (" " (quoted_text | expression))*
 ask: var " is ask " textwithspaces -> ask

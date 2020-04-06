@@ -333,6 +333,18 @@ if computerkeuze == jouwkeuze:
         self.assertEqual(expected_result, result)
         self.assertEqual(run_code(result),'gelijkspel!')
 
+    def test_if_in_array(self):
+        actual = hedy.transpile("items is red, green\nselected is red\nif selected in items print 'found!'", 4)
+
+        expected = """import random
+items = ['red', 'green']
+selected = 'red'
+if selected in items:
+  print('found!')"""
+
+        self.assertEqual(expected, actual)
+        self.assertEqual('found!', run_code(actual))
+
 class TestsLevel5(unittest.TestCase):
     #print should still work
     def test_print_with_var(self):

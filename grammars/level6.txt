@@ -22,10 +22,12 @@ assign : var " is " sum
 invalid: /^(?!(repeat|print|if|and )).+/ //everything that is not the start of a regular command
 
 // new commands for level 4
-ifelse : "if " equality_check " " command " else " command
-ifs: "if " equality_check " " command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+ifelse : "if " condition " " command " else " command
+ifs: "if " condition " " command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+condition: (equality_check|in_list_check) (" and " condition)*
 list_access_var : var " is " var " at " (index | random)
-equality_check: textwithoutspaces " is " textwithoutspaces (" and " equality_check)* -> equality_check
+equality_check: textwithoutspaces " is " textwithoutspaces
+in_list_check: textwithoutspaces " in " var
 
 //new for level 5
 repeat: "repeat " NUMBER " times " command
