@@ -136,7 +136,11 @@ class IsValid(Transformer):
         return self.pass_arguments(args)
     def ifelse(self, args):
         return self.pass_arguments(args)
+    def condition(self, args):
+        return self.pass_arguments(args)
     def equality_check(self, args):
+        return self.pass_arguments(args)
+    def in_list_check(self, args):
         return self.pass_arguments(args)
     #level 5 command
     def repeat(self, args):
@@ -259,18 +263,21 @@ class ConvertToPython_4(ConvertToPython_3):
     def ifs(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}"""
-    def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
-        if len(args) == 2:
-            return f"{arg0} == {arg1}" #no and statements
-        else:
-            return f"{arg0} == {arg1} and {args[2]}"
     def ifelse(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}
 else:
 {indent(args[2])}"""
+    def condition(self, args):
+        return ' and '.join(args)
+    def equality_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        return f"{arg0} == {arg1}" #no and statements
+    def in_list_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        return f"{arg0} in {arg1}"
 
 class ConvertToPython_5(ConvertToPython_4):
     def number(self, args):
