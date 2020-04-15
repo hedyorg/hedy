@@ -5,6 +5,35 @@ from lark.indenter import Indenter
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
+def closest_command(command, commands):
+    min = 1000
+    min_command = ''
+    for c in commands:
+        min_c = minimum_distance(c, command)
+        if min_c < min:
+            min = min_c
+            min_command = c
+    return min_command
+
+def minimum_distance(s1, s2):
+    if len(s1) > len(s2):
+        s1, s2 = s2, s1
+    distances = range(len(s1) + 1)
+    for index2, char2 in enumerate(s2):
+        newDistances = [index2 + 1]
+        for index1, char1 in enumerate(s1):
+            if char1 == char2:
+                newDistances.append(distances[index1])
+            else:
+                newDistances.append(1 + min((distances[index1],
+                                             distances[index1 + 1],
+                                             newDistances[-1])))
+        distances = newDistances
+    return distances[-1]
+
+
+
+
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
@@ -539,8 +568,9 @@ def transpile(input_string, level):
                 python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(program_root)
                 return python
         else:
-            invalid_command = is_valid[1]
-            raise HedyException('Invalid', command=invalid_command, level=level)
+            invalid_command = is_valid[1][0]
+            closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+            raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
     elif level >= 7:
