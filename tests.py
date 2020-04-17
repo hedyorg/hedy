@@ -139,6 +139,12 @@ class TestsLevel2(unittest.TestCase):
         result = hedy.transpile("ask ask Cuál es tu color favorito?", 2)
         self.assertEqual(result, "answer = input('ask Cuál es tu color favorito?')")
 
+    def test_transpile_echo_at_level_2(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
+        self.assertEqual(str(context.exception), 'Wrong Level')
+
+
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 2)

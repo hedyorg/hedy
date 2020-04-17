@@ -1,5 +1,5 @@
 from lark import Lark
-from lark.exceptions import VisitError
+from lark.exceptions import VisitError, LarkError
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
 
@@ -621,6 +621,21 @@ def create_grammar(level):
         return file.read()
 
 def transpile(input_string, level):
+    try:
+        return transpile_inner(input_string, level)
+    except Exception as E:
+        #try 1 level lower
+        if level > 1:
+            try:
+                new_level = level-1
+                result = transpile_inner(input_string, level-1)
+                raise HedyException('Wrong Level', correct_code = result, original_level=level, working_level=new_level)
+            except LarkError as e:
+                raise HedyException('Parse', level=level, parse_error=e.args[0])
+        else:
+            raise E
+
+def transpile_inner(input_string, level):
     if level <= 6:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
@@ -631,7 +646,7 @@ def transpile(input_string, level):
             lookup_table = all_assignments(program_root)
             flattened_tree = FlattenText().transform(program_root)
         except Exception as e:
-            # TODO: here we could translate Lark error messages into more sensible texts!
+            # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
             raise HedyException('Parse', level=level, parse_error=e.args[0])
 
         is_valid = IsValid().transform(program_root)
