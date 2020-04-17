@@ -211,7 +211,7 @@ class IsValid(Transformer):
 class IsComplete(Transformer):
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
-    # tree is transformed to a node of True or [False, args, line_number]
+    # tree is transformed to a node of [True] or [False, args, line_number]
     def pass_arguments(self, args):
         bool_arguments = [x[0] for x in args]
         arguments_of_false_nodes = [x[1] for x in args if not x[0]]
@@ -221,7 +221,7 @@ class IsComplete(Transformer):
     def program(self, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
-            return True #all complete
+            return [True] #all complete
         else:
             command_num = 1
             for a in args:
@@ -237,7 +237,46 @@ class IsComplete(Transformer):
     def print(self, args):
         return args != [], 'print'
     def echo(self, args):
-        return args != [], 'echo'
+        #echo may miss an argument
+        return True, 'echo'
+
+    def assign(self, args):
+        return self.pass_arguments(args)
+    def assign_list(self, args):
+        return self.pass_arguments(args)
+    def assign_sum(self, args):
+        return self.pass_arguments(args)
+    def list_access(self, args):
+        return self.pass_arguments(args)
+
+    # level 4 commands
+    def list_access_var(self, args):
+        return self.pass_arguments(args)
+    def ifs(self, args):
+        return self.pass_arguments(args)
+    def ifelse(self, args):
+        return self.pass_arguments(args)
+    def condition(self, args):
+        return self.pass_arguments(args)
+    def equality_check(self, args):
+        return self.pass_arguments(args)
+    def in_list_check(self, args):
+        return self.pass_arguments(args)
+
+    # level 5 command
+    def repeat(self, args):
+        return self.pass_arguments(args)
+
+    # level 6
+    def addition(self, args):
+        return self.pass_arguments(args)
+    def substraction(self, args):
+        return self.pass_arguments(args)
+    def multiplication(self, args):
+        return self.pass_arguments(args)
+    def division(self, args):
+        return self.pass_arguments(args)
+
 
     #leafs with tokens need to be all true
     def var(self, args):
@@ -276,8 +315,8 @@ class ConvertToPython_1(Transformer):
     def print(self, args):
         return "print('" + args[0] + "')"
     def echo(self, args):
-        all_parameters = ["'" + a + "'" for a in args]
-        return "print(" + '+'.join(all_parameters) + " + answer)"
+        all_parameters = ["'" + a + "'+" for a in args]
+        return "print(" + ''.join(all_parameters) + "answer)"
     def ask(self, args):
         all_parameters = ["'" + a + "'" for a in args]
         return 'answer = input(' + '+'.join(all_parameters) + ")"

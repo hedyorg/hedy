@@ -65,6 +65,8 @@ class TestsLevel1(unittest.TestCase):
             result = hedy.transpile("print", 1)
         self.assertEqual(str(context.exception), 'Incomplete')
 
+
+
     def test_transpile_incomplete_with_multiple_lines(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("print hallo allemaal\nprint", 1)
@@ -74,7 +76,14 @@ class TestsLevel1(unittest.TestCase):
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 1)
+        self.assertEqual(str(context.exception), 'Invalid')
         self.assertEqual(str(context.exception.arguments), "{'invalid_command': 'abc', 'level': 1, 'guessed_command': 'ask'}")
+
+    def test_transpile_incomplete_not_a_keyword(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("groen", 1)
+        self.assertEqual(str(context.exception), 'Invalid')
+
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
@@ -107,11 +116,16 @@ class TestsLevel1(unittest.TestCase):
 ask Wat is je lievelingskleur
 echo je lievelingskleur is"""
         result = hedy.transpile(input, 1)
-        self.assertEqual(result, "print('Hallo')\nanswer = input('Wat is je lievelingskleur')\nprint('je lievelingskleur is' + answer)")
+        self.assertEqual(result, "print('Hallo')\nanswer = input('Wat is je lievelingskleur')\nprint('je lievelingskleur is'+answer)")
 
     def test_transpile_echo(self):
         result = hedy.transpile("echo Jouw lievelingskleur is dus...", 1)
-        self.assertEqual(result, "print('Jouw lievelingskleur is dus...' + answer)")
+        self.assertEqual(result, "print('Jouw lievelingskleur is dus...'+answer)")
+
+    def test_transpile_echo_without_argument(self):
+        result = hedy.transpile("echo", 1)
+        self.assertEqual(result, "print(answer)")
+
 
 class TestsLevel2(unittest.TestCase):
 
