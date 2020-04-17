@@ -60,6 +60,17 @@ class TestsLevel1(unittest.TestCase):
             result = hedy.transpile("abc felienne 123", 1)
         self.assertEqual(str(context.exception), 'Invalid')
 
+    def test_transpile_incomplete(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("print", 1)
+        self.assertEqual(str(context.exception), 'Incomplete')
+
+    def test_transpile_incomplete_with_multiple_lines(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("print hallo allemaal\nprint", 1)
+        self.assertEqual(str(context.exception), 'Incomplete')
+
+
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 1)
@@ -76,7 +87,7 @@ class TestsLevel1(unittest.TestCase):
 
     def test_lines_may_end_in_spaces(self):
         result = hedy.transpile("print Hallo welkom bij Hedy! ", 1)
-        self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
+        self.assertEqual(result, "print('Hallo welkom bij Hedy! ')")
         self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
 
     def test_transpile_empty(self):

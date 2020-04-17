@@ -208,6 +208,60 @@ class IsValid(Transformer):
         return False, args[0][1]
 
 
+class IsComplete(Transformer):
+    # print, ask an echo can miss arguments and then are not complete
+    # used to generate more informative error messages
+    # tree is transformed to a node of True or [False, args, line_number]
+    def pass_arguments(self, args):
+        bool_arguments = [x[0] for x in args]
+        arguments_of_false_nodes = [x[1] for x in args if not x[0]]
+        return all(bool_arguments), arguments_of_false_nodes
+
+    #would be lovely if there was some sort of default rule! Not sure Lark supports that
+    def program(self, args):
+        bool_arguments = [x[0] for x in args]
+        if all(bool_arguments):
+            return True #all complete
+        else:
+            command_num = 1
+            for a in args:
+                if not a[0]:
+                    return False, a[1], command_num
+                command_num += 1
+
+
+    def command(self, args):
+        return self.pass_arguments(args)
+    def ask(self, args):
+        return args != [], 'ask'
+    def print(self, args):
+        return args != [], 'print'
+    def echo(self, args):
+        return args != [], 'echo'
+
+    #leafs with tokens need to be all true
+    def var(self, args):
+        return all(args), ''.join([c for c in args])
+    def text(self, args):
+        return all(args), ''.join([c for c in args])
+    def addition(self, args):
+        return all(args), ''.join([c for c in args])
+
+    #leafs are treated differently, they are True + their arguments flattened
+    def random(self, args):
+        return True, 'random'
+    def index(self, args):
+        return True, ''.join([str(c) for c in args])
+    def punctuation(self, args):
+        return True, ''.join([c for c in args])
+    def number(self, args):
+        return True, ''.join([c for c in args])
+    def invalid(self, args):
+        # return the first argument to place in the error message
+        # TODO: this will not work for misspelling 'at', needs to be improved!
+        return False, args[0][1]
+
+
 class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
@@ -542,35 +596,42 @@ def transpile(input_string, level):
             raise HedyException('Parse', level=level, parse_error=e.args[0])
 
         is_valid = IsValid().transform(program_root)
-
-        if is_valid[0]:
-            if level == 1:
-                python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
-                return python
-            elif level == 2:
-                python = 'import random\n'
-                python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
-                return python
-            elif level == 3:
-                python = 'import random\n'
-                python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
-                return python
-            elif level == 4:
-                python = 'import random\n'
-                python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(program_root)
-                return python
-            elif level == 5:
-                python = 'import random\n'
-                python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(program_root)
-                return python
-            elif level == 6:
-                python = 'import random\n'
-                python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(program_root)
-                return python
-        else:
+        if not is_valid[0]:
             invalid_command = is_valid[1][0]
             closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
             raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
+
+        is_complete = IsComplete().transform(program_root)
+        if not is_complete[0]:
+            incomplete_command = is_complete[1]
+            line = is_complete[2]
+            raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number = line)
+
+
+
+        if level == 1:
+            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
+            return python
+        elif level == 2:
+            python = 'import random\n'
+            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
+            return python
+        elif level == 3:
+            python = 'import random\n'
+            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+            return python
+        elif level == 4:
+            python = 'import random\n'
+            python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(program_root)
+            return python
+        elif level == 5:
+            python = 'import random\n'
+            python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(program_root)
+            return python
+        elif level == 6:
+            python = 'import random\n'
+            python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(program_root)
+            return python
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
     elif level >= 7:

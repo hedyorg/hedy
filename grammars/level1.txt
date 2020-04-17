@@ -1,17 +1,15 @@
 start: program
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: "print " text -> print
-               | "ask " text -> ask
-               | "echo " text -> echo
-               |  textwithoutspaces " " text -> invalid
+command: "print" (" " text)? -> print
+         | "ask" (" " text)? -> ask
+         | "echo" (" " text)? -> echo
+         |  textwithoutspaces " " text -> invalid
 
 _EOL: "\r"?"\n"
 
-PUNCTUATION : "!" | "?" | "."  //use uppercase to indicate terminals *will* appear in the tree, lowercase will not!
-text: (LETTER | DIGIT | PUNCTUATION | WS_INLINE | ACCENTED_LETTER)+
-textwithoutspaces: (LETTER | DIGIT)+ -> text
+text: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+textwithoutspaces: /([^\n, *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 
-ACCENTED_LETTER: "á" | "é" | "ó"
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library
