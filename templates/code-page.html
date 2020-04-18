@@ -7,18 +7,17 @@
 
           {% for command in commands %}
           <!-- """+commando[0]+""" demo -->
-          <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between flex my-2 shadow-md p-3 pl-5">
-            <div class="flex-grow">
-              <div class="font-thin text-xl">
-                {{ command.explanation }}
-              </div>
-              {{ command.example }}</tt>
+          <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
+            <div class="font-medium text-lg">
+              {{ command.explanation|markdown }}
             </div>
+            <div class="flex">
+              <div class="font-thin text-sm flex-grow">
+                {{ command.example|markdown }}
+              </div>
             <button class="btn block flex-none self-end"
               onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue("{{ command.demo_code }}")};show_demo()'>{{try_button}}</button>
-
-
-
+            </div>
           </div>
           {% endfor %}
         </div>

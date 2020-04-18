@@ -16,7 +16,7 @@ from werkzeug.urls import url_encode
 
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session
+from flask import Flask, request, jsonify, render_template, session, abort
 from flask_compress import Compress
 
 ALL_LANGUAGES = {
@@ -235,6 +235,9 @@ def default_landing_page():
 
 @app.route('/<page>')
 def main_page(page):
+    if page == 'favicon.ico':
+        abort(404)
+
     lang = requested_lang()
     effective_lang = lang
 
