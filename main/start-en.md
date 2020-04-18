@@ -15,7 +15,7 @@ page_title: Welcome to Hedy!
 Learning to program can be hard. Not that programming itself *is* hard! But there are a lot of rules you need to memorize, just like when you started to learn English.
 Similarly, you will need a lot of practice to learn programming.
 
-You can read these sentences with ease. But do you remember when oyu were learning to read? You took some time then for each letter!
+You can read these sentences with ease. But do you remember when you were learning to read? You took some time then for each letter!
 That is true for programming too, it might be hard in the beginning, but it will get easier!
 
 The nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.
