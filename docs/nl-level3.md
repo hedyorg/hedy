@@ -16,7 +16,7 @@ In Level 3 kunnen we ook weer steen schaar papier programmeren. Maar als je er t
 * `keuzes is steen, schaar, papier`
 * `print 'de winnaar is' keuzes at random`
 
-Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig. 
+Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig.
 
 # Maak dobbelsteen na
 Je kunt ook in Level 3 weer een dobbelsteen maken. Je kunt nu ook zinnen maken met de dobbelwaarde in de zin.
@@ -38,18 +38,18 @@ Dat doe je zo:
 # Een beter verhaal
 Wat je ook kunt doet is je verhaal weer een stukje beter maken, want nu mag je ook gewoon het woord `naam` gebruiken in de tekst.
 
-###Voorbeeld
+##Voorbeeld
 Dit is mijn verhaal, nu komt de hoofdpersoon die jij kiest steeds op de plek van naam te staan. Let goed op dat je alle zinnen tussen aanhalingstekens zet, behalve naam!
 
 * De naam van mijn hoofdpersoon is naam
 * naam gaat nu in het bos lopen
-* naam is wel een beetje bang 
+* naam is wel een beetje bang
 * Overal hoort hij gekke geluiden
 * naam is bang dat dit een spookbos is
 
-### Opdracht
+## Opdracht
 
-Nu jij! 
+Nu jij!
 
 1. Schrijf een verhaal van een paar zinnen over jouw hoofdpersoon.
 2. Waar de naam van je hoofdpersoon komt, zet je steeds `naam` (zie voorbeeld)
@@ -60,7 +60,7 @@ Regel 1: typ: `naam is` en daarachter de naam van jouw hoofdpersoon
 Voor alle volgende regels:
 Type `print` en dan de regel die je verzonnen hebt, maar let op! naam doe je niet tussen aanhalingstekens, de rest van de zinnen wel.
 
-### Voorbeeld Hedy code
+## Voorbeeld Hedy code
 * `naam is Bert`
 * `print 'De naam van mijn hoofdpersoon' is naam`
 * `print naam ' gaat nu in het bos lopen'`
@@ -68,10 +68,10 @@ Type `print` en dan de regel die je verzonnen hebt, maar let op! naam doe je nie
 * `print 'Overal hoort ' naam ' gekke geluiden'`
 * `print naam ' is bang dat dit een spookbos is'`
 
-### Een interactief verhaal
+## Een interactief verhaal
 Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Verander daarvoor de eerste regel van je programma `naam is Henk` in `naam is ask Wat is de naam van je hoofdrolspeler?`
 Als je het programma nu uitvoert kun je steeds een andere naam kiezen zonder de code te veranderen.
 
-### Keuzes in je verhaal of spel
+## Keuzes in je verhaal of spel
 Het zou nog leuker zijn als het verhaal echt inter-actief was. Dat je bijvoorbeeld kon kiezen of er wel of geen monster in het verhaal komt.
 Of dat je kan kijken wie de winnaar is van steen, schaar, papier. Dat kun je maken in Level 4.

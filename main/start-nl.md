@@ -1,12 +1,13 @@
 page_title: Welkom bij Hedy!
 ---
-<div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
-
-<h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">Hedy</h1>
-<h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Een graduele programmeertaal</h2>
-
-<div style="position: absolute; left: 75%; top: 40%;">
-<a class="green-btn text-white px-8 py-4" href="/hedy">Begin met Hedy</a>
+<div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
+  <div class="flex-1">
+    <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">Hedy</h1>
+    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Een graduele programmeertaal</h2>
+  </div>
+  <div class="flex-none">
+    <a class="green-btn text-white px-8 py-4" href="/hedy">Begin met Hedy</a>
+  </div>
 </div>
 
 </div>
@@ -17,13 +18,16 @@ Programmeren is lastig te leren. Niet dat het nou perse zo lastig is hoor! Maar 
 Nu lees jij deze zinnen zonder problemen. Maar misschien weet je nog wel dat het in groep 3 nog lettertje per lettertje ging.
 Zo is het bij programmeren ook, met wat oefening kan het jou zeker lukken.
 
-Het fijne van Hedy is dat Hedy een *graduele* programmeertaal is. Dat betekent dat je niet alle regels tegelijk hoeft te leren. Dat gaat namelijk stap voor stap. De eerste levels hebben nog maar weinig regels, zodat je rustig kan wennen aan programmeren. 
+Het fijne van Hedy is dat Hedy een *graduele* programmeertaal is. Dat betekent dat je niet alle regels tegelijk hoeft te leren. Dat gaat namelijk stap voor stap. De eerste levels hebben nog maar weinig regels, zodat je rustig kan wennen aan programmeren.
 Ieder level voegen we nieuwe regels toe, en zo leer je steeds nieuwe *commando's*. Commando's zijn opdrachten die een computer kan lezen.
 
 ## Waarom is Hedy gradueel?
 
 In deze video legt Felienne, de maker van Hedy, er meer over uit. Deze video is op dit moment alleen nog in het Engels beschikbaar.
+
+<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Voor wie is Hedy bedoeld?
 

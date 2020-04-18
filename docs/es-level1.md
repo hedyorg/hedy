@@ -2,7 +2,7 @@
 
 En el Nivel 1, por ejemplo, puedes crear una historia con un personaje principal. Cada vez que ejecutas este programa, puedes elegir nuevamente otro personaje principal.
 
-### Ejemplo
+## Ejemplo
 
 Esta es mi historia. Los puntos se remplazarán por el personaje principal que tú elegiste.
 
@@ -12,7 +12,7 @@ Esta es mi historia. Los puntos se remplazarán por el personaje principal que t
 * Escucha sonidos raros en todas partes
 * Teme que este sea un bosque fantasma
 
-### Tarea
+## Tarea
 
 ¡Ahora tú!
 
@@ -30,7 +30,7 @@ Para todas las siguientes líneas:
 * Cuando hay puntos en la línea, escribe `echo` y luego su oración
 * Si no hay puntos en la línea, escribe `print` y luego su oración
 
-### Ejemplo de código Hedy
+## Ejemplo de código Hedy
 
 * `ask El personaje principal de esta historia es ...`
 * `print El personaje principal ahora camina en el bosque`
@@ -38,7 +38,7 @@ Para todas las siguientes líneas:
 * `print Escucha sonidos raros en todas partes`
 * `print Teme que este sea un bosque fantasma`
 
-### Una historia simple
+## Una historia simple
 
 ¿Lamentas que ahora solo puedes hacer oraciones en las que el personaje principal esté al final de la oración?
 Luego, después de practicar esta historia, pasa al nivel 2 y luego al nivel 3. Así podras crear cada vez programas más complejos.

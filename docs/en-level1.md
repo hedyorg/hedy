@@ -2,7 +2,7 @@
 
 At Level 1, as an example, you can create a story with a different main character that you enter yourself.
 
-### Example
+## Example
 This is my story, on the dots the main character that you choose will be placed later.
 
 * The main character of this story is ...
@@ -11,7 +11,7 @@ This is my story, on the dots the main character that you choose will be placed 
 * He hears crazy sounds everywhere
 * He is afraid this is a ghost forest
 
-### Assignment
+## Assignment
 
 Now you can try yourself.
 
@@ -27,7 +27,7 @@ For all of the following lines:
 * If there are dots in the line, type `echo` followed by your sentence
 * If there are no dots in the line, type `print` followed by your sentence
 
-### Example Hedy code
+## Example Hedy code
 
 * `ask The main character of this story is ...`
 * `print The main character of this story is ...`
@@ -37,6 +37,6 @@ For all of the following lines:
 * `print He is afraid this is a ghost forest`
 
 
-### A simple story
+## A simple story
 It is a bit of a pity that you can now only create sentences in which the main character is at the end of the sentence right?
 Then, after practicing this story, proceed to level 2 and then level 3, where you can create more and more complicated programs.
