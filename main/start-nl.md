@@ -17,7 +17,7 @@ Programmeren is lastig te leren. Niet dat het nou perse zo lastig is hoor! Maar 
 Nu lees jij deze zinnen zonder problemen. Maar misschien weet je nog wel dat het in groep 3 nog lettertje per lettertje ging.
 Zo is het bij programmeren ook, met wat oefening kan het jou zeker lukken.
 
-Het fijne van Hedy is dat je niet alle regels tegelijk hoeft te leren. Dat gaat namelijk stap voor stap. De eerste levels hebben nog maar weinig regels, zodat je rustig kan wennen aan programmeren. 
+Het fijne van Hedy is dat Hedy een *graduele* programmeertaal is. Dat betekent dat je niet alle regels tegelijk hoeft te leren. Dat gaat namelijk stap voor stap. De eerste levels hebben nog maar weinig regels, zodat je rustig kan wennen aan programmeren. 
 Ieder level voegen we nieuwe regels toe, en zo leer je steeds nieuwe *commando's*. Commando's zijn opdrachten die een computer kan lezen.
 
 ## Waarom is Hedy gradueel?
