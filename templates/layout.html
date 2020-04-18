@@ -3,8 +3,10 @@
 
 <head>
   <title>{{page_title}}</title>
-  <link rel="stylesheet" href="css/generated.css">
-  <link rel="stylesheet" href="css/additional.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+  <link rel="stylesheet" href="/css/generated.css">
+  <link rel="stylesheet" href="/css/additional.css">
+  <link rel="shortcut icon" type="image/png" href="/images/Hedy-logo.png"/>
 </head>
 
 <body class="bg-gray-400">
@@ -12,26 +14,20 @@
     <nav class="bg-blue-500 px-8 shadow-sm text-white">
       <div class="-mb-px flex">
         <div class="py-1 mr-6 mt-1">
-          <a href="/?lang={{lang}}&level=1">
-            <img src="images/Home_Icon.svg" style="width: 2em;">
+          <a href="/?lang={{lang}}">
+            <img src="/images/Hedy-logo.png" style="width: 2.5em;"/>
           </a>
         </div>
-        <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1">
-          Hedy: {{ level_title }} {{ level }}
-        </div>
-        <a class="no-underline {% if selected_page == 'code' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/?lang={{lang}}&level={{level}}">
-          {{ code_title }}
+
+        {% block menu %}
+        {% for item in menu %}
+        <a class="no-underline font-slab font-semibold border-b-4 {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} tracking-wide text-xl px-4 py-3 mr-4" href="{{item.href}}?lang={{lang}}">
+          {{ item.caption }}
         </a>
-        <a class="no-underline {% if selected_page == 'docs' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/docs?lang={{lang}}&level={{level}}">
-          {{ docs_title }}
-        </a>
-        <a class="no-underline {% if selected_page == 'video' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/video?lang={{lang}}&level={{level}}">
-          {{ video_title }}
-        </a>
-        <a class="no-underline {% if selected_page == 'contact' %}border-b-4{% endif %} border-white tracking-wide font-bold px-4 py-3 mr-4" href="/contact?lang={{lang}}&level={{level}}">
-          {{ contact }}
-        </a>
-        <div class="dropdown inline-block relative ml-auto py-2">
+        {% endfor %}
+        {% endblock %}
+
+        <div class="dropdown inline-block relative ml-auto py-2 z-50">
           <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
             <span class="mr-1">{{ current_language().sym }}</span>
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
@@ -44,7 +40,7 @@
         </div>
       </div>
     </nav>
-    <div class="px-8 py-4 pt-12">
+    <div class="px-8 py-12">
       {% block body %}
       {% endblock %}
     </div>

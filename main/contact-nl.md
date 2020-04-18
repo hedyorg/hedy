@@ -1,3 +1,5 @@
+page_title: Contact — Hedy
+---
 # Wat vind jij van Hedy?
 
 We vinden het heel leuk om te horen wat jij allemaal maakt!

@@ -1,5 +1,13 @@
 @tailwind base;
 
+html {
+  @apply font-light;
+}
+
+.font-slab {
+  font-family: 'Zilla Slab', serif;
+}
+
 h1 {
   @apply font-thin text-4xl;
 }
@@ -12,36 +20,57 @@ h3 {
   @apply font-bold text-xl;
 }
 
+p + p, p + ul, p + ol {
+  @apply mt-4;
+}
+
+.green-btn {
+  @apply bg-green-500 text-white font-bold py-2 px-4 border-b-4 border-green-700 rounded;
+}
+
+.green-btn:hover {
+  @apply bg-green-400 border-green-500;
+}
+
+
 /* Styles only for use in MarkDown blocks */
 .markdown {
   @apply text-xl text-gray-800 leading-normal;
 }
 
-.markdown > * + *,  .markdown li + li, .markdown li > p + p {
+.markdown li + li, .markdown li > p + p {
   @apply my-2;
 }
 .markdown strong {
-  @apply text-black font-bold;
+  @apply font-bold;
 }
 .markdown a {
-  @apply text-black font-semibold;
+  @apply font-semibold;
 }
 .markdown strong a {
   @apply font-bold;
 }
-.markdown h2 {
-  @apply font-serif;
-  @apply leading-tight text-2xl font-bold text-black mb-2 mt-10;
+
+.markdown * + h1 {
+  @apply leading-tight mb-2 mt-10;
 }
-.markdown h3 {
-  @apply font-serif;
-  @apply leading-tight text-xl font-bold text-black mt-8 mb-1;
+
+h2 {
+  @apply font-slab font-medium text-blue-500;
+  @apply leading-tight text-2xl mb-2 mt-10;
 }
-.markdown code {
-  @apply font-mono text-sm inline bg-gray-200 rounded py-2 px-3;
+h3 {
+  @apply font-slab font-bold text-blue-700 italic;
+  @apply leading-tight text-xl mt-8 mb-1;
+}
+code {
+  @apply font-mono inline bg-gray-200 rounded py-1 px-2;
   @apply text-red-600;
 }
-.markdown pre {
+.markdown code {
+  @apply py-2 px-3 text-base;
+}
+pre {
   @apply block bg-gray-400 p-4 rounded;
   @apply text-red-600;
 }
@@ -64,18 +93,26 @@ h3 {
   @apply bg-blue-400 border-blue-500;
 }
 
-.green-btn {
-  @apply bg-green-500 text-white font-bold py-2 px-4 border-b-4 border-green-700 rounded;
-}
-
-.green-btn:hover {
-  @apply bg-green-400 border-green-500;
-}
-
 #output {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
 }
 
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.10);
+}
+
+.text-shadow-md {
+  text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.text-shadow-none {
+  text-shadow: none;
 }
