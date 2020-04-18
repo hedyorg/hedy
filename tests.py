@@ -99,6 +99,11 @@ class TestsLevel1(unittest.TestCase):
         self.assertEqual(result, "print('Hallo welkom bij Hedy! ')")
         self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
 
+    def test_lines_may_not_start_with_spaces(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile(" print Hallo welkom bij Hedy! ", 1)
+        self.assertEqual('Invalid Space', str(context.exception))
+
     def test_transpile_empty(self):
         with self.assertRaises(hedy.HedyException) as context:
             result = hedy.transpile("", 1)

@@ -3,7 +3,8 @@ program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on s
 command: "print" (" " text)? -> print
          | "ask" (" " text)? -> ask
          | "echo" (" " text)? -> echo
-         |  textwithoutspaces (" " text)? -> invalid
+         | textwithoutspaces (" " text)? -> invalid
+         | " "* text -> invalid_space
 
 _EOL: "\r"?"\n"
 

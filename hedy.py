@@ -140,7 +140,16 @@ class IsValid(Transformer):
 
     #would be lovely if there was some sort of default rule! Not sure Lark supports that
     def program(self, args):
-        return self.pass_arguments(args)
+        bool_arguments = [x[0] for x in args]
+        if all(bool_arguments):
+            return [True] #all complete
+        else:
+            command_num = 1
+            for a in args:
+                if not a[0]:
+                    return False, a[1], command_num
+                command_num += 1
+
     def command(self, args):
         return self.pass_arguments(args)
     def ask(self, args):
@@ -206,7 +215,9 @@ class IsValid(Transformer):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
-
+    def invalid_space(self, args):
+        # return space to indicate that line start in a space
+        return False, " "
 
 class IsComplete(Transformer):
     # print, ask an echo can miss arguments and then are not complete
@@ -651,15 +662,19 @@ def transpile_inner(input_string, level):
 
         is_valid = IsValid().transform(program_root)
         if not is_valid[0]:
-            invalid_command = is_valid[1][0]
-            closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
-            raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
+            if is_valid[1] == ' ':
+                line = is_valid[2]
+                raise HedyException('Invalid Space', level=level, line_number=line)
+            else:
+                invalid_command = is_valid[1]
+                closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+                raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
         is_complete = IsComplete().transform(program_root)
         if not is_complete[0]:
             incomplete_command = is_complete[1]
             line = is_complete[2]
-            raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number = line)
+            raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
 
 
 
