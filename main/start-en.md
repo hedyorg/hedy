@@ -3,10 +3,10 @@ page_title: Welcome to Hedy!
 <div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
   <div class="flex-1">
     <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">Hedy</h1>
-    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Een graduele programmeertaal</h2>
+    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">A gradual programming language</h2>
   </div>
   <div class="flex-none">
-    <a class="green-btn text-white px-8 py-4" href="/hedy">Begin met Hedy</a>
+    <a class="green-btn text-white px-8 py-4" href="/hedy">Try it</a>
   </div>
 </div>
 
