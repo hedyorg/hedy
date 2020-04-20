@@ -27,7 +27,7 @@ equality_check: textwithoutspaces " is " textwithoutspaces
 in_list_check: textwithoutspaces " in " var
 
 //new for level 5
-repeat: "repeat " NUMBER " times " command
+repeat: "repeat " (NUMBER | var) " times " command
 
 var: NAME -> var
 list_access : var " at " (index | random) -> list_access //todo: could be merged with list_acces_var?

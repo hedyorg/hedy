@@ -417,9 +417,9 @@ class ConvertToPython_5(ConvertToPython_4):
         return ''.join(args)
 
     def repeat(self, args):
-        times = ''.join(args[0])
+        times = wrap_non_var_in_quotes(args[0], self.lookup)
         command = args[1]
-        return f"""for i in range({times}):
+        return f"""for i in range(int({str(times)})):
 {indent(command)}"""
 
 class ConvertToPython_6(ConvertToPython_5):
@@ -491,7 +491,7 @@ class ConvertToPython_7(ConvertToPython_6):
 
     def repeat(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        return "for i in range(" +args[0] + "):\n" + "\n".join(args[1:])
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(args[1:])
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
