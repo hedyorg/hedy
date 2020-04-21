@@ -39,4 +39,4 @@ No, that is not needed. However, if you have programmed with Scratch or Python, 
 Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone that can program cau help us make Hedy better.
 
 ## Do I need to install anything?
-No. Hedy works in the browser, which is the program you are useing to look at this page. Probably Chrome of Edge or FireFox. Hedy also works on your phone or tablet.
+No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome of Edge or FireFox. Hedy also works on your phone or tablet.
