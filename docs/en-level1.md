@@ -32,7 +32,7 @@ For all of the following lines:
 * `ask The main character of this story is ...`
 * `print The main character of this story is ...`
 * `print He walks in the forest`
-* `acho He is a little scared ...`
+* `echo He is a little scared ...`
 * `print He hears crazy sounds everywhere`
 * `print He is afraid this is a ghost forest`
 
