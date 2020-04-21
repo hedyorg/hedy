@@ -30,7 +30,7 @@ equality_check: textwithoutspaces " is " textwithoutspaces
 in_list_check: textwithoutspaces " in " var
 
 //new for level 5
-repeat: "repeat " NUMBER " times " command
+repeat: "repeat " (NUMBER | var) " times " command
 
 //new for level 6
 ?sum: product
