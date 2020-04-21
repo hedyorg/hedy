@@ -149,6 +149,11 @@ class TestsLevel2(unittest.TestCase):
             result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
         self.assertEqual(str(context.exception), 'Wrong Level')
 
+    def test_spaces_in_arguments(self):
+        result = hedy.transpile("print hallo      wereld", 2)
+        self.assertEqual(result, "import random\nprint('hallo'+' '+'wereld')")
+
+
 
 
     def test_transpile_print(self):
