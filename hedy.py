@@ -668,7 +668,11 @@ def transpile_inner(input_string, level):
         if not is_valid[0]:
             if is_valid[1] == ' ':
                 line = is_valid[2]
-                raise HedyException('Invalid Space', level=level, line_number=line)
+                #the error here is a space at the beginning of the line, we can
+                # fix that!
+                fixed_code = input_string.lstrip()
+                result = transpile_inner(fixed_code, level)
+                raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
             else:
                 invalid_command = is_valid[1]
                 closest = closest_command(invalid_command, ['print', 'ask', 'echo'])

@@ -83,9 +83,11 @@ def parse():
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\n" + result
         except hedy.HedyException as E:
+            # some 'errors' can be fixed, for these we throw an exception, but also
+            # return fixed code, so it can be ran
             if E.args[0] == "Invalid Space":
                 error_template = texts['HedyErrorMessages'][E.error_code]
-                response["Code"] = "print(123)"
+                response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
             else:
                 error_template = texts['HedyErrorMessages'][E.error_code]
