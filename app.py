@@ -79,12 +79,19 @@ def parse():
     # is so, parse
     else:
         try:
+            texts = load_texts()
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\n" + result
         except hedy.HedyException as E:
-            texts = load_texts()
-            error_template = texts['HedyErrorMessages'][E.error_code]
-            response["Error"] = error_template.format(**E.arguments)
+            if E.args[0] == "Invalid Space":
+                error_template = texts['HedyErrorMessages'][E.error_code]
+                response["Code"] = "print(123)"
+                response["Warning"] = error_template.format(**E.arguments)
+            else:
+                error_template = texts['HedyErrorMessages'][E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+
+
         except Exception as E:
             print(f"error transpiling {code}")
             response["Error"] = str(E)
