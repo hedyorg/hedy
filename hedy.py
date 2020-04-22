@@ -635,14 +635,18 @@ def transpile(input_string, level):
     try:
         return transpile_inner(input_string, level)
     except Exception as E:
-        #try 1 level lower
-        if level > 1:
-            try:
-                new_level = level-1
-                result = transpile_inner(input_string, level-1)
-                raise HedyException('Wrong Level', correct_code = result, original_level=level, working_level=new_level)
-            except LarkError as e:
-                raise HedyException('Parse', level=level, parse_error=e.args[0])
+        #we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
+        if E.args[0] == 'Parse':
+            #try 1 level lower
+            if level > 1:
+                try:
+                    new_level = level-1
+                    result = transpile_inner(input_string, level-1)
+                    raise HedyException('Wrong Level', correct_code = result, original_level=level, working_level=new_level)
+                except LarkError as e:
+                    raise HedyException('Parse', level=level, parse_error=e.args[0])
+            else:
+                raise E
         else:
             raise E
 
