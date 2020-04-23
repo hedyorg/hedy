@@ -104,6 +104,12 @@ class TestsLevel1(unittest.TestCase):
             result = hedy.transpile(" print Hallo welkom bij Hedy! ", 1)
         self.assertEqual('Invalid Space', str(context.exception))
 
+    def test_two_lines_start_with_spaces(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile(" print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!", 1)
+        self.assertEqual('Invalid Space', str(context.exception))
+
+
     def test_transpile_empty(self):
         with self.assertRaises(hedy.HedyException) as context:
             result = hedy.transpile("", 1)
@@ -139,6 +145,10 @@ class TestsLevel2(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("abc felienne 123", 2)
         self.assertEqual(str(context.exception), 'Invalid')
+
+
+
+
 
     def test_transpile_ask_Spanish(self):
         result = hedy.transpile("ask ask Cuál es tu color favorito?", 2)

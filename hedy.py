@@ -650,6 +650,12 @@ def transpile(input_string, level):
         else:
             raise E
 
+def repair(input_string):
+    #the only repair we can do now is remove leading spaces, more can be added!
+    return '\n'.join([x.lstrip() for x in input_string.split('\n')])
+
+
+
 def transpile_inner(input_string, level):
     if level <= 6:
         punctuation_symbols = ['!', '?', '.']
@@ -668,9 +674,9 @@ def transpile_inner(input_string, level):
         if not is_valid[0]:
             if is_valid[1] == ' ':
                 line = is_valid[2]
-                #the error here is a space at the beginning of the line, we can
-                # fix that!
-                fixed_code = input_string.lstrip()
+                #the error here is a space at the beginning of a line, we can fix that!
+
+                fixed_code = repair(input_string)
                 result = transpile_inner(fixed_code, level)
                 raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
             else:
