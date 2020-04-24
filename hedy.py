@@ -417,9 +417,9 @@ class ConvertToPython_5(ConvertToPython_4):
         return ''.join(args)
 
     def repeat(self, args):
-        times = ''.join(args[0])
+        times = wrap_non_var_in_quotes(args[0], self.lookup)
         command = args[1]
-        return f"""for i in range({times}):
+        return f"""for i in range(int({str(times)})):
 {indent(command)}"""
 
 class ConvertToPython_6(ConvertToPython_5):
@@ -491,7 +491,7 @@ class ConvertToPython_7(ConvertToPython_6):
 
     def repeat(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        return "for i in range(" +args[0] + "):\n" + "\n".join(args[1:])
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(args[1:])
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -635,16 +635,26 @@ def transpile(input_string, level):
     try:
         return transpile_inner(input_string, level)
     except Exception as E:
-        #try 1 level lower
-        if level > 1:
-            try:
-                new_level = level-1
-                result = transpile_inner(input_string, level-1)
-                raise HedyException('Wrong Level', correct_code = result, original_level=level, working_level=new_level)
-            except LarkError as e:
-                raise HedyException('Parse', level=level, parse_error=e.args[0])
+        #we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
+        if E.args[0] == 'Parse':
+            #try 1 level lower
+            if level > 1:
+                try:
+                    new_level = level-1
+                    result = transpile_inner(input_string, level-1)
+                    raise HedyException('Wrong Level', correct_code = result, original_level=level, working_level=new_level)
+                except LarkError as e:
+                    raise HedyException('Parse', level=level, parse_error=e.args[0])
+            else:
+                raise E
         else:
             raise E
+
+def repair(input_string):
+    #the only repair we can do now is remove leading spaces, more can be added!
+    return '\n'.join([x.lstrip() for x in input_string.split('\n')])
+
+
 
 def transpile_inner(input_string, level):
     if level <= 6:
@@ -664,7 +674,11 @@ def transpile_inner(input_string, level):
         if not is_valid[0]:
             if is_valid[1] == ' ':
                 line = is_valid[2]
-                raise HedyException('Invalid Space', level=level, line_number=line)
+                #the error here is a space at the beginning of a line, we can fix that!
+
+                fixed_code = repair(input_string)
+                result = transpile_inner(fixed_code, level)
+                raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
             else:
                 invalid_command = is_valid[1]
                 closest = closest_command(invalid_command, ['print', 'ask', 'echo'])

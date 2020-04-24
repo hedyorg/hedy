@@ -31,7 +31,7 @@ In deze video legt Felienne, de maker van Hedy, er meer over uit. Deze video is 
 
 ## Voor wie is Hedy bedoeld?
 
-Hedy is bedoeld voor alle kinderen die willen leren programmeren! Het is daarbij wel nodig om al goed kunnen lezen, zo ongeveer AVI-M5 is wel nodig denken wij.
+Hedy is bedoeld voor alle kinderen die willen leren programmeren! Het is daarbij wel nodig om al goed kunnen lezen, zo ongeveer AVI-M5 (Analyse van Individualiseringsvormen) is wel nodig denken wij. AVI is een term die gebruikt wordt om het leesniveau aan te geven.
 
 ## Moet ik al iets kennen of weten?
 Nee, je hebt geen ervaring nodig met programmeren, maar als je al eerder Scratch hebt gedaan, dan zullen sommige codes je wel bekend voorkomen.

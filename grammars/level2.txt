@@ -1,28 +1,33 @@
 start: program
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: "print " ( list_access | (text punctuation)| text) (" " ( list_access | (text punctuation)| text) )*  -> print
-         | text " is ask " textwithspaces punctuation* -> ask
-         | text " is " text ((", "|",") text)+  -> assign_list
-         | text " is " text -> assign //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
-         | text " " textwithspaces -> invalid
+command: "print " (" "| list_access | textwithoutspaces | punctuation)*  -> print
+         | var " "+ "is ask " + (" " | text | punctuation)* -> ask
+         | var " is " text ((", "|",") text)+  -> assign_list
+         | var " is " text -> assign
+         | textwithoutspaces " " text -> invalid
 
 _EOL: "\r"?"\n"
 
-ACCENTED_LETTER: "á" | "é" | "ó"
-
-var: LETTER+ -> var
 list_access : var " at " (index | random) -> list_access
 index : DIGIT+
 random : "random"
+
 punctuation : PUNCTUATION -> punctuation
-textwithspaces: (LETTER | ACCENTED_LETTER | DIGIT | WS_INLINE)+ -> text
-text: (LETTER | ACCENTED_LETTER | DIGIT)+ -> text
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+
+text: /([^\r\n,!?.]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+//plus in Level 2 we need to treat punctuation differently, since it can be used to separate arguemnts (variables)
+
+textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+//plus in Level 2 we need to treat punctuation differently, since it can be used to separate arguemnts (variables)
+
+var: NAME -> var
+
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library
 %import common.WS_INLINE   // imports from terminal library
 %import common.NEWLINE   // imports from terminal library
-
+%import common.CNAME -> NAME
 
 

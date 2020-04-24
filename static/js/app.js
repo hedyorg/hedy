@@ -43,6 +43,9 @@ function runit(level, lang) {
       lang: lang
     }).done(function(response) {
       console.log('Response', response);
+      if (response.Warning) {
+        error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
+      }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
@@ -181,6 +184,13 @@ function runPythonProgram(code) {
 var error = {
   hide() {
     $('#errorbox').hide();
+    $('#warningbox').hide();
+  },
+
+  showWarning(caption, message) {
+    $('#warningbox .caption').text(caption);
+    $('#warningbox .details').text(message);
+    $('#warningbox').show();
   },
 
   show(caption, message) {
