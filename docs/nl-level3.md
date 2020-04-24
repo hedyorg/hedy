@@ -14,7 +14,7 @@ Nu kan dat wel! Je moet nu aanhalingstekens om de tekst zetten die je letterlijk
 In Level 3 kunnen we ook weer steen schaar papier programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
 
 * `keuzes is steen, schaar, papier`
-* `print 'de winnaar is' keuzes at random`
+* `print 'de winnaar is ' keuzes at random`
 
 Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig.
 
@@ -33,10 +33,10 @@ Ook je afwasprogramma kun je nu mooier maken met aanhalingstekens.
 Dat doe je zo:
 
 * `mensen is mama, papa, Emma, Sophie`
-* `print 'de afwas wordt gedaan door' mensen at random`
+* `print 'de afwas wordt gedaan door ' mensen at random`
 
 # Een beter verhaal
-Wat je ook kunt doet is je verhaal weer een stukje beter maken, want nu mag je ook gewoon het woord `naam` gebruiken in de tekst.
+Wat je ook kunt doen is je verhaal weer een stukje beter maken, want nu mag je ook gewoon het woord `naam` gebruiken in de tekst.
 
 ##Voorbeeld
 Dit is mijn verhaal, nu komt de hoofdpersoon die jij kiest steeds op de plek van naam te staan. Let goed op dat je alle zinnen tussen aanhalingstekens zet, behalve naam!

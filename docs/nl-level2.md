@@ -61,7 +61,7 @@ Voor alle volgende regels:
 Type `print` en dan de regel die je verzonnen hebt
 
 ## Voorbeeld Hedy code
-* `naam is Bert`
+* `naam is Henk`
 * `print naam gaat nu in het bos lopen`
 * `print naam is wel een beetje bang`
 * `print Overal hoort hij gekke geluiden`
