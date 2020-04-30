@@ -276,6 +276,7 @@ def embed():
         with open("static/levels.json", "r") as file:
             response_levels = json.load(file)
         response_texts_lang = load_texts()
+        response_assignments = load_assignments()
     except Exception as E:
         print(f"error opening level {level}")
         return jsonify({"Error": str(E)})
@@ -283,13 +284,15 @@ def embed():
     arguments_dict['page_title'] = response_texts_lang['Page_Title']
     arguments_dict['level_title'] = response_texts_lang['Level']
     arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
     arguments_dict['try_button'] = response_texts_lang['Try_button']
     arguments_dict['run_button'] = response_texts_lang['Run_code_button']
     arguments_dict['advance_button'] = response_texts_lang['Advance_button']
     arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
     arguments_dict['enter'] = response_texts_lang['Enter']
+
+    level_and_lang_assignment_dict = [r for r in response_assignments if int(r['Level']) == level and r['Language'] == lang][0]
+    arguments_dict['assignment_header'] = 'Opdracht'
+    arguments_dict['assignment'] = level_and_lang_assignment_dict["Assignment"]
 
     level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
     maxlevel = max(int(r['Level']) for r in response_levels if r['Language'] == lang)
@@ -303,7 +306,7 @@ def embed():
     arguments_dict['latest'] = version()
     arguments_dict['selected_page'] = 'code'
 
-    return render_template("code-page.html", **arguments_dict)
+    return render_template("code-page-embed.html", **arguments_dict)
 
 
 def session_id():
@@ -394,6 +397,13 @@ def load_texts():
     texts = texts_file.get(requested_lang().lower())
     return texts if texts else texts_file.get('en')
 
+def load_assignments():
+    """Load the assignments for the given language."""
+
+    with open("static/assignments.json", "r") as file:
+        texts_file = json.load(file)
+    texts = texts_file
+    return texts
 
 def no_none_sense(d):
     """Remove all None values from a dict."""

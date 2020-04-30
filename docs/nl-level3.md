@@ -14,7 +14,7 @@ Nu kan dat wel! Je moet nu aanhalingstekens om de tekst zetten die je letterlijk
 In Level 3 kunnen we ook weer steen schaar papier programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
 
 * `keuzes is steen, schaar, papier`
-* `print 'de winnaar is' keuzes at random`
+* `print 'de winnaar is  ' keuzes at random`
 
 Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig.
 
