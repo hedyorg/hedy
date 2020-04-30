@@ -23,6 +23,7 @@ ALL_LANGUAGES = {
     'en': '🇺🇸',
     'nl': '🇳🇱',
     'es': '🇪🇸',
+    'el': '🇬🇷',
 }
 
 # Load main menu (do it once, can be cached)
@@ -52,7 +53,7 @@ def levels():
 
     #read levels from file
     try:
-        file = open("levels.json", "r")
+        file = open("levels.json", "r", encoding = "utf8")
         contents = str(file.read())
         response = (json.loads(contents))
         file.close()
@@ -141,7 +142,7 @@ def index():
     arguments_dict['lang'] = lang
 
     try:
-        with open("static/levels.json", "r") as file:
+        with open("static/levels.json", "r",encoding="utf8") as file:
             response_levels = json.load(file)
         response_texts_lang = load_texts()
     except Exception as E:
@@ -345,7 +346,7 @@ def load_texts():
 
     If the language is unknown, default to English.
     """
-    with open("static/texts.json", "r") as file:
+    with open("static/texts.json", "r",encoding = "utf8") as file:
         texts_file = json.load(file)
     texts = texts_file.get(requested_lang().lower())
     return texts if texts else texts_file.get('en')
