@@ -30,8 +30,8 @@ dedent: DEDENT -> dedent
     | expression " "* "-" " "* product -> substraction
 
 ?product: atom
-    | product " "* " * " " "* atom -> multiplication
-    | product " "* " / " " "* atom -> division
+    | product " "* "*" " "* atom -> multiplication
+    | product " "* "/" " "* atom -> division
 
 ?atom: number | var_access
 

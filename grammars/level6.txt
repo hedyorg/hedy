@@ -38,8 +38,8 @@ repeat: "repeat " (NUMBER | var) " times " command
    | sum " "* "-" " "* product -> substraction
 
 ?product: atom
-    | product " "* " * " " "* atom -> multiplication
-    | product " "* " / " " "* atom -> division
+    | product " "* "*" " "* atom -> multiplication
+    | product " "* "/" " "* atom -> division
 
 ?atom: NUMBER | textwithoutspaces //TODO: means we cannot assign strings with spaces? would we want that?
 

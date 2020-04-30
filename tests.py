@@ -547,6 +547,14 @@ class TestsLevel7(unittest.TestCase):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 7)
         self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
 
+    def test_print_with_calc_no_spaces(self):
+        result = hedy.transpile("print '5 keer 5 is ' 5*5", 7)
+        self.assertEqual("import random\nnaam = 'Hedy'\nprint('5 keer 5 is '+str(5*5))",result)
+
+
+
+
+
     def test_print_calculation_times_directly(self):
         result = hedy.transpile("""nummer is 5
 nummertwee is 6
