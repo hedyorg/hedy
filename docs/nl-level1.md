@@ -1,6 +1,6 @@
 # Een verhaal
 
-In Level 1 kun je bijvoorbeeld een verhaal met steeds een andere hoofdpersoon die je zelf invoert.
+In Level 1 kun je bijvoorbeeld een verhaal maken met steeds een andere hoofdpersoon die je zelf invoert.
 
 ## Voorbeeld
 Dit is mijn verhaal, op de puntjes komt straks de hoofdpersoon te staan die jij kiest.
@@ -20,7 +20,7 @@ Nu jij!
 3. Er mogen ook zinnen in het verhaal staan waar geen hoofdpersoon in staat
 4. Vertaal je verhaal nu naar Hedy code, dat doe je zo:
 
-Regel 1: typ: `ask wat is de hoofdpersoon van jouw verhaal`
+Regel 1: typ: `ask wie is de hoofdpersoon van jouw verhaal`
 
 Voor alle volgende regels:
 

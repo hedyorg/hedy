@@ -3,7 +3,7 @@
 At Level 1, as an example, you can create a story with a different main character that you enter yourself.
 
 ## Example
-This is my story, on the dots the main character that you choose will be placed later.
+This is my story, the main character that you choose will be placed on the dots later.
 
 * The main character of this story is ...
 * He walks in the forest
@@ -13,14 +13,14 @@ This is my story, on the dots the main character that you choose will be placed 
 
 ## Assignment
 
-Now you can try yourself.
+Now you can try for yourself.
 
 1. Write a story of a few sentences about your main character.
 2. Where the name of your main character should be placed, just put ... (see example)
 3. There may also be sentences in the story that do not contain a main character
 4. Now translate your story into Hedy code, here's how:
 
-Line 1: type "ask what is the main character of your story"
+Line 1: type "ask who is the main character of your story"
 
 For all of the following lines:
 
@@ -39,4 +39,4 @@ For all of the following lines:
 
 ## A simple story
 It is a bit of a pity that you can now only create sentences in which the main character is at the end of the sentence right?
-Then, after practicing this story, proceed to level 2 and then level 3, where you can create more and more complicated programs.
+After you have practiced this story, proceed to level 2 and then level 3, where you can create more and more complicated programs.
