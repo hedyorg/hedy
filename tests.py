@@ -104,6 +104,15 @@ class TestsLevel1(unittest.TestCase):
             result = hedy.transpile(" print Hallo welkom bij Hedy! ", 1)
         self.assertEqual('Invalid Space', str(context.exception))
 
+    def test_print_with_comma(self):
+        result = hedy.transpile("print iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.", 1)
+        self.assertEqual(result, "print('iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.')")
+
+    def test_word_plus_period(self):
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile("word.", 1)
+        self.assertEqual('Invalid', str(context.exception))
+
     def test_two_lines_start_with_spaces(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile(" print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!", 1)

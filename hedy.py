@@ -677,7 +677,8 @@ def transpile_inner(input_string, level):
                 #the error here is a space at the beginning of a line, we can fix that!
 
                 fixed_code = repair(input_string)
-                result = transpile_inner(fixed_code, level)
+                if fixed_code != input_string: #only if we have made a successful fix
+                    result = transpile_inner(fixed_code, level)
                 raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
             else:
                 invalid_command = is_valid[1]

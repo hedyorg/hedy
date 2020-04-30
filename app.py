@@ -262,6 +262,50 @@ def main_page(page):
     menu = render_main_menu(page)
     return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
 
+@app.route('/embed.html')
+def embed():
+    session_id()  # Run this for the side effect of generating a session ID
+    level = requested_level()
+    lang = requested_lang()
+
+    arguments_dict = {}
+    arguments_dict['level'] = level
+    arguments_dict['lang'] = lang
+
+    try:
+        with open("static/levels.json", "r") as file:
+            response_levels = json.load(file)
+        response_texts_lang = load_texts()
+    except Exception as E:
+        print(f"error opening level {level}")
+        return jsonify({"Error": str(E)})
+
+    arguments_dict['page_title'] = response_texts_lang['Page_Title']
+    arguments_dict['level_title'] = response_texts_lang['Level']
+    arguments_dict['code_title'] = response_texts_lang['Code']
+    arguments_dict['docs_title'] = response_texts_lang['Docs']
+    arguments_dict['video_title'] = response_texts_lang['Video']
+    arguments_dict['try_button'] = response_texts_lang['Try_button']
+    arguments_dict['run_button'] = response_texts_lang['Run_code_button']
+    arguments_dict['advance_button'] = response_texts_lang['Advance_button']
+    arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
+    arguments_dict['enter'] = response_texts_lang['Enter']
+
+    level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
+    maxlevel = max(int(r['Level']) for r in response_levels if r['Language'] == lang)
+
+    arguments_dict['commands'] = level_and_lang_dict['Commands']
+    arguments_dict['introtext'] = level_and_lang_dict['Intro_text']
+    arguments_dict['startcode'] = level_and_lang_dict['Start_code']
+
+    next_level_available = level != maxlevel
+    arguments_dict['nextlevel'] = level + 1 if next_level_available else None
+    arguments_dict['latest'] = version()
+    arguments_dict['selected_page'] = 'code'
+
+    return render_template("code-page.html", **arguments_dict)
+
+
 def session_id():
     """Returns or sets the current session ID."""
     if 'session_id' not in session:
