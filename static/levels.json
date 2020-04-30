@@ -489,5 +489,185 @@
             "demo_code": "color is ask Cuál es tu color favorito?\\nif color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
         }
         ]
+    },
+    {
+        "Level": "1",
+        "Language" : "el",
+        "Intro_text" : "Στο επίπεδο 1 μπορείτε να χρησιμοποιήσετε τις παρακάτω εντολές",
+        "Available": true,
+        "Start_code": "print γεια σου κόσμε!",
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Τύπωσε κάτι με την εντολή print.",
+            "example": "Παράδειγμα: print Γεια σου καλωσήρθες στη Hedy!",
+            "demo_code": "print Γεια σου καλωσήρθες στη Hedy!"
+        }, {
+            "name": "ask",
+            "explanation": "Ρώτησε κάτι με την εντολή ask.",
+            "example": "Example: ask Ποιό είναι το αγαπημένο σου χρώμα;",
+            "demo_code": "ask Ποιό είναι το αγαπημένο σου χρώμα;"
+        }, {
+            "name": "echo",
+            "explanation": "Επανάλαβε κάτι με την εντολή echo.",
+            "example": "Example: echo ώστε το αγαπημένο σου χρώμα είναι το...",
+            "demo_code": "ask Ποιό είναι το αγαπημένο σου χρώμα;\\necho ώστε το αγαπημένο σου χρώμα είναι το..."
+        }
+        ]
+    },
+    {
+        "Level": "2",
+        "Language" : "el",
+        "Intro_text" : "Η εντολή print δουλεύει όπως και στο Επίπεδο 1, αλλά η ask αλλαξε, τώρα χρειάζεται ένα όνομα με το οποίο μετά μπορείς να τυπώσεις. H echo δεν χρειάζεται πια. Μπορείς επίσης να χρησιμοποιήσεις τις παρακάτω εντολές:",
+        "Start_code": "print γεια σου κόσμε!",
+        "Available": true,
+        "Commands" : [
+         {
+            "name": "is",
+            "explanation": "Δώσε σε μια λέξη ένα όνομα για να τη χρησιμοποιήσεις μέσα στο πρόγραμμα",
+            "example": "Παράδειγμα: name is Hedy.",
+            "demo_code": "name is Hedy\\nprint καλωσήρθες name"
+        }, {
+            "name": "ask",
+            "explanation": "Ρώτησε κάτι με την εντολή ask. Πρόσεχε! Η ask χρειάζεται ένα όνομα τώρα.",
+            "example": "Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;",
+            "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\\nprint To color είναι το αγαπημένο σου!"
+        }, {
+            "name": "choose_random",
+            "explanation": "Διάλεξε μια τυχαία λέξη από μια ομάδα λέξεων με την εντολή at ",
+            "example": "Παράδειγμα: animals is σκύλος, γάτα, σκίουρος.",
+            "demo_code": "animals is σκύλος, γάτα, σκίουρος\\nprint animals at random"
+        }
+        ]
+    },
+    {
+        "Level": "3",
+        "Language" : "el",
+        "Start_code": "print 'Γεια σου κόσμε!'",
+        "Intro_text" : "Στο επίπεδο 3, πρέπει να χρησιμοποιήσεις εισαγωγικά γύρω από τις λέξεις που θέλεις να τυπώσεις. H echo δεν χρειάζεται πια, μπορείς να τυπώσεις της λέξεις που θέλεις με την εντολή print!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Τύπωσε ακριβώς αυτό που θέλεις με τα εισαγωγικά",
+            "example": "Παράδειγμα: print 'Καλωσήρθες στη Hedy.'",
+            "demo_code": "print 'Γεια σου καλωσήρθες στη Hedy.'"
+        }, {
+            "name": "is",
+            "explanation": "Δώσε ένα όνομα σε ένα κείμενο και τύπωσέ το χρησιμοποιώντας την print χωρίς εισαγωγικά",
+            "example": "Example: name is Hedy.",
+            "demo_code": "name is Hedy\\nprint 'το όνομα μου είναι ' name"
+        }, {
+            "name": "ask",
+            "explanation": "Ρώτησε κάτι με την εντολή ask. Πρόσεχε! Η ask δεν χρειάζεται εισαγωγικά.",
+            "example": "Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;",
+            "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\\nprint 'To ' color 'είναι το αγαπημένο σου!'"
+        }
+        ]
+    },
+    {
+        "Level": "4",
+        "Language" : "el",
+        "Start_code": "name is ask ποιό είναι το όνομα σου;\nif name is Hedy print 'μπράβο!' else print 'τσκ'",
+        "Intro_text" : "Οι εντολές ask και print λειτουργούν ακριβώς όπως και στο Επίπεδο 3. Το Επίπεδο 4 προσθέτει την εντολή if, που σημαίνει αν!",
+        "Available": true,
+        "Commands" : [
+            {
+                "name": "print",
+                "explanation": "Τύπωσε ακριβώς αυτό που θέλεις χρησιμοποιώντας εισαγωγικά",
+                "example": "Παράδειγμα: print 'Γεια σου καλωσήρθες στη Hedy.'",
+                "demo_code": "print 'Γεια σου καλωσήρθες στη Hedy.'"
+            }, {
+                "name": "ask",
+                "explanation": "Ρώτησε κάτι με την εντολή ask. Πρόσεχε! Η ask δεν χρειάζεται εισαγωγικά.",
+                "example": "Example: color is ask Ποιο είναι το αγαπημένο σου χρώμα;",
+                "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα\\nprint 'Το ' color ' είναι το αγαπημένο σου χρώμα!'"
+            }, {
+                "name": "if",
+                "explanation": "Κάνε μια επιλογή",
+                "example": "Παράδειγμα: if color is πράσινο print 'ωραίο!' else print 'τσκ'",
+                "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\\nif color is green print 'ωραίο!' else print 'τσκ'"
+            }
+        ]
+    },
+    {
+        "Level": "5",
+        "Language": "el",
+        "Start_code": "repeat 3 times print 'Hedy is fun!'",
+        "Intro_text": "Οι εντολές ask, print και if λειτουργούν όπως και στο Επίπεδο 4. Το Επίπεδο 5 προσθέτει την εντολή repeat που σημαίνει απανάλαβε. Η repeat μπορεί να χρησιμοποιηθεί για να εκτελεστεί μια γραμμή κώδικα πολλές φορές.",
+        "Available": true,
+        "Commands": [
+            {
+                "name": "print",
+                "explanation": "Τύπωσε ακριβώς αυτό που θέλεις χρησιμοποιώντας εισαγωγικά",
+                "example": "Παράδειγμα: print 'Γεια σου καλωσήρθες στη Hedy.'",
+                "demo_code": "print 'Γεια σου καλωσήρθες στη Hedy.'"
+            }, {
+                "name": "ask",
+                "explanation": "Ρώτησε κάτι με την εντολή ask. Πρόσεχε! Η ask δεν χρειάζεται εισαγωγικά.",
+                "example": "Example: color is ask Ποιο είναι το αγαπημένο σου χρώμα;",
+                "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα\\nprint 'Το ' color ' είναι το αγαπημένο σου χρώμα!'"
+            }, {
+                "name": "if",
+                "explanation": "Κάνε μια επιλογή",
+                "example": "Παράδειγμα: if color is πράσινο print 'ωραίο!' else print 'τσκ'",
+                "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\\nif color is green print 'ωραίο!' else print 'τσκ'"
+            },
+            {
+                "name": "repeat",
+                "explanation": "Συνδυασμός repeat και if",
+                "example": "Παράδειγμα: if color is πράσινο repeat 3 times print 'ωραίο!' else repeat 5 times print 'τσκ'",
+                "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\\nif color is πράσινο repeat 3 times print 'ωραίο!' else repeat 5 times print 'τσκ'"
+            }
+        ]
+    },
+    {
+        "Level": "6",
+        "Language" : "el",
+        "Start_code": "print '5 times 5 is ' 5 * 5",
+        "Intro_text" : "Οι εντολές ask, print, if και repeat είναι οι ίδιες όοπως στα επίπεδο 4 και 5. Το Επίπεδο 6 προσθέτει κάτι νέο... Μπορείς πλέον να υπολογίζεις. ",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Τύπωσε ακριβώς αυτό που θέλεις χρησιμοποιώντας εισαγωγικά",
+            "example": "Example: print '5 φορές το 5 κάνει ' 5 * 5",
+            "demo_code": "print '5 φορές το  5 κάνει ' 5 * 5"
+        }, {
+            "name": "ask και if με υπολογισμούς",
+            "explanation": "Ρώτησε έναν υπολογισμό και σύγκρινε με την if. Πρόσεχε! Η εντολή print χρειάζεται εισαγωγικά.",
+            "example": "Example: answer is ask Πόσο κάνει 10 και 10;",
+            "demo_code": "answer is ask Πόσο κάνει 10 και 10;\\nif answer is 20 print 'Ναι!' else print 'Ουπς'"
+        }, {
+            "name": "repeat",
+            "explanation": "Συνδυασμός repeat και if",
+            "example": "Παράδειγμα: if color is πράσινο repeat 3 times print 'ωραίο!' else repeat 5 times print 'τσκ'",
+            "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\\nif color is πράσινο repeat 3 times print 'ωραίο!' else repeat 5 times print 'τσκ'"
+            }
+        ]
+    },
+    {   "Level": "7",
+        "Language" : "el",
+        "Start_code": "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'",
+        "Intro_text" : "Οι εντολές ask και print δουλεύουν όπως τις ξέρεις. Αλλά η if και η repeat άλλαξαν! Μπορείς να εκτελείς ομάδες εντολών μαζί, αλλά πρέπει να βάλεις εσοχές στον κώδικα. Αυτό σημαίνει ότι πρέπει να βάλεις τέσσερα κενά στην αρχή της γραμμής. Αυτό ισχύει ακόμη και αν θες να δημιουργήσεις μια ομάδα μιας γραμμής. Αν συνδυάσεις repeat και if, θα χρειαστεί να βάλεις εσοχές σε κάθε ομάδα. Δες τα παραδείγματα για περισσότερες λεπτομέρειες!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Τύπωσε κάτι. Θυμήσου να χρησιμοποιείς εισαγωγικά για να τυπώνεις ακριβώς αυτό που θέλεις.",
+            "example": "Example: print '5 φορές το  5 κάνει ' 5 * 5",
+            "demo_code": "print '5 φορές το 5 κάνει ' 5 * 5"
+        }, {
+            "name": "if με πολλές γραμμές",
+            "explanation": "Ρώτησε την απάντηση (answer) για ένα άθροισμα και έλεγξε αν είναι σωστή. Τώρα μπορούμε να τυπώσουμε δυο γραμμές.",
+            "example": "Παράδειγμα: answer is ask Πόσο κάνει 5 και 5;",
+            "demo_code": "answer is ask Πόσο κάνει 5 και 5;\\nif answer is 10\\n    print 'Μπράβο!'\\n    print 'Όντως, η απάντηση ήταν' answer\\nelse\\n    print 'Ουπς!'\\n    print 'Η απάντηση δεν είναι ' answer"
+        }, {
+            "name": "Συνδυασμός if και repeat",
+            "explanation": "Συνδυασμός if και repeat",
+            "example": "Παράδειγμα: Αν το χρώμα είναι πράσινο επανάλαβε 3 φορές print 'ωραίο!' αλλιώς επανάλαβε 5 φορές print 'τσκ'",
+            "demo_code": "color is ask Ποιό είναι το αγαπημένο σου χρώμα?\\nif color is πράσινο\\n    repeat 3 times\\n        print 'ωραίο!'\\nelse\\n    repeat 5 times\\n        print 'τσκ'"
+        }
+        ]
     }
 ]
