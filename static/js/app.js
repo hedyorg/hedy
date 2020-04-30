@@ -28,6 +28,13 @@ function goto(level, lang) {
     });
 }
 
+function goto_embed(level, lang) {
+    window.location.href = buildUrl('/embed.html', {
+      level: level,
+      lang: lang
+    });
+}
+
 function runit(level, lang) {
   error.hide();
   try {

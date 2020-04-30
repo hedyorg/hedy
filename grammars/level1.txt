@@ -3,13 +3,13 @@ program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on s
 command: "print" (" " text)? -> print
          | "ask" (" " text)? -> ask
          | "echo" (" " text)? -> echo
-         | textwithoutspaces (" " text)? -> invalid
-         | " "* text -> invalid_space
+         | " "+ text -> invalid_space
+         | textwithoutspaces text? -> invalid
 
 _EOL: "\r"?"\n"
 
-text: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
-textwithoutspaces: /([^\n, *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+text: /([^\n]+)/ -> text //anything can be parsed except for a newline
+textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
 
 %import common.LETTER   // imports from terminal library

@@ -10,8 +10,6 @@ page_title: Welkom bij Hedy!
   </div>
 </div>
 
-</div>
-
 ## Wat is een graduele programmeertaal?
 
 Programmeren is lastig te leren. Niet dat het nou perse zo lastig is hoor! Maar je moet een hoop codes uit je hoofd leren. Net als bij leren lezen, moet je ook een hoop oefenen.
