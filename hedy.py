@@ -49,6 +49,9 @@ class AllCommands(Transformer):
         for c in args:
                 commands.append(c)
         return commands
+    def repeat(self, args):
+        commands = args[2:-1]
+        return commands
     def command(self, args):
         return args
     def text(self, args):
@@ -71,31 +74,40 @@ class FlattenText(Transformer):
     #level 5
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
+    #level 6 (and up)
+    def repeat(self, args):
+        commands = args[2:-1]
+        return Tree('repeat times' + args[0].children[0], commands)
+    def indent(self, args):
+        return ''
+    def dedent(self, args):
+        return ''
 
+def flatten(args):
+    flattened_args = []
+    if isinstance(args, str):
+        return args
+    else:
+        for a in args:
+            if type(a) is list:
+                for x in a:
+                    flattened_args.append(flatten(x))
+            else:
+                flattened_args.append(a)
+        return flattened_args
 
-
-class AllCommandsAssignments(FlattenText):
+class AllAssignmentCommands(FlattenText):
     #returns only assignments
     def program(self, args):
-        flattened_args = []
-        for a in args:
-            if type(a) == list:
-                for x in a:
-                    flattened_args.append(x)
-            else:
-                flattened_args.append(a)
-        return flattened_args
-    def print(self, args):
-        return args
+        return flatten(args)
+
+    def repeat(self, args):
+        commands = args[2:-1]
+        return flatten(commands)
+
     def command(self, args):
-        flattened_args = []
-        for a in args:
-            if type(a) == list:
-                for x in a:
-                    flattened_args.append(x)
-            else:
-                flattened_args.append(a)
-        return flattened_args
+        return flatten(args)
+
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
         #(since then it has no var as 1st argument)
@@ -114,6 +126,8 @@ class AllCommandsAssignments(FlattenText):
             return 'random.choice(' + args[0].children + ')'
         else:
             return args[0].children + '[' + args[1] + ']'
+    def print(self, args):
+        return []
 
 def all_commands(tree):
     commands = AllCommands().transform(tree)
@@ -121,7 +135,7 @@ def all_commands(tree):
 
 def all_assignments(tree):
     flat = FlattenText().transform(tree)
-    assignments = AllCommandsAssignments().transform(tree)
+    assignments = AllAssignmentCommands().transform(tree)
     return assignments #leeg dus als er geen assignments gevonden zijn
 
 def create_parser(level):
