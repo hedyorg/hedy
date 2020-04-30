@@ -1,5 +1,6 @@
 # coding=utf-8
 import datetime
+import collections
 from functools import wraps
 import hedy
 import json
@@ -11,19 +12,37 @@ import re
 import requests
 import uuid
 import yaml
-from flaskext.markdown import Markdown
+from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort
+from flask import Flask, request, jsonify, render_template, session, abort, g
 from flask_compress import Compress
 
+# Hedy-specific modules
+import courses
+import hedyweb
+
+# Define and load all available language data
 ALL_LANGUAGES = {
     'en': '🇺🇸',
     'nl': '🇳🇱',
     'es': '🇪🇸',
 }
+
+LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
+for lang in ALL_LANGUAGES.keys():
+    LEVEL_DEFAULTS[lang] = courses.LevelDefaults(lang)
+
+HEDY_COURSE = collections.defaultdict(courses.NoSuchCourse)
+for lang in ALL_LANGUAGES.keys():
+    HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
+
+# Only available in Dutch
+SSP_COURSE = courses.Course('ssp', 'nl', LEVEL_DEFAULTS['nl'])
+
+TRANSLATIONS = hedyweb.Translations()
 
 # Load main menu (do it once, can be cached)
 with open(f'main/menu.json', 'r') as f:
@@ -40,26 +59,11 @@ app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = uuid.uuid4().hex
 
 Compress(app)
-Markdown(app)
+Commonmark(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
 
 if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
-
-@app.route('/levels-text/', methods=['GET'])
-def levels():
-    level = request.args.get("level", None)
-
-    #read levels from file
-    try:
-        file = open("levels.json", "r")
-        contents = str(file.read())
-        response = (json.loads(contents))
-        file.close()
-    except Exception as E:
-            print(f"error opening level {level}")
-            response["Error"] = str(E)
-    return jsonify(response)
 
 
 @app.route('/parse/', methods=['GET'])
@@ -79,21 +83,19 @@ def parse():
     # is so, parse
     else:
         try:
-            texts = load_texts()
+            hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\n" + result
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
             if E.args[0] == "Invalid Space":
-                error_template = texts['HedyErrorMessages'][E.error_code]
+                error_template = hedy_errors[E.error_code]
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
             else:
-                error_template = texts['HedyErrorMessages'][E.error_code]
+                error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
-
-
         except Exception as E:
             print(f"error transpiling {code}")
             response["Error"] = str(E)
@@ -130,104 +132,56 @@ def report_error():
 # for now we do not need a post but I am leaving it in for a potential future
 
 # routing to index.html
-@app.route('/hedy', methods=['GET'])
-def index():
+@app.route('/hedy', methods=['GET'], defaults={ 'level': 1 })
+@app.route('/hedy/<level>', methods=['GET'])
+def index(level):
     session_id()  # Run this for the side effect of generating a session ID
-    level = requested_level()
-    lang = requested_lang()
+    g.level = level = int(level)
+    g.lang = lang = requested_lang()
+    g.prefix = '/hedy'
 
-    arguments_dict = {}
-    arguments_dict['level'] = level
-    arguments_dict['lang'] = lang
-
-    try:
-        with open("static/levels.json", "r") as file:
-            response_levels = json.load(file)
-        response_texts_lang = load_texts()
-    except Exception as E:
-        print(f"error opening level {level}")
-        return jsonify({"Error": str(E)})
-
-    arguments_dict['page_title'] = response_texts_lang['Page_Title']
-    arguments_dict['level_title'] = response_texts_lang['Level']
-    arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
-    arguments_dict['try_button'] = response_texts_lang['Try_button']
-    arguments_dict['run_button'] = response_texts_lang['Run_code_button']
-    arguments_dict['advance_button'] = response_texts_lang['Advance_button']
-    arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
-    arguments_dict['enter'] = response_texts_lang['Enter']
-
-    level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
-    maxlevel = max(int(r['Level']) for r in response_levels if r['Language'] == lang)
-
-    arguments_dict['commands'] = level_and_lang_dict['Commands']
-    arguments_dict['introtext'] = level_and_lang_dict['Intro_text']
-    arguments_dict['startcode'] = level_and_lang_dict['Start_code']
-
-    next_level_available = level != maxlevel
-    arguments_dict['nextlevel'] = level + 1 if next_level_available else None
-    arguments_dict['latest'] = version()
-    arguments_dict['selected_page'] = 'code'
-    arguments_dict['menu'] = render_main_menu('hedy')
-
-    return render_template("code-page.html", **arguments_dict)
+    return hedyweb.render_assignment_editor(
+        course=HEDY_COURSE[lang],
+        assignment_number=level,
+        menu=render_main_menu('hedy'),
+        translations=TRANSLATIONS,
+        version=version())
 
 # routing to docs.html
-@app.route('/hedy/docs', methods=['GET'])
-def docs():
-    level = request.args.get("level", 1)
-    lang = requested_lang()
-    response_texts_lang = load_texts()
+@app.route('/hedy/<level>/<docspage>', methods=['GET'])
+def docs(level, docspage):
+    session_id()
+    g.level = level = int(level)
+    g.lang = lang = requested_lang()
+    g.prefix = '/hedy'
 
-    arguments_dict = {}
-    arguments_dict['level'] = level
-    arguments_dict['pagetitle'] = f'Level{level}'
-    arguments_dict['lang'] = lang
-    arguments_dict['level_title'] = response_texts_lang['Level']
-    arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
-    arguments_dict['selected_page'] = 'docs'
+    return hedyweb.render_assignment_docs(
+        doc_type=docspage,
+        course=HEDY_COURSE[lang],
+        assignment_number=level,
+        menu=render_main_menu('hedy'),
+        translations=TRANSLATIONS)
 
-    arguments_dict['mkd'] = load_docs()
-    arguments_dict['menu'] = render_main_menu('hedy')
 
-    return render_template("per-level-text.html", **arguments_dict)
+@app.route('/embed', methods=['GET'], defaults={ 'level': 1 })
+@app.route('/embed/<level>', methods=['GET'])
+def embed(level):
+    session_id()  # Run this for the side effect of generating a session ID
+    g.level = level = int(level)
+    g.lang = lang = requested_lang()
+    g.prefix = '/embed'
 
-# routing to video.html
-@app.route('/hedy/video', methods=['GET'])
-def video():
-    level = request.args.get("level", 1)
-    lang = requested_lang()
-    response_texts_lang = load_texts()
-
-    arguments_dict = {}
-    arguments_dict['level'] = level
-    arguments_dict['pagetitle'] = f'Level{level}'
-    arguments_dict['lang'] = lang
-    arguments_dict['selected_page'] = 'video'
-    arguments_dict['level_title'] = response_texts_lang['Level']
-    arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['docs_title'] = response_texts_lang['Docs']
-    arguments_dict['video_title'] = response_texts_lang['Video']
-
-    arguments_dict['mkd'] = load_video()
-    arguments_dict['menu'] = render_main_menu('hedy')
-
-    return render_template("per-level-text.html", **arguments_dict)
+    return hedyweb.render_assignment_editor(
+        course=SSP_COURSE,
+        assignment_number=level,
+        translations=TRANSLATIONS,
+        version=version(),
+        menu=None)
 
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
-    try:
-        lang_texts = load_texts()
-        error_messages = lang_texts["ClientErrorMessages"]
-    except Exception as E:
-        print(f"error opening texts.json")
-        error_messages = {"Error": str(E)}
-
+    error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
 
@@ -254,59 +208,16 @@ def main_page(page):
     if not path.isfile(f'main/{page}-{effective_lang}.md'):
         effective_lang = 'en'
 
-    with open(f'main/{page}-{effective_lang}.md', 'r') as f:
-        contents = f.read()
+    try:
+        with open(f'main/{page}-{effective_lang}.md', 'r') as f:
+            contents = f.read()
+    except IOError:
+        abort(404)
 
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
     return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
-
-@app.route('/embed.html')
-def embed():
-    session_id()  # Run this for the side effect of generating a session ID
-    level = requested_level()
-    lang = requested_lang()
-
-    arguments_dict = {}
-    arguments_dict['level'] = level
-    arguments_dict['lang'] = lang
-
-    try:
-        with open("static/levels.json", "r") as file:
-            response_levels = json.load(file)
-        response_texts_lang = load_texts()
-        response_assignments = load_assignments()
-    except Exception as E:
-        print(f"error opening level {level}")
-        return jsonify({"Error": str(E)})
-
-    arguments_dict['page_title'] = response_texts_lang['Page_Title']
-    arguments_dict['level_title'] = response_texts_lang['Level']
-    arguments_dict['code_title'] = response_texts_lang['Code']
-    arguments_dict['try_button'] = response_texts_lang['Try_button']
-    arguments_dict['run_button'] = response_texts_lang['Run_code_button']
-    arguments_dict['advance_button'] = response_texts_lang['Advance_button']
-    arguments_dict['enter_text'] = response_texts_lang['Enter_Text']
-    arguments_dict['enter'] = response_texts_lang['Enter']
-
-    level_and_lang_assignment_dict = [r for r in response_assignments if int(r['Level']) == level and r['Language'] == lang][0]
-    arguments_dict['assignment_header'] = 'Opdracht'
-    arguments_dict['assignment'] = level_and_lang_assignment_dict["Assignment"]
-
-    level_and_lang_dict = [r for r in response_levels if int(r['Level']) == level and r['Language'] == lang][0]
-    maxlevel = max(int(r['Level']) for r in response_levels if r['Language'] == lang)
-
-    arguments_dict['commands'] = level_and_lang_dict['Commands']
-    arguments_dict['introtext'] = level_and_lang_dict['Intro_text']
-    arguments_dict['startcode'] = level_and_lang_dict['Start_code']
-
-    next_level_available = level != maxlevel
-    arguments_dict['nextlevel'] = level + 1 if next_level_available else None
-    arguments_dict['latest'] = version()
-    arguments_dict['selected_page'] = 'code'
-
-    return render_template("code-page-embed.html", **arguments_dict)
 
 
 def session_id():
@@ -327,42 +238,20 @@ def requested_lang():
 
     return request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
 
-def requested_level():
-    """Return the user's requested level."""
-    return int(request.args.get("level", 1))
-
-
-def load_docs():
-    """Load the markdown docs for the given language and level. """
-    lang = requested_lang()
-    level = requested_level()
-
-    try:
-        with open(f'docs/{lang}-level{level}.md', "r") as file:
-            markdown = file.read()
-
-        return markdown
-    except IOError as e:
-        return f'No documentation available for language {lang} at Level {level}. You might want to translate this yourself via our GitHub repo?'
-
-def load_video():
-    """Load the markdown video document for the given language and level. """
-    lang = requested_lang()
-    level = requested_level()
-
-    try:
-        with open(f'docs/video-{lang}-level{level}.md', "r") as file:
-            markdown = file.read()
-
-        return markdown
-    except IOError as e:
-        return f'No docs available for {lang} at level {level}'
-
-
 @app.template_global()
 def current_language():
     return make_lang_obj(requested_lang())
 
+@app.template_global()
+def hedy_link(assignment_nr, subpage=None, lang=None):
+    """Make a link to a Hedy page."""
+    parts = [g.prefix]
+    parts.append('/' + str(assignment_nr))
+    if subpage and subpage != 'code':
+        parts.append('/' + subpage)
+    parts.append('?')
+    parts.append('lang=' + (lang if lang else requested_lang()))
+    return ''.join(parts)
 
 @app.template_global()
 def other_languages():
@@ -387,23 +276,6 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
-def load_texts():
-    """Load the texts for the given language.
-
-    If the language is unknown, default to English.
-    """
-    with open("static/texts.json", "r") as file:
-        texts_file = json.load(file)
-    texts = texts_file.get(requested_lang().lower())
-    return texts if texts else texts_file.get('en')
-
-def load_assignments():
-    """Load the assignments for the given language."""
-
-    with open("static/assignments.json", "r") as file:
-        texts_file = json.load(file)
-    texts = texts_file
-    return texts
 
 def no_none_sense(d):
     """Remove all None values from a dict."""

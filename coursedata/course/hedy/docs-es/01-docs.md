@@ -1,3 +1,6 @@
+title: "Explicación"
+level: 1
+---
 # Una historia
 
 En el Nivel 1, por ejemplo, puedes crear una historia con un personaje principal. Cada vez que ejecutas este programa, puedes elegir nuevamente otro personaje principal.

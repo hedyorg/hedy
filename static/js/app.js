@@ -6,8 +6,7 @@
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
   if (storage) {
-    const level = queryParam('level') || '1';
-    const levelKey = 'level_' + level + '_code';
+    const levelKey = $('#editor').data('lskey');
 
     // On page load, if we have a saved program, load it
     if (storage.getItem(levelKey)) {
@@ -20,20 +19,6 @@
     });
   }
 })();
-
-function goto(level, lang) {
-    window.location.href = buildUrl('/hedy', {
-      level: level,
-      lang: lang
-    });
-}
-
-function goto_embed(level, lang) {
-    window.location.href = buildUrl('/embed.html', {
-      level: level,
-      lang: lang
-    });
-}
 
 function runit(level, lang) {
   error.hide();

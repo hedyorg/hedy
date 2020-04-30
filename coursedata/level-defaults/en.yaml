@@ -1,0 +1,140 @@
+---
+  1: 
+    intro_text: "In Level 1 you can use these commands"
+    start_code: "print hello world!"
+    commands: 
+      - 
+        name: "print"
+        explanation: "Print something with print."
+        example: "Example: print Hello welcome to Hedy!"
+        demo_code: "print Hello welcome to Hedy!"
+      - 
+        name: "ask"
+        explanation: "Ask something with ask."
+        example: "Example: ask What is your favorite color?"
+        demo_code: "ask What is your favorite color?"
+      - 
+        name: "echo"
+        explanation: "Repeat something using echo."
+        example: "Example: echo so your favorite color is..."
+        demo_code: "ask What is your favorite color?\\necho so your favorite color is..."
+  2: 
+    intro_text: "Print still works as it did in Level 1, but ask has been changed abd now needs a name, which you can then print. Echo is no longer needed. You can now also use these commands:"
+    start_code: "print hello world!"
+    commands: 
+      - 
+        name: "is"
+        explanation: "Give a word a name to use in the program"
+        example: "Example: name is Hedy."
+        demo_code: "name is Hedy\\nprint welcome name"
+      - 
+        name: "ask"
+        explanation: "Ask something with ask. Beware! Ask needs a name now."
+        example: "Example: color is ask What is your favorite color?"
+        demo_code: "color is ask What is your favorite color?\\nprint color is your favorite!"
+      - 
+        name: "choose_random"
+        explanation: "Choose a random word from a group with at "
+        example: "Example: animals is dog, cat, kangaroo."
+        demo_code: "animals is dog, cat, kangaroo\\nprint animals at random"
+  3: 
+    start_code: "print 'Hello world'"
+    intro_text: "In level 3, you need to use quotation marks around words that you want to print. Echo is no longer needed, you can now print the words with print!"
+    commands: 
+      - 
+        name: "print"
+        explanation: "Print exactly using quotation marks"
+        example: "Example: print 'Hello welcome to Hedy.'"
+        demo_code: "print 'Hello welcome to Hedy.'"
+      - 
+        name: "is"
+        explanation: "Give a name to some text and print without quotation marks"
+        example: "Example: name is Hedy."
+        demo_code: "name is Hedy\\nprint 'my name is ' name"
+      - 
+        name: "ask"
+        explanation: "Ask something with ask. Beware! Print not needs quotations marks."
+        example: "Example: color is ask What is your favorite color?"
+        demo_code: "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+  4: 
+    start_code: "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'"
+    intro_text: "ask en printwork exactly like they did in Level 3. Level 4 adds the if statement!"
+    commands: 
+      - 
+        name: "print"
+        explanation: "Print exactly using quotation marks"
+        example: "Example: print 'Hello welcome to Hedy.'"
+        demo_code: "print 'Hello welcome to Hedy.'"
+      - 
+        name: "ask"
+        explanation: "Ask something with ask. Beware! Print not needs quotations marks."
+        example: "Example: color is ask What is your favorite color?"
+        demo_code: "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+      - 
+        name: "if"
+        explanation: "Make a choice"
+        example: "Example: if color is green print 'pretty!' else print 'meh'"
+        demo_code: "color is ask What is your favorite color?\\nif color is green print 'pretty!' else print 'meh'"
+  5: 
+    start_code: "repeat 3 times print 'Hedy is fun!'"
+    intro_text: "ask, print en if work exactly like they did in Level 4. But Level 5 adds the repeat command. Repeat can be used to execute a line of code multiple times."
+    commands: 
+      - 
+        name: "print"
+        explanation: "Print exactly using quotation marks"
+        example: "Example: print 'Hello welcome to Hedy.'"
+        demo_code: "print 'Hello welcome to Hedy.'"
+      - 
+        name: "ask"
+        explanation: "Ask something with ask. Beware! Print not needs quotations marks."
+        example: "Example: color is ask What is your favorite color?"
+        demo_code: "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+      - 
+        name: "if"
+        explanation: "Make a choice"
+        example: "Example: if color is green print 'pretty!' else print 'meh'"
+        demo_code: "color is ask What is your favorite color?\\nif color is green print 'pretty!' else print 'meh'"
+      - 
+        name: "repeat"
+        explanation: "Repeat and if combined"
+        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        demo_code: "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+  6: 
+    start_code: "print '5 times 5 is ' 5 * 5"
+    intro_text: "ask, print, if en repeat are still the same as in Level 4 en 5. Level 6 adds something new... You can now calculate. "
+    commands: 
+      - 
+        name: "print"
+        explanation: "Print exactly using quotation marks"
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+      - 
+        name: "ask en if with calculations"
+        explanation: "Ask for a calculation and compare with if. Beware: Print still needs quotation marks."
+        example: "Example: answer is ask What is 10 plus 10?"
+        demo_code: "answer is ask What is 10 plus 10?\\nif answer is 20 print 'Yes!' else print 'Oops'"
+      - 
+        name: "repeat"
+        explanation: "Repeat and if combined"
+        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        demo_code: "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+  7: 
+    start_code: "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'"
+    intro_text: "ask and print still work as you know them. But if and repeat have changed! You can now execute groups of code together, but you will have to indent the code. That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line. If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!"
+    commands: 
+      - 
+        name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+      - 
+        name: "if with multiple lines"
+        explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+        example: "Example: answer is ask What is 5 plus 5?"
+        demo_code: "answer is ask What is 5 plus 5?\\nif answer is 10\\n    print 'Well done!'\\n    print 'Indeed, the answer was ' answer\\nelse\\n    print 'Oops!'\\n    print 'Ths answer is ' answer"
+      - 
+        name: "if en repeat combined"
+        explanation: "if en repeat combined"
+        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        demo_code: "color is ask What is your favorite color?\\nif color is green\\n    repeat 3 times\\n        print 'pretty!'\\nelse\\n    repeat 5 times\\n        print 'meh'"
+
