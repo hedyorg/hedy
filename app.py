@@ -27,7 +27,7 @@ ALL_LANGUAGES = {
 }
 
 # Load main menu (do it once, can be cached)
-with open(f'main/menu.json', 'r') as f:
+with open(f'main/menu.json', 'r', encoding="utf8") as f:
     main_menu_json = json.load(f)
 
 
@@ -255,7 +255,7 @@ def main_page(page):
     if not path.isfile(f'main/{page}-{effective_lang}.md'):
         effective_lang = 'en'
 
-    with open(f'main/{page}-{effective_lang}.md', 'r') as f:
+    with open(f'main/{page}-{effective_lang}.md', 'r', encoding="utf8") as f:
         contents = f.read()
 
     front_matter, markdown = split_markdown_front_matter(contents)
@@ -274,7 +274,7 @@ def embed():
     arguments_dict['lang'] = lang
 
     try:
-        with open("static/levels.json", "r") as file:
+        with open("static/levels.json", "r",encoding="utf8") as file:
             response_levels = json.load(file)
         response_texts_lang = load_texts()
         response_assignments = load_assignments()
@@ -339,7 +339,7 @@ def load_docs():
     level = requested_level()
 
     try:
-        with open(f'docs/{lang}-level{level}.md', "r") as file:
+        with open(f'docs/{lang}-level{level}.md', "r",encoding="utf8") as file:
             markdown = file.read()
 
         return markdown
@@ -352,7 +352,7 @@ def load_video():
     level = requested_level()
 
     try:
-        with open(f'docs/video-{lang}-level{level}.md', "r") as file:
+        with open(f'docs/video-{lang}-level{level}.md', "r",encoding="utf8") as file:
             markdown = file.read()
 
         return markdown
@@ -401,7 +401,7 @@ def load_texts():
 def load_assignments():
     """Load the assignments for the given language."""
 
-    with open("static/assignments.json", "r") as file:
+    with open("static/assignments.json", "r",encoding="utf8") as file:
         texts_file = json.load(file)
     texts = texts_file
     return texts
