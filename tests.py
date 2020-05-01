@@ -51,8 +51,6 @@ class TestsForMultipleLevels(unittest.TestCase):
     #         self.assertEqual(str(context.exception), 'VarUndefined')
     #         print('Passed at level ', i)
 
-
-
 class TestsLevel1(unittest.TestCase):
 
     def test_transpile_other(self):

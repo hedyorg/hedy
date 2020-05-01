@@ -8,9 +8,11 @@ command: "print" (" " text)? -> print
 
 _EOL: "\r"?"\n"
 
+
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
 textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
+SPACE: " "
 
 %import common.LETTER   // imports from terminal library
 %import common.DIGIT   // imports from terminal library

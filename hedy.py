@@ -41,43 +41,29 @@ class HedyException(Exception):
 
 
 
-class AllCommands(Transformer):
-    #creates a list of all commands in a tree for further processing
-    # it removes command and program nodes
-    def program(self, args):
-        commands = []
-        for c in args:
-                commands.append(c)
-        return commands
-    def repeat(self, args):
-        commands = args[2:-1]
-        return commands
-    def command(self, args):
-        return args
-    def text(self, args):
-        return Tree('text', ''.join([str(c) for c in args]))
-    def var(self, args):
-        return Tree('var', ''.join([str(c) for c in args]))
-    def punctuation(self, args):
-        return Tree('punctuation', ''.join([str(c) for c in args]))
 
-class FlattenText(Transformer):
-    #flattens arguments of text, var and punctuation for more easy debugging
+class ExtractAST(Transformer):
+    # simplyfies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
         return Tree('text', ''.join([str(c) for c in args]))
+
+    #level 2
     def var(self, args):
         return Tree('var', ''.join([str(c) for c in args]))
     def punctuation(self, args):
         return Tree('punctuation', ''.join([str(c) for c in args]))
     def index(self, args):
         return ''.join([str(c) for c in args])
+    def list_access(self, args):
+        if type(args[1]) == Tree:
+            return Tree('list_access', [args[0], 'random'])
+        else:
+            return Tree('list_access', [args[0], args[1]])
+
     #level 5
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
     #level 6 (and up)
-    def repeat(self, args):
-        commands = args[2:-1]
-        return Tree('repeat times' + str(args[0]), commands)
     def indent(self, args):
         return ''
     def dedent(self, args):
@@ -98,8 +84,10 @@ def flatten(args):
                 flattened_args.append(a)
         return flattened_args
 
-class AllAssignmentCommands(FlattenText):
-    #returns only assignments
+class AllAssignmentCommands(ExtractAST):
+    # returns only variable assignments AND places where variables are accessed
+    # so these can be excluded when printing
+
     def program(self, args):
         return flatten(args)
 
@@ -123,6 +111,8 @@ class AllAssignmentCommands(FlattenText):
         return args[0].children
     def var_access(self,args):
         return args[0].children
+
+    #list access is accessing a variable, so must be escaped
     def list_access(self, args):
         if type(args[1]) == Tree:
             return 'random.choice(' + args[0].children + ')'
@@ -131,12 +121,10 @@ class AllAssignmentCommands(FlattenText):
     def print(self, args):
         return args
 
-def all_commands(tree):
-    commands = AllCommands().transform(tree)
-    return commands
+
 
 def all_assignments(tree):
-    flat = FlattenText().transform(tree)
+    flat = ExtractAST().transform(tree)
     assignments = AllAssignmentCommands().transform(tree)
     return assignments #leeg dus als er geen assignments gevonden zijn
 
@@ -328,7 +316,6 @@ class IsComplete(Transformer):
         return False, args[0][1]
 
 
-
 class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
@@ -359,7 +346,8 @@ def wrap_non_var_in_quotes(argument, lookup):
 
 class ConvertToPython_2(ConvertToPython_1):
     def var(self, args):
-        return ''.join(["_" + str(c) if c in reserved_words else str(c) for c in args])
+        name = ''.join(args)
+        return "_" + name if name in reserved_words else name
     def print(self, args):
         all_arguments_converted = []
         i = 0
@@ -385,10 +373,11 @@ class ConvertToPython_2(ConvertToPython_1):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
-        if args[1].data == 'random':
+        if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1].children[0] + ']'
+            return args[0] + '[' + args[1] + ']'
+
 
 
 #TODO: lookuptable and punctuation chars not be needed for level2 and up anymore, could be removed
@@ -682,7 +671,7 @@ def transpile_inner(input_string, level):
         try:
             program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
             lookup_table = all_assignments(program_root)
-            flattened_tree = FlattenText().transform(program_root)
+            abstract_syntaxtree = ExtractAST().transform(program_root)
         except Exception as e:
             # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
             raise HedyException('Parse', level=level, parse_error=e.args[0])
@@ -711,27 +700,27 @@ def transpile_inner(input_string, level):
 
 
         if level == 1:
-            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(program_root)
+            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
         elif level == 2:
             python = 'import random\n'
-            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(program_root)
+            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
         elif level == 3:
             python = 'import random\n'
-            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(program_root)
+            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
         elif level == 4:
             python = 'import random\n'
-            python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(program_root)
+            python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
         elif level == 5:
             python = 'import random\n'
-            python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(program_root)
+            python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
         elif level == 6:
             python = 'import random\n'
-            python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(program_root)
+            python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
@@ -739,7 +728,7 @@ def transpile_inner(input_string, level):
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
-        flattened_tree = FlattenText().transform(program_root)
+        abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = all_assignments(program_root)
         if level == 7:
             try:
