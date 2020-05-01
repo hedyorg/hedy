@@ -31,7 +31,7 @@ Je kunt ook in Level 4 weer een dobbelsteen maken en daarbij een if gebruiken. B
 * `keuzes is 1, 2, 3, 4, 5, regenworm`
 * `worp is keuzes at random`
 * `print 'je hebt ' worp ' gegooid'`
-* `if worp is regenworm print 'Je mag stoppen met gooien.' else print 'Je moet nog een keer hoor!`
+* `if worp is regenworm print 'Je mag stoppen met gooien.' else print 'Je moet nog een keer hoor!'`
 
 Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken.
 

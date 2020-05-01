@@ -7,7 +7,7 @@ Hier vind je weer een aantal opdrachten om mee aan de slag te gaan.
 
 # Meer regenwormen!
 Je kunt ook in Level 6 weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
-Je weet misschien dat de worm bij regenworm telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid.
+Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid.
 Zo doe je dat voor 1 dobbelsteen:
 
 1 `keuzes is 1, 2, 3, 4, 5, regenworm`
