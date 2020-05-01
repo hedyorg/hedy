@@ -549,7 +549,7 @@ class TestsLevel7(unittest.TestCase):
 
     def test_print_with_calc_no_spaces(self):
         result = hedy.transpile("print '5 keer 5 is ' 5*5", 7)
-        self.assertEqual("import random\nnaam = 'Hedy'\nprint('5 keer 5 is '+str(5*5))",result)
+        self.assertEqual("import random\nprint('5 keer 5 is '+str(int(5) * int(5)))",result)
 
 
 

@@ -77,7 +77,7 @@ class FlattenText(Transformer):
     #level 6 (and up)
     def repeat(self, args):
         commands = args[2:-1]
-        return Tree('repeat times' + args[0].children[0], commands)
+        return Tree('repeat times' + str(args[0]), commands)
     def indent(self, args):
         return ''
     def dedent(self, args):
@@ -86,6 +86,8 @@ class FlattenText(Transformer):
 def flatten(args):
     flattened_args = []
     if isinstance(args, str):
+        return args
+    elif isinstance(args, Tree):
         return args
     else:
         for a in args:
@@ -127,7 +129,7 @@ class AllAssignmentCommands(FlattenText):
         else:
             return args[0].children + '[' + args[1] + ']'
     def print(self, args):
-        return []
+        return args
 
 def all_commands(tree):
     commands = AllCommands().transform(tree)
@@ -324,6 +326,7 @@ class IsComplete(Transformer):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
+
 
 
 class ConvertToPython_1(Transformer):
