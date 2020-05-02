@@ -114,19 +114,13 @@ class AllAssignmentCommands(ExtractAST):
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
-        if type(args[1]) == Tree:
+        if args[1] == 'random':
             return 'random.choice(' + args[0].children + ')'
         else:
             return args[0].children + '[' + args[1] + ']'
     def print(self, args):
         return args
 
-
-
-def all_assignments(tree):
-    flat = ExtractAST().transform(tree)
-    assignments = AllAssignmentCommands().transform(tree)
-    return assignments #leeg dus als er geen assignments gevonden zijn
 
 def create_parser(level):
     with open(f"grammars/level{str(level)}.txt", "r") as file:
@@ -315,7 +309,6 @@ class IsComplete(Transformer):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
 
-
 class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
@@ -335,8 +328,6 @@ class ConvertToPython_1(Transformer):
     def ask(self, args):
         all_parameters = ["'" + a + "'" for a in args]
         return 'answer = input(' + '+'.join(all_parameters) + ")"
-    def punctuation(self, args):
-        return ''.join([str(c) for c in args])
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:
@@ -345,6 +336,8 @@ def wrap_non_var_in_quotes(argument, lookup):
         return "'" + argument + "'"
 
 class ConvertToPython_2(ConvertToPython_1):
+    def punctuation(self, args):
+        return ''.join([str(c) for c in args])
     def var(self, args):
         name = ''.join(args)
         return "_" + name if name in reserved_words else name
@@ -670,8 +663,9 @@ def transpile_inner(input_string, level):
 
         try:
             program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
-            lookup_table = all_assignments(program_root)
             abstract_syntaxtree = ExtractAST().transform(program_root)
+            lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
+
         except Exception as e:
             # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
             raise HedyException('Parse', level=level, parse_error=e.args[0])
@@ -729,7 +723,7 @@ def transpile_inner(input_string, level):
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
         abstract_syntaxtree = ExtractAST().transform(program_root)
-        lookup_table = all_assignments(program_root)
+        lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
         if level == 7:
             try:
                 python = 'import random\n'
