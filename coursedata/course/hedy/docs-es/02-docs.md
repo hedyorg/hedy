@@ -1,3 +1,6 @@
+title: "Explicación"
+level: 2
+---
 # Piedra, papel o tijera
 
 En el Nivel 2 podemos hacer algo nuevo, es decir, ingresar listas y elegir cosas de ellas.
