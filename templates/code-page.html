@@ -9,11 +9,11 @@
           <!-- """+commando[0]+""" demo -->
           <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
             <div class="font-medium text-lg">
-              {{ command.explanation|markdown }}
+              {{ command.explanation|commonmark }}
             </div>
             <div class="flex">
               <div class="font-thin text-sm flex-grow">
-                {{ command.example|markdown }}
+                {{ command.example|commonmark }}
               </div>
             <button class="btn block flex-none self-end"
               onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue("{{ command.demo_code }}")};show_demo()'>{{try_button}}</button>
@@ -21,12 +21,20 @@
           </div>
           {% endfor %}
         </div>
+        {% if prompt %}
+        <div class="py-2 px-4">
+          <div>
+            <h2 class="mt-4">{{assignment_header}}</h2>
+            {{prompt|commonmark}}
+          </div>
+        </div>
+        {% endif %}
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
         <div>
           <div class="w-full h-64 flex flex-col">
-            <div id="editor" class="w-full flex-1 text-lg rounded">{{startcode}}</div>
+            <div id="editor" data-lskey="level_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{start_code}}</div>
               <!-- errorbox -->
               <div id="errorbox" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md"
                 role="alert" style="display: none;">
@@ -60,9 +68,9 @@
               </div>
           </div>
           <br>
-          <button class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_button}}</button>
-          {% if nextlevel %}
-          <button class="green-btn" onclick="goto({{ nextlevel }} , '{{ lang }}')">{{advance_button}} {{ nextlevel }}
+          <button class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
+          {% if next_assignment %}
+          <button class="green-btn" onclick="window.location = '{{ hedy_link(next_assignment) }}';">{{advance_button}} {{ next_assignment }}
           </button>
           {% endif %}
         </div>

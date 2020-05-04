@@ -6,6 +6,7 @@ from lark.indenter import Indenter
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
 def closest_command(command, commands):
+    #simple string distance, could be more sophisticated MACHINE LEARNING!
     min = 1000
     min_command = ''
     for c in commands:
@@ -20,38 +21,30 @@ def minimum_distance(s1, s2):
         s1, s2 = s2, s1
     distances = range(len(s1) + 1)
     for index2, char2 in enumerate(s2):
-        newDistances = [index2 + 1]
+        new_distances = [index2 + 1]
         for index1, char1 in enumerate(s1):
             if char1 == char2:
-                newDistances.append(distances[index1])
+                new_distances.append(distances[index1])
             else:
-                newDistances.append(1 + min((distances[index1],
-                                             distances[index1 + 1],
-                                             newDistances[-1])))
-        distances = newDistances
+                new_distances.append(1 + min((distances[index1], distances[index1 + 1], new_distances[-1])))
+        distances = new_distances
     return distances[-1]
-
-
-
 
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
         self.arguments = arguments
 
-
-
-
 class ExtractAST(Transformer):
     # simplyfies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
-        return Tree('text', ''.join([str(c) for c in args]))
+        return Tree('text', [''.join([str(c) for c in args])])
 
     #level 2
     def var(self, args):
-        return Tree('var', ''.join([str(c) for c in args]))
+        return Tree('var', [''.join([str(c) for c in args])])
     def punctuation(self, args):
-        return Tree('punctuation', ''.join([str(c) for c in args]))
+        return Tree('punctuation', [''.join([str(c) for c in args])])
     def index(self, args):
         return ''.join([str(c) for c in args])
     def list_access(self, args):
@@ -84,7 +77,7 @@ def flatten(args):
                 flattened_args.append(a)
         return flattened_args
 
-class AllAssignmentCommands(ExtractAST):
+class AllAssignmentCommands(Transformer):
     # returns only variable assignments AND places where variables are accessed
     # so these can be excluded when printing
 
@@ -92,7 +85,7 @@ class AllAssignmentCommands(ExtractAST):
         return flatten(args)
 
     def repeat(self, args):
-        commands = args[2:-1]
+        commands = args[1:]
         return flatten(commands)
 
     def command(self, args):
@@ -114,35 +107,28 @@ class AllAssignmentCommands(ExtractAST):
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
-        if type(args[1]) == Tree:
-            return 'random.choice(' + args[0].children + ')'
+        listname = args[0].children[0]
+        if args[1] == 'random':
+            return 'random.choice(' + listname + ')'
         else:
-            return args[0].children + '[' + args[1] + ']'
+            return listname + '[' + args[1] + ']'
     def print(self, args):
         return args
 
-
-
-def all_assignments(tree):
-    flat = ExtractAST().transform(tree)
-    assignments = AllAssignmentCommands().transform(tree)
-    return assignments #leeg dus als er geen assignments gevonden zijn
 
 def create_parser(level):
     with open(f"grammars/level{str(level)}.txt", "r") as file:
         grammar = file.read()
     return Lark(grammar)
 
-class IsValid(Transformer):
-    # all rules are valid except for the invalid production rule
-    # used to generate more informative error messages
-    # tree is transformed to a node of [Bool, args]
-    def pass_arguments(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments_of_false_nodes = [x[1] for x in args if not x[0]]
-        return all(bool_arguments), arguments_of_false_nodes
+def all_arguments_true(args):
+    bool_arguments = [x[0] for x in args]
+    arguments_of_false_nodes = [x[1] for x in args if not x[0]]
+    return all(bool_arguments), arguments_of_false_nodes
 
-    #would be lovely if there was some sort of default rule! Not sure Lark supports that
+# this class contains code shared between IsValid and IsComplete, which are quite similar
+# because both filter out some types of 'wrong' nodes
+class Filter(Transformer):
     def program(self, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
@@ -155,56 +141,44 @@ class IsValid(Transformer):
                 command_num += 1
 
     def command(self, args):
-        return self.pass_arguments(args)
-    def ask(self, args):
-        return self.pass_arguments(args)
-    def print(self, args):
-        return self.pass_arguments(args)
-    def echo(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
 
     def assign(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def assign_list(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def assign_sum(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def list_access(self, args):
-        return self.pass_arguments(args)
-    #level 4 commands
+        return all_arguments_true(args)
+
+    # level 4 commands
     def list_access_var(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def ifs(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def ifelse(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def condition(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def equality_check(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def in_list_check(self, args):
-        return self.pass_arguments(args)
-    #level 5 command
+        return all_arguments_true(args)
+
+    # level 5 command
     def repeat(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
 
-    #level 6
+    # level 6
     def addition(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def substraction(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def multiplication(self, args):
-        return self.pass_arguments(args)
+        return all_arguments_true(args)
     def division(self, args):
-        return self.pass_arguments(args)
-
-    #leafs with tokens need to be all true
-    def var(self, args):
-        return all(args), ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def addition(self, args):
-        return all(args), ''.join([c for c in args])
+        return all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
@@ -219,34 +193,42 @@ class IsValid(Transformer):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
+
+class IsValid(Filter):
+    # all rules are valid except for the invalid production rule
+    # this function is used to generate more informative error messages
+    # tree is transformed to a node of [Bool, args, linenumber]
+
+    #would be lovely if there was some sort of default rule! Not sure Lark supports that
+
+    def ask(self, args):
+        return all_arguments_true(args)
+    def print(self, args):
+        return all_arguments_true(args)
+    def echo(self, args):
+        return all_arguments_true(args)
+
+
+    #leafs with tokens need to be all true
+    def var(self, args):
+        return all(args), ''.join([c for c in args])
+    def text(self, args):
+        return all(args), ''.join([c for c in args])
+    def addition(self, args):
+        return all(args), ''.join([c for c in args])
+
     def invalid_space(self, args):
         # return space to indicate that line start in a space
         return False, " "
 
-class IsComplete(Transformer):
+
+class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
-    def pass_arguments(self, args):
-        bool_arguments = [x[0] for x in args]
-        arguments_of_false_nodes = [x[1] for x in args if not x[0]]
-        return all(bool_arguments), arguments_of_false_nodes
 
     #would be lovely if there was some sort of default rule! Not sure Lark supports that
-    def program(self, args):
-        bool_arguments = [x[0] for x in args]
-        if all(bool_arguments):
-            return [True] #all complete
-        else:
-            command_num = 1
-            for a in args:
-                if not a[0]:
-                    return False, a[1], command_num
-                command_num += 1
 
-
-    def command(self, args):
-        return self.pass_arguments(args)
     def ask(self, args):
         return args != [], 'ask'
     def print(self, args):
@@ -255,44 +237,6 @@ class IsComplete(Transformer):
         #echo may miss an argument
         return True, 'echo'
 
-    def assign(self, args):
-        return self.pass_arguments(args)
-    def assign_list(self, args):
-        return self.pass_arguments(args)
-    def assign_sum(self, args):
-        return self.pass_arguments(args)
-    def list_access(self, args):
-        return self.pass_arguments(args)
-
-    # level 4 commands
-    def list_access_var(self, args):
-        return self.pass_arguments(args)
-    def ifs(self, args):
-        return self.pass_arguments(args)
-    def ifelse(self, args):
-        return self.pass_arguments(args)
-    def condition(self, args):
-        return self.pass_arguments(args)
-    def equality_check(self, args):
-        return self.pass_arguments(args)
-    def in_list_check(self, args):
-        return self.pass_arguments(args)
-
-    # level 5 command
-    def repeat(self, args):
-        return self.pass_arguments(args)
-
-    # level 6
-    def addition(self, args):
-        return self.pass_arguments(args)
-    def substraction(self, args):
-        return self.pass_arguments(args)
-    def multiplication(self, args):
-        return self.pass_arguments(args)
-    def division(self, args):
-        return self.pass_arguments(args)
-
-
     #leafs with tokens need to be all true
     def var(self, args):
         return all(args), ''.join([c for c in args])
@@ -300,20 +244,6 @@ class IsComplete(Transformer):
         return all(args), ''.join([c for c in args])
     def addition(self, args):
         return all(args), ''.join([c for c in args])
-
-    #leafs are treated differently, they are True + their arguments flattened
-    def random(self, args):
-        return True, 'random'
-    def index(self, args):
-        return True, ''.join([str(c) for c in args])
-    def punctuation(self, args):
-        return True, ''.join([c for c in args])
-    def number(self, args):
-        return True, ''.join([c for c in args])
-    def invalid(self, args):
-        # return the first argument to place in the error message
-        # TODO: this will not work for misspelling 'at', needs to be improved!
-        return False, args[0][1]
 
 
 class ConvertToPython_1(Transformer):
@@ -335,8 +265,6 @@ class ConvertToPython_1(Transformer):
     def ask(self, args):
         all_parameters = ["'" + a + "'" for a in args]
         return 'answer = input(' + '+'.join(all_parameters) + ")"
-    def punctuation(self, args):
-        return ''.join([str(c) for c in args])
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:
@@ -345,6 +273,8 @@ def wrap_non_var_in_quotes(argument, lookup):
         return "'" + argument + "'"
 
 class ConvertToPython_2(ConvertToPython_1):
+    def punctuation(self, args):
+        return ''.join([str(c) for c in args])
     def var(self, args):
         name = ''.join(args)
         return "_" + name if name in reserved_words else name
@@ -670,8 +600,9 @@ def transpile_inner(input_string, level):
 
         try:
             program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
-            lookup_table = all_assignments(program_root)
             abstract_syntaxtree = ExtractAST().transform(program_root)
+            lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
+
         except Exception as e:
             # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
             raise HedyException('Parse', level=level, parse_error=e.args[0])
@@ -729,7 +660,7 @@ def transpile_inner(input_string, level):
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
         abstract_syntaxtree = ExtractAST().transform(program_root)
-        lookup_table = all_assignments(program_root)
+        lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
         if level == 7:
             try:
                 python = 'import random\n'

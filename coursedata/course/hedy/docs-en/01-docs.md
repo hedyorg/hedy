@@ -1,3 +1,6 @@
+title: Explanation
+level: 1
+---
 # A story
 
 At Level 1, as an example, you can create a story with a different main character that you enter yourself.

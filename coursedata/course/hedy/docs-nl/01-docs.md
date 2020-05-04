@@ -1,4 +1,14 @@
+title: Uitleg
+level: 1
+---
 # Een verhaal
+
+
+```
+Kan ik eigenlijk blockquoten?
+Waaat
+Ohnee
+```
 
 In Level 1 kun je bijvoorbeeld een verhaal maken met steeds een andere hoofdpersoon die je zelf invoert.
 
