@@ -1,6 +1,3 @@
-title: Uitleg
-level: 2
----
 # Steen, schaar, papier
 
 In Level 2 kunnen we iets nieuws doen, namelijk lijstjes invoeren en daar dingen uit kiezen.

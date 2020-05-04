@@ -1,6 +1,3 @@
-title: Uitleg
-level: 4
----
 In level 4 blijven de regels hetzelfde voor ask en print. Je moet dus nog steeds aanhalingstekens gebruiken als je iets wilt printen.
 Er komt nu wel een nieuwe code bij, de if. If is Engels voor als.
 

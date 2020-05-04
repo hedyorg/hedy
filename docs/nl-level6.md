@@ -1,6 +1,3 @@
-title: Uitleg
-level: 6
----
 In level 6 komen er weer een nieuwe codes bij, je kunt nu namelijk gaan rekenen in je code.
 
 De plus is makkelijk, die schrijf je zoals bij rekenen: 5 + 5 bijvoorbeeld. De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
@@ -100,5 +97,5 @@ Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt door de regels te kop
 In Level 5 hebben we geleerd 1 regel te herhalen met repeat, zo:
 
 * `repeat 3 times print 'Baby Shark Tutududududu'`
-
+ 
  Maar zoals je in deze les ziet, wil je soms meerdere regels samen herhalen. Dat kan met knippen en plakken, maar dat is wel veel werk. In level 7 leer je hoe je dat makkelijker kan doen.

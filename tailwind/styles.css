@@ -20,7 +20,7 @@ h3 {
   @apply font-bold text-xl;
 }
 
-* + p, * + ul, * + ol, * + pre {
+p + p, p + ul, p + ol {
   @apply mt-4;
 }
 
@@ -71,13 +71,9 @@ code {
   @apply py-2 px-3 text-base;
 }
 pre {
-  @apply block bg-gray-200 py-2 px-4 my-2 rounded text-base border-gray-300 border;
+  @apply block bg-gray-400 p-4 rounded;
   @apply text-red-600;
 }
-pre code {
-  padding: 0 !important;
-}
-
 .markdown blockquote {
   @apply border-l-4 border-gray-300 pl-4 italic;
 }

@@ -1,6 +1,3 @@
-title: Uitleg
-level: 3
----
 Let op! In Level 3 gelden er nieuwe regels. Als je iets letterlijk wilt printen, dan moet je aanhalingstekens gebruiken.
 
 # Los het naamprobleem op

@@ -1,4 +1,4 @@
-{% extends "level-page.html" %}
+{% extends "level-page-embed.html" %}
 {% block levelbody %}
       <div>
         {{introtext}}
@@ -20,6 +20,14 @@
             </div>
           </div>
           {% endfor %}
+        </div>
+        <div class="flex-1 grid-cols-1 lg:grid-cols-2 gap-4">
+          <div>
+            <br>
+            <b>{{assignment_header}}</b><br>
+            {{assignment|markdown}}
+            <br>
+          </div>
         </div>
       </div>
 
@@ -62,7 +70,7 @@
           <br>
           <button class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_button}}</button>
           {% if nextlevel %}
-          <button class="green-btn" onclick="goto({{ nextlevel }} , '{{ lang }}')">{{advance_button}} {{ nextlevel }}
+          <button class="green-btn" onclick="goto_embed({{ nextlevel }} , '{{ lang }}')">{{advance_button}} {{ nextlevel }}
           </button>
           {% endif %}
         </div>
