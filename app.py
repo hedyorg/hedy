@@ -20,7 +20,7 @@ from flask import Flask, request, jsonify, render_template, session, abort
 from flask_compress import Compress
 
 ALL_LANGUAGES = {
-    'en': '🇺🇸',
+    'en': '🇬🇧',
     'nl': '🇳🇱',
     'es': '🇪🇸',
 }
