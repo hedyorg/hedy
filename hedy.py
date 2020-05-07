@@ -303,7 +303,7 @@ class ConvertToPython_2(ConvertToPython_1):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
-        if args[1] == 'random':
+        if args[1] == '':
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1] + ']'
@@ -444,7 +444,7 @@ class ConvertToPython_7(ConvertToPython_6):
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
-                if "'" in value:
+                if "'" in value or 'random.choice' in value: #not amainzg, should still be done with lookup
                     return parameter + " = " + value
                 else:
                     return parameter + " = '" + value + "'"
@@ -466,7 +466,6 @@ class ConvertToPython_7(ConvertToPython_6):
         else:
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
-
 
 class ConvertToPython(Transformer):
 

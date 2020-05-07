@@ -631,6 +631,16 @@ for i in range(int(5)):
         self.assertEqual(run_code(result),'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
 
+    def test_print_random(self):
+        result = hedy.transpile("""keuzes is steen, schaar, papier
+computerkeuze is keuzes at random
+print 'computer koos ' computerkeuze""", 7)
+        self.assertEqual("""import random
+keuzes = ['steen', 'schaar', 'papier']
+computerkeuze = random.choice(keuzes)
+print('computer koos '+str(computerkeuze))""", result)
+
+
     def test_repeat_basic_print_multiple_lines(self):
         result = hedy.transpile("""repeat 5 times
     print 'cookieeee!'
