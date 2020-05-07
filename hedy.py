@@ -303,7 +303,7 @@ class ConvertToPython_2(ConvertToPython_1):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
-        if args[1] == '':
+        if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1] + ']'
@@ -444,7 +444,7 @@ class ConvertToPython_7(ConvertToPython_6):
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
-                if "'" in value or 'random.choice' in value: #not amainzg, should still be done with lookup
+                if "'" in value or 'random.choice' in value: #TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
                     return parameter + " = '" + value + "'"
