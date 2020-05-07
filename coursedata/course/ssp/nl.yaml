@@ -6,21 +6,46 @@
         prompt: |
           In Level 1 kun je woorden en zinnen printen.
 
-          Probeer deze code maar eens: `print steen, schaar en papier!`
+          Probeer deze code maar eens: `ask Wil jij een spelletje met me doen?`
+
+          Probeer deze code maar eens: `echo Dus jouw antwoord is`
+
+          Het eerste begin van Steen, schaar, papier maak je met : `print steen, schaar en papier!`
         start_code: |
-          print steen, schaar en papier!
+          ask Wil jij een spelletje met me doen?
       -
         level: "2"
         prompt: |
-          In Level 2 kun je de computer laten kiezen. Dat doe je zo:
+          Probeer deze code maar eens:
+
+          ```
+          naam is ask Hoe heet jij?
+          print Jij heet dus naam
+          ```
+
+          In Level 2 kun je de computer laten kiezen met random. Random (je zegt ren-dom) is het Engelse woord voor willekeurig, at is het Engelse woord voor op.
+          Dat doe je zo:
 
           ```
           keuzes is steen, schaar, papier
           print keuzes at random
           ```
+        start_code: |
+            naam is ask Hoe heet jij?
+            print Jij heet dus naam
       -
         level: "3"
         prompt: |
+
+          Probeer deze code maar eens: `print 'Hallo, welkom bij Steen, papier, schaar'`
+
+          Of probeer deze code:
+
+          ```
+          spel is ask Wat is je lievelingsspel?
+          print 'Jouw favoriet is dus 'spel
+          ```
+
           In Level 3 kunnen we ook weer steen schaar papier programmeren. Je
           kunt nu ook tekst printen bij de willekeurige keuze, maar dan moet
           je ook hier nu aanhalingstekens gebruiken.
@@ -29,9 +54,18 @@
           keuzes is steen, schaar, papier
           print 'de winnaar is ' keuzes at random
           ```
+          Herinnering: `random` (je zegt ren-dom) is het Engelse woord voor willekeurig.
+
       -
         level: "4"
         prompt: |
+          Probeer deze code maar eens:
+
+          ```
+          spel is ask Wat is je lievelingsspel?
+          if spel is steen 'laten we dan spelen!' else print 'ok'
+          ```
+
           In Level 4 kunnen we ook weer steen schaar papier programmeren,
           maar nu kun je ook echt tegen de computer spelen, en bekijken wie
           de winnaar is. Hier is het begin van het programma, maak jij de
@@ -85,4 +119,27 @@
           aantalkeer is aantalkeer + 1
           ```
       - level: "7"
-        prompt: "`aantalkeer is 1`<br>`keuzes is steen, schaar, papier`<br>`repeat 5 times`<br>&nbsp;&nbsp;&nbsp;&nbsp;`print 'Poging ' aantalkeer`<br>&nbsp;&nbsp;&nbsp;&nbsp;`jouwkeuze is ask wat kies jij?`<br>&nbsp;&nbsp;&nbsp;&nbsp;`computerkeuze is keuzes at random`<br>&nbsp;&nbsp;&nbsp;&nbsp;`print 'jij koos ' jouwkeuze`<br>&nbsp;&nbsp;&nbsp;&nbsp;`print 'computer koos ' computerkeuze`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`if computerkeuze is schaar and jouwkeuze is papier`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`print 'de computer wint'`<br>&nbsp;&nbsp;&nbsp;&nbsp;`if computerkeuze is schaar and jouwkeuze is steen`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`print 'jij wint'`<br>&nbsp;&nbsp;&nbsp;&nbsp;`if computerkeuze is jouwkeuze`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`print 'gelijkspel'`<br>&nbsp;&nbsp;&nbsp;&nbsp;`aantalkeer is aantalkeer+1`<br>"
+        prompt:
+          In level 7 gebruiken we repeat om hele stukken code te herhalen. Op die manier hoeven we deze niet steeds helemaal uit te schrijven.
+          Maak nu jouw ‘steen, papier, schaar’ spel helemaal af.
+
+          Succes!
+
+        start_code: |
+          aantalkeer is 1
+          keuzes is steen, schaar, papier
+          repeat 5 times
+              print 'Poging ' aantalkeer
+              jouwkeuze is ask wat kies jij?
+              computerkeuze is keuzes at random
+              print 'jij koos ' jouwkeuze
+              print 'computer koos ' computerkeuze
+              if computerkeuze is schaar and jouwkeuze is papier
+                  print 'de computer wint'
+              if computerkeuze is schaar and jouwkeuze is steen
+                  print 'jij wint'
+
+              if computerkeuze is jouwkeuze
+                  print 'gelijkspel'
+
+              aantalkeer is aantalkeer+1
