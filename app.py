@@ -41,6 +41,7 @@ for lang in ALL_LANGUAGES.keys():
 
 # Only available in Dutch
 SSP_COURSE = courses.Course('ssp', 'nl', LEVEL_DEFAULTS['nl'])
+ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
 
 TRANSLATIONS = hedyweb.Translations()
 
@@ -172,11 +173,27 @@ def embed(level):
     g.prefix = '/embed'
 
     return hedyweb.render_assignment_editor(
+        course=ONLINE_MASTERS_COURSE,
+        assignment_number=level,
+        translations=TRANSLATIONS,
+        version=version(),
+        menu=None)
+
+@app.route('/space_eu', methods=['GET'], defaults={ 'level': 1 })
+@app.route('/space_eu/<level>', methods=['GET'])
+def space_eu(level):
+    session_id()  # Run this for the side effect of generating a session ID
+    g.level = level = int(level)
+    g.lang = lang = requested_lang()
+    g.prefix = '/space_eu'
+
+    return hedyweb.render_assignment_editor(
         course=SSP_COURSE,
         assignment_number=level,
         translations=TRANSLATIONS,
         version=version(),
         menu=None)
+
 
 
 @app.route('/error_messages.js', methods=['GET'])
