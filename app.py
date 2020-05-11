@@ -164,6 +164,8 @@ def docs(level, docspage):
         translations=TRANSLATIONS)
 
 
+@app.route('/onlinemasters', methods=['GET'], defaults={ 'level': 1 })
+@app.route('/onlinemasters/<level>', methods=['GET'])
 @app.route('/embed', methods=['GET'], defaults={ 'level': 1 })
 @app.route('/embed/<level>', methods=['GET'])
 def embed(level):
