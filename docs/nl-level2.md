@@ -1,13 +1,13 @@
 # Steen, schaar, papier
 
-In Level 2 kunnen we iets nieuws doen, namelijk lijstjes invoeren en daar dingen uit kiezen.
-Zo kun je bijvoorbeeld zelf een steen, schaar, papier spel maken.
+In Level 2 leren we iets nieuws! Lijstjes  en daar dingen uit kiezen.
+Zo kun je bijvoorbeeld zelf een 'steen, schaar, papier'-spel maken.
 Dat doe je zo:
 
 * `keuzes is steen, schaar, papier`
 * `print keuzes at random`
 
-Random (je zegt ren-dom) is het Engelse woord voor willekeurig.
+Random (spreek je uit als ren-dom) is het Engelse woord voor willekeurig.
 
 # Maak dobbelsteen na
 
