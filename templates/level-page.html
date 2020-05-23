@@ -5,11 +5,11 @@
     <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1">
       {{ level_title }} {{ assignment_nr }}
     </div>
-    <a class="no-underline {% if selected_page == 'code' %}border-b-4{% endif %} border-white tracking-wide font-normal px-4 py-3 mr-4" href="{{ hedy_link(assignment_nr) }}">
+    <a class="codebar-btn {% if selected_page == 'code' %}border-b-4{% endif %}" href="{{ hedy_link(assignment_nr) }}">
       {{ code_title }}
     </a>
     {% for doc in docs %}
-    <a class="no-underline {% if selected_page == doc.slug %}border-b-4{% endif %} border-white tracking-wide font-normal px-4 py-3 mr-4" href="{{ hedy_link(assignment_nr, subpage=doc.slug) }}">
+    <a class="codebar-btn {% if selected_page == doc.slug %}border-b-4{% endif %}" href="{{ hedy_link(assignment_nr, subpage=doc.slug) }}">
       {{ doc.title }}
     </a>
     {% endfor %}
