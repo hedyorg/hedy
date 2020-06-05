@@ -24,6 +24,15 @@ h3 {
   @apply mt-4;
 }
 
+a {
+  @apply font-semibold text-blue-400;
+  text-decoration: underline;
+}
+
+strong {
+  @apply font-bold;
+}
+
 .green-btn {
   @apply bg-green-500 text-white font-bold py-2 px-4 border-b-4 border-green-700 rounded;
 }
@@ -44,13 +53,6 @@ h3 {
 .markdown strong {
   @apply font-bold;
 }
-.markdown a {
-  @apply font-semibold;
-}
-.markdown strong a {
-  @apply font-bold;
-}
-
 .markdown * + h1 {
   @apply leading-tight mb-2 mt-10;
 }
@@ -95,6 +97,14 @@ pre code {
 
 .btn:hover {
   @apply bg-blue-400 border-blue-500;
+}
+
+.menubar-btn {
+  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl px-4 py-3 mr-4;
+}
+
+.codebar-btn {
+  @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 mr-4;
 }
 
 #output {
