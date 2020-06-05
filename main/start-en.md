@@ -10,7 +10,7 @@ page_title: Welcome to Hedy!
   </div>
 </div>
 
-## What is a gradual progamming language?
+## What is a gradual programming language?
 
 Learning to program can be hard. Not that programming itself *is* hard! But there are a lot of rules you need to memorize, just like when you started to learn English.
 Similarly, you will need a lot of practice to learn programming.
