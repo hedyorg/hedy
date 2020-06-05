@@ -36,7 +36,7 @@ Hedy is meant for all kids that want to learn programming! You do need to be abl
 No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.
 
 ## Is Hedy free?
-Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone that can program cau help us make Hedy better.
+Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone who can program can help us make Hedy better. You can find the code on [GitHub](https://github.com/Felienne/hedy).
 
 ## Do I need to install anything?
 No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome of Edge or FireFox. Hedy also works on your phone or tablet.

@@ -36,7 +36,7 @@ Nee, je hebt geen ervaring nodig met programmeren, maar als je al eerder Scratch
 
 ## Is Hedy gratis?
 
-Ja! Cadeautje van de Universiteit Leiden. Hedy is naast gratis ook 'Open source', dat betekent dat iedereen die al kan programmeren, ons kan helpen om nieuwe stukjes van Hedy te maken.
+Ja! Cadeautje van de Universiteit Leiden. Hedy is naast gratis ook 'Open source', dat betekent dat iedereen die al kan programmeren, ons kan helpen om nieuwe stukjes van Hedy te maken. Je kunt de code vinden op [GitHub](https://github.com/Felienne/hedy).
 
 ## Moet ik iets installeren?
 
