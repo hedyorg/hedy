@@ -20,7 +20,7 @@ That is true for programming too, it might be hard in the beginning, but it will
 
 The nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.
 The first few levels do not have that many rules, so you can get used to programming comfortably.
-In evert level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
+In every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
 
 ## Why is Hedy gradual?
 In this video Felienne, the creator of Hedy, explains why Hedy is gradual.
