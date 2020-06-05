@@ -77,4 +77,40 @@
       Invalid Space: "Oops! You started a line with a space on line {line_number}. Spaces confuse computers, can you remove it?"
       Parse: "El servidor no puede traducir este programa de Hedy a Python. Error: {parse_error}"
       VarUndefined: "Intentaste imprimir {name}, pero no lo instanciaste."
-
+  fr:
+    ui:
+      level_title: "Niveau"
+      code_title: "Code"
+      docs_title: "Explication"
+      contact: "Contact"
+      video_title: "Vidéos"
+      run_code_button: "Exécuter le code"
+      advance_button: "Aller au niveau"
+      try_button: "Essaye ceci"
+      enter_text: "Tapes ta réponse ici..."
+      enter: "Enter"
+      assignment_header: "Exercice"
+    ClientErrorMessages:
+      Transpile_warning: "Attention!"
+      Transpile_error: "Le serveur n’a pas pu traduire ce code Heyd en Python."
+      Connection_error: "Nous n’avons pas réussi à contacter le serveur."
+      Other_error: "Oups! Nous avons rencontré une erreur."
+      Execute_error: "Quelque chose s’est mal passé en exécutant ce programme."
+    HedyErrorMessages:
+      Wrong Level: >
+        Ce code est du code Hedy valide, mais pas du bon niveau.
+        Tu as saisis du code {original_level} au niveau {working_level}."
+      Incomplete: >
+        Oups! Tu as oublié un peu de code!
+        À la ligne {line_number}, tu dois écrire du texte après {incomplete_command}.
+      Invalid: >
+        {invalid_command} n’est pas une commande valide pour le niveau {level} de Hedy.
+        Voulais tu utiliser {guessed_command}?
+      Invalid Space: >
+        Oups! Tu as commencé une ligne avec un espace à la ligne {line_number}.
+        Les ordinateurs sont confus avec les espaces.
+        Peux tu le supprimer?
+      Parse: >
+        Le code saisi n’est pas du Hedy valide.
+        L’erreur rencontrée est: {parse_error}.
+      VarUndefined: "Tu as essayé d’afficher {name}, mais tu ne l’as pas initialisé."

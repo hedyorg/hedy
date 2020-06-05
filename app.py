@@ -29,6 +29,7 @@ ALL_LANGUAGES = {
     'en': '🇺🇸',
     'nl': '🇳🇱',
     'es': '🇪🇸',
+    'fr': '🇫🇷',
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)

@@ -20,7 +20,7 @@ That is true for programming too, it might be hard in the beginning, but it will
 
 The nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.
 The first few levels do not have that many rules, so you can get used to programming comfortably.
-In evert level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
+In every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
 
 ## Why is Hedy gradual?
 In this video Felienne, the creator of Hedy, explains why Hedy is gradual.
@@ -36,7 +36,7 @@ Hedy is meant for all kids that want to learn programming! You do need to be abl
 No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.
 
 ## Is Hedy free?
-Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone that can program cau help us make Hedy better.
+Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone that can program can help us make Hedy better.
 
 ## Do I need to install anything?
 No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome of Edge or FireFox. Hedy also works on your phone or tablet.
