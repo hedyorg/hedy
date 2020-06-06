@@ -79,6 +79,7 @@ class Command:
 
 @attr.s(slots=True, frozen=True)
 class Assignment:
+  step = attr.ib()
   level = attr.ib()
   prompt = attr.ib(default='')
   intro_text = attr.ib(default=None)
