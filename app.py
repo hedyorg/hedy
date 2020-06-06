@@ -41,7 +41,7 @@ for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
 # Only available in Dutch
-SSP_COURSE = courses.Course('ssp', 'nl', LEVEL_DEFAULTS['nl'])
+SPACE_EU_COURSE = courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl'])
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
 
 TRANSLATIONS = hedyweb.Translations()
@@ -191,7 +191,7 @@ def space_eu(level):
     g.prefix = '/space_eu'
 
     return hedyweb.render_assignment_editor(
-        course=SSP_COURSE,
+        course=SPACE_EU_COURSE,
         assignment_number=level,
         translations=TRANSLATIONS,
         version=version(),
