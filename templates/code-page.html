@@ -33,7 +33,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
         <div>
           <div class="w-full h-64 flex flex-col">
-            <div id="editor" data-lskey="level_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{start_code}}</div>
+            <div id="editor" data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{start_code}}</div>
               <!-- errorbox -->
               <div id="errorbox" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md"
                 role="alert" style="display: none;">
@@ -68,27 +68,34 @@
           </div>
           <br>
           <button class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
-          {% if next_assignment %}
-          <button class="green-btn" onclick="window.location = '{{ hedy_link(next_assignment) }}';">{{advance_button}} {{ next_assignment }}
-          </button>
-          {% endif %}
         </div>
-        <div class="h-64 flex flex-col">
-          <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
-          <div id="inline-modal" class="flex-0" style="display: none">
-            <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
-              <!--Title-->
-              <div class="flex justify-between items-center">
-                <p class="text-2xl font-bold caption">Header</p>
-              </div>
-              <!--Body-->
-              <form>
-                <div class="my-2 flex">
-                  <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ enter_text }}">
-                  <input type="submit" class="green-btn ml-3" value="{{ enter }}"></p>
+        <div>
+          <div class="h-64 flex flex-col">
+            <div id="output" class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
+            <div id="inline-modal" class="flex-0" style="display: none">
+              <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
+                <!--Title-->
+                <div class="flex justify-between items-center">
+                  <p class="text-2xl font-bold caption">Header</p>
                 </div>
-              </form>
+                <!--Body-->
+                <form>
+                  <div class="my-2 flex">
+                    <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ enter_text }}">
+                    <input type="submit" class="green-btn ml-3" value="{{ enter }}"></p>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
+          <br>
+          <div class="flex justify-end">
+            {% if next_assignment %}
+            <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">{{advance_step_button}} {{ next_assignment }}</button>
+            {% endif %}
+            {% if next_level %}
+            <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+            {% endif %}
           </div>
         </div>
       </div>
