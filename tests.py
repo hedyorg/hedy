@@ -469,6 +469,7 @@ class TestsLevel6(unittest.TestCase):
         result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 6)
         self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
 
+
     def test_transpile_ask(self):
         result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 6)
         self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
