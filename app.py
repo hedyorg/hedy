@@ -134,9 +134,10 @@ def report_error():
 # for now we do not need a post but I am leaving it in for a potential future
 
 # routing to index.html
-@app.route('/hedy', methods=['GET'], defaults={ 'level': 1 })
-@app.route('/hedy/<level>', methods=['GET'])
-def index(level):
+@app.route('/hedy', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
+@app.route('/hedy/<level>/<step>', methods=['GET'])
+def index(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = lang = requested_lang()
@@ -144,14 +145,14 @@ def index(level):
 
     return hedyweb.render_assignment_editor(
         course=HEDY_COURSE[lang],
-        assignment_number=level,
+        level_number=level,
+        assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version())
 
-# routing to docs.html
-@app.route('/hedy/<level>/<docspage>', methods=['GET'])
-def docs(level, docspage):
+@app.route('/hedy/<level>/<step>/<docspage>', methods=['GET'])
+def docs(level, step, docspage):
     session_id()
     g.level = level = int(level)
     g.lang = lang = requested_lang()
@@ -160,31 +161,34 @@ def docs(level, docspage):
     return hedyweb.render_assignment_docs(
         doc_type=docspage,
         course=HEDY_COURSE[lang],
-        assignment_number=level,
+        level_number=level,
+        # We don't have assignments in this course! (yet)
+        assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS)
 
 
-@app.route('/onlinemasters', methods=['GET'], defaults={ 'level': 1 })
-@app.route('/onlinemasters/<level>', methods=['GET'])
-@app.route('/embed', methods=['GET'], defaults={ 'level': 1 })
-@app.route('/embed/<level>', methods=['GET'])
-def embed(level):
+@app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
+@app.route('/onlinemasters/<level>/<step>', methods=['GET'])
+def onlinemasters(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = lang = requested_lang()
-    g.prefix = '/embed'
+    g.prefix = '/onlinemasters'
 
     return hedyweb.render_assignment_editor(
         course=ONLINE_MASTERS_COURSE,
-        assignment_number=level,
+        level_number=level,
+        assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
         menu=None)
 
-@app.route('/space_eu', methods=['GET'], defaults={ 'level': 1 })
-@app.route('/space_eu/<level>', methods=['GET'])
-def space_eu(level):
+@app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
+@app.route('/space_eu/<level>/<step>', methods=['GET'])
+def space_eu(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = lang = requested_lang()
@@ -192,7 +196,8 @@ def space_eu(level):
 
     return hedyweb.render_assignment_editor(
         course=SPACE_EU_COURSE,
-        assignment_number=level,
+        level_number=level,
+        assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
         menu=None)
@@ -263,10 +268,12 @@ def current_language():
     return make_lang_obj(requested_lang())
 
 @app.template_global()
-def hedy_link(assignment_nr, subpage=None, lang=None):
+def hedy_link(level_nr, assignment_nr, subpage=None, lang=None):
     """Make a link to a Hedy page."""
     parts = [g.prefix]
-    parts.append('/' + str(assignment_nr))
+    parts.append('/' + str(level_nr))
+    if str(assignment_nr) != '1' or subpage:
+        parts.append('/' + str(assignment_nr if assignment_nr else '1'))
     if subpage and subpage != 'code':
         parts.append('/' + subpage)
     parts.append('?')
