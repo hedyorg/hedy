@@ -66,7 +66,7 @@ def render_assignment_docs(doc_type, course, level_number, assignment_number, me
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
 
-  doc = course.docs.get(int(assignment_number), doc_type)
+  doc = course.docs.get(int(level_number), doc_type)
   if not doc:
     # Redirect to code page. Nasty 'import' here to work around
     # cyclic imports.
