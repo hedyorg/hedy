@@ -5,7 +5,7 @@ Contributing to Hedy
 Help Hedy with translations
 ------------
 
-Hedy is now available in Dutch and English and Spanish, but we'd love to support more languages! To contribute, add translations for all elements in the JSON files [levels](https://github.com/Felienne/hedy/blob/master/static/levels.json) and [texts](https://github.com/Felienne/hedy/blob/master/static/texts.json). The easiest way is to make a copy of the English versions and then change the field `language`. 
+Hedy is now available in Dutch and English and Spanish, but we'd love to support more languages! To contribute, add translations for all elements in the [JSON files](https://github.com/Felienne/hedy/tree/master/coursedata). The easiest way is to make a copy of the English version and then change the field `language`. 
 
 You can check the status of the several translation efforts [here](/STATUS.md) and see what you can best work on! 
 
