@@ -437,7 +437,7 @@ class ConvertToPython_7(ConvertToPython_6):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         return "\nelse:\n" + "\n".join(args)
 
-    def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing exprestions directly
+    def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
             value = args[1]
