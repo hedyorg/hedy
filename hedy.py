@@ -36,7 +36,7 @@ class HedyException(Exception):
         self.arguments = arguments
 
 class ExtractAST(Transformer):
-    # simplyfies the tree: f.e. flattens arguments of text, var and punctuation for further processing
+    # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
         return Tree('text', [''.join([str(c) for c in args])])
 
