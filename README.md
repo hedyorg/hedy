@@ -26,7 +26,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
     and operators as possible to lower cognitive load.
 
 3.  **Only one aspect of a concept changes at a time** In his paper on
-    the Spiral approach Shneidermann argued for minimal
+    the Spiral approach Shneiderman argued for minimal
     changes [@shneiderman_teaching_1977] which we follow for Hedy too.
     This allows us to focus the full attention of the learner on the new
     syntactic element.
