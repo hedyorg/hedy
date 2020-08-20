@@ -106,7 +106,6 @@ an assignment from [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom"), or a customized dice.
 
 ### Level 3: Quotation marks and types
-
 In Level 3 the first syntactic element is introduced: the use of
 quotation marks to distinguish between strings and text. In teaching
 novices we have seen that this distinction can be confusing for a long
@@ -161,7 +160,7 @@ prospect of building larger and more interesting programs (Design Goal
 6). The syntax of the loop remains otherwise unchanged as per Design
 Goal 3, so the new form is:\
 
-[`repēat 5 times`]\
+[`repeat 5 times`]\
 [`print `]\
 [`print `]\
 
