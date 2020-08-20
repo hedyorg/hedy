@@ -1,5 +1,5 @@
 # Hedy
-Hedy is a gradual programming language aimed at teaching programming and teaching Python. It teaches using different levels. The first level just offers printing text and asking for input. This level is meant to introduce learners to the idea of a progamming language, and the environment. From there, Hedy builds up to include more complex syntax and additional concepts.
+Hedy is a gradual programming language aimed at teaching programming and teaching Python. It teaches using different levels. The first level just offers printing text and asking for input. This level is meant to introduce learners to the idea of a programming language, and the environment. From there, Hedy builds up to include more complex syntax and additional concepts.
 
 The latest version of Hedy can be found at [hedy-beta.herokuapp.com](https://hedy-beta.herokuapp.com).
 
@@ -30,9 +30,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 
 3.  **Only one aspect of a concept changes at a time:** 
 
-    In his paper on
-    the Spiral approach Shneidermann argued for minimal
-    changes [@shneiderman_teaching_1977] which we follow for Hedy too.
+    In his paper on the Spiral approach Shneiderman argued for minimal changes [@shneiderman_teaching_1977] which we follow for Hedy too.
     This allows us to focus the full attention of the learner on the new
     syntactic element.
 
