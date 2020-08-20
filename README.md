@@ -93,7 +93,7 @@ programs such as a guessing game, a story with random elements, which is
 an assignment from [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom"), or a customized dice.
 
-###Level 3: Quotation marks and types
+### Level 3: Quotation marks and types
 In Level 3 the first syntactic element is introduced: the use of
 quotation marks to distinguish between strings and text. In teaching
 novices we have seen that this distinction can be confusing for a long
