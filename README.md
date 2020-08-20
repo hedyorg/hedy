@@ -12,27 +12,34 @@ Design Goals
 
 The overarching goal of Hedy is to successively add syntactic complexity to a Python-like language, until novices have mastered Python itself. To reach that goal, Hedy follows these design principles:
 
-1.  **Concepts are offered at least three times in different forms** Research from writing
+1.  **Concepts are offered at least three times in different forms:** 
+
+    Research from writing
     education [@simon_langue_1973; @fayol_etude_1989] has shown that it
     is needed to offer concept in different forms over a long period of
     time. Furthermore it has been shown that a word needs to be read 7
     times before it is stored in long-term
     memory [@verhallen_woorden_1994].
 
-2.  **The initial offering of a concept is the simplest form possible**
+2.  **The initial offering of a concept is the simplest form possible:**
+
     Previous research has shown that syntax can be confusing for
     novices [@denny_understanding_2011; @stefik_empirical_2013]. We
     therefore want to keep the initial syntax free of as many keywords
     and operators as possible to lower cognitive load.
 
-3.  **Only one aspect of a concept changes at a time** In his paper on
+3.  **Only one aspect of a concept changes at a time:** 
+
+    In his paper on
     the Spiral approach Shneidermann argued for minimal
     changes [@shneiderman_teaching_1977] which we follow for Hedy too.
     This allows us to focus the full attention of the learner on the new
     syntactic element.
 
 4.  **Adding syntactic elements like brackets and colons is deferred to
-    the latest moment possible** Previous research in the computer
+    the latest moment possible:** 
+    
+    Previous research in the computer
     science education domain has shown that operators such as [`==`]{}
     and [`:`]{} can be especially hard for novices, and prevent their
     effective *vocalization* of code [@hermans_code_2018], which is
@@ -44,13 +51,17 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
     latter are introduced first.
 
 5.  **Learning new forms is interleaved between concepts as much as
-    possible** We know that *spaced repetition* [@kang_spaced_2016] is a
+    possible:** 
+    
+    We know that *spaced repetition* [@kang_spaced_2016] is a
     good way of memorizing, and that it takes time to learn punctuation,
     so we give students as much opportunity as possible to work with
     concepts before syntax changes.
 
 6.  **At every level it is possible to create simple but meaningful
-    programs** It is important for all learners to engage in meaningful
+    programs:**
+    
+    It is important for all learners to engage in meaningful
     activities [@brown_situated_1989]. Our experience in teaching
     high-school students (and even university CS students) is that
     learning syntax is not always seen as a useful activity. Students
@@ -83,6 +94,7 @@ programs can be created in which a user is asked for a name or a
 favorite animal, fulfilling Design Goal 6.
 
 ### Level 2: Variables with is
+
 At the second level, variables are added to the syntax. Defining a
 variable is done with the word [`is`] rather than the equals symbol
 fulfilling Design Goal 3 and Design Goal 4. We also add the option to
@@ -125,7 +137,10 @@ initial form, like the if the syntax is placed on one line:\
 [`repeat 5 times print `]
 
 ### Level 6: Calculations
-Note: this level was originally planed as 4, is now moved up to 6. Might be moved to another place based on experiences of kids testing now.
+
+*Note: this level was originally planed as 4, is now moved up to 6.
+Might be moved to another place based on experiences of kids testing now.*
+
 In Level 4, students learn to calculate with variables, so addition,
 multiplication, subtraction and division are introduced. While this
 might seem like a simple step, our experience taught us that the use of
@@ -145,7 +160,7 @@ prospect of building larger and more interesting programs (Design Goal
 6). The syntax of the loop remains otherwise unchanged as per Design
 Goal 3, so the new form is:\
 
-[`repēat 5 times`]\
+[`repeat 5 times`]\
 [`print `]\
 [`print `]\
 
