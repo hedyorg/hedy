@@ -14,44 +14,34 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 
 1.  **Concepts are offered at least three times in different forms:** 
 
-    Research from writing
-    education [@simon_langue_1973; @fayol_etude_1989] has shown that it
-    is needed to offer concept in different forms over a long period of
+    Research from writing education has shown that it is best to offer concept in different forms over a long period of
     time. Furthermore it has been shown that a word needs to be read 7
     times before it is stored in long-term
-    memory [@verhallen_woorden_1994].
+    memory .
 
 2.  **The initial offering of a concept is the simplest form possible:**
 
     Previous research has shown that syntax can be confusing for
-    novices [@denny_understanding_2011; @stefik_empirical_2013]. We
-    therefore want to keep the initial syntax free of as many keywords
-    and operators as possible to lower cognitive load.
+    novices. Early levels thus are as syntax-free as possible to lower cognitive load.
 
 3.  **Only one aspect of a concept changes at a time:** 
 
-    In his paper on the Spiral approach Shneiderman argued for minimal changes [@shneiderman_teaching_1977] which we follow for Hedy too.
-    This allows us to focus the full attention of the learner on the new
-    syntactic element.
+    In his paper on [the spiral approach Shneiderman](https://www.sciencedirect.com/science/article/pii/0360131577900082) argued for samll steps in teaching programming, which we follow for Hedy too. This allows us to focus the full attention of the learner on the new     syntactic element.
 
-4.  **Adding syntactic elements like brackets and colons is deferred to
-    the latest moment possible:** 
+4.  **Adding syntactic elements like brackets and colons is deferred to the latest moment possible:** 
     
     Previous research in the computer
-    science education domain has shown that operators such as [`==`]{}
-    and [`:`]{} can be especially hard for novices, and prevent their
-    effective *vocalization* of code [@hermans_code_2018], which is
-    known to be an aid in remembering [@swidan_effect_2019]. Research
-    from natural language acquisition shows that parenthesis and the
+    science education domain has shown that operators such as == and : can be especially hard for novices. In a [study](https://www.felienne.com/archives/5947) with high-schoolers we found that that might be due to their pronunciation.
+    
+   Research from natural language acquisition also indicates that parentheses and the
     colon are among the latest element of punctuation that learners
-    typically learn [@ferreiro_managing_1999]. Given the choice between
+    typically learn. Given the choice between
     colons and parenthesis and other elements like indentation, the
     latter are introduced first.
 
-5.  **Learning new forms is interleaved between concepts as much as
-    possible:** 
+5.  **Learning new forms is interleaved between concepts as much as possible:** 
     
-    We know that *spaced repetition* [@kang_spaced_2016] is a
+    We know that *spaced repetition* is a
     good way of memorizing, and that it takes time to learn punctuation,
     so we give students as much opportunity as possible to work with
     concepts before syntax changes.
@@ -60,7 +50,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
     programs:**
     
     It is important for all learners to engage in meaningful
-    activities [@brown_situated_1989]. Our experience in teaching
+    activities. Our experience in teaching
     high-school students (and even university CS students) is that
     learning syntax is not always seen as a useful activity. Students
     experience a large discrepancy between the computer being smart, for
@@ -74,7 +64,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 Levels
 ------
 
-In its current form, Hedy consists of 13 different levels. The levels
+In its current form, Hedy consists of 13 different levels. The levels loosely
 follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
