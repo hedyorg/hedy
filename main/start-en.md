@@ -40,3 +40,4 @@ Yes! Leiden University allows us to share it for free. Hedy is also 'Open source
 
 ## Do I need to install anything?
 No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or FireFox. Hedy also works on your phone or tablet.
+
