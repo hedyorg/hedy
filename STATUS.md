@@ -17,9 +17,9 @@ Content for the landing page is stored in the [main folder](main). There current
 
 |  |NL|EN|ES|..|  
 |--|--|--|--|--|  
-|start| V | V |  |  |  
-|press| V | V |  |  |  
-|contact| V | V |  |  |   
+|start| V | V | V |  |  
+|press| V | V | V |  |  
+|contact| V | V | V |  |   
 [Back to top of page](#status-of-things)  
  
 ## Coding Environment
