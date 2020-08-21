@@ -15,6 +15,15 @@ If you would like to add a translation, there a three places where files that ne
 
 3) The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there is a page with press, and with contact info too. If you want to, you can skip those pages (people will then see the English version)
 
+Translated all of that? Then go to [app.py](https://github.com/Felienne/hedy/blob/master/app.py) and add your language to this list:
+
+ALL_LANGUAGES = {
+    'en': '🇺🇸',
+    'nl': '🇳🇱',
+    'es': '🇪🇸',
+    'fr': '🇫🇷',
+}
+
 You can check the status of the several translation efforts [here](/STATUS.md) and see what you can best work on. Would be lovely if you update your own translations there too :)
 
 
