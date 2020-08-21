@@ -13,7 +13,7 @@ If you would like to add a translation, there a three places where files that ne
 
 2) In the folder [texts](https://github.com/Felienne/hedy/tree/master/coursedata/texts) there is a file for each language too. That file translate UI-elements like menu headers, and, important, the error messages Hedy programmers will see. As above, copying the English file [English file](https://github.com/Felienne/hedy/blob/master/coursedata/texts/en.yaml) and translate that.
 
-3) The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [https://github.com/Felienne/hedy/blob/master/main/start-en.md](start) holds the content of the start page, and there is a page with press, and with contact info too. If you want to, you can skip those pages (people will then see the English version)
+3) The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there is a page with press, and with contact info too. If you want to, you can skip those pages (people will then see the English version)
 
 You can check the status of the several translation efforts [here](/STATUS.md) and see what you can best work on. Would be lovely if you update your own translations there too :)
 
