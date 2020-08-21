@@ -1,12 +1,18 @@
 import collections
 import attr
+import glob
+from os import path
 
 from flask import jsonify, render_template, abort, redirect
 import courses
 
 class Translations:
   def __init__(self):
-    self.data = courses.load_yaml('coursedata/texts.yaml')
+    self.data = {}
+    translations = glob.glob('coursedata/texts/*.yaml')
+    for trans_file in translations:
+      lang = path.splitext(path.basename(trans_file))[0]
+      self.data[lang] = courses.load_yaml(trans_file)
 
   def get_translations(self, language, section):
     # Merge with English when lacking translations
