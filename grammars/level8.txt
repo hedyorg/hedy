@@ -5,18 +5,22 @@ statement: if_statement elif_statement* else_statement?
          | ranged_loop
          | assignment _EOL+
          | print _EOL+
-         | echo _EOL+
 
-if_statement: "if" expression _EOL INDENT statement+ DEDENT
-elif_statement: "elif" expression _EOL INDENT statement+ DEDENT
-else_statement: "else" _EOL INDENT statement+ DEDENT 
+statement_block: _INDENT statement+ _DEDENT
 
-repeat: "repeat" expression "times" _EOL INDENT statement+ DEDENT
+if_statement: "if" expression _EOL statement_block
+elif_statement: "elif" expression _EOL statement_block
+else_statement: "else" _EOL statement_block
 
-ranged_loop: "for" NAME "in" "range" expression "to" expression _EOL INDENT statement+ DEDENT
+repeat: "repeat" expression "times" _EOL statement_block
+
+ranged_loop: "for" NAME "in" "range" expression "to" expression _EOL statement_block
 
 assignment: NAME "is" expression
-          | ask
+          | NAME "is" list
+          | NAME "is" ask
+
+list: (expression ",")+ expression
 
 ?expression: sum
            | expression "="  sum -> eq
@@ -27,37 +31,38 @@ assignment: NAME "is" expression
            | expression ">"  sum -> gt
 
 ?sum: product
-   | sum "+" product -> addition
-   | sum "-" product -> substraction
+    | sum "+" product -> addition
+    | sum "-" product -> substraction
 
 ?product: atom
-    | product "*" atom -> multiplication
-    | product "/" atom -> division
-    | product "%" atom -> modulo
+        | product "*" atom -> multiplication
+        | product "/" atom -> division
+        | product "%" atom -> modulo
 
-?atom: NAME 
-      | INTEGER
-      | FLOAT
-      | STRING
-      | "[" (expression? | (expression ",")+ expression) "]" -> list 
-      | "(" expression? ")" 
-      | NAME "at" atom -> list_access
+?atom: "+" atom -> unary_plus
+     | "-" atom -> unary_minus
+     | NAME
+     | NUMBER
+     | STRING
+     | "(" expression? ")" -> parenthesis 
+     | NAME "at" atom -> list_access
 
-print: "print" expression+
-echo: "echo" expression+
-ask: "ask" expression+
+print: "print" atom*
+ask: "ask" atom*
 
 _EOL: /(\r?\n[\t ]*)+/ 
 
+SINGLE_QUOTED_STRING  : /'[^']*'/
+STRING: SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+
 %import common.WS_INLINE
-%import common.SIGNED_INT -> INTEGER
+%import common.NUMBER -> NUMBER
 %import common.FLOAT -> FLOAT
 %import common.CNAME -> NAME
-%import common._STRING_ESC_INNER
-%import common.ESCAPED_STRING -> STRING // TODO: support single quoted strings
+%import common.ESCAPED_STRING -> DOUBLE_QUOTED_STRING 
 
-%declare INDENT DEDENT
+
+%declare _INDENT _DEDENT
 
 %ignore WS_INLINE 
-
 
