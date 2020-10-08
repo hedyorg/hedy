@@ -148,6 +148,7 @@ def index(level, step):
     return hedyweb.render_assignment_editor(
         course=HEDY_COURSE[lang],
         level_number=level,
+        lang = lang,
         assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
