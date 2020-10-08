@@ -40,8 +40,10 @@ HEDY_COURSE = collections.defaultdict(courses.NoSuchCourse)
 for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
-# Only available in Dutch
-SPACE_EU_COURSE = courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl'])
+SPACE_EU_COURSE = {'nl': courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl']),
+                   'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en'])
+                   }
+
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
 
 TRANSLATIONS = hedyweb.Translations()
@@ -191,12 +193,15 @@ def onlinemasters(level, step):
 def space_eu(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
-    g.lang = lang = requested_lang()
+    g.lang = requested_lang()
     g.prefix = '/space_eu'
 
+
+
     return hedyweb.render_assignment_editor(
-        course=SPACE_EU_COURSE,
-        level_number=level,
+        course=SPACE_EU_COURSE[g.lang],
+        level_number=level,  #why not g.level??
+        lang=g.lang,   #just lang gave fr? not sure what this does!
         assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
