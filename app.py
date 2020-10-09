@@ -41,7 +41,8 @@ for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
 SPACE_EU_COURSE = {'nl': courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl']),
-                   'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en'])
+                   'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en']),
+                   'es': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['es'])
                    }
 
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
