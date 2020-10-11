@@ -42,7 +42,7 @@ for lang in ALL_LANGUAGES.keys():
 
 SPACE_EU_COURSE = {'nl': courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl']),
                    'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en']),
-                   'es': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['es'])
+                   'es': courses.Course('space_eu', 'es', LEVEL_DEFAULTS['es'])
                    }
 
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
@@ -143,13 +143,12 @@ def report_error():
 def index(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
-    g.lang = lang = requested_lang()
+    g.lang = requested_lang()
     g.prefix = '/hedy'
 
     return hedyweb.render_assignment_editor(
-        course=HEDY_COURSE[lang],
+        course=HEDY_COURSE[g.lang],
         level_number=level,
-        lang = lang,
         assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
@@ -198,12 +197,9 @@ def space_eu(level, step):
     g.lang = requested_lang()
     g.prefix = '/space_eu'
 
-
-
     return hedyweb.render_assignment_editor(
         course=SPACE_EU_COURSE[g.lang],
-        level_number=level,  #why not g.level??
-        lang=g.lang,   #just lang gave fr? not sure what this does!
+        level_number=level,
         assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),

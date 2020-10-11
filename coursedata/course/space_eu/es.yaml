@@ -9,7 +9,7 @@ course:
       Presione el botón verde con 'Run the code' para probar el código.
       ¿Funciona? Luego pon esta línea debajo : `echo Entonces tu respuesta es`
       Luego presiona el botón verde nuevamente. ¡Ahora Hedy repite tu respuesta!
-   start_code: |
+    start_code: |
       ask ¿Te gustaría convertirte en astronauta?
   - step: '2'
     prompt: |
@@ -25,26 +25,26 @@ course:
 - level: '2'
   assignments:
   - step: '1'
-  prompt: |
-    Has entrado al Hedy Level 2. Eso significa que puede programar algo nuevo, es decir, elegir una palabra al azar de una lista. De esta manera, puedes probarte a tí mismo aún mejor.
-    ¿Puedes terminar la lista de palabras?
-    Y, ¿también puede asegurarse de que puede ingresar una respuesta con una `ask`?
-    Lea atentamente la explicación anterior, ¡porque `ask` funciona un poco diferente ahora!
-  start_code: |
-    las palabras son plantas, fotosíntesis
-    print palabras at random
+    prompt: |
+      Has entrado al Hedy Level 2. Eso significa que puede programar algo nuevo, es decir, elegir una palabra al azar de una lista. De esta manera, puedes probarte a tí mismo aún mejor.
+      ¿Puedes terminar la lista de palabras?
+      Y, ¿también puede asegurarse de que puede ingresar una respuesta con una `ask`?
+      Lea atentamente la explicación anterior, ¡porque `ask` funciona un poco diferente ahora!
+    start_code: |
+      las palabras son plantas, fotosíntesis
+      print palabras at random
 - level: '3'
   assignments:
   - step: '1'
-  prompt: |
-    Has entrado al Hedy level 3. La impresión funciona de manera un poco diferente, ahora tienes que usar comillas para imprimir.
-    ¡Ahora vamos a practicar cosas nuevas en nivel 3!
-    <img src="/images/SpaceEUplantpuzzel.png" width="50%"> </img>
-    ¿Harás un programa para que también puedas practicar este acertijo?
-    En el siguiente paso, aprenderás a comprobar si la respuesta es correcta.
-  start_code: |
-    la respuesta es ask  ¿Cuál es el nombre de la primera casilla?
-    print 'Tu respuesta fue ' respuesta
+    prompt: |
+      Has entrado al Hedy level 3. La impresión funciona de manera un poco diferente, ahora tienes que usar comillas para imprimir.
+      ¡Ahora vamos a practicar cosas nuevas en nivel 3!
+      <img src="/images/SpaceEUplantpuzzel.png" width="50%"> </img>
+      ¿Harás un programa para que también puedas practicar este acertijo?
+      En el siguiente paso, aprenderás a comprobar si la respuesta es correcta.
+    start_code: |
+      la respuesta es ask  ¿Cuál es el nombre de la primera casilla?
+      print 'Tu respuesta fue ' respuesta
 - level: '4'
   assignments:
   - step: '1'
@@ -65,22 +65,22 @@ course:
       Con el nuevo código de repetición puedes imprimir la misma oración varias veces, pruébalo.
       ¿Cuántas de ellas sabes? Pregunta tantas veces como quieras.
     start_code: |
-    repeat 1 times la respuesta es ask ¿Qué necesita una planta?
+      repeat 1 times la respuesta es ask ¿Qué necesita una planta?
 - level: "6"
   assignments:
   - step: '1'
-  prompt: |
-    Has entrado al Hedy level 6. En el nivel 6 puedes empezar a calcular. ¡Eso es útil si tienes que determinar qué tan pesadas pueden ser las cosas en la Luna!
-    Con spaceEU aprendiste que las cosas en la Luna pesan 6 veces menos que en la Tierra.
-    Eso significa que tienes que dividir por 6. En Hedy usas el signo / para dividir. Se llama "slash" (se pronuncia: slaSH).
-    ¿Puedes terminar el código?
-  start_code: |
-    el peso es 60
-    print 'El peso es' peso
-    print 'En la luna es ...'
-- step: '2'
-  prompt: |
-    Puedes hacer más cálculos sobre la Luna. Por ejemplo, un día en la luna dura aproximadamente 29 días.
-    ¿Puedes calcular con Hedy cuánto tiempo es un mes en la Luna?
-    Ahora tienes que crear el código tú mismo.
-  start_code: |
+    prompt: |
+      Has entrado al Hedy level 6. En el nivel 6 puedes empezar a calcular. ¡Eso es útil si tienes que determinar qué tan pesadas pueden ser las cosas en la Luna!
+      Con spaceEU aprendiste que las cosas en la Luna pesan 6 veces menos que en la Tierra.
+      Eso significa que tienes que dividir por 6. En Hedy usas el signo / para dividir. Se llama "slash" (se pronuncia: slaSH).
+      ¿Puedes terminar el código?
+    start_code: |
+      el peso es 60
+      print 'El peso es' peso
+      print 'En la luna es ...'
+  - step: '2'
+    prompt: |
+      Puedes hacer más cálculos sobre la Luna. Por ejemplo, un día en la luna dura aproximadamente 29 días.
+      ¿Puedes calcular con Hedy cuánto tiempo es un mes en la Luna?
+      Ahora tienes que crear el código tú mismo.
+    start_code: |
