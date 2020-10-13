@@ -747,17 +747,6 @@ a = input()
 a = input("string" + 1 + a + -1 + 2.8)
 """)
 
-    def test_repeat(self):
-        result = hedy.transpile("""
-repeat 5 * 2 times
-    a is a + 2
-    b is b + 2
-""", 8)
-        self.assertEqual(result, """import random
-for _ in range(5 * 2):
-    a = a + 2
-    b = b + 2
-""")
 
     def test_for_loop(self):
         result = hedy.transpile("""
@@ -787,31 +776,6 @@ elif a == 2:
     x = 22
 else:
     x = 222
-""")
-
-    def test_nesting(self):
-        result = hedy.transpile("""
-repeat 2 times
-    for a in range 1 to 2
-        if a = 1
-            if a = 2
-                x is 2
-            else
-                x is 22
-        else
-            x is 222
-
-""", 8)
-        self.assertEqual(result, """import random
-for _ in range(2):
-    for a in range(1, 2):
-        if a == 1:
-            if a == 2:
-                x = 2
-            else:
-                x = 22
-        else:
-            x = 222
 """)
 
 class TestsLevel9(unittest.TestCase):

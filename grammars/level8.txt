@@ -1,7 +1,6 @@
 start: _EOL* statement+
 
 statement: if_statement elif_statement* else_statement?
-         | repeat
          | ranged_loop
          | assignment _EOL+
          | print _EOL+
