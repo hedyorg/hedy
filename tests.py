@@ -871,17 +871,6 @@ a = input()
 a = input("string" + 1 + a + -1 + 2.8)
 """)
 
-    def test_repeat(self):
-        result = hedy.transpile("""
-repeat 5 * 2 times:
-    a is a + 2
-    b is b + 2
-""", 9)
-        self.assertEqual(result, """import random
-for _ in range(5 * 2):
-    a = a + 2
-    b = b + 2
-""")
 
     def test_for_loop(self):
         result = hedy.transpile("""
@@ -915,7 +904,7 @@ else:
 
     def test_nesting(self):
         result = hedy.transpile("""
-repeat 2 times:
+for b in range 1 to 2:
     for a in range 1 to 2:
         if a = 1:
             if a = 2:
@@ -927,7 +916,7 @@ repeat 2 times:
 
 """, 9)
         self.assertEqual(result, """import random
-for _ in range(2):
+for b in range(1, 2):
     for a in range(1, 2):
         if a == 1:
             if a == 2:
@@ -1032,18 +1021,6 @@ a = input()
 a = input("string" + 1 + a + -1 + 2.8)
 """)
 
-    def test_repeat(self):
-        result = hedy.transpile("""
-repeat 5 * 2 times:
-    a is a + 2
-    b is b + 2
-""", 10)
-        self.assertEqual(result, """import random
-for _ in range(5 * 2):
-    a = a + 2
-    b = b + 2
-""")
-
     def test_for_loop(self):
         result = hedy.transpile("""
 for a in range 2 to 4:
@@ -1076,8 +1053,8 @@ else:
 
     def test_nesting(self):
         result = hedy.transpile("""
-repeat 2 times:
-    for a in range 1 to 2:
+for a in range 1 to 2:
+    for b in range 1 to 2:
         if a = 1:
             if a = 2:
                 x is 2
@@ -1088,8 +1065,8 @@ repeat 2 times:
 
 """, 10)
         self.assertEqual(result, """import random
-for _ in range(2):
-    for a in range(1, 2):
+for a in range(1, 2):
+    for b in range(1, 2):
         if a == 1:
             if a == 2:
                 x = 2
@@ -1193,17 +1170,6 @@ a = input()
 a = input("string" + 1 + a + -1 + 2.8)
 """)
 
-    def test_repeat(self):
-        result = hedy.transpile("""
-repeat 5 * 2 times:
-    a is a + 2
-    b is b + 2
-""", 11)
-        self.assertEqual(result, """import random
-for _ in range(5 * 2):
-    a = a + 2
-    b = b + 2
-""")
 
     def test_for_loop(self):
         result = hedy.transpile("""
@@ -1237,7 +1203,7 @@ else:
 
     def test_nesting(self):
         result = hedy.transpile("""
-repeat 2 times:
+for b in range(1, 2):
     for a in range(1, 2):
         if a = 1:
             if a = 2:
@@ -1249,7 +1215,7 @@ repeat 2 times:
 
 """, 11)
         self.assertEqual(result, """import random
-for _ in range(2):
+for b in range(1, 2):
     for a in range(1, 2):
         if a == 1:
             if a == 2:
@@ -1360,17 +1326,6 @@ a = input()
 a = input("string" + 1 + a + -1 + 2.8)
 """)
 
-    def test_repeat(self):
-        result = hedy.transpile("""
-repeat 5 * 2 times:
-    a is a + 2
-    b is b + 2
-""", 12)
-        self.assertEqual(result, """import random
-for _ in range(5 * 2):
-    a = a + 2
-    b = b + 2
-""")
 
     def test_for_loop(self):
         result = hedy.transpile("""
@@ -1404,8 +1359,8 @@ else:
 
     def test_nesting(self):
         result = hedy.transpile("""
-repeat 2 times:
-    for a in range(1, 2):
+for a in range(1, 2):
+    for b in range(1, 2):
         if a = 1:
             if a = 2:
                 x is 2
@@ -1416,8 +1371,8 @@ repeat 2 times:
 
 """, 12)
         self.assertEqual(result, """import random
-for _ in range(2):
-    for a in range(1, 2):
+for a in range(1, 2):
+    for b in range(1, 2):
         if a == 1:
             if a == 2:
                 x = 2
@@ -1527,18 +1482,6 @@ a = input()
 a = input("string" + 1 + a + -1 + 2.8)
 """)
 
-    def test_repeat(self):
-        result = hedy.transpile("""
-repeat 5 * 2 times:
-    a = a + 2
-    b = b + 2
-""", 13)
-        self.assertEqual(result, """import random
-for _ in range(5 * 2):
-    a = a + 2
-    b = b + 2
-""")
-
     def test_for_loop(self):
         result = hedy.transpile("""
 for a in range(2, 4):
@@ -1571,8 +1514,8 @@ else:
 
     def test_nesting(self):
         result = hedy.transpile("""
-repeat 2 times:
-    for a in range(1, 2):
+for a in range(1, 2):
+    for b in range(1, 2):
         if a == 1:
             if a == 2:
                 x = 2
@@ -1582,8 +1525,8 @@ repeat 2 times:
             x = 222
 """, 13)
         self.assertEqual(result, """import random
-for _ in range(2):
-    for a in range(1, 2):
+for a in range(1, 2):
+    for b in range(1, 2):
         if a == 1:
             if a == 2:
                 x = 2
