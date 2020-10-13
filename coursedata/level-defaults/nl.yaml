@@ -138,23 +138,13 @@
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         demo_code: "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen\\n  repeat 3 times\\n    print 'mooi!'\\nelse\\n  repeat 5 times\\n    print 'niet zo mooi'"
   8:
-    start_code: "for i in range 1 to 5\n  print 'Hallo allemaal'\n  print 'Dit wordt allemaal 5 keer herhaald'"
+    start_code: "for i in range 1 to 11\\n    print i\\nprint 'wie niet weg is is gezien'"
     intro_text: |
       ask en print werken nog zoals eerst, maar repeat is nu veranderd!
       Je typt nu for i in range 1 tot 5, in plaats van repeat 5 times. Het leuke is dat je die variabele i ook in je programma kan gebruiken!
       Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
 
     commands:
-      -
-        name: "print"
-        explanation: "Iets letterlijk printen met print."
-        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
-      -
-        name: "if met meerdere regels"
-        explanation: "Het antwoord van een som vragen met ask en kijken of het goed is. Nu printen we twee regels uit."
-        example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
-        demo_code: "antwoord is ask Hoeveel is 10 plus 10?\\nif antwoord is 20\\n  print 'Goedzo!'\\n  print 'Het antwoord was inderdaad ' antwoord\\nelse\\n  print 'Foutje'\\n  print 'Het antwoord moest zijn ' antwoord"
       -
         name: "repeat"
         explanation: "nieuwe repeat"
