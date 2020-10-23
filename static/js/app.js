@@ -207,3 +207,22 @@ function buildUrl(url, params) {
   }
   return url + (clauses.length > 0 ? '?' + clauses.join('&') : '');
 }
+
+(function () {
+  let altPressed;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = (ev || document.event).keyCode;
+    if (keyCode === 18) return altPressed = true;
+    if (keyCode === 13 && altPressed) {
+      runit (window.State.level, window.State.lang);
+      $ ('#output').focus ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    const keyCode = (ev || document.event).keyCode;
+    if (keyCode === 18) return altPressed = false;
+  });
+
+}) ();
