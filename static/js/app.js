@@ -1,4 +1,7 @@
 (function() {
+
+  // *** EDITOR SETUP ***
+
   var editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   // editor.session.setMode("ace/mode/javascript");
@@ -18,6 +21,30 @@
       storage.setItem(levelKey, editor.getValue());
     });
   }
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = (ev || document.event).keyCode;
+    if (keyCode === 18) return altPressed = true;
+    if (keyCode === 13 && altPressed) {
+      runit (window.State.level, window.State.lang);
+      $ ('#output').focus ();
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    const keyCode = (ev || document.event).keyCode;
+    if (keyCode === 18) return altPressed = false;
+  });
+
 })();
 
 function runit(level, lang) {
@@ -207,22 +234,3 @@ function buildUrl(url, params) {
   }
   return url + (clauses.length > 0 ? '?' + clauses.join('&') : '');
 }
-
-(function () {
-  let altPressed;
-
-  // alt is 18, enter is 13
-  window.addEventListener ('keydown', function (ev) {
-    const keyCode = (ev || document.event).keyCode;
-    if (keyCode === 18) return altPressed = true;
-    if (keyCode === 13 && altPressed) {
-      runit (window.State.level, window.State.lang);
-      $ ('#output').focus ();
-    }
-  });
-  window.addEventListener ('keyup', function (ev) {
-    const keyCode = (ev || document.event).keyCode;
-    if (keyCode === 18) return altPressed = false;
-  });
-
-}) ();
