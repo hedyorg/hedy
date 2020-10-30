@@ -17,6 +17,11 @@
     editor.on('blur', function(e) {
       storage.setItem(levelKey, editor.getValue());
     });
+
+    // If prompt is shown and user enters text in the editor, hide the prompt.
+    editor.on('change', function () {
+      if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+    });
   }
 })();
 
