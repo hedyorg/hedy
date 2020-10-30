@@ -1,4 +1,7 @@
 (function() {
+
+  // *** EDITOR SETUP ***
+
   var editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   // editor.session.setMode("ace/mode/javascript");
@@ -18,9 +21,34 @@
       storage.setItem(levelKey, editor.getValue());
     });
   }
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = (ev || document.event).keyCode;
+    if (keyCode === 18) return altPressed = true;
+    if (keyCode === 13 && altPressed) {
+      runit (window.State.level, window.State.lang, function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    const keyCode = (ev || document.event).keyCode;
+    if (keyCode === 18) return altPressed = false;
+  });
+
 })();
 
-function runit(level, lang) {
+function runit(level, lang, cb) {
   error.hide();
   try {
     level = level.toString();
@@ -42,8 +70,7 @@ function runit(level, lang) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
       }
-
-      runPythonProgram(response.Code).catch(function(err) {
+      runPythonProgram(response.Code, cb).catch(function(err) {
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
@@ -75,7 +102,7 @@ function reportClientError(level, code, client_error) {
   });
 }
 
-function runPythonProgram(code) {
+function runPythonProgram(code, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -92,6 +119,7 @@ function runPythonProgram(code) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
     console.log('Program executed');
+    if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
     console.log(err);
@@ -159,6 +187,7 @@ function runPythonProgram(code) {
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
       input.val('');
+      input [0].placeholder = prompt;
       setTimeout(function() {
         input.focus();
       }, 0);
@@ -166,6 +195,8 @@ function runPythonProgram(code) {
         event.preventDefault();
         $('#inline-modal').hide();
         ok(input.val());
+        $ ('#output').focus ();
+
         return false;
       });
       $('#inline-modal').show();
