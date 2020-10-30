@@ -186,6 +186,7 @@ function runPythonProgram(code) {
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
       input.val('');
+      input [0].placeholder = prompt;
       setTimeout(function() {
         input.focus();
       }, 0);
