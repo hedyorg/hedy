@@ -31,12 +31,9 @@
     const keyCode = (ev || document.event).keyCode;
     if (keyCode === 18) return altPressed = true;
     if (keyCode === 13 && altPressed) {
-      runit (window.State.level, window.State.lang);
-      // Timeout is here to allow output to change before focusing
-      // so screen reader will read updated version
-      setTimeout (function () {
+      runit (window.State.level, window.State.lang, function () {
         $ ('#output').focus ();
-      }, 0);
+      });
     }
     // We don't use jquery because it doesn't return true for this equality check.
     if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
@@ -51,7 +48,7 @@
 
 })();
 
-function runit(level, lang) {
+function runit(level, lang, cb) {
   error.hide();
   try {
     level = level.toString();
@@ -73,8 +70,7 @@ function runit(level, lang) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
       }
-
-      runPythonProgram(response.Code).catch(function(err) {
+      runPythonProgram(response.Code, cb).catch(function(err) {
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
@@ -106,7 +102,7 @@ function reportClientError(level, code, client_error) {
   });
 }
 
-function runPythonProgram(code) {
+function runPythonProgram(code, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -123,6 +119,7 @@ function runPythonProgram(code) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
     console.log('Program executed');
+    if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
     console.log(err);
@@ -198,12 +195,7 @@ function runPythonProgram(code) {
         event.preventDefault();
         $('#inline-modal').hide();
         ok(input.val());
-
-        // Timeout is here to allow output to change before focusing
-        // so screen reader will read updated version
-        setTimeout (function () {
-          $ ('#output').focus ();
-        }, 0);
+        $ ('#output').focus ();
 
         return false;
       });
