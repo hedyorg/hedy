@@ -32,7 +32,11 @@
     if (keyCode === 18) return altPressed = true;
     if (keyCode === 13 && altPressed) {
       runit (window.State.level, window.State.lang);
-      $ ('#output').focus ();
+      // Timeout is here to allow output to change before focusing
+      // so screen reader will read updated version
+      setTimeout (function () {
+        $ ('#output').focus ();
+      }, 0);
     }
     // We don't use jquery because it doesn't return true for this equality check.
     if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
@@ -194,6 +198,13 @@ function runPythonProgram(code) {
         event.preventDefault();
         $('#inline-modal').hide();
         ok(input.val());
+
+        // Timeout is here to allow output to change before focusing
+        // so screen reader will read updated version
+        setTimeout (function () {
+          $ ('#output').focus ();
+        }, 0);
+
         return false;
       });
       $('#inline-modal').show();
