@@ -4,11 +4,14 @@ page_title: Pers — Hedy
 
 Soms schrijven mensen iets over Hedy, dat houden we op deze lijst bij:
 
+**Vives, oktober 2020**
+* [Link](images/artikel_vives.pdf "Met Hedy stap voor stap leren programmeren")
+
 **SlashDot, 20 augustus 2020**
 * [Link](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
 
 **GenBeta (Spaans), 19 augustus 2020**
-* [Link ](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
+* [Link](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
 
 **Developpez (Frans), 18 augustus 2020**
 * [Link](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
