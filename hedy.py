@@ -117,7 +117,7 @@ class AllAssignmentCommands(Transformer):
 
 
 def create_parser(level):
-    with open(f"grammars/level{str(level)}.txt", "r") as file:
+    with open(f"grammars/level{str(level)}.lark", "r") as file:
         grammar = file.read()
     return Lark(grammar)
 
