@@ -117,7 +117,7 @@ class AllAssignmentCommands(Transformer):
 
 
 def create_parser(level):
-    with open(f"grammars/level{str(level)}.txt", "r") as file:
+    with open(f"grammars/level{str(level)}.lark", "r") as file:
         grammar = file.read()
     return Lark(grammar)
 
@@ -622,7 +622,7 @@ class BasicIndenter2(Indenter):
     tab_len = 4
 
 def create_grammar(level):
-    with open("grammars/level" + str(level) + ".txt", "r") as file:
+    with open("grammars/level" + str(level) + ".lark", "r") as file:
         return file.read()
 
 def transpile(input_string, level):
