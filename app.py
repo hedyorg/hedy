@@ -14,7 +14,7 @@ import uuid
 import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
-
+from config import config
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session, abort, g
@@ -346,4 +346,4 @@ def render_main_menu(current_page):
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=config ['port'])
