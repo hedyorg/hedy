@@ -62,11 +62,17 @@ function runit(level, lang, cb) {
 
     console.log('Original program:\n', code);
 
-    $.getJSON('/parse/', {
-      level: level,
-      code: code,
-      lang: lang,
-      email: window.State.email || undefined
+    $.ajax({
+      type: 'POST',
+      url: '/parse',
+      data: JSON.stringify({
+        level: level,
+        code: code,
+        lang: lang,
+        email: window.State.email || undefined
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
     }).done(function(response) {
       console.log('Response', response);
       if (response.Warning) {

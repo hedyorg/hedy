@@ -72,12 +72,22 @@ if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 
-@app.route('/parse/', methods=['GET'])
+@app.route('/parse', methods=['POST'])
 def parse():
-    # Retrieve the name from url parameter
-    code = request.args.get("code", None)
-    level = int(request.args.get("level", None))
-    email = request.args.get("email", None)
+    body = request.json
+    if not body:
+        return "body must be an object", 400
+    if 'code' not in body:
+        return "body.code must be a string", 400
+    if 'level' not in body:
+        return "body.level must be a string", 400
+
+    code = body ['code']
+    level = int(body ['level'])
+    if 'email' in body:
+       email = body ['email']
+    else:
+       email = None
 
     # For debugging
     print(f"got code {code}")
