@@ -14,7 +14,8 @@
       {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
       {% endif %}
       <div class="px-8 py-12">
-        {% filter indent(width=8) %}{% block body %}{% endblock %}{% endfilter %}
+        {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+        {% block body %}{% endblock %}
       </div>
     </div>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
