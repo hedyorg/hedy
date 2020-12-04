@@ -4,8 +4,13 @@ import re
 from flask import request, make_response, jsonify
 from utils import type_check, object_check, timems
 from functools import wraps
-# TODO: set up config in config file
-r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+from config import config
+
+# We set decode_responses to true to get strings instead of binary strings
+r = redis.Redis(host=config ['redis'] ['host'], port=config ['redis'] ['port'], db= config ['redis'] ['db'], decode_responses=True)
+
+cookie_name     = config ['session'] ['cookie_name']
+session_length  = config ['session'] ['session_length'] * 60
 
 def check_password(password, hash):
     return bcrypt.checkpw(bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
@@ -23,9 +28,8 @@ def requires_login(f):
     @wraps(f)
     def inner(*args, **kws):
         User = None
-        # TODO: change cookie name to config
-        if request.cookies.get('hedy'):
-            username = r.get ('sess:' + request.cookies.get ('hedy'))
+        if request.cookies.get(cookie_name):
+            username = r.get ('sess:' + request.cookies.get (cookie_name))
             if not username:
                 return 'unauthorized', 403
             user = r.hgetall ('user:' + username)
@@ -66,13 +70,10 @@ def routes(app):
             return 'invalid username/password', 403
 
         cookie = make_salt ()
-        # Set session for one day
-        # TODO: move duration to config
-        r.setex ('sess:' + cookie, 1000 * 60 * 60 * 24, body ['username'])
+        r.setex ('sess:' + cookie, session_length, body ['username'])
         r.hset ('user:' + body ['username'], 'lastAccess', timems ())
-        # TODO: move cookie name to config
         resp = make_response({})
-        resp.set_cookie('hedy', value=cookie, httponly=True, path='/')
+        resp.set_cookie(cookie_name, value=cookie, httponly=True, path='/')
         return resp
 
     @app.route('/auth/signup', methods=['POST'])
@@ -136,14 +137,14 @@ def routes(app):
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
-        if request.cookies.get('hedy'):
-            r.delete ('sess:' + request.cookies.get('hedy'))
+        if request.cookies.get(cookie_name):
+            r.delete ('sess:' + request.cookies.get(cookie_name))
         return '', 200
 
     @app.route('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy(user):
-        r.delete ('sess:' + request.cookies.get('hedy'))
+        r.delete ('sess:' + request.cookies.get(cookie_name))
         r.delete ('user:' + user ['username'])
         r.hdel ('emails', user ['email'])
         return '', 200
@@ -244,8 +245,7 @@ def routes(app):
         token = make_salt ()
         hashed = hash(token, make_salt ())
 
-        # TODO: move duration to config
-        r.setex ('token:' + hashed, 1000 * 60 * 60 * 24, body ['username'])
+        r.setex ('token:' + hashed, session_length, body ['username'])
         # TODO: when in non-local environment, email the token instead of returning it
         return token
 
