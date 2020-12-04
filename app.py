@@ -14,7 +14,7 @@ import uuid
 import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
-
+from config import config
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session, abort, g
@@ -77,6 +77,7 @@ def parse():
     # Retrieve the name from url parameter
     code = request.args.get("code", None)
     level = int(request.args.get("level", None))
+    email = request.args.get("email", None)
 
     # For debugging
     print(f"got code {code}")
@@ -112,6 +113,7 @@ def parse():
         'level': level,
         'lang': requested_lang(),
         'code': code,
+        'email': email,
         'server_error': response.get('Error'),
         'version': version(),
     })
@@ -353,4 +355,4 @@ auth.routes(app)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=config ['port'])

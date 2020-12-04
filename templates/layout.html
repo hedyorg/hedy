@@ -1,26 +1,23 @@
 <!doctype html>
 <html>
+  <head>
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="/css/generated.css">
+    <link rel="stylesheet" href="/css/additional.css">
+    <link rel="shortcut icon" type="image/png" href="/images/Hedy-logo.png"/>
+  </head>
 
-<head>
-  <title>{{page_title}}</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
-  <link rel="stylesheet" href="/css/generated.css">
-  <link rel="stylesheet" href="/css/additional.css">
-  <link rel="shortcut icon" type="image/png" href="/images/Hedy-logo.png"/>
-</head>
-
-<body class="bg-gray-400">
-  <div class="container mx-auto bg-gray-100 min-h-screen shadow-md">
-    {% if menu %}
-    {% include "incl-menubar.html" %}
-    {% endif %}
-    <div class="px-8 py-12">
-      {% block body %}
-      {% endblock %}
+  <body class="bg-gray-400">
+    <div class="container mx-auto bg-gray-100 min-h-screen shadow-md">
+      {% if menu %}
+      {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
+      {% endif %}
+      <div class="px-8 py-12">
+        {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+        {% block body %}{% endblock %}
+      </div>
     </div>
-  </div>
-
-  {% block scripts %}
-  {% endblock %}
-</body>
+    {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
+  </body>
 </html>

@@ -65,7 +65,8 @@ function runit(level, lang, cb) {
     $.getJSON('/parse/', {
       level: level,
       code: code,
-      lang: lang
+      lang: lang,
+      email: window.State.email || undefined
     }).done(function(response) {
       console.log('Response', response);
       if (response.Warning) {
@@ -243,3 +244,26 @@ function buildUrl(url, params) {
   }
   return url + (clauses.length > 0 ? '?' + clauses.join('&') : '');
 }
+
+function promptEmail() {
+  // We use a try/catch to avoid an exception if localStorage doesn't exist (*very* old browsers) or if it's disabled by the user.
+  try {
+    if (localStorage.getItem('show_100k_prompt')) return;
+  }
+  catch (error) {
+    // If there's an error, we opt not to show the pop-up.
+    return;
+  }
+  // If there's already an email, do nothing.
+  if (window.State.email) return;
+  var text = 'We\'re about to hit 100.000 programs! Would you like to give us your email to see if you\'ll be the lucky one who gets the prize? (optional)';
+  var email = prompt (text);
+  if (email) window.State.email = email;
+  try {
+    localStorage.setItem('show_100k_prompt', '1');
+  }
+  catch (error) {
+  }
+}
+
+window.onload = promptEmail;
