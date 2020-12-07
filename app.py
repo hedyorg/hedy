@@ -344,6 +344,13 @@ def render_main_menu(current_page):
         accent_color=item.get('accent_color', 'white')
     ) for item in main_menu_json['nav']]
 
+# *** AUTH ***
+
+import auth
+auth.routes(app)
+
+# *** START SERVER ***
+
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=config ['port'])
