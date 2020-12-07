@@ -84,10 +84,6 @@ def parse():
 
     code = body ['code']
     level = int(body ['level'])
-    if 'email' in body:
-       email = body ['email']
-    else:
-       email = None
 
     # For debugging
     print(f"got code {code}")
@@ -123,7 +119,6 @@ def parse():
         'level': level,
         'lang': requested_lang(),
         'code': code,
-        'email': email,
         'server_error': response.get('Error'),
         'version': version(),
     })
@@ -355,6 +350,14 @@ def render_main_menu(current_page):
         selected=(current_page == item['_']),
         accent_color=item.get('accent_color', 'white')
     ) for item in main_menu_json['nav']]
+
+# *** AUTH ***
+
+#Disable auth routes until they are ready
+#import auth
+#auth.routes(app)
+
+# *** START SERVER ***
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
