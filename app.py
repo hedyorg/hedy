@@ -77,7 +77,6 @@ def parse():
     # Retrieve the name from url parameter
     code = request.args.get("code", None)
     level = int(request.args.get("level", None))
-    email = request.args.get("email", None)
 
     # For debugging
     print(f"got code {code}")
@@ -113,7 +112,6 @@ def parse():
         'level': level,
         'lang': requested_lang(),
         'code': code,
-        'email': email,
         'server_error': response.get('Error'),
         'version': version(),
     })
