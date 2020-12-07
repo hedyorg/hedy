@@ -1,7 +1,7 @@
 import bcrypt
 import redis
 import re
-from flask import request, make_response, jsonify
+from flask import request, make_response, jsonify, redirect
 from utils import type_check, object_check, timems
 from functools import wraps
 from config import config
@@ -11,6 +11,9 @@ r = redis.Redis(host=config ['redis'] ['host'], port=config ['redis'] ['port'], 
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
+
+# TODO: determine environment properly
+env = 'local'
 
 def check_password(password, hash):
     return bcrypt.checkpw(bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
@@ -54,7 +57,7 @@ def routes(app):
             return 'password must be a string', 400
 
         # If username has an @-sign, then it's an email
-        if re.match ('@', body ['username']):
+        if '@' in body ['username']:
            username = r.hget ('emails', body ['username'])
            if not username:
               return 'invalid username/password', 403
@@ -66,12 +69,14 @@ def routes(app):
         user = r.hgetall ('user:' + username)
         if not user:
             return 'invalid username/password', 403
+        if 'verification_pending' in user:
+            return 'email verification pending', 403
         if not check_password (body ['password'], user ['password']):
             return 'invalid username/password', 403
 
         cookie = make_salt ()
-        r.setex ('sess:' + cookie, session_length, body ['username'])
-        r.hset ('user:' + body ['username'], 'lastAccess', timems ())
+        r.setex ('sess:' + cookie, session_length, username)
+        r.hset ('user:' + username, 'lastAccess', timems ())
         resp = make_response({})
         resp.set_cookie(cookie_name, value=cookie, httponly=True, path='/')
         return resp
@@ -84,9 +89,9 @@ def routes(app):
             return 'body must be an object', 400
         if not object_check (body, 'username', 'str'):
             return 'username must be a string', 400
-        if re.match ('@', body ['username']):
+        if '@' in body ['username']:
             return 'username cannot contain an @-sign', 400
-        if re.match (':', body ['username']):
+        if ':' in body ['username']:
             return 'username cannot contain a colon', 400
         if not object_check (body, 'password', 'str'):
             return 'password must be a string', 400
@@ -116,11 +121,16 @@ def routes(app):
 
         hashed = hash(body ['password'], make_salt ())
 
+        token = make_salt ()
+        hashed_token = hash(token, make_salt ())
+        username = body ['username'].strip ().lower ()
+
         user = {
-           'username': body ['username'].strip ().lower (),
+           'username': username,
            'password': hashed,
            'email':    body ['email'].strip ().lower (),
-           'created':  timems ()
+           'created':  timems (),
+           'verification_pending': hashed_token
         }
 
         if 'country' in body:
@@ -130,10 +140,39 @@ def routes(app):
         if 'gender' in body:
            user ['gender'] = body ['gender']
 
-        r.hmset ('user:' + body ['username'], user);
-        r.hset ('emails', body ['email'], body ['username'])
+        r.hmset ('user:' + username, user);
+        r.hset ('emails', body ['email'].strip ().lower (), username)
 
-        return '', 200
+        if env == 'local':
+            # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+            return jsonify({'username': username, 'token': hashed_token}), 200
+        else:
+            # TODO: when in non-local environment, email the username & token instead of returning them.
+            return '', 200
+
+    @app.route('/auth/verify', methods=['GET'])
+    def verify_email():
+        username = request.args.get("username", None)
+        token = request.args.get("token", None)
+        if not token:
+            return 'No token sent', 403
+        if not username:
+            return 'No username sent', 403
+
+        user = r.hgetall ('user:' + username)
+
+        if not user:
+            return 'Invalid username', 403
+
+        # If user is verified, succeed anyway
+        if not 'verification_pending' in user:
+            return redirect('/')
+
+        if token != user ['verification_pending']:
+            return 'Invalid token', 403
+
+        r.hdel ('user:' + username, 'verification_pending')
+        return redirect('/')
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
@@ -146,6 +185,8 @@ def routes(app):
     def destroy(user):
         r.delete ('sess:' + request.cookies.get(cookie_name))
         r.delete ('user:' + user ['username'])
+        # The recover password token may exist, so we delete it
+        r.delete ('token:' + user ['username'])
         r.hdel ('emails', user ['email'])
         return '', 200
 
@@ -160,6 +201,9 @@ def routes(app):
             return 'body.oldPassword must be a string', 400
         if not object_check (body, 'newPassword', 'str'):
             return 'body.newPassword must be a string', 400
+
+        if len (body ['newPassword']) < 6:
+            return 'password must be at least six characters long', 400
 
         if not check_password (body ['oldPassword'], user ['password']):
             return 'invalid username/password', 403
@@ -191,7 +235,10 @@ def routes(app):
             if body ['gender'] != 'm' and body ['gender'] != 'f':
                 return 'body.gender must be m/f', 400
 
-        if 'email' in body:
+        if 'email' in body and body ['email'] != user ['email']:
+            email = r.hget ('emails', body ['email'])
+            if email:
+                return 'email exists', 403
             r.hdel ('emails', user ['email'])
             r.hset ('emails', body ['email'], user ['username'])
             r.hset ('user:' + user ['username'], 'email', body ['email'])
@@ -228,7 +275,7 @@ def routes(app):
             return 'body.username must be a string', 400
 
         # If username has an @-sign, then it's an email
-        if re.match ('@', body ['username']):
+        if '@' in body ['username']:
            username = r.hget ('emails', body ['username'])
            if not username:
               return 'invalid username/password', 403
@@ -245,9 +292,14 @@ def routes(app):
         token = make_salt ()
         hashed = hash(token, make_salt ())
 
-        r.setex ('token:' + hashed, session_length, body ['username'])
-        # TODO: when in non-local environment, email the token instead of returning it
-        return token
+        r.setex ('token:' + username, session_length, hashed)
+
+        if env == 'local':
+            # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+            return jsonify({'token': token}), 200
+        else:
+            # TODO: when in non-local environment, email the token instead of returning it.
+            return '', 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -255,16 +307,38 @@ def routes(app):
         # Validations
         if not type_check (body, 'dict'):
             return 'body must be an object', 400
+        if not object_check (body, 'username', 'str'):
+            return 'body.username must be a string', 400
         if not object_check (body, 'token', 'str'):
             return 'body.token must be a string', 400
         if not object_check (body, 'password', 'str'):
             return 'body.password be a string', 400
 
-        username = r.get ('token:' + body ['token'])
-        if not username:
-           return 'invalid token', 403
+        if len (body ['password']) < 6:
+            return 'password must be at least six characters long', 400
+
+        # If username has an @-sign, then it's an email
+        if '@' in body ['username']:
+           username = r.hget ('emails', body ['username'])
+           if not username:
+              return 'invalid username/password', 403
+        else:
+           username = body ['username']
+
+        username = username.strip ().lower ()
+
+        hashed = r.get ('token:' + username)
+        if not hashed:
+            return 'invalid username', 403
+        if not check_password(body ['token'], hashed):
+            return 'invalid token', 403
 
         hashed = hash(body ['password'], make_salt ())
-        r.delete ('token:' + body ['token'])
-        r ['hset'] ('user:' + username, 'password', hashed)
-        return {}, 200
+        r.delete ('token:' + username);
+        r.hset ('user:' + username, 'password', hashed)
+
+        if env != 'local':
+            # TODO: when in non-local environment, send email
+            'foobar'
+
+        return '', 200

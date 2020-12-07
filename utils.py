@@ -9,6 +9,8 @@ def type_check (val, Type):
         return isinstance(val, str)
     if Type == 'int':
         return isinstance(val, int)
+    if Type == 'fun':
+        return callable(val)
 
 def object_check (obj, key, Type):
   if not type_check (obj, 'dict') or not key in obj:

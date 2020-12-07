@@ -346,9 +346,8 @@ def render_main_menu(current_page):
 
 # *** AUTH ***
 
-#Disable auth routes until they are ready
-#import auth
-#auth.routes(app)
+import auth
+auth.routes(app)
 
 # *** START SERVER ***
 
