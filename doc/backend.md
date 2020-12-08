@@ -80,3 +80,24 @@
     - If present, `email` must be a valid email.
     - `email` should not be in use by an existing user. Otherwise, the route returns 403.
     - If successful, the route returns 200.
+
+## Redis
+
+```
+email (hash): keys are emails, values are corresponding usernames.
+
+user:USERNAME (hash):
+    username:    STRING
+    password:    STRING (not the original password, but a bcrypt hash of it)
+    email:       STRING
+    age:         INTEGER|UNDEFINED
+    country:     STRING|UNDEFINED
+    gender:      m|f|UNDEFINED
+    created:     INTEGER
+    last_access: INTEGER|UNDEFINED
+    verification_pending: STRING|UNDEFINED (if present, contains the a hash of the email verification token)
+
+sess:ID (string): ID is session, value is corresponding username.
+
+token:USERNAME (string): value is hash of recover password token.
+```

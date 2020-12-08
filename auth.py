@@ -58,13 +58,11 @@ def routes(app):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-           username = r.hget ('emails', body ['username'])
+           username = r.hget ('email', body ['username'].strip ().lower ())
            if not username:
               return 'invalid username/password', 403
         else:
-           username = body ['username']
-
-        username = username.strip ().lower ()
+           username = body ['username'].strip ().lower ()
 
         user = r.hgetall ('user:' + username)
         if not user:
@@ -76,7 +74,7 @@ def routes(app):
 
         cookie = make_salt ()
         r.setex ('sess:' + cookie, session_length, username)
-        r.hset ('user:' + username, 'lastAccess', timems ())
+        r.hset ('user:' + username, 'last_access', timems ())
         resp = make_response({})
         resp.set_cookie(cookie_name, value=cookie, httponly=True, path='/')
         return resp
@@ -112,10 +110,10 @@ def routes(app):
             if body ['gender'] != 'm' and body ['gender'] != 'f':
                 return 'gender must be m/f', 400
 
-        user = r.hgetall ('user:' + body ['username'])
+        user = r.hgetall ('user:' + body ['username'].strip ().lower ())
         if user:
             return 'username exists', 403
-        email = r.hget ('emails', body ['email'])
+        email = r.hget ('email', body ['email'].strip ().lower ())
         if email:
             return 'email exists', 403
 
@@ -124,11 +122,12 @@ def routes(app):
         token = make_salt ()
         hashed_token = hash(token, make_salt ())
         username = body ['username'].strip ().lower ()
+        email = body ['email'].strip ().lower ()
 
         user = {
            'username': username,
            'password': hashed,
-           'email':    body ['email'].strip ().lower (),
+           'email':    email,
            'created':  timems (),
            'verification_pending': hashed_token
         }
@@ -141,7 +140,7 @@ def routes(app):
            user ['gender'] = body ['gender']
 
         r.hmset ('user:' + username, user);
-        r.hset ('emails', body ['email'].strip ().lower (), username)
+        r.hset ('email', email, username)
 
         if env == 'local':
             # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
@@ -187,7 +186,7 @@ def routes(app):
         r.delete ('user:' + user ['username'])
         # The recover password token may exist, so we delete it
         r.delete ('token:' + user ['username'])
-        r.hdel ('emails', user ['email'])
+        r.hdel ('email', user ['email'])
         return '', 200
 
     @app.route('/auth/changePassword', methods=['POST'])
@@ -235,13 +234,15 @@ def routes(app):
             if body ['gender'] != 'm' and body ['gender'] != 'f':
                 return 'body.gender must be m/f', 400
 
-        if 'email' in body and body ['email'] != user ['email']:
-            email = r.hget ('emails', body ['email'])
-            if email:
+        email = body ['email'].strip ().lower ()
+
+        if 'email' in body and email != user ['email']:
+            exists = r.hget ('email', email)
+            if exists:
                 return 'email exists', 403
-            r.hdel ('emails', user ['email'])
-            r.hset ('emails', body ['email'], user ['username'])
-            r.hset ('user:' + user ['username'], 'email', body ['email'])
+            r.hdel ('email', user ['email'])
+            r.hset ('email', email, user ['username'])
+            r.hset ('user:' + user ['username'], 'email', email)
 
         if 'country' in body:
             r.hset ('user:' + user ['username'], 'country', body ['country'])
@@ -276,13 +277,11 @@ def routes(app):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-           username = r.hget ('emails', body ['username'])
+           username = r.hget ('email', body ['username'].strip ().lower ())
            if not username:
               return 'invalid username/password', 403
         else:
-           username = body ['username']
-
-        username = username.strip ().lower ()
+           username = body ['username'].strip ().lower ()
 
         user = r.hgetall ('user:' + username)
 
@@ -319,13 +318,11 @@ def routes(app):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-           username = r.hget ('emails', body ['username'])
+           username = r.hget ('email', body ['username'].strip ().lower ())
            if not username:
               return 'invalid username/password', 403
         else:
-           username = body ['username']
-
-        username = username.strip ().lower ()
+           username = body ['username'].strip ().lower ()
 
         hashed = r.get ('token:' + username)
         if not hashed:
