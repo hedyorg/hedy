@@ -14,15 +14,16 @@
 
 - `POST /auth/signup`
     - This route creates a new user.
-    - Requires a body of the form `{username: STRING, password: STRING, email: STRING, country: STRING|UNDEFINED, age: INTEGER|UNDEFINED, gender: m|f|UNDEFINED}`. Otherwise, the route returns 400.
+    - Requires a body of the form `{username: STRING, password: STRING, email: STRING, country: STRING|UNDEFINED, birth_year: INTEGER|UNDEFINED, gender: m|f|o|UNDEFINED}`. Otherwise, the route returns 400.
     - If present, `country` must be a valid [ISO 3166 Alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-    - If present, `age` must be an integer larger than 0.
-    - If present, `gender` must be either `m` or `f`.
+    - If present, `birth_year` must be an integer between 1900 and the current calendar year.
+    - If present, `gender` must be either `m`, `f` or `o`.
     - `email` must be a valid email.
     - `password` must be at least six characters long.
     - If `username` contains an `@`, it is considered an email.
     - Both `username` and `email` are stripped of any whitespace at the beginning or the end; they are also lowercased.
     - Both `username` and `email` should not be in use by an existing user. Otherwise, the route returns 403.
+    - The trimmed `username` must be at least three characters long.
     - If successful, the route returns 200. It also will send a verification email to the provided `email`.
 
 - `GET /auth/verify?username=USERNAME&token=TOKEN`
@@ -68,15 +69,15 @@
 - `GET /profile`
     - This route allows the user to retrieve their profile.
     - This route requires a session, otherwise it returns 403.
-    - If successful, this route returns 200 with a body of the shape `{username: STRING, email: STRING, age: INTEGER|UNDEFINED, country: STRING|UNDEFINED, gender: m|f|UNDEFINED}`.
+    - If successful, this route returns 200 with a body of the shape `{username: STRING, email: STRING, birth_year: INTEGER|UNDEFINED, country: STRING|UNDEFINED, gender: m|f|o|UNDEFINED}`.
 
 - `POST /profile`
-    - This route allows the user to change its `email`, `age`, `gender` and/or `country`.
+    - This route allows the user to change its `email`, `birth_year`, `gender` and/or `country`.
     - This route requires a session, otherwise it returns 403.
-    - Requires a body of the form `{email: STRING|UNDEFINED, country: STRING|UNDEFINED, age: INTEGER|UNDEFINED, gender: m|f|UNDEFINED}`. Otherwise, the route returns 400.
+    - Requires a body of the form `{email: STRING|UNDEFINED, country: STRING|UNDEFINED, birth_year: INTEGER|UNDEFINED, gender: m|f|oUNDEFINED}`. Otherwise, the route returns 400.
     - If present, `country` must be a valid [ISO 3166 Alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-    - If present, `age` must be an integer larger than 0.
-    - If present, `gender` must be either `m` or `f`.
+    - If present, `birth_year` must be an integer between 1900 and the current calendar year.
+    - If present, `gender` must be either `m`, `f` or `o`.
     - If present, `email` must be a valid email.
     - `email` should not be in use by an existing user. Otherwise, the route returns 403.
     - If successful, the route returns 200.
@@ -90,7 +91,7 @@ user:USERNAME (hash):
     username:    STRING
     password:    STRING (not the original password, but a bcrypt hash of it)
     email:       STRING
-    age:         INTEGER|UNDEFINED
+    birth_year:  INTEGER|UNDEFINED
     country:     STRING|UNDEFINED
     gender:      m|f|UNDEFINED
     created:     INTEGER

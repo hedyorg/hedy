@@ -15,6 +15,7 @@ import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
+from auth import auth_templates
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session, abort, g
@@ -232,6 +233,9 @@ def main_page(page):
 
     lang = requested_lang()
     effective_lang = lang
+
+    if page in ['signup', 'login', 'my-profile']:
+        return auth_templates(page, lang, render_main_menu(page))
 
     # Default to English if requested language is not available
     if not path.isfile(f'main/{page}-{effective_lang}.md'):

@@ -94,7 +94,7 @@ def invalidMap(tag, method, path, bodies):
     return output
 
 # We use a random username so that if a test fails, we don't have to do a cleaning of the DB so that the test suite can run again
-username = str (random.randint (10000, 100000))
+username = 'user' + str (random.randint (10000, 100000))
 
 def successfulSignup(state, response):
     if not 'token' in response ['body']:
@@ -126,7 +126,7 @@ def recoverPassword(state, response):
 
 suite = [
     ['get root', 'get', '/', {}, '', 308],
-    invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
+    invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
     ['valid signup', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@domain.com'}, 200, successfulSignup],
     invalidMap ('login', 'post', '/auth/login', ['', [], {}, {'username': 1}, {'username': 'user@me'}, {'username:': 'user: me'}]),
     ['valid login, invalid credentials', 'post', '/auth/login', {}, {'username': username, 'password': 'password'}, 403],
@@ -145,7 +145,9 @@ suite = [
     ['login again', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, successfulLogin],
     invalidMap ('change password', 'post', '/auth/changePassword', ['', [], {}, {'foo': 'bar'}, {'oldPassword': 1}, {'oldPassword': 'foobar'}, {'oldPassword': 'foobar', 'newPassword': 1}]),
     ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile1],
-    ['change profile', 'post', '/profile', {}, {'email': username + '@domain2.com', 'country': 'NL'}, 200],
+    invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}]),
+    ['change profile with same email', 'post', '/profile', {}, {'email': username + '@domain.com', 'country': 'US'}, 200],
+    ['change profile with different email', 'post', '/profile', {}, {'email': username + '@domain2.com', 'country': 'NL'}, 200],
     ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile2],
     invalidMap ('recover password', 'post', '/auth/recover', ['', [], {}, {'username': 1}]),
     ['recover password, invalid user', 'post', '/auth/recover', {}, {'username': 'nosuch'}, 403],

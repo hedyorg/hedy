@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<!-- Move to styles -->
+<style>
+  form.auth {
+    border: solid 1px #eeeeee;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+  }
+  form.auth label {
+    width: 140px;
+    display: inline-block;
+  }
+  form.auth input {
+    padding: 5px;
+    border: solid 2px grey;
+  }
+  form.auth .pointer {
+    cursor: pointer;
+  }
+  form.auth select {
+    padding: 5px;
+    width: 180px;
+  }
+</style>
+<div class="px-8">
+  <form class="auth" onsubmit="event.preventDefault (); window.auth.submit ('signup')">
+    <h2>Create account</h2>
+    <br>
+    <label>Username</label>
+    <input id="username">
+    <br><br>
+    <label>Email</label>
+    <input id="email">
+    <br><br>
+    <label>Password</label>
+    <input id="password" type=password>
+    <br><br>
+    <label>Repeat password</label>
+    <input id="password_repeat" type=password>
+    <br><br>
+    <label>Year of birth (optional)</label>
+    <input id="birth_year">
+    <br><br>
+    <label>Gender (optional)</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option value="f">female</option>
+      <option value="m">male</option>
+      <option value="o">other</option>
+    </select>
+    <br><br>
+    <label>Country (optional)</label>
+    <select id="country">
+    </select>
+    <br><br>
+    <input type="submit" class="pointer" value="Create account">
+  </form>
+</div>
+{% endblock %}
+{% block scripts %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+  <script src="/js/auth.js" type="text/javascript"></script>
+  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
+{% endblock %}
