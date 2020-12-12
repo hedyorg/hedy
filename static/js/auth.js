@@ -56,6 +56,41 @@ window.auth = {
         alert ('There was an error, please try again.');
       });
     }
+
+    if (op === 'profile') {
+      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return alert ('Please enter a valid email.');
+      if (values.birth_year) {
+        values.birth_year = parseInt (values.birth_year);
+        if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return alert ('Please enter a year between 1900 and ' + new Date ().getFullYear ());
+      }
+
+      var payload = {};
+      ['email', 'birth_year', 'country', 'gender'].map (function (k) {
+        if (! values [k]) return;
+        if (k === 'birth_year') payload [k] = parseInt (values [k]);
+        payload [k] = values [k];
+      });
+
+      $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+        alert ('Profile updated.');
+      }).fail (function (response) {
+        alert ('There was an error, please try again.');
+      });
+    }
+
+    if (op === 'change_password') {
+      if (! values.password) return alert ('Please enter a password.');
+      if (values.password.length < 6) return alert ('Password must contain at least six characters.');
+      if (values.password !== values.password_repeat) return alert ('The repeated password does not match.');
+
+      var payload = {old_password: values.old_password, new_password: values.password};
+
+      $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+        alert ('Password updated.');
+      }).fail (function (response) {
+        alert ('There was an error, please try again.');
+      });
+    }
   }
 }
 
@@ -73,7 +108,13 @@ if ($ ('#country') && $ ('#country').html () && $ ('#country').html ().trim () =
 $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
   if (window.location.pathname.indexOf (['/signup', '/login']) !== -1) window.location.pathname = '/my-profile';
   window.auth.profile = response;
-  if ($ ('#profile').html ()) $ ('#profile').html (JSON.stringify (window.auth.profile, null, '  '));
+  if ($ ('#profile').html ()) {
+    $ ('#username').val (response.username);
+    $ ('#email').val (response.email);
+    $ ('#birth_year').val (response.birth_year);
+    $ ('#gender').val (response.gender);
+    $ ('#country').val (response.country);
+  }
 }).fail (function (response) {
   if (window.location.pathname.indexOf (['/my-profile']) !== -1) window.location.pathname = '/login';
 });

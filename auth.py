@@ -70,8 +70,6 @@ def routes (app):
         user = r.hgetall ('user:' + username)
         if not user:
             return 'invalid username/password', 403
-        if 'verification_pending' in user:
-            return 'email verification pending', 403
         if not check_password (body ['password'], user ['password']):
             return 'invalid username/password', 403
 
@@ -195,25 +193,25 @@ def routes (app):
         r.hdel ('email', user ['email'])
         return '', 200
 
-    @app.route ('/auth/changePassword', methods=['POST'])
+    @app.route ('/auth/change_password', methods=['POST'])
     @requires_login
     def change_password (user):
 
         body = request.json
         if not type_check (body, 'dict'):
             return 'body must be an object', 400
-        if not object_check (body, 'oldPassword', 'str'):
-            return 'body.oldPassword must be a string', 400
-        if not object_check (body, 'newPassword', 'str'):
-            return 'body.newPassword must be a string', 400
+        if not object_check (body, 'old_password', 'str'):
+            return 'body.old_password must be a string', 400
+        if not object_check (body, 'new_password', 'str'):
+            return 'body.new_password must be a string', 400
 
-        if len (body ['newPassword']) < 6:
+        if len (body ['new_password']) < 6:
             return 'password must be at least six characters long', 400
 
-        if not check_password (body ['oldPassword'], user ['password']):
+        if not check_password (body ['old_password'], user ['password']):
             return 'invalid username/password', 403
 
-        hashed = hash (body ['newPassword'], make_salt ())
+        hashed = hash (body ['new_password'], make_salt ())
 
         r.hset ('user:' + user ['username'], 'password', hashed)
         return '', 200

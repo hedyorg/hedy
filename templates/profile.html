@@ -27,10 +27,48 @@
 </style>
 <div class="px-8">
   <h2>My profile</h2>
-  <pre id="profile">
-  </pre>
+  <form class="auth" id="profile" onsubmit="event.preventDefault (); window.auth.submit ('profile')">
+    <br>
+    <label>Username</label>
+    <input id="username" readonly="readonly">
+    <br><br>
+    <label>Email</label>
+    <input id="email">
+    <br><br>
+    <label>Year of birth (optional)</label>
+    <input id="birth_year">
+    <br><br>
+    <label>Gender (optional)</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option value="f">female</option>
+      <option value="m">male</option>
+      <option value="o">other</option>
+    </select>
+    <br><br>
+    <label>Country (optional)</label>
+    <select id="country">
+    </select>
+    <br><br>
+    <input type="submit" class="pointer" value="Update profile">
+  </form>
   <a href="" onclick="window.auth.logout ()">Log out</a>
+  <br>
   <a href="" onclick="window.auth.destroy ()">Delete account permanently</a>
+  <br>
+  <br>
+  <form class="auth" id="change_password" onsubmit="event.preventDefault (); window.auth.submit ('change_password')"> <br>
+    <label>Current password</label>
+    <input id="old_password" type=password>
+    <br><br>
+    <label>New password</label>
+    <input id="password" type=password>
+    <br><br>
+    <label>Repeat new password</label>
+    <input id="password_repeat" type=password>
+    <br><br>
+    <input type="submit" class="pointer" value="Change password">
+  </form>
 </div>
 {% endblock %}
 {% block scripts %}

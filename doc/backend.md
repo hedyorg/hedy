@@ -10,7 +10,6 @@
     - If `username` contains an `@`, it is considered an email.
     - `username` is stripped of any whitespace at the beginning or the end; it is also lowercased.
     - If successful, the route returns 200 and a `cookie` header containing the session. Otherwise, the route returns 403.
-    - For the route to be successful, the user should have already verified their account through `GET /auth/verify`.
 
 - `POST /auth/signup`
     - This route creates a new user.
@@ -41,9 +40,9 @@
     - This route requires a session, otherwise it returns 403.
     - If successful, the route returns 200.
 
-- `POST /auth/changePassword`
+- `POST /auth/change_password`
     - This route changes the user's password.
-    - Requires a body of the form `{oldPassword: STRING, newPassword: STRING}`. Otherwise, the route returns 400.
+    - Requires a body of the form `{old_password: STRING, new_password: STRING}`. Otherwise, the route returns 400.
     - `newPassword` must be at least six characters long.
     - If successful, the route returns 200.
 
