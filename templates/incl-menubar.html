@@ -12,6 +12,12 @@
       {{ item.caption }}
     </a>
     {% endfor %}
+    {% if username %}
+      <a class="menubar-btn border-transparent" href="my-profile">{{auth.profile}}</a>
+    {% endif %}
+    {% if not username %}
+      <a class="menubar-btn border-transparent" href="login">{{auth.login}}</a>
+    {% endif %}
     {% endblock %}
 
     <div class="dropdown inline-block relative ml-auto py-2 z-50">

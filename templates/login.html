@@ -1,46 +1,19 @@
-{% extends "layout.html" %}
+{% extends "auth.html" %}
 
-{% block body %}
-<!-- Move to styles -->
-<style>
-  form.auth {
-    border: solid 1px #eeeeee;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 10px;
-  }
-  form.auth label {
-    width: 140px;
-    display: inline-block;
-  }
-  form.auth input {
-    padding: 5px;
-    border: solid 2px grey;
-  }
-  form.auth .pointer {
-    cursor: pointer;
-  }
-  form.auth select {
-    padding: 5px;
-    width: 180px;
-  }
-</style>
+{% block main %}
 <div class="px-8">
   <form class="auth" onsubmit="event.preventDefault (); window.auth.submit ('login')">
-    <h2>Log in to your account</h2>
+    <h2>{{auth.login_long}}</h2>
     <br>
-    <label>Username / email</label>
+    <label>{{auth.username}} / {{auth.email}}</label>
     <input id="username">
     <br><br>
-    <label>Password</label>
+    <label>{{auth.password}}</label>
     <input id="password" type=password>
     <br><br>
-    <input type="submit" class="pointer" value="Log in">
+    <input type="submit" class="pointer" value="{{auth.login}}">
+    <br><br>
+    {{auth.no_account}} <a href="signup">{{auth.create_account}}</a>
   </form>
 </div>
-{% endblock %}
-{% block scripts %}
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-  <script src="/js/auth.js" type="text/javascript"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}

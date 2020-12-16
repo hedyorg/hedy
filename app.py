@@ -15,7 +15,7 @@ import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates
+from auth import auth_templates, current_user
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session, abort, g
@@ -115,6 +115,7 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
+        'username': current_user(request) or None
     })
 
     return jsonify(response)
@@ -235,7 +236,7 @@ def main_page(page):
     effective_lang = lang
 
     if page in ['signup', 'login', 'my-profile']:
-        return auth_templates(page, lang, render_main_menu(page))
+        return auth_templates(page, lang, render_main_menu(page), request)
 
     # Default to English if requested language is not available
     if not path.isfile(f'main/{page}-{effective_lang}.md'):
@@ -250,7 +251,7 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
-    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request), auth=TRANSLATIONS.data [lang] ['Auth'], **front_matter)
 
 
 def session_id():
@@ -351,7 +352,7 @@ def render_main_menu(current_page):
 # *** AUTH ***
 
 import auth
-auth.routes(app)
+auth.routes(app, requested_lang)
 
 # *** START SERVER ***
 

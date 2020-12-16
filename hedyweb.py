@@ -43,6 +43,7 @@ def render_assignment_editor(course, level_number, assignment_number, menu, tran
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
   arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
+  arguments_dict['auth'] = translations.data [course.language] ['Auth']
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
@@ -68,6 +69,7 @@ def render_assignment_docs(doc_type, course, level_number, assignment_number, me
   arguments_dict['lang'] = course.language
   arguments_dict['selected_page'] = doc_type
   arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
+  arguments_dict['auth'] = translations.data [course.language] ['Auth']
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))

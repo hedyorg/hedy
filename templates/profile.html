@@ -1,78 +1,47 @@
-{% extends "layout.html" %}
+{% extends "auth.html" %}
 
-{% block body %}
-<!-- Move to styles -->
-<style>
-  form.auth {
-    border: solid 1px #eeeeee;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 10px;
-  }
-  form.auth label {
-    width: 140px;
-    display: inline-block;
-  }
-  form.auth input {
-    padding: 5px;
-    border: solid 2px grey;
-  }
-  form.auth .pointer {
-    cursor: pointer;
-  }
-  form.auth select {
-    padding: 5px;
-    width: 180px;
-  }
-</style>
+{% block main %}
 <div class="px-8">
-  <h2>My profile</h2>
+  <h2>{{auth.profile}} &nbsp;&nbsp;[<a style="font-size: 80%" href="" onclick="window.auth.logout ()">{{auth.logout}}</a>]</h2>
   <form class="auth" id="profile" onsubmit="event.preventDefault (); window.auth.submit ('profile')">
-    <br>
-    <label>Username</label>
+    <br><br>
+    <label>{{auth.username}}</label>
     <input id="username" readonly="readonly">
     <br><br>
-    <label>Email</label>
+    <label>{{auth.email}}</label>
     <input id="email">
     <br><br>
-    <label>Year of birth (optional)</label>
+    <label>{{auth.birth_year}}</label>
     <input id="birth_year">
     <br><br>
-    <label>Gender (optional)</label>
+    <label>{{auth.gender}}</label>
     <select id="gender">
-      <option value="">Select</option>
-      <option value="f">female</option>
-      <option value="m">male</option>
-      <option value="o">other</option>
+      <option value="">{{auth.select}}</option>
+      <option value="f">{{auth.female}}</option>
+      <option value="m">{{auth.male}}</option>
+      <option value="o">{{auth.other}}</option>
     </select>
     <br><br>
-    <label>Country (optional)</label>
-    <select id="country">
-    </select>
+    <label>{{auth.country}}</label>
+    <select id="country"></select>
     <br><br>
-    <input type="submit" class="pointer" value="Update profile">
+    <input type="submit" class="pointer" value="{{auth.update_profile}}">
   </form>
-  <a href="" onclick="window.auth.logout ()">Log out</a>
-  <br>
-  <a href="" onclick="window.auth.destroy ()">Delete account permanently</a>
-  <br>
   <br>
   <form class="auth" id="change_password" onsubmit="event.preventDefault (); window.auth.submit ('change_password')"> <br>
-    <label>Current password</label>
+    <label>{{auth.current_password}}</label>
     <input id="old_password" type=password>
     <br><br>
-    <label>New password</label>
+    <label>{{auth.new_password}}</label>
     <input id="password" type=password>
     <br><br>
-    <label>Repeat new password</label>
+    <label>{{auth.new_password_repeat}}</label>
     <input id="password_repeat" type=password>
     <br><br>
-    <input type="submit" class="pointer" value="Change password">
+    <input type="submit" class="pointer" value="{{auth.change_password}}">
   </form>
+  <br><br>
+  <a style="color: red" href="" onclick="window.auth.destroy ()">{{auth.destroy}}</a>
+  <br><br>
 </div>
-{% endblock %}
-{% block scripts %}
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-  <script src="/js/auth.js" type="text/javascript"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}
