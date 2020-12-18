@@ -235,7 +235,7 @@ def main_page(page):
     lang = requested_lang()
     effective_lang = lang
 
-    if page in ['signup', 'login', 'my-profile']:
+    if page in ['signup', 'login', 'my-profile', 'recover', 'reset']:
         return auth_templates(page, lang, render_main_menu(page), request)
 
     # Default to English if requested language is not available

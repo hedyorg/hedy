@@ -13,17 +13,18 @@
 
 - `POST /auth/signup`
     - This route creates a new user.
-    - Requires a body of the form `{username: STRING, password: STRING, email: STRING, country: STRING|UNDEFINED, birth_year: INTEGER|UNDEFINED, gender: m|f|o|UNDEFINED}`. Otherwise, the route returns 400.
+    - Requires a body of the form `{username: STRING, password: STRING, email: STRING, country: STRING|UNDEFINED, birth_year: INTEGER|UNDEFINED, gender: m|f|o|UNDEFINED, subscribe: true|false|UNDEFINED}`. Otherwise, the route returns 400.
     - If present, `country` must be a valid [ISO 3166 Alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
     - If present, `birth_year` must be an integer between 1900 and the current calendar year.
     - If present, `gender` must be either `m`, `f` or `o`.
+    - If present, `subscribe` must be either boolean or undefined and if `true`, indicates that the user wants to subscribe to the Hedy newsletter.
     - `email` must be a valid email.
     - `password` must be at least six characters long.
     - If `username` contains an `@`, it is considered an email.
     - Both `username` and `email` are stripped of any whitespace at the beginning or the end; they are also lowercased.
     - Both `username` and `email` should not be in use by an existing user. Otherwise, the route returns 403.
     - The trimmed `username` must be at least three characters long.
-    - If successful, the route returns 200. It also will send a verification email to the provided `email`.
+    - If successful, the route returns 200. It will also send a verification email to the provided `email`.
 
 - `GET /auth/verify?username=USERNAME&token=TOKEN`
     - This route verifies ownership of the email address of a new user.
@@ -80,6 +81,11 @@
     - If present, `email` must be a valid email.
     - `email` should not be in use by an existing user. Otherwise, the route returns 403.
     - If successful, the route returns 200.
+
+- `GET /users`
+    - This route allows the admin user to retrieve a list of all the users in the system.
+    - If there's no session or the logged in user is not the admin user, it returns 403.
+    - If successful, the route will return an array with objects, one per user. The users will be sorted by creation date, last first.
 
 ## Redis
 

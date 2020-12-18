@@ -2,16 +2,35 @@ var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'A
 
 window.auth = {
   texts: {},
+  redirect: function (where) {
+    where = '/' + where;
+    window.location.pathname = where;
+  },
   logout: function () {
     $.ajax ({type: 'POST', url: '/auth/logout'}).done (function () {
-      window.location.pathname = '/login';
+      auth.redirect ('login');
     });
   },
   destroy: function () {
-    if (! confirm (window.auth.texts.are_you_sure)) return;
+    if (! confirm (auth.texts.are_you_sure)) return;
     $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
-      window.location.pathname = '/';
+      auth.redirect ('');
     });
+  },
+  error: function (message, element) {
+    $ ('#error').html (message);
+    $ ('#error').css ('display', 'block');
+    if (element) $ ('#' + element).css ('border', 'solid 1px red');
+  },
+  clear_error: function () {
+    $ ('#error').html ('');
+    $ ('#error').css ('display', 'none');
+    $ ('form *').css ('border', '');
+  },
+  success: function (message) {
+    $ ('#error').css ('display', 'none');
+    $ ('#success').html (message);
+    $ ('#success').css ('display', 'block');
   },
   submit: function (op) {
     var values = {};
@@ -20,49 +39,56 @@ window.auth = {
     });
 
     if (op === 'signup') {
-      if (! values.username) return alert (window.auth.texts.please_username);
+      if (! values.username) return auth.error (auth.texts.please_username, 'username');
       values.username = values.username.trim ();
-      if (values.username.length < 3) return alert (window.auth.texts.username_three);
-      if (values.username.match (/:|@/)) return alert (window.auth.texts.username_special);
-      if (! values.password) return alert (window.auth.texts.please_password);
-      if (values.password.length < 6) return alert (window.auth.texts.password_six);
-      if (values.password !== values.password_repeat) return alert (window.auth.texts.repeat_match);
-      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return alert (window.auth.texts.valid_email);
+      if (values.username.length < 3) return auth.error (auth.texts.username_three, 'username');
+      if (values.username.match (/:|@/)) return auth.error (auth.texts.username_special, 'username');
+      if (! values.password) return auth.error (auth.texts.please_password, 'password');
+      if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
+      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'psasword_repeat');
+      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return auth.error (auth.texts.valid_email, 'email');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
-        if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return alert (window.auth.texts.valid_year + new Date ().getFullYear ());
+        if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return auth.error (auth.texts.valid_year + new Date ().getFullYear (), 'birth_year');
       }
 
       var payload = {};
-      ['username', 'email', 'password', 'birth_year', 'country', 'gender'].map (function (k) {
+      ['username', 'email', 'password', 'birth_year', 'country', 'gender', 'subscribe'].map (function (k) {
         if (! values [k]) return;
         if (k === 'birth_year') payload [k] = parseInt (values [k]);
-        payload [k] = values [k];
+        else if (k === 'subscribe') payload [k] = $ ('#subscribe').prop ('checked');
+        else payload [k] = values [k];
       });
 
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        alert (window.auth.texts.signup_success);
-        window.location.pathname = '/login';
+        auth.success (auth.texts.signup_success);
+        auth.redirect ('login');
       }).fail (function (response) {
-        alert (window.auth.texts.ajax_error);
+        var error = response.responseText || '';
+        if (error.match ('email'))         auth.error (auth.texts.exists_email);
+        else if (error.match ('username')) auth.error (auth.texts.exists_username);
+        else                               auth.error (auth.texts.ajax_error);
       });
     }
 
     if (op === 'login') {
-      if (! values.username) return alert (window.auth.texts.please_username_email);
-      if (! values.password) return alert (window.auth.texts.please_password);
+      if (! values.username) return auth.error (auth.texts.please_username_email, 'username');
+      if (! values.password) return auth.error (auth.texts.please_password, 'password');
+
+      auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
-        window.location.pathname = '/my-profile';
+        auth.redirect ('my-profile');
       }).fail (function (response) {
-        alert (window.auth.texts.ajax_error);
+        if (response.status === 403) auth.error (auth.texts.invalid_username_password);
+        else                         auth.error (auth.texts.ajax_error);
       });
     }
 
     if (op === 'profile') {
-      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return alert (window.auth.texts.valid_email);
+      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return auth.error (auth.texts.valid_email, 'email');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
-        if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return alert (window.auth.texts.valid_year + new Date ().getFullYear ());
+        if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return auth.error (auth.texts.valid_year + new Date ().getFullYear (), 'birth_year');
       }
 
       var payload = {};
@@ -72,24 +98,64 @@ window.auth = {
         payload [k] = values [k];
       });
 
+      auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        alert (window.auth.texts.profile_updated);
+        auth.success (auth.texts.profile_updated);
       }).fail (function (response) {
-        alert (window.auth.texts.ajax_error);
+        auth.error (auth.texts.ajax_error);
       });
     }
 
     if (op === 'change_password') {
-      if (! values.password) return alert (window.auth.texts.please_password);
-      if (values.password.length < 6) return alert (window.auth.texts.password_six);
-      if (values.password !== values.password_repeat) return alert (window.auth.texts.password_match);
+      if (! values.password) return auth.error (auth.texts.please_password, 'password');
+      if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
+      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'password_repeat');
 
       var payload = {old_password: values.old_password, new_password: values.password};
 
+      auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        alert (window.auth.texts.password_updated);
+        auth.success (auth.texts.password_updated);
+        $ ('#old_password').val ('');
+        $ ('#password').val ('');
+        $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        alert (window.auth.texts.ajax_error);
+        if (response.status === 403) auth.error (auth.texts.invalid_password);
+        else                         auth.error (auth.texts.ajax_error);
+      });
+    }
+
+    if (op === 'recover') {
+      if (! values.username) return auth.error (auth.texts.please_username, 'username');
+
+      var payload = {username: values.username};
+
+      auth.clear_error ();
+      $.ajax ({type: 'POST', url: '/auth/recover', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+        auth.success (auth.texts.password_recovery);
+        $ ('#username').val ('');
+      }).fail (function (response) {
+        if (response.status === 403) auth.error (auth.texts.invalid_username);
+        else                         auth.error (auth.texts.ajax_error);
+      });
+    }
+
+    if (op === 'reset') {
+      if (! values.password) return auth.error (auth.texts.please_password, 'password');
+      if (values.password.length < 6) return auth.eror (auth.texts.password_six, 'password');
+      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'password_repeat');
+
+      var payload = {username: auth.reset.username, token: auth.reset.token, password: values.password};
+
+      auth.clear_error ();
+      $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
+        auth.success (auth.texts.password_resetted);
+        $ ('#password').val ('');
+        $ ('#password_repeat').val ('');
+        delete auth.reset;
+      }).fail (function (response) {
+        if (response.status === 403) auth.error (auth.texts.invalid_reset_link);
+        else                         auth.error (auth.texts.ajax_error);
       });
     }
   }
@@ -105,14 +171,20 @@ if ($ ('#country') && $ ('#country').html () && $ ('#country').html ().trim () =
   $ ('#country').html (html);
 }
 
+$ ('.auth input').get ().map (function (el) {
+  // Clear red borders if input was marked from a previous error.
+  el.addEventListener ('input', auth.clear_error);
+});
+
 $.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (function (response) {
-  window.auth.texts = response;
+  auth.texts = response;
 });
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
 $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) window.location.pathname = '/my-profile';
-  window.auth.profile = response;
+  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+
+  auth.profile = response;
   if ($ ('#profile').html ()) {
     $ ('#username').val (response.username);
     $ ('#email').val (response.email);
@@ -121,5 +193,17 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
     $ ('#country').val (response.country);
   }
 }).fail (function (response) {
-  if (window.location.pathname.indexOf (['/my-profile']) !== -1) window.location.pathname = '/login';
+  if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
 });
+
+if (window.location.pathname === '/reset') {
+  var query = window.location.search.slice (1).split ('&');
+  var params = {};
+  query.map (function (item) {
+    item = item.split ('=');
+    params [item [0]] = decodeURIComponent (item [1]);
+  });
+  // If we don't receive username and token, the redirect link is invalid. We redirect the user to /recover.
+  if (! params.username || ! params.token) auth.redirect ('recover')
+  else auth.reset = params;
+}

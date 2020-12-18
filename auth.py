@@ -1,6 +1,8 @@
+import os
 import bcrypt
 import redis
 import re
+import urllib
 from flask import request, make_response, jsonify, redirect, render_template
 from utils import type_check, object_check, timems
 import datetime
@@ -18,8 +20,7 @@ r = redis.Redis (host=config ['redis'] ['host'], port=config ['redis'] ['port'],
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
-# TODO: determine environment properly
-env = 'local'
+env = os.getenv ('HEROKU_APP_NAME')
 
 def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
@@ -77,11 +78,11 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-           username = r.hget ('email', body ['username'].strip ().lower ())
-           if not username:
-              return 'invalid username/password', 403
+            username = r.hget ('email', body ['username'].strip ().lower ())
+            if not username:
+                return 'invalid username/password', 403
         else:
-           username = body ['username'].strip ().lower ()
+            username = body ['username'].strip ().lower ()
 
         user = r.hgetall ('user:' + username)
         if not user:
@@ -143,30 +144,32 @@ def routes (app, requested_lang):
         username = body ['username'].strip ().lower ()
         email = body ['email'].strip ().lower ()
 
+        if env and 'subscribe' in body and body ['subscribe'] == True:
+            send_email (config ['email'] ['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+
         user = {
-           'username': username,
-           'password': hashed,
-           'email':    email,
-           'created':  timems (),
-           'verification_pending': hashed_token
+            'username': username,
+            'password': hashed,
+            'email':    email,
+            'created':  timems (),
+            'verification_pending': hashed_token
         }
 
         if 'country' in body:
-           user ['country'] = body ['country']
+            user ['country'] = body ['country']
         if 'birth_year' in body:
-           user ['birth_year'] = body ['birth_year']
+            user ['birth_year'] = body ['birth_year']
         if 'gender' in body:
-           user ['gender'] = body ['gender']
+            user ['gender'] = body ['gender']
 
         r.hmset ('user:' + username, user);
         r.hset ('email', email, username)
 
-        if env == 'local':
+        if not env:
             # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
             return jsonify ({'username': username, 'token': hashed_token}), 200
         else:
-            # TODO: Replace with template
-            send_email (email, 'Welcome to Hedy', 'Welcome to Hedy, please verify your email', '<h1>Welcome to Hedy, please verify your email</h1>')
+            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             return '', 200
 
     @app.route ('/auth/verify', methods=['GET'])
@@ -174,21 +177,21 @@ def routes (app, requested_lang):
         username = request.args.get ('username', None)
         token = request.args.get ('token', None)
         if not token:
-            return 'No token sent', 403
+            return 'no token', 400
         if not username:
-            return 'No username sent', 403
+            return 'no username', 400
 
         user = r.hgetall ('user:' + username)
 
         if not user:
-            return 'Invalid username', 403
+            return 'invalid username/token', 403
 
         # If user is verified, succeed anyway
         if not 'verification_pending' in user:
             return redirect ('/')
 
         if token != user ['verification_pending']:
-            return 'Invalid token', 403
+            return 'invalid username/token', 403
 
         r.hdel ('user:' + username, 'verification_pending')
         return redirect ('/')
@@ -230,6 +233,9 @@ def routes (app, requested_lang):
         hashed = hash (body ['new_password'], make_salt ())
 
         r.hset ('user:' + user ['username'], 'password', hashed)
+        if env:
+            send_email_template ('change_password', user ['email'], requested_lang (), None)
+
         return '', 200
 
     @app.route ('/profile', methods=['POST'])
@@ -257,12 +263,12 @@ def routes (app, requested_lang):
         if 'email' in body:
             email = body ['email'].strip ().lower ()
             if email != user ['email']:
-               exists = r.hget ('email', email)
-               if exists:
-                   return 'email exists', 403
-               r.hdel ('email', user ['email'])
-               r.hset ('email', email, user ['username'])
-               r.hset ('user:' + user ['username'], 'email', email)
+                exists = r.hget ('email', email)
+                if exists:
+                    return 'email exists', 403
+                r.hdel ('email', user ['email'])
+                r.hset ('email', email, user ['username'])
+                r.hset ('user:' + user ['username'], 'email', email)
 
         if 'country' in body:
             r.hset ('user:' + user ['username'], 'country', body ['country'])
@@ -297,11 +303,11 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-           username = r.hget ('email', body ['username'].strip ().lower ())
-           if not username:
-              return 'invalid username/password', 403
+            username = r.hget ('email', body ['username'].strip ().lower ())
+            if not username:
+                return 'invalid username', 403
         else:
-           username = body ['username'].strip ().lower ()
+            username = body ['username'].strip ().lower ()
 
         user = r.hgetall ('user:' + username)
 
@@ -313,12 +319,11 @@ def routes (app, requested_lang):
 
         r.setex ('token:' + username, session_length, hashed)
 
-        if env == 'local':
+        if not env:
             # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
-            return jsonify ({'token': token}), 200
+            return jsonify ({'username': username, 'token': token}), 200
         else:
-            # TODO: Replace with template
-            send_email (user ['email'], 'Reset password', 'Reset password', '<h1>Reset password</h1>')
+            send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (token))
             return '', 200
 
     @app.route ('/auth/reset', methods=['POST'])
@@ -339,31 +344,47 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-           username = r.hget ('email', body ['username'].strip ().lower ())
-           if not username:
-              return 'invalid username/password', 403
+            username = r.hget ('email', body ['username'].strip ().lower ())
+            if not username:
+                return 'invalid username/password', 403
         else:
-           username = body ['username'].strip ().lower ()
+            username = body ['username'].strip ().lower ()
 
         hashed = r.get ('token:' + username)
         if not hashed:
-            return 'invalid username', 403
+            return 'invalid username/token', 403
         if not check_password (body ['token'], hashed):
-            return 'invalid token', 403
+            return 'invalid username/token', 403
 
         hashed = hash (body ['password'], make_salt ())
         r.delete ('token:' + username);
         r.hset ('user:' + username, 'password', hashed)
         email = r.hget ('user:' + username, 'email')
 
-        if env != 'local':
-            # TODO: Replace with template
-            send_email (email, 'Your password has been changed', 'Your password has been changed', '<h1>Your password has been changed</h1>')
+        if env:
+            send_email_template ('reset_password', email, requested_lang (), None)
 
         return '', 200
 
+    @app.route ('/users', methods=['GET'])
+    @requires_login
+    def get_users (user):
+        if user ['email'] != os.getenv ('ADMIN_EMAIL'):
+            return '', 403
+        # TODO: implement
+        # username, email, birth_year (int), country, gender, created (int), last_access (int|undefined), verification_pending (make boolean)
+        # sort by last created first
+        output = []
+        return jsonify (output), 200
+
+# Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
+import logging
+for name in logging.Logger.manager.loggerDict.keys ():
+    if ('boto' in name) or ('urllib3' in name) or ('s3transfer' in name) or ('boto3' in name) or ('botocore' in name) or ('nose' in name):
+        logging.getLogger (name).setLevel (logging.CRITICAL)
+
 # https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
-email_client = boto3.client ('ses', region_name = config ['email'] ['region'], aws_access_key_id = '...', aws_secret_access_key = '...')
+email_client = boto3.client ('ses', region_name = config ['email'] ['region'], aws_access_key_id = os.getenv ('AWS_SES_ACCESS_KEY'), aws_secret_access_key = os.getenv ('AWS_SES_SECRET_KEY'))
 
 def send_email (recipient, subject, body_plain, body_html):
     try:
@@ -383,10 +404,25 @@ def send_email (recipient, subject, body_plain, body_html):
     else:
         print ('Email sent to ' + recipient)
 
+def send_email_template (template, email, lang, link):
+    texts = TRANSLATIONS.data [lang] ['Auth']
+    subject = texts ['email_' + template + '_subject']
+    body = texts ['email_' + template + '_body'].split ('\n')
+    body = [texts ['email_hello']] + body
+    if link:
+        body = body + ['@@LINK@@']
+    body = body + texts ['email_goodbye'].split ('\n')
+
+    body_plain = '\n'.join (body)
+    body_html = '<p>' + '</p><p>'.join (body) + '</p>'
+    if link:
+        body_plain = body_plain.replace ('@@LINK@@', 'Please copy and paste this link into a new tab: ' + link)
+        body_html = body_html.replace ('@@LINK@@', '<a href="' + link + '">Link</a>')
+
+    send_email (email, subject, body_plain, body_html)
+
 def auth_templates (page, lang, menu, request):
-    if page == 'signup':
-        return render_template ('signup.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
-    if page == 'login':
-        return render_template ('login.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
     if page == 'my-profile':
         return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
+    if page in ['signup', 'login', 'recover', 'reset']:
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))

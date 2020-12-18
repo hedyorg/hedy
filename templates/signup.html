@@ -31,9 +31,16 @@
     <label>{{auth.country}}</label>
     <select id="country"></select>
     <br><br>
+    <label>{{auth.subscribe_newsletter}}</label>
+    <input type="checkbox" id="subscribe">
+    <br><br>
     <input type="submit" class="pointer" value="{{auth.create_account}}">
     <br><br>
-    {{auth.already_account}} <a href="login">{{auth.login}}</a>
+    {{auth.already_account}} <a href="login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
+    <div id="error" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+    <div id="success" class="flex-0 mt-0 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+    </div>
+    <br><br>
   </form>
 </div>
 {% endblock %}
