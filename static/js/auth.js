@@ -163,7 +163,7 @@ window.auth = {
 
 // *** LOADERS ***
 
-if ($ ('#country') && $ ('#country').html () && $ ('#country').html ().trim () === '') {
+if ($ ('#country')) {
   var html = '<option value="">Select</option>';
   Object.keys (countries).map (function (code) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';

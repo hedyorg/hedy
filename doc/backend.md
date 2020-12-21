@@ -85,7 +85,7 @@
 - `GET /users`
     - This route allows the admin user to retrieve a list of all the users in the system.
     - If there's no session or the logged in user is not the admin user, it returns 403.
-    - If successful, the route will return an array with objects, one per user. The users will be sorted by creation date, last first.
+    - If successful, the route will return a template containing a table with all the users in the system. The users will be sorted by creation date, last first.
 
 ## Redis
 
@@ -100,7 +100,7 @@ user:USERNAME (hash):
     country:     STRING|UNDEFINED
     gender:      m|f|UNDEFINED
     created:     INTEGER
-    last_access: INTEGER|UNDEFINED
+    last_login:  INTEGER|UNDEFINED
     verification_pending: STRING|UNDEFINED (if present, contains the a hash of the email verification token)
 
 sess:ID (string): ID is session, value is corresponding username.

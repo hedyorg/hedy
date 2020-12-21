@@ -22,6 +22,18 @@ session_length  = config ['session'] ['session_length'] * 60
 
 env = os.getenv ('HEROKU_APP_NAME')
 
+def redis_keyscan (match, cursor, keys):
+    if not cursor:
+        cursor = 0
+    if not keys:
+        keys = {}
+    scan = r.scan (cursor, match)
+    for key in scan [1]:
+        keys [key] = True
+    if scan [0] == 0:
+        return list (keys.keys ())
+    return redis_keyscan (match, scan [0], keys)
+
 def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
 
@@ -92,7 +104,7 @@ def routes (app, requested_lang):
 
         cookie = make_salt ()
         r.setex ('sess:' + cookie, session_length, username)
-        r.hset ('user:' + username, 'last_access', timems ())
+        r.hset ('user:' + username, 'last_login', timems ())
         resp = make_response ({})
         resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
         return resp
@@ -366,17 +378,6 @@ def routes (app, requested_lang):
 
         return '', 200
 
-    @app.route ('/users', methods=['GET'])
-    @requires_login
-    def get_users (user):
-        if user ['email'] != os.getenv ('ADMIN_EMAIL'):
-            return '', 403
-        # TODO: implement
-        # username, email, birth_year (int), country, gender, created (int), last_access (int|undefined), verification_pending (make boolean)
-        # sort by last created first
-        output = []
-        return jsonify (output), 200
-
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging
 for name in logging.Logger.manager.loggerDict.keys ():
@@ -426,3 +427,30 @@ def auth_templates (page, lang, menu, request):
         return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
     if page in ['signup', 'login', 'recover', 'reset']:
         return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
+    if page == 'users':
+        user = current_user (request)
+        if current_user (request) != os.getenv ('ADMIN_USER'):
+            if r.hget ('user:' + user, 'email') != os.getenv ('ADMIN_USER'):
+                return 'unauthorized', 403
+
+        # After hitting 1k users, it'd be wise to add pagination.
+        users = redis_keyscan ('user:*', None, None)
+        userdata = []
+        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending']
+        counter = 1
+        for user in users:
+            rawdata = r.hmget (user, fields)
+            data = {}
+            for index, field in enumerate (fields):
+                data [field] = rawdata [index]
+            data ['email_verified'] = not bool (data ['verification_pending'])
+            data ['created'] = datetime.datetime.fromtimestamp (int (data ['created'] [:-3])).isoformat ()
+            if data ['last_login']:
+                data ['last_login'] = datetime.datetime.fromtimestamp (int (data ['last_login'] [:-3])).isoformat ()
+            data ['index'] = counter
+            counter = counter + 1
+            userdata.append (data)
+
+        userdata.sort(key=lambda user: user ['created'], reverse=True)
+
+        return render_template ('users.html', users=userdata)
