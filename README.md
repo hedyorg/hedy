@@ -26,7 +26,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 
 3.  **Only one aspect of a concept changes at a time:** 
 
-    In his paper on [the spiral approach Shneiderman](https://www.sciencedirect.com/science/article/pii/0360131577900082) argued for samll steps in teaching programming, which we follow for Hedy too. This allows us to focus the full attention of the learner on the new     syntactic element.
+    In his paper on [the spiral approach Shneiderman](https://www.sciencedirect.com/science/article/pii/0360131577900082) argued for small steps in teaching programming, which we follow for Hedy too. This allows us to focus the full attention of the learner on the new     syntactic element.
 
 4.  **Adding syntactic elements like brackets and colons is deferred to the latest moment possible:** 
     
