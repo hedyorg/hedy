@@ -15,7 +15,10 @@ import hedyweb
 TRANSLATIONS = hedyweb.Translations()
 
 # We set decode_responses to true to get strings instead of binary strings
-r = redis.Redis (host=config ['redis'] ['host'], port=config ['redis'] ['port'], db= config ['redis'] ['db'], decode_responses=True)
+if os.getenv ('REDIS_URL'):
+    r = redis.from_url (os.getenv ('REDIS_URL'), decode_responses=True)
+else:
+    r = redis.Redis (host=config ['redis'] ['host'], port=config ['redis'] ['port'], db= config ['redis'] ['db'], decode_responses=True)
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
