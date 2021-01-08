@@ -1,10 +1,9 @@
 import os
 import bcrypt
-import redis
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_scan
 import datetime
 from functools import wraps
 from config import config
@@ -12,30 +11,12 @@ import boto3
 from botocore.exceptions import ClientError as email_error
 
 import hedyweb
-TRANSLATIONS = hedyweb.Translations()
-
-# We set decode_responses to true to get strings instead of binary strings
-if os.getenv ('REDIS_URL'):
-    r = redis.from_url (os.getenv ('REDIS_URL'), decode_responses=True)
-else:
-    r = redis.Redis (host=config ['redis'] ['host'], port=config ['redis'] ['port'], db= config ['redis'] ['db'], decode_responses=True)
+TRANSLATIONS = hedyweb.Translations ()
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
 env = os.getenv ('HEROKU_APP_NAME')
-
-def redis_keyscan (match, cursor, keys):
-    if not cursor:
-        cursor = 0
-    if not keys:
-        keys = {}
-    scan = r.scan (cursor, match)
-    for key in scan [1]:
-        keys [key] = True
-    if scan [0] == 0:
-        return list (keys.keys ())
-    return redis_keyscan (match, scan [0], keys)
 
 def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
@@ -50,10 +31,13 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 
 def current_user (request):
     if request.cookies.get (cookie_name):
-        username = r.get ('sess:' + request.cookies.get (cookie_name))
-        if username:
-            return username
-    return ""
+        token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
+        if not token:
+            return {'username': '', 'email': ''}
+        user  = db_get ('users',  {'username': token ['username']})
+        if user:
+            return user
+    return {'username': '', 'email': ''}
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login (f):
@@ -61,10 +45,10 @@ def requires_login (f):
     def inner (*args, **kws):
         User = None
         if request.cookies.get (cookie_name):
-            username = r.get ('sess:' + request.cookies.get (cookie_name))
-            if not username:
+            token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
+            if not token:
                 return 'unauthorized', 403
-            user = r.hgetall ('user:' + username)
+            user = db_get ('users', {'username': token ['username']})
             if not user:
                 return 'unauthorized', 403
         else:
@@ -93,21 +77,18 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-            username = r.hget ('email', body ['username'].strip ().lower ())
-            if not username:
-                return 'invalid username/password', 403
+            user = db_get ('users', {'email': body ['username'].strip ().lower ()}, True)
         else:
-            username = body ['username'].strip ().lower ()
+            user = db_get ('users', {'username': body ['username'].strip ().lower ()})
 
-        user = r.hgetall ('user:' + username)
         if not user:
             return 'invalid username/password', 403
         if not check_password (body ['password'], user ['password']):
             return 'invalid username/password', 403
 
         cookie = make_salt ()
-        r.setex ('sess:' + cookie, session_length, username)
-        r.hset ('user:' + username, 'last_login', timems ())
+        db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
         resp = make_response ({})
         resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
         return resp
@@ -145,10 +126,10 @@ def routes (app, requested_lang):
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'gender must be m/f/o', 400
 
-        user = r.hgetall ('user:' + body ['username'].strip ().lower ())
+        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
         if user:
             return 'username exists', 403
-        email = r.hget ('email', body ['email'].strip ().lower ())
+        email = db_get ('users', {'email': body ['email'].strip ().lower ()}, True)
         if email:
             return 'email exists', 403
 
@@ -177,8 +158,7 @@ def routes (app, requested_lang):
         if 'gender' in body:
             user ['gender'] = body ['gender']
 
-        r.hmset ('user:' + username, user);
-        r.hset ('email', email, username)
+        db_set ('users', user)
 
         if not env:
             # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
@@ -196,7 +176,7 @@ def routes (app, requested_lang):
         if not username:
             return 'no username', 400
 
-        user = r.hgetall ('user:' + username)
+        user = db_get ('users', {'username': username})
 
         if not user:
             return 'invalid username/token', 403
@@ -208,23 +188,22 @@ def routes (app, requested_lang):
         if token != user ['verification_pending']:
             return 'invalid username/token', 403
 
-        r.hdel ('user:' + username, 'verification_pending')
+        db_set ('users', {'username': username, 'verification_pending': None})
         return redirect ('/')
 
     @app.route ('/auth/logout', methods=['POST'])
     def logout ():
         if request.cookies.get (cookie_name):
-            r.delete ('sess:' + request.cookies.get (cookie_name))
+            db_del ('tokens', {'id': request.cookies.get (cookie_name)})
         return '', 200
 
     @app.route ('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy (user):
-        r.delete ('sess:' + request.cookies.get (cookie_name))
-        r.delete ('user:' + user ['username'])
+        db_del ('tokens', {'id': request.cookies.get (cookie_name)})
+        db_del ('users', {'username': user ['username']})
         # The recover password token may exist, so we delete it
-        r.delete ('token:' + user ['username'])
-        r.hdel ('email', user ['email'])
+        db_del ('tokens', {'id': user ['username']})
         return '', 200
 
     @app.route ('/auth/change_password', methods=['POST'])
@@ -247,7 +226,7 @@ def routes (app, requested_lang):
 
         hashed = hash (body ['new_password'], make_salt ())
 
-        r.hset ('user:' + user ['username'], 'password', hashed)
+        db_set ('users', {'username': user ['username'], 'password': hashed})
         if env:
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
@@ -278,32 +257,29 @@ def routes (app, requested_lang):
         if 'email' in body:
             email = body ['email'].strip ().lower ()
             if email != user ['email']:
-                exists = r.hget ('email', email)
+                exists = db_get ('users', {'email': email}, True)
                 if exists:
                     return 'email exists', 403
-                r.hdel ('email', user ['email'])
-                r.hset ('email', email, user ['username'])
-                r.hset ('user:' + user ['username'], 'email', email)
+                db_set ('users', {'username': user ['username'], 'email': email})
 
         if 'country' in body:
-            r.hset ('user:' + user ['username'], 'country', body ['country'])
+            db_set ('users', {'username': user ['username'], 'country': body ['country']})
         if 'birth_year' in body:
-            r.hset ('user:' + user ['username'], 'birth_year', body ['birth_year'])
+            db_set ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
         if 'gender' in body:
-            r.hset ('user:' + user ['username'], 'gender', body ['gender'])
+            db_set ('users', {'username': user ['username'], 'gender': body ['gender']})
         return '', 200
 
     @app.route ('/profile', methods=['GET'])
     @requires_login
     def get_profile (user):
-        user = r.hmget ('user:' + user ['username'], 'username', 'email', 'birth_year', 'country', 'gender')
-        output = {'username': user [0], 'email': user [1]}
-        if user [2]:
-            output ['birth_year'] = user [2]
-        if user [3]:
-            output ['country'] = user [3]
-        if user [4]:
-            output ['gender'] = user [4]
+        output = {'username': user ['username'], 'email': user ['email']}
+        if 'birth_year' in user:
+            output ['birth_year'] = user ['birth_year']
+        if 'country' in user:
+            output ['country'] = user ['country']
+        if 'gender' in user:
+            output ['gender'] = user ['gender']
 
         return jsonify (output), 200
 
@@ -318,13 +294,9 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-            username = r.hget ('email', body ['username'].strip ().lower ())
-            if not username:
-                return 'invalid username', 403
+            user = db_get ('users', {'email': body ['username'].strip ().lower ()}, True)
         else:
-            username = body ['username'].strip ().lower ()
-
-        user = r.hgetall ('user:' + username)
+            user = db_get ('users', {'username': body ['username'].strip ().lower ()})
 
         if not user:
             return 'invalid username', 403
@@ -332,13 +304,13 @@ def routes (app, requested_lang):
         token = make_salt ()
         hashed = hash (token, make_salt ())
 
-        r.setex ('token:' + username, session_length, hashed)
+        db_set ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
         if not env:
             # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
-            return jsonify ({'username': username, 'token': token}), 200
+            return jsonify ({'username': user ['username'], 'token': token}), 200
         else:
-            send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (token))
+            send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
             return '', 200
 
     @app.route ('/auth/reset', methods=['POST'])
@@ -357,27 +329,20 @@ def routes (app, requested_lang):
         if len (body ['password']) < 6:
             return 'password must be at least six characters long', 400
 
-        # If username has an @-sign, then it's an email
-        if '@' in body ['username']:
-            username = r.hget ('email', body ['username'].strip ().lower ())
-            if not username:
-                return 'invalid username/password', 403
-        else:
-            username = body ['username'].strip ().lower ()
-
-        hashed = r.get ('token:' + username)
-        if not hashed:
+        # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
+        token = db_get ('tokens', {'id': body ['username']})
+        if not token:
             return 'invalid username/token', 403
-        if not check_password (body ['token'], hashed):
+        if not check_password (body ['token'], token ['token']):
             return 'invalid username/token', 403
 
         hashed = hash (body ['password'], make_salt ())
-        r.delete ('token:' + username);
-        r.hset ('user:' + username, 'password', hashed)
-        email = r.hget ('user:' + username, 'email')
+        token = db_del ('tokens', {'id': body ['username']})
+        db_set ('users', {'username': body ['username'], 'password': hashed})
+        user = db_get ('users', {'username': body ['username']})
 
         if env:
-            send_email_template ('reset_password', email, requested_lang (), None)
+            send_email_template ('reset_password', user.email, requested_lang (), None)
 
         return '', 200
 
@@ -427,29 +392,30 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'])
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request))
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'])
     if page == 'users':
         user = current_user (request)
-        if current_user (request) != os.getenv ('ADMIN_USER'):
-            if r.hget ('user:' + user, 'email') != os.getenv ('ADMIN_USER'):
-                return 'unauthorized', 403
+        if user ['username'] != os.getenv ('ADMIN_USER') and user ['email'] != os.getenv ('ADMIN_USER'):
+            return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
-        users = redis_keyscan ('user:*', None, None)
+        users = db_scan ('users')
         userdata = []
         fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending']
         counter = 1
         for user in users:
-            rawdata = r.hmget (user, fields)
             data = {}
-            for index, field in enumerate (fields):
-                data [field] = rawdata [index]
+            for field in fields:
+                if field in user:
+                    data [field] = user [field]
+                else:
+                    data [field] = None
             data ['email_verified'] = not bool (data ['verification_pending'])
-            data ['created'] = datetime.datetime.fromtimestamp (int (data ['created'] [:-3])).isoformat ()
+            data ['created'] = datetime.datetime.fromtimestamp (int (str (data ['created']) [:-3])).isoformat ()
             if data ['last_login']:
-                data ['last_login'] = datetime.datetime.fromtimestamp (int (data ['last_login'] [:-3])).isoformat ()
+                data ['last_login'] = datetime.datetime.fromtimestamp (int (str (data ['last_login']) [:-3])).isoformat ()
             data ['index'] = counter
             counter = counter + 1
             userdata.append (data)

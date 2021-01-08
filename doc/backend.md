@@ -87,23 +87,22 @@
     - If there's no session or the logged in user is not the admin user, it returns 403.
     - If successful, the route will return a template containing a table with all the users in the system. The users will be sorted by creation date, last first.
 
-## Redis
+## DynamoDB
 
 ```
-email (hash): keys are emails, values are corresponding usernames.
-
-user:USERNAME (hash):
+table users:
     username:    STRING
     password:    STRING (not the original password, but a bcrypt hash of it)
     email:       STRING
     birth_year:  INTEGER|UNDEFINED
     country:     STRING|UNDEFINED
     gender:      m|f|UNDEFINED
-    created:     INTEGER
-    last_login:  INTEGER|UNDEFINED
-    verification_pending: STRING|UNDEFINED (if present, contains the a hash of the email verification token)
+    created:     INTEGER (epoch milliseconds)
+    last_login:  INTEGER|UNDEFINED (epoch milliseconds)
 
-sess:ID (string): ID is session, value is corresponding username.
-
-token:USERNAME (string): value is hash of recover password token.
+table tokens:
+    id:       STRING (for password reset tokens, id is the username)
+    username: STRING|UNDEFINED (only set for session tokens)
+    token:    STRING|UNDEFINED (only set for password reset tokens)
+    ttl:      INTEGER (epoch seconds)
 ```
