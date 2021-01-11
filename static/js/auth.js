@@ -132,7 +132,7 @@ window.auth = {
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/recover', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts.password_recovery);
+        auth.success (auth.texts.sent_password_recovery);
         $ ('#username').val ('');
       }).fail (function (response) {
         if (response.status === 403) auth.error (auth.texts.invalid_username);
@@ -153,6 +153,7 @@ window.auth = {
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
         delete auth.reset;
+        auth.redirect ('login');
       }).fail (function (response) {
         if (response.status === 403) auth.error (auth.texts.invalid_reset_link);
         else                         auth.error (auth.texts.ajax_error);

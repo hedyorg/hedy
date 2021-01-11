@@ -10,9 +10,6 @@ from config import config
 import boto3
 from botocore.exceptions import ClientError as email_error
 
-import hedyweb
-TRANSLATIONS = hedyweb.Translations ()
-
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
@@ -32,12 +29,15 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 def current_user (request):
     if request.cookies.get (cookie_name):
         token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
-        if not token:
-            return {'username': '', 'email': ''}
-        user  = db_get ('users',  {'username': token ['username']})
-        if user:
-            return user
+        if token:
+            user = db_get ('users',  {'username': token ['username']})
+            if user:
+                return user
     return {'username': '', 'email': ''}
+
+# The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
+import hedyweb
+TRANSLATIONS = hedyweb.Translations ()
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login (f):
@@ -342,7 +342,7 @@ def routes (app, requested_lang):
         user = db_get ('users', {'username': body ['username']})
 
         if env:
-            send_email_template ('reset_password', user.email, requested_lang (), None)
+            send_email_template ('reset_password', user ['email'], requested_lang (), None)
 
         return '', 200
 

@@ -76,6 +76,8 @@ def db_key (table, data, *remove):
         for key in data:
             if table == 'users' and key == 'username':
                 continue
+            if table == 'tokens' and key == 'id':
+                continue
             processed_data [key] = data [key]
     else:
         if table == 'users':

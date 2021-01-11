@@ -122,7 +122,7 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
-        'username': current_user(request) or None
+        'username': current_user(request) ['username'] or None
     })
 
     return jsonify(response)
@@ -138,6 +138,7 @@ def report_error():
         'code': post_body.get('code'),
         'client_error': post_body.get('client_error'),
         'version': version(),
+        'username': current_user(request) ['username'] or None
     })
 
     return 'logged'
@@ -157,6 +158,7 @@ def index(level, step):
     g.prefix = '/hedy'
 
     return hedyweb.render_assignment_editor(
+        request=request,
         course=HEDY_COURSE[g.lang],
         level_number=level,
         assignment_number=step,
@@ -191,6 +193,7 @@ def onlinemasters(level, step):
     g.prefix = '/onlinemasters'
 
     return hedyweb.render_assignment_editor(
+        request=request,
         course=ONLINE_MASTERS_COURSE,
         level_number=level,
         assignment_number=step,
@@ -208,6 +211,7 @@ def space_eu(level, step):
     g.prefix = '/space_eu'
 
     return hedyweb.render_assignment_editor(
+        request=request,
         course=SPACE_EU_COURSE[g.lang],
         level_number=level,
         assignment_number=step,
@@ -258,7 +262,7 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
-    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request), auth=TRANSLATIONS.data [lang] ['Auth'], **front_matter)
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'], **front_matter)
 
 
 def session_id():
