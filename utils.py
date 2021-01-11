@@ -34,6 +34,7 @@ def times ():
 db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'], aws_access_key_id = os.getenv ('AWS_DYNAMODB_ACCESS_KEY'), aws_secret_access_key = os.getenv ('AWS_DYNAMODB_SECRET_KEY'))
 db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX')
 
+# Encode a dict so that it has the format expected by DynamoDB
 def db_encode (data, *args):
     # args may contain a boolean flag which we use to detect whether we should format the payload for update_item
     # when len (args) is truthy, we know we're dealing with update_item
@@ -59,6 +60,7 @@ def db_encode (data, *args):
             raise ValueError ('Unsupported type passed to db_put')
     return processed_data
 
+# Decode data in DynamoDB format to a plain dict
 def db_decode (data):
     processed_data = {}
     for key in data:
@@ -70,6 +72,8 @@ def db_decode (data):
             raise ValueError ('Unsupported type passed to db_put')
     return processed_data
 
+# This function takes a dict `data` and returns a new dict with only the key/value for the index key for the table.
+# If *remove is truthy, then the index key is removed instead, leaving the rest of the keys intact.
 def db_key (table, data, *remove):
     processed_data = {}
     if len (remove):
@@ -86,6 +90,7 @@ def db_key (table, data, *remove):
             processed_data ['id'] = data ['id']
     return processed_data
 
+# Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
 def db_get (table, data, *not_primary):
     # If we're querying by something else than the primary key of the table, we assume that data contains only one field, that on which we want to search. We also require that field to have an index.
     if len (not_primary):
@@ -101,6 +106,7 @@ def db_get (table, data, *not_primary):
             return None
         return db_decode (result ['Item'])
 
+# Creates or updates an item by primary key.
 def db_set (table, data):
     if db_get (table, data):
         result = db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
@@ -108,9 +114,11 @@ def db_set (table, data):
         result = db.put_item (TableName = db_prefix + '-' + table, Item = db_encode (data))
     return result
 
+# Deletes an item by primary key.
 def db_del (table, data):
     return db.delete_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
 
+# Searches for items.
 def db_scan (table):
     result = db.scan (TableName = db_prefix + '-' + table)
     output = []
