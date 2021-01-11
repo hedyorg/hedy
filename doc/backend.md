@@ -91,9 +91,9 @@
 
 ```
 table users:
-    username:    STRING
+    username:    STRING (main index)
     password:    STRING (not the original password, but a bcrypt hash of it)
-    email:       STRING
+    email:       STRING (secondary index)
     birth_year:  INTEGER|UNDEFINED
     country:     STRING|UNDEFINED
     gender:      m|f|UNDEFINED
@@ -101,7 +101,7 @@ table users:
     last_login:  INTEGER|UNDEFINED (epoch milliseconds)
 
 table tokens:
-    id:       STRING (for password reset tokens, id is the username)
+    id:       STRING (main index; for password reset tokens, id is the username)
     username: STRING|UNDEFINED (only set for session tokens)
     token:    STRING|UNDEFINED (only set for password reset tokens)
     ttl:      INTEGER (epoch seconds)
