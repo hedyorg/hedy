@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="px-8">
+  <h2>{{texts.recent}}</h2>
+  <ul class="programs">
+  {% for program in programs %}
+    <li>{{texts.level}} {{program.level}} - {{program.date}} <a href="/hedy/{{ program.level }}/{{ program.id }}{{query_lang}}">{{texts.open}}</a> <pre>{{program.code | truncate (50) }}</pre></li>
+    <br>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+{% block scripts %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
+{% endblock %}

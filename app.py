@@ -16,6 +16,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user
+from utils import db_get, db_get_many, db_set, timems, type_check
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session, abort, g
@@ -90,6 +91,7 @@ def parse():
     print(f"got code {code}")
 
     response = {}
+    username = current_user(request) ['username'] or None
 
     # Check if user sent code
     if not code:
@@ -122,8 +124,21 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
-        'username': current_user(request) ['username'] or None
+        'username': username
     })
+
+    if username:
+        db_set('programs', {
+            'id': uuid.uuid4().hex,
+            'session': session_id(),
+            'date': timems (),
+            'level': level,
+            'lang': requested_lang(),
+            'code': code,
+            'server_error': response.get('Error'),
+            'version': version(),
+            'username': username
+        })
 
     return jsonify(response)
 
@@ -143,6 +158,34 @@ def report_error():
 
     return 'logged'
 
+def programs_page (request):
+    username = current_user(request) ['username']
+    if not username:
+        return "unauthorized", 403
+
+    lang = requested_lang()
+    query_lang = request.args.get('lang') or ''
+    if query_lang:
+        query_lang = '?lang=' + query_lang
+
+    texts=TRANSLATIONS.data [lang] ['Programs']
+
+    result = db_get_many ('programs', {'username': username}, True)
+    programs = []
+    now = timems ()
+    for item in result:
+        measure = texts ['minutes']
+        date = round ((now - item ['date']) / 60000)
+        if date > 90:
+            measure = texts ['hours']
+            date = round (date / 60)
+        if date > 36:
+            measure = texts ['days']
+
+            date = round (date / 24)
+        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level']})
+
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('hedy'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, query_lang=query_lang)
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
@@ -157,6 +200,17 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
+    # If step is a string that has more than two characters, it must be an id of a program
+    if step and type_check (step, 'str') and len (step) > 2:
+        result = db_get ('programs', {'id': step})
+        if not result or result ['username'] != current_user(request) ['username']:
+            return 'No such program', 404
+        loaded_program = result ['code']
+        # We default to step 1 to provide a meaningful default assignment
+        step = 1
+    else:
+        loaded_program = None
+
     return hedyweb.render_assignment_editor(
         request=request,
         course=HEDY_COURSE[g.lang],
@@ -164,7 +218,8 @@ def index(level, step):
         assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
-        version=version())
+        version=version(),
+        loaded_program=loaded_program)
 
 @app.route('/hedy/<level>/<step>/<docspage>', methods=['GET'])
 def docs(level, step, docspage):
@@ -199,7 +254,8 @@ def onlinemasters(level, step):
         assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
-        menu=None)
+        menu=None,
+        loaded_program=None)
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
@@ -217,7 +273,8 @@ def space_eu(level, step):
         assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
-        menu=None)
+        menu=None,
+        loaded_program=None)
 
 
 
@@ -248,6 +305,9 @@ def main_page(page):
 
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'users']:
         return auth_templates(page, lang, render_main_menu(page), request)
+
+    if page == 'programs':
+        return programs_page(request)
 
     # Default to English if requested language is not available
     if not path.isfile(f'main/{page}-{effective_lang}.md'):

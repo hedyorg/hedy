@@ -10,9 +10,10 @@
   const storage = window.sessionStorage;
   if (storage) {
     const levelKey = $('#editor').data('lskey');
+    const loadedProgram = $('#editor').data('loaded-program');
 
-    // On page load, if we have a saved program, load it
-    if (storage.getItem(levelKey)) {
+    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+    if (loadedProgram !== 'True' && storage.getItem(levelKey)) {
       editor.setValue(storage.getItem(levelKey), 1);
     }
 

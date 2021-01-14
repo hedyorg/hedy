@@ -87,6 +87,12 @@
     - If there's no session or the logged in user is not the admin user, it returns 403.
     - If successful, the route will return a template containing a table with all the users in the system. The users will be sorted by creation date, last first.
 
+### Programs
+
+- `GET /programs`
+    - This route requires a session, otherwise it returns 403.
+    - This route returns a list of all the programs previously run by the user, in the form of an array.
+
 ## DynamoDB
 
 ```
@@ -105,4 +111,14 @@ table tokens:
     username: STRING|UNDEFINED (only set for session tokens)
     token:    STRING|UNDEFINED (only set for password reset tokens)
     ttl:      INTEGER (epoch seconds)
+
+table programs:
+    id:       STRING (main index)
+    date:     INTEGER (sort index; millisecods)
+    username: STRING (secondary index)
+    session:  STRING
+    level:    INTEGER
+    lang:     STRING
+    code:     STRING
+    version:  ??
 ```

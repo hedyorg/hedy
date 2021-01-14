@@ -13,6 +13,8 @@ def type_check (val, Type):
         return isinstance(val, str)
     if Type == 'int':
         return isinstance(val, int)
+    if Type == 'tuple':
+        return isinstance(val, tuple)
     if Type == 'fun':
         return callable(val)
 
@@ -68,6 +70,8 @@ def db_decode (data):
             processed_data [key] = data [key] ['S']
         elif 'N' in data [key]:
             processed_data [key] = int (data [key] ['N'])
+        elif 'NULL' in data [key]:
+            processed_data [key] = None
         else:
             raise ValueError ('Unsupported type passed to db_put')
     return processed_data
@@ -80,13 +84,13 @@ def db_key (table, data, *remove):
         for key in data:
             if table == 'users' and key == 'username':
                 continue
-            if table == 'tokens' and key == 'id':
+            if (table == 'tokens' or table == 'programs') and key == 'id':
                 continue
             processed_data [key] = data [key]
     else:
         if table == 'users':
             processed_data ['username'] = data ['username']
-        if table == 'tokens':
+        if table == 'tokens' or table == 'programs':
             processed_data ['id'] = data ['id']
     return processed_data
 
@@ -105,6 +109,19 @@ def db_get (table, data, *not_primary):
         if 'Item' not in result:
             return None
         return db_decode (result ['Item'])
+
+# Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
+def db_get_many (table, data, *not_primary):
+    if len (not_primary):
+        field = list (data.keys ()) [0]
+        # We use ScanIndexForward = False to get the latest items from the Programs table
+        result = db.query (TableName = db_prefix + '-' + table, IndexName = field + '-index', KeyConditionExpression = field + ' = :value', ExpressionAttributeValues = {':value': {'S': data [field]}}, ScanIndexForward = False)
+    else:
+        result = db.query (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
+    data = []
+    for item in result ['Items']:
+        data.append (db_decode (item))
+    return data
 
 # Creates or updates an item by primary key.
 def db_set (table, data):
