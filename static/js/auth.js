@@ -62,7 +62,7 @@ window.auth = {
 
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
-        auth.redirect ('login');
+        auth.redirect ('my-profile');
       }).fail (function (response) {
         var error = response.responseText || '';
         if (error.match ('email'))         auth.error (auth.texts.exists_email);
@@ -187,7 +187,7 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
 
   auth.profile = response;
   if ($ ('#profile').html ()) {
-    $ ('#username').val (response.username);
+    $ ('#username').html (response.username);
     $ ('#email').val (response.email);
     $ ('#birth_year').val (response.birth_year);
     $ ('#gender').val (response.gender);
