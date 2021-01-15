@@ -165,7 +165,14 @@ def routes (app, requested_lang):
             return jsonify ({'username': username, 'token': hashed_token}), 200
         else:
             send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
-            return '', 200
+
+            # We automatically login the user
+            cookie = make_salt ()
+            db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+            db_set ('users', {'username': user ['username'], 'last_login': timems ()})
+            resp = make_response ({})
+            resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
+            return resp
 
     @app.route ('/auth/verify', methods=['GET'])
     def verify_email ():
@@ -387,6 +394,7 @@ def send_email_template (template, email, lang, link):
     if link:
         body_plain = body_plain.replace ('@@LINK@@', 'Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.replace ('@@LINK@@', '<a href="' + link + '">Link</a>')
+    body_html += '<br><img style="max-width: 100px" src="http://www.hedycode.com/images/Hedy-logo.png">'
 
     send_email (email, subject, body_plain, body_html)
 
