@@ -13,10 +13,10 @@
     </a>
     {% endfor %}
     {% if username %}
-      <a class="menubar-btn border-transparent" href="my-profile{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.profile}}</a>
+      <a class="menubar-btn border-transparent" href="/my-profile{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.profile}}</a>
     {% endif %}
     {% if not username %}
-      <a class="menubar-btn border-transparent" href="login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
+      <a class="menubar-btn border-transparent" href="/login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
     {% endif %}
     {% endblock %}
 
