@@ -3,7 +3,7 @@ import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_scan
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan
 import datetime
 from functools import wraps
 from config import config
@@ -160,19 +160,21 @@ def routes (app, requested_lang):
 
         db_set ('users', user)
 
+        # We automatically login the user
+        cookie = make_salt ()
+        db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
+
+        # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
         if not env:
-            # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
-            return jsonify ({'username': username, 'token': hashed_token}), 200
+            resp = make_response ({'username': username, 'token': hashed_token})
+        # Otherwise, we send an email with a verification link and we return an empty body
         else:
             send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
-
-            # We automatically login the user
-            cookie = make_salt ()
-            db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-            db_set ('users', {'username': user ['username'], 'last_login': timems ()})
             resp = make_response ({})
-            resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
-            return resp
+
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
+        return resp
 
     @app.route ('/auth/verify', methods=['GET'])
     def verify_email ():
@@ -211,6 +213,7 @@ def routes (app, requested_lang):
         db_del ('users', {'username': user ['username']})
         # The recover password token may exist, so we delete it
         db_del ('tokens', {'id': user ['username']})
+        db_del_many ('programs', {'username': user ['username']}, True)
         return '', 200
 
     @app.route ('/auth/change_password', methods=['POST'])
@@ -400,9 +403,9 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'])
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'])
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')
     if page == 'users':
         user = current_user (request)
         if user ['username'] != os.getenv ('ADMIN_USER') and user ['email'] != os.getenv ('ADMIN_USER'):

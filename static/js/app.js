@@ -1,5 +1,9 @@
 (function() {
 
+  // If there's no #editor div, we're requiring this code in a non-code page.
+  // Therefore, we don't need to initialize anything.
+  if (! $ ('#editor').length) return;
+
   // *** EDITOR SETUP ***
 
   var editor = ace.edit("editor");
@@ -91,6 +95,53 @@ function runit(level, lang, cb) {
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
     });
 
+  } catch (e) {
+    console.error(e);
+    error.show(ErrorMessages.Other_error, e.message);
+  }
+}
+
+window.saveit = function saveit(level, lang, description, code, cb) {
+  error.hide();
+
+  try {
+    if (! window.auth.profile) {
+       if (! confirm (window.auth.texts.save_prompt)) return;
+       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, description, code]));
+       window.location.pathname = '/signup';
+       return;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/programs',
+      data: JSON.stringify({
+        level: level,
+        lang:  lang,
+        description: description || '',
+        code:  code
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (cb) return response.Error ? cb (response) : cb ();
+      if (response.Warning) {
+        error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
+      }
+      if (response.Error) {
+        error.show(ErrorMessages.Transpile_error, response.Error);
+        return;
+      }
+      $ ('#okbox').show ();
+      $ ('#okbox .caption').html (window.auth.texts.save_success);
+      $ ('#okbox .details').html (window.auth.texts.save_success_detail);
+      setTimeout (function () {
+         $ ('#okbox').hide ();
+      }, 2000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
   } catch (e) {
     console.error(e);
     error.show(ErrorMessages.Other_error, e.message);

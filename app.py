@@ -15,11 +15,11 @@ import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates, current_user
-from utils import db_get, db_get_many, db_set, timems, type_check
+from auth import auth_templates, current_user, requires_login
+from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g
+from flask import Flask, request, jsonify, render_template, session, abort, g, redirect
 from flask_compress import Compress
 
 # Hedy-specific modules
@@ -127,19 +127,6 @@ def parse():
         'username': username
     })
 
-    if username:
-        db_set('programs', {
-            'id': uuid.uuid4().hex,
-            'session': session_id(),
-            'date': timems (),
-            'level': level,
-            'lang': requested_lang(),
-            'code': code,
-            'server_error': response.get('Error'),
-            'version': version(),
-            'username': username
-        })
-
     return jsonify(response)
 
 @app.route('/report_error', methods=['POST'])
@@ -183,9 +170,14 @@ def programs_page (request):
             measure = texts ['days']
 
             date = round (date / 24)
-        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level']})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('hedy'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, query_lang=query_lang)
+        # Programs might not have a description, so we add a variable to optionally hold it.
+        description = ''
+        if 'description' in item:
+            description = item ['description']
+        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'description': description})
+
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', query_lang=query_lang)
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
@@ -419,6 +411,58 @@ def render_main_menu(current_page):
         selected=(current_page == item['_']),
         accent_color=item.get('accent_color', 'white')
     ) for item in main_menu_json['nav']]
+
+# *** PROGRAMS ***
+
+# Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
+@app.route('/programs/delete/<program_id>', methods=['GET'])
+@requires_login
+def delete_program (user, program_id):
+    result = db_get ('programs', {'id': program_id})
+    if not result or result ['username'] != user ['username']:
+        return "", 404
+    db_del ('programs', {'id': program_id})
+    return redirect ('/programs')
+
+@app.route('/programs', methods=['POST'])
+@requires_login
+def save_program (user):
+
+    body = request.json
+    if not type_check (body, 'dict'):
+        return 'body must be an object', 400
+    if not object_check (body, 'code', 'str'):
+        return 'code must be a string', 400
+    if not object_check (body, 'description', 'str'):
+        return 'description must be a string', 400
+    if not object_check (body, 'level', 'int'):
+        return 'level must be an integer', 400
+
+    # We execute the saved program to see if it would generate an error or not
+    error = None
+    try:
+        hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
+        result = hedy.transpile(body ['code'], body ['level'])
+    except hedy.HedyException as E:
+        error_template = hedy_errors[E.error_code]
+        error = error_template.format(**E.arguments)
+    except Exception as E:
+        error = str(E)
+
+    db_set('programs', {
+        'id': uuid.uuid4().hex,
+        'session': session_id(),
+        'date': timems (),
+        'lang': requested_lang(),
+        'version': version(),
+        'level': body ['level'],
+        'code': body ['code'],
+        'description': body ['description'],
+        'server_error': error,
+        'username': user ['username']
+    })
+
+    return jsonify({})
 
 # *** AUTH ***
 

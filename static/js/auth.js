@@ -62,7 +62,17 @@ window.auth = {
 
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
-        auth.redirect ('my-profile');
+
+        var first = localStorage.getItem ('hedy-first-save');
+        if (! first) return auth.redirect ('programs');
+        first = JSON.parse (first);
+        // We set up a non-falsy profile to let `saveit` know that we're logged in.
+        window.auth.profile = {};
+        window.saveit (first [0], first [1], first [2], first [3], function () {
+           localStorage.removeItem ('hedy-first-save');
+           auth.redirect ('programs');
+        });
+
       }).fail (function (response) {
         var error = response.responseText || '';
         if (error.match ('email'))         auth.error (auth.texts.exists_email);
@@ -77,7 +87,17 @@ window.auth = {
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.redirect ('my-profile');
+
+        var first = localStorage.getItem ('hedy-first-save');
+        if (! first) return auth.redirect ('programs');
+        first = JSON.parse (first);
+        // We set up a non-falsy profile to let `saveit` know that we're logged in.
+        window.auth.profile = {};
+        window.saveit (first [0], first [1], first [2], first [3], function () {
+           localStorage.removeItem ('hedy-first-save');
+           auth.redirect ('programs');
+        });
+
       }).fail (function (response) {
         if (response.status === 403) auth.error (auth.texts.invalid_username_password);
         else                         auth.error (auth.texts.ajax_error);

@@ -5,9 +5,25 @@
   <h2>{{texts.recent}}</h2>
   <ul class="programs">
   {% for program in programs %}
-    <li>{{texts.level}} {{program.level}} - {{program.date}} <a href="/hedy/{{ program.level }}/{{ program.id }}{{query_lang}}">{{texts.open}}</a> <pre>{{program.code | truncate (50) }}</pre></li>
+    <li>
+      {% if program.description %}
+      <strong>{{program.description}} </strong>
+      -&nbsp
+      {% endif %}
+      {{ texts.level }} {{ program.level }} - {{ program.date }}
+      <a href="/hedy/{{ program.level }}/{{ program.id }}{{ query_lang }}">{{ texts.open }}</a>
+
+      <a href="#" onclick="if (confirm ('{{ texts.delete_confirm }}')) window.open ('/programs/delete/{{program.id}}', '_self')">{{ texts.delete }}</a>
+      <pre>{{program.code | truncate (50) }}</pre>
+    </li>
     <br>
   {% endfor %}
+  {% if programs|length == 0 %}
+  <p>{{texts.no_programs}}
+    <br><br>
+    <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{texts.write_first}}</button>
+  </p>
+  {% endif %}
   </ul>
 </div>
 {% endblock %}

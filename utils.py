@@ -135,6 +135,18 @@ def db_set (table, data):
 def db_del (table, data):
     return db.delete_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
 
+# Deletes multiple items.
+def db_del_many (table, data, *not_primary):
+    # We define a recursive function in case the number of results is very large and cannot be returned with a single call to db_get_many.
+    def batch ():
+        to_delete = db_get_many (table, data, *not_primary)
+        if len (to_delete) == 0:
+            return
+        for item in to_delete:
+            db_del (table, db_key (table, item))
+        batch ()
+    batch ()
+
 # Searches for items.
 def db_scan (table):
     result = db.scan (TableName = db_prefix + '-' + table)

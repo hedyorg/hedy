@@ -113,12 +113,14 @@ table tokens:
     ttl:      INTEGER (epoch seconds)
 
 table programs:
-    id:       STRING (main index)
-    date:     INTEGER (sort index; millisecods)
-    username: STRING (secondary index)
-    session:  STRING
-    level:    INTEGER
-    lang:     STRING
-    code:     STRING
-    version:  ??
+    id:           STRING (main index)
+    date:         INTEGER (sort index; milliseconds)
+    username:     STRING (secondary index)
+    session:      STRING
+    level:        INTEGER
+    lang:         STRING
+    code:         STRING
+    description:  STRING
+    server_error: STRING
+    version:      STRING
 ```
