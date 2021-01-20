@@ -7,6 +7,8 @@ ui:
   contact: "Contacto"
   video_title: "Videos"
   run_code_button: "Ejecutar código"
+  save_code_button: "Save code"
+  save_code_description: "Describe tu programa (opcional)"
   advance_button: "Ir al nivel"
   advance_step_button: "Ir a la tarea"
   try_button: "Prueba esto"
@@ -88,8 +90,11 @@ Auth:
   email_recover_password_body: "Haciendo click en el link debajo, puedes reestablecer tu contraseña de Hedy. Si tú no has requerido reestablecer tu contraseña de Hedy, por favor ignora este correo electrónico."
   email_reset_password_subject: "Tu contraseña de Hedy se ha reestablecido"
   email_reset_password_body: "Tu contraseña de Hedy se ha reestablecido. Si tú has hecho esto, todo marcha bien.\nSi tú no has reestablecido tu contraseña, por favor contáctanos inmediataamente respondiendo a este correo electrónico."
-  # This variable is added here for convenience only
+  # These variables are added here to make the code simpler, but conceptually they belong elsewhere
   program_header: "Mis programas"
+  save_prompt: "Debes estar registrado para guardar tu programa. ¿Deseas crear una cuenta?"
+  save_success: "Éxito"
+  save_success_detail: "Tu programa se ha salvado exitosamente"
 Programs:
   recent: "Mis programas recientes"
   level: "Nivel"
@@ -99,3 +104,7 @@ Programs:
   ago-1: "Hace"
   ago-2: ""
   open: "Abrir"
+  delete: "Borrar"
+  delete_confirm: "Estás seguro de querer borrar este programa?"
+  no_programs: "Todavía no tienes programas guardados."
+  write_first: "¡Escribe tu primer programa!"
