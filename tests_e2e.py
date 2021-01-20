@@ -107,17 +107,31 @@ def successfulLogin(state, response):
 
 def getProfile1(state, response):
     profile = response ['body']
-    if response ['body'] ['username'] != username:
+    if profile ['username'] != username:
         raise Exception ('Invalid username (getProfile1)')
-    if response ['body'] ['email'] != username + '@domain.com':
+    if profile ['email'] != username + '@domain.com':
         raise Exception ('Invalid username (getProfile1)')
 
 def getProfile2(state, response):
     profile = response ['body']
-    if response ['body'] ['country'] != 'NL':
+    if profile ['country'] != 'NL':
         raise Exception ('Invalid country (getProfile2)')
-    if response ['body'] ['email'] != username + '@domain2.com':
+    if profile ['email'] != username + '@domain2.com':
         raise Exception ('Invalid country (getProfile2)')
+    if not 'verification_pending' in profile or profile ['verification_pending'] != True:
+        raise Exception ('Invalid verification_pending (getProfile2)')
+
+def getProfile3(state, response):
+    profile = response ['body']
+    if 'verification_pending' in profile:
+        raise Exception ('Invalid verification_pending (getProfile3)')
+
+def emailChange(state, response):
+    if not type_check (response ['body'] ['token'], 'str'):
+        raise Exception ('Invalid country (emailChange)')
+    if response ['body'] ['username'] != username:
+        raise Exception ('Invalid username (emailChange)')
+    state ['token2'] = response ['body'] ['token']
 
 def recoverPassword(state, response):
     if not 'token' in response ['body']:
@@ -146,8 +160,10 @@ suite = [
     ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile1],
     invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}]),
     ['change profile with same email', 'post', '/profile', {}, {'email': username + '@domain.com', 'country': 'US'}, 200],
-    ['change profile with different email', 'post', '/profile', {}, {'email': username + '@domain2.com', 'country': 'NL'}, 200],
-    ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile2],
+    ['change profile with different email', 'post', '/profile', {}, {'email': username + '@domain2.com', 'country': 'NL'}, 200, emailChange],
+    ['get profile after profile update', 'get', '/profile', {}, {}, 200, getProfile2],
+    ['verify email after email change', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': state ['token2']}), {}, '', 302],
+    ['get profile after email verification', 'get', '/profile', {}, {}, 200, getProfile3],
     invalidMap ('recover password', 'post', '/auth/recover', ['', [], {}, {'username': 1}]),
     ['recover password, invalid user', 'post', '/auth/recover', {}, {'username': 'nosuch'}, 403],
     ['recover password', 'post', '/auth/recover', {}, {'username': username}, 200, recoverPassword],
