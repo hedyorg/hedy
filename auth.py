@@ -264,13 +264,21 @@ def routes (app, requested_lang):
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
 
+        resp = {}
         if 'email' in body:
             email = body ['email'].strip ().lower ()
             if email != user ['email']:
                 exists = db_get ('users', {'email': email}, True)
                 if exists:
                     return 'email exists', 403
-                db_set ('users', {'username': user ['username'], 'email': email})
+                token = make_salt ()
+                hashed_token = hash (token, make_salt ())
+                db_set ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
+                if not env:
+                   # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+                   resp = {'username': user ['username'], 'token': hashed_token}
+                else:
+                    send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         if 'country' in body:
             db_set ('users', {'username': user ['username'], 'country': body ['country']})
@@ -278,7 +286,8 @@ def routes (app, requested_lang):
             db_set ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
         if 'gender' in body:
             db_set ('users', {'username': user ['username'], 'gender': body ['gender']})
-        return '', 200
+
+        return jsonify (resp)
 
     @app.route ('/profile', methods=['GET'])
     @requires_login
@@ -290,6 +299,8 @@ def routes (app, requested_lang):
             output ['country'] = user ['country']
         if 'gender' in user:
             output ['gender'] = user ['gender']
+        if 'verification_pending' in user:
+            output ['verification_pending'] = True
 
         return jsonify (output), 200
 

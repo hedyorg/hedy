@@ -69,7 +69,7 @@
 - `GET /profile`
     - This route allows the user to retrieve their profile.
     - This route requires a session, otherwise it returns 403.
-    - If successful, this route returns 200 with a body of the shape `{username: STRING, email: STRING, birth_year: INTEGER|UNDEFINED, country: STRING|UNDEFINED, gender: m|f|o|UNDEFINED}`.
+    - If successful, this route returns 200 with a body of the shape `{username: STRING, email: STRING, birth_year: INTEGER|UNDEFINED, country: STRING|UNDEFINED, gender: m|f|o|UNDEFINED, verification_pending: UNDEFINED|true}`.
 
 - `POST /profile`
     - This route allows the user to change its `email`, `birth_year`, `gender` and/or `country`.
@@ -80,6 +80,7 @@
     - If present, `gender` must be either `m`, `f` or `o`.
     - If present, `email` must be a valid email.
     - `email` should not be in use by an existing user. Otherwise, the route returns 403.
+    - If `email` is present and different from the existing email, the route will also send a verification email to the provided `email`.
     - If successful, the route returns 200.
 
 - `GET /users`

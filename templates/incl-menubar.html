@@ -17,7 +17,7 @@
       <a class="menubar-btn border-{% if current_page == 'programs' %}white{% else %}transparent{% endif %}" href="/programs{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.program_header}}</a>
     {% endif %}
     {% if not username %}
-      <a class="menubar-btn border-{% if current_page == 'login' %}white{% else %}transparent{% endif %}" href="login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
+      <a class="menubar-btn border-{% if current_page == 'login' %}white{% else %}transparent{% endif %}" href="/login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
     {% endif %}
     {% endblock %}
 
