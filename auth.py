@@ -400,7 +400,7 @@ def send_email_template (template, email, lang, link):
     body = texts ['email_' + template + '_body'].split ('\n')
     body = [texts ['email_hello']] + body
     if link:
-        body = body + ['@@LINK@@']
+        body [len (body) - 1] = body [len (body ) - 1] + ' @@LINK@@'
     body = body + texts ['email_goodbye'].split ('\n')
 
     body_plain = '\n'.join (body)
