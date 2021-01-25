@@ -90,9 +90,13 @@
 
 ### Programs
 
-- `GET /programs`
+- `GET /programs/delete/ID`
     - This route requires a session, otherwise it returns 403.
-    - This route returns a list of all the programs previously run by the user, in the form of an array.
+    - This route deletes the program with id `ID` as long as it belongs to the user performing the request.
+
+- `POST /programs`
+    - This route requires a session, otherwise it returns 403.
+    - Body must be of the shape `{level: INT, name: STRING, code: STRING}`.
 
 ## DynamoDB
 
@@ -117,11 +121,11 @@ table programs:
     id:           STRING (main index)
     date:         INTEGER (sort index; milliseconds)
     username:     STRING (secondary index)
+    name:         STRING (secondary index)
     session:      STRING
     level:        INTEGER
     lang:         STRING
     code:         STRING
-    description:  STRING
     server_error: STRING
     version:      STRING
 ```

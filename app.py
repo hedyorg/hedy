@@ -171,11 +171,7 @@ def programs_page (request):
 
             date = round (date / 24)
 
-        # Programs might not have a description, so we add a variable to optionally hold it.
-        description = ''
-        if 'description' in item:
-            description = item ['description']
-        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'description': description})
+        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name']})
 
     return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', query_lang=query_lang)
 
@@ -433,8 +429,8 @@ def save_program (user):
         return 'body must be an object', 400
     if not object_check (body, 'code', 'str'):
         return 'code must be a string', 400
-    if not object_check (body, 'description', 'str'):
-        return 'description must be a string', 400
+    if not object_check (body, 'name', 'str'):
+        return 'name must be a string', 400
     if not object_check (body, 'level', 'int'):
         return 'level must be an integer', 400
 
@@ -449,6 +445,19 @@ def save_program (user):
     except Exception as E:
         error = str(E)
 
+    name = body ['name']
+
+    # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
+    # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
+    # For now, we bring all existing programs for the user and then search within them for repeated names.
+    existing = db_get_many ('programs', {'username': user ['username']}, True)
+    name_counter = 0
+    for program in existing:
+        if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
+            name_counter = name_counter + 1
+    if name_counter:
+        name = name + ' (' + str (name_counter) + ')'
+
     db_set('programs', {
         'id': uuid.uuid4().hex,
         'session': session_id(),
@@ -457,7 +466,7 @@ def save_program (user):
         'version': version(),
         'level': body ['level'],
         'code': body ['code'],
-        'description': body ['description'],
+        'name': name,
         'server_error': error,
         'username': user ['username']
     })

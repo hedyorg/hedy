@@ -6,10 +6,8 @@
   <ul class="programs">
   {% for program in programs %}
     <li>
-      {% if program.description %}
-      <strong>{{program.description}} </strong>
+      <strong>{{program.name}} </strong>
       -&nbsp
-      {% endif %}
       {{ texts.level }} {{ program.level }} - {{ program.date }}
       <a href="/hedy/{{ program.level }}/{{ program.id }}{{ query_lang }}">{{ texts.open }}</a>
 

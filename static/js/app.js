@@ -101,13 +101,15 @@ function runit(level, lang, cb) {
   }
 }
 
-window.saveit = function saveit(level, lang, description, code, cb) {
+window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
+
+  if (name === true) name = $ ('#program_name').val ();
 
   try {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
-       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, description, code]));
+       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/signup';
        return;
     }
@@ -118,7 +120,7 @@ window.saveit = function saveit(level, lang, description, code, cb) {
       data: JSON.stringify({
         level: level,
         lang:  lang,
-        description: description || '',
+        name:  name,
         code:  code
       }),
       contentType: 'application/json',
