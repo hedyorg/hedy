@@ -29,8 +29,15 @@
     // If prompt is shown and user enters text in the editor, hide the prompt.
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+      window.unsaved_changes = true;
     });
   }
+
+  // *** PROMPT TO SAVE CHANGES ***
+
+  window.onbeforeunload = function () {
+     if (window.unsaved_changes) return 'You have an unsaved program. Do you want to leave without saving it?';
+  };
 
   // *** KEYBOARD SHORTCUTS ***
 
@@ -105,6 +112,8 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
 
   if (name === true) name = $ ('#program_name').val ();
+
+  window.unsaved_changes = false;
 
   try {
     if (! window.auth.profile) {

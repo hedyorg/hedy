@@ -14,7 +14,7 @@
           {{ command.example|commonmark }}
         </div>
         <button class="btn block flex-none self-end"
-          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo()'>{{try_button}}</button>
+          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.unsaved_changes = false;'>{{try_button}}</button>
       </div>
     </div>
     {% endfor %}
