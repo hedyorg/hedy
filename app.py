@@ -28,11 +28,11 @@ import hedyweb
 
 # Define and load all available language data
 ALL_LANGUAGES = {
-    'en': '🇺🇸',
-    'nl': '🇳🇱',
-    'es': '🇪🇸',
-    'fr': '🇫🇷',
-    'pt_br': '🇧🇷',
+    'en': 'English',
+    'nl': 'Nederlands',
+    'es': 'Español',
+    'fr': 'Français',
+    'pt_br': 'Português',
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
