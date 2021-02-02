@@ -5,6 +5,7 @@ from os import path
 
 from flask import jsonify, render_template, abort, redirect
 import courses
+from auth import current_user
 
 class Translations:
   def __init__(self):
@@ -23,7 +24,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(course, level_number, assignment_number, menu, translations, version):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program):
   assignment = course.get_assignment(level_number, assignment_number)
   if not assignment:
     abort(404)
@@ -43,6 +44,9 @@ def render_assignment_editor(course, level_number, assignment_number, menu, tran
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
   arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
+  arguments_dict['auth'] = translations.data [course.language] ['Auth']
+  arguments_dict['username'] = current_user(request) ['username']
+  arguments_dict['loaded_program'] = loaded_program or ''
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
@@ -68,6 +72,7 @@ def render_assignment_docs(doc_type, course, level_number, assignment_number, me
   arguments_dict['lang'] = course.language
   arguments_dict['selected_page'] = doc_type
   arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
+  arguments_dict['auth'] = translations.data [course.language] ['Auth']
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))

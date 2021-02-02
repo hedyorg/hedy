@@ -2,6 +2,7 @@ import requests
 import json
 import random
 from utils import type_check, timems
+import urllib.parse
 
 # TODO: unhardcode port
 host = 'http://localhost:5000/'
@@ -21,6 +22,16 @@ def request(test, counter):
     if not 'cookie' in test [3] and 'cookie' in state ['headers']:
         test [3] ['cookie'] = state ['headers'] ['cookie']
 
+    # If path, headers or body are functions, invoke them passing them the current state
+    if type_check (test[2], 'fun'):
+        test[2] = test[2] (state)
+
+    if type_check (test[3], 'fun'):
+        test[3] = test[3] (state)
+
+    if type_check (test[4], 'fun'):
+        test[4] = test[4] (state)
+
     if type_check (test[4], 'dict'):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
@@ -31,18 +42,28 @@ def request(test, counter):
     else:
         body = r.text
 
-    if len (test) == 7:
-        test [6] (state, {
-            'code':    r.status_code,
-            'headers': r.headers,
-            'body':    body
-        })
-    print ('Done  #' + str (counter) + ': ' + test [0] + ' - ' + str (r.status_code) + ' (' + str (timems () - start) + 'ms)')
-    return {
-        'code':    r.status_code,
+    if r.history and r.history [0]:
+        # This will be the case if there's a redirect
+        code = r.history [0].status_code
+    else:
+        code = r.status_code
+
+    output = {
+        'code':    code,
         'headers': r.headers,
         'body':    body
     }
+
+    if (code != test[5]):
+        print (output)
+        raise Exception ('A test failed!')
+
+    if len (test) == 7:
+        test [6] (state, output)
+
+    print ('Done  #' + str (counter) + ': ' + test [0] + ' - ' + str (r.status_code) + ' (' + str (timems () - start) + 'ms)')
+
+    return output
 
 def run_suite(tests):
     if not type_check(tests, 'list'):
@@ -51,9 +72,6 @@ def run_suite(tests):
 
     def run_test(test, counter):
         result = request(test, counter)
-        if (result ['code'] != test[5]):
-            print (result)
-            raise Exception ('A test failed!')
 
     for test in tests:
         # If test is nested, run a nested loop
@@ -76,7 +94,12 @@ def invalidMap(tag, method, path, bodies):
     return output
 
 # We use a random username so that if a test fails, we don't have to do a cleaning of the DB so that the test suite can run again
-username = str (random.randint (10000, 100000))
+username = 'user' + str (random.randint (10000, 100000))
+
+def successfulSignup(state, response):
+    if not 'token' in response ['body']:
+        raise Exception ('No token present')
+    state ['token'] = response ['body'] ['token']
 
 # We define apres functions here because multiline lambdas are not supported by python
 def successfulLogin(state, response):
@@ -84,34 +107,72 @@ def successfulLogin(state, response):
 
 def getProfile1(state, response):
     profile = response ['body']
-    if response ['body'] ['username'] != username:
+    if profile ['username'] != username:
         raise Exception ('Invalid username (getProfile1)')
-    if response ['body'] ['email'] != username + '@domain.com':
+    if profile ['email'] != username + '@domain.com':
         raise Exception ('Invalid username (getProfile1)')
 
 def getProfile2(state, response):
     profile = response ['body']
-    if response ['body'] ['country'] != 'NL':
-        raise Exception ('Invalid country (getProfile1)')
-    if response ['body'] ['email'] != username + '@domain2.com':
-        raise Exception ('Invalid country (getProfile1)')
+    if profile ['country'] != 'NL':
+        raise Exception ('Invalid country (getProfile2)')
+    if profile ['email'] != username + '@domain2.com':
+        raise Exception ('Invalid country (getProfile2)')
+    if not 'verification_pending' in profile or profile ['verification_pending'] != True:
+        raise Exception ('Invalid verification_pending (getProfile2)')
+
+def getProfile3(state, response):
+    profile = response ['body']
+    if 'verification_pending' in profile:
+        raise Exception ('Invalid verification_pending (getProfile3)')
+
+def emailChange(state, response):
+    if not type_check (response ['body'] ['token'], 'str'):
+        raise Exception ('Invalid country (emailChange)')
+    if response ['body'] ['username'] != username:
+        raise Exception ('Invalid username (emailChange)')
+    state ['token2'] = response ['body'] ['token']
+
+def recoverPassword(state, response):
+    if not 'token' in response ['body']:
+        raise Exception ('No token present')
+    state ['token'] = response ['body'] ['token']
 
 suite = [
-    ['get root', 'get', '/', {}, '', 200],
-    invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me'}, {'username:': 'user: me'}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
-    ['valid signup', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@domain.com'}, 200],
+    ['get root', 'get', '/', {}, '', 308],
+    invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
+    ['valid signup', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@domain.com'}, 200, successfulSignup],
     invalidMap ('login', 'post', '/auth/login', ['', [], {}, {'username': 1}, {'username': 'user@me'}, {'username:': 'user: me'}]),
     ['valid login, invalid credentials', 'post', '/auth/login', {}, {'username': username, 'password': 'password'}, 403],
+    ['verify email (missing fields)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': 'foobar', 'token': state ['token']}), {}, '', 403],
+    ['verify email (invalid username)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': 'foobar', 'token': state ['token']}), {}, '', 403],
+    ['verify email (invalid token)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': 'foobar'}), {}, '', 403],
+    ['verify email', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': state ['token']}), {}, '', 302],
     ['valid login', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar'}, 200, successfulLogin],
-    ['change password', 'post', '/auth/changePassword', {}, {'oldPassword': 'foobar', 'newPassword': 'foobar2'}, 200],
+    invalidMap ('change password', 'post', '/auth/change_password', ['', [], {}, {'foo': 'bar'}, {'old_password': 1}, {'old_password': 'foobar'}, {'old_password': 'foobar', 'new_password': 1}, {'old_password': 'foobar', 'new_password': 'short'}]),
+    ['change password', 'post', '/auth/change_password', {}, {'old_password': 'foobar', 'new_password': 'foobar2'}, 200],
     ['invalid login after password change', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar'}, 403],
-    ['valid login after password change', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, successfulLogin],
+    ['valid login after password change', 'post', '/auth/login', {}, {'username': username + '@domain.com', 'password': 'foobar2'}, 200, successfulLogin],
     ['logout', 'post', '/auth/logout', {}, {}, 200],
     ['check that session is no longer valid', 'get', '/profile', {}, '', 403],
     ['login again', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, successfulLogin],
+    invalidMap ('change password', 'post', '/auth/change_password', ['', [], {}, {'foo': 'bar'}, {'old_password': 1}, {'old_password': 'foobar'}, {'old_password': 'foobar', 'new_password': 1}]),
     ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile1],
-    ['change profile', 'post', '/profile', {}, {'email': username + '@domain2.com', 'country': 'NL'}, 200],
-    ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile2],
+    invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}]),
+    ['change profile with same email', 'post', '/profile', {}, {'email': username + '@domain.com', 'country': 'US'}, 200],
+    ['change profile with different email', 'post', '/profile', {}, {'email': username + '@domain2.com', 'country': 'NL'}, 200, emailChange],
+    ['get profile after profile update', 'get', '/profile', {}, {}, 200, getProfile2],
+    ['verify email after email change', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': state ['token2']}), {}, '', 302],
+    ['get profile after email verification', 'get', '/profile', {}, {}, 200, getProfile3],
+    invalidMap ('recover password', 'post', '/auth/recover', ['', [], {}, {'username': 1}]),
+    ['recover password, invalid user', 'post', '/auth/recover', {}, {'username': 'nosuch'}, 403],
+    ['recover password', 'post', '/auth/recover', {}, {'username': username}, 200, recoverPassword],
+    invalidMap ('reset password', 'post', '/auth/reset', ['', [], {}, {'username': 1}, {'username': 'foobar', 'token': 1}, {'username': 'foobar', 'token': 'some'}, {'username': 'foobar', 'token': 'some', 'password': 1}, {'username': 'foobar', 'token': 'some', 'password': 'short'}]),
+    ['reset password, invalid username', 'post', '/auth/reset', {}, lambda state: {'username': 'foobar', 'token': state ['token'], 'password': 'foobar'}, 403],
+    ['reset password, invalid token', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': 'foobar', 'password': 'foobar'}, 403],
+    ['reset password, invalid password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'short'}, 400],
+    ['reset password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'foobar3'}, 200],
+    ['login again after reset', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar3'}, 200],
     ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
 ]
 
