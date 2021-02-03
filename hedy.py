@@ -739,16 +739,18 @@ def execute(input_string, level):
     python = transpile(input_string, level)
     exec(python)
 
-if len(sys.argv) > 2:
-    LEVEL = int(sys.argv[1])
-    FILE = sys.argv[2]
+if len(sys.argv) > 1:
+    LEVEL = 1
+    FILE = sys.argv[1]
     FILE_TO_EXECUTE = open(FILE, 'r').readlines()
-    PROGRAM = ""
-
-    if LEVEL < 1 or LEVEL > 8:
-        LEVEL = 1
+    PROGRAM = "" 
+    if FILE_TO_EXECUTE[0].lower().startswith('#level'):
+        SELECTOR = FILE_TO_EXECUTE[0].split(' ')
+        if SELECTOR[1] is not None:
+            LEVEL = int(SELECTOR[1])
     for CMD in FILE_TO_EXECUTE:
-        PROGRAM = PROGRAM + CMD + "\n" # temporary
+        if not CMD.startswith("#"):
+            PROGRAM = PROGRAM + CMD + "\n" # temporary
     execute(PROGRAM, LEVEL)
 
 # f = open('output.py', 'w+')
