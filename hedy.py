@@ -749,15 +749,10 @@ if len(sys.argv) > 1:
         if SELECTOR[1] is not None:
             LEVEL = int(SELECTOR[1])
     for CMD in FILE_TO_EXECUTE:
-        if not CMD.startswith("#"):
+        if not CMD.startswith("#") or not CMD == "\n":
             PROGRAM = PROGRAM + CMD + "\n" # temporary
     execute(PROGRAM, LEVEL)
 
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
-
-
-
-
-
