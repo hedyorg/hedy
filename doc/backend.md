@@ -83,10 +83,10 @@
     - If `email` is present and different from the existing email, the route will also send a verification email to the provided `email`.
     - If successful, the route returns 200.
 
-- `GET /users`
-    - This route allows the admin user to retrieve a list of all the users in the system.
+- `GET /admin`
+    - This route allows the admin user to retrieve a list of all the users in the system, as well as a program count.
     - If there's no session or the logged in user is not the admin user, it returns 403.
-    - If successful, the route will return a template containing a table with all the users in the system. The users will be sorted by creation date, last first.
+    - If successful, the route will return a template containing a table with all the users in the system and a total count of saved programs. The users will be sorted by creation date, last first.
 
 ### Programs
 

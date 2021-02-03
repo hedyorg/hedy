@@ -3,7 +3,7 @@ import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe
 import datetime
 from functools import wraps
 from config import config
@@ -417,7 +417,7 @@ def auth_templates (page, lang, menu, request):
         return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
         return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')
-    if page == 'users':
+    if page == 'admin':
         user = current_user (request)
         if user ['username'] != os.getenv ('ADMIN_USER') and user ['email'] != os.getenv ('ADMIN_USER'):
             return 'unauthorized', 403
@@ -426,7 +426,6 @@ def auth_templates (page, lang, menu, request):
         users = db_scan ('users')
         userdata = []
         fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending']
-        counter = 1
         for user in users:
             data = {}
             for field in fields:
@@ -438,10 +437,12 @@ def auth_templates (page, lang, menu, request):
             data ['created'] = datetime.datetime.fromtimestamp (int (str (data ['created']) [:-3])).isoformat ()
             if data ['last_login']:
                 data ['last_login'] = datetime.datetime.fromtimestamp (int (str (data ['last_login']) [:-3])).isoformat ()
-            data ['index'] = counter
-            counter = counter + 1
             userdata.append (data)
 
         userdata.sort(key=lambda user: user ['created'], reverse=True)
+        counter = 1
+        for user in userdata:
+            user ['index'] = counter
+            counter = counter + 1
 
-        return render_template ('users.html', users=userdata)
+        return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'])
