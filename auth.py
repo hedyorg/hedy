@@ -445,4 +445,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'])
+        return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'], user_count=db_describe ('users') ['Table'] ['ItemCount'])
