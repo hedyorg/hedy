@@ -63,6 +63,16 @@ logging.basicConfig(
 
 app = Flask(__name__, static_url_path='')
 
+# HTTP -> HTTPS redirect
+# https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
+if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
+    @app.before_request
+    def before_request():
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            # We use a 302 in case we need to revert the redirect.
+            return redirect(url, code=302)
+
 # Unique random key for sessions
 app.config['SECRET_KEY'] = uuid.uuid4().hex
 
