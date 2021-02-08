@@ -154,3 +154,6 @@ def db_scan (table):
     for item in result ['Items']:
         output.append (db_decode (item))
     return output
+
+def db_describe (table):
+    return db.describe_table (TableName = db_prefix + '-' + table)
