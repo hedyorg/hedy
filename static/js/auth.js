@@ -70,7 +70,9 @@ window.auth = {
         window.auth.profile = {};
         window.saveit (first [0], first [1], first [2], first [3], function () {
            localStorage.removeItem ('hedy-first-save');
-           auth.redirect ('programs');
+           var redirect = localStorage.getItem ('hedy-save-redirect');
+           if (redirect) localStorage.removeItem ('hedy-save-redirect');
+           auth.redirect (redirect || 'programs');
         });
 
       }).fail (function (response) {
@@ -95,7 +97,9 @@ window.auth = {
         window.auth.profile = {};
         window.saveit (first [0], first [1], first [2], first [3], function () {
            localStorage.removeItem ('hedy-first-save');
-           auth.redirect ('programs');
+           var redirect = localStorage.getItem ('hedy-save-redirect');
+           if (redirect) localStorage.removeItem ('hedy-save-redirect');
+           auth.redirect (redirect || 'programs');
         });
 
       }).fail (function (response) {

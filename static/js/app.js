@@ -152,6 +152,11 @@ window.saveit = function saveit(level, lang, name, code, cb) {
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+      if (err.status === 403) {
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         localStorage.setItem ('hedy-save-redirect', 'hedy');
+         window.location.pathname = '/login';
+      }
     });
   } catch (e) {
     console.error(e);
