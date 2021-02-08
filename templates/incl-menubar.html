@@ -28,7 +28,7 @@
       </button>
       <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1">
         {% for lang in other_languages() %}
-        <li><a class="hover:bg-blue-700 py-2 px-4 block whitespace-no-wrap" href="{{ modify_query(lang=lang.lang) }}">{{ lang.sym }}</a></li>
+        <li><a class="hover:bg-blue-700 py-2 px-4 block whitespace-no-wrap text-white" href="{{ modify_query(lang=lang.lang) }}">{{ lang.sym }}</a></li>
         {% endfor %}
       </ul>
     </div>
