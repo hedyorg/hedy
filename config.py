@@ -3,7 +3,7 @@ config = {
     'session': {
         'cookie_name': 'hedy',
         # in minutes
-        'session_length': 60 * 24
+        'session_length': 60 * 24 * 14
     },
     'email': {
         'sender': 'Hedy <hedy@felienne.com>',
