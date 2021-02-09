@@ -42,9 +42,22 @@ If you are going to contribute to the code of Hedy, you will probably want to ru
 $ python3 -m venv .env
 $ source .env/bin/activate
 (.env)$ pip install -r requirements.txt
-
-$ python app.py
 ```
+
+If you want to run the website version locally, run:
+```bash
+(.env)$ python app.py
+```
+
+If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:
+```bash
+$ touch FILENAME.hedy
+```
+If you use a higher level than 1, specify the level at the top of the file by typing ```#LEVEL 1-8```. This will let the interpreter know which level you want to run the code on. Now to acctually run the code, type the following command in the terminal:
+```bash
+(.env)$ python hedy.py FILENAME.hedy
+```
+If all did correctly, you will see the output of your code right into the terminal.
 
 Pre-release environment
 -----------------------
