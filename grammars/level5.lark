@@ -12,13 +12,10 @@ program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on s
 
 _EOL: "\r"?"\n"
 
-print : "print " (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*
+print : "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*
 ask : var " is ask " textwithspaces*
 assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
-
-//TODO: sum needs to be expression here too (like in 7 and up)
-
-assign : var " is " sum
+assign : var " is " textwithspaces
 invalid: /^(?!(repeat|print|if|and )).+/ //everything that is not the start of a regular command
 
 // new commands for level 4
@@ -32,26 +29,13 @@ in_list_check: textwithoutspaces " in " var
 //new for level 5
 repeat: "repeat " (NUMBER | var) " times " command
 
-//new for level 6
-?sum: product
-   | sum " "* "+" " "* product -> addition
-   | sum " "* "-" " "* product -> substraction
-
-?product: atom
-    | product " "* "*" " "* atom -> multiplication
-    | product " "* "/" " "* atom -> division
-
-?atom: NUMBER | textwithoutspaces //TODO: means we cannot assign strings with spaces? would we want that?
-
-
 var: NAME -> var
-list_access : var " at " (index | random) -> list_access //todo: could be merged with list_acces_var?
+list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 index : NUMBER
 random : "random"
 
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
-textwithoutspaces: /([^\n, *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-//plus in level 6, calculation elements
+textwithoutspaces: /([^\n, ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 
 
 quoted_text_no_escape: /'([^']*)'/ -> text //simply all between quotes should this be used at earlier levels?

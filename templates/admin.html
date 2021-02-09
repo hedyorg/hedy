@@ -1,0 +1,36 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <h2>Total programs: {{ program_count }}</h2>
+  <h2>Users ({{ user_count }})</h2>
+  <table class="users">
+    <thead>
+      <td>#</td>
+      <td>Username</td>
+      <td>Email</td>
+      <td>Created</td>
+      <td>Last login</td>
+      <td>Birth year</td>
+      <td>Country</td>
+      <td>Gender</td>
+      <td>Email verified</td>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{user.index}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.created}}</td>
+        <td>{{user.last_login}}</td>
+        <td>{{user.birth_year}}</td>
+        <td>{{user.country}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.email_verified}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

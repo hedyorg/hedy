@@ -1,0 +1,103 @@
+---
+course:
+- level: '1'
+  assignments:
+  - step: '1'
+    prompt: |
+      In Level 1 you can print words and sentences.
+
+      Try the code: `ask Would you like to become an astronaut?`
+      Press the green button with 'Run the code' on it, to try the code.
+
+      Did it work? Then put this line below : `echo So your answer is`
+      Then press the green button again. Now Hedy repeats your answer!
+
+    start_code: |
+      ask Would you like to become an astronaut?
+  - step: '2'
+    prompt: |
+      If you want to live on a different planet, you undoubtedly must be able to grow plants.
+      Because bringing enough food with you for your whole life is impossible! That is why in this lesson you are going to learn what plants need to grow.
+
+      You will keep getting a sentence and then you have to complete it with the correct word.
+      These are the answers: plants, photosynthesis, oxygen, carbon dioxide, atmosphere, air
+
+      And these are the sentences:
+      What is a mix of different gases, like nitrogen and oxygen?
+
+      In Level 1 we cannot check yet if your answer is correct. That will happen in the next levels.
+
+
+    start_code: |
+      ask What is a mix of different gases, such as nitrogen and oxygen?
+      echo Your answer was:
+- level: '2'
+  assignments:
+  - step: '1'
+    prompt: |
+      You have entered Hedy Level 2. That means you can program something new, namely, choosing a random word from a list. This way you can test yourself even better.
+
+      Can you finish the list of words?
+      And, can you also make sure that you can enter an answer with an `ask`?
+      Read the above explanation carefully, because `ask` works a bit different now!
+
+    start_code: |
+      words are plants, photosynthesis
+      print words at random
+- level: '3'
+  assignments:
+  - step: '1'
+    prompt: |
+      You have entered Hedy level 3. Printing works a bit differently, you now have to use quotation marks to print.
+      We are now going to practice new things in level 3!
+      <img src="/images/SpaceEUplantpuzzel.png" width="50%"> </img>
+
+      Will you make a program so you can also practice this puzzle?
+      In the next step you will learn how to check whether the answer is correct.
+
+    start_code: |
+      answer is ask What is the name of the first box?
+      print 'Your answer was ' answer
+- level: '4'
+  assignments:
+  - step: '1'
+    prompt: |
+      Now that you have practiced programming, it is time to learn something new, the `if`.
+      With an `if` you can check whether an answer is correct.
+
+      <img src="/images/SpaceEUplantpuzzel.png" width="50%"> </img>
+
+      You will receive some code from us. Can you finish it for all the boxes?
+
+    start_code: |
+      answer is ask What is box 1?
+      if answer is leaf print 'correct!' else print 'wrong'
+- level: "5"
+  assignments:
+  - step: '1'
+    prompt: |
+      We have now learnt a lot of things about what plants need to grow well.
+      How many do you know?
+      With the new `repeat` code you can print the same sentence multiple times, give it a try.
+      How many do you know? Ask as many times as you want.
+    start_code: |
+      repeat 1 times answer is ask What does a plant need?
+
+- level: "6"
+  assignments:
+  - step: '1'
+    prompt: |
+      You have entered Hedy level 6. In level 6 you can start calculating. That is useful if you have to determine how heavy things can be on the Moon!
+      With spaceEU you learned that things on the Moon weigh 6x less than on Earth.
+      That means that you have to divide by 6. In Hedy you use the sign / to divide. It is called "slash" (Pronounce: slaSH).
+      Can you finish the code?
+    start_code: |
+      weight is 60
+      print 'The weight is' weight
+      print 'On the moon that is ...'
+  - step: '2'
+    prompt: |
+      You can make more calculations about the Moon. For example, a day on the Moon is about 29 days.
+      Can you calculate with Hedy how long a month is on the Moon?
+      You now have to create the code by yourself.
+    start_code: |

@@ -14,10 +14,12 @@ import uuid
 import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
-
+from config import config
+from auth import auth_templates, current_user, requires_login
+from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g
+from flask import Flask, request, jsonify, render_template, session, abort, g, redirect
 from flask_compress import Compress
 
 # Hedy-specific modules
@@ -26,10 +28,11 @@ import hedyweb
 
 # Define and load all available language data
 ALL_LANGUAGES = {
-    'en': '🇺🇸',
-    'nl': '🇳🇱',
-    'es': '🇪🇸',
-    'fr': '🇫🇷',
+    'en': 'English',
+    'nl': 'Nederlands',
+    'es': 'Español',
+    'fr': 'Français',
+    'pt_br': 'Português',
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -40,8 +43,11 @@ HEDY_COURSE = collections.defaultdict(courses.NoSuchCourse)
 for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
-# Only available in Dutch
-SPACE_EU_COURSE = courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl'])
+SPACE_EU_COURSE = {'nl': courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl']),
+                   'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en']),
+                   'es': courses.Course('space_eu', 'es', LEVEL_DEFAULTS['es'])
+                   }
+
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
 
 TRANSLATIONS = hedyweb.Translations()
@@ -68,16 +74,24 @@ if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 
-@app.route('/parse/', methods=['GET'])
+@app.route('/parse', methods=['POST'])
 def parse():
-    # Retrieve the name from url parameter
-    code = request.args.get("code", None)
-    level = int(request.args.get("level", None))
+    body = request.json
+    if not body:
+        return "body must be an object", 400
+    if 'code' not in body:
+        return "body.code must be a string", 400
+    if 'level' not in body:
+        return "body.level must be a string", 400
+
+    code = body ['code']
+    level = int(body ['level'])
 
     # For debugging
     print(f"got code {code}")
 
     response = {}
+    username = current_user(request) ['username'] or None
 
     # Check if user sent code
     if not code:
@@ -110,6 +124,7 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
+        'username': username
     })
 
     return jsonify(response)
@@ -125,10 +140,40 @@ def report_error():
         'code': post_body.get('code'),
         'client_error': post_body.get('client_error'),
         'version': version(),
+        'username': current_user(request) ['username'] or None
     })
 
     return 'logged'
 
+def programs_page (request):
+    username = current_user(request) ['username']
+    if not username:
+        return "unauthorized", 403
+
+    lang = requested_lang()
+    query_lang = request.args.get('lang') or ''
+    if query_lang:
+        query_lang = '?lang=' + query_lang
+
+    texts=TRANSLATIONS.data [lang] ['Programs']
+
+    result = db_get_many ('programs', {'username': username}, True)
+    programs = []
+    now = timems ()
+    for item in result:
+        measure = texts ['minutes']
+        date = round ((now - item ['date']) / 60000)
+        if date > 90:
+            measure = texts ['hours']
+            date = round (date / 60)
+        if date > 36:
+            measure = texts ['days']
+
+            date = round (date / 24)
+
+        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name']})
+
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', query_lang=query_lang)
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
@@ -140,16 +185,29 @@ def report_error():
 def index(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
-    g.lang = lang = requested_lang()
+    g.lang = requested_lang()
     g.prefix = '/hedy'
 
+    # If step is a string that has more than two characters, it must be an id of a program
+    if step and type_check (step, 'str') and len (step) > 2:
+        result = db_get ('programs', {'id': step})
+        if not result or result ['username'] != current_user(request) ['username']:
+            return 'No such program', 404
+        loaded_program = result ['code']
+        # We default to step 1 to provide a meaningful default assignment
+        step = 1
+    else:
+        loaded_program = None
+
     return hedyweb.render_assignment_editor(
-        course=HEDY_COURSE[lang],
+        request=request,
+        course=HEDY_COURSE[g.lang],
         level_number=level,
         assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
-        version=version())
+        version=version(),
+        loaded_program=loaded_program)
 
 @app.route('/hedy/<level>/<step>/<docspage>', methods=['GET'])
 def docs(level, step, docspage):
@@ -178,12 +236,14 @@ def onlinemasters(level, step):
     g.prefix = '/onlinemasters'
 
     return hedyweb.render_assignment_editor(
+        request=request,
         course=ONLINE_MASTERS_COURSE,
         level_number=level,
         assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
-        menu=None)
+        menu=None,
+        loaded_program=None)
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
@@ -191,16 +251,18 @@ def onlinemasters(level, step):
 def space_eu(level, step):
     session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
-    g.lang = lang = requested_lang()
+    g.lang = requested_lang()
     g.prefix = '/space_eu'
 
     return hedyweb.render_assignment_editor(
-        course=SPACE_EU_COURSE,
+        request=request,
+        course=SPACE_EU_COURSE[g.lang],
         level_number=level,
         assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
-        menu=None)
+        menu=None,
+        loaded_program=None)
 
 
 
@@ -229,6 +291,12 @@ def main_page(page):
     lang = requested_lang()
     effective_lang = lang
 
+    if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
+        return auth_templates(page, lang, render_main_menu(page), request)
+
+    if page == 'programs':
+        return programs_page(request)
+
     # Default to English if requested language is not available
     if not path.isfile(f'main/{page}-{effective_lang}.md'):
         effective_lang = 'en'
@@ -242,7 +310,7 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
-    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, **front_matter)
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'], **front_matter)
 
 
 def session_id():
@@ -340,6 +408,78 @@ def render_main_menu(current_page):
         accent_color=item.get('accent_color', 'white')
     ) for item in main_menu_json['nav']]
 
+# *** PROGRAMS ***
+
+# Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
+@app.route('/programs/delete/<program_id>', methods=['GET'])
+@requires_login
+def delete_program (user, program_id):
+    result = db_get ('programs', {'id': program_id})
+    if not result or result ['username'] != user ['username']:
+        return "", 404
+    db_del ('programs', {'id': program_id})
+    return redirect ('/programs')
+
+@app.route('/programs', methods=['POST'])
+@requires_login
+def save_program (user):
+
+    body = request.json
+    if not type_check (body, 'dict'):
+        return 'body must be an object', 400
+    if not object_check (body, 'code', 'str'):
+        return 'code must be a string', 400
+    if not object_check (body, 'name', 'str'):
+        return 'name must be a string', 400
+    if not object_check (body, 'level', 'int'):
+        return 'level must be an integer', 400
+
+    # We execute the saved program to see if it would generate an error or not
+    error = None
+    try:
+        hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
+        result = hedy.transpile(body ['code'], body ['level'])
+    except hedy.HedyException as E:
+        error_template = hedy_errors[E.error_code]
+        error = error_template.format(**E.arguments)
+    except Exception as E:
+        error = str(E)
+
+    name = body ['name']
+
+    # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
+    # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
+    # For now, we bring all existing programs for the user and then search within them for repeated names.
+    existing = db_get_many ('programs', {'username': user ['username']}, True)
+    name_counter = 0
+    for program in existing:
+        if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
+            name_counter = name_counter + 1
+    if name_counter:
+        name = name + ' (' + str (name_counter) + ')'
+
+    db_set('programs', {
+        'id': uuid.uuid4().hex,
+        'session': session_id(),
+        'date': timems (),
+        'lang': requested_lang(),
+        'version': version(),
+        'level': body ['level'],
+        'code': body ['code'],
+        'name': name,
+        'server_error': error,
+        'username': user ['username']
+    })
+
+    return jsonify({})
+
+# *** AUTH ***
+
+import auth
+auth.routes(app, requested_lang)
+
+# *** START SERVER ***
+
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=config ['port'])

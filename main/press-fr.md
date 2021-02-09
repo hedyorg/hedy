@@ -2,5 +2,5 @@ page_title: Presse — Hedy
 ---
 # Hedy dans les nouvelles
 
-**Université de Leiden, 25 avril 2020**
-[![Header Uni](images/UniLeiden-EN.png "Header Uni")](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
+* [Developpez (French)](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
+

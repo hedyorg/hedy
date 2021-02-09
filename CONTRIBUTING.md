@@ -5,9 +5,32 @@ Contributing to Hedy
 Help Hedy with translations
 ------------
 
-Hedy is now available in Dutch and English and Spanish, but we'd love to support more languages! To contribute, add translations for all elements in the JSON files [levels](https://github.com/Felienne/hedy/blob/master/static/levels.json) and [texts](https://github.com/Felienne/hedy/blob/master/static/texts.json). The easiest way is to make a copy of the English versions and then change the field `language`. 
+Hedy is now available in Dutch, French, English and Spanish, but we'd love to support more languages! 
 
-You can check the status of the several translation efforts [here](/STATUS.md) and see what you can best work on! 
+If you would like to add a translation, there a three places where files that need to be translated:
+
+1) The folder [level-defaults](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/) has a file for each language. That file controls what the landing page for each levels looks like. It is probably easiest to copy the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/en.yaml), rename it and translate that. Tip: example variables can be translated too, that is probably helpful for learners!
+
+2) In the folder [texts](https://github.com/Felienne/hedy/tree/master/coursedata/texts) there is a file for each language too. That file translate UI-elements like menu headers, and, important, the error messages Hedy programmers will see. As above, copying the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/texts/en.yaml) and translate that.
+
+3) The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there is a page with press, and with contact info too. If you want to, you can skip those pages (people will then see the English version)
+
+Translated all of that? 
+
+Two more small things to do!
+
+1) Add your language to the [menu](https://github.com/Felienne/hedy/blob/master/main/menu.json).
+
+2) Now go to [app.py](https://github.com/Felienne/hedy/blob/master/app.py) and add your language to this list:
+
+ALL_LANGUAGES = {
+    'en': '🇺🇸',
+    'nl': '🇳🇱',
+    'es': '🇪🇸',
+    'fr': '🇫🇷',
+}
+
+You can check the status of the several translation efforts [here](/STATUS.md) and see what you can best work on. Would be lovely if you update your own translations there too :)
 
 
 Run Hedy code on your machine
