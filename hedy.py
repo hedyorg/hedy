@@ -735,7 +735,11 @@ def transpile_inner(input_string, level):
     else:
         raise Exception('Levels over 7 are not implemented yet')
 
-def execute(input_string, level):
+def execute(input_string):
+    python = transpile(input_string)
+    exec(python)
+
+def execute_locally(input_string, level):
     python = transpile(input_string, level)
     exec(python)
 
@@ -751,7 +755,7 @@ if len(sys.argv) > 1:
     for CMD in FILE_TO_EXECUTE:
         if not CMD.startswith("#") or not CMD == "\n":
             PROGRAM = PROGRAM + CMD + "\n" # temporary
-    execute(PROGRAM, LEVEL)
+    execute_locally(PROGRAM, LEVEL)
 
 # f = open('output.py', 'w+')
 # f.write(python)
