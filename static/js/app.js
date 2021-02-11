@@ -6,7 +6,8 @@
 
   // *** EDITOR SETUP ***
 
-  var editor = ace.edit("editor");
+  // We expose the editor globally so it's available to other functions for resizing
+  var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   // editor.session.setMode("ace/mode/javascript");
 
@@ -287,18 +288,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
+    editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
+    editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
+    editor.resize ();
   }
 };
 
