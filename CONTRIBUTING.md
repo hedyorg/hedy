@@ -59,6 +59,9 @@ If you use a higher level than 1, specify the level at the top of the file by ty
 ```
 If all did correctly, you will see the output of your code right into the terminal.
 
+If you are using vscode, you can use the Hedy extension to get syntax highlighting in .hedy files.
+[Link to the vscode extension](https://marketplace.visualstudio.com/items?itemName=d3rbgsr77yzykt2qsg6pgb54dv7d6jh2tlaeyuawkrz4inovt5ka.hedy)
+
 Pre-release environment
 -----------------------
 
