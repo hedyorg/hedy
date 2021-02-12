@@ -51,3 +51,7 @@ page_title: Contact — Hedy
 We vinden het heel leuk om te horen wat jij allemaal maakt!
 
 [Klik hier om een mailtje te sturen](mailto:hedy@felienne.com "Stuur een mail")
+
+# Foutje gevonden?
+
+[Geef het door via GitHub](https://github.com/Felienne/hedy/issues/new)

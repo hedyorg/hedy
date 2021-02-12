@@ -51,4 +51,8 @@ page_title: Contact — Hedy
 
 Adoraríamos ouvir de você!
 
-[Clique aqui para nos enviar uma mensagem](mailto:f.f.j.hermans@liacs.leidenuniv.nl "Stuur een mail")
+[Clique aqui para nos enviar uma mensagem](mailto:hedy@felienne.com "Hedy")
+
+# Encontrou um erro?
+
+[Passe adiante via GitHub](https://github.com/Felienne/hedy/issues/new)
