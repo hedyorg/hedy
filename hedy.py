@@ -743,6 +743,9 @@ def printHelp():
     print("Usage: python hedy.py [--help] <filename> [--level <level (1-8)>]\n\nTo specify a level, add #level <level> to the top of your file or use the --level <level> argument.")
     sys.exit(1)
 
+def print(uitvoer):
+    sys.stdout.write(uitvoer + '\n')
+
 def main():
     # python3 hedy.py <filename(0)> [levelargument(1)] [level(2)] 
 
