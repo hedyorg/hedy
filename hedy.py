@@ -2,6 +2,7 @@ from lark import Lark
 from lark.exceptions import VisitError, LarkError
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
+import sys
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
@@ -734,16 +735,10 @@ def transpile_inner(input_string, level):
     else:
         raise Exception('Levels over 7 are not implemented yet')
 
-def execute(input_string):
-    python = transpile(input_string)
+def execute(input_string, level):
+    python = transpile(input_string, level)
     exec(python)
-
 
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
-
-
-
-
-
