@@ -55,9 +55,15 @@ $ touch FILENAME.hedy
 ```
 If you use a higher level than 1, specify the level at the top of the file by typing ```#LEVEL 1-8```. This will let the interpreter know which level you want to run the code on. Now to acctually run the code, type the following command in the terminal:
 ```bash
-(.env)$ python hedy.py FILENAME.hedy
+(.env)$ python runhedy.py FILENAME.hedy
 ```
 If all did correctly, you will see the output of your code right into the terminal.
+
+If you don't want to specify the level itself in the file, you can use the ```--level``` argument after the filename. You can do it like this:
+```bash
+(.env)$ python runhedy.py FILENAME.hedy --level 1-8
+```
+When you execute this, the interpreter will use the specified level.
 
 Pre-release environment
 -----------------------
