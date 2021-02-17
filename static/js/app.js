@@ -37,7 +37,9 @@
   // *** PROMPT TO SAVE CHANGES ***
 
   window.onbeforeunload = function () {
-     if (window.unsaved_changes) return 'You have an unsaved program. Do you want to leave without saving it?';
+     // The browser doesn't show this message, rather it shows a default message.
+     // We still have an internationalized message in case we want to implement this as a modal in the future.
+     if (window.unsaved_changes) return window.auth.texts.unsaved_changes;
   };
 
   // *** KEYBOARD SHORTCUTS ***
@@ -120,7 +122,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-       window.location.pathname = '/signup';
+       window.location.pathname = '/login';
        return;
     }
 

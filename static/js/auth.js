@@ -17,20 +17,20 @@ window.auth = {
       auth.redirect ('');
     });
   },
-  error: function (message, element) {
-    $ ('#error').html (message);
-    $ ('#error').css ('display', 'block');
+  error: function (message, element, id) {
+    $ (id || '#error').html (message);
+    $ (id || '#error').css ('display', 'block');
     if (element) $ ('#' + element).css ('border', 'solid 1px red');
   },
-  clear_error: function () {
-    $ ('#error').html ('');
-    $ ('#error').css ('display', 'none');
+  clear_error: function (id) {
+    $ (id || '#error').html ('');
+    $ (id || '#error').css ('display', 'none');
     $ ('form *').css ('border', '');
   },
-  success: function (message) {
+  success: function (message, id) {
     $ ('#error').css ('display', 'none');
-    $ ('#success').html (message);
-    $ ('#success').css ('display', 'block');
+    $ (id || '#success').html (message);
+    $ (id || '#success').css ('display', 'block');
   },
   submit: function (op) {
     var values = {};
@@ -103,7 +103,11 @@ window.auth = {
         });
 
       }).fail (function (response) {
-        if (response.status === 403) auth.error (auth.texts.invalid_username_password);
+        if (response.status === 403) {
+           auth.error (auth.texts.invalid_username_password + ' ' + auth.texts.no_account + ' &nbsp;<button class="green-btn" onclick="auth.redirect (\'signup\')">' + auth.texts.create_account + '</button>');
+           $ ('#create-account').hide ();
+           localStorage.setItem ('hedy-login-username', values.username);
+        }
         else                         auth.error (auth.texts.ajax_error);
       });
     }
@@ -131,21 +135,21 @@ window.auth = {
     }
 
     if (op === 'change_password') {
-      if (! values.password) return auth.error (auth.texts.please_password, 'password');
-      if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'password_repeat');
+      if (! values.password) return auth.error (auth.texts.please_password, 'password', '#error-password');
+      if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password', '#error-password');
+      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'password_repeat', '#error-password');
 
       var payload = {old_password: values.old_password, new_password: values.password};
 
-      auth.clear_error ();
+      auth.clear_error ('#error-password');
       $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
-        auth.success (auth.texts.password_updated);
+        auth.success (auth.texts.password_updated, '#success-password');
         $ ('#old_password').val ('');
         $ ('#password').val ('');
         $ ('#password_repeat').val ('');
       }).fail (function (response) {
-        if (response.status === 403) auth.error (auth.texts.invalid_password);
-        else                         auth.error (auth.texts.ajax_error);
+        if (response.status === 403) auth.error (auth.texts.invalid_password, null, '#error-password');
+        else                         auth.error (auth.texts.ajax_error, null, '#error-password');
       });
     }
 
@@ -231,4 +235,13 @@ if (window.location.pathname === '/reset') {
   // If we don't receive username and token, the redirect link is invalid. We redirect the user to /recover.
   if (! params.username || ! params.token) auth.redirect ('recover')
   else auth.reset = params;
+}
+
+if (window.location.pathname === '/signup') {
+  var login_username = localStorage.getItem ('hedy-login-username');
+  if (login_username) {
+    localStorage.removeItem ('hedy-login-username');
+    if (login_username.match ('@')) $ ('#email').val (login_username);
+    else                            $ ('#username').val (login_username);
+  }
 }
