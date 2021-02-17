@@ -499,7 +499,7 @@ class ConvertToPython(ConvertTo):
 
     def start(self, children):
         return "".join(self._call_children(children))
-    
+
     def statement(self, children):
         args = self._call_children(children)
         return "".join([self._generate_indentation() + x for x in args])
@@ -581,7 +581,7 @@ class ConvertToPython(ConvertTo):
     def unary_plus(self, children):
         args = self._call_children(children)
         return args[0]
-    
+
     def unary_minus(self, children):
         args = self._call_children(children)
         return "-" + args[0]
@@ -630,20 +630,19 @@ def transpile(input_string, level):
     try:
         return transpile_inner(input_string, level)
     except Exception as E:
-        #we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
+        # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
         if E.args[0] == 'Parse':
             #try 1 level lower
             if level > 1:
                 try:
-                    new_level = level-1
-                    result = transpile_inner(input_string, level-1)
-                    raise HedyException('Wrong Level', correct_code = result, original_level=level, working_level=new_level)
-                except LarkError as e:
-                    raise HedyException('Parse', level=level, parse_error=e.args[0])
-            else:
-                raise E
-        else:
-            raise E
+                    new_level = level - 1
+                    result = transpile_inner(input_string, new_level)
+                except (LarkError, HedyException) as innerE:
+                    # Parse at `level - 1` failed as well, just re-raise original error
+                    raise E
+                # If the parse at `level - 1` succeeded, then a better error is "wrong level"
+                raise HedyException('Wrong Level', correct_code=result, original_level=level, working_level=new_level) from E
+        raise E
 
 def repair(input_string):
     #the only repair we can do now is remove leading spaces, more can be added!
@@ -664,7 +663,7 @@ def transpile_inner(input_string, level):
 
         except Exception as e:
             # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
-            raise HedyException('Parse', level=level, parse_error=e.args[0])
+            raise HedyException('Parse', level=level, parse_error=e.args[0]) from e
 
         is_valid = IsValid().transform(program_root)
         if not is_valid[0]:
@@ -728,9 +727,9 @@ def transpile_inner(input_string, level):
         except VisitError as E:
             raise E.orig_exc
     elif level >= 8 and level <= 13:
-        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True) 
+        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True)
         python = 'import random\n'
-        python += ConvertToPython().transform(parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL 
+        python += ConvertToPython().transform(parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
         return python
     else:
         raise Exception('Levels over 7 are not implemented yet')
