@@ -2,7 +2,8 @@
 
 {% block body %}
 <div class="px-8">
-  <h2>{{texts.recent}}</h2>
+  {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
+  {% else %}<h2>{{texts.recent}}</h2>{% endif %}
   <ul class="programs">
   {% for program in programs %}
     <li>
@@ -16,7 +17,7 @@
     </li>
     <br>
   {% endfor %}
-  {% if programs|length == 0 %}
+  {% if programs|length == 0 and not from_user %}
   <p>{{texts.no_programs}}
     <br><br>
     <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{texts.write_first}}</button>
