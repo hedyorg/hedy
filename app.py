@@ -201,7 +201,10 @@ def index(level, step):
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
         result = db_get ('programs', {'id': step})
-        if not result or result ['username'] != current_user(request) ['username']:
+        if not result:
+            return 'No such program', 404
+        # Allow both the owner of the program and the admin user to access the program
+        if current_user(request) != os.getenv ('ADMIN_USER') and result ['username'] != current_user(request) ['username']:
             return 'No such program', 404
         loaded_program = result ['code']
         # We default to step 1 to provide a meaningful default assignment
