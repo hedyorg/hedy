@@ -8,6 +8,7 @@
     <thead>
       <td>#</td>
       <td>Username</td>
+      <td>Programs</td>
       <td>Email</td>
       <td>Created</td>
       <td>Last login</td>
@@ -21,6 +22,7 @@
       <tr>
         <td>{{user.index}}</td>
         <td>{{user.username}}</td>
+        <td><a href="programs?user={{user.username}}">Programs</a></td>
         <td>{{user.email}}</td>
         <td>{{user.created}}</td>
         <td>{{user.last_login}}</td>

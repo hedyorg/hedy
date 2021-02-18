@@ -35,6 +35,10 @@ def current_user (request):
                 return user
     return {'username': '', 'email': ''}
 
+def is_admin (request):
+    user = current_user (request)
+    return user ['username'] == os.getenv ('ADMIN_USER') or user ['email'] == os.getenv ('ADMIN_USER')
+
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
 TRANSLATIONS = hedyweb.Translations ()
@@ -418,8 +422,7 @@ def auth_templates (page, lang, menu, request):
     if page in ['signup', 'login', 'recover', 'reset']:
         return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')
     if page == 'admin':
-        user = current_user (request)
-        if user ['username'] != os.getenv ('ADMIN_USER') and user ['email'] != os.getenv ('ADMIN_USER'):
+        if not is_admin (request):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
