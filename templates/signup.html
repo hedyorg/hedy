@@ -34,13 +34,16 @@
     <label>{{auth.subscribe_newsletter}}</label>
     <input type="checkbox" id="subscribe">
     <br><br>
-    <input type="submit" class="pointer" value="{{auth.create_account}}">
-    <br><br>
-    {{auth.already_account}} <a href="login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
-    <div id="error" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
-    <div id="success" class="flex-0 mt-0 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+    <button type="submit" class="green-btn">{{auth.create_account}}</button>
+    <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+    <div id="success" class="flex-0 mt-8 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
     </div>
     <br><br>
   </form>
 </div>
+<form onsubmit="event.preventDefault (); window.location.href = 'login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'">
+  <br>
+  {{auth.already_account}}&nbsp;&nbsp;<button type="submit" class="btn">{{auth.login}}</button>
+  <br><br>
+</form>
 {% endblock %}
