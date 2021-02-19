@@ -30,7 +30,7 @@
     // If prompt is shown and user enters text in the editor, hide the prompt.
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
-      window.unsaved_changes = true;
+      window.State.unsaved_changes = true;
     });
   }
 
@@ -39,7 +39,7 @@
   window.onbeforeunload = function () {
      // The browser doesn't show this message, rather it shows a default message.
      // We still have an internationalized message in case we want to implement this as a modal in the future.
-     if (window.unsaved_changes) return window.auth.texts.unsaved_changes;
+     if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
   };
 
   // *** KEYBOARD SHORTCUTS ***
@@ -69,6 +69,8 @@
 })();
 
 function runit(level, lang, cb) {
+  if (window.State.disable_run) return;
+
   error.hide();
   try {
     level = level.toString();
@@ -116,7 +118,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 
   if (name === true) name = $ ('#program_name').val ();
 
-  window.unsaved_changes = false;
+  window.State.unsaved_changes = false;
 
   try {
     if (! window.auth.profile) {
@@ -245,6 +247,7 @@ function runPythonProgram(code, cb) {
    * Render the prompt to the terminal, add an inputbox where the user can
    * type, and replace the inputbox with static text after they hit enter.
    */
+   // Note: this method is currently not being used.
   function inputFromTerminal(prompt) {
     return new Promise(function(ok) {
       addToOutput(prompt + '\n', 'white');
@@ -264,8 +267,13 @@ function runPythonProgram(code, cb) {
     });
   }
 
+  // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
     return new Promise(function(ok) {
+
+      window.State.disable_run = true;
+      $ ('#runit').css('background-color', 'gray').prop ('disabled', true);
+
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
       input.val('');
@@ -274,6 +282,10 @@ function runPythonProgram(code, cb) {
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
+
+        window.State.disable_run = false;
+        $ ('#runit').css('background-color', '').prop ('disabled', false);
+
         event.preventDefault();
         $('#inline-modal').hide();
         ok(input.val());
