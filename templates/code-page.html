@@ -105,9 +105,12 @@
         </div>
       </div>
       <br>
-      <div class="flex justify-end">
+      <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
         {% if next_assignment %}
         <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">{{advance_step_button}} {{ next_assignment }}</button>
+        {% endif %}
+        {% if prev_level %}
+        <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
         <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
