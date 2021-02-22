@@ -305,6 +305,7 @@ def routes (app, requested_lang):
             output ['gender'] = user ['gender']
         if 'verification_pending' in user:
             output ['verification_pending'] = True
+        output ['session_expires_at'] = timems () + session_length * 1000
 
         return jsonify (output), 200
 

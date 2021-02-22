@@ -69,7 +69,7 @@
 - `GET /profile`
     - This route allows the user to retrieve their profile.
     - This route requires a session, otherwise it returns 403.
-    - If successful, this route returns 200 with a body of the shape `{username: STRING, email: STRING, birth_year: INTEGER|UNDEFINED, country: STRING|UNDEFINED, gender: m|f|o|UNDEFINED, verification_pending: UNDEFINED|true}`.
+    - If successful, this route returns 200 with a body of the shape `{username: STRING, email: STRING, birth_year: INTEGER|UNDEFINED, country: STRING|UNDEFINED, gender: m|f|o|UNDEFINED, verification_pending: UNDEFINED|true, session_expires_at: INTEGER}`.
 
 - `POST /profile`
     - This route allows the user to change its `email`, `birth_year`, `gender` and/or `country`.
