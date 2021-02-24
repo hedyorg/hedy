@@ -168,6 +168,8 @@ class Filter(Transformer):
         return all_arguments_true(args)
     def ifs(self, args):
         return all_arguments_true(args)
+    def valid_command(self, args):
+        return all_arguments_true(args)
     def ifelse(self, args):
         return all_arguments_true(args)
     def condition(self, args):

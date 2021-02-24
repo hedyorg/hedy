@@ -1,5 +1,5 @@
 start: program
-program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+program: _EOL* (command | invalid) (" ")* (_EOL+ (command | invalid) (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
          | ifelse
          | ifs
@@ -7,7 +7,7 @@ program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on s
          | assign_list
          | list_access_var
          | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
-         | invalid
+
 
 _EOL: "\r"?"\n"
 
