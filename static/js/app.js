@@ -6,7 +6,8 @@
 
   // *** EDITOR SETUP ***
 
-  var editor = ace.edit("editor");
+  // We expose the editor globally so it's available to other functions for resizing
+  var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   // editor.session.setMode("ace/mode/javascript");
 
@@ -29,14 +30,16 @@
     // If prompt is shown and user enters text in the editor, hide the prompt.
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
-      window.unsaved_changes = true;
+      window.State.unsaved_changes = true;
     });
   }
 
   // *** PROMPT TO SAVE CHANGES ***
 
   window.onbeforeunload = function () {
-     if (window.unsaved_changes) return 'You have an unsaved program. Do you want to leave without saving it?';
+     // The browser doesn't show this message, rather it shows a default message.
+     // We still have an internationalized message in case we want to implement this as a modal in the future.
+     if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
   };
 
   // *** KEYBOARD SHORTCUTS ***
@@ -65,7 +68,19 @@
 
 })();
 
+function reloadOnExpiredSession () {
+   // If user is not logged in or session is not expired, return false.
+   if (! window.auth.profile || window.auth.profile.session_expires_at > Date.now ()) return false;
+   // Otherwise, reload the page to update the top bar.
+   location.reload ();
+   return true;
+}
+
 function runit(level, lang, cb) {
+  if (window.State.disable_run) return;
+
+  if (reloadOnExpiredSession ()) return;
+
   error.hide();
   try {
     level = level.toString();
@@ -111,15 +126,17 @@ function runit(level, lang, cb) {
 window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
 
+  if (reloadOnExpiredSession ()) return;
+
   if (name === true) name = $ ('#program_name').val ();
 
-  window.unsaved_changes = false;
+  window.State.unsaved_changes = false;
 
   try {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-       window.location.pathname = '/signup';
+       window.location.pathname = '/login';
        return;
     }
 
@@ -242,6 +259,7 @@ function runPythonProgram(code, cb) {
    * Render the prompt to the terminal, add an inputbox where the user can
    * type, and replace the inputbox with static text after they hit enter.
    */
+   // Note: this method is currently not being used.
   function inputFromTerminal(prompt) {
     return new Promise(function(ok) {
       addToOutput(prompt + '\n', 'white');
@@ -261,8 +279,13 @@ function runPythonProgram(code, cb) {
     });
   }
 
+  // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
     return new Promise(function(ok) {
+
+      window.State.disable_run = true;
+      $ ('#runit').css('background-color', 'gray').prop ('disabled', true);
+
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
       input.val('');
@@ -271,6 +294,10 @@ function runPythonProgram(code, cb) {
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
+
+        window.State.disable_run = false;
+        $ ('#runit').css('background-color', '').prop ('disabled', false);
+
         event.preventDefault();
         $('#inline-modal').hide();
         ok(input.val());
@@ -287,18 +314,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
+    editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
+    editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
+    editor.resize ();
   }
 };
 

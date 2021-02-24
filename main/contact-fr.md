@@ -50,4 +50,8 @@ page_title: Contact — Hedy
 
 Nous aimerions en apprendre plus sur votre expérience!
 
-[Cliquez ici pour nous envoyer un message](mailto:  f.f.j.hermans@liacs.leidenuniv.nl "Envoyer un email")
+[Cliquez ici pour nous envoyer un message](mailto:hedy@felienne.com "Hedy")
+
+# Vous avez trouvé une erreur?
+
+[Transmettez-le via GitHub](https://github.com/Felienne/hedy/issues/new)

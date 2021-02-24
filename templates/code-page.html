@@ -14,7 +14,7 @@
           {{ command.example|commonmark }}
         </div>
         <button class="btn block flex-none self-end"
-          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.unsaved_changes = false;'>{{try_button}}</button>
+          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.State.unsaved_changes = false;'>{{try_button}}</button>
       </div>
     </div>
     {% endfor %}
@@ -36,6 +36,7 @@
         <!-- errorbox -->
         <div id="errorbox" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
+          <p class="close-dialog" onclick="$ ('#errorbox').hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -51,6 +52,7 @@
         <!-- warningbox -->
         <div id="warningbox" class="flex-0 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
+          <p class="close-dialog" onclick="$ ('#warningbox').hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -80,12 +82,12 @@
         </div>
       </div>
       <br>
-      <button class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
+      <button id="runit" class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
     </div>
     <div>
       <div class="h-64 flex flex-col">
         <!-- tabindex=0 makes the div focusable -->
-        <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg"></div>
+        <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto"></div>
         <div id="inline-modal" class="flex-0" style="display: none">
           <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
             <!--Title-->
@@ -103,9 +105,12 @@
         </div>
       </div>
       <br>
-      <div class="flex justify-end">
+      <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
         {% if next_assignment %}
         <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">{{advance_step_button}} {{ next_assignment }}</button>
+        {% endif %}
+        {% if prev_level %}
+        <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
         <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>

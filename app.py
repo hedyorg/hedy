@@ -15,7 +15,7 @@ import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates, current_user, requires_login
+from auth import auth_templates, current_user, requires_login, is_admin
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
 
 # app.py
@@ -62,6 +62,16 @@ logging.basicConfig(
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
 
 app = Flask(__name__, static_url_path='')
+
+# HTTP -> HTTPS redirect
+# https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
+if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
+    @app.before_request
+    def before_request():
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            # We use a 302 in case we need to revert the redirect.
+            return redirect(url, code=302)
 
 # Unique random key for sessions
 app.config['SECRET_KEY'] = uuid.uuid4().hex
@@ -155,9 +165,13 @@ def programs_page (request):
     if query_lang:
         query_lang = '?lang=' + query_lang
 
+    from_user = request.args.get('user') or None
+    if from_user and not is_admin (request):
+        return "unauthorized", 403
+
     texts=TRANSLATIONS.data [lang] ['Programs']
 
-    result = db_get_many ('programs', {'username': username}, True)
+    result = db_get_many ('programs', {'username': from_user or username}, True)
     programs = []
     now = timems ()
     for item in result:
@@ -173,7 +187,7 @@ def programs_page (request):
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name']})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', query_lang=query_lang)
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', query_lang=query_lang, from_user=from_user)
 
 # @app.route('/post/', methods=['POST'])
 # for now we do not need a post but I am leaving it in for a potential future
@@ -191,8 +205,12 @@ def index(level, step):
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
         result = db_get ('programs', {'id': step})
-        if not result or result ['username'] != current_user(request) ['username']:
+        if not result:
             return 'No such program', 404
+        # Allow both the owner of the program and the admin user to access the program
+        user = current_user (request)
+        if user ['username'] != result ['username'] and not is_admin (request):
+            return 'No such program!', 404
         loaded_program = result ['code']
         # We default to step 1 to provide a meaningful default assignment
         step = 1

@@ -46,6 +46,14 @@ strong {
   @apply bg-green-400 border-green-500;
 }
 
+.red-btn {
+  @apply btn-shape;
+  @apply bg-red-500 text-white border-red-700;
+}
+
+.red-btn:hover {
+  @apply bg-red-400 border-red-500;
+}
 
 /* Styles only for use in MarkDown blocks */
 .markdown {
@@ -141,8 +149,6 @@ pre code {
 
 form.auth {
   border: solid 1px #eeeeee;
-  padding-left: 50px;
-  padding-right: 50px;
   padding-bottom: 10px;
 }
 
@@ -186,4 +192,18 @@ table.users td {
 
 .bg-gray-400 {
   background-color: #cbd5e0;
+}
+
+/* EDITOR WARNINGS & ERRORS */
+
+div#errorbox, div#warningbox {
+   position: relative;
+}
+
+p.close-dialog {
+   font-weight: bold;
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   cursor: pointer;
 }
