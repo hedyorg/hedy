@@ -1,5 +1,5 @@
 start: program
-program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+program: _EOL* (command | invalid) (" ")* (_EOL+ (command | invalid) (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
          | ifelse
          | ifs
@@ -7,7 +7,7 @@ program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on s
          | assign_list
          | list_access_var
          | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
-         | invalid
+
 
 _EOL: "\r"?"\n"
 
@@ -15,7 +15,12 @@ print : "print " (quoted_text | list_access | var) (" " (quoted_text | list_acce
 ask : var " is ask " textwithspaces*
 assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
 assign : var " is " textwithspaces
-invalid: /^(?!(print|if|and )).+/ //everything that is not the start of a regular command
+invalid: textwithoutspaces " " textwithspaces
+
+// old code: /^(?!(print|if|and )).+/ //everything that is not the start of a regular command
+// I am not sure why we did this, I think in anticipation of higher levels where we cannot rely on order?
+// leaving it here just in case! (Felienne, Feb 24, 2021)
+
 
 // new commands for level 4
 ifelse : "if " condition " " command " else " command

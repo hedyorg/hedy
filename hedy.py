@@ -6,6 +6,16 @@ import sys
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
+# commands are used to suggest the right command when kids make a mistake
+commands_per_level = {1: ['print', 'ask', 'echo'] ,
+                      2: ['print', 'ask', 'echo', 'is'],
+                      3: ['print', 'ask', 'is'],
+                      4: ['print', 'ask', 'is', 'if'],
+                      5: ['print', 'ask', 'is', 'if', 'repeat'],
+                      6: ['print', 'ask', 'is', 'if', 'repeat']
+                      }
+
+
 def closest_command(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
     min = 1000
@@ -157,6 +167,8 @@ class Filter(Transformer):
     def list_access_var(self, args):
         return all_arguments_true(args)
     def ifs(self, args):
+        return all_arguments_true(args)
+    def valid_command(self, args):
         return all_arguments_true(args)
     def ifelse(self, args):
         return all_arguments_true(args)
@@ -677,7 +689,7 @@ def transpile_inner(input_string, level):
                 raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
             else:
                 invalid_command = is_valid[1]
-                closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+                closest = closest_command(invalid_command, commands_per_level[level])
                 raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
         is_complete = IsComplete().transform(program_root)
