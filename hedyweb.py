@@ -37,6 +37,7 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
   arguments_dict['level'] = assignment.level
+  arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
   arguments_dict['next_assignment'] = int(assignment_number) + 1 if int(assignment_number) < course.max_step(level_number) else None
   arguments_dict['menu'] = menu
