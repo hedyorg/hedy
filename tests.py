@@ -48,7 +48,7 @@ class TestsForMultipleLevels(unittest.TestCase):
 
         # This isn't correct Hedy at level 5 nor level 4
         try:
-            hedy.transpile("print Hello world!", 5)
+            hedy.transpile("printHelloworld!", 5)
             self.fail('Should have thrown')
         except hedy.HedyException as e:
             self.assertEqual(e.error_code, 'Parse')
@@ -412,6 +412,15 @@ if selected in items:
 
         self.assertEqual(expected, actual)
         self.assertEqual('found!', run_code(actual))
+
+    def test_pront_should_suggest_print(self):
+        program = "pront 'Hedy is leuk!'"
+
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile(program, 4)
+        self.assertEqual('Invalid', str(context.exception))
+        self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+
 
 class TestsLevel5(unittest.TestCase):
     #print should still work
