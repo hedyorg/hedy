@@ -46,6 +46,14 @@ strong {
   @apply bg-green-400 border-green-500;
 }
 
+.red-btn {
+  @apply btn-shape;
+  @apply bg-red-500 text-white border-red-700;
+}
+
+.red-btn:hover {
+  @apply bg-red-400 border-red-500;
+}
 
 /* Styles only for use in MarkDown blocks */
 .markdown {
@@ -135,4 +143,67 @@ pre code {
 
 .text-shadow-none {
   text-shadow: none;
+}
+
+/* AUTH */
+
+form.auth {
+  border: solid 1px #eeeeee;
+  padding-bottom: 10px;
+}
+
+form.auth label {
+  width: 140px;
+  display: inline-block;
+}
+
+form.auth input {
+  padding: 5px;
+  border: solid 2px grey;
+}
+
+form.auth .pointer {
+  cursor: pointer;
+}
+
+form.auth select {
+  padding: 5px;
+  width: 180px;
+}
+
+table.users thead {
+  font-weight: bold;
+}
+
+table.users td {
+  padding: 10px;
+  border: solid 1px gray;
+}
+
+/* RESTORE OLD COLORS */
+
+.bg-blue-500 {
+  background-color: #4299e1;
+}
+
+.bg-blue-400 {
+  background-color: #63b3ed;
+}
+
+.bg-gray-400 {
+  background-color: #cbd5e0;
+}
+
+/* EDITOR WARNINGS & ERRORS */
+
+div#errorbox, div#warningbox {
+   position: relative;
+}
+
+p.close-dialog {
+   font-weight: bold;
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   cursor: pointer;
 }

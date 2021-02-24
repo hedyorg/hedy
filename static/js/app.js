@@ -1,8 +1,13 @@
 (function() {
 
+  // If there's no #editor div, we're requiring this code in a non-code page.
+  // Therefore, we don't need to initialize anything.
+  if (! $ ('#editor').length) return;
+
   // *** EDITOR SETUP ***
 
-  var editor = ace.edit("editor");
+  // We expose the editor globally so it's available to other functions for resizing
+  var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   // editor.session.setMode("ace/mode/javascript");
 
@@ -10,9 +15,10 @@
   const storage = window.sessionStorage;
   if (storage) {
     const levelKey = $('#editor').data('lskey');
+    const loadedProgram = $('#editor').data('loaded-program');
 
-    // On page load, if we have a saved program, load it
-    if (storage.getItem(levelKey)) {
+    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+    if (loadedProgram !== 'True' && storage.getItem(levelKey)) {
       editor.setValue(storage.getItem(levelKey), 1);
     }
 
@@ -24,8 +30,17 @@
     // If prompt is shown and user enters text in the editor, hide the prompt.
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+      window.State.unsaved_changes = true;
     });
   }
+
+  // *** PROMPT TO SAVE CHANGES ***
+
+  window.onbeforeunload = function () {
+     // The browser doesn't show this message, rather it shows a default message.
+     // We still have an internationalized message in case we want to implement this as a modal in the future.
+     if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
+  };
 
   // *** KEYBOARD SHORTCUTS ***
 
@@ -53,7 +68,19 @@
 
 })();
 
+function reloadOnExpiredSession () {
+   // If user is not logged in or session is not expired, return false.
+   if (! window.auth.profile || window.auth.profile.session_expires_at > Date.now ()) return false;
+   // Otherwise, reload the page to update the top bar.
+   location.reload ();
+   return true;
+}
+
 function runit(level, lang, cb) {
+  if (window.State.disable_run) return alert (window.auth.texts.answer_question);
+
+  if (reloadOnExpiredSession ()) return;
+
   error.hide();
   try {
     level = level.toString();
@@ -90,6 +117,64 @@ function runit(level, lang, cb) {
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
     });
 
+  } catch (e) {
+    console.error(e);
+    error.show(ErrorMessages.Other_error, e.message);
+  }
+}
+
+window.saveit = function saveit(level, lang, name, code, cb) {
+  error.hide();
+
+  if (reloadOnExpiredSession ()) return;
+
+  if (name === true) name = $ ('#program_name').val ();
+
+  window.State.unsaved_changes = false;
+
+  try {
+    if (! window.auth.profile) {
+       if (! confirm (window.auth.texts.save_prompt)) return;
+       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+       window.location.pathname = '/login';
+       return;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/programs',
+      data: JSON.stringify({
+        level: level,
+        lang:  lang,
+        name:  name,
+        code:  code
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (cb) return response.Error ? cb (response) : cb ();
+      if (response.Warning) {
+        error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
+      }
+      if (response.Error) {
+        error.show(ErrorMessages.Transpile_error, response.Error);
+        return;
+      }
+      $ ('#okbox').show ();
+      $ ('#okbox .caption').html (window.auth.texts.save_success);
+      $ ('#okbox .details').html (window.auth.texts.save_success_detail);
+      setTimeout (function () {
+         $ ('#okbox').hide ();
+      }, 2000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+      if (err.status === 403) {
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         localStorage.setItem ('hedy-save-redirect', 'hedy');
+         window.location.pathname = '/login';
+      }
+    });
   } catch (e) {
     console.error(e);
     error.show(ErrorMessages.Other_error, e.message);
@@ -174,6 +259,7 @@ function runPythonProgram(code, cb) {
    * Render the prompt to the terminal, add an inputbox where the user can
    * type, and replace the inputbox with static text after they hit enter.
    */
+   // Note: this method is currently not being used.
   function inputFromTerminal(prompt) {
     return new Promise(function(ok) {
       addToOutput(prompt + '\n', 'white');
@@ -193,8 +279,13 @@ function runPythonProgram(code, cb) {
     });
   }
 
+  // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
     return new Promise(function(ok) {
+
+      window.State.disable_run = true;
+      $ ('#runit').css('background-color', 'gray');
+
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
       input.val('');
@@ -203,6 +294,10 @@ function runPythonProgram(code, cb) {
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
+
+        window.State.disable_run = false;
+        $ ('#runit').css('background-color', '');
+
         event.preventDefault();
         $('#inline-modal').hide();
         ok(input.val());
@@ -219,18 +314,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
+    editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
+    editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
+    editor.resize ();
   }
 };
 

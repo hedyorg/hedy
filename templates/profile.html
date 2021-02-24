@@ -1,0 +1,51 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <h2 class="pl-8">{{auth.profile}} &nbsp;&nbsp;<button class="green-btn text-xl" onclick="window.auth.logout ()">{{auth.logout}}</button></h2>
+  <form class="pl-8 auth" id="profile" onsubmit="event.preventDefault (); window.auth.submit ('profile')">
+    <br><br>
+    <label>{{auth.username}}</label>
+    <strong id="username"></strong>
+    <br><br>
+    <label>{{auth.email}}</label>
+    <input id="email">
+    <br><br>
+    <label>{{auth.birth_year}}</label>
+    <input id="birth_year">
+    <br><br>
+    <label>{{auth.gender}}</label>
+    <select id="gender">
+      <option value="">{{auth.select}}</option>
+      <option value="f">{{auth.female}}</option>
+      <option value="m">{{auth.male}}</option>
+      <option value="o">{{auth.other}}</option>
+    </select>
+    <br><br>
+    <label>{{auth.country}}</label>
+    <select id="country"></select>
+    <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <br><br>
+    <button type="submit" class="green-btn">{{auth.update_profile}}</button>
+  </form>
+  <br>
+  <form class="pl-8 auth" id="change_password" onsubmit="event.preventDefault (); window.auth.submit ('change_password')"> <br>
+    <label>{{auth.current_password}}</label>
+    <input id="old_password" type=password>
+    <br><br>
+    <label>{{auth.new_password}}</label>
+    <input id="password" type=password>
+    <br><br>
+    <label>{{auth.repeat_new_password}}</label>
+    <input id="password_repeat" type=password>
+    <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <br><br>
+    <button type="submit" class="green-btn">{{auth.change_password}}</button>
+  </form>
+  <br><br>
+  <button class="red-btn ml-8" onclick="window.auth.destroy ()">{{auth.destroy}}</button>
+  <br><br>
+</div>
+{% endblock %}

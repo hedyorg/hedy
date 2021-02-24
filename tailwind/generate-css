@@ -3,7 +3,7 @@ set -eu
 
 if ! which tailwindcss > /dev/null; then
   echo "This script needs Tailwind installed." >&2
-  echo "Run 'npm install -g tailwindcss' and try again." >&2
+  echo "Run 'npm install -g tailwindcss autoprefixer postcss' and try again." >&2
   exit 1
 fi
 

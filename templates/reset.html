@@ -1,0 +1,20 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <form class="auth" onsubmit="event.preventDefault (); window.auth.submit ('reset')">
+    <h2>{{auth.reset_password}}</h2>
+    <br>
+    <label>{{auth.password}}</label>
+    <input id="password" type=password>
+    <br><br>
+    <label>{{auth.password_repeat}}</label>
+    <input id="password_repeat" type=password>
+    <br><br>
+    <div id="error" class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <div id="success" class="flex-0 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <br><br>
+    <button type="submit" class="green-btn">{{auth.reset_password}}</button>
+  </form>
+</div>
+{% endblock %}

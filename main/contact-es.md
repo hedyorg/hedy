@@ -52,3 +52,7 @@ page_title: Contactos — Hedy
 ¡Nos encantaría saber más de ti!
 
 [Haz click aquí para escribirnos un mensaje](mailto:hedy@felienne.com "Enviar correo electrónico")
+
+# ¿Encontró un error?
+
+[Transmítelo a través de GitHub](https://github.com/Felienne/hedy/issues/new)

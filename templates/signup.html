@@ -1,0 +1,50 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <form class="auth" onsubmit="event.preventDefault (); window.auth.submit ('signup')">
+    <h2>{{auth.create_account}}</h2>
+    <h4 class="text-blue-500">{{auth.create_account_explanation}}</h3>
+    <br>
+    <label>{{auth.username}}</label>
+    <input id="username">
+    <br><br>
+    <label>{{auth.email}}</label>
+    <input id="email" type="email">
+    <br><br>
+    <label>{{auth.password}}</label>
+    <input id="password" type=password>
+    <br><br>
+    <label>{{auth.password_repeat}}</label>
+    <input id="password_repeat" type=password>
+    <br><br>
+    <label>{{auth.birth_year}}</label>
+    <input id="birth_year" placeholder="1995" type="number">
+    <br><br>
+    <label>{{auth.gender}}</label>
+    <select id="gender">
+      <option value="">{{auth.select}}</option>
+      <option value="f">{{auth.female}}</option>
+      <option value="m">{{auth.male}}</option>
+      <option value="o">{{auth.other}}</option>
+    </select>
+    <br><br>
+    <label>{{auth.country}}</label>
+    <select id="country"></select>
+    <br><br>
+    <label>{{auth.subscribe_newsletter}}</label>
+    <input type="checkbox" id="subscribe">
+    <br><br>
+    <button type="submit" class="green-btn">{{auth.create_account}}</button>
+    <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+    <div id="success" class="flex-0 mt-8 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">
+    </div>
+    <br><br>
+  </form>
+</div>
+<form onsubmit="event.preventDefault (); window.location.href = 'login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'">
+  <br>
+  {{auth.already_account}}&nbsp;&nbsp;<button type="submit" class="btn">{{auth.login}}</button>
+  <br><br>
+</form>
+{% endblock %}

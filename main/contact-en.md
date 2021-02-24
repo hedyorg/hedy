@@ -50,3 +50,7 @@ page_title: Contact — Hedy
 We love to hear from you!
 
 [Click here to send us a message](mailto:hedy@felienne.com "About Hedy")
+
+# Found a bug?
+
+[Let us know on GitHub](https://github.com/Felienne/hedy/issues/new)

@@ -1,0 +1,25 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <form class="auth" onsubmit="event.preventDefault (); window.auth.submit ('login')">
+    <h2>{{auth.login_long}}</h2>
+    <br>
+    <label>{{auth.username}} / {{auth.email}}</label>
+    <input id="username">
+    <br><br>
+    <label>{{auth.password}}</label>
+    <input id="password" type=password>
+    <br><br>
+    <button type="submit" class="green-btn">{{auth.login}}</button>
+    <div id="error" class="flex-0 mt-8 mb-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    <div id="success" class="flex-0 mt-8 mb-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+  </form>
+  <form id="create-account" onsubmit="event.preventDefault (); window.location.href = 'signup{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'">
+    <br>
+    {{auth.no_account}}&nbsp;&nbsp;<button type="submit" class="green-btn">{{auth.create_account}}</button>
+    <br><br>
+  </form>
+  <form onsubmit="event.preventDefault (); window.location.href = 'recover{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'"><button type="submit" class="btn">{{auth.forgot_password}}</button></form>
+</div>
+{% endblock %}

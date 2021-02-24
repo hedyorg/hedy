@@ -42,6 +42,18 @@ class TestsForMultipleLevels(unittest.TestCase):
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
 
+
+    def test_parse_error_shows_right_level(self):
+        """Check that a parse error that can't be fixed by downgrading the level is propagated properly."""
+
+        # This isn't correct Hedy at level 5 nor level 4
+        try:
+            hedy.transpile("print Hello world!", 5)
+            self.fail('Should have thrown')
+        except hedy.HedyException as e:
+            self.assertEqual(e.error_code, 'Parse')
+            self.assertEqual(e.arguments.get('level'), 5)
+
     # def test_print_undefined_var(self):
     #     min_level = 7
     #
@@ -153,10 +165,6 @@ class TestsLevel2(unittest.TestCase):
             result = hedy.transpile("abc felienne 123", 2)
         self.assertEqual(str(context.exception), 'Invalid')
 
-
-
-
-
     def test_transpile_ask_Spanish(self):
         result = hedy.transpile("ask ask Cuál es tu color favorito?", 2)
         self.assertEqual(result, "answer = input('ask Cuál es tu color favorito?')")
@@ -169,9 +177,6 @@ class TestsLevel2(unittest.TestCase):
     def test_spaces_in_arguments(self):
         result = hedy.transpile("print hallo      wereld", 2)
         self.assertEqual(result, "import random\nprint('hallo'+' '+'wereld')")
-
-
-
 
     def test_transpile_print(self):
         result = hedy.transpile("print Hallo welkom bij Hedy!", 2)
@@ -925,7 +930,7 @@ for b in range(1, 2):
                 x = 22
         else:
             x = 222
-""") 
+""")
 
 class TestsLevel10(unittest.TestCase):
     def test_list(self):
