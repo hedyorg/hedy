@@ -3,9 +3,9 @@ import json
 import random
 from utils import type_check, timems
 import urllib.parse
+from config import config
 
-# TODO: unhardcode port
-host = 'http://localhost:5000/'
+host = 'http://localhost:' + str (config ['port']) + '/'
 
 t0 = timems ()
 
@@ -111,6 +111,14 @@ def getProfile1(state, response):
         raise Exception ('Invalid username (getProfile1)')
     if profile ['email'] != username + '@domain.com':
         raise Exception ('Invalid username (getProfile1)')
+    if not profile ['session_expires_at']:
+        raise Exception ('No session_expires_at (getProfile1)')
+    expire = profile ['session_expires_at'] - config ['session'] ['session_length'] * 60 * 1000 - timems ()
+    if expire > 0:
+        raise Exception ('Invalid session_expires_at (getProfile1), too large')
+    # We give the server up to 10ms to respond to the query
+    if expire < -10:
+        raise Exception ('Invalid session_expires_at (getProfile1), too small')
 
 def getProfile2(state, response):
     profile = response ['body']

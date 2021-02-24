@@ -68,8 +68,18 @@
 
 })();
 
+function reloadOnExpiredSession () {
+   // If user is not logged in or session is not expired, return false.
+   if (! window.auth.profile || window.auth.profile.session_expires_at > Date.now ()) return false;
+   // Otherwise, reload the page to update the top bar.
+   location.reload ();
+   return true;
+}
+
 function runit(level, lang, cb) {
   if (window.State.disable_run) return;
+
+  if (reloadOnExpiredSession ()) return;
 
   error.hide();
   try {
@@ -115,6 +125,8 @@ function runit(level, lang, cb) {
 
 window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
+
+  if (reloadOnExpiredSession ()) return;
 
   if (name === true) name = $ ('#program_name').val ();
 
