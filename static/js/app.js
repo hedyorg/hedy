@@ -77,7 +77,7 @@ function reloadOnExpiredSession () {
 }
 
 function runit(level, lang, cb) {
-  if (window.State.disable_run) return;
+  if (window.State.disable_run) return alert (window.auth.texts.answer_question);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -284,7 +284,7 @@ function runPythonProgram(code, cb) {
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray').prop ('disabled', true);
+      $ ('#runit').css('background-color', 'gray');
 
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
@@ -296,7 +296,7 @@ function runPythonProgram(code, cb) {
       $('#inline-modal form').one('submit', function(event) {
 
         window.State.disable_run = false;
-        $ ('#runit').css('background-color', '').prop ('disabled', false);
+        $ ('#runit').css('background-color', '');
 
         event.preventDefault();
         $('#inline-modal').hide();
