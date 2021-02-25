@@ -1,5 +1,5 @@
 from lark import Lark
-from lark.exceptions import VisitError, LarkError
+from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
 import sys
@@ -660,7 +660,48 @@ def repair(input_string):
     #the only repair we can do now is remove leading spaces, more can be added!
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
 
+def translate_characters(s):
+# this method is used to make it more clear to kids what is meant in error messages
+# for example ' ' is hard to read, space is easier
+# this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
+    if s == " ":
+        return 'space'
 
+def filter_and_translate_terminals(list):
+    # in giving error messages, it does not make sense to include
+    # ANONs, and some things like EOL need kid friendly translations
+    new_terminals = []
+    for terminal in list:
+        if terminal[:4] == "ANON":
+            continue
+
+        if terminal == "EOL":
+            new_terminals.append("Newline")
+            break
+
+        #not translated or filtered out? simply add as is:
+        new_terminals.append(terminal)
+
+    return new_terminals
+
+def beautify_parse_error(error_message):
+
+    location = error_message.split(' at ')[1]
+    location = location.split('\n')[0].replace('line ', '')
+    location = location.split(' col ')
+    print(location)
+
+    character_found = error_message.split("'")[1]
+    character_found = character_found.split("'")[0]
+    character_found = translate_characters(character_found)
+
+    characters_expected = error_message.split("Expecting: {")[1]
+    characters_expected = characters_expected[0:-2]
+    characters_expected = characters_expected.replace("'", "").replace("_", "")
+    characters_expected = characters_expected.split(", ")
+    characters_expected = filter_and_translate_terminals(characters_expected)
+
+    return location, character_found, characters_expected
 
 def transpile_inner(input_string, level):
     if level <= 6:
@@ -674,8 +715,12 @@ def transpile_inner(input_string, level):
             lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
         except Exception as e:
-            # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
-            raise HedyException('Parse', level=level, parse_error=e.args[0]) from e
+            try:
+                location, character_found, characters_expected = beautify_parse_error(e.args[0])
+                raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
+            except UnexpectedEOF:
+                # this one can't be beautified (for now), so give up :)
+                raise e
 
         is_valid = IsValid().transform(program_root)
         if not is_valid[0]:

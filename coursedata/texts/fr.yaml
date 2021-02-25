@@ -38,7 +38,8 @@ HedyErrorMessages:
     Peux tu le supprimer?
   Parse: >
     Le code saisi n’est pas du Hedy valide.
-    L’erreur rencontrée est: {parse_error}.
+    L’erreur rencontrée est:
+    There is a mistake on line {location[0]}, at position {location[1]}. You typed {character_found}, but Hedy was expecting {characters_expected}
   VarUndefined: "Tu as essayé d’afficher {name}, mais tu ne l’as pas initialisé."
 Auth:
   create_account: "Create account"
