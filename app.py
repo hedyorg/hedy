@@ -96,6 +96,10 @@ def parse():
 
     code = body ['code']
     level = int(body ['level'])
+    # Language should come principally from the request body,
+    # but we'll fall back to browser default if it's missing for whatever
+    # reason.
+    lang = body.get('lang', requested_lang())
 
     # For debugging
     print(f"got code {code}")
@@ -109,7 +113,7 @@ def parse():
     # is so, parse
     else:
         try:
-            hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
+            hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\n" + result
         except hedy.HedyException as E:
@@ -130,7 +134,7 @@ def parse():
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
-        'lang': requested_lang(),
+        'lang': lang,
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
