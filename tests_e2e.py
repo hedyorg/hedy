@@ -35,7 +35,7 @@ def request(test, counter):
     if type_check (test[4], 'dict'):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
-    r = getattr (requests, test [1])(host + test [2], headers=test[3], data=test[4])
+    r = getattr (requests, test [1]) (host + test [2], headers=test[3], data=test[4])
 
     if 'Content-Type' in r.headers and r.headers ['Content-Type'] == 'application/json':
         body = r.json ()
