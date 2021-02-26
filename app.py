@@ -83,7 +83,6 @@ logger = jsonbin.JsonBinLogger.from_env_vars()
 if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
-
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
@@ -121,6 +120,8 @@ def parse():
                 response["Warning"] = error_template.format(**E.arguments)
             else:
                 error_template = hedy_errors[E.error_code]
+                # Localize the names of characters
+                E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
                 response["Error"] = error_template.format(**E.arguments)
         except Exception as E:
             print(f"error transpiling {code}")

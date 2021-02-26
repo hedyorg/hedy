@@ -664,8 +664,28 @@ def translate_characters(s):
 # this method is used to make it more clear to kids what is meant in error messages
 # for example ' ' is hard to read, space is easier
 # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
-    if s == " ":
+    if s == ' ':
         return 'space'
+    elif s == ',':
+        return 'comma'
+    elif s == '?':
+        return 'question mark'
+    elif s == '\\n':
+        return 'newline'
+    elif s == '.':
+        return 'period'
+    elif s == '!':
+        return 'exclamation mark'
+    elif s == '*':
+        return 'star'
+    elif s == "'":
+        return 'single quotes'
+    elif s == '"':
+        return 'double quotes'
+    elif s >= 'a' and s <= 'z' or s >= 'A' and s <= 'Z':
+        return s
+    else:
+        return s
 
 def filter_and_translate_terminals(list):
     # in giving error messages, it does not make sense to include
@@ -686,22 +706,10 @@ def filter_and_translate_terminals(list):
 
 def beautify_parse_error(error_message):
 
-    location = error_message.split(' at ')[1]
-    location = location.split('\n')[0].replace('line ', '')
-    location = location.split(' col ')
-    print(location)
-
     character_found = error_message.split("'")[1]
-    character_found = character_found.split("'")[0]
     character_found = translate_characters(character_found)
 
-    characters_expected = error_message.split("Expecting: {")[1]
-    characters_expected = characters_expected[0:-2]
-    characters_expected = characters_expected.replace("'", "").replace("_", "")
-    characters_expected = characters_expected.split(", ")
-    characters_expected = filter_and_translate_terminals(characters_expected)
-
-    return location, character_found, characters_expected
+    return character_found
 
 def transpile_inner(input_string, level):
     if level <= 6:
@@ -716,7 +724,11 @@ def transpile_inner(input_string, level):
 
         except Exception as e:
             try:
-                location, character_found, characters_expected = beautify_parse_error(e.args[0])
+                location = e.line, e.column
+                characters_expected = str(e.allowed)
+                character_found  = beautify_parse_error(e.args[0])
+                # print(e.args[0])
+                # print(location, character_found, characters_expected)
                 raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
             except UnexpectedEOF:
                 # this one can't be beautified (for now), so give up :)

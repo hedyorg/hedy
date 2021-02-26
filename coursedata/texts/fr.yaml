@@ -18,7 +18,7 @@ ui:
   assignment_header: "Exercice"
 ClientErrorMessages:
   Transpile_warning: "Attention!"
-  Transpile_error: "Le serveur n’a pas pu traduire ce code Heyd en Python."
+  Transpile_error: "Le serveur n’a pas pu traduire ce code."
   Connection_error: "Nous n’avons pas réussi à contacter le serveur."
   Other_error: "Oups! Nous avons rencontré une erreur."
   Execute_error: "Quelque chose s’est mal passé en exécutant ce programme."
@@ -39,7 +39,7 @@ HedyErrorMessages:
   Parse: >
     Le code saisi n’est pas du Hedy valide.
     L’erreur rencontrée est:
-    There is a mistake on line {location[0]}, at position {location[1]}. You typed {character_found}, but Hedy was expecting {characters_expected}
+    There is a mistake on line {location[0]}, at position {location[1]}. You typed {character_found}, but that is not allowed.
   VarUndefined: "Tu as essayé d’afficher {name}, mais tu ne l’as pas initialisé."
 Auth:
   create_account: "Create account"
