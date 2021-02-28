@@ -1,0 +1,141 @@
+---
+  1:
+    intro_text: "In Stufe 1 kannst du diese Befehle verwenden"
+    start_code: "print Hallo Welt!"
+    commands:
+      -
+        name: "print"
+        explanation: "Gib etwas mit `print` aus."
+        example: "Beispiel: print Hallo willkommen bei Hedy!"
+        demo_code: "print Hallo willkommen bei Hedy!"
+      -
+        name: "ask"
+        explanation: "Frage etwas mit `ask`."
+        example: "Beispiel: ask Was ist deine Lieblingsfarbe?"
+        demo_code: "ask Was ist deine Lieblingsfarbe?"
+      -
+        name: "echo"
+        explanation: "Wiederhole etwas mit `echo`."
+        example: "Beispiel: echo Also deine Lieblingsfarbe ist ..."
+        demo_code: "ask Was ist deine Lieblingsfarbe?\necho Also deine Lieblingsfarbe ist ..."
+  2:
+    intro_text: "`print` funktioniert immer noch wie in Stufe 1, aber `ask` hat sich geändert und braucht jetzt einen Namen, den du dann ausgeben kannst. `echo` wird nicht mehr benötigt. Du kannst jetzt zusätzlich diese Befehle verwenden:"
+    start_code: "print Hallo Welt!"
+    commands:
+      -
+        name: "is"
+        explanation: "Gib einem Wort einen Namen, den du in deinem Programm verwenden kannst."
+        example: "Beispiel: name is Hedy."
+        demo_code: "name is Hedy\nprint Willkommen name"
+      -
+        name: "ask"
+        explanation: "Frage etwas mit `ask`. Achtung! `ask` benötigt jetzt einen Namen."
+        example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ist dir am liebsten!"
+      -
+        name: "choose_random"
+        explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus."
+        example: "Beispiel: tiere is Hund, Katze, Känguru."
+        demo_code: "tiere is Hund, Katze, Känguru\nprint tiere at random"
+  3:
+    start_code: "print 'Hallo Welt'"
+    intro_text: "In Stufe 3 musst du Anführungszeichen vor und nach Wörtern verwenden, wenn du sie ausgeben möchtest. Echo wird nicht mehr benötigt, weil du die Wörter jetzt mit print ausgeben kannst!"
+    commands:
+      -
+        name: "print"
+        explanation: "Genaue Ausgabe mit Anführungszeichen."
+        example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
+        demo_code: "print 'Hallo. Willkommen bei Hedy.'"
+      -
+        name: "is"
+        explanation: "Gib einem Text einen Namen und gib ihn ohne Anführungszeichen aus."
+        example: "Beispiel: name is Hedy."
+        demo_code: "name is Hedy\nprint 'Ich heisse ' name"
+      -
+        name: "ask"
+        explanation: "Frage etwas mit `ask`. Achtung! `print` braucht jetzt Anführungszeichen."
+        example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
+  4:
+    start_code: "name is ask Wie heisst du?\nif name is Hedy print 'Cool!' else print 'Bäh'"
+    intro_text: "`ask` und `print` funktionieren genau wie in Stufen 3. In Stufe 4 kommt der `if` Befehl dazu!"
+    commands:
+      -
+        name: "print"
+        explanation: "Genaue Ausgabe mit Anführungszeichen."
+        example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
+        demo_code: "print 'Hallo. Willkommen bei Hedy.'"
+      -
+        name: "ask"
+        explanation: "Frage etwas mit `ask`. Achtung! `print` braucht jetzt Anführungszeichen."
+        example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
+      -
+        name: "if"
+        explanation: "Treffe eine Auswahl mit `if` und `else`"
+        example: "Beispiel: if farbe is green print 'Hübsch!' else print 'Bäh'"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is green print 'Hübsch!' else print 'Bäh'"
+  5:
+    start_code: "repeat 3 times print 'Hedy macht Spaß!'"
+    intro_text: "`ask`, `print` und `if` funktionieren genau wie in Stufe 4. Aber in Stufe 5 kommt der `repeat` Befehl dazu. `repeat` kann verwendet werden um eine Befehlszeile mehrmals auszuführen."
+    commands:
+      -
+        name: "print"
+        explanation: "Genaue Ausgabe mit Anführungszeichen."
+        example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
+        demo_code: "print 'Hallo. Willkommen bei Hedy.'"
+      -
+        name: "ask"
+        explanation: "Frage etwas mit `ask`. Achtung! `print` braucht jetzt Anführungszeichen."
+        example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
+      -
+        name: "if"
+        explanation: "Treffe eine Auswahl mit `if` und `else`"
+        example: "Beispiel: if farbe is green print 'Hübsch!' else print 'Bäh'"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is green print 'Hübsch!' else print 'Bäh'"
+      -
+        name: "repeat"
+        explanation: "`repeat` und `if` kombiniert"
+        example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
+  6:
+    start_code: "print '5 mal 5 ist ' 5 * 5"
+    intro_text: "`ask`, `print`, `if` und `repeat` sind immer noch gleich wie in Stufe 4 und 5. In Stufe 6 kommt etwas neues hinzu... Du kannst jetzt rechnen."
+    commands:
+      -
+        name: "print"
+        explanation: "Genaue Ausgabe mit Anführungszeichen."
+        example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
+        demo_code: "print '5 mal 5 ist ' 5 * 5"
+      -
+        name: "`ask` und `if` mit Berechnungen"
+        explanation: "Frage nach einer Rechenaufgabe. Achtung: `print` benötigt immer noch Anführungszeichen."
+        example: "Beispiel: antwort is ask Was ist 10 plus 10?"
+        demo_code: "antwort is ask Was ist 10 plus 10?\nif answer is 20 print 'Ja!' else print 'Ups'"
+      -
+        name: "repeat"
+        explanation: "`repeat` und `if` kombiniert"
+        example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
+  7:
+    start_code: "repeat 5 times\n    print 'Hello Leute'\n    print 'Das wird 5 mal ausgegeben'"
+    intro_text: "`ask` und `print` funktionieren immer noch wie du sie kennst. Aber `if` und `repeat` haben sich verändert! Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst die Befehle einrücken. Das heisst, du musst die Befehlszeile mit vier Leerzeichen beginnen. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest. Wenn du einen `repeat`- und `if`-Befehl kombinierst, musst du jeden Block einrücken. Schau dir die Beispielprogramme an, um es genauer zu sehen!"
+    commands:
+      -
+        name: "print"
+        explanation: "Gib etwas aus. Denke daran, Anführungszeichen für eine wörtliche Ausgabe zu verwenden."
+        example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
+        demo_code: "print '5 mal 5 ist ' 5 * 5"
+      -
+        name: "`if` mit mehreren Zeilen"
+        explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+        explanation: "Frage nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben."
+        example: "Beispiel: antwort is ask Was ist 5 plus 5?"
+        demo_code: "antwort is ask Was ist 5 plus 5?\nif antwort is 10\n    print 'Gut gemacht!'\n    print 'Die Antwort ist wirklich ' antwort\nelse\n    print 'Ups!'\n    print 'Die Antwort is 10'"
+      -
+        name: "`if` und `repeat` kombiniert"
+        explanation: "`if` und `repeat` kombiniert"
+        example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
+        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is grün\n    repeat 3 times\n        print 'Hübsch!'\nelse\n    repeat 5 times\n        print 'Bäh'"
+
