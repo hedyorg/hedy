@@ -125,7 +125,8 @@ def parse():
             else:
                 error_template = hedy_errors[E.error_code]
                 # Localize the names of characters
-                E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                if 'character_found' in E.arguments:
+                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
                 response["Error"] = error_template.format(**E.arguments)
         except Exception as E:
             print(f"error transpiling {code}")
