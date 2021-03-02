@@ -682,6 +682,10 @@ def translate_characters(s):
         return 'single quotes'
     elif s == '"':
         return 'double quotes'
+    elif s == '/':
+        return 'slash'
+    elif s == '-':
+        return 'dash'
     elif s >= 'a' and s <= 'z' or s >= 'A' and s <= 'Z':
         return s
     else:
