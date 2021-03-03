@@ -4,8 +4,11 @@ import sys
 import io
 from contextlib import contextmanager
 
-#this code let's us capture std out to also execute the generated Python
+#
+# This code let's us capture std out to also execute the generated Python
 # and check its output
+#
+
 @contextmanager
 def captured_output():
     new_out, new_err = io.StringIO(), io.StringIO()
@@ -22,54 +25,55 @@ def run_code(code):
     return out.getvalue().strip()
 
 #
-#
+# Tests for helper functions
 #
 
 class TestsHelperFunctions(unittest.TestCase):
     
     def test_closest_command(self):
         invalid_command = ""
-        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
-        self.assertEqual(closest, '')
+
+        closest = hedy.closest_command(invalid_command, ['ask', 'print', 'echo'])
+        self.assertEqual(closest, 'ask')
 
         invalid_command = "print"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "print")
 
         invalid_command = "ask"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "ask")
 
         invalid_command = "echo"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "echo")
 
         invalid_command = "printechoask"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "print")
 
         invalid_command = "printaskecho"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "print")
 
         invalid_command = "echoprintask"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "echo")
 
         invalid_command = "echoprint ask"
-        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['print', 'ask', 'echo'])
         self.assertEqual(closest, "echo")
 
         invalid_command = "echo print ask"
-        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['ask', 'print', 'echo'])
         self.assertEqual(closest, "echo")
 
         invalid_command = "hello ask echoprint"
-        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['ask', 'print', 'echo'])
         self.assertEqual(closest, "ask")
 
         invalid_command = "hello Ask echo0 print"
-        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        closest = hedy.closest_command(invalid_command, ['ask', 'print', 'echo'])
         self.assertEqual(closest, "echo")
 
 #
