@@ -6,7 +6,10 @@ import sys
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
-# commands are used to suggest the right command when kids make a mistake
+#
+# Commands per Hedy level which are used to suggest the closest command when kids make a mistake
+#
+
 commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       2: ['print', 'ask', 'echo', 'is'],
                       3: ['print', 'ask', 'is'],
@@ -15,8 +18,35 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       6: ['print', 'ask', 'is', 'if', 'repeat']
                       }
 
+# 
+#  closest_command() searches for known commands in an invalid command.
+#
+#  It will return the known command which is closest positioned at the beginning.
+#  It will return '' if the invalid command does not contain any known command. 
+#
 
-def closest_command(command, commands):
+def closest_command(invalid_command, known_commands):
+    
+    # First search for 100% match of known commands
+    min_position = len(invalid_command)
+    min_command = ''
+    for known_command in known_commands:
+        position = invalid_command.find(known_command)
+        if position != -1 and position < min_position:
+            min_position = position
+            min_command = known_command
+            
+    # If not found, search for partial match of know commands
+    if min_command == '':
+        min_command = closest_command_with_min_distance(invalid_command, known_commands)
+    
+    return min_command
+
+#
+#  closest_command_with_min_distance()
+#
+
+def closest_command_with_min_distance(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
     min = 1000
     min_command = ''

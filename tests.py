@@ -21,6 +21,60 @@ def run_code(code):
         exec(code)
     return out.getvalue().strip()
 
+#
+#
+#
+
+class TestsHelperFunctions(unittest.TestCase):
+    
+    def test_closest_command(self):
+        invalid_command = ""
+        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        self.assertEqual(closest, '')
+
+        invalid_command = "print"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "print")
+
+        invalid_command = "ask"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "ask")
+
+        invalid_command = "echo"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "echo")
+
+        invalid_command = "printechoask"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "print")
+
+        invalid_command = "printaskecho"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "print")
+
+        invalid_command = "echoprintask"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "echo")
+
+        invalid_command = "echoprint ask"
+        closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+        self.assertEqual(closest, "echo")
+
+        invalid_command = "echo print ask"
+        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        self.assertEqual(closest, "echo")
+
+        invalid_command = "hello ask echoprint"
+        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        self.assertEqual(closest, "ask")
+
+        invalid_command = "hello Ask echo0 print"
+        closest = closest_command(invalid_command, ['ask', 'print', 'echo'])
+        self.assertEqual(closest, "echo")
+
+#
+#
+#
 
 class TestsForMultipleLevels(unittest.TestCase):
     max_level = 7
@@ -75,13 +129,10 @@ class TestsLevel1(unittest.TestCase):
             result = hedy.transpile("print", 1)
         self.assertEqual(str(context.exception), 'Incomplete')
 
-
-
     def test_transpile_incomplete_with_multiple_lines(self):
         with self.assertRaises(Exception) as context:
             result = hedy.transpile("print hallo allemaal\nprint", 1)
         self.assertEqual(str(context.exception), 'Incomplete')
-
 
     def test_transpile_other(self):
         with self.assertRaises(Exception) as context:
