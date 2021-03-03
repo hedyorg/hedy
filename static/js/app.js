@@ -109,6 +109,7 @@ function runit(level, lang, cb) {
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
+        console.log(err)
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });

@@ -433,6 +433,28 @@ if option is Scissors
         self.assertEqual('Parse', str(context.exception))
 
 
+    def test_single_quote_in_assign_should_not_break(self):
+        program = """message is 'Hello welcome to Hedy.'"""
+
+        result = hedy.transpile(program, 4)
+        print(result)
+        self.assertEqual("", result)
+
+    # def test_single_quote_in_ask_should_not_break(self):
+    #     program = """message is 'Hello welcome to Hedy.'"""
+    #
+    #     result = hedy.transpile(program, 4)
+    #     print(result)
+    #     self.assertEqual("", result)
+
+    def test_bad_input_should_be_caught(self):
+        program = """naam is ask hoe heet jij?
+ifnaam is Hedy print 'leuk' else print 'minder leuk!'"""
+
+        result = hedy.transpile(program, 4)
+        print(result)
+        self.assertEqual("", result)
+
 
 
 class TestsLevel5(unittest.TestCase):
