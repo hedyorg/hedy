@@ -14,11 +14,11 @@ page_title: Bienvenue à Hedy!
 
 Apprendre à programmer peut être difficile. Non pas que programmer est difficile en soit ! Mais il y a
 beaucoup de règles à mémoriser, comme quand on apprend le français. De la même manière que quand on apprend à
-lire ou à écrire, tu auras besoin de beaucoup d’entrainement pour apprendre à programmer.
+lire ou à écrire, tu auras besoin de beaucoup d’entraînement pour apprendre à programmer.
 
 Aujourd'hui, tu peux lire ce texte facilement. Mais te souviens-tu de quand tu as appris à lire ? Au début ça
 te prenait un peu de temps de lire syllabe par syllabe ! C’est vrai pour la programmation aussi : ça peut être
-difficile au début, mais ça devient de plus en plus facile!
+difficile au début, mais ça devient de plus en plus facile !
 
 Le bon côté de Hedy, c’est qu’il est *progressif*. Ça veut dire que tu ne dois pas apprendre toutes les règles
 en même temps. Les premiers niveaux n’ont que quelques règles, ce qui te permet de t’y habituer tranquillement.
