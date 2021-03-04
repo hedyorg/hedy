@@ -55,6 +55,10 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   # Actual assignment
   arguments_dict.update(**attr.asdict(assignment))
 
+  # Add markdowns to docs
+  for doc in arguments_dict ['docs']:
+    doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
+
   return render_template("code-page.html", **arguments_dict)
 
 
