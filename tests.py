@@ -130,7 +130,7 @@ class TestsLevel1(unittest.TestCase):
 
 
     def test_transpile_empty(self):
-        with self.assertRaises(hedy.HedyException) as context:
+        with self.assertRaises(Exception) as context:
             result = hedy.transpile("", 1)
 
     def test_transpile_ask(self):
@@ -420,6 +420,19 @@ if selected in items:
             result = hedy.transpile(program, 4)
         self.assertEqual('Invalid', str(context.exception))
         self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+
+
+    def test_parser_errors_should_be_caught_and_beautified(self):
+        program = """option is ask Rock Paper or Scissors?
+print 'Player 2 ' option
+if option is Scissors
+    print 'Its a tie!'"""
+
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile(program, 4)
+        self.assertEqual('Parse', str(context.exception))
+
+
 
 
 class TestsLevel5(unittest.TestCase):
