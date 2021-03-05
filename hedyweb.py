@@ -60,37 +60,3 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
     doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
   return render_template("code-page.html", **arguments_dict)
-
-
-def render_assignment_docs(doc_type, course, level_number, assignment_number, menu, translations):
-  assignment = course.get_assignment(level_number, assignment_number)
-  if not assignment:
-    abort(404)
-
-  arguments_dict = {}
-
-  # Meta stuff
-  arguments_dict['course'] = course
-  arguments_dict['level_nr'] = str(level_number)
-  arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
-  arguments_dict['pagetitle'] = f'Level {level_number} - Hedy'
-  arguments_dict['lang'] = course.language
-  arguments_dict['selected_page'] = doc_type
-  arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
-  arguments_dict['auth'] = translations.data [course.language] ['Auth']
-
-  # Translations
-  arguments_dict.update(**translations.get_translations(course.language, 'ui'))
-
-  doc = course.docs.get(int(level_number), doc_type)
-  if not doc:
-    # Redirect to code page. Nasty 'import' here to work around
-    # cyclic imports.
-    import app
-    return redirect(app.hedy_link(level_number, assignment_number))
-
-  arguments_dict['mkd'] = doc.markdown
-  arguments_dict['menu'] = menu
-  arguments_dict['page_title'] = f'Level {level_number}.{assignment_number} – ' + doc.front_matter.get('title', '') + ' – Hedy'
-
-  return render_template("per-level-text.html", **arguments_dict)
