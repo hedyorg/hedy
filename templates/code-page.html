@@ -36,6 +36,7 @@ var toggleDocs = function () {
 }
 </script>
 
+{% if docs|length %}
 <div class="expandable-docs w-full h-16 flex flex-col bg-green-400 cursor-pointer" onclick="toggleDocs ()">
   <p class="self-center mt-5 text-white font-bold">&#9660;&nbsp;&nbsp;{{show_explanation}}&nbsp;&nbsp;&#9660;</p>
 </div>
@@ -50,6 +51,7 @@ var toggleDocs = function () {
 <div class="expandable-docs w-full h-16 flex flex-col bg-gray-600 cursor-pointer hidden" onclick="toggleDocs ()">
   <p class="self-center mt-5 text-white font-bold">&#9650;&nbsp;&nbsp;{{hide_explanation}}&nbsp;&nbsp;&#9650;</p>
 </div>
+{% endif %}
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
   <div>
