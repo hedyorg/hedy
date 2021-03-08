@@ -238,23 +238,6 @@ def index(level, step):
         version=version(),
         loaded_program=loaded_program)
 
-@app.route('/hedy/<level>/<step>/<docspage>', methods=['GET'])
-def docs(level, step, docspage):
-    session_id()
-    g.level = level = int(level)
-    g.lang = lang = requested_lang()
-    g.prefix = '/hedy'
-
-    return hedyweb.render_assignment_docs(
-        doc_type=docspage,
-        course=HEDY_COURSE[lang],
-        level_number=level,
-        # We don't have assignments in this course! (yet)
-        assignment_number=step,
-        menu=render_main_menu('hedy'),
-        translations=TRANSLATIONS)
-
-
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/onlinemasters/<level>/<step>', methods=['GET'])

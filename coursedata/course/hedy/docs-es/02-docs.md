@@ -23,7 +23,7 @@ Así es como lo haces:
 * `print opciones at random`
 
 Puedes crear tu propio dado? Por ejemplo el dado de la imagen?
-![Un dado del juego "Gusanitos" con 1 hasta 5 y el gusanito](https://cdn.anyfinder.eu/assets/5b64147d2864c61f08bdd4fb85c70d4d26e2b8d7774dc20edabeb13c9391c327)
+![Un dado del juego "Gusanitos" con 1 hasta 5 y el gusanito](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
 # ¿Quién lava los platos?
 

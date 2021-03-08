@@ -29,6 +29,34 @@
   {% endif %}
 </div>
 
+<script>
+var toggleDocs = function () {
+   $ ('.expandable-docs').toggleClass ('hidden');
+   $ ('.expandable-docs-text').slideToggle (400);
+}
+</script>
+
+{% if docs|length %}
+<div class="expandable-docs w-full h-16 flex flex-col bg-blue-500 cursor-pointer" onclick="toggleDocs ()">
+  <p class="self-center mt-5 text-white font-bold">&#9660;&nbsp;&nbsp;{{show_explanation}}&nbsp;&nbsp;&#9660;</p>
+</div>
+<div class="expandable-docs w-full h-16 flex flex-col bg-gray-600 cursor-pointer hidden" onclick="toggleDocs ()">
+  <p class="self-center mt-5 text-white font-bold">&#9660;&nbsp;&nbsp;{{hide_explanation}}&nbsp;&nbsp;&#9660;</p>
+</div>
+<div class="expandable-docs-text w-full flex flex-col p-3 border-2 hidden">
+  <!-- Show videos first -->
+  {% for doc in docs %}
+    {% if doc.slug == "videos" %} {{ doc.markdown|commonmark }} {% endif %}
+  {% endfor %}
+  {% for doc in docs %}
+    {% if doc.slug != "videos" %} {{ doc.markdown|commonmark }} {% endif %}
+  {% endfor %}
+</div>
+<div class="expandable-docs w-full h-16 flex flex-col bg-gray-600 cursor-pointer hidden" onclick="toggleDocs ()">
+  <p class="self-center mt-5 text-white font-bold">&#9650;&nbsp;&nbsp;{{hide_explanation}}&nbsp;&nbsp;&#9650;</p>
+</div>
+{% endif %}
+
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
   <div>
     <div class="w-full h-64 flex flex-col">
