@@ -1,10 +1,20 @@
 from lark import Lark
-from lark.exceptions import VisitError, LarkError
+from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
 import sys
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
+
+# commands are used to suggest the right command when kids make a mistake
+commands_per_level = {1: ['print', 'ask', 'echo'] ,
+                      2: ['print', 'ask', 'echo', 'is'],
+                      3: ['print', 'ask', 'is'],
+                      4: ['print', 'ask', 'is', 'if'],
+                      5: ['print', 'ask', 'is', 'if', 'repeat'],
+                      6: ['print', 'ask', 'is', 'if', 'repeat']
+                      }
+
 
 def closest_command(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
@@ -157,6 +167,8 @@ class Filter(Transformer):
     def list_access_var(self, args):
         return all_arguments_true(args)
     def ifs(self, args):
+        return all_arguments_true(args)
+    def valid_command(self, args):
         return all_arguments_true(args)
     def ifelse(self, args):
         return all_arguments_true(args)
@@ -648,7 +660,60 @@ def repair(input_string):
     #the only repair we can do now is remove leading spaces, more can be added!
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
 
+def translate_characters(s):
+# this method is used to make it more clear to kids what is meant in error messages
+# for example ' ' is hard to read, space is easier
+# this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
+    if s == ' ':
+        return 'space'
+    elif s == ',':
+        return 'comma'
+    elif s == '?':
+        return 'question mark'
+    elif s == '\\n':
+        return 'newline'
+    elif s == '.':
+        return 'period'
+    elif s == '!':
+        return 'exclamation mark'
+    elif s == '*':
+        return 'star'
+    elif s == "'":
+        return 'single quotes'
+    elif s == '"':
+        return 'double quotes'
+    elif s == '/':
+        return 'slash'
+    elif s == '-':
+        return 'dash'
+    elif s >= 'a' and s <= 'z' or s >= 'A' and s <= 'Z':
+        return s
+    else:
+        return s
 
+def filter_and_translate_terminals(list):
+    # in giving error messages, it does not make sense to include
+    # ANONs, and some things like EOL need kid friendly translations
+    new_terminals = []
+    for terminal in list:
+        if terminal[:4] == "ANON":
+            continue
+
+        if terminal == "EOL":
+            new_terminals.append("Newline")
+            break
+
+        #not translated or filtered out? simply add as is:
+        new_terminals.append(terminal)
+
+    return new_terminals
+
+def beautify_parse_error(error_message):
+
+    character_found = error_message.split("'")[1]
+    character_found = translate_characters(character_found)
+
+    return character_found
 
 def transpile_inner(input_string, level):
     if level <= 6:
@@ -662,8 +727,16 @@ def transpile_inner(input_string, level):
             lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
         except Exception as e:
-            # TODO: if all else fails, here we could translate Lark error messages into more sensible texts!
-            raise HedyException('Parse', level=level, parse_error=e.args[0]) from e
+            try:
+                location = e.line, e.column
+                characters_expected = str(e.allowed)
+                character_found  = beautify_parse_error(e.args[0])
+                # print(e.args[0])
+                # print(location, character_found, characters_expected)
+                raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
+            except UnexpectedEOF:
+                # this one can't be beautified (for now), so give up :)
+                raise e
 
         is_valid = IsValid().transform(program_root)
         if not is_valid[0]:
@@ -677,7 +750,7 @@ def transpile_inner(input_string, level):
                 raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
             else:
                 invalid_command = is_valid[1]
-                closest = closest_command(invalid_command, ['print', 'ask', 'echo'])
+                closest = closest_command(invalid_command, commands_per_level[level])
                 raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
         is_complete = IsComplete().transform(program_root)

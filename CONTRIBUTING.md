@@ -5,9 +5,9 @@ Contributing to Hedy
 Help Hedy with translations
 ------------
 
-Hedy is now available in Dutch, French, English and Spanish, but we'd love to support more languages! 
+Hedy is now available in Dutch, French, English, Brazilian Portugese and Spanish, but we'd love to support more languages! 
 
-If you would like to add a translation, there a three places where files that need to be translated:
+If you would like to add a new translation, there a three places where files that need to be translated:
 
 1) The folder [level-defaults](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/) has a file for each language. That file controls what the landing page for each levels looks like. It is probably easiest to copy the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/en.yaml), rename it and translate that. Tip: example variables can be translated too, that is probably helpful for learners!
 
@@ -24,13 +24,14 @@ Two more small things to do!
 2) Now go to [app.py](https://github.com/Felienne/hedy/blob/master/app.py) and add your language to this list:
 
 ALL_LANGUAGES = {
-    'en': '🇺🇸',
-    'nl': '🇳🇱',
-    'es': '🇪🇸',
-    'fr': '🇫🇷',
+    'en': 'English',
+    'nl': 'Nederlands',
+    'es': 'Español',
+    'fr': 'Français',
+    'pt_br': 'Português',
 }
 
-You can check the status of the several translation efforts [here](/STATUS.md) and see what you can best work on. Would be lovely if you update your own translations there too :)
+In some places, we are missing translations to the existing language. You can find those locations as [issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22translation+needed%22)
 
 
 Run Hedy code on your machine

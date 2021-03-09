@@ -33,6 +33,7 @@ ALL_LANGUAGES = {
     'es': 'Español',
     'fr': 'Français',
     'pt_br': 'Português',
+    'de': 'Deutsch',
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -83,7 +84,6 @@ logger = jsonbin.JsonBinLogger.from_env_vars()
 if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
-
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
@@ -96,6 +96,10 @@ def parse():
 
     code = body ['code']
     level = int(body ['level'])
+    # Language should come principally from the request body,
+    # but we'll fall back to browser default if it's missing for whatever
+    # reason.
+    lang = body.get('lang', requested_lang())
 
     # For debugging
     print(f"got code {code}")
@@ -109,7 +113,7 @@ def parse():
     # is so, parse
     else:
         try:
-            hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
+            hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\n" + result
         except hedy.HedyException as E:
@@ -119,6 +123,13 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Parse":
+                error_template = hedy_errors[E.error_code]
+                # Localize the names of characters
+                # Localize the names of characters
+                if 'character_found' in E.arguments:
+                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                response["Error"] = error_template.format(**E.arguments)
             else:
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
@@ -130,7 +141,7 @@ def parse():
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
-        'lang': requested_lang(),
+        'lang': lang,
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
@@ -226,23 +237,6 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         loaded_program=loaded_program)
-
-@app.route('/hedy/<level>/<step>/<docspage>', methods=['GET'])
-def docs(level, step, docspage):
-    session_id()
-    g.level = level = int(level)
-    g.lang = lang = requested_lang()
-    g.prefix = '/hedy'
-
-    return hedyweb.render_assignment_docs(
-        doc_type=docspage,
-        course=HEDY_COURSE[lang],
-        level_number=level,
-        # We don't have assignments in this course! (yet)
-        assignment_number=step,
-        menu=render_main_menu('hedy'),
-        translations=TRANSLATIONS)
-
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
