@@ -439,23 +439,27 @@ if option is Scissors
         self.assertEqual("""import random
 message = '\\'Hello welcome to Hedy.\\''""", result)
 
-    # def test_single_quote_in_ask_should_not_break(self):
+    def test_single_quote_in_ask_should_not_break(self):
     # Maybe this test can be skipped if we finally
-    # bit the bullet and allow ask (or mandate ask) to also use ''
-    #     program = """naam is ask 'Hello welcome to Hedy.'"""
-    #
-    #     result = hedy.transpile(program, 4)
-    #     print(result)
-    #     self.assertEqual("", result)
+    # bite the bullet and allow ask (or mandate ask) to also use ''
+        program = """naam is ask 'Hello welcome to Hedy.'"""
 
-# the root cause of this program also the issue qith quotes
-#     def test_bad_input_should_be_caught(self):
-#         program = """naam is ask hoe heet jij?
-# ifnaam is Hedy print 'leuk' else print 'minder leuk!'"""
-#
-#         result = hedy.transpile(program, 4)
-#         print(result)
-#         self.assertEqual("", result)
+        result = hedy.transpile(program, 4)
+        print(result)
+        self.assertEqual("""import random
+naam = input('\\'Hello welcome to Hedy.\\'')""", result)
+
+    # while this looks STRANGE it is in essence the same sting issue
+    # at least we solve it with the same fix of escaping quotes
+    def test_bad_input_should_be_caught(self):
+        program = """naam is ask hoe heet jij?
+ifnaam is Hedy print 'leuk' else print 'minder leuk!'"""
+
+        result = hedy.transpile(program, 4)
+        print(result)
+        self.assertEqual("""import random
+naam = input('hoe heet jij?')
+ifnaam = 'Hedy print \\'leuk\\' else print \\'minder leuk!\\''""", result)
 
 
 
