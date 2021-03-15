@@ -1,3 +1,8 @@
+import sys
+if (sys.version_info.major < 3 or sys.version_info.minor < 6):
+    print ('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join ([str (sys.version_info.major), str (sys.version_info.minor), str (sys.version_info.micro)]))
+    quit ()
+
 # coding=utf-8
 import datetime
 import collections
@@ -33,6 +38,8 @@ ALL_LANGUAGES = {
     'es': 'Español',
     'fr': 'Français',
     'pt_br': 'Português',
+    'de': 'Deutsch',
+    'it': 'Italiano'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -236,23 +243,6 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         loaded_program=loaded_program)
-
-@app.route('/hedy/<level>/<step>/<docspage>', methods=['GET'])
-def docs(level, step, docspage):
-    session_id()
-    g.level = level = int(level)
-    g.lang = lang = requested_lang()
-    g.prefix = '/hedy'
-
-    return hedyweb.render_assignment_docs(
-        doc_type=docspage,
-        course=HEDY_COURSE[lang],
-        level_number=level,
-        # We don't have assignments in this course! (yet)
-        assignment_number=step,
-        menu=render_main_menu('hedy'),
-        translations=TRANSLATIONS)
-
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
