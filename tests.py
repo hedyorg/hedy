@@ -675,7 +675,7 @@ print(str(int(nummer) * int(nummertwee)))""", result)
 
 
     def test_transpile_ask(self):
-        result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 7)
+        result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", 7)
         self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
 
     def test_if_with_indent(self):

@@ -827,7 +827,8 @@ def transpile_inner(input_string, level):
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
     elif level == 7:
-        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
+        parser = Lark(create_grammar(level), parser='earley', lexer='standard')
+        # parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
         abstract_syntaxtree = ExtractAST().transform(program_root)
@@ -839,6 +840,7 @@ def transpile_inner(input_string, level):
             return python + result
         except VisitError as E:
             raise E.orig_exc
+
     elif level >= 8 and level <= 13:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True)
         python = 'import random\n'
