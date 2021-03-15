@@ -70,7 +70,7 @@ logging.basicConfig(
 
 app = Flask(__name__, static_url_path='')
 
-if os.getenv ('REDIRECT_AB_TESTING') and os.getenv ('REDIRECT_AB_TESTING') !== os.getenv ('HEROKU_APP_NAME'):
+if os.getenv ('REDIRECT_AB_TESTING') and os.getenv ('REDIRECT_AB_TESTING') != os.getenv ('HEROKU_APP_NAME'):
     @app.before_request
     def before_request():
         url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('REDIRECT_AB_TESTING'))
