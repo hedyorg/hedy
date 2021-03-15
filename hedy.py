@@ -290,6 +290,13 @@ class IsComplete(Filter):
 
 
 class ConvertToPython_1(Transformer):
+
+    def process_single_quote(self, value):
+        # defines what happens if a kids uses ' in a string
+        value = value.replace("'", "\\'")
+        return value
+
+
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
@@ -334,12 +341,15 @@ class ConvertToPython_2(ConvertToPython_1):
         return 'print(' + '+'.join(all_arguments_converted) + ')'
     def ask(self, args):
         var = args[0]
-        all_parameters = ["'" + a + "'" for a in args[1:]]
+        all_parameters = ["'" + self.process_single_quote(a) + "'" for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
     def assign(self, args):
         parameter = args[0]
         value = args[1]
+        #if the assigned value contains single quotes, escape them
+        value = self.process_single_quote(value)
         return parameter + " = '" + value + "'"
+
     def assign_list(self, args):
         parameter = args[0]
         values = ["'" + a + "'" for a in args[1:]]
