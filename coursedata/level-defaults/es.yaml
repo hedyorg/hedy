@@ -17,7 +17,7 @@
         name: "echo"
         explanation: "Repiter algo usando echo."
         example: "Ejemplo: echo entonces su color favorito es..."
-        demo_code: "ask ¿Cuál es tu color favorito?\necho entonces su color favorito es..."
+        demo_code: "`ask` ¿Cuál es tu color favorito?\necho entonces su color favorito es..."
   2: 
     intro_text: "Print aún funcionan como en el nivel 1, pero ¡Cuidado! Ask ha cambiado y ahora necesita un nombre. Echo no necesitas usarlo por ahora. Ahora también puede usar estos nuevos comandos:"
     start_code: "print hola mundo!"
@@ -29,8 +29,8 @@
         demo_code: "nombre is Hedy\nprint Bienvenido nombre"
       - 
         name: "ask"
-        explanation: "Preguntar algo con ask. ¡Cuidado! Ask necesita un nombre ahora."
-        example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
+        explanation: "Preguntar algo con `ask`. ¡Cuidado! Ask necesita un nombre ahora."
+        example: "Ejemplo: color is `ask` ¿Cuál es tu color favorito?"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nprint color es tú favorito"
       - 
         name: "choose_random"
@@ -53,12 +53,12 @@
         demo_code: "nombre is Hedy\nprint 'Mi nombre es ' nombre"
       - 
         name: "ask"
-        explanation: "Preguntar algo con ask. Cuidado! Mostrar ahora necesita las comillas simples."
+        explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
   4: 
     start_code: "nombre is ask ¿Cómo te llamas?\nif nombre is Hedy print 'divertido' else print 'menos divertido!'"
-    intro_text: "ask y print funcionan como en el nivel 3, pero ¡En el nivel 4 hay algo nuevo: if!"
+    intro_text: "`ask` y `print` funcionan como en el nivel 3, pero ¡En el nivel 4 hay algo nuevo: if!"
     commands: 
       - 
         name: "print"
@@ -67,17 +67,17 @@
         demo_code: "print 'Hola bienvenido a Hedy.'"
       - 
         name: "ask"
-        explanation: "Preguntar algo con ask. ¡Recuerda! En print puedes seguir usando comillas simples."
+        explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
       - 
         name: "if"
-        explanation: "Tomar una decisión"
+        explanation: "Tomar una decisión con `if`"
         example: "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde print 'bonito!' else print 'no es tan bonito'"
   5: 
     start_code: "repeat 3 times print 'Hedy es divertido!'"
-    intro_text: "ask, print y if funcionan como en el nivel 4. Pero en el nivel 5 hay algo nuevo: repeat. Con repeat puedes repetir códigos varias veces."
+    intro_text: "`ask`, `print` y `if` funcionan como en el nivel 4. Pero en el nivel 5 hay algo nuevo: repeat. Con repeat puedes repetir códigos varias veces."
     commands: 
       - 
         name: "print"
@@ -86,17 +86,17 @@
         demo_code: "print 'Hola bienvenido a Hedy.'"
       - 
         name: "ask"
-        explanation: "Preguntar algo con ask."
+        explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
       - 
         name: "if"
-        explanation: "Tomar una decisión con if."
+        explanation: "Tomar una decisión con `if`."
         example: "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde print 'bonito!' else print 'no es tan bonito'"
       - 
         name: "repeat"
-        explanation: "Repetir algo con repeat."
+        explanation: "Repetir algo con `repeat`."
         example: "Ejemplo: if color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
   6: 
@@ -110,13 +110,13 @@
         demo_code: "print '5 veces 5 es ' 5 * 5"
       - 
         name: "ask e if con operaciones"
-        explanation: "Pregunta por una operación y compárala con if. ¡Recuerda! En print puedes seguir usando comillas simples"
+        explanation: "Pregunta por una operación y compárala con if."
         explanation: "Ask for a calculation and compare with if. Beware: Print still needs quotation marks."
         example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
         demo_code: "resultado is ask ¿Cuánto es 10 más 10?\nif resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'"
       - 
         name: "repeat"
-        explanation: "Repeat e if combinados"
+        explanation: "`repeat` e `if` combinados"
         example: "Ejemplo: if color is verde repeat 3 times print '¡Qué bonito!' else repeat 5 times print 'A mi me gusta otro'"
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde repeat 3 times print '¡Qué bonito!' else repeat 5 times print 'A mi me gusta otro'"
   7: 
@@ -125,16 +125,16 @@
     commands: 
       - 
         name: "print"
-        explanation: "Muestra algo (print). Recuerda usar las comillas simples para mostrar el texto literal."
+        explanation: "Muestra algo (`print`). Recuerda usar las comillas simples para mostrar el texto literal."
         example: "Ejemplo: print '5 veces 5 es ' 5 * 5"
         demo_code: "print '5 veces 5 es ' 5 * 5"
       - 
-        name: "if con varias líneas"
+        name: "`if` con varias líneas"
         explanation: "Pregunta por la respuesta de una operación y comprueba el resultado. Ahora podemos mostrar 2 líneas"
         example: "Ejemplo: resultado is ask ¿Cuánto es 5 más 5?"
         demo_code: "resultado is ask ¿Cuánto es 5 más 5?\nif resultado is 10\n    print 'Muy bien!'\n    print 'La respuesta claro que es ' resultado\nelse\n    print 'Oops!'\n    print 'La respuesta es 10'"
       - 
-        name: "if y repeat combinados"
+        name: "`if` y `repeat` combinados"
         explanation: "if y repeat combinados"
         example: "Ejemplo: if color is verde repeat 3 times print '¡Qué bonito!' else repeat 5 times print 'A mi me gusta otro'"
         demo_code: "color is ask ¿Cuá es tu color favorito?\nif color is verde\n    repeat 3 times\n        print '¡Qué bonito!'\nelse\n    repeat 5 times\n        print 'A mi me gusta otro'"

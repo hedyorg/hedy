@@ -39,7 +39,7 @@
     start_code: "print 'Bonjour le monde'"
     intro_text: >
       Au niveau 3, tu dois utiliser des guillemets autour des mots que tu veux afficher.
-      Echo est inutile, tu peux désormais afficher des noms de ton choix avec print!
+      Echo est inutile, tu peux désormais afficher des noms de ton choix avec `print`!
     commands:
       - name: "print"
         explanation: "Affiche exactement ce qui est entre les guilllemets"
@@ -50,7 +50,7 @@
         example: "Exemple: nom is Hedy."
         demo_code: nom is Hedy\nprint 'mon nom is ' nom
       - name: "ask"
-        explanation: "Demande quelque chose avec ask. Attention: Print a toujours besoin de guillemets!"
+        explanation: "Demande quelque chose avec `ask`."
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
   4:
@@ -65,18 +65,17 @@
         demo_code: "print 'Bonjour et bienvenue à Hedy.'"
       - name: "ask"
         explanation: >
-          Demande quelque chose avec ask. Attention!
-          Attention: Print a toujours besoin de guillemets!
+          Demande quelque chose avec `ask`.
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
       - name: "if"
-        explanation: "Fait un choix"
+        explanation: "Fait un choix `if`"
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert print 'joli!' else print 'bof'"
   5:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
     intro_text: >
-      ask, print et if fonctionnent exactement comme au niveau 4.
+      `ask`, `print` et `if` fonctionnent exactement comme au niveau 4.
       Le niveau 5 ajoute la commande `repeat`.
       Repeat permet d’exécuter une ligne de commande plusieurs fois.
     commands:
@@ -85,7 +84,7 @@
         example: "Exemple: print 'Bonjour et bienvenue à Hedy.'"
         demo_code: "print 'Bonjour et bienvenue à Hedy.'"
       - name: "ask"
-        explanation: "Demande quelque chose avec ask. Attention! Tu n’as pas besoin de guillemets."
+        explanation: "Demande quelque chose avec `ask`."
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
       - name: "if"
@@ -93,13 +92,13 @@
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert print 'joli!' else print 'bof'"
       - name: "repeat"
-        explanation: "Repeat et if combiné"
+        explanation: "`repeat` et `if` combiné"
         example: "Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
   6:
     start_code: "print '5 fois 5 font ' 5 * 5"
     intro_text: >
-      ask, print, if et repeat sont toujours comme aux niveaux 4 et 5.
+      `ask`, `print`, `if` et repeat sont toujours comme aux niveaux 4 et 5.
       Le niveau 6 te permet de faire quelque chose de plus: tu peux désormais calculer.
     commands:
       - name: "print"
@@ -108,20 +107,20 @@
         demo_code: "print '5 fois 5 font ' 5 * 5"
       - name: "ask et if avec des calculs"
         explanation: >
-          Pose une question sur un calcul et compare la valeur avec if.
+          Pose une question sur un calcul et compare la valeur avec `if`.
           Attention: Print a toujours besoin de guillemets!
         example: "Exemple: reponse is ask Combien font 10 plus 10?"
         demo_code: "reponse is ask Combien font 10 plus 10?\nif reponse is 20 print 'Oui!' else print 'Oups'"
       - name: "repeat"
-        explanation: "Repeat et if combinés"
+        explanation: "`repeat` et `if` combinés"
         example: >
           Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
   7:
     start_code: "repeat 5 times\n    print 'Bonjour les amis'\n    print 'Ceci sera affiché 5 fois'"
     intro_text: >
-      ask et print fonctionnent comme tu y es habitué.
-      Mais if et repeat ont changé!
+      `ask` et `print` fonctionnent comme tu y es habitué.
+      Mais `if` et `repeat` ont changé!
       Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes.
       Cela veut dire que tu dois mettre 4 espaces au début des lignes.
       Cela fonctionne aussi si tu veux créer un bloc d’une seule lignes.
@@ -141,6 +140,6 @@
         example: "Exemple: reponse is ask Combien font 5 plus 5?"
         demo_code: "reponse is ask Combien font 5 plus 5?\nif reponse is 10\n    print 'Bien joué!'\n    print 'En effet, la réponse est ' reponse\nelse\n    print 'Oups!'\n    print 'Ta réponse est 10'"
       - name: "if et repeat combinés"
-        explanation: "if et repeat combinés"
+        explanation: "`if` et `repeat` combinés"
         example: "Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert\n    repeat 3 times\n        print 'joli!'\nelse\n    repeat 5 times\n        print 'bof'"
