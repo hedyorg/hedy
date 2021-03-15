@@ -5,17 +5,17 @@
     commands:
       -
         name: "print"
-        explanation: "Print something with print."
+        explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print Hello welcome to Hedy!"
       -
         name: "ask"
-        explanation: "Ask something with ask."
+        explanation: "Ask something with `ask`."
         example: "Example: ask What is your favorite color?"
         demo_code: "ask What is your favorite color?"
       -
         name: "echo"
-        explanation: "Repeat something using echo."
+        explanation: "Repeat something using `echo`."
         example: "Example: echo so your favorite color is..."
         demo_code: "ask What is your favorite color?\necho so your favorite color is..."
   2:
@@ -24,22 +24,22 @@
     commands:
       -
         name: "is"
-        explanation: "Give a word a name to use in the program"
+        explanation: "Give a word a name to use in the program using `is`"
         example: "Example: name is Hedy."
         demo_code: "name is Hedy\nprint welcome name"
       -
         name: "ask"
-        explanation: "Ask something with ask. Beware! Ask needs a name now."
+        explanation: "Ask something with `ask`. Beware! You need to give the answer a name with `is`."
         example: "Example: color is ask What is your favorite color?"
         demo_code: "color is ask What is your favorite color?\nprint color is your favorite!"
       -
         name: "choose_random"
-        explanation: "Choose a random word from a group with at and random"
+        explanation: "Choose a random word from a group with `at` and `random`"
         example: "Example: animals is dog, cat, kangaroo."
         demo_code: "animals is dog, cat, kangaroo\nprint animals at random"
   3:
     start_code: "print 'Hello world'"
-    intro_text: "In level 3, you need to use quotation marks around words that you want to print. Echo is no longer needed, you can now print the words with print!"
+    intro_text: "In level 3, you need to use quotation marks around words that you want to `print`."
     commands:
       -
         name: "print"
@@ -48,17 +48,17 @@
         demo_code: "print 'Hello welcome to Hedy.'"
       -
         name: "is"
-        explanation: "Give a name to some text and print without quotation marks"
+        explanation: "Give a name to some text and `print` without quotation marks"
         example: "Example: name is Hedy."
         demo_code: "name is Hedy\nprint 'my name is ' name"
       -
         name: "ask"
-        explanation: "Ask something with ask. Beware! Print now needs quotations marks."
+        explanation: "Ask something with `ask`."
         example: "Example: color is ask What is your favorite color?"
         demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
   4:
     start_code: "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'"
-    intro_text: "ask and print work exactly like they did in Level 3. Level 4 adds the if statement!"
+    intro_text: "`ask` and `print` work exactly like they did in Level 3. Level 4 adds the `if` statement!"
     commands:
       -
         name: "print"
@@ -67,17 +67,17 @@
         demo_code: "print 'Hello welcome to Hedy.'"
       -
         name: "ask"
-        explanation: "Ask something with ask. Beware! Print now needs quotations marks."
+        explanation: "Ask something with `ask`."
         example: "Example: color is ask What is your favorite color?"
         demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
       -
         name: "if"
-        explanation: "Make a choice"
+        explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
   5:
     start_code: "repeat 3 times print 'Hedy is fun!'"
-    intro_text: "ask, print and if work exactly like they did in Level 4. But Level 5 adds the repeat command. Repeat can be used to execute a line of code multiple times."
+    intro_text: "`ask`, `print` and `if` work exactly like they did in Level 4. But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times."
     commands:
       -
         name: "print"
@@ -86,17 +86,17 @@
         demo_code: "print 'Hello welcome to Hedy.'"
       -
         name: "ask"
-        explanation: "Ask something with ask. Beware! Print now needs quotations marks."
+        explanation: "Ask something with `ask`."
         example: "Example: color is ask What is your favorite color?"
         demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
       -
         name: "if"
-        explanation: "Make a choice"
+        explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
       -
         name: "repeat"
-        explanation: "Repeat and if combined"
+        explanation: "`Repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: "color is ask What is your favorite color?\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
   6:
@@ -109,13 +109,13 @@
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
       -
-        name: "ask and if with calculations"
-        explanation: "Ask for a calculation and compare with if. Beware: Print still needs quotation marks."
+        name: "`ask` and `if` with calculations"
+        explanation: "Ask for a calculation and compare with if."
         example: "Example: answer is ask What is 10 plus 10?"
         demo_code: "answer is ask What is 10 plus 10?\nif answer is 20 print 'Yes!' else print 'Oops'"
       -
         name: "repeat"
-        explanation: "Repeat and if combined"
+        explanation: "`repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: "color is ask What is your favorite color?\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
   7:
@@ -128,13 +128,13 @@
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
       -
-        name: "if with multiple lines"
+        name: "`if` with multiple lines"
         explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
         example: "Example: answer is ask What is 5 plus 5?"
         demo_code: "answer is ask What is 5 plus 5?\nif answer is 10\n    print 'Well done!'\n    print 'Indeed, the answer was ' answer\nelse\n    print 'Oops!'\n    print 'The answer is 10'"
       -
         name: "if and repeat combined"
-        explanation: "if and repeat combined"
+        explanation: "`if` and `repeat` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: "color is ask What is your favorite color?\nif color is green\n    repeat 3 times\n        print 'pretty!'\nelse\n    repeat 5 times\n        print 'meh'"
 
