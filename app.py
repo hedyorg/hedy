@@ -70,6 +70,14 @@ logging.basicConfig(
 
 app = Flask(__name__, static_url_path='')
 
+if os.getenv ('REDIRECT_AB_TESTING') and os.getenv ('REDIRECT_AB_TESTING') !== os.getenv ('HEROKU_APP_NAME'):
+    @app.before_request
+    def before_request():
+        url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('REDIRECT_AB_TESTING'))
+        print ('DEBUG redirecting', request.url, 'to', url)
+        # We use a 302 in case we need to revert the redirect.
+        return redirect(url, code=302)
+
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
 if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
