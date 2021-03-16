@@ -47,7 +47,6 @@ var: NAME -> var
 _EOL: /(\r?\n[\t ]*)+/
 
 textwithoutspaces: /([^\n, *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
 
 
