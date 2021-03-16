@@ -45,7 +45,8 @@ window.auth = {
       if (values.username.match (/:|@/)) return auth.error (auth.texts.username_special, 'username');
       if (! values.password) return auth.error (auth.texts.please_password, 'password');
       if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'psasword_repeat');
+      if (values.email    !== values.email_repeat)    return auth.error (auth.texts.repeat_match_email,    'email_repeat');
+      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match_password, 'password_repeat');
       if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return auth.error (auth.texts.valid_email, 'email');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
@@ -245,3 +246,5 @@ if (window.location.pathname === '/signup') {
     else                            $ ('#username').val (login_username);
   }
 }
+
+$ ('#email, #email-repeat').on ("cut copy paste", function(e) {e.preventDefault ()});
