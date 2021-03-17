@@ -6,17 +6,19 @@ import os
 
 def type_check (val, Type):
     if Type == 'dict':
-        return isinstance(val, dict)
+        return isinstance (val, dict)
     if Type == 'list':
-        return isinstance(val, list)
+        return isinstance (val, list)
     if Type == 'str':
-        return isinstance(val, str)
+        return isinstance (val, str)
     if Type == 'int':
-        return isinstance(val, int)
+        return isinstance (val, int)
     if Type == 'tuple':
-        return isinstance(val, tuple)
+        return isinstance (val, tuple)
     if Type == 'fun':
-        return callable(val)
+        return callable (val)
+    if Type == 'bool':
+        return type (val) == bool
 
 def object_check (obj, key, Type):
   if not type_check (obj, 'dict') or not key in obj:

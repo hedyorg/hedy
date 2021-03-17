@@ -88,6 +88,10 @@
     - If there's no session or the logged in user is not the admin user, it returns 403.
     - If successful, the route will return a template containing a table with all the users in the system and a total count of saved programs. The users will be sorted by creation date, last first.
 
+- `POST /admin/markAsTeacher`
+    - This route allows the admin user to mark an user as teacher, which allows them to access a program from someone else by link.
+    - The body of the request should be of the shape `{username: STRING, is_teacher: BOOLEAN}`.
+
 ### Programs
 
 - `GET /programs/delete/ID`
