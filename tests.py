@@ -707,6 +707,16 @@ if str(naam) == str('Hedy'):
 for i in range(int(5)):
   print('koekoek')""",result)
 
+    def test_repeat_multiple_lines(self):
+        result = hedy.transpile("""repeat 5 times
+    print 'annemaria'
+    print 'koekoek'""", 7)
+
+        self.assertEqual("""import random
+for i in range(int(5)):
+  print('annemaria')
+  print('koekoek')""", result)
+
     def test_repeat_with_variable_print(self):
         result = hedy.transpile("n is 5\nrepeat n times\n    print 'me wants a cookie!'", 7)
         self.assertEqual(result, """import random
@@ -738,8 +748,7 @@ if str(kleur) == str('groen'):
         result = hedy.transpile("""kleur is groen
 if kleur is groen
     repeat 3 times
-        print 'mooi'
-""", 7)
+        print 'mooi'""", 7)
         self.assertEqual(result, """import random
 kleur = 'groen'
 if str(kleur) == str('groen'):
@@ -792,6 +801,24 @@ for i in range(int(5)):
   print('cookieeee!')
   print('me wants a cookie!')""", result)
         # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
+
+#programs with issues to see if we catch them properly
+
+    def test_level_7_no_indentation(self):
+        result = hedy.transpile("""antwoord is ask Hoeveel is 10 keer tien?
+if antwoord is 100
+print 'goed zo'
+else
+print 'bah slecht'""", 7)
+        self.assertEqual("""import random
+for i in range(int(5)):
+  print('cookieeee!')
+  print('me wants a cookie!')""", result)
+        # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
+
+
+
+
 
 
 class TestsLevel8(unittest.TestCase):
