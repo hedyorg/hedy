@@ -247,4 +247,4 @@ if (window.location.pathname === '/signup') {
   }
 }
 
-$ ('#email, #email-repeat').on ("cut copy paste", function(e) {e.preventDefault ()});
+$ ('#email, #email_repeat').on ("cut copy paste", function(e) {e.preventDefault ()});
