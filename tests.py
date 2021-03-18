@@ -732,8 +732,7 @@ for i in range(int(n)):
 kleur2 is rood
 if kleur is groen
     if kleur2 is rood
-        print 'mooi'
-"""
+        print 'mooi'"""
         result = hedy.transpile(code, 7)
         self.assertEqual("""import random
 kleur = 'groen'
@@ -814,10 +813,14 @@ else
 kleur = input('Wat is je lievelingskleur?')
 if str(kleur) == str('groen'):
   for i in range(int(3)):
-    print('mooi!')""", result)
+    print('mooi!')
+else:
+  for i in range(int(5)):
+    print('niet zo mooi')""", result)
+
 
 #programs with issues to see if we catch them properly
-
+# (so this should fail, for now)
     def test_level_7_no_indentation(self):
         result = hedy.transpile("""antwoord is ask Hoeveel is 10 keer tien?
 if antwoord is 100
