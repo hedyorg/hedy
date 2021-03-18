@@ -29,15 +29,17 @@ invalid: textwithoutspaces " " textwithspaces
 
 
 // new commands for level 4
-elses : "else" _EOL (" "* command _EOL)+
-ifs: "if " condition _EOL (" "* command _EOL)+ //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+elses : _EOL "else" _EOL (" "+ command _EOL)+
+ifs: "if " condition _EOL (" "+ command) (_EOL " "+ command)* //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+
+
 condition: (equality_check|in_list_check) (" and " condition)*
 list_access_var : var " is " var " at " (index | random)
 equality_check: textwithoutspaces " is " textwithoutspaces
 in_list_check: textwithoutspaces " in " var
 
 //new for level 5
-repeat: "repeat " (NUMBER | var) " times" _EOL (" "* command _EOL)+
+repeat: "repeat " (NUMBER | var) " times" _EOL (" "+ command _EOL)+
 
 //new for level 6
 ?sum: product
