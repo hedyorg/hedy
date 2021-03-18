@@ -793,6 +793,18 @@ for i in range(int(5)):
   print('me wants a cookie!')""", result)
         # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
 
+    def test_if_repeat_combined_else(self):
+        result = hedy.transpile("""kleur is ask Wat is je lievelingskleur?
+if kleur is groen
+    repeat 3 times
+        print 'mooi!'
+""", 7)
+        self.assertEqual("""import random
+    for i in range(int(5)):
+    print('cookieeee!')
+    print('me wants a cookie!')""", result)
+
+
 
 class TestsLevel8(unittest.TestCase):
     def test_list(self):
