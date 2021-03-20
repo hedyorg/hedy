@@ -36,12 +36,12 @@ class TestsLevel1(unittest.TestCase):
       result = hedy.transpile("print hallo allemaal\nprint", 1)
     self.assertEqual(str(context.exception), 'Incomplete')
 
-  def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile("abc felienne 123", 1)
-    self.assertEqual(str(context.exception), 'Invalid')
-    self.assertEqual(str(context.exception.arguments),
-                     "{'invalid_command': 'abc', 'level': 1, 'guessed_command': 'ask'}")
+  # def test_transpile_other_2(self):
+  #   with self.assertRaises(Exception) as context:
+  #     result = hedy.transpile("abc felienne 123", 1)
+  #   self.assertEqual(str(context.exception), 'Invalid')
+  #   self.assertEqual(str(context.exception.arguments),
+  #                    "{'invalid_command': 'abc', 'level': 1, 'guessed_command': 'ask'}")
 
   def test_transpile_incomplete_not_a_keyword(self):
     with self.assertRaises(Exception) as context:
