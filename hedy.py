@@ -535,6 +535,7 @@ class ConvertToPython_7(ConvertToPython_6):
         else:
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
+
 class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -607,7 +608,7 @@ class ConvertToPython(ConvertTo):
 
     def ranged_loop(self, children):
         args = self._call_children(children)
-        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] +  "):\n" + args[3]
+        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] + "):\n" + args[3]
 
     def assignment(self, children):
         args = self._call_children(children)
@@ -910,7 +911,8 @@ def transpile_inner(input_string, level):
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
     elif level == 7:
-        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
+        # parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
+        parser = Lark(create_grammar(level))
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
         abstract_syntaxtree = ExtractAST().transform(program_root)

@@ -80,7 +80,7 @@ class TestsHelperFunctions(unittest.TestCase):
 #
 
 class TestsForMultipleLevels(unittest.TestCase):
-    max_level = 7
+    max_level = 9
 
     def test_print_with_list_var_random(self):
         min_level = 2
@@ -92,7 +92,7 @@ class TestsForMultipleLevels(unittest.TestCase):
             print('Passed at level ', i)
 
         min_level = 6
-        max_level = 7
+        max_level = 9
         for i in range(min_level, max_level + 1):
             result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
             self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
@@ -393,7 +393,7 @@ class TestsLevel4(unittest.TestCase):
 
     def test_save_list_access_to_var(self):
         result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\ndier is dieren at random\nprint dier", 4)
-        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\ndier=random.choice(dieren)\nprint(dier)")
+        self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\ndier = random.choice(dieren)\nprint(dier)")
         self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
     def test_print_Spanish(self):
@@ -661,12 +661,12 @@ class TestsLevel7(unittest.TestCase):
 
     def test_print_calculation_times_directly(self):
         result = hedy.transpile("""nummer is 5
-    nummertwee is 6
-    print nummer * nummertwee""", 7)
+nummertwee is 6
+print nummer * nummertwee""", 7)
         self.assertEqual("""import random
-    nummer = '5'
-    nummertwee = '6'
-    print(str(int(nummer) * int(nummertwee)))""", result)
+nummer = '5'
+nummertwee = '6'
+print(str(int(nummer) * int(nummertwee)))""", result)
         self.assertEqual(run_code(result), "30")
 
     def test_transpile_ask(self):
@@ -675,205 +675,205 @@ class TestsLevel7(unittest.TestCase):
 
     def test_if_with_indent(self):
         result = hedy.transpile("""naam is Hedy
-    if naam is Hedy
-      print 'koekoek'""", 7)
+if naam is Hedy
+  print 'koekoek'""", 7)
         self.assertEqual("""import random
-    naam = 'Hedy'
-    if str(naam) == str('Hedy'):
-      print('koekoek')""", result)
+naam = 'Hedy'
+if str(naam) == str('Hedy'):
+  print('koekoek')""", result)
 
     def test_repeat_with_indent(self):
         result = hedy.transpile("""repeat 5 times
-      print 'koekoek'""", 7)
+  print 'koekoek'""", 7)
         self.assertEqual("""import random
-    for i in range(int(5)):
-      print('koekoek')""", result)
+for i in range(int(5)):
+  print('koekoek')""", result)
 
     def test_repeat_with_variable_print(self):
         result = hedy.transpile("n is 5\nrepeat n times\n    print 'me wants a cookie!'", 7)
         self.assertEqual(result, """import random
-    n = '5'
-    for i in range(int(n)):
-      print('me wants a cookie!')""")
+n = '5'
+for i in range(int(n)):
+  print('me wants a cookie!')""")
         self.assertEqual(run_code(result),
                          'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
     def test_repeat_nested_in_if(self):
         result = hedy.transpile("""kleur is groen
-    if kleur is groen
-      repeat 3 times
-        print 'mooi'""", 7)
+if kleur is groen
+  repeat 3 times
+    print 'mooi'""", 7)
         self.assertEqual(result, """import random
-    kleur = 'groen'
-    if str(kleur) == str('groen'):
-      for i in range(int(3)):
-        print('mooi')""")
+kleur = 'groen'
+if str(kleur) == str('groen'):
+  for i in range(int(3)):
+    print('mooi')""")
 
     def test_if_else(self):
         result = hedy.transpile("""antwoord is ask Hoeveel is 10 plus 10?
-    if antwoord is 20
-      print 'Goedzo!'
-      print 'Het antwoord was inderdaad ' antwoord
-    else
-      print 'Foutje'
-      print 'Het antwoord moest zijn ' antwoord""", 7)
+if antwoord is 20
+  print 'Goedzo!'
+  print 'Het antwoord was inderdaad ' antwoord
+else
+  print 'Foutje'
+  print 'Het antwoord moest zijn ' antwoord""", 7)
 
         self.assertEqual("""import random
-    antwoord = input('Hoeveel is 10 plus 10?')
-    if str(antwoord) == str('20'):
-      print('Goedzo!')
-      print('Het antwoord was inderdaad '+str(antwoord))
-    else:
-      print('Foutje')
-      print('Het antwoord moest zijn '+str(antwoord))""", result)
+antwoord = input('Hoeveel is 10 plus 10?')
+if str(antwoord) == str('20'):
+  print('Goedzo!')
+  print('Het antwoord was inderdaad '+str(antwoord))
+else:
+  print('Foutje')
+  print('Het antwoord moest zijn '+str(antwoord))""", result)
 
     def test_repeat_basic_print(self):
         result = hedy.transpile("""repeat 5 times
-      print 'me wants a cookie!'""", 7)
+  print 'me wants a cookie!'""", 7)
         self.assertEqual(result, """import random
-    for i in range(int(5)):
-      print('me wants a cookie!')""")
+for i in range(int(5)):
+  print('me wants a cookie!')""")
         self.assertEqual(run_code(result),
                          'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
     def test_print_random(self):
         result = hedy.transpile("""keuzes is steen, schaar, papier
-    computerkeuze is keuzes at random
-    print 'computer koos ' computerkeuze""", 7)
+computerkeuze is keuzes at random
+print 'computer koos ' computerkeuze""", 7)
         self.assertEqual("""import random
-    keuzes = ['steen', 'schaar', 'papier']
-    computerkeuze = random.choice(keuzes)
-    print('computer koos '+str(computerkeuze))""", result)
+keuzes = ['steen', 'schaar', 'papier']
+computerkeuze = random.choice(keuzes)
+print('computer koos '+str(computerkeuze))""", result)
 
     def test_repeat_basic_print_multiple_lines(self):
         result = hedy.transpile("""repeat 5 times
-        print 'cookieeee!'
-        print 'me wants a cookie!'""", 7)
+    print 'cookieeee!'
+    print 'me wants a cookie!'""", 7)
         self.assertEqual(result, """import random
-    for i in range(int(5)):
-      print('cookieeee!')
-      print('me wants a cookie!')""")
+for i in range(int(5)):
+  print('cookieeee!')
+  print('me wants a cookie!')""")
         # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
 
 
 class TestsLevel8(unittest.TestCase):
     def test_list(self):
         result = hedy.transpile("""
-    a is 1, 2
-    a is a at random
-    """, 8)
+a is 1, 2
+a is a at random
+""", 8)
         self.assertEqual(result, """import random
-    a = ['1', '2']
-    a = random.choice(a)""")
+a = ['1', '2']
+a = random.choice(a)""")
 
     def test_valid_assignments(self):
         result = hedy.transpile("""
-    a is 8
-    a is 88
-    b is ""
-    b is 'string'
-    b is "string"
-    list is 1, 2, 3, 4
-    e is ask hi
-    e is ask "what " a " je lievelingskleur"
-    """
+a is 8
+a is 88
+b is ""
+b is 'string'
+b is "string"
+list is 1, 2, 3, 4
+e is ask hi
+e is ask "what " a " je lievelingskleur"
+"""
                                 , 8)
         self.assertEqual(result, """import random
-    a = '8'
-    a = '88'
-    b = '""'
-    b = 'string'
-    b = '"string"'
-    list = ['1', '2', '3', '4']
-    e = input('hi')
-    e = input('"what " a " je lievelingskleur"')""")
+a = '8'
+a = '88'
+b = '""'
+b = 'string'
+b = '"string"'
+list = ['1', '2', '3', '4']
+e = input('hi')
+e = input('"what " a " je lievelingskleur"')""")
 
         # TODO: test echo
 
     def test_builtin_functions(self):
         result = hedy.transpile("""
-    print ''
-    print '"string" 1 a -1 2.8'
-    a is ask hoi
-    a is ask "string" 1 a -1 2.8
-    """, 8)
+print ''
+print '"string" 1 a -1 2.8'
+a is ask hoi
+a is ask "string" 1 a -1 2.8
+""", 8)
         self.assertEqual(result, """import random
-    print('')
-    print('"string" 1 a -1 2.8')
-    a = input('hoi')
-    a = input('"string" 1 a -1 2.8')""")
+print('')
+print('"string" 1 a -1 2.8')
+a = input('hoi')
+a = input('"string" 1 a -1 2.8')""")
 
     def test_for_loop(self):
         result = hedy.transpile("""
-    a is 2
-    a is 3
-    for a in range 2 to 4
-        a is a + 2
-        b is b + 2
-    """, 8)
+a is 2
+a is 3
+for a in range 2 to 4
+    a is a + 2
+    b is b + 2
+""", 8)
         self.assertEqual(result, """import random
-    a = '2'
-    a = '3'
-    for a in range(2, 4):
-      a = int(a) + int(2)
-      b = int(b) + int(2)""")
+a = '2'
+a = '3'
+for a in range(2, 4):
+  a = int(a) + int(2)
+  b = int(b) + int(2)""")
 
     def test_if__else(self):
         result = hedy.transpile("""
-    a is 5
-    if a is 1
-        x is 2
-    else
-        x is 222
-    """, 8)
+a is 5
+if a is 1
+    x is 2
+else
+    x is 222
+""", 8)
         self.assertEqual(result, """import random
-    a = '5'
-    if str(a) == str('1'):
-      x = '2'
-    else:
-      x = '222'""")
+a = '5'
+if str(a) == str('1'):
+  x = '2'
+else:
+  x = '222'""")
 
     def testforloop(self):
         result = hedy.transpile("""
-    for i in range 1 to 11
-        print i
-    print 'wie niet weg is is gezien'""", 8)
+for i in range 1 to 11
+    print i
+print 'wie niet weg is is gezien'""", 8)
         self.assertEqual(result, """import random
-    for i in range(1, 11):
-      print(str(i))
-    print('wie niet weg is is gezien')""")
+for i in range(1, 11):
+  print(str(i))
+print('wie niet weg is is gezien')""")
 
 class TestsLevel9(unittest.TestCase):
 
     def test_for_loop(self):
         result = hedy.transpile("""
-    for a in range 2 to 4:
-        a is a + 2
-        b is b + 2
-    """, 9)
+for a in range 2 to 4:
+    a is a + 2
+    b is b + 2
+""", 9)
         self.assertEqual(result, """import random
-    for a in range(2, 4):
-      a = int(a) + int(2)
-      b = int(b) + int(2)""")
+for a in range(2, 4):
+  a = int(a) + int(2)
+  b = int(b) + int(2)""")
 
     def test_if_elif_else(self):
         result = hedy.transpile("""
-    a is 5
-    if a is 1:
-        x is 2
-    elif a is 2:
-        x is 22
-    else:
-        x is 222
-    """, 9)
+a is 5
+if a is 1:
+    x is 2
+elif a is 2:
+    x is 22
+else:
+    x is 222
+""", 9)
         self.assertEqual(result, """import random
-    a = '5'
-    if str(a) == str('1'):
-      x = '2'
-    elif str(a) == str('2'):
-      x = '22'
-    else:
-      x = '222'""")
+a = '5'
+if str(a) == str('1'):
+  x = '2'
+elif str(a) == str('2'):
+  x = '22'
+else:
+  x = '222'""")
 
 
 class TestsLevel10(unittest.TestCase):
@@ -984,9 +984,9 @@ for a in range(2, 4):
 
     def test_if_elif_else(self):
         result = hedy.transpile("""
-if a = 1:
+if a is 1:
     x is 2
-elif a = 2:
+elif a is 2:
     x is 22
 else:
     x is 222
@@ -1004,8 +1004,8 @@ else:
         result = hedy.transpile("""
 for a in range 1 to 2:
     for b in range 1 to 2:
-        if a = 1:
-            if a = 2:
+        if a is 1:
+            if a is 2:
                 x is 2
             else:
                 x is 22
