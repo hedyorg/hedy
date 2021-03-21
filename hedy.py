@@ -15,7 +15,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       3: ['print', 'ask', 'is'],
                       4: ['print', 'ask', 'is', 'if'],
                       5: ['print', 'ask', 'is', 'if', 'repeat'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat']
+                      6: ['print', 'ask', 'is', 'if', 'repeat'],
+                      7: ['print', 'ask', 'is', 'if', 'repeat'],
+                      8: ['print', 'ask', 'is', 'if', 'repeat', 'for'],
+                      9: ['print', 'ask', 'is', 'if', 'repeat', 'for', 'elif']
                       }
 
 # 
@@ -129,6 +132,10 @@ class AllAssignmentCommands(Transformer):
         commands = args[1:]
         return flatten(commands)
 
+    def for_loop(self, args):
+        commands = args[1:]
+        return flatten(commands)
+
     def command(self, args):
         return flatten(args)
 
@@ -223,6 +230,18 @@ class Filter(Transformer):
     def division(self, args):
         return all_arguments_true(args)
 
+    # level 7
+    def elses(self, args):
+        return all_arguments_true(args)
+
+    # level 8
+    def for_loop(self, args):
+        return all_arguments_true(args)
+
+    # level 9
+    def elifs(self, args):
+        return all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
@@ -249,6 +268,8 @@ class IsValid(Filter):
     def print(self, args):
         return all_arguments_true(args)
     def echo(self, args):
+        return all_arguments_true(args)
+    def for_loop(self, args):
         return all_arguments_true(args)
 
 
@@ -379,7 +400,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def list_access_var(self, args):
         var = args[0]
         if args[2].data == 'random':
-            return var + '=random.choice(' + args[1] + ')'
+            return var + ' = random.choice(' + args[1] + ')'
         else:
             return var + '=' + args[1] + '[' + args[2].children[0] + ']'
     def ifs(self, args):
@@ -467,28 +488,23 @@ class ConvertToPython_7(ConvertToPython_6):
         self.lookup = lookup
         self.indent_level = indent_level
 
-    def indent(self, args):
-        self.indent_level += 1
-        return ""
-
-    def dedent(self, args):
-        self.indent_level -= 1
-        return ""
-
     def command(self, args):
         return "".join([self.indent_level * "    " + x for x in args if x != ""])
 
     def repeat(self, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(args[1:])
+        all_lines = [indent(x) for x in args[1:]]
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
+
 
     def ifs(self, args):
-        args = [a for a in args if a != ""] # filter out in|dedent tokens
-        return "if " + args[0] + ":\n" + "\n".join(args[1:])
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
     def elses(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        return "\nelse:\n" + "\n".join(args)
+        all_lines = [indent(x) for x in args]
+        return "\nelse:\n" + "\n".join(all_lines)
 
     def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
@@ -519,6 +535,17 @@ class ConvertToPython_7(ConvertToPython_6):
         else:
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
+class ConvertToPython_8(ConvertToPython_7):
+    def for_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[3:]]
+        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] + "):\n"+"\n".join(all_lines)
+
+class ConvertToPython_9(ConvertToPython_8):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
@@ -547,7 +574,7 @@ class ConvertToPython(ConvertTo):
         self.indent_level = indent_level
 
     def _generate_indentation(self):
-        return self.indent_level * "    "
+        return self.indent_level * "  "
 
     def start(self, children):
         return "".join(self._call_children(children))
@@ -588,46 +615,90 @@ class ConvertToPython(ConvertTo):
 
     def eq(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " == " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " == " + args[1]
         return args[0] + " == " + args[1]
 
     def ne(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " != " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " != " + args[1]
         return args[0] + " != " + args[1]
 
     def le(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " <= " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " <= " + args[1]
         return args[0] + " <= " + args[1]
 
     def ge(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " >= " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " >= " + args[1]
         return args[0] + " >= " + args[1]
 
     def lt(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " < " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " < " + args[1]
         return args[0] + " < " + args[1]
 
     def gt(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " > " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " > " + args[1]
         return args[0] + " > " + args[1]
 
     def addition(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " + " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " + " + args[1]
         return args[0] + " + " + args[1]
 
     def substraction(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " - " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " - " + args[1]
         return args[0] + " - " + args[1]
 
     def multiplication(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " * " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " * " + args[1]
         return args[0] + " * " + args[1]
 
     def division(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " / " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " / " + args[1]
         return args[0] + " / " + args[1]
 
     def modulo(self, children):
         args = self._call_children(children)
+        if args[0].type == "NUMBER":
+            return args[0] + " % " + "int(" + args[1] + ")"
+        elif args[1].type == "NUMBER":
+            return "int(" + args[0] + ")" + " % " + args[1]
         return args[0] + " % " + args[1]
 
     def unary_plus(self, children):
@@ -756,7 +827,7 @@ def beautify_parse_error(error_message):
     return character_found
 
 def transpile_inner(input_string, level):
-    if level <= 6:
+    if level <= 9:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = Lark(create_grammar(level))
@@ -823,6 +894,18 @@ def transpile_inner(input_string, level):
         elif level == 6:
             python = 'import random\n'
             python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+            return python
+        elif level == 7:
+            python = 'import random\n'
+            python += ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(abstract_syntaxtree)
+            return python
+        elif level == 8:
+            python = 'import random\n'
+            python += ConvertToPython_8(punctuation_symbols, lookup_table, 0).transform(abstract_syntaxtree)
+            return python
+        elif level == 9:
+            python = 'import random\n'
+            python += ConvertToPython_9(punctuation_symbols, lookup_table, 0).transform(abstract_syntaxtree)
             return python
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
