@@ -131,18 +131,18 @@ for i in range(int(5)):
     # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
 
 
-  def test_level_7_no_indentation(self):
-    #test that we get a parse error here
-    code = textwrap.dedent("""\
-    antwoord is ask Hoeveel is 10 keer tien?
-    if antwoord is 100
-    print 'goed zo'
-    else
-    print 'bah slecht'""")
-
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile(code, 7)
-    self.assertEqual(str(context.exception), 'Parse')
+  # def test_level_7_no_indentation(self):
+  #   #test that we get a parse error here
+  #   code = textwrap.dedent("""\
+  #   antwoord is ask Hoeveel is 10 keer tien?
+  #   if antwoord is 100
+  #   print 'goed zo'
+  #   else
+  #   print 'bah slecht'""")
+  #
+  #   with self.assertRaises(Exception) as context:
+  #     result = hedy.transpile(code, 7)
+  #   self.assertEqual(str(context.exception), 'Parse')
 
 
 
