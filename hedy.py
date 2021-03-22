@@ -2,6 +2,7 @@ from lark import Lark
 from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
 from lark.indenter import Indenter
+from os import path
 import sys
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
@@ -675,8 +676,11 @@ class BasicIndenter2(Indenter):
     tab_len = 4
 
 def create_grammar(level):
-    with open("grammars/level" + str(level) + ".lark", "r") as file:
+    # Load Lark grammars relative to directory of current file
+    script_dir = path.abspath(path.dirname(__file__))
+    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r") as file:
         return file.read()
+
 
 def transpile(input_string, level):
     try:
