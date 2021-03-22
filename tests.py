@@ -821,17 +821,19 @@ else:
 
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)
+# at one point we want a real "Indent" error and a better error message
+# for this!
     def test_level_7_no_indentation(self):
-        result = hedy.transpile("""antwoord is ask Hoeveel is 10 keer tien?
+        code = """antwoord is ask Hoeveel is 10 keer tien?
 if antwoord is 100
 print 'goed zo'
 else
-print 'bah slecht'""", 7)
-        self.assertEqual("""import random
-for i in range(int(5)):
-  print('cookieeee!')
-  print('me wants a cookie!')""", result)
-        # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
+print 'bah slecht'"""
+
+        with self.assertRaises(Exception) as context:
+            result = hedy.transpile(code, 7)
+        self.assertEqual(str(context.exception), 'Parse')
+
 
 
 
