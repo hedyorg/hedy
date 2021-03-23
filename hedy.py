@@ -21,15 +21,15 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       9: ['print', 'ask', 'is', 'if', 'repeat', 'for', 'elif']
                       }
 
-# 
+#
 #  closest_command() searches for known commands in an invalid command.
 #
 #  It will return the known command which is closest positioned at the beginning.
-#  It will return '' if the invalid command does not contain any known command. 
+#  It will return '' if the invalid command does not contain any known command.
 #
 
 def closest_command(invalid_command, known_commands):
-    
+
     # First search for 100% match of known commands
     min_position = len(invalid_command)
     min_command = ''
@@ -38,11 +38,11 @@ def closest_command(invalid_command, known_commands):
         if position != -1 and position < min_position:
             min_position = position
             min_command = known_command
-            
+
     # If not found, search for partial match of know commands
     if min_command == '':
         min_command = closest_command_with_min_distance(invalid_command, known_commands)
-    
+
     return min_command
 
 #
@@ -403,9 +403,11 @@ class ConvertToPython_4(ConvertToPython_3):
             return var + ' = random.choice(' + args[1] + ')'
         else:
             return var + '=' + args[1] + '[' + args[2].children[0] + ']'
+
     def ifs(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}"""
+
     def ifelse(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}
@@ -489,22 +491,26 @@ class ConvertToPython_7(ConvertToPython_6):
         self.indent_level = indent_level
 
     def command(self, args):
-        return "".join([self.indent_level * "    " + x for x in args if x != ""])
+        return "".join(args)
 
     def repeat(self, args):
         all_lines = [indent(x) for x in args[1:]]
         return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
 
-
     def ifs(self, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        args = [a for a in args if a != ""] # filter out in|dedent tokens
+
         all_lines = [indent(x) for x in args[1:]]
+
         return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
     def elses(self, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        args = [a for a in args if a != ""] # filter out in|dedent tokens
+
         all_lines = [indent(x) for x in args]
+
         return "\nelse:\n" + "\n".join(all_lines)
+
 
     def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
@@ -924,6 +930,7 @@ def transpile_inner(input_string, level):
             return python + result
         except VisitError as E:
             raise E.orig_exc
+
     elif level >= 8 and level <= 13:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True)
         python = 'import random\n'

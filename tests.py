@@ -29,7 +29,7 @@ def run_code(code):
 #
 
 class TestsHelperFunctions(unittest.TestCase):
-    
+
     def test_closest_command(self):
         invalid_command = ""
         closest = hedy.closest_command(invalid_command, ['ask', 'print', 'echo'])
@@ -671,7 +671,9 @@ print(str(int(nummer) * int(nummertwee)))""", result)
 
     def test_transpile_ask(self):
         result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 7)
-        self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
+        self.assertEqual("import random\nantwoord = input('wat is je lievelingskleur?')",result)
+
+
 
     def test_if_with_indent(self):
         result = hedy.transpile("""naam is Hedy
@@ -682,11 +684,32 @@ naam = 'Hedy'
 if str(naam) == str('Hedy'):
   print('koekoek')""", result)
 
+    def test_if_multiple_lines(self):
+        result = hedy.transpile("""naam is Hedy
+if naam is Hedy
+    print 'toetoet'
+    print 'boing boing'""", 7)
+        self.assertEqual("""import random
+naam = 'Hedy'
+if str(naam) == str('Hedy'):
+  print('toetoet')
+  print('boing boing')""", result)
+
     def test_repeat_with_indent(self):
         result = hedy.transpile("""repeat 5 times
   print 'koekoek'""", 7)
         self.assertEqual("""import random
 for i in range(int(5)):
+  print('koekoek')""",result)
+
+    def test_repeat_multiple_lines(self):
+        result = hedy.transpile("""repeat 5 times
+    print 'annemaria'
+    print 'koekoek'""", 7)
+
+        self.assertEqual("""import random
+for i in range(int(5)):
+  print('annemaria')
   print('koekoek')""", result)
 
     def test_repeat_with_variable_print(self):
@@ -698,6 +721,23 @@ for i in range(int(n)):
         self.assertEqual(run_code(result),
                          'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
+# todo: here we have to end in a newline, needs to be fixed!
+    def test_if_nested_in_if(self):
+        code="""kleur is groen
+kleur2 is rood
+if kleur is groen
+    if kleur2 is rood
+        print 'mooi'"""
+        result = hedy.transpile(code, 7)
+        self.assertEqual("""import random
+kleur = 'groen'
+kleur2 = 'rood'
+if str(kleur) == str('groen'):
+  if str(kleur2) == str('rood'):
+    print('mooi')""", result)
+
+
+#todo: here we have to end in a newline, needs to be fixed!
     def test_repeat_nested_in_if(self):
         result = hedy.transpile("""kleur is groen
 if kleur is groen
@@ -725,16 +765,16 @@ if str(antwoord) == str('20'):
   print('Het antwoord was inderdaad '+str(antwoord))
 else:
   print('Foutje')
-  print('Het antwoord moest zijn '+str(antwoord))""", result)
+  print('Het antwoord moest zijn '+str(antwoord))""",result)
 
     def test_repeat_basic_print(self):
         result = hedy.transpile("""repeat 5 times
-  print 'me wants a cookie!'""", 7)
+   print 'me wants a cookie!'""", 7)
         self.assertEqual(result, """import random
 for i in range(int(5)):
   print('me wants a cookie!')""")
-        self.assertEqual(run_code(result),
-                         'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+        self.assertEqual(run_code(result),'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+
 
     def test_print_random(self):
         result = hedy.transpile("""keuzes is steen, schaar, papier
@@ -742,18 +782,44 @@ computerkeuze is keuzes at random
 print 'computer koos ' computerkeuze""", 7)
         self.assertEqual("""import random
 keuzes = ['steen', 'schaar', 'papier']
-computerkeuze = random.choice(keuzes)
+computerkeuze=random.choice(keuzes)
 print('computer koos '+str(computerkeuze))""", result)
 
     def test_repeat_basic_print_multiple_lines(self):
         result = hedy.transpile("""repeat 5 times
     print 'cookieeee!'
     print 'me wants a cookie!'""", 7)
-        self.assertEqual(result, """import random
+        self.assertEqual("""import random
 for i in range(int(5)):
   print('cookieeee!')
-  print('me wants a cookie!')""")
+  print('me wants a cookie!')""", result)
         # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
+
+    def test_if_repeat_combined_else(self):
+        result = hedy.transpile("""kleur is ask Wat is je lievelingskleur?
+if kleur is groen
+    repeat 3 times
+        print 'mooi!'
+else
+    repeat 5 times
+        print 'niet zo mooi'""", 7)
+        self.assertEqual("""import random
+kleur = input('Wat is je lievelingskleur?')
+if str(kleur) == str('groen'):
+  for i in range(int(3)):
+    print('mooi!')
+else:
+  for i in range(int(5)):
+    print('niet zo mooi')""", result)
+
+
+
+
+
+
+
+
+
 
 
 class TestsLevel8(unittest.TestCase):
