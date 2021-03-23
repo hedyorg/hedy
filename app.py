@@ -22,9 +22,10 @@ from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
+from random import random
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect
+from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response
 from flask_compress import Compress
 
 # Hedy-specific modules
@@ -70,13 +71,44 @@ logging.basicConfig(
 
 app = Flask(__name__, static_url_path='')
 
-if os.getenv ('REDIRECT_AB_TESTING') and os.getenv ('REDIRECT_AB_TESTING') != os.getenv ('HEROKU_APP_NAME'):
+def into_number (string):
+    total = 0
+    for char in string:
+        total += ord (char)
+    return total
+
+def redirect_ab (request, session):
+    # If the user is logged in, we use their username as identifier, otherwise we use the session id
+    user_identifier = current_user(request) ['username'] or str (session_id)
+
+    # This will send 50% of the requests into redirect.
+    redirect_flag = (into_number (user_identifier) % 100) < 50
+    return redirect_flag
+
+# If present, REDIRECT_AB_TEST should be the name of the target environment (that is, environment B).
+# Environment B should *not* have REDIRECT_AB_TEST set, otherwise it will reverse proxy to itself and go down an infinite turtle recurse.
+if os.getenv ('REDIRECT_AB_TEST') and os.getenv ('REDIRECT_AB_TEST') != os.getenv ('HEROKU_APP_NAME'):
     @app.before_request
     def before_request():
-        url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('REDIRECT_AB_TESTING'))
-        print ('DEBUG redirecting', request.url, 'to', url)
-        # We use a 302 in case we need to revert the redirect.
-        return redirect(url, code=302)
+        session_id () # Run this for the side effect of generating a session ID
+        # If we enter this block, we will reverse proxy the request to the REDIRECT_AB_TEST environment.
+        if (redirect_ab (request, session)):
+            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('REDIRECT_AB_TEST'))
+
+            request_headers = {}
+            for header in request.headers:
+                if (header [0].lower () in ['host']):
+                    continue
+                request_headers [header [0]] = header [1]
+            r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
+
+            response = make_response (r.content)
+            for header in r.headers:
+                # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
+                if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection']):
+                    continue
+                response.headers [header] = r.headers [header]
+            return response, r.status_code
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
