@@ -26,4 +26,4 @@ jobs:
         pip3 install -r requirements.txt
     - name: Test with unittest
       run: |
-        python3 -m unittest tests.py
+        python -m unittest discover -s tests

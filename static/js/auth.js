@@ -45,8 +45,9 @@ window.auth = {
       if (values.username.match (/:|@/)) return auth.error (auth.texts.username_special, 'username');
       if (! values.password) return auth.error (auth.texts.please_password, 'password');
       if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
-      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match, 'psasword_repeat');
       if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return auth.error (auth.texts.valid_email, 'email');
+      if (values.email    !== values.email_repeat)    return auth.error (auth.texts.repeat_match_email,    'email_repeat');
+      if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match_password, 'password_repeat');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
         if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return auth.error (auth.texts.valid_year + new Date ().getFullYear (), 'birth_year');
@@ -187,7 +188,15 @@ window.auth = {
         else                         auth.error (auth.texts.ajax_error);
       });
     }
-  }
+  },
+  markAsTeacher: function (username, is_teacher) {
+    $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
+      alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
+    }).fail (function (error) {
+      console.log (error);
+      alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+    });
+  },
 }
 
 // *** LOADERS ***
@@ -245,3 +254,9 @@ if (window.location.pathname === '/signup') {
     else                            $ ('#username').val (login_username);
   }
 }
+
+$ ('#email, #email_repeat').on ('cut copy paste', function (e) {
+   console.log ('DEBUG cut/copy/paste prevented', e);
+   e.preventDefault ();
+   return false;
+});

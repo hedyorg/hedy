@@ -20,7 +20,7 @@ import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates, current_user, requires_login, is_admin
+from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
 
 # app.py
@@ -224,9 +224,9 @@ def index(level, step):
         result = db_get ('programs', {'id': step})
         if not result:
             return 'No such program', 404
-        # Allow both the owner of the program and the admin user to access the program
+        # Allow only the owner of the program, the admin user and the teacher users to access the program
         user = current_user (request)
-        if user ['username'] != result ['username'] and not is_admin (request):
+        if user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
         loaded_program = result ['code']
         # We default to step 1 to provide a meaningful default assignment
@@ -494,7 +494,7 @@ def save_program (user):
 # *** AUTH ***
 
 import auth
-auth.routes(app, requested_lang)
+auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 
