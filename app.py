@@ -436,10 +436,6 @@ def delete_program (user, program_id):
     if not result or result ['username'] != user ['username']:
         return "", 404
     db_del ('programs', {'id': program_id})
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_set ('users', {'username': user ['username'], 'program_count': program_count - 1})
     return redirect ('/programs')
 
 @app.route('/programs', methods=['POST'])
@@ -492,10 +488,6 @@ def save_program (user):
         'server_error': error,
         'username': user ['username']
     })
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({})
 

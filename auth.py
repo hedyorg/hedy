@@ -3,7 +3,7 @@ import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe
 import datetime
 from functools import wraps
 from config import config
@@ -479,7 +479,7 @@ def auth_templates (page, lang, menu, request):
         # After hitting 1k users, it'd be wise to add pagination.
         users = db_scan ('users')
         userdata = []
-        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
+        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher']
         for user in users:
             data = {}
             for field in fields:
@@ -501,15 +501,3 @@ def auth_templates (page, lang, menu, request):
             counter = counter + 1
 
         return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'], user_count=db_describe ('users') ['Table'] ['ItemCount'])
-
-# Helper method to initialize program count for existing users
-# TODO: Remove after deploying the code
-def initialize_program_count ():
-    users = db_scan ('users')
-    for user in users:
-        programs = db_get_many ('programs', {'username': user ['username']}, True)
-        if len (programs):
-           print ('Updating program count for user', user ['username'], len (programs))
-           db_set ('users', {'username': user ['username'], 'program_count': len (programs)})
-
-initialize_program_count ()
