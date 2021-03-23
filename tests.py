@@ -782,7 +782,7 @@ computerkeuze is keuzes at random
 print 'computer koos ' computerkeuze""", 7)
         self.assertEqual("""import random
 keuzes = ['steen', 'schaar', 'papier']
-computerkeuze=random.choice(keuzes)
+computerkeuze = random.choice(keuzes)
 print('computer koos '+str(computerkeuze))""", result)
 
     def test_repeat_basic_print_multiple_lines(self):
