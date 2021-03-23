@@ -54,21 +54,21 @@ if naam is Hedy
     self.assertEqual("""import random
 naam = 'Hedy'
 if str(naam) == str('Hedy'):
-    print('koekoek')""", result)
+  print('koekoek')""", result)
 
   def test_repeat_with_indent(self):
     result = hedy.transpile("""repeat 5 times
     print 'koekoek'""", 7)
     self.assertEqual("""import random
 for i in range(int(5)):
-    print('koekoek')""", result)
+  print('koekoek')""", result)
 
   def test_repeat_with_variable_print(self):
     result = hedy.transpile("n is 5\nrepeat n times\n    print 'me wants a cookie!'", 7)
     self.assertEqual(result, """import random
 n = '5'
 for i in range(int(n)):
-    print('me wants a cookie!')""")
+  print('me wants a cookie!')""")
     self.assertEqual(run_code(result),
                      'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
@@ -80,8 +80,8 @@ if kleur is groen
     self.assertEqual(result, """import random
 kleur = 'groen'
 if str(kleur) == str('groen'):
-    for i in range(int(3)):
-        print('mooi')""")
+  for i in range(int(3)):
+    print('mooi')""")
 
   def test_if_else(self):
     result = hedy.transpile("""antwoord is ask Hoeveel is 10 plus 10?
@@ -95,18 +95,18 @@ else
     self.assertEqual("""import random
 antwoord = input('Hoeveel is 10 plus 10?')
 if str(antwoord) == str('20'):
-    print('Goedzo!')
-    print('Het antwoord was inderdaad '+str(antwoord))
+  print('Goedzo!')
+  print('Het antwoord was inderdaad '+str(antwoord))
 else:
-    print('Foutje')
-    print('Het antwoord moest zijn '+str(antwoord))""", result)
+  print('Foutje')
+  print('Het antwoord moest zijn '+str(antwoord))""", result)
 
   def test_repeat_basic_print(self):
     result = hedy.transpile("""repeat 5 times
     print 'me wants a cookie!'""", 7)
     self.assertEqual(result, """import random
 for i in range(int(5)):
-    print('me wants a cookie!')""")
+  print('me wants a cookie!')""")
     self.assertEqual(run_code(result),
                      'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
@@ -116,7 +116,7 @@ computerkeuze is keuzes at random
 print 'computer koos ' computerkeuze""", 7)
     self.assertEqual("""import random
 keuzes = ['steen', 'schaar', 'papier']
-computerkeuze = random.choice(keuzes)
+computerkeuze=random.choice(keuzes)
 print('computer koos '+str(computerkeuze))""", result)
 
   def test_repeat_basic_print_multiple_lines(self):
@@ -125,6 +125,21 @@ print('computer koos '+str(computerkeuze))""", result)
     print 'me wants a cookie!'""", 7)
     self.assertEqual(result, """import random
 for i in range(int(5)):
-    print('cookieeee!')
-    print('me wants a cookie!')""")
+  print('cookieeee!')
+  print('me wants a cookie!')""")
     # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
+
+#programs with issues to see if we catch them properly
+# (so this should fail, for now)
+# at one point we want a real "Indent" error and a better error message
+# for this!
+  def test_level_7_no_indentation(self):
+      code = """antwoord is ask Hoeveel is 10 keer tien?
+if antwoord is 100
+print 'goed zo'
+else
+print 'bah slecht'"""
+
+      with self.assertRaises(Exception) as context:
+          result = hedy.transpile(code, 7)
+      self.assertEqual(str(context.exception), 'Parse')

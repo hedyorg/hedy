@@ -223,6 +223,10 @@ class Filter(Transformer):
     def division(self, args):
         return all_arguments_true(args)
 
+    #level 7
+    def elses(self, args):
+        return all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
@@ -382,9 +386,11 @@ class ConvertToPython_4(ConvertToPython_3):
             return var + '=random.choice(' + args[1] + ')'
         else:
             return var + '=' + args[1] + '[' + args[2].children[0] + ']'
+
     def ifs(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}"""
+
     def ifelse(self, args):
         return f"""if {args[0]}:
 {indent(args[1])}
@@ -467,28 +473,27 @@ class ConvertToPython_7(ConvertToPython_6):
         self.lookup = lookup
         self.indent_level = indent_level
 
-    def indent(self, args):
-        self.indent_level += 1
-        return ""
-
-    def dedent(self, args):
-        self.indent_level -= 1
-        return ""
-
     def command(self, args):
-        return "".join([self.indent_level * "    " + x for x in args if x != ""])
+        return "".join(args)
 
     def repeat(self, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(args[1:])
+        all_lines = [indent(x) for x in args[1:]]
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
-        return "if " + args[0] + ":\n" + "\n".join(args[1:])
+
+        all_lines = [indent(x) for x in args[1:]]
+
+        return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
     def elses(self, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        return "\nelse:\n" + "\n".join(args)
+        args = [a for a in args if a != ""] # filter out in|dedent tokens
+
+        all_lines = [indent(x) for x in args]
+
+        return "\nelse:\n" + "\n".join(all_lines)
+
 
     def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
@@ -756,7 +761,7 @@ def beautify_parse_error(error_message):
     return character_found
 
 def transpile_inner(input_string, level):
-    if level <= 6:
+    if level <= 7:
         punctuation_symbols = ['!', '?', '.']
         level = int(level)
         parser = Lark(create_grammar(level))
@@ -824,10 +829,16 @@ def transpile_inner(input_string, level):
             python = 'import random\n'
             python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
             return python
+        elif level == 7:
+            python = 'import random\n'
+            python += ConvertToPython_7(punctuation_symbols, lookup_table,0).transform(abstract_syntaxtree)
+            return python
+
 
     #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
     elif level == 7:
-        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
+        parser = Lark(create_grammar(level))
+        # parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
         punctuation_symbols = ['!', '?', '.']
         program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
         abstract_syntaxtree = ExtractAST().transform(program_root)
@@ -839,6 +850,7 @@ def transpile_inner(input_string, level):
             return python + result
         except VisitError as E:
             raise E.orig_exc
+
     elif level >= 8 and level <= 13:
         parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True)
         python = 'import random\n'
