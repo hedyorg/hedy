@@ -512,4 +512,4 @@ def initialize_program_count ():
            print ('Updating program count for user', user ['username'], len (programs))
            db_set ('users', {'username': user ['username'], 'program_count': len (programs)})
 
-initialize_program_count ()
+# initialize_program_count ()
