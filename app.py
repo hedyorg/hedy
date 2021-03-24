@@ -86,7 +86,6 @@ def redirect_ab (request, session):
     return redirect_flag
 
 # If present, REDIRECT_AB_TEST should be the name of the target environment (that is, environment B).
-# Environment B should *not* have REDIRECT_AB_TEST set, otherwise it will reverse proxy to itself and go down an infinite turtle recurse.
 if os.getenv ('REDIRECT_AB_TEST') and os.getenv ('REDIRECT_AB_TEST') != os.getenv ('HEROKU_APP_NAME'):
     @app.before_request
     def before_request():
@@ -183,7 +182,7 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
 
-    logger.log({
+    log_object = {
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
@@ -192,7 +191,12 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username
-    })
+    }
+
+    if os.getenv ('REDIRECT_AB_TEST') == os.getenv ('HEROKU_APP_NAME') and os.getenv ('HEROKU_APP_NAME'):
+        log_object ['is_test'] = 1
+
+    logger.log(log_object)
 
     return jsonify(response)
 
