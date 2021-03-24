@@ -502,15 +502,3 @@ def auth_templates (page, lang, menu, request):
             counter = counter + 1
 
         return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'], user_count=db_describe ('users') ['Table'] ['ItemCount'])
-
-# Helper method to initialize program count for existing users
-# TODO: Remove after deploying the code
-def initialize_program_count ():
-    users = db_scan ('users')
-    for user in users:
-        programs = db_get_many ('programs', {'username': user ['username']}, True)
-        if len (programs):
-           print ('Updating program count for user', user ['username'], len (programs))
-           db_set ('users', {'username': user ['username'], 'program_count': len (programs)})
-
-# initialize_program_count ()
