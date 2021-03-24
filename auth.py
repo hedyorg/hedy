@@ -480,6 +480,7 @@ def auth_templates (page, lang, menu, request):
         users = db_scan ('users')
         userdata = []
         fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
+
         for user in users:
             data = {}
             for field in fields:
