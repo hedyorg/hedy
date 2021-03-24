@@ -2,6 +2,7 @@ import unittest
 import hedy
 import sys
 import io
+import textwrap
 from contextlib import contextmanager
 
 @contextmanager
@@ -119,27 +120,23 @@ keuzes = ['steen', 'schaar', 'papier']
 computerkeuze=random.choice(keuzes)
 print('computer koos '+str(computerkeuze))""", result)
 
-  def test_repeat_basic_print_multiple_lines(self):
-    result = hedy.transpile("""repeat 5 times
-    print 'cookieeee!'
-    print 'me wants a cookie!'""", 7)
-    self.assertEqual(result, """import random
-for i in range(int(5)):
-  print('cookieeee!')
-  print('me wants a cookie!')""")
-    # self.assertEqual(run_code(result),'cookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!\ncookieeee!\nme wants a cookie!')
-
+    
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message
 # for this!
-  def test_level_7_no_indentation(self):
-      code = """antwoord is ask Hoeveel is 10 keer tien?
-if antwoord is 100
-print 'goed zo'
-else
-print 'bah slecht'"""
 
-      with self.assertRaises(Exception) as context:
-          result = hedy.transpile(code, 7)
-      self.assertEqual(str(context.exception), 'Parse')
+  # def test_level_7_no_indentation(self):
+  #   #test that we get a parse error here
+  #   code = textwrap.dedent("""\
+  #   antwoord is ask Hoeveel is 10 keer tien?
+  #   if antwoord is 100
+  #   print 'goed zo'
+  #   else
+  #   print 'bah slecht'""")
+  #
+  #   with self.assertRaises(Exception) as context:
+  #     result = hedy.transpile(code, 7)
+  #   self.assertEqual(str(context.exception), 'Parse')
+
+
