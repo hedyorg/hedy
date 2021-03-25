@@ -1,140 +1,140 @@
 ---
-  1: 
-    intro_text: "Welkom bij Hedy! In Level 1 kun je de commando's print, ask en echo gebruiken. Druk op de blauwe knop en de code wordt alvast voor jou getypt! Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het links programmeerveld."
+  1:
+    intro_text: "Welkom bij Hedy! In Level 1 kun je de commando's `print`, `ask` en `echo` gebruiken. Druk op de blauwe knop en de code wordt alvast voor jou getypt! Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het links programmeerveld."
     start_code: "print hallo wereld!"
-    commands: 
-      - 
+    commands:
+      -
         name: "print"
         explanation: "Iets printen met `print`."
         example: "Bijvoorbeeld: print Hallo welkom bij Hedy!"
         demo_code: "print Hallo welkom bij Hedy!"
-      - 
+      -
         name: "ask"
         explanation: "Iets vragen met `ask`."
         example: "Bijvoorbeeld: ask Wat is je lievelingskleur?"
         demo_code: "ask Wat is je lievelingskleur?"
-      - 
+      -
         name: "echo"
         explanation: "Iets herhalen dat is ingetypt met `echo`."
         example: "Bijvoorbeeld: echo dus je lievelingskleur is..."
         demo_code: "ask Wat is je lievelingskleur?\necho dus je lievelingskleur is..."
-  2: 
+  2:
     intro_text: "Print werkt nog zoals in Level 1, maar let op! ask werkt nu een klein beetje anders, het antwoord kun je opslaan dan dan printen. Echo heb je niet meer nodig. In Level 2 kun je ook deze commando's gebruiken:"
     start_code: "print hallo wereld!"
-    commands: 
-      - 
+    commands:
+      -
         name: "is"
-        explanation: "Een woord een naam geven met is. Je mag die naam zelf kiezen."
+        explanation: "Een woord een naam geven met `is`. Je mag die naam zelf kiezen."
         example: "Bijvoorbeeld: voornaam is Hedy."
         demo_code: "voornaam is Hedy\nprint ik heet voornaam"
-      - 
+      -
         name: "ask"
         explanation: "Iets vragen met `ask`. Maar let op! Je moet je antwoord een naam geven met `is`."
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nprint Jouw favoriet is dus kleur"
-      - 
+      -
         name: "kies_random"
         explanation: "Iets willekeurigs uit een groep woorden kiezen met `at` en `random`."
         example: "Bijvoorbeeld: dieren is hond, kat, kangoeroe."
         demo_code: "dieren is hond, kat, kangoeroe\nprint dieren at random"
-  3: 
+  3:
     start_code: "print 'hallo wereld'"
     intro_text: "`ask` is nog steeds hetzelfde in level 3, maar `print` is nu anders. Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten. "
-    commands: 
-      - 
+    commands:
+      -
         name: "print"
         explanation: "Iets letterlijk printen met `print`."
         example: "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'"
         demo_code: "print 'Hallo welkom bij Hedy'"
-      - 
+      -
         name: "is"
         explanation: "Een stukje tekst een naam geven met `is` en printen zonder aanhalingstekens"
         example: "Bijvoorbeeld: naam is Hedy."
         demo_code: "naam is Hedy\nprint 'ik heet ' naam"
-      - 
+      -
         name: "ask"
         explanation: "Iets vragen met `ask`"
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
-  4: 
+  4:
     start_code: "naam is ask hoe heet jij?\nif naam is Hedy print 'leuk' else print 'minder leuk!'"
     intro_text: "`ask` en `print` werken nog zoals in level 3. Maar in Level 4 is er iets nieuws, de `if`!"
-    commands: 
-      - 
+    commands:
+      -
         name: "print"
         explanation: "Iets letterlijk printen met `print`."
         example: "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'"
         demo_code: "print 'Hallo welkom bij Hedy'"
-      - 
+      -
         name: "ask"
         explanation: "Iets vragen met `ask`."
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
-      - 
+      -
         name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
-  5: 
+  5:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: "`ask`, `print` en `if` werken nog zoals in level 4. Maar in Level 5 is er iets nieuws: de `repeat`. Met `repeat` kun je codes een aantal keer herhalen."
-    commands: 
-      - 
+    commands:
+      -
         name: "print"
         explanation: "Iets letterlijk printen met `print`."
         example: "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'"
         demo_code: "print 'Hallo welkom bij Hedy'"
-      - 
+      -
         name: "ask"
         explanation: "Iets vragen met `ask`."
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
-      - 
+      -
         name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
-      - 
+      -
         name: "repeat"
         explanation: "Herhalen en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
-  6: 
+  6:
     start_code: "print '5 keer 5 is ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` en `repeat` werken nog zoals in level 4 en 5. Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen. "
-    commands: 
-      - 
-        name: "print"
-        explanation: "Iets letterlijk printen met print."
-        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
-      - 
-        name: "`ask` en `if` samen met rekenen"
-        explanation: "Het antwoord van een som vragen met ask en kijken of het goed is."
-        example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
-        demo_code: "antwoord is ask Hoeveel is 10 plus 10?\nif antwoord is 20 print 'Goedzo!' else print 'Foutje'"
-      - 
-        name: "repeat"
-        explanation: "Herhalen en `if` samen"
-        example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
-  7: 
-    start_code: "repeat 5 times\n  print 'Hallo allemaal'\n  print 'Dit wordt allemaal 5 keer herhaald'"
-    intro_text: "`ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd! Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen, dat betekent dat ze moeten beginnen met vier spaties. Ook als je 1 regel wilt herhalen moet je inspringen! Als je een `repeat` en een `if` samen gebruikt moet je steeds opnieuw inspringen."
-    commands: 
-      - 
+    intro_text: "`ask`, `print`, `if` en `repeat` werken nog zoals in level 4 en 5. Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen."
+    commands:
+      -
         name: "print"
         explanation: "Iets letterlijk printen met `print`."
         example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
         demo_code: "print '5 keer 5 is ' 5 * 5"
-      - 
+      -
+        name: "`ask` en `if` samen met rekenen"
+        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
+        example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
+        demo_code: "antwoord is ask Hoeveel is 10 plus 10?\nif antwoord is 20 print 'Goedzo!' else print 'Foutje'"
+      -
+        name: "repeat"
+        explanation: "Herhalen en `if` samen"
+        example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+        demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+  7:
+    start_code: "repeat 5 times\n  print 'Hallo allemaal'\n  print 'Dit wordt allemaal 5 keer herhaald'"
+    intro_text: "`ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd! Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen, dat betekent dat ze moeten beginnen met vier spaties. Ook als je 1 regel wilt herhalen moet je inspringen! Als je een `repeat` en een `if` samen gebruikt moet je steeds opnieuw inspringen."
+    commands:
+      -
+        name: "print"
+        explanation: "Iets letterlijk printen met `print`."
+        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+      -
         name: "`if` met meerdere regels"
-        explanation: "Het antwoord van een som vragen met ask en kijken of het goed is. Nu printen we twee regels uit."
+        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
         example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
         demo_code: "antwoord is ask Hoeveel is 10 plus 10?\nif antwoord is 20\n    print 'Goedzo!'\n    print 'Het antwoord was inderdaad ' antwoord\nelse\n    print 'Foutje'\n    print 'Het antwoord moest zijn 20'"
-      - 
+      -
         name: "`if` en `repeat` samen"
-        explanation: "repeat en if samen"
+        explanation: "`repeat` en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen\n    repeat 3 times\n        print 'mooi!'\nelse\n    repeat 5 times\n        print 'niet zo mooi'"
   8:
@@ -147,7 +147,7 @@
     commands:
       -
         name: "repeat"
-        explanation: "nieuwe repeat"
+        explanation: "nieuwe `repeat`"
         example: "for i in range 1 to 11"
         demo_code: |
           for i in range 1 to 11

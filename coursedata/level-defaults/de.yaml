@@ -1,6 +1,6 @@
 ---
   1:
-    intro_text: "In Stufe 1 kannst du diese Befehle verwenden"
+    intro_text: "Willkommen bei Hedy! In Level 1 könnt du die Befehle `print`, `ask` und `echo` verwenden. Drückst du die blaue Taste und der Code wird für du eingegeben! Probiert du den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus."
     start_code: "print Hallo Welt!"
     commands:
       -
@@ -29,7 +29,7 @@
         demo_code: "name is Hedy\nprint Willkommen name"
       -
         name: "ask"
-        explanation: "Frage etwas mit `ask`. Achtung! `ask` benötigt jetzt einen Namen."
+        explanation: "Frage etwas mit `ask`. Achtung! Du müsst der Antwort einen Namen mit `is` geben."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ist dir am liebsten!"
       -
@@ -39,7 +39,7 @@
         demo_code: "tiere is Hund, Katze, Känguru\nprint tiere at random"
   3:
     start_code: "print 'Hallo Welt'"
-    intro_text: "In Stufe 3 musst du Anführungszeichen vor und nach Wörtern verwenden, wenn du sie ausgeben möchtest. Echo wird nicht mehr benötigt, weil du die Wörter jetzt mit print ausgeben kannst!"
+    intro_text: "`ask` ist in Level 3 immer noch dasselbe, aber` print` ist jetzt anders. Du müsset Text, den du buchstäblich drucken möchten, in Anführungszeichen setzen."
     commands:
       -
         name: "print"
@@ -86,7 +86,7 @@
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
       -
         name: "ask"
-        explanation: "Frage etwas mit `ask`. "
+        explanation: "Frage etwas mit `ask`."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
       -
@@ -110,7 +110,7 @@
         demo_code: "print '5 mal 5 ist ' 5 * 5"
       -
         name: "`ask` und `if` mit Berechnungen"
-        explanation: "Frage nach einer Rechenaufgabe. Achtung: `print` benötigt immer noch Anführungszeichen."
+        explanation: "Frage nach einer Rechenaufgabe."
         example: "Beispiel: antwort is ask Was ist 10 plus 10?"
         demo_code: "antwort is ask Was ist 10 plus 10?\nif answer is 20 print 'Ja!' else print 'Ups'"
       -
