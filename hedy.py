@@ -765,100 +765,76 @@ def beautify_parse_error(error_message):
     return character_found
 
 def transpile_inner(input_string, level):
-    if level <= 7:
-        punctuation_symbols = ['!', '?', '.']
-        level = int(level)
-        parser = Lark(create_grammar(level))
+    punctuation_symbols = ['!', '?', '.']
+    level = int(level)
+    parser = Lark(create_grammar(level))
 
-        try:
-            program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
-            abstract_syntaxtree = ExtractAST().transform(program_root)
-            lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
-
-        except Exception as e:
-            try:
-                location = e.line, e.column
-                characters_expected = str(e.allowed)
-                character_found  = beautify_parse_error(e.args[0])
-                # print(e.args[0])
-                # print(location, character_found, characters_expected)
-                raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
-            except UnexpectedEOF:
-                # this one can't be beautified (for now), so give up :)
-                raise e
-
-        is_valid = IsValid().transform(program_root)
-        if not is_valid[0]:
-            if is_valid[1] == ' ':
-                line = is_valid[2]
-                #the error here is a space at the beginning of a line, we can fix that!
-
-                fixed_code = repair(input_string)
-                if fixed_code != input_string: #only if we have made a successful fix
-                    result = transpile_inner(fixed_code, level)
-                raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
-            else:
-                invalid_command = is_valid[1]
-                closest = closest_command(invalid_command, commands_per_level[level])
-                raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
-
-        is_complete = IsComplete().transform(program_root)
-        if not is_complete[0]:
-            incomplete_command = is_complete[1]
-            line = is_complete[2]
-            raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
-
-
-
-        if level == 1:
-            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 2:
-            python = 'import random\n'
-            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 3:
-            python = 'import random\n'
-            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 4:
-            python = 'import random\n'
-            python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 5:
-            python = 'import random\n'
-            python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 6:
-            python = 'import random\n'
-            python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 7:
-            python = 'import random\n'
-            python += ConvertToPython_7(punctuation_symbols, lookup_table,0).transform(abstract_syntaxtree)
-            return python
-
-
-    #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
-    elif level == 7:
-        parser = Lark(create_grammar(level))
-        # parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
-        punctuation_symbols = ['!', '?', '.']
-        program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
+    try:
+        program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
+    except Exception as e:
         try:
-            python = 'import random\n'
-            result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
-            return python + result
-        except VisitError as E:
-            raise E.orig_exc
+            location = e.line, e.column
+            characters_expected = str(e.allowed)
+            character_found  = beautify_parse_error(e.args[0])
+            # print(e.args[0])
+            # print(location, character_found, characters_expected)
+            raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
+        except UnexpectedEOF:
+            # this one can't be beautified (for now), so give up :)
+            raise e
 
-    elif level >= 8 and level <= 13:
-        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True)
+    is_valid = IsValid().transform(program_root)
+    if not is_valid[0]:
+        if is_valid[1] == ' ':
+            line = is_valid[2]
+            #the error here is a space at the beginning of a line, we can fix that!
+
+            fixed_code = repair(input_string)
+            if fixed_code != input_string: #only if we have made a successful fix
+                result = transpile_inner(fixed_code, level)
+            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
+        else:
+            invalid_command = is_valid[1]
+            closest = closest_command(invalid_command, commands_per_level[level])
+            raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
+
+    is_complete = IsComplete().transform(program_root)
+    if not is_complete[0]:
+        incomplete_command = is_complete[1]
+        line = is_complete[2]
+        raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
+
+
+
+    if level == 1:
+        python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 2:
         python = 'import random\n'
-        python += ConvertToPython().transform(parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
+        python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 3:
+        python = 'import random\n'
+        python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 4:
+        python = 'import random\n'
+        python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 5:
+        python = 'import random\n'
+        python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 6:
+        python = 'import random\n'
+        python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 7:
+        python = 'import random\n'
+        python += ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(abstract_syntaxtree)
         return python
     else:
         raise Exception('Levels over 7 are not implemented yet')
