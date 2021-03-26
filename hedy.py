@@ -1,7 +1,6 @@
 from lark import Lark
 from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
-from lark.indenter import Indenter
 from os import path
 import sys
 
@@ -98,11 +97,6 @@ class ExtractAST(Transformer):
     #level 5
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
-    #level 6 (and up)
-    def indent(self, args):
-        return ''
-    def dedent(self, args):
-        return ''
 
 def flatten(args):
     flattened_args = []
@@ -469,10 +463,9 @@ class ConvertToPython_6(ConvertToPython_5):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
 
 class ConvertToPython_7(ConvertToPython_6):
-    def __init__(self, punctuation_symbols, lookup, indent_level):
+    def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
-        self.indent_level = indent_level
 
     def command(self, args):
         return "".join(args)
@@ -549,24 +542,9 @@ class ConvertTo():
             return getattr(self, tree.data)(tree.children)
 
 class ConvertToPython(ConvertTo):
-    def __init__(self, indent_level = 0):
-        self.indent_level = indent_level
-
-    def _generate_indentation(self):
-        return self.indent_level * "    "
 
     def start(self, children):
         return "".join(self._call_children(children))
-
-    def statement(self, children):
-        args = self._call_children(children)
-        return "".join([self._generate_indentation() + x for x in args])
-
-    def statement_block(self, children):
-        self.indent_level += 1
-        args = self._call_children(children)
-        self.indent_level -= 1
-        return "".join(args)
 
     def if_statement(self, children):
         args = self._call_children(children)
@@ -663,22 +641,6 @@ class ConvertToPython(ConvertTo):
     def ask(self, children):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
-
-class BasicIndenter(Indenter):
-    NL_type = "_EOL"
-    OPEN_PAREN_types = []
-    CLOSE_PAREN_types = []
-    INDENT_type = "INDENT"
-    DEDENT_type = "DEDENT"
-    tab_len = 4
-
-class BasicIndenter2(Indenter):
-    NL_type = "_EOL"
-    OPEN_PAREN_types = []
-    CLOSE_PAREN_types = []
-    INDENT_type = "_INDENT"
-    DEDENT_type = "_DEDENT"
-    tab_len = 4
 
 def create_grammar(level):
     # Load Lark grammars relative to directory of current file
@@ -834,7 +796,7 @@ def transpile_inner(input_string, level):
         return python
     elif level == 7:
         python = 'import random\n'
-        python += ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(abstract_syntaxtree)
+        python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     else:
         raise Exception('Levels over 7 are not implemented yet')
