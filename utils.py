@@ -107,11 +107,10 @@ def db_get (table, data, *not_primary):
         else:
             return None
     else:
-        return None
-        # result = db.get_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
-        # if 'Item' not in result:
-        #     return None
-        # return db_decode (result ['Item'])
+        result = db.get_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
+        if 'Item' not in result:
+            return None
+        return db_decode (result ['Item'])
 
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
 def db_get_many (table, data, *not_primary):
