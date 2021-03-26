@@ -798,6 +798,9 @@ def transpile_inner(input_string, level):
         python = 'import random\n'
         python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
+
+    #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
+
     else:
         raise Exception('Levels over 7 are not implemented yet')
 
