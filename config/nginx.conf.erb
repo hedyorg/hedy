@@ -1,0 +1,91 @@
+daemon off;
+worker_processes auto;
+
+events {
+   use epoll;
+   accept_mutex on;
+   worker_connections 1024;
+   multi_accept on;
+}
+
+http {
+   server_tokens off;
+   gzip on;
+   gzip_min_length 250;
+
+   access_log off;
+   error_log stderr info;
+
+   include mime.types;
+   default_type application/octet-stream;
+
+   # This is the CURRENT version of the app server
+   upstream current_app_server {
+      server unix:/tmp/nginx.socket fail_timeout=0;
+   }
+
+   # This is the TEST version of the app server
+   upstream test_server {
+      keepalive 100;
+      server hedy-test.herokuapp.com:443;
+   }
+
+   # Split clients among the versions based on their IP address.
+   #
+   # (IP address makes it so that multiple requests from the same user all
+   # go to the same server).
+   split_clients "${remote_addr}" $appversion {
+   # NOTE! '0%' is not a valid value, so comment out the line instead of writing 0%!
+      100%     current_app_server;
+      *       test_server;
+   }
+
+   # We need to do a couple additional things if we chose to forward to
+   # the test server, because of the way Heroku works.
+   #
+   # Specifically -- we want the protocol to be HTTPS when traffic is going to pass
+   # across the internet, but we want to keep HTTP for local traffic.
+   #
+   # Also, we MUST explicitly set the HTTP "Host" header, because Heroku is using
+   # virtual hosting and it will redirect back to 'hedy-alpha' if we don't!
+   #
+   # This is pretty uncomfortable to write because we have to make two 'map's,
+   # but there ya go.
+   map $appversion $protocol {
+      default     http;
+      test_server https;
+   }
+
+   map $appversion $hostheader {
+      default     $proxy_host;
+      test_server hedy-test.herokuapp.com;
+   }
+
+   # handle SNI
+   proxy_ssl_server_name on;
+
+   # resolver needs to be set because we're using dynamic proxy_pass
+   resolver 8.8.8.8;
+
+   server {
+      listen <%= ENV["PORT"] %>;
+      location / {
+         # Set host header (for the benefit of Heroku traffic routing)
+         proxy_set_header host $hostheader;
+
+         # Let the backend know about the IP addresses
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-Host $host;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+         # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
+         proxy_http_version 1.1;
+
+         # Remove the Connection header if the client sends it,
+         # it could be "close" to close a keepalive connection
+         proxy_set_header Connection "";
+
+         proxy_pass $protocol://$appversion;
+      }
+   }
+}

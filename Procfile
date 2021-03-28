@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: config/heroku-startup.sh
