@@ -3,6 +3,18 @@ import hedy
 import sys
 import io
 from contextlib import contextmanager
+import textwrap
+
+# code = textwrap.dedent("""
+# """)
+#
+# result = hedy.transpile(code, 3)
+#
+# expected = textwrap.dedent("""\
+# """)
+#
+# self.assertEqual(expected, result)
+
 
 @contextmanager
 def captured_output():
@@ -32,53 +44,164 @@ class TestsLevel3(unittest.TestCase):
       self.assertEqual(str(context), 'First word is not a command')  # hier moet nog we een andere foutmelding komen!
 
   def test_print(self):
-    result = hedy.transpile("print 'hallo wereld!'", 3)
-    self.assertEqual(result, "import random\nprint('hallo wereld!')")
+
+    code = textwrap.dedent("""\
+    print 'hallo wereld!'""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    print('hallo wereld!')""")
+
+    self.assertEqual(expected, result)
+
 
   def test_print_with_comma(self):
-    result = hedy.transpile("naam is Hedy\nprint 'ik heet ,'", 3)
-    self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet ,')")
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet ,'""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet ,')""")
+
+    self.assertEqual(expected, result)
 
   def test_print_with_single_quote(self):
-    result = hedy.transpile("naam is Hedy\nprint 'ik heet \\''", 3)
-    self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet \\'')")
+
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet \\''""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet \\'')""")
+
+    self.assertEqual(expected, result)
 
   def test_name_with_underscore(self):
-    result = hedy.transpile("voor_naam is Hedy\nprint 'ik heet '", 3)
-    self.assertEqual(result, "import random\nvoor_naam = 'Hedy'\nprint('ik heet ')")
+    code = textwrap.dedent("""\
+    voor_naam is Hedy
+    print 'ik heet '""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    voor_naam = 'Hedy'
+    print('ik heet ')""")
+
+    self.assertEqual(expected, result)
 
   def test_name_that_is_keyword(self):
-    result = hedy.transpile("for is Hedy\nprint 'ik heet ' for ", 3)
-    self.assertEqual(result, "import random\n_for = 'Hedy'\nprint('ik heet '+_for)")
+    code = textwrap.dedent("""\
+    for is Hedy
+    print 'ik heet ' for """)
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    _for = 'Hedy'
+    print('ik heet '+_for)""")
+
+    self.assertEqual(expected, result)
 
   def test_print_Spanish(self):
-    result = hedy.transpile("print 'Cuál es tu color favorito?'", 3)
-    self.assertEqual(result, "import random\nprint('Cuál es tu color favorito?')")
+
+    code = textwrap.dedent("""\
+    print 'Cuál es tu color favorito?'""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    print('Cuál es tu color favorito?')""")
+
+    self.assertEqual(expected, result)
 
   def test_print_with_list_var(self):
-    result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at 1", 3)
-    self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[1])")
+
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print dieren at 1""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(dieren[1])""")
+
+    self.assertEqual(expected, result)
+
     self.assertEqual(run_code(result), "Kat")
 
   def test_print_with_list_var_random(self):
-    result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", 3)
-    self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
-    self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print dieren at random""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(random.choice(dieren))""")
+
+    self.assertEqual(expected, result)
+
+    code_to_run = "import random\n"+result
+
+    self.assertIn(run_code(code_to_run), ['Hond', 'Kat', 'Kangoeroe'])
 
   def test_transpile_ask_Spanish(self):
-    result = hedy.transpile("color is ask Cuál es tu color favorito?", 3)
-    self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito?')")
+    code = textwrap.dedent("""\
+    color is ask Cuál es tu color favorito?""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    color = input('Cuál es tu color favorito?')""")
+
+    self.assertEqual(expected, result)
 
   def test_print_2(self):
-    result = hedy.transpile("print 'ik heet henk'", 3)
-    self.assertEqual(result, """import random
-print('ik heet henk')""")
+
+    code = textwrap.dedent("""\
+    print 'ik heet henk'""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    print('ik heet henk')""")
+
+    self.assertEqual(expected, result)
 
   def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 3)
-    self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
+
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet'+naam)""")
+
+    self.assertEqual(expected, result)
 
   def test_transpile_ask_with_print(self):
-    result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint 'jouw lievelingskleur is dus' kleur '!'", 3)
-    self.assertEqual(result,
-                     "import random\nkleur = input('wat is je lievelingskleur?')\nprint('jouw lievelingskleur is dus'+kleur+'!')")
+
+    code = textwrap.dedent("""
+    kleur is ask wat is je lievelingskleur?
+    print 'jouw lievelingskleur is dus' kleur '!'""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    kleur = input('wat is je lievelingskleur?')
+    print('jouw lievelingskleur is dus'+kleur+'!')""")
+
+    self.assertEqual(expected, result)
