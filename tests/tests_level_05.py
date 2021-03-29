@@ -25,25 +25,73 @@ class TestsLevel5(unittest.TestCase):
   def test_print_with_var(self):
     result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 5)
     self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet'+naam)")
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
+
 
   def test_print_with_comma(self):
     result = hedy.transpile("naam is Hedy\nprint 'ik heet,' naam", 5)
     self.assertEqual(result, "import random\nnaam = 'Hedy'\nprint('ik heet,'+naam)")
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
 
   def test_print_Spanish(self):
     result = hedy.transpile("print 'Cuál es tu color favorito?'", 5)
     self.assertEqual(result, "import random\nprint('Cuál es tu color favorito?')")
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
 
   def test_transpile_ask_Spanish(self):
     result = hedy.transpile("color is ask Cuál es tu color favorito?", 5)
     self.assertEqual(result, "import random\ncolor = input('Cuál es tu color favorito?')")
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
 
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("abc felienne 123", 5)
     self.assertEqual(str(context.exception), 'Invalid')
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
+
 
   # todo: a few more things repeated from 4 here?
+
 
   # now add repeat
   def test_repeat_basic_print(self):
@@ -53,6 +101,15 @@ for i in range(int('5')):
   print('me wants a cookie!')""")
     self.assertEqual(run_code(result),
                      'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
 
   def test_repeat_with_variable_print(self):
     result = hedy.transpile("n is 5\nrepeat n times print 'me wants a cookie!'", 5)
@@ -62,6 +119,15 @@ for i in range(int(n)):
   print('me wants a cookie!')""")
     self.assertEqual(run_code(result),
                      'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
 
   def test_repeat_nested_in_if(self):
     result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'",
@@ -71,6 +137,15 @@ kleur = input('Wat is je lievelingskleur?')
 if kleur == 'groen':
   for i in range(int('3')):
     print('mooi!')""")
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
 
   def test_repeat_over_9_times(self):
     result = hedy.transpile("repeat 10 times print 'me wants a cookie!'", 5)
@@ -79,3 +154,12 @@ for i in range(int('10')):
   print('me wants a cookie!')""")
     self.assertEqual(run_code(result),
                      'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+    code = textwrap.dedent("""\
+    """)
+
+    result = hedy.transpile(code, 5)
+
+    expected = textwrap.dedent("""
+    """)
+
+    self.assertEqual(expected, result)
