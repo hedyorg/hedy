@@ -23,6 +23,7 @@ from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
 from random import random
+import hashlib
 
 # app.py
 from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response
@@ -71,18 +72,17 @@ logging.basicConfig(
 
 app = Flask(__name__, static_url_path='')
 
-def into_number (string):
-    total = 0
-    for char in string:
-        total += ord (char)
-    return total
+def hash_user_or_session (string):
+    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
+    return int (hash, 16)
 
 def redirect_ab (request, session):
     # If the user is logged in, we use their username as identifier, otherwise we use the session id
     user_identifier = current_user(request) ['username'] or str (session_id)
 
     # This will send 50% of the requests into redirect.
-    redirect_flag = (into_number (user_identifier) % 100) < 50
+    redirect_proportion = 50
+    redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
     return redirect_flag
 
 # If present, REDIRECT_AB_TEST should be the name of the target environment (that is, environment B).
