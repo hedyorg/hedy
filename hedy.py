@@ -775,28 +775,22 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 2:
-        python = 'import random\n'
-        python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 3:
-        python = 'import random\n'
-        python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 4:
-        python = 'import random\n'
-        python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 5:
-        python = 'import random\n'
-        python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 6:
-        python = 'import random\n'
-        python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        python = 'import random\n'
-        python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen

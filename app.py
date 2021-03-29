@@ -121,7 +121,7 @@ def parse():
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             result = hedy.transpile(code, level)
-            response["Code"] = "# coding=utf8\n" + result
+            response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
