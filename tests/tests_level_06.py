@@ -77,6 +77,8 @@ class TestsLevel6(unittest.TestCase):
     for i in range(int(n)):
       print('me wants a cookie!')""")
 
+    self.assertEqual(expected, result)
+
     expected_output = textwrap.dedent("""\
     me wants a cookie!
     me wants a cookie!
@@ -84,8 +86,7 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected, result)
-    self.assertEqual(expected_output, run_code(result)),
+    self.assertEqual(expected_output, run_code(result))
 
   # new tests for calculations
   def test_simple_calculation(self):

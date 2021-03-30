@@ -20,6 +20,7 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 def run_code(code):
+    code = "import random\n" + code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
@@ -36,7 +37,7 @@ class TestsForMultipleLevels(unittest.TestCase):
         max_level = 5
         for i in range(min_level, max_level + 1):
             result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
-            self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
+            self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
 
@@ -44,7 +45,7 @@ class TestsForMultipleLevels(unittest.TestCase):
         max_level = 7
         for i in range(min_level, max_level + 1):
             result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
-            self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
 
