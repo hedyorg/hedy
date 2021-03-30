@@ -15,7 +15,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       3: ['print', 'ask', 'is'],
                       4: ['print', 'ask', 'is', 'if'],
                       5: ['print', 'ask', 'is', 'if', 'repeat'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat']
+                      6: ['print', 'ask', 'is', 'if', 'repeat'],
+                      7: ['print', 'ask', 'is', 'if', 'repeat'],
+                      8: ['print', 'ask', 'is', 'if', 'repeat', 'for'],
+                      9: ['print', 'ask', 'is', 'if', 'repeat', 'for', 'elif']
                       }
 
 # 
@@ -127,6 +130,10 @@ class AllAssignmentCommands(Transformer):
     def command(self, args):
         return flatten(args)
 
+    def for_loop(self, args):
+        commands = args[1:]
+        return flatten(commands)
+
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
         #(since then it has no var as 1st argument)
@@ -222,6 +229,14 @@ class Filter(Transformer):
     def elses(self, args):
         return all_arguments_true(args)
 
+    # level 8
+    def for_loop(self, args):
+        return all_arguments_true(args)
+
+    # level 9
+    def elifs(self, args):
+        return all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
@@ -249,7 +264,8 @@ class IsValid(Filter):
         return all_arguments_true(args)
     def echo(self, args):
         return all_arguments_true(args)
-
+    def for_loop(self, args):
+        return all_arguments_true(args)
 
     #leafs with tokens need to be all true
     def var(self, args):
@@ -518,6 +534,19 @@ class ConvertToPython_7(ConvertToPython_6):
         else:
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
+
+class ConvertToPython_8(ConvertToPython_7):
+    def for_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[3:]]
+        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] + "):\n"+"\n".join(all_lines)
+
+class ConvertToPython_9(ConvertToPython_8):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
 
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
@@ -797,6 +826,14 @@ def transpile_inner(input_string, level):
     elif level == 7:
         python = 'import random\n'
         python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 8:
+        python = 'import random\n'
+        python += ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 9:
+        python = 'import random\n'
+        python += ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
