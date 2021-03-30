@@ -15,10 +15,12 @@ def captured_output():
     finally:
         sys.stdout, sys.stderr = old_out, old_err
 
+
 def run_code(code):
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
+  code = "import random\n" + code
+  with captured_output() as (out, err):
+    exec(code)
+  return out.getvalue().strip()
 
 
 class TestsLevel6(unittest.TestCase):
