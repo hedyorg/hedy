@@ -1139,6 +1139,142 @@ keuzes = ['steen', 'schaar', 'papier']
 computerkeuze=random.choice(keuzes)
 print('computer koos '+str(computerkeuze))""", result)
 
+class TestsLevel10(unittest.TestCase):
+
+    def test_for_loop(self):
+        result = hedy.transpile("""
+for a in range 2 to 4:
+    a is a + 2
+    b is b + 2
+""", 10)
+        self.assertEqual(result, """import random
+for a in range(2, 4):
+  a = int(a) + int(2)
+  b = int(b) + int(2)""")
+
+    def test_if_elif_else(self):
+        result = hedy.transpile("""
+a is 5
+if a is 1:
+    x is 2
+elif a is 2:
+    x is 22
+else:
+    x is 222
+""", 10)
+        self.assertEqual(result, """import random
+a = '5'
+if str(a) == str('1'):
+  x = '2'
+elif str(a) == str('2'):
+  x = '22'
+else:
+  x = '222'""")
+
+    def test_print(self):
+        result = hedy.transpile("print 'ik heet'", 10)
+        self.assertEqual("import random\nprint('ik heet')",result)
+
+    def test_print_with_var(self):
+        result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 10)
+        self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))",result)
+
+    def test_print_with_calc_no_spaces(self):
+        result = hedy.transpile("print '5 keer 5 is ' 5*5", 10)
+        self.assertEqual("import random\nprint('5 keer 5 is '+str(int(5) * int(5)))",result)
+
+
+
+
+
+    def test_print_calculation_times_directly(self):
+        result = hedy.transpile("""nummer is 5
+nummertwee is 6
+print nummer * nummertwee""", 10)
+        self.assertEqual("""import random
+nummer = '5'
+nummertwee = '6'
+print(str(int(nummer) * int(nummertwee)))""", result)
+        self.assertEqual(run_code(result), "30")
+
+
+    def test_transpile_ask(self):
+        result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 10)
+        self.assertEqual("import random\nantwoord = input('wat is je lievelingskleur?')",result)
+
+
+
+    def test_if_with_indent(self):
+        result = hedy.transpile("""naam is Hedy
+if naam is Hedy:
+    print 'koekoek'""", 10)
+        self.assertEqual("""import random
+naam = 'Hedy'
+if str(naam) == str('Hedy'):
+  print('koekoek')""", result)
+
+    def test_if_multiple_lines(self):
+        result = hedy.transpile("""naam is Hedy
+if naam is Hedy:
+    print 'toetoet'
+    print 'boing boing'""", 10)
+        self.assertEqual("""import random
+naam = 'Hedy'
+if str(naam) == str('Hedy'):
+  print('toetoet')
+  print('boing boing')""", result)
+
+# todo: here we have to end in a newline, needs to be fixed!
+    def test_if_nested_in_if(self):
+        code="""kleur is groen
+kleur2 is rood
+if kleur is groen:
+    if kleur2 is rood:
+        print 'mooi'"""
+        result = hedy.transpile(code, 10)
+        self.assertEqual("""import random
+kleur = 'groen'
+kleur2 = 'rood'
+if str(kleur) == str('groen'):
+  if str(kleur2) == str('rood'):
+    print('mooi')""", result)
+
+    def test_if_else(self):
+        result = hedy.transpile("""antwoord is ask Hoeveel is 10 plus 10?
+if antwoord is 20:
+    print 'Goedzo!'
+    print 'Het antwoord was inderdaad ' antwoord
+else:
+    print 'Foutje'
+    print 'Het antwoord moest zijn ' antwoord""", 10)
+
+        self.assertEqual("""import random
+antwoord = input('Hoeveel is 10 plus 10?')
+if str(antwoord) == str('20'):
+  print('Goedzo!')
+  print('Het antwoord was inderdaad '+str(antwoord))
+else:
+  print('Foutje')
+  print('Het antwoord moest zijn '+str(antwoord))""",result)
+
+    def test_print_random(self):
+        result = hedy.transpile("""keuzes is steen, schaar, papier
+computerkeuze is keuzes at random
+print 'computer koos ' computerkeuze""", 10)
+        self.assertEqual("""import random
+keuzes = ['steen', 'schaar', 'papier']
+computerkeuze=random.choice(keuzes)
+print('computer koos '+str(computerkeuze))""", result)
+
+    def for_nesting(self):
+        result = hedy.transpile("""for i in range 1 to 3:
+  for j in range 1 to 4:
+      print 'rondje: ' i ' tel: ' j""", 10)
+        self.assertEqual("""import random
+for i in range(1, 3):
+  for j in range(1, 4):
+    print('rondje: '+i+' tel: '+j""",result)
+
 
 if __name__ == '__main__':
     unittest.main()
