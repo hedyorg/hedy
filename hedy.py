@@ -17,8 +17,8 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       5: ['print', 'ask', 'is', 'if', 'repeat'],
                       6: ['print', 'ask', 'is', 'if', 'repeat'],
                       7: ['print', 'ask', 'is', 'if', 'repeat'],
-                      8: ['print', 'ask', 'is', 'if', 'repeat', 'for'],
-                      9: ['print', 'ask', 'is', 'if', 'repeat', 'for', 'elif']
+                      8: ['print', 'ask', 'is', 'if', 'for'],
+                      9: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 # 

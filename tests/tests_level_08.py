@@ -57,32 +57,6 @@ naam = 'Hedy'
 if str(naam) == str('Hedy'):
   print('koekoek')""", result)
 
-  def test_repeat_with_indent(self):
-    result = hedy.transpile("""repeat 5 times
-    print 'koekoek'""", 8)
-    self.assertEqual("""import random
-for i in range(int(5)):
-  print('koekoek')""", result)
-
-  def test_repeat_with_variable_print(self):
-    result = hedy.transpile("n is 5\nrepeat n times\n    print 'me wants a cookie!'", 8)
-    self.assertEqual(result, """import random
-n = '5'
-for i in range(int(n)):
-  print('me wants a cookie!')""")
-    self.assertEqual(run_code(result),
-                     'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
-
-  def test_repeat_nested_in_if(self):
-    result = hedy.transpile("""kleur is groen
-if kleur is groen
-    repeat 3 times
-        print 'mooi'""", 8)
-    self.assertEqual(result, """import random
-kleur = 'groen'
-if str(kleur) == str('groen'):
-  for i in range(int(3)):
-    print('mooi')""")
 
   def test_if_else(self):
     result = hedy.transpile("""antwoord is ask Hoeveel is 10 plus 10?
@@ -101,15 +75,6 @@ if str(antwoord) == str('20'):
 else:
   print('Foutje')
   print('Het antwoord moest zijn '+str(antwoord))""", result)
-
-  def test_repeat_basic_print(self):
-    result = hedy.transpile("""repeat 5 times
-    print 'me wants a cookie!'""", 8)
-    self.assertEqual(result, """import random
-for i in range(int(5)):
-  print('me wants a cookie!')""")
-    self.assertEqual(run_code(result),
-                     'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
 
   def test_print_random(self):
     result = hedy.transpile("""keuzes is steen, schaar, papier

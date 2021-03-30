@@ -7,7 +7,6 @@
 start: program
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
-         | repeat
          | ifs elses?
          | ask
          | for_loop
@@ -39,9 +38,6 @@ condition: (equality_check|in_list_check) (" and " condition)*
 list_access_var : var " is " var " at " (index | random)
 equality_check: textwithoutspaces " is " textwithoutspaces
 in_list_check: textwithoutspaces " in " var
-
-//new for level 5
-repeat: "repeat " (NUMBER | var) " times" _EOL (" "+ command) (_EOL " "+ command)*
 
 //new for level 6
 ?sum: product
