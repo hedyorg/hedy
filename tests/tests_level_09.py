@@ -95,7 +95,7 @@ for a in range 2 to 4:
     self.assertEqual(result, """import random
 a = '2'
 a = '3'
-for a in range(2, 4):
+for a in range(int(2), int(4)+1):
   a = int(a) + int(2)
   b = int(b) + int(2)""")
 
@@ -115,11 +115,11 @@ else:
 
   def testforloop(self):
     result = hedy.transpile("""
-for i in range 1 to 11:
+for i in range 1 to 10:
   print i
 print 'wie niet weg is is gezien'""", 9)
     self.assertEqual(result, """import random
-for i in range(1, 11):
+for i in range(int(1), int(10)+1):
   print(str(i))
 print('wie niet weg is is gezien')""")
 

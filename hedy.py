@@ -539,7 +539,7 @@ class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[3:]]
-        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] + "):\n"+"\n".join(all_lines)
+        return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
 
 class ConvertToPython_9(ConvertToPython_8):
     def elifs(self, args):
