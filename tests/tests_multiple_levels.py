@@ -29,7 +29,7 @@ def run_code(code):
 #
 
 class TestsForMultipleLevels(unittest.TestCase):
-    max_level = 7
+    max_level = 9
 
     def test_print_with_list_var_random(self):
         min_level = 2
@@ -41,7 +41,7 @@ class TestsForMultipleLevels(unittest.TestCase):
             print('Passed at level ', i)
 
         min_level = 6
-        max_level = 7
+        max_level = 9
         for i in range(min_level, max_level + 1):
             result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
             self.assertEqual(result, "import random\ndieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
