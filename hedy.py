@@ -822,12 +822,10 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
-        python = 'import random\n'
-        python += ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
-        python = 'import random\n'
-        python += ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
