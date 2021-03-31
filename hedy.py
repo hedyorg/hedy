@@ -1,7 +1,7 @@
 from lark import Lark
 from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
-from lark.indenter import Indenter
+from os import path
 import sys
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
@@ -15,7 +15,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       3: ['print', 'ask', 'is'],
                       4: ['print', 'ask', 'is', 'if'],
                       5: ['print', 'ask', 'is', 'if', 'repeat'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat']
+                      6: ['print', 'ask', 'is', 'if', 'repeat'],
+                      7: ['print', 'ask', 'is', 'if', 'repeat'],
+                      8: ['print', 'ask', 'is', 'if', 'for'],
+                      9: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 # 
@@ -97,11 +100,6 @@ class ExtractAST(Transformer):
     #level 5
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
-    #level 6 (and up)
-    def indent(self, args):
-        return ''
-    def dedent(self, args):
-        return ''
 
 def flatten(args):
     flattened_args = []
@@ -131,6 +129,10 @@ class AllAssignmentCommands(Transformer):
 
     def command(self, args):
         return flatten(args)
+
+    def for_loop(self, args):
+        commands = args[1:]
+        return flatten(commands)
 
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
@@ -227,6 +229,14 @@ class Filter(Transformer):
     def elses(self, args):
         return all_arguments_true(args)
 
+    # level 8
+    def for_loop(self, args):
+        return all_arguments_true(args)
+
+    # level 9
+    def elifs(self, args):
+        return all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
@@ -254,7 +264,8 @@ class IsValid(Filter):
         return all_arguments_true(args)
     def echo(self, args):
         return all_arguments_true(args)
-
+    def for_loop(self, args):
+        return all_arguments_true(args)
 
     #leafs with tokens need to be all true
     def var(self, args):
@@ -468,10 +479,9 @@ class ConvertToPython_6(ConvertToPython_5):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
 
 class ConvertToPython_7(ConvertToPython_6):
-    def __init__(self, punctuation_symbols, lookup, indent_level):
+    def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
-        self.indent_level = indent_level
 
     def command(self, args):
         return "".join(args)
@@ -525,6 +535,19 @@ class ConvertToPython_7(ConvertToPython_6):
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
+class ConvertToPython_8(ConvertToPython_7):
+    def for_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[3:]]
+        return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
+
+class ConvertToPython_9(ConvertToPython_8):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
+
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
@@ -548,24 +571,9 @@ class ConvertTo():
             return getattr(self, tree.data)(tree.children)
 
 class ConvertToPython(ConvertTo):
-    def __init__(self, indent_level = 0):
-        self.indent_level = indent_level
-
-    def _generate_indentation(self):
-        return self.indent_level * "    "
 
     def start(self, children):
         return "".join(self._call_children(children))
-
-    def statement(self, children):
-        args = self._call_children(children)
-        return "".join([self._generate_indentation() + x for x in args])
-
-    def statement_block(self, children):
-        self.indent_level += 1
-        args = self._call_children(children)
-        self.indent_level -= 1
-        return "".join(args)
 
     def if_statement(self, children):
         args = self._call_children(children)
@@ -663,25 +671,12 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
-class BasicIndenter(Indenter):
-    NL_type = "_EOL"
-    OPEN_PAREN_types = []
-    CLOSE_PAREN_types = []
-    INDENT_type = "INDENT"
-    DEDENT_type = "DEDENT"
-    tab_len = 4
-
-class BasicIndenter2(Indenter):
-    NL_type = "_EOL"
-    OPEN_PAREN_types = []
-    CLOSE_PAREN_types = []
-    INDENT_type = "_INDENT"
-    DEDENT_type = "_DEDENT"
-    tab_len = 4
-
 def create_grammar(level):
-    with open("grammars/level" + str(level) + ".lark", "r") as file:
+    # Load Lark grammars relative to directory of current file
+    script_dir = path.abspath(path.dirname(__file__))
+    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r") as file:
         return file.read()
+
 
 def transpile(input_string, level):
     try:
@@ -761,101 +756,82 @@ def beautify_parse_error(error_message):
     return character_found
 
 def transpile_inner(input_string, level):
-    if level <= 7:
-        punctuation_symbols = ['!', '?', '.']
-        level = int(level)
-        parser = Lark(create_grammar(level))
+    punctuation_symbols = ['!', '?', '.']
+    level = int(level)
+    parser = Lark(create_grammar(level))
 
-        try:
-            program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
-            abstract_syntaxtree = ExtractAST().transform(program_root)
-            lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
-
-        except Exception as e:
-            try:
-                location = e.line, e.column
-                characters_expected = str(e.allowed)
-                character_found  = beautify_parse_error(e.args[0])
-                # print(e.args[0])
-                # print(location, character_found, characters_expected)
-                raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
-            except UnexpectedEOF:
-                # this one can't be beautified (for now), so give up :)
-                raise e
-
-        is_valid = IsValid().transform(program_root)
-        if not is_valid[0]:
-            if is_valid[1] == ' ':
-                line = is_valid[2]
-                #the error here is a space at the beginning of a line, we can fix that!
-
-                fixed_code = repair(input_string)
-                if fixed_code != input_string: #only if we have made a successful fix
-                    result = transpile_inner(fixed_code, level)
-                raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
-            else:
-                invalid_command = is_valid[1]
-                closest = closest_command(invalid_command, commands_per_level[level])
-                raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
-
-        is_complete = IsComplete().transform(program_root)
-        if not is_complete[0]:
-            incomplete_command = is_complete[1]
-            line = is_complete[2]
-            raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
-
-
-
-        if level == 1:
-            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 2:
-            python = 'import random\n'
-            python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 3:
-            python = 'import random\n'
-            python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 4:
-            python = 'import random\n'
-            python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 5:
-            python = 'import random\n'
-            python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 6:
-            python = 'import random\n'
-            python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-            return python
-        elif level == 7:
-            python = 'import random\n'
-            python += ConvertToPython_7(punctuation_symbols, lookup_table,0).transform(abstract_syntaxtree)
-            return python
-
-
-    #todo: we need to be able to 'valid check' levels 6 and 8+ also, skipping for now (requires changes to grammar)
-    elif level == 7:
-        parser = Lark(create_grammar(level))
-        # parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter(), debug=True)
-        punctuation_symbols = ['!', '?', '.']
-        program_root = parser.parse(input_string + '\n').children[0]  # TODO: temporary fix, statements have to end with _EOL
+    try:
+        program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
+    except Exception as e:
         try:
-            python = 'import random\n'
-            result = ConvertToPython_7(punctuation_symbols, lookup_table, 0).transform(program_root)
-            return python + result
-        except VisitError as E:
-            raise E.orig_exc
+            location = e.line, e.column
+            characters_expected = str(e.allowed)
+            character_found  = beautify_parse_error(e.args[0])
+            # print(e.args[0])
+            # print(location, character_found, characters_expected)
+            raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
+        except UnexpectedEOF:
+            # this one can't be beautified (for now), so give up :)
+            raise e
 
-    elif level >= 8 and level <= 13:
-        parser = Lark(create_grammar(level), parser='lalr', postlex=BasicIndenter2(), debug=True)
-        python = 'import random\n'
-        python += ConvertToPython().transform(parser.parse(input_string + '\n'))  # TODO: temporary fix, statements have to end with _EOL
+    is_valid = IsValid().transform(program_root)
+    if not is_valid[0]:
+        if is_valid[1] == ' ':
+            line = is_valid[2]
+            #the error here is a space at the beginning of a line, we can fix that!
+
+            fixed_code = repair(input_string)
+            if fixed_code != input_string: #only if we have made a successful fix
+                result = transpile_inner(fixed_code, level)
+            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
+        else:
+            invalid_command = is_valid[1]
+            closest = closest_command(invalid_command, commands_per_level[level])
+            raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
+
+    is_complete = IsComplete().transform(program_root)
+    if not is_complete[0]:
+        incomplete_command = is_complete[1]
+        line = is_complete[2]
+        raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
+
+
+
+    if level == 1:
+        python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
+    elif level == 2:
+        python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 3:
+        python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 4:
+        python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 5:
+        python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 6:
+        python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 7:
+        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 8:
+        python = 'import random\n'
+        python += ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 9:
+        python = 'import random\n'
+        python += ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+
+    #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
+
     else:
         raise Exception('Levels over 7 are not implemented yet')
 

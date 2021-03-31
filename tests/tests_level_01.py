@@ -3,6 +3,7 @@ import hedy
 import sys
 import io
 from contextlib import contextmanager
+import textwrap
 
 @contextmanager
 def captured_output():
@@ -14,27 +15,29 @@ def captured_output():
     finally:
         sys.stdout, sys.stderr = old_out, old_err
 
+
 def run_code(code):
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
+  code = "import random\n" + code
+  with captured_output() as (out, err):
+    exec(code)
+  return out.getvalue().strip()
 
 class TestsLevel1(unittest.TestCase):
 
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("abc felienne 123", 1)
-    self.assertEqual(str(context.exception), 'Invalid')
+    self.assertEqual('Invalid', str(context.exception))
 
   def test_transpile_incomplete(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("print", 1)
-    self.assertEqual(str(context.exception), 'Incomplete')
+    self.assertEqual('Incomplete', str(context.exception))
 
   def test_transpile_incomplete_with_multiple_lines(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("print hallo allemaal\nprint", 1)
-    self.assertEqual(str(context.exception), 'Incomplete')
+    self.assertEqual('Incomplete', str(context.exception))
 
   # def test_transpile_other_2(self):
   #   with self.assertRaises(Exception) as context:
@@ -46,21 +49,21 @@ class TestsLevel1(unittest.TestCase):
   def test_transpile_incomplete_not_a_keyword(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("groen", 1)
-    self.assertEqual(str(context.exception), 'Invalid')
+    self.assertEqual('Invalid', str(context.exception))
 
   def test_transpile_print(self):
     result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
-    self.assertEqual(result, "print('Hallo welkom bij Hedy!')")
-    self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
+    self.assertEqual("print('Hallo welkom bij Hedy!')", result)
+    self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
   def test_transpile_ask_Spanish(self):
     result = hedy.transpile("ask ask Cuál es tu color favorito?", 1)
-    self.assertEqual(result, "answer = input('ask Cuál es tu color favorito?')")
+    self.assertEqual("answer = input('ask Cuál es tu color favorito?')", result)
 
   def test_lines_may_end_in_spaces(self):
     result = hedy.transpile("print Hallo welkom bij Hedy! ", 1)
-    self.assertEqual(result, "print('Hallo welkom bij Hedy! ')")
-    self.assertEqual(run_code(result), 'Hallo welkom bij Hedy!')
+    self.assertEqual("print('Hallo welkom bij Hedy! ')", result)
+    self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
   def test_lines_may_not_start_with_spaces(self):
     with self.assertRaises(Exception) as context:
@@ -69,7 +72,7 @@ class TestsLevel1(unittest.TestCase):
 
   def test_print_with_comma(self):
     result = hedy.transpile("print iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.", 1)
-    self.assertEqual(result, "print('iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.')")
+    self.assertEqual("print('iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.')", result)
 
   def test_word_plus_period(self):
     with self.assertRaises(Exception) as context:
@@ -87,24 +90,30 @@ class TestsLevel1(unittest.TestCase):
 
   def test_transpile_ask(self):
     result = hedy.transpile("ask wat is je lievelingskleur?", 1)
-    self.assertEqual(result, "answer = input('wat is je lievelingskleur?')")
+    self.assertEqual("answer = input('wat is je lievelingskleur?')", result)
 
   def test_transpile_print_multiple_lines(self):
     result = hedy.transpile("print Hallo welkom bij Hedy\nprint Mooi hoor", 1)
-    self.assertEqual(result, "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')")
+    self.assertEqual("print('Hallo welkom bij Hedy')\nprint('Mooi hoor')", result)
 
   def test_transpile_three_lines(self):
-    input = """print Hallo
-ask Wat is je lievelingskleur
-echo je lievelingskleur is"""
-    result = hedy.transpile(input, 1)
-    self.assertEqual(result,
-                     "print('Hallo')\nanswer = input('Wat is je lievelingskleur')\nprint('je lievelingskleur is'+answer)")
+    input = textwrap.dedent("""\
+    print Hallo
+    ask Wat is je lievelingskleur
+    echo je lievelingskleur is""")
 
+    expected = textwrap.dedent("""\
+    print('Hallo')
+    answer = input('Wat is je lievelingskleur')
+    print('je lievelingskleur is'+answer)""")
+
+    result = hedy.transpile(input, 1)
+    self.assertEqual(expected, result)
+                     
   def test_transpile_echo(self):
     result = hedy.transpile("echo Jouw lievelingskleur is dus...", 1)
-    self.assertEqual(result, "print('Jouw lievelingskleur is dus...'+answer)")
+    self.assertEqual("print('Jouw lievelingskleur is dus...'+answer)", result)
 
   def test_transpile_echo_without_argument(self):
     result = hedy.transpile("echo", 1)
-    self.assertEqual(result, "print(answer)")
+    self.assertEqual("print(answer)", result)

@@ -1,7 +1,7 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
 <div tabindex=0>
-  {{intro_text}}
+  {{intro_text|commonmark}}
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     {% for command in commands %}
     <!-- """+commando[0]+""" demo -->
