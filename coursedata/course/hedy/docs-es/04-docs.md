@@ -3,7 +3,7 @@ level: 4
 ---
 En el nivel 4 las reglas para `ask` y `print` siguen siendo las mismas. Debes solamente usar comillas para imprimir texto literalmente.
 
-Sin embargo, hay una funcion nueva: `if`. "If" es la palabra inglesa para "si".
+Sin embargo, hay una función nueva: `if`. "If" es la palabra inglesa para "si".
 
 Aquí encontrarás nuevamente algunas tareas para poner manos a la obra.
 
@@ -28,7 +28,7 @@ En el nivel 4 podemos nuevamente programar el juego piedra, papel o tijera, pero
 * `si eleccioncomputadora is tijera and tueleccion is papel print '¡la computadora gana!'`
 * `si eleccioncomputadora es tijera and tueleccion is piedra print '¡tu ganas!'`
 
-Recordatorio: `random` es la palabra en inglés para "aleatorio"; `and` es la palabra inglesa para "y".
+Recordatorio: `random` es la palabra en inglés para "aleatorio"; `and` es la palabra inglesa para "y"; y `else` es la palabra inglesa para "de otro modo".
 
 # Haz los dados
 

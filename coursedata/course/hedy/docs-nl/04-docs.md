@@ -26,7 +26,7 @@ Hier is het begin van het programma, maak jij de regels zelf af?
 * `if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'`
 * `if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'`
 
-Herinnering: `random` (je zegt ren-dom) is het Engelse woord voor willekeurig; `and` is het Engelse woord voor en.
+Herinnering: `random` (je zegt ren-dom) is het Engelse woord voor willekeurig; `and` is het Engelse woord voor en; en `else` is het Engelse woord voor anders.
 
 # Maak dobbelsteen na
 Je kunt ook in Level 4 weer een dobbelsteen maken en daarbij een `if` gebruiken. Bijv zo:
