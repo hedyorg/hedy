@@ -64,7 +64,7 @@ Esta es mi historia, ahora el personaje principal que elijas siempre viene en el
 1. Escribe una historia corta sobre tu personaje principal.
 2. Cuando aparezca el nombre de tu personaje principal, pon siempre `nombre` (ver ejemplo)
 3. También puede haber oraciones en la historia que no contengan un `nombre`
-4. Ahora traduce su historia al código Hedy, de la siguiente manera:
+4. Ahora traduce tu historia al código Hedy, de la siguiente manera:
 
 Línea 1:
 * Escribe `nombre is` y detrás el nombre de tu personaje principal.
