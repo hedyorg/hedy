@@ -14,7 +14,7 @@ else_statement: "else" _EOL statement_block
 
 repeat: "repeat" expression "times" _EOL statement_block
 
-for_loop: "for" NAME "in" "range" (NAME | NUMBER) "to" (NAME | NUMBER) "step" (NAME | NUMBER) _EOL statement_block
+for_loop: "for" NAME "is" (NAME | NUMBER) "to" (NAME | NUMBER) _EOL statement_block
 
 assignment: NAME "is" expression
           | NAME "is" list
