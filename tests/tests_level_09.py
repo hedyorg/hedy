@@ -16,6 +16,7 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 def run_code(code):
+    code = "import random\n" + code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
