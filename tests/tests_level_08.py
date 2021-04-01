@@ -22,7 +22,7 @@ def run_code(code):
     return out.getvalue().strip()
 
 
-class TestsLevel7(unittest.TestCase):
+class TestsLevel8(unittest.TestCase):
   def test_print(self):
     result = hedy.transpile("print 'ik heet'", 8)
     self.assertEqual("print('ik heet')", result)
@@ -108,7 +108,7 @@ if str(a) == str('1'):
 else:
   x = '222'""")
 
-  def testforloop(self):
+  def test_forloop(self):
     result = hedy.transpile("""
 for i in range 1 to 10
   print i

@@ -170,9 +170,12 @@
         example: "elif a is 5:"
         demo_code: "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'a is 2'\nelse:\n    print 'a is niet 1 of 2'"
   10:
-    start_code: "for i in range 1 to 4:\n    for j in range 1 to 6:\n    print 'we zitten nu in rondje: ' i ' en de tel is: ' j"
+    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we zitten nu in rondje: ' i ' en de tel is: ' j"
     intro_text: "Vanaf nu mogen we ook een loopje vaker uitvoeren. In het voorbeeld tellen we 3 maal tot 5. Dus we doen 3 rondjes en tellen elke keer tot 5"
     commands:
+      - name: "for onder elkaar"
+        explanation: "Dit is een voorbeeld van for loopjes onder/in elkaar zetten"
+        demo_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we zitten nu in rondje: ' i ' en de tel is: ' j"
       - name: "if onder elkaar"
         explanation: "We kunnen hetzelfde doen met if statements"
         demo_code: "kleur is blauw\nkleurtwee is geel\nif kleur is blauw:\n    if kleurtwee is geel:\n        print 'Samen is dit groen!'"

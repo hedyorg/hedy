@@ -829,9 +829,8 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 10:
-        python = 'import random\n'
         # Code does not change for nesting
-        python += ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
