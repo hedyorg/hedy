@@ -3,6 +3,7 @@ import hedy
 import sys
 import io
 from contextlib import contextmanager
+import textwrap
 
 @contextmanager
 def captured_output():
@@ -14,81 +15,156 @@ def captured_output():
     finally:
         sys.stdout, sys.stderr = old_out, old_err
 
+
 def run_code(code):
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
+  code = "import random\n" + code
+  with captured_output() as (out, err):
+    exec(code)
+  return out.getvalue().strip()
 
 
 class TestsLevel6(unittest.TestCase):
   def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 6)
-    self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))", result)
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet'+str(naam))""")
+
+    self.assertEqual(expected, result)
+
 
   def test_transpile_ask(self):
-    result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 6)
-    self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
+    code = textwrap.dedent("""\
+    antwoord is ask wat is je lievelingskleur?""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
+    antwoord = input('wat is je lievelingskleur?')""")
+
+    self.assertEqual(expected, result)
 
   def test_repeat_nested_in_if(self):
-    result = hedy.transpile("kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!'",
-                            6)
-    self.assertEqual(result, """import random
-kleur = input('Wat is je lievelingskleur?')
-if str(kleur) == str('groen'):
-  for i in range(int('3')):
-    print('mooi!')""")
+
+    code = textwrap.dedent("""\
+    kleur is ask Wat is je lievelingskleur?
+    if kleur is groen repeat 3 times print 'mooi!'""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
+    kleur = input('Wat is je lievelingskleur?')
+    if str(kleur) == str('groen'):
+      for i in range(int('3')):
+        print('mooi!')""")
+
+    self.assertEqual(expected, result)
 
   def test_repeat_with_variable_print(self):
-    result = hedy.transpile("n is 5\nrepeat n times print 'me wants a cookie!'", 6)
-    self.assertEqual(result, """import random
-n = '5'
-for i in range(int(n)):
-  print('me wants a cookie!')""")
-    self.assertEqual(run_code(result),
-                     'me wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!\nme wants a cookie!')
+    code = textwrap.dedent("""\
+    n is 5
+    repeat n times print 'me wants a cookie!'""")
 
-    # new tests for calculations
-    def test_simple_calculation(self):
-      result = hedy.transpile("nummer is 4 + 5", 6)
-      self.assertEqual('import random\nnummer = int(4) + int(5)', result)
+    result = hedy.transpile(code, 6)
 
-    def test_simple_calculation(self):
-      result = hedy.transpile("nummer is 4+5", 6)
-      self.assertEqual('import random\nnummer = int(4) + int(5)', result)
+    expected = textwrap.dedent("""\
+    n = '5'
+    for i in range(int(n)):
+      print('me wants a cookie!')""")
 
-    def test_calculation_and_printing(self):
-      result = hedy.transpile("nummer is 4 + 5\nprint nummer", 6)
-      self.assertEqual('import random\nnummer = int(4) + int(5)\nprint(str(nummer))', result)
-      self.assertEqual(run_code(result), "9")
+    self.assertEqual(expected, result)
 
-    def test_calculation_with_vars(self):
-      result = hedy.transpile("""nummer is 5
+    expected_output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    self.assertEqual(expected_output, run_code(result))
+
+  # new tests for calculations
+  def test_simple_calculation(self):
+    code = "nummer is 4 + 5"
+    result = hedy.transpile(code, 6)
+
+    expected = "nummer = int(4) + int(5)"
+    self.assertEqual(expected, result)
+
+  def test_simple_calculation_without_space(self):
+    code = "nummer is 4+5"
+    result = hedy.transpile(code, 6)
+
+    expected = "nummer = int(4) + int(5)"
+    self.assertEqual(expected, result)
+
+
+  def test_calculation_and_printing(self):
+
+    code = textwrap.dedent("""\
+    nummer is 4 + 5
+    print nummer""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
+    nummer = int(4) + int(5)
+    print(str(nummer))""")
+
+    self.assertEqual(expected, result)
+    self.assertEqual("9", run_code(result))
+
+  def test_calculation_with_vars(self):
+    code = textwrap.dedent("""\
+    nummer is 5
     nummertwee is 6
     getal is nummer * nummertwee
-    print getal""", 6)
-      self.assertEqual("""import random
+    print getal""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
     getal = int(nummer) * int(nummertwee)
-    print(str(getal))""", result)
-      self.assertEqual(run_code(result), "30")
+    print(str(getal))""")
 
-    def test_print_calculation_times_directly(self):
-      result = hedy.transpile("""nummer is 5
+    self.assertEqual(expected, result)
+    self.assertEqual("30", run_code(result))
+
+  def test_print_calculation_times_directly(self):
+    code = textwrap.dedent("""\
+    nummer is 5
     nummertwee is 6
-    print nummer * nummertwee""", 6)
-      self.assertEqual("""import random
+    print nummer * nummertwee""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
-    print(str(int(nummer) * int(nummertwee)))""", result)
-      self.assertEqual(run_code(result), "30")
+    print(str(int(nummer) * int(nummertwee)))""")
 
-    def test_print_calculation_divide_directly(self):
-      result = hedy.transpile("""nummer is 5
+    self.assertEqual(expected, result)
+    self.assertEqual("30", run_code(result))
+
+  def test_print_calculation_divide_directly(self):
+    code = textwrap.dedent("""\
+    nummer is 5
     nummertwee is 6
-    print nummer / nummertwee""", 6)
-      self.assertEqual("""import random
+    print nummer / nummertwee""")
+
+    result = hedy.transpile(code, 6)
+
+    expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
-    print(str(int(nummer) // int(nummertwee)))""", result)
-      self.assertEqual(run_code(result), "0")
+    print(str(int(nummer) // int(nummertwee)))""")
+
+    self.assertEqual(expected, result)
+    self.assertEqual("0", run_code(result))

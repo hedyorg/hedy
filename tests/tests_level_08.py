@@ -16,6 +16,7 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 def run_code(code):
+    code = "import random\n" + code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
@@ -24,36 +25,34 @@ def run_code(code):
 class TestsLevel7(unittest.TestCase):
   def test_print(self):
     result = hedy.transpile("print 'ik heet'", 8)
-    self.assertEqual("import random\nprint('ik heet')", result)
+    self.assertEqual("print('ik heet')", result)
 
   def test_print_with_var(self):
     result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 8)
-    self.assertEqual("import random\nnaam = 'Hedy'\nprint('ik heet'+str(naam))", result)
+    self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
 
   def test_print_with_calc_no_spaces(self):
     result = hedy.transpile("print '5 keer 5 is ' 5*5", 8)
-    self.assertEqual("import random\nprint('5 keer 5 is '+str(int(5) * int(5)))", result)
+    self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
 
   def test_print_calculation_times_directly(self):
     result = hedy.transpile("""nummer is 5
 nummertwee is 6
 print nummer * nummertwee""", 8)
-    self.assertEqual("""import random
-nummer = '5'
+    self.assertEqual("""nummer = '5'
 nummertwee = '6'
 print(str(int(nummer) * int(nummertwee)))""", result)
     self.assertEqual(run_code(result), "30")
 
   def test_transpile_ask(self):
     result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 8)
-    self.assertEqual(result, "import random\nantwoord = input('wat is je lievelingskleur?')")
+    self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
 
   def test_if_with_indent(self):
     result = hedy.transpile("""naam is Hedy
 if naam is Hedy
     print 'koekoek'""", 8)
-    self.assertEqual("""import random
-naam = 'Hedy'
+    self.assertEqual("""naam = 'Hedy'
 if str(naam) == str('Hedy'):
   print('koekoek')""", result)
 
@@ -67,8 +66,7 @@ else
     print 'Foutje'
     print 'Het antwoord moest zijn ' antwoord""", 8)
 
-    self.assertEqual("""import random
-antwoord = input('Hoeveel is 10 plus 10?')
+    self.assertEqual("""antwoord = input('Hoeveel is 10 plus 10?')
 if str(antwoord) == str('20'):
   print('Goedzo!')
   print('Het antwoord was inderdaad '+str(antwoord))
@@ -80,8 +78,7 @@ else:
     result = hedy.transpile("""keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 print 'computer koos ' computerkeuze""", 8)
-    self.assertEqual("""import random
-keuzes = ['steen', 'schaar', 'papier']
+    self.assertEqual("""keuzes = ['steen', 'schaar', 'papier']
 computerkeuze=random.choice(keuzes)
 print('computer koos '+str(computerkeuze))""", result)
 
@@ -92,10 +89,9 @@ a is 3
 for a in range 2 to 4
   a is a + 2
   b is b + 2""", 8)
-    self.assertEqual(result, """import random
-a = '2'
+    self.assertEqual(result, """a = '2'
 a = '3'
-for a in range(2, 4):
+for a in range(int(2), int(4)+1):
   a = int(a) + int(2)
   b = int(b) + int(2)""")
 
@@ -106,8 +102,7 @@ if a is 1
   x is 2
 else
   x is 222""", 8)
-    self.assertEqual(result, """import random
-a = '5'
+    self.assertEqual(result, """a = '5'
 if str(a) == str('1'):
   x = '2'
 else:
@@ -115,11 +110,10 @@ else:
 
   def testforloop(self):
     result = hedy.transpile("""
-for i in range 1 to 11
+for i in range 1 to 10
   print i
 print 'wie niet weg is is gezien'""", 8)
-    self.assertEqual(result, """import random
-for i in range(1, 11):
+    self.assertEqual(result, """for i in range(int(1), int(10)+1):
   print(str(i))
 print('wie niet weg is is gezien')""")
 

@@ -540,7 +540,7 @@ class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[3:]]
-        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] + "):\n"+"\n".join(all_lines)
+        return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
 
 class ConvertToPython_9(ConvertToPython_8):
     def elifs(self, args):
@@ -805,36 +805,28 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 2:
-        python = 'import random\n'
-        python += ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 3:
-        python = 'import random\n'
-        python += ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 4:
-        python = 'import random\n'
-        python += ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 5:
-        python = 'import random\n'
-        python += ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 6:
-        python = 'import random\n'
-        python += ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        python = 'import random\n'
-        python += ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
-        python = 'import random\n'
-        python += ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
-        python = 'import random\n'
-        python += ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 10:
         python = 'import random\n'
