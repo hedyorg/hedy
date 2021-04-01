@@ -78,7 +78,7 @@ def hash_user_or_session (string):
 
 def redirect_ab (request, session):
     # If the user is logged in, we use their username as identifier, otherwise we use the session id
-    user_identifier = current_user(request) ['username'] or str (session_id)
+    user_identifier = current_user(request) ['username'] or str (session_id ())
 
     # This will send 50% of the requests into redirect.
     redirect_proportion = 50
@@ -89,9 +89,13 @@ def redirect_ab (request, session):
 if os.getenv ('REDIRECT_AB_TEST') and os.getenv ('REDIRECT_AB_TEST') != os.getenv ('HEROKU_APP_NAME'):
     @app.before_request
     def before_request():
-        session_id () # Run this for the side effect of generating a session ID
+        # If it is an auth route, we do not reverse proxy it to the REDIRECT_AB_TEST environment, with the exception of /auth/texts
+        # We want to keep all cookie setting in the main environment, not the test one.
+        if (re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url)):
+            # Dummy value. We do this in a separate block so that the block below doesn't depend on a very long conditional.
+            0
         # If we enter this block, we will reverse proxy the request to the REDIRECT_AB_TEST environment.
-        if (redirect_ab (request, session)):
+        elif (redirect_ab (request, session)):
             url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('REDIRECT_AB_TEST'))
 
             request_headers = {}
@@ -99,12 +103,16 @@ if os.getenv ('REDIRECT_AB_TEST') and os.getenv ('REDIRECT_AB_TEST') != os.geten
                 if (header [0].lower () in ['host']):
                     continue
                 request_headers [header [0]] = header [1]
+
+            # Send the session_id to the test environment for logging purposes
+            request_headers ['x-session_id'] = session_id ()
             r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
 
             response = make_response (r.content)
             for header in r.headers:
                 # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
-                if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection']):
+                # We ignore the set-cookie header
+                if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'set-cookie']):
                     continue
                 response.headers [header] = r.headers [header]
             return response, r.status_code
@@ -195,6 +203,8 @@ def parse():
 
     if os.getenv ('REDIRECT_AB_TEST') == os.getenv ('HEROKU_APP_NAME') and os.getenv ('HEROKU_APP_NAME'):
         log_object ['is_test'] = 1
+        if 'x-session_id' in request.headers:
+            log_object ['session'] = request.headers ['x-session_id']
 
     logger.log(log_object)
 
@@ -204,7 +214,7 @@ def parse():
 def report_error():
     post_body = request.json
 
-    logger.log({
+    log_object = {
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
@@ -212,7 +222,14 @@ def report_error():
         'client_error': post_body.get('client_error'),
         'version': version(),
         'username': current_user(request) ['username'] or None
-    })
+    }
+
+    if os.getenv ('REDIRECT_AB_TEST') == os.getenv ('HEROKU_APP_NAME') and os.getenv ('HEROKU_APP_NAME'):
+        log_object ['is_test'] = 1
+        if 'x-session_id' in request.headers:
+            log_object ['session'] = request.headers ['x-session_id']
+
+    logger.log(log_object)
 
     return 'logged'
 
