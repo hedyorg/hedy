@@ -38,7 +38,7 @@ Si no lo logras, puedes ver [el video de la explicación](https://www.youtube.co
 
 Ahora que puedes calcular, puedes crear un programa para practicar las tablas de multiplicar.
 
-Puedes decidir que cuentas incluir, por ejemploÑ
+Puedes decidir que cuentas incluir, por ejemplo:
 
 * `respuestacorrecta is 11 * 27`
 * `print 'Cuanto es 11 veces 27?'`
