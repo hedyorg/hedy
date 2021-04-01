@@ -41,7 +41,7 @@ Pour toutes les lignes suivantes:
 * `print Il entend des sons étranges`
 * `print Il a peur que la forêt soit hantée`
 
-## A simple story
+## Une histoire simple
 
 C’est un peu dommage qu’on ne puisse créer des phrases dans lesquelles le personnage principal n’apparait qu’à la fin de la phrase, non?
 

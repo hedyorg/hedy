@@ -2,7 +2,7 @@ title: Uitleg
 level: 4
 ---
 In level 4 blijven de regels hetzelfde voor ask en print. Je moet dus nog steeds aanhalingstekens gebruiken als je iets wilt printen.
-Er komt nu wel een nieuwe code bij, de if. If is Engels voor als.
+Er komt nu wel een nieuwe code bij, de `if`. If is Engels voor als.
 
 Hier vind je weer een aantal opdrachten om mee aan de slag te gaan.
 
@@ -26,10 +26,10 @@ Hier is het begin van het programma, maak jij de regels zelf af?
 * `if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'`
 * `if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'`
 
-Herinnering: random (je zegt ren-dom) is het Engelse woord voor willekeurig; and is het Engelse woord voor en.
+Herinnering: `random` (je zegt ren-dom) is het Engelse woord voor willekeurig; `and` is het Engelse woord voor en; en `else` is het Engelse woord voor anders.
 
 # Maak dobbelsteen na
-Je kunt ook in Level 4 weer een dobbelsteen maken en daarbij een if gebruiken. Bijv zo:
+Je kunt ook in Level 4 weer een dobbelsteen maken en daarbij een `if` gebruiken. Bijv zo:
 
 * `keuzes is 1, 2, 3, 4, 5, regenworm`
 * `worp is keuzes at random`
@@ -39,9 +39,7 @@ Je kunt ook in Level 4 weer een dobbelsteen maken en daarbij een if gebruiken. B
 Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken.
 
 # Wie doet de afwas?
-Ook je afwasprogramma kun je nu leuker maken met een if. Bijvoorbeeld zo:
-
-Dat doe je zo:
+Ook je afwasprogramma kun je nu leuker maken met een `if`. Bijvoorbeeld zo:
 
 * `mensen is mama, papa, Emma, Sophie`
 * `afwasser is mensen at random`
@@ -77,7 +75,7 @@ Nu jij!
 * `if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else print 'Het monster eet de prinses op'`
 
 ## Een interactief verhaal
-Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Dat werkt net zoals in level 3. Dat kun je dus combineren met een if, en dan heb je al een heel programma gemaakt!
+Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Dat werkt net zoals in level 3. Dat kun je dus combineren met een `if`, en dan heb je al een heel programma gemaakt!
 
 ## Herhaling in je verhaal of spel
 Helaas kun je nu steeds maar 1 dobbelsteen gooien, of 1 keer bepalen wie de afwas doet. Regenwormen moet eigenlijk met 8 dobbelstenen, en misschien wil jij wel een afwasrooster maken voor de hele week! Soms is het handig als je codes een paar keer kan herhalen.

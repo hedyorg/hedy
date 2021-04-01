@@ -11,9 +11,9 @@ Así es como lo haces:
 * `opciones is piedra, papel, tijera`
 * `print opciones at random`
 
-Random es la palabra en inglés que significa aleaorio.
+"Random" es la palabra en inglés que significa aleatorio.
 
-# Tira los dados
+# Haz los dados
 
 También puedes hacer un dado. Echa un vistazo a los juegos que tienes en tu armario en casa.
 
@@ -23,11 +23,16 @@ Así es como lo haces:
 * `print opciones at random`
 
 Puedes crear tu propio dado? Por ejemplo el dado de la imagen?
-![Un dado del juego "Gusanitos" con 1 hasta 5 y el gusanito](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+[Un dado del juego "Gusanitos" con 1 hasta 5 y el gusanito](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+
+Puedes hacerlo de la siguiente manera:
+
+* `opciones is 1, 2, 3, 4, 5, gusanito`
+* `print opciones at random`
 
 # ¿Quién lava los platos?
 
-Es posible que quieras dejar que el computador elija honestamente quién debe lavar los platos o cambiar la caja de arena hoy.
+Seleccionar algo de una lista no es sólamente útil para jugar. Es posible que quieras dejar que el computador elija honestamente quién debe lavar los platos o cambiar la caja de arena hoy.
 
 ¡También puedes programar esto ahora!
 
@@ -59,7 +64,7 @@ Esta es mi historia, ahora el personaje principal que elijas siempre viene en el
 1. Escribe una historia corta sobre tu personaje principal.
 2. Cuando aparezca el nombre de tu personaje principal, pon siempre `nombre` (ver ejemplo)
 3. También puede haber oraciones en la historia que no contengan un `nombre`
-4. Ahora traduzca su historia al código Hedy. Así es como:
+4. Ahora traduce tu historia al código Hedy, de la siguiente manera:
 
 Línea 1:
 * Escribe `nombre is` y detrás el nombre de tu personaje principal.
@@ -68,6 +73,7 @@ Para todas las siguientes líneas:
 * Escribe `print` y luego la línea que has inventado.
 
 ## Ejemplo del código Hedy
+
 * `nombre is Carlos`
 * `print nombre ahora camina hacia el bosque`
 * `print nombre esta un poco asustado`
@@ -77,11 +83,11 @@ Para todas las siguientes líneas:
 ## Una historia interactiva
 
 Tu puedes elegir cada vez un nuevo personaje principal. Para hacer esto, cambia la primera línea de tu programa `nombre is Carlos` por `nombre is ask Cuál es el nombre del protagonista?`
-Si ejecutas el programa ahora, siempre puede elegir un nombre diferente sin cambiar el código.
+Si ejecutas el programa ahora, siempre puedes elegir un nombre diferente sin cambiar el código.
 
 ## ¡Ahora hay un pequeño problema...!
 
 ¿Intentaste hacer una oración que tuviera la palabra nombre? Por ejemplo `print Mi nombre es nombre`.
 Pruébalo si aún no lo has hecho.
 ¡Esto no funciona bien! El resultado que obtienes es: Mi Carlos es Carlos. Esto lo puedes resolver en el nivel 3.
-Haga clik en el botón "Ir al nivel 3" cuando hayas completado estas tres tareas.
+Haz clic en el botón "Ir al nivel 3" cuando hayas completado estas tres tareas.
