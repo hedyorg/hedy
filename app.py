@@ -22,7 +22,6 @@ from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
-from random import random
 import hashlib
 
 # app.py
