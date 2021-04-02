@@ -37,6 +37,13 @@ MAILCHIMP_API_KEY
 BASE_URL
 ```
 
+A/B testing:
+
+```
+PROXY_TO_TEST_ENV
+IS_TEST_ENV
+```
+
 ## Heroku Metadata
 
 This app depends on some environment variables that require Heroku dyno metadata.

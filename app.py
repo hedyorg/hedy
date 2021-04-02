@@ -84,18 +84,20 @@ def redirect_ab (request, session):
     redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
     return redirect_flag
 
-# If present, REDIRECT_AB_TEST should be the name of the target environment (that is, environment B).
-if os.getenv ('REDIRECT_AB_TEST') and os.getenv ('REDIRECT_AB_TEST') != os.getenv ('HEROKU_APP_NAME'):
+# If present, PROXY_TO_TEST_ENV should be the name of the target environment
+if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
     @app.before_request
     def before_request():
-        # If it is an auth route, we do not reverse proxy it to the REDIRECT_AB_TEST environment, with the exception of /auth/texts
+        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
         # We want to keep all cookie setting in the main environment, not the test one.
         if (re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url)):
-            # Dummy value. We do this in a separate block so that the block below doesn't depend on a very long conditional.
-            0
-        # If we enter this block, we will reverse proxy the request to the REDIRECT_AB_TEST environment.
+            pass
+        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
         elif (redirect_ab (request, session)):
-            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('REDIRECT_AB_TEST'))
+
+            print ('DEBUG TEST - REVERSE PROXYING REQUEST', request.method, request.url, session_id ())
+
+            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('PROXY_TO_TEST_ENV'))
 
             request_headers = {}
             for header in request.headers:
@@ -115,6 +117,11 @@ if os.getenv ('REDIRECT_AB_TEST') and os.getenv ('REDIRECT_AB_TEST') != os.geten
                     continue
                 response.headers [header] = r.headers [header]
             return response, r.status_code
+
+if os.getenv ('IS_TEST_ENV'):
+    @app.before_request
+    def before_request():
+        print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -189,7 +196,7 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
 
-    log_object = {
+    logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
@@ -197,15 +204,9 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
-        'username': username
-    }
-
-    if os.getenv ('REDIRECT_AB_TEST') == os.getenv ('HEROKU_APP_NAME') and os.getenv ('HEROKU_APP_NAME'):
-        log_object ['is_test'] = 1
-        if 'x-session_id' in request.headers:
-            log_object ['session'] = request.headers ['x-session_id']
-
-    logger.log(log_object)
+        'username': username,
+        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
+    })
 
     return jsonify(response)
 
@@ -213,22 +214,16 @@ def parse():
 def report_error():
     post_body = request.json
 
-    log_object = {
+    logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
         'code': post_body.get('code'),
         'client_error': post_body.get('client_error'),
         'version': version(),
-        'username': current_user(request) ['username'] or None
-    }
-
-    if os.getenv ('REDIRECT_AB_TEST') == os.getenv ('HEROKU_APP_NAME') and os.getenv ('HEROKU_APP_NAME'):
-        log_object ['is_test'] = 1
-        if 'x-session_id' in request.headers:
-            log_object ['session'] = request.headers ['x-session_id']
-
-    logger.log(log_object)
+        'username': current_user(request) ['username'] or None,
+        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
+    })
 
     return 'logged'
 
@@ -393,6 +388,8 @@ def main_page(page):
 
 def session_id():
     """Returns or sets the current session ID."""
+    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
+        return request.headers['x-session_id']
     if 'session_id' not in session:
         session['session_id'] = uuid.uuid4().hex
     return session['session_id']
