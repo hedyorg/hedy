@@ -18,7 +18,8 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       6: ['print', 'ask', 'is', 'if', 'repeat'],
                       7: ['print', 'ask', 'is', 'if', 'repeat'],
                       8: ['print', 'ask', 'is', 'if', 'for'],
-                      9: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      9: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      10: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 # 
@@ -825,6 +826,10 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
+        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 10:
+        # Code does not change for nesting
         python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
