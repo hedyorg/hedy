@@ -130,6 +130,18 @@ class TestsLevel1(unittest.TestCase):
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
 
+  def test_use_slashes_in_print_allowed(self):
+    code = "print 'Welcome to \O/ceanView!'"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    print('\\'Welcome to \O/ceanView!\\'')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+
   def test_use_quotes_in_ask_allowed(self):
     code = "ask 'Welcome to OceanView?'"
     result = hedy.transpile(code, 1)
