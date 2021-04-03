@@ -253,6 +253,30 @@ class TestsLevel2(unittest.TestCase):
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
 
+  def test_allow_use_of_slashes_in_print(self):
+    code = "print Welcome to O/ceanView"
+    result = hedy.transpile(code, 2)
+
+    expected = textwrap.dedent("""\
+    print('Welcome'+' '+'to'+' '+'O/ceanView')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to O/ceanView", expected_output)
+
+  def test_allow_use_of_backslashes_in_print(self):
+    code = "print Welcome to O\ceanView"
+    result = hedy.transpile(code, 2)
+
+    expected = textwrap.dedent("""\
+    print('Welcome'+' '+'to'+' '+'O\ceanView')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to O\ceanView", expected_output)
+
   def test_allow_use_of_quotes_in_ask(self):
     code = "print 'Welcome to OceanView!'"
     result = hedy.transpile(code, 2)
