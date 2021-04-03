@@ -229,8 +229,6 @@ class TestsLevel2(unittest.TestCase):
 
   def test_windows_line_endings(self):
 
-
-
     code = textwrap.dedent("""\
     print hallo
     print allemaal""")
@@ -242,3 +240,15 @@ class TestsLevel2(unittest.TestCase):
     print('allemaal')""")
 
     self.assertEqual(expected, result)
+
+  def test_allow_use_of_quotes_in_print(self):
+    code = "print 'Welcome to OceanView!'"
+    result = hedy.transpile(code, 2)
+
+    expected = textwrap.dedent("""\
+    print('\\'Welcome'+' '+'to'+' '+'OceanView'+'!'+' '+'\\'')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("'Welcome to OceanView! '", expected_output)
