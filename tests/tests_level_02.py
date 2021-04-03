@@ -252,3 +252,24 @@ class TestsLevel2(unittest.TestCase):
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
+
+  def test_allow_use_of_quotes_in_ask(self):
+    code = "print 'Welcome to OceanView!'"
+    result = hedy.transpile(code, 2)
+
+    expected = textwrap.dedent("""\
+    print('\\'Welcome'+' '+'to'+' '+'OceanView'+'!'+' '+'\\'')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("'Welcome to OceanView! '", expected_output)
+
+  def test_allow_use_of_quotes_in_echo(self):
+    code = "name is ask 'What restaurant'"
+    result = hedy.transpile(code, 2)
+
+    expected = textwrap.dedent("""\
+    name = input('\\'What restaurant\\'')""")
+
+    self.assertEqual(expected, result)

@@ -118,7 +118,7 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("echo", 1)
     self.assertEqual("print(answer)", result)
 
-  def test_use_quotes_in_print(self):
+  def test_use_quotes_in_print_allowed(self):
     code = "print 'Welcome to OceanView!'"
     result = hedy.transpile(code, 1)
 
@@ -129,3 +129,21 @@ class TestsLevel1(unittest.TestCase):
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
+
+  def test_use_quotes_in_ask_allowed(self):
+    code = "ask 'Welcome to OceanView?'"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    answer = input('\\'Welcome to OceanView?\\'')""")
+
+    self.assertEqual(expected, result)
+
+  def test_use_quotes_in_echo_allowed(self):
+    code = "echo oma's aan de"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    print('oma\\'s aan de'+answer)""")
+
+    self.assertEqual(expected, result)

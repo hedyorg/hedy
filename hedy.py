@@ -329,11 +329,14 @@ class ConvertToPython_1(Transformer):
 
         return "print('" + argument + "')"
     def echo(self, args):
-        all_parameters = ["'" + a + "'+" for a in args]
-        return "print(" + ''.join(all_parameters) + "answer)"
+        if len(args) == 0:
+            return "print(answer)" #no arguments, just print answer
+
+        argument = self.process_single_quote(args[0])
+        return "print('" + argument + "'+answer)"
     def ask(self, args):
-        all_parameters = ["'" + a + "'" for a in args]
-        return 'answer = input(' + '+'.join(all_parameters) + ")"
+        argument = self.process_single_quote(args[0])
+        return "answer = input('" + argument + "')"
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:
