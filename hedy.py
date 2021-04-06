@@ -43,12 +43,16 @@ def closest_command(invalid_command, known_commands):
     # If not found, search for partial match of know commands
     if min_command == '':
         min_command = closest_command_with_min_distance(invalid_command, known_commands)
-    
+
+    # Check if we are not returning the found command
+    # In that case we have no suggestion
+    # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
+
+    if min_command == invalid_command:
+        return None
+
     return min_command
 
-#
-#  closest_command_with_min_distance()
-#
 
 def closest_command_with_min_distance(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
@@ -253,11 +257,15 @@ class Filter(Transformer):
         return False, args[0][1]
 
 class IsValid(Filter):
-    # all rules are valid except for the invalid production rule
+    # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, linenumber]
 
     #would be lovely if there was some sort of default rule! Not sure Lark supports that
+
+    # note! If this function errors out with:
+    # Error trying to process rule "program" Tree object not subscriptable
+    # that means you added a production rule but did not add a method for the rule here
 
     def ask(self, args):
         return all_arguments_true(args)
@@ -277,9 +285,12 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
 
     def invalid_space(self, args):
-        # return space to indicate that line start in a space
+        # return space to indicate that line starts in a space
         return False, " "
 
+    def print_nq(self, args):
+        # return error source to indicate what went wrong
+        return False, "print without quotes"
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -288,10 +299,16 @@ class IsComplete(Filter):
 
     #would be lovely if there was some sort of default rule! Not sure Lark supports that
 
+    # note! If this function errors out with:
+    # Error trying to process rule "program" Tree object not subscriptable
+    # that means you added a production rule but did not add a method for the rule here
+
     def ask(self, args):
         return args != [], 'ask'
     def print(self, args):
         return args != [], 'print'
+    def print_nq(self, args):
+        return args != [], 'print level 2'
     def echo(self, args):
         #echo may miss an argument
         return True, 'echo'
@@ -397,6 +414,8 @@ class ConvertToPython_3(ConvertToPython_2):
     def print(self, args):
         #opzoeken is nu niet meer nodig
         return "print(" + '+'.join(args) + ')'
+    def print_nq(self, args):
+        return ConvertToPython_2.print(self, args)
 
 def indent(s):
     lines = s.split('\n')
@@ -694,6 +713,8 @@ def transpile(input_string, level):
     try:
         return transpile_inner(input_string, level)
     except Exception as E:
+        # This is the 'fall back' transpilation
+        # that should surely be improved!!
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
         if E.args[0] == 'Parse':
             #try 1 level lower
@@ -799,9 +820,15 @@ def transpile_inner(input_string, level):
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
+        elif is_valid[1] == 'print without quotes':
+            # grammar rule is ignostic of line number so we can't easily return that here
+            raise HedyException('Unquoted Text', level=level)
         else:
             invalid_command = is_valid[1]
             closest = closest_command(invalid_command, commands_per_level[level])
+            if closest == None: #we couldn't find a suggestion because the command itself was found
+                # clearly the error message here should be better or it should be a different one!
+                raise HedyException('Parse', level=level, location=["?", "?"], characters_expected="?")
             raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
     is_complete = IsComplete().transform(program_root)

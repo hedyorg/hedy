@@ -185,9 +185,11 @@ def parse():
             elif E.args[0] == "Parse":
                 error_template = hedy_errors[E.error_code]
                 # Localize the names of characters
-                # Localize the names of characters
                 if 'character_found' in E.arguments:
                     E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Unquoted Text":
+                error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             else:
                 error_template = hedy_errors[E.error_code]
