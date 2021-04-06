@@ -324,13 +324,19 @@ class ConvertToPython_1(Transformer):
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
-        return "print('" + args[0] + "')"
+        # escape quotes if kids accidentally use them at level 1
+        argument = self.process_single_quote(args[0])
+
+        return "print('" + argument + "')"
     def echo(self, args):
-        all_parameters = ["'" + a + "'+" for a in args]
-        return "print(" + ''.join(all_parameters) + "answer)"
+        if len(args) == 0:
+            return "print(answer)" #no arguments, just print answer
+
+        argument = self.process_single_quote(args[0])
+        return "print('" + argument + "'+answer)"
     def ask(self, args):
-        all_parameters = ["'" + a + "'" for a in args]
-        return 'answer = input(' + '+'.join(all_parameters) + ")"
+        argument = self.process_single_quote(args[0])
+        return "answer = input('" + argument + "')"
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:
@@ -347,7 +353,12 @@ class ConvertToPython_2(ConvertToPython_1):
     def print(self, args):
         all_arguments_converted = []
         i = 0
+
         for argument in args:
+            # escape quotes if kids accidentally use them at level 2
+            argument = self.process_single_quote(argument)
+
+            # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
             else:
@@ -782,8 +793,8 @@ def transpile_inner(input_string, level):
     if not is_valid[0]:
         if is_valid[1] == ' ':
             line = is_valid[2]
-            #the error here is a space at the beginning of a line, we can fix that!
 
+            #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
@@ -798,8 +809,6 @@ def transpile_inner(input_string, level):
         incomplete_command = is_complete[1]
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
-
-
 
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
