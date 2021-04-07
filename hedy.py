@@ -19,7 +19,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       7: ['print', 'ask', 'is', 'if', 'repeat'],
                       8: ['print', 'ask', 'is', 'if', 'for'],
                       9: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 # 
@@ -162,7 +165,8 @@ class AllAssignmentCommands(Transformer):
             return listname + '[' + args[1] + ']'
     def print(self, args):
         return args
-
+    def input(self,args):
+        return args[0].children
 
 def create_parser(level):
     with open(f"grammars/level{str(level)}.lark", "r") as file:
@@ -291,6 +295,8 @@ class IsValid(Filter):
     def print_nq(self, args):
         # return error source to indicate what went wrong
         return False, "print without quotes"
+    def input(self, args):
+        return all_arguments_true(args)
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -320,7 +326,8 @@ class IsComplete(Filter):
         return all(args), ''.join([c for c in args])
     def addition(self, args):
         return all(args), ''.join([c for c in args])
-
+    def input(self, args):
+        return args != [], 'input'
 
 class ConvertToPython_1(Transformer):
 
@@ -577,6 +584,12 @@ class ConvertToPython_9(ConvertToPython_8):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
+class ConvertToPython_11(ConvertToPython_9):
+    def input(self, args):
+        var = args[0]
+        all_parameters = ["'" + self.process_single_quote(a) + "'" for a in args[1:]]
+        return f'{var} = input(' + '+'.join(all_parameters) + ")"
 
 
 # Custom transformer that can both be used bottom-up or top-down
@@ -867,6 +880,10 @@ def transpile_inner(input_string, level):
     elif level == 10:
         # Code does not change for nesting
         python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 11:
+        # Code does not change for nesting
+        python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
