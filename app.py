@@ -133,8 +133,9 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
             # We use a 302 in case we need to revert the redirect.
             return redirect(url, code=302)
 
-# Unique random key for sessions
-app.config['SECRET_KEY'] = uuid.uuid4().hex
+# Unique random key for sessions.
+# For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
+app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
 Compress(app)
 Commonmark(app)
