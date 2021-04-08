@@ -196,21 +196,21 @@
         demo_code: "for i in range(0,10):\n    print(i)\nprint('Ready or not, here I come')"
 
   12:
-    start_code: "fruit is ['apple', 'banana', 'cherry']\n    print(fruit)"
+    start_code: "fruit is ['apple', 'banana', 'cherry']\nprint(fruit)"
     intro_text: "We are going to put square brackets around lists!"
     commands:
       - name: "Square brackets around lists"
         explanation: "We are going to put square brackets around lists!"
         example: "For example: fruit is ['apple', 'banana', 'cherry']"
-        demo_code: "fruit is ['apple', 'banana', 'cherry']\n    print(fruit)"
+        demo_code: "fruit is ['apple', 'banana', 'cherry']\nprint(fruit)"
   13:
-    start_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif(answer == 8):\n  print('That is correct!')\nelse:\n  print('Oh no, that is wrong!')"
+    start_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif answer == 8:\n  print('That is correct!')\nelse:\n  print('Oh no, that is wrong!')"
     intro_text: "Now we are going to change is into = and ==. We use = if we want to assign a value to a variable. If you want to assign 8 to the variable called anser, we do answer = 8. == we use when we want to see if two things are the same."
     commands:
       - name: "Compare"
         explanation: "If we want to compare, we use ==. 5+3 == 8 checks if 5+3 equals 8"
         example: "For example: 5+3 == 8"
-        demo_code: "if(5+3 == 8)\n    print('5+3 is indeed 8')\nelse:\n  print('This will not be printed because 5+3 is 8!')"
+        demo_code: "if 5+3 == 8:\n    print('5+3 is indeed 8')\nelse:\n  print('This will not be printed because 5+3 is 8!')"
       - name: "Assign Value"
         explanation: "If we want to say that a variable called anser is 8, we do answer = 8."
         example: "For example: answer = 8"
@@ -218,4 +218,4 @@
       - name: "Compare and assign value"
         explanation: "If we are going to compare two values, we use ==. If we are going to assign a variable, we use =. "
         example: "For example: 5+3 == 8, answer = 8"
-        demo_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif(answer == 8):\n  print('That is correct!')\nelse:\n  print('No, that is wrong!')"
+        demo_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif answer == 8:\n  print('That is correct!')\nelse:\n  print('No, that is wrong!')"

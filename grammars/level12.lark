@@ -21,7 +21,7 @@ _EOL: "\r"?"\n"
 
 print : "print(" (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))* ")"
 input : var " is input(" (quoted_text) (" " (quoted_text))* ")"
-assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
+assign_list: var " is [" quoted_text ((", "|",") quoted_text)+ "]"
 
 //TODO: sum needs to be expression here too (like in 7 and up)
 
@@ -52,7 +52,7 @@ in_list_check: textwithoutspaces " in " var
 ?atom: NUMBER | var | NAME //TODO: means we cannot assign strings with spaces? would we want that?
 
 //new for level 8
-for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var) (", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)*
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)*
 
 var: NAME -> var
 list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
