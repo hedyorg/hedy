@@ -155,6 +155,8 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
     def var_access(self,args):
         return args[0].children
+    def change_list_item(self, args):
+        return args[0].children
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
@@ -244,6 +246,10 @@ class Filter(Transformer):
 
     # level 9
     def elifs(self, args):
+        return all_arguments_true(args)
+
+    # level 12
+    def change_list_item(self, args):
         return all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
@@ -610,6 +616,9 @@ class ConvertToPython_12(ConvertToPython_11):
             return 'random.choice(' + args[0] + ')'
         else:
             return args[0] + '[' + args[1] + '-1]'
+
+    def change_list_item(self, args):
+        return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
