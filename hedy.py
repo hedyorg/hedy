@@ -410,7 +410,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1] + '-1]'
+            return args[0] + '[' + args[1] + ']'
 
 
 
@@ -434,7 +434,7 @@ class ConvertToPython_4(ConvertToPython_3):
         if args[2].data == 'random':
             return var + '=random.choice(' + args[1] + ')'
         else:
-            return var + '=' + args[1] + '[' + args[2].children[0] + '-1]'
+            return var + '=' + args[1] + '[' + args[2].children[0] + ']'
 
     def ifs(self, args):
         return f"""if {args[0]}:
@@ -605,6 +605,11 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             return var + '=' + args[1] + '[' + args[2] + '-1]'
 
+    def list_access(self, args):
+        if args[1] == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            return args[0] + '[' + args[1] + '-1]'
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
