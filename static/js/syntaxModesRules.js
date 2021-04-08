@@ -107,7 +107,13 @@ define('ace/mode/level2_highlight_rules', [], function(require, exports, module)
       },
       {
           token: "keyword.operator",
-          regex: "is"
+          regex: " is "
+      },{
+          token: "keyword.other",
+          regex: " at "
+      },{
+          token: "support.function",
+          regex: "random"
       },{
           token: "comment",
           regex: "#"
