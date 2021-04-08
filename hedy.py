@@ -604,6 +604,7 @@ class ConvertToPython_12(ConvertToPython_11):
                 return var + '=random.choice(' + args[1] + ')'
         else:
             return var + '=' + args[1] + '[' + args[2] + '-1]'
+
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
