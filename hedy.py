@@ -597,6 +597,13 @@ class ConvertToPython_12(ConvertToPython_11):
         values = [a for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
 
+    def list_access_var(self, args):
+        var = args[0]
+        if not isinstance(args[2], str):
+            if args[2].data == 'random':
+                return var + '=random.choice(' + args[1] + ')'
+        else:
+            return var + '=' + args[1] + '[' + args[2] + '-1]'
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
@@ -894,7 +901,7 @@ def transpile_inner(input_string, level):
         return python
     elif level == 13:
         # Code does not change for level 13 only grammar
-        python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen

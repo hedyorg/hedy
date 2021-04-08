@@ -36,7 +36,7 @@ elifs: _EOL "elif " condition ":"_EOL (" "+ command) (_EOL " "+ command)*
 
 
 condition: (equality_check|in_list_check) (" and " condition)*
-list_access_var : var " = " var " at " (index | random)
+list_access_var : var " = " var "[" (index | random | var) "]"
 equality_check: textwithoutspaces " == " textwithoutspaces
 in_list_check: textwithoutspaces " in " var
 
@@ -55,7 +55,7 @@ in_list_check: textwithoutspaces " in " var
 for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)*
 
 var: NAME -> var
-list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+list_access : var "[" (index | random | var) "]"
 index : NUMBER
 random : "random"
 
