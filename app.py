@@ -87,7 +87,7 @@ def redirect_ab (request, session):
 # If present, PROXY_TO_TEST_ENV should be the name of the target environment
 if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
     @app.before_request
-    def before_request():
+    def before_request_proxy():
         # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
         # We want to keep all cookie setting in the main environment, not the test one.
         if (re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url)):
@@ -120,14 +120,14 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
 
 if os.getenv ('IS_TEST_ENV'):
     @app.before_request
-    def before_request():
+    def before_request_receive_proxy():
         print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
 if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
     @app.before_request
-    def before_request():
+    def before_request_https():
         if request.url.startswith('http://'):
             url = request.url.replace('http://', 'https://', 1)
             # We use a 302 in case we need to revert the redirect.
