@@ -3,6 +3,7 @@ page_title: Press — Hedy
 # Hedy in the news
 Some websites and newspapers have written about Hedy since our release in early 2020. We keep a list here:
 
+* [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
 * [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)
 * [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)
