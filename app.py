@@ -230,6 +230,27 @@ def report_error():
 
     return 'logged'
 
+@app.route('/version', methods=['GET'])
+def version_page():
+    """
+    Generate a page with some diagnostic information and a useful GitHub URL on upcoming changes.
+
+    This is an admin-only page, it does not need to be linked.
+    (Also does not have any sensitive information so it's fine to be unauthenticated).
+    """
+    app_name = os.getenv('HEROKU_APP_NAME')
+
+    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+
+    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
+
+    return render_template('version-page.html',
+        app_name=app_name,
+        heroku_release_time=the_date,
+        commit=commit)
+
+
 def programs_page (request):
     username = current_user(request) ['username']
     if not username:
