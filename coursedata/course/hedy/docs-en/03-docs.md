@@ -24,7 +24,7 @@ Level 3 also allows you to make dice. In level 3 you can make sentences that inc
 This is the Pickamino dice again, but now with a nice sentence.
 
 * `choices is 1, 2, 3, 4, 5, earthworm`
-* `print 'You have thrown ' choices at random
+* `print 'You have thrown ' choices at random`
 
 Your turn to make some nice dice!
 
@@ -39,7 +39,7 @@ It looks like this:
 # A better story
 You can improve your story in level 3, because you can use the word ‘name’ in your text (as long as you put it in quotation marks).
 
-##Example
+## Example
 This is my story. The name that you choose for the main character will replace the word name. Pay close attention: All the sentences have to be in quotation marks, except the word name!
 
 * the name of my main character is name
@@ -59,13 +59,13 @@ Your turn!
 
 Line 1: type: `name is` followed by your main character’s name.
 For the following lines:
-Type `print` followed by the sentence you came up with, but pay cose attention! The word name shouldn’t be in quotation marks if you want it to change into the main character’s name. Everything else should be in quotation marks after `print`.
+Type `print` followed by the sentence you came up with, but pay close attention! The word name shouldn’t be in quotation marks if you want it to change into the main character’s name. Everything else should be in quotation marks after `print`.
 
 ## Example Hedy code
 * `name is John`
 * `print 'The name of my main character is `name
 * `print name ' is walking through the forest'`
-* `print name ' is a vit scared'`
+* `print name ' is a bit scared'`
 * `print 'Everywhere around him ' name ' is hearing strange noises'`
 * `print name ' is afraid this forest is haunted'`
 
