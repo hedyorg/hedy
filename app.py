@@ -12,6 +12,8 @@ import json
 import jsonbin
 import logging
 import os
+import pandas as pd
+from Levenshtein import distance as lev
 from os import path
 import re
 import requests
@@ -317,10 +319,11 @@ def preprocess_code_similarity_measure(code):
     return code
 
 def get_similar_code(processed_code, level):
-    filename = "coursedata/level" + str(level) + ".csv"
+    filename = "coursedata/" + str(level) + ".csv"
     try:
         df = pd.read_csv(filename)
-    except: # If the file doesn't exist (newer level then coding etc.) -> return None which will be caught later on
+    except:
+        print("The file doesn't exist!")
         return None
     shortest_distance = 1000
     similar_code = None
