@@ -1,3 +1,8 @@
+var prevFeedbackLevel;
+var prevSimilarCode;
+var feedbackViewed = false;
+var generalAnswered = false;
+
 (function() {
 
   // If there's no #editor div, we're requiring this code in a non-code page.
@@ -102,16 +107,38 @@ function runit(level, lang, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      prevFeedbackLevel = response.prevFeedbackLevel;
+      prevSimilarCode = response.prevSimilarCode;
       console.log('Response', response);
+      if (response.Duplicate) {
+        error.showFeedback(ErrorMessages.Feedback_Duplicate, response.Feedback);
+      }
+      else {
+        if (response.Feedback) {
+          if (response.FeedbackLevel === 4) {
+            error.showFeedback(ErrorMessages.Feedback_SimilarCode, response.Feedback);
+          } else {
+            error.showFeedback(ErrorMessages.Feedback_error, response.Feedback);
+          }
+        }
+      }
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
+        var btn = $('#run_button');
+        btn.prop('disabled', true);
+        btn.css("background", "gray");
+        btn.css("border", "black"); //does seem to remove the original color, but doesn't make ik grey (yet)
+        setTimeout(function () {
+          btn.prop('disabled', false);
+          btn.css('background-color', ''); //reset to original color
+          btn.css("border", '');
+        }, 2500);
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
-        console.log(err)
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
@@ -184,6 +211,52 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
+function get_level_question() {
+  if (prevFeedbackLevel == 2) {
+    return ErrorMessages.Feedback_question2;
+  } else if (prevFeedbackLevel == 3) {
+    return ErrorMessages.Feedback_question3;
+  } else if (prevFeedbackLevel == 4) {
+    return ErrorMessages.Feedback_question4;
+  } else {
+    return ErrorMessages.Feedback_question5;
+  }
+}
+
+function feedback(answer) {
+  if (generalAnswered == false) {
+    generalAnswer = answer;
+    generalAnswered = true
+    $('#feedback-popup .caption').text(get_level_question()) // Change to level-dependent text
+  }
+  else {
+    if (prevFeedbackLevel == 4) { // So similar code has been shown to the end-user, how do we retrieve it?
+      similarCode = prevSimilarCode
+    }
+    else {
+      similarCode = "-" // No similar code has been given to the user
+    }
+    levelAnswer = answer;
+    $.ajax({
+      type: 'POST',
+      url: '/feedback',
+      data: JSON.stringify({
+        generalAnswer: generalAnswer,
+        levelAnswer: levelAnswer,
+        collapse: feedbackViewed,
+        similarCode: similarCode,
+        feedbackLevel: prevFeedbackLevel
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    });
+    $('#feedback-popup').hide();
+    $('#opaque').hide();
+    feedbackViewed = false; // Set back to false to ensure that it won't pop-up in next error streak without looking
+    generalAnswered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+  }
+}
+
 /**
  * Do a POST with the error to the server so we can log it
  */
@@ -201,7 +274,25 @@ function reportClientError(level, code, client_error) {
   });
 }
 
+// Notes from Timon
+// In the function below the actual output of the program is ran
+// If there is a feedback level higher then 1: pop-up a window with feedback question
+// Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
+  if (prevFeedbackLevel > 1) {
+    if (feedbackViewed == true) {
+      $('#feedback-popup .caption').text(ErrorMessages.Feedback_question_general)
+      $('#feedback-popup .yes').text(ErrorMessages.Feedback_answerY)
+      $('#feedback-popup .no').text(ErrorMessages.Feedback_answerN)
+      $('#feedback-popup').show();
+      $('#opaque').show();
+    } else {
+      feedback(false);
+      feedback(false);
+      // We have to call feedback() twice due to the code structure: not ideal of course
+      // However, this way we are able to log the users error-solving even when the ECEM is not read
+    }
+  }
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -313,10 +404,27 @@ function runPythonProgram(code, cb) {
   }
 }
 
+/* Notes Timon
+This code helps us expand / withdraw the feedback box
+It is completely written by hand, we should pay attention when merging
+*/
+$('#feedbackbox .expand-dialog').click(function(){
+   feedbackViewed = true;
+   $ ('#feedbackbox .details').toggle();
+   var text = $ ('#feedbackbox .expand-dialog').text();
+   if (text === '↓'){
+      $ ('#feedbackbox .expand-dialog').text('↑')
+   }
+   else {
+     $ ('#feedbackbox .expand-dialog').text('↓')
+   }
+});
+
 var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
+    $('#feedbackbox').hide();
     editor.resize ();
   },
 
@@ -324,6 +432,15 @@ var error = {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
+    editor.resize ();
+  },
+
+  showFeedback(caption, message) {
+    $('#feedbackbox .caption').text(caption);
+    var obj = $("#feedbackbox .details").text(message);
+    obj.html(obj.html().replace(/\n/g,'<br/>'));
+    $('#feedbackbox').show();
+    $("#feedbackbox .details").hide();
     editor.resize ();
   },
 
