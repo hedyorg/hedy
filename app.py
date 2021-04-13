@@ -319,7 +319,7 @@ def preprocess_code_similarity_measure(code):
     return code
 
 def get_similar_code(processed_code, level):
-    filename = "coursedata/" + str(level) + ".csv"
+    filename = "coursedata/level" + str(level) + ".csv"
     try:
         df = pd.read_csv(filename)
     except:
