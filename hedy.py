@@ -585,19 +585,19 @@ class ConvertToPython_8(ConvertToPython_7):
         all_lines = [indent(x) for x in args[3:]]
         return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
 
-class ConvertToPython_9(ConvertToPython_8):
+class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-class ConvertToPython_11(ConvertToPython_9):
+class ConvertToPython_11(ConvertToPython_9_10):
     def input(self, args):
         var = args[0]
         all_parameters = [a for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
 
-class ConvertToPython_12(ConvertToPython_11):
+class ConvertToPython_12_13(ConvertToPython_11):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -902,21 +902,21 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
-        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 10:
         # Code does not change for nesting
-        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 11:
         python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 12:
-        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 13:
         # Code does not change for level 13 only grammar
-        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
