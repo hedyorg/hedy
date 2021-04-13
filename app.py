@@ -176,6 +176,17 @@ def parse():
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\nimport random\n" + result
+            if session['error_level'] == 5:
+                response['prevFeedbackLevel'] = 5
+            else:
+                response['prevFeedbackLevel'] = session['error_level'] - 1  # Minus 1 because we raise it AFTER the error
+            response['prevSimilarCode'] = session['similarCode']
+            # Notes Timon
+            #   If the feedback level was higher then 1 we want to ask some follow-up yes/no question
+            #   This is implemented in the app.js file, and then a POST is made to app.py through /feedback
+            #   This because the logging is done within this function and we want to log the answer
+            #   So, we do a "double" logging of the code submission
+            session['error_level'] = 1  # Code is correct: reset error_level back to 1
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -195,9 +206,51 @@ def parse():
             else:
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
+
+            response['prevFeedbackLevel'] = session['error_level']
+            response['prevSimilarCode'] = session['similarCode']
+
+            if session['code'] == code:
+                response["Feedback"] = gradual_feedback["IdenticalCode"]  # Don't raise the feedback level!
+                response["Duplicate"] = True
+            else:
+                response["Duplicate"] = False
+                if session['error_level'] == 2:
+                    response["Feedback"] = gradual_feedback["Expanded" + E.error_code]
+                elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
+                    response["Feedback"] = gradual_feedback["NewLevel" + str(level)]
+                elif session['error_level'] == 4:
+                    similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+                    if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                        response["Feedback"] = gradual_feedback["NoSimilarCode"]
+                    else:
+                        response["Feedback"] = similar_code
+                        session["similarCode"] = similar_code
+                elif session['error_level'] == 5:
+                    response["Feedback"] = gradual_feedback["Break"]  # Suggest a break -> Maybe improve model?
+                response["FeedbackLevel"] = session['error_level']
+                if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
+                    session['error_level'] = session['error_level'] + 1
+
         except Exception as E:
-            print(f"error transpiling {code}")
             response["Error"] = str(E)
+            response['prevFeedbackLevel'] = session['error_level']
+            if session['error_level'] == 2 or session['error_level'] == 3:
+                response["Feedback"] = gradual_feedback["UnknownError"]
+            elif session['error_level'] == 4:
+                similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+                if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                    response["Feedback"] = gradual_feedback["NoSimilarCode"]
+                else:
+                    response["Feedback"] = similar_code
+                    session["similarCode"] = similar_code
+            elif session['error_level'] == 5:
+                response["Feedback"] = gradual_feedback["Break"]
+            response["FeedbackLevel"] = session['error_level']
+            if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
+                session['error_level'] = session['error_level'] + 1
+
+    session['code'] = code
 
     logger.log ({
         'session': session_id(),
@@ -208,10 +261,89 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
+        'feedback_level': session['error_level'],  # Retrieve from session -> is always up-to-date
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
     return jsonify(response)
+
+@app.route('/feedback', methods=['POST'])
+def log_feedback():
+    body = request.json
+    generalAnswer = body['generalAnswer']
+    levelAnswer = body['levelAnswer']
+    feedbackLevel = int(body['feedbackLevel'])
+    collapse = bool(body['collapse'])  # this is either true or false: The window was either expanded or not
+    similarCode = body['similarCode']
+    logger.log({
+        'session': session_id(),
+        'date': str(datetime.datetime.now()),
+        'feedback_level': feedbackLevel,
+        'usefulness': generalAnswer,
+        'level_usefulness': levelAnswer,
+        'similar_code': similarCode,
+        'collapse': collapse
+    })
+    # This is for debugging purposes only!
+    print(session_id())
+    print(datetime.datetime.now())
+    print(feedbackLevel)
+    print(generalAnswer)
+    print(levelAnswer)
+    print(similarCode)
+    print(collapse)
+
+    # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
+    # We have to return something to the AJAX POST to show we are okay, improve by giving an error when not...
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+# Notes Timon
+#   Last but not least: We want to completely re-write this section
+#   It is currently inefficient and does not provide us with decent results
+#   One option is to try it without pre-processing
+#   Another option might be the implementation of cosine similarity or word2vec
+#   However, in both cases the word order is discarded in the process: something that we deemed important...
+
+def preprocess_code_similarity_measure(code):
+    concepts = ['print', 'ask', 'echo', 'is', 'at random', 'if', 'else', 'repeat', 'for']
+    words = code.split()
+    code = ""
+    for word in words:
+        if word not in concepts:
+            code += re.sub(r"[a-z|A-Z|0-9|!?,'']", "% ", word)
+        else:
+            code += word + " "
+    return code
+
+def get_similar_code(processed_code, level):
+    filename = "coursedata/level" + str(level) + ".csv"
+    try:
+        df = pd.read_csv(filename)
+    except: # If the file doesn't exist (newer level then coding etc.) -> return None which will be caught later on
+        return None
+    shortest_distance = 1000
+    similar_code = None
+
+    # This is very (very) inefficient and should be greatly improved for further use, however the concept works!
+    for i, row in df.iterrows():
+        distance = lev(processed_code, row['processed_code'])
+        if distance == 0:  # The code is identical, no need to search any further
+            similar_code = row['code']
+            break
+        else:
+            if distance < shortest_distance:
+                shortest_distance = distance
+                similar_code = row['code']
+                temp = row['processed_code']
+
+    # This code is temporary for debugging purposes -> it should be deleted before deployment!
+    print("The pre-processed code of the user:")
+    print(processed_code)
+    print("The pre-processed similar code:")
+    print(temp)
+    print("The actual similar code:")
+    print(similar_code)
+
+    return similar_code
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
@@ -297,6 +429,10 @@ def index(level, step):
     g.level = level = int(level)
     g.lang = requested_lang()
     g.prefix = '/hedy'
+
+    session['error_level'] = 1  # When requesting a new level, always reset error_level to 1
+    session["similarCode"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
+    session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
 
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
