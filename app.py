@@ -187,7 +187,7 @@ def parse():
             #   This is implemented in the app.js file, and then a POST is made to app.py through /feedback
             #   This because the logging is done within this function and we want to log the answer
             #   So, we do a "double" logging of the code submission
-            session['error_level'] = 0  # Code is correct: reset error_level back to 1
+            session['error_level'] = 0  # Code is correct: reset error_level back to 0
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -216,7 +216,7 @@ def parse():
                 response["Duplicate"] = True
             else:
                 response["Duplicate"] = False
-                if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
+                if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
                     session['error_level'] = session['error_level'] + 1
                 if session['error_level'] == 2:
                     response["Feedback"] = gradual_feedback["Expanded" + E.error_code]
