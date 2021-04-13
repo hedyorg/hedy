@@ -180,17 +180,15 @@ def parse():
 
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\nimport random\n" + result
-            if session['error_level'] == 5:
-                response['prevFeedbackLevel'] = 5
-            else:
-                response['prevFeedbackLevel'] = session['error_level'] - 1  # Minus 1 because we raise it AFTER the error
+            response['prevFeedbackLevel'] = session['error_level'] # Minus 1 because we raise it AFTER the error
             response['prevSimilarCode'] = session['similarCode']
+            print(response['prevSimilarCode'])
             # Notes Timon
             #   If the feedback level was higher then 1 we want to ask some follow-up yes/no question
             #   This is implemented in the app.js file, and then a POST is made to app.py through /feedback
             #   This because the logging is done within this function and we want to log the answer
             #   So, we do a "double" logging of the code submission
-            session['error_level'] = 1  # Code is correct: reset error_level back to 1
+            session['error_level'] = 0  # Code is correct: reset error_level back to 1
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -219,6 +217,8 @@ def parse():
                 response["Duplicate"] = True
             else:
                 response["Duplicate"] = False
+                if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
+                    session['error_level'] = session['error_level'] + 1
                 if session['error_level'] == 2:
                     response["Feedback"] = gradual_feedback["Expanded" + E.error_code]
                 elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
@@ -232,27 +232,30 @@ def parse():
                         session["similarCode"] = similar_code
                 elif session['error_level'] == 5:
                     response["Feedback"] = gradual_feedback["Break"]  # Suggest a break -> Maybe improve model?
-                response["FeedbackLevel"] = session['error_level']
-                if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
-                    session['error_level'] = session['error_level'] + 1
+            response["FeedbackLevel"] = session['error_level']
 
         except Exception as E:
             response["Error"] = str(E)
             response['prevFeedbackLevel'] = session['error_level']
-            if session['error_level'] == 2 or session['error_level'] == 3:
-                response["Feedback"] = gradual_feedback["UnknownError"]
-            elif session['error_level'] == 4:
-                similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
-                if similar_code is None:  # No similar code is found against a, to be defined, threshold
-                    response["Feedback"] = gradual_feedback["NoSimilarCode"]
-                else:
-                    response["Feedback"] = similar_code
-                    session["similarCode"] = similar_code
-            elif session['error_level'] == 5:
-                response["Feedback"] = gradual_feedback["Break"]
+            if session['code'] == code:
+                response["Feedback"] = gradual_feedback["IdenticalCode"]  # Don't raise the feedback level!
+                response["Duplicate"] = True
+            else:
+                if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
+                    session['error_level'] = session['error_level'] + 1
+
+                if session['error_level'] == 2 or session['error_level'] == 3:
+                    response["Feedback"] = gradual_feedback["UnknownError"]
+                elif session['error_level'] == 4:
+                    similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+                    if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                        response["Feedback"] = gradual_feedback["NoSimilarCode"]
+                    else:
+                        response["Feedback"] = similar_code
+                        session["similarCode"] = similar_code
+                elif session['error_level'] == 5:
+                    response["Feedback"] = gradual_feedback["Break"]
             response["FeedbackLevel"] = session['error_level']
-            if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
-                session['error_level'] = session['error_level'] + 1
 
     session['code'] = code
 
@@ -435,7 +438,7 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
-    session['error_level'] = 1  # When requesting a new level, always reset error_level to 1
+    session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
     session["similarCode"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
     session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
 

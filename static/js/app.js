@@ -230,7 +230,7 @@ function feedback(answer) {
     $('#feedback-popup .caption').text(get_level_question()) // Change to level-dependent text
   }
   else {
-    if (prevFeedbackLevel == 4) { // So similar code has been shown to the end-user, how do we retrieve it?
+    if (prevFeedbackLevel >= 4) { // So similar code has been shown to the end-user, how do we retrieve it?
       similarCode = prevSimilarCode
     }
     else {
