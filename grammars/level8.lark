@@ -8,7 +8,7 @@ start: program
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
          | repeat
-         //| for_loop
+         | for_loop
          | ifs elses?
          | ask
          | assign_list
@@ -54,7 +54,7 @@ repeat: "repeat " (NUMBER | var) " times" _EOL (" "+ command) (_EOL " "+ command
 ?atom: NUMBER | var //TODO: means we cannot assign strings with spaces? would we want that?
 
 //new for level 8
-//for_loop: "for" var "is" (NUMBER | var) "to" (NUMBER | var) _EOL (" "+ command) (_EOL " "+ command)*
+for_loop: "for " var " is " (NUMBER | var) " to " (NUMBER | var) _EOL (" "+ command) (_EOL " "+ command)*
 
 
 var: NAME -> var

@@ -137,4 +137,22 @@
         explanation: "`if` and `repeat` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: "color is ask What is your favorite color?\nif color is green\n    repeat 3 times\n        print 'pretty!'\nelse\n    repeat 5 times\n        print 'meh'"
-
+  8:
+    start_code: "for counter is 1 to 5\n    print counter"
+    intro_text: "Level 8 test"
+    commands:
+      -
+        name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+      -
+        name: "`if` with multiple lines"
+        explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+        example: "Example: answer is ask What is 5 plus 5?"
+        demo_code: "answer is ask What is 5 plus 5?\nif answer is 10\n    print 'Well done!'\n    print 'Indeed, the answer was ' answer\nelse\n    print 'Oops!'\n    print 'The answer is 10'"
+      -
+        name: "for loop"
+        explanation: "for loop explanation"
+        example: "Example: for counter is 1 to 5"
+        demo_code: "for counter is 1 to 5\n    print counter"

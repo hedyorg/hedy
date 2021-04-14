@@ -591,7 +591,7 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "for _ in range(" + args[0] + "):\n" + args[1]
 
-    def ranged_loop(self, children):
+    def for_loop(self, children):
         args = self._call_children(children)
         return "for " + args[0] + " in range(" + args[1] + ", " + args[2] +  "):\n" + args[3]
 
