@@ -13,6 +13,8 @@ program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on s
 _EOL: "\r"?"\n"
 
 print : "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*
+print_no_quotes: "print " (textwithoutspaces | list_access | var) (" " (textwithoutspaces | list_access | var))*  -> print_nq
+
 ask : var " is ask " textwithspaces*
 assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
 assign : var " is " textwithspaces

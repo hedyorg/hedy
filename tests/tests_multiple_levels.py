@@ -30,7 +30,7 @@ def run_code(code):
 #
 
 class TestsForMultipleLevels(unittest.TestCase):
-    max_level = 9
+    max_level = 10
 
     def test_print_with_list_var_random(self):
         min_level = 2
@@ -42,9 +42,27 @@ class TestsForMultipleLevels(unittest.TestCase):
             print('Passed at level ', i)
 
         min_level = 6
-        max_level = 9
+        max_level = 10
         for i in range(min_level, max_level + 1):
             result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
+            self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint(dieren at random)", 11)
+        self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+        print('Passed at level ', 11)
+
+        result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", 12)
+        self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+        print('Passed at level ', 12)
+
+        min_level = 13
+        max_level = 13
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
             self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)

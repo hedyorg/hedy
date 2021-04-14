@@ -1,9 +1,16 @@
 name: Automatically deploy to Alpha
 on:
-  push:
+  # Run this AFTER the unit test job finishes
+  workflow_run:
+    # Must be the same as in unittests.yml
+    workflows: ["Unit tests"]
     branches: [master]
+    types:
+      - completed
 jobs:
   deploy:
+    # Deploy ONLY IF the tests actually succeeded (if they failed, we don't wanna deploy)
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

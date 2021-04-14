@@ -4,6 +4,7 @@ page_title: Pers — Hedy
 
 Soms schrijven websites en kranten iets over Hedy, dat houden we op deze lijst bij:
 
+* [Opensource.com (Engels), April 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [Ingeniería De Software (Spaans), februari 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
 * [Hello World Magazine (Engels), februari 2021](images/Hello_World_15_Hedy.pdf)
 * [AG Connect over prijs voor ICT onderzoek, januari 2021](http://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)

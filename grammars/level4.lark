@@ -7,7 +7,7 @@ program: _EOL* (command | invalid) (" ")* (_EOL+ (command | invalid) (" ")*)* _E
          | assign_list
          | list_access_var
          | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
-
+         | print_no_quotes
 
 _EOL: "\r"?"\n"
 
@@ -16,6 +16,8 @@ ask : var " is ask " textwithspaces*
 assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
 assign : var " is " textwithspaces
 invalid: textwithoutspaces " " textwithspaces
+
+print_no_quotes: "print " (textwithoutspaces | list_access | var) (" " (textwithoutspaces | list_access | var))*  -> print_nq
 
 // old code: /^(?!(print|if|and )).+/ //everything that is not the start of a regular command
 // I am not sure why we did this, I think in anticipation of higher levels where we cannot rely on order?

@@ -1,7 +1,7 @@
 title: Uitleg
 level: 5
 ---
-In level 5 komt er weer een nieuwe code bij, de repeat. Repeat is Engels voor herhalen.
+In level 5 komt er weer een nieuwe code bij, de `repeat`. Repeat is Engels voor herhalen.
 
 Hier vind je weer een aantal opdrachten om mee aan de slag te gaan.
 
@@ -15,8 +15,6 @@ Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken.
 
 # Wie doet de afwas?
 Ook je afwasprogramma kun je nu voor de hele week uitrekenen. Bijvoorbeeld zo:
-
-Dat doe je zo:
 
 * `mensen is mama, papa, Emma, Sophie`
 * `repeat 7 times print 'de afwasser is ' mensen at random`

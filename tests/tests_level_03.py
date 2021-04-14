@@ -42,7 +42,8 @@ class TestsLevel3(unittest.TestCase):
   def test_transpile_print_level_2(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("print felienne 123", 3)
-      self.assertEqual(str(context), 'First word is not a command')  # hier moet nog we een andere foutmelding komen!
+
+    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
   def test_print(self):
 
@@ -203,3 +204,17 @@ class TestsLevel3(unittest.TestCase):
     print('jouw lievelingskleur is dus'+kleur+'!')""")
 
     self.assertEqual(expected, result)
+
+  def test_transpile_missing_opening_quote(self):
+    code = textwrap.dedent("""
+      print hallo wereld'""")
+
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, 3)
+
+    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+
+
+
+
+
