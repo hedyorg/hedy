@@ -53,7 +53,7 @@ in_list_check: textwithoutspaces " in " var
 ?atom: NUMBER | var | NAME //TODO: means we cannot assign strings with spaces? would we want that?
 
 //new for level 8
-for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)*
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) ((", "|",") (NUMBER | var))? "):" _EOL (" "+ command) (_EOL " "+ command)*
 
 //new for level 12, assignment of list[i]
 change_list_item : var "[" (index | var) "] is " (var | textwithoutspaces)

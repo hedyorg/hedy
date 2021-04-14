@@ -582,9 +582,13 @@ class ConvertToPython_7(ConvertToPython_6):
 class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [indent(x) for x in args[3:]]
-        return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
-
+        if type(args[3]) == str: # for loop without step
+            all_lines = [indent(x) for x in args[3:]]
+            return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
+        else:  # for loop with step
+            all_lines = [indent(x) for x in args[4:]]
+            return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + ", " + "int(" + args[3] + ")" + "):\n"+"\n".join(all_lines)
+            
 class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -749,9 +753,9 @@ def create_grammar(level):
         return file.read()
 
 
-def transpile(input_string, level):
+def transpile(input_string, level, step = 0):
     try:
-        return transpile_inner(input_string, level)
+        return transpile_inner(input_string, level, step)
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
@@ -828,7 +832,7 @@ def beautify_parse_error(error_message):
 
     return character_found
 
-def transpile_inner(input_string, level):
+def transpile_inner(input_string, level, step = 0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = Lark(create_grammar(level))
