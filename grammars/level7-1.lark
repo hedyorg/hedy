@@ -1,0 +1,75 @@
+// trying to simply copy level 6 allowing for spaces
+// the idea here is:
+// allows for almost the same grammar as 6, easy for us
+// gives better error messages out of the box
+// we check indents in code, we can give better indent errors
+
+start: program
+program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+?command: print
+         | ifs elses?
+         | ask
+         | for_loop
+         | assign_list
+         | list_access_var
+         | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
+
+//we had to drop invalid, I think because of the if-ifelse, but for now it is pretty ok!!
+
+_EOL: "\r"?"\n"
+
+
+print : "print " (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*
+ask : var " is ask " textwithspaces*
+assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
+
+//TODO: sum needs to be expression here too (like in 7 and up)
+
+assign : var " is " sum | var " is " textwithoutspaces
+invalid: textwithoutspaces " " textwithspaces
+
+
+// new commands for level 4
+elses : _EOL "else" _EOL (" "+ command) (_EOL " "+ command)*
+ifs: "if " condition _EOL (" "+ command) (_EOL " "+ command)* //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+
+
+condition: (equality_check|in_list_check) (" and " condition)*
+list_access_var : var " is " var " at " (index | random)
+equality_check: textwithoutspaces " is " textwithoutspaces
+in_list_check: textwithoutspaces " in " var
+
+//new for level 6
+?sum: product
+   | sum " "* "+" " "* product -> addition
+   | sum " "* "-" " "* product -> substraction
+
+?product: atom
+    | product " "* "*" " "* atom -> multiplication
+    | product " "* "/" " "* atom -> division
+
+?atom: NUMBER | var | NAME //TODO: means we cannot assign strings with spaces? would we want that?
+
+//new for level 8
+for_loop: "for " (NAME | var) " is " (NUMBER | var) " to " (NUMBER | var) _EOL (" "+ command) (_EOL " "+ command)*
+
+var: NAME -> var
+list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+index : NUMBER
+random : "random"
+
+textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+textwithoutspaces: /([^\n, *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+//plus in level 6, calculation elements
+
+quoted_text_no_escape: /'([^']*)'/ -> text //simply all between quotes should this be used at earlier levels?
+quoted_text: /'((?:[^\\']|\\.)*)'/ -> text //text can be between single quotes, but quotes may be escaped with \
+
+
+
+%import common.LETTER   // imports from terminal library
+%import common.DIGIT   // imports from terminal library
+%import common.WS_INLINE   // imports from terminal library
+%import common.NEWLINE   // imports from terminal library
+%import common.SIGNED_INT -> NUMBER
+%import common.CNAME -> NAME
