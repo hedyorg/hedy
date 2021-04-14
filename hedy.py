@@ -579,6 +579,12 @@ class ConvertToPython_7(ConvertToPython_6):
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
+class ConvertToPython_7_1(ConvertToPython_7):
+    def for_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[3:]]
+        return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
+
 class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -753,9 +759,9 @@ def create_grammar(level):
         return file.read()
 
 
-def transpile(input_string, level, step = 0):
+def transpile(input_string, level, sub = 0):
     try:
-        return transpile_inner(input_string, level, step)
+        return transpile_inner(input_string, level, sub)
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
@@ -832,7 +838,7 @@ def beautify_parse_error(error_message):
 
     return character_found
 
-def transpile_inner(input_string, level, step = 0):
+def transpile_inner(input_string, level, sub = 0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = Lark(create_grammar(level))
@@ -900,8 +906,10 @@ def transpile_inner(input_string, level, step = 0):
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
+        if sub == 0:
+            python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif sub == 1 or sub == 2:
+            python = ConvertToPython_7_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
     elif level == 8:
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
