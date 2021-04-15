@@ -242,7 +242,6 @@ def parse():
             else:
                 if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
                     session['error_level'] = session['error_level'] + 1
-
                 if session['error_level'] == 2 or session['error_level'] == 3:
                     response["Feedback"] = gradual_feedback["UnknownError"]
                 elif session['error_level'] == 4:
