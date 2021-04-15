@@ -213,13 +213,13 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 
 function get_level_question() {
   if (prevFeedbackLevel == 2) {
-    return ErrorMessages.Feedback_question2;
+    return GradualErrorMessages.Feedback_question2;
   } else if (prevFeedbackLevel == 3) {
-    return ErrorMessages.Feedback_question3;
+    return GradualErrorMessages.Feedback_question3;
   } else if (prevFeedbackLevel == 4) {
-    return ErrorMessages.Feedback_question4;
+    return GradualErrorMessages.Feedback_question4;
   } else {
-    return ErrorMessages.Feedback_question5;
+    return GradualErrorMessages.Feedback_question5;
   }
 }
 
@@ -281,9 +281,9 @@ function reportClientError(level, code, client_error) {
 function runPythonProgram(code, cb) {
   if (prevFeedbackLevel > 1) {
     if (feedbackViewed == true) {
-      $('#feedback-popup .caption').text(ErrorMessages.Feedback_question_general)
-      $('#feedback-popup .yes').text(ErrorMessages.Feedback_answerY)
-      $('#feedback-popup .no').text(ErrorMessages.Feedback_answerN)
+      $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
+      $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
+      $('#feedback-popup .no').text(GradualErrorMessages.Feedback_answerN)
       $('#feedback-popup').show();
       $('#opaque').show();
     } else {

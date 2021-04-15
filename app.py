@@ -539,6 +539,10 @@ def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
+@app.route('/gradual_messages.js', methods=['GET'])
+def gradual_error():
+    error_messages = TRANSLATIONS.get_translations(requested_lang(), "GradualFeedback")
+    return render_template("gradual_messages.js", error_messages=json.dumps(error_messages))
 
 @app.errorhandler(500)
 def internal_error(exception):
