@@ -66,20 +66,22 @@ define('ace/mode/level1_highlight_rules', [], function(require, exports, module)
   var ExampleHighlightRules = function() {
 
     this.$rules = {
+
       "start": [{
-        token: "support.function",
-        regex: "print"
+        token: "keyword",
+        regex: "^print "
       },{
-          token: "support.function",
-          regex: "ask"
+          token: "keyword",
+          regex: "^ask "
       },
       {
-          token: "support.function",
-          regex: "echo"
+          token: "keyword",
+          regex: "^echo "
       },{
           token: "comment",
           regex: "#"
-      }]
+      }],
+
     };
     this.normalizeRules();
   };
@@ -96,28 +98,29 @@ define('ace/mode/level2_highlight_rules', [], function(require, exports, module)
   var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
 
   var ExampleHighlightRules = function() {
-
     this.$rules = {
+
       "start": [{
-        token: "support.function",
-        regex: "print"
-      },{
-          token: "support.function",
-          regex: "ask"
+        token: "keyword",
+        regex: "^print "
       },
       {
-          token: "keyword.operator",
+          token: "keyword",
+          regex: "^echo "
+      },{
+          token: "keyword",
+          regex: " is ask "
+      },{
+          token: "keyword",
           regex: " is "
       },{
-          token: "keyword.other",
+          token: "keyword",
           regex: " at "
-      },{
-          token: "support.function",
-          regex: "random"
       },{
           token: "comment",
           regex: "#"
-      }]
+      }],
+
     };
     this.normalizeRules();
   };
