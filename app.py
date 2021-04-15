@@ -242,8 +242,10 @@ def parse():
             else:
                 if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
                     session['error_level'] = session['error_level'] + 1
-                if session['error_level'] == 2 or session['error_level'] == 3:
-                    response["Feedback"] = gradual_feedback["UnknownError"]
+                if session['error_level'] == 2:
+                    response["Feedback"] = gradual_feedback["ExpandedUnknown"]
+                elif session['error_level'] == 3:
+                    response["Feedback"] = gradual_feedback["NewLevel" + str(level)]
                 elif session['error_level'] == 4:
                     similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
                     if similar_code is None:  # No similar code is found against a, to be defined, threshold
