@@ -143,6 +143,14 @@ window.saveit = function saveit(level, lang, name, code, cb) {
        return;
     }
 
+    // If saving a program for an adventure, level is an array of the form [level, adventure_name]. In that case, we unpack it.
+    var adventure_name;
+    if (level instanceof Array) {
+       adventure_name = level [1];
+       level = level [0];
+       name = 'default';
+    }
+
     $.ajax({
       type: 'POST',
       url: '/programs',
@@ -150,7 +158,8 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         level: level,
         lang:  lang,
         name:  name,
-        code:  code
+        code:  code,
+        adventure_name: adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'

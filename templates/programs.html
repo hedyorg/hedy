@@ -7,10 +7,18 @@
   <ul class="programs">
   {% for program in programs %}
     <li>
-      <strong>{{program.name}} </strong>
-      -&nbsp
+      {% if program.adventure_name %}
+        <strong>{{ui.adventure}}: {{program.adventure_name}}</strong>
+      {% else %}
+        <strong>{{program.name}} </strong>
+      {% endif %}
+      -&nbsp;
       {{ texts.level }} {{ program.level }} - {{ program.date }}
-      <a href="/hedy/{{ program.level }}/{{ program.id }}{{ query_lang }}">{{ texts.open }}</a>
+      {% if program.adventure_name %}
+        <a href="{{localize_link ('/hedy/adventures/' + program ['adventure_name'] + '/' + program.level|string)}}">{{ texts.open }}</a>
+      {% else %}
+        <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}">{{ texts.open }}</a>
+      {% endif %}
 
       <a href="#" onclick="if (confirm ('{{ texts.delete_confirm }}')) window.open ('/programs/delete/{{program.id}}', '_self')">{{ texts.delete }}</a>
       <pre>{{program.code | truncate (50) }}</pre>

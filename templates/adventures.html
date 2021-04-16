@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="px-8">
+  <h1>{{adventures.title}}</h1>
+  <h2>{{adventures.subtitle}}</h3>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    {% for adventure in adventures.adventures.items () %}
+      <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5 font-medium text-lg cursor-pointer" tabindex=0 onclick="window.location = '{{localize_link ('/hedy/adventures/' + adventure [0])}}'">
+        <h2>{{adventure [1].name}}</h2>
+        <p>{{adventure [1].description}}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

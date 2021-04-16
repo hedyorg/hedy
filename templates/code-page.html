@@ -4,7 +4,6 @@
   {{intro_text|commonmark}}
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     {% for command in commands %}
-    <!-- """+commando[0]+""" demo -->
     <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
       <div class="font-medium text-lg" tabindex=0>
         {{ command.explanation|commonmark }}
@@ -138,10 +137,18 @@ var toggleDocs = function () {
         <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">{{advance_step_button}} {{ next_assignment }}</button>
         {% endif %}
         {% if prev_level %}
-        <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
+          {% if not adventure_name %}
+            <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
+          {% else %}
+            <button class="green-btn" onclick="window.location = '/hedy/adventures/{{adventure_name}}/{{prev_level}}';">{{regress_button}} {{ prev_level }}</button>
+          {% endif %}
         {% endif %}
         {% if next_level %}
-        <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+          {% if not adventure_name %}
+            <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+          {% else %}
+            <button class="green-btn" onclick="window.location = '/hedy/adventures/{{adventure_name}}/{{next_level}}';">{{advance_button}} {{ next_level }}</button>
+          {% endif %}
         {% endif %}
       </div>
     </div>
