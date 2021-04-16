@@ -34,41 +34,41 @@
       example: 'Παράδειγμα: animals is σκύλος, γάτα, καγκουρό'
       demo_code: "animals is σκύλος, γάτα, καγκουρό\nprint animals at random"
 3:
-  start_code: "print 'Hello world'"
-  intro_text: '`ask` is still the same in level 3, but` print` is different now. You must enclose text that you want to print in quotation marks.'
+  start_code: "print 'Γειά σου κόσμε'"
+  intro_text: 'Η `ask` παραμένει ίδια στο επίπεδο 3, όμως η `print` είναι πλέον διαφορετική. Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.'
   commands:
     - name: 'print'
-      explanation: 'Print exactly using quotation marks'
-      example: "Example: print 'Hello welcome to Hedy.'"
-      demo_code: "print 'Hello welcome to Hedy.'"
+      explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
+      example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
+      demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     - name: 'is'
-      explanation: 'Give a name to some text and `print` without quotation marks'
-      example: 'Example: name is Hedy.'
-      demo_code: "name is Hedy\nprint 'my name is ' name"
+      explanation: 'Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `print` χωρίς εισαγωγικά'
+      example: 'Παράδειγμα: name is Hedy.'
+      demo_code: "name is Hedy\nprint 'Το όνομά μου είναι ' name"
     - name: 'ask'
-      explanation: 'Ask something with `ask`.'
-      example: 'Example: color is ask What is your favorite color?'
+      explanation: 'Ρώτησε κάτι με την `ask`.'
+      example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
       demo_code:
-        "color is ask What is your favorite color?\nprint color ' is your favorite!'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;?\nprint 'το ' color ' είναι το αγαπημένο σου!'"
 4:
   start_code:
-    "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'"
-  intro_text: '`ask` and `print` work exactly like they did in Level 3. Level 4 adds the `if` statement!'
+    "name is ask Ποιό είναι το όνομά σου;\nif name is Hedy print 'τέλεια!' else print 'έτσι κι έτσι'"
+  intro_text: 'Οι `ask` και `print` λειτουργούν ακριβώς όπως στο επίπεδο 3. Το επίπεδο 4 προσθέτει τη δήλωση `if`!'
   commands:
     - name: 'print'
-      explanation: 'Print exactly using quotation marks'
-      example: "Example: print 'Hello welcome to Hedy.'"
-      demo_code: "print 'Hello welcome to Hedy.'"
+      explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
+      example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
+      demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     - name: 'ask'
-      explanation: 'Ask something with `ask`.'
-      example: 'Example: color is ask What is your favorite color?'
+      explanation: 'Ρώτησε κάτι με την `ask`.'
+      example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
       demo_code:
-        "color is ask What is your favorite color?\nprint color ' is your favorite!'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;?\nprint 'το ' color ' είναι το αγαπημένο σου!'"
     - name: 'if'
-      explanation: 'Make a choice with `if`'
-      example: "Example: if color is green print 'pretty!' else print 'meh'"
+      explanation: 'Κάνε μια επιλογή με την `if`'
+      example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
       demo_code:
-        "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
 5:
   start_code: "repeat 3 times print 'Hedy is fun!'"
   intro_text: '`ask`, `print` and `if` work exactly like they did in Level 4. But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times.'
