@@ -19,7 +19,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       7: ['print', 'ask', 'is', 'if', 'repeat'],
                       8: ['print', 'ask', 'is', 'if', 'for'],
                       9: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 # 
@@ -152,6 +155,8 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
     def var_access(self,args):
         return args[0].children
+    def change_list_item(self, args):
+        return args[0].children
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
@@ -162,7 +167,8 @@ class AllAssignmentCommands(Transformer):
             return listname + '[' + args[1] + ']'
     def print(self, args):
         return args
-
+    def input(self,args):
+        return args[0].children
 
 def create_parser(level):
     with open(f"grammars/level{str(level)}.lark", "r") as file:
@@ -242,6 +248,10 @@ class Filter(Transformer):
     def elifs(self, args):
         return all_arguments_true(args)
 
+    # level 12
+    def change_list_item(self, args):
+        return all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def random(self, args):
         return True, 'random'
@@ -291,6 +301,8 @@ class IsValid(Filter):
     def print_nq(self, args):
         # return error source to indicate what went wrong
         return False, "print without quotes"
+    def input(self, args):
+        return all_arguments_true(args)
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -320,7 +332,8 @@ class IsComplete(Filter):
         return all(args), ''.join([c for c in args])
     def addition(self, args):
         return all(args), ''.join([c for c in args])
-
+    def input(self, args):
+        return args != [], 'input'
 
 class ConvertToPython_1(Transformer):
 
@@ -572,13 +585,40 @@ class ConvertToPython_8(ConvertToPython_7):
         all_lines = [indent(x) for x in args[3:]]
         return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
 
-class ConvertToPython_9(ConvertToPython_8):
+class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
+class ConvertToPython_11(ConvertToPython_9_10):
+    def input(self, args):
+        var = args[0]
+        all_parameters = [a for a in args[1:]]
+        return f'{var} = input(' + '+'.join(all_parameters) + ")"
 
+class ConvertToPython_12_13(ConvertToPython_11):
+    def assign_list(self, args):
+        parameter = args[0]
+        values = [a for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+
+    def list_access_var(self, args):
+        var = args[0]
+        if not isinstance(args[2], str):
+            if args[2].data == 'random':
+                return var + '=random.choice(' + args[1] + ')'
+        else:
+            return var + '=' + args[1] + '[' + args[2] + '-1]'
+
+    def list_access(self, args):
+        if args[1] == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            return args[0] + '[' + args[1] + '-1]'
+
+    def change_list_item(self, args):
+        return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
@@ -862,11 +902,21 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
-        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 10:
         # Code does not change for nesting
-        python = ConvertToPython_9(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 11:
+        python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 12:
+        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 13:
+        # Code does not change for level 13 only grammar
+        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen

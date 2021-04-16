@@ -44,6 +44,12 @@ PROXY_TO_TEST_ENV
 IS_TEST_ENV
 ```
 
+App secret (for cookies):
+
+```
+SECRET_KEY
+```
+
 ## Heroku Metadata
 
 This app depends on some environment variables that require Heroku dyno metadata.

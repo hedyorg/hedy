@@ -13,7 +13,7 @@ It works like this:
 
 You could also create your own dice. Take a look at the (board)games in your own home. Are there any games (special) dice? You can easily remake them with Hedy code. For example the dice in the game Pickomino has the numbers 1 through 5 and an earthworm.
 
-![Dobbelsteen van regenwormen met 1 tot en met 5 en een regenworm erop](https://cdn.anyfinder.eu/assets/5b64147d2864c61f08bdd4fb85c70d4d26e2b8d7774dc20edabeb13c9391c327)
+![Dice with numbers 1 through 5 and an earthworm](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
 You make the dice like this:
 
@@ -32,7 +32,7 @@ You can make this code:
 * `people is mom, dad, Emma, Sophie`
 * `print people at random`
 
-# A better storyl
+# A better story
 
 In level 2 you could also upgrade your story, because the main character’s name can be anywhere in the line now! It only takes a little bit more of programming.
 
@@ -42,11 +42,11 @@ This is my story. The name of the main character that you choose will appear in 
 
 * The main character of the story is name
 * name is walking through a forest
-* naam is a bit scared
+* name is a bit scared
 * Everywhere around him are strange noises
-* naam is afraid this is a haunted forest
+* name is afraid this is a haunted forest
 
-## Assingment
+## Assignment
 
 Your turn!
 
