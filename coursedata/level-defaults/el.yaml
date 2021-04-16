@@ -17,22 +17,22 @@
       demo_code:
         "ask Ποιό είναι το αγαπημένο σου χρώμα;\necho ώστε το αγαπημένο σου χρώμα είναι το..."
 2:
-  intro_text: 'Print still works as it did in Level 1, but ask has been changed and now needs a name, which you can then print. Echo is no longer needed. You can now also use these commands:'
-  start_code: 'print hello world!'
+  intro_text: 'Η print λειτουργεί όπως και στο επίπεδο 1, όμως η ask έχει αλλαχθεί και πλέον χρειάζεται ένα όνομα, το οποίο έπειτα μπορείς να εμφανίσεις. Η echo πλέον δε χρειάζεται. Μπορείς τώρα να χρησιμοποιήσεις επιπλέον αυτές τις εντολές:'
+  start_code: 'print γειά σου κόσμε!'
   commands:
     - name: 'is'
-      explanation: 'Give a word a name to use in the program using `is`'
-      example: 'Example: name is Hedy.'
-      demo_code: "name is Hedy\nprint welcome name"
+      explanation: 'Δώσε ένα όνομα σε μια λέξη για να τη χρησιμοποιήσεις στο πρόγραμμα χρησιμοποιώντας την `is`'
+      example: 'Παράδειγμα:  name is Hedy.'
+      demo_code: "name is Hedy\nprint καλωσήλθες name"
     - name: 'ask'
-      explanation: 'Ask something with `ask`. Beware! You need to give the answer a name with `is`.'
-      example: 'Example: color is ask What is your favorite color?'
+      explanation: 'Ρώτησε κάτι με την `ask`. Πρόσεξε! Πρέπει να δώσεις στην απάντηση ένα όνομα με την `is`.'
+      example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
       demo_code:
-        "color is ask What is your favorite color?\nprint color is your favorite!"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nprint το color είναι το αγαπημένο σου!"
     - name: 'choose_random'
-      explanation: 'Choose a random word from a group with `at` and `random`'
-      example: 'Example: animals is dog, cat, kangaroo.'
-      demo_code: "animals is dog, cat, kangaroo\nprint animals at random"
+      explanation: 'Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `at` και `random`'
+      example: 'Παράδειγμα: animals is σκύλος, γάτα, καγκουρό.'
+      demo_code: "animals is σκύλος, γάτα, καγκουρό\nprint animals at random"
 3:
   start_code: "print 'Hello world'"
   intro_text: '`ask` is still the same in level 3, but` print` is different now. You must enclose text that you want to print in quotation marks.'
