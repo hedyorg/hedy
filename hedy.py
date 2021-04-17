@@ -22,7 +22,9 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 # 
@@ -157,6 +159,12 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
     def change_list_item(self, args):
         return args[0].children
+    def not_equal(self, args):
+        return args[0].children
+    def smaller(self, args):
+        return args[0].children
+    def bigger(self, args):
+        return args[0].children
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
@@ -204,6 +212,12 @@ class Filter(Transformer):
     def assign_sum(self, args):
         return all_arguments_true(args)
     def list_access(self, args):
+        return all_arguments_true(args)
+    def not_equal(self, args):
+        return all_arguments_true(args)
+    def smaller(self, args):
+        return all_arguments_true(args)
+    def bigger(self, args):
         return all_arguments_true(args)
 
     # level 4 commands
@@ -619,6 +633,33 @@ class ConvertToPython_12_13(ConvertToPython_11):
 
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
+
+class ConvertToPython_14(ConvertToPython_12_13):
+    def not_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) != str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) != str({arg1}) and {args[2]}"
+
+class ConvertToPython_15(ConvertToPython_14):
+    def smaller(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) < str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) < str({arg1}) and {args[2]}"
+
+    def bigger(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) > str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) > str({arg1}) and {args[2]}"
+
 # Custom transformer that can both be used bottom-up or top-down
 class ConvertTo():
     def __default_child_call(self, name, children):
@@ -917,6 +958,12 @@ def transpile_inner(input_string, level):
     elif level == 13:
         # Code does not change for level 13 only grammar
         python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 14:
+        python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 15:
+        python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen

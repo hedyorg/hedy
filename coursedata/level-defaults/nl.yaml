@@ -227,3 +227,23 @@
         explanation: "Als we gaan vergelijken gebruiken we dus ==. Als we een waarde geven dan gebruiken we =. "
         example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
         demo_code: "print('Hoeveel is 5+3?')\nantwoord = 5+3\nprint('antwoord is nu:')\nprint(antwoord)\nif antwoord == 8:\n  print('Dat is goed!')\nelse:\n  print('Helaas dat is fout!')"
+  14:
+    start_code: "land = input('In welk land woon jij?')\nif land != Nederland:\n    print('Cool!')\nelse:\n    print('Ik kom ook uit Nederland!')"
+    intro_text: "We gaan een nieuw teken leren, de != . De ! betekent niet en de = betekent gelijk dus != is niet gelijk. Als voorbeeldje is 5 != 4."
+    commands:
+      - name: "Niet gelijk"
+        explanation: "Als we gaan kijken of dingen anders zijn, gebruiken we dus !="
+        example: "Bijvoorbeeld: 5+3 != 9"
+        demo_code: "getal = input('Je mag geen 5 zeggen, wat is een leuk getal?')\nif getal != 5:\n    print('Goed zo!')\nelse:\n    print('Fout! Je mocht geen 5 zeggen')"
+  15:
+    start_code: "leeftijd = input('Hoe oud ben jij?')\nif leeftijd < 12:\n    print('Dan ben je jonger dan ik!')\nelif leeftijd > 12:\n    print('Dan ben je ouder dan ik!')"
+    intro_text: "We gaan nog meer nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, < en >. De < kijkt of het eerste getal kleiner is dan de tweede zoals 4 < 5. De > kijkt of iets groter is dan het tweede getal zoals 6 > 5."
+    commands:
+      - name: "Kleiner"
+        explanation: "De < kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 15 gebruik je variabele < 15"
+        example: "Bijvoorbeeld: leeftijd < 12"
+        demo_code: "leeftijd = input('Hoe oud ben jij?')\nif leeftijd < 12:\n    print('Dan ben je jonger dan ik!')"
+      - name: "Groter"
+        explanation: "De > kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je variabele > 15"
+        example: "Bijvoorbeeld: leeftijd > 12"
+        demo_code: "leeftijd = input('Hoe oud ben jij?')\nif leeftijd > 12:\n    print('Dan ben je ouder dan ik!')"

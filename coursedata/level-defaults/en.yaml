@@ -227,3 +227,23 @@
         explanation: "If we are going to compare two values, we use ==. If we are going to assign a variable, we use =. "
         example: "For example: 5+3 == 8, answer = 8"
         demo_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif answer == 8:\n  print('That is correct!')\nelse:\n  print('No, that is wrong!')"
+  14:
+    start_code: "country = input('What country are you from?')\nif country != Netherlands:\n    print('Cool!')\nelse:\n    print('I am also from the Netherlands!')"
+    intro_text: "We are going to learn a new item, the != . The ! means not and the = means equal so != means not equal. For example 5 != 4."
+    commands:
+      - name: "Not equal"
+        explanation: "If we are checking if two things are not equal, we use !="
+        example: "For example: 5+3 != 9"
+        demo_code: "number = input('You are not allowed to say 5, what is a cool number?')\nif number != 5:\n    print('Well done!')\nelse:\n    print('Wrong! You were not allowed to say 5')"
+  15:
+    start_code: "age = input('How old are you?')\nif age < 12:\n    print('You are younger than me!')\nelif age > 12:\n    print('You are older than me!')"
+    intro_text: "We are going to learn more new items! You might know them already from mathematics, the < and >. The < checks if the first number is smaller than the second, like 4 < 5. The > checks if the first number is bigger than the second, like 6 >5."
+    commands:
+      - name: "Smaller"
+        explanation: "We use the < to check if the first number is smaller than the second number. For example if we want to see if a variable is smaller than 15, we use variable < 15"
+        example: "For example: age < 12"
+        demo_code: "age = input('How old are you?')\nif age < 12:\n    print('You are younger than me!')"
+      - name: "Bigger"
+        explanation: "We use the > to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use variable > 15"
+        example: "For example: age > 12"
+        demo_code: "age = input('How old are you?')\nif age > 12:\n    print('You are older than me!')"
