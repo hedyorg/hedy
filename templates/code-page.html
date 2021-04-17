@@ -158,7 +158,10 @@ var toggleDocs = function () {
   <script src="/vendor/skulpt.min.js" type="text/javascript"></script>
   <script src="/vendor/skulpt-stdlib.js" type="text/javascript"></script>
   <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
+  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
+  <script src="/js/syntaxModesRules.js" type="text/javascript"></script>
   <script src="/js/app.js" type="text/javascript"></script>
   <script src="/js/auth.js" type="text/javascript"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
+
+
 {% endblock %}

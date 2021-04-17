@@ -5,11 +5,14 @@
   if (! $ ('#editor').length) return;
 
   // *** EDITOR SETUP ***
-
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
-  // editor.session.setMode("ace/mode/javascript");
+
+    if (window.State.level == 1){
+      window.editor.session.setMode("ace/mode/level1");
+    }
+
 
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
@@ -90,7 +93,6 @@ function runit(level, lang, cb) {
     var code = editor.getValue();
 
     console.log('Original program:\n', code);
-
     $.ajax({
       type: 'POST',
       url: '/parse',

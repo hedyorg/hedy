@@ -117,3 +117,45 @@ class TestsLevel1(unittest.TestCase):
   def test_transpile_echo_without_argument(self):
     result = hedy.transpile("echo", 1)
     self.assertEqual("print(answer)", result)
+
+  def test_use_quotes_in_print_allowed(self):
+    code = "print 'Welcome to OceanView!'"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    print('\\'Welcome to OceanView!\\'')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("'Welcome to OceanView!'", expected_output)
+
+  def test_use_slashes_in_print_allowed(self):
+    code = "print 'Welcome to \O/ceanView!'"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    print('\\'Welcome to \O/ceanView!\\'')""")
+
+    self.assertEqual(expected, result)
+
+    expected_output = run_code(result)
+    self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+
+  def test_use_quotes_in_ask_allowed(self):
+    code = "ask 'Welcome to OceanView?'"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    answer = input('\\'Welcome to OceanView?\\'')""")
+
+    self.assertEqual(expected, result)
+
+  def test_use_quotes_in_echo_allowed(self):
+    code = "echo oma's aan de"
+    result = hedy.transpile(code, 1)
+
+    expected = textwrap.dedent("""\
+    print('oma\\'s aan de'+answer)""")
+
+    self.assertEqual(expected, result)

@@ -3,8 +3,8 @@ level: 6
 ---
 In level 6 komen er weer een nieuwe codes bij, je kunt nu namelijk gaan rekenen in je code.
 
-De plus is makkelijk, die schrijf je zoals bij rekenen: 5 + 5 bijvoorbeeld. De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-Daarom doen we de keer met het sterretje boven de 8: 5 * 5. Lees dat maar als 5 keer 5 dan onthoud je het het makkeljkst.
+De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
+Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als 5 keer 5 dan onthoud je het het makkeljkst.
 
 Hier vind je weer een aantal opdrachten om mee aan de slag te gaan.
 
@@ -37,7 +37,7 @@ Je kunt de sommen zelf verzinnen, bijv zo:
 * `antwoord is ask Weet jij het antwoord?`
 * `if antwoord is goedeantwoord print 'goedzo' else print 'Foutje! Het was ' goedeantwoord`
 
-Maar je kunt ook de computer zelf willekeurige sommen laten maken met random.
+Maar je kunt ook de computer zelf willekeurige sommen laten maken met `random`.
 
 Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
 
@@ -48,7 +48,7 @@ Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een and
 * `keergetal is keer at random`
 * `goedeantwoord is tafel * keergetal`
 
-* `print 'hoeveel is ' tafel ' keer ' keergetal`
+* `print 'hoeveel is ' tafel ' keer ' keergetal '?'`
 
 * `antwoord is ask Weet jij het antwoord?`
 * `if antwoord is goedeantwoord print 'goedzo' else print 'foutje! het was ' goedeantwoord`
@@ -97,7 +97,7 @@ In liedjes zit vaak veel herhaling, en soms zitten er dan ook getallen in. Bijv 
 Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt door de regels te kopiëren.
 
 # Wel een hoop knippen en plakken zeg!
-In Level 5 hebben we geleerd 1 regel te herhalen met repeat, zo:
+In Level 5 hebben we geleerd 1 regel te herhalen met `repeat`, zo:
 
 * `repeat 3 times print 'Baby Shark Tutududududu'`
 
