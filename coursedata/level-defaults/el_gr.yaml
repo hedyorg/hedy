@@ -93,18 +93,18 @@
       demo_code:
         "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
 6:
-  start_code: "print '5 επί 5 είναι ' 5 * 5"
+  start_code: "print '5 επί 5 ίσον με ' 5 * 5"
   intro_text: 'Οι `ask`, `print`, `if` και `repeat` είναι ακόμα ίδις όπως και στα Επίπεδα 4 και 5. Το Επίπεδο 6 προσθέτει κάτι καινούριο...Πλέον μπορείς να κάνεις υπολογισμούς.'
   commands:
     - name: 'print'
       explanation: 'Εμφάνισε κάτι ακριβώς χρησιμοποιώντας εισαγωγικά'
-      example: "Παράδειγμα: print '5 επί 5 είναι ' 5 * 5"
+      example: "Παράδειγμα: print '5 επί 5 ίσον με ' 5 * 5"
       demo_code: "print '5 επί 5 είναι ' 5 * 5"
     - name: 'Οι `ask` και `if` με υπολογισμούς'
       explanation: 'Ρώτησε σχετικά με έναν υπολογισμό και έλεγξε ότι είναι σωστός.'
       example: 'Παράδειγμα: answer is ask Πόσο είναι 10 + 10;'
       demo_code:
-        "answer is ask Πόσο είναι 10 + 10;\nif answer is 20 print 'Ναι!' else print 'Λάθος'"
+        "answer is ask Πόσο είναι 10 + 10;\nif answer is 20 print 'Ναι!' else print 'Ουπς'"
     - name: 'repeat'
       explanation: 'Οι `repeat` και `if` σε συνδυασμό'
       example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
@@ -112,23 +112,24 @@
         "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
 7:
   start_code:
-    "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'"
-  intro_text: 'ask and print still work as you know them. But if and repeat have changed! You can now execute groups of code together, but you will have to indent the code. That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line. If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!'
+    "repeat 5 times\n    print 'Γειά σας παιδιά'\n    print 'Αυτό θα εμφανιστεί 5 φορές'"
+  intro_text: 'Οι ask και print λειτουργούν ακόμα όπως τις γνωρίζετε. Όμως, οι if και repeat έχουν αλλάξει! Τώρα μπορείτε να εκτελείτε μαζί ομάδες κώδικα, αλλά θα πρέπει να βάλετε εσοχή στον κώδικα. Αυτό σημαίνει να προσθέσετε τέσσερα κενά στην αρχή της γραμμής. Το ίδιο ισχύει όταν θέλετε να δημιουργήσετε ένα μπλοκ μιας γραμμής. Αν συνδυάσετε μια repeat με μια if, θα πρέπει να βάλετε εσοχή σε κάθε μπλοκ. Δείτε το παράδειγμα κώδικα για περισσότερες λεπτομέρειες!'
+
   commands:
     - name: 'print'
-      explanation: 'Print something. Remember to use a quotation mark for literal printing.'
-      example: "Example: print '5 times 5 is ' 5 * 5"
-      demo_code: "print '5 times 5 is ' 5 * 5"
-    - name: '`if` with multiple lines'
-      explanation: 'Ask for the answer to a sum and check if it is correct. We can now print 2 lines.'
-      example: 'Example: answer is ask What is 5 plus 5?'
+      explanation: 'Εμφάνισε κάτι. Θυμήσου να χρησιμοποιήσεις εισαγωγικά για ακριβή εμφάνιση.'
+      example: "Παράδειγμα: print '5 επί 5 ίσον με ' 5 * 5"
+      demo_code: "print '5 επί 5 ίσον με ' 5 * 5"
+    - name: 'Η `if` με πολλαπλές γραμμές'
+      explanation: 'Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.'
+      example: 'Παράδειγμα: answer is ask Πόσο είναι 5 συν 5?'
       demo_code:
-        "answer is ask What is 5 plus 5?\nif answer is 10\n    print 'Well done!'\n    print 'Indeed, the answer was ' answer\nelse\n    print 'Oops!'\n    print 'The answer is 10'"
+        "answer is ask Πόσο είναι 5 συν 5;\nif answer is 10\n    print 'Μπράβο!'\n    print 'Πράγματι, η απάντηση ήταν ' answer\nelse\n    print 'Ουπς!'\n    print 'Η απάντηση είναι 10'"
     - name: 'if and repeat combined'
-      explanation: '`if` and `repeat` combined'
-      example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+      explanation: 'Οι `if` και `repeat` σε συνδυασμό'
+      example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
       demo_code:
-        "color is ask What is your favorite color?\nif color is green\n    repeat 3 times\n        print 'pretty!'\nelse\n    repeat 5 times\n        print 'meh'"
+        "color is ask οιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
 8:
   start_code:
     "for i in range 1 to 10\n    print i\nprint 'Ready or not, here I come!'"
