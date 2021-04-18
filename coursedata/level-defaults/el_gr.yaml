@@ -63,35 +63,35 @@
       explanation: 'Ρώτησε κάτι με την `ask`.'
       example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
       demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;?\nprint 'το ' color ' είναι το αγαπημένο σου!'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nprint 'το ' color ' είναι το αγαπημένο σου!'"
     - name: 'if'
       explanation: 'Κάνε μια επιλογή με την `if`'
       example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
       demo_code:
         "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
 5:
-  start_code: "repeat 3 times print 'Hedy is fun!'"
-  intro_text: '`ask`, `print` and `if` work exactly like they did in Level 4. But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times.'
+  start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
+  intro_text: 'Οι `ask`, `print` και `if` λειτουργούν ακριβώς όπως και στο Επίπεδο 4. Όμως, το Επίπεδο 5 προσθέτει την εντολή `repeat`. H Repeat (Επανάληψη) μπορεί να χρησιμποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.'
   commands:
     - name: 'print'
-      explanation: 'Print exactly using quotation marks'
-      example: "Example: print 'Hello welcome to Hedy.'"
-      demo_code: "print 'Hello welcome to Hedy.'"
+      explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
+      example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
+      demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     - name: 'ask'
-      explanation: 'Ask something with `ask`.'
-      example: 'Example: color is ask What is your favorite color?'
+      explanation: 'Ρώτησε κάτι με την `ask`.'
+      example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
       demo_code:
-        "color is ask What is your favorite color?\nprint color ' is your favorite!'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;?\nprint 'το ' color ' είναι το αγαπημένο σου!"
     - name: 'if'
-      explanation: 'Make a choice with `if`'
-      example: "Example: if color is green print 'pretty!' else print 'meh'"
+      explanation: 'Κάνε μια επιλογή με την `if`'
+      example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
       demo_code:
-        "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
     - name: 'repeat'
-      explanation: '`repeat` and `if` combined'
-      example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+      explanation: 'Οι `repeat` και `if` μαζί'
+      example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
       demo_code:
-        "color is ask What is your favorite color?\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
 6:
   start_code: "print '5 times 5 is ' 5 * 5"
   intro_text: '`ask`, `print`, `if` and `repeat` are still the same as in Level 4 and 5. Level 6 adds something new... You can now calculate.'
