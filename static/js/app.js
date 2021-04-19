@@ -129,7 +129,7 @@ function runit(level, lang, cb) {
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
-        var btn = $('#runit');
+        var btn = $('#run_button');
         btn.prop('disabled', true);
         btn.css("background", "gray");
         btn.css("border", "black"); //does seem to remove the original color, but doesn't make ik grey (yet)
