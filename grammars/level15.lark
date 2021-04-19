@@ -58,7 +58,7 @@ in_list_check: textwithoutspaces " in " var
 for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)*
 
 //new for level 12, assignment of list[i]
-change_list_item : var "[" (index | var) "] is " (var | textwithoutspaces)
+change_list_item : var "[" (index | var) "] = " (var | textwithoutspaces)
 
 var: NAME -> var
 list_access : var "[" (index | random | var) "]"

@@ -247,3 +247,27 @@
         explanation: "De > kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je variabele > 15"
         example: "Bijvoorbeeld: leeftijd > 12"
         demo_code: "leeftijd = input('Hoe oud ben jij?')\nif leeftijd > 12:\n    print('Dan ben je ouder dan ik!')"
+  16:
+    start_code: "leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')\nif leeftijd <= 11:\n    print('Dan ben je jonger dan ik!')\nelif leeftijd >= 13:\n    print('Dan ben je ouder dan ik!')"
+    intro_text: "Nu gaan we < en = combineren. Als we willen kijken of iets kleiner of gelijk aan het tweede getal is dan gebruiken we <=. Hetzelfde kunnen we doen met >="
+    commands:
+      - name: "Kleiner gelijk"
+        explanation: "De <= kijkt dus of het eerste getal kleiner of gelijk is aan het tweede getal. Dus 5 < 5 is niet waar want 5 is niet kleiner dan 5 maar 5 <= 5 is wel waar want 5 is gelijk aan 5. 6 <= 5 is dus niet waar."
+        example: "Bijvoorbeeld: leeftijd <= 12"
+        demo_code: "leeftijd = input('Ik ben 13 jaar, hoe oud ben jij?')\nif leeftijd <= 12:\n    print('Dan ben je jonger dan ik!')"
+      - name: "Groter gelijk"
+        explanation: "De >= kijkt dus of het eerste getal groter of gelijk is aan het tweede getal. Dus 5 > 5 is niet waar want 5 is niet groter dan 5 maar 5 >= 5 is wel waar want 5 is gelijk aan 5. 4 >= 5 is dus niet waar."
+        example: "Bijvoorbeeld: leeftijd >= 12"
+        demo_code: "leeftijd = input('Ik ben 11 jaar, hoe oud ben jij?')\nif leeftijd >= 12:\n    print('Dan ben je ouder dan ik!')"
+  17:
+    start_code: "getal = 5\nleeftijd = input('Hoe oud ben jij?')\nleeftijd += getal\nprint('Dus over 5 jaar ben jij: ' leeftijd)"
+    intro_text: "Als we een getal dat we hebben met 2 willen verhogen dan kunnen we het volgende doen: getal = getal + 2. Dat kan makkelijker met: getal += 2. Dit pakt het getal en telt er twee bij op!"
+    commands:
+      - name: "min is"
+        explanation: "We kunnen hetzelfde doen met -. Dus in plaats van: getal = getal - 2, kunnen we getal -= 2 doen."
+        example: "getal -= 2"
+        demo_code: "print('Wij hebben een getal waarmee we beginnen en dat is 10')\ngetal = 10\ngetal -= input('Hoeveel moet er van af om 0 te bereiken?')\nif(getal == 0):\n    print('Dat is goed')\nelse:\n    print('Dat is fout')"
+      - name: "keer is"
+        explanation: "We kunnen dit ook doen met *. Dus in plaats van: getal = getal * 2, kunnen we getal *= 2 doen."
+        example: "getal *= 2"
+        demo_code: "print('We beginnen met een getal 3')\ngetal = 3\nvermenigvuldiging = input('Waarmee wil je vermenigvuldigen?')\ngetal *= vermenigvuldiging\nprint('Antwoord van 3 * ' vermenigvuldiging ' is: ' getal)"
