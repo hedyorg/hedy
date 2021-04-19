@@ -135,11 +135,11 @@ function runit(level, lang, cb) {
         var btn = $('#runit');
         btn.prop('disabled', true);
         btn.css("background", "gray");
-        btn.css("border", "black"); //does seem to remove the original color, but doesn't make ik grey (yet)
+        btn.css("border-bottom", "4px solid black");
         setTimeout(function () {
           btn.prop('disabled', false);
           btn.css('background-color', ''); //reset to original color
-          btn.css("border", '');
+          btn.css("border-bottom", '');
         }, 2500);
         return;
       }
