@@ -12,7 +12,7 @@ import json
 import jsonbin
 import logging
 import os
-import pandas as pd
+import csv
 from Levenshtein import distance as lev
 from os import path
 import re
@@ -334,6 +334,9 @@ def preprocess_code_similarity_measure(code):
             code += word + " "
     return code
 
+# This is the Pandas dependent implementation, below it is re-written in native Python.
+# It should be kept for debugging purposes and can be deleted later on in development!
+"""
 def get_similar_code(processed_code, level):
     filename = "coursedata/level" + str(level) + ".csv"
     try:
@@ -355,6 +358,25 @@ def get_similar_code(processed_code, level):
                 shortest_distance = distance
                 similar_code = row['code']
     return similar_code
+"""
+
+def get_similar_code(processed_code, level):
+    filename = "coursedata/level" + str(level) + ".csv"
+    shortest_distance = 1000
+    similar_code = None
+
+    with open(filename, mode='r') as file:
+        csvFile = csv.reader(file)
+        for lines in csvFile:
+            distance = lev(processed_code, lines[2])
+            if distance == 0:  # The code is identical, no need to search any further
+                similar_code = lines[0]
+                break
+            else:
+                if distance < shortest_distance:
+                    shortest_distance = distance
+                    similar_code = lines[0]
+        return similar_code
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
