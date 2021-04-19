@@ -318,9 +318,6 @@ def log_feedback():
         'collapse': collapse
     })
 
-    # Just for debugging!
-    print(body)
-
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
     # We have to return something to the AJAX POST to show we are okay
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
@@ -335,32 +332,6 @@ def preprocess_code_similarity_measure(code):
         else:
             code += word + " "
     return code
-
-# This is the Pandas dependent implementation, below it is re-written in native Python.
-# It should be kept for debugging purposes and can be deleted later on in development!
-"""
-def get_similar_code(processed_code, level):
-    filename = "coursedata/level" + str(level) + ".csv"
-    try:
-        df = pd.read_csv(filename)
-    except:
-        print("The file doesn't exist!")
-        return None
-    shortest_distance = 1000
-    similar_code = None
-
-    # This is very (very) inefficient and should be greatly improved for further use, however the concept works!
-    for i, row in df.iterrows():
-        distance = lev(processed_code, row['processed_code'])
-        if distance == 0:  # The code is identical, no need to search any further
-            similar_code = row['code']
-            break
-        else:
-            if distance < shortest_distance:
-                shortest_distance = distance
-                similar_code = row['code']
-    return similar_code
-"""
 
 def get_similar_code(processed_code, level):
     filename = "coursedata/level" + str(level) + ".csv"

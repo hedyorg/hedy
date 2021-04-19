@@ -111,7 +111,6 @@ function runit(level, lang, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      console.log(response);
       prev_feedback_level = response.prev_feedback_level;
       prev_similar_code = response.prev_similar_code;
       console.log('Response', response);
