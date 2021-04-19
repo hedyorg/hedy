@@ -180,9 +180,8 @@ def parse():
                 gradual_feedback = TRANSLATIONS.get_translations(requested_lang(), 'GradualFeedback')
                 result = hedy.transpile(code, level)
                 response["Code"] = "# coding=utf8\nimport random\n" + result
-                response['prev_feedback_level'] = session['error_level'] # Minus 1 because we raise it AFTER the error
+                response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
-                print(response['prev_similar_code'])
                 # Notes Timon
                 #   If the feedback level was higher then 1 we want to ask some follow-up yes/no question
                 #   This is implemented in the app.js file, and then a POST is made to app.py through /feedback
@@ -318,6 +317,9 @@ def log_feedback():
         'similar_code': similar_code,
         'collapse': collapse
     })
+
+    # Just for debugging!
+    print(body)
 
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
     # We have to return something to the AJAX POST to show we are okay
