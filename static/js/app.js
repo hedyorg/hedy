@@ -1,7 +1,9 @@
-var prevFeedbackLevel;
-var prevSimilarCode;
-var feedbackViewed = false;
-var generalAnswered = false;
+var prev_feedback_level;
+var prev_similar_code;
+var similar_code;
+var general_answer;
+var feedback_viewed = false;
+var general_answered = false;
 
 (function() {
 
@@ -109,16 +111,16 @@ function runit(level, lang, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      prevFeedbackLevel = response.prevFeedbackLevel;
-      prevSimilarCode = response.prevSimilarCode;
+      prev_feedback_level = response.prev_feedback_level;
+      prev_similar_code = response.prev_similar_code;
       console.log('Response', response);
       if (response.Duplicate) {
-        error.showFeedback(ErrorMessages.Feedback_Duplicate, response.Feedback);
+        error.showFeedback(ErrorMessages.Feedback_duplicate, response.Feedback);
       }
       else {
         if (response.Feedback) {
-          if (response.FeedbackLevel === 4) {
-            error.showFeedback(ErrorMessages.Feedback_SimilarCode, response.Feedback);
+          if (response.feedback_level === 4) {
+            error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
           } else {
             error.showFeedback(ErrorMessages.Feedback_error, response.Feedback);
           }
@@ -214,11 +216,11 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 }
 
 function get_level_question() {
-  if (prevFeedbackLevel == 2) {
+  if (prev_feedback_level == 2) {
     return GradualErrorMessages.Feedback_question2;
-  } else if (prevFeedbackLevel == 3) {
+  } else if (prev_feedback_level == 3) {
     return GradualErrorMessages.Feedback_question3;
-  } else if (prevFeedbackLevel == 4) {
+  } else if (prev_feedback_level == 4) {
     return GradualErrorMessages.Feedback_question4;
   } else {
     return GradualErrorMessages.Feedback_question5;
@@ -226,36 +228,34 @@ function get_level_question() {
 }
 
 function feedback(answer) {
-  if (generalAnswered == false) {
-    generalAnswer = answer;
-    generalAnswered = true
+  if (general_answered == false) {
+    general_answer = answer;
+    general_answered = true
     $('#feedback-popup .caption').text(get_level_question()) // Change to level-dependent text
-  }
-  else {
-    if (prevFeedbackLevel >= 4) { // So similar code has been shown to the end-user, how do we retrieve it?
-      similarCode = prevSimilarCode
+  } else {
+    if (prev_feedback_level >= 4) { // So similar code has been shown to the end-user, how do we retrieve it?
+      similar_code = prevSimilarCode
+    } else {
+      similar_code = "-" // No similar code has been given to the user
     }
-    else {
-      similarCode = "-" // No similar code has been given to the user
-    }
-    levelAnswer = answer;
+    level_answer = answer;
     $.ajax({
       type: 'POST',
       url: '/feedback',
       data: JSON.stringify({
-        generalAnswer: generalAnswer,
-        levelAnswer: levelAnswer,
-        collapse: feedbackViewed,
-        similarCode: similarCode,
-        feedbackLevel: prevFeedbackLevel
+        general_answer: general_answer,
+        level_answer: level_answer,
+        collapse: feedback_viewed,
+        similar_code: similar_code,
+        feedback_level: prev_feedback_level
       }),
       contentType: 'application/json',
       dataType: 'json'
     });
     $('#feedback-popup').hide();
     $('#opaque').hide();
-    feedbackViewed = false; // Set back to false to ensure that it won't pop-up in next error streak without looking
-    generalAnswered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+    feedback_viewed = false; // Set back to false to ensure that it won't pop-up in next error streak without looking
+    general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
   }
 }
 
@@ -281,8 +281,8 @@ function reportClientError(level, code, client_error) {
 // If there is a feedback level higher then 1: pop-up a window with feedback question
 // Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
-  if (prevFeedbackLevel > 1) {
-    if (feedbackViewed == true) {
+  if (prev_feedback_level > 1) {
+    if (feedback_viewed == true) {
       $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
       $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
       $('#feedback-popup .no').text(GradualErrorMessages.Feedback_answerN)
@@ -407,7 +407,7 @@ function runPythonProgram(code, cb) {
 }
 
 $('#feedbackbox .expand-dialog').click(function(){
-   feedbackViewed = true;
+   feedback_viewed = true;
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();
    if (text === '↓'){
