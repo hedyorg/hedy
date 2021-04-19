@@ -404,10 +404,6 @@ function runPythonProgram(code, cb) {
   }
 }
 
-/* Notes Timon
-This code helps us expand / withdraw the feedback box
-It is completely written by hand, we should pay attention when merging
-*/
 $('#feedbackbox .expand-dialog').click(function(){
    feedbackViewed = true;
    $ ('#feedbackbox .details').toggle();

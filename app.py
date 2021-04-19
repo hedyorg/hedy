@@ -318,24 +318,10 @@ def log_feedback():
         'similar_code': similarCode,
         'collapse': collapse
     })
-    # This is for debugging purposes only!
-    print(session_id())
-    print(datetime.datetime.now())
-    print(feedbackLevel)
-    print(generalAnswer)
-    print(levelAnswer)
-    print(similarCode)
-    print(collapse)
 
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
-    # We have to return something to the AJAX POST to show we are okay, improve by giving an error when not...
+    # We have to return something to the AJAX POST to show we are okay
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
-# Notes Timon
-#   Last but not least: We want to completely re-write this section
-#   It is currently inefficient and does not provide us with decent results
-#   One option is to try it without pre-processing
-#   Another option might be the implementation of cosine similarity or word2vec
-#   However, in both cases the word order is discarded in the process: something that we deemed important...
 
 def preprocess_code_similarity_measure(code):
     concepts = ['print', 'ask', 'echo', 'is', 'at random', 'if', 'else', 'repeat', 'for']
@@ -368,16 +354,6 @@ def get_similar_code(processed_code, level):
             if distance < shortest_distance:
                 shortest_distance = distance
                 similar_code = row['code']
-                temp = row['processed_code']
-
-    # This code is temporary for debugging purposes -> it should be deleted before deployment!
-    print("The pre-processed code of the user:")
-    print(processed_code)
-    print("The pre-processed similar code:")
-    print(temp)
-    print("The actual similar code:")
-    print(similar_code)
-
     return similar_code
 
 @app.route('/report_error', methods=['POST'])
