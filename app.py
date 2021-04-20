@@ -162,6 +162,7 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+    supported_lang = ["en", "nl"]
 
     # For debugging
     print(f"got code {code}")
@@ -174,115 +175,43 @@ def parse():
         response["Error"] = "no code found, please send code."
     # is so, parse
     else:
-        if lang in ["en", "nl"]:
-            try:
-                hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-                gradual_feedback = TRANSLATIONS.get_translations(requested_lang(), 'GradualFeedback')
-                result = hedy.transpile(code, level)
-                response["Code"] = "# coding=utf8\nimport random\n" + result
+        try:
+            hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+            gradual_feedback = TRANSLATIONS.get_translations(requested_lang(), 'GradualFeedback')
+            result = hedy.transpile(code, level)
+            response["Code"] = "# coding=utf8\nimport random\n" + result
+            if lang in supported_lang:
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
                 session['error_level'] = 0  # Code is correct: reset error_level back to 0
-            except hedy.HedyException as E:
-                # some 'errors' can be fixed, for these we throw an exception, but also
-                # return fixed code, so it can be ran
-                if E.args[0] == "Invalid Space":
-                    error_template = hedy_errors[E.error_code]
-                    response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
-                    response["Warning"] = error_template.format(**E.arguments)
-                elif E.args[0] == "Parse":
-                    error_template = hedy_errors[E.error_code]
-                    # Localize the names of characters
-                    if 'character_found' in E.arguments:
-                        E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
-                    response["Error"] = error_template.format(**E.arguments)
-                elif E.args[0] == "Unquoted Text":
-                    error_template = hedy_errors[E.error_code]
-                    response["Error"] = error_template.format(**E.arguments)
-                else:
-                    error_template = hedy_errors[E.error_code]
-                    response["Error"] = error_template.format(**E.arguments)
+        except hedy.HedyException as E:
+            # some 'errors' can be fixed, for these we throw an exception, but also
+            # return fixed code, so it can be ran
+            if E.args[0] == "Invalid Space":
+                error_template = hedy_errors[E.error_code]
+                response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
+                response["Warning"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Parse":
+                error_template = hedy_errors[E.error_code]
+                # Localize the names of characters
+                if 'character_found' in E.arguments:
+                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Unquoted Text":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+            else:
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+            if lang in supported_lang:
+                response.update(gradual_feedback_model(code, level, gradual_feedback, E, True))
 
-                response['prev_feedback_level'] = session['error_level']
-                response['prev_similar_code'] = session['similar_code']
-
-                print(response["Error"])
-
-                if session['code'] == code:
-                    response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
-                    response["Duplicate"] = True
-                else:
-                    response["Duplicate"] = False
-                    if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
-                        session['error_level'] = session['error_level'] + 1
-                    if session['error_level'] == 2:
-                        response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
-                    elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
-                        response["Feedback"] = gradual_feedback["New_level" + str(level)]
-                    elif session['error_level'] == 4:
-                        similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
-                        if similar_code is None:  # No similar code is found against a, to be defined, threshold
-                            response["Feedback"] = gradual_feedback["No_similar_code"]
-                        else:
-                            response["Feedback"] = similar_code
-                            session["similar_code"] = similar_code
-                    elif session['error_level'] == 5:
-                        response["Feedback"] = gradual_feedback["Break"]  # Suggest a break -> Maybe improve model?
-                response["feedback_level"] = session['error_level']
-            except Exception as E:
-                response["Error"] = str(E)
-                response['prev_feedback_level'] = session['error_level']
-                response['prev_similar_code'] = session['similar_code']
-
-                if session['code'] == code:
-                    response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
-                    response["Duplicate"] = True
-                else:
-                    if session['error_level'] < 5:  # Raise feedback level is it not 5 (yet)
-                        session['error_level'] = session['error_level'] + 1
-                    if session['error_level'] == 2:
-                        response["Feedback"] = gradual_feedback["Expanded_Unknown"]
-                    elif session['error_level'] == 3:
-                        response["Feedback"] = gradual_feedback["New_level" + str(level)]
-                    elif session['error_level'] == 4:
-                        similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
-                        if similar_code is None:  # No similar code is found against a, to be defined, threshold
-                            response["Feedback"] = gradual_feedback["No_similar_code"]
-                        else:
-                            response["Feedback"] = similar_code
-                            session["similar_code"] = similar_code
-                    elif session['error_level'] == 5:
-                        response["Feedback"] = gradual_feedback["Break"]
-                response["feedback_level"] = session['error_level']
+        except Exception as E:
+            response["Error"] = str(E)
+            if lang in supported_lang:
+                response.update(gradual_feedback_model(code, level, gradual_feedback, E, False))
+        if lang in supported_lang:
             session['code'] = code
-        #The model isn't implemented for any other language than English or Dutch: so give the original error structure
-        else:
-            try:
-                hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-                result = hedy.transpile(code, level)
-                response["Code"] = "# coding=utf8\nimport random\n" + result
-            except hedy.HedyException as E:
-                # some 'errors' can be fixed, for these we throw an exception, but also
-                # return fixed code, so it can be ran
-                if E.args[0] == "Invalid Space":
-                    error_template = hedy_errors[E.error_code]
-                    response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
-                    response["Warning"] = error_template.format(**E.arguments)
-                elif E.args[0] == "Parse":
-                    error_template = hedy_errors[E.error_code]
-                    # Localize the names of characters
-                    if 'character_found' in E.arguments:
-                        E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
-                    response["Error"] = error_template.format(**E.arguments)
-                elif E.args[0] == "Unquoted Text":
-                    error_template = hedy_errors[E.error_code]
-                    response["Error"] = error_template.format(**E.arguments)
-                else:
-                    error_template = hedy_errors[E.error_code]
-                    response["Error"] = error_template.format(**E.arguments)
-            except Exception as E:
-                print(f"error transpiling {code}")
-                response["Error"] = str(E)
 
     logger.log ({
         'session': session_id(),
@@ -293,11 +222,42 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
-        'feedback_level': session['error_level'] if lang in ["en", "nl"] else None,  # Retrieve from session -> is always up-to-date
+        'feedback_level': session['error_level'] if lang in supported_lang else None,  # Retrieve from session -> is always up-to-date
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
     return jsonify(response)
+
+def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
+    response = {}
+    response['prev_feedback_level'] = session['error_level']
+    response['prev_similar_code'] = session['similar_code']
+
+    if session['code'] == code:
+        response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
+        response["Duplicate"] = True
+    else:
+        response["Duplicate"] = False
+        if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
+            session['error_level'] = session['error_level'] + 1
+        if session['error_level'] == 2:
+            if hedy_exception:
+                response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
+            else:
+                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
+        elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
+            response["Feedback"] = gradual_feedback["New_level" + str(level)]
+        elif session['error_level'] == 4:
+            similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+            if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                response["Feedback"] = gradual_feedback["No_similar_code"]
+            else:
+                response["Feedback"] = similar_code
+                session["similar_code"] = similar_code
+        elif session['error_level'] == 5:
+            response["Feedback"] = gradual_feedback["Break"]  # Suggest a break -> Maybe improve model?
+    response["feedback_level"] = session['error_level']
+    return response
 
 @app.route('/feedback', methods=['POST'])
 def log_feedback():
