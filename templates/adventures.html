@@ -7,7 +7,9 @@
     {% for adventure in adventures.adventures.items () %}
       <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5 font-medium text-lg cursor-pointer" tabindex=0 onclick="window.location = '{{localize_link ('/hedy/adventures/' + adventure [0])}}'">
         <h2>{{adventure [1].name}}</h2>
-        <p>{{adventure [1].description}}</p>
+        <p class="h-8">{{adventure [1].description}}</p>
+        <br>
+        {% if adventure [1].image %}<img style="width: 200px; height: 200px" src="/images/{{adventure [1].image}}">{% endif %}
       </div>
     {% endfor %}
   </div>

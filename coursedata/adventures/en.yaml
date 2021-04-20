@@ -5,9 +5,16 @@ adventures:
     story:
         name: "A story"
         description: "Write an interactive story"
+        image: "story.png"
         1:
             intro_text: "Create your own story"
             start_code: "print This is the beginning of a great story"
+            commands:
+                -
+                    name: "print"
+                    explanation: "Print something with `print`."
+                    example: "Example: print Hello welcome to Hedy!"
+                    demo_code: "print Hello welcome to Hedy!"
         2:
             intro_text: "Create your own story"
             start_code: "print This is the beginning of a great story"
@@ -23,6 +30,7 @@ adventures:
     dice:
         name: "Create your own dice"
         description: "Make your own dice and your own rules!"
+        image: "dice.png"
         1:
             intro_text: "Create your own version game of dice"
             start_code: "print Welcome to a cool game of dice!"
@@ -31,6 +39,7 @@ adventures:
             start_code: "print Welcome to a cool game of dice!"
     dishes:
         name: "Who's turn is it to do the dishes?"
+        image: "dishes.png"
         description: "Use the computer to decide fairly who shall wash those dishes tonight."
         1:
             intro_text: "Who's turn is it to do the dishes?"
@@ -41,6 +50,7 @@ adventures:
     multiplication:
         name: "Practice multiplication tables"
         description: "Use the computer to help you ace the next math exam (starts at level 5)."
+        image: "calculator.png"
         5:
             intro_text: "Practice multiplication tables with the help of a computer"
             start_code: "print 'Welcome to the practice program for multiplication tables'"

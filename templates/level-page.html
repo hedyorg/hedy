@@ -18,9 +18,10 @@
       <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', true, ace.edit('editor').getValue());">
       <input type="submit" class="btn ml-5 h-3/5 mt-1" value="{{ switch_to_adventures }}" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">
     {% else %}
-      <span class="ml-52"></span>
+      <span class="ml-24"></span>
       <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit([{{ level }}, '{{ adventure_name }}'], '{{ lang }}', true, ace.edit('editor').getValue());">
       <button class="btn ml-5 h-3/5 mt-1" onclick="window.location = '{{localize_link ('/hedy/' + level_nr)}}'">{{switch_to_levels}}</button>
+      <input type="submit" class="btn ml-5 h-3/5 mt-1" value="{{ switch_to_adventures }}" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">
     {% endif %}
   </div>
 </div>
