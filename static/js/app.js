@@ -41,7 +41,7 @@ var general_answered = false;
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
       window.State.disable_run = false;
-      $ ('#runit').css('background-color', '');
+      //$ ('#runit').css('background-color', ''); Delete to prevent changing color within time-out
       window.State.unsaved_changes = true;
     });
   }
@@ -131,6 +131,7 @@ function runit(level, lang, cb) {
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
+        window.State.disable_run = true;
         var btn = $('#runit');
         btn.prop('disabled', true);
         btn.css("background", "gray");
@@ -139,6 +140,7 @@ function runit(level, lang, cb) {
           btn.prop('disabled', false);
           btn.css('background-color', ''); //reset to original color
           btn.css("border-bottom", '');
+          window.State.disable_run = false;
         }, 2500);
         return;
       }
