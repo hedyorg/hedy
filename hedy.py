@@ -839,20 +839,26 @@ def preprocess_blocks(code):
     processed_code = []
     lines = code.split("\n")
     current_indent = 0
+    previous_block = 0
     for line in lines:
         leading_spaces = find_indent_length(line)
-        if leading_spaces >= current_indent:
-            current_indent = leading_spaces
-            processed_code.append(line)
-        else:
+        if leading_spaces > previous_block:
+            current_indent += 1
+            previous_block = leading_spaces
+        elif leading_spaces < previous_block:
             #we springen 'terug' dus er moet een block in!
-            processed_code.append('end-block\n')
-            processed_code.append(line)
+            processed_code.append('end-block')
+            current_indent -=1
+            previous_block = leading_spaces
 
+        #if indent remains the same, do nothing, just add line
+        processed_code.append(line)
+
+    # if the last line is indented, the end of the program is also the end of all indents
+    # so close all blocks
+    for i in range(current_indent):
+        processed_code.append('end-block')
     return "\n".join(processed_code)
-
-
-
 
 
 def transpile_inner(input_string, level):
@@ -860,7 +866,8 @@ def transpile_inner(input_string, level):
     level = int(level)
     parser = Lark(create_grammar(level))
 
-    input_string = preprocess_blocks(input_string)
+    if level == 8:
+        input_string = preprocess_blocks(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer

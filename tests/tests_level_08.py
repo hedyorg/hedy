@@ -119,22 +119,6 @@ print('wie niet weg is is gezien')""")
 
 
   def test_if_under_else_in_for(self):
-
-    #waar je naartoe wilt is iets van:
-    preprocessed = textwrap.dedent("""\
-    for i in range 0 to 10
-      antwoord is ask Wat is 5*5
-      if antwoord is 24
-          print 'Dat is fout!'
-      else
-          print 'Dat is goed!'
-      end-block
-      if antwoord is 25
-          i is 10
-          end-block
-    end-block""")
-
-
     code = textwrap.dedent("""\
     for i in range 0 to 10
       antwoord is ask Wat is 5*5
@@ -143,9 +127,7 @@ print('wie niet weg is is gezien')""")
       else
           print 'Dat is goed!'
       if antwoord is 25
-          i is 10
-      for i in range 0 to 5
-          print 'lala'""")
+          i is 10""")
 
     expected = textwrap.dedent("""\
     for i in range(int(0), int(10)+1):
@@ -155,7 +137,7 @@ print('wie niet weg is is gezien')""")
       else:
         print('Dat is goed!')
       if str(antwoord) == str('25'):
-        i = int(10)""")
+        i = '10'""")
 
     result = hedy.transpile(code, 8)
 
