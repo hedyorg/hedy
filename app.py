@@ -182,11 +182,6 @@ def parse():
                 response["Code"] = "# coding=utf8\nimport random\n" + result
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
-                # Notes Timon
-                #   If the feedback level was higher then 1 we want to ask some follow-up yes/no question
-                #   This is implemented in the app.js file, and then a POST is made to app.py through /feedback
-                #   This because the logging is done within this function and we want to log the answer
-                #   So, we do a "double" logging of the code submission
                 session['error_level'] = 0  # Code is correct: reset error_level back to 0
             except hedy.HedyException as E:
                 # some 'errors' can be fixed, for these we throw an exception, but also
@@ -211,6 +206,8 @@ def parse():
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
 
+                print(response["Error"])
+
                 if session['code'] == code:
                     response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
                     response["Duplicate"] = True
@@ -232,10 +229,11 @@ def parse():
                     elif session['error_level'] == 5:
                         response["Feedback"] = gradual_feedback["Break"]  # Suggest a break -> Maybe improve model?
                 response["feedback_level"] = session['error_level']
-
             except Exception as E:
                 response["Error"] = str(E)
                 response['prev_feedback_level'] = session['error_level']
+                response['prev_similar_code'] = session['similar_code']
+
                 if session['code'] == code:
                     response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
                     response["Duplicate"] = True
@@ -257,6 +255,7 @@ def parse():
                         response["Feedback"] = gradual_feedback["Break"]
                 response["feedback_level"] = session['error_level']
             session['code'] = code
+        #The model isn't implemented for any other language than English or Dutch: so give the original error structure
         else:
             try:
                 hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
