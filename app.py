@@ -204,12 +204,12 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, E, True))
+                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=True))
 
         except Exception as E:
             response["Error"] = str(E)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, E, False))
+                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=False))
         if lang in supported_lang:
             session['code'] = code
 
