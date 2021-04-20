@@ -146,6 +146,13 @@ function runit(level, lang, cb) {
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
         // Todo: We have to make some implementation changes to give the user some additional feedback here as well
+        // Current idea:
+        /*
+          Make an additional POST to app.py and catch the updates on the GFI model
+          Implement the feedback similarly to how it is done above, this will result in (a lot) of duplicate code
+          The next step is to re-write the feedback-call and the button_disable-call into a function
+          Then these are call in the response in runit() as well as the response here
+         */
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
