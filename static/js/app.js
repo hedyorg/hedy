@@ -41,7 +41,6 @@ var general_answered = false;
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
       window.State.disable_run = false;
-      //$ ('#runit').css('background-color', ''); Delete to prevent changing color within time-out
       window.State.unsaved_changes = true;
     });
   }
