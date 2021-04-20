@@ -415,7 +415,7 @@ function runPythonProgram(code, cb) {
   }
 }
 
-$('#feedbackbox .expand-dialog').click(function(){
+$('#feedbackbox').click(function(){
    feedback_viewed = true;
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();

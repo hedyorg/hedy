@@ -205,7 +205,6 @@ def parse():
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
                 response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=True))
-
         except Exception as E:
             response["Error"] = str(E)
             if lang in supported_lang:
@@ -222,7 +221,7 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
-        'feedback_level': session['error_level'] if lang in supported_lang else None,  # Retrieve from session -> is always up-to-date
+        'feedback_level': session['error_level'] if lang in supported_lang else None,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
@@ -240,7 +239,7 @@ def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
         response["Duplicate"] = False
         if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
             session['error_level'] = session['error_level'] + 1
-        if session['error_level'] == 2:
+        if session['error_level'] == 2: # Give a more explanatory error message
             if hedy_exception:
                 response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
             else:
