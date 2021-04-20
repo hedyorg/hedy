@@ -395,7 +395,7 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
-    if lang in ["en", "en"]:
+    if requested_lang() in ["en", "nl"]:
         session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
         session["similar_code"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
         session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
