@@ -290,7 +290,7 @@ def adventure_page(adventure_name, level):
 
     # If requested adventure does not exist, return 404
     if not adventure_name in adventures ['adventures']:
-        abort(404)
+        return 'No such Hedy adventure!', 404
 
     adventure = adventures ['adventures'] [adventure_name]
     loaded_program = ''
@@ -343,7 +343,10 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
     session_id()  # Run this for the side effect of generating a session ID
-    g.level = level = int(level)
+    try:
+        g.level = level = int(level)
+    except:
+        return 'No such Hedy level!', 404
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
