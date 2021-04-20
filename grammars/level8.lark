@@ -30,7 +30,7 @@ invalid: textwithoutspaces " " textwithspaces
 
 
 // new commands for level 4
-elses : _EOL "else" _EOL (" "+ command) (_EOL " "+ command)*
+elses : _EOL (" ")* "else" _EOL (" "+ command) (_EOL " "+ command)*
 ifs: "if " condition _EOL (" "+ command) (_EOL " "+ command)* //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 
 
