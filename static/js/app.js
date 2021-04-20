@@ -118,6 +118,7 @@ function runit(level, lang, cb) {
       }
       else {
         if (response.Feedback) {
+          $ ('#feedbackbox .expand-dialog').text(GradualErrorMessages.Click_expand)
           if (response.feedback_level === 4) {
             error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
           } else {
@@ -419,11 +420,11 @@ $('#feedbackbox').click(function(){
    feedback_viewed = true;
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();
-   if (text === '↓'){
-      $ ('#feedbackbox .expand-dialog').text('↑')
+   if (text === GradualErrorMessages.Click_shrink){
+      $ ('#feedbackbox .expand-dialog').text(GradualErrorMessages.Click_expand)
    }
    else {
-     $ ('#feedbackbox .expand-dialog').text('↓')
+     $ ('#feedbackbox .expand-dialog').text(GradualErrorMessages.Click_shrink)
    }
 });
 
