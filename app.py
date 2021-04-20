@@ -395,9 +395,10 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
-    session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
-    session["similar_code"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
-    session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
+    if lang in ["en", "en"]:
+        session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
+        session["similar_code"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
+        session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
 
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
