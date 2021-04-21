@@ -61,7 +61,7 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
 
   return render_template("code-page.html", **arguments_dict)
 
-def render_adventure(adventure_name, adventure, request, lang, level_number, menu, translations, version, loaded_program):
+def render_adventure(adventure_name, adventure, course, request, lang, level_number, menu, translations, version, loaded_program):
 
   arguments_dict = {}
 
@@ -85,6 +85,11 @@ def render_adventure(adventure_name, adventure, request, lang, level_number, men
 
   # Actual assignment
   for key, value in adventure [level_number].items ():
-     arguments_dict [key] = value
+    arguments_dict [key] = value
+
+  # If there are no commands available for this combination of adventure + level, we use the commands from the corresponding Hedy level, if any
+  if not 'commands' in adventure [level_number]:
+    hedy_course = course.get_assignment(level_number, None)
+    arguments_dict ['commands'] = hedy_course.commands
 
   return render_template("code-page.html", **arguments_dict)
