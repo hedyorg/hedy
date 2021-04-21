@@ -1,19 +1,55 @@
 ---
-title: "Hedy adventures!"
-subtitle: "You can learn Hedy by creating a story, a game or something to make your life easier"
+title: "Hedy avonturen!"
+subtitle: "Met Hedy kan je van alles maken! Bijvoorbeeld een interactief verhaal, een spel of een app om het leven makkelijker te maken"
 adventures:
     story:
         name: "Een verhaal"
-        description: "Write an interactive story"
+        description: "Maak een interactief verhaal"
         1:
-            intro_text: "Create your own story"
-            start_code: "print This is the beginning of a great story"
+            intro_text: >
+                In Level 1 kun je een verhaal maken met steeds een andere hoofdpersoon die je zelf invoert.
+
+
+                Met `ask` ga jij vragen hoe de hoofdpersoon heet.
+
+
+                Met `print` kun je een zin printen.
+
+
+                Met `echo` kun je ook printen. Dan komt de naam op het einde van een regel.
+
+
+            start_code: "print Hier begint jouw verhaal"
             commands:
                 -
-                    name: "print"
-                    explanation: "Print something with `print`."
-                    example: "Example: print Hello welcome to Hedy!"
-                    demo_code: "print Hello welcome to Hedy!"
+                    name: "Voorbeeld"
+                    explanation: >
+                        ## Voorbeeld
+
+                        ```
+
+                        ask De hoofdpersoon van dit verhaal is
+
+                        print De hoofdpersoon loopt in een bos
+
+                        echo Hij is wel een beetje bang die
+
+                        print Overal hoort hij gekke geluiden
+
+                        print Hij is bang dat dit een spookbos is
+
+                        ```
+                    example: ""
+                    demo_code: >
+                        ask De hoofdpersoon van dit verhaal is
+
+                        print De hoofdpersoon loopt in een bos
+
+                        echo Hij is wel een beetje bang die
+
+                        print Overal hoort hij gekke geluiden
+
+                        print Hij is bang dat dit een spookbos is
         2:
             intro_text: "Create your own story"
             start_code: "print This is the beginning of a great story"
