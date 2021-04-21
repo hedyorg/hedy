@@ -118,7 +118,7 @@ function runit(level, lang, cb) {
       }
       else {
         if (response.Feedback) {
-          $ ('#feedbackbox .expand-dialog').text(GradualErrorMessages.Click_expand)
+          $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
           if (response.feedback_level === 4) {
             error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
           } else {
@@ -145,14 +145,6 @@ function runit(level, lang, cb) {
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
-        // Todo: We have to make some implementation changes to give the user some additional feedback here as well
-        // Current idea:
-        /*
-          Make an additional POST to app.py and catch the updates on the GFI model
-          Implement the feedback similarly to how it is done above, this will result in (a lot) of duplicate code
-          The next step is to re-write the feedback-call and the button_disable-call into a function
-          Then these are call in the response in runit() as well as the response here
-         */
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
@@ -420,11 +412,11 @@ $('#feedbackbox').click(function(){
    feedback_viewed = true;
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();
-   if (text === GradualErrorMessages.Click_shrink){
-      $ ('#feedbackbox .expand-dialog').text(GradualErrorMessages.Click_expand)
+   if (text === "▼ " + GradualErrorMessages.Click_shrink + " ▼"){
+      $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
    }
    else {
-     $ ('#feedbackbox .expand-dialog').text(GradualErrorMessages.Click_shrink)
+     $ ('#feedbackbox .expand-dialog').text("▼ " + GradualErrorMessages.Click_shrink + " ▼")
    }
 });
 

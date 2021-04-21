@@ -254,7 +254,7 @@ def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
                 response["Feedback"] = similar_code
                 session["similar_code"] = similar_code
         elif session['error_level'] == 5:
-            response["Feedback"] = gradual_feedback["Break"]  # Suggest a break -> Maybe improve model?
+            response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
     response["feedback_level"] = session['error_level']
     return response
 
@@ -293,7 +293,7 @@ def preprocess_code_similarity_measure(code):
 
 def get_similar_code(processed_code, level):
     filename = "coursedata/level" + str(level) + ".csv"
-    shortest_distance = 1000
+    shortest_distance = 10 # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
 
     with open(filename, mode='r') as file:
