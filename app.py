@@ -177,7 +177,7 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            gradual_feedback = TRANSLATIONS.get_translations(requested_lang(), 'GradualFeedback')
+            gradual_feedback = TRANSLATIONS.get_translations(lang, 'GradualFeedback')
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\nimport random\n" + result
             if lang in supported_lang:
