@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="-mx-8 -mt-12 px-8 mb-8 bg-blue-200 flex">
-  <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1 float-left">
+  <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1 float-left" style="max-width: 15rem;">
     {% if adventure_name %}
       {{ adventure }}: {{ full_adventure_name }} - Level {{ level_nr }}
     {% else %}
@@ -18,10 +18,9 @@
       <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', true, ace.edit('editor').getValue());">
       <input type="submit" class="btn ml-5 h-3/5 mt-1" value="{{ switch_to_adventures }}" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">
     {% else %}
-      <span class="ml-24"></span>
       <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit([{{ level }}, '{{ adventure_name }}'], '{{ lang }}', true, ace.edit('editor').getValue());">
       <button class="btn ml-5 h-3/5 mt-1" onclick="window.location = '{{localize_link ('/hedy/' + level_nr)}}'">{{switch_to_levels}}</button>
-      <input type="submit" class="btn ml-5 h-3/5 mt-1" value="{{ switch_to_adventures }}" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">
+      <button class="btn ml-5 h-3/5 mt-1" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">{{switch_to_another_adventure}}</button>
     {% endif %}
   </div>
 </div>
