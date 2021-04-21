@@ -114,11 +114,11 @@ function runit(level, lang, cb) {
       prev_similar_code = response.prev_similar_code;
       console.log('Response', response);
       if (response.Duplicate) {
+        $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
         error.showFeedback(ErrorMessages.Feedback_duplicate, response.Feedback);
       }
       else {
         if (response.Feedback) {
-          $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
           if (response.feedback_level === 4) {
             error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
           } else {
