@@ -910,6 +910,7 @@ def transpile_inner(input_string, level, sub = 0):
             python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         elif sub == 1 or sub == 2:
             python = ConvertToPython_7_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
     elif level == 8:
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python

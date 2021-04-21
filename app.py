@@ -156,6 +156,9 @@ def parse():
 
     code = body ['code']
     level = int(body ['level'])
+    
+    sub = 0 #int(body ['sub'])   # TODO implement sub in backend
+    
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -174,7 +177,7 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            result = hedy.transpile(code, level)
+            result = hedy.transpile(code, level, sub)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also

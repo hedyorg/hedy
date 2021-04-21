@@ -11,7 +11,7 @@ class LevelDefaults:
     self.language = language
     self.levels = load_yaml(f'coursedata/level-defaults/{language}.yaml')
 
-  def get_defaults(self, level):
+  def get_defaults(self, level, sub=0):
     """Return the level defaults for a given level number.
 
     Returns: Default
@@ -85,6 +85,17 @@ class Course:
     for level_i, level in enumerate(self.course):
       expected_value = str(level_i + 1)
       actual_value = level.get('level')
+      
+      # Check for sub levels
+      subs = level.get('subs')
+      if (subs):
+        for sub_i, sub in enumerate(subs):
+          expected_sub = str(sub_i + 1)
+          actual_sub = sub.get('sub')
+          if expected_sub != actual_sub:
+            raise RuntimeError(f'Expected \'sub: "{expected_sub}"\' but got "{actual_sub}" in {self.course_name}-{self.language}')
+          
+      
       if expected_value != actual_value:
         raise RuntimeError(f'Expected \'level: "{expected_value}"\' but found "{actual_value}" in {self.course_name}-{self.language}')
 

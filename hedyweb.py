@@ -24,7 +24,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, sub=0):
   assignment = course.get_assignment(level_number, assignment_number)
   if not assignment:
     abort(404)
@@ -34,6 +34,7 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   # Meta stuff
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
+  arguments_dict['level_sub'] = str(sub) if (int(sub) > 0) else None
   arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
   arguments_dict['level'] = assignment.level
