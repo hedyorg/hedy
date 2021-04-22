@@ -1,3 +1,10 @@
+var prev_feedback_level;
+var prev_similar_code;
+var similar_code;
+var general_answer;
+var feedback_viewed = false;
+var general_answered = false;
+
 (function() {
 
   // If there's no #editor div, we're requiring this code in a non-code page.
@@ -34,7 +41,6 @@
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
       window.State.disable_run = false;
-      $ ('#runit').css('background-color', '');
       window.State.unsaved_changes = true;
     });
   }
@@ -104,16 +110,42 @@ function runit(level, lang, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      prev_feedback_level = response.prev_feedback_level;
+      prev_similar_code = response.prev_similar_code;
       console.log('Response', response);
+      if (response.Duplicate) {
+        $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
+        error.showFeedback(ErrorMessages.Feedback_duplicate, response.Feedback);
+      }
+      else {
+        if (response.Feedback) {
+          $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
+          if (response.feedback_level === 4) {
+            error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
+          } else {
+            error.showFeedback(ErrorMessages.Feedback_error, response.Feedback);
+          }
+        }
+      }
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
+        window.State.disable_run = true;
+        var btn = $('#runit');
+        btn.prop('disabled', true);
+        btn.css("background", "gray");
+        btn.css("border-bottom", "4px solid black");
+        setTimeout(function () {
+          btn.prop('disabled', false);
+          btn.css('background-color', ''); //reset to original color
+          btn.css("border-bottom", '');
+          window.State.disable_run = false;
+        }, 2500);
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
-        console.log(err)
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
@@ -186,6 +218,50 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
+function get_level_question() {
+  if (prev_feedback_level == 2) {
+    return GradualErrorMessages.Feedback_question2;
+  } else if (prev_feedback_level == 3) {
+    return GradualErrorMessages.Feedback_question3;
+  } else if (prev_feedback_level == 4) {
+    return GradualErrorMessages.Feedback_question4;
+  } else {
+    return GradualErrorMessages.Feedback_question5;
+  }
+}
+
+function feedback(answer) {
+  if (general_answered == false) {
+    general_answer = answer;
+    general_answered = true
+    $('#feedback-popup .caption').text(get_level_question()) // Change to level-dependent text
+  } else {
+    if (prev_feedback_level >= 4) { // So similar code has been shown to the end-user, how do we retrieve it?
+      similar_code = prev_similar_code
+    } else {
+      similar_code = "-" // No similar code has been given to the user
+    }
+    level_answer = answer;
+    $.ajax({
+      type: 'POST',
+      url: '/feedback',
+      data: JSON.stringify({
+        general_answer: general_answer,
+        level_answer: level_answer,
+        collapse: feedback_viewed,
+        similar_code: similar_code,
+        feedback_level: prev_feedback_level
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    });
+    $('#feedback-popup').hide();
+    $('#opaque').hide();
+    feedback_viewed = false; // Set back to false to ensure that it won't pop-up in next error streak without looking
+    general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+  }
+}
+
 /**
  * Do a POST with the error to the server so we can log it
  */
@@ -203,7 +279,25 @@ function reportClientError(level, code, client_error) {
   });
 }
 
+// Notes from Timon
+// In the function below the actual output of the program is ran
+// If there is a feedback level higher then 1: pop-up a window with feedback question
+// Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
+  if (prev_feedback_level > 1) {
+    if (feedback_viewed == true) {
+      $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
+      $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
+      $('#feedback-popup .no').text(GradualErrorMessages.Feedback_answerN)
+      $('#feedback-popup').show();
+      $('#opaque').show();
+    } else {
+      feedback(false);
+      feedback(false);
+      // We have to call feedback() twice due to the code structure: not ideal of course
+      // However, this way we are able to log the users error-solving even when the ECEM is not read
+    }
+  }
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -315,10 +409,23 @@ function runPythonProgram(code, cb) {
   }
 }
 
+$('#feedbackbox .expand-dialog').click(function(){
+   feedback_viewed = true;
+   $ ('#feedbackbox .details').toggle();
+   var text = $ ('#feedbackbox .expand-dialog').text();
+   if (text === "▼ " + GradualErrorMessages.Click_shrink + " ▼"){
+      $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
+   }
+   else {
+     $ ('#feedbackbox .expand-dialog').text("▼ " + GradualErrorMessages.Click_shrink + " ▼")
+   }
+});
+
 var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
+    $('#feedbackbox').hide();
     editor.resize ();
   },
 
@@ -326,6 +433,15 @@ var error = {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
+    editor.resize ();
+  },
+
+  showFeedback(caption, message) {
+    $('#feedbackbox .caption').text(caption);
+    var obj = $("#feedbackbox .details").text(message);
+    obj.html(obj.html().replace(/\n/g,'<br/>'));
+    $('#feedbackbox').show();
+    $("#feedbackbox .details").hide();
     editor.resize ();
   },
 

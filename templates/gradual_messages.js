@@ -1,0 +1,1 @@
+var GradualErrorMessages = {{ error_messages|safe }};

@@ -12,6 +12,8 @@ import json
 import jsonbin
 import logging
 import os
+import csv
+from Levenshtein import distance as lev
 from os import path
 import re
 import requests
@@ -160,6 +162,7 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+    supported_lang = ["en", "nl"]
 
     # For debugging
     print(f"got code {code}")
@@ -174,8 +177,13 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+            gradual_feedback = TRANSLATIONS.get_translations(lang, 'GradualFeedback')
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\nimport random\n" + result
+            if lang in supported_lang:
+                response['prev_feedback_level'] = session['error_level']
+                response['prev_similar_code'] = session['similar_code']
+                session['error_level'] = 0  # Code is correct: reset error_level back to 0
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -195,9 +203,14 @@ def parse():
             else:
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
+            if lang in supported_lang:
+                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=True))
         except Exception as E:
-            print(f"error transpiling {code}")
             response["Error"] = str(E)
+            if lang in supported_lang:
+                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=False))
+        if lang in supported_lang:
+            session['code'] = code
 
     logger.log ({
         'session': session_id(),
@@ -208,10 +221,93 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
+        'feedback_level': session['error_level'] if lang in supported_lang else None,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
     return jsonify(response)
+
+def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
+    response = {}
+    response['prev_feedback_level'] = session['error_level']
+    response['prev_similar_code'] = session['similar_code']
+
+    if session['code'] == code:
+        response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
+        response["Duplicate"] = True
+    else:
+        response["Duplicate"] = False
+        if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
+            session['error_level'] = session['error_level'] + 1
+        if session['error_level'] == 2: # Give a more explanatory error message
+            if hedy_exception:
+                response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
+            else:
+                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
+        elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
+            response["Feedback"] = gradual_feedback["New_level" + str(level)]
+        elif session['error_level'] == 4:
+            similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+            if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                response["Feedback"] = gradual_feedback["No_similar_code"]
+            else:
+                response["Feedback"] = similar_code
+                session["similar_code"] = similar_code
+        elif session['error_level'] == 5:
+            response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
+    response["feedback_level"] = session['error_level']
+    return response
+
+@app.route('/feedback', methods=['POST'])
+def log_feedback():
+    body = request.json
+    general_answer = body['general_answer']
+    level_answer = body['level_answer']
+    feedback_level = int(body['feedback_level'])
+    collapse = bool(body['collapse'])  # this is either true or false: The window was either expanded or not
+    similar_code = body['similar_code']
+    logger.log({
+        'session': session_id(),
+        'date': str(datetime.datetime.now()),
+        'feedback_level': feedback_level,
+        'usefulness': general_answer,
+        'level_usefulness': level_answer,
+        'similar_code': similar_code,
+        'collapse': collapse
+    })
+
+    # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
+    # We have to return something to the AJAX POST to show we are okay
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+
+def preprocess_code_similarity_measure(code):
+    concepts = ['print', 'ask', 'echo', 'is', 'at random', 'if', 'else', 'repeat', 'for']
+    words = code.split()
+    code = ""
+    for word in words:
+        if word not in concepts:
+            code += re.sub(r"[a-z|A-Z|0-9|!?,'']", "% ", word)
+        else:
+            code += word + " "
+    return code
+
+def get_similar_code(processed_code, level):
+    filename = "coursedata/level" + str(level) + ".csv"
+    shortest_distance = 10 # This is the threshold: when differ more than this value it's no longer similar code
+    similar_code = None
+
+    with open(filename, mode='r') as file:
+        csvFile = csv.reader(file)
+        for lines in csvFile:
+            distance = lev(processed_code, lines[2])
+            if distance == 0:  # The code is identical, no need to search any further
+                similar_code = lines[0]
+                break
+            else:
+                if distance < shortest_distance:
+                    shortest_distance = distance
+                    similar_code = lines[0]
+        return similar_code
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
@@ -298,6 +394,11 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
+    if requested_lang() in ["en", "nl"]:
+        session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
+        session["similar_code"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
+        session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
+
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
         result = db_get ('programs', {'id': step})
@@ -368,6 +469,10 @@ def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
+@app.route('/gradual_messages.js', methods=['GET'])
+def gradual_error():
+    error_messages = TRANSLATIONS.get_translations(requested_lang(), "GradualFeedback")
+    return render_template("gradual_messages.js", error_messages=json.dumps(error_messages))
 
 @app.errorhandler(500)
 def internal_error(exception):
