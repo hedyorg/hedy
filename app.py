@@ -351,6 +351,7 @@ def adventure_page(adventure_name, level):
     return hedyweb.render_adventure(
         adventure_name=adventure_name,
         adventure=adventure,
+        course=HEDY_COURSE[requested_lang ()],
         request=request,
         lang=requested_lang (),
         level_number=level,
