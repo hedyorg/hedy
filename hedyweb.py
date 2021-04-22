@@ -85,16 +85,18 @@ def render_adventure(adventure_name, adventure, course, request, lang, level_num
 
   # Actual assignment
   for key, value in adventure [level_number].items ():
-    if key == 'commands':
-        arguments_dict ['story_commands'] = value
-    elif key == 'intro_text':
-        arguments_dict ['story_text'] = value
-    else:
-        arguments_dict [key] = value
+    arguments_dict [key] = value
 
-  # We use the intro_text and commands from the corresponding Hedy level
+  if not 'story_text' in arguments_dict:
+    arguments_dict ['story_text'] = ''
+  if not 'story_commands' in arguments_dict:
+    arguments_dict ['story_commands'] = []
+
+  # We use the intro_text and commands from the corresponding Hedy level, if they are not present in the adventure
   hedy_course = course.get_assignment(level_number, None)
-  arguments_dict ['intro_text'] = hedy_course.intro_text
-  arguments_dict ['commands'] = hedy_course.commands
+  if not 'intro_text' in arguments_dict:
+    arguments_dict ['intro_text'] = hedy_course.intro_text
+  if not 'commands' in arguments_dict:
+    arguments_dict ['commands'] = hedy_course.commands
 
   return render_template("code-page.html", **arguments_dict)

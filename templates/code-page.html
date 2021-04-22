@@ -18,23 +18,25 @@
     </div>
     {% endfor %}
   </div>
-  {{story_text|commonmark}}
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-    {% for command in story_commands %}
-    <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
-      <div class="font-medium text-lg" tabindex=0>
-        {{ command.explanation|commonmark }}
-      </div>
-      <div class="flex">
-        <div class="font-thin text-sm flex-grow" tabindex=0>
-          {{ command.example|commonmark }}
+  {% if adventure_name %}
+    {{story_text|commonmark}}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {% for command in story_commands %}
+      <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
+        <div class="font-medium text-lg" tabindex=0>
+          {{ command.explanation|commonmark }}
         </div>
-        <button class="btn block flex-none self-end"
-          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.State.unsaved_changes = false;'>{{try_button}}</button>
+        <div class="flex">
+          <div class="font-thin text-sm flex-grow" tabindex=0>
+            {{ command.example|commonmark }}
+          </div>
+          <button class="btn block flex-none self-end"
+            onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.State.unsaved_changes = false;'>{{try_button}}</button>
+        </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
+  {% endif %}
   {% if prompt %}
   <div class="py-2 px-4">
     <div>
@@ -157,14 +159,14 @@ var toggleDocs = function () {
           {% if not adventure_name %}
             <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
           {% else %}
-            <button class="green-btn" onclick="window.location = '/hedy/adventures/{{adventure_name}}/{{prev_level}}';">{{regress_button}} {{ prev_level }}</button>
+            <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (prev_level|string))}}';">{{regress_button}} {{ prev_level }}</button>
           {% endif %}
         {% endif %}
         {% if next_level %}
           {% if not adventure_name %}
             <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
           {% else %}
-            <button class="green-btn" onclick="window.location = '/hedy/adventures/{{adventure_name}}/{{next_level}}';">{{advance_button}} {{ next_level }}</button>
+            <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (next_level|string))}}';">{{advance_button}} {{ next_level }}</button>
           {% endif %}
         {% endif %}
       </div>
