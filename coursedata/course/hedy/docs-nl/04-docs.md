@@ -45,37 +45,6 @@ Ook je afwasprogramma kun je nu leuker maken met een `if`. Bijvoorbeeld zo:
 * `afwasser is mensen at random`
 * `if afwasser is Sophie print 'chips ik moet de afwas doen' else print 'gelukkig geen afwas want ' afwasser ' doet het'`
 
-# Een beter verhaal
-Wat je ook kunt doet is je verhaal weer leuker maken, want nu kun je verschillende eindes programmeren.
-
-## Voorbeeld
-Maak een verhaal met twee eindes, bijvoorbeeld zo:
-
-* De prinses loopt door het bos
-* Ze komt een monster tegen
-
-Goed einde:
-
-* Ze pakt haar zwaard en het monster rent snel weg
-
-Slecht einde
-
-* Het monster eet de prinses op
-
-## Opdracht
-
-Nu jij!
-
-1. Schrijf een verhaal met twee eindes
-
-## Voorbeeld Hedy code
-* `print 'De prinses loopt door het bos'`
-* `print 'Ze komt een monster tegen'`
-* `einde is ask Wil je een goed of slecht einde?`
-* `if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else print 'Het monster eet de prinses op'`
-
-## Een interactief verhaal
-Je kunt ook zorgen dat er weer een naam ingevoerd kan worden. Dat werkt net zoals in level 3. Dat kun je dus combineren met een `if`, en dan heb je al een heel programma gemaakt!
 
 ## Herhaling in je verhaal of spel
 Helaas kun je nu steeds maar 1 dobbelsteen gooien, of 1 keer bepalen wie de afwas doet. Regenwormen moet eigenlijk met 8 dobbelstenen, en misschien wil jij wel een afwasrooster maken voor de hele week! Soms is het handig als je codes een paar keer kan herhalen.

@@ -3,16 +3,6 @@ level: 3
 ---
 Let op! In Level 3 gelden er nieuwe regels. Als je iets letterlijk wilt printen, dan moet je aanhalingstekens gebruiken.
 
-# Los het naamprobleem op
-In Level 2 konden we het woord naam niet printen, omdat dat al in gebruik was.
-Deze code:
-
-* `naam is Hedy`
-* `print dus jouw naam is naam`
-
-Print in Level 2 "Dus jouw Hedy is Hedy"
-Nu kan dat wel! Je moet nu aanhalingstekens om de tekst zetten die je letterlijk uit wilt voeren. Probeer het maar eens!
-
 # Steen, schaar, papier
 In Level 3 kunnen we ook weer steen schaar papier programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
 
