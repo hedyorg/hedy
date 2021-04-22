@@ -80,6 +80,14 @@ you can wrap the command in a loop to restart the server quickly).
 (.env)$ env FLASK_ENV=development python app.py
 # or in a loop if it stops too often
 (.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
+
+If you want to run the website locally, but would prefer to use Docker instead of installing python, you can build a container and run it like so:
+```bash
+docker build -t NAME_OF_CONTAINER .
+```
+and then
+```bash
+docker run -it --rm -p 5000:5000 NAME_OF_CONTAINER
 ```
 
 If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:
