@@ -1,0 +1,141 @@
+
+---
+	  1:
+	    intro_text: "在第1级目标你可以使用这些命令"
+	    start_code: "print 你好世界!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，用print可以打印一些东西。"
+	        example: "例如：你好欢迎来到海迪！"
+	        demo_code: "print 你好欢迎来到海迪！"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出一些问题。"
+	        example: "例如: ask你最喜欢的颜色是什么?"
+	        demo_code: "ask 你最喜欢的颜色是什么?"
+	      -
+	        name: "echo"
+	        explanation: "意思是重复，用echo可以重复执行某一任务。"
+	        example: "例如: echo 那么你最喜欢的颜色是..."
+	        demo_code: "ask 你最喜欢的颜色是什么?\\necho 那么你最喜欢的颜色是..."
+	  2:
+	    intro_text: "在第2级目标中, print 仍旧如同在第1级目标中一样适用, 但是ask 已被改变并且需要一个你可以打印的名称. 不再需要echo了.你现在也可以使用这些命令:"
+	    start_code: "print 你好世界!"
+	    commands:
+	      -
+	        name: "is"
+	        explanation: "是，用来给一个词命名以便在程序中使用"
+	        example: "例如: 名字 is 海迪."
+	        demo_code: "名字 is 海迪\\nprint 欢迎名字"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出一些问题。注意! 现在提问需要一个名字。"
+	        example: "例如: 颜色 is ask 你最喜欢的颜色是什么?"
+	        demo_code: "颜色 is ask 你最喜欢的颜色是什么?\\nprint 颜色是我最喜欢的颜色!"
+	      -
+	        name: "choose_random"
+	        explanation: "意思是随机选择，用 at 和 random 可以从一组词汇中随机选择一个词"
+	        example: "例如: 动物is 狗, 猫, 袋鼠."
+	        demo_code: "动物 is 狗, 猫, 袋鼠可以\\nprint 动物 at random"
+	  3:
+	    start_code: "print 'Hello world'"
+	    intro_text: "在第3级目标中, you need to use quotation marks around words that you want to print你需要在你想要打印的内容前后两边使用引号. 现在不再需要echo, 你可以用print 打印文本!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，可以用来打印引号里面的内容"
+	        example: "例如:你好欢迎来到海迪.'"
+	        demo_code: "print '你好欢迎来到海迪.'"
+	      -
+	        name: "is"
+	        explanation: "是，可以用来给一段文本命名并不带引号打印出这段文本"
+	        example: "例如: 名字 is 海迪."
+	        demo_code: "名字 is 海迪\\nprint '我的名字是 '名字"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出问题。注意! 打印的内容前后两边需要用引号标记清楚。"
+	        example: "例如: 颜色 is ask 你最喜欢的颜色是什么?"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nprint 颜色 ' 是你最喜欢的颜色!'"
+	  4:
+	    start_code: "名字 is ask你的名字是什么?\nif 名字 is 海迪 print '酷!' else print '呵呵'"
+	    intro_text: "ask 和 print 的功能和在第3级目标里面一样. 在第4级目标里面增加了if条件语句!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，用print 可以打印的内容前后两边都要用引号标注清楚。"
+	        example: "例如: print '你好欢迎来到海迪。'"
+	        demo_code: "print '你好欢迎来到海迪。'"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出问题。注意! 现在打印内容的前后两边都需要用引号标注清楚。"
+	        example: "例如: 颜色 is ask 你最喜欢的颜色是什么?"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nprint 颜色 ' 是你最喜欢的颜色!'"
+	      -
+	        name: "if"
+	        explanation: "意思是如果，可以用来做出选择。"
+	        example: "例如: if 颜色 is 绿色 print '漂亮!' else print '呵呵'"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nif 颜色 is 绿色 print '漂亮!' else print '呵呵'"
+	  5:
+	    start_code: "repeat 3 times print '海迪很好玩!'"
+	    intro_text: "ask, print 和 if 的功能和在第四级目标里面一样. 但是在第五级目标里面增加了repeat循环命令.Repeat循环语句可以用来多次执行一行代码."
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，可以用print 打印的内容前后两边都要用引号标注清楚。"
+	        example: "例如: print '你好欢迎来到海迪。'"
+	        demo_code: "print '你好欢迎来到海迪。'"
+	      -
+	        name: "ask"
+	        explanation: " 意思是提问，用ask提出问题。注意! 现在打印内容的前后两边都需要用引号标注清楚。"
+	        example: "例如: 颜色 is ask你最喜欢的颜色是什么?"
+	        demo_code: "颜色 is ask 你最喜欢的颜色是什么?\\nprint 颜色 '是你最喜欢的颜色!'"
+	      -
+	        name: "if"
+	        explanation: "意思是如果，用来做出选择"
+	        example: "例如: if 颜色 is 绿色 print '漂亮!' else print '呵呵'"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nif 颜色 is 绿色 print '漂亮!' else print '呵呵'"
+	      -
+	        name: "repeat"
+	        explanation: "意思是重复或者循环，指的是repeat循环语句和if条件语句的组合"
+	        example: "例如: if 颜色 is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nif 颜色 is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	  6:
+	    start_code: "print '5 乘以 5 is ' 5 * 5"
+	    intro_text: "ask, print, if条件语句 和 repeat循环语句 的在这一级目标中的功能与在第四4级目标和第5级目标里面一样。 第6级目标里面增加了一些新的内容... 现在你可以计算啦。 "
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "现在打印内容的前后两边都需要用引号标注清楚。"
+	        example: "例如: print '5 乘以 5 是 ' 5 * 5"
+	        demo_code: "print '5 乘以5 是 ' 5 * 5"
+	      -
+	        name: "用ask 和 if条件语句来进行计算"
+	        explanation: "用ask提出计算题然后用if条件语句比较答案。注意: 打印内容的前后两边仍旧需要用引号标注清楚。"
+	        example: "例如: 答案 is ask 10加10等于几?"
+	        demo_code: "答案 is ask 10加10等于几?\\nif answer is 20 print '做得好!' else print '糟糕！'"
+	      -
+	        name: "repeat重复或者循环"
+	        explanation: "repeat循环语句和if 条件语句的组合"
+	        example: "例如: if 颜色 is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	        demo_code: "颜色 is ask 你最喜欢的颜色是什么?\\nif 颜色 is 绿色repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	  7:
+	    start_code: "repeat 5 times\n    print '大家好'\n    print '这段话将被打印五次'"
+	    intro_text: "ask 和 print 的功能保持不变. 但是 if 条件语句和 repeat循环语句已经改变了!你现在可以执行一组代码, 但是你将不得不使用缩进. 这意味着首行缩进四个空格.当你想要创建只有一行的代码块的时候这一点也适用. 如果你整合了一个repeat循环语句和if条件语句，那么你需要缩进每个代码块. 请看下面的范例以了解更多细节!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "打印.记得在打印内容的前后两边都用引号标注清楚。"
+	        example: "例如: print '5 乘以5 is ' 5 * 5"
+	        demo_code: "print '5 乘以 5 is ' 5 * 5"
+	      -
+	        name: "多行的if条件语句"
+	        explanation: "使用ask 提问加法运算的答案然后检查答案是否正确.我们现在可以打印两行代码了。"
+	        example: "例如: 答案 is ask 5加5等于几?"
+	        demo_code: "答案 is ask 5加5等于几?\\nif 答案 is 10\\n    print '做得好!'\\n    print '确实, 答案就是 ' 答案\\nelse\\n    print '糟糕!'\\n    print '答案就是 ' 答案"
+	      -
+	        name: "if 条件语句和 repeat 循环语句的组合"
+	        explanation: " if 条件语句和 repeat 循环语句的组合"
+	        example: "例如: if 颜色 is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nif 颜色 is 绿色\\n    repeat 3 times\\n        print '漂亮!'\\nelse\\n    repeat 5 times\\n        print '呵呵'"
+
