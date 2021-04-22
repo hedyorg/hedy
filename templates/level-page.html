@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="px-8 mb-8 bg-blue-200 flex">
+<div class="px-8 bg-blue-200 flex">
   <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1">
     {{ level_title }} {{ level_nr }}
     {% if assignment_nr %} · {{ step_title }} {{ assignment_nr }} {% endif %}
@@ -11,6 +11,8 @@
   <input type="submit" class="green-btn ml-3 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', true, ace.edit('editor').getValue());">
 </div>
 
-{% block levelbody %}
-{% endblock %}
+<div class="flex-grow flex items-stretch">
+{% block levelbody %}{% endblock %}
+</div>
+
 {% endblock %}
