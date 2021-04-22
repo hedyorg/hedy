@@ -88,6 +88,10 @@
     - If there's no session or the logged in user is not the admin user, it returns 403.
     - If successful, the route will return a template containing a table with all the users in the system and a total count of saved programs. The users will be sorted by creation date, last first.
 
+- `POST /admin/markAsTeacher`
+    - This route allows the admin user to mark an user as teacher, which allows them to access a program from someone else by link.
+    - The body of the request should be of the shape `{username: STRING, is_teacher: BOOLEAN}`.
+
 ### Programs
 
 - `GET /programs/delete/ID`
@@ -129,3 +133,11 @@ table programs:
     server_error: STRING
     version:      STRING
 ```
+
+## Test environment
+
+If the `PROXY_TO_TEST_ENV` environment is set, some requests will be sent to the specified test environment. These requests are *reverse proxied* to the test environment, which means that the main environment fetches the data from the test environment and then gives the result back to the client.
+
+The main environment passes the `session_id` to the test environment so that the test environment can use that session_id for logging. In reverse proxied requests, the session cookies set by the test environment are ignored.
+
+All the auth routes are *never* reverse proxied, to keep all the cookie setting within the scope of the main environment. The test environment, however, needs access to the same tables as the main environment to make sure that the cookies forwarded by the main environment are indeed valid. In other words, the test environment must be able to read and validate cookies. To do this, the test environment should have the same value for the environment variable `AWS_DYNAMODB_TABLE_PREFIX` as that of the main environment.

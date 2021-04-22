@@ -1,0 +1,21 @@
+name: Automatically deploy to Alpha
+on:
+  # Run this AFTER the unit test job finishes
+  workflow_run:
+    # Must be the same as in unittests.yml
+    workflows: ["Unit tests"]
+    branches: [master]
+    types:
+      - completed
+jobs:
+  deploy:
+    # Deploy ONLY IF the tests actually succeeded (if they failed, we don't wanna deploy)
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: hedy-alpha
+          heroku_email: felienne@gmail.com

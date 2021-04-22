@@ -1,0 +1,139 @@
+---
+  1:
+    intro_text: "Benvenuto in Hedy! Nel Livello 1 puoi usare i comandi `print`,` ask` e `echo`. Premi il pulsante blu e il codice verrà digitato per te! Prova tu stesso il codice con il pulsante verde 'Esegui il codice' sotto il campo di programmazione a sinistra."
+    start_code: "print ciao mondo!"
+    commands:
+      -
+        name: "print"
+        explanation: "Scrivi qualcosa con `print`."
+        example: "Esempio: print Ciao benvenuta/o su Hedy!"
+        demo_code: "print Ciao benvenuta/o su Hedy!"
+      -
+        name: "ask"
+        explanation: "Chiedi qualcosa con `ask`."
+        example: "Esempio: ask Qual è il tuo colore preferito?"
+        demo_code: "ask Qual è il tuo colore preferito?"
+      -
+        name: "echo"
+        explanation: "Ripeti qualcosa usando `echo`."
+        example: "Esempio: echo Quindi il tuo colore preferito è..."
+        demo_code: "ask Qual è il tuo colore preferito?\necho Quindi il tuo colore preferito è..."
+  2:
+    intro_text: "'Print' funziona ancora come nel primo livello, invece 'ask' è stato cambiato ed ha bisogno di dare un nome alla risposta che potrai poi scrivere con 'print'. 'Echo' non è più necessario. Puoi anche usare questi comandi:"
+    start_code: "print ciao mondo!"
+    commands:
+      -
+        name: "is"
+        explanation: "Dà un nomignolo da usare nel programma ad una parola con `is`."
+        example: "Esempio: nome is Hedy."
+        demo_code: "nome is Hedy\nprint benvenuta nome"
+      -
+        name: "ask"
+        explanation: "Chiedi qualcosa con `ask`. Attenzione! Devi dare alla risposta un nome con `is`."
+        example: "Esempio: colore is ask Qual è il tuo colore preferito?"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nprint colore è il tuo preferito!"
+      -
+        name: "scegli_acaso"
+        explanation: "Scegli una parola a caso da un gruppo con `at` e `random`"
+        example: "Esempio: animali is cane, gatto, canguro."
+        demo_code: "animali is cane, gatto, canguro\nprint animali at random"
+  3:
+    start_code: "print 'Ciao mondo'"
+    intro_text: "`ask` è sempre lo stesso nel livello 3, ma `print` è diverso ora. È necessario racchiudere il testo che si desidera stampare tra virgolette."
+    commands:
+      -
+        name: "print"
+        explanation: "Scrivi esattamente quello che metti tra virgolette"
+        example: "Esempio: print 'Ciao benvenuta/o su Hedy.'"
+        demo_code: "print 'Ciao benvenuta/o su Hedy.'"
+      -
+        name: "is"
+        explanation: "Dai un nomignolo ad un testo e scrivilo con `print` senza usare le virgolette"
+        example: "Esempio: nome is Hedy."
+        demo_code: "nome is Hedy\nprint 'Il mio nome è ' nome"
+      -
+        name: "ask"
+        explanation: "Chiedi qualcosa con `ask`."
+        example: "Esempio: colore is ask Qual è il tuo colore preferito?"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nprint colore ' è il tuo preferito!'"
+  4:
+    start_code: "nome is ask Come ti chiami?\nif nome is Hedy print 'che bello!' else print 'mah'"
+    intro_text: "`ask` e `print` funzionano esattamente come funzionavano nel terzo livello. Nel quarto livello si aggiunge la congiunzione `if`!"
+    commands:
+      -
+        name: "print"
+        explanation: "Scrivi esattamente quello che metti tra virgolette"
+        example: "Example: print 'Ciao benvenuta/o su Hedy.'"
+        demo_code: "print 'Ciao benvenuta/o su Hedy.'"
+      -
+        name: "ask"
+        explanation: "Chiedi qualcosa con `ask`."
+        example: "Esempio: colore is ask Qual è il tuo colore preferito?"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nprint colore ' è il tuo preferito!'"
+      -
+        name: "if"
+        explanation: "Fai una scelta con `if`."
+        example: "Esempio: if colore is verde print 'carino!' else print 'mah'"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde print 'carino!' else print 'mah'"
+  5:
+    start_code: "repeat 3 times print 'Hedy è divertente!'"
+    intro_text: "`ask`, `print` e `if` funzionano esattamente come funzionavano nel quarto livello. Il quinto livello introduce il comando `repeat x times`. `repeat x times` può essere usato per ripetere una parte di codice 'x' volte."
+    commands:
+      -
+        name: "print"
+        explanation: "Scrivi esattamente quello che metti tra virgolette"
+        example: "Example: print 'Ciao benvenuta/o su Hedy.'"
+        demo_code: "print 'Ciao benvenuta/o su Hedy.'"
+      -
+        name: "ask"
+        explanation: "Chiedi qualcosa con `ask`."
+        example: "Esempio: colore is ask Qual è il tuo colore preferito?"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nprint colore ' è il tuo preferito!'"
+      -
+        name: "if"
+        explanation: "Fai una scelta con `if`."
+        example: "Esempio: if colore is verde print 'carino!' else print 'mah'"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde print 'carino!' else print 'mah'"
+      -
+        name: "repeat x times"
+        explanation: "`repeat x times` e `if` combinati insieme"
+        example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde repeat 3 times print 'carino' else repeat 5 times print 'mah'"
+  6:
+    start_code: "print '5 per 5 è ' 5 * 5"
+    intro_text: "`ask`, `print`, `if` e `repeat x times` sono esattamente come nei livelli 4 e 5. Livello 6 aggiunge qualcosa di nuovo... Ora puoi fare i calcoli."
+    commands:
+      -
+        name: "print"
+        explanation: "Scrivi esattamente quello che metti tra virgolette"
+        example: "Example: print '5 per 5 è ' 5 * 5"
+        demo_code: "print '5 per 5 è ' 5 * 5"
+      -
+        name: "ask e if con calcoli"
+        explanation: "Chiedi di fare un calcolo e giudicalo."
+        example: "Esempio: risposta is ask Quanto fa 10 più 10?"
+        demo_code: "risposta is ask Quanto fa 10 più 10?\nif risposta is 20 print 'Yes!' else print 'Ops'"
+      -
+        name: "repeat"
+        explanation: "`repeat` e `if` combinati"
+        example: "Example: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
+  7:
+    start_code: "repeat 5 times\n    print 'Ciao a tutti'\n    print 'Questo sarà scritto 5 volte'"
+    intro_text: "ask e print funzionano come prima ma repeat e if sono cambiati! Ora puoi usare interi blocchi di codice ma dovrai ricordarti di usare l'indentazione. Questo significa mettere 4 spazi all'inizio della riga. Questo funziona anche quando vuoi scrivere un blocco di una sola riga. Se usi repeat e if dovrai ricordarti di mettere l'indentazione per ognuno dei due blocchi. Leggi l'esempio per più informazioni!"
+    commands:
+      -
+        name: "print"
+        explanation: "Scrivi qualcosa. Ricorda di usare le virgolette per scrivere parole e frasi."
+        example: "Esempio: print '5 volte 5 è ' 5 * 5"
+        demo_code: "print '5 volte 5 è ' 5 * 5"
+      -
+        name: "if con più righe"
+        explanation: "Chiedi la risposta per una somma e controlla se è corretta. Ora possiamo scrivere due righe."
+        example: "Esempio: risposta is ask Quanto fa 5 più 5?"
+        demo_code: "risposta is ask Quanto fa 5 più 5?\nif risposta è 10\n    print 'Ben fatto!'\n    print 'Esatto, la risposta corretta era ' risposta\ninvece\n    scrivi 'Ops!'\n    scrivi 'La risposta è ' risposta"
+      -
+        name: "if e repeat insieme"
+        explanation: "`if` e `repeat` insieme"
+        example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde\n    repeat 3 times\n    print 'carino!'\nelse\n    repeat 5 times\n    print 'mah'"

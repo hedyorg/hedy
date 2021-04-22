@@ -3,7 +3,7 @@ import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many
 import datetime
 from functools import wraps
 from config import config
@@ -40,6 +40,10 @@ def current_user (request):
 def is_admin (request):
     user = current_user (request)
     return user ['username'] == os.getenv ('ADMIN_USER') or user ['email'] == os.getenv ('ADMIN_USER')
+
+def is_teacher (request):
+    user = current_user (request)
+    return bool (user ['is_teacher'])
 
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
@@ -393,6 +397,31 @@ def routes (app, requested_lang):
 
         return '', 200
 
+    @app.route ('/admin/markAsTeacher', methods=['POST'])
+    def mark_as_teacher ():
+        if not is_admin (request):
+            return 'unauthorized', 403
+
+        body = request.json
+
+        # Validations
+        if not type_check (body, 'dict'):
+            return 'body must be an object', 400
+        if not object_check (body, 'username', 'str'):
+            return 'body.username must be a string', 400
+        if not object_check (body, 'is_teacher', 'bool'):
+            return 'body.is_teacher must be boolean', 400
+
+        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+
+        if not user:
+            return 'invalid username', 400
+
+        db_set ('users', {'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
+
+        return '', 200
+
+
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging
 for name in logging.Logger.manager.loggerDict.keys ():
@@ -450,7 +479,8 @@ def auth_templates (page, lang, menu, request):
         # After hitting 1k users, it'd be wise to add pagination.
         users = db_scan ('users')
         userdata = []
-        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending']
+        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
+
         for user in users:
             data = {}
             for field in fields:
@@ -459,6 +489,7 @@ def auth_templates (page, lang, menu, request):
                 else:
                     data [field] = None
             data ['email_verified'] = not bool (data ['verification_pending'])
+            data ['is_teacher']     = bool (data ['is_teacher'])
             data ['created'] = datetime.datetime.fromtimestamp (int (str (data ['created']) [:-3])).isoformat ()
             if data ['last_login']:
                 data ['last_login'] = datetime.datetime.fromtimestamp (int (str (data ['last_login']) [:-3])).isoformat ()

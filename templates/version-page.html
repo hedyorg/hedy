@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Hedy version info</title>
+  </head>
+  <body>
+    <h1>Hedy version info</h1>
+
+    <table>
+      <tr>
+        <th>Current App</th>
+        <td>{{app_name}}</td>
+      </tr>
+      <tr>
+        <th>Deployed At</th>
+        <td>{{heroku_release_time}}</td>
+      </tr>
+      <tr>
+        <th>Deployed Commit</th>
+        <td>{{commit}}</td>
+      </tr>
+      <tr>
+        <th>Undeployed Changes</th>
+        <td><a href="https://github.com/Felienne/hedy/compare/{{commit}}...master">GitHub</a></td>
+      </tr>
+    </table>
+  </body>
+</html>

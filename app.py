@@ -1,3 +1,8 @@
+import sys
+if (sys.version_info.major < 3 or sys.version_info.minor < 6):
+    print ('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join ([str (sys.version_info.major), str (sys.version_info.minor), str (sys.version_info.micro)]))
+    quit ()
+
 # coding=utf-8
 import datetime
 import collections
@@ -15,11 +20,12 @@ import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates, current_user, requires_login, is_admin
+from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
+import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect
+from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response
 from flask_compress import Compress
 
 # Hedy-specific modules
@@ -34,6 +40,7 @@ ALL_LANGUAGES = {
     'fr': 'Français',
     'pt_br': 'Português',
     'de': 'Deutsch',
+    'it': 'Italiano'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -64,18 +71,71 @@ logging.basicConfig(
 
 app = Flask(__name__, static_url_path='')
 
+def hash_user_or_session (string):
+    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
+    return int (hash, 16)
+
+def redirect_ab (request, session):
+    # If the user is logged in, we use their username as identifier, otherwise we use the session id
+    user_identifier = current_user(request) ['username'] or str (session_id ())
+
+    # This will send 50% of the requests into redirect.
+    redirect_proportion = 50
+    redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
+    return redirect_flag
+
+# If present, PROXY_TO_TEST_ENV should be the name of the target environment
+if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
+    @app.before_request
+    def before_request_proxy():
+        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
+        # We want to keep all cookie setting in the main environment, not the test one.
+        if (re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url)):
+            pass
+        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
+        elif (redirect_ab (request, session)):
+
+            print ('DEBUG TEST - REVERSE PROXYING REQUEST', request.method, request.url, session_id ())
+
+            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('PROXY_TO_TEST_ENV'))
+
+            request_headers = {}
+            for header in request.headers:
+                if (header [0].lower () in ['host']):
+                    continue
+                request_headers [header [0]] = header [1]
+
+            # Send the session_id to the test environment for logging purposes
+            request_headers ['x-session_id'] = session_id ()
+            r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
+
+            response = make_response (r.content)
+            for header in r.headers:
+                # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
+                # We ignore the set-cookie header
+                if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'set-cookie']):
+                    continue
+                response.headers [header] = r.headers [header]
+            return response, r.status_code
+
+if os.getenv ('IS_TEST_ENV'):
+    @app.before_request
+    def before_request_receive_proxy():
+        print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
+
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
 if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
     @app.before_request
-    def before_request():
+    def before_request_https():
         if request.url.startswith('http://'):
             url = request.url.replace('http://', 'https://', 1)
             # We use a 302 in case we need to revert the redirect.
             return redirect(url, code=302)
 
-# Unique random key for sessions
-app.config['SECRET_KEY'] = uuid.uuid4().hex
+# Unique random key for sessions.
+# For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
+app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
 Compress(app)
 Commonmark(app)
@@ -115,7 +175,7 @@ def parse():
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             result = hedy.transpile(code, level)
-            response["Code"] = "# coding=utf8\n" + result
+            response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -126,9 +186,11 @@ def parse():
             elif E.args[0] == "Parse":
                 error_template = hedy_errors[E.error_code]
                 # Localize the names of characters
-                # Localize the names of characters
                 if 'character_found' in E.arguments:
                     E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Unquoted Text":
+                error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             else:
                 error_template = hedy_errors[E.error_code]
@@ -137,7 +199,7 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
 
-    logger.log({
+    logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
@@ -145,7 +207,8 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'version': version(),
-        'username': username
+        'username': username,
+        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
     return jsonify(response)
@@ -154,17 +217,39 @@ def parse():
 def report_error():
     post_body = request.json
 
-    logger.log({
+    logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
         'code': post_body.get('code'),
         'client_error': post_body.get('client_error'),
         'version': version(),
-        'username': current_user(request) ['username'] or None
+        'username': current_user(request) ['username'] or None,
+        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
     return 'logged'
+
+@app.route('/version', methods=['GET'])
+def version_page():
+    """
+    Generate a page with some diagnostic information and a useful GitHub URL on upcoming changes.
+
+    This is an admin-only page, it does not need to be linked.
+    (Also does not have any sensitive information so it's fine to be unauthenticated).
+    """
+    app_name = os.getenv('HEROKU_APP_NAME')
+
+    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+
+    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
+
+    return render_template('version-page.html',
+        app_name=app_name,
+        heroku_release_time=the_date,
+        commit=commit)
+
 
 def programs_page (request):
     username = current_user(request) ['username']
@@ -218,9 +303,9 @@ def index(level, step):
         result = db_get ('programs', {'id': step})
         if not result:
             return 'No such program', 404
-        # Allow both the owner of the program and the admin user to access the program
+        # Allow only the owner of the program, the admin user and the teacher users to access the program
         user = current_user (request)
-        if user ['username'] != result ['username'] and not is_admin (request):
+        if user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
         loaded_program = result ['code']
         # We default to step 1 to provide a meaningful default assignment
@@ -327,6 +412,8 @@ def main_page(page):
 
 def session_id():
     """Returns or sets the current session ID."""
+    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
+        return request.headers['x-session_id']
     if 'session_id' not in session:
         session['session_id'] = uuid.uuid4().hex
     return session['session_id']
@@ -430,6 +517,10 @@ def delete_program (user, program_id):
     if not result or result ['username'] != user ['username']:
         return "", 404
     db_del ('programs', {'id': program_id})
+    program_count = 0
+    if 'program_count' in user:
+        program_count = user ['program_count']
+    db_set ('users', {'username': user ['username'], 'program_count': program_count - 1})
     return redirect ('/programs')
 
 @app.route('/programs', methods=['POST'])
@@ -482,13 +573,17 @@ def save_program (user):
         'server_error': error,
         'username': user ['username']
     })
+    program_count = 0
+    if 'program_count' in user:
+        program_count = user ['program_count']
+    db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({})
 
 # *** AUTH ***
 
 import auth
-auth.routes(app, requested_lang)
+auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 

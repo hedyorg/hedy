@@ -5,11 +5,14 @@
   if (! $ ('#editor').length) return;
 
   // *** EDITOR SETUP ***
-
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
-  // editor.session.setMode("ace/mode/javascript");
+
+    if (window.State.level == 1){
+      window.editor.session.setMode("ace/mode/level1");
+    }
+
 
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
@@ -30,6 +33,8 @@
     // If prompt is shown and user enters text in the editor, hide the prompt.
     editor.on('change', function () {
       if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+      window.State.disable_run = false;
+      $ ('#runit').css('background-color', '');
       window.State.unsaved_changes = true;
     });
   }
@@ -88,7 +93,6 @@ function runit(level, lang, cb) {
     var code = editor.getValue();
 
     console.log('Original program:\n', code);
-
     $.ajax({
       type: 'POST',
       url: '/parse',
@@ -109,6 +113,7 @@ function runit(level, lang, cb) {
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
+        console.log(err)
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
