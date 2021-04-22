@@ -18,6 +18,23 @@
     </div>
     {% endfor %}
   </div>
+  {{story_text|commonmark}}
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    {% for command in story_commands %}
+    <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
+      <div class="font-medium text-lg" tabindex=0>
+        {{ command.explanation|commonmark }}
+      </div>
+      <div class="flex">
+        <div class="font-thin text-sm flex-grow" tabindex=0>
+          {{ command.example|commonmark }}
+        </div>
+        <button class="btn block flex-none self-end"
+          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.State.unsaved_changes = false;'>{{try_button}}</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
   {% if prompt %}
   <div class="py-2 px-4">
     <div>
