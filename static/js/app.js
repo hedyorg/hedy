@@ -128,6 +128,25 @@ function runit(level, lang, cb) {
   }
 }
 
+/**
+ * Called when the user clicks the "Try" button in one of the palette buttons
+ */
+function tryPaletteCode(exampleCode) {
+  var editor = ace.edit("editor");
+  var currentUnsaved = window.State.unsaved_changes;
+  var currentCode = editor.getValue();
+
+  if (!currentCode.endsWith('\n')) { currentCode += '\n'; }
+  currentCode += exampleCode;
+  if (!currentCode.endsWith('\n')) { currentCode += '\n'; }
+
+  var MOVE_CURSOR_TO_END = 1;
+  editor.setValue(currentCode, MOVE_CURSOR_TO_END);
+
+  // Even though the content changed, we leave 'unsaved_changes' the same as it was before
+  window.State.unsaved_changes = currentUnsaved;
+}
+
 window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
 
