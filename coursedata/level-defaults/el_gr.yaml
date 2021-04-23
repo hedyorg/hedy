@@ -145,23 +145,23 @@
 9:
   start_code:
     "for i in range 1 to 10:\n    print i\nprint 'Έτοιμοι ή όχι, έρχομαι!'"
-  intro_text: 'Τώρα θα αλλάξουμε λίγο ' 'Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.'
+  intro_text: 'Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.'
   commands:
-    - name: 'for with :'
-      explanation: 'When we use a `for`, we need to put a `:` behind the `for` statement!'
+    - name: 'for με :'
+      explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
       example: 'for i in range 1 to 10:'
       demo_code:
-        "for i in range 1 to 11:\n    print i\nprint 'Ready or not, here I come!'"
-    - name: 'if with :'
-      explanation: 'We need to do the same with all of our `if` statements'
+        "for i in range 1 to 11:\n    print i\nprint 'Έτοιμοι ή όχι, έρχομαι!'"
+    - name: 'if με :'
+      explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
       example: "if colour is green:'"
       demo_code:
-        "colour is green\nif colour is green:\n    print 'The colour is green'\nelse:\n    print 'The colour is not green'"
-    - name: '(Optional) elif'
-      explanation: 'We will show you a new command that you are allowed to use: `elif`. `elif` means "else if". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`.'
+        "colour is green\nif colour is green:\n    print 'To χρώμα είναι πράσινο'\nelse:\n    print 'Το χρώμα δεν είναι πράσινο'"
+    - name: '(Προαιρετικό) elif'
+      explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
       example: 'elif a is 5:'
       demo_code:
-        "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'a is 2'\nelse:\n    print 'a is not 1 or 2'"
+        "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'το a είναι 2'\nelse:\n    print 'το a δεν είναι 1 ή 2'"
 10:
   start_code:
     "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we are in round: ' i ' and we count: ' j"
