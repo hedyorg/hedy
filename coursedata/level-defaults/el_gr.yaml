@@ -154,9 +154,9 @@
         "for i in range 1 to 11:\n    print i\nprint 'Έτοιμοι ή όχι, έρχομαι!'"
     - name: 'if με :'
       explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
-      example: "if colour is green:'"
+      example: "if colour is πράσινο:'"
       demo_code:
-        "colour is green\nif colour is green:\n    print 'To χρώμα είναι πράσινο'\nelse:\n    print 'Το χρώμα δεν είναι πράσινο'"
+        "colour is πράσινο\nif colour is πράσινο:\n    print 'To χρώμα είναι πράσινο'\nelse:\n    print 'Το χρώμα δεν είναι πράσινο'"
     - name: '(Προαιρετικό) elif'
       explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
       example: 'elif a is 5:'
@@ -164,17 +164,17 @@
         "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'το a είναι 2'\nelse:\n    print 'το a δεν είναι 1 ή 2'"
 10:
   start_code:
-    "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we are in round: ' i ' and we count: ' j"
-  intro_text: 'From now on, we can repeat a loop more often. In the example we count to 5 and do that 3 times. So we do 3 rounds and count to 5 every time.'
+    "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j"
+  intro_text: 'Από εδώ και στο εξής, μπορούμε να επαναλαμβάνουμε ένα βρόχο περισσότερες φορές. Στο παράδειγμα, μετράμε ως το 5 και το κάνουμε αυτό 3 φορές. Άρα, κάνουμε 3 γύρους και μετράμε ως το 5 κάθε φορά.'
   commands:
-    - name: 'for under eachother'
-      explanation: 'This is an example with the for statement'
+    - name: 'διαδοχικές for'
+      explanation: 'Αυτό είναι ένα παράδειγμα με τη δήλωση for'
       demo_code:
-        "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we are in round: ' i ' and we count: ' j"
-    - name: 'if under eachother'
-      explanation: 'We can do the same with if statements'
+        "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j"
+    - name: 'διαδοχικές if'
+      explanation: 'Μπορούμε να κάνουμε το ίδιο με τις δηλώσεις if'
       demo_code:
-        "colour is blue\ncolourtwo is yellow\nif colour is blue:\n    if colourtwo is yellow:\n        print 'Together we make green!'"
+        "colour is μπλε\ncolourtwo is κίτρινο\nif colour is μπλε:\n    if colourtwo is κίτρινο:\n        print 'Μαζί κάνουμε το χρώμα πράσινο!'"
 11:
   start_code:
     "age is input('What is your age?')\nprint('So you have been these ages:')\nfor i in range(0,age):\n    print(i)"
