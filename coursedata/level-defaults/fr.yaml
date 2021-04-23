@@ -114,11 +114,10 @@
         explanation: "Pose une question sur un calcul avec `ask` et compare le résultat..."
         example: "Exemple: reponse is ask Combien font 10 plus 10?"
         demo_code: "reponse is ask Combien font 10 plus 10?\nif reponse is 20 print 'Oui!' else print 'Oups'"
-      -
-       name: "repeat"
-       explanation: "`repeat` et `if` combinés"
-       example: "Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
-       demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
+      - name: "repeat"
+        explanation: "`repeat` et `if` combinés"
+        example: "Exemple: if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
+        demo_code: "produit is ask Combien font 10 fois 5?\nif produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
   7:
     start_code: "repeat 5 times\n    print 'Bonjour les amis'\n    print 'Ceci sera affiché 5 fois'"
     intro_text: "`ask` et `print` fonctionnent comme tu y es habitué. Mais `if` et `repeat` ont changé! Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes. Cela veut dire que tu dois mettre 4 espaces au début des lignes. Cela fonctionne aussi si tu veux créer un bloc d’une seule ligne. Si tu combines un if et un repeat, tu devras indenter chaque bloc. Regarde les exemples pour plus de détails!"
