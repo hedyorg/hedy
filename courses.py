@@ -16,7 +16,10 @@ class LevelDefaults:
 
     Returns: Default
     """
-    return copy.deepcopy(self.levels.get(int(level), {}))
+    if sub == 0:
+      return copy.deepcopy(self.levels.get(int(level), {}))
+    else:
+      return copy.deepcopy(self.levels.get(str(level) + "-" + str(sub), {}))
 
 
 class NoSuchDefaults:
