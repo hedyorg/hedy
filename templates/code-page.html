@@ -2,7 +2,7 @@
 {% block levelbody %}
 <div style="width: 250px;" class="right-hand-shadow flex-none">
   <div class="p-3 shadow-md">
-    <h2>Commands you can use here are:</h2>
+    <h2>{{ commands_title }}</h2>
   </div>
   <div>
     {% for command in commands %}
@@ -14,8 +14,8 @@
         <div class="font-thin text-sm flex-grow" tabindex=0>
           {{ command.example|commonmark }}
         </div>
-        <button class="btn block flex-none self-end"
-          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.State.unsaved_changes = false;'>{{try_button}}</button>
+        <button class="btn block flex-none self-end ml-1"
+          onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
       </div>
     </div>
     {% endfor %}
