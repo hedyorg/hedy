@@ -128,6 +128,18 @@ function runit(level, lang, cb) {
   }
 }
 
+/**
+ * Called when the user clicks the "Try" button in one of the palette buttons
+ */
+function tryPaletteCode(exampleCode) {
+  var editor = ace.edit("editor");
+
+  var MOVE_CURSOR_TO_END = 1;
+  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  window.State.unsaved_changes = false;
+}
+
+
 window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
 

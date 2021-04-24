@@ -12,14 +12,12 @@
   <body class="bg-gray-400">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <a class="github-fork-ribbon" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
-    <div class="container mx-auto bg-gray-100 min-h-screen shadow-md">
+    <div class="container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu %}
       {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
       {% endif %}
-      <div class="px-8 py-12">
-        {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-        {% block body %}{% endblock %}
-      </div>
+      {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+      {% block body %}{% endblock %}
     </div>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
   </body>
