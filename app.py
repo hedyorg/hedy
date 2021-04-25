@@ -62,12 +62,24 @@ TRANSLATIONS = hedyweb.Translations()
 
 ADVENTURES = {}
 for lang in ALL_LANGUAGES.keys ():
-    ADVENTURES [lang] = load_yaml (f'coursedata/adventures/{lang}.yaml')
+    ADVENTURES[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
 
 def load_adventures (lang):
     if not lang in ADVENTURES or len (ADVENTURES [lang]) == 0:
         return ADVENTURES ['en']
     return ADVENTURES [lang]
+
+def load_adventure_assignments_per_level(lang, level):
+    assignments = []
+    all_adventures = ADVENTURES[lang]
+    adventures = all_adventures['adventures']
+    for adventure in adventures.values():
+        try:
+            assignments.append(adventure[level])
+        except:
+            pass #geen assignment, geen probleem hoor
+    return assignments
+
 
 # Load main menu (do it once, can be cached)
 with open(f'main/menu.json', 'r') as f:
