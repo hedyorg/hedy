@@ -71,18 +71,14 @@ def load_adventures (lang):
 
 def load_adventure_assignments_per_level(lang, level):
     assignments = []
-    all_adventures = ADVENTURES[lang]
-    adventures = all_adventures['adventures']
-
+    adventures = load_adventures(lang)['adventures']
     for adventure in adventures.values():
-        assignment = {}
-        assignment['name'] = adventure['name']
-        assignment['image'] = adventure['image']
-        try:
-            assignment['text'] = (adventure['levels'][level]['story_text'])
-        except:
-            pass #geen assignment voor dit level? geen probleem hoor
-        assignments.append(assignment)
+        if level in adventure['levels']:
+            assignments.append({
+                'name': adventure['name'],
+                'image': adventure.get('image', None),
+                'text': adventure['levels'][level].get('story_text', 'No Story Text')
+            })
     return assignments
 
 
@@ -405,6 +401,8 @@ def index(level, step):
     else:
         loaded_program = ''
 
+    adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
+
     return hedyweb.render_assignment_editor(
         request=request,
         course=HEDY_COURSE[g.lang],
@@ -413,6 +411,7 @@ def index(level, step):
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
+        adventure_assignments=adventure_assignments,
         loaded_program=loaded_program)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
