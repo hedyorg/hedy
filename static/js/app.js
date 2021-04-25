@@ -5,11 +5,14 @@
   if (! $ ('#editor').length) return;
 
   // *** EDITOR SETUP ***
-
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
-  // editor.session.setMode("ace/mode/javascript");
+
+    if (window.State.level == 1){
+      window.editor.session.setMode("ace/mode/level1");
+    }
+
 
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
@@ -90,7 +93,6 @@ function runit(level, lang, cb) {
     var code = editor.getValue();
 
     console.log('Original program:\n', code);
-
     $.ajax({
       type: 'POST',
       url: '/parse',
@@ -125,6 +127,18 @@ function runit(level, lang, cb) {
     error.show(ErrorMessages.Other_error, e.message);
   }
 }
+
+/**
+ * Called when the user clicks the "Try" button in one of the palette buttons
+ */
+function tryPaletteCode(exampleCode) {
+  var editor = ace.edit("editor");
+
+  var MOVE_CURSOR_TO_END = 1;
+  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  window.State.unsaved_changes = false;
+}
+
 
 window.saveit = function saveit(level, lang, name, code, cb) {
   error.hide();
