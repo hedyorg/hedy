@@ -73,11 +73,16 @@ def load_adventure_assignments_per_level(lang, level):
     assignments = []
     all_adventures = ADVENTURES[lang]
     adventures = all_adventures['adventures']
+
     for adventure in adventures.values():
+        assignment = {}
+        assignment['name'] = adventure['name']
+        assignment['image'] = adventure['image']
         try:
-            assignments.append(adventure[level])
+            assignment['text'] = (adventure['levels'][level]['story_text'])
         except:
-            pass #geen assignment, geen probleem hoor
+            pass #geen assignment voor dit level? geen probleem hoor
+        assignments.append(assignment)
     return assignments
 
 

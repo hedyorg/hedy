@@ -23,13 +23,14 @@
       "properties": {
         "name": { "type": "string" },
         "description": { "type": "string" },
-        "image": { "type": "string" }
+        "image": { "type": "string" },
+        "levels": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/Story" }
+        }
       },
-      "required": ["name", "description"],
-      "additionalProperties": false,
-      "patternProperties": {
-        "^\\d+": { "$ref": "#/definitions/Story" }
-      }
+      "required": ["name", "description", "levels"],
+      "additionalProperties": false
     },
     "Story": {
       "type": "object",
