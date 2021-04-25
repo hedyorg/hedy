@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="-mx-8 -mt-12 px-8 mb-8 bg-blue-200 flex">
-  <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1 float-left" style="max-width: 15rem;">
+<div class="px-8 bg-blue-200 flex">
+  <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1">
     {% if adventure_name %}
       {{ adventure }}: {{ full_adventure_name }} - Level {{ level_nr }}
     {% else %}
@@ -25,6 +25,8 @@
   </div>
 </div>
 
-{% block levelbody %}
-{% endblock %}
+<div class="flex-grow flex items-stretch">
+{% block levelbody %}{% endblock %}
+</div>
+
 {% endblock %}
