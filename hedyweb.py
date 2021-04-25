@@ -48,9 +48,6 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
-
-  if adventure_assignments:
-    adventure_assignments[0]["selected"] = True
   arguments_dict['adventure_assignments'] = adventure_assignments
 
   # Translations

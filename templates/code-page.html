@@ -23,10 +23,10 @@
   </div>
 </div>
 <div tabindex="0" class="flex-grow p-8">
-  <div class="my-4">
-  {{intro_text|commonmark}}
-  </div>
   {% if adventure_name %}
+    <div class="my-4">
+    {{intro_text|commonmark}}
+    </div>
     {{story_text|commonmark}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {% for command in story_commands %}
@@ -46,9 +46,7 @@
     </div>
   {% else %}
     {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
-    {% if adventure_assignments %}
     {% include "incl-adventure-tabs.html" %}
-    {% endif %}
   {% endif %}
   {% if prompt %}
   <div class="py-2 px-4">
