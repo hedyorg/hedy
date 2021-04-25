@@ -1,0 +1,493 @@
+[
+    {
+        "Level": "1",
+        "Language" : "nl",
+        "Intro_text" : "In Level 1 kun je deze commando's gebruiken:",
+        "Available": true,
+        "Start_code": "print hallo wereld!",
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets printen met `print`.",
+            "example": "Bijvoorbeeld: print Hallo welkom bij Hedy!",
+            "demo_code": "print Hallo welkom bij Hedy!"
+        }, {
+            "name": "ask",
+            "explanation": "Iets vragen met `ask`.",
+            "example": "Bijvoorbeeld: ask Wat is je lievelingskleur?",
+            "demo_code": "ask Wat is je lievelingskleur?"
+        }, {
+            "name": "echo",
+            "explanation": "Iets herhalen dat is ingetypt met `echo`.",
+            "example": "Bijvoorbeeld: echo dus je lievelingskleur is...",
+            "demo_code": "ask Wat is je lievelingskleur?\\necho dus je lievelingskleur is..."
+        }
+        ]
+    },
+    {
+        "Level": "2",
+        "Language" : "nl",
+        "Intro_text" : "Print werkt nog zoals in Level 1, maar let op! Ask werkt nu een klein beetje anders. Het antwoord kun je opslaan en daarna printen. Echo heb je niet meer nodig in dit level. In Level 2 kun je ook deze commando's gebruiken:",
+        "Start_code": "print hallo wereld!",
+        "Available": true,
+        "Commands" : [
+         {
+            "name": "is",
+            "explanation": "Een woord een naam geven",
+            "example": "Bijvoorbeeld: naam is Hedy.",
+            "demo_code": "naam is Hedy\\nprint ik heet naam"
+        }, {
+            "name": "ask",
+            "explanation": "Iets vragen met ask. Maar let op! Er moet nu een naam voor.",
+            "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint Jouw favoriet is dus kleur"
+        }, {
+            "name": "kies_random",
+            "explanation": "Iets willekeurigs uit een groep woorden kiezen met at en random ",
+            "example": "Bijvoorbeeld: dieren is hond, kat, kangoeroe.",
+            "demo_code": "dieren is hond, kat, kangoeroe\\nprint dieren at random"
+        }
+        ]
+    },
+    {
+        "Level": "3",
+        "Language" : "nl",
+        "Start_code": "print 'hallo wereld'",
+        "Intro_text" : "Ask doet het nog steeds in level 3, maar let op! Vanaf nu moet je tekst die je letterlijk wilt printen tussen aanhalingstekens zetten bij print. ",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets letterlijk printen met print.",
+            "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
+            "demo_code": "print 'Hallo welkom bij Hedy'"
+        }, {
+            "name": "is",
+            "explanation": "Een stukje tekst een naam geven en printen zonder aanhalingstekens",
+            "example": "Bijvoorbeeld: naam is Hedy.",
+            "demo_code": "naam is Hedy\\nprint 'ik heet ' naam"
+        }, {
+            "name": "ask",
+            "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
+            "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
+        }
+        ]
+    },
+    {
+        "Level": "4",
+        "Language" : "nl",
+        "Start_code": "naam is ask hoe heet jij?\nif naam is Hedy print 'leuk' else print 'minder leuk!'",
+        "Intro_text" : "ask en print werken nog zoals in level 3. Maar in Level 4 is er iets nieuws, de if!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets letterlijk printen met print.",
+            "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
+            "demo_code": "print 'Hallo welkom bij Hedy'"
+        }, {
+            "name": "ask",
+            "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
+            "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
+        }, {
+            "name": "if",
+            "explanation": "Een keuze maken",
+            "example": "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
+        }
+        ]
+    },
+    {
+        "Level": "5",
+        "Language": "nl",
+        "Start_code": "repeat 3 times print 'Hedy is leuk!'",
+        "Intro_text": "ask, print en if werken nog zoals in level 4. Maar in Level 5 is er iets nieuws: de repeat. Met repeat kun je codes een aantal keer herhalen.",
+        "Available": true,
+        "Commands": [
+            {
+                "name": "print",
+                "explanation": "Iets letterlijk printen met print.",
+                "example": "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'",
+                "demo_code": "print 'Hallo welkom bij Hedy'"
+            },
+            {
+                "name": "ask",
+                "explanation": "Iets vragen met ask. Maar let op! Printen moet nu met een aanhalingsteken.",
+                "example": "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?",
+                "demo_code": "kleur is ask Wat is je lievelingskleur?\\nprint 'Jouw favoriet is dus ' kleur"
+            },
+            {
+                "name": "if",
+                "explanation": "Een keuze maken",
+                "example": "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'",
+                "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
+            },
+            {
+                "name": "repeat",
+                "explanation": "Herhalen en if samen",
+                "example": "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'",
+                "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+            }
+        ]
+    },
+    {    "Level": "6",
+        "Language" : "nl",
+        "Start_code": "print '5 keer 5 is ' 5 * 5",
+        "Intro_text" : "ask, print, if en repeat werken nog zoals in level 4 en 5. Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen. ",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets letterlijk printen met print.",
+            "example": "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5",
+            "demo_code": "print '5 keer 5 is ' 5 * 5"
+        }, {
+            "name": "ask en if samen met rekenen",
+            "explanation": "Het antwoord van een som vragen met ask en kijken of het goed is. Maar let op! Print moet nog steeds met een aanhalingsteken.",
+            "example": "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?",
+            "demo_code": "antwoord is ask Hoeveel is 10 plus 10?\\nif antwoord is 20 print 'Goedzo!' else print 'Foutje'"
+        }, {
+            "name": "repeat",
+            "explanation": "Herhalen en if samen",
+            "example": "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+        }
+        ]
+    },
+    {   "Level": "7",
+        "Language" : "nl",
+        "Start_code": "repeat 5 times\n    print 'Hallo allemaal'\n    print 'Dit wordt allemaal 5 keer herhaald'",
+        "Intro_text" : "ask en print werken nog zoals eerst, maar if en repeat zijn nu veranderd! Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen, dat betekent dat ze moeten beginnen met vier spaties. Ook als je 1 regel wilt herhalen moet je inspringen! Als je een repeat en een if samen gebruikt moet je steeds opnieuw inspringen.",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Iets letterlijk printen met print.",
+            "example": "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5",
+            "demo_code": "print '5 keer 5 is ' 5 * 5"
+        }, {
+            "name": "if met meerdere regels",
+            "explanation": "Het antwoord van een som vragen met ask en kijken of het goed is. Nu printen we twee regels uit.",
+            "example": "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?",
+            "demo_code": "antwoord is ask Hoeveel is 10 plus 10?\\nif antwoord is 20\\n    print 'Goedzo!'\\n    print 'Het antwoord was inderdaad ' antwoord\\nelse\\n    print 'Foutje'\\n    print 'Het antwoord moest zijn ' antwoord"
+        }, {
+            "name": "if en repeat samen",
+            "explanation": "repeat en if samen",
+            "example": "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'",
+            "demo_code": "kleur is ask Wat is je lievelingskleur?\\nif kleur is groen\\n    repeat 3 times\\n        print 'mooi!'\\nelse\\n    repeat 5 times\\n        print 'niet zo mooi'"
+        }
+        ]
+    },
+    {
+        "Level": "1",
+        "Language" : "en",
+        "Intro_text" : "In Level 1 you can use these commands",
+        "Available": true,
+        "Start_code": "print hello world!",
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Print something with print.",
+            "example": "Example: print Hello welcome to Hedy!",
+            "demo_code": "print Hello welcome to Hedy!"
+        }, {
+            "name": "ask",
+            "explanation": "Ask something with ask.",
+            "example": "Example: ask What is your favorite color?",
+            "demo_code": "ask What is your favorite color?"
+        }, {
+            "name": "echo",
+            "explanation": "Repeat something using echo.",
+            "example": "Example: echo so your favorite color is...",
+            "demo_code": "ask What is your favorite color?\\necho so your favorite color is..."
+        }
+        ]
+    },
+    {
+        "Level": "2",
+        "Language" : "en",
+        "Intro_text" : "Print still works as it did in Level 1, but ask has been changed abd now needs a name, which you can then print. Echo is no longer needed. You can now also use these commands:",
+        "Start_code": "print hello world!",
+        "Available": true,
+        "Commands" : [
+         {
+            "name": "is",
+            "explanation": "Give a word a name to use in the program",
+            "example": "Example: name is Hedy.",
+            "demo_code": "name is Hedy\\nprint welcome name"
+        }, {
+            "name": "ask",
+            "explanation": "Ask something with ask. Beware! Ask needs a name now.",
+            "example": "Example: color is ask What is your favorite color?",
+            "demo_code": "color is ask What is your favorite color?\\nprint color is your favorite!"
+        }, {
+            "name": "choose_random",
+            "explanation": "Choose a random word from a group with at ",
+            "example": "Example: animals is dog, cat, kangaroo.",
+            "demo_code": "animals is dog, cat, kangaroo\\nprint animals at random"
+        }
+        ]
+    },
+    {
+        "Level": "3",
+        "Language" : "en",
+        "Start_code": "print 'Hello world'",
+        "Intro_text" : "In level 3, you need to use quotation marks around words that you want to print. Echo is no longer needed, you can now print the words with print!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Print exactly using quotation marks",
+            "example": "Example: print 'Hello welcome to Hedy.'",
+            "demo_code": "print 'Hello welcome to Hedy.'"
+        }, {
+            "name": "is",
+            "explanation": "Give a name to some text and print without quotation marks",
+            "example": "Example: name is Hedy.",
+            "demo_code": "name is Hedy\\nprint 'my name is ' name"
+        }, {
+            "name": "ask",
+            "explanation": "Ask something with ask. Beware! Print not needs quotations marks.",
+            "example": "Example: color is ask What is your favorite color?",
+            "demo_code": "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+        }
+        ]
+    },
+    {
+        "Level": "4",
+        "Language" : "en",
+        "Start_code": "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'",
+        "Intro_text" : "ask en printwork exactly like they did in Level 3. Level 4 adds the if statement!",
+        "Available": true,
+        "Commands" : [
+            {
+                "name": "print",
+                "explanation": "Print exactly using quotation marks",
+                "example": "Example: print 'Hello welcome to Hedy.'",
+                "demo_code": "print 'Hello welcome to Hedy.'"
+            }, {
+                "name": "ask",
+                "explanation": "Ask something with ask. Beware! Print not needs quotations marks.",
+                "example": "Example: color is ask What is your favorite color?",
+                "demo_code": "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+            }, {
+                "name": "if",
+                "explanation": "Make a choice",
+                "example": "Example: if color is green print 'pretty!' else print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green print 'pretty!' else print 'meh'"
+            }
+        ]
+    },
+    {
+        "Level": "5",
+        "Language": "en",
+        "Start_code": "repeat 3 times print 'Hedy is fun!'",
+        "Intro_text": "ask, print en if work exactly like they did in Level 4. But Level 5 adds the repeat command. Repeat can be used to execute a line of code multiple times.",
+        "Available": true,
+        "Commands": [
+            {
+                "name": "print",
+                "explanation": "Print exactly using quotation marks",
+                "example": "Example: print 'Hello welcome to Hedy.'",
+                "demo_code": "print 'Hello welcome to Hedy.'"
+            }, {
+                "name": "ask",
+                "explanation": "Ask something with ask. Beware! Print not needs quotations marks.",
+                "example": "Example: color is ask What is your favorite color?",
+                "demo_code": "color is ask What is your favorite color?\\nprint color ' is your favorite!'"
+            }, {
+                "name": "if",
+                "explanation": "Make a choice",
+                "example": "Example: if color is green print 'pretty!' else print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green print 'pretty!' else print 'meh'"
+            },
+            {
+                "name": "repeat",
+                "explanation": "Repeat and if combined",
+                "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+                "demo_code": "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+            }
+        ]
+    },
+    {
+        "Level": "6",
+        "Language" : "en",
+        "Start_code": "print '5 times 5 is ' 5 * 5",
+        "Intro_text" : "ask, print, if en repeat are still the same as in Level 4 en 5. Level 6 adds something new... You can now calculate. ",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Print exactly using quotation marks",
+            "example": "Example: print '5 times 5 is ' 5 * 5",
+            "demo_code": "print '5 times 5 is ' 5 * 5"
+        }, {
+            "name": "ask en if with calculations",
+            "explanation": "Ask for a calculation and compare with if. Beware: Print still needs quotation marks.",
+            "example": "Example: answer is ask What is 10 plus 10?",
+            "demo_code": "answer is ask What is 10 plus 10?\\nif answer is 20 print 'Yes!' else print 'Oops'"
+        }, {
+            "name": "repeat",
+            "explanation": "Repeat and if combined",
+            "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+            "demo_code": "color is ask What is your favorite color?\\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+            }
+        ]
+    },
+    {   "Level": "7",
+        "Language" : "en",
+        "Start_code": "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'",
+        "Intro_text" : "ask and print still work as you know them. But if and repeat have changed! You can now execute groups of code together, but you will have to indent the code. That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line. If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Print something. Remember to use a quotation mark for literal printing.",
+            "example": "Example: print '5 keer 5 is ' 5 * 5",
+            "demo_code": "print '5 times 5 is ' 5 * 5"
+        }, {
+            "name": "if with multiple lines",
+            "explanation": "Ask for the answer to a sum and check if it is correct. We can now print 2 lines.",
+            "example": "Example: answer is ask What is 5 plus 5?",
+            "demo_code": "answer is ask What is 5 plus 5?\\nif answer is 10\\n    print 'Well done!'\\n    print 'Indeed, the answer was ' answer\\nelse\\n    print 'Oops!'\\n    print 'Ths answer is ' answer"
+        }, {
+            "name": "if en repeat combined",
+            "explanation": "if en repeat combined",
+            "example": "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'",
+            "demo_code": "color is ask What is your favorite color?\\nif color is green\\n    repeat 3 times\\n        print 'pretty!'\\nelse\\n    repeat 5 times\\n        print 'meh'"
+        }
+        ]
+    },
+    {
+        "Level": "1",
+        "Language" : "es",
+        "Intro_text" : "En el nivel 1 puedes usar estos comandos",
+        "Available": true,
+        "Start_code": "print hola mundo!",
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Imprimir algo con print.",
+            "example": "Ejemplo: print Hola bienvenido a Hedy!",
+            "demo_code": "print Hola bienvenido a Hedy!"
+        }, {
+            "name": "ask",
+            "explanation": "Pregunta algo con ask.",
+            "example": "Ejemplo: ask Cuál es tu color favorito?",
+            "demo_code": "ask Cuál es tu color favorito?"
+        }, {
+            "name": "echo",
+            "explanation": "Repita algo usando echo.",
+            "example": "Ejemplo: echo entonces su color favorito es...",
+            "demo_code": "ask Cuál es tu color favorito?\\necho entonces su color favorito es..."
+        }
+        ]
+    },
+    {
+        "Level": "2",
+        "Language" : "es",
+        "Intro_text" : "print aún funcionan. Cuidado! Ask necesita un nombre ahora. Echo no necesitas usarlo más. Ahora también puede usar estos nuevos comandos:",
+        "Start_code": "print hola mundo!",
+        "Available": true,
+        "Commands" : [
+         {
+            "name": "is",
+            "explanation": "Dar un nombre a una palabra para usar en el programa con is.",
+            "example": "Ejemplo: nombre is Hedy",
+            "demo_code": "nombre is Hedy\\nprint Bienvenido nombre"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask. Cuidado! Ask necesita un nombre ahora.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint Tu favorito es color"
+        }, {
+            "name": "choose_random",
+            "explanation": "Seleccionar una palabra aleatoria usando at y random.",
+            "example": "Ejemplo: animales is perro, gato, canguro",
+            "demo_code": "animales is perro, gato, canguro\\nprint animales at random"
+        }
+        ]
+    },
+    {
+        "Level": "3",
+        "Language" : "es",
+        "Start_code": "print 'Hola mundo'",
+        "Intro_text" : "Ask todavía funciona en nivel 3. Desde ahora cuando deseas imprimir un texto literal debes usar las comillas simples.",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Para imprimir un texto literal con el comando print debes usar las comillas simples.",
+            "example": "Ejemplo: print 'Hola bienvenido a Hedy.'",
+            "demo_code": "print 'Hola bienvenido a Hedy.'"
+        }, {
+            "name": "is",
+            "explanation": "Dar un nombre al texto y imprimir sin comillas simples.",
+            "example": "Ejemplo: nombre is Hedy",
+            "demo_code": "nombre is Hedy\\nprint 'Mi nombre es ' nombre"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask. Cuidado! Imprimir ahora necesita las comillas simples.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
+        }
+        ]
+    },
+    {
+        "Level": "4",
+        "Language" : "es",
+        "Start_code": "nombre is ask Cómo te llamas?\nif nombre is Hedy print 'divertido' else print 'menos divertido!'",
+        "Intro_text" : "ask y print funcionan como en nivel 3. ¡Pero en nivel 4 hay algo nuevo, el if!",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Para imprimir un texto literal con el comando print.",
+            "example": "Ejemplo: print 'Hola bienvenido a Hedy.'",
+            "demo_code": "print 'Hola bienvenido a Hedy.'"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask. Cuidado! Imprimir ahora necesita las comillas simples.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
+        }, {
+            "name": "if",
+            "explanation": "Tomar una decisión",
+            "example": "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nif color is verde print 'bonito!' else print 'no es tan bonito'"
+        }
+        ]
+    },
+    {
+        "Level": "5",
+        "Language" : "es",
+        "Start_code": "repeat 3 times print 'Hedy esta divertido!'",
+        "Intro_text" : "ask, print y if funcionan como en nivel 4. Pero en nivel 5 hay algo nuevo: el repeat. Con repeat puedes repetir códigos varias veces.",
+        "Available": true,
+        "Commands" : [
+        {
+            "name": "print",
+            "explanation": "Imprimir un texto literal con print.",
+            "example": "Ejemplo: print 'Hola bienvenido a Hedy.'",
+            "demo_code": "print 'Hola bienvenido a Hedy.'"
+        }, {
+            "name": "ask",
+            "explanation": "Preguntar algo con ask.",
+            "example": "Ejemplo: color is ask Cuál es tu color favorito?",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nprint 'Tu favorito es ' color"
+        }, {
+            "name": "if",
+            "explanation": "Tomar una decisión con if.",
+            "example": "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nif color is verde print 'bonito!' else print 'no es tan bonito'"
+        }, {
+            "name": "repeat",
+            "explanation": "Repetir algo con repeat.",
+            "example": "Ejemplo: if color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'",
+            "demo_code": "color is ask Cuál es tu color favorito?\\nif color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
+        }
+        ]
+    }
+]

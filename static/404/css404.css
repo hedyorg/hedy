@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+}
+
+body {
+	display: flex;
+}
+
+h1 {
+	font-family: 'Zilla Slab';
+	font-size: 3em;
+	text-align: center;
+
+}
+
+h1 small {
+
+	display: block;
+	font-size: 20px;
+}
+
+.site {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+  align-items: center;
+	flex-direction: column;
+	margin: 0 auto;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+
+.placeholder {
+	position: relative;
+	height: 550px;
+	min-width: 550px;
+	margin: 0;
+	overflow: visible;
+
+
+}
+
+.afbeelding-placeholder {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.hedy {
+	background: url(http://www.hedycode.com/images/Hedy-logo.png) no-repeat center center;
+	<!-- Update image for different error codes-->
+
+}
+
+@media only screen and (min-width: 780px) {
+  .site {
+		flex-direction: row;
+		padding: 1em 3em 1em 0em;
+	}
+
+	h1 {
+		text-align: right;
+		order: 2;
+		padding-bottom: 2em;
+		padding-left: 2em;
+
+	}
