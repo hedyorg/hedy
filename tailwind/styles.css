@@ -84,9 +84,13 @@ h3 {
 code {
   @apply font-mono inline rounded py-1 px-2;
   color: #ff6188;
-  background: #272822;
   font-size: 90%;
 }
+
+pre, code {
+  background: #272822 !important;
+}
+
 .markdown code {
   @apply py-2 px-3 text-base;
 }
@@ -94,8 +98,10 @@ pre {
   @apply block bg-gray-200 py-2 px-4 my-2 rounded text-base border-gray-300 border;
   @apply text-red-600;
 }
+
 pre code {
   padding: 0 !important;
+  font-size: 100%;
 }
 
 .markdown blockquote {
