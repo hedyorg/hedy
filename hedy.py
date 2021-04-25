@@ -548,18 +548,20 @@ class ConvertToPython_7(ConvertToPython_6):
 
         return "\nelse:\n" + "\n".join(all_lines)
 
-
-    def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
             value = args[1]
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
-                if "'" in value or 'random.choice' in value: #TODO: should be a call to wrap nonvarargument is quotes!
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
-                    return parameter + " = '" + value + "'"
+                    if value.isnumeric():
+                        return parameter + " = int(" + value + ")"
+                    else:
+                        return parameter + " = '" + value + "'"
         else:
             parameter = args[0]
             values = args[1:]

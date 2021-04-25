@@ -68,8 +68,8 @@ class TestsLevel7(unittest.TestCase):
     result = hedy.transpile(code, 7)
 
     expected = textwrap.dedent("""\
-    nummer = '5'
-    nummertwee = '6'
+    nummer = int(5)
+    nummertwee = int(6)
     print(str(int(nummer) * int(nummertwee)))""")
 
     self.assertEqual(expected, result)
@@ -124,7 +124,7 @@ class TestsLevel7(unittest.TestCase):
     result = hedy.transpile(code, 7)
 
     expected = textwrap.dedent("""\
-    n = '5'
+    n = int(5)
     for i in range(int(n)):
       print('me wants a cookie!')""")
 
