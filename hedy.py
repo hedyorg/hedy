@@ -866,7 +866,7 @@ def transpile_inner(input_string, level):
     level = int(level)
     parser = Lark(create_grammar(level))
 
-    if level == 8:
+    if level >= 8:
         input_string = preprocess_blocks(input_string)
 
     try:
