@@ -78,3 +78,32 @@ Pre-release environment
 When you have your PR accepted into `master`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
 
 We do periodic deploys of `master` to the [production version](https://hedycode.com) of Hedy.
+
+Editing YAML files with validation
+----------------------------------
+
+If you need to edit the YAML files that make up the Hedy adventure mode,
+you can have them validated as-you-type against our JSON schemas.
+
+This does require some manual configuration in your IDE, which we can
+unfortunately not do automatically for you. What you need to do depends
+on which IDE you are using. Here are the IDEs we know about:
+
+### Visual Studio Code
+
+* Install the Vistual Studio Code [YAML plugin](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
+* After installing the plugin, press **F1**, and type **Preferences: Open Worspace Settings (JSON)**.
+* Add the following `yaml.schemas` key to the JSON file that shows up:
+
+```json
+{
+  // ...
+  "yaml.schemas": {
+    "coursedata/adventures/adventures.schema.json": "adventures/*.yaml"
+  }
+}
+```
+
+### IntelliJ (PyCharm/WebStorm/...)
+
+(Instructions still to figure out)
