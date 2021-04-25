@@ -81,11 +81,6 @@ h3 {
   @apply font-slab font-bold text-blue-700 italic;
   @apply leading-tight text-xl mt-8 mb-1;
 }
-code {
-  @apply font-mono inline rounded py-1 px-2;
-  color: #ff6188;
-  font-size: 90%;
-}
 
 pre, code {
   background: #272822 !important;
@@ -99,9 +94,20 @@ pre {
   @apply text-red-600;
 }
 
+/* Code in a fenced code block (``` in MarkDown) */
 pre code {
   padding: 0 !important;
   font-size: 100%;
+  color: white;
+}
+
+/* All code (` and ```) */
+code {
+  @apply font-mono inline rounded py-1 px-2;
+  /* color: #ff6188; */
+  /* Temporarily back to white because syntax highlighting in Ace is not implemented yet for all levels */
+  color: white;
+  font-size: 90%;
 }
 
 .markdown blockquote {
