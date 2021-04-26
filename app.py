@@ -184,6 +184,7 @@ def parse():
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
                 session['error_level'] = 0  # Code is correct: reset error_level back to 0
+                print ('DEBUG SESSION SET GFM', session)
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -228,6 +229,7 @@ def parse():
     return jsonify(response)
 
 def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
+    print ('DEBUG SESSION GFM', session)
     response = {}
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
