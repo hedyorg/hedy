@@ -111,3 +111,4 @@ on which IDE you are using. Here are the IDEs we know about:
 * Click the **+** to add a new schema.
   * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/coursedata/adventures/adventures.schema.json` file.
   * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `coursedata/adventures`.
+* Click **OK** to close the window.
