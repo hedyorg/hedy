@@ -58,7 +58,7 @@ class DocCollection:
 class MarkdownDoc:
   @staticmethod
   def from_file(filename):
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding='utf-8') as f:
       contents = f.read()
     parts = re.split('^---+$', contents, maxsplit=1, flags=re.M)
     if len(parts) == 1:
