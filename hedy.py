@@ -822,16 +822,52 @@ def filter_and_translate_terminals(list):
     return new_terminals
 
 def beautify_parse_error(error_message):
-
     character_found = error_message.split("'")[1]
     character_found = translate_characters(character_found)
-
     return character_found
+
+def find_indent_length(line):
+    number_of_spaces = 0
+    for x in line:
+        if x == ' ':
+            number_of_spaces += 1
+        else:
+            break
+    return number_of_spaces
+
+def preprocess_blocks(code):
+    processed_code = []
+    lines = code.split("\n")
+    current_indent = 0
+    previous_block = 0
+    for line in lines:
+        leading_spaces = find_indent_length(line)
+        if leading_spaces > previous_block:
+            current_indent += 1
+            previous_block = leading_spaces
+        elif leading_spaces < previous_block:
+            #we springen 'terug' dus er moet een block in!
+            processed_code.append('end-block')
+            current_indent -=1
+            previous_block = leading_spaces
+
+        #if indent remains the same, do nothing, just add line
+        processed_code.append(line)
+
+    # if the last line is indented, the end of the program is also the end of all indents
+    # so close all blocks
+    for i in range(current_indent):
+        processed_code.append('end-block')
+    return "\n".join(processed_code)
+
 
 def transpile_inner(input_string, level):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = Lark(create_grammar(level))
+
+    if level >= 8:
+        input_string = preprocess_blocks(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
