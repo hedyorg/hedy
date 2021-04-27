@@ -9,7 +9,7 @@ def print(uitvoer):
     sys.stdout.write(uitvoer + '\n')
 
 def main():
-    # python3 hedy.py <filename(0)> [levelargument(1)] [level(2)] 
+    # python3 hedy.py <filename(0)> [levelargument(1)] [level(2)]
 
     args = sys.argv[1:]
     args_length = len(args)
@@ -30,9 +30,9 @@ def main():
                         level = 8
                 except ValueError:
                     print("Level argument is not an integer, skipping argument.")
-    
+
     lines = ""
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
     if level == 0:
