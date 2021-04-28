@@ -12,9 +12,7 @@
         {{ command.explanation|commonmark }}
       </div>
       <div class="flex">
-        <div class="font-thin text-sm flex-grow" tabindex=0>
-          {{ command.example|commonmark }}
-        </div>
+
         <button class="btn block flex-none self-end ml-1"
           onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
       </div>
