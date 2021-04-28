@@ -66,8 +66,6 @@ def load_adventures_in_all_languages():
         adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
     return adventures
 
-ADVENTURES = load_adventures_in_all_languages()
-
 def load_adventure_for_language(lang):
     adventures = load_adventures_in_all_languages()
     if not lang in adventures or len (adventures [lang]) == 0:
