@@ -24,7 +24,7 @@ Hedy（海迪）最大的好处就是你可以*循序渐进*的学习编程。�
 
 ## 为什么Hedy（海迪）是循序渐进的？
 
-在这段视频中，Hedy(海迪)的开发者Felienne（菲丽娜）解释了为什么海迪是循序渐进的。
+在这段视频中，Hedy(海迪)的开发者Felienne（翡丽娜）解释了为什么海迪是循序渐进的。
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
