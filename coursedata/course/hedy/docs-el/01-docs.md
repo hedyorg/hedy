@@ -1,45 +1,46 @@
-title: Explanation
-level: 1
+title: Εξήγηση level: 1
+
 ---
-# A story
 
-At Level 1, as an example, you can create a story with a different main character that you enter yourself.
+# Μια ιστορία
 
-## Example
-This is my story, the main character that you choose will be placed on the dots later.
+Στο Επίπεδο 1, ως παράδειγμα, μπορεις να δημιουργήσεις μια ιστορία με ένα διαφορετικό βασικό χαρακτήρα που θα εισάγεις εσύ.
 
-* The main character of this story is ...
-* He walks in the forest
-* He is a little scared ...
-* He hears crazy sounds everywhere
-* He is afraid this is a ghost forest
+## Παράδειγμα
 
-## Assignment
+Αυτή είναι η ιστορία μου, ο βασικός χαρακτήρας που θα επιλέξεις θα τοποθετηθείς στις τελίτσες παρακάτω.
 
-Now you can try for yourself.
+- Ο βασικός χαρακτήρας αυτής της ιστορίας είναι ...
+- Περπατάει στο δάσος
+- Φοβάται λίγο ...
+- Ακούει περίεργους ήχους παντού
+- Φοβάται πως αυτό είναι ένα δάσος φάντασμα
 
-1. Write a story of a few sentences about your main character.
-2. Where the name of your main character should be placed, just put ... (see example)
-3. There may also be sentences in the story that do not contain a main character
-4. Now translate your story into Hedy code, here's how:
+## Άσκηση
 
-Line 1: type "ask who is the main character of your story"
+Τώρα θα δοκιμάσεις κι εσύ!
 
-For all of the following lines:
+1. Γράψε μια ιστορία μερικών προτάσεων σχετικά με το βασικό σου χαρακτήρα.
+2. Όπου θα έβαζες το όνομα του βασικού σου χαρακτήρα, απλά βάλε ...(δες το παράδειγμα)
+3. Μπορεί επίσης να υπάρχουν προτάσεις στην ιστορία που δε θα περιέχουν ένα βασικό χαρακτήρα
+4. Τώρα μετάφρασε την ιστορία σου σε κώδικα Hedy, όπως εδώ:
 
-* If there are dots in the line, type `echo` followed by your sentence
-* If there are no dots in the line, type `print` followed by your sentence
+Γραμμή 1: πληκτρολόγησε "ask ποιός είναι ο βασικός χαρακτήρας της ιστορίας σου"
 
-## Example Hedy code
+Για όλες τις παρακάτω γραμμές:
 
-* `ask The main character of this story is ...`
-* `print The main character of this story is ...`
-* `print He walks in the forest`
-* `echo He is a little scared ...`
-* `print He hears crazy sounds everywhere`
-* `print He is afraid this is a ghost forest`
+- Αν υπάρχουν τελίτσες στη γραμμή, πληκτρολόγησε `echo` και έπειτα την πρότασή σου
+- Αν δεν υπάρχουν τελίτσες στη γραμμή, πληκτρολόγησε `print` και έπειτα την πρότασή σου
 
+## Παράδειγμα κώδικα Hedy
 
-## A simple story
-It is a bit of a pity that you can now only create sentences in which the main character is at the end of the sentence right?
-After you have practiced this story, proceed to level 2 and then level 3, where you can create more and more complicated programs.
+- `ask Ο βασικός χαρακτήρας της ιστορίας είναι ...`
+- `print Ο βασικός χαρακτήρας της ιστορίας είναι ...`
+- `print Περπατάει στο δάσος`
+- `echo Φοβάται λίγο ...`
+- `print Ακούει περίεργους ήχους παντού`
+- `print Φοβάται πως αυτό είναι ένα δάσος φάντασμα`
+
+## Μια απλή ιστορία
+
+Είναι κρίμα που μπορείς να δημιουργήσεις μόνο προτάσεις όπου ο βασικός χαρακτήρας είναι στο τέλος της πρότασης, σωστά; Αφού έχεις εξασκηθεί με αυτήν την ιστορία, προχώρησε στο επίπεδο 2 και μετά στο επίπεδο 3, όπου μπορείς να δημιουργήσεις περισσότερα και πιο σύνθετα προγράμματα.
