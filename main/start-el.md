@@ -1,43 +1,43 @@
-## page_title: Welcome to Hedy!
+## page_title: Καλωσήλθες στη Hedy!
 
 <div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
   <div class="flex-1">
     <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">Hedy</h1>
-    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">A gradual programming language</h2>
+    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Μια βαθμιαία γλώσσα προγραμματισμού</h2>
   </div>
   <div class="flex-none">
-    <a class="green-btn text-white px-8 py-4" href="/hedy?lang=en">Try it</a>
+    <a class="green-btn text-white px-8 py-4" href="/hedy?lang=en">Δοκίμασέ τη</a>
   </div>
 </div>
 
-## What is a gradual programming language?
+## Τί είναι μια βαθμιαία γλώσσα προγραμματισμού;
 
-Learning to program can be hard. Not that programming itself _is_ hard! But there are a lot of rules you need to memorize, just like when you started to learn English. Similarly, you will need a lot of practice to learn programming.
+Το να μάθεις να προγραμματίζεις μπορεί να είναι δύσκολο. Όχι ότι ο προγραμματισμός _είναι_ δύσκολος! Όμως υπάρχουν πολλοί κανόνες που πρέπει να απομνημονεύσεις, ακριβώς όπως όταν ξεκίνησες να μαθαίνεις Ελληνικά. Παρομοίως, θα χρειαστείς αρκετή εξάσκηση για να μάθεις προγραμματισμό.
 
-You can read these sentences with ease. But do you remember when you were learning to read? You took some time then for each letter! That is true for programming too, it might be hard in the beginning, but it will get easier!
+Μπορείς να διαβάσεις αυτές τις προτάσεις με ευκολία. Θυμάσαι όμως όταν ξεκίνησες να μαθαίνεις να διαβάζεις; Χρειαζόσουν λίγο χρόνο για κάθε γράμμα! Το ίδιο ισχύει και για τον προγραμματισμό, μπορεί να είναι δύσκολο στην αρχή, όμως θα γίνεται όλο και πιο εύκολο!
 
-The nice thing about Hedy is that Hedy is _gradual_. That means that you do not have to learn all rules at once. The first few levels do not have that many rules, so you can get used to programming comfortably. In every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
+Το καλό με τη Hedy είναι πως η Hedy είναι _βαθμιαία_. Αυτό σημαίνει πως δε χρειάζεται να μάθεις όλους τους κανόνες με τη μία. Τα πρώτα επίπεδα δεν έχουν τόσους πολλούς κανόνες, ώστε να συνηθίσεις τον προγραμματισμό αβίαστα. Σε κάθε επίπεδο προσθέτουμε νέους κανόνες, αυξάνοντας τον αριθμό των εντολών που γνωρίζεις. Εντολές ονομάζονται οι οδηγίες που δίνουμε σε έναν υπολογιστή.
 
-## Why is Hedy gradual?
+## Γιατί είναι βαθμιαία η Hedy;
 
-In this video Felienne, the creator of Hedy, explains why Hedy is gradual.
+Σε αυτό το βίντεο, η Felienne, δημιουργός της Hedy, εξηγεί γιατί η Hedy είναι βαθμιαία.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
-## Who is Hedy for?
+## Για ποιόν προορίζεται η Hedy;
 
-Hedy is meant for all kids that want to learn programming! You do need to be able to read English with ease.
+Η Hedy απευθύνεται σε όλα τα παιδιά που θέλουν να μάθουν προγραμματισμό! Θα πρέπει να μπορείς να διαβάζεις Ελληνικά με ευκολία.
 
-## Do I need programming experience?
+## Χρειάζομαι εμπειρία στον προγραμματισμό;
 
-No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.
+Όχι, κάτι τέτοιο δεν είναι απαραίτητο. Ωστόσο, αν έχεις προγραμματίσει ξανά σε Scratch ή Python, κάποιες εντολές θα σου είναι οικείες.
 
-## Is Hedy free?
+## Η Hedy είναι δωρεάν;
 
-Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone who can program can help us make Hedy better. You can find the code on [GitHub](https://github.com/Felienne/hedy).
+Ναι! Το Πανεπιστήμιο του Leiden μας επιτρέπει να τη μοιραζόμαστε δωρεάν. H Hedy είναι επίσης 'Ανοικτού Κώδικα', το οποίο σημαίνει πως οποιοσδήποτε μπορεί να προγραμματίσει, μπορεί να μας βοηθήσει να βελτιώσουμε τη Hedy. Μπορείς να βρείς τον κώδικα στο [GitHub](https://github.com/Felienne/hedy).
 
-## Do I need to install anything?
+## Θα χρειαστεί να εγκαταστήσω κάτι;
 
-No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or FireFox. Hedy also works on your phone or tablet.
+Όχι. H Hedy δουλεύει στον περιηγητή, που είναι το πρόγραμμα που χρησιμοποιείς για να δεις αυτήν εδώ τη σελίδα. Πιθανότατα, Chrome ή Edge ή Firefox. Η Hedy επίσης δουλεύει στο τηλέφωνό σου ή στο τάμπλετ.
