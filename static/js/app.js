@@ -15,6 +15,9 @@
     if (window.State.level == 2){
       window.editor.session.setMode("ace/mode/level2");
     }
+    if (window.State.level == 3){
+      window.editor.session.setMode("ace/mode/level3");
+    }
 
 
   // Load existing code from session, if it exists
