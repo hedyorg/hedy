@@ -316,7 +316,7 @@ def programs_page (request):
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
-    return render_template('adventures.html', lang=lang, adventures=load_adventures (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'])
+    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'])
 
 @app.route('/hedy/adventures/<adventure_name>', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/adventures/<adventure_name>/<level>', methods=['GET'])
@@ -324,7 +324,7 @@ def adventure_page(adventure_name, level):
 
     user = current_user (request)
     level = int (level)
-    adventures = load_adventures (requested_lang ())
+    adventures = load_adventure_for_language (requested_lang ())
 
     # If requested adventure does not exist, return 404
     if not adventure_name in adventures ['adventures']:
