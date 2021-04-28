@@ -1,3 +1,4 @@
+# Note that the story_commands are not in use at this point!
 ---
 title: "Hedy avonturen!"
 subtitle: "Met Hedy kan je van alles maken! Bijvoorbeeld een interactief verhaal, een spel of een app om het leven makkelijker te maken"
@@ -276,10 +277,15 @@ adventures:
               start_code: "print Welkom bij jouw eigen steen schaar papier!"
           3:
               story_text: |
-                  ## Steen, schaar, papier in Level 3
-                  In Level 3 kunnen we steen, schaar, papier verder programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
+                ## Steen, schaar, papier in Level 3
+                In Level 3 kunnen we steen, schaar, papier verder programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
 
-                  Lukt het jou om tekst erbij te printen? Vul op de stipjes de juiste codes in.
+                ## Voorbeeld Hedy code
+                ```
+                keuzes is steen, schaar, papier
+                print 'De computer koos...'
+                print keuzes at random
+                ```
               story_commands:
                   - name: "Voorbeeld"
                     example: "Kies uit steen schaar of papier"
@@ -341,7 +347,7 @@ adventures:
               start_code: "ask Heb jij zin om een dobbelsteen te maken?"
           2:
               story_text: |
-                ## Dobbelsteen op Level 2
+                ## Dobbelsteen in Level 2
                 In Level 2 kunnen we kiezen uit een lijst. Daarmee kunnen we de computer een kant van de dobbelsteen laten kiezen.
 
                 Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
@@ -376,10 +382,14 @@ adventures:
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           3:
               story_text: |
-                  ## Dobbelsteen op Level 3
-                  In Level 3 kunnen we zinnen maken met de dobbelwaarde in de zin, met aanhalingstekens natuurlijk.
-                  Maak jij de code af?
-
+                ## Dobbelsteen in Level 3
+                In Level 3 kunnen we zinnen maken met de dobbelwaarde in de zin, met aanhalingstekens natuurlijk.
+                Deze keer is de voorbeeldcode niet helemaal compleet. Maak jij de code af?
+                ## Voorbeeld Hedy code
+                ```
+                keuzes is 1, 2, 3, 4, 5, regenworm
+                print 'je hebt ' ... gegooid
+                ```
               story_commands:
                   - name: "Voorbeeld"
                     example: "Rol de dobbelsteen uit regenwormen"
@@ -390,7 +400,7 @@ adventures:
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           4:
               story_text: |
-                  ## Dobbelsteen op Level 4
+                  ## Dobbelsteen in Level 4
                   Je kunt ook in Level 4 weer een dobbelsteen maken en daarbij de `if` gebruiken.
                   Maak de voorbeeldcode af zodat de code zegt 'Je mag stoppen met gooien' als je een regenworm hebt gegooid.
                   Maar misschien wil jij wel een dobbelsteen uit een heel ander spel namaken.
@@ -407,7 +417,7 @@ adventures:
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           5:
               story_text: |
-                  ## Dobbelsteen op Level 5
+                  ## Dobbelsteen in Level 5
                   Je kunt ook in Level 5 weer een dobbelsteen maken. Met de `repeat` code kun je makkelijk een heel handje dobbelstenen rollen.
                   Probeer de voorbeeldcode maar eens af te maken!
                   Maar misschien wil jij wel een hele andere dobbelsteen maken.
@@ -429,7 +439,7 @@ adventures:
         levels:
           2:
               story_text: |
-                ## Afwasprogramma op Level 2
+                ## Afwasprogramma in Level 2
                 Heb jij altijd onenigheid thuis over wie vandaag de afwas moet doen of de kattenbak moet verschonen?
 
                 Dan kun je de computer heel eerlijk laten kiezen. Dat kun jij in Level 2 nu programmeren!
@@ -460,20 +470,26 @@ adventures:
               start_code: "print Wie doet de afwas?"
           3:
               story_text: |
-                  ## Afwasprogramma op Level 3
-                  Met aanhalingstekens kun je je afwasprogramma mooier maken.
-                  Maak jij de code af? Vergeet de aanhalingstekens niet!
+                ## Afwasprogramma in Level 3
+                Met aanhalingstekens kun je je afwasprogramma mooier maken.
+                Deze keer is de voorbeeldcode niet helemaal compleet. Maak jij de code af?
+
+                Tip: Vergeet de aanhalingstekens niet!
+                ## Voorbeeld Hedy code
+                ```
+                mensen is mama, papa, Emma, Sophie
+                print ... de afwas wordt gedaan door ... ... at ...
+                ```
               story_commands:
                   - name: "Voorbeeld"
                     example: "Bepaal wie de afwas doet vandaag"
                     explanation: "Voorbeeldcode"
                     demo_code: |
-                      mensen is mama, papa, Emma, Sophie
-                      print ... de afwas wordt gedaan door ... ... at ...
+
               start_code: "print 'Wie doet de afwas?'"
           4:
               story_text: |
-                  ## Afwasprogramma op Level 4
+                  ## Afwasprogramma in Levelp Level 4
                   Met de `if` kun je nu leuker maken met een `if`. Je kan je programma laten reageren op de keuze.
                   Maak jij de code af zodat het 'chips' print als jij aan de beurt bent, en anders 'yes!'?
                   Vergeet de aanhalingstekens niet!
@@ -488,7 +504,7 @@ adventures:
               start_code: "print 'Wie doet de afwas?'"
           5:
               story_text: |
-                  ## Afwasprogramma op Level 5
+                  ## Afwasprogramma in Level 5
                   Met de `repeat` kun je stukjes code herhalen. Daarmee kun je dan voor de hele week uitrekenen wie er aan de beurt is.
 
                   Dit level is het einde van het afwas-avontuur! Kies nu een ander avontuur of ga naar de vrije modus.
@@ -507,7 +523,7 @@ adventures:
         levels:
           5:
               story_text: |
-                  ## Liedjes op Level 5
+                  ## Liedjes in Level 5
                   In liedjes zit vaak veel herhaling. Denk maar aan Baby Shark! Ze zingen steeds hetzelfde:
                   Baby Shark tututudutudu
                   Baby Shark tututudutudu

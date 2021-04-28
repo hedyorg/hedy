@@ -60,18 +60,23 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 
 TRANSLATIONS = hedyweb.Translations()
 
-ADVENTURES = {}
-for lang in ALL_LANGUAGES.keys ():
-    ADVENTURES[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
+def load_adventures_in_all_languages():
+    adventures = {}
+    for lang in ALL_LANGUAGES.keys ():
+        adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
+    return adventures
 
-def load_adventures (lang):
-    if not lang in ADVENTURES or len (ADVENTURES [lang]) == 0:
-        return ADVENTURES ['en']
-    return ADVENTURES [lang]
+ADVENTURES = load_adventures_in_all_languages()
+
+def load_adventure_for_language(lang):
+    adventures = load_adventures_in_all_languages()
+    if not lang in adventures or len (adventures [lang]) == 0:
+        return adventures ['en']
+    return adventures [lang]
 
 def load_adventure_assignments_per_level(lang, level):
     assignments = []
-    adventures = load_adventures(lang)['adventures']
+    adventures = load_adventure_for_language(lang)['adventures']
     for adventure in adventures.values():
         if level in adventure['levels']:
             assignments.append({
