@@ -61,7 +61,7 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 TRANSLATIONS = hedyweb.Translations()
 
 # Load main menu (do it once, can be cached)
-with open(f'main/menu.json', 'r') as f:
+with open(f'main/menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
 
 
@@ -402,7 +402,7 @@ def main_page(page):
         effective_lang = 'en'
 
     try:
-        with open(f'main/{page}-{effective_lang}.md', 'r') as f:
+        with open(f'main/{page}-{effective_lang}.md', 'r', encoding='utf-8') as f:
             contents = f.read()
     except IOError:
         abort(404)

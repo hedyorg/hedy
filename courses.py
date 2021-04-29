@@ -148,7 +148,7 @@ class Doc:
 
 def load_yaml(filename):
   try:
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding='utf-8') as f:
       return yaml.safe_load(f)
   except IOError:
     return {}
