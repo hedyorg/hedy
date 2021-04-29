@@ -1,75 +1,74 @@
-title: Instructions
-level: 2
+title: Οδηγίες level: 2
+
 ---
-# Rock, paper, scissors
 
-In Level 2 you’ve learned to do something new. You can make lists and choose items from it.  This way you can create a game like rock, paper, scissors!
-It works like this:
+# Πέτρα, ψαλίδι, χαρτί
 
-* `choices is rock, paper, scissors`
-* `print choices at random`
+Στο Επίπεδο 2 έμαθες να κάνεις κάτι καινούριο. Μπορείς να κάνεις λίστες και να επιλέξεις αντικείμενα από αυτές. Κατ'αυτόν τον τρόπο μπορείς να δημιουργήσεις ένα παιχνίδι όπως το πέτρα, ψαλίδι, χαρτί! Αυτό δουλεύει κάπως έτσι:
 
-# Create your own dice
+- `choices is πέτρα, ψαλίδι, χαρτί`
+- `print choices at random`
 
-You could also create your own dice. Take a look at the (board)games in your own home. Are there any games (special) dice? You can easily remake them with Hedy code. For example the dice in the game Pickomino has the numbers 1 through 5 and an earthworm.
+# Δημιούργησε τα δικά σου ζάρια
 
-![Dice with numbers 1 through 5 and an earthworm](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+Θα μπορούσες επίσης να δημιουργήσεις τα δικά σου ζάρια. Ρίξε μια ματιά στα (επιτραπέζια) παιχνίδια στο σπίτι σου. Βρίσκεις κάποια (ιδιαίτερα) ζάρια παιχνιδιών; Μπορείς να τα αναδημιουργήσεις εύκολα με κώδικα Hedy. Για παράδειγμα τα ζάρια στο παιχνίδι Pickomino έχουν τους αριθμούς 1 έως 5 και ένα σκουληκάκι.
 
-You make the dice like this:
+![Ζάρια με αριθμούς 1 έως 5 και ένα σκουληκάκι](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
-* `choices is 1, 2, 3, 4, 5, earthworm`
-* `print choices at random`
+Θα φτιάξεις τα ζάρια κάπως έτσι:
 
-Can you make the dice as well?
+- `choices is 1, 2, 3, 4, 5, σκουληκάκι`
+- `print choices at random`
 
-# Who has to do the dishes?
+Μπορείς και εσύ να φτιάξεις τα ζάρια;
 
-Picking an item for a list doesn’t only happen in games. It can also come in handy if you want to let the computer decide fairly who has to do the dishes or change the kitty litter.
-You can program that too now!
+# Ποιός πρέπει να πλύνει τα πιάτα;
 
-You can make this code:
+Η επιλογή ενός αντικειμένου απο μια λίστα δε συμβαίνει μόνο στα παιχνίδια. Μπορεί να φανεί χρήσιμη αν θέλεις να αφήσεις τον υπολογιστή να αποφασίσει δίκαια ποιός πρέπει να κάνει τα πιάτα ή να αλλάξει την άμμο της γάτας. Τώρα μπορείς να το προγραμματίσεις και εσύ!
 
-* `people is mom, dad, Emma, Sophie`
-* `print people at random`
+Μπορείς να γράψεις αυτόν τον κώδικα:
 
-# A better story
+- `people is μαμά, μπαμπάς, Μαρία, Σοφία`
+- `print people at random`
 
-In level 2 you could also upgrade your story, because the main character’s name can be anywhere in the line now! It only takes a little bit more of programming.
+# Μια καλύτερη ιστορία
 
+Στο Επίπεδο 2 θα μπορούσες επίσης να αναβαθμίσεις την ιστορία σου, επειδή το όνομα του βασικού χαρακτήρα μπορεί πλέον να βρίσκεται οπουδήποτε στη γραμμή! Απλά χρειάζεται λιγάκι παραπάνω προγραμματισμός.
 
-## Example
-This is my story. The name of the main character that you choose will appear in the place where it now says name.
+## Παράδειγμα
 
-* The main character of the story is name
-* name is walking through a forest
-* name is a bit scared
-* Everywhere around him are strange noises
-* name is afraid this is a haunted forest
+Αυτή είναι η ιστορία μου. Το όνομα του βασικού χαρακτήρα που θα επιλέξεις θα εμφανίζεται στο σημείο όπου πλέον λέει name.
 
-## Assignment
+- Ο βασικός χαρακτήρας αυτής της ιστορίας είναι name
+- Ο name περπατάει στο δάσος
+- Ο name φοβάται λίγο
+- Ακούει περίεργους ήχους παντού
+- Ο name φοβάται πως αυτό είναι ένα δάσος φάντασμα
 
-Your turn!
+## Άσκηση
 
-1. Write a short story about your main character.
-2. Instead of writing the main character’s name, write the word `name` (like the example)
-3. You’re also allowed to write sentences without the word `name`
-4. Translate your story to Hedy code, like this:
+Σειρά σου!
 
-Line1: type: `name is` followed by your main character’s name.
-For the following lines:
-Type `print` and then the sentences you’ve thought of.
+1. Γράψε μια σύντομη ιστορία σχετικά με το βασικό σου χαρακτήρα.
+2. Όπου θα έβαζες το όνομα του βασικού σου χαρακτήρα, απλά γράψε τη λέξη `name` ...(δες το παράδειγμα)
+3. Μπορεί επίσης να υπάρχουν προτάσεις στην ιστορία που δε θα περιέχουν τη λέξη `name`
+4. Τώρα μετάφρασε την ιστορία σου σε κώδικα Hedy, όπως εδώ:
 
-## Example Hedy code
-* `name is John`
-* `print name is walking through a forest`
-* `print name is a bit scared`
-* `print everywhere around him are strange noises`
-* `print name is afraid this is a haunted forest`
+- Γραμμή 1: Πληκτρολόγησε: `name is` και έπειτα το όνομα του βασικού σου χαρακτήρα.
+- Για τις επόμενες γραμμές: Πληκτρολόγησε `print` και στη συνέχεια τις προτάσεις που έχεις σκεφτεί.
 
-## An interactive story
-You can program that the name can be chosen by anyone by changing the first line. Change `name is John` into `name is ask Who is the main character?`
-This way you can pick a different name every time without having to change your code!
+## Παράδειγμα κώδικα Hedy
 
-## We have a small problem…!
-Did you try to make a sentence using the word name? Like, `print my name is name`.
-If you hadn’t yet, go try it! You’ll see it doesn’t work right. Hedy will say: My John is John. Level 3 has a solution for that, so if you’re done with these exercises go check out level 3!
+- `name is Γιάννης`
+- `print Ο name περπατάει στο δάσος`
+- `print Ο name φοβάται λίγο`
+- `print Ακούει περίεργους ήχους παντού`
+- `print Ο name φοβάται πως αυτό είναι ένα δάσος φάντασμα`
+
+## Μια διαδραστική ιστορία
+
+Μπορείς να προγραμματίσεις έτσι ώστε το όνομα να μπορεί να επιλεχθεί αλλάζοντας την πρώτη γραμμή. Άλλαξε το `name is Γιάννης` σε `name is Ποιός είναι ο βασικός χαρακτήρας;` Έτσι μπορείς να επιλέγεις ένα διαφορετικό όνομα κάθε φορά χωρίς να χρειάζεται να αλλάζεις τον κώδικά σου!
+
+## Θα έχουμε ένα μικρό πρόβλημα…!
+
+Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη name; Δηλαδη, `print το name μου είναι name`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! Θα δεις ότι δε δουλεύει σωστά. H Hedy θα πει: To Γιάννης μου είναι Γιάννης. To Επίπεδο 3 έχει μια λύση για αυτό, οπότε αν έχεις τελειώσει με αυτές τις ασκήσεις πήγαινε να δεις το επίπεδο 3!
