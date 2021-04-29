@@ -1,77 +1,82 @@
-title: Instructions
-level: 3
+title: Οδηγίες level: 3
+
 ---
-Mind that there are new rules in level 3! If you want to literally print the text you have to use quotation marks.
 
-# Fix the name problem
-In Level 2 we weren’t able to print the word name, because we already used it.
-This code:
+Προσέξτε ότι στο επίπεδο 3 υπάρχουν καινούριοι κανόνες! Αν θέλετε να εμφανίσετε το κείμενο επακριβώς πρέπει να χρησιμοποιήσετε εισαγωγικά.
 
-* `name is Hedy`
-* `print so your name is name`
+# Λύνουμε το πρόβλημα με το name
 
-Prints in Level 2 "So your Hedy is Hedy"
-In level 3 we can fix it by putting quotation marks around the text that you want to print literally. Try it!
+Στο Επίπεδο 2 δεν μπορούσαμε να εμφανίσουμε τη λέξη name, επειδή τη χρησιμοποιούσαμε ήδη. Αυτός ο κώδικας:
 
-# Rock, paper, scissors
-In Level 3 we can also make the game of rock, paper, scissors. If you want to add text to your game, you’ll have to put it in quotation marks.
+- `name is Hedy`
+- `print ώστε το name σου είναι name`
 
-* `choices is rock, paper, scissors`
-* `print 'The winner is ' choices at random`
+Στο Επίπεδο 2 εμφανίζει "ώστε το Hedy σου is Hedy" Στο Επίπεδο 3 μπορούμε να το διορθώσουμε βάζοντας εισαγωγικά γύρω από το κείμενο που θέλεις να εμφανίσεις επακριβώς. Δοκίμασέ το!
 
-# Make your own dice
-Level 3 also allows you to make dice. In level 3 you can make sentences that include the amount that you’ve thrown.
-This is the Pickamino dice again, but now with a nice sentence.
+# Πέτρα, ψαλίδι, χαρτί
 
-* `choices is 1, 2, 3, 4, 5, earthworm`
-* `print 'You have thrown ' choices at random`
+Στο Επίπεδο 3 μπορούμε επίσης να δημιουργήσουμε το παιχνίδι πέτρα, ψαλίδι, χαρτί. Αν θέλεις να προσθέσεις κείμενο στο παιχνίδι σου, θα πρέπει να το βάλεις μέσα σε εισαγωγικά.
 
-Your turn to make some nice dice!
+- `choices is πέτρα, ψαλίδι, χαρτί`
+- `print 'Ο νικητής είναι: ' choices at random`
 
-# Who is doing the dishes tonight?
-Your code for doing the dishes can be upgraded too in level 3.
+# Φτιάξε τα δικά σου ζάρια
 
-It looks like this:
+Το Επίπεδο 3 σου επιτρέπει επίσης να φτιάξεις ζάρια. Στο επίπεδο 3 μπορείς να δημιουργήσεις προτάσεις που περιλαμβάνουν τον αριθμό που έριξες. Αυτά είναι τα ζάρια από το Pickamino και πάλι, όμως τώρα με μια όμορφη πρόταση.
 
-* `people is mom, dad, Emma, Sophie`
-* `print 'This person has to do the dishes tonight: ' people at random`
+- `choices is 1, 2, 3, 4, 5, σκουληκάκι`
+- `print 'Έριξες τον αριθμό ' choices at random`
 
-# A better story
-You can improve your story in level 3, because you can use the word ‘name’ in your text (as long as you put it in quotation marks).
+Σειρά σου να φτιάξεις μερικά ζάρια!
 
-## Example
-This is my story. The name that you choose for the main character will replace the word name. Pay close attention: All the sentences have to be in quotation marks, except the word name!
+# Ποιός θα πλύνει τα πιάτα σήμερα;
 
-* the name of my main character is name
-* name is walking through the forest
-* name is a bit scared
-* everywhere around him are strange noises
-* name is afraid this is a haunted forest
+Ο κώδικας για το πλύσιμο των πιάτων μπορεί πλέον να αναβαθμιστεί στο επίπεδο 3.
 
-## Assignment
+Αυτό δείχνει κάπως έτσι:
 
-Your turn!
+- `people is μαμά, μπαμπάς, Μαρία, Σοφία`
+- `print 'Αυτό το άτομο πρέπει να πλύνει τα πιάτα σήμερα: ' people at random`
 
-1. Write a short story about your main character.
-2. Write `name` instead of your main character’s name (like the example)
-3. You’re also allowed to use sentences without `name`
-4. Translate your story to Hedy code, like this:
+# Μια καλύτερη ιστορία
 
-Line 1: type: `name is` followed by your main character’s name.
-For the following lines:
-Type `print` followed by the sentence you came up with, but pay close attention! The word name shouldn’t be in quotation marks if you want it to change into the main character’s name. Everything else should be in quotation marks after `print`.
+Μπορείς να βελτιώσεις την ιστορία σου στο επίπεδο 3, επειδή μπορείς να χρησιμοποιήσεις τη λέξη ‘name’ στο κείμενο σου (αρκεί να τη βάλεις μέσα σε εισαγωγικά).
+
+## Παράδειγμα
+
+Αυτή είναι η ιστορία μου. Το όνομα που θα επιλέξεις για το βασικό χαρακτήρα θα αντικαταστήσουν τη λέξη name. Δώσε μεγάλη προσοχή: Όλες οι προτάσεις πρέπει να είναι σε εισαγωγικά, εκτός από τη λέξη name!
+
+- Το όνομα του βασικού χαρακτήρα αυτής της ιστορίας είναι name
+- Ο name περπατάει στο δάσος
+- Ο name φοβάται λίγο
+- Ακούει περίεργους ήχους παντού
+- Ο name φοβάται πως αυτό είναι ένα δάσος φάντασμα
+
+## Άσκηση
+
+Σειρά σου!
+
+1. Γράψε μια σύντομη ιστορία σχετικά με το βασικό σου χαρακτήρα.
+2. Γράψε `name` αντί για το όνομα του βασικού χαρακτήρα σου (δες το παράδειγμα)
+3. Μπορεί επίσης να υπάρχουν προτάσεις στην ιστορία που δε θα περιέχουν τη λέξη `name`
+4. Τώρα μετάφρασε την ιστορία σου σε κώδικα Hedy, όπως εδώ:
+
+- Γραμμή 1: Πληκτρολόγησε: `name is` και έπειτα το όνομα του βασικού σου χαρακτήρα.
+- Για τις επόμενες γραμμές: Πληκτρολόγησε `print` και στη συνέχεια την πρόταση που έχει σκεφτεί, όμως δώσε προσοχή! Η λέξη name δεν θα πρέπει να είναι σε εισαγωγικά αν θέλεις να αλλάξει στο όνομα του βασικού σου χαρακτήρα. Όλα τα υπόλοιπα μετά την `print` θα πρέπει να είναι μέσα σε εισαγωγικά.
 
 ## Example Hedy code
-* `name is John`
-* `print 'The name of my main character is `name
-* `print name ' is walking through the forest'`
-* `print name ' is a bit scared'`
-* `print 'Everywhere around him ' name ' is hearing strange noises'`
-* `print name ' is afraid this forest is haunted'`
 
-## An interactive story
-Make the story interactive by asking the main character’s name in the first line. Change `name is John` into `name is ask Who is the main character?`
-This way you can pick a different name every time without having to change your code!
+- `name is Γιάννης`
+- `print 'Το όνομα του βασικού μου χαρακτήρα είναι '`name
+- `print 'Ο ' name 'περπατάει στο δάσος'`
+- `print 'Ο ' name 'φοβάται λίγο'`
+- `print 'Ο ' name 'ακούει περίεργους ήχους παντού'`
+- `print 'Ο ' name 'φοβάται πως αυτό είναι ένα δάσος φάντασμα'`
 
-## Choices in your story or game
-It would be really great if your story could be more interactive. For example, if you could choose whether there is a monster in your story or not. Or if you could see who the winner is of rock, paper, scissors. You can learn to program these things in level 4!
+## Μια διαδραστική ιστορία
+
+Κάνε την ιστορία διαδραστική ρωτώντας το όνομα του βασικού χαρακτήρα στην πρώτη γραμμή. Άλλαξε το `name is Γιάννης` σε `name is ask Ποιός είναι ο βασικός χαρακτήρας;` Έτσι μπορείς να επιλέγεις ένα διαφορετικό όνομα κάθε φορά χωρίς να χρειάζεται να αλλάζεις τον κώδικά σου!
+
+## Επιλογές στην ιστορία ή στο παιχνίδι σου
+
+Θα ήταν πολύ ωραίο αν η ιστορία σου ήταν πιο διαδραστική. Για παράδειγμα, αν μπορούσες να επιλέξεις αν υπάρχει κάποιο τέρας στην ιστορία σου ή όχι. Ή αν θα μπορείς να δεις ποιός είναι ο νικητής στο πέτρα, ψαλίδι, χαρτί. Μπορείς να μάθεις πώς να προγραμματίζεις κάτι τέτοιο στο επίπεδο 4!
