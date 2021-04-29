@@ -558,10 +558,7 @@ class ConvertToPython_7(ConvertToPython_6):
                 if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
-                    if value.isnumeric():
-                        return parameter + " = int(" + value + ")"
-                    else:
-                        return parameter + " = '" + value + "'"
+                    return parameter + " = '" + value + "'"
         else:
             parameter = args[0]
             values = args[1:]

@@ -45,8 +45,8 @@ class TestsLevel13(unittest.TestCase):
     result = hedy.transpile(code, 13)
 
     expected = textwrap.dedent("""\
-    nummer = int(5)
-    nummertwee = int(6)
+    nummer = '5'
+    nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
     self.assertEqual(expected, result)
@@ -112,8 +112,8 @@ for a in range(2,4):
   a = a + 2
   b = b + 2""")
     expected = textwrap.dedent("""\
-a = int(2)
-a = int(3)
+a = '2'
+a = '3'
 for a in range(int(2), int(4)+1):
   a = int(a) + int(2)
   b = int(b) + int(2)""")
@@ -130,11 +130,11 @@ if a == 1:
 else:
   x = 222""")
     expected = textwrap.dedent("""\
-a = int(5)
+a = '5'
 if str(a) == str('1'):
-  x = int(2)
+  x = '2'
 else:
-  x = int(222)""")
+  x = '222'""")
 
     result = hedy.transpile(code, 13)
 
@@ -286,7 +286,7 @@ for i in range(int(1), int(3)+1):
       else:
         print('Dat is goed!')
       if str(antwoord) == str('25'):
-        i = int(10)""")
+        i = '10'""")
 
     result = hedy.transpile(code, 13)
 
