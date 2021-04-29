@@ -200,7 +200,7 @@ define('ace/mode/level3_highlight_rules', [], function(require, exports, module)
       }],
 
       "print option": [{
-        token: "keyword",
+        token: "constant.character",
         regex: "'",
         next: "print rest"
       },{
@@ -211,7 +211,7 @@ define('ace/mode/level3_highlight_rules', [], function(require, exports, module)
         token: "keyword",
         regex: " at random | at random$",
       },{
-        token: "keyword", // constant.character
+        token: "constant.character", // constant.character
         regex: "'",
         next: "rest"
       },{
