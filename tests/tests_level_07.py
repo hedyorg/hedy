@@ -218,6 +218,40 @@ class TestsLevel7(unittest.TestCase):
     print('computer koos '+str(computerkeuze))""")
 
     self.assertEqual(expected, result)
+
+  def test_addition_simple(self):
+
+    code = textwrap.dedent("""\
+    var is 5
+    print var + 5""")
+
+    result = hedy.transpile(code, 7)
+
+    expected = textwrap.dedent("""\
+    var = int(5)
+    print(str(int(var) + int(5)))""")
+
+    self.assertEqual(expected, result)
+
+  def test_issue_297(self):
+
+    code = textwrap.dedent("""\
+    count is 1
+    repeat 12 times
+      print count ' times 12 is ' count*12
+      count is count + 1""")
+
+    result = hedy.transpile(code, 7)
+
+    expected = textwrap.dedent("""\
+    count = int(1)
+    for i in range(int(12)):
+      print(str(count)+' times 12 is '+str(int(count) * int(12)))
+      count = int(count) + int(1)""")
+
+    self.assertEqual(expected, result)
+
+
     
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)
