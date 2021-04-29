@@ -255,7 +255,45 @@ adventures:
               demo_code: |
                 repeat ... ... print 'Baby Shark tututudutudu'
                 print 'Baby Shark'
-          start_code: "print 'Wie doet de afwas?'"
+
+        6:
+          story_text: |
+            ## Liedjes in Level 6
+            In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
+            Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
+
+            ## Voorbeeld Hedy code
+            ```
+            couplet is 1
+            print 'Ik heb het potje met vet'
+            print 'al op de tafel gezet'
+            print 'Ik heb het'
+            repeat 4 times print 'potje'
+            print 'veeeeeet'
+            print 'al op de tafel gezet'
+            couplet is couplet + 1
+            print 'Door naar het ' couplet 'e couplet'
+            ```
+            Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt, door de regels te kopiëren.
+
+            Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
+            Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
+
+            # Vooruitblik
+            In Level 5 hebben we geleerd 1 regel te herhalen met `repeat`, zo:
+
+            * `repeat 3 times print 'Baby Shark Tutududududu'`
+
+            Maar zoals je in deze les ziet, wil je soms meerdere regels samen herhalen. Dat kan met knippen en plakken, maar dat is wel veel werk. In level 7 leer je hoe je dat makkelijker kan doen.
+
+          story_commands:
+            - name: "Voorbeeld"
+              example: "Zing Baby Shark"
+              explanation: "Voorbeeldcode"
+              demo_code: |
+                repeat ... ... print 'Baby Shark tututudutudu'
+                print 'Baby Shark'
+
     dishes:
         name: "Wie doet de afwas?"
         image: "dishes.png"
@@ -348,8 +386,34 @@ adventures:
                 mensen is mama, papa, Emma, Sophie
                 repeat ... ... print 'de afwasser is ' ...
                 ```
+              story_commands:
+                  - name: "Voorbeeld"
+                    example: "Bepaal wie de afwas doet vandaag"
+                    explanation: "Voorbeeldcode"
+                    demo_code: |
+                      mensen is mama, papa, Emma, Sophie
+                      repeat ... ... print 'de afwasser is ' ...
+              start_code: "print 'Wie doet de afwas?'"
+          6:
+              story_text: |
+                ## Afwasprogramma in Level 6
+                Hoe vaak gaat iedereen eigenlijk afwassen? Is dat wel eerlijk? Dat kun je in level 6 tellen.
+
+                ## Voorbeeld Hedy code
+                ```
+                mensen is mama, papa, Emma, Sophie
+                emma_wast_af is 0
+                afwasser is mensen at random
+                print 'De afwasser is ' afwasser
+                if afwasser is Emma emma_wast_af is emma_wast_af + 1
+                print 'Emma gaat deze week ' emma_wast_af ' keer afwassen'
+                ```
+
+                Nu kun je regels 3 t/m 5 een paar keer (bijv 7 keer voor een hele week) kopiëren om weer voor een hele week vooruit te rekenen.
+                Maak jij de code voor de hele week?
 
                 ## Vooruitblik
+                Nu moet je wel een hoop knippen en plakken he? Dat gaan we in level 7 beter doen.
                 Dit level is het einde van het afwas-avontuur! Maar er zijn nog veel avonturen te maken in andere levels, zoals een rekenmachine, een interactief verhaal en een ingewikkelder spel.
               story_commands:
                   - name: "Voorbeeld"
@@ -476,6 +540,35 @@ adventures:
                 repeat ... ... print ___
                 ```
 
+              story_commands:
+                  - name: "Voorbeeld"
+                    example: "Rol de dobbelsteen uit regenwormen"
+                    explanation: "Voorbeeldcode"
+                    demo_code: |
+                      keuzes is 1, 2, 3, 4, 5, regenworm
+                      repeat ... ... print 'je hebt ' keuzes at random ' gegooid'
+              start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+          6:
+              story_text: |
+                ## Dobbelsteen in Level 6
+                Je kunt ook in Level 6 weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
+
+                Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid. Zo doe je dat voor 1 dobbelsteen:
+
+                ## Voorbeeld Hedy code
+                ```
+                keuzes is 1, 2, 3, 4, 5, regenworm
+                punten is 0
+                worp is keuzes at random
+                print 'je gooide ' worp
+                if worp is regenworm punten is punten + 5 else punten is punten + worp
+                print 'dat zijn dan ' punten
+                ```
+                Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
+
+                ## Vooruitblik
+
+                Is het gelukt met de codes? Nu moet je wel veel knippen en plakken he? Dat gaan we in level 7 makkelijker maken!
               story_commands:
                   - name: "Voorbeeld"
                     example: "Rol de dobbelsteen uit regenwormen"
@@ -615,3 +708,51 @@ adventures:
                           if ... is ... print 'gelijkspel!' else print 'geen gelijkspel'
                           if keuze is steen and computerkeuze is papier print 'computer wint'
               start_code: "print 'Welkom bij jouw eigen steen schaar papier!'"
+    calculator:
+        name: "Rekenmachine"
+        description: "Maak een rekenmachine"
+        image: "calculator.png"
+        levels:
+          6:
+              story_text: |
+                ## Rekenmachine
+                Nu je kunt rekenen, kun je ook een programma maken om sommetjes te oefenen. Je kunt de sommen zelf verzinnen, bijv zo:
+
+                ## Voorbeeld Hedy code
+                ```
+                goedeantwoord is 11 * 27
+                print 'Hoeveel is 11 keer 27?'
+                antwoord is ask Weet jij het antwoord?
+                if antwoord is goedeantwoord print 'goedzo' else print 'Foutje! Het was ' goedeantwoord
+                ```
+
+                ## Willekeurige getallen
+                Je kunt ook de computer zelf willekeurige sommen laten maken met random.
+
+                Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
+
+                ## Voorbeeld Hedy code
+                ```
+                tafels is 4, 5, 6, 8
+                keer is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                tafel is tafels at random
+                keergetal is keer at random
+                goede_antwoord is tafel * keergetal
+                print 'hoeveel is ' tafel ' keer ' keergetal '?'
+                antwoord is ask Weet jij het antwoord?
+                if antwoord is goede_antwoord print 'goedzo' else print 'foutje! het was ' goede_antwoord
+
+              story_commands:
+                  -
+                      name: "Voorbeeld"
+                      example: "Rekenmachine"
+                      explanation: "Voorbeeldcode"
+                      demo_code: |
+                          print wat kies jij?
+                          ask kies uit steen, schaar of papier
+                          echo dus jouw keuze was:
+              start_code: "print Welkom bij jouw eigen steen schaar papier!"
+
+
+
+
