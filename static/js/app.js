@@ -8,9 +8,7 @@
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
-  bool highlighting = false;
 
-    if (highlighting == true){
         if (window.State.level == 1){
           window.editor.session.setMode("ace/mode/level1");
         }
@@ -20,7 +18,7 @@
         if (window.State.level == 3){
           window.editor.session.setMode("ace/mode/level3");
         }
-    }
+
 
 
   // Load existing code from session, if it exists
