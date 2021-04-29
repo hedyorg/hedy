@@ -189,6 +189,31 @@ for i in range(int(1), int(3)+1):
   if str(highscore) == str('score[i]'):
     print(str(highscore))""")
 
+  def test_if_under_else_in_for(self):
+    code = textwrap.dedent("""\
+    for i in range(0, 10):
+      antwoord is input('Wat is 5*5')
+      if antwoord is 24:
+          print('Dat is fout!')
+      else:
+          print('Dat is goed!')
+      if antwoord is 25:
+          i is 10""")
+
+    expected = textwrap.dedent("""\
+    for i in range(int(0), int(10)+1):
+      antwoord = input('Wat is 5*5')
+      if str(antwoord) == str('24'):
+        print('Dat is fout!')
+      else:
+        print('Dat is goed!')
+      if str(antwoord) == str('25'):
+        i = '10'""")
+
+    result = hedy.transpile(code, 12)
+
+    self.assertEqual(expected, result)
+
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message
