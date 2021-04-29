@@ -25,15 +25,15 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       13: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
-# 
+#
 #  closest_command() searches for known commands in an invalid command.
 #
 #  It will return the known command which is closest positioned at the beginning.
-#  It will return '' if the invalid command does not contain any known command. 
+#  It will return '' if the invalid command does not contain any known command.
 #
 
 def closest_command(invalid_command, known_commands):
-    
+
     # First search for 100% match of known commands
     min_position = len(invalid_command)
     min_command = ''
@@ -42,7 +42,7 @@ def closest_command(invalid_command, known_commands):
         if position != -1 and position < min_position:
             min_position = position
             min_command = known_command
-            
+
     # If not found, search for partial match of know commands
     if min_command == '':
         min_command = closest_command_with_min_distance(invalid_command, known_commands)
@@ -171,7 +171,7 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
 
 def create_parser(level):
-    with open(f"grammars/level{str(level)}.lark", "r") as file:
+    with open(f"grammars/level{str(level)}.lark", "r", encoding="utf-8") as file:
         grammar = file.read()
     return Lark(grammar)
 
@@ -744,7 +744,7 @@ class ConvertToPython(ConvertTo):
 def create_grammar(level):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r") as file:
+    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
         return file.read()
 
 
