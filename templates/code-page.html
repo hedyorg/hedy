@@ -9,25 +9,32 @@
              <button class="green-btn ml-1 no" onclick="feedback(false)">-</button>
          </div>
      </div>
-<div tabindex=0>
-  {{intro_text|commonmark}}
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<div style="width: 250px;" class="right-hand-shadow flex-none">
+  <div class="p-3 shadow-md">
+    <h2>{{ commands_title }}</h2>
+  </div>
+  <div>
     {% for command in commands %}
-    <!-- """+commando[0]+""" demo -->
-    <div class="border-l-2 border-t-1 hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
-      <div class="font-medium text-lg" tabindex=0>
+    <div class="border-t-1 border-solid border-black justify-between my-2 shadow-md p-3 pl-4">
+      <div class="font-medium text-lg mb-2" tabindex=0>
         {{ command.explanation|commonmark }}
       </div>
       <div class="flex">
         <div class="font-thin text-sm flex-grow" tabindex=0>
           {{ command.example|commonmark }}
         </div>
-        <button class="btn block flex-none self-end"
-          onclick='function show_demo(){ var editor = ace.edit("editor"); editor.setValue({{ command.demo_code|tojson }})};show_demo(); window.State.unsaved_changes = false;'>{{try_button}}</button>
+        <button class="btn block flex-none self-end ml-1"
+          onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
       </div>
     </div>
     {% endfor %}
   </div>
+</div>
+<div tabindex="0" class="flex-grow p-8">
+  <div class="my-4">
+  {{intro_text|commonmark}}
+  </div>
+
   {% if prompt %}
   <div class="py-2 px-4">
     <div>
@@ -36,14 +43,13 @@
     </div>
   </div>
   {% endif %}
-</div>
 
-<script>
-var toggleDocs = function () {
-   $ ('.expandable-docs').toggleClass ('hidden');
-   $ ('.expandable-docs-text').slideToggle (400);
-}
-</script>
+  <script>
+    var toggleDocs = function () {
+      $('.expandable-docs').toggleClass('hidden');
+      $('.expandable-docs-text').slideToggle(400);
+    }
+  </script>
 
 {% if docs|length %}
 <div class="expandable-docs w-full h-16 flex flex-col bg-blue-500 cursor-pointer" onclick="toggleDocs ()">
