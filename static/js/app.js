@@ -8,15 +8,18 @@
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
+  bool highlighting = false;
 
-    if (window.State.level == 1){
-      window.editor.session.setMode("ace/mode/level1");
-    }
-    if (window.State.level == 2){
-      window.editor.session.setMode("ace/mode/level2");
-    }
-    if (window.State.level == 3){
-      window.editor.session.setMode("ace/mode/level3");
+    if (highlighting == true){
+        if (window.State.level == 1){
+          window.editor.session.setMode("ace/mode/level1");
+        }
+        if (window.State.level == 2){
+          window.editor.session.setMode("ace/mode/level2");
+        }
+        if (window.State.level == 3){
+          window.editor.session.setMode("ace/mode/level3");
+        }
     }
 
 
