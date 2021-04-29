@@ -228,7 +228,7 @@ class TestsLevel7(unittest.TestCase):
     result = hedy.transpile(code, 7)
 
     expected = textwrap.dedent("""\
-    var = int(5)
+    var = '5'
     print(str(int(var) + int(5)))""")
 
     self.assertEqual(expected, result)
@@ -244,7 +244,7 @@ class TestsLevel7(unittest.TestCase):
     result = hedy.transpile(code, 7)
 
     expected = textwrap.dedent("""\
-    count = int(1)
+    count = '1'
     for i in range(int(12)):
       print(str(count)+' times 12 is '+str(int(count) * int(12)))
       count = int(count) + int(1)""")
