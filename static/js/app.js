@@ -99,7 +99,8 @@ function runit(level, lang, cb) {
       data: JSON.stringify({
         level: level,
         code: code,
-        lang: lang
+        lang: lang,
+        adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'

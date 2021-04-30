@@ -75,9 +75,10 @@ def load_adventure_for_language(lang):
 def load_adventure_assignments_per_level(lang, level):
     assignments = []
     adventures = load_adventure_for_language(lang)['adventures']
-    for adventure in adventures.values():
+    for short_name, adventure in adventures.items ():
         if level in adventure['levels']:
             assignments.append({
+                'short_name': short_name,
                 'name': adventure['name'],
                 'image': adventure.get('image', None),
                 'text': adventure['levels'][level].get('story_text', 'No Story Text')
@@ -185,6 +186,8 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'adventure_name' in body and not type_check (body ['adventure_name'], 'str'):
+        return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
     level = int(body ['level'])
@@ -230,7 +233,6 @@ def parse():
         except Exception as E:
             print(f"error transpiling {code}")
             response["Error"] = str(E)
-
     logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
@@ -240,7 +242,8 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
-        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
+        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
+        'adventure_name': body.get('adventure_name', None)
     })
 
     return jsonify(response)
