@@ -178,46 +178,96 @@ adventures:
 
             But as you will see in this lesson, sometimes you want to repeat several lines together. This can be done with cutting and pasting, but that is a lot of work. In level 7 you will learn how to do that more easily.
           start_code: "print 'Baby shark'"
-    rock:
-        name: "Rock, paper, scissors"
-        description: "Develop your version of the classic game"
-        levels:
-            1:
-                intro_text: "Create your own rock, paper & scissors"
-                start_code: "print Welcome to rock, paper & scissors!"
-            2:
-                intro_text: "Create your own rock, paper & scissors"
-                start_code: "print Welcome to rock, paper & scissors!"
-    dice:
-        name: "Create your own dice"
-        description: "Make your own dice and your own rules!"
-        image: "dice.png"
-        levels:
-            1:
-                intro_text: "Create your own version game of dice"
-                start_code: "print Welcome to a cool game of dice!"
-            2:
-                intro_text: "Create your own version game of dice"
-                start_code: "print Welcome to a cool game of dice!"
     dishes:
-        name: "Who's turn is it to do the dishes?"
+        name: "Who does the dishes?"
         image: "dishes.png"
-        description: "Use the computer to decide fairly who shall wash those dishes tonight."
+        description: "Use the computer to see who does the dishes (Start at level 2)"
         levels:
-            1:
-                intro_text: "Who's turn is it to do the dishes?"
-                start_code: "print This program will decide who does the dishes"
-            2:
-                intro_text: "Who's turn is it to do the dishes?"
-                start_code: "print This program will decide who does the dishes"
-    multiplication:
-        name: "Practice multiplication tables"
-        description: "Use the computer to help you ace the next math exam (starts at level 5)."
-        image: "calculator.png"
-        levels:
-            5:
-                intro_text: "Practice multiplication tables with the help of a computer"
-                start_code: "print 'Welcome to the practice program for multiplication tables'"
-            6:
-                intro_text: "Practice multiplication tables with the help of a computer"
-                start_code: "print 'Welcome to the practice program for multiplication tables'"
+          2:
+              story_text: |
+                ## Dishwashing program in Level 2
+                Do you always disagree at home about who should wash the dishes or change the litter box today?
+
+                Then you can let the computer choose very fairly. You can program that in Level 2!
+
+                You first make a list of the members of your family. Then choose 'at random' from the list.
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                print people at random
+                ```
+
+                ## What's next?
+                Did you happen to try to make a sentence that contained the word people?
+
+                E.g. `print I chose from these people`. Give it a try if you haven't already.
+
+                That is not working properly! Then you get: I chose from [daddy, mom, Emma, ​​Sophie]. You can solve that in Level 3.
+
+              start_code: "print Who does the dishes?"
+          3:
+              story_text: |
+                ## Dishwashing program in Level 3
+                With quotation marks you can make your dishwashing planning more beautiful.
+                This time the sample code is not quite complete.
+
+                Can you complete the code by entering the correct commands or characters on the dots?
+                Every three dots must be replaced with one command.
+
+                Tip: Don't forget the quotation marks!
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                print ... the dishes are done by ...
+                print people at ...
+                ```
+              start_code: "print 'Who does the dishes?'"
+          4:
+              story_text: |
+                ## Dishwashing program in Level 4
+                With the `if` you can now make more fun with choice in the program. You can have your program respond to the choice that the computer has made.
+
+                Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
+                Don't forget the quotes!
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                dishwasher is people at random
+                if dishwasher is Sophie print ... too bad I have to do the dishes ... else print 'luckily no dishes because' ... 'is already washing up'
+                ```
+              start_code: "print 'Who does the dishes?'"
+          5:
+              story_text: |
+                ## Dishwashing program in Level 5
+                With the `repeat` you can repeat pieces of code. You can use this to calculate who will be wahing dishes for the entire week.
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                repeat ... ... print 'the dishwasher is' ...
+                ```
+              start_code: "print 'Who does the dishes?'"
+          6:
+              story_text: |
+                ## Dishwashing program in Level 6
+                How often is everyone going to do the dishes? Is that fair? You can count that in level 6.
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                emma_washes is 0
+                dishwasher is people at random
+                print 'The dishwasher is' dishwasher
+                if dishwasher is Emma emma_washes is emma_washes + 1
+                print 'Emma will do the dishes this week' emma_washes 'times'
+                ```
+
+                Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
+                Do you make the code for the whole week?
+
+                ## What's next?
+                Now you have to copy and paste a lot, right? We will fix that in level 7.
+                This level is the end of the washing up adventure! But there are still many adventures to be made in other levels, such as a calculator, an interactive story and a more complicated game.
+              start_code: "print 'Who does the dishes?'"
