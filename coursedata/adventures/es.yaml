@@ -33,16 +33,6 @@ adventures:
 
 
             start_code: "print Aquí comienza tu historia"
-            story_commands:
-                    name: "Ejemplo"
-                    example: "Por ejemplo, escribe una historia de terror"
-                    explanation: "Historia de ejemplo"
-                    demo_code: |
-                        ask El protagonista de esta historia es
-                        print El protagonista camina por un bosque
-                        echo Está bastante asustado
-                        print Por todos lados se oyen extraños ruidos
-                        print Él tiene miedo de que éste sea un bosque encantado
           2:
             story_text: |
                 ## Una historia en el nivel 2
@@ -79,29 +69,6 @@ adventures:
                 Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `mi Manuel es Manuel`. Pero ahora puedes resolver este problema en el nivel 3.
 
             start_code: "print Aquí viene tu historia!"
-            story_commands:
-                -
-                    name: "Ejemplo con `ask`"
-                    example: "Escribe una historia espeluznante donde puedas elegir el nombre de tu protagonista"
-                    explanation: "Ejemplo con `ask`"
-                    demo_code: |
-                        nombre es ask Cómo se llama el protagonista?
-                        print nombre está caminando por el bosque
-                        print nombre está bastante asustado
-                        print Por todos lados se oyen extraños ruidos
-                        print nombre tiene miedo de que éste sea un bosque encantado
-                -
-                    name: "Ejemplo con `random`"
-                    example: "Escribe una historia espeluznante escogiendo un animal al azar"
-                    explanation: "Ejemplo de historia con `random`"
-                    demo_code: |
-                        nombre is Manuel
-                        print nombre está caminando por el bosque
-                        print nombre está bastante asustado
-                        print Por todos lados se oyen extraños ruidos
-                        animales is búho, águila, armadillo
-                        print Él escucha el ruido de un animales at random
-                        print nombre tiene miedo de que éste sea un bosque encantado
           3:
             story_text: |
                 ## Una historia en el nivel 3
@@ -125,34 +92,6 @@ adventures:
                 ```
 
             start_code: "print Aquí viene tu historia!"
-            story_commands:
-                -
-                    name: "Ejemplo simple"
-                    example: "Escribe una historia espeluznante"
-                    explanation: "Historia de ejemplo"
-                    demo_code: |
-                        nombre is Carlos
-                        print nombre ' está caminando por el bosque'
-                        print nombre 'tiene miedo de que éste sea un bosque encantado'
-                -
-                    name: "Ejemplo con `ask`"
-                    example: "Escribe una historia espeluznante"
-                    explanation: "Historia de ejemplo con `ask`"
-                    demo_code: |
-                        nombre es ask Cómo se llama el protagonista?
-                        print nombre 'está caminando por el bosque'
-                        print nombre 'tiene miedo de que éste sea un bosque encantado'
-                -
-                    name: "Ejemplo con `random`"
-                    example: "Escribe una historia espeluznante escogiendo un animal al azar"
-                    explanation: "Ejemplo de historia con `random`"
-                    demo_code: |
-                        nombre is Manuel
-                        print nombre 'está caminando por el bosque'
-                        print nombre 'está bastante asustado'
-                        animales is búho, águila, armadillo
-                        print 'Él escucha el ruido de un' animales at random
-                        print nombre 'tiene miedo de que éste sea un bosque encantado'
           4:
             story_text: |
                 ## Una historia en el nivel 4
@@ -178,26 +117,6 @@ adventures:
                 ```
 
             start_code: "print Aquí viene tu historia!"
-            story_commands:
-                -
-                    name: "Ejemplo con `if`"
-                    example: "Escribe una historia con dos finales"
-                    explanation: "Historia de ejemplo"
-                    demo_code: |
-                        print 'La princesa camina por el bosque'
-                        print 'Ella se topa con un monstruo'
-                        final is ask Quieres un final feliz o un final triste?
-                        if final is feliz print 'Ella desenfunda su espada y el monstruo se va corriendo' else print 'El monstruo se come a la princesa'
-                -
-                    name: "Ejemplo con `ask` e `if`"
-                    example: "Escribe una historia espeluznante con dos finales y `ask`"
-                    explanation: "Historia de ejemplo con `ask`"
-                    demo_code: |
-                        nombre is ask Quién camina por el bosque?
-                        print nombre ' camina por el bosque'
-                        print nombre ' se topa con un monstruo'
-                        final is ask Quieres un final feliz o un final triste?
-                        if final is feliz print nombre ' desenfunda su espada y el monstruo se va corriendo' else print 'El monstruo se come a ' nombre
           5:
             story_text: |
                 ## Una historia en el nivel 5
@@ -212,15 +131,6 @@ adventures:
                 ```
 
             start_code: "repeat 5 times print 'Ayuda!'"
-            story_commands:
-                -
-                    name: "Ejemplo con `repeat`"
-                    example: "Escribe una historia con repetición"
-                    explanation: "Historia de ejemplo"
-                    demo_code: |
-                        print 'La princesa grita pidiendo ayuda'
-                        repeat 5 times print 'Ayuda!'
-                        print 'Por qué nadie viene en mi ayuda?'
     songs:
         name: "Canta una canción!"
         image: "songs.png"
@@ -245,15 +155,6 @@ adventures:
                 ```
 
                 Luego puedes, por supuesto, programar otras canciones. Hay muchas canciones donde hay repetición.
-
-
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Canta Bebé Tiburón"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-                    repeat ... ... print 'Bebé Tiburón tututudutudu'
-                    print 'Bebe Tiburón'
             start_code: "print 'Una canción'"
         6:
           story_text: |
@@ -279,14 +180,6 @@ adventures:
             * `repeat 3 times print 'Bebé Tiburón Tutududududu'`
 
             Pero como tal vez hayas notado en esta lección, a veces tenemos que repetir múltiples líneas, no solamente una. Eso puede hacerse copiando y pegando, pero eso da mucho trabajo. En el nivel 7 veremos como hacerlo más fácilmente.
-
-          story_commands:
-            - name: "Ejemplo"
-              example: "Canta Bebé Tiburón"
-              explanation: "Programa de ejemplo"
-              demo_code: |
-                repeat ... ... print 'Bebé Tiburón tututudutudu'
-                print 'Bebe Tiburón'
           start_code: "print 'Bebe Tiburón'"
     dishes:
         name: "Quién lava los platos?"
@@ -314,15 +207,6 @@ adventures:
                 Por ejemplo: `print elijo a una de estas personas`. Puedes probarlo ahora si no lo has intentado todavía.
 
                 Eso no va a funcionar! Como resultado obtendrás: elijo a una de estas [papá, mamá, Carlos, María]. Puedes resolver este problema en el nivel 3.
-
-
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Determina quien lavará los platos hoy"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-                    personas is mamá, papá, María, Carlos
-                    print ... at ...
             start_code: "print Quien lavará los platos hoy?"
           3:
             story_text: |
@@ -339,12 +223,6 @@ adventures:
                 print ... los platos serán lavados por ...
                 print personas at ...
                 ```
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Determina quien lavará los platos hoy"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-
             start_code: "print 'Quien lavará los platos hoy?'"
           4:
             story_text: |
@@ -361,14 +239,6 @@ adventures:
                 if lavador es María print 'oh no, hoy me toca lavar los platos' else print 'por suerte no debo lavar los platos porque' ... 'los lavará hoy!'
                 ```
 
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Determina quien lavará los platos hoy"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-                      personas is mamá, papá, María, Carlos
-                      lavador is personas at random
-                      if lavador es María print 'oh no, hoy me toca lavar los platos' else print 'por suerte no debo lavar los platos porque' ... 'los lavará hoy!'
             start_code: "print 'Quien lavará los platos hoy?'"
           5:
             story_text: |
@@ -380,13 +250,6 @@ adventures:
                 personas is mamá, papá, María, Carlos
                 repeat ... ... print 'lavará los platos' ...
                 ```
-              story_commands:
-                  - name: "Ejemplo"
-                    example: "Determina quien lavará los platos esta semana"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                      personas is mamá, papá, María, Carlos
-                      repeat ... ... print 'hoy lavará los platos' ...
               start_code: "print 'Wie doet de afwas?'"
           6:
               story_text: |
@@ -409,13 +272,6 @@ adventures:
                 ## Avance
                 Escribir el programa para la semana entera require bastante copiar y pegar, no crees? Vamos a arreglar eso en el nivel 7.
                 Este nivel es el último de la aventura del lavado de platos! Pero puedes elegir otra aventura y programar cosas como una calculadora, una historia interactiva o un juego más interesante.
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Determina quien lavará los platos esta semana"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-                    personas is mamá, papá, María, Carlos
-                    repeat ... ... print 'lavará los platos' ...
             start_code: "print 'Quien lavará los platos esta semana?'"
     dice:
         name: "Crea un juego de dados"
@@ -464,14 +320,6 @@ adventures:
 
                   Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `yo elijo una de las [1, 2, 3, 4, 5, regenworm]. Pero ahora puedes resolver este problema en el nivel 3.
 
-
-              story_commands:
-                  - name: "Ejemplo"
-                    example: "Tira los dados de Gusanitos"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                      opciones is 1, 2, 3, 4, 5, gusanito
-                      print opciones at random
               start_code: "print Qué salió esta vez?"
           3:
               story_text: |
@@ -484,13 +332,6 @@ adventures:
                   print 'has tirado un ' ...
                   print ... ... ... <- hier moet je het kiezen programmeren
                   ```
-              story_commands:
-                  - name: "Ejemplo"
-                    example: "Tira los dados de Gusanitos"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                          opciones is 1, 2, 3, 4, 5, gusanito
-                          print 'has tirado un ' ...
               start_code: "print 'Qué salió esta vez?'"
           4:
               story_text: |
@@ -507,16 +348,6 @@ adventures:
                   if ... is gusanito print 'Puedes dejar de tirar los dados' ... print 'Debes tirar los dados nuevamente!'
                   ```
 
-
-              story_commands:
-                  - name: "Ejemplo"
-                    example: "Tira los dados de Gusanitos"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                      opciones is 1, 2, 3, 4, 5, gusanito
-                      tirada is ...
-                      print 'haz tirado un ' ...
-                      if ... is gusanito print 'Puedes dejar de tirar los dados' ... print 'Debes tirar los dados nuevamente!'
               start_code: "print 'Qué salió esta vez?'"
           5:
               story_text: |
@@ -532,13 +363,6 @@ adventures:
                   repeat ... ... print ...
                   ```
 
-              story_commands:
-                  - name: "Ejemplo"
-                    example: "Tira los dados de Gusanitos"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                      opciones is 1, 2, 3, 4, 5, gusanito
-                      repeat ... ... print 'haz tirado un ' opciones at random
               start_code: "print 'Qué salió esta vez?'"
           6:
               story_text: |
@@ -561,13 +385,6 @@ adventures:
                 ## Avance
 
                 Haz podido modificar el programa correctamente? Escribir el programa para repetir el dado 8 veces require bastante copiar y pegar, no crees? Vamos a hacer eso más simple en el nivel 7!
-              story_commands:
-                  - name: "Ejemplo"
-                    example: "Tira los dados de Gusanitos"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                      opciones is 1, 2, 3, 4, 5, gusanito
-                      repeat ... ... print 'haz tirado un ' opciones at random
               start_code: "print 'Qué salió esta vez?'"
     rock:
         name: "Piedra, papel o tijera"
@@ -592,15 +409,6 @@ adventures:
                 ## Avance
                 Sólamente repetir la opción elegida es bastante aburrido, pero en los próximos niveles podremos hacer mucho más.
 
-            story_commands:
-                -
-                    name: "Ejemplo"
-                    example: "Elige piedra, papel o tijera"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                        print Qué eliges?
-                        ask elige piedra, papel o tijera
-                        echo has elegido:
             start_code: "print Bienvenide a tu propio piedra, papel o tijera!"
           2:
             story_text: |
@@ -629,15 +437,6 @@ adventures:
 
                 Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `yo elijo una de las [piedra, papel, tijera]`. Pero ahora puedes resolver este problema en el nivel 3.
 
-            story_commands:
-                -
-                    name: "Ejemplo"
-                    example: "Elige piedra, papel o tijera"
-                    explanation: "Programa de ejemplo"
-                    demo_code: |
-                        opciones is piedra, papel, tijera
-                        print la computadora ha elegido: opciones at random
-
             start_code: "print Bienvenide a tu propio piedra, papel o tijera!"
           3:
             story_text: |
@@ -650,14 +449,6 @@ adventures:
                 opciones is piedra, papel, tijera
                 print ... La computadora ha elegido: ... ... at ...
                 ```
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Elige piedra, papel o tijera"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-                      opciones is piedra, papel, tijera
-                      print ...
-                      print opciones at random
             start_code: "print 'Bienvenide a tu propio piedra, papel o tijera!'"
           4:
             story_text: |
@@ -687,18 +478,6 @@ adventures:
                 Ahora has terminado de escribir tu juego de piedra, papel y tijera! No es tan simple escribir todas las posibles opciones, no crees?
                 Podremos hacer eso más fácil en los siguientes niveles.
 
-            story_commands:
-                - name: "Ejemplo"
-                  example: "Elige piedra, papel o tijera"
-                  explanation: "Programa de ejemplo"
-                  demo_code: |
-                        opciones is piedra, papel, tijera
-                        opcióncomputadora is ...
-                        opción is ask Que eliges?
-                        print 'Has elegido' ...
-                        print 'La computadora ha elegido' ...
-                        if ... is ... print 'empate!' else print 'no hay empate'
-                        if opción is piedra and opcióncomputadora is papel print 'la computadora gana'
             start_code: "print 'Bienvenide a tu propio piedra, papel o tijera!'"
     calculator:
         name: "Calculadora"
@@ -734,15 +513,4 @@ adventures:
                 respuesta is ask Sabes la respuesta?
                 if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                 ```
-
-              story_commands:
-                  -
-                      name: "Ejemplo"
-                      example: "Calculadora"
-                      explanation: "Programa de ejemplo"
-                      demo_code: |
-                          respuestacorrecta is 11 * 27
-                          print 'Cuánto es 11 veces 27?'
-                          respuesta is ask Sabes la respuesta?
-                          if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
               start_code: "print Bienvenide a tu propia calculadora!"
