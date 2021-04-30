@@ -1,4 +1,3 @@
-# Note that the story_commands are not in use at this point!
 ---
 title: "Hedy avonturen!"
 subtitle: "Met Hedy kan je van alles maken! Bijvoorbeeld een interactief verhaal, een spel of een app om het leven makkelijker te maken"
@@ -34,16 +33,6 @@ adventures:
 
 
               start_code: "print Hier begint jouw verhaal"
-              story_commands:
-                    - name: "Voorbeeld"
-                      example: "Maak bijvoorbeeld een spannend spookverhaal"
-                      explanation: "Voorbeeld verhaal"
-                      demo_code: |
-                          ask De hoofdpersoon van dit verhaal is
-                          print De hoofdpersoon loopt in een bos
-                          echo Hij is wel een beetje bang die
-                          print Overal hoort hij gekke geluiden
-                          print Hij is bang dat dit een spookbos is
           2:
               story_text: |
                 ## Verhaal in Level 2
@@ -80,29 +69,6 @@ adventures:
                 Dat werkt niet goed! Dan krijg je: mijn Henk is Henk. Dat kun je in Level 3 oplossen.
 
               start_code: "print Hier komt straks jouw verhaal!"
-              story_commands:
-                  -
-                      name: "Voorbeeld met ask"
-                      example: "Maak een spannend spookverhaal waarin je de naam van de hoofdpersoon kan kiezen"
-                      explanation: "Voorbeeld verhaal met ask"
-                      demo_code: |
-                          naam is ask Hoe heet de hoofdpersoon?
-                          print naam gaat nu in het bos lopen
-                          print naam is wel een beetje bang
-                          print Overal hoort hij gekke geluiden
-                          print naam is bang dat dit een spookbos is
-                  -
-                      name: "Voorbeeld met random"
-                      example: "Maak een spannend spookverhaal met een willekeurig dier"
-
-                      explanation: "Voorbeeld verhaal met random"
-                      demo_code: |
-                          naam is Hans
-                          print naam gaat nu in het bos lopen
-                          print naam is wel een beetje bang
-                          dieren is uil, egel, gordeldier
-                          print Hij hoort het geluid van een dieren at random
-                          print naam is bang dat dit een spookbos is
           3:
               story_text: |
                 ## Verhaal in Level 3
@@ -126,34 +92,6 @@ adventures:
                 ```
 
               start_code: "print Hier komt straks jouw verhaal!"
-              story_commands:
-                  -
-                      name: "Simpel voorbeeld"
-                      example: "Maak een spannend spookverhaal"
-                      explanation: "Voorbeeld verhaal"
-                      demo_code: |
-                          naam is Henk
-                          print naam ' gaat nu in het bos lopen'
-                          print naam ' is bang dat dit een spookbos is'
-                  -
-                      name: "Voorbeeld met ask"
-                      example: "Maak een spannend spookverhaal"
-                      explanation: "Voorbeeld verhaal met ask"
-                      demo_code: |
-                          naam is ask Wie is de hoofdpersoon?
-                          print naam ' gaat nu in het bos lopen'
-                          print naam ' is bang dat dit een spookbos is'
-                  -
-                      name: "Voorbeeld met random"
-                      example: "Maak een spannend spookverhaal met een willekeurig dier"
-                      explanation: "Voorbeeld verhaal met random"
-                      demo_code: |
-                          naam is Hans
-                          print naam 'gaat nu in het bos lopen'
-                          print naam 'is wel een beetje bang'
-                          dieren is uil, egel, gordeldier
-                          print 'Hij hoort het geluid van een ' dieren at random
-                          print naam ' is bang dat dit een spookbos is'
           4:
               story_text: |
                 ## Verhaal in Level 4
@@ -179,26 +117,6 @@ adventures:
                 ```
 
               start_code: "print Hier komt straks jouw verhaal!"
-              story_commands:
-                  -
-                      name: "Voorbeeld met if"
-                      example: "Maak een verhaal met twee eindes"
-                      explanation: "Voorbeeld verhaal"
-                      demo_code: |
-                          print 'De prinses loopt door het bos'
-                          print 'Ze komt een monster tegen'
-                          einde is ask Wil je een goed of slecht einde?
-                          if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else print 'Het monster eet de prinses op'
-                  -
-                      name: "Voorbeeld met ask en if"
-                      example: "Maak een spannend verhaal met twee eindes en ask"
-                      explanation: "Voorbeeld verhaal met ask"
-                      demo_code: |
-                          naam is ask Wie loopt er in het bos?
-                          print naam ' loopt door het bos'
-                          print naam ' komt een monster tegen'
-                          einde is ask Wil je een goed of slecht einde?
-                          if einde is goed print naam ' pakt het zwaard en het monster rent snel weg' else print 'Het monster eet ' naam ' op'
           5:
               story_text: |
                 ## Verhaal in Level 5
@@ -213,15 +131,6 @@ adventures:
                 ```
 
               start_code: "repeat 5 times print 'Help!'"
-              story_commands:
-                  -
-                      name: "Voorbeeld met repeat"
-                      example: "Maak een verhaal met herhaling"
-                      explanation: "Voorbeeld verhaal"
-                      demo_code: |
-                          print 'De prins riep steeds om hulp'
-                          repeat 5 times print 'Help!'
-                          print 'Waarom helpt niemand me nou toch?'
     songs:
       name: "Zing een liedje!"
       image: "songs.png"
@@ -246,15 +155,6 @@ adventures:
             ```
 
             Na Baby Shark kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met herhaling erin.
-
-
-          story_commands:
-            - name: "Voorbeeld"
-              example: "Zing Baby Shark"
-              explanation: "Voorbeeldcode"
-              demo_code: |
-                repeat ... ... print 'Baby Shark tututudutudu'
-                print 'Baby Shark'
           start_code: "print Wie doet de afwas?"
         6:
           story_text: |
@@ -285,14 +185,6 @@ adventures:
             * `repeat 3 times print 'Baby Shark Tutududududu'`
 
             Maar zoals je in deze les ziet, wil je soms meerdere regels samen herhalen. Dat kan met knippen en plakken, maar dat is wel veel werk. In level 7 leer je hoe je dat makkelijker kan doen.
-
-          story_commands:
-            - name: "Voorbeeld"
-              example: "Zing Baby Shark"
-              explanation: "Voorbeeldcode"
-              demo_code: |
-                repeat ... ... print 'Baby Shark tututudutudu'
-                print 'Baby Shark'
           start_code: "print 'Baby shark'"
     dishes:
         name: "Wie doet de afwas?"
@@ -321,14 +213,6 @@ adventures:
 
                 Dat werkt niet goed! Dan krijg je: ik koos uit [papa, mama, Emma, Sophie]. Dat kun je in Level 3 oplossen.
 
-
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Bepaal wie de afwas doet vandaag"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      mensen is mama, papa, Emma, Sophie
-                      print ... at ...
               start_code: "print Wie doet de afwas?"
           3:
               story_text: |
@@ -345,12 +229,6 @@ adventures:
                 print ... de afwas wordt gedaan door ...
                 print mensen at ...
                 ```
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Bepaal wie de afwas doet vandaag"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-
               start_code: "print 'Wie doet de afwas?'"
           4:
               story_text: |
@@ -366,15 +244,6 @@ adventures:
                 afwasser is mensen at random
                 if afwasser is Sophie print ... chips ik moet de afwas doen ... else print ' gelukkig geen afwas want ' ... 'wast al af'
                 ```
-
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Bepaal wie de afwas doet vandaag"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                        mensen is mama, papa, Emma, Sophie
-                        afwasser is mensen at random
-                        if afwasser is Sophie print chips ik moet de afwas doen else print 'gelukkig geen afwas want ' ... 'wast al af'
               start_code: "print 'Wie doet de afwas?'"
           5:
               story_text: |
@@ -386,13 +255,6 @@ adventures:
                 mensen is mama, papa, Emma, Sophie
                 repeat ... ... print 'de afwasser is ' ...
                 ```
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Bepaal wie de afwas doet vandaag"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      mensen is mama, papa, Emma, Sophie
-                      repeat ... ... print 'de afwasser is ' ...
               start_code: "print 'Wie doet de afwas?'"
           6:
               story_text: |
@@ -415,13 +277,6 @@ adventures:
                 ## Vooruitblik
                 Nu moet je wel een hoop knippen en plakken he? Dat gaan we in level 7 beter doen.
                 Dit level is het einde van het afwas-avontuur! Maar er zijn nog veel avonturen te maken in andere levels, zoals een rekenmachine, een interactief verhaal en een ingewikkelder spel.
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Bepaal wie de afwas doet vandaag"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      mensen is mama, papa, Emma, Sophie
-                      repeat ... ... print 'de afwasser is ' ...
               start_code: "print 'Wie doet de afwas?'"
     dice:
         name: "Maak dobbelsteen na"
@@ -470,14 +325,6 @@ adventures:
 
                 Dat werkt niet goed! Dan krijg je: ik koos uit de [1, 2, 3, 4, 5, regenworm]. Dat kun je in Level 3 oplossen.
 
-
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Rol de dobbelsteen uit regenwormen"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      keuzes is 1, 2, 3, 4, 5, regenworm
-                      print keuzes at random
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           3:
               story_text: |
@@ -490,13 +337,7 @@ adventures:
                 print ... jij gooide ...
                 print ... ... ... <- hier moet je het kiezen programmeren
                 ```
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Rol de dobbelsteen uit regenwormen"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                          keuzes is 1, 2, 3, 4, 5, regenworm
-                          print 'je hebt ' ... gegooid
+
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           4:
               story_text: |
@@ -514,17 +355,6 @@ adventures:
                 print 'je hebt ' ... ' gegooid'
                 if ... is regenworm print 'Je mag stoppen met gooien.' ... print 'Je moet nog een keer hoor!'
                 ```
-
-
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Rol de dobbelsteen uit regenwormen"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      keuzes is 1, 2, 3, 4, 5, regenworm
-                      worp is ...
-                      print 'je hebt ' ... ' gegooid'
-                      if ... is regenworm print 'Je mag stoppen met gooien.' ... print 'Je moet nog een keer hoor!'
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           5:
               story_text: |
@@ -539,14 +369,6 @@ adventures:
                 keuzes is 1, 2, 3, 4, 5, regenworm
                 repeat ... ... print ___
                 ```
-
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Rol de dobbelsteen uit regenwormen"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      keuzes is 1, 2, 3, 4, 5, regenworm
-                      repeat ... ... print 'je hebt ' keuzes at random ' gegooid'
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
           6:
               story_text: |
@@ -569,13 +391,6 @@ adventures:
                 ## Vooruitblik
 
                 Is het gelukt met de codes? Nu moet je wel veel knippen en plakken he? Dat gaan we in level 7 makkelijker maken!
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Rol de dobbelsteen uit regenwormen"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                      keuzes is 1, 2, 3, 4, 5, regenworm
-                      repeat ... ... print 'je hebt ' keuzes at random ' gegooid'
               start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
     rock:
         name: "Steen, schaar, papier"
@@ -600,15 +415,6 @@ adventures:
                 ## Vooruitblik
                 Alleen herhalen is natuurlijk wel een beetje saai want de computer kiest niks. Dat gaan we later zelf maken.
 
-              story_commands:
-                  -
-                      name: "Voorbeeld"
-                      example: "Kies uit steen schaar of papier"
-                      explanation: "Voorbeeldcode"
-                      demo_code: |
-                          print wat kies jij?
-                          ask kies uit steen, schaar of papier
-                          echo dus jouw keuze was:
               start_code: "print Welkom bij jouw eigen steen schaar papier!"
           2:
               story_text: |
@@ -637,15 +443,6 @@ adventures:
 
                 Dat werkt niet goed! Dan krijg je: ik koos uit de [steen, schaar, papier]. Dat kun je in Level 3 oplossen.
 
-              story_commands:
-                  -
-                      name: "Voorbeeld"
-                      example: "Kies uit steen schaar of papier"
-                      explanation: "Voorbeeldcode"
-                      demo_code: |
-                          keuzes is steen, schaar, papier
-                          print de computer koos: keuzes at random
-
               start_code: "print Welkom bij jouw eigen steen schaar papier!"
           3:
               story_text: |
@@ -658,14 +455,6 @@ adventures:
                 keuzes is steen, schaar, papier
                 print ... De computer koos: ... ... at ...
                 ```
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Kies uit steen schaar of papier"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                        keuzes is steen, schaar, papier
-                        print ....
-                        print keuzes at random
               start_code: "print 'Welkom bij jouw eigen steen schaar papier!'"
           4:
               story_text: |
@@ -695,18 +484,6 @@ adventures:
                 Nu heb jij je eigen steen schaar papier af! Het is nog wel een beetje ingewikkeld met al die verschillende opties he?
                 Dat gaan we in een later level nog iets makkelijker maken.
 
-              story_commands:
-                  - name: "Voorbeeld"
-                    example: "Kies uit steen schaar of papier"
-                    explanation: "Voorbeeldcode"
-                    demo_code: |
-                          opties is steen, schaar, papier
-                          computerkeuze is ...
-                          keuze is ask Wat kies jij?
-                          print 'jij koos' ...
-                          print 'computer koos' ...
-                          if ... is ... print 'gelijkspel!' else print 'geen gelijkspel'
-                          if keuze is steen and computerkeuze is papier print 'computer wint'
               start_code: "print 'Welkom bij jouw eigen steen schaar papier!'"
     calculator:
         name: "Rekenmachine"
@@ -742,15 +519,6 @@ adventures:
                 antwoord is ask Weet jij het antwoord?
                 if antwoord is goede_antwoord print 'goedzo' else print 'foutje! het was ' goede_antwoord
 
-              story_commands:
-                  -
-                      name: "Voorbeeld"
-                      example: "Rekenmachine"
-                      explanation: "Voorbeeldcode"
-                      demo_code: |
-                          print wat kies jij?
-                          ask kies uit steen, schaar of papier
-                          echo dus jouw keuze was:
               start_code: "print Welkom bij jouw eigen steen schaar papier!"
 
 
