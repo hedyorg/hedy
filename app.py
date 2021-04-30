@@ -174,7 +174,7 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            result = hedy.transpile(code, level)
+            result = hedy.transpile(code, level, lang)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -541,7 +541,7 @@ def save_program (user):
     error = None
     try:
         hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
-        result = hedy.transpile(body ['code'], body ['level'])
+        result = hedy.transpile(body ['code'], body ['level'], requested_lang())
     except hedy.HedyException as E:
         error_template = hedy_errors[E.error_code]
         error = error_template.format(**E.arguments)

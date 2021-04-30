@@ -49,7 +49,7 @@ def main():
         if not line.startswith('#')])
 
     try:
-        hedy.execute(program, level)
+        hedy.execute(program, level, lang="en")
     except hedy.HedyException as e:
         sys.stderr.write('An error occurred: %s\n' % e.error_code)
         sys.stderr.write('Error attributes:\n')

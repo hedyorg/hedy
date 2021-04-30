@@ -170,10 +170,10 @@ class AllAssignmentCommands(Transformer):
     def input(self,args):
         return args[0].children
 
-def create_parser(level):
-    with open(f"grammars/level{str(level)}.lark", "r", encoding="utf-8") as file:
-        grammar = file.read()
-    return Lark(grammar)
+# def create_parser(level):
+#     with open(f"grammars/en/level{str(level)}.lark", "r", encoding="utf-8") as file:
+#         grammar = file.read()
+#     return Lark(grammar)
 
 def all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
@@ -548,14 +548,15 @@ class ConvertToPython_7(ConvertToPython_6):
 
         return "\nelse:\n" + "\n".join(all_lines)
 
-    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+
+    def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
             value = args[1]
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
-                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
+                if "'" in value or 'random.choice' in value: #TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
                     return parameter + " = '" + value + "'"
@@ -741,16 +742,19 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
-def create_grammar(level):
+def create_grammar(level, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
-        return file.read()
-
-
-def transpile(input_string, level):
     try:
-        return transpile_inner(input_string, level)
+        with open(path.join(script_dir, "grammars", lang, "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
+            return file.read()
+    except Exception:
+        with open(path.join(script_dir, "grammars", "en", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
+            return file.read()
+
+def transpile(input_string, level, lang="en"):
+    try:
+        return transpile_inner(input_string, level, lang)
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
@@ -760,7 +764,7 @@ def transpile(input_string, level):
             if level > 1:
                 try:
                     new_level = level - 1
-                    result = transpile_inner(input_string, new_level)
+                    result = transpile_inner(input_string, new_level, lang)
                 except (LarkError, HedyException) as innerE:
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
@@ -860,10 +864,10 @@ def preprocess_blocks(code):
     return "\n".join(processed_code)
 
 
-def transpile_inner(input_string, level):
+def transpile_inner(input_string, level, lang):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = Lark(create_grammar(level))
+    parser = Lark(create_grammar(level, lang))
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
@@ -893,7 +897,7 @@ def transpile_inner(input_string, level):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                result = transpile_inner(fixed_code, level, lang)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
         elif is_valid[1] == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
@@ -959,8 +963,8 @@ def transpile_inner(input_string, level):
     else:
         raise Exception('Levels over 7 are not implemented yet')
 
-def execute(input_string, level):
-    python = transpile(input_string, level)
+def execute(input_string, level, lang):
+    python = transpile(input_string, level, lang)
     exec(python)
 
 # f = open('output.py', 'w+')

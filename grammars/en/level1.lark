@@ -1,0 +1,20 @@
+start: program
+program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+command: "print" (" " text)? -> print
+         | "ask" (" " text)? -> ask
+         | "echo" (" " text)? -> echo
+         | " "+ text -> invalid_space
+         | textwithoutspaces text? -> invalid
+
+_EOL: "\r"?"\n"
+
+
+text: /([^\n]+)/ -> text //anything can be parsed except for a newline
+textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
+
+SPACE: " "
+
+%import common.LETTER   // imports from terminal library
+%import common.DIGIT   // imports from terminal library
+%import common.WS_INLINE   // imports from terminal library
+%import common.NEWLINE   // imports from terminal library
