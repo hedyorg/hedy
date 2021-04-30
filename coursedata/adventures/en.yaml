@@ -128,7 +128,56 @@ adventures:
                 ```
 
               start_code: "repeat 5 times print 'Help!'"
+    songs:
+      name: "Sing a song!"
+      image: "songs.png"
+      description: "Print a song"
+      levels:
+        5:
+          story_text: |
+            ## Songs in Level 5
+            Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
 
+            Baby Shark tututudutudu <br>
+            Baby Shark tututudutudu <br>
+            Baby Shark tututudutudu <br>
+            Baby Shark
+
+            You can make this song much shorter with a `repeat`! Can you finish the code?
+
+            ## Example Hedy code
+            ``
+            repeat ... ... print 'Baby Shark tututudutudu'
+            print 'Baby Shark'
+            ``
+
+            After Baby Shark you can of course also program other songs. There are many songs with repetition.
+          start_code: "print 'Baby Shark'"
+        6:
+          story_text: |
+            ## Songs in Level 6
+            Songs often contain a lot of repetition. Sometimes the repetition is also based counting.
+            For example in the well-known song 'bottles of beer'. You can program that song with a little math.
+
+            ## Example Hedy code
+            ```
+            verse is 99
+            print verse ' bottles of beer on the wall'
+            print verse ' bottles of beer'
+            print 'Take one down, pass it around'
+            verse is verse - 1
+            print verse ' bottles of beer on the wall'
+            ```
+
+            You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+
+            # Looking ahead
+            In Level 5 we learned to repeat 1 line with `repeat`, like this:
+
+            * repeat 3 times print 'Baby Shark Tutududududu'
+
+            But as you will see in this lesson, sometimes you want to repeat several lines together. This can be done with cutting and pasting, but that is a lot of work. In level 7 you will learn how to do that more easily.
+          start_code: "print 'Baby shark'"
     rock:
         name: "Rock, paper, scissors"
         description: "Develop your version of the classic game"
