@@ -348,7 +348,7 @@ def adventure_page(adventure_name, level):
                 return redirect(request.url.replace ('/' + adventure_name, '/' + adventure_name + '/' + str (desired_level)), code=302)
         # If user is not logged in, or has no saved programs for this adventure, default to the lowest level available for the adventure
         if desired_level == 0:
-            for key in adventure.keys ():
+            for key in adventure ['levels'].keys ():
                 if type_check (key, 'int') and (desired_level == 0 or desired_level > key):
                     desired_level = key
         level = desired_level
@@ -361,7 +361,7 @@ def adventure_page(adventure_name, level):
                 loaded_program = program ['code']
 
     # If requested level is not in adventure, return 404
-    if not level in adventure:
+    if not level in adventure ['levels']:
         abort(404)
 
     return hedyweb.render_adventure(

@@ -69,8 +69,8 @@ def render_adventure(adventure_name, adventure, course, request, lang, level_num
   arguments_dict['lang'] = lang
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['level'] = level_number
-  arguments_dict['prev_level'] = level_number - 1 if level_number - 1 in adventure else None
-  arguments_dict['next_level'] = level_number + 1 if level_number + 1 in adventure else None
+  arguments_dict['prev_level'] = level_number - 1 if level_number - 1 in adventure ['levels'] else None
+  arguments_dict['next_level'] = level_number + 1 if level_number + 1 in adventure ['levels'] else None
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
@@ -85,7 +85,7 @@ def render_adventure(adventure_name, adventure, course, request, lang, level_num
   arguments_dict.update(**translations.get_translations(lang, 'ui'))
 
   # Actual assignment
-  for key, value in adventure [level_number].items ():
+  for key, value in adventure ['levels'] [level_number].items ():
     arguments_dict [key] = value
 
   if not 'story_text' in arguments_dict:
