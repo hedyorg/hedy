@@ -479,3 +479,39 @@ adventures:
                 We will make that a bit easier in a later level.
 
               start_code: "print 'Welcome to your own rock scissors paper!'"
+    calculator:
+        name: "Calculator"
+        description: "Create a calculator"
+        image: "calculator.png"
+        levels:
+          6:
+              story_text: |
+                ## Calculator
+                Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
+
+                ## Example Hedy code
+                ```
+                correct_answer is 11 * 27
+                print 'How much is 11 times 27?'
+                answer is ask Do you know the answer?
+                if answer is correct_answer print 'good job!' else print 'Wrong! It was ' correct_answer
+                ```
+
+                ## Random numbers
+                You can also let the computer do random sums of its own using random.
+
+                This is how you choose a number of tables to practice, and from that you always get a different sum:
+
+                ## Example Hedy code
+                ```
+                tables is 4, 5, 6, 8
+                numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                table is tables at random
+                number is numbers at random
+                correct_answer is table * number
+                print 'how much is ' table ' times ' number '?'
+                answer is ask Do you know the answer?
+                if answer is correct_answer print 'okay' else print 'mistake! it was ' correct_answer
+                ```
+
+              start_code: "print Welcome to this calculator!"
