@@ -42,7 +42,8 @@ ALL_LANGUAGES = {
     'pt_br': 'Português',
     'de': 'Deutsch',
     'it': 'Italiano',
-    'hu': 'Magyarok'
+    'hu': 'Magyarok',
+    'el': 'Ελληνικά'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
