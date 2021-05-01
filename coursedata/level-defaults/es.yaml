@@ -1,6 +1,15 @@
 ---
   1:
-    intro_text: "¡Bienvenido a Hedy! En el Nivel 1 puedes usar los comandos `print`,` ask` y `echo`. ¡Presione el botón azul y el código será escrito por ti! Prueba el código tu mismo con el botón verde 'Ejecutar el código' debajo del campo de programación de la izquierda."
+    intro_text: |
+      ¡Bienvenido a Hedy! En el Nivel 1 puedes usar los comandos `print`,` ask` y `echo`.
+
+      En el lado izquierdo de su pantalla están todos los comandos del Nivel 1.
+
+      ¡Presione el botón azul y el código será escrito por ti!
+
+      Prueba el código tu mismo con el botón verde 'Ejecutar el código' debajo del campo de programación de la izquierda.
+
+      ¿No sabes qué crear? En las siguientes pestañas encontrará algunas ideas sobre qué construir.
     start_code: "print hola mundo!"
     commands:
       -
@@ -19,7 +28,22 @@
         example: "Ejemplo: echo entonces su color favorito es..."
         demo_code: "`ask` ¿Cuál es tu color favorito?\necho entonces su color favorito es..."
   2:
-    intro_text: "Print aún funcionan como en el nivel 1, pero ¡Cuidado! Ask ha cambiado y ahora necesita un nombre. Echo no necesitas usarlo por ahora. Ahora también puede usar estos nuevos comandos:"
+    intro_text: |
+      En el nivel 2 aprendemos algo nuevo. Puede nombrar una palabra con "es".
+
+      Si pones el código `name is Hedy` en la parte superior de tu programa, puedes usar name en todas partes. Eso luego será reemplazado por Hedy.
+
+      El `ask` ha cambiado en el nivel 2, también guarda la respuesta con un nombre:
+
+      ```
+      la respuesta es ¿Cuál es tu nombre?
+      ```
+
+      La impresión sigue funcionando como en el nivel 1 y ya no necesita un ultrasonido.
+
+      En el nivel 2 también puedes hacer una lista. Luego puede elegir cualquier cosa de la lista. Lo haces con 'al azar' (dices: et ren-dom).
+
+      Encontrarás todos los códigos del nivel 2 en la barra izquierda. También hay pestañas con asignaciones.
     start_code: "print hola mundo!"
     commands:
       -
@@ -38,7 +62,18 @@
         example: "Ejemplo: animales is perro, gato, canguro"
         demo_code: "animales is perro, gato, canguro\nprint animales at random"
   3:
-    intro_text: "`ask` sigue siendo el mismo en el nivel 3, pero `print` es diferente ahora. Debes colocar el texto que deseas imprimir entre comillas."
+    intro_text: |
+        `ask` funciona igual en el nivel 3 que en el nivel 2, pero` print` es diferente ahora.
+
+        Debe poner el texto que desea imprimir entre comillas.
+
+        Esto es útil, porque ahora puede imprimir todas las palabras que desee. También las palabras que usaste para almacenar algo con `is`.
+
+        La mayoría de los lenguajes de programación también utilizan comillas al imprimir, por lo que también nos estamos acercando un paso más a la programación real.
+
+        ## Las asignaciones son cada vez más difíciles
+        Encontrará nuevamente los comandos a la izquierda y las asignaciones en las siguientes pestañas. Las asignaciones son ahora cada vez más difíciles en las sucesivas pestañas.
+        Así que lo mejor es empezar por la izquierda con la historia y trabajar por la derecha para que los desafíos sean cada vez mayores.
     start_code: "print 'Hola mundo'"
     commands:
       -
@@ -58,7 +93,22 @@
         demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
   4:
     start_code: "nombre is ask ¿Cómo te llamas?\nif nombre is Hedy print 'divertido' else print 'menos divertido!'"
-    intro_text: "`ask` y `print` funcionan como en el nivel 3, pero ¡En el nivel 4 hay algo nuevo: `if`!"
+    intro_text: |
+      `ask` e` print` siguen funcionando como en el nivel 3.
+
+       En el nivel 4 hay algo nuevo, el `if`! Si es inglés para si. Con el `if` puede elegir entre dos opciones diferentes.
+
+       ## Ejemplo de código Hedy
+       ```
+       nombre is pregunta ¿cuál es tu nombre?
+       is nombre is Hedy print 'bien' else print '¡menos agradable!'
+       ```
+
+       Este código se imprime bien si ingresa Hedy como nombre, y menos agradable si ingresa algo más.
+
+       ## Las asignaciones son cada vez más difíciles
+
+       También en el nivel 4, las asignaciones en las pestañas se vuelven cada vez más difíciles. Así que hazlos de izquierda a derecha.
     commands:
       -
         name: "print"
@@ -77,7 +127,14 @@
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde print 'bonito!' else print 'no es tan bonito'"
   5:
     start_code: "repeat 3 times print 'Hedy es divertido!'"
-    intro_text: "`ask`, `print` y `if` funcionan como en el nivel 4. Pero en el nivel 5 hay algo nuevo: `repeat`. Con `repeat` puedes repetir códigos varias veces."
+    intro_text: |
+      `ask`, `print` y `if` funcionan como en el nivel 4.
+      Pero en el nivel 5 hay algo nuevo: `repeat`.
+      Con `repeat` puedes repetir códigos varias veces.
+      ## Ejemplo de código Hedy
+      ```
+      repeat 3 times print 'Hedy es divertido!'
+      ```
     commands:
       -
         name: "print"
@@ -101,7 +158,22 @@
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
   6:
     start_code: "print '5 veces 5 es ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` y `repeat` siguen funcionando igual que en los niveles 4 y 5. En el nivel 6 tenemos algo nuevo! ... Ahora puedes usar las operaciones."
+    intro_text: |
+      `ask`,` print`, `if` y` repeat` siguen funcionando como en los niveles 4 y 5.
+       Pero en el nivel 6 hay algo nuevo, ahora también puedes calcular.
+
+       En el nivel 6 se agregan nuevos códigos, ahora puede comenzar a calcular en su código.
+
+       El plus es fácil, lo escribes como con las matemáticas: `5 + 5` por ejemplo. El signo menos también funciona bien, que es `5 - 5`.
+
+       Los tiempos son un poco diferentes, porque no hay tiempos en su teclado. ¡Solo busca, realmente no lo hay!
+       Es por eso que hacemos los tiempos con el asterisco arriba de 8: `5 * 5`. Lea eso como 5 veces 5, entonces lo recordará más fácilmente.
+       ## Ejemplo de código Hedy
+       ```
+       print '5 más 5 es ' 5 + 5
+       print '5 menos 5 es ' 5 - 5
+       print '5 veces 5 es ' 5 * 5
+       ```
     commands:
       -
         name: "print"
@@ -111,7 +183,6 @@
       -
         name: "ask e if con operaciones"
         explanation: "Pregunta por una operación y comprueba que es correcta."
-        explanation: "Ask for a calculation and compare with `if`. Beware: Print still needs quotation marks."
         example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
         demo_code: "resultado is ask ¿Cuánto es 10 más 10?\nif resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'"
       -
@@ -121,11 +192,34 @@
         demo_code: "producto is ask Cuanto es 10 veces 5?\nif producto is 50 repeat 3 times print 'correcto!' else repeat 5 times print 'incorrecto!'"
   7:
     start_code: "repeat 5 times\n    print 'Hola amigos'\n    print 'Esto se va a mostrar 5 veces'"
-    intro_text: "ask y print sigue funcionando como ya sabes. Pero if y repeat han cambiado! Ahora puedes ejecutar grupos de código, pero vas a tener que respetar el sangrado. Esto signfica que es necesario poner 4 espacios al principio de la línea. Esto también se aplica cuando solo deseas crear un bloque de una línea. Si combinas repeat e if, vas a tener que respetar el sangrado. Vamós a mirar el ejemplo para entenderlo mejor!"
+    intro_text: |
+      ask y print sigue funcionando como ya sabes. Pero if y repeat han cambiado!
+      Ahora puedes ejecutar grupos de código, pero vas a tener que respetar el sangrado.
+      Esto signfica que es necesario poner 4 espacios al principio de la línea.
+      Esto también se aplica cuando solo deseas crear un bloque de una línea.
+
+      ## Ejemplo de código Hedy
+      ```
+      repeat 5 times
+          print 'Hola amigos'
+          print 'Esto se va a mostrar 5 veces'
+      ```
+
+      Si combinas `repeat` e `if`, vas a tener que respetar el sangrado. Vamós a mirar el ejemplo para entenderlo mejor!"
+      ## Ejemplo de código Hedy
+      ```
+      color is ask ¿Cuá es tu color favorito?
+      if color is verde
+          repeat 3 times
+              print '¡Qué bonito!'
+      else
+          repeat 5 times
+              print 'A mi me gusta otro'
+      ```
     commands:
       -
         name: "print"
-        explanation: "Muestra algo (`print`). Recuerda usar las comillas simples para mostrar el texto literal."
+        explanation: "Muestra algo `print`. Recuerda usar las comillas simples para mostrar el texto literal."
         example: "Ejemplo: print '5 veces 5 es ' 5 * 5"
         demo_code: "print '5 veces 5 es ' 5 * 5"
       -

@@ -1,0 +1,517 @@
+# Note that the story_commands are not in use at this point!
+# So they do not need to be translated to other languages neccessarily
+---
+title: "Hedy adventures!"
+subtitle: "You can learn Hedy by creating a story, a game or something to make your life easier"
+adventures:
+    story:
+        name: "A story"
+        description: "Make an interactive story"
+        image: "story.png"
+        levels:
+          1:
+              story_text: |
+                ## Make a story
+                In level 1 you can make a story with a different main character that you enter yourself.
+
+                As the first line, use this code:
+
+                `ask who is the protagonist of your story`
+
+                After that first line, start with `print` if the sentence needs to be printed.
+                You use `echo` if you want your main character to be at the end of the sentence.
+
+                ## Example Hedy code
+                ```
+                ask The main character of this story is ...
+                print The main character is now going to walk in the forest
+                echo He's a bit scared who ...
+                print He hears crazy noises everywhere
+                print He's afraid this is a haunted forest
+                ```
+
+                ## What's next?
+                It is a pity that you can now only make sentences in which the main character is at the end of the sentence right? After practicing with this story, continue to level 2 and then to level 3, where you can make more and more complicated programs.
+
+              start_code: "print Your story starts here"
+          2:
+              story_text: |
+                ## Story in level 2
+                In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+
+                You do have to program a little bit extra for that. You must now name your main character first.
+
+                You can then put that name anywhere in a sentence.
+
+                ## Example Hedy Code
+
+                ```
+                name is ask What is the name of the main character?
+                print name is now going to run in the woods
+                print name is a bit scared
+                print He hears crazy noises everywhere
+                print name is afraid this is a haunted forest
+                ```
+
+                ## Randomness
+                You can also add something random to your story. Any monster, animal or other obstacle.
+
+                It goes like this:
+                ```
+                animals is owl, hedgehog, armadillo
+                print He now hears the sound of an animal at random
+                ```
+
+                ## What's next?
+                Did you happen to try to make a sentence that contained the word name?
+                E.g. `print my name is name`. Give it a try if you haven't already.
+
+                That doet not work properly, it will print my Henk is Henk. You can solve that in level 3.
+              start_code: "print Your story"
+          3:
+              story_text: |
+                ## Story in level 3
+                You may have noticed that there is still a mistake in level 2.
+
+                Did you happen to try to make a sentence that contained the word name? E.g. `print my name is name`.
+
+                That didn't work well! Then you get: my Henk is Henk. You can solve that in level 3.
+
+                You must use quotation marks for everything that you are going to print.
+
+                ## Example Hedy code
+                ```
+                name is Hans
+                print 'The name of the main character is' name
+                print name 'is now going to walk in the woods'
+                print name 'is a bit scared'
+                animals is owl, hedgehog, armadillo
+                print 'He hears the sound of an' animals at random
+                print name 'is afraid this is a haunted forest'
+                ```
+              start_code: "print Your sotry will be printed here!"
+          4:
+              story_text: |
+                ## Story in level 4
+                What you can do in level 4 is make your story even more fun. In level 4 you can program different endings.
+
+                Think of two endings for your story, for example:
+
+                - The princess is walking through the forest
+                - She runs into a monster
+
+                - Happy ending: She takes her sword and the monster quickly runs away
+                - Bad Ending: The monster eats the princess
+
+                You can also ensure that a name can be entered again. That works just like in level 3. You can combine that with an `if`, and then you have already made a whole program!
+
+                ## Example Hedy code
+                ```
+                name is ask Who is walking in the forest?
+                print name 'walks through the forest'
+                print name 'encounter a monster'
+                end is ask Would you like a good or a bad ending?
+                if the end is good print name 'takes the sword and the monster quickly runs away' else print 'The monster eats' name
+                ```
+              start_code: "print Hier komt straks jouw verhaal!"
+          5:
+              story_text: |
+                ## Story in level 5
+                In story, someone says words several times. For example when someone calls for help or sings a song.
+                You can put such repetition in your story in level 5 with 'repeat'.
+
+                ## Example Hedy code
+                ```
+                print 'The prince kept calling for help'
+                repeat 5 times print 'Help!'
+                print 'Why isn't anyone helping me?'
+                ```
+
+              start_code: "repeat 5 times print 'Help!'"
+    songs:
+      name: "Sing a song!"
+      image: "songs.png"
+      description: "Print a song"
+      levels:
+        5:
+          story_text: |
+            ## Songs in level 5
+            Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+
+            Baby Shark tututudutudu <br>
+            Baby Shark tututudutudu <br>
+            Baby Shark tututudutudu <br>
+            Baby Shark
+
+            You can make this song much shorter with a `repeat`! Can you finish the code?
+
+            ## Example Hedy code
+            ```
+            repeat ... ... print 'Baby Shark tututudutudu'
+            print 'Baby Shark'
+            ```
+
+            After Baby Shark you can of course also program other songs. There are many songs with repetition.
+          start_code: "print 'Baby Shark'"
+        6:
+          story_text: |
+            ## Songs in level 6
+            Songs often contain a lot of repetition. Sometimes the repetition is also based counting.
+            For example in the well-known song 'bottles of beer'. You can program that song with a little math.
+
+            ## Example Hedy code
+            ```
+            verse is 99
+            print verse ' bottles of beer on the wall'
+            print verse ' bottles of beer'
+            print 'Take one down, pass it around'
+            verse is verse - 1
+            print verse ' bottles of beer on the wall'
+            ```
+
+            You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+
+            # Looking ahead
+            In level 5 we learned to repeat 1 line with `repeat`, like this:
+
+            * repeat 3 times print 'Baby Shark Tutududududu'
+
+            But as you will see in this lesson, sometimes you want to repeat several lines together. This can be done with cutting and pasting, but that is a lot of work. In level 7 you will learn how to do that more easily.
+          start_code: "print 'Baby shark'"
+    dishes:
+        name: "Who does the dishes?"
+        image: "dishes.png"
+        description: "Use the computer to see who does the dishes (Start at level 2)"
+        levels:
+          2:
+              story_text: |
+                ## Dishwashing program in level 2
+                Do you always disagree at home about who should wash the dishes or change the litter box today?
+
+                Then you can let the computer choose very fairly. You can program that in level 2!
+
+                You first make a list of the members of your family. Then choose 'at random' from the list.
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                print people at random
+                ```
+
+                ## What's next?
+                Did you happen to try to make a sentence that contained the word people?
+
+                E.g. `print I chose from these people`. Give it a try if you haven't already.
+
+                That is not working properly! Then you get: I chose from [daddy, mom, Emma, ​​Sophie]. You can solve that in level 3.
+
+              start_code: "print Who does the dishes?"
+          3:
+              story_text: |
+                ## Dishwashing program in level 3
+                With quotation marks you can make your dishwashing planning more beautiful.
+                This time the sample code is not quite complete.
+
+                Can you complete the code by entering the correct commands or characters on the dots?
+                Every three dots must be replaced with one command.
+
+                Tip: Don't forget the quotation marks!
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                print ... the dishes are done by ...
+                print people at ...
+                ```
+              start_code: "print 'Who does the dishes?'"
+          4:
+              story_text: |
+                ## Dishwashing program in level 4
+                With the `if` you can now make more fun with choice in the program. You can have your program respond to the choice that the computer has made.
+
+                Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
+                Don't forget the quotes!
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                dishwasher is people at random
+                if dishwasher is Sophie print ... too bad I have to do the dishes ... else print 'luckily no dishes because' ... 'is already washing up'
+                ```
+              start_code: "print 'Who does the dishes?'"
+          5:
+              story_text: |
+                ## Dishwashing program in level 5
+                With the `repeat` you can repeat pieces of code. You can use this to calculate who will be wahing dishes for the entire week.
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                repeat ... ... print 'the dishwasher is' ...
+                ```
+              start_code: "print 'Who does the dishes?'"
+          6:
+              story_text: |
+                ## Dishwashing program in level 6
+                How often is everyone going to do the dishes? Is that fair? You can count that in level 6.
+
+                ## Example Hedy code
+                ```
+                people is mom, dad, Emma, ​​Sophie
+                emma_washes is 0
+                dishwasher is people at random
+                print 'The dishwasher is' dishwasher
+                if dishwasher is Emma emma_washes is emma_washes + 1
+                print 'Emma will do the dishes this week' emma_washes 'times'
+                ```
+
+                Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
+                Do you make the code for the whole week?
+
+                ## What's next?
+                Now you have to copy and paste a lot, right? We will fix that in level 7.
+                This level is the end of the washing up adventure! But there are still many adventures to be made in other levels, such as a calculator, an interactive story and a more complicated game.
+              start_code: "print 'Who does the dishes?'"
+    dice:
+        name: "Make your own dice"
+        description: "Make your own dice"
+        image: "dice.png"
+        levels:
+          1:
+              story_text: |
+                ## Dice
+                In level 1 we make a start with our own die.
+
+                ## Example Hedy code
+                ```
+                ask Would you like to make a die?
+                echo You said:
+                ```
+
+                ## Looking forward
+                This code only repeats the player's answer. In the following levels, the computer will really make a choice.
+
+              start_code: "ask Would you like to make a die?"
+          2:
+              story_text: |
+                ## Dice in level 2
+                In level 2 we can choose from a list. With that we can let the computer choose one side of the die.
+
+                Take a look at the games you have in your closet at home.
+
+                Are there games with a (special) die? You can also copy it with this code.
+
+                For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
+
+                ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+
+                ## Example Hedy Code
+                ```
+                choices is 1, 2, 3, 4, 5, earthworm
+                print choices at random
+                ```
+
+                ## What's next?
+                Did you happen to try to make a sentence that included the word choices?
+
+                E.g. `print I chose from the choices`. Give it a try if you haven't already.
+
+                That is not working properly! Then you get: I chose from the [1, 2, 3, 4, 5, earthworm]. You can solve that in level 3.
+
+              start_code: "print What will the die indicate this time?"
+          3:
+              story_text: |
+                ## Dice in level 3
+                In level 3 we can make sentences with the die value in the sentence, with quotes of course.
+                This time the sample code is not quite complete. Can you finish the code?
+
+                ## Example Hedy code
+                ```
+                choices is 1, 2, 3, 4, 5, earthworm
+                print ... you threw ...
+                print ... ... ... <- here you have to program the dialing
+                ```
+
+              start_code: "print What will the die indicate this time?"
+          4:
+              story_text: |
+                ## Dice in level 4
+                You can also make a die again in level 4 using the `if`.
+                Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
+
+                But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something else.
+
+                ## Example Hedy code
+                ```
+                choices is 1, 2, 3, 4, 5, earthworm
+                throw is ...
+                print 'you have' ... 'thrown'
+                if ... is earthworm print 'You can stop throwing.' ... print 'You have to hear it again!'
+                ```
+              start_code: "print What will the die indicate this time?"
+          5:
+              story_text: |
+                ## Dice in level 5
+                You can also make a die again in level 5. With the `repeat` code you can easily roll a whole hand of dice.
+                Try to finish the sample code! The dashes should contain multiple commands and characters.
+
+                But maybe you want to make a completely different die. Of course you can!
+
+                ## Example Hedy code
+                ```
+                choices is 1, 2, 3, 4, 5, earthworm
+                repeat ... ... print ___
+                ```
+              start_code: "print What will the die indicate this time?"
+          6:
+              story_text: |
+                ## Dice in level 6
+                You can also make an earthworm die again in level 6, but now you can also calculate how many points have been rolled.
+
+                You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
+
+                This is the code to calculate points for one die:
+
+                ## Example Hedy code
+                ```
+                choices is 1, 2, 3, 4, 5, earthworm
+                points is 0
+                throw is choices at random
+                print 'you threw' throw
+                if throw is earthworm points is points + 5 else points is points + throw
+                print 'those are' points
+                ```
+                Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
+
+                ## Looking forward
+
+                Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+              start_code: "print What will the die indicate this time?"
+    rock:
+        name: "Rock, paper, scissors"
+        description: "Make your own rock, paper, scissors game"
+        image: "rock.png"
+        levels:
+          1:
+              story_text: |
+                ## Rock, paper, scissors
+                In level 1 you can start with a rock, paper, scissors  game.
+
+                With `ask` you can make a choice, and with` echo` you can repeat that choice.
+
+                ## Example Hedy code
+
+                ```
+                print what do you choose?
+                ask choose from rock, paper or scissors
+                echo so your choice was:
+                ```
+
+                ## What's next?
+                Just repeating is of course a bit boring because the computer does not choose anything. We will make that ourselves later.
+
+              start_code: "print Welcome to your own rock scissors paper!"
+          2:
+              story_text: |
+                ## Rock, paper, scissors
+
+                In level 2 we can enter lists and choose things from them.
+
+                You first make a list with `is`. Then you can let the computer choose something from the list with 'at random' (you say et ren-dom).
+
+                For example, you can let the computer pick from rock, paper and scissors.
+
+                ## Example Hedy code
+
+                ```
+                choices is rock, paper, scissors
+                print choices at random
+                ```
+
+                You can use the `ask` again in level 2. Can you print your choice and the choice from the computer?
+                Beware though, `ask` now works differently than in level 1. There must be a name in front of it.
+
+                ## Looking forward
+                Did you happen to try to make a sentence that included the word choices?
+
+                E.g. `print I chose from the choices`. Give it a try if you haven't already.
+
+                That is not working properly! Then you get: I chose from the [rock, paper, scissors]. You can solve that in level 3.
+
+              start_code: "print Welcome to your own rock scissors paper!"
+          3:
+              story_text: |
+                ## Rock, paper, scissors in level 3
+                In level 3 we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
+                Do you complete the code by entering the correct commands or characters on the dots?
+
+                ## Example Hedy code
+                ```
+                choices is rock, paper, scissors
+                print ... The computer chose: ... ... at ...
+                ```
+              start_code: "print 'Welcome to your own rock scissors paper!'"
+          4:
+              story_text: |
+                ## Rock, paper, scissors in level 4
+                In level 4 we can determine who won.
+                For that you need the new `if` code.
+
+                Save your choice with the name of choice and the choice of computer as computer choice.
+                Then you can use `if` to see if they are the same or different.
+                Will you finish the code?
+
+                ## Example Hedy code
+                ```
+                options is rock, paper, scissors
+                computer choice is ...
+                choice is ask What do you choose?
+                print 'you chose' ...
+                print 'computer chose' ...
+                if ... is ... print 'tie!' else print 'no tie'
+                if choice is stone and computer choice is paper print 'computer wins'
+                ```
+
+                First fill in the correct code on the dots to see if it is a draw.
+
+                Then copy the last line a few times and fill in all the different options correctly.
+
+                Now you have finished your own rock, paper, scissors! It's still a bit complicated with all those different options, isn't it?
+                We will make that a bit easier in a later level.
+
+              start_code: "print 'Welcome to your own rock scissors paper!'"
+    calculator:
+        name: "Calculator"
+        description: "Create a calculator"
+        image: "calculator.png"
+        levels:
+          6:
+              story_text: |
+                ## Calculator
+                Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
+
+                ## Example Hedy code
+                ```
+                correct_answer is 11 * 27
+                print 'How much is 11 times 27?'
+                answer is ask Do you know the answer?
+                if answer is correct_answer print 'good job!' else print 'Wrong! It was ' correct_answer
+                ```
+
+                ## Random numbers
+                You can also let the computer do random sums of its own using random.
+
+                This is how you choose a number of tables to practice, and from that you always get a different sum:
+
+                ## Example Hedy code
+                ```
+                tables is 4, 5, 6, 8
+                numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                table is tables at random
+                number is numbers at random
+                correct_answer is table * number
+                print 'how much is ' table ' times ' number '?'
+                answer is ask Do you know the answer?
+                if answer is correct_answer print 'okay' else print 'mistake! it was ' correct_answer
+                ```
+
+              start_code: "print Welcome to this calculator!"
