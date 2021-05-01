@@ -3,11 +3,7 @@ from config import config
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import os
-<<<<<<< HEAD
 from ruamel import yaml
-=======
-import yaml
->>>>>>> 9450fc1d3fe8867eea4009baec601ce5288de285
 
 def type_check (val, Type):
     if Type == 'dict':
@@ -43,7 +39,6 @@ def load_yaml (filename):
     except IOError:
         return {}
 
-<<<<<<< HEAD
 
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
@@ -58,8 +53,6 @@ def dump_yaml_rt(data):
     return yaml.round_trip_dump(data, indent=4)
 
 
-=======
->>>>>>> 9450fc1d3fe8867eea4009baec601ce5288de285
 # *** DYNAMO DB ***
 
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
