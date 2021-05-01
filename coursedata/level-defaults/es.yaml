@@ -158,7 +158,22 @@
         demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
   6:
     start_code: "print '5 veces 5 es ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` y `repeat` siguen funcionando igual que en los niveles 4 y 5. En el nivel 6 tenemos algo nuevo! ... Ahora puedes usar las operaciones."
+    intro_text: |
+      `ask`,` print`, `if` y` repeat` siguen funcionando como en los niveles 4 y 5.
+       Pero en el nivel 6 hay algo nuevo, ahora también puedes calcular.
+
+       En el nivel 6 se agregan nuevos códigos, ahora puede comenzar a calcular en su código.
+
+       El plus es fácil, lo escribes como con las matemáticas: `5 + 5` por ejemplo. El signo menos también funciona bien, que es `5 - 5`.
+
+       Los tiempos son un poco diferentes, porque no hay tiempos en su teclado. ¡Solo busca, realmente no lo hay!
+       Es por eso que hacemos los tiempos con el asterisco arriba de 8: `5 * 5`. Lea eso como 5 veces 5, entonces lo recordará más fácilmente.
+       ## Ejemplo de código Hedy
+       ```
+       print '5 más 5 es ' 5 + 5
+       print '5 menos 5 es ' 5 - 5
+       print '5 veces 5 es ' 5 * 5
+       ```
     commands:
       -
         name: "print"
@@ -168,7 +183,6 @@
       -
         name: "ask e if con operaciones"
         explanation: "Pregunta por una operación y comprueba que es correcta."
-        explanation: "Ask for a calculation and compare with `if`. Beware: Print still needs quotation marks."
         example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
         demo_code: "resultado is ask ¿Cuánto es 10 más 10?\nif resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'"
       -
