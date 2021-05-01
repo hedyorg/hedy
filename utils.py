@@ -3,6 +3,7 @@ from config import config
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import os
+from ruamel import yaml
 
 def type_check (val, Type):
     if Type == 'dict':
@@ -21,15 +22,36 @@ def type_check (val, Type):
         return type (val) == bool
 
 def object_check (obj, key, Type):
-  if not type_check (obj, 'dict') or not key in obj:
-     return False
-  return type_check (obj [key], Type)
+    if not type_check (obj, 'dict') or not key in obj:
+        return False
+    return type_check (obj [key], Type)
 
 def timems ():
     return int (round (time.time () * 1000))
 
 def times ():
     return int (round (time.time ()))
+
+def load_yaml (filename):
+    try:
+        with open (filename, 'r') as f:
+            return yaml.safe_load (f)
+    except IOError:
+        return {}
+
+
+def load_yaml_rt(filename):
+    """Load YAML with the round trip loader."""
+    try:
+        with open(filename, 'r') as f:
+            return yaml.round_trip_load(f, preserve_quotes=True)
+    except IOError:
+        return {}
+
+def dump_yaml_rt(data):
+    """Dump round-tripped YAML."""
+    return yaml.round_trip_dump(data, indent=4)
+
 
 # *** DYNAMO DB ***
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="/css/generated.css">
+    <link rel="stylesheet" href="/css/additional.css">
+    <link rel="shortcut icon" type="image/png" href="/images/Hedy-logo.png"/>
+    <style>
+      textarea { width: 100%; }
+      th { text-align: left; }
+      pre { font-family: sans-serif; }
+      td { vertical-align: top; }
+    </style>
+  </head>
+  <body class="p-4">
+    <h1>Translating '{{source_lang}}' to '{{target_lang}}'</h1>
+
+      {% for file in files %}
+        <form method="POST" action="/update_yaml">
+          <input type="hidden" name="file" value="{{file.file}}">
+        <h2>{{file.caption}}</h2>
+        <table class="w-full">
+          <tr>
+            <th></th>
+            <th>{{source_lang}}</th>
+            <th>{{target_lang}}</th>
+          </tr>
+        {% for string in file.strings %}
+          {% if string.is_header %}
+            <tr class="bg-purple-200">
+              <th></th>
+              <th colspan="2" class="py-2 px-4">{{ string.caption }}</th>
+            </tr>
+          {% else %}
+            <tr class="border-b">
+              <th style="max-width: 6em; overflow: hidden;">{{string.key}}</th>
+              <td><pre style="max-width: 40em;">{{ string.original }}</pre></td>
+              <td><textarea name="c:{{string.encoded_path}}" rows="2" class="border" style="width: 40em;">{{ string.translated }}</textarea></td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+        </table>
+        </form>
+      {% endfor %}
+    <div class="h-16"></div>
+    <div id="download-bar" class="inset-x-0 bottom-0 h-16 bg-green-700 fixed flex justify-center items-center text-white hidden">
+      <div>
+        Download translated files with changes. Create a GitHub PR with these.
+      </div>
+    </div>
+
+    <script src="/vendor/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/translating.js" type="text/javascript"></script>
+  </body>
+</html>

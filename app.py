@@ -16,21 +16,22 @@ from os import path
 import re
 import requests
 import uuid
-import yaml
+from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del
+from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
 import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response
+from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response, Response
 from flask_compress import Compress
 
 # Hedy-specific modules
 import courses
 import hedyweb
+import translating
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -579,6 +580,59 @@ def save_program (user):
     db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({})
+
+@app.route('/translate/<source>/<target>')
+def translate_fromto(source, target):
+    # FIXME: right now loading source file on demand. We might need to cache this...
+    source_adventures = load_yaml(f'coursedata/adventures/{source}.yaml')
+    source_levels = load_yaml(f'coursedata/level-defaults/{source}.yaml')
+    source_texts = load_yaml(f'coursedata/texts/{source}.yaml')
+
+    target_adventures = load_yaml(f'coursedata/adventures/{target}.yaml')
+    target_levels = load_yaml(f'coursedata/level-defaults/{target}.yaml')
+    target_texts = load_yaml(f'coursedata/texts/{target}.yaml')
+
+    files = []
+
+    files.append(translating.TranslatableFile(
+      'Adventures',
+      f'adventures/{target}.yaml',
+      translating.struct_to_sections(source_adventures, target_adventures)))
+
+    files.append(translating.TranslatableFile(
+      'Levels',
+      f'level-defaults/{target}.yaml',
+      translating.struct_to_sections(source_levels, target_levels)))
+
+    files.append(translating.TranslatableFile(
+      'Messages',
+      f'texts/{target}.yaml',
+      translating.struct_to_sections(source_texts, target_texts)))
+
+    return render_template('translate-fromto.html',
+        source_lang=source,
+        target_lang=target,
+        files=files)
+
+@app.route('/update_yaml', methods=['POST'])
+def update_yaml():
+    filename = path.join('coursedata', request.form['file'])
+    # The file MUST point to something inside our 'coursedata' directory
+    # (no exploiting bullshit here)
+    filepath = path.abspath(filename)
+    expected_path = path.abspath('coursedata')
+    if not filepath.startswith(expected_path):
+        raise RuntimeError('Are you trying to trick me?')
+
+    data = load_yaml_rt(filepath)
+    for key, value in request.form.items():
+        if key.startswith('c:'):
+            translating.apply_form_change(data, key[2:], value)
+
+    return Response(dump_yaml_rt(data),
+        mimetype='application/x-yaml',
+        headers={'Content-disposition': 'attachment; filename=' + path.basename(filename)})
+
 
 # *** AUTH ***
 
