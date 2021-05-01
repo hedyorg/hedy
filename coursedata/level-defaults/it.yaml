@@ -127,7 +127,14 @@
         demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde print 'carino!' else print 'mah'"
   5:
     start_code: "repeat 3 times print 'Hedy è divertente!'"
-    intro_text: "`ask`, `print` e `if` funzionano esattamente come funzionavano nel quarto livello. Il quinto livello introduce il comando `repeat x times`. `repeat x times` può essere usato per ripetere una parte di codice 'x' volte."
+    intro_text: |
+      `ask`, `print` e `if` funzionano esattamente come funzionavano nel quarto livello.
+      Il quinto livello introduce il comando `repeat`.
+      `repeat` può essere usato per ripetere una parte di codice 'x' volte.
+      ## Esempio di codice Hedy
+      ```
+      repeat 3 times print 'Hedy è divertente!'
+      ```
     commands:
       -
         name: "print"
@@ -145,8 +152,8 @@
         example: "Esempio: if colore is verde print 'carino!' else print 'mah'"
         demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde print 'carino!' else print 'mah'"
       -
-        name: "repeat x times"
-        explanation: "`repeat x times` e `if` combinati insieme"
+        name: "repeat"
+        explanation: "`repeat` e `if` combinati insieme"
         example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
         demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde repeat 3 times print 'carino' else repeat 5 times print 'mah'"
   6:
