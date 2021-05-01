@@ -192,7 +192,29 @@
         demo_code: "prodotto is ask Quanto fa 10 per 5?\nif prodotto is 50 repeat 3 times print 'corretto!' else repeat 5 times print 'errato!'"
   7:
     start_code: "repeat 5 times\n    print 'Ciao a tutti'\n    print 'Questo sarà scritto 5 volte'"
-    intro_text: "ask e print funzionano come prima ma repeat e if sono cambiati! Ora puoi usare interi blocchi di codice ma dovrai ricordarti di usare l'indentazione. Questo significa mettere 4 spazi all'inizio della riga. Questo funziona anche quando vuoi scrivere un blocco di una sola riga. Se usi repeat e if dovrai ricordarti di mettere l'indentazione per ognuno dei due blocchi. Leggi l'esempio per più informazioni!"
+    intro_text: |
+      `ask` e `print` funzionano ancora come prima, ma ora `if` e `repeat` sono cambiati!
+       Ora puoi ripetere più righe insieme. Quindi devi indentare le righe che vengono ripetute,
+       ciò significa che devono iniziare con quattro spazi.
+       Anche se vuoi ripetere solo una riga, devi indentare!
+       ## Esempio di codice Hedy
+       ```
+       repeat 5 times
+           print 'Ciao a tutti'
+           print 'Questo sarà scritto 5 volte'
+       ```
+       Se usi un `repeat` e un `if` insieme devi indentare più e più volte.
+
+       ## Esempio di codice Hedy
+       ```
+       colore is ask Qual è il tuo colore preferito?
+       if colore is verde
+         repeat 3 times
+             print 'carino!'
+       else
+         repeat 5 times
+             print 'mah'
+       ```
     commands:
       -
         name: "print"
@@ -208,4 +230,4 @@
         name: "if e repeat insieme"
         explanation: "`if` e `repeat` insieme"
         example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
-        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde\n    repeat 3 times\n    print 'carino!'\nelse\n    repeat 5 times\n    print 'mah'"
+        demo_code: "colore is ask Qual è il tuo colore preferito?\nif colore is verde\n    repeat 3 times\n        print 'carino!'\nelse\n    repeat 5 times\n        print 'mah'"
