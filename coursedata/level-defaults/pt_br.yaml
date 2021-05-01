@@ -93,9 +93,22 @@
         demo_code: "cor is ask Qual a sua cor favorita?\nprint cor ' é a sua favorita!'"
   4:
     start_code: "nome is ask qual o seu nome?\nif nome is Hedy print 'legal!' else print 'não tão legal'"
-    intro_text: >
-      Os comandos `ask` e `print` funcionam exatamente como no Nível 3.
-      Nível 4 adiciona a expressão `if`!
+    intro_text: |
+      `ask` e `print` ainda funcionam como no nível 3.
+
+       No nível 4, há algo novo, o `if`! Se é inglês para se. Com o `if` você pode escolher entre duas opções diferentes.
+
+       ## Exemplo de código Hedy
+       ```
+       nome is ask qual é o seu nome?
+       if nome is Hedy print 'legal' else print 'não tão legal'
+       ```
+
+       Este código imprime legal se você inserir Hedy como um nome, e não tão legal se você inserir outra coisa.
+
+       ## As atribuições estão ficando cada vez mais difíceis
+       Também no nível 4, as atribuições nas guias tornam-se cada vez mais difíceis. Então, faça-os da esquerda para a direita.
+
     commands:
       -
         name: "print"
