@@ -1,4 +1,4 @@
-import yaml
+from ruamel import yaml
 import glob
 import re
 import unicodedata
