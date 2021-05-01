@@ -94,8 +94,8 @@ window.auth = {
         var first = localStorage.getItem ('hedy-first-save');
         if (! first) return auth.redirect ('programs');
         first = JSON.parse (first);
-        // We set up a non-falsy profile to let `saveit` know that we're logged in.
-        window.auth.profile = {};
+        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
         window.saveit (first [0], first [1], first [2], first [3], function () {
            localStorage.removeItem ('hedy-first-save');
            var redirect = localStorage.getItem ('hedy-save-redirect');
