@@ -40,7 +40,8 @@ ALL_LANGUAGES = {
     'fr': 'Français',
     'pt_br': 'Português',
     'de': 'Deutsch',
-    'it': 'Italiano'
+    'it': 'Italiano',
+    'sw': 'Swahili'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
