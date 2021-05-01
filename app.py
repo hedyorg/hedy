@@ -42,6 +42,7 @@ ALL_LANGUAGES = {
     'pt_br': 'Português',
     'de': 'Deutsch',
     'it': 'Italiano',
+    'hu': 'Magyarok',
     'el': 'Ελληνικά'
 }
 
