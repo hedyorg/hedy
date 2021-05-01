@@ -60,21 +60,25 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 
 TRANSLATIONS = hedyweb.Translations()
 
-ADVENTURES = {}
-for lang in ALL_LANGUAGES.keys ():
-    ADVENTURES[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
+def load_adventures_in_all_languages():
+    adventures = {}
+    for lang in ALL_LANGUAGES.keys ():
+        adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
+    return adventures
 
-def load_adventures (lang):
-    if not lang in ADVENTURES or len (ADVENTURES [lang]) == 0:
-        return ADVENTURES ['en']
-    return ADVENTURES [lang]
+def load_adventure_for_language(lang):
+    adventures = load_adventures_in_all_languages()
+    if not lang in adventures or len (adventures [lang]) == 0:
+        return adventures ['en']
+    return adventures [lang]
 
 def load_adventure_assignments_per_level(lang, level):
     assignments = []
-    adventures = load_adventures(lang)['adventures']
-    for adventure in adventures.values():
+    adventures = load_adventure_for_language(lang)['adventures']
+    for short_name, adventure in adventures.items ():
         if level in adventure['levels']:
             assignments.append({
+                'short_name': short_name,
                 'name': adventure['name'],
                 'image': adventure.get('image', None),
                 'text': adventure['levels'][level].get('story_text', 'No Story Text')
@@ -182,6 +186,8 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'adventure_name' in body and not type_check (body ['adventure_name'], 'str'):
+        return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
     level = int(body ['level'])
@@ -227,7 +233,6 @@ def parse():
         except Exception as E:
             print(f"error transpiling {code}")
             response["Error"] = str(E)
-
     logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
@@ -237,7 +242,8 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
-        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
+        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
+        'adventure_name': body.get('adventure_name', None)
     })
 
     return jsonify(response)
@@ -313,7 +319,7 @@ def programs_page (request):
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
-    return render_template('adventures.html', lang=lang, adventures=load_adventures (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'])
+    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'])
 
 @app.route('/hedy/adventures/<adventure_name>', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/adventures/<adventure_name>/<level>', methods=['GET'])
@@ -321,7 +327,7 @@ def adventure_page(adventure_name, level):
 
     user = current_user (request)
     level = int (level)
-    adventures = load_adventures (requested_lang ())
+    adventures = load_adventure_for_language (requested_lang ())
 
     # If requested adventure does not exist, return 404
     if not adventure_name in adventures ['adventures']:
@@ -345,7 +351,7 @@ def adventure_page(adventure_name, level):
                 return redirect(request.url.replace ('/' + adventure_name, '/' + adventure_name + '/' + str (desired_level)), code=302)
         # If user is not logged in, or has no saved programs for this adventure, default to the lowest level available for the adventure
         if desired_level == 0:
-            for key in adventure.keys ():
+            for key in adventure ['levels'].keys ():
                 if type_check (key, 'int') and (desired_level == 0 or desired_level > key):
                     desired_level = key
         level = desired_level
@@ -358,7 +364,7 @@ def adventure_page(adventure_name, level):
                 loaded_program = program ['code']
 
     # If requested level is not in adventure, return 404
-    if not level in adventure:
+    if not level in adventure ['levels']:
         abort(404)
 
     return hedyweb.render_adventure(

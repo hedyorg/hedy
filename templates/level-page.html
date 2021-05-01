@@ -8,7 +8,6 @@
     {% else %}
       {{ level_title }} {{ level_nr }}
       &nbsp;
-      <a class="text-sm text-blue-200" href="{{localize_link ('/hedy/adventures')}}">{{switch_to_adventures}}</a>
     {% endif %}
     {% if assignment_nr %} · {{ step_title }} {{ assignment_nr }} {% endif %}
   </div>
@@ -16,11 +15,8 @@
     {% if not adventure_name %}
       <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/4 h-4/5 mt-1 ml-24" value="{{ untitled }}">
       <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', true, ace.edit('editor').getValue());">
-      <input type="submit" class="btn ml-5 h-3/5 mt-1" value="{{ switch_to_adventures }}" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">
     {% else %}
       <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit([{{ level }}, '{{ adventure_name }}'], '{{ lang }}', true, ace.edit('editor').getValue());">
-      <button class="btn ml-5 h-3/5 mt-1" onclick="window.location = '{{localize_link ('/hedy/' + level_nr)}}'">{{switch_to_levels}}</button>
-      <button class="btn ml-5 h-3/5 mt-1" onclick="window.location = '{{localize_link ('/hedy/adventures')}}'">{{switch_to_another_adventure}}</button>
     {% endif %}
   </div>
 </div>

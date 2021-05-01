@@ -99,7 +99,8 @@ function runit(level, lang, cb) {
       data: JSON.stringify({
         level: level,
         code: code,
-        lang: lang
+        lang: lang,
+        adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -152,6 +153,9 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   try {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
+       // In adventure only mode, the adventure_name comes as a parameter to the function;
+       // in the normal Hedy mode, where adventures are tabbed, the adventure_name is in the global variable window.State
+       if (window.State.adventure_name) level = [level, window.State.adventure_name];
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/login';
        return;
@@ -173,7 +177,9 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         lang:  lang,
         name:  name,
         code:  code,
-        adventure_name: adventure_name
+        // In adventure only mode, the adventure_name comes as a parameter to the function;
+        // in the normal Hedy mode, where adventures are tabbed, the adventure_name is in the global variable window.State
+        adventure_name: adventure_name || window.State.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -340,21 +346,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   }
 };
 
