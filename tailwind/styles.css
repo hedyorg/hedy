@@ -126,9 +126,6 @@ code {
 .markdown blockquote {
   @apply border-l-4 border-gray-300 pl-4 italic;
 }
-.markdown ul, .markdown ol {
-  @apply pl-5 list-disc;
-}
 
 @tailwind components;
 
@@ -173,6 +170,18 @@ code {
 
 .text-shadow-none {
   text-shadow: none;
+}
+
+/* Lists */
+
+ul {
+    list-style: disc outside none;
+    margin-left: 2em;
+}
+
+ol {
+    list-style: decimal outside none;
+    margin-left: 2em;
 }
 
 /* AUTH */
