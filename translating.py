@@ -150,7 +150,7 @@ def normalize_yaml_blocks(data):
     for i, el in enumerate(data):
       if isinstance(el, str):
         pass
-        # data[i] = maybe_translate_to_block(el)
+        data[i] = maybe_translate_to_block(el)
       else:
         normalize_yaml_blocks(el)
     return data
@@ -159,7 +159,7 @@ def normalize_yaml_blocks(data):
     for key, value in list(data.items()):
       if isinstance(value, str):
         pass
-        # data[key] = maybe_translate_to_block(value)
+        data[key] = maybe_translate_to_block(value)
       else:
         normalize_yaml_blocks(value)
     return data
