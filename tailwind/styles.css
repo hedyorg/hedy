@@ -92,12 +92,12 @@ h3 {
 }
 
 pre, code {
-  background: #272822 !important;
 }
 
 .markdown code {
   @apply py-2 px-3 text-base;
 }
+
 pre code {
   @apply block bg-gray-200 py-2 px-4 my-2 rounded text-base border-gray-300 border;
   @apply text-red-600;
@@ -109,7 +109,6 @@ pre {
 
 /* Code in a fenced code block (``` in MarkDown) */
 pre code {
-  padding: 0 !important;
   font-size: 100%;
   color: white;
 }
@@ -117,6 +116,7 @@ pre code {
 /* All code (` and ```) */
 code {
   @apply font-mono inline rounded py-1 px-2;
+  background: #272822 !important;
   /* color: #ff6188; */
   /* Temporarily back to white because syntax highlighting in Ace is not implemented yet for all levels */
   color: white;
