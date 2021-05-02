@@ -43,7 +43,8 @@ ALL_LANGUAGES = {
     'de': 'Deutsch',
     'it': 'Italiano',
     'hu': 'Magyarok',
-    'el': 'Ελληνικά'
+    'el': 'Ελληνικά',
+    "zh": "主页"
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
