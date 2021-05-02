@@ -1,162 +1,145 @@
----
-  1:
+1:
     intro_text: |
-      Bem-vindo ao Hedy! No Nível 1 você pode usar os comandos `print`,` ask` e `echo`.
+        Bem-vindo ao Hedy! No Nível 1 você pode usar os comandos `print`,` ask` e `echo`.
 
-      No lado esquerdo da tela estão todos os comandos do Nível 1.
+        No lado esquerdo da tela estão todos os comandos do Nível 1.
 
-      Pressione o botão azul e o código será digitado para você!
+        Pressione o botão azul e o código será digitado para você!
 
-      Experimente você mesmo o código com o botão verde 'Executar o código' sob o campo de programação esquerdo.
+        Experimente você mesmo o código com o botão verde 'Executar o código' sob o campo de programação esquerdo.
 
-      Não sabe o que programar? Nas próximas abas, você encontrará algumas idéias sobre o que construir.
+        Não sabe o que programar? Nas próximas abas, você encontrará algumas idéias sobre o que construir.
     start_code: "print olá mundo!"
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "printa algo com `print`."
         example: "Exemplo: print Olá! Seja bem-vindo(a) à Hedy!"
         demo_code: "print Olá! Seja bem-vindo(a) à Hedy!"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Pergunte algo com `ask`."
         example: "Exemplo: ask Qual a sua cor favorita?"
         demo_code: "ask Qual a sua cor favorita?"
-      -
-        name: "echo"
+    -   name: "echo"
         explanation: "Repita algo usando `echo`."
         example: "Exemplo: echo então a sua cor favorita é..."
         demo_code: "ask Qual a sua cor favorita?\necho então a sua cor favorita é..."
-  2:
+2:
     intro_text: |
-      No nível 2, aprendemos algo novo. Você pode nomear uma palavra com `is`.
+        No nível 2, aprendemos algo novo. Você pode nomear uma palavra com `is`.
 
-      Se você colocar o código `name is Hedy` no topo do seu programa, poderá usar o nome em qualquer lugar. Isso será então substituído por Hedy.
+        Se você colocar o código `name is Hedy` no topo do seu programa, poderá usar o nome em qualquer lugar. Isso será então substituído por Hedy.
 
-      O `ask` mudou no nível 2, você também salva a resposta com um nome:
+        O `ask` mudou no nível 2, você também salva a resposta com um nome:
 
-      ```
-      resposta is Qual é o seu nome?
-      ```
+        ```
+        resposta is Qual é o seu nome?
+        ```
 
-      A impressão ainda funciona como no Nível 1 e você não precisa mais de um ultrassom.
+        A impressão ainda funciona como no Nível 1 e você não precisa mais de um ultrassom.
 
-      No nível 2, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com 'at random' (você diz: et ren-dom).
+        No nível 2, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com 'at random' (você diz: et ren-dom).
 
-      Você encontrará todos os códigos do nível 2 na barra esquerda. Também existem guias com atribuições.
+        Você encontrará todos os códigos do nível 2 na barra esquerda. Também existem guias com atribuições.
     start_code: "print olá mundo!"
     commands:
-      -
-        name: "is"
+    -   name: "is"
         explanation: "Dê um nome para uma palavra para usar no programa com `is`."
         example: "Exemplo: nome is Hedy."
         demo_code: "nome is Hedy\nprint bem-vindo(a) nome"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Pergunte algo com `ask`. Cuidado! Você precisa dar à resposta um nome com `is`."
         example: "Exemplo: cor is ask Qual a sua cor favorita?"
         demo_code: "cor is ask Qual a sua cor favorita?\nprint cor é a sua favorita!"
-      -
-        name: "choose_random"
+    -   name: "choose_random"
         explanation: "Escolha uma palavra aleatória para formar um grupo com `at` e `random`"
         example: "Exemplo: animais is cachorro, gato, canguru."
         demo_code: "animais is cachorro, gato, canguru\nprint animais at random"
-  3:
+3:
     start_code: "print 'Olá mundo'"
     intro_text: |
-      `ask` funciona da mesma forma no nível 3 e no nível 2, mas `print` é diferente agora.
+        `ask` funciona da mesma forma no nível 3 e no nível 2, mas `print` é diferente agora.
 
-      Você deve colocar o texto que deseja imprimir entre aspas.
+        Você deve colocar o texto que deseja imprimir entre aspas.
 
-      Isso é útil porque agora você pode imprimir todas as palavras que desejar. Além disso, as palavras que você usou para armazenar algo com `is`.
+        Isso é útil porque agora você pode imprimir todas as palavras que desejar. Além disso, as palavras que você usou para armazenar algo com `is`.
 
-      A maioria das linguagens de programação também usa aspas ao imprimir, portanto, também estamos nos aproximando da programação real!
+        A maioria das linguagens de programação também usa aspas ao imprimir, portanto, também estamos nos aproximando da programação real!
 
-      ## As atribuições estão ficando cada vez mais difíceis
-      Você encontrará os comandos à esquerda novamente e as atribuições nas guias a seguir. As atribuições estão ficando cada vez mais difíceis nas guias sucessivas.
-      Portanto, é melhor começar pela esquerda com a história e trabalhar à direita para ser desafiada cada vez mais.
+        ## As atribuições estão ficando cada vez mais difíceis
+        Você encontrará os comandos à esquerda novamente e as atribuições nas guias a seguir. As atribuições estão ficando cada vez mais difíceis nas guias sucessivas.
+        Portanto, é melhor começar pela esquerda com a história e trabalhar à direita para ser desafiada cada vez mais.
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Para printar um texto usando aspas simples"
         example: "Exemplo: print 'Olá seja bem-vindo(a) à Hedy.'"
         demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
-      -
-        name: "is"
+    -   name: "is"
         explanation: "Dá um nome para um texto qualquer e printe sem aspas"
         example: "Exemplo: nome is Hedy."
         demo_code: "nome is Hedy\nprint 'meu nome is ' nome"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Pergunta algo com `ask`."
         example: "Exemplo: cor is ask Qual a sua cor favorita?"
         demo_code: "cor is ask Qual a sua cor favorita?\nprint cor ' é a sua favorita!'"
-  4:
+4:
     start_code: "nome is ask qual o seu nome?\nif nome is Hedy print 'legal!' else print 'não tão legal'"
     intro_text: |
-      `ask` e `print` ainda funcionam como no nível 3.
+        `ask` e `print` ainda funcionam como no nível 3.
 
-       No nível 4, há algo novo, o `if`! Se é inglês para se. Com o `if` você pode escolher entre duas opções diferentes.
+         No nível 4, há algo novo, o `if`! Se é inglês para se. Com o `if` você pode escolher entre duas opções diferentes.
 
-       ## Exemplo de código Hedy
-       ```
-       nome is ask qual é o seu nome?
-       if nome is Hedy print 'legal' else print 'não tão legal'
-       ```
+         ## Exemplo de código Hedy
+         ```
+         nome is ask qual é o seu nome?
+         if nome is Hedy print 'legal' else print 'não tão legal'
+         ```
 
-       Este código imprime legal se você inserir Hedy como um nome, e não tão legal se você inserir outra coisa.
+         Este código imprime legal se você inserir Hedy como um nome, e não tão legal se você inserir outra coisa.
 
-       ## As atribuições estão ficando cada vez mais difíceis
-       Também no nível 4, as atribuições nas guias tornam-se cada vez mais difíceis. Então, faça-os da esquerda para a direita.
+         ## As atribuições estão ficando cada vez mais difíceis
+         Também no nível 4, as atribuições nas guias tornam-se cada vez mais difíceis. Então, faça-os da esquerda para a direita.
 
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Printa o texto usando aspas simples"
         example: "Exemplo: print 'Olá seja bem-vindo(a) à Hedy.'"
         demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Pergunta algo com `ask`."
         example: "Exemplo: cor is ask Qual a sua cor favorita?"
         demo_code: "cor is ask Qual a sua cor favorita?\nprint cor ' é a sua favorita!'"
-      -
-        name: "if"
+    -   name: "if"
         explanation: "Faça uma escolha com `if`."
         example: "Exemplo: if cor is verde print 'bonita!' else print 'não gostei'"
         demo_code: "cor is ask Qual a sua cor favorita?\nif cor is verde print 'bonita!' else print 'não gostei'"
-  5:
+5:
     start_code: "repeat 3 times print 'Hedy é divertido!'"
     intro_text: |
-      Os comandos `ask`, `print` e `if` funcionam exatamente como no Nível 4.
-      Mas o Nível 5 adiciona o comando `repeat`.
-      `repeat` pode ser usado para executar uma linha de código várias vezes.
-      ## Exemplo de código Hedy
-      ```
-      repeat 3 times print 'Hedy é divertido!'
-      ```
+        Os comandos `ask`, `print` e `if` funcionam exatamente como no Nível 4.
+        Mas o Nível 5 adiciona o comando `repeat`.
+        `repeat` pode ser usado para executar uma linha de código várias vezes.
+        ## Exemplo de código Hedy
+        ```
+        repeat 3 times print 'Hedy é divertido!'
+        ```
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Printa o texto usando aspas simples"
         example: "Exemplo: print 'Olá seja bem-vindo(a) à Hedy.'"
         demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Pergunta algo com `ask`."
         example: "Exemplo: cor is ask Qual a sua cor favorita?"
         demo_code: "cor is ask Qual a sua cor favorita?\nprint cor ' is your favorite!'"
-      -
-        name: "if"
+    -   name: "if"
         explanation: "Faz uma escolha com `if`."
         example: "Exemplo: if cor is verde print 'bonita!' else print 'não gostei'"
         demo_code: "cor is ask Qual a sua cor favorita?\nif cor is verde print 'bonita!' else print 'não gostei'"
-      -
-        name: "repeat"
+    -   name: "repeat"
         explanation: "`repeat` e `if` juntos"
         example: "Exemplo: if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
         demo_code: "cor is ask Qual a sua cor favorita?\nif cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
-  6:
+6:
     start_code: "print '5 vezes 5 é ' 5 * 5"
     intro_text: |
         `ask`,` print`, `if` e` repeat` ainda funcionam como no nível 4 e 5.
@@ -176,61 +159,55 @@
         ```
 
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Printa o texto usando aspas simples"
         example: "Exemplo: print '5 vezes 5 é ' 5 * 5"
         demo_code: "print '5 vezes 5 é ' 5 * 5"
-      -
-        name: "ask e if com operações"
+    -   name: "ask e if com operações"
         explanation: "Pede por uma operação e verifique se está correta."
         example: "Exemplo: resposta is ask Quanto é 10 mais 10?"
         demo_code: "resposta is ask Quanto é 10 mais 10?\nif resposta is 20 print 'Acertou!' else print 'Errou! Tente de novo'"
-      -
-        name: "repeat"
+    -   name: "repeat"
         explanation: "`repeat` e `if` juntos"
         example: "Example: if produto is 50 repeat 3 times print 'correto!' else repeat 5 times print 'incorreto!'"
         demo_code: "produto is ask Quanto e 10 vezes 5?\nif produto is 50 repeat 3 times print 'correto!' else repeat 5 times print 'incorreto!'"
-  7:
+7:
     start_code: "repeat 5 times\n    print 'Olá galera'\n    print 'Isso vai ser printado 5 vezes'"
     intro_text: >
-      Os comandos `ask` e `print` ainda funcionam da mesma forma.
-      Mas `if` e `repeat` mudaram!
-      Você agora pode executar grupos de códigos juntos, mas você terá que identar o código.
-      Isso significa colocar espaços no começo da linha.
-      O mesmo vale para quando você queira criar um bloco só com um linha.
-      ## Exemplo de código Hedy
-      ```
-      repeat 5 times
-          print 'Olá galera'
-          print 'Isso vai ser printado 5 vezes'
-      ```
+        Os comandos `ask` e `print` ainda funcionam da mesma forma.
+        Mas `if` e `repeat` mudaram!
+        Você agora pode executar grupos de códigos juntos, mas você terá que identar o código.
+        Isso significa colocar espaços no começo da linha.
+        O mesmo vale para quando você queira criar um bloco só com um linha.
+        ## Exemplo de código Hedy
+        ```
+        repeat 5 times
+            print 'Olá galera'
+            print 'Isso vai ser printado 5 vezes'
+        ```
 
-      Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
-      ## Exemplo de código Hedy
-      ```
-      cor is ask Qual a sua cor favorita?
-      if cor is verde
-          repeat 3 times
-              print 'bonita!'
-      else
-          repeat 5 times
-              print 'não gostei'
-      ```
+        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
+        ## Exemplo de código Hedy
+        ```
+        cor is ask Qual a sua cor favorita?
+        if cor is verde
+            repeat 3 times
+                print 'bonita!'
+        else
+            repeat 5 times
+                print 'não gostei'
+        ```
 
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Printa alguma coisa. Lembre-se de usar aspas simples para printar literais."
         example: "Exemplo: print '5 vezes 5 é ' 5 * 5"
         demo_code: "print '5 vezes 5 é ' 5 * 5"
-      -
-        name: "if com múltiplas linhas"
+    -   name: "if com múltiplas linhas"
         explanation: "Pergunta à resposta de uma soma e verifica se está correta. Agora nós podemos printar 2 linhas."
         example: "Exemplo: resposta is ask Quanto é 5 mais 5?"
         demo_code: "resposta is ask Quanto é 5 mais 5?\nif resposta is 10\n    print 'Muito bem!'\n    print 'De fato, a resposta foi ' resposta\nelse\n    print 'Opa!'\n    print 'A resposta é 10'"
-      -
-        name: "if e repeat juntos"
+    -   name: "if e repeat juntos"
         explanation: "`if` e `repeat` juntos"
         example: "Exemplo: if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
         demo_code: "cor is ask Qual a sua cor favorita?\nif cor is verde\n    repeat 3 times\n        print 'bonita!'\nelse\n    repeat 5 times\n        print 'não gostei'"
