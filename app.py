@@ -712,11 +712,6 @@ def translate_fromto(source, target):
     files = []
 
     files.append(translating.TranslatableFile(
-      'Adventures',
-      f'adventures/{target}.yaml',
-      translating.struct_to_sections(source_adventures, target_adventures)))
-
-    files.append(translating.TranslatableFile(
       'Levels',
       f'level-defaults/{target}.yaml',
       translating.struct_to_sections(source_levels, target_levels)))
@@ -725,6 +720,11 @@ def translate_fromto(source, target):
       'Messages',
       f'texts/{target}.yaml',
       translating.struct_to_sections(source_texts, target_texts)))
+
+    files.append(translating.TranslatableFile(
+      'Adventures',
+      f'adventures/{target}.yaml',
+      translating.struct_to_sections(source_adventures, target_adventures)))
 
     return render_template('translate-fromto.html',
         source_lang=source,
@@ -744,11 +744,13 @@ def update_yaml():
     data = load_yaml_rt(filepath)
     for key, value in request.form.items():
         if key.startswith('c:'):
-            translating.apply_form_change(data, key[2:], value)
+            translating.apply_form_change(data, key[2:], translating.normalize_newlines(value))
+
+    data = translating.normalize_yaml_blocks(data)
 
     return Response(dump_yaml_rt(data),
         mimetype='application/x-yaml',
-        headers={'Content-disposition': 'attachment; filename=' + path.basename(filename)})
+        headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
 
 # *** AUTH ***

@@ -1,6 +1,7 @@
 """
 Helper routines for the translation page.
 """
+from ruamel import yaml
 
 
 class TranslatableFile:
@@ -114,7 +115,7 @@ def value_at(data, path):
   for p in path:
     if str(p).startswith('a:'):
       # Expecting to index into a list
-      index = int(key[2:])
+      index = int(p[2:])
       if not isinstance(data, list): return None
       if len(data) <= index: return None
       data = data[index]
@@ -138,3 +139,41 @@ def str_presenter(dumper, data):
   except TypeError as ex:
       return dumper.represent_scalar('tag:yaml.org,2002:str', data)
   return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+
+
+def normalize_yaml_blocks(data):
+  """Replace all string containing newlines with a special string that the Yaml parser will serialize as a | block.
+
+  This will make your YAML pretty and easy to work with.
+  """
+  if isinstance(data, list):
+    for i, el in enumerate(data):
+      if isinstance(el, str):
+        pass
+        data[i] = maybe_translate_to_block(el)
+      else:
+        normalize_yaml_blocks(el)
+    return data
+
+  if isinstance(data, dict):
+    for key, value in list(data.items()):
+      if isinstance(value, str):
+        pass
+        data[key] = maybe_translate_to_block(value)
+      else:
+        normalize_yaml_blocks(value)
+    return data
+
+  return data
+
+
+def maybe_translate_to_block(x):
+  newlines = '\n' in x
+  if newlines and not isinstance(x, yaml.scalarstring.LiteralScalarString):
+    return yaml.scalarstring.LiteralScalarString(str(x))
+  return x
+
+
+def normalize_newlines(x):
+  """Turn Windows/web newlines into Linux newlines."""
+  return x.replace('\r\n', '\n')

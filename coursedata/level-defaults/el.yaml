@@ -1,235 +1,319 @@
----
 1:
-  intro_text: "Καλωσήρθες στη Hedy! Στο επίπεδο 1 μπορείς να χρησιμοποιήσεις τις εντολές `print`, `ask`, και `echo`. Πάτησε το μπλε κουμπί και ο κώδικας θα πληκτρολογηθεί για σένα. Δοκίμασε και εσύ τον κώδικα πατώντας το πράσινο κουμπί 'Εκτέλεσε τον κώδικά' κάτω από το αριστερό προγραμματιστικό πεδίο."
-  start_code: 'print γειά σου κόσμε!'
-  commands:
-    - name: 'print'
-      explanation: 'Εμφάνισε κάτι με την `print`.'
-      example: 'Παράδειγμα: print Γειά, καλωσήλθες στη Hedy!'
-      demo_code: 'print Γειά, καλωσήλθες στη Hedy!'
-    - name: 'ask'
-      explanation: 'Ρώτησε κάτι με την `ask`.'
-      example: 'Παράδειγμα: ask Ποιό είναι το αγαπημένο σου χρώμα;'
-      demo_code: 'ask Ποιό είναι το αγαπημένο σου χρώμα;'
-    - name: 'echo'
-      explanation: 'Eπανάλαβε κάτι χρησιμποιώντας την `echo`.'
-      example: 'Παράδειγμα: echo ώστε το αγαπημένο σου χρώμα είναι το...'
-      demo_code:
-        "ask Ποιό είναι το αγαπημένο σου χρώμα;\necho ώστε το αγαπημένο σου χρώμα είναι το..."
+    intro_text: "Καλωσήρθες στη Hedy! Στο επίπεδο 1 μπορείς να χρησιμοποιήσεις τις εντολές `print`, `ask`, και `echo`. Πάτησε το μπλε κουμπί και ο κώδικας θα πληκτρολογηθεί για σένα. Δοκίμασε και εσύ τον κώδικα πατώντας το πράσινο κουμπί 'Εκτέλεσε τον κώδικά' κάτω από το αριστερό προγραμματιστικό πεδίο."
+    start_code: 'print γειά σου κόσμε!'
+    commands:
+    -   name: 'print'
+        explanation: 'Εμφάνισε κάτι με την `print`.'
+        example: 'Παράδειγμα: print Γειά, καλωσήλθες στη Hedy!'
+        demo_code: 'print Γειά, καλωσήλθες στη Hedy!'
+    -   name: 'ask'
+        explanation: 'Ρώτησε κάτι με την `ask`.'
+        example: 'Παράδειγμα: ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        demo_code: 'ask Ποιό είναι το αγαπημένο σου χρώμα;'
+    -   name: 'echo'
+        explanation: 'Eπανάλαβε κάτι χρησιμποιώντας την `echo`.'
+        example: 'Παράδειγμα: echo ώστε το αγαπημένο σου χρώμα είναι το...'
+        demo_code: |-
+            ask Ποιό είναι το αγαπημένο σου χρώμα;
+            echo ώστε το αγαπημένο σου χρώμα είναι το...
 2:
-  intro_text: 'Η print λειτουργεί όπως και στο επίπεδο 1, όμως η ask έχει αλλαχθεί και πλέον χρειάζεται ένα όνομα, το οποίο έπειτα μπορείς να εμφανίσεις. Η echo πλέον δε χρειάζεται. Μπορείς τώρα να χρησιμοποιήσεις επιπλέον αυτές τις εντολές:'
-  start_code: 'print γειά σου κόσμε!'
-  commands:
-    - name: 'is'
-      explanation: 'Δώσε ένα όνομα σε μια λέξη για να τη χρησιμοποιήσεις στο πρόγραμμα χρησιμοποιώντας την `is`'
-      example: 'Παράδειγμα:  name is Hedy.'
-      demo_code: "name is Hedy\nprint καλωσήλθες name"
-    - name: 'ask'
-      explanation: 'Ρώτησε κάτι με την `ask`. Πρόσεξε! Πρέπει να δώσεις στην απάντηση ένα όνομα με την `is`.'
-      example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nprint το color είναι το αγαπημένο σου!"
-    - name: 'choose_random'
-      explanation: 'Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `at` και `random`'
-      example: 'Παράδειγμα: animals is σκύλος, γάτα, καγκουρό'
-      demo_code: "animals is σκύλος, γάτα, καγκουρό\nprint animals at random"
+    intro_text: 'Η print λειτουργεί όπως και στο επίπεδο 1, όμως η ask έχει αλλαχθεί και πλέον χρειάζεται ένα όνομα, το οποίο έπειτα μπορείς να εμφανίσεις. Η echo πλέον δε χρειάζεται. Μπορείς τώρα να χρησιμοποιήσεις επιπλέον αυτές τις εντολές:'
+    start_code: 'print γειά σου κόσμε!'
+    commands:
+    -   name: 'is'
+        explanation: 'Δώσε ένα όνομα σε μια λέξη για να τη χρησιμοποιήσεις στο πρόγραμμα χρησιμοποιώντας την `is`'
+        example: 'Παράδειγμα:  name is Hedy.'
+        demo_code: |-
+            name is Hedy
+            print καλωσήλθες name
+    -   name: 'ask'
+        explanation: 'Ρώτησε κάτι με την `ask`. Πρόσεξε! Πρέπει να δώσεις στην απάντηση ένα όνομα με την `is`.'
+        example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            print το color είναι το αγαπημένο σου!
+    -   name: 'choose_random'
+        explanation: 'Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `at` και `random`'
+        example: 'Παράδειγμα: animals is σκύλος, γάτα, καγκουρό'
+        demo_code: |-
+            animals is σκύλος, γάτα, καγκουρό
+            print animals at random
 3:
-  start_code: "print 'Γειά σου κόσμε'"
-  intro_text: 'Η `ask` παραμένει ίδια στο επίπεδο 3, όμως η `print` είναι πλέον διαφορετική. Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.'
-  commands:
-    - name: 'print'
-      explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
-      example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
-      demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
-    - name: 'is'
-      explanation: 'Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `print` χωρίς εισαγωγικά'
-      example: 'Παράδειγμα: name is Hedy.'
-      demo_code: "name is Hedy\nprint 'Το όνομά μου είναι ' name"
-    - name: 'ask'
-      explanation: 'Ρώτησε κάτι με την `ask`.'
-      example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;?\nprint 'το ' color ' είναι το αγαπημένο σου!'"
+    start_code: "print 'Γειά σου κόσμε'"
+    intro_text: 'Η `ask` παραμένει ίδια στο επίπεδο 3, όμως η `print` είναι πλέον διαφορετική. Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.'
+    commands:
+    -   name: 'print'
+        explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
+        example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
+        demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
+    -   name: 'is'
+        explanation: 'Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `print` χωρίς εισαγωγικά'
+        example: 'Παράδειγμα: name is Hedy.'
+        demo_code: |-
+            name is Hedy
+            print 'Το όνομά μου είναι ' name
+    -   name: 'ask'
+        explanation: 'Ρώτησε κάτι με την `ask`.'
+        example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;?
+            print 'το ' color ' είναι το αγαπημένο σου!'
 4:
-  start_code:
-    "name is ask Ποιό είναι το όνομά σου;\nif name is Hedy print 'τέλεια!' else print 'έτσι κι έτσι'"
-  intro_text: 'Οι `ask` και `print` λειτουργούν ακριβώς όπως στο επίπεδο 3. Το επίπεδο 4 προσθέτει τη δήλωση `if`!'
-  commands:
-    - name: 'print'
-      explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
-      example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
-      demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
-    - name: 'ask'
-      explanation: 'Ρώτησε κάτι με την `ask`.'
-      example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nprint 'το ' color ' είναι το αγαπημένο σου!'"
-    - name: 'if'
-      explanation: 'Κάνε μια επιλογή με την `if`'
-      example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
+    start_code: |-
+        name is ask Ποιό είναι το όνομά σου;
+        if name is Hedy print 'τέλεια!' else print 'έτσι κι έτσι'
+    intro_text: 'Οι `ask` και `print` λειτουργούν ακριβώς όπως στο επίπεδο 3. Το επίπεδο 4 προσθέτει τη δήλωση `if`!'
+    commands:
+    -   name: 'print'
+        explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
+        example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
+        demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
+    -   name: 'ask'
+        explanation: 'Ρώτησε κάτι με την `ask`.'
+        example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            print 'το ' color ' είναι το αγαπημένο σου!'
+    -   name: 'if'
+        explanation: 'Κάνε μια επιλογή με την `if`'
+        example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
 5:
-  start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
-  intro_text: 'Οι `ask`, `print` και `if` λειτουργούν ακριβώς όπως και στο Επίπεδο 4. Όμως, το Επίπεδο 5 προσθέτει την εντολή `repeat`. H Repeat (Επανάληψη) μπορεί να χρησιμποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.'
-  commands:
-    - name: 'print'
-      explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
-      example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
-      demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
-    - name: 'ask'
-      explanation: 'Ρώτησε κάτι με την `ask`.'
-      example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;?\nprint 'το ' color ' είναι το αγαπημένο σου!"
-    - name: 'if'
-      explanation: 'Κάνε μια επιλογή με την `if`'
-      example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
-    - name: 'repeat'
-      explanation: 'Οι `repeat` και `if` σε συνδυασμό'
-      example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+    start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
+    intro_text: 'Οι `ask`, `print` και `if` λειτουργούν ακριβώς όπως και στο Επίπεδο 4. Όμως, το Επίπεδο 5 προσθέτει την εντολή `repeat`. H Repeat (Επανάληψη) μπορεί να χρησιμποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.'
+    commands:
+    -   name: 'print'
+        explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
+        example: "Παράδειγμα: print 'Γειά, καλωσήλθες στη Hedy.'"
+        demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
+    -   name: 'ask'
+        explanation: 'Ρώτησε κάτι με την `ask`.'
+        example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;?
+            print 'το ' color ' είναι το αγαπημένο σου!
+    -   name: 'if'
+        explanation: 'Κάνε μια επιλογή με την `if`'
+        example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
+    -   name: 'repeat'
+        explanation: 'Οι `repeat` και `if` σε συνδυασμό'
+        example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
 6:
-  start_code: "print '5 επί 5 ίσον με ' 5 * 5"
-  intro_text: 'Οι `ask`, `print`, `if` και `repeat` είναι ακόμα ίδις όπως και στα Επίπεδα 4 και 5. Το Επίπεδο 6 προσθέτει κάτι καινούριο...Πλέον μπορείς να κάνεις υπολογισμούς.'
-  commands:
-    - name: 'print'
-      explanation: 'Εμφάνισε κάτι ακριβώς χρησιμοποιώντας εισαγωγικά'
-      example: "Παράδειγμα: print '5 επί 5 ίσον με ' 5 * 5"
-      demo_code: "print '5 επί 5 είναι ' 5 * 5"
-    - name: 'Οι `ask` και `if` με υπολογισμούς'
-      explanation: 'Ρώτησε σχετικά με έναν υπολογισμό και έλεγξε ότι είναι σωστός.'
-      example: 'Παράδειγμα: answer is ask Πόσο είναι 10 + 10;'
-      demo_code:
-        "answer is ask Πόσο είναι 10 + 10;\nif answer is 20 print 'Ναι!' else print 'Ουπς'"
-    - name: 'repeat'
-      explanation: 'Οι `repeat` και `if` σε συνδυασμό'
-      example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
-      demo_code:
-        "color is ask Ποιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+    start_code: "print '5 επί 5 ίσον με ' 5 * 5"
+    intro_text: 'Οι `ask`, `print`, `if` και `repeat` είναι ακόμα ίδις όπως και στα Επίπεδα 4 και 5. Το Επίπεδο 6 προσθέτει κάτι καινούριο...Πλέον μπορείς να κάνεις υπολογισμούς.'
+    commands:
+    -   name: 'print'
+        explanation: 'Εμφάνισε κάτι ακριβώς χρησιμοποιώντας εισαγωγικά'
+        example: "Παράδειγμα: print '5 επί 5 ίσον με ' 5 * 5"
+        demo_code: "print '5 επί 5 είναι ' 5 * 5"
+    -   name: 'Οι `ask` και `if` με υπολογισμούς'
+        explanation: 'Ρώτησε σχετικά με έναν υπολογισμό και έλεγξε ότι είναι σωστός.'
+        example: 'Παράδειγμα: answer is ask Πόσο είναι 10 + 10;'
+        demo_code: |-
+            answer is ask Πόσο είναι 10 + 10;
+            if answer is 20 print 'Ναι!' else print 'Ουπς'
+    -   name: 'repeat'
+        explanation: 'Οι `repeat` και `if` σε συνδυασμό'
+        example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+        demo_code: |-
+            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
 7:
-  start_code:
-    "repeat 5 times\n    print 'Γειά σας παιδιά'\n    print 'Αυτό θα εμφανιστεί 5 φορές'"
-  intro_text: 'Οι ask και print λειτουργούν ακόμα όπως τις γνωρίζετε. Όμως, οι if και repeat έχουν αλλάξει! Τώρα μπορείτε να εκτελείτε μαζί ομάδες κώδικα, αλλά θα πρέπει να βάλετε εσοχή στον κώδικα. Αυτό σημαίνει να προσθέσετε τέσσερα κενά στην αρχή της γραμμής. Το ίδιο ισχύει όταν θέλετε να δημιουργήσετε ένα μπλοκ μιας γραμμής. Αν συνδυάσετε μια repeat με μια if, θα πρέπει να βάλετε εσοχή σε κάθε μπλοκ. Δείτε το παράδειγμα κώδικα για περισσότερες λεπτομέρειες!'
+    start_code: |-
+        repeat 5 times
+            print 'Γειά σας παιδιά'
+            print 'Αυτό θα εμφανιστεί 5 φορές'
+    intro_text: 'Οι ask και print λειτουργούν ακόμα όπως τις γνωρίζετε. Όμως, οι if και repeat έχουν αλλάξει! Τώρα μπορείτε να εκτελείτε μαζί ομάδες κώδικα, αλλά θα πρέπει να βάλετε εσοχή στον κώδικα. Αυτό σημαίνει να προσθέσετε τέσσερα κενά στην αρχή της γραμμής. Το ίδιο ισχύει όταν θέλετε να δημιουργήσετε ένα μπλοκ μιας γραμμής. Αν συνδυάσετε μια repeat με μια if, θα πρέπει να βάλετε εσοχή σε κάθε μπλοκ. Δείτε το παράδειγμα κώδικα για περισσότερες λεπτομέρειες!'
 
-  commands:
-    - name: 'print'
-      explanation: 'Εμφάνισε κάτι. Θυμήσου να χρησιμοποιήσεις εισαγωγικά για ακριβή εμφάνιση.'
-      example: "Παράδειγμα: print '5 επί 5 ίσον με ' 5 * 5"
-      demo_code: "print '5 επί 5 ίσον με ' 5 * 5"
-    - name: 'Η `if` με πολλαπλές γραμμές'
-      explanation: 'Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.'
-      example: 'Παράδειγμα: answer is ask Πόσο είναι 5 συν 5?'
-      demo_code:
-        "answer is ask Πόσο είναι 5 συν 5;\nif answer is 10\n    print 'Μπράβο!'\n    print 'Πράγματι, η απάντηση ήταν ' answer\nelse\n    print 'Ουπς!'\n    print 'Η απάντηση είναι 10'"
-    - name: 'if and repeat combined'
-      explanation: 'Οι `if` και `repeat` σε συνδυασμό'
-      example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
-      demo_code:
-        "color is ask οιό είναι το αγαπημένο σου χρώμα;\nif color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+    commands:
+    -   name: 'print'
+        explanation: 'Εμφάνισε κάτι. Θυμήσου να χρησιμοποιήσεις εισαγωγικά για ακριβή εμφάνιση.'
+        example: "Παράδειγμα: print '5 επί 5 ίσον με ' 5 * 5"
+        demo_code: "print '5 επί 5 ίσον με ' 5 * 5"
+    -   name: 'Η `if` με πολλαπλές γραμμές'
+        explanation: 'Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.'
+        example: 'Παράδειγμα: answer is ask Πόσο είναι 5 συν 5?'
+        demo_code: |-
+            answer is ask Πόσο είναι 5 συν 5;
+            if answer is 10
+                print 'Μπράβο!'
+                print 'Πράγματι, η απάντηση ήταν ' answer
+            else
+                print 'Ουπς!'
+                print 'Η απάντηση είναι 10'
+    -   name: 'if and repeat combined'
+        explanation: 'Οι `if` και `repeat` σε συνδυασμό'
+        example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+        demo_code: |-
+            color is ask οιό είναι το αγαπημένο σου χρώμα;
+            if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
 8:
-  start_code:
-    "for i in range 1 to 10\n    print i\nprint 'Έτοιμοι ή όχι, έρχομαι!'"
-  intro_text: 'Η `print` λειτουργεί ακριβώς όπως και πριν όμως η `repeat` τώρα αντικαθίσταται από τη `for`! Θα χρησιμοποιείς `for i in range 1 to 5`, αντί για `repeat 5 times`. Μπορείς επίσης να χρησιμοποιείς το `i` στο πρόγραμμα σου! Θυμήσου να χρησιμοποιείς εσοχές ύστερα από κάθε δήλωση `for` και `if` (Αυτό σημαίνει να ξεκινάς μια πρόταση με 4 κενά)'
-  commands:
-    - name: 'repeat'
-      explanation: 'αντικαθιστούμε τη `repeat` με τη `for`'
-      example: 'for i in range 1 to 10'
-      demo_code: |
+    start_code: |-
         for i in range 1 to 10
-          print i
+            print i
         print 'Έτοιμοι ή όχι, έρχομαι!'
+    intro_text: 'Η `print` λειτουργεί ακριβώς όπως και πριν όμως η `repeat` τώρα αντικαθίσταται από τη `for`! Θα χρησιμοποιείς `for i in range 1 to 5`, αντί για `repeat 5 times`. Μπορείς επίσης να χρησιμοποιείς το `i` στο πρόγραμμα σου! Θυμήσου να χρησιμοποιείς εσοχές ύστερα από κάθε δήλωση `for` και `if` (Αυτό σημαίνει να ξεκινάς μια πρόταση με 4 κενά)'
+    commands:
+    -   name: 'repeat'
+        explanation: 'αντικαθιστούμε τη `repeat` με τη `for`'
+        example: 'for i in range 1 to 10'
+        demo_code: |
+            for i in range 1 to 10
+              print i
+            print 'Έτοιμοι ή όχι, έρχομαι!'
 9:
-  start_code:
-    "for i in range 1 to 10:\n    print i\nprint 'Έτοιμοι ή όχι, έρχομαι!'"
-  intro_text: 'Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.'
-  commands:
-    - name: 'for με :'
-      explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
-      example: 'for i in range 1 to 10:'
-      demo_code:
-        "for i in range 1 to 11:\n    print i\nprint 'Έτοιμοι ή όχι, έρχομαι!'"
-    - name: 'if με :'
-      explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
-      example: "if colour is πράσινο:'"
-      demo_code:
-        "colour is πράσινο\nif colour is πράσινο:\n    print 'To χρώμα είναι πράσινο'\nelse:\n    print 'Το χρώμα δεν είναι πράσινο'"
-    - name: '(Προαιρετικό) elif'
-      explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
-      example: 'elif a is 5:'
-      demo_code:
-        "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'το a είναι 2'\nelse:\n    print 'το a δεν είναι 1 ή 2'"
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Έτοιμοι ή όχι, έρχομαι!'
+    intro_text: 'Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.'
+    commands:
+    -   name: 'for με :'
+        explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
+        example: 'for i in range 1 to 10:'
+        demo_code: |-
+            for i in range 1 to 11:
+                print i
+            print 'Έτοιμοι ή όχι, έρχομαι!'
+    -   name: 'if με :'
+        explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
+        example: "if colour is πράσινο:'"
+        demo_code: |-
+            colour is πράσινο
+            if colour is πράσινο:
+                print 'To χρώμα είναι πράσινο'
+            else:
+                print 'Το χρώμα δεν είναι πράσινο'
+    -   name: '(Προαιρετικό) elif'
+        explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
+        example: 'elif a is 5:'
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'το a είναι 2'
+            else:
+                print 'το a δεν είναι 1 ή 2'
 10:
-  start_code:
-    "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j"
-  intro_text: 'Από εδώ και στο εξής, μπορούμε να επαναλαμβάνουμε ένα βρόχο περισσότερες φορές. Στο παράδειγμα, μετράμε ως το 5 και το κάνουμε αυτό 3 φορές. Άρα, κάνουμε 3 γύρους και μετράμε ως το 5 κάθε φορά.'
-  commands:
-    - name: 'διαδοχικές for'
-      explanation: 'Αυτό είναι ένα παράδειγμα με τη δήλωση for'
-      demo_code:
-        "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j"
-    - name: 'διαδοχικές if'
-      explanation: 'Μπορούμε να κάνουμε το ίδιο με τις δηλώσεις if'
-      demo_code:
-        "colour is μπλε\ncolourtwo is κίτρινο\nif colour is μπλε:\n    if colourtwo is κίτρινο:\n        print 'Μαζί κάνουμε το χρώμα πράσινο!'"
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+            print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j
+    intro_text: 'Από εδώ και στο εξής, μπορούμε να επαναλαμβάνουμε ένα βρόχο περισσότερες φορές. Στο παράδειγμα, μετράμε ως το 5 και το κάνουμε αυτό 3 φορές. Άρα, κάνουμε 3 γύρους και μετράμε ως το 5 κάθε φορά.'
+    commands:
+    -   name: 'διαδοχικές for'
+        explanation: 'Αυτό είναι ένα παράδειγμα με τη δήλωση for'
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j
+    -   name: 'διαδοχικές if'
+        explanation: 'Μπορούμε να κάνουμε το ίδιο με τις δηλώσεις if'
+        demo_code: |-
+            colour is μπλε
+            colourtwo is κίτρινο
+            if colour is μπλε:
+                if colourtwo is κίτρινο:
+                    print 'Μαζί κάνουμε το χρώμα πράσινο!'
 11:
-  start_code:
-    "age is input('Ποιά είναι η ηλικία σου;')\nprint('Άρα έχεις υπάρξει σε αυτές τις ηλικίες:')\nfor i in range(0,age):\n    print(i)"
-  intro_text: 'Θα βάλουμε παρενθέσεις και θα αλλάξουμε την ask! Αλλάζουμε την ask σε input! Στις print, ask και for, θα βάλουμε πλέον παρενθέσεις.'
-  commands:
-    - name: 'Print (Εμφάνισε)'
-      explanation: 'Τώρα θα προσθέσουμε παρενθέσεις γύρω από την print!'
-      example: "Για παράδειγμα: print('Γειά σου Κόσμε')"
-      demo_code: "print('Γειά σου Κόσμε')"
-    - name: 'Από την ask στην input!'
-      explanation: 'Αφαιρούμε την ask και την ονομάζουμε input πλέον, επίσης θα βάλουμε παρενθέσεις γύρω της'
-      example: "Για παράδειγμα: answer is input('Ποιό είναι το όνομά σου;')"
-      demo_code:
-        "answer = input('Ποιό είναι το όνομά σου;')\nprint('Άρα το όνομά σου είναι ' answer)"
-    - name: 'For με παρενθέσεις'
-      explanation: 'Τώρα βάζουμε παρενθέσεις γύρω από τους αριθμούς στο βρόχο for. for i in range (0,10):'
-      example: 'Για παράδειγμα: for i in range(0,10):'
-      demo_code:
-        "for i in range(0,10):\n    print(i)\nprint('Έτοιμοι ή όχι, έρχομαι!')"
+    start_code: |-
+        age is input('Ποιά είναι η ηλικία σου;')
+        print('Άρα έχεις υπάρξει σε αυτές τις ηλικίες:')
+        for i in range(0,age):
+            print(i)
+    intro_text: 'Θα βάλουμε παρενθέσεις και θα αλλάξουμε την ask! Αλλάζουμε την ask σε input! Στις print, ask και for, θα βάλουμε πλέον παρενθέσεις.'
+    commands:
+    -   name: 'Print (Εμφάνισε)'
+        explanation: 'Τώρα θα προσθέσουμε παρενθέσεις γύρω από την print!'
+        example: "Για παράδειγμα: print('Γειά σου Κόσμε')"
+        demo_code: "print('Γειά σου Κόσμε')"
+    -   name: 'Από την ask στην input!'
+        explanation: 'Αφαιρούμε την ask και την ονομάζουμε input πλέον, επίσης θα βάλουμε παρενθέσεις γύρω της'
+        example: "Για παράδειγμα: answer is input('Ποιό είναι το όνομά σου;')"
+        demo_code: |-
+            answer = input('Ποιό είναι το όνομά σου;')
+            print('Άρα το όνομά σου είναι ' answer)
+    -   name: 'For με παρενθέσεις'
+        explanation: 'Τώρα βάζουμε παρενθέσεις γύρω από τους αριθμούς στο βρόχο for. for i in range (0,10):'
+        example: 'Για παράδειγμα: for i in range(0,10):'
+        demo_code: |-
+            for i in range(0,10):
+                print(i)
+            print('Έτοιμοι ή όχι, έρχομαι!')
+
 
 12:
-  start_code: "fruit is ['μήλο', 'μπανάνα', 'κεράσι']\nprint(fruit)"
-  intro_text: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες. "
-  commands:
-    - name: 'Αγκύλες γύρω από λίστες'
-      explanation: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες."
-      example: "Για παράδειγμα: fruit is ['μήλο', 'μπανάνα', 'κεράσι']"
-      demo_code: "fruit is ['μήλο', 'μπανάνα', 'κεράσι']\nprint(fruit)"
-    - name: 'Πάρε ένα αντικείμενο από μία λίστα'
-      explanation: 'Για να πάρουμε ένα αντικείμενο από μια λίστα χρησιμοποιούμε [αριθμός] έτσι fruit[1] σημαίνει, πάρε το πρώτο φρούτο από τη λίστα!'
-      example: 'Για παράδειγμα: firstfruit is fruit[1]'
-      demo_code:
-        "fruit is ['μήλο', 'μπανάνα', 'κεράσι'']\nfirstfruit is fruit[1]\nprint(firstfruit)"
-    - name: 'Πάρε ένα τυχαίο αντικείμενο από τη λίστα'
-      explanation: 'Για να πάρουμε ένα τυχαίο αντικείμενο από τη λίστα χρησιμοποιούμε [random] έτσι fruit[random] σημαίνει, πάρε ένα τυχαίο φρούτο από τη λίστα!'
-      example: 'Για παράδειγμα: randomfruit is fruit[random]'
-      demo_code:
-        "fruit is ['μήλο', 'μπανάνα', 'κεράσι'']\nrandomfruit is fruit[random]\nprint(randomfruit)"
+    start_code: |-
+        fruit is ['μήλο', 'μπανάνα', 'κεράσι']
+        print(fruit)
+    intro_text: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες. "
+    commands:
+    -   name: 'Αγκύλες γύρω από λίστες'
+        explanation: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες."
+        example: "Για παράδειγμα: fruit is ['μήλο', 'μπανάνα', 'κεράσι']"
+        demo_code: |-
+            fruit is ['μήλο', 'μπανάνα', 'κεράσι']
+            print(fruit)
+    -   name: 'Πάρε ένα αντικείμενο από μία λίστα'
+        explanation: 'Για να πάρουμε ένα αντικείμενο από μια λίστα χρησιμοποιούμε [αριθμός] έτσι fruit[1] σημαίνει, πάρε το πρώτο φρούτο από τη λίστα!'
+        example: 'Για παράδειγμα: firstfruit is fruit[1]'
+        demo_code: |-
+            fruit is ['μήλο', 'μπανάνα', 'κεράσι'']
+            firstfruit is fruit[1]
+            print(firstfruit)
+    -   name: 'Πάρε ένα τυχαίο αντικείμενο από τη λίστα'
+        explanation: 'Για να πάρουμε ένα τυχαίο αντικείμενο από τη λίστα χρησιμοποιούμε [random] έτσι fruit[random] σημαίνει, πάρε ένα τυχαίο φρούτο από τη λίστα!'
+        example: 'Για παράδειγμα: randomfruit is fruit[random]'
+        demo_code: |-
+            fruit is ['μήλο', 'μπανάνα', 'κεράσι'']
+            randomfruit is fruit[random]
+            print(randomfruit)
 13:
-  start_code:
-    "print('Πόσο κάνει 5+3?')\nanswer = 5+3\nprint('η απάντηση τώρα είναι:')\nprint(answer)\nif answer == 8:\n  print('Αυτό είναι σωστό!')\nelse:\n  print('Οχι, αυτό είναι λάθος!')"
-  intro_text: 'Τώρα θα αλλάξουμε το is σε = και ==. Χρησιμοποιούμε = αν θέλουμε να αναθέσουμε μια τιμή σε μια μεταβλητή. Αν θέλεις να αναθέσεις την τιμή 9 στη μεταβλητή answer, τότε γράφουμε answer = 8. Χρησιμοποιούμε το == όταν θέλουμε να ελέγξουμε αν δυο πράγματα είναι το ίδιο.'
-  commands:
-    - name: 'Σύγκρινε'
-      explanation: 'Αν θέλουμε να συγκρίνουμε, χρησιμοποιούμε ==. Το 5+3 == 8 ελέγχει αν 5+3 ισούται με 8'
-      example: 'Για παράδειγμα: 5+3 == 8'
-      demo_code:
-        "if 5+3 == 8:\n    print('5+3 ισούται πράγματι με 8')\nelse:\n  print('Αυτό δε θα εμφανιστεί επειδή 5+3 ισούται με 8!')"
-    - name: 'Ανάθεσε τιμή'
-      explanation: 'Αν θέλουμε να πούμε πως η μεταβλητή με το όνομα answer είναι 8, τότε λέμε answer = 8.'
-      example: 'Για παράδειγμα: answer = 8'
-      demo_code:
-        "print('Πόσο κάνει 5+3?')\nanswer = 5+3\nprint('η απάντηση τώρα είναι:')\nprint(answer)"
-    - name: 'Σύγκρινε και ανάθεσε τιμή'
-      explanation: 'Αν θέλουμε να συγκρίνουμε δυο τιμές, χρησιμοποιούμε ==. Αν είναι να αναθέσουμε τιμή σε μια μεταβλητή, χρησιμοποιούμε =. '
-      example: 'Για παράδειγμα: 5+3 == 8, answer = 8'
-      demo_code:
-        "print('Πόσο κάνει 5+3;')\nanswer = 5+3\nprint('η απάντηση τώρα είναι:')\nprint(answer)\nif answer == 8:\n  print('Αυτό είναι σωστό!')\nelse:\n  print('Όχι, αυτό είναι λάθος!')"
+    start_code: |-
+        print('Πόσο κάνει 5+3?')
+        answer = 5+3
+        print('η απάντηση τώρα είναι:')
+        print(answer)
+        if answer == 8:
+          print('Αυτό είναι σωστό!')
+        else:
+          print('Οχι, αυτό είναι λάθος!')
+    intro_text: 'Τώρα θα αλλάξουμε το is σε = και ==. Χρησιμοποιούμε = αν θέλουμε να αναθέσουμε μια τιμή σε μια μεταβλητή. Αν θέλεις να αναθέσεις την τιμή 9 στη μεταβλητή answer, τότε γράφουμε answer = 8. Χρησιμοποιούμε το == όταν θέλουμε να ελέγξουμε αν δυο πράγματα είναι το ίδιο.'
+    commands:
+    -   name: 'Σύγκρινε'
+        explanation: 'Αν θέλουμε να συγκρίνουμε, χρησιμοποιούμε ==. Το 5+3 == 8 ελέγχει αν 5+3 ισούται με 8'
+        example: 'Για παράδειγμα: 5+3 == 8'
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 ισούται πράγματι με 8')
+            else:
+              print('Αυτό δε θα εμφανιστεί επειδή 5+3 ισούται με 8!')
+    -   name: 'Ανάθεσε τιμή'
+        explanation: 'Αν θέλουμε να πούμε πως η μεταβλητή με το όνομα answer είναι 8, τότε λέμε answer = 8.'
+        example: 'Για παράδειγμα: answer = 8'
+        demo_code: |-
+            print('Πόσο κάνει 5+3?')
+            answer = 5+3
+            print('η απάντηση τώρα είναι:')
+            print(answer)
+    -   name: 'Σύγκρινε και ανάθεσε τιμή'
+        explanation: 'Αν θέλουμε να συγκρίνουμε δυο τιμές, χρησιμοποιούμε ==. Αν είναι να αναθέσουμε τιμή σε μια μεταβλητή, χρησιμοποιούμε =. '
+        example: 'Για παράδειγμα: 5+3 == 8, answer = 8'
+        demo_code: |-
+            print('Πόσο κάνει 5+3;')
+            answer = 5+3
+            print('η απάντηση τώρα είναι:')
+            print(answer)
+            if answer == 8:
+              print('Αυτό είναι σωστό!')
+            else:
+              print('Όχι, αυτό είναι λάθος!')
