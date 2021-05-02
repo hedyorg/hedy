@@ -711,11 +711,6 @@ def translate_fromto(source, target):
     files = []
 
     files.append(translating.TranslatableFile(
-      'Adventures',
-      f'adventures/{target}.yaml',
-      translating.struct_to_sections(source_adventures, target_adventures)))
-
-    files.append(translating.TranslatableFile(
       'Levels',
       f'level-defaults/{target}.yaml',
       translating.struct_to_sections(source_levels, target_levels)))
@@ -724,6 +719,11 @@ def translate_fromto(source, target):
       'Messages',
       f'texts/{target}.yaml',
       translating.struct_to_sections(source_texts, target_texts)))
+
+    files.append(translating.TranslatableFile(
+      'Adventures',
+      f'adventures/{target}.yaml',
+      translating.struct_to_sections(source_adventures, target_adventures)))
 
     return render_template('translate-fromto.html',
         source_lang=source,

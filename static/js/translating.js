@@ -47,6 +47,7 @@ $(function() {
     var fileName = form.find('*[name=file]').val();
 
     var formData = FORM_MAP.get(fileName);
+    console.log(formData);
 
     if (!formData) {
       var button = $('<button>').addClass('yellow-btn').addClass('mx-4').text(fileName).click(() => {
