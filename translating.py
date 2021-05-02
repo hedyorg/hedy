@@ -146,20 +146,32 @@ def normalize_yaml_blocks(data):
 
   This will make your YAML pretty and easy to work with.
   """
-  if isinstance(data, str):
-    newlines = '\n' in data
-    if newlines:
-      return yaml.scalarstring.LiteralScalarString(str(data))
-    else:
-      return str(data)
-
   if isinstance(data, list):
-    return [normalize_yaml_blocks(x) for x in data]
+    for i, el in enumerate(data):
+      if isinstance(el, str):
+        pass
+        # data[i] = maybe_translate_to_block(el)
+      else:
+        normalize_yaml_blocks(el)
+    return data
 
   if isinstance(data, dict):
-    return {k: normalize_yaml_blocks(v) for k, v in data.items()}
+    for key, value in list(data.items()):
+      if isinstance(value, str):
+        pass
+        # data[key] = maybe_translate_to_block(value)
+      else:
+        normalize_yaml_blocks(value)
+    return data
 
   return data
+
+
+def maybe_translate_to_block(x):
+  newlines = '\n' in x
+  if newlines and not isinstance(x, yaml.scalarstring.LiteralScalarString):
+    return yaml.scalarstring.LiteralScalarString(str(x))
+  return x
 
 
 def normalize_newlines(x):
