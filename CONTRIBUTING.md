@@ -6,13 +6,13 @@ Hedy is now available in Dutch, French, English, Brazilian Portugese, Greek Mand
 Help Hedy with translations (easy, no programming needed!)
 ------------
 
-The easiest way to translate Hedy is by using or translation UI website!
-
-![image](https://user-images.githubusercontent.com/1003685/116811467-c9b55a80-ab49-11eb-93ef-7e1bc2b96ebb.png)
+The easiest way to translate Hedy is by using or translation UI website! 
 
 Simply go to https://www.hedycode.com/translate/en/new and translate our texts that are shown on the left in the boxes on the right. When you are done, you can use the three download button at the end of the page, and [send us the files](mailto:hedy@felienne.com).
 
-You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again doanload the files and send them to us per email.
+![image](https://user-images.githubusercontent.com/1003685/116811756-3ed55f80-ab4b-11eb-881a-85677a30ef5e.png)
+
+You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again download the files and send them to us per email.
 
 
 Help Hedy with translations (in the cobe base, some coding experience needed)
