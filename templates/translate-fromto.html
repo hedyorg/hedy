@@ -35,7 +35,7 @@
     </ol>
 
       {% for file in files %}
-        <form method="POST" action="/update_yaml">
+        <form method="POST" action="/update_yaml" data-file="{{file.file}}">
           <input type="hidden" name="file" value="{{file.file}}">
         <h2>{{file.caption}}</h2>
         <table class="w-full">
@@ -66,6 +66,9 @@
       <div>
         Download your translated file(s) with these buttons:
       </div>
+      {% for file in files %}
+        <button class="yellow-btn mx-4" data-file="{{file.file}}">{{file.file}}</button>
+      {% endfor %}
     </div>
 
     <script src="/vendor/jquery.min.js" type="text/javascript"></script>

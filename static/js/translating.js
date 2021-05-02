@@ -43,26 +43,26 @@ $(function() {
   var FORM_MAP = new Map();
 
   function recordChangeToForm(form) {
-    $('#download-bar').removeClass('hidden');
-    var fileName = form.find('*[name=file]').val();
-
+    var fileName = form.data('file');
     var formData = FORM_MAP.get(fileName);
 
     if (!formData) {
-      var button = $('<button>').addClass('yellow-btn').addClass('mx-4').text(fileName).click(() => {
-        form.submit();
-      });
-
-      $('#download-bar').append(button);
-
+      var button = $('button[data-file="' + fileName + '"]');
       formData = {
         button: button,
         changes: 0,
       }
+
       FORM_MAP.set(fileName, formData);
     }
 
     formData.changes += 1;
     formData.button.text(`${fileName} (${formData.changes})`);
   }
+
+  $('button[data-file]').click(e => {
+    var fileName = $(e.target).data('file');
+    var form = $('form[data-file="' + fileName + '"]');
+    form.submit();
+  });
 });

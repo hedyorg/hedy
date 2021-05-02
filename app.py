@@ -743,11 +743,13 @@ def update_yaml():
     data = load_yaml_rt(filepath)
     for key, value in request.form.items():
         if key.startswith('c:'):
-            translating.apply_form_change(data, key[2:], value)
+            translating.apply_form_change(data, key[2:], translating.normalize_newlines(value))
+
+    data = translating.normalize_yaml_blocks(data)
 
     return Response(dump_yaml_rt(data),
         mimetype='application/x-yaml',
-        headers={'Content-disposition': 'attachment; filename=' + path.basename(filename)})
+        headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
 
 # *** AUTH ***

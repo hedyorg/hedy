@@ -50,7 +50,7 @@ def load_yaml_rt(filename):
 
 def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
-    return yaml.round_trip_dump(data, indent=4)
+    return yaml.round_trip_dump(data, indent=4, width=999)
 
 
 # *** DYNAMO DB ***
