@@ -8,11 +8,10 @@
   <div>
     {% for command in commands %}
     <div class="justify-between my-2 shadow-md p-3 pl-4">
-      <div class="font-medium text-lg mb-2" tabindex=0>
+      <div class="font-thin text-lg flex-grow" tabindex=0>
         {{ command.explanation|commonmark }}
       </div>
       <div class="flex">
-
         <button class="btn block flex-none self-end ml-1"
           onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
       </div>
