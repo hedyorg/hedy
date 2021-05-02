@@ -1,0 +1,227 @@
+---
+	  1:
+	    intro_text: "欢迎来到海迪！在第1级目标你可以使用命令print, ask 和 echo。按下蓝色的按钮，代码就会为你打出来！使用左边编程栏下的绿色 "运行代码 "按钮，你可以尝试运行这段代码。"
+	    start_code: "print 你好世界!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，用print可以打印一些东西。"
+	        example: "例如：print你好欢迎来到海迪！"
+	        demo_code: "print 你好欢迎来到海迪！"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出一些问题。"
+	        example: "例如: ask你最喜欢的颜色是什么?"
+	        demo_code: "ask 你最喜欢的颜色是什么?"
+	      -
+	        name: "echo"
+	        explanation: "意思是重复，用echo可以重复执行某一任务。"
+	        example: "例如: echo 那么你最喜欢的颜色是..."
+	        demo_code: "ask 你最喜欢的颜色是什么?\\necho 那么你最喜欢的颜色是..."
+	  2:
+	    intro_text: "在第2级目标中, print 的使用方法仍旧如同在第1级目标中一样, 但是ask 已被改变并且需要一个你可以打印的名称. 不再需要echo了.你现在也可以使用这些命令:"
+	    start_code: "print 你好世界!"
+	    commands:
+	      -
+	        name: "is"—中文词汇可以用来命名吗？
+	        explanation: "是，用来给一个词命名以便在程序中使用"
+	        example: "例如: name is 海迪。"
+	        demo_code: "name is 海迪\\nprint 欢迎name"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出一些问题。注意! 现在提问需要一个名字。"
+	        example: "例如：color is ask 你最喜欢的颜色是什么？"
+	        demo_code: "color is ask 你最喜欢的颜色是什么?\\nprint color是我最喜欢的颜色!"
+	      -
+	        name: "choose_random"
+	        explanation: "意思是随机选择，用 at 和 random 可以从一组词汇中随机选择一个词。"
+	        example: "例如：animal is 狗, 猫， 袋鼠。"
+	        demo_code: "animal is 狗，猫，袋鼠\\nprint animal at random"
+	  3:
+	    start_code: "print '你好世界'"
+	    intro_text: "在第3级目标中, print 的使用方法仍旧如同在第2级目标中一样，但是print的使用方法有所不同了，你需要在你想要打印的内容前后两边加上单引号。"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，可以用来打印单引号里面的内容"
+	        example: "例如: 'print你好欢迎来到海迪。'"
+	        demo_code: "print '你好欢迎来到海迪。'"
+	      -
+	        name: "is"
+	        explanation: "是, 可以用来给一段文本命名并不带引号打印print出这段文本."
+	        example: "例如：name is 海迪."
+	        demo_code: "name is 海迪\\nprint '我的名字是name'"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出问题。"
+	        example: "例如：color is ask 你最喜欢的颜色是什么？"
+	        demo_code: "color is ask你最喜欢的颜色是什么?\\nprint color ' 是你最喜欢的颜色!'"
+	  4:
+	    start_code: "name is ask你的名字是什么?\nif name is 海迪 print '酷!' elseprint '呵呵'"
+	    intro_text: "ask 和 print 的使用方法和在第3级目标里面一样. 在第4级目标里面增加了if条件语句!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，用print 打印的内容前后两边都要用单引号标注清楚。"
+	        example: "例如: print '你好欢迎来到海迪。'"
+	        demo_code: "print '你好欢迎来到海迪。'"
+	      -
+	        name: "ask"
+	        explanation: "意思是提问，用ask可以提出问题。注意! 现在打印内容的前后两边都需要用引号标注清楚。"
+	        example: "例如: 颜色 is ask 你最喜欢的颜色是什么?"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么?\\nprint 颜色 ' 是你最喜欢的颜色!'"
+	      -
+	        name: "if-else条件语句"
+	        explanation: "意思是如果..(那么)...否则...，可以用来做出选择。If（如果）后面的语句用来判断条件的真假，如果判断条件为真就执行if后面的（那么）语句，如果判断条件为假就执行else(否则)后面的语句。"
+	        example: "例如: if color is 绿色(那么)print '漂亮!' else print '呵呵'"
+	        demo_code: "color is ask你最喜欢的颜色是什么?\\nif color is 绿色 print '漂亮!' else print '呵呵'"
+	  5:
+	    start_code: "repeat 3 times print '海迪很好玩!'"
+	    intro_text: "ask, print 和 if 的功能和在第四级目标里面一样. 但是在第五级目标里面增加了repeat循环命令.Repeat循环语句可以用来多次执行一段代码."
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，可以用print 打印的内容前后两边都要用单引号标注清楚。"
+	        example: "例如: print '你好欢迎来到海迪。'"
+	        demo_code: "print '你好欢迎来到海迪。'"
+	      -
+	        name: "ask"
+	        explanation: " 意思是提问，用ask提出问题。"
+	        example: "例如: color is ask你最喜欢的颜色是什么？"
+	        demo_code: "color is ask 你最喜欢的颜色是什么？\\nprint color '是你最喜欢的颜色!'"
+	      -
+	        name: "if-else"
+	        explanation: "意思是如果..(那么)...否则...，用来做出选择。If（如果）后面的语句用来判断条件的真假，如果判断条件为真就执行if后面的（那么）语句，如果判断条件为假就执行else(否则)后面的语句。"
+	        example: "例如: if 颜色 is 绿色(那么) print '漂亮!' else print '呵呵'"
+	        demo_code: "颜色 is ask你最喜欢的颜色是什么？\\nif 颜色 is 绿色 print '漂亮!' else print '呵呵'"
+	      -
+	        name: "repeat"
+	        explanation: "意思是重复或者循环，指的是repeat循环语句和if-else条件语句的组合"
+	        example: "例如: if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	        demo_code: "color is ask你最喜欢的颜色是什么?\\nif color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	  6:
+	    start_code: "print '5 乘以 5 is ' 5 * 5"
+	    intro_text: "ask, print, if-else条件语句 和 repeat循环语句 的在这一级目标中的使用方法与在第四4级目标和第5级目标里面一样。 第6级目标里面增加了一些新的内容... 现在你可以计算啦。 "
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "意思是打印，现在打印内容的前后两边都需要用引号标注清楚。"
+	        example: "例如: print '5 乘以 5 是 ' 5 * 5"
+	        demo_code: "print '5 乘以5 是 ' 5 * 5"
+	      -
+	        name: "用ask 和 if-else条件语句来进行计算"
+	        explanation: "用ask提出计算题然后用if-else条件语句检查答案是否正确。"
+	        example: "例如: answer is ask 10加10等于几?"
+	        demo_code: "answer is ask 10加10等于几?\\nif answer is 20 print '做得好!' else print '糟糕,算错啦！'"
+	      -
+	        name: "repeat "
+	        explanation: "意思是重复或者循环，repeat循环语句和if-else 条件语句的组合"
+	        example: "例如: if answer is 50 repeat 3 times print '正确！' else repeat 5 times print '不正确！'"
+	        demo_code: "answer is ask 10乘以5等于几？ \\nif answer is 50 repeat 3 times print '正确！' else repeat 5 times print '不正确！'"
+	  7:
+	    start_code: "repeat 5 times\n    print '大家好'\n    print '这段话将被打印五次'"
+	    intro_text: "ask 和 print 的使用方法依旧保持不变. 但是 if -else条件语句和 repeat循环语句已经改变了!你现在可以执行一组代码, 但是你将不得不使用缩进. 这意味着首行缩进四个空格.当你想要创建只有一行的代码块的时候这一点也适用. 如果你整合了一个repeat循环语句和if-else条件语句，那么你需要缩进每个代码块. 请看下面的范例以了解更多细节!"
+	    commands:
+	      -
+	        name: "print"
+	        explanation: "打印一些内容。记得在打印内容的前后两边都用引号标注清楚。"
+	        example: "例如: print '5 乘以5 是 ' 5 * 5"
+	        demo_code: "print '5 乘以 5 是 ' 5 * 5"
+	      -
+	        name: "多行的if-else条件语句"
+	        explanation: "使用ask 提问加法运算的答案然后检查答案是否正确.我们现在可以打印两行代码了。"
+	        example: "例如: answer is ask 5加5等于几?"
+	        demo_code: "answer is ask 5加5等于几?\\nif answer is 10\\n    print '做得好!'\\n    print '确实, 答案就是 'answer\\nelse\\n    print '糟糕!'\\n    print '答案就是10 ' "
+	      -
+	        name: "if-else 条件语句和 repeat 循环语句的组合"
+	        explanation: " if-else 条件语句和 repeat 循环语句的组合"
+	        example: "例如: if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+	        demo_code: "color is ask你最喜欢的颜色是什么?\\nif color is 绿色\\n    repeat 3 times\\n        print '漂亮!'\\nelse\\n    repeat 5 times\\n        print '呵呵'"
+8:
+    start_code: "for i in range 1 to 10\n    print i\nprint '无论你是否准备好了，我都会来的！'"
+    intro_text: "print的使用方法照旧不变但是repeat现在被for所代替！你要用 for i in range 1 to 5, 代替 repeat 5 times。你也可以在你的程序中使用i！记住在 "for "和 "if "语句后使用缩进（这意味着以四个空格开始一个句子）。"
+    commands:
+           -
+             name: "repeat"
+             explanation: "我们用for 代替repeat"
+             example: "for i in range 1 to 10"
+             demo_code: |
+               for i in range 1 to 10
+                 print i
+               print '无论你是否准备好了，我都会来的！'
+9:
+    start_code: "for i in range 1 to 10:\n    print i\nprint '无论你是否准备好了，我都会来的！"
+    intro_text: "现在我们将对缩进进行一些改变。每当我们需要用缩进时，我们都需要在缩进前的那一行使用冒号“:”。"
+    commands:
+      - name: "for 语句和冒号 :"
+        explanation: "当我们使用 "for "时，我们需要在 "for "语句后面加一个冒号":"!"
+        example: "for i in range 1 to 10:"
+        demo_code: "for i in range 1 to 11:\n    print i\nprint '无论你是否准备好了，我都会来的！'"
+      - name: "if-else条件语句 和冒号 :"
+        explanation: "我们需要对所有的 "if-else"语句做同样的处理"
+        example: "if color is 绿色:'"
+        demo_code: "clor is 绿色\nif color is 绿色:\n    print '颜色是绿色'\nelse:\n    print '颜色不是绿色'"
+      - name: "(选学) if – elif – else 条件语句"
+        explanation: "我们将向你展示一个允许你使用的新命令：elif即else if意思是否则如果。条件语句if – elif – else的意思是如果..(那么)... 否则如果..(那么)...否则...，我们要按照顺序判断条件语句的真假，第一步，判断 if（如果）条件是否为真，如果为真就执行if后面的（那么）语句，如果为假就进入第二步，也就是判断elif（否则如果）条件，如果这个条件为真就执行elif后面的（那么）语句, 如果为假就进入第三步也就是执行else语句。
+        example: "elif a is 5:"
+        demo_code: "a is 2\nif a is 1:\n    print 'a 是 1'\nelif a is 2:\n    print 'a 是2'\nelse:\n    print 'a 不是 1 或者2'"
+10:
+    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print '我们在第i轮，我们每次都要数到j"
+    intro_text: "从现在开始，我们可以更频繁地重复一个循环。在这个例子中，我们数到5连做3遍。所以我们一共做了3轮，每次都数到5。"
+    commands:
+      - name: "for语句和其他语句"
+        explanation: "这是一个使用for语句的例子。"
+        demo_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print '我们在第i轮，我们每次都要数到j '"
+      - name: "if under eachother"
+        explanation: "我们可以用if语句做同样的事情。"
+        demo_code: "color is 蓝色\ncolor2 is 黄色\nif color is 蓝色:\n    if color2 is 黄色:\n        print '我们一起践行绿色生活!'"
+11:
+    start_code: "age is input('你现在几岁了?')\nprint('所以你的年龄曾经是:')\nfor i in range(0,age):\n    print(i)"
+    intro_text: "我们要开始用小括号还要改变ask! 我们把ask替换为input! 我们现在使用print、ask和for的时候要加上小括号。"
+    commands:
+      - name: "Print"
+        explanation: "我们现在要把打印的内容用小括号括起来!"
+        example: "例如: print('你好世界')"
+        demo_code: "print('你好世界')"
+      - name: "用input代替ask!"
+        explanation: "我们现在不会再用ask 了，我们现在要用 input 代替，同时我们要把input 的内容用小括号括起来。"
+        example: "例如: answer is input('你的名字是什么？')"
+        demo_code: "answer = input('你的名字是什么')\nprint('所以你的名字是 ' answer)"
+      - name: "在For循环语句中使用小括号"
+        explanation: "我们现在要把for循环语句中的数字用小括号括起来。for i in range (0,10):"
+        example: "例如：for i in range(0,10):"
+        demo_code: "for i in range(0,10):\n    print(i)\nprint('无论你是否准备好了，我都会来的')"
+  12:
+    start_code: "fruit is ['苹果', '香蕉', '樱桃']\nprint(水果)"
+    intro_text: "我们现在要把列表的内容用中括号括起来！我们现在也需要把列表里面的每一项都用单引号(')标示清楚。”
+    commands:
+      - name: "在列表中使用中括号"
+        explanation: " 我们现在要把列表的内容用中括号括起来！我们现在也需要把列表里面的每一项都用单引号(')标示清楚。"
+        example: "例如: fruit is ['苹果', '香蕉', '樱桃']"
+        demo_code: "fruit is ['苹果', '香蕉', '樱桃']\nprint(fruit)"
+      - name: "Get an item from a list从一个列表中检索元素"
+        explanation: "我们用[数字]从一个列表中检索元素，因此 fruit[1] 的意思就是从列表fruit中检索第一个元素！"
+        example: "例如：firstfruit is fruit[1]"
+        demo_code: "fruit is ['香蕉', '苹果', '樱桃']\nfirstfruit is fruit[1]\nprint(firstfruit)"
+      - name: "从一个列表中随机选择元素"
+        explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果！"
+        example: "例如：randomfruit is fruit[random]"
+        demo_code: "fruit is ['香蕉', '苹果', '樱桃']\nrandomfruit is fruit[random]\nprint(randomfruit)"
+13:
+    start_code: "print('5+3等于几?')\nanswer = 5+3\nprint('现在的答案是:')\nprint(answer)\nif answer == 8:\n  print('正确！')\nelse:\n  print('呃，错了！')"
+intro_text: "现在我们要把 "is "改为"="和"=="。 当我们想给变量赋值时就用等号"="，例如给变量名为answer的变量赋值8，就用"answer = 8"。当我们想判断两个事物是否相等时就用双等于号"=="。"
+    commands:
+      - name: "比较"
+        explanation: "我们用双等于号"=="比较。"
+        example: "例如: 5+3 == 8"
+        demo_code: "if 5+3 == 8:\n    print('5+3 确实等于8')\nelse:\n  print('这将不会被打印出来，因为5+3不等于8！')"
+      - name: "赋值"
+        explanation: "如果我们想说变量名为answer的变量等于8，就用"answer = 8".”
+        example: "例如: answer = 8"
+        demo_code: "print('5+3等于几？)\nanswer = 5+3\nprint('现在的答案是:')\nprint(answer)"
+      - name: "比较和赋值"
+        explanation: "如果我们想比较两个数值，我们就用双等于号==。如果我们想给一个变量赋值，我们就用等于号=。"
+        example: "例如: 5+3 == 8, answer = 8"
+        demo_code: "print('5+3等于几?')\nanswer = 5+3\nprint('现在的答案是:')\nprint(answer)\nif answer == 8:\n  print('正确!')\nelse:\n  print('不对，错了!')"	        	
+
+
