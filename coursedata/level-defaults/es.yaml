@@ -22,7 +22,9 @@
     -   name: "echo"
         explanation: "Repiter algo usando `echo`."
         example: "Ejemplo: echo entonces su color favorito es..."
-        demo_code: "`ask` ¿Cuál es tu color favorito?\necho entonces su color favorito es..."
+        demo_code: |-
+            `ask` ¿Cuál es tu color favorito?
+            echo entonces su color favorito es...
 2:
     intro_text: |
         En el nivel 2 aprendemos algo nuevo. Puede nombrar una palabra con "es".
@@ -45,15 +47,21 @@
     -   name: "is"
         explanation: "Dar un nombre a una palabra para usar en el programa con `is`."
         example: "Ejemplo: nombre is Hedy"
-        demo_code: "nombre is Hedy\nprint Bienvenido nombre"
+        demo_code: |-
+            nombre is Hedy
+            print Bienvenido nombre
     -   name: "ask"
         explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is `ask` ¿Cuál es tu color favorito?"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nprint color es tú favorito"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            print color es tú favorito
     -   name: "choose_random"
         explanation: "Seleccionar una palabra aleatoria usando `at` y `random`."
         example: "Ejemplo: animales is perro, gato, canguro"
-        demo_code: "animales is perro, gato, canguro\nprint animales at random"
+        demo_code: |-
+            animales is perro, gato, canguro
+            print animales at random
 3:
     intro_text: |
         `ask` funciona igual en el nivel 3 que en el nivel 2, pero` print` es diferente ahora.
@@ -76,13 +84,19 @@
     -   name: "is"
         explanation: "Dar un nombre al texto y mostrar sin comillas simples."
         example: "Ejemplo: nombre is Hedy"
-        demo_code: "nombre is Hedy\nprint 'Mi nombre es ' nombre"
+        demo_code: |-
+            nombre is Hedy
+            print 'Mi nombre es ' nombre
     -   name: "ask"
         explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            print 'Tu color favorito es ' color
 4:
-    start_code: "nombre is ask ¿Cómo te llamas?\nif nombre is Hedy print 'divertido' else print 'menos divertido!'"
+    start_code: |-
+        nombre is ask ¿Cómo te llamas?
+        if nombre is Hedy print 'divertido' else print 'menos divertido!'
     intro_text: |
         `ask` e` print` siguen funcionando como en el nivel 3.
 
@@ -107,11 +121,15 @@
     -   name: "ask"
         explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            print 'Tu color favorito es ' color
     -   name: "if"
         explanation: "Tomar una decisión con `if`"
         example: "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde print 'bonito!' else print 'no es tan bonito'"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            if color is verde print 'bonito!' else print 'no es tan bonito'
 5:
     start_code: "repeat 3 times print 'Hedy es divertido!'"
     intro_text: |
@@ -130,15 +148,21 @@
     -   name: "ask"
         explanation: "Preguntar algo con `ask`."
         example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nprint 'Tu color favorito es ' color"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            print 'Tu color favorito es ' color
     -   name: "if"
         explanation: "Tomar una decisión con `if`."
         example: "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde print 'bonito!' else print 'no es tan bonito'"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            if color is verde print 'bonito!' else print 'no es tan bonito'
     -   name: "repeat"
         explanation: "Repetir algo con `repeat` e `if`."
         example: "Ejemplo: if color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
-        demo_code: "color is ask ¿Cuál es tu color favorito?\nif color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
+        demo_code: |-
+            color is ask ¿Cuál es tu color favorito?
+            if color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'
 6:
     start_code: "print '5 veces 5 es ' 5 * 5"
     intro_text: |
@@ -165,13 +189,20 @@
     -   name: "ask e if con operaciones"
         explanation: "Pregunta por una operación y comprueba que es correcta."
         example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
-        demo_code: "resultado is ask ¿Cuánto es 10 más 10?\nif resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'"
+        demo_code: |-
+            resultado is ask ¿Cuánto es 10 más 10?
+            if resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'
     -   name: "repeat"
         explanation: "`repeat` e `if` combinados"
         example: "Ejemplo: if producto is 50 repeat 3 times print 'correcto!' else repeat 5 times print 'incorrecto!'"
-        demo_code: "producto is ask Cuanto es 10 veces 5?\nif producto is 50 repeat 3 times print 'correcto!' else repeat 5 times print 'incorrecto!'"
+        demo_code: |-
+            producto is ask Cuanto es 10 veces 5?
+            if producto is 50 repeat 3 times print 'correcto!' else repeat 5 times print 'incorrecto!'
 7:
-    start_code: "repeat 5 times\n    print 'Hola amigos'\n    print 'Esto se va a mostrar 5 veces'"
+    start_code: |-
+        repeat 5 times
+            print 'Hola amigos'
+            print 'Esto se va a mostrar 5 veces'
     intro_text: |
         ask y print sigue funcionando como ya sabes. Pero if y repeat han cambiado!
         Ahora puedes ejecutar grupos de código, pero vas a tener que respetar el sangrado.
@@ -204,8 +235,22 @@
     -   name: "`if` con varias líneas"
         explanation: "Pregunta por la respuesta de una operación y comprueba el resultado. Ahora podemos mostrar 2 líneas"
         example: "Ejemplo: resultado is ask ¿Cuánto es 5 más 5?"
-        demo_code: "resultado is ask ¿Cuánto es 5 más 5?\nif resultado is 10\n    print 'Muy bien!'\n    print 'La respuesta claro que es ' resultado\nelse\n    print 'Oops!'\n    print 'La respuesta es 10'"
+        demo_code: |-
+            resultado is ask ¿Cuánto es 5 más 5?
+            if resultado is 10
+                print 'Muy bien!'
+                print 'La respuesta claro que es ' resultado
+            else
+                print 'Oops!'
+                print 'La respuesta es 10'
     -   name: "`if` y `repeat` combinados"
         explanation: "`if` y `repeat` combinados"
         example: "Ejemplo: if color is verde repeat 3 times print '¡Qué bonito!' else repeat 5 times print 'A mi me gusta otro'"
-        demo_code: "color is ask ¿Cuá es tu color favorito?\nif color is verde\n    repeat 3 times\n        print '¡Qué bonito!'\nelse\n    repeat 5 times\n        print 'A mi me gusta otro'"
+        demo_code: |-
+            color is ask ¿Cuá es tu color favorito?
+            if color is verde
+                repeat 3 times
+                    print '¡Qué bonito!'
+            else
+                repeat 5 times
+                    print 'A mi me gusta otro'

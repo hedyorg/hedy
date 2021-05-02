@@ -23,7 +23,9 @@
     -   name: "echo"
         explanation: "Iets herhalen dat is ingetypt met `echo`."
         example: "Bijvoorbeeld: echo dus je lievelingskleur is..."
-        demo_code: "ask Wat is je lievelingskleur?\necho dus je lievelingskleur is..."
+        demo_code: |-
+            ask Wat is je lievelingskleur?
+            echo dus je lievelingskleur is...
 2:
     intro_text: |
         In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `is`.
@@ -46,15 +48,21 @@
     -   name: "is"
         explanation: "Een woord een naam geven met `is`. Je mag de naam zelf kiezen."
         example: "Bijvoorbeeld: voornaam is Hedy."
-        demo_code: "voornaam is Hedy\nprint ik heet voornaam"
+        demo_code: |-
+            voornaam is Hedy
+            print ik heet voornaam
     -   name: "ask"
         explanation: "Iets vragen met `ask`. Maar let op! Je moet je antwoord een naam geven met `is`."
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nprint Jouw favoriet is dus kleur"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            print Jouw favoriet is dus kleur
     -   name: "kies_random"
         explanation: "Iets willekeurigs uit een groep woorden kiezen met `at` en `random`."
         example: "Bijvoorbeeld: dieren is hond, kat, kangoeroe."
-        demo_code: "dieren is hond, kat, kangoeroe\nprint dieren at random"
+        demo_code: |-
+            dieren is hond, kat, kangoeroe
+            print dieren at random
 3:
     start_code: "print 'hallo wereld'"
     intro_text: |
@@ -78,13 +86,19 @@
     -   name: "is"
         explanation: "Een stukje tekst een naam geven met `is` en printen zonder aanhalingstekens"
         example: "Bijvoorbeeld: naam is Hedy."
-        demo_code: "naam is Hedy\nprint 'ik heet ' naam"
+        demo_code: |-
+            naam is Hedy
+            print 'ik heet ' naam
     -   name: "ask"
         explanation: "Iets vragen met `ask`"
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            print 'Jouw favoriet is dus ' kleur
 4:
-    start_code: "naam is ask hoe heet jij?\nif naam is Hedy print 'leuk' else print 'minder leuk!'"
+    start_code: |-
+        naam is ask hoe heet jij?
+        if naam is Hedy print 'leuk' else print 'minder leuk!'
     intro_text: |
         `ask` en `print` werken nog zoals in level 3.
 
@@ -109,11 +123,15 @@
     -   name: "ask"
         explanation: "Iets vragen met `ask`."
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            print 'Jouw favoriet is dus ' kleur
     -   name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            if kleur is groen print 'mooi!' else print 'niet zo mooi'
 5:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: |
@@ -133,15 +151,21 @@
     -   name: "ask"
         explanation: "Iets vragen met `ask`."
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            print 'Jouw favoriet is dus ' kleur
     -   name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            if kleur is groen print 'mooi!' else print 'niet zo mooi'
     -   name: "repeat"
         explanation: "Herhalen en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'
 6:
     start_code: "print '5 keer 5 is ' 5 * 5"
     intro_text: |
@@ -168,13 +192,20 @@
     -   name: "`ask` en `if` samen met rekenen"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
         example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
-        demo_code: "antwoord is ask Hoeveel is 10 plus 10?\nif antwoord is 20 print 'Goedzo!' else print 'Foutje'"
+        demo_code: |-
+            antwoord is ask Hoeveel is 10 plus 10?
+            if antwoord is 20 print 'Goedzo!' else print 'Foutje'
     -   name: "repeat"
         explanation: "Herhalen en `if` samen"
         example: "Bijvoorbeeld: if antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'"
-        demo_code: "antwoord is ask Hoeveel is 5 keer 10\nif antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'"
+        demo_code: |-
+            antwoord is ask Hoeveel is 5 keer 10
+            if antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'
 7:
-    start_code: "repeat 5 times\n  print 'Hallo allemaal'\n  print 'Dit wordt allemaal 5 keer herhaald'"
+    start_code: |-
+        repeat 5 times
+          print 'Hallo allemaal'
+          print 'Dit wordt allemaal 5 keer herhaald'
     intro_text: |
         `ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd!
         Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen,
@@ -206,14 +237,32 @@
     -   name: "`if` met meerdere regels"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
         example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
-        demo_code: "antwoord is ask Hoeveel is 10 plus 10?\nif antwoord is 20\n    print 'Goedzo!'\n    print 'Het antwoord was inderdaad ' antwoord\nelse\n    print 'Foutje'\n    print 'Het antwoord moest zijn 20'"
+        demo_code: |-
+            antwoord is ask Hoeveel is 10 plus 10?
+            if antwoord is 20
+                print 'Goedzo!'
+                print 'Het antwoord was inderdaad ' antwoord
+            else
+                print 'Foutje'
+                print 'Het antwoord moest zijn 20'
     -   name: "`if` en `repeat` samen"
         explanation: "`repeat` en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
-        demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen\n    repeat 3 times\n        print 'mooi!'\nelse\n    repeat 5 times\n        print 'niet zo mooi'"
+        demo_code: |-
+            kleur is ask Wat is je lievelingskleur?
+            if kleur is groen
+                repeat 3 times
+                    print 'mooi!'
+            else
+                repeat 5 times
+                    print 'niet zo mooi'
+
 
 8:
-    start_code: "for i in range 1 to 10\n    print i\nprint 'Wie niet weg is is gezien'"
+    start_code: |-
+        for i in range 1 to 10
+            print i
+        print 'Wie niet weg is is gezien'
     intro_text: "We gaan nu `repeat` veranderen in `for`! Je typt nu for `i in range 1 to 5`, in plaats van `repeat 5 times`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)"
     commands:
     -   name: "repeat vervangen met for"
@@ -224,33 +273,66 @@
               print i
             print 'Wie niet weg is is gezien'
 9:
-    start_code: "for i in range 1 to 10:\n    print i\nprint 'Wie niet weg is is gezien'"
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
     intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel er voor zetten."
     commands:
     -   name: "for met :"
         explanation: "Bij `for` moet je dus een `:` er achter zetten!"
         example: "for i in range 1 to 10:"
-        demo_code: "for i in range 1 to 10:\n    print i\nprint 'wie niet weg is is gezien'"
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'wie niet weg is is gezien'
     -   name: "if met :"
         explanation: "We moeten hetzelfde doen met al onze `if` statements"
         example: "if kleur is groen:"
-        demo_code: "kleur is groen\nif kleur is groen:\n    print 'De kleur is groen'\nelse:\n    print 'De kleur is niet groen'"
+        demo_code: |-
+            kleur is groen
+            if kleur is groen:
+                print 'De kleur is groen'
+            else:
+                print 'De kleur is niet groen'
     -   name: "(Optioneel) elif"
         explanation: "Verder is er een nieuw commando die je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
         example: "elif a is 5:"
-        demo_code: "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'a is 2'\nelse:\n    print 'a is niet 1 of 2'"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is niet 1 of 2'
 10:
-    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we zitten nu in rondje: ' i ' en de tel is: ' j"
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+            print 'we zitten nu in rondje: ' i ' en de tel is: ' j
     intro_text: "Vanaf nu mogen we ook een loopje vaker uitvoeren. In het voorbeeld tellen we 3 maal tot 5. Dus we doen 3 rondjes en tellen elke keer tot 5"
     commands:
     -   name: "for onder elkaar"
         explanation: "Dit is een voorbeeld van for loopjes onder/in elkaar zetten"
-        demo_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we zitten nu in rondje: ' i ' en de tel is: ' j"
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                print 'we zitten nu in rondje: ' i ' en de tel is: ' j
     -   name: "if onder elkaar"
         explanation: "We kunnen hetzelfde doen met if statements"
-        demo_code: "kleur is blauw\nkleurtwee is geel\nif kleur is blauw:\n    if kleurtwee is geel:\n        print 'Samen is dit groen!'"
+        demo_code: |-
+            kleur is blauw
+            kleurtwee is geel
+            if kleur is blauw:
+                if kleurtwee is geel:
+                    print 'Samen is dit groen!'
 11:
-    start_code: "leeftijd is input('Hoe oud ben jij?')\nprint('Dus jij hebt zo veel verjaardagen gehad:')\nfor i in range(0,leeftijd):\n    print(i)"
+    start_code: |-
+        leeftijd is input('Hoe oud ben jij?')
+        print('Dus jij hebt zo veel verjaardagen gehad:')
+        for i in range(0,leeftijd):
+            print(i)
     intro_text: "We gaan nu ronde haakjes toevoegen en ask veranderen! Ask noemen we nu input! Bij print, ask en for gaan we nu haakjes zetten!"
     commands:
     -   name: "Print"
@@ -260,40 +342,79 @@
     -   name: "Ask naar input!"
         explanation: "We zetten ask om en noemen het nu input, ook zetten we haakjes er omheen"
         example: "Bijvoorbeeld: antwoord is input('Hoe heet jij?')"
-        demo_code: "antwoord is input('Hoe heet jij?')\nprint('Dus jij heet ' antwoord)"
+        demo_code: |-
+            antwoord is input('Hoe heet jij?')
+            print('Dus jij heet ' antwoord)
     -   name: "For met haakjes"
         explanation: "We gaan nu in plaats van for i in range 1 to 10, haakjes zetten om de getallen. for i in range(0,10):"
         example: "Bijvoorbeeld: for i in range(0,10):"
-        demo_code: "for i in range(0,10):\n    print(i)\nprint('Wie niet weg is is gezien')"
+        demo_code: |-
+            for i in range(0,10):
+                print(i)
+            print('Wie niet weg is is gezien')
 12:
-    start_code: "fruit is ['appel', 'banaan', 'kers']\nprint(fruit)"
+    start_code: |-
+        fruit is ['appel', 'banaan', 'kers']
+        print(fruit)
     intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
     commands:
     -   name: "Haakjes om lijstjes"
         explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
         example: "Bijvoorbeeld: fruit is ['appel', 'banaan', 'kers']"
-        demo_code: "fruit is ['appel', 'banaan', 'kers']\nprint(fruit)"
+        demo_code: |-
+            fruit is ['appel', 'banaan', 'kers']
+            print(fruit)
     -   name: "Pak iets uit een lijst"
         explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
         example: "Bijvoorbeeld: eerstefruit is fruit[1]"
-        demo_code: "fruit is ['banaan', 'appel', 'kers']\neerstefruit is fruit[1]\nprint(eerstefruit)"
+        demo_code: |-
+            fruit is ['banaan', 'appel', 'kers']
+            eerstefruit is fruit[1]
+            print(eerstefruit)
     -   name: "Pak een random item uit een lijst"
         explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] is pak een random fruit uit de lijst!"
         example: "Bijvoorbeeld: randomfruit is fruit[random]"
-        demo_code: "fruit is ['banaan', 'appel', 'kers']\nrandomfruit is fruit[random]\nprint(randomfruit)"
+        demo_code: |-
+            fruit is ['banaan', 'appel', 'kers']
+            randomfruit is fruit[random]
+            print(randomfruit)
 13:
-    start_code: "print('Hoeveel is 5+3?')\nantwoord = 5+3\nprint('antwoord is nu:')\nprint(antwoord)\nif antwoord == 8:\n  print('Dat is goed!')\nelse:\n  print('Helaas dat is fout!')"
+    start_code: |-
+        print('Hoeveel is 5+3?')
+        antwoord = 5+3
+        print('antwoord is nu:')
+        print(antwoord)
+        if antwoord == 8:
+          print('Dat is goed!')
+        else:
+          print('Helaas dat is fout!')
     intro_text: "Nu veranderen we is in = en ==. Je gebruikt = als je iets een getal wilt maken. Als je bijvoorbeeld antwoord 8 wilt maken zeg je antwoord = 8. == gebruik je om te kijken of twee dingen hetzelfde zijn."
     commands:
     -   name: "Vergelijken"
         explanation: "Als we gaan vergelijken gebruiken we dus ==. 5+3 == 8 kijkt dus of 5+3 gelijk is aan 8"
         example: "Bijvoorbeeld: 5+3 == 8"
-        demo_code: "if 5+3 == 8:\n    print('5+3 is inderdaad 8')\nelse:\n  print('Dit wordt niet geprint want 5+3 is 8!')"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 is inderdaad 8')
+            else:
+              print('Dit wordt niet geprint want 5+3 is 8!')
     -   name: "Waarde geven"
         explanation: "Als we willen zeggen dat een variabele genaamd antwoord 8 is, dan doen we antwoord = 8."
         example: "Bijvoorbeeld: antwoord = 8"
-        demo_code: "print('Hoeveel is 5+3?')\nantwoord = 5+3\nprint('antwoord is nu:')\nprint(antwoord)"
+        demo_code: |-
+            print('Hoeveel is 5+3?')
+            antwoord = 5+3
+            print('antwoord is nu:')
+            print(antwoord)
     -   name: "Vergelijken en waarde geven"
         explanation: "Als we gaan vergelijken gebruiken we dus ==. Als we een waarde geven dan gebruiken we =. "
         example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
-        demo_code: "print('Hoeveel is 5+3?')\nantwoord = 5+3\nprint('antwoord is nu:')\nprint(antwoord)\nif antwoord == 8:\n  print('Dat is goed!')\nelse:\n  print('Helaas dat is fout!')"
+        demo_code: |-
+            print('Hoeveel is 5+3?')
+            antwoord = 5+3
+            print('antwoord is nu:')
+            print(antwoord)
+            if antwoord == 8:
+              print('Dat is goed!')
+            else:
+              print('Helaas dat is fout!')

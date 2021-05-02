@@ -22,7 +22,9 @@
     -   name: "echo"
         explanation: "Répète quelque chose avec `echo`."
         example: "Exemple: echo donc ta couleur préférée est..."
-        demo_code: "ask Quelle est ta couleur préférée?\necho donc ta couleur préférée est..."
+        demo_code: |-
+            ask Quelle est ta couleur préférée?
+            echo donc ta couleur préférée est...
 2:
     intro_text: |
         Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `is`.
@@ -45,15 +47,21 @@
     -   name: "is"
         explanation: "Donne un nom à un mot que tu peux utiliser dans le programme avec `is`"
         example: "Exemple: nom is Hedy."
-        demo_code: "nom is Hedy\nprint bienvenue nom"
+        demo_code: |-
+            nom is Hedy
+            print bienvenue nom
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`. Attention! Tu dois donner à la réponse un nom avec `is`."
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur est ton préféré !"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            print couleur est ton préféré !
     -   name: "choisi_au hasard"
         explanation: "Choisi un mot au hasard dans un groupe avec `at random`"
         example: "Exemple: animaux is chien, chat, kangourou"
-        demo_code: "animaux is chien, chat, kangourou\nprint animaux at random"
+        demo_code: |-
+            animaux is chien, chat, kangourou
+            print animaux at random
 3:
     start_code: "print 'Bonjour le monde'"
     intro_text: |
@@ -76,13 +84,19 @@
     -   name: "is"
         explanation: "Donne un nom à un mot que tu peux utiliser dans le programme sans guillemets"
         example: "Exemple: nom is Hedy."
-        demo_code: "nom is Hedy\nprint 'mon nom est ' nom"
+        demo_code: |-
+            nom is Hedy
+            print 'mon nom est ' nom
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            print couleur ' est ta couleur préférée!'
 4:
-    start_code: "nom is ask quel est ton nom?\nif nom is Hedy print 'cool!' else print 'mouais'"
+    start_code: |-
+        nom is ask quel est ton nom?
+        if nom is Hedy print 'cool!' else print 'mouais'
     intro_text: |
         `ask` et` print` fonctionnent toujours comme au niveau 3.
 
@@ -107,11 +121,15 @@
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            print couleur ' est ta couleur préférée!'
     -   name: "if"
         explanation: "Fait un choix avec `if`."
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert print 'joli!' else print 'bof'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            if couleur is vert print 'joli!' else print 'bof'
 5:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
     intro_text: |
@@ -130,15 +148,21 @@
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
         example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            print couleur ' est ta couleur préférée!'
     -   name: "if"
         explanation: "Fait un choix avec `if`."
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert print 'joli!' else print 'bof'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            if couleur is vert print 'joli!' else print 'bof'
     -   name: "repeat"
         explanation: "`repeat` et `if` combiné"
         example: "Exemple: if couleur is vert  repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'
 6:
     start_code: "print '5 fois 5 font ' 5 * 5"
     intro_text: |
@@ -165,13 +189,20 @@
     -   name: "ask et if avec des calculs"
         explanation: "Pose une question sur un calcul avec `ask` et compare le résultat..."
         example: "Exemple: reponse is ask Combien font 10 plus 10?"
-        demo_code: "reponse is ask Combien font 10 plus 10?\nif reponse is 20 print 'Oui!' else print 'Oups'"
+        demo_code: |-
+            reponse is ask Combien font 10 plus 10?
+            if reponse is 20 print 'Oui!' else print 'Oups'
     -   name: "repeat"
         explanation: "`repeat` et `if` combinés"
         example: "Exemple: if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
-        demo_code: "produit is ask Combien font 10 fois 5?\nif produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
+        demo_code: |-
+            produit is ask Combien font 10 fois 5?
+            if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'
 7:
-    start_code: "repeat 5 times\n    print 'Bonjour les amis'\n    print 'Ceci sera affiché 5 fois'"
+    start_code: |-
+        repeat 5 times
+            print 'Bonjour les amis'
+            print 'Ceci sera affiché 5 fois'
     intro_text: |
         `ask` et `print` fonctionnent comme tu y es habitué. Mais `if` et `repeat` ont changé!
         Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes.
@@ -206,47 +237,95 @@
     -   name: "`if` sur plusieurs lignes"
         explanation: "Demande la réponse d’une addition et vérifie si elle est correcte. Tu peux désormais imprimer sur 2 lignes."
         example: "Exemple: reponse is ask Combien font 5 plus 5?"
-        demo_code: "reponse is ask Combien font 5 plus 5?\nif reponse is 10\n    print 'Bien joué!'\n    print 'En effet, la réponse est ' reponse\nelse\n    print 'Oups!'\n    print 'La réponse devrait être 10.'"
+        demo_code: |-
+            reponse is ask Combien font 5 plus 5?
+            if reponse is 10
+                print 'Bien joué!'
+                print 'En effet, la réponse est ' reponse
+            else
+                print 'Oups!'
+                print 'La réponse devrait être 10.'
     -   name: "`if` et `repeat` combinés"
         explanation: "`if` et `repeat` combinés"
         example: "Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
-        demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert\n    repeat 3 times\n        print 'joli!'\nelse\n    repeat 5 times\n        print 'bof'"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            if couleur is vert
+                repeat 3 times
+                    print 'joli!'
+            else
+                repeat 5 times
+                    print 'bof'
+
 
 8:
-    start_code: "for i in range 1 to 11\n    print i\nprint ' Cache toi ou je te verrai !'"
+    start_code: |-
+        for i in range 1 to 11
+            print i
+        print ' Cache toi ou je te verrai !'
     intro_text: "`print` fonctionne encore comme avant, mais `repeat` est changé ! Tu tape maintenant `for i in range 1 to 5`, au lieu de `repeat 5 times`. La bonne chose est que tu peux également utiliser cette variable i dans ton programme! Tu dois encore toujours mettre en retrait toutes les lignes répétitives (cela signifie qu'elles doivent commencer par quatre espaces)"
     commands:
     -   name: " nouveau `repeat`"
         explanation: " `for` au lieu de `repeat`"
         example: "for i in range 1 to 11"
-        demo_code: >
+        demo_code: |
             for i in range 1 to 11
                 print i
             print ' Cache toi ou je te verrai !'
 9:
-    start_code: "for i in range 1 to 10\n    print i\nprint 'Cache toi ou je te verrai !'"
+    start_code: |-
+        for i in range 1 to 10
+            print i
+        print 'Cache toi ou je te verrai !'
     intro_text: "Maintenant on change encore un petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin du règle précédente."
     commands:
     -   name: "`for` avec `:`"
         explanation: "Utilisant un `for` sur plusieurs lignes, il te faut un `:` à la fin"
         example: "for i in range 1 to 10:"
-        demo_code: "for i in range 1 to 10:\n    print i\nprint ' Cache toi ou je te verrai !."
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print ' Cache toi ou je te verrai !.
     -   name: "`if` avec `:`"
         explanation: "Nous faisons de la même manière avec tous nos commandes `if`."
         example: "if couleur is vert:"
-        demo_code: "couleur is ask Quelle couleur préfères-tu ?\nif couleur is vert:\n    print 'Tu as choisi le vert.'\nelse\n    print 'Tu as choisi un autre couleur que le vert.'"
+        demo_code: |-
+            couleur is ask Quelle couleur préfères-tu ?
+            if couleur is vert:
+                print 'Tu as choisi le vert.'
+            else
+                print 'Tu as choisi un autre couleur que le vert.'
     -   name: "(Optionnel) `elif`"
         explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `elif`. `Elif` signifie `else if`. Tu regardes alors auparavant à `if` et quand ça n'est pas vrai, tu avances à `elif`. Quand ça n'est pas vrai aussi, tu avances à `else`."
         example: "elif a is 5"
-        demo_code: "a is 2\nif a is 1:\n    print 'a est égal à 1'\nelif a is 2:\n    print 'a est égal à 2'\nelse:\n    print 'a est ni 1 ni 2'"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a est égal à 1'
+            elif a is 2:
+                print 'a est égal à 2'
+            else:
+                print 'a est ni 1 ni 2'
+
 
 10:
-    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n        print 'Le résultat de: ' i ' fois ' j ’ fait 'i*j "
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+                print 'Le résultat de: ' i ' fois ' j ’ fait 'i*j 
     intro_text: "À partir de maintenant nous pouvons exécuter un boucle plusieurs fois. Dans l'exemple nous comptons trois fois de un à cinq. Alors nous répétons trois fois un boucle de cinq fois."
     commands:
     -   name: "`for` dans un autre `for`."
         explanation: "Ceci est un exemple de deux boucles de `for` combinés."
-        demo_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n        print 'Le résultat de: ' i ' fois ' j ’ fait 'i*j "
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                    print 'Le résultat de: ' i ' fois ' j ’ fait 'i*j 
     -   name: "`if` dans un autre `if`."
         explanation: "Nous pouvons faire le même truc avec `if`."
-        demo_code: "couleur1 is ask Donne-moi une couleur :\ncouleur2 is ask Donne-moi encore une couleur\nif couleur1 is bleu:\n    if couleur2 is jaune:\n        print 'Ensemble ça donne vert !'"
+        demo_code: |-
+            couleur1 is ask Donne-moi une couleur :
+            couleur2 is ask Donne-moi encore une couleur
+            if couleur1 is bleu:
+                if couleur2 is jaune:
+                    print 'Ensemble ça donne vert !'

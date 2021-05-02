@@ -13,7 +13,9 @@
     -   name: "echo"
         explanation: "Ismételj valamit: `echo`."
         example: "Példa: echo a kedvenc színed..."
-        demo_code: "ask Mi a kedvenc színed?\necho a kedvenc színed..."
+        demo_code: |-
+            ask Mi a kedvenc színed?
+            echo a kedvenc színed...
 2:
     intro_text: "print úgy működik, mint az 1. szinten, de az ask utasítás megváltozott most egy névre lesz szükség, amit kiírathatsz. Az echo utasítás már nem kell. Most már ezeket az utasításokat használhatod:"
     start_code: "print Helló világ!"
@@ -21,15 +23,21 @@
     -   name: "is"
         explanation: "Az `is` használatához adj egy nevet (ne legyen benne ékezet) a szónak, amit ki akarsz íratni."
         example: "Példa: nev is Hedy."
-        demo_code: "nev is Hedy\nprint szia nev"
+        demo_code: |-
+            nev is Hedy
+            print szia nev
     -   name: "ask"
         explanation: "Kérdezz valami az `ask` utasítással. Vigyázz! A válaszodnak nevet kell adnod az `is` segítségével."
         example: "Példa: szin is ask Mi a kedvenc színed?"
-        demo_code: "szin is ask Mi a kedvenc színed?\nprint szin a kedvenc színed!"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            print szin a kedvenc színed!
     -   name: "choose_random"
         explanation: "Válassz egy véletlen szót egy csoportból az `at` és `random` utasítással."
         example: "Példa: állatok is kutya, macska, kenguru."
-        demo_code: "állatok is kutya, macska, kenguru \nprint állatok at random"
+        demo_code: |-
+            állatok is kutya, macska, kenguru 
+            print állatok at random
 3:
     start_code: "print Helló világ "
     intro_text: "`ask` ugyanolyan, a 3. szinten, mint eddig, de` print` most más lesz. Amit ki akarsz írat, idézőjelbe kell tenned."
@@ -41,13 +49,17 @@
     -   name: "is"
         explanation: "Adj nevet a szövegnek és írasd ki `print`segítségével idézőjelek nélkül"
         example: "Példa: nev is Hedy."
-        demo_code: "nev is Hedy\nprint 'A nevem ' nev"
+        demo_code: |-
+            nev is Hedy
+            print 'A nevem ' nev
     -   name: "ask"
         explanation: "Kérdezz valamit `ask`segítségével."
         example: "Példa: szin is ask Mi a kedvenc színed?"
         demo_code: " !'"
 4:
-    start_code: "nev is ask Hogy hívnak?\nif nev is Hedy print 'klassz!' else print 'ajaj'"
+    start_code: |-
+        nev is ask Hogy hívnak?
+        if nev is Hedy print 'klassz!' else print 'ajaj'
     intro_text: "`ask` és `print` ugyanúgy működnek, mint a 3. szinten. A 4. szinten hozzájön az `if` parancs!"
     commands:
     -   name: "print"
@@ -57,11 +69,15 @@
     -   name: "ask"
         explanation: "Kérdezz valamit az `ask`utasítással."
         example: "Példa: szin is ask Mi a kedvenc színed?"
-        demo_code: "szin is ask Mi a kedvenc színed?\nprint szin ' a kedvenced!'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            print szin ' a kedvenced!'
     -   name: "if"
         explanation: "Válassz az `if` utasítással"
         example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
-        demo_code: "szin is ask Mi a kedvenc színed?\nif szin is zöld print 'szép!' else print 'csúnya'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            if szin is zöld print 'szép!' else print 'csúnya'
 5:
     start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
     intro_text: "`ask`, `print` és `if` ugyanúgy működik mint a 4. szinten. De az 5. szinten megjelenik a `repeat` parancs. A ‘repeat’ utasítást parancsok ismételt végrehajtásánál lehet használni."
@@ -73,16 +89,23 @@
     -   name: "ask"
         explanation: "Kérdezz valamit az `ask`utasítással."
         example: "Példa: szin is ask Mi a kedvenc színed?"
-        demo_code: "szin is ask Mi a kedvenc színed?\nprint szin ' a kedvenced!'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            print szin ' a kedvenced!'
     -   name: "if"
         explanation: "Készíts elágazást az `if` és az ‘else’ utasítással"
         example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
-        demo_code: "szin is ask Mi a kedvenc színed?\nif szin is zöld print 'szép!' else print 'csúnya'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            if szin is zöld print 'szép!' else print 'csúnya'
+
 
     -   name: "repeat"
         explanation: "`repeat` és `if` együtt"
         example: "Példa: if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
-        demo_code: "szin is ask Mi a kedvenc színed?\nif szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'
 6:
     start_code: "print '5-ször 5 az ' 5 * 5"
     intro_text: "`ask`, `print`, `if` és `repeat` még mindig ugyanolyanok, mint a 4. és az 5. szinten. A 6. szinten jön valami új... Tudsz majd számolni."
@@ -94,14 +117,22 @@
     -   name: "`ask` és `if` számolásokkal"
         explanation: "Kérdezz egy számolást és ellenőrizd, hogy jó-e."
         example: "Példa: valasz is ask Mennyi 10+10?"
-        demo_code: "valasz is ask Mennyi 10+10?\nif valasz is 20 print 'Igen!' else print 'Hoppá'"
+        demo_code: |-
+            valasz is ask Mennyi 10+10?
+            if valasz is 20 print 'Igen!' else print 'Hoppá'
     -   name: "repeat"
         explanation: "`repeat` és `if` együtt"
         example: "Példa: if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
-        demo_code: "szin is ask Mi a kedvenc színed?\nif szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'
+
 
 7:
-    start_code: "repeat 5 times\n    print 'Sziasztok'\n    print 'Ez 5-szor lett kiírva'"
+    start_code: |-
+        repeat 5 times
+            print 'Sziasztok'
+            print 'Ez 5-szor lett kiírva'
     intro_text: "ask és print még mindig úgy működik, ahogyan ismered. De az if és a repeat utasítások megváltoztak! Most különböző utasítások egy csoportját futtathatod egyszerre, de behúzással tagolnod kell a kódot. Ez azt jelenti, hogy négy szóközt kell tennünk a sor elejére. Ez akkor is érvényes, ha csak egy sor blokkját akarod létrehozni. Ha kombinálsz egy repeat-et és egy if-et, akkor minden blokkot be kell húznod. Nézd meg a példakódot a részletekért"
     commands:
     -   name: "print"
@@ -111,13 +142,30 @@
     -   name: "`if` több sorral"
         explanation: "Kérdezz egy műveletet és ellenőrizd, hogy jó-e a válasz. Most két sort fogunk kiíratni."
         example: " Példa: valasz is ask Mennyi 5 + 5?"
-        demo_code: "valasz is ask Mennyi 5 + 5?\nif valasz is 10\n    print 'Nagyszerű!'\n    print 'Valóban a válasz ' valasz\nelse\n    print 'Hoppá!'\n    print 'A válasz 10'"
+        demo_code: |-
+            valasz is ask Mennyi 5 + 5?
+            if valasz is 10
+                print 'Nagyszerű!'
+                print 'Valóban a válasz ' valasz
+            else
+                print 'Hoppá!'
+                print 'A válasz 10'
     -   name: "if és repeat együtt"
         explanation: "`if` és `repeat` együtt"
         example: "Példa: if szin is zöld repeat 3 times print 'csodás!' else repeat 5 times print 'Ajaj'"
-        demo_code: "szin is ask Mi a kedvenc színed?\nif szin is zöld\n    repeat 3 times\n        print 'csodás!'\nelse\n    repeat 5 times\n        print 'ajaj'"
+        demo_code: |-
+            szin is ask Mi a kedvenc színed?
+            if szin is zöld
+                repeat 3 times
+                    print 'csodás!'
+            else
+                repeat 5 times
+                    print 'ajaj'
 8:
-    start_code: "for i in range 1 to 10\n    print i\nprint ‘Aki bújt, aki nem, megyek!'"
+    start_code: |-
+        for i in range 1 to 10
+            print i
+        print ‘Aki bújt, aki nem, megyek!'
     intro_text: "`print` ugyanúgy működik, mint eddig, de a `repeat` utasítást `for` helyettesíti! `for i in range 1 to 5` utasításokat fogod használni, `repeat 5 times` helyett. Használhatsz `i` -t is a programban! Ne felejts el behúzásokat használni a 'for' és 'if' utasítások után (ez azt jelenti, hogy egy sort négy szóközzel kell kezdned) "
     commands:
     -   name: "repeat"
@@ -128,33 +176,66 @@
               print i
             print 'Aki bújt, aki nem, megyek!'
 9:
-    start_code: "for i in range 1 to 10:\n    print i\nprint 'Aki bújt, aki nem, megyek!'"
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Aki bújt, aki nem, megyek!'
     intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
     commands:
     -   name: "for ezzel:"
         explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` állítás végére!"
         example: "for i in range 1 to 10:"
-        demo_code: "for i in range 1 to 11:\n    print i\nprint 'Aki bújt, aki nem, megyek!'"
+        demo_code: |-
+            for i in range 1 to 11:
+                print i
+            print 'Aki bújt, aki nem, megyek!'
     -   name: "if ezzel:"
         explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
         example: "if szin is zöld:'"
-        demo_code: "szin is zöld\nif szin is zöld:\n    print 'a szín zöld'\nelse:\n    print 'A szin nem zöld'"
+        demo_code: |-
+            szin is zöld
+            if szin is zöld:
+                print 'a szín zöld'
+            else:
+                print 'A szin nem zöld'
     -   name: "(Optional) elif"
         explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
         example: "elif a is 5:"
-        demo_code: "a is 2\nif a is 1:\n    print 'a értéke 1'\nelif a is 2:\n    print 'a értéke 2'\nelse:\n    print 'a értéke nem 1 vagy 2'"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a értéke 1'
+            elif a is 2:
+                print 'a értéke 2'
+            else:
+                print 'a értéke nem 1 vagy 2'
 10:
-    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'körök száma: ' i ' a számlálás: ' j"
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+            print 'körök száma: ' i ' a számlálás: ' j
     intro_text: "Mostantól többször ismételhetünk egy ciklust. A példában 5-ig számolunk, és ezt háromszor megtesszük. Tehát 3 kört teszünk meg, és minden alkalommal 5-ig számolunk."
     commands:
     -   name: "for egymás alatt"
         explanation: "Ez egy példa a for állításra"
-        demo_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'körök száma: ' i ' a számlálás: ' j"
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                print 'körök száma: ' i ' a számlálás: ' j
     -   name: "if egymás alatt"
         explanation: "Ugyanezt megtehetjük if állítással"
-        demo_code: "szin is kék\nszinketto is sárga\nif szin is kék:\n    if szinketto is sárga:\n        print 'Együtt zöld!'"
+        demo_code: |-
+            szin is kék
+            szinketto is sárga
+            if szin is kék:
+                if szinketto is sárga:
+                    print 'Együtt zöld!'
 11:
-    start_code: "kor is input('Hány éves vagy?')\nprint('Akkor már voltál ennyi éves:')\nfor i in range(0,age):\n    print(i)"
+    start_code: |-
+        kor is input('Hány éves vagy?')
+        print('Akkor már voltál ennyi éves:')
+        for i in range(0,age):
+            print(i)
     intro_text: "Kerek zárójeleket fogunk használni és változtatni fogunk az ask utasításon! Az  ask utasítás input-ra változik! A print, az ask és a for utasításoknál ezek után kerekzárójelet használunk."
     commands:
     -   name: "Print"
@@ -164,41 +245,81 @@
     -   name: "Ask helyett input!"
         explanation: "Eltávolítjuk az ask utasítást és mostantól input-nak fogjuk nevezni, itt is kerek zárójeleket fogunk használni."
         example: "Példa: valasz is input('Mi a neved?')"
-        demo_code: "valasz = input('Mi a neved?')\nprint('Így a neved: ' valasz)"
+        demo_code: |-
+            valasz = input('Mi a neved?')
+            print('Így a neved: ' valasz)
     -   name: "For utasítás zárójelekkel"
         explanation: "Most zárójelbe tesszük a for ciklusban szereplő számokat. for i in range (0,10):"
         example: "Péla: for i in range(0,10):"
-        demo_code: "for i in range(0,10):\n    print(i)\nprint('Aki bújt, aki nem, megyek!')"
+        demo_code: |-
+            for i in range(0,10):
+                print(i)
+            print('Aki bújt, aki nem, megyek!')
+
 
 12:
-    start_code: "gyumolcs is ['alma', 'banán', 'cseresznye']\nprint(gyümölcs)"
+    start_code: |-
+        gyumolcs is ['alma', 'banán', 'cseresznye']
+        print(gyümölcs)
     intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
     commands:
     -   name: "Szögletes zárójel listák körül"
         explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
         example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
-        demo_code: " gyumolcs is ['alma', 'banán', 'cseresznye']\nprint(gyümölcs)"
+        demo_code: |4-
+             gyumolcs is ['alma', 'banán', 'cseresznye']
+            print(gyümölcs)
     -   name: "Vegyünk ki egy elemet a listából"
         explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
         example: "Példa: elsogyumolcs is gyumolcs[1]"
-        demo_code: " gyumolcs is ['alma', 'banán', 'cseresznye']\nelsogyumolcs is gyumolcs[1]\nprint(elsogyumolcs)"
+        demo_code: |4-
+             gyumolcs is ['alma', 'banán', 'cseresznye']
+            elsogyumolcs is gyumolcs[1]
+            print(elsogyumolcs)
     -   name: "Elem véletlenszerű kiválasztása listából"
         explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
         example: "Példa: veletlengyumolcs is gyumolcs[random]"
-        demo_code: " gyumolcs is ['alma', 'banán', 'cseresznye']\nveletlengyumolcs is gyumolcs[random]\nprint(veletlengyumolcs)"
+        demo_code: |4-
+             gyumolcs is ['alma', 'banán', 'cseresznye']
+            veletlengyumolcs is gyumolcs[random]
+            print(veletlengyumolcs)
 13:
-    start_code: "print('Mennyi 5+3?')\nvalasz = 5+3\nprint('A válasz:')\nprint(valasz)\nif valasz == 8:\n  print('Helyest!')\nelse:\n  print('Ó nem, ez rossz!')"
+    start_code: |-
+        print('Mennyi 5+3?')
+        valasz = 5+3
+        print('A válasz:')
+        print(valasz)
+        if valasz == 8:
+          print('Helyest!')
+        else:
+          print('Ó nem, ez rossz!')
     intro_text: "Meg fogjuk változtatni az is utasítást,  = és == jelek lesznek helyette. = jelet fogunk használni, ha egy változónak értéket adunk. Ha a valasz nevű változóhoz 8-at akarunk rendelni, akkor a valasz = 8 utasítást használjuk. A == jelet akkor használjuk, ha meg akarjuk nézni, hogy két dolog azonos-e."
     commands:
     -   name: "Összehasonlít"
         explanation: "Ha össze akarunk hasonlítani, akkor ezt használjuk: ==. 5+3 == 8 ellenőrzi, hogy 5+3 egyenlő-e 8-cal"
         example: "Példa: 5+3 == 8"
-        demo_code: "if 5+3 == 8:\n    print('5+3 tényleg 8')\nelse:\n  print('ezt nem írjuk ki, mert  5+3 az 8!')"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 tényleg 8')
+            else:
+              print('ezt nem írjuk ki, mert  5+3 az 8!')
     -   name: "Értékadás"
         explanation: "Ha meg akarjuk adni, hogy a valasz nevű változó értéke 8, akkor azt így tesszük: valasz = 8."
         example: "Példa: valasz = 8"
-        demo_code: "print('Mennyi 5+3?')\nvalasz = 5+3\nprint('Az eredmény:')\nprint(valasz)"
+        demo_code: |-
+            print('Mennyi 5+3?')
+            valasz = 5+3
+            print('Az eredmény:')
+            print(valasz)
     -   name: "Összehasonlítás és értékadás"
         explanation: "Ha össze akarunk hasonlítani két értéket, == jelet használunk. Ha értéket akarunk adni egy változónak, akkor = jelet használunk. "
         example: "Példa: 5+3 == 8, valasz = 8"
-        demo_code: "print('Mennyi 5+3?')\nvalasz = 5+3\nprint('Az eredmény:')\nprint(valasz)\nif valasz == 8:\n  print('Helyes!')\nelse:\n  print('Nem, ez rossz!')"
+        demo_code: |-
+            print('Mennyi 5+3?')
+            valasz = 5+3
+            print('Az eredmény:')
+            print(valasz)
+            if valasz == 8:
+              print('Helyes!')
+            else:
+              print('Nem, ez rossz!')
