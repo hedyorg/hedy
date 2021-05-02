@@ -1,6 +1,16 @@
 ---
   1:
-    intro_text: "Welkom bij Hedy! In Level 1 kun je de commando's `print`, `ask` en `echo` gebruiken. Druk op de blauwe knop en de code wordt alvast voor jou getypt! Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het links programmeerveld."
+    intro_text: |
+      Welkom bij Hedy! In Level 1 kun je de commando's `print`, `ask` en `echo` gebruiken.
+
+      Links in jouw scherm staan alle commando's van Level 1.
+
+      Druk op de blauwe knop en de code wordt alvast voor jou getypt!
+
+      Probeer de code dan zelf met de groene 'Voer de code uit' knop onder het links programmeerveld.
+
+      Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
+
     start_code: "print hallo wereld!"
     commands:
       -
@@ -19,12 +29,27 @@
         example: "Bijvoorbeeld: echo dus je lievelingskleur is..."
         demo_code: "ask Wat is je lievelingskleur?\necho dus je lievelingskleur is..."
   2:
-    intro_text: "Print werkt nog zoals in Level 1, maar let op! ask werkt nu een klein beetje anders, het antwoord kun je opslaan dan dan printen. Echo heb je niet meer nodig. In Level 2 kun je ook deze commando's gebruiken:"
+    intro_text: |
+      In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `is`.
+
+      Als je de code `naam is Hedy` bovenaan je programma zet, kun je daarna overal naam gebruiken. Dat wordt dan vervangen door Hedy.
+
+      De `ask` is in level 2 veranderd, het antwoord sla je ook op met een naam:
+
+      ```
+      antwoord is Hoe heet jij?
+      ```
+
+      Print werkt nog zoals in Level 1, en echo heb je niet meer nodig.
+
+      In level 2 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `at random` (je zegt: et ren-dom).
+
+      Je vindt alle codes van level 2 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
     start_code: "print hallo wereld!"
     commands:
       -
         name: "is"
-        explanation: "Een woord een naam geven met `is`. Je mag die naam zelf kiezen."
+        explanation: "Een woord een naam geven met `is`. Je mag de naam zelf kiezen."
         example: "Bijvoorbeeld: voornaam is Hedy."
         demo_code: "voornaam is Hedy\nprint ik heet voornaam"
       -
@@ -39,7 +64,19 @@
         demo_code: "dieren is hond, kat, kangoeroe\nprint dieren at random"
   3:
     start_code: "print 'hallo wereld'"
-    intro_text: "`ask` is nog steeds hetzelfde in level 3, maar `print` is nu anders. Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten. "
+    intro_text: |
+      `ask` is nog steeds hetzelfde in level 3, maar `print` is nu anders.
+
+      Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
+
+      Dat is handig, want nu kan je alle woorden printen die je maar wilt. Ook de woorden die je hebt gebruikt om iets in op te slaan met `is`.
+
+      De meeste programmeertalen gebruiken ook aanhalingstekens bij het printen, dus we komen zo al een stapje dichterbij echt programmeren!
+
+      ## Opdrachten worden steeds moeilijker
+      Je vindt de commando's weer links, en opdrachten in de volgende tabjes. De opdrachten worden in de opeenvolgende tabjes nu steeds iets moeilijker.
+      Begin dus links met het verhaal, en werk zo door om steeds meer uitgedaagd te worden.
+
     commands:
       -
         name: "print"
@@ -58,7 +95,22 @@
         demo_code: "kleur is ask Wat is je lievelingskleur?\nprint 'Jouw favoriet is dus ' kleur"
   4:
     start_code: "naam is ask hoe heet jij?\nif naam is Hedy print 'leuk' else print 'minder leuk!'"
-    intro_text: "`ask` en `print` werken nog zoals in level 3. Maar in Level 4 is er iets nieuws, de `if`!"
+    intro_text: |
+      `ask` en `print` werken nog zoals in level 3.
+
+      In level 4 is er iets nieuws, de `if`! If is Engels voor als. Met de `if` kun je een keuze maken tussen twee verschillende opties.
+
+      ## Voorbeeld Hedy Code
+      ```
+      naam is ask hoe heet jij?
+      if naam is Hedy print 'leuk' else print 'minder leuk!'
+      ```
+
+      Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
+
+      ## Opdrachten worden steeds moeilijker
+
+      Ook in level 4 worden de opdrachten in de tabjes steeds iets moeilijker. Doe ze dus van links naar rechts.
     commands:
       -
         name: "print"
@@ -77,7 +129,15 @@
         demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen print 'mooi!' else print 'niet zo mooi'"
   5:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
-    intro_text: "`ask`, `print` en `if` werken nog zoals in level 4. Maar in Level 5 is er iets nieuws: de `repeat`. Met `repeat` kun je codes een aantal keer herhalen."
+    intro_text: |
+      `ask`, `print` en `if` werken nog zoals in level 4.
+      Maar in Level 5 is er iets nieuws: de `repeat`.
+      Met `repeat` kun je codes een aantal keer herhalen.
+
+      ## Voorbeeld Hedy code
+      ```
+      repeat 3 times print 'Hedy is leuk!'
+      ```
     commands:
       -
         name: "print"
@@ -101,7 +161,22 @@
         demo_code: "kleur is ask Wat is je lievelingskleur?\nif kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
   6:
     start_code: "print '5 keer 5 is ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` en `repeat` werken nog zoals in level 4 en 5. Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen."
+    intro_text: |
+      `ask`, `print`, `if` en `repeat` werken nog zoals in level 4 en 5.
+      Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen.
+
+      In level 6 komen er weer een nieuwe codes bij, je kunt nu namelijk gaan rekenen in je code.
+
+      De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
+
+      De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
+      Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als 5 keer 5 dan onthoud je het het makkeljkst.
+      ## Voorbeeld Hedy code
+      ```
+      print '5 plus 5 is ' 5 + 5
+      print '5 min 5 is ' 5 - 5
+      print '5 keer 5 is ' 5 * 5
+      ```
     commands:
       -
         name: "print"
@@ -120,7 +195,29 @@
         demo_code: "antwoord is ask Hoeveel is 5 keer 10\nif antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'"
   7:
     start_code: "repeat 5 times\n  print 'Hallo allemaal'\n  print 'Dit wordt allemaal 5 keer herhaald'"
-    intro_text: "`ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd! Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen, dat betekent dat ze moeten beginnen met vier spaties. Ook als je 1 regel wilt herhalen moet je inspringen! Als je een `repeat` en een `if` samen gebruikt moet je steeds opnieuw inspringen."
+    intro_text: |
+      `ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd!
+      Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen,
+      dat betekent dat ze moeten beginnen met vier spaties.
+      Ook als je maar één regel wilt herhalen moet je inspringen!
+      ## Voorbeeld Hedy code
+      ```
+      repeat 5 times
+          print 'Hallo allemaal'
+          print 'Dit wordt allemaal 5 keer herhaald'
+      ```
+      Als je een `repeat` en een `if` samen gebruikt moet je steeds opnieuw inspringen.
+
+      ## Voorbeeld Hedy code
+      ```
+      kleur is ask Wat is je lievelingskleur?
+      if kleur is groen
+          repeat 3 times
+              print 'mooi!'
+      else
+          repeat 5 times
+              print 'niet zo mooi'
+      ```
     commands:
       -
         name: "print"

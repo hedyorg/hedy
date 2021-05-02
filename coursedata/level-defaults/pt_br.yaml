@@ -1,6 +1,15 @@
 ---
   1:
-    intro_text: "Bem-vindo ao Hedy! No Nível 1 você pode usar os comandos `print`,` ask` e `echo`. Pressione o botão azul e o código será digitado para você! Experimente você mesmo o código com o botão verde 'Executar o código' sob o campo de programação esquerdo."
+    intro_text: |
+      Bem-vindo ao Hedy! No Nível 1 você pode usar os comandos `print`,` ask` e `echo`.
+
+      No lado esquerdo da tela estão todos os comandos do Nível 1.
+
+      Pressione o botão azul e o código será digitado para você!
+
+      Experimente você mesmo o código com o botão verde 'Executar o código' sob o campo de programação esquerdo.
+
+      Não sabe o que programar? Nas próximas abas, você encontrará algumas idéias sobre o que construir.
     start_code: "print olá mundo!"
     commands:
       -
@@ -19,10 +28,22 @@
         example: "Exemplo: echo então a sua cor favorita é..."
         demo_code: "ask Qual a sua cor favorita?\necho então a sua cor favorita é..."
   2:
-    intro_text: >
-      Print funciona da mesma forma como no Nível 1, mas ask mudou e agora precisa de um nome, que você pode printar.
-      Echo não é mais necessário.
-      Você agora pode usar os seguintes comandos:
+    intro_text: |
+      No nível 2, aprendemos algo novo. Você pode nomear uma palavra com `is`.
+
+      Se você colocar o código `name is Hedy` no topo do seu programa, poderá usar o nome em qualquer lugar. Isso será então substituído por Hedy.
+
+      O `ask` mudou no nível 2, você também salva a resposta com um nome:
+
+      ```
+      resposta is Qual é o seu nome?
+      ```
+
+      A impressão ainda funciona como no Nível 1 e você não precisa mais de um ultrassom.
+
+      No nível 2, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com 'at random' (você diz: et ren-dom).
+
+      Você encontrará todos os códigos do nível 2 na barra esquerda. Também existem guias com atribuições.
     start_code: "print olá mundo!"
     commands:
       -
@@ -42,8 +63,18 @@
         demo_code: "animais is cachorro, gato, canguru\nprint animais at random"
   3:
     start_code: "print 'Olá mundo'"
-    intro_text: >
-      `ask` ainda é o mesmo no nível 3, mas `print` é diferente agora. Você deve colocar entre aspas o texto que deseja imprimir.
+    intro_text: |
+      `ask` funciona da mesma forma no nível 3 e no nível 2, mas `print` é diferente agora.
+
+      Você deve colocar o texto que deseja imprimir entre aspas.
+
+      Isso é útil porque agora você pode imprimir todas as palavras que desejar. Além disso, as palavras que você usou para armazenar algo com `is`.
+
+      A maioria das linguagens de programação também usa aspas ao imprimir, portanto, também estamos nos aproximando da programação real!
+
+      ## As atribuições estão ficando cada vez mais difíceis
+      Você encontrará os comandos à esquerda novamente e as atribuições nas guias a seguir. As atribuições estão ficando cada vez mais difíceis nas guias sucessivas.
+      Portanto, é melhor começar pela esquerda com a história e trabalhar à direita para ser desafiada cada vez mais.
     commands:
       -
         name: "print"
@@ -62,9 +93,22 @@
         demo_code: "cor is ask Qual a sua cor favorita?\nprint cor ' é a sua favorita!'"
   4:
     start_code: "nome is ask qual o seu nome?\nif nome is Hedy print 'legal!' else print 'não tão legal'"
-    intro_text: >
-      Os comandos `ask` e `print` funcionam exatamente como no Nível 3.
-      Nível 4 adiciona a expressão `if`!
+    intro_text: |
+      `ask` e `print` ainda funcionam como no nível 3.
+
+       No nível 4, há algo novo, o `if`! Se é inglês para se. Com o `if` você pode escolher entre duas opções diferentes.
+
+       ## Exemplo de código Hedy
+       ```
+       nome is ask qual é o seu nome?
+       if nome is Hedy print 'legal' else print 'não tão legal'
+       ```
+
+       Este código imprime legal se você inserir Hedy como um nome, e não tão legal se você inserir outra coisa.
+
+       ## As atribuições estão ficando cada vez mais difíceis
+       Também no nível 4, as atribuições nas guias tornam-se cada vez mais difíceis. Então, faça-os da esquerda para a direita.
+
     commands:
       -
         name: "print"
@@ -83,10 +127,14 @@
         demo_code: "cor is ask Qual a sua cor favorita?\nif cor is verde print 'bonita!' else print 'não gostei'"
   5:
     start_code: "repeat 3 times print 'Hedy é divertido!'"
-    intro_text: >
+    intro_text: |
       Os comandos `ask`, `print` e `if` funcionam exatamente como no Nível 4.
       Mas o Nível 5 adiciona o comando `repeat`.
-      `repeat` pode ser usado para executar uma linha de código várias vezes."
+      `repeat` pode ser usado para executar uma linha de código várias vezes.
+      ## Exemplo de código Hedy
+      ```
+      repeat 3 times print 'Hedy é divertido!'
+      ```
     commands:
       -
         name: "print"
@@ -110,7 +158,23 @@
         demo_code: "cor is ask Qual a sua cor favorita?\nif cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
   6:
     start_code: "print '5 vezes 5 é ' 5 * 5"
-    intro_text: "Os comandos `ask`, `print`, `if` e `repeat` funcionam exatamente como no Nível 4 e 5. O nível 6 adiciona algo novo... Agora você pode calcular."
+    intro_text: |
+        `ask`,` print`, `if` e` repeat` ainda funcionam como no nível 4 e 5.
+        Mas no nível 6 há algo novo, agora você também pode calcular.
+
+        No nível 6, novos códigos são adicionados, agora você pode começar a calcular em seu código.
+
+        O plus é fácil, você escreve como com matemática: `5 + 5` por exemplo. O sinal de menos também funciona bem, que é `5 - 5`.
+
+        Os vezes são um pouco diferentes, porque não existem vezes no seu teclado. Basta pesquisar, realmente não há!
+        Por isso fazemos os tempos com asterisco acima de 8: `5 * 5`. Leia isso como 5 vezes 5, então você se lembrará mais facilmente.
+        ## Exemplo de código Hedy
+        ```
+        print '5 plus 5 is ' 5 + 5
+        print '5 menos 5 is ' 5 - 5
+        print '5 vezes 5 is ' 5 * 5
+        ```
+
     commands:
       -
         name: "print"
@@ -130,13 +194,30 @@
   7:
     start_code: "repeat 5 times\n    print 'Olá galera'\n    print 'Isso vai ser printado 5 vezes'"
     intro_text: >
-      Os comandos ask e print ainda funcionam da mesma forma.
-      Mas if e repeat mudaram!
+      Os comandos `ask` e `print` ainda funcionam da mesma forma.
+      Mas `if` e `repeat` mudaram!
       Você agora pode executar grupos de códigos juntos, mas você terá que identar o código.
       Isso significa colocar espaços no começo da linha.
       O mesmo vale para quando você queira criar um bloco só com um linha.
-      Se você juntar um repeat e um if, você terá que identar cada bloco de código.
-      Dê uma olhada no exemplo de código para mais detalhes!
+      ## Exemplo de código Hedy
+      ```
+      repeat 5 times
+          print 'Olá galera'
+          print 'Isso vai ser printado 5 vezes'
+      ```
+
+      Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
+      ## Exemplo de código Hedy
+      ```
+      cor is ask Qual a sua cor favorita?
+      if cor is verde
+          repeat 3 times
+              print 'bonita!'
+      else
+          repeat 5 times
+              print 'não gostei'
+      ```
+
     commands:
       -
         name: "print"

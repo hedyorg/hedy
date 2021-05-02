@@ -1,6 +1,15 @@
 ---
   1:
-    intro_text: "Welcome to Hedy! In Level 1 you can use the commands `print`, `ask` and `echo`. Press the blue button and the code will be typed for you! Try the code yourself with the green 'Run the code' button under the left programming field."
+    intro_text: |
+      Welcome to Hedy! In Level 1 you can use the commands `print`, `ask` and `echo`.
+
+      In the left bar you can see all commands of level 1.
+
+      Press the blue button and the code will be typed for you!
+
+      Try the code yourself with the green 'Run the code' button under the left programming field.
+
+      Don't know what to create? In the next tabs you find some ideas for what to build.
     start_code: "print hello world!"
     commands:
       -
@@ -16,7 +25,22 @@
         example: "Example: echo so your favorite color is..."
         demo_code: "ask What is your favorite color?\necho so your favorite color is..."
   2:
-    intro_text: "Print still works as it did in Level 1, but ask has been changed and now needs a name, which you can then print. Echo is no longer needed. You can now also use these commands:"
+    intro_text: |
+      In level 2 we learn something new. You can name a word with `is`.
+
+      If you use the code `name is Hedy`, you can use name anywhere in your code and it will be replaced by Hedy.
+
+      Note: `ask` has changed, you also save the answer with a name, like this:
+
+      ```
+      answer is What is your name?
+      ```
+
+      Print still works as in Level 1, and you no longer need `echo`.
+
+      In level 2 you can also make a list. You can have the computer choose something random from the list. You do that with 'at random'.
+
+      You find all the codes of level 2 in the left bar. There are also tabs with assignments.
     start_code: "print hello world!"
     commands:
       -
@@ -33,7 +57,18 @@
         demo_code: "animals is dog, cat, kangaroo\nprint animals at random"
   3:
     start_code: "print 'Hello world'"
-    intro_text: "`ask` is still the same in level 3, but` print` is different now. You must enclose text that you want to print in quotation marks."
+    intro_text: |
+      `ask` works the same in level 3 as it did in level 2, but` print` is different now.
+
+       You must put text that you want to print between quotation marks.
+
+       This is useful, because now you can print all the words you want. Also the words you used to store something with `is`.
+
+       Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+
+       ## Assignments are getting more and more difficult
+       You will find the commands on the left again, and assignments in the following tabs. The assignments are now getting more and more difficult in the successive tabs.
+       So it is best to start on the left with the story, and work to the right that to be challenged more and more.
     commands:
       -
         explanation: "Print exactly using quotation marks"
@@ -49,7 +84,22 @@
         demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
   4:
     start_code: "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'"
-    intro_text: "`ask` and `print` work exactly like they did in Level 3. Level 4 adds the `if` statement!"
+    intro_text: |
+      `ask` and` print` still like they did in level 3.
+
+       In level 4 there is something new, the `if`! With the `if` you can choose between two different options.
+
+       ## Example Hedy Code
+       ```
+       name is ask what's your name?
+       if name is Hedy print 'nice' else print 'boo!'
+       ```
+
+       This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
+
+       ## Assignments are getting more and more difficult
+
+       Also in level 4 the assignments in the tabs become more and more difficult. So do them from left to right.
     commands:
       -
         explanation: "Print exactly using quotation marks"
@@ -65,7 +115,13 @@
         demo_code: "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
   5:
     start_code: "repeat 3 times print 'Hedy is fun!'"
-    intro_text: "`ask`, `print` and `if` work exactly like they did in Level 4. But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times."
+    intro_text: |
+      `ask`, `print` and `if` work exactly like they did in Level 4.
+      But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times.
+      ## Voorbeeld Hedy code
+      ```
+      repeat 3 times print 'Hedy is fun!'
+      ```
     commands:
       -
         explanation: "Print exactly using quotation marks"
@@ -85,7 +141,22 @@
         demo_code: "color is ask What is your favorite color?\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
   6:
     start_code: "print '5 times 5 is ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` and `repeat` are still the same as in Level 4 and 5. Level 6 adds something new... You can now calculate."
+    intro_text: |
+      `ask`,` print`, `if` and` repeat` still work as in level 4 and 5.
+       But in Level 6 there is something new, you can now also calculate.
+
+       In level 6 new codes are added, you can now start calculating in your code.
+
+       The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is is `5 - 5`.
+
+       The times is a bit different, because there are is no times symbol on your keyboard. Just search, there really isn't!
+       That is why we multiply with the asterisk above 8: `5 * 5`. Read that as 5 times 5 then you will remember it the easiest.
+       ## Example Hedy code
+       ```
+       print '5 plus 5 is ' 5 + 5
+       print '5 minus 5 is ' 5 - 5
+       print '5 times 5 is ' 5 * 5
+       ```
     commands:
       -
         explanation: "Print exactly using quotation marks"
@@ -101,7 +172,30 @@
         demo_code: "product is ask What is 10 times 5?\nif product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
   7:
     start_code: "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'"
-    intro_text: "ask and print still work as you know them. But if and repeat have changed! You can now execute groups of code together, but you will have to indent the code. That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line. If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!"
+    intro_text: |
+      `ask` and `print` still work as you know them. But `if` and `repeat` have changed!
+      You can now execute groups of code together, but you will have to indent the code.
+      That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line.
+
+      ## Example Hedy code
+      ```
+      repeat 5 times
+          print 'Hello everyone'
+          print 'This is all repeated 5 times'
+      ```
+      If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!"
+
+       ## Example Hedy code
+       ```
+       color is ask What is your favorite color?
+       if color is green
+           repeat 3 times
+               print 'beautiful!'
+       else
+           repeat 5 times
+               print 'not so beautiful'
+       ```
+
     commands:
       -
         explanation: "Print something. Remember to use a quotation mark for literal printing."

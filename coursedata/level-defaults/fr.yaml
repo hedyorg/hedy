@@ -1,6 +1,15 @@
 ---
   1:
-    intro_text: "Bienvenue à Hedy! Au niveau 1, tu peux utiliser les commandes `print`,` ask` et `echo`. Appuyez sur le bouton bleu et le code sera tapé pour toi! Essayez le code toi-même avec le bouton vert «Exécuter le code» sous le champ de programmation de gauche."
+    intro_text: |
+      Bienvenue à Hedy! Au niveau 1, tu peux utiliser les commandes `print`,` ask` et `echo`.
+
+      Sur le côté gauche de votre écran se trouvent toutes les commandes du niveau 1.
+
+      Appuyez sur le bouton bleu et le code sera tapé pour toi!
+
+      Essayez le code toi-même avec le bouton vert «Exécuter le code» sous le champ de programmation de gauche.
+
+      Vous ne savez pas quoi programmer? Dans les onglets suivants, vous trouverez des idées sur les éléments à construire.
     start_code: "print bonjour le monde!"
     commands:
       -
@@ -19,7 +28,22 @@
         example: "Exemple: echo donc ta couleur préférée est..."
         demo_code: "ask Quelle est ta couleur préférée?\necho donc ta couleur préférée est..."
   2:
-    intro_text: "`Print` fonctionne comme au Niveau 1, mais `ask` a été modifé et nécessite désormais un nom, que tu peux ensuite afficher.  `Echo` n’est plus utile. Tu peux désormais utiliser ces commandes:"
+    intro_text: |
+      Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `is`.
+
+      Si vous mettez le code `name is Hedy` en haut de votre programme, vous pouvez alors utiliser name partout. Cela sera alors remplacé par Hedy.
+
+      Le `ask` a changé au niveau 2, vous enregistrez également la réponse avec un nom:
+
+      ```
+      reponse is quel est votre nom?
+      ```
+
+      L'impression fonctionne toujours comme au niveau 1 et vous n'avez plus besoin d'une échographie.
+
+      Au niveau 2, vous pouvez également faire une liste. Vous pouvez ensuite choisir n'importe quoi dans la liste. Vous faites cela avec `at random` (vous dites: et ren-dom).
+
+      Vous trouverez tous les codes du niveau 2 dans la barre de gauche. Il existe également des onglets avec des affectations.
     start_code: "print bonjour le monde!"
     commands:
       -
@@ -39,7 +63,18 @@
         demo_code: "animaux is chien, chat, kangourou\nprint animaux at random"
   3:
     start_code: "print 'Bonjour le monde'"
-    intro_text: " `ask` est toujours le même au niveau 3, mais `print` est différent maintenant. Tu dois placer entre guillemets le texte que tu souhaites imprimer."
+    intro_text: |
+      `ask` fonctionne de la même manière au niveau 3 qu'au niveau 2, mais `print` est différent maintenant.
+
+      Vous devez placer le texte que vous souhaitez imprimer entre guillemets.
+
+      Ceci est utile, car vous pouvez désormais imprimer tous les mots souhaités. Aussi les mots que vous avez utilisés pour stocker quelque chose avec `is`.
+
+      La plupart des langages de programmation utilisent également des guillemets lors de l'impression, nous nous rapprochons donc également de la programmation réelle!
+
+      ## Les affectations deviennent de plus en plus difficiles
+      Vous retrouverez les commandes sur la gauche et les affectations dans les onglets suivants. Les affectations deviennent de plus en plus difficiles dans les onglets successifs.
+      Il est donc préférable de commencer à gauche avec l'histoire, et de travailler à droite pour être de plus en plus contestée.
     commands:
       -
         name: "print"
@@ -58,7 +93,22 @@
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nprint couleur ' est ta couleur préférée!'"
   4:
     start_code: "nom is ask quel est ton nom?\nif nom is Hedy print 'cool!' else print 'mouais'"
-    intro_text: " `ask` et `print` fonctionnent exactement comme au niveau 3. Le niveau 4 ajoute la commande `if`!"
+    intro_text: |
+      `ask` et` print` fonctionnent toujours comme au niveau 3.
+
+       Au niveau 4, il y a quelque chose de nouveau, le `if`! If est l'anglais pour se. Avec le `if`, vous pouvez choisir entre deux options différentes.
+
+       ## Exemple de code Hedy
+       ```
+       nom is ask quel est votre nom?
+       if nom is Hedy print 'cool!' else print 'moins amusant!'
+       ```
+
+       Ce code s'imprime cool! si vous entrez Hedy comme nom, et moins amusant! si vous entrez autre chose.
+
+       ## Les affectations deviennent de plus en plus difficiles
+
+       Toujours au niveau 4, les affectations dans les onglets deviennent de plus en plus difficiles. Alors faites-les de gauche à droite.
     commands:
       -
         name: "print"
@@ -77,8 +127,14 @@
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert print 'joli!' else print 'bof'"
   5:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
-    intro_text: " `ask`, `print` et `if` fonctionnent exactement comme au niveau 4. Le niveau 5 ajoute la commande `repeat`.
-      `repeat` te permet d’exécuter une ligne de commande plusieurs fois."
+    intro_text: |
+      `ask`, `print` et `if` fonctionnent exactement comme au niveau 4.
+      Le niveau 5 ajoute la commande `repeat`.
+      `repeat` te permet d’exécuter une ligne de commande plusieurs fois.
+      ## Exemple de code Hedy
+      ```
+      repeat 3 times print 'Hedy est amusant!'
+      ```
     commands:
       -
         name: "print"
@@ -102,7 +158,22 @@
         demo_code: "couleur is ask Quelle est ta couleur préférée?\nif couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
   6:
     start_code: "print '5 fois 5 font ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` et `repeat` sont toujours comme aux niveaux 4 et 5.  Le niveau 6 te permet de faire quelque chose de plus: tu peux désormais calculer."
+    intro_text: |
+      `ask`,` print`, `if` et `repeat` fonctionnent toujours comme dans les niveaux 4 et 5.
+       Mais au niveau 6, il y a quelque chose de nouveau, vous pouvez maintenant aussi calculer.
+
+       Au niveau 6, de nouveaux codes sont ajoutés, vous pouvez maintenant commencer à calculer dans votre code.
+
+       Le plus est simple, vous l'écrivez comme avec les maths: `5 + 5` par exemple. Le moins fonctionne également très bien, qui est `5 - 5`.
+
+       Le fois sont un peu différentes, car il n'y a pas de fois sur votre clavier. Cherchez, il n'y en a vraiment pas!
+       C'est pourquoi nous faisons les temps avec l'astérisque au-dessus de 8: `5 * 5`. Lisez cela comme 5 fois 5, alors vous vous en souviendrez le plus facile.
+       ## Exemple de code Hedy
+       ```
+       print '5 plus 5 est ' 5 + 5
+       print '5 moins 5 est ' 5 - 5
+       print '5 fois 5 est ' 5 * 5
+       ```
     commands:
       -
         name: "print"
@@ -120,7 +191,32 @@
         demo_code: "produit is ask Combien font 10 fois 5?\nif produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
   7:
     start_code: "repeat 5 times\n    print 'Bonjour les amis'\n    print 'Ceci sera affiché 5 fois'"
-    intro_text: "`ask` et `print` fonctionnent comme tu y es habitué. Mais `if` et `repeat` ont changé! Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes. Cela veut dire que tu dois mettre 4 espaces au début des lignes. Cela fonctionne aussi si tu veux créer un bloc d’une seule ligne. Si tu combines un if et un repeat, tu devras indenter chaque bloc. Regarde les exemples pour plus de détails!"
+    intro_text: |
+      `ask` et `print` fonctionnent comme tu y es habitué. Mais `if` et `repeat` ont changé!
+      Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes.
+      Cela veut dire que tu dois mettre 4 espaces au début des lignes.
+      Cela fonctionne aussi si tu veux créer un bloc d’une seule ligne.
+
+      ## Exemple de code Hedy
+      ```
+      repeat 5 times
+          print 'Bonjour les amis'
+          print 'Ceci sera affiché 5 fois'
+      ```
+
+      Si tu combines un if et un repeat, tu devras indenter chaque bloc. Regarde les exemples pour plus de détails!"
+
+      ## Exemple de code Hedy
+      ```
+      couleur is ask Quelle est ta couleur préférée?
+      if couleur is vert
+          repeat 3 times
+              print 'joli!'
+      else
+          repeat 5 times
+              print 'bof'
+      ```
+
     commands:
       -
         name: "print"

@@ -9,9 +9,21 @@
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
 
-    if (window.State.level == 1){
-      window.editor.session.setMode("ace/mode/level1");
-    }
+  // a variable which turns on(1) highlighter or turns it off(0)
+  var highlighter = 0;
+
+  if (highlighter == 1){
+        if (window.State.level == 1){
+          window.editor.session.setMode("ace/mode/level1");
+        }
+        if (window.State.level == 2){
+          window.editor.session.setMode("ace/mode/level2");
+        }
+        if (window.State.level == 3){
+          window.editor.session.setMode("ace/mode/level3");
+        }
+  }
+
 
 
   // Load existing code from session, if it exists
@@ -99,7 +111,8 @@ function runit(level, lang, cb) {
       data: JSON.stringify({
         level: level,
         code: code,
-        lang: lang
+        lang: lang,
+        adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -152,9 +165,20 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   try {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
+       // In adventure only mode, the adventure_name comes as a parameter to the function;
+       // in the normal Hedy mode, where adventures are tabbed, the adventure_name is in the global variable window.State
+       if (window.State.adventure_name) level = [level, window.State.adventure_name];
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/login';
        return;
+    }
+
+    // If saving a program for an adventure, level is an array of the form [level, adventure_name]. In that case, we unpack it.
+    var adventure_name;
+    if (level instanceof Array) {
+       adventure_name = level [1];
+       level = level [0];
+       name = 'default';
     }
 
     $.ajax({
@@ -164,7 +188,10 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         level: level,
         lang:  lang,
         name:  name,
-        code:  code
+        code:  code,
+        // In adventure only mode, the adventure_name comes as a parameter to the function;
+        // in the normal Hedy mode, where adventures are tabbed, the adventure_name is in the global variable window.State
+        adventure_name: adventure_name || window.State.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -331,21 +358,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   }
 };
 
