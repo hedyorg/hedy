@@ -1,7 +1,7 @@
 import json
 import copy
 import attr
-import yaml
+from ruamel import yaml
 
 import docs
 

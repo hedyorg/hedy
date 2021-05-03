@@ -1,140 +1,263 @@
----
-  1:
-    intro_text: "Willkommen bei Hedy! In Level 1 könnt du die Befehle `print`, `ask` und `echo` verwenden. Drückst du die blaue Taste und der Code wird für du eingegeben! Probiert du den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus."
+1:
+    intro_text: |
+        Willkommen bei Hedy! In Level 1 könnt du die Befehle `print`, `ask` und `echo` verwenden.
+
+        Auf der linken Seite Ihres Bildschirms befinden sich alle Befehle der Stufe 1.
+
+        Drückst du die blaue Taste und der Code wird für du eingegeben!
+
+        Probiert du den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus.
+
+        Sie wissen nicht, was Sie erstellen sollen? In den nächsten Registerkarten finden Sie einige Ideen, was Sie erstellen möchten.
     start_code: "print Hallo Welt!"
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Gib etwas mit `print` aus."
         example: "Beispiel: print Hallo willkommen bei Hedy!"
         demo_code: "print Hallo willkommen bei Hedy!"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Frage etwas mit `ask`."
         example: "Beispiel: ask Was ist deine Lieblingsfarbe?"
         demo_code: "ask Was ist deine Lieblingsfarbe?"
-      -
-        name: "echo"
+    -   name: "echo"
         explanation: "Wiederhole etwas mit `echo`."
         example: "Beispiel: echo Also deine Lieblingsfarbe ist ..."
-        demo_code: "ask Was ist deine Lieblingsfarbe?\necho Also deine Lieblingsfarbe ist ..."
-  2:
-    intro_text: "`print` funktioniert immer noch wie in Stufe 1, aber `ask` hat sich geändert und braucht jetzt einen Namen, den du dann ausgeben kannst. `echo` wird nicht mehr benötigt. Du kannst jetzt zusätzlich diese Befehle verwenden:"
+        demo_code: |-
+            ask Was ist deine Lieblingsfarbe?
+            echo Also deine Lieblingsfarbe ist ...
+2:
+    intro_text: |
+        In Level 2 lernen wir etwas Neues. Sie können ein Wort mit "is" benennen.
+
+        Wenn Sie den Code "Name ist Hedy" oben in Ihr Programm einfügen, können Sie den Namen überall verwenden. Das wird dann durch Hedy ersetzt.
+
+        Die Frage hat sich in Stufe 2 geändert. Sie speichern die Antwort auch unter einem Namen:
+
+        ```
+        Antwort ist Wie heißt du?
+        ```
+
+        Der Druck funktioniert immer noch wie in Stufe 1, und Sie benötigen keinen Ultraschall mehr.
+
+        In Level 2 können Sie auch eine Liste erstellen. Sie können dann alles aus der Liste auswählen. Du machst das mit 'zufällig' (du sagst: et ren-dom).
+
+        Sie finden alle Codes der Stufe 2 in der linken Leiste. Es gibt auch Registerkarten mit Zuordnungen.
     start_code: "print Hallo Welt!"
     commands:
-      -
-        name: "is"
+    -   name: "is"
         explanation: "Gib einem Wort einen Namen, den du in deinem Programm verwenden kannst."
         example: "Beispiel: name is Hedy."
-        demo_code: "name is Hedy\nprint Willkommen name"
-      -
-        name: "ask"
+        demo_code: |-
+            name is Hedy
+            print Willkommen name
+    -   name: "ask"
         explanation: "Frage etwas mit `ask`. Achtung! Du müsst der Antwort einen Namen mit `is` geben."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ist dir am liebsten!"
-      -
-        name: "choose_random"
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            print farbe ist dir am liebsten!
+    -   name: "choose_random"
         explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus."
         example: "Beispiel: tiere is Hund, Katze, Känguru."
-        demo_code: "tiere is Hund, Katze, Känguru\nprint tiere at random"
-  3:
+        demo_code: |-
+            tiere is Hund, Katze, Känguru
+            print tiere at random
+3:
     start_code: "print 'Hallo Welt'"
-    intro_text: "`ask` ist in Level 3 immer noch dasselbe, aber` print` ist jetzt anders. Du müsset Text, den du buchstäblich drucken möchten, in Anführungszeichen setzen."
+    intro_text: |
+        `ask` ist in Level 3 immer noch dasselbe, aber` print` ist jetzt anders.
+
+         Sie müssen Text, den Sie buchstäblich drucken möchten, in Anführungszeichen setzen.
+
+         Dies ist praktisch, da Sie jetzt alle gewünschten Wörter drucken können. Auch die Wörter, mit denen Sie etwas gespeichert haben.
+
+         Die meisten Programmiersprachen verwenden beim Drucken auch Anführungszeichen, sodass wir der echten Programmierung einen Schritt näher kommen!
+
+         ## Aufgaben werden immer schwieriger
+         Sie finden die Befehle wieder auf der linken Seite und die Befehle auf den folgenden Registerkarten. Die Zuordnungen werden jetzt in den aufeinanderfolgenden Registerkarten etwas schwieriger.
+         Beginnen Sie darum links mit der Geschichte und arbeiten Sie so, um immer mehr herausgefordert zu werden.
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Genaue Ausgabe mit Anführungszeichen."
         example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
-      -
-        name: "is"
+    -   name: "is"
         explanation: "Gib einem Text einen Namen und gib ihn ohne Anführungszeichen aus."
         example: "Beispiel: name is Hedy."
-        demo_code: "name is Hedy\nprint 'Ich heisse ' name"
-      -
-        name: "ask"
+        demo_code: |-
+            name is Hedy
+            print 'Ich heisse ' name
+    -   name: "ask"
         explanation: "Frage etwas mit `ask`. "
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
-  4:
-    start_code: "name is ask Wie heisst du?\nif name is Hedy print 'Cool!' else print 'Bäh'"
-    intro_text: "`ask` und `print` funktionieren genau wie in Stufen 3. In Stufe 4 kommt der `if` Befehl dazu!"
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            print farbe ' ist dir am liebsten!'
+4:
+    start_code: |-
+        name is ask Wie heisst du?
+        if name is Hedy print 'Cool!' else print 'Bäh'
+    intro_text: |
+        `ask` und` print` funktionieren immer noch wie in Level 3.
+
+        In Level 4 gibt es etwas Neues, das `if`! If ist Englisch für Wenn. Mit dem `if` können Sie zwischen zwei verschiedenen Optionen wählen.
+
+        ## Beispiel Hedy Code
+        ```
+        Name ist ask wie ist Ihr Name?
+        if Name is Hedy print 'schön' else print 'weniger Spaß!'
+        ```
+
+        Dieser Code wird gut gedruckt, wenn Sie Hedy als Namen eingeben, und weniger gut, wenn Sie etwas anderes eingeben.
+
+        ## Aufgaben werden immer schwieriger
+
+        Auch in Stube 4 werden die Zuordnungen in den Registerkarten immer schwieriger. Mach sie also von links nach rechts.
+
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Genaue Ausgabe mit Anführungszeichen."
         example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Frage etwas mit `ask`. "
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
-      -
-        name: "if"
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            print farbe ' ist dir am liebsten!'
+    -   name: "if"
         explanation: "Treffe eine Auswahl mit `if` und `else`"
         example: "Beispiel: if farbe is green print 'Hübsch!' else print 'Bäh'"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is green print 'Hübsch!' else print 'Bäh'"
-  5:
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            if farbe is green print 'Hübsch!' else print 'Bäh'
+5:
     start_code: "repeat 3 times print 'Hedy macht Spaß!'"
-    intro_text: "`ask`, `print` und `if` funktionieren genau wie in Stufe 4. Aber in Stufe 5 kommt der `repeat` Befehl dazu. `repeat` kann verwendet werden um eine Befehlszeile mehrmals auszuführen."
+    intro_text: |
+        `ask`, `print` und `if` funktionieren genau wie in Stufe 4.
+        Aber in Stufe 5 kommt der `repeat` Befehl dazu.
+        `repeat` kann verwendet werden um eine Befehlszeile mehrmals auszuführen.
+
+        ## Voorbeeld Hedy code
+        ```
+        repeat 3 times print 'Hedy macht Spaß!'
+        ```
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Genaue Ausgabe mit Anführungszeichen."
         example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
-      -
-        name: "ask"
+    -   name: "ask"
         explanation: "Frage etwas mit `ask`."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nprint farbe ' ist dir am liebsten!'"
-      -
-        name: "if"
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            print farbe ' ist dir am liebsten!'
+    -   name: "if"
         explanation: "Treffe eine Auswahl mit `if` und `else`"
         example: "Beispiel: if farbe is green print 'Hübsch!' else print 'Bäh'"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is green print 'Hübsch!' else print 'Bäh'"
-      -
-        name: "repeat"
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            if farbe is green print 'Hübsch!' else print 'Bäh'
+    -   name: "repeat"
         explanation: "`repeat` und `if` kombiniert"
         example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
-  6:
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'
+6:
     start_code: "print '5 mal 5 ist ' 5 * 5"
-    intro_text: "`ask`, `print`, `if` und `repeat` sind immer noch gleich wie in Stufe 4 und 5. In Stufe 6 kommt etwas neues hinzu... Du kannst jetzt rechnen."
+    intro_text: |
+        `ask`,` print`, `if` und` repeat` funktionieren immer noch wie in Level 4 und 5.
+         Aber in Level 6 gibt es etwas Neues, das Sie jetzt auch berechnen können.
+
+         In Stufe 6 werden neue Codes hinzugefügt. Jetzt können Sie mit der Berechnung Ihres Codes beginnen.
+
+         Das Plus ist einfach, Sie schreiben es wie mit Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert auch gut, was `5 - 5` ist.
+
+         Die Zeiten sind etwas anders, da auf Ihrer Tastatur keine Zeiten angezeigt werden. Einfach suchen, das gibt es wirklich nicht!
+         Deshalb machen wir die Zeiten mit dem Stern über 8: `5 * 5`. Lesen Sie das als 5 mal 5, dann werden Sie sich am einfachsten daran erinnern.
+         ## Beispiel Hedy Code
+         ```
+         print '5 plus 5 ist ' 5 + 5
+         print '5 minus 5 ist ' 5 - 5
+         print '5 mal 5 ist ' 5 * 5
+         ```
+
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Genaue Ausgabe mit Anführungszeichen."
         example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
         demo_code: "print '5 mal 5 ist ' 5 * 5"
-      -
-        name: "`ask` und `if` mit Berechnungen"
+    -   name: "`ask` und `if` mit Berechnungen"
         explanation: "Frage nach einer Rechenaufgabe."
         example: "Beispiel: antwort is ask Was ist 10 plus 10?"
-        demo_code: "antwort is ask Was ist 10 plus 10?\nif answer is 20 print 'Ja!' else print 'Ups'"
-      -
-        name: "repeat"
+        demo_code: |-
+            antwort is ask Was ist 10 plus 10?
+            if answer is 20 print 'Ja!' else print 'Ups'
+    -   name: "repeat"
         explanation: "`repeat` und `if` kombiniert"
         example: "Beispiel: if antwort is 50 repeat 3 times print 'Richtig!' else repeat 5 times print 'Ups'"
-        demo_code: "antwort is ask Was ist 5 mal 10?\nif antwort is 50 repeat 3 times print 'Richtig!' else repeat 5 times print 'Ups'"
-  7:
-    start_code: "repeat 5 times\n    print 'Hello Leute'\n    print 'Das wird 5 mal ausgegeben'"
-    intro_text: "`ask` und `print` funktionieren immer noch wie du sie kennst. Aber `if` und `repeat` haben sich verändert! Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst die Befehle einrücken. Das heisst, du musst die Befehlszeile mit vier Leerzeichen beginnen. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest. Wenn du einen `repeat`- und `if`-Befehl kombinierst, musst du jeden Block einrücken. Schau dir die Beispielprogramme an, um es genauer zu sehen!"
+        demo_code: |-
+            antwort is ask Was ist 5 mal 10?
+            if antwort is 50 repeat 3 times print 'Richtig!' else repeat 5 times print 'Ups'
+7:
+    start_code: |-
+        repeat 5 times
+            print 'Hello Leute'
+            print 'Das wird 5 mal ausgegeben'
+    intro_text: |
+        `ask` und `print` funktionieren immer noch wie du sie kennst.
+        Aber `if` und `repeat` haben sich verändert!
+        Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst die Befehle einrücken.
+        Das heisst, du musst die Befehlszeile mit vier Leerzeichen beginnen.
+        Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
+        ## Beispiel Hedy-Code
+        ```
+        repeat 5 times
+            print 'Hallo Leute'
+            print 'Dies wird 5 mal wiederholt'
+        ```
+
+        Wenn du einen `repeat`- und `if`-Befehl kombinierst, musst du jeden Block einrücken. Schau dir die Beispielprogramme an, um es genauer zu sehen!"
+
+        ## Beispiel Hedy-Code
+        ```
+        farbe is ask Was ist deine Lieblingsfarbe?
+        if farbe is grün
+            repeat 3 times
+                print 'Hübsch!'
+        else
+            repeat 5 times
+                print 'Bäh'
+        ```
+
     commands:
-      -
-        name: "print"
+    -   name: "print"
         explanation: "Gib etwas aus. Denke daran, Anführungszeichen für eine wörtliche Ausgabe zu verwenden."
         example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
         demo_code: "print '5 mal 5 ist ' 5 * 5"
-      -
-        name: "`if` mit mehreren Zeilen"
+    -   name: "`if` mit mehreren Zeilen"
         explanation: "Frage nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben."
         example: "Beispiel: antwort is ask Was ist 5 plus 5?"
-        demo_code: "antwort is ask Was ist 5 plus 5?\nif antwort is 10\n    print 'Gut gemacht!'\n    print 'Die Antwort ist wirklich ' antwort\nelse\n    print 'Ups!'\n    print 'Die Antwort is 10'"
-      -
-        name: "`if` und `repeat` kombiniert"
+        demo_code: |-
+            antwort is ask Was ist 5 plus 5?
+            if antwort is 10
+                print 'Gut gemacht!'
+                print 'Die Antwort ist wirklich ' antwort
+            else
+                print 'Ups!'
+                print 'Die Antwort is 10'
+    -   name: "`if` und `repeat` kombiniert"
         explanation: "`if` und `repeat` kombiniert"
         example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
-        demo_code: "farbe is ask Was ist deine Lieblingsfarbe?\nif farbe is grün\n    repeat 3 times\n        print 'Hübsch!'\nelse\n    repeat 5 times\n        print 'Bäh'"
+        demo_code: |-
+            farbe is ask Was ist deine Lieblingsfarbe?
+            if farbe is grün
+                repeat 3 times
+                    print 'Hübsch!'
+            else
+                repeat 5 times
+                    print 'Bäh'
+
 
