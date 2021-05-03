@@ -100,7 +100,7 @@ def routes (app, requested_lang):
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
         db_set ('users', {'username': user ['username'], 'last_login': timems ()})
         resp = make_response ({})
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
+        resp.set_cookie (cookie_name, value=cookie, path='/')
         return resp
 
     @app.route ('/auth/signup', methods=['POST'])
@@ -202,7 +202,7 @@ def routes (app, requested_lang):
             send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             resp = make_response ({})
 
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
+        resp.set_cookie (cookie_name, value=cookie, path='/')
         return resp
 
     @app.route ('/auth/verify', methods=['GET'])
