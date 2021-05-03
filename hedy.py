@@ -254,9 +254,9 @@ class Filter(Transformer):
 
     # level 14
     def andcondition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def orcondition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     # level 15
     def comment(self, args):
         return True
