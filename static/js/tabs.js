@@ -20,8 +20,11 @@ $(function() {
   $('*[data-tab]').click(function (e) {
     const tab = $(e.target);
     const allTabs = tab.siblings('*[data-tab]');
+    const tabName = tab.data('tab').replace ('t-', '');
 
-    const target = $('*[data-tabtarget="' + tab.data('tab') + '"]');
+    if (tabName !== 'level') window.State.adventure_name = tabName;
+
+    const target = $('*[data-tabtarget="t-' + tabName + '"]');
     const allTargets = target.siblings('*[data-tabtarget]');
 
     allTabs.removeClass('tab-selected');
@@ -30,7 +33,27 @@ $(function() {
     allTargets.addClass('hidden');
     target.removeClass('hidden');
 
+    // We show/hide the input for specifying the saved program name, which is only necessary in the level mode.
+    if (tabName === 'level') $ ('#program_name').css ('opacity', 1).attr ('readonly', false);
+    else                     $ ('#program_name').css ('opacity', 0).attr ('readonly', true);
+
+    // If reloading the default tab, show the default program (loaded_program or start_code)
+    if (tabName === 'level') window.editor.setValue (window.State.default_program);
+    else {
+      window.State.adventures.map (function (adventure) {
+         // If loading an adventure tab and there's a saved game, restore the loaded_program or start_code to the editor.
+         if (adventure.short_name === tabName && adventure.loaded_program) window.editor.setValue (adventure.loaded_program);
+      });
+    }
+    window.editor.clearSelection ();
+
     e.preventDefault();
     return false;
   });
+
+  // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+  if (window.State.adventure_name) {
+     console.log ('click', '[data-tabtarget="t-' + window.State.adventure_name + '"]');
+     $('[data-tab="t-' + window.State.adventure_name + '"]') [0].click ();
+  }
 });

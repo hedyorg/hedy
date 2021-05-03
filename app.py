@@ -73,15 +73,25 @@ def load_adventure_for_language(lang):
     return adventures [lang]
 
 def load_adventure_assignments_per_level(lang, level):
+
     assignments = []
+    existing_programs = []
+    if current_user (request) ['username']:
+        existing_programs = db_get_many ('programs', {'username': current_user (request) ['username']}, True)
+
     adventures = load_adventure_for_language(lang)['adventures']
     for short_name, adventure in adventures.items ():
         if level in adventure['levels']:
+            loaded_program = ''
+            for program in existing_programs:
+                if 'adventure_name' in program and program ['adventure_name'] == short_name and program ['level'] == level:
+                    loaded_program = program ['code']
             assignments.append({
                 'short_name': short_name,
                 'name': adventure['name'],
                 'image': adventure.get('image', None),
-                'text': adventure['levels'][level].get('story_text', 'No Story Text')
+                'text': adventure['levels'][level].get('story_text', 'No Story Text'),
+                'loaded_program': loaded_program
             })
     return assignments
 
@@ -334,9 +344,8 @@ def adventure_page(adventure_name, level):
         return 'No such Hedy adventure!', 404
 
     adventure = adventures ['adventures'] [adventure_name]
-    loaded_program = ''
 
-    # If no level is specified (take last item of path and remove query parameter, if any, then compare to adventure_name)
+    # If no level is specified (this will happen if the last element of the path (minus the query parameter) is the same as the adventure_name)
     if re.sub (r'\?.+', '', request.url.split ('/') [len (request.url.split ('/')) - 1]) == adventure_name:
         # If user is logged in, check if they have a program for this adventure
         # If there are many, note the highest level for which there is a saved program
@@ -356,28 +365,24 @@ def adventure_page(adventure_name, level):
                     desired_level = key
         level = desired_level
 
-    # If a level is specified and user is logged in, check if there's a stored program available for this level
-    elif user ['username']:
-        existing_programs = db_get_many ('programs', {'username': user ['username']}, True)
-        for program in existing_programs:
-            if 'adventure_name' in program and program ['adventure_name'] == adventure_name and program ['level'] == level:
-                loaded_program = program ['code']
-
     # If requested level is not in adventure, return 404
     if not level in adventure ['levels']:
         abort(404)
 
-    return hedyweb.render_adventure(
-        adventure_name=adventure_name,
-        adventure=adventure,
-        course=HEDY_COURSE[requested_lang ()],
+    adventure_assignments = load_adventure_assignments_per_level(requested_lang(), level)
+    g.prefix = '/hedy'
+    return hedyweb.render_assignment_editor(
         request=request,
-        lang=requested_lang (),
+        course=HEDY_COURSE[requested_lang()],
         level_number=level,
+        assignment_number=1,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        loaded_program=loaded_program)
+        adventure_assignments=adventure_assignments,
+        # The relevant loaded program will be available to client-side js and it will be loaded by js.
+        loaded_program='',
+        adventure_name=adventure_name)
 
 # routing to index.html
 @app.route('/hedy', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -418,7 +423,8 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         adventure_assignments=adventure_assignments,
-        loaded_program=loaded_program)
+        loaded_program=loaded_program,
+        adventure_name='')
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
@@ -429,6 +435,8 @@ def onlinemasters(level, step):
     g.lang = lang = requested_lang()
     g.prefix = '/onlinemasters'
 
+    adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
+
     return hedyweb.render_assignment_editor(
         request=request,
         course=ONLINE_MASTERS_COURSE,
@@ -437,7 +445,9 @@ def onlinemasters(level, step):
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        loaded_program='')
+        adventure_assignments=adventure_assignments,
+        loaded_program='',
+        adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
@@ -448,6 +458,8 @@ def space_eu(level, step):
     g.lang = requested_lang()
     g.prefix = '/space_eu'
 
+    adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
+
     return hedyweb.render_assignment_editor(
         request=request,
         course=SPACE_EU_COURSE[g.lang],
@@ -456,7 +468,9 @@ def space_eu(level, step):
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        loaded_program='')
+        adventure_assignments=adventure_assignments,
+        loaded_program='',
+        adventure_name='')
 
 
 
@@ -656,8 +670,16 @@ def save_program (user):
 
     name = body ['name']
 
-    # If this is not a saved program for an adventure, we check if there's already a program with that name for that user.
-    if not 'adventure_name' in body:
+    # If this is a saved program for an adventure, we set the name of the program to `default`, since we want only one saved program per adventure+level combination.
+    # If there's already a saved program for the adventure, we delete the old one.
+    if body ['adventure_name']:
+        name = 'default'
+        existing = db_get_many ('programs', {'username': user ['username']}, True)
+        for program in existing:
+            if 'adventure_name' in program and program ['adventure_name'] == body ['adventure_name'] and program ['level'] == body ['level']:
+                db_del ('programs', {'id': program ['id']})
+                break
+    else:
         # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
         # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
         # For now, we bring all existing programs for the user and then search within them for repeated names.

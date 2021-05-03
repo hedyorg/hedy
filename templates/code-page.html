@@ -21,31 +21,8 @@
   </div>
 </div>
 <div tabindex="0" class="flex-grow p-8">
-  {% if adventure_name %}
-    <div class="my-4">
-    {{intro_text|commonmark}}
-    </div>
-    {{story_text|commonmark}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      {% for command in story_commands %}
-      <div class="hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
-        <div class="font-medium text-lg" tabindex=0>
-          {{ command.explanation|commonmark }}
-        </div>
-        <div class="flex">
-          <div class="font-thin text-sm flex-grow" tabindex=0>
-            {{ command.example|commonmark }}
-          </div>
-          <button class="btn block flex-none self-end"
-            onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
-    {% include "incl-adventure-tabs.html" %}
-  {% endif %}
+  {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
+  {% include "incl-adventure-tabs.html" %}
   {% if prompt %}
   <div class="py-2 px-4">
     <div>
@@ -177,18 +154,10 @@
           next_assignment }}</button>
         {% endif %}
         {% if prev_level %}
-          {% if not adventure_name %}
-            <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
-          {% else %}
-            <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (prev_level|string))}}';">{{regress_button}} {{ prev_level }}</button>
-          {% endif %}
+          <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
-          {% if not adventure_name %}
-            <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
-          {% else %}
-            <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (next_level|string))}}';">{{advance_button}} {{ next_level }}</button>
-          {% endif %}
+          <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
         {% endif %}
       </div>
     </div>
@@ -207,7 +176,15 @@
   <script src="/vendor/skulpt.min.js" type="text/javascript"></script>
   <script src="/vendor/skulpt-stdlib.js" type="text/javascript"></script>
   <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
+  <script>
+    window.State = {};
+    window.State.lang = "{{ lang }}";
+    window.State.level = "{{ level }}";
+    window.State.adventure_name = "{{ adventure_name }}";
+    // We load the adventures into the js to have access to their saved programs (if any).
+    window.State.adventures = JSON.parse ('{{ adventure_assignments|tojson }}'.replace (/\n/g, '\\n'));
+    window.State.default_program = "{{ loaded_program or start_code }}";
+  </script>
   <script src="/js/syntaxModesRules.js" type="text/javascript"></script>
   <script src="/js/app.js" type="text/javascript"></script>
   <script src="/js/auth.js" type="text/javascript"></script>
