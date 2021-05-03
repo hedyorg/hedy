@@ -36,14 +36,18 @@ $(function() {
     // If reloading the default tab, show the default program (loaded_program or start_code)
     if (tabName === 'level') {
        window.editor.setValue (window.State.default_program);
-       $ ('#program_name').val (adventure.default_program_name);
+       $ ('#program_name').val (window.State.default_program_name);
     }
     else {
+      var foundSaved;
       window.State.adventures.map (function (adventure) {
          // If loading an adventure tab and there's a saved game, restore the loaded_program or start_code to the editor.
-         if (adventure.short_name === tabName && adventure.loaded_program) window.editor.setValue (adventure.loaded_program);
+         if (adventure.short_name !== tabName && adventure.loaded_program) return;
+         window.editor.setValue (adventure.loaded_program);
          $ ('#program_name').val (adventure.loaded_program_name);
+         foundSaved = true;
       });
+      if (! foundSaved) $ ('#program_name').val (tabName + ' - ' + window.State.level_title + ' ' + window.State.level);
     }
     window.editor.clearSelection ();
 

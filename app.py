@@ -81,6 +81,7 @@ def load_adventure_assignments_per_level(lang, level):
 
     adventures = load_adventure_for_language(lang)['adventures']
     for short_name, adventure in adventures.items ():
+        loaded_program_name = ''
         if level in adventure['levels']:
             loaded_program = ''
             for program in existing_programs:
@@ -399,6 +400,10 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
+    loaded_program = ''
+    loaded_program_name = ''
+    adventure_name = ''
+
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
         result = db_get ('programs', {'id': step})
@@ -410,10 +415,10 @@ def index(level, step):
             return 'No such program!', 404
         loaded_program = result ['code']
         loaded_program_name = result ['name']
+        if 'adventure_name' in result:
+            adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
         step = 1
-    else:
-        loaded_program = ''
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
 
@@ -428,7 +433,7 @@ def index(level, step):
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
         loaded_program_name=loaded_program_name,
-        adventure_name='')
+        adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
