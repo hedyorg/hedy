@@ -220,18 +220,14 @@
         example: "goedantwoord is False"
         demo_code: "for i in range(0,5):\n    goedantwoord is False\n    antwoord is input('Wat is 5*5')\n    if antwoord is 25:\n        goedantwoord is True\n    else:\n        goedantwoord is False\n    if goedantwoord is True:\n        print('Dat is goed!')\n    if goedantwoord is False:\n        print('Dat is fout! Nog ' 5-i ' pogingen over')"
   14:
-    start_code: "non"
-    intro_text: "non"
+    start_code: "jebenternog is False\nbenjeernog is input('ben je er nog? ja of nee?')\nif benjeernog is ja:\n    jebenternog is True\nantwoord is input('Wat is 5*5?')\nif jebenternog is True and antwoord is 25:\n    print('Je hebt ja gezegd en een goed antwoord gegeven!')"
+    intro_text: "We gaan nu and en or gebruiken! Als je 2 dingen wilt checken hoef je niet meer 2 ifjes in elkaar te doen maar kan je nu and gebruiken. Beide dingen in de if moeten waar zijn als je een and gebruikt. We kunnen ook or gebruiken. Daarbij moet er 1 van de twee waar zijn."
     commands:
-      - name: "non"
-        explanation: "non"
-        example: "non"
-        demo_code: "on"
-  15:
-    start_code: "non"
-    intro_text: "non"
-    commands:
-      - name: "non"
-        explanation: "non"
-        example: "non"
-        demo_code: "on"
+      - name: "And"
+        explanation: "And is dus en. Beide dingen links en rechts van de and moeten waar zijn."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: "antwoord1 is input('hoeveel is 3+2?')\nantwoord2 is input('hoeveel is 2+2?')\nif antwoord1 is 5 and antwoord2 is 4:\n    print('beide antwoorden zijn goed!')\nelse:\n    print('Minimaal 1 antwoord is fout!')"
+      - name: "Or"
+        explanation: "Or is dus of. Minimaal 1 van de twee tussen de or moet goed zijn. Allebei goed mag ook."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: "antwoord1 is input('hoeveel is 3+2?')\nantwoord2 is input('hoeveel is 2+2?')\nif antwoord1 is 5 or antwoord2 is 4:\n    print('Je hebt minimaal 1 antwoord goed!')\nelse:\n    print('Beide antwoorden zijn fout!')"

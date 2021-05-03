@@ -186,21 +186,18 @@
     commands:
       - name: "Example"
         explanation: "In this example, we use True and False to keep track of the answer of a question. You can answer 5 times. If the answer is correct, goodanswer will be True"
-        example: "goedantwoord is False"
+        example: "goodanswer is False"
         demo_code: "for i in range(1,5):\n    goodanswer is False\n    answer is input('What is 5*5')\n    if answer is 25:\n        goodanswer is True\n    else:\n        goodanswer is False\n    if goodanswer is True:\n        print('That is correct!')\n    if goodanswer is False:\n        print('That is wrong! ' 5-i ' attempts left')"
   14:
-    start_code: "non"
-    intro_text: "non"
+    start_code: "youarestillhere is False\nareyoustillhere is input('Are you still here? yes or no?')\nif areyoustillhere is yes:\n    youarestillhere is True\nanswer is input('What is 5*5?')\nif youarestillhere is True and answer is 25:\n    print('You said yes and gave a good answer')"
+    intro_text: "We are now going to learn and and or! If you want to check two statements, you don't have to use two if's but can use and and or. If you use and, both statements, left and right of the and need to be true. We can also use or. Then only one statement needs to be correct."
     commands:
-      - name: "non"
-        explanation: "non"
-        example: "non"
-        demo_code: "on"
-  15:
-    start_code: "non"
-    intro_text: "non"
-    commands:
-      - name: "non"
-        explanation: "non"
-        example: "non"
-        demo_code: "on"
+      - name: "And"
+        explanation: "Both statements (left and right of the and) need to be correct."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: "answer1 is input('What is 3+2?')\nanswer2 is input('What is 2+2?')\nif answer1 is 5 and answer2 is 4:\n    print('Both answers are correct!')\nelse:\n    print('At least one answer is wrong!')"
+      - name: "Or"
+        explanation: "Or is dus of. Minimaal 1 van de twee tussen de or moet goed zijn. Allebei goed mag ook."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: "answer1 is input('What is 3+2?')\nanswer2 is input('What is 2+2?')\nif answer1 is 5 or answer2 is 4:\n    print('At least one answer is correct!')\nelse:\n    print('Both answers are wrong!')"
+

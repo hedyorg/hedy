@@ -671,10 +671,6 @@ class ConvertToPython_14(ConvertToPython_13):
     def orcondition(self, args):
         return ' or '.join(args)
 
-class ConvertToPython_15(ConvertToPython_14):
-    def comment(self, args):
-        return '#'
-
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -1010,9 +1006,6 @@ def transpile_inner(input_string, level):
         return python
     elif level == 14:
         python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-    elif level == 15:
-        python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
