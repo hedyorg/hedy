@@ -302,9 +302,6 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
-    def addition(self, args):
-        return all(args), ''.join([c for c in args])
-
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -343,9 +340,6 @@ class IsComplete(Filter):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
-    def addition(self, args):
-        return all(args), ''.join([c for c in args])
-
     def input(self, args):
         return args != [], 'input'
 
