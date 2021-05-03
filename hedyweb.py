@@ -6,6 +6,8 @@ from os import path
 from flask import jsonify, render_template, abort, redirect
 import courses
 from auth import current_user
+from utils import type_check
+import re
 
 class Translations:
   def __init__(self):
@@ -24,8 +26,14 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, sub=0):
-  assignment = course.get_assignment(level_number, assignment_number)
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program):
+
+  sublevel = None
+  if type_check (level_number, 'str') and re.match ('\d+-\d+', level_number):
+    sublevel     = int (level_number [level_number.index ('-') + 1])
+    level_number = int (level_number [0:level_number.index ('-')])
+
+  assignment = course.get_assignment(level_number, assignment_number, sublevel)
   if not assignment:
     abort(404)
 
@@ -34,7 +42,7 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   # Meta stuff
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
-  arguments_dict['level_sub'] = str(sub) if (int(sub) > 0) else None
+  arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
   arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
   arguments_dict['level'] = assignment.level

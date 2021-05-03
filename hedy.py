@@ -593,7 +593,7 @@ class ConvertToPython_8(ConvertToPython_7):
         else:  # for loop with step
             all_lines = [indent(x) for x in args[4:]]
             return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + ", " + "int(" + args[3] + ")" + "):\n"+"\n".join(all_lines)
-            
+
 class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -751,10 +751,14 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
-def create_grammar(level):
+def create_grammar(level, sub):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
+    if sub:
+        filename = "level" + str(level) + "-" + str (sub) + ".lark"
+    else:
+        filename = "level" + str(level) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         return file.read()
 
 
@@ -767,10 +771,10 @@ def transpile(input_string, level, sub = 0):
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
         if E.args[0] == 'Parse':
             #try 1 level lower
-            if level > 1:
+            if level > 1 and sub == 0:
                 try:
                     new_level = level - 1
-                    result = transpile_inner(input_string, new_level)
+                    result = transpile_inner(input_string, new_level, sub)
                 except (LarkError, HedyException) as innerE:
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
@@ -873,7 +877,7 @@ def preprocess_blocks(code):
 def transpile_inner(input_string, level, sub = 0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = Lark(create_grammar(level))
+    parser = Lark(create_grammar(level, sub))
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
@@ -903,7 +907,7 @@ def transpile_inner(input_string, level, sub = 0):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                result = transpile_inner(fixed_code, level, sub)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
         elif is_valid[1] == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here

@@ -153,12 +153,13 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'sublevel' in body and not type_check (body ['sublevel'], 'int'):
+        return "If present, body.sublevel must be an integer", 400
 
     code = body ['code']
     level = int(body ['level'])
-    
-    sub = 0
-    
+    sublevel = body.get ('sublevel') or 0
+
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -177,7 +178,7 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            result = hedy.transpile(code, level, sub)
+            result = hedy.transpile(code, level, sublevel)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -297,7 +298,17 @@ def programs_page (request):
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
     session_id()  # Run this for the side effect of generating a session ID
-    g.level = level = int(level)
+
+    # Sublevel requested
+    if re.match ('\d+-\d+', level):
+        pass
+        # If level has a dash, we keep it as a string
+    # Normal level requested
+    elif re.match ('\d', level):
+        g.level = level = int(level)
+    else:
+        return 'Invalid level requested', 400
+
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
