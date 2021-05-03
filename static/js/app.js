@@ -101,7 +101,6 @@ function reloadOnExpiredSession () {
 
 function runit(level, lang, cb) {
   if (window.State.disable_run) return alert (window.auth.texts.answer_question);
-
   if (reloadOnExpiredSession ()) return;
 
   error.hide();
@@ -337,6 +336,8 @@ function runPythonProgram(code, cb) {
       // However, this way we are able to log the users error-solving even when the ECEM is not read
     }
   }
+
+  $('#runit').css('background-color', ''); //reset to original color
   const outputDiv = $('#output');
   outputDiv.empty();
 
