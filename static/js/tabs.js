@@ -33,16 +33,16 @@ $(function() {
     allTargets.addClass('hidden');
     target.removeClass('hidden');
 
-    // We show/hide the input for specifying the saved program name, which is only necessary in the level mode.
-    if (tabName === 'level') $ ('#program_name').css ('opacity', 1).attr ('readonly', false);
-    else                     $ ('#program_name').css ('opacity', 0).attr ('readonly', true);
-
     // If reloading the default tab, show the default program (loaded_program or start_code)
-    if (tabName === 'level') window.editor.setValue (window.State.default_program);
+    if (tabName === 'level') {
+       window.editor.setValue (window.State.default_program);
+       $ ('#program_name').val (adventure.default_program_name);
+    }
     else {
       window.State.adventures.map (function (adventure) {
          // If loading an adventure tab and there's a saved game, restore the loaded_program or start_code to the editor.
          if (adventure.short_name === tabName && adventure.loaded_program) window.editor.setValue (adventure.loaded_program);
+         $ ('#program_name').val (adventure.loaded_program_name);
       });
     }
     window.editor.clearSelection ();

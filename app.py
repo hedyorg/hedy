@@ -86,12 +86,14 @@ def load_adventure_assignments_per_level(lang, level):
             for program in existing_programs:
                 if 'adventure_name' in program and program ['adventure_name'] == short_name and program ['level'] == level:
                     loaded_program = program ['code']
+                    loaded_program_name = program ['name']
             assignments.append({
                 'short_name': short_name,
                 'name': adventure['name'],
                 'image': adventure.get('image', None),
                 'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-                'loaded_program': loaded_program
+                'loaded_program': loaded_program,
+                'loaded_program_name': loaded_program_name
             })
     return assignments
 
@@ -407,6 +409,7 @@ def index(level, step):
         if user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
         loaded_program = result ['code']
+        loaded_program_name = result ['name']
         # We default to step 1 to provide a meaningful default assignment
         step = 1
     else:
@@ -424,6 +427,7 @@ def index(level, step):
         version=version(),
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
+        loaded_program_name=loaded_program_name,
         adventure_name='')
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -447,6 +451,7 @@ def onlinemasters(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
+        loaded_program_name='',
         adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -470,6 +475,7 @@ def space_eu(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
+        loaded_program_name='',
         adventure_name='')
 
 
@@ -670,26 +676,16 @@ def save_program (user):
 
     name = body ['name']
 
-    # If this is a saved program for an adventure, we set the name of the program to `default`, since we want only one saved program per adventure+level combination.
-    # If there's already a saved program for the adventure, we delete the old one.
-    if body ['adventure_name']:
-        name = 'default'
-        existing = db_get_many ('programs', {'username': user ['username']}, True)
-        for program in existing:
-            if 'adventure_name' in program and program ['adventure_name'] == body ['adventure_name'] and program ['level'] == body ['level']:
-                db_del ('programs', {'id': program ['id']})
-                break
-    else:
-        # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
-        # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
-        # For now, we bring all existing programs for the user and then search within them for repeated names.
-        existing = db_get_many ('programs', {'username': user ['username']}, True)
-        name_counter = 0
-        for program in existing:
-            if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
-                name_counter = name_counter + 1
-        if name_counter:
-            name = name + ' (' + str (name_counter) + ')'
+    # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
+    # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
+    # For now, we bring all existing programs for the user and then search within them for repeated names.
+    existing = db_get_many ('programs', {'username': user ['username']}, True)
+    name_counter = 0
+    for program in existing:
+        if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
+            name_counter = name_counter + 1
+    if name_counter:
+        name = name + ' (' + str (name_counter) + ')'
 
     stored_program = {
         'id': uuid.uuid4().hex,
