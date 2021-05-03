@@ -175,7 +175,7 @@ def create_parser(level):
         grammar = file.read()
     return Lark(grammar)
 
-def all_arguments_true(args):
+def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
     arguments_of_false_nodes = [x[1] for x in args if not x[0]]
     return all(bool_arguments), arguments_of_false_nodes
@@ -195,62 +195,62 @@ class Filter(Transformer):
                 command_num += 1
 
     def command(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     def assign(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def assign_list(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def assign_sum(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def list_access(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 4 commands
     def list_access_var(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def ifs(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def valid_command(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def ifelse(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def condition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def equality_check(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def in_list_check(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 5 command
     def repeat(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 6
     def addition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def substraction(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def multiplication(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def division(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     #level 7
     def elses(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 8
     def for_loop(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 9
     def elifs(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 12
     def change_list_item(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 14
     def andcondition(self, args):
@@ -262,6 +262,8 @@ class Filter(Transformer):
         return True
 
     #leafs are treated differently, they are True + their arguments flattened
+    def var(self, args):
+        return True, ''.join([str(c) for c in args])
     def random(self, args):
         return True, 'random'
     def index(self, args):
@@ -287,13 +289,13 @@ class IsValid(Filter):
     # that means you added a production rule but did not add a method for the rule here
 
     def ask(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def print(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def echo(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def for_loop(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     #leafs with tokens need to be all true
     def var(self, args):
@@ -302,8 +304,6 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def addition(self, args):
         return all(args), ''.join([c for c in args])
-    def comment(self, args):
-        return True
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
@@ -313,7 +313,9 @@ class IsValid(Filter):
         # return error source to indicate what went wrong
         return False, "print without quotes"
     def input(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
+
+
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -343,8 +345,7 @@ class IsComplete(Filter):
         return all(args), ''.join([c for c in args])
     def addition(self, args):
         return all(args), ''.join([c for c in args])
-    def comment(self, args):
-        return True
+
     def input(self, args):
         return args != [], 'input'
 

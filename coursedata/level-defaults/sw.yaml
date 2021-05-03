@@ -1,198 +1,291 @@
----
-  1:
+1:
     intro_text: "Welcome to Hedy! In Level 1 you can use the commands `print`, `ask` and `echo`. Press the blue button and the code will be typed for you! Try the code yourself with the green 'Run the code' button under the left programming field."
     start_code: "print hello world!"
     commands:
-      -
-        explanation: "Print something with `print`."
+    -   explanation: "Print something with `print`."
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print Hello welcome to Hedy!"
-      -
-        explanation: "Ask something with `ask`."
+    -   explanation: "Ask something with `ask`."
         example: "Example: ask What is your favorite color?"
         demo_code: "ask What is your favorite color?"
-      -
-        explanation: "Repeat something using `echo`."
+    -   explanation: "Repeat something using `echo`."
         example: "Example: echo so your favorite color is..."
-        demo_code: "ask What is your favorite color?\necho so your favorite color is..."
-  2:
+        demo_code: |-
+            ask What is your favorite color?
+            echo so your favorite color is...
+2:
     intro_text: "Print still works as it did in Level 1, but ask has been changed and now needs a name, which you can then print. Echo is no longer needed. You can now also use these commands:"
     start_code: "print hello world!"
     commands:
-      -
-        explanation: "Give a word a name to use in the program using `is`"
+    -   explanation: "Give a word a name to use in the program using `is`"
         example: "Example: name is Hedy."
-        demo_code: "name is Hedy\nprint welcome name"
-      -
-        explanation: "Ask something with `ask`. Beware! You need to give the answer a name with `is`."
+        demo_code: |-
+            name is Hedy
+            print welcome name
+    -   explanation: "Ask something with `ask`. Beware! You need to give the answer a name with `is`."
         example: "Example: color is ask What is your favorite color?"
-        demo_code: "color is ask What is your favorite color?\nprint color is your favorite!"
-      -
-        explanation: "Choose a random word from a group with `at` and `random`"
+        demo_code: |-
+            color is ask What is your favorite color?
+            print color is your favorite!
+    -   explanation: "Choose a random word from a group with `at` and `random`"
         example: "Example: animals is dog, cat, kangaroo."
-        demo_code: "animals is dog, cat, kangaroo\nprint animals at random"
-  3:
+        demo_code: |-
+            animals is dog, cat, kangaroo
+            print animals at random
+3:
     start_code: "print 'Hello world'"
     intro_text: "`ask` is still the same in level 3, but` print` is different now. You must enclose text that you want to print in quotation marks."
     commands:
-      -
-        explanation: "Print exactly using quotation marks"
+    -   explanation: "Print exactly using quotation marks"
         example: "Example: print 'Hello welcome to Hedy.'"
         demo_code: "print 'Hello welcome to Hedy.'"
-      -
-        explanation: "Give a name to some text and `print` without quotation marks"
+    -   explanation: "Give a name to some text and `print` without quotation marks"
         example: "Example: name is Hedy."
-        demo_code: "name is Hedy\nprint 'my name is ' name"
-      -
-        explanation: "Ask something with `ask`."
+        demo_code: |-
+            name is Hedy
+            print 'my name is ' name
+    -   explanation: "Ask something with `ask`."
         example: "Example: color is ask What is your favorite color?"
-        demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
-  4:
-    start_code: "name is ask what is your name?\nif name is Hedy print 'cool!' else print 'meh'"
+        demo_code: |-
+            color is ask What is your favorite color?
+            print color ' is your favorite!'
+4:
+    start_code: |-
+        name is ask what is your name?
+        if name is Hedy print 'cool!' else print 'meh'
     intro_text: "`ask` and `print` work exactly like they did in Level 3. Level 4 adds the `if` statement!"
     commands:
-      -
-        explanation: "Print exactly using quotation marks"
+    -   explanation: "Print exactly using quotation marks"
         example: "Example: print 'Hello welcome to Hedy.'"
         demo_code: "print 'Hello welcome to Hedy.'"
-      -
-        explanation: "Ask something with `ask`."
+    -   explanation: "Ask something with `ask`."
         example: "Example: color is ask What is your favorite color?"
-        demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
-      -
-        explanation: "Make a choice with `if`"
+        demo_code: |-
+            color is ask What is your favorite color?
+            print color ' is your favorite!'
+    -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
-        demo_code: "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
-  5:
+        demo_code: |-
+            color is ask What is your favorite color?
+            if color is green print 'pretty!' else print 'meh'
+5:
     start_code: "repeat 3 times print 'Hedy is fun!'"
     intro_text: "`ask`, `print` and `if` work exactly like they did in Level 4. But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times."
     commands:
-      -
-        explanation: "Print exactly using quotation marks"
+    -   explanation: "Print exactly using quotation marks"
         example: "Example: print 'Hello welcome to Hedy.'"
         demo_code: "print 'Hello welcome to Hedy.'"
-      -
-        explanation: "Ask something with `ask`."
+    -   explanation: "Ask something with `ask`."
         example: "Example: color is ask What is your favorite color?"
-        demo_code: "color is ask What is your favorite color?\nprint color ' is your favorite!'"
-      -
-        explanation: "Make a choice with `if`"
+        demo_code: |-
+            color is ask What is your favorite color?
+            print color ' is your favorite!'
+    -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
-        demo_code: "color is ask What is your favorite color?\nif color is green print 'pretty!' else print 'meh'"
-      -
-        explanation: "`repeat` and `if` combined"
+        demo_code: |-
+            color is ask What is your favorite color?
+            if color is green print 'pretty!' else print 'meh'
+    -   explanation: "`repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
-        demo_code: "color is ask What is your favorite color?\nif color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
-  6:
+        demo_code: |-
+            color is ask What is your favorite color?
+            if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
+6:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: "`ask`, `print`, `if` and `repeat` are still the same as in Level 4 and 5. Level 6 adds something new... You can now calculate."
     commands:
-      -
-        explanation: "Print exactly using quotation marks"
+    -   explanation: "Print exactly using quotation marks"
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
-      -
-        explanation: "Ask for a calculation and check that it is correct."
+    -   explanation: "Ask for a calculation and check that it is correct."
         example: "Example: answer is ask What is 10 plus 10?"
-        demo_code: "answer is ask What is 10 plus 10?\nif answer is 20 print 'Yes!' else print 'Oops'"
-      -
-        explanation: "`repeat` and `if` combined"
+        demo_code: |-
+            answer is ask What is 10 plus 10?
+            if answer is 20 print 'Yes!' else print 'Oops'
+    -   explanation: "`repeat` and `if` combined"
         example: "Example: if product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
-        demo_code: "product is ask What is 10 times 5?\nif product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
-  7:
-    start_code: "repeat 5 times\n    print 'Hello folks'\n    print 'This will be printed 5 times'"
+        demo_code: |-
+            product is ask What is 10 times 5?
+            if product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'
+7:
+    start_code: |-
+        repeat 5 times
+            print 'Hello folks'
+            print 'This will be printed 5 times'
     intro_text: "ask and print still work as you know them. But if and repeat have changed! You can now execute groups of code together, but you will have to indent the code. That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line. If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!"
     commands:
-      -
-        explanation: "Print something. Remember to use a quotation mark for literal printing."
+    -   explanation: "Print something. Remember to use a quotation mark for literal printing."
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
-      -
-        explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+    -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
         example: "Example: answer is ask What is 5 plus 5?"
-        demo_code: "answer is ask What is 5 plus 5?\nif answer is 10\n    print 'Well done!'\n    print 'Indeed, the answer was ' answer\nelse\n    print 'Oops!'\n    print 'The answer is 10'"
-      -
-        explanation: "`if` and `repeat` combined"
+        demo_code: |-
+            answer is ask What is 5 plus 5?
+            if answer is 10
+                print 'Well done!'
+                print 'Indeed, the answer was ' answer
+            else
+                print 'Oops!'
+                print 'The answer is 10'
+    -   explanation: "`if` and `repeat` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
-        demo_code: "color is ask What is your favorite color?\nif color is green\n    repeat 3 times\n        print 'pretty!'\nelse\n    repeat 5 times\n        print 'meh'"
-  8:
-    start_code: "for i in range 1 to 10\n    print i\nprint 'Ready or not, here I come!'"
-    intro_text:
-      "`print` works just the same but the `repeat` is now replaced by `for`!
-      You use `for i in range 1 to 5`, instead of `repeat 5 times`. You can also use `i` in your program!
-      Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
+        demo_code: |-
+            color is ask What is your favorite color?
+            if color is green
+                repeat 3 times
+                    print 'pretty!'
+            else
+                repeat 5 times
+                    print 'meh'
+8:
+    start_code: |-
+        for i in range 1 to 10
+            print i
+        print 'Ready or not, here I come!'
+    intro_text: "`print` works just the same but the `repeat` is now replaced by `for`! You use `for i in range 1 to 5`, instead of `repeat 5 times`. You can also use `i` in your program! Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
     commands:
-           -
-             explanation: "we replace `repeat` with `for`"
-             example: "for i in range 1 to 10"
-             demo_code: |
-               for i in range 1 to 10
-                 print i
-               print 'Ready or not, here I come!'
-  9:
-    start_code: "for i in range 1 to 10:\n    print i\nprint 'Ready or not, here I come!'"
+    -   explanation: "we replace `repeat` with `for`"
+        example: "for i in range 1 to 10"
+        demo_code: |
+            for i in range 1 to 10
+              print i
+            print 'Ready or not, here I come!'
+9:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Ready or not, here I come!'
     intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation."
     commands:
-      - explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
+    -   explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
         example: "for i in range 1 to 10:"
-        demo_code: "for i in range 1 to 11:\n    print i\nprint 'Ready or not, here I come!'"
-      - explanation: "We need to do the same with all of our `if` statements"
+        demo_code: |-
+            for i in range 1 to 11:
+                print i
+            print 'Ready or not, here I come!'
+    -   explanation: "We need to do the same with all of our `if` statements"
         example: "if colour is green:'"
-        demo_code: "colour is green\nif colour is green:\n    print 'The colour is green'\nelse:\n    print 'The colour is not green'"
-      -
-        explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
+        demo_code: |-
+            colour is green
+            if colour is green:
+                print 'The colour is green'
+            else:
+                print 'The colour is not green'
+    -   explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
         example: "elif a is 5:"
-        demo_code: "a is 2\nif a is 1:\n    print 'a is 1'\nelif a is 2:\n    print 'a is 2'\nelse:\n    print 'a is not 1 or 2'"
-  10:
-    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we are in round: ' i ' and we count: ' j"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is not 1 or 2'
+10:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+            print 'we are in round: ' i ' and we count: ' j
     intro_text: "From now on, we can repeat a loop more often. In the example we count to 5 and do that 3 times. So we do 3 rounds and count to 5 every time."
     commands:
-      - explanation: "This is an example with the for statement"
-        demo_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n    print 'we are in round: ' i ' and we count: ' j"
-      - explanation: "We can do the same with if statements"
-        demo_code: "colour is blue\ncolourtwo is yellow\nif colour is blue:\n    if colourtwo is yellow:\n        print 'Together we make green!'"
-  11:
-    start_code: "age is input('What is your age?')\nprint('So you have been these ages:')\nfor i in range(0,age):\n    print(i)"
+    -   explanation: "This is an example with the for statement"
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                print 'we are in round: ' i ' and we count: ' j
+    -   explanation: "We can do the same with if statements"
+        demo_code: |-
+            colour is blue
+            colourtwo is yellow
+            if colour is blue:
+                if colourtwo is yellow:
+                    print 'Together we make green!'
+11:
+    start_code: |-
+        age is input('What is your age?')
+        print('So you have been these ages:')
+        for i in range(0,age):
+            print(i)
     intro_text: "We are going to put round brackets and we are going to change ask! We change ask into input! At print, ask and for, we are going to put round brackets now."
     commands:
-      - explanation: "We are going to put brackets around print now!"
+    -   explanation: "We are going to put brackets around print now!"
         example: "For example: print('Hello World')"
         demo_code: "print('Hello World')"
-      - explanation: "We remove ask and call it input now, also we are going to put brackets around it"
+    -   explanation: "We remove ask and call it input now, also we are going to put brackets around it"
         example: "For example: answer is input('What is your name?')"
-        demo_code: "answer = input('What is your name?')\nprint('So your name is ' answer)"
-      - explanation: "We are now putting brackets around the numbers in the for loop. for i in range (0,10):"
+        demo_code: |-
+            answer = input('What is your name?')
+            print('So your name is ' answer)
+    -   explanation: "We are now putting brackets around the numbers in the for loop. for i in range (0,10):"
         example: "For example: for i in range(0,10):"
-        demo_code: "for i in range(0,10):\n    print(i)\nprint('Ready or not, here I come')"
+        demo_code: |-
+            for i in range(0,10):
+                print(i)
+            print('Ready or not, here I come')
 
-  12:
-    start_code: "fruit is ['apple', 'banana', 'cherry']\nprint(fruit)"
+
+12:
+    start_code: |-
+        fruit is ['apple', 'banana', 'cherry']
+        print(fruit)
     intro_text: "We are going to put square brackets around lists! Also we now need to put single quotation marks (') around items in lists. "
     commands:
-      - explanation: "We are going to put square brackets around lists! We also need to put ' around items in lists."
+    -   explanation: "We are going to put square brackets around lists! We also need to put ' around items in lists."
         example: "For example: fruit is ['apple', 'banana', 'cherry']"
-        demo_code: "fruit is ['apple', 'banana', 'cherry']\nprint(fruit)"
-      - name: "Get an item from a list"
+        demo_code: |-
+            fruit is ['apple', 'banana', 'cherry']
+            print(fruit)
+    -   name: "Get an item from a list"
         explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
         example: "For example: firstfruit is fruit[1]"
-        demo_code: "fruit is ['banana', 'apple', 'cherry']\nfirstfruit is fruit[1]\nprint(firstfruit)"
-      - name: "Get an random item from a list"
+        demo_code: |-
+            fruit is ['banana', 'apple', 'cherry']
+            firstfruit is fruit[1]
+            print(firstfruit)
+    -   name: "Get an random item from a list"
         explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
         example: "For example: randomfruit is fruit[random]"
-        demo_code: "fruit is ['banana', 'apple', 'cherry']\nrandomfruit is fruit[random]\nprint(randomfruit)"
-  13:
-    start_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif answer == 8:\n  print('That is correct!')\nelse:\n  print('Oh no, that is wrong!')"
+        demo_code: |-
+            fruit is ['banana', 'apple', 'cherry']
+            randomfruit is fruit[random]
+            print(randomfruit)
+13:
+    start_code: |-
+        print('What is 5+3?')
+        answer = 5+3
+        print('answer is now:')
+        print(answer)
+        if answer == 8:
+          print('That is correct!')
+        else:
+          print('Oh no, that is wrong!')
     intro_text: "Now we are going to change is into = and ==. We use = if we want to assign a value to a variable. If you want to assign 8 to the variable called answer, we do answer = 8. == we use when we want to see if two things are the same."
     commands:
-      - name: "Compare"
+    -   name: "Compare"
         explanation: "If we want to compare, we use ==. 5+3 == 8 checks if 5+3 equals 8"
         example: "For example: 5+3 == 8"
-        demo_code: "if 5+3 == 8:\n    print('5+3 is indeed 8')\nelse:\n  print('This will not be printed because 5+3 is 8!')"
-      - name: "Assign Value"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 is indeed 8')
+            else:
+              print('This will not be printed because 5+3 is 8!')
+    -   name: "Assign Value"
         explanation: "If we want to say that a variable called answer is 8, we do answer = 8."
         example: "For example: answer = 8"
-        demo_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)"
-      - name: "Compare and assign value"
+        demo_code: |-
+            print('What is 5+3?')
+            answer = 5+3
+            print('answer is now:')
+            print(answer)
+    -   name: "Compare and assign value"
         explanation: "If we are going to compare two values, we use ==. If we are going to assign a variable, we use =. "
         example: "For example: 5+3 == 8, answer = 8"
-        demo_code: "print('What is 5+3?')\nanswer = 5+3\nprint('answer is now:')\nprint(answer)\nif answer == 8:\n  print('That is correct!')\nelse:\n  print('No, that is wrong!')"
+        demo_code: |-
+            print('What is 5+3?')
+            answer = 5+3
+            print('answer is now:')
+            print(answer)
+            if answer == 8:
+              print('That is correct!')
+            else:
+              print('No, that is wrong!')
