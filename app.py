@@ -157,7 +157,7 @@ def parse():
     code = body ['code']
     level = int(body ['level'])
     
-    sub = 0 #int(body ['sub'])   # TODO implement sub in backend
+    sub = 0
     
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
