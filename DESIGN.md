@@ -209,4 +209,9 @@ In level 15, comments are introduced. The learner will now know how to comment c
 
 In level 16, Learners learn about < and > in preparation for while loops
 
+### Level 17: while loops
+
+In level 17, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
+can make basic while loops.
+
 
