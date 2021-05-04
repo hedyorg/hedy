@@ -21,7 +21,7 @@ _EOL: "\r"?"\n"
 
 
 print : "print(" (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))* ")"
-input : var " is input(" (quoted_text) (" " (quoted_text))* ")"
+input : var " is input("  (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*  ")"
 assign_list: var " is [" quoted_text ((", "|",") quoted_text)+ "]"
 
 //TODO: sum needs to be expression here too (like in 7 and up)
