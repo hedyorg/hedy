@@ -481,3 +481,35 @@
             leeftijd is input('Hoe oud ben jij?')
             if leeftijd > 12:
                 print('Dan ben je ouder dan ik!')
+17:
+    start_code: |-
+        goedantwoord is False
+        # we gaan door totdat een goed antwoord is gegeven!
+        while goedantwoord is False:
+            antwoord is input('Wat is 5 keer 5?')
+            if antwoord is 25:
+                goedantwoord is True
+                print('Er is een goed antwoord gegeven')
+    intro_text: "Nu gaan we een nieuwe loop leren: De While loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
+    commands:
+    -   name: "Boolean while"
+        explanation: "We kunnen dus een while loop gebruiken met de True en False"
+        example: "Bijvoorbeeld: while goedantwoord is False"
+        demo_code: |-
+            goedantwoord is False
+            # we gaan door totdat een goed antwoord is gegeven!
+            while goedantwoord is False:
+                antwoord is input('Wat is 5 keer 5?')
+                if antwoord is 25:
+                    goedantwoord is True
+                    print('Er is een goed antwoord gegeven')
+    -   name: "Smaller while"
+        explanation: "We kunnen een while loop ook gebruiken met < en >. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
+        example: "Bijvoorbeeld: while tel < 3"
+        demo_code: |-
+            tel is 1
+            # we gaan door totdat tel 3 is!
+            while tel < 3:
+                print('Dit is de ' tel 'e keer')
+                tel is tel + 1
+            print('We zijn klaar')

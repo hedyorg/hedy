@@ -143,6 +143,9 @@ class AllAssignmentCommands(Transformer):
     def for_loop(self, args):
         commands = args[1:]
         return flatten(commands)
+    def while_loop(self, args):
+        commands = args[1:]
+        return flatten(commands)
 
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
@@ -276,6 +279,10 @@ class Filter(Transformer):
     def bigger(self, args):
         return are_all_arguments_true(args)
 
+    # level 17
+    def while_loop(self, args):
+        return are_all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
         return True, ''.join([str(c) for c in args])
@@ -310,6 +317,8 @@ class IsValid(Filter):
     def echo(self, args):
         return are_all_arguments_true(args)
     def for_loop(self, args):
+        return are_all_arguments_true(args)
+    def while_loop(self, args):
         return are_all_arguments_true(args)
     def comment(self, args):
         return are_all_arguments_true(args)
@@ -712,6 +721,12 @@ class ConvertToPython_16(ConvertToPython_15):
         else:
             return f"str({arg0}) > str({arg1}) and {args[2]}"
 
+class ConvertToPython_17(ConvertToPython_16):
+    def while_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "while " + args[0] + ":\n"+"\n".join(all_lines)
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -1053,6 +1068,9 @@ def transpile_inner(input_string, level):
         return python
     elif level == 16:
         python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 17:
+        python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
