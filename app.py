@@ -93,6 +93,7 @@ def load_adventure_assignments_per_level(lang, level):
                 'name': adventure['name'],
                 'image': adventure.get('image', None),
                 'text': adventure['levels'][level].get('story_text', 'No Story Text'),
+                'start_code': adventure['levels'][level].get ('start_code', ''),
                 'loaded_program': loaded_program,
                 'loaded_program_name': loaded_program_name
             })
@@ -385,6 +386,7 @@ def adventure_page(adventure_name, level):
         adventure_assignments=adventure_assignments,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
+        loaded_program_name='',
         adventure_name=adventure_name)
 
 # routing to index.html
