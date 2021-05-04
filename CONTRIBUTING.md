@@ -1,21 +1,33 @@
 Contributing to Hedy
 ======================
 
+Hedy is now available in Dutch, French, English, Brazilian Portugese, Greek Mandarin, Hungarian and Spanish, but we'd love to support more languages!
 
-Help Hedy with translations
+Help Hedy with translations (easy, no programming needed!)
 ------------
 
-Hedy is now available in Dutch, French, English, Brazilian Portugese and Spanish, but we'd love to support more languages!
+The easiest way to translate Hedy is by using or translation UI website! 
 
-If you would like to add a new translation, there are four places where files that need to be translated:
+Simply go to https://www.hedycode.com/translate/en/new and translate our texts that are shown on the left in the boxes on the right. When you are done, you can use the three download button at the end of the page, and [send us the files](mailto:hedy@felienne.com).
+
+![image](https://user-images.githubusercontent.com/1003685/116811756-3ed55f80-ab4b-11eb-881a-85677a30ef5e.png)
+
+You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again download the files and send them to us per email.
+
+
+Help Hedy with translations (in the cobe base, some coding experience needed)
+------------
+
+If you would like to add a new translation, there are four places where files are located that need to be translated:
 
 1) The folder [level-defaults](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/) has a file for each language. That file controls what the landing page for each levels looks like. It is probably easiest to copy the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/en.yaml), rename it and translate that. Tip: example variables can be translated too, that is probably helpful for learners!
 
 2) In the folder [texts](https://github.com/Felienne/hedy/tree/master/coursedata/texts) there is a file for each language too. That file translate UI-elements like menu headers, and, important, the error messages Hedy programmers will see. As above, copying the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/texts/en.yaml) and translate that.
 
-3) The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there is a page with press, and with contact info too. If you want to, you can skip those pages (people will then see the English version)
+3) The [folder](https://github.com/Felienne/hedy/tree/master/coursedata/adventures) that control the assignments kids see in the user interface for each of the levels. While not mandatory, the assignments in this section are of help for kids to better explore each level. If you do not translate them, the English version will be shown.
 
-4) There is also a [folder](https://github.com/Felienne/hedy/tree/master/coursedata/course/hedy/docs-en) with extra instructions for each of the levels. While not mandatory, the docs in this section are of help for kids to better explore each level.
+4) *optional* The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there are page with press, contact info too. These do not necessariyl have to be translated, if you don't people will then see the English version, but kids can still program in their own native language.
+
 
 Translated all of that?
 
@@ -78,3 +90,37 @@ Pre-release environment
 When you have your PR accepted into `master`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
 
 We do periodic deploys of `master` to the [production version](https://hedycode.com) of Hedy.
+
+Editing YAML files with validation
+----------------------------------
+
+If you need to edit the YAML files that make up the Hedy adventure mode,
+you can have them validated as-you-type against our JSON schemas.
+
+This does require some manual configuration in your IDE, which we can
+unfortunately not do automatically for you. What you need to do depends
+on which IDE you are using. Here are the IDEs we know about:
+
+### Visual Studio Code
+
+* Install the Vistual Studio Code [YAML plugin](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
+* After installing the plugin, press **F1**, and type **Preferences: Open Worspace Settings (JSON)**.
+* Add the following `yaml.schemas` key to the JSON file that shows up:
+
+```json
+{
+  // ...
+  "yaml.schemas": {
+    "coursedata/adventures/adventures.schema.json": "adventures/*.yaml"
+  }
+}
+```
+
+### IntelliJ (PyCharm/WebStorm/...)
+
+* Open **Preferences**
+* Navigate to **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
+* Click the **+** to add a new schema.
+  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/coursedata/adventures/adventures.schema.json` file.
+  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `coursedata/adventures`.
+* Click **OK** to close the window.
