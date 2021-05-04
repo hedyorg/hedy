@@ -231,7 +231,6 @@ def parse():
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
                 session['error_level'] = 0  # Code is correct: reset error_level back to 0
-                print ('DEBUG SESSION SET GFM', session)
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -277,7 +276,6 @@ def parse():
     return jsonify(response)
 
 def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
-    print ('DEBUG SESSION GFM', session)
     response = {}
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
@@ -295,7 +293,10 @@ def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
             else:
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
-            response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
+                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
         elif session['error_level'] == 4:
             similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
             if similar_code is None:  # No similar code is found against a, to be defined, threshold
@@ -345,19 +346,21 @@ def get_similar_code(processed_code, level):
     filename = "coursedata/level" + str(level) + ".csv"
     shortest_distance = 10 # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
-
-    with open(filename, mode='r') as file:
-        csvFile = csv.reader(file)
-        for lines in csvFile:
-            distance = lev(processed_code, lines[2])
-            if distance == 0:  # The code is identical, no need to search any further
-                similar_code = lines[0]
-                break
-            else:
-                if distance < shortest_distance:
-                    shortest_distance = distance
+    try:
+        with open(filename, mode='r', encoding='utf-8') as file:
+            csvFile = csv.reader(file)
+            for lines in csvFile:
+                distance = lev(processed_code, lines[2])
+                if distance == 0:  # The code is identical, no need to search any further
                     similar_code = lines[0]
-        return similar_code
+                    break
+                else:
+                    if distance < shortest_distance:
+                        shortest_distance = distance
+                        similar_code = lines[0]
+    except:
+        similar_code = None
+    return similar_code
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
