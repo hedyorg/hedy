@@ -253,7 +253,6 @@ def parse():
             if lang in supported_lang:
                 response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=True))
         except Exception as E:
-            print(f"error transpiling {code}")
             response["Error"] = str(E)
             if lang in supported_lang:
                 response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=False))
@@ -347,7 +346,6 @@ def get_similar_code(processed_code, level):
     filename = "coursedata/level" + str(level) + ".csv"
     shortest_distance = 10 # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
-
     try:
         with open(filename, mode='r', encoding='utf-8') as file:
             csvFile = csv.reader(file)

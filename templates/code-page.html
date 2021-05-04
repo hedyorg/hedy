@@ -1,13 +1,13 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
 <div id="opaque"></div>
- <div class="bg-blue-200" id="feedback-popup" style="display: none">
-     <p class="close-dialog" onclick="feedback('-')">X</p> <!-- No feedback is given: we still want to know! -->
-     <p class="text-2xl font-bold caption" id="feedback-popup-title">Error retrieving translation...</p>
-     <div id="answer-buttons">
-         <button class="green-btn ml-1 yes" onclick="feedback(true)">-</button>
-         <button class="green-btn ml-1 no" onclick="feedback(false)">-</button>
-     </div>
+<div class="bg-blue-200" id="feedback-popup" style="display: none">
+  <p class="close-dialog" onclick="feedback('-')">X</p> <!-- No feedback is given: we still want to know! -->
+  <p class="text-2xl font-bold caption" id="feedback-popup-title">Error retrieving translation...</p>
+  <div id="answer-buttons">
+    <button class="green-btn ml-1 yes" onclick="feedback(true)">-</button>
+    <button class="green-btn ml-1 no" onclick="feedback(false)">-</button>
+  </div>
 </div>
 <div style="width: 250px;" class="right-hand-shadow flex-none">
   <div class="p-3 shadow-md">
@@ -177,7 +177,7 @@
       <button id="runit" class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
     </div>
     <div>
-      <div class="h-64 flex flex-col">
+      <div class="h-72 flex flex-col">
         <!-- tabindex=0 makes the div focusable -->
         <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto">
         </div>
