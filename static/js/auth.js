@@ -256,7 +256,6 @@ if (window.location.pathname === '/signup') {
 }
 
 $ ('#email, #email_repeat').on ('cut copy paste', function (e) {
-   console.log ('DEBUG cut/copy/paste prevented', e);
    e.preventDefault ();
    return false;
 });
