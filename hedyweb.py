@@ -1,19 +1,28 @@
 import collections
 import attr
 import glob
+import flask
 from os import path
 
 from flask import jsonify, render_template, abort, redirect
 import courses
 from auth import current_user
+import utils
 
 class Translations:
   def __init__(self):
-    self.data = {}
-    translations = glob.glob('coursedata/texts/*.yaml')
-    for trans_file in translations:
-      lang = path.splitext(path.basename(trans_file))[0]
-      self.data[lang] = courses.load_yaml(trans_file)
+    self._data = None
+
+  @property
+  def data(self):
+    # In debug mode, always reload all translations
+    if self._data is None or utils.flask_in_debug_mode():
+      translations = glob.glob('coursedata/texts/*.yaml')
+      self._data = {}
+      for trans_file in translations:
+        lang = path.splitext(path.basename(trans_file))[0]
+        self._data[lang] = courses.load_yaml(trans_file)
+    return self._data
 
   def get_translations(self, language, section):
     # Merge with English when lacking translations

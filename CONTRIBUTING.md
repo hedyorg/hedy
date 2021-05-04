@@ -1,21 +1,33 @@
 Contributing to Hedy
 ======================
 
+Hedy is now available in Dutch, French, English, Brazilian Portugese, Greek Mandarin, Hungarian and Spanish, but we'd love to support more languages!
 
-Help Hedy with translations
+Help Hedy with translations (easy, no programming needed!)
 ------------
 
-Hedy is now available in Dutch, French, English, Brazilian Portugese and Spanish, but we'd love to support more languages!
+The easiest way to translate Hedy is by using or translation UI website!
 
-If you would like to add a new translation, there are four places where files that need to be translated:
+Simply go to https://www.hedycode.com/translate/en/new and translate our texts that are shown on the left in the boxes on the right. When you are done, you can use the three download button at the end of the page, and [send us the files](mailto:hedy@felienne.com).
+
+![image](https://user-images.githubusercontent.com/1003685/116811756-3ed55f80-ab4b-11eb-881a-85677a30ef5e.png)
+
+You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again download the files and send them to us per email.
+
+
+Help Hedy with translations (in the cobe base, some coding experience needed)
+------------
+
+If you would like to add a new translation, there are four places where files are located that need to be translated:
 
 1) The folder [level-defaults](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/) has a file for each language. That file controls what the landing page for each levels looks like. It is probably easiest to copy the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/level-defaults/en.yaml), rename it and translate that. Tip: example variables can be translated too, that is probably helpful for learners!
 
 2) In the folder [texts](https://github.com/Felienne/hedy/tree/master/coursedata/texts) there is a file for each language too. That file translate UI-elements like menu headers, and, important, the error messages Hedy programmers will see. As above, copying the [English file](https://github.com/Felienne/hedy/blob/master/coursedata/texts/en.yaml) and translate that.
 
-3) The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there is a page with press, and with contact info too. If you want to, you can skip those pages (people will then see the English version)
+3) The [folder](https://github.com/Felienne/hedy/tree/master/coursedata/adventures) that control the assignments kids see in the user interface for each of the levels. While not mandatory, the assignments in this section are of help for kids to better explore each level. If you do not translate them, the English version will be shown.
 
-4) There is also a [folder](https://github.com/Felienne/hedy/tree/master/coursedata/course/hedy/docs-en) with extra instructions for each of the levels. While not mandatory, the docs in this section are of help for kids to better explore each level.
+4) *optional* The folder [main](https://github.com/Felienne/hedy/tree/master/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/master/main/start-en.md) holds the content of the start page, and there are page with press, contact info too. These do not necessariyl have to be translated, if you don't people will then see the English version, but kids can still program in their own native language.
+
 
 Translated all of that?
 
@@ -54,6 +66,20 @@ $ source .env/bin/activate
 If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
+```
+
+To make debugging a lot more convenient, enable **development mode**. If you do this, any HTML templates and Python
+source files you change and save will automatically be reloaded.
+
+(Be aware that your program may stop with a `SyntaxError` if you save a Python file
+while the code is not complete. If this happens too often because you reflexively hit Ctrl-S 😉
+you can wrap the command in a loop to restart the server quickly).
+
+
+```bash
+(.env)$ env FLASK_ENV=development python app.py
+# or in a loop if it stops too often
+(.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
 ```
 
 If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:

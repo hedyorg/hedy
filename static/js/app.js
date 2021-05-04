@@ -9,9 +9,21 @@
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
 
-    if (window.State.level == 1){
-      window.editor.session.setMode("ace/mode/level1");
-    }
+  // a variable which turns on(1) highlighter or turns it off(0)
+  var highlighter = 0;
+
+  if (highlighter == 1){
+        if (window.State.level == 1){
+          window.editor.session.setMode("ace/mode/level1");
+        }
+        if (window.State.level == 2){
+          window.editor.session.setMode("ace/mode/level2");
+        }
+        if (window.State.level == 3){
+          window.editor.session.setMode("ace/mode/level3");
+        }
+  }
+
 
 
   // Load existing code from session, if it exists

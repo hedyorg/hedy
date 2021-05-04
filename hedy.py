@@ -25,15 +25,15 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       13: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
-# 
+#
 #  closest_command() searches for known commands in an invalid command.
 #
 #  It will return the known command which is closest positioned at the beginning.
-#  It will return '' if the invalid command does not contain any known command. 
+#  It will return '' if the invalid command does not contain any known command.
 #
 
 def closest_command(invalid_command, known_commands):
-    
+
     # First search for 100% match of known commands
     min_position = len(invalid_command)
     min_command = ''
@@ -42,7 +42,7 @@ def closest_command(invalid_command, known_commands):
         if position != -1 and position < min_position:
             min_position = position
             min_command = known_command
-            
+
     # If not found, search for partial match of know commands
     if min_command == '':
         min_command = closest_command_with_min_distance(invalid_command, known_commands)
@@ -171,11 +171,11 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
 
 def create_parser(level):
-    with open(f"grammars/level{str(level)}.lark", "r") as file:
+    with open(f"grammars/level{str(level)}.lark", "r", encoding="utf-8") as file:
         grammar = file.read()
     return Lark(grammar)
 
-def all_arguments_true(args):
+def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
     arguments_of_false_nodes = [x[1] for x in args if not x[0]]
     return all(bool_arguments), arguments_of_false_nodes
@@ -195,64 +195,66 @@ class Filter(Transformer):
                 command_num += 1
 
     def command(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     def assign(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def assign_list(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def assign_sum(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def list_access(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 4 commands
     def list_access_var(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def ifs(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def valid_command(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def ifelse(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def condition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def equality_check(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def in_list_check(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 5 command
     def repeat(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 6
     def addition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def substraction(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def multiplication(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def division(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     #level 7
     def elses(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 8
     def for_loop(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 9
     def elifs(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 12
     def change_list_item(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
+    def var(self, args):
+        return True, ''.join([str(c) for c in args])
     def random(self, args):
         return True, 'random'
     def index(self, args):
@@ -278,20 +280,18 @@ class IsValid(Filter):
     # that means you added a production rule but did not add a method for the rule here
 
     def ask(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def print(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def echo(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def for_loop(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     #leafs with tokens need to be all true
     def var(self, args):
         return all(args), ''.join([c for c in args])
     def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def addition(self, args):
         return all(args), ''.join([c for c in args])
 
     def invalid_space(self, args):
@@ -302,7 +302,9 @@ class IsValid(Filter):
         # return error source to indicate what went wrong
         return False, "print without quotes"
     def input(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
+
+
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -329,8 +331,6 @@ class IsComplete(Filter):
     def var(self, args):
         return all(args), ''.join([c for c in args])
     def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def addition(self, args):
         return all(args), ''.join([c for c in args])
     def input(self, args):
         return args != [], 'input'
@@ -548,15 +548,14 @@ class ConvertToPython_7(ConvertToPython_6):
 
         return "\nelse:\n" + "\n".join(all_lines)
 
-
-    def assign(self, args): #TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
             value = args[1]
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
-                if "'" in value or 'random.choice' in value: #TODO: should be a call to wrap nonvarargument is quotes!
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
                     return parameter + " = '" + value + "'"
@@ -745,7 +744,7 @@ class ConvertToPython(ConvertTo):
 def create_grammar(level):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r") as file:
+    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
         return file.read()
 
 
@@ -822,16 +821,52 @@ def filter_and_translate_terminals(list):
     return new_terminals
 
 def beautify_parse_error(error_message):
-
     character_found = error_message.split("'")[1]
     character_found = translate_characters(character_found)
-
     return character_found
+
+def find_indent_length(line):
+    number_of_spaces = 0
+    for x in line:
+        if x == ' ':
+            number_of_spaces += 1
+        else:
+            break
+    return number_of_spaces
+
+def preprocess_blocks(code):
+    processed_code = []
+    lines = code.split("\n")
+    current_indent = 0
+    previous_block = 0
+    for line in lines:
+        leading_spaces = find_indent_length(line)
+        if leading_spaces > previous_block:
+            current_indent += 1
+            previous_block = leading_spaces
+        elif leading_spaces < previous_block:
+            #we springen 'terug' dus er moet een block in!
+            processed_code.append('end-block')
+            current_indent -=1
+            previous_block = leading_spaces
+
+        #if indent remains the same, do nothing, just add line
+        processed_code.append(line)
+
+    # if the last line is indented, the end of the program is also the end of all indents
+    # so close all blocks
+    for i in range(current_indent):
+        processed_code.append('end-block')
+    return "\n".join(processed_code)
+
 
 def transpile_inner(input_string, level):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = Lark(create_grammar(level))
+
+    if level >= 8:
+        input_string = preprocess_blocks(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer

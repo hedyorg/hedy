@@ -16,21 +16,22 @@ from os import path
 import re
 import requests
 import uuid
-import yaml
+from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml
+from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
 import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response
+from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response, Response
 from flask_compress import Compress
 
 # Hedy-specific modules
 import courses
 import hedyweb
+import translating
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -40,7 +41,10 @@ ALL_LANGUAGES = {
     'fr': 'Français',
     'pt_br': 'Português',
     'de': 'Deutsch',
-    'it': 'Italiano'
+    'it': 'Italiano',
+    'hu': 'Magyarok',
+    'el': 'Ελληνικά',
+    "zh": "主页"
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -66,11 +70,13 @@ def load_adventures_in_all_languages():
         adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
     return adventures
 
+
 def load_adventure_for_language(lang):
     adventures = load_adventures_in_all_languages()
     if not lang in adventures or len (adventures [lang]) == 0:
         return adventures ['en']
     return adventures [lang]
+
 
 def load_adventure_assignments_per_level(lang, level):
 
@@ -101,16 +107,18 @@ def load_adventure_assignments_per_level(lang, level):
 
 
 # Load main menu (do it once, can be cached)
-with open(f'main/menu.json', 'r') as f:
+with open(f'main/menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
 
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
 
+
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
 
 def hash_user_or_session (string):
     hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
@@ -177,6 +185,14 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
+
+# Set security attributes for cookies in a central place
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+)
+
 
 Compress(app)
 Commonmark(app)
@@ -328,7 +344,7 @@ def programs_page (request):
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name')})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user)
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user)
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
@@ -523,7 +539,7 @@ def main_page(page):
         effective_lang = 'en'
 
     try:
-        with open(f'main/{page}-{effective_lang}.md', 'r') as f:
+        with open(f'main/{page}-{effective_lang}.md', 'r', encoding='utf-8') as f:
             contents = f.read()
     except IOError:
         abort(404)
@@ -718,6 +734,61 @@ def save_program (user):
     db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({})
+
+@app.route('/translate/<source>/<target>')
+def translate_fromto(source, target):
+    # FIXME: right now loading source file on demand. We might need to cache this...
+    source_adventures = load_yaml(f'coursedata/adventures/{source}.yaml')
+    source_levels = load_yaml(f'coursedata/level-defaults/{source}.yaml')
+    source_texts = load_yaml(f'coursedata/texts/{source}.yaml')
+
+    target_adventures = load_yaml(f'coursedata/adventures/{target}.yaml')
+    target_levels = load_yaml(f'coursedata/level-defaults/{target}.yaml')
+    target_texts = load_yaml(f'coursedata/texts/{target}.yaml')
+
+    files = []
+
+    files.append(translating.TranslatableFile(
+      'Levels',
+      f'level-defaults/{target}.yaml',
+      translating.struct_to_sections(source_levels, target_levels)))
+
+    files.append(translating.TranslatableFile(
+      'Messages',
+      f'texts/{target}.yaml',
+      translating.struct_to_sections(source_texts, target_texts)))
+
+    files.append(translating.TranslatableFile(
+      'Adventures',
+      f'adventures/{target}.yaml',
+      translating.struct_to_sections(source_adventures, target_adventures)))
+
+    return render_template('translate-fromto.html',
+        source_lang=source,
+        target_lang=target,
+        files=files)
+
+@app.route('/update_yaml', methods=['POST'])
+def update_yaml():
+    filename = path.join('coursedata', request.form['file'])
+    # The file MUST point to something inside our 'coursedata' directory
+    # (no exploiting bullshit here)
+    filepath = path.abspath(filename)
+    expected_path = path.abspath('coursedata')
+    if not filepath.startswith(expected_path):
+        raise RuntimeError('Are you trying to trick me?')
+
+    data = load_yaml_rt(filepath)
+    for key, value in request.form.items():
+        if key.startswith('c:'):
+            translating.apply_form_change(data, key[2:], translating.normalize_newlines(value))
+
+    data = translating.normalize_yaml_blocks(data)
+
+    return Response(dump_yaml_rt(data),
+        mimetype='application/x-yaml',
+        headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
+
 
 # *** AUTH ***
 

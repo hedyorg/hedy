@@ -26,7 +26,7 @@
         <span class="mr-1">{{ current_language().sym }}</span>
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
       </button>
-      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1">
+      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1 list-none ml-0">
         {% for lang in other_languages() %}
         <li><a class="hover:bg-blue-700 py-2 px-4 block whitespace-no-wrap text-white" href="{{ modify_query(lang=lang.lang) }}">{{ lang.sym }}</a></li>
         {% endfor %}
