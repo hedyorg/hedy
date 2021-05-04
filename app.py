@@ -170,6 +170,14 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
+# Set security attributes for cookies in a central place
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+)
+
+
 Compress(app)
 Commonmark(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
