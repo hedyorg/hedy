@@ -6,7 +6,7 @@ Hedy is now available in Dutch, French, English, Brazilian Portugese, Greek Mand
 Help Hedy with translations (easy, no programming needed!)
 ------------
 
-The easiest way to translate Hedy is by using or translation UI website! 
+The easiest way to translate Hedy is by using or translation UI website!
 
 Simply go to https://www.hedycode.com/translate/en/new and translate our texts that are shown on the left in the boxes on the right. When you are done, you can use the three download button at the end of the page, and [send us the files](mailto:hedy@felienne.com).
 
@@ -66,6 +66,20 @@ $ source .env/bin/activate
 If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
+```
+
+To make debugging a lot more convenient, enable **development mode**. If you do this, any HTML templates and Python
+source files you change and save will automatically be reloaded.
+
+(Be aware that your program may stop with a `SyntaxError` if you save a Python file
+while the code is not complete. If this happens too often because you reflexively hit Ctrl-S 😉
+you can wrap the command in a loop to restart the server quickly).
+
+
+```bash
+(.env)$ env FLASK_ENV=development python app.py
+# or in a loop if it stops too often
+(.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
 ```
 
 If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:

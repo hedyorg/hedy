@@ -1,7 +1,7 @@
 import json
 import copy
 import attr
-from ruamel import yaml
+from utils import load_yaml
 
 import docs
 
@@ -9,7 +9,10 @@ import docs
 class LevelDefaults:
   def __init__(self, language):
     self.language = language
-    self.levels = load_yaml(f'coursedata/level-defaults/{language}.yaml')
+
+  @property
+  def levels(self):
+    return load_yaml(f'coursedata/level-defaults/{self.language}.yaml')
 
   def get_defaults(self, level):
     """Return the level defaults for a given level number.
@@ -29,16 +32,23 @@ class Course:
     self.course_name = course_name
     self.language = language
     self.defaults = defaults
-    self.course = load_yaml(f'coursedata/course/{course_name}/{language}.yaml').get('course')
-    if not self.course:
-      raise RuntimeError(f'File should have top-level "course" field: coursedata/course/{course_name}/{language}.yaml')
-
-    self.validate_course()
-
     self.docs = docs.DocCollection(keys=['level', 'slug'], synth={
       'slug': lambda d: docs.slugify(d.front_matter.get('title', None))
     })
     self.docs.load_dir(f'coursedata/course/{course_name}/docs-{language}')
+    self._validated = False
+
+
+  @property
+  def course(self):
+    ret = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('course')
+    if not ret:
+      raise RuntimeError(f'File should have top-level "course" field: coursedata/course/{self.course_name}/{self.language}.yaml')
+
+    if not self._validated:
+      self._validated = True
+      self.validate_course()
+    return ret
 
   def max_level(self):
     return len(self.course)
@@ -130,11 +140,3 @@ class Assignment:
 class Doc:
   slug = attr.ib()
   title = attr.ib()
-
-
-def load_yaml(filename):
-  try:
-    with open(filename, 'r', encoding='utf-8') as f:
-      return yaml.safe_load(f)
-  except IOError:
-    return {}

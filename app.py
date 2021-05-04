@@ -70,11 +70,13 @@ def load_adventures_in_all_languages():
         adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
     return adventures
 
+
 def load_adventure_for_language(lang):
     adventures = load_adventures_in_all_languages()
     if not lang in adventures or len (adventures [lang]) == 0:
         return adventures ['en']
     return adventures [lang]
+
 
 def load_adventure_assignments_per_level(lang, level):
     assignments = []
@@ -98,9 +100,11 @@ logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
 
+
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+
 
 def hash_user_or_session (string):
     hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
