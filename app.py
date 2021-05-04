@@ -430,7 +430,7 @@ def programs_page (request):
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name')})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [lang] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user)
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user)
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
