@@ -20,6 +20,13 @@ h3 {
   @apply font-bold text-xl;
 }
 
+h4 {
+  @apply font-bold text-base;
+}
+
+
+
+
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
 }
@@ -88,14 +95,18 @@ h2:first-child { margin-top: 0; }
 
 h3 {
   @apply font-slab font-bold text-blue-700 italic;
-  @apply leading-tight text-xl mt-8 mb-1;
+  @apply leading-tight text-xl mt-4 mb-1;
+}
+
+h4 {
+  @apply mt-4 mb-2;
 }
 
 pre, code {
 }
 
 .markdown code {
-  @apply py-2 px-3 text-base;
+  @apply py-1 px-1 text-base;
 }
 
 pre code {
