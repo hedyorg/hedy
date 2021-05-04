@@ -212,9 +212,6 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
 
-    # For debugging
-    print(f"got code {code}")
-
     response = {}
     username = current_user(request) ['username'] or None
 
@@ -614,6 +611,10 @@ def split_markdown_front_matter(md):
         return {}, md
     # safe_load returns 'None' if the string is empty
     front_matter = yaml.safe_load(parts[0]) or {}
+    if not isinstance(front_matter, dict):
+      # There was some kind of parsing error
+      return {}, md
+
     return front_matter, parts[1]
 
 

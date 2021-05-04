@@ -1,4 +1,4 @@
-page_title:联系我们 — Hedy海迪
+page_title: 联系我们 — Hedy海迪
 ---
 # 订阅Hedy海迪通讯报
 
@@ -12,7 +12,7 @@ page_title:联系我们 — Hedy海迪
 <div id="mc_embed_signup">
 <form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	
+
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
