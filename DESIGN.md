@@ -200,3 +200,13 @@ In level 13, booleans are added. Learners encounter True and False and how to us
 ### Level 14: and and or
 
 In level 14, Learners learn about and and or in if statements. 
+
+### Level 15: Comments
+
+In level 15, comments are introduced. The learner will now know how to comment code
+
+### Level 16: smaller and bigger
+
+In level 16, Learners learn about < and > in preparation for while loops
+
+
