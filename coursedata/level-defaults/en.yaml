@@ -345,62 +345,62 @@
             print(randomfruit)
 13:
     start_code: |-
-        youarestillhere is False
-        areyoustillhere is input('Are you still here? yes or no?')
-        if areyoustillhere is yes:
-            youarestillhere is True
-        if youarestillhere is True:
+        you_are_still_here is False
+        are_you_still_here is input('Are you still here? yes or no?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        if you_are_still_here is True:
             print('Hello!')
-        if youarestillhere is False:
+        if you_are_still_here is False:
             print('Bye!')
-    intro_text: "We are now talking about making a variable True or False, you can put a variable on True and on False. You can use this to keep track of a certain answer."
+    intro_text: "We are now talking about making a variable `True` or `False`, you can put a variable on `True` and on `False`. You can use this to keep track of a certain answer."
     commands:
     -   name: "Example"
-        explanation: "In this example, we use True and False to keep track of the answer of a question. You can answer 5 times. If the answer is correct, goodanswer will be True"
-        example: "goodanswer is False"
+        explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`"
+        example: "good_answer is `False`"
         demo_code: |-
-            for i in range(1,5):
-                goodanswer is False
-                answer is input('What is 5*5')
-                if answer is 25:
-                    goodanswer is True
-                else:
-                    goodanswer is False
-                if goodanswer is True:
-                    print('That is correct!')
-                if goodanswer is False:
-                    print('That is wrong! ' 5-i ' attempts left')
+          for i in range(1,5):
+              good_answer is False
+              answer is input('What is 5*5')
+              if answer is 25:
+                  good_answer is True
+              else:
+                  good_answer is False
+              if good_answer is True:
+                  print('That is correct!')
+              if good_answer is False:
+                  print('That is wrong! ' 5-i ' attempts left')
 14:
     start_code: |-
-        youarestillhere is False
-        areyoustillhere is input('Are you still here? yes or no?')
-        if areyoustillhere is yes:
-            youarestillhere is True
+        you_are_still_here is False
+        are_you_still_here is input('Are you still here? yes or no?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
         answer is input('What is 5*5?')
-        if youarestillhere is True and answer is 25:
+        if you_are_still_here is True and answer is 25:
             print('You said yes and gave a good answer')
-    intro_text: "We are now going to learn and and or! If you want to check two statements, you don't have to use two if's but can use and and or. If you use and, both statements, left and right of the and need to be true. We can also use or. Then only one statement needs to be correct."
+    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
     commands:
     -   name: "And"
-        explanation: "Both statements (left and right of the and) need to be correct."
+        explanation: "Both statements (left and right of the `and`) need to be correct."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            answer1 is input('What is 3+2?')
-            answer2 is input('What is 2+2?')
-            if answer1 is 5 and answer2 is 4:
-                print('Both answers are correct!')
-            else:
-                print('At least one answer is wrong!')
+          answer1 is input('What is 3+2?')
+          answer2 is input('What is 2+2?')
+          if answer1 is 5 and answer2 is 4:
+              print('Both answers are correct!')
+          else:
+              print('At least one answer is wrong!')
     -   name: "Or"
-        explanation: "Or is dus of. Minimaal 1 van de twee tussen de or moet goed zijn. Allebei goed mag ook."
+        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            answer1 is input('What is 3+2?')
-            answer2 is input('What is 2+2?')
-            if answer1 is 5 or answer2 is 4:
-                print('At least one answer is correct!')
-            else:
-                print('Both answers are wrong!')
+          answer1 is input('What is 3+2?')
+          answer2 is input('What is 2+2?')
+          if answer1 is 5 or answer2 is 4:
+              print('At least one answer is correct!')
+          else:
+              print('Both answers are wrong!')
 15:
     start_code: |-
         # This is a program that is going to ask a couple of math questions
@@ -408,8 +408,8 @@
             # We are going to ask the multiplication table of 5
             answer is input('What is ' i ' times 5?')
             # We check if the answer is the same as our sum
-            correctanswer is i * 5
-            if answer is correctanswer:
+            correct_answer is i * 5
+            if answer is correct_answer:
                 print(answer ' is correct')
             else:
                 print('That is wrong, it is supposed to be: ' i*5)
@@ -430,17 +430,17 @@
             print('You are younger than me!')
         elif age > 12:
             print('You are older than me!')
-    intro_text: "We are going to learn more new items! You might know them already from mathematics, the < and >. The < checks if the first number is smaller than the second, like 4 < 5. The > checks if the first number is bigger than the second, like 6 >5."
+    intro_text: "We are going to learn more new items! You might know them already from mathematics, the `<` and `>`. The `<` checks if the first number is smaller than the second, like `4 < 5`. The `>` checks if the first number is bigger than the second, like `6 > 5`."
     commands:
     -   name: "Smaller"
-        explanation: "We use the < to check if the first number is smaller than the second number. For example if we want to see if a variable is smaller than 15, we use variable < 15"
+        explanation: "We use the `<` to check if the first number is smaller than the second number. For example if we want to see if a variable is smaller than 15, we use `variable < 15`"
         example: "For example: age < 12"
         demo_code: |-
             age is input('How old are you?')
             if age < 12:
                 print('You are younger than me!')
     -   name: "Bigger"
-        explanation: "We use the > to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use variable > 15"
+        explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`"
         example: "For example: age > 12"
         demo_code: |-
             age is input('How old are you?')
@@ -448,28 +448,28 @@
                 print('You are older than me!')
 17:
     start_code: |-
-        correctanswer is False
+        correct_answer is False
         # we continue until the correct answer has been given!
-        while correctanswer is False:
+        while correct_answer is False:
             answer is input('What is 5 times 5?')
             if answer is 25:
-                correctanswer is True
+                correct_answer is True
                 print('A good answer has been given')
-    intro_text: "We are going to learn a new loop, the While loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
+    intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
     commands:
     -   name: "Boolean while"
-        explanation: "We can use the while loop with True and False"
-        example: "Example: while correctanswer is False"
+        explanation: "We can use the `while` loop with `True` and `False`"
+        example: "Example: while correct_answer is False"
         demo_code: |-
-            correctanswer is False
+            correct_answer is False
             # we continue until the correct answer has been given!
-            while correctanswer is False:
+            while correct_answer is False:
                 answer is input('What is 5 times 5?')
                 if answer is 25:
-                    correctanswer is True
+                    correct_answer is True
                     print('A good answer has been given')
     -   name: "Smaller while"
-        explanation: "We can also use the while loop with < and >. Be careful, you need to change the number so the loop ends. We do that with count is count + 1 now."
+        explanation: "We can also use the `while` loop with `<` and `>`. Be careful, you need to change the number so the loop ends. We do that with count is count + 1 now."
         example: "For example: while count < 3"
         demo_code: |-
             count is 1
