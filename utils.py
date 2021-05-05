@@ -4,6 +4,8 @@ import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import os
 from ruamel import yaml
+import flask
+
 
 def type_check (val, Type):
     if Type == 'dict':
@@ -32,10 +34,33 @@ def timems ():
 def times ():
     return int (round (time.time ()))
 
-def load_yaml (filename):
+
+def flask_in_debug_mode():
+    """Whether or not Flask is in debug mode.
+
+    We do more expensive things that are better for development in debug mode.
+    """
+    return flask.current_app.config['DEBUG']
+
+
+YAML_CACHE = {}
+
+def load_yaml(filename):
+    """Load the given YAML file.
+
+    The file load will be cached in production, but reloaded everytime in development mode.
+
+    Whether we are running in production or not will be determined
+    by the Flask config (FLASK_ENV).
+    """
+    # Bypass the cache in DEBUG mode for mucho iterating
+    if not flask_in_debug_mode() and filename in YAML_CACHE:
+        return YAML_CACHE[filename]
     try:
         with open (filename, 'r') as f:
-            return yaml.safe_load (f)
+            data = yaml.safe_load(f)
+            YAML_CACHE[filename] = data
+            return data
     except IOError:
         return {}
 
