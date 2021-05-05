@@ -22,6 +22,17 @@ $(function() {
     const allTabs = tab.siblings('*[data-tab]');
     const tabName = tab.data('tab').replace ('t-', '');
 
+    // If there are unsaved changes, we warn the user before changing tabs.
+    if (window.State.unsaved_changes) {
+      var leave = confirm (window.auth.texts.unsaved_changes);
+      if (! leave) {
+        e.preventDefault();
+        return false;
+      }
+      // If user wants to override the unsaved program, reset unsaved_changes
+      window.State.unsaved_changes = false;
+    }
+
     window.State.adventure_name = tabName === 'level' ? undefined : tabName;
 
     const target = $('*[data-tabtarget="t-' + tabName + '"]');
@@ -33,46 +44,39 @@ $(function() {
     allTargets.addClass('hidden');
     target.removeClass('hidden');
 
-    // Logic for updating the input with program name and the actual program in the editor.
-    if (tabName === 'level') {
-       // If the page was loaded with a program that belongs to an adventure (hence not a program belonging to a level), when switching to levels, restore defaults.
-       if (window.State.adventure_name_onload) {
-          $ ('#program_name').val (window.State.default_program_name);
-          window.editor.setValue (window.State.default_program);
-       }
-       // Otherwise, restore the saved program.
-       else {
-          $ ('#program_name').val (window.State.loaded_program_name);
-          window.editor.setValue (window.State.loaded_program);
-       }
+    const adventures = {};
+    window.State.adventures.map (function (adventure) {
+      adventures [adventure.short_name] = adventure;
+    });
+
+    // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
+    if (window.State.loaded_program && window.State.adventure_name_onload === tabName) {
+      $ ('#program_name').val (window.State.loaded_program_name);
+      window.editor.setValue (window.State.loaded_program);
+    }
+    // If there's a loaded program for the adventure or level now selected, use it.
+    else if (adventures [tabName].loaded_program) {
+      $ ('#program_name').val (adventures [tabName].loaded_program_name);
+      window.editor.setValue (adventures [tabName].loaded_program);
+    }
+    // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
+    else if (tabName === 'level') {
+      $ ('#program_name').val (window.State.default_program_name);
+      window.editor.setValue (window.State.default_program);
     }
     else {
-      window.State.adventures.map (function (adventure) {
-         // If the adventure being iterated is not the selected one, return.
-         if (adventure.short_name !== tabName) return;
-         // If the adventure has no saved program, load default name and program from the adventure.
-         if (! adventure.loaded_program) {
-            $ ('#program_name').val (tabName + ' - ' + window.State.level_title + ' ' + window.State.level);
-            return window.editor.setValue (adventure.start_code);
-         }
-         // If the loaded program is from the current adventure, use that, overriding the loaded program that came in the adventure.
-         if (window.State.loaded_program && window.State.adventure_name_onload === tabName) {
-            $ ('#program_name').val (window.State.loaded_program_name);
-            return window.editor.setValue (window.State.loaded_program);
-         }
-         // Otherwise, use the loaded program from the adventure.
-         window.editor.setValue (adventure.loaded_program);
-         $ ('#program_name').val (adventure.loaded_program_name);
-      });
+      $ ('#program_name').val (tabName + ' - ' + window.State.level_title + ' ' + window.State.level);
+      window.editor.setValue (adventures [tabName].start_code);
     }
+
     window.editor.clearSelection ();
+    window.State.unsaved_changes = false;
 
     e.preventDefault();
     return false;
   });
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-  if (window.State.adventure_name) {
-     $('[data-tab="t-' + window.State.adventure_name + '"]') [0].click ();
-  }
+  // We click on `level` to load a program associated with level, if any.
+  $('[data-tab="t-' + (window.State.adventure_name || 'level') + '"]') [0].click ();
 });

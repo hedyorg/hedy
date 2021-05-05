@@ -158,8 +158,6 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 
   if (reloadOnExpiredSession ()) return;
 
-  window.State.unsaved_changes = false;
-
   try {
     // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! window.auth.profile) {
@@ -170,6 +168,8 @@ window.saveit = function saveit(level, lang, name, code, cb) {
        window.location.pathname = '/login';
        return;
     }
+
+    window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
     // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
@@ -191,6 +191,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb ();
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
@@ -205,6 +206,16 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       setTimeout (function () {
          $ ('#okbox').hide ();
       }, 2000);
+      // If we succeed, we need to update the default program name & program for the currently selected tab.
+      // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
+      // The name of the program might have been changed by the server, so we use the name stated by the server.
+      $ ('#program_name').val (response.name);
+      window.State.adventures.map (function (adventure) {
+        if (adventure.short_name === (adventure_name || 'level')) {
+          adventure.loaded_program_name = name;
+          adventure.loaded_program      = code;
+        }
+      });
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));

@@ -80,31 +80,40 @@ def load_adventure_for_language(lang):
 
 def load_adventure_assignments_per_level(lang, level):
 
-    assignments = []
-    existing_programs = []
+    loaded_programs = {}
+    # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode (no adventure) and for each of the adventures.
     if current_user (request) ['username']:
-        existing_programs = db_get_many ('programs', {'username': current_user (request) ['username']}, True)
+        user_programs = db_get_many ('programs', {'username': current_user (request) ['username']}, True)
+        for program in user_programs:
+            if program ['level'] != level:
+                continue
+            program_key = 'level' if not program.get ('adventure_name') else program ['adventure_name']
+            if not program_key in loaded_programs:
+                loaded_programs [program_key] = program
+            elif loaded_programs [program_key] ['date'] < program ['date']:
+                loaded_programs [program_key] = program
 
+    assignments = []
     adventures = load_adventure_for_language(lang)['adventures']
     for short_name, adventure in adventures.items ():
-        loaded_program_name = ''
-        if level in adventure['levels']:
-            loaded_program = ''
-            for program in existing_programs:
-                if 'adventure_name' in program and program ['adventure_name'] == short_name and program ['level'] == level:
-                    loaded_program = program ['code']
-                    loaded_program_name = program ['name']
-            assignments.append({
-                'short_name': short_name,
-                'name': adventure['name'],
-                'image': adventure.get('image', None),
-                'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-                'start_code': adventure['levels'][level].get ('start_code', ''),
-                'loaded_program': loaded_program,
-                'loaded_program_name': loaded_program_name
-            })
+        if not level in adventure['levels']:
+            continue
+        assignments.append({
+            'short_name': short_name,
+            'name': adventure['name'],
+            'image': adventure.get('image', None),
+            'text': adventure['levels'][level].get('story_text', 'No Story Text'),
+            'start_code': adventure['levels'][level].get ('start_code', ''),
+            'loaded_program': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['code'],
+            'loaded_program_name': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['name']
+        })
+    # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
+    assignments.append({
+        'short_name': 'level',
+        'loaded_program': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['code'],
+        'loaded_program_name': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['name']
+    })
     return assignments
-
 
 # Load main menu (do it once, can be cached)
 with open(f'main/menu.json', 'r', encoding='utf-8') as f:
@@ -699,6 +708,8 @@ def save_program (user):
 
     name = body ['name']
 
+    # If name ends with (N) or (NN), we strip them since it's very likely these addenda were added by our server to avoid overwriting existing programs.
+    name = re.sub (' \(\d+\)$', '', name)
     # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
@@ -733,7 +744,7 @@ def save_program (user):
         program_count = user ['program_count']
     db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
 
-    return jsonify({})
+    return jsonify({'name': name})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
