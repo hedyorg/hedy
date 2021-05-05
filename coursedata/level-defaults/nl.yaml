@@ -380,44 +380,44 @@
             print(randomfruit)
 13:
     start_code: |-
-        jebenternog is False
-        benjeernog is input('ben je er nog? ja of nee?')
-        if benjeernog is ja:
-            jebenternog is True
-        if jebenternog is True:
+        je_bent_er_nog is False
+        ben_je_er_nog is input('ben je er nog? ja of nee?')
+        if ben_je_er_nog is ja:
+            je_bent_er_nog is True
+        if je_bent_er_nog is True:
             print('Hallo!')
-        if jebenternog is False:
+        if je_bent_er_nog is False:
             print('Doei!')
-    intro_text: "We gaan nu het hebben over waar en niet waar, je kan een variabele op waar zetten (True) en op niet waar zetten: (False). Dit kan je bijvoorbeeld gebruiken om bij te houden of je al iets heb gedaan."
+    intro_text: "We gaan nu het hebben over waar en niet waar, je kan een variabele op waar zetten (`True`) en op niet waar zetten: (`False`). Dit kan je bijvoorbeeld gebruiken om bij te houden of je al iets heb gedaan."
     commands:
       - name: "Voorbeeld"
-        explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goedantwoord True (dus waar)"
-        example: "goedantwoord is False"
+        explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goed_antwoord `True` (dus waar)"
+        example: "goed_antwoord is `False`"
         demo_code: |-
             for i in range(0,5):
-                goedantwoord is False
+                goed_antwoord is False
                 antwoord is input('Wat is 5*5')
                 if antwoord is 25:
-                    goedantwoord is True
+                    goed_antwoord is True
                 else:
-                    goedantwoord is False
-                if goedantwoord is True:
+                    goed_antwoord is False
+                if goed_antwoord is True:
                     print('Dat is goed!')
-                if goedantwoord is False:
+                if goed_antwoord is False:
                     print('Dat is fout! Nog ' 5-i ' pogingen over')
 14:
     start_code: |-
-        jebenternog is False
-        benjeernog is input('ben je er nog? ja of nee?')
-        if benjeernog is ja:
-            jebenternog is True
+        je_bent_er_nog is False
+        ben_je_er_nog is input('ben je er nog? ja of nee?')
+        if ben_je_er_nog is ja:
+            je_bent_er_nog is True
         antwoord is input('Wat is 5*5?')
-        if jebenternog is True and antwoord is 25:
+        if je_bent_er_nog is True and antwoord is 25:
             print('Je hebt ja gezegd en een goed antwoord gegeven!')
-    intro_text: "We gaan nu and en or gebruiken! Als je 2 dingen wilt checken hoef je niet meer 2 ifjes in elkaar te doen maar kan je nu and gebruiken. Beide dingen in de if moeten waar zijn als je een and gebruikt. We kunnen ook or gebruiken. Daarbij moet er 1 van de twee waar zijn."
+    intro_text: "We gaan nu `and` en `or` gebruiken! Als je 2 dingen wilt checken hoef je niet meer 2 ifjes in elkaar te doen maar kan je nu `and` gebruiken. Beide dingen in de if moeten waar zijn als je een `and` gebruikt. We kunnen ook `or` gebruiken. Daarbij moet er 1 van de twee waar zijn."
     commands:
     -   name: "And"
-        explanation: "And is dus en. Beide dingen links en rechts van de and moeten waar zijn."
+        explanation: "`And` is dus en. Beide dingen links en rechts van de `and` moeten waar zijn."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
             antwoord1 is input('hoeveel is 3+2?')
@@ -427,7 +427,7 @@
             else:
                 print('Minimaal 1 antwoord is fout!')
     -   name: "Or"
-        explanation: "Or is dus of. Minimaal 1 van de twee tussen de or moet goed zijn. Allebei goed mag ook."
+        explanation: "`Or` is dus of. Minimaal 1 van de twee tussen de `or` moet goed zijn. Allebei goed mag ook."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
             antwoord1 is input('hoeveel is 3+2?')

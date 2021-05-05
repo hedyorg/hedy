@@ -345,44 +345,44 @@
             print(randomfruit)
 13:
     start_code: |-
-        youarestillhere is False
-        areyoustillhere is input('Are you still here? yes or no?')
-        if areyoustillhere is yes:
-            youarestillhere is True
-        if youarestillhere is True:
+        you_are_still_here is False
+        are_you_still_here is input('Are you still here? yes or no?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        if you_are_still_here is True:
             print('Hello!')
-        if youarestillhere is False:
+        if you_are_still_here is False:
             print('Bye!')
-    intro_text: "We are now talking about making a variable True or False, you can put a variable on True and on False. You can use this to keep track of a certain answer."
+    intro_text: "We are now talking about making a variable `True` or `False`, you can put a variable on `True` and on `False`. You can use this to keep track of a certain answer."
     commands:
     -   name: "Example"
-        explanation: "In this example, we use True and False to keep track of the answer of a question. You can answer 5 times. If the answer is correct, goodanswer will be True"
-        example: "goodanswer is False"
+        explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`"
+        example: "good_answer is `False`"
         demo_code: |-
           for i in range(1,5):
-              goodanswer is False
+              good_answer is False
               answer is input('What is 5*5')
               if answer is 25:
-                  goodanswer is True
+                  good_answer is True
               else:
-                  goodanswer is False
-              if goodanswer is True:
+                  good_answer is False
+              if good_answer is True:
                   print('That is correct!')
-              if goodanswer is False:
+              if good_answer is False:
                   print('That is wrong! ' 5-i ' attempts left')
 14:
     start_code: |-
-        youarestillhere is False
-        areyoustillhere is input('Are you still here? yes or no?')
-        if areyoustillhere is yes:
-            youarestillhere is True
+        you_are_still_here is False
+        are_you_still_here is input('Are you still here? yes or no?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
         answer is input('What is 5*5?')
-        if youarestillhere is True and answer is 25:
+        if you_are_still_here is True and answer is 25:
             print('You said yes and gave a good answer')
-    intro_text: "We are now going to learn and and or! If you want to check two statements, you don't have to use two if's but can use and and or. If you use and, both statements, left and right of the and need to be true. We can also use or. Then only one statement needs to be correct."
+    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
     commands:
     -   name: "And"
-        explanation: "Both statements (left and right of the and) need to be correct."
+        explanation: "Both statements (left and right of the `and`) need to be correct."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
           answer1 is input('What is 3+2?')
@@ -392,7 +392,7 @@
           else:
               print('At least one answer is wrong!')
     -   name: "Or"
-        explanation: "Or is dus of. Minimaal 1 van de twee tussen de or moet goed zijn. Allebei goed mag ook."
+        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
           answer1 is input('What is 3+2?')
