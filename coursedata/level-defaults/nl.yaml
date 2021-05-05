@@ -380,41 +380,59 @@
             print(randomfruit)
 13:
     start_code: |-
-        print('Hoeveel is 5+3?')
-        antwoord = 5+3
-        print('antwoord is nu:')
-        print(antwoord)
-        if antwoord == 8:
-          print('Dat is goed!')
-        else:
-          print('Helaas dat is fout!')
-    intro_text: "Nu veranderen we is in = en ==. Je gebruikt = als je iets een getal wilt maken. Als je bijvoorbeeld antwoord 8 wilt maken zeg je antwoord = 8. == gebruik je om te kijken of twee dingen hetzelfde zijn."
+        je_bent_er_nog is False
+        ben_je_er_nog is input('ben je er nog? ja of nee?')
+        if ben_je_er_nog is ja:
+            je_bent_er_nog is True
+        if je_bent_er_nog is True:
+            print('Hallo!')
+        if je_bent_er_nog is False:
+            print('Doei!')
+    intro_text: "We gaan nu het hebben over waar en niet waar, je kan een variabele op waar zetten (`True`) en op niet waar zetten: (`False`). Dit kan je bijvoorbeeld gebruiken om bij te houden of je al iets heb gedaan."
     commands:
-    -   name: "Vergelijken"
-        explanation: "Als we gaan vergelijken gebruiken we dus ==. 5+3 == 8 kijkt dus of 5+3 gelijk is aan 8"
-        example: "Bijvoorbeeld: 5+3 == 8"
+      - name: "Voorbeeld"
+        explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goed_antwoord `True` (dus waar)"
+        example: "goed_antwoord is `False`"
         demo_code: |-
-            if 5+3 == 8:
-                print('5+3 is inderdaad 8')
+            for i in range(0,5):
+                goed_antwoord is False
+                antwoord is input('Wat is 5*5')
+                if antwoord is 25:
+                    goed_antwoord is True
+                else:
+                    goed_antwoord is False
+                if goed_antwoord is True:
+                    print('Dat is goed!')
+                if goed_antwoord is False:
+                    print('Dat is fout! Nog ' 5-i ' pogingen over')
+14:
+    start_code: |-
+        je_bent_er_nog is False
+        ben_je_er_nog is input('ben je er nog? ja of nee?')
+        if ben_je_er_nog is ja:
+            je_bent_er_nog is True
+        antwoord is input('Wat is 5*5?')
+        if je_bent_er_nog is True and antwoord is 25:
+            print('Je hebt ja gezegd en een goed antwoord gegeven!')
+    intro_text: "We gaan nu `and` en `or` gebruiken! Als je 2 dingen wilt checken hoef je niet meer 2 ifjes in elkaar te doen maar kan je nu `and` gebruiken. Beide dingen in de if moeten waar zijn als je een `and` gebruikt. We kunnen ook `or` gebruiken. Daarbij moet er 1 van de twee waar zijn."
+    commands:
+    -   name: "And"
+        explanation: "`And` is dus en. Beide dingen links en rechts van de `and` moeten waar zijn."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            antwoord1 is input('hoeveel is 3+2?')
+            antwoord2 is input('hoeveel is 2+2?')
+            if antwoord1 is 5 and antwoord2 is 4:
+                print('beide antwoorden zijn goed!')
             else:
-              print('Dit wordt niet geprint want 5+3 is 8!')
-    -   name: "Waarde geven"
-        explanation: "Als we willen zeggen dat een variabele genaamd antwoord 8 is, dan doen we antwoord = 8."
-        example: "Bijvoorbeeld: antwoord = 8"
+                print('Minimaal 1 antwoord is fout!')
+    -   name: "Or"
+        explanation: "`Or` is dus of. Minimaal 1 van de twee tussen de `or` moet goed zijn. Allebei goed mag ook."
+        example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            print('Hoeveel is 5+3?')
-            antwoord = 5+3
-            print('antwoord is nu:')
-            print(antwoord)
-    -   name: "Vergelijken en waarde geven"
-        explanation: "Als we gaan vergelijken gebruiken we dus ==. Als we een waarde geven dan gebruiken we =. "
-        example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
-        demo_code: |-
-            print('Hoeveel is 5+3?')
-            antwoord = 5+3
-            print('antwoord is nu:')
-            print(antwoord)
-            if antwoord == 8:
-              print('Dat is goed!')
+            antwoord1 is input('hoeveel is 3+2?')
+            antwoord2 is input('hoeveel is 2+2?')
+            if antwoord1 is 5 or antwoord2 is 4:
+                print('Je hebt minimaal 1 antwoord goed!')
             else:
-              print('Helaas dat is fout!')
+                print('Beide antwoorden zijn fout!')

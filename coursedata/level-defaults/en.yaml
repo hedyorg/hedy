@@ -345,41 +345,59 @@
             print(randomfruit)
 13:
     start_code: |-
-        print('What is 5+3?')
-        answer = 5+3
-        print('answer is now:')
-        print(answer)
-        if answer == 8:
-          print('That is correct!')
-        else:
-          print('Oh no, that is wrong!')
-    intro_text: "Now we are going to change is into = and ==. We use = if we want to assign a value to a variable. If you want to assign 8 to the variable called answer, we do answer = 8. == we use when we want to see if two things are the same."
+        you_are_still_here is False
+        are_you_still_here is input('Are you still here? yes or no?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        if you_are_still_here is True:
+            print('Hello!')
+        if you_are_still_here is False:
+            print('Bye!')
+    intro_text: "We are now talking about making a variable `True` or `False`, you can put a variable on `True` and on `False`. You can use this to keep track of a certain answer."
     commands:
-    -   name: "Compare"
-        explanation: "If we want to compare, we use ==. 5+3 == 8 checks if 5+3 equals 8"
-        example: "For example: 5+3 == 8"
+    -   name: "Example"
+        explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`"
+        example: "good_answer is `False`"
         demo_code: |-
-            if 5+3 == 8:
-                print('5+3 is indeed 8')
-            else:
-              print('This will not be printed because 5+3 is 8!')
-    -   name: "Assign Value"
-        explanation: "If we want to say that a variable called answer is 8, we do answer = 8."
-        example: "For example: answer = 8"
+          for i in range(1,5):
+              good_answer is False
+              answer is input('What is 5*5')
+              if answer is 25:
+                  good_answer is True
+              else:
+                  good_answer is False
+              if good_answer is True:
+                  print('That is correct!')
+              if good_answer is False:
+                  print('That is wrong! ' 5-i ' attempts left')
+14:
+    start_code: |-
+        you_are_still_here is False
+        are_you_still_here is input('Are you still here? yes or no?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        answer is input('What is 5*5?')
+        if you_are_still_here is True and answer is 25:
+            print('You said yes and gave a good answer')
+    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
+    commands:
+    -   name: "And"
+        explanation: "Both statements (left and right of the `and`) need to be correct."
+        example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            print('What is 5+3?')
-            answer = 5+3
-            print('answer is now:')
-            print(answer)
-    -   name: "Compare and assign value"
-        explanation: "If we are going to compare two values, we use ==. If we are going to assign a variable, we use =. "
-        example: "For example: 5+3 == 8, answer = 8"
+          answer1 is input('What is 3+2?')
+          answer2 is input('What is 2+2?')
+          if answer1 is 5 and answer2 is 4:
+              print('Both answers are correct!')
+          else:
+              print('At least one answer is wrong!')
+    -   name: "Or"
+        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
+        example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            print('What is 5+3?')
-            answer = 5+3
-            print('answer is now:')
-            print(answer)
-            if answer == 8:
-              print('That is correct!')
-            else:
-              print('No, that is wrong!')
+          answer1 is input('What is 3+2?')
+          answer2 is input('What is 2+2?')
+          if answer1 is 5 or answer2 is 4:
+              print('At least one answer is correct!')
+          else:
+              print('Both answers are wrong!')

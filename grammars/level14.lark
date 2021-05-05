@@ -32,11 +32,11 @@ invalid: textwithoutspaces " " textwithspaces
 
 // new commands for level 4
 elses : _EOL (" ")* "else"":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
-ifs: "if " condition ":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-elifs: _EOL (" ")* "elif " condition ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+ifs: "if " (condition|andcondition|orcondition) ":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+elifs: _EOL (" ")* "elif " (condition|andcondition|orcondition) ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 
 
-condition: (equality_check|in_list_check) (" and " condition)*
+condition: (equality_check|in_list_check)
 list_access_var : var " is " var "[" (index | random | var) "]"
 equality_check: (textwithoutspaces | list_access) " is " (textwithoutspaces | list_access)
 in_list_check: textwithoutspaces " in " var
@@ -57,6 +57,10 @@ for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER |
 
 //new for level 12, assignment of list[i]
 change_list_item : var "[" (index | var) "] is " (var | textwithoutspaces)
+
+//new for level 14
+andcondition: (equality_check|in_list_check) (" and " condition)*
+orcondition: (equality_check|in_list_check) (" or " condition)*
 
 var: NAME -> var
 list_access : var "[" (index | random | var) "]"

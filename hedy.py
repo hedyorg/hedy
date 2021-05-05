@@ -252,6 +252,15 @@ class Filter(Transformer):
     def change_list_item(self, args):
         return are_all_arguments_true(args)
 
+    # level 14
+    def andcondition(self, args):
+        return are_all_arguments_true(args)
+    def orcondition(self, args):
+        return are_all_arguments_true(args)
+    # level 15
+    def comment(self, args):
+        return True
+
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
         return True, ''.join([str(c) for c in args])
@@ -293,7 +302,6 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
-
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -596,7 +604,7 @@ class ConvertToPython_11(ConvertToPython_9_10):
         all_parameters = [a for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
 
-class ConvertToPython_12_13(ConvertToPython_11):
+class ConvertToPython_12(ConvertToPython_11):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -619,6 +627,45 @@ class ConvertToPython_12_13(ConvertToPython_11):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
+
+class ConvertToPython_13(ConvertToPython_12):
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
+                    return parameter + " = " + value
+                else:
+                    if value == 'true' or value == 'True':
+                        return parameter + " = True"
+                    elif value == 'false' or value == 'False':
+                        return parameter + " = False"
+                    else:
+                        return parameter + " = '" + value + "'"
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
+
+    def equality_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if arg1 == '\'True\'' or arg1 == '\'true\'':
+            return f"{arg0} == True"
+        elif arg1 == '\'False\'' or arg1 == '\'false\'':
+            return f"{arg0} == False"
+        else:
+            return f"str({arg0}) == str({arg1})" #no and statements
+
+class ConvertToPython_14(ConvertToPython_13):
+    def andcondition(self, args):
+        return ' and '.join(args)
+    def orcondition(self, args):
+        return ' or '.join(args)
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -947,11 +994,13 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 12:
-        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 13:
-        # Code does not change for level 13 only grammar
-        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 14:
+        python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
