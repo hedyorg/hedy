@@ -172,7 +172,7 @@ app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
 # Set security attributes for cookies in a central place
 app.config.update(
-    SESSION_COOKIE_SECURE=True,
+    #SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE='Lax',
 )
@@ -277,6 +277,11 @@ def parse():
 
 def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
     response = {}
+    print("Printing the session...")
+    try:
+        print(session['error_level'])
+    except:
+        print("Doesn't exist!")
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
 
