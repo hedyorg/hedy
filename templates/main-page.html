@@ -4,7 +4,8 @@
 <div class="px-8 py-12">
 <div class="px-8">
   <div class="markdown">
-    {% filter indent(width=4) %}{{ mkd|commonmark }}{% endfilter %}
+    {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+    {{ mkd|commonmark }}
   </div>
 </div>
 </div>
