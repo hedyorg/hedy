@@ -323,6 +323,7 @@ def log_feedback():
     logger.log({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
+        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'feedback_level': feedback_level,
         'usefulness': general_answer,
         'level_usefulness': level_answer,
