@@ -272,6 +272,7 @@ def parse():
         'version': version(),
         'username': username,
         'feedback_level': session['error_level'] if lang in supported_lang else None,
+        'GFM': True if lang in supported_lang else False,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
@@ -329,7 +330,7 @@ def log_feedback():
         'level_usefulness': level_answer,
         'similar_code': similar_code,
         'collapse': collapse,
-        'GFI': True
+        'GFM': True
     })
 
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
