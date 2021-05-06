@@ -57,7 +57,7 @@ def load_yaml(filename):
     if not flask_in_debug_mode() and filename in YAML_CACHE:
         return YAML_CACHE[filename]
     try:
-        with open (filename, 'r') as f:
+        with open (filename, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f)
             YAML_CACHE[filename] = data
             return data
@@ -68,7 +68,7 @@ def load_yaml(filename):
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding='utf-8') as f:
             return yaml.round_trip_load(f, preserve_quotes=True)
     except IOError:
         return {}
