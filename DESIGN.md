@@ -193,7 +193,25 @@ In level 12, learners encounter different types of brackets for the
 first time, because it adds rectangular brackets for list access, which
 up to now was done with the keyword [`at`], following Design Goal 2.
 
-### Level 13: is becomes = and ==
+### Level 13: booleans
 
-In the final level Hedy becomes a subset of Python by replacing the word
-[`is`] in assignment and equality checks by [`=`] and [`==`].
+In level 13, booleans are added. Learners encounter True and False and how to use them in if statements
+
+### Level 14: and and or
+
+In level 14, Learners learn about and and or in if statements. 
+
+### Level 15: Comments
+
+In level 15, comments are introduced. The learner will now know how to comment code
+
+### Level 16: smaller and bigger
+
+In level 16, Learners learn about < and > in preparation for while loops
+
+### Level 17: while loops
+
+In level 17, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
+can make basic while loops.
+
+

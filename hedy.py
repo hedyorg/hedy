@@ -22,7 +22,9 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 #
@@ -141,6 +143,9 @@ class AllAssignmentCommands(Transformer):
     def for_loop(self, args):
         commands = args[1:]
         return flatten(commands)
+    def while_loop(self, args):
+        commands = args[1:]
+        return flatten(commands)
 
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
@@ -157,6 +162,8 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
     def change_list_item(self, args):
         return args[0].children
+    def comment(self, args):
+        return args[0].children
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
@@ -168,6 +175,11 @@ class AllAssignmentCommands(Transformer):
     def print(self, args):
         return args
     def input(self,args):
+        return args[0].children
+
+    def smaller(self, args):
+        return args[0].children
+    def bigger(self, args):
         return args[0].children
 
 def create_parser(level):
@@ -252,6 +264,25 @@ class Filter(Transformer):
     def change_list_item(self, args):
         return are_all_arguments_true(args)
 
+    # level 14
+    def andcondition(self, args):
+        return are_all_arguments_true(args)
+    def orcondition(self, args):
+        return are_all_arguments_true(args)
+    # level 15
+    def comment(self, args):
+        return are_all_arguments_true(args)
+
+    # level 16
+    def smaller(self, args):
+        return are_all_arguments_true(args)
+    def bigger(self, args):
+        return are_all_arguments_true(args)
+
+    # level 17
+    def while_loop(self, args):
+        return are_all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
         return True, ''.join([str(c) for c in args])
@@ -287,13 +318,16 @@ class IsValid(Filter):
         return are_all_arguments_true(args)
     def for_loop(self, args):
         return are_all_arguments_true(args)
+    def while_loop(self, args):
+        return are_all_arguments_true(args)
+    def comment(self, args):
+        return are_all_arguments_true(args)
 
     #leafs with tokens need to be all true
     def var(self, args):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
-
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -592,11 +626,19 @@ class ConvertToPython_9_10(ConvertToPython_8):
 
 class ConvertToPython_11(ConvertToPython_9_10):
     def input(self, args):
+        args_new = []
         var = args[0]
-        all_parameters = [a for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")"
+        for a in args[1:]:
+            if type(a) is Tree:
+                args_new.append(f'str({a.children})')
+            elif "'" not in a:
+                args_new.append(f'str({a})')
+            else:
+                args_new.append(a)
 
-class ConvertToPython_12_13(ConvertToPython_11):
+        return f'{var} = input(' + '+'.join(args_new) + ")"
+
+class ConvertToPython_12(ConvertToPython_11):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -619,6 +661,72 @@ class ConvertToPython_12_13(ConvertToPython_11):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
+
+class ConvertToPython_13(ConvertToPython_12):
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
+                    return parameter + " = " + value
+                else:
+                    if value == 'true' or value == 'True':
+                        return parameter + " = True"
+                    elif value == 'false' or value == 'False':
+                        return parameter + " = False"
+                    else:
+                        return parameter + " = '" + value + "'"
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
+
+    def equality_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if arg1 == '\'True\'' or arg1 == '\'true\'':
+            return f"{arg0} == True"
+        elif arg1 == '\'False\'' or arg1 == '\'false\'':
+            return f"{arg0} == False"
+        else:
+            return f"str({arg0}) == str({arg1})" #no and statements
+
+class ConvertToPython_14(ConvertToPython_13):
+    def andcondition(self, args):
+        return ' and '.join(args)
+    def orcondition(self, args):
+        return ' or '.join(args)
+
+class ConvertToPython_15(ConvertToPython_14):
+    def comment(self, args):
+        return f"# {args}"
+
+class ConvertToPython_16(ConvertToPython_15):
+    def smaller(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) < str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) < str({arg1}) and {args[2]}"
+
+    def bigger(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) > str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) > str({arg1}) and {args[2]}"
+
+class ConvertToPython_17(ConvertToPython_16):
+    def while_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "while " + args[0] + ":\n"+"\n".join(all_lines)
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -947,11 +1055,22 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 12:
-        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 13:
-        # Code does not change for level 13 only grammar
-        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 14:
+        python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 15:
+        python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 16:
+        python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 17:
+        python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
