@@ -28,3 +28,6 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest discover -s tests
+    - name: Validate YAML
+      run: build-tools/validate-yaml
+

@@ -54,18 +54,14 @@ class TestsForMultipleLevels(unittest.TestCase):
         self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
         print('Passed at level ', 11)
 
-        result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", 12)
-        self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-        print('Passed at level ', 12)
-
-        min_level = 13
-        max_level = 13
+        min_level = 12
+        max_level = 17
         for i in range(min_level, max_level + 1):
-            result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
+            result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", 12)
             self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
+
 
 
     def test_parse_error_shows_right_level(self):
