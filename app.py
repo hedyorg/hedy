@@ -328,7 +328,8 @@ def log_feedback():
         'usefulness': general_answer,
         'level_usefulness': level_answer,
         'similar_code': similar_code,
-        'collapse': collapse
+        'collapse': collapse,
+        'GFI': True
     })
 
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
