@@ -2,9 +2,32 @@ import time
 from config import config
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
+import functools
 import os
 from ruamel import yaml
 import flask
+
+
+class Timer:
+  """A quick and dirty timer."""
+  def __init__(self, name):
+    self.name = name
+
+  def __enter__(self):
+    self.start = time.time()
+
+  def __exit__(self, type, value, tb):
+    delta = time.time() - self.start
+    print(f'{self.name}: {delta}s')
+
+
+def timer(fn):
+  """Decoractor for fn."""
+  @functools.wraps(fn)
+  def wrapper(*args, **kwargs):
+    with Timer(fn.__name__):
+      return fn(*args, **kwargs)
+  return wrapper
 
 
 def type_check (val, Type):
@@ -35,12 +58,25 @@ def times ():
     return int (round (time.time ()))
 
 
-def flask_in_debug_mode():
-    """Whether or not Flask is in debug mode.
+
+
+DEBUG_MODE = False
+
+def is_debug_mode():
+    """Return whether or not we're in debug mode.
 
     We do more expensive things that are better for development in debug mode.
     """
-    return flask.current_app.config['DEBUG']
+    return DEBUG_MODE
+
+
+def set_debug_mode_based_on_flask():
+    """Set whether or not we're in debug mode based on whether Flask is.
+
+    This can only be called after the Flask server has been initialized.
+    """
+    global DEBUG_MODE
+    DEBUG_MODE = flask.current_app.config['DEBUG']
 
 
 YAML_CACHE = {}
@@ -54,7 +90,7 @@ def load_yaml(filename):
     by the Flask config (FLASK_ENV).
     """
     # Bypass the cache in DEBUG mode for mucho iterating
-    if not flask_in_debug_mode() and filename in YAML_CACHE:
+    if not is_debug_mode() and filename in YAML_CACHE:
         return YAML_CACHE[filename]
     try:
         with open (filename, 'r', encoding='utf-8') as f:
