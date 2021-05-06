@@ -35,7 +35,6 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
 #
 
 def closest_command(invalid_command, known_commands):
-
     # First search for 100% match of known commands
     min_position = len(invalid_command)
     min_command = ''
@@ -71,6 +70,7 @@ def closest_command_with_min_distance(command, commands):
     return min_command
 
 def minimum_distance(s1, s2):
+    """Return string distance between 2 strings."""
     if len(s1) > len(s2):
         s1, s2 = s2, s1
     distances = range(len(s1) + 1)
@@ -993,21 +993,28 @@ def transpile_inner(input_string, level):
             # this one can't be beautified (for now), so give up :)
             raise e
 
+    # IsValid returns (True,) or (False, args, line)
     is_valid = IsValid().transform(program_root)
-    if not is_valid[0]:
-        if is_valid[1] == ' ':
-            line = is_valid[2]
 
+    if not is_valid[0]:
+        _, args, line = is_valid
+
+        # Apparently, sometimes 'args' is a string, sometimes it's a list of
+        # strings ( are these production rule names?). If it's a list of
+        # strings, just take the first string and proceed.
+        if isinstance(args, list):
+            args = args[0]
+        if args == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
-        elif is_valid[1] == 'print without quotes':
+        elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)
         else:
-            invalid_command = is_valid[1]
+            invalid_command = args
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # clearly the error message here should be better or it should be a different one!
