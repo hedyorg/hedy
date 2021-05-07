@@ -945,25 +945,38 @@ def find_indent_length(line):
 def preprocess_blocks(code):
     processed_code = []
     lines = code.split("\n")
-    current_indent = 0
-    previous_block = 0
+    current_number_of_indents = 0
+    previous_number_of_indents = 0
+    indent_size = None #we don't fix indent size but the first encounter sets it
     for line in lines:
         leading_spaces = find_indent_length(line)
-        if leading_spaces > previous_block:
-            current_indent += 1
-            previous_block = leading_spaces
-        elif leading_spaces < previous_block:
-            #we springen 'terug' dus er moet een block in!
-            processed_code.append('end-block')
-            current_indent -=1
-            previous_block = leading_spaces
+
+        #first encounter sets indent size for this program
+        if indent_size == None and leading_spaces > 0:
+            indent_size = leading_spaces
+
+        #calculate nuber of indents if possible
+        if indent_size != None:
+            current_number_of_indents = leading_spaces // indent_size
+
+        if current_number_of_indents < previous_number_of_indents:
+            # we springen 'terug' dus er moeten end-blocken in
+            # bij meerdere terugsprongen sluiten we ook meerdere blokken
+
+            difference_in_indents = (previous_number_of_indents - current_number_of_indents)
+
+            for i in range(difference_in_indents):
+                processed_code.append('end-block')
+
+        #save to compare for next line
+        previous_number_of_indents = current_number_of_indents
 
         #if indent remains the same, do nothing, just add line
         processed_code.append(line)
 
     # if the last line is indented, the end of the program is also the end of all indents
     # so close all blocks
-    for i in range(current_indent):
+    for i in range(current_number_of_indents):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
@@ -975,6 +988,7 @@ def transpile_inner(input_string, level):
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
+        print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
