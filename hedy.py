@@ -3,7 +3,6 @@ from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
 from os import path
 import sys
-import utils
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
@@ -183,6 +182,10 @@ class AllAssignmentCommands(Transformer):
     def bigger(self, args):
         return args[0].children
 
+def create_parser(level):
+    with open(f"grammars/level{str(level)}.lark", "r", encoding="utf-8") as file:
+        grammar = file.read()
+    return Lark(grammar)
 
 def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
@@ -846,28 +849,11 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
-
 def create_grammar(level):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
     with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
         return file.read()
-
-
-PARSER_CACHE = {}
-
-
-def get_parser(level):
-    """Return the Lark parser for a given level.
-
-    Uses caching if Hedy is NOT running in development mode.
-    """
-    existing = PARSER_CACHE.get(level)
-    if existing and not utils.is_debug_mode():
-        return existing
-    ret = Lark(create_grammar(level))
-    PARSER_CACHE[level] = ret
-    return ret
 
 
 def transpile(input_string, level):
@@ -985,8 +971,7 @@ def preprocess_blocks(code):
 def transpile_inner(input_string, level):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-
-    parser = get_parser(level)
+    parser = Lark(create_grammar(level))
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
