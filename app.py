@@ -15,6 +15,7 @@ import os
 from os import path
 import re
 import requests
+import traceback
 import uuid
 from ruamel import yaml
 from flask_commonmark import Commonmark
@@ -225,6 +226,7 @@ def parse():
             result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
+            traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
             if E.args[0] == "Invalid Space":
@@ -244,6 +246,7 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
         except Exception as E:
+            traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
     logger.log ({
