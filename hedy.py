@@ -947,15 +947,28 @@ def preprocess_blocks(code):
     lines = code.split("\n")
     current_indent = 0
     previous_block = 0
+    indent_size = None #we don't fix indent size but the first encounter sets it
     for line in lines:
         leading_spaces = find_indent_length(line)
+
+        #set indent size for program
+        if indent_size == None and leading_spaces > 0:
+            indent_size = leading_spaces
+
         if leading_spaces > previous_block:
             current_indent += 1
             previous_block = leading_spaces
         elif leading_spaces < previous_block:
-            #we springen 'terug' dus er moet een block in!
-            processed_code.append('end-block')
-            current_indent -=1
+            # we springen 'terug' dus er moeten end-blocken in
+            # bij meerdere terugsprongen sluiten we ook meerdere blokken
+
+            difference = (previous_block - leading_spaces)
+
+            number_of_indents = difference // indent_size
+            for i in range(number_of_indents):
+                processed_code.append('end-block')
+
+            current_indent = leading_spaces // indent_size
             previous_block = leading_spaces
 
         #if indent remains the same, do nothing, just add line
@@ -975,6 +988,7 @@ def transpile_inner(input_string, level):
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
+        print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
