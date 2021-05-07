@@ -142,6 +142,13 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
                     continue
                 request_headers [header [0]] = header [1]
 
+            # Sets session variables in a header x-session_vars
+            session_vars = {}
+            for var in session:
+                if var not in ['session_id']:
+                    session_vars [var] = session [var]
+            request_headers ['x-session_vars'] = json.dumps (session_vars)
+
             # Send the session_id to the test environment for logging purposes
             request_headers ['x-session_id'] = session_id ()
             r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
@@ -152,6 +159,12 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
                 # We ignore the set-cookie header
                 if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'set-cookie']):
                     continue
+                # We set the session vars returned by the test server
+                if (header.lower () == 'x-session_vars'):
+                    session_vars = json.loads (r.headers ['x-session_vars'])
+                    for var in session_vars:
+                        print ('DEBUG RECEIVING SESSION VAR FROM TEST', var, session_vars [var])
+                        session [var] = session_vars [var]
                 response.headers [header] = r.headers [header]
             return response, r.status_code
 
@@ -159,6 +172,14 @@ if os.getenv ('IS_TEST_ENV'):
     @app.before_request
     def before_request_receive_proxy():
         print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
+        # If session vars come in a header, set them.
+        if 'x-session_vars' in request.headers:
+            print ('test received x-session_vars', request.headers ['x-session_vars'])
+            session_vars = json.loads (request.headers ['x-session_vars'])
+            for var in session_vars:
+                if var not in ['session_id']:
+                    print ('DEBUG RECEIVING SESSION VAR FROM PROXIED REQUEST', var, session_vars [var])
+                    session [var] = session_vars [var]
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -216,6 +237,7 @@ def parse():
     supported_lang = ["en", "nl"]
 
     response = {}
+    headers = {}
     username = current_user(request) ['username'] or None
 
     # Check if user sent code
@@ -231,7 +253,7 @@ def parse():
             if lang in supported_lang:
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
-                session['error_level'] = 0  # Code is correct: reset error_level back to 0
+                set_session_var (headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
         except hedy.HedyException as E:
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
@@ -252,13 +274,13 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=True))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=True))
         except Exception as E:
             response["Error"] = str(E)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=False))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=False))
         if lang in supported_lang:
-            session['code'] = code
+            set_session_var (headers, 'code', code)
 
     logger.log ({
         'session': session_id(),
@@ -274,9 +296,13 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
 
-    return jsonify(response)
+    response = make_response (response)
+    for header in headers:
+         response.headers [header] = headers [header]
 
-def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
+    return response
+
+def gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception):
     response = {}
     print("Printing the session...")
     try:
@@ -292,7 +318,7 @@ def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
     else:
         response["Duplicate"] = False
         if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
-            session['error_level'] = session['error_level'] + 1
+            set_session_var (headers, 'error_level', session['error_level'] + 1)
         if session['error_level'] == 2: # Give a more explanatory error message
             if hedy_exception:
                 response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
@@ -309,7 +335,7 @@ def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
-                session["similar_code"] = similar_code
+                set_session_var (headers, 'similar_code', similar_code)
         elif session['error_level'] == 5:
             response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
     response["feedback_level"] = session['error_level']
@@ -512,10 +538,13 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
+    response = {}
+    headers = {}
+
     if requested_lang() in ["en", "nl"]:
-        session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
-        session["similar_code"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
-        session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
+        set_session_var (headers, 'error_level', 0) # When requesting a new level, always reset error_level to 0
+        set_session_var (headers, 'similar_code', "-") # Make sure that the gathered similar code is also deleted when re-loading the page
+        set_session_var (headers, 'code', None) # Make sure that no code is stored in the session when re-loading the page
 
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
@@ -534,7 +563,7 @@ def index(level, step):
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    response = make_response (hedyweb.render_assignment_editor(
         request=request,
         course=HEDY_COURSE[g.lang],
         level_number=level,
@@ -543,7 +572,11 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         adventure_assignments=adventure_assignments,
-        loaded_program=loaded_program)
+        loaded_program=loaded_program
+    ))
+    for header in headers:
+         response.headers [header] = headers [header]
+    return response
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
@@ -644,6 +677,18 @@ def session_id():
         session['session_id'] = uuid.uuid4().hex
     return session['session_id']
 
+# This function allows for setting session vars in a special header (x-session_vars) in case
+# that 1) we're in the test environment and 2) the processed request is proxied to it.
+def set_session_var (headers, key, value):
+    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
+        if not 'x-session_vars' in headers:
+            session_vars = {}
+        else:
+            session_vars = json.loads (headers ['x-session_vars'])
+        session_vars [key] = value
+        headers ['x-session_vars'] = json.dumps (session_vars)
+    else:
+        session [key] = value
 
 def requested_lang():
     """Return the user's requested language code.
