@@ -193,11 +193,11 @@ class TestsLevel10(unittest.TestCase):
     for i in range 0 to 10:
       antwoord is ask Wat is 5*5
       if antwoord is 24:
-          print 'Dat is fout!'
+        print 'Dat is fout!'
       else:
-          print 'Dat is goed!'
+        print 'Dat is goed!'
       if antwoord is 25:
-          i is 10""")
+        i is 10""")
 
     expected = textwrap.dedent("""\
     for i in range(int(0), int(10)+1):

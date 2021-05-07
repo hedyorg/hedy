@@ -3,6 +3,7 @@ from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
 from os import path
 import sys
+import utils
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
@@ -35,7 +36,6 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
 #
 
 def closest_command(invalid_command, known_commands):
-
     # First search for 100% match of known commands
     min_position = len(invalid_command)
     min_command = ''
@@ -71,6 +71,7 @@ def closest_command_with_min_distance(command, commands):
     return min_command
 
 def minimum_distance(s1, s2):
+    """Return string distance between 2 strings."""
     if len(s1) > len(s2):
         s1, s2 = s2, s1
     distances = range(len(s1) + 1)
@@ -182,10 +183,6 @@ class AllAssignmentCommands(Transformer):
     def bigger(self, args):
         return args[0].children
 
-def create_parser(level):
-    with open(f"grammars/level{str(level)}.lark", "r", encoding="utf-8") as file:
-        grammar = file.read()
-    return Lark(grammar)
 
 def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
@@ -849,11 +846,28 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
+
 def create_grammar(level):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
     with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
         return file.read()
+
+
+PARSER_CACHE = {}
+
+
+def get_parser(level):
+    """Return the Lark parser for a given level.
+
+    Uses caching if Hedy is NOT running in development mode.
+    """
+    existing = PARSER_CACHE.get(level)
+    if existing and not utils.is_debug_mode():
+        return existing
+    ret = Lark(create_grammar(level))
+    PARSER_CACHE[level] = ret
+    return ret
 
 
 def transpile(input_string, level):
@@ -945,25 +959,38 @@ def find_indent_length(line):
 def preprocess_blocks(code):
     processed_code = []
     lines = code.split("\n")
-    current_indent = 0
-    previous_block = 0
+    current_number_of_indents = 0
+    previous_number_of_indents = 0
+    indent_size = None #we don't fix indent size but the first encounter sets it
     for line in lines:
         leading_spaces = find_indent_length(line)
-        if leading_spaces > previous_block:
-            current_indent += 1
-            previous_block = leading_spaces
-        elif leading_spaces < previous_block:
-            #we springen 'terug' dus er moet een block in!
-            processed_code.append('end-block')
-            current_indent -=1
-            previous_block = leading_spaces
+
+        #first encounter sets indent size for this program
+        if indent_size == None and leading_spaces > 0:
+            indent_size = leading_spaces
+
+        #calculate nuber of indents if possible
+        if indent_size != None:
+            current_number_of_indents = leading_spaces // indent_size
+
+        if current_number_of_indents < previous_number_of_indents:
+            # we springen 'terug' dus er moeten end-blocken in
+            # bij meerdere terugsprongen sluiten we ook meerdere blokken
+
+            difference_in_indents = (previous_number_of_indents - current_number_of_indents)
+
+            for i in range(difference_in_indents):
+                processed_code.append('end-block')
+
+        #save to compare for next line
+        previous_number_of_indents = current_number_of_indents
 
         #if indent remains the same, do nothing, just add line
         processed_code.append(line)
 
     # if the last line is indented, the end of the program is also the end of all indents
     # so close all blocks
-    for i in range(current_indent):
+    for i in range(current_number_of_indents):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
@@ -971,10 +998,12 @@ def preprocess_blocks(code):
 def transpile_inner(input_string, level):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = Lark(create_grammar(level))
+
+    parser = get_parser(level)
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
+        print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -993,21 +1022,28 @@ def transpile_inner(input_string, level):
             # this one can't be beautified (for now), so give up :)
             raise e
 
+    # IsValid returns (True,) or (False, args, line)
     is_valid = IsValid().transform(program_root)
-    if not is_valid[0]:
-        if is_valid[1] == ' ':
-            line = is_valid[2]
 
+    if not is_valid[0]:
+        _, args, line = is_valid
+
+        # Apparently, sometimes 'args' is a string, sometimes it's a list of
+        # strings ( are these production rule names?). If it's a list of
+        # strings, just take the first string and proceed.
+        if isinstance(args, list):
+            args = args[0]
+        if args == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
-        elif is_valid[1] == 'print without quotes':
+        elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)
         else:
-            invalid_command = is_valid[1]
+            invalid_command = args
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # clearly the error message here should be better or it should be a different one!
