@@ -23,6 +23,7 @@ from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
+import utils
 import hashlib
 
 # app.py
@@ -105,6 +106,7 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+utils.set_debug_mode_based_on_flask()
 
 
 def hash_user_or_session (string):
