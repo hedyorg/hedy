@@ -1003,7 +1003,7 @@ def transpile_inner(input_string, level):
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
-        print(input_string)
+        # print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer

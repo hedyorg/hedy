@@ -242,3 +242,14 @@ def db_scan (table):
 
 def db_describe (table):
     return db.describe_table (TableName = db_prefix + '-' + table)
+
+
+def slash_join(*args):
+    ret = []
+    for arg in args:
+        if not arg: continue
+
+        if ret and not ret[-1].endswith('/'):
+            ret.append('/')
+        ret.append(arg.lstrip('/') if ret else arg)
+    return ''.join(ret)
