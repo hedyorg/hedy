@@ -402,7 +402,6 @@ define('ace/mode/level5_highlight_rules', [], function(require, exports, module)
       },{
         token: "keyword",
         regex: " is ",
-        //next: "rest"
       },{
         token: "keyword",
         regex: "^if ",
@@ -429,6 +428,7 @@ define('ace/mode/level5_highlight_rules', [], function(require, exports, module)
         regex: "repeat "
       }],
 
+
       "print option": [{
         token: "constant.character",
         regex: "'",
@@ -442,7 +442,7 @@ define('ace/mode/level5_highlight_rules', [], function(require, exports, module)
         regex: " at random | at random$",
       },{
         token: "constant.character", // constant.character
-        regex: "'",
+        regex: "'$|' ",
         next: "start"
       },{
         token: "text",
