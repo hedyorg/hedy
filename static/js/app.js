@@ -10,7 +10,7 @@
   editor.setTheme("ace/theme/monokai");
 
   // a variable which turns on(1) highlighter or turns it off(0)
-  var highlighter = 1;
+  var highlighter = 0;
 
   if (highlighter == 1){
         if (window.State.level == 1){
@@ -34,8 +34,10 @@
         if (window.State.level == 7){
           window.editor.session.setMode("ace/mode/level7");
         }
+        if (window.State.level == 8){
+          window.editor.session.setMode("ace/mode/level8");
+        }
   }
-
 
 
   // Load existing code from session, if it exists
