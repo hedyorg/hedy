@@ -37,6 +37,6 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="/vendor/jquery.min.js" type="text/javascript"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
   <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}
