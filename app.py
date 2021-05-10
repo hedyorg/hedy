@@ -420,7 +420,6 @@ def preprocess_code_similarity_measure(code, level):
     code = temp
     return code
 
-
 def get_similar_code(processed_code, language, level):
     filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + language + ".csv"
     shortest_distance = 25  # This is the threshold: when differ more than this value it's no longer similar code
