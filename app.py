@@ -341,17 +341,17 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
             else:
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
-            try:
-                response["Feedback"] = gradual_feedback["New_level" + str(level)]
-            except:
-                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
-        elif session['error_level'] == 4:
             similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
             if similar_code is None:  # No similar code is found against a, to be defined, threshold
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
                 session["similar_code"] = similar_code
+        elif session['error_level'] == 4:
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
+                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
         elif session['error_level'] == 5:
             response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
     response["feedback_level"] = session['error_level']
