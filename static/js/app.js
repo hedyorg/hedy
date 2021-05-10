@@ -135,7 +135,7 @@ function runit(level, lang, cb) {
       else {
         if (response.Feedback) {
           $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
-          if (response.feedback_level === 4) {
+          if (response.feedback_level === 3) {
             error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
           } else {
             error.showFeedback(ErrorMessages.Feedback_error, response.Feedback);
