@@ -295,13 +295,13 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=True))
+                response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=True))
         except Exception as E:
             traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception=False))
+                response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=False))
         if lang in supported_lang:
             session['code'] = code
 
@@ -323,7 +323,7 @@ def parse():
     return jsonify(response)
 
 
-def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
+def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
     response = {}
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
@@ -346,7 +346,7 @@ def gradual_feedback_model(code, level, gradual_feedback, E, hedy_exception):
             except:
                 response["Feedback"] = gradual_feedback["Expanded_Uknown"]
         elif session['error_level'] == 4:
-            similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), level)
+            similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
             if similar_code is None:  # No similar code is found against a, to be defined, threshold
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
@@ -387,24 +387,22 @@ def get_concepts(level):
     if level == 1:
         return ['print', 'ask', 'echo']
     elif level == 2:
-        return ['print', 'ask', 'at random']
+        return ['print', 'ask', 'at', 'random']
     elif level == 3:
-        return ['print', 'is', 'ask']
+        return ['print', 'is', 'ask', 'at', 'random']
     elif level == 4:
-        return ['print', 'is', 'ask', 'if']
+        return ['print', 'is', 'ask', 'at', 'random', 'if']
     elif level == 5:
-        return ['print', 'is', 'ask', 'if', 'repeat', 'times']
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'repeat', 'times']
     elif level in [6, 7]:
-        return ['print', 'is', 'ask', 'if', 'repeat', 'times', '+', '-', '*']
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'repeat', 'times', '+', '-', '*']
     elif level in [8, 9, 10]:
-        return ['print', 'is', 'ask', 'if', 'for', 'range', '+', '-', '*']
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'for', 'in', 'range', '+', '-', '*']
     return []
 
 def preprocess_code_similarity_measure(code, level):
     concepts = get_concepts(int(level))
     words = code.split()
-    print("The given code: ")
-    print(code)
     code = ""
     for word in words:
         if word not in concepts:
@@ -420,18 +418,12 @@ def preprocess_code_similarity_measure(code, level):
         else:
             temp += processed + " "
     code = temp
-    print("The processed code: ")
-    print(code)
     return code
 
 
-def get_similar_code(processed_code, level):
-    if lang in ["en"]:
-        filename = "coursedata/similar-code-files/level" + str(level) + lang + ".csv"
-    else:
-        filename = "coursedata/similar-code-files/level" + str(level) + "en.csv"
-    print(filename)
-    shortest_distance = 30  # This is the threshold: when differ more than this value it's no longer similar code
+def get_similar_code(processed_code, language, level):
+    filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + language + ".csv"
+    shortest_distance = 25  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
     line = 0
     try:
@@ -439,8 +431,8 @@ def get_similar_code(processed_code, level):
             csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
             for lines in csvFile:
                 line += 1
-                distance = lev(processed_code, lines[2])
-                if distance < 5:  # The code is identical, no need to search any further
+                distance = lev(processed_code, lines[1])
+                if distance < 5:  # The code is similar enough, no need to search any further
                     similar_code = lines[0]
                     break
                 else:
