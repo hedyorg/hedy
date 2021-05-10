@@ -5,21 +5,21 @@ print 'Jouw favoriet is dus ' kleur",% is ask % is % % print % % is % % %
 "optie is ask steen papier schaar?
 print optie
 computeroptie is steen, papier, schaar
-print computeroptie at random",% is ask % % % print % % is % % % print % % % 
+print computeroptie at random",% is ask % % % print % % is % % % print % at random 
 "wie is ask knock knock wie is daar?
 print 'jij bent dus ' wie",% is ask % % % is % print % % % % % 
 "wie is ask knock knock wie is daar?
 print wie",% is ask % % % is % print % 
 "naam is ask Hoe heet jij?
-if naam is Thomas print 'ok jij mag doen wat je wil hier op' else print 'verboden toegang voor jou'",% is ask % % % % % is % print % % % % % % % % % % print % % % % 
+if naam is Thomas print 'ok jij mag doen wat je wil hier op' else print 'verboden toegang voor jou'",% is ask % % % if % is % print % % % % % % % % % else print % % % % 
 "keuzes is 1, 2, 3, 4, 5, regenworm
-print keuzes at random",% is % % % % % % print % % % 
+print keuzes at random",% is % % % % % % print % at random 
 "keuzes is 1, 2, 3, 4, 5, regenworm
 keuze is keuzes at random
-print keuze",% is % % % % % % % is % % % print % 
+print keuze",% is % % % % % % % is % at random print % 
 "dieren is Hond, Kat, Kangoeroe
 dier is dieren at random
-print dier",% is % % % % is % % % print % 
+print dier",% is % % % % is % at random print % 
 print ' hoi ' ,print % % % 
 "naam is ask Wat is je naam
 bijnaam is ask Heb je een bijnaam zo ja welke?
@@ -28,12 +28,12 @@ bijnaam is ask Heb je een bijnaam zo ja welke?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "print 'Janne steekt een drukke straat over'
 print 'Ze zag de auto niet'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Ze ligt in het ziekenhuis met veel ballonnen en cadeautjes'
-if einde is slecht print 'De ambulance is van een brug afgereden'",print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % % is % print % % is % % % % 
+if einde is slecht print 'De ambulance is van een brug afgereden'",print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % if % is % print % % is % % % % 
 "print 'Hallo welkom bij Hedy'
 print 'Hallo ik ben shirin'",print % % % % print % % % % 
 print 'De muis loopt door het huis',print % % % % % % 
@@ -42,7 +42,7 @@ print 'Ze zag de auto niet'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Ze ligt in het ziekenhuis met veel ballonnen en cadeautjes'
 if einde is slecht print 'De ambulance is van een brug afgereden'
-print 'The end'",print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % % is % print % % is % % % % print % % 
+print 'The end'",print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % if % is % print % % is % % % % print % % 
 "print 'De muis loopt door het huis'
 print 'Hij loopt om het hoekje en ziet een grote kat'",print % % % % % % print % % % % % % % % % % 
 "print 'Hallo ik heet willem'
@@ -88,20 +88,20 @@ print 'Nadat ze zijn gaan wandelen gaan ' vriend ' en ' naam keuzes at random
 print naam ' en ' vriend ' vonden het erg gezellig'
 keuzes is morgen, over een week
 print 'Daarom gaan ze het ' keuzes at random ' weer doen'
-",% is % print % % % % % % % is % print % % % % % % % % % % % % is % % % print % % % % % % % % % % % is % % % % % % print % % % % % % % % % % % % % % % print % % % % % % % % % % % is % % % % print % % % % % % % % % % % 
+",% is % print % % % % % % % is % print % % % % % % % % % % % % is % % % print % % % % % % at random % % % is % % % % % % print % % % % % % % % % % % % % at random print % % % % % % % % % % % is % % % % print % % % % % % at random % % % 
 "print 'Janne steekt een drukke straat over'
 print 'Ze zag de auto niet'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Ze ligt in het ziekenhuis met veel ballonnen en cadeautjes'
 print 'The end'
 if einde is slecht print 'De ambulance is van een brug afgereden'
-print 'The end'",print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % print % % % % is % print % % is % % % % print % % 
+print 'The end'",print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % print % % if % is % print % % is % % % % print % % 
 "print 'Hallo ik heet willem'
 hij is ask hoe heet jij
 print 'hallo ' hij
 gevoel is ask gaat het goed of slecht met jouw
 if gevoel is goed print 'nou mooi' else print 'oh dat is niet zo mooi'
-",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % % % print % % is % % % 
+",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % % else print % % is % % % 
 "naam is Ilva
 print 'Dit verhaaltje gaat over ' naam
 vriend is Anna
@@ -114,12 +114,12 @@ print naam ' en ' vriend ' vonden het erg gezellig'
 keuzes is morgen, over een week
 print 'Daarom gaan ze het ' keuzes at random ' weer doen'
 print 'de volgende dag'
-",% is % print % % % % % % % is % print % % % % % % % % % % % % is % % % print % % % % % % % % % % % is % % % % % % print % % % % % % % % % % % % % % % print % % % % % % % % % % % is % % % % print % % % % % % % % % % % print % % % 
+",% is % print % % % % % % % is % print % % % % % % % % % % % % is % % % print % % % % % % at random % % % is % % % % % % print % % % % % % % % % % % % % at random print % % % % % % % % % % % is % % % % print % % % % % % at random % % % print % % % 
 "print 'Nuria loopt door de school '
 print 'Ze komt haar leraar tegen'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Haar leraar vertelt haar dat ze een voldoende heeft voor het vak' else print 'De leraar vertelt haar dat ze een onvoldoende heeft voor het vak'
-",print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % % % print % % % % % % % % % % % % 
+",print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % % % else print % % % % % % % % % % % % 
 "naam is ask hoe heet jij?
 ",% is ask % % % 
 "print 'Hallo ik heet willem'
@@ -127,12 +127,12 @@ hij is ask hoe heet jij
 print 'hallo ' hij
 gevoel is ask gaat het goed of slecht met jouw
 if gevoel is goed print 'dat is mooi' else print 'oh dat is niet zo mooi'
-",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % is % % print % % is % % % 
+",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % is % else print % % is % % % 
 "print 'De muis loopt door het huis'
 print 'Hij loopt om het hoekje en ziet een grote kat'
 print 'Maar hij wil dat stukje kaas wat naast de kat ligt heel graag hebben'
 einde is ask Kaas pakken of niet?
-if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % % % % % % print % % % % % % % % % % % % % % % is ask % % % % % % is % print % % % % % % % % % % % % % % % % % % % % % % % 
+if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % % % % % % print % % % % % % % % % % % % % % % is ask % % % % if % is % print % % % % % % % % % % % % else % % % % % % % % % % 
 "naam is ask hoe heet jij?
 goed is ask loop je door in het bos",% is ask % % % % is ask % % % % % % 
 "naam is pietjan
@@ -143,12 +143,12 @@ keuzes is naar rechts, naar links",% is % print % % % % % % % % % % % print % % 
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
 keuzes is naar rechts, naar links
-print 'hij gaat naar' keuzes at random",% is % print % % % % % % % % % % % print % % is % % % % % is % % % % print % % % % % % 
+print 'hij gaat naar' keuzes at random",% is % print % % % % % % % % % % % print % % is % % % % % is % % % % print % % % % at random 
 "naam is pietjan
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
 keuzes is naar rechts, naar links
-print 'hij gaat' keuzes at random",% is % print % % % % % % % % % % % print % % is % % % % % is % % % % print % % % % % 
+print 'hij gaat' keuzes at random",% is % print % % % % % % % % % % % print % % is % % % % % is % % % % print % % % at random 
 "naam is ask hoe heet jij?
 print naam is in een bos
 goed is ask loop je door in het bos",% is ask % % % print % is % % % % is ask % % % % % % 
@@ -158,7 +158,7 @@ print naam ' is echt nergens bang voor'
 print naam ' loopt het verlaten kasteel binnen'
 keuzes is naar rechts, naar links
 print 'hij gaat ' keuzes at random
-",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % 
+",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % at random 
 "naam is de koning
 print naam 'loopt door het bos'",% is % % print % % % % % 
 "naam is pietjan
@@ -168,14 +168,14 @@ print naam ' loopt het verlaten kasteel binnen'
 keuzes is naar rechts, naar links
 print 'hij gaat ' keuzes at random
 print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
-",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % print % % % % % % % % % % % % % 
+",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % at random print % % % % % % % % % % % % % 
 "print 'Hallo ik heet willem'
 hij is ask hoe heet jij
 print 'hallo ' hij
 gevoel is ask gaat het goed of slecht met jouw
 if gevoel is goed print 'dat is mooi' else print 'oh dat is niet zo mooi'
 antwoord is ask zullen we een potje steen papier schaar doen?
-",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % is % % print % % is % % % % is ask % % % % % % % % 
+",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % is % else print % % is % % % % is ask % % % % % % % % 
 "naam is de koning
 print naam ' loopt door het bos'",% is % % print % % % % % % 
 "naam is pietjan
@@ -186,7 +186,7 @@ keuzes is naar rechts, naar links
 print 'hij gaat ' keuzes at random
 print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
 print 'de draak achtervolgd ' naam
-",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % print % % % % % % % % % % % % % print % % % % % 
+",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % at random print % % % % % % % % % % % % % print % % % % % 
 "naam is pietjan
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
@@ -196,63 +196,63 @@ print 'hij gaat ' keuzes at random
 print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
 print 'de draak achtervolgd ' naam
 einde is ask ga je in het bos of in de grot?
-",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % print % % % % % % % % % % % % % print % % % % % % is ask % % % % % % % % % 
+",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % at random print % % % % % % % % % % % % % print % % % % % % is ask % % % % % % % % % 
 "print 'Nuria loopt door de school '
 print 'Ze komt haar leraar tegen'
 print 'Haar leraar wil haar wat vertellen'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Haar leraar vertelt haar dat ze een voldoende heeft voor het vak' else print 'De leraar vertelt haar dat ze een onvoldoende heeft voor het vak'
-",print % % % % % % print % % % % % print % % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % % % print % % % % % % % % % % % % 
+",print % % % % % % print % % % % % print % % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % % % else print % % % % % % % % % % % % 
 "hobby is ask Wat is je hobby?
 print 'Jouw hobby is dus ' hobby
 print 'De prinses loopt door het bos'
 print 'Ze komt een monster tegen'
 einde is ask Wil je een goed of slecht einde?
-if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else print 'Het monster eet de prinses op'",% is ask % is % % print % % is % % % print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % print % % % % % % 
+if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else print 'Het monster eet de prinses op'",% is ask % is % % print % % is % % % print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % else print % % % % % % 
 "print ' De prins loopt door het bos. '
 print ' Hij hoort harde voetstappen. '
 print ' Het is donker. ' 
 print ' Hij ziet iets groots in de verte. '
 einde is ask Wil je een goed of een slecht einde?
-if einde is goed print ' De prins pakt zijn geweer en schiet de zwijn dood. ' else print ' De zwijn rent op de ridder af en eet hem op. '",print % % % % % % % % print % % % % % % print % % is % % print % % % % % % % % % % is ask % % % % % % % % % % is % print % % % % % % % % % % % % % print % % % % % % % % % % % % % 
+if einde is goed print ' De prins pakt zijn geweer en schiet de zwijn dood. ' else print ' De zwijn rent op de ridder af en eet hem op. '",print % % % % % % % % print % % % % % % print % % is % % print % % % % % % % % % % is ask % % % % % % % % if % is % print % % % % % % % % % % % % else print % % % % % % % % % % % % % 
 "naam is ask hoe heet jij?
 ja is ask loop je door in het bos
 einde is ask wil je dood of niet? 
-if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % % is ask % % % % % % % is ask % % % % % % % is % print % % % % % % % % print % % % % % % 
+if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % % is ask % % % % % % % is ask % % % % % if % is % print % % % % % % % else print % % % % % % 
 "naam is ask hoe heet jij?
 print 'naam loopt in het bos'
 ja is ask loop je door in het bos
 einde is ask wil je dood of niet? 
-if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % % % % % % is ask % % % % % % % is ask % % % % % % % is % print % % % % % % % % print % % % % % % 
+if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % % % % % % is ask % % % % % % % is ask % % % % % if % is % print % % % % % % % else print % % % % % % 
 "print 'De muis loopt door het huis'
 print 'Hij loopt om het hoekje en ziet een grote kat'
 print 'Maar hij wil dat stukje kaas wat naast de kat ligt heel graag hebben'
 einde is ask Kaas pakken of niet pakken?
-if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % % % % % % print % % % % % % % % % % % % % % % is ask % % % % % % % is % print % % % % % % % % % % % % % % % % % % % % % % % 
+if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % % % % % % print % % % % % % % % % % % % % % % is ask % % % % % if % is % print % % % % % % % % % % % % else % % % % % % % % % % 
 "hoofdpersoon is ask hoe heet jij?
 print 'de naam van mijn hoofdpersoon' is naam
 print 'hoofdpersoon loopt in het bos'
 ja is ask loop je door in het bos
 einde is ask wil je dood of niet? 
-if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % % % % % is % print % % % % % % is ask % % % % % % % is ask % % % % % % % is % print % % % % % % % % print % % % % % % 
+if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % % % % % is % print % % % % % % is ask % % % % % % % is ask % % % % % if % is % print % % % % % % % else print % % % % % % 
 "print 'Hallo ik heet willem'
 hij is ask hoe heet jij
 print 'hallo ' hij
 gevoel is ask gaat het goed of slecht met jouw
 if gevoel is goed print 'dat is mooi' else print 'oh dat is niet zo mooi'
 antwoord is ask zullen we een potje steen papier schaar doen?
-if antwoord is ja print 'oke mooi' else print 'je hebt pecht we gaan het doen'",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % is % % print % % is % % % % is ask % % % % % % % % % % is % print % % % print % % % % % % % 
+if antwoord is ja print 'oke mooi' else print 'je hebt pecht we gaan het doen'",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % is % else print % % is % % % % is ask % % % % % % % % if % is % print % % else print % % % % % % % 
 "print 'De muis loopt door het huis'
 print 'Hij loopt om het hoekje'
 print 'Hij ziet een stukje kaas wat hij wil hebben, maar daarnaast ligt een kat'
 einde is ask Kaas pakken of niet pakken?
-if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % print % % % % % % % % % % % % % % % is ask % % % % % % % is % print % % % % % % % % % % % % % % % % % % % % % % % 
+if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % print % % % % % % % % % % % % % % % is ask % % % % % if % is % print % % % % % % % % % % % % else % % % % % % % % % % 
 "hoofdpersoon is ask hoe heet jij?
 hoofdpersoon is hoofdpersoon
 print 'hoofdpersoon loopt in het bos'
 ja is ask loop je door in het bos
 einde is ask wil je dood of niet? 
-if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % % is % print % % % % % % is ask % % % % % % % is ask % % % % % % % is % print % % % % % % % % print % % % % % % 
+if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % % is % print % % % % % % is ask % % % % % % % is ask % % % % % if % is % print % % % % % % % else print % % % % % % 
 "naam is pietjan
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
@@ -273,13 +273,13 @@ jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % is % % print % % is % % % % is ask % % % % % % % % % % is % print % % % print % % % % % % % % is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % is % else print % % is % % % % is ask % % % % % % % % if % is % print % % else print % % % % % % % % is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "naam is pietjan
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
 print naam ' loopt het verlaten kasteel binnen'
 keuzes is naar rechts, naar links
-print 'hij gaat naar ' keuzes at random",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % % 
+print 'hij gaat naar ' keuzes at random",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % at random 
 "beroep is ask Wat is je beroep?
 print 'Jij bent dus is dus ' beroep",% is ask % is % % print % % % is % % % 
 "beroep is ask Wat is je beroep?
@@ -289,12 +289,12 @@ print 'hoofdpersoon is naam'
 print 'hoofdpersoon loopt in het bos'
 ja is ask loop je door in het bos
 einde is ask wil je dood of niet? 
-if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % is % print % % % % % % is ask % % % % % % % is ask % % % % % % % is % print % % % % % % % % print % % % % % % 
+if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % is % print % % % % % % is ask % % % % % % % is ask % % % % % if % is % print % % % % % % % else print % % % % % % 
 "print 'Shirin loopt rustig door het bos'
 print 'Ze komt een draak tegen'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Ze doet een drakendans en de draak vliegt weg' else print 'De draak spuugt vuur en shirin vliegt in brand'
-",print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % print % % % % % % % % % 
+",print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % else print % % % % % % % % % 
 "naam is pietjan
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
@@ -302,16 +302,7 @@ print naam ' loopt het verlaten kasteel binnen'
 keuzes is naar rechts, naar links
 print 'hij gaat naar ' keuzes at random
 print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
-einde is ask wil je een goed of slecht einde?",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % % print % % % % % % % % % % % % % % is ask % % % % % % % 
-"naam is pietjan
-print naam ' gaat naar het verlaten kasteel om schatten te vinden'
-print naam ' is echt nergens bang voor'
-print naam ' loopt het verlaten kasteel binnen'
-keuzes is naar rechts, naar links
-print 'hij gaat naar ' keuzes at random
-print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
-einde is ask wil je een goed of slecht einde?
-if einde is goed print naam ' schuilt in een grot en de draak vliegt weg'",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % % print % % % % % % % % % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % 
+einde is ask wil je een goed of slecht einde?",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % at random print % % % % % % % % % % % % % % is ask % % % % % % % 
 "naam is pietjan
 print naam ' gaat naar het verlaten kasteel om schatten te vinden'
 print naam ' is echt nergens bang voor'
@@ -320,7 +311,16 @@ keuzes is naar rechts, naar links
 print 'hij gaat naar ' keuzes at random
 print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
 einde is ask wil je een goed of slecht einde?
-if einde is goed print naam ' schuilt in een grot en de draak vliegt weg' else print naam ' schuilt in het bos maar wordt toch opgegeten'",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % % % print % % % % % % % % % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % % print % % % % % % % % % % 
+if einde is goed print naam ' schuilt in een grot en de draak vliegt weg'",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % at random print % % % % % % % % % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % % 
+"naam is pietjan
+print naam ' gaat naar het verlaten kasteel om schatten te vinden'
+print naam ' is echt nergens bang voor'
+print naam ' loopt het verlaten kasteel binnen'
+keuzes is naar rechts, naar links
+print 'hij gaat naar ' keuzes at random
+print naam ' rent gelijk naar buiten omdat een grote draak de schat bewaakt'
+einde is ask wil je een goed of slecht einde?
+if einde is goed print naam ' schuilt in een grot en de draak vliegt weg' else print naam ' schuilt in het bos maar wordt toch opgegeten'",% is % print % % % % % % % % % % % print % % is % % % % print % % % % % % % % is % % % % print % % % % % at random print % % % % % % % % % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % % else print % % % % % % % % % % 
 "print is ask 
 print print",print is ask print print 
 "print is ask wat vind ikl leuk
@@ -339,10 +339,10 @@ if computerkeuze is steen and jouwkeuze is schaar print 'jij wint'
 if computerkeuze is steen and jouwkeuze is steen print 'het is gelijk spel'
 if computerkeuze is papier and jouwkeuze is schaar print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
-if computerkeuze is papier and jouwkeuze is papier print 'het is gelijk spel'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % is % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % is % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % is % % 
+if computerkeuze is papier and jouwkeuze is papier print 'het is gelijk spel'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % is % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % is % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % is % % 
 "tijd is ask Hoe laat is het?
 print 'het is ' tijd
-if tijd is 12 print 'It is high noon' else print 'wat een kut tijd'",% is ask % % is % print % is % % % % is % print % is % % % print % % % % 
+if tijd is 12 print 'It is high noon' else print 'wat een kut tijd'",% is ask % % is % print % is % % if % is % print % is % % else print % % % % 
 "print 'Hallo welkom bij de muziek quiz'
 zangerlinkinpark is ask' Hoe heet de zanger van LinkinPark",print % % % % % % % is % % % % % % % 
 "print 'Hallo welkom bij de muziek quiz'
@@ -355,7 +355,7 @@ kleur is ask hoe gaat het?",% is ask % % % print % % % is ask % % %
 zangerlinkinpark is ask Hoe heet de zanger van Linkin Park?,% is ask % % % % % % % 
 "print 'we gaan steen papier schaar doen'
 zin is ask Heb je er zin in?
-if zin is ja print 'laten we beginnen' else print 'rot maar op met je hoofd'",print % % % % % % % is ask % % % % % % % is % print % % % % print % % % % % % 
+if zin is ja print 'laten we beginnen' else print 'rot maar op met je hoofd'",print % % % % % % % is ask % % % % % if % is % print % % % else print % % % % % % 
 persoon is ask ´Hoe heet de hoofdpersoon´,% is ask % % % % 
 "persoon is ask ´Hoe heet de hoofdpersoon´
 print persoon loopt door het bos",% is ask % % % % print % % % % % 
@@ -372,23 +372,23 @@ if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
 if computerkeuze is steen and jouwkeuze is steen print 'het is gelijk spel'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
-if computerkeuze is papier and jouwkeuze is papier print 'het is gelijk spel'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % is % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % is % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % is % % 
+if computerkeuze is papier and jouwkeuze is papier print 'het is gelijk spel'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % is % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % is % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % is % % 
 print 'Hallo welkom bij De realm',print % % % % % 
 print 'Hello ',print % % 
 "naam is ask Wat is je naam?
 print 'Dus jouw naam is ' naam",% is ask % is % % print % % % is % % 
 "keuze is Steen, Papier, Schaar
 print keuze at random
-",% is % % % print % % % 
+",% is % % % print % at random 
 "jouwkueze is ask wat kies jij?
 keuzes is steen , schaar , papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'computer wint'
-if jouwkeuze is steen and computerkeuze is schaar print 'jij wint'",% is ask % % % % is % % % % % % is % % % % % is % % % is % print % % % % is % % % is % print % % 
+if jouwkeuze is steen and computerkeuze is schaar print 'jij wint'",% is ask % % % % is % % % % % % is % at random if % is % % % is % print % % if % is % % % is % print % % 
 "naam is ask hoe heet jij?
 if naam is Noa print 'heel heel heel leuk'
 if naam is Rafi print 'heel heel heel stom'
-",% is ask % % % % % is % print % % % % % % is % print % % % % 
+",% is ask % % % if % is % print % % % % if % is % print % % % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet is dus ' kleur
 kleur is ask Wat is je lievelingskleur?",% is ask % is % % print % % is % % % % is ask % is % % 
@@ -476,39 +476,39 @@ print 'Jouw lievelings kleur is ' kleur
 eten is ask Wat is je lievelingseten? Vul Enter in als je het niet weet.
 print 'Jouw lievelings eten is ' eten",% is ask % is % % % % % % % % % % print % % is % % % is ask % is % % % % % % % % % % print % % is % % % is ask % is % % % % % % % % % % print % % % % % is ask % is % % % % % % % % % % print % % % is % % % is ask % is % % % % % % % % % % print % % % is % % 
 "naam is ask Hoe heet jij?
-if naam is Felienne print 'ok jij mag computeren' else print 'verboden toegang voor jou'",% is ask % % % % % is % print % % % % % print % % % % 
+if naam is Felienne print 'ok jij mag computeren' else print 'verboden toegang voor jou'",% is ask % % % if % is % print % % % % else print % % % % 
 "mens is ask Kies uit karel of Lotte
 ",% is ask % % % % % 
 "mens is ask Kies uit Karel of Eva?
-if mens is Karel print 'Je hebt gekozen voor de Stoere Jongen' else print 'Je hebt gekozen voor de knappe prinses'",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % 
-if naam is Jonas print 'Mooie naam' else print 'stomme naam',% % is % print % % % print % % 
+if mens is Karel print 'Je hebt gekozen voor de Stoere Jongen' else print 'Je hebt gekozen voor de knappe prinses'",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % 
+if naam is Jonas print 'Mooie naam' else print 'stomme naam',if % is % print % % else print % % 
 "Naam is ask Wat is je naam
-if naam is Jonas print 'Mooie naam' else print 'stomme naam'",% is ask % is % % % % is % print % % % print % % 
+if naam is Jonas print 'Mooie naam' else print 'stomme naam'",% is ask % is % % if % is % print % % else print % % 
 "mens is ask Kies uit Karel of Eva
 if mens is Karel print 'Je hebt gekozen voor de stoere ridder' else print 'Je hebt gekozen voor de knappe prinses'
-print mens 'loopt door het bos' ",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % print % % % % % 
+print mens 'loopt door het bos' ",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % print % % % % % 
 "mens is ask Kies uit Karel of Eva
 if mens is Karel print 'Je hebt gekozen voor de stoere ridder' else print 'Je hebt gekozen voor de knappe prinses'
 print mens ' loopt door het bos' 
-print mens ' Hoort enge geluiden'",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % print % % % % % % print % % % % % 
+print mens ' Hoort enge geluiden'",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % print % % % % % % print % % % % % 
 "mens is ask Kies uit Karel of Eva
 if mens is Karel print 'Je hebt gekozen voor de stoere ridder' else print 'Je hebt gekozen voor de knappe prinses'
 print mens ' loopt door het bos' 
 print mens ' hoort enge geluiden'
-if mens is Karel print 'Hij pakt zijn zwaard' else print 'Ze gilt om een dappere ridder'",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % print % % % % % % print % % % % % % % is % print % % % % % print % % % % % % 
+if mens is Karel print 'Hij pakt zijn zwaard' else print 'Ze gilt om een dappere ridder'",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % print % % % % % % print % % % % % if % is % print % % % % else print % % % % % % 
 "mens is ask Kies uit Karel of Eva
 if mens is Karel print 'Je hebt gekozen voor de stoere ridder' else print 'Je hebt gekozen voor de knappe prinses'
 print mens ' loopt door het bos' 
 print mens ' hoort enge geluiden'
 if mens is Karel print 'Hij pakt zijn zwaard' else print 'Ze gilt om een dappere ridder'
-if mens is Karel print 'Hij gaat naar de bosjes waar het geluid uitkomt en vindt iets wat hij niet had durven dromen' else print 'Eva hoort dat er iets naar haar toekomt en wil wegrennen'",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % print % % % % % % print % % % % % % % is % print % % % % % print % % % % % % % % is % print % % % % % % % % % % % % % % % % % % % print % % % % % % % % % % % 
+if mens is Karel print 'Hij gaat naar de bosjes waar het geluid uitkomt en vindt iets wat hij niet had durven dromen' else print 'Eva hoort dat er iets naar haar toekomt en wil wegrennen'",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % print % % % % % % print % % % % % if % is % print % % % % else print % % % % % % if % is % print % % % % % % % % % % % % % % % % % % else print % % % % % % % % % % % 
 "mens is ask Kies uit Karel of Eva
 if mens is Karel print 'Je hebt gekozen voor de stoere ridder' else print 'Je hebt gekozen voor de knappe prinses'
 print mens ' loopt door het bos' 
 print mens ' hoort enge geluiden'
 if mens is Karel print 'Hij pakt zijn zwaard' else print 'Ze gilt om een dappere ridder'
 if mens is Karel print 'Hij gaat naar de bosjes waar het geluid uitkomt en vindt iets wat hij niet had durven dromen' else print 'Eva hoort dat er iets naar haar toekomt en wil wegrennen'
-if mens is Karel print 'Hij kijkt recht in de mooie blauwe ogen van Eva, Hij is dolblij' else print 'Toch draait ze zich om en kijkt recht in de ogen van de oo zo dappere Karel'",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % print % % % % % % print % % % % % % % is % print % % % % % print % % % % % % % % is % print % % % % % % % % % % % % % % % % % % % print % % % % % % % % % % % % % is % print % % % % % % % % % % % is % % print % % % % % % % % % % % % % % % % % 
+if mens is Karel print 'Hij kijkt recht in de mooie blauwe ogen van Eva, Hij is dolblij' else print 'Toch draait ze zich om en kijkt recht in de ogen van de oo zo dappere Karel'",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % print % % % % % % print % % % % % if % is % print % % % % else print % % % % % % if % is % print % % % % % % % % % % % % % % % % % % else print % % % % % % % % % % % if % is % print % % % % % % % % % % % is % else print % % % % % % % % % % % % % % % % % 
 "mens is ask Kies uit Karel of Eva
 if mens is Karel print 'Je hebt gekozen voor de stoere ridder' else print 'Je hebt gekozen voor de knappe prinses'
 print mens ' loopt door het bos' 
@@ -518,34 +518,34 @@ if mens is Karel print 'Hij gaat naar de bosjes waar het geluid uitkomt en vindt
 if mens is Karel print 'Hij kijkt recht in de mooie blauwe ogen van Eva, Hij is dolblij' else print 'Toch draait ze zich om en kijkt recht in de ogen van de oo zo dappere ridder Karel'
 if mens is Karel print 'Karel geeft haar een kus en naar haar mee naar zijn bijzondere paard' else print 'Eva rent naar Karel en omhelst hem'
 Kleur is oranje, paarse, witte, zwarte
-print 'Karel tilt Eva op zijn Kleur at random paard'",% is ask % % % % % % % is % print % % % % % % % % print % % % % % % % print % % % % % % print % % % % % % % is % print % % % % % print % % % % % % % % is % print % % % % % % % % % % % % % % % % % % % print % % % % % % % % % % % % % is % print % % % % % % % % % % % is % % print % % % % % % % % % % % % % % % % % % % % is % print % % % % % % % % % % % % % % print % % % % % % % % is % % % % print % % % % % % % % % 
+print 'Karel tilt Eva op zijn Kleur at random paard'",% is ask % % % % % if % is % print % % % % % % % else print % % % % % % % print % % % % % % print % % % % % if % is % print % % % % else print % % % % % % if % is % print % % % % % % % % % % % % % % % % % % else print % % % % % % % % % % % if % is % print % % % % % % % % % % % is % else print % % % % % % % % % % % % % % % % % % if % is % print % % % % % % % % % % % % % else print % % % % % % % % is % % % % print % % % % % % at random % 
 "verhaal is ask wil je een verhaal horen?
 if verhaal is ja print 'oke er was eens een persoon genaamd henkie en henkie wilde heel graag astronaut worden' else print 'oke dan niet'
-vervolg is ask wil je verder lezen?",% is ask % % % % % % % is % print % % % % % % % % % % % % % % % % print % % % % is ask % % % % 
+vervolg is ask wil je verder lezen?",% is ask % % % % % if % is % print % % % % % % % % % % % % % % % else print % % % % is ask % % % % 
 "verhaal is ask wil je een verhaal horen?
 if verhaal is ja print 'oke er was eens een persoon genaamd henkie en henkie wilde heel graag astronaut worden' else print 'oke dan niet'
 vervolg is ask wil je verder lezen?
-if vervolg is ja print 'Henkie ging bij NASA werken en ging op een leeftijd van 69 dood nice' else print 'oke dan niet'",% is ask % % % % % % % is % print % % % % % % % % % % % % % % % % print % % % % is ask % % % % % % is % print % % % % % % % % % % % % % % % print % % % 
+if vervolg is ja print 'Henkie ging bij NASA werken en ging op een leeftijd van 69 dood nice' else print 'oke dan niet'",% is ask % % % % % if % is % print % % % % % % % % % % % % % % % else print % % % % is ask % % % % if % is % print % % % % % % % % % % % % % % else print % % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 print computerkeuze
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % print % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % at random print % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 print computerkeuze
 print jouwkeuze
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % print % print % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % at random print % print % if % is % % % is % print % % % if % is % % % is % print % % 
 "naam is ask hoe heet jij?
-print naam at random",% is ask % % % print % % % 
+print naam at random",% is ask % % % print % at random 
 "spel is ask jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 ",% is ask % % % % is % % % 
@@ -554,23 +554,23 @@ jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% % is % print % % % print % % % % % % % % is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",if % is % print % % else print % % % % % % % % is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "naam is ask hoe heet jij?
 print 'je loopt in het bos'
 einde is ask loop je door of niet
 einde is ask wil je dood of niet? 
-if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % % % % % % is ask % % % % % % is ask % % % % % % % is % print % % % % % % % % print % % % % % % 
+if einde is dood print 'ze vecht tegen het monster en verliest' else print 'ze rent weg en overleeft het'",% is ask % % % print % % % % % % is ask % % % % % % is ask % % % % % if % is % print % % % % % % % else print % % % % % % 
 "print 'Shirin loopt rustig door het bos'
 print 'Ze komt een draak tegen'
 einde is ask Wil je een goed, middelmatig of slecht einde?
 if einde is goed print 'Ze doet een drakendans en de draak vliegt weg' if einde is middelmatig print 'De draak kijkt shirin aan en ze weet niet wat ze moet doen' else print 'De draak spuugt vuur en shirin vliegt in brand'
-",print % % % % % % print % % % % % % is ask % % % % % % % % % % is % print % % % % % % % % % % % is % print % % % % % % % % % % % % % % print % % % % % % % % % 
+",print % % % % % % print % % % % % % is ask % % % % % % % % if % is % print % % % % % % % % % if % is % print % % % % % % % % % % % % % else print % % % % % % % % % 
 "print 'Hallo ik heet Merel'
 Naamq is ask hoe heet jij
 print 'hallo ' naam1
 gevoel is ask Gaat het goed of slecht met jou?
 if gevoel is goed print 'fijn om te horen' else ask 'Wat is er aan de hand'
-",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % % % % % ask % is % % % % 
+",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % % % % else ask % is % % % % 
 "print 'Hallo ik heet willem'
 hij is ask hoe heet jij
 print 'hallo ' hij
@@ -582,7 +582,7 @@ jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint, ik had schaar'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint, want ik had shaar'",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % is % % print % % is % % % % is ask % % % % % % % % % % is % print % % % print % % % % % % % % is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % % % % is % % % is % print % % % % % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint, want ik had shaar'",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % is % else print % % is % % % % is ask % % % % % % % % if % is % print % % else print % % % % % % % % is ask % % % % is % % % % is % at random if % is % % % is % print % % % % % % if % is % % % is % print % % % % % % 
 "print 'Hallo ik heet willem'
 hij is ask hoe heet jij
 print 'hallo ' hij
@@ -594,18 +594,18 @@ jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint, want ik had shaar'",print % % % % % is ask % % % print % % % % is ask % % % % % % % % % is % print % is % % print % % is % % % % is ask % % % % % % % % % % is % print % % % print % % % % % % % % is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint, want ik had shaar'",print % % % % % is ask % % % print % % % % is ask % % % % % % % if % is % print % is % else print % % is % % % % is ask % % % % % % % % if % is % print % % else print % % % % % % % % is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % % % % % 
 "print 'De muis loopt door het huis'
 print 'Hij loopt om het hoekje'
 print 'Hij ziet een stukje kaas wat hij wil hebben, maar daarnaast ligt een kat'
 einde is ask Kaas pakken of niet pakken?
-if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else print 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % print % % % % % % % % % % % % % % % is ask % % % % % % % is % print % % % % % % % % % % % % % print % % % % % % % % % % 
+if einde is pakken print 'Hij sluipt er naartoe, maar maakt te veel geluid en wordt opgegeten' else print 'Hij loopt rustig weg en probeert het een andere keer'",print % % % % % % print % % % % % print % % % % % % % % % % % % % % % is ask % % % % % if % is % print % % % % % % % % % % % % else print % % % % % % % % % % 
 "print 'Hallo welkom bij hedy ik ga een verhaaltje vertellen'
 print 'Shirin loopt rustig door het bos'
 print 'Ze komt een draak tegen'
 einde is ask Wil je een goed of slecht einde?
 if einde is goed print 'Ze doet een drakendans en de draak vliegt weg' else print 'De draak spuugt vuur en shirin vliegt in brand'
-",print % % % % % % % % % print % % % % % % print % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % print % % % % % % % % % 
+",print % % % % % % % % % print % % % % % % print % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % else print % % % % % % % % % 
 Naam is nienke,% is % 
 "Naam is nienke
 print naam 'is lekker aan het voetballen met haar vrienden'",% is % print % % % % % % % % % 
@@ -619,7 +619,7 @@ print naam ' is lekker aan het voetballen met haar vrienden'
 print 'alles gaat heel goed en ' naam ' heeft net gescoord'",% is % print % % is % % % % % % % print % % % % % % % % % % % 
 "print 'hallo wereld'
 naam is ask 'wat is je naam'
-if naam is karlijn print 'leuke naam' else print hallo",print % % % is ask % is % % % % is % print % % % print % 
+if naam is karlijn print 'leuke naam' else print hallo",print % % % is ask % is % % if % is % print % % else print % 
 "print 'hoi ik ben kick'
 Beroep is ask Wat is je beroep?
 print 'dus jij bent' Beroep",print % % % % % is ask % is % % print % % % % 
@@ -629,7 +629,7 @@ print 'dus jij bent ' Beroep",print % % % % % is ask % is % % print % % % % %
 "print 'Jantien loopt naar de bakker'
 print 'als ze opeens een dief tegenkomt'
 einde is ask Wil je een goed of slecht einde?
-if einde is goed print 'ze slaat de dief op de grond en rent weg' else print 'de dief steelt al haar geld'",print % % % % % print % % % % % % % is ask % % % % % % % % % is % print % % % % % % % % % % % print % % % % % % 
+if einde is goed print 'ze slaat de dief op de grond en rent weg' else print 'de dief steelt al haar geld'",print % % % % % print % % % % % % % is ask % % % % % % % if % is % print % % % % % % % % % % else print % % % % % % 
 "print 'Een meisje loopt op straat'
 print 'ze ziet een busje'
 ",print % % % % % print % % % % 
@@ -639,11 +639,11 @@ einde is ask Wil je een goed of een slecht einde?",print % % % % % print % % % %
 "print 'Een meisje loopt op straat'
 print 'ze ziet een busje waar een man uitstapt'
 einde is ask Wil je een goed of een slecht einde?
-if Einde is goed print 'ze rent weg en ziet haar moeder' else print 'de man pakt het meisje en neemt haar mee in zijn busje'",print % % % % % print % % % % % % % % % is ask % % % % % % % % % % is % print % % % % % % % % print % % % % % % % % % % % % 
+if Einde is goed print 'ze rent weg en ziet haar moeder' else print 'de man pakt het meisje en neemt haar mee in zijn busje'",print % % % % % print % % % % % % % % % is ask % % % % % % % % if % is % print % % % % % % % else print % % % % % % % % % % % % 
 "print 'Een meisje loopt op straat'
 print 'ze ziet een busje waar een man uitstapt'
 einde is ask Wil je een goed of een slecht einde?
-if einde is goed print 'Ze rent weg en ziet gelukkig haar moeder' else print 'De man pakt het meisje en neem haar mee in zijn busje'",print % % % % % print % % % % % % % % % is ask % % % % % % % % % % is % print % % % % % % % % % print % % % % % % % % % % % % 
+if einde is goed print 'Ze rent weg en ziet gelukkig haar moeder' else print 'De man pakt het meisje en neem haar mee in zijn busje'",print % % % % % print % % % % % % % % % is ask % % % % % % % % if % is % print % % % % % % % % else print % % % % % % % % % % % % 
 "Eten is ask Wat is je lievelingseten?
 print 'dus je lievelings eten is' eten",% is ask % is % % print % % % % % % 
 "Eten is ask Wat is je lievelingseten?
@@ -651,45 +651,48 @@ print dus je lievelings eten is eten",% is ask % is % % print % % % % is %
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
-if computerkeuze is schaar and jouwkeuze is paper print 'de computer wint'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % 
+if computerkeuze is schaar and jouwkeuze is paper print 'de computer wint'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is paper print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'u heeft gewonnen'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'u heeft gewonnen'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % % 
 "keuzes is 1, 2, 3, 4, 5, regenworm
 worp is keuzes at random
-print 'je hebt ' worp 'gegooid '",% is % % % % % % % is % % % print % % % % % % 
+print 'je hebt ' worp 'gegooid '",% is % % % % % % % is % at random print % % % % % % 
 "keuzes is 1, 2, 3, 4, 5, regenworm
 worp is keuzes at random
-print 'je hebt ' worp ' gegooid ' ",% is % % % % % % % is % % % print % % % % % % % 
+print 'je hebt ' worp ' gegooid ' ",% is % % % % % % % is % at random print % % % % % % % 
 "keuzes is 1, 2, 3, 4, 5, regenworm
 worp is keuzes at random
 print 'je hebt ' worp ' gegooid ' 
-if worp is regenworm print 'je mag stoppen met gooien ' else print 'je mag nog een keer gooien '",% is % % % % % % % is % % % print % % % % % % % % % is % print % % % % % % % print % % % % % % % 
+if worp is regenworm print 'je mag stoppen met gooien ' else print 'je mag nog een keer gooien '",% is % % % % % % % is % at random print % % % % % % % if % is % print % % % % % % else print % % % % % % % 
 "keuzes is 1, 2, 3, 4, 5, regenworm
 worp is keuzes at random
 print 'je hebt ' worp ' gegooid '
-if worp is regenworm print 'je hoeft niet nog een keer te gooien' else print 'je mag nog een keer gooien'",% is % % % % % % % is % % % print % % % % % % % % % is % print % % % % % % % % % print % % % % % % 
+if worp is regenworm print 'je hoeft niet nog een keer te gooien' else print 'je mag nog een keer gooien'",% is % % % % % % % is % at random print % % % % % % % if % is % print % % % % % % % % else print % % % % % % 
 "mensen is Angelo, Erik, Jan
 afwasser is mensen at random
-if afwasser is Erik print 'tfoe dit doet pijn' else print ' ik wil eventjes lekker dansen'",% is % % % % is % % % % % is % print % % % % % print % % % % % % 
+if afwasser is Erik print 'tfoe dit doet pijn' else print ' ik wil eventjes lekker dansen'",% is % % % % is % at random if % is % print % % % % else print % % % % % % 
 print na dit potje moet ik even poepen,print % % % % % % % 
 "print 'Freek vindt weer eens een wild dier'
 print 'het wilde dier rent op Freek af'
 einde is ask wil je een goed of slecht einde?
-if einde is goed print 'Freek van de kut wurm' else print 'Freek word doodgebeten door de kutwurm'",print % % % % % % % print % % % % % % % % is ask % % % % % % % % % is % print % % % % % % print % % % % % % 
+if einde is goed print 'Freek van de kut wurm' else print 'Freek word doodgebeten door de kutwurm'",print % % % % % % % print % % % % % % % % is ask % % % % % % % if % is % print % % % % % else print % % % % % % 
 "naam is ask wat is je naam
-if naam is dean print leuk",% is ask % is % % % % is % print % 
+if naam is dean print leuk",% is ask % is % % if % is % print % 
 "naam is ask wat is je naam
 if naam is dean print ' leuk '
-",% is ask % is % % % % is % print % % % 
+",% is ask % is % % if % is % print % % % 
 "naam is ask wat is je naam
 if naam is dean print ' leuk ' if els 'minder leuk '
-",% is ask % is % % % % is % print % % % % % % % % 
+",% is ask % is % % if % is % print % % % if % % % % 
+"naam is ask wat is je naam
+if naam is dean print ' leuk ' if else 'minder leuk '
+",% is ask % is % % if % is % print % % % if else % % % 
 "naam is ask wat is je naam
 if naam is dean print ' leuk ' if else ' minder leuk '
-",% is ask % is % % % % is % print % % % % % % % % % 
+",% is ask % is % % if % is % print % % % if else % % % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
@@ -701,7 +704,7 @@ if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is papier print 'gelijk spel'
 if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
 if computerkeuze is steen and jouwkeuze is papier print 'jij wint'
-if computerkeuze is steen and jouwkeuze is steen print 'gelijk spel'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % 
+if computerkeuze is steen and jouwkeuze is steen print 'gelijk spel'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
@@ -713,7 +716,7 @@ if computerkeuze is papier and jouwkeuze is steen print 'papier : de computer wi
 if computerkeuze is papier and jouwkeuze is papier print 'papier : gelijk spel'
 if computerkeuze is steen and jouwkeuze is schaar print 'steen : de computer wint'
 if computerkeuze is steen and jouwkeuze is papier print 'steen : jij wint'
-if computerkeuze is steen and jouwkeuze is steen print 'steen : gelijk spel'",% is ask % % % % is % % % % is % % % % % is % % % is % print % : % % % % % is % % % is % print % : % % % % is % % % is % print % : % % % % is % % % is % print % : % % % % is % % % is % print % : % % % % % is % % % is % print % : % % % % is % % % is % print % : % % % % % is % % % is % print % : % % % % is % % % is % print % : % % 
+if computerkeuze is steen and jouwkeuze is steen print 'steen : gelijk spel'",% is ask % % % % is % % % % is % at random if % is % % % is % print % : % % % if % is % % % is % print % : % % if % is % % % is % print % : % % if % is % % % is % print % : % % if % is % % % is % print % : % % % if % is % % % is % print % : % % if % is % % % is % print % : % % % if % is % % % is % print % : % % if % is % % % is % print % : % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet kleur is roze'",% is ask % is % % print % % % is % 
 "print 'welk spel kies jij'
@@ -726,7 +729,7 @@ print 'jakobus kies roblox'
 print 'alle spelers kiezen roblox'
 print 'team 1 wint'",print % % % % print % % % print % % % % print % % % 
 "keuzes is tycho, casper, marius, kobe, jonas
-print keuzes at random",% is % % % % % print % % % 
+print keuzes at random",% is % % % % % print % at random 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, papier, schaar
 computerkeuze is at random
@@ -735,7 +738,7 @@ if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
-if computerkeuze is steen and jouwkeuze is papier print 'jij wint'",% is ask % % % % is % % % % is % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is steen and jouwkeuze is papier print 'jij wint'",% is ask % % % % is % % % % is at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, papier, schaar
 computerkeuze is keuzes at random
@@ -744,20 +747,20 @@ if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
-if computerkeuze is steen and jouwkeuze is papier print 'jij wint'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is steen and jouwkeuze is papier print 'jij wint'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % % 
 "kleur is ask wat is je lievelings kleur?
-if kleur is kubra print 'kanker mooi' else print 'kanker lelijk kleur a ezel'",% is ask % is % % % % % is % print % % % print % % % % % 
+if kleur is kubra print 'kanker mooi' else print 'kanker lelijk kleur a ezel'",% is ask % is % % % if % is % print % % else print % % % % % 
 "kleur is ask wat is je lievelings kleur
-if kleur is ilias print 'kanker mooi' else 'kanker lelijk'",% is ask % is % % % % % is % print % % % % % 
+if kleur is ilias print 'kanker mooi' else 'kanker lelijk'",% is ask % is % % % if % is % print % % else % % 
 "kleur is ask wat is je lievelings kleur
-if kleur is ilias print 'kanker mooi' else say 'kanker lelijk'",% is ask % is % % % % % is % print % % % % % % 
+if kleur is ilias print 'kanker mooi' else say 'kanker lelijk'",% is ask % is % % % if % is % print % % else % % % 
 wat is je naam,% is % % 
-if naam is john print leuk ,% % is % print % 
+if naam is john print leuk ,if % is % print % 
 "kleur is ask Wat is je lievelingskleur?
 print 'blauw ' kleur",% is ask % is % % print % % % 
 "mensen is mama, papa, lisa
 afwasser is mensen at random
-if afwasser is Sophie print 'chips ik moet de afwas doen' else print 'gelukkig geen afwas want ' afwasser ' doet het'",% is % % % % is % % % % % is % print % % % % % % % print % % % % % % % % % 
+if afwasser is Sophie print 'chips ik moet de afwas doen' else print 'gelukkig geen afwas want ' afwasser ' doet het'",% is % % % % is % at random if % is % print % % % % % % else print % % % % % % % % % 
 "print 'welkom bij SAO'
 print 'kies personage'
 ",print % % % print % % 
@@ -781,14 +784,14 @@ if computerkeuze is steen and jouwkeuze is schaar print 'jij wint'
 if computerkeuze is steen and jouwkeuze is papier print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is steen print 'jij wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'de computer wint'
-",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % 
+",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet is dus ' kleur
 print 'Jouw favorier is dus rood'",% is ask % is % % print % % is % % % print % % is % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier 
 computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'    
-if computerkeuze is schaar and jouwkeuze is steen print ' jij wint'",% is ask % % % % is % % % % is % % % is % print % % % % % is % % % is % print % % % 
+if computerkeuze is schaar and jouwkeuze is steen print ' jij wint'",% is ask % % % % is % % % % is % % % is % print % % % if % is % % % is % print % % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier 
 computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'    
@@ -801,7 +804,7 @@ keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
 if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
-print mijn keuze was schaar",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % print % % % % 
+print mijn keuze was schaar",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % print % % % % 
 "kleur is ask Wat is het geslacht van jou date?
 print 'jou date word dus een ' kleur",% is ask % is % % % % % print % % % % % % % 
 "kleur is ask  is je fav dier?
@@ -809,7 +812,7 @@ print 'Jouw fav is dus ' dier",% is ask is % % % print % % is % % %
 "
 keuzes is steen, schaar, papier",% is % % % 
 "naam is ask moet je poepen?
-if naam is ja print 'ga naar de wc' else print 'je hoeft niet naar de wc'",% is ask % % % % % is % print % % % % % print % % % % % % 
+if naam is ja print 'ga naar de wc' else print 'je hoeft niet naar de wc'",% is ask % % % if % is % print % % % % else print % % % % % % 
 "kleur is ask Wat is je lievelingskleur?
 keuzes is steen, schaar, papier
 coputerkeuze is keuze at random 
@@ -821,7 +824,7 @@ if computerkeuze is steen and jouwkeuze is schaar print ' computer wint '
 if computerkeuze is steen and jouwkeuze is steen print 'geen winaar '
 if computerkeuze is papier and jouwkeuze is schaar print ' jij wint '
 if computerkeuze is papier and jouwkeuze is steen print 'computer wint '
-if computerkeuze is papier and jouwkeuze is papier print 'geen winaar '",% is ask % is % % % is % % % % is % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % 
+if computerkeuze is papier and jouwkeuze is papier print 'geen winaar '",% is ask % is % % % is % % % % is % at random if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % 
 "jouwkeuze is ask wat kies jij ?
 keuzes is steen, schaar, papier
 coputerkeuze is keuze at random 
@@ -833,7 +836,7 @@ if computerkeuze is steen and jouwkeuze is schaar print ' computer wint '
 if computerkeuze is steen and jouwkeuze is steen print 'geen winaar '
 if computerkeuze is papier and jouwkeuze is schaar print ' jij wint '
 if computerkeuze is papier and jouwkeuze is steen print 'computer wint '
-if computerkeuze is papier and jouwkeuze is papier print 'geen winaar '",% is ask % % % % % is % % % % is % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % 
+if computerkeuze is papier and jouwkeuze is papier print 'geen winaar '",% is ask % % % % % is % % % % is % at random if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % 
 print 'stik in je huig anders ga je aan de galg heddy Hedy',print % % % % % % % % % % % % 
 print 'stik in je huig anders ga je aan de galg  Hedy',print % % % % % % % % % % % 
 print 'hoi dit is een opdracht',print % % is % % 
@@ -843,28 +846,34 @@ print 'Jouw favoriet is dus ' kleur",% is ask % % % print % % is % % %
 print 'Jouw favoriet is dus geel ' kleur",% is ask % is % % print % % is % % % % 
 papier is ask,% is ask 
 "papier is ask
-steen is keuzes at random",% is ask % is % % % 
+steen is keuzes at random",% is ask % is % at random 
+"papier is ask
+steen is at random
+",% is ask % is at random 
+"papier is ask
+schaar is at random
+print 'de computer wint'",% is ask % is at random print % % % 
 "papier is ask
 schaar is at random
 print 'de computer wint'
 steen is ask
 schaar is at random
-print 'jij wint'",% is ask % is % % print % % % % is ask % is % % print % % 
+print 'jij wint'",% is ask % is at random print % % % % is ask % is at random print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is paier print 'de computer wint'
 if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % 
 "print 'Hallo welkom bij Hedy'
 jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",print % % % % % is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",print % % % % % is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "spel is ask Wat is je lievelingsspel?
 if spel is steen print 'laten we spelen ' else print 'ok '
-",% is ask % is % % % % is % print % % % % % print % % 
+",% is ask % is % % if % is % print % % % % else print % % 
 "jouwkeuze is ask wat kies jij? 
 keuze is steen, schaar, papier 
 computerkeuze is keuzes at random 
@@ -873,7 +882,7 @@ if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint' 
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint' 
 if computerkeuze is steen and jouwkeuze is papier print 'de computer wint' 
-if computerkeuze is steen and jouwkeuze is schaar print ' jij wint' ",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % 
+if computerkeuze is steen and jouwkeuze is schaar print ' jij wint' ",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % 
 "jouwkeuze is ask wat kies jij? 
 keuze is steen, schaar, papier 
 computerkeuze is keuzes at random 
@@ -881,10 +890,10 @@ if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
 if computerkeuze is schaar and jouwkeuze is steen print 'jij wint' 
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint' 
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint' 
-if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint' ",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % 
+if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint' ",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % 
 "jouwkeuze is ask wat kies jij
 keuzes is steen, papier, schaar
-computerkeuze is keuzes at random",% is ask % % % % is % % % % is % % % 
+computerkeuze is keuzes at random",% is ask % % % % is % % % % is % at random 
 "jouwkeuze is ask at kies jij?
 keuzes is steen, schaar, papier
 computerzeuze is keuzes at random
@@ -893,96 +902,96 @@ if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerzeuze is schaar and jouwkeuzs is steen print 'jij wint'",% is ask % % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerzeuze is schaar and jouwkeuzs is steen print 'jij wint'",% is ask at % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Fleur haar favoriete kleur is dus ' kleur",% is ask % is % % print % % % % is % % % 
 "naam is ask hoe heet jij?
 if naam is gerda print 'leuk ik wil spelletje doen' else print 'gerda is beter'
-",% is ask % % % % % is % print % % % % % % print % is % 
+",% is ask % % % if % is % print % % % % % else print % is % 
 "naam is ask hoe heet jij?
-if naam is gerda print leuk",% is ask % % % % % is % print % 
+if naam is gerda print leuk",% is ask % % % if % is % print % 
 "keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint '
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint '",% is % % % % is % % % % % is % % % is % print % % % % % % is % % % is % print % % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint '",% is % % % % is % at random if % is % % % is % print % % % % if % is % % % is % print % % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuzes is at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
 if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
-",% is ask % % % % is % % % % is % % % % is % % % is % print % % % % % is % % % is % print % % 
+",% is ask % % % % is % % % % is at random if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuzes is at random
-",% is ask % % % % is % % % % is % % 
+",% is ask % % % % is % % % % is at random 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kiesjij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papieer print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 geslacht is wat is je geslacht?,% is % is % % 
 "jouwkeuze is ask wat kies jij ?
 keuzes is steen , schaar , papier.
 computerkeuze is keuzes at random.
-",% is ask % % % % % is % % % % % % is % % % 
+",% is ask % % % % % is % % % % % % is % at % 
 "Jouwkeuze is ask Wat kies jij?
 print 'Jouw keuze is ' Jouwkeuze
 computerkeuze is steen, schaar, papier
 print 'computerkeuze is ' computerkeuze at random
 if computerkeuze is schaar and jouwkeuze is papier print 'De computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'Jij wint'",% is ask % % % print % % is % % % is % % % print % is % % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'Jij wint'",% is ask % % % print % % is % % % is % % % print % is % % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "Jouwkeuze is ask Wat kies jij?
 print 'Jouw keuze is ' Jouwkeuze
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'De computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'Jij wint'",% is ask % % % print % % is % % % is % % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'Jij wint'",% is ask % % % print % % is % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "Jouwkeuze is ask Wat kies jij?
 keuzes is steen, schaar, papier
 print 'Jouw keuze is ' Jouwkeuze
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'De computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'Jij wint'",% is ask % % % % is % % % print % % is % % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'Jij wint'",% is ask % % % % is % % % print % % is % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "mensen is mama, papa, Emma, Sophie
 afwasser is mensen at random
-if afwasser is Sophie print 'chips ik moet de afwas doen' else print 'gelukkig geen afwas want ' afwasser ' doet het'",% is % % % % % is % % % % % is % print % % % % % % % print % % % % % % % % % 
+if afwasser is Sophie print 'chips ik moet de afwas doen' else print 'gelukkig geen afwas want ' afwasser ' doet het'",% is % % % % % is % at random if % is % print % % % % % % else print % % % % % % % % % 
 "naam is ask Wat is je naam?
-if naam is ismael print 'bg bg' toi print 'tu est une grosse pute'",% is ask % is % % % % is % print % % % print % % % % % 
+if naam is ismael print 'bg bg' toi print 'tu est une grosse pute'",% is ask % is % % if % is % print % % % print % % % % % 
 "eten is ask wat is je lievelings eten?
-if eten is pasta print 'mmm lekker' else print 'Oh ok'",% is ask % is % % % % % is % print % % % print % % 
+if eten is pasta print 'mmm lekker' else print 'Oh ok'",% is ask % is % % % if % is % print % % else print % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet is dus ' rood en groen",% is ask % is % % print % % is % % % % % 
 "naam is ask hoe heet jij?
-if naam is amcik print 'evt yarram' else print 'hayir yarram !'",% is ask % % % % % is % print % % % print % % % 
+if naam is amcik print 'evt yarram' else print 'hayir yarram !'",% is ask % % % if % is % print % % else print % % % 
 "naam is ask yaram jij?
-if naam is amcik print 'evet tatlim' else print 'hayir tatlim'",% is ask % % % % is % print % % % print % % 
+if naam is amcik print 'evet tatlim' else print 'hayir tatlim'",% is ask % % if % is % print % % else print % % 
 "kleur is ask Is nora een mooie naam?
 print 'Ja ' kleur",% is ask % % % % % print % % % 
 "kleur is ask Wat is je lievelingskleur?
-if kleur is groen print 'je bent dom ' else print 'niet zo mooi'",% is ask % is % % % % is % print % % % % % print % % % 
+if kleur is groen print 'je bent dom ' else print 'niet zo mooi'",% is ask % is % % if % is % print % % % % else print % % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet is dus ' kleur
 sport is ask Wat is jouw lievelingssport?
 print 'Jouw favoriet is dus ' sport",% is ask % is % % print % % is % % % % is ask % is % % print % % is % % % 
 "kleur is ask wie is je lievelings persoon
-if kleur is Clément print 'hij is kei mooi' if kleur is Victor print 'hij is sterk in con' else print 'hij is gay'",% is ask % is % % % % % is % print % is % % % % is % print % is % % % % print % is % 
+if kleur is Clément print 'hij is kei mooi' if kleur is Victor print 'hij is sterk in con' else print 'hij is gay'",% is ask % is % % % if % is % print % is % % if % is % print % is % % % else print % is % 
 print Victor S is dom,print % % is % 
 "kleur is ask wie is je lievelings persoon
-if kleur is Clément print 'hij is kei mooi' if kleur is Victor H print 'hij is sterk in con' else print 'hij is gay'",% is ask % is % % % % % is % print % is % % % % is % % print % is % % % % print % is % 
+if kleur is Clément print 'hij is kei mooi' if kleur is Victor H print 'hij is sterk in con' else print 'hij is gay'",% is ask % is % % % if % is % print % is % % if % is % % print % is % % % else print % is % 
 "kleur is wie is je crush?
 print 'Jouw favoriet is dus ' trump",% is % is % % print % % is % % % 
 "kleur is wie is je crush?
 print 'Jouw favoriet is dus ' donald trump",% is % is % % print % % is % % % % 
 "kleur is ask wie is je lievelings persoon
-if kleur is Clément print 'hij is kei mooi' else print 'hij is gay'",% is ask % is % % % % % is % print % is % % % print % is % 
+if kleur is Clément print 'hij is kei mooi' else print 'hij is gay'",% is ask % is % % % if % is % print % is % % else print % is % 
 "print 'Hi ik haat trump'
 trump is ask 'wat is je mening over trump'
 print 'dus je mening over trump is dus' trump",print % % % % % is ask % is % % % % print % % % % % is % % 
@@ -990,19 +999,19 @@ print 'dus je mening over trump is dus' trump",print % % % % % is ask % is % % %
 trump is ask ' wat is je mening over trump'
 print ' dus je mening over trump is dus'",print % % % % % is ask % % is % % % % print % % % % % % is % 
 "kleur is ask vind je mij leuk
-if kleur is ja print 'OMG I love you' else print 'fuck you son of a bitch'",% is ask % % % % % % is % print % % % % % print % % % % % % 
+if kleur is ja print 'OMG I love you' else print 'fuck you son of a bitch'",% is ask % % % % if % is % print % % % % else print % % % % % % 
 "print 'Hi ik haat trump'
 trump is ask 'hoe kut vind je trump'
 print 'je vind hem dus ' trump",print % % % % % is ask % % % % % print % % % % % % 
 "louise is ask hoe heet jij?
-if naam is Luise print jouw naam is",% is ask % % % % % is % print % % is 
+if naam is Luise print jouw naam is",% is ask % % % if % is % print % % is 
 "jouwkeuze is ask hey shitass wanna see me speedrun
 keuze is yes, no
 computerkeuze is keuze at random
-if computerkeuze is yes and jouwkeuze is no print k",% is ask % % % % % % % is % % % is % % % % % is % % % is % print % 
+if computerkeuze is yes and jouwkeuze is no print k",% is ask % % % % % % % is % % % is % at random if % is % % % is % print % 
 "blanaam is ask Wat is jouw naam?
 if blanaam is Sacha print 'Wat mooi'
-",% is ask % is % % % % is % print % % 
+",% is ask % is % % if % is % print % % 
 "voornaam is Amir    
 print ik heet voornaam",% is % print % % % 
 "kleur is ask Wat is je lievelings muziek?
@@ -1010,7 +1019,7 @@ print 'Jouw favoriet is dus maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "kleur is ask Wat is je lievelings game?
 print 'Jouw favoriet is dus fortnite' ",% is ask % is % % % print % % is % % 
 "pop is ask is thiede u favo leerkracht?
-if pop is nee print ' goed geantwoord' else print 'ga op therapie'",% is ask is % % % % % % is % print % % % % print % % % 
+if pop is nee print ' goed geantwoord' else print 'ga op therapie'",% is ask is % % % % if % is % print % % % else print % % % 
 "jaar is ask  in welke klas zit je
 print 'dus je zit in ' jaar",% is ask % % % % % print % % % % % % 
 "groenten is ask Wat eet je het liefst als greonten?
@@ -1022,26 +1031,26 @@ print 'Adam woont in Belgiee' ",% is ask % % % print % % % %
 "kleur is ask Wat is je lievelings dier?
 print 'Jouw favoriet dier is dus een ' kleur",% is ask % is % % % print % % % is % % % % 
 "persoon is ask Wat is jouw favoriete HP charachter?
-if persoon is Draco print 'the boy with no choice' else pint 'Me too! '",% is ask % is % % % % % % is % print % % % % % % % % % % 
+if persoon is Draco print 'the boy with no choice' else pint 'Me too! '",% is ask % is % % % % if % is % print % % % % % else % % % % 
 print 'Hallo mijn naam is Noemi',print % % % is % 
 "naam is ask Hoe heet jij?
-if naam is Victor print 'leuk ' else print 'lelijk '",% is ask % % % % % is % print % % % print % % 
+if naam is Victor print 'leuk ' else print 'lelijk '",% is ask % % % if % is % print % % else print % % 
 "kleur is ask Wat is jou favorite kleur
 print 'jou favorite kleur is dus ' kleur",% is ask % is % % % print % % % is % % % 
 "minecraft is ask welke game vind jij leuk
-if game is minecraft print ' je heb gelijk '",% is ask % % % % % % % is % print % % % % % 
+if game is minecraft print ' je heb gelijk '",% is ask % % % % % if % is % print % % % % % 
 print 'ik eet jouw spullen met huid en lijm',print % % % % % % % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet is dus De Mooie Kleur: ' kleur",% is ask % is % % print % % is % % % % % % 
 "poep is ask Wat is poep?
-if poep is vies print ' poep is vies en ble ' else print ' poep is leuk en lekker '",% is ask % is % % % is % print % % is % % % % % print % % is % % % % 
+if poep is vies print ' poep is vies en ble ' else print ' poep is leuk en lekker '",% is ask % is % if % is % print % % is % % % % else print % % is % % % % 
 "naam is ask Wat is je naam?
-if naam is mette print 'mette doet het goed ' else print 'niemand doet het goed aleen mette '",% is ask % is % % % % is % print % % % % % % print % % % % % % % 
+if naam is mette print 'mette doet het goed ' else print 'niemand doet het goed aleen mette '",% is ask % is % % if % is % print % % % % % else print % % % % % % % 
 "keuzes is 1, 2, 3, 4, 5, 6
-worp is keuzes at random",% is % % % % % % % is % % % 
+worp is keuzes at random",% is % % % % % % % is % at random 
 "keuzes is 1, 2, 3, 4, 5, 6",% is % % % % % % 
 "naam is ask wat is je naam?
-if naam is Inge print 'hey ' naam else print 'ik zoek Inge'",% is ask % is % % % % is % print % % % % print % % % 
+if naam is Inge print 'hey ' naam else print 'ik zoek Inge'",% is ask % is % % if % is % print % % % else print % % % 
 "print ik ben Hedy de waarzegster 
 loterij is ask denk je dat je de loterij gaat winnen ",print % % % % % % is ask % % % % % % % % 
 "print hoi print ik ben Hedy de waarzegster 
@@ -1053,24 +1062,26 @@ if naam is fonger print 'is leuk'
 if naam is seraphine print 'is ook leuk'
 if naam is maelique print 'is ook echt leuk'
 if naam is valerie print 'is ook echt heel leuk'
-if naam is tijmen print 'is de beste progameerder'",% is ask % % % % % is % print % % % % is % print % % % % % is % print % % % % % % is % print % % % % % % % is % print % % % % 
+if naam is tijmen print 'is de beste progameerder'",% is ask % % % if % is % print % % if % is % print % % % if % is % print % % % % if % is % print % % % % % if % is % print % % % % 
 "naam is ask hoe heet jij?
 if naam is fonger print 'is leuk' 
 if naam is seraphine print 'is ook leuk'
 if naam is mealique print 'is ook echt leuk'
-if naam is valerie print 'is ook echt heel leuk'",% is ask % % % % % is % print % % % % is % print % % % % % is % print % % % % % % is % print % % % % % 
+if naam is valerie print 'is ook echt heel leuk'",% is ask % % % if % is % print % % if % is % print % % % if % is % print % % % % if % is % print % % % % % 
 "naam is ask hoe heet jij?
 if naam is fonger print 'is leuk' 
-if naam is seraphine print 'is ook leuk'",% is ask % % % % % is % print % % % % is % print % % % 
+if naam is seraphine print 'is ook leuk'",% is ask % % % if % is % print % % if % is % print % % % 
 "naam is ask hoe heet jij?
-if naam is tijmen print 'is leuk' naam is maelique print 'is ook leuk'",% is ask % % % % % is % print % % % is % print % % % 
+if naam is tijmen print 'is leuk' naam is maelique print 'is ook leuk'",% is ask % % % if % is % print % % % is % print % % % 
+"naam is ask hoe heet jij?
+if naam is tijmen print 'is leuk' maelique print 'is ook leuk'",% is ask % % % if % is % print % % % print % % % 
 "kleur is ask Wat is je lievelingskleur?
 print 'Jouw favoriet is dus ' kleur
 snelheid is ask Wat is je maximale snelheid?",% is ask % is % % print % % is % % % % is ask % is % % % 
 "print 'Hallo welkom bij Hedy'
 print 'het is verwarrend'",print % % % % print % is % 
 "mensen is mama, papa, Emma, Sophie
-print mensen at random",% is % % % % print % % % 
+print mensen at random",% is % % % % print % at random 
 "zender is ask Wat is zender?
 print ' mijn eerste zender was ' zender
 print ' mijn tweede ' zender ' met buizen '
@@ -1084,15 +1095,15 @@ print 'marleen is ' marleen",% is ask % is % print % is % %
 "marleen is ask Wie is marleen?
 print 'marleen is' marleen",% is ask % is % print % % % 
 "dier is ask Wat is je favoriete dier?
-if dier is hond print 'dat is een prachtig en lief beest' else print 'niet mijn favoriet maar oké'",% is ask % is % % % % % is % print % is % % % % % % print % % % % % 
+if dier is hond print 'dat is een prachtig en lief beest' else print 'niet mijn favoriet maar oké'",% is ask % is % % % if % is % print % is % % % % % else print % % % % % 
 "kleur is ask 'wat is je lievelingskleur? '
 if kleur is paars print 'wat een mooie kleur' else print 'ieuww maar okee '
-",% is ask % is % % % % % is % print % % % % % print % % % % 
+",% is ask % is % % % if % is % print % % % % else print % % % % 
 "kleur is ask 'wat is je lievelingskleur? '
 if kleur is paars print 'wat een mooie kleur ' else print 'ieuww maar okee '
-",% is ask % is % % % % % is % print % % % % % % print % % % % 
+",% is ask % is % % % if % is % print % % % % % else print % % % % 
 "dier is ask Wat is je favoriete dier?
-if dier is kat print 'dat is een heel stom dier' else print 'dat is oké' if dier is hond print 'dat is een prachtig en lief beest'",% is ask % is % % % % % is % print % is % % % % % print % is % % % is % print % is % % % % % 
+if dier is kat print 'dat is een heel stom dier' else print 'dat is oké' if dier is hond print 'dat is een prachtig en lief beest'",% is ask % is % % % if % is % print % is % % % % else print % is % if % is % print % is % % % % % 
 "print 'hoi ik ben hedy de waarzegger '
 print 'wil je weten of je levend uit het doolhof komt' 
 doolhof is ask denk je dat je levend uit het spookhuis komt
@@ -1104,7 +1115,7 @@ if keuze is links print 'goed zo' else print 'volgende keer beter'
 print 'op naar de volgende keuze'
 ac is ask wil je rechtdoor naar links of naar rechts ?
 if ac is rechtdoor print 'goed zo' else print 'jammer je gaat fout' 
-",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % % % is % print % % % % % print % % % % % % % % print % % % % % print % % % % % % % % % is ask % % % % % % % % is % print % % % print % % % print % % % % % % is ask % % % % % % % % % % % is % print % % % print % % % % 
+",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % if % is % print % % % % else print % % % % % % % % print % % % % % print % % % % % % % % % is ask % % % % % % if % is % print % % else print % % % print % % % % % % is ask % % % % % % % % % if % is % print % % else print % % % % 
 "print 'hoi ik ben hedy de waarzegger '
 print 'wil je weten of je levend uit het doolhof komt' 
 doolhof is ask denk je dat je levend uit het spookhuis komt
@@ -1114,12 +1125,12 @@ print 'er zijn 6 kanten waar je op kan'
 keuze is ask welke kant wil je op ? 
 if keuze is links print 'goed zo' else print 'volgende keer beter'
 
-",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % % % is % print % % % % % print % % % % % % % % print % % % % % print % % % % % % % % % is ask % % % % % % % % is % print % % % print % % % 
+",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % if % is % print % % % % else print % % % % % % % % print % % % % % print % % % % % % % % % is ask % % % % % % if % is % print % % else print % % % 
 "print 'hoi ik ben hedy de waarzegger '
 print 'wil je weten of je levend uit het doolhof komt' 
 doolhof is ask denk je dat je levend uit het spookhuis komt
 if doolhof is ja print 'dan gaan we door' else print 'jawel kom op je kan dit'
-",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % % % is % print % % % % % print % % % % % % 
+",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % if % is % print % % % % else print % % % % % % 
 "print 'hoi ik ben hedy de waarzegger '
 print 'wil je weten of je levend uit het doolhof komt' 
 doolhof is ask denk je dat je levend uit het spookhuis komt",print % % % % % % % print % % % % % % % % % % % is ask % % % % % % % % % 
@@ -1130,7 +1141,7 @@ naam is ask wat is jouw naam
 vraag is ask wat wil je weten
 ",print % % % is % % is ask % % % % 
 "naam is ask Wat is je naam? 
-if naam is Iglas print 'ahh jou moet ik hebben' else print 'Laat maar, sorry voor het lastigvallen'",% is ask % is % % % % is % print % % % % % % print % % % % % % 
+if naam is Iglas print 'ahh jou moet ik hebben' else print 'Laat maar, sorry voor het lastigvallen'",% is ask % is % % if % is % print % % % % % else print % % % % % % 
 "vraag is ask Wat is je vraag? 
 print 'Jouw vraag is' vraag ",% is ask % is % % print % % % % 
 "jouwkeuze is ask Wat kies jij?
@@ -1147,7 +1158,7 @@ if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
 if computerkeuze is steen and jouwkeuze is papier print 'jij wint'
 if computerkeuze is steen and jouwkeuze is steen print 'jullie winnen beide'
 if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
-",% is ask % % % % is % % % % is % % % print % % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % 
+",% is ask % % % % is % % % % is % at random print % % % % print % % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % 
 "jouwkeuze is ask Wat is jouw keuze?
 print jouwkeuze",% is ask % is % % print % 
 "jouwkeuze is ask Wat kies jij?
@@ -1161,36 +1172,45 @@ if computerkeuze is schaar and jouwkeuze is schaar print 'jullie winnen beide'
 if computerkeuze is papier and jouwkeuze is papier print 'jullie winnen beide'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
-",% is ask % % % % is % % % % is % % % print % % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % % % % % is % % % is % print % % 
+",% is ask % % % % is % % % % is % at random print % % % % print % % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask Wat kies jij?
 keuzes is steen, papier, schaar
 computerkeuze is keuzes at random
 print 'jij kiest ' jouwkeuze
 print 'de computer kiest ' computerkeuze
-",% is ask % % % % is % % % % is % % % print % % % % print % % % % % 
+",% is ask % % % % is % % % % is % at random print % % % % print % % % % % 
 "jouwkeuze is ask Wat kies jij?
 keuzes is steen, papier schaar
 computerkeuze is keuzes at random
 print 'jij kiest' jouwkeuze
 print 'de computer kiest' computerkeuze
-",% is ask % % % % is % % % % is % % % print % % % print % % % % 
+",% is ask % % % % is % % % % is % at random print % % % print % % % % 
+"jouwkeuze is ask wat kies jij?
+keuzes is steen, schaar, papier
+computerkeuze is keuzes at random
+if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
+if computerkeuze is papier and jouwkeuze is schaar print 'de computer wint'
+if computerkeuze is papier and jouwkeuze is steen print 'jij wint'
+if computerkeuze is steen and jouwkeuze is papier print 'de computer wint'
+if computerkeuze is steen and jouwkeuze is schaar print 'jij wint'",% is ask % % % % is % % % % is % at random if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % 
 "p is ask wie is je beste vriend?
-if p is quirijn print 'dat is leuk' else print 'dat is niet leuk'",% is ask % is % % % % % is % print % is % % print % is % % 
+if p is quirijn print 'dat is leuk' else print 'dat is niet leuk'",% is ask % is % % % if % is % print % is % else print % is % % 
 "keuzeSpeler is ask wat kies jij steen papier of schaar?
 v is steen, papier, schaar
 keuzecomputer is v at random 
-if keuzeSpeler is steen and keuzecomputer is papier print 'computer gewonnen'",% is ask % % % % % % % % is % % % % is % % % % % is % % % is % print % % 
+if keuzeSpeler is steen and keuzecomputer is papier print 'computer gewonnen'",% is ask % % % % % % % % is % % % % is % at random if % is % % % is % print % % 
 "keuzeSpeler is ask wat kies jij steen papier of schaar?
 v is steen, papier, schaar
 keuzeComputer is v at random
-print keuzeComputer",% is ask % % % % % % % % is % % % % is % % % print % 
+print keuzeComputer",% is ask % % % % % % % % is % % % % is % at random print % 
 "keuzeSpeler is ask wat kies jij steen papier of schaar?
 v is steen, papier, schaar
-keuzeComputer is v at random",% is ask % % % % % % % % is % % % % is % % % 
+keuzeComputer is v at random",% is ask % % % % % % % % is % % % % is % at random 
 "keuze is ask wat kies jij steen papier of schaar?
 v is steen, papier, schaar
 print v at random
-",% is ask % % % % % % % % is % % % print % % % 
+",% is ask % % % % % % % % is % % % print % at random 
 "p is ask hoe oud ben jij?
 print 'jij bent ' p ' jaar oud'",% is ask % % % % print % % % % % % % 
 "keuzeSpeler is ask wat kies jij steen papier of schaar?
@@ -1204,7 +1224,7 @@ if keuzeSpeler is schaar and keuzecomputer is schaar print 'computer schaar geli
 if keuzeSpeler is schaar and keuzecomputer is steen print 'computer steen computer wint'
 if keuzeSpeler is papier and keuzecomputer is steen print 'computer steen speler wint'
 if keuzeSpeler is papier and keuzecomputer is papier print 'computer papier gelijkspel'
-if keuzeSpeler is papier and keuzecomputer is schaar print 'computer schaar computer wint'",% is ask % % % % % % % % is % % % % is % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % 
+if keuzeSpeler is papier and keuzecomputer is schaar print 'computer schaar computer wint'",% is ask % % % % % % % % is % % % % is % at random if % is % % % is % print % % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % 
 "keuzeSpeler is ask wat kies jij steen papier of schaar?
 if keuzeSpeler is steen keuzecomputer is papier
 v is steen, papier, schaar
@@ -1217,7 +1237,7 @@ if keuzeSpeler is schaar and keuzecomputer is schaar print 'computer schaar geli
 if keuzeSpeler is schaar and keuzecomputer is steen print 'computer steen computer wint'
 if keuzeSpeler is papier and keuzecomputer is steen print 'computer steen speler wint'
 if keuzeSpeler is papier and keuzecomputer is papier print 'computer papier gelijkspel'
-if keuzeSpeler is papier and keuzecomputer is schaar print 'computer schaar computer wint'",% is ask % % % % % % % % % is % % is % % is % % % % is % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % 
+if keuzeSpeler is papier and keuzecomputer is schaar print 'computer schaar computer wint'",% is ask % % % % % % % if % is % % is % % is % % % % is % at random if % is % % % is % print % % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % 
 "keuzeSpeler is ask wat kies jij steen papier of schaar?
 if keuzeSpeler is steen keuzecomputer is papier
 if keuzeSpeler is papier keuzecomputer is schaar
@@ -1230,7 +1250,7 @@ if keuzeSpeler is schaar and keuzecomputer is schaar print 'computer schaar geli
 if keuzeSpeler is schaar and keuzecomputer is steen print 'computer steen computer wint'
 if keuzeSpeler is papier and keuzecomputer is steen print 'computer steen speler wint'
 if keuzeSpeler is papier and keuzecomputer is papier print 'computer papier gelijkspel'
-if keuzeSpeler is papier and keuzecomputer is schaar print 'computer schaar computer wint'",% is ask % % % % % % % % % is % % is % % % is % % is % % % is % % is % % % is % % % is % print % % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % % is % % % is % print % % % % % is % % % is % print % % % % 
+if keuzeSpeler is papier and keuzecomputer is schaar print 'computer schaar computer wint'",% is ask % % % % % % % if % is % % is % if % is % % is % if % is % % is % if % is % % % is % print % % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % if % is % % % is % print % % % % if % is % % % is % print % % % if % is % % % is % print % % % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
@@ -1242,7 +1262,7 @@ if computerkeuze is schaar and jouwkeuze is schaar print 'gelijk spel'
 if computerkeuze is steen and jouwkeuze is papier print 'jij wint'
 if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
 if computerkeuze is steen and jouwkeuze is steen print 'gelijk spel'
-",% is ask % % % % is % % % % is % % % print % % % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % 
+",% is ask % % % % is % % % % is % at random print % % % % % print % % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
@@ -1250,20 +1270,20 @@ print 'jouw keuze is: ' jouwkeuze
 print 'de computer kiest: ' computerkeuze
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
 if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'
-if computerkeuze is schaar and jouwkeuze is schaar print 'gelijk spel'",% is ask % % % % is % % % % is % % % print % % % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is schaar print 'gelijk spel'",% is ask % % % % is % % % % is % at random print % % % % % print % % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 print 'jouw keuze is: ' jouwkeuze
 print 'de computer kiest: ' computerkeuze
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % print % % % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % at random print % % % % % print % % % % % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
 print 'jouw keuze is: ' jouwkeuze
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % % % is % at random print % % % % % if % is % % % is % print % % % if % is % % % is % print % % 
 "jouwkeuze is ask wat kies jij?
 keuzes is steen, schaar, papier
 computerkeuze is keuzes at random
@@ -1277,15 +1297,15 @@ if computerkeuze is steen and jouwkeuze is schaar print 'de computer wint'
 if computerkeuze is steen and jouwkeuze is steen print 'gelijk spel'
 if computerkeuze is papier and jouwkeuze is steen print 'de computer wint'
 if computerkeuze is papier and jouwkeuze is schaar print 'jij wint'
-if computerkeuze is papier and jouwkeuze is papier print 'gelijk spel'",% is ask % % % % is % % % % is % % % print % % % % % print % % % % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % % % % is % % % is % print % % % % is % % % is % print % % 
+if computerkeuze is papier and jouwkeuze is papier print 'gelijk spel'",% is ask % % % % is % % % % is % at random print % % % % % print % % % % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % % if % is % % % is % print % % if % is % % % is % print % % 
 "spel is ask wat is je lievelingsspel?
-if spel is steen print 'laten we dan spelen' else print 'kanker dan maar op'",% is ask % is % % % % is % print % % % % % print % % % % 
+if spel is steen print 'laten we dan spelen' else print 'kanker dan maar op'",% is ask % is % % if % is % print % % % % else print % % % % 
 "
 
 
 
 antwoord is ask ""Wat gaat 's morgens op vier, s middags op twee en s avonds op drie voeten?
-if antwoord is mens print ' gefeliciteerd je hebt het goed het cijfer is 7 ' else print 'helaas probeer maar opnieuw'",% is ask % % % % % % % % % % % % % % % % % % is % print % % % % % % % % is % % % print % % % % 
+if antwoord is mens print ' gefeliciteerd je hebt het goed het cijfer is 7 ' else print 'helaas probeer maar opnieuw'",% is ask % % % % % % % % % % % % % % % % if % is % print % % % % % % % % is % % else print % % % % 
 "print 'Hallo ik ben Isa'
 print 'ik ben 13 jaar oud'
 sport is ask welke sport zit jij?
@@ -1350,68 +1370,68 @@ print 'ijskoffie halen'",print % % % % is ask % % % print % % % % print % % % % 
 print i like cheese and ham
 ",print % % % print % % % % % 
 "naam is ask hoe heet jij?
-if naam is zaka print 'zaka zou  prof kunnen worden'",% is ask % % % % % is % print % % % % % 
+if naam is zaka print 'zaka zou  prof kunnen worden'",% is ask % % % if % is % print % % % % % 
 "naam is ask hoe heet jij?
-if naam is dave print 'jij bent niet grappig' else print 'jij bent grappig'",% is ask % % % % % is % print % % % % % print % % % 
+if naam is dave print 'jij bent niet grappig' else print 'jij bent grappig'",% is ask % % % if % is % print % % % % else print % % % 
 "kleur is ask wat is je lievelingskleur?
-if kleur is groen print 'levi je bent gaaaaaaaaaaaaaaaaaaaay' else print",% is ask % is % % % % is % print % % % % % print 
+if kleur is groen print 'levi je bent gaaaaaaaaaaaaaaaaaaaay' else print",% is ask % is % % if % is % print % % % % else print 
 "naam is ask hoe heet jij?
-if naam is zaka print 'zaka zou er prof kunnen worden'",% is ask % % % % % is % print % % % % % % 
+if naam is zaka print 'zaka zou er prof kunnen worden'",% is ask % % % if % is % print % % % % % % 
 "naam is ask hoe heet jij?
 vrienden is justin, Jesse, Zakka, Oscar, Koan, Levi
-if naam is vrienden print 'jij bent Dave zijn vriend' else print 'jij bent lelijk'",% is ask % % % % is % % % % % % % % is % print % % % % % % print % % % 
+if naam is vrienden print 'jij bent Dave zijn vriend' else print 'jij bent lelijk'",% is ask % % % % is % % % % % % if % is % print % % % % % else print % % % 
 "naam is ask wat is je wachtwoord
-if naam is DUCK print 'GOED JE HEBT HET PROGRAMMA GEHACKT' else print 'FOUT FOUT FOUT'",% is ask % is % % % % is % print % % % % % % % print % % % 
+if naam is DUCK print 'GOED JE HEBT HET PROGRAMMA GEHACKT' else print 'FOUT FOUT FOUT'",% is ask % is % % if % is % print % % % % % % else print % % % 
 "naam is ask hoe heet jij?
 vrienden is justin, Jesse, zakka
-if naam is vrienden print 'jij zit bij Dave aan tafel' else print 'jij bent lelijk'",% is ask % % % % is % % % % % is % print % % % % % % % print % % % 
+if naam is vrienden print 'jij zit bij Dave aan tafel' else print 'jij bent lelijk'",% is ask % % % % is % % % if % is % print % % % % % % else print % % % 
 "vraag is ask Wat is het wachtwoord? 
-ifvraag is Pokemon Go print 'goed je bent slim' else print 'probeer het nog eens'",% is ask % is % % % is % % print % % % % % print % % % % 
+ifvraag is Pokemon Go print 'goed je bent slim' else print 'probeer het nog eens'",% is ask % is % % % is % % print % % % % else print % % % % 
 "naam is ask hoe heet jij?
-if naam is zaka print 'zaka zou  prof kunnen worden' else print jij niet",% is ask % % % % % is % print % % % % % % print % % 
+if naam is zaka print 'zaka zou  prof kunnen worden' else print jij niet",% is ask % % % if % is % print % % % % % else print % % 
 "naam is ask hoe heet jij?
-if naam is zaka print 'zaka zou  prof kunnen worden' else print 'jij word geen prof'",% is ask % % % % % is % print % % % % % % print % % % % 
+if naam is zaka print 'zaka zou  prof kunnen worden' else print 'jij word geen prof'",% is ask % % % if % is % print % % % % % else print % % % % 
 "naam is ask hoe heet jij?
-if naam is jesse print 'jij bent grappig' else print 'jij bent niet grappig'",% is ask % % % % % is % print % % % % print % % % % 
+if naam is jesse print 'jij bent grappig' else print 'jij bent niet grappig'",% is ask % % % if % is % print % % % else print % % % % 
 "
-if naam is zaka print 'zaka zou  prof kunnen worden' else print 'jij word geen prof'",% % is % print % % % % % % print % % % % 
+if naam is zaka print 'zaka zou  prof kunnen worden' else print 'jij word geen prof'",if % is % print % % % % % else print % % % % 
 "kleur is ask wie ben jij?
-if kleur is groen print 'dus jij bent tantou mooi' else print 'jij bent echt tantou lelijk'",% is ask % % % % % is % print % % % % % % print % % % % % 
+if kleur is groen print 'dus jij bent tantou mooi' else print 'jij bent echt tantou lelijk'",% is ask % % % if % is % print % % % % % else print % % % % % 
 "print 'hoi ik ben jessiulso de voorspeller'
 print 'ik kan voorspellen of jij de loterij wint'
 persoon is ask wie ben jij ?
-if persoon is jesse print 'jij wint de jackpot gefeliciteerd alvast' else print 'jij wint helaas deze keer niet misschien de volgende keer'",print % % % % % % print % % % % % % % % % is ask % % % % % % is % print % % % % % % % print % % % % % % % % % % 
+if persoon is jesse print 'jij wint de jackpot gefeliciteerd alvast' else print 'jij wint helaas deze keer niet misschien de volgende keer'",print % % % % % % print % % % % % % % % % is ask % % % % if % is % print % % % % % % else print % % % % % % % % % % 
 "print 'hoi ik ben jessiulso de voorspeller'
 print 'ik kan voorspellen of jij de loterij wint'
 persoon is ask wie ben jij ?
-if persoon is jesse print 'jij wint de jackpot gefeliciteerd alvast' else is print 'jij wint helaas deze keer niet misschien de volgende keer'",print % % % % % % print % % % % % % % % % is ask % % % % % % is % print % % % % % % % is print % % % % % % % % % % 
+if persoon is jesse print 'jij wint de jackpot gefeliciteerd alvast' else is print 'jij wint helaas deze keer niet misschien de volgende keer'",print % % % % % % print % % % % % % % % % is ask % % % % if % is % print % % % % % % else is print % % % % % % % % % % 
 "print 'hallo MUHAHAHAHA ik ben een hacker'
 print 'ik ga je hacken en jij kan mij toch niet stoppen want ik ben toch beter'
 print 'probeer dit maar eens te verslaan de eerste golf komt jou kant op'
 persoon is ask hahaha wat is dan mijn omas naam
-if persoon is GERDA print 'jaaazz waar' else 'nee voet fout'",print % % % % % % print % % % % % % % % % % % % % % % % print % % % % % % % % % % % % % % is ask % % is % % % % % % is % print % % % % % % 
+if persoon is GERDA print 'jaaazz waar' else 'nee voet fout'",print % % % % % % print % % % % % % % % % % % % % % % % print % % % % % % % % % % % % % % is ask % % is % % % % if % is % print % % else % % % 
 "naam is ask hoe heet jij?
 vrienden is jesse, dave, justin
-if naam is vrienden print 'jij bent grappig' else print 'jij bent niet grappig'",% is ask % % % % is % % % % % is % print % % % % print % % % % 
+if naam is vrienden print 'jij bent grappig' else print 'jij bent niet grappig'",% is ask % % % % is % % % if % is % print % % % else print % % % % 
 "print 'Hoi ik ben Hedy'
 print 'Ik kan voorspellen of jij morgen de loterij wint'
 ",print % % % % print % % % % % % % % % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij wint'
 persoon is ask Wie ben jij?
-if persoon is pleun print 'hoera je wint'",print % % % % print % % % % % % % % % % is ask % % % % % is % print % % % 
+if persoon is pleun print 'hoera je wint'",print % % % % print % % % % % % % % % % is ask % % % if % is % print % % % 
 "naam is ask hoe heet jij?
 if naam is zaka print 'zaka zou prof kunnen worden in voetball' else 
-print 'jij word geen prof in voetbal  ' ",% is ask % % % % % is % print % % % % % % % % print % % % % % % % 
+print 'jij word geen prof in voetbal  ' ",% is ask % % % if % is % print % % % % % % % else print % % % % % % % 
 "kleur is ask wie ben jij
-if kleur is oscar print 'je bent gay' else print 'niemand boeit jou'",% is ask % % % % % is % print % % % % print % % % 
+if kleur is oscar print 'je bent gay' else print 'niemand boeit jou'",% is ask % % % if % is % print % % % else print % % % 
 "naam is ask hoe heet jij?
 if naam is zaka print 'zaka zou prof kunnen worden
-' else print 'jij word geen prof' ",% is ask % % % % % is % print % % % % % % % print % % % % 
+' else print 'jij word geen prof' ",% is ask % % % if % is % print % % % % % % else print % % % % 
 "print 'hallo MUHAHAHAHA ik ben een hacker'
 print 'ik ga je hacken en jij kan mij toch niet stoppen want ik ben toch beter'",print % % % % % % print % % % % % % % % % % % % % % % % 
 "naam is ask hwachtwoord is ask wat is het gehijme wachtwoord
-if wachtwoord is wachtwoord print 'welkom mattan' else print 'ga weg stomme hacker'",% is ask % is ask % is % % % % % is % print % % % print % % % % 
+if wachtwoord is wachtwoord print 'welkom mattan' else print 'ga weg stomme hacker'",% is ask % is ask % is % % % if % is % print % % else print % % % % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
@@ -1423,18 +1443,18 @@ if persoon is greylin print slechtantwoord at random
 if persoon is greysson print slechtantwoord at random
 if persoon is greys print slechtantwoord at random
 if persoon is gregory print slechtantwoord at random
-if persoon is greyssis print slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % % % is % print % % % % % is % print % % % % % is % print % % % % % is % print % % % % % is % print % % % 
+if persoon is greyssis print slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random if % is % print % at random if % is % print % at random if % is % print % at random if % is % print % at random if % is % print % at random 
 "print 'hoi ik ben Hedy'
 print 'ik kan voorspellen of jij morgen de loterij wint'
 persoon is ask wie ben jij 
-if persoon is bekker print 'hoera jij wint' 'jij wind zeker' else print 'helaas je verliest' 'helaas volgend keer beter'",print % % % % print % % % % % % % % % % is ask % % % % % is % print % % % % % % % print % % % % % % % 
+if persoon is bekker print 'hoera jij wint' 'jij wind zeker' else print 'helaas je verliest' 'helaas volgend keer beter'",print % % % % print % % % % % % % % % % is ask % % % if % is % print % % % % % % else print % % % % % % % 
 "print 'haloah ik ben meneer beer'
 print 'ik kan voorspellen of jij morgen de loterij wint'
 persoon is ask Wie ben jij?
 goedeantwoorden is joehoe jij bent de winnaar, je wint, je hebt gewonnen
 slechteantwoorden is jammer, helaas, je hebt niet gwonnen
 if persoon is PASTINAAKJUH print goedeantwoorden at random else print slechteantwoorden at random
-",print % % % % % print % % % % % % % % % % is ask % % % % is % % % % % % % % % % % is % % % % % % % % is % print % % % % print % % % 
+",print % % % % % print % % % % % % % % % % is ask % % % % is % % % % % % % % % % % is % % % % % % if % is % print % at random else print % at random 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
@@ -1442,7 +1462,7 @@ if persoon is heylin print 'hoera je wint de loterij'
 goedantwoord is hoera je wint, joepie jij hebt gewonnen, je hebt gewonnen
 slechtantwoord is helaas volgede keer beter, helaas , nope, 
 if persoon is heylin print goedantwoord at random
-if persoon is greylin print slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % % % is % print % % % 
+if persoon is greylin print slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random if % is % print % at random 
 "print 'hey ik ben Julia'
 print 'ik kan voorspellen of jij de loterij wint'
 persoon is ask wat is je naam?
@@ -1450,91 +1470,91 @@ goedantwoord is 'hoera je wint jij wint ect helemaal joepieeeee'
 print stechtantwoord 'jammer volgende keer beter'
 if persoon is julia print 'goedantwoord at random' else print 'slechtantwoord at random'
 
-",print % % % % print % % % % % % % % % is ask % is % % % is % % % % % % % % print % % % % % % % is % print % % % % print % % % 
+",print % % % % print % % % % % % % % % is ask % is % % % is % % % % % % % % print % % % % % if % is % print % at % else print % at % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
 if persoon is heylin print 'hoera je wint de loterij'
 goedantwoord is hoera je wint, joepie jij hebt gewonnen, je hebt gewonnen
 slechtantwoord is helaas volgede keer beter, helaas , nope, 
-if persoon is heylin print goedantwoord at random else print at random persoon is greylin slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % % print % % % is % % % % 
+if persoon is heylin print goedantwoord at random else print at random persoon is greylin slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random else print at random % is % % at random 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
 if persoon is heylin print 'hoera je wint de loterij'
 goedantwoord is hoera je wint, joepie jij hebt gewonnen, je hebt gewonnen
 slechtantwoord is helaas volgede keer beter, helaas , nope, 
-if persoon is heylin print goedantwoord at random else print at random slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % % print % % % % % 
+if persoon is heylin print goedantwoord at random else print at random slechtantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random else print at random % at random 
 "print 'hey ik ben Julia'
 print 'ik kan voorspellen of jij de loterij wint'
 persoon is ask wat is je naam?
 goedantwoord is hoera je wint jij wint ect helemaal joepieeeee
 print stechtantwoord 'jammer volgende keer beter'
-if persoon is julia print 'goed antwoorden at random' else print 'slechte antwoorden at random'",print % % % % print % % % % % % % % % is ask % is % % % is % % % % % % % % print % % % % % % % is % print % % % % % print % % % % 
+if persoon is julia print 'goed antwoorden at random' else print 'slechte antwoorden at random'",print % % % % print % % % % % % % % % is ask % is % % % is % % % % % % % % print % % % % % if % is % print % % at % else print % % at % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
 if persoon is heylin print 'hoera je wint de loterij'
 goedantwoord is hoera je wint, joepie jij hebt gewonnen, je hebt gewonnen
 slechtantwoord is helaas volgede keer beter, helaas , nope, 
-if persoon is heylin print goedantwoord at random else print at random slechtantwoord",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % % print % % % 
+if persoon is heylin print goedantwoord at random else print at random slechtantwoord",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random else print at random % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
-if persoon is heylin print 'hoera je wint de loterij'",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % 
+if persoon is heylin print 'hoera je wint de loterij'",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % 
 "print 'Hoi ik ben MAGIC MONKIE'
 print 'Ikke kan loterij voorspellen'
 persoon is ask wie ben jij?
-if person is kaasxaaf print 'yes win epic' else print 'popopop noo'",print % % % % % print % % % % % is ask % % % % % is % print % % % % print % % 
+if person is kaasxaaf print 'yes win epic' else print 'popopop noo'",print % % % % % print % % % % % is ask % % % if % is % print % % % else print % % 
 "print 'hoi ik ben Hedy'
 print 'ik kan voorspellen of jij morgen de loterij wint'
 persoon is ask wie ben jij 
-if persoon is julie print 'hoera jij wint' else print 'helaas je verliest' ",print % % % % print % % % % % % % % % % is ask % % % % % is % print % % % % print % % % 
+if persoon is julie print 'hoera jij wint' else print 'helaas je verliest' ",print % % % % print % % % % % % % % % % is ask % % % if % is % print % % % else print % % % 
 "print 'hoi ik ga voorspellen of je de loterij gaat winnen'
 print 'vertel me eerst wie je bent'
 kandidaat is ask wie ben jij?
 if kandidaat is Zoe print 'hoera je wint de jackpot' else print 'helaas niks gewonnen'
-",print % % % % % % % % % % print % % % % % % % is ask % % % % % is % print % % % % % % print % % % 
+",print % % % % % % % % % % print % % % % % % % is ask % % % if % is % print % % % % % else print % % % 
 "wachtwoord is ask Wat is de geheime kleur om sims te kunnen spelen?
-if wachtwoord is blauw print 'eindelijk je mag spelen' wachtwoord is groen 'Joepieeee ga je gang' else print 'nope dit gaat niet werken! Toedels'",% is ask % is % % % % % % % % % % is % print % % % % % is % % % % % % print % % % % % % 
+if wachtwoord is blauw print 'eindelijk je mag spelen' wachtwoord is groen 'Joepieeee ga je gang' else print 'nope dit gaat niet werken! Toedels'",% is ask % is % % % % % % % % if % is % print % % % % % is % % % % % else print % % % % % % 
 "print 'ik weet of jij aardig of onaardig bent'
 persoon is ask wie ben jij?
-if persoon is Mijntje print 'bent super aardig' else print 'je bent helaas niet zo aardig'",print % % % % % % % % % is ask % % % % % is % print % % % % print % % % % % % 
+if persoon is Mijntje print 'bent super aardig' else print 'je bent helaas niet zo aardig'",print % % % % % % % % % is ask % % % if % is % print % % % else print % % % % % % 
 "wachtwoord is ask Wat is de geheime kleur om sims te kunnen spelen?
 if wachtwoord is blauw print 'eindelijk je mag spelen' else print 'nope dit gaat niet werken! Toedels'
-",% is ask % is % % % % % % % % % % is % print % % % % % print % % % % % % 
+",% is ask % is % % % % % % % % if % is % print % % % % else print % % % % % % 
 "wachtwoord is ask wat is het gehijme wachtwoord
-if code is wachtwoord print 'welkom mattan' else print 'ga weg stomme hacker'",% is ask % is % % % % % is % print % % % print % % % % 
+if code is wachtwoord print 'welkom mattan' else print 'ga weg stomme hacker'",% is ask % is % % % if % is % print % % else print % % % % 
 "wachtwoord is ask wat is het gehijme wachtwoord
-if code is wachtwoord print 'welkom mattan' else print 'ga weg hacker'",% is ask % is % % % % % is % print % % % print % % % 
+if code is wachtwoord print 'welkom mattan' else print 'ga weg hacker'",% is ask % is % % % if % is % print % % else print % % % 
 "naam is ask hwachtwoord is ask wat is het gehijme wachtwoord
-if wachtwoord is wachtwoord print 'welkom mattan' else print 'ga weg hacker'",% is ask % is ask % is % % % % % is % print % % % print % % % 
+if wachtwoord is wachtwoord print 'welkom mattan' else print 'ga weg hacker'",% is ask % is ask % is % % % if % is % print % % else print % % % 
 "print 'hey ik ben Julia'
 print 'ik kan voorspellen of jij de loterij wint'
 persoon is ask wat is je naam?
-if persoon is Julia print 'JAAAAA JE WINT DE LOTERIJ' else print 'sorry volgende keer beter'",print % % % % print % % % % % % % % % is ask % is % % % % is % print % % % % % % print % % % % 
+if persoon is Julia print 'JAAAAA JE WINT DE LOTERIJ' else print 'sorry volgende keer beter'",print % % % % print % % % % % % % % % is ask % is % % if % is % print % % % % % else print % % % % 
 "print 'Hoi ik ben MAGIC MONKIE'
 print 'Ikke kan loterij voorspellen'
 persoon is ask wie ben jij?
-if person is kaasxaaf print 'yes win epic' else 'popopop noo'",print % % % % % print % % % % % is ask % % % % % is % print % % % % % % 
+if person is kaasxaaf print 'yes win epic' else 'popopop noo'",print % % % % % print % % % % % is ask % % % if % is % print % % % else % % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
 if persoon is heylin print 'hoera je wint de loterij'
 goedantwoord is hoera je wint, joepie jij hebt gewonnen, je hebt gewonnen
 slechtantwoord is helaas volgede keer beter, helaas , nope, 
-if persoon is heylin print goedantwoord at random else print at random",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % % print % % 
+if persoon is heylin print goedantwoord at random else print at random",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random else print at random 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
-if persoon is heylin print 'hoera je wint de loterij' els 'nee je bent blut '",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % % % % % % 
+if persoon is heylin print 'hoera je wint de loterij' els 'nee je bent blut '",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % % % % % % 
 "print 'hoi ik ben hedy'
 print 'ik kan voorspellen of jij morgen de loterij gaar winnen'
 persoon is ask wie ben jij?
 if persoon is heylin print 'hoera je wint de loterij'
 goedantwoord is hoera je wint, joepie jij hebt gewonnen, je hebt gewonnen
 slechtantwoord is helaas volgede keer beter, helaas , nope, 
-if persoon is heylin print goedantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % % % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % % % is % print % % % 
+if persoon is heylin print goedantwoord at random",print % % % % print % % % % % % % % % % % is ask % % % if % is % print % % % % % % is % % % % % % % % % % % is % % % % % % % if % is % print % at random 
 "antwoord is ask wat staat staat op 4 poten als het jong is op 2 als het volwassen is en op 3 als het oud is?
 ",% is ask % % % % % % % % % is % % % % % is % % % % % % % 
 "idool is ask Wie je idool?
@@ -1552,38 +1572,38 @@ print 'Jouw favoriet is dus ' kleur",% is ask % % % print % % % % % % % % % is a
 print 'Ze komt een monster tegen'
 einde is ask print 'Wil je een goed einde of slecht einde'
 
-if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else slecht print 'Het monster eet de prinses op'",print % % % % % % print % % % % % % is ask print % % % % % % % % % % is % print % % % % % % % % % % % % print % % % % % % 
+if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg' else slecht print 'Het monster eet de prinses op'",print % % % % % % print % % % % % % is ask print % % % % % % % % if % is % print % % % % % % % % % % else % print % % % % % % 
 "print 'De prinses loopt door het bos'
 print 'Ze komt een monster tegen'
 einde is ask print 'Wil je een goed einde of slecht einde'
 
 if einde is goed print 'Ze pakt haar zwaard en het monster rent snel weg'
-if einde is slecht print 'Het monster eet de prinses op'",print % % % % % % print % % % % % % is ask print % % % % % % % % % % is % print % % % % % % % % % % % % is % print % % % % % % 
+if einde is slecht print 'Het monster eet de prinses op'",print % % % % % % print % % % % % % is ask print % % % % % % % % if % is % print % % % % % % % % % % if % is % print % % % % % % 
 "print 'Hoi ik ben Hedy de waarzegger'
 vraag is ask wat wil je weten
 antwoorden is ja, nee, misschien
-print antwoorden at random",print % % % % % % % is ask % % % % % is % % % print % % % 
+print antwoorden at random",print % % % % % % % is ask % % % % % is % % % print % at random 
 "print 'Hoi ik ben Hedy de waarzegger'
 vraag is wat wil je weten
 antwoorden is ja, nee, misschien
-print antwoorden at random",print % % % % % % % is % % % % % is % % % print % % % 
+print antwoorden at random",print % % % % % % % is % % % % % is % % % print % at random 
 "naam is ask Hoe heet jij
-if naam is Lotus print 'dat is een bloem' else print 'wat een mooie naam'",% is ask % % % % % is % print % is % % % print % % % % 
+if naam is Lotus print 'dat is een bloem' else print 'wat een mooie naam'",% is ask % % % if % is % print % is % % else print % % % % 
 "naam is ask Hoe heet jij
-if naam is Lotus print 'dat is een bloem' else 'wat een mooie naam'",% is ask % % % % % is % print % is % % % % % % % 
+if naam is Lotus print 'dat is een bloem' else 'wat een mooie naam'",% is ask % % % if % is % print % is % % else % % % % 
 "print 'ik ben de toverspiegel'
 naam is ask wie ben jij?
 print naam",print % % % % % is ask % % % print % 
 "print 'ik ben de toverspiegel'
 naam is ask wie ben jij?
-if naam is philene print 'jij bent de mooiste van het land' else 'philene is duizend maal mooier dan u'",print % % % % % is ask % % % % % is % print % % % % % % % % % is % % % % % 
+if naam is philene print 'jij bent de mooiste van het land' else 'philene is duizend maal mooier dan u'",print % % % % % is ask % % % if % is % print % % % % % % % else % is % % % % % 
 "print 'ik ben de eredivisiefreak'
 print 'ik weet waar jouw favoriete club gaat eindigen'
 club is ask wat is jouw favoriete club ?
-if club is ajax print 'jouw club gaat kampioen worden gefeliciteerd' else print 'helaas jouw club gaat dit jaar niet kampioen worden'",print % % % % print % % % % % % % % % is ask % is % % % % % % is % print % % % % % % % print % % % % % % % % % 
+if club is ajax print 'jouw club gaat kampioen worden gefeliciteerd' else print 'helaas jouw club gaat dit jaar niet kampioen worden'",print % % % % print % % % % % % % % % is ask % is % % % % if % is % print % % % % % % else print % % % % % % % % % 
 "print 'ik ben de toverspiegel'
 naam is ask wie ben jij?
-if naam is philene print 'jij bent de mooiste van het land' else ",print % % % % % is ask % % % % % is % print % % % % % % % % 
+if naam is philene print 'jij bent de mooiste van het land' else ",print % % % % % is ask % % % if % is % print % % % % % % % else 
 "print 'ik ben de eredivisiefreak'
 print 'ik weet waar jouw favoriete club gaat eindigen'
 club is ask wat is jouw favoriete club ?
@@ -1596,7 +1616,7 @@ print 'ik weet voor alle voetbalclubs op welke plek ze staan'
 club is ask voor welke voetbal club ben jij?
 nummer is derde, laatste, tweede, gediskwalificeerd
 if club is ajax print 'jouw club wordt kampioen' else print 'jouw club wordt ' nummer at random 
-",print % % % % % print % % % % % % % % % % % is ask % % % % % % % is % % % % % % is % print % % % % % print % % % % % % % 
+",print % % % % % print % % % % % % % % % % % is ask % % % % % % % is % % % % if % is % print % % % % else print % % % % % at random 
 "print ik ben hedy de voetbalwaarzegster
 print ik weet voor alle clubs waar ze gaan eindigen in de competitie
 club is ask voor welke club ben je?
@@ -1604,15 +1624,15 @@ club is ask voor welke club ben je?
 "vraag is ask voor welke club ben jij
 print 'Ik ben Hedy de voetbalvoorspeller'
 print 'ik weet op welke plek elke club komt ind kampioenschap'
-if club is Ajax print 'Ajax gaat winnen' else print 'jouw club verliest keihard'",% is ask % % % % % print % % % % % print % % % % % % % % % % % % is % print % % % % print % % % % 
+if club is Ajax print 'Ajax gaat winnen' else print 'jouw club verliest keihard'",% is ask % % % % % print % % % % % print % % % % % % % % % % if % is % print % % % else print % % % % 
 "vraag is ask voor welke club ben jij
 print 'Ik ben Hedy de voetbalvoorspeller'
 print 'ik weet op welke plek elke club komt ind kampioenschap'
-if is Ajax print 'Ajax gaat winnen' else print 'jouw club verliest keihard'",% is ask % % % % % print % % % % % print % % % % % % % % % % % is % print % % % % print % % % % 
+if is Ajax print 'Ajax gaat winnen' else print 'jouw club verliest keihard'",% is ask % % % % % print % % % % % print % % % % % % % % % % if is % print % % % else print % % % % 
 "club is ask voor welke club ben jij
 print 'Ik ben Hedy de voetbalvoorspeller'
 print 'ik weet op welke plek elke club komt ind kampioenschap'
-if club is Ajax print 'je club gaat winnen' else print 'jouw club verliest keihard'",% is ask % % % % % print % % % % % print % % % % % % % % % % % % is % print % % % % % print % % % % 
+if club is Ajax print 'je club gaat winnen' else print 'jouw club verliest keihard'",% is ask % % % % % print % % % % % print % % % % % % % % % % if % is % print % % % % else print % % % % 
 "print 'hey ik ben hedy de voetbalvoorspeller'
 print 'ik weet voor alle clubs op welke plek ze gaan eindigen in de competitie'
 club is ask voor welke club ben je?
@@ -1632,7 +1652,7 @@ print 'ja man vraag '",print % % % % is ask % % % % print % % % %
 keuzes is steen
 computerkeuze is keuzes at random
 if computerkeuze is schaar and jouwkeuze is papier print 'de computer wint'
-if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % is % % % % % is % % % is % print % % % % % is % % % is % print % % 
+if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'",% is ask % % % % is % % is % at random if % is % % % is % print % % % if % is % % % is % print % % 
 "keuze is lepon, riko ,je moeder",% is % % % % 
 "getal is ask wat is 4 + 4
 ",% is ask % is % + % 
