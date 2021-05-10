@@ -752,13 +752,13 @@ define('ace/mode/level7_highlight_rules', [], function(require, exports, module)
 
 });
 
-//  MODE LEVEL 8 SETUP
-define('ace/mode/level8', [], function(require, exports, module) {
+//  MODE LEVEL 8 and 9 SETUP
+define('ace/mode/level8and9', [], function(require, exports, module) {
 
   var oop = require("ace/lib/oop");
   var TextMode = require("ace/mode/text").Mode;
   var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level8_highlight_rules").ExampleHighlightRules;
+  var ExampleHighlightRules = require("ace/mode/level8and9_highlight_rules").ExampleHighlightRules;
 
   var Mode = function() {
     this.HighlightRules = ExampleHighlightRules;
@@ -783,8 +783,8 @@ define('ace/mode/level8', [], function(require, exports, module) {
 });
 
 
- //  Syntax rules level 8
-define('ace/mode/level8_highlight_rules', [], function(require, exports, module) {
+ //  Syntax rules level 8 and 9
+define('ace/mode/level8and9_highlight_rules', [], function(require, exports, module) {
   var oop = require("ace/lib/oop");
   var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
 
