@@ -104,6 +104,7 @@ def load_adventure_assignments_per_level(lang, level):
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
+            'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
             'start_code': adventure['levels'][level].get ('start_code', ''),
             'loaded_program': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['code'],
@@ -365,6 +366,7 @@ def programs_page (request):
 
     texts=TRANSLATIONS.data [requested_lang ()] ['Programs']
     ui=TRANSLATIONS.data [requested_lang ()] ['ui']
+    adventures = load_adventure_for_language(requested_lang ())['adventures']
 
     result = db_get_many ('programs', {'username': from_user or username}, True)
     programs = []
@@ -382,7 +384,7 @@ def programs_page (request):
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name')})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user)
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])

@@ -65,7 +65,7 @@ $(function() {
       window.editor.setValue (window.State.default_program);
     }
     else {
-      $ ('#program_name').val (tabName + ' - ' + window.State.level_title + ' ' + window.State.level);
+      $ ('#program_name').val (adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
       window.editor.setValue (adventures [tabName].start_code);
     }
 
