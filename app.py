@@ -426,7 +426,7 @@ def preprocess_code_similarity_measure(code, level):
 
 
 def get_similar_code(processed_code, level):
-    if lang in ["en"]: #TO-DO: Implement dutch files
+    if lang in ["en"]:
         filename = "coursedata/similar-code-files/level" + str(level) + lang + ".csv"
     else:
         filename = "coursedata/similar-code-files/level" + str(level) + "en.csv"
