@@ -68,6 +68,12 @@ If you want to run the website version locally, run:
 (.env)$ python app.py
 ```
 
+To run the unit tests:
+
+```bash
+(.env)$ python -m unittest discover -s tests
+```
+
 To make debugging a lot more convenient, enable **development mode**. If you do this, any HTML templates and Python
 source files you change and save will automatically be reloaded.
 
@@ -80,6 +86,16 @@ you can wrap the command in a loop to restart the server quickly).
 (.env)$ env FLASK_ENV=development python app.py
 # or in a loop if it stops too often
 (.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
+```
+
+If you want to run the website locally, but would prefer to use Docker instead of installing python, you can build a container image and run it like so:
+
+```bash
+docker build -t hedy .
+```
+and then
+```bash
+docker run -it --rm -p 5000:5000 hedy
 ```
 
 If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:

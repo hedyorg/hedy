@@ -96,13 +96,13 @@ else:
 
   def test_print_random(self):
     code = textwrap.dedent("""\
-keuzes is ['steen', 'schaar', 'papier']
-computerkeuze is keuzes[random]
-print('computer koos ' computerkeuze)""")
+    keuzes is ['steen', 'schaar', 'papier']
+    computerkeuze is keuzes[random]
+    print('computer koos ' computerkeuze)""")
     expected = textwrap.dedent("""\
-keuzes = ['steen', 'schaar', 'papier']
-computerkeuze=random.choice(keuzes)
-print('computer koos '+str(computerkeuze))""")
+    keuzes = ['steen', 'schaar', 'papier']
+    computerkeuze=random.choice(keuzes)
+    print('computer koos '+str(computerkeuze))""")
 
     result = hedy.transpile(code, 12)
 
@@ -110,17 +110,17 @@ print('computer koos '+str(computerkeuze))""")
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
-a is 2
-a is 3
-for a in range(2,4):
-  a is a + 2
-  b is b + 2""")
+    a is 2
+    a is 3
+    for a in range(2,4):
+      a is a + 2
+      b is b + 2""")
     expected = textwrap.dedent("""\
-a = '2'
-a = '3'
-for a in range(int(2), int(4)+1):
-  a = int(a) + int(2)
-  b = int(b) + int(2)""")
+    a = '2'
+    a = '3'
+    for a in range(int(2), int(4)+1):
+      a = int(a) + int(2)
+      b = int(b) + int(2)""")
 
     result = hedy.transpile(code, 12)
 
@@ -128,17 +128,17 @@ for a in range(int(2), int(4)+1):
 
   def test_if__else(self):
     code = textwrap.dedent("""\
-a is 5
-if a is 1:
-  x is 2
-else:
-  x is 222""")
+    a is 5
+    if a is 1:
+      x is 2
+    else:
+      x is 222""")
     expected = textwrap.dedent("""\
-a = '5'
-if str(a) == str('1'):
-  x = '2'
-else:
-  x = '222'""")
+    a = '5'
+    if str(a) == str('1'):
+      x = '2'
+    else:
+      x = '222'""")
 
     result = hedy.transpile(code, 12)
 
@@ -146,13 +146,13 @@ else:
 
   def test_forloop(self):
     code = textwrap.dedent("""\
-for i in range(1, 10):
-  print(i)
-print('wie niet weg is is gezien')""")
+    for i in range(1, 10):
+      print(i)
+    print('wie niet weg is is gezien')""")
     expected = textwrap.dedent("""\
-for i in range(int(1), int(10)+1):
-  print(str(i))
-print('wie niet weg is is gezien')""")
+    for i in range(int(1), int(10)+1):
+      print(str(i))
+    print('wie niet weg is is gezien')""")
 
     result = hedy.transpile(code, 12)
 
@@ -160,13 +160,13 @@ print('wie niet weg is is gezien')""")
 
   def test_for_nesting(self):
     code = textwrap.dedent("""\
-for i in range(1, 3):
-  for j in range(1,4):
-    print('rondje: ' i ' tel: ' j)""")
+    for i in range(1, 3):
+      for j in range(1,4):
+        print('rondje: ' i ' tel: ' j)""")
     expected = textwrap.dedent("""\
-for i in range(int(1), int(3)+1):
-  for j in range(int(1), int(4)+1):
-    print('rondje: '+str(i)+' tel: '+str(j))""")
+    for i in range(int(1), int(3)+1):
+      for j in range(int(1), int(4)+1):
+        print('rondje: '+str(i)+' tel: '+str(j))""")
 
     result = hedy.transpile(code, 12)
 
@@ -174,17 +174,17 @@ for i in range(int(1), int(3)+1):
 
   def test_if_nesting(self):
     code = textwrap.dedent("""\
-kleur is blauw
-kleurtwee is geel
-if kleur is blauw:
-  if kleurtwee is geel:
-    print('Samen is dit groen!')""")
+    kleur is blauw
+    kleurtwee is geel
+    if kleur is blauw:
+      if kleurtwee is geel:
+        print('Samen is dit groen!')""")
     expected = textwrap.dedent("""\
-kleur = 'blauw'
-kleurtwee = 'geel'
-if str(kleur) == str('blauw'):
-  if str(kleurtwee) == str('geel'):
-    print('Samen is dit groen!')""")
+    kleur = 'blauw'
+    kleurtwee = 'geel'
+    if str(kleur) == str('blauw'):
+      if str(kleurtwee) == str('geel'):
+        print('Samen is dit groen!')""")
 
     result = hedy.transpile(code, 12)
 
@@ -192,15 +192,15 @@ if str(kleur) == str('blauw'):
 
   def test_newprint(self):
     code = textwrap.dedent("""\
-leeftijd is input('Hoe oud ben jij?')
-print('Dus jij hebt zo veel verjaardagen gehad:')
-for i in range(0,leeftijd):
-    print(i)""")
+    leeftijd is input('Hoe oud ben jij?')
+    print('Dus jij hebt zo veel verjaardagen gehad:')
+    for i in range(0,leeftijd):
+        print(i)""")
     expected = textwrap.dedent("""\
-leeftijd = input('Hoe oud ben jij?')
-print('Dus jij hebt zo veel verjaardagen gehad:')
-for i in range(int(0), int(leeftijd)+1):
-  print(str(i))""")
+    leeftijd = input('Hoe oud ben jij?')
+    print('Dus jij hebt zo veel verjaardagen gehad:')
+    for i in range(int(0), int(leeftijd)+1):
+      print(str(i))""")
 
     result = hedy.transpile(code, 12)
 
@@ -208,11 +208,11 @@ for i in range(int(0), int(leeftijd)+1):
 
   def test_list(self):
     code = textwrap.dedent("""\
-fruit is ['appel', 'banaan', 'kers']
-print(fruit)""")
+    fruit is ['appel', 'banaan', 'kers']
+    print(fruit)""")
     expected = textwrap.dedent("""\
-fruit = ['appel', 'banaan', 'kers']
-print(str(fruit))""")
+    fruit = ['appel', 'banaan', 'kers']
+    print(str(fruit))""")
 
     result = hedy.transpile(code, 12)
 
@@ -220,13 +220,13 @@ print(str(fruit))""")
 
   def test_random(self):
     code = textwrap.dedent("""\
-fruit is ['banaan', 'appel', 'kers']
-randomfruit is fruit[random]
-print(randomfruit)""")
+    fruit is ['banaan', 'appel', 'kers']
+    randomfruit is fruit[random]
+    print(randomfruit)""")
     expected = textwrap.dedent("""\
-fruit = ['banaan', 'appel', 'kers']
-randomfruit=random.choice(fruit)
-print(str(randomfruit))""")
+    fruit = ['banaan', 'appel', 'kers']
+    randomfruit=random.choice(fruit)
+    print(str(randomfruit))""")
 
     result = hedy.transpile(code, 12)
 
@@ -234,13 +234,13 @@ print(str(randomfruit))""")
 
   def test_specific_access(self):
     code = textwrap.dedent("""\
-fruit is ['banaan', 'appel', 'kers']
-eerstefruit is fruit[1]
-print(eerstefruit)""")
+    fruit is ['banaan', 'appel', 'kers']
+    eerstefruit is fruit[1]
+    print(eerstefruit)""")
     expected = textwrap.dedent("""\
-fruit = ['banaan', 'appel', 'kers']
-eerstefruit=fruit[1-1]
-print(str(eerstefruit))""")
+    fruit = ['banaan', 'appel', 'kers']
+    eerstefruit=fruit[1-1]
+    print(str(eerstefruit))""")
 
     result = hedy.transpile(code, 12)
 
@@ -249,23 +249,23 @@ print(str(eerstefruit))""")
 #note that print(str(highscore)) will not print as it will compare 'score[i]' as str to a variable
   def test_everything_combined(self):
     code = textwrap.dedent("""\
-score is ['100', '300', '500']
-highscore is score[random]
-print('De highscore is: ' highscore)
-for i in range(1,3):
-    scorenu is score[i]
-    print('Score is nu ' scorenu)
-    if highscore is score[i]:
-        print(highscore)""")
+    score is ['100', '300', '500']
+    highscore is score[random]
+    print('De highscore is: ' highscore)
+    for i in range(1,3):
+        scorenu is score[i]
+        print('Score is nu ' scorenu)
+        if highscore is score[i]:
+            print(highscore)""")
     expected = textwrap.dedent("""\
-score = ['100', '300', '500']
-highscore=random.choice(score)
-print('De highscore is: '+str(highscore))
-for i in range(int(1), int(3)+1):
-  scorenu=score[i-1]
-  print('Score is nu '+str(scorenu))
-  if str(highscore) == str('score[i]'):
-    print(str(highscore))""")
+    score = ['100', '300', '500']
+    highscore=random.choice(score)
+    print('De highscore is: '+str(highscore))
+    for i in range(int(1), int(3)+1):
+      scorenu=score[i-1]
+      print('Score is nu '+str(scorenu))
+      if str(highscore) == str('score[i]'):
+        print(str(highscore))""")
 
     result = hedy.transpile(code, 12)
 
@@ -276,11 +276,11 @@ for i in range(int(1), int(3)+1):
     for i in range(0, 10):
       antwoord is input('Wat is 5*5')
       if antwoord is 24:
-          print('Dat is fout!')
+        print('Dat is fout!')
       else:
-          print('Dat is goed!')
+        print('Dat is goed!')
       if antwoord is 25:
-          i is 10""")
+        i is 10""")
 
     expected = textwrap.dedent("""\
     for i in range(int(0), int(10)+1):

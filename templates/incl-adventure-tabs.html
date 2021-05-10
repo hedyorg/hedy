@@ -18,7 +18,7 @@
           {% if assignment.short_name != 'level' %}
             <div data-tabtarget="t-{{assignment.short_name}}" class="hidden">
               {% if assignment.image %}
-                <img class="float-right w-48" src="/images/{{assignment.image}}">
+                <img class="float-right w-48" src="{{static('/images/' + assignment.image)}}">
               {% endif %}
               <div>
               {{ assignment.text|commonmark }}

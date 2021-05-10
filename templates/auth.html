@@ -6,10 +6,10 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="/vendor/jquery.min.js" type="text/javascript"></script>
-  <script src="/vendor/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/js/app.js" type="text/javascript"></script>
-  <script src="/js/auth.js" type="text/javascript"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8"></script>
+  <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
+  <script src="{{static('/js/auth.js')}}" type="text/javascript"></script>
   <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
   <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}

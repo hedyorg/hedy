@@ -24,19 +24,19 @@ def run_code(code):
     return out.getvalue().strip()
 
 
-class TestsLevel13(unittest.TestCase):
+class TestsLevel15(unittest.TestCase):
     maxDiff = None
 
     def test_print(self):
-        result = hedy.transpile("print('ik heet')", 13)
+        result = hedy.transpile("print('ik heet')", 15)
         self.assertEqual("print('ik heet')", result)
 
     def test_print_with_var(self):
-        result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", 13)
+        result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", 15)
         self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
 
     def test_print_with_calc_no_spaces(self):
-        result = hedy.transpile("print('5 keer 5 is ' 5*5)", 13)
+        result = hedy.transpile("print('5 keer 5 is ' 5*5)", 15)
         self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
 
     def test_print_calculation_times_directly(self):
@@ -45,7 +45,7 @@ class TestsLevel13(unittest.TestCase):
     nummertwee is 6
     print(nummer * nummertwee)""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         expected = textwrap.dedent("""\
     nummer = '5'
@@ -57,7 +57,7 @@ class TestsLevel13(unittest.TestCase):
         self.assertEqual("30", run_code(result))
 
     def test_transpile_ask(self):
-        result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", 13)
+        result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", 15)
         self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
 
     def test_if_with_indent(self):
@@ -70,7 +70,7 @@ naam = 'Hedy'
 if str(naam) == str('Hedy'):
   print('koekoek')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -93,7 +93,7 @@ else:
   print('Foutje')
   print('Het antwoord moest zijn '+str(antwoord))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -107,7 +107,7 @@ else:
     computerkeuze=random.choice(keuzes)
     print('computer koos '+str(computerkeuze))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -125,7 +125,7 @@ else:
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -143,7 +143,7 @@ else:
     else:
       x = '222'""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -157,7 +157,7 @@ else:
       print(str(i))
     print('wie niet weg is is gezien')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -171,7 +171,7 @@ else:
       for j in range(int(1), int(4)+1):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -189,7 +189,7 @@ else:
       if str(kleurtwee) == str('geel'):
         print('Samen is dit groen!')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -205,7 +205,7 @@ else:
     for i in range(int(0), int(leeftijd)+1):
       print(str(i))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -217,7 +217,7 @@ else:
     fruit = ['appel', 'banaan', 'kers']
     print(str(fruit))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -231,7 +231,7 @@ else:
     randomfruit=random.choice(fruit)
     print(str(randomfruit))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -245,7 +245,7 @@ else:
     eerstefruit=fruit[1-1]
     print(str(eerstefruit))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -270,7 +270,7 @@ else:
       if str(highscore) == str('score[i]'):
         print(str(highscore))""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -295,7 +295,7 @@ else:
       if str(antwoord) == str('25'):
         i = '10'""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -309,7 +309,7 @@ else:
     if ja == True:
       print('ja')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -322,7 +322,7 @@ else:
     ja = False
     if ja == False:
       print('ja')""")
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -336,7 +336,7 @@ else:
     if ja == True:
       print('ja')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -350,7 +350,7 @@ else:
     if ja == False:
       print('ja')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 
@@ -374,7 +374,72 @@ else:
     if jebenternog == False:
       print('Doei!')""")
 
-        result = hedy.transpile(code, 13)
+        result = hedy.transpile(code, 15)
+
+        self.assertEqual(expected, result)
+
+    def test_and(self):
+        code = textwrap.dedent("""\
+    if 5 is 5 and 4 is 4:
+        print('hallo')""")
+        expected = textwrap.dedent("""\
+    if str('5') == str('5') and str('4') == str('4'):
+      print('hallo')""")
+
+        result = hedy.transpile(code, 15)
+
+        self.assertEqual(expected, result)
+
+    def test_or(self):
+        code = textwrap.dedent("""\
+    if 5 is 5 or 4 is 4:
+        print('hallo')""")
+        expected = textwrap.dedent("""\
+    if str('5') == str('5') or str('4') == str('4'):
+      print('hallo')""")
+
+        result = hedy.transpile(code, 15)
+
+        self.assertEqual(expected, result)
+
+    def test_comment(self):
+        code = textwrap.dedent("""\
+    if 5 is 5 or 4 is 4:
+        print('hallo')
+        #comment""")
+        expected = textwrap.dedent("""\
+    if str('5') == str('5') or str('4') == str('4'):
+      print('hallo')
+      # ['comment']""")
+        result = hedy.transpile(code, 15)
+
+        self.assertEqual(expected, result)
+
+    def test_commentbegin(self):
+        code = textwrap.dedent("""\
+    # comment word
+    if 5 is 5 or 4 is 4:
+        print('hallo')
+        """)
+        expected = textwrap.dedent("""\
+    # [' comment word']
+    if str('5') == str('5') or str('4') == str('4'):
+      print('hallo')""")
+        result = hedy.transpile(code, 15)
+
+        self.assertEqual(expected, result)
+
+    def test_commentresult(self):
+        code = textwrap.dedent("""\
+    # comment word
+    if 5 is 5 or 4 is 4:
+        print('hallo')
+        """)
+        expected = textwrap.dedent("""\
+    # [' comment word']
+    if str('5') == str('5') or str('4') == str('4'):
+      print('hallo')""")
+        result = hedy.transpile(code, 15)
 
         self.assertEqual(expected, result)
 

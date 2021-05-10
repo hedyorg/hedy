@@ -22,6 +22,9 @@
         if (window.State.level == 3){
           window.editor.session.setMode("ace/mode/level3");
         }
+        if (window.State.level == 4){
+          window.editor.session.setMode("ace/mode/level4");
+        }
   }
 
 
@@ -148,7 +151,7 @@ function tryPaletteCode(exampleCode) {
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;
-  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  editor.setValue(exampleCode, MOVE_CURSOR_TO_END);
   window.State.unsaved_changes = false;
 }
 
