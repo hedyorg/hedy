@@ -109,6 +109,7 @@ logging.basicConfig(
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
 
 app = Flask(__name__, static_url_path='')
+csv.field_size_limit(sys.maxsize)
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
 utils.set_debug_mode_based_on_flask(app)
@@ -393,14 +394,14 @@ def get_concepts(level):
         return ['print', 'is', 'ask', 'if']
     elif level == 5:
         return ['print', 'is', 'ask', 'if', 'repeat', 'times']
-    elif level in ['6', '7']:
+    elif level in [6, 7]:
         return ['print', 'is', 'ask', 'if', 'repeat', 'times', '+', '-', '*']
-    elif level in ['8', '9', '10']:
+    elif level in [8, 9, 10]:
         return ['print', 'is', 'ask', 'if', 'for', 'range', '+', '-', '*']
-    return None
+    return []
 
 def preprocess_code_similarity_measure(code, level):
-    concepts = get_concepts(level)
+    concepts = get_concepts(int(level))
     words = code.split()
     print("The given code: ")
     print(code)
@@ -425,17 +426,21 @@ def preprocess_code_similarity_measure(code, level):
 
 
 def get_similar_code(processed_code, level):
-    if level > 10:  # Not enough data (yet) to get decent results
-        return None
-    filename = "coursedata/similar-code-files/level" + str(level) + "en" + ".csv"
-    shortest_distance = 10  # This is the threshold: when differ more than this value it's no longer similar code
+    if lang in ["en"]: #TO-DO: Implement dutch files
+        filename = "coursedata/similar-code-files/level" + str(level) + lang + ".csv"
+    else:
+        filename = "coursedata/similar-code-files/level" + str(level) + "en.csv"
+    print(filename)
+    shortest_distance = 30  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
+    line = 0
     try:
         with open(filename, mode='r', encoding='utf-8') as file:
-            csvFile = csv.reader(file)
+            csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
             for lines in csvFile:
+                line += 1
                 distance = lev(processed_code, lines[2])
-                if distance == 0:  # The code is identical, no need to search any further
+                if distance < 5:  # The code is identical, no need to search any further
                     similar_code = lines[0]
                     break
                 else:
