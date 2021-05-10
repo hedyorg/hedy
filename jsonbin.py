@@ -46,7 +46,9 @@ class JsonBinLogger:
     def _run(self):
         logger.debug('jsonbin logger started')
         while True:
+            logger.info('Dequeueing from jsonbin queue (DEBUG)')
             obj = self.queue.get()
+            logger.info('Dequeued an item from jsonbin queue, left: %d' % len(self.queue))
 
             try:
                 response = requests.post('https://api.jsonbin.io/b', json=obj, headers={
