@@ -174,7 +174,6 @@ if os.getenv ('IS_TEST_ENV'):
         print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
         # If session vars come in a header, set them.
         if 'x-session_vars' in request.headers:
-            print ('test received x-session_vars', request.headers ['x-session_vars'])
             session_vars = json.loads (request.headers ['x-session_vars'])
             for var in session_vars:
                 if var not in ['session_id']:
