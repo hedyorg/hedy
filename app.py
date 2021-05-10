@@ -408,6 +408,7 @@ def preprocess_code_similarity_measure(code, level):
     for word in words:
         if word not in concepts:
             code += re.sub(r"[a-z|A-Z|0-9|!?,''{}]", "%", word)
+            code += " "
         else:
             code += word + " "
     code = code.split()
@@ -426,7 +427,7 @@ def preprocess_code_similarity_measure(code, level):
 def get_similar_code(processed_code, level):
     if level > 10:  # Not enough data (yet) to get decent results
         return None
-    filename = "coursedata/similar-code-files/level" + str(level) + str(lang) + ".csv"
+    filename = "coursedata/similar-code-files/level" + str(level) + "en" + ".csv"
     shortest_distance = 10  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
     try:
