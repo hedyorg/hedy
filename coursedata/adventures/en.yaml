@@ -512,3 +512,67 @@ adventures:
                     ```
 
                 start_code: "print Welcome to this calculator!"
+                
+    restaurant:
+        name: "Restaurant"
+        description: "Create your own virtual restaurant"
+        image:
+        levels:
+            1:
+               story_text: |
+                   ## Restaurant
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
+                    
+                   ## Example Hedy code
+                     ```
+                    print Welcome to Hedy's restaurant
+                    ask What would you like to order? 
+                    echo So you would like to order...
+                    print Thanks you for your order! 
+                    print It's on its way! 
+                    ```
+                    
+                   ## Challenge
+                   Can you think of more line to add to your restaurant code? For example, can you ask the guests what they'd like to drink, tell them the price, or wish them a pleasant meal? 
+                   
+            2: 
+            story_text: |
+                   ## Restaurant
+                   In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only echo the order once and only remember the last thing that was ordered. 
+                   Now you can use variables and Hedy can remember both the food and the drinks! 
+                   
+                   ## Example Hedy Restaurant
+                   ```
+                   print Welcome to Hedy's restaurant!
+                   print Today we're serving pizza or lasagna. 
+                   food is ask What would you like to eat?
+                   print Great choice! The food is my favorite!
+                   topping is ask Would you like meat or veggies on that?
+                   print food with topping is on its way! 
+                   drinks is ask What would you like to drink with that?
+                   print Thank you for your order. 
+                   print Your food and drinks will be right there!
+                   ```
+                   
+                   ## Random Restaurant
+                   Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you! 
+                   Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
+                   You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                   
+                   ## Example Hedy Code Random Restaurant
+                   
+                   ```
+                   print Welcome to Hedy's Random Restaurant!
+                   print The only restaurant that will randomly choose your meal and its price for you!
+                   starters is salad, soup, carpaccio
+                   mains is pizza, brussels sprouts, spaghetti
+                   desserts is brownies, ice cream, french cheeses
+                   drinks is cola, beer, water
+                   prices is 1 dollar, 10 dollars, 100 dollars
+                   print You will start with: starters at random
+                   print Then we'll serve: mains at random
+                   print And as dessert: desserts at random
+                   print You will get a drinks to drink
+                   print That will be: prices at random
+                   print Thank you and enjoy your meal! 
+                   ```
