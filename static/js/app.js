@@ -4,9 +4,8 @@ var prev_similar_code;
 var similar_code;
 var general_answer;
 var last_question;
-var all_questions_asked;
 var level_answers = [null, null, null, null];
-var feedback_viewed = [null, null, null, null]; // Set the values for feedback_level 2 till 5
+var feedback_viewed = [null, null, null, null];
 var general_answered = false;
 
 (function() {
@@ -145,7 +144,9 @@ function runit(level, lang, cb) {
             error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
           } else if (response.feedback_level == 4) {
             error.showFeedback(ErrorMessages.Feedback_new, response.Feedback);
-          } else {
+          } else if (response.feedback_level == 5) {
+            error.showFeedback(ErrorMessages.Feedback_suggestion, response.Feedback);
+          }  else {
             error.showFeedback(ErrorMessages.Feedback_error, response.Feedback);
           }
         }
@@ -304,17 +305,14 @@ function feedback(answer) {
     feedback_viewed = [null, null, null, null];
     general_answered = false;
   } else if (general_answered == false) {
-    all_questions_asked = false;
+    last_question = 0;
     general_answer = answer;
     general_answered = true
     $('#feedback-popup .caption').text(get_level_question(feedback_viewed.indexOf(true)+2))
   } else {
-    console.log("Hier komen we!");
     level_answers[last_question - 2] = answer;
     console.log(level_answers);
     if (feedback_viewed.indexOf((true), last_question - 1) != -1) { // So there is some question left
-      console.log("Er is nog een vraag nodig!");
-      console.log("Dit is namelijk vraag " + (feedback_viewed.indexOf((true), last_question - 1) + 2));
       $('#feedback-popup .caption').text(get_level_question((feedback_viewed.indexOf((true), last_question - 1) + 2)));
     } else {
       if (prev_feedback_level >= 3) { // So similar code has been shown to the end-user, how do we retrieve it?
