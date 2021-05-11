@@ -400,6 +400,7 @@ def get_concepts(level):
         return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'for', 'in', 'range', '+', '-', '*']
     return []
 
+
 def preprocess_code_similarity_measure(code, level):
     print(code)
     concepts = get_concepts(int(level))
@@ -422,18 +423,17 @@ def preprocess_code_similarity_measure(code, level):
     print(code)
     return code
 
+
 def get_similar_code(processed_code, language, level):
     filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + ".csv"
     shortest_distance = 40  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
-    line = 0
     try:
         with open(filename, mode='r', encoding='utf-8') as file:
             csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
             for lines in csvFile:
-                line += 1
                 distance = lev(processed_code, lines[1])
-                if distance < 3:  # The code is similar enough, no need to search any further
+                if distance < 1:  # The code is identical, no need to search any further
                     similar_code = lines[0]
                     break
                 else:
