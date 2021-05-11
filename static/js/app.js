@@ -1,12 +1,11 @@
 var feedback_level;
 var prev_feedback_level;
-var prev_similar_code;
 var similar_code;
-var general_answer;
+var prev_similar_code;
+var general_answer = null;
 var last_question;
 var level_answers = [null, null, null, null];
 var feedback_viewed = [null, null, null, null];
-var general_answered = false;
 
 (function() {
 
@@ -301,11 +300,10 @@ function feedback(answer) {
     $('#feedback-popup').hide();
     $('#opaque').hide();
     feedback_viewed = [null, null, null, null];
-    general_answered = false;
-  } else if (general_answered == false) {
+    general_answer = null;
+  } else if (general_answer == null) {
     last_question = 0;
     general_answer = answer;
-    general_answered = true
     $('#feedback-popup .caption').text(get_level_question(feedback_viewed.indexOf(true)+2))
   } else {
     level_answers[last_question - 2] = answer;
@@ -333,7 +331,7 @@ function feedback(answer) {
       $('#feedback-popup').hide();
       $('#opaque').hide();
       feedback_viewed = [null, null, null, null]; // Set back to false to ensure that it won't pop-up in next error streak without looking
-      general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+      general_answer = null; // Set back to false to ensure that both questions are asked again in next mistake session
     }
   }
 }
