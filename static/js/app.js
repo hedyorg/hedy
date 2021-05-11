@@ -359,7 +359,7 @@ function reportClientError(level, code, client_error) {
 // Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
   if (prev_feedback_level > 1) {
-    if (feedback_viewed.indexOf(true) != -1) { // So there is a true value somewhere
+    if (feedback_viewed.indexOf(true) != -1) { // So there is a true value somewhere -> the user look at the feedback
       var count = 0;
       $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
       $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
