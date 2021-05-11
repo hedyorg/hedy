@@ -3,6 +3,9 @@ var prev_feedback_level;
 var prev_similar_code;
 var similar_code;
 var general_answer;
+var last_question;
+var all_questions_asked;
+var level_answers = [null, null, null, null];
 var feedback_viewed = [null, null, null, null]; // Set the values for feedback_level 2 till 5
 var general_answered = false;
 
@@ -264,38 +267,33 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
-function get_level_question() {
-  if (prev_feedback_level == 2) {
+function get_level_question(level) {
+  console.log("We roepen op vraag " + level);
+  if (level == 2) {
+    last_question = 2;
     return GradualErrorMessages.Feedback_question2;
-  } else if (prev_feedback_level == 3) {
+  } else if (level == 3) {
+    last_question = 3;
     return GradualErrorMessages.Feedback_question3;
-  } else if (prev_feedback_level == 4) {
+  } else if (level == 4) {
+    last_question = 4;
     return GradualErrorMessages.Feedback_question4;
   } else {
+    last_question = 5;
     return GradualErrorMessages.Feedback_question5;
   }
 }
 
 function feedback(answer) {
-  if (general_answered == false) {
-    general_answer = answer;
-    general_answered = true
-    $('#feedback-popup .caption').text(get_level_question()) // Change to level-dependent text
-  } else {
-    if (prev_feedback_level >= 3) { // So similar code has been shown to the end-user, how do we retrieve it?
-      similar_code = prev_similar_code
-    } else {
-      similar_code = "-" // No similar code has been given to the user
-    }
-    level_answer = answer;
+  if (answer == null) { // The user didn't look at any part of the model
     $.ajax({
       type: 'POST',
       url: '/feedback',
       data: JSON.stringify({
-        general_answer: general_answer,
-        level_answer: level_answer,
+        general_answer: null,
+        level_answers: [null, null, null, null],
         collapse: feedback_viewed,
-        similar_code: similar_code,
+        similar_code: "-",
         feedback_level: prev_feedback_level
       }),
       contentType: 'application/json',
@@ -303,8 +301,45 @@ function feedback(answer) {
     });
     $('#feedback-popup').hide();
     $('#opaque').hide();
-    feedback_viewed = [null, null, null, null]; // Set back to false to ensure that it won't pop-up in next error streak without looking
-    general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+    feedback_viewed = [null, null, null, null];
+    general_answered = false;
+  } else if (general_answered == false) {
+    all_questions_asked = false;
+    general_answer = answer;
+    general_answered = true
+    $('#feedback-popup .caption').text(get_level_question(feedback_viewed.indexOf(true)+2))
+  } else {
+    console.log("Hier komen we!");
+    level_answers[last_question - 2] = answer;
+    console.log(level_answers);
+    if (feedback_viewed.indexOf((true), last_question - 1) != -1) { // So there is some question left
+      console.log("Er is nog een vraag nodig!");
+      console.log("Dit is namelijk vraag " + (feedback_viewed.indexOf((true), last_question - 1) + 2));
+      $('#feedback-popup .caption').text(get_level_question((feedback_viewed.indexOf((true), last_question - 1) + 2)));
+    } else {
+      if (prev_feedback_level >= 3) { // So similar code has been shown to the end-user, how do we retrieve it?
+        similar_code = prev_similar_code
+      } else {
+        similar_code = "-" // No similar code has been given to the user
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/feedback',
+        data: JSON.stringify({
+          general_answer: general_answer,
+          level_answers: level_answers,
+          collapse: feedback_viewed,
+          similar_code: similar_code,
+          feedback_level: prev_feedback_level
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      });
+      $('#feedback-popup').hide();
+      $('#opaque').hide();
+      feedback_viewed = [null, null, null, null]; // Set back to false to ensure that it won't pop-up in next error streak without looking
+      general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+    }
   }
 }
 
@@ -332,21 +367,16 @@ function reportClientError(level, code, client_error) {
 function runPythonProgram(code, cb) {
   console.log(feedback_viewed);
   if (prev_feedback_level > 1) {
-    // We want to change this structure to ask a question for each of the collapsed windows
-    // So: create a for-loop, and for each true value in feedback_viewed: asked question!
-    // If false, return false and don't bother with the rest
-    // Makes it easier because now the POST can be done within this function as well
-    if (feedback_viewed[prev_feedback_level-2] == true) {
+    if (feedback_viewed.indexOf(true) != -1) { // So there is a true value somewhere
+      var count = 0;
       $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
       $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
       $('#feedback-popup .no').text(GradualErrorMessages.Feedback_answerN)
       $('#feedback-popup').show();
       $('#opaque').show();
-    } else {
-      feedback(false);
-      feedback(false);
-      // We have to call feedback() twice due to the code structure: not ideal of course
-      // However, this way we are able to log the users error-solving even when the ECEM is not read
+    }
+    else {
+      feedback(null);
     }
   }
 

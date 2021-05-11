@@ -362,7 +362,7 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
 def log_feedback():
     body = request.json
     general_answer = body['general_answer']
-    level_answer = body['level_answer']
+    level_answer = body['level_answers']
     feedback_level = int(body['feedback_level'])
     collapse = body['collapse']  # this is either true or false: The window was either expanded or not
     similar_code = body['similar_code']
