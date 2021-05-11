@@ -96,7 +96,7 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <div>
-      <div class="w-full h-72 flex flex-col">
+      <div class="w-full h-80 flex flex-col">
         <div id="editor" data-loaded-program="{{not not loaded_program}}"
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{loaded_program or
           start_code}}</div>
@@ -178,7 +178,7 @@
       <button id="runit" class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
     </div>
     <div>
-      <div class="h-72 flex flex-col">
+      <div class="h-80 flex flex-col">
         <!-- tabindex=0 makes the div focusable -->
         <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto">
         </div>
