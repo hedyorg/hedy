@@ -132,7 +132,6 @@ function runit(level, lang, cb) {
       prev_feedback_level = response.prev_feedback_level;
       feedback_viewed[feedback_level-2] = false; // Not viewed until we have viewed it
       prev_similar_code = response.prev_similar_code;
-      console.log('Response', response);
       if (response.Duplicate) {
         $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
         error.showFeedback(ErrorMessages.Feedback_duplicate, response.Feedback);
@@ -269,7 +268,6 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 }
 
 function get_level_question(level) {
-  console.log("We roepen op vraag " + level);
   if (level == 2) {
     last_question = 2;
     return GradualErrorMessages.Feedback_question2;
@@ -311,7 +309,6 @@ function feedback(answer) {
     $('#feedback-popup .caption').text(get_level_question(feedback_viewed.indexOf(true)+2))
   } else {
     level_answers[last_question - 2] = answer;
-    console.log(level_answers);
     if (feedback_viewed.indexOf((true), last_question - 1) != -1) { // So there is some question left
       $('#feedback-popup .caption').text(get_level_question((feedback_viewed.indexOf((true), last_question - 1) + 2)));
     } else {
@@ -363,7 +360,6 @@ function reportClientError(level, code, client_error) {
 // If there is a feedback level higher then 1: pop-up a window with feedback question
 // Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
-  console.log(feedback_viewed);
   if (prev_feedback_level > 1) {
     if (feedback_viewed.indexOf(true) != -1) { // So there is a true value somewhere
       var count = 0;
@@ -492,7 +488,6 @@ function runPythonProgram(code, cb) {
 
 $('#feedbackbox .expand-dialog').click(function(){
    feedback_viewed[feedback_level-2] = true;
-   console.log(feedback_viewed)
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();
    if (text === "▼ " + GradualErrorMessages.Click_shrink + " ▼"){
