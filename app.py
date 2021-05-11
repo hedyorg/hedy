@@ -434,7 +434,7 @@ def preprocess_code_similarity_measure(code, level):
 
 def get_similar_code(processed_code, language, level):
     filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + ".csv"
-    shortest_distance = 40  # This is the threshold: when differ more than this value it's no longer similar code
+    shortest_distance = 75  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
     try:
         with open(filename, mode='r', encoding='utf-8') as file:
