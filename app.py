@@ -377,6 +377,14 @@ def log_feedback():
         'collapse': collapse,
         'GFM': True
     })
+    debug = True
+    if debug:
+        print("TESTING FEEDBACK LOG INFORMATION")
+        print("Model was useful: " + str(general_answer))
+        print("Specific level was useful: " + str(level_answer))
+        print("Feedback level of fix: " + str(feedback_level))
+        print("Window was opened: " + str(collapse))
+        print("Possible similar code: " + str(similar_code))
 
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
     # We have to return something to the AJAX POST to show we are okay
