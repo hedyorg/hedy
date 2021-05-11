@@ -3,7 +3,7 @@ var prev_feedback_level;
 var prev_similar_code;
 var similar_code;
 var general_answer;
-var feedback_viewed = [false, false, false, false]; // Set the values for feedback_level 2 till 5
+var feedback_viewed = [null, null, null, null]; // Set the values for feedback_level 2 till 5
 var general_answered = false;
 
 (function() {
@@ -128,6 +128,7 @@ function runit(level, lang, cb) {
     }).done(function(response) {
       feedback_level = response.feedback_level;
       prev_feedback_level = response.prev_feedback_level;
+      feedback_viewed[feedback_level-2] = false; // Not viewed until we have viewed it
       prev_similar_code = response.prev_similar_code;
       console.log('Response', response);
       if (response.Duplicate) {
@@ -302,7 +303,7 @@ function feedback(answer) {
     });
     $('#feedback-popup').hide();
     $('#opaque').hide();
-    feedback_viewed = [false, false, false, false]; // Set back to false to ensure that it won't pop-up in next error streak without looking
+    feedback_viewed = [null, null, null, null]; // Set back to false to ensure that it won't pop-up in next error streak without looking
     general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
   }
 }
@@ -329,12 +330,12 @@ function reportClientError(level, code, client_error) {
 // If there is a feedback level higher then 1: pop-up a window with feedback question
 // Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
+  console.log(feedback_viewed);
   if (prev_feedback_level > 1) {
     // We want to change this structure to ask a question for each of the collapsed windows
     // So: create a for-loop, and for each true value in feedback_viewed: asked question!
     // If false, return false and don't bother with the rest
     // Makes it easier because now the POST can be done within this function as well
-
     if (feedback_viewed[prev_feedback_level-2] == true) {
       $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
       $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
