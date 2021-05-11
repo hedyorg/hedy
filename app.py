@@ -377,7 +377,7 @@ def log_feedback():
         'collapse': collapse,
         'GFM': True
     })
-    debug = True
+    debug = False
     if debug:
         print("TESTING FEEDBACK LOG INFORMATION")
         print("Model was useful: " + str(general_answer))
