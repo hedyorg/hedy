@@ -1,8 +1,9 @@
+var feedback_level;
 var prev_feedback_level;
 var prev_similar_code;
 var similar_code;
 var general_answer;
-var feedback_viewed = false;
+var feedback_viewed = [false, false, false, false]; // Set the values for feedback_level 2 till 5
 var general_answered = false;
 
 (function() {
@@ -125,6 +126,7 @@ function runit(level, lang, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      feedback_level = response.feedback_level;
       prev_feedback_level = response.prev_feedback_level;
       prev_similar_code = response.prev_similar_code;
       console.log('Response', response);
@@ -300,7 +302,7 @@ function feedback(answer) {
     });
     $('#feedback-popup').hide();
     $('#opaque').hide();
-    feedback_viewed = false; // Set back to false to ensure that it won't pop-up in next error streak without looking
+    feedback_viewed = [false, false, false, false]; // Set back to false to ensure that it won't pop-up in next error streak without looking
     general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
   }
 }
@@ -328,7 +330,12 @@ function reportClientError(level, code, client_error) {
 // Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
   if (prev_feedback_level > 1) {
-    if (feedback_viewed == true) {
+    // We want to change this structure to ask a question for each of the collapsed windows
+    // So: create a for-loop, and for each true value in feedback_viewed: asked question!
+    // If false, return false and don't bother with the rest
+    // Makes it easier because now the POST can be done within this function as well
+
+    if (feedback_viewed[prev_feedback_level-2] == true) {
       $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
       $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
       $('#feedback-popup .no').text(GradualErrorMessages.Feedback_answerN)
@@ -455,7 +462,8 @@ function runPythonProgram(code, cb) {
 }
 
 $('#feedbackbox .expand-dialog').click(function(){
-   feedback_viewed = true;
+   feedback_viewed[feedback_level-2] = true;
+   console.log(feedback_viewed)
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();
    if (text === "▼ " + GradualErrorMessages.Click_shrink + " ▼"){

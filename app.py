@@ -364,7 +364,7 @@ def log_feedback():
     general_answer = body['general_answer']
     level_answer = body['level_answer']
     feedback_level = int(body['feedback_level'])
-    collapse = bool(body['collapse'])  # this is either true or false: The window was either expanded or not
+    collapse = body['collapse']  # this is either true or false: The window was either expanded or not
     similar_code = body['similar_code']
     logger.log({
         'session': session_id(),
