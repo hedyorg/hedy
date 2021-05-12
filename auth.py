@@ -21,7 +21,7 @@ def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
 
 def make_salt ():
-    return bcrypt.gensalt ().decode ('utf-8')
+    return bcrypt.gensalt (rounds=config ['bcrypt_rounds']).decode ('utf-8')
 
 def hash (password, salt):
     return bcrypt.hashpw (bytes (password, 'utf-8'), bytes (salt, 'utf-8')).decode ('utf-8')
@@ -96,9 +96,17 @@ def routes (app, requested_lang):
         if not check_password (body ['password'], user ['password']):
             return 'invalid username/password', 403
 
+        # If the number of bcrypt rounds has changed, create a new hash.
+        new_hash = None
+        if config ['bcrypt_rounds'] != int (re.match ('\$2b\$\d+', user ['password']) [0].replace ('$2b$', '')):
+            new_hash = hash (body ['password'], make_salt ())
+
         cookie = make_salt ()
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
+        if new_hash:
+            db_set ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
+        else:
+            db_set ('users', {'username': user ['username'], 'last_login': timems ()})
         resp = make_response ({})
         resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/')
         return resp

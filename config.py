@@ -11,5 +11,7 @@ config = {
     },
     'dynamodb': {
         'region': 'eu-central-1'
-    }
+    },
+    # The bcrypt library's default is 12
+    'bcrypt_rounds': 9
 }
