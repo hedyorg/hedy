@@ -161,11 +161,11 @@ class TestsLevel8(unittest.TestCase):
     for i in range 0 to 10
       antwoord is ask Wat is 5*5
       if antwoord is 24
-          print 'Dat is fout!'
+        print 'Dat is fout!'
       else
-          print 'Dat is goed!'
+        print 'Dat is goed!'
       if antwoord is 25
-          i is 10""")
+        i is 10""")
 
     expected = textwrap.dedent("""\
     for i in range(int(0), int(10)+1):
@@ -180,25 +180,26 @@ class TestsLevel8(unittest.TestCase):
     result = hedy.transpile(code, 8)
 
     self.assertEqual(expected, result)
-  # fails, bugreport
-  # def test_for_ifbug(self):
-  #   code = textwrap.dedent("""\
-  #   for i in range 0 to 10
-  #     antwoord is ask Wat is 5*5
-  #     if antwoord is 24
-  #       print 'fout'
-  #   print 'klaar met for loop'""")
-  #
-  #   expected = textwrap.dedent("""\
-  #     for i in range(int(0), int(10)+1):
-  #       antwoord = input('Wat is 5*5')
-  #       if str(antwoord) == str('24'):
-  #         print('fout')
-  #     print('klaar met for loop')""")
-  #
-  #   result = hedy.transpile(code, 8)
-  #
-  #   self.assertEqual(expected, result)
+
+    #fails, issue 363
+  def test_for_ifbug(self):
+    code = textwrap.dedent("""\
+    for i in range 0 to 10
+      antwoord is ask Wat is 5*5
+      if antwoord is 24
+        print 'fout'
+    print 'klaar met for loop'""")
+
+    expected = textwrap.dedent("""\
+      for i in range(int(0), int(10)+1):
+        antwoord = input('Wat is 5*5')
+        if str(antwoord) == str('24'):
+          print('fout')
+      print('klaar met for loop')""")
+
+    result = hedy.transpile(code, 8)
+
+    self.assertEqual(expected, result)
 
 
 

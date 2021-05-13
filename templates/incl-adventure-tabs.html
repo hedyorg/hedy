@@ -15,7 +15,7 @@
         {% for assignment in adventure_assignments %}
           <div data-tabtarget="t-{{assignment.name}}" class="hidden">
             {% if assignment.image %}
-              <img class="float-right w-48" src="/images/{{assignment.image}}">
+              <img class="float-right w-48" src="{{static('/images/' + assignment.image)}}">
             {% endif %}
             <div>
             {{ assignment.text|commonmark }}

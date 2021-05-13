@@ -17,6 +17,7 @@ from Levenshtein import distance as lev
 from os import path
 import re
 import requests
+import traceback
 import uuid
 from ruamel import yaml
 from flask_commonmark import Commonmark
@@ -24,6 +25,7 @@ from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
+import utils
 import hashlib
 
 # app.py
@@ -106,6 +108,34 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+utils.set_debug_mode_based_on_flask(app)
+
+
+CDN_PREFIX = os.getenv('CDN_PREFIX', None)
+STATIC_PREFIX = '/'
+if CDN_PREFIX:
+    # If we are using a CDN, also host static resources under a URL that includes
+    # the version number (so the CDN can aggressively cache the static assets and we
+    # still can invalidate them whenever necessary).
+    #
+    # The function {{static('/js/bla.js')}} can be used to retrieve the URL of static
+    # assets, either from the CDN if configured or just the normal URL we would use
+    # without a CDN.
+    #
+    # We still keep on hosting static assets in the "old" location as well for images in
+    # emails and content we forgot to replace or are unable to replace (like in MarkDowns).
+    STATIC_PREFIX = '/static-' + os.getenv('HEROKU_SLUG_COMMIT', 'dev')
+    app.add_url_rule(STATIC_PREFIX + '/<path:filename>',
+            endpoint="static",
+            view_func=app.send_static_file)
+
+
+@app.context_processor
+def inject_static():
+    """Add the 'static' function to the Template context, to return links to static resources."""
+    def static(url):
+        return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
+    return dict(static=static)
 
 
 def hash_user_or_session (string):
@@ -194,13 +224,13 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
-# Set security attributes for cookies in a central place
-app.config.update(
-    #SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
-)
-
+# Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
+if not os.getenv ('HEROKU_APP_NAME'):
+    app.config.update(
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_SAMESITE='Lax',
+    )
 
 Compress(app)
 Commonmark(app)
@@ -254,6 +284,7 @@ def parse():
                 response['prev_similar_code'] = session['similar_code']
                 set_session_var (headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
         except hedy.HedyException as E:
+            traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
             if E.args[0] == "Invalid Space":
@@ -275,6 +306,8 @@ def parse():
             if lang in supported_lang:
                 response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=True))
         except Exception as E:
+            traceback.print_exc()
+            print(f"error transpiling {code}")
             response["Error"] = str(E)
             if lang in supported_lang:
                 response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=False))
