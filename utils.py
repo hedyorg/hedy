@@ -4,6 +4,7 @@ import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import functools
 import os
+import re
 from ruamel import yaml
 
 
@@ -253,3 +254,6 @@ def slash_join(*args):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
+def extract_bcrypt_rounds (hash):
+    return int (re.match ('\$2b\$\d+', hash) [0].replace ('$2b$', ''))

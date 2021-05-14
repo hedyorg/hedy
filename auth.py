@@ -3,7 +3,7 @@ import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds
 import datetime
 from functools import wraps
 from config import config
@@ -98,7 +98,7 @@ def routes (app, requested_lang):
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
-        if config ['bcrypt_rounds'] != int (re.match ('\$2b\$\d+', user ['password']) [0].replace ('$2b$', '')):
+        if config ['bcrypt_rounds'] != extract_bcrypt_rounds (user ['password']):
             new_hash = hash (body ['password'], make_salt ())
 
         cookie = make_salt ()
