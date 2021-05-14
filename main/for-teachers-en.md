@@ -246,8 +246,8 @@ These are the frequently made mistakes by students in level 3
 
 - The same mistakes as level 2. 
 - Students forget putting the quotation marks on both sides of the text after a print command. 
-- Students use the wrong quotation marks. The correct quotation mark is  ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
-- Students use quotation marks in the `ask`command, even though this is not necessary. 
+- Students use the wrong quotation marks. The correct quotation mark is ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
+- Students use quotation marks in the `ask` command, even though this is not necessary. 
 
 ### Lesson Plan 3
 The third lesson is mainly focussed on adding quotation marks to the print command. This is often a struggle for students. Therefore the instruction in this lesson plan is concise, and there is a lot of time scheduled for the students to practice.  
@@ -285,7 +285,7 @@ print pet at random
 Before the students get to work, pay attention to the frequently made mistakes: 
 There should always be a quotation mark before and one after the text you want to print. So always check whether all print commands have 2 quotation marks. 
 Students must use the right quotation marks. The correct quotation mark is  ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
-`ask` does not require quotation marks, only `print ` does. 
+`ask` does not require quotation marks, only `print` does. 
 
 #### Let’s get to work! (15 minutes)
 Remake your level 2 codes with quotation marks in level 3. 
