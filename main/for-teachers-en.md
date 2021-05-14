@@ -43,7 +43,7 @@ As soon as you are logged in, you’ll see the blue banner with My profile and M
 
 In My programs you can find all the codes that you’ve saved. 
 
-Je can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
+You can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
 
 ![](RackMultipart20210420-4-19s02r2_html_5657fc35812eb727.png)
 
@@ -263,7 +263,7 @@ You’ll see that the word pet is line 2 doesn’t work. It’s been changed to 
 
 ```
 pet is dog, cat, bunny
-print ‘You get this pet: ’
+print 'You get this pet: '
 print pet at random
 ```
 
@@ -271,14 +271,14 @@ Note that the quotation marks are used to tell Hedy what text should be printed.
 
 ```
 pet is dog, cat, bunny
-print ‘You’ll get this pet: ’
+print 'You'll get this pet: '
 print pet at random
 ```
 Fix it by removing the apostrophe. 
 
 ```
 pet is dog, cat, bunny
-print ‘Youll get this pet: ’
+print 'Youll get this pet: '
 print pet at random
 ```
 
@@ -320,13 +320,13 @@ These are the frequently made mistakes by students in level 4:
 - Mistake: Students put else on the next line, but it should be in the same line as the if command. 
 Code: 
 ```
-if name is Hedy print ‘nice’
-else print ‘boo!’
+if name is Hedy print 'nice'
+else print 'boo!'
 ```
 Solution: Else should be in the same line as if. 
 
 ```
-if name is Hedy print ‘nice’ else print ‘boo!’
+if name is Hedy print 'nice' else print 'boo!'
 ```
 - Mistake: Students use apostrophes after a print command. 
 ```
@@ -338,7 +338,7 @@ print 'Im Hedy'
 ```
 - Mistake: Students forget to use the print command when using an if command.
 ```
-if name is Hedy ‘nice’ else ‘boo!’
+if name is Hedy 'nice' else 'boo!'
 ```
 Solution: Use print twice when using both if and else. 
 ``` 
@@ -368,7 +368,7 @@ if name is Hedy print 'nice' else print 'boo!'
 
 - Mistake: Students use quotation marks around a variable. 
 ```
-if ‘name’ is 'Hedy' print 'nice' else print 'boo!'
+if 'name' is 'Hedy' print 'nice' else print 'boo!'
 ```
 Solution: Don’t use quotation marks around a variable. 
 ```
@@ -398,7 +398,7 @@ if name is David print 'you are funny'
 
 if name is Souf print 'you are funny'
 ```
-- Mistake: Students give the same answer in ask as the variable name. For example this student made the password ‘password’.  
+- Mistake: Students give the same answer in ask as the variable name. For example this student made the password 'password'.  
 ```
 password is ask What is the secret password?
 If password is password print 'You can enter!' else print 'Access denied!' 
@@ -424,7 +424,7 @@ Briefly repeat the previous lesson and also recollect the frequently made mistak
 The if-construction enables Hedy to react in two different ways to the player’s answers. Demonstrate using this example: 
 ```
 name is What’s your name?
-if name is Hedy print ‘Access granted’ else print ‘Access denied’
+if name is Hedy print 'Access granted' else print 'Access denied'
 ```
 
 #### Let’s get to work: The fortune teller (20 minutes) 
@@ -482,16 +482,16 @@ A good way to start up your lesson is by briefly repeating all the different com
 The repeat command allows you to repeat a line of code multiple times. In previous levels, if we wanted to program to song Baby Shark, we had to type this code: 
 
 ```
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark’
+print 'Baby Shark tututututudu'
+print 'Baby Shark tututututudu'
+print 'Baby Shark tututututudu'
+print 'Baby Shark'
 ```
 Now, with repeat, it’s much easier to make a code like this: 
 
 ```
-repeat 3 times print ‘Baby Shark tututututudu’
-print ‘Baby Shark’
+repeat 3 times print 'Baby Shark tututututudu'
+print 'Baby Shark'
 ```
 
 #### Let’s get to work: Hedy the Singer!  (20 - 30 minutes) 
@@ -510,6 +510,6 @@ Level 6 allows the students to use maths in Hedy. Hedy can add, subtract, multip
 ### New commands
 
 For addition and subtraction you can just use the + and - signs. 
-Multiplications are done with the * so 5 times 7 is 5*7. The asterisk is found above the 8 on your keyboard, so use shit 8 to type it. 
+Multiplications are done with the * so 5 times 7 is 5*7. The asterisk is found above the 8 on your keyboard, so use shift 8 to type it. 
 Divisions are made with the / (same key on your keyboard as the question mark). 
 
