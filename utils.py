@@ -184,6 +184,7 @@ def db_key (table, data, *remove):
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
 @querylog.timed
 def db_get (table, data, *not_primary):
+    querylog.log_counter('db_get:' + table)
     # If we're querying by something else than the primary key of the table, we assume that data contains only one field, that on which we want to search. We also require that field to have an index.
     if len (not_primary):
         field = list (data.keys ()) [0]
@@ -201,6 +202,7 @@ def db_get (table, data, *not_primary):
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
 @querylog.timed
 def db_get_many (table, data, *not_primary):
+    querylog.log_counter('db_get_many:' + table)
     if len (not_primary):
         field = list (data.keys ()) [0]
         # We use ScanIndexForward = False to get the latest items from the Programs table
@@ -216,6 +218,7 @@ def db_get_many (table, data, *not_primary):
 # Creates or updates an item by primary key.
 @querylog.timed
 def db_set (table, data):
+    querylog.log_counter('db_set:' + table)
     if db_get (table, data):
         result = db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
     else:
@@ -225,11 +228,13 @@ def db_set (table, data):
 # Deletes an item by primary key.
 @querylog.timed
 def db_del (table, data):
+    querylog.log_counter('db_del:' + table)
     return db.delete_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
 
 # Deletes multiple items.
 @querylog.timed
 def db_del_many (table, data, *not_primary):
+    querylog.log_counter('db_del_many:' + table)
     # We define a recursive function in case the number of results is very large and cannot be returned with a single call to db_get_many.
     def batch ():
         to_delete = db_get_many (table, data, *not_primary)
@@ -243,6 +248,7 @@ def db_del_many (table, data, *not_primary):
 # Searches for items.
 @querylog.timed
 def db_scan (table):
+    querylog.log_counter('db_scan:' + table)
     result = db.scan (TableName = db_prefix + '-' + table)
     output = []
     querylog.log_counter('db_scan_items', len(result['Items']))
@@ -252,6 +258,7 @@ def db_scan (table):
 
 @querylog.timed
 def db_describe (table):
+    querylog.log_counter('db_describe:' + table)
     return db.describe_table (TableName = db_prefix + '-' + table)
 
 
