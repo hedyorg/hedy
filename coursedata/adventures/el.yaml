@@ -184,33 +184,33 @@ adventures:
                     
                 start_code: "print 'Μωρό Καρχαρίας'"
     dishes:
-        name: "Who does the dishes?"
+        name: "Ποιός πρέπει να πλύνει τα πιάτα;"
         image: "dishes.png"
-        description: "Use the computer to see who does the dishes (Start at level 2)"
+        description: "Χρησιμοποίησε τον υπολογιστή για να δεις ποιός πρέπει να πλύνει τα πιάτα (Ξεκίνα από το επίπεδο 2)"
         levels:
             2:
                 story_text: |
-                    ## Dishwashing program in level 2
-                    Do you always disagree at home about who should wash the dishes or change the litter box today?
+                    ## Πρόγραμμα πλυσίματος πιάτων στο επίπεδο 2
+                    Διαφωνείτε πάντα στο σπίτι για το ποιός πρέπει να πλύνει τα πιάτα ή να αλλάξει την άμμο της γάτας;
 
-                    Then you can let the computer choose very fairly. You can program that in level 2!
+                    Τότε μπορείς να αφήσεις τον υπολογιστή να αποφασίσει πολύ δίκαια. Μπορείς να το προγραμματίσεις στο επίπεδο 2!
 
-                    You first make a list of the members of your family. Then choose 'at random' from the list.
-
-                    ## Example Hedy code
+                    Πρώτα φτιάξε μια λίστα με τα μέλη της οικογένειάς σου. Ύστερα επίλεξε 'τυχαία' από τη λίστα.
+                    
+                    ## Παράδειγμα κώδικα Hedy
                     ```
-                    people is mom, dad, Emma, Sophie
+                    people is μαμά, μπαμπάς, Ελένη, Σοφία
                     print people at random
                     ```
 
-                    ## What's next?
-                    Did you happen to try to make a sentence that contained the word people?
+                    ## Τί ακολουθεί;
+                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη people; 
+                    
+                    Δηλαδη, `print Επέλεξα από αυτούς τους people`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    
+                    Θα δεις ότι δε δουλεύει σωστά. H Hedy θα εμφανίσει: Επέλεξα από αυτούς τους [μαμά, μπαμπάς, Ελένη, Σοφία]. Αυτό μπορείς να το λύσεις στο επίπεδο 3.
 
-                    E.g. `print I chose from these people`. Give it a try if you haven't already.
-
-                    That is not working properly! Then you get: I chose from [daddy, mom, Emma, Sophie]. You can solve that in level 3.
-
-                start_code: "print Who does the dishes?"
+                start_code: "print Ποιός θα πλύνει τα πιάτα;"
             3:
                 story_text: |
                     ## Dishwashing program in level 3
