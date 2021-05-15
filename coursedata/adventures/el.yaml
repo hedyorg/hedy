@@ -491,41 +491,41 @@ adventures:
                     
                 start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί'"
     calculator:
-        name: "Calculator"
-        description: "Create a calculator"
+        name: "Αριθμομηχανή"
+        description: "Δημιούργησε μια αριθμομηχανή"
         image: "calculator.png"
         levels:
             6:
                 story_text: |
-                    ## Calculator
-                    Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
+                    ## Αριθμομηχανή
+                    Τώρα που μπορείς να κάνεις υπολογισμούς, μπορείς επίσης να δημιουργήσεις ένα πρόγραμμα για να εξασκηθείς σε μαθηματικούς υπολογισμούς. Μπορείς να δημιουργήσεις τους δικούς σου υπολογισμούς, για παράδειγμα:
 
-                    ## Example Hedy code
+                    ## Παράδειγμα κώδικα Hedy
                     ```
                     correct_answer is 11 * 27
-                    print 'How much is 11 times 27?'
-                    answer is ask Do you know the answer?
-                    if answer is correct_answer print 'good job!' else print 'Wrong! It was ' correct_answer
+                    print 'Πόσο κάνει 11 φορές το 27;'
+                    answer is ask Ξέρεις την απάντηση;
+                    if answer is correct_answer print 'συγχαρητήρια!' else print 'Λάθος! Ήταν ' correct_answer
                     ```
 
-                    ## Random numbers
-                    You can also let the computer do random sums of its own using random.
+                    ## Τυχαίοι αριθμοί
+                    Μπορείς επίσης να αφήσεις τον υπολογιστή να κάνει δικές του τυχαίες προσθέσεις χρησιμοποιώντας το randrom.
 
-                    This is how you choose a number of tables to practice, and from that you always get a different sum:
+                    Έτσι, θα επιλέξεις έναν αριθμό από πίνακες για να εξασκηθείς, και από αυτό θα παίρνεις πάντα ένα διαφορετικό άθροισμα:
 
-                    ## Example Hedy code
+                    ## Παράδειγμα κώδικα Hedy
                     ```
                     tables is 4, 5, 6, 8
                     numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     table is tables at random
                     number is numbers at random
                     correct_answer is table * number
-                    print 'how much is ' table ' times ' number '?'
-                    answer is ask Do you know the answer?
-                    if answer is correct_answer print 'okay' else print 'mistake! it was ' correct_answer
+                    print 'πόσο είναι ' table ' φορές ' number '?'
+                    answer is ask Γνωρίζεις την απάντηση;
+                    if answer is correct_answer print 'οκ' else print 'λάθος! ήταν ' correct_answer
                     ```
 
-                start_code: "print Welcome to this calculator!"
+                start_code: "print Καλωσήλθες σε αυτήν την αριθμομηχανή!"
                 
     restaurant:
         name: "Restaurant"
