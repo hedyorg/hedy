@@ -16,7 +16,7 @@ config = {
         'region': 'eu-central-1',
     },
     'dynamodb': {
-        'region': 'eu-central-1'
+        'region': 'eu-west-1'
     },
     's3-query-logs': {
         'bucket': 'hedy-query-logs',
