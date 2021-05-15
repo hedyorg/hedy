@@ -302,61 +302,59 @@ adventures:
                 start_code: "ask Θα ήθελες να φτιάξεις ένα ζάρι;"
             2:
                 story_text: |
-                    ## Dice in level 2
-                    In level 2 we can choose from a list. With that we can let the computer choose one side of the die.
+                    ## Ζάρια στο επίπεδο 2
+                    Στο επίπεδο 2 μπορούμε να επιλέξουμε από μια λίστα. Με αυτό μπορούμε να αφήσουμε τον υπολογιστή να επιλέξει μια πλευρά του ζαριού.
 
-                    Take a look at the games you have in your closet at home.
+                    
+                    Ρίξε μια ματιά στα (επιτραπέζια) παιχνίδια στο σπίτι σου. Βρίσκεις κάποια (ιδιαίτερα) ζάρια παιχνιδιών; Μπορείς να τα αναδημιουργήσεις εύκολα με κώδικα Hedy. Για παράδειγμα τα ζάρια στο παιχνίδι Earthworms(σκουληκάκια) έχουν τους αριθμούς 1 έως 5 και ένα σκουληκάκι.
 
-                    Are there games with a (special) die? You can also copy it with this code.
+                    ![Ζάρια με αριθμούς 1 έως 5 και ένα σκουληκάκι](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
-                    For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
-
-                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
-
-                    ## Example Hedy Code
+                    ## Παράδειγμα κώδικα Hedy
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
+                    choices is 1, 2, 3, 4, 5, σκουληκάκι
                     print choices at random
                     ```
 
-                    ## What's next?
-                    Did you happen to try to make a sentence that included the word choices?
+                    ## Τί ακολουθεί;
+                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη choices; 
+                    
+                    Δηλαδη, `print Επέλεξα από τις choices`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    
+                    Θα δεις ότι δε δουλεύει σωστά. H Hedy θα πει: Επέλεξα από τις [1, 2, 3, 4, 5, σκουληκάκι]. To Επίπεδο 3 έχει μια λύση για αυτό.
 
-                    E.g. `print I chose from the choices`. Give it a try if you haven't already.
-
-                    That is not working properly! Then you get: I chose from the [1, 2, 3, 4, 5, earthworm]. You can solve that in level 3.
-
-                start_code: "print What will the die indicate this time?"
+                start_code: "print Τί θα δείξει το ζάρι αυτήν τη φορά;"
             3:
                 story_text: |
-                    ## Dice in level 3
-                    In level 3 we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
+                    ## Ζάρια στο επίπεδο 3
+                    Στο επίπεδο 3 μπορούμε να φτιάξουμε προτάσεις με την τιμή του ζαριού μέσα στην πρόταση, φυσικά μέσα σε εισαγωγικά.
+                    Αυτήν τη φορά το δείγμα κώδικα δεν είναι πλήρες. Μπορείς να ολοκληρώσεις τον κώδικα;
+                    
 
-                    ## Example Hedy code
+                    ## Παράδειγμα κώδικα Hedy
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
-                    print ... you threw ...
-                    print ... ... ... <- here you have to program the dialing
+                    choices is 1, 2, 3, 4, 5, σκουληκάκι
+                    print ... έριξες ...
+                    print ... ... ... <- εδώ θα πρέπει να προγραμματίσεις τη ρίψη
                     ```
 
-                start_code: "print What will the die indicate this time?"
+                start_code: "print Τί θα δείξει το ζάρι αυτήν τη φορά;"
             4:
                 story_text: |
-                    ## Dice in level 4
-                    You can also make a die again in level 4 using the `if`.
-                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
+                    ## Ζάρια στο επίπεδο 4
+                    Μπορείς και πάλι να δημιουργήσεις ένα ζάρι στο επίπεδο 4 χρησιμοποιώντας την `if`.
+                    Συμπλήρωσε το δείγμα κώδικα έτσι ώστε ο κώδικας να λέει "Μπορείς να σταματήσεις να ρίχνεις" όταν ρίξεις ένα σκουληκάκι.
+                    
+                    Ίσως όμως να θέλεις να αναδημιουργήσεις ένα ζάρι από ένα τελείως διαφορετικό παιχνίδι. Και αυτό γίνεται! Έπειτα, δημιούργησε τη δική σου αντίδραση. Πχ. 'ναι' για το 6 και 'κρίμα' για οτιδήποτε άλλο.
 
-                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something else.
-
-                    ## Example Hedy code
+                    ## Παράδειγμα κώδικα Hedy
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
+                    choices is 1, 2, 3, 4, 5, σκουληκάκι
                     throw is ...
-                    print 'you have' ... 'thrown'
-                    if ... is earthworm print 'You can stop throwing.' ... print 'You have to hear it again!'
+                    print 'έχεις ρίξει' ...
+                    if ... is earthworm print 'Μπορείς να σταματήσεις να ρίχνεις.' ... print 'Πρέπει να το ακούσεις πάλι!'
                     ```
-                start_code: "print What will the die indicate this time?"
+                start_code: "print Τί θα δείξει το ζάρι αυτήν τη φορά;"
             5:
                 story_text: |
                     ## Dice in level 5
