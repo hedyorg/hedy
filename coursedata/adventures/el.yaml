@@ -528,66 +528,68 @@ adventures:
                 start_code: "print Καλωσήλθες σε αυτήν την αριθμομηχανή!"
                 
     restaurant:
-        name: "Restaurant"
-        description: "Create your own virtual restaurant"
+        name: "Εστιατόριο"
+        description: "Δημιούργησε το δικό σου εικονικό εστιατόριο"
         image: ""
         levels:
             1:
-               story_text: |
-                   ## Restaurant
-                    In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                  ## Εστιατόριο
+                    Στο επίπεδο 1 μπορείς να δημιουργήσεις το δικό σου εικονικό εστιατόριο και να πάρεις τις παραγγελίες των πελατών σου.
                     
-                   ## Example Hedy code
-                     ```
-                    print Welcome to Hedy's restaurant
-                    ask What would you like to order? 
-                    echo So you would like to order...
-                    print Thanks you for your order! 
-                    print It's on its way! 
+                  ## Παράδειγμα κώδικα Hedy
+                    ```
+                    print Καλωσήλθες στο εστιατόριο της Hedy
+                    ask Tί θα ήθελες να παραγγείλεις;
+                    echo Ώστε θα ήθελες να παραγγείλεις...
+                    print Ευχαριστούμε για την παραγγελία σου!
+                    print Ετοιμάζεται! 
                     ```
                     
-                   ## Challenge
-                   Can you think of more line to add to your restaurant code? For example, can you ask the guests what they'd like to drink, tell them the price, or wish them a pleasant meal? 
-               start_code: ""    
+                  ## Δοκιμασία
+                  Μπορείς να σκεφτείς άλλη μια γραμμή για να προσθέσεις στον κώδικα του εστιατορίου σου; Για παράδειγμα, μπορείς να ρωτήσεις τους πελάτες τί θα ήθελαν να πιούν, να τους πεις την τιμή, ή να τους ευχηθείς ένα καλό γεύμα;
+                  
+                start_code: ""    
             2: 
                 story_text: |
-                   ## Restaurant
-                   In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only echo the order once and only remember the last thing that was ordered. 
-                   Now you can use variables and Hedy can remember both the food and the drinks! 
-                   
-                   ## Example Hedy Restaurant
-                   ```
-                   print Welcome to Hedy's restaurant!
-                   print Today we're serving pizza or lasagna. 
-                   food is ask What would you like to eat?
-                   print Great choice! The food is my favorite!
-                   topping is ask Would you like meat or veggies on that?
-                   print food with topping is on its way! 
-                   drinks is ask What would you like to drink with that?
-                   print Thank you for your order. 
-                   print Your food and drinks will be right there!
-                   ```
-                   
-                   ## Random Restaurant
-                   Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you! 
-                   Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
-                   You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
-                   
-                   ## Example Hedy Code Random Restaurant
-                   
-                   ```
-                   print Welcome to Hedy's Random Restaurant!
-                   print The only restaurant that will randomly choose your meal and its price for you!
-                   starters is salad, soup, carpaccio
-                   mains is pizza, brussels sprouts, spaghetti
-                   desserts is brownies, ice cream, french cheeses
-                   drinks is cola, beer, water
-                   prices is 1 dollar, 10 dollars, 100 dollars
-                   print You will start with: starters at random
-                   print Then we'll serve: mains at random
-                   print And as dessert: desserts at random
-                   print You will get a drinks to drink
-                   print That will be: prices at random
-                   print Thank you and enjoy your meal! 
-                   ```
+                  ## Εστιατόριο
+                  Στο επίπεδο 2 μπορείς να επεκτείνεις το εστιατόριό σου χρησιμοποιώντας μεταβλητές. Στο επίπεδο 1, η Hedy μπορούσε μόνο να εμφανίσει την παραγγελία μια φορά και να θυμηθεί μόνο το τελευταίο αντικείμενο που παραγγέλθηκε.
+                  Τώρα μπορείς να χρησιμοποιήσεις μεταβλητές και η Hedy μπορεί να θυμάται και το φαγητό αλλά και τα ποτά!
+                  
+                  ## Παράδειγμα Εστιατορίου Hedy
+
+                  ```
+                  print Καλωσήλθατε στο εστιατόριο της Hedy!
+                  print Σήμερα σερβίρουμε πίτσα ή λαζάνια.
+                  food is ask Τί θα θέλατε να φάτε;
+                  print Καλή επιλογή! Αυτό το φαγητό είναι το αγαπημένο μου!
+                  topping is ask Θα θέλατε κρέας ή λαχανικά μαζί με αυτό;
+                  print food with topping ετοιμάζεται! 
+                  drinks is ask Τί θα θέλατε να πιείς με αυτό;
+                  print Σας ευχαριστώ για την παραγγελία.
+                  print Το φαγητό και τα ποτά σας θα είναι έτοιμα αμέσως!
+                  ```
+                  
+                  ## Τυχαίο Εστιάτοριο
+                  Δυσκολεύεσαι να αποφασίσεις τί θέλεις να φάς για δείπνο. Μπορείς να αφήσεις τη Hedy να επιλέξει για σένα!
+                  Απλά πρόσθεσε λίστες από τα αγαπημένα (ή λιγότερα αγαπημένα) γεύματα σου και η Hedy μπορεί να επιλέξει το δείπνο.
+                  Μπορείς επίσης να το διασκεδάσεις λίγο, αφήνοντας την Hedy να επιλέξει και την τιμή για το δείπνο σου! Τί θα πάρεις;
+                  
+                  ## Παράδειγμα κώδικα Τυχαίου Εστιατορίου της Hedy
+                  
+                  ```
+                  print Καλωσήλθατε στο Τυχαίο Εστιατόριο της Hedy!
+                  print Το μόνο εστιατόριο που θα επιλέξει τυχαία το γεύμα σας και την τιμή του!
+                  starters is σαλάτα, σούπα, καρπάτσιο
+                  mains is πίτσα, λαχανάκια Βρυξελλών, σπαγγέτι
+                  desserts is μπράουνι, παγωτό, γαλλικά τυριά
+                  drinks is κόλα, μπύρα, νερό
+                  prices is 1 ευρώ, 10 ευρώ, 100 ευρώ
+                  print Θα ξεκινήσετε με: starters at random
+                  print Έπειτα θα σερβίρουμε: mains at random
+                  print Και ως επιδόρπιο: desserts at random
+                  print Θα έχετε ένα drinks για να πιείτε
+                  print Το κόστος θα είναι: prices at random
+                  print Ευχαριστούμε και καλή όρεξη! 
+                  ```
                 start_code: ""
