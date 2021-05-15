@@ -340,3 +340,27 @@
             if farbe is blau:
                 if farbezwei is gelb:
                     print 'Zusammen ergeben wir grün!'
+11:
+    start_code: |-
+        alter is input('Wie alt bist du?')
+        print('Also hast du bis jetzt diese Geburtstage gefeiert: ')
+        for i in range(0,alter):
+            print(i)
+    intro_text: |-
+        Statt `ask` benutzen wir jetzt den `input`-Befehl. 
+        Außerdem benutzen wir setzen wir jetzt immer runde Klammern, wenn wir `print`, `input` oder `for` verwenden.
+    commands:
+    -   explanation: "Wir setzen jetzt Klammern hinter den `print`-Befehl!"
+        example: "print('Hallo Welt')"
+        demo_code: "print('Hallo Welt')"
+    -   explanation: "Wir ersetzen `ask` und nennen es jetzt `input`. Außerdem verwenden wir Klammern."
+        example: "name is input('Wie heißt du?')"
+        demo_code: |-
+            name is input('Wie heißt du?')
+            print('Dein Name ist also ' name)
+    -   explanation: "Wir setzen nun Klammern um die Zahlen in der `for`-Schleife."
+        example: "for i in range(0,10):"
+        demo_code: |-
+            for i in range(0,10):
+                print(i)
+            print('Bereit oder nicht, hier komme ich!')
