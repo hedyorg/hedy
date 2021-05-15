@@ -21,8 +21,8 @@ config = {
     's3-query-logs': {
         'bucket': 'hedy-query-logs',
         'prefix': app_name + '/',
-        # Make logs from different instances unique
-        'postfix': '.' + dyno if dyno else '',
+        # Make logs from different instances/processes unique
+        'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
         'region': 'eu-central-1'
     },
 }
