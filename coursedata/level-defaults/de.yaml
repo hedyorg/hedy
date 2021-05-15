@@ -364,3 +364,36 @@
             for i in range(0,10):
                 print(i)
             print('Bereit oder nicht, hier komme ich!')
+12:
+    start_code: |-
+        fruechte is ['Apfel', 'Banane', 'Kirsche']
+        print(fruechte)
+    intro_text: |-
+        Wir werden eckige Klammern um Listen setzen! 
+        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
+    commands:
+    -   explanation: |-
+            Wir werden eckige Klammern um Listen setzen! 
+            Wir müssen auch `'` um Elemente in Listen setzen.
+        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            print(fruechte)
+    -   name: "Nimm ein Element aus einer Liste"
+        explanation: |-
+            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`. 
+            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
+        example: "erstefrucht is fruechte[1]"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            erstefrucht is fruechte[1]
+            print(erstefrucht)
+    -   name: "Nimm ein zufälliges Element aus einer Liste"
+        explanation: |-
+            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`. 
+            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
+        example: "zufaelligefrucht is fruechte[random]"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            zufaelligefrucht is fruechte[random]
+            print(zufaelligefrucht)
