@@ -318,3 +318,25 @@
                 print 'a ist 2'
             else:
                 print 'a ist nicht 1 oder 2'
+10:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+            print 'wir sind in Runde: ' i ' bei Nummer: ' j
+    intro_text: |-
+        Ab jetzt können wir eine Schleife öfters wiederholen. 
+        Im Beispiel zählen wir bis 5 und machen das 3 Mal. 
+        Wir machen also 3 Runden und zählen jedes Mal bis 5.
+    commands:
+    -   explanation: "Dies ist ein Beispiel der `for`-Anweisung."
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                    print 'wir sind in Runde: ' i ' bei Nummer: ' j
+    -   explanation: "Dasselbe können wir mit `if`-Anweisungen machen"
+        demo_code: |-
+            farbe is blau
+            farbezwei is gelb
+            if farbe is blau:
+                if farbezwei is gelb:
+                    print 'Zusammen ergeben wir grün!'
