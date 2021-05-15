@@ -18,7 +18,7 @@ adventures:
                     Ύστερα από αυτήν την πρώτη γραμμή, ξεκίνα με την `print` αν η πρόταση χρειάζεται να εμφανιστεί.
                     Χρησιμοποίησε την `echo` αν θέλεις ο βασικός σου χαρακτήρας να εμφανίζεται στο τέλος της πρότασης.
 
-                    ## Παράδειγμα Κώδικα Hedy
+                    ## Παράδειγμα κώδικα Hedy
                     ```
                     ask Ο βασικός χαρακτήρας της ιστορίας είναι ...
                     print Ο βασικός χαρακτήρας της ιστορίας τώρα περπατάει στο δάσος
@@ -42,7 +42,7 @@ adventures:
 
                     Έπειτα μπορείς να τοποθετήσεις αυτό το όνομα οπουδήποτε στην πρόταση.
 
-                    ## Παράδειγμα Κώδικα Hedy
+                    ## Παράδειγμα κώδικα Hedy
 
                     ```
                     name is ask What is the name of the main character?
@@ -82,7 +82,7 @@ adventures:
 
                     Θα πρέπει να χρησιμοποιήσεις εισαγωγικά για οτιδήποτε θα εμφανίσεις.
 
-                    ## Παράδειγμα Κώδικα Hedy
+                    ## Παράδειγμα κώδικα Hedy
                     ```
                     name is Γιάννης
                     print 'Το όνομα του βασικού χαρακτήρα είναι' name
@@ -108,7 +108,7 @@ adventures:
 
                     Επιπλέον, μπορείς να βεβαιώσεις πως θα δηλωθεί πάλι το όνομα. Αυτό λειτουργεί όπως στο επίπεδο 3. Μπορείς να το συνδυάσεις με ένα `if`,  και έτσι έχεις δημιουργήσει ήδη ένα ολόκληρο πρόγραμμα!
 
-                    ## Παράδειγμα Κώδικα Hedy
+                    ## Παράδειγμα κώδικα Hedy
                     ```
                     name is ask Ποιός περπατάει στο δάσος;
                     print 'Ο' name 'περπατάει στο δάσος'
@@ -124,7 +124,7 @@ adventures:
                     Σε μια ιστορία, κάποιος μπορεί να αναφέρει διάφορες λέξεις πολλές φορές. Για παράδειγμα, όταν κάποιος φωνάζει βοήθεια ή τραγουδά ένα τραγούδι. 
                     Μπορείς να βάλεις μια τέτοια επανάληψη στην ιστορία σου στο επίπεδο 5 με την `repeat`.
 
-                    ## Παράδειγμα Κώδικα Hedy
+                    ## Παράδειγμα κώδικα Hedy
                     ```
                     print 'Ο πρίγκιπας φώναζε για βοήθεια συνεχώς'
                     repeat 5 times print 'Βοήθεια!'
@@ -133,30 +133,30 @@ adventures:
 
                 start_code: "repeat 5 times print 'Βοήθεια!'"
     songs:
-        name: "Sing a song!"
+        name: "Τραγούδα ένα τραγούδι!"
         image: "songs.png"
-        description: "Print a song"
+        description: "Εμφάνισε ένα τραγούδι"
         levels:
             5:
                 story_text: |
-                    ## Songs in level 5
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+                    ## Τραγούδια στο επίπεδο 5
+                    Τα τραγούδια συχνά περιλαμβάνουν αρκετή επανάληψη. Για παράδειγμα... το Μωρό Καρχαρίας! Αν το τραγουδήσεις, τραγουδάς διαρκώς το ίδιο πράγμα:
+                    
+                    Μωρό Καρχαρίας τουτουρουτουτου <br>
+                    Μωρό Καρχαρίας τουτουρουτουτου <br>
+                    Μωρό Καρχαρίας τουτουρουτουτου <br>
+                    Μωρό Καρχαρίας
 
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark
+                    Μπορείς να κάνεις το τραγούδι αυτό πολύ πιο σύντομο με ένα `repeat`! Μπορείς να ολοκληρώσεις τον κώδικα;
 
-                    You can make this song much shorter with a `repeat`! Can you finish the code?
-
-                    ## Example Hedy code
+                    ## Παράδειγμα κωδικα Hedy
                     ```
-                    repeat ... ... print 'Baby Shark tututudutudu'
-                    print 'Baby Shark'
+                    repeat ... ... print 'Μωρό Καρχαρίας τουτουρουτουτου'
+                    print 'Μωρό Καρχαρίας'
                     ```
-
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
-                start_code: "print 'Baby Shark'"
+                    
+                    Ύστερα από το Μωρό Καρχαρίας μπορείς φυσικά να προγραμματ΄ και άλλα τραγούδια. Υπάρχουν πολλά τραγούδια με επανάληψη.
+                start_code: "print 'Μωρό Καρχαρίας'"
             6:
                 story_text: |
                     ## Songs in level 6
