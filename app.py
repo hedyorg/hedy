@@ -6,7 +6,6 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 6):
 # coding=utf-8
 import datetime
 import collections
-from functools import wraps
 import hedy
 import json
 import jsonbin
@@ -15,6 +14,7 @@ import os
 from os import path
 import re
 import requests
+import traceback
 import uuid
 from ruamel import yaml
 from flask_commonmark import Commonmark
@@ -22,16 +22,20 @@ from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
+import utils
 import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
+from flask_helpers import render_template
 from flask_compress import Compress
 
 # Hedy-specific modules
 import courses
 import hedyweb
 import translating
+import querylog
+import aws_helpers
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -104,6 +108,34 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
+utils.set_debug_mode_based_on_flask(app)
+
+
+CDN_PREFIX = os.getenv('CDN_PREFIX', None)
+STATIC_PREFIX = '/'
+if CDN_PREFIX:
+    # If we are using a CDN, also host static resources under a URL that includes
+    # the version number (so the CDN can aggressively cache the static assets and we
+    # still can invalidate them whenever necessary).
+    #
+    # The function {{static('/js/bla.js')}} can be used to retrieve the URL of static
+    # assets, either from the CDN if configured or just the normal URL we would use
+    # without a CDN.
+    #
+    # We still keep on hosting static assets in the "old" location as well for images in
+    # emails and content we forgot to replace or are unable to replace (like in MarkDowns).
+    STATIC_PREFIX = '/static-' + os.getenv('HEROKU_SLUG_COMMIT', 'dev')
+    app.add_url_rule(STATIC_PREFIX + '/<path:filename>',
+            endpoint="static",
+            view_func=app.send_static_file)
+
+
+@app.context_processor
+def inject_static():
+    """Add the 'static' function to the Template context, to return links to static resources."""
+    def static(url):
+        return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
+    return dict(static=static)
 
 
 def hash_user_or_session (string):
@@ -172,17 +204,18 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
-# Set security attributes for cookies in a central place
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
-)
-
+# Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
+if not os.getenv ('HEROKU_APP_NAME'):
+    app.config.update(
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_SAMESITE='Lax',
+    )
 
 Compress(app)
 Commonmark(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
+querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_transmitter_from_env())
 
 # Check that requested language is supported, otherwise return 404
 @app.before_request
@@ -192,6 +225,17 @@ def check_language():
 
 if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
+
+
+@app.before_request
+def before_request_begin_logging():
+    querylog.begin_global_log_record(path=request.path, method=request.method)
+
+
+@app.teardown_request
+def teardown_request_finish_logging(exc):
+    querylog.finish_global_log_record(exc)
+
 
 @app.route('/parse', methods=['POST'])
 def parse():
@@ -216,6 +260,8 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
 
+    querylog.log_value(level=level, lang=lang)
+
     response = {}
     username = current_user(request) ['username'] or None
 
@@ -226,9 +272,11 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            result = hedy.transpile(code, level, sublevel)
+            with querylog.log_time('transpile'):
+                result = hedy.transpile(code, level,sublevel)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
+            traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
             # return fixed code, so it can be ran
             if E.args[0] == "Invalid Space":
@@ -248,6 +296,7 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
         except Exception as E:
+            traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
     logger.log ({
