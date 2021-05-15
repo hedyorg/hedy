@@ -227,4 +227,4 @@ def div_clip(x, y):
     return int(x // y) * y
 
 
-LOG_QUEUE = LogQueue(batch_window_s=300, do_print=True)
+LOG_QUEUE = LogQueue(batch_window_s=300)

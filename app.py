@@ -6,7 +6,6 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 6):
 # coding=utf-8
 import datetime
 import collections
-from functools import wraps
 import hedy
 import json
 import jsonbin
@@ -36,6 +35,7 @@ import courses
 import hedyweb
 import translating
 import querylog
+import aws_helpers
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -215,6 +215,7 @@ if not os.getenv ('HEROKU_APP_NAME'):
 Compress(app)
 Commonmark(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
+querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_transmitter_from_env())
 
 # Check that requested language is supported, otherwise return 404
 @app.before_request

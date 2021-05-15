@@ -1,3 +1,4 @@
+import datetime
 import time
 from config import config
 import boto3
@@ -271,3 +272,9 @@ def slash_join(*args):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
+
+def isoformat(timestamp):
+    """Turn a timestamp into an ISO formatted string."""
+    dt = datetime.datetime.utcfromtimestamp(timestamp)
+    return dt.isoformat() + 'Z'
