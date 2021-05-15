@@ -65,7 +65,7 @@ adventures:
                     ## Τί ακολουθεί;
                     Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη name; 
                     
-                    Δηλαδη, `print το name μου είναι name`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    Δηλαδή, `print το name μου είναι name`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
                     
                     Θα δεις ότι δε δουλεύει σωστά. H Hedy θα εμφανίσει: To Γιάννης μου είναι Γιάννης. Αυτό μπορείς να το λύσεις στο επίπεδο 3.
 
@@ -76,7 +76,7 @@ adventures:
 
                     Θα παρατήρησες πως υπάρχει ακόμα ένα σφάλμα στο επίπεδο 2.
 
-                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη name; Δηλαδη, `print το name μου είναι name`.
+                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη name; Δηλαδή, `print το name μου είναι name`.
 
                     Αυτό δε δούλεψε σωστά! Τότε θα έχεις σαν αποτέλεσμα: το Γιάννης μου είναι Γιάννης. Αυτό μπορεί να λυθεί στο επίπεδο 3.
 
@@ -206,7 +206,7 @@ adventures:
                     ## Τί ακολουθεί;
                     Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη people; 
                     
-                    Δηλαδη, `print Επέλεξα από αυτούς τους people`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    Δηλαδή, `print Επέλεξα από αυτούς τους people`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
                     
                     Θα δεις ότι δε δουλεύει σωστά. H Hedy θα εμφανίσει: Επέλεξα από αυτούς τους [μαμά, μπαμπάς, Ελένη, Σοφία]. Αυτό μπορείς να το λύσεις στο επίπεδο 3.
 
@@ -319,7 +319,7 @@ adventures:
                     ## Τί ακολουθεί;
                     Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη choices; 
                     
-                    Δηλαδη, `print Επέλεξα από τις choices`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    Δηλαδή, `print Επέλεξα από τις choices`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
                     
                     Θα δεις ότι δε δουλεύει σωστά. H Hedy θα πει: Επέλεξα από τις [1, 2, 3, 4, 5, σκουληκάκι]. To Επίπεδο 3 έχει μια λύση για αυτό.
 
@@ -396,98 +396,100 @@ adventures:
                   
                 start_code: "print Τί θα δείξει το ζάρι αυτήν τη φορά;"
     rock:
-        name: "Rock, paper, scissors"
-        description: "Make your own rock, paper, scissors game"
+        name: "Πέτρα, ψαλίδι, χαρτί"
+        description: "Φτιάξε το δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί"
         image: "rock.png"
         levels:
             1:
                 story_text: |
-                    ## Rock, paper, scissors
-                    In level 1 you can start with a rock, paper, scissors  game.
+                    ## Πέτρα, ψαλίδι, χαρτί
+                    Στο επίπεδο 1 μπορείς να ξεκινήσεις με ένα παιχνίδι Πέτρα, ψαλίδι, χαρτί.
 
-                    With `ask` you can make a choice, and with` echo` you can repeat that choice.
+                    Με την `ask` μπορείς να κάνεις μια επιλογή, και με την `echo` μπορείς να επαναλάβεις αυτήν την επιλογή.
 
-                    ## Example Hedy code
+                    ## Παράδειγμα κώδικα Hedy
 
                     ```
-                    print what do you choose?
-                    ask choose from rock, paper or scissors
-                    echo so your choice was:
+                    print τί επιλέγεις;
+                    ask επίλεξε ανάμεσα σε πέτρα, ψαλίδι ή χαρτί
+                    echo ώστε η επιλογή σου είναι:
                     ```
 
-                    ## What's next?
-                    Just repeating is of course a bit boring because the computer does not choose anything. We will make that ourselves later.
+                    ## Τί ακολουθεί;
+                    Η απλή επανάληψη είναι φυσικά κάπως βαρετή επειδή ο υπολογιστής δεν επιλέγει τίποτα. Θα φτιάξουμε κάτι τέτοιο αργότερα.
+                    
 
-                start_code: "print Welcome to your own rock scissors paper!"
+                start_code: "print Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!"
             2:
                 story_text: |
-                    ## Rock, paper, scissors
+                    ## Πέτρα, ψαλίδι, χαρτί
 
-                    In level 2 we can enter lists and choose things from them.
+                    Στο επίπεδο 2 μπορούμε να εισάγουμε λίστες και να επιλέξουμε πράγματα από αυτές. 
 
-                    You first make a list with `is`. Then you can let the computer choose something from the list with 'at random' (you say et ren-dom).
+                    Αρχικά θα φτιάξεις μια λίστα με την `is`. Ύστερα μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι από τη λίστα με την `at random` (τυχαία).
 
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    Για παράδειγμα, μπορείς να αφήσεις τον υπολογιστή να επιλέξει ανάμεσα σε πέτρα, ψαλίδι και χαρτί.
 
-                    ## Example Hedy code
+                    ## Παράδειγμα κώδικα Hedy
 
                     ```
-                    choices is rock, paper, scissors
+                    choices is πέτρα, ψαλίδι, χαρτί
                     print choices at random
                     ```
 
-                    You can use the `ask` again in level 2. Can you print your choice and the choice from the computer?
-                    Beware though, `ask` now works differently than in level 1. There must be a name in front of it.
+                    Μπορείς να χρησιμοποιήσεις την `ask` και πάλι στο επίπεδο 2. Μπορείς να εμφανίσεις την επιλογή σου και την επιλογή από τον υπολογιστή;
+                    Προσοχή όμως, η `ask` τώρα λειτουργεί διαφορετικά απ'ότι στο επίπεδο 1. Θα πρέπει να υπάρχει ένα όνομα πριν από αυτή.
+                    
+                    ## Κοιτώντας μπροστά
 
-                    ## Looking forward
-                    Did you happen to try to make a sentence that included the word choices?
+                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη choices; 
+                    
+                    Δηλαδή, `print Επέλεξα από τις choices`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    
+                    Θα δεις ότι δε δουλεύει σωστά. H Hedy θα πει: Επέλεξα από τις [πέτρα, ψαλίδι, χαρτί]. To Επίπεδο 3 έχει μια λύση για αυτό.
 
-                    E.g. `print I chose from the choices`. Give it a try if you haven't already.
-
-                    That is not working properly! Then you get: I chose from the [rock, paper, scissors]. You can solve that in level 3.
-
-                start_code: "print Welcome to your own rock scissors paper!"
+                start_code: "print Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!"
             3:
                 story_text: |
-                    ## Rock, paper, scissors in level 3
-                    In level 3 we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the dots?
-
-                    ## Example Hedy code
+                    ## Πέτρα, ψαλίδι, χαρτί στο επίπεδο 3
+                    Στο επίπεδο 3 μπορούμε να προγραμματίσουμε περαιτέρω το Πέτρα, ψαλίδι, χαρτί. Όμως αν θέλεις να προσθέσεις κείμενο, πρέπει να χρησιμοποιήσεις εισαγωγικά και εδώ. Μπορείς να συμπληρώσεις τον κώδικα τοποθετώντας τις σωστές εντολές ή χαρακτήρες στις τελίτσες;
+                    
+                    ## Παράδειγμα κώδικα Hedy
                     ```
-                    choices is rock, paper, scissors
-                    print ... The computer chose: ... ... at ...
+                    choices is πέτρα, ψαλίδι, χαρτί
+                    print ... Ο υπολογιστής επέλεξε: ... ... at ...
                     ```
-                start_code: "print 'Welcome to your own rock scissors paper!'"
+                start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!'"
             4:
                 story_text: |
-                    ## Rock, paper, scissors in level 4
-                    In level 4 we can determine who won.
-                    For that you need the new `if` code.
+                    ## Πέτρα, ψαλίδι, χαρτί στο επίπεδο 4
+                    Στο επίπεδο 4 μπορούμε να αποφασίσουμε ποιός θα κερδίσει. Για αυτό θα χρειαστούμε τον νέο κώδικα `if`.
 
-                    Save your choice with the name of choice and the choice of computer as computer choice.
-                    Then you can use `if` to see if they are the same or different.
-                    Will you finish the code?
-
-                    ## Example Hedy code
+                    Αποθήκευσε την επιλογή σου με το όνομα της επιλογής σου και την επιλογή του υπολογιστή ως computer choices`.
+                    Έπειτα, μπορείς να χρησιμοποιήσεις την `if` για να δεις αν αυτές είναι ίδιες ή διαφορετικές.
+                    Θα τελειώσεις τον κώδικα;
+                  
+                    ## Παράδειγμα κώδικα Hedy
                     ```
-                    options is rock, paper, scissors
+                    options is πέτρα, ψαλίδι, χαρτί
                     computer choice is ...
-                    choice is ask What do you choose?
-                    print 'you chose' ...
-                    print 'computer chose' ...
-                    if ... is ... print 'tie!' else print 'no tie'
-                    if choice is stone and computer choice is paper print 'computer wins'
+                    choice is ask Τί επιλέγεις;
+                    print 'εσύ επέλεξες' ...
+                    print 'ο υπολογιστής επέλεξε' ...
+                    if ... is ... print 'ισοπαλία!' else print 'όχι ισοπαλία'
+                    if choice is πέτρα and computer choice is χαρτί print 'ο υπολογιστής κερδίζει'
                     ```
 
-                    First fill in the correct code on the dots to see if it is a draw.
+                    Πρώτα, συμπλήρωσε το σωστό κώδικα στις τελίτσες για να δεις αν είναι ισοπαλία.
 
-                    Then copy the last line a few times and fill in all the different options correctly.
+                    Έπειτα, αντίγραψε την τελευταία γραμμή αρκετές φορές και συμπλήρωσε σωστά τις διάφορες επιλογές.
 
-                    Now you have finished your own rock, paper, scissors! It's still a bit complicated with all those different options, isn't it?
-                    We will make that a bit easier in a later level.
+                    Τώρα έχεις τελειώσει το δικό σου πέτρα, ψαλίδι, χαρτί! Είναι ακόμα λίγο περίπλοκο με όλες αυτές τις διαφορετικές επιλογές, δεν είναι;
 
-                start_code: "print 'Welcome to your own rock scissors paper!'"
+                    Θα το κάνουμε πιο εύκολο σε ένα επίπεδο πιο μετά.
+
+                    
+                start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί'"
     calculator:
         name: "Calculator"
         description: "Create a calculator"
