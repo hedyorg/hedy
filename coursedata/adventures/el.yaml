@@ -258,26 +258,28 @@ adventures:
                 start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
             6:
                 story_text: |
-                    ## Dishwashing program in level 6
-                    How often is everyone going to do the dishes? Is that fair? You can count that in level 6.
+                    ## Πρόγραμμα πλυσίματος πιάτων στο επίπεδο 6
+                    Πόσο συχνά θα πλένει ο καθένας τα πιάτα; Είναι δίκαιο αυτό; Μπορείς να το υπολογίσεις στο επίπεδο 6.
 
-                    ## Example Hedy code
+                    ## Παράδειγμα κωδικα Hedy
                     ```
-                    people is mom, dad, Emma, Sophie
-                    emma_washes is 0
+                    people is μαμά, μπαμπάς, Ελένη, Σοφία
+                    eleni_washes is 0
                     dishwasher is people at random
-                    print 'The dishwasher is' dishwasher
-                    if dishwasher is Emma emma_washes is emma_washes + 1
-                    print 'Emma will do the dishes this week' emma_washes 'times'
+                    print 'Αυτός που θα πλυνει τα πιάτα' dishwasher
+                    if dishwasher is Ελένη eleni_washes is eleni_washes + 1
+                    print 'Η Ελένη θα πλύνει τα πιάτα ' eleni_washes 'φορές αυτήν την εβδομάδα'
                     ```
 
-                    Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
-                    Do you make the code for the whole week?
+                    Τώρα μπορείς να αντιγράψεις τις γραμμές 3 έως 4 κάποιες φορές (πχ. 7 φορές για όλην την εβδομάδα) για να υπολογίσεις για όλην την εβδομάδα.
+                    Θα κάνεις τον κώδικα για όλην την εβδομάδα;
+                    
 
-                    ## What's next?
-                    Now you have to copy and paste a lot, right? We will fix that in level 7.
-                    This level is the end of the washing up adventure! But there are still many adventures to be made in other levels, such as a calculator, an interactive story and a more complicated game.
-                start_code: "print 'Who does the dishes?'"
+                    ## Τί ακολουθεί;
+                    Τώρα θα πρέπει να κάνεις πολλή αντιγραφή και επικόλληση, έτσι; Αυτό θα το διορθώσουμε στο επίπεδο 7.
+                    Αυτό το επίπεδο είναι το τέλος της περιπέτειας του πλυσίματος! Όμως υπάρχουν πολλές ακόμα περιπέτειες να ακολουθήσεις σε άλλα επίπεδα, όπως το κομπιουτεράκι, μια διαδραστική ιστορία και ένα πιο περίπλοκο παιχνίδι.
+                    
+                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
     dice:
         name: "Make your own dice"
         description: "Make your own dice"
