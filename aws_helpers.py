@@ -26,7 +26,7 @@ def transmit_to_s3(timestamp, records):
 
     # Grouping in the key is important, we need this to zoom into an interesting
     # log period.
-    key = s3config['prefix'] + utils.isoformat(timestamp) + s3config['postfix'] + '.jsonl'
+    key = s3config['prefix'] + utils.isoformat(timestamp).replace('T', '/') + s3config['postfix'] + '.jsonl'
 
     # Store as json-lines format
     body = '\n'.join(json.dumps(r) for r in records)
