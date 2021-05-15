@@ -7,6 +7,11 @@ if ! type lnav > /dev/null; then
     exit 1
 fi
 
+if ! type aws > /dev/null; then
+    echo "Install the AWS CLI before running this script." >&2
+    exit 1
+fi
+
 hedy_env=$1
 day=$2
 
