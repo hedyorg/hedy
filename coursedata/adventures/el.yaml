@@ -86,37 +86,37 @@ adventures:
                     ```
                     name is Γιάννης
                     print 'Το όνομα του βασικού χαρακτήρα είναι' name
-                    print O name 'τώρα θα περπατήσει στο δάσος'
-                    print Ο name 'φοβάται λίγο'
+                    print 'O' name 'τώρα θα περπατήσει στο δάσος'
+                    print 'Ο' name 'φοβάται λίγο'
                     animals is κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
                     print 'Ακούει τον ήχο ενός' animals at random
-                    print Ο name 'φοβάται πως αυτό είναι ένα στοιχειωμένο δάσος'
+                    print 'Ο' name 'φοβάται πως αυτό είναι ένα στοιχειωμένο δάσος'
                     ```
                 start_code: "print Η ιστορία σου θα εμφανιστεί εδώ!"
             4:
                 story_text: |
-                    ## Story in level 4
-                    What you can do in level 4 is make your story even more fun. In level 4 you can program different endings.
+                    ## Η ιστορία στο επίπεδο 4
+                    Στο επίπεδο 4 μπορείς να κάνεις την ιστορία σου ακόμα πιο διασκεδαστική. Στο επίπεδο 4 μπορείς να προγραμματίσεις διαφορετικά φινάλε.
+                    
+                    Σκέψου δύο διαφορετικά φινάλε για την ιστορία σου, για παράδειγμα:
+                    
+                    - Η πριγκίπισσα περπατάει μέσα στο δάσος
+                    - Συναντά ένα τέρας
 
-                    Think of two endings for your story, for example:
+                    - Ευχάριστο τέλος: Παίρνει το σπαθί της και το τέρας τρέχει μακριά.
+                    - Δυσάρεστο τέλος: Το τέρας τρώει την πριγκίπισσα
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    Επιπλέον, μπορείς να βεβαιώσεις πως θα δηλωθεί πάλι το όνομα. Αυτό λειτουργεί όπως στο επίπεδο 3. Μπορείς να το συνδυάσεις με ένα `if`,  και έτσι έχεις δημιουργήσει ήδη ένα ολόκληρο πρόγραμμα!
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
-
-                    You can also ensure that a name can be entered again. That works just like in level 3. You can combine that with an `if`, and then you have already made a whole program!
-
-                    ## Example Hedy code
+                    ## Παράδειγμα Κώδικα Hedy
                     ```
-                    name is ask Who is walking in the forest?
-                    print name 'walks through the forest'
-                    print name 'encounter a monster'
-                    end is ask Would you like a good or a bad ending?
-                    if the end is good print name 'takes the sword and the monster quickly runs away' else print 'The monster eats' name
+                    name is ask Ποιός περπατάει στο δάσος;
+                    print 'Ο' name 'περπατάει στο δάσος'
+                    print 'Ο' name 'συναντά ένα τέρας'
+                    end is ask Θα ήθελες ένα ευχάριστο ή ένα δυσάρεστο φινάλε (good or bad)?
+                    if the end is good print 'Ο' name 'παίρνει το σπαθί και το τέρας τρέχει γρήγορα μακριά' else print 'Το τέρας τρώει τον' name
                     ```
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print Εδώ θα βρίσκεται σύντομα η ιστορία σου!"
             5:
                 story_text: |
                     ## Story in level 5
