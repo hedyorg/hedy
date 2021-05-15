@@ -100,15 +100,15 @@ def apply_change(data, path, value):
 
     index = int(key[2:])
     while len(container) < index + 1:
-      data.append({})
+      container.append({})
     container[index] = value
-    return container
+    return container[index]
   else:
     # Expecting to index into a dict
     if not isinstance(container, dict):
       container = apply_change(data, path[:-1], {})
     container[key] = value
-    return container
+    return container[key]
 
 
 def value_at(data, path):
