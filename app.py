@@ -6,7 +6,6 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 6):
 # coding=utf-8
 import datetime
 import collections
-from functools import wraps
 import hedy
 import json
 import jsonbin
@@ -27,13 +26,16 @@ import utils
 import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
+from flask_helpers import render_template
 from flask_compress import Compress
 
 # Hedy-specific modules
 import courses
 import hedyweb
 import translating
+import querylog
+import aws_helpers
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -213,6 +215,7 @@ if not os.getenv ('HEROKU_APP_NAME'):
 Compress(app)
 Commonmark(app)
 logger = jsonbin.JsonBinLogger.from_env_vars()
+querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_transmitter_from_env())
 
 # Check that requested language is supported, otherwise return 404
 @app.before_request
@@ -222,6 +225,17 @@ def check_language():
 
 if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
+
+
+@app.before_request
+def before_request_begin_logging():
+    querylog.begin_global_log_record(path=request.path, method=request.method)
+
+
+@app.teardown_request
+def teardown_request_finish_logging(exc):
+    querylog.finish_global_log_record(exc)
+
 
 @app.route('/parse', methods=['POST'])
 def parse():
@@ -242,6 +256,8 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
 
+    querylog.log_value(level=level, lang=lang)
+
     response = {}
     username = current_user(request) ['username'] or None
 
@@ -252,7 +268,8 @@ def parse():
     else:
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            result = hedy.transpile(code, level)
+            with querylog.log_time('transpile'):
+                result = hedy.transpile(code, level)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             traceback.print_exc()

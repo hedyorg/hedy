@@ -1,10 +1,11 @@
 import collections
 import attr
 import glob
-import flask
 from os import path
 
-from flask import jsonify, render_template, abort, redirect
+from flask import abort
+from flask_helpers import render_template
+
 import courses
 from auth import current_user
 import utils
