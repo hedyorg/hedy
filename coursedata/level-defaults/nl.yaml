@@ -331,7 +331,7 @@
     start_code: |-
         leeftijd is input('Hoe oud ben jij?')
         print('Dus jij hebt zo veel verjaardagen gehad:')
-        for i in range(0,leeftijd):
+        for i in range(0, leeftijd):
             print(i)
     intro_text: "We gaan nu ronde haakjes toevoegen en ask veranderen! Ask noemen we nu input! Bij print, input en for gaan we nu haakjes zetten!"
     commands:
@@ -346,10 +346,10 @@
             naam is input('Hoe heet jij?')
             print('Dus jij heet ' naam)
     -   name: "For met haakjes"
-        explanation: "We gaan nu in plaats van for i in range 1 to 10, haakjes zetten om de getallen. for i in range(0,10):"
-        example: "Bijvoorbeeld: for i in range(0,10):"
+        explanation: "We gaan nu in plaats van for i in range 1 to 10, haakjes zetten om de getallen. for i in range(0, 10):"
+        example: "Bijvoorbeeld: for i in range(0, 10):"
         demo_code: |-
-            for i in range(0,10):
+            for i in range(0, 10):
                 print(i)
             print('Wie niet weg is is gezien')
 12:
@@ -394,7 +394,7 @@
         explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goed_antwoord `True` (dus waar)"
         example: "goed_antwoord is `False`"
         demo_code: |-
-            for i in range(0,5):
+            for i in range(0, 5):
                 goed_antwoord is False
                 antwoord is input('Wat is 5*5')
                 if antwoord is 25:
@@ -439,7 +439,7 @@
 15:
     start_code: |-
         # Dit is een programma die een aantal sommen gaat vragen
-        for i in range(1,10):
+        for i in range(1, 10):
             # We gaan de van de tafel van 5 vragen
             antwoord is input('Hoeveel is ' i ' keer 5?')
             # We kijken of de som gelijk is aan het antwoord
