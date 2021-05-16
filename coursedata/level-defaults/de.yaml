@@ -523,3 +523,42 @@
             alter is input('Wie alt bist du?')
             if alter > 12:
                 print('Du bist älter als ich!')
+17:
+    start_code: |-
+        richtige_antwort is False
+        # wir fahren fort, bis die richtige Antwort gegeben wurde!
+        while richtige_antwort is False:
+            antwort is input('Wieviel ist 5 mal 5?')
+            if antwort is 25:
+                richtige_antwort is True
+                print('Das ist die richtge Antwort!')
+    intro_text: |- 
+        Wir werden eine neue Schleife lernen, die `while`-Schleife! 
+        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist! 
+        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde. 
+        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
+    commands:
+    -   name: "Boolesches while"
+        explanation: "Wir können die `while`-Schleife mit `True` und `False` verwenden."
+        example: "while richtige_antwort is False"
+        demo_code: |-
+            richtige_antwort is False
+            # wir fahren fort, bis die richtige Antwort gegeben wurde!
+            while richtige_antwort is False:
+                antwort is input('Wieviel ist 5 mal 5?')
+                if antwort is 25:
+                    richtige_antwort is True
+                    print('Das ist die richtge Antwort!')
+    -   name: "while mit Ungleichungen"
+        explanation: |-
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden. 
+            Beachte, dass du die Zahl ändern musst, damit die Schleife endet. 
+            Wir machen das hier mit `zaehler is zaehler + 1`.
+        example: "while zaehler < 3"
+        demo_code: |-
+            zaehler is 1
+            # wir fahren fort, bis der Zählerstand 3 ist!
+            while zaehler < 3:
+                print('Wir machen dies noch ' 3 - zaehler ' mal.')
+                zaehler is zaehler + 1
+            print('Wir sind fertig!')
