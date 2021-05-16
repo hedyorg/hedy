@@ -429,3 +429,40 @@
                   print('Das ist richtig!')
               if richtige_antwort is False:
                   print('Das ist leider falsch! Du hast noch ' 5-i ' Versuche übrig.')
+14:
+    start_code: |-
+        du_bist_noch_hier is False
+        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
+        if bist_du_noch_hier is ja:
+            du_bist_noch_hier is True
+        antwort is input('Wieviel ist 5*5')
+        if du_bist_noch_hier is True and antwort is 25:
+            print('Du hast ja gesagt und die richtige Antwort gegeben!')
+    intro_text: |-
+        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen. 
+        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein. 
+        Du kannst auch `oder` verwenden. 
+        Dann muss nur eine Aussage richtig sein.
+    commands:
+    -   name: "`and`"
+        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+          antwort1 is input('Was ergibt 3+2?')
+          antwort2 is input('Was ergibt 2+2?')
+          if antwort1 is 5 and antwort2 is 4:
+              print('Beide Antworten sind richtig!')
+          else:
+              print('Mindestens eine Antwort ist falsch.')
+    -   name: "`or`"
+        explanation: |-
+            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein. 
+            Wenn beide richtig sind, ist es auch in Ordnung.
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+          antwort1 is input('Was ergibt 3+2?')
+          antwort2 is input('Was ergibt 2+2?')
+          if antwort1 is 5 or antwort2 is 4:
+              print('Mindestens eine Antwort ist richtig!')
+          else:
+              print('Beide Antworten sind falsch.')
