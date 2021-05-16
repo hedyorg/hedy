@@ -2,7 +2,7 @@
     intro_text: |
         Willkommen bei Hedy! In Level 1 kannst du die Befehle `print`, `ask` und `echo` verwenden. 
         
-        Hedy benutzt englische Wörter für Befehle wie die meisten Programmiersprachen. `print` bedeutet drucken oder auf den Bildschirm ausgeben, `ask` bedeutet fragen und `echo` bedeutet wiederholen.
+        Hedy benutzt englische Wörter für Befehle wie die meisten Programmiersprachen. `print` bedeutet drucken oder auf den Bildschirm ausgeben, `ask` bedeutet fraltern und `echo` bedeutet wiederholen.
 
         Auf der linken Seite deines Bildschirms befinden sich alle Befehle des Level 1.
 
@@ -18,7 +18,7 @@
         example: "Beispiel: print Hallo willkommen bei Hedy!"
         demo_code: "print Hallo willkommen bei Hedy!"
     -   name: "ask"
-        explanation: "Frage etwas mit `ask`."
+        explanation: "Fralter etwas mit `ask`."
         example: "Beispiel: ask Was ist deine Lieblingsfarbe?"
         demo_code: "ask Was ist deine Lieblingsfarbe?"
     -   name: "echo"
@@ -53,7 +53,7 @@
             name is Hedy
             print Willkommen name
     -   name: "ask"
-        explanation: "Frage etwas mit `ask`. Aber pass auf! Du musst der Antwort einen Namen mit `is` geben."
+        explanation: "Fralter etwas mit `ask`. Aber pass auf! Du musst der Antwort einen Namen mit `is` geben."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: |-
             farbe is ask Was ist deine Lieblingsfarbe?
@@ -90,7 +90,7 @@
             name is Hedy
             print 'Ich heisse ' name
     -   name: "ask"
-        explanation: "Frage etwas mit `ask`."
+        explanation: "Fralter etwas mit `ask`."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: |-
             farbe is ask Was ist deine Lieblingsfarbe?
@@ -122,7 +122,7 @@
         example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
     -   name: "ask"
-        explanation: "Frage etwas mit `ask`."
+        explanation: "Fralter etwas mit `ask`."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: |-
             farbe is ask Was ist deine Lieblingsfarbe?
@@ -153,7 +153,7 @@
         example: "Beispiel: print 'Hallo. Willkommen bei Hedy.'"
         demo_code: "print 'Hallo. Willkommen bei Hedy.'"
     -   name: "ask"
-        explanation: "Frage etwas mit `ask`."
+        explanation: "Fralter etwas mit `ask`."
         example: "Beispiel: farbe is ask Was ist deine Lieblingsfarbe?"
         demo_code: |-
             farbe is ask Was ist deine Lieblingsfarbe?
@@ -195,7 +195,7 @@
         example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
         demo_code: "print '5 mal 5 ist ' 5 * 5"
     -   name: "`ask` und `if` mit Berechnungen"
-        explanation: "Frage nach einer Rechenaufgabe."
+        explanation: "Fralter nach einer Rechenaufgabe."
         example: "Beispiel: antwort is ask Was ist 10 plus 10?"
         demo_code: |-
             antwort is ask Was ist 10 plus 10?
@@ -243,7 +243,7 @@
         example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
         demo_code: "print '5 mal 5 ist ' 5 * 5"
     -   name: "`if` mit mehreren Zeilen"
-        explanation: "Frage nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben."
+        explanation: "Fralter nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben."
         example: "Beispiel: antwort is ask Was ist 5 plus 5?"
         demo_code: |-
             antwort is ask Was ist 5 plus 5?
@@ -343,7 +343,7 @@
 11:
     start_code: |-
         alter is input('Wie alt bist du?')
-        print('Also hast du bis jetzt diese Geburtstage gefeiert: ')
+        print('Also hast du bis jetzt diese Geburtstalter gefeiert: ')
         for i in range(0,alter):
             print(i)
     intro_text: |-
@@ -413,7 +413,7 @@
     commands:
     -   name: "Beispiel"
         explanation: |-
-            In diesem Beispiel verwenden wir `True` und `False`, um die Antwort auf eine Frage festzuhalten. 
+            In diesem Beispiel verwenden wir `True` und `False`, um die Antwort auf eine Fralter festzuhalten. 
             Du kannst 5 Mal antworten. 
             Wenn die Antwort richtig ist, wird `richtige_antwort` `True` sein.
         example: "`richtige_antwort` ist `False`"
@@ -442,7 +442,7 @@
         Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen. 
         Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein. 
         Du kannst auch `oder` verwenden. 
-        Dann muss nur eine Aussage richtig sein.
+        Dann muss nur eine Aussalter richtig sein.
     commands:
     -   name: "`and`"
         explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
@@ -456,7 +456,7 @@
               print('Mindestens eine Antwort ist falsch.')
     -   name: "`or`"
         explanation: |-
-            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein. 
+            Mindestens eine der beiden Aussaltern links und rechts vom `or`, muss richtig sein. 
             Wenn beide richtig sind, ist es auch in Ordnung.
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
@@ -468,9 +468,9 @@
               print('Beide Antworten sind falsch.')
 15:
     start_code: |-
-        # Dieses Programm wird ein paar mathematische Fragen stellen
+        # Dieses Programm wird ein paar mathematische Fraltern stellen
         for i in range(1,10):
-            # Wir werden die Multiplikationstabelle der 5 abfragen
+            # Wir werden die Multiplikationstabelle der 5 abfraltern
             antwort is input('Was ergibt ' i ' mal 5?')
             # Wir prüfen, ob die Antwort mit unserer übereinstimmt
             korrekte_antwort is i * 5
@@ -492,3 +492,34 @@
             # Es ist in Hedy erstellt worden
             # Es macht nichts, außer Hallo! zu auszugeben
             print('Hallo!')
+16:
+    start_code: |-
+        alter is input('Wie alt bist du?')
+        if alter < 12:
+            print('Du bist jünger als ich!')
+        elif alter > 12:
+            print('Du bist älter als ich!')
+    intro_text: |-
+        Wir lernen weitere neue Elemente kennen! 
+        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen 
+        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`. 
+        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
+    commands:
+    -   name: "Kleiner"
+        explanation: |-
+            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist. 
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+        example: "alter < 12"
+        demo_code: |-
+            alter is input('Wie alt bist du?')
+            if alter < 12:
+                print('Du bist jünger als ich!')
+    -   name: "Größer"
+        explanation: |-
+            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist. 
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+        example: "alter > 12"
+        demo_code: |-
+            alter is input('Wie alt bist du?')
+            if alter > 12:
+                print('Du bist älter als ich!')
