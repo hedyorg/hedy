@@ -255,6 +255,10 @@ if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def before_request_begin_logging():
     querylog.begin_global_log_record(path=request.path, method=request.method)
 
+@app.after_request
+def after_request_log_status(response):
+    querylog.log_value(http_code=response.status_code)
+    return response
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
@@ -280,10 +284,10 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
 
-    querylog.log_value(level=level, lang=lang)
-
     response = {}
     username = current_user(request) ['username'] or None
+
+    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
     # Check if user sent code
     if not code:
@@ -319,6 +323,7 @@ def parse():
             traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
+    querylog.log_value(server_error=response.get('Error'))
     logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
