@@ -23,6 +23,6 @@ config = {
         'prefix': app_name + '/',
         # Make logs from different instances/processes unique
         'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
-        'region': 'eu-central-1'
+        'region': 'eu-west-1'
     },
 }
