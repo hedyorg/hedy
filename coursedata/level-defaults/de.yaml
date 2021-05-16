@@ -383,17 +383,49 @@
         explanation: |-
             Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`. 
             Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-        example: "erstefrucht is fruechte[1]"
+        example: "erste_frucht is fruechte[1]"
         demo_code: |-
             fruechte is ['Apfel', 'Banane', 'Kirsche']
-            erstefrucht is fruechte[1]
-            print(erstefrucht)
+            erste_frucht is fruechte[1]
+            print(erste_frucht)
     -   name: "Nimm ein zufälliges Element aus einer Liste"
         explanation: |-
             Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`. 
             Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-        example: "zufaelligefrucht is fruechte[random]"
+        example: "zufaellige_frucht is fruechte[random]"
         demo_code: |-
             fruechte is ['Apfel', 'Banane', 'Kirsche']
-            zufaelligefrucht is fruechte[random]
-            print(zufaelligefrucht)
+            zufaellige_frucht is fruechte[random]
+            print(zufaellige_frucht)
+13:
+    start_code: |-
+        du_bist_noch_hier is False
+        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
+        if bist_du_noch_hier is ja:
+            du_bist_noch_hier is True
+        if du_bist_noch_hier is True:
+            print('Hallo!')
+        if du_bist_noch_hier is False:
+            print('Tschüss!')
+    intro_text: |-
+        Ab jetzt kannst du Variablen als wahr (`True`) oder falsch (`False`) definieren. 
+        Du kannst dies zum Beispiel verwenden, um abzuspeichern, ob eine Antwort wahr oder falsch war. 
+    commands:
+    -   name: "Beispiel"
+        explanation: |-
+            In diesem Beispiel verwenden wir `True` und `False`, um die Antwort auf eine Frage festzuhalten. 
+            Du kannst 5 Mal antworten. 
+            Wenn die Antwort richtig ist, wird `richtige_antwort` `True` sein.
+        example: "`richtige_antwort` ist `False`"
+        demo_code: |-
+          for i in range(1,5):
+              richtige_antwort is False
+              antwort is input('Wieviel ist 5*5')
+              if antwort is 25:
+                  richtige_antwort is True
+              else:
+                  richtige_antwort is False
+              if richtige_antwort is True:
+                  print('Das ist richtig!')
+              if richtige_antwort is False:
+                  print('Das ist leider falsch! Du hast noch ' 5-i ' Versuche übrig.')
