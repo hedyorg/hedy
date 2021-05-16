@@ -199,7 +199,7 @@
         example: "Beispiel: antwort is ask Was ist 10 plus 10?"
         demo_code: |-
             antwort is ask Was ist 10 plus 10?
-            if answer is 20 print 'Ja!' else print 'Ups'
+            if antwort is 20 print 'Ja!' else print 'Ups'
     -   name: "repeat"
         explanation: "`repeat` und `if` kombiniert"
         example: "Beispiel: if antwort is 50 repeat 3 times print 'Richtig!' else repeat 5 times print 'Ups'"
@@ -466,3 +466,29 @@
               print('Mindestens eine Antwort ist richtig!')
           else:
               print('Beide Antworten sind falsch.')
+15:
+    start_code: |-
+        # Dieses Programm wird ein paar mathematische Fragen stellen
+        for i in range(1,10):
+            # Wir werden die Multiplikationstabelle der 5 abfragen
+            antwort is input('Was ergibt ' i ' mal 5?')
+            # Wir prüfen, ob die Antwort mit unserer übereinstimmt
+            korrekte_antwort is i * 5
+            if antwort is korrekte_antwort:
+                print(antwort ' ist korrekt!')
+            else:
+                print('Das ist falsch. Die richtige Antwort lautet: ' i*5)
+    intro_text: |-
+        Wenn du größere Programme erstellst, brauchst du einen Weg, um dir zu merken, was jedes Codestück tut. 
+        Wir verwenden dafür Kommentare. 
+        Ein Kommentar sieht folgendermaßen aus:\n ` # Dies ist ein Kommentar`. 
+        Alles nach dem `#` wird für den Code unsichtbar.
+    commands:
+    -   name: "Kommentar"
+        explanation: "Wir können Kommentare platzieren, wo immer wir wollen."
+        example: "# Dies ist ein Kommentar"
+        demo_code: |-
+            # Dieses Programm gibt Hallo! aus
+            # Es ist in Hedy erstellt worden
+            # Es macht nichts, außer Hallo! zu auszugeben
+            print('Hallo!')
