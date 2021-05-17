@@ -251,7 +251,7 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
 # Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
-if not os.getenv ('HEROKU_APP_NAME'):
+if os.getenv ('HEROKU_APP_NAME'):
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
@@ -277,6 +277,10 @@ if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def before_request_begin_logging():
     querylog.begin_global_log_record(path=request.path, method=request.method)
 
+@app.after_request
+def after_request_log_status(response):
+    querylog.log_value(http_code=response.status_code)
+    return response
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
@@ -303,11 +307,11 @@ def parse():
     lang = body.get('lang', requested_lang())
     supported_lang = ["en", "nl"]
 
-    querylog.log_value(level=level, lang=lang)
-
     response = {}
     headers = {}
     username = current_user(request) ['username'] or None
+
+    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
     # Check if user sent code
     if not code:
@@ -357,6 +361,7 @@ def parse():
         if lang in supported_lang:
             set_session_var (headers, 'code', code)
 
+    querylog.log_value(server_error=response.get('Error'))
     logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
