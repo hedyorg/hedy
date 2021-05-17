@@ -671,7 +671,9 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         adventure_assignments=adventure_assignments,
-        loaded_program=loaded_program)
+        loaded_program=loaded_program,
+        loaded_program_name=loaded_program_name,
+        adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
