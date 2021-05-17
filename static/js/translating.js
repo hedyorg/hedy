@@ -34,8 +34,14 @@ $(function() {
     const target = $(e.target);
     if (!target.hasClass('touched')) {
       target.addClass('touched');
+
+      // Change the 'data-name="xxx"' attribute into an actual 'name="xxx"' attribute
+      // so that the value is actually submitted via the form.
+      target.attr('name', target.data('name'));
+
       recordChangeToForm(target.closest('form'));
     }
+
     resizeArea(target);
   });
 

@@ -1,0 +1,36 @@
+#!/bin/bash
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+
+if ! type lnav > /dev/null; then
+    echo "Install 'lnav' before running this script! (http://lnav.org)" >&2
+    exit 1
+fi
+
+if ! type aws > /dev/null; then
+    echo "Install the AWS CLI before running this script." >&2
+    exit 1
+fi
+
+hedy_env=$1
+day=$2
+
+cache_root=~/.cache/hedy-logs/${hedy_env}
+cache_dir=${cache_root}/${day}
+mkdir -p "$cache_dir"
+
+export AWS_DEFAULT_REGION=eu-central-1
+export AWS_PROFILE=hedy-logs-viewer
+bucket=hedy-query-logs
+
+aws s3 sync s3://${bucket}/${hedy_env}/${day} $cache_dir
+
+# Need to make sure every file ends in a newline
+sed -i -e '$a\' $cache_dir/*
+
+#finalfile=$cache_root/$day.jsonl
+#rm -f $finalfile
+#for f in $cache_dir/*; do (cat "${f}"; echo) >> $finalfile; done
+
+lnav -i $scriptdir/jsonlines_fmt.json
+lnav -r $cache_dir
