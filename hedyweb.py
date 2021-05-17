@@ -34,7 +34,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, loaded_program_name, adventure_assignments, adventure_name):
   assignment = course.get_assignment(level_number, assignment_number)
   if not assignment:
     abort(404)
@@ -58,7 +58,9 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
+  arguments_dict['loaded_program_name'] = loaded_program_name
   arguments_dict['adventure_assignments'] = adventure_assignments
+  arguments_dict['adventure_name'] = adventure_name
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
@@ -69,45 +71,5 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   # Add markdowns to docs
   for doc in arguments_dict ['docs']:
     doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
-
-  return render_template("code-page.html", **arguments_dict)
-
-def render_adventure(adventure_name, adventure, course, request, lang, level_number, menu, translations, version, loaded_program):
-
-  arguments_dict = {}
-
-  arguments_dict['lang'] = lang
-  arguments_dict['level_nr'] = str(level_number)
-  arguments_dict['level'] = level_number
-  arguments_dict['prev_level'] = level_number - 1 if level_number - 1 in adventure ['levels'] else None
-  arguments_dict['next_level'] = level_number + 1 if level_number + 1 in adventure ['levels'] else None
-  arguments_dict['menu'] = menu
-  arguments_dict['latest'] = version
-  arguments_dict['selected_page'] = 'code'
-  arguments_dict['page_title'] = f'Adventure mode: {adventure ["name"]} {level_number} – Hedy'
-  arguments_dict['auth'] = (translations.data.get (lang) or translations.data ['en']) ['Auth']
-  arguments_dict['username'] = current_user(request) ['username']
-  arguments_dict['loaded_program'] = loaded_program
-  arguments_dict['adventure_name'] = adventure_name
-  arguments_dict['full_adventure_name'] = adventure ['name']
-
-  # Translations
-  arguments_dict.update(**translations.get_translations(lang, 'ui'))
-
-  # Actual assignment
-  for key, value in adventure ['levels'] [level_number].items ():
-    arguments_dict [key] = value
-
-  if not 'story_text' in arguments_dict:
-    arguments_dict ['story_text'] = ''
-  if not 'story_commands' in arguments_dict:
-    arguments_dict ['story_commands'] = []
-
-  # We use the intro_text and commands from the corresponding Hedy level, if they are not present in the adventure
-  hedy_course = course.get_assignment(level_number, None)
-  if not 'intro_text' in arguments_dict:
-    arguments_dict ['intro_text'] = hedy_course.intro_text
-  if not 'commands' in arguments_dict:
-    arguments_dict ['commands'] = hedy_course.commands
 
   return render_template("code-page.html", **arguments_dict)
