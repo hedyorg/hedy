@@ -229,7 +229,7 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
 # Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
-if not os.getenv ('HEROKU_APP_NAME'):
+if os.getenv ('HEROKU_APP_NAME'):
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
