@@ -233,7 +233,7 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
 app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 
 # Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
-if not os.getenv ('HEROKU_APP_NAME'):
+if os.getenv ('HEROKU_APP_NAME'):
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
@@ -408,7 +408,7 @@ def log_feedback():
         'collapse': collapse,
         'GFM': True
     })
-    debug = False
+    debug = True
     if debug:
         print("TESTING FEEDBACK LOG INFORMATION")
         print("Model was useful: " + str(general_answer))
@@ -717,13 +717,15 @@ def space_eu(level, step):
         menu=None,
         loaded_program='')
 
-
-
 @app.route('/error_messages.js', methods=['GET'])
 def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     return render_template("error_messages.js", error_messages=json.dumps(error_messages))
 
+@app.route('/gradual_messages.js', methods=['GET'])
+def gradual_error():
+    error_messages = TRANSLATIONS.get_translations(requested_lang(), "GradualFeedback")
+    return render_template("gradual_messages.js", error_messages=json.dumps(error_messages))
 
 @app.errorhandler(500)
 def internal_error(exception):
