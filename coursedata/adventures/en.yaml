@@ -523,6 +523,7 @@ adventures:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
         image: ""
+        default_save_name: "Restaurant"
         levels:
             1:
                story_text: |
@@ -578,8 +579,115 @@ adventures:
                    print You will start with: starters at random
                    print Then we'll serve: mains at random
                    print And as dessert: desserts at random
-                   print You will get a drinks to drink
+                   print You will get a drinks at random to drink
                    print That will be: prices at random
                    print Thank you and enjoy your meal! 
                    ```
+                   
+                   ## Challenge
+                   Can you think of any fun additions in your restaurant code? 
                 start_code: ""
+            3:
+                story_text: |
+                       ## Restaurant
+                       In level 3 you have to use quotation marks when using the `print` command.
+                       Can you make your level 2 code work in level 3 by adding the quotation marks?
+
+                       Be careful! In level 2 apostrophes were allowed in the text, but in level 3 Hedy will confuse them for quotation marks and the code will not work!
+                       So instead of typing  `print Today we're serving pizza` , you should type `print 'Today we are serving pizza'`
+
+                       ## Example Hedy Restaurant
+                       ```
+                       print 'Welcome to Hedys restaurant!'
+                       print 'Today we are serving pizza or lasagna.'
+                       food is ask What would you like to eat?
+                       print 'Great choice! The ' food ' is my favorite!'
+                       topping is ask Would you like meat or veggies on that?
+                       print food ' with ' topping ' is on its way!'
+                       drinks is ask What would you like to drink with that?
+                       print 'Thank you for your order.'
+                       print 'Your ' food ' and ' drinks ' will be right there!'
+                       ```
+                start_code: ""
+            4:
+                story_text: |
+                       ## Restaurant
+                       In level 4 the if command allows you to ask your customers questions and give diffrent responses to the asnwers.
+                       In the example below you see that you can ask the customer if they want to hear the specials and Hedy can respond accordingly.
+
+                       ## Example Hedy Code
+                       ```
+                       print 'Welcome to Hedys restaurant!'
+                       special is ask Would you like to hear our specials today?
+                       if special is yes print 'Todays special is chicken piri piri and rice.' else print 'No problem.'
+                       food is ask What would you like to eat?
+                       print 'One ' food ', coming right up!'
+                       drink is ask What would you like to drink with that?
+                       if drink is cola print 'Im sorry, we are out of cola!' else print 'Great choice!'
+                       anything is ask Would you like anything else?
+                       print 'Let me repeat your order...'
+                       print 'One ' food
+                       if drink is cola print 'and...' else print 'One ' drinks
+                       if anything is no print 'Thats it!' else print 'One ' anything
+                       print 'Thank you for your order and enjoy your meal!'
+                       ```
+
+                       ## Challenge
+                       Can you think of more questions to ask the customers when they are ordering, and make up different responses to their answers by using the if command?
+
+                start_code: ""
+            6:
+                story_text: |
+                      ## Restaurant
+                      In level 6 you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+
+                      ## Example Hedy Code (Simple)
+                      You can make a simple restaurant code, like this:
+                      ```
+                      print 'Welcome to Hedys restaurant'
+                      print 'Here is our menu:'
+                      print 'Our main courses are pizza, lasagne, or spaghetti'
+                      main is ask Which main course would you like?
+                      price is 0
+                      if main is pizza price is 10
+                      if main is lasagne price is 12
+                      if main is spaghetti price is 8
+                      print 'You have ordered ' main
+                      print 'That will be ' price ' dollars, please'
+                      print 'Thank you, enjoy your meal!'
+                      ```
+                      But you can also add many more things to your virtual restaurant, for example more courses.
+
+                      ## Example Hedy Code (Elaborate)
+                      In this example there are three courses, which requires more code and more additions in calculating the price.
+                      ```
+                      print 'Welcome to Hedys restaurant'
+                      print 'Here is our menu:'
+                      print 'Our starters are salad, soup, or carpaccio'
+                      print 'Our main courses are pizza, lasagne, or spaghetti'
+                      print 'Our desserts are brownie, icecream, or milkshake'
+                      starter is ask Which starter would you like to have?
+                      main is ask Which main course would you like?
+                      dessert is ask Which dessert do you pick?
+                      price is 0
+                      if starter is soup price is price + 6 else price is price + 7
+                      if main is pizza price is price + 10
+                      if main is lasagne price is price + 12
+                      if main is spaghetti price is price + 8
+                      if dessert is brownie price is price + 7
+                      if dessert is icecream price is price + 5
+                      if dessert is milkshake price is price + 4
+                      print 'You have ordered ' starter ' , ' main ' and ' dessert
+                      print 'That will be ' price ' dollars, please'
+                      print 'Thank you, enjoy your meal!'
+                      ```
+                      ## Challenge
+                      You can add many more things to your virtual restaurant for example can you...
+                      ... ask how many people are coming and multiply the price by that amount?
+                      ... add another course?
+                      ... give people a discount when they enter a (secret) couponcode?
+                      ... add a children's menu?
+                      ... think of other fun things to add?
+
+                start_code: ""
+
