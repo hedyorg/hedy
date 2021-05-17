@@ -215,12 +215,11 @@
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
     window.State.adventure_name_onload = window.State.adventure_name;
     // We load the adventures into the js to have access to their saved programs (if any).
-    window.State.adventures = JSON.parse ('{{ adventure_assignments|tojson }}'.replace (/\n/g, '\\n'));
-    // We unescape HTML entities on the default program, but we do this in javascript and not in the template to avoid malicious programs injecting js.
-    window.State.default_program = "{{ start_code }}".replace (/&#39;/g, "'").replace (/&quot;/g, '"').replace (/&amp;/g, '&').replace (/&lt;/g, '<').replace (/&gt;/g, '>').replace (/&#96;/g, '`');
-    window.State.loaded_program = "{{ loaded_program }}".replace (/&#39;/g, "'").replace (/&quot;/g, '"').replace (/&amp;/g, '&').replace (/&lt;/g, '<').replace (/&gt;/g, '>').replace (/&#96;/g, '`');
-    window.State.loaded_program_name = "{{ loaded_program_name }}";
-    window.State.default_program_name = "{{ untitled + ' - ' + level_title + ' ' + level_nr}}";
+    window.State.adventures = {{ adventure_assignments|tojson }};
+    window.State.default_program = {{start_code|tojson }};
+    window.State.loaded_program = {{ loaded_program|tojson }};
+    window.State.loaded_program_name = {{ loaded_program_name|tojson }};
+    window.State.default_program_name = {{ (untitled + ' - ' + level_title + ' ' + level_nr)|tojson }};
   </script>
   <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript"></script>
   <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
