@@ -25,8 +25,22 @@
         if (window.State.level == 4){
           window.editor.session.setMode("ace/mode/level4");
         }
+        if (window.State.level == 5){
+          window.editor.session.setMode("ace/mode/level5");
+        }
+        if (window.State.level == 6){
+          window.editor.session.setMode("ace/mode/level6");
+        }
+        if (window.State.level == 7){
+          window.editor.session.setMode("ace/mode/level7");
+        }
+        if (window.State.level == 8 || window.State.level == 9){
+          window.editor.session.setMode("ace/mode/level8and9");
+        }
+        if (window.State.level == 10){
+          window.editor.session.setMode("ace/mode/level10");
+        }
   }
-
 
 
   // Load existing code from session, if it exists
