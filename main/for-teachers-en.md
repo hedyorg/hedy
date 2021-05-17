@@ -6,7 +6,7 @@ It’s great that you want to bring Hedy into your classroom! On this page you�
 
 ### What’s Hedy?
 
-Hedy is a textual programming language, specifically developed for (pre-)teens (10 to 15 years old).  In contrast to programming languages for kids, like Scratch, Hedy doesn’t use code blocks but textual code.  So with Hedy you’ll learn how to type code like the real programmers do, but in small steps with playful exercises. 
+Hedy is a textual programming language, specifically developed for (pre-)teens (10 to 15 years old). In contrast to programming languages for kids, like Scratch, Hedy doesn’t use code blocks but textual code. So with Hedy you’ll learn how to type code like the real programmers do, but in small steps with playful exercises. 
 
 This way Hedy can function as a stepping stone to real programming languages like Python in an accessible and mostly fun way! 
 
@@ -17,7 +17,7 @@ Here you can watch a [video](https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2
 Hedy’s developed with middle school and junior high school students in mind (ages 10 - 15). It’s important for the students to be able to read well. We recommend not to start with Hedy before the students have achieved at least a 3rd grade reading level. Students (and teachers!) don’t need any programming experience before starting with Hedy. 
 
 ### Teaching with Hedy
-Hedy is divided into levels, in which new commands are taught.Each level contains a variety of exercises to practice to newly learned commands. The exercises can be done by the students individually, or you can use them in classical instructions. The lesson plans for each level are included in this teacher manual.  The lesson plans and exercises are explained step by step, to make sure the less digitally informed teachers should be able to use Hedy too! 
+Hedy is divided into levels, in which new commands are taught.Each level contains a variety of exercises to practice to newly learned commands. The exercises can be done by the students individually, or you can use them in classical instructions. The lesson plans for each level are included in this teacher manual. The lesson plans and exercises are explained step by step, to make sure the less digitally informed teachers should be able to use Hedy too! 
 
 Of course Hedy also caters to the creative teachers that love to make their own lessonplans and exercises! 
 
@@ -33,9 +33,9 @@ To start programming with Hedy, visit this website:
 
 [https://www.hedycode.com/](https://www.hedycode.com/)
 
-Click on  Login in the upper right corner. Here you can log in with your username and password. Is this your first time using Hedy? Click the green button Create an account. 
+Click on Login in the upper right corner. Here you can log in with your username and password. Is this your first time using Hedy? Click the green button Create an account. 
 
-Mind: Choose a username and password that you can easily remember, or write it down somewhere!  
+Mind: Choose a username and password that you can easily remember, or write it down somewhere! 
 
 ### Saving programs
 
@@ -43,7 +43,7 @@ As soon as you are logged in, you’ll see the blue banner with My profile and M
 
 In My programs you can find all the codes that you’ve saved. 
 
-Je can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
+You can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
 
 ![](RackMultipart20210420-4-19s02r2_html_5657fc35812eb727.png)
 
@@ -57,7 +57,7 @@ Level 1 is the introductory level of Hedy. The students will learn 3 new command
 
 ### New commands
 
-`print `- This command makes text appear in the output screen. 
+`print`- This command makes text appear in the output screen. 
 
 `ask` - This command allows you to ask a question to the player. 
 
@@ -72,7 +72,7 @@ Level 1 is the introductory level of Hedy. The students will learn 3 new command
 
 These are the frequently made mistakes by students in level 1: 
 
-- Students forget to type the commands and write a code without starting with `print` for example.  
+- Students forget to type the commands and write a code without starting with `print` for example. 
 - Students start the commands with a capital letter, even though all letters should be lowercase. 
 - Sometimes students will get error messages from their browser that Hedy doesn’t work as it’s supposed to. The solution is to refresh the webpage. 
 
@@ -108,7 +108,7 @@ Show your students…
 Show the 3 commands of level 1 to your students and let them make up codes themselves. When all the students have created their own codes, you can start with the fortune teller exercise. This exercise is worked out step by step in the assignment booklet. Je can choose to let the students work on the exercises independently or you can work on them with the whole class together. 
 
 #### Evaluation (5 minutes)
-Shortly evaluate the lesson to check if all the students accomplished to make a code. You can also ask your students how they liked programming (for the first time). Potentially, you could let some students show their codes to the whole class.  
+Shortly evaluate the lesson to check if all the students accomplished to make a code. You can also ask your students how they liked programming (for the first time). Potentially, you could let some students show their codes to the whole class. 
 
 ## Level 2
 
@@ -143,7 +143,7 @@ These are the frequently made mistakes in level 2:
 - Students sometimes tend to forget to type the commands at all, for instance they start their code without typing print first. 
 - Students use the command echo, which only works in level 1. In level 2 you can repeat a given answer by using the variable. 
 - Students forget to use commas when making a list. For instance, they would make this code: 
- `animals is dog cat` instead of  `animals is dog, cat`
+ `animals is dog cat` instead of `animals is dog, cat`
 - Students tend to use commas after a `print` command, this is not possible.
 E.g. they program: `print Hello, I’m Hedy` instead of `print Hello I’m Hedy`
 
@@ -246,11 +246,11 @@ These are the frequently made mistakes by students in level 3
 
 - The same mistakes as level 2. 
 - Students forget putting the quotation marks on both sides of the text after a print command. 
-- Students use the wrong quotation marks. The correct quotation mark is  ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
-- Students use quotation marks in the `ask`command, even though this is not necessary. 
+- Students use the wrong quotation marks. The correct quotation mark is ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
+- Students use quotation marks in the `ask` command, even though this is not necessary. 
 
 ### Lesson Plan 3
-The third lesson is mainly focussed on adding quotation marks to the print command. This is often a struggle for students. Therefore the instruction in this lesson plan is concise, and there is a lot of time scheduled for the students to practice.  
+The third lesson is mainly focussed on adding quotation marks to the print command. This is often a struggle for students. Therefore the instruction in this lesson plan is concise, and there is a lot of time scheduled for the students to practice. 
 
 #### Activating prior knowledge and instruction quotation marks(10 minutes)
 Start off the lesson by repeating the commands learned in the previous lesson. Explain that level 3 requires you to add quotation marks to your codes after using the print command. The code below shows the importance or practicality of using quotation marks. Mind: Show your students the code in level 2 first! 
@@ -263,7 +263,7 @@ You’ll see that the word pet is line 2 doesn’t work. It’s been changed to 
 
 ```
 pet is dog, cat, bunny
-print ‘You get this pet: ’
+print 'You get this pet: '
 print pet at random
 ```
 
@@ -271,21 +271,21 @@ Note that the quotation marks are used to tell Hedy what text should be printed.
 
 ```
 pet is dog, cat, bunny
-print ‘You’ll get this pet: ’
+print 'You'll get this pet: '
 print pet at random
 ```
 Fix it by removing the apostrophe. 
 
 ```
 pet is dog, cat, bunny
-print ‘Youll get this pet: ’
+print 'Youll get this pet: '
 print pet at random
 ```
 
 Before the students get to work, pay attention to the frequently made mistakes: 
 There should always be a quotation mark before and one after the text you want to print. So always check whether all print commands have 2 quotation marks. 
-Students must use the right quotation marks. The correct quotation mark is  ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
-`ask` does not require quotation marks, only `print ` does. 
+Students must use the right quotation marks. The correct quotation mark is ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
+`ask` does not require quotation marks, only `print` does. 
 
 #### Let’s get to work! (15 minutes)
 Remake your level 2 codes with quotation marks in level 3. 
@@ -301,7 +301,7 @@ Wrap up the lesson by evaluating what the students learned in this lesson.
 
 ### What will the students learn in this level? 
 
-Level 4 introduces the if and else commands, which creates a lot of options. This results in lots of new and fun possibilities for the students, but can also be confusing to them as the chance of making a mistake increases considerably. The codes will also become a bit longer than in the previous levels, which makes it harder for students to detect their own faults.  
+Level 4 introduces the if and else commands, which creates a lot of options. This results in lots of new and fun possibilities for the students, but can also be confusing to them as the chance of making a mistake increases considerably. The codes will also become a bit longer than in the previous levels, which makes it harder for students to detect their own faults. 
 
 ### New commands
 
@@ -320,13 +320,13 @@ These are the frequently made mistakes by students in level 4:
 - Mistake: Students put else on the next line, but it should be in the same line as the if command. 
 Code: 
 ```
-if name is Hedy print ‘nice’
-else print ‘boo!’
+if name is Hedy print 'nice'
+else print 'boo!'
 ```
 Solution: Else should be in the same line as if. 
 
 ```
-if name is Hedy print ‘nice’ else print ‘boo!’
+if name is Hedy print 'nice' else print 'boo!'
 ```
 - Mistake: Students use apostrophes after a print command. 
 ```
@@ -338,7 +338,7 @@ print 'Im Hedy'
 ```
 - Mistake: Students forget to use the print command when using an if command.
 ```
-if name is Hedy ‘nice’ else ‘boo!’
+if name is Hedy 'nice' else 'boo!'
 ```
 Solution: Use print twice when using both if and else. 
 ``` 
@@ -368,7 +368,7 @@ if name is Hedy print 'nice' else print 'boo!'
 
 - Mistake: Students use quotation marks around a variable. 
 ```
-if ‘name’ is 'Hedy' print 'nice' else print 'boo!'
+if 'name' is 'Hedy' print 'nice' else print 'boo!'
 ```
 Solution: Don’t use quotation marks around a variable. 
 ```
@@ -398,7 +398,7 @@ if name is David print 'you are funny'
 
 if name is Souf print 'you are funny'
 ```
-- Mistake: Students give the same answer in ask as the variable name. For example this student made the password ‘password’.  
+- Mistake: Students give the same answer in ask as the variable name. For example this student made the password 'password'. 
 ```
 password is ask What is the secret password?
 If password is password print 'You can enter!' else print 'Access denied!' 
@@ -424,7 +424,7 @@ Briefly repeat the previous lesson and also recollect the frequently made mistak
 The if-construction enables Hedy to react in two different ways to the player’s answers. Demonstrate using this example: 
 ```
 name is What’s your name?
-if name is Hedy print ‘Access granted’ else print ‘Access denied’
+if name is Hedy print 'Access granted' else print 'Access denied'
 ```
 
 #### Let’s get to work: The fortune teller (20 minutes) 
@@ -470,7 +470,7 @@ Level 5 introduces the new command `repeat … times`, which allows the students
 These are the frequently made mistakes by students in level 4: 
 
 - The same mistakes as in level 4 (see level 4)
-- Students tend to forget words in this command: repeat 3 times print. Especially the words print or times are easily forgotten.  
+- Students tend to forget words in this command: repeat 3 times print. Especially the words print or times are easily forgotten. 
 
 ### Lesson plan 5
 This lesson focuses on the assignment Hedy the Singer. When the students are done with this assignment they can independently go ahead with the other assignments in level 5.
@@ -482,19 +482,19 @@ A good way to start up your lesson is by briefly repeating all the different com
 The repeat command allows you to repeat a line of code multiple times. In previous levels, if we wanted to program to song Baby Shark, we had to type this code: 
 
 ```
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark’
+print 'Baby Shark tututututudu'
+print 'Baby Shark tututututudu'
+print 'Baby Shark tututututudu'
+print 'Baby Shark'
 ```
 Now, with repeat, it’s much easier to make a code like this: 
 
 ```
-repeat 3 times print ‘Baby Shark tututututudu’
-print ‘Baby Shark’
+repeat 3 times print 'Baby Shark tututututudu'
+print 'Baby Shark'
 ```
 
-#### Let’s get to work: Hedy the Singer!  (20 - 30 minutes) 
+#### Let’s get to work: Hedy the Singer! (20 - 30 minutes) 
 After this short instruction, the students can work on the other songs in the exercises by themselves. Unfortunately, Hedy can only print text and not really sing songs. If you want to hear the computer sing, you could tell your students to copy the output into Google Translate and use the speak-function there. Tip: Only do this if the students have headphones. 
 If the students are done with programming the songs in the assignments. They can continue with the other assignments in level 5. 
 
@@ -505,11 +505,11 @@ Wrap up the lesson with a short evaluation. It might be fun to ask some students
 
 ### What will the students learn in level 6?
 
-Level 6 allows the students to use maths in Hedy. Hedy can add, subtract, multiply and divide two numbers or variables.  
+Level 6 allows the students to use maths in Hedy. Hedy can add, subtract, multiply and divide two numbers or variables. 
 
 ### New commands
 
 For addition and subtraction you can just use the + and - signs. 
-Multiplications are done with the * so 5 times 7 is 5*7. The asterisk is found above the 8 on your keyboard, so use shit 8 to type it. 
+Multiplications are done with the * so 5 times 7 is 5*7. The asterisk is found above the 8 on your keyboard, so use shift 8 to type it. 
 Divisions are made with the / (same key on your keyboard as the question mark). 
 
