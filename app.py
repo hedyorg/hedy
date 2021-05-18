@@ -200,6 +200,13 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
                     continue
                 request_headers [header [0]] = header [1]
 
+            # Sets session variables in a header x-session_vars
+            session_vars = {}
+            for var in session:
+                if var not in ['session_id']:
+                    session_vars [var] = session [var]
+            request_headers ['x-session_vars'] = json.dumps (session_vars)
+
             # Send the session_id to the test environment for logging purposes
             request_headers ['x-session_id'] = session_id ()
             r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
@@ -210,6 +217,12 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
                 # We ignore the set-cookie header
                 if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'set-cookie']):
                     continue
+                # We set the session vars returned by the test server
+                if (header.lower () == 'x-session_vars'):
+                    session_vars = json.loads (r.headers ['x-session_vars'])
+                    for var in session_vars:
+                        print ('DEBUG RECEIVING SESSION VAR FROM TEST', var, session_vars [var])
+                        session [var] = session_vars [var]
                 response.headers [header] = r.headers [header]
             return response, r.status_code
 
@@ -217,6 +230,13 @@ if os.getenv ('IS_TEST_ENV'):
     @app.before_request
     def before_request_receive_proxy():
         print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
+        # If session vars come in a header, set them.
+        if 'x-session_vars' in request.headers:
+            session_vars = json.loads (request.headers ['x-session_vars'])
+            for var in session_vars:
+                if var not in ['session_id']:
+                    print ('DEBUG RECEIVING SESSION VAR FROM PROXIED REQUEST', var, session_vars [var])
+                    session [var] = session_vars [var]
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -259,6 +279,10 @@ if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def before_request_begin_logging():
     querylog.begin_global_log_record(path=request.path, method=request.method)
 
+@app.after_request
+def after_request_log_status(response):
+    querylog.log_value(http_code=response.status_code)
+    return response
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
@@ -284,11 +308,14 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
     supported_lang = ["en", "nl"]
-
     querylog.log_value(level=level, lang=lang)
 
+
     response = {}
+    headers = {}
     username = current_user(request) ['username'] or None
+
+    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
     # Check if user sent code
     if not code:
@@ -300,11 +327,13 @@ def parse():
             gradual_feedback = TRANSLATIONS.get_translations(lang, 'GradualFeedback')
             with querylog.log_time('transpile'):
                 result = hedy.transpile(code, level)
+
             response["Code"] = "# coding=utf8\nimport random\n" + result
             if lang in supported_lang:
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
-                session['error_level'] = 0  # Code is correct: reset error_level back to 0
+                set_session_var (headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
+
         except hedy.HedyException as E:
             traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -326,17 +355,19 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=True))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=True))
+                
         except Exception as E:
             traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=False))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=False))
         if lang in supported_lang:
-            session['code'] = code
+            set_session_var (headers, 'code', code)
 
-    logger.log({
+    querylog.log_value(server_error=response.get('Error'))
+    logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
@@ -351,7 +382,103 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
 
-    return jsonify(response)
+    response = make_response (response)
+    for header in headers:
+         response.headers [header] = headers [header]
+
+    return response
+
+def gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception):
+    response = {}
+    print("Printing the session...")
+    try:
+        print(session['error_level'])
+    except:
+        print("Doesn't exist!")
+    response['prev_feedback_level'] = session['error_level']
+    response['prev_similar_code'] = session['similar_code']
+
+    if session['code'] == code:
+        response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
+        response["Duplicate"] = True
+    else:
+        response["Duplicate"] = False
+        if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
+            set_session_var (headers, 'error_level', session['error_level'] + 1)
+        if session['error_level'] == 2: # Give a more explanatory error message
+            if hedy_exception:
+                response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
+            else:
+                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
+        elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
+                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
+        elif session['error_level'] == 4:
+            similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+            if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                response["Feedback"] = gradual_feedback["No_similar_code"]
+            else:
+                response["Feedback"] = similar_code
+                set_session_var (headers, 'similar_code', similar_code)
+        elif session['error_level'] == 5:
+            response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
+    response["feedback_level"] = session['error_level']
+    return response
+
+@app.route('/feedback', methods=['POST'])
+def log_feedback():
+    body = request.json
+    general_answer = body['general_answer']
+    level_answer = body['level_answer']
+    feedback_level = int(body['feedback_level'])
+    collapse = bool(body['collapse'])  # this is either true or false: The window was either expanded or not
+    similar_code = body['similar_code']
+    logger.log({
+        'session': session_id(),
+        'date': str(datetime.datetime.now()),
+        'feedback_level': feedback_level,
+        'usefulness': general_answer,
+        'level_usefulness': level_answer,
+        'similar_code': similar_code,
+        'collapse': collapse
+    })
+
+    # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
+    # We have to return something to the AJAX POST to show we are okay
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+
+def preprocess_code_similarity_measure(code):
+    concepts = ['print', 'ask', 'echo', 'is', 'at random', 'if', 'else', 'repeat', 'for']
+    words = code.split()
+    code = ""
+    for word in words:
+        if word not in concepts:
+            code += re.sub(r"[a-z|A-Z|0-9|!?,'']", "% ", word)
+        else:
+            code += word + " "
+    return code
+
+def get_similar_code(processed_code, level):
+    filename = "coursedata/level" + str(level) + ".csv"
+    shortest_distance = 10 # This is the threshold: when differ more than this value it's no longer similar code
+    similar_code = None
+    try:
+        with open(filename, mode='r', encoding='utf-8') as file:
+            csvFile = csv.reader(file)
+            for lines in csvFile:
+                distance = lev(processed_code, lines[2])
+                if distance == 0:  # The code is identical, no need to search any further
+                    similar_code = lines[0]
+                    break
+                else:
+                    if distance < shortest_distance:
+                        shortest_distance = distance
+                        similar_code = lines[0]
+    except:
+        similar_code = None
+    return similar_code
 
 
 def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
@@ -632,6 +759,14 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
+    response = {}
+    headers = {}
+
+    if requested_lang() in ["en", "nl"]:
+        set_session_var (headers, 'error_level', 0) # When requesting a new level, always reset error_level to 0
+        set_session_var (headers, 'similar_code', "-") # Make sure that the gathered similar code is also deleted when re-loading the page
+        set_session_var (headers, 'code', None) # Make sure that no code is stored in the session when re-loading the page
+
     loaded_program = ''
     loaded_program_name = ''
     adventure_name = ''
@@ -662,7 +797,7 @@ def index(level, step):
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    response = make_response (hedyweb.render_assignment_editor(
         request=request,
         course=HEDY_COURSE[g.lang],
         level_number=level,
@@ -673,7 +808,11 @@ def index(level, step):
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
         loaded_program_name=loaded_program_name,
-        adventure_name=adventure_name)
+        adventure_name=adventure_name
+    ))
+    for header in headers:
+         response.headers [header] = headers [header]
+    return response
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
@@ -776,6 +915,18 @@ def session_id():
         session['session_id'] = uuid.uuid4().hex
     return session['session_id']
 
+# This function allows for setting session vars in a special header (x-session_vars) in case
+# that 1) we're in the test environment and 2) the processed request is proxied to it.
+def set_session_var (headers, key, value):
+    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
+        if not 'x-session_vars' in headers:
+            session_vars = {}
+        else:
+            session_vars = json.loads (headers ['x-session_vars'])
+        session_vars [key] = value
+        headers ['x-session_vars'] = json.dumps (session_vars)
+    else:
+        session [key] = value
 
 def requested_lang():
     """Return the user's requested language code.

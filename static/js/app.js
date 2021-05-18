@@ -145,6 +145,7 @@ function runit(level, lang, cb) {
       prev_feedback_level = response.prev_feedback_level;
       feedback_viewed[feedback_level-2] = false; // Not viewed until we have viewed it
       prev_similar_code = response.prev_similar_code;
+
       if (response.Duplicate) {
         $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
         error.showFeedback(ErrorMessages.Feedback_duplicate, response.Feedback);
@@ -312,7 +313,6 @@ function feedback(answer) {
         level_answers: [null, null, null, null],
         collapse: feedback_viewed,
         similar_code: "-",
-        feedback_level: prev_feedback_level
       }),
       contentType: 'application/json',
       dataType: 'json'
