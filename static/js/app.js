@@ -170,7 +170,7 @@ function runit(level, lang, cb) {
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         window.State.disable_run = true;
-        if (response.Feedback) {  //Only enforce error reading when using the GFM model
+        if (response.GFM) {  //Only enforce error reading when using the GFM model
           var btn = $('#runit');
           btn.prop('disabled', true);
           btn.css("background", "gray");

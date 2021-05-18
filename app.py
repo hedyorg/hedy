@@ -391,6 +391,7 @@ def gradual_feedback_model(headers, code, level, gradual_feedback, language, E, 
     response = {}
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
+    response['GFM'] = True
 
     if session['code'] == code:
         response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
