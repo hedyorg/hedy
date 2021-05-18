@@ -187,6 +187,10 @@ function runit(level, lang, cb) {
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
         error.show(ErrorMessages.Execute_error, err.message);
+        if (prev_feedback_level >= 1) { // So now we are at level 2 or higher, necessary to use a prev value
+          $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
+          error.showFeedback(ErrorMessages.Feedback_error, ErrorMessages.Feedback_client_error);
+        }
         reportClientError(level, code, err.message);
       });
     }).fail(function(err) {
