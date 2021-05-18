@@ -626,13 +626,6 @@ def adventure_page(adventure_name, level):
                     desired_level = key
         level = desired_level
 
-    # If a level is specified and user is logged in, check if there's a stored program available for this level
-    elif user ['username']:
-        existing_programs = db_get_many ('programs', {'username': user ['username']}, True)
-        for program in existing_programs:
-            if 'adventure_name' in program and program ['adventure_name'] == adventure_name and program ['level'] == level:
-                loaded_program = program ['code']
-
     # If requested level is not in adventure, return 404
     if not level in adventure ['levels']:
         abort(404)
@@ -677,12 +670,6 @@ def index(level, step):
     loaded_program = ''
     loaded_program_name = ''
     adventure_name = ''
-
-    if requested_lang() in ["en", "nl"]:
-        session['error_level'] = 0  # When requesting a new level, always reset error_level to 0
-        session[
-            "similar_code"] = "-"  # Make sure that the gathered similar code is also deleted when re-loading the page
-        session['code'] = None  # Make sure that no code is stored in the session when re-loading the page
 
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
