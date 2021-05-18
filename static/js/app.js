@@ -174,12 +174,13 @@ function runit(level, lang, cb) {
         btn.prop('disabled', true);
         btn.css("background", "gray");
         btn.css("border-bottom", "4px solid black");
+        $("#runit").animate({backgroundColor:"#68d391"}, 3000);
         setTimeout(function () {
           btn.prop('disabled', false);
           btn.css('background-color', ''); //reset to original color
           btn.css("border-bottom", '');
           window.State.disable_run = false;
-        }, 2500);
+        }, 3000);
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
