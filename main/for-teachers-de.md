@@ -1,4 +1,4 @@
-page_title: Für Lehrer — Hedy
+page_title: Für Lehrende — Hedy
 ---
 Schön, dass Sie Hedy in Ihr Klassenzimmer holen wollen! 
 Auf dieser Seite finden Sie alle Tipps & Tricks, damit Ihr Hedy-Unterricht so reibungslos wie möglich verläuft. 
