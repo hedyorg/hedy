@@ -310,7 +310,6 @@ def parse():
     supported_lang = ["en", "nl"]
     querylog.log_value(level=level, lang=lang)
 
-
     response = {}
     headers = {}
     username = current_user(request) ['username'] or None
@@ -382,11 +381,11 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
 
-    response = make_response (response)
+    response = make_response(response)
     for header in headers:
-         response.headers [header] = headers [header]
-
+        response.headers[header] = headers[header]
     return response
+
 
 def gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception):
     response = {}
