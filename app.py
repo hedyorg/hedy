@@ -6,7 +6,6 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 6):
 # coding=utf-8
 import datetime
 import collections
-from functools import wraps
 import hedy
 import json
 import jsonbin
@@ -29,7 +28,8 @@ import utils
 import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, render_template, session, abort, g, redirect, make_response, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
+from flask_helpers import render_template
 from flask_compress import Compress
 
 # Hedy-specific modules
