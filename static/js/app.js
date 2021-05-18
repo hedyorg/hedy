@@ -167,20 +167,22 @@ function runit(level, lang, cb) {
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
-      if (response.Error && response.feedback_level) { // Only enforce error reading when using the GFM model
+      if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         window.State.disable_run = true;
-        var btn = $('#runit');
-        btn.prop('disabled', true);
-        btn.css("background", "gray");
-        btn.css("border-bottom", "4px solid black");
-        $("#runit").animate({backgroundColor:"#68d391"}, 3000);
-        setTimeout(function () {
-          btn.prop('disabled', false);
-          btn.css('background-color', ''); //reset to original color
-          btn.css("border-bottom", '');
-          window.State.disable_run = false;
-        }, 3000);
+        if (response.Feedback) {  //Only enforce error reading when using the GFM model
+          var btn = $('#runit');
+          btn.prop('disabled', true);
+          btn.css("background", "gray");
+          btn.css("border-bottom", "4px solid black");
+          $("#runit").animate({backgroundColor:"#68d391"}, 3000);
+          setTimeout(function () {
+            btn.prop('disabled', false);
+            btn.css('background-color', ''); //reset to original color
+            btn.css("border-bottom", '');
+            window.State.disable_run = false;
+          }, 3000);
+        }
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
