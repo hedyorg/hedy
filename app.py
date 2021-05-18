@@ -1020,7 +1020,7 @@ def save_program (user):
         program_count = user ['program_count']
     db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
 
-    return jsonify({})
+    return jsonify({'name': name})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
