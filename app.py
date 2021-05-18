@@ -354,14 +354,14 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=True))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, lang, E, hedy_exception=True))
                 
         except Exception as E:
             traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=False))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, lang, E, hedy_exception=False))
         if lang in supported_lang:
             set_session_var(headers, 'code', code)
 
@@ -386,7 +386,8 @@ def parse():
         response.headers[header] = headers[header]
     return response
 
-def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
+
+def gradual_feedback_model(headers, code, level, gradual_feedback, language, E, hedy_exception):
     response = {}
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
