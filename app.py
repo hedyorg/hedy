@@ -703,7 +703,6 @@ def index(level, step):
         loaded_program = ''
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
-
     response = make_response (hedyweb.render_assignment_editor(
         request=request,
         course=HEDY_COURSE[g.lang],
@@ -740,7 +739,10 @@ def onlinemasters(level, step):
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        loaded_program='')
+        adventure_assignments=adventure_assignments,
+        loaded_program='',
+        loaded_program_name='',
+        adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
@@ -761,7 +763,10 @@ def space_eu(level, step):
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        loaded_program='')
+        adventure_assignments=adventure_assignments,
+        loaded_program='',
+        loaded_program_name='',
+        adventure_name='')
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
