@@ -1,9 +1,11 @@
+var feedback_level;
 var prev_feedback_level;
-var prev_similar_code;
 var similar_code;
-var general_answer;
-var feedback_viewed = false;
-var general_answered = false;
+var prev_similar_code;
+var general_answer = null;
+var last_question;
+var level_answers = [null, null, null, null];
+var feedback_viewed = [null, null, null, null];
 
 (function() {
 
@@ -139,9 +141,11 @@ function runit(level, lang, cb) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      feedback_level = response.feedback_level;
       prev_feedback_level = response.prev_feedback_level;
+      feedback_viewed[feedback_level-2] = false; // Not viewed until we have viewed it
       prev_similar_code = response.prev_similar_code;
-      console.log('Response', response);
+
       if (response.Duplicate) {
         $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
         error.showFeedback(ErrorMessages.Feedback_duplicate, response.Feedback);
@@ -149,9 +153,13 @@ function runit(level, lang, cb) {
       else {
         if (response.Feedback) {
           $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
-          if (response.feedback_level === 4) {
+          if (response.feedback_level === 3) {
             error.showFeedback(ErrorMessages.Feedback_similar_code, response.Feedback);
-          } else {
+          } else if (response.feedback_level == 4) {
+            error.showFeedback(ErrorMessages.Feedback_new, response.Feedback);
+          } else if (response.feedback_level == 5) {
+            error.showFeedback(ErrorMessages.Feedback_suggestion, response.Feedback);
+          }  else {
             error.showFeedback(ErrorMessages.Feedback_error, response.Feedback);
           }
         }
@@ -162,20 +170,27 @@ function runit(level, lang, cb) {
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         window.State.disable_run = true;
-        var btn = $('#runit');
-        btn.prop('disabled', true);
-        btn.css("background", "gray");
-        btn.css("border-bottom", "4px solid black");
-        setTimeout(function () {
-          btn.prop('disabled', false);
-          btn.css('background-color', ''); //reset to original color
-          btn.css("border-bottom", '');
-          window.State.disable_run = false;
-        }, 2500);
+        if (response.GFM) {  //Only enforce error reading when using the GFM model
+          var btn = $('#runit');
+          btn.prop('disabled', true);
+          btn.css("background", "gray");
+          btn.css("border-bottom", "4px solid black");
+          $("#runit").animate({backgroundColor:"#68d391"}, 3000);
+          setTimeout(function () {
+            btn.prop('disabled', false);
+            btn.css('background-color', ''); //reset to original color
+            btn.css("border-bottom", '');
+            window.State.disable_run = false;
+          }, 3000);
+        }
         return;
       }
       runPythonProgram(response.Code, cb).catch(function(err) {
         error.show(ErrorMessages.Execute_error, err.message);
+        if (prev_feedback_level >= 1) { // So now we are at level 2 or higher, necessary to use a prev value
+          $ ('#feedbackbox .expand-dialog').text("▲ " + GradualErrorMessages.Click_expand + " ▲")
+          error.showFeedback(ErrorMessages.Feedback_error, ErrorMessages.Feedback_client_error);
+        }
         reportClientError(level, code, err.message);
       });
     }).fail(function(err) {
@@ -279,47 +294,72 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
-function get_level_question() {
-  if (prev_feedback_level == 2) {
+function get_level_question(level) {
+  if (level == 2) {
+    last_question = 2;
     return GradualErrorMessages.Feedback_question2;
-  } else if (prev_feedback_level == 3) {
+  } else if (level == 3) {
+    last_question = 3;
     return GradualErrorMessages.Feedback_question3;
-  } else if (prev_feedback_level == 4) {
+  } else if (level == 4) {
+    last_question = 4;
     return GradualErrorMessages.Feedback_question4;
   } else {
+    last_question = 5;
     return GradualErrorMessages.Feedback_question5;
   }
 }
 
 function feedback(answer) {
-  if (general_answered == false) {
-    general_answer = answer;
-    general_answered = true
-    $('#feedback-popup .caption').text(get_level_question()) // Change to level-dependent text
-  } else {
-    if (prev_feedback_level >= 4) { // So similar code has been shown to the end-user, how do we retrieve it?
-      similar_code = prev_similar_code
-    } else {
-      similar_code = "-" // No similar code has been given to the user
-    }
-    level_answer = answer;
+  if (answer == null) { // The user didn't look at any part of the model
     $.ajax({
       type: 'POST',
       url: '/feedback',
       data: JSON.stringify({
-        general_answer: general_answer,
-        level_answer: level_answer,
+        general_answer: null,
+        level_answers: [null, null, null, null],
         collapse: feedback_viewed,
-        similar_code: similar_code,
-        feedback_level: prev_feedback_level
+        similar_code: "-",
       }),
       contentType: 'application/json',
       dataType: 'json'
     });
     $('#feedback-popup').hide();
     $('#opaque').hide();
-    feedback_viewed = false; // Set back to false to ensure that it won't pop-up in next error streak without looking
-    general_answered = false; // Set back to false to ensure that both questions are asked again in next mistake session
+    feedback_viewed = [null, null, null, null];
+    general_answer = null;
+  } else if (general_answer == null) {
+    last_question = 0;
+    general_answer = answer;
+    $('#feedback-popup .caption').text(get_level_question(feedback_viewed.indexOf(true)+2))
+  } else {
+    level_answers[last_question - 2] = answer;
+    if (feedback_viewed.indexOf((true), last_question - 1) != -1) { // So there is some question left
+      $('#feedback-popup .caption').text(get_level_question((feedback_viewed.indexOf((true), last_question - 1) + 2)));
+    } else {
+      if (prev_feedback_level >= 3) { // So similar code has been shown to the end-user, how do we retrieve it?
+        similar_code = prev_similar_code
+      } else {
+        similar_code = "-" // No similar code has been given to the user
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/feedback',
+        data: JSON.stringify({
+          general_answer: general_answer,
+          level_answers: level_answers,
+          collapse: feedback_viewed,
+          similar_code: similar_code,
+          feedback_level: prev_feedback_level
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      });
+      $('#feedback-popup').hide();
+      $('#opaque').hide();
+      feedback_viewed = [null, null, null, null]; // Set back to false to ensure that it won't pop-up in next error streak without looking
+      general_answer = null; // Set back to false to ensure that both questions are asked again in next mistake session
+    }
   }
 }
 
@@ -346,17 +386,16 @@ function reportClientError(level, code, client_error) {
 // Then, post this question through app.py and log the yes / no answer and the collapse boolean
 function runPythonProgram(code, cb) {
   if (prev_feedback_level > 1) {
-    if (feedback_viewed == true) {
+    if (feedback_viewed.indexOf(true) != -1) { // So there is a true value somewhere -> the user look at the feedback
+      var count = 0;
       $('#feedback-popup .caption').text(GradualErrorMessages.Feedback_question_general)
       $('#feedback-popup .yes').text(GradualErrorMessages.Feedback_answerY)
       $('#feedback-popup .no').text(GradualErrorMessages.Feedback_answerN)
       $('#feedback-popup').show();
       $('#opaque').show();
-    } else {
-      feedback(false);
-      feedback(false);
-      // We have to call feedback() twice due to the code structure: not ideal of course
-      // However, this way we are able to log the users error-solving even when the ECEM is not read
+    }
+    else {
+      feedback(null);
     }
   }
 
@@ -473,7 +512,7 @@ function runPythonProgram(code, cb) {
 }
 
 $('#feedbackbox .expand-dialog').click(function(){
-   feedback_viewed = true;
+   feedback_viewed[feedback_level-2] = true;
    $ ('#feedbackbox .details').toggle();
    var text = $ ('#feedbackbox .expand-dialog').text();
    if (text === "▼ " + GradualErrorMessages.Click_shrink + " ▼"){

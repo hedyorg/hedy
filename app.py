@@ -122,6 +122,7 @@ def load_adventure_assignments_per_level(lang, level):
     })
     return assignments
 
+
 # Load main menu (do it once, can be cached)
 with open(f'main/menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
@@ -132,6 +133,7 @@ logging.basicConfig(
 
 
 app = Flask(__name__, static_url_path='')
+csv.field_size_limit(sys.maxsize)
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
 utils.set_debug_mode_based_on_flask(app)
@@ -306,6 +308,7 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
     supported_lang = ["en", "nl"]
+    querylog.log_value(level=level, lang=lang)
 
     response = {}
     headers = {}
@@ -321,7 +324,6 @@ def parse():
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             gradual_feedback = TRANSLATIONS.get_translations(lang, 'GradualFeedback')
-
             with querylog.log_time('transpile'):
                 result = hedy.transpile(code, level)
 
@@ -329,7 +331,8 @@ def parse():
             if lang in supported_lang:
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
-                set_session_var (headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
+                set_session_var(headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
+
         except hedy.HedyException as E:
             traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -351,15 +354,16 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=True))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, lang, E, hedy_exception=True))
+                
         except Exception as E:
             traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
             if lang in supported_lang:
-                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=False))
+                response.update(gradual_feedback_model(headers, code, level, gradual_feedback, lang, E, hedy_exception=False))
         if lang in supported_lang:
-            set_session_var (headers, 'code', code)
+            set_session_var(headers, 'code', code)
 
     querylog.log_value(server_error=response.get('Error'))
     logger.log ({
@@ -372,25 +376,22 @@ def parse():
         'version': version(),
         'username': username,
         'feedback_level': session['error_level'] if lang in supported_lang else None,
-        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
+        'GFM': True if lang in supported_lang else False,
+        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
 
-    response = make_response (response)
+    response = make_response(response)
     for header in headers:
-         response.headers [header] = headers [header]
-
+        response.headers[header] = headers[header]
     return response
 
-def gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception):
+
+def gradual_feedback_model(headers, code, level, gradual_feedback, language, E, hedy_exception):
     response = {}
-    print("Printing the session...")
-    try:
-        print(session['error_level'])
-    except:
-        print("Doesn't exist!")
     response['prev_feedback_level'] = session['error_level']
     response['prev_similar_code'] = session['similar_code']
+    response['GFM'] = True
 
     if session['code'] == code:
         response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
@@ -398,72 +399,116 @@ def gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_excep
     else:
         response["Duplicate"] = False
         if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
-            set_session_var (headers, 'error_level', session['error_level'] + 1)
-        if session['error_level'] == 2: # Give a more explanatory error message
+            set_session_var(headers, 'error_level', session['error_level'] + 1)
+        if session['error_level'] == 2:  # Give a more explanatory error message
             if hedy_exception:
+                print("The current error code is: ")
+                print(E.error_code)
                 response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
             else:
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['error_level'] == 3:  # Give a reminder what is new in this specific level
-            try:
-                response["Feedback"] = gradual_feedback["New_level" + str(level)]
-            except:
-                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
-        elif session['error_level'] == 4:
-            similar_code = get_similar_code(preprocess_code_similarity_measure(code), level)
+            similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
             if similar_code is None:  # No similar code is found against a, to be defined, threshold
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
-                set_session_var (headers, 'similar_code', similar_code)
+                set_session_var(headers, 'similar_code', similar_code)
+        elif session['error_level'] == 4:
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
+                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
         elif session['error_level'] == 5:
             response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
     response["feedback_level"] = session['error_level']
     return response
 
+
 @app.route('/feedback', methods=['POST'])
 def log_feedback():
     body = request.json
     general_answer = body['general_answer']
-    level_answer = body['level_answer']
+    level_answer = body['level_answers']
     feedback_level = int(body['feedback_level'])
-    collapse = bool(body['collapse'])  # this is either true or false: The window was either expanded or not
+    collapse = body['collapse']  # this is either true or false: The window was either expanded or not
     similar_code = body['similar_code']
     logger.log({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
+        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'feedback_level': feedback_level,
         'usefulness': general_answer,
         'level_usefulness': level_answer,
         'similar_code': similar_code,
-        'collapse': collapse
+        'collapse': collapse,
+        'GFM': True
     })
+    debug = True
+    if debug:
+        print("TESTING FEEDBACK LOG INFORMATION")
+        print("Model was useful: " + str(general_answer))
+        print("Specific level was useful: " + str(level_answer))
+        print("Feedback level of fix: " + str(feedback_level))
+        print("Window was opened: " + str(collapse))
+        print("Possible similar code: " + str(similar_code))
 
     # https://stackoverflow.com/questions/26079754/flask-how-to-return-a-success-status-code-for-ajax-call
     # We have to return something to the AJAX POST to show we are okay
-    return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
-def preprocess_code_similarity_measure(code):
-    concepts = ['print', 'ask', 'echo', 'is', 'at random', 'if', 'else', 'repeat', 'for']
+
+def get_concepts(level):
+    if level == 1:
+        return ['print', 'ask', 'echo']
+    elif level == 2:
+        return ['print', 'ask', 'at', 'random']
+    elif level == 3:
+        return ['print', 'is', 'ask', 'at', 'random']
+    elif level == 4:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else']
+    elif level == 5:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'repeat', 'times']
+    elif level in [6, 7]:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'repeat', 'times', '+', '-', '*']
+    elif level in [8, 9, 10]:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'for', 'in', 'range', '+', '-', '*']
+    return []
+
+
+def preprocess_code_similarity_measure(code, level):
+    print(code)
+    concepts = get_concepts(int(level))
     words = code.split()
     code = ""
     for word in words:
         if word not in concepts:
-            code += re.sub(r"[a-z|A-Z|0-9|!?,'']", "% ", word)
+            code += re.sub(r"[a-z|A-Z|0-9|!?,''{}]", "%", word)
+            code += " "
         else:
             code += word + " "
+    code = code.split()
+    temp = ""
+    for processed in code:
+        if "%" in processed:
+            temp += "% "
+        else:
+            temp += processed + " "
+    code = temp
+    print(code)
     return code
 
-def get_similar_code(processed_code, level):
-    filename = "coursedata/level" + str(level) + ".csv"
-    shortest_distance = 10 # This is the threshold: when differ more than this value it's no longer similar code
+
+def get_similar_code(processed_code, language, level):
+    filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + ".csv"
+    shortest_distance = 75  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
     try:
         with open(filename, mode='r', encoding='utf-8') as file:
-            csvFile = csv.reader(file)
+            csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
             for lines in csvFile:
-                distance = lev(processed_code, lines[2])
-                if distance == 0:  # The code is identical, no need to search any further
+                distance = lev(processed_code, lines[1])
+                if distance < 1:  # The code is identical, no need to search any further
                     similar_code = lines[0]
                     break
                 else:
@@ -473,6 +518,7 @@ def get_similar_code(processed_code, level):
     except:
         similar_code = None
     return similar_code
+
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
@@ -510,7 +556,6 @@ def version_page():
         app_name=app_name,
         heroku_release_time=the_date,
         commit=commit)
-
 
 def programs_page (request):
     username = current_user(request) ['username']
@@ -642,9 +687,10 @@ def index(level, step):
             adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
         step = 1
+    else:
+        loaded_program = ''
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
-
     response = make_response (hedyweb.render_assignment_editor(
         request=request,
         course=HEDY_COURSE[g.lang],
@@ -709,8 +755,6 @@ def space_eu(level, step):
         loaded_program='',
         loaded_program_name='',
         adventure_name='')
-
-
 
 @app.route('/error_messages.js', methods=['GET'])
 def error():
