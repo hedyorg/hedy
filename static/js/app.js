@@ -167,7 +167,7 @@ function runit(level, lang, cb) {
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
-      if (response.Error) {
+      if (response.Error && response.feedback_level) { // Only enforce error reading when using the GFM model
         error.show(ErrorMessages.Transpile_error, response.Error);
         window.State.disable_run = true;
         var btn = $('#runit');
