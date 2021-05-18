@@ -192,7 +192,8 @@ def routes (app, requested_lang):
             'password': hashed,
             'email':    email,
             'created':  timems (),
-            'verification_pending': hashed_token
+            'verification_pending': hashed_token,
+            'last_login': timems ()
         }
 
         if 'country' in body:
@@ -207,7 +208,6 @@ def routes (app, requested_lang):
         # We automatically login the user
         cookie = make_salt ()
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
 
         # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
         if not env:
