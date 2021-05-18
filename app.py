@@ -331,7 +331,7 @@ def parse():
             if lang in supported_lang:
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
-                set_session_var (headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
+                set_session_var(headers, 'error_level', 0)  # Code is correct: reset error_level back to 0
 
         except hedy.HedyException as E:
             traceback.print_exc()
@@ -363,7 +363,7 @@ def parse():
             if lang in supported_lang:
                 response.update(gradual_feedback_model(headers, code, level, gradual_feedback, E, hedy_exception=False))
         if lang in supported_lang:
-            set_session_var (headers, 'code', code)
+            set_session_var(headers, 'code', code)
 
     querylog.log_value(server_error=response.get('Error'))
     logger.log ({
@@ -397,9 +397,11 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
     else:
         response["Duplicate"] = False
         if session['error_level'] < 5:  # Raise feedback level if is it not 5 (yet)
-            session['error_level'] = session['error_level'] + 1
+            set_session_var(headers, 'error_level', session['error_level'] + 1)
         if session['error_level'] == 2:  # Give a more explanatory error message
             if hedy_exception:
+                print("The current error code is: ")
+                print(E.error_code)
                 response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
             else:
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
@@ -409,7 +411,7 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
-                session["similar_code"] = similar_code
+                set_session_var(headers, 'similar_code', similar_code)
         elif session['error_level'] == 4:
             try:
                 response["Feedback"] = gradual_feedback["New_level" + str(level)]
@@ -552,7 +554,6 @@ def version_page():
         app_name=app_name,
         heroku_release_time=the_date,
         commit=commit)
-
 
 def programs_page (request):
     username = current_user(request) ['username']
