@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds
 import datetime
 from functools import wraps
 from config import config
@@ -24,7 +24,7 @@ def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
 
 def make_salt ():
-    return bcrypt.gensalt ().decode ('utf-8')
+    return bcrypt.gensalt (rounds=config ['bcrypt_rounds']).decode ('utf-8')
 
 @querylog.timed
 def hash (password, salt):
@@ -101,9 +101,17 @@ def routes (app, requested_lang):
         if not check_password (body ['password'], user ['password']):
             return 'invalid username/password', 403
 
+        # If the number of bcrypt rounds has changed, create a new hash.
+        new_hash = None
+        if config ['bcrypt_rounds'] != extract_bcrypt_rounds (user ['password']):
+            new_hash = hash (body ['password'], make_salt ())
+
         cookie = make_salt ()
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
+        if new_hash:
+            db_set ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
+        else:
+            db_set ('users', {'username': user ['username'], 'last_login': timems ()})
         resp = make_response ({})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.

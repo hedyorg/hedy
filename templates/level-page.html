@@ -3,21 +3,13 @@
 {% block body %}
 <div class="px-8 bg-blue-200 flex">
   <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1">
-    {% if adventure_name %}
-      {{ adventure }}: {{ full_adventure_name }} - Level {{ level_nr }}
-    {% else %}
-      {{ level_title }} {{ level_nr }}
-      &nbsp;
-    {% endif %}
+    {{ level_title }} {{ level_nr }}
+    &nbsp;
     {% if assignment_nr %} · {{ step_title }} {{ assignment_nr }} {% endif %}
   </div>
   <div class="h-full">
-    {% if not adventure_name %}
-      <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/4 h-4/5 mt-1 ml-24" value="{{ untitled }}">
-      <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', true, ace.edit('editor').getValue());">
-    {% else %}
-      <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit([{{ level }}, '{{ adventure_name }}'], '{{ lang }}', true, ace.edit('editor').getValue());">
-    {% endif %}
+    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5 mt-1 ml-24" value="{{ loaded_program_name or untitled + ' - ' + level_title + ' ' + level_nr}}">
+    <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', $ ('#program_name').val (), ace.edit('editor').getValue());">
   </div>
 </div>
 

@@ -23,31 +23,8 @@
   </div>
 </div>
 <div tabindex="0" class="flex-grow p-8">
-  {% if adventure_name %}
-    <div class="my-4">
-    {{intro_text|commonmark}}
-    </div>
-    {{story_text|commonmark}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      {% for command in story_commands %}
-      <div class="hover:bg-gray-200 justify-between my-2 shadow-md p-3 pl-5">
-        <div class="font-medium text-lg" tabindex=0>
-          {{ command.explanation|commonmark }}
-        </div>
-        <div class="flex">
-          <div class="font-thin text-sm flex-grow" tabindex=0>
-            {{ command.example|commonmark }}
-          </div>
-          <button class="btn block flex-none self-end"
-            onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
-    {% include "incl-adventure-tabs.html" %}
-  {% endif %}
+  {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
+  {% include "incl-adventure-tabs.html" %}
   {% if prompt %}
   <div class="py-2 px-4">
     <div>
@@ -95,7 +72,7 @@
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
           style="display: none;">
-          <p class="close-dialog" onclick="$ ('#errorbox').hide ()">X</p>
+          <p class="close-dialog" onclick="window.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -113,7 +90,7 @@
         <div id="warningbox"
           class="flex-0 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
-          <p class="close-dialog" onclick="$ ('#warningbox').hide ()">X</p>
+          <p class="close-dialog" onclick="window.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg"
@@ -179,18 +156,10 @@
           next_assignment }}</button>
         {% endif %}
         {% if prev_level %}
-          {% if not adventure_name %}
-            <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
-          {% else %}
-            <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (prev_level|string))}}';">{{regress_button}} {{ prev_level }}</button>
-          {% endif %}
+          <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
-          {% if not adventure_name %}
-            <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
-          {% else %}
-            <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (next_level|string))}}';">{{advance_button}} {{ next_level }}</button>
-          {% endif %}
+          <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
         {% endif %}
       </div>
     </div>
@@ -204,12 +173,28 @@
 {% endblock %}
 
 {% block scripts %}
+
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript"></script>
-  <script src="/error_messages.js?lang={{lang}}" type="text/javascript"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}", sublevel: {{ sublevel or 0 }}}</script>
+  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
+  <script>
+    window.State = {};
+    window.State.lang = "{{ lang }}";
+    window.State.level = "{{ level }}";
+    window.State.sublevel = {{ sublevel or 0 }};
+    window.State.level_title = "{{ level_title }}";
+    window.State.adventure_name = "{{ adventure_name }}";
+    // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
+    window.State.adventure_name_onload = window.State.adventure_name;
+    // We load the adventures into the js to have access to their saved programs (if any).
+    window.State.adventures = {{ adventure_assignments|tojson }};
+    window.State.default_program = {{start_code|tojson }};
+    window.State.loaded_program = {{ loaded_program|tojson }};
+    window.State.loaded_program_name = {{ loaded_program_name|tojson }};
+    window.State.default_program_name = {{ (untitled + ' - ' + level_title + ' ' + level_nr)|tojson }};
+  </script>
   <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript"></script>
   <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
   <script src="{{static('/js/auth.js')}}" type="text/javascript"></script>
