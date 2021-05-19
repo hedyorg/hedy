@@ -229,14 +229,18 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
 if os.getenv ('IS_TEST_ENV'):
     @app.before_request
     def before_request_receive_proxy():
-        print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
-        # If session vars come in a header, set them.
-        if 'x-session_vars' in request.headers:
-            session_vars = json.loads (request.headers ['x-session_vars'])
-            for var in session_vars:
-                if var not in ['session_id']:
-                    print ('DEBUG RECEIVING SESSION VAR FROM PROXIED REQUEST', var, session_vars [var])
-                    session [var] = session_vars [var]
+        if 'x-session_id' in request.headers:
+            print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
+            # If session vars come in a header, set them.
+            if 'x-session_vars' in request.headers:
+                session_vars = json.loads (request.headers ['x-session_vars'])
+                for var in session_vars:
+                    if var not in ['session_id']:
+                        print ('DEBUG RECEIVING SESSION VAR FROM PROXIED REQUEST', var, session_vars [var])
+                        session [var] = session_vars [var]
+        # DEBUG SESSION VARS
+        for var in session:
+            print ('DEBUG SESSION VAR', var, session [var])
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -355,7 +359,7 @@ def parse():
                 response["Error"] = error_template.format(**E.arguments)
             if lang in supported_lang:
                 response.update(gradual_feedback_model(headers, code, level, gradual_feedback, lang, E, hedy_exception=True))
-                
+
         except Exception as E:
             traceback.print_exc()
             print(f"error transpiling {code}")
