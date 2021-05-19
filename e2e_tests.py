@@ -8,7 +8,7 @@ import sys
 import threading
 
 host = 'http://localhost:' + str (config ['port']) + '/'
-hosts = {'alpha': 'https://hedy-alpha.herokuapp.com/', 'test': 'https://hedy-alpha.herokuapp.com/'}
+hosts = {'alpha': 'https://hedy-alpha.herokuapp.com/', 'test': 'https://hedy-test.herokuapp.com/'}
 
 if len (sys.argv) == 3:
     if not sys.argv [2] in hosts:
