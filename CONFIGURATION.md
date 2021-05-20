@@ -50,6 +50,12 @@ App secret (for cookies):
 SECRET_KEY
 ```
 
+To determine if this is the production environment (to avoid requests from e2e tests being considered as such, to avoid any sort of security loopholes):
+
+```
+IS_PRODUCTION
+```
+
 ## Heroku Metadata
 
 This app depends on some environment variables that require Heroku dyno metadata.
