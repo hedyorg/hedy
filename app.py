@@ -814,6 +814,8 @@ def main_page(page):
 def session_id():
     """Returns or sets the current session ID."""
     if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
+        # Set a session_id anyway so there's a session
+        session['session_id'] = uuid.uuid4().hex
         return request.headers['x-session_id']
     if 'session_id' not in session:
         session['session_id'] = uuid.uuid4().hex
