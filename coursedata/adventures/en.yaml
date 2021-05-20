@@ -5,6 +5,7 @@ adventures:
         name: "A story"
         description: "Make an interactive story"
         image: "story.png"
+        default_save_name: "Story"
         levels:
             1:
                 story_text: |
@@ -40,7 +41,7 @@ adventures:
 
                     You can then put that name anywhere in a sentence.
 
-                    ## Example Hedy Code
+                    ## Example Hedy code
 
                     ```
                     name is ask What is the name of the main character?
@@ -63,7 +64,7 @@ adventures:
                     Did you happen to try to make a sentence that contained the word name?
                     E.g. `print my name is name`. Give it a try if you haven't already.
 
-                    That doet not work properly, it will print my Henk is Henk. You can solve that in level 3.
+                    That does not work properly, it will print my Henk is Henk. You can solve that in level 3.
                 start_code: "print Your story"
             3:
                 story_text: |
@@ -86,7 +87,7 @@ adventures:
                     print 'He hears the sound of an' animals at random
                     print name 'is afraid this is a haunted forest'
                     ```
-                start_code: "print Your sotry will be printed here!"
+                start_code: "print Your story will be printed here!"
             4:
                 story_text: |
                     ## Story in level 4
@@ -110,12 +111,12 @@ adventures:
                     end is ask Would you like a good or a bad ending?
                     if the end is good print name 'takes the sword and the monster quickly runs away' else print 'The monster eats' name
                     ```
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print Here will soon be your story!"
             5:
                 story_text: |
                     ## Story in level 5
-                    In story, someone says words several times. For example when someone calls for help or sings a song.
-                    You can put such repetition in your story in level 5 with 'repeat'.
+                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
+                    You can put such repetitions in your story, in level 5 with 'repeat'.
 
                     ## Example Hedy code
                     ```
@@ -127,8 +128,9 @@ adventures:
                 start_code: "repeat 5 times print 'Help!'"
     songs:
         name: "Sing a song!"
-        image: "songs.png"
         description: "Print a song"
+        image: "songs.png"
+        default_save_name: "Song"
         levels:
             5:
                 story_text: |
@@ -153,8 +155,8 @@ adventures:
             6:
                 story_text: |
                     ## Songs in level 6
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based counting.
-                    For example in the well-known song 'bottles of beer'. You can program that song with a little math.
+                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
+                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
 
                     ## Example Hedy code
                     ```
@@ -177,8 +179,9 @@ adventures:
                 start_code: "print 'Baby shark'"
     dishes:
         name: "Who does the dishes?"
-        image: "dishes.png"
         description: "Use the computer to see who does the dishes (Start at level 2)"
+        image: "dishes.png"
+        default_save_name: "Dishes"
         levels:
             2:
                 story_text: |
@@ -200,7 +203,7 @@ adventures:
 
                     E.g. `print I chose from these people`. Give it a try if you haven't already.
 
-                    That is not working properly! Then you get: I chose from [daddy, mom, Emma, Sophie]. You can solve that in level 3.
+                    That is not working properly! Then you get: I chose from these [mom, dad, Emma, Sophie]. You can solve that in level 3.
 
                 start_code: "print Who does the dishes?"
             3:
@@ -223,7 +226,7 @@ adventures:
             4:
                 story_text: |
                     ## Dishwashing program in level 4
-                    With the `if` you can now make more fun with choice in the program. You can have your program respond to the choice that the computer has made.
+                    With the `if` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
 
                     Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
                     Don't forget the quotes!
@@ -238,7 +241,7 @@ adventures:
             5:
                 story_text: |
                     ## Dishwashing program in level 5
-                    With the `repeat` you can repeat pieces of code. You can use this to calculate who will be wahing dishes for the entire week.
+                    With the `repeat` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
 
                     ## Example Hedy code
                     ```
@@ -272,6 +275,7 @@ adventures:
         name: "Make your own dice"
         description: "Make your own dice"
         image: "dice.png"
+        default_save_name: "Dice"
         levels:
             1:
                 story_text: |
@@ -301,7 +305,7 @@ adventures:
 
                     ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
-                    ## Example Hedy Code
+                    ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
                     print choices at random
@@ -387,13 +391,14 @@ adventures:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
         image: "rock.png"
+        default_save_name: "Rock"
         levels:
             1:
                 story_text: |
                     ## Rock, paper, scissors
                     In level 1 you can start with a rock, paper, scissors  game.
 
-                    With `ask` you can make a choice, and with` echo` you can repeat that choice.
+                    With `ask` you can make a choice, and with `echo` you can repeat that choice.
 
                     ## Example Hedy code
 
@@ -413,7 +418,7 @@ adventures:
 
                     In level 2 we can enter lists and choose things from them.
 
-                    You first make a list with `is`. Then you can let the computer choose something from the list with 'at random' (you say et ren-dom).
+                    You first make a list with `is`. Then you can let the computer choose something from the list with `at random`.
 
                     For example, you can let the computer pick from rock, paper and scissors.
 
@@ -480,6 +485,7 @@ adventures:
         name: "Calculator"
         description: "Create a calculator"
         image: "calculator.png"
+        default_save_name: "Calculator"
         levels:
             6:
                 story_text: |
@@ -512,3 +518,176 @@ adventures:
                     ```
 
                 start_code: "print Welcome to this calculator!"
+                
+    restaurant:
+        name: "Restaurant"
+        description: "Create your own virtual restaurant"
+        image: ""
+        default_save_name: "Restaurant"
+        levels:
+            1:
+               story_text: |
+                   ## Restaurant
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
+                    
+                   ## Example Hedy code
+                     ```
+                    print Welcome to Hedy's restaurant
+                    ask What would you like to order? 
+                    echo So you would like to order...
+                    print Thanks you for your order! 
+                    print It's on its way! 
+                    ```
+                    
+                   ## Challenge
+                   Can you think of more line to add to your restaurant code? For example, can you ask the guests what they'd like to drink, tell them the price, or wish them a pleasant meal? 
+               start_code: ""    
+            2: 
+                story_text: |
+                   ## Restaurant
+                   In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only echo the order once and only remember the last thing that was ordered. 
+                   Now you can use variables and Hedy can remember both the food and the drinks! 
+                   
+                   ## Example Hedy Restaurant
+                   ```
+                   print Welcome to Hedy's restaurant!
+                   print Today we're serving pizza or lasagna. 
+                   food is ask What would you like to eat?
+                   print Great choice! The food is my favorite!
+                   topping is ask Would you like meat or veggies on that?
+                   print food with topping is on its way! 
+                   drinks is ask What would you like to drink with that?
+                   print Thank you for your order. 
+                   print Your food and drinks will be right there!
+                   ```
+                   
+                   ## Random Restaurant
+                   Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you! 
+                   Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
+                   You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                   
+                   ## Example Hedy Code Random Restaurant
+                   
+                   ```
+                   print Welcome to Hedy's Random Restaurant!
+                   print The only restaurant that will randomly choose your meal and its price for you!
+                   starters is salad, soup, carpaccio
+                   mains is pizza, brussels sprouts, spaghetti
+                   desserts is brownies, ice cream, french cheeses
+                   drinks is cola, beer, water
+                   prices is 1 dollar, 10 dollars, 100 dollars
+                   print You will start with: starters at random
+                   print Then we'll serve: mains at random
+                   print And as dessert: desserts at random
+                   print You will get a drinks at random to drink
+                   print That will be: prices at random
+                   print Thank you and enjoy your meal! 
+                   ```
+                   
+                   ## Challenge
+                   Can you think of any fun additions in your restaurant code? 
+                start_code: ""
+            3:
+                story_text: |
+                       ## Restaurant
+                       In level 3 you have to use quotation marks when using the `print` command.
+                       Can you make your level 2 code work in level 3 by adding the quotation marks?
+
+                       Be careful! In level 2 apostrophes were allowed in the text, but in level 3 Hedy will confuse them for quotation marks and the code will not work!
+                       So instead of typing  `print Today we're serving pizza` , you should type `print 'Today we are serving pizza'`
+
+                       ## Example Hedy Restaurant
+                       ```
+                       print 'Welcome to Hedys restaurant!'
+                       print 'Today we are serving pizza or lasagna.'
+                       food is ask What would you like to eat?
+                       print 'Great choice! The ' food ' is my favorite!'
+                       topping is ask Would you like meat or veggies on that?
+                       print food ' with ' topping ' is on its way!'
+                       drinks is ask What would you like to drink with that?
+                       print 'Thank you for your order.'
+                       print 'Your ' food ' and ' drinks ' will be right there!'
+                       ```
+                start_code: ""
+            4:
+                story_text: |
+                       ## Restaurant
+                       In level 4 the if command allows you to ask your customers questions and give diffrent responses to the asnwers.
+                       In the example below you see that you can ask the customer if they want to hear the specials and Hedy can respond accordingly.
+
+                       ## Example Hedy Code
+                       ```
+                       print 'Welcome to Hedys restaurant!'
+                       special is ask Would you like to hear our specials today?
+                       if special is yes print 'Todays special is chicken piri piri and rice.' else print 'No problem.'
+                       food is ask What would you like to eat?
+                       print 'One ' food ', coming right up!'
+                       drink is ask What would you like to drink with that?
+                       if drink is cola print 'Im sorry, we are out of cola!' else print 'Great choice!'
+                       anything is ask Would you like anything else?
+                       print 'Let me repeat your order...'
+                       print 'One ' food
+                       if drink is cola print 'and...' else print 'One ' drinks
+                       if anything is no print 'Thats it!' else print 'One ' anything
+                       print 'Thank you for your order and enjoy your meal!'
+                       ```
+
+                       ## Challenge
+                       Can you think of more questions to ask the customers when they are ordering, and make up different responses to their answers by using the if command?
+
+                start_code: ""
+            6:
+                story_text: |
+                      ## Restaurant
+                      In level 6 you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+
+                      ## Example Hedy Code (Simple)
+                      You can make a simple restaurant code, like this:
+                      ```
+                      print 'Welcome to Hedys restaurant'
+                      print 'Here is our menu:'
+                      print 'Our main courses are pizza, lasagne, or spaghetti'
+                      main is ask Which main course would you like?
+                      price is 0
+                      if main is pizza price is 10
+                      if main is lasagne price is 12
+                      if main is spaghetti price is 8
+                      print 'You have ordered ' main
+                      print 'That will be ' price ' dollars, please'
+                      print 'Thank you, enjoy your meal!'
+                      ```
+                      But you can also add many more things to your virtual restaurant, for example more courses.
+
+                      ## Example Hedy Code (Elaborate)
+                      In this example there are three courses, which requires more code and more additions in calculating the price.
+                      ```
+                      print 'Welcome to Hedys restaurant'
+                      print 'Here is our menu:'
+                      print 'Our starters are salad, soup, or carpaccio'
+                      print 'Our main courses are pizza, lasagne, or spaghetti'
+                      print 'Our desserts are brownie, icecream, or milkshake'
+                      starter is ask Which starter would you like to have?
+                      main is ask Which main course would you like?
+                      dessert is ask Which dessert do you pick?
+                      price is 0
+                      if starter is soup price is price + 6 else price is price + 7
+                      if main is pizza price is price + 10
+                      if main is lasagne price is price + 12
+                      if main is spaghetti price is price + 8
+                      if dessert is brownie price is price + 7
+                      if dessert is icecream price is price + 5
+                      if dessert is milkshake price is price + 4
+                      print 'You have ordered ' starter ' , ' main ' and ' dessert
+                      print 'That will be ' price ' dollars, please'
+                      print 'Thank you, enjoy your meal!'
+                      ```
+                      ## Challenge
+                      You can add many more things to your virtual restaurant for example can you...
+                      ... ask how many people are coming and multiply the price by that amount?
+                      ... add another course?
+                      ... give people a discount when they enter a (secret) couponcode?
+                      ... add a children's menu?
+                      ... think of other fun things to add?
+
+                start_code: ""
+

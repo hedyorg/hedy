@@ -86,7 +86,7 @@ Level 1 is het introductielevel van Hedy. De leerlingen leren 3 nieuwe commando'
 In level 1 zijn dit veelgemaakte fouten door de leerlingen:
 
 - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print.
-- Leerlingen typen de commando’s met een hoofdletter, waardoor de commando’s niet meer werken. 
+- Leerlingen typen de commando's met een hoofdletter, waardoor de commando's niet meer werken. 
 - Soms krijgen de leerlingen meldingen van de browser dat Hedy niet werkt. De oplossing is om de pagina opnieuw te laden.
 
 ### Lesopzet les 1
@@ -178,7 +178,7 @@ print dieren at random
 Bespreek kort met de leerlingen wat ze vorige les geleerd hebben. Leg daarbij vooral de nadruk op het print en ask commando (echo vervalt namelijk in level 2). 
 
 #### Instructie: Wat is een variabele? (10 minuten)
-Daarna kun je het nieuwe concept variabele introduceren. Een variabele is een woord dat verschillende (variërende, variabele) waardes aan kan nemen en dus steeds kan veranderen. Dat klinkt misschien moeilijk, maar dat valt wel mee. Denk bijvoorbeeld aan ‘leeftijd’. Iedereen heeft een andere leeftijd en daarbij verandert het getal ook nog eens elk jaar. Lengte is ook zo’n getal, of de cijfers voor je toets, of een score in een spelletje: Allemaal variabelen. 
+Daarna kun je het nieuwe concept variabele introduceren. Een variabele is een woord dat verschillende (variërende, variabele) waardes aan kan nemen en dus steeds kan veranderen. Dat klinkt misschien moeilijk, maar dat valt wel mee. Denk bijvoorbeeld aan 'leeftijd'. Iedereen heeft een andere leeftijd en daarbij verandert het getal ook nog eens elk jaar. Lengte is ook zo'n getal, of de cijfers voor je toets, of een score in een spelletje: Allemaal variabelen. 
 
 Een variabele hoeft geen getal te zijn, het kan ook een lijstje woorden zijn, zoals je naam. Gebruik dit voorbeeld in Hedy om de variabele voornaam te demonstreren. 
 
@@ -262,7 +262,7 @@ In level 3 zijn dit veelgemaakte fouten door de leerlingen:
 In les 3 is het voornamelijk van belang dat er aanhalingstekens toegevoegd worden bij het print commando. Dit is voor leerlingen vaak lastig, daarom is de uitleg in deze les beknopt en is er veel tijd om te oefenen.  
 
 #### Voorkennis activeren en instructie Aanhalingstekens (10 minuten)
-Begin de les met het kort herhalen van de commando’s die er in de vorige les geleerd zijn. 
+Begin de les met het kort herhalen van de commando's die er in de vorige les geleerd zijn. 
 In level 3 gebruiken we aanhalingstekens na print. Laat in level 2 dit voorbeeld zien om te tonen waarom we de aanhalingstekens nodig hebben. 
 ```
 huisdier is hond, kat, cavia
@@ -272,7 +272,7 @@ print huisdier at random
 Je ziet dat het woord huisdier in regel 2 niet werkt, het wordt namelijk vervangen door de waarde van de variabele huisdier. Je kunt het woord huisdier dus niet meer gebruiken! In level 3 kan dat wel, omdat we dus aanhalingstekens gebruiken voor teksten die letterlijk geprint moeten worden. Toon nu het voorbeeld in Level 3. 
 ```
 huisdier is hond, kat, cavia
-print ‘Jij krijgt dit huisdier:’
+print 'Jij krijgt dit huisdier:'
 print huisdier at random
 ```
 
@@ -357,7 +357,7 @@ if naam is Hedy print 'leuk' else print 'minder leuk!'
 
 - Fout: Leerlingen gebruiken aanhalingstekens rond de naam van de variabele.
 ```
-if ‘naam’ is 'Hedy' print 'leuk' else print 'minder leuk!'
+if 'naam' is 'Hedy' print 'leuk' else print 'minder leuk!'
 ```
 Oplossing: rond een variabele moeten geen aanhalingstekens
 ```
@@ -425,7 +425,7 @@ De if-constructie zorgt ervoor dat Hedy op verschillende antwoorden van de spele
 
 ```
 naam is ask Hoe heet jij?
-if naam is Hedy print ‘ok jij mag computeren’ else print ‘verboden toegang voor jou!’
+if naam is Hedy print 'ok jij mag computeren' else print 'verboden toegang voor jou!'
 ```
 
 #### Aan de slag: Hedy de Waarzegger! (20 minuten) 
@@ -480,7 +480,7 @@ In level 5 zijn dit veelgemaakte fouten door de leerlingen:
 In de les van level 5 wordt de opdracht Hedy de Zangeres opdracht aangeraden als hoofdopdracht, als de leerlingen daar klaar mee zijn, kunnen ze zelfstandig verder met de overige opdrachten bij level 5. 
 
 #### Voorkennis activeren (5 minuten)
-Een korte herhaling van de geleerde commando’s is een goede manier om deze les te openen.  
+Een korte herhaling van de geleerde commando's is een goede manier om deze les te openen.  
 
 #### Instructie repeat (10 minuten) 
 Laat zien hoe de repeat functie werkt, of toon de [instructievideo](https://youtu.be/JZuqXNgxTBw). Daarna kun je de Hedy de Zangeres opdracht introduceren aan de hand van het voorbeeld Baby Shark. 
@@ -488,16 +488,16 @@ Laat zien hoe de repeat functie werkt, of toon de [instructievideo](https://yout
 In de vorige levels moesten we deze code maken: 
 
 ```
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark tututututudu’
-print ‘Baby Shark’
+print 'Baby Shark tututututudu'
+print 'Baby Shark tututututudu'
+print 'Baby Shark tututututudu'
+print 'Baby Shark'
 ```
 Maar nu kan er in een keer 3 regels geprint worden met de repeatfunctie: 
 
 ```
-repeat 3 times print ‘Baby Shark tututututudu’
-print ‘Baby Shark’
+repeat 3 times print 'Baby Shark tututututudu'
+print 'Baby Shark'
 ```
 
 #### Aan de slag: Hedy de Zangeres (20 - 30 minuten) 
