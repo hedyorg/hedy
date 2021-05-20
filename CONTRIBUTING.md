@@ -15,7 +15,7 @@ Simply go to https://www.hedycode.com/translate/en/new and translate our texts t
 You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again download the files and send them to us per email.
 
 
-Help Hedy with translations (in the cobe base, some coding experience needed)
+Help Hedy with translations (in the code base, some coding experience needed)
 ------------
 
 If you would like to add a new translation, there are four places where files are located that need to be translated:
