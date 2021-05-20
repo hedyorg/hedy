@@ -149,6 +149,12 @@ def redirect_ab (request, session):
     redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
     return redirect_flag
 
+if os.getenv('IS_PRODUCTION'):
+    @app.before_request
+    def reject_e2e_requests():
+        if utils.is_testing_request (request):
+            return 'No E2E tests are allowed in production', 400
+
 # If present, PROXY_TO_TEST_ENV should be the name of the target environment
 if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
     @app.before_request

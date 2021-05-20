@@ -253,3 +253,6 @@ def slash_join(*args):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
+def is_testing_request(request):
+    return bool ('X-Testing' in request.headers and request.headers ['X-Testing'])

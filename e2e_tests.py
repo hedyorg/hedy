@@ -7,20 +7,30 @@ from config import config
 import sys
 import threading
 
+# USAGE: python e2e_tests.py [CONCURRENT_TESTS] [alpha|test]
+# Concurrent tests are a way to stress test an environment
+# When no environment is specified, the tests are run against localhost
+
+import argparse
+args = argparse.ArgumentParser ()
+args.add_argument ('--concurrent', help='how many tests to run at the same time (stress testing), default is 1', type=int)
+args.add_argument ('--host', help='Host against which to run the tests (optional), default is localhost')
+args = args.parse_args ()
+
 host = 'http://localhost:' + str (config ['port']) + '/'
 hosts = {'alpha': 'https://hedy-alpha.herokuapp.com/', 'test': 'https://hedy-test.herokuapp.com/'}
 
-if len (sys.argv) == 3:
-    if not sys.argv [2] in hosts:
+if args.host:
+    if not args.host in hosts:
         raise Exception ('No such host')
     host = hosts [sys.argv [2]]
 
-# test structure: tag method path headers body code
-def request(state, test, counter, username):
+# test structure: [tag, method, path, headers, body, code, after_test_function]
+def request (state, test, counter, username):
 
     start = timems ()
 
-    if isinstance(threading.current_thread(), threading._MainThread):
+    if isinstance (threading.current_thread (), threading._MainThread):
         print ('Start #' + str (counter) + ': ' + test [0])
 
     # If no explicit cookie passed, use the one from the state
@@ -40,6 +50,10 @@ def request(state, test, counter, username):
     if type_check (test[4], 'dict'):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
+
+    # We pass the X-Testing header to let the server know that this is a request coming from an E2E test, thus no transactional emails should be sent.
+    test [3] ['X-Testing'] = '1'
+
     r = getattr (requests, test [1]) (host + test [2], headers=test[3], data=test[4])
 
     if 'Content-Type' in r.headers and r.headers ['Content-Type'] == 'application/json':
@@ -66,42 +80,42 @@ def request(state, test, counter, username):
     if len (test) == 7:
         test [6] (state, output, username)
 
-    if isinstance(threading.current_thread(), threading._MainThread):
+    if isinstance (threading.current_thread (), threading._MainThread):
         print ('Done  #' + str (counter) + ': ' + test [0] + ' - ' + str (r.status_code) + ' (' + str (timems () - start) + 'ms)')
 
     return output
 
-def run_suite(suite):
+def run_suite (suite):
     # We use a random username so that if a test fails, we don't have to do a cleaning of the DB so that the test suite can run again
     # This also allows us to run concurrent tests without having username conflicts.
     username = 'user' + str (random.randint (10000, 100000))
-    tests = suite(username)
+    tests = suite (username)
     state = {'headers': {}}
     t0 = timems ()
 
-    if not type_check(tests, 'list'):
+    if not type_check (tests, 'list'):
         return print ('Invalid test suite, must be a list.')
     counter = 1
 
-    def run_test(test, counter):
-        result = request(state, test, counter, username)
+    def run_test (test, counter):
+        result = request (state, test, counter, username)
 
     for test in tests:
         # If test is nested, run a nested loop
-        if not (type_check(test[0], 'str')):
+        if not (type_check (test[0], 'str')):
             for subtest in test:
-                run_test(subtest, counter)
+                run_test (subtest, counter)
                 counter += 1
         else:
-           run_test(test, counter)
+           run_test (test, counter)
            counter += 1
 
-    if isinstance(threading.current_thread(), threading._MainThread):
+    if isinstance (threading.current_thread (), threading._MainThread):
         print ('Test suite successful! (' + str (timems () - t0) + 'ms)')
     else:
         return timems () - t0
 
-def invalidMap(tag, method, path, bodies):
+def invalidMap (tag, method, path, bodies):
     output = []
     counter = 1
     for body in bodies:
@@ -109,16 +123,16 @@ def invalidMap(tag, method, path, bodies):
         counter += 1
     return output
 
-def successfulSignup(state, response, username):
+def successfulSignup (state, response, username):
     if not 'token' in response ['body']:
         raise Exception ('No token present')
     state ['token'] = response ['body'] ['token']
 
 # We define apres functions here because multiline lambdas are not supported by python
-def successfulLogin(state, response, username):
+def successfulLogin (state, response, username):
     state ['headers'] ['cookie'] = response ['headers'] ['Set-Cookie']
 
-def getProfile1(state, response, username):
+def getProfile1 (state, response, username):
     profile = response ['body']
     if profile ['username'] != username:
         raise Exception ('Invalid username (getProfile1)')
@@ -133,7 +147,7 @@ def getProfile1(state, response, username):
     if expire < -2000:
         raise Exception ('Invalid session_expires_at (getProfile1), too small')
 
-def getProfile2(state, response, username):
+def getProfile2 (state, response, username):
     profile = response ['body']
     if profile ['country'] != 'NL':
         raise Exception ('Invalid country (getProfile2)')
@@ -142,19 +156,19 @@ def getProfile2(state, response, username):
     if not 'verification_pending' in profile or profile ['verification_pending'] != True:
         raise Exception ('Invalid verification_pending (getProfile2)')
 
-def getProfile3(state, response, username):
+def getProfile3 (state, response, username):
     profile = response ['body']
     if 'verification_pending' in profile:
         raise Exception ('Invalid verification_pending (getProfile3)')
 
-def emailChange(state, response, username):
+def emailChange (state, response, username):
     if not type_check (response ['body'] ['token'], 'str'):
         raise Exception ('Invalid country (emailChange)')
     if response ['body'] ['username'] != username:
         raise Exception ('Invalid username (emailChange)')
     state ['token2'] = response ['body'] ['token']
 
-def recoverPassword(state, response, username):
+def recoverPassword (state, response, username):
     if not 'token' in response ['body']:
         raise Exception ('No token present')
     state ['token'] = response ['body'] ['token']
@@ -198,7 +212,7 @@ def suite (username):
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
     ]
 
-if len (sys.argv) == 1:
+if not args.concurrent:
     run_suite (suite)
 else:
     counter = 0
@@ -206,7 +220,7 @@ else:
     results = []
     errors  = []
 
-    def thread_function(counter):
+    def thread_function (counter):
         try:
             ms = run_suite (suite)
             print ('Finished concurrent test #' + str (counter))
@@ -215,8 +229,8 @@ else:
             print ('Concurrent test #' + str (counter), "finished with error")
             errors.append (e)
 
-    print ('Starting', sys.argv [1], 'concurrent tests')
-    while counter < int (sys.argv [1]):
+    print ('Starting', args.concurrent, 'concurrent tests')
+    while counter < args.concurrent:
         counter += 1
         thread = threading.Thread (target=thread_function, args=[counter])
         thread.start ()
@@ -225,4 +239,4 @@ else:
     for thread in threads:
         # join waits until all threads are done
         thread.join ()
-    print ('Done with', sys.argv [1], 'concurrent tests,', len (results), 'OK,', len (errors), 'errors,', round (sum (results) / (len (results) * 1000), 2), 'seconds average')
+    print ('Done with', args.concurrent, 'concurrent tests,', len (results), 'OK,', len (errors), 'errors,', round (sum (results) / (len (results) * 1000), 2), 'seconds average')

@@ -3,7 +3,7 @@ import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, is_testing_request
 import datetime
 from functools import wraps
 from config import config
@@ -14,12 +14,6 @@ import requests
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
-
-def is_e2e_test_request (email):
-    # We don't want the verify email loophole for accounts created with the `e2e-testing` domain, so we always return False in this case
-    if os.getenv ('IS_PRODUCTION'):
-        return False
-    return not not re.match ('.+@e2e-testing.+', email)
 
 def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
@@ -154,7 +148,7 @@ def routes (app, requested_lang):
         username = body ['username'].strip ().lower ()
         email = body ['email'].strip ().lower ()
 
-        if not is_e2e_test_request (email) and 'subscribe' in body and body ['subscribe'] == True:
+        if not is_testing_request (request) and 'subscribe' in body and body ['subscribe'] == True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if os.getenv ('MAILCHIMP_API_KEY') and os.getenv ('MAILCHIMP_AUDIENCE_ID'):
                 # The first domain in the path is the server name, which is contained in the Mailchimp API key
@@ -199,7 +193,7 @@ def routes (app, requested_lang):
         db_set ('users', {'username': user ['username'], 'last_login': timems ()})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
-        if is_e2e_test_request (email):
+        if is_testing_request (request):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
@@ -270,7 +264,7 @@ def routes (app, requested_lang):
         hashed = hash (body ['new_password'], make_salt ())
 
         db_set ('users', {'username': user ['username'], 'password': hashed})
-        if not is_e2e_test_request (user ['email']):
+        if not is_testing_request (request):
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
         return '', 200
@@ -308,7 +302,7 @@ def routes (app, requested_lang):
                 hashed_token = hash (token, make_salt ())
                 db_set ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
-                if is_e2e_test_request (email):
+                if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
@@ -361,7 +355,7 @@ def routes (app, requested_lang):
 
         db_set ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
-        if is_e2e_test_request (user ['email']):
+        if is_testing_request (request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify ({'username': user ['username'], 'token': token}), 200
         else:
@@ -396,7 +390,7 @@ def routes (app, requested_lang):
         db_set ('users', {'username': body ['username'], 'password': hashed})
         user = db_get ('users', {'username': body ['username']})
 
-        if not is_e2e_test_request (user ['email']):
+        if not is_testing_request (request):
             send_email_template ('reset_password', user ['email'], requested_lang (), None)
 
         return '', 200
