@@ -3,6 +3,7 @@ from lark.exceptions import VisitError, LarkError, UnexpectedEOF
 from lark import Tree, Transformer, Visitor
 from os import path
 import sys
+import utils
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
@@ -22,7 +23,9 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif']
                       }
 
 #
@@ -33,7 +36,6 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
 #
 
 def closest_command(invalid_command, known_commands):
-
     # First search for 100% match of known commands
     min_position = len(invalid_command)
     min_command = ''
@@ -69,6 +71,7 @@ def closest_command_with_min_distance(command, commands):
     return min_command
 
 def minimum_distance(s1, s2):
+    """Return string distance between 2 strings."""
     if len(s1) > len(s2):
         s1, s2 = s2, s1
     distances = range(len(s1) + 1)
@@ -141,6 +144,9 @@ class AllAssignmentCommands(Transformer):
     def for_loop(self, args):
         commands = args[1:]
         return flatten(commands)
+    def while_loop(self, args):
+        commands = args[1:]
+        return flatten(commands)
 
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
@@ -157,6 +163,8 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
     def change_list_item(self, args):
         return args[0].children
+    def comment(self, args):
+        return args[0].children
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
@@ -170,12 +178,13 @@ class AllAssignmentCommands(Transformer):
     def input(self,args):
         return args[0].children
 
-def create_parser(level):
-    with open(f"grammars/level{str(level)}.lark", "r", encoding="utf-8") as file:
-        grammar = file.read()
-    return Lark(grammar)
+    def smaller(self, args):
+        return args[0].children
+    def bigger(self, args):
+        return args[0].children
 
-def all_arguments_true(args):
+
+def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
     arguments_of_false_nodes = [x[1] for x in args if not x[0]]
     return all(bool_arguments), arguments_of_false_nodes
@@ -195,64 +204,85 @@ class Filter(Transformer):
                 command_num += 1
 
     def command(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     def assign(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def assign_list(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def assign_sum(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def list_access(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 4 commands
     def list_access_var(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def ifs(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def valid_command(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def ifelse(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def condition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def equality_check(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def in_list_check(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 5 command
     def repeat(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 6
     def addition(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def substraction(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def multiplication(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def division(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     #level 7
     def elses(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 8
     def for_loop(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 9
     def elifs(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
 
     # level 12
     def change_list_item(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
+
+    # level 14
+    def andcondition(self, args):
+        return are_all_arguments_true(args)
+    def orcondition(self, args):
+        return are_all_arguments_true(args)
+    # level 15
+    def comment(self, args):
+        return are_all_arguments_true(args)
+
+    # level 16
+    def smaller(self, args):
+        return are_all_arguments_true(args)
+    def bigger(self, args):
+        return are_all_arguments_true(args)
+
+    # level 17
+    def while_loop(self, args):
+        return are_all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
+    def var(self, args):
+        return True, ''.join([str(c) for c in args])
     def random(self, args):
         return True, 'random'
     def index(self, args):
@@ -278,22 +308,23 @@ class IsValid(Filter):
     # that means you added a production rule but did not add a method for the rule here
 
     def ask(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def print(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def echo(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
     def for_loop(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
+    def while_loop(self, args):
+        return are_all_arguments_true(args)
+    def comment(self, args):
+        return are_all_arguments_true(args)
 
     #leafs with tokens need to be all true
     def var(self, args):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
-    def addition(self, args):
-        return all(args), ''.join([c for c in args])
-
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -302,7 +333,9 @@ class IsValid(Filter):
         # return error source to indicate what went wrong
         return False, "print without quotes"
     def input(self, args):
-        return all_arguments_true(args)
+        return are_all_arguments_true(args)
+
+
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -329,8 +362,6 @@ class IsComplete(Filter):
     def var(self, args):
         return all(args), ''.join([c for c in args])
     def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def addition(self, args):
         return all(args), ''.join([c for c in args])
     def input(self, args):
         return args != [], 'input'
@@ -592,11 +623,19 @@ class ConvertToPython_9_10(ConvertToPython_8):
 
 class ConvertToPython_11(ConvertToPython_9_10):
     def input(self, args):
+        args_new = []
         var = args[0]
-        all_parameters = [a for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")"
+        for a in args[1:]:
+            if type(a) is Tree:
+                args_new.append(f'str({a.children})')
+            elif "'" not in a:
+                args_new.append(f'str({a})')
+            else:
+                args_new.append(a)
 
-class ConvertToPython_12_13(ConvertToPython_11):
+        return f'{var} = input(' + '+'.join(args_new) + ")"
+
+class ConvertToPython_12(ConvertToPython_11):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -619,6 +658,72 @@ class ConvertToPython_12_13(ConvertToPython_11):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
+
+class ConvertToPython_13(ConvertToPython_12):
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
+                    return parameter + " = " + value
+                else:
+                    if value == 'true' or value == 'True':
+                        return parameter + " = True"
+                    elif value == 'false' or value == 'False':
+                        return parameter + " = False"
+                    else:
+                        return parameter + " = '" + value + "'"
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
+
+    def equality_check(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if arg1 == '\'True\'' or arg1 == '\'true\'':
+            return f"{arg0} == True"
+        elif arg1 == '\'False\'' or arg1 == '\'false\'':
+            return f"{arg0} == False"
+        else:
+            return f"str({arg0}) == str({arg1})" #no and statements
+
+class ConvertToPython_14(ConvertToPython_13):
+    def andcondition(self, args):
+        return ' and '.join(args)
+    def orcondition(self, args):
+        return ' or '.join(args)
+
+class ConvertToPython_15(ConvertToPython_14):
+    def comment(self, args):
+        return f"# {args}"
+
+class ConvertToPython_16(ConvertToPython_15):
+    def smaller(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) < str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) < str({arg1}) and {args[2]}"
+
+    def bigger(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) > str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) > str({arg1}) and {args[2]}"
+
+class ConvertToPython_17(ConvertToPython_16):
+    def while_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "while " + args[0] + ":\n"+"\n".join(all_lines)
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -741,11 +846,28 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
+
 def create_grammar(level):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
     with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
         return file.read()
+
+
+PARSER_CACHE = {}
+
+
+def get_parser(level):
+    """Return the Lark parser for a given level.
+
+    Uses caching if Hedy is NOT running in development mode.
+    """
+    existing = PARSER_CACHE.get(level)
+    if existing and not utils.is_debug_mode():
+        return existing
+    ret = Lark(create_grammar(level))
+    PARSER_CACHE[level] = ret
+    return ret
 
 
 def transpile(input_string, level):
@@ -837,25 +959,38 @@ def find_indent_length(line):
 def preprocess_blocks(code):
     processed_code = []
     lines = code.split("\n")
-    current_indent = 0
-    previous_block = 0
+    current_number_of_indents = 0
+    previous_number_of_indents = 0
+    indent_size = None #we don't fix indent size but the first encounter sets it
     for line in lines:
         leading_spaces = find_indent_length(line)
-        if leading_spaces > previous_block:
-            current_indent += 1
-            previous_block = leading_spaces
-        elif leading_spaces < previous_block:
-            #we springen 'terug' dus er moet een block in!
-            processed_code.append('end-block')
-            current_indent -=1
-            previous_block = leading_spaces
+
+        #first encounter sets indent size for this program
+        if indent_size == None and leading_spaces > 0:
+            indent_size = leading_spaces
+
+        #calculate nuber of indents if possible
+        if indent_size != None:
+            current_number_of_indents = leading_spaces // indent_size
+
+        if current_number_of_indents < previous_number_of_indents:
+            # we springen 'terug' dus er moeten end-blocken in
+            # bij meerdere terugsprongen sluiten we ook meerdere blokken
+
+            difference_in_indents = (previous_number_of_indents - current_number_of_indents)
+
+            for i in range(difference_in_indents):
+                processed_code.append('end-block')
+
+        #save to compare for next line
+        previous_number_of_indents = current_number_of_indents
 
         #if indent remains the same, do nothing, just add line
         processed_code.append(line)
 
     # if the last line is indented, the end of the program is also the end of all indents
     # so close all blocks
-    for i in range(current_indent):
+    for i in range(current_number_of_indents):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
@@ -863,10 +998,12 @@ def preprocess_blocks(code):
 def transpile_inner(input_string, level):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = Lark(create_grammar(level))
+
+    parser = get_parser(level)
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
+        # print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -885,21 +1022,28 @@ def transpile_inner(input_string, level):
             # this one can't be beautified (for now), so give up :)
             raise e
 
+    # IsValid returns (True,) or (False, args, line)
     is_valid = IsValid().transform(program_root)
-    if not is_valid[0]:
-        if is_valid[1] == ' ':
-            line = is_valid[2]
 
+    if not is_valid[0]:
+        _, args, line = is_valid
+
+        # Apparently, sometimes 'args' is a string, sometimes it's a list of
+        # strings ( are these production rule names?). If it's a list of
+        # strings, just take the first string and proceed.
+        if isinstance(args, list):
+            args = args[0]
+        if args == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
-        elif is_valid[1] == 'print without quotes':
+        elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)
         else:
-            invalid_command = is_valid[1]
+            invalid_command = args
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # clearly the error message here should be better or it should be a different one!
@@ -947,11 +1091,22 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 12:
-        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 13:
-        # Code does not change for level 13 only grammar
-        python = ConvertToPython_12_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 14:
+        python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 15:
+        python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 16:
+        python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 17:
+        python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen

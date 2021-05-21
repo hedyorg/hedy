@@ -2,19 +2,20 @@
 {% block levelbody %}
 <div style="width: 250px;" class="right-hand-shadow flex-none">
   <div class="p-3 shadow-md">
+    <div></div>
     <h2>{{ commands_title }}</h2>
   </div>
   <div>
     {% for command in commands %}
-    <div class="border-t-1 border-solid border-black justify-between my-2 shadow-md p-3 pl-4">
-      <div class="font-medium text-lg mb-2" tabindex=0>
+    <div class="justify-between my-2 shadow-md p-3 pl-4">
+      <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
         {{ command.explanation|commonmark }}
       </div>
       <div class="flex">
         <div class="font-thin text-sm flex-grow" tabindex=0>
-          {{ command.example|commonmark }}
+          {# placeholder to make button go right, was originally in use for the example code 3#}
         </div>
-        <button class="btn block flex-none self-end ml-1"
+        <button class="btn block flex-none self-end ml-1" style="min-width:6em"
           onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
       </div>
     </div>
@@ -22,10 +23,8 @@
   </div>
 </div>
 <div tabindex="0" class="flex-grow p-8">
-  <div class="my-4">
-  {{intro_text|commonmark}}
-  </div>
-
+  {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
+  {% include "incl-adventure-tabs.html" %}
   {% if prompt %}
   <div class="py-2 px-4">
     <div>
@@ -73,7 +72,7 @@
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
           style="display: none;">
-          <p class="close-dialog" onclick="$ ('#errorbox').hide ()">X</p>
+          <p class="close-dialog" onclick="window.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -91,7 +90,7 @@
         <div id="warningbox"
           class="flex-0 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
-          <p class="close-dialog" onclick="$ ('#warningbox').hide ()">X</p>
+          <p class="close-dialog" onclick="window.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg"
@@ -157,10 +156,10 @@
           next_assignment }}</button>
         {% endif %}
         {% if prev_level %}
-        <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
+          <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
-        <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+          <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
         {% endif %}
       </div>
     </div>
@@ -174,13 +173,29 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="/vendor/jquery.min.js" type="text/javascript"></script>
-  <script src="/vendor/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/vendor/skulpt.min.js" type="text/javascript"></script>
-  <script src="/vendor/skulpt-stdlib.js" type="text/javascript"></script>
+
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8"></script>
+  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript"></script>
+  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript"></script>
   <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
-  <script src="/js/syntaxModesRules.js" type="text/javascript"></script>
-  <script src="/js/app.js" type="text/javascript"></script>
-  <script src="/js/auth.js" type="text/javascript"></script>
+  <script>
+    window.State = {};
+    window.State.lang = "{{ lang }}";
+    window.State.level = "{{ level }}";
+    window.State.level_title = "{{ level_title }}";
+    window.State.adventure_name = "{{ adventure_name }}";
+    // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
+    window.State.adventure_name_onload = window.State.adventure_name;
+    // We load the adventures into the js to have access to their saved programs (if any).
+    window.State.adventures = {{ adventure_assignments|tojson }};
+    window.State.default_program = {{start_code|tojson }};
+    window.State.loaded_program = {{ loaded_program|tojson }};
+    window.State.loaded_program_name = {{ loaded_program_name|tojson }};
+    window.State.default_program_name = {{ (untitled + ' - ' + level_title + ' ' + level_nr)|tojson }};
+  </script>
+  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript"></script>
+  <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
+  <script src="{{static('/js/auth.js')}}" type="text/javascript"></script>
+  <script src="{{static('/js/tabs.js')}}" type="text/javascript"></script>
 {% endblock %}

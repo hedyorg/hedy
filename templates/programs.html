@@ -8,10 +8,14 @@
   <ul class="programs">
   {% for program in programs %}
     <li>
-      <strong>{{program.name}} </strong>
-      -&nbsp
+      {% if program.adventure_name %}
+        <strong>{{ui.adventure}}: {{adventures [program.adventure_name].name }} - {{program.name}}</strong>
+      {% else %}
+        <strong>{{program.name}} </strong>
+      {% endif %}
+      -&nbsp;
       {{ texts.level }} {{ program.level }} - {{ program.date }}
-      <a href="/hedy/{{ program.level }}/{{ program.id }}{{ query_lang }}">{{ texts.open }}</a>
+      <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}">{{ texts.open }}</a>
 
       <a href="#" onclick="if (confirm ('{{ texts.delete_confirm }}')) window.open ('/programs/delete/{{program.id}}', '_self')">{{ texts.delete }}</a>
       <pre>{{program.code | truncate (50) }}</pre>
@@ -29,6 +33,6 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="/vendor/jquery.min.js" type="text/javascript"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
   <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}

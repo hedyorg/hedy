@@ -49,24 +49,24 @@ class JsonBinLogger:
             obj = self.queue.get()
 
             try:
-                response = requests.post('https://api.jsonbin.io/b', json=obj, headers={
+                response = requests.post('https://api.jsonbin.io/v3/b', json=obj, headers={
                     'Content-Type': 'application/json',
-                    'secret-key': self.secret_key,
-                    'collection-id': self.collection_id,
+                    'X-Master-Key': self.secret_key,
+                    'X-Collection-Id': self.collection_id,
                 })
 
                 # Try to read the response as JSON
                 try:
                     resp = json.loads(response.text)
 
-                    if resp['success']:
+                    if response.status_code == 200:
                         logger.info('Posted to jsonbin')
                     else:
-                        logger.warning('Posting to jsonbin failed: ' + resp['message'])
-                except Exception as e:
+                        logger.warning(f'Posting to jsonbin failed: {response.status_code} {resp["message"]}')
+                except Exception:
                     # Not JSON or no success field
-                    logger.warning(f'Posting to jsonbin failed: {response.text}')
-            except Exception as e:
+                    logger.exception(f'Posting to jsonbin failed: {response.text}')
+            except Exception:
                 logger.exception(f'Error posting to jsonbin.')
 
 class NullJsonbinLogger():

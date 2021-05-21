@@ -1,23 +1,23 @@
 <nav class="bg-blue-500 px-8 shadow-sm text-white">
   <div class="-mb-px flex">
     <div class="py-1 mr-6 mt-1">
-      <a href="/?lang={{lang}}">
-        <img src="/images/Hedy-logo.png" style="width: 2.5em;"/>
+      <a href="{{localize_link ('/')}}">
+        <img src="{{static('/images/Hedy-logo.png')}}" style="width: 2.5em;"/>
       </a>
     </div>
 
     {% block menu %}
     {% for item in menu %}
-    <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{item.href}}?lang={{lang}}">
+    <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{localize_link (item.href)}}">
       {{ item.caption }}
     </a>
     {% endfor %}
     {% if username %}
-      <a class="menubar-btn border-{% if current_page == 'my-profile' %}white{% else %}transparent{% endif %}" href="/my-profile{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.profile}}</a>
-      <a class="menubar-btn border-{% if current_page == 'programs' %}white{% else %}transparent{% endif %}" href="/programs{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.program_header}}</a>
+      <a class="menubar-btn border-{% if current_page == 'my-profile' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/my-profile')}}">{{auth.profile}}</a>
+      <a class="menubar-btn border-{% if current_page == 'programs' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/programs')}}">{{auth.program_header}}</a>
     {% endif %}
     {% if not username %}
-      <a class="menubar-btn border-{% if current_page == 'login' %}white{% else %}transparent{% endif %}" href="/login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}">{{auth.login}}</a>
+      <a class="menubar-btn border-{% if current_page == 'login' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
     {% endif %}
     {% endblock %}
 
@@ -26,7 +26,7 @@
         <span class="mr-1">{{ current_language().sym }}</span>
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
       </button>
-      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1">
+      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1 list-none ml-0">
         {% for lang in other_languages() %}
         <li><a class="hover:bg-blue-700 py-2 px-4 block whitespace-no-wrap text-white" href="{{ modify_query(lang=lang.lang) }}">{{ lang.sym }}</a></li>
         {% endfor %}

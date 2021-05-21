@@ -2,8 +2,9 @@ import os
 import bcrypt
 import re
 import urllib
-from flask import request, make_response, jsonify, redirect, render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many
+from flask import request, make_response, jsonify, redirect
+from flask_helpers import render_template
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request
 import datetime
 from functools import wraps
 from config import config
@@ -11,23 +12,27 @@ import boto3
 from botocore.exceptions import ClientError as email_error
 import json
 import requests
+import querylog
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
 env = os.getenv ('HEROKU_APP_NAME')
 
+@querylog.timed
 def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
 
 def make_salt ():
-    return bcrypt.gensalt ().decode ('utf-8')
+    return bcrypt.gensalt (rounds=config ['bcrypt_rounds']).decode ('utf-8')
 
+@querylog.timed
 def hash (password, salt):
     return bcrypt.hashpw (bytes (password, 'utf-8'), bytes (salt, 'utf-8')).decode ('utf-8')
 
 countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Algeria','AS':'American Samoa','AD':'Andorra','AO':'Angola','AI':'Anguilla','AQ':'Antarctica','AG':'Antigua and Barbuda','AR':'Argentina','AM':'Armenia','AW':'Aruba','AU':'Australia','AT':'Austria','AZ':'Azerbaijan','BS':'Bahamas','BH':'Bahrain','BD':'Bangladesh','BB':'Barbados','BY':'Belarus','BE':'Belgium','BZ':'Belize','BJ':'Benin','BM':'Bermuda','BT':'Bhutan','BO':'Bolivia, Plurinational State of','BQ':'Bonaire, Sint Eustatius and Saba','BA':'Bosnia and Herzegovina','BW':'Botswana','BV':'Bouvet Island','BR':'Brazil','IO':'British Indian Ocean Territory','BN':'Brunei Darussalam','BG':'Bulgaria','BF':'Burkina Faso','BI':'Burundi','KH':'Cambodia','CM':'Cameroon','CA':'Canada','CV':'Cape Verde','KY':'Cayman Islands','CF':'Central African Republic','TD':'Chad','CL':'Chile','CN':'China','CX':'Christmas Island','CC':'Cocos (Keeling) Islands','CO':'Colombia','KM':'Comoros','CG':'Congo','CD':'Congo, the Democratic Republic of the','CK':'Cook Islands','CR':'Costa Rica','CI':'Côte d\'Ivoire','HR':'Croatia','CU':'Cuba','CW':'Curaçao','CY':'Cyprus','CZ':'Czech Republic','DK':'Denmark','DJ':'Djibouti','DM':'Dominica','DO':'Dominican Republic','EC':'Ecuador','EG':'Egypt','SV':'El Salvador','GQ':'Equatorial Guinea','ER':'Eritrea','EE':'Estonia','ET':'Ethiopia','FK':'Falkland Islands (Malvinas)','FO':'Faroe Islands','FJ':'Fiji','FI':'Finland','FR':'France','GF':'French Guiana','PF':'French Polynesia','TF':'French Southern Territories','GA':'Gabon','GM':'Gambia','GE':'Georgia','DE':'Germany','GH':'Ghana','GI':'Gibraltar','GR':'Greece','GL':'Greenland','GD':'Grenada','GP':'Guadeloupe','GU':'Guam','GT':'Guatemala','GG':'Guernsey','GN':'Guinea','GW':'Guinea-Bissau','GY':'Guyana','HT':'Haiti','HM':'Heard Island and McDonald Islands','VA':'Holy See (Vatican City State)','HN':'Honduras','HK':'Hong Kong','HU':'Hungary','IS':'Iceland','IN':'India','ID':'Indonesia','IR':'Iran, Islamic Republic of','IQ':'Iraq','IE':'Ireland','IM':'Isle of Man','IL':'Israel','IT':'Italy','JM':'Jamaica','JP':'Japan','JE':'Jersey','JO':'Jordan','KZ':'Kazakhstan','KE':'Kenya','KI':'Kiribati','KP':'Korea, Democratic People\'s Republic of','KR':'Korea, Republic of','KW':'Kuwait','KG':'Kyrgyzstan','LA':'Lao People\'s Democratic Republic','LV':'Latvia','LB':'Lebanon','LS':'Lesotho','LR':'Liberia','LY':'Libya','LI':'Liechtenstein','LT':'Lithuania','LU':'Luxembourg','MO':'Macao','MK':'Macedonia, the Former Yugoslav Republic of','MG':'Madagascar','MW':'Malawi','MY':'Malaysia','MV':'Maldives','ML':'Mali','MT':'Malta','MH':'Marshall Islands','MQ':'Martinique','MR':'Mauritania','MU':'Mauritius','YT':'Mayotte','MX':'Mexico','FM':'Micronesia, Federated States of','MD':'Moldova, Republic of','MC':'Monaco','MN':'Mongolia','ME':'Montenegro','MS':'Montserrat','MA':'Morocco','MZ':'Mozambique','MM':'Myanmar','NA':'Namibia','NR':'Nauru','NP':'Nepal','NL':'Netherlands','NC':'New Caledonia','NZ':'New Zealand','NI':'Nicaragua','NE':'Niger','NG':'Nigeria','NU':'Niue','NF':'Norfolk Island','MP':'Northern Mariana Islands','NO':'Norway','OM':'Oman','PK':'Pakistan','PW':'Palau','PS':'Palestine, State of','PA':'Panama','PG':'Papua New Guinea','PY':'Paraguay','PE':'Peru','PH':'Philippines','PN':'Pitcairn','PL':'Poland','PT':'Portugal','PR':'Puerto Rico','QA':'Qatar','RE':'Réunion','RO':'Romania','RU':'Russian Federation','RW':'Rwanda','BL':'Saint Barthélemy','SH':'Saint Helena, Ascension and Tristan da Cunha','KN':'Saint Kitts and Nevis','LC':'Saint Lucia','MF':'Saint Martin (French part)','PM':'Saint Pierre and Miquelon','VC':'Saint Vincent and the Grenadines','WS':'Samoa','SM':'San Marino','ST':'Sao Tome and Principe','SA':'Saudi Arabia','SN':'Senegal','RS':'Serbia','SC':'Seychelles','SL':'Sierra Leone','SG':'Singapore','SX':'Sint Maarten (Dutch part)','SK':'Slovakia','SI':'Slovenia','SB':'Solomon Islands','SO':'Somalia','ZA':'South Africa','GS':'South Georgia and the South Sandwich Islands','SS':'South Sudan','ES':'Spain','LK':'Sri Lanka','SD':'Sudan','SR':'Suriname','SJ':'Svalbard and Jan Mayen','SZ':'Swaziland','SE':'Sweden','CH':'Switzerland','SY':'Syrian Arab Republic','TW':'Taiwan, Province of China','TJ':'Tajikistan','TZ':'Tanzania, United Republic of','TH':'Thailand','TL':'Timor-Leste','TG':'Togo','TK':'Tokelau','TO':'Tonga','TT':'Trinidad and Tobago','TN':'Tunisia','TR':'Turkey','TM':'Turkmenistan','TC':'Turks and Caicos Islands','TV':'Tuvalu','UG':'Uganda','UA':'Ukraine','AE':'United Arab Emirates','GB':'United Kingdom','US':'United States','UM':'United States Minor Outlying Islands','UY':'Uruguay','UZ':'Uzbekistan','VU':'Vanuatu','VE':'Venezuela, Bolivarian Republic of','VN':'Viet Nam','VG':'Virgin Islands, British','VI':'Virgin Islands, U.S.','WF':'Wallis and Futuna','EH':'Western Sahara','YE':'Yemen','ZM':'Zambia','ZW':'Zimbabwe'};
 
+@querylog.timed
 def current_user (request):
     if request.cookies.get (cookie_name):
         token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
@@ -96,11 +101,21 @@ def routes (app, requested_lang):
         if not check_password (body ['password'], user ['password']):
             return 'invalid username/password', 403
 
+        # If the number of bcrypt rounds has changed, create a new hash.
+        new_hash = None
+        if config ['bcrypt_rounds'] != extract_bcrypt_rounds (user ['password']):
+            new_hash = hash (body ['password'], make_salt ())
+
         cookie = make_salt ()
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
+        if new_hash:
+            db_set ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
+        else:
+            db_set ('users', {'username': user ['username'], 'last_login': timems ()})
         resp = make_response ({})
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
+        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+        # The server will decide whether the cookie expires.
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         return resp
 
     @app.route ('/auth/signup', methods=['POST'])
@@ -150,7 +165,7 @@ def routes (app, requested_lang):
         username = body ['username'].strip ().lower ()
         email = body ['email'].strip ().lower ()
 
-        if env and 'subscribe' in body and body ['subscribe'] == True:
+        if not is_testing_request (request) and 'subscribe' in body and body ['subscribe'] == True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if os.getenv ('MAILCHIMP_API_KEY') and os.getenv ('MAILCHIMP_AUDIENCE_ID'):
                 # The first domain in the path is the server name, which is contained in the Mailchimp API key
@@ -177,7 +192,8 @@ def routes (app, requested_lang):
             'password': hashed,
             'email':    email,
             'created':  timems (),
-            'verification_pending': hashed_token
+            'verification_pending': hashed_token,
+            'last_login': timems ()
         }
 
         if 'country' in body:
@@ -192,17 +208,18 @@ def routes (app, requested_lang):
         # We automatically login the user
         cookie = make_salt ()
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
 
-        # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
-        if not env:
+        # If this is an e2e test, we return the email verification token directly instead of emailing it.
+        if is_testing_request (request):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
             send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             resp = make_response ({})
 
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, path='/')
+        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+        # The server will decide whether the cookie expires.
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         return resp
 
     @app.route ('/auth/verify', methods=['GET'])
@@ -266,7 +283,7 @@ def routes (app, requested_lang):
         hashed = hash (body ['new_password'], make_salt ())
 
         db_set ('users', {'username': user ['username'], 'password': hashed})
-        if env:
+        if not is_testing_request (request):
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
         return '', 200
@@ -303,11 +320,11 @@ def routes (app, requested_lang):
                 token = make_salt ()
                 hashed_token = hash (token, make_salt ())
                 db_set ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
-                if not env:
-                   # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+                # If this is an e2e test, we return the email verification token directly instead of emailing it.
+                if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
-                    send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
+                    send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         if 'country' in body:
             db_set ('users', {'username': user ['username'], 'country': body ['country']})
@@ -357,8 +374,8 @@ def routes (app, requested_lang):
 
         db_set ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
-        if not env:
-            # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+        if is_testing_request (request):
+            # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify ({'username': user ['username'], 'token': token}), 200
         else:
             send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
@@ -392,7 +409,7 @@ def routes (app, requested_lang):
         db_set ('users', {'username': body ['username'], 'password': hashed})
         user = db_get ('users', {'username': body ['username']})
 
-        if env:
+        if not is_testing_request (request):
             send_email_template ('reset_password', user ['email'], requested_lang (), None)
 
         return '', 200
@@ -431,6 +448,7 @@ for name in logging.Logger.manager.loggerDict.keys ():
 # https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
 email_client = boto3.client ('ses', region_name = config ['email'] ['region'], aws_access_key_id = os.getenv ('AWS_SES_ACCESS_KEY'), aws_secret_access_key = os.getenv ('AWS_SES_SECRET_KEY'))
 
+@querylog.timed
 def send_email (recipient, subject, body_plain, body_html):
     try:
         result = email_client.send_email (

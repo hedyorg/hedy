@@ -1,0 +1,31 @@
+{
+    "request": {
+        "title": "JSON Request Log",
+        "description": "Log format for JSON request logs",
+        "json": true,
+        "file-pattern": "\\.jsonl$",
+        "line-format": [
+            { "field": "start_time" },
+            " ",
+            { "field": "method" },
+            " ",
+            { "field": "path" },
+            ": ",
+            { "field": "duration_ms" }
+        ],
+        "level-field": "fault",
+        "level": {
+            "error": 1,
+            "info": 0
+        },
+        "timestamp-field": "start_time",
+        "body-field": "path",
+        "value": {
+            "start_time": { "kind": "string" },
+            "path": { "kind": "string" },
+            "method": { "kind": "string" },
+            "duration_ms": { "kind": "integer" },
+            "fault": { "kind": "integer" }
+        }
+    }
+}

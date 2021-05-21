@@ -20,6 +20,13 @@ h3 {
   @apply font-bold text-xl;
 }
 
+h4 {
+  @apply font-bold text-base;
+}
+
+
+
+
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
 }
@@ -55,6 +62,15 @@ strong {
   @apply bg-red-400 border-red-500;
 }
 
+.yellow-btn {
+  @apply btn-shape;
+  @apply bg-yellow-500 text-black border-yellow-700;
+}
+
+.yellow-btn:hover {
+  @apply bg-yellow-400 border-yellow-500;
+}
+
 /* Styles only for use in MarkDown blocks */
 .markdown {
   @apply text-xl text-gray-800 leading-normal;
@@ -74,32 +90,52 @@ h2 {
   @apply font-slab font-medium text-blue-500;
   @apply leading-tight text-2xl mb-2 mt-10;
 }
+
+h2:first-child { margin-top: 0; }
+
 h3 {
   @apply font-slab font-bold text-blue-700 italic;
-  @apply leading-tight text-xl mt-8 mb-1;
+  @apply leading-tight text-xl mt-4 mb-1;
 }
-code {
-  @apply font-mono inline rounded py-1 px-2;
-  color: #ff6188;
-  background: #272822;
-  font-size: 90%;
+
+h4 {
+  @apply mt-4 mb-2;
 }
+
+pre, code {
+}
+
 .markdown code {
-  @apply py-2 px-3 text-base;
+  @apply py-1 px-1 text-base;
 }
-pre {
+
+pre code {
   @apply block bg-gray-200 py-2 px-4 my-2 rounded text-base border-gray-300 border;
   @apply text-red-600;
 }
+
+pre {
+  white-space: pre-wrap;
+}
+
+/* Code in a fenced code block (``` in MarkDown) */
 pre code {
-  padding: 0 !important;
+  font-size: 100%;
+  color: white;
+}
+
+/* All code (` and ```) */
+code {
+  @apply font-mono inline rounded py-1 px-2;
+  background: #272822 !important;
+  /* color: #ff6188; */
+  /* Temporarily back to white because syntax highlighting in Ace is not implemented yet for all levels */
+  color: white;
+  font-size: 90%;
 }
 
 .markdown blockquote {
   @apply border-l-4 border-gray-300 pl-4 italic;
-}
-.markdown ul, .markdown ol {
-  @apply pl-5 list-disc;
 }
 
 @tailwind components;
@@ -147,6 +183,18 @@ pre code {
   text-shadow: none;
 }
 
+/* Lists */
+
+ul {
+    list-style: disc outside none;
+    margin-left: 2em;
+}
+
+ol {
+    list-style: decimal outside none;
+    margin-left: 2em;
+}
+
 /* AUTH */
 
 form.auth {
@@ -186,6 +234,23 @@ table.users td {
   box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
 }
 
+.tab {
+  @apply py-1 px-6 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm;
+  box-shadow:
+    /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
+}
+
+.tab + .tab {
+  box-shadow:
+    /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1),
+    /* left */ inset 4px 0px 4px -1px rgba(0,0,0,0.1);
+}
+
+.tab-selected {
+  @apply py-1 px-6 mt-0 pt-2 bg-white rounded-t-lg border-t-8 border-r border-l border-pink-500 text-sm;
+  box-shadow: none !important;
+}
+
 /* EDITOR WARNINGS & ERRORS */
 
 div#errorbox, div#warningbox {
@@ -205,4 +270,8 @@ p.close-dialog {
 .expandable-docs-text h1 {
    margin-top: 30px;
    margin-bottom: 30px;
+}
+
+.touched {
+  @apply bg-green-200;
 }

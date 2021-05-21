@@ -1,8 +1,36 @@
+import datetime
 import time
 from config import config
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
+import functools
 import os
+import re
+from ruamel import yaml
+import querylog
+
+
+class Timer:
+  """A quick and dirty timer."""
+  def __init__(self, name):
+    self.name = name
+
+  def __enter__(self):
+    self.start = time.time()
+
+  def __exit__(self, type, value, tb):
+    delta = time.time() - self.start
+    print(f'{self.name}: {delta}s')
+
+
+def timer(fn):
+  """Decoractor for fn."""
+  @functools.wraps(fn)
+  def wrapper(*args, **kwargs):
+    with Timer(fn.__name__):
+      return fn(*args, **kwargs)
+  return wrapper
+
 
 def type_check (val, Type):
     if Type == 'dict':
@@ -21,15 +49,74 @@ def type_check (val, Type):
         return type (val) == bool
 
 def object_check (obj, key, Type):
-  if not type_check (obj, 'dict') or not key in obj:
-     return False
-  return type_check (obj [key], Type)
+    if not type_check (obj, 'dict') or not key in obj:
+        return False
+    return type_check (obj [key], Type)
 
 def timems ():
     return int (round (time.time () * 1000))
 
 def times ():
     return int (round (time.time ()))
+
+
+
+
+DEBUG_MODE = False
+
+def is_debug_mode():
+    """Return whether or not we're in debug mode.
+
+    We do more expensive things that are better for development in debug mode.
+    """
+    return DEBUG_MODE
+
+
+def set_debug_mode_based_on_flask(app):
+    """Set whether or not we're in debug mode based on whether Flask is.
+
+    This can only be called after the Flask server has been initialized.
+    """
+    global DEBUG_MODE
+    DEBUG_MODE = app.config['DEBUG']
+
+
+YAML_CACHE = {}
+
+@querylog.timed
+def load_yaml(filename):
+    """Load the given YAML file.
+
+    The file load will be cached in production, but reloaded everytime in development mode.
+
+    Whether we are running in production or not will be determined
+    by the Flask config (FLASK_ENV).
+    """
+    # Bypass the cache in DEBUG mode for mucho iterating
+    if not is_debug_mode() and filename in YAML_CACHE:
+        return YAML_CACHE[filename]
+    try:
+        with open (filename, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+            YAML_CACHE[filename] = data
+            return data
+    except IOError:
+        return {}
+
+
+def load_yaml_rt(filename):
+    """Load YAML with the round trip loader."""
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            return yaml.round_trip_load(f, preserve_quotes=True)
+    except IOError:
+        return {}
+
+
+def dump_yaml_rt(data):
+    """Dump round-tripped YAML."""
+    return yaml.round_trip_dump(data, indent=4, width=999)
+
 
 # *** DYNAMO DB ***
 
@@ -97,7 +184,9 @@ def db_key (table, data, *remove):
     return processed_data
 
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
+@querylog.timed
 def db_get (table, data, *not_primary):
+    querylog.log_counter('db_get:' + table)
     # If we're querying by something else than the primary key of the table, we assume that data contains only one field, that on which we want to search. We also require that field to have an index.
     if len (not_primary):
         field = list (data.keys ()) [0]
@@ -113,7 +202,9 @@ def db_get (table, data, *not_primary):
         return db_decode (result ['Item'])
 
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
+@querylog.timed
 def db_get_many (table, data, *not_primary):
+    querylog.log_counter('db_get_many:' + table)
     if len (not_primary):
         field = list (data.keys ()) [0]
         # We use ScanIndexForward = False to get the latest items from the Programs table
@@ -121,12 +212,15 @@ def db_get_many (table, data, *not_primary):
     else:
         result = db.query (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
     data = []
+    querylog.log_counter('db_get_many_items', len(result['Items']))
     for item in result ['Items']:
         data.append (db_decode (item))
     return data
 
 # Creates or updates an item by primary key.
+@querylog.timed
 def db_set (table, data):
+    querylog.log_counter('db_set:' + table)
     if db_get (table, data):
         result = db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
     else:
@@ -134,11 +228,15 @@ def db_set (table, data):
     return result
 
 # Deletes an item by primary key.
+@querylog.timed
 def db_del (table, data):
+    querylog.log_counter('db_del:' + table)
     return db.delete_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
 
 # Deletes multiple items.
+@querylog.timed
 def db_del_many (table, data, *not_primary):
+    querylog.log_counter('db_del_many:' + table)
     # We define a recursive function in case the number of results is very large and cannot be returned with a single call to db_get_many.
     def batch ():
         to_delete = db_get_many (table, data, *not_primary)
@@ -150,12 +248,39 @@ def db_del_many (table, data, *not_primary):
     batch ()
 
 # Searches for items.
+@querylog.timed
 def db_scan (table):
+    querylog.log_counter('db_scan:' + table)
     result = db.scan (TableName = db_prefix + '-' + table)
     output = []
+    querylog.log_counter('db_scan_items', len(result['Items']))
     for item in result ['Items']:
         output.append (db_decode (item))
     return output
 
+@querylog.timed
 def db_describe (table):
+    querylog.log_counter('db_describe:' + table)
     return db.describe_table (TableName = db_prefix + '-' + table)
+
+
+def slash_join(*args):
+    ret = []
+    for arg in args:
+        if not arg: continue
+
+        if ret and not ret[-1].endswith('/'):
+            ret.append('/')
+        ret.append(arg.lstrip('/') if ret else arg)
+    return ''.join(ret)
+
+def is_testing_request(request):
+    return bool ('X-Testing' in request.headers and request.headers ['X-Testing'])
+
+def extract_bcrypt_rounds (hash):
+    return int (re.match ('\$2b\$\d+', hash) [0].replace ('$2b$', ''))
+
+def isoformat(timestamp):
+    """Turn a timestamp into an ISO formatted string."""
+    dt = datetime.datetime.utcfromtimestamp(timestamp)
+    return dt.isoformat() + 'Z'

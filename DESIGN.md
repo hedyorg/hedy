@@ -113,7 +113,7 @@ can now use both [`number is 12`] and [`name is Hedy`].
 ### Level 4: Selection with if and else flat
 
 In Level 5, selection with the if statement is introduced, but the
-syntax is ‘flat’, i.e. placed on one line, resembling a regular syntax
+syntax is 'flat', i.e. placed on one line, resembling a regular syntax
 more:\
 [`if name is print `]\
 Else statements are also included, and are also placed on one line,
@@ -124,7 +124,7 @@ using the keyword [`else`]:\
 
 In working with non-English native Python novices. Research has found
 the keyword [`for`] to be a confusing word for repetition, especially
-because it sounds like the word ‘four’ [@hermans_code_2018]. For our
+because it sounds like the word 'four' [@hermans_code_2018]. For our
 first simplest form, according to Design Goal 2, we opt to use
 Quorum [@stefik_quorum_2017] syntax [`repeat x times`]. In this
 initial form, like the if the syntax is placed on one line:\
@@ -145,11 +145,11 @@ steep learning curve and should be treated as a separate learning goal.
 
 ### Level 7: Code blocks
 
-After Level 6, there is a clear need to ‘move on’, as the body of a loop
+After Level 6, there is a clear need to 'move on', as the body of a loop
 (and also that of an if) can only consist of one line, which limits the
 possibilities of programs that users can create. We assume this
-limitation will be a motivating factor for learners, rather than ‘having
-to learn’ the block structure of Python, they are motivated by the
+limitation will be a motivating factor for learners, rather than 'having
+to learn' the block structure of Python, they are motivated by the
 prospect of building larger and more interesting programs (Design Goal
 6). The syntax of the loop remains otherwise unchanged as per Design
 Goal 3, so the new form is:\
@@ -193,7 +193,25 @@ In level 12, learners encounter different types of brackets for the
 first time, because it adds rectangular brackets for list access, which
 up to now was done with the keyword [`at`], following Design Goal 2.
 
-### Level 13: is becomes = and ==
+### Level 13: booleans
 
-In the final level Hedy becomes a subset of Python by replacing the word
-[`is`] in assignment and equality checks by [`=`] and [`==`].
+In level 13, booleans are added. Learners encounter True and False and how to use them in if statements
+
+### Level 14: and and or
+
+In level 14, Learners learn about and and or in if statements. 
+
+### Level 15: Comments
+
+In level 15, comments are introduced. The learner will now know how to comment code
+
+### Level 16: smaller and bigger
+
+In level 16, Learners learn about < and > in preparation for while loops
+
+### Level 17: while loops
+
+In level 17, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
+can make basic while loops.
+
+

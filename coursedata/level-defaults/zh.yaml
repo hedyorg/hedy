@@ -1,0 +1,481 @@
+1:
+    intro_text: |
+        欢迎来到海迪!你可以使用在第1级学习内容中的命令print, ask 和 echo.
+
+        在左边的命令栏里，你可以看到第1级学习内容中的所有的命令.
+
+        按下蓝色的按钮, 代码就会为你打出来!
+
+        使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行这段代码.
+
+        不知道自己想要创建些什么？你也许能在下面的内容里面找到灵感. 
+        
+    start_code: "print 你好世界!"
+    commands:
+    -   explanation: "Print的意思是打印,用print可以打印一些东西."
+        example: "例如: print 你好欢迎来到Hedy!"
+        demo_code: "print 你好欢迎来到 Hedy!"
+    -   explanation: "Ask的意思是提问, 用ask可以提出一些问题."
+        example: "例如: ask 你最喜欢的颜色是什么?"
+        demo_code: "ask 你最喜欢的颜色是什么?"
+    -   explanation: "echo的意思是回声, 用echo可以重复执行某一任务."
+        example: "例如: echo 你最喜欢的颜色是什么..."
+        demo_code: |-
+            ask 你最喜欢的颜色是什么?
+            echo 你最喜欢的颜色是什么...
+2:
+    intro_text: |
+        在第2级学习内容中,我们会学习新的内容. 你可以用`is`来命名一个词.
+
+        如果你使用代码 `name is 海迪`, 你可以在程序的任何地方使用name这个词,并且name这个词会被'海迪'这个词所取代.
+
+        注意: ask已被改变, 你可以命名这个问题的答案并保存, 就像这样:
+
+        ```
+        answer is 你的名字是什么?
+        ```
+
+        Print 的使用方法仍旧如同在第1级中一样, 不过你不再需要echo了.
+
+        在第2级你也可以创建一个列表. 你可以让计算机从列表中随机选择一些东西. 你可以用'at random'来完成这个任务.
+
+        你可以在左边的命令栏里面找到第2级学习内容的所有命令. 还有作业题目栏.
+    start_code: "print 你好世界!"
+    commands:
+    -   explanation: "`is`的意思是\"是\", 用来给一个词命名以便在程序中使用"
+        example: "Example: name is 海迪."
+        demo_code: |-
+            name is 海迪
+            print 欢迎 name
+    -   explanation: "Ask的意思是提问, 用`ask`可以提出一些问题. 注意! 现在你需要用 `is`给问题的答案命名."
+        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            print color 是我最喜欢的颜色!
+    -   explanation: "用`at` and `random`可以从一组词汇中随机选择一个词"
+        example: "例如: animals is 狗, 猫, 袋鼠."
+        demo_code: |-
+            animals is 狗, 猫, 袋鼠
+            print animals at random
+3:
+    start_code: "print '你好世界'"
+    intro_text: |
+        在第3级目标中`ask`的使用方法仍旧如同在第2级中一样, 但是现在` print` 的使用方法有所不同了.
+
+         你需要在你想要打印的内容前后两边加上单引号.
+
+         这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `is`命名并保存的词汇.
+
+         大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
+
+         ## 作业题会越来越难
+         你会发现左边的命令栏又出现了, 而作业则标题栏下方. 现在的作业题会逐渐变得越来越难.
+         所以最好从左边的"故事"开始, 然后按照左往右的顺序做题, 逐渐接受越来越大的挑战.
+    commands:
+    -   explanation: "Print的意思是打印, 可以用来打印单引号里面的内容"
+        example: "例如: print 你好欢迎来到海迪.'"
+        demo_code: "print '你好欢迎来到海迪.'"
+    -   explanation: "给一段文本命名并不带单引号打印`print` 出这段文本"
+        example: "例如: name is 海迪."
+        demo_code: |-
+            name is 海迪
+            print '我的名字是 ' name
+    -   explanation: "Ask的意思是提问, 用 `ask`提出问题."
+        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            print color ' 是你最喜欢的颜色!'
+4:
+    start_code: |-
+        name is ask 你的名字是什么?
+        if name is 海迪 print '酷!' else print '呵呵'
+    intro_text: |
+        `ask` 和` print` 的使用方法和在第3级目标里面一样.
+
+         在第4级目标里面增加了新的内容,  `if`条件语句! 用`if` 你可以在两个不同的选项中进行选择.
+
+         ## 海迪代码范例
+         ```
+         name is ask 你的名字是什么?
+         if name is 海迪 print '赞' else print '嘁!'
+         ```
+
+         如果你输入的名字是'海迪'那么这段代码运行的结果就是打印出'赞'这个字. 如果你输入的名字不是海迪而是其他词汇,那么这段代码运行的结果就是打印出'嘁'这个字.
+
+         ## 作业题越来越难了
+
+         第4级学习内容中作业题的难度也是逐渐增加的,所以最好按照左往右的顺序做题.
+    commands:
+    -   explanation: "Print的意思是打印, 用print打印的内容前后两边都要用单引号标注清楚"
+        example: "例如: print '你好欢迎来到海迪.'"
+        demo_code: "print '你好欢迎来到海迪.'"
+    -   explanation: "Ask的意思是提问，用`ask`可以提出问题."
+        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            print color ' 是你最喜欢的颜色!'
+    -   explanation: "用`if-else`条件语句进行选择"
+        example: "例如: if color is 绿色 print '漂亮!' else print '呵呵'"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            if color is 绿色 print '漂亮!' else print '呵呵'
+5:
+    start_code: "repeat 3 times print '海迪很好玩!'"
+    intro_text: |
+        `ask`, `print` 和 `if-else条件语句` 的使用方法和在第4级里面一样.
+        但是在第5级的学习内容里面增加了repeat循环命令. Repeat循环语句可以用来多次执行一段代码.
+        ## Voorbeeld 海迪 代码
+        ```
+        repeat 3 times print '海迪很好玩!'
+        ```
+    commands:
+    -   explanation: "Print的意思是打印，可以用print打印的内容前后两边都要用单引号标注清楚."
+        example: "例如: print '你好欢迎来到海迪.'"
+        demo_code: "print '你好欢迎来到海迪.'"
+    -   explanation: "Ask的意思是提问，用`ask`提出问题."
+        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            print color ' is your favorite!'
+    -   explanation: "Make a choice with `if`"
+        example: "Example: if color is green print 'pretty!' else print 'meh'"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            if color is green print 'pretty!' else print 'meh'
+    -   explanation: "`repeat` and `if` combined"
+        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
+6:
+    start_code: "print '5乘以5 is ' 5 * 5"
+    intro_text: |
+         ask提问, print打印, if-else条件语句和repeat循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
+         但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦. 
+
+         在第6级的学习内容里面增加了新的代码,你现在可以用代码进行计算了.
+
+         加法运算很简单, 和你在数学课上学的加法运算的知识很类似, 例如''5加5记做 `5 + 5`. 减法运算也很简单, 例如'5减5'记做 `5 - 5`.
+
+         乘法运算有点不同, 因为键盘上面没有乘法符号. 你可以找一下, 确实没有!
+         这就是为什么我们要把数字8上面的星号当做乘法符号: `5 * 5`. 读作5乘以5,你会很容易记住它.
+         ## 海迪代码范例
+         ```
+         print '5加5等于 ' 5 + 5
+         print '5减5等于 ' 5 - 5
+         print '5乘以5等于 ' 5 * 5
+         ```
+    commands:
+    -   explanation: "Print的意思是打印，现在打印内容的前后两边都需要用单引号标注清楚."
+        example: "例如: print '5乘以5等于 ' 5 * 5"
+        demo_code: "print '5乘以5等于 ' 5 * 5"
+    -   explanation: "用ask提问计算题的答案然后用if-else条件语句检查答案是否正确。."
+        example: "例如: answer is ask 10加10等于几?"
+        demo_code: |-
+            answer is ask 10加10等于几?
+            if answer is 20 print '做得好!' else print '糟糕,算错啦'
+    -   explanation: "`repeat`循环语句 and `if-else` 条件语句的组合"
+        example: "例如: if 乘积 is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'"
+        demo_code: |-
+            product is ask 10乘以5等于几?
+            if product is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'
+7:
+    start_code: |-
+        repeat 5 times
+            print '大家好'
+            print '这段话将被打印5次'
+    intro_text: |
+        `ask` 和 `print` 的使用方法依旧保持不变. 但是 `if-else`条件语句 和 `repeat`循环语句已经改变了!
+        你现在可以执行一组代码, 但你必须使用缩进.
+        这意味着必须首行缩进四个空格. 当你想要创建只有一行的代码块的时候这一点也适用.
+
+        ## 海迪代码范例
+        ```
+        repeat 5            
+            print '大家好'
+            print '这一切都要重复5次'
+        ```
+        如果你要用一个repeat循环语句和一个if-else条件语句的组合, 那么你需要缩进每个代码块. 请看下面的范例以了解更多细节!
+
+         ## 海迪代码范例
+         ```
+         color is ask 你最喜欢的颜色是什么?
+         if color is 绿色
+             repeat 3 times
+                 print '好看!'
+         else
+             repeat 5 times
+                 print '真难看'
+         ```
+
+    commands:
+    -   explanation: "用print打印一些内容. 记得在打印内容的前后两边都用单引号标注清楚."
+        example: "Example: print '5乘以5等于 ' 5 * 5"
+        demo_code: "print '5乘以5等于 ' 5 * 5"
+    -   explanation: "使用ask提问加法运算的答案然后检查答案是否正确. 我们现在可以打印两行代码了."
+        example: "例如: answer is ask 5加5等于几?"
+        demo_code: |-
+            answer is ask 5加5等于几?
+            if answer is 10
+                print '做得好!'
+                print '的确, 答案就是 ' answer
+            else
+                print '糟糕!'
+                print '答案就是 10'
+    -   explanation: "`if-else` 条件语句and `repeat`循环语句的组合"
+        example: "例如: if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
+        demo_code: |-
+            color is ask 你最喜欢的颜色是什么?
+            if color is 绿色
+                repeat 3 times
+                    print '漂亮!'
+            else
+                repeat 5 times
+                    print '呵呵'
+8:
+    start_code: |-
+        for i in range 1 to 10
+            print i
+        print 'Ready or not, here I come!'
+    intro_text: "`print` (打印)的使用方法照旧不变但是`repeat` (重复或循环)现在被`for`(循环)所代替! 你要用 `for i in range 1 to 5`, 代替`repeat 5 times`. 你也可以在你的程序中使用 `i`! 记住在`for`和 `if` 语句后使用缩进(这意味着以四个空格开始一个句子)"
+    commands:
+    -   explanation: "我们用`for`循环语句代替`repeat`循环语句"
+        example: "for i in range 1 to 10"
+        demo_code: |
+            for i in range 1 to 10
+              print i
+            print '无论你是否准备好了，我都会来的!'
+9:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print '无论你是否准备好了，我都会来的!'
+    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
+    commands:
+    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 11:
+                print i
+            print '无论你是否准备好了，我都会来的!'
+    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
+        example: "if colour is 绿色:'"
+        demo_code: |-
+            colour is 绿色
+            if colour is 绿色:
+                print 'The colour 是绿色'
+            else:
+                print 'The colour 不是绿色'
+    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a 是 1'
+            elif a is 2:
+                print 'a 是 2'
+            else:
+                print 'a 既不是1也不是2'
+10:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+            print 'we are in round: ' i ' and we count: ' j '.'
+    intro_text: "从现在开始，我们可以更频繁地重复一个循环。在这个例子中，我们数到5连做3遍。所以我们一共做了3轮，每次都数到5."
+    commands:
+    -   explanation: "This is an example with the for statement"
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                print 'we are in round: ' i ' and we count: ' j '.'
+    -   explanation: "我们可以用if条件语句做同样的事情s"
+        demo_code: |-
+            colour is 蓝色
+            colourtwo is 黄色
+            if colour is 蓝色:
+                if colourtwo is 黄色:
+                    print '我们一起践行绿色生活!'
+11:
+    start_code: |-
+        age is input('你现在几岁了?')
+        print('所以你的年龄曾经是:')
+        for i in range(0,age):
+            print(i)
+    intro_text: "我们要开始用小括号还要改变ask(提问)! 我们把ask(提问)替换为input(输入)! 我们现在使用print, ask和for的时候要加上小括号."
+    commands:
+    -   explanation: "我们现在要把print(打印)的内容用小括号括起来!"
+        example: "例如: print('你好世界')"
+        demo_code: "print('你好世界')"
+    -   explanation: ", also we are going to put brackets around it我们现在要用input(输入)代替ask，同时要在input(输入)的内容前后添加小括号."
+        example: "例如: answer is input('你的名字是什么?')"
+        demo_code: |-
+            answer = input('你的名字是什么?')
+            print('那你的名字是 ' answer)
+    -   explanation: "我们现在要在for循环语句的前后添加小括号. for i in range (0,10):"
+        example: "例如: for i in range(0,10):"
+        demo_code: |-
+            for i in range(0,10):
+                print(i)
+            print('无论你是否准备好了，我都会来的')
+
+
+12:
+    start_code: |-
+        fruit is ['苹果', '香蕉', '樱桃']
+        print(fruit)
+    intro_text: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
+    commands:
+    -   explanation: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
+        example: "例如: fruit is ['苹果', '香蕉', '樱桃']"
+        demo_code: |-
+            fruit is ['苹果', '香蕉', '樱桃']
+            print(fruit)
+    -   name: "从一个列表中检索元素"
+        explanation: "我们用[数字]从一个列表中检索元素，因此 fruit[1] 的意思就是从列表fruit中检索第一个元素t!"
+        example: "例如: firstfruit is fruit[1]"
+        demo_code: |-
+            fruit is ['香蕉', '苹果', '樱桃']
+            firstfruit is fruit[1]
+            print(firstfruit)
+    -   name: "从一个列表中随机选择元素"
+        explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
+        example: "例如: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['香蕉', '苹果', '樱桃']
+            randomfruit is fruit[random]
+            print(randomfruit)
+13:
+    start_code: |-
+        you_are_still_here is False
+        are_you_still_here is input('你还在这里吗? 是 或 不是?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        if you_are_still_here is True:
+            print('你好!')
+        if you_are_still_here is False:
+            print('再见!')
+    intro_text: "我们现在讨论将创建一个变量，即`True` (真)或 'False`(假), 你可以将`True` (真)` 和 'False`(假) 赋值给一个变量. 你可以用这个来记录某个答案."
+    commands:
+    -   name: "Example例子"
+        explanation: "在这个例子中, 我们用`True` (真)和 'False`(假)来记录一个问题的答案. 你可以回答5次. 如果答案正确, good_answer 将会为 `True`(真)"
+        example: "good_answer is 'False'"
+        demo_code: |-
+          for i in range(1,5):
+              good_answer is False
+              answer is input('5*5等于 ')
+              if answer is 25:
+                  good_answer is True
+              else:
+                  good_answer is False
+              if good_answer is True:
+                  print('正确!')
+              if good_answer is False:
+                  print('错误! ' 5-i ' 试图离开')
+14:
+    start_code: |-
+        you_are_still_here is False
+        are_you_still_here is input('你还在这里吗? 是 或 不是?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        answer is input('5*5等于几?')
+        if you_are_still_here is True and answer is 25:
+            print('你说yes，并给出了一个很好的答案')
+    intro_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
+    commands:
+    -   name: "And(且)"
+        explanation: "'and`的左边和右边的两个语句都必须是正确的."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+          answer1 is input('3+2等于几?')
+          answer2 is input('2+2等于几?')
+          if answer1 is 5 and answer2 is 4:
+              print('这两个答案都正确!')
+          else:
+              print('至少有一个答案是错的!')
+    -   name: "Or(或)"
+        explanation: " 在`or`(或)的左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+          answer1 is input('3+2等于几?')
+          answer2 is input('2+2等于几?')
+          if answer1 is 5 or answer2 is 4:
+              print('至少有一个答案是正确的!')
+          else:
+              print('这两个答案都是错的!')
+15:
+    start_code: |-
+        # 这是一个要问几个数学问题的程序
+        for i in range(1,10):
+            # 我们将要问一些有关五五乘法表的问题
+            answer is input('' i ' 乘以 5等于几?')
+            # 我们判断答案是否正确
+            correct_answer is i * 5
+            if answer is correct_answer:
+                print(answer ' 是正确的')
+            else:
+                print('错了, 应该是: ' i*5)
+    intro_text: "当你在编写更大的程序时, 你将需要找到一种方法来记住每一段代码的作用. 我们使用 comments(注释)来实现这一点. 注释的格式如下:\n ` # 这是一个注释`. 在 # 后面的所有内容对代码来说都是不可见的."
+    commands:
+    -   name: "Comment注释"
+        explanation: "我们可以把注释放在任何我们想放的地方."
+        example: "# 这是一个注释"
+        demo_code: |-
+            # 这段代码是为了打印你好
+            # 这是用海迪编写的
+            # 除了打印 "你好"，它什么也没做
+            print('你好!')
+16:
+    start_code: |-
+        age is input('你今年几岁了?')
+        if age < 12:
+            print('你比我年纪小!')
+        elif age > 12:
+            print('你比我年纪大!')
+    intro_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
+    commands:
+    -   name: "Smaller 小于"
+        explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
+        example: "例如: age < 12"
+        demo_code: |-
+            age is input('你今年几岁了?')
+            if age < 12:
+                print('你比我年纪小!')
+    -   name: "Bigger 大于"
+        explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
+        example: "例如: age > 12"
+        demo_code: |-
+            age is input('你今年几岁了?')
+            if age > 12:
+                print('你比我年纪大!')
+17:
+    start_code: |-
+        correct_answer is False
+        # 我们继续知道正确答案被给出!
+        while correct_answer is False:
+            answer is input('5乘以5等于几?')
+            if answer is 25:
+                correct_answer is True
+                print('已经给出了一个很好的答案')
+    intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
+    commands:
+    -   name: "布尔 while循环语句"
+        explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
+        example: "例如: while correct_answer is False"
+        demo_code: |-
+            correct_answer is False
+            # 我们继续知道正确答案被给出!
+            while correct_answer is False:
+                answer is input('5乘以5等于几?')
+                if answer is 25:
+                    correct_answer is True
+                    print('已经给出了一个很好的答案')
+    -   name: "Smaller while (直到小于)"
+        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
+        example: "例如: while count < 3"
+        demo_code: |-
+            count is 1
+            # 我们继续，直到count数到3为止!
+            while count < 3:
+                print('我们计算 ' 3 - count ' 的次数更多了')
+                count is count + 1
+            print('我们完成啦')

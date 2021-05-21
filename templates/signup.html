@@ -45,7 +45,7 @@
     <br><br>
   </form>
 </div>
-<form onsubmit="event.preventDefault (); window.location.href = 'login{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'">
+<form onsubmit="event.preventDefault (); window.location.href = '{{localize_link ('/login')}}'">
   <br>
   {{auth.already_account}}&nbsp;&nbsp;<button type="submit" class="btn">{{auth.login}}</button>
   <br><br>

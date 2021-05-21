@@ -9,6 +9,10 @@
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
 
+  // a variable which turns on(1) highlighter or turns it off(0)
+  var highlighter = 0;
+
+  if (highlighter == 1){
         if (window.State.level == 1){
           window.editor.session.setMode("ace/mode/level1");
         }
@@ -18,7 +22,25 @@
         if (window.State.level == 3){
           window.editor.session.setMode("ace/mode/level3");
         }
-
+        if (window.State.level == 4){
+          window.editor.session.setMode("ace/mode/level4");
+        }
+        if (window.State.level == 5){
+          window.editor.session.setMode("ace/mode/level5");
+        }
+        if (window.State.level == 6){
+          window.editor.session.setMode("ace/mode/level6");
+        }
+        if (window.State.level == 7){
+          window.editor.session.setMode("ace/mode/level7");
+        }
+        if (window.State.level == 8 || window.State.level == 9){
+          window.editor.session.setMode("ace/mode/level8and9");
+        }
+        if (window.State.level == 10){
+          window.editor.session.setMode("ace/mode/level10");
+        }
+  }
 
 
   // Load existing code from session, if it exists
@@ -106,7 +128,8 @@ function runit(level, lang, cb) {
       data: JSON.stringify({
         level: level,
         code: code,
-        lang: lang
+        lang: lang,
+        adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -142,7 +165,7 @@ function tryPaletteCode(exampleCode) {
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;
-  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  editor.setValue(exampleCode, MOVE_CURSOR_TO_END);
   window.State.unsaved_changes = false;
 }
 
@@ -152,16 +175,24 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 
   if (reloadOnExpiredSession ()) return;
 
-  if (name === true) name = $ ('#program_name').val ();
-
-  window.State.unsaved_changes = false;
-
   try {
+    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
+       // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+       if (window.State.adventure_name) level = [level, window.State.adventure_name];
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/login';
        return;
+    }
+
+    window.State.unsaved_changes = false;
+
+    var adventure_name = window.State.adventure_name;
+    // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
+    if (level instanceof Array) {
+       adventure_name = level [1];
+       level = level [0];
     }
 
     $.ajax({
@@ -171,11 +202,13 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         level: level,
         lang:  lang,
         name:  name,
-        code:  code
+        code:  code,
+        adventure_name: adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb ();
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
@@ -190,11 +223,21 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       setTimeout (function () {
          $ ('#okbox').hide ();
       }, 2000);
+      // If we succeed, we need to update the default program name & program for the currently selected tab.
+      // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
+      // The name of the program might have been changed by the server, so we use the name stated by the server.
+      $ ('#program_name').val (response.name);
+      window.State.adventures.map (function (adventure) {
+        if (adventure.short_name === (adventure_name || 'level')) {
+          adventure.loaded_program_name = name;
+          adventure.loaded_program      = code;
+        }
+      });
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
       if (err.status === 403) {
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
          window.location.pathname = '/login';
       }
@@ -338,21 +381,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
-    editor.resize ();
+    if ($ ('#editor').length) editor.resize ();
   }
 };
 
