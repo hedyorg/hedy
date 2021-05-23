@@ -1,0 +1,8 @@
+#!/bin/bash
+# Helper script to run unit tests
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir/..
+
+# This is expected to run from the repo root
+python -m unittest discover -s tests

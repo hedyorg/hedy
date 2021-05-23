@@ -1,6 +1,6 @@
 from lark import Lark
-from lark.exceptions import VisitError, LarkError, UnexpectedEOF
-from lark import Tree, Transformer, Visitor
+from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
+from lark import Tree, Transformer
 from os import path
 import sys
 import utils
@@ -1053,7 +1053,7 @@ def transpile_inner(input_string, level):
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
-    except Exception as e:
+    except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
             characters_expected = str(e.allowed)
