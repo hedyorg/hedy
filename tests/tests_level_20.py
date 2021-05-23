@@ -609,30 +609,6 @@ else:
 
         self.assertEqual(expected, result)
 
-    def test_everything_combined(self):
-        code = textwrap.dedent("""\
-    score = ['100', '300', '500']
-    highscore = score[random]
-    print('De highscore is: ' highscore)
-    for i in range(1,3):
-        scorenu = score[i]
-        print('Score is nu ' scorenu)
-        if highscore == score[i]:
-            print(highscore)""")
-        expected = textwrap.dedent("""\
-    score = ['100', '300', '500']
-    highscore=random.choice(score)
-    print('De highscore is: '+str(highscore))
-    for i in range(int(1), int(3)+1):
-      scorenu=score[i-1]
-      print('Score is nu '+str(scorenu))
-      if str(highscore) == str('score[i]'):
-        print(str(highscore))""")
-
-        result = hedy.transpile(code, 20)
-
-        self.assertEqual(expected, result)
-
 # programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message
