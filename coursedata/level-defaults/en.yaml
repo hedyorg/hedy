@@ -298,26 +298,24 @@
     start_code: |-
         age is input('What is your age?')
         print('So you have been these ages:')
-        for i in range(0,age):
+        for i in range(0, age):
             print(i)
-    intro_text: "We are going to put round brackets and we are going to change ask! We change ask into input! At print, ask and for, we are going to put round brackets now."
+    intro_text: "We are going to use round brackets and we are going to change ask! We change ask into input! With print, input and for we will use round brackets now."
     commands:
-    -   explanation: "We are going to put brackets around print now!"
+    -   explanation: "We are going to use brackets with print now!"
         example: "For example: print('Hello World')"
         demo_code: "print('Hello World')"
-    -   explanation: "We remove ask and call it input now, also we are going to put brackets around it"
-        example: "For example: answer is input('What is your name?')"
+    -   explanation: "We remove ask and call it input now. Also we are going to use brackets."
+        example: "For example: name is input('What is your name?')"
         demo_code: |-
-            answer = input('What is your name?')
-            print('So your name is ' answer)
-    -   explanation: "We are now putting brackets around the numbers in the for loop. for i in range (0,10):"
-        example: "For example: for i in range(0,10):"
+            name is input('What is your name?')
+            print('So your name is ' name)
+    -   explanation: "We are now putting brackets around the numbers in the for loop. for i in range (0, 10):"
+        example: "For example: for i in range(0, 10):"
         demo_code: |-
-            for i in range(0,10):
+            for i in range(0, 10):
                 print(i)
             print('Ready or not, here I come')
-
-
 12:
     start_code: |-
         fruit is ['apple', 'banana', 'cherry']
@@ -336,7 +334,7 @@
             fruit is ['banana', 'apple', 'cherry']
             firstfruit is fruit[1]
             print(firstfruit)
-    -   name: "Get an random item from a list"
+    -   name: "Get a random item from a list"
         explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
         example: "For example: randomfruit is fruit[random]"
         demo_code: |-
@@ -359,7 +357,7 @@
         explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`."
         example: "good_answer is `False`"
         demo_code: |-
-          for i in range(1,5):
+          for i in range(1, 5):
               good_answer is False
               answer is input('What is 5*5')
               if answer is 25:
@@ -404,7 +402,7 @@
 15:
     start_code: |-
         # This is a program that is going to ask a couple of math questions
-        for i in range(1,10):
+        for i in range(1, 10):
             # We are going to ask the multiplication table of 5
             answer is input('What is ' i ' times 5?')
             # We check if the answer is the same as our sum
@@ -440,7 +438,7 @@
             if age < 12:
                 print('You are younger than me!')
     -   name: "Bigger"
-        explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`"
+        explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`."
         example: "For example: age > 12"
         demo_code: |-
             age is input('How old are you?')
