@@ -64,7 +64,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result)
 
 
-  def test_transpile_ask_Spanish(self):
+  def test_transpile_ask_Spanish_2(self):
     result = hedy.transpile("color is ask ask Cuál es tu color favorito?", 2)
 
     expected = textwrap.dedent("""\
