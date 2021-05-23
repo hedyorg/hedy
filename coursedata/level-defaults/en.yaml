@@ -478,3 +478,34 @@
                 print('We do this ' 3 - count ' more times')
                 count is count + 1
             print('We are done')
+18:
+    start_code: |-
+        list is ['first', 'second', 'third']
+        secondvalue is list[2]
+        print(secondvalue)
+    intro_text: "When we have a list, we can take a specific value from the list. If we want the second item from the list, we type `list[2]`."
+    commands:
+    -   name: "Count"
+        explanation: "We can also sum up all values from a list"
+        example: "list[1]"
+        demo_code: |-
+            list is ['1', '2', '3']
+            sum is list[1] + list[2]
+            sum is sum + list[3]
+            # we expect a 6 here
+            print(sum)
+19:
+    start_code: |-
+        fruit is ['apple', 'banana', 'cherry']
+        for i in range(1, 3):
+            print(fruit[i])
+    intro_text: "We can also see everyting in a list with the for loop. Because there are three things in the list, we take the loop from 1 to 3. Now we print everything in the loop."
+    commands:
+    -   name: "Length of list"
+        explanation: "With `length` we can see the size of a list. The list in the example is 3 because there are three things in the list"
+        example: "length(list)"
+        demo_code: |-
+            fruit is ['apple', 'banana', 'cherry']
+            print('length of list is ' length(fruit))
+            for i in range(1, length(fruit)):
+                print(fruit[i])
