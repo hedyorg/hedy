@@ -7,7 +7,7 @@
 start: program
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
-         | ifs elifs? elses?
+         | ifs (elifs)* elses?
          | input
          | for_loop
          | while_loop
