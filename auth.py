@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds
+from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request
 import datetime
 from functools import wraps
 from config import config
@@ -165,7 +165,7 @@ def routes (app, requested_lang):
         username = body ['username'].strip ().lower ()
         email = body ['email'].strip ().lower ()
 
-        if env and 'subscribe' in body and body ['subscribe'] == True:
+        if not is_testing_request (request) and 'subscribe' in body and body ['subscribe'] == True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if os.getenv ('MAILCHIMP_API_KEY') and os.getenv ('MAILCHIMP_AUDIENCE_ID'):
                 # The first domain in the path is the server name, which is contained in the Mailchimp API key
@@ -192,7 +192,8 @@ def routes (app, requested_lang):
             'password': hashed,
             'email':    email,
             'created':  timems (),
-            'verification_pending': hashed_token
+            'verification_pending': hashed_token,
+            'last_login': timems ()
         }
 
         if 'country' in body:
@@ -207,10 +208,9 @@ def routes (app, requested_lang):
         # We automatically login the user
         cookie = make_salt ()
         db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
-        db_set ('users', {'username': user ['username'], 'last_login': timems ()})
 
-        # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
-        if not env:
+        # If this is an e2e test, we return the email verification token directly instead of emailing it.
+        if is_testing_request (request):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
@@ -283,7 +283,7 @@ def routes (app, requested_lang):
         hashed = hash (body ['new_password'], make_salt ())
 
         db_set ('users', {'username': user ['username'], 'password': hashed})
-        if env:
+        if not is_testing_request (request):
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
         return '', 200
@@ -320,8 +320,8 @@ def routes (app, requested_lang):
                 token = make_salt ()
                 hashed_token = hash (token, make_salt ())
                 db_set ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
-                if not env:
-                   # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+                # If this is an e2e test, we return the email verification token directly instead of emailing it.
+                if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
@@ -374,8 +374,8 @@ def routes (app, requested_lang):
 
         db_set ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
-        if not env:
-            # If on local environment, we return email verification token directly instead of emailing it, for test purposes.
+        if is_testing_request (request):
+            # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify ({'username': user ['username'], 'token': token}), 200
         else:
             send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
@@ -409,7 +409,7 @@ def routes (app, requested_lang):
         db_set ('users', {'username': body ['username'], 'password': hashed})
         user = db_get ('users', {'username': body ['username']})
 
-        if env:
+        if not is_testing_request (request):
             send_email_template ('reset_password', user ['email'], requested_lang (), None)
 
         return '', 200

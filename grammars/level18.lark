@@ -7,9 +7,10 @@
 start: program
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 ?command: print
-         | ifs (elifs)* elses?
+         | ifs elifs? elses?
          | input
          | for_loop
+         | while_loop
          | assign_list
          | list_access_var
          | change_list_item
@@ -51,7 +52,7 @@ in_list_check: textwithoutspaces " in " var
     | product " "* "*" " "* atom -> multiplication
     | product " "* "/" " "* atom -> division
 
-?atom: NUMBER | var | NAME //TODO: means we cannot assign strings with spaces? would we want that?
+?atom: NUMBER | var | NAME | list_access //TODO: means we cannot assign strings with spaces? would we want that?
 
 //new for level 8
 for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
@@ -69,6 +70,9 @@ comment: "#" (textwithspaces)*
 //new for level 16
 smaller: (textwithoutspaces | list_access) " < " (textwithoutspaces | list_access)
 bigger: (textwithoutspaces | list_access) " > " (textwithoutspaces | list_access)
+
+//new for level 17
+while_loop: "while " (condition|andcondition|orcondition) ":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 
 var: NAME -> var
 list_access : var "[" (index | random | var) "]"

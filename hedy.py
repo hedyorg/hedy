@@ -1,6 +1,6 @@
 from lark import Lark
-from lark.exceptions import VisitError, LarkError, UnexpectedEOF
-from lark import Tree, Transformer, Visitor
+from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
+from lark import Tree, Transformer
 from os import path
 import sys
 import utils
@@ -25,7 +25,11 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      16: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
                       }
 
 #
@@ -104,7 +108,10 @@ class ExtractAST(Transformer):
         return ''.join([str(c) for c in args])
     def list_access(self, args):
         if type(args[1]) == Tree:
-            return Tree('list_access', [args[0], 'random'])
+            if "random" in args[1].data:
+                return Tree('list_access', [args[0], 'random'])
+            else:
+                return Tree('list_access', [args[0], args[1].children[0]])
         else:
             return Tree('list_access', [args[0], args[1]])
 
@@ -280,6 +287,10 @@ class Filter(Transformer):
     def while_loop(self, args):
         return are_all_arguments_true(args)
 
+    # level 19
+    def length(self, args):
+        return True, ''.join([str(c) for c in args])
+
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
         return True, ''.join([str(c) for c in args])
@@ -318,6 +329,8 @@ class IsValid(Filter):
     def while_loop(self, args):
         return are_all_arguments_true(args)
     def comment(self, args):
+        return are_all_arguments_true(args)
+    def length(self, args):
         return are_all_arguments_true(args)
 
     #leafs with tokens need to be all true
@@ -365,6 +378,8 @@ class IsComplete(Filter):
         return all(args), ''.join([c for c in args])
     def input(self, args):
         return args != [], 'input'
+    def length(self, args):
+        return args != [], 'len'
 
 class ConvertToPython_1(Transformer):
 
@@ -734,6 +749,34 @@ class ConvertToPython_17(ConvertToPython_16):
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
+class ConvertToPython_18_19(ConvertToPython_17):
+    def length(self, args):
+        arg0 = args[0]
+        return f"len({arg0})"
+
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
+                    return parameter + " = " + value
+                elif "len(" in value:
+                    return parameter + " = " + value
+                else:
+                    if value == 'true' or value == 'True':
+                        return parameter + " = True"
+                    elif value == 'false' or value == 'False':
+                        return parameter + " = False"
+                    else:
+                        return parameter + " = '" + value + "'"
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -1024,7 +1067,7 @@ def transpile_inner(input_string, level, sub = 0):
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
-    except Exception as e:
+    except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
             characters_expected = str(e.allowed)
@@ -1124,6 +1167,12 @@ def transpile_inner(input_string, level, sub = 0):
         return python
     elif level == 17:
         python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 18:
+        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 19:
+        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
