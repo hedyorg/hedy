@@ -25,8 +25,22 @@
         if (window.State.level == 4){
           window.editor.session.setMode("ace/mode/level4");
         }
+        if (window.State.level == 5){
+          window.editor.session.setMode("ace/mode/level5");
+        }
+        if (window.State.level == 6){
+          window.editor.session.setMode("ace/mode/level6");
+        }
+        if (window.State.level == 7){
+          window.editor.session.setMode("ace/mode/level7");
+        }
+        if (window.State.level == 8 || window.State.level == 9){
+          window.editor.session.setMode("ace/mode/level8and9");
+        }
+        if (window.State.level == 10){
+          window.editor.session.setMode("ace/mode/level10");
+        }
   }
-
 
 
   // Load existing code from session, if it exists
@@ -161,27 +175,24 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 
   if (reloadOnExpiredSession ()) return;
 
-  if (name === true) name = $ ('#program_name').val ();
-
-  window.State.unsaved_changes = false;
-
   try {
+    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
-       // In adventure only mode, the adventure_name comes as a parameter to the function;
-       // in the normal Hedy mode, where adventures are tabbed, the adventure_name is in the global variable window.State
+       // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
        if (window.State.adventure_name) level = [level, window.State.adventure_name];
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/login';
        return;
     }
 
-    // If saving a program for an adventure, level is an array of the form [level, adventure_name]. In that case, we unpack it.
-    var adventure_name;
+    window.State.unsaved_changes = false;
+
+    var adventure_name = window.State.adventure_name;
+    // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
     if (level instanceof Array) {
        adventure_name = level [1];
        level = level [0];
-       name = 'default';
     }
 
     $.ajax({
@@ -192,13 +203,12 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         lang:  lang,
         name:  name,
         code:  code,
-        // In adventure only mode, the adventure_name comes as a parameter to the function;
-        // in the normal Hedy mode, where adventures are tabbed, the adventure_name is in the global variable window.State
-        adventure_name: adventure_name || window.State.adventure_name
+        adventure_name: adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb ();
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
@@ -213,11 +223,21 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       setTimeout (function () {
          $ ('#okbox').hide ();
       }, 2000);
+      // If we succeed, we need to update the default program name & program for the currently selected tab.
+      // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
+      // The name of the program might have been changed by the server, so we use the name stated by the server.
+      $ ('#program_name').val (response.name);
+      window.State.adventures.map (function (adventure) {
+        if (adventure.short_name === (adventure_name || 'level')) {
+          adventure.loaded_program_name = name;
+          adventure.loaded_program      = code;
+        }
+      });
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
       if (err.status === 403) {
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
          window.location.pathname = '/login';
       }
