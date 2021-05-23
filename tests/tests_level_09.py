@@ -199,7 +199,7 @@ class TestsLevel9(unittest.TestCase):
 
       self.assertEqual(expected, result)
 
-  def test_if_elif(self):
+  def test_if_with_multiple_elifs(self):
       code = textwrap.dedent("""\
       a is 5
       if a is 1:
