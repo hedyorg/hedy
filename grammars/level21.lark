@@ -23,12 +23,12 @@ _EOL: "\r"?"\n"
 
 
 print : "print(" (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))* ")"
-input : var " is input("  (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))*  ")"
-assign_list: var " is [" quoted_text ((", "|",") quoted_text)+ "]"
+input : var " = input("  (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))*  ")"
+assign_list: var " = [" quoted_text ((", "|",") quoted_text)+ "]"
 
 //TODO: sum needs to be expression here too (like in 7 and up)
 
-assign : var " is " length | var " is " sum | var " is " textwithoutspaces | list_access " is " sum | list_access " is " textwithoutspaces
+assign : var " = " length | var " = " sum | var " = " textwithoutspaces | list_access " = " sum | list_access " = " textwithoutspaces
 invalid: textwithoutspaces " " textwithspaces
 
 
@@ -38,9 +38,9 @@ ifs: "if " (condition|andcondition|orcondition) ":" _EOL (" "+ command) (_EOL " 
 elifs: _EOL (" ")* "elif " (condition|andcondition|orcondition) ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 
 
-condition: (equality_check|in_list_check|smaller|bigger)
-list_access_var : var " is " var "[" (index | random | var) "]"
-equality_check: (length | textwithoutspaces | list_access) " is " (length | textwithoutspaces | list_access)
+condition: (equality_check|in_list_check|smaller|bigger|not_equal)
+list_access_var : var " = " var "[" (index | random | var) "]"
+equality_check: (length | textwithoutspaces | list_access) " == " (length | textwithoutspaces | list_access)
 in_list_check: textwithoutspaces " in " var
 
 //new for level 6
@@ -58,7 +58,7 @@ in_list_check: textwithoutspaces " in " var
 for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var | length)(", "|",") (NUMBER | var | length) "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 
 //new for level 12, assignment of list[i]
-change_list_item : var "[" (index | var) "] is " (var | textwithoutspaces)
+change_list_item : var "[" (index | var) "] = " (var | textwithoutspaces)
 
 //new for level 14
 andcondition: (equality_check|in_list_check) (" and " condition)*
@@ -76,6 +76,9 @@ while_loop: "while " (condition|andcondition|orcondition) ":" _EOL (" "+ command
 
 //new for level 19
 length: "length(" var ")"
+
+//new for level 21
+not_equal: (length | textwithoutspaces | list_access) " != " (length | textwithoutspaces | list_access)
 
 var: NAME -> var
 list_access : var "[" (index | random | var | length) "]"
