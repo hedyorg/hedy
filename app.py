@@ -24,6 +24,7 @@ from auth import auth_templates, current_user, requires_login, is_admin, is_teac
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
 import utils
 import hashlib
+from itsdangerous.url_safe import URLSafeSerializer
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
@@ -271,6 +272,19 @@ def after_request_log_status(response):
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
 
+# Deserialize signed session cookies; this allows us to share session cookies across multiple machines.
+@app.before_request
+def get_session_cookie():
+    hedy_session = request.cookies.get('hedy-session')
+    if hedy_session:
+        serializer = URLSafeSerializer(app.config['SECRET_KEY'], salt='hedy-session')
+        try:
+            loaded_session = serializer.loads (hedy_session)
+            for key in loaded_session:
+                session [key] = loaded_session [key]
+        # Ignore invalid cookies
+        except:
+            pass
 
 @app.route('/parse', methods=['POST'])
 def parse():
@@ -869,6 +883,14 @@ def update_yaml():
 
 import auth
 auth.routes (app, requested_lang)
+
+# Serialize signed session cookies; this allows us to share session cookies across multiple machines.
+@app.after_request
+def set_session_cookie(response):
+    serializer = URLSafeSerializer(app.config['SECRET_KEY'], salt='hedy-session')
+    session_cookie = serializer.dumps(dict(session))
+    response.set_cookie ('hedy-session', value=session_cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+    return response
 
 # *** START SERVER ***
 
