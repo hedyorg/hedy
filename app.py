@@ -229,6 +229,8 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
 if os.getenv ('IS_TEST_ENV'):
     @app.before_request
     def before_request_receive_proxy():
+        # We create the session if it doesn't exist.
+        session_id ()
         if 'x-session_id' in request.headers:
             print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
             # If session vars come in a header, set them.
@@ -814,8 +816,10 @@ def main_page(page):
 def session_id():
     """Returns or sets the current session ID."""
     if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
-        # Set a session_id anyway so there's a session
-        session['session_id'] = uuid.uuid4().hex
+        # If there's no session set yet, sets a session_id anyway so there's a session
+        if 'session_id' not in session:
+            session['session_id'] = uuid.uuid4().hex
+        # If we're in a test environment and the request was proxied, return the session_id sent by the main environment
         return request.headers['x-session_id']
     if 'session_id' not in session:
         session['session_id'] = uuid.uuid4().hex
