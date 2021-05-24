@@ -36,7 +36,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, loaded_program_name, adventure_assignments, adventure_name):
 
   sublevel = None
   if type_check (level_number, 'str') and re.match ('\d+-\d+', level_number):
