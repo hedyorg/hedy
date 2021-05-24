@@ -6,11 +6,16 @@ Architecture
 
 The global idea of Hedy is that we transpile Hedy code to Python code by adding syntactic elements when they are missing. In the code base, this works in steps:
 
-1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser
+1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser.
 2. Validity of the code is checked with the IsValid() function
 3. If the code is valid, it is transformed into Python with the relevant function.
 
 This logic all resides in hedy.py.
+
+Transpiling
+------------
+
+Transpiling Hedy is a stepwise process. Firstly the code is parsed using Lark, resulting in an AST. The AST is then scanned for invalid rules. If these appear in the tree, the Hedy program is invalid and an error message will be generated. Secondly, a lookup table with all variable names occuring in the program is extracted from the AST. Finally, the AST is transformed into Python by adding needed syntax such as brackets.
 
 
 Design Goals
