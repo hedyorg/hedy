@@ -836,7 +836,6 @@ def set_session_var (headers, key, value):
         session_vars [key] = value
         headers ['x-session_vars'] = json.dumps (session_vars)
     else:
-        print ('DEBUG SETTING SESSION VAR', key, value)
         session [key] = value
 
 def requested_lang():
