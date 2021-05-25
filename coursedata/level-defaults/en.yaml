@@ -69,7 +69,7 @@
 
          ## Assignments are getting more and more difficult
          You will find the commands on the left again, and assignments in the following tabs. The assignments are now getting more and more difficult in the successive tabs.
-         So it is best to start on the left with the story, and work to the right that to be challenged more and more.
+         So it is best to start on the left with the story, and work to the right, in order to be challenged more and more.
     commands:
     -   explanation: "Print exactly using quotation marks"
         example: "Example: print 'Hello welcome to Hedy.'"
@@ -103,7 +103,7 @@
 
          ## Assignments are getting more and more difficult
 
-         Also in level 4 the assignments in the tabs become more and more difficult. So do them from left to right.
+         Also in level 4 the assignments in the tabs become more and more difficult. So, do them from left to right.
     commands:
     -   explanation: "Print exactly using quotation marks"
         example: "Example: print 'Hello welcome to Hedy.'"
@@ -123,7 +123,7 @@
     intro_text: |
         `ask`, `print` and `if` work exactly like they did in Level 4.
         But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times.
-        ## Voorbeeld Hedy code
+        ## Example Hedy code
         ```
         repeat 3 times print 'Hedy is fun!'
         ```
@@ -154,7 +154,7 @@
 
          In level 6 new codes are added, you can now start calculating in your code.
 
-         The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is is `5 - 5`.
+         The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
          The times is a bit different, because there are is no times symbol on your keyboard. Just search, there really isn't!
          That is why we multiply with the asterisk above 8: `5 * 5`. Read that as 5 times 5 then you will remember it the easiest.
@@ -282,12 +282,12 @@
             print 'we are in round: ' i ' and we count: ' j
     intro_text: "From now on, we can repeat a loop more often. In the example we count to 5 and do that 3 times. So we do 3 rounds and count to 5 every time."
     commands:
-    -   explanation: "This is an example with the for statement"
+    -   explanation: "This is an example with the `for` statement"
         demo_code: |-
             for i in range 1 to 3:
                 for j in range 1 to 5:
                     print 'we are in round: ' i ' and we count: ' j
-    -   explanation: "We can do the same with if statements"
+    -   explanation: "We can do the same with `if` statements"
         demo_code: |-
             colour is blue
             colourtwo is yellow
@@ -298,26 +298,24 @@
     start_code: |-
         age is input('What is your age?')
         print('So you have been these ages:')
-        for i in range(0,age):
+        for i in range(0, age):
             print(i)
-    intro_text: "We are going to put round brackets and we are going to change ask! We change ask into input! At print, ask and for, we are going to put round brackets now."
+    intro_text: "We are going to use round brackets and we are going to change ask! We change ask into input! With print, input and for we will use round brackets now."
     commands:
-    -   explanation: "We are going to put brackets around print now!"
+    -   explanation: "We are going to use brackets with print now!"
         example: "For example: print('Hello World')"
         demo_code: "print('Hello World')"
-    -   explanation: "We remove ask and call it input now, also we are going to put brackets around it"
-        example: "For example: answer is input('What is your name?')"
+    -   explanation: "We remove ask and call it input now. Also we are going to use brackets."
+        example: "For example: name is input('What is your name?')"
         demo_code: |-
-            answer = input('What is your name?')
-            print('So your name is ' answer)
-    -   explanation: "We are now putting brackets around the numbers in the for loop. for i in range (0,10):"
-        example: "For example: for i in range(0,10):"
+            name is input('What is your name?')
+            print('So your name is ' name)
+    -   explanation: "We are now putting brackets around the numbers in the for loop. for i in range (0, 10):"
+        example: "For example: for i in range(0, 10):"
         demo_code: |-
-            for i in range(0,10):
+            for i in range(0, 10):
                 print(i)
             print('Ready or not, here I come')
-
-
 12:
     start_code: |-
         fruit is ['apple', 'banana', 'cherry']
@@ -336,7 +334,7 @@
             fruit is ['banana', 'apple', 'cherry']
             firstfruit is fruit[1]
             print(firstfruit)
-    -   name: "Get an random item from a list"
+    -   name: "Get a random item from a list"
         explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
         example: "For example: randomfruit is fruit[random]"
         demo_code: |-
@@ -356,10 +354,10 @@
     intro_text: "We are now talking about making a variable `True` or `False`, you can put a variable on `True` and on `False`. You can use this to keep track of a certain answer."
     commands:
     -   name: "Example"
-        explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`"
+        explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`."
         example: "good_answer is `False`"
         demo_code: |-
-          for i in range(1,5):
+          for i in range(1, 5):
               good_answer is False
               answer is input('What is 5*5')
               if answer is 25:
@@ -404,7 +402,7 @@
 15:
     start_code: |-
         # This is a program that is going to ask a couple of math questions
-        for i in range(1,10):
+        for i in range(1, 10):
             # We are going to ask the multiplication table of 5
             answer is input('What is ' i ' times 5?')
             # We check if the answer is the same as our sum
@@ -419,10 +417,10 @@
         explanation: "We can place comments wherever we want."
         example: "# This is a comment"
         demo_code: |-
-            # This program prints hello
+            # This program prints Ηello!
             # It has been made in Hedy
-            # It does nothing except print Hello
-            print('hello!')
+            # It does nothing except print Hello!
+            print('Ηello!')
 16:
     start_code: |-
         age is input('How old are you?')
@@ -440,7 +438,7 @@
             if age < 12:
                 print('You are younger than me!')
     -   name: "Bigger"
-        explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`"
+        explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`."
         example: "For example: age > 12"
         demo_code: |-
             age is input('How old are you?')
@@ -478,3 +476,34 @@
                 print('We do this ' 3 - count ' more times')
                 count is count + 1
             print('We are done')
+18:
+    start_code: |-
+        list is ['first', 'second', 'third']
+        secondvalue is list[2]
+        print(secondvalue)
+    intro_text: "When we have a list, we can take a specific value from the list. If we want the second item from the list, we type `list[2]`."
+    commands:
+    -   name: "Count"
+        explanation: "We can also sum up all values from a list"
+        example: "list[1]"
+        demo_code: |-
+            list is ['1', '2', '3']
+            sum is list[1] + list[2]
+            sum is sum + list[3]
+            # we expect a 6 here
+            print(sum)
+19:
+    start_code: |-
+        fruit is ['apple', 'banana', 'cherry']
+        for i in range(1, 3):
+            print(fruit[i])
+    intro_text: "We can also see everyting in a list with the for loop. Because there are three things in the list, we take the loop from 1 to 3. Now we print everything in the loop."
+    commands:
+    -   name: "Length of list"
+        explanation: "With `length` we can see the size of a list. The list in the example is 3 because there are three things in the list"
+        example: "length(list)"
+        demo_code: |-
+            fruit is ['apple', 'banana', 'cherry']
+            print('length of list is ' length(fruit))
+            for i in range(1, length(fruit)):
+                print(fruit[i])

@@ -1,10 +1,13 @@
+import datetime
 import time
 from config import config
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import functools
 import os
+import re
 from ruamel import yaml
+import querylog
 
 
 class Timer:
@@ -80,6 +83,7 @@ def set_debug_mode_based_on_flask(app):
 
 YAML_CACHE = {}
 
+@querylog.timed
 def load_yaml(filename):
     """Load the given YAML file.
 
@@ -180,7 +184,9 @@ def db_key (table, data, *remove):
     return processed_data
 
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
+@querylog.timed
 def db_get (table, data, *not_primary):
+    querylog.log_counter('db_get:' + table)
     # If we're querying by something else than the primary key of the table, we assume that data contains only one field, that on which we want to search. We also require that field to have an index.
     if len (not_primary):
         field = list (data.keys ()) [0]
@@ -196,7 +202,9 @@ def db_get (table, data, *not_primary):
         return db_decode (result ['Item'])
 
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
+@querylog.timed
 def db_get_many (table, data, *not_primary):
+    querylog.log_counter('db_get_many:' + table)
     if len (not_primary):
         field = list (data.keys ()) [0]
         # We use ScanIndexForward = False to get the latest items from the Programs table
@@ -204,12 +212,15 @@ def db_get_many (table, data, *not_primary):
     else:
         result = db.query (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
     data = []
+    querylog.log_counter('db_get_many_items', len(result['Items']))
     for item in result ['Items']:
         data.append (db_decode (item))
     return data
 
 # Creates or updates an item by primary key.
+@querylog.timed
 def db_set (table, data):
+    querylog.log_counter('db_set:' + table)
     if db_get (table, data):
         result = db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
     else:
@@ -217,11 +228,15 @@ def db_set (table, data):
     return result
 
 # Deletes an item by primary key.
+@querylog.timed
 def db_del (table, data):
+    querylog.log_counter('db_del:' + table)
     return db.delete_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)))
 
 # Deletes multiple items.
+@querylog.timed
 def db_del_many (table, data, *not_primary):
+    querylog.log_counter('db_del_many:' + table)
     # We define a recursive function in case the number of results is very large and cannot be returned with a single call to db_get_many.
     def batch ():
         to_delete = db_get_many (table, data, *not_primary)
@@ -233,14 +248,19 @@ def db_del_many (table, data, *not_primary):
     batch ()
 
 # Searches for items.
+@querylog.timed
 def db_scan (table):
+    querylog.log_counter('db_scan:' + table)
     result = db.scan (TableName = db_prefix + '-' + table)
     output = []
+    querylog.log_counter('db_scan_items', len(result['Items']))
     for item in result ['Items']:
         output.append (db_decode (item))
     return output
 
+@querylog.timed
 def db_describe (table):
+    querylog.log_counter('db_describe:' + table)
     return db.describe_table (TableName = db_prefix + '-' + table)
 
 
@@ -253,3 +273,14 @@ def slash_join(*args):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
+def is_testing_request(request):
+    return bool ('X-Testing' in request.headers and request.headers ['X-Testing'])
+
+def extract_bcrypt_rounds (hash):
+    return int (re.match ('\$2b\$\d+', hash) [0].replace ('$2b$', ''))
+
+def isoformat(timestamp):
+    """Turn a timestamp into an ISO formatted string."""
+    dt = datetime.datetime.utcfromtimestamp(timestamp)
+    return dt.isoformat() + 'Z'

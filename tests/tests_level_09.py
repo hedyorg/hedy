@@ -181,6 +181,45 @@ class TestsLevel9(unittest.TestCase):
 
     self.assertEqual(expected, result)
 
+  def test_if_elif(self):
+      code = textwrap.dedent("""\
+      a is 5
+      if a is 1:
+        x is 2
+      elif a is 2:
+        x is 222""")
+      expected = textwrap.dedent("""\
+      a = '5'
+      if str(a) == str('1'):
+        x = '2'
+      elif str(a) == str('2'):
+        x = '222'""")
+
+      result = hedy.transpile(code, 9)
+
+      self.assertEqual(expected, result)
+
+  def test_if_with_multiple_elifs(self):
+      code = textwrap.dedent("""\
+      a is 5
+      if a is 1:
+        x is 2
+      elif a is 4:
+        x is 3
+      elif a is 2:
+        x is 222""")
+      expected = textwrap.dedent("""\
+      a = '5'
+      if str(a) == str('1'):
+        x = '2'
+      elif str(a) == str('4'):
+        x = '3'
+      elif str(a) == str('2'):
+        x = '222'""")
+
+      result = hedy.transpile(code, 9)
+
+      self.assertEqual(expected, result)
 
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)

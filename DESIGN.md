@@ -6,11 +6,16 @@ Architecture
 
 The global idea of Hedy is that we transpile Hedy code to Python code by adding syntactic elements when they are missing. In the code base, this works in steps:
 
-1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser
+1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser.
 2. Validity of the code is checked with the IsValid() function
 3. If the code is valid, it is transformed into Python with the relevant function.
 
 This logic all resides in hedy.py.
+
+Transpiling
+------------
+
+Transpiling Hedy is a stepwise process. Firstly the code is parsed using Lark, resulting in an AST. The AST is then scanned for invalid rules. If these appear in the tree, the Hedy program is invalid and an error message will be generated. Secondly, a lookup table with all variable names occuring in the program is extracted from the AST. Finally, the AST is transformed into Python by adding needed syntax such as brackets.
 
 
 Design Goals
@@ -113,7 +118,7 @@ can now use both [`number is 12`] and [`name is Hedy`].
 ### Level 4: Selection with if and else flat
 
 In Level 5, selection with the if statement is introduced, but the
-syntax is ‘flat’, i.e. placed on one line, resembling a regular syntax
+syntax is 'flat', i.e. placed on one line, resembling a regular syntax
 more:\
 [`if name is print `]\
 Else statements are also included, and are also placed on one line,
@@ -124,7 +129,7 @@ using the keyword [`else`]:\
 
 In working with non-English native Python novices. Research has found
 the keyword [`for`] to be a confusing word for repetition, especially
-because it sounds like the word ‘four’ [@hermans_code_2018]. For our
+because it sounds like the word 'four' [@hermans_code_2018]. For our
 first simplest form, according to Design Goal 2, we opt to use
 Quorum [@stefik_quorum_2017] syntax [`repeat x times`]. In this
 initial form, like the if the syntax is placed on one line:\
@@ -145,11 +150,11 @@ steep learning curve and should be treated as a separate learning goal.
 
 ### Level 7: Code blocks
 
-After Level 6, there is a clear need to ‘move on’, as the body of a loop
+After Level 6, there is a clear need to 'move on', as the body of a loop
 (and also that of an if) can only consist of one line, which limits the
 possibilities of programs that users can create. We assume this
-limitation will be a motivating factor for learners, rather than ‘having
-to learn’ the block structure of Python, they are motivated by the
+limitation will be a motivating factor for learners, rather than 'having
+to learn' the block structure of Python, they are motivated by the
 prospect of building larger and more interesting programs (Design Goal
 6). The syntax of the loop remains otherwise unchanged as per Design
 Goal 3, so the new form is:\
