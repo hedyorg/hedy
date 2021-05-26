@@ -40,7 +40,7 @@ elifs: _EOL (" ")* "elif " (condition|andcondition|orcondition) ":"_EOL (" "+ co
 
 condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
 list_access_var : var " = " var "[" (index | random | var) "]"
-equality_check: (length | textwithoutspaces | list_access) " == " (length | textwithoutspaces | list_access)
+equality_check: (length | textwithoutspaces | list_access | sum) " == " (length | textwithoutspaces | list_access | sum)
 in_list_check: textwithoutspaces " in " var
 
 //new for level 6
