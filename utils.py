@@ -8,7 +8,10 @@ import os
 import re
 from ruamel import yaml
 import querylog
-
+import hashlib
+from http.cookies import SimpleCookie
+import base64
+import json
 
 class Timer:
   """A quick and dirty timer."""
@@ -284,3 +287,24 @@ def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
     dt = datetime.datetime.utcfromtimestamp(timestamp)
     return dt.isoformat() + 'Z'
+
+def hash_user_or_session (string):
+    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
+    return int (hash, 16)
+
+# Used by A/B testing to extract a session from a set-cookie header.
+# The signature is ignored. The source of the session should be trusted.
+def extract_session_from_cookie (cookie_header):
+    parsed_cookie = SimpleCookie (cookie_header)
+    if not 'session' in parsed_cookie:
+        return {}
+    # It could be that the cookie is malformed or doesn't parse to a JSON, so we envelop the parsing into a try/except block.
+    try:
+        # We extract the first part of the cookie (ignoring a possible dot just after session), which is base64 encoded. We add `===` in case the padding is missing, otherwise the base64 parser may gripe.
+        encoded_session = parsed_cookie ['session'].value.replace ('session=', '')
+        if encoded_session [0] == '.':
+            encoded_session = encoded_session [:1]
+        encoded_session = encoded_session.split ('.') [0] + '==='
+        return json.loads (base64.b64decode (encoded_session).decode ('utf-8'))
+    except Exception as E:
+        return {}

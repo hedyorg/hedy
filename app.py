@@ -23,7 +23,6 @@ from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
 import utils
-import hashlib
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
@@ -154,6 +153,10 @@ if CDN_PREFIX:
             endpoint="static",
             view_func=app.send_static_file)
 
+# Set session id if not already set.
+@app.before_request
+def set_session_cookie():
+    session_id()
 
 @app.context_processor
 def inject_static():
@@ -162,84 +165,18 @@ def inject_static():
         return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
     return dict(static=static)
 
-
-def hash_user_or_session (string):
-    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
-    return int (hash, 16)
-
-def redirect_ab (request, session):
-    # If the user is logged in, we use their username as identifier, otherwise we use the session id
-    user_identifier = current_user(request) ['username'] or str (session_id ())
-
-    # This will send 50% of the requests into redirect.
-    redirect_proportion = 50
-    redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
-    return redirect_flag
-
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
     def reject_e2e_requests():
         if utils.is_testing_request (request):
             return 'No E2E tests are allowed in production', 400
 
-# If present, PROXY_TO_TEST_ENV should be the name of the target environment
-if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
-    @app.before_request
-    def before_request_proxy():
-        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
-        # We want to keep all cookie setting in the main environment, not the test one.
-        if (re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url)):
-            pass
-        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
-        elif (redirect_ab (request, session)):
-
-            print ('DEBUG TEST - REVERSE PROXYING REQUEST', request.method, request.url, session_id ())
-
-            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('PROXY_TO_TEST_ENV'))
-
-            request_headers = {}
-            for header in request.headers:
-                if (header [0].lower () in ['host']):
-                    continue
-                request_headers [header [0]] = header [1]
-
-            # Sets session variables in a header x-session_vars
-            session_vars = {}
-            for var in session:
-                if var not in ['session_id']:
-                    session_vars [var] = session [var]
-            request_headers ['x-session_vars'] = json.dumps (session_vars)
-
-            # Send the session_id to the test environment for logging purposes
-            request_headers ['x-session_id'] = session_id ()
-            r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
-
-            response = make_response (r.content)
-            for header in r.headers:
-                # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
-                # We ignore the set-cookie header
-                if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'set-cookie']):
-                    continue
-                # We set the session vars returned by the test server
-                if (header.lower () == 'x-session_vars'):
-                    session_vars = json.loads (r.headers ['x-session_vars'])
-                    for var in session_vars:
-                        print ('DEBUG RECEIVING SESSION VAR FROM TEST', var, session_vars [var])
-                        session [var] = session_vars [var]
-                response.headers [header] = r.headers [header]
-            return response, r.status_code
-
-if os.getenv ('IS_TEST_ENV'):
-    @app.before_request
-    def before_request_receive_proxy():
-        print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
-        # If session vars come in a header, set them.
-        if 'x-session_vars' in request.headers:
-            session_vars = json.loads (request.headers ['x-session_vars'])
-            for var in session_vars:
-                if var not in ['session_id']:
-                    print ('DEBUG RECEIVING SESSION VAR FROM PROXIED REQUEST', var, session_vars [var])
-                    session [var] = session_vars [var]
+@app.before_request
+def before_request_proxy_testing():
+    print ('DEBUG - INCOMING REQUEST', request.method, request.url, dict (session))
+    if utils.is_testing_request (request):
+        if os.getenv ('IS_TEST_ENV'):
+            session ['session-test'] = 'test'
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -291,6 +228,71 @@ def after_request_log_status(response):
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
 
+def redirect_ab (request, session):
+    # If this is a testing request, we return True
+    if utils.is_testing_request (request):
+        return True
+    # If the user is logged in, we use their username as identifier, otherwise we use the session id
+    user_identifier = current_user(request) ['username'] or str (session_id ())
+
+    # This will send either % PROXY_TO_TEST_PROPORTION of the requests into redirect, or 50% if that variable is not specified.
+    redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION') or 0) or 50
+    redirect_flag = (utils.hash_user_or_session (user_identifier) % 100) < redirect_proportion
+    return redirect_flag
+
+# If present, PROXY_TO_TEST_ENV should be the name of the target environment
+if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
+    @app.before_request
+    def before_request_proxy():
+        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
+        # We want to keep all cookie setting in the main environment, not the test one.
+        if re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url):
+            pass
+        # This route is meant to return the session from the main environment, for testing purposes.
+        if re.match ('.*/session_main', request.url):
+            pass
+        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
+        # /session_test is meant to return the session from the test environment, for testing purposes.
+        elif re.match ('.*/session_test', request.url) or redirect_ab (request, session):
+
+            print ('DEBUG - REVERSE PROXYING REQUEST', request.method, request.url, dict (session))
+
+            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('PROXY_TO_TEST_ENV'))
+
+            request_headers = {}
+            for header in request.headers:
+                if (header [0].lower () in ['host']):
+                    continue
+                request_headers [header [0]] = header [1]
+
+            r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
+
+            response = make_response (r.content)
+            for header in r.headers:
+                # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
+                if header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection']:
+                    continue
+                # Setting the session cookie returned by the test environment into the response won't work because it will be overwritten by Flask, so we need to read the cookie into the session so that then the session cookie can be updated by Flask
+                if header.lower () == 'set-cookie':
+                    proxied_session = utils.extract_session_from_cookie (r.headers [header])
+                    for key in proxied_session:
+                        session [key] = proxied_session [key]
+                    continue
+                response.headers [header] = r.headers [header]
+
+            return response, r.status_code
+
+@app.route('/session_test', methods=['GET'])
+def echo_session_vars_test():
+    if not utils.is_testing_request (request):
+        return 'This endpoint is only meant for E2E tests', 400
+    return jsonify({'session': dict(session), 'testing': bool (os.getenv ('PROXY_TO_TEST_ENV'))})
+
+@app.route('/session_main', methods=['GET'])
+def echo_session_vars_main():
+    if not utils.is_testing_request (request):
+        return 'This endpoint is only meant for E2E tests', 400
+    return jsonify({'session': dict(session), 'testing': bool (os.getenv ('PROXY_TO_TEST_ENV'))})
 
 @app.route('/parse', methods=['POST'])
 def parse():
@@ -499,7 +501,6 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    session_id()  # Run this for the side effect of generating a session ID
     try:
         g.level = level = int(level)
     except:
@@ -546,7 +547,6 @@ def index(level, step):
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/onlinemasters/<level>/<step>', methods=['GET'])
 def onlinemasters(level, step):
-    session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = lang = requested_lang()
     g.prefix = '/onlinemasters'
@@ -570,7 +570,6 @@ def onlinemasters(level, step):
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/space_eu/<level>/<step>', methods=['GET'])
 def space_eu(level, step):
-    session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = requested_lang()
     g.prefix = '/space_eu'
@@ -641,24 +640,9 @@ def main_page(page):
 
 def session_id():
     """Returns or sets the current session ID."""
-    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
-        return request.headers['x-session_id']
     if 'session_id' not in session:
         session['session_id'] = uuid.uuid4().hex
     return session['session_id']
-
-# This function allows for setting session vars in a special header (x-session_vars) in case
-# that 1) we're in the test environment and 2) the processed request is proxied to it.
-def set_session_var (headers, key, value):
-    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
-        if not 'x-session_vars' in headers:
-            session_vars = {}
-        else:
-            session_vars = json.loads (headers ['x-session_vars'])
-        session_vars [key] = value
-        headers ['x-session_vars'] = json.dumps (session_vars)
-    else:
-        session [key] = value
 
 def requested_lang():
     """Return the user's requested language code.

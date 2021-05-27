@@ -5,7 +5,7 @@ app_name = os.getenv('HEROKU_APP_NAME', socket.gethostname())
 dyno = os.getenv('DYNO')
 
 config = {
-    'port': 5000,
+    'port': os.getenv ('PORT') or 5000,
     'session': {
         'cookie_name': 'hedy',
         # in minutes
