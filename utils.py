@@ -300,11 +300,14 @@ def extract_session_from_cookie (cookie_header):
         return {}
     # It could be that the cookie is malformed or doesn't parse to a JSON, so we envelop the parsing into a try/except block.
     try:
-        # We extract the first part of the cookie (ignoring a possible dot just after session), which is base64 encoded. We add `===` in case the padding is missing, otherwise the base64 parser may gripe.
+        # We extract the first part of the cookie (ignoring a possible dot just after session), which is base64 encoded.
         encoded_session = parsed_cookie ['session'].value.replace ('session=', '')
         if encoded_session [0] == '.':
-            encoded_session = encoded_session [:1]
-        encoded_session = encoded_session.split ('.') [0] + '==='
+            encoded_session = encoded_session [1:]
+        encoded_session = encoded_session.split ('.') [0]
+        # We add one to three `=` characters in case the padding is missing, otherwise the base64 parser will gripe.
+        if len (encoded_session) % 4 > 0:
+            encoded_session += '=' * (4 - len (encoded_session) % 4)
         return json.loads (base64.b64decode (encoded_session).decode ('utf-8'))
     except Exception as E:
         return {}

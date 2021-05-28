@@ -176,7 +176,7 @@ def before_request_proxy_testing():
     print ('DEBUG - INCOMING REQUEST', request.method, request.url, dict (session))
     if utils.is_testing_request (request):
         if os.getenv ('IS_TEST_ENV'):
-            session ['session-test'] = 'test'
+            session ['test_session'] = 'test'
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -249,7 +249,7 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
         if re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url):
             pass
         # This route is meant to return the session from the main environment, for testing purposes.
-        if re.match ('.*/session_main', request.url):
+        elif re.match ('.*/session_main', request.url):
             pass
         # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
         # /session_test is meant to return the session from the test environment, for testing purposes.
@@ -264,6 +264,8 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
                 if (header [0].lower () in ['host']):
                     continue
                 request_headers [header [0]] = header [1]
+            # In case the session_id is not yet set in the cookie, pass it in a special header
+            request_headers ['X-session_id'] = session ['session_id']
 
             r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
 
@@ -286,13 +288,13 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
 def echo_session_vars_test():
     if not utils.is_testing_request (request):
         return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session), 'testing': bool (os.getenv ('PROXY_TO_TEST_ENV'))})
+    return jsonify({'session': dict(session)})
 
 @app.route('/session_main', methods=['GET'])
 def echo_session_vars_main():
     if not utils.is_testing_request (request):
         return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session), 'testing': bool (os.getenv ('PROXY_TO_TEST_ENV'))})
+    return jsonify({'session': dict(session), 'proxy_enabled': bool (os.getenv ('PROXY_TO_TEST_ENV'))})
 
 @app.route('/parse', methods=['POST'])
 def parse():
@@ -641,7 +643,10 @@ def main_page(page):
 def session_id():
     """Returns or sets the current session ID."""
     if 'session_id' not in session:
-        session['session_id'] = uuid.uuid4().hex
+        if os.getenv ('IS_TEST_ENV') and 'X-session_id' in request.headers:
+            session['session_id'] = request.headers ['X-session_id']
+        else:
+            session['session_id'] = uuid.uuid4().hex
     return session['session_id']
 
 def requested_lang():
