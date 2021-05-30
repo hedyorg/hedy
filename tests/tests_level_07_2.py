@@ -156,30 +156,30 @@ class TestsLevel7_2(unittest.TestCase):
     self.assertEqual(expected, result)
 
 
-  def test_if_under_else_in_for(self):
-    code = textwrap.dedent("""\
-    for i in range 0 to 10
-      antwoord is ask Wat is 5*5
-      if antwoord is 24
-          print 'Dat is fout!'
-      else
-          print 'Dat is goed!'
-      if antwoord is 25
-          i is 10""")
-
-    expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
-      antwoord = input('Wat is 5*5')
-      if str(antwoord) == str('24'):
-        print('Dat is fout!')
-      else:
-        print('Dat is goed!')
-      if str(antwoord) == str('25'):
-        i = '10'""")
-
-    result = hedy.transpile(code, 7, 2)
-
-    self.assertEqual(expected, result)
+#  def test_if_under_else_in_for(self):
+#    code = textwrap.dedent("""\
+#    for i in range 0 to 10
+#      antwoord is ask Wat is 5*5
+#      if antwoord is 24
+#          print 'Dat is fout!'
+#      else
+#          print 'Dat is goed!'
+#      if antwoord is 25
+#          i is 10""")
+#
+#    expected = textwrap.dedent("""\
+#    for i in range(int(0), int(10)+1):
+#      antwoord = input('Wat is 5*5')
+#      if str(antwoord) == str('24'):
+#        print('Dat is fout!')
+#      else:
+#        print('Dat is goed!')
+#      if str(antwoord) == str('25'):
+#        i = '10'""")
+#
+#    result = hedy.transpile(code, 7, 2)
+#
+#    self.assertEqual(expected, result)
 
 
 
