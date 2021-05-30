@@ -7,7 +7,6 @@ import os
 import re
 from ruamel import yaml
 import querylog
-import hashlib
 
 
 class Timer:
@@ -284,7 +283,3 @@ def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
     dt = datetime.datetime.utcfromtimestamp(timestamp)
     return dt.isoformat() + 'Z'
-
-def hash_user_or_session (string):
-    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
-    return int (hash, 16)

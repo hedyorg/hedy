@@ -1,4 +1,5 @@
 from http.cookies import SimpleCookie
+import hashlib
 import re
 import os
 import logging
@@ -68,9 +69,13 @@ def redirect_ab (request):
 
     # This will send either % PROXY_TO_TEST_PROPORTION of the requests into redirect, or 50% if that variable is not specified.
     redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION', '50'))
-    redirect_flag = (utils.hash_user_or_session (user_identifier) % 100) < redirect_proportion
-    print('Redirect:', redirect_flag)
+    redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
     return redirect_flag
+
+
+def hash_user_or_session (string):
+    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
+    return int (hash, 16)
 
 
 # Used by A/B testing to extract a session from a set-cookie header.
@@ -106,3 +111,4 @@ def extract_session_from_cookie (cookie_header, secret_key):
             except itsdangerous.exc.BadData:
                 pass
         return {}
+
