@@ -207,7 +207,7 @@ def after_request_log_status(response):
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
 
-# If present, PROXY_TO_TEST_HOST should be the hostname[:port] of the target environment
+# If present, PROXY_TO_TEST_HOST should be the 'http[s]://hostname[:port]' of the target environment
 if os.getenv ('PROXY_TO_TEST_HOST') and not os.getenv ('IS_TEST_ENV'):
     ab_proxying.ABProxying(app, os.getenv ('PROXY_TO_TEST_HOST'), app.config['SECRET_KEY'])
 
