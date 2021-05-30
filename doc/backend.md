@@ -136,7 +136,12 @@ table programs:
 
 ## Test environment
 
-If the `PROXY_TO_TEST_ENV` environment is set, some requests will be sent to the specified test environment. These requests are *reverse proxied* to the test environment, which means that the main environment fetches the data from the test environment and then gives the result back to the client.
+If the `PROXY_TO_TEST_HOST` environment is set, some requests will be sent to the specified test environment (specified
+by host prefix). These
+requests are *reverse proxied* to the test environment, which means that the main environment fetches the data from the
+test environment and then gives the result back to the client.
+
+`PROXY_TO_TEST_HOST` should look like `https://host.com` (no trailing `/`).
 
 The main environment passes the `session_id` to the test environment so that the test environment can use that session_id for logging. The session variables set by the test environment are read by the main environment by parsing the cookie header returned by the test environment. Other session variables set by the main environment will be available to the test environment since they will be also present in the session cookie sent by the main environment to the test environment.
 

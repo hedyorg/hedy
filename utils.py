@@ -1,5 +1,6 @@
 import datetime
 import time
+import flask.sessions
 from config import config
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
@@ -12,6 +13,8 @@ import hashlib
 from http.cookies import SimpleCookie
 import base64
 import json
+import itsdangerous
+
 
 class Timer:
   """A quick and dirty timer."""
@@ -294,20 +297,34 @@ def hash_user_or_session (string):
 
 # Used by A/B testing to extract a session from a set-cookie header.
 # The signature is ignored. The source of the session should be trusted.
-def extract_session_from_cookie (cookie_header):
+def extract_session_from_cookie (cookie_header, secret_key):
     parsed_cookie = SimpleCookie (cookie_header)
     if not 'session' in parsed_cookie:
         return {}
-    # It could be that the cookie is malformed or doesn't parse to a JSON, so we envelop the parsing into a try/except block.
+
+    cookie_interface = flask.sessions.SecureCookieSessionInterface()
+
+    # This code matches what Flask does for encoding
+    serializer = itsdangerous.URLSafeTimedSerializer(
+        secret_key,
+        salt=cookie_interface.salt,
+        serializer=cookie_interface.serializer,
+        signer_kwargs=dict(
+            key_derivation=cookie_interface.key_derivation,
+            digest_method=cookie_interface.digest_method
+       ))
+
     try:
-        # We extract the first part of the cookie (ignoring a possible dot just after session), which is base64 encoded.
-        encoded_session = parsed_cookie ['session'].value.replace ('session=', '')
-        if encoded_session [0] == '.':
-            encoded_session = encoded_session [1:]
-        encoded_session = encoded_session.split ('.') [0]
-        # We add one to three `=` characters in case the padding is missing, otherwise the base64 parser will gripe.
-        if len (encoded_session) % 4 > 0:
-            encoded_session += '=' * (4 - len (encoded_session) % 4)
-        return json.loads (base64.b64decode (encoded_session).decode ('utf-8'))
-    except Exception as E:
+        cookie_value = parsed_cookie['session'].value
+        return serializer.loads(cookie_value)
+    except itsdangerous.exc.BadSignature as e:
+        # If the signature is wrong, we can still decode the cookie.
+        # We try to do it properly with the actual key though, because exception
+        # handling is slightly slow in Python and doing it successfully is therefore
+        # faster.
+        if e.payload is not None:
+            try:
+                return serializer.load_payload(e.payload)
+            except itsdangerous.exc.BadData:
+                pass
         return {}

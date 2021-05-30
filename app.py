@@ -173,7 +173,6 @@ if os.getenv('IS_PRODUCTION'):
 
 @app.before_request
 def before_request_proxy_testing():
-    print ('DEBUG - INCOMING REQUEST', request.method, request.url, dict (session))
     if utils.is_testing_request (request):
         if os.getenv ('IS_TEST_ENV'):
             session ['test_session'] = 'test'
@@ -228,7 +227,7 @@ def after_request_log_status(response):
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
 
-def redirect_ab (request, session):
+def redirect_ab (request):
     # If this is a testing request, we return True
     if utils.is_testing_request (request):
         return True
@@ -236,28 +235,27 @@ def redirect_ab (request, session):
     user_identifier = current_user(request) ['username'] or str (session_id ())
 
     # This will send either % PROXY_TO_TEST_PROPORTION of the requests into redirect, or 50% if that variable is not specified.
-    redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION') or 0) or 50
+    redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION', '50'))
     redirect_flag = (utils.hash_user_or_session (user_identifier) % 100) < redirect_proportion
+    print('Redirect:', redirect_flag)
     return redirect_flag
 
-# If present, PROXY_TO_TEST_ENV should be the name of the target environment
-if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
+# If present, PROXY_TO_TEST_HOST should be the hostname[:port] of the target environment
+if os.getenv ('PROXY_TO_TEST_HOST') and not os.getenv ('IS_TEST_ENV'):
     @app.before_request
     def before_request_proxy():
-        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
+        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_HOST environment, with the exception of /auth/texts
         # We want to keep all cookie setting in the main environment, not the test one.
         if re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url):
             pass
         # This route is meant to return the session from the main environment, for testing purposes.
         elif re.match ('.*/session_main', request.url):
             pass
-        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
+        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_HOST environment.
         # /session_test is meant to return the session from the test environment, for testing purposes.
-        elif re.match ('.*/session_test', request.url) or redirect_ab (request, session):
-
-            print ('DEBUG - REVERSE PROXYING REQUEST', request.method, request.url, dict (session))
-
-            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('PROXY_TO_TEST_ENV'))
+        elif re.match ('.*/session_test', request.url) or redirect_ab (request):
+            url = os.getenv ('PROXY_TO_TEST_HOST') + request.full_path
+            logging.debug('Proxying %s %s %s to %s', request.method, request.url, dict (session), url)
 
             request_headers = {}
             for header in request.headers:
@@ -276,7 +274,7 @@ if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
                     continue
                 # Setting the session cookie returned by the test environment into the response won't work because it will be overwritten by Flask, so we need to read the cookie into the session so that then the session cookie can be updated by Flask
                 if header.lower () == 'set-cookie':
-                    proxied_session = utils.extract_session_from_cookie (r.headers [header])
+                    proxied_session = utils.extract_session_from_cookie (r.headers [header], app.config['SECRET_KEY'])
                     for key in proxied_session:
                         session [key] = proxied_session [key]
                     continue
@@ -294,7 +292,7 @@ def echo_session_vars_test():
 def echo_session_vars_main():
     if not utils.is_testing_request (request):
         return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session), 'proxy_enabled': bool (os.getenv ('PROXY_TO_TEST_ENV'))})
+    return jsonify({'session': dict(session), 'proxy_enabled': bool (os.getenv ('PROXY_TO_TEST_HOST'))})
 
 @app.route('/parse', methods=['POST'])
 def parse():
