@@ -31,10 +31,6 @@ class TestsLevel2(unittest.TestCase):
       result = hedy.transpile("abc felienne 123", 2)
     self.assertEqual('Invalid', str(context.exception))
 
-  def test_transpile_ask_Spanish(self):
-    result = hedy.transpile("ask ask Cuál es tu color favorito?", 2)
-    self.assertEqual("answer = input('ask Cuál es tu color favorito?')", result)
-
   def test_transpile_echo_at_level_2(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("echo Jouw lievelingskleur is dus...", 2)
