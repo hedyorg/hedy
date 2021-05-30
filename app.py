@@ -13,7 +13,6 @@ import logging
 import os
 from os import path
 import re
-import requests
 import traceback
 import uuid
 from ruamel import yaml
@@ -25,7 +24,7 @@ from utils import db_get, db_get_many, db_set, timems, type_check, object_check,
 import utils
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response
 from flask_helpers import render_template
 from flask_compress import Compress
 
@@ -35,6 +34,7 @@ import hedyweb
 import translating
 import querylog
 import aws_helpers
+import ab_proxying
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -153,17 +153,16 @@ if CDN_PREFIX:
             endpoint="static",
             view_func=app.send_static_file)
 
-# Set session id if not already set.
+@app.template_global()
+def static(url):
+    """Return cacheable links to static resources."""
+    return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
+
+# Set session id if not already set. This must be done as one of the first things,
+# so the function should be defined high up.
 @app.before_request
 def set_session_cookie():
     session_id()
-
-@app.context_processor
-def inject_static():
-    """Add the 'static' function to the Template context, to return links to static resources."""
-    def static(url):
-        return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
-    return dict(static=static)
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -227,60 +226,9 @@ def after_request_log_status(response):
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
 
-def redirect_ab (request):
-    # If this is a testing request, we return True
-    if utils.is_testing_request (request):
-        return True
-    # If the user is logged in, we use their username as identifier, otherwise we use the session id
-    user_identifier = current_user(request) ['username'] or str (session_id ())
-
-    # This will send either % PROXY_TO_TEST_PROPORTION of the requests into redirect, or 50% if that variable is not specified.
-    redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION', '50'))
-    redirect_flag = (utils.hash_user_or_session (user_identifier) % 100) < redirect_proportion
-    print('Redirect:', redirect_flag)
-    return redirect_flag
-
 # If present, PROXY_TO_TEST_HOST should be the hostname[:port] of the target environment
 if os.getenv ('PROXY_TO_TEST_HOST') and not os.getenv ('IS_TEST_ENV'):
-    @app.before_request
-    def before_request_proxy():
-        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_HOST environment, with the exception of /auth/texts
-        # We want to keep all cookie setting in the main environment, not the test one.
-        if re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url):
-            pass
-        # This route is meant to return the session from the main environment, for testing purposes.
-        elif re.match ('.*/session_main', request.url):
-            pass
-        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_HOST environment.
-        # /session_test is meant to return the session from the test environment, for testing purposes.
-        elif re.match ('.*/session_test', request.url) or redirect_ab (request):
-            url = os.getenv ('PROXY_TO_TEST_HOST') + request.full_path
-            logging.debug('Proxying %s %s %s to %s', request.method, request.url, dict (session), url)
-
-            request_headers = {}
-            for header in request.headers:
-                if (header [0].lower () in ['host']):
-                    continue
-                request_headers [header [0]] = header [1]
-            # In case the session_id is not yet set in the cookie, pass it in a special header
-            request_headers ['X-session_id'] = session ['session_id']
-
-            r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
-
-            response = make_response (r.content)
-            for header in r.headers:
-                # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
-                if header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection']:
-                    continue
-                # Setting the session cookie returned by the test environment into the response won't work because it will be overwritten by Flask, so we need to read the cookie into the session so that then the session cookie can be updated by Flask
-                if header.lower () == 'set-cookie':
-                    proxied_session = utils.extract_session_from_cookie (r.headers [header], app.config['SECRET_KEY'])
-                    for key in proxied_session:
-                        session [key] = proxied_session [key]
-                    continue
-                response.headers [header] = r.headers [header]
-
-            return response, r.status_code
+    ab_proxying.ABProxying(app, os.getenv ('PROXY_TO_TEST_HOST'), app.config['SECRET_KEY'])
 
 @app.route('/session_test', methods=['GET'])
 def echo_session_vars_test():

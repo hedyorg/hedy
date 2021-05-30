@@ -1,19 +1,13 @@
 import datetime
 import time
-import flask.sessions
 from config import config
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
 import functools
 import os
 import re
 from ruamel import yaml
 import querylog
 import hashlib
-from http.cookies import SimpleCookie
-import base64
-import json
-import itsdangerous
 
 
 class Timer:
@@ -294,37 +288,3 @@ def isoformat(timestamp):
 def hash_user_or_session (string):
     hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
     return int (hash, 16)
-
-# Used by A/B testing to extract a session from a set-cookie header.
-# The signature is ignored. The source of the session should be trusted.
-def extract_session_from_cookie (cookie_header, secret_key):
-    parsed_cookie = SimpleCookie (cookie_header)
-    if not 'session' in parsed_cookie:
-        return {}
-
-    cookie_interface = flask.sessions.SecureCookieSessionInterface()
-
-    # This code matches what Flask does for encoding
-    serializer = itsdangerous.URLSafeTimedSerializer(
-        secret_key,
-        salt=cookie_interface.salt,
-        serializer=cookie_interface.serializer,
-        signer_kwargs=dict(
-            key_derivation=cookie_interface.key_derivation,
-            digest_method=cookie_interface.digest_method
-       ))
-
-    try:
-        cookie_value = parsed_cookie['session'].value
-        return serializer.loads(cookie_value)
-    except itsdangerous.exc.BadSignature as e:
-        # If the signature is wrong, we can still decode the cookie.
-        # We try to do it properly with the actual key though, because exception
-        # handling is slightly slow in Python and doing it successfully is therefore
-        # faster.
-        if e.payload is not None:
-            try:
-                return serializer.load_payload(e.payload)
-            except itsdangerous.exc.BadData:
-                pass
-        return {}
