@@ -35,6 +35,7 @@ import translating
 import querylog
 import aws_helpers
 import ab_proxying
+import cdn
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -135,28 +136,8 @@ app.url_map.strict_slashes = False
 utils.set_debug_mode_based_on_flask(app)
 
 
-CDN_PREFIX = os.getenv('CDN_PREFIX', None)
-STATIC_PREFIX = '/'
-if CDN_PREFIX:
-    # If we are using a CDN, also host static resources under a URL that includes
-    # the version number (so the CDN can aggressively cache the static assets and we
-    # still can invalidate them whenever necessary).
-    #
-    # The function {{static('/js/bla.js')}} can be used to retrieve the URL of static
-    # assets, either from the CDN if configured or just the normal URL we would use
-    # without a CDN.
-    #
-    # We still keep on hosting static assets in the "old" location as well for images in
-    # emails and content we forgot to replace or are unable to replace (like in MarkDowns).
-    STATIC_PREFIX = '/static-' + os.getenv('HEROKU_SLUG_COMMIT', 'dev')
-    app.add_url_rule(STATIC_PREFIX + '/<path:filename>',
-            endpoint="static",
-            view_func=app.send_static_file)
 
-@app.template_global()
-def static(url):
-    """Return cacheable links to static resources."""
-    return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
+cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 # Set session id if not already set. This must be done as one of the first things,
 # so the function should be defined high up.
