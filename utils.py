@@ -284,3 +284,6 @@ def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
     dt = datetime.datetime.utcfromtimestamp(timestamp)
     return dt.isoformat() + 'Z'
+
+def is_heroku():
+    return __name__ == '__main__'

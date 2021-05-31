@@ -247,12 +247,12 @@ def version():
 
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
-if version() == 'DEV':
-    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
-else:
+if utils.is_heroku():
     if not os.getenv ('SECRET_KEY'):
         raise RuntimeError('The SECRET KEY must be provided for non-dev environments.')
     app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY')
+else:
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
 
 # Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
 if os.getenv ('HEROKU_APP_NAME'):
@@ -879,5 +879,5 @@ auth.routes (app, requested_lang)
 # *** START SERVER ***
 
 # Threaded option enables multiple instances for multiple user access support
-if __name__ == '__main__':
+if not is_heroku():
     app.run(threaded=True, port=config ['port'], host="0.0.0.0")
