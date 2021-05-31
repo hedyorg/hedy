@@ -29,7 +29,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       16: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
                       18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
+                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
                       }
 
 #
@@ -190,6 +193,14 @@ class AllAssignmentCommands(Transformer):
     def bigger(self, args):
         return args[0].children
 
+    def not_equal(self, args):
+        return args[0].children
+
+    def smaller_equal(self, args):
+        return args[0].children
+    def bigger_equal(self, args):
+        return args[0].children
+
 
 def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
@@ -290,6 +301,16 @@ class Filter(Transformer):
     # level 19
     def length(self, args):
         return True, ''.join([str(c) for c in args])
+
+    # level 21
+    def not_equal(self, args):
+        return are_all_arguments_true(args)
+
+    # level 22
+    def smaller_equal(self, args):
+        return are_all_arguments_true(args)
+    def bigger_equal(self, args):
+        return are_all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
@@ -777,6 +798,48 @@ class ConvertToPython_18_19(ConvertToPython_17):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
+class ConvertToPython_20(ConvertToPython_18_19):
+    def equality_check(self, args):
+        if type(args[0]) is Tree:
+            return args[0].children + " == int(" + args[1] + ")"
+        if type(args[1]) is Tree:
+            return "int(" + args[0] + ") == " + args[1].children
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if arg1 == '\'True\'' or arg1 == '\'true\'':
+            return f"{arg0} == True"
+        elif arg1 == '\'False\'' or arg1 == '\'false\'':
+            return f"{arg0} == False"
+        else:
+            return f"str({arg0}) == str({arg1})"  # no and statements
+
+class ConvertToPython_21(ConvertToPython_20):
+    def not_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) != str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) != str({arg1}) and {args[2]}"
+
+class ConvertToPython_22(ConvertToPython_21):
+    def smaller_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) <= str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) <= str({arg1}) and {args[2]}"
+
+    def bigger_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) >= str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) >= str({arg1}) and {args[2]}"
+
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -1173,6 +1236,15 @@ def transpile_inner(input_string, level, sub = 0):
         return python
     elif level == 19:
         python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 20:
+        python = ConvertToPython_20(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 21:
+        python = ConvertToPython_21(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 22:
+        python = ConvertToPython_22(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
