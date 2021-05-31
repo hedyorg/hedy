@@ -879,7 +879,5 @@ auth.routes (app, requested_lang)
 # *** START SERVER ***
 
 # Threaded option enables multiple instances for multiple user access support
-if version() == 'DEV':
+if __name__ == '__main__':
     app.run(threaded=True, port=config ['port'], host="0.0.0.0")
-else:
-    app.run(threaded=True, port=config ['port'])
