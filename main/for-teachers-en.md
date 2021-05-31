@@ -1,12 +1,12 @@
 page_title: For teachers — Hedy
 ---
-It’s great that you want to bring Hedy into your classroom! On this page you’ll find all the tips & tricks to make your Hedy lessons run as smoothly as possible. 
+It's great that you want to bring Hedy into your classroom! On this page you'll find all the tips & tricks to make your Hedy lessons run as smoothly as possible. 
 
 ## Introduction Hedy
 
-### What’s Hedy?
+### What's Hedy?
 
-Hedy is a textual programming language, specifically developed for (pre-)teens (10 to 15 years old). In contrast to programming languages for kids, like Scratch, Hedy doesn’t use code blocks but textual code. So with Hedy you’ll learn how to type code like the real programmers do, but in small steps with playful exercises. 
+Hedy is a textual programming language, specifically developed for (pre-)teens (10 to 15 years old). In contrast to programming languages for kids, like Scratch, Hedy doesn't use code blocks but textual code. So with Hedy you'll learn how to type code like the real programmers do, but in small steps with playful exercises. 
 
 This way Hedy can function as a stepping stone to real programming languages like Python in an accessible and mostly fun way! 
 
@@ -14,7 +14,7 @@ Here you can watch a [video](https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2
 
 ### Target audience
 
-Hedy’s developed with middle school and junior high school students in mind (ages 10 - 15). It’s important for the students to be able to read well. We recommend not to start with Hedy before the students have achieved at least a 3rd grade reading level. Students (and teachers!) don’t need any programming experience before starting with Hedy. 
+Hedy's developed with middle school and junior high school students in mind (ages 10 - 15). It's important for the students to be able to read well. We recommend not to start with Hedy before the students have achieved at least a 3rd grade reading level. Students (and teachers!) don't need any programming experience before starting with Hedy. 
 
 ### Teaching with Hedy
 Hedy is divided into levels, in which new commands are taught.Each level contains a variety of exercises to practice to newly learned commands. The exercises can be done by the students individually, or you can use them in classical instructions. The lesson plans for each level are included in this teacher manual. The lesson plans and exercises are explained step by step, to make sure the less digitally informed teachers should be able to use Hedy too! 
@@ -23,7 +23,7 @@ Of course Hedy also caters to the creative teachers that love to make their own 
 
 ### Devices
 
-Hedy is webbased, which means it works on any device with a browser (Google Chrome, FireFox, Edge etc), so laptops, chromebooks, tablets and even smartphones are suitable to use Hedy. There’s no need to download anything before working with Hedy, just go to the website and you’re all set! 
+Hedy is webbased, which means it works on any device with a browser (Google Chrome, FireFox, Edge etc), so laptops, chromebooks, tablets and even smartphones are suitable to use Hedy. There's no need to download anything before working with Hedy, just go to the website and you're all set! 
 
 ## Preparations
 
@@ -39,9 +39,9 @@ Mind: Choose a username and password that you can easily remember, or write it d
 
 ### Saving programs
 
-As soon as you are logged in, you’ll see the blue banner with My profile and My programs. 
+As soon as you are logged in, you'll see the blue banner with My profile and My programs. 
 
-In My programs you can find all the codes that you’ve saved. 
+In My programs you can find all the codes that you've saved. 
 
 You can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
 
@@ -53,7 +53,7 @@ Let the programming fun begin!
 
 ### What do the students learn in this level?
 
-Level 1 is the introductory level of Hedy. The students will learn 3 new commands with which they can write their first codes! This level has been made easily accessible for all students, to make sure they’ll have a positive first experience in programming. 
+Level 1 is the introductory level of Hedy. The students will learn 3 new commands with which they can write their first codes! This level has been made easily accessible for all students, to make sure they'll have a positive first experience in programming. 
 
 ### New commands
 
@@ -74,7 +74,7 @@ These are the frequently made mistakes by students in level 1:
 
 - Students forget to type the commands and write a code without starting with `print` for example. 
 - Students start the commands with a capital letter, even though all letters should be lowercase. 
-- Sometimes students will get error messages from their browser that Hedy doesn’t work as it’s supposed to. The solution is to refresh the webpage. 
+- Sometimes students will get error messages from their browser that Hedy doesn't work as it's supposed to. The solution is to refresh the webpage. 
 
 ### Lesson Plan 1
 
@@ -85,7 +85,7 @@ This is an example of how you could plan lesson 1. The Hedy lessons are between 
 - What do students know about programming?
 - Are there any students with programming experience, like scratch?
 - What is programming exactly?
-_Programming is nothing other than giving instructions to a computer or robot in their own language: programming language. The programming language in this course is called Hedy. It’s been developed for students betweens the ages of 10 and 15, so students that are a bit too old for the kids’ programming languages, but still have trouble understanding the ‘real’ programming languages._
+_Programming is nothing other than giving instructions to a computer or robot in their own language: programming language. The programming language in this course is called Hedy. It's been developed for students betweens the ages of 10 and 15, so students that are a bit too old for the kids' programming languages, but still have trouble understanding the 'real' programming languages._
 
 #### Creating an account (10 minutes)
 
@@ -93,17 +93,17 @@ The students create their own account, as shown in the introduction of this manu
 
 #### Discovering Hedy (5 minutes)
 
-It’s smart to allow your students to mess around for a bit when using Hedy for the first time. This way they can discover level 1 and try all the buttons. This doesn’t have to take long. 
+It's smart to allow your students to mess around for a bit when using Hedy for the first time. This way they can discover level 1 and try all the buttons. This doesn't have to take long. 
 
 #### General instructions of Hedy (5 minutes)
 Show your students… 
 
 - The input screen, where you type the code. 
 - The output screen, where your code will be executed. 
-- the ‘Try this’ buttons, that allow you to try new commands. 
+- the 'Try this' buttons, that allow you to try new commands. 
 - The button to save your programs. 
 
-#### Let’s get to work! (20 minutes)
+#### Let's get to work! (20 minutes)
 
 Show the 3 commands of level 1 to your students and let them make up codes themselves. When all the students have created their own codes, you can start with the fortune teller exercise. This exercise is worked out step by step in the assignment booklet. Je can choose to let the students work on the exercises independently or you can work on them with the whole class together. 
 
@@ -115,24 +115,24 @@ Shortly evaluate the lesson to check if all the students accomplished to make a 
 ### What do the students learn in this level?
 
 Level 2 introduces variables. This can be a tough concept for the students, but by introducing it in a playful and understandable way, most students will pick it up quickly. 
-Level 2 also allows students to pick a random word from a list of a variable. This allows students to programm their first entry level games, like rock, paper, scissors or the fortune teller. This really increases the students’ enthusiasm!
+Level 2 also allows students to pick a random word from a list of a variable. This allows students to programm their first entry level games, like rock, paper, scissors or the fortune teller. This really increases the students' enthusiasm!
 
 ### New commands
 
 In level 2 variables are introduced. In the examples below, the variable animals is used, but of course anything could be a variable. 
 
-`animals is dog, cat` - With this command you can create a variable, like animals. You can ‘fill’ the variable with one or multiple words or numbers.
+`animals is dog, cat` - With this command you can create a variable, like animals. You can 'fill' the variable with one or multiple words or numbers.
 
 `animals is ask What is your favourite animal?` - Mind that `ask` works differently than in level 1! In level 2 you have to start with a variable before using ask. 
 
-`print animals at random` - Hedy picks a random word or number from the list of animals that you’ve made.
+`print animals at random` - Hedy picks a random word or number from the list of animals that you've made.
 
 ### Exercises with this level 
 
 - Story
 - Fortune Tellen
 - Rock, paper, scissors
-- Who’s doing the dishes?
+- Who's doing the dishes?
 
 ### Frequently made mistakes in level 2
 
@@ -145,7 +145,7 @@ These are the frequently made mistakes in level 2:
 - Students forget to use commas when making a list. For instance, they would make this code: 
  `animals is dog cat` instead of `animals is dog, cat`
 - Students tend to use commas after a `print` command, this is not possible.
-E.g. they program: `print Hello, I’m Hedy` instead of `print Hello I’m Hedy`
+E.g. they program: `print Hello, I'm Hedy` instead of `print Hello I'm Hedy`
 
 - Students use the name of a variable as a word in a print command, this is allowed from level 3 on. 
 
@@ -167,12 +167,12 @@ print animals at random
 ### Lesson Plan 2
 
 #### Introduction: Activating prior knowledge (2 minutes)
-Briefly discuss the previous lesson with the students: What did they learn and which difficulties did they come across. Emphasize the `print` and `ask` commands, because they won’t be able to use `echo` anymore in level 2. 
+Briefly discuss the previous lesson with the students: What did they learn and which difficulties did they come across. Emphasize the `print` and `ask` commands, because they won't be able to use `echo` anymore in level 2. 
 
-#### Instruction: What’s a variable? (10 minutes)
-After the intro, you can introduce the concept of a variable to your students. A variable is a word that can contain a lot of different values, so it can change all the time. This may sound difficult, but I’m sure you’ve seen variables before without knowing they were a variable. For example: Think of your age. Everyone has a different age, and your age changes every year. Length is such a number too, just like your grades for a test, or the score in a game: All of these numbers are variables. 
+#### Instruction: What's a variable? (10 minutes)
+After the intro, you can introduce the concept of a variable to your students. A variable is a word that can contain a lot of different values, so it can change all the time. This may sound difficult, but I'm sure you've seen variables before without knowing they were a variable. For example: Think of your age. Everyone has a different age, and your age changes every year. Length is such a number too, just like your grades for a test, or the score in a game: All of these numbers are variables. 
 
-A variable doesn’t have to be a number, it can also be (a list of) words, like your name. You can use this example in Hedy to demonstrate: 
+A variable doesn't have to be a number, it can also be (a list of) words, like your name. You can use this example in Hedy to demonstrate: 
 
 ```
 name is Hedy
@@ -213,7 +213,7 @@ print clubs at random
 #### Student assignment: The fortune teller (20 min) 
 
 ```
-print I’m Hedy the fortune teller!
+print I'm Hedy the fortune teller!
 question is ask What do you want to know?
 print This is what you want to know: question
 answers is yes, no, maybe 
@@ -259,7 +259,7 @@ pet is dog, cat, bunny
 print You get this pet: 
 print pet at random
 ```
-You’ll see that the word pet is line 2 doesn’t work. It’s been changed to the value of the variable pet even though you meant to use it as a normal word. In level 3 this problem is solved by using the quotation marks. The quotation marks tell Hedy that everything between the quotation marks is supposed to be a normal word, that should be printed. Everything outside of the quotation marks is a variable or a command. Show this example in level 3. 
+You'll see that the word pet is line 2 doesn't work. It's been changed to the value of the variable pet even though you meant to use it as a normal word. In level 3 this problem is solved by using the quotation marks. The quotation marks tell Hedy that everything between the quotation marks is supposed to be a normal word, that should be printed. Everything outside of the quotation marks is a variable or a command. Show this example in level 3. 
 
 ```
 pet is dog, cat, bunny
@@ -267,7 +267,7 @@ print 'You get this pet: '
 print pet at random
 ```
 
-Note that the quotation marks are used to tell Hedy what text should be printed. This means you can’t use quotation marks for other purposes like contracting words or possession apostrophe. Show your students that this means this code will not work, because of the apostrophe in line 2. 
+Note that the quotation marks are used to tell Hedy what text should be printed. This means you can't use quotation marks for other purposes like contracting words or possession apostrophe. Show your students that this means this code will not work, because of the apostrophe in line 2. 
 
 ```
 pet is dog, cat, bunny
@@ -287,7 +287,7 @@ There should always be a quotation mark before and one after the text you want t
 Students must use the right quotation marks. The correct quotation mark is ' you find in next to the enter button on most keyboards. Different quotation marks like the double marks &quot; or the skewed quotation mark ` (found in the left corner with ~) will not work.
 `ask` does not require quotation marks, only `print` does. 
 
-#### Let’s get to work! (15 minutes)
+#### Let's get to work! (15 minutes)
 Remake your level 2 codes with quotation marks in level 3. 
 
 #### The Haunted House (20 minutes) 
@@ -332,7 +332,7 @@ if name is Hedy print 'nice' else print 'boo!'
 ```
 print 'I'm Hedy'
 ```
-Solution: Don’t use apostrophes.
+Solution: Don't use apostrophes.
 ```
 print 'Im Hedy'
 ```
@@ -370,7 +370,7 @@ if name is Hedy print 'nice' else print 'boo!'
 ```
 if 'name' is 'Hedy' print 'nice' else print 'boo!'
 ```
-Solution: Don’t use quotation marks around a variable. 
+Solution: Don't use quotation marks around a variable. 
 ```
 if name is Hedy print 'nice' else print 'boo!'
 ```
@@ -412,7 +412,7 @@ If secretpassword is password print 'You can enter!' else print 'Access denied!'
 
 
 ### Lesson Plan 4
-Due to the addition of the if command, a lot of possibilities opened up in Level 4. That’s why we recommend spending two lessons in Level 4 before continuing to level 5. It offers the students the chance to really get to grips with the if constructions, before going to the next level. 
+Due to the addition of the if command, a lot of possibilities opened up in Level 4. That's why we recommend spending two lessons in Level 4 before continuing to level 5. It offers the students the chance to really get to grips with the if constructions, before going to the next level. 
 
 ### Lesson 4a
 Lesson 4a consists of both instruction and practice. Lesson 4b is meant for extra practice and time to spend on the assignments.
@@ -421,13 +421,13 @@ Lesson 4a consists of both instruction and practice. Lesson 4b is meant for extr
 Briefly repeat the previous lesson and also recollect the frequently made mistakes in that level (e.g. forgetting the quotation marks, or using the wrong ones etc.)
 
 #### Instruction: If constructions (10 minutes)
-The if-construction enables Hedy to react in two different ways to the player’s answers. Demonstrate using this example: 
+The if-construction enables Hedy to react in two different ways to the player's answers. Demonstrate using this example: 
 ```
-name is What’s your name?
+name is What's your name?
 if name is Hedy print 'Access granted' else print 'Access denied'
 ```
 
-#### Let’s get to work: The fortune teller (20 minutes) 
+#### Let's get to work: The fortune teller (20 minutes) 
 The students can work on the fortune teller assignment independently, or you could do the assignments step-by-step together with your students. 
 
 #### Evaluation (5 minutes) 
@@ -443,7 +443,7 @@ Briefly discuss the learning goals from the previous lesson and the frequently m
 In the previous lessons the students usually had to copy the codes from the examples. This lesson encourages the students to think of the codes themselves, because only the output is given to them, and not the codes itselves. 
 
 #### Quiz (10 minutes)
-To check on your students’ knowledge levels, you can give them a short quiz. 
+To check on your students' knowledge levels, you can give them a short quiz. 
 TODO Quiz toevoegen. 
 
 #### Evaluation (5 minutes)
@@ -487,14 +487,14 @@ print 'Baby Shark tututututudu'
 print 'Baby Shark tututututudu'
 print 'Baby Shark'
 ```
-Now, with repeat, it’s much easier to make a code like this: 
+Now, with repeat, it's much easier to make a code like this: 
 
 ```
 repeat 3 times print 'Baby Shark tututututudu'
 print 'Baby Shark'
 ```
 
-#### Let’s get to work: Hedy the Singer! (20 - 30 minutes) 
+#### Let's get to work: Hedy the Singer! (20 - 30 minutes) 
 After this short instruction, the students can work on the other songs in the exercises by themselves. Unfortunately, Hedy can only print text and not really sing songs. If you want to hear the computer sing, you could tell your students to copy the output into Google Translate and use the speak-function there. Tip: Only do this if the students have headphones. 
 If the students are done with programming the songs in the assignments. They can continue with the other assignments in level 5. 
 

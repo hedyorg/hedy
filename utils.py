@@ -2,7 +2,6 @@ import datetime
 import time
 from config import config
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
 import functools
 import os
 import re
@@ -273,6 +272,9 @@ def slash_join(*args):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
+def is_testing_request(request):
+    return bool ('X-Testing' in request.headers and request.headers ['X-Testing'])
 
 def extract_bcrypt_rounds (hash):
     return int (re.match ('\$2b\$\d+', hash) [0].replace ('$2b$', ''))

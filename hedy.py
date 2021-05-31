@@ -1,6 +1,6 @@
 from lark import Lark
-from lark.exceptions import VisitError, LarkError, UnexpectedEOF
-from lark import Tree, Transformer, Visitor
+from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
+from lark import Tree, Transformer
 from os import path
 import sys
 import utils
@@ -25,7 +25,14 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
                       14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif']
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      16: ['print', 'ask', 'is', 'if', 'for', 'elif'],
+                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
                       }
 
 #
@@ -104,7 +111,10 @@ class ExtractAST(Transformer):
         return ''.join([str(c) for c in args])
     def list_access(self, args):
         if type(args[1]) == Tree:
-            return Tree('list_access', [args[0], 'random'])
+            if "random" in args[1].data:
+                return Tree('list_access', [args[0], 'random'])
+            else:
+                return Tree('list_access', [args[0], args[1].children[0]])
         else:
             return Tree('list_access', [args[0], args[1]])
 
@@ -181,6 +191,14 @@ class AllAssignmentCommands(Transformer):
     def smaller(self, args):
         return args[0].children
     def bigger(self, args):
+        return args[0].children
+
+    def not_equal(self, args):
+        return args[0].children
+
+    def smaller_equal(self, args):
+        return args[0].children
+    def bigger_equal(self, args):
         return args[0].children
 
 
@@ -280,6 +298,20 @@ class Filter(Transformer):
     def while_loop(self, args):
         return are_all_arguments_true(args)
 
+    # level 19
+    def length(self, args):
+        return True, ''.join([str(c) for c in args])
+
+    # level 21
+    def not_equal(self, args):
+        return are_all_arguments_true(args)
+
+    # level 22
+    def smaller_equal(self, args):
+        return are_all_arguments_true(args)
+    def bigger_equal(self, args):
+        return are_all_arguments_true(args)
+
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
         return True, ''.join([str(c) for c in args])
@@ -318,6 +350,8 @@ class IsValid(Filter):
     def while_loop(self, args):
         return are_all_arguments_true(args)
     def comment(self, args):
+        return are_all_arguments_true(args)
+    def length(self, args):
         return are_all_arguments_true(args)
 
     #leafs with tokens need to be all true
@@ -365,6 +399,8 @@ class IsComplete(Filter):
         return all(args), ''.join([c for c in args])
     def input(self, args):
         return args != [], 'input'
+    def length(self, args):
+        return args != [], 'len'
 
 class ConvertToPython_1(Transformer):
 
@@ -724,6 +760,76 @@ class ConvertToPython_17(ConvertToPython_16):
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
+class ConvertToPython_18_19(ConvertToPython_17):
+    def length(self, args):
+        arg0 = args[0]
+        return f"len({arg0})"
+
+    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
+                    return parameter + " = " + value
+                elif "len(" in value:
+                    return parameter + " = " + value
+                else:
+                    if value == 'true' or value == 'True':
+                        return parameter + " = True"
+                    elif value == 'false' or value == 'False':
+                        return parameter + " = False"
+                    else:
+                        return parameter + " = '" + value + "'"
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
+
+class ConvertToPython_20(ConvertToPython_18_19):
+    def equality_check(self, args):
+        if type(args[0]) is Tree:
+            return args[0].children + " == int(" + args[1] + ")"
+        if type(args[1]) is Tree:
+            return "int(" + args[0] + ") == " + args[1].children
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if arg1 == '\'True\'' or arg1 == '\'true\'':
+            return f"{arg0} == True"
+        elif arg1 == '\'False\'' or arg1 == '\'false\'':
+            return f"{arg0} == False"
+        else:
+            return f"str({arg0}) == str({arg1})"  # no and statements
+
+class ConvertToPython_21(ConvertToPython_20):
+    def not_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) != str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) != str({arg1}) and {args[2]}"
+
+class ConvertToPython_22(ConvertToPython_21):
+    def smaller_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) <= str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) <= str({arg1}) and {args[2]}"
+
+    def bigger_equal(self, args):
+        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
+        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        if len(args) == 2:
+            return f"str({arg0}) >= str({arg1})"  # no and statements
+        else:
+            return f"str({arg0}) >= str({arg1}) and {args[2]}"
+
+
 class ConvertTo():
     def __default_child_call(self, name, children):
         return self._call_children(children)
@@ -1010,7 +1116,7 @@ def transpile_inner(input_string, level):
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
-    except Exception as e:
+    except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
             characters_expected = str(e.allowed)
@@ -1107,6 +1213,21 @@ def transpile_inner(input_string, level):
         return python
     elif level == 17:
         python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 18:
+        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 19:
+        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 20:
+        python = ConvertToPython_20(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 21:
+        python = ConvertToPython_21(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        return python
+    elif level == 22:
+        python = ConvertToPython_22(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
 
     #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
