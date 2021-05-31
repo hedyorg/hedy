@@ -248,7 +248,7 @@ def version():
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
 if version() == 'DEV':
-    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
 else:
     if not os.getenv ('SECRET_KEY'):
         raise RuntimeError('The SECRET KEY must be provided for non-dev environments.')
