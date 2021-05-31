@@ -250,7 +250,7 @@ def version():
 if version() == 'DEV':
     app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
 else:
-    if not app.config['SECRET_KEY']:
+    if not os.getenv ('SECRET_KEY'):
         raise RuntimeError('The SECRET KEY must be provided for non-dev environments.')
     app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY')
 
