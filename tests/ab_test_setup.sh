@@ -1,5 +1,7 @@
 #!/bin/bash
 # Run the server in an A/B testing setup.
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir/..
 PIDS=""
 trap 'kill $PIDS; exit' INT
 
