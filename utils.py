@@ -2,7 +2,6 @@ import datetime
 import time
 from config import config
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
 import functools
 import os
 import re

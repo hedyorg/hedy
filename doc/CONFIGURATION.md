@@ -40,7 +40,8 @@ BASE_URL
 A/B testing:
 
 ```
-PROXY_TO_TEST_ENV
+PROXY_TO_TEST_HOST
+PROXY_TO_TEST_PROPORTION
 IS_TEST_ENV
 ```
 
@@ -54,6 +55,12 @@ To determine if this is the production environment (to avoid requests from e2e t
 
 ```
 IS_PRODUCTION
+```
+
+To set up the port of the app through an env variable (helpful to start multiple instances of the app locally
+
+```
+PORT
 ```
 
 ## Heroku Metadata
