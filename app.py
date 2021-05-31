@@ -123,7 +123,6 @@ def load_adventure_assignments_per_level(lang, level):
     })
     return assignments
 
-
 # Load main menu (do it once, can be cached)
 with open(f'main/menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
@@ -316,7 +315,7 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
 
-    return response
+    return jsonify(response)
 
 
 def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
@@ -591,8 +590,6 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
-    response = {}
-
     if requested_lang() in ["en", "nl"]:
         session ['error_level'] = 0 # When requesting a new level, always reset error_level to 0
         session ['similar_code'] = "-" # Make sure that the gathered similar code is also deleted when re-loading the page
@@ -617,8 +614,6 @@ def index(level, step):
             adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
         step = 1
-    else:
-        loaded_program = ''
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
     return hedyweb.render_assignment_editor(
@@ -632,8 +627,7 @@ def index(level, step):
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
         loaded_program_name=loaded_program_name,
-        adventure_name=adventure_name
-    )
+        adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
