@@ -37,6 +37,9 @@ import translating
 import querylog
 import aws_helpers
 
+# Set the current directory to the root Hedy folder
+os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
+
 # Define and load all available language data
 ALL_LANGUAGES = {
     'en': 'English',
@@ -135,7 +138,6 @@ app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False
 utils.set_debug_mode_based_on_flask(app)
 
-
 CDN_PREFIX = os.getenv('CDN_PREFIX', None)
 STATIC_PREFIX = '/'
 if CDN_PREFIX:
@@ -231,9 +233,26 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
             # We use a 302 in case we need to revert the redirect.
             return redirect(url, code=302)
 
+def version():
+    """Get the version from the Heroku environment variables."""
+    if not os.getenv('DYNO'):
+        # Not on Heroku
+        return 'DEV'
+
+    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+
+    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
+    return the_date.strftime('%b %d') + f' ({commit})'
+
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
-app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
+if version() == 'DEV':
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY') or uuid.uuid4().hex
+else:
+    if not app.config['SECRET_KEY']:
+        raise RuntimeError('The SECRET KEY must be provided for non-dev environments.')
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY')
 
 # Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
 if os.getenv ('HEROKU_APP_NAME'):
@@ -691,19 +710,6 @@ def no_none_sense(d):
     return {k: v for k, v in d.items() if v is not None}
 
 
-def version():
-    """Get the version from the Heroku environment variables."""
-    if not os.getenv('DYNO'):
-        # Not on Heroku
-        return 'DEV'
-
-    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
-    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
-
-    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%b %d') + f' ({commit})'
-
-
 def split_markdown_front_matter(md):
     parts = re.split('^---', md, 1, re.M)
     if len(parts) == 1:
@@ -872,9 +878,8 @@ auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 
-if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
-    if version() == 'DEV':
-        app.run(threaded=True, port=config ['port'], host="0.0.0.0")
-    else:
-        app.run(threaded=True, port=config ['port'])
+# Threaded option enables multiple instances for multiple user access support
+if version() == 'DEV':
+    app.run(threaded=True, port=config ['port'], host="0.0.0.0")
+else:
+    app.run(threaded=True, port=config ['port'])
