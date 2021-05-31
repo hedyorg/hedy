@@ -826,5 +826,5 @@ auth.routes (app, requested_lang)
 # *** START SERVER ***
 
 # Threaded option enables multiple instances for multiple user access support
-if not is_heroku():
+if not utils.is_heroku():
     app.run(threaded=True, port=config ['port'], host="0.0.0.0")
