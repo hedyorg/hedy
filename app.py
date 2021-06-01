@@ -175,13 +175,15 @@ if utils.is_production():
 
     app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY')
 
+else:
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
+
+if utils.is_heroku():
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE='Lax',
     )
-else:
-    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
 
 # Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
 
