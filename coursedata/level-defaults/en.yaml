@@ -231,14 +231,63 @@
             else
                 repeat 5 times
                     print 'meh'
+7-1:
+    start_code: "for counter is 1 to 5\n    print counter"
+    intro_text:
+        "`print` works just the same but the `repeat` is now replaced by `for`!
+        You can now write `for counter is 1 to 5` and use `counter` in your program.
+        Try it out to see what happens!
+        Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
+    commands:
+    -   name: "for loop"
+        explanation: "We replace `repeat` with `for` and add a range"
+        example: "for counter is 1 to 5"
+        demo_code: "for counter is 1 to 5\n    print counter"
+    -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+        example: "Example: answer is ask What is 5 plus 5?"
+        demo_code: |-
+            answer is ask What is 5 plus 5?
+            if answer is 10
+                print 'Well done!'
+                print 'Indeed, the answer was ' answer
+            else
+                print 'Oops!'
+                print 'The answer is 10'
+7-2:
+    start_code: "for counter in range 1 to 5\n    print counter"
+    intro_text:
+        "`print` works just the same but the `repeat` is now replaced by `for`!
+        You can now write `for counter in range 1 to 5` and use `counter` in your program. Try it out to see what happens!
+        Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
+    commands:
+    -   name: "for loop"
+        explanation: "We replace `repeat` with `for` and add a range"
+        example: "for counter in range 1 to 5"
+        demo_code: "for counter in range 1 to 5\n    print counter"
+    -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+        example: "Example: answer is ask What is 5 plus 5?"
+        demo_code: |-
+            answer is ask What is 5 plus 5?
+            if answer is 10
+                print 'Well done!'
+                print 'Indeed, the answer was ' answer
+            else
+                print 'Oops!'
+                print 'The answer is 10'
 8:
     start_code: |-
-        for i in range 1 to 10
-            print i
-        print 'Ready or not, here I come!'
-    intro_text: "`print` works just the same but the `repeat` is now replaced by `for`! You use `for i in range 1 to 5`, instead of `repeat 5 times`. You can also use `i` in your program! Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
+        for counter in range 2 to 10 step 2
+            print counter
+        print 'Steps of 2!'
+    intro_text: "We changed `for` again! Now you can use `step` in the for loop to skip through the counting faster. It is not necessary to use, so try loops with and without the step! Use `in range` to tell the for loop how far it needs to count."
     commands:
-    -   explanation: "we replace `repeat` with `for`"
+    -   explanation: "We added a `step` to `for`"
+        example: "for counter in range 2 to 10 step 2"
+        demo_code: |
+            for counter in range 2 to 10 step 2
+              print counter
+            print 'Steps of 2!'
+    -   explanation: "You can also use shorter names in the for loop to make your program smaller. Try using `i` as a counter for example."
         example: "for i in range 1 to 10"
         demo_code: |
             for i in range 1 to 10
