@@ -211,6 +211,7 @@
     window.State = {};
     window.State.lang = "{{ lang }}";
     window.State.level = "{{ level }}";
+    window.State.sublevel = {{ sublevel or 0 }};
     window.State.level_title = "{{ level_title }}";
     window.State.adventure_name = "{{ adventure_name }}";
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
