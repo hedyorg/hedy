@@ -71,13 +71,10 @@ def is_debug_mode():
     return DEBUG_MODE
 
 
-def set_debug_mode_based_on_flask(app):
-    """Set whether or not we're in debug mode based on whether Flask is.
-
-    This can only be called after the Flask server has been initialized.
-    """
+def set_debug_mode(debug_mode):
+    """Switch debug mode to given value."""
     global DEBUG_MODE
-    DEBUG_MODE = app.config['DEBUG']
+    DEBUG_MODE = debug_mode
 
 
 YAML_CACHE = {}
@@ -284,5 +281,38 @@ def isoformat(timestamp):
     dt = datetime.datetime.utcfromtimestamp(timestamp)
     return dt.isoformat() + 'Z'
 
+
+def is_production():
+    """Whether we are serving production traffic."""
+    return os.getenv('IS_PRODUCTION', '') != ''
+
+
 def is_heroku():
-    return __name__ == '__main__'
+    """Whether we are running on Heroku.
+
+    Only use this flag if you are making a decision that really has to do with
+    Heroku-based hosting or not.
+
+    If you are trying to make a decision whether something needs to be done
+    "for real" or not, prefer using:
+
+    - `is_production()` to see if we're serving customer traffic and trying to
+      optimize for safety and speed.
+    - `is_debug_mode()` to see if we're on a developer machine and we're trying
+      to optimize for developer productivity.
+
+    """
+    return os.getenv('DYNO', '') != ''
+
+
+def version():
+    """Get the version from the Heroku environment variables."""
+    if not is_heroku():
+        return 'DEV'
+
+    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+
+    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
+    return the_date.strftime('%b %d') + f' ({commit})'
+

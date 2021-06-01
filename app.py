@@ -20,7 +20,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
+from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -136,7 +136,6 @@ logging.basicConfig(
 app = Flask(__name__, static_url_path='')
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
-utils.set_debug_mode_based_on_flask(app)
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
@@ -168,34 +167,23 @@ if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
             # We use a 302 in case we need to revert the redirect.
             return redirect(url, code=302)
 
-def version():
-    """Get the version from the Heroku environment variables."""
-    if not os.getenv('DYNO'):
-        # Not on Heroku
-        return 'DEV'
-
-    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
-    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
-
-    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%b %d') + f' ({commit})'
-
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
-if utils.is_heroku():
+if utils.is_production():
     if not os.getenv ('SECRET_KEY'):
         raise RuntimeError('The SECRET KEY must be provided for non-dev environments.')
-    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY')
-else:
-    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
 
-# Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
-if os.getenv ('HEROKU_APP_NAME'):
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY')
+
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE='Lax',
     )
+else:
+    app.config['SECRET_KEY'] = os.getenv ('SECRET_KEY', uuid.uuid4().hex)
+
+# Set security attributes for cookies in a central place - but not when running locally, so that session cookies work well without HTTPS
 
 Compress(app)
 Commonmark(app)
@@ -208,7 +196,7 @@ def check_language():
     if requested_lang() not in ALL_LANGUAGES.keys ():
         return "Language " + requested_lang () + " not supported", 404
 
-if not os.getenv('HEROKU_RELEASE_CREATED_AT'):
+if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 
@@ -825,6 +813,13 @@ auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 
-# Threaded option enables multiple instances for multiple user access support
-if not utils.is_heroku():
-    app.run(threaded=True, port=config ['port'], host="0.0.0.0")
+if __name__ == '__main__':
+    # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
+    # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
+    # own file loading routines also hot-reload.
+    utils.set_debug_mode(True)
+
+    # Threaded option enables multiple instances for multiple user access support
+    app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
+
+    # See `Procfile` for how the server is started on Heroku.
