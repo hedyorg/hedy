@@ -645,11 +645,21 @@ class ConvertToPython_7(ConvertToPython_6):
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
-class ConvertToPython_8(ConvertToPython_7):
+class ConvertToPython_7_1(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[3:]]
         return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
+
+class ConvertToPython_8(ConvertToPython_7):
+    def for_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        if type(args[3]) == str: # for loop without step
+            all_lines = [indent(x) for x in args[3:]]
+            return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
+        else:  # for loop with step
+            all_lines = [indent(x) for x in args[4:]]
+            return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + ", " + "int(" + args[3] + ")" + "):\n"+"\n".join(all_lines)
 
 class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
@@ -872,7 +882,7 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "for _ in range(" + args[0] + "):\n" + args[1]
 
-    def ranged_loop(self, children):
+    def for_loop(self, children):
         args = self._call_children(children)
         return "for " + args[0] + " in range(" + args[1] + ", " + args[2] +  "):\n" + args[3]
 
@@ -952,43 +962,47 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
-
-def create_grammar(level):
+def create_grammar(level, sub):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "level" + str(level) + ".lark"), "r", encoding="utf-8") as file:
+    if sub:
+        filename = "level" + str(level) + "-" + str (sub) + ".lark"
+    else:
+        filename = "level" + str(level) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         return file.read()
 
 
 PARSER_CACHE = {}
 
 
-def get_parser(level):
+def get_parser(level, sub):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    existing = PARSER_CACHE.get(level)
+    key = str(level) + "." + str(sub)
+    existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    ret = Lark(create_grammar(level))
-    PARSER_CACHE[level] = ret
+    ret = Lark(create_grammar(level, sub))
+    PARSER_CACHE[key] = ret
     return ret
 
 
-def transpile(input_string, level):
+def transpile(input_string, level, sub = 0):
     try:
-        return transpile_inner(input_string, level)
+        return transpile_inner(input_string, level, sub)
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
         if E.args[0] == 'Parse':
             #try 1 level lower
-            if level > 1:
+            if level > 1 and sub == 0:
                 try:
                     new_level = level - 1
-                    result = transpile_inner(input_string, new_level)
+                    result = transpile_inner(input_string, new_level, sub)
                 except (LarkError, HedyException) as innerE:
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
@@ -1101,11 +1115,11 @@ def preprocess_blocks(code):
     return "\n".join(processed_code)
 
 
-def transpile_inner(input_string, level):
+def transpile_inner(input_string, level, sub = 0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
 
-    parser = get_parser(level)
+    parser = get_parser(level, sub)
 
     if level >= 8:
         input_string = preprocess_blocks(input_string)
@@ -1143,7 +1157,7 @@ def transpile_inner(input_string, level):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                result = transpile_inner(fixed_code, level, sub)
             raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
@@ -1181,7 +1195,10 @@ def transpile_inner(input_string, level):
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        if sub == 0:
+            python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif sub == 1 or sub == 2:
+            python = ConvertToPython_7_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
