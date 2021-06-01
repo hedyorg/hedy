@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_set, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request
+from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request
 import datetime
 from functools import wraps
 from config import config
@@ -107,11 +107,11 @@ def routes (app, requested_lang):
             new_hash = hash (body ['password'], make_salt ())
 
         cookie = make_salt ()
-        db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        db_create ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
         if new_hash:
-            db_set ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
+            db_update ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
         else:
-            db_set ('users', {'username': user ['username'], 'last_login': timems ()})
+            db_update ('users', {'username': user ['username'], 'last_login': timems ()})
         resp = make_response ({})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
@@ -203,11 +203,11 @@ def routes (app, requested_lang):
         if 'gender' in body:
             user ['gender'] = body ['gender']
 
-        db_set ('users', user)
+        db_create ('users', user)
 
         # We automatically login the user
         cookie = make_salt ()
-        db_set ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        db_create ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request (request):
@@ -243,7 +243,7 @@ def routes (app, requested_lang):
         if token != user ['verification_pending']:
             return 'invalid username/token', 403
 
-        db_set ('users', {'username': username, 'verification_pending': None})
+        db_update ('users', {'username': username, 'verification_pending': None})
         return redirect ('/')
 
     @app.route ('/auth/logout', methods=['POST'])
@@ -282,7 +282,7 @@ def routes (app, requested_lang):
 
         hashed = hash (body ['new_password'], make_salt ())
 
-        db_set ('users', {'username': user ['username'], 'password': hashed})
+        db_update ('users', {'username': user ['username'], 'password': hashed})
         if not is_testing_request (request):
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
@@ -319,7 +319,7 @@ def routes (app, requested_lang):
                     return 'email exists', 403
                 token = make_salt ()
                 hashed_token = hash (token, make_salt ())
-                db_set ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
+                db_update ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
                 if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
@@ -327,11 +327,11 @@ def routes (app, requested_lang):
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         if 'country' in body:
-            db_set ('users', {'username': user ['username'], 'country': body ['country']})
+            db_update ('users', {'username': user ['username'], 'country': body ['country']})
         if 'birth_year' in body:
-            db_set ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
+            db_update ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
         if 'gender' in body:
-            db_set ('users', {'username': user ['username'], 'gender': body ['gender']})
+            db_update ('users', {'username': user ['username'], 'gender': body ['gender']})
 
         return jsonify (resp)
 
@@ -372,7 +372,7 @@ def routes (app, requested_lang):
         token = make_salt ()
         hashed = hash (token, make_salt ())
 
-        db_set ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
+        db_create ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
         if is_testing_request (request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -406,7 +406,7 @@ def routes (app, requested_lang):
 
         hashed = hash (body ['password'], make_salt ())
         token = db_del ('tokens', {'id': body ['username']})
-        db_set ('users', {'username': body ['username'], 'password': hashed})
+        db_update ('users', {'username': body ['username'], 'password': hashed})
         user = db_get ('users', {'username': body ['username']})
 
         if not is_testing_request (request):
@@ -434,7 +434,7 @@ def routes (app, requested_lang):
         if not user:
             return 'invalid username', 400
 
-        db_set ('users', {'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
+        db_update ('users', {'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
 
         return '', 200
 

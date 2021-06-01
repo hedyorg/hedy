@@ -216,15 +216,17 @@ def db_get_many (table, data, *not_primary):
         data.append (db_decode (item))
     return data
 
-# Creates or updates an item by primary key.
+# Creates an item.
 @querylog.timed
-def db_set (table, data):
-    querylog.log_counter('db_set:' + table)
-    if db_get (table, data):
-        result = db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
-    else:
-        result = db.put_item (TableName = db_prefix + '-' + table, Item = db_encode (data))
-    return result
+def db_create (table, data):
+    querylog.log_counter('db_create:' + table)
+    return db.put_item (TableName = db_prefix + '-' + table, Item = db_encode (data))
+
+# Updates an item by primary key.
+@querylog.timed
+def db_update (table, data):
+    querylog.log_counter('db_update:' + table)
+    return db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
 
 # Deletes an item by primary key.
 @querylog.timed
