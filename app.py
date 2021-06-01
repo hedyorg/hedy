@@ -13,7 +13,6 @@ import logging
 import os
 from os import path
 import re
-import requests
 import traceback
 import uuid
 from ruamel import yaml
@@ -23,10 +22,9 @@ from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
 import utils
-import hashlib
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, make_response, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response
 from flask_helpers import render_template
 from flask_compress import Compress
 
@@ -36,6 +34,8 @@ import hedyweb
 import translating
 import querylog
 import aws_helpers
+import ab_proxying
+import cdn
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -136,45 +136,14 @@ app.url_map.strict_slashes = False
 utils.set_debug_mode_based_on_flask(app)
 
 
-CDN_PREFIX = os.getenv('CDN_PREFIX', None)
-STATIC_PREFIX = '/'
-if CDN_PREFIX:
-    # If we are using a CDN, also host static resources under a URL that includes
-    # the version number (so the CDN can aggressively cache the static assets and we
-    # still can invalidate them whenever necessary).
-    #
-    # The function {{static('/js/bla.js')}} can be used to retrieve the URL of static
-    # assets, either from the CDN if configured or just the normal URL we would use
-    # without a CDN.
-    #
-    # We still keep on hosting static assets in the "old" location as well for images in
-    # emails and content we forgot to replace or are unable to replace (like in MarkDowns).
-    STATIC_PREFIX = '/static-' + os.getenv('HEROKU_SLUG_COMMIT', 'dev')
-    app.add_url_rule(STATIC_PREFIX + '/<path:filename>',
-            endpoint="static",
-            view_func=app.send_static_file)
 
+cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
-@app.context_processor
-def inject_static():
-    """Add the 'static' function to the Template context, to return links to static resources."""
-    def static(url):
-        return utils.slash_join(CDN_PREFIX, STATIC_PREFIX, url)
-    return dict(static=static)
-
-
-def hash_user_or_session (string):
-    hash = hashlib.md5 (string.encode ('utf-8')).hexdigest ()
-    return int (hash, 16)
-
-def redirect_ab (request, session):
-    # If the user is logged in, we use their username as identifier, otherwise we use the session id
-    user_identifier = current_user(request) ['username'] or str (session_id ())
-
-    # This will send 50% of the requests into redirect.
-    redirect_proportion = 50
-    redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
-    return redirect_flag
+# Set session id if not already set. This must be done as one of the first things,
+# so the function should be defined high up.
+@app.before_request
+def set_session_cookie():
+    session_id()
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -182,44 +151,11 @@ if os.getenv('IS_PRODUCTION'):
         if utils.is_testing_request (request):
             return 'No E2E tests are allowed in production', 400
 
-# If present, PROXY_TO_TEST_ENV should be the name of the target environment
-if os.getenv ('PROXY_TO_TEST_ENV') and not os.getenv ('IS_TEST_ENV'):
-    @app.before_request
-    def before_request_proxy():
-        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_ENV environment, with the exception of /auth/texts
-        # We want to keep all cookie setting in the main environment, not the test one.
-        if (re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url)):
-            pass
-        # If we enter this block, we will reverse proxy the request to the PROXY_TO_TEST_ENV environment.
-        elif (redirect_ab (request, session)):
-
-            print ('DEBUG TEST - REVERSE PROXYING REQUEST', request.method, request.url, session_id ())
-
-            url = request.url.replace (os.getenv ('HEROKU_APP_NAME'), os.getenv ('PROXY_TO_TEST_ENV'))
-
-            request_headers = {}
-            for header in request.headers:
-                if (header [0].lower () in ['host']):
-                    continue
-                request_headers [header [0]] = header [1]
-
-            # Send the session_id to the test environment for logging purposes
-            request_headers ['x-session_id'] = session_id ()
-            r = getattr (requests, request.method.lower ()) (url, headers=request_headers, data=request.data)
-
-            response = make_response (r.content)
-            for header in r.headers:
-                # With great help from https://medium.com/customorchestrator/simple-reverse-proxy-server-using-flask-936087ce0afb
-                # We ignore the set-cookie header
-                if (header.lower () in ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'set-cookie']):
-                    continue
-                response.headers [header] = r.headers [header]
-            return response, r.status_code
-
-if os.getenv ('IS_TEST_ENV'):
-    @app.before_request
-    def before_request_receive_proxy():
-        print ('DEBUG TEST - RECEIVE PROXIED REQUEST', request.method, request.url, session_id ())
+@app.before_request
+def before_request_proxy_testing():
+    if utils.is_testing_request (request):
+        if os.getenv ('IS_TEST_ENV'):
+            session ['test_session'] = 'test'
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
@@ -271,6 +207,21 @@ def after_request_log_status(response):
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
 
+# If present, PROXY_TO_TEST_HOST should be the 'http[s]://hostname[:port]' of the target environment
+if os.getenv ('PROXY_TO_TEST_HOST') and not os.getenv ('IS_TEST_ENV'):
+    ab_proxying.ABProxying(app, os.getenv ('PROXY_TO_TEST_HOST'), app.config['SECRET_KEY'])
+
+@app.route('/session_test', methods=['GET'])
+def echo_session_vars_test():
+    if not utils.is_testing_request (request):
+        return 'This endpoint is only meant for E2E tests', 400
+    return jsonify({'session': dict(session)})
+
+@app.route('/session_main', methods=['GET'])
+def echo_session_vars_main():
+    if not utils.is_testing_request (request):
+        return 'This endpoint is only meant for E2E tests', 400
+    return jsonify({'session': dict(session), 'proxy_enabled': bool (os.getenv ('PROXY_TO_TEST_HOST'))})
 
 @app.route('/parse', methods=['POST'])
 def parse():
@@ -281,11 +232,15 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'sublevel' in body and not type_check (body ['sublevel'], 'int'):
+        return "If present, body.sublevel must be an integer", 400
     if 'adventure_name' in body and not type_check (body ['adventure_name'], 'str'):
         return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
     level = int(body ['level'])
+    sublevel = body.get ('sublevel') or 0
+
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -304,7 +259,7 @@ def parse():
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             with querylog.log_time('transpile'):
-                result = hedy.transpile(code, level)
+                result = hedy.transpile(code, level,sublevel)
             response["Code"] = "# coding=utf8\nimport random\n" + result
         except hedy.HedyException as E:
             traceback.print_exc()
@@ -475,15 +430,22 @@ def adventure_page(adventure_name, level):
         adventure_name=adventure_name)
 
 # routing to index.html
-@app.route('/hedy', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    session_id()  # Run this for the side effect of generating a session ID
-    try:
+    
+
+    # Sublevel requested
+    if re.match ('\d+-\d+', level):
+        pass
+        # If level has a dash, we keep it as a string
+    # Normal level requested
+    elif re.match ('\d', level):
         g.level = level = int(level)
-    except:
+    else:
         return 'No such Hedy level!', 404
+
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
@@ -526,7 +488,6 @@ def index(level, step):
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/onlinemasters/<level>/<step>', methods=['GET'])
 def onlinemasters(level, step):
-    session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = lang = requested_lang()
     g.prefix = '/onlinemasters'
@@ -550,7 +511,6 @@ def onlinemasters(level, step):
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/space_eu/<level>/<step>', methods=['GET'])
 def space_eu(level, step):
-    session_id()  # Run this for the side effect of generating a session ID
     g.level = level = int(level)
     g.lang = requested_lang()
     g.prefix = '/space_eu'
@@ -621,12 +581,12 @@ def main_page(page):
 
 def session_id():
     """Returns or sets the current session ID."""
-    if os.getenv('IS_TEST_ENV') and 'x-session_id' in request.headers:
-        return request.headers['x-session_id']
     if 'session_id' not in session:
-        session['session_id'] = uuid.uuid4().hex
+        if os.getenv ('IS_TEST_ENV') and 'X-session_id' in request.headers:
+            session['session_id'] = request.headers ['X-session_id']
+        else:
+            session['session_id'] = uuid.uuid4().hex
     return session['session_id']
-
 
 def requested_lang():
     """Return the user's requested language code.

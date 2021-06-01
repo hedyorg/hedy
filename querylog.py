@@ -8,7 +8,6 @@ import datetime
 import resource
 import traceback
 import logging
-import utils
 
 logger = logging.getLogger('querylog')
 
@@ -174,7 +173,7 @@ class LogQueue:
         bucket = div_clip(time.time(), self.batch_window_s)
         data = record.as_data()
 
-        if self.do_print or utils.is_debug_mode():
+        if self.do_print:
             logging.debug(repr(data))
 
         with self.mutex:
