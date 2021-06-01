@@ -434,7 +434,7 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    
+
 
     # Sublevel requested
     if re.match ('\d+-\d+', level):
@@ -442,7 +442,10 @@ def index(level, step):
         # If level has a dash, we keep it as a string
     # Normal level requested
     elif re.match ('\d', level):
-        g.level = level = int(level)
+        try:
+            g.level = level = int(level)
+        except:
+            return 'No such Hedy level!', 404
     else:
         return 'No such Hedy level!', 404
 
