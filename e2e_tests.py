@@ -225,6 +225,7 @@ def retrieveProgramsAfter (state, response, username):
     if len (response ['body'] ['programs']) != 1:
         raise Exception ('Programs list should contain one program')
     program = response ['body'] ['programs'] [0]
+    state ['program'] = program
     if not type_check (program, 'dict'):
         raise Exception ('Invalid program type')
     if not 'code' in program or program ['code'] != 'print Hello world':
@@ -274,6 +275,8 @@ def suite (username):
         ['retrieve programs before saving any', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['create program', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Program 1', 'level': 1}, 200],
         ['retrieve programs after saving one', 'get', '/programs_list', {}, {}, 200, retrieveProgramsAfter],
+        ['delete program', 'get', lambda state: '/programs/delete/' + state ['program'] ['id'], {}, {}, 302],
+        ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
     ]
 
