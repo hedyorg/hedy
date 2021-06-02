@@ -122,26 +122,32 @@ db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'], aws
 db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX')
 
 # Encode a dict so that it has the format expected by DynamoDB
-def db_encode (data, update=False):
+def db_encode (data):
     # update is a boolean flag which we use to detect whether we should format the payload for update_item
     processed_data = {}
     for key in data:
         if type_check (data [key], 'str'):
-            if update:
-                processed_data [key] = {'Value': {'S': data [key]}}
-            else:
-                processed_data [key] = {'S': data [key]}
+            processed_data [key] = {'S': data [key]}
         elif type_check (data [key], 'int'):
             # Note we convert the value into a string
-            if update:
-                processed_data [key] = {'Value': {'N': str (data [key])}}
-            else:
-                processed_data [key] = {'N': str (data [key])}
+            processed_data [key] = {'N': str (data [key])}
         elif data [key] == None:
-            if update:
-                processed_data [key] = {'Action': 'DELETE'}
-            else:
-                processed_data [key] = {'NULL': True}
+            processed_data [key] = {'NULL': True}
+        else:
+            raise ValueError ('Unsupported type passed to db_put')
+    return processed_data
+
+# Encode a dict so that it has the format expected by DynamoDB
+def db_encode_updates (data):
+    processed_data = {}
+    for key in data:
+        if type_check (data [key], 'str'):
+            processed_data [key] = {'Value': {'S': data [key]}}
+        elif type_check (data [key], 'int'):
+            # Note we convert the value into a string
+            processed_data [key] = {'Value': {'N': str (data [key])}}
+        elif data [key] == None:
+            processed_data [key] = {'Action': 'DELETE'}
         else:
             raise ValueError ('Unsupported type passed to db_put')
     return processed_data
@@ -222,7 +228,7 @@ def db_create (table, data):
 @querylog.timed
 def db_update (table, data):
     querylog.log_counter('db_update:' + table)
-    return db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode (db_key (table, data, True), True))
+    return db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode_updates (db_key (table, data, True)))
 
 # Deletes an item by primary key.
 @querylog.timed
