@@ -691,6 +691,11 @@ def render_main_menu(current_page):
 
 # *** PROGRAMS ***
 
+@app.route('/programs_list', methods=['GET'])
+@requires_login
+def list_programs (user):
+    return {'programs': db_get_many ('programs', {'username': user ['username']}, True)}
+
 # Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
 @app.route('/programs/delete/<program_id>', methods=['GET'])
 @requires_login
