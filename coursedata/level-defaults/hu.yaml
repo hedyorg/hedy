@@ -1,10 +1,10 @@
 1:
     intro_text: |+
-        Üdvözlünk a Hedynél! Az első szinten a `print`, `ask` és `echo` parancsokat használhatod. 
+        Üdvözlünk a Hedynél! Az első szinten a `print`, `ask` és `echo` parancsokat használhatod.
 
         A baloldali sávban az 1. szint összes parancsát láthatod.
 
-        Nyomd meg a kék gombot és a kód megjelenik a programozási ablakban! 
+        Nyomd meg a kék gombot és a kód megjelenik a programozási ablakban!
 
         Próbáld ki a kódot a 'Kód futtatása' gomb megnyomásával a bal oldali programozási
         ablak alatt.
@@ -40,7 +40,7 @@
         ```
 
         A print utasítás úgy működik, mint az 1. szinten, de az echo utasításra már nem lesz
-        szükséged. 
+        szükséged.
 
         A 2. szinten készíthetsz listát is. Kérheted a számítógépet, hogy véletlenszerűen
         válasszon valamit a listából. Ezt az 'at random' utasítással teheted meg.
@@ -65,12 +65,12 @@
         explanation: "Válassz egy véletlen szót egy csoportból az `at` és `random` utasítással."
         example: "Példa: állatok is kutya, macska, kenguru."
         demo_code: |-
-            állatok is kutya, macska, kenguru 
+            állatok is kutya, macska, kenguru
             print állatok at random
 3:
     start_code: "print Helló világ "
     intro_text: |-
-        ask` ugyanolyan, a 3. szinten, mint eddig, de` print` most más lesz. 
+        ask` ugyanolyan, a 3. szinten, mint eddig, de` print` most más lesz.
 
         Amit ki akarsz íratni, idézőjelbe kell tenned.
 
@@ -117,7 +117,7 @@
         Ez a kód kiírja, hogy klassz, ha a Hedy nevet adod meg névként, és úhh-t, ha valami
         mást írsz be.
 
-        ####A feladatok egyre nehezebbek lesznek. 
+        ####A feladatok egyre nehezebbek lesznek.
 
         A feladatok a 4. szinten a füleken egyre nehezebbek lesznek. Csináld őket balról jobbra
         haladva.
@@ -141,7 +141,7 @@
 5:
     start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
     intro_text: |
-        ask`, `print` és `if` ugyanúgy működik mint a 4. szinten. 
+        ask`, `print` és `if` ugyanúgy működik mint a 4. szinten.
         De az 5. szinten megjelenik a `repeat` parancs. A ‘repeat’ utasítást parancsok
         ismételt végrehajtásánál lehet használni.
         ##Hedy code példa
@@ -176,7 +176,7 @@
 6:
     start_code: "print '5-ször 5 az ' 5 * 5"
     intro_text: |-
-        `ask`, `print`, `if` és `repeat` még mindig ugyanolyanok, mint a 4. és az 5. szinten. 
+        `ask`, `print`, `if` és `repeat` még mindig ugyanolyanok, mint a 4. és az 5. szinten.
         De a 6. szinten jön valami új, tudsz majd számolni.
 
         A 6. szinten új kódok jönnek, most már képes leszel számolni a kódodban.
@@ -219,11 +219,11 @@
             print 'Ez 5-szor lett kiírva'
     intro_text: |-
         ask és print még mindig úgy működik, ahogyan ismered. De az if és a repeat utasítások
-        megváltoztak! 
+        megváltoztak!
         Most különböző utasítások egy csoportját futtathatod egyszerre, de behúzással
         tagolnod kell a kódot.
         Ez azt jelenti, hogy négy szóközt kell tennünk a sor elejére. Ez akkor is érvényes, ha csak
-        egy sor blokkját akarod létrehozni. 
+        egy sor blokkját akarod létrehozni.
 
         ##Hedy Code példa
         ```
@@ -584,3 +584,34 @@
              print('Ezt ' 3 - szam ' alkalommal ismételjük')
              szam is szam + 1
             print('Készen vagyunk')
+18:
+    start_code: |-
+        lista is ['első', 'második', 'harmadik']
+        masodikertek is lista[2]
+        print(masodikertek)
+    intro_text: Ha van egy listánk, akkor kivehetünk egy adott értéket a listából. Ha a második elemet akarjuk kivenni a listából, akkor beírjuk a `lista [2]` parancsot.
+    commands:
+    -   name: Számolás
+        explanation: Összegezhetjük az egy listában szereplő összes értéket is
+        example: lista[1]
+        demo_code: |-
+            lista is ['1', '2', '3']
+            osszeg is lista[1] + lista[2]
+            osszeg is osszeg + lista[3]
+            # itt 6-ra számítunk
+            print(osszeg)
+19:
+    start_code: |-
+        gyumolcs is ['alma', 'banán', 'cseresznye']
+        for i in range(1, 3):
+            print(gyumolcs[i])
+    intro_text: A for ciklussal egy listában is mindent láthatunk. Mivel a listában három dolog van, a ciklust 1-től 3-ig vesszük. Most mindent kiíratunk a ciklusban.
+    commands:
+    -   name: Lista hossza
+        explanation: A `hosszúsággal 'láthatjuk a lista méretét. A példában szereplő lista hossza 3, mert három dolog van a lis-ben
+        example: length(lista)
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            print('a lista hossza ' length(gyumolcs))
+            for i in range(1, length(gyumolcs)):
+                print(gyumolcs[i])
