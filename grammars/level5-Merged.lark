@@ -1,6 +1,6 @@
 start: program
 program: _EOL* (command | invalid) (" ")* (_EOL+ (command | invalid) (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: print | ifelse | ifs | ask | assign_list | list_access_var | assign | print_no_quotes
+command: print | repeat | ifelse | ifs | ask | assign_list | list_access_var | assign | invalid
 print: "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*
 ask: var " is ask " textwithspaces*
 echo: "echo" (" " text)?
@@ -34,3 +34,4 @@ list_access_var: var " is " var " at " (index | random)
 equality_check: textwithoutspaces " is " textwithoutspaces
 in_list_check: textwithoutspaces " in " var
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+repeat: "repeat " (NUMBER | var) " times " command

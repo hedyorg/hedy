@@ -1023,7 +1023,7 @@ def create_grammar(level, sub):
         # we start with creating the grammar for level 1
         grammar_text_1 = get_full_grammar_for_level(1)
 
-        if level == 1 or level >= 5: #left here for now so we can still run higher levels in the normal way to test
+        if level == 1 or level >= 7: #left here for now so we can still run higher levels in the normal way to test
             grammar_text = get_full_grammar_for_level(level)
             return grammar_text
 

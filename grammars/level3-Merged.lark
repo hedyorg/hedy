@@ -22,7 +22,7 @@ index : NUMBER //different why?
 random : "random"
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
-list_access : var " at " (index | random) -> list_access
+list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 var: NAME -> var
 print_no_quotes: "print " (" "| list_access | textwithoutspaces | punctuation)*  -> print_nq
 quoted_text_no_escape: /'([^']*)'/ -> text //simply all between quotes should this be used at earlier levels?
