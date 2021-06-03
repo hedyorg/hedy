@@ -27,6 +27,7 @@ import utils
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response
 from flask_helpers import render_template
 from flask_compress import Compress
+from flask_talisman import Talisman
 
 # Hedy-specific modules
 import courses
@@ -134,6 +135,40 @@ logging.basicConfig(
 
 
 app = Flask(__name__, static_url_path='')
+
+# set the security stuff https://github.com/GoogleCloudPlatform/flask-talisman
+content_security_policy = {
+    'default-src': [
+        '\'self\'',
+        '*.cloudfront.net',
+        'youtube.com',
+    ],
+    'font-src': [
+        'fonts.googleapis.com',
+        'fonts.gstatic.com',
+    ],
+    'frame-src': [
+        'www.youtube.com',
+    ],
+    'img-src': [
+        '\'self\'',
+        'data:',
+    ],
+    'script-src': [
+        '\'self\'',
+        's3.amazonaws.com',
+        '\'unsafe-inline\'',
+        '\'unsafe-eval\'',
+    ],
+    'style-src': [
+        '\'self\'',
+        '\'unsafe-inline\'',
+        'cdn-images.mailchimp.com',
+        'fonts.googleapis.com',
+    ],
+}
+Talisman(app, content_security_policy=content_security_policy)
+
 # Ignore trailing slashes in URLs
 app.url_map.strict_slashes = False
 
@@ -156,16 +191,6 @@ def before_request_proxy_testing():
     if utils.is_testing_request (request):
         if os.getenv ('IS_TEST_ENV'):
             session ['test_session'] = 'test'
-
-# HTTP -> HTTPS redirect
-# https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
-if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
-    @app.before_request
-    def before_request_https():
-        if request.url.startswith('http://'):
-            url = request.url.replace('http://', 'https://', 1)
-            # We use a 302 in case we need to revert the redirect.
-            return redirect(url, code=302)
 
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
