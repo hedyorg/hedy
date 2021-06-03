@@ -417,7 +417,7 @@ class ConvertToPython_1(Transformer):
     def program(self, args):
         return '\n'.join([str(c) for c in args])
     def command(self, args):
-        return args
+        return args[0]
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
@@ -962,15 +962,86 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
+def merge_grammars(grammar_text_1, grammar_text_2):
+    # this function takes two grammar files and merges them into one
+    # rules that are redefined in the second file are overridden
+    # rule that are new in the second file are added (remaining_rules_grammar_2)
+
+    merged_grammar = ''
+
+    rules_grammar_1 = grammar_text_1.split('\n')
+    remaining_rules_grammar_2 = grammar_text_2.split('\n')
+    for line_1 in rules_grammar_1:
+        if line_1 == '' or line_1[0] == '/': #skip comments and empty lines:
+            continue
+        parts = line_1.split(':')
+        name_1, definition_1 = parts[0], ''.join(parts[1:]) #get part before are after : (this is a join because there can be : in the rule)
+
+        rules_grammar_2 = grammar_text_2.split('\n')
+        override_found = False
+        for line_2 in rules_grammar_2:
+            if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
+                continue
+            parts = line_2.split(':')
+            name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+            if name_1 == name_2:
+                override_found = True
+                new_rule = line_2
+                # this rule is now in the grammar, remove form this list
+                remaining_rules_grammar_2.remove(new_rule)
+                break
+
+        # new rule found? print that. nothing found? print org rule
+        if override_found:
+            merged_grammar += new_rule
+        else:
+            merged_grammar += line_1
+        merged_grammar += '\n'
+
+    #all rules that were not overlapping are new in the grammar, add these too
+    for rule in remaining_rules_grammar_2:
+        if not(rule == '' or rule[0] == '/'):
+            merged_grammar += rule
+            merged_grammar += '\n'
+
+    return merged_grammar
+
+
 def create_grammar(level, sub):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
+
     if sub:
-        filename = "level" + str(level) + "-" + str (sub) + ".lark"
+      filename = "level" + str(level) + "-" + str (sub) + ".lark"
+      with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+          return file.read()
     else:
-        filename = "level" + str(level) + ".lark"
+
+        # Load Lark grammars relative to directory of current file
+        script_dir = path.abspath(path.dirname(__file__))
+
+        # we start with creating the grammar for level 1
+        grammar_text_1 = get_grammar_for_level(1)
+
+        if level == 1:
+            return grammar_text_1
+
+        grammar_text_2 = get_grammar_for_level(2)
+
+        #start at 1 and keep merging new grammars in
+        new = merge_grammars(grammar_text_1, grammar_text_2)
+
+        for i in range(2, level):
+            new = merge_grammars(new, i)
+
+    return new
+
+def get_grammar_for_level(level):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "level" + str(level) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        return file.read()
+        grammar_text = file.read()
+    return grammar_text
 
 
 PARSER_CACHE = {}
@@ -985,7 +1056,9 @@ def get_parser(level, sub):
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    ret = Lark(create_grammar(level, sub))
+    grammar = create_grammar(level, sub)
+    print(grammar)
+    ret = Lark(grammar)
     PARSER_CACHE[key] = ret
     return ret
 
