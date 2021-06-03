@@ -865,7 +865,6 @@ auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 if __name__ == '__main__':
-<<<<<<< HEAD
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
@@ -875,7 +874,3 @@ if __name__ == '__main__':
     app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
-=======
-    # Only for local development, production server is started via `gunicorn`
-    app.run(threaded=True, debug=True, port=config['port'], host="0.0.0.0")
->>>>>>> 71d64f8 (revert the https redirect block and simplify local run)
