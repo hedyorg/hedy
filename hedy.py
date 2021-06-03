@@ -1021,28 +1021,44 @@ def create_grammar(level, sub):
         script_dir = path.abspath(path.dirname(__file__))
 
         # we start with creating the grammar for level 1
-        grammar_text_1 = get_grammar_for_level(1)
+        grammar_text_1 = get_full_grammar_for_level(1)
 
-        if level == 1:
-            return grammar_text_1
+        if level == 1 or level >= 5: #left here for now so we can still run higher levels in the normal way to test
+            grammar_text = get_full_grammar_for_level(level)
+            return grammar_text
 
-        grammar_text_2 = get_grammar_for_level(2)
+        grammar_text_2 = get_partial_grammar_for_level(2)
 
         #start at 1 and keep merging new grammars in
         new = merge_grammars(grammar_text_1, grammar_text_2)
 
-        for i in range(2, level):
-            new = merge_grammars(new, i)
+        for i in range(3, level+1):
+            grammar_text_i = get_partial_grammar_for_level(i)
+            new = merge_grammars(new, grammar_text_i)
+
+        # ready? Save to file to ease debugging
+        # this could also be done on each merge for performance reasons
+        filename = "level" + str(level) + "-Merged.lark"
+        loc = path.join(script_dir, "grammars", filename)
+        file = open(loc, "w", encoding="utf-8")
+        file.write(new)
+        file.close()
 
     return new
 
-def get_grammar_for_level(level):
+def get_partial_grammar_for_level(level):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "level" + str(level) + "-Partial.lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
+
+def get_full_grammar_for_level(level):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "level" + str(level) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
-
 
 PARSER_CACHE = {}
 
@@ -1057,7 +1073,6 @@ def get_parser(level, sub):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, sub)
-    print(grammar)
     ret = Lark(grammar)
     PARSER_CACHE[key] = ret
     return ret

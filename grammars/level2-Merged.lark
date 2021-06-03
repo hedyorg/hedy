@@ -1,0 +1,26 @@
+start: program
+program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+command: print | ask | assign | assign_list | invalid_space | invalid
+print: "print " (" "| list_access | textwithoutspaces | punctuation)*
+ask: var " "+ "is ask " + (" " | text | punctuation)*
+echo: "echo" (" " text)?
+invalid_space: " "+ text
+invalid: textwithoutspaces text?
+_EOL: "\r"?"\n"
+text: /([^\r\n,!?.]+)/ -> text
+textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+SPACE: " "
+%import common.LETTER
+%import common.DIGIT
+%import common.WS_INLINE
+%import common.NEWLINE
+%import common.SIGNED_INT -> NUMBER
+%import common.CNAME -> NAME
+assign: var " is " text -> assign
+assign_list: var " is " text ((", "|",") text)+
+index : DIGIT+
+random : "random"
+punctuation : PUNCTUATION -> punctuation
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+list_access : var " at " (index | random) -> list_access
+var: NAME -> var
