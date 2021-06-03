@@ -21,7 +21,6 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt
 import utils
 import hashlib
 
@@ -36,6 +35,8 @@ import hedyweb
 import translating
 import querylog
 import aws_helpers
+from utils import timems, type_check, object_check, load_yaml, load_yaml_rt, dump_yaml_rt
+from utils import db_init, db_get, db_get_many, db_set, db_del
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -866,6 +867,8 @@ auth.routes (app, requested_lang)
 # *** START SERVER ***
 
 if __name__ == '__main__':
+    db_init()
+
     # Threaded option to enable multiple instances for multiple user access support
     if version() == 'DEV':
         app.run(threaded=True, port=config ['port'], host="0.0.0.0")
