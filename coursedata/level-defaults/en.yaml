@@ -556,3 +556,84 @@
             print('length of list is ' length(fruit))
             for i in range(1, length(fruit)):
                 print(fruit[i])
+20:
+    start_code: |-
+        print('What is 5+3?')
+        answer = 5+3
+        print('answer is now:')
+        print(answer)
+        if answer == 8:
+            print('That is correct!')
+        else:
+            print('Oh no, that is wrong!')
+    intro_text: "Now we are going to change is into `=` and `==`. We use `=` if we want to assign a value to a variable. If you want to assign 8 to the variable called anser, we do answer = 8. `==` we use when we want to see if two things are the same."
+    commands:
+    -   name: "Compare"
+        explanation: "If we want to compare, we use ==. 5+3 == 8 checks if 5+3 equals 8"
+        example: "For example: 5+3 == 8"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 is indeed 8')
+            else:
+                print('This will not be printed because 5+3 is 8!')
+    -   name: "Assign Value"
+        explanation: "If we want to say that a variable called answer is 8, we do answer = 8."
+        example: "For example: answer = 8"
+        demo_code: |-
+            print('What is 5+3?')
+            answer = 5+3
+            print('answer is now:')
+            print(answer)
+    -   name: "Compare and assign value"
+        explanation: "If we are going to compare two values, we use `==`. If we are going to assign a variable, we use `=`. "
+        example: "For example: 5+3 == 8, answer = 8"
+        demo_code: |-
+            print('What is 5+3?')
+            answer = 5+3
+            print('answer is now:')
+            print(answer)
+            if answer == 8:
+                print('That is correct!')
+            else:
+                print('No, that is wrong!')
+21:
+    start_code: |-
+        country = input('Where do you live?')
+        if land != Netherlands:
+            print('Cool!')
+        else:
+            print('I am also from the Netherlands!')
+    intro_text: "We are going to learn a new item, the `!=` . The ! means not and the = means equal so != means not equal. For example 5 != 4."
+    commands:
+    -   name: "Not equal"
+        explanation: "If we are checking if two things are not equal, we use `!=`"
+        example: "For example: 5+3 != 9"
+        demo_code: |-
+            number = input('You are not allowed to say 5, what is a cool number?')
+            if getal != 5:
+                print('Good job!')
+            else:
+                print('You were not allowed to say 5!')
+22:
+    start_code: |-
+        age = input('I am 12 years old, how old are you?')
+        if age <= 11:
+            print('You are younger than I am!')
+        elif age >= 13:
+            print('You are older than I am!')
+    intro_text: "We are going to combine < and = now. If we want to see if something is smaller or equal than the second number, we use `<=`. We can also check if something is bigger or equal than the second number with `>=`."
+    commands:
+    -   name: "Smaller equal"
+        explanation: "`<=` checks if the number on the left of the `<=` is smaller or equal than the one on the right. So 5 < 5 is not true because 5 is not smaller than 5 but 5 <= 5 is true because 5 is smaller or equal to 5. 6 <= 5 is not true."
+        example: "For example: age <= 12"
+        demo_code: |-
+            age = input('I am 13 years old, how old are you?')
+            if age <= 12:
+                print('You are younger than I am!')
+    -   name: "Larger equal"
+        explanation: "`>=` checks if the number on the left of the `>=` is bigger or equal than the one on the right. So 5 > 5 is not true because 5 is not bigger than 5 but 5 >= 5 is true because 5 is smaller or equal to 5. 4 >= 5 is not true."
+        example: "For example: age >= 12"
+        demo_code: |-
+            age = input('I am 11 years old, how old are you?')
+            if age >= 12:
+                print('You are older than I am!')
