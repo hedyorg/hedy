@@ -192,6 +192,16 @@ def before_request_proxy_testing():
         if os.getenv ('IS_TEST_ENV'):
             session ['test_session'] = 'test'
 
+# HTTP -> HTTPS redirect
+# https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
+if os.getenv ('REDIRECT_HTTP_TO_HTTPS'):
+    @app.before_request
+    def before_request_https():
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            # We use a 302 in case we need to revert the redirect.
+            return redirect(url, code=302)
+
 # Unique random key for sessions.
 # For settings with multiple workers, an environment variable is required, otherwise cookies will be constantly removed and re-set by different workers.
 if utils.is_production():
@@ -854,8 +864,8 @@ import auth
 auth.routes (app, requested_lang)
 
 # *** START SERVER ***
-
 if __name__ == '__main__':
+<<<<<<< HEAD
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
@@ -865,3 +875,7 @@ if __name__ == '__main__':
     app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
+=======
+    # Only for local development, production server is started via `gunicorn`
+    app.run(threaded=True, debug=True, port=config['port'], host="0.0.0.0")
+>>>>>>> 71d64f8 (revert the https redirect block and simplify local run)
