@@ -138,7 +138,7 @@ def routes (app, requested_lang):
             return 'password must be at least six characters long', 400
         if not object_check (body, 'email', 'str'):
             return 'email must be a string', 400
-        if not re.match ('^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', body ['email']):
+        if not valid_email (body ['email']):
             return 'email must be a valid email', 400
         # Validations, optional fields
         if 'country' in body:
@@ -298,7 +298,7 @@ def routes (app, requested_lang):
         if 'email' in body:
             if not object_check (body, 'email', 'str'):
                 return 'body.email must be a string', 400
-            if not re.match ('^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', body ['email']):
+            if not valid_email (body ['email']):
                 return 'body.email must be a valid email', 400
         if 'country' in body:
             if not body ['country'] in countries:
@@ -414,6 +414,8 @@ def routes (app, requested_lang):
 
         return '', 200
 
+    # *** ADMIN ROUTES ***
+
     @app.route ('/admin/markAsTeacher', methods=['POST'])
     def mark_as_teacher ():
         if not is_admin (request):
@@ -435,6 +437,42 @@ def routes (app, requested_lang):
             return 'invalid username', 400
 
         db_update ('users', {'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
+
+        return '', 200
+
+    @app.route ('/admin/changeUserEmail', methods=['POST'])
+    def change_user_email():
+        if not is_admin (request):
+            return 'unauthorized', 403
+
+        body = request.json
+
+        # Validations
+        if not type_check (body, 'dict'):
+            return 'body must be an object', 400
+        if not object_check (body, 'username', 'str'):
+            return 'body.username must be a string', 400
+        if not object_check (body, 'email', 'str'):
+            return 'body.email must be a string', 400
+        if not valid_email (body ['email']):
+            return 'email must be a valid email', 400
+
+        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+
+        if not user:
+            return 'invalid username', 400
+
+        token = make_salt ()
+        hashed_token = hash (token, make_salt ())
+
+        # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
+        db_set ('users', {'username': user ['username'], 'email': body ['email'], 'verification_pending': hashed_token})
+
+        # If this is an e2e test, we return the email verification token directly instead of emailing it.
+        if is_testing_request (request):
+           resp = {'username': user ['username'], 'token': hashed_token}
+        else:
+            send_email_template ('welcome_verify', body ['email'], requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         return '', 200
 

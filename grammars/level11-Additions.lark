@@ -1,0 +1,8 @@
+// level 11 adds brackets to for and print and changes ask to input
+
+command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | assign
+
+print: "print(" (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))* ")"
+input: var " is input("  (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*  ")"
+
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var) (", "|",") (NUMBER | var) ((", "|",") (NUMBER | var))? "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
