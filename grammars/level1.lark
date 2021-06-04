@@ -7,6 +7,11 @@ _LEFT_BRACKET : "("
 _RIGHT_BRACKET : ")"
 _LEFT_SQUARE_BRACKET : "["
 _RIGHT_SQUARE_BRACKET : "]"
+_HASH: "#"
+_SMALLER : "<"
+_LARGER: ">"
+_EQUALS: "="
+_DOUBLE_EQUALS: "=="
 
 _PRINT : "print"
 _ASK : "ask"
@@ -44,6 +49,14 @@ _ELIF: "elif"
 //level 11
 _INPUT: "input"
 
+//level 14
+_OR: "or"
+
+//level 17
+_WHILE: "while"
+
+//level 19
+_LENGTH: "length"
 
 start: program
 program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
