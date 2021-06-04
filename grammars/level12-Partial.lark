@@ -1,0 +1,18 @@
+// Level 12 adds square brackets around lists
+// string list elements also need single quotation marks (') now
+
+// and list items can be assigned to
+
+command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item | assign
+
+assign: var " is " sum | var " is " textwithoutspaces | list_access " is " sum | list_access " is " textwithoutspaces
+assign_list: var " is [" quoted_text ((", "|",") quoted_text)+ "]"
+
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) ((", "|",") (NUMBER | var))? "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+
+//new for level 12, assignment of list[i]
+change_list_item : var "[" (index | var) "] is " (var | textwithoutspaces)
+
+list_access : var "[" (index | random | var) "]"
+list_access_var: var " is " var "[" (index | random | var) "]"
+equality_check: (textwithoutspaces | list_access) " is " (textwithoutspaces | list_access)
