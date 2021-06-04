@@ -1,0 +1,10 @@
+// Level 14 adds and and or
+
+ifs: "if " (condition|andcondition|orcondition) ":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+elifs: _EOL (" ")* "elif " (condition|andcondition|orcondition) ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+condition: (equality_check|in_list_check)
+
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+
+andcondition: (equality_check|in_list_check) (" and " condition)*
+orcondition: (equality_check|in_list_check) (" or " condition)*
