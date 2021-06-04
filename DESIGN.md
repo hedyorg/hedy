@@ -193,11 +193,11 @@ In level 12, learners encounter different types of brackets for the
 first time, because it adds rectangular brackets for list access, which
 up to now was done with the keyword [`at`], following Design Goal 2.
 
-### Level 13: booleans
+### Level 13: Booleans
 
 In level 13, booleans are added. Learners encounter True and False and how to use them in if statements
 
-### Level 14: and and or
+### Level 14: And and or
 
 In level 14, Learners learn about and and or in if statements. 
 
@@ -205,13 +205,38 @@ In level 14, Learners learn about and and or in if statements.
 
 In level 15, comments are introduced. The learner will now know how to comment code
 
-### Level 16: smaller and bigger
+### Level 16: Smaller and bigger
 
 In level 16, Learners learn about < and > in preparation for while loops
 
-### Level 17: while loops
+### Level 17: While loops
 
 In level 17, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
 can make basic while loops.
 
+### Level 18: Access specific value in list
 
+In level 18, learners are shown how to get a specific value from a list. The code to access a specific
+value has already been available for a while but there was no explanation yet how to access a specific
+value.
+
+### Level 19: Loop through all values in lists
+
+In level 19, learners are shown how to loop through a list. The length() function is also introduced,
+as it makes looping through a list easier. The code to loop through a list has already been available since
+the for loop was introduced but there was no explanation yet how to loop through the list.
+
+### Level 20: Change is to = and ==
+
+In level 20, we introduce the = and ==. All variable assignments change is to =. All equality checks
+turn into ==. 
+
+### Level 21: Introducing !=
+
+In level 21, we introduce the != in the equality checks. This is introduced after the change to = and
+== as to make it easier to understand when you already know the syntax for =. 
+
+### Level 22: Introducing <= and >=
+
+In level 22, we introduce <= and >=. This is introduced after the change to = and
+== as to make it easier to understand when you already know the syntax for =. 
