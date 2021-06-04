@@ -1,26 +1,26 @@
-start: program
-program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: print | ask | assign | assign_list | invalid_space | invalid
-print: "print " (" "| list_access | textwithoutspaces | punctuation)*
-ask: var " "+ "is ask " + (" " | text | punctuation)*
-echo: "echo" (" " text)?
-invalid_space: " "+ text
-invalid: textwithoutspaces text?
-_EOL: "\r"?"\n"
-text: /([^\r\n,!?.]+)/ -> text
-textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-SPACE: " "
-%import common.LETTER
+%import common.CNAME -> NAME
 %import common.DIGIT
-%import common.WS_INLINE
+%import common.LETTER
 %import common.NEWLINE
 %import common.SIGNED_INT -> NUMBER
-%import common.CNAME -> NAME
+%import common.WS_INLINE
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+SPACE: " "
+_EOL: "\r"?"\n"
+ask: var " "+ "is ask " + (" " | text | punctuation)*
 assign: var " is " text -> assign
 assign_list: var " is " text ((", "|",") text)+
+command: print | ask | assign | assign_list | invalid_space | invalid
+echo: "echo" (" " text)?
 index : DIGIT+
-random : "random"
+invalid: textwithoutspaces text?
+invalid_space: " "+ text
+list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+print: "print " (" "| list_access | textwithoutspaces | punctuation)*
+program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
 punctuation : PUNCTUATION -> punctuation
-PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
-list_access : var " at " (index | random) -> list_access
+random : "random"
+start: program
+text: /([^\r\n,!?.]+)/ -> text
+textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 var: NAME -> var

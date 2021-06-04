@@ -1,0 +1,12 @@
+// adds length of lists
+
+print: "print(" (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))* ")"
+input: var " is input("  (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))*  ")"
+assign: var " is " length | var " is " sum | var " is " textwithoutspaces | list_access " is " sum | list_access " is " textwithoutspaces
+equality_check: (length | textwithoutspaces | list_access) " is " (length | textwithoutspaces | list_access)
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var | length)(", "|",") (NUMBER | var | length) "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+smaller: (textwithoutspaces | list_access | length) " < " (textwithoutspaces | list_access | length)
+bigger: (textwithoutspaces | list_access | length) " > " (textwithoutspaces | list_access | length)
+length: "length(" var ")"
+list_access: var "[" (index | random | var | length) "]"
+

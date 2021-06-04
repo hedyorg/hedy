@@ -26,7 +26,7 @@ in_list_check: textwithoutspaces " in " var
 index : NUMBER //different why?
 invalid: textwithoutspaces " " textwithspaces
 invalid_space: " "+ text
-list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 list_access_var: var " is " var " at " (index | random)
 print: "print " (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*
 print_no_quotes: "print " (textwithoutspaces | list_access | var) (" " (textwithoutspaces | list_access | var))*  -> print_nq

@@ -5,7 +5,7 @@ from os import path
 import sys
 import utils
 
-reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
+reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
 #
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
@@ -716,9 +716,11 @@ class ConvertToPython_13(ConvertToPython_12):
                 if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
-                    if value == 'true' or value == 'True':
+                    # FH, June 21 the addition of _true/false is a bit of a hack. cause they are first seen as vars that at reserved words, they egt and _ and we undo that here.
+                    # could/should be fixed in the grammar!
+                    if value == 'true' or value == 'True' or value == '_True':
                         return parameter + " = True"
-                    elif value == 'false' or value == 'False':
+                    elif value == 'false' or value == 'False' or value == '_False':
                         return parameter + " = False"
                     else:
                         return parameter + " = '" + value + "'"
@@ -1022,7 +1024,8 @@ def create_grammar(level, sub):
         # we start with creating the grammar for level 1
         grammar_text_1 = get_full_grammar_for_level(1)
 
-        if level == 1 or level > 12: #left here for now so we can still run higher levels in the normal way to test
+        #grep
+        if level == 1:
             grammar_text = get_full_grammar_for_level(level)
             return grammar_text
 

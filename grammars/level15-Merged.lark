@@ -10,19 +10,21 @@
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 SPACE: " "
 _EOL: "\r"?"\n"
+andcondition: (equality_check|in_list_check) (" and " condition)*
 ask: var " is ask " textwithspaces*
 assign: var " is " sum | var " is " textwithoutspaces | list_access " is " sum | list_access " is " textwithoutspaces
 assign_list: var " is [" quoted_text ((", "|",") quoted_text)+ "]"
 change_list_item: var "[" (index | var) "] is " (var | textwithoutspaces)
-command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item | assign
-condition: (equality_check|in_list_check) (" and " condition)*
+command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item| comment | assign
+comment: "#" (textwithspaces)*
+condition: (equality_check|in_list_check)
 echo: "echo" (" " text)?
-elifs: _EOL (" ")* "elif " condition ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+elifs: _EOL (" ")* "elif " (condition|andcondition|orcondition) ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 elses: _EOL (" ")* "else"":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 equality_check: (textwithoutspaces | list_access) " is " (textwithoutspaces | list_access)
-for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) ((", "|",") (NUMBER | var))? "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var)(", "|",") (NUMBER | var) "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 ifelse: "if " condition " " command " else " command
-ifs: "if " condition ":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"//'if' cannot be used in Python, hence the name of the rule is 'ifs'
+ifs: "if " (condition|andcondition|orcondition) ":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 in_list_check: textwithoutspaces " in " var
 index : NUMBER //different why?
 input: var " is input("  (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*  ")"
@@ -30,6 +32,7 @@ invalid: textwithoutspaces " " textwithspaces
 invalid_space: " "+ text
 list_access: var "[" (index | random | var) "]"
 list_access_var: var " is " var "[" (index | random | var) "]"
+orcondition: (equality_check|in_list_check) (" or " condition)*
 print: "print(" (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))* ")"
 print_no_quotes: "print " (textwithoutspaces | list_access | var) (" " (textwithoutspaces | list_access | var))*  -> print_nq
 program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines

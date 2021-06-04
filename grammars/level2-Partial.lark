@@ -17,7 +17,7 @@ random : "random"
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
 
-list_access : var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 
 var: NAME -> var
 
