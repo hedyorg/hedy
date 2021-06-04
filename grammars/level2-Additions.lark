@@ -1,0 +1,23 @@
+command: print | ask | assign | assign_list | invalid_space | invalid
+
+print: "print " (" "| list_access | textwithoutspaces | punctuation)*
+ask: var " "+ "is ask " + (" " | text | punctuation)*
+assign: var " is " text -> assign
+assign_list: var " is " text ((", "|",") text)+
+invalid_space: " "+ text
+
+//in Level 2 we need to treat punctuation differently, since it can be used to separate arguments (variables)
+
+textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+text: /([^\r\n,!?.]+)/ -> text
+
+index : DIGIT+
+random : "random"
+
+punctuation : PUNCTUATION -> punctuation
+PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+
+list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+
+var: NAME -> var
+

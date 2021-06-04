@@ -22,7 +22,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import db_get, db_get_many, db_create, db_update, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -846,6 +846,11 @@ def render_main_menu(current_page):
 
 # *** PROGRAMS ***
 
+@app.route('/programs_list', methods=['GET'])
+@requires_login
+def list_programs (user):
+    return {'programs': db_get_many ('programs', {'username': user ['username']}, True)}
+
 # Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
 @app.route('/programs/delete/<program_id>', methods=['GET'])
 @requires_login
@@ -857,7 +862,7 @@ def delete_program (user, program_id):
     program_count = 0
     if 'program_count' in user:
         program_count = user ['program_count']
-    db_set ('users', {'username': user ['username'], 'program_count': program_count - 1})
+    db_update ('users', {'username': user ['username'], 'program_count': program_count - 1})
     return redirect ('/programs')
 
 @app.route('/programs', methods=['POST'])
@@ -919,12 +924,12 @@ def save_program (user):
     if 'adventure_name' in body:
         stored_program ['adventure_name'] = body ['adventure_name']
 
-    db_set('programs', stored_program)
+    db_create('programs', stored_program)
 
     program_count = 0
     if 'program_count' in user:
         program_count = user ['program_count']
-    db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
+    db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({'name': name})
 
