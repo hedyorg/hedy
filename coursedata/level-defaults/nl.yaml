@@ -331,9 +331,9 @@
     start_code: |-
         leeftijd is input('Hoe oud ben jij?')
         print('Dus jij hebt zo veel verjaardagen gehad:')
-        for i in range(0,leeftijd):
+        for i in range(0, leeftijd):
             print(i)
-    intro_text: "We gaan nu ronde haakjes toevoegen en ask veranderen! Ask noemen we nu input! Bij print, ask en for gaan we nu haakjes zetten!"
+    intro_text: "We gaan nu ronde haakjes toevoegen en ask veranderen! Ask noemen we nu input! Bij print, input en for gaan we nu haakjes zetten!"
     commands:
     -   name: "Print"
         explanation: "We gaan nu haakjes om print heen zetten!"
@@ -341,15 +341,15 @@
         demo_code: "print('Hallo Wereld')"
     -   name: "Ask naar input!"
         explanation: "We zetten ask om en noemen het nu input, ook zetten we haakjes er omheen"
-        example: "Bijvoorbeeld: antwoord is input('Hoe heet jij?')"
+        example: "Bijvoorbeeld: naam is input('Hoe heet jij?')"
         demo_code: |-
-            antwoord is input('Hoe heet jij?')
-            print('Dus jij heet ' antwoord)
+            naam is input('Hoe heet jij?')
+            print('Dus jij heet ' naam)
     -   name: "For met haakjes"
-        explanation: "We gaan nu in plaats van for i in range 1 to 10, haakjes zetten om de getallen. for i in range(0,10):"
-        example: "Bijvoorbeeld: for i in range(0,10):"
+        explanation: "We gaan nu in plaats van for i in range 1 to 10, haakjes zetten om de getallen. for i in range(0, 10):"
+        example: "Bijvoorbeeld: for i in range(0, 10):"
         demo_code: |-
-            for i in range(0,10):
+            for i in range(0, 10):
                 print(i)
             print('Wie niet weg is is gezien')
 12:
@@ -394,7 +394,7 @@
         explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goed_antwoord `True` (dus waar)"
         example: "goed_antwoord is `False`"
         demo_code: |-
-            for i in range(0,5):
+            for i in range(0, 5):
                 goed_antwoord is False
                 antwoord is input('Wat is 5*5')
                 if antwoord is 25:
@@ -439,7 +439,7 @@
 15:
     start_code: |-
         # Dit is een programma die een aantal sommen gaat vragen
-        for i in range(1,10):
+        for i in range(1, 10):
             # We gaan de van de tafel van 5 vragen
             antwoord is input('Hoeveel is ' i ' keer 5?')
             # We kijken of de som gelijk is aan het antwoord
@@ -544,3 +544,84 @@
             print('lengte van de lijst is ' length(fruit))
             for i in range(1, length(fruit)):
                 print(fruit[i])
+20:
+    start_code: |-
+        print('Hoeveel is 5+3?')
+        antwoord = 5+3
+        print('antwoord is nu:')
+        print(antwoord)
+        if antwoord == 8:
+            print('Dat is goed!')
+        else:
+            print('Helaas dat is fout!')
+    intro_text: "Nu veranderen we is in `=` en `==`. Je gebruikt `=` als je iets een getal wilt maken. Als je bijvoorbeeld antwoord 8 wilt maken zeg je antwoord = 8. `==` gebruik je om te kijken of twee dingen hetzelfde zijn."
+    commands:
+    -   name: "Vergelijken"
+        explanation: "Als we gaan vergelijken gebruiken we dus ==. 5+3 == 8 kijkt dus of 5+3 gelijk is aan 8"
+        example: "Bijvoorbeeld: 5+3 == 8"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 is inderdaad 8')
+            else:
+                print('Dit wordt niet geprint want 5+3 is 8!')
+    -   name: "Waarde geven"
+        explanation: "Als we willen zeggen dat een variabele genaamd antwoord 8 is, dan doen we antwoord = 8."
+        example: "Bijvoorbeeld: antwoord = 8"
+        demo_code: |-
+            print('Hoeveel is 5+3?')
+            antwoord = 5+3
+            print('antwoord is nu:')
+            print(antwoord)
+    -   name: "Vergelijken en waarde geven"
+        explanation: "Als we gaan vergelijken gebruiken we dus `==`. Als we een waarde geven dan gebruiken we `=`. "
+        example: "Bijvoorbeeld: antwoord == 8, antwoord = 8"
+        demo_code: |-
+            print('Hoeveel is 5+3?')
+            antwoord = 5+3
+            print('antwoord is nu:')
+            print(antwoord)
+            if antwoord == 8:
+                print('Dat is goed!')
+            else:
+                print('Helaas dat is fout!')
+21:
+    start_code: |-
+        land = input('In welk land woon jij?')
+        if land != Nederland:
+            print('Cool!')
+        else:
+            print('Ik kom ook uit Nederland!')
+    intro_text: "We gaan een nieuw teken leren, de `!=` . De ! betekent niet en de = betekent gelijk dus != is niet gelijk. Als voorbeeldje is 5 != 4."
+    commands:
+    -   name: "Niet gelijk"
+        explanation: "Als we gaan kijken of dingen anders zijn, gebruiken we dus `!=`"
+        example: "Bijvoorbeeld: 5+3 != 9"
+        demo_code: |-
+            getal = input('Je mag geen 5 zeggen, wat is een leuk getal?')
+            if getal != 5:
+                print('Goed zo!')
+            else:
+                print('Fout! Je mocht geen 5 zeggen')
+22:
+    start_code: |-
+        leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
+        if leeftijd <= 11:
+            print('Dan ben je jonger dan ik!')
+        elif leeftijd >= 13:
+            print('Dan ben je ouder dan ik!')
+    intro_text: "Nu gaan we < en = combineren. Als we willen kijken of iets kleiner of gelijk aan het tweede getal is dan gebruiken we `<=`. Hetzelfde kunnen we doen met `>=`"
+    commands:
+    -   name: "Kleiner gelijk"
+        explanation: "De `<=` kijkt dus of het eerste getal kleiner of gelijk is aan het tweede getal. Dus 5 < 5 is niet waar want 5 is niet kleiner dan 5 maar 5 <= 5 is wel waar want 5 is gelijk aan 5. 6 <= 5 is dus niet waar."
+        example: "Bijvoorbeeld: leeftijd <= 12"
+        demo_code: |-
+            leeftijd = input('Ik ben 13 jaar, hoe oud ben jij?')
+            if leeftijd <= 12:
+                print('Dan ben je jonger dan ik!')
+    -   name: "Groter gelijk"
+        explanation: "De `>=` kijkt dus of het eerste getal groter of gelijk is aan het tweede getal. Dus 5 > 5 is niet waar want 5 is niet groter dan 5 maar 5 >= 5 is wel waar want 5 is gelijk aan 5. 4 >= 5 is dus niet waar."
+        example: "Bijvoorbeeld: leeftijd >= 12"
+        demo_code: |-
+            leeftijd = input('Ik ben 11 jaar, hoe oud ben jij?')
+            if leeftijd >= 12:
+                print('Dan ben je ouder dan ik!')
