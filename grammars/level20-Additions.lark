@@ -1,0 +1,11 @@
+// level 20 changes is to = and ==
+
+input: var " = input("  (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))*  ")"
+assign_list: var " = [" quoted_text ((", "|",") quoted_text)+ "]"
+
+assign: var " = " length | var " = " sum | var " = " textwithoutspaces | list_access " = " sum | list_access " = " textwithoutspaces
+
+list_access_var: var " = " var "[" (index | random | var) "]"
+equality_check: (length | textwithoutspaces | list_access | sum) " == " (length | textwithoutspaces | list_access | sum)
+
+change_list_item: var "[" (index | var) "] = " (var | textwithoutspaces)
