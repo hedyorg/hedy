@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request
+from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, valid_email
 import datetime
 from functools import wraps
 from config import config
@@ -466,7 +466,7 @@ def routes (app, requested_lang):
         hashed_token = hash (token, make_salt ())
 
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
-        db_set ('users', {'username': user ['username'], 'email': body ['email'], 'verification_pending': hashed_token})
+        db_update ('users', {'username': user ['username'], 'email': body ['email'], 'verification_pending': hashed_token})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request (request):
