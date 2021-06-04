@@ -5,10 +5,15 @@
 %import common.SIGNED_INT -> NUMBER
 %import common.WS_INLINE
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+_AND: "and"
 _ASK : "ask"
+_AT: "at"
 _COMMA: ","
 _ECHO : "echo"
+_ELSE: "else"
 _EOL: "\r"?"\n"
+_IF: "if"
+_IN: "in"
 _IS: "is"
 _PRINT : "print"
 _SPACE: " "
@@ -22,7 +27,7 @@ invalid: textwithoutspaces text?
 invalid_space: _SPACE+ text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 print: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*
-program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
+program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
 punctuation : PUNCTUATION -> punctuation
 random : "random"
 start: program

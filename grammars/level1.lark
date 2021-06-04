@@ -1,7 +1,3 @@
-start: program
-program: _EOL* command (" ")* (_EOL+ command (" ")*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: print | ask | echo | invalid_space | invalid
-
 //SYMBOLS
 _SPACE: " "
 _COMMA: ","
@@ -12,6 +8,33 @@ _ECHO : "echo"
 
 //level 2
 _IS: "is"
+
+//level 4
+_IN: "in"
+_IF: "if"
+_ELSE: "else"
+_AND: "and"
+_AT: "at"
+
+//level 5
+_REPEAT: "repeat"
+_TIMES: "times"
+
+//level 6
+_MULTIPLY: "*"
+_ADD: "+"
+_SUBTRACT: "-"
+_DIVIDE: "/"
+
+//level7
+_FOR: "for"
+_RANGE: "range"
+
+
+
+start: program
+program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
+command: print | ask | echo | invalid_space | invalid
 
 print: _PRINT (_SPACE text)?
 ask: _ASK (_SPACE text)?
