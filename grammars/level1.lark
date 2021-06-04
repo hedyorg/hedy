@@ -1,7 +1,12 @@
-//SYMBOLS
+//symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
+
 _SPACE: " "
 _COMMA: ","
 _COLON: ":"
+_LEFT_BRACKET : "("
+_RIGHT_BRACKET : ")"
+_LEFT_SQUARE_BRACKET : "["
+_RIGHT_SQUARE_BRACKET : "]"
 
 _PRINT : "print"
 _ASK : "ask"
@@ -36,6 +41,8 @@ _STEP: "step"
 //level 9
 _ELIF: "elif"
 
+//level 11
+_INPUT: "input"
 
 
 start: program

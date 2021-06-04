@@ -22,11 +22,14 @@ _EOL: "\r"?"\n"
 _FOR: "for"
 _IF: "if"
 _IN: "in"
+_INPUT: "input"
 _IS: "is"
+_LEFT_BRACKET : "("
 _MULTIPLY: "*"
 _PRINT : "print"
 _RANGE: "range"
 _REPEAT: "repeat"
+_RIGHT_BRACKET : ")"
 _SPACE: " "
 _STEP: "step"
 _SUBTRACT: "-"
@@ -41,17 +44,17 @@ echo: _ECHO (_SPACE text)?
 elifs: _EOL _SPACE* _ELIF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
 elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
 equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
-for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var) (", "|",") (NUMBER | var) ((", "|",") (NUMBER | var))? "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _LEFT_BRACKET (NUMBER | var) (_COMMA _SPACE|_COMMA) (NUMBER | var) ((_COMMA _SPACE |_COMMA) (NUMBER | var))? _RIGHT_BRACKET _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
 ifelse: _IF _SPACE condition _SPACE command _SPACE _ELSE _SPACE command
 ifs: _IF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"//'if' cannot be used in Python, hence the name of the rule is 'ifs'
 in_list_check: textwithoutspaces _SPACE _IN _SPACE var
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
-input: var " is input("  (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))*  ")"
+input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))*  _RIGHT_BRACKET
 invalid: textwithoutspaces _SPACE textwithspaces
 invalid_space: _SPACE+ text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (index | random)
-print: "print(" (quoted_text | list_access | var | sum) (" " (quoted_text | list_access | var | sum))* ")"
+print: _PRINT _LEFT_BRACKET (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))* _RIGHT_BRACKET
 print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
 program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
 punctuation : PUNCTUATION -> punctuation
