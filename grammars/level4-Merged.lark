@@ -5,18 +5,30 @@
 %import common.SIGNED_INT -> NUMBER
 %import common.WS_INLINE
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+_ADD: "+"
 _AND: "and"
 _ASK : "ask"
 _AT: "at"
+_COLON: ":"
 _COMMA: ","
+_DIVIDE: "/"
 _ECHO : "echo"
+_ELIF: "elif"
 _ELSE: "else"
 _EOL: "\r"?"\n"
+_FOR: "for"
 _IF: "if"
 _IN: "in"
 _IS: "is"
+_MULTIPLY: "*"
 _PRINT : "print"
+_RANGE: "range"
+_REPEAT: "repeat"
 _SPACE: " "
+_STEP: "step"
+_SUBTRACT: "-"
+_TIMES: "times"
+_TO: "to"
 ask: var _SPACE _IS _SPACE _ASK _SPACE textwithspaces*
 assign: var _SPACE _IS _SPACE textwithspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
