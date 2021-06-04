@@ -1,0 +1,32 @@
+{
+  "title": "JSON Schema for Hedy Levels",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^[0-9]{1,2}-?[0-9]{0,2}$": { "$ref": "#/definitions/Level" }
+  },
+  "definitions": {
+    "Level": {
+      "type": "object",
+      "properties": {
+        "intro_text": { "type": "string" },
+        "start_code": { "type": "string" },
+        "commands": {
+          "type": "array",
+          "additionalProperties": { "$ref": "#/definitions/Command" }
+        }
+      },
+      "required": ["intro_text", "start_code", "commands"],
+      "additionalProperties": false
+    },
+    "Command": {
+      "type": "object",
+      "properties": {
+        "explanation": { "type": "string" },
+        "example": { "type": "string" },
+        "demo_code": { "type": "string" }
+      },
+      "required": ["explanation", "example", "demo_code"]
+    }
+  }
+}
