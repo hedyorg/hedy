@@ -967,7 +967,7 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     # rules that are redefined in the second file are overridden
     # rule that are new in the second file are added (remaining_rules_grammar_2)
 
-    merged_grammar = ''
+    merged_grammar = []
 
     rules_grammar_1 = grammar_text_1.split('\n')
     remaining_rules_grammar_2 = grammar_text_2.split('\n')
@@ -993,18 +993,17 @@ def merge_grammars(grammar_text_1, grammar_text_2):
 
         # new rule found? print that. nothing found? print org rule
         if override_found:
-            merged_grammar += new_rule
+            merged_grammar.append(new_rule)
         else:
-            merged_grammar += line_1
-        merged_grammar += '\n'
+            merged_grammar.append(line_1)
 
     #all rules that were not overlapping are new in the grammar, add these too
     for rule in remaining_rules_grammar_2:
         if not(rule == '' or rule[0] == '/'):
-            merged_grammar += rule
-            merged_grammar += '\n'
+            merged_grammar.append(rule)
 
-    return merged_grammar
+    merged_grammar = sorted(merged_grammar)
+    return '\n'.join(merged_grammar)
 
 
 def create_grammar(level, sub):
@@ -1023,7 +1022,7 @@ def create_grammar(level, sub):
         # we start with creating the grammar for level 1
         grammar_text_1 = get_full_grammar_for_level(1)
 
-        if level == 1 or level >= 7: #left here for now so we can still run higher levels in the normal way to test
+        if level == 1 or level >= 9: #left here for now so we can still run higher levels in the normal way to test
             grammar_text = get_full_grammar_for_level(level)
             return grammar_text
 
