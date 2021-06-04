@@ -5,6 +5,7 @@ import threading
 import logging
 import os
 import datetime
+import resource
 import traceback
 import logging
 import utils
@@ -15,6 +16,7 @@ class LogRecord:
     """A log record."""
     def __init__(self, **kwargs):
         self.start_time = time.time()
+        self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         self.attributes = kwargs
         self.set(
             start_time=dtfmt(self.start_time),
@@ -26,10 +28,12 @@ class LogRecord:
 
     def finish(self):
         end_time = time.time()
-        duration = int((end_time - self.start_time) * 1000) # ms resolution is good enough
+        end_rusage = resource.getrusage(resource.RUSAGE_SELF)
         self.set(
             end_time=dtfmt(end_time),
-            duration_ms=duration)
+            user_ms=ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime),
+            sys_ms=ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime),
+            duration_ms=ms_from_fsec(end_time - self.start_time))
 
         LOG_QUEUE.add(self)
 
@@ -133,7 +137,7 @@ class LogTimer:
         self.start = time.time()
 
     def __exit__(self, type, value, tb):
-        delta = int((time.time() - self.start) * 1000) # ms resolution is good enough
+        delta = ms_from_fsec(time.time() - self.start)
         self.record.inc_timer(self.name, delta)
 
 
@@ -228,6 +232,12 @@ class LogQueue:
 def div_clip(x, y):
     """Return the highest value < x that's a multiple of y."""
     return int(x // y) * y
+
+
+def ms_from_fsec(x):
+    """Milliseconds from fractional seconds."""
+    return int(x * 1000)
+
 
 
 LOG_QUEUE = LogQueue(batch_window_s=300)
