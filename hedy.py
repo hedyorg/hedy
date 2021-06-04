@@ -1029,18 +1029,18 @@ def create_grammar(level, sub):
             grammar_text = get_full_grammar_for_level(level)
             return grammar_text
 
-        grammar_text_2 = get_partial_grammar_for_level(2)
+        grammar_text_2 = get_additional_rules_for_level(2)
 
         #start at 1 and keep merging new grammars in
         new = merge_grammars(grammar_text_1, grammar_text_2)
 
         for i in range(3, level+1):
-            grammar_text_i = get_partial_grammar_for_level(i)
+            grammar_text_i = get_additional_rules_for_level(i)
             new = merge_grammars(new, grammar_text_i)
 
         # ready? Save to file to ease debugging
         # this could also be done on each merge for performance reasons
-        filename = "level" + str(level) + "-Merged.lark"
+        filename = "level" + str(level) + "-Total.lark"
         loc = path.join(script_dir, "grammars", filename)
         file = open(loc, "w", encoding="utf-8")
         file.write(new)
@@ -1048,9 +1048,9 @@ def create_grammar(level, sub):
 
     return new
 
-def get_partial_grammar_for_level(level):
+def get_additional_rules_for_level(level):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "-Partial.lark"
+    filename = "level" + str(level) + "-Additions.lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
