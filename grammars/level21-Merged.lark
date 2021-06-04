@@ -8,8 +8,13 @@
 ?product: atom | product " "* "*" " "* atom -> multiplication | product " "* "/" " "* atom -> division
 ?sum: product | sum " "* "+" " "* product -> addition | sum " "* "-" " "* product -> substraction
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
-SPACE: " "
+_ASK : "ask"
+_COMMA: ","
+_ECHO : "echo"
 _EOL: "\r"?"\n"
+_IS: "is"
+_PRINT : "print"
+_SPACE: " "
 andcondition: (equality_check|in_list_check) (" and " condition)*
 ask: var " is ask " textwithspaces*
 assign: var " = " length | var " = " sum | var " = " textwithoutspaces | list_access " = " sum | list_access " = " textwithoutspaces
@@ -19,7 +24,7 @@ change_list_item: var "[" (index | var) "] = " (var | textwithoutspaces)
 command: print | ifs (elifs)* elses? | input | for_loop | while_loop | assign_list | list_access_var | change_list_item| comment | assign
 comment: "#" (textwithspaces)*
 condition: (equality_check|in_list_check|smaller|bigger|not_equal)
-echo: "echo" (" " text)?
+echo: _ECHO (_SPACE text)?
 elifs: _EOL (" ")* "elif " (condition|andcondition|orcondition) ":"_EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 elses: _EOL (" ")* "else"":" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
 equality_check: (length | textwithoutspaces | list_access | sum) " == " (length | textwithoutspaces | list_access | sum)
@@ -30,7 +35,7 @@ in_list_check: textwithoutspaces " in " var
 index : NUMBER //different why?
 input: var " = input("  (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))*  ")"
 invalid: textwithoutspaces " " textwithspaces
-invalid_space: " "+ text
+invalid_space: _SPACE+ text
 length: "length(" var ")"
 list_access: var "[" (index | random | var | length) "]"
 list_access_var: var " = " var "[" (index | random | var) "]"

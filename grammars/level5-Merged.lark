@@ -5,21 +5,26 @@
 %import common.SIGNED_INT -> NUMBER
 %import common.WS_INLINE
 PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
-SPACE: " "
+_ASK : "ask"
+_COMMA: ","
+_ECHO : "echo"
 _EOL: "\r"?"\n"
+_IS: "is"
+_PRINT : "print"
+_SPACE: " "
 ask: var " is ask " textwithspaces*
 assign: var " is " textwithspaces
 assign_list: var " is " textwithspaces ((", "|",") textwithspaces)+
 command: print | repeat | ifelse | ifs | ask | assign_list | list_access_var | assign | invalid
 condition: (equality_check|in_list_check) (" and " condition)*
-echo: "echo" (" " text)?
+echo: _ECHO (_SPACE text)?
 equality_check: textwithoutspaces " is " textwithoutspaces
 ifelse: "if " condition " " command " else " command
 ifs: "if " condition " " command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 in_list_check: textwithoutspaces " in " var
 index : NUMBER //different why?
 invalid: textwithoutspaces " " textwithspaces
-invalid_space: " "+ text
+invalid_space: _SPACE+ text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 list_access_var: var " is " var " at " (index | random)
 print: "print " (quoted_text | list_access | var) (" " (quoted_text | list_access | var))*
