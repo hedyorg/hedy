@@ -1,12 +1,11 @@
 // adds length of lists
 
-print: "print(" (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))* ")"
-input: var " is input("  (quoted_text | list_access | var | sum | length) (" " (quoted_text | list_access | var | sum | length))*  ")"
-assign: var " is " length | var " is " sum | var " is " textwithoutspaces | list_access " is " sum | list_access " is " textwithoutspaces
-equality_check: (length | textwithoutspaces | list_access) " is " (length | textwithoutspaces | list_access)
-for_loop: "for " (NAME | var) " in " "range(" (NUMBER | var | length)(", "|",") (NUMBER | var | length) "):" _EOL (" "+ command) (_EOL " "+ command)* _EOL "end-block"
-smaller: (textwithoutspaces | list_access | length) " < " (textwithoutspaces | list_access | length)
-bigger: (textwithoutspaces | list_access | length) " > " (textwithoutspaces | list_access | length)
-length: "length(" var ")"
-list_access: var "[" (index | random | var | length) "]"
-
+print: _PRINT _LEFT_BRACKET (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))* _RIGHT_BRACKET
+input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))*  _RIGHT_BRACKET
+assign: var _SPACE _IS _SPACE length | var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces | list_access _SPACE _IS _SPACE sum | list_access _SPACE _IS _SPACE textwithoutspaces
+equality_check: (length | textwithoutspaces | list_access) _SPACE _IS _SPACE (length | textwithoutspaces | list_access)
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _LEFT_BRACKET (NUMBER | var | length)(_COMMA _SPACE|_COMMA) (NUMBER | var | length) _RIGHT_BRACKET _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+smaller: (textwithoutspaces | list_access | length) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access | length)
+bigger: (textwithoutspaces | list_access | length) _SPACE _LARGER _SPACE (textwithoutspaces | list_access | length)
+length: _LENGTH _LEFT_BRACKET var _RIGHT_BRACKET
+list_access: var _LEFT_SQUARE_BRACKET (index | random | var | length) _RIGHT_SQUARE_BRACKET
