@@ -1041,7 +1041,7 @@ def create_grammar(level, sub):
         # ready? Save to file to ease debugging
         # this could also be done on each merge for performance reasons
         filename = "level" + str(level) + "-Total.lark"
-        loc = path.join(script_dir, "grammars", filename)
+        loc = path.join(script_dir, "grammars-Total", filename)
         file = open(loc, "w", encoding="utf-8")
         file.write(new)
         file.close()

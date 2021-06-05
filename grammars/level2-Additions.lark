@@ -12,10 +12,9 @@ textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except 
 text: /([^\r\n,!?.]+)/ -> text
 
 index : DIGIT+
-random : "random"
 
 punctuation : PUNCTUATION -> punctuation
-PUNCTUATION: "!" | "?" | "." //uppercase places tokens in tree
+PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree
 
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 

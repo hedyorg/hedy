@@ -1,0 +1,93 @@
+%import common.CNAME -> NAME
+%import common.DIGIT
+%import common.LETTER
+%import common.NEWLINE
+%import common.SIGNED_INT -> NUMBER
+%import common.WS_INLINE
+?atom: NUMBER | var | NAME | list_access
+?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
+?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> substraction
+PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree
+_ADD: "+"
+_AND: "and"
+_ASK : "ask"
+_AT: "at"
+_COLON: ":"
+_COMMA: ","
+_DIVIDE: "/"
+_DOUBLE_EQUALS: "=="
+_ECHO : "echo"
+_ELIF: "elif"
+_ELSE: "else"
+_EOL: "\r"?"\n"
+_EQUALS: "="
+_EXCLAMATION_MARK: "!"
+_FOR: "for"
+_HASH: "#"
+_IF: "if"
+_IN: "in"
+_INPUT: "input"
+_IS: "is"
+_LARGER: ">"
+_LARGER_EQUALS: ">="
+_LEFT_BRACKET : "("
+_LEFT_SQUARE_BRACKET : "["
+_LENGTH: "length"
+_MULTIPLY: "*"
+_NOT_EQUALS: "!="
+_OR: "or"
+_PERIOD: "."
+_PRINT : "print"
+_QUESTION_MARK: "?"
+_RANGE: "range"
+_REPEAT: "repeat"
+_RIGHT_BRACKET : ")"
+_RIGHT_SQUARE_BRACKET : "]"
+_SMALLER : "<"
+_SMALLER_EQUALS : "<="
+_SPACE: " "
+_STEP: "step"
+_SUBTRACT: "-"
+_TIMES: "times"
+_TO: "to"
+_WHILE: "while"
+andcondition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
+ask: var _SPACE _IS _SPACE _ASK _SPACE textwithspaces*
+assign: var _SPACE _IS _SPACE length | var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces | list_access _SPACE _IS _SPACE sum | list_access _SPACE _IS _SPACE textwithoutspaces
+assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET quoted_text ((", "|",") quoted_text)+ _RIGHT_SQUARE_BRACKET
+bigger: (textwithoutspaces | list_access | length) _SPACE _LARGER _SPACE (textwithoutspaces | list_access | length)
+change_list_item: var _LEFT_SQUARE_BRACKET (index | var) _RIGHT_SQUARE_BRACKET _SPACE _IS _SPACE (var | textwithoutspaces)
+command: print | ifs (elifs)* elses? | input | for_loop | while_loop | assign_list | list_access_var | change_list_item| comment | assign
+comment: _HASH (textwithspaces)*
+condition: (equality_check|in_list_check|smaller|bigger)
+echo: _ECHO (_SPACE text)?
+elifs: _EOL (" ")* _ELIF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+equality_check: (length | textwithoutspaces | list_access) _SPACE _IS _SPACE (length | textwithoutspaces | list_access)
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _LEFT_BRACKET (NUMBER | var | length)(_COMMA _SPACE|_COMMA) (NUMBER | var | length) _RIGHT_BRACKET _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+ifelse: _IF _SPACE condition _SPACE command _SPACE _ELSE _SPACE command
+ifs: _IF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+in_list_check: textwithoutspaces _SPACE _IN _SPACE var
+index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
+input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))*  _RIGHT_BRACKET
+invalid: textwithoutspaces _SPACE textwithspaces
+invalid_space: _SPACE+ text
+length: _LENGTH _LEFT_BRACKET var _RIGHT_BRACKET
+list_access: var _LEFT_SQUARE_BRACKET (index | random | var | length) _RIGHT_SQUARE_BRACKET
+list_access_var: var _SPACE _IS _SPACE var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
+orcondition: (equality_check|in_list_check) (_SPACE _OR _SPACE condition)*
+print: _PRINT _LEFT_BRACKET (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))* _RIGHT_BRACKET
+print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
+program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
+punctuation : PUNCTUATION -> punctuation
+quoted_text: /'((?:[^\\']|\\.)*)'/ -> text //text can be between single quotes, but quotes may be escaped with \
+quoted_text_no_escape: /'([^']*)'/ -> text //simply all between quotes should this be used at earlier levels?
+random : "random" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
+repeat: _REPEAT _SPACE (NUMBER | var) _SPACE _TIMES _EOL (_SPACE+ command) (_EOL _SPACE+ command)*
+smaller: (textwithoutspaces | list_access | length) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access | length)
+start: program
+text: /([^\n,]+)/ -> text
+textwithoutspaces: /([^\n, :*+-\/]+)/ -> text
+textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+var: NAME -> var
+while_loop: _WHILE _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
