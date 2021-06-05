@@ -209,6 +209,30 @@ def checkMainSessionVarsAgain (state, response, username):
     if response ['body'] ['session'] ['test_session'] != state ['test_session']:
         raise Exception ('test_session not received by main')
 
+def retrieveProgramsBefore (state, response, username):
+    if not type_check (response ['body'], 'dict'):
+        raise Exception ('Invalid response body')
+    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+        raise Exception ('Invalid programs list')
+    if len (response ['body'] ['programs']) != 0:
+        raise Exception ('Programs list should be empty')
+
+def retrieveProgramsAfter (state, response, username):
+    if not type_check (response ['body'], 'dict'):
+        raise Exception ('Invalid response body')
+    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+        raise Exception ('Invalid programs list')
+    if len (response ['body'] ['programs']) != 1:
+        raise Exception ('Programs list should contain one program')
+    program = response ['body'] ['programs'] [0]
+    state ['program'] = program
+    if not type_check (program, 'dict'):
+        raise Exception ('Invalid program type')
+    if not 'code' in program or program ['code'] != 'print Hello world':
+        raise Exception ('Invalid program.code')
+    if not 'level' in program or program ['level'] != 1:
+        raise Exception ('Invalid program.level')
+
 def suite (username):
     return [
         ['get session vars from main', 'get', '/session_main', {}, {}, 200, checkMainSessionVars],
@@ -248,6 +272,11 @@ def suite (username):
         ['reset password, invalid password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'short'}, 400],
         ['reset password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'foobar3'}, 200],
         ['login again after reset', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar3'}, 200],
+        ['retrieve programs before saving any', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
+        ['create program', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Program 1', 'level': 1}, 200],
+        ['retrieve programs after saving one', 'get', '/programs_list', {}, {}, 200, retrieveProgramsAfter],
+        ['delete program', 'get', lambda state: '/programs/delete/' + state ['program'] ['id'], {}, {}, 302],
+        ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
     ]
 
