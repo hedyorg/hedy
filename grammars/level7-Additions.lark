@@ -6,7 +6,3 @@ repeat: _REPEAT _SPACE (NUMBER | var) _SPACE _TIMES _EOL (_SPACE+ command) (_EOL
 // from level 7 on if is implemented slightly differently
 elses: _EOL _ELSE _EOL (_SPACE+ command) (_EOL _SPACE+ command)*
 ifs: _IF _SPACE condition _EOL (_SPACE+ command) (_EOL _SPACE+ command)* //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-
-
-
-
