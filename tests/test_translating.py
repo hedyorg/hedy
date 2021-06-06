@@ -1,6 +1,6 @@
 import unittest
 import utils
-import translating
+from website import translating
 
 class TestTranslating(unittest.TestCase):
   def test_change_nested_records(self):
