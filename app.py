@@ -184,8 +184,10 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-logger = jsonbin.JsonBinLogger.from_env_vars()
-querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_transmitter_from_env())
+parse_logger = jsonbin.MultiParseLogger(
+    jsonbin.JsonBinLogger.from_env_vars(),
+    jsonbin.S3ParseLogger.from_env_vars())
+querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_querylog_transmitter_from_env())
 
 # Check that requested language is supported, otherwise return 404
 @app.before_request
@@ -289,7 +291,7 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
     querylog.log_value(server_error=response.get('Error'))
-    logger.log ({
+    parse_logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
@@ -308,7 +310,7 @@ def parse():
 def report_error():
     post_body = request.json
 
-    logger.log ({
+    parse_logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
