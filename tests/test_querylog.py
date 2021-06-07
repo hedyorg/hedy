@@ -1,4 +1,4 @@
-import querylog
+from website import querylog
 import unittest
 
 class TestQueryLog(unittest.TestCase):
