@@ -9,7 +9,7 @@ import requests
 import flask.sessions
 import itsdangerous
 
-from auth import current_user
+from .auth import current_user
 import utils
 
 class ABProxying:

@@ -1,5 +1,5 @@
 import flask
-import querylog
+from website import querylog
 
 @querylog.timed
 def render_template(filename, **kwargs):

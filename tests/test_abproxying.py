@@ -1,4 +1,4 @@
-import ab_proxying
+from website import ab_proxying
 import unittest
 
 class TestAbTesting(unittest.TestCase):

@@ -1,4 +1,4 @@
-import querylog
+from website import querylog
 import unittest
 
 class TestQueryLog(unittest.TestCase):
@@ -29,7 +29,7 @@ class TestQueryLog(unittest.TestCase):
     recovered_queue.try_load_emergency_saves()
     recovered_queue.set_transmitter(self._fake_transmitter)
 
-    self.assertEquals(self.records, [])
+    self.assertEqual(self.records, [])
 
     recovered_queue.transmit_now()
 
