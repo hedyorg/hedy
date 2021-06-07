@@ -68,7 +68,10 @@ def redirect_ab (request):
     user_identifier = current_user(request) ['username'] or str (session['session_id'])
 
     # This will send either % PROXY_TO_TEST_PROPORTION of the requests into redirect, or 50% if that variable is not specified.
-    redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION', '50'))
+    if os.getenv ('PROXY_TO_TEST_PROPORTION') == None:
+        redirect_proportion = 50
+    else:
+        redirect_proportion = int (os.getenv ('PROXY_TO_TEST_PROPORTION'))
     redirect_flag = (hash_user_or_session (user_identifier) % 100) < redirect_proportion
     return redirect_flag
 
