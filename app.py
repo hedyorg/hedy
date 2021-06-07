@@ -276,6 +276,8 @@ def parse():
                 result = hedy.transpile(code, level,sublevel)
             response["Code"] = "# coding=utf8\nimport random\n" + result
             if lang in supported_lang:
+                if not 'error_level' in session or 'similar_code' in session:
+                    return 'session cookie must have error_level & similar_code set', 400
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
                 session ['error_level'] = 0  # Code is correct: reset error_level back to 0
