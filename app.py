@@ -548,7 +548,7 @@ def error():
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return "<h1>500 Internal Server Error</h1>"
+    return "<h1>500 Internal Server Error</h1>", 500
 
 @app.route('/index.html')
 @app.route('/')
