@@ -7,7 +7,7 @@ from flask import abort
 from flask_helpers import render_template
 
 import courses
-from auth import current_user
+from website.auth import current_user
 from utils import type_check
 import re
 import utils

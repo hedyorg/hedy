@@ -6,7 +6,7 @@ import functools
 import os
 import re
 from ruamel import yaml
-import querylog
+from website import querylog
 
 
 class Timer:

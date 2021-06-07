@@ -12,7 +12,7 @@ import boto3
 from botocore.exceptions import ClientError as email_error
 import json
 import requests
-import querylog
+from website import querylog
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60

@@ -8,7 +8,6 @@ import datetime
 import collections
 import hedy
 import json
-import jsonbin
 import logging
 import os
 import csv
@@ -21,7 +20,7 @@ from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
+from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import db_get, db_get_many, db_create, db_update, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
@@ -33,11 +32,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import courses
 import hedyweb
-import translating
-import querylog
-import aws_helpers
-import ab_proxying
-import cdn
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
@@ -715,7 +710,7 @@ def gradual_error():
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return "<h1>500 Internal Server Error</h1>"
+    return "<h1>500 Internal Server Error</h1>", 500
 
 @app.route('/index.html')
 @app.route('/')
@@ -992,7 +987,7 @@ def update_yaml():
 
 # *** AUTH ***
 
-import auth
+from website import auth
 auth.routes (app, requested_lang)
 
 # *** START SERVER ***
