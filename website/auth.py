@@ -48,7 +48,7 @@ def is_admin (request):
 
 def is_teacher (request):
     user = current_user (request)
-    return bool (user ['is_teacher'])
+    return bool ('is_teacher' in user and user ['is_teacher'])
 
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
