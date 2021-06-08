@@ -275,6 +275,8 @@ def suite (username):
         ['retrieve programs before saving any', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['create program', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Program 1', 'level': 1}, 200],
         ['retrieve programs after saving one', 'get', '/programs_list', {}, {}, 200, retrieveProgramsAfter],
+        ['share program', 'post', '/programs/share', {}, lambda state: {'id': state ['program'] ['id'], 'public': True}, 200],
+        ['unshare program', 'post', '/programs/share', {}, lambda state: {'id': state ['program'] ['id'], 'public': False}, 200],
         ['delete program', 'get', lambda state: '/programs/delete/' + state ['program'] ['id'], {}, {}, 302],
         ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200]

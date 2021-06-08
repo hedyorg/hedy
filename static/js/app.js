@@ -365,6 +365,27 @@ function feedback(answer) {
   }
 }
 
+window.share_program = function share_program (id, Public, reload) {
+  $.ajax({
+    type: 'POST',
+    url: '/programs/share',
+    data: JSON.stringify({
+      id: id,
+      public: Public
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    $ ('#okbox').show ();
+    $ ('#okbox .caption').html (window.auth.texts.save_success);
+    $ ('#okbox .details').html (window.auth.texts.share_success_detail);
+    if (reload) location.reload ();
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
 /**
  * Do a POST with the error to the server so we can log it
  */

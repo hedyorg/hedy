@@ -525,7 +525,7 @@ def programs_page (request):
 
             date = round (date / 24)
 
-        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name')})
+        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name'), 'public': item.get ('public')})
 
     return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
 
@@ -625,9 +625,10 @@ def index(level, step):
         result = db_get ('programs', {'id': step})
         if not result:
             return 'No such program', 404
-        # Allow only the owner of the program, the admin user and the teacher users to access the program
+        # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
         user = current_user (request)
-        if user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
+        public_program = 'public' in result and result ['public']
+        if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
         loaded_program = result ['code']
         loaded_program_name = result ['name']
@@ -929,6 +930,24 @@ def save_program (user):
     db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({'name': name})
+
+@app.route('/programs/share', methods=['POST'])
+@requires_login
+def share_unshare_program(user):
+    body = request.json
+    if not type_check (body, 'dict'):
+        return 'body must be an object', 400
+    if not object_check (body, 'id', 'str'):
+        return 'id must be a string', 400
+    if not object_check (body, 'public', 'bool'):
+        return 'public must be a string', 400
+
+    result = db_get ('programs', {'id': body ['id']})
+    if not result or result ['username'] != user ['username']:
+        return 'No such program!', 404
+
+    db_update ('programs', {'id': body ['id'], 'public': 1 if body ['public'] else None})
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
