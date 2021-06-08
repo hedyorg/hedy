@@ -1,0 +1,17 @@
+command: print | ask | assign_list | assign | print_no_quotes | invalid //catch all at the end
+
+print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var)*  -> print
+print_no_quotes: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
+
+//anything can be parsed except for spaces, and a newlines and commas for list separators
+textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text
+index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
+
+//anything can be parsed except for a newline and a comma for list separators
+//punctuation does not need to be treated differently anymore
+text: /([^\n,]+)/ -> text
+
+quoted_text_no_escape: /'([^']*)'/ -> text //simply all between quotes should this be used at earlier levels?
+quoted_text: /'((?:[^\\']|\\.)*)'/ -> text //text can be between single quotes, but quotes may be escaped with \
+
+

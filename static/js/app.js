@@ -127,6 +127,7 @@ function runit(level, lang, cb) {
       url: '/parse',
       data: JSON.stringify({
         level: level,
+        sublevel: window.State.sublevel ? window.State.sublevel : undefined,
         code: code,
         lang: lang,
         adventure_name: window.State.adventure_name
@@ -171,6 +172,7 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
+  if (window.State.sublevel) return alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;
@@ -246,6 +248,27 @@ window.saveit = function saveit(level, lang, name, code, cb) {
     console.error(e);
     error.show(ErrorMessages.Other_error, e.message);
   }
+}
+
+window.share_program = function share_program (id, Public, reload) {
+  $.ajax({
+    type: 'POST',
+    url: '/programs/share',
+    data: JSON.stringify({
+      id: id,
+      public: Public
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    $ ('#okbox').show ();
+    $ ('#okbox .caption').html (window.auth.texts.save_success);
+    $ ('#okbox .details').html (window.auth.texts.share_success_detail);
+    if (reload) location.reload ();
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
 }
 
 /**

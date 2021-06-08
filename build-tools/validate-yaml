@@ -19,3 +19,9 @@ $scriptdir/node_modules/.bin/pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
+
+cd ../level-defaults/
+$scriptdir/node_modules/.bin/pajv validate \
+    --errors=text \
+    -s "levels.schema.json" \
+    -d "*.yaml"

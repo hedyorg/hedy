@@ -1,0 +1,5 @@
+// Level 17 adds the while loop
+
+command: print | ifs (elifs)* elses? | input | for_loop | while_loop | assign_list | list_access_var | change_list_item| comment | assign
+
+while_loop: _WHILE _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"

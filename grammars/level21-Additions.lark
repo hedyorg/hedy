@@ -1,0 +1,6 @@
+// Level 21 introduces the !=
+
+condition: (equality_check|in_list_check|smaller|bigger|not_equal)
+not_equal: (length | textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (length | textwithoutspaces | list_access)
+
+//space hierboven kan met + want hoeft niet?

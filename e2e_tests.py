@@ -129,8 +129,9 @@ def successfulSignup (state, response, username):
     state ['token'] = response ['body'] ['token']
 
 # We define apres functions here because multiline lambdas are not supported by python
-def successfulLogin (state, response, username):
-    state ['headers'] ['cookie'] = response ['headers'] ['Set-Cookie']
+def setSentCookies (state, response, username):
+    if 'Set-Cookie' in response ['headers']:
+        state ['headers'] ['cookie'] = response ['headers'] ['Set-Cookie']
 
 def getProfile1 (state, response, username):
     profile = response ['body']
@@ -173,10 +174,72 @@ def recoverPassword (state, response, username):
         raise Exception ('No token present')
     state ['token'] = response ['body'] ['token']
 
+def checkMainSessionVars (state, response, username):
+    if not 'session_id' in response ['body'] ['session']:
+        raise Exception ('No session_id set')
+    if not 'proxy_enabled' in response ['body']:
+        raise Exception ('No proxy_enabled variable set')
+    state ['session_id'] = response ['body'] ['session'] ['session_id']
+    state ['proxy_enabled'] = response ['body'] ['proxy_enabled']
+    setSentCookies (state, response, username)
+
+def checkTestSessionVars (state, response, username):
+    # If proxying to test is disabled, there is nothing to do.
+    if not state ['proxy_enabled']:
+        return
+    if not 'session_id' in response ['body'] ['session']:
+        raise Exception ('No session_id set')
+    if not 'test_session' in response ['body'] ['session']:
+        raise Exception ('No test_session set')
+    if response ['body'] ['session'] ['session_id'] != state ['session_id']:
+        raise Exception ('session_id from main not passed to test')
+    state ['test_session'] = response ['body'] ['session'] ['test_session']
+    setSentCookies (state, response, username)
+
+def checkMainSessionVarsAgain (state, response, username):
+    if not 'session_id' in response ['body'] ['session']:
+        raise Exception ('No session_id set')
+    if response ['body'] ['session'] ['session_id'] != state ['session_id']:
+        raise Exception ('session_id from main not maintained after proxying to test')
+    # If proxying to test is disabled, there is nothing else to do.
+    if not state ['proxy_enabled']:
+        return
+    if not 'test_session' in response ['body'] ['session']:
+        raise Exception ('No test_session set')
+    if response ['body'] ['session'] ['test_session'] != state ['test_session']:
+        raise Exception ('test_session not received by main')
+
+def retrieveProgramsBefore (state, response, username):
+    if not type_check (response ['body'], 'dict'):
+        raise Exception ('Invalid response body')
+    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+        raise Exception ('Invalid programs list')
+    if len (response ['body'] ['programs']) != 0:
+        raise Exception ('Programs list should be empty')
+
+def retrieveProgramsAfter (state, response, username):
+    if not type_check (response ['body'], 'dict'):
+        raise Exception ('Invalid response body')
+    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+        raise Exception ('Invalid programs list')
+    if len (response ['body'] ['programs']) != 1:
+        raise Exception ('Programs list should contain one program')
+    program = response ['body'] ['programs'] [0]
+    state ['program'] = program
+    if not type_check (program, 'dict'):
+        raise Exception ('Invalid program type')
+    if not 'code' in program or program ['code'] != 'print Hello world':
+        raise Exception ('Invalid program.code')
+    if not 'level' in program or program ['level'] != 1:
+        raise Exception ('Invalid program.level')
+
 def suite (username):
     return [
+        ['get session vars from main', 'get', '/session_main', {}, {}, 200, checkMainSessionVars],
+        ['get session vars from test', 'get', '/session_test', {}, {}, 200, checkTestSessionVars],
+        ['get session vars from main again', 'get', '/session_main', {}, {}, 200, checkMainSessionVarsAgain],
         ['get root', 'get', '/', {}, '', 200],
-            invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
+        invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
         ['valid signup', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@e2e-testing.com'}, 200, successfulSignup],
         invalidMap ('login', 'post', '/auth/login', ['', [], {}, {'username': 1}, {'username': 'user@me'}, {'username:': 'user: me'}]),
         ['valid login, invalid credentials', 'post', '/auth/login', {}, {'username': username, 'password': 'password'}, 403],
@@ -184,14 +247,14 @@ def suite (username):
         ['verify email (invalid username)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': 'foobar', 'token': state ['token']}), {}, '', 403],
         ['verify email (invalid token)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': 'foobar'}), {}, '', 403],
         ['verify email', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': state ['token']}), {}, '', 302],
-        ['valid login', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar'}, 200, successfulLogin],
+        ['valid login', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar'}, 200, setSentCookies],
         invalidMap ('change password', 'post', '/auth/change_password', ['', [], {}, {'foo': 'bar'}, {'old_password': 1}, {'old_password': 'foobar'}, {'old_password': 'foobar', 'new_password': 1}, {'old_password': 'foobar', 'new_password': 'short'}]),
         ['change password', 'post', '/auth/change_password', {}, {'old_password': 'foobar', 'new_password': 'foobar2'}, 200],
         ['invalid login after password change', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar'}, 403],
-        ['valid login after password change', 'post', '/auth/login', {}, {'username': username + '@e2e-testing.com', 'password': 'foobar2'}, 200, successfulLogin],
+        ['valid login after password change', 'post', '/auth/login', {}, {'username': username + '@e2e-testing.com', 'password': 'foobar2'}, 200, setSentCookies],
         ['logout', 'post', '/auth/logout', {}, {}, 200],
         ['check that session is no longer valid', 'get', '/profile', {}, '', 403],
-        ['login again', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, successfulLogin],
+        ['login again', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, setSentCookies],
         invalidMap ('change password', 'post', '/auth/change_password', ['', [], {}, {'foo': 'bar'}, {'old_password': 1}, {'old_password': 'foobar'}, {'old_password': 'foobar', 'new_password': 1}]),
         ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile1],
         invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}]),
@@ -209,6 +272,13 @@ def suite (username):
         ['reset password, invalid password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'short'}, 400],
         ['reset password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'foobar3'}, 200],
         ['login again after reset', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar3'}, 200],
+        ['retrieve programs before saving any', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
+        ['create program', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Program 1', 'level': 1}, 200],
+        ['retrieve programs after saving one', 'get', '/programs_list', {}, {}, 200, retrieveProgramsAfter],
+        ['share program', 'post', '/programs/share', {}, lambda state: {'id': state ['program'] ['id'], 'public': True}, 200],
+        ['unshare program', 'post', '/programs/share', {}, lambda state: {'id': state ['program'] ['id'], 'public': False}, 200],
+        ['delete program', 'get', lambda state: '/programs/delete/' + state ['program'] ['id'], {}, {}, 302],
+        ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
     ]
 

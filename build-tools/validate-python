@@ -1,0 +1,11 @@
+#!/bin/bash
+# Run pylint against all Python code
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir/..
+
+# There are MANY pep8 style violations in the code base currently.
+# Let's just check for definite errors.
+pylint -j 0 \
+    --errors-only \
+    *.py tests
