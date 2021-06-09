@@ -72,7 +72,7 @@ page_title: 了解更多-海迪
 * [2021年4月，用Hedy教任何人如何编码，Opensource.com](https://opensource.com/article/21/4/hedy-teach-code)
 * [2021年4月，平衡权力和理解能力-与Felienne Hermans对话，IO Magazine](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
 * [2021年2月，Hedy--向 "不那么小的孩子 "教授编程的最佳语言，Ingeniería De Software (西班牙语)](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
-* [2021年2月]，Hello World Magazine,(images/Hello_World_15_Hedy.pdf)
+* [2021年2月 Hello World Magazine](images/Hello_World_15_Hedy.pdf)
 * [2021年1月，Hedy - 循序渐进地学习一种编程语言，Discoro](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
 * [2021年1月，Felienne Hermans博士由于开发Hedy编程语言而获得2021年荷兰信息通信技术研究奖](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)
 * [2020年8月,科学家开发出一种新的编程语言，用于编程教学（和Python），SlashDot](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
