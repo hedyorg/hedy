@@ -37,6 +37,7 @@ Não, isso não é necessário. No entanto, se você programou com Scratch ou Py
 
 ## A Hedy é gratuito?
 Sim! A Universidade de Leiden nos permite compartilhá-la gratuitamente. Hedy também é 'código aberto', o que significa que todos que podem programar podem nos ajudar a torná-lo melhor. Você pode encontrar o código no [GitHub] (https://github.com/Felienne/hedy).
+Se você gosta de Hedy, adoraríamos uma [doação](https://www.steunleiden.nl/project/hedy?locale=en)!
 
 ## Preciso instalar alguma coisa?
 Não. Hedy funciona no navegador, que é o programa que você está usando para ver esta página. Provavelmente Chrome, Edge ou FireFox. Hedy também funciona em seu telefone ou tablet.
