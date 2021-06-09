@@ -2,7 +2,7 @@ var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'A
 
 window.auth = {
   texts: {},
-  emailRegex: /^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
+  emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where) {
     where = '/' + where;
     window.location.pathname = where;
