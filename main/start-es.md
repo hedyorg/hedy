@@ -43,6 +43,7 @@ No, no es indispensable. Sin embargo, si ya han programado en Scratch o Python, 
 ¡Sí! La Universidad de Leiden nos concede licencia de compartilo con libertad. Hedy también es 'Open source', lo que significa que
 todas las personas que sepan programar podrían ayudarnos a mejorarlo. El código de Hedy puede obtenerse en
 [GitHub](https://github.com/Felienne/hedy).
+Si te gusta Hedy, ¡nos encantaría una [donación](https://www.steunleiden.nl/project/hedy?locale=en)!
 
 ## ¿Debo instalar algo?
 No. Hedy marcha muy bien en  tu navegador, es decir, en el mismo programa que estás utilizando para ver esta página. Probablemente Chrome,

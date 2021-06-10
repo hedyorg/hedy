@@ -1,0 +1,7 @@
+print: _PRINT _SPACE (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))*
+assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
+?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> substraction
+?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
+?atom: NUMBER | var //TODO: means we cannot assign strings with spaces? would we want that?
+
+textwithoutspaces: /([^\n, *+-\/]+)/ -> text //new cause in level 6 calculation elements ned to be escaped too

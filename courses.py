@@ -5,6 +5,8 @@ from utils import load_yaml
 
 import docs
 
+import re
+from utils import type_check
 
 class LevelDefaults:
   def __init__(self, language):
@@ -14,12 +16,15 @@ class LevelDefaults:
   def levels(self):
     return load_yaml(f'coursedata/level-defaults/{self.language}.yaml')
 
-  def get_defaults(self, level):
+  def get_defaults(self, level, sub=0):
     """Return the level defaults for a given level number.
 
     Returns: Default
     """
-    return copy.deepcopy(self.levels.get(int(level), {}))
+    if sub:
+      return copy.deepcopy(self.levels.get(str(level) + "-" + str(sub), {}))
+    else:
+      return copy.deepcopy(self.levels.get(int(level), {}))
 
 
 class NoSuchDefaults:
@@ -58,16 +63,18 @@ class Course:
     if level_ix >= len(self.course): return 0
     return len(self.course[level_ix].get('assignments', []))
 
-  def get_assignment(self, level, number):
+  def get_assignment(self, level, number, sublevel=0):
+
     """Return the 1-based Assignment from this course."""
     level_ix = int(level) - 1
     if level_ix >= len(self.course): return None
+
     assignments = self.course[level_ix].get('assignments')
 
     assignment_values = {
       "level": str(level),
     }
-    assignment_values.update(**self.defaults.get_defaults(int(level)))
+    assignment_values.update(**self.defaults.get_defaults(int(level), sublevel))
 
     # If we don't have any "assignments", return a default Assignment object
     # based off the level and the level defaults. This is used in the Hedy main
@@ -95,6 +102,17 @@ class Course:
     for level_i, level in enumerate(self.course):
       expected_value = str(level_i + 1)
       actual_value = level.get('level')
+
+      # Check for sub levels
+      subs = level.get('subs')
+      if (subs):
+        for sub_i, sub in enumerate(subs):
+          expected_sub = str(sub_i + 1)
+          actual_sub = sub.get('sub')
+          if expected_sub != actual_sub:
+            raise RuntimeError(f'Expected \'sub: "{expected_sub}"\' but got "{actual_sub}" in {self.course_name}-{self.language}')
+
+
       if expected_value != actual_value:
         raise RuntimeError(f'Expected \'level: "{expected_value}"\' but found "{actual_value}" in {self.course_name}-{self.language}')
 

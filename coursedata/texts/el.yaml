@@ -17,6 +17,11 @@ ui:
     assignment_header: 'Άσκηση'
     show_explanation: 'Εμφάνισε εξήγηση'
     hide_explanation: 'Κρύψε εξήγηση'
+    adventure: Περιπέτεια
+    switch_to_levels: Έξοδος από περιπέτειες
+    switch_to_adventures: Πήγαινε σε περιπέτειες
+    switch_to_another_adventure: Επίλεξε μια διαφορετική περιπέτεια
+    commands_title: Εντολές
 ClientErrorMessages:
     Transpile_warning: 'Προσοχή!'
     Transpile_error: 'Δεν μπορούμε να εκτελέσουμε το πρόγραμμά σου.'
@@ -34,17 +39,17 @@ HedyErrorMessages:
     space: 'ένα κενό'
     comma: 'ένα κόμμα'
     question mark: 'ένα ερωτηματικό'
-    newline: 'μια νέα γραμμή'
-    period: 'μια τελεία'
+    newline: 'μία νέα γραμμή'
+    period: 'μία τελεία'
     exclamation mark: 'ένα θαυμαστικό'
-    dash: 'μια παύλα'
+    dash: 'μία παύλα'
     star: 'ένας αστερίσκος'
     single quotes: 'ένα μονό εισαγωγικό'
     double quotes: 'διπλά εισαγωγικά'
-    slash: 'μια κάθετος'
+    slash: 'μία κάθετος'
 Auth:
     create_account: 'Δημιουργία λογαριασμού'
-    create_account_explanation: 'Το να έχεις το δικό σου λογαριασμό σου επιτρέπει να αποθηκεύεις τα προγράμματά σου.'
+    create_account_explanation: 'Το να έχεις το δικό σου λογαριασμό, σου επιτρέπει να αποθηκεύεις τα προγράμματά σου.'
     username: 'Όνομα Χρήστη'
     email: 'Email'
     email_repeat: 'Επανάλαβε το email'
@@ -106,8 +111,7 @@ Auth:
         Παρακαλώ πάτησε σε αυτόν το σύνδεσμο για να επιβεβαιώσεις το email σου:
     email_change_password_subject: 'To Hedy συνθηματικό σου έχει αλλάξει'
     email_change_password_body: |-
-        Το Hedy συνθηματικό σου έχει αλλάξει. Αν αυτό ήταν δική σου ενέργεια, όλα καλά.
-         Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
+        Το Hedy συνθηματικό σου έχει αλλάξει. Αν αυτό ήταν δική σου ενέργεια, όλα καλά. Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
     email_recover_password_subject: 'Επαναφορά του Hedy συνθηματικού σου'
     email_recover_password_body: 'Πατώντας σε αυτόν το σύνδεσμο, μπορείς να ορίσεις ένα νέο Hedy password. Αν δεν ζήτησες επαναφορά συνθηματικού, παρακαλούμε αγνόησε αυτό το email.'
     email_reset_password_subject: 'Έχει γίνει επαναφορά του Hedy συνθηματικού σου'
@@ -115,13 +119,17 @@ Auth:
         Το Hedy συνθηματικό σου επαναφέρθηκε σε ένα νέο. Αν αυτό ήταν δική σου ενέργεια, όλα καλα.
         Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
 
-  # These variables are added here to make the code simpler, but conceptually they belong to the UI.
+    # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: 'Τα προγράμματά μου'
     save_prompt: 'Πρέπει να έχεις ένα λογαριασμό για να αποθηκεύσεις το πρόγραμμά σου. Θα ήθελες να συνδεθείς τώρα;'
     unsaved_changes: 'Έχεις ένα μη αποθηκευμένο πρόγραμμα. Θέλεις να αποχωρήσεις χωρίς να το αποθηκεύσεις;'
     save_success: 'Επιτυχία'
     save_success_detail: 'Το πρόγραμμα αποθηκεύτηκε επιτυχώς'
+    share_success_detail: "Program shared successfully"
+    unshare_success_detail: "Program unshared successfully"
+    copy_clipboard: "Successfully copied to clipboard"
     answer_question: 'Δεν μπορείς να εκτελέσεις το πρόγραμμα πριν να απαντήσεις την ερώτηση'
+    login_long: Συνδέσου στο λογαριασμό σου
 Programs:
     recent: 'Τα πρόσφατα προγράμματά μου'
     level: 'Επίπεδο'
@@ -133,5 +141,10 @@ Programs:
     open: 'Άνοιγμα'
     delete: 'Διαγραφή'
     delete_confirm: 'Είσαι σίγουρος/η ότι θέλεις να διαγράψεις το πρόγραμμα;'
+    share: "Share"
+    share_confirm: "Are you sure you want to make the program public?"
+    unshare: "Unshare"
+    unshare_confirm: "Are you sure you want to make the program private?"
+    copy_link_to_share: "Copy link to share"
     no_programs: 'Δεν έχεις προγράμματα ακόμα.'
     write_first: 'Γράψε το πρώτο σου πρόγραμμα!'

@@ -6,11 +6,16 @@ Architecture
 
 The global idea of Hedy is that we transpile Hedy code to Python code by adding syntactic elements when they are missing. In the code base, this works in steps:
 
-1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser
+1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser.
 2. Validity of the code is checked with the IsValid() function
 3. If the code is valid, it is transformed into Python with the relevant function.
 
 This logic all resides in hedy.py.
+
+Transpiling
+------------
+
+Transpiling Hedy is a stepwise process. Firstly the code is parsed using Lark, resulting in an AST. The AST is then scanned for invalid rules. If these appear in the tree, the Hedy program is invalid and an error message will be generated. Secondly, a lookup table with all variable names occuring in the program is extracted from the AST. Finally, the AST is transformed into Python by adding needed syntax such as brackets.
 
 
 Design Goals
@@ -18,7 +23,7 @@ Design Goals
 
 The overarching goal of Hedy is to successively add syntactic complexity to a Python-like language, until novices have mastered Python itself. To reach that goal, Hedy follows these design principles:
 
-1.  **Concepts are offered at least three times in different forms:** 
+1.  **Concepts are offered at least three times in different forms:**
 
     Research from writing education has shown that it is best to offer concept in different forms over a long period of
     time. Furthermore it has been shown that a word needs to be read 7
@@ -30,23 +35,23 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
     Previous research has shown that syntax can be confusing for
     novices. Early levels thus are as syntax-free as possible to lower cognitive load.
 
-3.  **Only one aspect of a concept changes at a time:** 
+3.  **Only one aspect of a concept changes at a time:**
 
     In his paper on [the spiral approach Shneiderman](https://www.sciencedirect.com/science/article/pii/0360131577900082) argued for small steps in teaching programming, which we follow for Hedy too. This allows us to focus the full attention of the learner on the new     syntactic element.
 
-4.  **Adding syntactic elements like brackets and colons is deferred to the latest moment possible:** 
-    
+4.  **Adding syntactic elements like brackets and colons is deferred to the latest moment possible:**
+
     Previous research in the computer
     science education domain has shown that operators such as == and : can be especially hard for novices. In a [study](https://www.felienne.com/archives/5947) with high-schoolers we found that that might be due to their pronunciation.
-    
+
    Research from natural language acquisition also indicates that parentheses and the
     colon are among the latest element of punctuation that learners
     typically learn. Given the choice between
     colons and parenthesis and other elements like indentation, the
     latter are introduced first.
 
-5.  **Learning new forms is interleaved between concepts as much as possible:** 
-    
+5.  **Learning new forms is interleaved between concepts as much as possible:**
+
     We know that *spaced repetition* is a
     good way of memorizing, and that it takes time to learn punctuation,
     so we give students as much opportunity as possible to work with
@@ -54,7 +59,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 
 6.  **At every level it is possible to create simple but meaningful
     programs:**
-    
+
     It is important for all learners to engage in meaningful
     activities. Our experience in teaching
     high-school students (and even university CS students) is that
@@ -199,7 +204,7 @@ In level 13, booleans are added. Learners encounter True and False and how to us
 
 ### Level 14: And and or
 
-In level 14, Learners learn about and and or in if statements. 
+In level 14, Learners learn about and and or in if statements.
 
 ### Level 15: Comments
 
@@ -229,14 +234,14 @@ the for loop was introduced but there was no explanation yet how to loop through
 ### Level 20: Change is to = and ==
 
 In level 20, we introduce the = and ==. All variable assignments change is to =. All equality checks
-turn into ==. 
+turn into ==.
 
 ### Level 21: Introducing !=
 
 In level 21, we introduce the != in the equality checks. This is introduced after the change to = and
-== as to make it easier to understand when you already know the syntax for =. 
+== as to make it easier to understand when you already know the syntax for =.
 
 ### Level 22: Introducing <= and >=
 
 In level 22, we introduce <= and >=. This is introduced after the change to = and
-== as to make it easier to understand when you already know the syntax for =. 
+== as to make it easier to understand when you already know the syntax for =.
