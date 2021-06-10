@@ -261,14 +261,38 @@ window.share_program = function share_program (id, Public, reload) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response) {
-    $ ('#okbox').show ();
-    $ ('#okbox .caption').html (window.auth.texts.save_success);
-    $ ('#okbox .details').html (window.auth.texts.share_success_detail);
-    if (reload) location.reload ();
+    if ($ ('#okbox') && $ ('#okbox').length) {
+      $ ('#okbox').show ();
+      $ ('#okbox .caption').html (window.auth.texts.save_success);
+      $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+    }
+    else {
+      alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+    }
+    if (reload) setTimeout (function () {location.reload ()}, 1000);
   }).fail(function(err) {
     console.error(err);
     error.show(ErrorMessages.Connection_error, JSON.stringify(err));
   });
+}
+
+window.copy_to_clipboard = function copy_to_clipboard (string) {
+  // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
+  var el = document.createElement ('textarea');
+  el.value = string;
+  el.setAttribute ('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild (el);
+  var selected = document.getSelection ().rangeCount > 0 ? document.getSelection ().getRangeAt (0) : false;
+  el.select ();
+  document.execCommand ('copy');
+  document.body.removeChild (el);
+  if (selected) {
+     document.getSelection ().removeAllRanges ();
+     document.getSelection ().addRange (selected);
+  }
+  alert (window.auth.texts.copy_clipboard);
 }
 
 /**
