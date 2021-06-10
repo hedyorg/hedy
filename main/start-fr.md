@@ -45,6 +45,7 @@ Non, ce n'est pas nécessaire. Cependant, si tu as déjà programmé avec Scratc
 
 Oui ! L’Université de Leiden au Pays-Bas nous permet de le partager gratuitement. Hedy est aussi 'Open
 source', ce qui signifie que n’importe qui sachant programmer peut nous aider à améliorer Hedy.
+Si vous aimez Hedy, nous aimerions un [don](https://www.steunleiden.nl/project/hedy?locale=en)!
 
 ## Que dois-je installer ?
 

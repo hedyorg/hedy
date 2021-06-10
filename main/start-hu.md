@@ -37,6 +37,7 @@ Nem, erre nincs szükség. Ha azonban használtad már a Scratch vagy a Python p
 
 ##A Hedy ingyenes?
 Igen! A Leideni Egyetem lehetővé teszi számunkra, hogy ingyen megosszuk. A Hedy egyúttal „nyílt forráskódú” is, ami azt jelenti, hogy mindenki, aki programozni tud, segíthet nekünk jobbá tenni Hedy-t. A kód a [GitHub] oldalon található (https://github.com/Felienne/hedy).
+Ha kedveled Hedyt, örülnénk egy [adománynak](https://www.steunleiden.nl/project/hedy?locale=en)!
 
 ##Telepítenem kell valamit?
 Nem. A Hedy a böngészőben működik, mely az a program, amit ennek az oldalnak a megtekintésére használsz. Valószínűleg Chrome vagy Edge vagy FireFox. A Hedy a telefonon vagy a táblagépen is működik.
