@@ -244,6 +244,9 @@ def parse():
     level = int(body ['level'])
     sublevel = body.get ('sublevel') or 0
 
+    code = re.sub(r'\n{2,}', '\n\n', code)
+    code += '\n';
+
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
