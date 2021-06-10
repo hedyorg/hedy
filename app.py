@@ -251,7 +251,6 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
-    supported_lang = ["en", "nl"]
     querylog.log_value(level=level, lang=lang)
 
     response = {}
@@ -270,8 +269,8 @@ def parse():
             with querylog.log_time('transpile'):
                 result = hedy.transpile(code, level,sublevel)
             response["Code"] = "# coding=utf8\nimport random\n" + result
-            if lang in supported_lang:
-                if not 'error_level' in session or 'similar_code' in session:
+            if gfi_support(lang):
+                if not (('error_level' in session) or ('similar_code' in session)):
                     return 'session cookie must have error_level & similar_code set', 400
                 response['prev_feedback_level'] = session['error_level']
                 response['prev_similar_code'] = session['similar_code']
@@ -297,16 +296,16 @@ def parse():
             else:
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
-            if lang in supported_lang:
+            if gfi_support(lang):
                 response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=True))
 
         except Exception as E:
             traceback.print_exc()
             print(f"error transpiling {code}")
             response["Error"] = str(E)
-            if lang in supported_lang:
+            if gfi_support(lang):
                 response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=False))
-        if lang in supported_lang:
+        if gfi_support(lang):
             session ['code'] = code
 
     querylog.log_value(server_error=response.get('Error'))
@@ -319,8 +318,8 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
-        'feedback_level': session['error_level'] if lang in supported_lang else None,
-        'GFM': True if lang in supported_lang else False,
+        'feedback_level': session['error_level'] if gfi_support (lang) else None,
+        'GFM': True if gfi_support (lang) else False,
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
@@ -460,6 +459,14 @@ def get_similar_code(processed_code, language, level):
         similar_code = None
     return similar_code
 
+def gfi_support(language):
+    return language in ["en", "nl"]
+
+def initialize_gfi_session(language):
+    if gfi_support(language):
+        session ['error_level'] = 0 # When requesting a new level, always reset error_level to 0
+        session ['similar_code'] = "-" # Make sure that the gathered similar code is also deleted when re-loading the page
+        session ['code'] = None # Make sure that no code is stored in the session when re-loading the page
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
@@ -572,6 +579,8 @@ def adventure_page(adventure_name, level):
     if not level in adventure ['levels']:
         abort(404)
 
+    initialize_gfi_session(requested_lang())
+
     adventure_assignments = load_adventure_assignments_per_level(requested_lang(), level)
     g.prefix = '/hedy'
     return hedyweb.render_assignment_editor(
@@ -611,10 +620,7 @@ def index(level, step):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
-    if requested_lang() in ["en", "nl"]:
-        session ['error_level'] = 0 # When requesting a new level, always reset error_level to 0
-        session ['similar_code'] = "-" # Make sure that the gathered similar code is also deleted when re-loading the page
-        session ['code'] = None # Make sure that no code is stored in the session when re-loading the page
+    initialize_gfi_session(g.lang)
 
     loaded_program = ''
     loaded_program_name = ''
