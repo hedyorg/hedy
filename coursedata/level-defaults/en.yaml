@@ -253,7 +253,7 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
-7-2:
+8:
     start_code: "for counter in range 1 to 5\n    print counter"
     intro_text:
         "`print` works just the same but the `repeat` is now replaced by `for`!
@@ -274,25 +274,6 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
-8:
-    start_code: |-
-        for counter in range 2 to 10 step 2
-            print counter
-        print 'Steps of 2!'
-    intro_text: "We changed `for` again! Now you can use `step` in the for loop to skip through the counting faster. It is not necessary to use, so try loops with and without the step! Use `in range` to tell the for loop how far it needs to count."
-    commands:
-    -   explanation: "We added a `step` to `for`"
-        example: "for counter in range 2 to 10 step 2"
-        demo_code: |
-            for counter in range 2 to 10 step 2
-              print counter
-            print 'Steps of 2!'
-    -   explanation: "You can also use shorter names in the for loop to make your program smaller. Try using `i` as a counter for example."
-        example: "for i in range 1 to 10"
-        demo_code: |
-            for i in range 1 to 10
-              print i
-            print 'Ready or not, here I come!'
 9:
     start_code: |-
         for i in range 1 to 10:
