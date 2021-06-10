@@ -1,0 +1,16 @@
+// in level 9 we add the : at the end of if and else and elif and for
+
+command: print | ifs (elifs)* elses? | ask | for_loop | assign_list | list_access_var | assign
+
+elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+ifs: _IF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"//'if' cannot be used in Python, hence the name of the rule is 'ifs'
+elifs: _EOL _SPACE* _ELIF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+
+//new for level 9
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) (_SPACE _STEP _SPACE (NUMBER | var))? _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+
+//anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+//plus from level 6 on: calculation elements
+//plus from level 8 on: colon
+
+textwithoutspaces: /([^\n, :*+-\/]+)/ -> text

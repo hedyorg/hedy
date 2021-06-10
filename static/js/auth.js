@@ -2,6 +2,7 @@ var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'A
 
 window.auth = {
   texts: {},
+  emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where) {
     where = '/' + where;
     window.location.pathname = where;
@@ -45,7 +46,7 @@ window.auth = {
       if (values.username.match (/:|@/)) return auth.error (auth.texts.username_special, 'username');
       if (! values.password) return auth.error (auth.texts.please_password, 'password');
       if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
-      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return auth.error (auth.texts.valid_email, 'email');
+      if (! values.email.match (window.auth.emailRegex)) return auth.error (auth.texts.valid_email, 'email');
       if (values.email    !== values.email_repeat)    return auth.error (auth.texts.repeat_match_email,    'email_repeat');
       if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match_password, 'password_repeat');
       if (values.birth_year) {
@@ -114,7 +115,7 @@ window.auth = {
     }
 
     if (op === 'profile') {
-      if (! values.email.match (/^(([a-zA-Z0-9_\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/)) return auth.error (auth.texts.valid_email, 'email');
+      if (! values.email.match (window.auth.emailRegex)) return auth.error (auth.texts.valid_email, 'email');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
         if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return auth.error (auth.texts.valid_year + new Date ().getFullYear (), 'birth_year');
@@ -195,6 +196,19 @@ window.auth = {
     }).fail (function (error) {
       console.log (error);
       alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+    });
+  },
+
+  changeUserEmail: function (username, email) {
+    var correctedEmail = prompt ('Please enter the corrected email', email);
+    if (correctedEmail === email) return;
+    if (! correctedEmail.match (window.auth.emailRegex)) return alert ('Please enter a valid email.');
+    $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+      alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
+      location.reload ();
+    }).fail (function (error) {
+      console.log (error);
+      alert (['Error when changing the email for User', username].join (' '));
     });
   },
 }

@@ -1,0 +1,7 @@
+// Level 22 adds <= to combine < and =
+
+condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
+
+//new for level 22
+smaller_equal: (textwithoutspaces | list_access | length) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access | length)
+bigger_equal: (textwithoutspaces | list_access | length) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access | length)

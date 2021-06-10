@@ -5,7 +5,7 @@ from os import path
 import sys
 import utils
 
-reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','false','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
+reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
 #
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
@@ -417,7 +417,7 @@ class ConvertToPython_1(Transformer):
     def program(self, args):
         return '\n'.join([str(c) for c in args])
     def command(self, args):
-        return args
+        return args[0]
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
@@ -716,9 +716,11 @@ class ConvertToPython_13(ConvertToPython_12):
                 if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
-                    if value == 'true' or value == 'True':
+                    # FH, June 21 the addition of _true/false is a bit of a hack. cause they are first seen as vars that at reserved words, they egt and _ and we undo that here.
+                    # could/should be fixed in the grammar!
+                    if value == 'true' or value == 'True' or value == '_True':
                         return parameter + " = True"
-                    elif value == 'false' or value == 'False':
+                    elif value == 'false' or value == 'False' or value == '_False':
                         return parameter + " = False"
                     else:
                         return parameter + " = '" + value + "'"
@@ -962,16 +964,103 @@ class ConvertToPython(ConvertTo):
         args = self._call_children(children)
         return "input("  + " + ".join(args) + ")"
 
+def merge_grammars(grammar_text_1, grammar_text_2):
+    # this function takes two grammar files and merges them into one
+    # rules that are redefined in the second file are overridden
+    # rule that are new in the second file are added (remaining_rules_grammar_2)
+
+    merged_grammar = []
+
+    rules_grammar_1 = grammar_text_1.split('\n')
+    remaining_rules_grammar_2 = grammar_text_2.split('\n')
+    for line_1 in rules_grammar_1:
+        if line_1 == '' or line_1[0] == '/': #skip comments and empty lines:
+            continue
+        parts = line_1.split(':')
+        name_1, definition_1 = parts[0], ''.join(parts[1:]) #get part before are after : (this is a join because there can be : in the rule)
+
+        rules_grammar_2 = grammar_text_2.split('\n')
+        override_found = False
+        for line_2 in rules_grammar_2:
+            if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
+                continue
+            parts = line_2.split(':')
+            name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+            if name_1 == name_2:
+                override_found = True
+                new_rule = line_2
+                # this rule is now in the grammar, remove form this list
+                remaining_rules_grammar_2.remove(new_rule)
+                break
+
+        # new rule found? print that. nothing found? print org rule
+        if override_found:
+            merged_grammar.append(new_rule)
+        else:
+            merged_grammar.append(line_1)
+
+    #all rules that were not overlapping are new in the grammar, add these too
+    for rule in remaining_rules_grammar_2:
+        if not(rule == '' or rule[0] == '/'):
+            merged_grammar.append(rule)
+
+    merged_grammar = sorted(merged_grammar)
+    return '\n'.join(merged_grammar)
+
+
 def create_grammar(level, sub):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    if sub:
-        filename = "level" + str(level) + "-" + str (sub) + ".lark"
-    else:
-        filename = "level" + str(level) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        return file.read()
 
+    if sub:
+      filename = "level" + str(level) + "-" + str (sub) + ".lark"
+      with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+          return file.read()
+    else:
+
+        # Load Lark grammars relative to directory of current file
+        script_dir = path.abspath(path.dirname(__file__))
+
+        # we start with creating the grammar for level 1
+        grammar_text_1 = get_full_grammar_for_level(1)
+
+        #grep
+        if level == 1:
+            grammar_text = get_full_grammar_for_level(level)
+            return grammar_text
+
+        grammar_text_2 = get_additional_rules_for_level(2)
+
+        #start at 1 and keep merging new grammars in
+        new = merge_grammars(grammar_text_1, grammar_text_2)
+
+        for i in range(3, level+1):
+            grammar_text_i = get_additional_rules_for_level(i)
+            new = merge_grammars(new, grammar_text_i)
+
+        # ready? Save to file to ease debugging
+        # this could also be done on each merge for performance reasons
+        filename = "level" + str(level) + "-Total.lark"
+        loc = path.join(script_dir, "grammars-Total", filename)
+        file = open(loc, "w", encoding="utf-8")
+        file.write(new)
+        file.close()
+
+    return new
+
+def get_additional_rules_for_level(level):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "level" + str(level) + "-Additions.lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
+
+def get_full_grammar_for_level(level):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "level" + str(level) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
 
 PARSER_CACHE = {}
 
@@ -985,7 +1074,8 @@ def get_parser(level, sub):
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    ret = Lark(create_grammar(level, sub))
+    grammar = create_grammar(level, sub)
+    ret = Lark(grammar)
     PARSER_CACHE[key] = ret
     return ret
 

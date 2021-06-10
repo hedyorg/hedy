@@ -8,7 +8,6 @@ import datetime
 import collections
 import hedy
 import json
-import jsonbin
 import logging
 import os
 from os import path
@@ -19,8 +18,8 @@ from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_set, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
+from utils import db_get, db_get_many, db_create, db_update, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -31,11 +30,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import courses
 import hedyweb
-import translating
-import querylog
-import aws_helpers
-import ab_proxying
-import cdn
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
@@ -374,7 +369,7 @@ def programs_page (request):
 
             date = round (date / 24)
 
-        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name')})
+        programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name'), 'public': item.get ('public')})
 
     return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
 
@@ -467,9 +462,10 @@ def index(level, step):
         result = db_get ('programs', {'id': step})
         if not result:
             return 'No such program', 404
-        # Allow only the owner of the program, the admin user and the teacher users to access the program
+        # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
         user = current_user (request)
-        if user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
+        public_program = 'public' in result and result ['public']
+        if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
         loaded_program = result ['code']
         loaded_program_name = result ['name']
@@ -551,7 +547,7 @@ def error():
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return "<h1>500 Internal Server Error</h1>"
+    return "<h1>500 Internal Server Error</h1>", 500
 
 @app.route('/index.html')
 @app.route('/')
@@ -684,6 +680,11 @@ def render_main_menu(current_page):
 
 # *** PROGRAMS ***
 
+@app.route('/programs_list', methods=['GET'])
+@requires_login
+def list_programs (user):
+    return {'programs': db_get_many ('programs', {'username': user ['username']}, True)}
+
 # Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
 @app.route('/programs/delete/<program_id>', methods=['GET'])
 @requires_login
@@ -695,7 +696,7 @@ def delete_program (user, program_id):
     program_count = 0
     if 'program_count' in user:
         program_count = user ['program_count']
-    db_set ('users', {'username': user ['username'], 'program_count': program_count - 1})
+    db_update ('users', {'username': user ['username'], 'program_count': program_count - 1})
     return redirect ('/programs')
 
 @app.route('/programs', methods=['POST'])
@@ -757,14 +758,32 @@ def save_program (user):
     if 'adventure_name' in body:
         stored_program ['adventure_name'] = body ['adventure_name']
 
-    db_set('programs', stored_program)
+    db_create('programs', stored_program)
 
     program_count = 0
     if 'program_count' in user:
         program_count = user ['program_count']
-    db_set('users', {'username': user ['username'], 'program_count': program_count + 1})
+    db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
 
     return jsonify({'name': name})
+
+@app.route('/programs/share', methods=['POST'])
+@requires_login
+def share_unshare_program(user):
+    body = request.json
+    if not type_check (body, 'dict'):
+        return 'body must be an object', 400
+    if not object_check (body, 'id', 'str'):
+        return 'id must be a string', 400
+    if not object_check (body, 'public', 'bool'):
+        return 'public must be a string', 400
+
+    result = db_get ('programs', {'id': body ['id']})
+    if not result or result ['username'] != user ['username']:
+        return 'No such program!', 404
+
+    db_update ('programs', {'id': body ['id'], 'public': 1 if body ['public'] else None})
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
@@ -823,7 +842,7 @@ def update_yaml():
 
 # *** AUTH ***
 
-import auth
+from website import auth
 auth.routes (app, requested_lang)
 
 # *** START SERVER ***

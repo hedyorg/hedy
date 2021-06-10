@@ -1,0 +1,14 @@
+// level 20 changes is to = and ==
+
+input: var _SPACE _EQUALS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))*  _RIGHT_BRACKET
+assign_list: var _SPACE _EQUALS _SPACE _LEFT_SQUARE_BRACKET quoted_text ((_COMMA|_COMMA _SPACE) quoted_text)+ _RIGHT_SQUARE_BRACKET
+
+//space hierboven kan met + want hoeft niet?
+
+assign: var _SPACE _EQUALS _SPACE length | var _SPACE _EQUALS _SPACE sum | var _SPACE _EQUALS _SPACE textwithoutspaces | list_access _SPACE _EQUALS _SPACE sum | list_access _SPACE _EQUALS _SPACE textwithoutspaces
+
+list_access_var: var _SPACE _EQUALS _SPACE var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
+equality_check: (length | textwithoutspaces | list_access | sum) _SPACE _DOUBLE_EQUALS _SPACE (length | textwithoutspaces | list_access | sum)
+//space hierboven kan met + want hoeft niet?
+
+change_list_item: var _LEFT_SQUARE_BRACKET (index | var) _RIGHT_SQUARE_BRACKET _SPACE _EQUALS _SPACE (var | textwithoutspaces)
