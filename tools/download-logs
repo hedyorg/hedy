@@ -26,4 +26,4 @@ sed -e '$a\' $cache_dir/* > $finalfile
 
 echo "Now run a command like:"
 echo ""
-echo "   cat $finalfile | recs grep '{{duration_ms}} > 10000' | recs totable -k start_time,duration_ms,method,path,'!_ms\$!' | less -S"
+echo "   cat $finalfile | recs grep '{{duration_ms}} > 1000' | tee _lastquery.jsonl | recs totable -k start_time,duration_ms,method,path,'!_ms\$!' | less -S"
