@@ -1,6 +1,8 @@
+import contextlib
 import datetime
 import time
 from config import config
+import pickle
 import boto3
 import functools
 import os
@@ -80,24 +82,69 @@ def set_debug_mode(debug_mode):
 YAML_CACHE = {}
 
 @querylog.timed
-def load_yaml(filename):
+def load_yaml(filename, can_memcache=True, can_pickle=True):
     """Load the given YAML file.
 
-    The file load will be cached in production, but reloaded everytime in development mode.
+    The file load will be cached in production, but reloaded everytime in
+    development mode for much iterating. Because YAML loading is still
+    somewhat slow, in production we'll have two levels of caching:
 
-    Whether we are running in production or not will be determined
-    by the Flask config (FLASK_ENV).
+    - In-memory cache: each of the N processes on the box will only need to
+      load the YAML file once (per restart).
+
+    - On-disk pickle cache: "pickle" is a more efficient Python serialization
+      format, and loads 400x quicker than YAML. We will prefer loading a pickle
+      file to loading the source YAML file if possible. Hopefully only 1/N
+      processes on the box will have to do the full load per deploy.
+
+    We should be generating the pickled files at build time, but Heroku doesn't
+    make it easy to have a build/deploy time... so for now let's just make sure
+    we only do it once per box per deploy.
     """
-    # Bypass the cache in DEBUG mode for mucho iterating
-    if not is_debug_mode() and filename in YAML_CACHE:
-        return YAML_CACHE[filename]
-    try:
-        with open (filename, 'r', encoding='utf-8') as f:
-            data = yaml.safe_load(f)
+    def load():
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                return yaml.safe_load(f)
+        except IOError:
+            return {}
+
+    def unpickle_or(next):
+        pickle_file = f'{filename}.pickle'
+        if not os.path.exists(pickle_file):
+            data = next()
+
+            # Write a pickle file, first write to a tempfile then rename
+            # into place because multiple processes might try to do this in parallel.
+            with atomic_write_file(pickle_file) as f:
+                pickle.dump(data, f)
+
+            return data
+        else:
+            with open(pickle_file, 'rb') as f:
+                return pickle.load(f)
+
+    def memcache_or(next):
+        # Production mode, check our two-level cache
+        if filename not in YAML_CACHE:
+            data = next()
             YAML_CACHE[filename] = data
             return data
-    except IOError:
-        return {}
+        else:
+            return YAML_CACHE[filename]
+
+    if is_debug_mode():
+        return load()
+
+    # The following is not great but I'm worried more indirection via partially
+    # applied functions is going to perform a lot worse (and also is annoying
+    # to write in Python).
+    if can_memcache and can_pickle:
+        return memcache_or(unpickle_or(load))
+    if can_pickle:
+        return unpickle_or(load)
+    if can_memcache:
+        return memcache_or(load)
+    return load()
 
 
 def load_yaml_rt(filename):
@@ -325,3 +372,23 @@ def version():
 
 def valid_email(s):
     return bool (re.match ('^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+
+
+@contextlib.contextmanager
+def atomic_write_file(filename, mode='wb'):
+    """Write to a filename atomically.
+
+    First write to a unique tempfile, then rename the tempfile into
+    place. Use as a context manager:
+
+        with atomic_write_file('file.txt') as f:
+            f.write('hello')
+
+    THIS WON'T WORK ON WINDOWS -- atomic file renames don't overwrite
+    on Windows.
+    """
+    tmp_file = f'{filename}.{os.getpid()}'
+    with open(tmp_file, mode) as f:
+        yield f
+
+    os.rename(tmp_file, filename)
