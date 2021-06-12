@@ -27,18 +27,18 @@ class LogQueue:
     thread-safe. We do as little work as possible every time we hold the mutex
     to allow for maximum parallelism.
     """
-    def __init__(self, batch_window_s, do_print=False):
+    def __init__(self, name, batch_window_s, do_print=False):
+        self.name = name
         self.records_queue = collections.defaultdict(list)
         self.batch_window_s = batch_window_s
         self.transmitter = None
         self.do_print = do_print
         self.mutex = threading.Lock()
-        self.thread = threading.Thread(target=self._write_thread, name='QueryLogWriter', daemon=True)
+        self.thread = threading.Thread(target=self._write_thread, name=f'{name}Writer', daemon=True)
         self.thread.start()
 
-    def add(self, record):
+    def add(self, data):
         bucket = div_clip(time.time(), self.batch_window_s)
-        data = record.as_data()
 
         if self.do_print:
             logging.debug(repr(data))
@@ -71,7 +71,7 @@ class LogQueue:
         if not all_records:
             return
 
-        filename = f'querylog_dump.{os.getpid()}.{time.time()}.jsonl'
+        filename = f'{self.name}_dump.{os.getpid()}.{time.time()}.jsonl'
         with open(filename, 'w') as f:
             json.dump(all_records, f)
 
@@ -84,7 +84,7 @@ class LogQueue:
 
         We use the atomicity of renaming the file as a way of claiming ownership of it.
         """
-        candidates = glob.glob('querylog_dump.*.jsonl')
+        candidates = glob.glob(f'{self.name}_dump.*.jsonl')
         for candidate in candidates:
             try:
                 claim_name = candidate + '.claimed'

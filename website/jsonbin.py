@@ -110,3 +110,8 @@ class S3ParseLogger():
 
 
 S3_LOG_QUEUE = log_queue.LogQueue('parse', batch_window_s=300)
+S3_LOG_QUEUE.try_load_emergency_saves()
+
+def emergency_shutdown():
+    """The process is being killed. Do whatever needs to be done to save the logs."""
+    S3_LOG_QUEUE.emergency_save_to_disk()
