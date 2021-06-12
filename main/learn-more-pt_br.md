@@ -1,6 +1,7 @@
-page_title: 联系我们 — Hedy海迪
+page_title: Learn More - Hedy
 ---
-# 订阅Hedy海迪通讯报
+
+# Subscribe to the Hedy newsletter 
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
@@ -12,7 +13,7 @@ page_title: 联系我们 — Hedy海迪
 <div id="mc_embed_signup">
 <form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-
+	
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
@@ -38,20 +39,43 @@ page_title: 联系我们 — Hedy海迪
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
     <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
     </div>
-    <p><a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" title="查看以往的活动">View previous campaigns.</a></p>
+<p><a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" title="View previous campaigns">View previous campaigns.</a></p>
 
 </form>
 </div>
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 <!--End mc_embed_signup-->
 
-# 你喜欢Hedy海迪吗?
 
-我们很高兴听取您的意见和建议！
+# Você gostou de Hedy?
 
-[请点击这里给我们发送信息](mailto:hedy@felienne.com "About Hedy")
+Adoraríamos ouvir de você!
 
-# 你发现了一个错误？?
+[Clique aqui para nos enviar uma mensagem](mailto:hedy@felienne.com "Hedy")
 
-[请到GitHub告知我们](https://github.com/Felienne/hedy/issues/new)page_title: Contact — Hedy
+# Encontrou um erro?
 
+[Passe adiante via GitHub](https://github.com/Felienne/hedy/issues/new)
+
+
+# Hedy na mídia
+
+Desde o nosso lançamento no início de 2020, algumas pessoas escreveram sobre nós! Mantemos uma lista aqui:
+
+**SlashDot (Inglês), 20 de agosto 2020**
+* [Link](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
+
+**GenBeta (Espanhol), 19 de agosto 2020**
+* [Link ](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
+
+**Developpez (Francês), 18 de agosto 2020**
+* [Link](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
+
+**Universidade de Leiden, 25 de abril 2020**
+[![Header Uni](images/UniLeiden-NL.png "Header Uni")](https://www.universiteitleiden.nl/nieuws/2020/03/kinderen-verantwoord-afleiden-tijdens-het-thuiswerken-leer-ze-programmeren)
+
+**Mare, 10 de abril 2020**
+[![Header Mare](images/mare.png "Header Mare")](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
+
+**AG Connect, 3 de abril 2020**
+[![Header AG Connect](images/agconnect.png "Header AG Connect")](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
