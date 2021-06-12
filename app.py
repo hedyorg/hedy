@@ -206,6 +206,16 @@ def after_request_log_status(response):
     querylog.log_value(http_code=response.status_code)
     return response
 
+@app.after_request
+def set_security_headers(response):
+    security_headers = {
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+    }
+    response.headers.update(security_headers)
+    return response
+
 @app.teardown_request
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
