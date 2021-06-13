@@ -23,12 +23,12 @@ class TestUtils(unittest.TestCase):
 
     start = time.time()
     for _ in range(n):
-      original_data = utils.load_yaml(file, can_memcache=False, can_pickle=False)
+      original_data = utils.load_yaml_uncached(file)
     original_seconds = time.time() - start
 
     start = time.time()
     for _ in range(n):
-      cached_data = utils.load_yaml(file, can_memcache=False, can_pickle=True)
+      cached_data = utils.load_yaml_pickled(file)
     cached_seconds = time.time() - start
 
     self.assertEqual(original_data, cached_data)

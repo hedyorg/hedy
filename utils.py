@@ -82,7 +82,7 @@ def set_debug_mode(debug_mode):
 YAML_CACHE = {}
 
 @querylog.timed
-def load_yaml(filename, can_memcache=True, can_pickle=True):
+def load_yaml(filename):
     """Load the given YAML file.
 
     The file load will be cached in production, but reloaded everytime in
@@ -101,50 +101,40 @@ def load_yaml(filename, can_memcache=True, can_pickle=True):
     make it easy to have a build/deploy time... so for now let's just make sure
     we only do it once per box per deploy.
     """
-    def load():
-        try:
-            with open(filename, 'r', encoding='utf-8') as f:
-                return yaml.safe_load(f)
-        except IOError:
-            return {}
-
-    def unpickle_or(next):
-        pickle_file = f'{filename}.pickle'
-        if not os.path.exists(pickle_file):
-            data = next()
-
-            # Write a pickle file, first write to a tempfile then rename
-            # into place because multiple processes might try to do this in parallel.
-            with atomic_write_file(pickle_file) as f:
-                pickle.dump(data, f)
-
-            return data
-        else:
-            with open(pickle_file, 'rb') as f:
-                return pickle.load(f)
-
-    def memcache_or(next):
-        # Production mode, check our two-level cache
-        if filename not in YAML_CACHE:
-            data = next()
-            YAML_CACHE[filename] = data
-            return data
-        else:
-            return YAML_CACHE[filename]
-
     if is_debug_mode():
-        return load()
+        return load_yaml_uncached()
 
-    # The following is not great but I'm worried more indirection via partially
-    # applied functions is going to perform a lot worse (and also is annoying
-    # to write in Python).
-    if can_memcache and can_pickle:
-        return memcache_or(unpickle_or(load))
-    if can_pickle:
-        return unpickle_or(load)
-    if can_memcache:
-        return memcache_or(load)
-    return load()
+    # Production mode, check our two-level cache
+    if filename not in YAML_CACHE:
+        data = load_yaml_pickled()
+        YAML_CACHE[filename] = data
+        return data
+    else:
+        return YAML_CACHE[filename]
+
+
+def load_yaml_pickled(filename):
+    pickle_file = f'{filename}.pickle'
+    if not os.path.exists(pickle_file):
+        data = load_yaml_uncached()
+
+        # Write a pickle file, first write to a tempfile then rename
+        # into place because multiple processes might try to do this in parallel.
+        with atomic_write_file(pickle_file) as f:
+            pickle.dump(data, f)
+
+        return data
+    else:
+        with open(pickle_file, 'rb') as f:
+            return pickle.load(f)
+
+
+def load_yaml_uncached(filename):
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    except IOError:
+        return {}
 
 
 def load_yaml_rt(filename):
