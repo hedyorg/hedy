@@ -184,8 +184,10 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-logger = jsonbin.JsonBinLogger.from_env_vars()
-querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_transmitter_from_env())
+parse_logger = jsonbin.MultiParseLogger(
+    jsonbin.JsonBinLogger.from_env_vars(),
+    jsonbin.S3ParseLogger.from_env_vars())
+querylog.LOG_QUEUE.set_transmitter(aws_helpers.s3_querylog_transmitter_from_env())
 
 # Check that requested language is supported, otherwise return 404
 @app.before_request
@@ -204,6 +206,16 @@ def before_request_begin_logging():
 @app.after_request
 def after_request_log_status(response):
     querylog.log_value(http_code=response.status_code)
+    return response
+
+@app.after_request
+def set_security_headers(response):
+    security_headers = {
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+    }
+    response.headers.update(security_headers)
     return response
 
 @app.teardown_request
@@ -273,11 +285,16 @@ def parse():
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
-                error_template = hedy_errors[E.error_code]
-                # Localize the names of characters
-                if 'character_found' in E.arguments:
-                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
-                response["Error"] = error_template.format(**E.arguments)
+                try:
+                    error_template = hedy_errors[E.error_code]
+                    # Localize the names of characters
+                    if 'character_found' in E.arguments:
+                        E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                    response["Error"] = error_template.format(**E.arguments)
+                except:
+                    print('DEBUG ISSUE 375', code) #TEMP!! We need to find the programs that cause weird issue #375
+                    raise E
+
             elif E.args[0] == "Unquoted Text":
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
@@ -289,7 +306,7 @@ def parse():
             print(f"error transpiling {code}")
             response["Error"] = str(E)
     querylog.log_value(server_error=response.get('Error'))
-    logger.log ({
+    parse_logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': level,
@@ -308,7 +325,7 @@ def parse():
 def report_error():
     post_body = request.json
 
-    logger.log ({
+    parse_logger.log ({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'level': post_body.get('level'),
