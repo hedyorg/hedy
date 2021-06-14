@@ -148,9 +148,9 @@ function runit(level, lang, cb) {
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
       });
-    }).fail(function(xhr, textStatus, err) {
+    }).fail(function(xhr) {
+      console.error(xhr);
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
-      console.error(xhr, textStatus, err);
       if (xhr.readyState < 4) {
         error.show(ErrorMessages.Connection_error, ErrorMessages.CheckInternet);
       } else {

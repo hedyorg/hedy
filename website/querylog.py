@@ -102,7 +102,6 @@ class NullRecord(LogRecord):
 THREAD_LOCAL = threading.local()
 THREAD_LOCAL.current_log_record = NullRecord()
 
-print("Thread local set")
 
 def begin_global_log_record(**kwargs):
     """Open a new global log record with the given attributes."""
