@@ -15,12 +15,16 @@ import argparse
 args = argparse.ArgumentParser ()
 args.add_argument ('--concurrent', help='how many tests to run at the same time (stress testing), default is 1', type=int)
 args.add_argument ('--host', help='Host against which to run the tests (optional), default is localhost')
+args.add_argument ('--endpoint', help='Endpoint against which to run the tests (optional, by default \'--host\' is used)')
 args = args.parse_args ()
 
 host = 'http://localhost:' + str (config ['port']) + '/'
 hosts = {'alpha': 'https://hedy-alpha.herokuapp.com/', 'test': 'https://hedy-test.herokuapp.com/'}
 
-if args.host:
+if args.endpoint:
+  host = args.endpoint
+
+elif args.host:
     if not args.host in hosts:
         raise Exception ('No such host')
     host = hosts [sys.argv [2]]

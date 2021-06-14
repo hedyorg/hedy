@@ -166,7 +166,10 @@ def dump_yaml_rt(data):
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
 
 db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'], aws_access_key_id = os.getenv ('AWS_DYNAMODB_ACCESS_KEY'), aws_secret_access_key = os.getenv ('AWS_DYNAMODB_SECRET_KEY'))
-db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX')
+db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX', '')
+
+def is_dynamo_available():
+    return bool(os.getenv ('AWS_DYNAMODB_ACCESS_KEY'))
 
 # Encode a dict so that it has the format expected by DynamoDB
 def db_encode (data):
@@ -221,15 +224,14 @@ db_main_indexes = {
 
 # This function takes a dict `data` and returns a new dict with only the key/value for the index key for the table.
 # If remove is truthy, then the index key is removed instead, leaving the rest of the keys intact.
-def db_key (table, data, remove=False):
-    processed_data = {}
-    if remove:
-        for key in data:
-            if key != db_main_indexes [table]:
-                processed_data [key] = data [key]
-    else:
-        processed_data [db_main_indexes [table]] = data [db_main_indexes [table]]
-    return processed_data
+def db_key (table, data):
+    index_name = db_main_indexes [table]
+    return { index_name: data[index_name] }
+
+
+def db_remove_key(table, data):
+    """Remove the key fields for the given table from the given dict."""
+    return {k: v for k, v in data.items() if k != db_main_indexes[table]}
 
 # Gets an item by index from the database. If not_primary is truthy, the search is done by a field that should be set as a secondary index.
 @querylog.timed
@@ -273,9 +275,15 @@ def db_create (table, data):
 
 # Updates an item by primary key.
 @querylog.timed
-def db_update (table, data):
+def db_update (table, data, raw_updates=None):
     querylog.log_counter('db_update:' + table)
-    return db.update_item (TableName = db_prefix + '-' + table, Key = db_encode (db_key (table, data)), AttributeUpdates = db_encode_updates (db_key (table, data, True)))
+    return db.update_item (
+        TableName = db_prefix + '-' + table,
+        Key = db_encode (db_key (table, data)),
+        AttributeUpdates = {
+            **db_encode_updates(db_remove_key (table, data)),
+            **(raw_updates or {})
+        })
 
 # Deletes an item by primary key.
 @querylog.timed

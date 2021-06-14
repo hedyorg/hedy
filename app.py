@@ -19,7 +19,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_create, db_update, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import is_dynamo_available, timems, type_check, object_check, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -30,7 +30,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import courses
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, users
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
@@ -67,6 +67,8 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 
 TRANSLATIONS = hedyweb.Translations()
 
+USERS = users.DynamoUsers() if utils.is_dynamo_available() else users.InMemoryUsers()
+
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys ():
@@ -86,7 +88,7 @@ def load_adventure_assignments_per_level(lang, level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode (no adventure) and for each of the adventures.
     if current_user (request) ['username']:
-        user_programs = db_get_many ('programs', {'username': current_user (request) ['username']}, True)
+        user_programs = USERS.programs_for_user(current_user (request) ['username'])
         for program in user_programs:
             if program ['level'] != level:
                 continue
@@ -372,7 +374,7 @@ def programs_page (request):
     ui=TRANSLATIONS.data [requested_lang ()] ['ui']
     adventures = load_adventure_for_language(requested_lang ())['adventures']
 
-    result = db_get_many ('programs', {'username': from_user or username}, True)
+    result = USERS.programs_for_user(from_user or username)
     programs = []
     now = timems ()
     for item in result:
@@ -415,7 +417,7 @@ def adventure_page(adventure_name, level):
         # If there are many, note the highest level for which there is a saved program
         desired_level = 0
         if user ['username']:
-            existing_programs = db_get_many ('programs', {'username': user ['username']}, True)
+            existing_programs = USERS.programs_for_user(user ['username'])
             for program in existing_programs:
                 if 'adventure_name' in program and program ['adventure_name'] == adventure_name and program ['level'] > desired_level:
                     desired_level = program ['level']
@@ -478,7 +480,7 @@ def index(level, step):
 
     # If step is a string that has more than two characters, it must be an id of a program
     if step and type_check (step, 'str') and len (step) > 2:
-        result = db_get ('programs', {'id': step})
+        result = USERS.program_by_id(step)
         if not result:
             return 'No such program', 404
         # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
@@ -702,20 +704,17 @@ def render_main_menu(current_page):
 @app.route('/programs_list', methods=['GET'])
 @requires_login
 def list_programs (user):
-    return {'programs': db_get_many ('programs', {'username': user ['username']}, True)}
+    return {'programs': USERS.programs_for_user(user['username'])}
 
 # Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
 @app.route('/programs/delete/<program_id>', methods=['GET'])
 @requires_login
 def delete_program (user, program_id):
-    result = db_get ('programs', {'id': program_id})
+    result = USERS.program_by_id(program_id)
     if not result or result ['username'] != user ['username']:
         return "", 404
-    db_del ('programs', {'id': program_id})
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_update ('users', {'username': user ['username'], 'program_count': program_count - 1})
+    USERS.delete_program_by_id(program_id)
+    USERS.increase_user_program_count(user['username'], -1)
     return redirect ('/programs')
 
 @app.route('/programs', methods=['POST'])
@@ -753,7 +752,7 @@ def save_program (user):
     # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    existing = db_get_many ('programs', {'username': user ['username']}, True)
+    existing = USERS.programs_for_user(user ['username'])
     name_counter = 0
     for program in existing:
         if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
@@ -777,12 +776,8 @@ def save_program (user):
     if 'adventure_name' in body:
         stored_program ['adventure_name'] = body ['adventure_name']
 
-    db_create('programs', stored_program)
-
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
+    USERS.store_program(stored_program)
+    USERS.increase_user_program_count(user ['username'])
 
     return jsonify({'name': name})
 
@@ -797,11 +792,11 @@ def share_unshare_program(user):
     if not object_check (body, 'public', 'bool'):
         return 'public must be a string', 400
 
-    result = db_get ('programs', {'id': body ['id']})
+    result = USERS.program_by_id(body['id'])
     if not result or result ['username'] != user ['username']:
         return 'No such program!', 404
 
-    db_update ('programs', {'id': body ['id'], 'public': 1 if body ['public'] else None})
+    USERS.set_program_public(body ['id'], bool(body ['public']))
     return jsonify({})
 
 @app.route('/translate/<source>/<target>')
@@ -863,6 +858,7 @@ def update_yaml():
 
 from website import auth
 auth.routes (app, requested_lang)
+auth.pass_users(USERS)
 
 # *** START SERVER ***
 

@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, valid_email
+from utils import type_check, object_check, timems, times, extract_bcrypt_rounds, is_testing_request, valid_email
 import datetime
 from functools import wraps
 from config import config
@@ -12,12 +12,23 @@ import boto3
 from botocore.exceptions import ClientError as email_error
 import json
 import requests
-from website import querylog
+from website import querylog, users
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
 env = os.getenv ('HEROKU_APP_NAME')
+
+USERS = users.Users()
+
+def pass_users(users):
+    """Make the USERS object the same as the given object.
+
+    Bit of a hack but given that we've split the logic over these files, we have to
+    do it like this.
+    """
+    global USERS
+    USERS = users
 
 @querylog.timed
 def check_password (password, hash):
@@ -35,9 +46,9 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 @querylog.timed
 def current_user (request):
     if request.cookies.get (cookie_name):
-        token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
+        token = USERS.get_token(request.cookies.get (cookie_name))
         if token:
-            user = db_get ('users',  {'username': token ['username']})
+            user = USERS.user_by_username(token ['username'])
             if user:
                 return user
     return {'username': '', 'email': ''}
@@ -58,12 +69,12 @@ TRANSLATIONS = hedyweb.Translations ()
 def requires_login (f):
     @wraps (f)
     def inner (*args, **kws):
-        User = None
+        user = None
         if request.cookies.get (cookie_name):
-            token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
+            token = USERS.get_token(request.cookies.get (cookie_name))
             if not token:
                 return 'unauthorized', 403
-            user = db_get ('users', {'username': token ['username']})
+            user = USERS.user_by_username(token ['username'])
             if not user:
                 return 'unauthorized', 403
         else:
@@ -92,9 +103,9 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-            user = db_get ('users', {'email': body ['username'].strip ().lower ()}, True)
+            user = USERS.user_by_email(body ['username'].strip ().lower ())
         else:
-            user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+            user = USERS.user_by_username(body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username/password', 403
@@ -107,11 +118,11 @@ def routes (app, requested_lang):
             new_hash = hash (body ['password'], make_salt ())
 
         cookie = make_salt ()
-        db_create ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        USERS.store_token({'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
         if new_hash:
-            db_update ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
+            USERS.record_login(user['username'], new_hash)
         else:
-            db_update ('users', {'username': user ['username'], 'last_login': timems ()})
+            USERS.record_login(user['username'])
         resp = make_response ({})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
@@ -151,10 +162,10 @@ def routes (app, requested_lang):
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'gender must be m/f/o', 400
 
-        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+        user = USERS.user_by_username(body ['username'].strip ().lower ())
         if user:
             return 'username exists', 403
-        email = db_get ('users', {'email': body ['email'].strip ().lower ()}, True)
+        email = USERS.user_by_email (body ['email'].strip ().lower ())
         if email:
             return 'email exists', 403
 
@@ -203,18 +214,18 @@ def routes (app, requested_lang):
         if 'gender' in body:
             user ['gender'] = body ['gender']
 
-        db_create ('users', user)
+        USERS.store_user(user)
 
         # We automatically login the user
         cookie = make_salt ()
-        db_create ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        USERS.store_token({'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request (request):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
-            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
+            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             resp = make_response ({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
@@ -231,7 +242,7 @@ def routes (app, requested_lang):
         if not username:
             return 'no username', 400
 
-        user = db_get ('users', {'username': username})
+        user = USERS.user_by_username(username)
 
         if not user:
             return 'invalid username/token', 403
@@ -243,23 +254,20 @@ def routes (app, requested_lang):
         if token != user ['verification_pending']:
             return 'invalid username/token', 403
 
-        db_update ('users', {'username': username, 'verification_pending': None})
+        USERS.update_user({'username': username, 'verification_pending': None})
         return redirect ('/')
 
     @app.route ('/auth/logout', methods=['POST'])
     def logout ():
         if request.cookies.get (cookie_name):
-            db_del ('tokens', {'id': request.cookies.get (cookie_name)})
+            USERS.forget_token(request.cookies.get (cookie_name))
         return '', 200
 
     @app.route ('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy (user):
-        db_del ('tokens', {'id': request.cookies.get (cookie_name)})
-        db_del ('users', {'username': user ['username']})
-        # The recover password token may exist, so we delete it
-        db_del ('tokens', {'id': user ['username']})
-        db_del_many ('programs', {'username': user ['username']}, True)
+        USERS.forget_token(request.cookies.get (cookie_name))
+        USERS.forget_user(user ['username'])
         return '', 200
 
     @app.route ('/auth/change_password', methods=['POST'])
@@ -282,7 +290,7 @@ def routes (app, requested_lang):
 
         hashed = hash (body ['new_password'], make_salt ())
 
-        db_update ('users', {'username': user ['username'], 'password': hashed})
+        USERS.update_user({'username': user ['username'], 'password': hashed})
         if not is_testing_request (request):
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
@@ -314,24 +322,25 @@ def routes (app, requested_lang):
         if 'email' in body:
             email = body ['email'].strip ().lower ()
             if email != user ['email']:
-                exists = db_get ('users', {'email': email}, True)
+                exists = USERS.user_by_email(email)
                 if exists:
                     return 'email exists', 403
                 token = make_salt ()
                 hashed_token = hash (token, make_salt ())
-                db_update ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
+                USERS.update_user({'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
                 if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
+        # FIXME: All these updates should be collapsed into one.
         if 'country' in body:
-            db_update ('users', {'username': user ['username'], 'country': body ['country']})
+            USERS.update_user({'username': user ['username'], 'country': body ['country']})
         if 'birth_year' in body:
-            db_update ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
+            USERS.update_user({'username': user ['username'], 'birth_year': body ['birth_year']})
         if 'gender' in body:
-            db_update ('users', {'username': user ['username'], 'gender': body ['gender']})
+            USERS.update_user({'username': user ['username'], 'gender': body ['gender']})
 
         return jsonify (resp)
 
@@ -362,9 +371,9 @@ def routes (app, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-            user = db_get ('users', {'email': body ['username'].strip ().lower ()}, True)
+            user = USERS.user_by_email(body ['username'].strip ().lower ())
         else:
-            user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+            user = USERS.user_by_username(body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username', 403
@@ -372,7 +381,7 @@ def routes (app, requested_lang):
         token = make_salt ()
         hashed = hash (token, make_salt ())
 
-        db_create ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
+        USERS.store_token({'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
         if is_testing_request (request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -398,16 +407,16 @@ def routes (app, requested_lang):
             return 'password must be at least six characters long', 400
 
         # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
-        token = db_get ('tokens', {'id': body ['username']})
+        token = USERS.get_token(body ['username'])
         if not token:
             return 'invalid username/token', 403
         if not check_password (body ['token'], token ['token']):
             return 'invalid username/token', 403
 
         hashed = hash (body ['password'], make_salt ())
-        token = db_del ('tokens', {'id': body ['username']})
-        db_update ('users', {'username': body ['username'], 'password': hashed})
-        user = db_get ('users', {'username': body ['username']})
+        token = USERS.forget_token('tokens', {'id': body ['username']})
+        USERS.update_user('users', {'username': body ['username'], 'password': hashed})
+        user = USERS.user_by_username(body ['username'])
 
         if not is_testing_request (request):
             send_email_template ('reset_password', user ['email'], requested_lang (), None)
@@ -431,12 +440,12 @@ def routes (app, requested_lang):
         if not object_check (body, 'is_teacher', 'bool'):
             return 'body.is_teacher must be boolean', 400
 
-        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+        user = USERS.user_by_username(body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username', 400
 
-        db_update ('users', {'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
+        USERS.update_user({'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
 
         return '', 200
 
@@ -457,7 +466,7 @@ def routes (app, requested_lang):
         if not valid_email (body ['email']):
             return 'email must be a valid email', 400
 
-        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+        user = USERS.user_by_username (body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username', 400
@@ -466,7 +475,7 @@ def routes (app, requested_lang):
         hashed_token = hash (token, make_salt ())
 
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
-        db_update ('users', {'username': user ['username'], 'email': body ['email'], 'verification_pending': hashed_token})
+        USERS.update_user ({'username': user ['username'], 'email': body ['email'], 'verification_pending': hashed_token})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request (request):
@@ -533,7 +542,7 @@ def auth_templates (page, lang, menu, request):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
-        users = db_scan ('users')
+        users = USERS.all_users()
         userdata = []
         fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
 
@@ -557,4 +566,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'], user_count=db_describe ('users') ['Table'] ['ItemCount'])
+        return render_template ('admin.html', users=userdata, program_count=USERS.all_programs_count(), user_count=USERS.all_users_count())
