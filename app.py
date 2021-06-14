@@ -292,7 +292,7 @@ def parse():
                         E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
                     response["Error"] = error_template.format(**E.arguments)
                 except:
-                    print(code) #TEMP!! We need to find the programs that cause weird issue #375
+                    print('DEBUG ISSUE 375', code) #TEMP!! We need to find the programs that cause weird issue #375
                     raise E
 
             elif E.args[0] == "Unquoted Text":
