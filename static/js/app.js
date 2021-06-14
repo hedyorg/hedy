@@ -322,6 +322,7 @@ function feedback(answer) {
         level_answers: [null, null, null, null],
         collapse: feedback_viewed,
         similar_code: "-",
+        feedback_level: prev_feedback_level
       }),
       contentType: 'application/json',
       dataType: 'json'
