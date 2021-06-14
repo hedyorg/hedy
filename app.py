@@ -375,7 +375,7 @@ def log_feedback():
     feedback_level = int(body['feedback_level'])
     collapse = body['collapse']  # this is either true or false: The window was either expanded or not
     similar_code = body['similar_code']
-    logger.log({
+    parse_logger.log({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
