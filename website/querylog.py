@@ -102,6 +102,8 @@ class NullRecord(LogRecord):
 THREAD_LOCAL = threading.local()
 THREAD_LOCAL.current_log_record = NullRecord()
 
+print("Thread local set")
+
 def begin_global_log_record(**kwargs):
     """Open a new global log record with the given attributes."""
     THREAD_LOCAL.current_log_record = LogRecord(**kwargs)
@@ -109,10 +111,13 @@ def begin_global_log_record(**kwargs):
 
 def finish_global_log_record(exc=None):
     """Finish the global log record."""
-    record = THREAD_LOCAL.current_log_record
-    if exc:
-        record.record_exception(exc)
-    record.finish()
+
+    # When developing, this can sometimes get called before 'current_log_record' has been set.
+    if hasattr(THREAD_LOCAL, 'current_log_record'):
+        record = THREAD_LOCAL.current_log_record
+        if exc:
+            record.record_exception(exc)
+        record.finish()
     THREAD_LOCAL.current_log_record = NullRecord()
 
 
