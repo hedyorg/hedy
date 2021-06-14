@@ -285,15 +285,15 @@ def parse():
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
-                try:
-                    error_template = hedy_errors[E.error_code]
-                    # Localize the names of characters
-                    if 'character_found' in E.arguments:
-                        E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
-                    response["Error"] = error_template.format(**E.arguments)
-                except:
-                    print('DEBUG ISSUE 375', code) #TEMP!! We need to find the programs that cause weird issue #375
-                    raise E
+                error_template = hedy_errors[E.error_code]
+                # Localize the names of characters
+                if 'character_found' in E.arguments.keys():
+                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                elif 'keyword_found' in E.arguments.keys():
+                    #if we find an invalid keyword, place it in the same location in the error message but without translating
+                    E.arguments['character_found'] = E.arguments['keyword_found']
+
+                response["Error"] = error_template.format(**E.arguments)
 
             elif E.args[0] == "Unquoted Text":
                 error_template = hedy_errors[E.error_code]
