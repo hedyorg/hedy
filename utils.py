@@ -11,6 +11,9 @@ from ruamel import yaml
 from website import querylog
 
 
+IS_WINDOWS = os.name == 'nt'
+
+
 class Timer:
   """A quick and dirty timer."""
   def __init__(self, name):
@@ -114,12 +117,19 @@ def load_yaml(filename):
 
 
 def load_yaml_pickled(filename):
+    # Let's not even attempt the pickling on Windows, because we have
+    # no pattern to atomatically write the pickled result file.
+    if IS_WINDOWS:
+        return load_yaml_uncached(filename)
+
     pickle_file = f'{filename}.pickle'
     if not os.path.exists(pickle_file):
         data = load_yaml_uncached(filename)
 
         # Write a pickle file, first write to a tempfile then rename
-        # into place because multiple processes might try to do this in parallel.
+        # into place because multiple processes might try to do this in parallel,
+        # plus we only want `path.exists(pickle_file)` to return True once the
+        # file is actually complete and readable.
         with atomic_write_file(pickle_file) as f:
             pickle.dump(data, f)
 
@@ -375,8 +385,13 @@ def atomic_write_file(filename, mode='wb'):
             f.write('hello')
 
     THIS WON'T WORK ON WINDOWS -- atomic file renames don't overwrite
-    on Windows.
+    on Windows. We could potentially do something else to make it work
+    (just swallow the exception, someone else already wrote the file?)
+    but for now we just don't support it.
     """
+    if IS_WINDOWS:
+        raise RuntimeError('Cannot use atomic_write_file() on Windows!')
+
     tmp_file = f'{filename}.{os.getpid()}'
     with open(tmp_file, mode) as f:
         yield f
