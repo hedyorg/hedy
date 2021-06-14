@@ -286,9 +286,10 @@ def parse():
                 response["Warning"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
                 error_template = hedy_errors[E.error_code]
-                # Localize the names of characters
+                # Localize the names of characters. If we can't do that, just show the original
+                # character.
                 if 'character_found' in E.arguments.keys():
-                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                    E.arguments['character_found'] = hedy_errors.get(E.arguments['character_found'], E.arguments['character_found'])
                 elif 'keyword_found' in E.arguments.keys():
                     #if we find an invalid keyword, place it in the same location in the error message but without translating
                     E.arguments['character_found'] = E.arguments['keyword_found']
