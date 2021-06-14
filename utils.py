@@ -102,11 +102,11 @@ def load_yaml(filename):
     we only do it once per box per deploy.
     """
     if is_debug_mode():
-        return load_yaml_uncached()
+        return load_yaml_uncached(filename)
 
     # Production mode, check our two-level cache
     if filename not in YAML_CACHE:
-        data = load_yaml_pickled()
+        data = load_yaml_pickled(filename)
         YAML_CACHE[filename] = data
         return data
     else:
@@ -116,7 +116,7 @@ def load_yaml(filename):
 def load_yaml_pickled(filename):
     pickle_file = f'{filename}.pickle'
     if not os.path.exists(pickle_file):
-        data = load_yaml_uncached()
+        data = load_yaml_uncached(filename)
 
         # Write a pickle file, first write to a tempfile then rename
         # into place because multiple processes might try to do this in parallel.
