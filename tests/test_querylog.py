@@ -1,4 +1,4 @@
-from website import querylog
+from website import querylog, log_queue
 import unittest
 
 class TestQueryLog(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestQueryLog(unittest.TestCase):
 
     querylog.emergency_shutdown()
 
-    recovered_queue = querylog.LogQueue(batch_window_s=300)
+    recovered_queue = log_queue.LogQueue('querylog', batch_window_s=300)
     recovered_queue.try_load_emergency_saves()
     recovered_queue.set_transmitter(self._fake_transmitter)
 
