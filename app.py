@@ -737,21 +737,19 @@ def save_program (user):
 
     name = body ['name']
 
-    # If name ends with (N) or (NN), we strip them since it's very likely these addenda were added by our server to avoid overwriting existing programs.
-    name = re.sub (' \(\d+\)$', '', name)
-    # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
+    # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    existing = db_get_many ('programs', {'username': user ['username']}, True)
-    name_counter = 0
-    for program in existing:
-        if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
-            name_counter = name_counter + 1
-    if name_counter:
-        name = name + ' (' + str (name_counter) + ')'
+    programs = db_get_many ('programs', {'username': user ['username']}, True)
+    program = {}
+    overwrite = False
+    for program in programs:
+        if program ['name'] == name:
+            overwrite = True
+            break
 
     stored_program = {
-        'id': uuid.uuid4().hex,
+        'id': program.get ('id') if overwrite else uuid.uuid4().hex,
         'session': session_id(),
         'date': timems (),
         'lang': requested_lang(),
@@ -765,7 +763,10 @@ def save_program (user):
     if 'adventure_name' in body:
         stored_program ['adventure_name'] = body ['adventure_name']
 
-    db_create('programs', stored_program)
+    if overwrite:
+        db_update('programs', stored_program)
+    else:
+        db_create('programs', stored_program)
 
     program_count = 0
     if 'program_count' in user:
