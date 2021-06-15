@@ -749,8 +749,8 @@ def save_program (user):
     programs = db_get_many ('programs', {'username': user ['username']}, True)
     program = {}
     overwrite = False
-    for program in existing:
-        if program.name == name:
+    for program in programs:
+        if program ['name'] == name:
             overwrite = True
             break
 
