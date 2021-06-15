@@ -130,7 +130,6 @@ table programs:
     level:        INTEGER
     lang:         STRING
     code:         STRING
-    server_error: STRING
     version:      STRING
 ```
 
