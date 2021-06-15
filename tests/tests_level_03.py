@@ -216,7 +216,7 @@ class TestsLevel3(unittest.TestCase):
 
   def test_transpile_issue_375(self):
     code = textwrap.dedent("""
-      is ChiefMluh
+      is Foobar
       print welcome""")
 
     with self.assertRaises(Exception) as context:
