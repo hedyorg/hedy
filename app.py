@@ -295,7 +295,6 @@ def parse():
                     E.arguments['character_found'] = E.arguments['keyword_found']
 
                 response["Error"] = error_template.format(**E.arguments)
-
             elif E.args[0] == "Unquoted Text":
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
