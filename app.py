@@ -351,7 +351,7 @@ def report_client_exception():
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
     })
 
-    return 'logged'
+    return 'logged', 500
 
 @app.route('/version', methods=['GET'])
 def version_page():
