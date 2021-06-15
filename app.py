@@ -735,17 +735,6 @@ def save_program (user):
         if not object_check (body, 'adventure_name', 'str'):
             return 'if present, adventure_name must be a string', 400
 
-    # We execute the saved program to see if it would generate an error or not
-    error = None
-    try:
-        hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
-        result = hedy.transpile(body ['code'], body ['level'])
-    except hedy.HedyException as E:
-        error_template = hedy_errors[E.error_code]
-        error = error_template.format(**E.arguments)
-    except Exception as E:
-        error = str(E)
-
     name = body ['name']
 
     # If name ends with (N) or (NN), we strip them since it's very likely these addenda were added by our server to avoid overwriting existing programs.
@@ -770,7 +759,6 @@ def save_program (user):
         'level': body ['level'],
         'code': body ['code'],
         'name': name,
-        'server_error': error,
         'username': user ['username']
     }
 
