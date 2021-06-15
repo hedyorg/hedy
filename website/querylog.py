@@ -97,6 +97,13 @@ class NullRecord(LogRecord):
     def __init__(self, **kwargs): pass
     def finish(self): pass
     def set(self, **kwargs): pass
+    def _remember_timer(self, _): pass
+    def _forget_timer(self, _): pass
+    def _terminate_running_timers(self): pass
+    def inc_timer(self, _, _2): pass
+
+    def record_exception(self, exc):
+        self.set(fault=1, error_message=str(exc))
 
 
 THREAD_LOCAL = threading.local()

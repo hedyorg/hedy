@@ -255,7 +255,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
-window.share_program = function share_program (id, Public, reload) {
+window.share_program = function share_program (id, level, Public, reload) {
   $.ajax({
     type: 'POST',
     url: '/programs/share',
@@ -270,8 +270,12 @@ window.share_program = function share_program (id, Public, reload) {
       $ ('#okbox').show ();
       $ ('#okbox .caption').html (window.auth.texts.save_success);
       $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+      // If we're sharing the program, copy the link to the clipboard.
+      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
     }
     else {
+      // If we're sharing the program, copy the link to the clipboard.
+      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
       alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
     }
     if (reload) setTimeout (function () {location.reload ()}, 1000);
@@ -281,7 +285,7 @@ window.share_program = function share_program (id, Public, reload) {
   });
 }
 
-window.copy_to_clipboard = function copy_to_clipboard (string) {
+window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
   el.value = string;
@@ -297,7 +301,7 @@ window.copy_to_clipboard = function copy_to_clipboard (string) {
      document.getSelection ().removeAllRanges ();
      document.getSelection ().addRange (selected);
   }
-  alert (window.auth.texts.copy_clipboard);
+  if (! noAlert) alert (window.auth.texts.copy_clipboard);
 }
 
 /**
