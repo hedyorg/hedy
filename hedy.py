@@ -1213,11 +1213,11 @@ def transpile_inner(input_string, level, sub = 0):
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
-            characters_expected = str(e.allowed)
+            characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
             character_found  = beautify_parse_error(e.args[0])
             # print(e.args[0])
             # print(location, character_found, characters_expected)
-            raise HedyException('Parse', level=level, location=location, character_found=character_found, characters_expected=characters_expected) from e
+            raise HedyException('Parse', level=level, location=location, character_found=character_found) from e
         except UnexpectedEOF:
             # this one can't be beautified (for now), so give up :)
             raise e
@@ -1247,7 +1247,7 @@ def transpile_inner(input_string, level, sub = 0):
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # clearly the error message here should be better or it should be a different one!
-                raise HedyException('Parse', level=level, location=["?", "?"], characters_expected="?")
+                raise HedyException('Parse', level=level, location=["?", "?"], keyword_found=invalid_command)
             raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
     is_complete = IsComplete().transform(program_root)
