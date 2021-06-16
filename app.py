@@ -211,6 +211,16 @@ def after_request_log_status(response):
     querylog.log_value(http_code=response.status_code)
     return response
 
+@app.after_request
+def set_security_headers(response):
+    security_headers = {
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+    }
+    response.headers.update(security_headers)
+    return response
+
 @app.teardown_request
 def teardown_request_finish_logging(exc):
     querylog.finish_global_log_record(exc)
@@ -288,9 +298,14 @@ def parse():
                 response["Warning"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
                 error_template = hedy_errors[E.error_code]
-                # Localize the names of characters
-                if 'character_found' in E.arguments:
-                    E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
+                # Localize the names of characters. If we can't do that, just show the original
+                # character.
+                if 'character_found' in E.arguments.keys():
+                    E.arguments['character_found'] = hedy_errors.get(E.arguments['character_found'], E.arguments['character_found'])
+                elif 'keyword_found' in E.arguments.keys():
+                    #if we find an invalid keyword, place it in the same location in the error message but without translating
+                    E.arguments['character_found'] = E.arguments['keyword_found']
+
                 response["Error"] = error_template.format(**E.arguments)
             elif E.args[0] == "Unquoted Text":
                 error_template = hedy_errors[E.error_code]
