@@ -342,14 +342,14 @@ def report_error():
 def report_client_exception():
     post_body = request.json
 
-    parse_logger.log ({
-        'session': session_id(),
-        'date': str(datetime.datetime.now()),
-        'client_error': post_body.get('client_error'),
-        'version': version(),
-        'username': current_user(request) ['username'] or None,
-        'is_test': 1 if os.getenv ('IS_TEST_ENV') else None
-    })
+    querylog.log_value(
+        session=session_id(),
+        date=str(datetime.datetime.now()),
+        client_error=post_body,
+        version=version(),
+        username=current_user(request) ['username'] or None,
+        is_test=1 if os.getenv ('IS_TEST_ENV') else None
+    )
 
     return 'logged', 500
 
