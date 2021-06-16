@@ -472,6 +472,7 @@ def get_similar_code(processed_code, language, level):
                     if distance < shortest_distance:
                         shortest_distance = distance
                         similar_code = lines[0]
+        similar_code = similar_code.replace("    ", "\t")
     except:
         similar_code = None
     return similar_code
