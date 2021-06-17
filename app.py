@@ -391,7 +391,6 @@ def log_feedback():
     feedback_level = int(body['feedback_level'])
     collapse = body['collapse']  # this is either true or false: The window was either expanded or not
     similar_code = body['similar_code']
-    print("CURRENT LANGUAGE: " + str(session['lang'] ))
     parse_logger.log({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
