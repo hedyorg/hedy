@@ -255,6 +255,9 @@ def parse():
     if 'adventure_name' in body and not type_check (body ['adventure_name'], 'str'):
         return "if present, body.adventure_name must be a string", 400
 
+    if not 'error_level' in session:
+        initialize_gfi_session(requested_lang())
+
     code = body ['code']
     level = int(body ['level'])
     sublevel = body.get ('sublevel') or 0
