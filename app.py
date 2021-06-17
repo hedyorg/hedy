@@ -263,6 +263,7 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+    session['lang'] = lang
     querylog.log_value(level=level, lang=lang)
 
     response = {}
@@ -390,6 +391,7 @@ def log_feedback():
     feedback_level = int(body['feedback_level'])
     collapse = body['collapse']  # this is either true or false: The window was either expanded or not
     similar_code = body['similar_code']
+    print("CURRENT LANGUAGE: " + str(session['lang'] ))
     parse_logger.log({
         'session': session_id(),
         'date': str(datetime.datetime.now()),
@@ -399,7 +401,7 @@ def log_feedback():
         'level_usefulness': level_answer,
         'similar_code': similar_code,
         'collapse': collapse,
-        'GFM': True if gfi_support(lang) else False
+        'GFM': True if gfi_support(session['lang']) else False
     })
     debug = True
     if debug:
