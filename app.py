@@ -454,8 +454,6 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-
-
     # Sublevel requested
     if re.match ('\d+-\d+', level):
         pass
