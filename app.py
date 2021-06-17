@@ -399,7 +399,7 @@ def log_feedback():
         'level_usefulness': level_answer,
         'similar_code': similar_code,
         'collapse': collapse,
-        'GFM': True
+        'GFM': True if gfi_support(lang) else False
     })
     debug = True
     if debug:
