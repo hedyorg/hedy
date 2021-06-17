@@ -75,7 +75,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 Levels
 ------
 
-In its current form, Hedy consists of 13 different levels. The levels loosely
+In its current form, Hedy consists of 22 different levels. The levels loosely
 follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
