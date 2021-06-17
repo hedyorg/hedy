@@ -263,6 +263,7 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+    session['lang'] = lang
     querylog.log_value(level=level, lang=lang)
 
     response = {}
@@ -399,7 +400,7 @@ def log_feedback():
         'level_usefulness': level_answer,
         'similar_code': similar_code,
         'collapse': collapse,
-        'GFM': True
+        'GFM': True if gfi_support(session['lang']) else False
     })
     debug = True
     if debug:
