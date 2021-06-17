@@ -236,8 +236,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       $ ('#program_name').val (response.name);
       window.State.adventures.map (function (adventure) {
         if (adventure.short_name === (adventure_name || 'level')) {
-          adventure.loaded_program_name = name;
-          adventure.loaded_program      = code;
+          adventure.loaded_program = {name: response.name, code: code};
         }
       });
     }).fail(function(err) {

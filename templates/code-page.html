@@ -66,8 +66,7 @@
     <div>
       <div class="w-full h-64 flex flex-col">
         <div id="editor" data-loaded-program="{{not not loaded_program}}"
-          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{loaded_program or
-          start_code}}</div>
+          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}</div>
         <!-- errorbox -->
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
@@ -192,7 +191,6 @@
     window.State.adventures = {{ adventure_assignments|tojson }};
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
-    window.State.loaded_program_name = {{ loaded_program_name|tojson }};
     window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
   </script>
   <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript"></script>

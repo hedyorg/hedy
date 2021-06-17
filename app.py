@@ -108,14 +108,18 @@ def load_adventure_assignments_per_level(lang, level):
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
             'start_code': adventure['levels'][level].get ('start_code', ''),
-            'loaded_program': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['code'],
-            'loaded_program_name': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['name']
+            'loaded_program': '' if not loaded_programs.get (short_name) else {
+                'name': loaded_programs.get (short_name) ['name'],
+                'code': loaded_programs.get (short_name) ['code'],
+             }
         })
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     assignments.append({
         'short_name': 'level',
-        'loaded_program': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['code'],
-        'loaded_program_name': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['name']
+        'loaded_program': '' if not loaded_programs.get ('level') else {
+            'name': loaded_programs.get ('level') ['name'],
+            'code': loaded_programs.get ('level') ['code'],
+         }
     })
     return assignments
 
@@ -446,7 +450,6 @@ def adventure_page(adventure_name, level):
         adventure_assignments=adventure_assignments,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
-        loaded_program_name='',
         adventure_name=adventure_name)
 
 # routing to index.html
@@ -471,7 +474,6 @@ def index(level, step):
     g.prefix = '/hedy'
 
     loaded_program = ''
-    loaded_program_name = ''
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
@@ -484,8 +486,7 @@ def index(level, step):
         public_program = 'public' in result and result ['public']
         if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
-        loaded_program = result ['code']
-        loaded_program_name = result ['name']
+        loaded_program = {'code': result ['code'], 'name': result ['name'], 'not_own_program': public_program and user ['username'] != result ['username'], 'adventure_name': result.get ('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
@@ -503,7 +504,6 @@ def index(level, step):
         version=version(),
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
-        loaded_program_name=loaded_program_name,
         adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -526,7 +526,6 @@ def onlinemasters(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
-        loaded_program_name='',
         adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -549,7 +548,6 @@ def space_eu(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
-        loaded_program_name='',
         adventure_name='')
 
 
