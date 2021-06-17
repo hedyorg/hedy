@@ -1,0 +1,6 @@
+// Level 16 adds comparison
+
+condition: (equality_check|in_list_check|smaller|bigger)
+
+smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
+bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)

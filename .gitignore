@@ -18,6 +18,7 @@ eggs/
 .eggs/
 lib/
 lib64/
+venv/
 parts/
 sdist/
 var/
@@ -145,3 +146,8 @@ logs.txt
 *.swo
 .local
 node_modules
+
+# Ignore things that start with underscores
+_*
+# Ignore pickled versions of YAML files
+*.yaml.pickle

@@ -1,0 +1,7 @@
+command: print | ifs elses? | ask | for_loop | assign_list | list_access_var | assign
+
+//new for level 7-1, for loop and the end-blocks
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IS _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+
+elses: _EOL (_SPACE)* _ELSE _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+ifs: _IF _SPACE condition _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'

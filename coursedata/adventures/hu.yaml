@@ -1,0 +1,659 @@
+title: Hedy kalandok!
+subtitle: Megtanulhatod a Hedyt úgy, hogy létrehozol egy történetet, játékot vagy valamit, hogy megkönnyítsd az életedet
+adventures:
+    story:
+        name: A történet
+        default_save_name: Történet
+        description: Készíts egy interaktív történetet
+        image: story.png
+        levels:
+            1:
+                story_text: |-
+                    ## Készíts egy történetet
+                    Az 1. szinten elkészíthetsz egy történetet egy másik főszereplővel, amelyet te magad adsz meg.
+
+                    Első sorként használd ezt a kódot:
+
+                    `kérdezd meg, ki a történeted főszereplője`
+
+                    Az első sor után kezdd a `print` utasítással, ha a mondatot ki kell íratni.
+                    Akkor használd az `echo` szót, ha azt szeretnéd, hogy főszereplő neve a mondat végén legyen.
+
+                    ## Példa Hedy kódra
+                    ```
+                    ask A történet főszereplője ...
+                    print A főszereplő most az erdőben fog sétálni
+                    echo Kicsit fél, aki ...
+                    print Őrült zajokat hall mindenütt
+                    print Fél, hogy ez egy kísértetjárta erdő
+                    ```
+
+                    ## Mi a következő lépés?
+                    Kár, hogy most már csak olyan mondatokat lehet készíteni, amelyekben a főszereplő a mondat végén van? Miután ezzel a történettel gyakoroltál, folytasd a 2., majd a 3. szinttel, ahol egyre bonyolultabb programokat készíthetsz.
+                start_code: print A történeted itt kezdődik
+            2:
+                start_code: print A te történeted
+                story_text: |
+                    ## Történet a 2. szinten
+                    A 2. szinten szórakoztatóbbá teheted a történetedet. Fő karaktered neve mostantól
+                    bárhol lehet a mondatban.
+
+                    Ehhez egy kicsit fel kell javítanod a kódodat. Most először meg kell nevezned a főszereplődet.
+
+                    Ezt a nevet bárhol elhelyezheted a mondatban.
+
+                    ## Példa Hedy kódra
+                    ```
+                    nev is ask Mi a neve a főszereplőnek?
+                    print nev most fog futni az erdőben
+                    print nev kissé fél
+                    print Őrült zajokat hall mindenütt
+                    print nev fél, hogy ez egy kísértetjárta erdő
+                    ```
+                    ## Véletlenszerűség
+                    Hozzáadhatsz valami véletlenszerűt is a történetéhez. Bármilyen szörnyet, állatot vagy
+                    más akadályt.
+                    Így hangzik:
+                    ```
+                    allatok is bagoly, sündisznó, tatu
+                    print Most véletlenszerűen hallja az allatok hangját
+                    ```
+                    ## Mi a következő lépés?
+                    Véletlenül megpróbáltál olyan mondatot készíteni, amely tartalmazza a nev szót?
+                    Például. `print ki a nevem a nev '. Próbáld ki, ha még nem tetted meg.
+                    Ez nem működik megfelelően, kiírja az én Henk a Henk kódomat. Ezt meg tudod majd
+                    oldani a 3. szinten.
+            3:
+                start_code: print A történeted ide lesz írva!
+                story_text: |-
+                    ## Történet a 3. szinten
+                    Lehet, hogy észrevetted, hogy még mindig van hiba a 2. szinten.
+                    Véletlenül megpróbáltál olyan mondatot készíteni, amely tartalmazza a nev szót?
+                    Például. `print a nevem a nev '.
+                    Ez nem működött jól! Aztán megkapod: az én Henkem Henk. Ezt meg tudod oldani a 3.
+                    szinten.
+                    Idézőjeleket kell használnia minden nyomtatáshoz.
+                    ## Példa Hedy kódra
+                    ```
+                    nev is Jancsi
+                    print 'A fő karakter neve ' nev
+                    print nev "most az erdőben jár"
+                    print nev "egy kicsit fél"
+                    allatok bagoly, sündisznó, páncélos
+                    print 'Hallja a következő állat hangját:' allatok at random
+                    print name ' fél, hogy ez egy kísértetjárta erdő'
+                    ```
+            4:
+                start_code: print Itt lesz hamarosan a történeted!
+                story_text: |-
+                    ## Történet a 4. szinten
+                    Amit a 4. szinten megtehetsz, az még szórakoztatóbbá varázsolja történetedet. A 4.
+                    szinten különböző végződéseket programozhatsz.
+                    Gondolj például a történet két végére:
+                    - A hercegnő sétál az erdőn
+                    - Összefut egy szörnyeteggel
+                    - Boldog befejezés: Előveszi a kardját, és a szörny gyorsan elszalad
+                    - Rossz befejezés: A szörny megeszi a hercegnőt
+                    Biztosíthatod azt is, hogy egy név újra beírható legyen. Ez ugyanúgy működik, mint a 3.
+                    szinten. Kombinálhatod ezt egy `if`-fel, és akkor már készítettél is egy egész programot!
+                    ## Példa Hedy kód
+                    ```
+                    nev is Ki jár az erdőben?
+                    print nev „sétál az erdőn”
+                    print nev "találkozik egy szörnnyel"
+                    vege is ask Egy jó vagy rossz véget szeretnél?
+                    ha vege is jó print nev, 'előveszi a kardot és a szörny gyorsan elszalad' else print 'A
+                    szörny megeszi ' nevet
+                    ```
+            5:
+                start_code: repeat 5 times print 'Segítség!'
+                story_text: |-
+                    ## Történet az 5. szinten
+                    A történetben valaki szavakat többször is elmond. Például, ha valaki segítséget kér vagy elénekel egy dalt.
+                    Az ilyen ismétlést beírhatod az 5. szintbe tartozó történetbe a 'repeat' paranccsal.
+
+                    ## Példa Hedy kód
+                    ```
+                    print 'A herceg folyamatosan segítséget kért'
+                    repeat 5 times print 'Segítség!'
+                    print 'Miért nem segít nekem senki?'
+                    ```
+    songs:
+        image: songs.png
+        name: Énekelj egy dalt!
+        default_save_name: Dal
+        description: Dal kiíratása
+        levels:
+            5:
+                start_code: print 'Baby Shark'
+                story_text: |-
+                    ## Dalok az 5. szinten
+                    A dalok gyakran sok ismétlést tartalmaznak. Például... Baby Shark! Ha elénekled, ugyanazt énekled folyamatosan:
+
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark
+
+                    ezt a dalt sokkal rövidebbé teheted egy `repeat` utasítással! Be tudod fejezni a kódot?
+
+                    ## Példa Hedy kód
+                    ```
+                    repeat ... ... print 'Baby Shark tututudutudu'
+                    print 'Baby Shark'
+                    ```
+
+                    A Baby Shark után természetesen más dalokat is programozhat. Sok dal van ismétléssel.
+            6:
+                start_code: print 'Baby shark'
+                story_text: |-
+                    ## Dalok a 6. szinten
+                    A dalok gyakran sok ismétlést tartalmaznak. Néha az ismétlés alapja a számlálás is.
+                    Például a jól ismert dalban „üveg sör”. Programozhatod azt a dalt egy kis matekkal.
+
+                    ## Példa Hedy kódr
+                    ```
+                    verse is 99
+                    print verse ' üveg sör a falon'
+                    print verse ' üveg sör'
+                    print 'Vegyél egyet, add tovább'
+                    verse is verse - 1
+                    print verse ' üveg sör a falon'
+                    ```
+                    Most megismételheted a 2–9. Sort, ahányszor csak akarod, a sorok másolásával.
+
+                    # Előretekintve
+                    Az 5. szinten megtanultunk 1 sort megismételni az `repeat` szóval, így:
+
+                    * repeat 3 times print 'Baby Shark Tutududududu'
+
+                    De ahogyan ebben a leckében látni fogod, néha több sort is meg akarsz együtt ismételni. Ezt meg lehet tenni vágással és beillesztéssel, de ez sok munka. A 7. szinten megtanulod, hogyan kell ezt könnyebben megtenni.
+    dishes:
+        image: dishes.png
+        name: Ki mosogat?
+        default_save_name: mosogat
+        description: Használd a számítógépet, hogy lásd, ki mosogat (Kezdd a 2. szinten)
+        levels:
+            2:
+                start_code: |-
+                    print Ki mosogat?
+                story_text: |-
+                    ## Mosogatóprogram a 2. szinten
+                    Otthon általában nem értesz egyet abban, hogy kinek kell ma mosogatnia vagy kicserélnie az alomdobozt?
+
+                    Ezután hagyhatod, hogy a számítógép nagyon tisztességesen válasszon. Ezt beprogramozhatod a 2. szinten!
+
+                    Először állítsd össze a családja tagjainak listáját. Ezután válaszd az 'at random' lehetőséget a listából.
+
+                    ## Példa Hedy kód
+                    ```
+                    emberek is anya, apa, Edit, Gizi
+                    print people at emberek
+                    ```
+
+                    ## Mi a következő lépés?
+                    Véletlenül megpróbáltál olyan mondatot alkotni, amely az emberek szót tartalmazta?
+
+                    Pl. `print Ezek közül az emberek közül választottam`. Próbáld ki, ha még nem tetted meg.
+
+                    Ez nem működik megfelelően! Aztán megkapod: [apu, anya, Edit, Gizi] közül választottam. Ezt meg tudod majd oldani a 3. szinten.
+            3:
+                start_code: print Ki mosogat?
+                story_text: |-
+                    ## Mosogatóprogram a 3. szinten
+                    Az idézőjelek segítségével szebbé teheted a mosogatás tervezését.
+                    Ezúttal a minta kód nem egészen teljes.
+                    Ki tudod egészíteni a kódot a helyes parancsok vagy karakterek pontokra történő
+                    beírásával?
+                    Minden három pontot egy paranccsal kell kicserélni.
+                    Tipp: Ne felejtsd el az idézőjeleket
+                    ## Példa Hedy kód
+                    ```
+                    emberek is anya, apa, Edit, Gizi
+                    print ... ő mosogat: ...
+                    print emberek at ...
+                    ```
+            4:
+                start_code: print 'Ki mosogat?'
+                story_text: |-
+                    ## Mosogatóprogram a 4. szinten
+                    Az `if` segítségével most szórakoztatóbbá teheted a választást a programban.
+                    Megkérheted a programot, hogy válaszoljon a számítógép választására.
+                    Befejezheted a kódot úgy, hogy „túl rosszul” írja ki, amikor rajtad a sor, és egyébként
+                    „igen!”?
+                    Ne felejtsd el az idézeteket!
+                    ## Example Hedy code
+                    ```
+                    emberek is anya, apa, Edit, Gizi
+                    mosogato is emberek at random
+                    if mosogato is Gizi print ... sajnos mosogatnom kell ... else print 'szerencsére nem én,
+                    mert' ... 'már mosogat'
+                    ```
+            5:
+                start_code: print 'Ki mosogat?'
+                story_text: |-
+                    ## Mosogatóprogram az 5. szinten
+                    Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
+                    kiszámíthatod, hogy kik fogj mosogatni az egész héten.
+                    ## Példa Hedy kód
+                    ```
+                    emberek is anya, apa, Edit, Gizi
+                    repeat ... ... print 'a mosogató:' ...
+                    ```
+            6:
+                start_code: print 'Ki mosogat?'
+                story_text: |-
+                    ## Mosogatóprogram a 6. szinten
+                    Ki milyen gyakran mosogat? Ez igazságos? Ezt megszámolhatod a 6. szinten.
+
+                    ## Példa Hedy kód
+                    ```
+                    emberek is anya, apa, Edit, Gizi
+                    edit_mosogat is 0
+                    mosogato is emberek at random
+                    print 'A mosogató' mosogato
+                    if mosogato is Edit edit_mosogat is edit_mosogat + 1
+                    print 'Edit ezen a héten' edit_mosogat 'alkalommal mosogatott'
+                    ```
+
+                    Most néhányszor átmásolhatod a 3–5-ös sorokat (pl. az egész hétre 7-szer), hogy ismét egy egész hétre számoljon.
+                    Elkészíted az egész hét kódját?
+
+                    ## Mi a következő lépés?
+                    Most sokat kell másolnod és beillesztened, igaz? Ezt a 7. szinten javítjuk.
+                    Ezen a szinten a vége a mosogató kalandnak! De még mindig sok kaland van más szinteken, például egy számológéppel, egy interaktív történettel és egy bonyolultabb játékkal.
+    dice:
+        description: Készítsd el a saját kockádat
+        name: Készítsd el a saját kockádat
+        default_save_name: Kocka
+        image: dice.png
+        levels:
+            1:
+                start_code: ask Dobnál egyet?
+                story_text: |-
+                    ## Kocka
+                    Az 1. szinten a saját kockánkkal kezdünk.
+
+                    ## Példa Hedy kód
+                    ```
+                    ask Dobnál egyet?
+                    echo You said:
+                    ```
+
+                    ## Előretekintés
+                    Ez a kód csak megismétli a játékos válaszát. A következő szinteken a számítógép valóban választani fog.
+            2:
+                start_code: print Mit dobunk ezúttal?
+                story_text: |-
+                    ## Kocka a 2. szinten
+                    A 2. szinten választhatunk egy listából. Ezzel hagyhatjuk, hogy a számítógép válassza ki
+                    a kocka egyik oldalát.
+                    Vess egy pillantást azokra a játékokra, amelyek otthon vannak a szekrényedben.
+                    Vannak (speciális) kockával játszott játékok? Ezzel a kóddal másolhatod is.
+                    Például a Giliszta játék kockája a 1–5-ig számokkal és egy gilisztával.
+                    ! [Giliszta játék kockája a 1–5-ig számokkal és egy gilisztával]
+                    ## Példa Hedy kód
+                    ```
+                    dobasok is 1, 2, 3, 4, 5, giliszta
+                    print dobasok at random
+                    ```
+                    ## Mi a következő lépés?
+                    Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a
+                    dobásokat?
+                    Például. `print Választottam a dobasok közül`. Próbáld ki, ha még nem tetted meg.
+                    Ez nem működik megfelelően! Aztán megkapod: Az [1, 2, 3, 4, 5, földigiliszta] közül
+                    választottam. Ezt meg tudod majd oldani a 3. szinten.
+            3:
+                start_code: print Mit dobunk ezúttal?
+                story_text: |-
+                    ## Kocka a 3. szinten
+                    A 3. szinten mondatokat készíthetünk a változó értékével, természetesen idézőjelekkel.
+                    Ezúttal a minta kód nem egészen teljes. Be tudod fejezni a kódot?
+                    ## Példa Hedy kód
+                    ```
+                    dobasok is 1, 2, 3, 4, 5, earthworm
+                    print ... te jössz ...
+                    print ... ... ... <- itt kell beprogramozni a dobást
+                    ```
+            4:
+                start_code: print Mit dobunk ezúttal?
+                story_text: |-
+                    ## Kocka a 4. szinten
+                    Ismét készíthetsz egy kockát a 4. szinten az `if` használatával.
+                    Töltsd ki a mintakódot úgy, hogy a kód azt mondja: "Megállíthatod a dobást", miután
+                    földigilisztát dobtál.
+                    De lehet, hogy újra létre akarsz hozni egy kockát egy teljesen más játékból. Ez is
+                    rendben van! Ezután állítsd be a saját reakcióját. Pl. „Igen” 6-ra és „kár” valami másra.
+                    ## Példa Hedy kód
+                    ```
+                    dobasok is 1, 2, 3, 4, 5, giliszta
+                    dobas ...
+                    print 'Te' ... 'dobtál'
+                    if ... is giliszta print 'Megállhatsz.' ... print 'Dobj újra!'
+                    ```
+            5:
+                start_code: print Mit dobunk ezúttal?
+                story_text: |-
+                    ## Kocka az 5. szinten
+                    Az 5. szinten ismét készíthetsz kockát . A `repeat` kóddal könnyedén dobhatsz egy
+                    csomó dobókockát.
+                    Próbáld meg befejezni a mintakódot! A kötőjeleknek több parancsot és karaktert
+                    kell tartalmazniuk.
+                    De talán teljesen más kockát akarsz készíteni. Természetesen lehet!
+                    ## Példa Hedy kód
+                    ```
+                    dobások is 1, 2, 3, 4, 5, giliszta
+                    repeat ... ... print ___
+                    ```
+            6:
+                start_code: print Mit dobunk ezúttal?
+                story_text: |-
+                    ## Kocka a 6. szinten
+                    Azt is megteheted, hogy újra egy giliszta kockát csinálsz a 6. szinten, de most kiszámíthatod azt is, hogy hány pontot dobtál.
+
+                    Lehet, hogy tudod, hogy a giliszta 5 pontot számít a játékban. Most egy dobás után azonnal kiszámíthatod, hány pontot dobott.
+
+                    Ez az a kód, amely kiszámítja a pontokat egy dobáshoz:
+
+                    ## Példa Hedy kód
+                    ```
+                    dobasok is 1, 2, 3, 4, 5, giliszta
+                    pontok is 0
+                    dobas is dobasok at random
+                    print 'a dobásod' dobas
+                    if dobas is giliszta pontok is pontok + 5 else pontok is pontok + dobas
+                    print 'Pontok:' pontok
+                    ```
+
+                    Át tudod alakítani a kódot, hogy megkapd a 8 kockadobás összpontszámát? Ehhez ki kell vágnod és be kell illesztened a kód egyes sorait.
+
+                    ## Előretekintés
+
+                    Sikerült kiszámolni a 8 kocka pontszámát? Ehhez sok vágás és beillesztés kellett, igaz? Ezt megkönnyítjük a 7. szinten!
+    rock:
+        description: Készíts saját kő, papír, olló játékot
+        default_save_name: Kő
+        name: Kő, papír, olló
+        image: rock.png
+        levels:
+            1:
+                start_code: print Üdvözlünk saját kő, papír olló játékodon!
+                story_text: |-
+                    ## Kő, papír, olló
+                    Az 1. szinten kezdhetsz egy kő, papír, olló játékkal.
+
+                    A `ask'-val választhatsz, és az` echo'-val megismételheted ezt a választást.
+
+                    ## Példa Hedy kód
+
+                    ```
+                    print Mit választottál?
+                    ask Válassz kő, papír és olló közül
+                    echo ez volt a választásod:
+                    ```
+
+                    ## Mi a következő lépés?
+                    Az ismétlés természetesen kissé unalmas, mert a számítógép nem választ semmit. Ezt később mi magunk is elkészítjük.
+            2:
+                start_code: print Üdvözlünk saját kő, papír olló játékodon!
+                story_text: |
+                    ## Kő, papír, olló
+                    A 2. szinten listákat írhatunk be, és választhatunk belőlük dolgokat.
+                    Először készíts egy listát az `is' segítségével. Ezután hagyhatod, hogy a számítógép a 'at
+                    random' segítségével válasszon ki valamit a listából.
+                    Például megengedheted, hogy a számítógép kő, papír és olló közül válogasson.
+                    ## Példa Hedy kód
+                    ```
+                    valasztas is kő, papír, olló
+                    print valasztas at random
+                    ```
+                    Újra használhatod a `ask'-t a 2. szinten. Kiírathatod számítógép a választását?
+                    Vigyázz, a `ask` most másképp működik, mint az 1. szinten. Előtte el kell nevezni.
+                    ## Előretekintés
+                    Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a valasztas
+                    változót?
+                    Például. `print Az enyém: valasztas`. Próbáld ki, ha még nem tetted meg.
+                    Ez nem működik megfelelően! Aztán megkapod: a [kő, papír, olló] közül választottam.
+                    Ezt meg tudod majd oldani a 3. szinten.
+            3:
+                start_code: print 'Üdvözlünk saját kő, papír olló játékodon!'
+                story_text: |
+                    ## Kő, papír, olló a 3. szinten
+                    A 3. szinten tovább programozhatunk kő, papírt, ollót. De ha szöveget szeretnél
+                    hozzáadni, akkor itt is idézőjeleket kell használnod.
+                    Egészítsd ki a kódot úgy, hogy a helyes parancsokat vagy karaktereket írd be a
+                    pontokra?
+                    ## Példa Hedy
+                    ```
+                    valasztas is kő, papír, olló
+                    print ... A számítógép ezt választotta: ... ... at ...
+                    ```
+            4:
+                start_code: print 'Üdvözlünk saját kő, papír olló játékodon!'
+                story_text: |-
+                    ## Kő, papír, olló a 4. szinten
+                    A 4. szinten meghatározhatjuk, hogy ki nyert.
+                    Ehhez szükséged van az új `if` kódra.
+
+                    Mentsd el a a számítógép választását egy tetszőleges névvel.
+                    Ezután használhatod az `if' utasítást, hogy lásd, azonosak-e vagy különböznek-e.
+                    Befejezed a kódot?
+
+                    ## Példa Hedy kód
+                    ```
+                    lehetoseg is kő, papír, olló
+                    szamitogepe is ...
+                    valaszt is ask Mit választasz?
+                    print 'ezt választottad:' ...
+                    print 'a számítógép választása:' ...
+                    if ... is ... print 'döntetlen!' else print 'nem döntetlen'
+                    if valaszt is kő and szamitogepe is papír print 'számítógép nyert'
+                    ```
+
+                    Először töltsd ki a helyes kódot a pontok helyén, és nézd meg, hogy döntetlen-e.
+
+                    Ezután néhányszor másold az utolsó sort, és töltsd ki helyesen az összes opciót.
+
+                    Most elkészült a saját kő, papír, olló! Még mindig kissé bonyolult a sokféle lehetőséggel, nem?
+                    Ezt egy kicsit megkönnyítjük egy későbbi szinten.
+    calculator:
+        name: Számológép
+        description: Készíts számológépet
+        default_save_name: Számológép
+        image: calculator.png
+        levels:
+            6:
+                start_code: print Üdvözlünk a számológépnél!
+                story_text: |-
+                    ## Számológép
+                    Most, hogy tudsz számolni, létrehozhatsz egy programot is a matematikai számítások gyakorlásához. A számításokat magad is elkészítheted, például:
+
+                    ## Example Hedy code
+                    ```
+                    jo_valasz is 11 * 27
+                    print 'Mennyi 11 és 27 szorzata?'
+                    valasz is ask Tudod a választ?
+                    if valasz is jo_valasz print 'nagyszerű!' else print 'Nem jó! Ennyi: ' jo_valasz
+                    ```
+                    ## Véletlen számok
+                    Azt is engedélyezheted, hogy a számítógép véletlenszerű számításokat végezzen véletlenszámok használatával.
+
+                    Így válassz ki pár táblázatot a gyakorláshoz, és ettől mindig más eredményt kapsz
+                    ## Példa Hedy kód
+                    ```
+                    tablazat is 4, 5, 6, 8
+                    szamok is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    tabla is tablazat at random
+                    szam is szamok at random
+                    jo_valasz is tabla * szam
+                    print 'Mennyi ' tabla ' és ' szam ' szorzata?'
+                    valasz is ask Tudod a választ?
+                    if valasz is jo_valasz print 'rendben' else print 'hiba! ennyi: ' jo_valasz
+                    ```
+    restaurant:
+        name: Étterem
+        default_save_name: Étterem
+        image: "restaurant.png"
+        description: Készíts virtuális éttermet
+        levels:
+            1:
+                start_code: ''
+                story_text: |-
+                    ## Étterem
+                    Az 1. szinten elkészítheted saját virtuális éttermedet és fogadhatod vendégei megrendeléseit.
+
+                    ## Példa Hedy kód
+                    ```
+                    print Üdvözlünk a Hedy étteremben
+                    ask Mit rendelsz?
+                    echo Szóval ezt szeretnéd megrendelni ...
+                    print Köszönjük a rendelésedet!
+                    print Már úton van!
+                    ```
+
+                    ## Kihívás
+                    Tudnál még egy sort felvenni az éttermi kódodba? Megkérdezheted például a vendégeket, hogy mit szeretnének inni, megmondod-e nekik az árat, vagy kívánsz-e nekik jó étvágyat?
+            2:
+                start_code: ''
+                story_text: |-
+                    ## Étterem
+                    A 2. szinten változók segítségével bővítheted éttermedet. Az 1. szinten Hedy csak egyszer tudta visszhangozni a sorrendet, és csak az utolsó dologra emlékezett, amit rendeltek.
+                    Most már használhatsz változókat, és Hedy emlékszik mind az ételekre, mind az italokra!
+
+                    ## Példa Hedy étterem
+                    ```
+                    print Üdvözlünk a Hedy étteremben!
+                    print Ma pizzát vagy lasagnat szolgálunk fel.
+                    etel is ask Mit szeretnél enni?
+                    print Jó választás! A etel a kedvencem!
+                    feltet is ask Szeretnél rá húst vagy zöldséget?
+                    print etel rajta feltet úton van!
+                    ital is ask Mit szeretnél inni?
+                    print Köszönjük a rendelésedet.
+                    print A etel és ital mindjárt itt lesz!
+                    ```
+
+                    ## Véletlenszerű étterem
+                    Nehezen tudod eldönteni, mit szeretnél vacsorázni? Engedheted, hogy Hedy válasszon neked!
+                    Egyszerűen add hozzá kedvenc (vagy legkevésbé kedvenc) ételeidnek listáját, és Hedy véletlenszerűen választhatja ki a vacsorádat.
+                    Szórakozhatsz egy kicsit, ha hagyod, hogy Hedy megválassza a vacsora árát is! Mit fogsz kapni?
+
+                    ## Példa Hedy Code véletlenszerű étterem
+
+                    ```
+                    print Üdvözöljük a Hedy's Random étteremben!
+                    print Az egyetlen étterem, amely véletlenszerűen kiválasztja az étkezést és annak árát az Ön számára!
+                    eloetelek saláta, leves, sajt
+                    foetel pizza, kelbimbó, spagetti
+                    desszertek brownie, fagylalt, francia sajtok
+                    ital kóla, sör, víz
+                    arak 1000 forint, 2000 forint, 3000 forint
+                    print A következővel indul: eloetelek at random
+                    print Ezután kiszolgáljuk: foetel at random
+                    print És desszertként: desszertek at random
+                    print Igyon egy italt
+                    print Ez lesz: arak at random
+                    print Köszönöm és élvezze az étkezést!
+                    ```
+            3:
+                start_code: ''
+                story_text: |-
+                    ## Étterem
+                    A 3. szinten idézőjeleket fogunk alkalmazni, amikor a `print` parancsot használjuk.
+                    Tudod-e idézőjelek hozzáadásával működtetni a 2. szintű kódodat a 3. szinten?
+
+                    Légy óvatos! A 2. szinten aposztrófokat engedélyeztek a szövegben, de a 3. szinten Hedy összetéveszti őket idézőjelekkel, és a kód nem fog működni!
+                    Tehát ahelyett, hogy beírnád a `print ma pizzát szolgálunk fel` kifejezést, írd be a `print ` ma pizzát szolgálunk fel` parancsot
+
+                    ## Példa Hedy Étterem
+                    ```
+                    print 'Üdvözlünk a Hedy Étteremben!'
+                    print 'Ma pizzát vagy lasagnat szolgálunk fel.'
+                    etel is ask Mit szeretnél enni?
+                    print 'Jó választás! A(z) ' etel ' nekem is kedvencem!'
+                    feltet is ask Szeretnél hús vagy zöldséget rá?
+                    print etel ' , rajta a(z) ' feltet ' már úton van!'
+                    ital is ask Mit szeretnél inni hozzá?
+                    print 'Köszönjük a rendelésedet.'
+                    print 'A(z) ' etel ' és a(z) ' ital ' mindjárt itt lesz!'
+                    ```
+            4:
+                start_code: ''
+                story_text: |-
+                    ## Étterem
+                    A 4. szinten az if parancs lehetővé teszi, hogy kérdéseket tegyél fel ügyfeleidnek, és különböző módon felelj a válaszaikra.
+                    Az alábbi példában láthatod, hogy megkérdezheted az ügyfeledet, hogy szeretné-e hallani a különlegességeket, és Hedy ennek megfelelően válaszolhat.
+
+                    ## Példa Hedy kódra
+                    ```
+                    print 'Üdvözlünk a Hedy Étteremben!'
+                    kulonleges is ask Szeretnél hallani ma a különlegességeinkről?
+                    if kulonleges is igen print 'Mai különlegességünk piri piri csirek és rizs.' else print 'Nem probléma.'
+                    etel is ask Mit szeretnél enni?
+                    print 'Egy ' etel', mindjárt jön!'
+                    ital is ask Mit szeretnél inni hozzá?
+                    if ital is kóla print 'Sajnálom a kóla kifogyott!' else print 'Jó választás!!'
+                    mas is ask Szeretnél valami mást?
+                    print 'Hadd ismételjem el a rendelésedet...'
+                    print 'Egy ' etel
+                    if ital is kóla print 'és...' else print 'Egy ' ital
+                    if mas is nem print 'Ez minden!' else print 'Egy  ' mas
+                    print 'Köszönjük a rendelésedet, jó étvágyat !'
+                    ```
+
+                    ## Kihívás
+                    Tudnál még több kérdést feltenni az ügyfeleknek, amikor rendelnek, és különböző  módon felelni a válaszaikra az if paranccsal?
+            6:
+                start_code: ''
+                story_text: |-
+                    ## Étterem
+                    A 6. szinten matematikai számításokkal kiszámíthatod az ügyfelek megrendelésének teljes árát, ami reálisabbá teheti a virtuális éttermet.
+
+                    ## Példa Hedy kódra (egyszerű)
+                    Készíthetsz egyszerű éttermi kódot, például:
+                    ```
+                    print 'Üdvözlünk a Hedy Étteremben'
+                    print 'Ez a menünk:'
+                    print 'Fő ételeink: pizza, lasagne vagy spagetti'
+                    foetel is ask Melyik főételt szeretnéd?
+                    ar is 0
+                    if foetel is pizza ar is 1000
+                    if foetel is lasagne ar is 1200
+                    if foetel is spagetti ar is 800
+                    print 'Ezt rendelted: ' foetel
+                    print 'Ez ' ar ' forint lesz, kérem'
+                    print 'Köszönöm, jó étvágyat!'
+                    ```
+
+                    De még sok mindent hozzáadhatsz a virtuális éttermedhez, például több tanfolyamot.
+
+                    ## Példa Hedy-kódra (kidolgozás)
+                    Ebben a példában három tanfolyam létezik, amelyek több kódot és további kiegészítéseket igényelnek az ár kiszámításakor.
+                    ```
+                    print 'Üdvözlünk a Hedy Étteremben'
+                    print 'Ez a menünk:'
+                    print 'Előételeink: saláta, leves, vagy sajt'
+                    print 'Fő ételeink: pizza, lasagne vagy spagetti'
+                    print 'Desszertjeink: piskóta, fagyi vagy turmix'
+                    eloetel is ask Melyik előételt szeretnéd?
+                    foetel is ask Melyik főételt szeretnéd?
+                    desszert is ask Melyik desszertet választod?
+                    ar is 0
+                    if eloetel is leves ar is ar + 600 else ar is ar + 700
+                    if foetel is pizza ar is ar + 1000
+                    if foetel is lasagne ar is ar + 1200
+                    if foetel is spagetti ar is ar + 800
+                    if desszert  is piskóta ar is ar + 700
+                    if desszert  is fagyi ar is ar + 500
+                    if desszert is turmix ar is ar + 400
+                    print 'Ezt rendelted: ' eloetel ' , ' foetel ' és ' desszert
+                    print 'Ez ' ar ' forint lesz, kérem'
+                    print 'Köszönöm, jó étvágyat!'
+                    ```
+                    ## Kihívás
+                    Hozzáadhatsz még sok mindent a virtuális éttermedhez, például ...
+                    ... kérdezd meg, hány ember jön, és szorozd meg az árat ezzel az értékkel
+                    ... felveszel egy másik ételt?
+                    ... kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
+                    ... adsz hozzá gyermekmenüt?
+                    ... gondolsz más szórakoztató dolgokra?

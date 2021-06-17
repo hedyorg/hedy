@@ -1,0 +1,26 @@
+program: _EOL* (command | invalid) (_SPACE)* (_EOL+ (command | invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
+command: print | ifelse | ifs | ask | assign_list | list_access_var | assign | print_no_quotes
+//placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
+
+print: _PRINT _SPACE (quoted_text | list_access | var) (_SPACE (quoted_text | list_access | var))*
+ask: var _SPACE _IS _SPACE _ASK _SPACE textwithspaces*
+assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
+assign: var _SPACE _IS _SPACE textwithspaces
+invalid: textwithoutspaces _SPACE textwithspaces
+
+print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
+
+// new commands for level 4
+ifelse: _IF _SPACE condition _SPACE command _SPACE _ELSE _SPACE command
+ifs: _IF _SPACE condition _SPACE command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
+list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (index | random)
+equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
+in_list_check: textwithoutspaces _SPACE _IN _SPACE var
+
+textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+textwithoutspaces: /([^\n, ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+
+
+
+

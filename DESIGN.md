@@ -6,11 +6,16 @@ Architecture
 
 The global idea of Hedy is that we transpile Hedy code to Python code by adding syntactic elements when they are missing. In the code base, this works in steps:
 
-1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser
+1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser.
 2. Validity of the code is checked with the IsValid() function
 3. If the code is valid, it is transformed into Python with the relevant function.
 
 This logic all resides in hedy.py.
+
+Transpiling
+------------
+
+Transpiling Hedy is a stepwise process. Firstly the code is parsed using Lark, resulting in an AST. The AST is then scanned for invalid rules. If these appear in the tree, the Hedy program is invalid and an error message will be generated. Secondly, a lookup table with all variable names occuring in the program is extracted from the AST. Finally, the AST is transformed into Python by adding needed syntax such as brackets.
 
 
 Design Goals
@@ -70,7 +75,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 Levels
 ------
 
-In its current form, Hedy consists of 13 different levels. The levels loosely
+In its current form, Hedy consists of 22 different levels. The levels loosely
 follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
@@ -193,11 +198,11 @@ In level 12, learners encounter different types of brackets for the
 first time, because it adds rectangular brackets for list access, which
 up to now was done with the keyword [`at`], following Design Goal 2.
 
-### Level 13: booleans
+### Level 13: Booleans
 
 In level 13, booleans are added. Learners encounter True and False and how to use them in if statements
 
-### Level 14: and and or
+### Level 14: And and or
 
 In level 14, Learners learn about and and or in if statements. 
 
@@ -205,13 +210,38 @@ In level 14, Learners learn about and and or in if statements.
 
 In level 15, comments are introduced. The learner will now know how to comment code
 
-### Level 16: smaller and bigger
+### Level 16: Smaller and bigger
 
 In level 16, Learners learn about < and > in preparation for while loops
 
-### Level 17: while loops
+### Level 17: While loops
 
 In level 17, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
 can make basic while loops.
 
+### Level 18: Access specific value in list
 
+In level 18, learners are shown how to get a specific value from a list. The code to access a specific
+value has already been available for a while but there was no explanation yet how to access a specific
+value.
+
+### Level 19: Loop through all values in lists
+
+In level 19, learners are shown how to loop through a list. The length() function is also introduced,
+as it makes looping through a list easier. The code to loop through a list has already been available since
+the for loop was introduced but there was no explanation yet how to loop through the list.
+
+### Level 20: Change is to = and ==
+
+In level 20, we introduce the = and ==. All variable assignments change is to =. All equality checks
+turn into ==. 
+
+### Level 21: Introducing !=
+
+In level 21, we introduce the != in the equality checks. This is introduced after the change to = and
+== as to make it easier to understand when you already know the syntax for =. 
+
+### Level 22: Introducing <= and >=
+
+In level 22, we introduce <= and >=. This is introduced after the change to = and
+== as to make it easier to understand when you already know the syntax for =. 

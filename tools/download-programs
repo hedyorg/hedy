@@ -1,0 +1,60 @@
+#!/bin/bash
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+
+if ! type aws > /dev/null; then
+    echo "Install the AWS CLI before running this script." >&2
+    exit 1
+fi
+
+if ! grep '\[hedy-logs-viewer\]' ~/.aws/credentials > /dev/null; then
+    echo "Add the following block to your ~/.aws/credentials file:" >&2
+    echo "" >&2
+    echo "[hedy-logs-viewer]" >&2
+    echo "aws_access_key_id = AKIA***********" >&2
+    echo "aws_secret_access_key = **************" >&2
+    echo ""
+    echo "(Ask someone from the team for the actual keys)" >&2
+    exit 1
+fi
+
+#----------------------------------------------------------------------
+hedy_env=""
+prefix=""
+
+usage() {
+    echo "download-programs -e <ENVIRONMENT> [-d <YYYY-MM-DD>] <DIRECTORY>" >&2
+}
+
+while getopts "he:d:" OPTION
+do
+	case $OPTION in
+		e)
+            hedy_env="$OPTARG"
+			;;
+        d)
+            prefix="/$OPTARG"
+			;;
+		h)
+			usage
+            exit 0
+			;;
+	esac
+done
+shift $((OPTIND -1))
+
+dir="${1:-}"
+if [[ "${dir}" == "" ]]; then
+    usage
+    exit 1
+fi
+
+#----------------------------------------------------------------------
+
+mkdir -p "$dir"
+
+export AWS_DEFAULT_REGION=eu-west-1
+export AWS_PROFILE=hedy-logs-viewer
+bucket=hedy-parse-logs
+
+aws s3 sync s3://${bucket}/${hedy_env}/${prefix} $dir

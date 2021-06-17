@@ -49,6 +49,7 @@ Ja! Die Universität Leiden erlaubt uns, es gratis zur Verfügung zu stellen.
 Hedy ist außerdem 'Open Source'. 
 Das bedeutet, dass jeder, der programmieren kann, uns helfen kann, Hedy besser zu machen. 
 Du kannst den Code auf [GitHub](https://github.com/Felienne/hedy) finden.
+Wenn dir Hedy gefällt, würden wir uns über eine [Spende](https://www.steunleiden.nl/project/hedy?locale=en) freuen!
 
 ## Muss ich etwas installieren?
 Nein. Hedy funktioniert im Browser, also in dem Programm, mit dem du diese Seite ansiehst. 

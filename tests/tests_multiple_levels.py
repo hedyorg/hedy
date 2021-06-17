@@ -55,9 +55,17 @@ class TestsForMultipleLevels(unittest.TestCase):
         print('Passed at level ', 11)
 
         min_level = 12
-        max_level = 17
+        max_level = 19
         for i in range(min_level, max_level + 1):
-            result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", 12)
+            result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
+            self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+        min_level = 20
+        max_level = 22
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
             self.assertEqual(result, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
