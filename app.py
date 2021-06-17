@@ -271,6 +271,9 @@ def parse():
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
+    if not 'error_level' in session:
+        initialize_gfi_session(lang)
+
     # Check if user sent code
     if not code:
         response["Error"] = "no code found, please send code."
