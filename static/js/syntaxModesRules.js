@@ -989,7 +989,32 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         regex: " \\- "
       },{
         token: "keyword",
-        regex: "^for |    for "
+        regex: "^for | for ",
+        next: "forloop1"
+      }],
+
+      "forloop1": [{
+        token: "keyword",
+        regex: " in range ",
+        next: "forloop2"
+      },{
+        defaultToken : "text"
+      }],
+
+      "forloop2": [{
+        token: "keyword",
+        regex: " to ",
+        next: "forloop3"
+      },{
+        defaultToken : "text"
+      }],
+
+      "forloop3": [{
+        token: "text",
+        regex: "$",
+        next: "start"
+      },{
+        defaultToken : "text"
       }],
 
       "ifElseSpace": [{
