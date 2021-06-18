@@ -321,6 +321,23 @@ function reportClientError(level, code, client_error) {
   });
 }
 
+window.onerror = function reportClientException(message, source, line_number, column_number, error) {
+
+  $.ajax({
+    type: 'POST',
+    url: '/client_exception',
+    data: JSON.stringify({
+      message: message,
+      source: source,
+      line_number: line_number,
+      column_number: column_number,
+      error: error
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  });
+}
+
 function runPythonProgram(code, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
