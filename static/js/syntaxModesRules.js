@@ -822,7 +822,32 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
         regex: " \\- "
       },{
         token: "keyword",
-        regex: "^for "
+        regex: "^for ",
+        next: "forloop1"
+      }],
+
+      "forloop1": [{
+        token: "keyword",
+        regex: " in range ",
+        next: "forloop2"
+      },{
+        defaultToken : "text"
+      }],
+
+      "forloop2": [{
+        token: "keyword",
+        regex: " to ",
+        next: "forloop3"
+      },{
+        defaultToken : "text"
+      }],
+
+      "forloop3": [{
+        token: "text",
+        regex: "$",
+        next: "start"
+      },{
+        defaultToken : "text"
       }],
 
       "ifElseSpace": [{
@@ -854,6 +879,10 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        token: "text",
+        regex: "$",
+        next: "start"
       },{
         defaultToken : "text"
       }],
@@ -997,6 +1026,10 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        token: "text",
+        regex: "$",
+        next: "start"
+      },{
         defaultToken : "text"
       }],
 
@@ -1005,8 +1038,12 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         regex: " at random | at random$",
       },{
         token: "constant.character", // constant.character
-        regex: "'",
+        regex: "'$",
         next: "start"
+      },{
+        token: "constant.character",
+        regex: "' ",
+        next: "print option"
       },{
         token: "text",
         regex: "$",
