@@ -327,7 +327,8 @@ def parse():
             if gfi_support(lang):
                 response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=False))
         if gfi_support(lang):
-            session ['code'] = code
+            session['code'] = code
+            session['hedy_level'] = level
 
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log ({
@@ -398,6 +399,7 @@ def log_feedback():
         'session': session_id(),
         'date': str(datetime.datetime.now()),
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
+        'level': session['hedy_level'],
         'feedback_level': feedback_level,
         'usefulness': general_answer,
         'level_usefulness': level_answer,
@@ -408,6 +410,7 @@ def log_feedback():
     debug = True
     if debug:
         print("TESTING FEEDBACK LOG INFORMATION")
+        print("Current level: " + str(session['hedy_level']))
         print("Model was useful: " + str(general_answer))
         print("Specific level was useful: " + str(level_answer))
         print("Feedback level of fix: " + str(feedback_level))
