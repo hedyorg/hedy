@@ -4,7 +4,9 @@ import threading
 import logging
 import os
 import datetime
-import resource
+IS_WINDOWS = os.name == 'nt'
+if not IS_WINDOWS:
+    import resource
 import logging
 
 from . import log_queue
@@ -15,7 +17,9 @@ class LogRecord:
     """A log record."""
     def __init__(self, **kwargs):
         self.start_time = time.time()
-        self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
+
+        if not IS_WINDOWS:
+            self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         self.attributes = kwargs
         self.running_timers = set([])
         self.set(
@@ -30,11 +34,18 @@ class LogRecord:
 
     def finish(self):
         end_time = time.time()
-        end_rusage = resource.getrusage(resource.RUSAGE_SELF)
+        if not IS_WINDOWS:
+            end_rusage = resource.getrusage(resource.RUSAGE_SELF)
+            user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime),
+            sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime),
+        else:
+            user_ms = None
+            sys_ms = None
+
         self.set(
             end_time=dtfmt(end_time),
-            user_ms=ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime),
-            sys_ms=ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime),
+            user_ms=user_ms,
+            sys_ms=sys_ms,
             duration_ms=ms_from_fsec(end_time - self.start_time))
 
         # There should be 0, but who knows
