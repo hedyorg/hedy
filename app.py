@@ -338,6 +338,21 @@ def report_error():
 
     return 'logged'
 
+@app.route('/client_exception', methods=['POST'])
+def report_client_exception():
+    post_body = request.json
+
+    querylog.log_value(
+        session=session_id(),
+        date=str(datetime.datetime.now()),
+        client_error=post_body,
+        version=version(),
+        username=current_user(request) ['username'] or None,
+        is_test=1 if os.getenv ('IS_TEST_ENV') else None
+    )
+
+    return 'logged', 500
+
 @app.route('/version', methods=['GET'])
 def version_page():
     """
