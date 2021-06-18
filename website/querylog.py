@@ -44,8 +44,8 @@ class LogRecord:
 
         self.set(
             end_time=dtfmt(end_time),
-            user_ms=user_ms
-            sys_ms=sys_ms
+            user_ms=user_ms,
+            sys_ms=sys_ms,
             duration_ms=ms_from_fsec(end_time - self.start_time))
 
         # There should be 0, but who knows
