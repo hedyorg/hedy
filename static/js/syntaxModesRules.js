@@ -1042,7 +1042,7 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         next: "start"
       },{
         token: "constant.character",
-        regex: "' ",
+        regex: "'",
         next: "print option"
       },{
         token: "text",
