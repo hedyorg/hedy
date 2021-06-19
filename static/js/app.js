@@ -46,6 +46,9 @@
         if (window.State.level == 12){
           window.editor.session.setMode("ace/mode/level12");
         }
+        if (window.State.level == 13){
+          window.editor.session.setMode("ace/mode/level13");
+        }
   }
 
 
