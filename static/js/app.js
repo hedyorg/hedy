@@ -58,8 +58,11 @@
         if (window.State.level == 16){
           window.editor.session.setMode("ace/mode/level16");
         }
-        if (window.State.level == 17){
-          window.editor.session.setMode("ace/mode/level17");
+        if (window.State.level == 17 || window.State.level == 18){
+          window.editor.session.setMode("ace/mode/level17and18");
+        }
+        if (window.State.level == 19){
+          window.editor.session.setMode("ace/mode/level19");
         }
   }
 
