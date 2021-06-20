@@ -2501,7 +2501,7 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         next: "ifElseSpace"
       },{
         token: "keyword",
-        regex: "^elif|^else| else| else if",
+        regex: "^elif|^else| else| elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
