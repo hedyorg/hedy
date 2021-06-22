@@ -216,7 +216,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       dataType: 'json'
     }).done(function(response) {
       // The auth functions use this callback function.
-      if (cb) return response.Error ? cb (response) : cb ();
+      if (cb) return response.Error ? cb (response) : cb (null, response);
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
@@ -254,34 +254,56 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
-window.share_program = function share_program (id, level, Public, reload) {
-  $.ajax({
-    type: 'POST',
-    url: '/programs/share',
-    data: JSON.stringify({
-      id: id,
-      public: Public
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    if ($ ('#okbox') && $ ('#okbox').length) {
-      $ ('#okbox').show ();
-      $ ('#okbox .caption').html (window.auth.texts.save_success);
-      $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
-    }
-    else {
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
-      alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-    }
-    if (reload) setTimeout (function () {location.reload ()}, 1000);
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+window.share_program = function share_program (level, lang, id, Public, reload) {
+  var share = function (id) {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/share',
+      data: JSON.stringify({
+        id: id,
+        public: Public
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if ($ ('#okbox') && $ ('#okbox').length) {
+        $ ('#okbox').show ();
+        $ ('#okbox .caption').html (window.auth.texts.save_success);
+        $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+        // If we're sharing the program, copy the link to the clipboard.
+        if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
+      }
+      else {
+        // If we're sharing the program, copy the link to the clipboard.
+        if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
+        alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+      }
+      if (reload) setTimeout (function () {location.reload ()}, 1000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  }
+
+  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+
+  // If id is true, the request comes from the code page.
+  // We check if the currently displayed program is a saved one. If so, we overwrite the id.
+  // If the program is not own, the server will create one for the current user and then share it.
+  if (id === true && window.State.current_program_id) id = window.State.current_program_id;
+
+  // THe program exists, so we just share it.
+  if (id !== true) return share (id);
+
+  // If id is still true, we need to save a completely new program.
+  var name = $ ('#program_name').val ();
+  var code = ace.edit('editor').getValue();
+  return saveit(level, lang, name, code, function (err, resp) {
+    if (err && err.Warning) return error.showWarning(ErrorMessages.Transpile_warning, err.Warning);
+    if (err && err.Error) return error.show(ErrorMessages.Transpile_error, err.Error);
+    share (resp.id);
   });
+
 }
 
 window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {

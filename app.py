@@ -111,6 +111,7 @@ def load_adventure_assignments_per_level(lang, level):
             'loaded_program': '' if not loaded_programs.get (short_name) else {
                 'name': loaded_programs.get (short_name) ['name'],
                 'code': loaded_programs.get (short_name) ['code'],
+                'id':   loaded_programs.get (short_name) ['id']
              }
         })
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
@@ -119,6 +120,7 @@ def load_adventure_assignments_per_level(lang, level):
         'loaded_program': '' if not loaded_programs.get ('level') else {
             'name': loaded_programs.get ('level') ['name'],
             'code': loaded_programs.get ('level') ['code'],
+            'id':   loaded_programs.get ('level') ['id']
          }
     })
     return assignments
@@ -486,7 +488,7 @@ def index(level, step):
         public_program = 'public' in result and result ['public']
         if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
-        loaded_program = {'code': result ['code'], 'name': result ['name'], 'not_own_program': public_program and user ['username'] != result ['username'], 'adventure_name': result.get ('adventure_name')}
+        loaded_program = {'code': result ['code'], 'name': result ['name'], 'adventure_name': result.get ('adventure_name'), 'id': result.get ('id')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
@@ -714,6 +716,43 @@ def delete_program (user, program_id):
     db_update ('users', {'username': user ['username'], 'program_count': program_count - 1})
     return redirect ('/programs')
 
+def save_program_helper (user, code, name, level, adventure_name, public):
+    # We check if a program with a name `xyz` exists in the database for the username.
+    # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
+    # For now, we bring all existing programs for the user and then search within them for repeated names.
+    programs = db_get_many ('programs', {'username': user ['username']}, True)
+    program = {}
+    overwrite = False
+    for program in programs:
+        if program ['name'] == name:
+            overwrite = True
+            break
+
+    program_id = program.get ('id') if overwrite else uuid.uuid4().hex,
+
+    stored_program = {
+        'id': program_id,
+        'session': session_id(),
+        'date': timems (),
+        'lang': requested_lang(),
+        'version': version(),
+        'level': level,
+        'code': code,
+        'name': name,
+        'username': user ['username']
+    }
+
+    if adventure_name:
+        stored_program ['adventure_name'] = adventure_name
+
+    if overwrite:
+        db_update('programs', stored_program)
+    else:
+        db_create('programs', stored_program)
+        db_update('users', {'username': user ['username'], 'program_count': len (programs)})
+
+    return {'name': name, 'id': program_id}
+
 @app.route('/programs', methods=['POST'])
 @requires_login
 def save_program (user):
@@ -733,43 +772,7 @@ def save_program (user):
 
     name = body ['name']
 
-    # We check if a program with a name `xyz` exists in the database for the username.
-    # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
-    # For now, we bring all existing programs for the user and then search within them for repeated names.
-    programs = db_get_many ('programs', {'username': user ['username']}, True)
-    program = {}
-    overwrite = False
-    for program in programs:
-        if program ['name'] == name:
-            overwrite = True
-            break
-
-    stored_program = {
-        'id': program.get ('id') if overwrite else uuid.uuid4().hex,
-        'session': session_id(),
-        'date': timems (),
-        'lang': requested_lang(),
-        'version': version(),
-        'level': body ['level'],
-        'code': body ['code'],
-        'name': name,
-        'username': user ['username']
-    }
-
-    if 'adventure_name' in body:
-        stored_program ['adventure_name'] = body ['adventure_name']
-
-    if overwrite:
-        db_update('programs', stored_program)
-    else:
-        db_create('programs', stored_program)
-
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
-
-    return jsonify({'name': name})
+    return save_program_helper (user, body ['code'], body ['name'], body ['level'], body.get ('adventure_name'), False):
 
 @app.route('/programs/share', methods=['POST'])
 @requires_login
@@ -780,14 +783,25 @@ def share_unshare_program(user):
     if not object_check (body, 'id', 'str'):
         return 'id must be a string', 400
     if not object_check (body, 'public', 'bool'):
-        return 'public must be a string', 400
+        return 'public must be a boolean', 400
 
     result = db_get ('programs', {'id': body ['id']})
-    if not result or result ['username'] != user ['username']:
+    if not result:
         return 'No such program!', 404
 
+    if result ['username'] != user ['username']:
+        # If this is not the user's program, they cannot unshare it.
+        if body ['public'] == False:
+            return 'No such program!', 404
+        public_program = 'public' in result and result ['public']
+        # If program is not public and doesn't belong to the user, they cannot share a copy of it either
+        if not public_program:
+            return 'No such program!', 404
+        # If program is public but doesn't belong to the user, we save a new one for this user with the same code, name & level
+        return save_program_helper (user, result ['code'], result ['name'], result ['level'], result.get ('adventure_name'), True):
+
     db_update ('programs', {'id': body ['id'], 'public': 1 if body ['public'] else None})
-    return jsonify({})
+    return jsonify({'id': body ['id']})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):

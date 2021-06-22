@@ -53,20 +53,24 @@ $(function() {
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);
       window.editor.setValue (window.State.loaded_program.code);
+      window.State.current_program_id = window.State.loaded_program.id;
     }
     // If there's a loaded program for the adventure or level now selected, use it.
     else if (adventures [tabName].loaded_program) {
       $ ('#program_name').val (adventures [tabName].loaded_program.name);
       window.editor.setValue (adventures [tabName].loaded_program.code);
+      window.State.current_program_id = adventures [tabName].loaded_program.id;
     }
     // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
     else if (tabName === 'level') {
       $ ('#program_name').val (window.State.default_program_name);
       window.editor.setValue (window.State.default_program);
+      window.State.current_program_id = null;
     }
     else {
       $ ('#program_name').val (adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
       window.editor.setValue (adventures [tabName].start_code);
+      window.State.current_program_id = null;
     }
 
     window.editor.clearSelection ();
