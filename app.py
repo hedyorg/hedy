@@ -23,7 +23,7 @@ from utils import db_get, db_get_many, db_create, db_update, timems, type_check,
 import utils
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
 from flask_helpers import render_template
 from flask_compress import Compress
 
@@ -572,7 +572,9 @@ def space_eu(level, step):
 @app.route('/error_messages.js', methods=['GET'])
 def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
-    return render_template("error_messages.js", error_messages=json.dumps(error_messages))
+    response = make_response(render_template("error_messages.js", error_messages=json.dumps(error_messages)))
+    response.cache_control.max_age = 60 * 60  # Seconds
+    return response
 
 
 @app.errorhandler(500)

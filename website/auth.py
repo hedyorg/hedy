@@ -77,7 +77,9 @@ def routes (app, requested_lang):
 
     @app.route('/auth/texts', methods=['GET'])
     def auth_texts():
-        return jsonify (TRANSLATIONS.data [requested_lang ()] ['Auth'])
+        response = make_response(jsonify(TRANSLATIONS.data [requested_lang ()] ['Auth']))
+        response.cache_control.max_age = 60 * 60  # Seconds
+        return response
 
     @app.route ('/auth/login', methods=['POST'])
     def login ():
