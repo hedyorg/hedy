@@ -19,7 +19,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_create, db_update, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import db_get, db_get_many, db_create, db_update, is_debug_mode, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -573,7 +573,11 @@ def space_eu(level, step):
 def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     response = make_response(render_template("error_messages.js", error_messages=json.dumps(error_messages)))
-    response.cache_control.max_age = 60 * 60  # Seconds
+
+    if not is_debug_mode():
+        # Cache for longer when not devving
+        response.cache_control.max_age = 60 * 60  # Seconds
+
     return response
 
 
