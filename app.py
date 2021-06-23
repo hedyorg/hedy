@@ -772,7 +772,7 @@ def save_program (user):
 
     name = body ['name']
 
-    return save_program_helper (user, body ['code'], body ['name'], body ['level'], body.get ('adventure_name'), False):
+    return save_program_helper (user, body ['code'], body ['name'], body ['level'], body.get ('adventure_name'), False)
 
 @app.route('/programs/share', methods=['POST'])
 @requires_login
@@ -798,7 +798,7 @@ def share_unshare_program(user):
         if not public_program:
             return 'No such program!', 404
         # If program is public but doesn't belong to the user, we save a new one for this user with the same code, name & level
-        return save_program_helper (user, result ['code'], result ['name'], result ['level'], result.get ('adventure_name'), True):
+        return save_program_helper (user, result ['code'], result ['name'], result ['level'], result.get ('adventure_name'), True)
 
     db_update ('programs', {'id': body ['id'], 'public': 1 if body ['public'] else None})
     return jsonify({'id': body ['id']})
