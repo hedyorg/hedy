@@ -1428,7 +1428,7 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -1656,7 +1656,7 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
         regex: "\\[",
         next: "lijst"
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False",
         next: "start"
       },{
@@ -1695,7 +1695,7 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -1939,7 +1939,7 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -1980,7 +1980,7 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -2234,7 +2234,7 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -2275,7 +2275,7 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -2529,7 +2529,7 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -2570,7 +2570,7 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -2829,7 +2829,7 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -2870,7 +2870,7 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -3129,7 +3129,7 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -3182,7 +3182,7 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -3465,7 +3465,7 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -3518,7 +3518,7 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -3801,7 +3801,7 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -3854,7 +3854,7 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
@@ -4137,7 +4137,7 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         token: "keyword",
         regex: " or "
       },{
-        token: "constant.character",
+        token: "support.function",
         regex: "True|False"
       },{
         token: "keyword",
@@ -4190,7 +4190,7 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         regex: "'\\]",
         next: "start"
       },{
-        defaultToken: "text"
+        defaultToken: "constant.character"
       }],
 
       "input": [{
