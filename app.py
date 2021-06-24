@@ -524,8 +524,8 @@ def index(level, step):
         adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/onlinemasters/<level>/<step>', methods=['GET'])
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
+@app.route('/onlinemasters/<int:level>/<int:step>', methods=['GET'])
 def onlinemasters(level, step):
     g.level = level = int(level)
     g.lang = lang = requested_lang()
@@ -547,8 +547,8 @@ def onlinemasters(level, step):
         adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu/<level>/<step>', methods=['GET'])
+@app.route('/space_eu/<int:level>', methods=['GET'], defaults={'step': 1})
+@app.route('/space_eu/<int:level>/<int:step>', methods=['GET'])
 def space_eu(level, step):
     g.level = level = int(level)
     g.lang = requested_lang()
