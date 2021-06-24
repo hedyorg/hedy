@@ -140,7 +140,9 @@ def finish_global_log_record(exc=None):
 
 def log_value(**kwargs):
     """Log values into the currently globally active Log Record."""
-    THREAD_LOCAL.current_log_record.set(**kwargs)
+    if hasattr(THREAD_LOCAL, 'current_log_record'):
+        # For some malformed URLs, the records are not initialized, so we check whether there's a current_log_record
+        THREAD_LOCAL.current_log_record.set(**kwargs)
 
 
 def log_time(name):

@@ -525,7 +525,10 @@ def index(level, step):
 @app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/onlinemasters/<level>/<step>', methods=['GET'])
 def onlinemasters(level, step):
-    g.level = level = int(level)
+    try:
+        g.level = level = int(level)
+    except:
+        return 'No such Hedy level!', 404
     g.lang = lang = requested_lang()
     g.prefix = '/onlinemasters'
 
@@ -548,7 +551,10 @@ def onlinemasters(level, step):
 @app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/space_eu/<level>/<step>', methods=['GET'])
 def space_eu(level, step):
-    g.level = level = int(level)
+    try:
+        g.level = level = int(level)
+    except:
+        return 'No such Hedy level!', 404
     g.lang = requested_lang()
     g.prefix = '/space_eu'
 
