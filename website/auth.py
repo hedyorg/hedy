@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, valid_email
+from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email
 import datetime
 from functools import wraps
 from config import config
@@ -77,7 +77,11 @@ def routes (app, requested_lang):
 
     @app.route('/auth/texts', methods=['GET'])
     def auth_texts():
-        return jsonify (TRANSLATIONS.data [requested_lang ()] ['Auth'])
+        response = make_response(jsonify(TRANSLATIONS.data [requested_lang ()] ['Auth']))
+        if not is_debug_mode():
+            # Cache for longer when not devving
+            response.cache_control.max_age = 60 * 60  # Seconds
+        return response
 
     @app.route ('/auth/login', methods=['POST'])
     def login ():
