@@ -377,7 +377,9 @@ def version_page():
 def programs_page (request):
     username = current_user(request) ['username']
     if not username:
-        return "unauthorized", 403
+        # redirect users to /login if they are not logged in
+        url = request.url.replace('/programs', '/login')
+        return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
     if from_user and not is_admin (request):
@@ -786,11 +788,7 @@ def save_program (user):
         db_update('programs', stored_program)
     else:
         db_create('programs', stored_program)
-
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
+        db_update('users', {'username': user ['username'], 'program_count': len (programs) + 1})
 
     return jsonify({'name': name})
 
