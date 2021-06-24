@@ -40,6 +40,36 @@
         if (window.State.level == 10){
           window.editor.session.setMode("ace/mode/level10");
         }
+        if (window.State.level == 11){
+          window.editor.session.setMode("ace/mode/level11");
+        }
+        if (window.State.level == 12){
+          window.editor.session.setMode("ace/mode/level12");
+        }
+        if (window.State.level == 13){
+          window.editor.session.setMode("ace/mode/level13");
+        }
+        if (window.State.level == 14){
+          window.editor.session.setMode("ace/mode/level14");
+        }
+        if (window.State.level == 15){
+          window.editor.session.setMode("ace/mode/level15");
+        }
+        if (window.State.level == 16){
+          window.editor.session.setMode("ace/mode/level16");
+        }
+        if (window.State.level == 17 || window.State.level == 18){
+          window.editor.session.setMode("ace/mode/level17and18");
+        }
+        if (window.State.level == 19){
+          window.editor.session.setMode("ace/mode/level19");
+        }
+        if (window.State.level == 20){
+          window.editor.session.setMode("ace/mode/level20");
+        }
+        if (window.State.level == 21 || window.State.level == 22){
+          window.editor.session.setMode("ace/mode/level21and22");
+        }
   }
 
 
