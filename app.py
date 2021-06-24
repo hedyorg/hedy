@@ -788,11 +788,7 @@ def save_program (user):
         db_update('programs', stored_program)
     else:
         db_create('programs', stored_program)
-
-    program_count = 0
-    if 'program_count' in user:
-        program_count = user ['program_count']
-    db_update('users', {'username': user ['username'], 'program_count': program_count + 1})
+        db_update('users', {'username': user ['username'], 'program_count': len (programs) + 1})
 
     return jsonify({'name': name})
 
