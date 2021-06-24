@@ -255,6 +255,8 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 }
 
 window.share_program = function share_program (level, lang, id, Public, reload) {
+  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+
   var share = function (id) {
     $.ajax({
       type: 'POST',
@@ -285,17 +287,12 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
     });
   }
 
-  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
-
-  // If id is true, the request comes from the code page.
-  // We check if the currently displayed program is a saved one. If so, we overwrite the id.
-  // If the program is not own, the server will create one for the current user and then share it.
-  if (id === true && window.State.current_program_id) id = window.State.current_program_id;
-
-  // THe program exists, so we just share it.
+  // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
   if (id !== true) return share (id);
 
-  // If id is still true, we need to save a completely new program.
+  // Otherwise, we save the program and then share it.
+  // Saving the program makes things way simpler for many reasons: it covers the cases where:
+  // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
   var name = $ ('#program_name').val ();
   var code = ace.edit('editor').getValue();
   return saveit(level, lang, name, code, function (err, resp) {
