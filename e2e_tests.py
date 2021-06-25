@@ -279,7 +279,8 @@ def suite (username):
         ['unshare program', 'post', '/programs/share', {}, lambda state: {'id': state ['program'] ['id'], 'public': False}, 200],
         ['delete program', 'get', lambda state: '/programs/delete/' + state ['program'] ['id'], {}, {}, 302],
         ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
-        ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
+        ['destroy account', 'post', '/auth/destroy', {}, {}, 200],
+        ['get programs without being logged in', 'get', '/programs', {}, {}, 302]
     ]
 
 if not args.concurrent:

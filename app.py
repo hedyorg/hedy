@@ -19,11 +19,11 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_create, db_update, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import db_get, db_get_many, db_create, db_update, is_debug_mode, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
 from flask_helpers import render_template
 from flask_compress import Compress
 
@@ -342,6 +342,21 @@ def report_error():
 
     return 'logged'
 
+@app.route('/client_exception', methods=['POST'])
+def report_client_exception():
+    post_body = request.json
+
+    querylog.log_value(
+        session=session_id(),
+        date=str(datetime.datetime.now()),
+        client_error=post_body,
+        version=version(),
+        username=current_user(request) ['username'] or None,
+        is_test=1 if os.getenv ('IS_TEST_ENV') else None
+    )
+
+    return 'logged', 500
+
 @app.route('/version', methods=['GET'])
 def version_page():
     """
@@ -366,7 +381,9 @@ def version_page():
 def programs_page (request):
     username = current_user(request) ['username']
     if not username:
-        return "unauthorized", 403
+        # redirect users to /login if they are not logged in
+        url = request.url.replace('/programs', '/login')
+        return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
     if from_user and not is_admin (request):
@@ -507,8 +524,8 @@ def index(level, step):
         adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/onlinemasters/<level>/<step>', methods=['GET'])
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
+@app.route('/onlinemasters/<int:level>/<int:step>', methods=['GET'])
 def onlinemasters(level, step):
     g.level = level = int(level)
     g.lang = lang = requested_lang()
@@ -529,8 +546,8 @@ def onlinemasters(level, step):
         adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu/<level>/<step>', methods=['GET'])
+@app.route('/space_eu/<int:level>', methods=['GET'], defaults={'step': 1})
+@app.route('/space_eu/<int:level>/<int:step>', methods=['GET'])
 def space_eu(level, step):
     g.level = level = int(level)
     g.lang = requested_lang()
@@ -555,7 +572,13 @@ def space_eu(level, step):
 @app.route('/error_messages.js', methods=['GET'])
 def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
-    return render_template("error_messages.js", error_messages=json.dumps(error_messages))
+    response = make_response(render_template("error_messages.js", error_messages=json.dumps(error_messages)))
+
+    if not is_debug_mode():
+        # Cache for longer when not devving
+        response.cache_control.max_age = 60 * 60  # Seconds
+
+    return response
 
 
 @app.errorhandler(500)
@@ -762,9 +785,9 @@ def save_program (user):
         db_update('programs', stored_program)
     else:
         db_create('programs', stored_program)
-        db_update('users', {'username': user ['username'], 'program_count': len (programs)})
+        db_update('users', {'username': user ['username'], 'program_count': len (programs) + 1})
 
-    return {'name': body ['name'], 'id': program_id}
+    return jsonify({'name': body ['name'], 'id': program_id})
 
 @app.route('/programs/share', methods=['POST'])
 @requires_login
