@@ -296,7 +296,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
 }
 
 function viewProgramLink(programId) {
-  return window.location.origin + '/hedy/' + id + '/' + view;
+  return window.location.origin + '/hedy/' + programId + '/view';
 }
 
 window.share_program = function share_program (level, lang, id, Public, reload) {
@@ -533,7 +533,7 @@ var error = {
     $('#errorbox').show();
     if ($('#editor').length) editor.resize ();
   }
-};
+}
 
 function queryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);

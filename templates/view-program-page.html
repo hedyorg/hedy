@@ -2,8 +2,8 @@
 {% block body %}
 <div style="height: 30px;"></div>
 <div tabindex="0" class="flex-grow p-8">
-  <h1>{{loaded_program_name}}</h1>
-  <div>{{by}} <strong>{{loaded_program_username}}</strong></div>
+  <h1>{{loaded_program.name}}</h1>
+  <div>{{by}} <strong>{{loaded_program.username}}</strong></div>
   {% include "incl-editor-and-output.html" %}
 </div>
 

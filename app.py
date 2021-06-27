@@ -528,16 +528,9 @@ def view_program(id):
     g.lang = requested_lang()
     g.prefix = '/hedy'
 
-#    result = db_get ('programs', {'id': id})
-#    if not result:
-#        return 'No such program', 404
-    result = {
-        'name': 'Test',
-        'lang': 'en',
-        'username': 'Ricodepico',
-        'code': 'print banaan!',
-        'level': 1
-    }
+    result = db_get ('programs', {'id': id})
+    if not result:
+        return 'No such program', 404
 
     # Default to the language of the program's author (but still respect)
     # the switch if given.
@@ -548,17 +541,17 @@ def view_program(id):
     arguments_dict = {}
     arguments_dict['program_id'] = id
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
-    arguments_dict['lang'] = lang
     arguments_dict['level'] = result['level']  # Necessary for running
-    arguments_dict['loaded_program_username'] = result['username']
-    arguments_dict['loaded_program'] = result['code']
-    arguments_dict['loaded_program_name'] = result['name']
-    arguments_dict['menu'] = render_main_menu('view')
-    arguments_dict['auth'] = TRANSLATIONS.data [lang] ['Auth']
+    arguments_dict['loaded_program'] = result
     arguments_dict['editor_readonly'] = True
     arguments_dict['show_edit_button'] = True
 
-    # Translations
+    # Everything below this line has nothing to do with this page and it's silly
+    # that every page needs to put in so much effort to re-set it
+    arguments_dict['lang'] = lang
+    arguments_dict['menu'] = render_main_menu('view')
+    arguments_dict['auth'] = TRANSLATIONS.data [lang] ['Auth']
+    arguments_dict['username'] = current_user(request) ['username'] or None
     arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
 
     return render_template("view-program-page.html", **arguments_dict)
