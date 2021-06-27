@@ -78,5 +78,6 @@ $(function() {
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
-  $('[data-tab="t-' + (window.State.adventure_name || 'level') + '"]') [0].click ();
+  const adventureName = window.State && window.State.adventure_name;
+  $('[data-tab="t-' + (adventureName || 'level') + '"]').click ();
 });

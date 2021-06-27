@@ -523,6 +523,47 @@ def index(level, step):
         loaded_program_name=loaded_program_name,
         adventure_name=adventure_name)
 
+@app.route('/hedy/<id>/view', methods=['GET'])
+def view_program(id):
+    g.lang = requested_lang()
+    g.prefix = '/hedy'
+
+#    result = db_get ('programs', {'id': id})
+#    if not result:
+#        return 'No such program', 404
+    result = {
+        'name': 'Test',
+        'lang': 'en',
+        'username': 'Ricodepico',
+        'code': 'print banaan!',
+        'level': 1
+    }
+
+    # Default to the language of the program's author (but still respect)
+    # the switch if given.
+    lang = request.args.get("lang")
+    if not lang:
+        lang = result['lang']
+
+    arguments_dict = {}
+    arguments_dict['program_id'] = id
+    arguments_dict['page_title'] = f'{result["name"]} – Hedy'
+    arguments_dict['lang'] = lang
+    arguments_dict['level'] = result['level']  # Necessary for running
+    arguments_dict['loaded_program_username'] = result['username']
+    arguments_dict['loaded_program'] = result['code']
+    arguments_dict['loaded_program_name'] = result['name']
+    arguments_dict['menu'] = render_main_menu('view')
+    arguments_dict['auth'] = TRANSLATIONS.data [lang] ['Auth']
+    arguments_dict['editor_readonly'] = True
+    arguments_dict['show_edit_button'] = True
+
+    # Translations
+    arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
+
+    return render_template("view-program-page.html", **arguments_dict)
+
+
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
 @app.route('/onlinemasters/<int:level>/<int:step>', methods=['GET'])

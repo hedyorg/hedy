@@ -1,13 +1,24 @@
 (function() {
+  // A bunch of code expects a global "State" object. Set it here if not 
+  // set yet.
+  if (!window.State) {
+    window.State = {};
+  }
 
   // If there's no #editor div, we're requiring this code in a non-code page.
   // Therefore, we don't need to initialize anything.
-  if (! $ ('#editor').length) return;
+  const $editor = $('#editor');
+  if (!$editor.length) return;
 
   // *** EDITOR SETUP ***
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
+
+  // Editor could have been initialized as readonly
+  if ($editor.data('readonly')) {
+    editor.setReadOnly(true);
+  }
 
   // a variable which turns on(1) highlighter or turns it off(0)
   var highlighter = 0;
@@ -76,8 +87,8 @@
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
   if (storage) {
-    const levelKey = $('#editor').data('lskey');
-    const loadedProgram = $('#editor').data('loaded-program');
+    const levelKey = $editor.data('lskey');
+    const loadedProgram = $editor.data('loaded-program');
 
     // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
     if (loadedProgram !== 'True' && storage.getItem(levelKey)) {
@@ -217,7 +228,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
        // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-       if (window.State.adventure_name) level = [level, window.State.adventure_name];
+       if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/login';
        return;
@@ -484,21 +495,21 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    if ($ ('#editor').length) editor.resize ();
+    if ($('#editor').length) editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    if ($ ('#editor').length) editor.resize ();
+    if ($('#editor').length) editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
-    if ($ ('#editor').length) editor.resize ();
+    if ($('#editor').length) editor.resize ();
   }
 };
 
