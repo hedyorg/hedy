@@ -295,6 +295,10 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
+function viewProgramLink(programId) {
+  return window.location.origin + '/hedy/' + id + '/' + view;
+}
+
 window.share_program = function share_program (level, lang, id, Public, reload) {
   if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
 
@@ -314,11 +318,11 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
         $ ('#okbox .caption').html (window.auth.texts.save_success);
         $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
         // If we're sharing the program, copy the link to the clipboard.
-        if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
+        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
       }
       else {
         // If we're sharing the program, copy the link to the clipboard.
-        if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
+        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
         alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
       }
       if (reload) setTimeout (function () {location.reload ()}, 1000);
