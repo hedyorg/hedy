@@ -246,7 +246,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       dataType: 'json'
     }).done(function(response) {
       // The auth functions use this callback function.
-      if (cb) return response.Error ? cb (response) : cb ();
+      if (cb) return response.Error ? cb (response) : cb (null, response);
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
@@ -266,8 +266,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       $ ('#program_name').val (response.name);
       window.State.adventures.map (function (adventure) {
         if (adventure.short_name === (adventure_name || 'level')) {
-          adventure.loaded_program_name = name;
-          adventure.loaded_program      = code;
+          adventure.loaded_program = {name: response.name, code: code};
         }
       });
     }).fail(function(err) {
@@ -285,34 +284,53 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
-window.share_program = function share_program (id, level, Public, reload) {
-  $.ajax({
-    type: 'POST',
-    url: '/programs/share',
-    data: JSON.stringify({
-      id: id,
-      public: Public
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    if ($ ('#okbox') && $ ('#okbox').length) {
-      $ ('#okbox').show ();
-      $ ('#okbox .caption').html (window.auth.texts.save_success);
-      $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
-    }
-    else {
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
-      alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-    }
-    if (reload) setTimeout (function () {location.reload ()}, 1000);
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+window.share_program = function share_program (level, lang, id, Public, reload) {
+  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+
+  var share = function (id) {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/share',
+      data: JSON.stringify({
+        id: id,
+        public: Public
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if ($ ('#okbox') && $ ('#okbox').length) {
+        $ ('#okbox').show ();
+        $ ('#okbox .caption').html (window.auth.texts.save_success);
+        $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+        // If we're sharing the program, copy the link to the clipboard.
+        if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
+      }
+      else {
+        // If we're sharing the program, copy the link to the clipboard.
+        if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
+        alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+      }
+      if (reload) setTimeout (function () {location.reload ()}, 1000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  }
+
+  // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
+  if (id !== true) return share (id);
+
+  // Otherwise, we save the program and then share it.
+  // Saving the program makes things way simpler for many reasons: it covers the cases where:
+  // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
+  var name = $ ('#program_name').val ();
+  var code = ace.edit('editor').getValue();
+  return saveit(level, lang, name, code, function (err, resp) {
+    if (err && err.Warning) return error.showWarning(ErrorMessages.Transpile_warning, err.Warning);
+    if (err && err.Error) return error.show(ErrorMessages.Transpile_error, err.Error);
+    share (resp.id);
   });
+
 }
 
 window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {

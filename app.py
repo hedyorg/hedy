@@ -108,14 +108,18 @@ def load_adventure_assignments_per_level(lang, level):
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
             'start_code': adventure['levels'][level].get ('start_code', ''),
-            'loaded_program': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['code'],
-            'loaded_program_name': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['name']
+            'loaded_program': '' if not loaded_programs.get (short_name) else {
+                'name': loaded_programs.get (short_name) ['name'],
+                'code': loaded_programs.get (short_name) ['code']
+             }
         })
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     assignments.append({
         'short_name': 'level',
-        'loaded_program': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['code'],
-        'loaded_program_name': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['name']
+        'loaded_program': '' if not loaded_programs.get ('level') else {
+            'name': loaded_programs.get ('level') ['name'],
+            'code': loaded_programs.get ('level') ['code']
+         }
     })
     return assignments
 
@@ -463,7 +467,6 @@ def adventure_page(adventure_name, level):
         adventure_assignments=adventure_assignments,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
-        loaded_program_name='',
         adventure_name=adventure_name)
 
 # routing to index.html
@@ -488,7 +491,6 @@ def index(level, step):
     g.prefix = '/hedy'
 
     loaded_program = ''
-    loaded_program_name = ''
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
@@ -501,8 +503,7 @@ def index(level, step):
         public_program = 'public' in result and result ['public']
         if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
-        loaded_program = result ['code']
-        loaded_program_name = result ['name']
+        loaded_program = {'code': result ['code'], 'name': result ['name'], 'adventure_name': result.get ('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
@@ -520,7 +521,6 @@ def index(level, step):
         version=version(),
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
-        loaded_program_name=loaded_program_name,
         adventure_name=adventure_name)
 
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -543,7 +543,6 @@ def onlinemasters(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
-        loaded_program_name='',
         adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
@@ -566,7 +565,6 @@ def space_eu(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
-        loaded_program_name='',
         adventure_name='')
 
 
@@ -756,28 +754,27 @@ def save_program (user):
         if not object_check (body, 'adventure_name', 'str'):
             return 'if present, adventure_name must be a string', 400
 
-    name = body ['name']
-
     # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
     programs = db_get_many ('programs', {'username': user ['username']}, True)
-    program = {}
+    program_id = uuid.uuid4().hex
     overwrite = False
     for program in programs:
-        if program ['name'] == name:
+        if program ['name'] == body ['name']:
             overwrite = True
+            program_id = program ['id']
             break
 
     stored_program = {
-        'id': program.get ('id') if overwrite else uuid.uuid4().hex,
+        'id': program_id,
         'session': session_id(),
         'date': timems (),
         'lang': requested_lang(),
         'version': version(),
         'level': body ['level'],
         'code': body ['code'],
-        'name': name,
+        'name': body ['name'],
         'username': user ['username']
     }
 
@@ -790,7 +787,7 @@ def save_program (user):
         db_create('programs', stored_program)
         db_update('users', {'username': user ['username'], 'program_count': len (programs) + 1})
 
-    return jsonify({'name': name})
+    return jsonify({'name': body ['name'], 'id': program_id})
 
 @app.route('/programs/share', methods=['POST'])
 @requires_login
@@ -801,14 +798,14 @@ def share_unshare_program(user):
     if not object_check (body, 'id', 'str'):
         return 'id must be a string', 400
     if not object_check (body, 'public', 'bool'):
-        return 'public must be a string', 400
+        return 'public must be a boolean', 400
 
     result = db_get ('programs', {'id': body ['id']})
     if not result or result ['username'] != user ['username']:
         return 'No such program!', 404
 
     db_update ('programs', {'id': body ['id'], 'public': 1 if body ['public'] else None})
-    return jsonify({})
+    return jsonify({'id': body ['id']})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
