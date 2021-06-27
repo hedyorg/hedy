@@ -36,7 +36,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, loaded_program_name, adventure_assignments, adventure_name):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
 
   sublevel = None
   if type_check (level_number, 'str') and re.match ('\d+-\d+', level_number):
@@ -68,7 +68,6 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
-  arguments_dict['loaded_program_name'] = loaded_program_name
   arguments_dict['adventure_assignments'] = adventure_assignments
   arguments_dict['adventure_name'] = adventure_name
 

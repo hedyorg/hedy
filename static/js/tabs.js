@@ -51,13 +51,13 @@ $(function() {
 
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
-      $ ('#program_name').val (window.State.loaded_program_name);
-      window.editor.setValue (window.State.loaded_program);
+      $ ('#program_name').val (window.State.loaded_program.name);
+      window.editor.setValue (window.State.loaded_program.code);
     }
     // If there's a loaded program for the adventure or level now selected, use it.
     else if (adventures [tabName].loaded_program) {
-      $ ('#program_name').val (adventures [tabName].loaded_program_name);
-      window.editor.setValue (adventures [tabName].loaded_program);
+      $ ('#program_name').val (adventures [tabName].loaded_program.name);
+      window.editor.setValue (adventures [tabName].loaded_program.code);
     }
     // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
     else if (tabName === 'level') {

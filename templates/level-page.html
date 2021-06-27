@@ -8,8 +8,9 @@
     {% if assignment_nr %} · {{ step_title }} {{ assignment_nr }} {% endif %}
   </div>
   <div class="h-full">
-    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5 mt-1 ml-24" value="{{ loaded_program_name or level_title + ' ' + level_nr}}">
+    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5 mt-1 ml-24" value="{{ (loaded_program or {}).name or (level_title + ' ' + level_nr)}}">
     <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ save_code_button }}" onclick="saveit({{ level }}, '{{ lang }}', $ ('#program_name').val (), ace.edit('editor').getValue());">
+    <input type="submit" class="green-btn ml-5 h-3/5 mt-1" value="{{ share_code_button }}" onclick="share_program({{ level }}, '{{ lang }}', true, true);">
   </div>
 </div>
 

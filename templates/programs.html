@@ -19,10 +19,10 @@
 
       <a href="#" onclick="if (confirm ('{{ texts.delete_confirm }}')) window.open ('/programs/delete/{{program.id}}', '_self')">{{ texts.delete }}</a>
       {% if program.public %}
-        <a href="#" onclick="if (confirm ('{{ texts.unshare_confirm }}')) window.share_program ('{{program.id}}', {{program.level}}, false, true)">{{ texts.unshare}}</a>
+        <a href="#" onclick="if (confirm ('{{ texts.unshare_confirm }}')) window.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)">{{ texts.unshare}}</a>
         <a href="#" onclick="window.copy_to_clipboard (window.location.origin + '{{'/hedy/' + program.level|string + '/' + program.id}}')">{{ texts.copy_link_to_share }}</a>
       {% else %}
-        <a href="#" onclick="if (confirm ('{{ texts.share_confirm }}')) window.share_program ('{{program.id}}', {{program.level}}, true, true)">{{ texts.share}}</a>
+        <a href="#" onclick="if (confirm ('{{ texts.share_confirm }}')) window.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)">{{ texts.share}}</a>
       {% endif %}
       <pre>{{program.code | truncate (50) }}</pre>
     </li>
