@@ -165,8 +165,23 @@ def dump_yaml_rt(data):
 
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
 
-db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'], aws_access_key_id = os.getenv ('AWS_DYNAMODB_ACCESS_KEY'), aws_secret_access_key = os.getenv ('AWS_DYNAMODB_SECRET_KEY'))
-db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX')
+# Set to manually initialise the app database
+# to prevent useless activate
+db = None
+db_prefix = None
+
+def db_init():
+    """ Initialise the database connection """
+    global db
+    db = boto3.client (
+        'dynamodb',
+        region_name = config ['dynamodb'] ['region'],
+        aws_access_key_id = os.getenv ('AWS_DYNAMODB_ACCESS_KEY'),
+        aws_secret_access_key = os.getenv ('AWS_DYNAMODB_SECRET_KEY'),
+        )
+
+    global db_prefix
+    db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX')
 
 # Encode a dict so that it has the format expected by DynamoDB
 def db_encode (data):

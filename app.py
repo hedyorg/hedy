@@ -19,7 +19,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_create, db_update, is_debug_mode, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import db_init, db_get, db_get_many, db_create, db_update, is_debug_mode, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -904,6 +904,7 @@ auth.routes (app, requested_lang)
 # *** START SERVER ***
 
 if __name__ == '__main__':
+    db_init()
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
