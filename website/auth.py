@@ -154,6 +154,17 @@ def routes (app, requested_lang):
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'gender must be m/f/o', 400
+        if 'programming_experience' in body:
+            if not type_check (body ['programming_experience'], 'dict'):
+                return 'If present, programming_experience must be an object', 400
+            exp = body ['programming_experience']
+            if 'has_experience' in exp and exp ['has_experience'] not in ['yes', 'no']:
+                return 'If present, programming_experience.has_experience must be "yes" or "no"', 400
+            if 'languages' in exp and not type_check (exp ['languages'], 'list'):
+                return 'If present, programming_experience.languages must be a list', 400
+                for language in exp ['languages']:
+                    if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                        return 'Invalid language: ' + str (language), 400
 
         user = db_get ('users', {'username': body ['username'].strip ().lower ()})
         if user:
@@ -197,7 +208,8 @@ def routes (app, requested_lang):
             'email':    email,
             'created':  timems (),
             'verification_pending': hashed_token,
-            'last_login': timems ()
+            'last_login': timems (),
+            'programming_experience': body.get ('programming_experience')
         }
 
         if 'country' in body:
@@ -313,6 +325,17 @@ def routes (app, requested_lang):
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
+        if 'programming_experience' in body:
+            if not type_check (body ['programming_experience'], 'dict'):
+                return 'If present, programming_experience must be an object', 400
+            exp = body ['programming_experience']
+            if 'has_experience' in exp and exp ['has_experience'] not in ['yes', 'no']:
+                return 'If present, programming_experience.has_experience must be "yes" or "no"', 400
+            if 'languages' in exp and not type_check (exp ['languages'], 'list'):
+                return 'If present, programming_experience.languages must be a list', 400
+                for language in exp ['languages']:
+                    if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                        return 'Invalid language: ' + str (language), 400
 
         resp = {}
         if 'email' in body:
@@ -330,12 +353,13 @@ def routes (app, requested_lang):
                 else:
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
-        if 'country' in body:
-            db_update ('users', {'username': user ['username'], 'country': body ['country']})
-        if 'birth_year' in body:
-            db_update ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
-        if 'gender' in body:
-            db_update ('users', {'username': user ['username'], 'gender': body ['gender']})
+        updates = {'username': user ['username']}
+
+        for key in ['country', 'birth_year', 'gender', 'programming_experience']:
+            if key in body:
+                updates [key] = body [key]
+
+        db_update ('users', updates)
 
         return jsonify (resp)
 

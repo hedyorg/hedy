@@ -114,6 +114,7 @@ table users:
     gender:      m|f|UNDEFINED
     created:     INTEGER (epoch milliseconds)
     last_login:  INTEGER|UNDEFINED (epoch milliseconds)
+    programming_experience: UNDEFINED|{has_experience: UNDEFINED|'yes'|'no', languages: UNDEFINED|['scratch'|'other_block'|'python'|'other_text']}
 
 table tokens:
     id:       STRING (main index; for password reset tokens, id is the username)

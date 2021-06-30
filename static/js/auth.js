@@ -40,6 +40,7 @@ window.auth = {
     });
 
     if (op === 'signup') {
+
       if (! values.username) return auth.error (auth.texts.please_username, 'username');
       values.username = values.username.trim ();
       if (values.username.length < 3) return auth.error (auth.texts.username_three, 'username');
@@ -62,6 +63,13 @@ window.auth = {
         else payload [k] = values [k];
       });
 
+      var languages = [];
+      $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      payload.programming_experience = {
+         has_experience: $ ('input[name=has_experience]:checked').val (),
+         languages: languages.length ? languages : undefined
+      }
+
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
 
@@ -79,6 +87,7 @@ window.auth = {
 
       }).fail (function (response) {
         var error = response.responseText || '';
+        console.log (error);
         if (error.match ('email'))         auth.error (auth.texts.exists_email);
         else if (error.match ('username')) auth.error (auth.texts.exists_username);
         else                               auth.error (auth.texts.ajax_error);
@@ -127,6 +136,14 @@ window.auth = {
         if (k === 'birth_year') payload [k] = parseInt (values [k]);
         payload [k] = values [k];
       });
+
+      var languages = [];
+      $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      payload.programming_experience = {
+         has_experience: $ ('input[name=has_experience]:checked').val (),
+         languages: languages.length ? languages : undefined
+      }
+
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
