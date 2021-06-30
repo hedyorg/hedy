@@ -1,13 +1,24 @@
 (function() {
+  // A bunch of code expects a global "State" object. Set it here if not 
+  // set yet.
+  if (!window.State) {
+    window.State = {};
+  }
 
   // If there's no #editor div, we're requiring this code in a non-code page.
   // Therefore, we don't need to initialize anything.
-  if (! $ ('#editor').length) return;
+  const $editor = $('#editor');
+  if (!$editor.length) return;
 
   // *** EDITOR SETUP ***
   // We expose the editor globally so it's available to other functions for resizing
   var editor = window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
+
+  // Editor could have been initialized as readonly
+  if ($editor.data('readonly')) {
+    editor.setReadOnly(true);
+  }
 
   // a variable which turns on(1) highlighter or turns it off(0)
   var highlighter = 0;
@@ -40,14 +51,44 @@
         if (window.State.level == 10){
           window.editor.session.setMode("ace/mode/level10");
         }
+        if (window.State.level == 11){
+          window.editor.session.setMode("ace/mode/level11");
+        }
+        if (window.State.level == 12){
+          window.editor.session.setMode("ace/mode/level12");
+        }
+        if (window.State.level == 13){
+          window.editor.session.setMode("ace/mode/level13");
+        }
+        if (window.State.level == 14){
+          window.editor.session.setMode("ace/mode/level14");
+        }
+        if (window.State.level == 15){
+          window.editor.session.setMode("ace/mode/level15");
+        }
+        if (window.State.level == 16){
+          window.editor.session.setMode("ace/mode/level16");
+        }
+        if (window.State.level == 17 || window.State.level == 18){
+          window.editor.session.setMode("ace/mode/level17and18");
+        }
+        if (window.State.level == 19){
+          window.editor.session.setMode("ace/mode/level19");
+        }
+        if (window.State.level == 20){
+          window.editor.session.setMode("ace/mode/level20");
+        }
+        if (window.State.level == 21 || window.State.level == 22){
+          window.editor.session.setMode("ace/mode/level21and22");
+        }
   }
 
 
   // Load existing code from session, if it exists
   const storage = window.sessionStorage;
   if (storage) {
-    const levelKey = $('#editor').data('lskey');
-    const loadedProgram = $('#editor').data('loaded-program');
+    const levelKey = $editor.data('lskey');
+    const loadedProgram = $editor.data('loaded-program');
 
     // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
     if (loadedProgram !== 'True' && storage.getItem(levelKey)) {
@@ -187,7 +228,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
     if (! window.auth.profile) {
        if (! confirm (window.auth.texts.save_prompt)) return;
        // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-       if (window.State.adventure_name) level = [level, window.State.adventure_name];
+       if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
        localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
        window.location.pathname = '/login';
        return;
@@ -216,7 +257,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       dataType: 'json'
     }).done(function(response) {
       // The auth functions use this callback function.
-      if (cb) return response.Error ? cb (response) : cb ();
+      if (cb) return response.Error ? cb (response) : cb (null, response);
       if (response.Warning) {
         error.showWarning(ErrorMessages.Transpile_warning, response.Warning);
       }
@@ -236,8 +277,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
       $ ('#program_name').val (response.name);
       window.State.adventures.map (function (adventure) {
         if (adventure.short_name === (adventure_name || 'level')) {
-          adventure.loaded_program_name = name;
-          adventure.loaded_program      = code;
+          adventure.loaded_program = {name: response.name, code: code};
         }
       });
     }).fail(function(err) {
@@ -255,34 +295,57 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   }
 }
 
-window.share_program = function share_program (id, level, Public, reload) {
-  $.ajax({
-    type: 'POST',
-    url: '/programs/share',
-    data: JSON.stringify({
-      id: id,
-      public: Public
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    if ($ ('#okbox') && $ ('#okbox').length) {
-      $ ('#okbox').show ();
-      $ ('#okbox .caption').html (window.auth.texts.save_success);
-      $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
-    }
-    else {
-      // If we're sharing the program, copy the link to the clipboard.
-      if (Public) window.copy_to_clipboard (window.location.origin + '/hedy/' + level + '/' + id, true);
-      alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-    }
-    if (reload) setTimeout (function () {location.reload ()}, 1000);
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+function viewProgramLink(programId) {
+  return window.location.origin + '/hedy/' + programId + '/view';
+}
+
+window.share_program = function share_program (level, lang, id, Public, reload) {
+  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+
+  var share = function (id) {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/share',
+      data: JSON.stringify({
+        id: id,
+        public: Public
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if ($ ('#okbox') && $ ('#okbox').length) {
+        $ ('#okbox').show ();
+        $ ('#okbox .caption').html (window.auth.texts.save_success);
+        $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+        // If we're sharing the program, copy the link to the clipboard.
+        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
+      }
+      else {
+        // If we're sharing the program, copy the link to the clipboard.
+        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
+        alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+      }
+      if (reload) setTimeout (function () {location.reload ()}, 1000);
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  }
+
+  // If id is not true, the request comes from the programs page. In that case, we merely call the share function.
+  if (id !== true) return share (id);
+
+  // Otherwise, we save the program and then share it.
+  // Saving the program makes things way simpler for many reasons: it covers the cases where:
+  // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
+  var name = $ ('#program_name').val ();
+  var code = ace.edit('editor').getValue();
+  return saveit(level, lang, name, code, function (err, resp) {
+    if (err && err.Warning) return error.showWarning(ErrorMessages.Transpile_warning, err.Warning);
+    if (err && err.Error) return error.show(ErrorMessages.Transpile_error, err.Error);
+    share (resp.id);
   });
+
 }
 
 window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
@@ -315,6 +378,23 @@ function reportClientError(level, code, client_error) {
       level: level,
       code: code,
       client_error: client_error,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  });
+}
+
+window.onerror = function reportClientException(message, source, line_number, column_number, error) {
+
+  $.ajax({
+    type: 'POST',
+    url: '/client_exception',
+    data: JSON.stringify({
+      message: message,
+      source: source,
+      line_number: line_number,
+      column_number: column_number,
+      error: error
     }),
     contentType: 'application/json',
     dataType: 'json'
@@ -437,23 +517,23 @@ var error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    if ($ ('#editor').length) editor.resize ();
+    if ($('#editor').length) editor.resize ();
   },
 
   showWarning(caption, message) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    if ($ ('#editor').length) editor.resize ();
+    if ($('#editor').length) editor.resize ();
   },
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);
     $('#errorbox').show();
-    if ($ ('#editor').length) editor.resize ();
+    if ($('#editor').length) editor.resize ();
   }
-};
+}
 
 function queryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
