@@ -69,7 +69,8 @@ class RunHedy(BaseModel):
     def run(self):
         """ Execute runhedy with the validated parameters """
 
-        self.output.mkdir(parents=True, exist_ok=True)
+        if self.output:
+            self.output.mkdir(parents=True, exist_ok=True)
 
         # for display
         maxfilelength = max(len(str(f.stem)) for f in self.filename)
@@ -176,7 +177,7 @@ class RunHedy(BaseModel):
         # Create object list
         jobs = [TranspileJob(f) for f in self.filename]
 
-        if len(self.level) > 0:
+        if self.level and len(self.level) > 0:
             jobs = [r for r in jobs if r.level in self.level]
 
         # Remove files with invalid level
