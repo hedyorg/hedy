@@ -154,17 +154,14 @@ def routes (app, requested_lang):
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'gender must be m/f/o', 400
-        if 'programming_experience' in body:
-            if not type_check (body ['programming_experience'], 'dict'):
-                return 'If present, programming_experience must be an object', 400
-            exp = body ['programming_experience']
-            if 'has_experience' in exp and exp ['has_experience'] not in ['yes', 'no']:
-                return 'If present, programming_experience.has_experience must be "yes" or "no"', 400
-            if 'languages' in exp and not type_check (exp ['languages'], 'list'):
-                return 'If present, programming_experience.languages must be a list', 400
-                for language in exp ['languages']:
-                    if language not in ['scratch', 'other_block', 'python', 'other_text']:
-                        return 'Invalid language: ' + str (language), 400
+        if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
+            return 'If present, prog_experience must be "yes" or "no"', 400
+        if 'experience_languages' in body:
+            if not type_check (body ['experience_languages'], 'list'):
+                return 'If present, experience_languages must be an array', 400
+            for language in body ['experience_languages']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                    return 'Invalid language: ' + str (language), 400
 
         user = db_get ('users', {'username': body ['username'].strip ().lower ()})
         if user:
@@ -209,15 +206,13 @@ def routes (app, requested_lang):
             'created':  timems (),
             'verification_pending': hashed_token,
             'last_login': timems (),
-            'programming_experience': body.get ('programming_experience')
         }
 
-        if 'country' in body:
-            user ['country'] = body ['country']
-        if 'birth_year' in body:
-            user ['birth_year'] = body ['birth_year']
-        if 'gender' in body:
-            user ['gender'] = body ['gender']
+        for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+           if field in body:
+               if field == 'experience_languages' and len (body [field]) == 0:
+                   continue
+               user [field] = body [field]
 
         db_create ('users', user)
 
@@ -325,17 +320,14 @@ def routes (app, requested_lang):
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
-        if 'programming_experience' in body:
-            if not type_check (body ['programming_experience'], 'dict'):
-                return 'If present, programming_experience must be an object', 400
-            exp = body ['programming_experience']
-            if 'has_experience' in exp and exp ['has_experience'] not in ['yes', 'no']:
-                return 'If present, programming_experience.has_experience must be "yes" or "no"', 400
-            if 'languages' in exp and not type_check (exp ['languages'], 'list'):
-                return 'If present, programming_experience.languages must be a list', 400
-                for language in exp ['languages']:
-                    if language not in ['scratch', 'other_block', 'python', 'other_text']:
-                        return 'Invalid language: ' + str (language), 400
+        if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
+            return 'If present, prog_experience must be "yes" or "no"', 400
+        if 'experience_languages' in body:
+            if not type_check (body ['experience_languages'], 'list'):
+                return 'If present, experience_languages must be an array', 400
+            for language in body ['experience_languages']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                    return 'Invalid language: ' + str (language), 400
 
         resp = {}
         if 'email' in body:
@@ -355,9 +347,12 @@ def routes (app, requested_lang):
 
         updates = {'username': user ['username']}
 
-        for key in ['country', 'birth_year', 'gender', 'programming_experience']:
-            if key in body:
-                updates [key] = body [key]
+        for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+           if field in body:
+               if field == 'experience_languages' and len (body [field]) == 0:
+                   updates [field] = None
+               else:
+                   updates [field] = body [field]
 
         db_update ('users', updates)
 
@@ -367,12 +362,9 @@ def routes (app, requested_lang):
     @requires_login
     def get_profile (user):
         output = {'username': user ['username'], 'email': user ['email']}
-        if 'birth_year' in user:
-            output ['birth_year'] = user ['birth_year']
-        if 'country' in user:
-            output ['country'] = user ['country']
-        if 'gender' in user:
-            output ['gender'] = user ['gender']
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+            if field in user:
+                output [field] = user [field]
         if 'verification_pending' in user:
             output ['verification_pending'] = True
         output ['session_expires_at'] = timems () + session_length * 1000
@@ -563,7 +555,7 @@ def auth_templates (page, lang, menu, request):
         # After hitting 1k users, it'd be wise to add pagination.
         users = db_scan ('users')
         userdata = []
-        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
+        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
         for user in users:
             data = {}
