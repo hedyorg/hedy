@@ -19,7 +19,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import db_get, db_get_many, db_create, db_update, is_debug_mode, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import db_init, db_get, db_get_many, db_create, db_update, is_debug_mode, timems, type_check, object_check, db_del, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -523,6 +523,40 @@ def index(level, step):
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
+@app.route('/hedy/<id>/view', methods=['GET'])
+def view_program(id):
+    g.lang = requested_lang()
+    g.prefix = '/hedy'
+
+    result = db_get ('programs', {'id': id})
+    if not result:
+        return 'No such program', 404
+
+    # Default to the language of the program's author (but still respect)
+    # the switch if given.
+    lang = request.args.get("lang")
+    if not lang:
+        lang = result['lang']
+
+    arguments_dict = {}
+    arguments_dict['program_id'] = id
+    arguments_dict['page_title'] = f'{result["name"]} – Hedy'
+    arguments_dict['level'] = result['level']  # Necessary for running
+    arguments_dict['loaded_program'] = result
+    arguments_dict['editor_readonly'] = True
+    arguments_dict['show_edit_button'] = True
+
+    # Everything below this line has nothing to do with this page and it's silly
+    # that every page needs to put in so much effort to re-set it
+    arguments_dict['lang'] = lang
+    arguments_dict['menu'] = render_main_menu('view')
+    arguments_dict['auth'] = TRANSLATIONS.data [lang] ['Auth']
+    arguments_dict['username'] = current_user(request) ['username'] or None
+    arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
+
+    return render_template("view-program-page.html", **arguments_dict)
+
+
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
 @app.route('/onlinemasters/<int:level>/<int:step>', methods=['GET'])
@@ -869,11 +903,21 @@ auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 
+def on_server_start():
+    """Called just before the server is started, both in developer mode and on Heroku.
+
+    Use this to initialize objects, dependencies and connections.
+    """
+    db_init()
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(True)
+
+    on_server_start()
 
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
