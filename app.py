@@ -903,12 +903,21 @@ auth.routes (app, requested_lang)
 
 # *** START SERVER ***
 
-if __name__ == '__main__':
+def on_server_start():
+    """Called just before the server is started, both in developer mode and on Heroku.
+
+    Use this to initialize objects, dependencies and connections.
+    """
     db_init()
+
+
+if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(True)
+
+    on_server_start()
 
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
