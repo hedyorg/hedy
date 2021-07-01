@@ -205,7 +205,7 @@ def routes (app, requested_lang):
             'email':    email,
             'created':  timems (),
             'verification_pending': hashed_token,
-            'last_login': timems (),
+            'last_login': timems ()
         }
 
         for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:

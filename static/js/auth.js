@@ -40,7 +40,6 @@ window.auth = {
     });
 
     if (op === 'signup') {
-
       if (! values.username) return auth.error (auth.texts.please_username, 'username');
       values.username = values.username.trim ();
       if (values.username.length < 3) return auth.error (auth.texts.username_three, 'username');
@@ -85,7 +84,6 @@ window.auth = {
 
       }).fail (function (response) {
         var error = response.responseText || '';
-        console.log (error);
         if (error.match ('email'))         auth.error (auth.texts.exists_email);
         else if (error.match ('username')) auth.error (auth.texts.exists_username);
         else                               auth.error (auth.texts.ajax_error);
