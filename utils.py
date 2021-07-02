@@ -193,6 +193,11 @@ def db_encode (data):
         elif type_check (data [key], 'int'):
             # Note we convert the value into a string
             processed_data [key] = {'N': str (data [key])}
+        elif type_check (data [key], 'dict'):
+            processed_data [key] = {'M': data [key]}
+        # Note: we only support lists of strings.
+        elif type_check (data [key], 'list'):
+            processed_data [key] = {'SS': data [key]}
         elif data [key] == None:
             processed_data [key] = {'NULL': True}
         else:
@@ -208,6 +213,11 @@ def db_encode_updates (data):
         elif type_check (data [key], 'int'):
             # Note we convert the value into a string
             processed_data [key] = {'Value': {'N': str (data [key])}}
+        elif type_check (data [key], 'dict'):
+            processed_data [key] = {'Value': {'M': data [key]}}
+        # Note: we only support lists of strings.
+        elif type_check (data [key], 'list'):
+            processed_data [key] = {'Value': {'SS': data [key]}}
         elif data [key] == None:
             processed_data [key] = {'Action': 'DELETE'}
         else:
@@ -222,6 +232,10 @@ def db_decode (data):
             processed_data [key] = data [key] ['S']
         elif 'N' in data [key]:
             processed_data [key] = int (data [key] ['N'])
+        elif 'M' in data [key]:
+            processed_data [key] = data [key] ['M']
+        elif 'SS' in data [key]:
+            processed_data [key] = data [key] ['SS']
         elif 'NULL' in data [key]:
             processed_data [key] = None
         else:
