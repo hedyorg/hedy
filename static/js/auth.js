@@ -64,7 +64,8 @@ window.auth = {
 
       payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
       var languages = [];
-      $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      // We ignore the languages checkboxes if the section is hidden
+      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
       if (languages.length) payload.experience_languages = languages;
 
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -135,7 +136,8 @@ window.auth = {
 
       payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
       var languages = [];
-      $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      // We ignore the languages checkboxes if the section is hidden
+      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
       // When updating the profile, we can remove all languages, so in this case we send the empty array. This doesn't happen on signup.
       payload.experience_languages = languages;
 
@@ -254,7 +256,10 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
     $ ('#birth_year').val (response.birth_year);
     $ ('#gender').val (response.gender);
     $ ('#country').val (response.country);
-    if (response.prog_experience) $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+    if (response.prog_experience) {
+      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+      if (response.prog_experience === 'yes') $ ('#languages').show ();
+    }
     (response.experience_languages || []).map (function (lang) {
        $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
     });

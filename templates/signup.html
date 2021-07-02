@@ -34,16 +34,16 @@
     <br><br>
     <label>{{auth.country}}</label>
     <select id="country"></select>
-    <br><br>
     <div>
+      <br><br>
       <label class="inline-block float-left">{{auth.programming_experience}}</label>
       <div class="float-left">
-        <input class="pl-4" type="radio" name="has_experience" value="yes"><span class="pl-2">{{auth.yes}}</span><br>
-        <input class="pl-4" type="radio" name="has_experience" value="no"><span class="pl-2">{{auth.no}}</span>
+        <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
+        <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
       </div>
     </div>
-    <br><br><br><br>
-    <div class="clear-both">
+    <div class="clear-both hidden" id="languages">
+      <br><br>
       <label class="inline-block float-left">{{auth.languages}}</label>
       <div class="float-left">
         <input type="checkbox" name="languages" value="scratch"><span class="pl-2">Scratch</span><br>
@@ -52,7 +52,6 @@
         <input type="checkbox" name="languages" value="other_text"><span class="pl-2">{{auth.other_text}}</span><br>
       </div>
     </div>
-    <br><br>
     <div class="clear-both">
       <br>
       <label>{{auth.subscribe_newsletter}}</label>
