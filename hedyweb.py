@@ -8,7 +8,6 @@ from flask_helpers import render_template
 
 import courses
 from website.auth import current_user
-from utils import type_check
 import re
 import utils
 
@@ -39,7 +38,7 @@ class Translations:
 def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
 
   sublevel = None
-  if type_check (level_number, 'str') and re.match ('\d+-\d+', level_number):
+  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
     sublevel     = int (level_number [level_number.index ('-') + 1])
     level_number = int (level_number [0:level_number.index ('-')])
 

@@ -5,8 +5,6 @@ from utils import load_yaml
 
 import docs
 
-import re
-from utils import type_check
 
 class LevelDefaults:
   def __init__(self, language):

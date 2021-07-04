@@ -1,7 +1,7 @@
 import requests
 import json
 import random
-from utils import type_check, timems
+from utils import timems
 import urllib.parse
 from config import config
 import sys
@@ -15,12 +15,16 @@ import argparse
 args = argparse.ArgumentParser ()
 args.add_argument ('--concurrent', help='how many tests to run at the same time (stress testing), default is 1', type=int)
 args.add_argument ('--host', help='Host against which to run the tests (optional), default is localhost')
+args.add_argument ('--endpoint', help='Endpoint against which to run the tests (optional, by default \'--host\' is used)')
 args = args.parse_args ()
 
 host = 'http://localhost:' + str (config ['port']) + '/'
 hosts = {'alpha': 'https://hedy-alpha.herokuapp.com/', 'test': 'https://hedy-test.herokuapp.com/'}
 
-if args.host:
+if args.endpoint:
+  host = args.endpoint
+
+elif args.host:
     if not args.host in hosts:
         raise Exception ('No such host')
     host = hosts [sys.argv [2]]
@@ -38,16 +42,16 @@ def request (state, test, counter, username):
         test [3] ['cookie'] = state ['headers'] ['cookie']
 
     # If path, headers or body are functions, invoke them passing them the current state
-    if type_check (test[2], 'fun'):
+    if callable(test[2]):
         test[2] = test[2] (state)
 
-    if type_check (test[3], 'fun'):
+    if callable (test[3]):
         test[3] = test[3] (state)
 
-    if type_check (test[4], 'fun'):
+    if callable(test[4]):
         test[4] = test[4] (state)
 
-    if type_check (test[4], 'dict'):
+    if isinstance(test[4], dict):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
 
@@ -93,7 +97,7 @@ def run_suite (suite):
     state = {'headers': {}}
     t0 = timems ()
 
-    if not type_check (tests, 'list'):
+    if not isinstance (tests, list):
         return print ('Invalid test suite, must be a list.')
     counter = 1
 
@@ -102,7 +106,7 @@ def run_suite (suite):
 
     for test in tests:
         # If test is nested, run a nested loop
-        if not (type_check (test[0], 'str')):
+        if not (isinstance (test[0], str)):
             for subtest in test:
                 run_test (subtest, counter)
                 counter += 1
@@ -169,18 +173,18 @@ def getProfile4 (state, response, username):
         raise Exception ('Invalid verification_pending (getProfile4)')
     if not 'prog_experience' in profile or profile ['prog_experience'] != 'yes':
         raise Exception ('Invalid prog_experience (getProfile4)')
-    if not 'experience_languages' in profile or not type_check (profile ['experience_languages'], 'list') or len (profile ['experience_languages']) != 1 or profile ['experience_languages'] [0] != 'python':
+    if not 'experience_languages' in profile or not isinstance(profile ['experience_languages'], list) or len (profile ['experience_languages']) != 1 or profile ['experience_languages'] [0] != 'python':
         raise Exception ('Invalid experience_languages (getProfile4)')
 
 def getProfile5 (state, response, username):
     profile = response ['body']
     if not 'prog_experience' in profile or profile ['prog_experience'] != 'no':
         raise Exception ('Invalid prog_experience (getProfile5)')
-    if not 'experience_languages' in profile or not type_check (profile ['experience_languages'], 'list') or len (profile ['experience_languages']) != 2 or profile ['experience_languages'] [0] not in ['scratch', 'other_text'] or profile ['experience_languages'] [1] not in ['scratch', 'other_text']:
+    if not 'experience_languages' in profile or not isinstance(profile ['experience_languages'], list) or len (profile ['experience_languages']) != 2 or profile ['experience_languages'] [0] not in ['scratch', 'other_text'] or profile ['experience_languages'] [1] not in ['scratch', 'other_text']:
         raise Exception ('Invalid experience_languages (getProfile5)')
 
 def emailChange (state, response, username):
-    if not type_check (response ['body'] ['token'], 'str'):
+    if not isinstance (response ['body'] ['token'], str):
         raise Exception ('Invalid country (emailChange)')
     if response ['body'] ['username'] != username:
         raise Exception ('Invalid username (emailChange)')
@@ -227,23 +231,23 @@ def checkMainSessionVarsAgain (state, response, username):
         raise Exception ('test_session not received by main')
 
 def retrieveProgramsBefore (state, response, username):
-    if not type_check (response ['body'], 'dict'):
+    if not isinstance (response ['body'], dict):
         raise Exception ('Invalid response body')
-    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+    if not 'programs' in response ['body'] or not isinstance (response ['body'] ['programs'], list):
         raise Exception ('Invalid programs list')
     if len (response ['body'] ['programs']) != 0:
         raise Exception ('Programs list should be empty')
 
 def retrieveProgramsAfter (state, response, username):
-    if not type_check (response ['body'], 'dict'):
+    if not isinstance (response ['body'], dict):
         raise Exception ('Invalid response body')
-    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+    if not 'programs' in response ['body'] or not isinstance (response ['body'] ['programs'], list):
         raise Exception ('Invalid programs list')
     if len (response ['body'] ['programs']) != 1:
         raise Exception ('Programs list should contain one program')
     program = response ['body'] ['programs'] [0]
     state ['program'] = program
-    if not type_check (program, 'dict'):
+    if not isinstance (program, dict):
         raise Exception ('Invalid program type')
     if not 'code' in program or program ['code'] != 'print Hello world':
         raise Exception ('Invalid program.code')
