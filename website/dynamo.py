@@ -200,8 +200,6 @@ class AwsDynamoStorage(TableStorage):
         value_updates = {k: v for k, v in updates.items() if not isinstance(v, DynamoUpdate)}
         special_updates = {k: v.to_dynamo() for k, v in updates.items() if isinstance(v, DynamoUpdate)}
 
-        print(value_updates, special_updates)
-
         return self.db.update_item(
             TableName = self.db_prefix + '-' + table_name,
             Key = self._encode(key),
