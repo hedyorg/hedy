@@ -5,6 +5,7 @@ import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
 from utils import timems, times, extract_bcrypt_rounds, is_testing_request, valid_email, is_heroku
+from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email
 import datetime
 from functools import wraps
 from config import config
@@ -88,7 +89,11 @@ def routes (app, requested_lang):
 
     @app.route('/auth/texts', methods=['GET'])
     def auth_texts():
-        return jsonify (TRANSLATIONS.data [requested_lang ()] ['Auth'])
+        response = make_response(jsonify(TRANSLATIONS.data [requested_lang ()] ['Auth']))
+        if not is_debug_mode():
+            # Cache for longer when not devving
+            response.cache_control.max_age = 60 * 60  # Seconds
+        return response
 
     @app.route ('/auth/login', methods=['POST'])
     def login ():
@@ -161,6 +166,14 @@ def routes (app, requested_lang):
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'gender must be m/f/o', 400
+        if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
+            return 'If present, prog_experience must be "yes" or "no"', 400
+        if 'experience_languages' in body:
+            if not type_check (body ['experience_languages'], 'list'):
+                return 'If present, experience_languages must be an array', 400
+            for language in body ['experience_languages']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                    return 'Invalid language: ' + str (language), 400
 
         user = DATABASE.user_by_username(body ['username'].strip ().lower ())
         if user:
@@ -207,12 +220,11 @@ def routes (app, requested_lang):
             'last_login': timems ()
         }
 
-        if 'country' in body:
-            user ['country'] = body ['country']
-        if 'birth_year' in body:
-            user ['birth_year'] = body ['birth_year']
-        if 'gender' in body:
-            user ['gender'] = body ['gender']
+        for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+           if field in body:
+               if field == 'experience_languages' and len (body [field]) == 0:
+                   continue
+               user [field] = body [field]
 
         DATABASE.store_user(user)
 
@@ -321,6 +333,14 @@ def routes (app, requested_lang):
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
+        if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
+            return 'If present, prog_experience must be "yes" or "no"', 400
+        if 'experience_languages' in body:
+            if not type_check (body ['experience_languages'], 'list'):
+                return 'If present, experience_languages must be an array', 400
+            for language in body ['experience_languages']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                    return 'Invalid language: ' + str (language), 400
 
         resp = {}
         if 'email' in body:
@@ -338,10 +358,15 @@ def routes (app, requested_lang):
                 else:
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
-        # Copy across some updates from the form into the database
         username = user ['username']
-        updates = {field: value for field, value in body.items()
-            if field in ['country', 'birth_year', 'gender']}
+
+        updates = {}
+        for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+           if field in body:
+               if field == 'experience_languages' and len (body [field]) == 0:
+                   updates [field] = None
+               else:
+                   updates [field] = body [field]
 
         if updates:
             DATABASE.update_user(username, updates)
@@ -352,12 +377,9 @@ def routes (app, requested_lang):
     @requires_login
     def get_profile (user):
         output = {'username': user ['username'], 'email': user ['email']}
-        if 'birth_year' in user:
-            output ['birth_year'] = user ['birth_year']
-        if 'country' in user:
-            output ['country'] = user ['country']
-        if 'gender' in user:
-            output ['gender'] = user ['gender']
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+            if field in user:
+                output [field] = user [field]
         if 'verification_pending' in user:
             output ['verification_pending'] = True
         output ['session_expires_at'] = timems () + session_length * 1000
@@ -548,7 +570,7 @@ def auth_templates (page, lang, menu, request):
         # After hitting 1k users, it'd be wise to add pagination.
         users = DATABASE.all_users()
         userdata = []
-        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
+        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
         for user in users:
             data = {}

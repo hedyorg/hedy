@@ -214,6 +214,20 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
+  def test_transpile_issue_375(self):
+    code = textwrap.dedent("""
+      is Foobar
+      print welcome""")
+
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, 3)
+
+    self.assertEqual('Parse', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+
+
+
+
+
 
 
 

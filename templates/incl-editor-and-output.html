@@ -1,0 +1,109 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+    <div>
+      <div class="w-full h-64 flex flex-col">
+        <div id="editor"
+          style="background: #272822; font-family: monospace; color: white"
+        data-loaded-program="{{not not loaded_program}}"
+          {% if editor_readonly %}data-readonly="true"{% endif %}
+          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}</div>
+        <!-- errorbox -->
+        <div id="errorbox"
+          class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
+          style="display: none;">
+          <p class="close-dialog" onclick="window.error.hide ()">X</p>
+          <div class="flex">
+            <div class="py-1">
+              <svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="caption font-bold">Oops</p>
+              <p class="details text-sm">An error occurred.</p>
+            </div>
+          </div>
+        </div>
+        <!-- warningbox -->
+        <div id="warningbox"
+          class="flex-0 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+          role="alert" style="display: none;">
+          <p class="close-dialog" onclick="window.error.hide ()">X</p>
+          <div class="flex">
+            <div class="py-1">
+              <svg class="fill-current h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="caption font-bold">Oops</p>
+              <p class="details text-sm">An error occurred.</p>
+            </div>
+          </div>
+        </div>
+        <!-- okbox -->
+        <div id="okbox"
+          class="flex-0 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+          role="alert" style="display: none;">
+          <div class="flex">
+            <div class="py-1">
+              <svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="caption font-bold">Success</p>
+              <p class="details text-sm">Something went according to plan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="flex justify-between">
+        <button id="runit" class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
+        {% if show_edit_button %}
+        <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{edit_code_button}}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      <div class="h-64 flex flex-col">
+        <!-- tabindex=0 makes the div focusable -->
+        <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto">
+        </div>
+        <div id="inline-modal" class="flex-0" style="display: none">
+          <div class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100">
+            <!--Title-->
+            <div class="flex justify-between items-center">
+              <p class="text-2xl font-bold caption">Header</p>
+            </div>
+            <!--Body-->
+            <form>
+              <div class="my-2 flex">
+                <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ enter_text }}">
+                <input type="submit" class="green-btn ml-3" value="{{ enter }}"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+        {% if next_assignment %}
+        <button class="green-btn ml-1"
+          onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">{{advance_step_button}} {{
+          next_assignment }}</button>
+        {% endif %}
+        {% if prev_level %}
+          <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
+        {% endif %}
+        {% if next_level %}
+          <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+        {% endif %}
+      </div>
+    </div>
+  </div>

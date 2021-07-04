@@ -139,15 +139,6 @@ def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
     return yaml.round_trip_dump(data, indent=4, width=999)
 
-
-# *** DYNAMO DB ***
-
-# https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
-
-def is_dynamo_available():
-    return bool(os.getenv ('AWS_DYNAMODB_ACCESS_KEY'))
-
-
 def slash_join(*args):
     ret = []
     for arg in args:

@@ -19,11 +19,11 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import is_dynamo_available, timems, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
 from flask_helpers import render_template
 from flask_compress import Compress
 
@@ -110,14 +110,18 @@ def load_adventure_assignments_per_level(lang, level):
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
             'start_code': adventure['levels'][level].get ('start_code', ''),
-            'loaded_program': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['code'],
-            'loaded_program_name': '' if not loaded_programs.get (short_name) else loaded_programs.get (short_name) ['name']
+            'loaded_program': '' if not loaded_programs.get (short_name) else {
+                'name': loaded_programs.get (short_name) ['name'],
+                'code': loaded_programs.get (short_name) ['code']
+             }
         })
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     assignments.append({
         'short_name': 'level',
-        'loaded_program': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['code'],
-        'loaded_program_name': '' if not loaded_programs.get ('level') else loaded_programs.get ('level') ['name']
+        'loaded_program': '' if not loaded_programs.get ('level') else {
+            'name': loaded_programs.get ('level') ['name'],
+            'code': loaded_programs.get ('level') ['code']
+         }
     })
     return assignments
 
@@ -287,16 +291,16 @@ def parse():
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
-                try:
-                    error_template = hedy_errors[E.error_code]
-                    # Localize the names of characters
-                    if 'character_found' in E.arguments:
-                        E.arguments['character_found'] = hedy_errors[E.arguments['character_found']]
-                    response["Error"] = error_template.format(**E.arguments)
-                except:
-                    print('DEBUG ISSUE 375', code) #TEMP!! We need to find the programs that cause weird issue #375
-                    raise E
+                error_template = hedy_errors[E.error_code]
+                # Localize the names of characters. If we can't do that, just show the original
+                # character.
+                if 'character_found' in E.arguments.keys():
+                    E.arguments['character_found'] = hedy_errors.get(E.arguments['character_found'], E.arguments['character_found'])
+                elif 'keyword_found' in E.arguments.keys():
+                    #if we find an invalid keyword, place it in the same location in the error message but without translating
+                    E.arguments['character_found'] = E.arguments['keyword_found']
 
+                response["Error"] = error_template.format(**E.arguments)
             elif E.args[0] == "Unquoted Text":
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
@@ -340,6 +344,21 @@ def report_error():
 
     return 'logged'
 
+@app.route('/client_exception', methods=['POST'])
+def report_client_exception():
+    post_body = request.json
+
+    querylog.log_value(
+        session=session_id(),
+        date=str(datetime.datetime.now()),
+        client_error=post_body,
+        version=version(),
+        username=current_user(request) ['username'] or None,
+        is_test=1 if os.getenv ('IS_TEST_ENV') else None
+    )
+
+    return 'logged', 500
+
 @app.route('/version', methods=['GET'])
 def version_page():
     """
@@ -364,7 +383,9 @@ def version_page():
 def programs_page (request):
     username = current_user(request) ['username']
     if not username:
-        return "unauthorized", 403
+        # redirect users to /login if they are not logged in
+        url = request.url.replace('/programs', '/login')
+        return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
     if from_user and not is_admin (request):
@@ -448,7 +469,6 @@ def adventure_page(adventure_name, level):
         adventure_assignments=adventure_assignments,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
-        loaded_program_name='',
         adventure_name=adventure_name)
 
 # routing to index.html
@@ -456,8 +476,6 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-
-
     # Sublevel requested
     if re.match ('\d+-\d+', level):
         pass
@@ -475,7 +493,6 @@ def index(level, step):
     g.prefix = '/hedy'
 
     loaded_program = ''
-    loaded_program_name = ''
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
@@ -488,8 +505,7 @@ def index(level, step):
         public_program = 'public' in result and result ['public']
         if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
             return 'No such program!', 404
-        loaded_program = result ['code']
-        loaded_program_name = result ['name']
+        loaded_program = {'code': result ['code'], 'name': result ['name'], 'adventure_name': result.get ('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
         # We default to step 1 to provide a meaningful default assignment
@@ -507,12 +523,45 @@ def index(level, step):
         version=version(),
         adventure_assignments=adventure_assignments,
         loaded_program=loaded_program,
-        loaded_program_name=loaded_program_name,
         adventure_name=adventure_name)
 
+@app.route('/hedy/<id>/view', methods=['GET'])
+def view_program(id):
+    g.lang = requested_lang()
+    g.prefix = '/hedy'
+
+    result = DATABASE.program_by_id(id)
+    if not result:
+        return 'No such program', 404
+
+    # Default to the language of the program's author (but still respect)
+    # the switch if given.
+    lang = request.args.get("lang")
+    if not lang:
+        lang = result['lang']
+
+    arguments_dict = {}
+    arguments_dict['program_id'] = id
+    arguments_dict['page_title'] = f'{result["name"]} – Hedy'
+    arguments_dict['level'] = result['level']  # Necessary for running
+    arguments_dict['loaded_program'] = result
+    arguments_dict['editor_readonly'] = True
+    arguments_dict['show_edit_button'] = True
+
+    # Everything below this line has nothing to do with this page and it's silly
+    # that every page needs to put in so much effort to re-set it
+    arguments_dict['lang'] = lang
+    arguments_dict['menu'] = render_main_menu('view')
+    arguments_dict['auth'] = TRANSLATIONS.data [lang] ['Auth']
+    arguments_dict['username'] = current_user(request) ['username'] or None
+    arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
+
+    return render_template("view-program-page.html", **arguments_dict)
+
+
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/onlinemasters/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/onlinemasters/<level>/<step>', methods=['GET'])
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
+@app.route('/onlinemasters/<int:level>/<int:step>', methods=['GET'])
 def onlinemasters(level, step):
     g.level = level = int(level)
     g.lang = lang = requested_lang()
@@ -530,12 +579,11 @@ def onlinemasters(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
-        loaded_program_name='',
         adventure_name='')
 
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/space_eu/<level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu/<level>/<step>', methods=['GET'])
+@app.route('/space_eu/<int:level>', methods=['GET'], defaults={'step': 1})
+@app.route('/space_eu/<int:level>/<int:step>', methods=['GET'])
 def space_eu(level, step):
     g.level = level = int(level)
     g.lang = requested_lang()
@@ -553,7 +601,6 @@ def space_eu(level, step):
         menu=None,
         adventure_assignments=adventure_assignments,
         loaded_program='',
-        loaded_program_name='',
         adventure_name='')
 
 
@@ -561,7 +608,13 @@ def space_eu(level, step):
 @app.route('/error_messages.js', methods=['GET'])
 def error():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
-    return render_template("error_messages.js", error_messages=json.dumps(error_messages))
+    response = make_response(render_template("error_messages.js", error_messages=json.dumps(error_messages)))
+
+    if not is_debug_mode():
+        # Cache for longer when not devving
+        response.cache_control.max_age = 60 * 60  # Seconds
+
+    return response
 
 
 @app.errorhandler(500)
@@ -734,42 +787,27 @@ def save_program (user):
         if not isinstance (body.get('adventure_name'), str):
             return 'if present, adventure_name must be a string', 400
 
-    # We execute the saved program to see if it would generate an error or not
-    error = None
-    try:
-        hedy_errors = TRANSLATIONS.get_translations(requested_lang(), 'HedyErrorMessages')
-        result = hedy.transpile(body ['code'], body ['level'])
-    except hedy.HedyException as E:
-        error_template = hedy_errors[E.error_code]
-        error = error_template.format(**E.arguments)
-    except Exception as E:
-        error = str(E)
-
-    name = body ['name']
-
-    # If name ends with (N) or (NN), we strip them since it's very likely these addenda were added by our server to avoid overwriting existing programs.
-    name = re.sub (' \(\d+\)$', '', name)
-    # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
+    # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    existing = DATABASE.programs_for_user(user ['username'])
-    name_counter = 0
-    for program in existing:
-        if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
-            name_counter = name_counter + 1
-    if name_counter:
-        name = name + ' (' + str (name_counter) + ')'
+    programs = DATABASE.programs_for_user(user ['username'])
+    program_id = uuid.uuid4().hex
+    overwrite = False
+    for program in programs:
+        if program ['name'] == body ['name']:
+            overwrite = True
+            program_id = program ['id']
+            break
 
     stored_program = {
-        'id': uuid.uuid4().hex,
+        'id': program_id,
         'session': session_id(),
         'date': timems (),
         'lang': requested_lang(),
         'version': version(),
         'level': body ['level'],
         'code': body ['code'],
-        'name': name,
-        'server_error': error,
+        'name': body ['name'],
         'username': user ['username']
     }
 
@@ -777,9 +815,10 @@ def save_program (user):
         stored_program ['adventure_name'] = body ['adventure_name']
 
     DATABASE.store_program(stored_program)
-    DATABASE.increase_user_program_count(user ['username'])
+    if not overwrite:
+        DATABASE.increase_user_program_count(user ['username'])
 
-    return jsonify({'name': name})
+    return jsonify({'name': body ['name'], 'id': program_id})
 
 @app.route('/programs/share', methods=['POST'])
 @requires_login
@@ -797,7 +836,7 @@ def share_unshare_program(user):
         return 'No such program!', 404
 
     DATABASE.set_program_public_by_id(body ['id'], bool(body ['public']))
-    return jsonify({})
+    return jsonify({'id': body ['id']})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
@@ -862,6 +901,14 @@ auth.pass_database(DATABASE)
 
 # *** START SERVER ***
 
+def on_server_start():
+    """Called just before the server is started, both in developer mode and on Heroku.
+
+    Use this to initialize objects, dependencies and connections.
+    """
+    pass
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
@@ -871,6 +918,8 @@ if __name__ == '__main__':
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
     is_in_debugger = sys.gettrace() is not None
+
+    on_server_start()
 
     # Threaded option enables multiple instances for multiple user access support
     # app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")

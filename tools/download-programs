@@ -57,4 +57,5 @@ export AWS_DEFAULT_REGION=eu-west-1
 export AWS_PROFILE=hedy-logs-viewer
 bucket=hedy-parse-logs
 
-aws s3 sync s3://${bucket}/${hedy_env}/${prefix} $dir
+set -x
+aws s3 sync s3://${bucket}/${hedy_env}${prefix} $dir
