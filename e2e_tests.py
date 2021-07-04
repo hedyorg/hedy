@@ -173,14 +173,14 @@ def getProfile4 (state, response, username):
         raise Exception ('Invalid verification_pending (getProfile4)')
     if not 'prog_experience' in profile or profile ['prog_experience'] != 'yes':
         raise Exception ('Invalid prog_experience (getProfile4)')
-    if not 'experience_languages' in profile or not type_check (profile ['experience_languages'], 'list') or len (profile ['experience_languages']) != 1 or profile ['experience_languages'] [0] != 'python':
+    if not 'experience_languages' in profile or not isinstance(profile ['experience_languages'], list) or len (profile ['experience_languages']) != 1 or profile ['experience_languages'] [0] != 'python':
         raise Exception ('Invalid experience_languages (getProfile4)')
 
 def getProfile5 (state, response, username):
     profile = response ['body']
     if not 'prog_experience' in profile or profile ['prog_experience'] != 'no':
         raise Exception ('Invalid prog_experience (getProfile5)')
-    if not 'experience_languages' in profile or not type_check (profile ['experience_languages'], 'list') or len (profile ['experience_languages']) != 2 or profile ['experience_languages'] [0] not in ['scratch', 'other_text'] or profile ['experience_languages'] [1] not in ['scratch', 'other_text']:
+    if not 'experience_languages' in profile or not isinstance(profile ['experience_languages'], list) or len (profile ['experience_languages']) != 2 or profile ['experience_languages'] [0] not in ['scratch', 'other_text'] or profile ['experience_languages'] [1] not in ['scratch', 'other_text']:
         raise Exception ('Invalid experience_languages (getProfile5)')
 
 def emailChange (state, response, username):

@@ -4,8 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, valid_email, is_heroku
-from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
 import datetime
 from functools import wraps
 from config import config
@@ -169,7 +168,7 @@ def routes (app, requested_lang):
         if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
             return 'If present, prog_experience must be "yes" or "no"', 400
         if 'experience_languages' in body:
-            if not type_check (body ['experience_languages'], 'list'):
+            if not isinstance(body ['experience_languages'], list):
                 return 'If present, experience_languages must be an array', 400
             for language in body ['experience_languages']:
                 if language not in ['scratch', 'other_block', 'python', 'other_text']:
@@ -336,7 +335,7 @@ def routes (app, requested_lang):
         if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
             return 'If present, prog_experience must be "yes" or "no"', 400
         if 'experience_languages' in body:
-            if not type_check (body ['experience_languages'], 'list'):
+            if not isinstance(body ['experience_languages'], list):
                 return 'If present, experience_languages must be an array', 400
             for language in body ['experience_languages']:
                 if language not in ['scratch', 'other_block', 'python', 'other_text']:
