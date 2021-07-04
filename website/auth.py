@@ -21,15 +21,6 @@ env = os.getenv ('HEROKU_APP_NAME')
 
 DATABASE: database.Database = None
 
-def pass_database(database):
-    """Make the USERS object the same as the given object.
-
-    Bit of a hack but given that we've split the logic over these files, we have to
-    do it like this.
-    """
-    global DATABASE
-    DATABASE = database
-
 @querylog.timed
 def check_password (password, hash):
     return bcrypt.checkpw (bytes (password, 'utf-8'), bytes (hash, 'utf-8'))
@@ -84,7 +75,9 @@ def requires_login (f):
     return inner
 
 # Note: translations are used only for texts that will be seen by a GUI user.
-def routes (app, requested_lang):
+def routes (app, database, requested_lang):
+    global DATABASE
+    DATABASE = database
 
     @app.route('/auth/texts', methods=['GET'])
     def auth_texts():

@@ -896,8 +896,7 @@ def update_yaml():
 # *** AUTH ***
 
 from website import auth
-auth.routes (app, requested_lang)
-auth.pass_database(DATABASE)
+auth.routes (app, DATABASE, requested_lang)
 
 # *** START SERVER ***
 
