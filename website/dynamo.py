@@ -2,7 +2,7 @@ import functools
 import boto3
 from abc import ABCMeta
 import os
-import copy
+import logging
 from config import config
 from . import querylog
 from dataclasses import dataclass
@@ -267,8 +267,10 @@ class MemoryStorage(TableStorage):
             try:
                 with open(filename, 'r') as f:
                     self.tables = json.load(f)
-            except (IOError, json.decoder.JSONDecodeError):
+            except IOError:
                 pass
+            except json.decoder.JSONDecodeError as e:
+                logging.warning(f'Error loading {filename}. The next write operation will overwrite the database with a clean copy: {e}')
 
     # NOTE: on purpose not @synchronized here
     def get_item(self, table_name, key):

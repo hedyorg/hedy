@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, valid_email
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, valid_email, is_heroku
 import datetime
 from functools import wraps
 from config import config
@@ -126,7 +126,7 @@ def routes (app, requested_lang):
         resp = make_response ({})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         return resp
 
     @app.route ('/auth/signup', methods=['POST'])
@@ -232,7 +232,7 @@ def routes (app, requested_lang):
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         return resp
 
     @app.route ('/auth/verify', methods=['GET'])
