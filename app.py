@@ -757,7 +757,6 @@ def render_main_menu(current_page):
 @app.route('/programs_list', methods=['GET'])
 @requires_login
 def list_programs (user):
-    print(DATABASE.programs_for_user(user['username']))
     return {'programs': DATABASE.programs_for_user(user['username'])}
 
 # Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
