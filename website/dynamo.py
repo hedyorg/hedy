@@ -176,7 +176,7 @@ class AwsDynamoStorage(TableStorage):
             TableName=self.db_prefix + '-' + table_name,
             Key = self._encode(key),
             ScanIndexForward = not reverse)
-        return map(self._decode, result.get('Items', []))
+        return list(map(self._decode, result.get('Items', [])))
 
     def query_index(self, table_name, index_name, key, reverse=False):
         assert len(key) == 1
@@ -189,7 +189,7 @@ class AwsDynamoStorage(TableStorage):
             ExpressionAttributeValues = {':value': {'S': key_value}},
             ScanIndexForward = not reverse)
 
-        return map(self._decode, result.get('Items', []))
+        return list(map(self._decode, result.get('Items', [])))
 
     def put(self, table_name, _key, data):
         return self.db.put_item(
@@ -200,7 +200,7 @@ class AwsDynamoStorage(TableStorage):
         value_updates = {k: v for k, v in updates.items() if not isinstance(v, DynamoUpdate)}
         special_updates = {k: v.to_dynamo() for k, v in updates.items() if isinstance(v, DynamoUpdate)}
 
-        return self.storage.update_item(
+        return self.db.update_item(
             TableName = self.db_prefix + '-' + table_name,
             Key = self._encode(key),
             AttributeUpdates = {
@@ -218,7 +218,7 @@ class AwsDynamoStorage(TableStorage):
 
     def scan(self, table_name):
         result = self.db.scan (TableName = self.db_prefix + '-' + table_name)
-        return map(self._decode, result.get('Items', []))
+        return list(map(self._decode, result.get('Items', [])))
 
     def _encode (self, data):
         return {k: self.SERIALIZER.serialize(v) for k, v in data.items()}
@@ -236,7 +236,7 @@ class AwsDynamoStorage(TableStorage):
         if data is None:
             return None
 
-        return {k: self.DESERIALIZER.deserialize(v) for k, v in data.items()}
+        return {k: replace_decimals(self.DESERIALIZER.deserialize(v)) for k, v in data.items()}
 
 
 class Lock:
@@ -385,5 +385,30 @@ class DynamoIncrement(DynamoUpdate):
     def to_dynamo(self):
         return {
                 'Action': 'ADD',
-                'Value': { 'N': self.delta },
+                'Value': { 'N': str(self.delta) },
             }
+
+def replace_decimals(obj):
+    """
+    Replace Decimals with native Python values.
+
+    The default DynamoDB deserializer returns Decimals instead of ints,
+    which we can't to-JSON. *sigh*.
+    """
+    import decimal
+
+    if isinstance(obj, list):
+        for i in range(len(obj)):
+            obj[i] = replace_decimals(obj[i])
+        return obj
+    elif isinstance(obj, dict):
+        for k in obj.iterkeys():
+            obj[k] = replace_decimals(obj[k])
+        return obj
+    elif isinstance(obj, decimal.Decimal):
+        if obj % 1 == 0:
+            return int(obj)
+        else:
+            return float(obj)
+    else:
+        return obj
