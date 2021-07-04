@@ -19,7 +19,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import is_dynamo_available, timems, type_check, object_check, load_yaml, load_yaml_rt, dump_yaml_rt, version
+from utils import is_dynamo_available, timems, load_yaml, load_yaml_rt, dump_yaml_rt, version
 import utils
 
 # app.py
@@ -30,7 +30,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import courses
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, users
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
@@ -67,7 +67,7 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 
 TRANSLATIONS = hedyweb.Translations()
 
-USERS = users.DynamoUsers() if utils.is_dynamo_available() else users.InMemoryUsers()
+DATABASE = database.Database()
 
 def load_adventures_in_all_languages():
     adventures = {}
@@ -88,7 +88,7 @@ def load_adventure_assignments_per_level(lang, level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode (no adventure) and for each of the adventures.
     if current_user (request) ['username']:
-        user_programs = USERS.programs_for_user(current_user (request) ['username'])
+        user_programs = DATABASE.programs_for_user(current_user (request) ['username'])
         for program in user_programs:
             if program ['level'] != level:
                 continue
@@ -249,9 +249,9 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
-    if 'sublevel' in body and not type_check (body ['sublevel'], 'int'):
+    if 'sublevel' in body and not isinstance(body ['sublevel'], int):
         return "If present, body.sublevel must be an integer", 400
-    if 'adventure_name' in body and not type_check (body ['adventure_name'], 'str'):
+    if 'adventure_name' in body and not isinstance(body ['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
@@ -374,7 +374,7 @@ def programs_page (request):
     ui=TRANSLATIONS.data [requested_lang ()] ['ui']
     adventures = load_adventure_for_language(requested_lang ())['adventures']
 
-    result = USERS.programs_for_user(from_user or username)
+    result = DATABASE.programs_for_user(from_user or username)
     programs = []
     now = timems ()
     for item in result:
@@ -417,7 +417,7 @@ def adventure_page(adventure_name, level):
         # If there are many, note the highest level for which there is a saved program
         desired_level = 0
         if user ['username']:
-            existing_programs = USERS.programs_for_user(user ['username'])
+            existing_programs = DATABASE.programs_for_user(user ['username'])
             for program in existing_programs:
                 if 'adventure_name' in program and program ['adventure_name'] == adventure_name and program ['level'] > desired_level:
                     desired_level = program ['level']
@@ -427,7 +427,7 @@ def adventure_page(adventure_name, level):
         # If user is not logged in, or has no saved programs for this adventure, default to the lowest level available for the adventure
         if desired_level == 0:
             for key in adventure ['levels'].keys ():
-                if type_check (key, 'int') and (desired_level == 0 or desired_level > key):
+                if isinstance(key, int) and (desired_level == 0 or desired_level > key):
                     desired_level = key
         level = desired_level
 
@@ -479,8 +479,8 @@ def index(level, step):
     adventure_name = ''
 
     # If step is a string that has more than two characters, it must be an id of a program
-    if step and type_check (step, 'str') and len (step) > 2:
-        result = USERS.program_by_id(step)
+    if step and isinstance(step, str) and len (step) > 2:
+        result = DATABASE.program_by_id(step)
         if not result:
             return 'No such program', 404
         # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
@@ -704,17 +704,17 @@ def render_main_menu(current_page):
 @app.route('/programs_list', methods=['GET'])
 @requires_login
 def list_programs (user):
-    return {'programs': USERS.programs_for_user(user['username'])}
+    return {'programs': DATABASE.programs_for_user(user['username'])}
 
 # Not very restful to use a GET to delete something, but indeed convenient; we can do it with a single link and avoiding AJAX.
 @app.route('/programs/delete/<program_id>', methods=['GET'])
 @requires_login
 def delete_program (user, program_id):
-    result = USERS.program_by_id(program_id)
+    result = DATABASE.program_by_id(program_id)
     if not result or result ['username'] != user ['username']:
         return "", 404
-    USERS.delete_program_by_id(program_id)
-    USERS.increase_user_program_count(user['username'], -1)
+    DATABASE.delete_program_by_id(program_id)
+    DATABASE.increase_user_program_count(user['username'], -1)
     return redirect ('/programs')
 
 @app.route('/programs', methods=['POST'])
@@ -722,16 +722,16 @@ def delete_program (user, program_id):
 def save_program (user):
 
     body = request.json
-    if not type_check (body, 'dict'):
+    if not isinstance (body, dict):
         return 'body must be an object', 400
-    if not object_check (body, 'code', 'str'):
+    if not isinstance (body.get('code'), str):
         return 'code must be a string', 400
-    if not object_check (body, 'name', 'str'):
+    if not isinstance (body.get('name'), str):
         return 'name must be a string', 400
-    if not object_check (body, 'level', 'int'):
+    if not isinstance (body.get('level'), int):
         return 'level must be an integer', 400
     if 'adventure_name' in body:
-        if not object_check (body, 'adventure_name', 'str'):
+        if not isinstance (body.get('adventure_name'), str):
             return 'if present, adventure_name must be a string', 400
 
     # We execute the saved program to see if it would generate an error or not
@@ -752,7 +752,7 @@ def save_program (user):
     # We check if a program with a name `xyz` exists in the database for the username. If it does, we exist whether `xyz (1)` exists, until we find a program `xyz (NN)` that doesn't exist yet.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    existing = USERS.programs_for_user(user ['username'])
+    existing = DATABASE.programs_for_user(user ['username'])
     name_counter = 0
     for program in existing:
         if re.match ('^' + re.escape (name) + '( \(\d+\))*', program ['name']):
@@ -776,8 +776,8 @@ def save_program (user):
     if 'adventure_name' in body:
         stored_program ['adventure_name'] = body ['adventure_name']
 
-    USERS.store_program(stored_program)
-    USERS.increase_user_program_count(user ['username'])
+    DATABASE.store_program(stored_program)
+    DATABASE.increase_user_program_count(user ['username'])
 
     return jsonify({'name': name})
 
@@ -785,18 +785,18 @@ def save_program (user):
 @requires_login
 def share_unshare_program(user):
     body = request.json
-    if not type_check (body, 'dict'):
+    if not isinstance (body, dict):
         return 'body must be an object', 400
-    if not object_check (body, 'id', 'str'):
+    if not isinstance (body.get('id'), 'str'):
         return 'id must be a string', 400
-    if not object_check (body, 'public', 'bool'):
+    if not isinstance (body.get('public'), 'bool'):
         return 'public must be a string', 400
 
-    result = USERS.program_by_id(body['id'])
+    result = DATABASE.program_by_id(body['id'])
     if not result or result ['username'] != user ['username']:
         return 'No such program!', 404
 
-    USERS.set_program_public(body ['id'], bool(body ['public']))
+    DATABASE.set_program_public(body ['id'], bool(body ['public']))
     return jsonify({})
 
 @app.route('/translate/<source>/<target>')
@@ -858,7 +858,7 @@ def update_yaml():
 
 from website import auth
 auth.routes (app, requested_lang)
-auth.pass_users(USERS)
+auth.pass_database(DATABASE)
 
 # *** START SERVER ***
 

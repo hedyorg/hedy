@@ -1,7 +1,7 @@
 import requests
 import json
 import random
-from utils import type_check, timems
+from utils import timems
 import urllib.parse
 from config import config
 import sys
@@ -42,16 +42,16 @@ def request (state, test, counter, username):
         test [3] ['cookie'] = state ['headers'] ['cookie']
 
     # If path, headers or body are functions, invoke them passing them the current state
-    if type_check (test[2], 'fun'):
+    if callable(test[2]):
         test[2] = test[2] (state)
 
-    if type_check (test[3], 'fun'):
+    if callable (test[3]):
         test[3] = test[3] (state)
 
-    if type_check (test[4], 'fun'):
+    if callable(test[4]):
         test[4] = test[4] (state)
 
-    if type_check (test[4], 'dict'):
+    if isinstance(test[4], 'dict'):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
 
@@ -97,7 +97,7 @@ def run_suite (suite):
     state = {'headers': {}}
     t0 = timems ()
 
-    if not type_check (tests, 'list'):
+    if not isinstance (tests, list):
         return print ('Invalid test suite, must be a list.')
     counter = 1
 
@@ -106,7 +106,7 @@ def run_suite (suite):
 
     for test in tests:
         # If test is nested, run a nested loop
-        if not (type_check (test[0], 'str')):
+        if not (isinstance (test[0], str)):
             for subtest in test:
                 run_test (subtest, counter)
                 counter += 1
@@ -167,7 +167,7 @@ def getProfile3 (state, response, username):
         raise Exception ('Invalid verification_pending (getProfile3)')
 
 def emailChange (state, response, username):
-    if not type_check (response ['body'] ['token'], 'str'):
+    if not isinstance (response ['body'] ['token'], str):
         raise Exception ('Invalid country (emailChange)')
     if response ['body'] ['username'] != username:
         raise Exception ('Invalid username (emailChange)')
@@ -214,23 +214,23 @@ def checkMainSessionVarsAgain (state, response, username):
         raise Exception ('test_session not received by main')
 
 def retrieveProgramsBefore (state, response, username):
-    if not type_check (response ['body'], 'dict'):
+    if not isinstance (response ['body'], dict):
         raise Exception ('Invalid response body')
-    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+    if not 'programs' in response ['body'] or not isinstance (response ['body'] ['programs'], list):
         raise Exception ('Invalid programs list')
     if len (response ['body'] ['programs']) != 0:
         raise Exception ('Programs list should be empty')
 
 def retrieveProgramsAfter (state, response, username):
-    if not type_check (response ['body'], 'dict'):
+    if not isinstance (response ['body'], dict):
         raise Exception ('Invalid response body')
-    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+    if not 'programs' in response ['body'] or not isinstance (response ['body'] ['programs'], list):
         raise Exception ('Invalid programs list')
     if len (response ['body'] ['programs']) != 1:
         raise Exception ('Programs list should contain one program')
     program = response ['body'] ['programs'] [0]
     state ['program'] = program
-    if not type_check (program, 'dict'):
+    if not isinstance (program, dict):
         raise Exception ('Invalid program type')
     if not 'code' in program or program ['code'] != 'print Hello world':
         raise Exception ('Invalid program.code')
