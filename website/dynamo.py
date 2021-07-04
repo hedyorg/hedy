@@ -1,5 +1,4 @@
 import functools
-from website.users import DynamoUsers
 import boto3
 from abc import ABCMeta
 import os
@@ -90,7 +89,7 @@ class Table:
         return self.storage.update(self.table_name, key, updates)
 
     @querylog.timed_as('db_del')
-    def del(self, key):
+    def delete(self, key):
         """Delete an item by primary key.
 
         Returns the delete item.
@@ -113,7 +112,7 @@ class Table:
         while to_delete:
             for item in to_delete:
                 key, _ = self._extract_key(item)
-                self.del(key)
+                self.delete(key)
             to_delete = self.get_many(key)
 
     @querylog.timed_as('db_scan')

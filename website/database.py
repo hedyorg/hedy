@@ -32,7 +32,7 @@ class Database:
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
-        PROGRAMS.del({'id': id})
+        PROGRAMS.delete({'id': id})
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
@@ -61,7 +61,7 @@ class Database:
 
         Returns the Token that was deleted.
         """
-        return TOKENS.del({'id': token_id})
+        return TOKENS.delete({'id': token_id})
 
     def store_user(self, user):
         """Store a user in the database."""
@@ -85,9 +85,9 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
-        USERS.del({'username': username})
+        USERS.delete({'username': username})
         # The recover password token may exist, so we delete it
-        TOKENS.del({'id': username})
+        TOKENS.delete({'id': username})
         PROGRAMS.del_many({'username': username})
 
     def all_users(self):

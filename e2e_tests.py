@@ -51,7 +51,7 @@ def request (state, test, counter, username):
     if callable(test[4]):
         test[4] = test[4] (state)
 
-    if isinstance(test[4], 'dict'):
+    if isinstance(test[4], dict):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
 

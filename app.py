@@ -796,7 +796,7 @@ def share_unshare_program(user):
     if not result or result ['username'] != user ['username']:
         return 'No such program!', 404
 
-    DATABASE.set_program_public(body ['id'], bool(body ['public']))
+    DATABASE.set_program_public_by_id(body ['id'], bool(body ['public']))
     return jsonify({})
 
 @app.route('/translate/<source>/<target>')
@@ -868,7 +868,12 @@ if __name__ == '__main__':
     # own file loading routines also hot-reload.
     utils.set_debug_mode(True)
 
+    # If we are running in a Python debugger, don't use flasks reload mode. It creates
+    # subprocesses which make debugging harder.
+    is_in_debugger = sys.gettrace() is not None
+
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
+    # app.run(threaded=True, debug=True, port=config ['port'], host="0.0.0.0")
+    app.run(threaded=True, debug=not is_in_debugger, port=config ['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.

@@ -119,8 +119,9 @@ def load_yaml_pickled(filename):
 
 def load_yaml_uncached(filename):
     try:
+        y = yaml.YAML(typ='safe', pure=True)
         with open(filename, 'r', encoding='utf-8') as f:
-            return yaml.safe_load(f)
+            return y.load(f)
     except IOError:
         return {}
 

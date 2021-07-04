@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, extract_bcrypt_rounds, is_testing_request, valid_email
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, valid_email
 import datetime
 from functools import wraps
 from config import config
@@ -12,14 +12,14 @@ import boto3
 from botocore.exceptions import ClientError as email_error
 import json
 import requests
-from website import querylog
+from website import querylog, database
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
 env = os.getenv ('HEROKU_APP_NAME')
 
-DATABASE = None
+DATABASE: database.Database = None
 
 def pass_database(database):
     """Make the USERS object the same as the given object.
@@ -94,11 +94,11 @@ def routes (app, requested_lang):
     def login ():
         body = request.json
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance(body.get('username'), str):
             return 'username must be a string', 400
-        if not object_check (body, 'password', 'str'):
+        if not isinstance(body.get('password'), str):
             return 'password must be a string', 400
 
         # If username has an @-sign, then it's an email
@@ -133,9 +133,9 @@ def routes (app, requested_lang):
     def signup ():
         body = request.json
         # Validations, mandatory fields
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'username must be a string', 400
         if '@' in body ['username']:
             return 'username cannot contain an @-sign', 400
@@ -143,11 +143,11 @@ def routes (app, requested_lang):
             return 'username cannot contain a colon', 400
         if len (body ['username'].strip ()) < 3:
             return 'username must be at least three characters long', 400
-        if not object_check (body, 'password', 'str'):
+        if not isinstance (body.get('password'), str):
             return 'password must be a string', 400
         if len (body ['password']) < 6:
             return 'password must be at least six characters long', 400
-        if not object_check (body, 'email', 'str'):
+        if not isinstance(body.get('email'), str):
             return 'email must be a string', 400
         if not valid_email (body ['email']):
             return 'email must be a valid email', 400
@@ -156,7 +156,7 @@ def routes (app, requested_lang):
             if not body ['country'] in countries:
                 return 'country must be a valid country', 400
         if 'birth_year' in body:
-            if not object_check (body, 'birth_year', 'int') or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
+            if not isinstance(body.get('birth_year'), int) or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
                 return 'birth_year must be a year between 1900 and ' + datetime.datetime.now ().year, 400
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
@@ -275,11 +275,11 @@ def routes (app, requested_lang):
     def change_password (user):
 
         body = request.json
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'old_password', 'str'):
+        if not isinstance (body.get('old_password'), str):
             return 'body.old_password must be a string', 400
-        if not object_check (body, 'new_password', 'str'):
+        if not isinstance (body.get( 'new_password'), str):
             return 'body.new_password must be a string', 400
 
         if len (body ['new_password']) < 6:
@@ -301,10 +301,10 @@ def routes (app, requested_lang):
     def update_profile (user):
 
         body = request.json
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
         if 'email' in body:
-            if not object_check (body, 'email', 'str'):
+            if not isinstance (body.get( 'email'), str):
                 return 'body.email must be a string', 400
             if not valid_email (body ['email']):
                 return 'body.email must be a valid email', 400
@@ -312,7 +312,7 @@ def routes (app, requested_lang):
             if not body ['country'] in countries:
                 return 'body.country must be a valid country', 400
         if 'birth_year' in body:
-            if not object_check (body, 'birth_year', 'int') or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
+            if not isinstance (body.get('birth_year'), int) or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
                 return 'birth_year must be a year between 1900 and ' + str (datetime.datetime.now ().year), 400
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
@@ -364,9 +364,9 @@ def routes (app, requested_lang):
     def recover ():
         body = request.json
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
 
         # If username has an @-sign, then it's an email
@@ -394,13 +394,13 @@ def routes (app, requested_lang):
     def reset ():
         body = request.json
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
-        if not object_check (body, 'token', 'str'):
+        if not isinstance (body.get('token'), str):
             return 'body.token must be a string', 400
-        if not object_check (body, 'password', 'str'):
+        if not isinstance (body.get('password'), str):
             return 'body.password be a string', 400
 
         if len (body ['password']) < 6:
@@ -433,11 +433,11 @@ def routes (app, requested_lang):
         body = request.json
 
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
-        if not object_check (body, 'is_teacher', 'bool'):
+        if not isinstance (body.get('is_teacher'), bool):
             return 'body.is_teacher must be boolean', 400
 
         user = DATABASE.user_by_username(body ['username'].strip ().lower ())
@@ -457,11 +457,11 @@ def routes (app, requested_lang):
         body = request.json
 
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
-        if not object_check (body, 'email', 'str'):
+        if not isinstance (body.get('email'), str):
             return 'body.email must be a string', 400
         if not valid_email (body ['email']):
             return 'email must be a valid email', 400
