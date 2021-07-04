@@ -787,9 +787,9 @@ def share_unshare_program(user):
     body = request.json
     if not isinstance (body, dict):
         return 'body must be an object', 400
-    if not isinstance (body.get('id'), 'str'):
+    if not isinstance (body.get('id'), str):
         return 'id must be a string', 400
-    if not isinstance (body.get('public'), 'bool'):
+    if not isinstance (body.get('public'), bool):
         return 'public must be a string', 400
 
     result = DATABASE.program_by_id(body['id'])

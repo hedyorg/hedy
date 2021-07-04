@@ -2,6 +2,7 @@ import functools
 import boto3
 from abc import ABCMeta
 import os
+import copy
 from config import config
 from . import querylog
 from dataclasses import dataclass
@@ -95,10 +96,10 @@ class Table:
         Returns the delete item.
         """
         querylog.log_counter('db_del:' + self.table_name)
-        return self.storage.delete_item(self.table_name, key)
+        return self.storage.delete(self.table_name, key)
 
     @querylog.timed_as('db_del_many')
-    def db_del_many (self, key):
+    def del_many (self, key):
         """Delete all items matching a key.
 
         DynamoDB does not support this operation natively, so we have to turn
@@ -111,7 +112,7 @@ class Table:
         to_delete = self.get_many(key)
         while to_delete:
             for item in to_delete:
-                key, _ = self._extract_key(item)
+                key = self._extract_key(item)
                 self.delete(key)
             to_delete = self.get_many(key)
 
@@ -141,14 +142,11 @@ class Table:
     def _extract_key(self, data):
         """
         Extract the key data out of plain data.
-
-        Returns a (key, remainder) tuple.
         """
         if self.partition_key not in data:
             raise RuntimeError(f'Partition key {self.partition_key} missing from data: {data}')
         key_value = data.get(self.partition_key)
-        del data[self.partition_key]
-        return { self.partition_key: key_value }, data
+        return { self.partition_key: key_value }
 
 
 class AwsDynamoStorage(TableStorage):
@@ -269,10 +267,10 @@ class MemoryStorage(TableStorage):
             try:
                 with open(filename, 'r') as f:
                     self.tables = json.load(f)
-            except IOError:
+            except (IOError, json.decoder.JSONDecodeError):
                 pass
 
-    @lock.synchronized
+    # NOTE: on purpose not @synchronized here
     def get_item(self, table_name, key):
         return first_or_none(self.query(table_name, key))
 
@@ -284,18 +282,19 @@ class MemoryStorage(TableStorage):
             filtered.reverse()
         return filtered
 
-    @lock.synchronized
+    # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, key, reverse=False):
         return self.query(table_name, key, reverse=reverse)
 
     @lock.synchronized
     def put(self, table_name, key, data):
-        records = self.tables.get(table_name, [])
+        records = self.tables.setdefault(table_name, [])
         index = self._find_index(records, key)
         if index is None:
             records.append(data)
         else:
             records[index] = data
+        self._flush()
 
     @lock.synchronized
     def update(self, table_name, key, updates):
@@ -311,18 +310,25 @@ class MemoryStorage(TableStorage):
                     record[name] = record.get(name, 0) + update.delta
                 else:
                     raise RuntimeError(f'Unsupported update type for in-memory database: {update}')
+            elif update is None:
+                if name in record:
+                    del record[name]
             else:
                 # Plain value update
                 record[name] = update
+
+        self._flush()
         return record
 
     @lock.synchronized
     def delete(self, table_name, key):
         records = self.tables.get(table_name, [])
         index = self._find_index(records, key)
+        ret = None
         if index is not None:
-            return records.pop(index)
-        return None
+            ret = records.pop(index)
+            self._flush()
+        return ret
 
     @lock.synchronized
     def item_count(self, table_name):
@@ -345,7 +351,7 @@ class MemoryStorage(TableStorage):
         if self.filename:
             try:
                 with open(self.filename, 'w') as f:
-                    json.dump(f, self.tables, indent=2)
+                    json.dump(self.tables, f, indent=2)
             except IOError:
                 pass
 
@@ -370,7 +376,7 @@ class DynamoUpdate:
     def to_dynamo(self):
         raise NotImplementedError()
 
-class DynamoIncrement:
+class DynamoIncrement(DynamoUpdate):
     def __init__(self, delta=1):
         self.delta = delta
 

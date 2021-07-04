@@ -216,6 +216,8 @@ def routes (app, requested_lang):
 
         DATABASE.store_user(user)
 
+        print(user)
+
         # We automatically login the user
         cookie = make_salt ()
         DATABASE.store_token({'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
@@ -241,6 +243,8 @@ def routes (app, requested_lang):
             return 'no token', 400
         if not username:
             return 'no username', 400
+
+        print(username)
 
         user = DATABASE.user_by_username(username)
 
@@ -414,7 +418,7 @@ def routes (app, requested_lang):
             return 'invalid username/token', 403
 
         hashed = hash (body ['password'], make_salt ())
-        token = DATABASE.forget_token('tokens', {'id': body ['username']})
+        token = DATABASE.forget_token({'id': body ['username']})
         DATABASE.update_user(body ['username'], {'password': hashed})
         user = DATABASE.user_by_username(body ['username'])
 
