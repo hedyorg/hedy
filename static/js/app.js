@@ -442,12 +442,33 @@ function speak(text) {
   }
 }
 
-// Show the "speak" checkbox if we find that we have speech support for the
-// current language (showing an initially hidden element is a better experience
-// than hiding an initially shown element... arguably... ?)
-if (findBestVoiceForCurrentLanguage()) {
-  $('#speak_container').show();
-}
+
+
+/**
+ * Show the "speak" checkbox if we find that we have speech support for the
+ * current language (showing an initially hidden element is a better experience
+ * than hiding an initially shown element... arguably... ?)
+ *
+ * Also, for funzies: the speechSynthesis.getVoices() array is asynchronously
+ * populated *some time* after the page loads... and we won't know when. Keep
+ * on testing periodically until we got it or it's taken too long to finish.
+ */
+(function() {
+  if (!window.speechSynthesis) { return; /* No point in even trying */ }
+
+  let attempts = 0;
+  const timer = setInterval(function() {
+    attempts += 1;
+    if (findBestVoiceForCurrentLanguage()) {
+      $('#speak_container').show();
+      clearInterval(timer);
+    }
+    if (attempts >= 20) {
+      // Give up
+      clearInterval(timer);
+    }
+  }, 50);
+})();
 
 function findBestVoiceForCurrentLanguage() {
   return findVoice(convert_lang_to_ISO(window.State.lang));
