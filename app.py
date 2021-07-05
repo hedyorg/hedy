@@ -69,6 +69,9 @@ TRANSLATIONS = hedyweb.Translations()
 
 DATABASE = database.Database()
 
+TOTAL_SCORE = 0
+CORRECT = 0
+
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys ():
@@ -412,6 +415,93 @@ def programs_page (request):
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name'), 'public': item.get ('public')})
 
     return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
+
+@app.route('/quiz/start/<level>', methods=['GET'])
+def get_quiz_start(level):
+    global TOTAL_SCORE, CORRECT
+    g.lang = lang = requested_lang()
+    g.prefix = '/hedy'
+    TOTAL_SCORE = 0
+    CORRECT = 0
+    return render_template('startquiz.html', level=level, next_assignment = 1, menu=render_main_menu('adventures'), lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+
+
+# Quiz mode
+# Fill in the filename as source
+@app.route('/quiz/<source>/<question_nr>', methods=['GET'])
+def get_quiz(source, question_nr):
+
+    # Reading yaml file
+    quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
+
+    # set globals
+    try:
+        g.level = level = quiz_data['level']
+    except:
+        return 'No such Hedy level!', 404
+    g.lang = lang = requested_lang()
+    g.prefix = '/hedy'
+
+    q_nr = int(question_nr)
+    print(q_nr <= len(quiz_data['questions']))
+    if q_nr <= len(quiz_data['questions']):
+        question = quiz_data['questions'][q_nr - 1].get(q_nr)
+        print(len(question['mp_choice_options']))
+        char_array = []
+        for i in range(len(question['mp_choice_options'])):
+            char_array.append(chr(ord('@') + (i + 1)))
+        return render_template('quiz_question.html', quiz=quiz_data, source=source,
+                               questions=quiz_data['questions'],
+                               question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                               correct=CORRECT,
+                               char_array=char_array,
+                               menu=render_main_menu('adventures'), lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+    else:
+        return render_template('endquiz.html', correct=CORRECT, total_score=TOTAL_SCORE,  menu=render_main_menu('adventures'), lang=lang,
+                               quiz=quiz_data,level=level+1, next_assignment = 1,  username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+
+def enable_submit():
+    print("radio clicked")
+    sbmt = document.getElementById('submit-button')
+    print(sbmt)
+    if request.form["_option"]:
+        sbmt.disabled = False
+    else:
+        sbmt.disabled = True
+
+
+@app.route('/submit_answer/<source>/<question_nr>', methods=["POST"])
+def submit_answer(source, question_nr):
+    option = request.form["radio_option"]
+    print('option', option)
+
+    quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
+    q_nr = int(question_nr)
+    question = quiz_data['questions'][q_nr - 1].get(q_nr)
+    index_option = ord(option.split("-")[1])-65
+    if question['correct_answer'] in option:
+        global TOTAL_SCORE, CORRECT
+        TOTAL_SCORE= TOTAL_SCORE + question['question_score']
+        CORRECT = CORRECT + 1
+
+    if q_nr <= len(quiz_data['questions']):
+        return render_template('feedback.html', quiz=quiz_data, question=question,
+                               questions = quiz_data['questions'],
+                               question_nr=q_nr,
+                               correct = CORRECT,
+                               option=option,
+                               index_option=index_option,
+                               menu=render_main_menu('adventures'), lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+    else:  # show a different page for after the last question
+        return jsonify({'response': 200, 'results': quiz_data})
+
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
