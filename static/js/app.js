@@ -1,5 +1,5 @@
 (function() {
-  // A bunch of code expects a global "State" object. Set it here if not 
+  // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
     window.State = {};
@@ -401,44 +401,70 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function convert_lang_to_ISO(lang){
-switch (lang){
+/**
+ * Translate the language code into a full language+locale code, for voice lookup
+ */
+function convert_lang_to_ISO(lang) {
+  switch (lang) {
     case 'nl':
-        return 'nl-NL';
+      return 'nl-NL';
     case 'hu':
-        return 'hu-HU';
+      return 'hu-HU';
     case 'sw':
-        return 'sw-KE';
+      return 'sw-KE';
     case 'fr':
-        return 'fr-FR';
+      return 'fr-FR';
     case 'pt':
-        return 'pt-BR';
+      return 'pt-BR';
     case 'de':
-        return 'de-DE';
+      return 'de-DE';
     case 'it':
-        return 'it-IT';
+      return 'it-IT';
     case 'el':
-        return 'el-GR';
+      return 'el-GR';
     case 'zh':
-        return 'zh-CN';
+      return 'zh-CN';
     case 'es':
-        return 'es-ES';
+      return 'es-ES';
     default:
-        return 'en-US';
-
-}
+      return 'en-US';
+  }
 }
 
 function speak(text) {
-    speak_enabled = $('#speak').is(":checked")
-    console.log('speak?', speak_enabled);
-    if (speak_enabled){
-        let utterance = new SpeechSynthesisUtterance(text);
-        lang = window.State.lang;
-        utterance.lang = convert_lang_to_ISO(lang);
-        speechSynthesis.speak(utterance);
-    }
+  var speakEnabled = $('#speak').is(":checked")
+  var voice = findBestVoiceForCurrentLanguage();
 
+  if (speakEnabled && voice) {
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    speechSynthesis.speak(utterance);
+  }
+}
+
+// Show the "speak" checkbox if we find that we have speech support for the
+// current language (showing an initially hidden element is a better experience
+// than hiding an initially shown element... arguably... ?)
+if (findBestVoiceForCurrentLanguage()) {
+  $('#speak_container').show();
+}
+
+function findBestVoiceForCurrentLanguage() {
+  return findVoice(convert_lang_to_ISO(window.State.lang));
+}
+
+function findVoice(langWithCountry) {
+  // If the feature doesn't exist in the browser, return null
+  if (!window.speechSynthesis) { return undefined; }
+  const ourVoices = window.speechSynthesis.getVoices().filter(voice => voice.lang === langWithCountry);
+
+  // Give preference to local voices to not send Chrome users a big data bill (otherwise
+  // Google voices will be the first in the list)
+  const localVoices = ourVoices.filter(voice => voice.localService);
+  if (localVoices.length > 0) { return localVoices[0]; }
+
+  // Otherwise any voice we can get our hands on
+  return ourVoices.length > 0 ? ourVoices[0] : undefined;
 }
 
 function runPythonProgram(code, cb) {
@@ -491,11 +517,6 @@ function runPythonProgram(code, cb) {
     addToOutput(text, 'white');
     speak(text)
   }
-
-
-
-
-
 
   function builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
