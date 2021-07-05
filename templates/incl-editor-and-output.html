@@ -102,7 +102,7 @@
           <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
-          <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+          <button class="green-btn ml-1" onclick="window.location = '/quiz/start/{{level}}';">Ga naar de quiz van level {{ level }}</button>
         {% endif %}
       </div>
     </div>
