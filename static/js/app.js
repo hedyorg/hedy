@@ -401,6 +401,46 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
+function convert_lang_to_ISO(lang){
+switch (lang){
+    case 'nl':
+        return 'nl-NL';
+    case 'hu':
+        return 'hu-HU';
+    case 'sw':
+        return 'sw-KE';
+    case 'fr':
+        return 'fr-FR';
+    case 'pt':
+        return 'pt-BR';
+    case 'de':
+        return 'de-DE';
+    case 'it':
+        return 'it-IT';
+    case 'el':
+        return 'el-GR';
+    case 'zh':
+        return 'zh-CN';
+    case 'es':
+        return 'es-ES';
+    default:
+        return 'en-US';
+
+}
+}
+
+function speak(text) {
+    speak_enabled = $('#speak').is(":checked")
+    console.log('speak?', speak_enabled);
+    if (speak_enabled){
+        let utterance = new SpeechSynthesisUtterance(text);
+        lang = window.State.lang;
+        utterance.lang = convert_lang_to_ISO(lang);
+        speechSynthesis.speak(utterance);
+    }
+
+}
+
 function runPythonProgram(code, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -444,11 +484,18 @@ function runPythonProgram(code, cb) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
   }
 
+
   // output functions are configurable.  This one just appends some text
   // to a pre element.
   function outf(text) {
     addToOutput(text, 'white');
+    speak(text)
   }
+
+
+
+
+
 
   function builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
@@ -493,6 +540,8 @@ function runPythonProgram(code, cb) {
       $('#inline-modal .caption').text(prompt);
       input.val('');
       input [0].placeholder = prompt;
+      speak(prompt)
+
       setTimeout(function() {
         input.focus();
       }, 0);
