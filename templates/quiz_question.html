@@ -17,18 +17,22 @@
                 class="font-semibold">Vraag {{ question_nr }} </p>
             <p> / {{ questions|length }} </p></div>
         <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center font-slab"> {{ question.question_text }} </p>
+        {% if question.code and question.code!= "..." %}
+            <pre><code class="ml-6 text-xl">{{question.code}}</code></pre>
+        {% endif %}
 
-        <form action='/submit_answer/{{ source }}/{{ question_nr }}' method="POST">
+        <form action='/submit_answer/{{ level_source }}/{{ question_nr }}' method="POST">
             <div class="grid gap-2 rounded-t-xl radio-block">
                 {% for row in question.mp_choice_options %}
                     <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
                         <label class="inline-flex items-center"><p
-                                class="text-6xl font-bold ml-6 mr-6 font-slab">{{ char_array[loop.index - 1] }}</p></p> <input
-                                type="radio"
-                                name="radio_option"
-                                value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
-                                class="class form-radio h-12 w-12">
-                            <span ><code class="ml-6 text-xl">{{ row.code }}</code></span>
+                                class="text-6xl font-bold ml-6 mr-6 font-slab">{{ char_array[loop.index - 1] }}</p></p>
+                            <input
+                                    type="radio"
+                                    name="radio_option"
+                                    value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
+                                    class="class form-radio h-12 w-12">
+                            <span><code class="ml-6 text-xl">{{ row.code }}</code></span>
                         </label>
                     </div>
                 {% endfor %}

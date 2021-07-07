@@ -24,13 +24,13 @@
         {% if question_nr < questions|length %}
             <div></div>
             <button class="green-btn ml-1 text-right-0"
-                    onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'">
+                    onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}'">
                 Ga
                 naar vraag {{ question_nr + 1 }}</button>
         {% else %}
             <div></div>
             <button class="green-btn ml-1 right-0"
-                    onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'">
+                    onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}'">
                 Ga
                 naar de resultaten van de quiz
             </button>

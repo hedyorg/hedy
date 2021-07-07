@@ -1,4 +1,6 @@
 import collections
+import os
+
 import attr
 import glob
 from os import path
@@ -80,4 +82,11 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   for doc in arguments_dict ['docs']:
     doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
-  return render_template("code-page.html", **arguments_dict)
+  if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
+    print("File opened "  + str(level_number))
+    quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
+    quiz_data_level = quiz_data['level']
+  else:
+    quiz_data_level = 0
+
+  return render_template("code-page.html", **arguments_dict, quiz_data_level = quiz_data_level)
