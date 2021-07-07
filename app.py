@@ -357,6 +357,7 @@ def report_client_exception():
         is_test=1 if os.getenv ('IS_TEST_ENV') else None
     )
 
+    # Return a 500 so the HTTP status codes will stand out in our monitoring/logging
     return 'logged', 500
 
 @app.route('/version', methods=['GET'])
