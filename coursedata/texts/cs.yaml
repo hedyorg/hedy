@@ -1,0 +1,154 @@
+ui:
+    level_title: Úroveň
+    step_title: Úkol
+    code_title: Kód
+    docs_title: Vysvětlení
+    contact: Kontakt
+    video_title: Videa
+    run_code_button: Spustit kód
+    save_code_button: Uložit kód
+    edit_code_button: Upravit kód
+    share_code_button: Uložit a sdílet kód
+    regress_button: Vrátit se na úroveň
+    advance_button: Jít na úroveň
+    advance_step_button: Jít na úkol
+    try_button: Vyzkoušet
+    enter_text: Zde napiš svou odpověď...
+    enter: Enter
+    assignment_header: Úkol
+    show_explanation: Ukázat vysvětlení
+    hide_explanation: Skrýt vysvětlení
+    adventure: Dobrodružství
+    switch_to_levels: Opustit dobrodružství
+    switch_to_adventures: Otevřít dobrodružství
+    switch_to_another_adventure: Vybrat jiné dobrodružství
+    commands_title: Příkazy
+    by: od
+ClientErrorMessages:
+    Transpile_warning: Pozor!
+    Transpile_error: Nemůžeme spustit tvůj program.
+    Connection_error: Nemůžeme se připojit k serveru.
+    Other_error: Jejda! Asi jsme někde udělali chybu.
+    Execute_error: Něco se pokazilo během běhu programu.
+    CheckInternet: Prosím zkontroluj své připojení k internetu.
+    ServerError: Napsal*a jsi program, který jsme nečekali. Pokud potřebuješ pomoc, pošli nám email s číslem úrovně a svým kódem na hedy@felienne.com. Mezitím můžeš zkusit úkol vyřešit nějak jinak nebo se znova podívat na příklady. Díky!
+HedyErrorMessages:
+    Wrong Level: Toto je správný kód v Hedy, ale na špatné úrovni. Napsal jsi kód úrovně {original_level} na úrovni {working_level}.
+    Incomplete: Jejda, zapomněl*a jsi kousek kódu! Na řádku {line_number} musíš ještě něco dopsat za {incomplete_command}.
+    Invalid: '{invalid_command} není příkaz v Hedy na úrovni {level}. Nemyslel*a jsi spíš {guessed_command}?'
+    Invalid Space: Jejda, řádek číslo {line_number} začíná mezerou! Mezery dokáží počítač pořádně zmást, mohl*a bys ji prosím vymazat?
+    Parse: Tebou zadaný kód není platný kód v Hedy. Chyba je na řádku {location[0]}, na pozici {location[1]}. Napsal*a jsi tam {character_found}, ale to není povoleno.
+    Unquoted Text: Dávej si pozor, pokud chceš něco vypsat, musí text začínat a končit uvozovkami. Někde jsi nějakou zapomněl*a.
+    VarUndefined: Pokusil*a ses vypsat {name}, ale neinicializoval*a ji.
+    space: mezera
+    comma: čárka
+    question mark: otazník
+    newline: nový řádek
+    period: tečka
+    exclamation mark: vykřičník
+    dash: pomlčka
+    star: hvězdička
+    single quotes: jednoduché uvozovky
+    double quotes: dvojité uvozovky
+    slash: lomítko
+Auth:
+    create_account: Vytvořit účet
+    create_account_explanation: Vlastní účet ti umožňuje ukládat si své programy.
+    username: Uživatelské jméno
+    email: Email
+    email_repeat: Zopakuj email
+    password: Heslo
+    password_repeat: Zopakuj heslo
+    birth_year: Rok narození (volitelný)
+    gender: Pohlaví (volitelné)
+    select: Vyber
+    female: Žena
+    male: Muž
+    other: Jiné
+    country: Země
+    subscribe_newsletter: Přihlásit se k newsletteru
+    already_account: Už máš svůj účet?
+    login_long: Přihlásit se ke svému účtu
+    login: Přihlásit se
+    no_account: Zatím nemáš svů účet?
+    profile: Můj profil
+    update_profile: Upravit profil
+    logout: Odhlásit se
+    destroy: Trvale odstranit účet
+    current_password: Současné heslo
+    new_password: Nové heslo
+    repeat_new_password: Zopakuj nové heslo
+    change_password: Změnit heslo
+    are_you_sure: Opravdu to chceš udělat? Tato akce je nevratná.
+    please_username: Prosím zadej své uživatelské jméno.
+    username_three: Uživatelské jméno musí obsahovat alespoň tři znaky.
+    username_special: Uživatelské jméno nesmí obsahovat `:` a `@`.
+    please_password: Prosím zadej své heslo.
+    password_six: Heslo musí obsahovat alespoň šest znaků.
+    repeat_match_email: Zopakovaný email se neshoduje.
+    repeat_match_password: Zopakované heslo se neshoduje.
+    valid_email: Prosím zadej platný email.
+    valid_year: 'Prosím zadej rok mezi 1900 a '
+    ajax_error: Nastala chyba, prosím zkus to znova.
+    please_username_email: Prosím zadej své uživatelské jméno nebo email.
+    profile_updated: Profil byl upraven.
+    password_updated: Heslo bylo změněno.
+    signup_success: Hotovo! Prosím přihlaš se :)
+    forgot_password: Zapomněl*a jsi heslo?
+    recover_password: Požádat o obnovení hesla
+    send_password_recovery: Pošlete mi odkaz na obnovení hesla
+    sent_password_recovery: Brzy by ti měl dorazit email s instrukcemi ke změně hesla.
+    reset_password: Obnovit heslo
+    password_resetted: Tvé heslo bylo úspěšně obnoveno. Prosím přihlaš se.
+    invalid_username_password: Neplatné uživatelské jméno/heslo.
+    invalid_username: Neplatné uživatelské jméno.
+    invalid_password: Neplatné heslo.
+    invalid_reset_link: Neplatný odkaz pro obnovu hesla.
+    exists_email: Tento email už někdo používá.
+    exists_username: Toto uživatelské jméno už někdo používá.
+    email_hello: Ahoj!
+    email_goodbye: |-
+        Děkujeme!
+        Tým Hedy
+    email_welcome_verify_subject: Vítej v Hedy
+    email_welcome_verify_body: |-
+        Tvůj Hedy účet byl úspěšně vytvořen. Vítej!
+        Prosím klikni na následující odkaz pro ověřění tvé emailové adresy:
+    email_change_password_subject: Tvé Hedy heslo bylo změněno.
+    email_change_password_body: |-
+        Tvé Hedy heslo bylo změněno. Pokud jsi to udělal*a ty, je vše v pořádku.
+        Pokud jsi své heslo neměnil*a, prosím ihned nás kontaktuj odpovědí na tento email.
+    email_recover_password_subject: Obnovit Hedy heslo
+    email_recover_password_body: Kliknutím na tento odkaz můžeš nastavit nové heslo pro svůj Hedy účet. Pokud jsi o obnovu hesla nežádal*a, prosím ignotuj tento email.
+    email_reset_password_subject: Tvé heslo pro Hedy účet bylo obnoveno.
+    email_reset_password_body: |-
+        Tvé Hedy heslo bylo nastaveno na nové. Pokud jsi to udělal*a ty, je vše v pořádku.
+        Pokud jsi své heslo neměnil*a, prosím ihned nás kontaktuj odpovědí na tento email.
+    program_header: Moje programy
+    save_prompt: Potřebuješ vlastní uživatelský účet, abys mohl*a uložit svůj program. Chceš se nyní přihlásit?
+    unsaved_changes: Tvůj program není uložený. Chceš odejít bez uložení?
+    save_success: Úspěch
+    save_success_detail: Program byl úspěšně uložen.
+    share_success_detail: Program byl úspěšně sdílen a odkaz pro sdílení byl skopírován do schránky
+    unshare_success_detail: Program už dále není sdílený
+    copy_clipboard: Úspěšně skopírováno do schránky
+    answer_question: Nemůžeš spustit program bez zodpovězení otázky
+    must_be_logged: Musíš se přihlásit, abys mohl*a uložit svůj program
+Programs:
+    recent: Moje nejnovější programy
+    level: Úroveň
+    minutes: minuty
+    hours: hodiny
+    days: dny
+    ago-1: před
+    ago-2: ''
+    open: Otevřít
+    delete: Smazat
+    delete_confirm: Opravdu chceš smazat tento program?
+    share: Sdílet
+    share_confirm: Opravdu chceš, aby byl tento program veřejný?
+    unshare: Ukončit sdílení
+    unshare_confirm: Opravdu cheš, aby byl tento program soukromý?
+    copy_link_to_share: Zkopírovat odkaz ke sdílení
+    no_programs: Zatím nemáš žádné programy.
+    write_first: Napiš svůj první program!
