@@ -36,8 +36,8 @@ class LogRecord:
         end_time = time.time()
         if not IS_WINDOWS:
             end_rusage = resource.getrusage(resource.RUSAGE_SELF)
-            user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime),
-            sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime),
+            user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime)
+            sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime)
         else:
             user_ms = None
             sys_ms = None
