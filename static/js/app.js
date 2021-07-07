@@ -595,15 +595,18 @@ function buildUrl(url, params) {
 
       clearInterval(timer);
     }
-    if (attempts >= 20) {
+    if (attempts >= 20) {  // ~2 seconds
       // Give up
       clearInterval(timer);
     }
-  }, 50);
+  }, 100);
 
   function findVoices(lang) {
+    // Our own "lang" is *typically* just the language code, but we also have "pt_BR".
+    const simpleLang = lang.match(/^([a-z]+)/i)[1];
+
     // If the feature doesn't exist in the browser, return null
     if (!window.speechSynthesis) { return []; }
-    return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(lang));
+    return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
 })();
