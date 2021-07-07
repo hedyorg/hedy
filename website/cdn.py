@@ -26,6 +26,7 @@ class Cdn:
         self.cdn_prefix = cdn_prefix or ''
         self.commit = commit
         self.static_prefix = '/'
+        self.app = app
 
         if self.cdn_prefix:
             # If we are using a CDN, also host static resources under a URL that includes
@@ -40,8 +41,8 @@ class Cdn:
             # emails and content we forgot to replace or are unable to replace (like in MarkDowns).
             self.static_prefix = '/static-' + commit
             app.add_url_rule(self.static_prefix + '/<path:filename>',
-                    endpoint="static",
-                    view_func=app.send_static_file)
+                    endpoint='cdn_static',
+                    view_func=self._send_static_file)
 
         app.add_template_global(self.static, name='static')
 
@@ -49,4 +50,19 @@ class Cdn:
         """Return cacheable links to static resources."""
         return utils.slash_join(self.cdn_prefix, self.static_prefix, url)
 
+    def _send_static_file(self, filename):
+        """
+        Call app.send_static_file, add headers appropriate for the CDN.
+
+        1. A CORS header. If we don't do this, JavaScript errors won't be
+        reported properly ( the errors will be reported as "Script Error") due
+        to browser security settings, since they seem to be originating from the
+        CDN instead of from us.
+
+        2. Set caching to indefinite.
+        """
+        response = self.app.send_static_file(filename)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.cache_control.max_age = 24 * 3600 # A day
+        return response
 
