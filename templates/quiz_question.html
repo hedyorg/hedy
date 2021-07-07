@@ -18,7 +18,7 @@
             <p> / {{ questions|length }} </p></div>
         <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center font-slab"> {{ question.question_text }} </p>
         {% if question.code and question.code!= "..." %}
-            <pre><code class="ml-6 text-xl">{{question.code}}</code></pre>
+            <pre><code class="ml-6 text-xl">{{ question.code }}</code></pre>
         {% endif %}
 
         <form action='/submit_answer/{{ level_source }}/{{ question_nr }}' method="POST">
@@ -32,7 +32,14 @@
                                     name="radio_option"
                                     value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
                                     class="class form-radio h-12 w-12">
-                            <span><code class="ml-6 text-xl">{{ row.code }}</code></span>
+                            <span>
+                                {% if row.code %}
+
+                                    <code class="ml-6 text-xl">{{ row.code }}</code>
+                                {% elif row.option_text %}
+                                    <p class="ml-6 text-xl font-bold"> {{row.option_text}}</p>
+                                {% endif %}
+                            </span>
                         </label>
                     </div>
                 {% endfor %}
