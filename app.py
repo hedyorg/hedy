@@ -447,6 +447,8 @@ def get_quiz_start(level):
     global TOTAL_SCORE, CORRECT
     g.lang = lang = requested_lang()
     g.prefix = '/hedy'
+
+    #Sets the values of total_score and correct on the beginning of the quiz at 0
     TOTAL_SCORE = 0
     CORRECT = 0
     return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
@@ -459,6 +461,7 @@ def get_quiz_start(level):
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>', methods=['GET'])
 def get_quiz(level_source, question_nr):
+
     # Reading yaml file
     quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
 
@@ -466,11 +469,12 @@ def get_quiz(level_source, question_nr):
     g.lang = lang = requested_lang()
     g.prefix = '/hedy'
 
+    #Loop through the questions and check that the loop doesn't reach out of bounds
     q_nr = int(question_nr)
-    print(q_nr <= len(quiz_data['questions']))
     if q_nr <= len(quiz_data['questions']):
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
-        print(len(question['mp_choice_options']))
+
+        #Convert the indices to the corresponding characters
         char_array = []
         for i in range(len(question['mp_choice_options'])):
             char_array.append(chr(ord('@') + (i + 1)))
@@ -490,29 +494,29 @@ def get_quiz(level_source, question_nr):
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
 
-def enable_submit():
-    print("radio clicked")
-    sbmt = document.getElementById('submit-button')
-    print(sbmt)
-    if request.form["_option"]:
-        sbmt.disabled = False
-    else:
-        sbmt.disabled = True
-
-
 @app.route('/submit_answer/<level_source>/<question_nr>', methods=["POST"])
 def submit_answer(level_source, question_nr):
+
+    #Get the chosen option from the request form with radio buttons
     option = request.form["radio_option"]
 
+    # Reading yaml file
     quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+
+    #Convert question_nr to an integer
     q_nr = int(question_nr)
+
+    #Convert the corresponding chosen option to the index of an option
     question = quiz_data['questions'][q_nr - 1].get(q_nr)
     index_option = ord(option.split("-")[1]) - 65
+
+    #If the correct answer is chosen, update the total score and the number of correct answered questions
     if question['correct_answer'] in option:
         global TOTAL_SCORE, CORRECT
         TOTAL_SCORE = TOTAL_SCORE + question['question_score']
         CORRECT = CORRECT + 1
 
+    # Loop through the questions
     if q_nr <= len(quiz_data['questions']):
         return render_template('feedback.html', quiz=quiz_data, question=question,
                                questions=quiz_data['questions'],
