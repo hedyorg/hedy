@@ -825,7 +825,11 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
         next: "ifElseSpace"
       },{
         token: "keyword",
-        regex: "^else$",
+        regex: "^else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -998,7 +1002,11 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         next: "ifElseSpace"
       },{
         token: "keyword",
-        regex: "^else$",
+        regex: "^else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -1179,7 +1187,11 @@ define('ace/mode/level11_highlight_rules', [], function(require, exports, module
         next: "ifElseSpace"
       },{
         token: "keyword",
-        regex: "^else$",
+        regex: "^else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -1405,7 +1417,11 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
         next: "ifElseSpace"
       },{
         token: "keyword",
-        regex: "^else$",
+        regex: "^else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -1678,6 +1694,10 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "^else| else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -1967,6 +1987,10 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "^else| else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -2274,6 +2298,10 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "^else| else",
+        next: "ifElseSpace"
+      },{
+        token: "keyword",
+        regex: "^elif",
         next: "ifElseSpace"
       },{
         token: "keyword",
@@ -4478,7 +4506,7 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         regex: "\\-"
       },{
         token: "keyword",
-        regex: " \\/ "
+        regex: "\\/"
       },{
         token: "keyword",
         regex: " length[(]",
