@@ -10,7 +10,7 @@
   editor.setTheme("ace/theme/monokai");
 
   // a variable which turns on(1) highlighter or turns it off(0)
-  var highlighter = 0;
+  var highlighter = 1;
 
   if (highlighter == 1){
         if (window.State.level == 1){

@@ -541,6 +541,9 @@ define('ace/mode/level6_highlight_rules', [], function(require, exports, module)
       },{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       }],
 
       "ifElseSpace": [{
@@ -568,6 +571,9 @@ define('ace/mode/level6_highlight_rules', [], function(require, exports, module)
       ,{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       }],
 
 
@@ -682,6 +688,9 @@ define('ace/mode/level7_highlight_rules', [], function(require, exports, module)
       },{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       }],
 
       "ifElseSpace": [{
@@ -709,6 +718,9 @@ define('ace/mode/level7_highlight_rules', [], function(require, exports, module)
       ,{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       }],
 
 
@@ -716,6 +728,10 @@ define('ace/mode/level7_highlight_rules', [], function(require, exports, module)
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        token: "text",
+        regex: "$",
+        next: "start"
       },{
         defaultToken : "text"
       }],
@@ -822,6 +838,9 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
         regex: " \\- "
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for ",
         next: "forloop1"
       }],
@@ -872,6 +891,9 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
       ,{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       }],
 
 
@@ -989,6 +1011,9 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         regex: " \\- "
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -1039,6 +1064,9 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
       ,{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "text",
         regex: "$",
@@ -1164,6 +1192,9 @@ define('ace/mode/level11_highlight_rules', [], function(require, exports, module
         regex: " \\- "
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -1254,6 +1285,9 @@ define('ace/mode/level11_highlight_rules', [], function(require, exports, module
       ,{
         token: "keyword",
         regex: " \\- "
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "text",
         regex: "$",
@@ -1384,6 +1418,9 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -1405,6 +1442,9 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -1517,6 +1557,9 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
       ,{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "text",
         regex: "$",
@@ -1647,6 +1690,9 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -1672,6 +1718,9 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -1786,6 +1835,9 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
         token: "keyword",
         regex: "\\-"
       },{
+        token: "keyword",
+        regex: " \\/ "
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -1813,6 +1865,9 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -1924,6 +1979,9 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -1957,6 +2015,9 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2070,6 +2131,9 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
       ,{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },
       {
         token: "keyword",
@@ -2105,6 +2169,9 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2219,6 +2286,9 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -2252,6 +2322,9 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2365,6 +2438,9 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
       ,{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },
       {
         token: "keyword",
@@ -2400,6 +2476,9 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2514,6 +2593,9 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       }],
@@ -2547,6 +2629,9 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2658,6 +2743,9 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "<"
       },{
         token: "keyword",
@@ -2696,6 +2784,9 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2810,6 +2901,9 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       },{
@@ -2847,6 +2941,9 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -2958,6 +3055,9 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "<"
       },{
         token: "keyword",
@@ -2996,6 +3096,9 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         defaultToken : "text"
       }],
@@ -3110,6 +3213,9 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       },{
@@ -3147,6 +3253,9 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: "length[(]",
@@ -3282,6 +3391,9 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "<"
       },{
         token: "keyword",
@@ -3320,6 +3432,9 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: " length[(]",
@@ -3446,6 +3561,9 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       },{
@@ -3483,6 +3601,9 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: "length[(]",
@@ -3618,6 +3739,9 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "<"
       },{
         token: "keyword",
@@ -3656,6 +3780,9 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: " length[(]",
@@ -3782,6 +3909,9 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       },{
@@ -3819,6 +3949,9 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: "length[(]",
@@ -3954,6 +4087,9 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "<"
       },{
         token: "keyword",
@@ -3992,6 +4128,9 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: " length[(]",
@@ -4118,6 +4257,9 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "^for | for ",
         next: "forloop1"
       },{
@@ -4155,6 +4297,9 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: "length[(]",
@@ -4290,6 +4435,9 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         regex: "\\-"
       },{
         token: "keyword",
+        regex: " \\/ "
+      },{
+        token: "keyword",
         regex: "<"
       },{
         token: "keyword",
@@ -4328,6 +4476,9 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
       },{
         token: "keyword",
         regex: "\\-"
+      },{
+        token: "keyword",
+        regex: " \\/ "
       },{
         token: "keyword",
         regex: " length[(]",
