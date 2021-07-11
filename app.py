@@ -71,10 +71,6 @@ TRANSLATIONS = hedyweb.Translations()
 
 DATABASE = database.Database()
 
-TOTAL_SCORE = 0
-CORRECT = 0
-
-
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys():
@@ -445,13 +441,12 @@ def programs_page(request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    global TOTAL_SCORE, CORRECT
     g.lang = lang = requested_lang()
     g.prefix = '/hedy'
 
     #Sets the values of total_score and correct on the beginning of the quiz at 0
-    TOTAL_SCORE = 0
-    CORRECT = 0
+    session['TOTAL_SCORE'] = 0
+    session['CORRECT'] = 0
     return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
                            lang=lang,
                            username=current_user(request)['username'],
@@ -482,13 +477,13 @@ def get_quiz(level_source, question_nr):
         return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
                                questions=quiz_data['questions'],
                                question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
-                               correct=CORRECT,
+                               correct=session.get('CORRECT'),
                                char_array=char_array,
                                menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
-        return render_template('endquiz.html', correct=CORRECT, total_score=TOTAL_SCORE,
+        return render_template('endquiz.html', correct=session.get('CORRECT'), total_score=session.get('TOTAL_SCORE'),
                                menu=render_main_menu('adventures'), lang=lang,
                                quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
                                next_assignment=1, username=current_user(request)['username'],
@@ -513,9 +508,8 @@ def submit_answer(level_source, question_nr):
 
     #If the correct answer is chosen, update the total score and the number of correct answered questions
     if question['correct_answer'] in option:
-        global TOTAL_SCORE, CORRECT
-        TOTAL_SCORE = TOTAL_SCORE + question['question_score']
-        CORRECT = CORRECT + 1
+        session['TOTAL_SCORE'] = session.get('TOTAL_SCORE')+ question['question_score']
+        session['CORRECT'] = session.get('CORRECT') + 1
 
     # Loop through the questions
     if q_nr <= len(quiz_data['questions']):
@@ -523,7 +517,7 @@ def submit_answer(level_source, question_nr):
                                questions=quiz_data['questions'],
                                level_source=level_source,
                                question_nr=q_nr,
-                               correct=CORRECT,
+                               correct=session.get('CORRECT'),
                                option=option,
                                index_option=index_option,
                                menu=render_main_menu('adventures'), lang=lang,
