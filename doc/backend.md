@@ -116,6 +116,7 @@ table users:
     last_login:  INTEGER|UNDEFINED (epoch milliseconds)
     prog_experience: UNDEFINED|'yes'|'no',
     experience_languages: UNDEFINED|['scratch'|'other_block'|'python'|'other_text']
+    classes: [STRING, ...] (ids of the classes of which the user is a member)
 
 table tokens:
     id:       STRING (main index; for password reset tokens, id is the username)
@@ -133,6 +134,14 @@ table programs:
     lang:         STRING
     code:         STRING
     version:      STRING
+
+table classes:
+    id: STRING (main index)
+    date: INTEGER
+    owner: STRING (secondary index)
+    link: STRING
+    name: STRING
+    students: [STRING, ...]
 ```
 
 ## Test environment

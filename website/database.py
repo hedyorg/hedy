@@ -6,6 +6,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['owner'])
 
 class Database:
     def programs_for_user(self, username):
@@ -101,3 +102,63 @@ class Database:
     def all_users_count(self):
         """Return the total number of all users."""
         return USERS.item_count()
+
+    def get_classes(self, username):
+        """Return all the classes belonging to a teacher."""
+        return CLASSES.get_many({'owner': username})
+
+    def get_class(self, id):
+        """Return the classes with given id."""
+        return CLASSES.get({'id': id})
+
+    def store_class(self, Class):
+        """Store a class."""
+        CLASSES.create(Class)
+
+    def update_class(self, id, name):
+        """Updates a class."""
+        CLASSES.update({'id': id}, {'name': name})
+
+    def add_student_to_class(self, Class, student_id):
+        """Adds a student to a class."""
+
+        students = Class.get('students')
+        # If student is already in class, there is nothing to do
+        if user ['username'] in students:
+            return True
+
+        user = USERS.get({'username': student_id})
+
+        # TODO: we might need to change this to avoid race conditions when adding items
+        student_classes = user.get('classes') or []
+        student_classes.append(Class ['id'])
+
+        Class ['students'].append(student_id)
+
+        USERS.update({'username': student_id, 'classes': student_classes})
+        CLASSES.update({'id': id}, {'students': class_students})
+
+    def remove_student_from_class(self, Class, student_id):
+        """Removes a student to a class."""
+
+        students = Class.get('students')
+        # If student is not in the class, there is nothing to do
+        if not user ['username'] in students:
+            return True
+
+        user = USERS.get({'username': student_id})
+
+        # TODO: we might need to change this to avoid race conditions when removing items
+        student_classes = user.get('classes') or []
+        student_classes.remove(Class ['id'])
+
+        Class ['students'].remove(student_id)
+
+        USERS.update({'username': student_id, 'classes': student_classes})
+        CLASSES.update({'id': id}, {'students': class_students})
+
+    def delete_class(self, Class):
+        for student_id in Class ['students']:
+            Database.remove_student_from_class (Class, student_id)
+
+        CLASSES.delete({'id': Class ['id']})

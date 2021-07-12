@@ -369,11 +369,13 @@ def routes (app, database, requested_lang):
     @requires_login
     def get_profile (user):
         output = {'username': user ['username'], 'email': user ['email']}
-        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages', 'classes']:
             if field in user:
                 output [field] = user [field]
         if 'verification_pending' in user:
             output ['verification_pending'] = True
+        if not 'classes' in output:
+            output ['classes'] = []
         output ['session_expires_at'] = timems () + session_length * 1000
 
         return jsonify (output), 200

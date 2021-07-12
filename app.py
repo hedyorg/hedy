@@ -899,6 +899,11 @@ def update_yaml():
 from website import auth
 auth.routes (app, DATABASE, requested_lang)
 
+# *** TEACHER BACKEND
+
+from website import teacher
+teacher.routes (app, DATABASE, requested_lang)
+
 # *** START SERVER ***
 
 def on_server_start():

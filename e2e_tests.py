@@ -307,6 +307,27 @@ def suite (username):
         ['change profile with different programming experience', 'post', '/profile', {}, {'prog_experience': 'no', 'experience_languages': ['scratch', 'other_text']}, 200],
         ['get profile after updating experience', 'get', '/profile', {}, {}, 200, getProfile5],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200],
+        # TODO: E2E tests for classes
+        # create account & set it as teacher
+        # create class (invalid & valid)
+        # get classes as teacher, see that the class is there
+        # retrieve empty class
+        # edit class name
+        # retrieve updated class
+        # join class as non-logged user
+        # join class as student
+        # get profile as student, see classes
+        # join class again (idempotent call, no error)
+        # get profile as student, see classes
+        # get class with a student as a teacher
+        # remove student from class
+        # get class as teacher, see it empty again
+        # get profile as student, see no class
+        # remove student from class again (idempotent)
+        # add student to class again
+        # delete class
+        # get classes as teacher, see that the class is not there
+        # get profile as student, see that class is not there
     ]
 
 if not args.concurrent:
