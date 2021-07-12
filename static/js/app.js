@@ -401,93 +401,6 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-/**
- * Translate the language code into a full language+locale code, for voice lookup
- */
-function convert_lang_to_ISO(lang) {
-  switch (lang) {
-    case 'nl':
-      return 'nl-NL';
-    case 'hu':
-      return 'hu-HU';
-    case 'sw':
-      return 'sw-KE';
-    case 'fr':
-      return 'fr-FR';
-    case 'pt':
-      return 'pt-BR';
-    case 'de':
-      return 'de-DE';
-    case 'it':
-      return 'it-IT';
-    case 'el':
-      return 'el-GR';
-    case 'zh':
-      return 'zh-CN';
-    case 'es':
-      return 'es-ES';
-    default:
-      return 'en-US';
-  }
-}
-
-function speak(text) {
-  var speakEnabled = $('#speak').is(":checked")
-  var voice = findBestVoiceForCurrentLanguage();
-
-  if (speakEnabled && voice) {
-    let utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = voice;
-    speechSynthesis.speak(utterance);
-  }
-}
-
-
-
-/**
- * Show the "speak" checkbox if we find that we have speech support for the
- * current language (showing an initially hidden element is a better experience
- * than hiding an initially shown element... arguably... ?)
- *
- * Also, for funzies: the speechSynthesis.getVoices() array is asynchronously
- * populated *some time* after the page loads... and we won't know when. Keep
- * on testing periodically until we got it or it's taken too long to finish.
- */
-(function() {
-  if (!window.speechSynthesis) { return; /* No point in even trying */ }
-
-  let attempts = 0;
-  const timer = setInterval(function() {
-    attempts += 1;
-    if (findBestVoiceForCurrentLanguage()) {
-      $('#speak_container').show();
-      clearInterval(timer);
-    }
-    if (attempts >= 20) {
-      // Give up
-      clearInterval(timer);
-    }
-  }, 50);
-})();
-
-function findBestVoiceForCurrentLanguage() {
-  return findVoice(convert_lang_to_ISO(window.State.lang));
-}
-
-function findVoice(langWithCountry) {
-  // If the feature doesn't exist in the browser, return null
-  if (!window.speechSynthesis) { return undefined; }
-  const ourVoices = window.speechSynthesis.getVoices().filter(voice => voice.lang === langWithCountry);
-
-  // Give preference to local voices to not send Chrome users a big data bill (otherwise
-  // Google voices will be the first in the list)
-  const localVoices = ourVoices.filter(voice => voice.localService);
-  if (localVoices.length > 0) { return localVoices[0]; }
-
-  // Otherwise any voice we can get our hands on
-  return ourVoices.length > 0 ? ourVoices[0] : undefined;
-}
-
 function runPythonProgram(code, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
@@ -641,3 +554,59 @@ function buildUrl(url, params) {
   }
   return url + (clauses.length > 0 ? '?' + clauses.join('&') : '');
 }
+
+(function () {
+  window.speak = function speak(text) {
+    var selectedURI = $('#speak_dropdown').val();
+    if (!selectedURI) { return; }
+    var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
+
+    if (voice) {
+      let utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  }
+
+  if (!window.speechSynthesis) { return; /* No point in even trying */ }
+
+  /**
+   * Show the "speak" checkbox if we find that we have speech support for the
+   * current language (showing an initially hidden element is a better experience
+   * than hiding an initially shown element... arguably... ?)
+   *
+   * Also, for funzies: the speechSynthesis.getVoices() array is asynchronously
+   * populated *some time* after the page loads... and we won't know when. Keep
+   * on testing periodically until we got it or it's taken too long to finish.
+   */
+  let attempts = 0;
+  const timer = setInterval(function() {
+    attempts += 1;
+
+    const voices = findVoices(window.State.lang);
+
+    if (voices.length > 0) {
+      for (const voice of voices) {
+        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
+      }
+
+      $('#speak_container').show();
+
+      clearInterval(timer);
+    }
+    if (attempts >= 20) {  // ~2 seconds
+      // Give up
+      clearInterval(timer);
+    }
+  }, 100);
+
+  function findVoices(lang) {
+    // Our own "lang" is *typically* just the language code, but we also have "pt_BR".
+    const simpleLang = lang.match(/^([a-z]+)/i)[1];
+
+    // If the feature doesn't exist in the browser, return null
+    if (!window.speechSynthesis) { return []; }
+    return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
+  }
+})();
