@@ -6,7 +6,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['owner'])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher'])
 
 class Database:
     def programs_for_user(self, username):
@@ -86,10 +86,20 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
+        classes = USERS.get({'username': username}).get ('classes') or []
         USERS.delete({'username': username})
         # The recover password token may exist, so we delete it
         TOKENS.delete({'id': username})
         PROGRAMS.del_many({'username': username})
+
+        # Remove user from classes of which they may be a student
+        for class_id in classes:
+            Class = CLASSES.get({'id': class_id})
+            Database.remove_student_from_class (self, Class, username)
+
+        # Delete classes owned by the user
+        for Class in Database.get_classes (self, username):
+            Database.delete_class (self, Class)
 
     def all_users(self):
         """Return all users."""
@@ -105,7 +115,7 @@ class Database:
 
     def get_classes(self, username):
         """Return all the classes belonging to a teacher."""
-        return CLASSES.get_many({'owner': username})
+        return CLASSES.get_many({'teacher': username})
 
     def get_class(self, id):
         """Return the classes with given id."""
@@ -124,7 +134,7 @@ class Database:
 
         students = Class.get('students')
         # If student is already in class, there is nothing to do
-        if user ['username'] in students:
+        if student_id in students:
             return True
 
         user = USERS.get({'username': student_id})
@@ -135,15 +145,15 @@ class Database:
 
         Class ['students'].append(student_id)
 
-        USERS.update({'username': student_id, 'classes': student_classes})
-        CLASSES.update({'id': id}, {'students': class_students})
+        USERS.update({'username': student_id}, {'classes': student_classes})
+        CLASSES.update({'id': Class ['id']}, {'students': Class ['students']})
 
     def remove_student_from_class(self, Class, student_id):
         """Removes a student to a class."""
 
         students = Class.get('students')
         # If student is not in the class, there is nothing to do
-        if not user ['username'] in students:
+        if not student_id in students:
             return True
 
         user = USERS.get({'username': student_id})
@@ -154,11 +164,11 @@ class Database:
 
         Class ['students'].remove(student_id)
 
-        USERS.update({'username': student_id, 'classes': student_classes})
-        CLASSES.update({'id': id}, {'students': class_students})
+        USERS.update({'username': student_id}, {'classes': student_classes})
+        CLASSES.update({'id': Class ['id']}, {'students': Class ['students']})
 
     def delete_class(self, Class):
         for student_id in Class ['students']:
-            Database.remove_student_from_class (Class, student_id)
+            Database.remove_student_from_class (self, Class, student_id)
 
         CLASSES.delete({'id': Class ['id']})

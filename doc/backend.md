@@ -102,21 +102,55 @@
     - This route requires a session, otherwise it returns 403.
     - Body must be of the shape `{level: INT, name: STRING, code: STRING}`.
 
+### Classes
+
+- `GET /classes`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - Returns a list of classes owned by the user inside a template.
+
+- `GET /class/ID`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+   - Returns a template containing a table, filled with the following information: `{name: STRING, link: STRING, students: [{username: STRING, last_login: INTEGER|UNDEFINED, programs: INTEGER, highest_level: INTEGER|UNDEFINED, latest_shared: PROGRAM|UNDEFINED}, ...]}`.
+
+- `POST /class`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - Body must be of the shape `{name: STRING}`.
+
+- `PUT /class/ID`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+   - Body must be of the shape `{name: STRING}`.
+
+- `DELETE /class/ID`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+
+- `GET /class/ID/join/LINK
+   - This route requires a session of an user, otherwise it returns 403.
+   - The route adds the user as a student of the class.
+   - The route returns a 302 to redirect the user that joined to `/profile`.
+
+- `DELETE /class/ID/student/STUDENT_ID
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+   - The route removes a student from a class. This action can only be done by the teacher who owns the class.
+
 ## DynamoDB
 
 ```
 table users:
-    username:    STRING (main index)
-    password:    STRING (not the original password, but a bcrypt hash of it)
-    email:       STRING (secondary index)
-    birth_year:  INTEGER|UNDEFINED
-    country:     STRING|UNDEFINED
-    gender:      m|f|UNDEFINED
-    created:     INTEGER (epoch milliseconds)
-    last_login:  INTEGER|UNDEFINED (epoch milliseconds)
-    prog_experience: UNDEFINED|'yes'|'no',
+    username:             STRING (main index)
+    password:             STRING (not the original password, but a bcrypt hash of it)
+    email:                STRING (secondary index)
+    birth_year:           INTEGER|UNDEFINED
+    country:              STRING|UNDEFINED
+    gender:               m|f|o|UNDEFINED
+    created:              INTEGER (epoch milliseconds)
+    last_login:           INTEGER|UNDEFINED (epoch milliseconds)
+    prog_experience:      UNDEFINED|'yes'|'no',
     experience_languages: UNDEFINED|['scratch'|'other_block'|'python'|'other_text']
-    classes: [STRING, ...] (ids of the classes of which the user is a member)
+    classes:              UNDEFINED|[STRING, ...] (ids of the classes of which the user is a member)
 
 table tokens:
     id:       STRING (main index; for password reset tokens, id is the username)
@@ -136,11 +170,11 @@ table programs:
     version:      STRING
 
 table classes:
-    id: STRING (main index)
-    date: INTEGER
-    owner: STRING (secondary index)
-    link: STRING
-    name: STRING
+    id:       STRING (main index)
+    date:     INTEGER
+    teacher:  STRING (secondary index)
+    link:     STRING
+    name:     STRING
     students: [STRING, ...]
 ```
 

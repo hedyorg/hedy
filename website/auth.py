@@ -447,7 +447,7 @@ def routes (app, database, requested_lang):
 
     @app.route ('/admin/markAsTeacher', methods=['POST'])
     def mark_as_teacher ():
-        if not is_admin (request):
+        if not is_admin (request) and not is_testing_request (request):
             return 'unauthorized', 403
 
         body = request.json
@@ -554,6 +554,7 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
+        # TODO: if teacher, load classes // if student, load classes
         return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
         return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')

@@ -1,6 +1,8 @@
 from website.auth import requires_login, is_teacher
 import utils
 import uuid
+from flask import request, jsonify, redirect
+
 def routes (app, database, requested_lang):
     global DATABASE
     DATABASE = database
@@ -15,13 +17,13 @@ def routes (app, database, requested_lang):
             return jsonify (classes)
         # TODO add templating
 
-    @app.route('/class/<id>', methods=['GET'])
+    @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
         if not is_teacher (request):
             return 'Only teachers can retrieve classes', 403
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['owner'] != user ['username']:
+        if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
         students = []
         for student_username in Class.get ('students'):
@@ -39,7 +41,7 @@ def routes (app, database, requested_lang):
             students.append ({'username': student_username, 'last_login': student ['last_login'], 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
-            return jsonify ({'students': students, 'link': Class ['link']})
+            return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name']})
         # TODO add templating
 
     @app.route('/class', methods=['POST'])
@@ -57,8 +59,8 @@ def routes (app, database, requested_lang):
 
         Class = {
             'id': uuid.uuid4().hex,
-            'date': timems (),
-            'owner': user ['username'],
+            'date': utils.timems (),
+            'teacher': user ['username'],
             'link': uuid.uuid4().hex,
             'name': body ['name'],
             'students': [],
@@ -68,9 +70,9 @@ def routes (app, database, requested_lang):
 
         return {}, 200
 
-    @app.route('/class/<id>', methods=['PUT'])
+    @app.route('/class/<class_id>', methods=['PUT'])
     @requires_login
-    def update_class (user):
+    def update_class (user, class_id):
         if not is_teacher (request):
             return 'Only teachers can update classes', 403
 
@@ -82,43 +84,41 @@ def routes (app, database, requested_lang):
             return 'name must be a string', 400
 
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['owner'] != user ['username']:
+        if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
-        Class = DATABASE.update_class (class_id, {'name': body ['name']})
+        Class = DATABASE.update_class (class_id, body ['name'])
 
         return {}, 200
 
-    @app.route('/class/<id>', methods=['DELETE'])
+    @app.route('/class/<class_id>', methods=['DELETE'])
     @requires_login
-    def delete_class (user):
+    def delete_class (user, class_id):
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['owner'] != user ['username']:
+        if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
         DATABASE.delete_class (Class)
 
         return {}, 200
 
-    @app.route('/class/<id>/join/<link>', methods=['GET'])
+    @app.route('/class/<class_id>/join/<link>', methods=['GET'])
     @requires_login
     def join_class (user, class_id, link):
-
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['link'] != link:
             return 'No such class', 404
 
-        DATABASE.add_student_to_class (Class, student_id)
+        DATABASE.add_student_to_class (Class, user ['username'])
 
-        # TODO: add proper redirect
-        return {}, 302
+        return redirect(request.url.replace('/class/' + class_id + '/join/' + link, '/profile'), code=302)
 
-    @app.route('/class/<id>/member/<link>', methods=['DELETE'])
+    @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
-    def leave_class (user, class_id, link):
+    def leave_class (user, class_id, student_id):
 
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['owner'] != user ['username']:
+        if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
         DATABASE.remove_student_from_class (Class, student_id)
