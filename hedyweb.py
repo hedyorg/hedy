@@ -13,6 +13,9 @@ from website.auth import current_user
 import re
 import utils
 
+# Set variable to true to enable the quiz environment
+QUIZ_ENABLED = True
+
 class Translations:
   def __init__(self):
     self._data = None
@@ -38,6 +41,13 @@ class Translations:
 
 
 def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+
+  if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
+    print("File opened " + str(level_number))
+    quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
+    quiz_data_level = quiz_data['level']
+  else:
+    quiz_data_level = 0
 
   sublevel = None
   if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
@@ -82,11 +92,4 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   for doc in arguments_dict ['docs']:
     doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
-  if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
-    print("File opened "  + str(level_number))
-    quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
-    quiz_data_level = quiz_data['level']
-  else:
-    quiz_data_level = 0
-
-  return render_template("code-page.html", **arguments_dict, quiz_data_level = quiz_data_level)
+  return render_template("code-page.html", **arguments_dict, quiz_enabled= QUIZ_ENABLED, quiz_data_level = quiz_data_level)
