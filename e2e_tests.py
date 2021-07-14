@@ -6,6 +6,7 @@ import urllib.parse
 from config import config
 import sys
 import threading
+import re
 
 # USAGE: python e2e_tests.py [CONCURRENT_TESTS] [alpha|test]
 # Concurrent tests are a way to stress test an environment
@@ -68,6 +69,9 @@ def request (state, test, counter, username):
     if r.history and r.history [0]:
         # This will be the case if there's a redirect
         code = r.history [0].status_code
+        headers = r.history [0].headers
+        if getattr (r.history [0], '_content'):
+            body = getattr (r.history [0], '_content').decode ('utf-8')
     else:
         code = r.status_code
 
@@ -262,32 +266,118 @@ def retrieveProgramsAfter (state, response, username):
         raise Exception ('Invalid program.level')
 
 def getClasses0 (state, response, username):
-    print ('DEBUG GETCLASSES0', response ['body'])
+    if not isinstance (response ['body'], list):
+        raise Exception ('Classes should be a list')
+    if len (response ['body']) != 0:
+        raise Exception ('Classes should be empty')
 
 def getClasses1 (state, response, username):
-    print ('DEBUG GETCLASSES1', response ['body'])
+    if not isinstance (response ['body'], list):
+        raise Exception ('Classes should be a list')
+    if len (response ['body']) != 1:
+        raise Exception ('Classes should contain one class')
+    Class = response ['body'] [0]
+    if not isinstance (Class.get ('date'), int):
+        raise Exception ('Class should contain date')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if Class.get ('name') != 'class1':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
+    if Class.get ('teacher') != 'teacher-' + username:
+        raise Exception ('Invalid teacher')
+
     state ['classes'] = response ['body']
 
 def getClass1 (state, response, username):
-    print ('DEBUG GETCLASS1', response ['body'])
+    Class = response ['body']
+    if not isinstance (Class, dict):
+        raise Exception ('Invalid response body')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if Class.get ('name') != 'class1':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
 
 def getClasses2 (state, response, username):
-    print ('DEBUG GETCLASSES2', response ['body'])
+    if not isinstance (response ['body'], list):
+        raise Exception ('Classes should be a list')
+    if len (response ['body']) != 1:
+        raise Exception ('Classes should contain one class')
+    Class = response ['body'] [0]
+    if not isinstance (Class.get ('date'), int):
+        raise Exception ('Class should contain date')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if Class.get ('name') != 'class_renamed':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
+    if Class.get ('teacher') != 'teacher-' + username:
+        raise Exception ('Invalid teacher')
 
 def getClass2 (state, response, username):
-    print ('DEBUG GETCLASS2', response ['body'])
+    Class = response ['body']
+    if not isinstance (Class, dict):
+        raise Exception ('Invalid response body')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if Class.get ('name') != 'class_renamed':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
 
 def redirectAfterJoin1 (state, response, username):
-    print ('DEBUG REDIRECTAFTERJOIN1', response ['body'])
+    if not re.search ('http://localhost:5000/profile', response ['body']):
+        raise Exception ('Invalid redirect')
 
 def getProfileClass1 (state, response, username):
-    print ('DEBUG GETPROFILECLASS1', response ['body'])
+    classes = response ['body'].get ('classes')
+    if not isinstance (classes, list):
+        raise Exception ('Invalid classes list')
+    if len (classes) != 1:
+        raise Exception ('Class list should contain one item')
+    if classes [0] != state ['classes'] [0] ['id']:
+        raise Exception ('Invalid class id')
 
 def getClass3 (state, response, username):
-    print ('DEBUG GETCLASS3', response ['body'])
+    students = response ['body'].get ('students')
+    if not isinstance (students, list):
+        raise Exception ('Students should be a list')
+    if len (students) != 1:
+        raise Exception ('Student list should contain one student')
+    student = students [0]
+    if student.get ('highest_level') != 0:
+        raise Exception ('student.highest_level should be 0')
+    if student.get ('programs') != 0:
+        raise Exception ('student.programs should be 0')
+    if student.get ('latest_shared') != None:
+        raise Exception ('student.latest_shared should be None')
+    if not isinstance (student.get ('last_login'), int):
+        raise Exception ('student.last_login should be an integer')
+    if student.get ('username') != 'student-' + username:
+        raise Exception ('Invalid student username')
 
 def getProfileClass2 (state, response, username):
-    print ('DEBUG GETPROFILECLASS2', response ['body'])
+    classes = response ['body'].get ('classes')
+    if not isinstance (classes, list):
+        raise Exception ('Invalid classes list')
+    if len (classes) != 0:
+        raise Exception ('Class list should be empty')
 
 
 def suite (username):
