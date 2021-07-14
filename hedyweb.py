@@ -52,18 +52,13 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   # Meta stuff
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
-  arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
-  arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
-  arguments_dict['level'] = assignment.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
-  arguments_dict['next_assignment'] = int(assignment_number) + 1 if int(assignment_number) < course.max_step(level_number) else None
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
@@ -75,9 +70,5 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
 
   # Actual assignment
   arguments_dict.update(**attr.asdict(assignment))
-
-  # Add markdowns to docs
-  for doc in arguments_dict ['docs']:
-    doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
   return render_template("code-page.html", **arguments_dict)
