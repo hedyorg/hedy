@@ -61,7 +61,7 @@ class Course:
     if level_ix >= len(self.course): return 0
     return len(self.course[level_ix].get('assignments', []))
 
-  def get_assignment(self, level, number, sublevel=0):
+  def get_assignment(self, level, number):
 
     """Return the 1-based Assignment from this course."""
     level_ix = int(level) - 1
@@ -72,7 +72,6 @@ class Course:
     assignment_values = {
       "level": str(level),
     }
-    assignment_values.update(**self.defaults.get_defaults(int(level), sublevel))
 
     # If we don't have any "assignments", return a default Assignment object
     # based off the level and the level defaults. This is used in the Hedy main

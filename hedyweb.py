@@ -37,12 +37,6 @@ class Translations:
 
 def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
 
-  sublevel = None
-  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
-    sublevel     = int (level_number [level_number.index ('-') + 1])
-    level_number = int (level_number [0:level_number.index ('-')])
-
-  assignment = course.get_assignment(level_number, assignment_number, sublevel)
 
   if not assignment:
     abort(404)
