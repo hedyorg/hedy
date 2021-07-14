@@ -12,9 +12,7 @@ import courses
 from website.auth import current_user
 import re
 import utils
-
-# Set variable to true to enable the quiz environment
-QUIZ_ENABLED = True
+from config import config
 
 class Translations:
   def __init__(self):
@@ -81,6 +79,7 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventure_assignments'] = adventure_assignments
   arguments_dict['adventure_name'] = adventure_name
+  arguments_dict['quiz_enabled'] = config['quiz-enabled']
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
@@ -92,4 +91,4 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   for doc in arguments_dict ['docs']:
     doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
-  return render_template("code-page.html", **arguments_dict, quiz_enabled= QUIZ_ENABLED, quiz_data_level = quiz_data_level)
+  return render_template("code-page.html", **arguments_dict, quiz_data_level = quiz_data_level)
