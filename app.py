@@ -441,16 +441,19 @@ def programs_page(request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    g.lang = lang = requested_lang()
-    g.prefix = '/hedy'
+    if not config['quiz-enabled']:
+        return 'No such Hedy quiz!', 404
+    else:
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
 
-    #Sets the values of total_score and correct on the beginning of the quiz at 0
-    session['TOTAL_SCORE'] = 0
-    session['CORRECT'] = 0
-    return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
-                           lang=lang,
-                           username=current_user(request)['username'],
-                           auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+         #Sets the values of total_score and correct on the beginning of the quiz at 0
+        session['TOTAL_SCORE'] = 0
+        session['CORRECT'] = 0
+        return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
+                               lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
 
 # Quiz mode
@@ -458,7 +461,7 @@ def get_quiz_start(level):
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>', methods=['GET'])
 def get_quiz(level_source, question_nr):
 
-    # Reading yaml file
+    # Reading the yaml file
     quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
 
     # set globals
