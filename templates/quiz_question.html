@@ -32,11 +32,11 @@
         {% endif %}
 
         <form action='/submit_answer/{{ level_source }}/{{ question_nr }}' method="POST">
-            <div class="grid gap-2 rounded-t-xl radio-block">
+            <div class="grid gap-1 rounded-t-xl radio-block">
                 {% for row in question.mp_choice_options %}
                     <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
                         <label class="inline-flex items-center"><p
-                                class="text-6xl font-bold ml-6 mr-6 font-slab">{{ char_array[loop.index - 1] }}</p></p>
+                                class="text-4xl font-bold ml-6 mr-6 font-slab">{{ char_array[loop.index - 1] }}</p></p>
                             <input
                                     type="radio"
                                     name="radio_option"
