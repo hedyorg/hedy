@@ -72,6 +72,7 @@ class Course:
     assignment_values = {
       "level": str(level),
     }
+    assignment_values.update(**self.defaults.get_defaults(int(level)))
 
     # If we don't have any "assignments", return a default Assignment object
     # based off the level and the level defaults. This is used in the Hedy main

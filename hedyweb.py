@@ -37,6 +37,8 @@ class Translations:
 
 def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
 
+  #get_assignment actually gets the default level text!!!*introtext*!!!
+  assignment = course.get_assignment(level_number, assignment_number)
 
   if not assignment:
     abort(404)
