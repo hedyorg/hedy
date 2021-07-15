@@ -440,7 +440,10 @@ def get_quiz(level_source, question_nr):
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
-        quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
+           return 'No quiz yaml file found for this level', 404
 
         # set globals
         g.lang = lang = requested_lang()
@@ -480,7 +483,10 @@ def submit_answer(level_source, question_nr):
         option = request.form["radio_option"]
 
         # Reading yaml file
-        quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
+            return 'No quiz yaml file found for this level', 404
 
         #Convert question_nr to an integer
         q_nr = int(question_nr)
