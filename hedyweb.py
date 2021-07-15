@@ -38,11 +38,15 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, sublevel, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+
+  sublevel = None
+  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
+    sublevel     = int (level_number [level_number.index ('-') + 1])
+    level_number = int (level_number [0:level_number.index ('-')])
 
   #get_assignment actually gets the default level text!!!*introtext*!!!
-
-  assignment = course.get_assignment(level_number, assignment_number, sublevel)
+  assignment = course.get_assignment(level_number, assignment_number)
 
   if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
     quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
@@ -63,6 +67,7 @@ def render_assignment_editor(request, course, level_number, sublevel, assignment
   # Meta stuff
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
+  arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
   arguments_dict['lang'] = course.language
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
