@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
 from functools import wraps
 from config import config
@@ -312,7 +312,7 @@ def routes (app, database, requested_lang):
         if not isinstance (body, dict):
             return 'body must be an object', 400
         if 'email' in body:
-            if not isinstance (body.get( 'email'), str):
+            if not isinstance (body.get('email'), str):
                 return 'body.email must be a string', 400
             if not valid_email (body ['email']):
                 return 'body.email must be a valid email', 400
@@ -369,13 +369,16 @@ def routes (app, database, requested_lang):
     @requires_login
     def get_profile (user):
         output = {'username': user ['username'], 'email': user ['email']}
-        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages', 'classes']:
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
             if field in user:
                 output [field] = user [field]
         if 'verification_pending' in user:
             output ['verification_pending'] = True
-        if not 'classes' in output:
-            output ['classes'] = []
+
+        output ['student_classes'] = DATABASE.get_student_classes (user ['username'])
+        if bool ('is_teacher' in user and user ['is_teacher']):
+            output ['teacher_classes'] = DATABASE.get_teacher_classes (user ['username'])
+
         output ['session_expires_at'] = timems () + session_length * 1000
 
         return jsonify (output), 200
@@ -554,7 +557,6 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        # TODO: if teacher, load classes // if student, load classes
         return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
         return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')
@@ -576,9 +578,9 @@ def auth_templates (page, lang, menu, request):
                     data [field] = None
             data ['email_verified'] = not bool (data ['verification_pending'])
             data ['is_teacher']     = bool (data ['is_teacher'])
-            data ['created'] = datetime.datetime.fromtimestamp (int (str (data ['created']) [:-3])).isoformat ()
+            data ['created'] = mstoisostring (data ['created'])
             if data ['last_login']:
-                data ['last_login'] = datetime.datetime.fromtimestamp (int (str (data ['last_login']) [:-3])).isoformat ()
+                data ['last_login'] = mstoisostring (data ['last_login'])
             userdata.append (data)
 
         userdata.sort(key=lambda user: user ['created'], reverse=True)
@@ -587,4 +589,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())

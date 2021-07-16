@@ -1,21 +1,17 @@
-from website.auth import requires_login, is_teacher
+from website.auth import requires_login, is_teacher, current_user
 import utils
 import uuid
 from flask import request, jsonify, redirect
+from flask_helpers import render_template
+import os
+import hedyweb
+TRANSLATIONS = hedyweb.Translations ()
 
 def routes (app, database, requested_lang):
     global DATABASE
     DATABASE = database
 
-    @app.route('/classes', methods=['GET'])
-    @requires_login
-    def get_classes (user):
-        if not is_teacher (request):
-            return 'Only teachers can retrieve classes', 403
-        classes = DATABASE.get_classes (user ['username'])
-        if utils.is_testing_request (request):
-            return jsonify (classes)
-        # TODO add templating
+    from app import render_main_menu
 
     @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
@@ -37,12 +33,12 @@ def routes (app, database, requested_lang):
                 if not program.get ('public'):
                     continue
                 if not latest_shared or latest_shared ['date'] < program ['date']:
-                    latest_shared = program
-            students.append ({'username': student_username, 'last_login': student ['last_login'], 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
+                    latest_shared = os.getenv ('BASE_URL') + '/hedy/' + str (program ['level']) + '/' + program ['id'] + '?lang=' + requested_lang ()
+            students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
-            return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name']})
-        # TODO add templating
+            return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/prejoin/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -102,6 +98,15 @@ def routes (app, database, requested_lang):
 
         return {}, 200
 
+    @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
+    @requires_login
+    def prejoin_class (user, class_id, link):
+        Class = DATABASE.get_class (class_id)
+        if not Class or Class ['link'] != link:
+            return 'No such class', 404
+
+        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
+
     @app.route('/class/<class_id>/join/<link>', methods=['GET'])
     @requires_login
     def join_class (user, class_id, link):
@@ -111,7 +116,7 @@ def routes (app, database, requested_lang):
 
         DATABASE.add_student_to_class (Class, user ['username'])
 
-        return redirect(request.url.replace('/class/' + class_id + '/join/' + link, '/profile'), code=302)
+        return redirect(request.url.replace('/class/' + class_id + '/join/' + link, '/my-profile'), code=302)
 
     @app.route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login

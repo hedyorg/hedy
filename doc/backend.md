@@ -104,14 +104,10 @@
 
 ### Classes
 
-- `GET /classes`
-   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
-   - Returns a list of classes owned by the user inside a template.
-
 - `GET /class/ID`
    - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
    - The class must be owned by the user, otherwise it returns 404.
-   - Returns a template containing a table, filled with the following information: `{name: STRING, link: STRING, students: [{username: STRING, last_login: INTEGER|UNDEFINED, programs: INTEGER, highest_level: INTEGER|UNDEFINED, latest_shared: PROGRAM|UNDEFINED}, ...]}`.
+   - Returns a template containing a table, filled with the following information: `{id: STRING, name: STRING, link: STRING, students: [{username: STRING, last_login: INTEGER|UNDEFINED, programs: INTEGER, highest_level: INTEGER|UNDEFINED, latest_shared: PROGRAM|UNDEFINED}, ...]}`.
 
 - `POST /class`
    - This route requires a session of an user that is marked as teacher, otherwise it returns 403.

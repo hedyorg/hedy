@@ -98,7 +98,7 @@ class Database:
             Database.remove_student_from_class (self, Class, username)
 
         # Delete classes owned by the user
-        for Class in Database.get_classes (self, username):
+        for Class in Database.get_teacher_classes (self, username):
             Database.delete_class (self, Class)
 
     def all_users(self):
@@ -113,13 +113,22 @@ class Database:
         """Return the total number of all users."""
         return USERS.item_count()
 
-    def get_classes(self, username):
-        """Return all the classes belonging to a teacher."""
-        return CLASSES.get_many({'teacher': username})
-
     def get_class(self, id):
         """Return the classes with given id."""
         return CLASSES.get({'id': id})
+
+    def get_teacher_classes(self, username):
+        """Return all the classes belonging to a teacher."""
+        return CLASSES.get_many({'teacher': username})
+
+    def get_student_classes(self, username):
+        """Return all the classes of which the user is a student."""
+        classes = []
+        for class_id in USERS.get({'username': username}).get ('classes') or []:
+            Class = Database.get_class (self, class_id)
+            classes.append ({'id': Class ['id'], 'name': Class ['name']})
+
+        return classes
 
     def store_class(self, Class):
         """Store a class."""

@@ -222,3 +222,6 @@ def atomic_write_file(filename, mode='wb'):
         yield f
 
     os.rename(tmp_file, filename)
+
+def mstoisostring(date):
+    return datetime.datetime.fromtimestamp (int (str (date) [:-3])).isoformat ()

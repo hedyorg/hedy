@@ -2,6 +2,9 @@ var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'A
 
 window.auth = {
   texts: {},
+  entityify: function (string) {
+      return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
+   },
   emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where) {
     where = '/' + where;
@@ -243,29 +246,39 @@ $ ('.auth input').get ().map (function (el) {
 
 $.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (function (response) {
   auth.texts = response;
-});
 
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+   $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
+     if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
 
-  auth.profile = response;
-  if ($ ('#profile').html ()) {
-    $ ('#username').html (response.username);
-    $ ('#email').val (response.email);
-    $ ('#birth_year').val (response.birth_year);
-    $ ('#gender').val (response.gender);
-    $ ('#country').val (response.country);
-    if (response.prog_experience) {
-      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
-      if (response.prog_experience === 'yes') $ ('#languages').show ();
-    }
-    (response.experience_languages || []).map (function (lang) {
-       $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
-    });
-  }
-}).fail (function (response) {
-  if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+     auth.profile = response;
+     if ($ ('#profile').html ()) {
+       $ ('#username').html (response.username);
+       $ ('#email').val (response.email);
+       $ ('#birth_year').val (response.birth_year);
+       $ ('#gender').val (response.gender);
+       $ ('#country').val (response.country);
+       if (response.prog_experience) {
+         $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+         if (response.prog_experience === 'yes') $ ('#languages').show ();
+       }
+       (response.experience_languages || []).map (function (lang) {
+          $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
+       });
+       $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class) {
+          return '<li>' + auth.entityify (Class.name) + '</li>';
+       }).join (''));
+       if (response.teacher_classes) {
+          $ ('#teacher_classes ul').html ((response.teacher_classes || []).map (function (Class) {
+             return '<li><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a> (' + Class.students.length + ' ' + window.auth.texts.students + ')</li>';
+          }).join (''));
+          $ ('#teacher_classes').show ();
+          $ ('#student_classes').hide ();
+       }
+     }
+   }).fail (function (response) {
+     if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+   });
 });
 
 if (window.location.pathname === '/reset') {

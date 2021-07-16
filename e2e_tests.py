@@ -265,18 +265,18 @@ def retrieveProgramsAfter (state, response, username):
     if not 'level' in program or program ['level'] != 1:
         raise Exception ('Invalid program.level')
 
-def getClasses0 (state, response, username):
-    if not isinstance (response ['body'], list):
+def getTeacherClasses1 (state, response, username):
+    if not isinstance (response ['body'] ['teacher_classes'], list):
         raise Exception ('Classes should be a list')
-    if len (response ['body']) != 0:
+    if len (response ['body'] ['teacher_classes']) != 0:
         raise Exception ('Classes should be empty')
 
-def getClasses1 (state, response, username):
-    if not isinstance (response ['body'], list):
+def getTeacherClasses2 (state, response, username):
+    if not isinstance (response ['body'] ['teacher_classes'], list):
         raise Exception ('Classes should be a list')
-    if len (response ['body']) != 1:
+    if len (response ['body'] ['teacher_classes']) != 1:
         raise Exception ('Classes should contain one class')
-    Class = response ['body'] [0]
+    Class = response ['body'] ['teacher_classes'] [0]
     if not isinstance (Class.get ('date'), int):
         raise Exception ('Class should contain date')
     if not isinstance (Class.get ('id'), str):
@@ -292,7 +292,7 @@ def getClasses1 (state, response, username):
     if Class.get ('teacher') != 'teacher-' + username:
         raise Exception ('Invalid teacher')
 
-    state ['classes'] = response ['body']
+    state ['classes'] = response ['body'] ['teacher_classes']
 
 def getClass1 (state, response, username):
     Class = response ['body']
@@ -300,6 +300,8 @@ def getClass1 (state, response, username):
         raise Exception ('Invalid response body')
     if not isinstance (Class.get ('link'), str):
         raise Exception ('Class should contain link')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
     if Class.get ('name') != 'class1':
         raise Exception ('Invalid class name')
     if not isinstance (Class.get ('students'), list):
@@ -307,18 +309,20 @@ def getClass1 (state, response, username):
     if len (Class.get ('students')) != 0:
         raise Exception ('Student list should be empty')
 
-def getClasses2 (state, response, username):
-    if not isinstance (response ['body'], list):
+def getTeacherClasses3 (state, response, username):
+    if not isinstance (response ['body'] ['teacher_classes'], list):
         raise Exception ('Classes should be a list')
-    if len (response ['body']) != 1:
+    if len (response ['body'] ['teacher_classes']) != 1:
         raise Exception ('Classes should contain one class')
-    Class = response ['body'] [0]
+    Class = response ['body'] ['teacher_classes'] [0]
     if not isinstance (Class.get ('date'), int):
         raise Exception ('Class should contain date')
     if not isinstance (Class.get ('id'), str):
         raise Exception ('Class should contain id')
     if not isinstance (Class.get ('link'), str):
         raise Exception ('Class should contain link')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
     if Class.get ('name') != 'class_renamed':
         raise Exception ('Invalid class name')
     if not isinstance (Class.get ('students'), list):
@@ -334,6 +338,8 @@ def getClass2 (state, response, username):
         raise Exception ('Invalid response body')
     if not isinstance (Class.get ('link'), str):
         raise Exception ('Class should contain link')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
     if Class.get ('name') != 'class_renamed':
         raise Exception ('Invalid class name')
     if not isinstance (Class.get ('students'), list):
@@ -342,17 +348,24 @@ def getClass2 (state, response, username):
         raise Exception ('Student list should be empty')
 
 def redirectAfterJoin1 (state, response, username):
-    if not re.search ('http://localhost:5000/profile', response ['body']):
+    if not re.search ('http://localhost:5000/my-profile', response ['body']):
         raise Exception ('Invalid redirect')
 
-def getProfileClass1 (state, response, username):
-    classes = response ['body'].get ('classes')
+def getStudentClasses1 (state, response, username):
+    classes = response ['body'].get ('student_classes')
     if not isinstance (classes, list):
         raise Exception ('Invalid classes list')
     if len (classes) != 1:
         raise Exception ('Class list should contain one item')
-    if classes [0] != state ['classes'] [0] ['id']:
+    Class = classes [0]
+    if not isinstance (Class, dict):
+        raise Exception ('Invalid class')
+    if Class ['id'] != state ['classes'] [0] ['id']:
         raise Exception ('Invalid class id')
+    if Class ['name'] != 'class_renamed':
+        raise Exception ('Invalid class name')
+    if len (Class.keys ()) != 2:
+        raise Exception ('Too many fields contained in class')
 
 def getClass3 (state, response, username):
     students = response ['body'].get ('students')
@@ -367,13 +380,13 @@ def getClass3 (state, response, username):
         raise Exception ('student.programs should be 0')
     if student.get ('latest_shared') != None:
         raise Exception ('student.latest_shared should be None')
-    if not isinstance (student.get ('last_login'), int):
-        raise Exception ('student.last_login should be an integer')
+    if not isinstance (student.get ('last_login'), str):
+        raise Exception ('student.last_login should be a string')
     if student.get ('username') != 'student-' + username:
         raise Exception ('Invalid student username')
 
-def getProfileClass2 (state, response, username):
-    classes = response ['body'].get ('classes')
+def getStudentClasses2 (state, response, username):
+    classes = response ['body'].get ('student_classes')
     if not isinstance (classes, list):
         raise Exception ('Invalid classes list')
     if len (classes) != 0:
@@ -444,17 +457,16 @@ def suite (username):
         # Classes
         ['valid signup as student', 'post', '/auth/signup', {}, {'username': 'student-' + username, 'password': 'foobar', 'email': 'student-' + username + '@e2e-testing.com'}, 200, successfulSignupStudent],
         ['valid signup as teacher', 'post', '/auth/signup', {}, {'username': 'teacher-' + username, 'password': 'foobar', 'email': 'teacher-' + username + '@e2e-testing.com'}, 200, successfulSignupTeacher],
-        ['get classes without being a teacher', 'get', '/classes', {}, {}, 403],
         ['create class without being a teacher', 'post', '/class', {}, {'name': 'class1'}, 403],
         ['mark teacher user as teacher', 'post', '/admin/markAsTeacher', {}, {'username': 'teacher-' + username, 'is_teacher': True}, 200],
-        ['get classes before creating a class', 'get', '/classes', {}, {}, 200, getClasses0],
+        ['get classes before creating a class', 'get', '/profile', {}, {}, 200, getTeacherClasses1],
         invalidMap ('create class', 'post', '/class', ['', [], {}, {'name': 1}, {'name': ['foobar']}]),
         ['create class', 'post', '/class', {}, {'name': 'class1'}, 200],
-        ['get classes after creating a class', 'get', '/classes', {}, {}, 200, getClasses1],
+        ['get classes after creating a class', 'get', '/profile', {}, {}, 200, getTeacherClasses2],
         ['get empty class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass1],
         invalidMap ('update class', 'put', lambda state: '/class/' + state ['classes'] [0] ['id'], ['', [], {}, {'name': 1}, {'name': ['foobar']}]),
         ['update class', 'put', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {'name': 'class_renamed'}, 200],
-        ['get classes after renaming a class', 'get', '/classes', {}, {}, 200, getClasses2],
+        ['get classes after renaming a class', 'get', '/profile', {}, {}, 200, getTeacherClasses3],
         ['get renamed class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
         ['join class as non-logged in user', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], lambda state: {'cookie': 'foo'}, {}, 403],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
@@ -462,7 +474,7 @@ def suite (username):
         ['join class with invalid link', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + 'foo', {}, {}, 404],
         ['join class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
         ['join class again (idempotent call)', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
-        ['get profile after joining class', 'get', '/profile', {}, {}, 200, getProfileClass1],
+        ['get profile after joining class', 'get', '/profile', {}, {}, 200, getStudentClasses1],
         ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['get class with a student', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass3],
         ['remove non-existing student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'foo', {}, {}, 200],
@@ -470,14 +482,14 @@ def suite (username):
         ['remove student from class again (idempotent call)', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
         ['get class that is now again empty', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
-        ['get profile after being removed from class', 'get', '/profile', {}, {}, 200, getProfileClass2],
+        ['get profile after being removed from class', 'get', '/profile', {}, {}, 200, getStudentClasses2],
         ['join class again', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
         ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['delete class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200],
-        ['get classes after deleting the class', 'get', '/classes', {}, {}, 200, getClasses0],
+        ['get classes after deleting the class', 'get', '/profile', {}, {}, 200, getTeacherClasses1],
         ['destroy teacher account', 'post', '/auth/destroy', {}, {}, 200],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
-        ['get profile after class being deleted', 'get', '/profile', {}, {}, 200, getProfileClass2],
+        ['get profile after class being deleted', 'get', '/profile', {}, {}, 200, getStudentClasses2],
         ['destroy student account', 'post', '/auth/destroy', {}, {}, 200],
     ]
 
