@@ -40,7 +40,10 @@ class Course:
     })
     self.docs.load_dir(f'coursedata/course/{course_name}/docs-{language}')
     self._validated = False
-
+    custom = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('custom')
+    self.custom = False if custom is None else custom
+    adventures = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('adventures')
+    self.adventures = False if adventures is None else adventures
 
   @property
   def course(self):
@@ -94,7 +97,6 @@ class Course:
     return Assignment(**assignment_values)
 
   def validate_course(self):
-    return True
     """Check that the 'level' and 'step' fields have the right number in the entire course.
 
     This information is redundant, but it helps the human locate their way in the YAML file.
