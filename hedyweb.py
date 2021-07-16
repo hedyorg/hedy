@@ -62,12 +62,11 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   if not assignment:
     abort(404)
 
-  #if this is a custom course (such as online masters)
-  # filter the tabs on only the ones named in the yaml
+  # #if this is a custom course (such as online masters)
+  # # filter the tabs on only the ones named in the yaml
   d = course.course[0]
-  if d['custom']:
-    print('koekoek')
-
+  if 'custom' in d.keys():
+    adventure_assignments = [x for x in adventure_assignments if x['short_name'] in d['adventures']]
 
   arguments_dict = {}
 
