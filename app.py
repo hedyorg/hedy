@@ -47,7 +47,8 @@ ALL_LANGUAGES = {
     'sw': 'Swahili',
     'hu': 'Magyar',
     'el': 'Ελληνικά',
-    "zh": "简体中文"
+    "zh": "简体中文",
+    'cs': 'Čeština'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
