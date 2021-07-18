@@ -266,7 +266,7 @@ class MemoryStorage(TableStorage):
         if filename:
             try:
                 with open(filename, 'r') as f:
-                    self.tables = json.load(f)
+                    self.tables = json.load(f, object_hook=CustomEncoder.decode_object)
             except IOError:
                 pass
             except json.decoder.JSONDecodeError as e:
@@ -363,7 +363,7 @@ class MemoryStorage(TableStorage):
         if self.filename:
             try:
                 with open(self.filename, 'w') as f:
-                    json.dump(self.tables, f, indent=2)
+                    json.dump(self.tables, f, indent=2, cls=CustomEncoder)
             except IOError:
                 pass
 
@@ -444,4 +444,20 @@ def replace_decimals(obj):
         else:
             return float(obj)
     else:
+        return obj
+
+
+class CustomEncoder(json.JSONEncoder):
+    """An encoder that serializes non-standard types like sets."""
+    def default(self, obj):
+        if isinstance(obj, set):
+            return {"$type": "set", "elements": list(obj)}
+        return json.JSONEncoder.default(self, obj)
+
+
+    @staticmethod
+    def decode_object(obj):
+        """The decoding for the encoding above."""
+        if obj.get('$type') == 'set':
+            return set(obj['elements'])
         return obj

@@ -1,5 +1,7 @@
 from website import dynamo
 import unittest
+import os
+import contextlib
 
 class TestDynamoAbstraction(unittest.TestCase):
   def setUp(self):
@@ -42,3 +44,33 @@ class TestDynamoAbstraction(unittest.TestCase):
       self.table.update(dict(id='key'), dict(
         values=dynamo.DynamoAddToStringSet('x', 'y'),
       ))
+
+  def test_sets_are_serialized_properly(self):
+    """Test that adding to a set and removing from a set works."""
+    with with_clean_file('test.json'):
+      table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id')
+      table.create(dict(
+        id='key',
+        values=set(['a', 'b', 'c']),
+      ))
+
+      table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id')
+      final = table.get(dict(id='key'))
+      self.assertEqual(final['values'], set(['a', 'b', 'c']))
+
+
+def try_to_delete(filename):
+  if os.path.exists(filename):
+    os.unlink(filename)
+
+@contextlib.contextmanager
+def with_clean_file(filename):
+  """Remove file before starting, and after running.
+
+  Intended for tempfiles used in tests.
+  """
+  try_to_delete(filename)
+  try:
+    yield
+  finally:
+    try_to_delete(filename)
