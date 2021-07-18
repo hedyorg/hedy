@@ -21,7 +21,11 @@
   }
 
   // a variable which turns on(1) highlighter or turns it off(0)
+<<<<<<< Updated upstream
   var highlighter = 1 ;
+=======
+  var highlighter = 1;
+>>>>>>> Stashed changes
 
   if (highlighter == 1){
         if (window.State.level == 1){
