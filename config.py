@@ -34,4 +34,6 @@ config = {
         'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
         'region': 'eu-west-1'
     },
+    #enables the quiz environment by setting the config variable on True
+    'quiz-enabled': True,
 }
