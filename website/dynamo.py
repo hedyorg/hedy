@@ -310,6 +310,16 @@ class MemoryStorage(TableStorage):
             if isinstance(update, DynamoUpdate):
                 if isinstance(update, DynamoIncrement):
                     record[name] = record.get(name, 0) + update.delta
+                elif isinstance(update, DynamoAddToStringSet):
+                    existing = record.get(name, set())
+                    if not isinstance(existing, set):
+                        raise TypeError(f'Expected a set in {name}, got: {existing}')
+                    record[name] = existing | set(update.elements)
+                elif isinstance(update, DynamoRemoveFromStringSet):
+                    existing = record.get(name, set())
+                    if not isinstance(existing, set):
+                        raise TypeError(f'Expected a set in {name}, got: {existing}')
+                    record[name] = existing - set(update.elements)
                 else:
                     raise RuntimeError(f'Unsupported update type for in-memory database: {update}')
             elif update is None:
@@ -386,6 +396,29 @@ class DynamoIncrement(DynamoUpdate):
         return {
                 'Action': 'ADD',
                 'Value': { 'N': str(self.delta) },
+            }
+
+class DynamoAddToStringSet(DynamoUpdate):
+    """Add one or more elements to a string set."""
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def to_dynamo(self):
+        return {
+                'Action': 'ADD',
+                'Value': { 'SS': list(self.elements) },
+            }
+
+
+class DynamoRemoveFromStringSet(DynamoUpdate):
+    """Remove one or more elements to a string set."""
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def to_dynamo(self):
+        return {
+                'Action': 'DELETE',
+                'Value': { 'SS': list(self.elements) },
             }
 
 def replace_decimals(obj):
