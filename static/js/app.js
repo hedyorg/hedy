@@ -5,142 +5,123 @@
     window.State = {};
   }
 
-  // If there's no #editor div, we're requiring this code in a non-code page.
-  // Therefore, we don't need to initialize anything.
-  const $editor = $('#editor');
-  if (!$editor.length) return;
-
   // *** EDITOR SETUP ***
-  // We expose the editor globally so it's available to other functions for resizing
-  var editor = window.editor = ace.edit("editor");
-  editor.setTheme("ace/theme/monokai");
+  initializeMainEditor($('#editor'));
 
-  // Editor could have been initialized as readonly
-  if ($editor.data('readonly')) {
-    editor.setReadOnly(true);
+  // Any code blocks we find inside 'turn-pre-into-ace' get turned into
+  // read-only editors (for syntax highlighting)
+  for (const preview of $('.turn-pre-into-ace pre').get()) {
+    $(preview).addClass('text-lg rounded');
+    const editor = turnIntoAceEditor(preview, true)
+    // Fits to content size
+    editor.setOptions({ maxLines: Infinity });
+    // Strip trailing newline, it renders better
+    editor.setValue(editor.getValue().replace(/\n+$/, ''), -1);
   }
 
-  // a variable which turns on(1) highlighter or turns it off(0)
-  var highlighter = 0;
+  /**
+   * Initialize the main editor and attach all the required event handlers
+   */
+  function initializeMainEditor($editor) {
+    if (!$editor.length) return;
 
-  if (highlighter == 1){
-        if (window.State.level == 1){
-          window.editor.session.setMode("ace/mode/level1");
-        }
-        if (window.State.level == 2){
-          window.editor.session.setMode("ace/mode/level2");
-        }
-        if (window.State.level == 3){
-          window.editor.session.setMode("ace/mode/level3");
-        }
-        if (window.State.level == 4){
-          window.editor.session.setMode("ace/mode/level4");
-        }
-        if (window.State.level == 5){
-          window.editor.session.setMode("ace/mode/level5");
-        }
-        if (window.State.level == 6){
-          window.editor.session.setMode("ace/mode/level6");
-        }
-        if (window.State.level == 7){
-          window.editor.session.setMode("ace/mode/level7");
-        }
-        if (window.State.level == 8 || window.State.level == 9){
-          window.editor.session.setMode("ace/mode/level8and9");
-        }
-        if (window.State.level == 10){
-          window.editor.session.setMode("ace/mode/level10");
-        }
-        if (window.State.level == 11){
-          window.editor.session.setMode("ace/mode/level11");
-        }
-        if (window.State.level == 12){
-          window.editor.session.setMode("ace/mode/level12");
-        }
-        if (window.State.level == 13){
-          window.editor.session.setMode("ace/mode/level13");
-        }
-        if (window.State.level == 14){
-          window.editor.session.setMode("ace/mode/level14");
-        }
-        if (window.State.level == 15){
-          window.editor.session.setMode("ace/mode/level15");
-        }
-        if (window.State.level == 16){
-          window.editor.session.setMode("ace/mode/level16");
-        }
-        if (window.State.level == 17 || window.State.level == 18){
-          window.editor.session.setMode("ace/mode/level17and18");
-        }
-        if (window.State.level == 19){
-          window.editor.session.setMode("ace/mode/level19");
-        }
-        if (window.State.level == 20){
-          window.editor.session.setMode("ace/mode/level20");
-        }
-        if (window.State.level == 21 || window.State.level == 22){
-          window.editor.session.setMode("ace/mode/level21and22");
-        }
-  }
+    // We expose the editor globally so it's available to other functions for resizing
+    var editor = window.editor = turnIntoAceEditor($editor.get(0), $editor.data('readonly'));
 
+    // Load existing code from session, if it exists
+    const storage = window.sessionStorage;
+    if (storage) {
+      const levelKey = $editor.data('lskey');
+      const loadedProgram = $editor.data('loaded-program');
 
-  // Load existing code from session, if it exists
-  const storage = window.sessionStorage;
-  if (storage) {
-    const levelKey = $editor.data('lskey');
-    const loadedProgram = $editor.data('loaded-program');
+      // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+      if (loadedProgram !== 'True' && storage.getItem(levelKey)) {
+        editor.setValue(storage.getItem(levelKey), 1);
+      }
 
-    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-    if (loadedProgram !== 'True' && storage.getItem(levelKey)) {
-      editor.setValue(storage.getItem(levelKey), 1);
-    }
+      // When the user exits the editor, save what we have.
+      editor.on('blur', function(e) {
+        storage.setItem(levelKey, editor.getValue());
+      });
 
-    // When the user exits the editor, save what we have.
-    editor.on('blur', function(e) {
-      storage.setItem(levelKey, editor.getValue());
-    });
-
-    // If prompt is shown and user enters text in the editor, hide the prompt.
-    editor.on('change', function () {
-      if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
-      window.State.disable_run = false;
-      $ ('#runit').css('background-color', '');
-      window.State.unsaved_changes = true;
-    });
-  }
-
-  // *** PROMPT TO SAVE CHANGES ***
-
-  window.onbeforeunload = function () {
-     // The browser doesn't show this message, rather it shows a default message.
-     // We still have an internationalized message in case we want to implement this as a modal in the future.
-     if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
-  };
-
-  // *** KEYBOARD SHORTCUTS ***
-
-  let altPressed;
-
-  // alt is 18, enter is 13
-  window.addEventListener ('keydown', function (ev) {
-    const keyCode = (ev || document.event).keyCode;
-    if (keyCode === 18) return altPressed = true;
-    if (keyCode === 13 && altPressed) {
-      runit (window.State.level, window.State.lang, function () {
-        $ ('#output').focus ();
+      // If prompt is shown and user enters text in the editor, hide the prompt.
+      editor.on('change', function () {
+        if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+        window.State.disable_run = false;
+        $ ('#runit').css('background-color', '');
+        window.State.unsaved_changes = true;
       });
     }
-    // We don't use jquery because it doesn't return true for this equality check.
-    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-      editor.focus ();
-      editor.navigateFileEnd ();
-    }
-  });
-  window.addEventListener ('keyup', function (ev) {
-    const keyCode = (ev || document.event).keyCode;
-    if (keyCode === 18) return altPressed = false;
-  });
 
+    // *** PROMPT TO SAVE CHANGES ***
+
+    window.onbeforeunload = function () {
+       // The browser doesn't show this message, rather it shows a default message.
+       // We still have an internationalized message in case we want to implement this as a modal in the future.
+       if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
+    };
+
+    // *** KEYBOARD SHORTCUTS ***
+
+    let altPressed;
+
+    // alt is 18, enter is 13
+    window.addEventListener ('keydown', function (ev) {
+      const keyCode = (ev || document.event).keyCode;
+      if (keyCode === 18) return altPressed = true;
+      if (keyCode === 13 && altPressed) {
+        runit (window.State.level, window.State.lang, function () {
+          $ ('#output').focus ();
+        });
+      }
+      // We don't use jquery because it doesn't return true for this equality check.
+      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+        editor.focus ();
+        editor.navigateFileEnd ();
+      }
+    });
+    window.addEventListener ('keyup', function (ev) {
+      const keyCode = (ev || document.event).keyCode;
+      if (keyCode === 18) return altPressed = false;
+    });
+  }
+
+  /**
+   * Turn an HTML element into an Ace editor
+   */
+  function turnIntoAceEditor(element, isReadOnly) {
+    const editor = ace.edit(element);
+    editor.setTheme("ace/theme/monokai");
+    if (isReadOnly) {
+      editor.setOptions({
+        readOnly: true,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
+    }
+
+    // a variable which turns on(1) highlighter or turns it off(0)
+    var highlighter = 1;
+
+    if (highlighter == 1) {
+      // Everything turns into 'ace/mode/levelX', except what's in
+      // this table.
+      const modeExceptions = {
+        8: 'ace/mode/level8and9',
+        9: 'ace/mode/level8and9',
+        17: 'ace/mode/level17and18',
+        18: 'ace/mode/level17and18',
+        21: 'ace/mode/level21and22',
+        22: 'ace/mode/level21and22',
+      };
+
+      const mode = modeExceptions[window.State.level] || `ace/mode/level${window.State.level}`;
+      editor.session.setMode(mode);
+    }
+
+    return editor;
+  }
 })();
 
 function reloadOnExpiredSession () {
