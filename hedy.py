@@ -5,6 +5,11 @@ from os import path
 import sys
 import utils
 
+
+# Some usefull constants
+HEDY_MAX_LEVEL = 15
+
+
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
 #

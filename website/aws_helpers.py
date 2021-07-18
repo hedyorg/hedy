@@ -5,6 +5,7 @@ import json
 import logging
 import config
 import utils
+import threading
 
 
 def s3_querylog_transmitter_from_env():
@@ -29,13 +30,21 @@ def s3_parselog_transmitter_from_env():
     return make_s3_transmitter(config.config['s3-parse-logs'])
 
 
+
+# The 'boto3.client' method is not thread safe: https://github.com/boto/boto3/issues/1592
+#
+# Put a lock around it to make sure that when both log queues try to get an S3 client at the
+# same time, they don't trample on each other.
+BOTO3_LOCK = threading.Lock()
+
 def make_s3_transmitter(s3config):
     """Make a transmitter function (for use with a LogQueue) which will save records to S3."""
     def transmit_to_s3(timestamp, records):
         """Transmit logfiles to S3 with default config."""
 
         # No need to configure credentials, we've already confirmed they are in the environment.
-        s3 = boto3.client('s3', region_name=s3config['region'])
+        with BOTO3_LOCK:
+            s3 = boto3.client('s3', region_name=s3config['region'])
 
         # Grouping in the key is important, we need this to zoom into an interesting
         # log period.
