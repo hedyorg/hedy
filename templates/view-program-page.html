@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
-  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8"></script>
-  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript"></script>
-  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript"></script>
-  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
-  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/tabs.js')}}" type="text/javascript"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}
 
