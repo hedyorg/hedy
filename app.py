@@ -417,7 +417,7 @@ def programs_page (request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    if not config['quiz-enabled']:
+    if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         g.lang = lang = requested_lang()
@@ -436,25 +436,25 @@ def get_quiz_start(level):
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>', methods=['GET'])
 def get_quiz(level_source, question_nr):
-    if not config['quiz-enabled']:
+    if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
         if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
             quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
         else:
-           return 'No quiz yaml file found for this level', 404
+            return 'No quiz yaml file found for this level', 404
 
         # set globals
         g.lang = lang = requested_lang()
         g.prefix = '/hedy'
 
-        #Loop through the questions and check that the loop doesn't reach out of bounds
+        # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
         if q_nr <= len(quiz_data['questions']):
             question = quiz_data['questions'][q_nr - 1].get(q_nr)
 
-            #Convert the indices to the corresponding characters
+            # Convert the indices to the corresponding characters
             char_array = []
             for i in range(len(question['mp_choice_options'])):
                 char_array.append(chr(ord('@') + (i + 1)))
@@ -467,7 +467,8 @@ def get_quiz(level_source, question_nr):
                                    username=current_user(request)['username'],
                                    auth=TRANSLATIONS.data[requested_lang()]['Auth'])
         else:
-            return render_template('endquiz.html', correct=session.get('correct_answer'), total_score=session.get('total_score'),
+            return render_template('endquiz.html', correct=session.get('correct_answer'),
+                                   total_score=session.get('total_score'),
                                    menu=render_main_menu('adventures'), lang=lang,
                                    quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
                                    next_assignment=1, username=current_user(request)['username'],
@@ -476,10 +477,10 @@ def get_quiz(level_source, question_nr):
 
 @app.route('/submit_answer/<level_source>/<question_nr>', methods=["POST"])
 def submit_answer(level_source, question_nr):
-    if not config['quiz-enabled']:
+    if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
-        #Get the chosen option from the request form with radio buttons
+        # Get the chosen option from the request form with radio buttons
         option = request.form["radio_option"]
 
         # Reading yaml file
@@ -488,16 +489,16 @@ def submit_answer(level_source, question_nr):
         else:
             return 'No quiz yaml file found for this level', 404
 
-        #Convert question_nr to an integer
+        # Convert question_nr to an integer
         q_nr = int(question_nr)
 
-        #Convert the corresponding chosen option to the index of an option
+        # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
         index_option = ord(option.split("-")[1]) - 65
 
-        #If the correct answer is chosen, update the total score and the number of correct answered questions
+        # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
-            session['total_score'] = session.get('total_score')+ question['question_score']
+            session['total_score'] = session.get('total_score') + question['question_score']
             session['correct_answer'] = session.get('correct_answer') + 1
 
         # Loop through the questions

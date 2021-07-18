@@ -79,8 +79,9 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['adventure_assignments'] = adventure_assignments
   arguments_dict['adventure_name'] = adventure_name
   arguments_dict['quiz_data_level'] = quiz_data_level
-  arguments_dict['quiz_enabled'] = config['quiz-enabled']
+  arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
 
+  print(course.language == 'nl')
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
 
