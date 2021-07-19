@@ -5,7 +5,7 @@ adventures:
         name: "Uma história"
         description: "Cria uma história interactiva"
         image: "story.png"
-        default_save_name: "Story"
+        default_save_name: "História"
         levels:
             1:
                 story_text: |
@@ -21,50 +21,51 @@ adventures:
 
                     ## Código de exemplo Hedy
                     ```
-                    ask O personagem principal desta história é ...
-                    print O personagem principal vai caminhar agora na floresta
-                    echo He's a bit scared who ...
-                    print He hears crazy noises everywhere
-                    print He's afraid this is a haunted forest
+                    ask O(A) personagem principal desta história é ...
+                    print O(A) personagem principal vai caminhar agora na floresta
+                    echo Está um pouco(a) assustado(a) ...
+                    print Ouve barulhos estranhos por toda a parte
+                    print Receia que esta floresta seja assombrada
                     ```
 
-                    ## What's next?
-                    It is a pity that you can now only make sentences in which the main character is at the end of the sentence right? After practicing with this story, continue to level 2 and then to level 3, where you can make more and more complicated programs.
+                    ## O que se segue?
+                    É uma pena só conseguires criar frases em que o nome do personagem principal aparece no final, certo? Depois de praticarmos com esta história, prossegue para o nível 2 e, a seguir, para o nível 3, onde podes criar programas cada vez mais complexos.
 
-                start_code: "print Your story starts here"
+                start_code: "print A tua história começa aqui"
             2:
                 story_text: |
-                    ## Story in level 2
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    ## História no nível 2
+                    No nível 2 podes tornar a tua história ainda mais divertida. O nome da tua personagem principal pode agora aparecer em qualquer parte da frase.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    Precisas de programar algumas coisas extra, para conseguires isso. Tens de atribuir o nome ao teu personagem principal, primeiro de tudo.
 
-                    You can then put that name anywhere in a sentence.
+                    Depois, podes colocar esse nome em qualquer lugar da frase.
 
-                    ## Example Hedy code
+                    ## Código de exemplo Hedy
 
                     ```
-                    name is ask What is the name of the main character?
-                    print name is now going to run in the woods
-                    print name is a bit scared
-                    print He hears crazy noises everywhere
-                    print name is afraid this is a haunted forest
+                    nome is ask Qual é o nome da tua personagem principal?
+                    print nome vai agora correr na floresta
+                    print nome está um pouco assustado(a)
+                    print Está a ouvir barulhos estranhos por toda a parte
+                    print nome receia que esta floresta seja assombrada
                     ```
 
-                    ## Randomness
-                    You can also add something random to your story. Any monster, animal or other obstacle.
+                    ## Aleatoriedade
+                    Podes também acrescentar algo aleatório à tua história. Pode ser um monstro, um animal ou qualquer outro obstáculo.
 
-                    It goes like this:
+                    Podemos fazê-lo da seguinte maneira:
                     ```
-                    animals is owl, hedgehog, armadillo
-                    print He now hears the sound of an animal at random
+                    animais is coruja, cobra, raposa
+                    print Agora consegue ouvir o barulho de uma animais at random
                     ```
 
-                    ## What's next?
-                    Did you happen to try to make a sentence that contained the word name?
-                    E.g. `print my name is name`. Give it a try if you haven't already.
+                    ## O que se segue?
+                    Tentaste criar uma frase que continha a palavra nome?
+                    E.g. `print o meu nome é nome`. Tenta fazê-lo, se ainda não tentaste.
 
-                    That does not work properly, it will print my Henk is Henk. You can solve that in level 3.
+                    Não funciona como seria de esperar, vai escrever o meu Manuel é Manuel. Vais conseguir resolver isto no nível 3.
+                    
                 start_code: "print Your story"
             3:
                 story_text: |
