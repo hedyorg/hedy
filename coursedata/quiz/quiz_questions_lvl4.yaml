@@ -14,8 +14,8 @@ questions:
   - 2:
       question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam?"
       code: |-
-      naam is ask Hoe heet je?
-      if naam is Hedy print 'leuk' else print 'minder leuk'
+        naam is ask Hoe heet je?
+        if naam is Hedy print 'leuk' else print 'minder leuk'
       mp_choice_options:
         - { option_text: "leuk", code: , feedback: "Klopt!" }
         - { option_text: "minder leuk", code: , feedback: "Als de naam Hedy is, zegt Hedy juist 'leuk'" }
@@ -27,8 +27,8 @@ questions:
   - 3: 
       question_text: "Wat is het goede wachtwoord?"
       code: |-
-      wachtwoord is ask Wat is het wachtwoord?
-      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+        wachtwoord is ask Wat is het wachtwoord?
+        if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
       mp_choice_options:
         - { option_text: "Goed", code: , feedback: "Goed wordt geprint als je het juiste wachtwoord invult, maar het is niet het wachtwoord" }
         - { option_text: "GEHEIM", code: , feedback: "Klopt!'" }
@@ -40,8 +40,8 @@ questions:
   - 4: 
       question_text: "Wat wordt print Hedy als je een fout wachtwoord intypt?"
       code: |-
-      wachtwoord is ask Wat is het wachtwoord?
-      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+        wachtwoord is ask Wat is het wachtwoord?
+        if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
       mp_choice_options:
         - { option_text: "Goed", code: , feedback: "Dat wordt geprint bij een goed antwoord, niet bij een foute.." }
         - { option_text: "GEHEIM", code: , feedback: "Dat is het juiste wachtwoord." }
@@ -53,8 +53,8 @@ questions:
   - 5: 
       question_text: "Waarom zegt Hedy 'ALARM! INDRINGER!' als je 'geheim' antwoordt op de vraag?"
       code: |-
-      wachtwoord is ask Wat is het wachtwoord?
-      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+        wachtwoord is ask Wat is het wachtwoord?
+        if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
       mp_choice_options:
         - { option_text: "Omdat je het in hoofdletters moet typen, dus GEHEIM", code: , feedback: "Klopt!" }
         - { option_text: "Omdat het wachtwoord 'alarm' is", code: , feedback: "Nee, dat is niet het wachtwoord." }
@@ -65,8 +65,7 @@ questions:
       question_score: 10
    - 6: 
       question_text: "vraag"
-      code: |-
-
+      code: "..."
       mp_choice_options:
         - { option_text: "Omdat je het in hoofdletters moet typen, dus GEHEIM", code: , feedback: "Klopt!" }
         - { option_text: "Omdat het wachtwoord 'alarm' is", code: , feedback: "Nee, dat is niet het wachtwoord." }
