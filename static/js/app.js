@@ -551,6 +551,7 @@ function buildUrl(url, params) {
   }
 
   if (!window.speechSynthesis) { return; /* No point in even trying */ }
+  if (!window.State.lang) { return; /* Not on a code page */ }
 
   /**
    * Show the "speak" checkbox if we find that we have speech support for the

@@ -15,6 +15,13 @@
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="/error_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script>
+    window.State = {};
+    window.State.lang = "{{ lang }}";
+    window.State.level = "{{ level }}";
+    window.State.sublevel = {{ sublevel or 0 }};
+    window.State.level_title = "{{ level_title }}";
+  </script>
   <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
