@@ -4,10 +4,74 @@ questions:
       question_text: "Wat is waar?"
       code: "..."
       mp_choice_options:
-        - { option_text: "In level 3 werkt print anders", code: , feedback: "Correct, je hebt aanhalingstekens nodig" }
-        - { option_text: "In level 3 werkt ask anders dan in level 2", code: , feedback: "Ask werkt nog hetzelfde" }
-        - { option_text: "In level 3 werkt at random anders dan in level 2 ", code: , feedback: "At random werkt nog hetzelfde" }
-        - { option_text: "In level 3 werkt alles nog hetzelfde als in level 2", code: , feedback: "Nee, een commando is anders." }
+        - { option_text: "In level 4 werkt print anders dan in level 3", code: , feedback: "print werkt nog hetzelfde" }
+        - { option_text: "In level 4 werkt ask anders dan in level 3", code: , feedback: "ask werkt nog hetzelfde" }
+        - { option_text: "In level 4 werken print en ask anders dan in level 3 ", code: , feedback: "Nee hoor, ze werken hetzelfde!" }
+        - { option_text: "In level 4 werken print en ask nog hetzelfde als in level 3", code: , feedback: "Klopt!." }
+      correct_answer: "D"
+      hint: "Er is alleen een commando bijgekomen."
+      question_score: 10
+  - 2:
+      question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam?"
+      code: |-
+      naam is ask Hoe heet je?
+      if naam is Hedy print 'leuk' else print 'minder leuk'
+      mp_choice_options:
+        - { option_text: "leuk", code: , feedback: "Klopt!" }
+        - { option_text: "minder leuk", code: , feedback: "Als de naam Hedy is, zegt Hedy juist 'leuk'" }
+        - { option_text: "Hedy ", code: , feedback: "Nee, er staat niet print naam" }
+        - { option_text: "Error", code: , feedback: "Gelukkig niet!" }
       correct_answer: "A"
-      hint: "Je hebt vanaf level 3 aanhalingstekens nodig bij een commando."
+      hint: "Als je naam Hedy is, wat wordt er dan geprint..?"
+      question_score: 10
+  - 3: 
+      question_text: "Wat is het goede wachtwoord?"
+      code: |-
+      wachtwoord is ask Wat is het wachtwoord?
+      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+      mp_choice_options:
+        - { option_text: "Goed", code: , feedback: "Goed wordt geprint als je het juiste wachtwoord invult, maar het is niet het wachtwoord" }
+        - { option_text: "GEHEIM", code: , feedback: "Klopt!'" }
+        - { option_text: "wachtwoord ", code: , feedback: "het wachtwoord is niet wachtwoord" }
+        - { option_text: "ALARM INDRINGER", code: , feedback: "Dat wordt er geprint als je het foute antwoord intypt!" }
+      correct_answer: "B"
+      hint: "if wachtwoord is ... print 'Goed!'"
+      question_score: 10
+  - 4: 
+      question_text: "Wat wordt print Hedy als je een fout wachtwoord intypt?"
+      code: |-
+      wachtwoord is ask Wat is het wachtwoord?
+      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+      mp_choice_options:
+        - { option_text: "Goed", code: , feedback: "Dat wordt geprint bij een goed antwoord, niet bij een foute.." }
+        - { option_text: "GEHEIM", code: , feedback: "Dat is het juiste wachtwoord." }
+        - { option_text: "fout ", code: , feedback: "Nee, Hedy print wat anders..." }
+        - { option_text: "ALARM! INDRINGER!", code: , feedback: "Juist!" }
+      correct_answer: "D"
+      hint: "Als je een fout wachtwoord intypt slaat je computer alarm!"
+      question_score: 10
+  - 5: 
+      question_text: "Waarom zegt Hedy 'ALARM! INDRINGER!' als je 'geheim' antwoordt op de vraag?"
+      code: |-
+      wachtwoord is ask Wat is het wachtwoord?
+      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+      mp_choice_options:
+        - { option_text: "Omdat je het in hoofdletters moet typen, dus GEHEIM", code: , feedback: "Klopt!" }
+        - { option_text: "Omdat het wachtwoord 'alarm' is", code: , feedback: "Nee, dat is niet het wachtwoord." }
+        - { option_text: "Omdat het gehijm is, met lange ij. ", code: , feedback: "Nee, zo spel je dat woord niet" }
+        - { option_text: "Omdat Hedy een fout maakt", code: , feedback: "Nee hoor, dat is geen fout!" }
+      correct_answer: "A"
+      hint: "De spelling moet precies hetzelfde zijn."
+      question_score: 10
+   - 6: 
+      question_text: "vraag"
+      code: |-
+
+      mp_choice_options:
+        - { option_text: "Omdat je het in hoofdletters moet typen, dus GEHEIM", code: , feedback: "Klopt!" }
+        - { option_text: "Omdat het wachtwoord 'alarm' is", code: , feedback: "Nee, dat is niet het wachtwoord." }
+        - { option_text: "Omdat het gehijm is, met lange ij. ", code: , feedback: "Nee, zo spel je dat woord niet" }
+        - { option_text: "Omdat Hedy een fout maakt", code: , feedback: "Nee hoor, dat is geen fout!" }
+      correct_answer: "A"
+      hint: "De spelling moet precies hetzelfde zijn."
       question_score: 10
