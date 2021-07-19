@@ -39,8 +39,8 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}

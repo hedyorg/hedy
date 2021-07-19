@@ -72,9 +72,9 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript"></script>
-  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8"></script>
-  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="/error_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script>
     window.State = {};
     window.State.lang = "{{ lang }}";
@@ -90,10 +90,11 @@
     window.State.loaded_program = {{ loaded_program|tojson }};
     window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
   </script>
-  <script src="{{static('/js/app.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/tabs.js')}}" type="text/javascript"></script>
-  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript"></script>
-  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript"></script>
-  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript"></script>
+  {# Important syntaxModeRules.js gets loaded first #}
+  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}
