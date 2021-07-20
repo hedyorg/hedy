@@ -2,6 +2,7 @@ command: print | ask | assign_list | assign | print_no_quotes | invalid //catch 
 
 print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var)*  -> print
 print_no_quotes: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
+ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | quoted_text | punctuation)*
 
 //anything can be parsed except for spaces, and a newlines and commas for list separators
 textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text

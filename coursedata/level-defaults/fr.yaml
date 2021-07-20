@@ -65,7 +65,8 @@
 3:
     start_code: "print 'Bonjour le monde'"
     intro_text: |
-        `ask` fonctionne de la même manière au niveau 3 qu'au niveau 2, mais `print` est différent maintenant.
+
+        `Print` et `impreso` changent au niveau 3.
 
         Vous devez placer le texte que vous souhaitez imprimer entre guillemets.
 
@@ -89,13 +90,13 @@
             print 'mon nom est ' nom
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
-        example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
+        example: "Exemple: couleur is ask 'Quelle est ta couleur préférée?'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             print couleur ' est ta couleur préférée!'
 4:
     start_code: |-
-        nom is ask quel est ton nom?
+        nom is ask 'quel est ton nom?'
         if nom is Hedy print 'cool!' else print 'mouais'
     intro_text: |
         `ask` et` print` fonctionnent toujours comme au niveau 3.
@@ -104,7 +105,7 @@
 
          ## Exemple de code Hedy
          ```
-         nom is ask quel est votre nom?
+         nom is ask 'quel est votre nom?'
          if nom is Hedy print 'cool!' else print 'moins amusant!'
          ```
 
@@ -120,15 +121,15 @@
         demo_code: "print 'Bonjour et bienvenue à Hedy.'"
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
-        example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
+        example: "Exemple: couleur is ask 'Quelle est ta couleur préférée?'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             print couleur ' est ta couleur préférée!'
     -   name: "if"
         explanation: "Fait un choix avec `if`."
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert print 'joli!' else print 'bof'
 5:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
@@ -147,21 +148,21 @@
         demo_code: "print 'Bonjour et bienvenue à Hedy.'"
     -   name: "ask"
         explanation: "Demande quelque chose avec `ask`."
-        example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
+        example: "Exemple: couleur is ask 'Quelle est ta couleur préférée?'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             print couleur ' est ta couleur préférée!'
     -   name: "if"
         explanation: "Fait un choix avec `if`."
         example: "Exemple: if couleur is vert print 'joli!' else print 'bof'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert print 'joli!' else print 'bof'
     -   name: "repeat"
         explanation: "`repeat` et `if` combiné"
         example: "Exemple: if couleur is vert  repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'
 6:
     start_code: "print '5 fois 5 font ' 5 * 5"
@@ -188,15 +189,15 @@
         demo_code: "print '5 fois 5 font ' 5 * 5"
     -   name: "ask et if avec des calculs"
         explanation: "Pose une question sur un calcul avec `ask` et compare le résultat..."
-        example: "Exemple: reponse is ask Combien font 10 plus 10?"
+        example: "Exemple: reponse is ask 'Combien font 10 plus 10?'"
         demo_code: |-
-            reponse is ask Combien font 10 plus 10?
+            reponse is ask 'Combien font 10 plus 10?'
             if reponse is 20 print 'Oui!' else print 'Oups'
     -   name: "repeat"
         explanation: "`repeat` et `if` combinés"
         example: "Exemple: if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
         demo_code: |-
-            produit is ask Combien font 10 fois 5?
+            produit is ask 'Combien font 10 fois 5?'
             if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'
 7:
     start_code: |-
@@ -220,7 +221,7 @@
 
         ## Exemple de code Hedy
         ```
-        couleur is ask Quelle est ta couleur préférée?
+        couleur is ask 'Quelle est ta couleur préférée?'
         if couleur is vert
             repeat 3 times
                 print 'joli!'
@@ -236,9 +237,9 @@
         demo_code: "print '5 fois 5 font ' 5 * 5"
     -   name: "`if` sur plusieurs lignes"
         explanation: "Demande la réponse d’une addition et vérifie si elle est correcte. Tu peux désormais imprimer sur 2 lignes."
-        example: "Exemple: reponse is ask Combien font 5 plus 5?"
+        example: "Exemple: reponse is ask 'Combien font 5 plus 5?'"
         demo_code: |-
-            reponse is ask Combien font 5 plus 5?
+            reponse is ask 'Combien font 5 plus 5?'
             if reponse is 10
                 print 'Bien joué!'
                 print 'En effet, la réponse est ' reponse
@@ -249,7 +250,7 @@
         explanation: "`if` et `repeat` combinés"
         example: "Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
         demo_code: |-
-            couleur is ask Quelle est ta couleur préférée?
+            couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert
                 repeat 3 times
                     print 'joli!'

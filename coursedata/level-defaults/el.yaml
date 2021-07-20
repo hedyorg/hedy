@@ -62,7 +62,7 @@
 3:
     start_code: "print 'Γειά σου κόσμε'"
     intro_text: |-
-        Η `ask` παραμένει ίδια στο επίπεδο 3, όμως η `print` είναι πλέον διαφορετική. Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.
+        Αλλαγή `print` και `ask` στο επίπεδο 3.Πρέπει να περικλείσεις το κείμενο που θέλεις να εμφανίσεις σε εισαγωγικά.
 
         Αυτό είναι χρήσιμο, επειδή τώρα μπορείς να εμφανίσεις όσες λέξεις θέλεις. Επίσης, τις λέξεις που αποθήκευες με την `is`.
 
@@ -83,13 +83,13 @@
             print 'Το όνομά μου είναι ' name
     -   name: 'ask'
         explanation: 'Ρώτησε κάτι με την `ask`.'
-        example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        example: "Example: color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;?
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
             print 'το ' color ' είναι το αγαπημένο σου!'
 4:
     start_code: |-
-        name is ask Ποιό είναι το όνομά σου;
+        name is ask 'Ποιό είναι το όνομά σου;'
         if name is Hedy print 'τέλεια!' else print 'έτσι κι έτσι'
     intro_text: |-
         Οι `ask` και `print` λειτουργούν ακριβώς όπως στο επίπεδο 3.
@@ -98,7 +98,7 @@
 
         ## Παράδειγμα κώδικα Hedy
         ```
-        name is ask ποιό είναι το όνομά σου;
+        name is ask 'ποιό είναι το όνομά σου;'
         if name is Hedy print `ωραία` else print `μπου!`
         ```
 
@@ -113,15 +113,15 @@
         demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     -   name: 'ask'
         explanation: 'Ρώτησε κάτι με την `ask`.'
-        example: 'Example: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        example: "'Example: color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             print 'το ' color ' είναι το αγαπημένο σου!'
     -   name: 'if'
         explanation: 'Κάνε μια επιλογή με την `if`'
         example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
 5:
     start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
@@ -139,21 +139,21 @@
         demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     -   name: 'ask'
         explanation: 'Ρώτησε κάτι με την `ask`.'
-        example: 'Παράδειγμα: color is ask Ποιό είναι το αγαπημένο σου χρώμα;'
+        example: "Παράδειγμα: color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;""
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;?
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?
             print 'το ' color ' είναι το αγαπημένο σου!
     -   name: 'if'
         explanation: 'Κάνε μια επιλογή με την `if`'
         example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
     -   name: 'repeat'
         explanation: 'Οι `repeat` και `if` σε συνδυασμό'
         example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
 6:
     start_code: "print '5 επί 5 ίσον με ' 5 * 5"
@@ -179,15 +179,15 @@
         demo_code: "print '5 επί 5 είναι ' 5 * 5"
     -   name: 'Οι `ask` και `if` με υπολογισμούς'
         explanation: 'Ρώτησε σχετικά με έναν υπολογισμό και έλεγξε ότι είναι σωστός.'
-        example: 'Παράδειγμα: answer is ask Πόσο είναι 10 + 10;'
+        example: "Παράδειγμα: answer is ask 'Πόσο είναι 10 + 10;'"
         demo_code: |-
-            answer is ask Πόσο είναι 10 + 10;
+            answer is ask 'Πόσο είναι 10 + 10;'
             if answer is 20 print 'Ναι!' else print 'Ουπς'
     -   name: 'repeat'
         explanation: 'Οι `repeat` και `if` σε συνδυασμό'
         example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
 7:
     start_code: |-
@@ -208,7 +208,7 @@
 
         ## Παράδειγμα κώδικα Hedy
          ```
-         color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+         color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
          if color is πράσινο
              repeat 3 times
                  print 'όμορφο!'
@@ -225,9 +225,9 @@
         demo_code: "print '5 επί 5 ίσον με ' 5 * 5"
     -   name: 'Η `if` με πολλαπλές γραμμές'
         explanation: 'Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.'
-        example: 'Παράδειγμα: answer is ask Πόσο είναι 5 συν 5?'
+        example: "'Παράδειγμα: answer is ask 'Πόσο είναι 5 συν 5?'"
         demo_code: |-
-            answer is ask Πόσο είναι 5 συν 5;
+            answer is ask 'Πόσο είναι 5 συν 5;'
             if answer is 10
                 print 'Μπράβο!'
                 print 'Πράγματι, η απάντηση ήταν ' answer
@@ -238,7 +238,7 @@
         explanation: 'Οι `if` και `repeat` σε συνδυασμό'
         example: "Παράδειγμα: if color is πράσινο repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
         demo_code: |-
-            color is ask Ποιό είναι το αγαπημένο σου χρώμα;
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is πράσινο
               repeat 3 times
                 print 'όμορφο!'

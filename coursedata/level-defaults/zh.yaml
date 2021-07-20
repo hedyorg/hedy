@@ -60,7 +60,7 @@
 3:
     start_code: "print '你好世界'"
     intro_text: |
-        在第3级目标中`ask`的使用方法仍旧如同在第2级中一样, 但是现在` print` 的使用方法有所不同了.
+         `print` 和 `ask` 的使用在级别 3 中是不同的。
 
          你需要在你想要打印的内容前后两边加上单引号.
 
@@ -81,13 +81,13 @@
             name is 海迪
             print '我的名字是 ' name
     -   explanation: "Ask的意思是提问, 用 `ask`提出问题."
-        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        example: "例如: color is ask '你最喜欢的颜色是什么?'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             print color ' 是你最喜欢的颜色!'
 4:
     start_code: |-
-        name is ask 你的名字是什么?
+        name is ask '你的名字是什么?'
         if name is 海迪 print '酷!' else print '呵呵'
     intro_text: |
         `ask` 和` print` 的使用方法和在第3级目标里面一样.
@@ -96,7 +96,7 @@
 
          ## 海迪代码范例
          ```
-         name is ask 你的名字是什么?
+         name is ask '你的名字是什么?'
          if name is 海迪 print '赞' else print '嘁!'
          ```
 
@@ -110,14 +110,14 @@
         example: "例如: print '你好欢迎来到海迪.'"
         demo_code: "print '你好欢迎来到海迪.'"
     -   explanation: "Ask的意思是提问，用`ask`可以提出问题."
-        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        example: "例如: color is ask '你最喜欢的颜色是什么?'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             print color ' 是你最喜欢的颜色!'
     -   explanation: "用`if-else`条件语句进行选择"
         example: "例如: if color is 绿色 print '漂亮!' else print '呵呵'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             if color is 绿色 print '漂亮!' else print '呵呵'
 5:
     start_code: "repeat 3 times print '海迪很好玩!'"
@@ -133,19 +133,19 @@
         example: "例如: print '你好欢迎来到海迪.'"
         demo_code: "print '你好欢迎来到海迪.'"
     -   explanation: "Ask的意思是提问，用`ask`提出问题."
-        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        example: "例如: color is ask '你最喜欢的颜色是什么?'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             print color ' is your favorite!'
     -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             if color is green print 'pretty!' else print 'meh'
     -   explanation: "`repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
 6:
     start_code: "print '5乘以5 is ' 5 * 5"
@@ -170,14 +170,14 @@
         example: "例如: print '5乘以5等于 ' 5 * 5"
         demo_code: "print '5乘以5等于 ' 5 * 5"
     -   explanation: "用ask提问计算题的答案然后用if-else条件语句检查答案是否正确。."
-        example: "例如: answer is ask 10加10等于几?"
+        example: "例如: answer is ask '10加10等于几?'"
         demo_code: |-
-            answer is ask 10加10等于几?
+            answer is ask '10加10等于几?'
             if answer is 20 print '做得好!' else print '糟糕,算错啦'
     -   explanation: "`repeat`循环语句 and `if-else` 条件语句的组合"
         example: "例如: if 乘积 is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'"
         demo_code: |-
-            product is ask 10乘以5等于几?
+            product is ask '10乘以5等于几?'
             if product is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'
 7:
     start_code: |-
@@ -199,7 +199,7 @@
 
          ## 海迪代码范例
          ```
-         color is ask 你最喜欢的颜色是什么?
+         color is ask '你最喜欢的颜色是什么?'
          if color is 绿色
              repeat 3 times
                  print '好看!'
@@ -213,9 +213,9 @@
         example: "Example: print '5乘以5等于 ' 5 * 5"
         demo_code: "print '5乘以5等于 ' 5 * 5"
     -   explanation: "使用ask提问加法运算的答案然后检查答案是否正确. 我们现在可以打印两行代码了."
-        example: "例如: answer is ask 5加5等于几?"
+        example: "例如: answer is ask '5加5等于几?'"
         demo_code: |-
-            answer is ask 5加5等于几?
+            answer is ask '5加5等于几?'
             if answer is 10
                 print '做得好!'
                 print '的确, 答案就是 ' answer
@@ -225,7 +225,7 @@
     -   explanation: "`if-else` 条件语句and `repeat`循环语句的组合"
         example: "例如: if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             if color is 绿色
                 repeat 3 times
                     print '漂亮!'

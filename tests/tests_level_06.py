@@ -40,7 +40,7 @@ class TestsLevel6(unittest.TestCase):
 
   def test_transpile_ask(self):
     code = textwrap.dedent("""\
-    antwoord is ask wat is je lievelingskleur?""")
+    antwoord is ask 'wat is je lievelingskleur?'""")
 
     result = hedy.transpile(code, 6)
 
@@ -52,7 +52,7 @@ class TestsLevel6(unittest.TestCase):
   def test_repeat_nested_in_if(self):
 
     code = textwrap.dedent("""\
-    kleur is ask Wat is je lievelingskleur?
+    kleur is ask 'Wat is je lievelingskleur?'
     if kleur is groen repeat 3 times print 'mooi!'""")
 
     result = hedy.transpile(code, 6)

@@ -156,7 +156,7 @@ class TestsLevel3(unittest.TestCase):
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
-    color is ask Cuál es tu color favorito?""")
+    color is ask 'Cuál es tu color favorito?'""")
 
     result = hedy.transpile(code, 3)
 
@@ -194,7 +194,7 @@ class TestsLevel3(unittest.TestCase):
   def test_transpile_ask_with_print(self):
 
     code = textwrap.dedent("""
-    kleur is ask wat is je lievelingskleur?
+    kleur is ask 'wat is je lievelingskleur?'
     print 'jouw lievelingskleur is dus' kleur '!'""")
 
     result = hedy.transpile(code, 3)

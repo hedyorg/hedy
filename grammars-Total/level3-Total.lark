@@ -48,7 +48,7 @@ _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
 _WHILE: "while"
-ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
+ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | quoted_text | punctuation)*
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
 command: print | ask | assign_list | assign | print_no_quotes | invalid //catch all at the end

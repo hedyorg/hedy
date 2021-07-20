@@ -15,7 +15,7 @@
         example: "Example: print Hello welcome to Hedy!"
         demo_code: "print Hello welcome to Hedy!"
     -   explanation: "Ask something with `ask`."
-        example: "Example: ask What is your favorite color?"
+        example: "Example: ask What is your favorite color?'"
         demo_code: "ask What is your favorite color?"
     -   explanation: "Repeat something using `echo`."
         example: "Example: echo so your favorite color is..."
@@ -59,7 +59,7 @@
 3:
     start_code: "print 'Hello world'"
     intro_text: |
-        `ask` works the same in level 3 as it did in level 2, but` print` is different now.
+         In level 3` print` and `ask` are different now.
 
          You must put text that you want to print between quotation marks.
 
@@ -80,13 +80,13 @@
             name is Hedy
             print 'my name is ' name
     -   explanation: "Ask something with `ask`."
-        example: "Example: color is ask What is your favorite color?"
+        example: "Example: color is ask 'What is your favorite color?'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             print color ' is your favorite!'
 4:
     start_code: |-
-        name is ask what is your name?
+        name is ask 'what is your name?'
         if name is Hedy print 'cool!' else print 'meh'
     intro_text: |
         `ask` and` print` still like they did in level 3.
@@ -95,7 +95,7 @@
 
          ## Example Hedy Code
          ```
-         name is ask what's your name?
+         name is ask 'what's your name?'
          if name is Hedy print 'nice' else print 'boo!'
          ```
 
@@ -109,14 +109,14 @@
         example: "Example: print 'Hello welcome to Hedy.'"
         demo_code: "print 'Hello welcome to Hedy.'"
     -   explanation: "Ask something with `ask`."
-        example: "Example: color is ask What is your favorite color?"
+        example: "Example: color is ask 'What is your favorite color?'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             print color ' is your favorite!'
     -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             if color is green print 'pretty!' else print 'meh'
 5:
     start_code: "repeat 3 times print 'Hedy is fun!'"
@@ -132,19 +132,19 @@
         example: "Example: print 'Hello welcome to Hedy.'"
         demo_code: "print 'Hello welcome to Hedy.'"
     -   explanation: "Ask something with `ask`."
-        example: "Example: color is ask What is your favorite color?"
+        example: "Example: color is ask 'What is your favorite color?'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             print color ' is your favorite!'
     -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             if color is green print 'pretty!' else print 'meh'
     -   explanation: "`repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
 6:
     start_code: "print '5 times 5 is ' 5 * 5"
@@ -169,14 +169,14 @@
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
     -   explanation: "Ask for a calculation and check that it is correct."
-        example: "Example: answer is ask What is 10 plus 10?"
+        example: "Example: answer is ask 'What is 10 plus 10?'"
         demo_code: |-
-            answer is ask What is 10 plus 10?
+            answer is ask 'What is 10 plus 10?'
             if answer is 20 print 'Yes!' else print 'Oops'
     -   explanation: "`repeat` and `if` combined"
         example: "Example: if product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
         demo_code: |-
-            product is ask What is 10 times 5?
+            product is ask 'What is 10 times 5?'
             if product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'
 7:
     start_code: |-
@@ -198,7 +198,7 @@
 
          ## Example Hedy code
          ```
-         color is ask What is your favorite color?
+         color is ask 'What is your favorite color?'
          if color is green
              repeat 3 times
                  print 'beautiful!'
@@ -212,9 +212,9 @@
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
     -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-        example: "Example: answer is ask What is 5 plus 5?"
+        example: "Example: answer is ask 'What is 5 plus 5?'"
         demo_code: |-
-            answer is ask What is 5 plus 5?
+            answer is ask 'What is 5 plus 5?'
             if answer is 10
                 print 'Well done!'
                 print 'Indeed, the answer was ' answer
@@ -224,7 +224,7 @@
     -   explanation: "`if` and `repeat` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
-            color is ask What is your favorite color?
+            color is ask 'What is your favorite color?'
             if color is green
                 repeat 3 times
                     print 'pretty!'
@@ -244,9 +244,9 @@
         example: "for counter is 1 to 5"
         demo_code: "for counter is 1 to 5\n    print counter"
     -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-        example: "Example: answer is ask What is 5 plus 5?"
+        example: "Example: answer is ask 'What is 5 plus 5?'"
         demo_code: |-
-            answer is ask What is 5 plus 5?
+            answer is ask 'What is 5 plus 5?'
             if answer is 10
                 print 'Well done!'
                 print 'Indeed, the answer was ' answer
@@ -265,9 +265,9 @@
         example: "for counter in range 1 to 5"
         demo_code: "for counter in range 1 to 5\n    print counter"
     -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-        example: "Example: answer is ask What is 5 plus 5?"
+        example: "Example: answer is ask 'What is 5 plus 5?'"
         demo_code: |-
-            answer is ask What is 5 plus 5?
+            answer is ask 'What is 5 plus 5?'
             if answer is 10
                 print 'Well done!'
                 print 'Indeed, the answer was ' answer
@@ -431,9 +431,9 @@
               print('Both answers are wrong!')
 15:
     start_code: |-
-        # This is a program that is going to ask a couple of math questions
+        # This is a program that is going to ask 'a couple of math questions
         for i in range(1, 10):
-            # We are going to ask the multiplication table of 5
+            # We are going to ask 'the multiplication table of 5
             answer is input('What is ' i ' times 5?')
             # We check if the answer is the same as our sum
             correct_answer is i * 5

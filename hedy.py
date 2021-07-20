@@ -501,6 +501,18 @@ class ConvertToPython_3(ConvertToPython_2):
         return "print(" + '+'.join(args) + ')'
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
+    def ask(self, args):
+        args_new = []
+        var = args[0]
+        for a in args[1:]:
+            if type(a) is Tree:
+                args_new.append(f'str({a.children})')
+            elif "'" not in a:
+                args_new.append(f'str({a})')
+            else:
+                args_new.append(a)
+
+        return f'{var} = input(' + '+'.join(args_new) + ")"
 
 def indent(s):
     lines = s.split('\n')
