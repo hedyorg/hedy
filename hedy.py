@@ -5,6 +5,11 @@ from os import path
 import sys
 import utils
 
+
+# Some usefull constants
+HEDY_MAX_LEVEL = 15
+
+
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
 #
@@ -645,21 +650,11 @@ class ConvertToPython_7(ConvertToPython_6):
         # dit was list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
-class ConvertToPython_7_1(ConvertToPython_7):
+class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[3:]]
         return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
-
-class ConvertToPython_8(ConvertToPython_7):
-    def for_loop(self, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        if type(args[3]) == str: # for loop without step
-            all_lines = [indent(x) for x in args[3:]]
-            return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
-        else:  # for loop with step
-            all_lines = [indent(x) for x in args[4:]]
-            return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + ", " + "int(" + args[3] + ")" + "):\n"+"\n".join(all_lines)
 
 class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
@@ -1287,8 +1282,9 @@ def transpile_inner(input_string, level, sub = 0):
     elif level == 7:
         if sub == 0:
             python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        elif sub == 1 or sub == 2:
-            python = ConvertToPython_7_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif sub == 1:
+            # Code conversion is the same as level 8
+            python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)

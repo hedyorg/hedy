@@ -1,7 +1,7 @@
 import requests
 import json
 import random
-from utils import type_check, timems
+from utils import timems
 import urllib.parse
 from config import config
 import sys
@@ -15,12 +15,16 @@ import argparse
 args = argparse.ArgumentParser ()
 args.add_argument ('--concurrent', help='how many tests to run at the same time (stress testing), default is 1', type=int)
 args.add_argument ('--host', help='Host against which to run the tests (optional), default is localhost')
+args.add_argument ('--endpoint', help='Endpoint against which to run the tests (optional, by default \'--host\' is used)')
 args = args.parse_args ()
 
 host = 'http://localhost:' + str (config ['port']) + '/'
 hosts = {'alpha': 'https://hedy-alpha.herokuapp.com/', 'test': 'https://hedy-test.herokuapp.com/'}
 
-if args.host:
+if args.endpoint:
+  host = args.endpoint
+
+elif args.host:
     if not args.host in hosts:
         raise Exception ('No such host')
     host = hosts [sys.argv [2]]
@@ -38,16 +42,16 @@ def request (state, test, counter, username):
         test [3] ['cookie'] = state ['headers'] ['cookie']
 
     # If path, headers or body are functions, invoke them passing them the current state
-    if type_check (test[2], 'fun'):
+    if callable(test[2]):
         test[2] = test[2] (state)
 
-    if type_check (test[3], 'fun'):
+    if callable (test[3]):
         test[3] = test[3] (state)
 
-    if type_check (test[4], 'fun'):
+    if callable(test[4]):
         test[4] = test[4] (state)
 
-    if type_check (test[4], 'dict'):
+    if isinstance(test[4], dict):
         test[3] ['content-type'] = 'application/json'
         test[4] = json.dumps (test [4])
 
@@ -93,7 +97,7 @@ def run_suite (suite):
     state = {'headers': {}}
     t0 = timems ()
 
-    if not type_check (tests, 'list'):
+    if not isinstance (tests, list):
         return print ('Invalid test suite, must be a list.')
     counter = 1
 
@@ -102,7 +106,7 @@ def run_suite (suite):
 
     for test in tests:
         # If test is nested, run a nested loop
-        if not (type_check (test[0], 'str')):
+        if not (isinstance (test[0], str)):
             for subtest in test:
                 run_test (subtest, counter)
                 counter += 1
@@ -123,15 +127,16 @@ def invalidMap (tag, method, path, bodies):
         counter += 1
     return output
 
-def successfulSignup (state, response, username):
-    if not 'token' in response ['body']:
-        raise Exception ('No token present')
-    state ['token'] = response ['body'] ['token']
-
 # We define apres functions here because multiline lambdas are not supported by python
 def setSentCookies (state, response, username):
     if 'Set-Cookie' in response ['headers']:
         state ['headers'] ['cookie'] = response ['headers'] ['Set-Cookie']
+
+def successfulSignup (state, response, username):
+    if not 'token' in response ['body']:
+        raise Exception ('No token present')
+    state ['token'] = response ['body'] ['token']
+    setSentCookies (state, response, username)
 
 def getProfile1 (state, response, username):
     profile = response ['body']
@@ -162,8 +167,24 @@ def getProfile3 (state, response, username):
     if 'verification_pending' in profile:
         raise Exception ('Invalid verification_pending (getProfile3)')
 
+def getProfile4 (state, response, username):
+    profile = response ['body']
+    if not 'verification_pending' in profile or profile ['verification_pending'] != True:
+        raise Exception ('Invalid verification_pending (getProfile4)')
+    if not 'prog_experience' in profile or profile ['prog_experience'] != 'yes':
+        raise Exception ('Invalid prog_experience (getProfile4)')
+    if not 'experience_languages' in profile or not isinstance(profile ['experience_languages'], list) or len (profile ['experience_languages']) != 1 or profile ['experience_languages'] [0] != 'python':
+        raise Exception ('Invalid experience_languages (getProfile4)')
+
+def getProfile5 (state, response, username):
+    profile = response ['body']
+    if not 'prog_experience' in profile or profile ['prog_experience'] != 'no':
+        raise Exception ('Invalid prog_experience (getProfile5)')
+    if not 'experience_languages' in profile or not isinstance(profile ['experience_languages'], list) or len (profile ['experience_languages']) != 2 or profile ['experience_languages'] [0] not in ['scratch', 'other_text'] or profile ['experience_languages'] [1] not in ['scratch', 'other_text']:
+        raise Exception ('Invalid experience_languages (getProfile5)')
+
 def emailChange (state, response, username):
-    if not type_check (response ['body'] ['token'], 'str'):
+    if not isinstance (response ['body'] ['token'], str):
         raise Exception ('Invalid country (emailChange)')
     if response ['body'] ['username'] != username:
         raise Exception ('Invalid username (emailChange)')
@@ -210,23 +231,23 @@ def checkMainSessionVarsAgain (state, response, username):
         raise Exception ('test_session not received by main')
 
 def retrieveProgramsBefore (state, response, username):
-    if not type_check (response ['body'], 'dict'):
+    if not isinstance (response ['body'], dict):
         raise Exception ('Invalid response body')
-    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+    if not 'programs' in response ['body'] or not isinstance (response ['body'] ['programs'], list):
         raise Exception ('Invalid programs list')
     if len (response ['body'] ['programs']) != 0:
         raise Exception ('Programs list should be empty')
 
 def retrieveProgramsAfter (state, response, username):
-    if not type_check (response ['body'], 'dict'):
+    if not isinstance (response ['body'], dict):
         raise Exception ('Invalid response body')
-    if not 'programs' in response ['body'] or not type_check (response ['body'] ['programs'], 'list'):
+    if not 'programs' in response ['body'] or not isinstance (response ['body'] ['programs'], list):
         raise Exception ('Invalid programs list')
     if len (response ['body'] ['programs']) != 1:
         raise Exception ('Programs list should contain one program')
     program = response ['body'] ['programs'] [0]
     state ['program'] = program
-    if not type_check (program, 'dict'):
+    if not isinstance (program, dict):
         raise Exception ('Invalid program type')
     if not 'code' in program or program ['code'] != 'print Hello world':
         raise Exception ('Invalid program.code')
@@ -239,7 +260,7 @@ def suite (username):
         ['get session vars from test', 'get', '/session_test', {}, {}, 200, checkTestSessionVars],
         ['get session vars from main again', 'get', '/session_main', {}, {}, 200, checkMainSessionVarsAgain],
         ['get root', 'get', '/', {}, '', 200],
-        invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}]),
+        invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}, {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]}, {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'}, {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}]),
         ['valid signup', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@e2e-testing.com'}, 200, successfulSignup],
         invalidMap ('login', 'post', '/auth/login', ['', [], {}, {'username': 1}, {'username': 'user@me'}, {'username:': 'user: me'}]),
         ['valid login, invalid credentials', 'post', '/auth/login', {}, {'username': username, 'password': 'password'}, 403],
@@ -257,7 +278,7 @@ def suite (username):
         ['login again', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, setSentCookies],
         invalidMap ('change password', 'post', '/auth/change_password', ['', [], {}, {'foo': 'bar'}, {'old_password': 1}, {'old_password': 'foobar'}, {'old_password': 'foobar', 'new_password': 1}]),
         ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile1],
-        invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}]),
+        invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}, {'prog_experience': 1}, {'prog_experience': 'foo'}, {'experience_languages': ['python', 'foo']}]),
         ['change profile with same email', 'post', '/profile', {}, {'email': username + '@e2e-testing.com', 'country': 'US'}, 200],
         ['change profile with different email', 'post', '/profile', {}, {'email': username + '@e2e-testing2.com', 'country': 'NL'}, 200, emailChange],
         ['get profile after profile update', 'get', '/profile', {}, {}, 200, getProfile2],
@@ -279,7 +300,13 @@ def suite (username):
         ['unshare program', 'post', '/programs/share', {}, lambda state: {'id': state ['program'] ['id'], 'public': False}, 200],
         ['delete program', 'get', lambda state: '/programs/delete/' + state ['program'] ['id'], {}, {}, 302],
         ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
-        ['destroy account', 'post', '/auth/destroy', {}, {}, 200]
+        ['destroy account', 'post', '/auth/destroy', {}, {}, 200],
+        ['get programs without being logged in', 'get', '/programs', {}, {}, 302],
+        ['valid signup again', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@e2e-testing.com', 'prog_experience': 'yes', 'experience_languages': ['python']}, 200, successfulSignup],
+        ['get profile after recreating account', 'get', '/profile', {}, {}, 200, getProfile4],
+        ['change profile with different programming experience', 'post', '/profile', {}, {'prog_experience': 'no', 'experience_languages': ['scratch', 'other_text']}, 200],
+        ['get profile after updating experience', 'get', '/profile', {}, {}, 200, getProfile5],
+        ['destroy account', 'post', '/auth/destroy', {}, {}, 200],
     ]
 
 if not args.concurrent:

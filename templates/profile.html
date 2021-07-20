@@ -24,6 +24,25 @@
     <br><br>
     <label>{{auth.country}}</label>
     <select id="country"></select>
+    <div>
+      <br><br>
+      <label class="inline-block float-left">{{auth.programming_experience}}</label>
+      <div class="float-left">
+        <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
+        <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
+      </div>
+    </div>
+    <div class="clear-both hidden" id="languages">
+      <br><br>
+      <label class="inline-block float-left">{{auth.languages}}</label>
+      <div class="float-left">
+        <input type="checkbox" name="languages" value="scratch"><span class="pl-2">Scratch</span><br>
+        <input type="checkbox" name="languages" value="other_block"><span class="pl-2">{{auth.other_block}}</span><br>
+        <input type="checkbox" name="languages" value="python"><span class="pl-2">Python</span><br>
+        <input type="checkbox" name="languages" value="other_text"><span class="pl-2">{{auth.other_text}}</span><br>
+      </div>
+    </div>
+    <div class="clear-both"></div>
     <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
     <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
     <br><br>
