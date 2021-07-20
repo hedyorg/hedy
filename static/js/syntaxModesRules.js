@@ -184,52 +184,39 @@ define('ace/mode/level3_highlight_rules', [], function(require, exports, module)
   var ExampleHighlightRules = function() {
 
     this.$rules = {
-
       "start": [{
-        token: "keyword",
         regex: "^print ",
+        token: "keyword",
         next: "print option"
       },{
-        token: "keyword",
         regex: " is ask ",
+        token: "keyword",
         next: "rest"
       },{
-        token: "keyword",
         regex: " is ",
+        token: "keyword",
         next: "rest"
       }],
 
       "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
+        regex: "('[^']*')(.*)",
+        token: ["constant.character", "text"],
+        next: "start",
       },{
-        defaultToken : "text"
+        regex: "\\w+",
+        token: "text",
+        next: "after print variable",
       }],
 
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "rest"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
+      "rest": [{ regex: "$", next: "start" }],
 
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
+      "after print variable": [{
+        regex: "(\\s+at random)(.*)",
+        token: ["keyword", "text"],
+        next: "start",
+      }],
     };
+
     this.normalizeRules();
   };
 
