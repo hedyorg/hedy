@@ -26,4 +26,10 @@ $scriptdir/node_modules/.bin/pajv validate \
     -s "levels.schema.json" \
     -d "*.yaml"
 
+cd ../quiz/
+$scriptdir/node_modules/.bin/pajv validate \
+    --errors=text \
+    -s "quiz_questions.schema.json" \
+    -d "*.yaml"
+
 node $scriptdir/validate-texts.js $scriptdir

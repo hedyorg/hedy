@@ -415,6 +415,107 @@ def programs_page (request):
 
     return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
 
+@app.route('/quiz/start/<level>', methods=['GET'])
+def get_quiz_start(level):
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
+
+         #Sets the values of total_score and correct on the beginning of the quiz at 0
+        session['total_score'] = 0
+        session['correct_answer'] = 0
+        return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
+                               lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+
+
+# Quiz mode
+# Fill in the filename as source
+@app.route('/quiz/quiz_questions/<level_source>/<question_nr>', methods=['GET'])
+def get_quiz(level_source, question_nr):
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        # Reading the yaml file
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
+            return 'No quiz yaml file found for this level', 404
+
+        # set globals
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
+
+        # Loop through the questions and check that the loop doesn't reach out of bounds
+        q_nr = int(question_nr)
+        if q_nr <= len(quiz_data['questions']):
+            question = quiz_data['questions'][q_nr - 1].get(q_nr)
+
+            # Convert the indices to the corresponding characters
+            char_array = []
+            for i in range(len(question['mp_choice_options'])):
+                char_array.append(chr(ord('@') + (i + 1)))
+            return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+                                   questions=quiz_data['questions'],
+                                   question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                                   correct=session.get('correct_answer'),
+                                   char_array=char_array,
+                                   menu=render_main_menu('adventures'), lang=lang,
+                                   username=current_user(request)['username'],
+                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+        else:
+            return render_template('endquiz.html', correct=session.get('correct_answer'),
+                                   total_score=session.get('total_score'),
+                                   menu=render_main_menu('adventures'), lang=lang,
+                                   quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
+                                   next_assignment=1, username=current_user(request)['username'],
+                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+
+
+@app.route('/submit_answer/<level_source>/<question_nr>', methods=["POST"])
+def submit_answer(level_source, question_nr):
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        # Get the chosen option from the request form with radio buttons
+        option = request.form["radio_option"]
+
+        # Reading yaml file
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
+            return 'No quiz yaml file found for this level', 404
+
+        # Convert question_nr to an integer
+        q_nr = int(question_nr)
+
+        # Convert the corresponding chosen option to the index of an option
+        question = quiz_data['questions'][q_nr - 1].get(q_nr)
+        index_option = ord(option.split("-")[1]) - 65
+
+        # If the correct answer is chosen, update the total score and the number of correct answered questions
+        if question['correct_answer'] in option:
+            session['total_score'] = session.get('total_score') + question['question_score']
+            session['correct_answer'] = session.get('correct_answer') + 1
+
+        # Loop through the questions
+        if q_nr <= len(quiz_data['questions']):
+            return render_template('feedback.html', quiz=quiz_data, question=question,
+                                   questions=quiz_data['questions'],
+                                   level_source=level_source,
+                                   question_nr=q_nr,
+                                   correct=session.get('correct_answer'),
+                                   option=option,
+                                   index_option=index_option,
+                                   menu=render_main_menu('adventures'), lang=lang,
+                                   username=current_user(request)['username'],
+                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+        else:  # show a different page for after the last question
+            return 'No end quiz page!', 404
+
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
