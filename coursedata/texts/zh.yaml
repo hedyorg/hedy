@@ -6,8 +6,10 @@ ui:
     contact: "联系方式"
     video_title: "视频"
     run_code_button: "运行代码"
+    read_code_label: "大声朗读"
     save_code_button: "保存代码"
-    untitled: "无标题的"
+    edit_code_button: "Edit code"
+    share_code_button: "Save & share code"
     regress_button: "返回级别"
     advance_button: "前往级别"
     advance_step_button: "前往任务"
@@ -22,12 +24,15 @@ ui:
     switch_to_adventures: "Go to adventures"
     switch_to_another_adventure: "Choose a different adventure"
     commands_title: "Commands"
+    by: "by"
 ClientErrorMessages:
     Transpile_warning: "警告!"
     Transpile_error: "服务器无法将这个Hedy程序翻译成Python程序."
     Connection_error: "我们无法连接到服务器."
     Other_error: "糟糕! 也许我们犯了一个小错误."
     Execute_error: "在运行程序时出了点问题."
+    CheckInternet: "Have a look if your Internet connection is working properly?"
+    ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
     Wrong Level: "这个 Hedy代码是正确的，但级别不对.你在第{working_level}级使用的是第{original_level}级的代码."
     Incomplete: "糟糕! 你好像在第 {line_number}行忘写了一段代码!, 你需要在{incomplete_command}后面输入文字."
@@ -120,6 +125,12 @@ Auth:
     email_reset_password_body: |-
         你的Hedy账号的密码已被更改. 如果是你更改了密码, 那就没问题.
         如果您没有更改密码，请立即联系我们，并回复此邮件..
+    programming_experience: "Do you have programming experience?"
+    yes: "yes"
+    no: "no"
+    languages: "Which of these programming languages have you used before?"
+    other_block: "Another block language"
+    other_text: "Another text language"
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "我的程序"
@@ -131,6 +142,7 @@ Auth:
     unshare_success_detail: "Program unshared successfully"
     copy_clipboard: "Successfully copied to clipboard"
     answer_question: "你要先回答问题，才能运行程序."
+    must_be_logged: "You must be logged in to save a program"
 Programs:
     recent: "我最近的程序"
     level: "级别"

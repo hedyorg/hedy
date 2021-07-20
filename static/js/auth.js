@@ -62,6 +62,12 @@ window.auth = {
         else payload [k] = values [k];
       });
 
+      payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
+      var languages = [];
+      // We ignore the languages checkboxes if the section is hidden
+      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      if (languages.length) payload.experience_languages = languages;
+
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
 
@@ -127,6 +133,13 @@ window.auth = {
         if (k === 'birth_year') payload [k] = parseInt (values [k]);
         payload [k] = values [k];
       });
+
+      payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
+      var languages = [];
+      // We ignore the languages checkboxes if the section is hidden
+      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      // When updating the profile, we can remove all languages, so in this case we send the empty array. This doesn't happen on signup.
+      payload.experience_languages = languages;
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -243,6 +256,13 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
     $ ('#birth_year').val (response.birth_year);
     $ ('#gender').val (response.gender);
     $ ('#country').val (response.country);
+    if (response.prog_experience) {
+      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+      if (response.prog_experience === 'yes') $ ('#languages').show ();
+    }
+    (response.experience_languages || []).map (function (lang) {
+       $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
+    });
   }
 }).fail (function (response) {
   if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');

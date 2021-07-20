@@ -6,8 +6,10 @@ ui:
     contact: "Contact"
     video_title: "Videos"
     run_code_button: "Run code"
+    read_code_label: "Read aloud"
     save_code_button: "Save code"
-    untitled: "Untitled"
+    edit_code_button: "Edit code"
+    share_code_button: "Save & share code"
     regress_button: "Go back to level"
     advance_button: "Go to level"
     advance_step_button: "Go to assignment"
@@ -22,12 +24,15 @@ ui:
     switch_to_adventures: "Go to adventures"
     switch_to_another_adventure: "Choose a different adventure"
     commands_title: "Commands"
+    by: "by"
 ClientErrorMessages:
     Transpile_warning: "Warning!"
     Transpile_error: "We can't run your program."
     Connection_error: "We couldn't reach the server."
     Other_error: "Oops! Maybe we made a little mistake."
     Execute_error: "Something went wrong while running the program."
+    CheckInternet: "Have a look if your Internet connection is working properly?"
+    ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
     Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {original_level} at level {working_level}."
     Incomplete: "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind {incomplete_command}."
@@ -120,6 +125,13 @@ Auth:
     email_reset_password_body: |-
         Your Hedy password has been reset to a new one. If you did this, all is good.
         If you didn't change your password, please contact us immediately by replying to this email.
+    programming_experience: "Do you have programming experience?"
+    yes: "yes"
+    no: "no"
+    languages: "Which of these programming languages have you used before?"
+    other_block: "Another block language"
+    other_text: "Another text language"
+
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "My programs"
@@ -131,6 +143,7 @@ Auth:
     unshare_success_detail: "Program unshared successfully"
     copy_clipboard: "Successfully copied to clipboard"
     answer_question: "You can't run the program until you answer the question first"
+    must_be_logged: "You must be logged in to save a program"
 Programs:
     recent: "My recent programs"
     level: "Level"

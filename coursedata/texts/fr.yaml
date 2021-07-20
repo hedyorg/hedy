@@ -6,8 +6,10 @@ ui:
     contact: "Contact"
     video_title: "Vidéos"
     run_code_button: "Exécuter le code"
+    read_code_label: "Lit à voix haute"
     save_code_button: "Save code"
-    untitled: "Untitled"
+    edit_code_button: "Edit code"
+    share_code_button: "Save & share code"
     regress_button: "Retourner au niveau"
     advance_button: "Aller au niveau"
     advance_step_button: "Aller au devoir"
@@ -22,12 +24,15 @@ ui:
     switch_to_adventures: "Aller aux aventures"
     switch_to_another_adventure: "Choose a different adventure"
     commands_title: "Commandos"
+    by: "per"
 ClientErrorMessages:
     Transpile_warning: "Attention!"
     Transpile_error: "Le serveur n’a pas pu traduire ce code."
     Connection_error: "Nous n’avons pas réussi à contacter le serveur."
     Other_error: "Oups! Nous avons rencontré une erreur."
     Execute_error: "Quelque chose s’est mal passé en exécutant ce programme."
+    CheckInternet: "Have a look if your Internet connection is working properly?"
+    ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
     Wrong Level: "Ce code est du code Hedy valide, mais pas du bon niveau. Tu as saisis du code {original_level} au niveau {working_level}."
     Incomplete: "Oups ! Tu as oublié un morceau de code ! À la ligne {line_number}, tu dois écrire du texte après {incomplete_command}."
@@ -120,6 +125,12 @@ Auth:
     email_reset_password_body: |-
         Ton mot de passe sur Hedy a été réinitialisé. Si tu as fait ce changement toi-même, tout va bien.
         Si tu n'as pas changé ton mot de passe, merci de nous contacter immédiatement en répondant à cet email.
+    programming_experience: "Do you have programming experience?"
+    yes: "yes"
+    no: "no"
+    languages: "Which of these programming languages have you used before?"
+    other_block: "Another block language"
+    other_text: "Another text language"
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "Mes programmes"
@@ -131,6 +142,7 @@ Auth:
     unshare_success_detail: "Program unshared successfully"
     copy_clipboard: "Successfully copied to clipboard"
     answer_question: "Tu ne peux pas exécuter le programme avant d'avoir répondu à la question."
+    must_be_logged: "You must be logged in to save a program"
 Programs:
     recent: "Mes programmes récents"
     level: "Niveau"

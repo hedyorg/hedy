@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+        <div class="flex-container">
+            <div class="center-picture p-10"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
+            </div>
+            <div class="title-block p-8 border-t-8 border-blue-600">
+                <h1 class="start-quiz-title font-slab">Start de Hedy Quiz</h1>
+                <h2 class="start-quiz-subtitle"><i> Level {{ level }} </i></h2>
+            </div>
+        </div>
+        <div class="p-10 button-bar border-t-8 border-green-600 ">
+            <button class="green-btn"
+                    onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">Ga terug naar
+                level {{ level }} </button>
+
+            <button class="green-btn ml-1 " onclick="window.location = '/quiz/quiz_questions/{{level }}/1'"> Ga naar
+                vraag 1 van de quiz
+            </button>
+        </div>
+{% endblock %}

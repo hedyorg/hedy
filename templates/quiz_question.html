@@ -1,0 +1,74 @@
+
+{% extends "quiz.html" %}
+
+{% block question %}
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type=text/javascript>
+            $(function () {
+                $("input[name='radio_option']").change(function () {
+                    $("input[name='submit-button']").prop("disabled", false);
+                });
+            });
+
+            function changeHint() {
+                const btn = document.getElementById("hint-button");
+                if (btn.innerText === "Hint?") {
+                    btn.innerText = document.getElementById('hidden-hint').textContent;
+                } else {
+                    btn.innerText = "Hint?";
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+    <div>
+        <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab"><p
+                class="font-semibold">Vraag {{ question_nr }} </p>
+            <p> / {{ questions|length }} </p></div>
+        <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center font-slab"> {{ question.question_text }} </p>
+        {% if question.code and question.code!= "..." %}
+            <pre><code class="ml-6 text-xl">{{ question.code }}</code></pre>
+        {% endif %}
+
+        <form action='/submit_answer/{{ level_source }}/{{ question_nr }}' method="POST">
+            <div class="grid gap-1 rounded-t-xl radio-block">
+                {% for row in question.mp_choice_options %}
+                    <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
+                        <label class="inline-flex items-center"><p
+                                class="text-4xl font-bold ml-6 mr-6 font-slab">{{ char_array[loop.index - 1] }}</p></p>
+                            <input
+                                    type="radio"
+                                    name="radio_option"
+                                    value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
+                                    class="class form-radio h-12 w-12">
+                            <span>
+                                {% if row.code %}
+
+                                    <code class="ml-6 text-xl">{{ row.code }}</code>
+                                {% elif row.option_text %}
+                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
+                                {% endif %}
+                            </span>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="p-10 button-bar border-t-8 border-green-600">
+                <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
+                <div>
+                    <button type="button" onclick="changeHint()"
+                            class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600" name="hint-button" id="hint-button">Hint?
+                    </button>
+                </div>
+                <input class="green-btn ml-1" type="submit" name="submit-button"
+                       value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
+            </div>
+        </form>
+
+    </div>
+    </body>
+
+    </script>
+{% endblock %}

@@ -1,4 +1,6 @@
 import collections
+import os
+
 import attr
 import glob
 from os import path
@@ -8,9 +10,9 @@ from flask_helpers import render_template
 
 import courses
 from website.auth import current_user
-from utils import type_check
 import re
 import utils
+from config import config
 
 class Translations:
   def __init__(self):
@@ -36,10 +38,16 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, loaded_program_name, adventure_assignments, adventure_name):
+def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+
+  if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
+    quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
+    quiz_data_level = quiz_data['level']
+  else:
+    quiz_data_level = 0
 
   sublevel = None
-  if type_check (level_number, 'str') and re.match ('\d+-\d+', level_number):
+  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
     sublevel     = int (level_number [level_number.index ('-') + 1])
     level_number = int (level_number [0:level_number.index ('-')])
 
@@ -68,10 +76,12 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
-  arguments_dict['loaded_program_name'] = loaded_program_name
   arguments_dict['adventure_assignments'] = adventure_assignments
   arguments_dict['adventure_name'] = adventure_name
+  arguments_dict['quiz_data_level'] = quiz_data_level
+  arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
 
+  print(course.language == 'nl')
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
 
