@@ -22,17 +22,17 @@ def run_code(code):
     return out.getvalue().strip()
 
 
-class TestsLevel7_1(unittest.TestCase):
+class TestsLevel8_1(unittest.TestCase):
   def test_print(self):
-    result = hedy.transpile("print 'ik heet'", 7, 1)
+    result = hedy.transpile("print 'ik heet'", 8, 1)
     self.assertEqual("print('ik heet')", result)
 
   def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 7, 1)
+    result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 8, 1)
     self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
 
   def test_print_with_calc_no_spaces(self):
-    result = hedy.transpile("print '5 keer 5 is ' 5*5", 7, 1)
+    result = hedy.transpile("print '5 keer 5 is ' 5*5", 8, 1)
     self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
 
   def test_print_calculation_times_directly(self):
@@ -41,7 +41,7 @@ class TestsLevel7_1(unittest.TestCase):
     nummertwee is 6
     print nummer * nummertwee""")
 
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     expected = textwrap.dedent("""\
     nummer = '5'
@@ -53,7 +53,7 @@ class TestsLevel7_1(unittest.TestCase):
     self.assertEqual("30", run_code(result))
 
   def test_transpile_ask(self):
-    result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 7, 1)
+    result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 8, 1)
     self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
 
   def test_if_with_indent(self):
@@ -65,7 +65,7 @@ class TestsLevel7_1(unittest.TestCase):
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print('koekoek')""")
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     self.assertEqual(expected, result)
 
@@ -88,7 +88,7 @@ class TestsLevel7_1(unittest.TestCase):
       print('Foutje')
       print('Het antwoord moest zijn '+str(antwoord))""")
 
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     self.assertEqual(expected, result)
 
@@ -101,7 +101,7 @@ class TestsLevel7_1(unittest.TestCase):
     keuzes = ['steen', 'schaar', 'papier']
     computerkeuze=random.choice(keuzes)
     print('computer koos '+str(computerkeuze))""")
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     self.assertEqual(expected, result)
 
@@ -119,7 +119,7 @@ class TestsLevel7_1(unittest.TestCase):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     self.assertEqual(expected, result)
 
@@ -137,7 +137,7 @@ class TestsLevel7_1(unittest.TestCase):
     else:
       x = '222'""")
 
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     self.assertEqual(expected, result)
 
@@ -151,7 +151,7 @@ class TestsLevel7_1(unittest.TestCase):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
-    result = hedy.transpile(code, 7, 1)
+    result = hedy.transpile(code, 8, 1)
 
     self.assertEqual(expected, result)
 
@@ -177,7 +177,7 @@ class TestsLevel7_1(unittest.TestCase):
 #      if str(antwoord) == str('25'):
 #        i = '10'""")
 #
-#    result = hedy.transpile(code, 7, 1)
+#    result = hedy.transpile(code, 8, 1)
 #
 #    self.assertEqual(expected, result)
 
@@ -189,7 +189,7 @@ class TestsLevel7_1(unittest.TestCase):
 # at one point we want a real "Indent" error and a better error message
 # for this!
 
-  # def test_level_7_no_indentation(self):
+  # def test_level_8_no_indentation(self):
   #   #test that we get a parse error here
   #   code = textwrap.dedent("""\
   #   antwoord is ask Hoeveel is 10 keer tien?
@@ -199,7 +199,7 @@ class TestsLevel7_1(unittest.TestCase):
   #   print 'bah slecht'""")
   #
   #   with self.assertRaises(Exception) as context:
-  #     result = hedy.transpile(code, 7, 1)
+  #     result = hedy.transpile(code, 8, 1)
   #   self.assertEqual(str(context.exception), 'Parse')
 
 

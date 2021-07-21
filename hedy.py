@@ -1297,6 +1297,7 @@ def transpile_inner(input_string, level, sub = 0):
         python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 4:
+        # Sublevel has the same grammar
         python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 5:
@@ -1306,13 +1307,10 @@ def transpile_inner(input_string, level, sub = 0):
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        if sub == 0:
-            python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        elif sub == 1:
-            # Code conversion is the same as level 8
-            python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
+        # Sublevel has the same conversion
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
