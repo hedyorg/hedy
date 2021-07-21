@@ -5,17 +5,6 @@ import io
 from contextlib import contextmanager
 import textwrap
 
-# code = textwrap.dedent("""
-# """)
-#
-# result = hedy.transpile(code, 3)
-#
-# expected = textwrap.dedent("""\
-# """)
-#
-# self.assertEqual(expected, result)
-
-
 @contextmanager
 def captured_output():
     new_out, new_err = io.StringIO(), io.StringIO()
@@ -204,6 +193,25 @@ class TestsLevel3(unittest.TestCase):
     print('jouw lievelingskleur is dus'+kleur+'!')""")
 
     self.assertEqual(expected, result)
+
+  def test_transpile_ask_with_var(self):
+
+    code = textwrap.dedent("""
+    ding is kleur
+    kleur is ask 'Wat is je lievelings' ding
+    print 'Jouw favoriet is dus ' kleur""")
+
+    result = hedy.transpile(code, 3)
+
+    expected = textwrap.dedent("""\
+    ding = 'kleur'
+    kleur = input('Wat is je lievelings'+ding)
+    print('Jouw favoriet is dus '+kleur)""")
+
+    self.assertEqual(expected, result)
+
+
+
 
   def test_transpile_missing_opening_quote(self):
     code = textwrap.dedent("""
