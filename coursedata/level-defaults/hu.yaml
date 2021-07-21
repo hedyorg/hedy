@@ -36,14 +36,14 @@
 
         Jegyezd meg: 'ask' megváltozott, egy szó segítségével elmentheted a választ, mint itt:
         ```
-        valasz is Mi a neved?
+        valasz is ask Mi a neved?
         ```
 
         A print utasítás úgy működik, mint az 1. szinten, de az echo utasításra már nem lesz
         szükséged.
 
         A 2. szinten készíthetsz listát is. Kérheted a számítógépet, hogy véletlenszerűen
-        válasszon valamit a listából. Ezt az 'at random' utasítással teheted meg.
+        válasszon valamit a listából. Ezt az `at random` utasítással teheted meg.
 
         A baloldali sávban a 2. szint összes parancsát láthatod. A következő füleken különböző
         feladatokat találsz.
@@ -70,7 +70,7 @@
 3:
     start_code: "print Helló világ "
     intro_text: |-
-        a `print` és a `ask` változás a 3 szinten.
+        ask` ugyanolyan, a 3. szinten, mint eddig, de `print` most más lesz.
 
         Amit ki akarsz íratni, idézőjelbe kell tenned.
 
@@ -97,13 +97,13 @@
             print 'A nevem ' nev
     -   name: "ask"
         explanation: "Kérdezz valamit `ask`segítségével."
-        example: "Példa: szin is ask 'Mi a kedvenc színed?'"
+        example: "Példa: szin is ask Mi a kedvenc színed?"
         demo_code: |
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             print szin 'a kedvenc színed !'
 4:
     start_code: |-
-        nev is ask 'Hogy hívnak?'
+        nev is ask Hogy hívnak?
         if nev is Hedy print 'klassz!' else print 'ajaj'
     intro_text: |-
         `ask` és `print` ugyanúgy működnek, mint a 3. szinten. A 4. szinten hozzájön az `if`
@@ -111,7 +111,7 @@
 
         ##Hedy Code példa
         ```
-        nev is ask 'mi a neved?'
+        nev is ask mi a neved?
         if nev is Hedy print 'klassz' else print 'úhh'
         ```
         Ez a kód kiírja, hogy klassz, ha a Hedy nevet adod meg névként, és úhh-t, ha valami
@@ -128,15 +128,15 @@
         demo_code: "print 'Szia, üdvözlünk a Hedy-nél.'"
     -   name: "ask"
         explanation: "Kérdezz valamit az `ask`utasítással."
-        example: "Példa: szin is ask 'Mi a kedvenc színed?'"
+        example: "Példa: szin is ask Mi a kedvenc színed?"
         demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             print szin ' a kedvenced!'
     -   name: "if"
         explanation: "Válassz az `if` utasítással"
         example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
         demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             if szin is zöld print 'szép!' else print 'csúnya'
 5:
     start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
@@ -155,15 +155,15 @@
         demo_code: "print 'Szia, üdvözlünk a Hedy-nél.'"
     -   name: "ask"
         explanation: "Kérdezz valamit az `ask`utasítással."
-        example: "Példa: szin is ask 'Mi a kedvenc színed?'"
+        example: "Példa: szin is ask Mi a kedvenc színed?"
         demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             print szin ' a kedvenced!'
     -   name: "if"
         explanation: "Készíts elágazást az `if` és az 'else' utasítással"
         example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
         demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             if szin is zöld print 'szép!' else print 'csúnya'
 
 
@@ -171,7 +171,7 @@
         explanation: "`repeat` és `if` együtt"
         example: "Példa: if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
         demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'
 6:
     start_code: "print '5-ször 5 az ' 5 * 5"
@@ -200,15 +200,15 @@
         demo_code: "print '5-ször 5 az ' 5 * 5"
     -   name: "`ask` és `if` számolásokkal"
         explanation: "Kérdezz egy számolást és ellenőrizd, hogy jó-e."
-        example: "Példa: valasz is ask 'Mennyi 10+10?'"
+        example: "Példa: valasz is ask Mennyi 10+10?"
         demo_code: |-
-            valasz is ask 'Mennyi 10+10?'
+            valasz is ask Mennyi 10+10?
             if valasz is 20 print 'Igen!' else print 'Hoppá'
     -   name: "repeat"
         explanation: "`repeat` és `if` együtt"
         example: "Példa: if szorzat is 50 repeat 3 times print 'helyes!' else repeat 5 times print 'hibás'"
         demo_code: |-
-            szorzat is ask 'Mennyi 10-szer 5?'
+            szorzat is ask Mennyi 10-szer 5?
             if szorzat is 50 repeat 3 times print 'helyes!' else repeat 5 times print 'hibás'
 
 
@@ -235,7 +235,7 @@
         meg a példakódot a részletekért'
         ##Hedy code példa
         ```
-        szin is ask 'Mi a kedvenc színed?'
+        szin is ask Mi a kedvenc színed?
          if szin is zöld
          repeat 3 times
          print 'szép!'
@@ -250,9 +250,9 @@
         demo_code: "print '5-ször 5 az ' 5 * 5"
     -   name: "`if` több sorral"
         explanation: "Kérdezz egy műveletet és ellenőrizd, hogy jó-e a válasz. Most két sort fogunk kiíratni."
-        example: " Példa: valasz is ask 'Mennyi 5 + 5?'"
+        example: " Példa: valasz is ask Mennyi 5 + 5?"
         demo_code: |-
-            valasz is ask 'Mennyi 5 + 5?'
+            valasz is ask Mennyi 5 + 5?
             if valasz is 10
                 print 'Nagyszerű!'
                 print 'Valóban a válasz ' valasz
@@ -263,7 +263,7 @@
         explanation: "`if` és `repeat` együtt"
         example: "Példa: if szin is zöld repeat 3 times print 'csodás!' else repeat 5 times print 'Ajaj'"
         demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
+            szin is ask Mi a kedvenc színed?
             if szin is zöld
                 repeat 3 times
                     print 'csodás!'
