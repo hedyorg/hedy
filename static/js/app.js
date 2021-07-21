@@ -649,6 +649,26 @@ window.delete_class = function delete_class(id) {
   });
 }
 
+window.join_class = function join_class(link, noRedirect) {
+  // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
+  if (! window.auth.profile) {
+     if (! confirm (window.auth.texts.save_prompt)) return;
+     localStorage.setItem ('hedy-join', link);
+     window.location.pathname = '/login';
+     return;
+  }
+
+  $.ajax({
+    type: 'GET',
+    url: link,
+  }).done(function(response) {
+    if (! noRedirect) window.location.pathname = '/programs';
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
 window.remove_student = function delete_class(class_id, student_id) {
   if (! confirm (window.auth.texts.remove_student_prompt)) return;
 

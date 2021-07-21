@@ -165,16 +165,17 @@ class Database:
         if not student_id in students:
             return True
 
-        user = USERS.get({'username': student_id})
-
         # TODO: we might need to change this to avoid race conditions when removing items
-        student_classes = user.get('classes') or []
-        student_classes.remove(Class ['id'])
-
         Class ['students'].remove(student_id)
-
-        USERS.update({'username': student_id}, {'classes': student_classes})
         CLASSES.update({'id': Class ['id']}, {'students': Class ['students']})
+
+        user = USERS.get({'username': student_id})
+        # If the user was already deleted, there's no need to remove the class from their list of classes
+        if user:
+            # TODO: we might need to change this to avoid race conditions when removing items
+            student_classes = user.get('classes') or []
+            student_classes.remove(Class ['id'])
+            USERS.update({'username': student_id}, {'classes': student_classes})
 
     def delete_class(self, Class):
         for student_id in Class ['students']:

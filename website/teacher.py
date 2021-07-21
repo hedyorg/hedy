@@ -6,6 +6,8 @@ from flask_helpers import render_template
 import os
 import hedyweb
 TRANSLATIONS = hedyweb.Translations ()
+from config import config
+cookie_name     = config ['session'] ['cookie_name']
 
 def routes (app, database, requested_lang):
     global DATABASE
@@ -99,11 +101,15 @@ def routes (app, database, requested_lang):
         return {}, 200
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
-    @requires_login
-    def prejoin_class (user, class_id, link):
+    def prejoin_class (class_id, link):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['link'] != link:
             return 'No such class', 404
+        user = {}
+        if request.cookies.get (cookie_name):
+            token = DATABASE.get_token(request.cookies.get (cookie_name))
+            if token:
+                user = DATABASE.user_by_username(token ['username'])
 
         return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
 

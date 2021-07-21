@@ -491,6 +491,18 @@ def suite (username):
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['get profile after class being deleted', 'get', '/profile', {}, {}, 200, getStudentClasses2],
         ['destroy student account', 'post', '/auth/destroy', {}, {}, 200],
+        ['valid signup as student', 'post', '/auth/signup', {}, {'username': 'student-' + username, 'password': 'foobar', 'email': 'student-' + username + '@e2e-testing.com'}, 200, successfulSignupStudent],
+        ['valid signup as teacher', 'post', '/auth/signup', {}, {'username': 'teacher-' + username, 'password': 'foobar', 'email': 'teacher-' + username + '@e2e-testing.com'}, 200, successfulSignupTeacher],
+        ['mark teacher user as teacher', 'post', '/admin/markAsTeacher', {}, {'username': 'teacher-' + username, 'is_teacher': True}, 200],
+        ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['create class', 'post', '/class', {}, {'name': 'class1'}, 200],
+        ['get classes to set its id in the state', 'get', '/profile', {}, {}, 200, getTeacherClasses2],
+        ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['join class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
+        ['destroy student account', 'post', '/auth/destroy', {}, {}, 200],
+        ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['get classes after student destroyed their account', 'get', '/profile', {}, {}, 200, getTeacherClasses2],
+        ['destroy teacher account', 'post', '/auth/destroy', {}, {}, 200],
     ]
 
 if not args.concurrent:

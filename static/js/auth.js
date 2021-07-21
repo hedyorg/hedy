@@ -74,13 +74,24 @@ window.auth = {
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
 
+        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+
         var savedProgram = localStorage.getItem ('hedy-first-save');
-        if (! savedProgram) return auth.redirect ('programs');
+        var joinClass    = localStorage.getItem ('hedy-join');
+        if (! savedProgram) {
+           if (! joinClass) return auth.redirect ('programs');
+           localStorage.removeItem ('hedy-join');
+           return window.join_class (joinClass);
+        }
+
         savedProgram = JSON.parse (savedProgram);
-        // We set up a non-falsy profile to let `saveit` know that we're logged in.
-        window.auth.profile = {};
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
+           if (joinClass) {
+             localStorage.removeItem ('hedy-join');
+             return window.join_class (joinClass, true);
+           }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
            auth.redirect (redirect || 'programs');
@@ -101,13 +112,24 @@ window.auth = {
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
 
-        var savedProgram = localStorage.getItem ('hedy-first-save');
-        if (! savedProgram) return auth.redirect ('programs');
-        savedProgram = JSON.parse (savedProgram);
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+
+        var savedProgram = localStorage.getItem ('hedy-first-save');
+        var joinClass    = localStorage.getItem ('hedy-join');
+        if (! savedProgram) {
+           if (! joinClass) return auth.redirect ('programs');
+           localStorage.removeItem ('hedy-join');
+           return window.join_class (joinClass);
+        }
+
+        savedProgram = JSON.parse (savedProgram);
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
+           if (joinClass) {
+             localStorage.removeItem ('hedy-join');
+             return window.join_class (joinClass, true);
+           }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
            auth.redirect (redirect || 'programs');
