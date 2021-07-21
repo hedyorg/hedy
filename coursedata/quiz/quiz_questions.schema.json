@@ -1,0 +1,74 @@
+{
+  "title": "JSON Schema for Hedy Quiz",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "level": {
+      "type": "integer",
+      "description": "Level number of the quiz"
+    },
+    "questions": {
+      "type": "array",
+      "description": "Questions for the Hedy Quiz, key/value map",
+      "additionalProperties": {
+        "$ref": "#/Question"
+      }
+    }
+  },
+  "required": [
+    "level",
+    "questions"
+  ],
+  "Question": {
+    "type": "object",
+    "properties": {
+      "option_text": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "mp_choice_options": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minItems": 2,
+          "uniqueItems": true
+        }
+      },
+      "correct_answer": {
+        "type": "string",
+        "enum": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "hint": {
+        "type": "string"
+      },
+      "question_score": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "mp_choice_options",
+      "correct_answer",
+      "question_score"
+    ],
+    "anyOf": [
+      {
+        "required": [
+          "option_text"
+        ]
+      },
+      {
+        "required": [
+          "code"
+        ]
+      }
+    ],
+    "additionalProperties": false
+  }
+}
