@@ -652,7 +652,7 @@ window.delete_class = function delete_class(id) {
 window.join_class = function join_class(link, noRedirect) {
   // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
   if (! window.auth.profile) {
-     if (! confirm (window.auth.texts.save_prompt)) return;
+     if (! confirm (window.auth.texts.join_prompt)) return;
      localStorage.setItem ('hedy-join', link);
      window.location.pathname = '/login';
      return;
