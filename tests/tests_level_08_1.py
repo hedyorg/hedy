@@ -53,7 +53,7 @@ class TestsLevel8_1(unittest.TestCase):
     self.assertEqual("30", run_code(result))
 
   def test_transpile_ask(self):
-    result = hedy.transpile("antwoord is ask wat is je lievelingskleur?", 8, 1)
+    result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", 8, 1)
     self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
 
   def test_if_with_indent(self):
@@ -71,7 +71,7 @@ class TestsLevel8_1(unittest.TestCase):
 
   def test_if_else(self):
     code = textwrap.dedent("""\
-    antwoord is ask Hoeveel is 10 plus 10?
+    antwoord is ask 'Hoeveel is 10 plus 10?'
     if antwoord is 20
         print 'Goedzo!'
         print 'Het antwoord was inderdaad ' antwoord

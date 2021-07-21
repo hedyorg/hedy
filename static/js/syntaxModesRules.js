@@ -185,36 +185,43 @@ define('ace/mode/level3_highlight_rules', [], function(require, exports, module)
 
     this.$rules = {
       "start": [{
-        regex: "^print ",
         token: "keyword",
+        regex: "^print ",
         next: "print option"
       },{
+        token: "keyword",
         regex: " is ask ",
-        token: "keyword",
-        next: "rest"
+        next: "print option"
       },{
+        token: "keyword",
         regex: " is ",
-        token: "keyword",
-        next: "rest"
+        next: "print option"
       }],
 
-      "print option": [{
-        regex: "('[^']*')(.*)",
-        token: ["constant.character", "text"],
-        next: "start",
-      },{
-        regex: "\\w+",
-        token: "text",
-        next: "after print variable",
-      }],
-
-      "rest": [{ regex: "$", next: "start" }],
-
-      "after print variable": [{
-        regex: "(\\s+at random)(.*)",
-        token: ["keyword", "text"],
-        next: "start",
-      }],
+      "print option": [
+        {
+          token: "constant.character",
+          regex: "'[^']*'$",
+          next: "start",
+        },{
+          token: "constant.character",
+          regex: "'[^']*'",
+        },{
+          token: "text",
+          regex: "\\w+$",
+          next: "start",
+        },{
+          token: "text",
+          regex: "\\w+$",
+        },{
+          regex: "at random",
+          token: "keyword"
+        },{
+          regex: "at random$",
+          token: "keyword",
+          next: "start"
+        }
+      ]
     };
 
     this.normalizeRules();
@@ -302,6 +309,9 @@ define('ace/mode/level4_highlight_rules', [], function(require, exports, module)
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         defaultToken : "text"
       }],
@@ -420,6 +430,9 @@ define('ace/mode/level5_highlight_rules', [], function(require, exports, module)
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         defaultToken : "text"
       }],
@@ -563,6 +576,9 @@ define('ace/mode/level6_highlight_rules', [], function(require, exports, module)
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         defaultToken : "text"
       }],
 
@@ -703,6 +719,9 @@ define('ace/mode/level7_highlight_rules', [], function(require, exports, module)
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         defaultToken : "text"
       }],
@@ -866,6 +885,9 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1037,6 +1059,9 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1252,6 +1277,9 @@ define('ace/mode/level11_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1515,6 +1543,9 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1783,6 +1814,9 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -2075,6 +2109,9 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -2371,6 +2408,9 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -2666,6 +2706,9 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -2966,6 +3009,9 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -3290,6 +3336,9 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -3627,6 +3676,9 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -3963,6 +4015,9 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -4298,6 +4353,9 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",

@@ -266,7 +266,7 @@ class MemoryStorage(TableStorage):
         if filename:
             try:
                 with open(filename, 'r') as f:
-                    self.tables = json.load(f)
+                    self.tables = json.load(f, object_hook=CustomEncoder.decode_object)
             except IOError:
                 pass
             except json.decoder.JSONDecodeError as e:
@@ -310,6 +310,16 @@ class MemoryStorage(TableStorage):
             if isinstance(update, DynamoUpdate):
                 if isinstance(update, DynamoIncrement):
                     record[name] = record.get(name, 0) + update.delta
+                elif isinstance(update, DynamoAddToStringSet):
+                    existing = record.get(name, set())
+                    if not isinstance(existing, set):
+                        raise TypeError(f'Expected a set in {name}, got: {existing}')
+                    record[name] = existing | set(update.elements)
+                elif isinstance(update, DynamoRemoveFromStringSet):
+                    existing = record.get(name, set())
+                    if not isinstance(existing, set):
+                        raise TypeError(f'Expected a set in {name}, got: {existing}')
+                    record[name] = existing - set(update.elements)
                 else:
                     raise RuntimeError(f'Unsupported update type for in-memory database: {update}')
             elif update is None:
@@ -353,7 +363,7 @@ class MemoryStorage(TableStorage):
         if self.filename:
             try:
                 with open(self.filename, 'w') as f:
-                    json.dump(self.tables, f, indent=2)
+                    json.dump(self.tables, f, indent=2, cls=CustomEncoder)
             except IOError:
                 pass
 
@@ -388,6 +398,29 @@ class DynamoIncrement(DynamoUpdate):
                 'Value': { 'N': str(self.delta) },
             }
 
+class DynamoAddToStringSet(DynamoUpdate):
+    """Add one or more elements to a string set."""
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def to_dynamo(self):
+        return {
+                'Action': 'ADD',
+                'Value': { 'SS': list(self.elements) },
+            }
+
+
+class DynamoRemoveFromStringSet(DynamoUpdate):
+    """Remove one or more elements to a string set."""
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def to_dynamo(self):
+        return {
+                'Action': 'DELETE',
+                'Value': { 'SS': list(self.elements) },
+            }
+
 def replace_decimals(obj):
     """
     Replace Decimals with native Python values.
@@ -411,4 +444,20 @@ def replace_decimals(obj):
         else:
             return float(obj)
     else:
+        return obj
+
+
+class CustomEncoder(json.JSONEncoder):
+    """An encoder that serializes non-standard types like sets."""
+    def default(self, obj):
+        if isinstance(obj, set):
+            return {"$type": "set", "elements": list(obj)}
+        return json.JSONEncoder.default(self, obj)
+
+
+    @staticmethod
+    def decode_object(obj):
+        """The decoding for the encoding above."""
+        if obj.get('$type') == 'set':
+            return set(obj['elements'])
         return obj

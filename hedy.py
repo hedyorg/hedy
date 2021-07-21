@@ -501,6 +501,12 @@ class ConvertToPython_3(ConvertToPython_2):
         return "print(" + '+'.join(args) + ')'
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
+    def ask(self, args):
+        args_new = []
+        var = args[0]
+        remaining_args = args[1:]
+
+        return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
     lines = s.split('\n')

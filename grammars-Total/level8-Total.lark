@@ -51,7 +51,8 @@ _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
 _WHILE: "while"
-ask: var _SPACE _IS _SPACE _ASK _SPACE textwithspaces*
+ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
+ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
 command: print | ifs elses? | ask | for_loop | assign_list | list_access_var | assign
