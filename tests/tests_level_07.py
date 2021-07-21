@@ -78,7 +78,7 @@ class TestsLevel7(unittest.TestCase):
 
   def test_transpile_ask(self):
     code = textwrap.dedent("""\
-    antwoord is ask wat is je lievelingskleur?""")
+    antwoord is ask 'wat is je lievelingskleur?'""")
 
     result = hedy.transpile(code, 7)
 
@@ -158,7 +158,7 @@ class TestsLevel7(unittest.TestCase):
 
   def test_if_else(self):
     code = textwrap.dedent("""\
-    antwoord is ask Hoeveel is 10 plus 10?
+    antwoord is ask 'Hoeveel is 10 plus 10?'
     if antwoord is 20
         print 'Goedzo!'
         print 'Het antwoord was inderdaad ' antwoord

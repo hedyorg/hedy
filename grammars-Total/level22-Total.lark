@@ -52,7 +52,7 @@ _TIMES: "times"
 _TO: "to"
 _WHILE: "while"
 andcondition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
-ask: var _SPACE _IS _SPACE _ASK _SPACE textwithspaces*
+ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
 assign: var _SPACE _EQUALS _SPACE length | var _SPACE _EQUALS _SPACE sum | var _SPACE _EQUALS _SPACE textwithoutspaces | list_access _SPACE _EQUALS _SPACE sum | list_access _SPACE _EQUALS _SPACE textwithoutspaces
 assign_list: var _SPACE _EQUALS _SPACE _LEFT_SQUARE_BRACKET quoted_text ((_COMMA|_COMMA _SPACE) quoted_text)+ _RIGHT_SQUARE_BRACKET
 bigger: (textwithoutspaces | list_access | length) _SPACE _LARGER _SPACE (textwithoutspaces | list_access | length)
