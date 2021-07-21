@@ -131,6 +131,28 @@ adventures:
                     ```
 
                 start_code: "repeat 5 times print 'Help!'"
+            7: 
+                story_text: |
+                    ## Verhaal in level 7
+                    In level 7 kun je je verhaal ècht interactief maken! In dit level is het `if` commando namelijk veranderd, waardoor je in staat bent om meerdere regels te printen na een if. 
+                    Zo kun je de lezer van je verhaal een keuze laten maken en het verhaal verder laten gaan op basis van die keuze. Kijk maar naar het voorbeeld. 
+                    
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Je loopt door het bos'
+                    print 'Je hoort plotseling een geluid!'
+                    dapper is ask Ga je op het geluid af? 
+                    if dapper is ja
+                        print 'Dapper stap je op het geluid af'
+                        print ...
+                    else
+                        print 'Snel zoek je een verstopplek'
+                        print ...
+                    ```
+                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf de puntjes in! Wat gebeurt er verder?
+                start_code: ""
+                
+            
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
@@ -187,6 +209,48 @@ adventures:
 
                     Maar zoals je in deze les ziet, wil je soms meerdere regels samen herhalen. Dat kan met knippen en plakken, maar dat is wel veel werk. In level 7 leer je hoe je dat makkelijker kan doen.
                 start_code: "print 'Baby shark'"
+            7: 
+                story_text: |
+                    ## Zing een liedje!
+                    In level 7 kun je meerdere regels herhalen, wat heel fijn is in liedjes! 
+                    
+                    ## Cowboy Billie Boem
+                    ```
+                    repeat 3 times
+                        dier is ask Welk dier kies je?
+                        print 'En wie rijdt er op zijn ' dier ' door de prairie?'
+                        print 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
+                        print 'Er is nooit in t Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
+                        print 'Van je hotsie knotsie knetter!'
+                        print 'Van je jippie jippie jeej!'
+                        print 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
+                        print 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
+                        print 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
+                    ```
+                start_code: " "
+                    
+            8:
+                story_text: |
+                    ## Zing een stapelliedje!
+                    In level 8 kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren. 
+                    
+                    ## 10 kleine visjes
+                    ```
+                    for i in range 0 to 8
+                        i is 10-i
+                        print i ' kleine visjes zwommen naar de zee'
+                        print 'Moeder zei: ik ga niet mee'
+                        print 'Ik blijf liever in de vieze oude sloot'
+                        print 'Want in de zee daar zwemmen haaien en die bijten je...'
+                        print 'Blub, blub, blub, blubblubblub'
+                        print 'Blubblubblub, blub, blubblubblub'
+                    print 'Een klein visje zwom naar de zee'
+                    print 'Moeder zei: ik ga niet mee'
+                    print 'Ik blijf liever in de vieze oude sloot'
+                    print 'Want in de zee daar zwemmen haaien en die bijten je...'
+                    print 'DOOD!'
+                    ```
+                start_code: " "
     dishes:
         name: "Wie doet de afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
@@ -524,6 +588,27 @@ adventures:
                     if antwoord is goede_antwoord print 'goedzo' else print 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "print Welkom bij jouw rekenmachine"
+            7:
+              story_text: |
+                  ## Rekenmachine
+                  In level 7 kun je een score bijhouden bij je rekenspelletje! 
+                  
+                  ## Voorbeeld Hedycode
+                  ```
+                  score is 0
+                  repeat 10 times
+                    getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    getal1 is getallen at random
+                    getal2 is getallen at random
+                    goedeantwoord is getal1 * getal2
+                    print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
+                    antwoord is ask Vul hier het antwoord in: 
+                    print 'Jouw antwoord is ' antwoord
+                    if antwoord is goedeantwoord
+                        score is score +1
+                  print 'Je score is ' score
+                  ```
+            start_code: ""
     fortune:
         name: "Waarzegger"
         description: "Laat Hedy jouw toekomst voorspellen"
@@ -704,7 +789,148 @@ adventures:
                          print antwoorden at random
                      ```
                  start_code: ""
-
+    restaurant:
+        name: "Restaurant"
+        description: "Maak een virtueel restaurant"
+        image: "restaurant.png"
+        default_save_name: "Restaurant"
+        levels:
+            6:
+                story_text: |
+                    ## Restaurant level 6
+                        In level 6 kun je in je restaurant prijzen toevoegen en berekenen! 
+                    
+                    ## Voorbeeld Hedy code
+                      You can make a simple restaurant code, like this:
+                      ```
+                      print 'Welkom bij McHedy'
+                      print 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
+                      print 'U krijgt frietjes en drinken bij uw bestelling. '
+                      eten is ask Wat wilt u bestellen?
+                      prijs is 0
+                      if eten is hamburger prijs is 8
+                      if eten is kroket prijs is 6
+                      if eten is kaassoufle prijs is 5
+                      print 'U heeft een ' eten ' besteld'
+                      print 'Dat is dan ' prijs ' euro, alstublieft!'
+                      print 'Bedankt en eet smakelijk!'
+                      ```
+                      De code hierboven is best simpel, je kunt namelijk maar 1 gerecht bestellen en dat wordt de prijs die afgerekend moet worden. 
+                      Je kunt de code nog een stuk uitgebreider maken, kijk maar naar dit voorbeeld waarin je 3 gangen kunt bestellen.
+                      ## Example Hedy Code (Elaborate)
+                      In this example there are three courses, which requires more code and more additions in calculating the price.
+                      ```
+                      print 'Welkom in restaurant Hedy'
+                      print 'Dit is ons menu:'
+                      print 'Onze voorgerechten zijn salade, soep of carpaccio'
+                      print 'Onze hoofdgerechten zijn pizza, lasagne, of spaghetti'
+                      print 'Onze toetjes zijn brownie, ijsje, of milkshake'
+                      voorgerecht is ask Welk voorgerecht wilt u?
+                      hoofdgrecht is ask Welk hoofdgerecht wilt u?
+                      nagerecht is ask Welk nagerecht wilt u?
+                      prijs is 0
+                      if voorgerecht is soep prijs is prijs + 6 else prijs is prijs + 7
+                      if hoofdgerecht is pizza prijs is prijs + 10
+                      if hoofdgerecht is lasagne prijs is prijs + 12
+                      if hoofdgerecht is spaghetti prijs is prijs + 8
+                      if nagerecht is brownie prijs is prijs + 7
+                      if nagerecht is ijsje prijs is prijs + 5
+                      if nagerecht is milkshake prijs is prijs + 4
+                      print 'Dit heb je besteld: ' voorgerecht ' , ' hoofdgerecht ' en ' nagerecht
+                      print 'Dat wordt dan ' prijs ' euro, alstublieft.'
+                      print 'Bedankt en eet smakelijk!'
+                      ```
+                      ## Uitdaging
+                      Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld...
+                      ... mensen korting geven met een geheime code?
+                      ... vragen hoeveel mensen er komen en de prijs daarop aanpassen?
+                      ... nog een gang toevoegen?
+                      ... een kindermenu toevoegen?
+                      ... nog iets anders?
+                      
+                start_code: " print 'Welkom' "
+          
+            7: 
+                story_text: | 
+                    ## Restaurant level 7
+                    In level 7 kun je meerdere regels code herhalen, wat betekent dat je meerdere mensen kunt vragen wat ze willen eten en drinken en dat ook nog kunt printen. 
+                    Kijk maar naar het voorbeeld!
+                    
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Welkom bij McHedy!'
+                    print 'U kunt hier uw bestelling doorgeven'
+                    mensen is ask Voor hoeveel personen wilt u bestellen?
+                    repeat mensen times
+                      eten is ask Wat wilt u eten?
+                      print eten
+                      drinken is ask Wat wilt u drinken?
+                      print drinken
+                    prijs is 4 * mensen
+                    print 'Dat wordt dan ' prijs ' euro!'
+                    ```
+                                       
+                    ## Toevoegingen met `if`
+                    Je kunt natuurlijk ook zorgen dat er vervolgvragen komen. 
+                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola... 
+                    En zo kun je vast zelf nog veel meer vragen bedenken! 
+                    ```
+                    print 'Welkom bij McHedy!'
+                    print 'U kunt hier uw bestelling doorgeven'
+                    mensen is ask Voor hoeveel personen wilt u bestellen?
+                    repeat mensen times
+                      eten is ask Wat wilt u eten?
+                      print eten
+                      if eten is patat
+                        saus is ask Wat voor saus wil je?
+                        print saus
+                      drinken is ask Wat wilt u drinken?
+                      if drinken is cola
+                         light is ask Normaal of light?
+                      print drinken light
+                    prijs is 4 * mensen
+                    print 'Dat wordt dan ' prijs ' euro!'
+                    ```
+                    
+                    ## Uitdaging prijzen
+                    De prijs is nu altijd 4 euro per persoon, kun jij nog een andere manier bedenken om de prijs te berekenen?
+                    Bijvoorbeeld:
+                    
+                    ```
+                    prijs is 0
+                    if eten is patat
+                        prijs is prijs + 3
+                    if drinken is cola
+                        prijs is prijs + 1
+                    ```
+                start_code: "print 'Welkom bij McHedy!' "    
+                
+            8:
+                story_text: |
+                    ## Maak je eigen restaurant
+                    In level 8 kun je de functie `i in range 1 to 5` gebruiken om een bestelling te printen voor meerdere mensen. 
+                    
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Welkom bij McHedy!'
+                    print 'U kunt hier uw bestelling doorgeven'
+                    mensen is ask Voor hoeveel personen wilt u bestellen?
+                    for i in range 1 to mensen
+                      print i 'e bestelling:'
+                      eten is ask Wat wilt u eten?
+                      print eten
+                      if eten is patat
+                        saus is ask Wat voor saus wil je?
+                        print saus
+                      drinken is ask Wat wilt u drinken?
+                      print drinken
+                    prijs is 4 * mensen
+                    print 'Dat wordt dan ' prijs ' euro!'
+                    ```
+                    ## uitdaging
+                    Alle uitdagingen die in level 7 worden genoemd zoals de extra `if` statements of de verbeterde prijzen, kun je natuurlijk in level 8 nog steeds gebruiken! 
+                start_code: " print 'Welkom bij McHedy!' "
+                
 
 
                    
