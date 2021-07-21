@@ -109,10 +109,10 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    naam is ask Wie loopt er in het bos?
+                    naam is ask 'Wie loopt er in het bos?'
                     print naam ' loopt door het bos'
                     print naam ' komt een monster tegen'
-                    einde is ask Wil je een goed of slecht einde?
+                    einde is ask 'Wil je een goed of slecht einde?'
                     if einde is goed print naam ' pakt het zwaard en het monster rent snel weg' else print 'Het monster eet ' naam ' op'
                     ```
 
@@ -139,14 +139,15 @@ adventures:
                     
                     ## Voorbeeld Hedy code
                     ```
-                    print 'Je loopt door het bos'
-                    print 'Je hoort plotseling een geluid!'
-                    dapper is ask Ga je op het geluid af? 
+                    hoofdpersoon is ask 'Hoe heet de hoofdpersoon in dit verhaal?'
+                    print hoofdpersoon ' loopt door het bos'
+                    print hoofdpersoon ' hoort plotseling een geluid!'
+                    dapper is ask 'Gaat 'hoofdpersoon ' op het geluid af?' 
                     if dapper is ja
-                        print 'Dapper stap je op het geluid af'
+                        print 'Dapper stapt ' hoofdpersoon ' op het geluid af'
                         print ...
                     else
-                        print 'Snel zoek je een verstopplek'
+                        print 'Snel zoekt 'hoofdpersoon ' een verstopplek'
                         print ...
                     ```
                     In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf de puntjes in! Wat gebeurt er verder?
@@ -217,7 +218,7 @@ adventures:
                     ## Cowboy Billie Boem
                     ```
                     repeat 3 times
-                        dier is ask Welk dier kies je?
+                        dier is ask 'Welk dier kies je?'
                         print 'En wie rijdt er op zijn ' dier ' door de prairie?'
                         print 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
                         print 'Er is nooit in t Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
@@ -537,7 +538,7 @@ adventures:
                     ```
                     opties is steen, schaar, papier
                     computerkeuze is ...
-                    keuze is ask Wat kies jij?
+                    keuze is ask 'Wat kies jij?'
                     print 'jij koos' ...
                     print 'computer koos' ...
                     if ... is ... print 'gelijkspel!' else print 'geen gelijkspel'
@@ -567,7 +568,7 @@ adventures:
                     ```
                     goedeantwoord is 11 * 27
                     print 'Hoeveel is 11 keer 27?'
-                    antwoord is ask Weet jij het antwoord?
+                    antwoord is ask 'Weet jij het antwoord?'
                     if antwoord is goedeantwoord print 'goedzo' else print 'Foutje! Het was ' goedeantwoord
                     ```
 
@@ -584,7 +585,7 @@ adventures:
                     keergetal is keer at random
                     goede_antwoord is tafel * keergetal
                     print 'hoeveel is ' tafel ' keer ' keergetal '?'
-                    antwoord is ask Weet jij het antwoord?
+                    antwoord is ask 'Weet jij het antwoord?'
                     if antwoord is goede_antwoord print 'goedzo' else print 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "print Welkom bij jouw rekenmachine"
@@ -602,7 +603,7 @@ adventures:
                     getal2 is getallen at random
                     goedeantwoord is getal1 * getal2
                     print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
-                    antwoord is ask Vul hier het antwoord in: 
+                    antwoord is ask 'Vul hier het antwoord in:' 
                     print 'Jouw antwoord is ' antwoord
                     if antwoord is goedeantwoord
                         score is score +1
@@ -640,7 +641,7 @@ adventures:
                 start_code: ""
             2:
                 story_text: | 
-                    ##Hedy de Waarzegger
+                    ## Hedy de Waarzegger
                     In level 1 heb je een begin gemaakt aan de waarzegger, maar echt voorspellingen waren er nog niet. 
                     In level 2 kun je een variabele gebruiken en het `at random` commando om Hedy antwoorden te laten kiezen op je vraag. 
                     Kijk maar naar dit voorbeeld: 
@@ -660,13 +661,13 @@ adventures:
                 start_code: ""
             3:
                 story_text: | 
-                    ##Hedy de Waarzegger
+                    ## Hedy de Waarzegger
                     In level 3 kun je oefenen met de aanhalingstekens. Probeer dezelfde code te maken als in level 2, maar let op dat je de aanhalingstekens op de goede plek plaatst!
                     
                     ## Voorbeeld Hedy code
                     ```
                     print 'Hoi ik ben Hedy de Waarzegger!'
-                    vraag is ask Wat wil je weten
+                    vraag is ask 'Wat wil je weten?'
                     print 'Dit is je vraag: ' vraag
                     antwoorden is ja, nee, misschien
                     print 'Mijn glazen bol zegt...'
@@ -675,7 +676,7 @@ adventures:
                 start_code: ""
             4: 
                 story_text: |
-                    ##Hedy de Waarzegger
+                    ## Hedy de Waarzegger
                     In level 4 leer je hoe je er (stiekem) voor kunt zorgen dat Hedy altijd goede voorspellingen voor jou heeft. 
                     Door `if` en `else` te gebruiken kun je er namelijk voor zorgen dat jij de leuke voorspellingen krijgt, en de anderen niet!
                     Kijk naar het voorbeeld om te zien hoe het moet: 
@@ -684,7 +685,7 @@ adventures:
                     ```
                     print 'Hoi ik ben Hedy de Waarzegger'
                     print 'Ik kan voorspellen wie morgen de loterij wint!'
-                    naam is ask Wie ben jij?
+                    naam is ask 'Wie ben jij?'
                     if naam is Hedy print 'Hoera, je wint!' else print 'Helaas, iemand anders wint'
                     ```
                     
@@ -696,7 +697,7 @@ adventures:
                     ```
                     print 'Hoi ik ben Hedy de Waarzegger'
                     print 'Ik kan voorspellen wie morgen de loterij wint!'
-                    naam is ask Wie ben jij?
+                    naam is ask 'Wie ben jij?'
                     goedantwoord is Hoera! Je wint!, Je bent rijk!, Jij gaat zeker winnen!
                     slechtantwoord is Helaas!, Geen prijs voor jou, Probeer het nog eens
                     if naam is Hedy print goedantwoord at random else print slechtantwoord at random
@@ -717,8 +718,8 @@ adventures:
                     ```
                     print 'Ik ben Hedy de waarzegger'
                     print 'Je mag 3 vragen stellen!'
-                    repeat 3 times vraag is ask Wat wil je weten?
-                    antwoorden is yes, no, maybe
+                    repeat 3 times vraag is ask 'Wat wil je weten?'
+                    antwoorden is ja, nee, misschien
                     repeat 3 times print 'Mijn glazen bol zegt... ' antwoorden at random
                     ```
                    
@@ -736,7 +737,7 @@ adventures:
                    
             6: 
                 story_text: |
-                     ##Hedy de Waarzegger
+                     ## Hedy de Waarzegger
                      In level 6 kun je rekenen met Hedy, waardoor je "magische" formules kunt gebruiken in je voorspellingen! 
                      Zo kun je berekeken hoe rijk je wordt, aan de hand van de formule in het voorbeeld: 
                      
@@ -744,9 +745,9 @@ adventures:
                      ```
                      print 'Ik ben Hedy de Waarzegger!'
                      print 'Ik kan voorspellen hoeveel kinderen je later krijgt!'
-                     leeftijd is ask Hoe oud ben je?
-                     brusjes is ask Hoeveel broers/zussen heb je?
-                     lengte is ask Hoe lang ben je (in cm)? 
+                     leeftijd is ask 'Hoe oud ben je?'
+                     brusjes is ask 'Hoeveel broers/zussen heb je?'
+                     lengte is ask 'Hoe lang ben je (in cm)?' 
                      kinderen is lengte / leeftijd
                      kinderen is kinderen - brusjes
                      print 'Jij krijgt later... '
@@ -759,11 +760,11 @@ adventures:
                      
                      ## Voorbeeld gekke voorspelling
                      ```
-                     print 'Ik ben Hedy de malle waarzegger!’
+                     print 'Ik ben Hedy de malle waarzegger!'
                      print 'Ik ga voorspellen hoe slim jij bent!'
-                     ajax is ask Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?
-                     bananen is ask Hoeveel bananen heb jij deze week gegeten?
-                     hygiene is ask Hoevaak heb jij je handen al gewassen vandaag?
+                     ajax is ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
+                     bananen is ask 'Hoeveel bananen heb jij deze week gegeten?'
+                     hygiene is ask 'Hoevaak heb jij je handen al gewassen vandaag?'
                      resultaat is bananen + hygiene 
                      resultaat is resultaat * ajax
                      print 'Jij bent ' resultaat 'procent slim.'
@@ -784,7 +785,7 @@ adventures:
                      print 'Je mag 3 vragen stellen!'
                      antwoorden is ja, nee, misschien
                      repeat 3 times
-                         vraag is ask Wat wil je weten?
+                         vraag is ask 'Wat wil je weten?'
                          print vraag
                          print antwoorden at random
                      ```
@@ -806,7 +807,7 @@ adventures:
                       print 'Welkom bij McHedy'
                       print 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
                       print 'U krijgt frietjes en drinken bij uw bestelling. '
-                      eten is ask Wat wilt u bestellen?
+                      eten is ask 'Wat wilt u bestellen?'
                       prijs is 0
                       if eten is hamburger prijs is 8
                       if eten is kroket prijs is 6
@@ -825,9 +826,9 @@ adventures:
                       print 'Onze voorgerechten zijn salade, soep of carpaccio'
                       print 'Onze hoofdgerechten zijn pizza, lasagne, of spaghetti'
                       print 'Onze toetjes zijn brownie, ijsje, of milkshake'
-                      voorgerecht is ask Welk voorgerecht wilt u?
-                      hoofdgrecht is ask Welk hoofdgerecht wilt u?
-                      nagerecht is ask Welk nagerecht wilt u?
+                      voorgerecht is ask 'Welk voorgerecht wilt u?'
+                      hoofdgrecht is ask 'Welk hoofdgerecht wilt u?'
+                      nagerecht is ask 'Welk nagerecht wilt u?'
                       prijs is 0
                       if voorgerecht is soep prijs is prijs + 6 else prijs is prijs + 7
                       if hoofdgerecht is pizza prijs is prijs + 10
@@ -860,11 +861,11 @@ adventures:
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
-                    mensen is ask Voor hoeveel personen wilt u bestellen?
+                    mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                      eten is ask Wat wilt u eten?
+                      eten is ask 'Wat wilt u eten?'
                       print eten
-                      drinken is ask Wat wilt u drinken?
+                      drinken is ask 'Wat wilt u drinken?'
                       print drinken
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
@@ -877,16 +878,16 @@ adventures:
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
-                    mensen is ask Voor hoeveel personen wilt u bestellen?
+                    mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                      eten is ask Wat wilt u eten?
+                      eten is ask 'Wat wilt u eten?'
                       print eten
                       if eten is patat
-                        saus is ask Wat voor saus wil je?
+                        saus is ask 'Wat voor saus wil je?'
                         print saus
-                      drinken is ask Wat wilt u drinken?
+                      drinken is ask 'Wat wilt u drinken?'
                       if drinken is cola
-                         light is ask Normaal of light?
+                         light is ask 'Normaal of light?'
                       print drinken light
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
@@ -914,15 +915,15 @@ adventures:
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
-                    mensen is ask Voor hoeveel personen wilt u bestellen?
+                    mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     for i in range 1 to mensen
                       print i 'e bestelling:'
-                      eten is ask Wat wilt u eten?
+                      eten is ask 'Wat wilt u eten?'
                       print eten
                       if eten is patat
-                        saus is ask Wat voor saus wil je?
+                        saus is ask 'Wat voor saus wil je?'
                         print saus
-                      drinken is ask Wat wilt u drinken?
+                      drinken is ask 'Wat wilt u drinken?'
                       print drinken
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
