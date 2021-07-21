@@ -51,7 +51,7 @@ _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
 _WHILE: "while"
-ask: var _SPACE _IS _SPACE _ASK _SPACE quoted_text
+ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
 assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
 command: print | repeat | ifs elses? | ask | assign_list | list_access_var | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
