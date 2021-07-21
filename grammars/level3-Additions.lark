@@ -1,11 +1,18 @@
-command: print | ask | assign_list | assign | print_no_quotes | invalid //catch all at the end
+command: print | ask | assign_list | ask_no_quotes| assign | print_no_quotes | invalid //catch all at the end
+
+//ask_no_quotes can conflict with assign (color is ask wat? -> color = 'ask wat?')
+// so it needs to go before
 
 //since ask allows for quotes, there is some duplication between ask and print
 //so maybe (_SPACE| list_access | quoted_text | var)* should be something like 'print_argument'?)
 
+//same holds for the unquoted arguments
+
 print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var)*  -> print
 print_no_quotes: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
+ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
+
 
 //anything can be parsed except for spaces, and a newlines and commas for list separators
 textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text
