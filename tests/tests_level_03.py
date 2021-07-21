@@ -210,6 +210,16 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result)
 
+  def test_transpile_ask_no_quotes(self):
+    code = textwrap.dedent("""
+    ding is kleur
+    kleur is ask Wat is je lievelingskleur'
+    print 'Jouw favoriet is dus ' kleur""")
+
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, 3)
+
+    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
 
 

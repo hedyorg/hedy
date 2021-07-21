@@ -49,6 +49,7 @@ _TIMES: "times"
 _TO: "to"
 _WHILE: "while"
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
+ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE textwithspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
 command: print | repeat | ifelse | ifs | ask | assign_list | list_access_var | assign | invalid
