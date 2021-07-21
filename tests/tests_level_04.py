@@ -61,7 +61,7 @@ class TestsLevel4(unittest.TestCase):
 
   def test_transpile_ask_with_print(self):
     code = textwrap.dedent("""\
-    kleur is ask wat is je lievelingskleur?
+    kleur is ask 'wat is je lievelingskleur?'
     print 'jouw lievelingskleur is dus' kleur '!'""")
 
     result = hedy.transpile(code, 4)
@@ -74,7 +74,7 @@ class TestsLevel4(unittest.TestCase):
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
-    color is ask Cuál es tu color favorito?""")
+    color is ask 'Cuál es tu color favorito?'""")
 
     result = hedy.transpile(code, 4)
 
@@ -135,7 +135,7 @@ class TestsLevel4(unittest.TestCase):
 
 
     code = textwrap.dedent("""\
-    kleur is ask Wat is je lievelingskleur?
+    kleur is ask 'Wat is je lievelingskleur?'
     if kleur is groen print 'mooi!' else print 'niet zo mooi'""")
 
     result = hedy.transpile(code, 4)
@@ -212,7 +212,7 @@ class TestsLevel4(unittest.TestCase):
 
   def test_parser_errors_should_be_caught_and_beautified(self):
     code = textwrap.dedent("""\
-    option is ask Rock Paper or Scissors?
+    option is ask 'Rock Paper or Scissors?'
     print 'Player 2 ' option
     if option is Scissors
         print 'Its a tie!'""")
@@ -234,7 +234,7 @@ class TestsLevel4(unittest.TestCase):
     # Maybe this test can be skipped if we finally
     # bite the bullet and allow ask (or mandate ask) to also use ''
     code = """naam is ask 'Hello welcome to Hedy.'"""
-    expected = "naam = input('\\'Hello welcome to Hedy.\\'')"
+    expected = "naam = input('Hello welcome to Hedy.')"
 
     result = hedy.transpile(code, 4)
     print(result)
@@ -245,7 +245,7 @@ class TestsLevel4(unittest.TestCase):
   # at least we solve it with the same fix of escaping quotes
   def test_bad_input_should_be_caught(self):
     code = textwrap.dedent("""\
-    naam is ask hoe heet jij?
+    naam is ask 'hoe heet jij?'
     ifnaam is Hedy print 'leuk' else print 'minder leuk!'""")
 
     result = hedy.transpile(code, 4)

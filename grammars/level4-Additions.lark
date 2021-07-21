@@ -2,8 +2,6 @@ program: _EOL* (command | invalid) (_SPACE)* (_EOL+ (command | invalid) (_SPACE)
 command: print | ifelse | ifs | ask | assign_list | list_access_var | assign | print_no_quotes
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
 
-print: _PRINT _SPACE (quoted_text | list_access | var) (_SPACE (quoted_text | list_access | var))*
-ask: var _SPACE _IS _SPACE _ASK _SPACE textwithspaces*
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
 assign: var _SPACE _IS _SPACE textwithspaces
 invalid: textwithoutspaces _SPACE textwithspaces
