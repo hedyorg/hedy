@@ -310,6 +310,9 @@ define('ace/mode/level4_highlight_rules', [], function(require, exports, module)
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         defaultToken : "text"
       }],
 
@@ -427,6 +430,9 @@ define('ace/mode/level5_highlight_rules', [], function(require, exports, module)
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         defaultToken : "text"
       }],
@@ -570,6 +576,9 @@ define('ace/mode/level6_highlight_rules', [], function(require, exports, module)
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         defaultToken : "text"
       }],
 
@@ -710,6 +719,9 @@ define('ace/mode/level7_highlight_rules', [], function(require, exports, module)
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         defaultToken : "text"
       }],
@@ -873,6 +885,9 @@ define('ace/mode/level8and9_highlight_rules', [], function(require, exports, mod
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1044,6 +1059,9 @@ define('ace/mode/level10_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1259,6 +1277,9 @@ define('ace/mode/level11_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1522,6 +1543,9 @@ define('ace/mode/level12_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -1790,6 +1814,9 @@ define('ace/mode/level13_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -2082,6 +2109,9 @@ define('ace/mode/level14_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -2378,6 +2408,9 @@ define('ace/mode/level15_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -2673,6 +2706,9 @@ define('ace/mode/level16_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -2973,6 +3009,9 @@ define('ace/mode/level17and18_highlight_rules', [], function(require, exports, m
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -3297,6 +3336,9 @@ define('ace/mode/level19_highlight_rules', [], function(require, exports, module
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
@@ -3634,6 +3676,9 @@ define('ace/mode/level20_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -3970,6 +4015,9 @@ define('ace/mode/level21_highlight_rules', [], function(require, exports, module
         regex: "'",
         next: "print rest"
       },{
+        regex: " at random",
+        token: "keyword"
+      },{
         token: "text",
         regex: "$",
         next: "start"
@@ -4305,6 +4353,9 @@ define('ace/mode/level21and22_highlight_rules', [], function(require, exports, m
         token: "constant.character",
         regex: "'",
         next: "print rest"
+      },{
+        regex: " at random",
+        token: "keyword"
       },{
         token: "text",
         regex: "$",
