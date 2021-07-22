@@ -348,8 +348,7 @@ def getClass2 (state, response, username):
         raise Exception ('Student list should be empty')
 
 def redirectAfterJoin1 (state, response, username):
-    print ('DEBUG REDIRECT', response ['body'])
-    if not re.search ('http://localhost:5000/my-profile', response ['body']):
+    if not re.search ('http://localhost:\d\d\d\d/my-profile', response ['body']):
         raise Exception ('Invalid redirect')
 
 def getStudentClasses1 (state, response, username):
