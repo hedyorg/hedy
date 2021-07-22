@@ -97,7 +97,7 @@ class Database:
             Database.remove_student_from_class (self, class_id, username)
 
         # Delete classes owned by the user
-        for Class in Database.get_teacher_classes (self, username):
+        for Class in Database.get_teacher_classes (self, username, False):
             Database.delete_class (self, Class)
 
     def all_users(self):
@@ -116,14 +116,22 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({'id': id})
 
-    def get_teacher_classes(self, username):
+    def get_teacher_classes(self, username, students_to_list):
         """Return all the classes belonging to a teacher."""
-        classes = CLASSES.get_many({'teacher': username})
-        for Class in classes:
-            if not 'students' in Class:
-                Class ['students'] = []
-            else:
-                Class ['students'] = list (Class ['students'])
+        classes = None
+        if dynamo.is_dynamo_available ():
+            classes = CLASSES.get_many({'teacher': username})
+        # If we're using the in-memory database, we need to make a shallow copy of the classes before changing the `students` key from a set to list, otherwise the field will remain a list later and that will break the set methods.
+        else:
+            classes = []
+            for Class in CLASSES.get_many({'teacher': username}):
+                classes.append (Class.copy())
+        if students_to_list:
+            for Class in classes:
+                if not 'students' in Class:
+                    Class ['students'] = []
+                else:
+                    Class ['students'] = list (Class ['students'])
         return classes
 
     def get_student_classes(self, username):
@@ -154,7 +162,7 @@ class Database:
         USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet (class_id)})
 
     def delete_class(self, Class):
-        for student_id in Class ['students']:
+        for student_id in Class.get ('students', []):
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CLASSES.delete({'id': Class ['id']})
