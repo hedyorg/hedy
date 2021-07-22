@@ -168,3 +168,30 @@ class TestsLevel6(unittest.TestCase):
 
     self.assertEqual(expected, result)
     self.assertEqual("0", run_code(result))
+
+  def test_issue_andras(self):
+      code = textwrap.dedent("""\
+      prijs is 0
+      optiestoetje is ask 'zou u nog een toetje willen'
+      if optiestoetje is ja toet is ask 'zou u een brownie of een ijsje willen' else print 'ok dan wordt het ' prijs ' euro'
+      print toet
+      if toet is ijsje prijs is prijs + 2
+      print 'ok bedankt dan wordt het ' prijs ' euro'""")
+
+      result = hedy.transpile(code, 6)
+
+      expected = textwrap.dedent("""\
+        prijs = '0'
+        optiestoetje = input('zou u nog een toetje willen')
+        if str(optiestoetje) == str('ja'):
+          toet = input('zou u een brownie of een ijsje willen')
+        else:
+          print('ok dan wordt het '+str(prijs)+' euro')
+        print(str(toet))
+        if str(toet) == str('ijsje'):
+          prijs = int(prijs) + int(2)
+        print('ok bedankt dan wordt het '+str(prijs)+' euro')""")
+
+      self.assertEqual(expected, result)
+
+
