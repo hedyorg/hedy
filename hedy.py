@@ -132,7 +132,10 @@ def flatten(args):
     if isinstance(args, str):
         return args
     elif isinstance(args, Tree):
-        return args
+        if args.data == 'var':
+            return args.children[0]
+        else:
+            return args
     else:
         for a in args:
             if type(a) is list:
@@ -170,6 +173,10 @@ class AllAssignmentCommands(Transformer):
         #(since then it has no var as 1st argument)
         #we should actually loop the level in here to distinguish on
         return args[0].children
+
+    # def var(self, args):
+    #     return args[0]
+
     def assign(self, args):
         return args[0].children
     def assign_list(self, args):
@@ -182,6 +189,7 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
     def comment(self, args):
         return args[0].children
+
 
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
@@ -201,6 +209,8 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
 
     def not_equal(self, args):
+        return args[0].children
+    def equality_check(self, args):
         return args[0].children
 
     def smaller_equal(self, args):
