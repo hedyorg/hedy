@@ -132,6 +132,9 @@
    - The class must be owned by the user, otherwise it returns 404.
    - The route removes a student from a class. This action can only be done by the teacher who owns the class.
 
+- `GET /hedy/l/LINK_ID`
+   - If there's a class with a LINK_ID, this route will redirect you with a 302 to the full URL for prejoining a class.
+
 ## DynamoDB
 
 ```
@@ -172,6 +175,10 @@ table classes:
     link:     STRING
     name:     STRING
     students: [STRING, ...]
+
+table classlinks:
+    id:    STRING (main index)
+    class: STRING
 ```
 
 ## Test environment

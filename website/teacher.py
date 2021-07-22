@@ -40,7 +40,7 @@ def routes (app, database, requested_lang):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/prejoin/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -59,7 +59,7 @@ def routes (app, database, requested_lang):
             'id': uuid.uuid4().hex,
             'date': utils.timems (),
             'teacher': user ['username'],
-            'link': uuid.uuid4().hex,
+            'link': uuid.uuid4().hex [0:7],
             'name': body ['name']
         }
 
@@ -134,3 +134,10 @@ def routes (app, database, requested_lang):
         DATABASE.remove_student_from_class (Class ['id'], student_id)
 
         return {}, 200
+
+    @app.route('/hedy/l/<link_id>', methods=['GET'])
+    def resolve_class_link (link_id):
+        link = DATABASE.resolve_class_link (link_id)
+        if not link:
+            return 'Invalid link', 404
+        return redirect(request.url.replace('/hedy/l/' + link_id, '/class/' + link ['class'] + '/prejoin/' + link_id), code=302)

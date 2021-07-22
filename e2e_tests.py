@@ -392,6 +392,9 @@ def getStudentClasses2 (state, response, username):
     if len (classes) != 0:
         raise Exception ('Class list should be empty')
 
+def checkJoinLink (state, response, username):
+    if not re.search ('http://localhost:\d\d\d\d/class/' + state ['classes'] [0] ['id'] + '/prejoin/' + state ['classes'] [0] ['link'], response ['body']):
+        raise Exception ('Invalid redirect')
 
 def suite (username):
     return [
@@ -472,6 +475,7 @@ def suite (username):
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['join class that does not exist', 'get', lambda state: '/class/foo' + '/join/' + state ['classes'] [0] ['link'], {}, {}, 404],
         ['join class with invalid link', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + 'foo', {}, {}, 404],
+        ['test short class link', 'get', lambda state: '/hedy/l/' + state ['classes'] [0] ['link'], {}, {}, 302, checkJoinLink],
         ['join class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
         ['join class again (idempotent call)', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
         ['get profile after joining class', 'get', '/profile', {}, {}, 200, getStudentClasses1],
@@ -486,6 +490,7 @@ def suite (username):
         ['join class again', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
         ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['delete class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200],
+        ['check that short class link was deleted', 'get', lambda state: '/hedy/l/' + state ['classes'] [0] ['link'], {}, {}, 404],
         ['get classes after deleting the class', 'get', '/profile', {}, {}, 200, getTeacherClasses1],
         ['destroy teacher account', 'post', '/auth/destroy', {}, {}, 200],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
