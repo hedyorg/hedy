@@ -92,10 +92,9 @@ class Database:
         TOKENS.delete({'id': username})
         PROGRAMS.del_many({'username': username})
 
-        # Remove user from classes of which they may be a student
+        # Remove user from classes of which they are a student
         for class_id in classes:
-            Class = CLASSES.get({'id': class_id})
-            Database.remove_student_from_class (self, Class, username)
+            Database.remove_student_from_class (self, class_id, username)
 
         # Delete classes owned by the user
         for Class in Database.get_teacher_classes (self, username):
@@ -119,7 +118,13 @@ class Database:
 
     def get_teacher_classes(self, username):
         """Return all the classes belonging to a teacher."""
-        return CLASSES.get_many({'teacher': username})
+        classes = CLASSES.get_many({'teacher': username})
+        for Class in classes:
+            if not 'students' in Class:
+                Class ['students'] = []
+            else:
+                Class ['students'] = list (Class ['students'])
+        return classes
 
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
@@ -138,47 +143,18 @@ class Database:
         """Updates a class."""
         CLASSES.update({'id': id}, {'name': name})
 
-    def add_student_to_class(self, Class, student_id):
+    def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
+        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoAddToStringSet (student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoAddToStringSet (class_id)})
 
-        students = Class.get('students')
-        # If student is already in class, there is nothing to do
-        if student_id in students:
-            return True
-
-        user = USERS.get({'username': student_id})
-
-        # TODO: we might need to change this to avoid race conditions when adding items
-        student_classes = user.get('classes') or []
-        student_classes.append(Class ['id'])
-
-        Class ['students'].append(student_id)
-
-        USERS.update({'username': student_id}, {'classes': student_classes})
-        CLASSES.update({'id': Class ['id']}, {'students': Class ['students']})
-
-    def remove_student_from_class(self, Class, student_id):
-        """Removes a student to a class."""
-
-        students = Class.get('students')
-        # If student is not in the class, there is nothing to do
-        if not student_id in students:
-            return True
-
-        # TODO: we might need to change this to avoid race conditions when removing items
-        Class ['students'].remove(student_id)
-        CLASSES.update({'id': Class ['id']}, {'students': Class ['students']})
-
-        user = USERS.get({'username': student_id})
-        # If the user was already deleted, there's no need to remove the class from their list of classes
-        if user:
-            # TODO: we might need to change this to avoid race conditions when removing items
-            student_classes = user.get('classes') or []
-            student_classes.remove(Class ['id'])
-            USERS.update({'username': student_id}, {'classes': student_classes})
+    def remove_student_from_class(self, class_id, student_id):
+        """Removes a student from a class."""
+        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoRemoveFromStringSet (student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet (class_id)})
 
     def delete_class(self, Class):
         for student_id in Class ['students']:
-            Database.remove_student_from_class (self, Class, student_id)
+            Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CLASSES.delete({'id': Class ['id']})

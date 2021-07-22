@@ -24,7 +24,7 @@ def routes (app, database, requested_lang):
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
         students = []
-        for student_username in Class.get ('students'):
+        for student_username in Class.get ('students', []):
             student = DATABASE.user_by_username (student_username)
             programs = DATABASE.programs_for_user(student_username)
             highest_level = 0
@@ -60,8 +60,7 @@ def routes (app, database, requested_lang):
             'date': utils.timems (),
             'teacher': user ['username'],
             'link': uuid.uuid4().hex,
-            'name': body ['name'],
-            'students': [],
+            'name': body ['name']
         }
 
         DATABASE.store_class (Class)
@@ -120,7 +119,7 @@ def routes (app, database, requested_lang):
         if not Class or Class ['link'] != link:
             return 'No such class', 404
 
-        DATABASE.add_student_to_class (Class, user ['username'])
+        DATABASE.add_student_to_class (Class ['id'], user ['username'])
 
         return redirect(request.url.replace('/class/' + class_id + '/join/' + link, '/my-profile'), code=302)
 
@@ -132,6 +131,6 @@ def routes (app, database, requested_lang):
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
-        DATABASE.remove_student_from_class (Class, student_id)
+        DATABASE.remove_student_from_class (Class ['id'], student_id)
 
         return {}, 200
