@@ -157,8 +157,10 @@ class AllAssignmentCommands(Transformer):
         return flatten(args)
 
     def for_loop(self, args):
-        commands = args[1:]
+        # for loop iterator is a var so should be added to the list of vars
+        commands = args
         return flatten(commands)
+
     def while_loop(self, args):
         commands = args[1:]
         return flatten(commands)
