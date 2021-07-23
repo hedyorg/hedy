@@ -35,12 +35,12 @@ def routes (app, database, requested_lang):
                 if not program.get ('public'):
                     continue
                 if not latest_shared or latest_shared ['date'] < program ['date']:
-                    latest_shared = os.getenv ('BASE_URL') + '/hedy/' + str (program ['level']) + '/' + program ['id'] + '?lang=' + requested_lang ()
+                    latest_shared = {'link': os.getenv ('BASE_URL') + '/hedy/' + program ['id'] + '/view?lang=' + requested_lang (), 'date': program ['date'], 'level': program ['level'], 'name': program ['name']}
             students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
