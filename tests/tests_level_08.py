@@ -182,6 +182,7 @@ class TestsLevel8(unittest.TestCase):
     self.assertEqual(expected, result)
 
     #fails, issue 363
+
   def test_for_ifbug(self):
     code = textwrap.dedent("""\
     for i in range 0 to 10
@@ -201,7 +202,20 @@ class TestsLevel8(unittest.TestCase):
 
     self.assertEqual(expected, result)
 
+  def test_for_loopbug599(self):
+    code = textwrap.dedent("""\
+    for i in range 0 to 10
+      if i is 2
+        print '2'""")
 
+    expected = textwrap.dedent("""\
+      for i in range(int(0), int(10)+1):
+        if str(i) == str('2'):
+          print('2')""")
+
+    result = hedy.transpile(code, 8)
+
+    self.assertEqual(expected, result)
 
 
 #programs with issues to see if we catch them properly
