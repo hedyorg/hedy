@@ -198,6 +198,11 @@ class AllAssignmentCommands(Transformer):
             return 'random.choice(' + listname + ')'
         else:
             return listname + '[' + args[1] + ']'
+
+    def ifs(self, args):
+        #left side of the condition can be a var
+        return args[1][0]
+
     def print(self, args):
         return args
     def input(self,args):
