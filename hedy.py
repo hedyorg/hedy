@@ -1095,6 +1095,7 @@ def get_parser(level, sub):
 
 def transpile(input_string, level, sub = 0):
     try:
+        input_string = input_string.replace('\r\n', '\n')
         return transpile_inner(input_string, level, sub)
     except Exception as E:
         # This is the 'fall back' transpilation
