@@ -81,16 +81,18 @@ window.auth = {
         var joinClass    = localStorage.getItem ('hedy-join');
         if (! savedProgram) {
            if (! joinClass) return auth.redirect ('programs');
+           joinClass = JSON.parse (joinClass);
            localStorage.removeItem ('hedy-join');
-           return window.join_class (joinClass);
+           return window.join_class (joinClass.link, joinClass.name);
         }
 
         savedProgram = JSON.parse (savedProgram);
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
            if (joinClass) {
+             joinClass = JSON.parse (joinClass);
              localStorage.removeItem ('hedy-join');
-             return window.join_class (joinClass, true);
+             window.join_class (joinClass.link, joinClass.name, true);
            }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
@@ -119,16 +121,18 @@ window.auth = {
         var joinClass    = localStorage.getItem ('hedy-join');
         if (! savedProgram) {
            if (! joinClass) return auth.redirect ('programs');
+           joinClass = JSON.parse (joinClass);
            localStorage.removeItem ('hedy-join');
-           return window.join_class (joinClass);
+           return window.join_class (joinClass.link, joinClass.name);
         }
 
         savedProgram = JSON.parse (savedProgram);
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
            if (joinClass) {
+             joinClass = JSON.parse (joinClass);
              localStorage.removeItem ('hedy-join');
-             return window.join_class (joinClass, true);
+             window.join_class (joinClass.link, joinClass.name, true);
            }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');

@@ -649,11 +649,11 @@ window.delete_class = function delete_class(id) {
   });
 }
 
-window.join_class = function join_class(link, noRedirect) {
+window.join_class = function join_class(link, name, noRedirect) {
   // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
   if (! window.auth.profile) {
      if (! confirm (window.auth.texts.join_prompt)) return;
-     localStorage.setItem ('hedy-join', link);
+     localStorage.setItem ('hedy-join', JSON.stringify ({link: link, name: name}));
      window.location.pathname = '/login';
      return;
   }
@@ -662,6 +662,7 @@ window.join_class = function join_class(link, noRedirect) {
     type: 'GET',
     url: link,
   }).done(function(response) {
+    alert (window.auth.texts.class_join_confirmation + ' ' + name);
     if (! noRedirect) window.location.pathname = '/programs';
   }).fail(function(err) {
     console.error(err);
