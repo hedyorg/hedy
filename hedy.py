@@ -127,71 +127,74 @@ class ExtractAST(Transformer):
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
 
-def flatten(args):
-    flattened_args = []
-    if isinstance(args, str):
-        return args
-    elif isinstance(args, Tree):
-        if args.data == 'var':
-            return args.children[0]
-        else:
-            return args
-    else:
-        for a in args:
-            if type(a) is list:
-                for x in a:
-                    flattened_args.append(flatten(x))
-            else:
-                flattened_args.append(a)
-        return flattened_args
-
 class AllAssignmentCommands(Transformer):
-    # returns only variable assignments AND places where variables are accessed
+    # returns a list of variable and list access
     # so these can be excluded when printing
 
+    # relevant nodes (list acces, ask, assign) are transformed into strings
+    # higher in the tree, we filter on only string arguments, of lists with string arguments
+
+    def filter_ask_assign(self, args):
+        ask_assign = []
+        for a in args:
+            # strings are added directly
+            if type(a) is str:
+                ask_assign.append(a)
+            #lists are seached further for string components
+            elif type(a) is list:
+                sub_a_ask_assign = self.filter_ask_assign(a)
+                for sub_a in sub_a_ask_assign:
+                    ask_assign.append(sub_a)
+        return ask_assign
+
+
     def program(self, args):
-        return flatten(args)
+        return self.filter_ask_assign(args)
 
     def repeat(self, args):
         commands = args[1:]
-        return flatten(commands)
+        return self.filter_ask_assign(commands)
 
     def command(self, args):
-        return flatten(args)
+        return self.filter_ask_assign(args)
+
+    def ifs(self, args):
+        return self.filter_ask_assign(args)
+
+    def ifelse(self, args):
+        return self.filter_ask_assign(args)
+
+    def print(self, args):
+        return self.filter_ask_assign(args)
 
     def for_loop(self, args):
         # for loop iterator is a var so should be added to the list of vars
-        commands = args
-        return flatten(commands)
+      iterator = str(args[0])
+      commands = args[1:]
+      return [iterator] + self.filter_ask_assign(args)
 
     def while_loop(self, args):
         commands = args[1:]
-        return flatten(commands)
+        return self.filter_ask_assign(commands)
+
+    def input(self, args):
+        #return left side of the =
+        return args[0].children[0]
 
     def ask(self, args):
         #todo: this also uses this arg for level 1, where it should not be used
         #(since then it has no var as 1st argument)
         #we should actually loop the level in here to distinguish on
-        return args[0].children
-
-    # def var(self, args):
-    #     return args[0]
+        return args[0].children[0]
 
     def assign(self, args):
         return args[0].children
+
     def assign_list(self, args):
         return args[0].children
-    def list_access_var(self, args):
-        return args[0].children
-    def var_access(self,args):
-        return args[0].children
-    def change_list_item(self, args):
-        return args[0].children
-    def comment(self, args):
-        return args[0].children
 
-
-    #list access is accessing a variable, so must be escaped
+    # list access is accessing a variable, so must be escaped
+    # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
         listname = args[0].children[0]
         if args[1] == 'random':
@@ -199,28 +202,13 @@ class AllAssignmentCommands(Transformer):
         else:
             return listname + '[' + args[1] + ']'
 
-    def ifs(self, args):
-        #left side of the condition can be a var
-        return args[1][0]
 
-    def print(self, args):
-        return args
-    def input(self,args):
+    # additions Laura, to be checked for higher levels:
+    def list_access_var(self, args):
         return args[0].children
-
-    def smaller(self, args):
+    def var_access(self,args):
         return args[0].children
-    def bigger(self, args):
-        return args[0].children
-
-    def not_equal(self, args):
-        return args[0].children
-    def equality_check(self, args):
-        return args[0].children
-
-    def smaller_equal(self, args):
-        return args[0].children
-    def bigger_equal(self, args):
+    def change_list_item(self, args):
         return args[0].children
 
 
@@ -1238,6 +1226,8 @@ def transpile_inner(input_string, level, sub = 0):
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
+        print(lookup_table)
+
 
     except UnexpectedCharacters as e:
         try:
