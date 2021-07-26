@@ -65,7 +65,7 @@ class TestsLevel5(unittest.TestCase):
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
-    color is ask Cuál es tu color favorito?""")
+    color is ask 'Cuál es tu color favorito?'""")
 
     result = hedy.transpile(code, 5)
 
@@ -132,7 +132,7 @@ class TestsLevel5(unittest.TestCase):
   def test_repeat_nested_in_if(self):
 
     code = textwrap.dedent("""\
-    kleur is ask Wat is je lievelingskleur?
+    kleur is ask 'Wat is je lievelingskleur?'
     if kleur is groen repeat 3 times print 'mooi!'""")
 
     result = hedy.transpile(code, 5)

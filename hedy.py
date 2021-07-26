@@ -132,7 +132,10 @@ def flatten(args):
     if isinstance(args, str):
         return args
     elif isinstance(args, Tree):
-        return args
+        if args.data == 'var':
+            return args.children[0]
+        else:
+            return args
     else:
         for a in args:
             if type(a) is list:
@@ -157,8 +160,10 @@ class AllAssignmentCommands(Transformer):
         return flatten(args)
 
     def for_loop(self, args):
-        commands = args[1:]
+        # for loop iterator is a var so should be added to the list of vars
+        commands = args
         return flatten(commands)
+
     def while_loop(self, args):
         commands = args[1:]
         return flatten(commands)
@@ -168,6 +173,10 @@ class AllAssignmentCommands(Transformer):
         #(since then it has no var as 1st argument)
         #we should actually loop the level in here to distinguish on
         return args[0].children
+
+    # def var(self, args):
+    #     return args[0]
+
     def assign(self, args):
         return args[0].children
     def assign_list(self, args):
@@ -181,6 +190,7 @@ class AllAssignmentCommands(Transformer):
     def comment(self, args):
         return args[0].children
 
+
     #list access is accessing a variable, so must be escaped
     def list_access(self, args):
         listname = args[0].children[0]
@@ -188,6 +198,11 @@ class AllAssignmentCommands(Transformer):
             return 'random.choice(' + listname + ')'
         else:
             return listname + '[' + args[1] + ']'
+
+    def ifs(self, args):
+        #left side of the condition can be a var
+        return args[1][0]
+
     def print(self, args):
         return args
     def input(self,args):
@@ -199,6 +214,8 @@ class AllAssignmentCommands(Transformer):
         return args[0].children
 
     def not_equal(self, args):
+        return args[0].children
+    def equality_check(self, args):
         return args[0].children
 
     def smaller_equal(self, args):
@@ -501,6 +518,12 @@ class ConvertToPython_3(ConvertToPython_2):
         return "print(" + '+'.join(args) + ')'
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
+    def ask(self, args):
+        args_new = []
+        var = args[0]
+        remaining_args = args[1:]
+
+        return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
     lines = s.split('\n')
@@ -1077,6 +1100,7 @@ def get_parser(level, sub):
 
 def transpile(input_string, level, sub = 0):
     try:
+        input_string = input_string.replace('\r\n', '\n')
         return transpile_inner(input_string, level, sub)
     except Exception as E:
         # This is the 'fall back' transpilation

@@ -35,7 +35,7 @@
         De `ask` is in level 2 veranderd, het antwoord sla je ook op met een naam:
 
         ```
-        antwoord is Hoe heet jij?
+        antwoord is ask Hoe heet jij?
         ```
 
         Print werkt nog zoals in Level 1, en echo heb je niet meer nodig.
@@ -66,7 +66,7 @@
 3:
     start_code: "print 'hallo wereld'"
     intro_text: |
-        `ask` is nog steeds hetzelfde in level 3, maar `print` is nu anders.
+        In level 3 zijn print `ask` en `print` nu anders.
 
         Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
 
@@ -93,11 +93,11 @@
         explanation: "Iets vragen met `ask`"
         example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             print 'Jouw favoriet is dus ' kleur
 4:
     start_code: |-
-        naam is ask hoe heet jij?
+        naam is ask 'hoe heet jij?'
         if naam is Hedy print 'leuk' else print 'minder leuk!'
     intro_text: |
         `ask` en `print` werken nog zoals in level 3.
@@ -106,7 +106,7 @@
 
         ## Voorbeeld Hedy Code
         ```
-        naam is ask hoe heet jij?
+        naam is ask 'hoe heet jij?'
         if naam is Hedy print 'leuk' else print 'minder leuk!'
         ```
 
@@ -122,15 +122,15 @@
         demo_code: "print 'Hallo welkom bij Hedy'"
     -   name: "ask"
         explanation: "Iets vragen met `ask`."
-        example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
+        example: "Bijvoorbeeld: kleur is ask 'Wat is je lievelingskleur?'"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             print 'Jouw favoriet is dus ' kleur
     -   name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             if kleur is groen print 'mooi!' else print 'niet zo mooi'
 5:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
@@ -150,21 +150,21 @@
         demo_code: "print 'Hallo welkom bij Hedy'"
     -   name: "ask"
         explanation: "Iets vragen met `ask`."
-        example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
+        example: "Bijvoorbeeld: kleur is ask 'Wat is je lievelingskleur?'"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             print 'Jouw favoriet is dus ' kleur
     -   name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             if kleur is groen print 'mooi!' else print 'niet zo mooi'
     -   name: "repeat"
         explanation: "Herhalen en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'
 6:
     start_code: "print '5 keer 5 is ' 5 * 5"
@@ -191,15 +191,15 @@
         demo_code: "print '5 keer 5 is ' 5 * 5"
     -   name: "`ask` en `if` samen met rekenen"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
-        example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
+        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord is ask Hoeveel is 10 plus 10?
+            antwoord is ask 'Hoeveel is 10 plus 10?'
             if antwoord is 20 print 'Goedzo!' else print 'Foutje'
     -   name: "repeat"
         explanation: "Herhalen en `if` samen"
         example: "Bijvoorbeeld: if antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'"
         demo_code: |-
-            antwoord is ask Hoeveel is 5 keer 10
+            antwoord is ask 'Hoeveel is 5 keer 10'
             if antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'
 7:
     start_code: |-
@@ -221,7 +221,7 @@
 
         ## Voorbeeld Hedy code
         ```
-        kleur is ask Wat is je lievelingskleur?
+        kleur is ask 'Wat is je lievelingskleur?'
         if kleur is groen
             repeat 3 times
                 print 'mooi!'
@@ -236,9 +236,9 @@
         demo_code: "print '5 keer 5 is ' 5 * 5"
     -   name: "`if` met meerdere regels"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
-        example: "Bijvoorbeeld: antwoord is ask Hoeveel is 10 plus 10?"
+        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
         demo_code: |-
-            antwoord is ask Hoeveel is 10 plus 10?
+            antwoord is ask 'Hoeveel is 10 plus 10?'
             if antwoord is 20
                 print 'Goedzo!'
                 print 'Het antwoord was inderdaad ' antwoord
@@ -249,7 +249,7 @@
         explanation: "`repeat` en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         demo_code: |-
-            kleur is ask Wat is je lievelingskleur?
+            kleur is ask 'Wat is je lievelingskleur?'
             if kleur is groen
                 repeat 3 times
                     print 'mooi!'

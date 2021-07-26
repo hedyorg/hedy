@@ -112,6 +112,7 @@ class NullRecord(LogRecord):
     def _forget_timer(self, _): pass
     def _terminate_running_timers(self): pass
     def inc_timer(self, _, _2): pass
+    def inc(self, name, amount=1): pass
 
     def record_exception(self, exc):
         self.set(fault=1, error_message=str(exc))
