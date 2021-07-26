@@ -17,7 +17,7 @@
                     <p
                             class="m-4 text-white  text-center font-extrabold  text-4xl font-slab ">Fout!</p></div>
             {% endif %}
-            <p class="text-2xl text-center"><i>{{ question.mp_choice_options[index_option].feedback }}</i></p>
+            <p class="text-2xl text-center"><p class="text-2xl text-center"><i>{% if question.mp_choice_options[index_option].feedback%} {{question.mp_choice_options[index_option].feedback }} {% endif %}</i></p>
         </div>
     </div>
     <div class="p-10 button-bar border-t-8 border-green-600">
