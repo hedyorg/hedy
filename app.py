@@ -499,10 +499,18 @@ def submit_answer(level_source, question_nr):
 
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
-            session['total_score'] = session.get('total_score') + question['question_score']
-            session['correct_answer'] = session.get('correct_answer') + 1
+            if session.get('total_score'):
+                session['total_score'] = session.get('total_score') + question['question_score']
+            else:
+                session['total_score'] = question['question_score']
+            if session.get('correct_answer'):
+                session['correct_answer'] = session.get('correct_answer') + 1
+            else:
+                session['correct_answer'] = 1
+        else:
+            session['correct_answer'] = 0
 
-        # Loop through the questions
+                # Loop through the questions
         if q_nr <= len(quiz_data['questions']):
             return render_template('feedback.html', quiz=quiz_data, question=question,
                                    questions=quiz_data['questions'],
