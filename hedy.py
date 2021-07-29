@@ -1230,7 +1230,7 @@ def transpile_inner(input_string, level, sub = 0):
 
     parser = get_parser(level, sub)
 
-    if level >= 8:
+    if level >= 7:
         input_string = preprocess_blocks(input_string)
         # print(input_string)
 
