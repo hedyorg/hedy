@@ -569,7 +569,7 @@ def adventure_page(adventure_name, level):
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventure_assignments=adventure_assignments,
+        adventures=adventure_assignments,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
@@ -621,7 +621,7 @@ def index(level, step):
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventure_assignments=adventure_assignments,
+        adventures=adventure_assignments,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
@@ -676,7 +676,7 @@ def onlinemasters(level, step):
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        adventure_assignments=adventure_assignments,
+        adventures=adventure_assignments,
         loaded_program='',
         adventure_name='')
 
@@ -697,7 +697,7 @@ def space_eu(level, step):
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        adventure_assignments=adventure_assignments,
+        adventures=adventure_assignments,
         loaded_program='',
         adventure_name='')
 

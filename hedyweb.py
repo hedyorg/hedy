@@ -38,7 +38,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+def render_assignment_editor(request, course, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
 
   if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
     quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
@@ -51,13 +51,13 @@ def render_assignment_editor(request, course, level_number, menu, translations, 
     sublevel     = int (level_number [level_number.index ('-') + 1])
     level_number = int (level_number [0:level_number.index ('-')])
 
-  assignment = course.get_default_text(level_number, sublevel)
+  defaults = course.get_default_text(level_number, sublevel)
+
+  if not defaults:
+    abort(404)
 
   if course.custom:
-    adventure_assignments = [x for x in adventure_assignments if x['short_name'] in course.adventures]
-
-  if not assignment:
-    abort(404)
+    adventures = [x for x in adventures if x['short_name'] in course.adventures]
 
   arguments_dict = {}
 
@@ -66,7 +66,7 @@ def render_assignment_editor(request, course, level_number, menu, translations, 
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
   arguments_dict['lang'] = course.language
-  arguments_dict['level'] = assignment.level
+  arguments_dict['level'] = defaults.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
   arguments_dict['menu'] = menu
@@ -76,17 +76,17 @@ def render_assignment_editor(request, course, level_number, menu, translations, 
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
-  #todo: rename to simply adventures
-  arguments_dict['adventure_assignments'] = adventure_assignments
+  arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
   arguments_dict['quiz_data_level'] = quiz_data_level
   arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
 
   print(course.language == 'nl')
+
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
 
   # Actual assignment
-  arguments_dict.update(**attr.asdict(assignment))
+  arguments_dict.update(**attr.asdict(defaults))
 
   return render_template("code-page.html", **arguments_dict)

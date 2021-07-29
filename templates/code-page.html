@@ -49,7 +49,7 @@
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
     window.State.adventure_name_onload = window.State.adventure_name;
     // We load the adventures into the js to have access to their saved programs (if any).
-    window.State.adventures = {{ adventure_assignments|tojson }};
+    window.State.adventures = {{ adventures|tojson }};
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
     window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
