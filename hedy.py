@@ -1030,18 +1030,41 @@ def create_grammar(level, sub):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
 
+    # Load Lark grammars relative to directory of current file
+    script_dir = path.abspath(path.dirname(__file__))
+
+    # we start with creating the grammar for level 1
+    grammar_text_1 = get_full_grammar_for_level(1)
+    
     if sub:
-      filename = "level" + str(level) + "-" + str (sub) + ".lark"
-      with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-          return file.read()
+        #grep
+        if level == 1:
+            # this is a level 1 sublevel, so get the sublevel grammar and return
+            grammar_text_sub = get_additional_rules_for_level(1, sub)
+            grammar_text = merge_grammars(grammar_text_1, grammar_text_sub)
+            return grammar_text
+
+        grammar_text_2 = get_additional_rules_for_level(2)
+
+        #start at 1 and keep merging new grammars in
+        new = merge_grammars(grammar_text_1, grammar_text_2)
+
+        for i in range(3, level+1):
+            grammar_text_i = get_additional_rules_for_level(i)
+            new = merge_grammars(new, grammar_text_i)
+
+        # get grammar for the sublevel and merge it
+        grammar_text_sub = get_additional_rules_for_level(level, sub)
+        new = merge_grammars(new, grammar_text_sub)
+        
+        # ready? Save to file to ease debugging
+        # this could also be done on each merge for performance reasons
+        filename = "level" + str(level) + "-" + str(sub) + "-Total.lark"
+        loc = path.join(script_dir, "grammars-Total", filename)
+        file = open(loc, "w", encoding="utf-8")
+        file.write(new)
+        file.close()
     else:
-
-        # Load Lark grammars relative to directory of current file
-        script_dir = path.abspath(path.dirname(__file__))
-
-        # we start with creating the grammar for level 1
-        grammar_text_1 = get_full_grammar_for_level(1)
-
         #grep
         if level == 1:
             grammar_text = get_full_grammar_for_level(level)
@@ -1066,9 +1089,12 @@ def create_grammar(level, sub):
 
     return new
 
-def get_additional_rules_for_level(level):
+def get_additional_rules_for_level(level, sub = 0):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "-Additions.lark"
+    if sub:
+        filename = "level" + str(level) + "-" + str(sub) + "-Additions.lark"
+    else:
+        filename = "level" + str(level) + "-Additions.lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
@@ -1295,6 +1321,7 @@ def transpile_inner(input_string, level, sub = 0):
         python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 4:
+        # Sublevel has the same grammar
         python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 5:
@@ -1304,13 +1331,10 @@ def transpile_inner(input_string, level, sub = 0):
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        if sub == 0:
-            python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        elif sub == 1:
-            # Code conversion is the same as level 8
-            python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
+        # Sublevel has the same conversion
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
