@@ -248,6 +248,27 @@ class TestsLevel7(unittest.TestCase):
     self.assertEqual(expected, result)
 
 # programs with issues to see if we catch them properly
+
+  def test_issue_396(self):
+    code = textwrap.dedent("""\
+    repeat 5 times
+        if antwoord2 is 10
+            print 'Goedzo'
+        else
+            print 'lalala'""")
+
+    result = hedy.transpile(code, 7)
+
+    expected = textwrap.dedent("""\
+    for i in range(int(5)):
+      if str('antwoord2') == str('10'):
+        print('Goedzo')
+      else:
+        print('lalala')""")
+
+    self.assertEqual(expected, result)
+
+    
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message
 # for this!
