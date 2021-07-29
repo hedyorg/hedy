@@ -38,7 +38,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
+def render_assignment_editor(request, course, level_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
 
   if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
     quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
@@ -51,7 +51,7 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
     sublevel     = int (level_number [level_number.index ('-') + 1])
     level_number = int (level_number [0:level_number.index ('-')])
 
-  assignment = course.get_assignment(level_number, assignment_number, sublevel)
+  assignment = course.get_default_text(level_number, sublevel)
 
   if not assignment:
     abort(404)
@@ -67,12 +67,10 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['level'] = assignment.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
-  arguments_dict['next_assignment'] = int(assignment_number) + 1 if int(assignment_number) < course.max_step(level_number) else None
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
@@ -87,9 +85,5 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
 
   # Actual assignment
   arguments_dict.update(**attr.asdict(assignment))
-
-  # Add markdowns to docs
-  for doc in arguments_dict ['docs']:
-    doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
   return render_template("code-page.html", **arguments_dict)

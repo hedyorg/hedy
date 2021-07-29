@@ -65,7 +65,7 @@ class Course:
     if level_ix >= len(self.course): return 0
     return len(self.course[level_ix].get('assignments', []))
 
-  def get_assignment(self, level, number):
+  def get_default_text(self, level, sublevel=0):
 
     """Return the 1-based Assignment from this course."""
     level_ix = int(level) - 1
@@ -77,22 +77,6 @@ class Course:
       "level": str(level),
     }
     assignment_values.update(**self.defaults.get_defaults(int(level)))
-
-    # If we don't have any "assignments", return a default Assignment object
-    # based off the level and the level defaults. This is used in the Hedy main
-    # course.
-    #
-    # Otherwise, if this is a course that DOES have assignments, validate and
-    # load the data into the accumulator object.
-    if assignments:
-      step_ix = int(number) - 1
-      if step_ix >= len(assignments): return None
-      assignment_values.update(**assignments[step_ix])
-
-    assignment_values['commands'] = [Command(**c) for c in assignment_values.get('commands', [])]
-
-    assignment_values['docs'] = [Doc(slug=slug, title=doc.front_matter.get('title'))
-                          for slug, doc in self.docs.get(level).items()]
 
     return Assignment(**assignment_values)
 

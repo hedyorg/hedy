@@ -566,7 +566,6 @@ def adventure_page(adventure_name, level):
         request=request,
         course=HEDY_COURSE[requested_lang()],
         level_number=level,
-        assignment_number=1,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
@@ -612,8 +611,6 @@ def index(level, step):
         loaded_program = {'code': result ['code'], 'name': result ['name'], 'adventure_name': result.get ('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
-        # We default to step 1 to provide a meaningful default assignment
-        step = 1
 
     adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
 
@@ -621,7 +618,6 @@ def index(level, step):
         request=request,
         course=HEDY_COURSE[g.lang],
         level_number=level,
-        assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
@@ -677,7 +673,6 @@ def onlinemasters(level, step):
         request=request,
         course=ONLINE_MASTERS_COURSE,
         level_number=level,
-        assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
@@ -699,7 +694,6 @@ def space_eu(level, step):
         request=request,
         course=SPACE_EU_COURSE[g.lang],
         level_number=level,
-        assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
