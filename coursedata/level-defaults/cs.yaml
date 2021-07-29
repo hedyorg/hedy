@@ -59,7 +59,8 @@
 3:
     start_code: print 'Ahoj světe!'
     intro_text: |
-        `ask` funguje ve 3. úrovni stejně jako ve 2., ale `print` se mění.
+
+         V úrovni 3 se mění `ask` a `print`.
 
          Text, který chceš vytisknout, teď musíš dát do uvozovek.
 
@@ -82,11 +83,11 @@
     -   explanation: Zeptej se na něco pomocí `ask`.
         example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
         demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             print barva ' je tvoje nejoblíbenější barva.'
 4:
     start_code: |-
-        jmeno is ask Jak se jmenuješ?
+        jmeno is ask 'Jak se jmenuješ?'
         if jmeno is Hedy print 'Super!' else print 'Ok, tebe neznám.'
     intro_text: |-
         `ask` a` print` fungují stále jako na úrovni 3.
@@ -95,7 +96,7 @@
 
          ## Příklad kódu v Hedy
          ```
-         jmeno is ask Jak se jmenuješ?
+         jmeno is ask 'Jak se jmenuješ?'
          if jmeno is Hedy print 'Ahoj!' else print 'Ráda tě poznávám!'
          ```
 
@@ -109,14 +110,14 @@
         example: "Příklad: print 'Ahoj, vítej v Hedy!'"
         demo_code: print 'Ahoj, vítej v Hedy!'
     -   explanation: Zopakuj si příkaz `ask`.
-        example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
+        example: "Příklad: barva is ask 'Jaká je tvoje nejoblíbenější barva?'"
         demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             print barva ' je tvoje nejoblíbenější barva.'
     -   explanation: Rozhodni se pomocí `if`.
         example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
         demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj...'
 5:
     start_code: repeat 3 times print 'Hedy je zábavná!'
@@ -134,17 +135,17 @@
     -   explanation: Zopakuj si příkaz `ask`.
         example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
         demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             print barva ' je tvoje nejoblíbenější barva.'
     -   explanation: Rozhodni se pomocí `if`.
         example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
         demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj...'
     -   explanation: Zkombinuj `repeat` a `if`.
         example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
         demo_code: |-
-            barva is ask Jaká je tvoje nejoblíbenější barva?
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'
 6:
     start_code: print '5 krát 5 je ' 5 * 5
@@ -169,14 +170,14 @@
         example: "Příklad: print '5 krát 5 je ' 5 * 5"
         demo_code: print '5 krát 5 je ' 5 * 5
     -   explanation: Zadej příklad a ověř výsledek.
-        example: 'Příklad: vysledek is ask Kolik je 10 plus 10?'
+        example: "Příklad: vysledek is ask 'Kolik je 10 plus 10?'"
         demo_code: |-
             vysledek is ask Kolik je 10 plus 10?
             if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
     -   explanation: Zkombinuj `repeat` a `if`.
         example: "Příklad: if vysledek is 50 repeat 3 times print 'Správně!' else repeat 5 times print 'Špatně!'"
         demo_code: |-
-            vysledek is ask Kolik je 10 krát 5?
+            vysledek is ask 'Kolik je 10 krát 5?'
             if vysledek is 50 repeat 3 times print 'Správně!' else repeat 5 times print 'Špatně!'
 7:
     start_code: |-
@@ -198,7 +199,7 @@
 
          ## Příklad kódu v Hedy
          ```
-         barva is ask Jaká je tvoje nejoblíbenější barva?
+         barva is ask 'Jaká je tvoje nejoblíbenější barva?'
          if barva is zelená
              repeat 3 times
                  print 'Nádherná!'
@@ -211,7 +212,7 @@
         example: "Příklad: print '5 krát 5 je ' 5 * 5"
         demo_code: print '5 krát 5 je ' 5 * 5
     -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: 'Příklad: vysledek is ask Kolik je 5 plus 5?'
+        example: "Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
         demo_code: |-
             vysledek is ask Kolik je 5 plus 5?
             if vysledek is 10
@@ -223,7 +224,7 @@
     -   explanation: Zkombinuj `if` a `repeat`.
         example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
         demo_code: |4-
-             barva is ask Jaká je tvoje nejoblíbenější barva?
+             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
              if barva is zelená
                  repeat 3 times
                      print 'Nádherná!'
@@ -241,9 +242,9 @@
         example: for pocitadlo is 1 to 5
         demo_code: for pocitadlo is 1 to 5
     -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: 'Příklad: vysledek is ask Kolik je 5 plus 5?'
+        example: "'Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
         demo_code: |-
-            vysledek is ask Kolik je 5 plus 5?
+            vysledek is ask 'Kolik je 5 plus 5?'
             if vysledek is 10
                 print 'Skvělá práce!'
                 print 'Výsledek opravdu je ' vysledek
@@ -263,9 +264,9 @@
             for pocitadlo in range 1  to 5
                 print pocitadlo
     -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: 'Příklad: vysledek is ask Kolik je 5 plus 5?'
+        example: "Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
         demo_code: |-
-            vysledek is ask Kolik je 5 plus 5?
+            vysledek is ask 'Kolik je 5 plus 5?'
             if vysledek is 10
                 print 'Skvělá práce!'
                 print 'Výsledek opravdu je ' vysledek

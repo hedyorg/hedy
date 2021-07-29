@@ -1,6 +1,6 @@
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
-from lark import Tree, Transformer
+from lark import Tree, Transformer, visitors
 from os import path
 import sys
 import utils
@@ -127,84 +127,81 @@ class ExtractAST(Transformer):
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
 
-def flatten(args):
-    flattened_args = []
-    if isinstance(args, str):
-        return args
-    elif isinstance(args, Tree):
-        return args
-    else:
-        for a in args:
-            if type(a) is list:
-                for x in a:
-                    flattened_args.append(flatten(x))
-            else:
-                flattened_args.append(a)
-        return flattened_args
-
 class AllAssignmentCommands(Transformer):
-    # returns only variable assignments AND places where variables are accessed
+    # returns a list of variable and list access
     # so these can be excluded when printing
 
-    def program(self, args):
-        return flatten(args)
+    # relevant nodes (list acces, ask, assign) are transformed into strings
+    # higher in the tree (through default rule), we filter on only string arguments, of lists with string arguments
 
-    def repeat(self, args):
-        commands = args[1:]
-        return flatten(commands)
-
-    def command(self, args):
-        return flatten(args)
+    def filter_ask_assign(self, args):
+        ask_assign = []
+        for a in args:
+            # strings (vars remaining in the tree) are added directly
+            if type(a) is str:
+                ask_assign.append(a)
+            #lists are seached further for string members (vars)
+            elif type(a) is list:
+                sub_a_ask_assign = self.filter_ask_assign(a)
+                for sub_a in sub_a_ask_assign:
+                    ask_assign.append(sub_a)
+        return ask_assign
 
     def for_loop(self, args):
-        commands = args[1:]
-        return flatten(commands)
-    def while_loop(self, args):
-        commands = args[1:]
-        return flatten(commands)
+        # for loop iterator is a var so should be added to the list of vars
+      iterator = str(args[0])
+      commands = args[1:]
+      return [iterator] + self.filter_ask_assign(args)
+
+    def input(self, args):
+        #return left side of the =
+        return args[0]
 
     def ask(self, args):
-        #todo: this also uses this arg for level 1, where it should not be used
-        #(since then it has no var as 1st argument)
-        #we should actually loop the level in here to distinguish on
-        return args[0].children
-    def assign(self, args):
-        return args[0].children
-    def assign_list(self, args):
-        return args[0].children
-    def list_access_var(self, args):
-        return args[0].children
-    def var_access(self,args):
-        return args[0].children
-    def change_list_item(self, args):
-        return args[0].children
-    def comment(self, args):
-        return args[0].children
+        #try is needed cause in level 1 sk has not variable in front
+        try:
+            return args[0]
+        except:
+            return None
 
-    #list access is accessing a variable, so must be escaped
+    def assign(self, args):
+        return args[0]
+
+    def assign_list(self, args):
+        return args[0]
+
+    # list access is accessing a variable, so must be escaped
+    # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
-        listname = args[0].children[0]
+        listname = args[0][0]
         if args[1] == 'random':
             return 'random.choice(' + listname + ')'
         else:
             return listname + '[' + args[1] + ']'
-    def print(self, args):
+
+
+    # additions Laura, to be checked for higher levels:
+    def list_access_var(self, args):
+        return args[0]
+    def var_access(self,args):
+        return args[0]
+    def change_list_item(self, args):
+        return args[0]
+
+    def text(self, args):
+        #text never contains a variable
+        return None
+
+    def var(self, args):
         return args
-    def input(self,args):
-        return args[0].children
 
-    def smaller(self, args):
-        return args[0].children
-    def bigger(self, args):
-        return args[0].children
+    def punctuation(self, args):
+        #is never a variable (but should be removed from the tree or it will be seen as one!)
+        return None
 
-    def not_equal(self, args):
-        return args[0].children
+    def __default__(self, args, children, meta):
+        return self.filter_ask_assign(children)
 
-    def smaller_equal(self, args):
-        return args[0].children
-    def bigger_equal(self, args):
-        return args[0].children
 
 
 def are_all_arguments_true(args):
@@ -501,6 +498,12 @@ class ConvertToPython_3(ConvertToPython_2):
         return "print(" + '+'.join(args) + ')'
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
+    def ask(self, args):
+        args_new = []
+        var = args[0]
+        remaining_args = args[1:]
+
+        return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
     lines = s.split('\n')
@@ -1007,18 +1010,41 @@ def create_grammar(level, sub):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
 
+    # Load Lark grammars relative to directory of current file
+    script_dir = path.abspath(path.dirname(__file__))
+
+    # we start with creating the grammar for level 1
+    grammar_text_1 = get_full_grammar_for_level(1)
+    
     if sub:
-      filename = "level" + str(level) + "-" + str (sub) + ".lark"
-      with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-          return file.read()
+        #grep
+        if level == 1:
+            # this is a level 1 sublevel, so get the sublevel grammar and return
+            grammar_text_sub = get_additional_rules_for_level(1, sub)
+            grammar_text = merge_grammars(grammar_text_1, grammar_text_sub)
+            return grammar_text
+
+        grammar_text_2 = get_additional_rules_for_level(2)
+
+        #start at 1 and keep merging new grammars in
+        new = merge_grammars(grammar_text_1, grammar_text_2)
+
+        for i in range(3, level+1):
+            grammar_text_i = get_additional_rules_for_level(i)
+            new = merge_grammars(new, grammar_text_i)
+
+        # get grammar for the sublevel and merge it
+        grammar_text_sub = get_additional_rules_for_level(level, sub)
+        new = merge_grammars(new, grammar_text_sub)
+        
+        # ready? Save to file to ease debugging
+        # this could also be done on each merge for performance reasons
+        filename = "level" + str(level) + "-" + str(sub) + "-Total.lark"
+        loc = path.join(script_dir, "grammars-Total", filename)
+        file = open(loc, "w", encoding="utf-8")
+        file.write(new)
+        file.close()
     else:
-
-        # Load Lark grammars relative to directory of current file
-        script_dir = path.abspath(path.dirname(__file__))
-
-        # we start with creating the grammar for level 1
-        grammar_text_1 = get_full_grammar_for_level(1)
-
         #grep
         if level == 1:
             grammar_text = get_full_grammar_for_level(level)
@@ -1043,9 +1069,12 @@ def create_grammar(level, sub):
 
     return new
 
-def get_additional_rules_for_level(level):
+def get_additional_rules_for_level(level, sub = 0):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "-Additions.lark"
+    if sub:
+        filename = "level" + str(level) + "-" + str(sub) + "-Additions.lark"
+    else:
+        filename = "level" + str(level) + "-Additions.lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
@@ -1077,6 +1106,7 @@ def get_parser(level, sub):
 
 def transpile(input_string, level, sub = 0):
     try:
+        input_string = input_string.replace('\r\n', '\n')
         return transpile_inner(input_string, level, sub)
     except Exception as E:
         # This is the 'fall back' transpilation
@@ -1206,7 +1236,7 @@ def transpile_inner(input_string, level, sub = 0):
 
     parser = get_parser(level, sub)
 
-    if level >= 8:
+    if level >= 7:
         input_string = preprocess_blocks(input_string)
         # print(input_string)
 
@@ -1214,6 +1244,8 @@ def transpile_inner(input_string, level, sub = 0):
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
+        print(lookup_table)
+
 
     except UnexpectedCharacters as e:
         try:
@@ -1271,6 +1303,7 @@ def transpile_inner(input_string, level, sub = 0):
         python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 4:
+        # Sublevel has the same grammar
         python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 5:
@@ -1280,13 +1313,10 @@ def transpile_inner(input_string, level, sub = 0):
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 7:
-        if sub == 0:
-            python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        elif sub == 1:
-            # Code conversion is the same as level 8
-            python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 8:
+        # Sublevel has the same conversion
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         return python
     elif level == 9:
