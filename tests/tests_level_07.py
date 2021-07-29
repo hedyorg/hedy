@@ -5,15 +5,16 @@ import io
 import textwrap
 from contextlib import contextmanager
 
+
 @contextmanager
 def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
+  new_out, new_err = io.StringIO(), io.StringIO()
+  old_out, old_err = sys.stdout, sys.stderr
+  try:
+    sys.stdout, sys.stderr = new_out, new_err
+    yield sys.stdout, sys.stderr
+  finally:
+    sys.stdout, sys.stderr = old_out, old_err
 
 
 def run_code(code):
@@ -78,7 +79,7 @@ class TestsLevel7(unittest.TestCase):
 
   def test_transpile_ask(self):
     code = textwrap.dedent("""\
-    antwoord is ask wat is je lievelingskleur?""")
+    antwoord is ask 'wat is je lievelingskleur?'""")
 
     result = hedy.transpile(code, 7)
 
@@ -158,7 +159,7 @@ class TestsLevel7(unittest.TestCase):
 
   def test_if_else(self):
     code = textwrap.dedent("""\
-    antwoord is ask Hoeveel is 10 plus 10?
+    antwoord is ask 'Hoeveel is 10 plus 10?'
     if antwoord is 20
         print 'Goedzo!'
         print 'Het antwoord was inderdaad ' antwoord
@@ -201,10 +202,7 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected_output, run_code(result))
 
-
-
   def test_print_random(self):
-
     code = textwrap.dedent("""\
     keuzes is steen, schaar, papier
     computerkeuze is keuzes at random
@@ -220,7 +218,6 @@ class TestsLevel7(unittest.TestCase):
     self.assertEqual(expected, result)
 
   def test_addition_simple(self):
-
     code = textwrap.dedent("""\
     var is 5
     print var + 5""")
@@ -234,7 +231,6 @@ class TestsLevel7(unittest.TestCase):
     self.assertEqual(expected, result)
 
   def test_issue_297(self):
-
     code = textwrap.dedent("""\
     count is 1
     repeat 12 times
@@ -251,24 +247,42 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected, result)
 
+# programs with issues to see if we catch them properly
+
+  def test_issue_396(self):
+    code = textwrap.dedent("""\
+    repeat 5 times
+        if antwoord2 is 10
+            print 'Goedzo'
+        else
+            print 'lalala'""")
+
+    result = hedy.transpile(code, 7)
+
+    expected = textwrap.dedent("""\
+    for i in range(int(5)):
+      if str('antwoord2') == str('10'):
+        print('Goedzo')
+      else:
+        print('lalala')""")
+
+    self.assertEqual(expected, result)
 
     
-#programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message
 # for this!
 
-  # def test_level_7_no_indentation(self):
-  #   #test that we get a parse error here
-  #   code = textwrap.dedent("""\
-  #   antwoord is ask Hoeveel is 10 keer tien?
-  #   if antwoord is 100
-  #   print 'goed zo'
-  #   else
-  #   print 'bah slecht'""")
-  #
-  #   with self.assertRaises(Exception) as context:
-  #     result = hedy.transpile(code, 7)
-  #   self.assertEqual(str(context.exception), 'Parse')
-
+# def test_level_7_no_indentation(self):
+#   #test that we get a parse error here
+#   code = textwrap.dedent("""\
+#   antwoord is ask Hoeveel is 10 keer tien?
+#   if antwoord is 100
+#   print 'goed zo'
+#   else
+#   print 'bah slecht'""")
+#
+#   with self.assertRaises(Exception) as context:
+#     result = hedy.transpile(code, 7)
+#   self.assertEqual(str(context.exception), 'Parse')
 

@@ -40,14 +40,6 @@ class Translations:
 
 def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, adventure_assignments, adventure_name):
 
-  sublevel = None
-  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
-    sublevel     = int (level_number [level_number.index ('-') + 1])
-    level_number = int (level_number [0:level_number.index ('-')])
-
-  #get_assignment actually gets the default level text!!!*introtext*!!!
-  assignment = course.get_assignment(level_number, assignment_number)
-
   if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
     quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
     quiz_data_level = quiz_data['level']
@@ -59,14 +51,10 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
     sublevel     = int (level_number [level_number.index ('-') + 1])
     level_number = int (level_number [0:level_number.index ('-')])
 
+  assignment = course.get_assignment(level_number, assignment_number, sublevel)
+
   if not assignment:
     abort(404)
-
-  # if this is a custom course (such as online masters)
-  # filter the adventure tabs to show only the ones named in the yaml
-
-  if course.custom:
-    adventure_assignments = [x for x in adventure_assignments if x['short_name'] in course.adventures]
 
   arguments_dict = {}
 
@@ -74,25 +62,34 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
+  arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
+  arguments_dict['level'] = assignment.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
+  arguments_dict['next_assignment'] = int(assignment_number) + 1 if int(assignment_number) < course.max_step(level_number) else None
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
+  arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventure_assignments'] = adventure_assignments
   arguments_dict['adventure_name'] = adventure_name
   arguments_dict['quiz_data_level'] = quiz_data_level
-  arguments_dict['quiz_enabled'] = config['quiz-enabled']
+  arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
 
+  print(course.language == 'nl')
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
 
   # Actual assignment
   arguments_dict.update(**attr.asdict(assignment))
+
+  # Add markdowns to docs
+  for doc in arguments_dict ['docs']:
+    doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
 
   return render_template("code-page.html", **arguments_dict)

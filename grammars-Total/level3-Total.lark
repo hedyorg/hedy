@@ -48,10 +48,11 @@ _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
 _WHILE: "while"
-ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
+ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
+ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
-command: print | ask | assign_list | assign | print_no_quotes | invalid //catch all at the end
+command: print | ask | assign_list | ask_no_quotes| assign | print_no_quotes | invalid //catch all at the end
 echo: _ECHO (_SPACE text)?
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 invalid: textwithoutspaces text?
