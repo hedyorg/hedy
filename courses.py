@@ -56,11 +56,6 @@ class Course:
   def max_level(self):
     return len(self.course)
 
-  def max_step(self, level):
-    level_ix = int(level) - 1
-    if level_ix >= len(self.course): return 0
-    return len(self.course[level_ix].get('assignments', []))
-
   def get_default_text(self, level, sublevel=0):
 
     """Return the 1-based Assignment from this course."""
