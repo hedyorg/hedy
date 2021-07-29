@@ -60,11 +60,6 @@ HEDY_COURSE = collections.defaultdict(courses.NoSuchCourse)
 for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
-SPACE_EU_COURSE = {'nl': courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl']),
-                   'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en']),
-                   'es': courses.Course('space_eu', 'es', LEVEL_DEFAULTS['es'])
-                   }
-
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
 
 TRANSLATIONS = hedyweb.Translations()
@@ -560,16 +555,16 @@ def adventure_page(adventure_name, level):
     if not level in adventure ['levels']:
         abort(404)
 
-    adventure_assignments = load_adventures_per_level(requested_lang(), level)
+    adventures = load_adventures_per_level(requested_lang(), level)
     g.prefix = '/hedy'
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
         course=HEDY_COURSE[requested_lang()],
         level_number=level,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventures=adventure_assignments,
+        adventures=adventures,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
@@ -612,16 +607,16 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
 
-    adventure_assignments = load_adventures_per_level(g.lang, level)
+    adventures = load_adventures_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
         course=HEDY_COURSE[g.lang],
         level_number=level,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventures=adventure_assignments,
+        adventures=adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
@@ -667,16 +662,16 @@ def onlinemasters(level, step):
     g.lang = lang = requested_lang()
     g.prefix = '/onlinemasters'
 
-    adventure_assignments = load_adventures_per_level(g.lang, level)
+    adventures = load_adventures_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
         course=ONLINE_MASTERS_COURSE,
         level_number=level,
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        adventures=adventure_assignments,
+        adventures=adventures,
         loaded_program='',
         adventure_name='')
 
@@ -688,16 +683,16 @@ def space_eu(level, step):
     g.lang = requested_lang()
     g.prefix = '/space_eu'
 
-    adventure_assignments = load_adventures_per_level(g.lang, level)
+    adventures = load_adventures_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
-        course=SPACE_EU_COURSE[g.lang],
+        course=HEDY_COURSE[g.lang],
         level_number=level,
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        adventures=adventure_assignments,
+        adventures=adventures,
         loaded_program='',
         adventure_name='')
 

@@ -38,7 +38,7 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
+def render_code_editor_with_tabs(request, course, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
 
   if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
     quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
