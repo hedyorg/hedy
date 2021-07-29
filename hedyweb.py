@@ -53,6 +53,9 @@ def render_assignment_editor(request, course, level_number, menu, translations, 
 
   assignment = course.get_default_text(level_number, sublevel)
 
+  if course.custom:
+    adventure_assignments = [x for x in adventure_assignments if x['short_name'] in course.adventures]
+
   if not assignment:
     abort(404)
 
@@ -62,7 +65,6 @@ def render_assignment_editor(request, course, level_number, menu, translations, 
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
-  arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
   arguments_dict['level'] = assignment.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
@@ -74,6 +76,7 @@ def render_assignment_editor(request, course, level_number, menu, translations, 
   arguments_dict['auth'] = translations.data [course.language] ['Auth']
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
+  #todo: rename to simply adventures
   arguments_dict['adventure_assignments'] = adventure_assignments
   arguments_dict['adventure_name'] = adventure_name
   arguments_dict['quiz_data_level'] = quiz_data_level

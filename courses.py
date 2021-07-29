@@ -35,10 +35,6 @@ class Course:
     self.course_name = course_name
     self.language = language
     self.defaults = defaults
-    self.docs = docs.DocCollection(keys=['level', 'slug'], synth={
-      'slug': lambda d: docs.slugify(d.front_matter.get('title', None))
-    })
-    self.docs.load_dir(f'coursedata/course/{course_name}/docs-{language}')
     self._validated = False
     custom = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('custom')
     self.custom = False if custom is None else custom
@@ -71,14 +67,12 @@ class Course:
     level_ix = int(level) - 1
     if level_ix >= len(self.course): return None
 
-    assignments = self.course[level_ix].get('assignments')
-
-    assignment_values = {
+    default_values = {
       "level": str(level),
     }
-    assignment_values.update(**self.defaults.get_defaults(int(level)))
+    default_values.update(**self.defaults.get_defaults(int(level)))
 
-    return Assignment(**assignment_values)
+    return DefaultValues(**default_values)
 
   def validate_course(self):
     """Check that the 'level' and 'step' fields have the right number in the entire course.
@@ -125,22 +119,11 @@ class Command:
 
 
 @attr.s(slots=True, frozen=True)
-class Assignment:
-  """A single assignment.
+class DefaultValues:
+  """Default texts for a level"""
 
-  Either a concrete assignment written in the YAML, or a default-generated
-  Assignment.
-  """
   level = attr.ib()
-  prompt = attr.ib(default='')
   intro_text = attr.ib(default=None)
   start_code = attr.ib(default=None)
   commands = attr.ib(default=None)
-  step = attr.ib(default=None)
-  docs = attr.ib(default=list)
 
-
-@attr.s(slots=True, frozen=True)
-class Doc:
-  slug = attr.ib()
-  title = attr.ib()
