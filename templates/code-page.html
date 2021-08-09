@@ -23,44 +23,8 @@
   </div>
 </div>
 <div tabindex="0" class="flex-grow p-8">
-  {# When we're NOT in adventure mode but DO have adventure-assignments, render them in tabs #}
+  {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
   {% include "incl-adventure-tabs.html" %}
-  {% if prompt %}
-  <div class="py-2 px-4">
-    <div>
-      <h2 class="mt-4">{{assignment_header}}</h2>
-      {{prompt|commonmark}}
-    </div>
-  </div>
-  {% endif %}
-
-  <script>
-    var toggleDocs = function () {
-      $('.expandable-docs').toggleClass('hidden');
-      $('.expandable-docs-text').slideToggle(400);
-    }
-  </script>
-
-  {% if docs|length %}
-  <div class="expandable-docs w-full h-16 flex flex-col bg-blue-500 cursor-pointer" onclick="toggleDocs ()">
-    <p class="self-center mt-5 text-white font-bold">&#9660;&nbsp;&nbsp;{{show_explanation}}&nbsp;&nbsp;&#9660;</p>
-  </div>
-  <div class="expandable-docs w-full h-16 flex flex-col bg-gray-600 cursor-pointer hidden" onclick="toggleDocs ()">
-    <p class="self-center mt-5 text-white font-bold">&#9660;&nbsp;&nbsp;{{hide_explanation}}&nbsp;&nbsp;&#9660;</p>
-  </div>
-  <div class="expandable-docs-text w-full flex flex-col p-3 border-2 hidden">
-    <!-- Show videos first -->
-    {% for doc in docs %}
-    {% if doc.slug == "videos" %} {{ doc.markdown|commonmark }} {% endif %}
-    {% endfor %}
-    {% for doc in docs %}
-    {% if doc.slug != "videos" %} {{ doc.markdown|commonmark }} {% endif %}
-    {% endfor %}
-  </div>
-  <div class="expandable-docs w-full h-16 flex flex-col bg-gray-600 cursor-pointer hidden" onclick="toggleDocs ()">
-    <p class="self-center mt-5 text-white font-bold">&#9650;&nbsp;&nbsp;{{hide_explanation}}&nbsp;&nbsp;&#9650;</p>
-  </div>
-  {% endif %}
 
   {% include "incl-editor-and-output.html" %}
 
@@ -86,7 +50,7 @@
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
     window.State.adventure_name_onload = window.State.adventure_name;
     // We load the adventures into the js to have access to their saved programs (if any).
-    window.State.adventures = {{ adventure_assignments|tojson }};
+    window.State.adventures = {{ adventures|tojson }};
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
     window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
