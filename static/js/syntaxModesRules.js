@@ -69,6 +69,7 @@ const LEVELS = [
     name: 'level3',
     rules: pipe(baseRules(),
       rule_print(),
+      rule_print('expression_eol'),
       rule_isAsk(),
       rule_is(),
     ),
