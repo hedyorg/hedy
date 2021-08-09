@@ -20,6 +20,7 @@ _EOL: "\r"?"\n"
 _EQUALS: "="
 _EXCLAMATION_MARK: "!"
 _FOR: "for"
+_FORWARD : "forward"
 _HASH: "#"
 _IF: "if"
 _IN: "in"
@@ -47,11 +48,12 @@ _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
+_TURN: "turn"
 _WHILE: "while"
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
-command: print | ask | assign | assign_list | invalid_space | invalid
+command: print | ask | turtle | assign | assign_list | invalid_space | invalid
 echo: _ECHO (_SPACE text)?
 index : DIGIT+
 invalid: textwithoutspaces text?
@@ -64,4 +66,5 @@ random : "random" //random needs to appear in the tree for further processing so
 start: program
 text: /([^\r\n,!?.]+)/ -> text
 textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+turtle: _FORWARD -> forward | _TURN -> turn
 var: NAME -> var

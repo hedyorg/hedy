@@ -20,6 +20,7 @@ _EOL: "\r"?"\n"
 _EQUALS: "="
 _EXCLAMATION_MARK: "!"
 _FOR: "for"
+_FORWARD : "forward"
 _HASH: "#"
 _IF: "if"
 _IN: "in"
@@ -47,6 +48,7 @@ _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
+_TURN: "turn"
 _WHILE: "while"
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
 ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
@@ -75,4 +77,5 @@ start: program
 text: /([^\n,]+)/ -> text
 textwithoutspaces: /([^\n, ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+turtle: _FORWARD -> forward | _TURN -> turn
 var: NAME -> var

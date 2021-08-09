@@ -20,6 +20,7 @@ _EOL: "\r"?"\n"
 _EQUALS: "="
 _EXCLAMATION_MARK: "!"
 _FOR: "for"
+_FORWARD : "forward"
 _HASH: "#"
 _IF: "if"
 _IN: "in"
@@ -47,12 +48,13 @@ _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
+_TURN: "turn"
 _WHILE: "while"
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
 ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
-command: print | ask | assign_list | ask_no_quotes| assign | print_no_quotes | invalid //catch all at the end
+command: print | ask | turtle | assign_list | ask_no_quotes| assign | print_no_quotes | invalid //catch all at the end
 echo: _ECHO (_SPACE text)?
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 invalid: textwithoutspaces text?
@@ -68,4 +70,5 @@ random : "random" //random needs to appear in the tree for further processing so
 start: program
 text: /([^\n,]+)/ -> text
 textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text
+turtle: _FORWARD -> forward | _TURN -> turn
 var: NAME -> var

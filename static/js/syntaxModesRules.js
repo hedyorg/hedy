@@ -6,6 +6,7 @@
 // - 'gobble' is the state that will eat whatever is left in the line and go back to 'start'
 function baseRules() {
   return {
+    // gobble is a state in which we can read anything (.*), used after print
     gobble: [
       {
         regex: '.*',
@@ -13,6 +14,9 @@ function baseRules() {
         next: 'start',
       }
     ],
+
+    // this function creates two rules, one to recognize strings and at random within a line (staying in the same state)
+    // and one where it is recognized at the end of the line (going back to start)
     expression_eol: finishLine([
       {
         regex: "'[^']*'",
@@ -23,7 +27,7 @@ function baseRules() {
         token: 'keyword'
       },
       {
-        regex: '$',
+        regex: '$', // $ matches with end of line
         token: 'text',
       },
     ]),
@@ -35,13 +39,14 @@ const LEVELS = [
     name: 'level1',
     rules: pipe(baseRules(),
       rule_print('gobble'),
+      rule_turtle(),
       recognize('start', {
-        regex: 'ask ',
+        regex: 'echo ',
         token: 'keyword',
         next: 'gobble',
       }),
       recognize('start', {
-        regex: 'echo ',
+        regex: 'ask ',
         token: 'keyword',
         next: 'gobble',
       }),
@@ -51,6 +56,7 @@ const LEVELS = [
     // Adds lists and 'at random'
     name: 'level2',
     rules: pipe(baseRules(),
+      rule_turtle(),
 
       rule_print('print_expression_eol'),
       rule_isAsk('gobble'),
@@ -68,6 +74,7 @@ const LEVELS = [
     // Adds quoted text
     name: 'level3',
     rules: pipe(baseRules(),
+      rule_turtle(),
       rule_print(),
       rule_isAsk(),
       rule_is(),
@@ -420,6 +427,25 @@ function rule_printParen() {
     next: 'expression'
   });
 }
+
+function rule_turtle() {
+    return comp(
+      recognize('start', {
+        regex: 'turn',
+        token: 'keyword',
+        next: 'start',
+      }),
+      recognize('start', {
+        regex: 'forward',
+        token: 'keyword',
+        next: 'start',
+      })
+    )
+}
+
+
+
+
 
 /**
  * Add a 'print' rule with brackets
