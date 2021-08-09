@@ -56,12 +56,33 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual("print('Hallo welkom bij Hedy!')", result)
     self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
-  def test_transpile_print(self):
+  def test_transpile_one_forward(self):
     result = hedy.transpile("forward", 1)
     expected = textwrap.dedent("""\
-    t = turtle.Turtle()
     t.forward(50)""")
     self.assertEqual(expected, result)
+
+  def test_transpile_one_turn(self):
+    result = hedy.transpile("turn", 1)
+    expected = textwrap.dedent("""\
+    t.right(90)""")
+    self.assertEqual(expected, result)
+
+  def test_transpile_multiple_forward(self):
+    result = hedy.transpile("forward\nforward", 1)
+    expected = textwrap.dedent("""\
+    t.forward(50)
+    t.forward(50)""")
+    self.assertEqual(expected, result)
+
+  def test_transpile_turtle_combi(self):
+    result = hedy.transpile("forward\nturn\nforward", 1)
+    expected = textwrap.dedent("""\
+    t.forward(50)
+    t.right(90)
+    t.forward(50)""")
+    self.assertEqual(expected, result)
+
 
   def test_transpile_ask_Spanish(self):
     result = hedy.transpile("ask ask Cuál es tu color favorito?", 1)

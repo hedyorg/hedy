@@ -328,6 +328,8 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def forward(self, args): #forward does not have arguments (at least for now!)
         return True, ''.join([c for c in args])
+    def turn(self, args): #turn does not have arguments (at least for now!)
+        return True, ''.join([c for c in args])
     def invalid(self, args):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -365,6 +367,8 @@ class IsValid(Filter):
     def text(self, args):
         return all(args), ''.join([c for c in args])
     def forward(self, args): #forward does not have arguments (at least for now!)
+        return True, ''.join([c for c in args])
+    def turn(self, args): #turn does not have arguments (at least for now!)
         return True, ''.join([c for c in args])
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
@@ -443,7 +447,9 @@ class ConvertToPython_1(Transformer):
         argument = self.process_single_quote(args[0])
         return "answer = input('" + argument + "')"
     def forward(self,args):
-        return "t = turtle.Turtle()\nt.forward(50)"""
+        return "t.forward(50)"""
+    def turn(self,args):
+        return "t.right(90)"""
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:

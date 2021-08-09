@@ -74,7 +74,7 @@ command: print | ask | echo | turtle | invalid_space | invalid
 print: _PRINT (_SPACE text)?
 ask: _ASK (_SPACE text)?
 echo: _ECHO (_SPACE text)?
-turtle: _FORWARD -> forward
+turtle: _FORWARD -> forward | _TURN -> turn
 invalid_space: _SPACE+ text
 invalid: textwithoutspaces text?
 
