@@ -387,6 +387,7 @@ function runPythonProgram(code, cb) {
   outputDiv.empty();
 
   Sk.pre = "output";
+  (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtlecanvas';
   Sk.configure({
     output: outf,
     read: builtinRead,

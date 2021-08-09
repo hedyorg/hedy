@@ -211,6 +211,7 @@ def are_all_arguments_true(args):
 
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
+# TODO: this could also use a default lark rule like AllAssignmentCommands does now
 class Filter(Transformer):
     def program(self, args):
         bool_arguments = [x[0] for x in args]
@@ -325,6 +326,8 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def number(self, args):
         return True, ''.join([c for c in args])
+    def forward(self, args): #forward does not have arguments (at least for now!)
+        return True, ''.join([c for c in args])
     def invalid(self, args):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -361,6 +364,8 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
+    def forward(self, args): #forward does not have arguments (at least for now!)
+        return True, ''.join([c for c in args])
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -420,6 +425,7 @@ class ConvertToPython_1(Transformer):
         return '\n'.join([str(c) for c in args])
     def command(self, args):
         return args[0]
+
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
@@ -436,6 +442,8 @@ class ConvertToPython_1(Transformer):
     def ask(self, args):
         argument = self.process_single_quote(args[0])
         return "answer = input('" + argument + "')"
+    def forward(self,args):
+        return "t = turtle.Turtle()\nt.forward(50)"""
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:
