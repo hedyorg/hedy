@@ -2,7 +2,7 @@
       <div>
         <div class="flex cursor-pointer flex-end">
         <a tabindex="0" href="#" data-tab="t-level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
-        {% for assignment in adventure_assignments %}
+        {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
             <a tabindex="0" href="#" data-tab="t-{{assignment.short_name}}" class="block text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
           {% endif %}
@@ -14,7 +14,7 @@
         <div data-tabtarget="t-level">
           {{intro_text|commonmark}}
         </div>
-        {% for assignment in adventure_assignments %}
+        {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
             <div data-tabtarget="t-{{assignment.short_name}}" class="hidden">
               {% if assignment.image %}
