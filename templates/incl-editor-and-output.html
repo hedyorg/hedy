@@ -1,11 +1,11 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <div>
       <div class="w-full h-64 flex flex-col">
-        <pre id="editor"
-          style="background: #272822; color: white"
+        <div id="editor"
+          style="background: #272822; font-family: monospace; color: white"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}</pre>
+          data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or start_code}}</div>
         <!-- errorbox -->
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
@@ -97,28 +97,23 @@
         </div>
       </div>
       <br>
-        <div class="flex {% if prev_level %}justify-between{% else %}justify-end{% endif %}">
-            {% if next_assignment %}
+      <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+        {% if prev_level %}
+          <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
+        {% endif %}
+        {% if next_level %}
+            {% if (next_level == quiz_data_level + 1) and quiz_enabled %}
                 <button class="green-btn ml-1"
-                        onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">{{ advance_step_button }} {{ next_assignment }}</button>
+                        onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
+                <button class="green-btn ml-1" onclick="window.location = '/quiz/start/{{ quiz_data_level }}';">Ga
+                    naar de
+                    quiz
+                    van level {{ level }}</button>
+            {% else %}
+                <button class="green-btn ml-1"
+                        onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
             {% endif %}
-            {% if prev_level %}
-                <button class="green-btn"
-                        onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{ regress_button }} {{ prev_level }}</button>
-            {% endif %}
-            {% if next_level %}
-                {% if (next_level == quiz_data_level + 1) and quiz_enabled %}
-                    <button class="green-btn ml-1"
-                            onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
-                    <button class="green-btn ml-1" onclick="window.location = '/quiz/start/{{ quiz_data_level }}';">Ga
-                        naar de
-                        quiz
-                        van level {{ level }}</button>
-                {% else %}
-                    <button class="green-btn ml-1"
-                            onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
-                {% endif %}
-            {% endif %}
-        </div>
+          {% endif %}
+      </div>
     </div>
-</div>
+  </div>
