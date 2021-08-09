@@ -60,11 +60,6 @@ HEDY_COURSE = collections.defaultdict(courses.NoSuchCourse)
 for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = courses.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
-SPACE_EU_COURSE = {'nl': courses.Course('space_eu', 'nl', LEVEL_DEFAULTS['nl']),
-                   'en': courses.Course('space_eu', 'en', LEVEL_DEFAULTS['en']),
-                   'es': courses.Course('space_eu', 'es', LEVEL_DEFAULTS['es'])
-                   }
-
 ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
 
 TRANSLATIONS = hedyweb.Translations()
@@ -85,7 +80,7 @@ def load_adventure_for_language(lang):
     return adventures [lang]
 
 
-def load_adventure_assignments_per_level(lang, level):
+def load_adventures_per_level(lang, level):
 
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode (no adventure) and for each of the adventures.
@@ -100,12 +95,12 @@ def load_adventure_assignments_per_level(lang, level):
             elif loaded_programs [program_key] ['date'] < program ['date']:
                 loaded_programs [program_key] = program
 
-    assignments = []
+    all_adventures = []
     adventures = load_adventure_for_language(lang)['adventures']
     for short_name, adventure in adventures.items ():
         if not level in adventure['levels']:
             continue
-        assignments.append({
+        all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
             'image': adventure.get('image', None),
@@ -118,14 +113,14 @@ def load_adventure_assignments_per_level(lang, level):
              }
         })
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
-    assignments.append({
+    all_adventures.append({
         'short_name': 'level',
         'loaded_program': '' if not loaded_programs.get ('level') else {
             'name': loaded_programs.get ('level') ['name'],
             'code': loaded_programs.get ('level') ['code']
          }
     })
-    return assignments
+    return all_adventures
 
 # Load main menu (do it once, can be cached)
 with open(f'main/menu.json', 'r', encoding='utf-8') as f:
@@ -568,17 +563,16 @@ def adventure_page(adventure_name, level):
     if not level in adventure ['levels']:
         abort(404)
 
-    adventure_assignments = load_adventure_assignments_per_level(requested_lang(), level)
+    adventures = load_adventures_per_level(requested_lang(), level)
     g.prefix = '/hedy'
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
         course=HEDY_COURSE[requested_lang()],
         level_number=level,
-        assignment_number=1,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventure_assignments=adventure_assignments,
+        adventures=adventures,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
@@ -620,20 +614,17 @@ def index(level, step):
         loaded_program = {'code': result ['code'], 'name': result ['name'], 'adventure_name': result.get ('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
-        # We default to step 1 to provide a meaningful default assignment
-        step = 1
 
-    adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
+    adventures = load_adventures_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
         course=HEDY_COURSE[g.lang],
         level_number=level,
-        assignment_number=step,
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventure_assignments=adventure_assignments,
+        adventures=adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
@@ -679,17 +670,16 @@ def onlinemasters(level, step):
     g.lang = lang = requested_lang()
     g.prefix = '/onlinemasters'
 
-    adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
+    adventures = load_adventures_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
         course=ONLINE_MASTERS_COURSE,
         level_number=level,
-        assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        adventure_assignments=adventure_assignments,
+        adventures=adventures,
         loaded_program='',
         adventure_name='')
 
@@ -701,17 +691,16 @@ def space_eu(level, step):
     g.lang = requested_lang()
     g.prefix = '/space_eu'
 
-    adventure_assignments = load_adventure_assignments_per_level(g.lang, level)
+    adventures = load_adventures_per_level(g.lang, level)
 
-    return hedyweb.render_assignment_editor(
+    return hedyweb.render_code_editor_with_tabs(
         request=request,
-        course=SPACE_EU_COURSE[g.lang],
+        course=HEDY_COURSE[g.lang],
         level_number=level,
-        assignment_number=step,
         translations=TRANSLATIONS,
         version=version(),
         menu=None,
-        adventure_assignments=adventure_assignments,
+        adventures=adventures,
         loaded_program='',
         adventure_name='')
 
