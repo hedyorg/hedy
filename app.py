@@ -430,8 +430,8 @@ def get_quiz_start(level):
 
 # Quiz mode
 # Fill in the filename as source
-@app.route('/quiz/quiz_questions/<level_source>/<question_nr>', methods=['GET'])
-def get_quiz(level_source, question_nr):
+@app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
+def get_quiz(level_source, question_nr, attempt):
     if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
@@ -458,6 +458,7 @@ def get_quiz(level_source, question_nr):
                                    questions=quiz_data['questions'],
                                    question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                    correct=session.get('correct_answer'),
+                                   attempt = attempt,
                                    char_array=char_array,
                                    menu=render_main_menu('adventures'), lang=lang,
                                    username=current_user(request)['username'],
@@ -470,9 +471,8 @@ def get_quiz(level_source, question_nr):
                                    next_assignment=1, username=current_user(request)['username'],
                                    auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
-
-@app.route('/submit_answer/<level_source>/<question_nr>', methods=["POST"])
-def submit_answer(level_source, question_nr):
+@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+def submit_answer(level_source, question_nr, attempt):
     if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
@@ -502,21 +502,49 @@ def submit_answer(level_source, question_nr):
                 session['correct_answer'] = session.get('correct_answer') + 1
             else:
                 session['correct_answer'] = 1
-        else:
-            session['correct_answer'] = 0
 
-                # Loop through the questions
-        if q_nr <= len(quiz_data['questions']):
-            return render_template('feedback.html', quiz=quiz_data, question=question,
-                                   questions=quiz_data['questions'],
-                                   level_source=level_source,
-                                   question_nr=q_nr,
-                                   correct=session.get('correct_answer'),
-                                   option=option,
-                                   index_option=index_option,
-                                   menu=render_main_menu('adventures'), lang=lang,
-                                   username=current_user(request)['username'],
-                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+        # Loop through the questions and check that the loop doesn't reach out of bounds
+        q_nr = int(question_nr)
+        if q_nr <= len(quiz_data['questions']) :
+            if question['correct_answer'] in option:
+                return render_template('feedback.html', quiz=quiz_data, question=question,
+                                       questions=quiz_data['questions'],
+                                       level_source=level_source,
+                                       question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       option=option,
+                                       index_option=index_option,
+                                       menu=render_main_menu('adventures'), lang=lang,
+                                       username=current_user(request)['username'],
+                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+            elif int(attempt) <= 3:
+                question = quiz_data['questions'][q_nr - 1].get(q_nr)
+                # Convert the indices to the corresponding characters
+                char_array = []
+                for i in range(len(question['mp_choice_options'])):
+                    char_array.append(chr(ord('@') + (i + 1)))
+                return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+                                       questions=quiz_data['questions'],
+                                       question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       attempt=int(attempt),
+                                       questionFalse='false',
+                                       char_array=char_array,
+                                       menu=render_main_menu('adventures'), lang=lang,
+                                       username=current_user(request)['username'],
+                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+            elif int(attempt) >= 3:
+                return render_template('feedback.html', quiz=quiz_data, question=question,
+                                       questions=quiz_data['questions'],
+                                       level_source=level_source,
+                                       question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       questionFalse = 'false',
+                                       option=option,
+                                       index_option=index_option,
+                                       menu=render_main_menu('adventures'), lang=lang,
+                                       username=current_user(request)['username'],
+                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
         else:  # show a different page for after the last question
             return 'No end quiz page!', 404
 
