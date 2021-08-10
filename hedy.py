@@ -327,7 +327,7 @@ class Filter(Transformer):
     def number(self, args):
         return True, ''.join([c for c in args])
     def forward(self, args): #forward does not have arguments (at least for now!)
-        return True, ''.join([c for c in args])
+        return are_all_arguments_true(args)
     def turn(self, args): #turn does not have arguments (at least for now!)
         return True, ''.join([c for c in args])
     def invalid(self, args):
@@ -366,8 +366,8 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
-    def forward(self, args): #forward does not have arguments (at least for now!)
-        return True, ''.join([c for c in args])
+    def forward(self, args):
+        return are_all_arguments_true(args)
     def turn(self, args): #turn does not have arguments (at least for now!)
         return True, ''.join([c for c in args])
     def invalid_space(self, args):
@@ -447,7 +447,12 @@ class ConvertToPython_1(Transformer):
         argument = self.process_single_quote(args[0])
         return "answer = input('" + argument + "')"
     def forward(self,args):
-        return "t.forward(50)"""
+        # when a not-number is given, we simply use 50 as default
+        try:
+            parameter = int(args[0])
+        except:
+            parameter = 50
+        return f"t.forward({parameter})"""
     def turn(self,args):
         return "t.right(90)"""
 
@@ -479,6 +484,19 @@ class ConvertToPython_2(ConvertToPython_1):
             all_arguments_converted.append(wrap_non_var_in_quotes(argument, self.lookup) + space)
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
+    def forward(self, args):
+        parameter = args[0]
+        #if the parameter is a variable, print as is
+        if parameter in self.lookup:
+            return f"t.forward({parameter})"
+
+        # otherwise, see if we got a number. if not, simply use 50 as default
+        try:
+            parameter = int(args[0])
+        except:
+            parameter = 50
+        return f"t.forward({parameter})"""
+
     def ask(self, args):
         var = args[0]
         all_parameters = ["'" + self.process_single_quote(a) + "'" for a in args[1:]]

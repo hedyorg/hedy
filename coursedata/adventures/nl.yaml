@@ -932,3 +932,35 @@ adventures:
                     ## uitdaging
                     Alle uitdagingen die in level 7 worden genoemd zoals de extra `if` statements of de verbeterde prijzen, kun je natuurlijk in level 8 nog steeds gebruiken! 
                 start_code: "print 'Welkom bij McHedy!' "
+    turtle:
+        name: "Tekenen"
+        description: "Maak jouw eigen tekening"
+        image: "turtle.png"
+        default_save_name: "schildpad"
+        levels:
+            1:
+                story_text: |
+                    ## Tekenen maar
+                    In level 1 kun je ook beginnen met een programmeer-tekening! Door lijnen te combineren met draaien kun je bijvoorbeeld een
+                    vierkant maken of een trapje.
+
+                    Met `forward` ga je naar voren. Het getal erna bepaalt hoe ver naar voren. Met `turn` draai je een kwartslag, met de klok mee. Wil je meer draaien?
+                    Dan kun je meerdere turns na elkaar gebruiken.
+
+                    Dit is het begin van een trapje, zorg jij dat het wel 5 treden worden?
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    forward 50
+                    turn
+                    turn
+                    turn
+                    forward 50
+                    turn
+                    ```
+
+                    ## Vooruitblik
+                    Wel een beetje veel werk hè, die drie keer `turn` achter elkaar? In latere levels kun je ook de hoek zelf instellen.
+
+
+                start_code: "forward 50\nturn"

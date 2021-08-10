@@ -57,7 +57,7 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
   def test_transpile_one_forward(self):
-    result = hedy.transpile("forward", 1)
+    result = hedy.transpile("forward 50", 1)
     expected = textwrap.dedent("""\
     t.forward(50)""")
     self.assertEqual(expected, result)
@@ -68,7 +68,7 @@ class TestsLevel1(unittest.TestCase):
     t.right(90)""")
     self.assertEqual(expected, result)
 
-  def test_transpile_multiple_forward(self):
+  def test_transpile_multiple_forward_without_arguments(self):
     result = hedy.transpile("forward\nforward", 1)
     expected = textwrap.dedent("""\
     t.forward(50)
@@ -76,11 +76,11 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(expected, result)
 
   def test_transpile_turtle_combi(self):
-    result = hedy.transpile("forward\nturn\nforward", 1)
+    result = hedy.transpile("forward 50\nturn\nforward 100", 1)
     expected = textwrap.dedent("""\
     t.forward(50)
     t.right(90)
-    t.forward(50)""")
+    t.forward(100)""")
     self.assertEqual(expected, result)
 
 
