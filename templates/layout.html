@@ -12,6 +12,31 @@
 
   <body class="bg-gray-400">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
+    <div id="modal-mask" class="hidden absolute bg-gray-400 z-50 w-full h-full" style="opacity: 40%"></div>
+    <div id="modal-content" class="hidden absolute z-50 p-16 bg-gray-200 border-2 border-black" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+       <div id="modal-alert" class="hidden">
+          <div id="modal-alert-text"></div>
+          <div style="margin: auto; text-align: center;">
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.hide ()">OK</button>
+          </div>
+       </div>
+       <div id="modal-confirm" class="hidden">
+          <div id="modal-confirm-text"></div>
+          <div style="margin: auto; text-align: center;">
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.confirmcb (true)">OK</button>
+            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.confirmcb (false)">Cancel</button>
+          </div>
+       </div>
+       <div id="modal-prompt" class="hidden">
+          <div id="modal-prompt-text"></div>
+          <div style="margin: auto; text-align: center;">
+            <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
+            <br>
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.promptcb ()">OK</button>
+            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.promptcb (true)">Cancel</button>
+          </div>
+       </div>
+    </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu %}
       {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
@@ -19,6 +44,46 @@
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block body %}{% endblock %}
     </div>
+    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script>
+      window.modal = {
+         show: function () {
+            $ ('#modal-mask').show ();
+            $ ('#modal-content').show ();
+         },
+         hide: function () {
+            $ ('#modal-mask').hide ();
+            $ ('#modal-content').hide ();
+            $ ('#modal-alert').hide ();
+            $ ('#modal-prompt').hide ();
+            $ ('#modal-confirm').hide ();
+         },
+         alert: function (message) {
+            $ ('#modal-alert-text').text (message);
+            window.modal.show ();
+            $ ('#modal-alert').show ();
+         },
+         confirm: function (message, cb) {
+            $ ('#modal-confirm-text').text (message);
+            window.modal.show ();
+            $ ('#modal-confirm').show ();
+            window.modal.confirmcb = function (proceed) {
+              window.modal.hide ();
+              if (proceed) cb ();
+            }
+         },
+         prompt: function (message, cb) {
+            $ ('#modal-prompt-text').text (message);
+            window.modal.show ();
+            $ ('#modal-prompt').show ();
+            window.modal.promptcb = function (cancel) {
+              window.modal.hide ();
+              if (cancel) return;
+              cb ($ ('#modal-prompt-input').val ());
+            }
+         }
+      }
+    </script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
   </body>
 </html>

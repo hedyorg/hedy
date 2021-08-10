@@ -4,7 +4,9 @@ scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir
 
 # Install the dependencies at the versions indicated by package.json and package-lock.json
-npm install
+if [ "$1" != "noinstall" ] ; then
+  npm install
+fi
 
 npx tailwindcss build styles.css -o ../static/css/generated.css
 npx minify ../static/css/generated.css > ../static/css/generated.css.min
