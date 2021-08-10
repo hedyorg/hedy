@@ -387,7 +387,14 @@ function runPythonProgram(code, cb) {
   outputDiv.empty();
 
   Sk.pre = "output";
-  (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtlecanvas';
+  const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
+  turtleConfig.target = 'turtlecanvas';
+//  turtleConfig.width = 0; // Use width & height of div
+//  turtleConfig.height = 0;
+  turtleConfig.worldWidth = 400;
+  turtleConfig.worldHeight = 400;
+//  turtleConfig.height = 200;
+
   Sk.configure({
     output: outf,
     read: builtinRead,
