@@ -206,10 +206,10 @@ window.auth = {
   },
   markAsTeacher: function (username, is_teacher) {
     $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
+      window.modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
     }).fail (function (error) {
       console.log (error);
-      alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+      window.modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
     });
   },
 
@@ -218,11 +218,11 @@ window.auth = {
       if (correctedEmail === email) return;
       if (! correctedEmail.match (window.auth.emailRegex)) return window.modal.alert ('Please enter a valid email.');
       $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
-        alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
+        window.modal.alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
         location.reload ();
       }).fail (function (error) {
         console.log (error);
-        alert (['Error when changing the email for User', username].join (' '));
+        window.modal.alert (['Error when changing the email for User', username].join (' '));
       });
     });
   },

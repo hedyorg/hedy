@@ -133,7 +133,7 @@ function reloadOnExpiredSession () {
 }
 
 function runit(level, lang, cb) {
-  if (window.State.disable_run) return alert (window.auth.texts.answer_question);
+  if (window.State.disable_run) return window.modal.alert (window.auth.texts.answer_question);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -199,7 +199,7 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
-  if (window.State.sublevel) return alert ('Sorry, you cannot save programs when in a sublevel.');
+  if (window.State.sublevel) return window.modal.alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;
@@ -281,7 +281,7 @@ function viewProgramLink(programId) {
 }
 
 window.share_program = function share_program (level, lang, id, Public, reload) {
-  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+  if (! window.auth.profile) return window.modal.alert (window.auth.texts.must_be_logged);
 
   var share = function (id) {
     $.ajax({
@@ -304,7 +304,7 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
       else {
         // If we're sharing the program, copy the link to the clipboard.
         if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-        alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+        window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
       }
       if (reload) setTimeout (function () {location.reload ()}, 1000);
     }).fail(function(err) {
@@ -345,7 +345,7 @@ window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
      document.getSelection ().removeAllRanges ();
      document.getSelection ().addRange (selected);
   }
-  if (! noAlert) alert (window.auth.texts.copy_clipboard);
+  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard);
 }
 
 /**
