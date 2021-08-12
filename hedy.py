@@ -326,10 +326,10 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def number(self, args):
         return True, ''.join([c for c in args])
-    def forward(self, args): #forward does not have arguments (at least for now!)
+    def forward(self, args):
         return are_all_arguments_true(args)
-    def turn(self, args): #turn does not have arguments (at least for now!)
-        return True, ''.join([c for c in args])
+    def turn(self, args):
+        return are_all_arguments_true(args)
     def invalid(self, args):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -368,8 +368,8 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def forward(self, args):
         return are_all_arguments_true(args)
-    def turn(self, args): #turn does not have arguments (at least for now!)
-        return True, ''.join([c for c in args])
+    def turn(self, args):
+        return are_all_arguments_true(args)
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -453,8 +453,14 @@ class ConvertToPython_1(Transformer):
         except:
             parameter = 50
         return f"t.forward({parameter})"""
-    def turn(self,args):
-        return "t.right(90)"""
+    def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)" #no arguments works, and means a right turn
+
+        if args[0] == 'left':
+            return "t.left(90)"
+        else:
+            return "t.right(90)" #something else also defaults to right turn
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:

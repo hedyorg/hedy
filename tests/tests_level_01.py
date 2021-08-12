@@ -62,11 +62,31 @@ class TestsLevel1(unittest.TestCase):
     t.forward(50)""")
     self.assertEqual(expected, result)
 
-  def test_transpile_one_turn(self):
+  def test_transpile_turn_no_args(self):
     result = hedy.transpile("turn", 1)
     expected = textwrap.dedent("""\
     t.right(90)""")
     self.assertEqual(expected, result)
+
+  def test_transpile_one_turn_right(self):
+    result = hedy.transpile("turn right", 1)
+    expected = textwrap.dedent("""\
+    t.right(90)""")
+    self.assertEqual(expected, result)
+
+  def test_transpile_one_turn_right(self):
+    result = hedy.transpile("turn koekoek", 1)
+    expected = textwrap.dedent("""\
+    t.right(90)""")
+    self.assertEqual(expected, result)
+
+  def test_transpile_one_turn_left(self):
+    result = hedy.transpile("turn left", 1)
+    expected = textwrap.dedent("""\
+    t.left(90)""")
+    self.assertEqual(expected, result)
+
+
 
   def test_transpile_multiple_forward_without_arguments(self):
     result = hedy.transpile("forward\nforward", 1)
