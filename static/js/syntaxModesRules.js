@@ -56,11 +56,12 @@ const LEVELS = [
     // Adds lists and 'at random'
     name: 'level2',
     rules: pipe(baseRules(),
-      rule_turtle(),
 
       rule_print('print_expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
+
+      rule_turtle(),
 
       recognize('print_expression_eol', finishLine([
         {
@@ -431,7 +432,7 @@ function rule_printParen() {
 function rule_turtle() {
     return comp(
       recognize('start', {
-        regex: 'turn',
+        regex: 'turn (left|right)+',
         token: 'keyword',
         next: 'start',
       }),

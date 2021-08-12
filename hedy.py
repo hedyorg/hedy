@@ -1282,8 +1282,6 @@ def transpile_inner(input_string, level, sub = 0):
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
-        print(lookup_table)
-
 
     except UnexpectedCharacters as e:
         try:
