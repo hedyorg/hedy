@@ -63,12 +63,6 @@ const LEVELS = [
 
       rule_turtle(),
 
-      recognize('print_expression_eol', finishLine([
-        {
-          regex: 'at random',
-          token: 'keyword',
-        },
-      ])),
     ),
   },
   {
