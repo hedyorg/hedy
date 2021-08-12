@@ -57,7 +57,7 @@ const LEVELS = [
     name: 'level2',
     rules: pipe(baseRules(),
 
-      rule_print('print_expression_eol'),
+      rule_print('expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
 
@@ -426,7 +426,7 @@ function rule_printParen() {
 function rule_turtle() {
     return comp(
       recognize('start', {
-        regex: 'turn (left|right)+',
+        regex: 'turn (left|right)?',
         token: 'keyword',
         next: 'start',
       }),
