@@ -70,5 +70,5 @@ random : "random" //random needs to appear in the tree for further processing so
 start: program
 text: /([^\n,]+)/ -> text
 textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text
-turtle: _FORWARD -> forward | _TURN -> turn
+turtle: _FORWARD (_SPACE NUMBER | _SPACE textwithoutspaces)? -> forward | _TURN (_SPACE text)? -> turn
 var: NAME -> var
