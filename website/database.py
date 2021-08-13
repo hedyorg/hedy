@@ -98,7 +98,7 @@ class Database:
             self.remove_student_from_class (class_id, username)
 
         # Delete classes owned by the user
-        for Class in Database.get_teacher_classes (self, username, False):
+        for Class in self.get_teacher_classes (username, False):
             self.delete_class (Class)
 
     def all_users(self):
