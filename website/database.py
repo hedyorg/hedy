@@ -139,7 +139,7 @@ class Database:
         """Return all the classes of which the user is a student."""
         classes = []
         for class_id in USERS.get({'username': username}).get ('classes') or []:
-            Class = Database.get_class (self, class_id)
+            Class = self.get_class (class_id)
             classes.append ({'id': Class ['id'], 'name': Class ['name']})
 
         return classes
