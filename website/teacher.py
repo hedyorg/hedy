@@ -131,7 +131,7 @@ def routes (app, database, requested_lang):
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
-        link = DATABASE.resolve_class_link (link_id)
-        if not link:
+        Class = DATABASE.resolve_class_link (link_id)
+        if not Class:
             return 'Invalid link', 404
-        return redirect(request.url.replace('/hedy/l/' + link_id, '/class/' + link ['class'] + '/prejoin/' + link_id), code=302)
+        return redirect(request.url.replace('/hedy/l/' + link_id, '/class/' + Class ['id'] + '/prejoin/' + link_id), code=302)

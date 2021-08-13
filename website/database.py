@@ -6,8 +6,7 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher'])
-CLASSLINKS = dynamo.Table(storage, 'classlinks', 'id')
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
 
 class Database:
     def programs_for_user(self, username):
@@ -147,7 +146,6 @@ class Database:
     def store_class(self, Class):
         """Store a class."""
         CLASSES.create(Class)
-        CLASSLINKS.create({'id': Class ['link'], 'class': Class ['id']})
 
     def update_class(self, id, name):
         """Updates a class."""
@@ -167,8 +165,7 @@ class Database:
         for student_id in Class.get ('students', []):
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
-        CLASSLINKS.delete({'id': Class ['link']})
         CLASSES.delete({'id': Class ['id']})
 
     def resolve_class_link(self, link_id):
-        return CLASSLINKS.get({'id': link_id})
+        return CLASSES.get({'link': link_id})

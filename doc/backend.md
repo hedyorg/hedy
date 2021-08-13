@@ -172,13 +172,9 @@ table classes:
     id:       STRING (main index)
     date:     INTEGER
     teacher:  STRING (secondary index)
-    link:     STRING
+    link:     STRING (secondary index)
     name:     STRING
     students: [STRING, ...]
-
-table classlinks:
-    id:    STRING (main index)
-    class: STRING
 ```
 
 ## Test environment
