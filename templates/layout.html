@@ -17,14 +17,14 @@
        <div id="modal-alert" class="hidden">
           <div id="modal-alert-text"></div>
           <div style="margin: auto; text-align: center;">
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.hide ()">OK</button>
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.hide ()">{{auth.yes}}</button>
           </div>
        </div>
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text"></div>
           <div style="margin: auto; text-align: center;">
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.confirmcb (true)">OK</button>
-            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.confirmcb (false)">Cancel</button>
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.confirmcb (true)">{{auth.yes}}</button>
+            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.confirmcb (false)">{{auth.no}}</button>
           </div>
        </div>
        <div id="modal-prompt" class="hidden">
@@ -32,8 +32,8 @@
           <div style="margin: auto; text-align: center;">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <br>
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.promptcb ()">OK</button>
-            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.promptcb (true)">Cancel</button>
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.promptcb ()">{{auth.yes}}</button>
+            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.promptcb (true)">{{auth.no}}</button>
           </div>
        </div>
     </div>
@@ -50,6 +50,7 @@
          show: function () {
             $ ('#modal-mask').show ();
             $ ('#modal-content').show ();
+            window.scrollTo (0, 0);
          },
          hide: function () {
             $ ('#modal-mask').hide ();

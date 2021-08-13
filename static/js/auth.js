@@ -13,7 +13,7 @@ window.auth = {
     });
   },
   destroy: function () {
-    window.modal.confirm (auth.texts.are_you_sure), function () {
+    window.modal.confirm (auth.texts.are_you_sure, function () {
       $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
         auth.redirect ('');
       });

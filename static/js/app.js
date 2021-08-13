@@ -207,12 +207,12 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   try {
     // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! window.auth.profile) {
-       if (! confirm (window.auth.texts.save_prompt)) return;
-       // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-       if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
-       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-       window.location.pathname = '/login';
-       return;
+       return window.modal.confirm (window.auth.texts.save_prompt, function () {
+         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+         if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         window.location.pathname = '/login';
+       });
     }
 
     window.State.unsaved_changes = false;
