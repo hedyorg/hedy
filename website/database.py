@@ -95,11 +95,11 @@ class Database:
 
         # Remove user from classes of which they are a student
         for class_id in classes:
-            Database.remove_student_from_class (self, class_id, username)
+            self.remove_student_from_class (class_id, username)
 
         # Delete classes owned by the user
-        for Class in Database.get_teacher_classes (self, username, False):
-            Database.delete_class (self, Class)
+        for Class in self.get_teacher_classes (username, False):
+            self.delete_class (Class)
 
     def all_users(self):
         """Return all users."""
@@ -139,7 +139,7 @@ class Database:
         """Return all the classes of which the user is a student."""
         classes = []
         for class_id in USERS.get({'username': username}).get ('classes') or []:
-            Class = Database.get_class (self, class_id)
+            Class = self.get_class (class_id)
             classes.append ({'id': Class ['id'], 'name': Class ['name']})
 
         return classes
