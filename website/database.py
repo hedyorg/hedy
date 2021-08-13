@@ -95,7 +95,7 @@ class Database:
 
         # Remove user from classes of which they are a student
         for class_id in classes:
-            Database.remove_student_from_class (self, class_id, username)
+            self.remove_student_from_class (class_id, username)
 
         # Delete classes owned by the user
         for Class in Database.get_teacher_classes (self, username, False):
