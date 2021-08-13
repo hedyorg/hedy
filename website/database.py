@@ -99,7 +99,7 @@ class Database:
 
         # Delete classes owned by the user
         for Class in Database.get_teacher_classes (self, username, False):
-            Database.delete_class (self, Class)
+            self.delete_class (Class)
 
     def all_users(self):
         """Return all users."""
