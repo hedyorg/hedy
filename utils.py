@@ -5,6 +5,8 @@ import pickle
 import functools
 import os
 import re
+import string
+import random
 from ruamel import yaml
 from website import querylog
 
@@ -223,5 +225,12 @@ def atomic_write_file(filename, mode='wb'):
 
     os.rename(tmp_file, filename)
 
+# This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
+# It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
+# and then invoking the `isoformat` date function on it
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp (int (str (date) [:-3])).isoformat ()
+
+# https://stackoverflow.com/a/2257449
+def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+    return ''.join (random.choice (chars) for _ in range (size))

@@ -27,15 +27,9 @@ def routes (app, database, requested_lang):
         for student_username in Class.get ('students', []):
             student = DATABASE.user_by_username (student_username)
             programs = DATABASE.programs_for_user(student_username)
-            highest_level = 0
-            latest_shared = None
-            for program in programs:
-                if program ['level'] > highest_level:
-                    highest_level = program ['level']
-                if not program.get ('public'):
-                    continue
-                if not latest_shared or latest_shared ['date'] < program ['date']:
-                    latest_shared = {'link': os.getenv ('BASE_URL') + '/hedy/' + program ['id'] + '/view?lang=' + requested_lang (), 'date': program ['date'], 'level': program ['level'], 'name': program ['name']}
+            highest_level = max(program['level'] for program in programs) if len(programs) else 0
+            sorted_public_programs = list(sorted([program for program in programs if program.get ('public')], key=lambda p: p['date']))
+            latest_shared = sorted_public_programs[-1] if sorted_public_programs else None
             students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
@@ -59,7 +53,7 @@ def routes (app, database, requested_lang):
             'id': uuid.uuid4().hex,
             'date': utils.timems (),
             'teacher': user ['username'],
-            'link': uuid.uuid4().hex [0:7],
+            'link': utils.random_id_generator (7),
             'name': body ['name']
         }
 
