@@ -27,21 +27,21 @@
             echo entonces tu color favorito es...
 2:
     intro_text: |
-        En el nivel 2 aprendemos algo nuevo. Puede nombrar una palabra con "es".
+        En el nivel 2 aprendemos algo nuevo. Puedes nombrar una palabra con `is`.
 
-        Si pones el código `name is Hedy` en la parte superior de tu programa, puedes usar name en todas partes. Eso luego será reemplazado por Hedy.
+        Si pones el código `name is Hedy` en la parte superior de tu programa, puedes usar `name` en cualquier parte y será reemplazado por Hedy.
 
-        El `ask` ha cambiado en el nivel 2, también guarda la respuesta con un nombre:
+        Nota: `ask` ha cambiado en el nivel 2, también puedes guardar la respuesta con un nombre:
 
         ```
-        respuesta es ask ¿Cuál es tu nombre?
+        respuesta is ask ¿Cómo te llamas?
         ```
 
-        La impresión sigue funcionando como en el nivel 1 y ya no necesita un ultrasonido.
+        `print` sigue funcionando como en el nivel 1, así que ya no necesitas usar `echo`.
 
-        En el nivel 2 también puedes hacer una lista. Luego puede elegir cualquier cosa de la lista. Lo haces con `at random` (dices: et ren-dom).
+        En el nivel 2 también puedes hacer una lista. Puedes dejar al ordenador escoger algo aleatorio de la lista, usando `at random` (se pronuncia: et ren-dom).
 
-        Encontrarás todos los códigos del nivel 2 en la barra izquierda. También hay pestañas con asignaciones.
+        Encontrarás todos los códigos del nivel 2 en la barra de la izquierda. También hay pestañas con ejemplos.
     start_code: "print hola mundo!"
     commands:
     -   name: "is"
@@ -51,13 +51,13 @@
             nombre is Hedy
             print Bienvenido nombre
     -   name: "ask"
-        explanation: "Preguntar algo con `ask`."
-        example: "Ejemplo: color is `ask` ¿Cuál es tu color favorito?"
+        explanation: "Preguntar algo con `ask`. ¡Atención! Necesitas darle un nombre a la respuesta con `is`"
+        example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
         demo_code: |-
             color is ask ¿Cuál es tu color favorito?
-            print color es tú favorito
+            print El color es tú color favorito
     -   name: "choose_random"
-        explanation: "Seleccionar una palabra aleatoria usando `at` y `random`."
+        explanation: "Seleccionar una palabra aleatoria de un grupo usando `at` y `random`."
         example: "Ejemplo: animales is perro, gato, canguro"
         demo_code: |-
             animales is perro, gato, canguro
