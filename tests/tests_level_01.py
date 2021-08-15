@@ -74,7 +74,7 @@ class TestsLevel1(unittest.TestCase):
     t.right(90)""")
     self.assertEqual(expected, result)
 
-  def test_transpile_one_turn_right(self):
+  def test_transpile_one_turn_with_var(self):
     result = hedy.transpile("turn koekoek", 1)
     expected = textwrap.dedent("""\
     t.right(90)""")
