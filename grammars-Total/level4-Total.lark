@@ -54,7 +54,7 @@ ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | va
 ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE textwithspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
-command: print | ifelse | ifs | ask | assign_list | list_access_var | assign | print_no_quotes
+command: print | ifelse | ifs | ask | turtle | assign_list | list_access_var | assign | print_no_quotes
 condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
 echo: _ECHO (_SPACE text)?
 equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
