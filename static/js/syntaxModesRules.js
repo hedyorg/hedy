@@ -71,6 +71,7 @@ const LEVELS = [
     rules: pipe(baseRules(),
       rule_turtle(),
       rule_print(),
+      rule_print('expression_eol'),
       rule_isAsk(),
       rule_is(),
     ),
