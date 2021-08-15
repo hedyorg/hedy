@@ -2,6 +2,9 @@ var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'A
 
 window.auth = {
   texts: {},
+  entityify: function (string) {
+      return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
+   },
   emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where) {
     where = '/' + where;
@@ -71,13 +74,26 @@ window.auth = {
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
 
+        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+
         var savedProgram = localStorage.getItem ('hedy-first-save');
-        if (! savedProgram) return auth.redirect ('programs');
+        var joinClass    = localStorage.getItem ('hedy-join');
+        if (! savedProgram) {
+           if (! joinClass) return auth.redirect ('programs');
+           joinClass = JSON.parse (joinClass);
+           localStorage.removeItem ('hedy-join');
+           return window.join_class (joinClass.link, joinClass.name);
+        }
+
         savedProgram = JSON.parse (savedProgram);
-        // We set up a non-falsy profile to let `saveit` know that we're logged in.
-        window.auth.profile = {};
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
+           if (joinClass) {
+             joinClass = JSON.parse (joinClass);
+             localStorage.removeItem ('hedy-join');
+             window.join_class (joinClass.link, joinClass.name, true);
+           }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
            auth.redirect (redirect || 'programs');
@@ -98,13 +114,26 @@ window.auth = {
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
 
-        var savedProgram = localStorage.getItem ('hedy-first-save');
-        if (! savedProgram) return auth.redirect ('programs');
-        savedProgram = JSON.parse (savedProgram);
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+
+        var savedProgram = localStorage.getItem ('hedy-first-save');
+        var joinClass    = localStorage.getItem ('hedy-join');
+        if (! savedProgram) {
+           if (! joinClass) return auth.redirect ('programs');
+           joinClass = JSON.parse (joinClass);
+           localStorage.removeItem ('hedy-join');
+           return window.join_class (joinClass.link, joinClass.name);
+        }
+
+        savedProgram = JSON.parse (savedProgram);
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
+           if (joinClass) {
+             joinClass = JSON.parse (joinClass);
+             localStorage.removeItem ('hedy-join');
+             window.join_class (joinClass.link, joinClass.name, true);
+           }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
            auth.redirect (redirect || 'programs');
@@ -243,29 +272,39 @@ $ ('.auth input').get ().map (function (el) {
 
 $.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (function (response) {
   auth.texts = response;
-});
 
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+   $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
+     if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
 
-  auth.profile = response;
-  if ($ ('#profile').html ()) {
-    $ ('#username').html (response.username);
-    $ ('#email').val (response.email);
-    $ ('#birth_year').val (response.birth_year);
-    $ ('#gender').val (response.gender);
-    $ ('#country').val (response.country);
-    if (response.prog_experience) {
-      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
-      if (response.prog_experience === 'yes') $ ('#languages').show ();
-    }
-    (response.experience_languages || []).map (function (lang) {
-       $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
-    });
-  }
-}).fail (function (response) {
-  if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+     auth.profile = response;
+     if ($ ('#profile').html ()) {
+       $ ('#username').html (response.username);
+       $ ('#email').val (response.email);
+       $ ('#birth_year').val (response.birth_year);
+       $ ('#gender').val (response.gender);
+       $ ('#country').val (response.country);
+       if (response.prog_experience) {
+         $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+         if (response.prog_experience === 'yes') $ ('#languages').show ();
+       }
+       (response.experience_languages || []).map (function (lang) {
+          $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
+       });
+       $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class) {
+          return '<li>' + auth.entityify (Class.name) + '</li>';
+       }).join (''));
+       if (response.teacher_classes) {
+          $ ('#teacher_classes ul').html ((response.teacher_classes || []).map (function (Class) {
+             return '<li><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a> (' + Class.students.length + ' ' + window.auth.texts.students + ')</li>';
+          }).join (''));
+          $ ('#teacher_classes').show ();
+          $ ('#student_classes').hide ();
+       }
+     }
+   }).fail (function (response) {
+     if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+   });
 });
 
 if (window.location.pathname === '/reset') {

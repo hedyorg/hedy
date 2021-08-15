@@ -592,3 +592,96 @@ function buildUrl(url, params) {
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
 })();
+
+window.create_class = function create_class() {
+  var class_name = window.prompt (window.auth.texts.class_name_prompt);
+  if (! class_name) return;
+
+  $.ajax({
+    type: 'POST',
+    url: '/class',
+    data: JSON.stringify({
+      name: class_name
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    location.reload ();
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
+window.rename_class = function rename_class(id) {
+  var class_name = window.prompt (window.auth.texts.class_name_prompt);
+  if (! class_name) return;
+
+  $.ajax({
+    type: 'PUT',
+    url: '/class/' + id,
+    data: JSON.stringify({
+      class_name: name
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    location.reload ();
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
+window.delete_class = function delete_class(id) {
+  if (! confirm (window.auth.texts.delete_class_prompt)) return;
+
+  $.ajax({
+    type: 'DELETE',
+    url: '/class/' + id,
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    window.location.pathname = '/my-profile';
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
+window.join_class = function join_class(link, name, noRedirect) {
+  // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
+  if (! window.auth.profile) {
+     if (! confirm (window.auth.texts.join_prompt)) return;
+     localStorage.setItem ('hedy-join', JSON.stringify ({link: link, name: name}));
+     window.location.pathname = '/login';
+     return;
+  }
+
+  $.ajax({
+    type: 'GET',
+    url: link,
+  }).done(function(response) {
+    alert (window.auth.texts.class_join_confirmation + ' ' + name);
+    if (! noRedirect) window.location.pathname = '/programs';
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
+window.remove_student = function delete_class(class_id, student_id) {
+  if (! confirm (window.auth.texts.remove_student_prompt)) return;
+
+  $.ajax({
+    type: 'DELETE',
+    url: '/class/' + class_id + '/student/' + student_id,
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response) {
+    location.reload ();
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
