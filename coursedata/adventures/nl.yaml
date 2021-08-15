@@ -282,6 +282,7 @@ adventures:
                 story_text: |
                     ## Tekenen maar
                     In level 2 kun je je tekening *interactief* maken! Dat betekent dat je met de `ask` om invoer vraagt.
+                    Met onderstaande code vraag je de schildpad eerst om één keer te draaien, naar links met left of naar rechts met right. Daarna vraag je hoever de schildpad moet lopen. Kopieer de code een paar keer om de schildpad meerdere keren te laten lopen.
 
                     ## Voorbeeld Hedy code
                     ```
@@ -296,22 +297,22 @@ adventures:
             3:
                 story_text: |
                     ## Tekenen maar
-                    In level 3 moet je aanhalgstekens gebruiken bij `print` en `ask`. Ook bij het tekenen.
+                    In level 3 moet je aanhalingstekens gebruiken bij `print` en `ask`. Ook bij het tekenen dus!
 
                     ## Voorbeeld Hedy code
                     ```
                     print 'Schildpaddenrace'
-                    richting is ask 'welke kant op?'
+                    richting is ask 'Welke kant op?'
                     turn richting
-                    afstand is ask 'hoe ver moet ik lopen?'
+                    afstand is ask 'Hoe ver moet ik lopen?'
                     forward afstand
                     ```
 
                 start_code: |
                     print 'Schildpaddenrace!'
-                    richting is ask 'welke kant op?'
+                    richting is ask 'Welke kant op?'
                     turn richting
-                    afstand is ask 'hoe ver moet ik lopen?'
+                    afstand is ask 'Hoe ver moet ik lopen?'
                     forward afstand
     dishes:
         name: "Wie doet de afwas?"
