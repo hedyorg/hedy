@@ -6,6 +6,7 @@ import urllib.parse
 from config import config
 import sys
 import threading
+import re
 
 # USAGE: python e2e_tests.py [CONCURRENT_TESTS] [alpha|test]
 # Concurrent tests are a way to stress test an environment
@@ -37,10 +38,6 @@ def request (state, test, counter, username):
     if isinstance (threading.current_thread (), threading._MainThread):
         print ('Start #' + str (counter) + ': ' + test [0])
 
-    # If no explicit cookie passed, use the one from the state
-    if not 'cookie' in test [3] and 'cookie' in state ['headers']:
-        test [3] ['cookie'] = state ['headers'] ['cookie']
-
     # If path, headers or body are functions, invoke them passing them the current state
     if callable(test[2]):
         test[2] = test[2] (state)
@@ -50,6 +47,10 @@ def request (state, test, counter, username):
 
     if callable(test[4]):
         test[4] = test[4] (state)
+
+    # If no explicit cookie passed, use the one from the state
+    if not 'cookie' in test [3] and 'cookie' in state ['headers']:
+        test [3] ['cookie'] = state ['headers'] ['cookie']
 
     if isinstance(test[4], dict):
         test[3] ['content-type'] = 'application/json'
@@ -68,6 +69,9 @@ def request (state, test, counter, username):
     if r.history and r.history [0]:
         # This will be the case if there's a redirect
         code = r.history [0].status_code
+        headers = r.history [0].headers
+        if getattr (r.history [0], '_content'):
+            body = getattr (r.history [0], '_content').decode ('utf-8')
     else:
         code = r.status_code
 
@@ -127,7 +131,7 @@ def invalidMap (tag, method, path, bodies):
         counter += 1
     return output
 
-# We define apres functions here because multiline lambdas are not supported by python
+# We define after_test_functions here because multiline lambdas are not supported by python
 def setSentCookies (state, response, username):
     if 'Set-Cookie' in response ['headers']:
         state ['headers'] ['cookie'] = response ['headers'] ['Set-Cookie']
@@ -137,6 +141,13 @@ def successfulSignup (state, response, username):
         raise Exception ('No token present')
     state ['token'] = response ['body'] ['token']
     setSentCookies (state, response, username)
+
+def successfulSignupTeacher (state, response, username):
+    state ['teacher-session'] = response ['headers'] ['Set-Cookie']
+    setSentCookies (state, response, username)
+
+def successfulSignupStudent (state, response, username):
+    state ['student-session'] = response ['headers'] ['Set-Cookie']
 
 def getProfile1 (state, response, username):
     profile = response ['body']
@@ -254,15 +265,150 @@ def retrieveProgramsAfter (state, response, username):
     if not 'level' in program or program ['level'] != 1:
         raise Exception ('Invalid program.level')
 
+def getTeacherClasses1 (state, response, username):
+    if not isinstance (response ['body'] ['teacher_classes'], list):
+        raise Exception ('Classes should be a list')
+    if len (response ['body'] ['teacher_classes']) != 0:
+        raise Exception ('Classes should be empty')
+
+def getTeacherClasses2 (state, response, username):
+    if not isinstance (response ['body'] ['teacher_classes'], list):
+        raise Exception ('Classes should be a list')
+    if len (response ['body'] ['teacher_classes']) != 1:
+        raise Exception ('Classes should contain one class')
+    Class = response ['body'] ['teacher_classes'] [0]
+    if not isinstance (Class.get ('date'), int):
+        raise Exception ('Class should contain date')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if Class.get ('name') != 'class1':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
+    if Class.get ('teacher') != 'teacher-' + username:
+        raise Exception ('Invalid teacher')
+
+    state ['classes'] = response ['body'] ['teacher_classes']
+
+def getClass1 (state, response, username):
+    Class = response ['body']
+    if not isinstance (Class, dict):
+        raise Exception ('Invalid response body')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if Class.get ('name') != 'class1':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
+
+def getTeacherClasses3 (state, response, username):
+    if not isinstance (response ['body'] ['teacher_classes'], list):
+        raise Exception ('Classes should be a list')
+    if len (response ['body'] ['teacher_classes']) != 1:
+        raise Exception ('Classes should contain one class')
+    Class = response ['body'] ['teacher_classes'] [0]
+    if not isinstance (Class.get ('date'), int):
+        raise Exception ('Class should contain date')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if Class.get ('name') != 'class_renamed':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
+    if Class.get ('teacher') != 'teacher-' + username:
+        raise Exception ('Invalid teacher')
+
+def getClass2 (state, response, username):
+    Class = response ['body']
+    if not isinstance (Class, dict):
+        raise Exception ('Invalid response body')
+    if not isinstance (Class.get ('link'), str):
+        raise Exception ('Class should contain link')
+    if not isinstance (Class.get ('id'), str):
+        raise Exception ('Class should contain id')
+    if Class.get ('name') != 'class_renamed':
+        raise Exception ('Invalid class name')
+    if not isinstance (Class.get ('students'), list):
+        raise Exception ('Class should contain a list of students')
+    if len (Class.get ('students')) != 0:
+        raise Exception ('Student list should be empty')
+
+def redirectAfterJoin1 (state, response, username):
+    if not re.search ('http://localhost:\d\d\d\d/my-profile', response ['body']):
+        raise Exception ('Invalid redirect')
+
+def getStudentClasses1 (state, response, username):
+    classes = response ['body'].get ('student_classes')
+    if not isinstance (classes, list):
+        raise Exception ('Invalid classes list')
+    if len (classes) != 1:
+        raise Exception ('Class list should contain one item')
+    Class = classes [0]
+    if not isinstance (Class, dict):
+        raise Exception ('Invalid class')
+    if Class ['id'] != state ['classes'] [0] ['id']:
+        raise Exception ('Invalid class id')
+    if Class ['name'] != 'class_renamed':
+        raise Exception ('Invalid class name')
+    if len (Class.keys ()) != 2:
+        raise Exception ('Too many fields contained in class')
+
+def getClass3 (state, response, username):
+    students = response ['body'].get ('students')
+    if not isinstance (students, list):
+        raise Exception ('Students should be a list')
+    if len (students) != 1:
+        raise Exception ('Student list should contain one student')
+    student = students [0]
+    if student.get ('highest_level') != 0:
+        raise Exception ('student.highest_level should be 0')
+    if student.get ('programs') != 0:
+        raise Exception ('student.programs should be 0')
+    if student.get ('latest_shared') != None:
+        raise Exception ('student.latest_shared should be None')
+    if not isinstance (student.get ('last_login'), str):
+        raise Exception ('student.last_login should be a string')
+    if student.get ('username') != 'student-' + username:
+        raise Exception ('Invalid student username')
+
+def getStudentClasses2 (state, response, username):
+    classes = response ['body'].get ('student_classes')
+    if not isinstance (classes, list):
+        raise Exception ('Invalid classes list')
+    if len (classes) != 0:
+        raise Exception ('Class list should be empty')
+
+def checkJoinLink (state, response, username):
+    if not re.search ('http://localhost:\d\d\d\d/class/' + state ['classes'] [0] ['id'] + '/prejoin/' + state ['classes'] [0] ['link'], response ['body']):
+        raise Exception ('Invalid redirect')
+
 def suite (username):
     return [
+        # Session variables
         ['get session vars from main', 'get', '/session_main', {}, {}, 200, checkMainSessionVars],
         ['get session vars from test', 'get', '/session_test', {}, {}, 200, checkTestSessionVars],
         ['get session vars from main again', 'get', '/session_main', {}, {}, 200, checkMainSessionVarsAgain],
+        # Main page
         ['get root', 'get', '/', {}, '', 200],
+        # Auth: signup
         invalidMap ('signup', 'post', '/auth/signup', ['', [], {}, {'username': 1}, {'username': 'user@me', 'password': 'foobar', 'email': 'a@a.com'}, {'username:': 'user: me', 'password': 'foobar', 'email': 'a@a.co'}, {'username': 't'}, {'username': '    t    '}, {'username': username}, {'username': username, 'password': 1}, {'username': username, 'password': 'foo'}, {'username': username, 'password': 'foobar'}, {'username': username, 'password': 'foobar', 'email': 'me@something'}, {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]}, {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'}, {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}]),
         ['valid signup', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@e2e-testing.com'}, 200, successfulSignup],
         invalidMap ('login', 'post', '/auth/login', ['', [], {}, {'username': 1}, {'username': 'user@me'}, {'username:': 'user: me'}]),
+        # Auth: verify & login
         ['valid login, invalid credentials', 'post', '/auth/login', {}, {'username': username, 'password': 'password'}, 403],
         ['verify email (missing fields)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': 'foobar', 'token': state ['token']}), {}, '', 403],
         ['verify email (invalid username)', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': 'foobar', 'token': state ['token']}), {}, '', 403],
@@ -277,12 +423,14 @@ def suite (username):
         ['check that session is no longer valid', 'get', '/profile', {}, '', 403],
         ['login again', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar2'}, 200, setSentCookies],
         invalidMap ('change password', 'post', '/auth/change_password', ['', [], {}, {'foo': 'bar'}, {'old_password': 1}, {'old_password': 'foobar'}, {'old_password': 'foobar', 'new_password': 1}]),
+        # Auth: profile
         ['get profile before profile update', 'get', '/profile', {}, {}, 200, getProfile1],
         invalidMap ('update profile', 'post', '/profile', ['', [], {'email': 'foobar'}, {'birth_year': 'a'}, {'birth_year': 20}, {'country': 'Netherlands'}, {'gender': 0}, {'gender': 'a'}, {'prog_experience': 1}, {'prog_experience': 'foo'}, {'experience_languages': ['python', 'foo']}]),
         ['change profile with same email', 'post', '/profile', {}, {'email': username + '@e2e-testing.com', 'country': 'US'}, 200],
         ['change profile with different email', 'post', '/profile', {}, {'email': username + '@e2e-testing2.com', 'country': 'NL'}, 200, emailChange],
         ['get profile after profile update', 'get', '/profile', {}, {}, 200, getProfile2],
         ['verify email after email change', 'get', lambda state: '/auth/verify?' + urllib.parse.urlencode ({'username': username, 'token': state ['token2']}), {}, '', 302],
+        # Auth: recover & reset
         ['get profile after email verification', 'get', '/profile', {}, {}, 200, getProfile3],
         invalidMap ('recover password', 'post', '/auth/recover', ['', [], {}, {'username': 1}]),
         ['recover password, invalid user', 'post', '/auth/recover', {}, {'username': 'nosuch'}, 403],
@@ -293,6 +441,7 @@ def suite (username):
         ['reset password, invalid password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'short'}, 400],
         ['reset password', 'post', '/auth/reset', {}, lambda state: {'username': username, 'token': state ['token'], 'password': 'foobar3'}, 200],
         ['login again after reset', 'post', '/auth/login', {}, {'username': username, 'password': 'foobar3'}, 200],
+        # Programs
         ['retrieve programs before saving any', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['create program', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Program 1', 'level': 1}, 200],
         ['retrieve programs after saving one', 'get', '/programs_list', {}, {}, 200, retrieveProgramsAfter],
@@ -302,11 +451,63 @@ def suite (username):
         ['retrieve programs after deleting saved program', 'get', '/programs_list', {}, {}, 200, retrieveProgramsBefore],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200],
         ['get programs without being logged in', 'get', '/programs', {}, {}, 302],
+        # Auth: profile (programming experience)
         ['valid signup again', 'post', '/auth/signup', {}, {'username': username, 'password': 'foobar', 'email': username + '@e2e-testing.com', 'prog_experience': 'yes', 'experience_languages': ['python']}, 200, successfulSignup],
         ['get profile after recreating account', 'get', '/profile', {}, {}, 200, getProfile4],
         ['change profile with different programming experience', 'post', '/profile', {}, {'prog_experience': 'no', 'experience_languages': ['scratch', 'other_text']}, 200],
         ['get profile after updating experience', 'get', '/profile', {}, {}, 200, getProfile5],
         ['destroy account', 'post', '/auth/destroy', {}, {}, 200],
+        # Classes
+        ['valid signup as student', 'post', '/auth/signup', {}, {'username': 'student-' + username, 'password': 'foobar', 'email': 'student-' + username + '@e2e-testing.com'}, 200, successfulSignupStudent],
+        ['valid signup as teacher', 'post', '/auth/signup', {}, {'username': 'teacher-' + username, 'password': 'foobar', 'email': 'teacher-' + username + '@e2e-testing.com'}, 200, successfulSignupTeacher],
+        ['create class without being a teacher', 'post', '/class', {}, {'name': 'class1'}, 403],
+        ['mark teacher user as teacher', 'post', '/admin/markAsTeacher', {}, {'username': 'teacher-' + username, 'is_teacher': True}, 200],
+        ['get classes before creating a class', 'get', '/profile', {}, {}, 200, getTeacherClasses1],
+        invalidMap ('create class', 'post', '/class', ['', [], {}, {'name': 1}, {'name': ['foobar']}]),
+        ['create class', 'post', '/class', {}, {'name': 'class1'}, 200],
+        ['get classes after creating a class', 'get', '/profile', {}, {}, 200, getTeacherClasses2],
+        ['get empty class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass1],
+        invalidMap ('update class', 'put', lambda state: '/class/' + state ['classes'] [0] ['id'], ['', [], {}, {'name': 1}, {'name': ['foobar']}]),
+        ['update class', 'put', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {'name': 'class_renamed'}, 200],
+        ['get classes after renaming a class', 'get', '/profile', {}, {}, 200, getTeacherClasses3],
+        ['get renamed class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
+        ['join class as non-logged in user', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], lambda state: {'cookie': 'foo'}, {}, 403],
+        ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['join class that does not exist', 'get', lambda state: '/class/foo' + '/join/' + state ['classes'] [0] ['link'], {}, {}, 404],
+        ['join class with invalid link', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + 'foo', {}, {}, 404],
+        ['test short class link', 'get', lambda state: '/hedy/l/' + state ['classes'] [0] ['link'], {}, {}, 302, checkJoinLink],
+        ['join class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
+        ['join class again (idempotent call)', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
+        ['get profile after joining class', 'get', '/profile', {}, {}, 200, getStudentClasses1],
+        ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['get class with a student', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass3],
+        ['remove non-existing student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'foo', {}, {}, 200],
+        ['remove student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
+        ['remove student from class again (idempotent call)', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
+        ['get class that is now again empty', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
+        ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['get profile after being removed from class', 'get', '/profile', {}, {}, 200, getStudentClasses2],
+        ['join class again', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
+        ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['delete class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200],
+        ['check that short class link was deleted', 'get', lambda state: '/hedy/l/' + state ['classes'] [0] ['link'], {}, {}, 404],
+        ['get classes after deleting the class', 'get', '/profile', {}, {}, 200, getTeacherClasses1],
+        ['destroy teacher account', 'post', '/auth/destroy', {}, {}, 200],
+        ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['get profile after class being deleted', 'get', '/profile', {}, {}, 200, getStudentClasses2],
+        ['destroy student account', 'post', '/auth/destroy', {}, {}, 200],
+        ['valid signup as student', 'post', '/auth/signup', {}, {'username': 'student-' + username, 'password': 'foobar', 'email': 'student-' + username + '@e2e-testing.com'}, 200, successfulSignupStudent],
+        ['valid signup as teacher', 'post', '/auth/signup', {}, {'username': 'teacher-' + username, 'password': 'foobar', 'email': 'teacher-' + username + '@e2e-testing.com'}, 200, successfulSignupTeacher],
+        ['mark teacher user as teacher', 'post', '/admin/markAsTeacher', {}, {'username': 'teacher-' + username, 'is_teacher': True}, 200],
+        ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['create class', 'post', '/class', {}, {'name': 'class1'}, 200],
+        ['get classes to set its id in the state', 'get', '/profile', {}, {}, 200, getTeacherClasses2],
+        ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['join class', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
+        ['destroy student account', 'post', '/auth/destroy', {}, {}, 200],
+        ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
+        ['get classes after student destroyed their account', 'get', '/profile', {}, {}, 200, getTeacherClasses2],
+        ['destroy teacher account', 'post', '/auth/destroy', {}, {}, 200],
     ]
 
 if not args.concurrent:

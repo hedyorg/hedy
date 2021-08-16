@@ -57,15 +57,14 @@ ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | va
 ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
-command: print | ifs (elifs)* elses? | ask | for_loop | assign_list | list_access_var | assign
+command: print | ifs elses? | ask | for_loop | assign_list | list_access_var | assign
 condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
 echo: _ECHO (_SPACE text)?
-elifs: _EOL _SPACE* _ELIF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
-elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+elses: _EOL (_SPACE)* _ELSE _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
 equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
-for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) (_SPACE _STEP _SPACE (NUMBER | var))? _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IS _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
 ifelse: _IF _SPACE condition _SPACE command _SPACE _ELSE _SPACE command
-ifs: _IF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"//'if' cannot be used in Python, hence the name of the rule is 'ifs'
+ifs: _IF _SPACE condition _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 in_list_check: textwithoutspaces _SPACE _IN _SPACE var
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 invalid: textwithoutspaces _SPACE textwithspaces
@@ -82,7 +81,7 @@ random : "random" //random needs to appear in the tree for further processing so
 repeat: _REPEAT _SPACE (NUMBER | var) _SPACE _TIMES _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
 start: program
 text: /([^\n,]+)/ -> text
-textwithoutspaces: /([^\n, :*+-\/]+)/ -> text
+textwithoutspaces: /([^\n, *+-\/]+)/ -> text //new cause in level 6 calculation elements ned to be escaped too
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
 turtle: _FORWARD (_SPACE NUMBER | _SPACE textwithoutspaces)? -> forward | _TURN (_SPACE text)? -> turn
 var: NAME -> var

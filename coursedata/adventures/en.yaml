@@ -194,7 +194,67 @@ adventures:
                     ```
 
                 start_code: " "
+    turtle:
+        name: "Turtle"
+        description: "Make your own drawing"
+        image: "turtle.png"
+        default_save_name: "turtle"
+        levels:
+            1:
+                story_text: |
+                    ## Let's draw
+                    In level 1 you can also use Hedy to draw. By combining turns and lines, you can make a square or a stair!
 
+                    Using `forward` you draw a linke forwards. The number behind it determines how far the turtle will walk. `turn right` turns a quarter turn in clockwise direction, `turn left` turns counter clockwise.
+
+                    This is the start of some little stairs. Can you make it to 5 steps?
+
+                    ## Example Hedy code
+                    ```
+                    forward 50
+                    turn left
+                    forward 50
+                    turn right
+                    ```
+
+
+                start_code: "forward 50\nturn left"
+            2:
+                story_text: |
+                    ## Drawing
+                    In level 2 you can make an interactive drawing by combining with `ask`.
+                    With this code you ask the user to tell the turtle to turn either left or right. It then ask the turtle how far to go. You can copy this code to make the turtle move farther.
+
+                    ## Example Hedy code
+                    ```
+                    print Turtle race
+                    direction is ask 'Where to turn?'
+                    turn direction
+                    distance is ask 'How far?'
+                    forward distance
+                    ```
+
+                start_code: "forward 50\nturn left"
+            3:
+                story_text: |
+                    ## Drawing
+                    In level 3 you need to use quotation marks with `print` and `ask`. Also when you are using the turtle.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Turtle race'
+                    direction is ask 'Where to turn?'
+                    turn direction
+                    distance is ask 'How far?'
+                    forward distance
+                    ```
+
+                start_code: |
+                    print 'Schildpaddenrace!'
+                    richting is ask 'welke kant op?'
+                    turn richting
+                    afstand is ask 'hoe ver moet ik lopen?'
+                    forward afstand
     dishes:
         name: "Who does the dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"

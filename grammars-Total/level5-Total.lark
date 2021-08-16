@@ -20,6 +20,7 @@ _EOL: "\r"?"\n"
 _EQUALS: "="
 _EXCLAMATION_MARK: "!"
 _FOR: "for"
+_FORWARD : "forward"
 _HASH: "#"
 _IF: "if"
 _IN: "in"
@@ -47,12 +48,13 @@ _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
+_TURN: "turn"
 _WHILE: "while"
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
 ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE textwithspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
-command: print | repeat | ifelse | ifs | ask | assign_list | list_access_var | assign | invalid
+command: print | repeat | ifelse | ifs | turtle | ask | assign_list | list_access_var | assign | invalid
 condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
 echo: _ECHO (_SPACE text)?
 equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
@@ -76,4 +78,5 @@ start: program
 text: /([^\n,]+)/ -> text
 textwithoutspaces: /([^\n, ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+turtle: _FORWARD (_SPACE NUMBER | _SPACE textwithoutspaces)? -> forward | _TURN (_SPACE text)? -> turn
 var: NAME -> var
