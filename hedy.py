@@ -238,42 +238,19 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def number(self, args):
         return True, ''.join([c for c in args])
+    def text(self, args):
+        return all(args), ''.join([c for c in args])
+
+
 
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, linenumber]
 
-    #would be lovely if there was some sort of default rule! Not sure Lark supports that
 
-    # note! If this function errors out with:
-    # Error trying to process rule "program" Tree object not subscriptable
-    # that means you added a production rule but did not add a method for the rule here
 
-    def ask(self, args):
-        return are_all_arguments_true(args)
-    def print(self, args):
-        return are_all_arguments_true(args)
-    def echo(self, args):
-        return are_all_arguments_true(args)
-    def for_loop(self, args):
-        return are_all_arguments_true(args)
-    def while_loop(self, args):
-        return are_all_arguments_true(args)
-    def comment(self, args):
-        return are_all_arguments_true(args)
-    def length(self, args):
-        return are_all_arguments_true(args)
 
-    #leafs with tokens need to be all true
-    def var(self, args):
-        return all(args), ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def forward(self, args):
-        return are_all_arguments_true(args)
-    def turn(self, args):
-        return are_all_arguments_true(args)
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -281,8 +258,7 @@ class IsValid(Filter):
     def print_nq(self, args):
         # return error source to indicate what went wrong
         return False, "print without quotes"
-    def input(self, args):
-        return are_all_arguments_true(args)
+
     def invalid(self, args):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -295,31 +271,19 @@ class IsComplete(Filter):
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
 
-    #would be lovely if there was some sort of default rule! Not sure Lark supports that
-
-    # note! If this function errors out with:
-    # Error trying to process rule "program" Tree object not subscriptable
-    # that means you added a production rule but did not add a method for the rule here
-
     def ask(self, args):
         return args != [], 'ask'
     def print(self, args):
         return args != [], 'print'
+    def input(self, args):
+        return args != [], 'input'
+    def length(self, args):
+        return args != [], 'len'
     def print_nq(self, args):
         return args != [], 'print level 2'
     def echo(self, args):
         #echo may miss an argument
         return True, 'echo'
-
-    #leafs with tokens need to be all true
-    def var(self, args):
-        return all(args), ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def input(self, args):
-        return args != [], 'input'
-    def length(self, args):
-        return args != [], 'len'
 
 class ConvertToPython_1(Transformer):
 
