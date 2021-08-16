@@ -487,7 +487,8 @@ def submit_answer(level_source, question_nr, attempt):
 
         # Convert question_nr to an integer
         q_nr = int(question_nr)
-        attempt = int(attempt)
+
+        config['quiz-attempt'] = int(attempt)
 
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
@@ -496,9 +497,9 @@ def submit_answer(level_source, question_nr, attempt):
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
             if session.get('total_score'):
-                session['total_score'] = session.get('total_score') +(4 - attempt )* 0.5 * question['question_score']
+                session['total_score'] = session.get('total_score') +(config['max-attempts'] -  config['quiz-attempt']  )* 0.5 * question['question_score']
             else:
-                session['total_score'] = (4 - attempt )* 0.5 * question['question_score']
+                session['total_score'] = (config['max-attempts'] -  config['quiz-attempt']  )* 0.5 * question['question_score']
             if session.get('correct_answer'):
                 session['correct_answer'] = session.get('correct_answer') + 1
             else:
@@ -517,7 +518,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif attempt <= 3:
+            elif config['quiz-attempt']  < config['max-attempts']:
                 question = quiz_data['questions'][q_nr - 1].get(q_nr)
                 # Convert the indices to the corresponding characters
                 char_array = []
@@ -527,13 +528,13 @@ def submit_answer(level_source, question_nr, attempt):
                                        questions=quiz_data['questions'],
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                        correct=session.get('correct_answer'),
-                                       attempt=attempt,
+                                       attempt= config['quiz-attempt'] ,
                                        questionFalse='false',
                                        char_array=char_array,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif attempt >= 3:
+            elif config['quiz-attempt']  >= config['quiz-attempt'] - 1:
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,

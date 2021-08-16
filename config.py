@@ -36,4 +36,7 @@ config = {
     },
     #enables the quiz environment by setting the config variable on True
     'quiz-enabled': True,
+    'quiz-attempt':0,
+    'max-attempts': 4,
+
 }
