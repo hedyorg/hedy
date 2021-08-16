@@ -6,9 +6,8 @@ import sys
 import utils
 
 
-# Some usefull constants
-HEDY_MAX_LEVEL = 15
-
+# Some useful constants
+HEDY_MAX_LEVEL = 22
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
@@ -241,15 +240,24 @@ class Filter(Transformer):
     def text(self, args):
         return all(args), ''.join([c for c in args])
 
+class UsesTurtle(Transformer):
+    # returns true if Forward or Turn are in the tree, false otherwise
+    def __default__(self, args, children, meta):
+        return False
+
+    def forward(self, args):
+        return True
+
+    def turn(self, args):
+        return True
+
+
 
 
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, linenumber]
-
-
-
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
@@ -264,7 +272,7 @@ class IsValid(Filter):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
 
-
+    #other rules are inherited from Filter
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
@@ -284,6 +292,8 @@ class IsComplete(Filter):
     def echo(self, args):
         #echo may miss an argument
         return True, 'echo'
+
+    #other rules are inherited from Filter
 
 class ConvertToPython_1(Transformer):
 
@@ -750,128 +760,6 @@ class ConvertToPython_22(ConvertToPython_21):
             return f"str({arg0}) >= str({arg1}) and {args[2]}"
 
 
-class ConvertTo():
-    def __default_child_call(self, name, children):
-        return self._call_children(children)
-
-    def _call_children(self, children):
-        result = []
-        for x in children:
-            if type(x) == Tree:
-                try:
-                    method = getattr(self, x.data)
-                except AttributeError:
-                    result.append(self.__default_child_call(x.data, x.children))
-                else:
-                    result.append(method(x.children))
-            else:
-                result.append(x)
-        return result
-
-    def transform(self, tree):
-            return getattr(self, tree.data)(tree.children)
-
-class ConvertToPython(ConvertTo):
-
-    def start(self, children):
-        return "".join(self._call_children(children))
-
-    def if_statement(self, children):
-        args = self._call_children(children)
-        return "if " + args[0] + ":\n" + args[1]
-
-    def elif_statement(self, children):
-        args = self._call_children(children)
-        return "elif " + args[0] + ":\n" + args[1]
-
-    def else_statement(self, children):
-        args = self._call_children(children)
-        return "else:\n" + args[0]
-
-    def repeat(self, children):
-        args = self._call_children(children)
-        return "for _ in range(" + args[0] + "):\n" + args[1]
-
-    def for_loop(self, children):
-        args = self._call_children(children)
-        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] +  "):\n" + args[3]
-
-    def assignment(self, children):
-        args = self._call_children(children)
-        return args[0] + " = " + args[1] + "\n"
-
-    def eq(self, children):
-        args = self._call_children(children)
-        return args[0] + " == " + args[1]
-
-    def ne(self, children):
-        args = self._call_children(children)
-        return args[0] + " != " + args[1]
-
-    def le(self, children):
-        args = self._call_children(children)
-        return args[0] + " <= " + args[1]
-
-    def ge(self, children):
-        args = self._call_children(children)
-        return args[0] + " >= " + args[1]
-
-    def lt(self, children):
-        args = self._call_children(children)
-        return args[0] + " < " + args[1]
-
-    def gt(self, children):
-        args = self._call_children(children)
-        return args[0] + " > " + args[1]
-
-    def addition(self, children):
-        args = self._call_children(children)
-        return args[0] + " + " + args[1]
-
-    def substraction(self, children):
-        args = self._call_children(children)
-        return args[0] + " - " + args[1]
-
-    def multiplication(self, children):
-        args = self._call_children(children)
-        return args[0] + " * " + args[1]
-
-    def division(self, children):
-        args = self._call_children(children)
-        return args[0] + " / " + args[1]
-
-    def modulo(self, children):
-        args = self._call_children(children)
-        return args[0] + " % " + args[1]
-
-    def unary_plus(self, children):
-        args = self._call_children(children)
-        return args[0]
-
-    def unary_minus(self, children):
-        args = self._call_children(children)
-        return "-" + args[0]
-
-    def parenthesis(self, children):
-        args = self._call_children(children)
-        return "(" + args[0] + ")"
-
-    def list_access(self, children):
-        args = self._call_children(children)
-        return args[0] + "[" + args[1] + "]" if args[1] != "random" else "random.choice(" + args[0] + ")"
-
-    def list(self, children):
-        args = self._call_children(children)
-        return "[" + ", ".join(args) + "]"
-
-    def print(self, children):
-        args = self._call_children(children)
-        return "print("  + ", ".join(args) + ")\n"
-
-    def ask(self, children):
-        args = self._call_children(children)
-        return "input("  + " + ".join(args) + ")"
-
 def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
@@ -1017,7 +905,8 @@ def get_parser(level, sub):
 def transpile(input_string, level, sub = 0):
     try:
         input_string = input_string.replace('\r\n', '\n')
-        return transpile_inner(input_string, level, sub)
+        transpile_result = transpile_inner(input_string, level, sub)
+        return transpile_result[0]
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
@@ -1203,78 +1092,54 @@ def transpile_inner(input_string, level, sub = 0):
 
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 2:
         python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 3:
         python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 4:
         # Sublevel has the same grammar
         python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 5:
         python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 6:
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 7:
         python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 8:
         # Sublevel has the same conversion
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 9:
         python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 10:
         # Code does not change for nesting
         python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 11:
         python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 12:
         python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 13:
         python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 14:
         python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 15:
         python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 16:
         python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 17:
         python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-    elif level == 18:
+    elif level == 18 or level == 19:
         python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-    elif level == 19:
-        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 20:
         python = ConvertToPython_20(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 21:
         python = ConvertToPython_21(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 22:
         python = ConvertToPython_22(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-
-    #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
-
     else:
-        raise Exception('Levels over 7 are not implemented yet')
+        raise Exception('Levels over 22 are not implemented yet')
+
+    has_turtle = UsesTurtle().transform(program_root)
+    return (python, has_turtle)
 
 def execute(input_string, level):
     python = transpile(input_string, level)
