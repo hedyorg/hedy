@@ -213,6 +213,9 @@ def are_all_arguments_true(args):
 # because both filter out some types of 'wrong' nodes
 # TODO: this could also use a default lark rule like AllAssignmentCommands does now
 class Filter(Transformer):
+    def __default__(self, args, children, meta):
+        return are_all_arguments_true(children)
+
     def program(self, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
@@ -223,97 +226,6 @@ class Filter(Transformer):
                 if not a[0]:
                     return False, a[1], command_num
                 command_num += 1
-
-    def command(self, args):
-        return are_all_arguments_true(args)
-
-    def assign(self, args):
-        return are_all_arguments_true(args)
-    def assign_list(self, args):
-        return are_all_arguments_true(args)
-    def assign_sum(self, args):
-        return are_all_arguments_true(args)
-    def list_access(self, args):
-        return are_all_arguments_true(args)
-
-    # level 4 commands
-    def list_access_var(self, args):
-        return are_all_arguments_true(args)
-    def ifs(self, args):
-        return are_all_arguments_true(args)
-    def valid_command(self, args):
-        return are_all_arguments_true(args)
-    def ifelse(self, args):
-        return are_all_arguments_true(args)
-    def condition(self, args):
-        return are_all_arguments_true(args)
-    def equality_check(self, args):
-        return are_all_arguments_true(args)
-    def in_list_check(self, args):
-        return are_all_arguments_true(args)
-
-    # level 5 command
-    def repeat(self, args):
-        return are_all_arguments_true(args)
-
-    # level 6
-    def addition(self, args):
-        return are_all_arguments_true(args)
-    def substraction(self, args):
-        return are_all_arguments_true(args)
-    def multiplication(self, args):
-        return are_all_arguments_true(args)
-    def division(self, args):
-        return are_all_arguments_true(args)
-
-    #level 7
-    def elses(self, args):
-        return are_all_arguments_true(args)
-
-    # level 8
-    def for_loop(self, args):
-        return are_all_arguments_true(args)
-
-    # level 9
-    def elifs(self, args):
-        return are_all_arguments_true(args)
-
-    # level 12
-    def change_list_item(self, args):
-        return are_all_arguments_true(args)
-
-    # level 14
-    def andcondition(self, args):
-        return are_all_arguments_true(args)
-    def orcondition(self, args):
-        return are_all_arguments_true(args)
-    # level 15
-    def comment(self, args):
-        return are_all_arguments_true(args)
-
-    # level 16
-    def smaller(self, args):
-        return are_all_arguments_true(args)
-    def bigger(self, args):
-        return are_all_arguments_true(args)
-
-    # level 17
-    def while_loop(self, args):
-        return are_all_arguments_true(args)
-
-    # level 19
-    def length(self, args):
-        return True, ''.join([str(c) for c in args])
-
-    # level 21
-    def not_equal(self, args):
-        return are_all_arguments_true(args)
-
-    # level 22
-    def smaller_equal(self, args):
-        return are_all_arguments_true(args)
-    def bigger_equal(self, args):
-        return are_all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
@@ -326,14 +238,6 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def number(self, args):
         return True, ''.join([c for c in args])
-    def forward(self, args):
-        return are_all_arguments_true(args)
-    def turn(self, args):
-        return are_all_arguments_true(args)
-    def invalid(self, args):
-        # return the first argument to place in the error message
-        # TODO: this will not work for misspelling 'at', needs to be improved!
-        return False, args[0][1]
 
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
@@ -379,6 +283,10 @@ class IsValid(Filter):
         return False, "print without quotes"
     def input(self, args):
         return are_all_arguments_true(args)
+    def invalid(self, args):
+        # return the first argument to place in the error message
+        # TODO: this will not work for misspelling 'at', needs to be improved!
+        return False, args[0][1]
 
 
 
