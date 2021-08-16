@@ -243,13 +243,20 @@ class Filter(Transformer):
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
     def __default__(self, args, children, meta):
-        return False
+        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
+            return False
+        else:                   # children? is any is true there is a Turtle leaf
+            return any(children)
 
     def forward(self, args):
         return True
 
     def turn(self, args):
         return True
+
+    #text can have children (the letters in the text) so needs its own rule
+    def text(self, args):
+        return False
 
 
 

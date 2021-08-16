@@ -56,6 +56,16 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual("print('Hallo welkom bij Hedy!')", result)
     self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
+  def test_print_has_no_turtle(self):
+    result = hedy.transpile_inner("print koekoek", 1)[1]
+    expected = False
+    self.assertEqual(expected, result)
+
+  def test_one_forward_has_turtle(self):
+    result = hedy.transpile_inner("forward 50", 1)[1]
+    expected = True
+    self.assertEqual(expected, result)
+
   def test_transpile_one_forward(self):
     result = hedy.transpile("forward 50", 1)
     expected = textwrap.dedent("""\

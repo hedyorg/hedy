@@ -67,6 +67,14 @@ class TestsLevel4(unittest.TestCase):
     t.forward(100)""")
     self.assertEqual(expected, result)
 
+  def test_turtle_with_ask_has_turtle(self):
+    code = textwrap.dedent("""\
+    afstand is ask 'hoe ver dan?'
+    forward afstand""")
+    result = hedy.transpile_inner(code, 4)[1]
+    expected = True
+    self.assertEqual(expected, result)
+
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
@@ -185,6 +193,15 @@ class TestsLevel4(unittest.TestCase):
 
     self.assertEqual(expected, result)
     self.assertEqual(run_code(result), 'jij wint')
+
+  def test_turtle_with_if_has_no_turtle(self):
+    code = textwrap.dedent("""\
+    jouwkeuze is schaar
+    computerkeuze is schaar
+    if computerkeuze is jouwkeuze print 'gelijkspel!'""")
+    result = hedy.transpile_inner(code, 4)[1]
+    expected = True
+    self.assertEqual(expected, result)
 
   def test_print_if_with_var(self):
     code = textwrap.dedent("""\
