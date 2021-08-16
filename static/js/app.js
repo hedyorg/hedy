@@ -57,8 +57,10 @@
 
     window.onbeforeunload = function () {
        // The browser doesn't show this message, rather it shows a default message.
-       // We still have an internationalized message in case we want to implement this as a modal in the future.
-       if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
+       if (window.State.unsaved_changes) {
+          // This allows us to avoid showing the programmatic modal from `prompt_unsaved` and then the native one
+          if (! window.State.no_unload_prompt) return window.auth.texts.unsaved_changes;
+       }
     };
 
     // *** KEYBOARD SHORTCUTS ***
@@ -695,4 +697,11 @@ window.remove_student = function delete_class(class_id, student_id) {
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));
     });
   });
+}
+
+window.prompt_unsaved = function prompt_unsaved(cb) {
+  if (! window.State.unsaved_changes) return cb ();
+  // This variable avoids showing the generic native `onbeforeunload` prompt
+  window.State.no_unload_prompt = true;
+  window.modal.confirm (window.auth.texts.unsaved_changes, cb);
 }
