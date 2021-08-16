@@ -252,6 +252,68 @@ adventures:
                     print 'DOOD!'
                     ```
                 start_code: " "
+    turtle:
+        name: "Tekenen"
+        description: "Maak jouw eigen tekening"
+        image: "turtle.png"
+        default_save_name: "schildpad"
+        levels:
+            1:
+                story_text: |
+                    ## Tekenen maar
+                    In level 1 kun je ook beginnen met een programmeer-tekening! Door lijnen te combineren met draaien kun je bijvoorbeeld een
+                    vierkant maken of een trapje.
+
+                    Met `forward` ga je naar voren. Het getal erna bepaalt hoe ver naar voren. Met `turn right` draai je een kwartslag, met de klok mee. `turn left` draait tegen de klok in.
+
+                    Dit is het begin van een trapje, zorg jij dat het wel 5 treden worden?
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    forward 50
+                    turn left
+                    forward 50
+                    turn right
+                    ```
+
+
+                start_code: "forward 50\nturn left"
+            2:
+                story_text: |
+                    ## Tekenen maar
+                    In level 2 kun je je tekening *interactief* maken! Dat betekent dat je met de `ask` om invoer vraagt.
+                    Met onderstaande code vraag je de schildpad eerst om één keer te draaien, naar links met left of naar rechts met right. Daarna vraag je hoever de schildpad moet lopen. Kopieer de code een paar keer om de schildpad meerdere keren te laten lopen.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print Schildpaddenrace
+                    richting is ask welke kant op?
+                    turn richting
+                    afstand is ask hoe ver moet ik lopen?
+                    forward afstand
+                    ```
+
+                start_code: "forward 50\nturn left"
+            3:
+                story_text: |
+                    ## Tekenen maar
+                    In level 3 moet je aanhalingstekens gebruiken bij `print` en `ask`. Ook bij het tekenen dus!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Schildpaddenrace'
+                    richting is ask 'Welke kant op?'
+                    turn richting
+                    afstand is ask 'Hoe ver moet ik lopen?'
+                    forward afstand
+                    ```
+
+                start_code: |
+                    print 'Schildpaddenrace!'
+                    richting is ask 'Welke kant op?'
+                    turn richting
+                    afstand is ask 'Hoe ver moet ik lopen?'
+                    forward afstand
     dishes:
         name: "Wie doet de afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
