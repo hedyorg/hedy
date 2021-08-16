@@ -278,7 +278,7 @@ def parse():
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             with querylog.log_time('transpile'):
                 result = hedy.transpile(code, level,sublevel)
-            response["Code"] = "# coding=utf8\nimport random\n" + result
+            response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\n" + result
         except hedy.HedyException as E:
             traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -990,6 +990,11 @@ def update_yaml():
 
 from website import auth
 auth.routes (app, DATABASE, requested_lang)
+
+# *** TEACHER BACKEND
+
+from website import teacher
+teacher.routes (app, DATABASE, requested_lang)
 
 # *** START SERVER ***
 

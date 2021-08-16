@@ -49,6 +49,24 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected, result)
 
+  def test_transpile_turtle_basic(self):
+    result = hedy.transpile("forward 50\nturn\nforward 100", 7)
+    expected = textwrap.dedent("""\
+    t.forward(50)
+    t.right(90)
+    t.forward(100)""")
+    self.assertEqual(expected, result)
+
+  def test_transpile_turtle_with_ask(self):
+    code = textwrap.dedent("""\
+    afstand is ask 'hoe ver dan?'
+    forward afstand""")
+    result = hedy.transpile(code, 7)
+    expected = textwrap.dedent("""\
+    afstand = input('hoe ver dan?')
+    t.forward(afstand)""")
+    self.assertEqual(expected, result)
+
   def test_print_with_calc_no_spaces(self):
     code = textwrap.dedent("""\
     print '5 keer 5 is ' 5*5""")

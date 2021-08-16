@@ -64,6 +64,19 @@
     <button type="submit" class="green-btn">{{auth.change_password}}</button>
   </form>
   <br><br>
+  <div id="student_classes" class="pl-8">
+    <h2>{{auth.student_classes}}</h2>
+    <ul class="list-none" style="margin: 0"></ul>
+    <br><br>
+  </div>
+  <div id="teacher_classes" class="hidden pl-8">
+    <h2 class="">{{auth.teacher_classes}}</h2>
+    <ul class="list-disc list-inside" style="margin: 0"></ul>
+    <br>
+    <button class="green-btn" onclick="window.create_class ()">{{auth.create_class}}</button>
+    <br><br><br>
+  </div>
+
   <button class="red-btn ml-8" onclick="window.auth.destroy ()">{{auth.destroy}}</button>
   <br><br>
 </div>

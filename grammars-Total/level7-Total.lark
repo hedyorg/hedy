@@ -23,6 +23,7 @@ _EOL: "\r"?"\n"
 _EQUALS: "="
 _EXCLAMATION_MARK: "!"
 _FOR: "for"
+_FORWARD : "forward"
 _HASH: "#"
 _IF: "if"
 _IN: "in"
@@ -50,12 +51,13 @@ _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
+_TURN: "turn"
 _WHILE: "while"
 ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
 ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
-command: print | repeat | ifs elses? | ask | assign_list | list_access_var | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
+command: print | repeat | ifs elses? | turtle | ask | assign_list | list_access_var | assign  //placing it here means print is will print 'is' and print is Felienne will print 'is Felienne'
 condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
 echo: _ECHO (_SPACE text)?
 elses: _EOL (_SPACE)* _ELSE _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
@@ -80,4 +82,5 @@ start: program
 text: /([^\n,]+)/ -> text
 textwithoutspaces: /([^\n, *+-\/]+)/ -> text //new cause in level 6 calculation elements ned to be escaped too
 textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+turtle: _FORWARD (_SPACE NUMBER | _SPACE textwithoutspaces)? -> forward | _TURN (_SPACE text)? -> turn
 var: NAME -> var
