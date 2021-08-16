@@ -211,6 +211,7 @@ def are_all_arguments_true(args):
 
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
+# TODO: this could also use a default lark rule like AllAssignmentCommands does now
 class Filter(Transformer):
     def program(self, args):
         bool_arguments = [x[0] for x in args]
@@ -325,6 +326,10 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def number(self, args):
         return True, ''.join([c for c in args])
+    def forward(self, args):
+        return are_all_arguments_true(args)
+    def turn(self, args):
+        return are_all_arguments_true(args)
     def invalid(self, args):
         # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -361,6 +366,10 @@ class IsValid(Filter):
         return all(args), ''.join([c for c in args])
     def text(self, args):
         return all(args), ''.join([c for c in args])
+    def forward(self, args):
+        return are_all_arguments_true(args)
+    def turn(self, args):
+        return are_all_arguments_true(args)
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -420,6 +429,7 @@ class ConvertToPython_1(Transformer):
         return '\n'.join([str(c) for c in args])
     def command(self, args):
         return args[0]
+
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
@@ -436,6 +446,21 @@ class ConvertToPython_1(Transformer):
     def ask(self, args):
         argument = self.process_single_quote(args[0])
         return "answer = input('" + argument + "')"
+    def forward(self,args):
+        # when a not-number is given, we simply use 50 as default
+        try:
+            parameter = int(args[0])
+        except:
+            parameter = 50
+        return f"t.forward({parameter})"""
+    def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)" #no arguments works, and means a right turn
+
+        if args[0] == 'left':
+            return "t.left(90)"
+        else:
+            return "t.right(90)" #something else also defaults to right turn
 
 def wrap_non_var_in_quotes(argument, lookup):
     if argument in lookup:
@@ -465,6 +490,19 @@ class ConvertToPython_2(ConvertToPython_1):
             all_arguments_converted.append(wrap_non_var_in_quotes(argument, self.lookup) + space)
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
+    def forward(self, args):
+        parameter = args[0]
+        #if the parameter is a variable, print as is
+        if parameter in self.lookup:
+            return f"t.forward({parameter})"
+
+        # otherwise, see if we got a number. if not, simply use 50 as default
+        try:
+            parameter = int(args[0])
+        except:
+            parameter = 50
+        return f"t.forward({parameter})"""
+
     def ask(self, args):
         var = args[0]
         all_parameters = ["'" + self.process_single_quote(a) + "'" for a in args[1:]]
@@ -1244,8 +1282,6 @@ def transpile_inner(input_string, level, sub = 0):
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
-        print(lookup_table)
-
 
     except UnexpectedCharacters as e:
         try:
