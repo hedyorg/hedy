@@ -4,6 +4,7 @@ from lark import Tree, Transformer, visitors
 from os import path
 import sys
 import utils
+from collections import namedtuple
 
 
 # Some useful constants
@@ -910,6 +911,7 @@ def get_parser(level, sub):
     PARSER_CACHE[key] = ret
     return ret
 
+ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, sub = 0):
     try:
@@ -1148,7 +1150,8 @@ def transpile_inner(input_string, level, sub = 0):
         raise Exception('Levels over 22 are not implemented yet')
 
     has_turtle = UsesTurtle().transform(program_root)
-    return (python, has_turtle)
+
+    return ParseResult(python, has_turtle)
 
 def execute(input_string, level):
     python = transpile(input_string, level)

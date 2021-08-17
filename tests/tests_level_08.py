@@ -48,7 +48,7 @@ class TestsLevel8(unittest.TestCase):
     nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     self.assertEqual("30", run_code(result))
 
@@ -67,7 +67,7 @@ class TestsLevel8(unittest.TestCase):
       print('koekoek')""")
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -90,7 +90,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_random(self):
     code = textwrap.dedent("""\
@@ -103,7 +103,7 @@ class TestsLevel8(unittest.TestCase):
     print('computer koos '+str(computerkeuze))""")
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
@@ -121,7 +121,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -139,7 +139,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -153,7 +153,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_if_under_else_in_for(self):
@@ -179,7 +179,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     #fails, issue 363
 
@@ -200,7 +200,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_for_loopbug599(self):
     code = textwrap.dedent("""\
@@ -215,7 +215,7 @@ class TestsLevel8(unittest.TestCase):
 
     result = hedy.transpile(code, 8)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
 #programs with issues to see if we catch them properly

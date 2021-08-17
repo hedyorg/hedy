@@ -52,7 +52,7 @@ class TestsLevel15(unittest.TestCase):
     nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
         self.assertEqual("30", run_code(result))
 
@@ -72,7 +72,7 @@ if str(naam) == str('Hedy'):
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_if_else(self):
         code = textwrap.dedent("""\
@@ -95,7 +95,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_print_random(self):
         code = textwrap.dedent("""\
@@ -109,7 +109,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_for_loop(self):
         code = textwrap.dedent("""\
@@ -127,7 +127,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_if__else(self):
         code = textwrap.dedent("""\
@@ -145,7 +145,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_forloop(self):
         code = textwrap.dedent("""\
@@ -159,7 +159,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_for_nesting(self):
         code = textwrap.dedent("""\
@@ -173,7 +173,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_if_nesting(self):
         code = textwrap.dedent("""\
@@ -191,7 +191,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_newprint(self):
         code = textwrap.dedent("""\
@@ -207,7 +207,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_list(self):
         code = textwrap.dedent("""\
@@ -219,7 +219,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_random(self):
         code = textwrap.dedent("""\
@@ -233,7 +233,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_specific_access(self):
         code = textwrap.dedent("""\
@@ -247,7 +247,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     # note that print(str(highscore)) will not print as it will compare 'score[i]' as str to a variable
     def test_everything_combined(self):
@@ -272,7 +272,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_if_under_else_in_for(self):
         code = textwrap.dedent("""\
@@ -297,7 +297,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_bool_true(self):
         code = textwrap.dedent("""\
@@ -311,7 +311,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_bool_false(self):
         code = textwrap.dedent("""\
@@ -324,7 +324,7 @@ else:
       print('ja')""")
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_bool_true2(self):
         code = textwrap.dedent("""\
@@ -338,7 +338,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_bool_false2(self):
         code = textwrap.dedent("""\
@@ -352,7 +352,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_bool_total(self):
         code = textwrap.dedent("""\
@@ -376,7 +376,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_and(self):
         code = textwrap.dedent("""\
@@ -388,7 +388,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_or(self):
         code = textwrap.dedent("""\
@@ -400,7 +400,7 @@ else:
 
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_comment(self):
         code = textwrap.dedent("""\
@@ -413,7 +413,7 @@ else:
       # ['comment']""")
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_commentbegin(self):
         code = textwrap.dedent("""\
@@ -427,7 +427,7 @@ else:
       print('hallo')""")
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
     def test_commentresult(self):
         code = textwrap.dedent("""\
@@ -441,7 +441,7 @@ else:
       print('hallo')""")
         result = hedy.transpile(code, 15)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
 
 # programs with issues to see if we catch them properly
 # (so this should fail, for now)

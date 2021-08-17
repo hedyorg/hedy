@@ -48,7 +48,7 @@ class TestsLevel11(unittest.TestCase):
     nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     self.assertEqual("30", run_code(result))
 
@@ -68,7 +68,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -91,7 +91,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_random(self):
     code = textwrap.dedent("""\
@@ -105,7 +105,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
@@ -123,7 +123,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -140,7 +140,7 @@ class TestsLevel11(unittest.TestCase):
       x = '222'""")
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -154,7 +154,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_for_nesting(self):
     code = textwrap.dedent("""\
@@ -168,7 +168,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if_nesting(self):
     code = textwrap.dedent("""\
@@ -186,7 +186,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_newprint(self):
     code = textwrap.dedent("""\
@@ -202,7 +202,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
@@ -227,7 +227,7 @@ class TestsLevel11(unittest.TestCase):
 
     result = hedy.transpile(code, 11)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)

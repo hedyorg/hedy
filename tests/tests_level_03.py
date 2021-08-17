@@ -44,7 +44,7 @@ class TestsLevel3(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('hallo wereld!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_turtle_basic(self):
@@ -53,7 +53,7 @@ class TestsLevel3(unittest.TestCase):
     t.forward(50)
     t.right(90)
     t.forward(100)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
@@ -63,7 +63,7 @@ class TestsLevel3(unittest.TestCase):
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_with_comma(self):
     code = textwrap.dedent("""\
@@ -76,7 +76,7 @@ class TestsLevel3(unittest.TestCase):
     naam = 'Hedy'
     print('ik heet ,')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_with_single_quote(self):
 
@@ -90,7 +90,7 @@ class TestsLevel3(unittest.TestCase):
     naam = 'Hedy'
     print('ik heet \\'')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_name_with_underscore(self):
     code = textwrap.dedent("""\
@@ -103,7 +103,7 @@ class TestsLevel3(unittest.TestCase):
     voor_naam = 'Hedy'
     print('ik heet ')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_name_that_is_keyword(self):
     code = textwrap.dedent("""\
@@ -116,7 +116,7 @@ class TestsLevel3(unittest.TestCase):
     _for = 'Hedy'
     print('ik heet '+_for)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_Spanish(self):
 
@@ -128,7 +128,7 @@ class TestsLevel3(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('Cuál es tu color favorito?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_with_list_var(self):
 
@@ -142,7 +142,7 @@ class TestsLevel3(unittest.TestCase):
     dieren = ['Hond', 'Kat', 'Kangoeroe']
     print(dieren[1])""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     self.assertEqual(run_code(result), "Kat")
 
@@ -158,7 +158,7 @@ class TestsLevel3(unittest.TestCase):
     dieren = ['Hond', 'Kat', 'Kangoeroe']
     print(random.choice(dieren))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
   def test_transpile_ask_Spanish(self):
@@ -170,7 +170,7 @@ class TestsLevel3(unittest.TestCase):
     expected = textwrap.dedent("""\
     color = input('Cuál es tu color favorito?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_2(self):
 
@@ -182,7 +182,7 @@ class TestsLevel3(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('ik heet henk')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_with_var(self):
 
@@ -196,7 +196,7 @@ class TestsLevel3(unittest.TestCase):
     naam = 'Hedy'
     print('ik heet'+naam)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_ask_with_print(self):
 
@@ -210,7 +210,7 @@ class TestsLevel3(unittest.TestCase):
     kleur = input('wat is je lievelingskleur?')
     print('jouw lievelingskleur is dus'+kleur+'!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_ask_with_var(self):
 
@@ -226,7 +226,7 @@ class TestsLevel3(unittest.TestCase):
     kleur = input('Wat is je lievelings'+ding)
     print('Jouw favoriet is dus '+kleur)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_ask_no_quotes(self):
     code = textwrap.dedent("""

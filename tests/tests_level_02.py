@@ -41,14 +41,14 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('hallo'+' '+'wereld')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_print(self):
     result = hedy.transpile("print Hallo welkom bij Hedy!", 2)
     expected = textwrap.dedent("""\
     print('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_ask(self):
@@ -57,7 +57,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     kleur = input('wat is je lievelingskleur'+'?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_ask_Spanish(self):
@@ -66,7 +66,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     color = input('ask Cuál es tu color favorito'+'?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_ask_with_print(self):
@@ -76,7 +76,7 @@ class TestsLevel2(unittest.TestCase):
     kleur = input('wat is je lievelingskleur'+'?')
     print(kleur+'!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
 
@@ -87,7 +87,7 @@ class TestsLevel2(unittest.TestCase):
     print('Hallo'+' '+'welkom'+' '+'bij'+' '+'Hedy'+'!')
     print('Mooi'+' '+'hoor')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     expected_output = textwrap.dedent("""\
     Hallo welkom bij Hedy!
@@ -101,7 +101,7 @@ class TestsLevel2(unittest.TestCase):
     t.forward(50)
     t.right(90)
     t.forward(100)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
@@ -111,7 +111,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan'+'?')
     t.forward(afstand)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_assign(self):
     result = hedy.transpile("naam is Felienne", 2)
@@ -119,7 +119,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     naam = 'Felienne'""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_assign_2_integer(self):
     result = hedy.transpile("naam is 14", 2)
@@ -127,7 +127,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     naam = '14'""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_assign_and_print(self):
     code = textwrap.dedent("""\
@@ -140,7 +140,7 @@ class TestsLevel2(unittest.TestCase):
     naam = 'Felienne'
     print(naam)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_assign_and_print_more_words(self):
@@ -154,7 +154,7 @@ class TestsLevel2(unittest.TestCase):
     naam = 'Felienne'
     print('hallo'+' '+naam)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_assign_and_print_punctuation(self):
     code = textwrap.dedent("""\
@@ -167,7 +167,7 @@ class TestsLevel2(unittest.TestCase):
     naam = 'Hedy'
     print('Hallo'+' '+naam+'!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
 
@@ -182,7 +182,7 @@ class TestsLevel2(unittest.TestCase):
     naam = 'Hedy'
     print(naam+' '+'is'+' '+'jouw'+' '+'voornaam')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_assign_and_print_something_else(self):
@@ -197,7 +197,7 @@ class TestsLevel2(unittest.TestCase):
     naam = 'Felienne'
     print('Hallo')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_set_list_var(self):
@@ -210,7 +210,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_with_list_var(self):
     code = textwrap.dedent("""\
@@ -223,7 +223,7 @@ class TestsLevel2(unittest.TestCase):
     dieren = ['Hond', 'Kat', 'Kangoeroe']
     print(dieren[1])""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     self.assertEqual(run_code(result), "Kat")
 
@@ -239,7 +239,7 @@ class TestsLevel2(unittest.TestCase):
     naam = input('wat is de naam van de hoofdpersoon')
     print(naam+' '+'doet'+' '+'mee'+' '+'aan'+' '+'een'+' '+'race'+' '+'hij'+' '+'krijgt'+' '+'een'+' '+'willekeurige'+' '+'auto')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_windows_line_endings(self):
 
@@ -253,7 +253,7 @@ class TestsLevel2(unittest.TestCase):
     print('hallo')
     print('allemaal')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_allow_use_of_quotes_in_print(self):
     code = "print 'Welcome to OceanView!'"
@@ -262,7 +262,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('\\'Welcome'+' '+'to'+' '+'OceanView'+'!'+' '+'\\'')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
@@ -274,7 +274,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('Welcome'+' '+'to'+' '+'O/ceanView')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     expected_output = run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
@@ -286,7 +286,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('Welcome'+' '+'to'+' '+'O\ceanView')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     expected_output = run_code(result)
     self.assertEqual("Welcome to O\ceanView", expected_output)
@@ -298,7 +298,7 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('\\'Welcome'+' '+'to'+' '+'OceanView'+'!'+' '+'\\'')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
@@ -310,4 +310,4 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     name = input('\\'What restaurant\\'')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)

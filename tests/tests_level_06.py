@@ -35,7 +35,7 @@ class TestsLevel6(unittest.TestCase):
     naam = 'Hedy'
     print('ik heet'+str(naam))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_ask(self):
@@ -47,7 +47,7 @@ class TestsLevel6(unittest.TestCase):
     expected = textwrap.dedent("""\
     antwoord = input('wat is je lievelingskleur?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_repeat_nested_in_if(self):
 
@@ -63,7 +63,7 @@ class TestsLevel6(unittest.TestCase):
       for i in range(int('3')):
         print('mooi!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
@@ -77,7 +77,7 @@ class TestsLevel6(unittest.TestCase):
     for i in range(int(n)):
       print('me wants a cookie!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     expected_output = textwrap.dedent("""\
     me wants a cookie!
@@ -94,14 +94,14 @@ class TestsLevel6(unittest.TestCase):
     result = hedy.transpile(code, 6)
 
     expected = "nummer = int(4) + int(5)"
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_simple_calculation_without_space(self):
     code = "nummer is 4+5"
     result = hedy.transpile(code, 6)
 
     expected = "nummer = int(4) + int(5)"
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_turtle_basic(self):
@@ -110,7 +110,7 @@ class TestsLevel6(unittest.TestCase):
     t.forward(50)
     t.right(90)
     t.forward(100)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
@@ -120,7 +120,7 @@ class TestsLevel6(unittest.TestCase):
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_calculation_and_printing(self):
 
@@ -134,7 +134,7 @@ class TestsLevel6(unittest.TestCase):
     nummer = int(4) + int(5)
     print(str(nummer))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual("9", run_code(result))
 
   def test_calculation_with_vars(self):
@@ -152,7 +152,7 @@ class TestsLevel6(unittest.TestCase):
     getal = int(nummer) * int(nummertwee)
     print(str(getal))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual("30", run_code(result))
 
   def test_print_calculation_times_directly(self):
@@ -168,7 +168,7 @@ class TestsLevel6(unittest.TestCase):
     nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual("30", run_code(result))
 
   def test_print_calculation_divide_directly(self):
@@ -184,7 +184,7 @@ class TestsLevel6(unittest.TestCase):
     nummertwee = '6'
     print(str(int(nummer) // int(nummertwee)))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual("0", run_code(result))
 
   def test_issue_andras(self):
@@ -210,6 +210,6 @@ class TestsLevel6(unittest.TestCase):
           prijs = int(prijs) + int(2)
         print('ok bedankt dan wordt het '+str(prijs)+' euro')""")
 
-      self.assertEqual(expected, result)
+      self.assertEqual(expected, result.code)
 
 

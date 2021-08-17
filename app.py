@@ -278,8 +278,8 @@ def parse():
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             with querylog.log_time('transpile'):
                 transpile_result = hedy.transpile(code, level, sublevel)
-                code = transpile_result[0]
-                has_turtle = transpile_result[1]
+                code = transpile_result.code
+                has_turtle = transpile_result.has_turtle
             if has_turtle:
                 response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + code
             else:

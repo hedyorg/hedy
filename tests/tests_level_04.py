@@ -42,7 +42,7 @@ class TestsLevel4(unittest.TestCase):
     naam = 'Hedy'
     print('ik heet'+naam)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_with_comma(self):
 
@@ -56,7 +56,7 @@ class TestsLevel4(unittest.TestCase):
     naam = 'Hedy'
     print('ik heet,'+naam)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_transpile_turtle_basic(self):
@@ -65,7 +65,7 @@ class TestsLevel4(unittest.TestCase):
     t.forward(50)
     t.right(90)
     t.forward(100)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_turtle_with_ask_has_turtle(self):
     code = textwrap.dedent("""\
@@ -73,7 +73,7 @@ class TestsLevel4(unittest.TestCase):
     forward afstand""")
     result = hedy.transpile_inner(code, 4)[1]
     expected = True
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
@@ -83,7 +83,7 @@ class TestsLevel4(unittest.TestCase):
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_ask_with_print(self):
     code = textwrap.dedent("""\
@@ -96,7 +96,7 @@ class TestsLevel4(unittest.TestCase):
     kleur = input('wat is je lievelingskleur?')
     print('jouw lievelingskleur is dus'+kleur+'!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
@@ -107,7 +107,7 @@ class TestsLevel4(unittest.TestCase):
     expected = textwrap.dedent("""\
     color = input('Cuál es tu color favorito?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_save_list_access_to_var(self):
@@ -123,7 +123,7 @@ class TestsLevel4(unittest.TestCase):
     dier=random.choice(dieren)
     print(dier)""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
   def test_print_Spanish(self):
@@ -135,7 +135,7 @@ class TestsLevel4(unittest.TestCase):
     expected = textwrap.dedent("""\
     print('Cuál es tu color favorito?')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   # now adds if
@@ -155,7 +155,7 @@ class TestsLevel4(unittest.TestCase):
     else:
       print('minder leuk')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_if_else_with_ask(self):
 
@@ -173,7 +173,7 @@ class TestsLevel4(unittest.TestCase):
     else:
       print('niet zo mooi')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   # steen schaar papier
   def test_print_if_else_with_and_var(self):
@@ -191,7 +191,7 @@ class TestsLevel4(unittest.TestCase):
     if computerkeuze == 'schaar' and jouwkeuze == 'steen':
       print('jij wint')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual(run_code(result), 'jij wint')
 
   def test_turtle_with_if_has_no_turtle(self):
@@ -201,7 +201,7 @@ class TestsLevel4(unittest.TestCase):
     if computerkeuze is jouwkeuze print 'gelijkspel!'""")
     result = hedy.transpile_inner(code, 4)[1]
     expected = True
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_if_with_var(self):
     code = textwrap.dedent("""\
@@ -217,7 +217,7 @@ class TestsLevel4(unittest.TestCase):
     if computerkeuze == jouwkeuze:
       print('gelijkspel!')""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual(run_code(result), 'gelijkspel!')
 
   def test_if_in_array(self):
@@ -234,7 +234,7 @@ class TestsLevel4(unittest.TestCase):
 
     result = hedy.transpile(code, 4)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
     self.assertEqual('found!', run_code(result))
 
   def test_pront_should_suggest_print(self):
@@ -262,7 +262,7 @@ class TestsLevel4(unittest.TestCase):
     expected = "message = '\\'Hello welcome to Hedy.\\''"
 
     result = hedy.transpile(code, 4)
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_single_quote_in_ask_should_not_break(self):
@@ -273,7 +273,7 @@ class TestsLevel4(unittest.TestCase):
 
     result = hedy.transpile(code, 4)
     print(result)
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   # while this looks STRANGE it is in essence the same sting issue
@@ -289,4 +289,4 @@ class TestsLevel4(unittest.TestCase):
     naam = input('hoe heet jij?')
     ifnaam = 'Hedy print \\'leuk\\' else print \\'minder leuk!\\''""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
