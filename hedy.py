@@ -4,11 +4,11 @@ from lark import Tree, Transformer, visitors
 from os import path
 import sys
 import utils
+from collections import namedtuple
 
 
-# Some usefull constants
-HEDY_MAX_LEVEL = 15
-
+# Some useful constants
+HEDY_MAX_LEVEL = 22
 
 reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
 
@@ -213,6 +213,9 @@ def are_all_arguments_true(args):
 # because both filter out some types of 'wrong' nodes
 # TODO: this could also use a default lark rule like AllAssignmentCommands does now
 class Filter(Transformer):
+    def __default__(self, args, children, meta):
+        return are_all_arguments_true(children)
+
     def program(self, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
@@ -223,97 +226,6 @@ class Filter(Transformer):
                 if not a[0]:
                     return False, a[1], command_num
                 command_num += 1
-
-    def command(self, args):
-        return are_all_arguments_true(args)
-
-    def assign(self, args):
-        return are_all_arguments_true(args)
-    def assign_list(self, args):
-        return are_all_arguments_true(args)
-    def assign_sum(self, args):
-        return are_all_arguments_true(args)
-    def list_access(self, args):
-        return are_all_arguments_true(args)
-
-    # level 4 commands
-    def list_access_var(self, args):
-        return are_all_arguments_true(args)
-    def ifs(self, args):
-        return are_all_arguments_true(args)
-    def valid_command(self, args):
-        return are_all_arguments_true(args)
-    def ifelse(self, args):
-        return are_all_arguments_true(args)
-    def condition(self, args):
-        return are_all_arguments_true(args)
-    def equality_check(self, args):
-        return are_all_arguments_true(args)
-    def in_list_check(self, args):
-        return are_all_arguments_true(args)
-
-    # level 5 command
-    def repeat(self, args):
-        return are_all_arguments_true(args)
-
-    # level 6
-    def addition(self, args):
-        return are_all_arguments_true(args)
-    def substraction(self, args):
-        return are_all_arguments_true(args)
-    def multiplication(self, args):
-        return are_all_arguments_true(args)
-    def division(self, args):
-        return are_all_arguments_true(args)
-
-    #level 7
-    def elses(self, args):
-        return are_all_arguments_true(args)
-
-    # level 8
-    def for_loop(self, args):
-        return are_all_arguments_true(args)
-
-    # level 9
-    def elifs(self, args):
-        return are_all_arguments_true(args)
-
-    # level 12
-    def change_list_item(self, args):
-        return are_all_arguments_true(args)
-
-    # level 14
-    def andcondition(self, args):
-        return are_all_arguments_true(args)
-    def orcondition(self, args):
-        return are_all_arguments_true(args)
-    # level 15
-    def comment(self, args):
-        return are_all_arguments_true(args)
-
-    # level 16
-    def smaller(self, args):
-        return are_all_arguments_true(args)
-    def bigger(self, args):
-        return are_all_arguments_true(args)
-
-    # level 17
-    def while_loop(self, args):
-        return are_all_arguments_true(args)
-
-    # level 19
-    def length(self, args):
-        return True, ''.join([str(c) for c in args])
-
-    # level 21
-    def not_equal(self, args):
-        return are_all_arguments_true(args)
-
-    # level 22
-    def smaller_equal(self, args):
-        return are_all_arguments_true(args)
-    def bigger_equal(self, args):
-        return are_all_arguments_true(args)
 
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
@@ -326,50 +238,37 @@ class Filter(Transformer):
         return True, ''.join([c for c in args])
     def number(self, args):
         return True, ''.join([c for c in args])
+    def text(self, args):
+        return all(args), ''.join([c for c in args])
+
+class UsesTurtle(Transformer):
+    # returns true if Forward or Turn are in the tree, false otherwise
+    def __default__(self, args, children, meta):
+        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
+            return False
+        else:
+            if type(children[0]) == bool:
+                return any(children) # children? if any is true there is a Turtle leaf
+            else:
+                return False # some nodes like text and punctuation have text children (their letters) these are not turtles
+
     def forward(self, args):
-        return are_all_arguments_true(args)
+        return True
+
     def turn(self, args):
-        return are_all_arguments_true(args)
-    def invalid(self, args):
-        # return the first argument to place in the error message
-        # TODO: this will not work for misspelling 'at', needs to be improved!
-        return False, args[0][1]
+        return True
+
+
+
+
+
+
 
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, linenumber]
 
-    #would be lovely if there was some sort of default rule! Not sure Lark supports that
-
-    # note! If this function errors out with:
-    # Error trying to process rule "program" Tree object not subscriptable
-    # that means you added a production rule but did not add a method for the rule here
-
-    def ask(self, args):
-        return are_all_arguments_true(args)
-    def print(self, args):
-        return are_all_arguments_true(args)
-    def echo(self, args):
-        return are_all_arguments_true(args)
-    def for_loop(self, args):
-        return are_all_arguments_true(args)
-    def while_loop(self, args):
-        return are_all_arguments_true(args)
-    def comment(self, args):
-        return are_all_arguments_true(args)
-    def length(self, args):
-        return are_all_arguments_true(args)
-
-    #leafs with tokens need to be all true
-    def var(self, args):
-        return all(args), ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def forward(self, args):
-        return are_all_arguments_true(args)
-    def turn(self, args):
-        return are_all_arguments_true(args)
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
         return False, " "
@@ -377,41 +276,34 @@ class IsValid(Filter):
     def print_nq(self, args):
         # return error source to indicate what went wrong
         return False, "print without quotes"
-    def input(self, args):
-        return are_all_arguments_true(args)
 
+    def invalid(self, args):
+        # return the first argument to place in the error message
+        # TODO: this will not work for misspelling 'at', needs to be improved!
+        return False, args[0][1]
 
+    #other rules are inherited from Filter
 
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
 
-    #would be lovely if there was some sort of default rule! Not sure Lark supports that
-
-    # note! If this function errors out with:
-    # Error trying to process rule "program" Tree object not subscriptable
-    # that means you added a production rule but did not add a method for the rule here
-
     def ask(self, args):
         return args != [], 'ask'
     def print(self, args):
         return args != [], 'print'
+    def input(self, args):
+        return args != [], 'input'
+    def length(self, args):
+        return args != [], 'len'
     def print_nq(self, args):
         return args != [], 'print level 2'
     def echo(self, args):
         #echo may miss an argument
         return True, 'echo'
 
-    #leafs with tokens need to be all true
-    def var(self, args):
-        return all(args), ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
-    def input(self, args):
-        return args != [], 'input'
-    def length(self, args):
-        return args != [], 'len'
+    #other rules are inherited from Filter
 
 class ConvertToPython_1(Transformer):
 
@@ -878,128 +770,6 @@ class ConvertToPython_22(ConvertToPython_21):
             return f"str({arg0}) >= str({arg1}) and {args[2]}"
 
 
-class ConvertTo():
-    def __default_child_call(self, name, children):
-        return self._call_children(children)
-
-    def _call_children(self, children):
-        result = []
-        for x in children:
-            if type(x) == Tree:
-                try:
-                    method = getattr(self, x.data)
-                except AttributeError:
-                    result.append(self.__default_child_call(x.data, x.children))
-                else:
-                    result.append(method(x.children))
-            else:
-                result.append(x)
-        return result
-
-    def transform(self, tree):
-            return getattr(self, tree.data)(tree.children)
-
-class ConvertToPython(ConvertTo):
-
-    def start(self, children):
-        return "".join(self._call_children(children))
-
-    def if_statement(self, children):
-        args = self._call_children(children)
-        return "if " + args[0] + ":\n" + args[1]
-
-    def elif_statement(self, children):
-        args = self._call_children(children)
-        return "elif " + args[0] + ":\n" + args[1]
-
-    def else_statement(self, children):
-        args = self._call_children(children)
-        return "else:\n" + args[0]
-
-    def repeat(self, children):
-        args = self._call_children(children)
-        return "for _ in range(" + args[0] + "):\n" + args[1]
-
-    def for_loop(self, children):
-        args = self._call_children(children)
-        return "for " + args[0] + " in range(" + args[1] + ", " + args[2] +  "):\n" + args[3]
-
-    def assignment(self, children):
-        args = self._call_children(children)
-        return args[0] + " = " + args[1] + "\n"
-
-    def eq(self, children):
-        args = self._call_children(children)
-        return args[0] + " == " + args[1]
-
-    def ne(self, children):
-        args = self._call_children(children)
-        return args[0] + " != " + args[1]
-
-    def le(self, children):
-        args = self._call_children(children)
-        return args[0] + " <= " + args[1]
-
-    def ge(self, children):
-        args = self._call_children(children)
-        return args[0] + " >= " + args[1]
-
-    def lt(self, children):
-        args = self._call_children(children)
-        return args[0] + " < " + args[1]
-
-    def gt(self, children):
-        args = self._call_children(children)
-        return args[0] + " > " + args[1]
-
-    def addition(self, children):
-        args = self._call_children(children)
-        return args[0] + " + " + args[1]
-
-    def substraction(self, children):
-        args = self._call_children(children)
-        return args[0] + " - " + args[1]
-
-    def multiplication(self, children):
-        args = self._call_children(children)
-        return args[0] + " * " + args[1]
-
-    def division(self, children):
-        args = self._call_children(children)
-        return args[0] + " / " + args[1]
-
-    def modulo(self, children):
-        args = self._call_children(children)
-        return args[0] + " % " + args[1]
-
-    def unary_plus(self, children):
-        args = self._call_children(children)
-        return args[0]
-
-    def unary_minus(self, children):
-        args = self._call_children(children)
-        return "-" + args[0]
-
-    def parenthesis(self, children):
-        args = self._call_children(children)
-        return "(" + args[0] + ")"
-
-    def list_access(self, children):
-        args = self._call_children(children)
-        return args[0] + "[" + args[1] + "]" if args[1] != "random" else "random.choice(" + args[0] + ")"
-
-    def list(self, children):
-        args = self._call_children(children)
-        return "[" + ", ".join(args) + "]"
-
-    def print(self, children):
-        args = self._call_children(children)
-        return "print("  + ", ".join(args) + ")\n"
-
-    def ask(self, children):
-        args = self._call_children(children)
-        return "input("  + " + ".join(args) + ")"
-
 def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
@@ -1141,11 +911,13 @@ def get_parser(level, sub):
     PARSER_CACHE[key] = ret
     return ret
 
+ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, sub = 0):
     try:
         input_string = input_string.replace('\r\n', '\n')
-        return transpile_inner(input_string, level, sub)
+        transpile_result = transpile_inner(input_string, level, sub)
+        return transpile_result
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
@@ -1331,78 +1103,55 @@ def transpile_inner(input_string, level, sub = 0):
 
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 2:
         python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 3:
         python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 4:
         # Sublevel has the same grammar
         python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 5:
         python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 6:
         python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 7:
         python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 8:
         # Sublevel has the same conversion
         python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 9:
         python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 10:
         # Code does not change for nesting
         python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 11:
         python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 12:
         python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 13:
         python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 14:
         python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 15:
         python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 16:
         python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 17:
         python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-    elif level == 18:
+    elif level == 18 or level == 19:
         python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-    elif level == 19:
-        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 20:
         python = ConvertToPython_20(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 21:
         python = ConvertToPython_21(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
     elif level == 22:
         python = ConvertToPython_22(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        return python
-
-    #Laura & Thera: hier kun je code voor de nieuwe levels toevoegen
-
     else:
-        raise Exception('Levels over 7 are not implemented yet')
+        raise Exception('Levels over 22 are not implemented yet')
+
+    has_turtle = UsesTurtle().transform(program_root)
+
+    return ParseResult(python, has_turtle)
 
 def execute(input_string, level):
     python = transpile(input_string, level)

@@ -15,25 +15,30 @@ def captured_output():
     finally:
         sys.stdout, sys.stderr = old_out, old_err
 
-def run_code(code):
-    code = "import random\n" + code
+def run_code(parse_result):
+    code = "import random\n" + parse_result.code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
 
 
 class TestsLevel8(unittest.TestCase):
+  level = 8
+  
   def test_print(self):
-    result = hedy.transpile("print 'ik heet'", 8)
-    self.assertEqual("print('ik heet')", result)
+    result = hedy.transpile("print 'ik heet'", self.level)
+    expected = "print('ik heet')"
+    self.assertEqual(expected, result.code)
 
   def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 8)
-    self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
+    result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", self.level)
+    expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
+    self.assertEqual(expected, result.code)
 
   def test_print_with_calc_no_spaces(self):
-    result = hedy.transpile("print '5 keer 5 is ' 5*5", 8)
-    self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
+    result = hedy.transpile("print '5 keer 5 is ' 5*5", self.level)
+    expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
+    self.assertEqual(expected, result.code)
 
   def test_print_calculation_times_directly(self):
     code = textwrap.dedent("""\
@@ -41,20 +46,21 @@ class TestsLevel8(unittest.TestCase):
     nummertwee is 6
     print nummer * nummertwee""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     self.assertEqual("30", run_code(result))
 
   def test_transpile_ask(self):
-    result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", 8)
-    self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
+    result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", self.level)
+    expected = "antwoord = input('wat is je lievelingskleur?')"
+    self.assertEqual(expected, result.code)
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
@@ -65,9 +71,9 @@ class TestsLevel8(unittest.TestCase):
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print('koekoek')""")
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -88,9 +94,9 @@ class TestsLevel8(unittest.TestCase):
       print('Foutje')
       print('Het antwoord moest zijn '+str(antwoord))""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_print_random(self):
     code = textwrap.dedent("""\
@@ -101,9 +107,9 @@ class TestsLevel8(unittest.TestCase):
     keuzes = ['steen', 'schaar', 'papier']
     computerkeuze=random.choice(keuzes)
     print('computer koos '+str(computerkeuze))""")
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
@@ -119,9 +125,9 @@ class TestsLevel8(unittest.TestCase):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -137,9 +143,9 @@ class TestsLevel8(unittest.TestCase):
     else:
       x = '222'""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -151,9 +157,9 @@ class TestsLevel8(unittest.TestCase):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
   def test_if_under_else_in_for(self):
@@ -177,9 +183,9 @@ class TestsLevel8(unittest.TestCase):
       if str(antwoord) == str('25'):
         i = '10'""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
     #fails, issue 363
 
@@ -198,9 +204,9 @@ class TestsLevel8(unittest.TestCase):
           print('fout')
       print('klaar met for loop')""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
   def test_for_loopbug599(self):
     code = textwrap.dedent("""\
@@ -213,9 +219,9 @@ class TestsLevel8(unittest.TestCase):
         if str(i) == str('2'):
           print('2')""")
 
-    result = hedy.transpile(code, 8)
+    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result)
+    self.assertEqual(expected, result.code)
 
 
 #programs with issues to see if we catch them properly
@@ -233,7 +239,7 @@ class TestsLevel8(unittest.TestCase):
   #   print 'bah slecht'""")
   #
   #   with self.assertRaises(Exception) as context:
-  #     result = hedy.transpile(code, 8)
+  #     result = hedy.transpile(code, self.level)
   #   self.assertEqual(str(context.exception), 'Parse')
 
 
