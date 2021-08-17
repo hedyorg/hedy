@@ -245,8 +245,11 @@ class UsesTurtle(Transformer):
     def __default__(self, args, children, meta):
         if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
-        else:                   # children? is any is true there is a Turtle leaf
-            return any(children)
+        else:
+            if isinstance(args[0], bool):
+                return any(children) # children? if any is true there is a Turtle leaf
+            else:
+                return False
 
     def forward(self, args):
         return True
@@ -254,9 +257,8 @@ class UsesTurtle(Transformer):
     def turn(self, args):
         return True
 
-    #text can have children (the letters in the text) so needs its own rule
-    def text(self, args):
-        return False
+
+
 
 
 
@@ -913,7 +915,7 @@ def transpile(input_string, level, sub = 0):
     try:
         input_string = input_string.replace('\r\n', '\n')
         transpile_result = transpile_inner(input_string, level, sub)
-        return transpile_result[0]
+        return transpile_result
     except Exception as E:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
