@@ -280,6 +280,8 @@ def parse():
                 transpile_result = hedy.transpile(code, level, sublevel)
                 code = transpile_result.code
                 has_turtle = transpile_result.has_turtle
+
+            response['has_turtle'] = has_turtle
             if has_turtle:
                 response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + code
             else:
