@@ -34,7 +34,7 @@ def routes (app, database, requested_lang):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -104,7 +104,7 @@ def routes (app, database, requested_lang):
             if token:
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
+        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
 
     @app.route('/class/<class_id>/join/<link>', methods=['GET'])
     @requires_login
