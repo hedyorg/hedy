@@ -95,27 +95,27 @@
             print 'Tu color favorito es ' color
 4:
     start_code: |-
-        nombre is ask ¿Cómo te llamas?
-        if nombre is Hedy print 'divertido' else print 'menos divertido!'
+        nombre is ask '¿Cómo te llamas?'
+        if nombre is Hedy print '¡genial!' else print 'meh'
     intro_text: |
-        `ask` e` print` siguen funcionando como en el nivel 3.
+        `ask` y `print` siguen funcionando como en el nivel 3.
 
-         En el nivel 4 hay algo nuevo, el `if`! Si es inglés para si. Con el `if` puede elegir entre dos opciones diferentes.
+         En el nivel 4 hay algo nuevo, el `if`! `if` significa `si` en inglés. Con el `if` puedes elegir entre dos opciones.
 
          ## Ejemplo de código Hedy
          ```
-         nombre is pregunta ¿cuál es tu nombre?
-         is nombre is Hedy print 'bien' else print '¡menos agradable!'
+         nombre is ask '¿Cómo te llamas?'
+         if nombre is Hedy print 'bien' else print 'buu'
          ```
 
-         Este código se imprime bien si ingresa Hedy como nombre, y menos agradable si ingresa algo más.
+         Este código imprime bien si introduces Hedy como nombre, y buu si introduces algo distinto.
 
-         ## Las asignaciones son cada vez más difíciles
+         ## Las tareas son cada vez más difíciles
 
-         También en el nivel 4, las asignaciones en las pestañas se vuelven cada vez más difíciles. Así que hazlos de izquierda a derecha.
+         También en el nivel 4, las tareas en las pestañas se vuelven cada vez más difíciles. Así que hazlas de izquierda a derecha.
     commands:
     -   name: "print"
-        explanation: "Para mostrar un texto literal con el comando `print`."
+        explanation: "Mostrar un texto literal con el comando `print`."
         example: "Ejemplo: print 'Hola bienvenido a Hedy.'"
         demo_code: "print 'Hola bienvenido a Hedy.'"
     -   name: "ask"
@@ -125,11 +125,11 @@
             color is ask ¿Cuál es tu color favorito?
             print 'Tu color favorito es ' color
     -   name: "if"
-        explanation: "Tomar una decisión con `if`"
-        example: "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'"
+        explanation: "Elegir una opción con `if`"
+        example: "Ejemplo: if color is verde print 'qué bonito!' else print 'no es tan bonito'"
         demo_code: |-
-            color is ask ¿Cuál es tu color favorito?
-            if color is verde print 'bonito!' else print 'no es tan bonito'
+            color is ask '¿Cuál es tu color favorito?'
+            if color is verde print 'qué bonito!' else print 'no es tan bonito'
 5:
     start_code: "repeat 3 times print 'Hedy es divertido!'"
     intro_text: |
