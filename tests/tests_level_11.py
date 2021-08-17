@@ -15,25 +15,30 @@ def captured_output():
     finally:
         sys.stdout, sys.stderr = old_out, old_err
 
-def run_code(code):
-    code = "import random\n" + code
+def run_code(parse_result):
+    code = "import random\n" + parse_result.code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
 
 
 class TestsLevel11(unittest.TestCase):
+  level = 11
+  
   def test_print(self):
-    result = hedy.transpile("print('ik heet')", 11)
-    self.assertEqual("print('ik heet')", result)
+    result = hedy.transpile("print('ik heet')", self.level)
+    expected = "print('ik heet')"
+    self.assertEqual(expected, result.code)
 
   def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", 11)
-    self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
+    result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
+    expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
+    self.assertEqual(expected, result.code)
 
   def test_print_with_calc_no_spaces(self):
-    result = hedy.transpile("print('5 keer 5 is ' 5*5)", 11)
-    self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
+    result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
+    expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
+    self.assertEqual(expected, result.code)
 
   def test_print_calculation_times_directly(self):
     code = textwrap.dedent("""\
@@ -41,7 +46,7 @@ class TestsLevel11(unittest.TestCase):
     nummertwee is 6
     print(nummer * nummertwee)""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     nummer = '5'
@@ -53,8 +58,9 @@ class TestsLevel11(unittest.TestCase):
     self.assertEqual("30", run_code(result))
 
   def test_transpile_ask(self):
-    result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", 11)
-    self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
+    result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
+    expected = "antwoord = input('wat is je lievelingskleur?')"
+    self.assertEqual(expected, result.code)
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
@@ -66,7 +72,7 @@ class TestsLevel11(unittest.TestCase):
     if str(naam) == str('Hedy'):
       print('koekoek')""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -89,7 +95,7 @@ class TestsLevel11(unittest.TestCase):
       print('Foutje')
       print('Het antwoord moest zijn '+str(antwoord))""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -103,7 +109,7 @@ class TestsLevel11(unittest.TestCase):
     computerkeuze=random.choice(keuzes)
     print('computer koos '+str(computerkeuze))""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -121,7 +127,7 @@ class TestsLevel11(unittest.TestCase):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -138,7 +144,7 @@ class TestsLevel11(unittest.TestCase):
       x = '2'
     else:
       x = '222'""")
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -152,7 +158,7 @@ class TestsLevel11(unittest.TestCase):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -166,7 +172,7 @@ class TestsLevel11(unittest.TestCase):
       for j in range(int(1), int(4)+1):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -184,7 +190,7 @@ class TestsLevel11(unittest.TestCase):
       if str(kleurtwee) == str('geel'):
         print('Samen is dit groen!')""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -200,7 +206,7 @@ class TestsLevel11(unittest.TestCase):
     for i in range(int(0), int(leeftijd)+1):
       print(str(i))""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 
@@ -225,7 +231,7 @@ class TestsLevel11(unittest.TestCase):
       if str(antwoord) == str('25'):
         i = '10'""")
 
-    result = hedy.transpile(code, 11)
+    result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
 

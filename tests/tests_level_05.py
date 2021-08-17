@@ -16,21 +16,24 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 
-def run_code(code):
-  code = "import random\n" + code
+def run_code(parse_result):
+  code = "import random\n" + parse_result.code
   with captured_output() as (out, err):
     exec(code)
   return out.getvalue().strip()
 
 
+
 class TestsLevel5(unittest.TestCase):
+  level = 5
+  
   # print should still work
   def test_print_with_var(self):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -44,7 +47,7 @@ class TestsLevel5(unittest.TestCase):
     naam is Hedy
     print 'ik heet,' naam""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -53,7 +56,7 @@ class TestsLevel5(unittest.TestCase):
     self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", 5)
+    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
     t.right(90)
@@ -64,7 +67,7 @@ class TestsLevel5(unittest.TestCase):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
@@ -74,7 +77,7 @@ class TestsLevel5(unittest.TestCase):
     code = textwrap.dedent("""\
     print 'Cuál es tu color favorito?'""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     print('Cuál es tu color favorito?')""")
@@ -85,7 +88,7 @@ class TestsLevel5(unittest.TestCase):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     color = input('Cuál es tu color favorito?')""")
@@ -94,7 +97,7 @@ class TestsLevel5(unittest.TestCase):
 
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile("abc felienne 123", 5)
+      result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual(str(context.exception), 'Invalid')
 
   # todo: a few more things repeated from 4 here?
@@ -105,7 +108,7 @@ class TestsLevel5(unittest.TestCase):
     code = textwrap.dedent("""\
     repeat 5 times print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     for i in range(int('5')):
@@ -129,7 +132,7 @@ class TestsLevel5(unittest.TestCase):
     n is 5
     repeat n times print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     n = '5'
@@ -153,7 +156,7 @@ class TestsLevel5(unittest.TestCase):
     kleur is ask 'Wat is je lievelingskleur?'
     if kleur is groen repeat 3 times print 'mooi!'""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     kleur = input('Wat is je lievelingskleur?')
@@ -168,7 +171,7 @@ class TestsLevel5(unittest.TestCase):
     code = textwrap.dedent("""\
     repeat 10 times print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, 5)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     for i in range(int('10')):

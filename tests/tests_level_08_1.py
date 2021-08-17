@@ -15,8 +15,8 @@ def captured_output():
     finally:
         sys.stdout, sys.stderr = old_out, old_err
 
-def run_code(code):
-    code = "import random\n" + code
+def run_code(parse_result):
+    code = "import random\n" + parse_result.code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
@@ -25,15 +25,18 @@ def run_code(code):
 class TestsLevel8_1(unittest.TestCase):
   def test_print(self):
     result = hedy.transpile("print 'ik heet'", 8, 1)
-    self.assertEqual("print('ik heet')", result)
+    expected = "print('ik heet')"
+    self.assertEqual(expected, result.code)
 
   def test_print_with_var(self):
     result = hedy.transpile("naam is Hedy\nprint 'ik heet' naam", 8, 1)
-    self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
+    expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
+    self.assertEqual(expected, result.code)
 
   def test_print_with_calc_no_spaces(self):
     result = hedy.transpile("print '5 keer 5 is ' 5*5", 8, 1)
-    self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
+    expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
+    self.assertEqual(expected, result.code)
 
   def test_print_calculation_times_directly(self):
     code = textwrap.dedent("""\
@@ -54,7 +57,8 @@ class TestsLevel8_1(unittest.TestCase):
 
   def test_transpile_ask(self):
     result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", 8, 1)
-    self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
+    expected = "antwoord = input('wat is je lievelingskleur?')"
+    self.assertEqual(expected, result.code)
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\

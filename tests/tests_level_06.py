@@ -16,20 +16,22 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 
-def run_code(code):
-  code = "import random\n" + code
+def run_code(parse_result):
+  code = "import random\n" + parse_result.code
   with captured_output() as (out, err):
     exec(code)
   return out.getvalue().strip()
 
 
 class TestsLevel6(unittest.TestCase):
+  level = 6
+  
   def test_print_with_var(self):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -42,7 +44,7 @@ class TestsLevel6(unittest.TestCase):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     antwoord = input('wat is je lievelingskleur?')""")
@@ -55,7 +57,7 @@ class TestsLevel6(unittest.TestCase):
     kleur is ask 'Wat is je lievelingskleur?'
     if kleur is groen repeat 3 times print 'mooi!'""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     kleur = input('Wat is je lievelingskleur?')
@@ -70,7 +72,7 @@ class TestsLevel6(unittest.TestCase):
     n is 5
     repeat n times print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     n = '5'
@@ -91,21 +93,21 @@ class TestsLevel6(unittest.TestCase):
   # new tests for calculations
   def test_simple_calculation(self):
     code = "nummer is 4 + 5"
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = "nummer = int(4) + int(5)"
     self.assertEqual(expected, result.code)
 
   def test_simple_calculation_without_space(self):
     code = "nummer is 4+5"
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = "nummer = int(4) + int(5)"
     self.assertEqual(expected, result.code)
 
 
   def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", 6)
+    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
     t.right(90)
@@ -116,7 +118,7 @@ class TestsLevel6(unittest.TestCase):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
@@ -128,7 +130,7 @@ class TestsLevel6(unittest.TestCase):
     nummer is 4 + 5
     print nummer""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     nummer = int(4) + int(5)
@@ -144,7 +146,7 @@ class TestsLevel6(unittest.TestCase):
     getal is nummer * nummertwee
     print getal""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     nummer = '5'
@@ -161,7 +163,7 @@ class TestsLevel6(unittest.TestCase):
     nummertwee is 6
     print nummer * nummertwee""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     nummer = '5'
@@ -177,7 +179,7 @@ class TestsLevel6(unittest.TestCase):
     nummertwee is 6
     print nummer / nummertwee""")
 
-    result = hedy.transpile(code, 6)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     nummer = '5'
@@ -196,7 +198,7 @@ class TestsLevel6(unittest.TestCase):
       if toet is ijsje prijs is prijs + 2
       print 'ok bedankt dan wordt het ' prijs ' euro'""")
 
-      result = hedy.transpile(code, 6)
+      result = hedy.transpile(code, self.level)
 
       expected = textwrap.dedent("""\
         prijs = '0'
