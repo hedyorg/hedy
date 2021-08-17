@@ -55,6 +55,7 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("print Hallo welkom bij Hedy!", 1)
     expected = "print('Hallo welkom bij Hedy!')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
     self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
   def test_print_has_no_turtle(self):
@@ -78,26 +79,28 @@ class TestsLevel1(unittest.TestCase):
     expected = textwrap.dedent("""\
     t.right(90)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_transpile_one_turn_right(self):
     result = hedy.transpile("turn right", 1)
     expected = textwrap.dedent("""\
     t.right(90)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_transpile_one_turn_with_var(self):
     result = hedy.transpile("turn koekoek", 1)
     expected = textwrap.dedent("""\
     t.right(90)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_transpile_one_turn_left(self):
     result = hedy.transpile("turn left", 1)
     expected = textwrap.dedent("""\
     t.left(90)""")
     self.assertEqual(expected, result.code)
-
-
+    self.assertEqual(True, result.has_turtle)
 
   def test_transpile_multiple_forward_without_arguments(self):
     result = hedy.transpile("forward\nforward", 1)
@@ -105,6 +108,7 @@ class TestsLevel1(unittest.TestCase):
     t.forward(50)
     t.forward(50)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_transpile_turtle_combi(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", 1)
@@ -113,17 +117,20 @@ class TestsLevel1(unittest.TestCase):
     t.right(90)
     t.forward(100)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
 
   def test_transpile_ask_Spanish(self):
     result = hedy.transpile("ask ask Cuál es tu color favorito?", 1)
     expected = "answer = input('ask Cuál es tu color favorito?')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_lines_may_end_in_spaces(self):
     result = hedy.transpile("print Hallo welkom bij Hedy! ", 1)
     expected = "print('Hallo welkom bij Hedy! ')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
     self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
 
   def test_lines_may_not_start_with_spaces(self):
@@ -136,6 +143,7 @@ class TestsLevel1(unittest.TestCase):
 
     expected = "print('iedereen zegt tegen hem: NERD, omdat hij de slimste van de klas is.')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_word_plus_period(self):
     with self.assertRaises(Exception) as context:
@@ -155,11 +163,13 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("ask wat is je lievelingskleur?", 1)
     expected = "answer = input('wat is je lievelingskleur?')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_transpile_print_multiple_lines(self):
     result = hedy.transpile("print Hallo welkom bij Hedy\nprint Mooi hoor", 1)
     expected = "print('Hallo welkom bij Hedy')\nprint('Mooi hoor')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_transpile_three_lines(self):
     input = textwrap.dedent("""\
@@ -174,16 +184,19 @@ class TestsLevel1(unittest.TestCase):
 
     result = hedy.transpile(input, 1)
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
                      
   def test_transpile_echo(self):
     result = hedy.transpile("echo Jouw lievelingskleur is dus...", 1)
     expected = "print('Jouw lievelingskleur is dus...'+answer)"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_transpile_echo_without_argument(self):
     result = hedy.transpile("echo", 1)
     expected = "print(answer)"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_use_quotes_in_print_allowed(self):
     code = "print 'Welcome to OceanView!'"
@@ -193,6 +206,7 @@ class TestsLevel1(unittest.TestCase):
     print('\\'Welcome to OceanView!\\'')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
@@ -205,6 +219,7 @@ class TestsLevel1(unittest.TestCase):
     print('\\'Welcome to \O/ceanView!\\'')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
@@ -217,6 +232,7 @@ class TestsLevel1(unittest.TestCase):
     answer = input('\\'Welcome to OceanView?\\'')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_use_quotes_in_echo_allowed(self):
     code = "echo oma's aan de"
@@ -226,3 +242,4 @@ class TestsLevel1(unittest.TestCase):
     print('oma\\'s aan de'+answer)""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)

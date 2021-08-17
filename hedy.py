@@ -247,10 +247,10 @@ class UsesTurtle(Transformer):
         if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
         else:
-            if isinstance(args[0], bool):
+            if type(children[0]) == bool:
                 return any(children) # children? if any is true there is a Turtle leaf
             else:
-                return False
+                return False # some nodes like text and punctuation have text children (their letters) these are not turtles
 
     def forward(self, args):
         return True
