@@ -547,8 +547,9 @@ function rule_forRangeParen() {
 function loosenRules(rules) {
   for (const ruleSets of Object.values(rules)) {
     for (const rule of ruleSets) {
-      if (rule.regex) {
+      if (rule.regex && !rule._loosened) {
         rule.regex = rule.regex.replace(/ /g, ' +');
+        rule._loosened = true;
       }
     }
   }
