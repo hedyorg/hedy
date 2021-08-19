@@ -73,15 +73,13 @@ def render_code_editor_with_tabs(request, course, level_number, menu, translatio
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['auth'] = translations.data [course.language] ['Auth']
+  arguments_dict['auth'] = translations.get_translations (course.language, 'Auth')
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
   arguments_dict['quiz_data_level'] = quiz_data_level
   arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
-
-  print(course.language == 'nl')
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))

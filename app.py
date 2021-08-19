@@ -277,8 +277,15 @@ def parse():
         try:
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             with querylog.log_time('transpile'):
-                result = hedy.transpile(code, level,sublevel)
-            response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\n" + result
+                transpile_result = hedy.transpile(code, level, sublevel)
+                code = transpile_result.code
+                has_turtle = transpile_result.has_turtle
+
+            response['has_turtle'] = has_turtle
+            if has_turtle:
+                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + code
+            else:
+                response["Code"] = "# coding=utf8\nimport random\n" + code
         except hedy.HedyException as E:
             traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -389,8 +396,8 @@ def programs_page (request):
     if from_user and not is_admin (request):
         return "unauthorized", 403
 
-    texts=TRANSLATIONS.data [requested_lang ()] ['Programs']
-    ui=TRANSLATIONS.data [requested_lang ()] ['ui']
+    texts=TRANSLATIONS.get_translations (requested_lang (), 'Programs')
+    ui=TRANSLATIONS.get_translations (requested_lang (), 'ui')
     adventures = load_adventure_for_language(requested_lang ())['adventures']
 
     result = DATABASE.programs_for_user(from_user or username)
@@ -409,7 +416,7 @@ def programs_page (request):
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name'), 'public': item.get ('public')})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
@@ -425,7 +432,7 @@ def get_quiz_start(level):
         return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
                                lang=lang,
                                username=current_user(request)['username'],
-                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                               auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
 
 # Quiz mode
@@ -461,14 +468,14 @@ def get_quiz(level_source, question_nr):
                                    char_array=char_array,
                                    menu=render_main_menu('adventures'), lang=lang,
                                    username=current_user(request)['username'],
-                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                                   auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
         else:
             return render_template('endquiz.html', correct=session.get('correct_answer'),
                                    total_score=session.get('total_score'),
                                    menu=render_main_menu('adventures'), lang=lang,
                                    quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
                                    next_assignment=1, username=current_user(request)['username'],
-                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                                   auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
 
 @app.route('/submit_answer/<level_source>/<question_nr>', methods=["POST"])
@@ -508,14 +515,14 @@ def submit_answer(level_source, question_nr):
                                    index_option=index_option,
                                    menu=render_main_menu('adventures'), lang=lang,
                                    username=current_user(request)['username'],
-                                   auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                                   auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
         else:  # show a different page for after the last question
             return 'No end quiz page!', 404
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
-    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'])
+    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'))
 
 @app.route('/hedy/adventures/<adventure_name>', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/adventures/<adventure_name>/<level>', methods=['GET'])
@@ -647,7 +654,7 @@ def view_program(id):
     # that every page needs to put in so much effort to re-set it
     arguments_dict['lang'] = lang
     arguments_dict['menu'] = render_main_menu('view')
-    arguments_dict['auth'] = TRANSLATIONS.data [lang] ['Auth']
+    arguments_dict['auth'] = TRANSLATIONS.get_translations(lang, 'Auth')
     arguments_dict['username'] = current_user(request) ['username'] or None
     arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
 
@@ -748,7 +755,7 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
-    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], auth=TRANSLATIONS.data [lang] ['Auth'], **front_matter)
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], auth=TRANSLATIONS.get_translations (lang, 'Auth'), **front_matter)
 
 
 def session_id():
