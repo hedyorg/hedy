@@ -204,10 +204,9 @@
             print 'Hola amigos'
             print 'Esto se va a mostrar 5 veces'
     intro_text: |
-        `ask` y `print` sigue funcionando como ya sabes. Pero `if` y `repeat` han cambiado!
+        `ask` y `print` siguen funcionando igual. Pero `if` y `repeat` han cambiado!
         Ahora puedes ejecutar grupos de código, pero vas a tener que respetar el sangrado.
-        Esto signfica que es necesario poner 4 espacios al principio de la línea.
-        Esto también se aplica cuando solo deseas crear un bloque de una línea.
+        Esto signfica que es necesario poner 4 espacios al principio de la línea. Esto también se aplica cuando solo deseas crear un bloque de una línea.
 
         ## Ejemplo de código Hedy
         ```
@@ -216,10 +215,11 @@
             print 'Esto se va a mostrar 5 veces'
         ```
 
-        Si combinas `repeat` e `if`, vas a tener que respetar el sangrado. Vamós a mirar el ejemplo para entenderlo mejor!"
+        Si combinas `repeat` e `if`, vas a tener que respetar el sangrado. ¡Vamos a ver el ejemplo para entenderlo mejor!"
+
         ## Ejemplo de código Hedy
         ```
-        color is ask ¿Cuál es tu color favorito?
+        color is ask '¿Cuál es tu color favorito?'
         if color is verde
             repeat 3 times
                 print '¡Qué bonito!'
@@ -229,25 +229,25 @@
         ```
     commands:
     -   name: "print"
-        explanation: "Muestra algo `print`. Recuerda usar las comillas simples para mostrar el texto literal."
-        example: "Ejemplo: print '5 veces 5 es ' 5 * 5"
-        demo_code: "print '5 veces 5 es ' 5 * 5"
+        explanation: "Imprime algo con `print`. Recuerda usar las comillas simples para mostrar el texto literal."
+        example: "Ejemplo: print '5 multiplicado por 5 es ' 5 * 5"
+        demo_code: "print '5 multiplicado por 5 es ' 5 * 5"
     -   name: "`if` con varias líneas"
-        explanation: "Pregunta por la respuesta de una operación y comprueba el resultado. Ahora podemos mostrar 2 líneas"
-        example: "Ejemplo: resultado is ask ¿Cuánto es 5 más 5?"
+        explanation: "Pregunta por la respuesta de una suma y comprueba el resultado. Ahora podemos mostrar 2 líneas."
+        example: "Ejemplo: resultado is ask '¿Cuánto es 5 más 5?'"
         demo_code: |-
-            resultado is ask ¿Cuánto es 5 más 5?
+            resultado is ask '¿Cuánto es 5 más 5?'
             if resultado is 10
-                print 'Muy bien!'
-                print 'La respuesta claro que es ' resultado
+                print '¡Muy bien!'
+                print 'Efectivamente, la respuesta es ' resultado
             else
-                print 'Oops!'
+                print '¡Ups!'
                 print 'La respuesta es 10'
     -   name: "`if` y `repeat` combinados"
         explanation: "`if` y `repeat` combinados"
         example: "Ejemplo: if color is verde repeat 3 times print '¡Qué bonito!' else repeat 5 times print 'A mi me gusta otro'"
         demo_code: |-
-            color is ask ¿Cuál es tu color favorito?
+            color is ask '¿Cuál es tu color favorito?'
             if color is verde
                 repeat 3 times
                     print '¡Qué bonito!'
