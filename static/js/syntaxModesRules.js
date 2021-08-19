@@ -419,7 +419,7 @@ function rule_printParen() {
   return recognize('start', {
     regex: '(print)(\\()',
     token: ['keyword', 'paren.lparen'],
-    next: 'expression'
+    next: 'start'
   });
 }
 
@@ -443,13 +443,13 @@ function rule_turtle() {
 
 
 /**
- * Add a 'print' rule with brackets
+ * Add an 'is input' rule with brackets
  */
 function rule_isInputParen() {
   return recognize('start', {
     regex: '(\\w+)( is input)(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
-    next: 'expression'
+    next: 'start'
   });
 }
 
