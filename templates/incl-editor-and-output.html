@@ -108,7 +108,7 @@
         {% if next_level %}
             {% if (next_level == quiz_data_level + 1) and quiz_enabled %}
                 <button class="green-btn ml-1"
-                        onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
+                        onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'});">{{ advance_button }} {{ next_level }}</button>
                 <button class="green-btn ml-1" onclick="window.prompt_unsaved (function () {window.location = '/quiz/start/{{ quiz_data_level }}'})">Ga
                     naar de
                     quiz
