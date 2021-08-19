@@ -9,7 +9,7 @@
   {% for program in programs %}
     <li>
       {% if program.adventure_name %}
-        <strong>{{ui.adventure}}: {{adventures [program.adventure_name].name }} - {{program.name}}</strong>
+        <strong>{{ui.adventure}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</strong>
       {% else %}
         <strong>{{program.name}} </strong>
       {% endif %}
