@@ -165,7 +165,7 @@ function runit(level, lang, cb) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
       }
-      runPythonProgram(response.Code, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
@@ -382,18 +382,23 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code, cb) {
+function runPythonProgram(code, hasTurtle, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
-//  turtleConfig.width = 0; // Use width & height of div
-//  turtleConfig.height = 0;
+  turtleConfig.width = 400;
+  turtleConfig.height = 300;
   turtleConfig.worldWidth = 400;
-  turtleConfig.worldHeight = 400;
-//  turtleConfig.height = 200;
+  turtleConfig.worldHeight = 300;
+
+  if (!hasTurtle) {
+    // There might still be a visible turtle panel. If the new program does not use the Turtle,
+    // remove it (by clearing the '#turtlecanvas' div)
+    $('#turtlecanvas').empty();
+  }
 
   Sk.configure({
     output: outf,
