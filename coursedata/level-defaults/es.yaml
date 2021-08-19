@@ -133,36 +133,36 @@
 5:
     start_code: "repeat 3 times print 'Hedy es divertido!'"
     intro_text: |
-        `ask`, `print` y `if` funcionan como en el nivel 4.
+        `ask`, `print` e `if` funcionan como en el nivel 4.
         Pero en el nivel 5 hay algo nuevo: `repeat`.
-        Con `repeat` puedes repetir códigos varias veces.
+        Con `repeat` puedes repetir una línea de código varias veces.
         ## Ejemplo de código Hedy
         ```
         repeat 3 times print 'Hedy es divertido!'
         ```
     commands:
     -   name: "print"
-        explanation: "Mostrar un texto literal con `print`."
+        explanation: "Imprimir un texto literal con `print`."
         example: "Ejemplo: print 'Hola bienvenido a Hedy.'"
         demo_code: "print 'Hola bienvenido a Hedy.'"
     -   name: "ask"
         explanation: "Preguntar algo con `ask`."
-        example: "Ejemplo: color is ask ¿Cuál es tu color favorito?"
+        example: "Ejemplo: color is ask '¿Cuál es tu color favorito?'"
         demo_code: |-
-            color is ask ¿Cuál es tu color favorito?
-            print 'Tu color favorito es ' color
+            color is ask '¿Cuál es tu color favorito?'
+            print 'Tu color favorito es el ' color
     -   name: "if"
         explanation: "Tomar una decisión con `if`."
-        example: "Ejemplo: if color is verde print 'bonito!' else print 'no es tan bonito'"
+        example: "Ejemplo: if color is verde print '¡qué bonito!' else print 'no es tan bonito'"
         demo_code: |-
-            color is ask ¿Cuál es tu color favorito?
-            if color is verde print 'bonito!' else print 'no es tan bonito'
+            color is ask '¿Cuál es tu color favorito?'
+            if color is verde print '¡qué bonito!' else print 'no es tan bonito'
     -   name: "repeat"
         explanation: "Repetir algo con `repeat` e `if`."
-        example: "Ejemplo: if color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'"
+        example: "Ejemplo: if color is verde repeat 3 times print '¡qué bonito!' else repeat 5 times print 'no es tan bonito'"
         demo_code: |-
-            color is ask ¿Cuál es tu color favorito?
-            if color is verde repeat 3 times print 'bonito!' else repeat 5 times print 'no es tan bonito'
+            color is ask '¿Cuál es tu color favorito?'
+            if color is verde repeat 3 times print '¡qué bonito!' else repeat 5 times print 'no es tan bonito'
 6:
     start_code: "print '5 veces 5 es ' 5 * 5"
     intro_text: |
