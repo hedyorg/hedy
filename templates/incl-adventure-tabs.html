@@ -4,7 +4,7 @@
         <a tabindex="0" href="#" data-tab="t-level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <a tabindex="0" href="#" data-tab="t-{{assignment.short_name}}" class="block text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
+            <a tabindex="0" href="#" data-tab="t-{{assignment.short_name}}" class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
           {% endif %}
         {% endfor %}
         </ul>
