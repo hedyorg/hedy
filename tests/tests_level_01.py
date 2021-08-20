@@ -4,6 +4,7 @@ import sys
 import io
 from contextlib import contextmanager
 import textwrap
+import inspect
 
 @contextmanager
 def captured_output():
@@ -24,6 +25,8 @@ def run_code(parse_result):
 
 class TestsLevel1(unittest.TestCase):
   level = 1
+  def test_name(self):
+    return inspect.stack()[1][3]
 
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
@@ -241,6 +244,18 @@ class TestsLevel1(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     print('oma\\'s aan de'+answer)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_two_spaces_after_print(self):
+
+    code = "print        hallo!"
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('hallo!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
