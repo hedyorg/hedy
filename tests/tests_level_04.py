@@ -175,7 +175,7 @@ class TestsLevel4(unittest.TestCase):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
-    if naam is Hedy print 'leuk' 
+    if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
     for level in range(self.level, max_level + 1):
@@ -192,6 +192,29 @@ class TestsLevel4(unittest.TestCase):
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
 
+  def test_print_if_else_with_line_break_and_space(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+
+    max_level = 6
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'     
+    else print 'minder leuk'""")
+
+    for level in range(self.level, max_level + 1):
+      result = hedy.transpile(code, self.level)
+
+      expected = textwrap.dedent("""\
+      naam = 'Hedy'
+      print('ik heet'+naam)
+      if naam == 'Hedy':
+        print('leuk')
+      else:
+        print('minder leuk')""")
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
 
   def test_print_if_else_with_ask(self):
 
