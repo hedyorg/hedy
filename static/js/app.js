@@ -360,6 +360,7 @@ function reportClientError(level, code, client_error) {
     data: JSON.stringify({
       level: level,
       code: code,
+      page: window.location.href,
       client_error: client_error,
     }),
     contentType: 'application/json',
