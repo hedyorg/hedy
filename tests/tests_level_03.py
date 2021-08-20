@@ -282,7 +282,7 @@ class TestsLevel3(unittest.TestCase):
 
   def test_two_spaces_after_print(self):
 
-    max_level = 8
+    max_level = 10
     code = "print        'hallo!'"
 
     for level in range(self.level, max_level+1):

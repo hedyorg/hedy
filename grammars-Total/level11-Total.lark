@@ -73,7 +73,7 @@ invalid: textwithoutspaces _SPACE textwithspaces
 invalid_space: _SPACE text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (index | random)
-print: _PRINT _LEFT_BRACKET (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))* _RIGHT_BRACKET
+print: _PRINT _SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))* _RIGHT_BRACKET
 print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
 program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
 punctuation : PUNCTUATION -> punctuation

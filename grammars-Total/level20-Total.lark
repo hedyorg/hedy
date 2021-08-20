@@ -79,7 +79,7 @@ length: _LENGTH _LEFT_BRACKET var _RIGHT_BRACKET
 list_access: var _LEFT_SQUARE_BRACKET (index | random | var | length) _RIGHT_SQUARE_BRACKET
 list_access_var: var _SPACE _EQUALS _SPACE var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
 orcondition: (equality_check|in_list_check) (_SPACE _OR _SPACE condition)*
-print: _PRINT _LEFT_BRACKET (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))* _RIGHT_BRACKET
+print: _PRINT _SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var | sum | length) (_SPACE (quoted_text | list_access | var | sum | length))* _RIGHT_BRACKET
 print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
 program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
 punctuation : PUNCTUATION -> punctuation
