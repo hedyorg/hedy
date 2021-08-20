@@ -16,9 +16,10 @@ window.auth = {
     });
   },
   destroy: function () {
-    if (! confirm (auth.texts.are_you_sure)) return;
-    $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
-      auth.redirect ('');
+    window.modal.confirm (auth.texts.are_you_sure, function () {
+      $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
+        auth.redirect ('');
+      });
     });
   },
   error: function (message, element, id) {
@@ -234,23 +235,24 @@ window.auth = {
   },
   markAsTeacher: function (username, is_teacher) {
     $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
+      window.modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
     }).fail (function (error) {
       console.log (error);
-      alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+      window.modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
     });
   },
 
   changeUserEmail: function (username, email) {
-    var correctedEmail = prompt ('Please enter the corrected email', email);
-    if (correctedEmail === email) return;
-    if (! correctedEmail.match (window.auth.emailRegex)) return alert ('Please enter a valid email.');
-    $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
-      location.reload ();
-    }).fail (function (error) {
-      console.log (error);
-      alert (['Error when changing the email for User', username].join (' '));
+    window.modal.prompt ('Please enter the corrected email', function (correctedEmail) {
+      if (correctedEmail === email) return;
+      if (! correctedEmail.match (window.auth.emailRegex)) return window.modal.alert ('Please enter a valid email.');
+      $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+        window.modal.alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
+        location.reload ();
+      }).fail (function (error) {
+        console.log (error);
+        window.modal.alert (['Error when changing the email for User', username].join (' '));
+      });
     });
   },
 }

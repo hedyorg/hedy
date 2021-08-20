@@ -57,8 +57,10 @@
 
     window.onbeforeunload = function () {
        // The browser doesn't show this message, rather it shows a default message.
-       // We still have an internationalized message in case we want to implement this as a modal in the future.
-       if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
+       if (window.State.unsaved_changes) {
+          // This allows us to avoid showing the programmatic modal from `prompt_unsaved` and then the native one
+          if (! window.State.no_unload_prompt) return window.auth.texts.unsaved_changes;
+       }
     };
 
     // *** KEYBOARD SHORTCUTS ***
@@ -133,7 +135,7 @@ function reloadOnExpiredSession () {
 }
 
 function runit(level, lang, cb) {
-  if (window.State.disable_run) return alert (window.auth.texts.answer_question);
+  if (window.State.disable_run) return window.modal.alert (window.auth.texts.answer_question);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -199,7 +201,7 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
-  if (window.State.sublevel) return alert ('Sorry, you cannot save programs when in a sublevel.');
+  if (window.State.sublevel) return window.modal.alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;
@@ -207,12 +209,12 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   try {
     // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! window.auth.profile) {
-       if (! confirm (window.auth.texts.save_prompt)) return;
-       // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-       if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
-       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-       window.location.pathname = '/login';
-       return;
+       return window.modal.confirm (window.auth.texts.save_prompt, function () {
+         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+         if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         window.location.pathname = '/login';
+       });
     }
 
     window.State.unsaved_changes = false;
@@ -281,7 +283,7 @@ function viewProgramLink(programId) {
 }
 
 window.share_program = function share_program (level, lang, id, Public, reload) {
-  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+  if (! window.auth.profile) return window.modal.alert (window.auth.texts.must_be_logged);
 
   var share = function (id) {
     $.ajax({
@@ -304,7 +306,7 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
       else {
         // If we're sharing the program, copy the link to the clipboard.
         if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-        alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+        window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
       }
       if (reload) setTimeout (function () {location.reload ()}, 1000);
     }).fail(function(err) {
@@ -345,7 +347,7 @@ window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
      document.getSelection ().removeAllRanges ();
      document.getSelection ().addRange (selected);
   }
-  if (! noAlert) alert (window.auth.texts.copy_clipboard);
+  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard);
 }
 
 /**
@@ -608,75 +610,77 @@ function buildUrl(url, params) {
 })();
 
 window.create_class = function create_class() {
-  var class_name = window.prompt (window.auth.texts.class_name_prompt);
-  if (! class_name) return;
+  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
 
-  $.ajax({
-    type: 'POST',
-    url: '/class',
-    data: JSON.stringify({
-      name: class_name
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    location.reload ();
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    $.ajax({
+      type: 'POST',
+      url: '/class',
+      data: JSON.stringify({
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
   });
 }
 
 window.rename_class = function rename_class(id) {
-  var class_name = window.prompt (window.auth.texts.class_name_prompt);
-  if (! class_name) return;
+  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
 
-  $.ajax({
-    type: 'PUT',
-    url: '/class/' + id,
-    data: JSON.stringify({
-      class_name: name
-    }),
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    location.reload ();
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    $.ajax({
+      type: 'PUT',
+      url: '/class/' + id,
+      data: JSON.stringify({
+        class_name: name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
   });
 }
 
 window.delete_class = function delete_class(id) {
-  if (! confirm (window.auth.texts.delete_class_prompt)) return;
+  window.modal.confirm (window.auth.texts.delete_class_prompt, function () {
 
-  $.ajax({
-    type: 'DELETE',
-    url: '/class/' + id,
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    window.location.pathname = '/my-profile';
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/my-profile';
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
   });
 }
 
 window.join_class = function join_class(link, name, noRedirect) {
-  // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
+  // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
   if (! window.auth.profile) {
-     if (! confirm (window.auth.texts.join_prompt)) return;
-     localStorage.setItem ('hedy-join', JSON.stringify ({link: link, name: name}));
-     window.location.pathname = '/login';
-     return;
+    return window.modal.confirm (window.auth.texts.join_prompt, function () {
+      localStorage.setItem ('hedy-join', JSON.stringify ({link: link, name: name}));
+      window.location.pathname = '/login';
+      return;
+    });
   }
 
   $.ajax({
     type: 'GET',
     url: link,
   }).done(function(response) {
-    alert (window.auth.texts.class_join_confirmation + ' ' + name);
+    window.modal.alert (window.auth.texts.class_join_confirmation + ' ' + name);
     if (! noRedirect) window.location.pathname = '/programs';
   }).fail(function(err) {
     console.error(err);
@@ -685,17 +689,25 @@ window.join_class = function join_class(link, name, noRedirect) {
 }
 
 window.remove_student = function delete_class(class_id, student_id) {
-  if (! confirm (window.auth.texts.remove_student_prompt)) return;
+  window.modal.confirm (window.auth.texts.remove_student_prompt, function () {
 
-  $.ajax({
-    type: 'DELETE',
-    url: '/class/' + class_id + '/student/' + student_id,
-    contentType: 'application/json',
-    dataType: 'json'
-  }).done(function(response) {
-    location.reload ();
-  }).fail(function(err) {
-    console.error(err);
-    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + class_id + '/student/' + student_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
   });
+}
+
+window.prompt_unsaved = function prompt_unsaved(cb) {
+  if (! window.State.unsaved_changes) return cb ();
+  // This variable avoids showing the generic native `onbeforeunload` prompt
+  window.State.no_unload_prompt = true;
+  window.modal.confirm (window.auth.texts.unsaved_changes, cb);
 }
