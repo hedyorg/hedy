@@ -167,6 +167,32 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+
+  def test_print_if_else_with_line_break(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+
+    max_level = 6
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk' 
+    else print 'minder leuk'""")
+
+    for level in range(self.level, max_level + 1):
+      result = hedy.transpile(code, self.level)
+
+      expected = textwrap.dedent("""\
+      naam = 'Hedy'
+      print('ik heet'+naam)
+      if naam == 'Hedy':
+        print('leuk')
+      else:
+        print('minder leuk')""")
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
+
   def test_print_if_else_with_ask(self):
 
 
@@ -279,19 +305,10 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_single_quote_in_ask_should_not_break(self):
-    # Maybe this test can be skipped if we finally
-    # bite the bullet and allow ask (or mandate ask) to also use ''
-    code = """naam is ask 'Hello welcome to Hedy.'"""
-    expected = "naam = input('Hello welcome to Hedy.')"
-
-    result = hedy.transpile(code, self.level)
-    print(result)
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
 
-  # while this looks STRANGE it is in essence the same sting issue
+
+  # while this looks STRANGE it is in essence a string issue like the one above
   # at least we solve it with the same fix of escaping quotes
   def test_bad_input_should_be_caught(self):
     code = textwrap.dedent("""\
