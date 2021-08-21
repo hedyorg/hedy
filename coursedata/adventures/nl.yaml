@@ -482,7 +482,8 @@ adventures:
                     keuzes is 1, 2, 3, 4, 5, regenworm
                     worp is ...
                     print 'je hebt ' ... ' gegooid'
-                    if ... is regenworm print 'Je mag stoppen met gooien.' ... print 'Je moet nog een keer hoor!'
+                    if ... is regenworm print 'Je mag stoppen met gooien.'
+                    ... print 'Je moet nog een keer hoor!'
                     ```
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
             5:
@@ -512,7 +513,8 @@ adventures:
                     punten is 0
                     worp is keuzes at random
                     print 'je gooide ' worp
-                    if worp is regenworm punten is punten + 5 else punten is punten + worp
+                    if worp is regenworm punten is punten + 5
+                    else punten is punten + worp
                     print 'dat zijn dan ' punten
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
