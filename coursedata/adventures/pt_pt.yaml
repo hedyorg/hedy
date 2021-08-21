@@ -513,9 +513,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     correct_answer is 11 * 27
-                    print 'How much is 11 times 27?'
-                    answer is ask Do you know the answer?
-                    if answer is correct_answer print 'good job!' else print 'Wrong! It was ' correct_answer
+                    answer is ask 'How much is 11 times 27?'
+                    if answer is correct_answer print 'good job!'
+                    else print 'Wrong! It was ' correct_answer
                     ```
 
                     ## Random numbers
@@ -530,9 +530,9 @@ adventures:
                     table is tables at random
                     number is numbers at random
                     correct_answer is table * number
-                    print 'how much is ' table ' times ' number '?'
-                    answer is ask Do you know the answer?
-                    if answer is correct_answer print 'okay' else print 'mistake! it was ' correct_answer
+                    answer is ask 'how much is ' table ' times ' number '?'
+                    if answer is correct_answer print 'okay'
+                    else print 'mistake! it was ' correct_answer
                     ```
 
                 start_code: "print Welcome to this calculator!"
