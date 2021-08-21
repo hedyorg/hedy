@@ -471,9 +471,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     jo_valasz is 11 * 27
-                    print 'Mennyi 11 és 27 szorzata?'
-                    valasz is ask Tudod a választ?
-                    if valasz is jo_valasz print 'nagyszerű!' else print 'Nem jó! Ennyi: ' jo_valasz
+                    valasz is ask 'Mennyi 11 és 27 szorzata?'
+                    if valasz is jo_valasz print 'nagyszerű!'
+                    else print 'Nem jó! Ennyi: ' jo_valasz
                     ```
                     ## Véletlen számok
                     Azt is engedélyezheted, hogy a számítógép véletlenszerű számításokat végezzen véletlenszámok használatával.
@@ -486,9 +486,9 @@ adventures:
                     tabla is tablazat at random
                     szam is szamok at random
                     jo_valasz is tabla * szam
-                    print 'Mennyi ' tabla ' és ' szam ' szorzata?'
-                    valasz is ask Tudod a választ?
-                    if valasz is jo_valasz print 'rendben' else print 'hiba! ennyi: ' jo_valasz
+                    valasz is ask 'Mennyi ' tabla ' és ' szam ' szorzata?'
+                    if valasz is jo_valasz print 'rendben'
+                    else print 'hiba! ennyi: ' jo_valasz
                     ```
     restaurant:
         name: Étterem

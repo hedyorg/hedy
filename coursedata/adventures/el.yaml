@@ -509,9 +509,9 @@ adventures:
                     ## Παράδειγμα κώδικα Hedy
                     ```
                     correct_answer is 11 * 27
-                    print 'Πόσο κάνει 11 φορές το 27;'
-                    answer is ask Ξέρεις την απάντηση;
-                    if answer is correct_answer print 'συγχαρητήρια!' else print 'Λάθος! Ήταν ' correct_answer
+                    answer is ask 'Πόσο κάνει 11 φορές το 27;'
+                    if answer is correct_answer print 'συγχαρητήρια!'
+                    else print 'Λάθος! Ήταν ' correct_answer
                     ```
 
                     ## Τυχαίοι αριθμοί
@@ -526,9 +526,9 @@ adventures:
                     table is tables at random
                     number is numbers at random
                     correct_answer is table * number
-                    print 'πόσο είναι ' table ' φορές ' number '?'
-                    answer is ask Γνωρίζεις την απάντηση;
-                    if answer is correct_answer print 'οκ' else print 'λάθος! ήταν ' correct_answer
+                    answer is ask 'πόσο είναι ' table ' φορές ' number '?'
+                    if answer is correct_answer print 'οκ'
+                    else print 'λάθος! ήταν ' correct_answer
                     ```
 
                 start_code: "print Καλωσήλθες σε αυτήν την αριθμομηχανή!"

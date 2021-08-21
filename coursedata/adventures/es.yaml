@@ -497,9 +497,9 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     respuestacorrecta is 11 * 27
-                    print 'Cuánto es 11 veces 27?'
-                    respuesta is ask Sabes la respuesta?
-                    if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta is ask 'Cuánto es 11 veces 27?'
+                    if respuesta is respuestacorrecta print 'Bien hecho'
+                    else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
 
                     ## Multiplicaciones al azar
@@ -514,8 +514,8 @@ adventures:
                     tabla is tablas at random
                     multiplicador is veces at random
                     respuestacorrecta is tabla * multiplicador
-                    print 'Cuánto es ' tabla ' veces ' multiplicador '?'
-                    respuesta is ask Sabes la respuesta?
-                    if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta is ask 'Cuánto es ' tabla ' veces ' multiplicador '?'
+                    if respuesta is respuestacorrecta print 'Bien hecho'
+                    else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
                 start_code: "print Bienvenide a tu propia calculadora!"
