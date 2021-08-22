@@ -72,16 +72,16 @@ class TestsForMultipleLevels(unittest.TestCase):
 
 
 
-    def test_parse_error_shows_right_level(self):
-        """Check that a parse error that can't be fixed by downgrading the level is propagated properly."""
-
-        # This isn't correct Hedy at level 5 nor level 4
-        try:
-            hedy.transpile("printHelloworld!", 5)
-            self.fail('Should have thrown')
-        except hedy.HedyException as e:
-            self.assertEqual(e.error_code, 'Parse')
-            self.assertEqual(e.arguments.get('level'), 5)
+    # def test_parse_error_shows_right_level(self):
+    #     """Check that a parse error that can't be fixed by downgrading the level is propagated properly."""
+    #
+    #     # This isn't correct Hedy at level 5 nor level 4
+    #     try:
+    #         hedy.transpile("printHelloworld!", 5)
+    #         self.fail('Should have thrown')
+    #     except hedy.HedyException as e:
+    #         self.assertEqual(e.error_code, 'Parse')
+    #         self.assertEqual(e.arguments.get('level'), 5)
 
     # def test_print_undefined_var(self):
     #     min_level = 7
