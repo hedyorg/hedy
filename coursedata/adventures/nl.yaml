@@ -113,7 +113,8 @@ adventures:
                     print naam ' loopt door het bos'
                     print naam ' komt een monster tegen'
                     einde is ask 'Wil je een goed of slecht einde?'
-                    if einde is goed print naam ' pakt het zwaard en het monster rent snel weg' else print 'Het monster eet ' naam ' op'
+                    if einde is goed print naam ' pakt het zwaard en het monster rent snel weg'
+                    else print 'Het monster eet ' naam ' op'
                     ```
 
                 start_code: "print Hier komt straks jouw verhaal!"
@@ -371,7 +372,8 @@ adventures:
                     ```
                     mensen is mama, papa, Emma, Sophie
                     afwasser is mensen at random
-                    if afwasser is Sophie print ... chips ik moet de afwas doen ... else print ' gelukkig geen afwas want ' ... 'wast al af'
+                    if afwasser is Sophie print ... chips ik moet de afwas doen ...
+                    else print ' gelukkig geen afwas want ' ... 'wast al af'
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             5:
@@ -512,7 +514,8 @@ adventures:
                     punten is 0
                     worp is keuzes at random
                     print 'je gooide ' worp
-                    if worp is regenworm punten is punten + 5 else punten is punten + worp
+                    if worp is regenworm punten is punten + 5
+                    else punten is punten + worp
                     print 'dat zijn dan ' punten
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
@@ -629,9 +632,9 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     goedeantwoord is 11 * 27
-                    print 'Hoeveel is 11 keer 27?'
-                    antwoord is ask 'Weet jij het antwoord?'
-                    if antwoord is goedeantwoord print 'goedzo' else print 'Foutje! Het was ' goedeantwoord
+                    antwoord is ask 'Hoeveel is 11 keer 27?'
+                    if antwoord is goedeantwoord print 'goedzo'
+                    else print 'Foutje! Het was ' goedeantwoord
                     ```
 
                     ## Willekeurige getallen
@@ -646,9 +649,9 @@ adventures:
                     tafel is tafels at random
                     keergetal is keer at random
                     goede_antwoord is tafel * keergetal
-                    print 'hoeveel is ' tafel ' keer ' keergetal '?'
-                    antwoord is ask 'Weet jij het antwoord?'
-                    if antwoord is goede_antwoord print 'goedzo' else print 'foutje! het was ' goede_antwoord
+                    antwoord is ask 'hoeveel is ' tafel ' keer ' keergetal '?'
+                    if antwoord is goede_antwoord print 'goedzo'
+                    else print 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "print Welkom bij jouw rekenmachine"
             7:
@@ -878,11 +881,12 @@ adventures:
                       print 'Dat is dan ' prijs ' euro, alstublieft!'
                       print 'Bedankt en eet smakelijk!'
                       ```
-                      In de hierboven kan je maar 1 gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
+                      In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
                       Je kunt de code nog een stuk uitgebreider maken, kijk maar naar dit voorbeeld waarin je 3 gangen kunt bestellen.
 
                       ## Voorbeeld Hedy Code
-                      In this example there are three courses, which requires more code and more additions in calculating the price.
+                      Met deze code kan een klant drie gerechten bestellen.
+
                       ```
                       print 'Welkom in restaurant Hedy'
                       print 'Dit is ons menu:'

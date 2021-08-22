@@ -109,10 +109,10 @@ adventures:
 
                     ## Programa Hedy de ejemplo
                     ```
-                    nombre is ask Quién camina por el bosque?
+                    nombre is ask 'Quién camina por el bosque?'
                     print nombre ' camina por el bosque'
                     print nombre ' se topa con un monstruo'
-                    final is ask Quieres un final feliz o un final triste?
+                    final is ask 'Quieres un final feliz o un final triste?'
                     if final is feliz print nombre ' desenfunda su espada y el monstruo se va corriendo' else print 'El monstruo se come a ' nombre
                     ```
 
@@ -289,7 +289,7 @@ adventures:
                     ## Programa Hedy de ejemplo
 
                     ```
-                    ask Quieres hacer tus propios dados?
+                    ask 'Quieres hacer tus propios dados?'
                     echo Tu dices:
                     ```
 
@@ -333,7 +333,7 @@ adventures:
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
                     print 'has tirado un ' ...
-                    print ... ... ... <- hier moet je het kiezen programmeren
+                    print ... ... ... <- agregar código aquí
                     ```
                 start_code: "print 'Qué salió esta vez?'"
             4:
@@ -468,7 +468,7 @@ adventures:
                     ```
                     opciones is piedra, papel, tijera
                     opcióncomputadora is ...
-                    opción is ask Que eliges?
+                    opción is ask 'Que eliges?'
                     print 'Has elegido' ...
                     print 'La computadora ha elegido' ...
                     if ... is ... print 'empate!' else print 'no hay empate'
@@ -497,9 +497,9 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     respuestacorrecta is 11 * 27
-                    print 'Cuánto es 11 veces 27?'
-                    respuesta is ask Sabes la respuesta?
-                    if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta is ask 'Cuánto es 11 veces 27?'
+                    if respuesta is respuestacorrecta print 'Bien hecho'
+                    else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
 
                     ## Multiplicaciones al azar
@@ -514,8 +514,8 @@ adventures:
                     tabla is tablas at random
                     multiplicador is veces at random
                     respuestacorrecta is tabla * multiplicador
-                    print 'Cuánto es ' tabla ' veces ' multiplicador '?'
-                    respuesta is ask Sabes la respuesta?
-                    if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta is ask 'Cuánto es ' tabla ' veces ' multiplicador '?'
+                    if respuesta is respuestacorrecta print 'Bien hecho'
+                    else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
                 start_code: "print Bienvenide a tu propia calculadora!"
