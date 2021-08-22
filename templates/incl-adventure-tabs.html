@@ -1,22 +1,22 @@
       {# TABS #}
       <div>
         <div class="flex cursor-pointer flex-end">
-        <a tabindex="0" href="#" data-tab="t-level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
+        <a tabindex="0" href="#" data-tab="level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <a tabindex="0" href="#" data-tab="t-{{assignment.short_name}}" class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
+            <a tabindex="0" href="#" data-tab="{{assignment.short_name}}" class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
           {% endif %}
         {% endfor %}
         </ul>
       </div>
       {# PANES #}
       <div style='width: 100%; min-height: 10em;' class="bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
-        <div data-tabtarget="t-level">
+        <div data-tabtarget="level">
           {{intro_text|commonmark}}
         </div>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <div data-tabtarget="t-{{assignment.short_name}}" class="hidden">
+            <div data-tabtarget="{{assignment.short_name}}" class="hidden">
               {% if assignment.image %}
                 <img class="float-right w-48" src="{{static('/images/' + assignment.image)}}">
               {% endif %}
