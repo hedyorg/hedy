@@ -263,6 +263,8 @@ class UsesTurtle(Transformer):
     def NUMBER(self, args):
         return False
 
+    def NAME(self, args):
+        return False
 
 
 

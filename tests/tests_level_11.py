@@ -29,16 +29,19 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile("print('ik heet')", self.level)
     expected = "print('ik heet')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_print_with_var(self):
     result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
     expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_print_with_calc_no_spaces(self):
     result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
     expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_print_calculation_times_directly(self):
     code = textwrap.dedent("""\
@@ -54,6 +57,7 @@ class TestsLevel11(unittest.TestCase):
     print(str(int(nummer) * int(nummertwee)))""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     self.assertEqual("30", run_code(result))
 
@@ -61,6 +65,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
     expected = "antwoord = input('wat is je lievelingskleur?')"
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
@@ -75,6 +80,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -98,6 +104,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_print_random(self):
     code = textwrap.dedent("""\
@@ -112,6 +119,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
@@ -130,6 +138,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -147,6 +156,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -161,6 +171,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_for_nesting(self):
     code = textwrap.dedent("""\
@@ -175,6 +186,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_if_nesting(self):
     code = textwrap.dedent("""\
@@ -193,6 +205,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_newprint(self):
     code = textwrap.dedent("""\
@@ -209,6 +222,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
@@ -234,6 +248,7 @@ class TestsLevel11(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)

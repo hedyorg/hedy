@@ -55,7 +55,7 @@ class TestsLevel5(unittest.TestCase):
     print('ik heet,'+naam)""")
 
     self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
+    self.assertEqual(False, result.has_turtle)
 
   def test_transpile_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
@@ -75,7 +75,7 @@ class TestsLevel5(unittest.TestCase):
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
     self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.assertEqual(True, result.has_turtle)
 
   def test_print_Spanish(self):
     code = textwrap.dedent("""\
