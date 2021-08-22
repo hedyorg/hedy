@@ -705,17 +705,20 @@ def space_eu(level, step):
 
 
 
-@app.route('/error_messages.js', methods=['GET'])
-def error():
+@app.route('/client_messages.js', methods=['GET'])
+def client_messages():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
-    response = make_response(render_template("error_messages.js", error_messages=json.dumps(error_messages)))
+    ui_messages = TRANSLATIONS.get_translations(requested_lang(), "ui")
+
+    response = make_response(render_template("client_messages.js",
+        error_messages=json.dumps(error_messages),
+        ui_messages=json.dumps(ui_messages)))
 
     if not is_debug_mode():
         # Cache for longer when not devving
         response.cache_control.max_age = 60 * 60  # Seconds
 
     return response
-
 
 @app.errorhandler(500)
 def internal_error(exception):
