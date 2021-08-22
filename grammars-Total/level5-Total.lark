@@ -43,15 +43,15 @@ _RIGHT_BRACKET : ")"
 _RIGHT_SQUARE_BRACKET : "]"
 _SMALLER : "<"
 _SMALLER_EQUALS : "<="
-_SPACE: " "
+_SPACE: " "+
 _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
 _TURN: "turn"
 _WHILE: "while"
-ask: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | quoted_text | var)*
-ask_no_quotes: var _SPACE+ _IS _SPACE _ASK _SPACE+ (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
+ask: var _SPACE _IS _SPACE _ASK _SPACE (_SPACE| list_access | quoted_text | var)*
+ask_no_quotes: var _SPACE _IS _SPACE _ASK _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 assign: var _SPACE _IS _SPACE textwithspaces
 assign_list: var _SPACE _IS _SPACE textwithspaces (("," _SPACE |",") textwithspaces)+
 command: print | repeat | ifelse | ifs | turtle | ask | assign_list | list_access_var | assign | invalid
@@ -63,7 +63,7 @@ ifs: _IF _SPACE condition (_SPACE|_EOL*) command //'if' cannot be used in Python
 in_list_check: textwithoutspaces _SPACE _IN _SPACE var
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 invalid: textwithoutspaces _SPACE textwithspaces
-invalid_space: _SPACE+ text
+invalid_space: _SPACE text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (index | random)
 print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var)*  -> print

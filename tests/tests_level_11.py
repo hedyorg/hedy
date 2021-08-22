@@ -4,6 +4,7 @@ import sys
 import io
 import textwrap
 from contextlib import contextmanager
+import inspect
 
 @contextmanager
 def captured_output():
@@ -24,7 +25,9 @@ def run_code(parse_result):
 
 class TestsLevel11(unittest.TestCase):
   level = 11
-  
+  def test_name(self):
+    return inspect.stack()[1][3]
+
   def test_print(self):
     result = hedy.transpile("print('ik heet')", self.level)
     expected = "print('ik heet')"
@@ -253,4 +256,47 @@ class TestsLevel11(unittest.TestCase):
   #     result = hedy.transpile(code, 10)
   #   self.assertEqual(str(context.exception), 'Parse')
 
+  def test_multiple_spaces_after_print(self):
 
+    max_level = 22
+    code = "print    ('hallo!')"
+
+    for level in range(self.level, max_level+1):
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      print('hallo!')""")
+
+      print(f'{self.test_name()} level {level}')
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
+  def test_two_spaces_after_bracket(self):
+
+    max_level = 22
+    code = "print(   'hallo!')"
+
+    for level in range(self.level, max_level + 1):
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      print('hallo!')""")
+
+      print(f'{self.test_name()} level {level}')
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
+  def test_multiple_spaces_before_and_after_bracket(self):
+
+    max_level = 22
+    code = "print  (   'hallo!')"
+
+    for level in range(self.level, max_level+1):
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      print('hallo!')""")
+
+      print(f'{self.test_name()} level {level}')
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
