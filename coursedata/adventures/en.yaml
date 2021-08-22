@@ -109,7 +109,8 @@ adventures:
                     print name 'walks through the forest'
                     print name 'encounter a monster'
                     end is ask Would you like a good or a bad ending?
-                    if the end is good print name 'takes the sword and the monster quickly runs away' else print 'The monster eats' name
+                    if the end is good print name 'takes the sword and the monster quickly runs away'
+                    else print 'The monster eats' name
                     ```
                 start_code: "print Here will soon be your story!"
             5:
@@ -573,9 +574,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     correct_answer is 11 * 27
-                    print 'How much is 11 times 27?'
-                    answer is ask Do you know the answer?
-                    if answer is correct_answer print 'good job!' else print 'Wrong! It was ' correct_answer
+                    answer is ask 'How much is 11 times 27?'
+                    if answer is correct_answer print 'good job!'
+                    else print 'Wrong! It was ' correct_answer
                     ```
 
                     ## Random numbers
@@ -590,9 +591,9 @@ adventures:
                     table is tables at random
                     number is numbers at random
                     correct_answer is table * number
-                    print 'how much is ' table ' times ' number '?'
-                    answer is ask Do you know the answer?
-                    if answer is correct_answer print 'okay' else print 'mistake! it was ' correct_answer
+                    answer is ask 'how much is ' table ' times ' number '?'
+                    if answer is correct_answer print 'okay'
+                    else print 'mistake! it was ' correct_answer
                     ```
 
                 start_code: "print Welcome to this calculator!"
@@ -610,7 +611,7 @@ adventures:
                         number2 is numbers at random
                         correctanswer is number1 * number2
                         print 'What is ' number1 ' times ' number2 '?'
-                        answer is ask Type your answer here...
+                        answer is ask 'Type your answer here...'
                         print 'Your answer is' answer
                         if answer is correctanswer
                             score is score + 1
@@ -700,11 +701,11 @@ adventures:
                        ```
                        print 'Welcome to Hedys restaurant!'
                        print 'Today we are serving pizza or lasagna.'
-                       food is ask What would you like to eat?
+                       food is ask 'What would you like to eat?'
                        print 'Great choice! The ' food ' is my favorite!'
-                       topping is ask Would you like meat or veggies on that?
+                       topping is ask 'Would you like meat or veggies on that?'
                        print food ' with ' topping ' is on its way!'
-                       drinks is ask What would you like to drink with that?
+                       drinks is ask 'What would you like to drink with that?'
                        print 'Thank you for your order.'
                        print 'Your ' food ' and ' drinks ' will be right there!'
                        ```
@@ -718,13 +719,13 @@ adventures:
                        ## Example Hedy Code
                        ```
                        print 'Welcome to Hedys restaurant!'
-                       special is ask Would you like to hear our specials today?
+                       special is ask 'Would you like to hear our specials today?'
                        if special is yes print 'Todays special is chicken piri piri and rice.' else print 'No problem.'
-                       food is ask What would you like to eat?
+                       food is ask 'What would you like to eat?'
                        print 'One ' food ', coming right up!'
-                       drink is ask What would you like to drink with that?
+                       drink is ask 'What would you like to drink with that?'
                        if drink is cola print 'Im sorry, we are out of cola!' else print 'Great choice!'
-                       anything is ask Would you like anything else?
+                       anything is ask 'Would you like anything else?'
                        print 'Let me repeat your order...'
                        print 'One ' food
                        if drink is cola print 'and...' else print 'One ' drinks
@@ -764,7 +765,7 @@ adventures:
                       print 'Welcome to Hedys restaurant'
                       print 'Here is our menu:'
                       print 'Our main courses are pizza, lasagne, or spaghetti'
-                      main is ask Which main course would you like?
+                      main is ask 'Which main course would you like?'
                       price is 0
                       if main is pizza price is 10
                       if main is lasagne price is 12
@@ -783,9 +784,9 @@ adventures:
                       print 'Our starters are salad, soup, or carpaccio'
                       print 'Our main courses are pizza, lasagne, or spaghetti'
                       print 'Our desserts are brownie, icecream, or milkshake'
-                      starter is ask Which starter would you like to have?
-                      main is ask Which main course would you like?
-                      dessert is ask Which dessert do you pick?
+                      starter is ask 'Which starter would you like to have?'
+                      main is ask 'Which main course would you like?'
+                      dessert is ask 'Which dessert do you pick?'
                       price is 0
                       if starter is soup price is price + 6 else price is price + 7
                       if main is pizza price is price + 10
@@ -814,11 +815,11 @@ adventures:
 
                     ```
                     print 'Welcome to Hedys restaurant!'
-                    people is ask How many people will be joining us today?
+                    people is ask 'How many people will be joining us today?'
                     print 'Great!'
                     print 'Todays menu has pizza or salad'
                     repeat people times
-                        food is ask What whould you like to order?
+                        food is ask 'What whould you like to order?'
                         print food
                         if food is pizza
                             price is price + 10
@@ -900,7 +901,7 @@ adventures:
                     ## Example Hedy Code
                     ```
                     print 'Im Hedy the fortune teller!'
-                    question is ask What do you want to know?
+                    question is ask 'What do you want to know?'
                     print 'This is your question: ' question
                     answers is yes, no, maybe
                     print 'My crystal ball says...' answers at random
@@ -917,7 +918,7 @@ adventures:
                     ```
                     print 'Im Hedy the fortune teller!'
                     print 'I can predict if youll win the lottery tomorrow!'
-                    person is ask Who are you?
+                    person is ask 'Who are you?'
                     if person is Hedy print 'You will definitely win!' else print 'Bad luck! Someone else will win!'
                     ```
 
@@ -929,7 +930,7 @@ adventures:
                     ```
                     print 'Im Hedy the fortune teller!'
                     print 'I can predict if youll win the lottery tomorrow!'
-                    person is ask Who are you?
+                    person is ask 'Who are you?'
                     goodanswer is Hurray! You win!, You will definitely win!, We have a winner!
                     badanswer is Bad luck! Try again!, Someone else will win, You lose!
                     if person is Hedy print goodanswer at random else print badanswer at random
@@ -950,7 +951,7 @@ adventures:
                    ```
                    print 'Im Hedy the fortune teller!'
                    print 'You can ask 3 questions!'
-                   repeat 3 times question is ask What do you want to know?
+                   repeat 3 times question is ask 'What do you want to know?'
                    answer is yes, no, maybe
                    repeat 3 times print 'My crystall ball says... ' answer at random
                    ```
@@ -977,7 +978,7 @@ adventures:
                    ```
                    print 'Im Hedy the fortune teller!'
                    print 'I can predict how many kids youll get when you grow up!'
-                   age is ask How old are you?
+                   age is ask 'How old are you?'
                    siblings is How many siblings do you have?
                    length is How tall are you in centimetres?
                    kids is length / age
@@ -992,9 +993,9 @@ adventures:
                    ```
                    print 'Im Hedy the silly fortune teller!'
                    print 'I will predict how smart you are!'
-                   football is ask On a scale 1-10 how much do you love football?
-                   bananas is ask How many bananas did you eat this week?
-                   hygiene is ask How many times did you wash your hands today?
+                   football is ask 'On a scale 1-10 how much do you love football?'
+                   bananas is ask 'How many bananas did you eat this week?'
+                   hygiene is ask 'How many times did you wash your hands today?'
                    result is bananas + hygiene
                    result is result * football
                    print 'You are ' result ' percent smart.'
@@ -1014,7 +1015,7 @@ adventures:
                  print 'You can ask me 3 questions.'
                  answers are yes, no, maybe
                  repeat 3 times
-                    question is ask What do you want to know?
+                    question is ask 'What do you want to know?'
                     print question
                     print 'My crystall ball says...' answers at random
                  ```
@@ -1101,7 +1102,7 @@ adventures:
                     print 'There are 3 doors in front of you...'
                     doors is 1,2,3
                     monsters is werewold, mummy, vampire, zombie
-                    chosendoor is ask Which door do you choose?
+                    chosendoor is ask 'Which door do you choose?'
                     print 'You chose door...' chosendoor
                     correctdoor is doors at random
                     if chosendoor is correctdoor print 'Great! Youve escaped!' else print 'Oh no! You are being eaten by a...' monsters at random

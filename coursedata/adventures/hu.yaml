@@ -471,9 +471,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     jo_valasz is 11 * 27
-                    print 'Mennyi 11 és 27 szorzata?'
-                    valasz is ask Tudod a választ?
-                    if valasz is jo_valasz print 'nagyszerű!' else print 'Nem jó! Ennyi: ' jo_valasz
+                    valasz is ask 'Mennyi 11 és 27 szorzata?'
+                    if valasz is jo_valasz print 'nagyszerű!'
+                    else print 'Nem jó! Ennyi: ' jo_valasz
                     ```
                     ## Véletlen számok
                     Azt is engedélyezheted, hogy a számítógép véletlenszerű számításokat végezzen véletlenszámok használatával.
@@ -486,9 +486,9 @@ adventures:
                     tabla is tablazat at random
                     szam is szamok at random
                     jo_valasz is tabla * szam
-                    print 'Mennyi ' tabla ' és ' szam ' szorzata?'
-                    valasz is ask Tudod a választ?
-                    if valasz is jo_valasz print 'rendben' else print 'hiba! ennyi: ' jo_valasz
+                    valasz is ask 'Mennyi ' tabla ' és ' szam ' szorzata?'
+                    if valasz is jo_valasz print 'rendben'
+                    else print 'hiba! ennyi: ' jo_valasz
                     ```
     restaurant:
         name: Étterem
@@ -569,11 +569,11 @@ adventures:
                     ```
                     print 'Üdvözlünk a Hedy Étteremben!'
                     print 'Ma pizzát vagy lasagnat szolgálunk fel.'
-                    etel is ask Mit szeretnél enni?
+                    etel is ask 'Mit szeretnél enni?'
                     print 'Jó választás! A(z) ' etel ' nekem is kedvencem!'
-                    feltet is ask Szeretnél hús vagy zöldséget rá?
+                    feltet is ask 'Szeretnél hús vagy zöldséget rá?'
                     print etel ' , rajta a(z) ' feltet ' már úton van!'
-                    ital is ask Mit szeretnél inni hozzá?
+                    ital is ask 'Mit szeretnél inni hozzá?'
                     print 'Köszönjük a rendelésedet.'
                     print 'A(z) ' etel ' és a(z) ' ital ' mindjárt itt lesz!'
                     ```
@@ -587,13 +587,13 @@ adventures:
                     ## Példa Hedy kódra
                     ```
                     print 'Üdvözlünk a Hedy Étteremben!'
-                    kulonleges is ask Szeretnél hallani ma a különlegességeinkről?
+                    kulonleges is ask 'Szeretnél hallani ma a különlegességeinkről?'
                     if kulonleges is igen print 'Mai különlegességünk piri piri csirek és rizs.' else print 'Nem probléma.'
-                    etel is ask Mit szeretnél enni?
+                    etel is ask 'Mit szeretnél enni?'
                     print 'Egy ' etel', mindjárt jön!'
-                    ital is ask Mit szeretnél inni hozzá?
+                    ital is ask 'Mit szeretnél inni hozzá?'
                     if ital is kóla print 'Sajnálom a kóla kifogyott!' else print 'Jó választás!!'
-                    mas is ask Szeretnél valami mást?
+                    mas is ask 'Szeretnél valami mást?'
                     print 'Hadd ismételjem el a rendelésedet...'
                     print 'Egy ' etel
                     if ital is kóla print 'és...' else print 'Egy ' ital
@@ -615,7 +615,7 @@ adventures:
                     print 'Üdvözlünk a Hedy Étteremben'
                     print 'Ez a menünk:'
                     print 'Fő ételeink: pizza, lasagne vagy spagetti'
-                    foetel is ask Melyik főételt szeretnéd?
+                    foetel is ask 'Melyik főételt szeretnéd?'
                     ar is 0
                     if foetel is pizza ar is 1000
                     if foetel is lasagne ar is 1200
@@ -635,9 +635,9 @@ adventures:
                     print 'Előételeink: saláta, leves, vagy sajt'
                     print 'Fő ételeink: pizza, lasagne vagy spagetti'
                     print 'Desszertjeink: piskóta, fagyi vagy turmix'
-                    eloetel is ask Melyik előételt szeretnéd?
-                    foetel is ask Melyik főételt szeretnéd?
-                    desszert is ask Melyik desszertet választod?
+                    eloetel is ask 'Melyik előételt szeretnéd?'
+                    foetel is ask 'Melyik főételt szeretnéd?'
+                    desszert is ask 'Melyik desszertet választod?'
                     ar is 0
                     if eloetel is leves ar is ar + 600 else ar is ar + 700
                     if foetel is pizza ar is ar + 1000
