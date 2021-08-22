@@ -993,8 +993,7 @@ def filter_and_translate_terminals(list):
 
     return new_terminals
 
-def beautify_parse_error(error_message):
-    character_found = error_message.split("'")[1]
+def beautify_parse_error(character_found):
     character_found = translate_characters(character_found)
     return character_found
 
@@ -1065,7 +1064,7 @@ def transpile_inner(input_string, level, sub = 0):
         try:
             location = e.line, e.column
             characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
-            character_found  = beautify_parse_error(e.args[0])
+            character_found  = beautify_parse_error(e.char)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
             raise HedyException('Parse', level=level, location=location, character_found=character_found) from e
