@@ -63,9 +63,15 @@ echo: _ECHO (_SPACE text)?
 elifs: _EOL _SPACE* _ELIF _SPACE condition _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block"
 elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block"
 equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
+<<<<<<< HEAD
 for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) (_SPACE _STEP _SPACE (NUMBER | var))? _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block"
 ifelse: _IF _SPACE condition _SPACE command _SPACE _ELSE _SPACE command
 ifs: _IF _SPACE condition _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block"//'if' cannot be used in Python, hence the name of the rule is 'ifs'
+=======
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) (_SPACE _STEP _SPACE (NUMBER | var))? _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"
+ifelse: _IF _SPACE condition _SPACE command (_SPACE|_EOL*) _ELSE _SPACE command
+ifs: _IF _SPACE condition _COLON _EOL (_SPACE+ command) (_EOL _SPACE+ command)* _EOL "end-block"//'if' cannot be used in Python, hence the name of the rule is 'ifs'
+>>>>>>> main
 in_list_check: textwithoutspaces _SPACE _IN _SPACE var
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 invalid: textwithoutspaces _SPACE textwithspaces
