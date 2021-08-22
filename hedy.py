@@ -258,7 +258,13 @@ class UsesTurtle(Transformer):
     def turn(self, args):
         return True
 
+    # somehow a token (or only this token?) is not picked up by the default rule so it needs
+    # its own rule
+    def NUMBER(self, args):
+        return False
 
+    def NAME(self, args):
+        return False
 
 
 
