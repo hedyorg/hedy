@@ -101,6 +101,22 @@ class TestsLevel5(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+
+  def test_repeat_turtle(self):
+
+    code = textwrap.dedent("""\
+    repeat 3 times forward 100""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    for i in range(int('3')):
+      t.forward(100)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
+
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("abc felienne 123", self.level)
