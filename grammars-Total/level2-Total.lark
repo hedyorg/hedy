@@ -43,21 +43,21 @@ _RIGHT_BRACKET : ")"
 _RIGHT_SQUARE_BRACKET : "]"
 _SMALLER : "<"
 _SMALLER_EQUALS : "<="
-_SPACE: " "
+_SPACE: " "+
 _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
 _TURN: "turn"
 _WHILE: "while"
-ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
+ask: var _SPACE _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
 command: print | ask | turtle | assign | assign_list | invalid_space | invalid
 echo: _ECHO (_SPACE text)?
 index : DIGIT+
 invalid: textwithoutspaces text?
-invalid_space: _SPACE+ text
+invalid_space: _SPACE text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 print: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*
 program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
