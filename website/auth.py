@@ -589,4 +589,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations (lang, 'Auth'))
