@@ -172,9 +172,13 @@ class AwsDynamoStorage(TableStorage):
         return self._decode(result.get('Item', None))
 
     def query(self, table_name, key, reverse=False):
+        assert len(key.keys ()) == 1
+        key_field = list (key.keys ()) [0]
+        key_value = key [key_field]
         result = self.db.query(
             TableName=self.db_prefix + '-' + table_name,
-            Key = self._encode(key),
+            KeyConditionExpression = key_field + ' = :value',
+            ExpressionAttributeValues = {':value': self.SERIALIZER.serialize (key_value)},
             ScanIndexForward = not reverse)
         return list(map(self._decode, result.get('Items', [])))
 
