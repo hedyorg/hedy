@@ -14,7 +14,9 @@ adventures:
 
                     Első sorként használd ezt a kódot:
 
-                    `kérdezd meg, ki a történeted főszereplője`
+                    ```
+                    ask kérdezd meg, ki a történeted főszereplője
+                    ```
 
                     Az első sor után kezdd a `print` utasítással, ha a mondatot ki kell íratni.
                     Akkor használd az `echo` szót, ha azt szeretnéd, hogy főszereplő neve a mondat végén legyen.
@@ -60,8 +62,14 @@ adventures:
                     ```
                     ## Mi a következő lépés?
                     Véletlenül megpróbáltál olyan mondatot készíteni, amely tartalmazza a nev szót?
-                    Például. `print ki a nevem a nev '. Próbáld ki, ha még nem tetted meg.
-                    Ez nem működik megfelelően, kiírja az én Henk a Henk kódomat. Ezt meg tudod majd
+                    Például.
+
+                    ```
+                    print ki a nevem a nev '
+                    ```
+
+                    Próbáld ki, ha még nem tetted meg.
+                    Ez nem működik megfelelően, kiírja az én Harry a Harry kódomat. Ezt meg tudod majd
                     oldani a 3. szinten.
             3:
                 start_code: print A történeted ide lesz írva!
@@ -268,20 +276,6 @@ adventures:
         default_save_name: Kocka
         image: dice.png
         levels:
-            1:
-                start_code: ask Dobnál egyet?
-                story_text: |-
-                    ## Kocka
-                    Az 1. szinten a saját kockánkkal kezdünk.
-
-                    ## Példa Hedy kód
-                    ```
-                    ask Dobnál egyet?
-                    echo You said:
-                    ```
-
-                    ## Előretekintés
-                    Ez a kód csak megismétli a játékos válaszát. A következő szinteken a számítógép valóban választani fog.
             2:
                 start_code: print Mit dobunk ezúttal?
                 story_text: |-

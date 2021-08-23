@@ -14,7 +14,9 @@ adventures:
 
                     Puedes usar esta línea para comenzar tu programa:
 
-                    `ask Quién es el protagonista de tu historia?`
+                    ```
+                    ask Quién es el protagonista de tu historia?
+                    ```
 
                     En la segunda línea puedes empezar usando `print` si quieres imprimir una oración.
                     Puedes usar `echo` si quieres poner el nombre del protagonista al final de la oración.
@@ -62,9 +64,13 @@ adventures:
                     ```
 
                     ## Avance
-                    Haz por casualidad probado escribir una oración donde está incluída la palabra "nombre"?
+                    Haz por casualidad probado escribir una oración donde está incluída la palabra "nombre", por ejemplo:
 
-                    Por ejemplo: `print mi nombre es nombre`. Puedes probarlo ahora si no lo has intentado todavía.
+                    ```
+                    print mi nombre es nombre
+                    ```
+
+                    Puedes probarlo ahora si no lo has intentado todavía.
 
                     Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `mi Manuel es Manuel`. Pero ahora puedes resolver este problema en el nivel 3.
 
@@ -281,22 +287,6 @@ adventures:
         image: "dice.png"
         default_save_name: "Dados"
         levels:
-            1:
-                story_text: |
-                    ## Dados
-                    En el nivel 1 empezamos por crear nuestros propios dados.
-
-                    ## Programa Hedy de ejemplo
-
-                    ```
-                    ask 'Quieres hacer tus propios dados?'
-                    echo Tu dices:
-                    ```
-
-                    ## Avance
-                    Este programa sólo repite la respuesta del jugador. En los próximos niveles la computadora podrá tirar los dados.
-
-                start_code: "ask Tienes ganas de crear un juego de dados?"
             2:
                 story_text: |
                     ## Dados en el nivel 2
