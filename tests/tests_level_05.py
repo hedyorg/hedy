@@ -40,6 +40,7 @@ class TestsLevel5(unittest.TestCase):
     print('ik heet'+naam)""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
 
   def test_print_with_comma(self):
@@ -54,6 +55,7 @@ class TestsLevel5(unittest.TestCase):
     print('ik heet,'+naam)""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_transpile_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
@@ -62,6 +64,7 @@ class TestsLevel5(unittest.TestCase):
     t.right(90)
     t.forward(100)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
@@ -72,6 +75,7 @@ class TestsLevel5(unittest.TestCase):
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
     self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_print_Spanish(self):
     code = textwrap.dedent("""\
@@ -83,6 +87,7 @@ class TestsLevel5(unittest.TestCase):
     print('Cuál es tu color favorito?')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
@@ -94,6 +99,23 @@ class TestsLevel5(unittest.TestCase):
     color = input('Cuál es tu color favorito?')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
+  def test_repeat_turtle(self):
+
+    code = textwrap.dedent("""\
+    repeat 3 times forward 100""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    for i in range(int('3')):
+      t.forward(100)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
 
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
@@ -115,6 +137,7 @@ class TestsLevel5(unittest.TestCase):
       print('me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     expected_output = textwrap.dedent("""\
     me wants a cookie!
@@ -140,6 +163,7 @@ class TestsLevel5(unittest.TestCase):
       print('me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     expected_output = textwrap.dedent("""\
     me wants a cookie!
@@ -165,6 +189,7 @@ class TestsLevel5(unittest.TestCase):
         print('mooi!')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_repeat_over_9_times(self):
 
@@ -178,6 +203,7 @@ class TestsLevel5(unittest.TestCase):
       print('me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     expected_output = textwrap.dedent("""\
     me wants a cookie!

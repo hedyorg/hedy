@@ -111,10 +111,10 @@ adventures:
 
                     ## Παράδειγμα κώδικα Hedy
                     ```
-                    name is ask Ποιός περπατάει στο δάσος;
+                    name is ask 'Ποιός περπατάει στο δάσος;'
                     print 'Ο' name 'περπατάει στο δάσος'
                     print 'Ο' name 'συναντά ένα τέρας'
-                    end is ask Θα ήθελες ένα ευχάριστο ή ένα δυσάρεστο φινάλε (good or bad)?
+                    end is ask 'Θα ήθελες ένα ευχάριστο ή ένα δυσάρεστο φινάλε (good or bad)?'
                     if the end is good print 'Ο' name 'παίρνει το σπαθί και το τέρας τρέχει γρήγορα μακριά' else print 'Το τέρας τρώει τον' name
                     ```
                 start_code: "print Εδώ θα βρίσκεται σύντομα η ιστορία σου!"
@@ -478,7 +478,7 @@ adventures:
                     ```
                     options is πέτρα, ψαλίδι, χαρτί
                     computer choice is ...
-                    choice is ask Τί επιλέγεις;
+                    choice is ask 'Τί επιλέγεις;'
                     print 'εσύ επέλεξες' ...
                     print 'ο υπολογιστής επέλεξε' ...
                     if ... is ... print 'ισοπαλία!' else print 'όχι ισοπαλία'
@@ -509,9 +509,9 @@ adventures:
                     ## Παράδειγμα κώδικα Hedy
                     ```
                     correct_answer is 11 * 27
-                    print 'Πόσο κάνει 11 φορές το 27;'
-                    answer is ask Ξέρεις την απάντηση;
-                    if answer is correct_answer print 'συγχαρητήρια!' else print 'Λάθος! Ήταν ' correct_answer
+                    answer is ask 'Πόσο κάνει 11 φορές το 27;'
+                    if answer is correct_answer print 'συγχαρητήρια!'
+                    else print 'Λάθος! Ήταν ' correct_answer
                     ```
 
                     ## Τυχαίοι αριθμοί
@@ -526,9 +526,9 @@ adventures:
                     table is tables at random
                     number is numbers at random
                     correct_answer is table * number
-                    print 'πόσο είναι ' table ' φορές ' number '?'
-                    answer is ask Γνωρίζεις την απάντηση;
-                    if answer is correct_answer print 'οκ' else print 'λάθος! ήταν ' correct_answer
+                    answer is ask 'πόσο είναι ' table ' φορές ' number '?'
+                    if answer is correct_answer print 'οκ'
+                    else print 'λάθος! ήταν ' correct_answer
                     ```
 
                 start_code: "print Καλωσήλθες σε αυτήν την αριθμομηχανή!"
