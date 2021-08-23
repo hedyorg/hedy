@@ -921,10 +921,10 @@ adventures:
                     print 'U kunt hier uw bestelling doorgeven'
                     mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                      eten is ask 'Wat wilt u eten?'
-                      print eten
-                      drinken is ask 'Wat wilt u drinken?'
-                      print drinken
+                        eten is ask 'Wat wilt u eten?'
+                        print eten
+                        drinken is ask 'Wat wilt u drinken?'
+                        print drinken
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
@@ -938,15 +938,15 @@ adventures:
                     print 'U kunt hier uw bestelling doorgeven'
                     mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                      eten is ask 'Wat wilt u eten?'
-                      print eten
-                      if eten is patat
-                        saus is ask 'Wat voor saus wil je?'
-                        print saus
-                      drinken is ask 'Wat wilt u drinken?'
-                      if drinken is cola
-                         light is ask 'Normaal of light?'
-                      print drinken light
+                        eten is ask 'Wat wilt u eten?'
+                        print eten
+                        if eten is patat
+                            saus is ask 'Wat voor saus wil je?'
+                            print saus
+                        drinken is ask 'Wat wilt u drinken?'
+                        if drinken is cola
+                            light is ask 'Normaal of light?'
+                            print drinken light
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
@@ -975,14 +975,14 @@ adventures:
                     print 'U kunt hier uw bestelling doorgeven'
                     mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     for i in range 1 to mensen
-                      print i 'e bestelling:'
-                      eten is ask 'Wat wilt u eten?'
-                      print eten
-                      if eten is patat
-                        saus is ask 'Wat voor saus wil je?'
-                        print saus
-                      drinken is ask 'Wat wilt u drinken?'
-                      print drinken
+                        print i 'e bestelling:'
+                        eten is ask 'Wat wilt u eten?'
+                        print eten
+                        if eten is patat
+                            saus is ask 'Wat voor saus wil je?'
+                            print saus
+                        drinken is ask 'Wat wilt u drinken?'
+                        print drinken
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
