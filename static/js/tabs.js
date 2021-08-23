@@ -82,7 +82,7 @@ $(function() {
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
   if (window.State && window.State.adventure_name) {
-    switchToTab(adventureName);
+    switchToTab(window.State.adventure_name);
   }
   else if (window.location.hash) {
     // If we have an '#anchor' in the URL, switch to that tab
