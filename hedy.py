@@ -1045,7 +1045,7 @@ def preprocess_blocks(code):
     return "\n".join(processed_code)
 
 def contains_blanks(code):
-    return " _ " or " _\n" in code
+    return (" _ " in code) or (" _\n" in code)
 
 def transpile_inner(input_string, level, sub=0):
     punctuation_symbols = ['!', '?', '.']
