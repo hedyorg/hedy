@@ -23,9 +23,9 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    ask De hoofdpersoon van dit verhaal is ...
+                    ask De hoofdpersoon van dit verhaal is
                     print De hoofdpersoon gaat nu in het bos lopen
-                    echo Hij is wel een beetje bang die ...
+                    echo Hij is wel een beetje bang, die
                     print Overal hoort hij gekke geluiden
                     print Hij is bang dat dit een spookbos is
                     ```
@@ -141,7 +141,7 @@ adventures:
             7: 
                 story_text: |
                     ## Verhaal
-                    In level 7 kun je je verhaal écht interactief maken! In dit level is het `if` commando namelijk veranderd, waardoor je in staat bent om meerdere regels te printen na een if.
+                    In level 7 kun je je verhaal écht interactief maken! In dit level is het `if` commando namelijk veranderd, waardoor je meerdere regels kan printen na een `if`.
                     Zo kun je de lezer van je verhaal een keuze laten maken. Na de keuze gaat het verhaal verder op basis van die keuze. Kijk maar naar het voorbeeld.
                     
                     ## Voorbeeld Hedy code
@@ -152,12 +152,12 @@ adventures:
                     dapper is ask 'Gaat 'hoofdpersoon ' op het geluid af?' 
                     if dapper is ja
                         print 'Dapper stapt ' hoofdpersoon ' op het geluid af'
-                        print ...
+                        print _
                     else
                         print 'Snel zoekt 'hoofdpersoon ' een verstopplek'
-                        print ...
+                        print _
                     ```
-                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf de puntjes in! Wat gebeurt er verder?
+                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: ""
                 
             
@@ -181,7 +181,7 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    repeat ... ... print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -355,15 +355,15 @@ adventures:
                     ## Afwasprogramma
                     Met aanhalingstekens kun je je afwasprogramma mooier maken.
                     Deze keer is de voorbeeldcode niet helemaal compleet.
-                    Maak jij de code af door op de stipjes de juiste commando's of tekens in te vullen?
-                    Op iedere drie stipjes moet 1 commando komen.
+                    Maak jij de code af door op de lage streepjes de juiste commando's of tekens in te vullen?
+                    Op ieder streepje moet steeds één woord of teken komen.
 
                     Tip: Vergeet de aanhalingstekens niet!
                     ## Voorbeeld Hedy code
                     ```
                     mensen is mama, papa, Emma, Sophie
-                    print ... de afwas wordt gedaan door ...
-                    print mensen at ...
+                    print _ de afwas wordt gedaan door _
+                    print mensen at _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             4:
@@ -378,8 +378,8 @@ adventures:
                     ```
                     mensen is mama, papa, Emma, Sophie
                     afwasser is mensen at random
-                    if afwasser is Sophie print ... chips ik moet de afwas doen ...
-                    else print ' gelukkig geen afwas want ' ... 'wast al af'
+                    if afwasser is Sophie print _ chips ik moet de afwas doen _
+                    else print ' gelukkig geen afwas want ' _ 'wast al af'
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             5:
@@ -390,7 +390,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     mensen is mama, papa, Emma, Sophie
-                    repeat ... ... print 'de afwasser is ' ...
+                    repeat _ _ print 'de afwasser is ' _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             6:
@@ -456,8 +456,8 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is 1, 2, 3, 4, 5, regenworm
-                    print ... jij gooide ...
-                    print ... ... ... <- hier moet je het kiezen programmeren
+                    print _ jij gooide _
+                    print _ _ _ <- hier moet je het kiezen programmeren
                     ```
 
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
@@ -472,10 +472,10 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is 1, 2, 3, 4, 5, regenworm
-                    worp is ...
-                    print 'je hebt ' ... ' gegooid'
-                    if ... is regenworm print 'Je mag stoppen met gooien.'
-                    ... print 'Je moet nog een keer hoor!'
+                    worp is _
+                    print 'je hebt ' _ ' gegooid'
+                    if _ is regenworm print 'Je mag stoppen met gooien.'
+                    _ print 'Je moet nog een keer hoor!'
                     ```
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
             5:
@@ -489,7 +489,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is 1, 2, 3, 4, 5, regenworm
-                    repeat ... ... print ___
+                    repeat _ _ print ___
                     ```
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
             6:
@@ -577,7 +577,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is steen, schaar, papier
-                    print ... De computer koos: ... ... at ...
+                    print _ De computer koos: _ _ at _
                     ```
                 start_code: "print 'Welkom bij jouw eigen steen schaar papier!'"
             4:
@@ -593,11 +593,11 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     opties is steen, schaar, papier
-                    computerkeuze is ...
+                    computerkeuze is _
                     keuze is ask 'Wat kies jij?'
-                    print 'jij koos' ...
-                    print 'computer koos' ...
-                    if ... is ... print 'gelijkspel!' else print 'geen gelijkspel'
+                    print 'jij koos' _
+                    print 'computer koos' _
+                    if _ is _ print 'gelijkspel!' else print 'geen gelijkspel'
                     if keuze is steen and computerkeuze is papier print 'computer wint'
                     ```
 
@@ -685,7 +685,7 @@ adventures:
                     ```
                     print Hoi, ik ben Hedy de waarzegger!
                     ask Wie ben jij?
-                    print Ik voorspel... Ik voorspel... 
+                    print Ik voorspel... Ik voorspel...
                     echo Jouw naam is...
                     ```
                     
@@ -760,9 +760,9 @@ adventures:
                     ```
                     
                     ##Uitdaging
-                    Op deze manier kun je nog veel meer programma's schrijven! Je zou bijvoorbeeld kunnen voorspellen welke club de Eredivisie wint...
+                    Op deze manier kun je nog veel meer programma's schrijven! Je zou bijvoorbeeld kunnen voorspellen welke club de Eredivisie wint.
                     Of je zou de toverspiegel uit Sneeuwwitje kunnen laten voorspellen dat jij de mooiste van het land bent (en de rest natuurlijk niet!). 
-                    Of... er zijn nog heel veel meer opties, laat je fantasie de vrije loop en wees creatief!
+                    Of er zijn nog heel veel meer opties, laat je fantasie de vrije loop en wees creatief!
                 start_code: ""
                     
             5:
@@ -855,7 +855,7 @@ adventures:
             6:
                 story_text: |
                     ## Restaurant level 6
-                        In level 6 kun je in je restaurant prijzen toevoegen en berekenen! 
+                    In level 6 kun je in je restaurant prijzen toevoegen en berekenen!
                     
                     ## Voorbeeld Hedy Code
                       Je kunt een simpel restaurant maken:
@@ -900,12 +900,12 @@ adventures:
                       print 'Bedankt en eet smakelijk!'
                       ```
                       ## Uitdaging
-                      Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld...
-                      ... mensen korting geven met een geheime code?
-                      ... vragen hoeveel mensen er komen en de prijs daarop aanpassen?
-                      ... nog een gang toevoegen?
-                      ... een kindermenu toevoegen?
-                      ... nog iets anders?
+                      Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld:
+                      - mensen korting geven met een geheime code?
+                      - vragen hoeveel mensen er komen en de prijs daarop aanpassen?
+                      - nog een gang toevoegen?
+                      - een kindermenu toevoegen?
+                      - nog iets anders?
                       
                 start_code: "print 'Welkom' "
           
@@ -931,7 +931,7 @@ adventures:
                                        
                     ## Toevoegingen met `if`
                     Je kunt natuurlijk ook zorgen dat er vervolgvragen komen. 
-                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola... 
+                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola.
                     En zo kun je vast zelf nog veel meer vragen bedenken! 
                     ```
                     print 'Welkom bij McHedy!'
