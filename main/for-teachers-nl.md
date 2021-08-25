@@ -138,12 +138,7 @@ In level 2 worden variabelen geïntroduceerd. Hier vind je een [instructievideo]
 
 `print dieren at random` - Hedy kiest een willekeurig woord (of getal) uit het lijstje dat je hebt aangemaakt met dieren is.
 
-### Opdrachten bij dit level
 
-- Verhaal schrijven
-- Hedy de Waarzegger
-- Steen, papier, schaar
-- Wie doet de afwas?
 
 ### Veelgemaakte fouten
 
