@@ -271,6 +271,8 @@ class TranspileJob:
                 firstline = f.readline()
                 self.codestart = f.tell()
 
+            self.level = 0
+
             if firstline.find("=") > -1:
                 self.level = int(firstline.split("=")[-1])
             else:
@@ -301,6 +303,7 @@ class TranspileJob:
             f.seek(self.codestart)
             code = f.read()
         code = "\n".join(line for line in code.splitlines() if len(line) > 0)
+
         # Make sure that the last line is "\n".
         if len(code) > 0:
             return code if code[-1] == "\n" else code + "\n"
