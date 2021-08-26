@@ -561,7 +561,7 @@ def auth_templates (page, lang, menu, request):
     if page in ['signup', 'login', 'recover', 'reset']:
         return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='login')
     if page == 'admin':
-        if not is_admin (request):
+        if not is_testing_request (request) and not is_admin (request):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
@@ -589,4 +589,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations (lang, 'Auth'))

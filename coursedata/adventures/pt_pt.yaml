@@ -25,7 +25,7 @@ adventures:
                     ```
                     ask O(A) personagem principal desta história é ...
                     print O(A) personagem principal vai caminhar agora na floresta
-                    echo Está um pouco(a) assustado(a) ...
+                    echo Está um pouco(a) assustado(a)
                     print Ouve barulhos estranhos por toda a parte
                     print Receia que esta floresta seja assombrada
                     ```
@@ -153,7 +153,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    repeat ... ... print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -236,15 +236,15 @@ adventures:
                     With quotation marks you can make your dishwashing planning more beautiful.
                     This time the sample code is not quite complete.
 
-                    Can you complete the code by entering the correct commands or characters on the dots?
-                    Every three dots must be replaced with one command.
+                    Can you complete the code by entering the correct commands or characters on the blanks?
+                    Every blank must be replaced with one command.
 
                     Tip: Don't forget the quotation marks!
                     ## Example Hedy code
                     ```
                     people is mom, dad, Emma, Sophie
-                    print ... the dishes are done by ...
-                    print people at ...
+                    print _ the dishes are done by _
+                    print people at _
                     ```
                 start_code: "print 'Who does the dishes?'"
             4:
@@ -259,7 +259,7 @@ adventures:
                     ```
                     people is mom, dad, Emma, Sophie
                     dishwasher is people at random
-                    if dishwasher is Sophie print ... too bad I have to do the dishes ... else print 'luckily no dishes because' ... 'is already washing up'
+                    if dishwasher is Sophie print _ too bad I have to do the dishes _ else print 'luckily no dishes because' _ 'is already washing up'
                     ```
                 start_code: "print 'Who does the dishes?'"
             5:
@@ -270,7 +270,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     people is mom, dad, Emma, Sophie
-                    repeat ... ... print 'the dishwasher is' ...
+                    repeat _ _ print 'the dishwasher is' _
                     ```
                 start_code: "print 'Who does the dishes?'"
             6:
@@ -337,8 +337,8 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    print ... you threw ...
-                    print ... ... ... <- here you have to program the dialing
+                    print _ you threw _
+                    print _ _ _ <- here you have to program the choice
                     ```
 
                 start_code: "print What will the die indicate this time?"
@@ -353,9 +353,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    throw is ...
-                    print 'you have' ... 'thrown'
-                    if ... is earthworm print 'You can stop throwing.' ... print 'You have to hear it again!'
+                    throw is _
+                    print 'you have' _ 'thrown'
+                    if _ is earthworm print 'You can stop throwing.' _ print 'You have to hear it again!'
                     ```
                 start_code: "print What will the die indicate this time?"
             5:
@@ -369,7 +369,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    repeat ... ... print ___
+                    repeat _ _ print ___
                     ```
                 start_code: "print What will the die indicate this time?"
             6:
@@ -388,7 +388,7 @@ adventures:
                     throw is choices at random
                     print 'you threw' throw
                     if throw is earthworm points is points + 5 else points is points + throw
-                    print 'those are' points
+                    print 'those are' points ' points'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
 
@@ -453,12 +453,12 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors in level 3
                     In level 3 we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the dots?
+                    Do you complete the code by entering the correct commands or characters on the blanks?
 
                     ## Example Hedy code
                     ```
                     choices is rock, paper, scissors
-                    print ... The computer chose: ... ... at ...
+                    print _ The computer chose: _ _ at _
                     ```
                 start_code: "print 'Welcome to your own rock scissors paper!'"
             4:
@@ -474,11 +474,11 @@ adventures:
                     ## Example Hedy code
                     ```
                     options is rock, paper, scissors
-                    computer choice is ...
+                    computer choice is _
                     choice is ask What do you choose?
-                    print 'you chose' ...
-                    print 'computer chose' ...
-                    if ... is ... print 'tie!' else print 'no tie'
+                    print 'you chose' _
+                    print 'computer chose' _
+                    if _ is _ print 'tie!' else print 'no tie'
                     if choice is stone and computer choice is paper print 'computer wins'
                     ```
 
@@ -731,11 +731,11 @@ adventures:
                       ```
                       ## Challenge
                       You can add many more things to your virtual restaurant. For example, can you...
-                      ... ask how many people are coming and multiply the price by that amount?
-                      ... add another course?
-                      ... give people a discount when they enter a (secret) couponcode?
-                      ... add a children's menu?
-                      ... think of other fun things to add?
+                      - ask how many people are coming and multiply the price by that amount?
+                      - add another course?
+                      - give people a discount when they enter a (secret) couponcode?
+                      - add a children's menu?
+                      - think of other fun things to add?
 
                 start_code: ""
             7:

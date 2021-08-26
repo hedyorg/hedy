@@ -227,4 +227,28 @@ class TestsLevel6(unittest.TestCase):
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
 
+  def test_print_and_else(self):
+      code = textwrap.dedent("""\
+      keuzes is 1, 2, 3, 4, 5, regenworm
+      punten is 0
+      worp is keuzes at random
+      if worp is regenworm punten is punten + 5
+      else punten is punten + worp
+      print 'dat zijn dan ' punten""")
+
+      result = hedy.transpile(code, self.level)
+
+      expected = textwrap.dedent("""\
+      keuzes = ['1', '2', '3', '4', '5', 'regenworm']
+      punten = '0'
+      worp=random.choice(keuzes)
+      if str(worp) == str('regenworm'):
+        punten = int(punten) + int(5)
+      else:
+        punten = int(punten) + int(worp)
+      print('dat zijn dan '+str(punten))""")
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
 

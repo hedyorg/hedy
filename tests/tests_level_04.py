@@ -218,7 +218,6 @@ class TestsLevel4(unittest.TestCase):
 
   def test_print_if_else_with_ask(self):
 
-
     code = textwrap.dedent("""\
     kleur is ask 'Wat is je lievelingskleur?'
     if kleur is groen print 'mooi!' else print 'niet zo mooi'""")

@@ -1044,16 +1044,19 @@ def preprocess_blocks(code):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+def contains_blanks(code):
+    return (" _ " in code) or (" _\n" in code)
 
-def transpile_inner(input_string, level, sub = 0):
+def transpile_inner(input_string, level, sub=0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-
     parser = get_parser(level, sub)
+
+    if contains_blanks(input_string):
+        raise HedyException('Has Blanks')
 
     if level >= 7:
         input_string = preprocess_blocks(input_string)
-        # print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
