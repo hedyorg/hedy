@@ -162,51 +162,51 @@ adventures:
                 
             8: 
                 story_text: |
-                ## Verhaal
-                Hoe langer en meer if commandos in je verhaal, hoe interectiever het verhaal wordt. Het wordt natuurlijk ook lastiger dus let goed op het inspringen! 
-                Hieronder zie je een voorbeeld van een echt interactief verhaal over een ridder. 
-                
-                ## Voorbeeld Hedy code
-                ```
-                naam is ask 'Hoe heet je?'
-                hijzij is ask 'Ben je een hij of een zij?'
-                print 'Ridder ' naam ' loopt door een bos '
-                print hijzij ' is op zoek naar een schat, die diep in het woud verborgen ligt'
-                print 'Er gaan verhalen rond dat de schat bewaakt wordt door een verschrikkelijke draak'
-                print 'maar ridder ' naam ' stapt dapper voort'
-                print 'Totdat ' hijzij ' bij een splitsing komt'
-                zwaard is kwijt
-                spel is aan
-                for i in range 0 to 2
-                  if spel is aan
-                    pad is ask 'Welk pad kiest ridder ' naam ' ?'
-                    if pad is links
-                      if zwaard is gevonden
-                        print 'Met het zwaard is ridder ' naam ' niet te stoppen!'
-                        print hijzij ' verslaat de draak!'
-                        spel is uit
-                      else
-                        print 'Ridder ' naam ' treft een draak aan, maar ' hijzij ' heeft geen wapen'
-                        print hijzij ' wordt verslagen door de draak'
-                        print 'Helaas, probeer het opnieuw'
-                        spel is uit
-                    if pad is rechts
-                      if zwaard is kwijt
-                        print 'Ridder ' naam ' vindt een zwaard'
-                      if zwaard is gevonden
-                        print 'Hier is niks meer te vinden'
-                      print hijzij ' loopt terug naar de splitsing'
-                      zwaard is gevonden
+                    ## Verhaal
+                    Hoe langer en meer if commandos in je verhaal, hoe interectiever het verhaal wordt. Het wordt natuurlijk ook lastiger dus let goed op het inspringen!
+                    Hieronder zie je een voorbeeld van een echt interactief verhaal over een ridder.
+
+                    ## Voorbeeld Hedy code
                     ```
-                    ## Uitdaging
-                    Dit verhaal gaat over een ridder, maar misschien wil je zelf wel een verhaal maken over iets anders. Gelukkig is alles mogelijk in Hedy! 
-                    Verzin en programmeer je eigen verhaal en spiek voor wat inspiratie gerust in het voorbeeld!
+                    naam is ask 'Hoe heet je?'
+                    hijzij is ask 'Ben je een hij of een zij?'
+                    print 'Ridder ' naam ' loopt door een bos '
+                    print hijzij ' is op zoek naar een schat, die diep in het woud verborgen ligt'
+                    print 'Er gaan verhalen rond dat de schat bewaakt wordt door een verschrikkelijke draak'
+                    print 'maar ridder ' naam ' stapt dapper voort'
+                    print 'Totdat ' hijzij ' bij een splitsing komt'
+                    zwaard is kwijt
+                    spel is aan
+                    for i in range 0 to 2
+                      if spel is aan
+                        pad is ask 'Welk pad kiest ridder ' naam ' ?'
+                        if pad is links
+                          if zwaard is gevonden
+                            print 'Met het zwaard is ridder ' naam ' niet te stoppen!'
+                            print hijzij ' verslaat de draak!'
+                            spel is uit
+                          else
+                            print 'Ridder ' naam ' treft een draak aan, maar ' hijzij ' heeft geen wapen'
+                            print hijzij ' wordt verslagen door de draak'
+                            print 'Helaas, probeer het opnieuw'
+                            spel is uit
+                        if pad is rechts
+                          if zwaard is kwijt
+                            print 'Ridder ' naam ' vindt een zwaard'
+                          if zwaard is gevonden
+                            print 'Hier is niks meer te vinden'
+                          print hijzij ' loopt terug naar de splitsing'
+                          zwaard is gevonden
+                        ```
+                        ## Uitdaging
+                        Dit verhaal gaat over een ridder, maar misschien wil je zelf wel een verhaal maken over iets anders. Gelukkig is alles mogelijk in Hedy!
+                        Verzin en programmeer je eigen verhaal en spiek voor wat inspiratie gerust in het voorbeeld!
                 start_code: |
                     naam is ask 'Hoe heet je?'
                     hijzij is ask 'Ben je een hij of een zij?'
                     print 'Ridder ' naam ' loopt door een bos '
                     print hijzij ' is op zoek naar een schat
-                    
+
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
