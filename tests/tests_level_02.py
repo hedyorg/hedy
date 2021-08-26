@@ -356,6 +356,52 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_turn_number(self):
+    code = textwrap.dedent("""\
+    print Turtle race
+    turn 90""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Turtle'+' '+'race')
+    t.right(90)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
+  def test_turn_number_var(self):
+    code = textwrap.dedent("""\
+    print Turtle race
+    direction is 70
+    turn direction""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Turtle'+' '+'race')
+    direction = '70'
+    t.right(direction)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
+  def test_turn_ask(self):
+    code = textwrap.dedent("""\
+    print Turtle race
+    direction is ask Where to turn?
+    turn direction""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Turtle'+' '+'race')
+    direction = input('Where to turn'+'?')
+    t.right(direction)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
   # test for 297 (not easy to fix, not giving prio now)
   # def test_print_space_after_excl(self):
   #   code = "print hello world!koekie!"

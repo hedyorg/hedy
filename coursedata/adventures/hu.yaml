@@ -23,7 +23,7 @@ adventures:
 
                     ## Példa Hedy kódra
                     ```
-                    ask A történet főszereplője ...
+                    ask A történet főszereplője
                     print A főszereplő most az erdőben fog sétálni
                     echo Kicsit fél, aki ...
                     print Őrült zajokat hall mindenütt
@@ -147,7 +147,7 @@ adventures:
 
                     ## Példa Hedy kód
                     ```
-                    repeat ... ... print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -217,8 +217,8 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    print ... ő mosogat: ...
-                    print emberek at ...
+                    print _ ő mosogat: _
+                    print emberek at _
                     ```
             4:
                 start_code: print 'Ki mosogat?'
@@ -233,8 +233,8 @@ adventures:
                     ```
                     emberek is anya, apa, Edit, Gizi
                     mosogato is emberek at random
-                    if mosogato is Gizi print ... sajnos mosogatnom kell ... else print 'szerencsére nem én,
-                    mert' ... 'már mosogat'
+                    if mosogato is Gizi print _ sajnos mosogatnom kell _ else print 'szerencsére nem én,
+                    mert' _ 'már mosogat'
                     ```
             5:
                 start_code: print 'Ki mosogat?'
@@ -245,7 +245,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    repeat ... ... print 'a mosogató:' ...
+                    repeat _ _ print 'a mosogató:' _
                     ```
             6:
                 start_code: print 'Ki mosogat?'
@@ -305,8 +305,8 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, earthworm
-                    print ... te jössz ...
-                    print ... ... ... <- itt kell beprogramozni a dobást
+                    print _ te jössz _
+                    print _ _ _ <- itt kell beprogramozni a dobást
                     ```
             4:
                 start_code: print Mit dobunk ezúttal?
@@ -320,9 +320,9 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, giliszta
-                    dobas ...
-                    print 'Te' ... 'dobtál'
-                    if ... is giliszta print 'Megállhatsz.' ... print 'Dobj újra!'
+                    dobas _
+                    print 'Te' _ 'dobtál'
+                    if _ is giliszta print 'Megállhatsz.' _ print 'Dobj újra!'
                     ```
             5:
                 start_code: print Mit dobunk ezúttal?
@@ -336,7 +336,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobások is 1, 2, 3, 4, 5, giliszta
-                    repeat ... ... print ___
+                    repeat _ _ print ___
                     ```
             6:
                 start_code: print Mit dobunk ezúttal?
@@ -419,7 +419,7 @@ adventures:
                     ## Példa Hedy
                     ```
                     valasztas is kő, papír, olló
-                    print ... A számítógép ezt választotta: ... ... at ...
+                    print _ A számítógép ezt választotta: _ _ at _
                     ```
             4:
                 start_code: print 'Üdvözlünk saját kő, papír olló játékodon!'
@@ -435,11 +435,11 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     lehetoseg is kő, papír, olló
-                    szamitogepe is ...
+                    szamitogepe is _
                     valaszt is ask Mit választasz?
-                    print 'ezt választottad:' ...
-                    print 'a számítógép választása:' ...
-                    if ... is ... print 'döntetlen!' else print 'nem döntetlen'
+                    print 'ezt választottad:' _
+                    print 'a számítógép választása:' _
+                    if _ is _ print 'döntetlen!' else print 'nem döntetlen'
                     if valaszt is kő and szamitogepe is papír print 'számítógép nyert'
                     ```
 
@@ -644,9 +644,9 @@ adventures:
                     print 'Köszönöm, jó étvágyat!'
                     ```
                     ## Kihívás
-                    Hozzáadhatsz még sok mindent a virtuális éttermedhez, például ...
-                    ... kérdezd meg, hány ember jön, és szorozd meg az árat ezzel az értékkel
-                    ... felveszel egy másik ételt?
-                    ... kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
-                    ... adsz hozzá gyermekmenüt?
-                    ... gondolsz más szórakoztató dolgokra?
+                    Hozzáadhatsz még sok mindent a virtuális éttermedhez, például:
+                    - kérdezd meg, hány ember jön, és szorozd meg az árat ezzel az értékkel
+                    - felveszel egy másik ételt?
+                    - kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
+                    - adsz hozzá gyermekmenüt?
+                    - gondolsz más szórakoztató dolgokra?

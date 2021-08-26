@@ -308,6 +308,9 @@ def parse():
             elif E.args[0] == "Unquoted Text":
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Has Blanks":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
             else:
                 error_template = hedy_errors[E.error_code]
                 response["Error"] = error_template.format(**E.arguments)
