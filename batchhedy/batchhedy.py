@@ -164,6 +164,7 @@ class RunHedy(BaseModel):
         if self.checkdata is None:
             # Simple run
             print(f"Total transpile time: {sum(runtimes):10f}s ")
+            print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
         else:
             # Compare with previous data
             previous_total_time = sum(float(
