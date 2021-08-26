@@ -229,15 +229,33 @@ adventures:
                 start_code: "forward 50\nturn left"
             2:
                 story_text: |
-                    ## Drawing
-                    In level 2 you can make an interactive drawing by combining with `ask`.
-                    With this code you ask the user to tell the turtle to turn either left or right. It then ask the turtle how far to go. You can copy this code to make the turtle move farther.
+                    In level 1 the turtle could only turn left or right. That is a bit boring!
+                    In level 2 he can point his nose in all directions.
+
+                    Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
+                    Can you make a figure with this code? Maybe a triangle or a circle?
+
+                    ## Example Hedy code
+
+                    ```
+                    print Drwaing figures
+                    angle is 90
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    ```
+
+                    ## Interaction
+
+                    In level 2 you can also make an interactive drawing by combining with `ask`.
+                    With this code you ask the user to tell the turtle how many degrees to turn. It then ask the turtle how far to go. You can copy this code to make the turtle move farther.
 
                     ## Example Hedy code
                     ```
                     print Turtle race
-                    direction is ask Where to turn?
-                    turn direction
+                    angle is ask Where to turn?
+                    turn angle
                     distance is ask How far?
                     forward distance
                     ```
@@ -251,7 +269,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Turtle race'
-                    direction is ask 'Where to turn?'
+                    direction is ask 'How many degrees to turn?'
                     turn direction
                     distance is ask 'How far?'
                     forward distance
