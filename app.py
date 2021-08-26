@@ -404,15 +404,16 @@ def programs_page (request):
     programs = []
     now = timems ()
     for item in result:
-        measure = texts ['minutes']
-        date = round ((now - item ['date']) / 60000)
-        if date > 90:
+        program_age = now - item ['date']
+        if program_age < 1000 * 60 * 60:
+            measure = texts ['minutes']
+            date = round (program_age / (1000 * 60))
+        elif program_age < 1000 * 60 * 60 * 24:
             measure = texts ['hours']
-            date = round (date / 60)
-        if date > 36:
+            date = round (program_age / (1000 * 60 * 60))
+        else:
             measure = texts ['days']
-
-            date = round (date / 24)
+            date = round (program_age / (1000 * 60 * 60 * 24))
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name'), 'public': item.get ('public')})
 

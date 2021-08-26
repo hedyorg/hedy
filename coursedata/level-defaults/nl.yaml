@@ -40,11 +40,14 @@
             turn right
 2:
     intro_text: |
-        In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `is`.
+        In level 2 leren we iets nieuws. Je kunt een woord een naam geven met `is`. Je kunt daarna in je code overal naam gebruiken. Dat wordt dan vervangen door Hedy. Zo:
 
-        Als je de code `naam is Hedy` bovenaan je programma zet, kun je daarna overal naam gebruiken. Dat wordt dan vervangen door Hedy.
+        ```
+        naam is Hedy
+        print hallo naam
+        ```
 
-        De `ask` is in level 2 veranderd, het antwoord sla je ook op met een naam:
+        En de `ask` is in level 2 veranderd, het antwoord sla je ook op met een naam:
 
         ```
         antwoord is ask Hoe heet jij?
@@ -288,7 +291,7 @@
         example: "for i in range 1 to 10"
         demo_code: |
             for i in range 1 to 10
-              print i
+                print i
             print 'Wie niet weg is is gezien'
 8-1:
     start_code: "for teller is 1 to 5\n    print teller"

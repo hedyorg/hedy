@@ -345,3 +345,25 @@ class TestsLevel2(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  def test_print_asterisk(self):
+    code = "print *Jouw* favoriet is dus kleur"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('*Jouw*'+' '+'favoriet'+' '+'is'+' '+'dus'+' '+'kleur')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  # test for 297 (not easy to fix, not giving prio now)
+  # def test_print_space_after_excl(self):
+  #   code = "print hello world!koekie!"
+  #   result = hedy.transpile(code, self.level)
+  #
+  #   expected = textwrap.dedent("""\
+  #   print('hello'+' '+'world'+'!'+'koekie'+'!')""")
+  #
+  #   self.assertEqual(expected, result.code)
+  #   self.assertEqual(False, result.has_turtle)
+
