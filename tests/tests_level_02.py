@@ -356,7 +356,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_turn_number_var(self):
+  def test_turn_number(self):
     code = textwrap.dedent("""\
     print Turtle race
     turn 90""")

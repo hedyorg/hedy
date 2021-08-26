@@ -360,7 +360,7 @@ class ConvertToPython_1(Transformer):
         if argument in self.lookup:        #is the argument a variable? if so, use that
             return f"t.right({argument})"
         elif argument.isnumeric():         #numbers can also be passed through
-            return "t.left({argument})"
+            return f"t.right({argument})"
         elif argument == 'left':
             return "t.left(90)"
         else:
