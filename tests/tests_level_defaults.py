@@ -3,7 +3,7 @@ import re
 import utils
 import hedy
 
-path = 'coursedata/level-defaults'
+path = '../coursedata/level-defaults'
 files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith ('.yaml')]
 
 def test_code (f, level, field_name, code):
