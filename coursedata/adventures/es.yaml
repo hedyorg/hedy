@@ -3,7 +3,7 @@ subtitle: "Con Hedy puedes hacer de todo! Por ejemplo, una historia interactiva,
 adventures:
     story:
         name: "Una historia"
-        description: "Escribe una historia interactiva"
+        description: "Una historia"
         image: "story.png"
         default_save_name: "Historia"
         levels:
@@ -23,7 +23,7 @@ adventures:
 
                     ## Programa Hedy de ejemplo
                     ```
-                    ask El protagonista de esta historia es ...
+                    ask El protagonista de esta historia es
                     print El protagonista camina por un bosque
                     echo Está bastante asustado
                     print Por todos lados se oyen extraños ruidos
@@ -138,7 +138,7 @@ adventures:
 
                 start_code: "repeat 5 times print 'Ayuda!'"
     songs:
-        name: "Canta una canción!"
+        name: "Canción"
         description: "Imprime una canción"
         image: "songs.png"
         default_save_name: "Canción"
@@ -157,7 +157,7 @@ adventures:
 
                     ## Programa Hedy de ejemplo
                     ```
-                    repeat ... ... print 'Bebé Tiburón tututudutudu'
+                    repeat _ _ print 'Bebé Tiburón tututudutudu'
                     print 'Bebe Tiburón'
                     ```
 
@@ -189,7 +189,7 @@ adventures:
                     Pero como tal vez hayas notado en esta lección, a veces tenemos que repetir múltiples líneas, no solamente una. Eso puede hacerse copiando y pegando, pero eso da mucho trabajo. En el nivel 7 veremos como hacerlo más fácilmente.
                 start_code: "print 'Bebe Tiburón'"
     dishes:
-        name: "Quién lava los platos?"
+        name: "Platos"
         image: "dishes.png"
         description: "Usa la computadora para ver quien ha de lavar los platos (Comienza en el nivel 2)"
         default_save_name: "Platos"
@@ -221,15 +221,15 @@ adventures:
                     ## Programa de lavado de platos
                     Usando comillas puedes hacer más interesante tu programa.
                     Esta vez el programa de ejemplo no está completo.
-                    Puedes completar el código reemplazando los puntos suspensivos con los comandos correctos y las comillas?
-                    En cada grupo de puntos suspensivos debes colocar un comando o una comilla.
+                    Puedes completar el código reemplazando los guiones bajos con los comandos correctos y las comillas?
+                    En cada guión bajo debes colocar un comando o una comilla.
 
                     Consejo: no olvides las comillas!
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, Carlos, María
-                    print ... los platos serán lavados por ...
-                    print personas at ...
+                    print _ los platos serán lavados por _
+                    print personas at _
                     ```
                 start_code: "print 'Quien lavará los platos hoy?'"
             4:
@@ -244,7 +244,7 @@ adventures:
                     ```
                     personas is mamá, papá, María, Carlos
                     lavador is personas at random
-                    if lavador es María print 'oh no, hoy me toca lavar los platos' else print 'por suerte no debo lavar los platos porque' ... 'los lavará hoy!'
+                    if lavador es María print 'oh no, hoy me toca lavar los platos' else print 'por suerte no debo lavar los platos porque' _ 'los lavará hoy!'
                     ```
 
                 start_code: "print 'Quien lavará los platos hoy?'"
@@ -256,7 +256,7 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, María, Carlos
-                    repeat ... ... print 'lavará los platos' ...
+                    repeat _ _ print 'lavará los platos' _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             6:
@@ -282,7 +282,7 @@ adventures:
                     Este nivel es el último de la aventura del lavado de platos! Pero puedes elegir otra aventura y programar cosas como una calculadora, una historia interactiva o un juego más interesante.
                 start_code: "print 'Quien lavará los platos esta semana?'"
     dice:
-        name: "Crea un juego de dados"
+        name: "Dados"
         description: "Crea tu propio juego de dados"
         image: "dice.png"
         default_save_name: "Dados"
@@ -318,12 +318,12 @@ adventures:
                 story_text: |
                     ## Dados
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
-                    Puedes escribir el programa, reemplazando los puntos suspensivos?
+                    Puedes escribir el programa, reemplazando los guiones bajos?
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
-                    print 'has tirado un ' ...
-                    print ... ... ... <- agregar código aquí
+                    print 'has tirado un ' _
+                    print _ _ _ <- agregar código aquí
                     ```
                 start_code: "print 'Qué salió esta vez?'"
             4:
@@ -336,9 +336,9 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
-                    tirada is ...
-                    print 'haz tirado un ' ...
-                    if ... is gusanito print 'Puedes dejar de tirar los dados' ... print 'Debes tirar los dados nuevamente!'
+                    tirada is _
+                    print 'haz tirado un ' _
+                    if _ is gusanito print 'Puedes dejar de tirar los dados' _ print 'Debes tirar los dados nuevamente!'
                     ```
 
                 start_code: "print 'Qué salió esta vez?'"
@@ -353,7 +353,7 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
-                    repeat ... ... print ...
+                    repeat _ _ print _
                     ```
 
                 start_code: "print 'Qué salió esta vez?'"
@@ -436,12 +436,12 @@ adventures:
                 story_text: |
                     ## Piedra, papel o tijera
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si quieres imprimir texto, debes usar comillas.
-                    Eres capaz de imprimir un texto adicional? Reemplaza los puntos suspensivos con el código correcto.
+                    Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
 
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is piedra, papel, tijera
-                    print ... La computadora ha elegido: ... ... at ...
+                    print _ La computadora ha elegido: _ _ at _
                     ```
                 start_code: "print 'Bienvenide a tu propio piedra, papel o tijera!'"
             4:
@@ -457,15 +457,15 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is piedra, papel, tijera
-                    opcióncomputadora is ...
+                    opcióncomputadora is _
                     opción is ask 'Que eliges?'
-                    print 'Has elegido' ...
-                    print 'La computadora ha elegido' ...
-                    if ... is ... print 'empate!' else print 'no hay empate'
+                    print 'Has elegido' _
+                    print 'La computadora ha elegido' _
+                    if _ is _ print 'empate!' else print 'no hay empate'
                     if opción is piedra and opcióncomputadora is papel print 'la computadora gana'
                     ```
 
-                    Reemplaza los puntos suspensivos con el código correcto para comprobar si alguien ganó el juego o si el juego resultó empatado.
+                    Reemplaza los guiones bajos con el código correcto para comprobar si alguien ganó el juego o si el juego resultó empatado.
 
                     Luego copia la última línea y completa todas las distintas opciones posibles.
 
