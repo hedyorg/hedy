@@ -351,11 +351,17 @@ class ConvertToPython_1(Transformer):
         except:
             parameter = 50
         return f"t.forward({parameter})"""
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)" #no arguments works, and means a right turn
 
-        if args[0] == 'left':
+        argument = args[0]
+        if argument in self.lookup:        #is the argument a variable? if so, use that
+            return f"t.right({argument})"
+        elif argument.isnumeric():         #numbers can also be passed through
+            return f"t.right({argument})"
+        elif argument == 'left':
             return "t.left(90)"
         else:
             return "t.right(90)" #something else also defaults to right turn
