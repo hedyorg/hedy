@@ -18,4 +18,5 @@ if __name__ == '__main__':
     RunHedy(
         filename=glob.glob('input/*.hedy'),
         output='output_programs',
-        report='output_report.csv').run()
+        report='output_report.csv',
+        check='output_report.csv').run()
