@@ -11,7 +11,7 @@ invalid_space: _SPACE text
 
 //in Level 2 we need to treat punctuation differently, since it can be used to separate arguments (variables)
 
-textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+textwithoutspaces: /([^\r\n,!?. ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 text: /([^\r\n,!?.]+)/ -> text
 
 index : DIGIT+
