@@ -4,4 +4,4 @@ assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 ?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
 ?atom: NUMBER | var //TODO: means we cannot assign strings with spaces? would we want that?
 
-textwithoutspaces: /([^\n, *+-\/]+)/ -> text //new cause in level 6 calculation elements ned to be escaped too
+textwithoutspaces: /([^\n, *+-\/]+)/ -> text //new cause in level 6 calculation elements need to be escaped too

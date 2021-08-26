@@ -450,7 +450,7 @@ adventures:
                     throw is choices at random
                     print 'you threw' throw
                     if throw is earthworm points is points + 5 else points is points + throw
-                    print 'those are' points
+                    print 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
 
@@ -1046,7 +1046,7 @@ adventures:
 
                     ## Challenge
                     Can you finish the scary story? Or make up your own haunted house story?
-                start_code: "How did I get here?"
+                start_code: "print How did I get here?"
             2:
                 story_text: |
                     ## Haunted house game
@@ -1086,18 +1086,19 @@ adventures:
                     ## Haunted House
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     In the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In level 4 you can pnly win the game by picking the same door Hedy picked randomly.
+                    In level 4 you can only win the game by picking the same door Hedy picked randomly.
 
                     ## Example Hedy code
                     ```
                     print 'Escape from the haunted house!'
                     print 'There are 3 doors in front of you...'
                     doors is 1,2,3
-                    monsters is werewold, mummy, vampire, zombie
+                    monsters is werewolf, mummy, vampire, zombie
                     chosendoor is ask 'Which door do you choose?'
                     print 'You chose door...' chosendoor
                     correctdoor is doors at random
-                    if chosendoor is correctdoor print 'Great! Youve escaped!' else print 'Oh no! You are being eaten by a...' monsters at random
+                    if chosendoor is correctdoor print 'Great! Youve escaped!' 
+                    else print 'Oh no! You are being eaten by a...' monsters at random
                     ```
 
                 start_code: ""
