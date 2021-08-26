@@ -95,7 +95,23 @@ Tekenturtle:
 - De leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100. 
 
 
-### Veelgemaakte fouten in level 2
+### Wat leren de leerlingen in dit level?
+
+In level 2 komen variabelen aan bod. Dit kan voor de leerlingen een lastig concept zijn, maar door het aan te bieden in speelse opdrachten kunnen leerlingen er goed mee uit de voeten. In level 2 wordt er ook voor het eerst de mogelijkheid geboden om een willekeurig woord te kiezen uit het lijstje van de variabele. Dit geeft de leerlingen de kans om simpele spelletjes zoals _steen, papier, schaar_ en _Hedy de waarzegger_ te maken, waardoor er veel enthousiasme is bij de leerlingen!
+
+### Nieuwe commando's
+
+In level 2 worden variabelen geïntroduceerd. Hier vind je een [instructievideo](https://www.youtube.com/watch?v=bTsUdpK4Co8) over de nieuwe commando's van level 2. In de commando's hieronder wordt de variabele dieren gebruikt, maar de variabelen kunnen uiteraard van alles zijn!
+
+`dieren is hond, kat` - Met dit commando kun je een variabele maken, zoals dieren. Je kunt de variabele 'vullen' met één of meerdere woorden of getallen.
+
+`dieren is ask Wat is je lievelingsdier?` - Let op! Ask werkt in dit level anders dan is level 1. In level 2 begin je met variabele is voordat ask gebruikt.
+
+`print dieren at random` - Hedy kiest een willekeurig woord (of getal) uit het lijstje dat je hebt aangemaakt met dieren is.
+
+
+
+### Veelgemaakte fouten
 
 In level 2 zijn dit veelgemaakte fouten door de leerlingen:
 

@@ -100,6 +100,7 @@ class RunHedy(BaseModel):
         jobs = self.jobs
 
         print(header)
+        number_of_error_programs = 0
 
         for job in jobs:
             # Basic info on the file
@@ -110,6 +111,9 @@ class RunHedy(BaseModel):
                             f"{job.src_tokens:6}", ]), end=sep)
 
             job.transpile()
+
+            if job.error_msg != '':
+                number_of_error_programs += 1
 
             if self.output is not None:
                 # Write python file
@@ -160,16 +164,19 @@ class RunHedy(BaseModel):
         if self.checkdata is None:
             # Simple run
             print(f"Total transpile time: {sum(runtimes):10f}s ")
+            print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
         else:
             # Compare with previous data
-            previoustotaltime = sum(float(
+            previous_total_time = sum(float(
                 self.checkdata[job.filename.stem]["transpile time"]
                 ) for job in self.jobs)
-            diff = 100 * sum(runtimes) / previoustotaltime
+            diff = 100 * sum(runtimes) / previous_total_time
             print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
         print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
         print(f"Min transpile time:   {minvalue:10f}s")
+        print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
+
 
     @lazy
     def jobs(self):
@@ -268,8 +275,12 @@ class TranspileJob:
         # Get the level and code position
         try:
             with open(filename) as f:
-                firstline = f.readline()
-                self.codestart = f.tell()
+                all_lines = f.readlines()
+                # remove header info
+                firstline = all_lines[0]
+                self.code = '\n'.join(all_lines[3:])
+
+            self.level = 0
 
             if firstline.find("=") > -1:
                 self.level = int(firstline.split("=")[-1])
@@ -297,10 +308,8 @@ class TranspileJob:
     @lazy
     def code(self) -> str:
         """ The hedy code"""
-        with open(self.filename) as f:
-            f.seek(self.codestart)
-            code = f.read()
-        code = "\n".join(line for line in code.splitlines() if len(line) > 0)
+        code = self.code
+
         # Make sure that the last line is "\n".
         if len(code) > 0:
             return code if code[-1] == "\n" else code + "\n"
@@ -315,7 +324,7 @@ class TranspileJob:
         try:
             pycode = ""
             t1 = perf_counter()
-            pycode = hedy.transpile(self.code, self.level)
+            pycode = hedy.transpile(self.code, self.level).code
         except hedy.HedyException as e:
             self.error = True
             self.error_msg = str(e)
