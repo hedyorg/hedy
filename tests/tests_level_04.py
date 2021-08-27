@@ -327,6 +327,25 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
 
+  def test_ifelse_should_go_before_assign(self):
+    code = textwrap.dedent("""\
+    if kleur is poep kleur2 is a else kleur2 is b
+    print kleur2""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    if 'kleur' == 'poep':
+      kleur2 = 'a'
+    else:
+      kleur2 = 'b'
+    print(kleur2)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
+
 
 
 
