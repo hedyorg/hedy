@@ -351,11 +351,17 @@ class ConvertToPython_1(Transformer):
         except:
             parameter = 50
         return f"t.forward({parameter})"""
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)" #no arguments works, and means a right turn
 
-        if args[0] == 'left':
+        argument = args[0]
+        if argument in self.lookup:        #is the argument a variable? if so, use that
+            return f"t.right({argument})"
+        elif argument.isnumeric():         #numbers can also be passed through
+            return f"t.right({argument})"
+        elif argument == 'left':
             return "t.left(90)"
         else:
             return "t.right(90)" #something else also defaults to right turn
@@ -1044,16 +1050,19 @@ def preprocess_blocks(code):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+def contains_blanks(code):
+    return (" _ " in code) or (" _\n" in code)
 
-def transpile_inner(input_string, level, sub = 0):
+def transpile_inner(input_string, level, sub=0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-
     parser = get_parser(level, sub)
+
+    if contains_blanks(input_string):
+        raise HedyException('Has Blanks')
 
     if level >= 7:
         input_string = preprocess_blocks(input_string)
-        # print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer

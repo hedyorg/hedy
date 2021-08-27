@@ -3,7 +3,7 @@ subtitle: "You can learn Hedy by creating a story, a game or something to make y
 adventures:
     story:
         name: "Story"
-        description: "Make an interactive story"
+        description: "Story"
         image: "story.png"
         default_save_name: "Story"
         levels:
@@ -23,9 +23,9 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    ask The main character of this story is ...
+                    ask The main character of this story is
                     print The main character is now going to walk in the forest
-                    echo He's a bit scared who ...
+                    echo He's a bit scared,
                     print He hears crazy noises everywhere
                     print He's afraid this is a haunted forest
                     ```
@@ -154,7 +154,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    repeat ... ... print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -229,15 +229,33 @@ adventures:
                 start_code: "forward 50\nturn left"
             2:
                 story_text: |
-                    ## Drawing
-                    In level 2 you can make an interactive drawing by combining with `ask`.
-                    With this code you ask the user to tell the turtle to turn either left or right. It then ask the turtle how far to go. You can copy this code to make the turtle move farther.
+                    In level 1 the turtle could only turn left or right. That is a bit boring!
+                    In level 2 he can point his nose in all directions.
+
+                    Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
+                    Can you make a figure with this code? Maybe a triangle or a circle?
+
+                    ## Example Hedy code
+
+                    ```
+                    print Drawing figures
+                    angle is 90
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    ```
+
+                    ## Interaction
+
+                    In level 2 you can also make an interactive drawing by combining with `ask`.
+                    With this code you ask the user to tell the turtle how many degrees to turn. It then ask the turtle how far to go. You can copy this code to make the turtle move farther.
 
                     ## Example Hedy code
                     ```
                     print Turtle race
-                    direction is ask Where to turn?
-                    turn direction
+                    angle is ask Where to turn?
+                    turn angle
                     distance is ask How far?
                     forward distance
                     ```
@@ -251,7 +269,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Turtle race'
-                    direction is ask 'Where to turn?'
+                    direction is ask 'How many degrees to turn?'
                     turn direction
                     distance is ask 'How far?'
                     forward distance
@@ -298,15 +316,14 @@ adventures:
                     With quotation marks you can make your dishwashing planning more beautiful.
                     This time the sample code is not quite complete.
 
-                    Can you complete the code by entering the correct commands or characters on the dots?
-                    Every three dots must be replaced with one command.
+                    Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
 
                     Tip: Don't forget the quotation marks!
                     ## Example Hedy code
                     ```
                     people is mom, dad, Emma, Sophie
-                    print ... the dishes are done by ...
-                    print people at ...
+                    print _ the dishes are done by _
+                    print people at _
                     ```
                 start_code: "print 'Who does the dishes?'"
             4:
@@ -321,7 +338,7 @@ adventures:
                     ```
                     people is mom, dad, Emma, Sophie
                     dishwasher is people at random
-                    if dishwasher is Sophie print ... too bad I have to do the dishes ... else print 'luckily no dishes because' ... 'is already washing up'
+                    if dishwasher is Sophie print _ too bad I have to do the dishes _ else print 'luckily no dishes because' _ 'is already washing up'
                     ```
                 start_code: "print 'Who does the dishes?'"
             5:
@@ -332,7 +349,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     people is mom, dad, Emma, Sophie
-                    repeat ... ... print 'the dishwasher is' ...
+                    repeat _ _ print 'the dishwasher is' _
                     ```
                 start_code: "print 'Who does the dishes?'"
             6:
@@ -399,8 +416,8 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    print ... you threw ...
-                    print ... ... ... <- here you have to program the dialing
+                    print _ you threw _
+                    print _ _ _ <- here you have to program the choice
                     ```
 
                 start_code: "print What will the die indicate this time?"
@@ -415,9 +432,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    throw is ...
-                    print 'you have' ... 'thrown'
-                    if ... is earthworm print 'You can stop throwing.' ... print 'You have to hear it again!'
+                    throw is _
+                    print 'you have' _ 'thrown'
+                    if _ is earthworm print 'You can stop throwing.' _ print 'You have to hear it again!'
                     ```
                 start_code: "print What will the die indicate this time?"
             5:
@@ -431,7 +448,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    repeat ... ... print ___
+                    repeat _ _ print ___
                     ```
                 start_code: "print What will the die indicate this time?"
             6:
@@ -450,7 +467,7 @@ adventures:
                     throw is choices at random
                     print 'you threw' throw
                     if throw is earthworm points is points + 5 else points is points + throw
-                    print 'those are' points
+                    print 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
 
@@ -515,12 +532,12 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In level 3 we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the dots?
+                    Do you complete the code by entering the correct commands or characters on the underscores?
 
                     ## Example Hedy code
                     ```
                     choices is rock, paper, scissors
-                    print ... The computer chose: ... ... at ...
+                    print _ The computer chose: _ _ at _
                     ```
                 start_code: "print 'Welcome to your own rock scissors paper!'"
             4:
@@ -536,15 +553,15 @@ adventures:
                     ## Example Hedy code
                     ```
                     options is rock, paper, scissors
-                    computer choice is ...
+                    computer choice is _
                     choice is ask What do you choose?
-                    print 'you chose' ...
-                    print 'computer chose' ...
-                    if ... is ... print 'tie!' else print 'no tie'
+                    print 'you chose' _
+                    print 'computer chose' _
+                    if _ is _ print 'tie!' else print 'no tie'
                     if choice is stone and computer choice is paper print 'computer wins'
                     ```
 
-                    First fill in the correct code on the dots to see if it is a draw.
+                    First fill in the correct code on the blanks to see if it is a draw.
 
                     Then copy the last line a few times and fill in all the different options correctly.
 
@@ -793,11 +810,11 @@ adventures:
                       ```
                       ## Challenge
                       You can add many more things to your virtual restaurant. For example, can you...
-                      ... ask how many people are coming and multiply the price by that amount?
-                      ... add another course?
-                      ... give people a discount when they enter a (secret) couponcode?
-                      ... add a children's menu?
-                      ... think of other fun things to add?
+                      - ask how many people are coming and multiply the price by that amount?
+                      - add another course?
+                      - give people a discount when they enter a (secret) couponcode?
+                      - add a children's menu?
+                      - think of other fun things to add?
 
                 start_code: ""
             7:
@@ -1046,7 +1063,7 @@ adventures:
 
                     ## Challenge
                     Can you finish the scary story? Or make up your own haunted house story?
-                start_code: "How did I get here?"
+                start_code: "print How did I get here?"
             2:
                 story_text: |
                     ## Haunted house game
@@ -1086,18 +1103,19 @@ adventures:
                     ## Haunted House
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     In the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In level 4 you can pnly win the game by picking the same door Hedy picked randomly.
+                    In level 4 you can only win the game by picking the same door Hedy picked randomly.
 
                     ## Example Hedy code
                     ```
                     print 'Escape from the haunted house!'
                     print 'There are 3 doors in front of you...'
                     doors is 1,2,3
-                    monsters is werewold, mummy, vampire, zombie
+                    monsters is werewolf, mummy, vampire, zombie
                     chosendoor is ask 'Which door do you choose?'
                     print 'You chose door...' chosendoor
                     correctdoor is doors at random
-                    if chosendoor is correctdoor print 'Great! Youve escaped!' else print 'Oh no! You are being eaten by a...' monsters at random
+                    if chosendoor is correctdoor print 'Great! Youve escaped!'
+                    else print 'Oh no! You are being eaten by a...' monsters at random
                     ```
 
                 start_code: ""
