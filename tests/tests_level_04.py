@@ -329,17 +329,19 @@ class TestsLevel4(unittest.TestCase):
 
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
-    if kleur is poep kleur2 is a else kleur2 is b
-    print kleur2""")
+    kleur is geel
+    if kleur is groen antwoord is ok else antwoord is stom
+    print ans""")
 
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    if 'kleur' == 'poep':
-      kleur2 = 'a'
+    kleur = 'geel'
+    if kleur == 'groen':
+      antwoord = 'ok'
     else:
-      kleur2 = 'b'
-    print(kleur2)""")
+      antwoord = 'stom'
+    print(antwoord)""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
