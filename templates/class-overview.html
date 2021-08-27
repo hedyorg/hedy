@@ -18,7 +18,7 @@
         <td class="p-2">{{student.last_login}}</td>
         <td class="p-2">{{student.highest_level}}</td>
         <td class="p-2">{{student.programs}}</td>
-        <td class="p-2">{% if student.latest_shared %}<a target="_blank" href={{student.latest_shared.link}}>{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
+        <td class="p-2">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
         <td class="p-2"><a href="#" onclick="remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove_student}}</a></td>
       </tr>
     {% endfor %}
