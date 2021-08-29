@@ -581,6 +581,7 @@ def adventure_page(adventure_name, level):
         adventure_name=adventure_name)
 
 # routing to index.html
+@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])

@@ -29,7 +29,11 @@ def routes (app, database, requested_lang):
             programs = DATABASE.programs_for_user(student_username)
             highest_level = max(program['level'] for program in programs) if len(programs) else 0
             sorted_public_programs = list(sorted([program for program in programs if program.get ('public')], key=lambda p: p['date']))
-            latest_shared = sorted_public_programs[-1] if sorted_public_programs else None
+            if sorted_public_programs:
+                latest_shared = sorted_public_programs[-1]
+                latest_shared['link'] = os.getenv ('BASE_URL') + f"hedy/{latest_shared['id']}/view"
+            else:
+                latest_shared = None
             students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
