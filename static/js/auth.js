@@ -296,16 +296,16 @@ $.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (functi
        $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class) {
           return '<li>' + auth.entityify (Class.name) + '</li>';
        }).join (''));
-       if (response.teacher_classes) {
-          $ ('#teacher_classes ul').html ((response.teacher_classes || []).map (function (Class) {
-             return '<li><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a> (' + Class.students.length + ' ' + window.auth.texts.students + ')</li>';
-          }).join (''));
-          $ ('#teacher_classes').show ();
-          $ ('#student_classes').hide ();
-       }
+     }
+
+     if ($ ('#teacher_classes').html ()) {
+        $ ('#teacher_classes table tbody').html ((response.teacher_classes || []).map (function (Class) {
+          return '<tr><td class="text-center p-2"><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a></td><td class="text-center p-2">' + Class.students.length + '</td></tr>';
+        }).join (''));
      }
    }).fail (function (response) {
      if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+     if ($ ('#teacher_classes').html ()) $ ('#teacher_classes').hide ();
    });
 });
 

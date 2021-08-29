@@ -1,0 +1,25 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div id="teacher_classes" class="pl-8">
+  <h2 class="">{{auth.teacher_classes}}</h2>
+  <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
+    <thead class="bg-gray-200">
+      <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <br>
+  <button class="green-btn" onclick="window.create_class ()">{{auth.create_class}}</button>
+  <br><br><br>
+</div>
+<div class="px-8">
+  <h1>Hedy docs</h1>
+  <div class="markdown">
+<a class="github-fork-ribbon left-top" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+    {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+    {{ mkd|commonmark }}
+  </div>
+</div>
+{% endblock %}

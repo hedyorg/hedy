@@ -557,9 +557,9 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='my-profile')
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='login')
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request (request) and not is_admin (request):
             return 'unauthorized', 403
