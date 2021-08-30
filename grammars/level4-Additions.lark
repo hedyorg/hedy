@@ -16,7 +16,9 @@ list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (index | random)
 equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces
 in_list_check: textwithoutspaces _SPACE _IN _SPACE var
 
-textwithspaces: /([^\n,]+)/ -> text //anything can be parsed except for a newline and a comma for list separators
+textwithspaces: /(?:[^\n, ]| (?!else))+/ -> text //anything can be parsed except for a newline and a comma for list separators
+//a space is allowed, of course but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
+//That is because allowing else in strings leads to issue #303
 textwithoutspaces: /([^\n, ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 
 
