@@ -31,7 +31,7 @@ def routes (app, database, requested_lang):
             sorted_public_programs = list(sorted([program for program in programs if program.get ('public')], key=lambda p: p['date']))
             if sorted_public_programs:
                 latest_shared = sorted_public_programs[-1]
-                latest_shared['link'] = os.getenv ('BASE_URL') + f"hedy/{latest_shared['id']}/view"
+                latest_shared['link'] = os.getenv ('BASE_URL') + f"/hedy/{latest_shared['id']}/view"
             else:
                 latest_shared = None
             students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
