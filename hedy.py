@@ -273,7 +273,7 @@ class UsesTurtle(Transformer):
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
-    # tree is transformed to a node of [Bool, args, linenumber]
+    # tree is transformed to a node of [Bool, args, command number]
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
@@ -1111,7 +1111,7 @@ def transpile_inner(input_string, level, sub=0):
 
     is_complete = IsComplete().transform(program_root)
     if not is_complete[0]:
-        incomplete_command = is_complete[1]
+        incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
 
