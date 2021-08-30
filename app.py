@@ -534,7 +534,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif session.get('quiz-attempt')  >= config['quiz-max-attempts'] - 1:
+            elif session.get('quiz-attempt')  > config['quiz-max-attempts']:
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,

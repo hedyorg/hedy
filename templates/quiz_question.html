@@ -61,9 +61,9 @@
                             class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600" name="hint-button" id="hint-button">Hint?
                     </button>
                 </div>
-                {% if attempt == 3 %}
+                {% if attempt == config['quiz-max-attempts'] %}
                     <input class="green-btn ml-1" type="submit" name="submit-button"
-                           value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
+                           value="Ga naar het antwoord" disabled="disabled">
                 {% else %}
                  <input class="green-btn ml-1" type="submit" name="submit-button"
                            value="Beantwoord vraag {{ question_nr }}" disabled="disabled">
