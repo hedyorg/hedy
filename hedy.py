@@ -183,8 +183,7 @@ class AllAssignmentCommands(Transformer):
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
         return args[0]
-    def var_access(self,args):
-        return args[0]
+
     def change_list_item(self, args):
         return args[0]
 
