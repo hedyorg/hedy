@@ -244,5 +244,18 @@
             else
                 repeat 5 times
                     print 'não gostei'
-
-
+8:
+    start_code: |-
+        for contador in range 1 to 5
+            print contador
+    intro_text:
+        "O `print` continua funcionando do mesmo modo, mas `repeat` é substituído por `for`!
+        Agora dá para escrever `for contador in range 1 to 5` e usar `contador` no seu programa. Experimente para ver o que acontece!
+        Lembre-se de usar endentações depois dos comandos `for` e `if` (que significa começar uma frase com quatro espaços)"
+    commands:
+    -   name: "for loop"
+        explanation: "Trocamos `repeat` por `for` e acrescentamos uma faixa de valores"
+        example: "for contador in range 1 to 5"
+        demo_code: |-
+            for contador in range 1 to 5
+                print contador
