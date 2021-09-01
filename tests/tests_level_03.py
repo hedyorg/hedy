@@ -39,6 +39,7 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
+
   def test_print(self):
 
     code = textwrap.dedent("""\
@@ -262,13 +263,30 @@ class TestsLevel3(unittest.TestCase):
 
 
   def test_transpile_missing_opening_quote(self):
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
       print hallo wereld'""")
 
     with self.assertRaises(Exception) as context:
       result = hedy.transpile(code, 3)
 
-    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+    self.assertEqual('Unquoted Text', context.exception.args[0])
+
+
+  def test_transpile_missing_all_quotes(self):
+    # het probleem is dat dit wordt herkend als variabelen (natuurlijk)
+    # dus de oplossing is throwen bij herkennen var die niet in lookup staat
+    # met de varundefined dan ipv unquoted!
+
+    code = textwrap.dedent("""\
+      print hallo wereld""")
+
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, 3)
+
+    self.assertEqual('Unquoted Text', context.exception.args[0])
+
+
+
 
   def test_transpile_issue_375(self):
     code = textwrap.dedent("""
@@ -278,7 +296,7 @@ class TestsLevel3(unittest.TestCase):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile(code, 3)
 
-    self.assertEqual('Parse', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+    self.assertEqual('Parse', context.exception.args[0])
 
   def test_two_spaces_after_print(self):
 
