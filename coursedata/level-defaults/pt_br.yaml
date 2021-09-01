@@ -205,11 +205,22 @@
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
     intro_text: |
-        Os comandos `ask` e `print` ainda funcionam da mesma forma. Mas `if` e `repeat` mudaram! Você agora pode executar grupos de códigos juntos, mas você terá que identar o código. Isso significa colocar espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha. ## Exemplo de código Hedy ``` repeat 5 times
+        Os comandos `ask` e `print` ainda funcionam da mesma forma. Mas `if` e `repeat` mudaram!
+        Você agora pode executar grupos de códigos juntos, mas você terá que identar o código.
+        Isso significa colocar espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha.
+
+        ## Exemplo de código Hedy
+        ```
+        repeat 5 times
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
         ```
-        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código. ## Exemplo de código Hedy ``` cor is ask 'Qual a sua cor favorita?' if cor is verde
+        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
+
+        ## Exemplo de código Hedy
+        ```
+        cor is ask 'Qual a sua cor favorita?'
+        if cor is verde
             repeat 3 times
                 print 'bonita!'
         else
