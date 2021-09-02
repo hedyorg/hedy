@@ -58,29 +58,29 @@ Veel programmeer plezier!
 
 Hedy is opgebouwd uit verschillende levels, waarin de leerlingen steeds één of meerdere nieuwe vaardigheden leren. Wij raden aan om per les één Hedy level te behandelen. Zo leren uw leerlingen stapje voor stapje programmeren en kan de nieuwe stof inslijpen voordat u naar het volgende level gaat. In onze levels hanteren we deze structuur:
 
-### ALgemene lesopbouw
-Introductie
+### Algemene lesopbouw
+#### Introductie
 In de introductie van uw programmeerles activeert u de voorkennis van uw leerlingen. Door een korte herhaling van de vorige les zitten de nieuwe commando's en veelgemaakte fouten weer vers in het geheugen van uw leerlingen en zijn ze klaar om een nieuw level te ontdekken!
 
-Instructie van nieuwe concepten en commando's 
-Nieuwe concepten en commando's kunnen voor leerlingen soms erg lastig zijn om te begrijpen. Het is daarom van belang dat u als leerkracht het juiste gebruik van de nieuwe commando's voordoet aan de klas. Voornamelijk in de lagere levels, waarin de programmeerconcepten geheel nieuw zijn voor uw leerlingen, kan het lastig zijn om de concepten te begrijpen. Het tonen van voorbeelden maakt een abstracte uitleg (bijvoorbeeld over 'Wat is een variable?') herkenbaar voor de leerlingen ('Kijk, de variabele huisdier wordt vervangen door hond!').
+#### Instructie van nieuwe concepten en commando's 
+Nieuwe concepten en commando's kunnen voor leerlingen soms erg lastig zijn om te begrijpen. Het is daarom van belang dat u als leerkracht het juiste gebruik van de nieuwe commando's voordoet aan de klas. Voornamelijk in de lagere levels, waarin de programmeerconcepten geheel nieuw zijn voor uw leerlingen, kan het lastig zijn om de concepten te begrijpen. Het tonen van voorbeelden maakt een abstracte uitleg (bijvoorbeeld over 'Wat is een variabele?') herkenbaar voor de leerlingen ('Kijk, de variabele huisdier wordt vervangen door hond!').
 
-Inoefening van nieuwe commando's
+#### Inoefening van nieuwe commando's
 Voordat uw leerlingen met de avonturen aan de slag gaan, wordt aangeraden om de leerlingen even te laten oefenen met de nieuwe commando's. Op deze manier kunnen de leerlingen de commando's goed in de vingers krijgen, zonder dat de commando's meteen in lange codes verwerkt zitten. De probeerknoppen zijn hierbij erg handig. Na enige oefening kunnen de leerlingen aan de slag met de avonturen.
 
-Aan de slag
+#### Aan de slag
 Bij elk Hedy level zijn verschillende avonturen te vinden in de roze tabbladen. De avonturen staan geordend van makkelijk naar moeilijk, dus het is het beste om de leerlingen te laten beginnen met het verhaalavontuur en daarna naar rechts te werken. Uiteraard hoeven de leerlingen niet bij alle levels alle opdrachten te maken, en kunt u zorgen voor een leuke afwisseling in de opdrachten per les. De avonturen bevatten over het algemeen een voorbeeldcode, die met de groene knop in de hoek van het voorbeeld gekopieerd kunnen worden naar het werkveld. Hierna kunnen de leerlingen de code zelf een keer proberen en kunnen ze zelf de code aanpassen om er hun eigen project van te maken. Stimuleer de leerlingen om hun eigen ideeën toe te voegen aan de code, en hun eigen varianten van de codes te creëren!
 
-Quiz
+#### Quiz
 Om te testen of uw leerlingen de nieuwe concepten en commando's volledig begrepen hebben, kunt u de leerlingen de quiz laten invullen. Dit zijn 10 multiple-choice vragen over de leerstof van het desbetreffende level. 
 
-Evaluatie
+#### Evaluatie
 Sluit de les af met een korte evaluatie; Wat hebben de leerlingen ontdekt? Van welke fouten hebben ze kunnen leren? En het allerbelangrijkste: Wat hebben ze gemaakt? 
 Leerlingen vinden het vaak leuk om hun eigen creaties aan hun klasgenoten te laten zien, dus het is fijn om wat tijd over te houden aan het einde van elke les voor wat presentaties van de gemaakte codes.
 
 
 ## Veelgemaakte fouten in Hedy
-Van fouten kun je leren en dat geldt al helemaal bij programmeren! Fouten maken is onvermijdelijk en helemaal niet erg, maar het kan als leerkracht soms nog knap lastig zijn om foutjes van leerlingen op te sporen en op te lossen. Vooral als de codes door de levels heen almaar langer worden... Daarom hebben wij hier per level een lijst gemaakt van de meestgemaakte fouten door leerlingen en de oplossingen. 
+Van fouten kun je leren en dat geldt al helemaal bij programmeren! Fouten maken is onvermijdelijk en helemaal niet erg, maar het kan als leerkracht soms nog knap lastig zijn om foutjes van leerlingen op te sporen en op te lossen. Vooral als de codes door de levels heen almaar langer worden... Daarom hebben wij hier per level een lijst gemaakt van de meest gemaakte fouten door leerlingen en de oplossingen. 
 
 ### Veelgemaakte fouten in level 1 
 
@@ -94,24 +94,7 @@ Tekenturtle:
 - De leerlingen laten het pijltje soms uit beeld lopen, waardoor ze denken dat de code het niet doet. Gebruik in dat geval kleinere getallen.
 - De leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100. 
 
-
-### Wat leren de leerlingen in dit level?
-
-In level 2 komen variabelen aan bod. Dit kan voor de leerlingen een lastig concept zijn, maar door het aan te bieden in speelse opdrachten kunnen leerlingen er goed mee uit de voeten. In level 2 wordt er ook voor het eerst de mogelijkheid geboden om een willekeurig woord te kiezen uit het lijstje van de variabele. Dit geeft de leerlingen de kans om simpele spelletjes zoals _steen, papier, schaar_ en _Hedy de waarzegger_ te maken, waardoor er veel enthousiasme is bij de leerlingen!
-
-### Nieuwe commando's
-
-In level 2 worden variabelen geïntroduceerd. Hier vind je een [instructievideo](https://www.youtube.com/watch?v=bTsUdpK4Co8) over de nieuwe commando's van level 2. In de commando's hieronder wordt de variabele dieren gebruikt, maar de variabelen kunnen uiteraard van alles zijn!
-
-`dieren is hond, kat` - Met dit commando kun je een variabele maken, zoals dieren. Je kunt de variabele 'vullen' met één of meerdere woorden of getallen.
-
-`dieren is ask Wat is je lievelingsdier?` - Let op! Ask werkt in dit level anders dan is level 1. In level 2 begin je met variabele is voordat ask gebruikt.
-
-`print dieren at random` - Hedy kiest een willekeurig woord (of getal) uit het lijstje dat je hebt aangemaakt met dieren is.
-
-
-
-### Veelgemaakte fouten
+### Veelgemaakte fouten in level 2
 
 In level 2 zijn dit veelgemaakte fouten door de leerlingen:
 
