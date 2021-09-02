@@ -51,7 +51,7 @@ window.auth = {
       if (! values.password) return auth.error (auth.texts.please_password, 'password');
       if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
       if (! values.email.match (window.auth.emailRegex)) return auth.error (auth.texts.valid_email, 'email');
-      if (values.email    !== values.email_repeat)    return auth.error (auth.texts.repeat_match_email,    'email_repeat');
+      if (values.email    !== values.mail_repeat)    return auth.error (auth.texts.repeat_match_email,    'mail_repeat');
       if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match_password, 'password_repeat');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
@@ -323,7 +323,7 @@ if (window.location.pathname === '/signup') {
   }
 }
 
-$ ('#email, #email_repeat').on ('cut copy paste', function (e) {
+$ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
 });
