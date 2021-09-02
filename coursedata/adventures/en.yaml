@@ -842,7 +842,29 @@ adventures:
                     ## Challenge
                     Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
                 start_code: " "
-
+            8:
+                story_text: |
+                    ## Restaurant
+                    We can use the `for i in range 1 to 5` to print the orders from multiple customers in an orderly manner. 
+                    
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Welcome to Hedy's!'
+                    people is ask 'For how many people would you like to order?'
+                    for i in range 1 to people
+                        print 'Order number ' i
+                        food is ask 'What would you like to eat?'
+                        print food
+                        if food is fries
+                            sauce is ask 'What kind of sauce would you like with that?'
+                            print sauce
+                        drinks is ask 'What would you like to drink?'
+                        print drinks
+                    price is 4 * people
+                    print 'That will be ' price ' dollars, please!'
+                    ```
+                start_code: ""
+                 
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
@@ -1119,6 +1141,66 @@ adventures:
                     ```
 
                 start_code: ""
+            7:
+                story_text: |
+                    ## Haunted House
+                    In level 7 you can repeat multiple lines of code, which allows you to make the haunted house even more interactive!
+                    
+                    ## Example Hedy code
+                    ```
+                    print 'Escape from the Haunted House!'
+                    player is alive
+                    doors is 1, 2, 3
+                    monsters is zombie, vampire, giant spider
+                    repeat 3 times
+                        if player is alive
+                            correctdoor is doors at random
+                            print 'There are 3 doors in front of you...'
+                            chosendoor is ask 'Which door do you choose?'
+                            if chosendoor is correctdoor
+                                print 'No monsters here!'
+                            else
+                                print 'You are eaten by a ' monsters at random
+                                player is dead
+                        else
+                            print 'GAME OVER'
+                    if player is alive
+                        print 'Great! You survived!'
+                    ```
+                    ## Challenge
+                    Now it's very hard to win this game, can you make it easier to win?
+                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?
+                    
+                start_code: "print'Escape from the haunted house!'"
+                
+            8:
+                story_text: |
+                    ## Haunted House
+                    In level 8 we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are. 
+                    
+                    ## Example Hedy Code
+                    ```
+                    print 'Escape from the Haunted House!'
+                    player is alive
+                    doors is 1, 2, 3
+                    monsters is zombie, vampire, giant spider
+                    for i in range 1 to 3
+                        if player is alive
+                            correctdoor is doors at random
+                            print 'Room ' i
+                            print 'There are 3 doors in front of you...'
+                            chosendoor is ask 'Which door do you choose?'
+                            if chosendoor is correctdoor
+                                print 'No monsters here!'
+                            else
+                                print 'You are eaten by a ' monsters at random
+                                player is dead
+                        else
+                            print 'GAME OVER'
+                    if player is alive
+                        print 'Great! You survived!'
+                    ```
+                start_code: "print 'Escape from the haunted house!"
 
 
 
