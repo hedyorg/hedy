@@ -1313,4 +1313,127 @@ adventures:
                         print ' Hoera! Je bent ontsnapt!'
                     ```
                 start_code: "'print 'Ontsnap uit het spookhuis!'"
-             
+                                 
+    next:
+        name: "Vooruitblik"
+        description: "Vooruitblik"
+        image: ""
+        default_save_name: "next"
+        levels:
+            1:
+                story_text: |
+                    ## Vooruitblik
+                    Gefeliciteerd! Je bent aan het einde gekomen van het eerste level van Hedy. Hopelijk heb je al wat mooie codes kunnen maken, maar er is in Hedy nog veel meer te ontdekken. 
+                    
+                    In level 1 ben je er misschien tegenaan gelopen dat Hedy in het `echo` commando maar één ding kan onthouden. 
+                    In het restaurantavontuur kon je bijvoorbeeld alleen herhalen wat de klant wilde eten, of alleen wat hij wilde drinken. Kijk maar: 
+                    
+                    ```
+                    print Welkom bij restaurant Hedy
+                    ask wat wilt u eten?
+                    echo Dus dit wilt u eten...
+                    ask wat wilt u drinken
+                    echo Dus dit wilt u drinken...
+                    ```
+                    Als de speler hamburger en cola invult, kun je nog niet zeggen `dus u wilt een hamburger en cola`, maar je moet daar twee lossen zinnen van maken.
+                    Daarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'
+                    
+                    Dat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen. 
+                    Daarnaast leer je in level 2 werken met het `at random` commando, waardoor je echte spelletjes kunt gaan maken. 
+                    Neem snel een kijkje! 
+                    
+                start_code: "print Op naar het volgende level!"
+            2:
+                story_text: |
+                    ## Vooruitblik
+                    In level 2 heb je veel geoefend met variabelen, maar misschien heb je ook wel eens gezien dat dat nog niet altijd perfect werkt. 
+                    
+                    Probeer deze code maar eens uit: 
+                    ```
+                    naam is Sophie
+                    print Mijn naam is naam
+                    ```
+                    Je wilde natuurlijk printen `Mijn naam is Sophie` maar Hedy print `Mijn Sophie is Sophie`.
+                    
+                    In level 3 wordt dit probleem opgelost door aanhalingstekens te gebruiken, kijk maar eens in level 3. 
+                 
+                start_code: "print Op naar het volgende level!"
+            3:
+                story_text: |
+                    
+                    ## Vooruitblik
+                    In level 2 en 3 heb al codes leren maken met `at random` waardoor je programma's elke keer anders waren als je ze afspeelde. 
+                    Toch waren de codes niet echt interactief, je hebt er als speler namelijk geen invloed op. 
+                
+                    In level 4 leer je het `if` commando waarmee je kunt zorgen voor 2 verschillende reacties in je code. 
+                    Zo kun je bijvoorbeeld je computer beveiligen met een wachtwoord. Neem maar een kijkje in level 4!
+                
+                                 
+                start_code: "print 'Op naar het volgende level!'"
+            4:
+                story_text: |
+                    ## Vooruitblik
+                    Super! Je bent bij het einde van level 4, dus je hebt inmiddels goed geoefend met `if` en `else`. 
+                
+                    Je hebt misschien gemerkt dat je codes steeds maar langer worden. Als je bijvoorbeeld een zin meerdere keren wil herhalen, nemen die allemaal een aparte regel in. 
+                    Bijvoorbeeld als je lang zal ze leven wil coderen...
+                    ```
+                    print lang zal ze leven
+                    print lang zal ze leven
+                    print lang zal ze leven
+                    print in de gloria
+                    print in de gloria
+                    print in de gloria
+                    ```
+                    Dit is een erg lange code voor maar 2 zinnetjes... In level 5 leer je gelukkig het `repeat` commando, waardoor je regels code kunt herhalen.
+                start_code: "print 'Op naar het volgende level!'"
+            5:
+                story_text: |
+                    ## Vooruitblik
+                    Na level 5 kun je regels code herhalen. Zo heb je bijvoorbeeld geleerd om in je restaurant aan meerdere mensen te vragen wat ze willen eten. 
+                    Wat je alleen nog niet kunt in level 5, is ook prijzen berekenen voor je restaurant. 
+                    Zou het niet leuk zijn om precies te kunnen zeggen hoeveel de klanten moeten betalen, en stiekem een kortingscode toe te voegen voor jou en je vrienden? 
+                    
+                    Vanaf level 6 kan dit wel, want in level 6 kun je rekenen met Hedy. Je kunt daar ook proberen om een tafelsommen game te programmeren (voor je broertje of zusje?). 
+                    Neem snel een kijkje in level 6!
+                                 
+                start_code: "print 'Op naar het volgende level!'"
+            6:
+                story_text: |
+                    ## Vooruitblik
+                    In level 5 heb je met `repeat` al geleerd hoe je één regel code kunt herhalen. Maar soms is het wel zo fijn als je niet maar een regel kunt herhalen maar een heel stukje code. 
+                    In regel 7 wordt dat mogelijk gemaakt door stukjes code bij elkaar een groepje te maken, door ze te beginnen met een aantal spaties. Zo'n groepje regels kun je dan in één keer herhalen met repeat. 
+                    
+                    ```
+                    repeat 5 times print 'vanaf level 7 kun je meerdere regels code in een keer herhalen!'
+                    ```
+                    
+                start_code: "print 'Op naar het volgende level!'"
+            7:
+                story_text: |
+                    ## Vooruitblik 
+                    Je bent alweer aan het einde van level 7, knap hoor! Je staat op het punt om door te gaan naar level 8. In de hogere levels gaan we steeds een beetje meer toewerken naar de programmeertaal Python.
+                    In Python bestaat het commando `repeat` echter niet, dus gaan we dat vervangen door 'echte' programmeertaal! 
+                    Ben je benieuwd hoe dat eruit ziet? Ga dan snel naar level 8. 
+                                 
+                start_code: "print 'Op naar het volgende level!'"
+            8:
+                story_text: |
+                    ## Vooruitblik
+                    In level 8 lijkt je code al wat meer op Pyhton, zometeen zul je in level 9 nog een toevoeging van Pyhton leren! 
+                    Daarnaast ben je er in level 8 misschien al eens tegenaan gelopen dat je eigenlijk meerdere opties wil hebben dan alleen `if` en `else`. 
+                    Bijvoorbeeld in deze code:
+                    
+                    ```
+                    print 'Wat gaan we eten vanavond?'
+                    opties is pizza, spuitjes, boerenkool
+                    gekozen is opties at random
+                    if opties is pasta
+                        print 'Hmmm lekker! Pasta!'
+                    else 
+                        print 'Helaas pindakaas'
+                    ```
+                    Eigenlijk zou je in dit voorbeeld 2x een else willen hebben: eentje voor de spruitjes en eentje voor de boerenkool. 
+                    In level 9 leer je een nieuw commando `elif` dat je daarbij kan helpen! 
+                    Kijk maar eens in level 9...
+                    
