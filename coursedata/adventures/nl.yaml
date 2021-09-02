@@ -924,6 +924,105 @@ adventures:
         image: "restaurant.png"
         default_save_name: "Restaurant"
         levels:
+            1:
+                story_text: |
+                    ## Restaurant level 1
+                    Je kunt met Hedy ook een virtueel restaurant bouwen en de bestellingen van je klanten opnemen! 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print Welkom bij McHedy!
+                    aks Wat wilt u bestellen?
+                    echo Dus u wilt graag... 
+                    print Bedankt voor uw bestelling!
+                    ```
+                    
+                    ## Uitdaging
+                    Kun jij het restaurant verder uitbreiden door meer regels code toe te voegen? Je zou bijvoorbeeld kunnen vragen of je klant ook iets wil drinken, vertellen hoe duur het is, of de klant eet smakelijk wensen! 
+                    
+                start_code: "print Welkom bij McHedy!"
+                
+            2:
+                story_text: |
+                    ## Restaurant level 2
+                    In level 2 kun je variabelen gebruiken om je restaurant interactiever te maken! Kijk maar naar het voorbeeld. 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print Welkom bij McHedy!
+                    eten is ask Wat wilt u eten?
+                    saus is ask Welke saus wilt u daarbij?
+                    drinken is ask Wat wilt u drinken?
+                    print U heeft eten met saus en drinken besteld.
+                    print Bedankt voor uw bestelling!
+                    ```
+                  
+                    ## Random restaurant
+                    In level 2 kun je ook het commando `at random` gebruiken om Hedy voor jou te laten kiezen. Hierdoor kun je ook een grappig random restaurant bouwen, waarbij je Hedy laat kiezen wat jij te eten krijgt!
+                    
+                    ## Voorbeeld Hedy Code Random Restaurant
+                    ```
+                    gerechten is patat, pizza, spruitjes
+                    toetjes is een ijsje, appeltaart, franse stinkkaas
+                    drinken is cola, water, bier
+                    prijzen is 1 euro, 10 euro, 100 euro
+                    print Welkom bij het random restaurant
+                    print Vandaag eet u gerechten at random
+                    print Daarbij drinkt u drinken at random
+                    print En u krijgt toetjes at random achteraf
+                    print Dat wordt dan prijzen at random
+                    print Eet smakelijk!
+                    ```
+                    
+                    ## Uitdaging
+                    Kun jij de restaurants nog leuker maken?
+                start_code: ""
+            3:
+                story_code: |    
+                    ## Restaurant level 3
+                    Lukt het jou om in level 3 aanhalingstekens toe te voegen aan je restaurant van level 2?
+                start_code: ""
+            4:
+                story_code: |
+                    ## Restaurant level 4
+                    In level 4 kun je het nieuwe `if` commando gebruiken om verschillende reacties te geven op antwoorden van de klanten. Zo kun je bijvoorbeeld vragen of de klant saus wil bij de frietjes, terwijl dat een rare vraag zou zijn als de klant pizza bestelt. 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Welkom bij McHedy'
+                    eten is ask 'Wat wilt u eten?'
+                    if eten is friet saus is ask 'Welke saus wilt u bij de friet?'
+                    if eten is pizza topping is ask 'Welke topping wilt u op de pizza?'
+                    print eten
+                    ```
+                    ## Prijslijst toevoegen
+                    Je kunt het `if` commando ook goed gebruiken om een prijslijst te maken.  
+                    
+                    ## Voorbeeld Hedy Code
+                    print 'Welkom bij McHedy'
+                    prijs is 0
+                    eten is ask 'Wilt u friet of pizza?'
+                    if eten is friet prijs is 3
+                    if eten is pizza prijs is 4
+                    print 'Dat wordt dan ' prijs ' euro, alstublieft.'
+                    
+                start_code: "" 
+            5:    
+                story_code: |
+                    ## Restaurant level 5
+                    In level 5 kun je het `repeat` commando gebruiken om van meerdere klanten de bestelling op te nemen. 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Welkom bij restaurant Hedy'
+                    mensen is ask 'Voor hoeveel personen wilt u bestellen vandaag?'
+                    repeat mensen times eten is ask 'Wat wilt u bestellen?'
+                    print 'Bedankt voor uw bestelling!'
+                    ```
+                    In level 5 kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet. 
+                    In level 7 wordt dit probleem opgelost, want daar kun je meerdere regels code printen. 
+                start_code: ""
+                    
             6:
                 story_text: |
                     ## Restaurant level 6
@@ -980,7 +1079,7 @@ adventures:
                       - een kindermenu toevoegen?
                       - nog iets anders?
                       
-                start_code: "print 'Welkom' "
+                start_code: "print 'Welkom'"
           
             7: 
                 story_text: | 
@@ -1059,7 +1158,7 @@ adventures:
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
-                    ## uitdaging
+                    ## Uitdaging
                     Alle uitdagingen die in level 7 worden genoemd zoals de extra `if` statements of de verbeterde prijzen, kun je natuurlijk in level 8 nog steeds gebruiken! 
                 start_code: "print 'Welkom bij McHedy!' "
     
@@ -1107,7 +1206,7 @@ adventures:
                     print Voor je staan drie deuren...
                     keuze is ask Welke deur kies je?
                     print Je koos deur ... keuze
-                    monsters is een zombie, een vampier, NIKS JE ONTSNAPT!
+                    monsters is een zombie, een vampier, NIKS JE ONTSNAPT
                     print Jij ziet...
                     print monsters at random
                     ```
@@ -1125,7 +1224,7 @@ adventures:
 
             3:
                 story_text: |
-                    ## Haunted house
+                    ## Spookhuis
                     In level 3 heb je geleerd hoe je aanhalingstekens moet gebruiken. 
                     Kun jij je spookhuis ook in level 3 aan de praat krijgen?
                 start_code: "print 'Ontsnap uit het spookhuis!'"
@@ -1176,7 +1275,7 @@ adventures:
                         else
                             print 'GAME OVER'
                     if speler is levend
-                    print ' Hoera! Je bent ontsnapt!'
+                        print ' Hoera! Je bent ontsnapt!'
                     ```
                     ## Uitdaging
                     Je spel in nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaast van 2?
@@ -1211,7 +1310,7 @@ adventures:
                         else
                             print 'GAME OVER'
                     if speler is levend
-                    print ' Hoera! Je bent ontsnapt!'
+                        print ' Hoera! Je bent ontsnapt!'
                     ```
                 start_code: "'print 'Ontsnap uit het spookhuis!'"
              
