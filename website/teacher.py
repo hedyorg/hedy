@@ -15,6 +15,13 @@ def routes (app, database, requested_lang):
 
     from app import render_main_menu
 
+    @app.route('/classes', methods=['GET'])
+    @requires_login
+    def get_classes (user):
+        if not is_teacher (request):
+            return 'Only teachers can retrieve classes', 403
+        return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
+
     @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):

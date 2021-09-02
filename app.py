@@ -21,6 +21,9 @@ from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
+import commonmark
+commonmark_parser = commonmark.Parser ()
+commonmark_renderer = commonmark.HtmlRenderer ()
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
@@ -767,8 +770,11 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
-    template = 'main-page.html' if page != 'for-teachers' else 'for-teachers.html'
-    return render_template(template, mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations (lang, 'Auth'), **front_matter)
+    if page == 'for-teachers':
+        teacher_classes = [] if not current_user (request) ['username'] else DATABASE.get_teacher_classes (current_user (request) ['username'], True)
+        return render_template('for-teachers.html', sections=split_teacher_docs (contents), lang=lang, menu=menu, username=current_user(request) ['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations (lang, 'Auth'), teacher_classes=teacher_classes, **front_matter)
+
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations (lang, 'Auth'), **front_matter)
 
 
 def session_id():
@@ -855,6 +861,21 @@ def split_markdown_front_matter(md):
 
     return front_matter, parts[1]
 
+def split_teacher_docs (contents):
+    _html = commonmark_renderer.render(commonmark_parser.parse (contents))
+    # TODO: replace with html/xml parser
+    splitted = re.split (r'</?h2>', _html)
+    sections = []
+    for index in range (len (splitted)):
+        if index == 0:
+            continue
+        if index == 1:
+           splitted [index] = splitted [index].replace ('page_title: ', '')
+        if index % 2 == 1:
+            sections.append ({'title': splitted [index]})
+        else:
+            sections [-1] ['content'] = splitted [index]
+    return sections
 
 def render_main_menu(current_page):
     """Render a list of (caption, href, selected, color) from the main menu."""

@@ -376,8 +376,6 @@ def routes (app, database, requested_lang):
             output ['verification_pending'] = True
 
         output ['student_classes'] = DATABASE.get_student_classes (user ['username'])
-        if bool ('is_teacher' in user and user ['is_teacher']):
-            output ['teacher_classes'] = DATABASE.get_teacher_classes (user ['username'], True)
 
         output ['session_expires_at'] = timems () + session_length * 1000
 

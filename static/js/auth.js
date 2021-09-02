@@ -297,15 +297,8 @@ $.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (functi
           return '<li>' + auth.entityify (Class.name) + '</li>';
        }).join (''));
      }
-
-     if ($ ('#teacher_classes').html ()) {
-        $ ('#teacher_classes table tbody').html ((response.teacher_classes || []).map (function (Class) {
-          return '<tr><td class="text-center p-2"><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a></td><td class="text-center p-2">' + Class.students.length + '</td></tr>';
-        }).join (''));
-     }
    }).fail (function (response) {
      if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
-     if ($ ('#teacher_classes').html ()) $ ('#teacher_classes').hide ();
    });
 });
 
