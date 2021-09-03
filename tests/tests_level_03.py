@@ -30,21 +30,22 @@ class TestsLevel3(unittest.TestCase):
 
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile("abc felienne 123", 3)
+      result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual(str(context.exception), 'Invalid')
 
   def test_transpile_print_level_2(self):
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile("print felienne 123", 3)
+      result = hedy.transpile("print felienne 123", self.level)
 
     self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+
 
   def test_print(self):
 
     code = textwrap.dedent("""\
     print 'hallo wereld!'""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     print('hallo wereld!')""")
@@ -54,7 +55,7 @@ class TestsLevel3(unittest.TestCase):
 
 
   def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", 3)
+    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
     t.right(90)
@@ -66,7 +67,7 @@ class TestsLevel3(unittest.TestCase):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
     t.forward(afstand)""")
@@ -78,7 +79,7 @@ class TestsLevel3(unittest.TestCase):
     naam is Hedy
     print 'ik heet ,'""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -93,7 +94,7 @@ class TestsLevel3(unittest.TestCase):
     naam is Hedy
     print 'ik heet \\''""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -107,7 +108,7 @@ class TestsLevel3(unittest.TestCase):
     voor_naam is Hedy
     print 'ik heet '""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     voor_naam = 'Hedy'
@@ -121,7 +122,7 @@ class TestsLevel3(unittest.TestCase):
     for is Hedy
     print 'ik heet ' for """)
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     _for = 'Hedy'
@@ -135,7 +136,7 @@ class TestsLevel3(unittest.TestCase):
     code = textwrap.dedent("""\
     print 'Cuál es tu color favorito?'""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     print('Cuál es tu color favorito?')""")
@@ -149,7 +150,7 @@ class TestsLevel3(unittest.TestCase):
     dieren is Hond, Kat, Kangoeroe
     print dieren at 1""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
@@ -166,7 +167,7 @@ class TestsLevel3(unittest.TestCase):
     dieren is Hond, Kat, Kangoeroe
     print dieren at random""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
@@ -180,7 +181,7 @@ class TestsLevel3(unittest.TestCase):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     color = input('Cuál es tu color favorito?')""")
@@ -193,7 +194,7 @@ class TestsLevel3(unittest.TestCase):
     code = textwrap.dedent("""\
     print 'ik heet henk'""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     print('ik heet henk')""")
@@ -207,7 +208,7 @@ class TestsLevel3(unittest.TestCase):
     naam is Hedy
     print 'ik heet' naam""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -222,7 +223,7 @@ class TestsLevel3(unittest.TestCase):
     kleur is ask 'wat is je lievelingskleur?'
     print 'jouw lievelingskleur is dus' kleur '!'""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     kleur = input('wat is je lievelingskleur?')
@@ -238,7 +239,7 @@ class TestsLevel3(unittest.TestCase):
     kleur is ask 'Wat is je lievelings' ding
     print 'Jouw favoriet is dus ' kleur""")
 
-    result = hedy.transpile(code, 3)
+    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     ding = 'kleur'
@@ -255,20 +256,38 @@ class TestsLevel3(unittest.TestCase):
     print 'Jouw favoriet is dus ' kleur""")
 
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile(code, 3)
+      result = hedy.transpile(code, self.level)
 
     self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
 
 
   def test_transpile_missing_opening_quote(self):
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
       print hallo wereld'""")
 
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile(code, 3)
+      result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+    self.assertEqual('Unquoted Text', context.exception.args[0])
+
+
+  def test_transpile_missing_all_quotes(self):
+    max_level = 5
+
+    code = textwrap.dedent("""\
+      print hallo wereld""")
+    
+    for level in range(self.level, max_level+1):
+
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, level)
+
+      self.assertEqual('Var Undefined', context.exception.args[0])
+
+      print(f'{self.test_name()} level {level}')
+
+
 
   def test_transpile_issue_375(self):
     code = textwrap.dedent("""
@@ -276,9 +295,9 @@ class TestsLevel3(unittest.TestCase):
       print welcome""")
 
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile(code, 3)
+      result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Parse', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+    self.assertEqual('Parse', context.exception.args[0])
 
   def test_two_spaces_after_print(self):
 
