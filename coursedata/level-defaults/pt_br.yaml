@@ -301,3 +301,22 @@
                 print 'a é 2'
             else:
                 print 'a não é 1 nem 2'
+10:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+                print 'Estamos na volta: ' i ' e contamos: ' j
+    intro_text: "A partir de agora, podemos repetir um ciclo mais vezes. No exemplo nós contamos até 5 por 3 vezes. Portanto, fazemos 3 voltas e contamos até 5 em todas elas."
+    commands:
+    -   explanation: "Este é um exemplo com a instrução `for`."
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                    print 'Estamos na volta: ' i ' e contamos: ' j
+    -   explanation: "Podemos fazer o mesmo com as instruções `if`."
+        demo_code: |-
+            cor is azul
+            segundacor is amarelo
+            if cor is azul:
+                if segundacor is amarelo:
+                    print 'Juntos fazemos verde!'
