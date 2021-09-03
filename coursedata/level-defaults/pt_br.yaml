@@ -320,3 +320,25 @@
             if cor is azul:
                 if segundacor is amarelo:
                     print 'Juntos fazemos verde!'
+11:
+    start_code: |-
+        idade is input('Quantos anos você tem?')
+        print('Então você já teve estas idades:')
+        for i in range(0, idade):
+            print(i)
+    intro_text: "Vamos utilizar parênteses e vamos mudar `ask`! Alteramos `ask` para `input`! Agora vamos usar parênteres em `print`, `input` e `for`."
+    commands:
+    -   explanation: "Vamos utilizar parênteses com `print` agora!"
+        example: "Por exemplo: print('Olá mundo!')"
+        demo_code: "print('Olá mundo!')"
+    -   explanation: "Removemos o `ask` a agora o chamamos de `input`. Também vamos passar a usar parênteses."
+        example: "Por exemplo: nome is input('Qual o seu nome?')"
+        demo_code: |-
+            nome is input('Qual o seu nome?')
+            print('Então o seu nome é ' nome)
+    -   explanation: "Agora colocamos os números entre parênteses nos ciclos `for`. for i in range (0, 10):"
+        example: "Por exemplo: for i in range(0, 10):"
+        demo_code: |-
+            for i in range(0, 10):
+                print(i)
+            print('Preparados ou não, aqui vou eu!')
