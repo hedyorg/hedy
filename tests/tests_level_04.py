@@ -335,7 +335,7 @@ class TestsLevel4(unittest.TestCase):
     code = textwrap.dedent("""\
     kleur is geel
     if kleur is groen antwoord is ok else antwoord is stom
-    print ans""")
+    print antwoord""")
 
     for level in range(self.level, maxlevel+1):
       result = hedy.transpile(code, level)
@@ -346,7 +346,7 @@ class TestsLevel4(unittest.TestCase):
         antwoord = 'ok'
       else:
         antwoord = 'stom'
-      print(ans)""")
+      print(antwoord)""")
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
