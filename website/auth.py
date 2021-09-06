@@ -79,14 +79,6 @@ def routes (app, database, requested_lang):
     global DATABASE
     DATABASE = database
 
-    @app.route('/auth/texts', methods=['GET'])
-    def auth_texts():
-        response = make_response(jsonify(TRANSLATIONS.get_translations (requested_lang (), 'Auth')))
-        if not is_debug_mode():
-            # Cache for longer when not devving
-            response.cache_control.max_age = 60 * 60  # Seconds
-        return response
-
     @app.route ('/auth/login', methods=['POST'])
     def login ():
         body = request.json
