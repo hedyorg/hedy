@@ -21,9 +21,6 @@ from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
-import commonmark
-commonmark_parser = commonmark.Parser ()
-commonmark_renderer = commonmark.HtmlRenderer ()
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
@@ -721,10 +718,12 @@ def space_eu(level, step):
 def client_messages():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     ui_messages = TRANSLATIONS.get_translations(requested_lang(), "ui")
+    auth_messages = TRANSLATIONS.get_translations(requested_lang(), "Auth")
 
     response = make_response(render_template("client_messages.js",
         error_messages=json.dumps(error_messages),
-        ui_messages=json.dumps(ui_messages)))
+        ui_messages=json.dumps(ui_messages),
+        auth_messages=json.dumps(auth_messages)))
 
     if not is_debug_mode():
         # Cache for longer when not devving
@@ -862,19 +861,19 @@ def split_markdown_front_matter(md):
     return front_matter, parts[1]
 
 def split_teacher_docs (contents):
-    _html = commonmark_renderer.render(commonmark_parser.parse (contents))
-    # TODO: replace with html/xml parser
-    splitted = re.split (r'</?h2>', _html)
+    tags = utils.markdown_to_html_tags (contents)
     sections = []
-    for index in range (len (splitted)):
-        if index == 0:
-            continue
-        if index == 1:
-           splitted [index] = splitted [index].replace ('page_title: ', '')
-        if index % 2 == 1:
-            sections.append ({'title': splitted [index]})
+    for tag in tags:
+        # Sections are divided by h2 tags
+        if re.match ('^<h2>', str (tag)):
+            tag = tag.contents [0]
+            # We strip `page_title: ` from the first title
+            if len (sections) == 0:
+                tag = tag.replace ('page_title: ', '')
+            sections.append ({'title': tag, 'content': ''})
         else:
-            sections [-1] ['content'] = splitted [index]
+            sections [-1] ['content'] += str (tag)
+
     return sections
 
 def render_main_menu(current_page):

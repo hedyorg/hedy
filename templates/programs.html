@@ -39,6 +39,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
+  <script src="/client_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>

@@ -368,7 +368,7 @@ def getClass4 (state, response, username):
         raise Exception ('student.latest_shared.name should be "Public program 1"')
     link = student.get ('latest_shared').get ('link')
     if not re.search ('http://localhost:\d\d\d\d/hedy/' + state ['public_program'] + '/view', link):
-        raise Exception ('Invalid student.latest_shared.link ' + link + ', expecting', 'http://localhost:\d\d\d\d/5000/hedy/' + state ['public_program'] + '/view')
+        raise Exception ('Invalid student.latest_shared.link ' + link + ', expecting', 'http://localhost:\d\d\d\d/hedy/' + state ['public_program'] + '/view')
 
 def getTeacherClasses4 (state, response, username):
     Class = response ['body'] [0]
