@@ -44,7 +44,7 @@ $(function() {
       window.editor.setValue (window.State.loaded_program.code);
     }
     // If there's a loaded program for the adventure or level now selected, use it.
-    else if (adventures [tabName].loaded_program) {
+    else if (adventures [tabName] && adventures[tabName].loaded_program) {
       $ ('#program_name').val (adventures [tabName].loaded_program.name);
       window.editor.setValue (adventures [tabName].loaded_program.code);
     }
@@ -76,7 +76,7 @@ $(function() {
 
     // Do a 'replaceState' to add a '#anchor' to the URL
     const hashFragment = tabName !== 'level' ? tabName : '';
-    window.history?.replaceState(null, null, '#' + hashFragment);
+    if (window.history) { window.history.replaceState(null, null, '#' + hashFragment); }
   });
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.

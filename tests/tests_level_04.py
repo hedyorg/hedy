@@ -4,6 +4,7 @@ import sys
 import io
 from contextlib import contextmanager
 import textwrap
+import inspect
 
 @contextmanager
 def captured_output():
@@ -25,6 +26,8 @@ def run_code(parse_result):
 
 class TestsLevel4(unittest.TestCase):
   level = 4
+  def test_name(self):
+    return inspect.stack()[1][3]
 
   # invalid, ask and print should still work as in level 4
   def test_transpile_other(self):
@@ -327,6 +330,28 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
 
+  def test_ifelse_should_go_before_assign(self):
+    maxlevel = 5
+    code = textwrap.dedent("""\
+    kleur is geel
+    if kleur is groen antwoord is ok else antwoord is stom
+    print antwoord""")
+
+    for level in range(self.level, maxlevel+1):
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      kleur = 'geel'
+      if kleur == 'groen':
+        antwoord = 'ok'
+      else:
+        antwoord = 'stom'
+      print(antwoord)""")
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+      print(f'{self.test_name()} level {level}')
+
 
 
 
@@ -337,11 +362,8 @@ class TestsLevel4(unittest.TestCase):
     naam is ask 'hoe heet jij?'
     ifnaam is Hedy print 'leuk' else print 'minder leuk!'""")
 
-    result = hedy.transpile(code, self.level)
+    def test_transpile_other(self):
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, self.level)
+      self.assertEqual(str(context.exception), 'Invalid')
 
-    expected = textwrap.dedent("""\
-    naam = input('hoe heet jij?')
-    ifnaam = 'Hedy print \\'leuk\\' else print \\'minder leuk!\\''""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)

@@ -37,6 +37,13 @@ class TestsLevel1(unittest.TestCase):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("print", self.level)
     self.assertEqual('Incomplete', str(context.exception))
+    self.assertEqual('print', str(context.exception.arguments['incomplete_command']))
+
+  def test_transpile_incomplete_on_line_2(self):
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile("print lalalala\nprint", self.level)
+    self.assertEqual('Incomplete', str(context.exception))
+    self.assertEqual('print', str(context.exception.arguments['incomplete_command']))
 
   def test_transpile_incomplete_with_multiple_lines(self):
     with self.assertRaises(Exception) as context:
