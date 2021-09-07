@@ -315,6 +315,36 @@ class TestsLevel3(unittest.TestCase):
       self.assertEqual(False, result.has_turtle)
 
 
+  def test_bengali_assign(self):
+
+    code = textwrap.dedent("""\
+    নাম is হেডি""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    নাম = 'হেডি'""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_bengali_assign_and_use(self):
+
+    code = textwrap.dedent("""\
+    নাম is হেডি
+    print 'আমার নাম is ' নাম """)
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    নাম = 'হেডি'
+    print('আমার নাম is '+নাম)""")
+
+    self.assertEqual(expected, result.code)
+
+
+
+
 
 
 

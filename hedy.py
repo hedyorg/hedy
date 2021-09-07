@@ -934,7 +934,7 @@ def get_parser(level, sub):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, sub)
-    ret = Lark(grammar)
+    ret = Lark(grammar, regex=True)
     PARSER_CACHE[key] = ret
     return ret
 
