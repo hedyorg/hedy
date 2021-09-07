@@ -18,7 +18,7 @@ def check_code(f, level, field_name, code):
         hedy.transpile(code, int(level))
     except Exception as E:
         if E.args[0] != 'Has Blanks':  # code with blanks is ok!
-            error = 'Invalid ' + field_name + ' in file ' + f + ', level #' + str(level) + ' - Error: ' + E.args [0] + ' - code: ' + code
+            error = 'Invalid ' + field_name + ' in file ' + f + ', level #' + str(level) + ' - Error: ' + E.args [0]
             # We print the error for readability, since otherwise they get accumulated on a long list
             print (error)
             return error
