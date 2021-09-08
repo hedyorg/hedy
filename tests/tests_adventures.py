@@ -47,6 +47,7 @@ class TestsAdventurePrograms(unittest.TestCase):
                             continue
                         code_snippet_counter += 1
                         code = tag.contents [0].contents [0]
+
                         result = check_code (f, level_number, 'story_text code snippet #' + str (code_snippet_counter), code, adventure_name)
                         if result != True:
                             adventure_fails.append(result)
