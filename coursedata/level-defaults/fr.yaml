@@ -275,7 +275,7 @@
             print ' Cache toi ou je te verrai !'
 9:
     start_code: |-
-        for i in range 1 to 10
+        for i in range 1 to 10:
             print i
         print 'Cache toi ou je te verrai !'
     intro_text: "Maintenant on change encore un petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin du règle précédente."
@@ -286,15 +286,15 @@
         demo_code: |-
             for i in range 1 to 10:
                 print i
-            print ' Cache toi ou je te verrai !.
+            print ' Cache toi ou je te verrai !.'
     -   name: "`if` avec `:`"
         explanation: "Nous faisons de la même manière avec tous nos commandes `if`."
         example: "if couleur is vert:"
         demo_code: |-
-            couleur is ask Quelle couleur préfères-tu ?
+            couleur is ask 'Quelle couleur préfères-tu ?'
             if couleur is vert:
                 print 'Tu as choisi le vert.'
-            else
+            else:
                 print 'Tu as choisi un autre couleur que le vert.'
     -   name: "(Optionnel) `elif`"
         explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `elif`. `Elif` signifie `else if`. Tu regardes alors auparavant à `if` et quand ça n'est pas vrai, tu avances à `elif`. Quand ça n'est pas vrai aussi, tu avances à `else`."
@@ -313,7 +313,7 @@
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
-                print 'Le résultat de: ' i ' fois ' j ’ fait 'i*j 
+                print 'Le résultat de: ' i ' fois ' j ' fait ' i*j
     intro_text: "À partir de maintenant nous pouvons exécuter un boucle plusieurs fois. Dans l'exemple nous comptons trois fois de un à cinq. Alors nous répétons trois fois un boucle de cinq fois."
     commands:
     -   name: "`for` dans un autre `for`."
@@ -321,12 +321,12 @@
         demo_code: |-
             for i in range 1 to 3:
                 for j in range 1 to 5:
-                    print 'Le résultat de: ' i ' fois ' j ’ fait 'i*j 
+                    print 'Le résultat de: ' i ' fois ' j ' fait ' i*j
     -   name: "`if` dans un autre `if`."
         explanation: "Nous pouvons faire le même truc avec `if`."
         demo_code: |-
-            couleur1 is ask Donne-moi une couleur :
-            couleur2 is ask Donne-moi encore une couleur
+            couleur1 is ask 'Donne-moi une couleur :'
+            couleur2 is ask 'Donne-moi encore une couleur'
             if couleur1 is bleu:
                 if couleur2 is jaune:
                     print 'Ensemble ça donne vert !'
