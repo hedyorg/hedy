@@ -58,7 +58,7 @@ adventures:
                     print Hij hoort nu het geluid van een dieren at random
                     ```
 
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print 'Hier komt straks jouw verhaal!'"
             3:
                 story_text: |
                     ## Verhaal
@@ -81,7 +81,7 @@ adventures:
                     print naam ' is bang dat dit een spookbos is'
                     ```
 
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print 'Hier komt straks jouw verhaal!'"
             4:
                 story_text: |
                     ## Verhaal
@@ -107,7 +107,7 @@ adventures:
                     else print 'Het monster eet ' naam ' op'
                     ```
 
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print 'Hier komt straks jouw verhaal!'"
             5:
                 story_text: |
                     ## Verhaal
@@ -181,15 +181,15 @@ adventures:
                             print 'Hier is niks meer te vinden'
                           print hijzij ' loopt terug naar de splitsing'
                           zwaard is gevonden
-                        ```
-                        ## Uitdaging
-                        Dit verhaal gaat over een ridder, maar misschien wil je zelf wel een verhaal maken over iets anders. Gelukkig is alles mogelijk in Hedy!
-                        Verzin en programmeer je eigen verhaal en spiek voor wat inspiratie gerust in het voorbeeld!
+                    ```
+                    ## Uitdaging
+                    Dit verhaal gaat over een ridder, maar misschien wil je zelf wel een verhaal maken over iets anders. Gelukkig is alles mogelijk in Hedy!
+                    Verzin en programmeer je eigen verhaal en spiek voor wat inspiratie gerust in het voorbeeld!
                 start_code: |
                     naam is ask 'Hoe heet je?'
                     hijzij is ask 'Ben je een hij of een zij?'
                     print 'Ridder ' naam ' loopt door een bos '
-                    print hijzij ' is op zoek naar een schat
+                    print hijzij ' is op zoek naar een schat'
 
     songs:
         name: "Zing een liedje!"
@@ -258,7 +258,7 @@ adventures:
                         print 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
                         print 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
                     ```
-                start_code: " "
+                start_code: ""
                     
             8:
                 story_text: |
@@ -281,7 +281,7 @@ adventures:
                     print 'Want in de zee daar zwemmen haaien en die bijten je...'
                     print 'DOOD!'
                     ```
-                start_code: " "
+                start_code: ""
     turtle:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"
@@ -501,7 +501,7 @@ adventures:
                     print _ _ _ <- hier moet je het kiezen programmeren
                     ```
 
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
             4:
                 story_text: |
                     ## Dobbelsteen
@@ -518,7 +518,7 @@ adventures:
                     if _ is regenworm print 'Je mag stoppen met gooien.'
                     _ print 'Je moet nog een keer hoor!'
                     ```
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
             5:
                 story_text: |
                     ## Dobbelsteen
@@ -532,7 +532,7 @@ adventures:
                     keuzes is 1, 2, 3, 4, 5, regenworm
                     repeat _ _ print ___
                     ```
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
             6:
                 story_text: |
                     ## Dobbelsteen
@@ -551,7 +551,7 @@ adventures:
                     print 'dat zijn dan ' punten ' punten'
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
     rock:
         name: "Steen, schaar, papier"
         description: "Maak jouw eigen steen, schaar, papier spel"
@@ -687,7 +687,7 @@ adventures:
                     antwoord is ask 'Vul hier het antwoord in:'
                     print 'Jouw antwoord is ' antwoord
                     if antwoord is goedeantwoord
-                        score is score +1
+                      score is score +1
                   print 'Je score is ' score
                   ```
                 start_code: ""
@@ -885,7 +885,7 @@ adventures:
                     ## Voorbeeld Hedy Code
                     ```
                     print Welkom bij McHedy!
-                    aks Wat wilt u bestellen?
+                    ask Wat wilt u bestellen?
                     echo Dus u wilt graag... 
                     print Bedankt voor uw bestelling!
                     ```
@@ -1264,7 +1264,7 @@ adventures:
                     if speler is levend
                         print ' Hoera! Je bent ontsnapt!'
                     ```
-                start_code: "'print 'Ontsnap uit het spookhuis!'"
+                start_code: "print 'Ontsnap uit het spookhuis!'"
                                  
     next:
         name: "Vooruitblik"
@@ -1328,12 +1328,12 @@ adventures:
                     Je hebt misschien gemerkt dat je codes steeds maar langer worden. Als je bijvoorbeeld een zin meerdere keren wil herhalen, nemen die allemaal een aparte regel in. 
                     Bijvoorbeeld als je lang zal ze leven wil coderen...
                     ```
-                    print lang zal ze leven
-                    print lang zal ze leven
-                    print lang zal ze leven
-                    print in de gloria
-                    print in de gloria
-                    print in de gloria
+                    print 'lang zal ze leven'
+                    print 'lang zal ze leven'
+                    print 'lang zal ze leven'
+                    print 'in de gloria'
+                    print 'in de gloria'
+                    print 'in de gloria'
                     ```
                     Dit is een erg lange code voor maar 2 zinnetjes... In level 5 leer je gelukkig het `repeat` commando, waardoor je regels code kunt herhalen.
                 start_code: "print 'Op naar het volgende level!'"
@@ -1380,7 +1380,7 @@ adventures:
                     gekozen is opties at random
                     if opties is pasta
                         print 'Hmmm lekker! Pasta!'
-                    else 
+                    else
                         print 'Helaas pindakaas'
                     ```
                     Eigenlijk zou je in dit voorbeeld 2x een else willen hebben: eentje voor de spruitjes en eentje voor de boerenkool. 

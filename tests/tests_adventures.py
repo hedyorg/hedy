@@ -10,15 +10,18 @@ os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file_
 path = '../coursedata/adventures'
 files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith ('.yaml')]
 
-def check_code(f, level, field_name, code, adventure_name):
-    # We ignore empty code snippets
+def check_code(filename, level, field_name, code, adventure_name):
+    # We ignore empty code snippets or those of length 1
     if len(code) == 0:
         return True
     try:
         hedy.transpile(code, int(level))
     except Exception as E:
+        #shorter file name for beter readability
+        filename_shorter = filename.split("/")[3]
+        language = filename_shorter.split(".")[0]
         if E.args[0] != 'Has Blanks':  # code with blanks is ok!
-            error = f'Invalid {field_name} in file {f} level #{level} adventure {adventure_name}. Error: {E.args[0]}'
+            error = f'Invalid {field_name} in {language} level #{level} adventure {adventure_name}. Error: {E.args[0]}'
             print(error)
             return error
     return True
@@ -53,4 +56,4 @@ class TestsAdventurePrograms(unittest.TestCase):
                         if result != True:
                             adventure_fails.append(result)
 
-        self.assertEqual([],adventure_fails)
+        self.assertEqual(0,len(adventure_fails))
