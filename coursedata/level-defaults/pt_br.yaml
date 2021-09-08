@@ -342,3 +342,28 @@
             for i in range(0, 10):
                 print(i)
             print('Preparados ou não, aqui vou eu!')
+12:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        print(fruta)
+    intro_text: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
+    commands:
+    -   explanation: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
+        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print(fruta)
+    -   name: "Obtém um elemento da lista."
+        explanation: "Para obter um elemento da lista usamos [número] onde fruta[1] significa: obtenha a primeira fruta da lista!"
+        example: "Por exemplo: primeirafruta is fruta[1]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            primeirafruta is fruta[1]
+            print(primeirafruta)
+    -   name: "Obtém um elemento aleatório da lista."
+        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
+        example: "For example: randomfruit is fruit[random]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            qualquerfruta is fruta[random]
+            print(qualquerfruta)
