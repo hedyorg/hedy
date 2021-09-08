@@ -161,12 +161,12 @@ adventures:
 
                     ## Példa Hedy kódr
                     ```
-                    verse is 99
-                    print verse ' üveg sör a falon'
-                    print verse ' üveg sör'
+                    verssor is 99
+                    print verssor ' üveg sör a falon'
+                    print verssor ' üveg sör'
                     print 'Vegyél egyet, add tovább'
-                    verse is verse - 1
-                    print verse ' üveg sör a falon'
+                    verssor is verssor - 1
+                    print verssor ' üveg sör a falon'
                     ```
                     Most megismételheted a 2–9. Sort, ahányszor csak akarod, a sorok másolásával.
 
@@ -176,6 +176,21 @@ adventures:
                     * repeat 3 times print 'Baby Shark Tutududududu'
 
                     De ahogyan ebben a leckében látni fogod, néha több sort is meg akarsz együtt ismételni. Ezt meg lehet tenni vágással és beillesztéssel, de ez sok munka. A 7. szinten megtanulod, hogyan kell ezt könnyebben megtenni.
+            7:
+                start_code: print 'Üveg sör'
+                story_text: |-
+                    ## Dalok
+                    A 6. szinten a "Üveg sör" dalt programoztad. Egy verset alkottál, majd 99 -szer kellett lemásolnod a verssorokat. A 7. szinten 99 alkalommal ismételheted meg a dalt, csak egy egyszerű sor hozzáadásával!
+
+                    ## Példa Hedy kódra
+                    ```
+                    verssor is 99
+                    print verssor ' üveg sör a falon'
+                    print verssor ' üveg sör'
+                    print 'Vegyél egyet, add tovább'
+                    verssor is verssor - 1
+                    print verssor' üveg sör a falon'
+                    ```
     dishes:
         image: dishes.png
         name: Ki mosogat?
@@ -483,6 +498,27 @@ adventures:
                     if valasz is jo_valasz print 'rendben'
                     else print 'hiba! ennyi: ' jo_valasz
                     ```
+            7:
+                story_text: |-
+                    ## Számológép
+                    A 6. szinten megtanultad a számológép készítését, a 7. szinten kibővítheted ezt a kódot, és egy kis matematikai játékot készíthetsz belőle. Mint ez...
+
+                    ## Példa Hedy kód
+                    ```
+                    pontszam is 0
+                    repeat 10 times
+                        szamok is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        szam1 is szamok at random
+                        szam2 is szamok at random
+                        helyesvalasz is szam1 * szam2
+                        print 'Mennyi ' szam1 ' * ' szam2 '?'
+                        valasz is ask 'Gépeld ide a válaszodat...'
+                        print 'A válaszod: ' valasz
+                        if valasz is helyesvalasz
+                            pontszam is pontszam + 1
+                    print 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
+                    ```
+                start_code: print Üdvözölünk a számológépnél!
     restaurant:
         name: Étterem
         default_save_name: Étterem
@@ -596,6 +632,21 @@ adventures:
 
                     ## Kihívás
                     Tudnál még több kérdést feltenni az ügyfeleknek, amikor rendelnek, és különböző  módon felelni a válaszaikra az if paranccsal?
+            5:
+                start_code: print 'Üdvözlünk a Hedy étteremben!'
+                story_text: |-
+                    ## Étterem
+                    Az 5. szinten megtanultad, hogyan használhatod az ismétlés parancsot egy kódsor megismétlésére bizonyos számú alkalommal.
+                    Ezt használhatod éttermedben, hogy megkérdezz több embert, hogy mit szeretnének enni. Mint ez:
+
+                    ```
+                    print 'Üdvözlünk a Hedy étteremben!'
+                    emberek is ask 'Hány ember jön ma?'
+                    repeat emberek times food is ask 'Mit szeretnél ennit?'
+                    print 'Köszönjük megrendelésedet! Mindjárt jön!'
+                    ```
+                    Az 5. szinten több embert is megkérdezhetsz, hogy mit szeretnének enni, de nem lehet minden egyes rendelést külön kiíratni, mert csak egy kódsort ismételhetsz meg.
+                    A 7. szinten megtanulhatod, hogyan kell több sor kódot egyszerre megismételni, ami lehetővé teszi több rendelés kérését és kiíratását is!
             6:
                 start_code: ''
                 story_text: |-
@@ -650,3 +701,556 @@ adventures:
                     - kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
                     - adsz hozzá gyermekmenüt?
                     - gondolsz más szórakoztató dolgokra?
+            7:
+                start_code: print 'Üdvözlünk a Hedy étteremben!'
+                story_text: |-
+                    ## Étterem
+                    A 7. szinten több sor kód megismétlésével bonyolultabbá teheted virtuális éttermedet. Mint ez:
+
+                    ```
+                    print 'Üdvözlünk a Hedy étteremben!'
+                    emberek is ask 'Hány ember jön ma??'
+                    print 'Nagyszerű!'
+                    print 'A mai menü pizza vagy saláta'
+                    repeat emberek times
+                        etel is ask 'Mit szeretnél rendelni?'
+                        print etel
+                        if etel is pizza
+                            ar is ar + 1000
+                        else
+                            ar is ar + 800
+                    print 'Köszönjük rendelésedet!'
+                    print 'Ez ' ar ' forint lesz'
+                    print 'Köszönöm, jó étvágyat!!'
+                    ```
+
+                    ## Kihívás
+                    Természetesen ez a kód bővíthető a menü további elemeivel, italokkal és/vagy több fogással, így nyugodtan adj hozzá annyi lehetőséget, amennyit csak akarsz!
+            8:
+                start_code: print 'Üdvözlünk a Hedy étteremben!'
+                story_text: |-
+                    ## Étterem
+                    Az "for i in 1 in 5" tartományban használhatjuk a több vásárló megrendeléseinek rendezett kiíratására.
+
+                    ## Példa Hedy kódra
+                    ```
+                    print 'Üdvözlünk a Hedynél!'
+                    emberek is ask 'Hány ember számára rendelsz?'
+                    for i in range 1 to emberek
+                        print 'Rendelésszám ' i
+                        etel is ask 'Mit szeretnél enni?'
+                        print etel
+                        if etel is sültkrumpli
+                            szosz is ask 'Milyen szószt szeretnél hozzá?'
+                            print szosz
+                        ital is ask 'Mit szeretnél inni?'
+                        print ital
+                    ar is 400 * emberek
+                    print 'Ez ' ar ' forint lesz, kérem'
+                    ```
+    turtle:
+        name: Teknős
+        description: Készíts saját rajzot
+        image: turtle.png
+        default_save_name: teknős
+        levels:
+            1:
+                story_text: |-
+                    ## Rajzoljunk
+                    Az 1. szinten Hedy segítségével rajzolhatsz is. A fordulatok és vonalak kombinálásával négyzetet vagy lépcsőt készíthetsz!
+
+                    Az "előre" segítségével húzhatsz egy vonalat előre. A mögötte lévő szám határozza meg, hogy a teknős mennyit fog gyalogolni. "jobbra fordul" negyed fordulatot forgat az óramutató járásával megegyező irányba, "balra fordul" az óramutató járásával ellentétes irányba fordul
+
+                    Ez egy kis lépcső kezdete. El tudod érni az 5 lépést?
+
+                    ## Példa Hedy kódra
+                    ```
+                    forward 50
+                    turn left
+                    forward 50
+                    turn right
+                    ```
+                start_code: |-
+                    	
+                    forward 50
+                    turn left
+            2:
+                story_text: |-
+                    Az 1. szinten a teknős csak balra vagy jobbra tudott fordulni. Ez egy kicsit unalmas!
+                    A 2. szinten minden irányba tudja mutatni az orrát.
+
+                    Használd a 90-et a negyed fordulathoz. Ezeket fokoknak hívjuk. A teljes fordulat 360 fok.
+                    Tudsz ábrát készíteni ezzel a kóddal? Talán egy háromszög vagy egy kör?
+
+                    ## Példa Hedy kódra
+
+                    ```
+                    print Ábrák rajzolása
+                    angle is 90
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    ```
+                    ## Együttműködés
+
+                    A 2. szinten interaktív rajzot is készíthetsz az "ask" kombinálásával.
+                    Ezzel a kóddal megkéred a felhasználót, hogy mondja meg a teknősnek, hány fokkal kell fordulnia. Ezután megkérdezi a teknőst, meddig kell mennie. Ezt a kódot lemásolva a teknős messzire juthat
+
+                    ## Példa Hedy kódra
+                    ```
+                    print Turtle race
+                    angle is ask Where to turn?
+                    turn angle
+                    distance is ask How far?
+                    forward distance
+                    ```
+                start_code: |-
+                    	
+                    forward 50
+                    turn left
+            3:
+                story_text: |-
+                    ## Rajz
+                    A 3. szinten idézőjeleket kell használni a "print" és az "ask" szöveggel. A teknős használata közben is
+
+                    ## Példa Hedy kódra
+                    ```
+                    print 'Teknős verseny'
+                    irany is ask 'Hány fokot forduljon?'
+                    turn irany
+                    tavolsag is ask 'Milyen messze menjen?'
+                    forward tavolsag
+                    ```
+                start_code: |-
+                    print 'Teknős verseny'
+                    irany is ask 'Hány fokot forduljon?'
+                    turn irany
+                    tavolsag is ask 'Milyen messze menjen?'
+                    forward tavolsag
+    fortune:
+        name: Jósnő
+        description: Hadd jósolja meg Hedy a jövőt
+        image: fortuneteller.png
+        default_save_name: Jósnő
+        levels:
+            1:
+                start_code: print Szia, Hedy, a jósnő vagyok!
+                story_text: |-
+                    ## Jósnő
+                    Voltál már fesztiválon, és egy jósnő megjósolta a jövődet? Vagy játszottál már varázslatos nyolc labdával?
+                    Akkor valószínűleg tudod, hogy nem igazán tudják megjósolni a jövődet, de ettől még szórakoztató játszani!
+
+                    A következő szinteken megtanulhatod, hogyan kell saját jósnőt létrehozni!
+                    Az 1. szinten könnyen kezdheted, ha hagyod, hogy Hedy jósnőként mutatkozzon be, és hagyja, hogy visszhangozza a játékosok válaszait.
+                    Mint ez:
+
+                    ## Példa Hedy kódra
+                    ```
+                    print Szia, Hedy, a jósnő vagyok!
+                    ask Ki vagy te?
+                    print Hadd nézzek bele a kristálygömbömbe
+                    print Látom... Látom...
+                    echo A neved...
+                    ```
+                    ## Kihívás
+                    Hedy most csak a nevedet mondja meg. Ki tudod bővíteni a kódot, hogy Hedy több dolgot meg tudjon jósolni rólad?
+
+                    Nyilvánvaló, hogy Hedy még nem túl jó jósnő, hiszen csak meg tudja ismételni a játékosok által adott válaszokat!
+                    Vess egy pillantást a 2. szintre, hogy fejleszd a jósnődet.
+            2:
+                start_code : print Szia, Hedy, a jósnő vagyok!
+                story_text: |-
+                    ## Jósnő
+                    Az 1. szinten megalkottad első jóslásgépedet, de Hedy nem tudott igazán megjósolni semmit, csak visszhangot.
+                    A 2. szinten használhatsz egy változót és az "at random" parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
+
+                    ## Példa Hedy -kódra
+                    Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
+                    ""
+                    print Szia, Hedy, a jósnő vagyok!
+                    kerdes is ask Mit akarsz tudni?
+                    print Ez az amit tudni akarsz: kerdes
+                    valasz is igen, nem, talan
+                    print A kristálygömböm azt mondja... valasz at random
+
+                    ## Kihívások
+                    Most Hedy csak igennel, nemmel vagy talán válaszolhat. Adhatsz Hedynek több válaszlehetőséget, például „határozottan” vagy „kérdezz újra”
+            3:
+                start_code : print 'Szia, Hedy, a jósnő vagyok!'
+                story_text: |-
+                    ## Jósnő
+                    A 3. szint nem tartalmaz új funkciókat, de lehetővé teszi az idézőjelek használatának gyakorlását.
+                    Újra elkészítheted a 2. szintű kódot, és ügyelj arra, hogy az idézőjeleket a megfelelő helyre írd!
+
+                    Ne feledd, hogy a 2. szinten nem használhattuk a „kerdes” szót a változó nevének és egy normál kiíratható szónak sem.
+                    A 3. szintű idézőjelek lehetővé teszik ezt!
+
+                    Fontos! Ne feledd, hogy most, amikor idézőjeleket használunk, Hedy összezavarodik, amikor az aposztrófot más szövegösszefüggésben használod.
+
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print 'Szia, Hedy, a jósnő vagyok!'
+                    kerdes is ask 'Mit akarsz tudni'?
+                    print Ez az amit tudni akarsz: kerdes
+                    valasz is igen, nem, talan
+                    print 'A kristálygömböm azt mondja...' valasz at random
+            4:
+                start_code : print 'Szia, Hedy, a jósnő vagyok!'
+                story_text: |-
+                    ## Jós
+                    A 4. szinten megtanulod (titokban) az esélyeket a magad javára billenteni a jósnő használata során!
+                    Az "if" és az "else" használatával bebiztosíthatod, hogy mindig jó szerencsét kapj, míg mások nem.
+                    Tekintsd meg ezt a példát, hogy megtudd, hogyan.
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print 'Szia, Hedy, a jósnő vagyok'
+                    print 'Meg tudom jósolni, nyersz-e a lottón holnap!'
+                    szemely is ask 'Ki vagy te?'
+                    if szemely  is Hedy print 'Bizonyosan nyerni fogsz!' else print 'Balszerencse! Valaki más nyer!'
+
+                    Cseréld le Hedyt a saját nevedre az utolsó sorban, és Hedy mindig azt jósolja, hogy te nyersz a lottón, mások nem!
+                    Természetesen ez gyanakvást kelthet a többi játékossal szemben ... Ennek elkerülése érdekében gondoskodhatsz arról, hogy Hedy minden alkalommal más válaszokat adjon a kód futtatásakor.
+                    De természetesen neked továbbra is pozitív választ ad, a többi játékosnak pedig negatív választ.
+
+                    ## Példa Hedy -kódra 2
+                    ""
+                    print 'Szia, Hedy, a jósnő vagyok'
+                    print 'Meg tudom jósolni, nyersz-e a lottón holnap!'
+                    szemely is ask 'Ki vagy te?'
+                    jovalasz is Hurrá! Nyerni fogsz!, Bizonyára nyerni fogsz!, Van egy nyertesünk!
+                    rosszvalasz is 'Balszerencse!, Valaki más nyer!, Te veszteni fogsz!
+                    if szemely is Hedy print jovalasz at random else print rosszvalasz at random
+                    ```
+                    ## Kihívások
+                    Ezeb az elven különféle programokat lehet készíteni, csak légy kreatív! Például létrehozhatsz egy olyan gépet, amely megjósolja, hogy kedvenc sportcsapatod legyőzi az összes versenytársat!
+                    Vagy elkészítheted Hófehérke varázslatos tükrét a falon, hogy elmondd mindenkinek, hogy te vagy a legbecsületesebb!
+                    Hagyd, hogy a fantáziád végezze a munkádat!
+            5:
+                start_code : |-
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Feltehetsz 3 kérdést!'
+                story_text: |-
+                    ## Jósnő
+                    Az 5. szinten a repeat paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Feltehetsz 3 kérdést!'
+                    repeat 3 times kerdes is ask 'Mit akarsz tudni?'
+                    valasz is igen, nem, talan
+                    repeat 3 times print 'A kristálygömböm azt mondja... ' valasz at random
+                    ```
+                    ## Kihívás
+                    Amint láthatod, a kérdések ebben a példában nincsenek kiíratva. Ennek az az oka, hogy a "kérdés" változót háromszor módosult.
+                    Valahányszor a játékos kitölti az új választ, Hedy felülírja az előzőt, így a játékos első válaszát elfelejti.
+                    Ez azt jelenti, hogy így nem tudja kiíratni az összes kérdést.
+
+                    Ha 1 helyett 3 különböző változót használsz (például `kerdes1`,` kerdes2` és `kerdes3`), megoldhatod a problémát, és kiírathatod a kérdéseket.
+                    Ez azt jelenti, hogy a válaszoknál csak az "repeat" utasítást kell használnod, és az összes kérdést külön kell feltenned és ki kell íratnod.
+                    Meg tudod csinálni?
+
+                    A 7. szinten az ismétlés parancs elrendezése megváltozik, ami lehetővé teszi több sor ismétlését egyszerre.
+            6:
+                start_code: |-
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
+                story_text: |-
+                    ## Jósnő
+                    A 6. szinten jövendőmondóként használhatod a matematikát előrejelzéseidben. Ez lehetővé teszi (buta) képletek kitalálását a jövő kiszámításához.
+                    Például kiszámíthatod, hogy milyen gazdag leszel, vagy hány gyermeked lesz, ha felnősz.
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
+                    kor is ask 'Hany éves vagy?'
+                    testver is Hány testvéred van?
+                    magassag is Hány cm magas vagy?
+                    gyerekek is magassag / kor
+                    gyerekek is gyerekek - testver
+                    print 'Neked ...'
+                    print gyerekek ' gyereked lesz!'
+                    ```
+                    ## Példa a buta jósnőre
+                    Ha az előző példa nem volt elég buta a számodra, akkor nézd meg ezt!
+
+                    ""
+                    print 'Hedy vagyok a buta jósnő!'
+                    print 'Meg tudom jósolni, milyen okos vagy!'
+                    foci is ask '1-10-es skálás mennyire szereted a focit?'
+                    banan is ask 'Hány banánt ettél a héten?'
+                    higienia is ask 'Hányszor mostad meg a kezed ma?'
+                    eredmeny is banan + higienia
+                    eredmeny is eredmeny * foci
+                    print 'Te ' eredmeny ' százalék okos vagy.'
+                    ""
+            7:
+                start_code: |-
+                    print 'Hedy a jósnő vagyok!'
+                    print 'Feltehetsz 3 kérdést.'
+                story_text: |-
+                    ## Jósnő
+                    Az 5. szinten megtanultad, hogyan kell használni az ismétlést, hogy a jósnő 3 kérdésre válaszoljon egymás után, de problémánk adódott a kérdések kiíratásával.
+                    A 7. szinten ez a probléma megoldódott az ismétlés parancs új módjának köszönhetően.
+                    A következő példában a jósnő 3 kérdést tehet fel, és kiírathatja őket!
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print 'Hedy a jósnő vagyok!'
+                    print 'Feltehetsz 3 kérdést.'
+                    valasz are igen, nem, talán
+                    repeat 3 times
+                       kerdes is ask 'Mit akarsz tudni?'
+                       print kerdes
+                       print 'A kristálygömböm azt mondja...' valasz at random
+                    ```
+    haunted:
+        name: Kísértetház
+        description: menekülés a kísértetjárta házból
+        default_save_name: Kísértetház
+        levels:
+            1:
+                story_text: |-
+                    ## Kísértetház játék
+                    Ebben a kalandban egy olyan játék létrehozásán dolgozol, amelyben a megfelelő ajtó kiválasztásával menekülnöd kell egy kísértetjárta házból.
+                    Ha a megfelelő ajtót választod, túléled, de ha nem, egy rettenetes szörnyeteg ...
+
+                    Az 1. szinten elkezdjük a kísértetjárta ház játékunkat egy ijesztő történet kitalálásával, és megkérdezzük a játékost, hogy milyen szörnyet látnak a kísértetjárta házban.
+
+                    ## Példa Hedy kódra
+
+                    ""
+                    print Hogyan kerültem ide?
+                    print Emlékszem, a barátom azt mondta, menjek be a régi kastélyba ...
+                    print és hirtelen minden elsötétült.
+                    print De hogy kerületem a padlóra...?
+                    print éA fejem úgy fáj, minhta egy baseball ütővel ütötték volna meg!
+                    print Mi ez a hang?
+                    print Ó, nem! Úgy érzem, nem vagyok egyedül ebben a házban!
+                    print El kell mennem innen!
+                    print Három ajtó van előttem ...
+                    ask Melyik ajtót válasszam?
+                    echo Az ajtó, amit választok
+                    print ...?
+                    ```
+                    ## Kihívás
+                    Be tudod fejezni az ijesztő történetet? Vagy kitalálsz egy saját kísértetáz történetet?
+                start_code: print Hogy kerültem ide?
+            2:
+                start_code: print Escape from the haunted house!
+                story_text: |-
+                    ## Kísértetház játék
+                    Az 1. szinten bemutatkoztál a kísértetjház játékodnak, de ahogy észrevetted, a történetnek mindig rettenetes vége lesz.
+                    A 2. szinten interaktívabbá teheted a történetet a játék kimenetelének megváltoztatásával; néha megesznek, néha megmenekülsz!
+                    Hadd döntsön Hedy véletlenszerűen!
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print Escape from the haunted house!
+                    print There are 3 doors in front of you...
+                    choice is ask Which door do you choose?
+                    print You picked door ... choice
+                    monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    print You see...
+                    print monsters at random
+                    ```
+                    ## Kihívás
+                    Ez a történet meglehetősen egyszerű, talán egy kicsit érdekesebbé teheted egy izgalmasabb történet hozzáadásával.
+                    Továbbá nagyon korlátozott eredményeket érhetsz el, csak 3 lehetőség van arra, hogy mi van az ajtók mögött. Talán még több szörnyetegre gondolhatsz, amelyet felvehetsz a listába!
+
+                    ## Változtasd a játékot tévéműsorrá!
+                    Végezetül szeretnénk egy kihívást küldeni Neked,  hogy változtasd meg ezt a játékot olyan játékműsorrá (mint amilyenek a tévében vannak), ahol a játékosok ajtót vagy bőröndöt választanak, és valamelyik nagy díjat tartalmaz!
+                    Meg tudod csinálni?
+            3:
+                start_code: print Escape from the haunted house!
+                story_text: |-
+                    ## Kísértetház
+                    A 3. szinten megtanulod használni az idézőjeleket a játékaidban.
+                    Át tudod alakítani a kisértetház játékot úgy, hogy megfeleljen a 3. szintnek?
+            4:
+                start_code: print Escape from the haunted house!
+                story_text: |-
+                    ## Kísértetház
+                    Eddig a szintig a kísértetjárta ház játék mindig arra kérte a játékost, hogy válasszon egy ajtót, de ahogy észrevettétek, nem igazán kellett helyesen válaszolniuk.
+                    Abban az esetben, ha a játékos teljesen véletlenszerű választ adott, a játék továbbra is működne, és a játékos akár nyerhet is (annak ellenére, hogy nem választott ajtót).
+                    A 4. szinten csak akkor nyerheti meg a játékot, ha ugyanazt az ajtót választja, amelyet Hedy véletlenszerűen választott ki.
+
+                    ## Példa Hedy kódra
+                    ""
+                    print 'Szabadulj ki a kísértetházból!'
+                    print 'Három ajtó van előtted...'
+                    ajtok is 1,2,3
+                    szornyek is verfarkas, mumia, vampir, zombi
+                    valasztottajto is ask 'Melyik ajtót választod?'
+                    print 'Az ajtó, amit választottál...' valasztottajto
+                    helyesajto is ajtok at random
+                    if valasztottajto is helyesajto print 'Nagyszerű! Kiszabadultál!'
+                    else print 'Jaj ne! Megevett a ...' szornyek at random
+                    ```
+            7:
+                start_code: print 'Szabadulj ki a kísértetházból'
+                story_text: |-
+                    ## Kísértetház
+                    A 7. szinten több sor kódot ismételhetsz meg, ami lehetővé teszi, hogy a kísértetjárta házat még interaktívabbá tedd!
+
+                    ## Példa Hedy kódra
+                    ""
+                    print 'Szabadulj ki a kísértetházból'
+                    jatekos is elo
+                    ajtok is 1, 2, 3
+                    szornyek is  vampir, zombi, oriaspok
+                    repeat 3 times
+                        if jatekos is elo
+                            helyesajto is ajtok at random
+                            print 'Három ajtó van előtted...'
+                            valasztottajto is ask 'Melyik ajtót választod?'
+                            if valasztottajto is helyesajto
+                                print 'Itt nincs szörny!'
+                            else
+                                print 'Megevett a(z) ' szornyek at random
+                                jatekos is halott
+                        else
+                            print 'GAME OVER'
+                    if jatekos is elo
+                        print 'Nagyszerű! Túlélted!'
+                    ```
+                    ## Kihívás
+                    Most nagyon nehéz megnyerni ezt a játékot, meg tudod könnyíteni a győzelmet?
+                    Például úgy, hogy csak 1 rossz ajtó és 2 helyes ajtó van, 1 helyes  és 2 rossz ajtó helyett?
+
+            8:
+                story_text: |-
+                    ## Kísértetház
+                    A 8. szinten megváltoztattuk az ismétlés parancsot, és hozzáadtunk egy sort a kísértetjárta házunkhoz, amely megmondja a játékosnak, hogy melyik szobában vannak.
+
+                    ## Példa Hedy -kódra
+                    ""
+                    print 'Szabadulj ki a kísértetházból'
+                    jatekos is elo
+                    ajtok is 1, 2, 3
+                    szornyek is  vampir, zombi, oriaspok
+                    for i in range 1 to 3
+                        if jatekos is elo
+                            helyesajto is ajtok at random
+                            print 'Három ajtó van előtted...'
+                            valasztottajto is ask 'Melyik ajtót választod?'
+                            if valasztottajto is helyesajto
+                                print 'Itt nincs szörny!'
+                            else
+                                print 'Megevett a(z) ' szornyek at random
+                                jatekos is halott
+                        else
+                            print 'GAME OVER'
+                    if jatekos is elo
+                        print 'Nagyszerű! Túlélted!
+                    ```
+                start_code: print 'Szabadulj ki a kísértetházból'
+    next:
+        name: Mi a következő lépés?
+        description: Mi a következő lépés?
+        default_save_name: következő
+        levels:
+            1:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    Gratulálunk! Elérted az 1. szint végét. Remélhetőleg már készítettél néhány fantasztikus kódot, de Hedyben még sok mindent felfedezhetsz.
+
+                    Az első szinten észrevehetted, hogy az "echo" parancs egyszerre csak egy bit információt tud menteni.
+                    Például az éttermi kalandban visszhangozhattad, hogy mit akart enni a vevő, vagy mit akart inni, de nem mindkettőt egy mondatban.
+                    ```
+                    print Üdvözlünk a Hedynél
+                    ask Mit szeretnél enni?
+                    echo Szóval ezt akarod...
+                    ask Mit akarsz inni?
+                    echo Szóval ezt akarod...
+                    ```
+                    Ha a játékos hamburgert és kólát ír be, akkor nem mondhatja azt, hogy "Szóval ezt akarod..  hamburger és kóla", két külön sort kell készíteni.
+                    Ezenkívül az "echo" parancs csak a mondat végén visszhangozza a szót. Tehát nem mondhatod, hogy „A hamburger hamarosan jön neked!”.
+
+                    Ez megváltoztatja a 2. szintet. A 2. szinten megtanulhatsz olyan változókkal dolgozni, amelyek lehetővé teszik több információ mentését és kiíratását a kívánt helyre.
+                    Ezen kívül megtanulod, hogyan kell dolgozni a "véletlenszerű" paranccsal, amellyel játékokat készíthetsz.
+                    Menjünk tehát a következő szintre!
+                start_code: print Menjünk!
+            2:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    A 2. szinten a változókkal gyakoroltál, de talán találkoztál ezzel a hibával.
+
+                    Próbálja meg futtatni ezt a kódot:
+                    ""
+                    nevem is Zita
+                    print A nevem nevem
+                    ""
+                    Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
+                    A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
+                start_code: print Menjünk a következő szintre!
+            3:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    A 2. és 3. szinten már megtanultad a "at random" használatát, ami a játékot minden alkalommal mássá tette, amikor a kódot futtattad.
+                    De ez nem igazán interaktív, a játékosnak nincs befolyása arra, ami a játékban történik.
+
+                    A 4. szinten meg fogod tanulni az "if" parancsot, amely lehetővé teszi, hogy különböző válaszokat adjon a programban. Így például titkos jelszót programozhatsz a számítógépedhez.
+                    Vegyünk tehát egy csúcsot a 4 -es szinten.
+                start_code: print 'Menjünk a következő szintre!'
+            4:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    Nagyszerű munka! Elérted a 4. szint végét, ami azt jelenti, hogy gyakoroltál az "if" és az "else" kifejezésekkel. Valószínűleg észrevetted, hogy a kódok egyre hosszabbak.
+                    Például, ha „Boldog születésnapot” szeretnél programozni
+                    ""
+                    print boldog születésnapot
+                    print boldog születésnapot
+                    print boldog születésnapot kedves Hedy
+                    print boldog születésnapot
+                    ""
+                    Ez sok kód főleg ugyanazokra a szavakra újra és újra. Szerencsére az 5. szinten van egy megoldás az "repeat" paranccsal, amely lehetővé teszi egy kódsor többszörös megismétlését.
+                start_code: "'print Menjünk a következő szintre!'"
+            5:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    Most elérted az 5. szint végét, tehát megtanultad, hogyan kell megismételni egy kód sort. Például kódolhatod az éttermedett, hogy több vendégtől megkérdezhesd, mit szeretne enni.
+                    Amit azonban még nem tehetsz meg, az, hogy kiszámítsd mindenkinek a vacsorája árát.
+
+                    A 6. szint lehetővé teszi az összeadás, kivonás és szorzás használatát a programokban. Így kiszámíthatod az étteremben az árakat, de hozzáadhat egy titkos kódot is, hogy barátaid és családjuk kedvezményben részesülhessenek.
+                    Egy másik lehetőség a 6. szinten a saját matematikai játék programozása, hogy a kistestvéred gyakorolja a szorzást.
+                    Menj és nézd meg magadnak ezt a következő szinten!
+                start_code: "'print Menjünk a következő szintre!'"
+            6:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    Az 5. szinten megtanultad, hogyan ismételj meg egyetlen kódsort. Ez jól jön, de nem mindig. Néha több sort szeretnél megismételni egy helyen.
+                    A 7. szint lehetővé teszi, hogy csoportosíts pár sor kódot, és megismételd ezt a kis sorcsoportot egyszerre!
+
+                    ""
+                    repeat 5 times print 'A 7. szinten egyszerre több sor kódot is megismételhetsz!'
+                    ""
+                start_code: print 'Menjünk a következő szintre!'
+            7:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    Elérted a 7. szint végét, remekül csinálod! A 8. szintre készülsz. A magasabb szinteken Hedy egyre inkább a Python programozási nyelv megtanítására összpontosít.
+                    A Pythonban nincs `repeat` parancs, de van olyan parancs, amely úgy működik, mint az repeat. Kíváncsi vagy, hogyan működik "repeat" parancs "valódi" programozási nyelven? Gyorsan lépj a 8. szintre, hogy megtudd!
+                start_code: print 'Menjünk a következő szintre!'
+            8:
+                story_text: |-
+                    ## Mi a következő lépés?
+                    A kódod egyre jobban hasonlít egy python kódra, remek! A 9. szinten megtanulsz egy újabb kis lépést, hogy még inkább hasonlítson a pythonra.
+                    Egy másik nagyszerű dolog, amit a 9. szinten tanulsz, egy új parancs. A 8. szinten észrevehetted, hogy néha használhatsz egy másik "else" utasítást a kódban.
+                    Például:
+                    ""
+                    print 'Mi van ma ebédre?'
+                    lehetosegek are pizza, broccoli, green beans
+                    valasztott is lehetosegek at random
+                    if lehetosegek is pizza
+                        print 'Nyami! Pizza!'
+                    else
+                        print 'Jaj...'
+                    ```
+                    Ebben a kódban jó lenne, ha lenne 2x egy másik, hogy legyen egy lehetőség a brokkolihoz és egy a zöldbabhoz. A 9. szint az "elif" új paranccsal érkezik, amely ezt lehetővé teszi!
+                    Tehát nézd meg a következő szintet most!
+                start_code: print 'Menjünk a következő szintre!'
