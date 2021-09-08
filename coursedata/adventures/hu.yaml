@@ -1004,7 +1004,7 @@ adventures:
                     ```
                     print 'Hedy a jósnő vagyok!'
                     print 'Feltehetsz 3 kérdést.'
-                    valasz are igen, nem, talán
+                    valasz is igen, nem, talán
                     repeat 3 times
                        kerdes is ask 'Mit akarsz tudni?'
                        print kerdes
@@ -1043,7 +1043,6 @@ adventures:
                     Be tudod fejezni az ijesztő történetet? Vagy kitalálsz egy saját kísértetáz történetet?
                 start_code: print Hogy kerültem ide?
             2:
-                start_code: print Escape from the haunted house!
                 story_text: |-
                     ## Kísértetház játék
                     Az 1. szinten bemutatkoztál a kísértetjház játékodnak, de ahogy észrevetted, a történetnek mindig rettenetes vége lesz.
@@ -1051,7 +1050,7 @@ adventures:
                     Hadd döntsön Hedy véletlenszerűen!
 
                     ## Példa Hedy -kódra
-                    ``
+                    ```
                     print Escape from the haunted house!
                     print There are 3 doors in front of you...
                     choice is ask Which door do you choose?
@@ -1067,14 +1066,14 @@ adventures:
                     ## Változtasd a játékot tévéműsorrá!
                     Végezetül szeretnénk egy kihívást küldeni Neked,  hogy változtasd meg ezt a játékot olyan játékműsorrá (mint amilyenek a tévében vannak), ahol a játékosok ajtót vagy bőröndöt választanak, és valamelyik nagy díjat tartalmaz!
                     Meg tudod csinálni?
+                start_code: print 'Szabadulj ki a kísértetházból'
             3:
-                start_code: print Escape from the haunted house!
                 story_text: |-
                     ## Kísértetház
                     A 3. szinten megtanulod használni az idézőjeleket a játékaidban.
                     Át tudod alakítani a kisértetház játékot úgy, hogy megfeleljen a 3. szintnek?
+                start_code: print 'Szabadulj ki a kísértetházból'
             4:
-                start_code: print Escape from the haunted house!
                 story_text: |-
                     ## Kísértetház
                     Eddig a szintig a kísértetjárta ház játék mindig arra kérte a játékost, hogy válasszon egy ajtót, de ahogy észrevettétek, nem igazán kellett helyesen válaszolniuk.
@@ -1093,8 +1092,8 @@ adventures:
                     if valasztottajto is helyesajto print 'Nagyszerű! Kiszabadultál!'
                     else print 'Jaj ne! Megevett a ...' szornyek at random
                     ```
-            7:
                 start_code: print 'Szabadulj ki a kísértetházból'
+            7:
                 story_text: |-
                     ## Kísértetház
                     A 7. szinten több sor kódot ismételhetsz meg, ami lehetővé teszi, hogy a kísértetjárta házat még interaktívabbá tedd!
@@ -1123,7 +1122,7 @@ adventures:
                     ## Kihívás
                     Most nagyon nehéz megnyerni ezt a játékot, meg tudod könnyíteni a győzelmet?
                     Például úgy, hogy csak 1 rossz ajtó és 2 helyes ajtó van, 1 helyes  és 2 rossz ajtó helyett?
-
+                start_code: print 'Szabadulj ki a kísértetházból'
             8:
                 story_text: |-
                     ## Kísértetház
@@ -1148,7 +1147,7 @@ adventures:
                         else
                             print 'GAME OVER'
                     if jatekos is elo
-                        print 'Nagyszerű! Túlélted!
+                        print 'Nagyszerű! Túlélted!'
                     ```
                 start_code: print 'Szabadulj ki a kísértetházból'
     next:
@@ -1205,13 +1204,13 @@ adventures:
                     Nagyszerű munka! Elérted a 4. szint végét, ami azt jelenti, hogy gyakoroltál az "if" és az "else" kifejezésekkel. Valószínűleg észrevetted, hogy a kódok egyre hosszabbak.
                     Például, ha „Boldog születésnapot” szeretnél programozni
                     ```
-                    print boldog születésnapot
-                    print boldog születésnapot
-                    print boldog születésnapot kedves Hedy
-                    print boldog születésnapot
+                    print 'boldog születésnapot'
+                    print 'boldog születésnapot'
+                    print 'boldog születésnapot kedves Hedy'
+                    print 'boldog születésnapot'
                     ```
                     Ez sok kód főleg ugyanazokra a szavakra újra és újra. Szerencsére az 5. szinten van egy megoldás az "repeat" paranccsal, amely lehetővé teszi egy kódsor többszörös megismétlését.
-                start_code: "'print Menjünk a következő szintre!'"
+                start_code: "print 'Menjünk a következő szintre!'"
             5:
                 story_text: |-
                     ## Mi a következő lépés?
@@ -1221,7 +1220,7 @@ adventures:
                     A 6. szint lehetővé teszi az összeadás, kivonás és szorzás használatát a programokban. Így kiszámíthatod az étteremben az árakat, de hozzáadhat egy titkos kódot is, hogy barátaid és családjuk kedvezményben részesülhessenek.
                     Egy másik lehetőség a 6. szinten a saját matematikai játék programozása, hogy a kistestvéred gyakorolja a szorzást.
                     Menj és nézd meg magadnak ezt a következő szinten!
-                start_code: "'print Menjünk a következő szintre!'"
+                start_code: "print 'Menjünk a következő szintre!'"
             6:
                 story_text: |-
                     ## Mi a következő lépés?
@@ -1246,7 +1245,7 @@ adventures:
                     Például:
                     ```
                     print 'Mi van ma ebédre?'
-                    lehetosegek are pizza, broccoli, green beans
+                    lehetosegek is pizza, broccoli, green beans
                     valasztott is lehetosegek at random
                     if lehetosegek is pizza
                         print 'Nyami! Pizza!'

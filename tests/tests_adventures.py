@@ -36,25 +36,25 @@ class TestsAdventurePrograms(unittest.TestCase):
             yaml = utils.load_yaml_uncached (f)
 
             for adventure in yaml ['adventures'].values ():
-                for level_number in adventure ['levels']:
-                    level = adventure ['levels'] [level_number]
+                for level_number in adventure['levels']:
+                    level = adventure['levels'][level_number]
                     adventure_name = adventure['name']
 
                     code_snippet_counter = 0
                     # code snippets inside story_text
-                    for tag in utils.markdown_to_html_tags (level ['story_text']):
-                        if tag.name != 'pre' or not tag.contents [0]:
+                    for tag in utils.markdown_to_html_tags(level['story_text']):
+                        if tag.name != 'pre' or not tag.contents[0]:
                             continue
                         code_snippet_counter += 1
-                        code = tag.contents [0].contents [0]
+                        code = tag.contents[0].contents[0]
 
-                        result = check_code (f, level_number, 'story_text code snippet #' + str (code_snippet_counter), code, adventure_name)
+                        result = check_code(f, level_number, 'story_text code snippet #' + str (code_snippet_counter), code, adventure_name)
                         if result != True:
                             adventure_fails.append(result)
 
                     # start_code
-                    result = check_code (f, level_number, 'start_code', level ['start_code'], adventure_name)
+                    result = check_code(f, level_number, 'start_code', level ['start_code'], adventure_name)
                     if result != True:
                         adventure_fails.append(result)
 
-        self.assertEqual(0,len(adventure_fails))
+        self.assertEqual(0, len(adventure_fails))
