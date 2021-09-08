@@ -62,12 +62,7 @@ adventures:
             3:
                 story_text: |
                     ## Story
-                    You may have noticed that there is still a problem in level 2. Did you try to make a sentence that contained the word name? E.g:
-
-                    ```
-                    print my name is name
-                    ```
-
+                    You may have noticed that there is still a problem in level 2. Did you try to print a sentence that contained the word name?
                     You can solve that in level 3. You must use quotation marks for everything that you are going to print.
 
                     ## Example Hedy code
@@ -80,7 +75,7 @@ adventures:
                     print 'He hears the sound of an' animals at random
                     print name 'is afraid this is a haunted forest'
                     ```
-                start_code: "print Your story will be printed here!"
+                start_code: "print 'Your story will be printed here!'"
             4:
                 story_text: |
                     ## Story
@@ -102,10 +97,10 @@ adventures:
                     print name 'walks through the forest'
                     print name 'encounter a monster'
                     end is ask Would you like a good or a bad ending?
-                    if the end is good print name 'takes the sword and the monster quickly runs away'
+                    if end is good print name 'takes the sword and the monster quickly runs away'
                     else print 'The monster eats' name
                     ```
-                start_code: "print Here will soon be your story!"
+                start_code: "print 'Here your story will start!'"
             5:
                 story_text: |
                     ## Story
@@ -116,7 +111,7 @@ adventures:
                     ```
                     print 'The prince kept calling for help'
                     repeat 5 times print 'Help!'
-                    print 'Why isn't anyone helping me?'
+                    print 'Why is nobody helping me?'
                     ```
 
                 start_code: "repeat 5 times print 'Help!'"
@@ -187,7 +182,7 @@ adventures:
                         print verse ' bottles of beer on the wall'
                     ```
 
-                start_code: " "
+                start_code: ""
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
@@ -389,7 +384,7 @@ adventures:
                     print _ _ _ <- here you have to program the choice
                     ```
 
-                start_code: "print What will the die indicate this time?"
+                start_code: "print 'What will the die indicate this time?'"
             4:
                 story_text: |
                     ## Dice
@@ -405,7 +400,7 @@ adventures:
                     print 'you have' _ 'thrown'
                     if _ is earthworm print 'You can stop throwing.' _ print 'You have to hear it again!'
                     ```
-                start_code: "print What will the die indicate this time?"
+                start_code: "print 'What will the die indicate this time?'"
             5:
                 story_text: |
                     ## Dice
@@ -417,9 +412,9 @@ adventures:
                     ## Example Hedy code
                     ```
                     choices is 1, 2, 3, 4, 5, earthworm
-                    repeat _ _ print ___
+                    repeat _ _ print _ _ _
                     ```
-                start_code: "print What will the die indicate this time?"
+                start_code: "print 'What will the die indicate this time?'"
             6:
                 story_text: |
                     ## Dice
@@ -443,7 +438,7 @@ adventures:
                     ## Looking forward
 
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-                start_code: "print What will the die indicate this time?"
+                start_code: "print 'What will the die indicate this time?'"
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
@@ -571,7 +566,7 @@ adventures:
                     else print 'mistake! it was ' correct_answer
                     ```
 
-                start_code: "print Welcome to this calculator!"
+                start_code: "print 'Welcome to this calculator!'"
             7:
                 story_text: |
                     ## Calculator
@@ -592,7 +587,7 @@ adventures:
                             score is score + 1
                     print 'Great job! Your score is... ' score ' out of 10!'
                     ```
-                start_code: "print Welcome to this calculator!"
+                start_code: "print 'Welcome to this calculator!'"
 
 
     restaurant:
@@ -703,7 +698,7 @@ adventures:
                        anything is ask 'Would you like anything else?'
                        print 'Let me repeat your order...'
                        print 'One ' food
-                       if drink is cola print 'and...' else print 'One ' drinks
+                       if drink is cola print 'and...' else print 'One ' drink
                        if anything is no print 'Thats it!' else print 'One ' anything
                        print 'Thank you for your order and enjoy your meal!'
                        ```
@@ -807,7 +802,7 @@ adventures:
 
                     ## Challenge
                     Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                start_code: " "
+                start_code: ""
             8:
                 story_text: |
                     ## Restaurant
@@ -815,7 +810,7 @@ adventures:
                     
                     ## Voorbeeld Hedy code
                     ```
-                    print 'Welcome to Hedy's!'
+                    print 'Welcome to Restaurant Hedy!'
                     people is ask 'For how many people would you like to order?'
                     for i in range 1 to people
                         print 'Order number ' i
@@ -926,10 +921,10 @@ adventures:
                     ## Example Hedy Code 2
                     ```
                     print 'Im Hedy the fortune teller!'
-                    print 'I can predict if youll win the lottery tomorrow!'
+                    print 'I can predict if you will win the lottery tomorrow!'
                     person is ask 'Who are you?'
                     goodanswer is Hurray! You win!, You will definitely win!, We have a winner!
-                    badanswer is Bad luck! Try again!, Someone else will win, You lose!
+                    badanswer is Bad luck! Try again!, Aother person will win, You lose!
                     if person is Hedy print goodanswer at random else print badanswer at random
                     ```
 
@@ -973,11 +968,11 @@ adventures:
 
                    ## Example Hedy Code
                    ```
-                   print 'Im Hedy the fortune teller!'
+                   print 'I am Hedy the fortune teller!'
                    print 'I can predict how many kids youll get when you grow up!'
                    age is ask 'How old are you?'
-                   siblings is How many siblings do you have?
-                   length is How tall are you in centimetres?
+                   siblings is ask 'How many siblings do you have?'
+                   length is ask 'How tall are you in centimetres?'
                    kids is length / age
                    kids is kids - siblings
                    print 'You will get ...'
@@ -1008,9 +1003,9 @@ adventures:
 
                  ## Example Hedy Code
                  ```
-                 print 'Im Hedy the fortune teller!'
+                 print 'I am Hedy the fortune teller!'
                  print 'You can ask me 3 questions.'
-                 answers are yes, no, maybe
+                 answers is yes, no, maybe
                  repeat 3 times
                     question is ask 'What do you want to know?'
                     print question
@@ -1137,7 +1132,7 @@ adventures:
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?
                     
-                start_code: "print'Escape from the haunted house!'"
+                start_code: "print 'Escape from the haunted house!'"
                 
             8:
                 story_text: |
@@ -1166,7 +1161,7 @@ adventures:
                     if player is alive
                         print 'Great! You survived!'
                     ```
-                start_code: "print 'Escape from the haunted house!"
+                start_code: "print 'Escape from the haunted house!'"
                 
     next:
         name: "What's next?"
@@ -1224,17 +1219,18 @@ adventures:
                 story_text: |
                     ## What's next?  
                     Great job! You've reached the end of level 4, which means you have practiced with `if` and `else`. You have probably noticed that your codes are getting longer and longer. 
-                    For example if you'd like to program 'Happy Birthday'
+                    For example if you want to program 'Happy Birthday'
                     
                     ```
-                    print happy birthday to you
-                    print happy birthday to you
-                    print happy birthday dear Hedy
-                    print happy birthday to you
+                    print 'happy birthday to you'
+                    print 'happy birthday to you'
+                    print 'happy birthday dear Hedy'
+                    print 'happy birthday to you'
+
                     ```
                     That's a lot of code for mainly the same words over and over again. Luckily level 5 has a solution with the `repeat` command, that allows you to repeat a line of code multiple times.
                     
-                start_code: "'print Lets go to the next level!'"
+                start_code: "print 'On to the next level!'"
             5:
                 story_text: |
                     ## What's next?
@@ -1244,7 +1240,7 @@ adventures:
                     Level 6 makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount. 
                     Another option in level 6 is programming your own maths game, for your little brother or sister to practice their multiplications.
                     Go see for yourself in the next level!
-                start_code: "'print Lets go to the next level!'"
+                start_code: "print 'On to the next level!'"
             6:
                 story_text: |
                     ## What's next?  
@@ -1269,8 +1265,8 @@ adventures:
                     Another great thing you'll learn in level 9 is a new command. In level 8, you might have noticed that you sometimes could use another `else` in your code. 
                     For example: 
                     ```
-                    print 'Whats for dinner tonight?'
-                    options are pizza, broccoli, green beans
+                    print 'What is for dinner tonight?'
+                    options is pizza, broccoli, green beans
                     chosen is options at random
                     if options is pizza
                         print 'Yummy! Pizza!'

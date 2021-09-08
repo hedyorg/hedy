@@ -21,7 +21,7 @@ def check_code(filename, level, field_name, code, adventure_name):
         filename_shorter = filename.split("/")[3]
         language = filename_shorter.split(".")[0]
         if E.args[0] != 'Has Blanks':  # code with blanks is ok!
-            error = f'Invalid {field_name} in {language} level #{level} adventure {adventure_name}. Error: {E.args[0]}'
+            error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.args[0]}'
             print(error)
             return error
     return True
