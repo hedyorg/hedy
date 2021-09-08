@@ -40,11 +40,6 @@ class TestsAdventurePrograms(unittest.TestCase):
                     level = adventure ['levels'] [level_number]
                     adventure_name = adventure['name']
 
-                    # start_code
-                    result = check_code (f, level_number, 'start_code', level ['start_code'], adventure_name)
-                    if result != True:
-                        adventure_fails.append(result)
-
                     code_snippet_counter = 0
                     # code snippets inside story_text
                     for tag in utils.markdown_to_html_tags (level ['story_text']):
@@ -55,5 +50,10 @@ class TestsAdventurePrograms(unittest.TestCase):
                         result = check_code (f, level_number, 'story_text code snippet #' + str (code_snippet_counter), code, adventure_name)
                         if result != True:
                             adventure_fails.append(result)
+
+                    # start_code
+                    result = check_code (f, level_number, 'start_code', level ['start_code'], adventure_name)
+                    if result != True:
+                        adventure_fails.append(result)
 
         self.assertEqual(0,len(adventure_fails))
