@@ -5,6 +5,7 @@ from os import path
 import sys
 import utils
 from collections import namedtuple
+import hashlib
 
 
 # Some useful constants
@@ -46,6 +47,21 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
 #  It will return the known command which is closest positioned at the beginning.
 #  It will return '' if the invalid command does not contain any known command.
 #
+
+def hash_var(name):
+    import re
+    pattern = re.compile('[^a-zA-Z0-9_]')
+
+    if name in reserved_words or pattern.match(name) != None:
+        # hash "illegal" var names
+        # being reservered keywords
+        # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
+        # prepend with v for when hash starts with a number
+
+        hash_object = hashlib.md5(name.encode())
+        return "v" + hash_object.hexdigest()
+    else:
+        return name
 
 def closest_command(invalid_command, known_commands):
     # First search for 100% match of known commands
@@ -179,7 +195,6 @@ class AllAssignmentCommands(Transformer):
         else:
             return listname + '[' + args[1] + ']'
 
-
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
         return args[0]
@@ -197,9 +212,8 @@ class AllAssignmentCommands(Transformer):
 
     def var(self, args):
         # the var itself (when in an assignment) should be added
-        # if it happens to be a keyword in Python, prefix with _
         name = args[0]
-        return "_" + name if name in reserved_words else name
+        return name
 
     def punctuation(self, args):
         #is never a variable (but should be removed from the tree or it will be seen as one!)
@@ -208,6 +222,83 @@ class AllAssignmentCommands(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+class AllAssignmentCommandsHashed(Transformer):
+    # returns a list of variable and list access
+    # so these can be excluded when printing
+
+    #this version returns all hashe var names
+
+    def filter_ask_assign(self, args):
+        ask_assign = []
+        for a in args:
+            # strings (vars remaining in the tree) are added directly
+            if type(a) is str:
+                ask_assign.append(a)
+            #lists are seached further for string members (vars)
+            elif type(a) is list:
+                sub_a_ask_assign = self.filter_ask_assign(a)
+                for sub_a in sub_a_ask_assign:
+                    ask_assign.append(sub_a)
+        return ask_assign
+
+    def for_loop(self, args):
+      # for loop iterator is a var so should be added to the list of vars
+      iterator = str(args[0])
+      iterator_hashed = hash_var(iterator)
+      return [iterator_hashed] + self.filter_ask_assign(args)
+
+    def input(self, args):
+        #return left side of the =
+        return hash_var(args[0])
+
+    def ask(self, args):
+        #try is needed cause in level 1 sk has not variable in front
+        try:
+            return hash_var(args[0])
+        except:
+            return None
+
+    def assign(self, args):
+        return hash_var(args[0])
+
+    def assign_list(self, args):
+        return hash_var(args[0])
+
+    # list access is accessing a variable, so must be escaped
+    # for example we print(dieren[1]) not print('dieren[1]')
+    def list_access(self, args):
+        listname = hash_var(args[0])
+        if args[1] == 'random':
+            return 'random.choice(' + listname + ')'
+        else:
+            return listname + '[' + args[1] + ']'
+
+    # additions Laura, to be checked for higher levels:
+    def list_access_var(self, args):
+        return hash_var(args[0])
+
+    def change_list_item(self, args):
+        return hash_var(args[0])
+
+    def text(self, args):
+        #text never contains a variable
+        return None
+
+    def var_access(self, args):
+        # just accessing (printing) a variable does not count toward the lookup table
+        return None
+
+    def var(self, args):
+        # the var itself (when in an assignment) should be added
+        name = hash_var(args[0])
+        return name
+
+    def punctuation(self, args):
+        #is never a variable (but should be removed from the tree or it will be seen as one!)
+        return None
+
+    def __default__(self, args, children, meta):
+        return self.filter_ask_assign(children)
 
 
 def are_all_arguments_true(args):
@@ -395,7 +486,9 @@ class ConvertToPython_2(ConvertToPython_1):
         return ''.join([str(c) for c in args])
     def var(self, args):
         name = ''.join(args)
-        return "_" + name if name in reserved_words else name
+        name = args[0]
+        return hash_var(name)
+        # return "_" + name if name in reserved_words else name
     def print(self, args):
         all_arguments_converted = []
         i = 0
@@ -454,8 +547,8 @@ def quoted(s):
 class ConvertToPython_3(ConvertToPython_2):
 
     def var_access(self, args):
-        name = ''.join(args)
-        return "_" + name if name in reserved_words else name
+        name = args[0]
+        return hash_var(name)
 
     def text(self, args):
         return ''.join([str(c) for c in args])
@@ -467,7 +560,7 @@ class ConvertToPython_3(ConvertToPython_2):
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
             return "print(" + '+'.join(args) + ')'
         else:
-            # I would like to raise normally but that is caught by the tranformer :(
+            # I would like to raise normally but that is caught by the transformer :(
             return f"HedyException:{args[0]}"
             #raise HedyException('Var Undefined', name=args[0])
 
@@ -487,7 +580,7 @@ def indent(s):
 
 class ConvertToPython_4(ConvertToPython_3):
     def list_access_var(self, args):
-        var = args[0]
+        var = hash_var(args[0])
         if args[2].data == 'random':
             return var + '=random.choice(' + args[1] + ')'
         else:
@@ -655,7 +748,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access_var(self, args):
-        var = args[0]
+        var = hash_var(args[0])
         if not isinstance(args[2], str):
             if args[2].data == 'random':
                 return var + '=random.choice(' + args[1] + ')'
@@ -683,11 +776,12 @@ class ConvertToPython_13(ConvertToPython_12):
                 if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
-                    # FH, June 21 the addition of _true/false is a bit of a hack. cause they are first seen as vars that at reserved words, they egt and _ and we undo that here.
+                    # FH, June 21 the addition of _true/false is a bit of a hack. cause they are first seen as vars that at reserved words, they are then hashed and we undo that here
                     # could/should be fixed in the grammar!
-                    if value == 'true' or value == 'True' or value == '_True':
+
+                    if value == 'true' or value == 'True' or value == hash_var('True') or value == hash_var('true'):
                         return parameter + " = True"
-                    elif value == 'false' or value == 'False' or value == '_False':
+                    elif value == 'false' or value == 'False' or value == hash_var('False') or value == hash_var('false'):
                         return parameter + " = False"
                     else:
                         return parameter + " = '" + value + "'"
@@ -946,7 +1040,7 @@ def get_parser(level, sub):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, sub)
-    ret = Lark(grammar)
+    ret = Lark(grammar, regex=True)
     PARSER_CACHE[key] = ret
     return ret
 
@@ -1095,6 +1189,11 @@ def transpile_inner(input_string, level, sub=0):
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
+
+        #also add hashes to list
+        hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
+
+        lookup_table += hashed_lookups
 
     except UnexpectedCharacters as e:
         try:
