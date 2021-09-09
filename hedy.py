@@ -6,7 +6,7 @@ import sys
 import utils
 from collections import namedtuple
 import hashlib
-
+import re
 
 # Some useful constants
 HEDY_MAX_LEVEL = 22
@@ -48,11 +48,12 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
 #  It will return '' if the invalid command does not contain any known command.
 #
 
-def hash_var(name):
-    import re
+def hash_needed(name):
     pattern = re.compile('[^a-zA-Z0-9_]')
+    return name in reserved_words or pattern.match(name) != None
 
-    if name in reserved_words or pattern.match(name) != None:
+def hash_var(name):
+    if hash_needed(name):
         # hash "illegal" var names
         # being reservered keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
@@ -387,6 +388,18 @@ class IsValid(Filter):
 
     #other rules are inherited from Filter
 
+def valid_echo(ast):
+    commands = ast.children
+    command_names = [x.children[0].data for x in commands]
+    no_echo = not 'echo' in command_names
+
+    #no echo is always ok!
+
+    #otherwise, both have to be in the list and echo shold come after
+    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
+
+
+
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
@@ -463,11 +476,15 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
-def wrap_non_var_in_quotes(argument, lookup):
-    if argument in lookup:
-        return argument
+def process_variable(name, lookup):
+    #processes a variable by hashing and escaping when needed
+    if name in lookup:
+        if hash_needed(name):
+            return hash_var(name)
+        else:
+            return name
     else:
-        return "'" + argument + "'"
+        return f"'{name}'"
 
 class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
@@ -490,7 +507,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 space = ''
             else:
                 space = "+' '"
-            all_arguments_converted.append(wrap_non_var_in_quotes(argument, self.lookup) + space)
+            all_arguments_converted.append(process_variable(argument, self.lookup) + space)
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
     def forward(self, args):
@@ -586,12 +603,12 @@ else:
     def condition(self, args):
         return ' and '.join(args)
     def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} == {arg1}" #no and statements
     def in_list_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} in {arg1}"
 
 class ConvertToPython_5(ConvertToPython_4):
@@ -599,7 +616,7 @@ class ConvertToPython_5(ConvertToPython_4):
         return ''.join(args)
 
     def repeat(self, args):
-        times = wrap_non_var_in_quotes(args[0], self.lookup)
+        times = process_variable(args[0], self.lookup)
         command = args[1]
         return f"""for i in range(int({str(times)})):
 {indent(command)}"""
@@ -621,8 +638,8 @@ class ConvertToPython_6(ConvertToPython_5):
 
     #we can now have ints as types so chck must force str
     def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) == str({arg1})" #no and statements
         else:
@@ -698,7 +715,7 @@ class ConvertToPython_7(ConvertToPython_6):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return wrap_non_var_in_quotes(args[0], self.lookup)
+            return process_variable(args[0], self.lookup)
         else:
         # this is list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
@@ -779,8 +796,8 @@ class ConvertToPython_13(ConvertToPython_12):
             return parameter + " = [" + ", ".join(values) + "]"
 
     def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if arg1 == '\'True\'' or arg1 == '\'true\'':
             return f"{arg0} == True"
         elif arg1 == '\'False\'' or arg1 == '\'false\'':
@@ -800,16 +817,16 @@ class ConvertToPython_15(ConvertToPython_14):
 
 class ConvertToPython_16(ConvertToPython_15):
     def smaller(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) < str({arg1})"  # no and statements
         else:
             return f"str({arg0}) < str({arg1}) and {args[2]}"
 
     def bigger(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) > str({arg1})"  # no and statements
         else:
@@ -855,8 +872,8 @@ class ConvertToPython_20(ConvertToPython_18_19):
             return args[0].children + " == int(" + args[1] + ")"
         if type(args[1]) is Tree:
             return "int(" + args[0] + ") == " + args[1].children
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if arg1 == '\'True\'' or arg1 == '\'true\'':
             return f"{arg0} == True"
         elif arg1 == '\'False\'' or arg1 == '\'false\'':
@@ -866,8 +883,8 @@ class ConvertToPython_20(ConvertToPython_18_19):
 
 class ConvertToPython_21(ConvertToPython_20):
     def not_equal(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) != str({arg1})"  # no and statements
         else:
@@ -875,16 +892,16 @@ class ConvertToPython_21(ConvertToPython_20):
 
 class ConvertToPython_22(ConvertToPython_21):
     def smaller_equal(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) <= str({arg1})"  # no and statements
         else:
             return f"str({arg0}) <= str({arg1}) and {args[2]}"
 
     def bigger_equal(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) >= str({arg1})"  # no and statements
         else:
@@ -1228,6 +1245,9 @@ def transpile_inner(input_string, level, sub=0):
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
+
+    if not valid_echo(program_root):
+        raise HedyException('Lonely Echo')
 
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)

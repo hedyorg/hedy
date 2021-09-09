@@ -32,7 +32,7 @@ class Translations:
   def get_translations(self, language, section):
     # Merge with English when lacking translations
     # Start from a defaultdict
-    d = collections.defaultdict(lambda: '???')
+    d = collections.defaultdict(lambda: 'Unknown Exception')
     d.update(**self.data.get('en', {}).get(section, {}))
     d.update(**self.data.get(language, {}).get(section, {}))
     return d
