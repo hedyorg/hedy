@@ -172,7 +172,7 @@
     -   explanation: Zadej příklad a ověř výsledek.
         example: "Příklad: vysledek is ask 'Kolik je 10 plus 10?'"
         demo_code: |-
-            vysledek is ask Kolik je 10 plus 10?
+            vysledek is ask 'Kolik je 10 plus 10?'
             if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
     -   explanation: Zkombinuj `repeat` a `if`.
         example: "Příklad: if vysledek is 50 repeat 3 times print 'Správně!' else repeat 5 times print 'Špatně!'"
@@ -214,7 +214,7 @@
     -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
         example: "Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
         demo_code: |-
-            vysledek is ask Kolik je 5 plus 5?
+            vysledek is ask 'Kolik je 5 plus 5?'
             if vysledek is 10
                 print 'Skvělá práce!'
                 print 'Výsledek opravdu je ' vysledek
@@ -223,34 +223,14 @@
                 print 'Správný výsledek je 10.'
     -   explanation: Zkombinuj `if` a `repeat`.
         example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
-        demo_code: |4-
+        demo_code: |-
              barva is ask 'Jaká je tvoje nejoblíbenější barva?'
              if barva is zelená
                  repeat 3 times
                      print 'Nádherná!'
              else
                  repeat 5 times
-                     vypsat 'Znám i lepší...'
-7-1:
-    start_code: |-
-        for pocitadlo is 1 to 5
-            print pocitadlo
-    intro_text: '`print` funguje stejně, ale místo`repeat` odteď budeme používat `for`! Teď můžeš napsat `for pocitadlo is 1 to 5` a použít `pocitadlo` ve svém programu. Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení za příkazy `for` a `if` (To znamená začínat řádek čtyřmi mezerami).'
-    commands:
-    -   name: for loop
-        explanation: Nahradíme `repeat` za `for` a přidáme rozsah.
-        example: for pocitadlo is 1 to 5
-        demo_code: for pocitadlo is 1 to 5
-    -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: "'Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
-        demo_code: |-
-            vysledek is ask 'Kolik je 5 plus 5?'
-            if vysledek is 10
-                print 'Skvělá práce!'
-                print 'Výsledek opravdu je ' vysledek
-            else
-                print 'Ups, těsně vedle...'
-                print 'Správný výsledek je 10.'
+                     print 'Znám i lepší...'
 8:
     start_code: |-
         for pocitadlo in range 1 to 5
