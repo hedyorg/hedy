@@ -643,7 +643,7 @@ window.rename_class = function rename_class(id) {
       type: 'PUT',
       url: '/class/' + id,
       data: JSON.stringify({
-        class_name: name
+        name: class_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -665,7 +665,7 @@ window.delete_class = function delete_class(id) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      window.location.pathname = '/my-profile';
+      window.location.pathname = '/for-teachers';
     }).fail(function(err) {
       console.error(err);
       error.show(ErrorMessages.Connection_error, JSON.stringify(err));

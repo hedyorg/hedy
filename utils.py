@@ -16,7 +16,6 @@ from bs4 import BeautifulSoup
 
 IS_WINDOWS = os.name == 'nt'
 
-
 class Timer:
   """A quick and dirty timer."""
   def __init__(self, name):

@@ -79,14 +79,6 @@ def routes (app, database, requested_lang):
     global DATABASE
     DATABASE = database
 
-    @app.route('/auth/texts', methods=['GET'])
-    def auth_texts():
-        response = make_response(jsonify(TRANSLATIONS.get_translations (requested_lang (), 'Auth')))
-        if not is_debug_mode():
-            # Cache for longer when not devving
-            response.cache_control.max_age = 60 * 60  # Seconds
-        return response
-
     @app.route ('/auth/login', methods=['POST'])
     def login ():
         body = request.json
@@ -376,8 +368,6 @@ def routes (app, database, requested_lang):
             output ['verification_pending'] = True
 
         output ['student_classes'] = DATABASE.get_student_classes (user ['username'])
-        if bool ('is_teacher' in user and user ['is_teacher']):
-            output ['teacher_classes'] = DATABASE.get_teacher_classes (user ['username'], True)
 
         output ['session_expires_at'] = timems () + session_length * 1000
 
@@ -557,9 +547,9 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='my-profile')
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='login')
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request (request) and not is_admin (request):
             return 'unauthorized', 403

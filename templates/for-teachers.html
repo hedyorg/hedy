@@ -1,0 +1,46 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div id="teacher_classes" class="pl-8">
+  <h2>{{auth.teacher_classes}}</h2>
+  <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
+    <thead class="bg-gray-200">
+      <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
+    </thead>
+    <tbody>
+      {% for class in teacher_classes %}
+        <tr>
+          <td class="text-center p-2"><a href="{{localize_link ('/class/' + class.id)}}">{{class.name|e}}</a></td>
+          <td class="text-center p-2">{{class.students|length}}</td></tr>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <button class="green-btn" onclick="window.create_class ()">{{auth.create_class}}</button>
+  <br><br><br>
+</div>
+<div class="px-8">
+  <h1>Hedy docs</h1>
+  <div class="markdown">
+    <a class="github-fork-ribbon left-top" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+    {% for section in sections %}
+      {# Always show the first section #}
+      {% if loop.index == 1 %}
+        <h2 class="underline">{{section.title}}</h2>
+        <div class="turn-pre-into-ace">{{section.content|safe}}</div>
+      {% else %}
+        <h2 class="underline cursor-pointer" onclick="showSection ({{loop.index}})">{{section.title}}</h2>
+        <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">{{section.content|safe}}</div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<script>
+var showSection = function (index) {
+   if ($ ('#section-' + index).is (':visible')) return $ ('.section').hide ();
+   $ ('.section').hide ();
+   $ ('#section-' + index).slideToggle (400);
+}
+</script>
+{% endblock %}
