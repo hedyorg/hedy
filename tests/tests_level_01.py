@@ -255,11 +255,15 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual('Lonely Echo', str(context.exception))
 
   def test_use_quotes_in_echo_allowed(self):
-    code = "echo oma's aan de"
+    code = textwrap.dedent("""\
+    ask waar?
+    echo oma's aan de """)
+
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('oma\\'s aan de'+answer)""")
+    answer = input('waar?')
+    print('oma\\'s aan de '+answer)""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)

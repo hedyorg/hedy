@@ -32,8 +32,11 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual('Invalid', str(context.exception))
 
   def test_transpile_echo_at_level_2(self):
+    code = textwrap.dedent("""\
+    ask what is jouw lievelingskleur?
+    echo Jouw lievelingskleur is dus...""")
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile("echo Jouw lievelingskleur is dus...", self.level)
+      result = hedy.transpile(code, self.level)
     self.assertEqual('Wrong Level', str(context.exception))
 
   def test_spaces_in_arguments(self):

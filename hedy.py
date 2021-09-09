@@ -1142,8 +1142,7 @@ def transpile_inner(input_string, level, sub=0):
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
 
-    valid_ech = valid_echo(program_root)
-    if not valid_ech:
+    if not valid_echo(program_root):
         raise HedyException('Lonely Echo')
 
     if level == 1:
