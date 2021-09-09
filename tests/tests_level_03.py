@@ -118,15 +118,17 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
   def test_name_that_is_keyword(self):
+    hashed_var = hedy.hash_var("for")
+
     code = textwrap.dedent("""\
     for is Hedy
     print 'ik heet ' for """)
 
     result = hedy.transpile(code, self.level)
 
-    expected = textwrap.dedent("""\
-    _for = 'Hedy'
-    print('ik heet '+_for)""")
+    expected = textwrap.dedent(f"""\
+    {hashed_var} = 'Hedy'
+    print('ik heet '+{hashed_var})""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -313,6 +315,57 @@ class TestsLevel3(unittest.TestCase):
       print(f'{self.test_name()} level {level}')
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
+
+
+  def test_bengali_assign(self):
+    hashed_var = hedy.hash_var("নাম")
+
+    code = textwrap.dedent("""\
+    নাম is হেডি""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent(f"""\
+    {hashed_var} = 'হেডি'""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_bengali_assign_and_use(self):
+    hashed_var = hedy.hash_var("নাম")
+
+    code = textwrap.dedent("""\
+    নাম is হেডি
+    print 'আমার নাম is ' নাম """)
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent(f"""\
+    {hashed_var} = 'হেডি'
+    print('আমার নাম is '+{hashed_var})""")
+
+    self.assertEqual(expected, result.code)
+
+  def test_chinese_assign_and_use(self):
+    hashed_var = hedy.hash_var("你好世界")
+
+    code = textwrap.dedent("""\
+    你好世界 is 你好世界
+    print 你好世界""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent(f"""\
+    {hashed_var} = '你好世界'
+    print({hashed_var})""")
+
+    self.assertEqual(expected, result.code)
+
+
+
+
+
+
 
 
 
