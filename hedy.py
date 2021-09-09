@@ -388,6 +388,18 @@ class IsValid(Filter):
 
     #other rules are inherited from Filter
 
+def valid_echo(ast):
+    commands = ast.children
+    command_names = [x.children[0].data for x in commands]
+    no_echo = not 'echo' in command_names
+
+    #no echo is always ok!
+
+    #otherwise, both have to be in the list and echo shold come after
+    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
+
+
+
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
@@ -1233,6 +1245,9 @@ def transpile_inner(input_string, level, sub=0):
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
+
+    if not valid_echo(program_root):
+        raise HedyException('Lonely Echo')
 
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
