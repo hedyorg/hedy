@@ -113,6 +113,8 @@ def routes (app, database, requested_lang):
         if request.cookies.get (cookie_name):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
+                if token ['username'] in Class.get ('students', []):
+                    return render_template ('class-already-joined.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
         return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})

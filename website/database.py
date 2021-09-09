@@ -134,6 +134,16 @@ class Database:
                     Class ['students'] = list (Class ['students'])
         return classes
 
+    def get_teacher_students(self, username):
+        """Return all the students belonging to a teacher."""
+        students = []
+        classes = CLASSES.get_many({'teacher': username})
+        for Class in classes:
+            for student in Class.get ('students', []):
+                if student not in students:
+                    students.append (student)
+        return students
+
     def get_student_classes(self, username):
         """Return all the classes of which the user is a student."""
         classes = []

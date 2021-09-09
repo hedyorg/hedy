@@ -397,7 +397,11 @@ def programs_page (request):
 
     from_user = request.args.get('user') or None
     if from_user and not is_admin (request):
-        return "unauthorized", 403
+        if not is_teacher (request):
+            return "unauthorized", 403
+        students = DATABASE.get_teacher_students (username)
+        if from_user not in students:
+            return "unauthorized", 403
 
     texts=TRANSLATIONS.get_translations (requested_lang (), 'Programs')
     ui=TRANSLATIONS.get_translations (requested_lang (), 'ui')
@@ -823,7 +827,10 @@ def localize_link(url):
     lang = requested_lang()
     if not lang:
         return url
-    return url + '?lang=' + lang
+    if '?' in url:
+        return url + '&lang=' + lang
+    else:
+        return url + '?lang=' + lang
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""

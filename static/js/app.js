@@ -643,7 +643,7 @@ window.rename_class = function rename_class(id) {
       type: 'PUT',
       url: '/class/' + id,
       data: JSON.stringify({
-        class_name: name
+        name: class_name
       }),
       contentType: 'application/json',
       dataType: 'json'

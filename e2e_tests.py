@@ -345,6 +345,7 @@ def getClass3 (state, response, username):
     if len (students) != 1:
         raise Exception ('Student list should contain one student')
     student = students [0]
+    state ['student'] = student
     if student.get ('highest_level') != 0:
         raise Exception ('student.highest_level should be 0')
     if student.get ('programs') != 0:
@@ -476,6 +477,7 @@ def suite (username):
         ['get profile after joining class', 'get', '/profile', {}, {}, 200, getStudentClasses1],
         ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['get class with a student', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass3],
+        ['get student programs', 'get', lambda state: '/programs?user=' + state ['student'] ['username'], {}, {}, 200],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['create public program (not shared yet)', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Public program 1', 'level': 1}, 200, createPublicProgram],
         ['share public program', 'post', '/programs/share', {}, lambda state: {'id': state ['public_program'], 'public': True}, 200],
@@ -487,6 +489,7 @@ def suite (username):
         ['remove student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
         ['remove student from class again (idempotent call)', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
         ['get class that is now again empty', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
+        ['get student programs if student is no longer in teacher\'s class', 'get', lambda state: '/programs?user=' + state ['student'] ['username'], {}, {}, 403],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200, setSentCookies],
         ['get profile after being removed from class', 'get', '/profile', {}, {}, 200, getStudentClasses2],
         ['join class again', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/join/' + state ['classes'] [0] ['link'], {}, {}, 302, redirectAfterJoin1],
