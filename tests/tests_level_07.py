@@ -136,6 +136,8 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
 
+
+
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -147,6 +149,30 @@ class TestsLevel7(unittest.TestCase):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
+      print('me wants a cookie!')""")
+
+    self.assertEqual(expected, result.code)
+
+    expected_output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    self.assertEqual(expected_output, run_code(result))
+
+  def test_repeat_with_non_latin_variable_print(self):
+    code = textwrap.dedent("""\
+    állatok is 5
+    repeat állatok times
+        print 'me wants a cookie!'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    v79de0191e90551f058d466c5e8c267ff = '5'
+    for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
       print('me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)

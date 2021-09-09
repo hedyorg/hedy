@@ -9,10 +9,12 @@ import string
 import random
 from ruamel import yaml
 from website import querylog
-
+import commonmark
+commonmark_parser = commonmark.Parser ()
+commonmark_renderer = commonmark.HtmlRenderer ()
+from bs4 import BeautifulSoup
 
 IS_WINDOWS = os.name == 'nt'
-
 
 class Timer:
   """A quick and dirty timer."""
@@ -234,3 +236,10 @@ def mstoisostring(date):
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     return ''.join (random.choice (chars) for _ in range (size))
+
+# This function takes a markdown string and returns a list with each of the HTML elements obtained
+# by rendering the markdown into HTML.
+def markdown_to_html_tags (markdown):
+    _html = commonmark_renderer.render(commonmark_parser.parse (markdown))
+    soup = BeautifulSoup(_html, 'html.parser')
+    return soup.find_all ()

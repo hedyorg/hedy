@@ -5,7 +5,7 @@ command: print | ask | turtle | assign_list | ask_no_quotes| assign | print_no_q
 var_access : NAME
 
 //since ask allows for quotes, there is some duplication between ask and print
-//so maybe (_SPACE| list_access | quoted_text | var)* should be something like 'print_argument'?)
+//so maybe (_SPACE| list_access | quoted_text | var_access)* should be something like 'print_argument'?)
 
 print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var_access)*  -> print
 print_no_quotes: _PRINT _SPACE text -> print_nq

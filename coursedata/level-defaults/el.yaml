@@ -99,7 +99,7 @@
         ## Παράδειγμα κώδικα Hedy
         ```
         name is ask 'ποιό είναι το όνομά σου;'
-        if name is Hedy print `ωραία` else print `μπου!`
+        if name is Hedy print 'ωραία' else print 'μπου!'
         ```
 
         Αυτός ο κώδικας εμφανίζει 'ωραία' αν εισάγεις σαν όνομα το Hedy, και 'μπου!' αν εισάγεις κάτι άλλο.
@@ -141,8 +141,8 @@
         explanation: 'Ρώτησε κάτι με την `ask`.'
         example: "Παράδειγμα: color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;"
         demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?
-            print 'το ' color ' είναι το αγαπημένο σου!
+            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
+            print 'το ' color ' είναι το αγαπημένο σου!'
     -   name: 'if'
         explanation: 'Κάνε μια επιλογή με την `if`'
         example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
@@ -339,8 +339,6 @@
             for i in range(0,10):
                 print(i)
             print('Έτοιμοι ή όχι, έρχομαι!')
-
-
 12:
     start_code: |-
         fruit is ['μήλο', 'μπανάνα', 'κεράσι']
@@ -357,14 +355,14 @@
         explanation: 'Για να πάρουμε ένα αντικείμενο από μια λίστα χρησιμοποιούμε [αριθμός] έτσι fruit[1] σημαίνει, πάρε το πρώτο φρούτο από τη λίστα!'
         example: 'Για παράδειγμα: firstfruit is fruit[1]'
         demo_code: |-
-            fruit is ['μήλο', 'μπανάνα', 'κεράσι'']
+            fruit is ['μήλο', 'μπανάνα', 'κεράσι']
             firstfruit is fruit[1]
             print(firstfruit)
     -   name: 'Πάρε ένα τυχαίο αντικείμενο από μία λίστα'
         explanation: 'Για να πάρουμε ένα τυχαίο αντικείμενο από τη λίστα χρησιμοποιούμε [random] έτσι fruit[random] σημαίνει, πάρε ένα τυχαίο φρούτο από τη λίστα!'
         example: 'Για παράδειγμα: randomfruit is fruit[random]'
         demo_code: |-
-            fruit is ['μήλο', 'μπανάνα', 'κεράσι'']
+            fruit is ['μήλο', 'μπανάνα', 'κεράσι']
             randomfruit is fruit[random]
             print(randomfruit)
 13:
@@ -394,26 +392,6 @@
                     print('Αυτό είναι σωστό!')
                 if good_answer is False:
                     print('Αυτό είναι λάθος! Απομένουν ' 5-i ' προσπάθειες ')
-    -   name: 'Ανάθεσε τιμή'
-        explanation: 'Αν θέλουμε να πούμε πως η μεταβλητή με το όνομα answer είναι 8, τότε λέμε answer = 8.'
-        example: 'Για παράδειγμα: answer = 8'
-        demo_code: |-
-            print('Πόσο κάνει 5+3?')
-            answer = 5+3
-            print('η απάντηση τώρα είναι:')
-            print(answer)
-    -   name: 'Σύγκρινε και ανάθεσε τιμή'
-        explanation: 'Αν θέλουμε να συγκρίνουμε δυο τιμές, χρησιμοποιούμε ==. Αν είναι να αναθέσουμε τιμή σε μια μεταβλητή, χρησιμοποιούμε =. '
-        example: 'Για παράδειγμα: 5+3 == 8, answer = 8'
-        demo_code: |-
-            print('Πόσο κάνει 5+3;')
-            answer = 5+3
-            print('η απάντηση τώρα είναι:')
-            print(answer)
-            if answer == 8:
-              print('Αυτό είναι σωστό!')
-            else:
-              print('Όχι, αυτό είναι λάθος!')
 14:
     start_code: |-
         you_are_still_here is False
@@ -441,7 +419,6 @@
         demo_code: |-
             answer1 is input('Πόσο κάνει 3+2;')
             answer2 is input('Πόσο κάνει 2+2;')
-            if answer1 is 5 and answer2 is 4:
             if answer1 is 5 or answer2 is 4:
                 print('Τουλάχιστον μία απάντηση είναι σωστή!')
             else:

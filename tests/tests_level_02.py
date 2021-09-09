@@ -32,8 +32,11 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual('Invalid', str(context.exception))
 
   def test_transpile_echo_at_level_2(self):
+    code = textwrap.dedent("""\
+    ask what is jouw lievelingskleur?
+    echo Jouw lievelingskleur is dus...""")
     with self.assertRaises(Exception) as context:
-      result = hedy.transpile("echo Jouw lievelingskleur is dus...", self.level)
+      result = hedy.transpile(code, self.level)
     self.assertEqual('Wrong Level', str(context.exception))
 
   def test_spaces_in_arguments(self):
@@ -332,6 +335,27 @@ class TestsLevel2(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     name = input('\\'What restaurant\\'')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_allow_hungarian_vars(self):
+    code = textwrap.dedent("""\
+      állatok is kutya, macska, kenguru
+      print állatok at random""")
+
+    result = hedy.transpile(code, self.level)
+
+  def test_ask_bengali_vars(self):
+    code = textwrap.dedent("""\
+      রং is ask আপনার প্রিয় রং কি?
+      print রং is আপনার প্রিয""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
+    print(ve1760b6272d4c9f816e62af4882d874f+' '+'is'+' '+'আপনার'+' '+'প্রিয')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)

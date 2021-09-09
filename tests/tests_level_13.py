@@ -311,13 +311,13 @@ else:
 
     def test_bool_true(self):
         code = textwrap.dedent("""\
-    ja is True
-    if ja is True:
-        print('ja')""")
+        ja is True
+        if ja is True:
+            print('ja')""")
         expected = textwrap.dedent("""\
-    ja = True
-    if ja == True:
-      print('ja')""")
+        ja = True
+        if ja == True:
+          print('ja')""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)

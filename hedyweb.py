@@ -9,7 +9,7 @@ from flask import abort
 from flask_helpers import render_template
 
 import courses
-from website.auth import current_user
+from website.auth import current_user, is_teacher
 import re
 import utils
 from config import config
@@ -32,7 +32,7 @@ class Translations:
   def get_translations(self, language, section):
     # Merge with English when lacking translations
     # Start from a defaultdict
-    d = collections.defaultdict(lambda: '???')
+    d = collections.defaultdict(lambda: 'Unknown Exception')
     d.update(**self.data.get('en', {}).get(section, {}))
     d.update(**self.data.get(language, {}).get(section, {}))
     return d
@@ -75,6 +75,7 @@ def render_code_editor_with_tabs(request, course, level_number, menu, translatio
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
   arguments_dict['auth'] = translations.get_translations (course.language, 'Auth')
   arguments_dict['username'] = current_user(request) ['username']
+  arguments_dict['is_teacher'] = is_teacher(request)
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
