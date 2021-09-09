@@ -83,10 +83,16 @@ _EOL: "\r"?"\n"
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
 textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
-
-%import common.LETTER
 %import common.DIGIT
 %import common.WS_INLINE
 %import common.NEWLINE
 %import common.SIGNED_INT -> NUMBER
-%import common.CNAME -> NAME
+
+// FH Sept 2021: Frankly I have no clue what any of this means but they are Python compliant var names (aka include unicode)
+// this allows for var names in non-Latin names like Chinese and Bengali
+// stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
+
+NAME: ID_START ID_CONTINUE*
+ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+ID_CONTINUE: ID_START | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+

@@ -336,6 +336,27 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_allow_hungarian_vars(self):
+    code = textwrap.dedent("""\
+      állatok is kutya, macska, kenguru
+      print állatok at random""")
+
+    result = hedy.transpile(code, self.level)
+
+  def test_ask_bengali_vars(self):
+    code = textwrap.dedent("""\
+      রং is ask আপনার প্রিয় রং কি?
+      print রং is আপনার প্রিয""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
+    print(ve1760b6272d4c9f816e62af4882d874f+' '+'is'+' '+'আপনার'+' '+'প্রিয')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
   def test_two_spaces_after_print(self):
     code = "print        hallo!"
     result = hedy.transpile(code, self.level)

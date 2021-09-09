@@ -367,3 +367,11 @@ class TestsLevel4(unittest.TestCase):
         result = hedy.transpile(code, self.level)
       self.assertEqual(str(context.exception), 'Invalid')
 
+  # def test_list_find_issue(self):
+  #   #'list' object has no attribute 'find'
+  #   # FH dd sept 2021 for later fixing!
+  #   code = textwrap.dedent("""\
+  #     নাম is ask আপনার নাম কি?
+  #     if নাম is হেডি print 'ভালো!' else print 'মন্দ'\"""")
+  #
+  #
