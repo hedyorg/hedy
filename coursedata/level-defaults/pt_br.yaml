@@ -452,3 +452,26 @@
             # Este programa foi feito em Hedy
             # Não faz mais nada além de escrever Olá!
             print('Olá!')
+16:
+    start_code: |-
+        idade is input('Quantos anos você tem?')
+        if idade < 12:
+            print('Você é mais novo(a) do que eu!')
+        elif idade > 12:
+            print('Você é mais velho(a) do que eu!')
+    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
+    commands:
+    -   name: "Menor"
+        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
+        example: "Por exemplo: idade < 12"
+        demo_code: |-
+            idade is input('Quantos anos você tem?')
+            if idade < 12:
+                print('Você é mais novo(a) do que eu!')
+    -   name: "Maior"
+        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
+        example: "Por exemplo: idade > 12"
+        demo_code: |-
+            idade is input('Quantos anos você tem?')
+            if age > 12:
+                print('Você é mais velho(a) do que eu!')
