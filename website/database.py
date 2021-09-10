@@ -1,13 +1,42 @@
 from utils import timems
 from . import dynamo
-
+import boto3
+from decimal import Decimal
+import json
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
+
+QUIZ_ANSWER = dynamo.Table(storage, 'QuizAnswer', 'QuizAnswerId')
+QUIZ_ATTEMPT = dynamo.Table(storage, 'QuizAttempt', 'QuizAttemptId', indexed_fields=['QuizAnswerId'])
 
 class Database:
+
+    def store_quiz_answer(self,quiz_answer, dynamodb=None):
+        if not dynamodb:
+            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+
+        table = dynamodb.Table('QuizAnswer')
+        data = json.loads(json.dumps(quiz_answer), parse_float=Decimal)
+        return table.put_item(Item=data)
+
+
+    def get_quiz_answer(self, answer_id):
+        """Load a token from the database."""
+        return QUIZ_ANSWER.get({'QuizAnswerId': answer_id})
+
+    def store_quiz_attempt(self,quiz_attempt, dynamodb=None):
+        if not dynamodb:
+            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+
+        table = dynamodb.Table('QuizAttempt')
+        data = json.loads(json.dumps(quiz_attempt), parse_float=Decimal)
+        return table.put_item(Item=data)
+
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 

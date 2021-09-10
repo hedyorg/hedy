@@ -1,0 +1,27 @@
+{
+  "TableName": "QuizAnswer",
+  "KeySchema": [
+    {
+      "AttributeName": "QuizAnswerId",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "QuizQuestionText",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "QuizAnswerId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "QuizQuestionText",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

@@ -506,7 +506,23 @@ def submit_answer(level_source, question_nr, attempt):
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
         if q_nr <= len(quiz_data['questions']) :
+
             if question['correct_answer'] in option:
+                answer_id = uuid.uuid4().hex
+                stored_quiz_answer = {
+                    'QuizAnswerId': answer_id,
+                    'QuizQuestionText': question['question_text'],
+                    'option': option,
+                    'isCorrectAnswer': False,
+                    'points': session.get('total_score'),
+                    'questionType': 'mp-choice-question',
+                    'questionAttempt': attempt,
+                    'date': timems(),
+                }
+
+                print(stored_quiz_answer)
+
+                DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,
@@ -523,6 +539,21 @@ def submit_answer(level_source, question_nr, attempt):
                 char_array = []
                 for i in range(len(question['mp_choice_options'])):
                     char_array.append(chr(ord('@') + (i + 1)))
+
+                answer_id = uuid.uuid4().hex
+
+                stored_quiz_answer = {
+                    'QuizAnswerId': answer_id,
+                    'QuizQuestionText': question['question_text'],
+                    'option': option,
+                    'isCorrectAnswer': False,
+                    'points': session.get('total_score'),
+                    'questionType': 'mp-choice-question',
+                    'questionAttempt': attempt,
+                    'date': timems(),
+                }
+
+                DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
                                        questions=quiz_data['questions'],
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
@@ -534,6 +565,20 @@ def submit_answer(level_source, question_nr, attempt):
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
             elif attempt >= 3:
+                answer_id = uuid.uuid4().hex
+
+                stored_quiz_answer = {
+                    'QuizAnswerId': answer_id,
+                    'QuizQuestionText': question['question_text'],
+                    'option': option,
+                    'isCorrectAnswer': False,
+                    'points': session.get('total_score'),
+                    'questionType': 'mp-choice-question',
+                    'questionAttempt': attempt,
+                    'date': timems(),
+                }
+
+                DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,

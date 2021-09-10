@@ -1,0 +1,49 @@
+{
+  "TableName": "QuizAttempt",
+  "KeySchema": [
+    {
+      "AttributeName": "QuizAttemptId",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "QuizLevel",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "QuizAttemptId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "QuizLevel",
+      "AttributeType": "N"
+    },
+    {
+      "AttributeName": "QuizAnswerId",
+      "AttributeType": "N"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  },
+  "LocalSecondaryIndexes": [
+    {
+      "IndexName": "index_QuizAttemptId_QuizAnswerId",
+      "KeySchema": [
+        {
+          "AttributeName": "QuizAttemptId",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "QuizAnswerId",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  ]
+}
