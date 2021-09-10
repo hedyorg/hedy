@@ -394,3 +394,34 @@
                   print('Está certo!')
               if resposta_certa is Falso:
                   print('Está errado! ' 5-i ' tentativas restantes')
+14:
+    start_code: |-
+        ainda_esta_aqui is Falso
+        resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
+        if resposta_ainda_esta_aqui is sim:
+            ainda_esta_aqui is Verdadeiro
+        resultado is input('Quanto é 5*5?')
+        if ainda_esta_aqui is Verdadeiro and resultado is 25:
+            print('Você disse sim e respondeu corretamente!')
+    intro_text: "Agora vamos aprender `and` e `or`! Se você quiser verificar duas instruções, não é necessário usar dois `if` porque você pode usar `and` e `or`. Se você usar `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
+    commands:
+    -   name: "And"
+        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser verdadeiras."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+          resposta1 is input('Quanto é 3+2?')
+          resposta2 is input('Quanto é 2+2?')
+          if resposta1 is 5 and resposta2 is 4:
+              print('Ambas as respostas estão corretas!')
+          else:
+              print('Pelo menos uma resposta está errada!')
+    -   name: "Or"
+        explanation: "Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correta. Se ambas estiverem corretas, também não tem problema."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+          resposta1 is input('Quanto é 3+2?')
+          resposta2 is input('Quanto é 2+2?')
+          if resposta1 is 5 or resposta2 is 4:
+              print('Pelo menos uma resposta está correta!')
+          else:
+              print('Ambas as respostas estão erradas!')
