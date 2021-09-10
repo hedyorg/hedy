@@ -425,3 +425,30 @@
               print('Pelo menos uma resposta está correta!')
           else:
               print('Ambas as respostas estão erradas!')
+15:
+    start_code: |-
+        # Este é um programa que vai perguntar algumas questões de Matemática
+        for i in range(1, 10):
+            # Vamos perguntar pela tabuada do 5
+            resposta is input('Quanto é ' i ' vezes 5?')
+            # Verificamos se o resultado é igual ao nosso cálculo
+            resposta_certa is i * 5
+            if resposta is resposta_certa:
+                print(resposta ' está certo!')
+            else:
+                print('Está errado, a resposta devia ser: ' i*5)
+    intro_text: |-
+        Quando você estiver criando programas maiores, vai precisar
+        arranjar uma maneira de lembrar o que cada pedaço de código faz.
+        Usamos os comentários para isso. Um comentário se parece com isso:
+        ` # Isto é um comentário`. Tudo o que aparecer depois do # será
+        invisível para o código.
+    commands:
+    -   name: "Comentário"
+        explanation: "Podemos colocar comentários onde quisermos."
+        example: "# Isto é um comentário"
+        demo_code: |-
+            # Este programa escreve Olá!
+            # Este programa foi feito em Hedy
+            # Não faz mais nada além de escrever Olá!
+            print('Olá!')
