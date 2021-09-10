@@ -17,27 +17,16 @@
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
-  $('*[data-tab]').click(function (e) {
-    const tab = $(e.target);
+  function switchToTab(tabName) {
+    // Find the tab that leads to this selection, and its siblings
+    const tab = $('*[data-tab="' + tabName + '"]');
     const allTabs = tab.siblings('*[data-tab]');
-    const tabName = tab.data('tab').replace ('t-', '');
 
-    // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) {
-      var leave = confirm (window.auth.texts.unsaved_changes);
-      if (! leave) {
-        e.preventDefault();
-        return false;
-      }
-      // If user wants to override the unsaved program, reset unsaved_changes
-      window.State.unsaved_changes = false;
-    }
-
-    window.State.adventure_name = tabName === 'level' ? undefined : tabName;
-
-    const target = $('*[data-tabtarget="t-' + tabName + '"]');
+    // Fidn the target associated with this selection, and its siblings
+    const target = $('*[data-tabtarget="' + tabName + '"]');
     const allTargets = target.siblings('*[data-tabtarget]');
 
+    // Fix classes
     allTabs.removeClass('tab-selected');
     tab.addClass('tab-selected');
 
@@ -55,7 +44,7 @@ $(function() {
       window.editor.setValue (window.State.loaded_program.code);
     }
     // If there's a loaded program for the adventure or level now selected, use it.
-    else if (adventures [tabName].loaded_program) {
+    else if (adventures [tabName] && adventures[tabName].loaded_program) {
       $ ('#program_name').val (adventures [tabName].loaded_program.name);
       window.editor.setValue (adventures [tabName].loaded_program.code);
     }
@@ -69,15 +58,37 @@ $(function() {
       window.editor.setValue (adventures [tabName].start_code);
     }
 
-    window.editor.clearSelection ();
+    window.State.adventure_name = tabName === 'level' ? undefined : tabName;
+    window.editor.clearSelection();
+    // If user wants to override the unsaved program, reset unsaved_changes
     window.State.unsaved_changes = false;
+  }
 
-    e.preventDefault();
-    return false;
+  $('*[data-tab]').click(function (e) {
+    const tab = $(e.target);
+    const tabName = tab.data('tab');
+
+    e.preventDefault ();
+
+    // If there are unsaved changes, we warn the user before changing tabs.
+    if (window.State.unsaved_changes) window.modal.confirm(window.auth.texts.unsaved_changes, () => switchToTab(tabName));
+    else switchToTab(tabName);
+
+    // Do a 'replaceState' to add a '#anchor' to the URL
+    const hashFragment = tabName !== 'level' ? tabName : '';
+    if (window.history) { window.history.replaceState(null, null, '#' + hashFragment); }
   });
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
-  const adventureName = window.State && window.State.adventure_name;
-  $('*[data-tab="t-' + (adventureName || 'level') + '"]').click ();
+  if (window.State && window.State.adventure_name) {
+    switchToTab(window.State.adventure_name);
+  }
+  else if (window.location.hash) {
+    // If we have an '#anchor' in the URL, switch to that tab
+    const hashFragment = window.location.hash.replace(/^#/, '');
+    if (hashFragment) {
+      switchToTab(hashFragment);
+    }
+  }
 });

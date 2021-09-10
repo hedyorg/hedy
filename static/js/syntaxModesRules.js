@@ -1,4426 +1,581 @@
- //  MODE LEVEL 1 SETUP
-define('ace/mode/level1', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level1_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 1
-define('ace/mode/level1_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print "
-      },{
-          token: "keyword",
-          regex: "^ask "
-      },
+// Basic highlighter rules we can use in most levels
+// - Highlighters always begin in the 'start' state, and see line by line (no newlines!)
+// - We try to recognize as many commands and tokens as possible in 'start', only deviating
+//   to another state to avoid highlighting something.
+// - 'expression_eol' is the state to contain arbitrary values that will always eat the rest of the line
+// - 'gobble' is the state that will eat whatever is left in the line and go back to 'start'
+function baseRules() {
+  return {
+    // gobble is a state in which we can read anything (.*), used after print
+    gobble: [
       {
-          token: "keyword",
-          regex: "^echo "
-      },{
-          token: "comment",
-          regex: "#"
-      }],
-
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
- //  MODE LEVEL 2 SETUP
-define('ace/mode/level2', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level2_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 2
-define('ace/mode/level2_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print ",
-        next: "print rest"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "rest"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 3 SETUP
-define('ace/mode/level3', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level3_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 3
-define('ace/mode/level3_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-      "start": [{
-        token: "keyword",
-        regex: "^print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "print option"
-      }],
-
-      "print option": [
-        {
-          token: "constant.character",
-          regex: "'[^']*'$",
-          next: "start",
-        },{
-          token: "constant.character",
-          regex: "'[^']*'",
-        },{
-          token: "text",
-          regex: "\\w+$",
-          next: "start",
-        },{
-          token: "text",
-          regex: "\\w+$",
-        },{
-          regex: "at random",
-          token: "keyword"
-        },{
-          regex: "at random$",
-          token: "keyword",
-          next: "start"
-        }
-      ]
-    };
-
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 4 SETUP
-define('ace/mode/level4', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level4_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 4
-define('ace/mode/level4_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-        //next: "rest"
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " else ",
-        next: "ifElseSpace"
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      }],
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 5 SETUP
-define('ace/mode/level5', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level5_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 5
-define('ace/mode/level5_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " else ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^repeat "
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "repeat "
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$|' ",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-
-//  MODE LEVEL 6 SETUP
-define('ace/mode/level6', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level6_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 6
-define('ace/mode/level6_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " else ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^repeat "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "repeat "
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
+        regex: '.*',
+        token: 'text',
+        next: 'start',
       }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      }],
+    ],
 
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
+    // this function creates two rules, one to recognize strings and at random within a line (staying in the same state)
+    // and one where it is recognized at the end of the line (going back to start)
+    expression_eol: finishLine([
+      {
+        regex: "'[^']*'",
+        token: 'constant.character',
+      },
+      {
+        regex: 'at random',
+        token: 'keyword'
+      },
+      {
+        regex: '$', // $ matches with end of line
+        token: 'text',
+      },
+    ]),
   };
+}
 
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
+const LEVELS = [
+  {
+    name: 'level1',
+    rules: pipe(baseRules(),
+      rule_print('gobble'),
+      rule_turtle(),
+      recognize('start', {
+        regex: 'echo ',
+        token: 'keyword',
+        next: 'gobble',
+      }),
+      recognize('start', {
+        regex: 'ask ',
+        token: 'keyword',
+        next: 'gobble',
+      }),
+    ),
+  },
+  {
+    // Adds lists and 'at random'
+    name: 'level2',
+    rules: pipe(baseRules(),
 
-  exports.ExampleHighlightRules = ExampleHighlightRules;
+      rule_print('expression_eol'),
+      rule_isAsk('gobble'),
+      rule_is('gobble'),
 
-});
+      rule_turtle(),
 
-//  MODE LEVEL 7 SETUP
-define('ace/mode/level7', [], function(require, exports, module) {
+    ),
+  },
+  {
+    // Adds quoted text
+    name: 'level3',
+    rules: pipe(baseRules(),
+      rule_turtle(),
+      rule_print('expression_eol'),
+      rule_isAsk(),
+      rule_is(),
+    ),
+  },
+  {
+    // Adds if/else
+    name: 'level4',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+    ),
+  },
+  {
+    // Adds repeat
+    name: 'level5',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
+    ),
+  },
+  {
+    // Adds arithmetic
+    name: 'level6',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
+      rule_arithmetic(),
+    ),
+  },
+  {
+    // Adds indented blocks -- no changes to highlighter necessary
+    name: 'level7',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
+      rule_arithmetic(),
+    ),
+  },
+  {
+    // Replaces 'repeat' with 'for'
+    name: 'level8and9',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRange(),
+    ),
+  },
+  {
+    // Nesting of 'for' loops (no changes necessary)
+    name: 'level10',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRange(),
+    ),
+  },
+  {
+    // Adding fncall parens
+    name: 'level11',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+// ----------------------------------------------------------------
+//  Everything below this line hasn't been done yet
+// ----------------------------------------------------------------
+  {
+    name: 'level11',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level12',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level13',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level14',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level15',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level16',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level17and18',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level19',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level20',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level21',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level22',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+];
 
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level7_highlight_rules").ExampleHighlightRules;
 
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
+/**
+ * From a list of rules, duplicate all rules
+ *
+ * - 1 is the rule that's given
+ * - 2 is the same rule, adding an '$' which returns to the 'start' state
+ *
+ * 2nd one comes first to have the right precedence.
+ */
+function finishLine(rules) {
+  const ret = [];
+  for (const rule of rules) {
+    if (rule.regex) {
+      ret.push({
+        regex: rule.regex + '$',
+        token: rule.token,
+        next: 'start',
+      });
+    }
+    ret.push(rule);
+  }
+  return ret;
+}
 
-  (function() {
-    this.lineCommentStart = "#";
+/**
+ * Add a single rule, or multiple rules, to a given state, or multiple states
+ *
+ * Examples:
+ *
+ * - recognize('start', { regex, token, next })
+ * - recognize(['start', 'expression'], { regex, token, next })
+ * - recognize('start', [{ ... }, {...}])
+ */
+function recognize(stateOrStates, ruleOrRules) {
+  return (rules) => {
+    if (!Array.isArray(stateOrStates)) {
+      stateOrStates = [stateOrStates];
+    }
 
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 7
-define('ace/mode/level7_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^repeat "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "repeat "
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
+    for (const state of stateOrStates) {
+      if (!rules[state]) {
+        rules[state] = [];
       }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
+      if (Array.isArray(ruleOrRules)) {
+        rules[state].push(...ruleOrRules);
+      } else {
+        rules[state].push(ruleOrRules);
       }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      }],
+    }
 
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
+    return rules;
   };
+}
 
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 8 and 9 SETUP
-define('ace/mode/level8and9', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level8and9_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
+/**
+ * comp(f1, f2, f3, ...)
+ *
+ * Returns f1 ○ f2 ○ f3 ○ ...
+ */
+function comp(...fns) {
+  return (val) => {
+    for (const fn of fns) {
+      val = fn(val);
+    }
+    return val;
   };
-  oop.inherits(Mode, TextMode);
+}
 
-  (function() {
-    this.lineCommentStart = "#";
+/**
+ * pipe(X, f1, f2, f3, ...)
+ *
+ * Returns ...(f3(f2(f1(X)))
+ *
+ * (Same as X |> f1 |> f2 |> f3 |> ...)
+ */
+function pipe(val, ...fns) {
+  return comp(...fns)(val);
+}
 
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
+/**
+ * Add a 'print' rule, going to the indicated 'next' state (start if omitted)
+ */
+function rule_print(next) {
+  return recognize('start', {
+    regex: 'print',
+    token: 'keyword',
+    next: next ?? 'start',
+  });
+}
 
-  }).call(Mode.prototype);
+/**
+ * Add an 'is ask' rule, going to the indicated 'next' state (expression_eol if omitted)
+ */
+function rule_isAsk(next) {
+  return recognize('start', {
+    regex: '(\\w+)( is ask )',
+    token: ['text', 'keyword'],
+    next: next ?? 'expression_eol',
+  });
+}
 
-  exports.Mode = Mode;
-});
+/**
+ * Add an 'is' rule, going to the indicated 'next' state (expression_eol if omitted)
+ */
+function rule_is(next) {
+  return recognize('start', {
+    regex: '(\\w+)( is )',
+    token: ['text', 'keyword'],
+    next: next ?? 'expression_eol',
+  });
+}
+
+/**
+ * Add a 'print' rule with brackets
+ */
+function rule_printParen() {
+  return recognize('start', {
+    regex: '(print)(\\()',
+    token: ['keyword', 'paren.lparen'],
+    next: 'start'
+  });
+}
+
+function rule_turtle() {
+    return comp(
+      recognize('start', {
+        regex: 'turn (left|right)?',
+        token: 'keyword',
+        next: 'start',
+      }),
+      recognize('start', {
+        regex: 'forward',
+        token: 'keyword',
+        next: 'start',
+      })
+    )
+}
 
 
- //  Syntax rules level 8 and 9
-define('ace/mode/level8and9_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
 
-  var ExampleHighlightRules = function() {
 
-    this.$rules = {
 
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "keyword",
-        regex: "^for ",
-        next: "forloop1"
-      }],
+/**
+ * Add an 'is input' rule with brackets
+ */
+function rule_isInputParen() {
+  return recognize('start', {
+    regex: '(\\w+)( is input)(\\()',
+    token: ['text', 'keyword', 'paren.lparen'],
+    next: 'start'
+  });
+}
 
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range ",
-        next: "forloop2"
-      },{
-        defaultToken : "text"
-      }],
+/**
+ * Recognize expressions as part of the 'start' state
+ */
+function rule_expressions() {
+  return comp(
+    recognize('start', {
+      regex: "'[^']*'",
+      token: 'constant.character',
+    }),
+    recognize('start', {
+      regex: 'at random',
+      token: 'keyword'
+    }),
+    recognize('start', {
+      regex: '[, ]+',
+      token: 'punctuation.operator',
+    }),
+  );
+}
 
-      "forloop2": [{
-        token: "keyword",
-        regex: " to ",
-        next: "forloop3"
-      },{
-        defaultToken : "text"
-      }],
 
-      "forloop3": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
+/**
+ * Add highlighting for if/else, also add a condition
+ */
+function rule_ifElse() {
+  return comp(
+    recognize('start', {
+      regex: 'if',
+      token: 'keyword',
+      next: 'condition',
+    }),
+    recognize('start', {
+      regex: 'else',
+      token: 'keyword',
+    }),
+    recognize('condition', {
+      regex: 'is',
+      token: 'keyword',
+      next: 'start',
+    }),
+  );
+}
 
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
+/**
+ * Add numbers and arithmetic
+ */
+function rule_arithmetic() {
+  return recognize(['start', 'expression_eol'], [
+    {
+      regex: ' \\* ',
+      token: 'keyword',
+    },
+    {
+      regex: ' \\+ ',
+      token: 'keyword',
+    },
+    {
+      regex: ' \\- ',
+      token: 'keyword',
+    },
+  ]);
+}
+
+/**
+ * Add highlighting for repeat
+ */
+function rule_repeat() {
+  return recognize('start', {
+    regex: '(repeat)( \\w+ )(times)',
+    token: ['keyword', 'text', 'keyword'],
+  });
+}
+
+function rule_forRange() {
+  return recognize('start', {
+    regex: '(for )(\\w+)( in range )(\\w+)( to )(\\w+)',
+    token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
+  });
+}
+
+function rule_forRangeParen() {
+  return recognize('start', {
+    regex: '(for )(\\w+)( in range)(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
+  });
+}
+
+/**
+ * Modify the given ruleset, replacing literal spaces with "one or more spaces"
+ */
+function loosenRules(rules) {
+  for (const ruleSets of Object.values(rules)) {
+    for (const rule of ruleSets) {
+      if (rule.regex && !rule._loosened) {
+        rule.regex = rule.regex.replace(/ /g, ' +');
+        rule._loosened = true;
       }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      }],
+    }
+  }
+  return rules;
+}
 
+// Define the modes based on the level definitions above
+for (const level of LEVELS) {
 
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
+  // This is a local definition of the file 'ace/mode/level1.js', etc.
+  define('ace/mode/' + level.name, [], function(require, exports, module) {
+    var oop = require('ace/lib/oop');
+    var TextMode = require('ace/mode/text').Mode;
+    var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
 
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
+    function ThisLevelHighlightRules() {
+      this.$rules = loosenRules(level.rules);
+      console.log(level.name, this.$rules);
+      this.normalizeRules();
     };
-    this.normalizeRules();
-  };
+    oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
 
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 10 SETUP
-define('ace/mode/level10', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level10_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
+    function Mode() {
+      this.HighlightRules = ThisLevelHighlightRules;
     };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 10
-define('ace/mode/level10_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range ",
-        next: "forloop2"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: " to ",
-        next: "forloop3"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop3": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 11 SETUP
-define('ace/mode/level11', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level11_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 11
-define('ace/mode/level11_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 12 SETUP
-define('ace/mode/level12', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level12_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 12
-define('ace/mode/level12_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 13 SETUP
-define('ace/mode/level13', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level13_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 13
-define('ace/mode/level13_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else| else",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "support.function",
-        regex: "True|False",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 14 SETUP
-define('ace/mode/level14', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level14_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 14
-define('ace/mode/level14_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else| else",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " is "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },
-      {
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 15 SETUP
-define('ace/mode/level15', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level15_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 15
-define('ace/mode/level15_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else| else",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " is "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },
-      {
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 16 SETUP
-define('ace/mode/level16', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level16_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 16
-define('ace/mode/level16_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^elif|^else| else| elif",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " is "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "<"
-      },{
-        token: "keyword",
-        regex: ">"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 17 & 18 SETUP
-define('ace/mode/level17and18', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level17and18_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 17 & 18
-define('ace/mode/level17and18_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^elif|^else| else| elif",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      },{
-        token: "keyword",
-        regex: "^while | while ",
-        next: "ifElseSpace"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " is "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "<"
-      },{
-        token: "keyword",
-        regex: ">"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 19 SETUP
-define('ace/mode/level19', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level19_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 19
-define('ace/mode/level19_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^elif|^else| else| elif",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      },{
-        token: "keyword",
-        regex: "^while | while ",
-        next: "ifElseSpace"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " is "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length is"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length is": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "LijstOfGeenLijst"
-      },{
-        defaultToken: "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length forloop"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length forloop": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "forloop2"
-      },{
-        defaultToken: "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "<"
-      },{
-        token: "keyword",
-        regex: ">"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: " length[(]",
-        next: "length rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length rest": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "print option"
-      },{
-        defaultToken: "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 20 SETUP
-define('ace/mode/level20', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level20_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 20
-define('ace/mode/level20_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " = input[(]|= input[(]| =input[(]|=input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^elif|^else| else| elif",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      },{
-        token: "keyword",
-        regex: "^while | while ",
-        next: "ifElseSpace"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length is"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length is": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "LijstOfGeenLijst"
-      },{
-        defaultToken: "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length forloop"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length forloop": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "forloop2"
-      },{
-        defaultToken: "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "<"
-      },{
-        token: "keyword",
-        regex: ">"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: " length[(]",
-        next: "length rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length rest": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "print option"
-      },{
-        defaultToken: "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 21 SETUP
-define('ace/mode/level21', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level21_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 21
-define('ace/mode/level21_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " = input[(]|= input[(]| =input[(]|=input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^elif|^else| else| elif",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      },{
-        token: "keyword",
-        regex: "^while | while ",
-        next: "ifElseSpace"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length is"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length is": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "LijstOfGeenLijst"
-      },{
-        defaultToken: "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length forloop"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length forloop": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "forloop2"
-      },{
-        defaultToken: "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " != |!= |!=| !=| = | =|=|= ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "<"
-      },{
-        token: "keyword",
-        regex: ">"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: " length[(]",
-        next: "length rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length rest": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "print option"
-      },{
-        defaultToken: "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 21 and 22 SETUP
-define('ace/mode/level21and22', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level21and22_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 22
-define('ace/mode/level21and22_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "comment",
-        regex: "#.*$"
-      },{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " = input[(]|= input[(]| =input[(]|=input[(]",
-        next: "input"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^elif|^else| else| elif",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      },{
-        token: "keyword",
-        regex: "^while | while ",
-        next: "ifElseSpace"
-      }],
-
-      "LijstOfGeenLijst": [{
-        token: "text",
-        regex: "\\[",
-        next: "lijst"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "support.function",
-        regex: "True|False"
-      },{
-        token: "keyword",
-        regex: " = | =|=|= "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length is"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length is": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "LijstOfGeenLijst"
-      },{
-        defaultToken: "text"
-      }],
-
-      "lijst": [{
-        token: "constant.character",
-        regex: "'",
-        next: "singleQuote"
-      },{
-        token: "text",
-        regex: "\\]",
-        next: "start"
-      }],
-
-      "singleQuote": [{
-        token: "constant.character",
-        regex: "'",
-        next: "lijst"
-      },{
-        token: "constant.character",
-        regex: "'\\]",
-        next: "start"
-      },{
-        defaultToken: "constant.character"
-      }],
-
-      "input": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input rest"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "input rest": [{
-        token: "constant.character",
-        regex: "'",
-        next: "input eind"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "input eind": [{
-        token: "keyword",
-        regex: "[)]$",
-        next: "start"
-      },
-      {
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range[(]",
-        next: "forloop2"
-      },{
-      token: "text",
-      regex: "$",
-      next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "length[(]",
-        next: "length forloop"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length forloop": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "forloop2"
-      },{
-        defaultToken: "text"
-      }],
-
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "^print[(]| print[(]",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " != |!= |!=| !=| = | =|=|= ",
-        next: "LijstOfGeenLijst"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\+"
-      }
-      ,{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: "<"
-      },{
-        token: "keyword",
-        regex: ">"
-      },{
-        token: "keyword",
-        regex: " and "
-      },{
-        token: "keyword",
-        regex: " or "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        regex: " at random",
-        token: "keyword"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "[)]",
-        next: "start"
-      },{
-        token: "keyword",
-        regex: "\\*"
-      },{
-        token: "keyword",
-        regex: "\\+"
-      },{
-        token: "keyword",
-        regex: "\\-"
-      },{
-        token: "keyword",
-        regex: " length[(]",
-        next: "length rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "length rest": [{
-        token: "keyword",
-        regex: "[)]",
-        next: "print option"
-      },{
-        defaultToken: "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "'",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
+    oop.inherits(Mode, TextMode);
+
+    exports.Mode = Mode;
+  });
+}

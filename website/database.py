@@ -114,10 +114,19 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
+        classes = USERS.get({'username': username}).get ('classes') or []
         USERS.delete({'username': username})
         # The recover password token may exist, so we delete it
         TOKENS.delete({'id': username})
         PROGRAMS.del_many({'username': username})
+
+        # Remove user from classes of which they are a student
+        for class_id in classes:
+            self.remove_student_from_class (class_id, username)
+
+        # Delete classes owned by the user
+        for Class in self.get_teacher_classes (username, False):
+            self.delete_class (Class)
 
     def all_users(self):
         """Return all users."""
@@ -130,3 +139,71 @@ class Database:
     def all_users_count(self):
         """Return the total number of all users."""
         return USERS.item_count()
+
+    def get_class(self, id):
+        """Return the classes with given id."""
+        return CLASSES.get({'id': id})
+
+    def get_teacher_classes(self, username, students_to_list):
+        """Return all the classes belonging to a teacher."""
+        classes = None
+        if dynamo.is_dynamo_available ():
+            classes = CLASSES.get_many({'teacher': username})
+        # If we're using the in-memory database, we need to make a shallow copy of the classes before changing the `students` key from a set to list, otherwise the field will remain a list later and that will break the set methods.
+        else:
+            classes = []
+            for Class in CLASSES.get_many({'teacher': username}):
+                classes.append (Class.copy())
+        if students_to_list:
+            for Class in classes:
+                if not 'students' in Class:
+                    Class ['students'] = []
+                else:
+                    Class ['students'] = list (Class ['students'])
+        return classes
+
+    def get_teacher_students(self, username):
+        """Return all the students belonging to a teacher."""
+        students = []
+        classes = CLASSES.get_many({'teacher': username})
+        for Class in classes:
+            for student in Class.get ('students', []):
+                if student not in students:
+                    students.append (student)
+        return students
+
+    def get_student_classes(self, username):
+        """Return all the classes of which the user is a student."""
+        classes = []
+        for class_id in USERS.get({'username': username}).get ('classes') or []:
+            Class = self.get_class (class_id)
+            classes.append ({'id': Class ['id'], 'name': Class ['name']})
+
+        return classes
+
+    def store_class(self, Class):
+        """Store a class."""
+        CLASSES.create(Class)
+
+    def update_class(self, id, name):
+        """Updates a class."""
+        CLASSES.update({'id': id}, {'name': name})
+
+    def add_student_to_class(self, class_id, student_id):
+        """Adds a student to a class."""
+        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoAddToStringSet (student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoAddToStringSet (class_id)})
+
+    def remove_student_from_class(self, class_id, student_id):
+        """Removes a student from a class."""
+        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoRemoveFromStringSet (student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet (class_id)})
+
+    def delete_class(self, Class):
+        for student_id in Class.get ('students', []):
+            Database.remove_student_from_class (self, Class ['id'], student_id)
+
+        CLASSES.delete({'id': Class ['id']})
+
+    def resolve_class_link(self, link_id):
+        return CLASSES.get({'link': link_id})

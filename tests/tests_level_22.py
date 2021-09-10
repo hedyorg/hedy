@@ -17,26 +17,39 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 
-def run_code(code):
-    code = "import random\n" + code
+def run_code(parse_result):
+    code = "import random\n" + parse_result.code
     with captured_output() as (out, err):
         exec(code)
     return out.getvalue().strip()
 
 class TestsLevel22(unittest.TestCase):
     maxDiff = None
+    level = 22
 
     def test_print(self):
-        result = hedy.transpile("print('ik heet')", 22)
-        self.assertEqual("print('ik heet')", result)
+        result = hedy.transpile("print('ik heet')", self.level)
+        expected = "print('ik heet')"
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_print_with_var(self):
-        result = hedy.transpile("naam = Hedy\nprint('ik heet' naam)", 22)
-        self.assertEqual("naam = 'Hedy'\nprint('ik heet'+str(naam))", result)
+        result = hedy.transpile("naam = Hedy\nprint('ik heet' naam)", self.level)
+        expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_print_with_calc_no_spaces(self):
-        result = hedy.transpile("print('5 keer 5 is ' 5*5)", 22)
-        self.assertEqual("print('5 keer 5 is '+str(int(5) * int(5)))", result)
+        result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
+        expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
+
+    def test_transpile_ask(self):
+        result = hedy.transpile("antwoord = input('wat is je lievelingskleur?')", self.level)
+        expected = "antwoord = input('wat is je lievelingskleur?')"
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_print_calculation_times_directly(self):
         code = textwrap.dedent("""\
@@ -44,20 +57,17 @@ class TestsLevel22(unittest.TestCase):
     nummertwee = 6
     print(nummer * nummertwee)""")
 
-        result = hedy.transpile(code, 22)
+        result = hedy.transpile(code, self.level)
 
         expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
     print(str(int(nummer) * int(nummertwee)))""")
 
-        self.assertEqual(expected, result)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
         self.assertEqual("30", run_code(result))
-
-    def test_transpile_ask(self):
-        result = hedy.transpile("antwoord = input('wat is je lievelingskleur?')", 22)
-        self.assertEqual(result, "antwoord = input('wat is je lievelingskleur?')")
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -69,9 +79,9 @@ naam = 'Hedy'
 if str(naam) == str('Hedy'):
   print('koekoek')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_if_else(self):
         code = textwrap.dedent("""\
@@ -92,9 +102,9 @@ else:
   print('Foutje')
   print('Het antwoord moest zijn '+str(antwoord))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_print_random(self):
         code = textwrap.dedent("""\
@@ -106,9 +116,9 @@ else:
     computerkeuze=random.choice(keuzes)
     print('computer koos '+str(computerkeuze))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_for_loop(self):
         code = textwrap.dedent("""\
@@ -124,9 +134,9 @@ else:
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_if__else(self):
         code = textwrap.dedent("""\
@@ -142,9 +152,9 @@ else:
     else:
       x = '222'""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_forloop(self):
         code = textwrap.dedent("""\
@@ -156,9 +166,9 @@ else:
       print(str(i))
     print('wie niet weg is is gezien')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_for_nesting(self):
         code = textwrap.dedent("""\
@@ -170,9 +180,9 @@ else:
       for j in range(int(1), int(4)+1):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_if_nesting(self):
         code = textwrap.dedent("""\
@@ -188,9 +198,9 @@ else:
       if str(kleurtwee) == str('geel'):
         print('Samen is dit groen!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_newprint(self):
         code = textwrap.dedent("""\
@@ -204,9 +214,9 @@ else:
     for i in range(int(0), int(leeftijd)+1):
       print(str(i))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_list(self):
         code = textwrap.dedent("""\
@@ -216,9 +226,9 @@ else:
     fruit = ['appel', 'banaan', 'kers']
     print(str(fruit))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_random(self):
         code = textwrap.dedent("""\
@@ -230,9 +240,9 @@ else:
     randomfruit=random.choice(fruit)
     print(str(randomfruit))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_specific_access(self):
         code = textwrap.dedent("""\
@@ -244,9 +254,9 @@ else:
     eerstefruit=fruit[1-1]
     print(str(eerstefruit))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     # note that print(str(highscore)) will not print as it will compare 'score[i]' as str to a variable
     def test_everything_combined(self):
@@ -269,9 +279,9 @@ else:
       if str(highscore) == str('score[i]'):
         print(str(highscore))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_if_under_else_in_for(self):
         code = textwrap.dedent("""\
@@ -294,9 +304,9 @@ else:
       if str(antwoord) == str('25'):
         i = '10'""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bool_true(self):
         code = textwrap.dedent("""\
@@ -308,9 +318,9 @@ else:
     if ja == True:
       print('ja')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bool_false(self):
         code = textwrap.dedent("""\
@@ -321,9 +331,9 @@ else:
     ja = False
     if ja == False:
       print('ja')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bool_true2(self):
         code = textwrap.dedent("""\
@@ -335,9 +345,9 @@ else:
     if ja == True:
       print('ja')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bool_false2(self):
         code = textwrap.dedent("""\
@@ -349,9 +359,9 @@ else:
     if ja == False:
       print('ja')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bool_total(self):
         code = textwrap.dedent("""\
@@ -373,9 +383,9 @@ else:
     if jebenternog == False:
       print('Doei!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_and(self):
         code = textwrap.dedent("""\
@@ -385,9 +395,9 @@ else:
     if str('5') == str('5') and str('4') == str('4'):
       print('hallo')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_or(self):
         code = textwrap.dedent("""\
@@ -397,9 +407,9 @@ else:
     if str('5') == str('5') or str('4') == str('4'):
       print('hallo')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_comment(self):
         code = textwrap.dedent("""\
@@ -410,9 +420,9 @@ else:
     if str('5') == str('5') or str('4') == str('4'):
       print('hallo')
       # ['comment']""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_commentbegin(self):
         code = textwrap.dedent("""\
@@ -424,9 +434,9 @@ else:
     # [' comment word']
     if str('5') == str('5') or str('4') == str('4'):
       print('hallo')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_commentresult(self):
         code = textwrap.dedent("""\
@@ -438,9 +448,9 @@ else:
     # [' comment word']
     if str('5') == str('5') or str('4') == str('4'):
       print('hallo')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_smaller(self):
         code = textwrap.dedent("""\
@@ -452,9 +462,9 @@ else:
     if str(leeftijd) < str('12'):
       print('Dan ben je jonger dan ik!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bigger(self):
         code = textwrap.dedent("""\
@@ -466,9 +476,9 @@ else:
     if str(leeftijd) > str('12'):
       print('Dan ben je ouder dan ik!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_big_and_small(self):
         code = textwrap.dedent("""\
@@ -484,9 +494,9 @@ else:
     elif str(leeftijd) > str('12'):
       print('Dan ben je ouder dan ik!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_whileloop(self):
         code = textwrap.dedent("""\
@@ -502,9 +512,9 @@ else:
       if str(antwoord) == str('25'):
         goedantwoord = True""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_whileloop2(self):
         code = textwrap.dedent("""\
@@ -522,9 +532,9 @@ else:
       tel = int(tel) + int(1)
     print('We zijn klaar')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_whileloop3(self):
         code = textwrap.dedent("""\
@@ -544,9 +554,9 @@ else:
         goedantwoord = True
         print('Er is een goed antwoord gegeven')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_access_plus(self):
         code = textwrap.dedent("""\
@@ -562,9 +572,9 @@ else:
     # [' we verwachten hier 6']
     print(str(optellen))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
     def test_length(self):
         code = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
@@ -575,9 +585,9 @@ else:
     hoi = len(fruit)
     print(str(hoi))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_length2(self):
         code = textwrap.dedent("""\
@@ -589,9 +599,9 @@ else:
     for i in range(int(1), int(len(fruit))+1):
       print(str(fruit[i-1]))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_print_length(self):
         code = textwrap.dedent("""\
@@ -605,9 +615,9 @@ else:
     for i in range(int(1), int(3)+1):
       print(str(fruit[i-1]))""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_not_equal_one(self):
         code = textwrap.dedent("""\
@@ -622,9 +632,9 @@ else:
       print('Cool!')
     else:
       print('Ik kom ook uit Nederland!')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_not_equal_two(self):
         code = textwrap.dedent("""\
@@ -639,9 +649,9 @@ else:
       print('Goed zo!')
     else:
       print('Fout! Je mocht geen 5 zeggen')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_smaller_equal(self):
         code = textwrap.dedent("""\
@@ -652,9 +662,9 @@ else:
     leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
     if str(leeftijd) <= str('11'):
       print('Dan ben je jonger dan ik!')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_bigger_equal(self):
         code = textwrap.dedent("""\
@@ -665,9 +675,9 @@ else:
     leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
     if str(leeftijd) >= str('11'):
       print('Dan ben je jonger dan ik!')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_smaller_bigger_equal(self):
         code = textwrap.dedent("""\
@@ -682,9 +692,9 @@ else:
       print('Dan ben je jonger dan ik!')
     elif str(leeftijd) >= str('13'):
       print('Dan ben je ouder dan ik!')""")
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_sum_in_if(self):
         code = textwrap.dedent("""\
@@ -698,9 +708,9 @@ else:
     else:
       print('Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_sum_in_right_side_if(self):
         code = textwrap.dedent("""\
@@ -714,9 +724,9 @@ else:
     else:
       print('Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_min_in_if(self):
         code = textwrap.dedent("""\
@@ -730,9 +740,9 @@ else:
     else:
       print('Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_multiply_in_if(self):
         code = textwrap.dedent("""\
@@ -746,9 +756,9 @@ else:
     else:
       print('Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, 22)
-
-        self.assertEqual(expected, result)
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 # programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message

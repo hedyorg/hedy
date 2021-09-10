@@ -1,0 +1,9 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <h2>{{auth.prompt_join_class}}</h2>
+  <h3>{{class_info.name}}</h3>
+  <a href="#" onclick="join_class ('{{class_info.link}}', '{{class_info.name}}')">{{auth.join_class}}</a>
+</div>
+{% endblock %}

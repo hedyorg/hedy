@@ -1,0 +1,36 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <h2>{{auth.class_overview}}: {{class_info.name}}</h2>
+  <table class="table-auto">
+    <tr class="font-bold">
+      <td class="p-2">{{auth.username}}</td>
+      <td class="p-2">{{auth.last_login}}</td>
+      <td class="p-2">{{auth.highest_level_reached}}</td>
+      <td class="p-2">{{auth.number_programs}}</td>
+      <td class="p-2">{{auth.programs}}</td>
+      <td class="p-2">{{auth.latest_shared_program}}</td>
+      <td class="p-2">{{auth.remove_student}}</td>
+    </tr>
+    {% for student in class_info.students %}
+      <tr>
+        <td class="p-2">{{student.username}}</td>
+        <td class="p-2">{{student.last_login}}</td>
+        <td class="p-2">{{student.highest_level}}</td>
+        <td class="p-2">{{student.programs}}</td>
+        <td class="p-2"><a href="{{localize_link ('/programs?user=' + student.username)}}">{{auth.programs}}</a></td>
+        <td class="p-2">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
+        <td class="p-2"><a href="#" onclick="remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove_student}}</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <p>{{auth.class_link}}: <a href="{{class_info.link}}"<span class="text-blue-500">{{class_info.link}}</span></a></p>
+  <br>
+  <button class="green-btn" onclick="window.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
+  <br> <br>
+  <button class="green-btn" onclick="window.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
+  <br> <br>
+  <button class="red-btn" onclick="window.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+</div>
+{% endblock %}

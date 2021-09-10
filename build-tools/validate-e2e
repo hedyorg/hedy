@@ -10,7 +10,7 @@ pids=""
 trap 'kill $pids' EXIT
 
 export PORT=5050
-env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py > e2e-server.log 2>&1 &
+env HEROKU_APP_NAME=localhost BASE_URL=http://localhost:$PORT SECRET_KEY=TheSecret python app.py > e2e-server.log 2>&1 &
 pids="$pids $!"
 
 endpoint=http://localhost:$PORT
@@ -18,7 +18,7 @@ endpoint=http://localhost:$PORT
 # We need to wait a bit for the server to come up. curl for a max time
 echo "Waiting for server to start..." >&2
 up=false
-for i in $(seq 0 100); do
+for i in $(seq 0 1000); do
     if curl -sSf "$endpoint" > /dev/null 2>&1; then
         up=true
 		break

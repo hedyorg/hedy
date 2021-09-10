@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
 from functools import wraps
 from config import config
@@ -78,14 +78,6 @@ def requires_login (f):
 def routes (app, database, requested_lang):
     global DATABASE
     DATABASE = database
-
-    @app.route('/auth/texts', methods=['GET'])
-    def auth_texts():
-        response = make_response(jsonify(TRANSLATIONS.data [requested_lang ()] ['Auth']))
-        if not is_debug_mode():
-            # Cache for longer when not devving
-            response.cache_control.max_age = 60 * 60  # Seconds
-        return response
 
     @app.route ('/auth/login', methods=['POST'])
     def login ():
@@ -312,7 +304,7 @@ def routes (app, database, requested_lang):
         if not isinstance (body, dict):
             return 'body must be an object', 400
         if 'email' in body:
-            if not isinstance (body.get( 'email'), str):
+            if not isinstance (body.get('email'), str):
                 return 'body.email must be a string', 400
             if not valid_email (body ['email']):
                 return 'body.email must be a valid email', 400
@@ -374,6 +366,9 @@ def routes (app, database, requested_lang):
                 output [field] = user [field]
         if 'verification_pending' in user:
             output ['verification_pending'] = True
+
+        output ['student_classes'] = DATABASE.get_student_classes (user ['username'])
+
         output ['session_expires_at'] = timems () + session_length * 1000
 
         return jsonify (output), 200
@@ -445,7 +440,7 @@ def routes (app, database, requested_lang):
 
     @app.route ('/admin/markAsTeacher', methods=['POST'])
     def mark_as_teacher ():
-        if not is_admin (request):
+        if not is_admin (request) and not is_testing_request (request):
             return 'unauthorized', 403
 
         body = request.json
@@ -533,7 +528,7 @@ def send_email (recipient, subject, body_plain, body_html):
         print ('Email sent to ' + recipient)
 
 def send_email_template (template, email, lang, link):
-    texts = TRANSLATIONS.data [lang] ['Auth']
+    texts = TRANSLATIONS.get_translations (lang, 'Auth')
     subject = texts ['email_' + template + '_subject']
     body = texts ['email_' + template + '_body'].split ('\n')
     body = [texts ['email_hello']] + body
@@ -552,11 +547,11 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='my-profile')
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=False, current_page='login')
     if page == 'admin':
-        if not is_admin (request):
+        if not is_testing_request (request) and not is_admin (request):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
@@ -573,9 +568,9 @@ def auth_templates (page, lang, menu, request):
                     data [field] = None
             data ['email_verified'] = not bool (data ['verification_pending'])
             data ['is_teacher']     = bool (data ['is_teacher'])
-            data ['created'] = datetime.datetime.fromtimestamp (int (str (data ['created']) [:-3])).isoformat ()
+            data ['created'] = mstoisostring (data ['created'])
             if data ['last_login']:
-                data ['last_login'] = datetime.datetime.fromtimestamp (int (str (data ['last_login']) [:-3])).isoformat ()
+                data ['last_login'] = mstoisostring (data ['last_login'])
             userdata.append (data)
 
         userdata.sort(key=lambda user: user ['created'], reverse=True)
@@ -584,4 +579,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations (lang, 'Auth'))

@@ -54,323 +54,155 @@ Je kunt je projecten simpel opslaan door je project een naam te geven in het wit
 
 Veel programmeer plezier!
 
-## Lesgeven met Hedy (algemeen)
+## Lesgeven met Hedy 
 
-TODO
+Hedy is opgebouwd uit verschillende levels, waarin de leerlingen steeds één of meerdere nieuwe vaardigheden leren. Wij raden aan om per les één Hedy level te behandelen. Zo leren uw leerlingen stapje voor stapje programmeren en kan de nieuwe stof inslijpen voordat u naar het volgende level gaat. In onze levels hanteren we deze structuur:
+
+### Algemene lesopbouw
+#### Introductie
+In de introductie van uw programmeerles activeert u de voorkennis van uw leerlingen. Door een korte herhaling van de vorige les zitten de nieuwe commando's en veelgemaakte fouten weer vers in het geheugen van uw leerlingen en zijn ze klaar om een nieuw level te ontdekken!
+
+#### Instructie van nieuwe concepten en commando's 
+Nieuwe concepten en commando's kunnen voor leerlingen soms erg lastig zijn om te begrijpen. Het is daarom van belang dat u als leerkracht het juiste gebruik van de nieuwe commando's voordoet aan de klas. Voornamelijk in de lagere levels, waarin de programmeerconcepten geheel nieuw zijn voor uw leerlingen, kan het lastig zijn om de concepten te begrijpen. Het tonen van voorbeelden maakt een abstracte uitleg (bijvoorbeeld over 'Wat is een variabele?') herkenbaar voor de leerlingen ('Kijk, de variabele huisdier wordt vervangen door hond!').
+
+#### Inoefening van nieuwe commando's
+Voordat uw leerlingen met de avonturen aan de slag gaan, wordt aangeraden om de leerlingen even te laten oefenen met de nieuwe commando's. Op deze manier kunnen de leerlingen de commando's goed in de vingers krijgen, zonder dat de commando's meteen in lange codes verwerkt zitten. De probeerknoppen zijn hierbij erg handig. Na enige oefening kunnen de leerlingen aan de slag met de avonturen.
+
+#### Aan de slag
+Bij elk Hedy level zijn verschillende avonturen te vinden in de roze tabbladen. De avonturen staan geordend van makkelijk naar moeilijk, dus het is het beste om de leerlingen te laten beginnen met het verhaalavontuur en daarna naar rechts te werken. Uiteraard hoeven de leerlingen niet bij alle levels alle opdrachten te maken, en kunt u zorgen voor een leuke afwisseling in de opdrachten per les. De avonturen bevatten over het algemeen een voorbeeldcode, die met de groene knop in de hoek van het voorbeeld gekopieerd kunnen worden naar het werkveld. Hierna kunnen de leerlingen de code zelf een keer proberen en kunnen ze zelf de code aanpassen om er hun eigen project van te maken. Stimuleer de leerlingen om hun eigen ideeën toe te voegen aan de code, en hun eigen varianten van de codes te creëren!
+
+#### Quiz
+Om te testen of uw leerlingen de nieuwe concepten en commando's volledig begrepen hebben, kunt u de leerlingen de quiz laten invullen. Dit zijn 10 multiple-choice vragen over de leerstof van het desbetreffende level. 
+
+#### Evaluatie
+Sluit de les af met een korte evaluatie; Wat hebben de leerlingen ontdekt? Van welke fouten hebben ze kunnen leren? En het allerbelangrijkste: Wat hebben ze gemaakt? 
+Leerlingen vinden het vaak leuk om hun eigen creaties aan hun klasgenoten te laten zien, dus het is fijn om wat tijd over te houden aan het einde van elke les voor wat presentaties van de gemaakte codes.
 
 
+## Veelgemaakte fouten in Hedy
+Van fouten kun je leren en dat geldt al helemaal bij programmeren! Fouten maken is onvermijdelijk en helemaal niet erg, maar het kan als leerkracht soms nog knap lastig zijn om foutjes van leerlingen op te sporen en op te lossen. Vooral als de codes door de levels heen almaar langer worden... Daarom hebben wij hier per level een lijst gemaakt van de meest gemaakte fouten door leerlingen en de oplossingen. 
 
-## Lesgeven met Hedy Level 1
-
-
-
-### Wat leren de leerlingen in dit level?
-
-Level 1 is het introductielevel van Hedy. De leerlingen leren 3 nieuwe commando's waarmee ze hun eerste code's kunnen schrijven. Dit level is zeer laagdrempelig om te zorgen voor een positieve eerste ervaring met programmeren.
-
-### Nieuwe commando's
-
-`print` - Hiermee kun je tekst laten verschijnen.
-
-`ask` - Hiermee kun je een vraag stellen aan de speler.
-
-`echo` - Hiermee kun je het gegeven antwoord op een vraag printen. Let op! Echo werkt alleen in level 1, vanaf level 2 worden variabelen geïntroduceerd voor het herhalen van een gegeven antwoord.
-
-### Opdrachten bij dit level
-
-- Hedy de Waarzegger
-- Verhaal schrijven
-
-### Veelgemaakte fouten
+### Veelgemaakte fouten in level 1 
 
 In level 1 zijn dit veelgemaakte fouten door de leerlingen:
 
-- Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print.
-- Leerlingen typen de commando's met een hoofdletter, waardoor de commando's niet meer werken. 
+- Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print. Los dit op door het juiste commando vooraan de regel te typen.
+- Leerlingen typen de commando's met een hoofdletter, waardoor de commando's niet meer werken. Commando's moeten getypt worden in kleine letters.
 - Soms krijgen de leerlingen meldingen van de browser dat Hedy niet werkt. De oplossing is om de pagina opnieuw te laden.
 
-### Lesopzet les 1
+Tekenturtle:
+- De leerlingen laten het pijltje soms uit beeld lopen, waardoor ze denken dat de code het niet doet. Gebruik in dat geval kleinere getallen.
+- De leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100. 
 
-Dit is een voorbeeld van hoe je les 1 zou kunnen inrichten. De lessen van Hedy duren 30 tot 60 minuten per les. Les 1 duurt wat langer in verband met het ontdekken van het programma en het aanmaken van accounts. Je kunt ervoor kiezen voorafgaand aan de les al accounts aan te maken.
-
-#### Introductie: Voorkennis activeren (5-10 minuten)
-
-- Wat weten de leerlingen al van programmeren?
-- Zijn er al leerlingen met programmeerervaring in bijvoorbeeld Scratch?
-- Wat is programmeren eigenlijk?
-_Programmeren is het geven van instructies aan een computer of robot in hun eigen taal: programmeertaal. De programmeertaal die jullie nu gaan leren is Hedy. Deze taal is speciaal gemaakt voor leerlingen in de bovenbouw van het po en de onderbouw van het vo, oftewel de leerlingen die te groot zijn voor de kinderprogrammeertalen, maar voor wie de 'echte' programmeertalen nog te lastig zijn._
-
-#### Account aanmaken (10 minuten)
-
-De leerlingen maken een account aan, zoals aangegeven in de introductie van deze handleiding.
-
-#### Ontdekken (5 minuten)
-
-Het is verstandig om de leerlingen even een aanrommelfase te gunnen om zelf te kunnen ontdekken wat er in level 1 allemaal is om op te klikken. Dit hoeft niet lang te duren.
-
-#### Uitleg Hedy algemeen (5 minuten)
-
-- Het scherm waar je de code typt.
-- Het scherm waar de code uitgevoerd wordt.
-- De knoppen waarmee je de commando's kunt proberen.
-- De knop om de codes op te slaan.
-
-#### Aan de slag met de opdrachten! (20 minuten)
-
-Laat de drie commando's van level 1 zien op het bord en laat de leerlingen daarna zelf codes verzinnen. Zodra de leerlingen de commando's succesvol hebben geoefend kun je beginnen met de opdracht Hedy de Waarzegger. De opdracht staat stap voor stap uitgewerkt in het opdrachtenboekje. Je kunt er voor kiezen om de stappen zelf klassikaal te behandelen, of je kunt het opdrachtenboekje delen met de leerlingen en ze zelfstandig aan de slag laten gaan.
-
-#### Evaluatie (5 minuten)
- Doe een korte evaluatie over de les om te controleren of het iedereen gelukt is en wat de leerlingen van de les vonden. Laat eventueel wat kinderen hun code presenteren op het bord.
-
-## Level 2
-
-### Wat leren de leerlingen in dit level?
-
-In level 2 komen variabelen aan bod. Dit kan voor de leerlingen een lastig concept zijn, maar door het aan te bieden in speelse opdrachten kunnen leerlingen er goed mee uit de voeten. In level 2 wordt er ook voor het eerst de mogelijkheid geboden om een willekeurig woord te kiezen uit het lijstje van de variabele. Dit geeft de leerlingen de kans om simpele spelletjes zoals _steen, papier, schaar_ en _Hedy de waarzegger_ te maken, waardoor er veel enthousiasme is bij de leerlingen!
-
-### Nieuwe commando's
-
-In level 2 worden variabelen geïntroduceerd. Hier vind je een [instructievideo](https://www.youtube.com/watch?v=bTsUdpK4Co8) over de nieuwe commando's van level 2. In de commando's hieronder wordt de variabele dieren gebruikt, maar de variabelen kunnen uiteraard van alles zijn!
-
-`dieren is hond, kat` - Met dit commando kun je een variabele maken, zoals dieren. Je kunt de variabele 'vullen' met één of meerdere woorden of getallen.
-
-`dieren is ask Wat is je lievelingsdier?` - Let op! Ask werkt in dit level anders dan is level 1. In level 2 begin je met variabele is voordat ask gebruikt.
-
-`print dieren at random` - Hedy kiest een willekeurig woord (of getal) uit het lijstje dat je hebt aangemaakt met dieren is.
-
-### Opdrachten bij dit level
-
-- Verhaal schrijven
-- Hedy de Waarzegger
-- Steen, papier, schaar
-- Wie doet de afwas?
-
-### Veelgemaakte fouten
+### Veelgemaakte fouten in level 2
 
 In level 2 zijn dit veelgemaakte fouten door de leerlingen:
 
 - Leerlingen maken spelfouten in de commando's.
-- Leerlingen vergeten bij ask de variabele eerst te noemen en gebruiken ask hetzelfde als in level 1.
+- Leerlingen vergeten bij ask de variabele eerst te noemen en gebruiken ask hetzelfde als in level 1. Vanaf level 2 heeft een ask commando altijd eerst een variabelenaam en een is nodig. 
+Bijvoorbeeld `ask Hoe heet je?` oplossing:  `naam is ask Hoe heet je?`
 - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print.
 - Leerlingen gebruiken het commando echo, maar dat werkt alleen in level 1. In level 2 kun je het gegeven antwoord herhalen door de variabele te gebruiken.
 - Leerlingen gebruiken geen komma's bij het maken van een opsomming.
-Bijvoorbeeld: `dieren is hond kat`
-- Leerlingen gebruiken komma's na een print, dit kan niet.
-Bijvoorbeeld: `print Hallo, ik ben Hedy.`
+Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
+- Leerlingen gebruiken komma's na een printcommando, dit kan niet.
+Bijvoorbeeld: `print Hallo, ik ben Hedy.` oplossing: `print Hallo ik ben Hedy`
 - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando, maar dat kan pas vanaf level 3.
 Bijvoorbeeld: 
 ```
+dier is hond, kat, koe
+print Het leukste dier is…
+print dier at random
+```
+In regel 2 van deze code staat het woord dier, terwijl dat ook de naam van de variabele is. Los dit op door de variabele een andere naam te geven, bijvoorbeeld:
+```
 dieren is hond, kat, koe
-print de leukste dieren zijn…
+print Het leukste dier is...
 print dieren at random
 ```
-In regel 2 van deze code staat het woord dieren, terwijl dat ook de naam van de variabele is. Los het op door de zin anders te formuleren: 
 
-```
-dieren is hond, kat, koe
-print het leukste dier is…
-print dieren at random
-```
-
-### Lesopzet Level 2
-
-#### Introductie: Voorkennis activeren (2 minuten)
-Bespreek kort met de leerlingen wat ze vorige les geleerd hebben. Leg daarbij vooral de nadruk op het print en ask commando (echo vervalt namelijk in level 2). 
-
-#### Instructie: Wat is een variabele? (10 minuten)
-Daarna kun je het nieuwe concept variabele introduceren. Een variabele is een woord dat verschillende (variërende, variabele) waardes aan kan nemen en dus steeds kan veranderen. Dat klinkt misschien moeilijk, maar dat valt wel mee. Denk bijvoorbeeld aan 'leeftijd'. Iedereen heeft een andere leeftijd en daarbij verandert het getal ook nog eens elk jaar. Lengte is ook zo'n getal, of de cijfers voor je toets, of een score in een spelletje: Allemaal variabelen. 
-
-Een variabele hoeft geen getal te zijn, het kan ook een lijstje woorden zijn, zoals je naam. Gebruik dit voorbeeld in Hedy om de variabele voornaam te demonstreren. 
-
-```
-voornaam is Hedy
-print Hoi voornaam
-```
-Je kunt een variabele dus in de code vastleggen, maar je kunt ook aan de speler vragen wat de variabele moet worden. Dat kun je zien in dit voorbeeld. 
-
-```
-voornaam is ask Hoe heet jij?
-print Hoi voornaam!
-```
-
-Breid het voorbeeld uit met de variabele leeftijd. 
-```
-voornaam is ask Hoe heet jij?
-print Hoi voornaam!
-leeftijd is ask Hoe oud ben jij?
-print Jij bent leeftijd jaar oud
-```
-
-#### Zelf proberen! (10 minuten) 
-Laat de leerlingen zelf deze codes maken, of er zelf varianten op bedenken. 
-
-#### At random (15 minuten) 
-Het leuke van variabelen is dat je Hedy ook een waarde van een variabele willekeurig (Engels: random) kan laten kiezen. Toon deze voorbeelden en laat de leerlingen dan weer zelf aan de slag gaan met deze nieuwe codes. 
-```
-keuzes is steen, papier, schaar
-print keuzes at random
-```
-
-```
-voetbalclubs is Ajax, Feyenoord, PSV
-print de beste club is...
-print voetbalclubs at random
-```
-
-#### Zelfstandige verwerking: Waarzegger-opdracht (20 min) 
-
-```
-print Ik ben Hedy de Waarzegster!
-vraag is ask Wat wil je weten?
-print Dit wil je weten: vraag
-antwoorden is ja, nee, misschien 
-print mijn glazen bol zegt... 
-print antwoorden at random
-```
-
-#### Evaluatie (5 min)
-Houd een korte evaluatie met de leerlingen om de les af te sluiten. 
-
-## Level 3
-
-### Wat leren de leerlingen in dit level?
-
-In level 3 worden geen nieuwe functies uitgelegd. Het enige wat verandert is dat er in level 3 gewerkt wordt met aanhalingstekens bij het commando print.
-
-### Nieuwe commando's
-
-Hier vind je een [instructievideo](https://www.youtube.com/watch?v=3XT7nhsXVkY) over de nieuwe commando's van level 3.
-
-`print 'Hallo wereld' ` - Er worden aanhalingstekens gebruikt bij print
-
-### Opdrachten bij dit level
-
-- Alle kleine opdrachten uit level 2
-- Hedy de Waarzegger
-- Spookhuisgame
-
-### Veelgemaakte fouten
+### Veelgemaakte fouten in level 3
 
 In level 3 zijn dit veelgemaakte fouten door de leerlingen:
 
-- Dezelfde fouten als bij level 2
-- Leerlingen vergeten de aanhalingstekens aan beide kanten te zetten
+- Dezelfde fouten als bij level 2.
+- Leerlingen vergeten de aanhalingstekens aan beide kanten te zetten. 
+Bijvoorbeeld: `print 'Hallo ` Oplossing: `print 'Hallo'`
 - Leerlingen gebruiken de verkeerde aanhalingstekens. Het correcte aanhalingsteken is ' deze vindt je op de meeste toetsenborden naast de enterknop. Andere aanhalingstekens zoals de dubbele aanhalingstekens &quot; of het schuine aanhalingsteken ` (op de meeste toetsenborden linksboven samen met ~).
-- Leerlingen gebruiken bij ask ook aanhalingstekens terwijl dit niet hoeft.
-
-### Lesopzet Level 3
-In les 3 is het voornamelijk van belang dat er aanhalingstekens toegevoegd worden bij het print commando. Dit is voor leerlingen vaak lastig, daarom is de uitleg in deze les beknopt en is er veel tijd om te oefenen.  
-
-#### Voorkennis activeren en instructie Aanhalingstekens (10 minuten)
-Begin de les met het kort herhalen van de commando's die er in de vorige les geleerd zijn. 
-In level 3 gebruiken we aanhalingstekens na print. Laat in level 2 dit voorbeeld zien om te tonen waarom we de aanhalingstekens nodig hebben. 
+- Leerlingen vergeten dat ook bij ask aanhalingstekens gebruikt moeten worden. 
+Bijvoorbeeld: `naam is ask Hoe heet je?` oplossing `naam is ask 'Hoe heet je?'`
+- Leerlingen gebruiken hoge komma's na een print commando. Bijvoorbeeld:
 ```
-huisdier is hond, kat, cavia
-print Jij krijgt dit huisdier:
-print huisdier at random
+print 'Er lopen twee oma's door het park'
 ```
-Je ziet dat het woord huisdier in regel 2 niet werkt, het wordt namelijk vervangen door de waarde van de variabele huisdier. Je kunt het woord huisdier dus niet meer gebruiken! In level 3 kan dat wel, omdat we dus aanhalingstekens gebruiken voor teksten die letterlijk geprint moeten worden. Toon nu het voorbeeld in Level 3. 
+Oplossing: Gebruik de andere hoge komma (naast de 1 toets met het ~)
 ```
-huisdier is hond, kat, cavia
-print 'Jij krijgt dit huisdier:'
-print huisdier at random
+print 'Er lopen twee oma`s door het park'
+```
+Oplossing 2: Gebruik geen hoge komma en spel het woord fout.
+```
+print 'Er lopen twee omas door het park'
 ```
 
-Benadruk voordat de leerlingen aan de slag gaan nog even deze veelgemaakte fouten: 
-Er moet een aanhalingsteken voor en achter de tekst die je wil printen, dus check altijd dat er twee aanhalingstekens staan. 
-De leerlingen moeten de juiste aanhalingstekens gebruiken. Het correcte aanhalingsteken is ' deze vindt je op de meeste toetsenborden naast de enterknop. Andere aanhalingstekens zoals de dubbele aanhalingstekens &quot; of het schuine aanhalingsteken ` (op de meeste toetsenborden linksboven samen met ~).
-Bij ask hoeven geen aanhalingstekens, alleen bij print. 
-
-#### Aan de slag (15 minuten)
-Maak de codes van les 2 nu in level 3 met aanhalingstekens! 
-
-#### Spookhuisgame (20 minuten) 
-Nadat de leerlingen geoefend hebben met de waarzeggersopdracht in level 3, kunnen de leerlingen verder met de spookhuisopdracht. 
-
-#### Evaluatie
-Sluit de les af met een korte evaluatie. 
-
-
-## Level 4
-
-### Wat leren de leerlingen in dit level?
-
-In level 4 wordt er voor het eerste gewerkt met if en else, waardoor er veel opties ontstaan. Dit is erg leuk voor de leerlingen, maar het wordt ook vaak lastig gevonden. Door de extra opties wordt de kans natuurlijk groter dat de leerlingen een fout maken. Ook worden de codes langer en zijn de fouten soms dus lastiger te vinden.
-
-### Nieuwe commando's
-
-Hier vind je een [instructievideo](https://www.youtube.com/watch?v=1HjVN_HEdCc)voor de nieuwe commando's bij level 4.
-
-`if naam is Hedy print 'leuk' else print 'minder leuk!' `- Met dit commando kun je zorgen dat Hedy twee verschillende reacties geeft. Namelijk een reactie voor als de naam Hedy is en een voor als de naam iets anders is.
-
-### Opdrachten bij dit level
-
-- Hedy de Waarzegger
-- Spookhuisgame
--
-
-### Veelgemaakte fouten
+### Veelgemaakte fouten in level 4
 
 In level 4 zijn dit veelgemaakte fouten door de leerlingen:
-
-- Fout: Leerlingen zetten else op de volgende regel, terwijl het else commando op dezelfde regel moet als het if commando. Code: 
-
-```
-if naam is Hedy print 'leuk'
-else print 'minder leuk!'
-```
-Oplossing: Else moet op dezelfde regel als if.
-```
-if naam is Hedy print 'leuk' else print 'minder leuk!'
-```
 
 - Fout: Leerlingen vergeten het woord print bij een if commando.
 
 ```
-if naam is Hedy 'leuk' else 'minder leuk!'
+if naam is Hedy 'leuk' 
+else 'minder leuk!'
 ```
 Oplossing: gebruik twee keer een print commando na een if commando
 ``` 
-if naam is Hedy print 'leuk' else print 'minder leuk!'
+if naam is Hedy print 'leuk' 
+else print 'minder leuk!'
 ```
 
 - Fout: Leerlingen gebruiken twee verschillende namen voor dezelfde variabele.
 ```
-paard is ask Hoe heet jouw paard
-if naam is Bonfire print 'leuk' else print 'minder leuk!'
+paard is ask 'Hoe heet jouw paard?'
+if naam is Bonfire print 'leuk' 
+else print 'minder leuk!'
 ```
 
 Oplossing: Gebruik altijd dezelfde naam voor een variabele. Controleer ook of de variabelenaam enkelvoud of meervoud is, daar lees je gemakkelijk overheen (antwoord/antwoorden). 
 ```
-paard is ask Hoe heet jouw paard?
-if paard is Bonfire print 'leuk' else print 'minder leuk!'
+paard is ask 'Hoe heet jouw paard?'
+if paard is Bonfire print 'leuk' 
+else print 'minder leuk!'
 ```
 
 - Fout: Leerlingen vergeten beide aanhalingstekens bij de print commando's.
 ```
-if naam is Hedy print leuk else print 'minder leuk!
+if naam is Hedy print leuk 
+else print 'minder leuk!
 ```
 Oplossing: Gebruik altijd twee aanhalingstekens per printcommando, een vooraan en een achteraan.
 ```
-if naam is Hedy print 'leuk' else print 'minder leuk!'
+if naam is Hedy print 'leuk' 
+else print 'minder leuk!'
 ```
 
 - Fout: Leerlingen gebruiken aanhalingstekens rond de naam van de variabele.
 ```
-if 'naam' is 'Hedy' print 'leuk' else print 'minder leuk!'
+if 'naam' is 'Hedy' print 'leuk' 
+else print 'minder leuk!'
 ```
-Oplossing: rond een variabele moeten geen aanhalingstekens
+Oplossing: rond een variabele moeten geen aanhalingstekens.
 ```
-if naam is Hedy print 'leuk' else print 'minder leuk!'
+if naam is Hedy print 'leuk' 
+else print 'minder leuk!'
 ```
 
-- Fout: Leerlingen geven variabelen namen met meerdere woorden
+- Fout: Leerlingen geven variabelen namen met meerdere woorden.
 ```
-gekozen deur is ask Welke deur kies jij?
+gekozen deur is ask 'Welke deur kies jij?'
 ```
-Oplossing: Een variabelenaam mag maar een woord zijn
+Oplossing: Een variabelenaam mag maar een woord zijn.
 ```
-gekozendeur is ask Welke deur kies jij?
+gekozendeur is ask 'Welke deur kies jij?'
 ```
 
 - Fout: Leerlingen willen dat bij de if meerdere antwoorden goed zijn.
@@ -387,14 +219,22 @@ if naam is David print 'leuk'
 
 if naam is Souf print 'leuk'
 ```
+Alternatieve oplossing: Je kunt ook een lijstje maken met vrienden en Hedy laten controleren of het antwoord in het lijstje staat met in. 
+```
+vrienden is Jesse, David, Souf
+naam is ask 'Wie ben jij?'
+if naam in vrienden print 'leuk'
+else print 'minder leuk'
+```
 - Fout: De leerlingen vullen bij ask hetzelfde in als bij de variabelenaam, dus de variabele wordt de zelfde waarde als de variabelenaam. In het voorbeeld hieronder was bijvoorbeeld het wachtwoord 'wachtwoord'
 ```
-wachtwoord is ask Wat is het wachtwoord?
-if wachtwoord is wachtwoord print 'Je mag er door!' else print 'Verboden toegang!'
+wachtwoord is ask 'Wat is het wachtwoord?'
+if wachtwoord is wachtwoord print 'Je mag er door!' 
+else print 'Verboden toegang!'
 ```
 Oplossing: Kies een andere naam voor je variabele
 ```
-geheimwachtwoord is ask Wat is het wachtwoord?
+geheimwachtwoord is ask 'Wat is het wachtwoord?'
 if geheimwachtwoord is wachtwoord print 'Je mag er door!' else print 'Verboden toegang!'
 ```
 
@@ -411,114 +251,10 @@ Oplossing 2: Gebruik geen hoge komma en spel het woord fout.
 print 'Er lopen twee omas door het park'
 ```
 
-### Lesopzet Level 4
-Door de toevoeging van het if commando zijn er veel nieuwe opties in Level 4. Daarom raden wij aan om twee lessen te gebruiken voor level 4. Daarnaast geeft het de leerlingen de kans om de if constructie extra te oefenen en goed in de vingers te krijgen, voordat ze doorgaan naar het volgende level. 
-
-### Les 4a
-Les 4a bestaat deels uit instructie en zelfstandige verwerking. Les 4b bestaat vooral uit zelfstandig werken aan de opdrachten. 
-
-#### Introductie: Voorkennis activeren (5 minuten)
-Herhaal wat er vorige les aangeleerd is en welke fouten er veel gemaakt werden (aanhalingstekens vergeten, verkeerde aanhalingstekens gebruiken etc). 
-
-#### Instructie: If constructies (10 minuten)
-De if-constructie zorgt ervoor dat Hedy op verschillende antwoorden van de speler, anders kan reageren. Dit kun je demonstreren met dit voorbeeld:
-
-```
-naam is ask Hoe heet jij?
-if naam is Hedy print 'ok jij mag computeren' else print 'verboden toegang voor jou!'
-```
-
-#### Aan de slag: Hedy de Waarzegger! (20 minuten) 
-De leerlingen kunnen zelfstandig werken aan de waarzeggersopdracht, of je kunt de opdracht stapje voor stapje samen doen. 
-
-#### Evaluatie (5 minuten) 
-Sluit de les af met een korte evaluatie. 
-
-### Les 4b 
-In les 4b wordt er voornamelijk tijd gegeven aan de leerlingen om zelfstandig met de opdrachten aan de slag te gaan. Aan het einde van de les kun je er voor kiezen om een quiz te doen met de leerlingen om te zien of de stof goed geconsolideerd is. 
-
-#### Voorkennis activeren (5 minuten)
-Bespreek kort wat er vorige week geleerd is en van welke fouten je hebt kunnen leren. Daarna kunnen de leerlingen vrijwel direct aan de slag met het maken van de opdrachten. 
-
-#### Opdracht: Bedenk zelf de code (20 - 30 minuten)
-De afgelopen lessen hebben de leerlingen voornamelijk voorbeeldcodes nagemaakt. Deze les kun je de leerlingen uitdagen door het eindresultaat (de output) van Hedy te tonen, maar de code niet. Hierdoor worden de leerlingen aangemoedigd om zelf na te denken over de codes die ze geleerd hebben. 
-
-#### Quiz (10 minuten)
-Om te testen hoe goed de leerstof geconsolideerd is, kun je deze quiz doen met de leerlingen. 
-TODO Quiz toevoegen. 
-
-#### Evaluatie (5 minuten)
-Bespreek met de leerlingen wat deze les heeft opgeleverd om de les af te sluiten. 
-
-### Level 5
-
-### Wat leren de leerlingen in dit level?
-
-In level 5 komt het nieuwe commando repeat … times aan bod, waardoor de leerlingen stukjes code kunnen herhalen. Let op: Er kan in level 5 maar 1 regel code herhaald worden, vanaf level 7 kunnen er meerdere regels code herhaald worden in één keer.
-
-### Nieuwe commando's
-
-Hier vind je een [instructievideo](https://youtu.be/JZuqXNgxTBw)voor de nieuwe commando's bij level 5.
-
-`repeat 3 times print 'Hallo'` - Met dit commando kun je een code meermaals herhalen.
-
-### Opdrachten bij dit level
-
-- Hedy de Zangeres
-- Hedy de Waarzegger
-- Spookhuisgame
-
-### Veelgemaakte fouten
+### Veelgemaakte fouten in level 5
 
 In level 5 zijn dit veelgemaakte fouten door de leerlingen:
 
 - Dezelfde fouten als in level 4 (zie level 4) 
-- De leerlingen vergeten vaak een woord in het commando: repeat 3 times print. Voornamelijk het woord times of het woord print worden vaak vergeten. 
+- De leerlingen vergeten vaak een woord in het commando: repeat 3 times print. Voornamelijk het woord 'times' of het woord 'print' worden vaak vergeten. 
 - Het woord repeat wordt vaak fout gespeld (bijvoorbeeld, repeet, repaet of repeate). 
-
-### Lesopzet level 5
-In de les van level 5 wordt de opdracht Hedy de Zangeres opdracht aangeraden als hoofdopdracht, als de leerlingen daar klaar mee zijn, kunnen ze zelfstandig verder met de overige opdrachten bij level 5. 
-
-#### Voorkennis activeren (5 minuten)
-Een korte herhaling van de geleerde commando's is een goede manier om deze les te openen.  
-
-#### Instructie repeat (10 minuten) 
-Laat zien hoe de repeat functie werkt, of toon de [instructievideo](https://youtu.be/JZuqXNgxTBw). Daarna kun je de Hedy de Zangeres opdracht introduceren aan de hand van het voorbeeld Baby Shark. 
-
-In de vorige levels moesten we deze code maken: 
-
-```
-print 'Baby Shark tututututudu'
-print 'Baby Shark tututututudu'
-print 'Baby Shark tututututudu'
-print 'Baby Shark'
-```
-Maar nu kan er in een keer 3 regels geprint worden met de repeatfunctie: 
-
-```
-repeat 3 times print 'Baby Shark tututututudu'
-print 'Baby Shark'
-```
-
-#### Aan de slag: Hedy de Zangeres (20 - 30 minuten) 
-Na deze korte instructie kunnen de leerlingen zelf aan de slag met de andere liedjes in de opdrachten. Helaas komt er geen geluid uit Hedy, willen de leerlingen graag toch geluid, dan kunnen ze ook de uitvoer uit Hedy kopiëren en voor laten lezen met de voorleesfunctie van Google Translate. Tip: Doe dit alleen als de leerlingen koptelefoons hebben. 
-De leerlingen die al klaar zijn kunnen aan de slag met de overige opdrachten die bij level 5 horen. 
-
-#### Evaluatie (5 minuten)
-Sluit de les af met een korte evaluatie. Laat de leerlingen vertellen wat ze gemaakt hebben en of ze ook zelf liedjes hebben bedacht!
-
-### Level 6
-
-### Wat leren de leerlingen in dit level?
-
-In level 6 kunnen de leerlingen rekenen met Hedy. Je kunt nu met twee getallen (of variabelen) optellen, aftrekken, vermenigvuldigen en delen.  
-
-### Nieuwe commando's
-
-Hier vind je een [instructievideo](https://youtu.be/mRfpvre2X78) voor de nieuwe commando's bij level 6.
-
-Voor plus- en minsommen gebruik je de + en - tekens. 
-Voor keersommen gebruik je * dus 5 keer 5 is 5*5. Je vindt het sterretje boven de 8, dus shift 8.  Voor deelsommen gebruik je de / die staat op dezelfde toets als het vraagteken. 
-
-
-

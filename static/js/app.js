@@ -12,11 +12,17 @@
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
-    const editor = turnIntoAceEditor(preview, true)
+    const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
-    editor.setOptions({ maxLines: Infinity });
+    exampleEditor.setOptions({ maxLines: Infinity });
     // Strip trailing newline, it renders better
-    editor.setValue(editor.getValue().replace(/\n+$/, ''), -1);
+    exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
+
+    // And add an overlay button to the editor
+    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
+    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+      window.editor.setValue(exampleEditor.getValue() + '\n');
+    });
   }
 
   /**
@@ -57,8 +63,10 @@
 
     window.onbeforeunload = function () {
        // The browser doesn't show this message, rather it shows a default message.
-       // We still have an internationalized message in case we want to implement this as a modal in the future.
-       if (window.State.unsaved_changes) return window.auth.texts.unsaved_changes;
+       if (window.State.unsaved_changes) {
+          // This allows us to avoid showing the programmatic modal from `prompt_unsaved` and then the native one
+          if (! window.State.no_unload_prompt) return window.auth.texts.unsaved_changes;
+       }
     };
 
     // *** KEYBOARD SHORTCUTS ***
@@ -133,7 +141,7 @@ function reloadOnExpiredSession () {
 }
 
 function runit(level, lang, cb) {
-  if (window.State.disable_run) return alert (window.auth.texts.answer_question);
+  if (window.State.disable_run) return window.modal.alert (window.auth.texts.answer_question);
 
   if (reloadOnExpiredSession ()) return;
 
@@ -165,7 +173,7 @@ function runit(level, lang, cb) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
       }
-      runPythonProgram(response.Code, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages.Execute_error, err.message);
         reportClientError(level, code, err.message);
@@ -199,7 +207,7 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
-  if (window.State.sublevel) return alert ('Sorry, you cannot save programs when in a sublevel.');
+  if (window.State.sublevel) return window.modal.alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;
@@ -207,12 +215,12 @@ window.saveit = function saveit(level, lang, name, code, cb) {
   try {
     // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
     if (! window.auth.profile) {
-       if (! confirm (window.auth.texts.save_prompt)) return;
-       // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-       if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
-       localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-       window.location.pathname = '/login';
-       return;
+       return window.modal.confirm (window.auth.texts.save_prompt, function () {
+         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+         if (window.State && window.State.adventure_name) level = [level, window.State.adventure_name];
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         window.location.pathname = '/login';
+       });
     }
 
     window.State.unsaved_changes = false;
@@ -281,7 +289,7 @@ function viewProgramLink(programId) {
 }
 
 window.share_program = function share_program (level, lang, id, Public, reload) {
-  if (! window.auth.profile) return alert (window.auth.texts.must_be_logged);
+  if (! window.auth.profile) return window.modal.alert (window.auth.texts.must_be_logged);
 
   var share = function (id) {
     $.ajax({
@@ -304,7 +312,7 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
       else {
         // If we're sharing the program, copy the link to the clipboard.
         if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-        alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
+        window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
       }
       if (reload) setTimeout (function () {location.reload ()}, 1000);
     }).fail(function(err) {
@@ -345,7 +353,7 @@ window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
      document.getSelection ().removeAllRanges ();
      document.getSelection ().addRange (selected);
   }
-  if (! noAlert) alert (window.auth.texts.copy_clipboard);
+  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard);
 }
 
 /**
@@ -358,6 +366,7 @@ function reportClientError(level, code, client_error) {
     data: JSON.stringify({
       level: level,
       code: code,
+      page: window.location.href,
       client_error: client_error,
     }),
     contentType: 'application/json',
@@ -375,18 +384,32 @@ window.onerror = function reportClientException(message, source, line_number, co
       source: source,
       line_number: line_number,
       column_number: column_number,
-      error: error
+      error: error,
+      user_agent: navigator.userAgent,
     }),
     contentType: 'application/json',
     dataType: 'json'
   });
 }
 
-function runPythonProgram(code, cb) {
+function runPythonProgram(code, hasTurtle, cb) {
   const outputDiv = $('#output');
   outputDiv.empty();
 
   Sk.pre = "output";
+  const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
+  turtleConfig.target = 'turtlecanvas';
+  turtleConfig.width = 400;
+  turtleConfig.height = 300;
+  turtleConfig.worldWidth = 400;
+  turtleConfig.worldHeight = 300;
+
+  if (!hasTurtle) {
+    // There might still be a visible turtle panel. If the new program does not use the Turtle,
+    // remove it (by clearing the '#turtlecanvas' div)
+    $('#turtlecanvas').empty();
+  }
+
   Sk.configure({
     output: outf,
     read: builtinRead,
@@ -592,3 +615,106 @@ function buildUrl(url, params) {
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
 })();
+
+window.create_class = function create_class() {
+  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
+
+    $.ajax({
+      type: 'POST',
+      url: '/class',
+      data: JSON.stringify({
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  });
+}
+
+window.rename_class = function rename_class(id) {
+  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
+
+    $.ajax({
+      type: 'PUT',
+      url: '/class/' + id,
+      data: JSON.stringify({
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  });
+}
+
+window.delete_class = function delete_class(id) {
+  window.modal.confirm (window.auth.texts.delete_class_prompt, function () {
+
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers';
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  });
+}
+
+window.join_class = function join_class(link, name, noRedirect) {
+  // If there's no session but we want to join the class, we store the program data in localStorage and redirect to /login.
+  if (! window.auth.profile) {
+    return window.modal.confirm (window.auth.texts.join_prompt, function () {
+      localStorage.setItem ('hedy-join', JSON.stringify ({link: link, name: name}));
+      window.location.pathname = '/login';
+      return;
+    });
+  }
+
+  $.ajax({
+    type: 'GET',
+    url: link,
+  }).done(function(response) {
+    window.modal.alert (window.auth.texts.class_join_confirmation + ' ' + name);
+    if (! noRedirect) window.location.pathname = '/programs';
+  }).fail(function(err) {
+    console.error(err);
+    error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+  });
+}
+
+window.remove_student = function delete_class(class_id, student_id) {
+  window.modal.confirm (window.auth.texts.remove_student_prompt, function () {
+
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + class_id + '/student/' + student_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages.Connection_error, JSON.stringify(err));
+    });
+  });
+}
+
+window.prompt_unsaved = function prompt_unsaved(cb) {
+  if (! window.State.unsaved_changes) return cb ();
+  // This variable avoids showing the generic native `onbeforeunload` prompt
+  window.State.no_unload_prompt = true;
+  window.modal.confirm (window.auth.texts.unsaved_changes, cb);
+}
