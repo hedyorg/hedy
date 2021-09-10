@@ -2,7 +2,7 @@ title: "Hedy avonturen!"
 subtitle: "Met Hedy kan je van alles maken! Bijvoorbeeld een interactief verhaal, een spel of een app om het leven makkelijker te maken"
 adventures:
     story:
-        name: "Een verhaal"
+        name: "Verhaal"
         description: "Maak een interactief verhaal"
         image: "story.png"
         default_save_name: "Verhaal"
@@ -14,28 +14,25 @@ adventures:
 
                     Gebruik als eerste regel deze code:
 
-                    `ask wie is de hoofdpersoon van jouw verhaal`
+                    ```
+                    ask wie is de hoofdpersoon van jouw verhaal
+                    ```
 
                     Na die eerste regel begin je met `print` als de zin moet worden geprint.
                     Je gebruikt `echo` als je wilt dat jouw hoofdpersoon op het einde van de zin komt.
 
                     ## Voorbeeld Hedy code
                     ```
-                    ask De hoofdpersoon van dit verhaal is ...
+                    ask De hoofdpersoon van dit verhaal is
                     print De hoofdpersoon gaat nu in het bos lopen
-                    echo Hij is wel een beetje bang die ...
+                    echo Hij is wel een beetje bang, die
                     print Overal hoort hij gekke geluiden
                     print Hij is bang dat dit een spookbos is
                     ```
-
-                    ## Vooruitblik
-                    Vind je het jammer dat je nu alleen zinnen kan maken waarin de hoofdpersoon op het einde van de zin staat? Ga dan na het oefenen met dit verhaal door naar level 2 en dan level 3, dan kun je steeds ingewikkeldere programma's maken.
-
-
                 start_code: "print Hier begint jouw verhaal"
             2:
                 story_text: |
-                    ## Verhaal in level 2
+                    ## Verhaal
                     In level 2 kun je je verhaal leuker maken. De naam van je hoofdpersoon kan nu overal in de zin staan.
 
                     Je moet daar wel een klein beetje extra voor programmeren. Je moet je hoofdpersoon nu eerst een naam geven.
@@ -61,17 +58,10 @@ adventures:
                     print Hij hoort nu het geluid van een dieren at random
                     ```
 
-                    ## Vooruitblik
-                    Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat?
-
-                    Bijv. `print mijn naam is naam`. Probeer het maar eens als je dat nog niet gedaan had.
-
-                    Dat werkt niet goed! Dan krijg je: mijn Henk is Henk. Dat kun je in level 3 oplossen.
-
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print 'Hier komt straks jouw verhaal!'"
             3:
                 story_text: |
-                    ## Verhaal in level 3
+                    ## Verhaal
                     Misschien heb je gezien dat in level 2 nog wel een foutje zit.
 
                     Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat? Bijv. `print mijn naam is naam`.
@@ -91,11 +81,11 @@ adventures:
                     print naam ' is bang dat dit een spookbos is'
                     ```
 
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print 'Hier komt straks jouw verhaal!'"
             4:
                 story_text: |
-                    ## Verhaal in level 4
-                    Wat je in level 4 kunt doen is je verhaal nog leuker maken. In level 4 kun je verschillende eindes programmeren.
+                    ## Verhaal
+                    In level 4 kun je je verhaal nog leuker maken. In level 4 kun je verschillende eindes programmeren.
 
                     Verzin twee eindes voor je verhaal, bijvoorbeeld zo:
 
@@ -113,13 +103,14 @@ adventures:
                     print naam ' loopt door het bos'
                     print naam ' komt een monster tegen'
                     einde is ask 'Wil je een goed of slecht einde?'
-                    if einde is goed print naam ' pakt het zwaard en het monster rent snel weg' else print 'Het monster eet ' naam ' op'
+                    if einde is goed print naam ' pakt het zwaard en het monster rent snel weg'
+                    else print 'Het monster eet ' naam ' op'
                     ```
 
-                start_code: "print Hier komt straks jouw verhaal!"
+                start_code: "print 'Hier komt straks jouw verhaal!'"
             5:
                 story_text: |
-                    ## Verhaal in level 5
+                    ## Verhaal
                     Soms zegt iemand in een verhaal iets meerdere keren. Bijvoorbeeld als iemand om hulp roept, of een liedje zingt.
                     Dat kun je in level 5 in je verhaal zetten met `repeat`.
 
@@ -133,9 +124,9 @@ adventures:
                 start_code: "repeat 5 times print 'Help!'"
             7: 
                 story_text: |
-                    ## Verhaal in level 7
-                    In level 7 kun je je verhaal ècht interactief maken! In dit level is het `if` commando namelijk veranderd, waardoor je in staat bent om meerdere regels te printen na een if. 
-                    Zo kun je de lezer van je verhaal een keuze laten maken en het verhaal verder laten gaan op basis van die keuze. Kijk maar naar het voorbeeld. 
+                    ## Verhaal
+                    In level 7 kun je je verhaal écht interactief maken! In dit level is het `if` commando namelijk veranderd, waardoor je meerdere regels kan printen na een `if`.
+                    Zo kun je de lezer van je verhaal een keuze laten maken. Na de keuze gaat het verhaal verder op basis van die keuze. Kijk maar naar het voorbeeld.
                     
                     ## Voorbeeld Hedy code
                     ```
@@ -145,15 +136,61 @@ adventures:
                     dapper is ask 'Gaat 'hoofdpersoon ' op het geluid af?' 
                     if dapper is ja
                         print 'Dapper stapt ' hoofdpersoon ' op het geluid af'
-                        print ...
+                        print _
                     else
                         print 'Snel zoekt 'hoofdpersoon ' een verstopplek'
-                        print ...
+                        print _
                     ```
-                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf de puntjes in! Wat gebeurt er verder?
+                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: ""
                 
-            
+            8: 
+                story_text: |
+                    ## Verhaal
+                    Hoe langer en meer if commandos in je verhaal, hoe interectiever het verhaal wordt. Het wordt natuurlijk ook lastiger dus let goed op het inspringen!
+                    Hieronder zie je een voorbeeld van een echt interactief verhaal over een ridder.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    naam is ask 'Hoe heet je?'
+                    hijzij is ask 'Ben je een hij of een zij?'
+                    print 'Ridder ' naam ' loopt door een bos '
+                    print hijzij ' is op zoek naar een schat, die diep in het woud verborgen ligt'
+                    print 'Er gaan verhalen rond dat de schat bewaakt wordt door een verschrikkelijke draak'
+                    print 'maar ridder ' naam ' stapt dapper voort'
+                    print 'Totdat ' hijzij ' bij een splitsing komt'
+                    zwaard is kwijt
+                    spel is aan
+                    for i in range 0 to 2
+                      if spel is aan
+                        pad is ask 'Welk pad kiest ridder ' naam ' ?'
+                        if pad is links
+                          if zwaard is gevonden
+                            print 'Met het zwaard is ridder ' naam ' niet te stoppen!'
+                            print hijzij ' verslaat de draak!'
+                            spel is uit
+                          else
+                            print 'Ridder ' naam ' treft een draak aan, maar ' hijzij ' heeft geen wapen'
+                            print hijzij ' wordt verslagen door de draak'
+                            print 'Helaas, probeer het opnieuw'
+                            spel is uit
+                        if pad is rechts
+                          if zwaard is kwijt
+                            print 'Ridder ' naam ' vindt een zwaard'
+                          if zwaard is gevonden
+                            print 'Hier is niks meer te vinden'
+                          print hijzij ' loopt terug naar de splitsing'
+                          zwaard is gevonden
+                    ```
+                    ## Uitdaging
+                    Dit verhaal gaat over een ridder, maar misschien wil je zelf wel een verhaal maken over iets anders. Gelukkig is alles mogelijk in Hedy!
+                    Verzin en programmeer je eigen verhaal en spiek voor wat inspiratie gerust in het voorbeeld!
+                start_code: |
+                    naam is ask 'Hoe heet je?'
+                    hijzij is ask 'Ben je een hij of een zij?'
+                    print 'Ridder ' naam ' loopt door een bos '
+                    print hijzij ' is op zoek naar een schat'
+
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
@@ -162,7 +199,7 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Liedjes in level 5
+                    ## Liedjes
                     In liedjes zit vaak veel herhaling. Denk maar aan Baby Shark! Ze zingen steeds hetzelfde:
 
                     Baby Shark tututudutudu <br>
@@ -174,7 +211,7 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    repeat ... ... print 'Baby Shark tututudutudu'
+                    repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
                     ```
 
@@ -182,7 +219,7 @@ adventures:
                 start_code: "print 'Baby Shark'"
             6:
                 story_text: |
-                    ## Liedjes in level 6
+                    ## Liedjes
                     In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
                     Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
 
@@ -202,13 +239,6 @@ adventures:
 
                     Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
                     Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
-
-                    # Vooruitblik
-                    In level 5 hebben we geleerd 1 regel te herhalen met `repeat`, zo:
-
-                    * `repeat 3 times print 'Baby Shark Tutududududu'`
-
-                    Maar zoals je in deze les ziet, wil je soms meerdere regels samen herhalen. Dat kan met knippen en plakken, maar dat is wel veel werk. In level 7 leer je hoe je dat makkelijker kan doen.
                 start_code: "print 'Baby shark'"
             7: 
                 story_text: |
@@ -228,7 +258,7 @@ adventures:
                         print 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
                         print 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
                     ```
-                start_code: " "
+                start_code: ""
                     
             8:
                 story_text: |
@@ -251,7 +281,7 @@ adventures:
                     print 'Want in de zee daar zwemmen haaien en die bijten je...'
                     print 'DOOD!'
                     ```
-                start_code: " "
+                start_code: ""
     turtle:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"
@@ -281,19 +311,44 @@ adventures:
             2:
                 story_text: |
                     ## Tekenen maar
-                    In level 2 kun je je tekening *interactief* maken! Dat betekent dat je met de `ask` om invoer vraagt.
-                    Met onderstaande code vraag je de schildpad eerst om één keer te draaien, naar links met left of naar rechts met right. Daarna vraag je hoever de schildpad moet lopen. Kopieer de code een paar keer om de schildpad meerdere keren te laten lopen.
+                    In level 1 kon je schildpad alleen links of rechts draaien. Dat is een beetje saai!
+                    In level 2 kan zijn neus alle kanten op kijken.
+
+                    Een kwartslag draaien doe je met het getal 90. Dat noemen we graden. Een heel rondje is 360 graden.
+                    Kun jij een ander figuur maken door de hoek te veranderen? Een driekhoek of een rondje?
+                    Je moet de schildpad dan misschien ook meer stapjes laten zetten.
 
                     ## Voorbeeld Hedy code
+
+                    ```
+                    print Figuren tekenen
+                    hoek is 90
+                    turn hoek
+                    forward 25
+                    turn hoek
+                    forward 25
+                    ```
+
+                    ## Interactie
+
+                    Je kunt je tekening ook *interactief* maken. Dat betekent dat je met de `ask` om invoer vraagt.
+                    Met onderstaande code vraag je de schildpad eerst om één keer te draaien. Bijv. naar links met 90 of naar rechts met -90. Daarna vraag je hoever de schildpad moet lopen. Kopieer de code een paar keer om de schildpad meerdere keren te laten lopen.
+
+                    ## Voorbeeld Hedy code
+
                     ```
                     print Schildpaddenrace
-                    richting is ask welke kant op?
+                    richting is ask Hoeveel graden?
                     turn richting
-                    afstand is ask hoe ver moet ik lopen?
+                    afstand is ask Hoe ver moet ik lopen?
                     forward afstand
                     ```
 
-                start_code: "forward 50\nturn left"
+                start_code: |
+                    print Schildpaddenrace!
+                    hoek is 90
+                    turn hoek
+                    forward 25
             3:
                 story_text: |
                     ## Tekenen maar
@@ -301,28 +356,29 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    print 'Schildpaddenrace'
-                    richting is ask 'Welke kant op?'
-                    turn richting
-                    afstand is ask 'Hoe ver moet ik lopen?'
-                    forward afstand
+                    print 'Figuren tekenen'
+                    hoek is 90
+                    turn hoek
+                    forward 25
+                    turn hoek
+                    forward 25
                     ```
 
                 start_code: |
-                    print 'Schildpaddenrace!'
-                    richting is ask 'Welke kant op?'
-                    turn richting
-                    afstand is ask 'Hoe ver moet ik lopen?'
-                    forward afstand
+                    print 'Figuren tekenen'
+                    hoek is 90
+                    turn hoek
+                    forward 25
+
     dishes:
-        name: "Wie doet de afwas?"
+        name: "Afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
         image: "dishes.png"
         default_save_name: "Afwas"
         levels:
             2:
                 story_text: |
-                    ## Afwasprogramma in level 2
+                    ## Afwasprogramma
                     Heb jij altijd onenigheid thuis over wie vandaag de afwas moet doen of de kattenbak moet verschonen?
 
                     Dan kun je de computer heel eerlijk laten kiezen. Dat kun jij in level 2 nu programmeren!
@@ -334,34 +390,26 @@ adventures:
                     mensen is mama, papa, Emma, Sophie
                     print mensen at random
                     ```
-
-                    ## Vooruitblik
-                    Heb je toevallig geprobeerd om een zin te maken waarin het woord mensen zat?
-
-                    Bijv. `print ik koos uit deze mensen`. Probeer het maar eens als je dat nog niet gedaan had.
-
-                    Dat werkt niet goed! Dan krijg je: ik koos uit [papa, mama, Emma, Sophie]. Dat kun je in level 3 oplossen.
-
                 start_code: "print Wie doet de afwas?"
             3:
                 story_text: |
-                    ## Afwasprogramma in level 3
+                    ## Afwasprogramma
                     Met aanhalingstekens kun je je afwasprogramma mooier maken.
                     Deze keer is de voorbeeldcode niet helemaal compleet.
-                    Maak jij de code af door op de stipjes de juiste commando's of tekens in te vullen?
-                    Op iedere drie stipjes moet 1 commando op teken komen.
+                    Maak jij de code af door op de lage streepjes de juiste commando's of tekens in te vullen?
+                    Op ieder streepje moet steeds één woord of teken komen.
 
                     Tip: Vergeet de aanhalingstekens niet!
                     ## Voorbeeld Hedy code
                     ```
                     mensen is mama, papa, Emma, Sophie
-                    print ... de afwas wordt gedaan door ...
-                    print mensen at ...
+                    print _ de afwas wordt gedaan door _
+                    print mensen at _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             4:
                 story_text: |
-                    ## Afwasprogramma in level 4
+                    ## Afwasprogramma
                     Met de `if` kun je nu leuker maken met een `if`. Je kan je programma laten reageren op de keuze.
 
                     Maak jij de code af zodat het 'chips' print als jij aan de beurt bent, en anders 'yes!'?
@@ -371,23 +419,24 @@ adventures:
                     ```
                     mensen is mama, papa, Emma, Sophie
                     afwasser is mensen at random
-                    if afwasser is Sophie print ... chips ik moet de afwas doen ... else print ' gelukkig geen afwas want ' ... 'wast al af'
+                    if afwasser is Sophie print _ chips ik moet de afwas doen _
+                    else print ' gelukkig geen afwas want ' _ 'wast al af'
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             5:
                 story_text: |
-                    ## Afwasprogramma in level 5
+                    ## Afwasprogramma
                     Met de `repeat` kun je stukjes code herhalen. Daarmee kun je dan voor de hele week uitrekenen wie er aan de beurt is.
 
                     ## Voorbeeld Hedy code
                     ```
                     mensen is mama, papa, Emma, Sophie
-                    repeat ... ... print 'de afwasser is ' ...
+                    repeat _ _ print 'de afwasser is ' _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             6:
                 story_text: |
-                    ## Afwasprogramma in level 6
+                    ## Afwasprogramma
                     Hoe vaak gaat iedereen eigenlijk afwassen? Is dat wel eerlijk? Dat kun je in level 6 tellen.
 
                     ## Voorbeeld Hedy code
@@ -408,30 +457,14 @@ adventures:
                     Dit level is het einde van het afwas-avontuur! Maar er zijn nog veel avonturen te maken in andere levels, zoals een rekenmachine, een interactief verhaal en een ingewikkelder spel.
                 start_code: "print 'Wie doet de afwas?'"
     dice:
-        name: "Maak dobbelsteen na"
+        name: "Dobbelsteen"
         description: "Maak je eigen dobbelsteen"
         image: "dice.png"
         default_save_name: "Dobbelsteen"
         levels:
-            1:
-                story_text: |
-                    ## Dobbelsteen
-                    In level 1 maken we een beginnetje met een eigen dobbelsteen.
-
-                    ## Voorbeeld Hedy code
-
-                    ```
-                    ask Heb jij zin om een dobbelsteen te maken?
-                    echo Jij zei:
-                    ```
-
-                    ## Vooruitblik
-                    Deze code herhaalt alleen nog het antwoord van de speler. In de volgende levels gaat de computer echt een keus maken.
-
-                start_code: "ask Heb jij zin om een dobbelsteen te maken?"
             2:
                 story_text: |
-                    ## Dobbelsteen in level 2
+                    ## Dobbelsteen
                     In level 2 kunnen we kiezen uit een lijst. Daarmee kunnen we de computer een kant van de dobbelsteen laten kiezen.
 
                     Kijk eens bij de spelletjes die je thuis in de kast hebt staan.
@@ -458,20 +491,20 @@ adventures:
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
             3:
                 story_text: |
-                    ## Dobbelsteen in level 3
+                    ## Dobbelsteen
                     In level 3 kunnen we zinnen maken met de dobbelwaarde in de zin, met aanhalingstekens natuurlijk.
                     Deze keer is de voorbeeldcode niet helemaal compleet. Maak jij de code af?
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is 1, 2, 3, 4, 5, regenworm
-                    print ... jij gooide ...
-                    print ... ... ... <- hier moet je het kiezen programmeren
+                    print _ jij gooide _
+                    print _ _ _ <- hier moet je het kiezen programmeren
                     ```
 
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
             4:
                 story_text: |
-                    ## Dobbelsteen in level 4
+                    ## Dobbelsteen
                     Je kunt ook in level 4 weer een dobbelsteen maken en daarbij de `if` gebruiken.
                     Maak de voorbeeldcode af zodat de code zegt 'Je mag stoppen met gooien' als je een regenworm hebt gegooid.
 
@@ -480,14 +513,15 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is 1, 2, 3, 4, 5, regenworm
-                    worp is ...
-                    print 'je hebt ' ... ' gegooid'
-                    if ... is regenworm print 'Je mag stoppen met gooien.' ... print 'Je moet nog een keer hoor!'
+                    worp is _
+                    print 'je hebt ' _ ' gegooid'
+                    if _ is regenworm print 'Je mag stoppen met gooien.'
+                    _ print 'Je moet nog een keer hoor!'
                     ```
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
             5:
                 story_text: |
-                    ## Dobbelsteen in level 5
+                    ## Dobbelsteen
                     Je kunt ook in level 5 weer een dobbelsteen maken. Met de `repeat` code kun je makkelijk een heel handje dobbelstenen rollen.
                     Probeer de voorbeeldcode maar eens af te maken! Op de streepjes moeten meerdere commando's en tekens komen.
 
@@ -496,12 +530,12 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is 1, 2, 3, 4, 5, regenworm
-                    repeat ... ... print ___
+                    repeat _ _ print _ _ _
                     ```
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
             6:
                 story_text: |
-                    ## Dobbelsteen in level 6
+                    ## Dobbelsteen
                     Je kunt ook in level 6 weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
 
                     Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid. Zo doe je dat voor 1 dobbelsteen:
@@ -512,15 +546,12 @@ adventures:
                     punten is 0
                     worp is keuzes at random
                     print 'je gooide ' worp
-                    if worp is regenworm punten is punten + 5 else punten is punten + worp
-                    print 'dat zijn dan ' punten
+                    if worp is regenworm punten is punten + 5
+                    else punten is punten + worp
+                    print 'dat zijn dan ' punten ' punten'
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
-
-                    ## Vooruitblik
-
-                    Is het gelukt met de codes? Nu moet je wel veel knippen en plakken he? Dat gaan we in level 7 makkelijker maken!
-                start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
     rock:
         name: "Steen, schaar, papier"
         description: "Maak jouw eigen steen, schaar, papier spel"
@@ -541,10 +572,6 @@ adventures:
                     ask kies uit steen, schaar of papier
                     echo dus jouw keuze was:
                     ```
-
-                    ## Vooruitblik
-                    Alleen herhalen is natuurlijk wel een beetje saai want de computer kiest niks. Dat gaan we later zelf maken.
-
                 start_code: "print Welkom bij jouw eigen steen schaar papier!"
             2:
                 story_text: |
@@ -565,14 +592,6 @@ adventures:
 
                     Ook in level 2 kun je de `ask` weer gebruiken, dus probeer maar eens of jij jouw keuze en de keuze van de computer kan printen!
                     Let wel goed op, omdat de `ask` nu anders werkt dan in level 1. Er moet een naam voor.
-
-                    ## Vooruitblik
-                    Heb je toevallig geprobeerd om een zin te maken waarin het woord keuzes zat?
-
-                    Bijv. `print ik koos uit de keuzes`. Probeer het maar eens als je dat nog niet gedaan had.
-
-                    Dat werkt niet goed! Dan krijg je: ik koos uit de [steen, schaar, papier]. Dat kun je in level 3 oplossen.
-
                 start_code: "print Welkom bij jouw eigen steen schaar papier!"
             3:
                 story_text: |
@@ -583,7 +602,7 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     keuzes is steen, schaar, papier
-                    print ... De computer koos: ... ... at ...
+                    print _ De computer koos: _ _ at _
                     ```
                 start_code: "print 'Welkom bij jouw eigen steen schaar papier!'"
             4:
@@ -599,11 +618,11 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     opties is steen, schaar, papier
-                    computerkeuze is ...
+                    computerkeuze is _
                     keuze is ask 'Wat kies jij?'
-                    print 'jij koos' ...
-                    print 'computer koos' ...
-                    if ... is ... print 'gelijkspel!' else print 'geen gelijkspel'
+                    print 'jij koos' _
+                    print 'computer koos' _
+                    if _ is _ print 'gelijkspel!' else print 'geen gelijkspel'
                     if keuze is steen and computerkeuze is papier print 'computer wint'
                     ```
 
@@ -629,9 +648,9 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     goedeantwoord is 11 * 27
-                    print 'Hoeveel is 11 keer 27?'
-                    antwoord is ask 'Weet jij het antwoord?'
-                    if antwoord is goedeantwoord print 'goedzo' else print 'Foutje! Het was ' goedeantwoord
+                    antwoord is ask 'Hoeveel is 11 keer 27?'
+                    if antwoord is goedeantwoord print 'goedzo'
+                    else print 'Foutje! Het was ' goedeantwoord
                     ```
 
                     ## Willekeurige getallen
@@ -646,9 +665,9 @@ adventures:
                     tafel is tafels at random
                     keergetal is keer at random
                     goede_antwoord is tafel * keergetal
-                    print 'hoeveel is ' tafel ' keer ' keergetal '?'
-                    antwoord is ask 'Weet jij het antwoord?'
-                    if antwoord is goede_antwoord print 'goedzo' else print 'foutje! het was ' goede_antwoord
+                    antwoord is ask 'hoeveel is ' tafel ' keer ' keergetal '?'
+                    if antwoord is goede_antwoord print 'goedzo'
+                    else print 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "print Welkom bij jouw rekenmachine"
             7:
@@ -668,7 +687,7 @@ adventures:
                     antwoord is ask 'Vul hier het antwoord in:'
                     print 'Jouw antwoord is ' antwoord
                     if antwoord is goedeantwoord
-                        score is score +1
+                      score is score +1
                   print 'Je score is ' score
                   ```
                 start_code: ""
@@ -691,7 +710,7 @@ adventures:
                     ```
                     print Hoi, ik ben Hedy de waarzegger!
                     ask Wie ben jij?
-                    print Ik voorspel... Ik voorspel... 
+                    print Ik voorspel... Ik voorspel...
                     echo Jouw naam is...
                     ```
                     
@@ -766,14 +785,14 @@ adventures:
                     ```
                     
                     ##Uitdaging
-                    Op deze manier kun je nog veel meer programma's schrijven! Je zou bijvoorbeeld kunnen voorspellen welke club de Eredivisie wint...
+                    Op deze manier kun je nog veel meer programma's schrijven! Je zou bijvoorbeeld kunnen voorspellen welke club de Eredivisie wint.
                     Of je zou de toverspiegel uit Sneeuwwitje kunnen laten voorspellen dat jij de mooiste van het land bent (en de rest natuurlijk niet!). 
-                    Of... er zijn nog heel veel meer opties, laat je fantasie de vrije loop en wees creatief!
+                    Of er zijn nog heel veel meer opties, laat je fantasie de vrije loop en wees creatief!
                 start_code: ""
                     
             5:
                 story_text: |
-                    ##Hedy de Waarzegger
+                    ## Hedy de Waarzegger
                     In level 5 kun je het repeat commando gebruiken om meerdere voorspellingen te doen. Kijk maar naar het voorbeeld:
                     
                     ## Voorbeeld Hedy code
@@ -785,7 +804,7 @@ adventures:
                     repeat 3 times print 'Mijn glazen bol zegt... ' antwoorden at random
                     ```
                    
-                    ##Uitdaging
+                    ## Uitdaging
                     Zoals je ziet worden de vragen niet geprint in dit voorbeeld. Dat komt omdat de variabele 'vraag' 3x veranderd wordt. 
                     Elke keer als een speler een nieuw antwoord geeft, wordt de variabele namelijk overschreven, waardoor het vorige antwoord verloren gaat. 
                     Dit betekent dat je dus niet alle vragen kunt printen op deze manier. 
@@ -858,10 +877,109 @@ adventures:
         image: "restaurant.png"
         default_save_name: "Restaurant"
         levels:
+            1:
+                story_text: |
+                    ## Restaurant level 1
+                    Je kunt met Hedy ook een virtueel restaurant bouwen en de bestellingen van je klanten opnemen! 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print Welkom bij McHedy!
+                    ask Wat wilt u bestellen?
+                    echo Dus u wilt graag... 
+                    print Bedankt voor uw bestelling!
+                    ```
+                    
+                    ## Uitdaging
+                    Kun jij het restaurant verder uitbreiden door meer regels code toe te voegen? Je zou bijvoorbeeld kunnen vragen of je klant ook iets wil drinken, vertellen hoe duur het is, of de klant eet smakelijk wensen! 
+                    
+                start_code: "print Welkom bij McHedy!"
+                
+            2:
+                story_text: |
+                    ## Restaurant level 2
+                    In level 2 kun je variabelen gebruiken om je restaurant interactiever te maken! Kijk maar naar het voorbeeld. 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print Welkom bij McHedy!
+                    eten is ask Wat wilt u eten?
+                    saus is ask Welke saus wilt u daarbij?
+                    drinken is ask Wat wilt u drinken?
+                    print U heeft eten met saus en drinken besteld.
+                    print Bedankt voor uw bestelling!
+                    ```
+                  
+                    ## Random restaurant
+                    In level 2 kun je ook het commando `at random` gebruiken om Hedy voor jou te laten kiezen. Hierdoor kun je ook een grappig random restaurant bouwen, waarbij je Hedy laat kiezen wat jij te eten krijgt!
+                    
+                    ## Voorbeeld Hedy Code Random Restaurant
+                    ```
+                    gerechten is patat, pizza, spruitjes
+                    toetjes is een ijsje, appeltaart, franse stinkkaas
+                    drinken is cola, water, bier
+                    prijzen is 1 euro, 10 euro, 100 euro
+                    print Welkom bij het random restaurant
+                    print Vandaag eet u gerechten at random
+                    print Daarbij drinkt u drinken at random
+                    print En u krijgt toetjes at random achteraf
+                    print Dat wordt dan prijzen at random
+                    print Eet smakelijk!
+                    ```
+                    
+                    ## Uitdaging
+                    Kun jij de restaurants nog leuker maken?
+                start_code: ""
+            3:
+                story_text: |    
+                    ## Restaurant level 3
+                    Lukt het jou om in level 3 aanhalingstekens toe te voegen aan je restaurant van level 2?
+                start_code: ""
+            4:
+                story_text: |
+                    ## Restaurant level 4
+                    In level 4 kun je het nieuwe `if` commando gebruiken om verschillende reacties te geven op antwoorden van de klanten. Zo kun je bijvoorbeeld vragen of de klant saus wil bij de frietjes, terwijl dat een rare vraag zou zijn als de klant pizza bestelt. 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Welkom bij McHedy'
+                    eten is ask 'Wat wilt u eten?'
+                    if eten is friet saus is ask 'Welke saus wilt u bij de friet?'
+                    if eten is pizza topping is ask 'Welke topping wilt u op de pizza?'
+                    print eten
+                    ```
+                    ## Prijslijst toevoegen
+                    Je kunt het `if` commando ook goed gebruiken om een prijslijst te maken.  
+                    
+                    ## Voorbeeld Hedy Code
+                    print 'Welkom bij McHedy'
+                    prijs is 0
+                    eten is ask 'Wilt u friet of pizza?'
+                    if eten is friet prijs is 3
+                    if eten is pizza prijs is 4
+                    print 'Dat wordt dan ' prijs ' euro, alstublieft.'
+                    
+                start_code: "" 
+            5:    
+                story_text: |
+                    ## Restaurant level 5
+                    In level 5 kun je het `repeat` commando gebruiken om van meerdere klanten de bestelling op te nemen. 
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Welkom bij restaurant Hedy'
+                    mensen is ask 'Voor hoeveel personen wilt u bestellen vandaag?'
+                    repeat mensen times eten is ask 'Wat wilt u bestellen?'
+                    print 'Bedankt voor uw bestelling!'
+                    ```
+                    In level 5 kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet. 
+                    In level 7 wordt dit probleem opgelost, want daar kun je meerdere regels code printen. 
+                start_code: ""
+                    
             6:
                 story_text: |
                     ## Restaurant level 6
-                        In level 6 kun je in je restaurant prijzen toevoegen en berekenen! 
+                    In level 6 kun je in je restaurant prijzen toevoegen en berekenen!
                     
                     ## Voorbeeld Hedy Code
                       Je kunt een simpel restaurant maken:
@@ -878,11 +996,12 @@ adventures:
                       print 'Dat is dan ' prijs ' euro, alstublieft!'
                       print 'Bedankt en eet smakelijk!'
                       ```
-                      In de hierboven kan je maar 1 gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
+                      In de hierboven kan je maar één gerecht bestellen en dat wordt de prijs die afgerekend moet worden.
                       Je kunt de code nog een stuk uitgebreider maken, kijk maar naar dit voorbeeld waarin je 3 gangen kunt bestellen.
 
                       ## Voorbeeld Hedy Code
-                      In this example there are three courses, which requires more code and more additions in calculating the price.
+                      Met deze code kan een klant drie gerechten bestellen.
+
                       ```
                       print 'Welkom in restaurant Hedy'
                       print 'Dit is ons menu:'
@@ -905,14 +1024,15 @@ adventures:
                       print 'Bedankt en eet smakelijk!'
                       ```
                       ## Uitdaging
-                      Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld...
-                      ... mensen korting geven met een geheime code?
-                      ... vragen hoeveel mensen er komen en de prijs daarop aanpassen?
-                      ... nog een gang toevoegen?
-                      ... een kindermenu toevoegen?
-                      ... nog iets anders?
                       
-                start_code: "print 'Welkom' "
+                      Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld:
+                      - mensen korting geven met een geheime code?
+                      - vragen hoeveel mensen er komen en de prijs daarop aanpassen?
+                      - nog een gang toevoegen?
+                      - een kindermenu toevoegen?
+                      - nog iets anders?
+                      
+                start_code: "print 'Welkom'"
           
             7: 
                 story_text: | 
@@ -926,32 +1046,32 @@ adventures:
                     print 'U kunt hier uw bestelling doorgeven'
                     mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                      eten is ask 'Wat wilt u eten?'
-                      print eten
-                      drinken is ask 'Wat wilt u drinken?'
-                      print drinken
+                        eten is ask 'Wat wilt u eten?'
+                        print eten
+                        drinken is ask 'Wat wilt u drinken?'
+                        print drinken
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
                                        
                     ## Toevoegingen met `if`
                     Je kunt natuurlijk ook zorgen dat er vervolgvragen komen. 
-                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola... 
+                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola.
                     En zo kun je vast zelf nog veel meer vragen bedenken! 
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
                     mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                      eten is ask 'Wat wilt u eten?'
-                      print eten
-                      if eten is patat
-                        saus is ask 'Wat voor saus wil je?'
-                        print saus
-                      drinken is ask 'Wat wilt u drinken?'
-                      if drinken is cola
-                         light is ask 'Normaal of light?'
-                      print drinken light
+                        eten is ask 'Wat wilt u eten?'
+                        print eten
+                        if eten is patat
+                            saus is ask 'Wat voor saus wil je?'
+                            print saus
+                        drinken is ask 'Wat wilt u drinken?'
+                        if drinken is cola
+                            light is ask 'Normaal of light?'
+                            print drinken light
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
@@ -980,17 +1100,291 @@ adventures:
                     print 'U kunt hier uw bestelling doorgeven'
                     mensen is ask 'Voor hoeveel personen wilt u bestellen?'
                     for i in range 1 to mensen
-                      print i 'e bestelling:'
-                      eten is ask 'Wat wilt u eten?'
-                      print eten
-                      if eten is patat
-                        saus is ask 'Wat voor saus wil je?'
-                        print saus
-                      drinken is ask 'Wat wilt u drinken?'
-                      print drinken
+                        print i 'e bestelling:'
+                        eten is ask 'Wat wilt u eten?'
+                        print eten
+                        if eten is patat
+                            saus is ask 'Wat voor saus wil je?'
+                            print saus
+                        drinken is ask 'Wat wilt u drinken?'
+                        print drinken
                     prijs is 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
-                    ## uitdaging
+                    ## Uitdaging
                     Alle uitdagingen die in level 7 worden genoemd zoals de extra `if` statements of de verbeterde prijzen, kun je natuurlijk in level 8 nog steeds gebruiken! 
                 start_code: "print 'Welkom bij McHedy!' "
+    haunted:
+        name: "Spookhuis"
+        description: "Ontsnap uit het spookhuis"
+        image: ""
+        default_save_name: "Spookhuis"
+        levels:
+            1:
+                story_text: |            
+                    ## Spookhuis
+                    in dit avontuur leer je een echte spookhuis game maken, waarbij de spelers moeten ontsnappen uit jouw spookhuis door je juiste deur te kiezen. 
+                    Als je de goede deur kiest overleef je het, maar anders...
+                    In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welk monster ze tegenkomen in het spookhuis. 
+          
+                    ## Voorbeeld Hedy code
+                    ```
+                    print Hoe ben ik hier terechtgekomen?
+                    print Ik herinner me dat ik mijn vrienden vertelde over die verlaten villa..
+                    print en toen werd ineens alles zwart.
+                    print Maar waarom lig ik hier nu op de grond...?
+                    print ik heb knallende hoofdpijn, alsof ik een harde klap heb gehad.
+                    print Huh? Wat is dat geluid?
+                    print Oh nee! Volgens mij ben ik niet alleen in dit huis!
+                    print Ik moet maken dat ik wegkom!
+                    print Er staan drie deuren voor me, maar welke moet ik kiezen?
+                    ask Welke deur kies ik?
+                    echo Ik kies deur... 
+                    print ...?
+                    ```
+                    ## Challenge
+                    Kun jij het spannende verhaal afmaken? Of je eigen spannende(re) intro bedenken?
+                start_code: "print Hoe ben ik hier terechtgekomen?"
+            2:
+                story_text: |
+                    ## Spookhuis
+                    In level 1 heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af. 
+                    In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms wordt je opgepeuzeld door een verschikkelijk monster en soms ontsnap je! 
+                    Hedy kiest random of je overleeft of niet...
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print Ontsnap uit het spookhuis!
+                    print Voor je staan drie deuren...
+                    keuze is ask Welke deur kies je?
+                    print Je koos deur ... keuze
+                    monsters is een zombie, een vampier, NIKS JE ONTSNAPT
+                    print Jij ziet...
+                    print monsters at random
+                    ```
+                    ## Uitdaging
+                    Dit verhaal is kort maar krachtig. Kun jij het verhaal opleuken tot een echte spannende game? 
+                    Daarbij zijn er nu maar 3 mogelijke opties voor wat er achter de deur zit, kun jij meer monsters toevoegen aan die lijst?
+                    
+                    ## Verander het spel in een tv prijzenshow!
+                    Tot slot willen we je graag uitdagen om dit spel om te bouwen tot een prijzenshow zoals op tv! 
+                    In prijzenshows kiest de kandidaat een deur of een koffertje en vindt daarin een grote prijs (of niets natuurlijk...). 
+                    Kun jij een prijzenshow bouwen?
+                   
+
+                start_code: "print Ontsnap uit het spookhuis!"
+
+            3:
+                story_text: |
+                    ## Spookhuis
+                    In level 3 heb je geleerd hoe je aanhalingstekens moet gebruiken. 
+                    Kun jij je spookhuis ook in level 3 aan de praat krijgen?
+                start_code: "print 'Ontsnap uit het spookhuis!'"
+            4:
+                story_text: |
+                    ## Spookhuis
+                    Tot nu toe werd er in je spookhuisspel wel altijd aan de speler gevraagd welke deur geopend moest worden, maar zoals je misschien al gemerkt hebt, maakte het niet uit wat voor antwoord de speler gaf. 
+                    De speler kon netjes een deur kiezen, maar als de speler een compleet random antwoord gaf, zoals 'pannenkoek!', dan zou de speler het spel nog steeds kunnen winnen (ook al is er niet eens een deur gekozen!). 
+                    In level 4 kun je alleen winnen als je dezelfde deur kiest als Hedy heeft gekozen en maakt het dus echt uit welk antwoord je invult!
+
+                    ## voorbeeld Hedy code
+                    ```
+                    print 'Ontsnap uit het spookhuis!'
+                    print 'Voor je staan 3 deuren...'
+                    deuren is 1,2,3
+                    monsters is weerwolf, mummy, vampier, zombie
+                    gekozendeur is ask 'Welke deur kies je?'
+                    print 'Jij kiest deur...' gekozendeur
+                    goededeur is deuren at random
+                    if gekozendeur is goededeur print 'Hoera! Je ontsnapt!' 
+                    else print 'Oh nee! Je wordt opgepeuzeld door een...' monsters at random
+                    ```
+                start_code: "print 'Ontsnap uit het spookhuis!'"
+            7:
+                story_text: |
+                    ## Spookhuis
+                    In level 7 heb je geleerd hoe je hele stukken code meerdere keren kunt herhalen. Hierdoor kun je levels maken in je spookhuisgame!
+                    In de lagere levels hoefde je maar een kamer door voordat je ontsnapt was, maar in dit level moet je wel 3x uit een kamer vluchten voordat je ontsnapt bent. 
+                    Dat maakt het spel een stuk lastiger om te winnen, kijk maar...
+                
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Ontsnap uit het spookhuis!'
+                    speler is levend
+                    deuren is 1, 2, 3
+                    monsters is zombie, vampier, mummy, reuzespin
+                    repeat 3 times
+                        if speler is levend
+                            goededeur is deuren at random
+                            print 'Voor je staan drie deuren...'
+                            gekozendeur is ask 'Welke deur kies je?'
+                            print 'Jij kiest deur...' gekozendeur
+                            if gekozendeur is goededeur
+                                print 'Gelukkig! Geen monster!'
+                            else
+                                print 'Je wordt opgegeten door een... ' monsters at random
+                                speler is dood
+                        else
+                            print 'GAME OVER'
+                    if speler is levend
+                        print ' Hoera! Je bent ontsnapt!'
+                    ```
+                    ## Uitdaging
+                    Je spel in nu wel heel lastig te winnen... Kun jij je spel zo ombouwen dat er maar 1 foute deur is om te kiezen, in plaast van 2?
+                    
+                start_code: "print 'Ontsnap uit het spookhuis!'"
+                
+            8:
+                story_text: |
+                    ## Spookhuis
+                    In level 8 kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele i te gebruiken. 
+                    Let op: Deze code is bijna gelijk aan die in level 7. Er zit een aanpassing op regel 5, waar het repeatcommando is vervangen door `for i in range 1 to 3`.
+                    Daarnaast is regel 8 toegevoegd, waardoor de speler nu ziet in welke kamer hij zit. 
+                    
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Ontsnap uit het spookhuis!'
+                    speler is levend
+                    deuren is 1, 2, 3
+                    monsters is zombie, vampier, mummy, reuzespin
+                    for i in range 1 to 3
+                        if speler is levend
+                            goededeur is deuren at random
+                            print 'Kamer ' i
+                            print 'Voor je staan drie deuren...'
+                            gekozendeur is ask 'Welke deur kies je?'
+                            print 'Jij kiest deur...' gekozendeur
+                            if gekozendeur is goededeur
+                                print 'Gelukkig! Geen monster!'
+                            else
+                                print 'Je wordt opgegeten door een... ' monsters at random
+                                speler is dood
+                        else
+                            print 'GAME OVER'
+                    if speler is levend
+                        print ' Hoera! Je bent ontsnapt!'
+                    ```
+                start_code: "print 'Ontsnap uit het spookhuis!'"
+                                 
+    next:
+        name: "Vooruitblik"
+        description: "Vooruitblik"
+        image: ""
+        default_save_name: "next"
+        levels:
+            1:
+                story_text: |
+                    ## Vooruitblik
+                    Gefeliciteerd! Je bent aan het einde gekomen van het eerste level van Hedy. Hopelijk heb je al wat mooie codes kunnen maken, maar er is in Hedy nog veel meer te ontdekken. 
+                    
+                    In level 1 ben je er misschien tegenaan gelopen dat Hedy in het `echo` commando maar één ding kan onthouden. 
+                    In het restaurantavontuur kon je bijvoorbeeld alleen herhalen wat de klant wilde eten, of alleen wat hij wilde drinken. Kijk maar: 
+                    
+                    ```
+                    print Welkom bij restaurant Hedy
+                    ask wat wilt u eten?
+                    echo Dus dit wilt u eten...
+                    ask wat wilt u drinken
+                    echo Dus dit wilt u drinken...
+                    ```
+                    Als de speler hamburger en cola invult, kun je nog niet zeggen `dus u wilt een hamburger en cola`, maar je moet daar twee lossen zinnen van maken.
+                    Daarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'
+                    
+                    Dat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen. 
+                    Daarnaast leer je in level 2 werken met het `at random` commando, waardoor je echte spelletjes kunt gaan maken. 
+                    Neem snel een kijkje! 
+                    
+                start_code: "print Op naar het volgende level!"
+            2:
+                story_text: |
+                    ## Vooruitblik
+                    In level 2 heb je veel geoefend met variabelen, maar misschien heb je ook wel eens gezien dat dat nog niet altijd perfect werkt. 
+                    
+                    Probeer deze code maar eens uit: 
+                    ```
+                    naam is Sophie
+                    print Mijn naam is naam
+                    ```
+                    Je wilde natuurlijk printen `Mijn naam is Sophie` maar Hedy print `Mijn Sophie is Sophie`.
+                    
+                    In level 3 wordt dit probleem opgelost door aanhalingstekens te gebruiken, kijk maar eens in level 3. 
+                 
+                start_code: "print Op naar het volgende level!"
+            3:
+                story_text: |
+                    
+                    ## Vooruitblik
+                    In level 2 en 3 heb al codes leren maken met `at random` waardoor je programma's elke keer anders waren als je ze afspeelde. 
+                    Toch waren de codes niet echt interactief, je hebt er als speler namelijk geen invloed op. 
+                
+                    In level 4 leer je het `if` commando waarmee je kunt zorgen voor 2 verschillende reacties in je code. 
+                    Zo kun je bijvoorbeeld je computer beveiligen met een wachtwoord. Neem maar een kijkje in level 4!
+                start_code: "print 'Op naar het volgende level!'"
+            4:
+                story_text: |
+                    ## Vooruitblik
+                    Super! Je bent bij het einde van level 4, dus je hebt inmiddels goed geoefend met `if` en `else`. 
+                
+                    Je hebt misschien gemerkt dat je codes steeds maar langer worden. Als je bijvoorbeeld een zin meerdere keren wil herhalen, nemen die allemaal een aparte regel in. 
+                    Bijvoorbeeld als je lang zal ze leven wil coderen...
+                    ```
+                    print 'lang zal ze leven'
+                    print 'lang zal ze leven'
+                    print 'lang zal ze leven'
+                    print 'in de gloria'
+                    print 'in de gloria'
+                    print 'in de gloria'
+                    ```
+                    Dit is een erg lange code voor maar 2 zinnetjes... In level 5 leer je gelukkig het `repeat` commando, waardoor je regels code kunt herhalen.
+                start_code: "print 'Op naar het volgende level!'"
+            5:
+                story_text: |
+                    ## Vooruitblik
+                    Na level 5 kun je regels code herhalen. Zo heb je bijvoorbeeld geleerd om in je restaurant aan meerdere mensen te vragen wat ze willen eten. 
+                    Wat je alleen nog niet kunt in level 5, is ook prijzen berekenen voor je restaurant. 
+                    Zou het niet leuk zijn om precies te kunnen zeggen hoeveel de klanten moeten betalen, en stiekem een kortingscode toe te voegen voor jou en je vrienden? 
+                    
+                    Vanaf level 6 kan dit wel, want in level 6 kun je rekenen met Hedy. Je kunt daar ook proberen om een tafelsommen game te programmeren (voor je broertje of zusje?). 
+                    Neem snel een kijkje in level 6!
+                                 
+                start_code: "print 'Op naar het volgende level!'"
+            6:
+                story_text: |
+                    ## Vooruitblik
+                    In level 5 heb je met `repeat` al geleerd hoe je één regel code kunt herhalen. Maar soms is het wel zo fijn als je niet maar een regel kunt herhalen maar een heel stukje code. 
+                    In regel 7 wordt dat mogelijk gemaakt door stukjes code bij elkaar een groepje te maken, door ze te beginnen met een aantal spaties. Zo'n groepje regels kun je dan in één keer herhalen met repeat. 
+                    
+                    ```
+                    repeat 5 times print 'vanaf level 7 kun je meerdere regels code in een keer herhalen!'
+                    ```
+                    
+                start_code: "print 'Op naar het volgende level!'"
+            7:
+                story_text: |
+                    ## Vooruitblik 
+                    Je bent alweer aan het einde van level 7, knap hoor! Je staat op het punt om door te gaan naar level 8. In de hogere levels gaan we steeds een beetje meer toewerken naar de programmeertaal Python.
+                    In Python bestaat het commando `repeat` echter niet, dus gaan we dat vervangen door 'echte' programmeertaal! 
+                    Ben je benieuwd hoe dat eruit ziet? Ga dan snel naar level 8. 
+                                 
+                start_code: "print 'Op naar het volgende level!'"
+            8:
+                story_text: |
+                    ## Vooruitblik
+                    In level 8 lijkt je code al wat meer op Pyhton, zometeen zul je in level 9 nog een toevoeging van Pyhton leren! 
+                    Daarnaast ben je er in level 8 misschien al eens tegenaan gelopen dat je eigenlijk meerdere opties wil hebben dan alleen `if` en `else`. 
+                    Bijvoorbeeld in deze code:
+                    
+                    ```
+                    print 'Wat gaan we eten vanavond?'
+                    opties is pizza, spuitjes, boerenkool
+                    gekozen is opties at random
+                    if opties is pasta
+                        print 'Hmmm lekker! Pasta!'
+                    else
+                        print 'Helaas pindakaas'
+                    ```
+                    Eigenlijk zou je in dit voorbeeld 2x een else willen hebben: eentje voor de spruitjes en eentje voor de boerenkool. 
+                    In level 9 leer je een nieuw commando `elif` dat je daarbij kan helpen! 
+                    Kijk maar eens in level 9...
+                start_code: "print 'Op naar het volgende level!'"
+                    

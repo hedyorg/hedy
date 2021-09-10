@@ -3,7 +3,7 @@ subtitle: "Con Hedy puedes hacer de todo! Por ejemplo, una historia interactiva,
 adventures:
     story:
         name: "Una historia"
-        description: "Escribe una historia interactiva"
+        description: "Una historia"
         image: "story.png"
         default_save_name: "Historia"
         levels:
@@ -14,14 +14,16 @@ adventures:
 
                     Puedes usar esta línea para comenzar tu programa:
 
-                    `ask Quién es el protagonista de tu historia?`
+                    ```
+                    ask Quién es el protagonista de tu historia?
+                    ```
 
                     En la segunda línea puedes empezar usando `print` si quieres imprimir una oración.
                     Puedes usar `echo` si quieres poner el nombre del protagonista al final de la oración.
 
                     ## Programa Hedy de ejemplo
                     ```
-                    ask El protagonista de esta historia es ...
+                    ask El protagonista de esta historia es
                     print El protagonista camina por un bosque
                     echo Está bastante asustado
                     print Por todos lados se oyen extraños ruidos
@@ -35,7 +37,7 @@ adventures:
                 start_code: "print Aquí comienza tu historia"
             2:
                 story_text: |
-                    ## Una historia en el nivel 2
+                    ## Una historia
                     En el nivel 2 puedes hacer tu historia más divertida. El nombre de tu protagonista puede ahora ser usado en las oraciones de la historia.
 
                     Para eso debes realizar un poquito más de programación. Debes dar primero un nombre al protagonista de tu historia.
@@ -45,7 +47,7 @@ adventures:
                     ## Programa Hedy de ejemplo
 
                     ```
-                    nombre es ask Cómo se llama el protagonista?
+                    nombre is ask Cómo se llama el protagonista?
                     print nombre está caminando por el bosque
                     print nombre está bastante asustado
                     print Por todos lados se oyen extraños ruidos
@@ -62,16 +64,20 @@ adventures:
                     ```
 
                     ## Avance
-                    Haz por casualidad probado escribir una oración donde está incluída la palabra "nombre"?
+                    Haz por casualidad probado escribir una oración donde está incluída la palabra "nombre", por ejemplo:
 
-                    Por ejemplo: `print mi nombre es nombre`. Puedes probarlo ahora si no lo has intentado todavía.
+                    ```
+                    print mi nombre es nombre
+                    ```
+
+                    Puedes probarlo ahora si no lo has intentado todavía.
 
                     Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `mi Manuel es Manuel`. Pero ahora puedes resolver este problema en el nivel 3.
 
                 start_code: "print Aquí viene tu historia!"
             3:
                 story_text: |
-                    ## Una historia en el nivel 3
+                    ## Una historia
                     Tal vez hayas notado un problema con el nivel 2.
 
                     Haz por casualidad probado escribir una oración donde está incluída la palabra "nombre"? Por ejemplo: `print mi nombre es nombre`.
@@ -83,18 +89,18 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     nombre is Carlos
-                    print 'El protagonista de esta historia es' naam
+                    print 'El protagonista de esta historia es' nombre
                     print nombre ' está caminando por el bosque'
-                    print nombre 'está bastante asustado'
+                    print nombre ' está bastante asustado'
                     animales is búho, águila, armadillo
                     print 'Él escucha el ruido de un' animales at random
                     print nombre 'tiene miedo de que éste sea un bosque encantado'
                     ```
 
-                start_code: "print Aquí viene tu historia!"
+                start_code: "print 'Aquí viene tu historia!'"
             4:
                 story_text: |
-                    ## Una historia en el nivel 4
+                    ## Una historia
                     Lo que también puedes hacer para hacer tu historia todavía más interesante es darle distintos finales posibles.
 
                     Escribe una historia con dos finales, por ejemplo:
@@ -109,17 +115,17 @@ adventures:
 
                     ## Programa Hedy de ejemplo
                     ```
-                    nombre is ask Quién camina por el bosque?
+                    nombre is ask 'Quién camina por el bosque?'
                     print nombre ' camina por el bosque'
                     print nombre ' se topa con un monstruo'
-                    final is ask Quieres un final feliz o un final triste?
+                    final is ask 'Quieres un final feliz o un final triste?'
                     if final is feliz print nombre ' desenfunda su espada y el monstruo se va corriendo' else print 'El monstruo se come a ' nombre
                     ```
 
-                start_code: "print Aquí viene tu historia!"
+                start_code: "print 'Aquí viene tu historia!'"
             5:
                 story_text: |
-                    ## Una historia en el nivel 5
+                    ## Una historia
                     En una historia, a veces es necesario repetir algo. Por ejemplo, si alguien pide ayuda, o si se canta una canción.
                     Eso lo puedes hacer ahora en el nivel 5 usando `repeat`.
 
@@ -132,14 +138,14 @@ adventures:
 
                 start_code: "repeat 5 times print 'Ayuda!'"
     songs:
-        name: "Canta una canción!"
+        name: "Canción"
         description: "Imprime una canción"
         image: "songs.png"
         default_save_name: "Canción"
         levels:
             5:
                 story_text: |
-                    ## Canciones en el nivel 5
+                    ## Canciones
                     En las canciones hay a menudo mucha repetición. Por ejemplo, Bebé Tiburón! En esa canción cantan siempre lo mismo:
 
                     Bebé Tiburón tututudutudu <br>
@@ -151,7 +157,7 @@ adventures:
 
                     ## Programa Hedy de ejemplo
                     ```
-                    repeat ... ... print 'Bebé Tiburón tututudutudu'
+                    repeat _ _ print 'Bebé Tiburón tututudutudu'
                     print 'Bebe Tiburón'
                     ```
 
@@ -159,7 +165,7 @@ adventures:
                 start_code: "print 'Una canción'"
             6:
                 story_text: |
-                    ## Canciones en el nivel 5
+                    ## Canciones
                     En las canciones hay a menudo mucha repetición. Por ejemplo, hay canciones que repiten con números.
                     Por ejemplo, la canción de los elefantes que se balancean! Ahora puedes programar esa canción programando con números.
 
@@ -183,14 +189,14 @@ adventures:
                     Pero como tal vez hayas notado en esta lección, a veces tenemos que repetir múltiples líneas, no solamente una. Eso puede hacerse copiando y pegando, pero eso da mucho trabajo. En el nivel 7 veremos como hacerlo más fácilmente.
                 start_code: "print 'Bebe Tiburón'"
     dishes:
-        name: "Quién lava los platos?"
+        name: "Platos"
         image: "dishes.png"
         description: "Usa la computadora para ver quien ha de lavar los platos (Comienza en el nivel 2)"
         default_save_name: "Platos"
         levels:
             2:
                 story_text: |
-                    ## Programa de lavado de platos en el nivel 2
+                    ## Programa de lavado de platos
                     Tienes en tu casa discusiones interminables sobre quien ha de lavar los platos hoy, o quien tiene que limpiar la caja del gato?
 
                     Ahora puedes dejar que la computadora elija honestamente a quien debe hacerlo. Puedes programar esto ahora en el nivel 2!
@@ -212,23 +218,23 @@ adventures:
                 start_code: "print Quien lavará los platos hoy?"
             3:
                 story_text: |
-                    ## Programa de lavado de platos en el nivel 3
+                    ## Programa de lavado de platos
                     Usando comillas puedes hacer más interesante tu programa.
                     Esta vez el programa de ejemplo no está completo.
-                    Puedes completar el código reemplazando los puntos suspensivos con los comandos correctos y las comillas?
-                    En cada grupo de puntos suspensivos debes colocar un comando o una comilla.
+                    Puedes completar el código reemplazando los guiones bajos con los comandos correctos y las comillas?
+                    En cada guión bajo debes colocar un comando o una comilla.
 
                     Consejo: no olvides las comillas!
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, Carlos, María
-                    print ... los platos serán lavados por ...
-                    print personas at ...
+                    print _ los platos serán lavados por _
+                    print personas at _
                     ```
                 start_code: "print 'Quien lavará los platos hoy?'"
             4:
                 story_text: |
-                    ## Programa de lavado de platos en el nivel 4
+                    ## Programa de lavado de platos
                     Usando el comando `if` ahora puedes hacer tu programa todavía más interesante. Ahora tu programa puede reaccionar de acuerdo a la elección de quien lavará los platos.
 
                     Puede hacer que tu programa imprima 'oh no' si es tu turno de lavar los platos, y 'sí!' en caso de que no sea tu turno de lavar los platos?
@@ -238,7 +244,7 @@ adventures:
                     ```
                     personas is mamá, papá, María, Carlos
                     lavador is personas at random
-                    if lavador es María print 'oh no, hoy me toca lavar los platos' else print 'por suerte no debo lavar los platos porque' ... 'los lavará hoy!'
+                    if lavador es María print 'oh no, hoy me toca lavar los platos' else print 'por suerte no debo lavar los platos porque' _ 'los lavará hoy!'
                     ```
 
                 start_code: "print 'Quien lavará los platos hoy?'"
@@ -250,7 +256,7 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     personas is mamá, papá, María, Carlos
-                    repeat ... ... print 'lavará los platos' ...
+                    repeat _ _ print 'lavará los platos' _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
             6:
@@ -276,30 +282,14 @@ adventures:
                     Este nivel es el último de la aventura del lavado de platos! Pero puedes elegir otra aventura y programar cosas como una calculadora, una historia interactiva o un juego más interesante.
                 start_code: "print 'Quien lavará los platos esta semana?'"
     dice:
-        name: "Crea un juego de dados"
+        name: "Dados"
         description: "Crea tu propio juego de dados"
         image: "dice.png"
         default_save_name: "Dados"
         levels:
-            1:
-                story_text: |
-                    ## Dados
-                    En el nivel 1 empezamos por crear nuestros propios dados.
-
-                    ## Programa Hedy de ejemplo
-
-                    ```
-                    ask Quieres hacer tus propios dados?
-                    echo Tu dices:
-                    ```
-
-                    ## Avance
-                    Este programa sólo repite la respuesta del jugador. En los próximos niveles la computadora podrá tirar los dados.
-
-                start_code: "ask Tienes ganas de crear un juego de dados?"
             2:
                 story_text: |
-                    ## Dados en el nivel 2
+                    ## Dados
                     En el nivel 2 puedes elegir elementos de una lista. De esa manera podemos hacer que se tiren los dados.
 
                     Dale una mirada a los juegos de mesa que tienes en tu casa.
@@ -326,19 +316,19 @@ adventures:
                 start_code: "print Qué salió esta vez?"
             3:
                 story_text: |
-                    ## Dados en el nivel 3
+                    ## Dados
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
-                    Puedes escribir el programa, reemplazando los puntos suspensivos?
+                    Puedes escribir el programa, reemplazando los guiones bajos?
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
-                    print 'has tirado un ' ...
-                    print ... ... ... <- hier moet je het kiezen programmeren
+                    print 'has tirado un ' _
+                    print _ _ _ <- agregar código aquí
                     ```
                 start_code: "print 'Qué salió esta vez?'"
             4:
                 story_text: |
-                    ## Dados en el nivel 4
+                    ## Dados
                     En el nivel 4 puedes nuevamente crear dados, y ahora puedes usar el comando `if`.
                     Puedes modificar el programa de ejemplo para que éste diga "Puedes dejar de tirar los dados" si el jugador ha obtenido un gusanito.
                     Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto. Por ejemplo, puedes hacer que el juego responda de manera distinta. Por ejemplo, diciendo 'éxito' si arrojas un 6 o 'que injusticia!' si arrojas algo distinto.
@@ -346,15 +336,15 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
-                    tirada is ...
-                    print 'haz tirado un ' ...
-                    if ... is gusanito print 'Puedes dejar de tirar los dados' ... print 'Debes tirar los dados nuevamente!'
+                    tirada is _
+                    print 'haz tirado un ' _
+                    if _ is gusanito print 'Puedes dejar de tirar los dados' _ print 'Debes tirar los dados nuevamente!'
                     ```
 
                 start_code: "print 'Qué salió esta vez?'"
             5:
                 story_text: |
-                    ## Dados en el nivel 5
+                    ## Dados
                     En el nivel 5 puedes nuevamente crear dados. Esta vez puedes usar el comando `repeat` para tirar varios dados a la vez.
                     Puedes usar el programa de ejemplo para terminar el juego!
 
@@ -363,13 +353,13 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is 1, 2, 3, 4, 5, gusanito
-                    repeat ... ... print ...
+                    repeat _ _ print _
                     ```
 
                 start_code: "print 'Qué salió esta vez?'"
             6:
                 story_text: |
-                    ## Dados en el nivel 6
+                    ## Dados
                     En el nivel 6 puedes nuevamente crear dados, pero ahora puedes contar cuántos puntos se han tirado ya.
 
                     Tal vez sepas que tirar un gusanito cuenta como 5 puntos. Ahora puedes tirar un dado y luego sumar cuántos puntos has obtenido ya. El siguiente ejemplo es para tirar un sólo dado:
@@ -381,7 +371,7 @@ adventures:
                     tirada is opciones at random
                     print 'has tirado un ' tirada
                     if tirada is gusanito puntaje is puntaje + 5 else puntaje is puntaje + tirada
-                    print 'Tu puntaje es ' puntaje
+                    print 'Tu puntaje es ' puntaje ' puntaje'
                     ```
                     Puedes modificar el programa de manera que puedas calcular el puntaje si tiras el dado 8 veces? Para hacer eso deberás copiar y pegar algunas líneas de tu programa.
 
@@ -441,22 +431,22 @@ adventures:
 
                     Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `yo elijo una de las [piedra, papel, tijera]`. Pero ahora puedes resolver este problema en el nivel 3.
 
-                start_code: "print Bienvenide a tu propio piedra, papel o tijera!"
+                start_code: "print Bienvenide a tu propio piedra papel o tijera!"
             3:
                 story_text: |
-                    ## Piedra, papel o tijera en el nivel 3
+                    ## Piedra, papel o tijera
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si quieres imprimir texto, debes usar comillas.
-                    Eres capaz de imprimir un texto adicional? Reemplaza los puntos suspensivos con el código correcto.
+                    Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
 
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is piedra, papel, tijera
-                    print ... La computadora ha elegido: ... ... at ...
+                    print _ La computadora ha elegido: _ _ at _
                     ```
                 start_code: "print 'Bienvenide a tu propio piedra, papel o tijera!'"
             4:
                 story_text: |
-                    ## Piedra, papel o tijera en el nivel 3
+                    ## Piedra, papel o tijera
                     En el nivel 4 podemos determinar quien ha ganado el juego.
                     Para eso necesitamos un nuevo comando: `if`.
 
@@ -467,15 +457,15 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     opciones is piedra, papel, tijera
-                    opcióncomputadora is ...
-                    opción is ask Que eliges?
-                    print 'Has elegido' ...
-                    print 'La computadora ha elegido' ...
-                    if ... is ... print 'empate!' else print 'no hay empate'
+                    opcióncomputadora is _
+                    opción is ask 'Que eliges?'
+                    print 'Has elegido' _
+                    print 'La computadora ha elegido' _
+                    if _ is _ print 'empate!' else print 'no hay empate'
                     if opción is piedra and opcióncomputadora is papel print 'la computadora gana'
                     ```
 
-                    Reemplaza los puntos suspensivos con el código correcto para comprobar si alguien ganó el juego o si el juego resultó empatado.
+                    Reemplaza los guiones bajos con el código correcto para comprobar si alguien ganó el juego o si el juego resultó empatado.
 
                     Luego copia la última línea y completa todas las distintas opciones posibles.
 
@@ -497,9 +487,9 @@ adventures:
                     ## Programa Hedy de ejemplo
                     ```
                     respuestacorrecta is 11 * 27
-                    print 'Cuánto es 11 veces 27?'
-                    respuesta is ask Sabes la respuesta?
-                    if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta is ask 'Cuánto es 11 veces 27?'
+                    if respuesta is respuestacorrecta print 'Bien hecho'
+                    else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
 
                     ## Multiplicaciones al azar
@@ -514,8 +504,8 @@ adventures:
                     tabla is tablas at random
                     multiplicador is veces at random
                     respuestacorrecta is tabla * multiplicador
-                    print 'Cuánto es ' tabla ' veces ' multiplicador '?'
-                    respuesta is ask Sabes la respuesta?
-                    if respuesta is respuestacorrecta print 'Bien hecho' else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta is ask 'Cuánto es ' tabla ' veces ' multiplicador '?'
+                    if respuesta is respuestacorrecta print 'Bien hecho'
+                    else print 'Incorrecto! La respuesta correcta es ' respuestacorrecta
                     ```
-                start_code: "print Bienvenide a tu propia calculadora!"
+                start_code: "print 'Bienvenide a tu propia calculadora!'"

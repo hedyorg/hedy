@@ -21,9 +21,9 @@ class ABProxying:
         app.before_request(self.before_request_proxy)
 
     def before_request_proxy(self):
-        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_HOST environment, with the exception of /auth/texts
+        # If it is an auth route, we do not reverse proxy it to the PROXY_TO_TEST_HOST environment
         # We want to keep all cookie setting in the main environment, not the test one.
-        if re.match ('.*/auth/.*', request.url) and not re.match ('.*/auth/texts', request.url):
+        if re.match ('.*/auth/.*', request.url):
             pass
         # This route is meant to return the session from the main environment, for testing purposes.
         elif re.match ('.*/session_main', request.url):

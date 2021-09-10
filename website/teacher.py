@@ -15,6 +15,13 @@ def routes (app, database, requested_lang):
 
     from app import render_main_menu
 
+    @app.route('/classes', methods=['GET'])
+    @requires_login
+    def get_classes (user):
+        if not is_teacher (request):
+            return 'Only teachers can retrieve classes', 403
+        return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
+
     @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
@@ -29,12 +36,16 @@ def routes (app, database, requested_lang):
             programs = DATABASE.programs_for_user(student_username)
             highest_level = max(program['level'] for program in programs) if len(programs) else 0
             sorted_public_programs = list(sorted([program for program in programs if program.get ('public')], key=lambda p: p['date']))
-            latest_shared = sorted_public_programs[-1] if sorted_public_programs else None
+            if sorted_public_programs:
+                latest_shared = sorted_public_programs[-1]
+                latest_shared['link'] = os.getenv ('BASE_URL') + f"/hedy/{latest_shared['id']}/view"
+            else:
+                latest_shared = None
             students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -102,9 +113,11 @@ def routes (app, database, requested_lang):
         if request.cookies.get (cookie_name):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
+                if token ['username'] in Class.get ('students', []):
+                    return render_template ('class-already-joined.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.data [requested_lang ()] ['Auth'], menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
+        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
 
     @app.route('/class/<class_id>/join/<link>', methods=['GET'])
     @requires_login

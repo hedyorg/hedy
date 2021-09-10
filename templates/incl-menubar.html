@@ -8,9 +8,11 @@
 
     {% block menu %}
     {% for item in menu %}
-    <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{localize_link (item.href)}}">
-      {{ item.caption }}
-    </a>
+      {% if item.short_name != 'for-teachers' or is_teacher %}
+        <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{localize_link (item.href)}}">
+          {{ item.caption }}
+        </a>
+      {% endif %}
     {% endfor %}
     {% if username %}
       <a class="menubar-btn border-{% if current_page == 'my-profile' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/my-profile')}}">{{auth.profile}}</a>

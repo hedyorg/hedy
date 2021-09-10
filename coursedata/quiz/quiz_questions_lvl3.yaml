@@ -37,15 +37,15 @@ questions:
       question_text: "Welke stelling is waar?"
       code: "..."
       mp_choice_options:
-        - { option_text: "Bij ask gebruik je ook aanhalingstekens", code: , feedback: "Bij ask heb je geen aanhalingstekens nodig" }
         - { option_text: "Als je een tekst wil printen moeten er dubbele aanhalingstekens voor en na de tekst staan.", code: , feedback: "Enkele aanhalingstekens zijn genoeg" }
         - { option_text: "Als je een tekst wil printen moeten er enkele aanhalingstekens voor en na de tekst staan.", code: , feedback: "Super!" }
+        - { option_text: "Als je een vraag wil stellen heb je geen aanhalingstekens nodig", code: , feedback: "Zowel bij ask als print heb je enkele aanhalingstekens nodig voor en na de tekst" }
         - { option_text: "Je mag zelf kiezen of je aanhalingstekens gebruikt of niet.", code: , feedback: "Helaas is Hedy strenger dan dat." }
-      correct_answer: "C"
+      correct_answer: "B"
       hint: "Je hebt vanaf level 3 aanhalingstekens nodig als je een tekst wil printen."
       question_score: 10
   - 5:
-      question_text: "Wat klopt er niet aan regel 2 van deze code?"
+      question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige optie te printen?"
       code: |-
         opties is steen, papier, schaar
         print 'opties at random'
@@ -55,7 +55,7 @@ questions:
         - { option_text:, code: " print opties at random", feedback: "Heel goed" }
         - { option_text: "Niets, de code is goed!", code:, feedback: "Kijk goed! Er zit wel een fout in!" }
       correct_answer: "C"
-      hint: "Je wil niet dat er letterlijk 'opties at random' geprint wordt, je wil ddat Hedy 'steen' 'papier' of 'schaar' print."
+      hint: "Je wil niet dat er letterlijk 'opties at random' geprint wordt, je wil dat Hedy 'steen' 'papier' of 'schaar' print."
       question_score: 10
   - 6:
       question_text: "Wat zou een goede tweede regel zijn na deze eerste regel?"
@@ -76,11 +76,11 @@ questions:
         antwoorden is ja, nee, misschien
         print antwoorden at random
       mp_choice_options:
-        - { option_text: "Er missen aanhalingstekens in regel 1", code: , feedback: "ask heeft geen aanhalingstekens nodig" }
+        - { option_text: "Er missen aanhalingstekens in regel 1", code: , feedback: "Juist, bij ask heb je aanhalingstekens nodig" }
         - { option_text: "Er missen aanhalingstekens in regel 2" , code: , feedback: "een variabele heeft geen aanhalingstekens nodig" }
         - { option_text: "Er missen aanhalingstekens in regel 3", code: , feedback: " Je wil niet dat er letterlijk 'antwoorden at random' worst geprint, dus geen aanhalingstekens hier!" }
-        - { option_text: "Niets! Deze code is goed!" , code: , feedback: "Juist! Alles is goed!" }
-      correct_answer: "D"
+        - { option_text: "Niets! Deze code is goed!" , code: , feedback: "Kijk goed! Er zit wel een fout in!" }
+      correct_answer: "A"
       hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
       question_score: 10
   - 8:
@@ -88,7 +88,7 @@ questions:
       code: |-
         print 'Welkom bij de prijzenshow!'
         print 'Voor je staan 3 deuren'
-        deur is ask Welke deur kies je?
+        deur is ask 'Welke deur kies je?'
       mp_choice_options:
         - { option_text: "print Dus jij kiest deur deur", code: , feedback: "Er zijn aanhalingstekens nodig in deze zin" }
         - { option_text: "print 'Dus jij kiest ' deur deur" , code: , feedback: "Als de speler nu deur 3 kiest, print Hedy: Dus jij kiest 3 3" }
@@ -100,7 +100,7 @@ questions:
   - 9:
       question_text: "Wat zou er niet op het uitvoerscherm kunnen verschijnen?"
       code: |-
-        voetbalclubs is Ajax, FC Utrecht, PSV, Feyenoord, FC Twente, sc Herenveen
+        voetbalclubs is Ajax, FC Utrecht, PSV, Feyenoord, FC Twente, sc Heerenveen
         print 'De beste club is..' voetbalclubs at random
       mp_choice_options:
         - { option_text: "De beste club is... Ajax", code: , feedback: "Dit zou wel kunnen" }
@@ -117,9 +117,9 @@ questions:
         print De afwas wordt gedaan door...
         print mensen at random
       mp_choice_options:
-        - { option_text:  "Er missen aanhalingstekens is regel 1", code:, feedback: "Dit rijtje heeft geen aanhalingstekens nodig" }
-        - { option_text:  "Er missen aanhalingstekens is regel 2", code:, feedback: "Correct!" }
-        - { option_text:  "Er missen aanhalingstekens is regel 3", code:, feedback: "Deze regel hoeft niet letterlijk geprint en dus geen aanhalingstekens" }
+        - { option_text:  "Er missen aanhalingstekens in regel 1", code:, feedback: "Dit rijtje heeft geen aanhalingstekens nodig" }
+        - { option_text:  "Er missen aanhalingstekens in regel 2", code:, feedback: "Correct!" }
+        - { option_text:  "Er missen aanhalingstekens in regel 3", code:, feedback: "Deze regel hoeft niet letterlijk geprint en dus geen aanhalingstekens" }
         - { option_text:  "Niets deze code is goed!", code:, feedback: "Helaas er missen toch ergens " }
       correct_answer: "B"
       hint: "Er missen aanhalingstekens bij een print commando."

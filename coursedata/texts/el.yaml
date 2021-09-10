@@ -40,7 +40,7 @@ HedyErrorMessages:
     Invalid Space: 'Ουπς! Ξεκίνησες μια γραμμή με κενό στη γραμμή {line_number}. Τα κενά μπερδεύουν τους υπολογιστές, μπορείς να τα αφαιρέσεις;'
     Parse: 'Ο κώδικας που εισήγαγες δεν είναι έγκυρος κώδικας Hedy. Υπάρχει ένα σφάλμα στη γραμμή {location[0]}, στη θέση {location[1]}. Πληκτρολόγησες {character_found}, όμως αυτό δεν επιτρέπεται.'
     Unquoted Text: 'Πρόσεξε. Αν εμφανίσεις κάτι το κείμενο θα πρέπει να ξεκινάει και να τελειώνει με εισαγωγικά. Κάπου ξέχασες ένα.'
-    VarUndefined: 'Προσπάθησες να εμφανίσεις το {name}, όμως δεν το αρχικοποίησες.'
+    Var Undefined: 'Προσπάθησες να εμφανίσεις το {name}, όμως δεν το αρχικοποίησες.'
     space: 'ένα κενό'
     comma: 'ένα κόμμα'
     question mark: 'ένα ερωτηματικό'
@@ -125,8 +125,8 @@ Auth:
         Το Hedy συνθηματικό σου επαναφέρθηκε σε ένα νέο. Αν αυτό ήταν δική σου ενέργεια, όλα καλα.
         Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
     programming_experience: "Do you have programming experience?"
-    yes: "yes"
-    no: "no"
+    yes: "Yes"
+    no: "No"
     languages: "Which of these programming languages have you used before?"
     other_block: "Another block language"
     other_text: "Another text language"
@@ -148,12 +148,15 @@ Auth:
     student_classes: "My classes"
     teacher_classes: "My classes"
     create_class: "Create new class"
+    rename_class: "Rename class"
     delete_class: "Delete class permanently"
     class_link: "Link to join class"
     prompt_join_class: "Do you want to join this class?"
     join_class: "Join class"
     class_overview: "Class overview"
     class_join_confirmation: "You have successfully joined the class"
+    class_already_joined: "You are already part of the class"
+    goto_profile: "Go to my profile"
     last_login: "Last login"
     highest_level_reached: "Highest level reached"
     number_programs: "Number of programs"
