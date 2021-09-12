@@ -385,6 +385,7 @@ window.onerror = function reportClientException(message, source, line_number, co
       line_number: line_number,
       column_number: column_number,
       error: error,
+      url: window.location.href,
       user_agent: navigator.userAgent,
     }),
     contentType: 'application/json',
