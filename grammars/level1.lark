@@ -88,9 +88,8 @@ textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for 
 %import common.NEWLINE
 %import common.SIGNED_INT -> NUMBER
 
-// FH Sept 2021: Frankly I have no clue what any of this means but they are Python compliant var names (aka include unicode)
-// this allows for var names in non-Latin names like Chinese and Bengali
-// stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
+// FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
+// Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
 
 NAME: ID_START ID_CONTINUE*
 ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
