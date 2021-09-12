@@ -187,6 +187,8 @@ class TestsLevel2(unittest.TestCase):
 
 
 
+
+
   def test_transpile_assign_and_print_in_sentence(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -356,6 +358,20 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
     print(ve1760b6272d4c9f816e62af4882d874f+' '+'is'+' '+'আপনার'+' '+'প্রিয')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_transpile_emoji(self):
+    code = textwrap.dedent("""\
+      😍 is Rico
+      print Hallo 😍!""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    v02612e1975f186b11bfb968ca2cf33bd = 'Rico'
+    print('Hallo'+' '+v02612e1975f186b11bfb968ca2cf33bd+'!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)

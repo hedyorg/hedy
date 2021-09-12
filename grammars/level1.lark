@@ -93,6 +93,6 @@ textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for 
 // stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
 
 NAME: ID_START ID_CONTINUE*
-ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+ID_START: /[\p{emoji}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
 ID_CONTINUE: ID_START | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
 
