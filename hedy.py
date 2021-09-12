@@ -961,7 +961,7 @@ def create_grammar(level, sub):
 
     # we start with creating the grammar for level 1
     grammar_text_1 = get_full_grammar_for_level(1)
-    
+
     if sub:
         #grep
         if level == 1:
@@ -982,7 +982,7 @@ def create_grammar(level, sub):
         # get grammar for the sublevel and merge it
         grammar_text_sub = get_additional_rules_for_level(level, sub)
         new = merge_grammars(new, grammar_text_sub)
-        
+
         # ready? Save to file to ease debugging
         # this could also be done on each merge for performance reasons
         filename = "level" + str(level) + "-" + str(sub) + "-Total.lark"
@@ -1070,7 +1070,7 @@ def transpile(input_string, level, sub = 0):
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
                 # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-                raise HedyException('Wrong Level', correct_code=result, original_level=level, working_level=new_level) from E
+                raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
         raise E
 
 def repair(input_string):
