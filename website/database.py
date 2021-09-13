@@ -3,6 +3,8 @@ from . import dynamo
 import boto3
 from decimal import Decimal
 import json
+from botocore.exceptions import ClientError
+
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
@@ -47,6 +49,24 @@ class Database:
         data = json.loads(json.dumps(quiz_attempt), parse_float=Decimal)
         return table.put_item(Item=data)
 
+    def get_quiz_attempt(self, quiz_attempt_id,level, dynamodb=None):
+
+        print("id, ", quiz_attempt_id, "level", level)
+        if not dynamodb:
+            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+
+        table = dynamodb.Table('QuizAttempt')
+
+        response = table.get_item(
+            Key={
+                'QuizAttemptId':  quiz_attempt_id,
+                'QuizLevel': level
+            }
+        )
+
+
+        print(response['Item'])
+        return response['Item']
 
     def programs_for_user(self, username):
         """List programs for the given user, newest first.

@@ -11,6 +11,8 @@
 
     <div class="p-10 button-bar border-t-8 border-green-600">
         <div></div>
+         <button class="yellow-btn ml-1"
+                onclick="window.location = '/quiz/results/{{ level }}';"> Ga naar het resultaten overzicht van de quiz </button>
         <button class="green-btn ml-1"
                 onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">Ga naar
             level {{ level }} </button>

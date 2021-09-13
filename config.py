@@ -38,4 +38,5 @@ config = {
     'quiz-enabled': True,
     'quiz-answer-id':None,
     'list-of-answer-ids': None,
+    'quiz-attempt-id':None
 }

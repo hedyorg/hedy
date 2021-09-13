@@ -481,11 +481,45 @@ def get_quiz(level_source, question_nr, attempt):
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
         else:
+            quiz_attempt_id = uuid.uuid4().hex
+            session["quiz-attempt-id"] = quiz_attempt_id
+            stored_quiz_attempt = {
+                'QuizAttemptId': quiz_attempt_id,
+                'QuizLevel': level_source,
+                'answerIds': session.get('list-of-answer-ids'),
+                'completedAt': timems(),
+                'isCorrectAnswer': False,
+                'totalPoints': session.get('total_score'),
+            }
+            print(stored_quiz_attempt)
+            DATABASE.store_quiz_attempt(stored_quiz_attempt)
             return render_template('endquiz.html', correct=session.get('correct_answer'),
                                    total_score=session.get('total_score'),
                                    menu=render_main_menu('adventures'), lang=lang,
                                    quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
                                    next_assignment=1, username=current_user(request)['username'],
+                                   is_teacher=is_teacher(request),
+                                   auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
+
+@app.route('/quiz/results/<level_source>', methods=["GET"])
+def get_result_info_quiz(level_source):
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        # Reading the yaml file
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
+            return 'No quiz yaml file found for this level', 404
+
+        # set globals
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
+
+    level =  int(level_source)-1
+    attempt_data = DATABASE.get_quiz_attempt(session.get('quiz-attempt-id'), str(level))
+    print('attempt data,' , attempt_data)
+    return render_template('results-quiz.html', attempt_data = attempt_data, quiz=quiz_data, level=int(level_source)-1,  menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 

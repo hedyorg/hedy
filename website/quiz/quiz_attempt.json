@@ -17,33 +17,11 @@
     },
     {
       "AttributeName": "QuizLevel",
-      "AttributeType": "N"
-    },
-    {
-      "AttributeName": "QuizAnswerId",
-      "AttributeType": "N"
+      "AttributeType": "S"
     }
   ],
   "ProvisionedThroughput": {
     "ReadCapacityUnits": 5,
     "WriteCapacityUnits": 5
-  },
-  "LocalSecondaryIndexes": [
-    {
-      "IndexName": "index_QuizAttemptId_QuizAnswerId",
-      "KeySchema": [
-        {
-          "AttributeName": "QuizAttemptId",
-          "KeyType": "HASH"
-        },
-        {
-          "AttributeName": "QuizAnswerId",
-          "KeyType": "RANGE"
-        }
-      ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
-    }
-  ]
+  }
 }
