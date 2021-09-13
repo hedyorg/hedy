@@ -24,9 +24,20 @@ class Database:
         return table.put_item(Item=data)
 
 
-    def get_quiz_answer(self, answer_id):
+    def get_quiz_answer(self, answer_id, dynamodb=None):
         """Load a token from the database."""
-        return QUIZ_ANSWER.get({'QuizAnswerId': answer_id})
+        if not dynamodb:
+            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+
+        table = dynamodb.Table('QuizAnswer')
+        response = table.get_item(
+            TableName='QuizAnswer',
+            Key={
+                'QuizAnswerId': {'S': answer_id},
+            }
+        )
+        print(response['Item'])
+        return repsonse
 
     def store_quiz_attempt(self,quiz_attempt, dynamodb=None):
         if not dynamodb:

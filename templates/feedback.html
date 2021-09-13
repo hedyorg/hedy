@@ -27,6 +27,9 @@
     <div class="p-10 button-bar border-t-8 border-green-600">
         {% if question_nr < questions|length %}
             <div></div>
+              <button class="yellow-btn ml-1 text-right-0"
+                    onclick="window.location = '/quiz/quiz_questions/answer/'">
+                Bekijk data over het gegeven antwoord {{ question_nr + 1 }}</button>
             <button class="green-btn ml-1 text-right-0"
                     onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1'">
                 Ga
