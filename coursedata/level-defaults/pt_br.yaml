@@ -534,3 +534,23 @@
             soma is soma + lista[3]
             # Esperamos um resultado de 6
             print(soma)
+19:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        for i in range(1, 3):
+            print(fruta[i])
+    intro_text: |-
+        Podemos também ver tudo na lista com o ciclo `for`. Como
+        existem três coisas na lista, passamos o ciclo de 1 até 3.
+        Durante o ciclo nós printamos tudo que há na lista.
+    commands:
+    -   name: "Tamanho da lista"
+        explanation: |-
+            Com `length` podemos saber o tamanho da lista. A lista no
+            exemplo tem tamanho 3, porque existem três coisas na lista.
+        example: "length(lista)"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print('tamanho da lista é ' length(fruta))
+            for i in range(1, length(fruta)):
+                print(fruta[i])
