@@ -475,3 +475,43 @@
             idade is input('Quantos anos você tem?')
             if age > 12:
                 print('Você é mais velho(a) do que eu!')
+17:
+    start_code: |-
+        resposta_certa is Falso
+        # Continuamos até ser dada a resposta certa!
+        while resposta_certa is Falso:
+            resultado is input('Quanto é 5 vezes 5?')
+            if resultado is 25:
+                resposta_certa is True
+                print('Foi dada uma boa resposta')
+    intro_text: |-
+        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
+        ciclo enquanto a instrução for verdadeira/válida! Portanto,
+        no exemplo de código, continuamos até ser dada a resposta
+        certa. Se a resposta correta nunca for dada, o ciclo nunca
+        acaba!
+    commands:
+    -   name: "While booleano"
+        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
+        example: "Exemplo: while resposta_certa is Falso"
+        demo_code: |-
+            resposta_certa is Falso
+            # Continuamos até termos a resposta certa!
+            while resposta_certa is Falso:
+                resultado is input('Quanto é 5 vezes 5?')
+                if resultado is 25:
+                    resposta_certa is Verdadeiro
+                    print('Foi dada uma boa resposta')
+    -   name: "while menor"
+        explanation: |-
+            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
+            cuidado, é preciso mudar o número para que ciclo termine.
+            Aqui nós fazemos isso com `contagem is contagem + 1`.
+        example: "Por exemplo: while contagem < 3"
+        demo_code: |-
+            contagem is 1
+            # Continuamos até a contagem ser 3!
+            while contagem < 3:
+                print('Fazemos isto mais ' 3 - contagem ' vezes.')
+                contagem is contagem + 1
+            print('Acabamos!')
