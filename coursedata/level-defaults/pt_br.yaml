@@ -515,3 +515,22 @@
                 print('Fazemos isto mais ' 3 - contagem ' vezes.')
                 contagem is contagem + 1
             print('Acabamos!')
+18:
+    start_code: |-
+        lista is ['primeiro', 'segundo', 'terceiro']
+        segundovalor is lista[2]
+        print(segundovalor)
+    intro_text: |-
+        Quando temos uma lista, podemos obter um valor específico
+        dessa lista. Se queremos o segundo elemento da lista, digitamos
+        `lista[2]`.
+    commands:
+    -   name: "Contagem"
+        explanation: "Podemos também somar todos os valores da lista."
+        example: "lista[1]"
+        demo_code: |-
+            lista is ['1', '2', '3']
+            soma is lista[1] + lista[2]
+            soma is soma + lista[3]
+            # Esperamos um resultado de 6
+            print(soma)
