@@ -489,8 +489,16 @@ def get_quiz(level_source, question_nr, attempt):
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
+@app.route('/quiz/quiz_questions/answer, methods=["GET"]')
+def get_answer_info():
+    DATABASE.get_quiz_answer(session.get('quiz-answer-id'))
+
+
 @app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
+    if session.get('list-of-answer-ids') is None:
+        session['list-of-answer-ids'] = []
+
     if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
@@ -527,6 +535,12 @@ def submit_answer(level_source, question_nr, attempt):
 
             if question['correct_answer'] in option:
                 answer_id = uuid.uuid4().hex
+                session['quiz-answer-id'] = answer_id
+
+                list_answers = session['list-of-answer-ids']
+                list_answers.append(answer_id)
+                session['list-of-answer-ids'] = list_answers
+                print(session.get('list-of-answer-ids'))
                 stored_quiz_answer = {
                     'QuizAnswerId': answer_id,
                     'QuizQuestionText': question['question_text'],
@@ -559,7 +573,11 @@ def submit_answer(level_source, question_nr, attempt):
                     char_array.append(chr(ord('@') + (i + 1)))
 
                 answer_id = uuid.uuid4().hex
-
+                session['quiz-answer-id'] = answer_id
+                list_answers  = session['list-of-answer-ids']
+                list_answers.append(answer_id)
+                session['list-of-answer-ids'] = list_answers
+                print(session.get('list-of-answer-ids'))
                 stored_quiz_answer = {
                     'QuizAnswerId': answer_id,
                     'QuizQuestionText': question['question_text'],
@@ -584,7 +602,11 @@ def submit_answer(level_source, question_nr, attempt):
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
             elif attempt >= 3:
                 answer_id = uuid.uuid4().hex
-
+                session['quiz-answer-id'] = answer_id
+                list_answers = session['list-of-answer-ids']
+                list_answers.append(answer_id)
+                session['list-of-answer-ids'] = list_answers
+                print(session.get('list-of-answer-ids'))
                 stored_quiz_answer = {
                     'QuizAnswerId': answer_id,
                     'QuizQuestionText': question['question_text'],
@@ -595,7 +617,6 @@ def submit_answer(level_source, question_nr, attempt):
                     'questionAttempt': attempt,
                     'date': timems(),
                 }
-
                 DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
