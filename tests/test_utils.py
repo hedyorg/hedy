@@ -27,7 +27,7 @@ class TestUtils(unittest.TestCase):
     n = 50
 
     # Pick a file with unicode in it so we're sure it gets handled properly
-    file = 'coursedata/adventures/hu.yaml'
+    file = os.path.join(os.path.dirname(__file__), '..', 'coursedata/adventures/hu.yaml')
 
     # Remove pickled version of this file if it exists, it may
     # influence the tests
