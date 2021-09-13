@@ -426,6 +426,23 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+  def test_random_turn(self):
+    code = textwrap.dedent("""\
+    print Turtle race
+    directions is 10, 100, 360
+    turn directions at random""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Turtle'+' '+'race')
+    directions = ['10', '100', '360']
+    t.right(random.choice(directions))""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
+
   # test for 297 (not easy to fix, not giving prio now)
   # def test_print_space_after_excl(self):
   #   code = "print hello world!koekie!"
