@@ -503,10 +503,7 @@ class ConvertToPython_2(ConvertToPython_1):
         # return "_" + name if name in reserved_words else name
     def print(self, args):
         argument_string = ""
-
-        all_arguments_converted = []
         i = 0
-
 
         for argument in args:
             # escape quotes if kids accidentally use them at level 2
@@ -519,9 +516,11 @@ class ConvertToPython_2(ConvertToPython_1):
                 space = " "
 
             if argument in self.lookup:
+                #variables are placed in {} in the f string
                 argument_string += "{" + process_hash(argument) + "}"
                 argument_string += space
             else:
+                #strings are written regularly
                 argument_string += argument
                 argument_string += space
 
@@ -571,6 +570,20 @@ class ConvertToPython_2(ConvertToPython_1):
 def quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
+def make_f_string(args, lookup):
+    argument_string = ''
+    for argument in args:
+        if argument in lookup:
+            # variables are placed in {} in the f string
+            argument_string += "{" + process_hash(argument) + "}"
+        else:
+            # strings are written regularly
+            # however we no longer need their quptes in the f-string
+            # the quotes are only left on to check if they are there.
+            argument_string += argument.replace("'",'')
+
+    return f"print(f'{argument_string}')"
+
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 class ConvertToPython_3(ConvertToPython_2):
 
@@ -586,7 +599,7 @@ class ConvertToPython_3(ConvertToPython_2):
         unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
         #we can print if all arguments are quoted OR they are all variables
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            return "print(" + '+'.join(args) + ')'
+            return make_f_string(args, self.lookup)
         else:
             # I would like to raise normally but that is caught by the transformer :(
             return f"HedyException:{args[0]}"
@@ -645,6 +658,7 @@ class ConvertToPython_5(ConvertToPython_4):
 {indent(command)}"""
 
 class ConvertToPython_6(ConvertToPython_5):
+    #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
         #force all to be printed as strings (since there can not be int arguments)
