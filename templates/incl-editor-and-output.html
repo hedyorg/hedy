@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1" style="min-height: 16rem">
+    <div class="flex flex-col order-1" style="min-height: 22rem">
       <div class="w-full flex-1 flex flex-col">
         <div id="editor"
           style="background: #272822; font-family: monospace; color: white"
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col order-3" style="min-height: 16rem">
+    <div class="flex flex-col order-3" style="min-height: 22rem">
       <!-- tabindex=0 makes the div focusable -->
       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem"></div>
       <div id="turtlecanvas" class="flex-0"></div>
@@ -103,19 +103,19 @@
       <br>
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
         {% if prev_level %}
-          <button class="green-btn" onclick="window.location = '{{ hedy_link(prev_level, 1) }}';">{{regress_button}} {{ prev_level }}</button>
+          <button class="green-btn" onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
             {% if (next_level == quiz_data_level + 1) and quiz_enabled %}
                 <button class="green-btn ml-1"
-                        onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
-                <button class="green-btn ml-1" onclick="window.location = '/quiz/start/{{ quiz_data_level }}';">Ga
+                        onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'});">{{ advance_button }} {{ next_level }}</button>
+                <button class="green-btn ml-1" onclick="window.prompt_unsaved (function () {window.location = '/quiz/start/{{ quiz_data_level }}'})">Ga
                     naar de
                     quiz
                     van level {{ level }}</button>
             {% else %}
                 <button class="green-btn ml-1"
-                        onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{ advance_button }} {{ next_level }}</button>
+                        onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
             {% endif %}
           {% endif %}
       </div>

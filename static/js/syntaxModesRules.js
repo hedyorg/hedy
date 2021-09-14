@@ -70,7 +70,6 @@ const LEVELS = [
     name: 'level3',
     rules: pipe(baseRules(),
       rule_turtle(),
-      rule_print(),
       rule_print('expression_eol'),
       rule_isAsk(),
       rule_is(),
@@ -420,7 +419,7 @@ function rule_printParen() {
   return recognize('start', {
     regex: '(print)(\\()',
     token: ['keyword', 'paren.lparen'],
-    next: 'expression'
+    next: 'start'
   });
 }
 
@@ -444,13 +443,13 @@ function rule_turtle() {
 
 
 /**
- * Add a 'print' rule with brackets
+ * Add an 'is input' rule with brackets
  */
 function rule_isInputParen() {
   return recognize('start', {
     regex: '(\\w+)( is input)(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
-    next: 'expression'
+    next: 'start'
   });
 }
 
@@ -547,8 +546,9 @@ function rule_forRangeParen() {
 function loosenRules(rules) {
   for (const ruleSets of Object.values(rules)) {
     for (const rule of ruleSets) {
-      if (rule.regex) {
+      if (rule.regex && !rule._loosened) {
         rule.regex = rule.regex.replace(/ /g, ' +');
+        rule._loosened = true;
       }
     }
   }

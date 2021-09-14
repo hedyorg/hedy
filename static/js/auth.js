@@ -1,7 +1,7 @@
 var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Algeria','AS':'American Samoa','AD':'Andorra','AO':'Angola','AI':'Anguilla','AQ':'Antarctica','AG':'Antigua and Barbuda','AR':'Argentina','AM':'Armenia','AW':'Aruba','AU':'Australia','AT':'Austria','AZ':'Azerbaijan','BS':'Bahamas','BH':'Bahrain','BD':'Bangladesh','BB':'Barbados','BY':'Belarus','BE':'Belgium','BZ':'Belize','BJ':'Benin','BM':'Bermuda','BT':'Bhutan','BO':'Bolivia, Plurinational State of','BQ':'Bonaire, Sint Eustatius and Saba','BA':'Bosnia and Herzegovina','BW':'Botswana','BV':'Bouvet Island','BR':'Brazil','IO':'British Indian Ocean Territory','BN':'Brunei Darussalam','BG':'Bulgaria','BF':'Burkina Faso','BI':'Burundi','KH':'Cambodia','CM':'Cameroon','CA':'Canada','CV':'Cape Verde','KY':'Cayman Islands','CF':'Central African Republic','TD':'Chad','CL':'Chile','CN':'China','CX':'Christmas Island','CC':'Cocos (Keeling) Islands','CO':'Colombia','KM':'Comoros','CG':'Congo','CD':'Congo, the Democratic Republic of the','CK':'Cook Islands','CR':'Costa Rica','CI':'Côte d\'Ivoire','HR':'Croatia','CU':'Cuba','CW':'Curaçao','CY':'Cyprus','CZ':'Czech Republic','DK':'Denmark','DJ':'Djibouti','DM':'Dominica','DO':'Dominican Republic','EC':'Ecuador','EG':'Egypt','SV':'El Salvador','GQ':'Equatorial Guinea','ER':'Eritrea','EE':'Estonia','ET':'Ethiopia','FK':'Falkland Islands (Malvinas)','FO':'Faroe Islands','FJ':'Fiji','FI':'Finland','FR':'France','GF':'French Guiana','PF':'French Polynesia','TF':'French Southern Territories','GA':'Gabon','GM':'Gambia','GE':'Georgia','DE':'Germany','GH':'Ghana','GI':'Gibraltar','GR':'Greece','GL':'Greenland','GD':'Grenada','GP':'Guadeloupe','GU':'Guam','GT':'Guatemala','GG':'Guernsey','GN':'Guinea','GW':'Guinea-Bissau','GY':'Guyana','HT':'Haiti','HM':'Heard Island and McDonald Islands','VA':'Holy See (Vatican City State)','HN':'Honduras','HK':'Hong Kong','HU':'Hungary','IS':'Iceland','IN':'India','ID':'Indonesia','IR':'Iran, Islamic Republic of','IQ':'Iraq','IE':'Ireland','IM':'Isle of Man','IL':'Israel','IT':'Italy','JM':'Jamaica','JP':'Japan','JE':'Jersey','JO':'Jordan','KZ':'Kazakhstan','KE':'Kenya','KI':'Kiribati','KP':'Korea, Democratic People\'s Republic of','KR':'Korea, Republic of','KW':'Kuwait','KG':'Kyrgyzstan','LA':'Lao People\'s Democratic Republic','LV':'Latvia','LB':'Lebanon','LS':'Lesotho','LR':'Liberia','LY':'Libya','LI':'Liechtenstein','LT':'Lithuania','LU':'Luxembourg','MO':'Macao','MK':'Macedonia, the Former Yugoslav Republic of','MG':'Madagascar','MW':'Malawi','MY':'Malaysia','MV':'Maldives','ML':'Mali','MT':'Malta','MH':'Marshall Islands','MQ':'Martinique','MR':'Mauritania','MU':'Mauritius','YT':'Mayotte','MX':'Mexico','FM':'Micronesia, Federated States of','MD':'Moldova, Republic of','MC':'Monaco','MN':'Mongolia','ME':'Montenegro','MS':'Montserrat','MA':'Morocco','MZ':'Mozambique','MM':'Myanmar','NA':'Namibia','NR':'Nauru','NP':'Nepal','NL':'Netherlands','NC':'New Caledonia','NZ':'New Zealand','NI':'Nicaragua','NE':'Niger','NG':'Nigeria','NU':'Niue','NF':'Norfolk Island','MP':'Northern Mariana Islands','NO':'Norway','OM':'Oman','PK':'Pakistan','PW':'Palau','PS':'Palestine, State of','PA':'Panama','PG':'Papua New Guinea','PY':'Paraguay','PE':'Peru','PH':'Philippines','PN':'Pitcairn','PL':'Poland','PT':'Portugal','PR':'Puerto Rico','QA':'Qatar','RE':'Réunion','RO':'Romania','RU':'Russian Federation','RW':'Rwanda','BL':'Saint Barthélemy','SH':'Saint Helena, Ascension and Tristan da Cunha','KN':'Saint Kitts and Nevis','LC':'Saint Lucia','MF':'Saint Martin (French part)','PM':'Saint Pierre and Miquelon','VC':'Saint Vincent and the Grenadines','WS':'Samoa','SM':'San Marino','ST':'Sao Tome and Principe','SA':'Saudi Arabia','SN':'Senegal','RS':'Serbia','SC':'Seychelles','SL':'Sierra Leone','SG':'Singapore','SX':'Sint Maarten (Dutch part)','SK':'Slovakia','SI':'Slovenia','SB':'Solomon Islands','SO':'Somalia','ZA':'South Africa','GS':'South Georgia and the South Sandwich Islands','SS':'South Sudan','ES':'Spain','LK':'Sri Lanka','SD':'Sudan','SR':'Suriname','SJ':'Svalbard and Jan Mayen','SZ':'Swaziland','SE':'Sweden','CH':'Switzerland','SY':'Syrian Arab Republic','TW':'Taiwan, Province of China','TJ':'Tajikistan','TZ':'Tanzania, United Republic of','TH':'Thailand','TL':'Timor-Leste','TG':'Togo','TK':'Tokelau','TO':'Tonga','TT':'Trinidad and Tobago','TN':'Tunisia','TR':'Turkey','TM':'Turkmenistan','TC':'Turks and Caicos Islands','TV':'Tuvalu','UG':'Uganda','UA':'Ukraine','AE':'United Arab Emirates','GB':'United Kingdom','US':'United States','UM':'United States Minor Outlying Islands','UY':'Uruguay','UZ':'Uzbekistan','VU':'Vanuatu','VE':'Venezuela, Bolivarian Republic of','VN':'Viet Nam','VG':'Virgin Islands, British','VI':'Virgin Islands, U.S.','WF':'Wallis and Futuna','EH':'Western Sahara','YE':'Yemen','ZM':'Zambia','ZW':'Zimbabwe'};
 
 window.auth = {
-  texts: {},
+  texts: AuthMessages,
   entityify: function (string) {
       return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
    },
@@ -16,9 +16,10 @@ window.auth = {
     });
   },
   destroy: function () {
-    if (! confirm (auth.texts.are_you_sure)) return;
-    $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
-      auth.redirect ('');
+    window.modal.confirm (auth.texts.are_you_sure, function () {
+      $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
+        auth.redirect ('');
+      });
     });
   },
   error: function (message, element, id) {
@@ -50,7 +51,7 @@ window.auth = {
       if (! values.password) return auth.error (auth.texts.please_password, 'password');
       if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
       if (! values.email.match (window.auth.emailRegex)) return auth.error (auth.texts.valid_email, 'email');
-      if (values.email    !== values.email_repeat)    return auth.error (auth.texts.repeat_match_email,    'email_repeat');
+      if (values.email    !== values.mail_repeat)    return auth.error (auth.texts.repeat_match_email,    'mail_repeat');
       if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match_password, 'password_repeat');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
@@ -234,23 +235,24 @@ window.auth = {
   },
   markAsTeacher: function (username, is_teacher) {
     $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
+      window.modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
     }).fail (function (error) {
       console.log (error);
-      alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+      window.modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
     });
   },
 
   changeUserEmail: function (username, email) {
-    var correctedEmail = prompt ('Please enter the corrected email', email);
-    if (correctedEmail === email) return;
-    if (! correctedEmail.match (window.auth.emailRegex)) return alert ('Please enter a valid email.');
-    $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
-      location.reload ();
-    }).fail (function (error) {
-      console.log (error);
-      alert (['Error when changing the email for User', username].join (' '));
+    window.modal.prompt ('Please enter the corrected email', function (correctedEmail) {
+      if (correctedEmail === email) return;
+      if (! correctedEmail.match (window.auth.emailRegex)) return window.modal.alert ('Please enter a valid email.');
+      $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+        window.modal.alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
+        location.reload ();
+      }).fail (function (error) {
+        console.log (error);
+        window.modal.alert (['Error when changing the email for User', username].join (' '));
+      });
     });
   },
 }
@@ -270,41 +272,30 @@ $ ('.auth input').get ().map (function (el) {
   el.addEventListener ('input', auth.clear_error);
 });
 
-$.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (function (response) {
-  auth.texts = response;
+// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
+  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
 
-   // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-   $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-     if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
-
-     auth.profile = response;
-     if ($ ('#profile').html ()) {
-       $ ('#username').html (response.username);
-       $ ('#email').val (response.email);
-       $ ('#birth_year').val (response.birth_year);
-       $ ('#gender').val (response.gender);
-       $ ('#country').val (response.country);
-       if (response.prog_experience) {
-         $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
-         if (response.prog_experience === 'yes') $ ('#languages').show ();
-       }
-       (response.experience_languages || []).map (function (lang) {
-          $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
-       });
-       $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class) {
-          return '<li>' + auth.entityify (Class.name) + '</li>';
-       }).join (''));
-       if (response.teacher_classes) {
-          $ ('#teacher_classes ul').html ((response.teacher_classes || []).map (function (Class) {
-             return '<li><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a> (' + Class.students.length + ' ' + window.auth.texts.students + ')</li>';
-          }).join (''));
-          $ ('#teacher_classes').show ();
-          $ ('#student_classes').hide ();
-       }
-     }
-   }).fail (function (response) {
-     if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
-   });
+  auth.profile = response;
+  if ($ ('#profile').html ()) {
+    $ ('#username').html (response.username);
+    $ ('#email').val (response.email);
+    $ ('#birth_year').val (response.birth_year);
+    $ ('#gender').val (response.gender);
+    $ ('#country').val (response.country);
+    if (response.prog_experience) {
+      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+      if (response.prog_experience === 'yes') $ ('#languages').show ();
+    }
+    (response.experience_languages || []).map (function (lang) {
+       $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
+    });
+    $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class) {
+       return '<li>' + auth.entityify (Class.name) + '</li>';
+    }).join (''));
+  }
+}).fail (function (response) {
+  if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
 });
 
 if (window.location.pathname === '/reset') {
@@ -328,7 +319,7 @@ if (window.location.pathname === '/signup') {
   }
 }
 
-$ ('#email, #email_repeat').on ('cut copy paste', function (e) {
+$ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
 });

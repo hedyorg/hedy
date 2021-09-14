@@ -24,9 +24,11 @@
             echo so your favorite color is...
 2:
     intro_text: |
-        In level 2 we learn something new. You can name a word with `is`.
+        In level 2 we learn something new. You can name a word with `is`. You can use name anywhere in your code and it will be replaced by Hedy, like this:
 
-        If you use the code `name is Hedy`, you can use name anywhere in your code and it will be replaced by Hedy.
+        ```name is Hedy
+        print Hello name
+        ```
 
         Note: `ask` has changed, you also save the answer with a name, like this:
 
@@ -101,6 +103,15 @@
 
          This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
 
+         ## Tip
+         Sometimes code with an `if` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `else` like this:
+         ```
+         name is ask 'what's your name?'
+         if name is Hedy print 'nice'
+         else print 'boo!'
+         ```
+
+
          ## Assignments are getting more and more difficult
 
          Also in level 4 the assignments in the tabs become more and more difficult. So, do them from left to right.
@@ -118,42 +129,6 @@
         demo_code: |-
             color is ask 'What is your favorite color?'
             if color is green print 'pretty!' else print 'meh'
-4-1:
-    start_code: |-
-        animals is dog, cat, bunny
-        animal is ask 'Which animal is your favourite?'
-        if animal in animals print 'Cool!' else print 'Meh'
-    intro_text: |
-        Now that you know how `if` works, let's see what else it can do! Say you want to know if someone likes the same animal as you, but you have more than one animal you like. You can use a list with your favourite animals, ask for someone's favourite animal and check with `in` if their animal is in your list of animals. The example code shows a program that does just that. 
-
-         ## Example Hedy Code
-         ```
-         animals is dog, cat, bunny
-         animal is ask 'Which animal is your favourite?'
-         if animal in animals print 'Cool!' else print 'Meh'
-         ```
-
-         This code prints Cool! if you enter dog, cat or bunny and Meh if you enter something else 
-
-         ## Assignments
-
-         The assignments are the same as in level 4. Try to see if you can use `in` to make even better programs!
-         
-    commands:
-    -   explanation: "Print exactly using quotation marks"
-        example: "Example: print 'Hello welcome to Hedy.'"
-        demo_code: "print 'Hello welcome to Hedy.'"
-    -   explanation: "Ask something with `ask`."
-        example: "Example: color is ask 'What is your favorite color?'"
-        demo_code: |-
-            color is ask 'What is your favorite color?'
-            print color ' is your favorite!'
-    -   explanation: "Compare your answer to a list with `if` and `in`"
-        example: "Example: if color in favourites print 'pretty!' else print 'meh'"
-        demo_code: |-
-            favourites is blue, green, red
-            color is ask 'What is your favorite color?'
-            if color in favourites print 'pretty!' else print 'meh'
 5:
     start_code: "repeat 3 times print 'Hedy is fun!'"
     intro_text: |
@@ -278,28 +253,6 @@
         explanation: "We replace `repeat` with `for` and add a range"
         example: "for counter in range 1 to 5"
         demo_code: "for counter in range 1 to 5\n    print counter"
-    -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-        example: "Example: answer is ask 'What is 5 plus 5?'"
-        demo_code: |-
-            answer is ask 'What is 5 plus 5?'
-            if answer is 10
-                print 'Well done!'
-                print 'Indeed, the answer was ' answer
-            else
-                print 'Oops!'
-                print 'The answer is 10'
-8-1:
-    start_code: "for counter is 1 to 5\n    print counter"
-    intro_text:
-        "`print` works just the same but the `repeat` is now replaced by `for`!
-        You can now write `for counter is 1 to 5` and use `counter` in your program.
-        Try it out to see what happens!
-        Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
-    commands:
-    -   name: "for loop"
-        explanation: "We replace `repeat` with `for` and add a range"
-        example: "for counter is 1 to 5"
-        demo_code: "for counter is 1 to 5\n    print counter"
     -   explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
         example: "Example: answer is ask 'What is 5 plus 5?'"
         demo_code: |-

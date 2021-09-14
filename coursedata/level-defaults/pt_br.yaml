@@ -205,11 +205,22 @@
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
     intro_text: |
-        Os comandos `ask` e `print` ainda funcionam da mesma forma. Mas `if` e `repeat` mudaram! Você agora pode executar grupos de códigos juntos, mas você terá que identar o código. Isso significa colocar espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha. ## Exemplo de código Hedy ``` repeat 5 times
+        Os comandos `ask` e `print` ainda funcionam da mesma forma. Mas `if` e `repeat` mudaram!
+        Você agora pode executar grupos de códigos juntos, mas você terá que identar o código.
+        Isso significa colocar espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha.
+
+        ## Exemplo de código Hedy
+        ```
+        repeat 5 times
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
         ```
-        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código. ## Exemplo de código Hedy ``` cor is ask 'Qual a sua cor favorita?' if cor is verde
+        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
+
+        ## Exemplo de código Hedy
+        ```
+        cor is ask 'Qual a sua cor favorita?'
+        if cor is verde
             repeat 3 times
                 print 'bonita!'
         else
@@ -244,5 +255,223 @@
             else
                 repeat 5 times
                     print 'não gostei'
-
-
+8:
+    start_code: |-
+        for contador in range 1 to 5
+            print contador
+    intro_text:
+        "O `print` continua funcionando do mesmo modo, mas `repeat` é substituído por `for`!
+        Agora dá para escrever `for contador in range 1 to 5` e usar `contador` no seu programa. Experimente para ver o que acontece!
+        Lembre-se de usar indentação depois dos comandos `for` e `if` (que significa começar uma frase com quatro espaços)"
+    commands:
+    -   name: "for loop"
+        explanation: "Trocamos `repeat` por `for` e acrescentamos uma faixa de valores"
+        example: "for contador in range 1 to 5"
+        demo_code: |-
+            for contador in range 1 to 5
+                print contador
+9:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Preparados ou não, aqui vou eu!'
+    intro_text: "Agora vamos mudar um pouco as coisas com a indentação. Cada vez que precisarmos de indentação, temos de colocar `:` na linha antes da indentação."
+    commands:
+    -   explanation: "Quando usamos um `for`, temos de colocar `:` após a instrução `for`!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 11:
+                print i
+            print 'Preparados ou não, aqui vou eu!'
+    -   explanation: "Precisamos fazer a mesma coisa para todas as instruções `if`."
+        example: "if cor is verde:'"
+        demo_code: |-
+            cor is verde
+            if cor is verde:
+                print 'A cor é verde.'
+            else:
+                print 'A cor não é verde.'
+    -   explanation: "Vamos mostrar um novo comando que pode ser usado: `elif`. `elif` significa \"else if\". Começamos por verificar se o `if` é verdadeiro, se não for o caso, verificamos em seguida o `elif`, e se esse também não for verdadeiro, avançamos para o `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a é 1'
+            elif a is 2:
+                print 'a é 2'
+            else:
+                print 'a não é 1 nem 2'
+10:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+                print 'Estamos na volta: ' i ' e contamos: ' j
+    intro_text: "A partir de agora, podemos repetir um ciclo mais vezes. No exemplo nós contamos até 5 por 3 vezes. Portanto, fazemos 3 voltas e contamos até 5 em todas elas."
+    commands:
+    -   explanation: "Este é um exemplo com a instrução `for`."
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                    print 'Estamos na volta: ' i ' e contamos: ' j
+    -   explanation: "Podemos fazer o mesmo com as instruções `if`."
+        demo_code: |-
+            cor is azul
+            segundacor is amarelo
+            if cor is azul:
+                if segundacor is amarelo:
+                    print 'Juntos fazemos verde!'
+11:
+    start_code: |-
+        idade is input('Quantos anos você tem?')
+        print('Então você já teve estas idades:')
+        for i in range(0, idade):
+            print(i)
+    intro_text: "Vamos utilizar parênteses e vamos mudar `ask`! Alteramos `ask` para `input`! Agora vamos usar parênteres em `print`, `input` e `for`."
+    commands:
+    -   explanation: "Vamos utilizar parênteses com `print` agora!"
+        example: "Por exemplo: print('Olá mundo!')"
+        demo_code: "print('Olá mundo!')"
+    -   explanation: "Removemos o `ask` a agora o chamamos de `input`. Também vamos passar a usar parênteses."
+        example: "Por exemplo: nome is input('Qual o seu nome?')"
+        demo_code: |-
+            nome is input('Qual o seu nome?')
+            print('Então o seu nome é ' nome)
+    -   explanation: "Agora colocamos os números entre parênteses nos ciclos `for`. for i in range (0, 10):"
+        example: "Por exemplo: for i in range(0, 10):"
+        demo_code: |-
+            for i in range(0, 10):
+                print(i)
+            print('Preparados ou não, aqui vou eu!')
+12:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        print(fruta)
+    intro_text: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
+    commands:
+    -   explanation: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
+        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print(fruta)
+    -   name: "Obtém um elemento da lista."
+        explanation: "Para obter um elemento da lista usamos [número] onde fruta[1] significa: obtenha a primeira fruta da lista!"
+        example: "Por exemplo: primeirafruta is fruta[1]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            primeirafruta is fruta[1]
+            print(primeirafruta)
+    -   name: "Obtém um elemento aleatório da lista."
+        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
+        example: "For example: randomfruit is fruit[random]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            qualquerfruta is fruta[random]
+            print(qualquerfruta)
+13:
+    start_code: |-
+        ainda_esta_aqui is Falso
+        resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
+        if resposta_ainda_esta_aqui is sim:
+            ainda_esta_aqui is Verdadeiro
+        if ainda_esta_aqui is Verdadeiro:
+            print('Olá!')
+        if ainda_esta_aqui is Falso:
+            print('Adeus!')
+    intro_text: "Estamos vendo como tornar uma variável `Verdadeiro` ou `Falso`. Você pode colocar uma variável como `Verdadeiro` ou `Falso`. Você pode usar isso para guardar uma determinada resposta."
+    commands:
+    -   name: "Exemplo"
+        explanation: "Neste exemplo, usamos `Verdadeiro` ou `Falso` para guardar a resposta a uma pergunta. Você pode responder 5 vezes. Se o resultado estiver correto, resposta_certa será `Verdadeiro`."
+        example: "resposta_certa is `Falso`"
+        demo_code: |-
+          for i in range(1, 5):
+              resposta_certa is Falso
+              resultado is input('Quanto é 5*5?')
+              if resultado is 25:
+                  resposta_certa is Verdadeiro
+              else:
+                  resposta_certa is Falso
+              if resposta_certa is Verdadeiro:
+                  print('Está certo!')
+              if resposta_certa is Falso:
+                  print('Está errado! ' 5-i ' tentativas restantes')
+14:
+    start_code: |-
+        ainda_esta_aqui is Falso
+        resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
+        if resposta_ainda_esta_aqui is sim:
+            ainda_esta_aqui is Verdadeiro
+        resultado is input('Quanto é 5*5?')
+        if ainda_esta_aqui is Verdadeiro and resultado is 25:
+            print('Você disse sim e respondeu corretamente!')
+    intro_text: "Agora vamos aprender `and` e `or`! Se você quiser verificar duas instruções, não é necessário usar dois `if` porque você pode usar `and` e `or`. Se você usar `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
+    commands:
+    -   name: "And"
+        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser verdadeiras."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+          resposta1 is input('Quanto é 3+2?')
+          resposta2 is input('Quanto é 2+2?')
+          if resposta1 is 5 and resposta2 is 4:
+              print('Ambas as respostas estão corretas!')
+          else:
+              print('Pelo menos uma resposta está errada!')
+    -   name: "Or"
+        explanation: "Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correta. Se ambas estiverem corretas, também não tem problema."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+          resposta1 is input('Quanto é 3+2?')
+          resposta2 is input('Quanto é 2+2?')
+          if resposta1 is 5 or resposta2 is 4:
+              print('Pelo menos uma resposta está correta!')
+          else:
+              print('Ambas as respostas estão erradas!')
+15:
+    start_code: |-
+        # Este é um programa que vai perguntar algumas questões de Matemática
+        for i in range(1, 10):
+            # Vamos perguntar pela tabuada do 5
+            resposta is input('Quanto é ' i ' vezes 5?')
+            # Verificamos se o resultado é igual ao nosso cálculo
+            resposta_certa is i * 5
+            if resposta is resposta_certa:
+                print(resposta ' está certo!')
+            else:
+                print('Está errado, a resposta devia ser: ' i*5)
+    intro_text: |-
+        Quando você estiver criando programas maiores, vai precisar
+        arranjar uma maneira de lembrar o que cada pedaço de código faz.
+        Usamos os comentários para isso. Um comentário se parece com isso:
+        ` # Isto é um comentário`. Tudo o que aparecer depois do # será
+        invisível para o código.
+    commands:
+    -   name: "Comentário"
+        explanation: "Podemos colocar comentários onde quisermos."
+        example: "# Isto é um comentário"
+        demo_code: |-
+            # Este programa escreve Olá!
+            # Este programa foi feito em Hedy
+            # Não faz mais nada além de escrever Olá!
+            print('Olá!')
+16:
+    start_code: |-
+        idade is input('Quantos anos você tem?')
+        if idade < 12:
+            print('Você é mais novo(a) do que eu!')
+        elif idade > 12:
+            print('Você é mais velho(a) do que eu!')
+    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
+    commands:
+    -   name: "Menor"
+        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
+        example: "Por exemplo: idade < 12"
+        demo_code: |-
+            idade is input('Quantos anos você tem?')
+            if idade < 12:
+                print('Você é mais novo(a) do que eu!')
+    -   name: "Maior"
+        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
+        example: "Por exemplo: idade > 12"
+        demo_code: |-
+            idade is input('Quantos anos você tem?')
+            if age > 12:
+                print('Você é mais velho(a) do que eu!')

@@ -82,7 +82,7 @@
     -   explanation: "Pergunto algo com `ask`."
         example: "Exemplo: cor is ask Qual é a tua cor favorita?"
         demo_code: |-
-            cor is ask Qual é a tua cor favorita?
+            cor is ask 'Qual é a tua cor favorita?'
             print cor ' é a tua favorita!'
 4:
     start_code: |-
@@ -171,12 +171,12 @@
     -   explanation: "Pergunta por um cálculo e verifica se está correcto."
         example: "Exemplo: resultado is ask Quanto é 10 mais 10?"
         demo_code: |-
-            resultado is ask Quanto é 10 mais 10?
+            resultado is ask 'Quanto é 10 mais 10?'
             if resultado is 20 print 'Sim!' else print 'Oops'
     -   explanation: "`repeat` e `if` juntos."
         example: "Exemplo: if produto is 50 repeat 3 times print 'Correcto!' else repeat 5 times print 'Errado!'"
         demo_code: |-
-            produto is ask Quanto é 10 vezes 5?
+            produto is ask 'Quanto é 10 vezes 5?'
             if produto is 50 repeat 3 times print 'Correcto!' else repeat 5 times print 'Errado!'
 7:
     start_code: |-
@@ -196,16 +196,16 @@
         ```
         Se juntares um `repeat` e um `if`, terás de indentar cada bloco. Observa o exemplo de código para mais detalhes!"
 
-         ## Exemplo de Código Hedy
-         ```
-         cor is ask Qual é a tua cor favorita?
-         if cor is verde
-             repeat 3 times
-                 print 'Linda!'
-         else
-             repeat 5 times
-                 print 'Não é assim tão bonita.'
-         ```
+        ## Exemplo de Código Hedy
+        ```
+        cor is ask 'Qual é a tua cor favorita?'
+        if cor is verde
+            repeat 3 times
+                print 'Linda!'
+        else
+            repeat 5 times
+                print 'Não é assim tão bonita.'
+        ```
 
     commands:
     -   explanation: "Escreve alguma coisa. Lembra-te de usar aspas simples para escreveres com exactidão."
@@ -214,45 +214,23 @@
     -   explanation: "Pergunta pelo resultado de uma soma e verfica se está correcto. Podemos agora escrever 2 linhas."
         example: "Example: answer is ask What is 5 plus 5?"
         demo_code: |-
-            resultado is ask Quanto é 5 mais 5?
-            if resultado is 10
-                print 'Muito bem!'
-                print 'De facto, a resposta é ' answer
-            else
-                print 'Oops!'
-                print 'A resposta certa é 10'
-    -   explanation: "`if` e `repeat` juntos."
-        example: "Exemplo: if cor is verde repeat 3 times print 'Linda!' else repeat 5 times print 'pff'"
-        demo_code: |-
-            cor is ask Qual é a tua cor favorita?
-            if cor is verde
-                repeat 3 times
-                    print 'Linda!'
-            else
-                repeat 5 times
-                    print 'pff'
-7-1:
-    start_code: "for counter is 1 to 5\n    print counter"
-    intro_text:
-        "`print` continua a funcionar igual, mas o `repeat` agora será substituído por `for`!
-        Agora podes escrever `for counter is 1 to 5` e usar `counter` no teu programa.
-        Experimenta, para observares o que acontece!
-        Lembra-te de usar a indentação a seguir às instruções `for` e `if` (Isto significa começar uma frase com quatro espaços)."
-    commands:
-    -   name: "Ciclo `for`"
-        explanation: "Substituímos `repeat` com `for` e acrescentamos um intervalo de valores."
-        example: "for counter is 1 to 5"
-        demo_code: "for counter is 1 to 5\n    print counter"
-    -   explanation: "Pergunta pelo resultado de uma soma e verifica se está correcta. Agora podes escrever em 2 linhas."
-        example: "Exemplo: resultado is ask Quanto é 5 mais 5?"
-        demo_code: |-
-            resultado is ask Quanto é 5 mais 5?
+            resultado is ask 'Quanto é 5 mais 5?'
             if resultado is 10
                 print 'Muito bem!'
                 print 'De facto, a resposta é ' resultado
             else
                 print 'Oops!'
                 print 'A resposta certa é 10'
+    -   explanation: "`if` e `repeat` juntos."
+        example: "Exemplo: if cor is verde repeat 3 times print 'Linda!' else repeat 5 times print 'pff'"
+        demo_code: |-
+            cor is ask 'Qual é a tua cor favorita?'
+            if cor is verde
+                repeat 3 times
+                    print 'Linda!'
+            else
+                repeat 5 times
+                    print 'pff'
 8:
     start_code: "for counter in range 1 to 5\n    print counter"
     intro_text:
@@ -267,7 +245,7 @@
     -   explanation: "Pergunta pelo resultado de uma soma e verifica se está correcto. Podes agora escrever em 2 linhas."
         example: "Exemplo: resultado is ask Quanto é 5 mais 5?"
         demo_code: |-
-            resultado is ask Quanto é 5 mais 5?
+            resultado is ask 'Quanto é 5 mais 5?'
             if resultado is 10
                 print 'Muito bem!'
                 print 'De facto, a resposta é ' resultado
@@ -328,7 +306,7 @@
     start_code: |-
         idade is input('Quantos anos tens?')
         print('Então já tivestes estas idades:')
-        for i in range(0, age):
+        for i in range(0, idade):
             print(i)
     intro_text: "Vamos utilizar parênteses curvos e vamos mudar `ask`! Vamos alterar `ask` para `input`! Com `print`, `input` e `for` vamos passar a usar agora parênteses curvos."
     commands:
@@ -374,8 +352,8 @@
 13:
     start_code: |-
         ainda_estas_aqui is Falso
-        ainda_estas_aqui is input('Ainda estás aqui? sim ou não?')
-        if ainda_estas_aqui is sim:
+        resposta_ainda_estas_aqui is input('Ainda estás aqui? sim ou não?')
+        if resposta_ainda_estas_aqui is sim:
             ainda_estas_aqui is Verdadeiro
         if ainda_estas_aqui is Verdadeiro:
             print('Olá!')
@@ -401,8 +379,8 @@
 14:
     start_code: |-
         ainda_estas_aqui is Falso
-        ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
-        if ainda_estas_aqui is sim:
+        resposta_ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
+        if resposta_ainda_estas_aqui is sim:
             ainda_estas_aqui is Verdadeiro
         resultado is input('Quanto é 5*5?')
         if ainda_estas_aqui is Verdadeiro and resultado is 25:
@@ -590,8 +568,8 @@
         explanation: "Se estamos a verificar se duas coisas são diferentes, usamos `!=`"
         example: "Por exemplo: 5+3 != 9"
         demo_code: |-
-            número = input('Não podes responder 5, que número é fixe?')
-            if getal != 5:
+            numero = input('Não podes responder 5, que número é fixe?')
+            if numero != 5:
                 print('Bom trabalho!')
             else:
                 print('Não podes responder 5!')
