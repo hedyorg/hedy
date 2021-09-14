@@ -4,7 +4,7 @@ print: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*
 ask: var _SPACE _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
 
 //in level 2, forward may also depend on a variable
-turtle: _FORWARD (_SPACE NUMBER | _SPACE textwithoutspaces)? -> forward | _TURN (_SPACE text)? -> turn
+turtle: _FORWARD (_SPACE (NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
 invalid_space: _SPACE text

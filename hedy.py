@@ -511,6 +511,10 @@ class ConvertToPython_2(ConvertToPython_1):
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
     def forward(self, args):
+        # no args received? default to 50
+        if len(args) == 0:
+            return "t.forward(50)"
+
         parameter = args[0]
         #if the parameter is a variable, print as is
         if parameter in self.lookup:
