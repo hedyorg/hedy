@@ -38,14 +38,20 @@ class LogRecord:
             end_rusage = resource.getrusage(resource.RUSAGE_SELF)
             user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime)
             sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime)
+            max_rss = end_rusage.ru_maxrss
+            inc_max_rss = max_rss - self.start_rusage.ru_maxrss
         else:
             user_ms = None
             sys_ms = None
+            max_rss = None
+            inc_max_rss = None
 
         self.set(
             end_time=dtfmt(end_time),
             user_ms=user_ms,
             sys_ms=sys_ms,
+            max_rss=max_rss,
+            inc_max_rss=inc_max_rss,
             duration_ms=ms_from_fsec(end_time - self.start_time))
 
         # There should be 0, but who knows
