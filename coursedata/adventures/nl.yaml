@@ -365,6 +365,73 @@ adventures:
                     turn hoek
                     forward 25
 
+            4:
+                story_text: |
+                    ## Tekenen maar
+                    In level 4 kun je met `if` een keuze maken. Bijvoorbeel tussen verschillende soorten figuren.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Figuren tekenen'
+                    figuur is ask 'Wil je een driehoek of een vierkant?'
+                    if figuur is driehoek hoek is 120 else hoek is 90
+                    turn hoek
+                    forward 25
+                    turn hoek
+                    forward 25
+                    turn hoek
+                    forward 25
+                    turn hoek
+                    forward 25
+                    ```
+                start_code: |
+                    print 'Figuren tekenen'
+                    hoek is 90
+                    turn hoek
+                    forward 25
+
+            5:
+                story_text: |
+                    ## Tekenen maar
+                    In level 5 kun je met `repeat` een regel code herhalen.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Figuren tekenen'
+                    repeat 3 times forward 10
+                    ```
+                start_code: |
+                    print 'Figuren tekenen'
+                    repeat 3 times forward 10
+
+            6:
+                story_text: |
+                    ## Tekenen maar
+                    In level 6 kun je gaan rekenen en kun je daarmee verschillende figuren tekenen.
+                    Misschien heb je op school al geleerd dat een heel rondje rond draaien 360 graden is. Zo niet, dan weet je het nu!
+                    Daarom gebruik je voor een vierkant ook 90 graden. 360 gedeeld door 4 is 90.
+                    Nu we met Hedy kunnen rekenen, kunnen we alle figuren tekenen die we maar willen!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    hoeken is ask 'hoeveel hoeken krijg dit figuur?'
+                    hoek is 360 / hoeken
+                    forward 50
+                    turn hoek
+                    forward 50
+                    turn hoek
+                    forward 50
+                    turn hoek
+                    forward 50
+                    turn hoek
+                    forward 50
+                    turn hoek
+                    forward 50
+                    turn hoek
+                    ```
+                start_code: |
+                    print 'Figuren tekenen'
+
     dishes:
         name: "Afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
@@ -1336,17 +1403,22 @@ adventures:
                 story_text: |
                     ## Vooruitblik
                     Na level 5 kun je regels code herhalen. Zo heb je bijvoorbeeld geleerd om in je restaurant aan meerdere mensen te vragen wat ze willen eten. 
-                    Wat je alleen nog niet kunt in level 5, is ook prijzen berekenen voor je restaurant. 
+                    Wat je alleen nog niet kunt in level 5, is rekenen.
+                    Bijvoorbeeld om prijzen te berekenen voor je restaurant, of precies uit te rekenen hoe de teken-schildpad moet lopen.
                     Zou het niet leuk zijn om precies te kunnen zeggen hoeveel de klanten moeten betalen, en stiekem een kortingscode toe te voegen voor jou en je vrienden? 
                     
-                    Vanaf level 6 kan dit wel, want in level 6 kun je rekenen met Hedy. Je kunt daar ook proberen om een tafelsommen game te programmeren (voor je broertje of zusje?). 
+                    Vanaf level 6 kan dit wel, want in level 6 kun je rekenen met Hedy. Je kunt daar ook proberen om een tafelsommen spel te programmeren (voor je broertje of zusje?).
                     Neem snel een kijkje in level 6!
                                  
                 start_code: "print 'Op naar het volgende level!'"
             6:
                 story_text: |
                     ## Vooruitblik
-                    In level 5 heb je met `repeat` al geleerd hoe je één regel code kunt herhalen. Maar soms is het wel zo fijn als je niet maar een regel kunt herhalen maar een heel stukje code. 
+                    In level 5 heb je met `repeat` al geleerd hoe je één regel code kunt herhalen.
+
+                    Maar soms is het wel fijn als je niet maar een regel kunt herhalen maar een heel stukje code.
+                    Want nu moest je wel een hoop knippen en plakken in sommige programma's.
+
                     In regel 7 wordt dat mogelijk gemaakt door stukjes code bij elkaar een groepje te maken, door ze te beginnen met een aantal spaties. Zo'n groepje regels kun je dan in één keer herhalen met repeat. 
                     
                     ```
