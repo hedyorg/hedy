@@ -47,7 +47,7 @@
         print hallo naam
         ```
 
-        En de `ask` is in level 2 veranderd, het antwoord sla je ook op met een naam:
+        De `ask` is in level 2 ook veranderd, het antwoord sla je ook op met een naam:
 
         ```
         antwoord is ask Hoe heet jij?
@@ -162,6 +162,12 @@
         demo_code: |-
             kleur is ask 'Wat is je lievelingskleur?'
             if kleur is groen print 'mooi!' else print 'niet zo mooi'
+    -   name: "if met turtle"
+        explanation: "Een keuze maken met `if`"
+        example: "Bijvoorbeeld: if antwoord is ver forward 100 else forward 5"
+        demo_code: |-
+            antwoord is ask 'Hoe ver moet ik lopen?'
+            if antwoord is ver forward 100 else forward 100
 5:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: |
@@ -192,15 +198,14 @@
             if kleur is groen print 'mooi!' else print 'niet zo mooi'
     -   name: "repeat"
         explanation: "Iets herhalen met `repeat`."
-        example: "Bijvoorbeeld: repeat 3 times print 'Hey die is leuk!'"
+        example: "Bijvoorbeeld: repeat 3 times print 'Hedy is leuk!'"
         demo_code: |-
-            repeat 3 times print 'Hey die is leuk!'
-    -   name: "`repeat` en `if`"
-        explanation: "`repeat` en `if` samen"
-        example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+            repeat 3 times print 'Hedy is leuk!'
+    -   name: "repeat - turtle"
+        explanation: "Een regel code herhalen met `repeat`."
+        example: "Bijvoorbeeld: repeat 3 times forward 10"
         demo_code: |-
-            kleur is ask 'Wat is je lievelingskleur?'
-            if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'
+            repeat 3 times forward 10
 6:
     start_code: "print '5 keer 5 is ' 5 * 5"
     intro_text: |
@@ -231,12 +236,13 @@
         demo_code: |-
             antwoord is ask 'Hoeveel is 10 plus 10?'
             if antwoord is 20 print 'Goedzo!' else print 'Foutje'
-    -   name: "repeat"
-        explanation: "Herhalen en `if` samen"
-        example: "Bijvoorbeeld: if antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'"
+    -   name: "`ask` en `if` turtle"
+        explanation: "De gebruiker vragen hoeveel hoeken hij wil"
+        example: "Bijvoorbeeld: hoeken is ask 'hoeveel hoeken krijgt dit figuur?'"
         demo_code: |-
-            antwoord is ask 'Hoeveel is 5 keer 10'
-            if antwoord is 50 repeat 3 times print 'goedzo!' else repeat 5 times print 'niet goed!'
+            hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
+            hoek is 360 / hoeken
+            forward 50
 7:
     start_code: |-
         repeat 5 times

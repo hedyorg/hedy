@@ -160,6 +160,12 @@
         demo_code: |-
             color is ask 'What is your favorite color?'
             if color is green print 'pretty!' else print 'meh'
+    -   name: "if with turtle"
+        explanation: "Make a choice with `if`"
+        example: "Bijvoorbeeld: if answer is far forward 100 else forward 5"
+        demo_code: |-
+            answer is ask 'How far should I walk?'
+            if answer is far forward 100 else forward 100
 5:
     start_code: "repeat 3 times print 'Hedy is fun!'"
     intro_text: |
@@ -186,12 +192,11 @@
         demo_code: |-
             color is ask 'What is your favorite color?'
             if color is green print 'pretty!' else print 'meh'
-    -   name: "repeat and if"
-        explanation: "`repeat` and `if` combined"
-        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            color is ask 'What is your favorite color?'
-            if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
+            repeat 3 times forward 10
 6:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
@@ -216,17 +221,18 @@
         example: "Example: print '5 times 5 is ' 5 * 5"
         demo_code: "print '5 times 5 is ' 5 * 5"
     -   name: "ask"
-        explanation: "Ask for a calculation and check that it is correct."
+        explanation: "Ask for a calculation and check whether it is correct."
         example: "Example: answer is ask 'What is 10 plus 10?'"
         demo_code: |-
             answer is ask 'What is 10 plus 10?'
             if answer is 20 print 'Yes!' else print 'Oops'
-    -   name: "repeat and if"
-        explanation: "`repeat` and `if` combined"
-        example: "Example: if product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            product is ask 'What is 10 times 5?'
-            if product is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 7:
     start_code: |-
         repeat 5 times
