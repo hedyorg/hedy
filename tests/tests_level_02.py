@@ -105,11 +105,29 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected_output, run_code(result))
 
   def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
+    code = textwrap.dedent("""\
+    forward 50
+    turn
+    forward 100""")
+    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
     t.right(90)
     t.forward(100)""")
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
+  def test_transpile_forward_without_argument(self):
+    code = textwrap.dedent("""\
+    hoek is 90
+    turn hoek
+    forward """)
+    result = hedy.transpile(code, self.level)
+    expected = textwrap.dedent("""\
+    hoek = '90'
+    t.right(hoek)
+    t.forward(50)""")
+
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -425,6 +443,23 @@ class TestsLevel2(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
+
+  def test_random_turn(self):
+    code = textwrap.dedent("""\
+    print Turtle race
+    directions is 10, 100, 360
+    turn directions at random""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Turtle'+' '+'race')
+    directions = ['10', '100', '360']
+    t.right(random.choice(directions))""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
 
   # test for 297 (not easy to fix, not giving prio now)
   # def test_print_space_after_excl(self):
