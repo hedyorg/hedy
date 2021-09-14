@@ -476,15 +476,22 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
+
+
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
-        if hash_needed(name):
-            return hash_var(name)
-        else:
-            return name
+        return process_hash(name)
     else:
         return f"'{name}'"
+
+
+def process_hash(name):
+    if hash_needed(name):
+        return hash_var(name)
+    else:
+        return name
+
 
 class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
@@ -495,8 +502,11 @@ class ConvertToPython_2(ConvertToPython_1):
         return hash_var(name)
         # return "_" + name if name in reserved_words else name
     def print(self, args):
+        argument_string = ""
+
         all_arguments_converted = []
         i = 0
+
 
         for argument in args:
             # escape quotes if kids accidentally use them at level 2
@@ -506,10 +516,19 @@ class ConvertToPython_2(ConvertToPython_1):
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
             else:
-                space = "+' '"
-            all_arguments_converted.append(process_variable(argument, self.lookup) + space)
+                space = " "
+
+            if argument in self.lookup:
+                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += space
+            else:
+                argument_string += argument
+                argument_string += space
+
             i = i + 1
-        return 'print(' + '+'.join(all_arguments_converted) + ')'
+
+        return f"print(f'{argument_string}')"
+
     def forward(self, args):
         # no args received? default to 50
         if len(args) == 0:

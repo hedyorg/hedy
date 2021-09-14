@@ -55,6 +55,19 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_print_list(self):
+    code = textwrap.dedent("""\
+    plaatsen is een stad, een  dorp, een strand 
+    print test plaatsen""")
+
+    result = hedy.transpile(code, self.level)
+    expected = textwrap.dedent("""\
+    plaatsen = ['een stad', 'een dorp', 'een strand ']
+    print('test'+' '+plaatsen)""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
 
   def test_transpile_ask(self):
     result = hedy.transpile("kleur is ask wat is je lievelingskleur?", self.level)
