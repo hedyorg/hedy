@@ -124,8 +124,8 @@ class TestsLevel2(unittest.TestCase):
     forward """)
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
-    hoek = 90
-    t.right(90)
+    hoek = '90'
+    t.right(hoek)
     t.forward(50)""")
 
     self.assertEqual(expected, result.code)
