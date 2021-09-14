@@ -430,7 +430,7 @@ def programs_page (request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         g.lang = lang = requested_lang()
@@ -449,7 +449,7 @@ def get_quiz_start(level):
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
 def get_quiz(level_source, question_nr, attempt):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
@@ -492,7 +492,7 @@ def get_quiz(level_source, question_nr, attempt):
 
 @app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Get the chosen option from the request form with radio buttons
@@ -516,9 +516,9 @@ def submit_answer(level_source, question_nr, attempt):
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
             if session.get('total_score'):
-                session['total_score'] = session.get('total_score') +(config['quiz-max-attempts'] -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
+                session['total_score'] = session.get('total_score') +(config.get('quiz-max-attempts') -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
             else:
-                session['total_score'] = (config['quiz-max-attempts'] - session.get('quiz-attempt')  )* 0.5 * question['question_score']
+                session['total_score'] = (config.get('quiz-max-attempts') - session.get('quiz-attempt')  )* 0.5 * question['question_score']
             if session.get('correct_answer'):
                 session['correct_answer'] = session.get('correct_answer') + 1
             else:
@@ -537,7 +537,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif session.get('quiz-attempt')  < config['quiz-max-attempts']:
+            elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
                 question = quiz_data['questions'][q_nr - 1].get(q_nr)
                 # Convert the indices to the corresponding characters
                 char_array = []
@@ -553,7 +553,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif session.get('quiz-attempt')  > config['quiz-max-attempts']:
+            elif session.get('quiz-attempt') > config.get('quiz-max-attempts'):
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,
