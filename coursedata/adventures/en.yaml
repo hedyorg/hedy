@@ -331,7 +331,34 @@ adventures:
                     ```
                 start_code: |
                     print 'Drawing figures'
+            7:
+                story_text: |
+                    ## Let's draw
+                    Now that we can repeat several lines, we can make figures more easily.
+                    We only have to set the angle once and then use that variable in the `repeat`.
 
+                    ## Example Hedy code
+                    ```
+                    angle is 90
+                    repeat 10 times
+                        turn angle
+                        forward 50
+                    ```
+
+                    ## Interaction
+                    Also, we can now improve the program that draws different figures.
+                    Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
+
+                    ## Example Hedy code
+                    ```
+                    angles is ask 'How many angles should I draw?'
+                    angle is 360 / angles
+                    repeat angle times
+                        turn __
+                        forward __
+                    ```
+                start_code: |
+                    hoeken is ask 'How many angles should I draw?'
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"

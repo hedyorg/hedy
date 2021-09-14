@@ -259,18 +259,7 @@
             print 'Hallo allemaal'
             print 'Dit wordt allemaal 5 keer herhaald'
         ```
-        Als je een `repeat` en een `if` samen gebruikt moet je steeds opnieuw inspringen.
 
-        ## Voorbeeld Hedy code
-        ```
-        kleur is ask 'Wat is je lievelingskleur?'
-        if kleur is groen
-            repeat 3 times
-                print 'mooi!'
-        else
-            repeat 5 times
-                print 'niet zo mooi'
-        ```
     commands:
     -   name: "print"
         explanation: "Iets letterlijk printen met `print`."
@@ -287,17 +276,13 @@
             else
                 print 'Foutje'
                 print 'Het antwoord moest zijn 20'
-    -   name: "`if` en `repeat` samen"
-        explanation: "`repeat` en `if` samen"
-        example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
+    -   name: "`repeat` met de turtle"
+        explanation: "Meerdere regels samen herhalen"
+        example: "Bijvoorbeeld: een vierkant maken"
         demo_code: |-
-            kleur is ask 'Wat is je lievelingskleur?'
-            if kleur is groen
-                repeat 3 times
-                    print 'mooi!'
-            else
-                repeat 5 times
-                    print 'niet zo mooi'
+            repeat 4 times
+                turn 90
+                forward 50
 8:
     start_code: |-
         for i in range 1 to 10

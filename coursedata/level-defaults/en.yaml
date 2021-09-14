@@ -240,8 +240,8 @@
             print 'This will be printed 5 times'
     intro_text: |
         `ask` and `print` still work as you know them. But `if` and `repeat` have changed!
-        You can now execute groups of code together, but you will have to indent the code.
-        That means putting four spaces at the beginning of the line. This also holds when you just want to create a block of one line.
+        You can now execute groups of code together, but you will have to *indent* the code.
+        That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
 
         ## Example Hedy code
         ```
@@ -249,18 +249,6 @@
             print 'Hello everyone'
             print 'This is all repeated 5 times'
         ```
-        If you combine a repeat and an if, you will need to indent each block. Have a look at the example code for more details!"
-
-         ## Example Hedy code
-         ```
-         color is ask 'What is your favorite color?'
-         if color is green
-             repeat 3 times
-                 print 'beautiful!'
-         else
-             repeat 5 times
-                 print 'not so beautiful'
-         ```
     commands:
     -   name: "print"
         explanation: "Print something. Remember to use a quotation mark for literal printing."
@@ -277,17 +265,13 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
-    -   name: "repeat and if"
-        explanation: "`if` and `repeat` combined"
-        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+    -   name: "`repeat` with turtle"
+        explanation: "Repeat multiple lines"
+        example: "Example: draw a square"
         demo_code: |-
-            color is ask 'What is your favorite color?'
-            if color is green
-                repeat 3 times
-                    print 'pretty!'
-            else
-                repeat 5 times
-                    print 'meh'
+            repeat 4 times
+                turn 90
+                forward 50
 8:
     start_code: |-
         for counter in range 1 to 5

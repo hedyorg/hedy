@@ -432,6 +432,35 @@ adventures:
                 start_code: |
                     print 'Figuren tekenen'
 
+            7:
+                story_text: |
+                    ## Tekenen maar
+                    Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.
+                    Want we hoeven maar één keer in te stellen wat de hoek is en dan steeds die variabele gebruiken in de `repeat`.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    hoek is 90
+                    repeat 10 times
+                        turn hoek
+                        forward 50
+                    ```
+
+                    ## Interactie
+                    Ook kunnen we nu het programma verbeteren dat verschillende figuren tekent.
+                    Week jij hoe ver de schildpad hier moet draaien? Maak de code af en je kunt iedere veelhoek tekenen.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
+                    hoek is 360 / hoeken
+                    repeat hoeken times
+                        turn __
+                        forward __
+                    ```
+                start_code: |
+                    hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
+
     dishes:
         name: "Afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
