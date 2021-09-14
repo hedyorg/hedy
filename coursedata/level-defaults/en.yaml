@@ -59,7 +59,7 @@
     start_code: "print hello world!"
     commands:
     -   name: "is"
-        explanation: "Give a word a name to use in the program using `is`"
+        explanation: "Give a word a name to use in the program using `is`. You can choose the name yourself."
         example: "Example: name is Hedy."
         demo_code: |-
             name is Hedy
@@ -70,8 +70,16 @@
         demo_code: |-
             color is ask What is your favorite color?
             print color is your favorite!
-    -   explanation: "Choose a random word from a group with `at` and `random`"
-        example: "Example: animals is dog, cat, kangaroo."
+    -   explanation: "Give a number a name using `is`. You can choose the name yourself."
+        example: "Example: angle is 90"
+        demo_code: |-
+            angle is 90
+            turn angle
+            forward 100
+        name: is - turtle
+    -   name: choose_random
+        explanation: Choose a random word from a group with `at` and `random`
+        example: 'Example: animals is dog, cat, kangaroo.'
         demo_code: |-
             animals is dog, cat, kangaroo
             print animals at random
@@ -275,16 +283,17 @@
                 repeat 5 times
                     print 'meh'
 8:
-    start_code: "for counter in range 1 to 5\n    print counter"
-    intro_text:
-        "`print` works just the same but the `repeat` is now replaced by `for`!
-        You can now write `for counter in range 1 to 5` and use `counter` in your program. Try it out to see what happens!
-        Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
+    start_code: |-
+        for counter in range 1 to 5
+            print counter
+    intro_text: "`print` works just the same but the `repeat` is now replaced by `for`! You can now write `for counter in range 1 to 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
     commands:
     -   name: "for loop"
         explanation: "We replace `repeat` with `for` and add a range"
         example: "for counter in range 1 to 5"
-        demo_code: "for counter in range 1 to 5\n    print counter"
+        demo_code: |-
+            for counter in range 1 to 5
+                print counter
     -   name: "ask"
         explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
         example: "Example: answer is ask 'What is 5 plus 5?'"
@@ -418,17 +427,17 @@
         explanation: "In this example, we use `True` and `False` to keep track of the answer of a question. You can answer 5 times. If the answer is correct, good_answer will be `True`."
         example: "good_answer is `False`"
         demo_code: |-
-          for i in range(1, 5):
-              good_answer is False
-              answer is input('What is 5*5')
-              if answer is 25:
-                  good_answer is True
-              else:
-                  good_answer is False
-              if good_answer is True:
-                  print('That is correct!')
-              if good_answer is False:
-                  print('That is wrong! ' 5-i ' attempts left')
+            for i in range(1, 5):
+                good_answer is False
+                answer is input('What is 5*5')
+                if answer is 25:
+                    good_answer is True
+                else:
+                    good_answer is False
+                if good_answer is True:
+                    print('That is correct!')
+                if good_answer is False:
+                    print('That is wrong! ' 5-i ' attempts left')
 14:
     start_code: |-
         you_are_still_here is False
@@ -444,22 +453,22 @@
         explanation: "Both statements (left and right of the `and`) need to be correct."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-          answer1 is input('What is 3+2?')
-          answer2 is input('What is 2+2?')
-          if answer1 is 5 and answer2 is 4:
-              print('Both answers are correct!')
-          else:
-              print('At least one answer is wrong!')
+            answer1 is input('What is 3+2?')
+            answer2 is input('What is 2+2?')
+            if answer1 is 5 and answer2 is 4:
+                print('Both answers are correct!')
+            else:
+                print('At least one answer is wrong!')
     -   name: "Or"
         explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-          answer1 is input('What is 3+2?')
-          answer2 is input('What is 2+2?')
-          if answer1 is 5 or answer2 is 4:
-              print('At least one answer is correct!')
-          else:
-              print('Both answers are wrong!')
+            answer1 is input('What is 3+2?')
+            answer2 is input('What is 2+2?')
+            if answer1 is 5 or answer2 is 4:
+                print('At least one answer is correct!')
+            else:
+                print('Both answers are wrong!')
 15:
     start_code: |-
         # This is a program that is going to ask a couple of math questions
@@ -472,7 +481,9 @@
                 print(answer ' is correct')
             else:
                 print('That is wrong, it is supposed to be: ' i*5)
-    intro_text: "When you are making bigger programs, you will need to find a way to remember what every piece of code does. We use comments for this. A comment looks the following:\n ` # This is a comment`. Everything after the # will be invisible for the code."
+    intro_text: |-
+        When you are making bigger programs, you will need to find a way to remember what every piece of code does. We use comments for this. A comment looks the following:
+         ` # This is a comment`. Everything after the # will be invisible for the code.
     commands:
     -   name: "Comment"
         explanation: "We can place comments wherever we want."
