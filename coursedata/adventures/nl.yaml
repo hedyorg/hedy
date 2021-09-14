@@ -305,8 +305,6 @@ adventures:
                     forward 50
                     turn right
                     ```
-
-
                 start_code: "forward 50\nturn left"
             2:
                 story_text: |
@@ -315,8 +313,8 @@ adventures:
                     In level 2 kan zijn neus alle kanten op kijken.
 
                     Een kwartslag draaien doe je met het getal 90. Dat noemen we graden. Een heel rondje is 360 graden.
-                    Kun jij een ander figuur maken door de hoek te veranderen? Een driekhoek of een rondje?
-                    Je moet de schildpad dan misschien ook meer stapjes laten zetten.
+                    Kun jij een ander figuur maken door de hoek te veranderen? Een driehoek of een rondje?
+                    Je moet de schildpad dan misschien ook vaker vooruit laten gaan met `forward`.
 
                     ## Voorbeeld Hedy code
 
@@ -329,19 +327,16 @@ adventures:
                     forward 25
                     ```
 
-                    ## Interactie
-
-                    Je kunt je tekening ook *interactief* maken. Dat betekent dat je met de `ask` om invoer vraagt.
-                    Met onderstaande code vraag je de schildpad eerst om één keer te draaien. Bijv. naar links met 90 of naar rechts met -90. Daarna vraag je hoever de schildpad moet lopen. Kopieer de code een paar keer om de schildpad meerdere keren te laten lopen.
+                    ## Zoekende schildpad
+                    Ook bij je teken-schildpad kun je random gebruiken! Dan loopt hij steeds een ander pad.
+                    Kies met `at random` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
 
                     ## Voorbeeld Hedy code
 
                     ```
-                    print Schildpaddenrace
-                    richting is ask Hoeveel graden?
-                    turn richting
-                    afstand is ask Hoe ver moet ik lopen?
-                    forward afstand
+                    hoek is 10, 50, 90, 150, 250
+                    turn hoek at random
+                    forward 25
                     ```
 
                 start_code: |

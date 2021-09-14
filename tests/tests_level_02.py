@@ -105,11 +105,29 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected_output, run_code(result))
 
   def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
+    code = textwrap.dedent("""\
+    forward 50
+    turn
+    forward 100""")
+    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
     t.right(90)
     t.forward(100)""")
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
+
+  def test_transpile_forward_without_argument(self):
+    code = textwrap.dedent("""\
+    hoek is 90
+    turn hoek
+    forward """)
+    result = hedy.transpile(code, self.level)
+    expected = textwrap.dedent("""\
+    hoek = 90
+    t.right(90)
+    t.forward(50)""")
+
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
