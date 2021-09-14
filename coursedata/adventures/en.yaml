@@ -227,41 +227,111 @@ adventures:
                     forward 25
                     ```
 
-                    ## Interaction
-
-                    In level 2 you can also make an interactive drawing by combining with `ask`.
-                    With this code you ask the user to tell the turtle how many degrees to turn. It then ask the turtle how far to go. You can copy this code to make the turtle move farther.
-
-                    ## Example Hedy code
-                    ```
-                    print Turtle race
-                    angle is ask Where to turn?
-                    turn angle
-                    distance is ask How far?
-                    forward distance
-                    ```
-
-                start_code: "forward 50\nturn left"
-            3:
-                story_text: |
-                    ## Drawing
-                    In level 3 you need to use quotation marks with `print` and `ask`. Also when you are using the turtle.
+                    ## Searching turtle
+                    You can also use `random` with the drawing turtle. A random choice makes the turtle walk a different path each time. 
+                    Use `at random` to choose a value from a list. You can copy and paste lines 2 and 3 so create a longer random path.
 
                     ## Example Hedy code
+
                     ```
-                    print 'Turtle race'
-                    direction is ask 'How many degrees to turn?'
-                    turn direction
-                    distance is ask 'How far?'
-                    forward distance
+                    angles is 10, 50, 90, 150, 250
+                    turn angles at random
+                    forward 25
                     ```
 
                 start_code: |
-                    print 'Schildpaddenrace!'
-                    richting is ask 'welke kant op?'
-                    turn richting
-                    afstand is ask 'hoe ver moet ik lopen?'
-                    forward afstand
+                    print Turtle race!
+                    hoek is 90
+                    turn hoek
+                    forward 25
+            3:
+                story_text: |
+                    ## Let's draw
+                    In level 3 you have to use quotation marks with `print` and `ask`. Also when drawing!
+                    
+                    ## Example Hedy code
+                    ```
+                    print 'Drawing figures'
+                    angle is 90
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    ```
+
+                start_code: |
+                    print 'Drawing figures'
+                    angle is 90
+                    turn angle
+                    forward 25
+
+            4:
+                story_text: |
+                    ## Let's draw
+                    In level 4 you can make a choice with `if`. For example between different types of figures.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Drawing Figures'
+                    figure is ask 'Do you want a square or a triangle?'
+                    if figure is triangle angle is 120 else angle is 90
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    turn angle
+                    forward 25
+                    ```
+                start_code: |
+                    print 'Drawing Figures'
+                    figure is ask 'Do you want a square or a triangle?'
+                    if figure is triangle angle is 120 else angle is 90
+                    turn angle
+                    forward 25
+            5:
+                story_text: |
+                    ## Let's draw
+                    In level 5 you can repeat one line of code with `repeat`.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Draw figures'
+                    repeat 3 times forward 10
+                    ```
+                start_code: |
+                    print 'Draw figures'
+                    repeat 3 times forward 10
+
+            6:
+                story_text: |
+                    ## Let's draw
+                    In level 6 you can use calculations to draw different figures.
+                    You may have learned in school that turning a full circle is 360 degrees. If not, now you know!
+                    That's why you also use 90 degrees for a square. 360 divided by 4 is 90.
+                    Now that we can do math with Hedy, we can draw all the figures we want!
+
+                    ## Example Hedy code
+                    ```
+                    angles is ask 'How many angles do you want?'
+                    angle is 360 / angles
+                    forward 50
+                    turn angle
+                    forward 50
+                    turn angle
+                    forward 50
+                    turn angle
+                    forward 50
+                    turn angle
+                    forward 50
+                    turn angle
+                    forward 50
+                    turn angle
+                    ```
+                start_code: |
+                    print 'Drawing figures'
+
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
@@ -808,7 +878,7 @@ adventures:
                     ## Restaurant
                     We can use the `for i in range 1 to 5` to print the orders from multiple customers in an orderly manner. 
                     
-                    ## Voorbeeld Hedy code
+                    ## Example Hedy code
                     ```
                     print 'Welcome to Restaurant Hedy!'
                     people is ask 'For how many people would you like to order?'
