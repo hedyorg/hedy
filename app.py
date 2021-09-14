@@ -512,7 +512,8 @@ def submit_answer(level_source, question_nr, attempt):
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
         index_option = ord(option.split("-")[1]) - 65
-
+        print(option.split("-")[1] )
+        session['chosen_option'] =option.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
             if session.get('total_score'):
@@ -549,6 +550,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        correct=session.get('correct_answer'),
                                        attempt= session.get('quiz-attempt') ,
                                        questionFalse='false',
+                                       chosen_option = session.get('chosen_option'),
                                        char_array=char_array,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
