@@ -27,10 +27,10 @@
   </table>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"<span class="text-blue-500">{{class_info.link}}</span></a></p>
   <br>
-  <button class="green-btn" onclick="window.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
-  <br> <br>
-  <button class="green-btn" onclick="window.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-  <br> <br>
-  <button class="red-btn" onclick="window.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+  <button class="green-btn mr-4" onclick="window.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
+  <button class="green-btn mr-4" onclick="window.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
+  <button class="red-btn mr-4" onclick="window.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+  <br><br>
+  <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
 </div>
 {% endblock %}
