@@ -17,6 +17,7 @@ if __name__ == '__main__':
     os.chdir(path.dirname(path.abspath(__file__)))
     RunHedy(
         filename=glob.glob('input/*.hedy'),
-        output='output_programs',
         report='output_report.csv',
         check='output_report.csv').run()
+
+
