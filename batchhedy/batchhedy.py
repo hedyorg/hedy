@@ -18,6 +18,9 @@ from pathlib import Path
 from time import perf_counter
 from typing import Optional, List, Tuple, ClassVar
 import csv
+import os
+from os import path
+import glob
 
 # Hedy lib
 import hedy
@@ -27,8 +30,6 @@ from docopt import docopt
 from pydantic import BaseModel, ValidationError, FilePath
 from lark.exceptions import GrammarError, UnexpectedEOF
 from lazy.lazy import lazy
-
-print_infos = False  # do we print to the console?
 
 class RunHedy(BaseModel):
     """ For each file in `filename`, do a timed transpilling from Hedy code
@@ -60,13 +61,9 @@ class RunHedy(BaseModel):
     filename: List[FilePath]
     report: Optional[Path]
     check: Optional[FilePath]
-    level: Optional[List[int]]
     output: Optional[Path]
-    help: Optional[bool]       # no used, but needed for CLI interface
-
     jobs: ClassVar[None]
     checkdata: ClassVar[None]
-
 
 
     def run(self):
@@ -78,41 +75,12 @@ class RunHedy(BaseModel):
         # for display
         maxfilelength = max(len(str(f.stem)) for f in self.filename)
 
-        # For table display
-        sep = "  "
-        header = sep.join([
-            f"{'filename':{maxfilelength}}",
-            f"{'lev.':>3}",
-            f"{'loc':>4}",
-            f"{'0loc':>4}",
-            f"{'tokens':>6}",
-            f"{'time':>14}",
-            f"{'time/tokens':>14}",
-            f"{'pyloc':>5}",
-            f"{'error msg':>10}",
-        ])
+        #skip empty programs
+        jobs = [j for j in self.jobs if not is_empty(j.code)]
 
-        if self.checkdata is not None:
-            header = sep.join([
-                header,
-                f"{'time diff.':>9}",
-                f"{'error msg':>10}",
-            ])
-
-        # This will print any errors or warning before the header
-        jobs = [j for j in self.jobs if j.code != '']
-
-        if print_infos: print(header)
         number_of_error_programs = 0
 
         for job in jobs:
-            # Basic info on the file
-            if print_infos:
-                print(sep.join([f"{str(job.filename.stem):{maxfilelength}}",
-                                f"{job.level:3}",
-                                f"{job.src_loc:4}",
-                                f"{job.src_loc_empty:4}",
-                                f"{job.src_tokens:6}", ]), end=sep)
 
             job.transpile()
 
@@ -127,9 +95,6 @@ class RunHedy(BaseModel):
             # Run info
             infos = [
                 f"{job.transpile_time:13.3f}s",
-                (f"{'-':>14}" if job.src_tokens == 0 else
-                    f"{job.transpile_time/job.src_tokens:13.3f}s"),
-                f"{job.py_loc:5}",
                 f"{job.error_msg[:10]:10}"]
 
             if self.checkdata is not None:
@@ -155,47 +120,38 @@ class RunHedy(BaseModel):
                     job.error_change = f"{'loc different':15}"
                     infos.append(job.error_change)
 
-            if print_infos: print(sep.join(infos))
-
-        # Reprint header for easy read
-        if print_infos: (header)
 
         if self.report is not None:
             self._save_report()
 
-        if print_infos:
         # print run informations
-            runtimes = [r.transpile_time for r in self.jobs]
-            maxvalue = max(runtimes)
-            minvalue = min(runtimes)
-            maxfilename = self.jobs[runtimes.index(maxvalue)].filename
+        runtimes = [r.transpile_time for r in self.jobs]
+        maxvalue = max(runtimes)
+        minvalue = min(runtimes)
+        maxfilename = self.jobs[runtimes.index(maxvalue)].filename
 
-            if self.checkdata is None:
-                # Simple run
-                print(f"Total transpile time: {sum(runtimes):10f}s ")
-                print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
-            else:
-                # Compare with previous data
-                previous_total_time = sum(float(
-                    self.checkdata[job.filename.stem]["transpile time"]
-                    ) for job in self.jobs)
-                diff = 100 * sum(runtimes) / previous_total_time
-                print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
+        if self.checkdata is None:
+            # Simple run
+            print(f"Total transpile time: {sum(runtimes):10f}s ")
+            print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
+        else:
+            # Compare with previous data
+            previous_total_time = sum(float(
+                self.checkdata[job.filename.stem]["transpile time"]
+                ) for job in self.jobs)
+            diff = 100 * sum(runtimes) / previous_total_time
+            print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
-            print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
-            print(f"Min transpile time:   {minvalue:10f}s")
-            print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
+        print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
+        print(f"Min transpile time:   {minvalue:10f}s")
+        print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
 
-        print('Done!')
 
     @lazy
     def jobs(self):
         """ The list of jobs to be run """
         # Create object list
         jobs = [TranspileJob(f) for f in self.filename]
-
-        if self.level and len(self.level) > 0:
-            jobs = [r for r in jobs if r.level in self.level]
 
         # Remove files with invalid level
         invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
@@ -228,13 +184,10 @@ class RunHedy(BaseModel):
             writer = csv.DictWriter(csvfile, fieldnames=[
                 "filename",
                 "level",
+                "code",
                 "transpile time",
                 "error",
                 "error message",
-                "src_loc",
-                "src_loc_empty",
-                "src_tokens",
-                "py_loc",
                 "error_change"
             ])
 
@@ -243,13 +196,10 @@ class RunHedy(BaseModel):
                 writer.writerow({
                     "filename": str(job.filename.stem),
                     "level": job.level,
+                    "code": job.code,
                     "transpile time": job.transpile_time,
                     "error": job.error,
                     "error message": job.error_msg,
-                    "src_loc": job.src_loc,
-                    "src_loc_empty": job.src_loc_empty,
-                    "src_tokens": job.src_tokens,
-                    "py_loc": job.py_loc,
                     "error_change": job.error_change,
                 })
 
@@ -342,6 +292,7 @@ class TranspileJob:
         except hedy.HedyException as e:
             self.error = True
             self.error_msg = str(e)
+            print(self.error_msg)
         except UnexpectedEOF as e:
             self.error = True
             self.error_msg = str(e)
@@ -370,15 +321,6 @@ class TranspileJob:
         """ Empty Line of code in the Hedy file """
         return len([line for line in self.code.split("\n") if len(line) == 0])
 
-    @lazy
-    def src_tokens(self) -> int:
-        """ Tokens in the Hedy file """
-        return (len(self.code.split()))
-
-    @lazy
-    def py_loc(self) -> int:
-        """ Lines of code in the Python file """
-        return len(self.pycode.split("\n"))
 
 
 def extract_level_from_code(code: str) -> Tuple[int, str]:
@@ -399,15 +341,14 @@ def extract_level_from_code(code: str) -> Tuple[int, str]:
                 pass
     return None, code
 
+def is_empty(program):
+    all_lines = program.split('\n')
+    return all(line == '' for line in all_lines)
 
-if __name__ == "__main__":
-    try:
-        RunHedy(**{
-            # Remove unwanted characters from the parsed args
-            "".join([k for k in key if k not in "-<>"]): value
-            for key, value in docopt(__doc__).items()
-        }).run()
-        exit(0)
-    except ValidationError as e:
-        print(e)
-        exit(1)
+if __name__ == '__main__':
+    os.chdir(path.dirname(path.abspath(__file__)))
+    RunHedy(
+        filename=glob.glob('../../input_one/*.hedy'),
+        # check='output_report.csv',
+        report='output_report_one.csv'
+        ).run()
