@@ -2,21 +2,13 @@
   "TableName": "QuizAttempt",
   "KeySchema": [
     {
-      "AttributeName": "QuizAttemptId",
+      "AttributeName": "quizAttemptId",
       "KeyType": "HASH"
-    },
-    {
-      "AttributeName": "QuizLevel",
-      "KeyType": "RANGE"
     }
   ],
   "AttributeDefinitions": [
     {
-      "AttributeName": "QuizAttemptId",
-      "AttributeType": "S"
-    },
-    {
-      "AttributeName": "QuizLevel",
+      "AttributeName": "quizAttemptId",
       "AttributeType": "S"
     }
   ],

@@ -485,8 +485,8 @@ def get_quiz(level_source, question_nr, attempt):
             quiz_attempt_id = uuid.uuid4().hex
             session["quiz-attempt-id"] = quiz_attempt_id
             stored_quiz_attempt = {
-                'QuizAttemptId': quiz_attempt_id,
-                'QuizLevel': level_source,
+                'quizAttemptId': quiz_attempt_id,
+                'quizLevel': level_source,
                 'answerIds': session.get('list-of-answer-ids'),
                 'completedAt': timems(),
                 'isCorrectAnswer': False,
@@ -518,7 +518,7 @@ def get_result_info_quiz(level_source):
         g.prefix = '/hedy'
 
     level =  int(level_source)-1
-    attempt_data = DATABASE.get_quiz_attempt(session.get('quiz-attempt-id'), str(level))
+    attempt_data = DATABASE.get_quiz_attempt(session.get('quiz-attempt-id'))
     print('attempt data,' , attempt_data)
     return render_template('results-quiz.html', attempt_data = attempt_data, quiz=quiz_data, level=int(level_source)-1,  menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
@@ -577,8 +577,8 @@ def submit_answer(level_source, question_nr, attempt):
                 session['list-of-answer-ids'] = list_answers
                 print(session.get('list-of-answer-ids'))
                 stored_quiz_answer = {
-                    'QuizAnswerId': answer_id,
-                    'QuizQuestionText': question['question_text'],
+                    'quizAnswerId': answer_id,
+                    'quizQuestionText': question['question_text'],
                     'option': option,
                     'isCorrectAnswer': False,
                     'points': session.get('total_score'),
@@ -614,8 +614,8 @@ def submit_answer(level_source, question_nr, attempt):
                 session['list-of-answer-ids'] = list_answers
                 print(session.get('list-of-answer-ids'))
                 stored_quiz_answer = {
-                    'QuizAnswerId': answer_id,
-                    'QuizQuestionText': question['question_text'],
+                    'quizAnswerId': answer_id,
+                    'quizQuestionText': question['question_text'],
                     'option': option,
                     'isCorrectAnswer': False,
                     'points': session.get('total_score'),
@@ -643,8 +643,8 @@ def submit_answer(level_source, question_nr, attempt):
                 session['list-of-answer-ids'] = list_answers
                 print(session.get('list-of-answer-ids'))
                 stored_quiz_answer = {
-                    'QuizAnswerId': answer_id,
-                    'QuizQuestionText': question['question_text'],
+                    'quizAnswerId': answer_id,
+                    'quizQuestionText': question['question_text'],
                     'option': option,
                     'isCorrectAnswer': False,
                     'points': session.get('total_score'),

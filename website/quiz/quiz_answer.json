@@ -2,21 +2,13 @@
   "TableName": "QuizAnswer",
   "KeySchema": [
     {
-      "AttributeName": "QuizAnswerId",
+      "AttributeName": "quizAnswerId",
       "KeyType": "HASH"
-    },
-    {
-      "AttributeName": "QuizQuestionText",
-      "KeyType": "RANGE"
     }
   ],
   "AttributeDefinitions": [
     {
-      "AttributeName": "QuizAnswerId",
-      "AttributeType": "S"
-    },
-    {
-      "AttributeName": "QuizQuestionText",
+      "AttributeName": "quizAnswerId",
       "AttributeType": "S"
     }
   ],

@@ -33,9 +33,8 @@ class Database:
 
         table = dynamodb.Table('QuizAnswer')
         response = table.get_item(
-            TableName='QuizAnswer',
             Key={
-                'QuizAnswerId': {'S': answer_id},
+                'quizAnswerId': answer_id,
             }
         )
         print(response['Item'])
@@ -49,9 +48,9 @@ class Database:
         data = json.loads(json.dumps(quiz_attempt), parse_float=Decimal)
         return table.put_item(Item=data)
 
-    def get_quiz_attempt(self, quiz_attempt_id,level, dynamodb=None):
+    def get_quiz_attempt(self, quiz_attempt_id, dynamodb=None):
 
-        print("id, ", quiz_attempt_id, "level", level)
+        print("id, ", quiz_attempt_id)
         if not dynamodb:
             dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
 
@@ -59,8 +58,7 @@ class Database:
 
         response = table.get_item(
             Key={
-                'QuizAttemptId':  quiz_attempt_id,
-                'QuizLevel': level
+                'quizAttemptId':  quiz_attempt_id,
             }
         )
 
