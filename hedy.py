@@ -570,7 +570,8 @@ class ConvertToPython_3(ConvertToPython_2):
             return "print(" + '+'.join(args) + ')'
         else:
             # I would like to raise normally but that is caught by the transformer :(
-            return f"HedyException:{args[0]}"
+            first_unquoted_var = unquoted_args[0]
+            return f"HedyException:{first_unquoted_var}"
             #raise HedyException('Var Undefined', name=args[0])
 
     def print_nq(self, args):
