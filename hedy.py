@@ -476,15 +476,22 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
+
+
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
-        if hash_needed(name):
-            return hash_var(name)
-        else:
-            return name
+        return process_hash(name)
     else:
         return f"'{name}'"
+
+
+def process_hash(name):
+    if hash_needed(name):
+        return hash_var(name)
+    else:
+        return name
+
 
 class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
@@ -495,7 +502,7 @@ class ConvertToPython_2(ConvertToPython_1):
         return hash_var(name)
         # return "_" + name if name in reserved_words else name
     def print(self, args):
-        all_arguments_converted = []
+        argument_string = ""
         i = 0
 
         for argument in args:
@@ -506,10 +513,21 @@ class ConvertToPython_2(ConvertToPython_1):
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
             else:
-                space = "+' '"
-            all_arguments_converted.append(process_variable(argument, self.lookup) + space)
+                space = " "
+
+            if argument in self.lookup:
+                #variables are placed in {} in the f string
+                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += space
+            else:
+                #strings are written regularly
+                argument_string += argument
+                argument_string += space
+
             i = i + 1
-        return 'print(' + '+'.join(all_arguments_converted) + ')'
+
+        return f"print(f'{argument_string}')"
+
     def forward(self, args):
         # no args received? default to 50
         if len(args) == 0:
@@ -552,6 +570,20 @@ class ConvertToPython_2(ConvertToPython_1):
 def quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
+def make_f_string(args, lookup):
+    argument_string = ''
+    for argument in args:
+        if argument in lookup:
+            # variables are placed in {} in the f string
+            argument_string += "{" + process_hash(argument) + "}"
+        else:
+            # strings are written regularly
+            # however we no longer need their quptes in the f-string
+            # the quotes are only left on to check if they are there.
+            argument_string += argument.replace("'",'')
+
+    return f"print(f'{argument_string}')"
+
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 class ConvertToPython_3(ConvertToPython_2):
 
@@ -567,7 +599,7 @@ class ConvertToPython_3(ConvertToPython_2):
         unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
         #we can print if all arguments are quoted OR they are all variables
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            return "print(" + '+'.join(args) + ')'
+            return make_f_string(args, self.lookup)
         else:
             # I would like to raise normally but that is caught by the transformer :(
             first_unquoted_var = unquoted_args[0]
@@ -627,6 +659,7 @@ class ConvertToPython_5(ConvertToPython_4):
 {indent(command)}"""
 
 class ConvertToPython_6(ConvertToPython_5):
+    #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
         #force all to be printed as strings (since there can not be int arguments)

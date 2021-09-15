@@ -48,7 +48,7 @@ class TestsLevel3(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('hallo wereld!')""")
+    print(f'hallo wereld!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -83,7 +83,7 @@ class TestsLevel3(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet ,')""")
+    print(f'ik heet ,')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -98,7 +98,7 @@ class TestsLevel3(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet \\'')""")
+    print(f'ik heet \\')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -112,7 +112,7 @@ class TestsLevel3(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     voor_naam = 'Hedy'
-    print('ik heet ')""")
+    print(f'ik heet ')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -126,9 +126,9 @@ class TestsLevel3(unittest.TestCase):
 
     result = hedy.transpile(code, self.level)
 
-    expected = textwrap.dedent(f"""\
-    {hashed_var} = 'Hedy'
-    print('ik heet '+{hashed_var})""")
+    expected = textwrap.dedent("""\
+    vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'
+    print(f'ik heet {vd55669822f1a8cf72ec1911e462a54eb}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -141,7 +141,7 @@ class TestsLevel3(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('Cuál es tu color favorito?')""")
+    print(f'Cuál es tu color favorito?')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -156,7 +156,7 @@ class TestsLevel3(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(dieren[1])""")
+    print(f'{dieren[1]}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -167,17 +167,17 @@ class TestsLevel3(unittest.TestCase):
 
     code = textwrap.dedent("""\
     dieren is Hond, Kat, Kangoeroe
-    print dieren at random""")
+    print 'hallo ' dieren at random""")
 
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(random.choice(dieren))""")
+    print(f'hallo {random.choice(dieren)}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+    self.assertIn(run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
@@ -199,7 +199,7 @@ class TestsLevel3(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('ik heet henk')""")
+    print(f'ik heet henk')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -214,7 +214,7 @@ class TestsLevel3(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet'+naam)""")
+    print(f'ik heet{naam}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -229,7 +229,7 @@ class TestsLevel3(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     kleur = input('wat is je lievelingskleur?')
-    print('jouw lievelingskleur is dus'+kleur+'!')""")
+    print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -246,7 +246,7 @@ class TestsLevel3(unittest.TestCase):
     expected = textwrap.dedent("""\
     ding = 'kleur'
     kleur = input('Wat is je lievelings'+ding)
-    print('Jouw favoriet is dus '+kleur)""")
+    print(f'Jouw favoriet is dus {kleur}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -314,14 +314,14 @@ class TestsLevel3(unittest.TestCase):
 
   def test_two_spaces_after_print(self):
 
-    max_level = 10
+    max_level = 5
     code = "print        'hallo!'"
 
     for level in range(self.level, max_level+1):
       result = hedy.transpile(code, level)
 
       expected = textwrap.dedent("""\
-      print('hallo!')""")
+      print(f'hallo!')""")
 
       print(f'{self.test_name()} level {level}')
       self.assertEqual(expected, result.code)
@@ -344,6 +344,7 @@ class TestsLevel3(unittest.TestCase):
 
   def test_bengali_assign_and_use(self):
     hashed_var = hedy.hash_var("নাম")
+    self.assertEqual('veb9b5c786e8cde0910df4197f630ee75', hashed_var)
 
     code = textwrap.dedent("""\
     নাম is হেডি
@@ -351,14 +352,15 @@ class TestsLevel3(unittest.TestCase):
 
     result = hedy.transpile(code, self.level)
 
-    expected = textwrap.dedent(f"""\
-    {hashed_var} = 'হেডি'
-    print('আমার নাম is '+{hashed_var})""")
+    expected = textwrap.dedent("""\
+    veb9b5c786e8cde0910df4197f630ee75 = 'হেডি'
+    print(f'আমার নাম is {veb9b5c786e8cde0910df4197f630ee75}')""")
 
     self.assertEqual(expected, result.code)
 
   def test_chinese_assign_and_use(self):
     hashed_var = hedy.hash_var("你好世界")
+    self.assertEqual('v65396ee4aad0b4f17aacd1c6112ee364', hashed_var)
 
     code = textwrap.dedent("""\
     你好世界 is 你好世界
@@ -366,9 +368,9 @@ class TestsLevel3(unittest.TestCase):
 
     result = hedy.transpile(code, self.level)
 
-    expected = textwrap.dedent(f"""\
-    {hashed_var} = '你好世界'
-    print({hashed_var})""")
+    expected = textwrap.dedent("""\
+    v65396ee4aad0b4f17aacd1c6112ee364 = '你好世界'
+    print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
 
     self.assertEqual(expected, result.code)
 
