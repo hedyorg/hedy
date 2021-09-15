@@ -1,19 +1,3 @@
-#!/bin/env python3
-""" Usage: batchhedy.py [--help] [--level <level>]... [--output <output>]
-         [--report <csvfile>] [--check <checkfile>] <filename>...
-
-Batch transpiling of Hedy files with option to check the results and
-benchmark it. If <output> is set the resulting python files
-will be written in that directory if not the result will be print.
-
--h, --help                           Show this help
--l <level>, --level <level>          Only do those levels
--o <output>, --output <output>       Directory were to output python files
--r <csvfile, --report <csvfile>      Write report info in <csvfile>
--c <checkfile>, --check <checkfile>  Compare with a previous report
-"""
-
-# Python standard lib
 from pathlib import Path
 from time import perf_counter
 from typing import Optional, List, Tuple, ClassVar
@@ -26,8 +10,7 @@ import glob
 import hedy
 
 # External lib
-from docopt import docopt
-from pydantic import BaseModel, ValidationError, FilePath
+from pydantic import BaseModel, FilePath
 from lark.exceptions import GrammarError, UnexpectedEOF
 from lazy.lazy import lazy
 
@@ -35,45 +18,23 @@ class RunHedy(BaseModel):
     """ For each file in `filename`, do a timed transpilling from Hedy code
     to Python code.
 
-    After the object creating, use RunHedy.run(self) to do the transpiling.
-
     Arguments:
-        filename: List[FilePath]
-            A list of .hedy file to transpile/test. The first line need to
-            be the Hedy level in the format "# level X" or "# level = X" (case
-            insensitive) where 'X' is a valid level.
-        report: Optional[Path]
-            If present and a valid path, will save information of the
-            transpilings (timing, error, line of code,...) in csv format.
-        check: Optional[FilePath]
-            If present and a valid csv file from a previous run, will
-            compare the results from this run with the one from the file and
-            report any change in error and the time difference.
-        level: Optional[List[int]]
-            If present, only file with Hedy level in `level` will be
-            transpiled/tested.
         output: Optional[Path]
             If present, the resulting python code will be save in the
             direction `output`. The name of the python files will be the same
             than the Hedy files, with the extension changed from .hedy to .py.
             If the path doesn't exist, it will be created.
     """
-    filename: List[FilePath]
-    report: Optional[Path]
-    check: Optional[FilePath]
+
     output: Optional[Path]
     jobs: ClassVar[None]
     checkdata: ClassVar[None]
-
 
     def run(self):
         """ Execute runhedy with the validated parameters """
 
         if self.output:
             self.output.mkdir(parents=True, exist_ok=True)
-
-        # for display
-        maxfilelength = max(len(str(f.stem)) for f in self.filename)
 
         #skip empty programs
         jobs = [j for j in self.jobs if not is_empty(j.code)]
@@ -99,7 +60,7 @@ class RunHedy(BaseModel):
 
             if self.checkdata is not None:
                 # Compare with previous run
-                chkjob = self.checkdata[job.filename.stem]
+                chkjob = self.checkdata[job.filename]
                 chktime = float(chkjob["transpile time"])
                 diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
                 infos.append(f"{diff:1.0f}%")
@@ -121,8 +82,8 @@ class RunHedy(BaseModel):
                     infos.append(job.error_change)
 
 
-        if self.report is not None:
-            self._save_report()
+        if report is not None:
+            _save_report(self.jobs)
 
         # print run informations
         runtimes = [r.transpile_time for r in self.jobs]
@@ -137,7 +98,7 @@ class RunHedy(BaseModel):
         else:
             # Compare with previous data
             previous_total_time = sum(float(
-                self.checkdata[job.filename.stem]["transpile time"]
+                self.checkdata[job.filename]["transpile time"]
                 ) for job in self.jobs)
             diff = 100 * sum(runtimes) / previous_total_time
             print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
@@ -151,7 +112,7 @@ class RunHedy(BaseModel):
     def jobs(self):
         """ The list of jobs to be run """
         # Create object list
-        jobs = [TranspileJob(f) for f in self.filename]
+        jobs = [TranspileJob(f) for f in filenames_list]
 
         # Remove files with invalid level
         invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
@@ -165,11 +126,11 @@ class RunHedy(BaseModel):
     @lazy
     def checkdata(self):
         """ Data of a previous run. Return None is self.check is not set."""
-        if self.check is None:
+        if check is None:
             return None
 
         comparedata = {}
-        with open(self.check, newline="") as csvfile:
+        with open(check, newline="") as csvfile:
             reader = csv.reader(csvfile)
             fields = None
             for row in reader:
@@ -179,29 +140,6 @@ class RunHedy(BaseModel):
                     comparedata[row[0]] = ({k: v for k, v in zip(fields, row)})
         return comparedata
 
-    def _save_report(self, file=None):
-        with open(file or self.report, "w", newline="") as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=[
-                "filename",
-                "level",
-                "code",
-                "transpile time",
-                "error",
-                "error message",
-                "error_change"
-            ])
-
-            writer.writeheader()
-            for job in self.jobs:
-                writer.writerow({
-                    "filename": str(job.filename.stem),
-                    "level": job.level,
-                    "code": job.code,
-                    "transpile time": job.transpile_time,
-                    "error": job.error,
-                    "error message": job.error_msg,
-                    "error_change": job.error_change,
-                })
 
 
 class TranspileJob:
@@ -345,10 +283,34 @@ def is_empty(program):
     all_lines = program.split('\n')
     return all(line == '' for line in all_lines)
 
+def _save_report(jobs):
+        with open(report, "w", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=[
+                "filename",
+                "level",
+                "code",
+                "transpile time",
+                "error",
+                "error message",
+                "error_change"
+            ])
+
+            writer.writeheader()
+            for job in jobs:
+                writer.writerow({
+                    "filename": job.filename,
+                    "level": job.level,
+                    "code": job.code,
+                    "transpile time": job.transpile_time,
+                    "error": job.error,
+                    "error message": job.error_msg,
+                    "error_change": job.error_change,
+                })
+
+filenames_list = glob.glob('../../input_one/*.hedy')
+report = 'output_report_one.csv'
+check = 'output_report_one.csv'
+
 if __name__ == '__main__':
     os.chdir(path.dirname(path.abspath(__file__)))
-    RunHedy(
-        filename=glob.glob('../../input_one/*.hedy'),
-        # check='output_report.csv',
-        report='output_report_one.csv'
-        ).run()
+    RunHedy().run()
