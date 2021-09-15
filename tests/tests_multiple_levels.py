@@ -3,6 +3,7 @@ import hedy
 import sys
 import io
 from contextlib import contextmanager
+import textwrap
 
 #
 # This code let's us capture std out to also execute the generated Python
@@ -36,8 +37,14 @@ class TestsForMultipleLevels(unittest.TestCase):
         min_level = 2
         max_level = 5
         for i in range(min_level, max_level + 1):
-            result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
-            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(random.choice(dieren))")
+            code = textwrap.dedent("""\
+            dieren is Hond, Kat, Kangoeroe
+            print dieren at random""")
+            result = hedy.transpile(code, i)
+            expected = textwrap.dedent("""\
+            dieren = ['Hond', 'Kat', 'Kangoeroe']
+            print(f'{random.choice(dieren)}')""")
+            self.assertEqual(expected, result.code)
             self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
             print('Passed at level ', i)
 
