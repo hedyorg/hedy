@@ -603,3 +603,26 @@
                 print('Está certo!')
             else:
                 print('Não, está errado!')
+21:
+    start_code: |-
+        pais = input('Onde você mora?')
+        if pais != Brasil:
+            print('Legal!')
+        else:
+            print('Também moro no Brasil!')
+    intro_text: |-
+        Vamos aprender um novo conceito, o `!=` . A ! significa não e
+        o = significa igual, portanto, `!=` significa que não é igual.
+        Por exemplo, 5 != 4.
+    commands:
+    -   name: "Não é igual"
+        explanation: |-
+            Se estamos verificando se duas coisas são diferentes,
+            usamos `!=`
+        example: "Por exemplo: 5+3 != 9"
+        demo_code: |-
+            numero = input('Você não pode responder 5, qual é um bom número?')
+            if numero != 5:
+                print('Bom trabalho!')
+            else:
+                print('Você não pode responder 5!')
