@@ -13,7 +13,9 @@ If you want to see what the core team will work on next, you can follow [our Pro
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ------------
 
-The best way to help out Hedy is to help us translate hedy [into more languages](TRANSLATING.md)! At this point we only support left to right languages, but we are working on right to left too.
+A great and simple way to help out Hedy is to help us translate Hedy [into more languages](TRANSLATING.md)! You do not need programming experience or knowledge to translate Hedy.
+
+Note that at this point we only support left to right languages, but we are working on right to left too.
 
 I have an idea for what you should build!
 ------------
