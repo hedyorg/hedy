@@ -511,6 +511,10 @@ class ConvertToPython_2(ConvertToPython_1):
             i = i + 1
         return 'print(' + '+'.join(all_arguments_converted) + ')'
     def forward(self, args):
+        # no args received? default to 50
+        if len(args) == 0:
+            return "t.forward(50)"
+
         parameter = args[0]
         #if the parameter is a variable, print as is
         if parameter in self.lookup:
@@ -566,7 +570,8 @@ class ConvertToPython_3(ConvertToPython_2):
             return "print(" + '+'.join(args) + ')'
         else:
             # I would like to raise normally but that is caught by the transformer :(
-            return f"HedyException:{args[0]}"
+            first_unquoted_var = unquoted_args[0]
+            return f"HedyException:{first_unquoted_var}"
             #raise HedyException('Var Undefined', name=args[0])
 
     def print_nq(self, args):
