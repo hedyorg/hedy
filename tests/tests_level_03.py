@@ -289,6 +289,17 @@ class TestsLevel3(unittest.TestCase):
 
       print(f'{self.test_name()} level {level}')
 
+  def test_var_undefined_error_message(self):
+
+    code = textwrap.dedent("""\
+      naam is Hedy
+      print 'ik heet ' name""")
+
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual('Var Undefined', context.exception.args[0])
+    self.assertEqual('name', context.exception.arguments['name'])
 
 
   def test_transpile_issue_375(self):
