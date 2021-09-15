@@ -5,8 +5,17 @@ Hedy is a gradual programming language aimed at teaching programming and teachin
 
 The latest version of Hedy can be found at [hedycode.com](https://hedycode.com).
 
+What's next?
+------------
+
+If you want to see what the core team will work on next, you can follow [our Project](https://github.com/Felienne/hedy/projects/5)
+
+Živjo Hedy! Привет Hedy! !Hedy سلام
+------------
+
+The best way to help out Hedy is to help us translate hedy [into more languages](TRANSLATING.md)! At this point we only support left to right languages, but we are working on right to left too.
 
 Want to help improve Hedy?
 ------------
 
-See how we can use your help here: [CONTRIBUTING.md](CONTRIBUTING.md). Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)
+We would love to have a few more programmers join the Hedy core team! See how we can use your help here: [CONTRIBUTING.md](CONTRIBUTING.md). You can also join the [maintainers mailinglist](mailto:hedy-maintainers+subscribe@googlegroups.com) to stay up to date on things we are working on and considering. Full documentation including our design and design principles can be found [DESIGN.md](DESIGN.md)
