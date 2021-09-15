@@ -254,12 +254,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
       }
-      $ ('#okbox').show ();
-      $ ('#okbox .caption').html (window.auth.texts.save_success);
-      $ ('#okbox .details').html (window.auth.texts.save_success_detail);
-      setTimeout (function () {
-         $ ('#okbox').hide ();
-      }, 2000);
+      window.modal.alert (window.auth.texts.save_success_detail, 4000);
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
       // The name of the program might have been changed by the server, so we use the name stated by the server.
@@ -302,18 +297,9 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if ($ ('#okbox') && $ ('#okbox').length) {
-        $ ('#okbox').show ();
-        $ ('#okbox .caption').html (window.auth.texts.save_success);
-        $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-        // If we're sharing the program, copy the link to the clipboard.
-        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-      }
-      else {
-        // If we're sharing the program, copy the link to the clipboard.
-        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-        window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-      }
+      // If we're sharing the program, copy the link to the clipboard.
+      if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
+      window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail, 4000);
       if (reload) setTimeout (function () {location.reload ()}, 1000);
     }).fail(function(err) {
       console.error(err);
@@ -353,7 +339,7 @@ window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
      document.getSelection ().removeAllRanges ();
      document.getSelection ().addRange (selected);
   }
-  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard);
+  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard, 4000);
 }
 
 /**
@@ -618,7 +604,7 @@ function buildUrl(url, params) {
 })();
 
 window.create_class = function create_class() {
-  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
+  window.modal.prompt (window.auth.texts.class_name_prompt, '', function (class_name) {
 
     $.ajax({
       type: 'POST',
@@ -638,7 +624,7 @@ window.create_class = function create_class() {
 }
 
 window.rename_class = function rename_class(id) {
-  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
+  window.modal.prompt (window.auth.texts.class_name_prompt, '', function (class_name) {
 
     $.ajax({
       type: 'PUT',

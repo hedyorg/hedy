@@ -16,8 +16,8 @@ from batchhedy import RunHedy
 if __name__ == '__main__':
     os.chdir(path.dirname(path.abspath(__file__)))
     RunHedy(
-        filename=glob.glob('input/*.hedy'),
-        report='output_report.csv',
-        check='output_report.csv').run()
-
+        filename=glob.glob('../../input/*.hedy'),
+        check='output_report.csv',
+        report='output_report.csv'
+        ).run()
 
