@@ -28,6 +28,7 @@ from pydantic import BaseModel, ValidationError, FilePath
 from lark.exceptions import GrammarError, UnexpectedEOF
 from lazy.lazy import lazy
 
+print_infos = False  # do we print to the console?
 
 class RunHedy(BaseModel):
     """ For each file in `filename`, do a timed transpilling from Hedy code
@@ -66,6 +67,8 @@ class RunHedy(BaseModel):
     jobs: ClassVar[None]
     checkdata: ClassVar[None]
 
+
+
     def run(self):
         """ Execute runhedy with the validated parameters """
 
@@ -97,18 +100,19 @@ class RunHedy(BaseModel):
             ])
 
         # This will print any errors or warning before the header
-        jobs = self.jobs
+        jobs = [j for j in self.jobs if j.code != '']
 
-        print(header)
+        if print_infos: print(header)
         number_of_error_programs = 0
 
         for job in jobs:
             # Basic info on the file
-            print(sep.join([f"{str(job.filename.stem):{maxfilelength}}",
-                            f"{job.level:3}",
-                            f"{job.src_loc:4}",
-                            f"{job.src_loc_empty:4}",
-                            f"{job.src_tokens:6}", ]), end=sep)
+            if print_infos:
+                print(sep.join([f"{str(job.filename.stem):{maxfilelength}}",
+                                f"{job.level:3}",
+                                f"{job.src_loc:4}",
+                                f"{job.src_loc_empty:4}",
+                                f"{job.src_tokens:6}", ]), end=sep)
 
             job.transpile()
 
@@ -122,9 +126,9 @@ class RunHedy(BaseModel):
 
             # Run info
             infos = [
-                f"{job.transpile_time:13.8f}s",
+                f"{job.transpile_time:13.3f}s",
                 (f"{'-':>14}" if job.src_tokens == 0 else
-                    f"{job.transpile_time/job.src_tokens:13.8f}s"),
+                    f"{job.transpile_time/job.src_tokens:13.3f}s"),
                 f"{job.py_loc:5}",
                 f"{job.error_msg[:10]:10}"]
 
@@ -132,51 +136,57 @@ class RunHedy(BaseModel):
                 # Compare with previous run
                 chkjob = self.checkdata[job.filename.stem]
                 chktime = float(chkjob["transpile time"])
-                diff = 100 * job.transpile_time / chktime
-                infos.append(f"{diff:9.2f}%")
+                diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
+                infos.append(f"{diff:1.0f}%")
 
                 if (job.error is True) and (chkjob["error"] == "False"):
-                    infos.append(f"{'no error->error':15}")
+                    job.error_change = f"{'no error->error':15}"
+                    infos.append(job.error_change)
                 elif (job.error is True) and (chkjob["error"] == "True"):
                     # only check the first line, args position change
                     if (job.error_msg.splitlines()[0] !=
                             chkjob["error message"].splitlines()[0]):
-                        infos.append(f"{'error diff.':15}")
+                        job.error_change = f"{'error diff.':15}"
+                        infos.append(job.error_change)
                 elif (job.error is False) and (chkjob["error"] == "True"):
-                    infos.append(f"{'error->no error':15}")
+                    job.error_change = f"{'error->no error':15}"
+                    infos.append(job.error_change)
                 elif job.py_loc != int(chkjob["py_loc"]):
-                    infos.append(f"{'loc different':15}")
+                    job.error_change = f"{'loc different':15}"
+                    infos.append(job.error_change)
 
-            print(sep.join(infos))
+            if print_infos: print(sep.join(infos))
 
         # Reprint header for easy read
-        print(header)
+        if print_infos: (header)
 
         if self.report is not None:
             self._save_report()
 
+        if print_infos:
         # print run informations
-        runtimes = [r.transpile_time for r in self.jobs]
-        maxvalue = max(runtimes)
-        minvalue = min(runtimes)
-        maxfilename = self.jobs[runtimes.index(maxvalue)].filename
+            runtimes = [r.transpile_time for r in self.jobs]
+            maxvalue = max(runtimes)
+            minvalue = min(runtimes)
+            maxfilename = self.jobs[runtimes.index(maxvalue)].filename
 
-        if self.checkdata is None:
-            # Simple run
-            print(f"Total transpile time: {sum(runtimes):10f}s ")
-            print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
-        else:
-            # Compare with previous data
-            previous_total_time = sum(float(
-                self.checkdata[job.filename.stem]["transpile time"]
-                ) for job in self.jobs)
-            diff = 100 * sum(runtimes) / previous_total_time
-            print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
+            if self.checkdata is None:
+                # Simple run
+                print(f"Total transpile time: {sum(runtimes):10f}s ")
+                print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
+            else:
+                # Compare with previous data
+                previous_total_time = sum(float(
+                    self.checkdata[job.filename.stem]["transpile time"]
+                    ) for job in self.jobs)
+                diff = 100 * sum(runtimes) / previous_total_time
+                print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
-        print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
-        print(f"Min transpile time:   {minvalue:10f}s")
-        print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
+            print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
+            print(f"Min transpile time:   {minvalue:10f}s")
+            print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
 
+        print('Done!')
 
     @lazy
     def jobs(self):
@@ -225,13 +235,14 @@ class RunHedy(BaseModel):
                 "src_loc_empty",
                 "src_tokens",
                 "py_loc",
+                "error_change"
             ])
 
             writer.writeheader()
             for job in self.jobs:
                 writer.writerow({
                     "filename": str(job.filename.stem),
-                    "level": self.level,
+                    "level": job.level,
                     "transpile time": job.transpile_time,
                     "error": job.error,
                     "error message": job.error_msg,
@@ -239,6 +250,7 @@ class RunHedy(BaseModel):
                     "src_loc_empty": job.src_loc_empty,
                     "src_tokens": job.src_tokens,
                     "py_loc": job.py_loc,
+                    "error_change": job.error_change,
                 })
 
 
@@ -255,6 +267,7 @@ class TranspileJob:
         error: True if there was an error during transpiling
         error_msg: The error message
         transpile_time: The time took for transpiling in seconds
+        error_change: if the new error is different
 
     Functions:
         transpile: (re)run the transpiling
@@ -271,6 +284,7 @@ class TranspileJob:
         self.error = False
         self.error_msg = ""
         self.transpile_time = 0.0
+        self.error_change = None
 
         # Get the level and code position
         try:
