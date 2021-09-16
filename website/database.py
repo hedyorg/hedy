@@ -38,7 +38,7 @@ class Database:
             }
         )
         print(response['Item'])
-        return repsonse
+        return response['Item']
 
     def store_quiz_attempt(self,quiz_attempt, dynamodb=None):
         if not dynamodb:

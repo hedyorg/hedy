@@ -28,7 +28,7 @@
         {% if question_nr < questions|length %}
             <div></div>
               <button class="yellow-btn ml-1 text-right-0"
-                    onclick="window.location = '/quiz/quiz_questions/answer/'">
+                    onclick="window.location = '/quiz/quiz_questions/answer/{{ level_source }}'">
                 Bekijk data over het gegeven antwoord {{ question_nr + 1 }}</button>
             <button class="green-btn ml-1 right-0"
                     onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ 11}}/1'">

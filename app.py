@@ -517,16 +517,33 @@ def get_result_info_quiz(level_source):
         g.lang = lang = requested_lang()
         g.prefix = '/hedy'
 
-    level =  int(level_source)-1
     attempt_data = DATABASE.get_quiz_attempt(session.get('quiz-attempt-id'))
     print('attempt data,' , attempt_data)
     return render_template('results-quiz.html', attempt_data = attempt_data, quiz=quiz_data, level=int(level_source)-1,  menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
-@app.route('/quiz/quiz_questions/answer, methods=["GET"]')
-def get_answer_info():
-    DATABASE.get_quiz_answer(session.get('quiz-answer-id'))
+@app.route('/quiz/quiz_questions/answer/<level_source>', methods=["GET"])
+def get_answer_info(level_source):
+
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        # Reading the yaml file
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
+            return 'No quiz yaml file found for this level', 404
+
+        # set globals
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
+
+    answer_data = DATABASE.get_quiz_answer(session.get('quiz-answer-id'))
+    return render_template('results-answer-quiz.html', answer_data=answer_data, quiz=quiz_data, level=int(level_source) - 1,
+                           menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
+                           is_teacher=is_teacher(request),
+                           auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
 
 
 @app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
@@ -567,26 +584,27 @@ def submit_answer(level_source, question_nr, attempt):
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
         if q_nr <= len(quiz_data['questions']) :
+            answer_id = uuid.uuid4().hex
+            session['quiz-answer-id'] = answer_id
+
+            list_answers = session['list-of-answer-ids']
+            list_answers.append(answer_id)
+            session['list-of-answer-ids'] = list_answers
+            print(session.get('list-of-answer-ids'))
+
+            answerIsCorrect = True if question['correct_answer'] in option else False
+            stored_quiz_answer = {
+                'quizAnswerId': answer_id,
+                'quizQuestionText': question['question_text'],
+                'option': option,
+                'isCorrectAnswer': answerIsCorrect,
+                'points': session.get('total_score'),
+                'questionType': 'mp-choice-question',
+                'questionAttempt': attempt,
+                'date': timems(),
+            }
 
             if question['correct_answer'] in option:
-                answer_id = uuid.uuid4().hex
-                session['quiz-answer-id'] = answer_id
-
-                list_answers = session['list-of-answer-ids']
-                list_answers.append(answer_id)
-                session['list-of-answer-ids'] = list_answers
-                print(session.get('list-of-answer-ids'))
-                stored_quiz_answer = {
-                    'quizAnswerId': answer_id,
-                    'quizQuestionText': question['question_text'],
-                    'option': option,
-                    'isCorrectAnswer': False,
-                    'points': session.get('total_score'),
-                    'questionType': 'mp-choice-question',
-                    'questionAttempt': attempt,
-                    'date': timems(),
-                }
-
                 print(stored_quiz_answer)
 
                 DATABASE.store_quiz_answer(stored_quiz_answer)
@@ -607,22 +625,6 @@ def submit_answer(level_source, question_nr, attempt):
                 for i in range(len(question['mp_choice_options'])):
                     char_array.append(chr(ord('@') + (i + 1)))
 
-                answer_id = uuid.uuid4().hex
-                session['quiz-answer-id'] = answer_id
-                list_answers  = session['list-of-answer-ids']
-                list_answers.append(answer_id)
-                session['list-of-answer-ids'] = list_answers
-                print(session.get('list-of-answer-ids'))
-                stored_quiz_answer = {
-                    'quizAnswerId': answer_id,
-                    'quizQuestionText': question['question_text'],
-                    'option': option,
-                    'isCorrectAnswer': False,
-                    'points': session.get('total_score'),
-                    'questionType': 'mp-choice-question',
-                    'questionAttempt': attempt,
-                    'date': timems(),
-                }
 
                 DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
@@ -642,16 +644,7 @@ def submit_answer(level_source, question_nr, attempt):
                 list_answers.append(answer_id)
                 session['list-of-answer-ids'] = list_answers
                 print(session.get('list-of-answer-ids'))
-                stored_quiz_answer = {
-                    'quizAnswerId': answer_id,
-                    'quizQuestionText': question['question_text'],
-                    'option': option,
-                    'isCorrectAnswer': False,
-                    'points': session.get('total_score'),
-                    'questionType': 'mp-choice-question',
-                    'questionAttempt': attempt,
-                    'date': timems(),
-                }
+
                 DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],

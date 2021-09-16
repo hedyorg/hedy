@@ -1,0 +1,10 @@
+{% block answer_results %}
+    <h1 class="p-8 font-bold text-4xl font-slab"> Resultaten van de Quiz</h1>
+
+    <ul>
+        {% for key, value in answer_data.items() %}
+            <dt> {{ key }}</dt>
+            <dd> {{ value }}</dd>
+        {% endfor %}
+    </ul>
+{% endblock %}
