@@ -14,18 +14,10 @@ from pydantic import BaseModel, FilePath
 from lark.exceptions import GrammarError, UnexpectedEOF
 from lazy.lazy import lazy
 
-class RunHedy(BaseModel):
-    """ For each file in `filename`, do a timed transpilling from Hedy code
-    to Python code. """
-
-    jobs: ClassVar[None]
-    checkdata: ClassVar[None]
-
-    def run(self):
-        """ Execute runhedy with the validated parameters """
-
+def run():
+        jobs = create_jobs()
         #skip empty programs
-        jobs = [j for j in self.jobs if not is_empty(j.code)]
+        jobs = [j for j in jobs if not is_empty(j.code)]
 
         number_of_error_programs = 0
 
@@ -34,10 +26,11 @@ class RunHedy(BaseModel):
             if job.error_msg != '':
                 number_of_error_programs += 1
 
-            if self.checkdata is not None:
+            checkdata = create_checkdata()
+            if checkdata is not None:
                 # Compare with previous run
                 try:
-                    chkjob = self.checkdata[job.filename]
+                    chkjob = checkdata[job.filename]
                     chktime = float(chkjob["transpile time"])
                     diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
 
@@ -54,10 +47,10 @@ class RunHedy(BaseModel):
                     print('checking failed')
 
         if report is not None:
-            _save_report(self.jobs)
+            _save_report(jobs)
 
         # print run informations
-        runtimes_and_files = [(r.filename, r.transpile_time) for r in self.jobs]
+        runtimes_and_files = [(r.filename, r.transpile_time) for r in jobs]
         ordered_runtimes = sorted(runtimes_and_files, key=lambda x: x[1], reverse = True)
         slowest_top_x = [x[0] for x in ordered_runtimes[:top]]
 
@@ -65,17 +58,17 @@ class RunHedy(BaseModel):
 
         maxvalue = max(runtimes)
         minvalue = min(runtimes)
-        name_of_slowest_file = self.jobs[runtimes.index(maxvalue)].filename
+        name_of_slowest_file = jobs[runtimes.index(maxvalue)].filename
 
-        if self.checkdata is None:
+        if checkdata is None:
             # Simple run
             print(f"Total transpile time: {sum(runtimes):10f}s ")
             print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
         else:
             # Compare with previous data
             previous_total_time = sum(float(
-                self.checkdata[job.filename]["transpile time"]
-                ) for job in self.jobs)
+                checkdata[job.filename]["transpile time"]
+                ) for job in jobs)
             diff = 100 * sum(runtimes) / previous_total_time
             print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
@@ -85,38 +78,35 @@ class RunHedy(BaseModel):
         print(f"Min transpile time:   {minvalue:10f}s")
         print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
 
+def create_jobs():
+    """ The list of jobs to be run """
+    # Create object list
+    jobs = [TranspileJob(f) for f in filenames_list]
 
-    @lazy
-    def jobs(self):
-        """ The list of jobs to be run """
-        # Create object list
-        jobs = [TranspileJob(f) for f in filenames_list]
+    # Remove files with invalid level
+    invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
+    if len(invalidjob) > 0:
+        print(f"WARNING: There are {len(invalidjob)} files with"
+              f" invalid Hedy level (> {hedy.HEDY_MAX_LEVEL})")
+        jobs = [j for j in jobs if j.level <= hedy.HEDY_MAX_LEVEL]
 
-        # Remove files with invalid level
-        invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
-        if len(invalidjob) > 0:
-            print(f"WARNING: There are {len(invalidjob)} files with"
-                  f" invalid Hedy level (> {hedy.HEDY_MAX_LEVEL})")
-            jobs = [j for j in jobs if j.level <= hedy.HEDY_MAX_LEVEL]
+    return jobs
 
-        return jobs
+def create_checkdata():
+    """ Data of a previous run. Return None is self.check is not set."""
+    if check is None:
+        return None
 
-    @lazy
-    def checkdata(self):
-        """ Data of a previous run. Return None is self.check is not set."""
-        if check is None:
-            return None
-
-        comparedata = {}
-        with open(check, newline="") as csvfile:
-            reader = csv.reader(csvfile)
-            fields = None
-            for row in reader:
-                if fields is None:
-                    fields = row
-                else:
-                    comparedata[row[0]] = ({k: v for k, v in zip(fields, row)})
-        return comparedata
+    comparedata = {}
+    with open(check, newline="") as csvfile:
+        reader = csv.reader(csvfile)
+        fields = None
+        for row in reader:
+            if fields is None:
+                fields = row
+            else:
+                comparedata[row[0]] = ({k: v for k, v in zip(fields, row)})
+    return comparedata
 
 
 
@@ -281,4 +271,4 @@ if __name__ == '__main__':
     if len(filenames_list) == 0:
         print("no files found!")
     else:
-        RunHedy().run()
+        run()
