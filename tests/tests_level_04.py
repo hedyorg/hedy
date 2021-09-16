@@ -45,7 +45,7 @@ class TestsLevel4(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet'+naam)""")
+    print(f'ik heet{naam}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -60,7 +60,7 @@ class TestsLevel4(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet,'+naam)""")
+    print(f'ik heet,{naam}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -102,7 +102,7 @@ class TestsLevel4(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     kleur = input('wat is je lievelingskleur?')
-    print('jouw lievelingskleur is dus'+kleur+'!')""")
+    print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -131,7 +131,7 @@ class TestsLevel4(unittest.TestCase):
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
     dier=random.choice(dieren)
-    print(dier)""")
+    print(f'{dier}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -144,7 +144,7 @@ class TestsLevel4(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('Cuál es tu color favorito?')""")
+    print(f'Cuál es tu color favorito?')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -161,11 +161,11 @@ class TestsLevel4(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet'+naam)
+    print(f'ik heet{naam}')
     if naam == 'Hedy':
-      print('leuk')
+      print(f'leuk')
     else:
-      print('minder leuk')""")
+      print(f'minder leuk')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -186,11 +186,11 @@ class TestsLevel4(unittest.TestCase):
 
       expected = textwrap.dedent("""\
       naam = 'Hedy'
-      print('ik heet'+naam)
+      print(f'ik heet{naam}')
       if naam == 'Hedy':
-        print('leuk')
+        print(f'leuk')
       else:
-        print('minder leuk')""")
+        print(f'minder leuk')""")
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
@@ -210,11 +210,11 @@ class TestsLevel4(unittest.TestCase):
 
       expected = textwrap.dedent("""\
       naam = 'Hedy'
-      print('ik heet'+naam)
+      print(f'ik heet{naam}')
       if naam == 'Hedy':
-        print('leuk')
+        print(f'leuk')
       else:
-        print('minder leuk')""")
+        print(f'minder leuk')""")
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
@@ -230,9 +230,9 @@ class TestsLevel4(unittest.TestCase):
     expected = textwrap.dedent("""\
     kleur = input('Wat is je lievelingskleur?')
     if kleur == 'groen':
-      print('mooi!')
+      print(f'mooi!')
     else:
-      print('niet zo mooi')""")
+      print(f'niet zo mooi')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -251,7 +251,7 @@ class TestsLevel4(unittest.TestCase):
     jouwkeuze = 'steen'
     computerkeuze = 'schaar'
     if computerkeuze == 'schaar' and jouwkeuze == 'steen':
-      print('jij wint')""")
+      print(f'jij wint')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -277,7 +277,7 @@ class TestsLevel4(unittest.TestCase):
     jouwkeuze = 'schaar'
     computerkeuze = 'schaar'
     if computerkeuze == jouwkeuze:
-      print('gelijkspel!')""")
+      print(f'gelijkspel!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -293,7 +293,7 @@ class TestsLevel4(unittest.TestCase):
     items = ['red', 'green']
     selected = 'red'
     if selected in items:
-      print('found!')""")
+      print(f'found!')""")
 
     result = hedy.transpile(code, self.level)
 
@@ -346,7 +346,7 @@ class TestsLevel4(unittest.TestCase):
         antwoord = 'ok'
       else:
         antwoord = 'stom'
-      print(antwoord)""")
+      print(f'{antwoord}')""")
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)

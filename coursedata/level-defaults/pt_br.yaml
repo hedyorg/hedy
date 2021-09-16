@@ -475,3 +475,131 @@
             idade is input('Quantos anos você tem?')
             if age > 12:
                 print('Você é mais velho(a) do que eu!')
+17:
+    start_code: |-
+        resposta_certa is Falso
+        # Continuamos até ser dada a resposta certa!
+        while resposta_certa is Falso:
+            resultado is input('Quanto é 5 vezes 5?')
+            if resultado is 25:
+                resposta_certa is True
+                print('Foi dada uma boa resposta')
+    intro_text: |-
+        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
+        ciclo enquanto a instrução for verdadeira/válida! Portanto,
+        no exemplo de código, continuamos até ser dada a resposta
+        certa. Se a resposta correta nunca for dada, o ciclo nunca
+        acaba!
+    commands:
+    -   name: "While booleano"
+        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
+        example: "Exemplo: while resposta_certa is Falso"
+        demo_code: |-
+            resposta_certa is Falso
+            # Continuamos até termos a resposta certa!
+            while resposta_certa is Falso:
+                resultado is input('Quanto é 5 vezes 5?')
+                if resultado is 25:
+                    resposta_certa is Verdadeiro
+                    print('Foi dada uma boa resposta')
+    -   name: "while menor"
+        explanation: |-
+            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
+            cuidado, é preciso mudar o número para que ciclo termine.
+            Aqui nós fazemos isso com `contagem is contagem + 1`.
+        example: "Por exemplo: while contagem < 3"
+        demo_code: |-
+            contagem is 1
+            # Continuamos até a contagem ser 3!
+            while contagem < 3:
+                print('Fazemos isto mais ' 3 - contagem ' vezes.')
+                contagem is contagem + 1
+            print('Acabamos!')
+18:
+    start_code: |-
+        lista is ['primeiro', 'segundo', 'terceiro']
+        segundovalor is lista[2]
+        print(segundovalor)
+    intro_text: |-
+        Quando temos uma lista, podemos obter um valor específico
+        dessa lista. Se queremos o segundo elemento da lista, digitamos
+        `lista[2]`.
+    commands:
+    -   name: "Contagem"
+        explanation: "Podemos também somar todos os valores da lista."
+        example: "lista[1]"
+        demo_code: |-
+            lista is ['1', '2', '3']
+            soma is lista[1] + lista[2]
+            soma is soma + lista[3]
+            # Esperamos um resultado de 6
+            print(soma)
+19:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        for i in range(1, 3):
+            print(fruta[i])
+    intro_text: |-
+        Podemos também ver tudo na lista com o ciclo `for`. Como
+        existem três coisas na lista, passamos o ciclo de 1 até 3.
+        Durante o ciclo nós printamos tudo que há na lista.
+    commands:
+    -   name: "Tamanho da lista"
+        explanation: |-
+            Com `length` podemos saber o tamanho da lista. A lista no
+            exemplo tem tamanho 3, porque existem três coisas na lista.
+        example: "length(lista)"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print('tamanho da lista é ' length(fruta))
+            for i in range(1, length(fruta)):
+                print(fruta[i])
+20:
+    start_code: |-
+        print('Quanto é 5+3?')
+        resposta = 5+3
+        print('Resposta é agora:')
+        print(resposta)
+        if resposta == 8:
+            print('Está certo!')
+        else:
+            print('Oh não, está errado!')
+    intro_text: |-
+        Agora vamos substituir o `is` por `=` e `==`. Usamos `=` se
+        quisermos atribuir um determinado valor a uma variável. Se
+        quisermos atribuir 8 à variável chamada resposta, então
+        escrevemos resposta = 8. Utilizamos `==` quando queremos
+        saber se duas coisas são iguais.
+    commands:
+    -   name: "Comparar"
+        explanation: "Se quisermos comparar, usamos ==. 5+3 == 8 verifica se 5+3 é igual a 8"
+        example: "Por exemplo: 5+3 == 8"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 é realmente 8')
+            else:
+                print('Isto não será printado, porque 5+3 é 8!')
+    -   name: "Atribuir valor"
+        explanation: |-
+            Se quisermos dizer que uma variável chamada resposta é 8,
+            escrevemos resposta = 8.
+        example: "Por exemplo: resposta = 8"
+        demo_code: |-
+            print('Quanto é 5+3?')
+            resposta = 5+3
+            print('Resposta é agora:')
+            print(resposta)
+    -   name: "Comparar e atribuir valor"
+        explanation: |-
+            Se vamos comparar dois valores, utilizamos `==`. Se
+            vamos atribuir um valor a uma variável, usamos `=`.
+        example: "Por exemplo: 5+3 == 8, resposta = 8"
+        demo_code: |-
+            print('Quanto é 5+3?')
+            resposta = 5+3
+            print('Resposta é agora:')
+            print(resposta)
+            if resposta == 8:
+                print('Está certo!')
+            else:
+                print('Não, está errado!')

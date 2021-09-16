@@ -17,7 +17,7 @@
        <div id="modal-alert" class="hidden">
           <div id="modal-alert-text"></div>
           <div style="margin: auto; text-align: center;">
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.hide ()">{{auth.yes}}</button>
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.hide ()">{{auth.ok}}</button>
           </div>
        </div>
        <div id="modal-confirm" class="hidden">
@@ -32,8 +32,8 @@
           <div style="margin: auto; text-align: center;">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <br>
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.promptcb ()">{{auth.yes}}</button>
-            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.promptcb (true)">{{auth.no}}</button>
+            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.promptcb ()">{{auth.ok}}</button>
+            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.promptcb (true)">{{auth.cancel}}</button>
           </div>
        </div>
     </div>
@@ -59,10 +59,11 @@
             $ ('#modal-prompt').hide ();
             $ ('#modal-confirm').hide ();
          },
-         alert: function (message) {
+         alert: function (message, timeout) {
             $ ('#modal-alert-text').text (message);
             window.modal.show ();
             $ ('#modal-alert').show ();
+            if (timeout) setTimeout (window.modal.hide, timeout);
          },
          confirm: function (message, cb) {
             $ ('#modal-confirm-text').text (message);
@@ -73,10 +74,11 @@
               if (proceed) cb ();
             }
          },
-         prompt: function (message, cb) {
+         prompt: function (message, defaultValue, cb) {
             $ ('#modal-prompt-text').text (message);
             window.modal.show ();
             $ ('#modal-prompt').show ();
+            if (defaultValue) $ ('#modal-prompt-input').val (defaultValue);
             window.modal.promptcb = function (cancel) {
               window.modal.hide ();
               if (cancel) return;
