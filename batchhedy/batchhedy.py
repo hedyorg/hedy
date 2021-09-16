@@ -16,15 +16,7 @@ from lazy.lazy import lazy
 
 class RunHedy(BaseModel):
     """ For each file in `filename`, do a timed transpilling from Hedy code
-    to Python code.
-
-    Arguments:
-        output: Optional[Path]
-            If present, the resulting python code will be save in the
-            direction `output`. The name of the python files will be the same
-            than the Hedy files, with the extension changed from .hedy to .py.
-            If the path doesn't exist, it will be created.
-    """
+    to Python code. """
 
     output: Optional[Path]
     jobs: ClassVar[None]
@@ -33,25 +25,15 @@ class RunHedy(BaseModel):
     def run(self):
         """ Execute runhedy with the validated parameters """
 
-        if self.output:
-            self.output.mkdir(parents=True, exist_ok=True)
-
         #skip empty programs
         jobs = [j for j in self.jobs if not is_empty(j.code)]
 
         number_of_error_programs = 0
 
         for job in jobs:
-
             job.transpile()
-
             if job.error_msg != '':
                 number_of_error_programs += 1
-
-            if self.output is not None:
-                # Write python file
-                with open(self.output / (job.filename.stem + ".py"), "w") as f:
-                    f.write(job.pycode)
 
             # Run info
             infos = [
@@ -60,27 +42,26 @@ class RunHedy(BaseModel):
 
             if self.checkdata is not None:
                 # Compare with previous run
-                chkjob = self.checkdata[job.filename]
-                chktime = float(chkjob["transpile time"])
-                diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
-                infos.append(f"{diff:1.0f}%")
+                try:
+                    chkjob = self.checkdata[job.filename]
+                    chktime = float(chkjob["transpile time"])
+                    diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
+                    infos.append(f"{diff:1.0f}%")
 
-                if (job.error is True) and (chkjob["error"] == "False"):
-                    job.error_change = f"{'no error->error':15}"
-                    infos.append(job.error_change)
-                elif (job.error is True) and (chkjob["error"] == "True"):
-                    # only check the first line, args position change
-                    if (job.error_msg.splitlines()[0] !=
-                            chkjob["error message"].splitlines()[0]):
-                        job.error_change = f"{'error diff.':15}"
+                    if (job.error is True) and (chkjob["error"] == "False"):
+                        job.error_change = f"{'no error->error':15}"
                         infos.append(job.error_change)
-                elif (job.error is False) and (chkjob["error"] == "True"):
-                    job.error_change = f"{'error->no error':15}"
-                    infos.append(job.error_change)
-                elif job.py_loc != int(chkjob["py_loc"]):
-                    job.error_change = f"{'loc different':15}"
-                    infos.append(job.error_change)
-
+                    elif (job.error is True) and (chkjob["error"] == "True"):
+                        # only check the first line, args position change
+                        if (job.error_msg.splitlines()[0] !=
+                                chkjob["error message"].splitlines()[0]):
+                            job.error_change = f"{'error diff.':15}"
+                            infos.append(job.error_change)
+                    elif (job.error is False) and (chkjob["error"] == "True"):
+                        job.error_change = f"{'error->no error':15}"
+                        infos.append(job.error_change)
+                except Exception as e:
+                    print('checking failed')
 
         if report is not None:
             _save_report(self.jobs)
@@ -103,6 +84,7 @@ class RunHedy(BaseModel):
             diff = 100 * sum(runtimes) / previous_total_time
             print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
+        print(f"Number of files:  {len(jobs)}")
         print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
         print(f"Min transpile time:   {minvalue:10f}s")
         print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
@@ -148,10 +130,7 @@ class TranspileJob:
     Attributes:
         code: The Hedy code
         pycode: The Python code
-        src_loc: Number of lines of code in the Hedy code
-        src_loc_empty: Number of empty line of code in the Hedy code
         src_tokens: Number of tokens in the Hedy code
-        py_loc: Number of lines of code in the Python code
         error: True if there was an error during transpiling
         error_msg: The error message
         transpile_time: The time took for transpiling in seconds
@@ -180,7 +159,9 @@ class TranspileJob:
                 all_lines = f.readlines()
                 # remove header info
                 firstline = all_lines[0]
-                self.code = '\n'.join(all_lines[3:])
+                self.date = all_lines[1]
+                non_empty_lines = [a for a in all_lines[4:] if a != '']
+                self.code = ''.join(non_empty_lines) + '\n'
 
             self.level = 0
 
@@ -198,14 +179,33 @@ class TranspileJob:
             self.error_msg = str(e)
 
 
-
     def transpile(self) -> str:
-        """ (Re)run the transpiling """
+        if self.error:
+            return ""
         try:
-            del self.pycode   # force rerun of the transpiling
-        except AttributeError:
-            pass
-        return self.pycode
+            pycode = ""
+            t1 = perf_counter()
+            pycode = hedy.transpile(self.code, self.level).code
+        except hedy.HedyException as e:
+            self.error = True
+            self.error_msg = str(e)
+        except UnexpectedEOF as e:
+            self.error = True
+            self.error_msg = str(e)
+        except GrammarError as e:
+            self.error = True
+            self.error_msg = str(e)
+        except Exception as e:
+            # Catch all
+            self.error = True
+            self.error_msg = str(e)
+
+        # TODO: Catch any error ?
+        finally:
+            t2 = perf_counter()
+
+        self.transpile_time = t2 - t1
+        return pycode
 
     @lazy
     def code(self) -> str:
@@ -218,46 +218,7 @@ class TranspileJob:
         else:
             return ""
 
-    @lazy
-    def pycode(self) -> str:
-        """ The transpiled code """
-        if self.error:
-            return ""
-        try:
-            pycode = ""
-            t1 = perf_counter()
-            pycode = hedy.transpile(self.code, self.level).code
-        except hedy.HedyException as e:
-            self.error = True
-            self.error_msg = str(e)
-            print(self.error_msg)
-        except UnexpectedEOF as e:
-            self.error = True
-            self.error_msg = str(e)
-        except GrammarError as e:
-            self.error = True
-            self.error_msg = str(e)
-        except Exception as e:
-            # Catch all
-            self.error = True
-            self.error_msg = str(e)
 
-        #TODO: Catch any error ?
-        finally:
-            t2 = perf_counter()
-
-        self.transpile_time = t2 - t1
-        return pycode
-
-    @lazy
-    def src_loc(self) -> int:
-        """ Lines of code in the Hedy file """
-        return len(self.code.split("\n"))
-
-    @lazy
-    def src_loc_empty(self) -> int:
-        """ Empty Line of code in the Hedy file """
-        return len([line for line in self.code.split("\n") if len(line) == 0])
 
 
 
@@ -287,6 +248,7 @@ def _save_report(jobs):
         with open(report, "w", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=[
                 "filename",
+                "date",
                 "level",
                 "code",
                 "transpile time",
@@ -295,10 +257,12 @@ def _save_report(jobs):
                 "error_change"
             ])
 
+
             writer.writeheader()
             for job in jobs:
                 writer.writerow({
                     "filename": job.filename,
+                    "date": job.date,
                     "level": job.level,
                     "code": job.code,
                     "transpile time": job.transpile_time,
@@ -307,10 +271,17 @@ def _save_report(jobs):
                     "error_change": job.error_change,
                 })
 
-filenames_list = glob.glob('../../input_one/*.hedy')
-report = 'output_report_one.csv'
-check = 'output_report_one.csv'
+os.chdir(path.dirname(path.abspath(__file__)))
+filenames_list = glob.glob('../../input/*.hedy')
+report = 'output_report.csv'
+
+#check determines if we are comparing against an existing report
+check = None
+check = 'output_report.csv'
+
 
 if __name__ == '__main__':
-    os.chdir(path.dirname(path.abspath(__file__)))
-    RunHedy().run()
+    if len(filenames_list) == 0:
+        print("no files found!")
+    else:
+        RunHedy().run()
