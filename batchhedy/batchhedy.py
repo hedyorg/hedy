@@ -18,7 +18,6 @@ class RunHedy(BaseModel):
     """ For each file in `filename`, do a timed transpilling from Hedy code
     to Python code. """
 
-    output: Optional[Path]
     jobs: ClassVar[None]
     checkdata: ClassVar[None]
 
@@ -35,31 +34,22 @@ class RunHedy(BaseModel):
             if job.error_msg != '':
                 number_of_error_programs += 1
 
-            # Run info
-            infos = [
-                f"{job.transpile_time:13.3f}s",
-                f"{job.error_msg[:10]:10}"]
-
             if self.checkdata is not None:
                 # Compare with previous run
                 try:
                     chkjob = self.checkdata[job.filename]
                     chktime = float(chkjob["transpile time"])
                     diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
-                    infos.append(f"{diff:1.0f}%")
 
                     if (job.error is True) and (chkjob["error"] == "False"):
                         job.error_change = f"{'no error->error':15}"
-                        infos.append(job.error_change)
                     elif (job.error is True) and (chkjob["error"] == "True"):
                         # only check the first line, args position change
                         if (job.error_msg.splitlines()[0] !=
                                 chkjob["error message"].splitlines()[0]):
                             job.error_change = f"{'error diff.':15}"
-                            infos.append(job.error_change)
                     elif (job.error is False) and (chkjob["error"] == "True"):
                         job.error_change = f"{'error->no error':15}"
-                        infos.append(job.error_change)
                 except Exception as e:
                     print('checking failed')
 
@@ -67,10 +57,15 @@ class RunHedy(BaseModel):
             _save_report(self.jobs)
 
         # print run informations
-        runtimes = [r.transpile_time for r in self.jobs]
+        runtimes_and_files = [(r.filename, r.transpile_time) for r in self.jobs]
+        ordered_runtimes = sorted(runtimes_and_files, key=lambda x: x[1], reverse = True)
+        slowest_top_x = [x[0] for x in ordered_runtimes[:top]]
+
+        runtimes = [x[1] for x in runtimes_and_files]
+
         maxvalue = max(runtimes)
         minvalue = min(runtimes)
-        maxfilename = self.jobs[runtimes.index(maxvalue)].filename
+        name_of_slowest_file = self.jobs[runtimes.index(maxvalue)].filename
 
         if self.checkdata is None:
             # Simple run
@@ -85,7 +80,8 @@ class RunHedy(BaseModel):
             print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
         print(f"Number of files:  {len(jobs)}")
-        print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
+        print(f"Max transpile time:   {maxvalue:10f}s (files: {name_of_slowest_file})")
+        print(f"Slowest files: {slowest_top_x})")
         print(f"Min transpile time:   {minvalue:10f}s")
         print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
 
@@ -147,7 +143,7 @@ class TranspileJob:
         to transpile() or pycode is made.
         """
 
-        self.filename = filename
+        self.filename = os.path.basename(filename)
         self.error = False
         self.error_msg = ""
         self.transpile_time = 0.0
@@ -260,11 +256,12 @@ def _save_report(jobs):
 
             writer.writeheader()
             for job in jobs:
+                code = job.code.replace("\\n", "")
                 writer.writerow({
                     "filename": job.filename,
                     "date": job.date,
                     "level": job.level,
-                    "code": job.code,
+                    "code": f'""{code}""',
                     "transpile time": job.transpile_time,
                     "error": job.error,
                     "error message": job.error_msg,
@@ -277,8 +274,8 @@ report = 'output_report.csv'
 
 #check determines if we are comparing against an existing report
 check = None
-check = 'output_report.csv'
-
+# check = 'output_report.csv'
+top = 10
 
 if __name__ == '__main__':
     if len(filenames_list) == 0:
