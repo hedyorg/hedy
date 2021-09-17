@@ -466,8 +466,7 @@ def get_quiz(level_source, question_nr, attempt):
         q_nr = int(question_nr)
         
         if int(attempt) == 1:
-            questionFalse = 'start'
-            print('start')
+            questionStatus = 'start'
 
         if q_nr <= len(quiz_data['questions']):
             question = quiz_data['questions'][q_nr - 1].get(q_nr)
@@ -477,7 +476,7 @@ def get_quiz(level_source, question_nr, attempt):
             for i in range(len(question['mp_choice_options'])):
                 char_array.append(chr(ord('@') + (i + 1)))
             return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
-                                   questionFalse= questionFalse,
+                                   questionStatus= questionStatus,
                                    questions=quiz_data['questions'],
                                    question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                    correct=session.get('correct_answer'),
@@ -514,14 +513,12 @@ def submit_answer(level_source, question_nr, attempt):
         q_nr = int(question_nr)
 
         session['quiz-attempt'] = int(attempt)
-        questionFalse = 'false'
+        questionStatus = 'false'
         if int(attempt) == 1:
-            questionFalse = 'start'
-            print('start')
+            questionStatus = 'start'
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
         index_option = ord(option.split("-")[1]) - 65
-        print(option.split("-")[1] )
         session['chosen_option'] =option.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
@@ -558,7 +555,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        attempt= session.get('quiz-attempt') ,
-                                       questionFalse=questionFalse,
+                                       questionStatus=questionStatus,
                                        chosen_option = session.get('chosen_option'),
                                        char_array=char_array,
                                        menu=render_main_menu('adventures'), lang=lang,
@@ -570,7 +567,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        level_source=level_source,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
-                                       questionFalse = questionFalse,
+                                       questionStatus = questionStatus,
                                        option=option,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
