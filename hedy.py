@@ -649,16 +649,6 @@ else:
         return f"{arg0} in {arg1}"
 
 class ConvertToPython_5(ConvertToPython_4):
-    def number(self, args):
-        return ''.join(args)
-
-    def repeat(self, args):
-        times = process_variable(args[0], self.lookup)
-        command = args[1]
-        return f"""for i in range(int({str(times)})):
-{indent(command)}"""
-
-class ConvertToPython_6(ConvertToPython_5):
     #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
@@ -708,6 +698,16 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def division(self, args):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
+
+class ConvertToPython_6(ConvertToPython_5):
+    def number(self, args):
+        return ''.join(args)
+
+    def repeat(self, args):
+        times = process_variable(args[0], self.lookup)
+        command = args[1]
+        return f"""for i in range(int({str(times)})):
+{indent(command)}"""
 
 class ConvertToPython_7(ConvertToPython_6):
     def __init__(self, punctuation_symbols, lookup):
@@ -1098,17 +1098,17 @@ def transpile(input_string, level, sub = 0):
         # This is the 'fall back' transpilation
         # that should surely be improved!!
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
-        if E.args[0] == 'Parse':
-            #try 1 level lower
-            if level > 1 and sub == 0:
-                try:
-                    new_level = level - 1
-                    result = transpile_inner(input_string, new_level, sub)
-                except (LarkError, HedyException) as innerE:
-                    # Parse at `level - 1` failed as well, just re-raise original error
-                    raise E
-                # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-                raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
+        # if E.args[0] == 'Parse':
+        #     #try 1 level lower
+        #     if level > 1 and sub == 0:
+        #         try:
+        #             new_level = level - 1
+        #             result = transpile_inner(input_string, new_level, sub)
+        #         except (LarkError, HedyException) as innerE:
+        #             # Parse at `level - 1` failed as well, just re-raise original error
+        #             raise E
+        #         # If the parse at `level - 1` succeeded, then a better error is "wrong level"
+        #         raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
         raise E
 
 def repair(input_string):
