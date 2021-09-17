@@ -16,23 +16,119 @@ Level 1 supports:
 
 #### Correct Programs
 
+<table>
+<tr> <th> Hedy </th> <th> Python </th> </tr>
+<tr>
+<td>
+ 
+```
+print x
+```
 
-| Hedy     | Python     |
-|----------|------------|
-| print x  | print('x') |
-| forward  | t.forward(50) |
-| turn     | t.right(90) |
-| ask x    | answer = input('x') |
-| ask x    | answer = input('x') |
-| echo y   | print('y', answer) |
+</td>
+<td>
+ 
+```python
+print('x')
+```
+
+</td>
+</tr>
+<tr>
+<td>
+ 
+```
+forward
+```
+
+</td>
+<td>
+ 
+```python
+t = turtle.Turtle()
+t.forward(50)
+```
+ 
+</td>
+</tr>
+<tr>
+<td>
+ 
+```
+turn
+```
+
+</td>
+<td>
+ 
+```python
+t = turtle.Turtle()
+t.right(90)
+```
+ 
+</td>
+</tr>
+<tr>
+<td>
+ 
+```
+ask x
+```
+
+</td>
+<td>
+ 
+```python
+answer = input('x')
+```
+ 
+</td>
+</tr>
+<tr>
+<td>
+ 
+```
+ask x
+```
+
+</td>
+<td>
+ 
+```python
+answer = input('x')
+```
+ 
+</td>
+</tr>
+<tr>
+<td>
+ 
+```
+ask x
+echo y
+```
+
+</td>
+<td>
+ 
+```python
+answer = input('x')
+print('y', answer)
+```
+ 
+</td>
+</tr>
+</table>
+
+
  
 
 #### Incorrect Programs
 
-print -> Incomplete Exception
-ask -> Incomplete Exception
-echo -> Incomplete Exception
-
-word other than print, ask, forward, turn, echo -> Invaid Exception
+* print -> Incomplete Exception
+* ask -> Incomplete Exception
+* echo -> Incomplete Exception
+* words other than print, ask, forward, turn, echo -> Invaid Exception
+* echo x -> Lonely echo Exception
 
 
