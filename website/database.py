@@ -12,59 +12,28 @@ TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
 
-QUIZ_ANSWER = dynamo.Table(storage, 'QuizAnswer', 'QuizAnswerId')
-QUIZ_ATTEMPT = dynamo.Table(storage, 'QuizAttempt', 'QuizAttemptId', indexed_fields=['QuizAnswerId'])
+QUIZ_ANSWER = dynamo.Table(storage, 'QuizAnswer', 'quizAnswerId')
+QUIZ_ATTEMPT = dynamo.Table(storage, 'QuizAttempt', 'quizAttemptId')
 
 class Database:
 
-    def store_quiz_answer(self,quiz_answer, dynamodb=None):
-        if not dynamodb:
-            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+    def store_quiz_answer(self,quiz_answer):
 
-        table = dynamodb.Table('QuizAnswer')
-        data = json.loads(json.dumps(quiz_answer), parse_float=Decimal)
-        return table.put_item(Item=data)
+        return QUIZ_ANSWER.create(quiz_answer)
 
+    def get_quiz_answer(self, answer_id):
+        """Load a quiz answer from the database."""
 
-    def get_quiz_answer(self, answer_id, dynamodb=None):
-        """Load a token from the database."""
-        if not dynamodb:
-            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
-
-        table = dynamodb.Table('QuizAnswer')
-        response = table.get_item(
-            Key={
-                'quizAnswerId': answer_id,
-            }
-        )
-        print(response['Item'])
-        return response['Item']
-
-    def store_quiz_attempt(self,quiz_attempt, dynamodb=None):
-        if not dynamodb:
-            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
-
-        table = dynamodb.Table('QuizAttempt')
-        data = json.loads(json.dumps(quiz_attempt), parse_float=Decimal)
-        return table.put_item(Item=data)
-
-    def get_quiz_attempt(self, quiz_attempt_id, dynamodb=None):
-
-        print("id, ", quiz_attempt_id)
-        if not dynamodb:
-            dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
-
-        table = dynamodb.Table('QuizAttempt')
-
-        response = table.get_item(
-            Key={
-                'quizAttemptId':  quiz_attempt_id,
-            }
-        )
+        return QUIZ_ANSWER.get({'quizAnswerId': answer_id})
 
 
-        print(response['Item'])
-        return response['Item']
+    def store_quiz_attempt(self,quiz_attempt):
+        return QUIZ_ATTEMPT.create(quiz_attempt)
+
+    def get_quiz_attempt(self, quiz_attempt_id):
+        """Load a quiz answer from the database."""
+
+        return QUIZ_ATTEMPT.get({'quizAttemptId': quiz_attempt_id})
 
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
