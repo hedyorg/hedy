@@ -460,7 +460,7 @@ def routes (app, database, requested_lang):
 
         DATABASE.update_user(user ['username'], {'is_teacher': 1 if body ['is_teacher'] else 0})
 
-        if body ['is_teacher']:
+        if body ['is_teacher'] and not is_testing_request (request):
             send_email_template ('welcome_teacher', user ['email'], requested_lang (), '')
 
         return '', 200
