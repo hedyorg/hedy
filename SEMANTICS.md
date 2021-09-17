@@ -16,10 +16,16 @@ Level 1 supports:
 
 #### Correct Programs
 
-print x -> print('x')
-forward -> t.forward(50)
-turn -> t.right(90)
-ask x -> answer = input('x')
+
+| Hedy     | Python     |
+|----------|------------|
+| print x  | print('x') |
+| forward  | t.forward(50) |
+| turn     | t.right(90) |
+| ask x    | answer = input('x') |
+| ask x    | answer = input('x') |
+| echo y   | print('y', answer) |
+ 
 
 #### Incorrect Programs
 
