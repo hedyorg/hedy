@@ -108,11 +108,11 @@ adventures:
                     ```
 
                 start_code: "print 'Hier komt straks jouw verhaal!'"
-            5:
+            6:
                 story_text: |
                     ## Verhaal
                     Soms zegt iemand in een verhaal iets meerdere keren. Bijvoorbeeld als iemand om hulp roept, of een liedje zingt.
-                    Dat kun je in level 5 in je verhaal zetten met `repeat`.
+                    Dat kun je in level 6 in je verhaal zetten met `repeat`.
 
                     ## Voorbeeld Hedy code
                     ```
@@ -200,6 +200,29 @@ adventures:
             5:
                 story_text: |
                     ## Liedjes
+                    In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
+                    Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    couplet is 1
+                    print 'Ik heb het potje met vet'
+                    print 'al op de tafel gezet'
+                    print 'Ik heb het'
+                    print 'potje, potje, potje, potje... '
+                    print 'veeeeeet'
+                    print 'al op de tafel gezet'
+                    couplet is couplet + 1
+                    print 'Door naar het ' couplet 'e couplet'
+                    ```
+                    Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt, door de regels te kopiëren.
+
+                    Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
+                    Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
+                start_code: "print 'Baby shark'"
+            6:
+                story_text: |
+                    ## Liedjes
                     In liedjes zit vaak veel herhaling. Denk maar aan Baby Shark! Ze zingen steeds hetzelfde:
 
                     Baby Shark tututudutudu <br>
@@ -217,30 +240,7 @@ adventures:
 
                     Na Baby Shark kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met herhaling erin.
                 start_code: "print 'Baby Shark'"
-            6:
-                story_text: |
-                    ## Liedjes
-                    In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
-                    Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
-
-                    ## Voorbeeld Hedy code
-                    ```
-                    couplet is 1
-                    print 'Ik heb het potje met vet'
-                    print 'al op de tafel gezet'
-                    print 'Ik heb het'
-                    repeat 4 times print 'potje'
-                    print 'veeeeeet'
-                    print 'al op de tafel gezet'
-                    couplet is couplet + 1
-                    print 'Door naar het ' couplet 'e couplet'
-                    ```
-                    Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt, door de regels te kopiëren.
-
-                    Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
-                    Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
-                start_code: "print 'Baby shark'"
-            7: 
+            7:
                 story_text: |
                     ## Zing een liedje!
                     In level 7 kun je meerdere regels herhalen, wat heel fijn is in liedjes! 
@@ -393,21 +393,7 @@ adventures:
             5:
                 story_text: |
                     ## Tekenen maar
-                    In level 5 kun je één regel code herhalen met `repeat`.
-
-                    ## Voorbeeld Hedy code
-                    ```
-                    print 'Figuren tekenen'
-                    repeat 3 times forward 10
-                    ```
-                start_code: |
-                    print 'Figuren tekenen'
-                    repeat 3 times forward 10
-
-            6:
-                story_text: |
-                    ## Tekenen maar
-                    In level 6 kun je gaan rekenen en kun je daarmee verschillende figuren tekenen.
+                    In level 5 kun je gaan rekenen en kun je daarmee verschillende figuren tekenen.
                     Misschien heb je op school al geleerd dat een heel rondje rond draaien 360 graden is. Zo niet, dan weet je het nu!
                     Daarom gebruik je voor een vierkant ook 90 graden. 360 gedeeld door 4 is 90.
                     Nu we met Hedy kunnen rekenen, kunnen we alle figuren tekenen die we maar willen!
@@ -431,6 +417,20 @@ adventures:
                     ```
                 start_code: |
                     print 'Figuren tekenen'
+
+            6:
+                story_text: |
+                    ## Tekenen maar
+                    In level 6 kun je één regel code herhalen met `repeat`.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Figuren tekenen'
+                    repeat 3 times forward 10
+                    ```
+                start_code: |
+                    print 'Figuren tekenen'
+                    repeat 3 times forward 10
 
             7:
                 story_text: |
@@ -517,18 +517,7 @@ adventures:
             5:
                 story_text: |
                     ## Afwasprogramma
-                    Met de `repeat` kun je stukjes code herhalen. Daarmee kun je dan voor de hele week uitrekenen wie er aan de beurt is.
-
-                    ## Voorbeeld Hedy code
-                    ```
-                    mensen is mama, papa, Emma, Sophie
-                    repeat _ _ print 'de afwasser is ' _
-                    ```
-                start_code: "print 'Wie doet de afwas?'"
-            6:
-                story_text: |
-                    ## Afwasprogramma
-                    Hoe vaak gaat iedereen eigenlijk afwassen? Is dat wel eerlijk? Dat kun je in level 6 tellen.
+                    Hoe vaak gaat iedereen eigenlijk afwassen? Is dat wel eerlijk? Dat kun je in level 5 tellen.
 
                     ## Voorbeeld Hedy code
                     ```
@@ -546,6 +535,17 @@ adventures:
                     ## Vooruitblik
                     Nu moet je wel een hoop knippen en plakken he? Dat gaan we in level 7 beter doen.
                     Dit level is het einde van het afwas-avontuur! Maar er zijn nog veel avonturen te maken in andere levels, zoals een rekenmachine, een interactief verhaal en een ingewikkelder spel.
+                start_code: "print 'Wie doet de afwas?'"
+            6:
+                story_text: |
+                    ## Afwasprogramma
+                    Met de `repeat` kun je stukjes code herhalen. Daarmee kun je dan voor de hele week uitrekenen wie er aan de beurt is.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    mensen is mama, papa, Emma, Sophie
+                    repeat _ _ print 'de afwasser is ' _
+                    ```
                 start_code: "print 'Wie doet de afwas?'"
     dice:
         name: "Dobbelsteen"
@@ -613,21 +613,7 @@ adventures:
             5:
                 story_text: |
                     ## Dobbelsteen
-                    Je kunt ook in level 5 weer een dobbelsteen maken. Met de `repeat` code kun je makkelijk een heel handje dobbelstenen rollen.
-                    Probeer de voorbeeldcode maar eens af te maken! Op de streepjes moeten meerdere commando's en tekens komen.
-
-                    Maar misschien wil jij wel een hele andere dobbelsteen maken. Dat mag natuurlijk ook!
-
-                    ## Voorbeeld Hedy code
-                    ```
-                    keuzes is 1, 2, 3, 4, 5, regenworm
-                    repeat _ _ print _ _ _
-                    ```
-                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
-            6:
-                story_text: |
-                    ## Dobbelsteen
-                    Je kunt ook in level 6 weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
+                    Je kunt ook in level 5 weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
 
                     Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid. Zo doe je dat voor 1 dobbelsteen:
 
@@ -642,6 +628,20 @@ adventures:
                     print 'dat zijn dan ' punten ' punten'
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
+                start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
+            6:
+                story_text: |
+                    ## Dobbelsteen
+                    Je kunt ook in level 6 weer een dobbelsteen maken. Met de `repeat` code kun je makkelijk een heel handje dobbelstenen rollen.
+                    Probeer de voorbeeldcode maar eens af te maken! Op de streepjes moeten meerdere commando's en tekens komen.
+
+                    Maar misschien wil jij wel een hele andere dobbelsteen maken. Dat mag natuurlijk ook!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    keuzes is 1, 2, 3, 4, 5, regenworm
+                    repeat _ _ print _ _ _
+                    ```
                 start_code: "print 'Wat zal de dobbelsteen deze keer aangeven?'"
     rock:
         name: "Steen, schaar, papier"
@@ -731,7 +731,7 @@ adventures:
         image: "calculator.png"
         default_save_name: "Rekenmachine"
         levels:
-            6:
+            5:
                 story_text: |
                     ## Rekenmachine
                     Nu je kunt rekenen, kun je ook een programma maken om sommetjes te oefenen. Je kunt de sommen zelf verzinnen, bijv zo:
@@ -880,11 +880,45 @@ adventures:
                     Of je zou de toverspiegel uit Sneeuwwitje kunnen laten voorspellen dat jij de mooiste van het land bent (en de rest natuurlijk niet!). 
                     Of er zijn nog heel veel meer opties, laat je fantasie de vrije loop en wees creatief!
                 start_code: ""
-                    
             5:
                 story_text: |
+                     ## Hedy de Waarzegger
+                     In level 5 kun je rekenen met Hedy, waardoor je "magische" formules kunt gebruiken in je voorspellingen!
+                     Zo kun je berekeken hoe rijk je wordt, aan de hand van de formule in het voorbeeld:
+
+                     ## Voorbeeld Hedy code
+                     ```
+                     print 'Ik ben Hedy de Waarzegger!'
+                     print 'Ik kan voorspellen hoeveel kinderen je later krijgt!'
+                     leeftijd is ask 'Hoe oud ben je?'
+                     brusjes is ask 'Hoeveel broers/zussen heb je?'
+                     lengte is ask 'Hoe lang ben je (in cm)?'
+                     kinderen is lengte / leeftijd
+                     kinderen is kinderen - brusjes
+                     print 'Jij krijgt later... '
+                     print kinderen ' kinderen!'
+                     ```
+
+                     ## Uitdaging
+                     In de voorbeelden worden simpele vragen gebruikt zoals 'Hoe oud ben je?' en Hoe lang ben je? , maar je kunt natuurlijk van alles gebruiken om voorspellingen te maken!
+                     Kun jij zelf leuke of grappige vragen bedenken die Hedy kan gebruiken in haar voorspellingen?
+
+                     ## Voorbeeld gekke voorspelling
+                     ```
+                     print 'Ik ben Hedy de malle waarzegger!'
+                     print 'Ik ga voorspellen hoe slim jij bent!'
+                     ajax is ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
+                     bananen is ask 'Hoeveel bananen heb jij deze week gegeten?'
+                     hygiene is ask 'Hoevaak heb jij je handen al gewassen vandaag?'
+                     resultaat is bananen + hygiene
+                     resultaat is resultaat * ajax
+                     print 'Jij bent ' resultaat 'procent slim.'
+                     ```
+                start_code: ""
+            6:
+                story_text: |
                     ## Hedy de Waarzegger
-                    In level 5 kun je het repeat commando gebruiken om meerdere voorspellingen te doen. Kijk maar naar het voorbeeld:
+                    In level 6 kun je het `repeat` commando gebruiken om meerdere voorspellingen te doen. Kijk maar naar het voorbeeld:
                     
                     ## Voorbeeld Hedy code
                     ```
@@ -907,42 +941,7 @@ adventures:
                     In level 7 verandert de opmaak van het repeat-commando, waardoor dit probleem verdwijnt!
                 start_code: "" 
                    
-            6: 
-                story_text: |
-                     ## Hedy de Waarzegger
-                     In level 6 kun je rekenen met Hedy, waardoor je "magische" formules kunt gebruiken in je voorspellingen! 
-                     Zo kun je berekeken hoe rijk je wordt, aan de hand van de formule in het voorbeeld: 
-                     
-                     ## Voorbeeld Hedy code
-                     ```
-                     print 'Ik ben Hedy de Waarzegger!'
-                     print 'Ik kan voorspellen hoeveel kinderen je later krijgt!'
-                     leeftijd is ask 'Hoe oud ben je?'
-                     brusjes is ask 'Hoeveel broers/zussen heb je?'
-                     lengte is ask 'Hoe lang ben je (in cm)?' 
-                     kinderen is lengte / leeftijd
-                     kinderen is kinderen - brusjes
-                     print 'Jij krijgt later... '
-                     print kinderen ' kinderen!'
-                     ```
-                     
-                     ## Uitdaging
-                     In de voorbeelden worden simpele vragen gebruikt zoals 'Hoe oud ben je?' en Hoe lang ben je? , maar je kunt natuurlijk van alles gebruiken om voorspellingen te maken! 
-                     Kun jij zelf leuke of grappige vragen bedenken die Hedy kan gebruiken in haar voorspellingen?
-                     
-                     ## Voorbeeld gekke voorspelling
-                     ```
-                     print 'Ik ben Hedy de malle waarzegger!'
-                     print 'Ik ga voorspellen hoe slim jij bent!'
-                     ajax is ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
-                     bananen is ask 'Hoeveel bananen heb jij deze week gegeten?'
-                     hygiene is ask 'Hoevaak heb jij je handen al gewassen vandaag?'
-                     resultaat is bananen + hygiene 
-                     resultaat is resultaat * ajax
-                     print 'Jij bent ' resultaat 'procent slim.'
-                     ```
-                start_code: ""
-                     
+
             7: 
                  story_text: |
                      ## Hedy de waarzegger
@@ -1050,28 +1049,12 @@ adventures:
                     if eten is pizza prijs is 4
                     print 'Dat wordt dan ' prijs ' euro, alstublieft.'
                     
-                start_code: "" 
-            5:    
+                start_code: ""
+            5:
                 story_text: |
                     ## Restaurant level 5
-                    In level 5 kun je het `repeat` commando gebruiken om van meerdere klanten de bestelling op te nemen. 
-                    
-                    ## Voorbeeld Hedy Code
-                    ```
-                    print 'Welkom bij restaurant Hedy'
-                    mensen is ask 'Voor hoeveel personen wilt u bestellen vandaag?'
-                    repeat mensen times eten is ask 'Wat wilt u bestellen?'
-                    print 'Bedankt voor uw bestelling!'
-                    ```
-                    In level 5 kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet. 
-                    In level 7 wordt dit probleem opgelost, want daar kun je meerdere regels code printen. 
-                start_code: ""
-                    
-            6:
-                story_text: |
-                    ## Restaurant level 6
-                    In level 6 kun je in je restaurant prijzen toevoegen en berekenen!
-                    
+                    In level 5 kun je in je restaurant prijzen toevoegen en berekenen!
+
                     ## Voorbeeld Hedy Code
                       Je kunt een simpel restaurant maken:
                       ```
@@ -1115,16 +1098,30 @@ adventures:
                       print 'Bedankt en eet smakelijk!'
                       ```
                       ## Uitdaging
-                      
+
                       Kun jij nog meer toevoegingen bedenken voor je restaurant? Bijvoorbeeld:
                       - mensen korting geven met een geheime code?
                       - vragen hoeveel mensen er komen en de prijs daarop aanpassen?
                       - nog een gang toevoegen?
                       - een kindermenu toevoegen?
                       - nog iets anders?
-                      
+
                 start_code: "print 'Welkom'"
-          
+            6:
+                story_text: |
+                    ## Restaurant level 6
+                    In level 6 kun je het `repeat` commando gebruiken om van meerdere klanten de bestelling op te nemen.
+                    
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Welkom bij restaurant Hedy'
+                    mensen is ask 'Voor hoeveel personen wilt u bestellen vandaag?'
+                    repeat mensen times eten is ask 'Wat wilt u bestellen?'
+                    print 'Bedankt voor uw bestelling!'
+                    ```
+                    In level 5 kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet. 
+                    In level 7 wordt dit probleem opgelost, want daar kun je meerdere regels code printen. 
+                start_code: ""
             7: 
                 story_text: | 
                     ## Restaurant level 7
@@ -1264,7 +1261,6 @@ adventures:
                    
 
                 start_code: "print Ontsnap uit het spookhuis!"
-
             3:
                 story_text: |
                     ## Spookhuis

@@ -101,11 +101,11 @@ adventures:
                     else print 'The monster eats' name
                     ```
                 start_code: "print 'Here your story will start!'"
-            5:
+            6:
                 story_text: |
                     ## Story
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in level 5 with 'repeat'.
+                    You can put such repetitions in your story, in level 6 with `repeat`.
 
                     ## Example Hedy code
                     ```
@@ -122,6 +122,25 @@ adventures:
         default_save_name: "Song"
         levels:
             5:
+                story_text: |
+                    ## Songs
+                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
+                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
+
+                    ## Example Hedy code
+                    ```
+                    verse is 99
+                    print verse ' bottles of beer on the wall'
+                    print verse ' bottles of beer'
+                    print 'Take one down, pass it around'
+                    verse is verse - 1
+                    print verse ' bottles of beer on the wall'
+                    ```
+
+                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+
+                start_code: "print 'Baby shark'"
+            6:
                 story_text: |
                     ## Songs
                     Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
@@ -141,31 +160,6 @@ adventures:
 
                     After Baby Shark you can of course also program other songs. There are many songs with repetition.
                 start_code: "print 'Baby Shark'"
-            6:
-                story_text: |
-                    ## Songs
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-
-                    ## Example Hedy code
-                    ```
-                    verse is 99
-                    print verse ' bottles of beer on the wall'
-                    print verse ' bottles of beer'
-                    print 'Take one down, pass it around'
-                    verse is verse - 1
-                    print verse ' bottles of beer on the wall'
-                    ```
-
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
-
-                    # Looking ahead
-                    In level 5 we learned to repeat 1 line with `repeat`, like this:
-
-                    * repeat 3 times print 'Baby Shark Tutududududu'
-
-                    But as you will see in this lesson, sometimes you want to repeat several lines together. This can be done with cutting and pasting, but that is a lot of work. In level 7 you will learn how to do that more easily.
-                start_code: "print 'Baby shark'"
             7:
                 story_text: |
                     ## Songs
@@ -293,21 +287,7 @@ adventures:
             5:
                 story_text: |
                     ## Let's draw
-                    In level 5 you can repeat one line of code with `repeat`.
-
-                    ## Example Hedy code
-                    ```
-                    print 'Draw figures'
-                    repeat 3 times forward 10
-                    ```
-                start_code: |
-                    print 'Draw figures'
-                    repeat 3 times forward 10
-
-            6:
-                story_text: |
-                    ## Let's draw
-                    In level 6 you can use calculations to draw different figures.
+                    In level 5 you can use calculations to draw different figures.
                     You may have learned in school that turning a full circle is 360 degrees. If not, now you know!
                     That's why you also use 90 degrees for a square. 360 divided by 4 is 90.
                     Now that we can do math with Hedy, we can draw all the figures we want!
@@ -331,6 +311,20 @@ adventures:
                     ```
                 start_code: |
                     print 'Drawing figures'
+            6:
+                story_text: |
+                    ## Let's draw
+                    In level 6 you can repeat one line of code with `repeat`.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Draw figures'
+                    repeat 3 times forward 10
+                    ```
+                start_code: |
+                    print 'Draw figures'
+                    repeat 3 times forward 10
+
             7:
                 story_text: |
                     ## Let's draw
@@ -415,17 +409,6 @@ adventures:
             5:
                 story_text: |
                     ## Dishwashing
-                    With the `repeat` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
-
-                    ## Example Hedy code
-                    ```
-                    people is mom, dad, Emma, Sophie
-                    repeat _ _ print 'the dishwasher is' _
-                    ```
-                start_code: "print 'Who does the dishes?'"
-            6:
-                story_text: |
-                    ## Dishwashing
                     How often is everyone going to do the dishes? Is that fair? You can count that in level 6.
 
                     ## Example Hedy code
@@ -441,6 +424,17 @@ adventures:
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
                     Do you make the code for the whole week?
 
+                start_code: "print 'Who does the dishes?'"
+            6:
+                story_text: |
+                    ## Dishwashing
+                    With the `repeat` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+
+                    ## Example Hedy code
+                    ```
+                    people is mom, dad, Emma, Sophie
+                    repeat _ _ print 'the dishwasher is' _
+                    ```
                 start_code: "print 'Who does the dishes?'"
     dice:
         name: "Dice"
@@ -501,21 +495,7 @@ adventures:
             5:
                 story_text: |
                     ## Dice
-                    You can also make a die again in level 5. With the `repeat` code you can easily roll a whole hand of dice.
-                    Try to finish the sample code! The dashes should contain multiple commands and characters.
-
-                    But maybe you want to make a completely different die. Of course you can!
-
-                    ## Example Hedy code
-                    ```
-                    choices is 1, 2, 3, 4, 5, earthworm
-                    repeat _ _ print _ _ _
-                    ```
-                start_code: "print 'What will the die indicate this time?'"
-            6:
-                story_text: |
-                    ## Dice
-                    You can also make an Earthworm die again in level 6, but now you can also calculate how many points have been rolled.
+                    You can also make an Earthworm die again in level 5, but now you can also calculate how many points have been rolled.
 
                     You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
 
@@ -535,6 +515,20 @@ adventures:
                     ## Looking forward
 
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                start_code: "print 'What will the die indicate this time?'"
+            6:
+                story_text: |
+                    ## Dice
+                    You can also make a die again in level 5. With the `repeat` code you can easily roll a whole hand of dice.
+                    Try to finish the sample code! The dashes should contain multiple commands and characters.
+
+                    But maybe you want to make a completely different die. Of course you can!
+
+                    ## Example Hedy code
+                    ```
+                    choices is 1, 2, 3, 4, 5, earthworm
+                    repeat _ _ print _ _ _
+                    ```
                 start_code: "print 'What will the die indicate this time?'"
     rock:
         name: "Rock, paper, scissors"
@@ -633,7 +627,7 @@ adventures:
         image: "calculator.png"
         default_save_name: "Calculator"
         levels:
-            6:
+            5:
                 story_text: |
                     ## Calculator
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
@@ -685,8 +679,6 @@ adventures:
                     print 'Great job! Your score is... ' score ' out of 10!'
                     ```
                 start_code: "print 'Welcome to this calculator!'"
-
-
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
@@ -806,25 +798,8 @@ adventures:
                 start_code: ""
             5:
                 story_text: |
-                    ## Restaurant
-                    In level 5 you've learned how to use the repeat command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to ask multiple people what they'd like to eat. Like this:
-
-                    ```
-                    print 'Welcome to Hedys restaurant!'
-                    people is ask 'How many people are joining us today?'
-                    repeat people times food is ask 'What whould you like to eat?'
-                    print 'Thanks for your order! Its coming right up!'
-                    ```
-                    In level 5 you can ask multiple people what they'd like to eat, but you can't print each order individually, because you can only repeat one line of code.
-                    In level 7 you'll learn how to repeat multiple lines of code at once, which allows you to ask multiple orders and print them too!
-
-                start_code: ""
-
-            6:
-                story_text: |
                       ## Restaurant
-                      In level 6 you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                      In level 5 you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
                       ## Example Hedy Code (Simple)
                       You can make a simple restaurant code, like this:
@@ -873,6 +848,22 @@ adventures:
                       - give people a discount when they enter a (secret) couponcode?
                       - add a children's menu?
                       - think of other fun things to add?
+
+                start_code: ""
+            6:
+                story_text: |
+                    ## Restaurant
+                    In level 5 you've learned how to use the repeat command to repeat a line of code a certain amount of times.
+                    You can use that in your restaurant to ask multiple people what they'd like to eat. Like this:
+
+                    ```
+                    print 'Welcome to Hedys restaurant!'
+                    people is ask 'How many people are joining us today?'
+                    repeat people times food is ask 'What whould you like to eat?'
+                    print 'Thanks for your order! Its coming right up!'
+                    ```
+                    In level 5 you can ask multiple people what they'd like to eat, but you can't print each order individually, because you can only repeat one line of code.
+                    In level 7 you'll learn how to repeat multiple lines of code at once, which allows you to ask multiple orders and print them too!
 
                 start_code: ""
             7:
@@ -1034,33 +1025,7 @@ adventures:
             5:
                story_text: |
                    ## Fortune Teller
-                   In level 5 you can use the repeat command to make your machine tell multiple fortunes at once.
-
-                   ## Example Hedy Code
-                   ```
-                   print 'Im Hedy the fortune teller!'
-                   print 'You can ask 3 questions!'
-                   repeat 3 times question is ask 'What do you want to know?'
-                   answer is yes, no, maybe
-                   repeat 3 times print 'My crystall ball says... ' answer at random
-                   ```
-
-                   ## Challenge
-                   As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
-                   Everytime the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
-                   This means you can't print all the questions this way.
-
-                   By using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and print the questions.
-                   This does mean that you can only use `repeat` for the answers, and you will have to ask and print all the questions seperately.
-                   Can you do it?
-
-                   In level 7 the layout of repeat command will change, which enables you to repeat multiple lines at once.
-               start_code: ""
-
-            6:
-               story_text: |
-                   ## Fortune Teller
-                   In level 6 you can use maths in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
+                   In level 5 you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                    For example you could calculate how rich you'll get or how many kids you will have when you grow up.
 
                    ## Example Hedy Code
@@ -1090,7 +1055,31 @@ adventures:
                    print 'You are ' result ' percent smart.'
                    ```
                start_code: ""
+            6:
+               story_text: |
+                   ## Fortune Teller
+                   In level 6 you can use the `repeat` command to make your machine tell multiple fortunes at once.
 
+                   ## Example Hedy Code
+                   ```
+                   print 'Im Hedy the fortune teller!'
+                   print 'You can ask 3 questions!'
+                   repeat 3 times question is ask 'What do you want to know?'
+                   answer is yes, no, maybe
+                   repeat 3 times print 'My crystall ball says... ' answer at random
+                   ```
+
+                   ## Challenge
+                   As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
+                   Everytime the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
+                   This means you can't print all the questions this way.
+
+                   By using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and print the questions.
+                   This does mean that you can only use `repeat` for the answers, and you will have to ask and print all the questions seperately.
+                   Can you do it?
+
+                   In level 7 the layout of repeat command will change, which enables you to repeat multiple lines at once.
+               start_code: ""
             7:
               story_text: |
                  ## Fortune Teller
@@ -1109,7 +1098,6 @@ adventures:
                     print 'My crystall ball says...' answers at random
                  ```
               start_code: ""
-
     haunted:
         name: "Haunted House"
         description: "escape from the haunted house"
@@ -1314,10 +1302,21 @@ adventures:
                 start_code: "print 'Lets go to the next level!'"
             4:
                 story_text: |
-                    ## What's next?  
-                    Great job! You've reached the end of level 4, which means you have practiced with `if` and `else`. You have probably noticed that your codes are getting longer and longer. 
+                    ## What's next?
+                    Now you've reached the end of level 4, so oyu have learned `ask` and `if`. For example you can ask guests what they would like to eat.
+                    What you can't yet do though, is calculate the price for everyone's dinner.
+
+                    Level 5 makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
+                    Another option in level 6 is programming your own maths game, for your little brother or sister to practice their multiplications.
+                    Go see for yourself in the next level!
+
+                start_code: "print 'On to the next level!'"
+            5:
+                story_text: |
+                   ## What's next?
+                    Great job! You've reached the end of level 5, which means you have practiced with `if` and `else`. You have probably noticed that your codes are getting longer and longer.
                     For example if you want to program 'Happy Birthday'
-                    
+
                     ```
                     print 'happy birthday to you'
                     print 'happy birthday to you'
@@ -1326,28 +1325,19 @@ adventures:
 
                     ```
                     That's a lot of code for mainly the same words over and over again. Luckily level 5 has a solution with the `repeat` command, that allows you to repeat a line of code multiple times.
-                    
-                start_code: "print 'On to the next level!'"
-            5:
-                story_text: |
-                    ## What's next?
-                    Now you've reached the end of level 5, so you've learned how to repeat a line of code. For example you can code your restaurant so that you can ask multiple guest what they would like to eat. 
-                    What you can't yet do though, is calculate the price for everyone's dinner.
-                    
-                    Level 6 makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount. 
-                    Another option in level 6 is programming your own maths game, for your little brother or sister to practice their multiplications.
-                    Go see for yourself in the next level!
+
+
                 start_code: "print 'On to the next level!'"
             6:
                 story_text: |
-                    ## What's next?  
-                    In level 5 you've learned how to repeat one single line of code. This comes in handy, but it's not always enhough. Sometimes you want to repeat multiple lines at onece. 
-                    Level 7 allows you to group a couple of lines of code, and repeat that little group of lines all at once! 
-                    
+                    ## What's next?
+                    In level 6 you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at onece.
+                    Level 7 allows you to group a couple of lines of code, and repeat that little group of lines all at once!
+
                     ```
                     repeat 5 times print 'In level 7 you can repeat multiple lines of code at once!'
                     ```
-                    
+
                 start_code: "print 'Lets go to the next level!'"
             7:
                 story_text: |
