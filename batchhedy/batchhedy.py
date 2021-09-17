@@ -14,8 +14,8 @@ from pydantic import BaseModel, FilePath
 from lark.exceptions import GrammarError, UnexpectedEOF
 from lazy.lazy import lazy
 
-def run():
-        jobs = create_jobs()
+def run(filenames, report, top, check = None, ):
+        jobs = create_jobs(filenames)
         #skip empty programs
         jobs = [j for j in jobs if not is_empty(j.code)]
 
@@ -26,7 +26,7 @@ def run():
             if job.error_msg != '':
                 number_of_error_programs += 1
 
-            checkdata = create_checkdata()
+            checkdata = create_checkdata(check)
             if checkdata is not None:
                 # Compare with previous run
                 try:
@@ -47,7 +47,7 @@ def run():
                     print('checking failed')
 
         if report is not None:
-            _save_report(jobs)
+            _save_report(jobs, report)
 
         # print run informations
         runtimes_and_files = [(r.filename, r.transpile_time) for r in jobs]
@@ -78,10 +78,10 @@ def run():
         print(f"Min transpile time:   {minvalue:10f}s")
         print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
 
-def create_jobs():
+def create_jobs(filenames):
     """ The list of jobs to be run """
     # Create object list
-    jobs = [TranspileJob(f) for f in filenames_list]
+    jobs = [TranspileJob(f) for f in filenames]
 
     # Remove files with invalid level
     invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
@@ -92,7 +92,7 @@ def create_jobs():
 
     return jobs
 
-def create_checkdata():
+def create_checkdata(check):
     """ Data of a previous run. Return None is self.check is not set."""
     if check is None:
         return None
@@ -230,7 +230,7 @@ def is_empty(program):
     all_lines = program.split('\n')
     return all(line == '' for line in all_lines)
 
-def _save_report(jobs):
+def _save_report(jobs, report):
         with open(report, "w", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=[
                 "filename",
@@ -251,7 +251,7 @@ def _save_report(jobs):
                     "filename": job.filename,
                     "date": job.date,
                     "level": job.level,
-                    "code": f'""{code}""',
+                    "code": f'{code}',
                     "transpile time": job.transpile_time,
                     "error": job.error,
                     "error message": job.error_msg,
@@ -259,16 +259,13 @@ def _save_report(jobs):
                 })
 
 os.chdir(path.dirname(path.abspath(__file__)))
-filenames_list = glob.glob('../../input/*.hedy')
-report = 'output_report.csv'
+filenames_list = glob.glob('../../input_small/*.hedy')
 
+#report determines if we are generating a fresh report
 #check determines if we are comparing against an existing report
-check = None
-# check = 'output_report.csv'
-top = 10
 
 if __name__ == '__main__':
     if len(filenames_list) == 0:
         print("no files found!")
     else:
-        run()
+        run(filenames=filenames_list, check = 'output_report_small.csv', report = 'output_report_small.csv', top=10)
