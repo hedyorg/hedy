@@ -23,22 +23,23 @@
                 <p
                             class="m-4 text-black  text-center font-extrabold  text-4xl font-slab ">Het juiste antwoord is: {% if question.mp_choice_options[index_option].option_text  %}{{question.mp_choice_options[index_option].option_text}} {% elif question.mp_choice_options[index_option].code %} {{question.mp_choice_options[index_option].code }} {% endif %}</p></div>
         </div>
-    </div>
-    <div class="p-10 button-bar border-t-8 border-green-600">
-        {% if question_nr < questions|length %}
-            <div></div>
-            <button class="green-btn ml-1 text-right-0"
-                    onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1'">
-                Ga
-                naar vraag {{ question_nr + 1 }}</button>
-        {% else %}
-            <div></div>
-            <button class="green-btn ml-1 right-0"
-                    onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1'">
-                Ga
-                naar de resultaten van de quiz
-            </button>
+          <div class="p-10 button-bar border-t-8 border-green-600">
+            {% if question_nr < questions|length %}
+                <div></div>
+                <button class="green-btn ml-1 text-right-0"
+                        onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1'">
+                    Ga
+                    naar vraag {{ question_nr + 1 }}</button>
+            {% else %}
+                <div></div>
+                <button class="green-btn ml-1 right-0"
+                        onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1'">
+                    Ga
+                    naar de resultaten van de quiz
+                </button>
 
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
+
 {% endblock %}
