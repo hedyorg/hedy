@@ -460,6 +460,9 @@ def routes (app, database, requested_lang):
 
         DATABASE.update_user(user ['username'], {'is_teacher': 1 if body ['is_teacher'] else 0})
 
+        if body ['is_teacher']:
+            send_email_template ('welcome_teacher', user ['email'], requested_lang (), '')
+
         return '', 200
 
     @app.route ('/admin/changeUserEmail', methods=['POST'])
@@ -537,11 +540,14 @@ def send_email_template (template, email, lang, link):
     body = body + texts ['email_goodbye'].split ('\n')
 
     body_plain = '\n'.join (body)
-    body_html = '<p>' + '</p><p>'.join (body) + '</p>'
+
+    with open('templates/base_email.html', 'r', encoding='utf-8') as f:
+        body_html = f.read ()
+    body_html += '<p>' + '</p><p>'.join (body) + '</p>'
+    body_html += '</div>'
     if link:
         body_plain = body_plain.replace ('@@LINK@@', 'Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.replace ('@@LINK@@', '<a href="' + link + '">Link</a>')
-    body_html += '<br><img style="max-width: 100px" src="http://www.hedycode.com/images/Hedy-logo.png">'
 
     send_email (email, subject, body_plain, body_html)
 
