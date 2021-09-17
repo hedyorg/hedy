@@ -489,10 +489,9 @@ def get_quiz(level_source, question_nr, attempt):
                 'quizLevel': level_source,
                 'answerIds': session.get('list-of-answer-ids'),
                 'completedAt': timems(),
-                'isCorrectAnswer': False,
                 'totalPoints': session.get('total_score'),
             }
-            print(stored_quiz_attempt)
+
             DATABASE.store_quiz_attempt(stored_quiz_attempt)
             return render_template('endquiz.html', correct=session.get('correct_answer'),
                                    total_score=session.get('total_score'),
@@ -518,7 +517,7 @@ def get_result_info_quiz(level_source):
         g.prefix = '/hedy'
 
     attempt_data = DATABASE.get_quiz_attempt(session.get('quiz-attempt-id'))
-    print('attempt data,' , attempt_data)
+
     return render_template('results-quiz.html', attempt_data = attempt_data, quiz=quiz_data, level=int(level_source)-1,  menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
@@ -590,7 +589,6 @@ def submit_answer(level_source, question_nr, attempt):
             list_answers = session['list-of-answer-ids']
             list_answers.append(answer_id)
             session['list-of-answer-ids'] = list_answers
-            print(session.get('list-of-answer-ids'))
 
             answerIsCorrect = True if question['correct_answer'] in option else False
             stored_quiz_answer = {
@@ -605,7 +603,6 @@ def submit_answer(level_source, question_nr, attempt):
             }
 
             if question['correct_answer'] in option:
-                print(stored_quiz_answer)
 
                 DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('feedback.html', quiz=quiz_data, question=question,
@@ -643,7 +640,6 @@ def submit_answer(level_source, question_nr, attempt):
                 list_answers = session['list-of-answer-ids']
                 list_answers.append(answer_id)
                 session['list-of-answer-ids'] = list_answers
-                print(session.get('list-of-answer-ids'))
 
                 DATABASE.store_quiz_answer(stored_quiz_answer)
                 return render_template('feedback.html', quiz=quiz_data, question=question,
