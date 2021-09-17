@@ -12,8 +12,8 @@ TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
 
-QUIZ_ANSWER = dynamo.Table(storage, 'QuizAnswer', 'quizAnswerId')
-QUIZ_ATTEMPT = dynamo.Table(storage, 'QuizAttempt', 'quizAttemptId')
+QUIZ_ANSWER = dynamo.Table(storage, 'quizAnswer', 'quizAnswerId')
+QUIZ_ATTEMPT = dynamo.Table(storage, 'quizAttempt', 'quizAttemptId')
 
 class Database:
 
@@ -25,7 +25,6 @@ class Database:
         """Load a quiz answer from the database."""
 
         return QUIZ_ANSWER.get({'quizAnswerId': answer_id})
-
 
     def store_quiz_attempt(self,quiz_attempt):
         return QUIZ_ATTEMPT.create(quiz_attempt)
