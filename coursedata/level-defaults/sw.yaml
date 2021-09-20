@@ -63,6 +63,22 @@
       example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
       demo_code: "jibu is ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
 5:
+  start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
+  intro_text: "Matumizi ya `ask`, `print` na `if` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
+  commands:
+    -
+      explanation: "Tumia fungua semi na funga semi ya aina ''"
+      example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
+      demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
+    -
+      explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
+      example: "Mfano: answer is ask '10 jumlisha 10 ni sawa sawa na?'"
+      demo_code: "jibu is ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
+    -
+      explanation: "Matumizi ya `repeat` na `if` pamoja"
+      example: "Mfano: if jibu is 50 repeat 3 times print 'Sahihi!' else repeat 5 times print 'Sio Sahihi!'"
+      demo_code: "jibu is ask '10 mara 5 in sawa sawa na?'\nif jibu is 50 repeat 3 times print 'Sahihi!' else repeat 5 times print 'Sio Sahihi!'"
+6:
   start_code: "repeat 3 times print 'Hedy ni furaha!'"
   intro_text: "Matumizi ya `ask`, `print` na `if` zinabaki kama ziliwio. Ila kwa kiwango cha tano, tutasoma neno `repeat`. Neno `repeat` kinatumika kurudia utekelezaji mara nyingi."
   commands:
@@ -82,22 +98,7 @@
       explanation: "`repeat` na `if` zinaweza kutumika kwapamoja"
       example: "Mfano: if rangi is kijani repeat 3 times print 'nzuri!' else repeat 5 times print 'meh'"
       demo_code: "rangi is ask 'Rangi ambayo unapenda ni kipi?'\nif rangi is kijani repeat 3 times print 'vizuri sana!' else repeat 5 times print 'meh'"
-6:
-  start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-  intro_text: "Matumizi ya `ask`, `print`, `if` na `repeat` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
-  commands:
-    -
-      explanation: "Tumia fungua semi na funga semi ya aina ''"
-      example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
-      demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-    -
-      explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
-      example: "Mfano: answer is ask '10 jumlisha 10 ni sawa sawa na?'"
-      demo_code: "jibu is ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
-    -
-      explanation: "Matumizi ya `repeat` na `if` pamoja"
-      example: "Mfano: if jibu is 50 repeat 3 times print 'Sahihi!' else repeat 5 times print 'Sio Sahihi!'"
-      demo_code: "jibu is ask '10 mara 5 in sawa sawa na?'\nif jibu is 50 repeat 3 times print 'Sahihi!' else repeat 5 times print 'Sio Sahihi!'"
+
 7:
   start_code: "repeat 5 times\n    print 'Jambu!! rafiki'\n    print 'Hii itachapishwa kwenye skrini mara 5'"
   intro_text: "ask na print zinatumika kama tulivio zitumia kwenye kiwango cha sita. Ila matumizi ya if na repeat zimebadilika! Sasa unaweza kutekeleza kikundi cha code kwa pamoja, ila utatakiwa kuweka ujazo(indent). Kinamaanisha utaweka nafasi(space) mara nne ukianza ukiandika kwenye mstari. Utafanya hivyo ataukiandika kikundi(block) cha code ata kama ni mstari moja tu. Kama utatumia if na repeat, utatakiwa ujazo kila kikundi(block) cha code. Rejea mfano zifuatazo kwa maelezo zaid!"
