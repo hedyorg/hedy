@@ -331,7 +331,7 @@ class TestsLevel4(unittest.TestCase):
 
 
   def test_ifelse_should_go_before_assign(self):
-    maxlevel = 5
+    maxlevel = 4
     code = textwrap.dedent("""\
     kleur is geel
     if kleur is groen antwoord is ok else antwoord is stom
