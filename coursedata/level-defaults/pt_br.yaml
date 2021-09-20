@@ -603,3 +603,61 @@
                 print('Está certo!')
             else:
                 print('Não, está errado!')
+21:
+    start_code: |-
+        pais = input('Onde você mora?')
+        if pais != Brasil:
+            print('Legal!')
+        else:
+            print('Também moro no Brasil!')
+    intro_text: |-
+        Vamos aprender um novo conceito, o `!=` . A ! significa não e
+        o = significa igual, portanto, `!=` significa que não é igual.
+        Por exemplo, 5 != 4.
+    commands:
+    -   name: "Não é igual"
+        explanation: |-
+            Se estamos verificando se duas coisas são diferentes,
+            usamos `!=`
+        example: "Por exemplo: 5+3 != 9"
+        demo_code: |-
+            numero = input('Você não pode responder 5, qual é um bom número?')
+            if numero != 5:
+                print('Bom trabalho!')
+            else:
+                print('Você não pode responder 5!')
+22:
+    start_code: |-
+        idade = input('Tenho 12 anos, quantos anos você tem?')
+        if idade <= 11:
+            print('Você é mais novo(a) do que eu!')
+        elif idade >= 13:
+            print('Você é mais velho(a) do que eu!')
+    intro_text: |-
+        Vamos juntar < e = agora. Se quisermos descobrir se algo é
+        menor ou igual a um segundo número, utilizamos `<=`. Podemos
+        também verificar se algo é maior ou igual ao segundo número
+        com `>=`.
+    commands:
+    -   name: "Menor ou igual"
+        explanation: |-
+            `<=` verifica se o número à esquerda do `<=` é menor ou
+            igual ao que está a sua direita. Portanto, 5 < 5 não é
+            verdade porque 5 não é menor que 5, mas, 5 <= 5 é verdade
+            porque 5 é menor ou igual a 5. 6 <= 5 não é verdade.
+        example: "Por exemplo: idade <= 12"
+        demo_code: |-
+            idade = input('Eu tenho 13 anos, que idade você tem?')
+            if idade <= 12:
+                print('Você é mais novo(a) do que eu!')
+    -   name: "Maior ou igual"
+        explanation: |-
+            `>=` verifica se o número à esquerda do `>=` é maior ou
+            igual ao número a sua direita. Portanto, 5 > 5 não é
+            verdade porque 5 não é maior que 5, mas, 5 >= 5 é verdade
+            porque 5 é maior ou igual que 5. 4 >= 5 não é verdade.
+        example: "Por exemplo: idade >= 12"
+        demo_code: |-
+            idade = input('Eu tenho 11 anos, quantos anos você tem?')
+            if idade >= 12:
+                print('Você é mais velho(a) do que eu!')
