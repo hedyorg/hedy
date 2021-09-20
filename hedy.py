@@ -1098,17 +1098,17 @@ def transpile(input_string, level, sub = 0):
         # This is the 'fall back' transpilation
         # that should surely be improved!!
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
-        # if E.args[0] == 'Parse':
-        #     #try 1 level lower
-        #     if level > 1 and sub == 0:
-        #         try:
-        #             new_level = level - 1
-        #             result = transpile_inner(input_string, new_level, sub)
-        #         except (LarkError, HedyException) as innerE:
-        #             # Parse at `level - 1` failed as well, just re-raise original error
-        #             raise E
-        #         # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-        #         raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
+        if E.args[0] == 'Parse':
+            #try 1 level lower
+            if level > 1 and sub == 0:
+                try:
+                    new_level = level - 1
+                    result = transpile_inner(input_string, new_level, sub)
+                except (LarkError, HedyException) as innerE:
+                    # Parse at `level - 1` failed as well, just re-raise original error
+                    raise E
+                # If the parse at `level - 1` succeeded, then a better error is "wrong level"
+                raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
         raise E
 
 def repair(input_string):
