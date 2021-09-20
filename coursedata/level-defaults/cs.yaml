@@ -120,40 +120,12 @@
             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj...'
 5:
-    start_code: repeat 3 times print 'Hedy je zábavná!'
-    intro_text: |-
-        `ask`, `print` a `if` fungují stejně jako na úrovni 4.
-        Úroveň 5 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
-        ## Příklad kódu v Hedy
-        ```
-        repeat 3 times print 'Hedy je zábavná!'
-        ```
-    commands:
-    -   explanation: Připomeň si `print` s uvozovkami.
-        example: "Příklad: print 'Ahoj, vítej v Hedy!'"
-        demo_code: print 'Ahoj, vítej v Hedy!'
-    -   explanation: Zopakuj si příkaz `ask`.
-        example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
-        demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            print barva ' je tvoje nejoblíbenější barva.'
-    -   explanation: Rozhodni se pomocí `if`.
-        example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
-        demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is růžová print 'Moje taky!' else print 'Fuj...'
-    -   explanation: Zkombinuj `repeat` a `if`.
-        example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
-        demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'
-6:
     start_code: print '5 krát 5 je ' 5 * 5
     intro_text: |-
-        `ask`,` print`, `if` a` repeat` stále fungují jako na úrovních 4 a 5.
-         V úrovni 6 je ale něco nového, nyní můžeš také počítat!
+        `ask`,` print`, `if` a` repeat` stále fungují jako na úrovních 4.
+         V úrovni 5 je ale něco nového, nyní můžeš také počítat!
 
-         V úrovni 6 přibyly nové znaky, díky kterým můžeš ve svých kódech dělat základní výpočty.
+         V úrovni 5 přibyly nové znaky, díky kterým můžeš ve svých kódech dělat základní výpočty.
 
          Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
 
@@ -179,6 +151,34 @@
         demo_code: |-
             vysledek is ask 'Kolik je 10 krát 5?'
             if vysledek is 50 repeat 3 times print 'Správně!' else repeat 5 times print 'Špatně!'
+6:
+    start_code: repeat 3 times print 'Hedy je zábavná!'
+    intro_text: |-
+        `ask`, `print` a `if` fungují stejně jako na úrovni 4 a 6.
+        Úroveň 6 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
+        ## Příklad kódu v Hedy
+        ```
+        repeat 3 times print 'Hedy je zábavná!'
+        ```
+    commands:
+    -   explanation: Připomeň si `print` s uvozovkami.
+        example: "Příklad: print 'Ahoj, vítej v Hedy!'"
+        demo_code: print 'Ahoj, vítej v Hedy!'
+    -   explanation: Zopakuj si příkaz `ask`.
+        example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
+        demo_code: |-
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            print barva ' je tvoje nejoblíbenější barva.'
+    -   explanation: Rozhodni se pomocí `if`.
+        example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
+        demo_code: |-
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            if barva is růžová print 'Moje taky!' else print 'Fuj...'
+    -   explanation: Zkombinuj `repeat` a `if`.
+        example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
+        demo_code: |-
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'
 7:
     start_code: |-
         repeat 5 times
