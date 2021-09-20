@@ -1108,7 +1108,7 @@ def transpile(input_string, level, sub = 0):
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
                 # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-                raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
+                raise HedyException('Wrong Level', correct_code=result.code, original_level=new_level, working_level=level) from E
         raise E
 
 def repair(input_string):
