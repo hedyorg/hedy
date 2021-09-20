@@ -169,12 +169,13 @@
         demo_code: |-
             valasz is ask 'Mennyi 10+10?'
             if valasz is 20 print 'Igen!' else print 'Hoppá'
-    -   name: "repeat"
-        explanation: "`repeat` és `if` együtt"
-        example: "Példa: if szorzat is 50 repeat 3 times print 'helyes!' else repeat 5 times print 'hibás'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            szorzat is ask 'Mennyi 10-szer 5?'
-            if szorzat is 50 repeat 3 times print 'helyes!' else repeat 5 times print 'hibás'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 6:
     start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
     intro_text: |
@@ -194,22 +195,19 @@
         explanation: "Kérdezz valamit az `ask`utasítással."
         example: "Példa: szin is ask Mi a kedvenc színed?"
         demo_code: |-
-            szin is ask Mi a kedvenc színed?
+            szin is ask 'Mi a kedvenc színed?'
             print szin ' a kedvenced!'
     -   name: "if"
         explanation: "Készíts elágazást az `if` és az 'else' utasítással"
         example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
         demo_code: |-
-            szin is ask Mi a kedvenc színed?
+            szin is ask 'Mi a kedvenc színed?'
             if szin is zöld print 'szép!' else print 'csúnya'
-
-
-    -   name: "repeat"
-        explanation: "`repeat` és `if` együtt"
-        example: "Példa: if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            szin is ask Mi a kedvenc színed?
-            if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

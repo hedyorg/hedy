@@ -151,12 +151,13 @@
         demo_code: |-
             answer is ask 'Πόσο είναι 10 + 10;'
             if answer is 20 print 'Ναι!' else print 'Ουπς'
-    -   name: 'repeat'
-        explanation: 'Οι `repeat` και `if` σε συνδυασμό'
-        example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-            if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 6:
     start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
     intro_text: |-
@@ -183,12 +184,11 @@
         demo_code: |-
             color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
-    -   name: 'repeat'
-        explanation: 'Οι `repeat` και `if` σε συνδυασμό'
-        example: "Παράδειγμα: if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-            if color is green repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

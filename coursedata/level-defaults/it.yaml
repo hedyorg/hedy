@@ -159,12 +159,13 @@
         demo_code: |-
             risposta is ask 'Quanto fa 10 più 10?'
             if risposta is 20 print 'Yes!' else print 'Ops'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` combinati"
-        example: "Example: if prodotto is 50 repeat 3 times print 'corretto!' else repeat 5 times print 'errato!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            prodotto is ask 'Quanto fa 10 per 5?'
-            if prodotto is 50 repeat 3 times print 'corretto!' else repeat 5 times print 'errato!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 6:
     start_code: "repeat 3 times print 'Hedy è divertente!'"
     intro_text: |
@@ -192,12 +193,11 @@
         demo_code: |-
             colore is ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` combinati insieme"
-        example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            if colore is verde repeat 3 times print 'carino' else repeat 5 times print 'mah'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

@@ -933,33 +933,7 @@ adventures:
             5:
                 story_text: |-
                     ## Jósnő
-                    Az 5. szinten a repeat paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
-
-                    ## Példa Hedy -kódra
-                    ```
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Feltehetsz 3 kérdést!'
-                    repeat 3 times kerdes is ask 'Mit akarsz tudni?'
-                    valasz is igen, nem, talan
-                    repeat 3 times print 'A kristálygömböm azt mondja... ' valasz at random
-                    ```
-                    ## Kihívás
-                    Amint láthatod, a kérdések ebben a példában nincsenek kiíratva. Ennek az az oka, hogy a "kérdés" változót háromszor módosult.
-                    Valahányszor a játékos kitölti az új választ, Hedy felülírja az előzőt, így a játékos első válaszát elfelejti.
-                    Ez azt jelenti, hogy így nem tudja kiíratni az összes kérdést.
-
-                    Ha 1 helyett 3 különböző változót használsz (például `kerdes1`,` kerdes2` és `kerdes3`), megoldhatod a problémát, és kiírathatod a kérdéseket.
-                    Ez azt jelenti, hogy a válaszoknál csak az "repeat" utasítást kell használnod, és az összes kérdést külön kell feltenned és ki kell íratnod.
-                    Meg tudod csinálni?
-
-                    A 7. szinten az ismétlés parancs elrendezése megváltozik, ami lehetővé teszi több sor ismétlését egyszerre.
-                start_code : |-
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Feltehetsz 3 kérdést!'
-            6:
-                story_text: |-
-                    ## Jósnő
-                    A 6. szinten jövendőmondóként használhatod a matematikát előrejelzéseidben. Ez lehetővé teszi (buta) képletek kitalálását a jövő kiszámításához.
+                    A 5. szinten jövendőmondóként használhatod a matematikát előrejelzéseidben. Ez lehetővé teszi (buta) képletek kitalálását a jövő kiszámításához.
                     Például kiszámíthatod, hogy milyen gazdag leszel, vagy hány gyermeked lesz, ha felnősz.
 
                     ## Példa Hedy -kódra
@@ -990,6 +964,32 @@ adventures:
                 start_code: |-
                     print 'Hedy, a jósnő vagyok!'
                     print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
+            6:
+                story_text: |-
+                    ## Jósnő
+                    Az 6. szinten a repeat paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
+
+                    ## Példa Hedy -kódra
+                    ```
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Feltehetsz 3 kérdést!'
+                    repeat 3 times kerdes is ask 'Mit akarsz tudni?'
+                    valasz is igen, nem, talan
+                    repeat 3 times print 'A kristálygömböm azt mondja... ' valasz at random
+                    ```
+                    ## Kihívás
+                    Amint láthatod, a kérdések ebben a példában nincsenek kiíratva. Ennek az az oka, hogy a "kérdés" változót háromszor módosult.
+                    Valahányszor a játékos kitölti az új választ, Hedy felülírja az előzőt, így a játékos első válaszát elfelejti.
+                    Ez azt jelenti, hogy így nem tudja kiíratni az összes kérdést.
+
+                    Ha 1 helyett 3 különböző változót használsz (például `kerdes1`,` kerdes2` és `kerdes3`), megoldhatod a problémát, és kiírathatod a kérdéseket.
+                    Ez azt jelenti, hogy a válaszoknál csak az "repeat" utasítást kell használnod, és az összes kérdést külön kell feltenned és ki kell íratnod.
+                    Meg tudod csinálni?
+
+                    A 7. szinten az ismétlés parancs elrendezése megváltozik, ami lehetővé teszi több sor ismétlését egyszerre.
+                start_code : |-
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Feltehetsz 3 kérdést!'
             7:
                 start_code: |-
                     print 'Hedy a jósnő vagyok!'

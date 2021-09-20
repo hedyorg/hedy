@@ -88,10 +88,13 @@
        explanation: "हिसाब के लिए पूछें और जांचें कि वह सही है।"
        example: "उदाहरण: उत्तर is ask '१० जमा १० क्या होता है?'"
        demo_code: "उत्तर is ask '१० जमा १० क्या है?'\nif उत्तर is २० print 'हाँ!' else  print 'उफ़'"
-     - name: "repeat"
-       explanation: "`repeat` और `if` एक साथ "
-       example: "उदाहरण: if रंग is हरा repeat ३ बार print 'सुंदर!' else repeat 5 times print 'मेह'"
-       demo_code: "रंग is ask 'आपका पसंदीदा रंग कोनसा है?'\nif रंग is हरा repeat 3 times print 'सुन्दर' else repeat 5 times print 'मेह'"
+     - name: "`ask` and `if` turtle"
+       explanation: "Ask the user how many angles they want"
+       example: "Example: angles is ask 'How many angles?'"
+       demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 6:
    start_code: "repeat 3 times print 'हेडी मजेदार है!'"
    intro_text: "`ask`, `print` और `if` वैसे ही काम करते है जैसा स्तर ४ और ५ में करते थे| लेकिन स्तर ६ में `repeat` आदेश जुड़ जाता है| repeat एक कोड की लाइन को बहुत बार निष्पादित करने के काम आता है|"
@@ -110,13 +113,11 @@
        demo_code: |
          रंग is ask 'आपका पसंदीदा रंग कौन सा है?'
          if रंग is हरा print 'सुन्दर!' else print 'मेह'
-     - name: "repeat"
-       explanation: "`repeat` और `if` एक साथ"
-       example: "उदाहरण: if रंग is हरा repeat ३ बार print 'सुन्दर!’ else repeat ५ बार print 'मेह’"
-       demo_code: |
-         रंग is ask 'पसंदीदा रंग कौन सा है?'
-         if रंग is हरा repeat 3 times print 'सुन्दर!' else repeat 4 times print 'मेह'
-
+     - name: "repeat - turtle"
+       explanation: "Repeat a line of code with `repeat`."
+       example: "Example: repeat 3 times forward 10"
+       demo_code: |-
+            repeat 3 times forward 10
 7:
    start_code: |
      repeat 5 times

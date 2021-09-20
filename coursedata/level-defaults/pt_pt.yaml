@@ -145,11 +145,13 @@
         demo_code: |-
             resultado is ask 'Quanto é 10 mais 10?'
             if resultado is 20 print 'Sim!' else print 'Oops'
-    -   explanation: "`repeat` e `if` juntos."
-        example: "Exemplo: if produto is 50 repeat 3 times print 'Correcto!' else repeat 5 times print 'Errado!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            produto is ask 'Quanto é 10 vezes 5?'
-            if produto is 50 repeat 3 times print 'Correcto!' else repeat 5 times print 'Errado!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 6:
     start_code: "repeat 3 times print 'Hedy é divertida!'"
     intro_text: |
@@ -166,18 +168,19 @@
     -   explanation: "Pergunta alguma coisa usando `ask`."
         example: "Exemplo: cor is ask Qual é a tua cor favorita?"
         demo_code: |-
-            cor is ask Qual é a tua cor favorita?
+            cor is ask 'Qual é a tua cor favorita?'
             print cor ' é a tua favorita!'
     -   explanation: "Faz uma escolha utilizando o `if`."
         example: "Exemplo: if cor is verde print 'Linda!' else print 'pff'"
         demo_code: |-
-            cor is ask Qual é a tua cor favorita?
+            cor is ask 'Qual é a tua cor favorita?'
             if cor is verde print 'Linda!' else print 'pff'
-    -   explanation: "`repeat` e `if` juntos."
-        example: "Exemplo: if cor is verde repeat 3 times print 'Linda!' else repeat 5 times print 'pff'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            cor is ask Qual é a tua cor favorita?
-            if color is green repeat 3 times print 'Linda!' else repeat 5 times print 'pff'
+            repeat 3 times forward 10
+
 7:
     start_code: |-
         repeat 5 times

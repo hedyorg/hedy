@@ -130,39 +130,6 @@
         demo_code: |-
             cor is ask 'Qual a sua cor favorita?'
             if cor is verde print 'bonita!' else print 'não gostei'
-6:
-    start_code: "repeat 3 times print 'Hedy é divertido!'"
-    intro_text: |
-        Os comandos `ask`, `print` e `if` funcionam exatamente como no nível 4 e 5.
-        Mas o nível 6 adiciona o comando `repeat`.
-        `repeat` pode ser usado para executar uma linha de código várias vezes.
-        ## Exemplo de código Hedy
-        ```
-        repeat 3 times print 'Hedy é divertido!'
-        ```
-    commands:
-    -   name: "print"
-        explanation: "Printa o texto usando aspas simples"
-        example: "Exemplo: print 'Olá seja bem-vindo(a) à Hedy.'"
-        demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
-    -   name: "ask"
-        explanation: "Pergunta algo com `ask`."
-        example: "Exemplo: cor is ask 'Qual a sua cor favorita?'"
-        demo_code: |-
-            cor is ask 'Qual a sua cor favorita?'
-            print cor ' is your favorite!'
-    -   name: "if"
-        explanation: "Faz uma escolha com `if`."
-        example: "Exemplo: if cor is verde print 'bonita!' else print 'não gostei'"
-        demo_code: |-
-            cor is ask 'Qual a sua cor favorita?'
-            if cor is verde print 'bonita!' else print 'não gostei'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` juntos"
-        example: "Exemplo: if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
-        demo_code: |-
-            cor is ask 'Qual a sua cor favorita?'
-            if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'
 5:
     start_code: "print '5 vezes 5 é ' 5 * 5"
     intro_text: |
@@ -193,12 +160,45 @@
         demo_code: |-
             resposta is ask 'Quanto é 10 mais 10?'
             if resposta is 20 print 'Acertou!' else print 'Errou! Tente de novo'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` juntos"
-        example: "Example: if produto is 50 repeat 3 times print 'correto!' else repeat 5 times print 'incorreto!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            produto is ask 'Quanto e 10 vezes 5?'
-            if produto is 50 repeat 3 times print 'correto!' else repeat 5 times print 'incorreto!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
+    start_code: "repeat 3 times print 'Hedy é divertido!'"
+    intro_text: |
+        Os comandos `ask`, `print` e `if` funcionam exatamente como no nível 4 e 5.
+        Mas o nível 6 adiciona o comando `repeat`.
+        `repeat` pode ser usado para executar uma linha de código várias vezes.
+        ## Exemplo de código Hedy
+        ```
+        repeat 3 times print 'Hedy é divertido!'
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Printa o texto usando aspas simples"
+        example: "Exemplo: print 'Olá seja bem-vindo(a) à Hedy.'"
+        demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
+    -   name: "ask"
+        explanation: "Pergunta algo com `ask`."
+        example: "Exemplo: cor is ask 'Qual a sua cor favorita?'"
+        demo_code: |-
+            cor is ask 'Qual a sua cor favorita?'
+            print cor ' is your favorite!'
+    -   name: "if"
+        explanation: "Faz uma escolha com `if`."
+        example: "Exemplo: if cor is verde print 'bonita!' else print 'não gostei'"
+        demo_code: |-
+            cor is ask 'Qual a sua cor favorita?'
+            if cor is verde print 'bonita!' else print 'não gostei'
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

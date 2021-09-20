@@ -146,11 +146,13 @@
         demo_code: |-
             answer is ask '10加10等于几?'
             if answer is 20 print '做得好!' else print '糟糕,算错啦'
-    -   explanation: "`repeat`循环语句 and `if-else` 条件语句的组合"
-        example: "例如: if 乘积 is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            product is ask '10乘以5等于几?'
-            if product is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
 6:
     start_code: "repeat 3 times print '海迪很好玩!'"
     intro_text: |
@@ -167,17 +169,17 @@
     -   explanation: "Ask的意思是提问，用`ask`提出问题."
         example: "例如: color is ask 你最喜欢的颜色是什么?"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             print color ' is your favorite!'
     -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             if color is green print 'pretty!' else print 'meh'
     -   explanation: "`repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
+            color is ask '你最喜欢的颜色是什么?'
             if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
 
 7:
