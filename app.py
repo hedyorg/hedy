@@ -102,6 +102,10 @@ def load_adventures_per_level(lang, level):
     for short_name, adventure in adventures.items ():
         if not level in adventure['levels']:
             continue
+        # end adventure is the quiz
+        # if quizzes are not enabled, do not load it
+        if short_name == 'end' and not config['quiz-enabled']:
+            continue
         all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
@@ -217,7 +221,8 @@ def after_request_log_status(response):
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-        'X-Frame-Options': 'DENY',
+        # TODO: re-enable
+        #'X-Frame-Options': 'DENY',
         'X-XSS-Protection': '1; mode=block',
     }
     response.headers.update(security_headers)

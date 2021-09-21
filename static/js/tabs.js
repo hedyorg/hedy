@@ -38,6 +38,13 @@ $(function() {
       adventures [adventure.short_name] = adventure;
     });
 
+    if (tabName === 'end') {
+      $ ('#editor-area').hide ();
+      $ ('#level-header').hide ();
+      return;
+    }
+    $ ('#editor-area').show ();
+    $ ('#level-header').show ();
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);
@@ -92,3 +99,10 @@ $(function() {
     }
   }
 });
+
+window.load_quiz = function (level) {
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" onload="window.hide_quiz_nav ();" style="height: 48rem" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+}
+window.hide_quiz_nav = function () {
+  $('#quiz-iframe').contents ().find ('nav').hide ();
+}
