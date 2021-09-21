@@ -69,6 +69,7 @@ page_title: 了解更多-海迪
 
 # 有关Hedy 的新闻
 自从我们在2020年初发布Hedy（海迪）以来，已经有多个媒体发布了相关新闻! 列表如下:
+* [CodeWeek.eu - Haunted House Challenge,(英语) September 2021](https://codeweek.eu/2021/challenges/haunted-house)
 * [2021年4月，用Hedy教任何人如何编码，Opensource.com](https://opensource.com/article/21/4/hedy-teach-code)
 * [2021年4月，平衡权力和理解能力-与Felienne Hermans对话，IO Magazine](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
 * [2021年2月，Hedy--向 "不那么小的孩子 "教授编程的最佳语言，Ingeniería De Software (西班牙语)](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)

@@ -1,7 +1,7 @@
 page_title: Learn More — Hedy
 ---
 
-# Subscribe to the Hedy newsletter 
+# Subscribe to the Hedy newsletter
 
 Do you want to know more? Stay up to date through our newsletter.
 
@@ -15,7 +15,7 @@ Do you want to know more? Stay up to date through our newsletter.
 <div id="mc_embed_signup">
 <form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	
+
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
@@ -75,6 +75,7 @@ Want to know even more? Read the [research paper](https://www.felienne.com/wp-co
 # Hedy in the news
 Some websites and newspapers have written about Hedy since our release in early 2020. We keep a list here:
 
+* [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)
 * [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
 * [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
@@ -88,4 +89,3 @@ Some websites and newspapers have written about Hedy since our release in early 
 * [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
 * [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
 * [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
-
