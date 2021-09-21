@@ -41,15 +41,14 @@ Level 1 supports:
     <td>answer = input('x')</td>
   </tr>
   <tr>
-    <td>ask x</td>
-    <td>answer = input('x')</td>
-  </tr>
-  <tr>
     <td>ask x<br>echo y</td>
     <td>answer = input('x')<br>print('y', answer)</td>
   </tr>
 </tbody>
 </table>
+
+
+#### Incorrect Programs
 
 <table>
 <thead>
@@ -85,12 +84,5 @@ Level 1 supports:
   </tr>
  
 
-#### Incorrect Programs
-
-* print -> Incomplete Exception
-* ask -> Incomplete Exception
-* echo -> Incomplete Exception
-* words other than print, ask, forward, turn, echo -> Invaid Exception
-* echo x -> Lonely echo Exception
 
 
