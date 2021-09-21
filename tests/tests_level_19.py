@@ -458,7 +458,7 @@ else:
         print('Dan ben je jonger dan ik!')""")
         expected = textwrap.dedent("""\
     leeftijd = input('Hoe oud ben jij?')
-    if str(leeftijd) < str('12'):
+    if int(leeftijd) < int('12'):
       print('Dan ben je jonger dan ik!')""")
 
         result = hedy.transpile(code, self.level)
@@ -472,7 +472,7 @@ else:
         print('Dan ben je ouder dan ik!')""")
         expected = textwrap.dedent("""\
     leeftijd = input('Hoe oud ben jij?')
-    if str(leeftijd) > str('12'):
+    if int(leeftijd) > int('12'):
       print('Dan ben je ouder dan ik!')""")
 
         result = hedy.transpile(code, self.level)
@@ -488,9 +488,9 @@ else:
         print('Dan ben je ouder dan ik!')""")
         expected = textwrap.dedent("""\
     leeftijd = input('Hoe oud ben jij?')
-    if str(leeftijd) < str('12'):
+    if int(leeftijd) < int('12'):
       print('Dan ben je jonger dan ik!')
-    elif str(leeftijd) > str('12'):
+    elif int(leeftijd) > int('12'):
       print('Dan ben je ouder dan ik!')""")
 
         result = hedy.transpile(code, self.level)
@@ -526,7 +526,7 @@ else:
         expected = textwrap.dedent("""\
     tel = '1'
     # [' we gaan door totdat tel 3 is!']
-    while str(tel) < str('3'):
+    while int(tel) < int('3'):
       print('Dit is de '+str(tel)+'e keer')
       tel = int(tel) + int(1)
     print('We zijn klaar')""")
