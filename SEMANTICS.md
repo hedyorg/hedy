@@ -75,7 +75,7 @@ Level 1 supports:
     <td>Invalid Exception</td>
   </tr>
   <tr>
-    <td>any valid line(s) of code<br>echo x</td>
+    <td>any valid line(s) of code not using ask<br>echo x</td>
     <td>Lonely Echo</td>
   </tr>
   <tr>
