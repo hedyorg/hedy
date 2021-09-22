@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring, load_yaml_uncached
 import datetime
 from functools import wraps
 from config import config
@@ -55,6 +55,7 @@ def is_teacher (request):
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
 TRANSLATIONS = hedyweb.Translations ()
+EMAILS = load_yaml_uncached ('website/emails.yaml')
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login (f):
@@ -223,7 +224,7 @@ def routes (app, database, requested_lang):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
-            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
+            send_email_template ('welcome_verify', email, os.getenv ('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             resp = make_response ({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
@@ -292,7 +293,7 @@ def routes (app, database, requested_lang):
 
         DATABASE.update_user(user ['username'], {'password': hashed})
         if not is_testing_request (request):
-            send_email_template ('change_password', user ['email'], requested_lang (), None)
+            send_email_template ('change_password', user ['email'], None)
 
         return '', 200
 
@@ -340,7 +341,7 @@ def routes (app, database, requested_lang):
                 if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
-                    send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
+                    send_email_template ('welcome_verify', email, os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         username = user ['username']
 
@@ -400,7 +401,7 @@ def routes (app, database, requested_lang):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify ({'username': user ['username'], 'token': token}), 200
         else:
-            send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
+            send_email_template ('recover_password', user ['email'], os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
             return '', 200
 
     @app.route ('/auth/reset', methods=['POST'])
@@ -432,7 +433,7 @@ def routes (app, database, requested_lang):
         user = DATABASE.user_by_username(body ['username'])
 
         if not is_testing_request (request):
-            send_email_template ('reset_password', user ['email'], requested_lang (), None)
+            send_email_template ('reset_password', user ['email'], None)
 
         return '', 200
 
@@ -461,7 +462,7 @@ def routes (app, database, requested_lang):
         DATABASE.update_user(user ['username'], {'is_teacher': 1 if body ['is_teacher'] else 0})
 
         if body ['is_teacher'] and not is_testing_request (request):
-            send_email_template ('welcome_teacher', user ['email'], requested_lang (), '')
+            send_email_template ('welcome_teacher', user ['email'], '')
 
         return '', 200
 
@@ -497,7 +498,7 @@ def routes (app, database, requested_lang):
         if is_testing_request (request):
            resp = {'username': user ['username'], 'token': hashed_token}
         else:
-            send_email_template ('welcome_verify', body ['email'], requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
+            send_email_template ('welcome_verify', body ['email'], os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         return '', 200
 
@@ -530,8 +531,8 @@ def send_email (recipient, subject, body_plain, body_html):
     else:
         print ('Email sent to ' + recipient)
 
-def send_email_template (template, email, lang, link):
-    texts = TRANSLATIONS.get_translations (lang, 'Auth')
+def send_email_template (template, email, link):
+    texts = EMAILS
     subject = texts ['email_' + template + '_subject']
     body = texts ['email_' + template + '_body'].split ('\n')
     body = [texts ['email_hello']] + body
