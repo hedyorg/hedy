@@ -1272,7 +1272,7 @@ def transpile_inner(input_string, level, sub=0):
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, sub)
-            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
+            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result.code)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)
