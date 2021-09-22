@@ -475,6 +475,13 @@ def get_quiz(level_source, question_nr, attempt):
             char_array = []
             for i in range(len(question['mp_choice_options'])):
                 char_array.append(chr(ord('@') + (i + 1)))
+
+            i  = 0
+            for option in question['mp_choice_options']:
+                option.update({'char_index': char_array[i]})
+                i+=1
+
+            print(question)
             return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
                                    questionStatus= questionStatus,
                                    questions=quiz_data['questions'],

@@ -31,21 +31,21 @@
             <pre><code class="ml-6 text-xl">{{ question.code }}</code></pre>
         {% endif %}
         <form action='/submit_answer/{{ level_source }}/{{ question_nr }}/{{ attempt|int + 1 }}' method="POST">
-            <div class="grid gap-1 rounded-t-xl radio-block">
+            <div class="grid gap-1 rounded-t-xl">
             {%  set counter = namespace(value=0) %}
                 {% for row in question.mp_choice_options|batch(2) %}
                     <div class="flex flex-row">
                     {% for column in row %}
                         <div class="flex flex-col">
                             {% if question.correct_answer == chosen_option and not chosen_option %}
-                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block id={{column.char_index}}>
                                     <label class="inline-flex items-center"><p
                                             class="text-4xl font-bold ml-6 mr-6 font-slab">
-                                        {{ char_array[counter.value] }}</p></p>
+                                        {{column.char_index }}</p></p>
                                         <input
                                                 type="radio"
                                                 name="radio_option"
-                                                value="{{ question_nr }}-{{ char_array[counter.value] }}"
+                                                value="{{ question_nr }}-{{ column.char_index }}"
                                                 class="class form-radio h-12 w-12">
                                         <span>
                                         {% if column.code %}
@@ -56,15 +56,15 @@
                                     </span>
                                     </label>
                                 </div>
-                            {% elif chosen_option == char_array[counter.value] %}
-                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" id="answer-disabled">
+                            {% elif chosen_option == column.char_index %}
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" radio-block id="answer-disabled {{column.char_index}}">
                                     <label class="inline-flex items-center"><p
                                             class="text-4xl font-bold ml-6 mr-6 font-slab">
-                                        {{ char_array[counter.value] }}</p></p>
+                                        {{ column.char_index }}</p></p>
                                         <input
                                                 type="radio"
                                                 name="radio_option"
-                                                value="{{ question_nr }}-{{ char_array[counter.value] }}"
+                                                value="{{ question_nr }}-{{ column.char_index }}"
                                                 class="class form-radio h-12 w-12" disabled="disabled">
                                         <span>
                                         {% if column.code %}
@@ -76,14 +76,14 @@
                                     </label>
                                 </div>
                             {% else %}
-                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block" id={{column.char_index}}>
                                     <label class="inline-flex items-center"><p
                                             class="text-4xl font-bold ml-6 mr-6 font-slab">
-                                        {{ char_array[counter.value] }}</p></p>
+                                        {{ column.char_index }}</p></p>
                                         <input
                                                 type="radio"
                                                 name="radio_option"
-                                                value="{{ question_nr }}-{{ char_array[counter.value] }}"
+                                                value="{{ question_nr }}-{{column.index }}"
                                                 class="class form-radio h-12 w-12" >
                                         <span>
                                         {% if column.code %}
