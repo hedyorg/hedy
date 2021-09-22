@@ -11,12 +11,10 @@ import re
 # Some useful constants
 HEDY_MAX_LEVEL = 22
 
-reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
+# Python keywords need hashing when used as var names
+reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
-#
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-#
-
 commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       2: ['print', 'ask', 'echo', 'is'],
                       3: ['print', 'ask', 'is'],
@@ -41,12 +39,10 @@ commands_per_level = {1: ['print', 'ask', 'echo'] ,
                       22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
                       }
 
-#
-#  closest_command() searches for known commands in an invalid command.
-#
-#  It will return the known command which is closest positioned at the beginning.
-#  It will return '' if the invalid command does not contain any known command.
-#
+# we generate Python strings with ' always, so ' needs to be escaped but " works fine
+# \ also needs to be escaped because it eats the next character
+characters_that_need_escaping = ["\\", "'"]
+
 
 def hash_needed(name):
     pattern = re.compile('[^a-zA-Z0-9_]')
@@ -66,6 +62,12 @@ def hash_var(name):
 
 def closest_command(invalid_command, known_commands):
     # First search for 100% match of known commands
+    #
+    #  closest_command() searches for known commands in an invalid command.
+    #
+    #  It will return the known command which is closest positioned at the beginning.
+    #  It will return '' if the invalid command does not contain any known command.
+    #
     min_position = len(invalid_command)
     min_command = ''
     for known_command in known_commands:
@@ -421,13 +423,14 @@ class IsComplete(Filter):
 
     #other rules are inherited from Filter
 
+def process_characters_needing_escape(value):
+    # defines what happens if a kids uses ' or \ in in a string
+    for c in characters_that_need_escaping:
+        value = value.replace(c, f'\{c}')
+    return value
+
+
 class ConvertToPython_1(Transformer):
-
-    def process_single_quote(self, value):
-        # defines what happens if a kids uses ' in a string
-        value = value.replace("'", "\\'")
-        return value
-
 
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
@@ -441,18 +444,18 @@ class ConvertToPython_1(Transformer):
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
-        # escape quotes if kids accidentally use them at level 1
-        argument = self.process_single_quote(args[0])
+        # escape needed characters
+        argument = process_characters_needing_escape(args[0])
 
         return "print('" + argument + "')"
     def echo(self, args):
         if len(args) == 0:
             return "print(answer)" #no arguments, just print answer
 
-        argument = self.process_single_quote(args[0])
+        argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
     def ask(self, args):
-        argument = self.process_single_quote(args[0])
+        argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
     def forward(self,args):
         # when a not-number is given, we simply use 50 as default
@@ -477,7 +480,6 @@ class ConvertToPython_1(Transformer):
             return "t.right(90)" #something else also defaults to right turn
 
 
-
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
@@ -491,7 +493,6 @@ def process_hash(name):
         return hash_var(name)
     else:
         return name
-
 
 class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
@@ -507,7 +508,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
         for argument in args:
             # escape quotes if kids accidentally use them at level 2
-            argument = self.process_single_quote(argument)
+            argument = process_characters_needing_escape(argument)
 
             # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
@@ -547,13 +548,13 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def ask(self, args):
         var = args[0]
-        all_parameters = ["'" + self.process_single_quote(a) + "'" for a in args[1:]]
+        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
     def assign(self, args):
         parameter = args[0]
         value = args[1]
         #if the assigned value contains single quotes, escape them
-        value = self.process_single_quote(value)
+        value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
     def assign_list(self, args):
@@ -567,7 +568,7 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             return args[0] + '[' + args[1] + ']'
 
-def quoted(s):
+def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
 def make_f_string(args, lookup):
@@ -578,9 +579,9 @@ def make_f_string(args, lookup):
             argument_string += "{" + process_hash(argument) + "}"
         else:
             # strings are written regularly
-            # however we no longer need their quptes in the f-string
-            # the quotes are only left on to check if they are there.
-            argument_string += argument.replace("'",'')
+            # however we no longer need the enclosing quotes in the f-string
+            # the quotes are only left on the argument to check if they are there.
+            argument_string += argument.replace("'", '')
 
     return f"print(f'{argument_string}')"
 
@@ -595,7 +596,7 @@ class ConvertToPython_3(ConvertToPython_2):
         return ''.join([str(c) for c in args])
 
     def print(self, args):
-        unquoted_args = [a for a in args if not quoted(a)]
+        unquoted_args = [a for a in args if not is_quoted(a)]
         unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
         #we can print if all arguments are quoted OR they are all variables
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
@@ -858,17 +859,17 @@ class ConvertToPython_16(ConvertToPython_15):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) < str({arg1})"  # no and statements
+            return f"int({arg0}) < int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) < str({arg1}) and {args[2]}"
+            return f"int({arg0}) < int({arg1}) and {args[2]}"
 
     def bigger(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) > str({arg1})"  # no and statements
+            return f"int({arg0}) > int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) > str({arg1}) and {args[2]}"
+            return f"int({arg0}) > int({arg1}) and {args[2]}"
 
 class ConvertToPython_17(ConvertToPython_16):
     def while_loop(self, args):
@@ -933,17 +934,17 @@ class ConvertToPython_22(ConvertToPython_21):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) <= str({arg1})"  # no and statements
+            return f"int({arg0}) <= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) <= str({arg1}) and {args[2]}"
+            return f"int({arg0}) <= int({arg1}) and {args[2]}"
 
     def bigger_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) >= str({arg1})"  # no and statements
+            return f"int({arg0}) >= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) >= str({arg1}) and {args[2]}"
+            return f"int({arg0}) >= int({arg1}) and {args[2]}"
 
 
 def merge_grammars(grammar_text_1, grammar_text_2):
@@ -1225,6 +1226,11 @@ def transpile_inner(input_string, level, sub=0):
     if contains_blanks(input_string):
         raise HedyException('Has Blanks')
 
+
+    if level >= 3:
+        input_string = input_string.replace("\\", "\\\\")
+
+    #in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
         input_string = preprocess_blocks(input_string)
 
@@ -1266,7 +1272,7 @@ def transpile_inner(input_string, level, sub=0):
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, sub)
-            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
+            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result.code)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)

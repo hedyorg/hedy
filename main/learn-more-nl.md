@@ -1,7 +1,7 @@
 page_title: Learn More — Hedy
 ---
 
-# Schrijf je in voor de Hedy nieuwsbrief 
+# Schrijf je in voor de Hedy nieuwsbrief
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
@@ -13,7 +13,7 @@ page_title: Learn More — Hedy
 <div id="mc_embed_signup">
 <form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	
+
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL">Emailadres  <span class="asterisk">*</span>
@@ -74,6 +74,7 @@ Wil je nog meer weten? Lees dan het [research paper](https://www.felienne.com/wp
 
 Soms schrijven websites en kranten iets over Hedy, dat houden we op deze lijst bij:
 
+* [CodeWeek.eu - Haunted House Challenge,(Engels) September 2021](https://codeweek.eu/2021/challenges/haunted-house)
 * [Opensource.com (Engels), april 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [IO Magazine (Engels), april 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
 * [Ingeniería De Software (Spaans), februari 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)

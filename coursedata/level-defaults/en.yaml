@@ -165,7 +165,7 @@
         example: "Bijvoorbeeld: if answer is far forward 100 else forward 5"
         demo_code: |-
             answer is ask 'How far should I walk?'
-            if answer is far forward 100 else forward 100
+            if answer is far forward 100 else forward 5
 5:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
@@ -612,7 +612,7 @@
 21:
     start_code: |-
         country = input('Where do you live?')
-        if land != Netherlands:
+        if country != Netherlands:
             print('Cool!')
         else:
             print('I am also from the Netherlands!')

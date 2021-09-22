@@ -88,21 +88,6 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_print_with_single_quote(self):
-
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet \\''""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet \\')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
   def test_name_with_underscore(self):
     code = textwrap.dedent("""\
     voor_naam is Hedy
@@ -262,7 +247,18 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
+  def test_use_slashes_at_end_of_print_allowed(self):
+    code = "print 'Welcome to \\'"
+    result = hedy.transpile(code, self.level)
 
+    expected = textwrap.dedent("""\
+    print(f'Welcome to \\\\')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
 
   def test_transpile_missing_opening_quote(self):
     code = textwrap.dedent("""\
