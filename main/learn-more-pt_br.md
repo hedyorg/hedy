@@ -1,7 +1,7 @@
 page_title: Learn More - Hedy
 ---
 
-# Subscribe to the Hedy newsletter 
+# Subscribe to the Hedy newsletter
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
@@ -13,7 +13,7 @@ page_title: Learn More - Hedy
 <div id="mc_embed_signup">
 <form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	
+
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>

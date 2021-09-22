@@ -858,17 +858,17 @@ class ConvertToPython_16(ConvertToPython_15):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) < str({arg1})"  # no and statements
+            return f"int({arg0}) < int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) < str({arg1}) and {args[2]}"
+            return f"int({arg0}) < int({arg1}) and {args[2]}"
 
     def bigger(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) > str({arg1})"  # no and statements
+            return f"int({arg0}) > int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) > str({arg1}) and {args[2]}"
+            return f"int({arg0}) > int({arg1}) and {args[2]}"
 
 class ConvertToPython_17(ConvertToPython_16):
     def while_loop(self, args):
@@ -933,17 +933,17 @@ class ConvertToPython_22(ConvertToPython_21):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) <= str({arg1})"  # no and statements
+            return f"int({arg0}) <= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) <= str({arg1}) and {args[2]}"
+            return f"int({arg0}) <= int({arg1}) and {args[2]}"
 
     def bigger_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) >= str({arg1})"  # no and statements
+            return f"int({arg0}) >= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) >= str({arg1}) and {args[2]}"
+            return f"int({arg0}) >= int({arg1}) and {args[2]}"
 
 
 def merge_grammars(grammar_text_1, grammar_text_2):
@@ -1108,7 +1108,7 @@ def transpile(input_string, level, sub = 0):
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
                 # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-                raise HedyException('Wrong Level', correct_code=result.code, original_level=level, working_level=new_level) from E
+                raise HedyException('Wrong Level', correct_code=result.code, original_level=new_level, working_level=level) from E
         raise E
 
 def repair(input_string):
