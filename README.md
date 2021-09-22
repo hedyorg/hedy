@@ -20,7 +20,7 @@ Note that at this point we only support left to right languages, but we are work
 I have an idea for what you should build!
 ------------
 
-Great! If is is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). If it is a radical new idea for a language feature, [start a discussion](https://github.com/Felienne/hedy/discussions/categories/ideas.
+Great! If is is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). If it is a radical new idea for a language feature, [start a discussion](https://github.com/Felienne/hedy/discussions/categories/ideas).
 
 Want to help improve Hedy?
 ------------
