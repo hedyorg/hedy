@@ -858,17 +858,17 @@ class ConvertToPython_16(ConvertToPython_15):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) < str({arg1})"  # no and statements
+            return f"int({arg0}) < int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) < str({arg1}) and {args[2]}"
+            return f"int({arg0}) < int({arg1}) and {args[2]}"
 
     def bigger(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) > str({arg1})"  # no and statements
+            return f"int({arg0}) > int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) > str({arg1}) and {args[2]}"
+            return f"int({arg0}) > int({arg1}) and {args[2]}"
 
 class ConvertToPython_17(ConvertToPython_16):
     def while_loop(self, args):
@@ -933,17 +933,17 @@ class ConvertToPython_22(ConvertToPython_21):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) <= str({arg1})"  # no and statements
+            return f"int({arg0}) <= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) <= str({arg1}) and {args[2]}"
+            return f"int({arg0}) <= int({arg1}) and {args[2]}"
 
     def bigger_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) >= str({arg1})"  # no and statements
+            return f"int({arg0}) >= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) >= str({arg1}) and {args[2]}"
+            return f"int({arg0}) >= int({arg1}) and {args[2]}"
 
 
 def merge_grammars(grammar_text_1, grammar_text_2):
