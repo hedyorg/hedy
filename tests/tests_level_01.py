@@ -222,13 +222,26 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('\\'Welcome to \O/ceanView!\\'')""")
+    print('\\'Welcome to \\\\O/ceanView!\\'')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+
+  def test_use_slashes_at_end_of_print_allowed(self):
+    code = "print Welcome to \\"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Welcome to \\\\')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
 
   def test_use_quotes_in_ask_allowed(self):
     code = "ask 'Welcome to OceanView?'"
