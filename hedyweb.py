@@ -20,8 +20,7 @@ class Translations:
 
   @property
   def data(self):
-    # In debug mode, always reload all translations
-    if self._data is None or utils.is_debug_mode():
+    if self._data is None:
       translations = glob.glob('coursedata/texts/*.yaml')
       self._data = {}
       for trans_file in translations:
