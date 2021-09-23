@@ -464,7 +464,7 @@ class ConvertToPython_1(Transformer):
             parameter = int(args[0])
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return f"t.forward({parameter})""\ntime.sleep(0.1)"
 
     def turn(self, args):
         if len(args) == 0:
