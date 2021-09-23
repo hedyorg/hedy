@@ -101,8 +101,5 @@ $(function() {
 });
 
 window.load_quiz = function (level) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" onload="window.hide_quiz_nav ();" style="height: 48rem" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
-}
-window.hide_quiz_nav = function () {
-  $('#quiz-iframe').contents ().find ('nav').hide ();
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" style="height: 48rem" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }

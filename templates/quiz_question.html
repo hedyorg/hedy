@@ -31,7 +31,7 @@
         {% if question.code and question.code!= "..." %}
             <pre><code class="ml-6 text-xl">{{ question.code }}</code></pre>
         {% endif %}
-        <form action='/submit_answer/{{ level_source }}/{{ question_nr }}/{{attempt|int + 1 }}' method="POST">
+        <form action='/quiz/submit_answer/{{ level_source }}/{{ question_nr }}/{{attempt|int + 1 }}' method="POST">
             <div class="grid gap-1 rounded-t-xl radio-block">
                 {% for row in question.mp_choice_options %}
                     <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">

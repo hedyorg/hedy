@@ -1,6 +1,7 @@
-{% extends "layout.html" %}
-
-{% block body %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+    <link rel="stylesheet" href="{{static('/css/additional.css')}}">
+    <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <div class="px-6 bg-blue-200 border-b-8 border-blue-600" >
         <div class="flex justify-around bg-blue-200">
             <div></div>
@@ -15,4 +16,3 @@
     </div>
     {% block question %}
     {% endblock %}
-{% endblock %}

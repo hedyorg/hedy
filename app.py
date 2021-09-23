@@ -221,8 +221,7 @@ def after_request_log_status(response):
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-        # TODO: re-enable
-        #'X-Frame-Options': 'DENY',
+        'X-Frame-Options': None if re.match ('.*/quiz', request.url) else 'DENY',
         'X-XSS-Protection': '1; mode=block',
     }
     response.headers.update(security_headers)
@@ -495,7 +494,7 @@ def get_quiz(level_source, question_nr, attempt):
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
-@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+@app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
     if not config['quiz-enabled'] and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
