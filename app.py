@@ -468,7 +468,7 @@ def get_quiz(level_source, question_nr, attempt):
 
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
-        
+
         if int(attempt) == 1:
             questionStatus = 'start'
 
@@ -1108,7 +1108,7 @@ if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    utils.set_debug_mode(True)
+    utils.set_debug_mode(not os.getenv ('NO_DEBUG_MODE'))
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
