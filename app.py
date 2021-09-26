@@ -48,8 +48,10 @@ ALL_LANGUAGES = {
     'sw': 'Swahili',
     'hu': 'Magyar',
     'el': 'Ελληνικά',
-    "zh": "简体中文",
-    'cs': 'Čeština'
+    'zh': "简体中文",
+    'cs': 'Čeština',
+    'bn': 'বাংলা',
+    'hi': 'हिंदी'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -278,14 +280,14 @@ def parse():
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             with querylog.log_time('transpile'):
                 transpile_result = hedy.transpile(code, level, sublevel)
-                code = transpile_result.code
+                python_code = transpile_result.code
                 has_turtle = transpile_result.has_turtle
 
             response['has_turtle'] = has_turtle
             if has_turtle:
-                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + code
+                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
             else:
-                response["Code"] = "# coding=utf8\nimport random\n" + code
+                response["Code"] = "# coding=utf8\nimport random\n" + python_code
         except hedy.HedyException as E:
             traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -397,7 +399,11 @@ def programs_page (request):
 
     from_user = request.args.get('user') or None
     if from_user and not is_admin (request):
-        return "unauthorized", 403
+        if not is_teacher (request):
+            return "unauthorized", 403
+        students = DATABASE.get_teacher_students (username)
+        if from_user not in students:
+            return "unauthorized", 403
 
     texts=TRANSLATIONS.get_translations (requested_lang (), 'Programs')
     ui=TRANSLATIONS.get_translations (requested_lang (), 'ui')
@@ -420,11 +426,11 @@ def programs_page (request):
 
         programs.append ({'id': item ['id'], 'code': item ['code'], 'date': texts ['ago-1'] + ' ' + str (date) + ' ' + measure + ' ' + texts ['ago-2'], 'level': item ['level'], 'name': item ['name'], 'adventure_name': item.get ('adventure_name'), 'public': item.get ('public')})
 
-    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), programs=programs, username=username, current_page='programs', from_user=from_user, adventures=adventures)
+    return render_template('programs.html', lang=requested_lang(), menu=render_main_menu('programs'), texts=texts, ui=ui, auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), programs=programs, username=username, is_teacher=is_teacher (request), current_page='programs', from_user=from_user, adventures=adventures)
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         g.lang = lang = requested_lang()
@@ -435,15 +441,15 @@ def get_quiz_start(level):
         session['correct_answer'] = 0
         return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
                                lang=lang,
-                               username=current_user(request)['username'],
+                               username=current_user(request)['username'], is_teacher=is_teacher (request),
                                auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
 
 # Quiz mode
 # Fill in the filename as source
-@app.route('/quiz/quiz_questions/<level_source>/<question_nr>', methods=['GET'])
-def get_quiz(level_source, question_nr):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+@app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
+def get_quiz(level_source, question_nr, attempt):
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
@@ -458,6 +464,10 @@ def get_quiz(level_source, question_nr):
 
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
+
+        if int(attempt) == 1:
+            questionStatus = 'start'
+
         if q_nr <= len(quiz_data['questions']):
             question = quiz_data['questions'][q_nr - 1].get(q_nr)
 
@@ -466,12 +476,15 @@ def get_quiz(level_source, question_nr):
             for i in range(len(question['mp_choice_options'])):
                 char_array.append(chr(ord('@') + (i + 1)))
             return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+                                   questionStatus= questionStatus,
                                    questions=quiz_data['questions'],
                                    question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                    correct=session.get('correct_answer'),
+                                   attempt = attempt,
                                    char_array=char_array,
                                    menu=render_main_menu('adventures'), lang=lang,
                                    username=current_user(request)['username'],
+                                   is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
         else:
             return render_template('endquiz.html', correct=session.get('correct_answer'),
@@ -479,12 +492,12 @@ def get_quiz(level_source, question_nr):
                                    menu=render_main_menu('adventures'), lang=lang,
                                    quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
                                    next_assignment=1, username=current_user(request)['username'],
+                                   is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
-
-@app.route('/submit_answer/<level_source>/<question_nr>', methods=["POST"])
-def submit_answer(level_source, question_nr):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+def submit_answer(level_source, question_nr, attempt):
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Get the chosen option from the request form with radio buttons
@@ -499,34 +512,74 @@ def submit_answer(level_source, question_nr):
         # Convert question_nr to an integer
         q_nr = int(question_nr)
 
+        session['quiz-attempt'] = int(attempt)
+        questionStatus = 'false'
+        if int(attempt) == 1:
+            questionStatus = 'start'
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
         index_option = ord(option.split("-")[1]) - 65
-
+        session['chosen_option'] =option.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
-            session['total_score'] = session.get('total_score') + question['question_score']
-            session['correct_answer'] = session.get('correct_answer') + 1
-
-        # Loop through the questions
-        if q_nr <= len(quiz_data['questions']):
-            return render_template('feedback.html', quiz=quiz_data, question=question,
-                                   questions=quiz_data['questions'],
-                                   level_source=level_source,
-                                   question_nr=q_nr,
-                                   correct=session.get('correct_answer'),
-                                   option=option,
-                                   index_option=index_option,
-                                   menu=render_main_menu('adventures'), lang=lang,
-                                   username=current_user(request)['username'],
-                                   auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
+            if session.get('total_score'):
+                session['total_score'] = session.get('total_score') +(config.get('quiz-max-attempts') -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
+            else:
+                session['total_score'] = (config.get('quiz-max-attempts') - session.get('quiz-attempt')  )* 0.5 * question['question_score']
+            if session.get('correct_answer'):
+                session['correct_answer'] = session.get('correct_answer') + 1
+            else:
+                session['correct_answer'] = 1
+        # Loop through the questions and check that the loop doesn't reach out of bounds
+        q_nr = int(question_nr)
+        if q_nr <= len(quiz_data['questions']) :
+            if question['correct_answer'] in option:
+                return render_template('feedback.html', quiz=quiz_data, question=question,
+                                       questions=quiz_data['questions'],
+                                       level_source=level_source,
+                                       question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       option=option,
+                                       index_option=index_option,
+                                       menu=render_main_menu('adventures'), lang=lang,
+                                       username=current_user(request)['username'],
+                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+            elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
+                question = quiz_data['questions'][q_nr - 1].get(q_nr)
+                # Convert the indices to the corresponding characters
+                char_array = []
+                for i in range(len(question['mp_choice_options'])):
+                    char_array.append(chr(ord('@') + (i + 1)))
+                return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+                                       questions=quiz_data['questions'],
+                                       question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       attempt= session.get('quiz-attempt') ,
+                                       questionStatus=questionStatus,
+                                       chosen_option = session.get('chosen_option'),
+                                       char_array=char_array,
+                                       menu=render_main_menu('adventures'), lang=lang,
+                                       username=current_user(request)['username'],
+                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+            elif session.get('quiz-attempt') > config.get('quiz-max-attempts'):
+                return render_template('feedback.html', quiz=quiz_data, question=question,
+                                       questions=quiz_data['questions'],
+                                       level_source=level_source,
+                                       question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       questionStatus = questionStatus,
+                                       option=option,
+                                       index_option=index_option,
+                                       menu=render_main_menu('adventures'), lang=lang,
+                                       username=current_user(request)['username'],
+                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
         else:  # show a different page for after the last question
             return 'No end quiz page!', 404
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
-    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'))
+    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language (requested_lang ()), menu=render_main_menu('adventures'), username=current_user(request) ['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'))
 
 @app.route('/hedy/adventures/<adventure_name>', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/adventures/<adventure_name>/<level>', methods=['GET'])
@@ -661,6 +714,7 @@ def view_program(id):
     arguments_dict['menu'] = render_main_menu('view')
     arguments_dict['auth'] = TRANSLATIONS.get_translations(lang, 'Auth')
     arguments_dict['username'] = current_user(request) ['username'] or None
+    arguments_dict['is_teacher'] = is_teacher(request)
     arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
 
     return render_template("view-program-page.html", **arguments_dict)
@@ -714,10 +768,12 @@ def space_eu(level, step):
 def client_messages():
     error_messages = TRANSLATIONS.get_translations(requested_lang(), "ClientErrorMessages")
     ui_messages = TRANSLATIONS.get_translations(requested_lang(), "ui")
+    auth_messages = TRANSLATIONS.get_translations(requested_lang(), "Auth")
 
     response = make_response(render_template("client_messages.js",
         error_messages=json.dumps(error_messages),
-        ui_messages=json.dumps(ui_messages)))
+        ui_messages=json.dumps(ui_messages),
+        auth_messages=json.dumps(auth_messages)))
 
     if not is_debug_mode():
         # Cache for longer when not devving
@@ -763,7 +819,11 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     menu = render_main_menu(page)
-    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], auth=TRANSLATIONS.get_translations (lang, 'Auth'), **front_matter)
+    if page == 'for-teachers':
+        teacher_classes = [] if not current_user (request) ['username'] else DATABASE.get_teacher_classes (current_user (request) ['username'], True)
+        return render_template('for-teachers.html', sections=split_teacher_docs (contents), lang=lang, menu=menu, username=current_user(request) ['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations (lang, 'Auth'), teacher_classes=teacher_classes, **front_matter)
+
+    return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request) ['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations (lang, 'Auth'), **front_matter)
 
 
 def session_id():
@@ -813,7 +873,10 @@ def localize_link(url):
     lang = requested_lang()
     if not lang:
         return url
-    return url + '?lang=' + lang
+    if '?' in url:
+        return url + '&lang=' + lang
+    else:
+        return url + '?lang=' + lang
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
@@ -850,6 +913,21 @@ def split_markdown_front_matter(md):
 
     return front_matter, parts[1]
 
+def split_teacher_docs (contents):
+    tags = utils.markdown_to_html_tags (contents)
+    sections = []
+    for tag in tags:
+        # Sections are divided by h2 tags
+        if re.match ('^<h2>', str (tag)):
+            tag = tag.contents [0]
+            # We strip `page_title: ` from the first title
+            if len (sections) == 0:
+                tag = tag.replace ('page_title: ', '')
+            sections.append ({'title': tag, 'content': ''})
+        else:
+            sections [-1] ['content'] += str (tag)
+
+    return sections
 
 def render_main_menu(current_page):
     """Render a list of (caption, href, selected, color) from the main menu."""
@@ -857,7 +935,8 @@ def render_main_menu(current_page):
         caption=item.get(requested_lang(), item.get('en', '???')),
         href='/' + item['_'],
         selected=(current_page == item['_']),
-        accent_color=item.get('accent_color', 'white')
+        accent_color=item.get('accent_color', 'white'),
+        short_name=item['_']
     ) for item in main_menu_json['nav']]
 
 # *** PROGRAMS ***
@@ -1025,7 +1104,7 @@ if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    utils.set_debug_mode(True)
+    utils.set_debug_mode(not os.getenv ('NO_DEBUG_MODE'))
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.

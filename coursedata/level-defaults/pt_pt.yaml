@@ -217,7 +217,7 @@
             resultado is ask 'Quanto é 5 mais 5?'
             if resultado is 10
                 print 'Muito bem!'
-                print 'De facto, a resposta é ' answer
+                print 'De facto, a resposta é ' resultado
             else
                 print 'Oops!'
                 print 'A resposta certa é 10'
@@ -352,8 +352,8 @@
 13:
     start_code: |-
         ainda_estas_aqui is Falso
-        ainda_estas_aqui is input('Ainda estás aqui? sim ou não?')
-        if ainda_estas_aqui is sim:
+        resposta_ainda_estas_aqui is input('Ainda estás aqui? sim ou não?')
+        if resposta_ainda_estas_aqui is sim:
             ainda_estas_aqui is Verdadeiro
         if ainda_estas_aqui is Verdadeiro:
             print('Olá!')
@@ -379,8 +379,8 @@
 14:
     start_code: |-
         ainda_estas_aqui is Falso
-        ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
-        if ainda_estas_aqui is sim:
+        resposta_ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
+        if resposta_ainda_estas_aqui is sim:
             ainda_estas_aqui is Verdadeiro
         resultado is input('Quanto é 5*5?')
         if ainda_estas_aqui is Verdadeiro and resultado is 25:
@@ -558,7 +558,7 @@
 21:
     start_code: |-
         pais = input('Onde vives?')
-        if lugar != Portugal:
+        if pais != Portugal:
             print('Fixe!')
         else:
             print('Também vivo em Portugal!')

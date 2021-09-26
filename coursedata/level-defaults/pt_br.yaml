@@ -342,3 +342,322 @@
             for i in range(0, 10):
                 print(i)
             print('Preparados ou não, aqui vou eu!')
+12:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        print(fruta)
+    intro_text: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
+    commands:
+    -   explanation: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
+        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print(fruta)
+    -   name: "Obtém um elemento da lista."
+        explanation: "Para obter um elemento da lista usamos [número] onde fruta[1] significa: obtenha a primeira fruta da lista!"
+        example: "Por exemplo: primeirafruta is fruta[1]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            primeirafruta is fruta[1]
+            print(primeirafruta)
+    -   name: "Obtém um elemento aleatório da lista."
+        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
+        example: "For example: randomfruit is fruit[random]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            qualquerfruta is fruta[random]
+            print(qualquerfruta)
+13:
+    start_code: |-
+        ainda_esta_aqui is Falso
+        resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
+        if resposta_ainda_esta_aqui is sim:
+            ainda_esta_aqui is Verdadeiro
+        if ainda_esta_aqui is Verdadeiro:
+            print('Olá!')
+        if ainda_esta_aqui is Falso:
+            print('Adeus!')
+    intro_text: "Estamos vendo como tornar uma variável `Verdadeiro` ou `Falso`. Você pode colocar uma variável como `Verdadeiro` ou `Falso`. Você pode usar isso para guardar uma determinada resposta."
+    commands:
+    -   name: "Exemplo"
+        explanation: "Neste exemplo, usamos `Verdadeiro` ou `Falso` para guardar a resposta a uma pergunta. Você pode responder 5 vezes. Se o resultado estiver correto, resposta_certa será `Verdadeiro`."
+        example: "resposta_certa is `Falso`"
+        demo_code: |-
+          for i in range(1, 5):
+              resposta_certa is Falso
+              resultado is input('Quanto é 5*5?')
+              if resultado is 25:
+                  resposta_certa is Verdadeiro
+              else:
+                  resposta_certa is Falso
+              if resposta_certa is Verdadeiro:
+                  print('Está certo!')
+              if resposta_certa is Falso:
+                  print('Está errado! ' 5-i ' tentativas restantes')
+14:
+    start_code: |-
+        ainda_esta_aqui is Falso
+        resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
+        if resposta_ainda_esta_aqui is sim:
+            ainda_esta_aqui is Verdadeiro
+        resultado is input('Quanto é 5*5?')
+        if ainda_esta_aqui is Verdadeiro and resultado is 25:
+            print('Você disse sim e respondeu corretamente!')
+    intro_text: "Agora vamos aprender `and` e `or`! Se você quiser verificar duas instruções, não é necessário usar dois `if` porque você pode usar `and` e `or`. Se você usar `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
+    commands:
+    -   name: "And"
+        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser verdadeiras."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+          resposta1 is input('Quanto é 3+2?')
+          resposta2 is input('Quanto é 2+2?')
+          if resposta1 is 5 and resposta2 is 4:
+              print('Ambas as respostas estão corretas!')
+          else:
+              print('Pelo menos uma resposta está errada!')
+    -   name: "Or"
+        explanation: "Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correta. Se ambas estiverem corretas, também não tem problema."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+          resposta1 is input('Quanto é 3+2?')
+          resposta2 is input('Quanto é 2+2?')
+          if resposta1 is 5 or resposta2 is 4:
+              print('Pelo menos uma resposta está correta!')
+          else:
+              print('Ambas as respostas estão erradas!')
+15:
+    start_code: |-
+        # Este é um programa que vai perguntar algumas questões de Matemática
+        for i in range(1, 10):
+            # Vamos perguntar pela tabuada do 5
+            resposta is input('Quanto é ' i ' vezes 5?')
+            # Verificamos se o resultado é igual ao nosso cálculo
+            resposta_certa is i * 5
+            if resposta is resposta_certa:
+                print(resposta ' está certo!')
+            else:
+                print('Está errado, a resposta devia ser: ' i*5)
+    intro_text: |-
+        Quando você estiver criando programas maiores, vai precisar
+        arranjar uma maneira de lembrar o que cada pedaço de código faz.
+        Usamos os comentários para isso. Um comentário se parece com isso:
+        ` # Isto é um comentário`. Tudo o que aparecer depois do # será
+        invisível para o código.
+    commands:
+    -   name: "Comentário"
+        explanation: "Podemos colocar comentários onde quisermos."
+        example: "# Isto é um comentário"
+        demo_code: |-
+            # Este programa escreve Olá!
+            # Este programa foi feito em Hedy
+            # Não faz mais nada além de escrever Olá!
+            print('Olá!')
+16:
+    start_code: |-
+        idade is input('Quantos anos você tem?')
+        if idade < 12:
+            print('Você é mais novo(a) do que eu!')
+        elif idade > 12:
+            print('Você é mais velho(a) do que eu!')
+    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
+    commands:
+    -   name: "Menor"
+        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
+        example: "Por exemplo: idade < 12"
+        demo_code: |-
+            idade is input('Quantos anos você tem?')
+            if idade < 12:
+                print('Você é mais novo(a) do que eu!')
+    -   name: "Maior"
+        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
+        example: "Por exemplo: idade > 12"
+        demo_code: |-
+            idade is input('Quantos anos você tem?')
+            if age > 12:
+                print('Você é mais velho(a) do que eu!')
+17:
+    start_code: |-
+        resposta_certa is Falso
+        # Continuamos até ser dada a resposta certa!
+        while resposta_certa is Falso:
+            resultado is input('Quanto é 5 vezes 5?')
+            if resultado is 25:
+                resposta_certa is True
+                print('Foi dada uma boa resposta')
+    intro_text: |-
+        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
+        ciclo enquanto a instrução for verdadeira/válida! Portanto,
+        no exemplo de código, continuamos até ser dada a resposta
+        certa. Se a resposta correta nunca for dada, o ciclo nunca
+        acaba!
+    commands:
+    -   name: "While booleano"
+        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
+        example: "Exemplo: while resposta_certa is Falso"
+        demo_code: |-
+            resposta_certa is Falso
+            # Continuamos até termos a resposta certa!
+            while resposta_certa is Falso:
+                resultado is input('Quanto é 5 vezes 5?')
+                if resultado is 25:
+                    resposta_certa is Verdadeiro
+                    print('Foi dada uma boa resposta')
+    -   name: "while menor"
+        explanation: |-
+            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
+            cuidado, é preciso mudar o número para que ciclo termine.
+            Aqui nós fazemos isso com `contagem is contagem + 1`.
+        example: "Por exemplo: while contagem < 3"
+        demo_code: |-
+            contagem is 1
+            # Continuamos até a contagem ser 3!
+            while contagem < 3:
+                print('Fazemos isto mais ' 3 - contagem ' vezes.')
+                contagem is contagem + 1
+            print('Acabamos!')
+18:
+    start_code: |-
+        lista is ['primeiro', 'segundo', 'terceiro']
+        segundovalor is lista[2]
+        print(segundovalor)
+    intro_text: |-
+        Quando temos uma lista, podemos obter um valor específico
+        dessa lista. Se queremos o segundo elemento da lista, digitamos
+        `lista[2]`.
+    commands:
+    -   name: "Contagem"
+        explanation: "Podemos também somar todos os valores da lista."
+        example: "lista[1]"
+        demo_code: |-
+            lista is ['1', '2', '3']
+            soma is lista[1] + lista[2]
+            soma is soma + lista[3]
+            # Esperamos um resultado de 6
+            print(soma)
+19:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        for i in range(1, 3):
+            print(fruta[i])
+    intro_text: |-
+        Podemos também ver tudo na lista com o ciclo `for`. Como
+        existem três coisas na lista, passamos o ciclo de 1 até 3.
+        Durante o ciclo nós printamos tudo que há na lista.
+    commands:
+    -   name: "Tamanho da lista"
+        explanation: |-
+            Com `length` podemos saber o tamanho da lista. A lista no
+            exemplo tem tamanho 3, porque existem três coisas na lista.
+        example: "length(lista)"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print('tamanho da lista é ' length(fruta))
+            for i in range(1, length(fruta)):
+                print(fruta[i])
+20:
+    start_code: |-
+        print('Quanto é 5+3?')
+        resposta = 5+3
+        print('Resposta é agora:')
+        print(resposta)
+        if resposta == 8:
+            print('Está certo!')
+        else:
+            print('Oh não, está errado!')
+    intro_text: |-
+        Agora vamos substituir o `is` por `=` e `==`. Usamos `=` se
+        quisermos atribuir um determinado valor a uma variável. Se
+        quisermos atribuir 8 à variável chamada resposta, então
+        escrevemos resposta = 8. Utilizamos `==` quando queremos
+        saber se duas coisas são iguais.
+    commands:
+    -   name: "Comparar"
+        explanation: "Se quisermos comparar, usamos ==. 5+3 == 8 verifica se 5+3 é igual a 8"
+        example: "Por exemplo: 5+3 == 8"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 é realmente 8')
+            else:
+                print('Isto não será printado, porque 5+3 é 8!')
+    -   name: "Atribuir valor"
+        explanation: |-
+            Se quisermos dizer que uma variável chamada resposta é 8,
+            escrevemos resposta = 8.
+        example: "Por exemplo: resposta = 8"
+        demo_code: |-
+            print('Quanto é 5+3?')
+            resposta = 5+3
+            print('Resposta é agora:')
+            print(resposta)
+    -   name: "Comparar e atribuir valor"
+        explanation: |-
+            Se vamos comparar dois valores, utilizamos `==`. Se
+            vamos atribuir um valor a uma variável, usamos `=`.
+        example: "Por exemplo: 5+3 == 8, resposta = 8"
+        demo_code: |-
+            print('Quanto é 5+3?')
+            resposta = 5+3
+            print('Resposta é agora:')
+            print(resposta)
+            if resposta == 8:
+                print('Está certo!')
+            else:
+                print('Não, está errado!')
+21:
+    start_code: |-
+        pais = input('Onde você mora?')
+        if pais != Brasil:
+            print('Legal!')
+        else:
+            print('Também moro no Brasil!')
+    intro_text: |-
+        Vamos aprender um novo conceito, o `!=` . A ! significa não e
+        o = significa igual, portanto, `!=` significa que não é igual.
+        Por exemplo, 5 != 4.
+    commands:
+    -   name: "Não é igual"
+        explanation: |-
+            Se estamos verificando se duas coisas são diferentes,
+            usamos `!=`
+        example: "Por exemplo: 5+3 != 9"
+        demo_code: |-
+            numero = input('Você não pode responder 5, qual é um bom número?')
+            if numero != 5:
+                print('Bom trabalho!')
+            else:
+                print('Você não pode responder 5!')
+22:
+    start_code: |-
+        idade = input('Tenho 12 anos, quantos anos você tem?')
+        if idade <= 11:
+            print('Você é mais novo(a) do que eu!')
+        elif idade >= 13:
+            print('Você é mais velho(a) do que eu!')
+    intro_text: |-
+        Vamos juntar < e = agora. Se quisermos descobrir se algo é
+        menor ou igual a um segundo número, utilizamos `<=`. Podemos
+        também verificar se algo é maior ou igual ao segundo número
+        com `>=`.
+    commands:
+    -   name: "Menor ou igual"
+        explanation: |-
+            `<=` verifica se o número à esquerda do `<=` é menor ou
+            igual ao que está a sua direita. Portanto, 5 < 5 não é
+            verdade porque 5 não é menor que 5, mas, 5 <= 5 é verdade
+            porque 5 é menor ou igual a 5. 6 <= 5 não é verdade.
+        example: "Por exemplo: idade <= 12"
+        demo_code: |-
+            idade = input('Eu tenho 13 anos, que idade você tem?')
+            if idade <= 12:
+                print('Você é mais novo(a) do que eu!')
+    -   name: "Maior ou igual"
+        explanation: |-
+            `>=` verifica se o número à esquerda do `>=` é maior ou
+            igual ao número a sua direita. Portanto, 5 > 5 não é
+            verdade porque 5 não é maior que 5, mas, 5 >= 5 é verdade
+            porque 5 é maior ou igual que 5. 4 >= 5 não é verdade.
+        example: "Por exemplo: idade >= 12"
+        demo_code: |-
+            idade = input('Eu tenho 11 anos, quantos anos você tem?')
+            if idade >= 12:
+                print('Você é mais velho(a) do que eu!')

@@ -38,10 +38,11 @@ HedyErrorMessages:
     Incomplete: "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter {incomplete_command} nog tekst komen."
     Invalid: "{invalid_command} is geen commando in Hedy level {level}. Bedoelde je {guessed_command}?"
     Invalid Space: "Oeps! Regel {line_number} begint met een spatie. Computers kunnen niet zo goed tegen spaties, kun je 'm weghalen?"
-    Has Blanks: "Let op! Jouw code is not niet compleet. Er staat nog een laag streepje in, daar moet jij de juiste code nog invullen."
+    Has Blanks: "Let op! Jouw code is nog niet compleet. Er staat nog een laag streepje in, daar moet jij de juiste code nog invullen."
     Parse: "De code die jij intypte is geen geldige Hedy code. Er zit een foutje op regel {location[0]}, op positie {location[1]}. Jij typte {character_found}, maar dat mag op die plek niet."
-    Unquoted Text: "Let op! Als bij print en ask moet voor én achter de tekst een aanhalingsteken komen. Jij bent er ergens eentje vergeten."
+    Unquoted Text: "Let op! Bij print en ask moet voor én achter de tekst een aanhalingsteken komen. Jij bent er ergens eentje vergeten."
     Var Undefined: "Je probeert de variabele {name} te printen, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde printen en aanhalingstekens vergeten bent."
+    Lonely Echo: "Je gebruikt een echo voor een ask, of een echo zonder een ask. Vraag eerst met een ask om invoer voordat je die herhaalt met een echo."
     space: "een spatie"
     comma: "een komma"
     question mark: "een vraagteken"
@@ -108,27 +109,11 @@ Auth:
     invalid_reset_link: "Ongeldige reset wachtwoord link."
     exists_email: "Dat emailadres is al in gebruik."
     exists_username: "Die gebruikersnaam is al in gebruik."
-    email_hello: "Hoi!"
-    email_goodbye: |-
-        Dankjewel!
-        Groetjes van Het Hedy team
-    email_welcome_verify_subject: "Welkom bij Hedy"
-    email_welcome_verify_body: |-
-        Je Hedy account is aangemaakt. Welkom!
-        Klik op deze link om je email adres te bevestigen:
-    email_change_password_subject: "Je Hedy wachtwoord is veranderd"
-    email_change_password_body: |-
-        Je Hedy wachtwoord is veranderd. Heb jij dat zelf aangevraagd? Dan is alles in orde.
-        Heb jij dat niet gedaan? Dan kan het zijn dat iemand probeert jouw Hedy account over te nemen. Reageer op deze mail zodat we kunnen controleren of alles in orde is.
-    email_recover_password_subject: "Verander je Hedy wachtwoord"
-    email_recover_password_body: "Als je op deze link klikt, kun je een nieuw Hedy wachtwoord instellen:"
-    email_reset_password_subject: "Je Hedy wachtwoord is veranderd"
-    email_reset_password_body: |-
-        Je Hedy wachtwoord is veranderd in een nieuw wachtwoord. eb jij dat zelf aangevraagd? Dan is alles in orde.
-        Heb jij dat niet gedaan? Dan kan het zijn dat iemand probeert jouw Hedy account over te nemen. Reageer op deze mail zodat we kunnen controleren of alles in orde is.
     programming_experience: "Heb jij al eens geprogrammeerd?"
     yes: "Ja"
     no: "Nee"
+    ok: "OK"
+    cancel: "Cancel"
     languages: "Welke programmeertaal heb je wl eens gebruikt?"
     other_block: "Een andere blokkentaal"
     other_text: "Een andere teksttaal"
@@ -149,13 +134,18 @@ Auth:
     remove_student_prompt: "Are you sure you want to remove the student from the class?"
     student_classes: "My classes"
     teacher_classes: "My classes"
+    name: "Naam"
     create_class: "Create new class"
+    rename_class: "Rename class"
     delete_class: "Delete class permanently"
+    back_to_class_list: "Go back to list of classes"
     class_link: "Link to join class"
     prompt_join_class: "Do you want to join this class?"
     join_class: "Join class"
     class_overview: "Class overview"
     class_join_confirmation: "You have successfully joined the class"
+    class_already_joined: "You are already part of the class"
+    goto_profile: "Go to my profile"
     last_login: "Last login"
     highest_level_reached: "Highest level reached"
     number_programs: "Number of programs"

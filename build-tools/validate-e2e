@@ -10,7 +10,7 @@ pids=""
 trap 'kill $pids' EXIT
 
 export PORT=5050
-env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py > e2e-server.log 2>&1 &
+env HEROKU_APP_NAME=localhost BASE_URL=http://localhost:$PORT SECRET_KEY=TheSecret python app.py > e2e-server.log 2>&1 &
 pids="$pids $!"
 
 endpoint=http://localhost:$PORT

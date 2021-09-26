@@ -5,50 +5,69 @@ from os import path
 import sys
 import utils
 from collections import namedtuple
-
+import hashlib
+import re
 
 # Some useful constants
 HEDY_MAX_LEVEL = 22
 
-reserved_words = ['and','except','lambda','with','as','finally','nonlocal','while','assert','False','None','yield','break','for','not','class','from','or','continue','global','pass','def','if','raise','del','import','return','elif','in','True','else','is','try']
+# Python keywords need hashing when used as var names
+reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
-#
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-#
-
-commands_per_level = {1: ['print', 'ask', 'echo'] ,
-                      2: ['print', 'ask', 'echo', 'is'],
-                      3: ['print', 'ask', 'is'],
-                      4: ['print', 'ask', 'is', 'if'],
-                      5: ['print', 'ask', 'is', 'if', 'repeat'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat'],
-                      7: ['print', 'ask', 'is', 'if', 'repeat'],
-                      8: ['print', 'ask', 'is', 'if', 'for'],
-                      9: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      16: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
+commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
+                      2: ['print', 'ask', 'echo', 'is', 'turn', 'forward'],
+                      3: ['print', 'ask', 'is', 'turn', 'forward'],
+                      4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
+                      5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+                      6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+                      7: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+                      8: ['print', 'ask', 'is', 'if', 'for', 'turn', 'forward'],
+                      9: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      10: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      11: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      12: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      14: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      16: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
-#
-#  closest_command() searches for known commands in an invalid command.
-#
-#  It will return the known command which is closest positioned at the beginning.
-#  It will return '' if the invalid command does not contain any known command.
-#
+# we generate Python strings with ' always, so ' needs to be escaped but " works fine
+# \ also needs to be escaped because it eats the next character
+characters_that_need_escaping = ["\\", "'"]
+
+
+def hash_needed(name):
+    pattern = re.compile('[^a-zA-Z0-9_]')
+    return name in reserved_words or pattern.match(name) != None
+
+def hash_var(name):
+    if hash_needed(name):
+        # hash "illegal" var names
+        # being reservered keywords
+        # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
+        # prepend with v for when hash starts with a number
+
+        hash_object = hashlib.md5(name.encode())
+        return "v" + hash_object.hexdigest()
+    else:
+        return name
 
 def closest_command(invalid_command, known_commands):
     # First search for 100% match of known commands
+    #
+    #  closest_command() searches for known commands in an invalid command.
+    #
+    #  It will return the known command which is closest positioned at the beginning.
+    #  It will return '' if the invalid command does not contain any known command.
+    #
     min_position = len(invalid_command)
     min_command = ''
     for known_command in known_commands:
@@ -179,7 +198,6 @@ class AllAssignmentCommands(Transformer):
         else:
             return listname + '[' + args[1] + ']'
 
-
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
         return args[0]
@@ -197,9 +215,8 @@ class AllAssignmentCommands(Transformer):
 
     def var(self, args):
         # the var itself (when in an assignment) should be added
-        # if it happens to be a keyword in Python, prefix with _
         name = args[0]
-        return "_" + name if name in reserved_words else name
+        return name
 
     def punctuation(self, args):
         #is never a variable (but should be removed from the tree or it will be seen as one!)
@@ -208,6 +225,83 @@ class AllAssignmentCommands(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+class AllAssignmentCommandsHashed(Transformer):
+    # returns a list of variable and list access
+    # so these can be excluded when printing
+
+    #this version returns all hashe var names
+
+    def filter_ask_assign(self, args):
+        ask_assign = []
+        for a in args:
+            # strings (vars remaining in the tree) are added directly
+            if type(a) is str:
+                ask_assign.append(a)
+            #lists are seached further for string members (vars)
+            elif type(a) is list:
+                sub_a_ask_assign = self.filter_ask_assign(a)
+                for sub_a in sub_a_ask_assign:
+                    ask_assign.append(sub_a)
+        return ask_assign
+
+    def for_loop(self, args):
+      # for loop iterator is a var so should be added to the list of vars
+      iterator = str(args[0])
+      iterator_hashed = hash_var(iterator)
+      return [iterator_hashed] + self.filter_ask_assign(args)
+
+    def input(self, args):
+        #return left side of the =
+        return hash_var(args[0])
+
+    def ask(self, args):
+        #try is needed cause in level 1 sk has not variable in front
+        try:
+            return hash_var(args[0])
+        except:
+            return None
+
+    def assign(self, args):
+        return hash_var(args[0])
+
+    def assign_list(self, args):
+        return hash_var(args[0])
+
+    # list access is accessing a variable, so must be escaped
+    # for example we print(dieren[1]) not print('dieren[1]')
+    def list_access(self, args):
+        listname = hash_var(args[0])
+        if args[1] == 'random':
+            return 'random.choice(' + listname + ')'
+        else:
+            return listname + '[' + args[1] + ']'
+
+    # additions Laura, to be checked for higher levels:
+    def list_access_var(self, args):
+        return hash_var(args[0])
+
+    def change_list_item(self, args):
+        return hash_var(args[0])
+
+    def text(self, args):
+        #text never contains a variable
+        return None
+
+    def var_access(self, args):
+        # just accessing (printing) a variable does not count toward the lookup table
+        return None
+
+    def var(self, args):
+        # the var itself (when in an assignment) should be added
+        name = hash_var(args[0])
+        return name
+
+    def punctuation(self, args):
+        #is never a variable (but should be removed from the tree or it will be seen as one!)
+        return None
+
+    def __default__(self, args, children, meta):
+        return self.filter_ask_assign(children)
 
 
 def are_all_arguments_true(args):
@@ -296,6 +390,18 @@ class IsValid(Filter):
 
     #other rules are inherited from Filter
 
+def valid_echo(ast):
+    commands = ast.children
+    command_names = [x.children[0].data for x in commands]
+    no_echo = not 'echo' in command_names
+
+    #no echo is always ok!
+
+    #otherwise, both have to be in the list and echo shold come after
+    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
+
+
+
 class IsComplete(Filter):
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
@@ -317,13 +423,14 @@ class IsComplete(Filter):
 
     #other rules are inherited from Filter
 
+def process_characters_needing_escape(value):
+    # defines what happens if a kids uses ' or \ in in a string
+    for c in characters_that_need_escaping:
+        value = value.replace(c, f'\{c}')
+    return value
+
+
 class ConvertToPython_1(Transformer):
-
-    def process_single_quote(self, value):
-        # defines what happens if a kids uses ' in a string
-        value = value.replace("'", "\\'")
-        return value
-
 
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
@@ -337,18 +444,18 @@ class ConvertToPython_1(Transformer):
     def text(self, args):
         return ''.join([str(c) for c in args])
     def print(self, args):
-        # escape quotes if kids accidentally use them at level 1
-        argument = self.process_single_quote(args[0])
+        # escape needed characters
+        argument = process_characters_needing_escape(args[0])
 
         return "print('" + argument + "')"
     def echo(self, args):
         if len(args) == 0:
             return "print(answer)" #no arguments, just print answer
 
-        argument = self.process_single_quote(args[0])
+        argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
     def ask(self, args):
-        argument = self.process_single_quote(args[0])
+        argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
     def forward(self,args):
         # when a not-number is given, we simply use 50 as default
@@ -372,35 +479,61 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
-def wrap_non_var_in_quotes(argument, lookup):
-    if argument in lookup:
-        return argument
+
+def process_variable(name, lookup):
+    #processes a variable by hashing and escaping when needed
+    if name in lookup:
+        return process_hash(name)
     else:
-        return "'" + argument + "'"
+        return f"'{name}'"
+
+
+def process_hash(name):
+    if hash_needed(name):
+        return hash_var(name)
+    else:
+        return name
 
 class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
     def var(self, args):
         name = ''.join(args)
-        return "_" + name if name in reserved_words else name
+        name = args[0]
+        return hash_var(name)
+        # return "_" + name if name in reserved_words else name
     def print(self, args):
-        all_arguments_converted = []
+        argument_string = ""
         i = 0
 
         for argument in args:
             # escape quotes if kids accidentally use them at level 2
-            argument = self.process_single_quote(argument)
+            argument = process_characters_needing_escape(argument)
 
             # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
                 space = ''
             else:
-                space = "+' '"
-            all_arguments_converted.append(wrap_non_var_in_quotes(argument, self.lookup) + space)
+                space = " "
+
+            if argument in self.lookup:
+                #variables are placed in {} in the f string
+                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += space
+            else:
+                #strings are written regularly
+                argument_string += argument
+                argument_string += space
+
             i = i + 1
-        return 'print(' + '+'.join(all_arguments_converted) + ')'
+
+        return f"print(f'{argument_string}')"
+
     def forward(self, args):
+        # no args received? default to 50
+        if len(args) == 0:
+            return "t.forward(50)"
+
         parameter = args[0]
         #if the parameter is a variable, print as is
         if parameter in self.lookup:
@@ -415,13 +548,13 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def ask(self, args):
         var = args[0]
-        all_parameters = ["'" + self.process_single_quote(a) + "'" for a in args[1:]]
+        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
     def assign(self, args):
         parameter = args[0]
         value = args[1]
         #if the assigned value contains single quotes, escape them
-        value = self.process_single_quote(value)
+        value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
     def assign_list(self, args):
@@ -435,28 +568,43 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             return args[0] + '[' + args[1] + ']'
 
-def quoted(s):
+def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
+
+def make_f_string(args, lookup):
+    argument_string = ''
+    for argument in args:
+        if argument in lookup:
+            # variables are placed in {} in the f string
+            argument_string += "{" + process_hash(argument) + "}"
+        else:
+            # strings are written regularly
+            # however we no longer need the enclosing quotes in the f-string
+            # the quotes are only left on the argument to check if they are there.
+            argument_string += argument.replace("'", '')
+
+    return f"print(f'{argument_string}')"
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 class ConvertToPython_3(ConvertToPython_2):
 
     def var_access(self, args):
-        name = ''.join(args)
-        return "_" + name if name in reserved_words else name
+        name = args[0]
+        return hash_var(name)
 
     def text(self, args):
         return ''.join([str(c) for c in args])
 
     def print(self, args):
-        unquoted_args = [a for a in args if not quoted(a)]
+        unquoted_args = [a for a in args if not is_quoted(a)]
         unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
         #we can print if all arguments are quoted OR they are all variables
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            return "print(" + '+'.join(args) + ')'
+            return make_f_string(args, self.lookup)
         else:
-            # I would like to raise normally but that is caught by the tranformer :(
-            return f"HedyException:{args[0]}"
+            # I would like to raise normally but that is caught by the transformer :(
+            first_unquoted_var = unquoted_args[0]
+            return f"HedyException:{first_unquoted_var}"
             #raise HedyException('Var Undefined', name=args[0])
 
     def print_nq(self, args):
@@ -475,7 +623,7 @@ def indent(s):
 
 class ConvertToPython_4(ConvertToPython_3):
     def list_access_var(self, args):
-        var = args[0]
+        var = hash_var(args[0])
         if args[2].data == 'random':
             return var + '=random.choice(' + args[1] + ')'
         else:
@@ -493,12 +641,12 @@ else:
     def condition(self, args):
         return ' and '.join(args)
     def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} == {arg1}" #no and statements
     def in_list_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} in {arg1}"
 
 class ConvertToPython_5(ConvertToPython_4):
@@ -506,12 +654,13 @@ class ConvertToPython_5(ConvertToPython_4):
         return ''.join(args)
 
     def repeat(self, args):
-        times = wrap_non_var_in_quotes(args[0], self.lookup)
+        times = process_variable(args[0], self.lookup)
         command = args[1]
         return f"""for i in range(int({str(times)})):
 {indent(command)}"""
 
 class ConvertToPython_6(ConvertToPython_5):
+    #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
         #force all to be printed as strings (since there can not be int arguments)
@@ -528,8 +677,8 @@ class ConvertToPython_6(ConvertToPython_5):
 
     #we can now have ints as types so chck must force str
     def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) == str({arg1})" #no and statements
         else:
@@ -605,7 +754,7 @@ class ConvertToPython_7(ConvertToPython_6):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return wrap_non_var_in_quotes(args[0], self.lookup)
+            return process_variable(args[0], self.lookup)
         else:
         # this is list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
@@ -643,7 +792,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access_var(self, args):
-        var = args[0]
+        var = hash_var(args[0])
         if not isinstance(args[2], str):
             if args[2].data == 'random':
                 return var + '=random.choice(' + args[1] + ')'
@@ -671,11 +820,12 @@ class ConvertToPython_13(ConvertToPython_12):
                 if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
                     return parameter + " = " + value
                 else:
-                    # FH, June 21 the addition of _true/false is a bit of a hack. cause they are first seen as vars that at reserved words, they egt and _ and we undo that here.
+                    # FH, June 21 the addition of _true/false is a bit of a hack. cause they are first seen as vars that at reserved words, they are then hashed and we undo that here
                     # could/should be fixed in the grammar!
-                    if value == 'true' or value == 'True' or value == '_True':
+
+                    if value == 'true' or value == 'True' or value == hash_var('True') or value == hash_var('true'):
                         return parameter + " = True"
-                    elif value == 'false' or value == 'False' or value == '_False':
+                    elif value == 'false' or value == 'False' or value == hash_var('False') or value == hash_var('false'):
                         return parameter + " = False"
                     else:
                         return parameter + " = '" + value + "'"
@@ -685,8 +835,8 @@ class ConvertToPython_13(ConvertToPython_12):
             return parameter + " = [" + ", ".join(values) + "]"
 
     def equality_check(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if arg1 == '\'True\'' or arg1 == '\'true\'':
             return f"{arg0} == True"
         elif arg1 == '\'False\'' or arg1 == '\'false\'':
@@ -706,20 +856,20 @@ class ConvertToPython_15(ConvertToPython_14):
 
 class ConvertToPython_16(ConvertToPython_15):
     def smaller(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) < str({arg1})"  # no and statements
+            return f"int({arg0}) < int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) < str({arg1}) and {args[2]}"
+            return f"int({arg0}) < int({arg1}) and {args[2]}"
 
     def bigger(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) > str({arg1})"  # no and statements
+            return f"int({arg0}) > int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) > str({arg1}) and {args[2]}"
+            return f"int({arg0}) > int({arg1}) and {args[2]}"
 
 class ConvertToPython_17(ConvertToPython_16):
     def while_loop(self, args):
@@ -761,8 +911,8 @@ class ConvertToPython_20(ConvertToPython_18_19):
             return args[0].children + " == int(" + args[1] + ")"
         if type(args[1]) is Tree:
             return "int(" + args[0] + ") == " + args[1].children
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if arg1 == '\'True\'' or arg1 == '\'true\'':
             return f"{arg0} == True"
         elif arg1 == '\'False\'' or arg1 == '\'false\'':
@@ -772,8 +922,8 @@ class ConvertToPython_20(ConvertToPython_18_19):
 
 class ConvertToPython_21(ConvertToPython_20):
     def not_equal(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
             return f"str({arg0}) != str({arg1})"  # no and statements
         else:
@@ -781,20 +931,20 @@ class ConvertToPython_21(ConvertToPython_20):
 
 class ConvertToPython_22(ConvertToPython_21):
     def smaller_equal(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) <= str({arg1})"  # no and statements
+            return f"int({arg0}) <= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) <= str({arg1}) and {args[2]}"
+            return f"int({arg0}) <= int({arg1}) and {args[2]}"
 
     def bigger_equal(self, args):
-        arg0 = wrap_non_var_in_quotes(args[0], self.lookup)
-        arg1 = wrap_non_var_in_quotes(args[1], self.lookup)
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
         if len(args) == 2:
-            return f"str({arg0}) >= str({arg1})"  # no and statements
+            return f"int({arg0}) >= int({arg1})"  # no and statements
         else:
-            return f"str({arg0}) >= str({arg1}) and {args[2]}"
+            return f"int({arg0}) >= int({arg1}) and {args[2]}"
 
 
 def merge_grammars(grammar_text_1, grammar_text_2):
@@ -850,7 +1000,7 @@ def create_grammar(level, sub):
 
     # we start with creating the grammar for level 1
     grammar_text_1 = get_full_grammar_for_level(1)
-    
+
     if sub:
         #grep
         if level == 1:
@@ -871,7 +1021,7 @@ def create_grammar(level, sub):
         # get grammar for the sublevel and merge it
         grammar_text_sub = get_additional_rules_for_level(level, sub)
         new = merge_grammars(new, grammar_text_sub)
-        
+
         # ready? Save to file to ease debugging
         # this could also be done on each merge for performance reasons
         filename = "level" + str(level) + "-" + str(sub) + "-Total.lark"
@@ -934,7 +1084,7 @@ def get_parser(level, sub):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, sub)
-    ret = Lark(grammar)
+    ret = Lark(grammar, regex=True)
     PARSER_CACHE[key] = ret
     return ret
 
@@ -959,7 +1109,7 @@ def transpile(input_string, level, sub = 0):
                     # Parse at `level - 1` failed as well, just re-raise original error
                     raise E
                 # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-                raise HedyException('Wrong Level', correct_code=result, original_level=level, working_level=new_level) from E
+                raise HedyException('Wrong Level', correct_code=result.code, original_level=new_level, working_level=level) from E
         raise E
 
 def repair(input_string):
@@ -1076,6 +1226,11 @@ def transpile_inner(input_string, level, sub=0):
     if contains_blanks(input_string):
         raise HedyException('Has Blanks')
 
+
+    if level >= 3:
+        input_string = input_string.replace("\\", "\\\\")
+
+    #in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
         input_string = preprocess_blocks(input_string)
 
@@ -1083,6 +1238,11 @@ def transpile_inner(input_string, level, sub=0):
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
+
+        #also add hashes to list
+        hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
+
+        lookup_table += hashed_lookups
 
     except UnexpectedCharacters as e:
         try:
@@ -1112,7 +1272,7 @@ def transpile_inner(input_string, level, sub=0):
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, sub)
-            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result)
+            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result.code)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)
@@ -1129,6 +1289,9 @@ def transpile_inner(input_string, level, sub=0):
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
+
+    if not valid_echo(program_root):
+        raise HedyException('Lonely Echo')
 
     if level == 1:
         python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)

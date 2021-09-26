@@ -196,16 +196,11 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile(input, self.level)
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-                     
-  def test_transpile_echo(self):
-    result = hedy.transpile("echo Jouw lievelingskleur is dus...", self.level)
-    expected = "print('Jouw lievelingskleur is dus...'+answer)"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
 
   def test_transpile_echo_without_argument(self):
-    result = hedy.transpile("echo", self.level)
-    expected = "print(answer)"
+    result = hedy.transpile("ask wat?\necho", self.level)
+    expected = "answer = input('wat?')\nprint(answer)"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
@@ -227,13 +222,26 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('\\'Welcome to \O/ceanView!\\'')""")
+    print('\\'Welcome to \\\\O/ceanView!\\'')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+
+  def test_use_slashes_at_end_of_print_allowed(self):
+    code = "print Welcome to \\"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Welcome to \\\\')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
 
   def test_use_quotes_in_ask_allowed(self):
     code = "ask 'Welcome to OceanView?'"
@@ -245,12 +253,30 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_lonely_echo(self):
+    code = "echo wat dan?"
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Lonely Echo', str(context.exception))
+
+  def test_early_echo(self):
+    code = textwrap.dedent("""\
+    echo what can't we do?
+    ask time travel """)
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Lonely Echo', str(context.exception))
+
   def test_use_quotes_in_echo_allowed(self):
-    code = "echo oma's aan de"
+    code = textwrap.dedent("""\
+    ask waar?
+    echo oma's aan de """)
+
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('oma\\'s aan de'+answer)""")
+    answer = input('waar?')
+    print('oma\\'s aan de '+answer)""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)

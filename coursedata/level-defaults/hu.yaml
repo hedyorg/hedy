@@ -19,8 +19,8 @@
         demo_code: "print Szia, üdvözlünk a Hedynél!"
     -   name: "ask"
         explanation: "Kérdezz valamit vele: `ask`."
-        example: "Példa: ask Mi a kedvenc színed?"
-        demo_code: "ask Mi a kedvenc színed?"
+        example: "ask 'Mi a kedvenc színed?'"
+        demo_code: "ask 'Mi a kedvenc színed?'"
     -   name: "echo"
         explanation: "Ismételj valamit: `echo`."
         example: "Példa: echo a kedvenc színed..."
@@ -99,8 +99,8 @@
         explanation: "Kérdezz valamit `ask`segítségével."
         example: "Példa: szin is ask Mi a kedvenc színed?"
         demo_code: |
-            szin is ask Mi a kedvenc színed?
-            print szin 'a kedvenc színed !'
+            szin is ask 'Mi a kedvenc színed?'
+            print szin ' a kedvenc színed !'
 4:
     start_code: |-
         nev is ask Hogy hívnak?
@@ -233,7 +233,7 @@
         meg a példakódot a részletekért'
         ##Hedy code példa
         ```
-        szin is ask Mi a kedvenc színed?
+        szin is ask 'Mi a kedvenc színed?'
         if szin is zöld
             repeat 3 times
                 print 'szép!'
@@ -474,9 +474,9 @@
              print('Mindkét válasz hibás!')
 15:
     start_code: |-
-        # Ez egy olyan program, amely néhány matematikai kérdést fog feltenni
+        # Ez egy olyan program amely néhány matematikai kérdést fog feltenni
         for i in range(1, 10):
-            # Ki fogjuk kérdezni az 5-ös szorzótáblát
+            # Ki fogjuk kérdezni az 5 ös szorzótáblát
             valasz is input('Mennyi ' i ' szorozva 5-tel?')
             # Leellenőrizzük hogy a valasz megegyezik-e a mi eredményünkkel
             helyes_valasz is i * 5
@@ -496,9 +496,9 @@
         example: |
             #Ez egy megjegyzés
         demo_code: |
-            # Ez a program kiírja, hogy szia
+            # Ez a program kiírja hogy szia
             # Ez Hedy-ben készült
-            # Ez nem csinál mást mint kiírja, Szia
+            # Ez nem csinál mást mint kiírja Szia
             print('szia!')
 16:
     start_code: |
