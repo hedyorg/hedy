@@ -173,7 +173,7 @@ class AllAssignmentCommands(Transformer):
     # list access is accessing a variable, so must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
-        listname = args[0][0]
+        listname = args[0]
         if args[1] == 'random':
             return 'random.choice(' + listname + ')'
         else:
@@ -183,8 +183,7 @@ class AllAssignmentCommands(Transformer):
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
         return args[0]
-    def var_access(self,args):
-        return args[0]
+
     def change_list_item(self, args):
         return args[0]
 
@@ -192,8 +191,15 @@ class AllAssignmentCommands(Transformer):
         #text never contains a variable
         return None
 
+    def var_access(self, args):
+        # just accessing (printing) a variable does not count toward the lookup table
+        return None
+
     def var(self, args):
-        return args
+        # the var itself (when in an assignment) should be added
+        # if it happens to be a keyword in Python, prefix with _
+        name = args[0]
+        return "_" + name if name in reserved_words else name
 
     def punctuation(self, args):
         #is never a variable (but should be removed from the tree or it will be seen as one!)
@@ -273,7 +279,7 @@ class UsesTurtle(Transformer):
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
-    # tree is transformed to a node of [Bool, args, linenumber]
+    # tree is transformed to a node of [Bool, args, command number]
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
@@ -351,11 +357,17 @@ class ConvertToPython_1(Transformer):
         except:
             parameter = 50
         return f"t.forward({parameter})"""
+
     def turn(self, args):
         if len(args) == 0:
             return "t.right(90)" #no arguments works, and means a right turn
 
-        if args[0] == 'left':
+        argument = args[0]
+        if argument in self.lookup:        #is the argument a variable? if so, use that
+            return f"t.right({argument})"
+        elif argument.isnumeric():         #numbers can also be passed through
+            return f"t.right({argument})"
+        elif argument == 'left':
             return "t.left(90)"
         else:
             return "t.right(90)" #something else also defaults to right turn
@@ -423,17 +435,33 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             return args[0] + '[' + args[1] + ']'
 
+def quoted(s):
+    return s[0] == "'" and s[-1] == "'"
 
-
-#TODO: lookuptable and punctuation chars not be needed for level2 and up anymore, could be removed
+#TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 class ConvertToPython_3(ConvertToPython_2):
+
+    def var_access(self, args):
+        name = ''.join(args)
+        return "_" + name if name in reserved_words else name
+
     def text(self, args):
         return ''.join([str(c) for c in args])
+
     def print(self, args):
-        #opzoeken is nu niet meer nodig
-        return "print(" + '+'.join(args) + ')'
+        unquoted_args = [a for a in args if not quoted(a)]
+        unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
+        #we can print if all arguments are quoted OR they are all variables
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            return "print(" + '+'.join(args) + ')'
+        else:
+            # I would like to raise normally but that is caught by the tranformer :(
+            return f"HedyException:{args[0]}"
+            #raise HedyException('Var Undefined', name=args[0])
+
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
+
     def ask(self, args):
         args_new = []
         var = args[0]
@@ -578,15 +606,8 @@ class ConvertToPython_7(ConvertToPython_6):
     def var_access(self, args):
         if len(args) == 1: #accessing a var
             return wrap_non_var_in_quotes(args[0], self.lookup)
-            # this was used to produce better error messages, but needs more work
-            # (because plain text strings are now also var_access and not textwithoutspaces
-            # since we no longer have priority rules
-            # if args[0] in self.lookup:
-            #     return args[0]
-            # else:
-            #     raise HedyException('VarUndefined', level=7, name=args[0])
         else:
-        # dit was list_access
+        # this is list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
 class ConvertToPython_8(ConvertToPython_7):
@@ -1044,16 +1065,19 @@ def preprocess_blocks(code):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+def contains_blanks(code):
+    return (" _ " in code) or (" _\n" in code)
 
-def transpile_inner(input_string, level, sub = 0):
+def transpile_inner(input_string, level, sub=0):
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-
     parser = get_parser(level, sub)
+
+    if contains_blanks(input_string):
+        raise HedyException('Has Blanks')
 
     if level >= 7:
         input_string = preprocess_blocks(input_string)
-        # print(input_string)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -1102,7 +1126,7 @@ def transpile_inner(input_string, level, sub = 0):
 
     is_complete = IsComplete().transform(program_root)
     if not is_complete[0]:
-        incomplete_command = is_complete[1]
+        incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
 
@@ -1155,6 +1179,9 @@ def transpile_inner(input_string, level, sub = 0):
         raise Exception('Levels over 22 are not implemented yet')
 
     has_turtle = UsesTurtle().transform(program_root)
+    if 'HedyException' in python:
+        var = python.split(':')
+        raise HedyException('Var Undefined', name=var[1])
 
     return ParseResult(python, has_turtle)
 

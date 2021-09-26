@@ -22,10 +22,10 @@
         demo_code: "ask Wat is je lievelingskleur?"
     -   name: "echo"
         explanation: "Iets herhalen dat is ingetypt met `echo`."
-        example: "Bijvoorbeeld: echo dus je lievelingskleur is..."
+        example: "Bijvoorbeeld: echo dus je lievelingskleur is"
         demo_code: |-
             ask Wat is je lievelingskleur?
-            echo dus je lievelingskleur is...
+            echo dus je lievelingskleur is
     -   name: "forward"
         explanation: "Een lijn trekken met `forward`."
         example: "Bijvoorbeeld: forward 100"
@@ -184,7 +184,12 @@
             kleur is ask 'Wat is je lievelingskleur?'
             if kleur is groen print 'mooi!' else print 'niet zo mooi'
     -   name: "repeat"
-        explanation: "Herhalen en `if` samen"
+        explanation: "Iets herhalen met `repeat`."
+        example: "Bijvoorbeeld: repeat 3 times print 'Hey die is leuk!'"
+        demo_code: |-
+            repeat 3 times print 'Hey die is leuk!'
+    -   name: "`repeat` en `if`"
+        explanation: "`repeat` en `if` samen"
         example: "Bijvoorbeeld: if kleur is groen repeat 3 times print 'mooi!' else repeat 5 times print 'niet zo mooi'"
         demo_code: |-
             kleur is ask 'Wat is je lievelingskleur?'
@@ -293,26 +298,6 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-8-1:
-    start_code: "for teller is 1 to 5\n    print teller"
-    intro_text:
-        "We gaan nu `repeat` veranderen in `for`! Je typt nu `for teller is 1 to 5`, in plaats van `repeat 5 times`. Het leuke is dat je die variabele `teller` ook in je programma kan gebruiken! Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)"
-        
-    commands:
-    -   name: "repeat vervangen met for"
-        explanation: "We vervangen `repeat` met `for` en voegen een range toe"
-        example: "for teller is 1 to 5"
-        demo_code: "for teller is 1 to 5\n    print teller"
-    -   explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
-        example: "Example: antwoord is ask 'Wat is 5 plus 5?'"
-        demo_code: |-
-            antwoord is ask 'Wat is 5 plus 5?'
-            if antwoord is 10
-                print 'Goed zo!'
-                print 'Het antwoord was inderdaad ' antwoord
-            else
-                print 'Oeps!'
-                print 'Het antwoord is 10'
 9:
     start_code: |-
         for i in range 1 to 10:

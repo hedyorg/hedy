@@ -103,6 +103,19 @@ class TestsLevel6(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_addition_var(self):
+    code = textwrap.dedent("""\
+    var is 5
+    print var + 5""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    var = '5'
+    print(str(int(var) + int(5)))""")
+
+    self.assertEqual(expected, result.code)
+
   def test_simple_calculation_without_space(self):
     code = "nummer is 4+5"
     result = hedy.transpile(code, self.level)
@@ -252,3 +265,22 @@ class TestsLevel6(unittest.TestCase):
       self.assertEqual(False, result.has_turtle)
 
 
+  def test_ifelse_should_go_before_assign(self):
+
+    code = textwrap.dedent("""\
+    kleur is geel
+    if kleur is groen antwoord is ok else antwoord is stom
+    print ans""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    kleur = 'geel'
+    if str(kleur) == str('groen'):
+      antwoord = 'ok'
+    else:
+      antwoord = 'stom'
+    print(str(ans))""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
