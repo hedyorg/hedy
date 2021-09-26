@@ -14,7 +14,7 @@ page_title: Learn More — Hedy
 <div id="mc_embed_signup">
 <form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	
+
 <div class="indicates-required"><span class="asterisk">*</span> champs requis</div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL">Adresse email  <span class="asterisk">*</span>
@@ -63,6 +63,7 @@ Nous aimerions en apprendre plus sur votre expérience!
 Depuis notre lancement au début de l'année 2020, certains sites et journaux ont publié des articles sur Hedy.
 Voici la liste des articles que nous avons trouvé :
 
+* [CodeWeek.eu - Haunted House Challenge,(Anglais) September 2021](https://codeweek.eu/2021/challenges/haunted-house)
 * [Opensource.com (Anglais), April 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [Ingeniería De Software (Espagnol), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
 * [Hello World Magazine (Anglais), February 2021](images/Hello_World_15_Hedy.pdf)

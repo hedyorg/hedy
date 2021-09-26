@@ -280,14 +280,14 @@ def parse():
             hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
             with querylog.log_time('transpile'):
                 transpile_result = hedy.transpile(code, level, sublevel)
-                code = transpile_result.code
+                python_code = transpile_result.code
                 has_turtle = transpile_result.has_turtle
 
             response['has_turtle'] = has_turtle
             if has_turtle:
-                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + code
+                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
             else:
-                response["Code"] = "# coding=utf8\nimport random\n" + code
+                response["Code"] = "# coding=utf8\nimport random\n" + python_code
         except hedy.HedyException as E:
             traceback.print_exc()
             # some 'errors' can be fixed, for these we throw an exception, but also
@@ -430,7 +430,7 @@ def programs_page (request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         g.lang = lang = requested_lang()
@@ -449,7 +449,7 @@ def get_quiz_start(level):
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
 def get_quiz(level_source, question_nr, attempt):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
@@ -464,6 +464,10 @@ def get_quiz(level_source, question_nr, attempt):
 
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
+        
+        if int(attempt) == 1:
+            questionStatus = 'start'
+
         if q_nr <= len(quiz_data['questions']):
             question = quiz_data['questions'][q_nr - 1].get(q_nr)
 
@@ -472,6 +476,7 @@ def get_quiz(level_source, question_nr, attempt):
             for i in range(len(question['mp_choice_options'])):
                 char_array.append(chr(ord('@') + (i + 1)))
             return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+                                   questionStatus= questionStatus,
                                    questions=quiz_data['questions'],
                                    question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                    correct=session.get('correct_answer'),
@@ -492,7 +497,7 @@ def get_quiz(level_source, question_nr, attempt):
 
 @app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
-    if not config['quiz-enabled'] and g.lang != 'nl':
+    if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
     else:
         # Get the chosen option from the request form with radio buttons
@@ -508,17 +513,19 @@ def submit_answer(level_source, question_nr, attempt):
         q_nr = int(question_nr)
 
         session['quiz-attempt'] = int(attempt)
-
+        questionStatus = 'false'
+        if int(attempt) == 1:
+            questionStatus = 'start'
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
         index_option = ord(option.split("-")[1]) - 65
-
+        session['chosen_option'] =option.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
         if question['correct_answer'] in option:
             if session.get('total_score'):
-                session['total_score'] = session.get('total_score') +(config['quiz-max-attempts'] -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
+                session['total_score'] = session.get('total_score') +(config.get('quiz-max-attempts') -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
             else:
-                session['total_score'] = (config['quiz-max-attempts'] - session.get('quiz-attempt')  )* 0.5 * question['question_score']
+                session['total_score'] = (config.get('quiz-max-attempts') - session.get('quiz-attempt')  )* 0.5 * question['question_score']
             if session.get('correct_answer'):
                 session['correct_answer'] = session.get('correct_answer') + 1
             else:
@@ -537,7 +544,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif session.get('quiz-attempt')  < config['quiz-max-attempts']:
+            elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
                 question = quiz_data['questions'][q_nr - 1].get(q_nr)
                 # Convert the indices to the corresponding characters
                 char_array = []
@@ -548,18 +555,19 @@ def submit_answer(level_source, question_nr, attempt):
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        attempt= session.get('quiz-attempt') ,
-                                       questionFalse='false',
+                                       questionStatus=questionStatus,
+                                       chosen_option = session.get('chosen_option'),
                                        char_array=char_array,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif session.get('quiz-attempt')  > config['quiz-max-attempts']:
+            elif session.get('quiz-attempt') > config.get('quiz-max-attempts'):
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
-                                       questionFalse = 'false',
+                                       questionStatus = questionStatus,
                                        option=option,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
