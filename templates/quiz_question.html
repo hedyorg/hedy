@@ -100,6 +100,66 @@
                         {% endfor %}
                     </div>
                     {% set counter.value = counter.value + 1%}
+            <div class="grid gap-1 rounded-t-xl radio-block">
+                {% for row in question.mp_choice_options %}
+                    {% if question.correct_answer == chosen_option and not chosen_option %}
+                        <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
+                            <label class="inline-flex items-center"><p
+                                    class="text-4xl font-bold ml-6 mr-6 font-slab">
+                                {{ char_array[loop.index - 1] }}</p></p>
+                                <input
+                                        type="radio"
+                                        name="radio_option"
+                                        value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
+                                        class="class form-radio h-12 w-12">
+                                <span>
+                                {% if row.code %}
+                                    <code class="ml-6 text-xl">{{ row.code }}</code>
+                                {% elif row.option_text %}
+                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
+                                {% endif %}
+                            </span>
+                            </label>
+                        </div>
+                    {% elif chosen_option == char_array[loop.index - 1] %}
+                        <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" id="answer-disabled">
+                            <label class="inline-flex items-center"><p
+                                    class="text-4xl font-bold ml-6 mr-6 font-slab">
+                                {{ char_array[loop.index - 1] }}</p></p>
+                                <input
+                                        type="radio"
+                                        name="radio_option"
+                                        value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
+                                        class="class form-radio h-12 w-12" disabled="disabled">
+                                <span>
+                                {% if row.code %}
+                                    <code class="ml-6 text-xl">{{ row.code }}</code>
+                                {% elif row.option_text %}
+                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
+                                {% endif %}
+                                </span>
+                            </label>
+                        </div>
+                    {% else %}
+                        <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
+                            <label class="inline-flex items-center"><p
+                                    class="text-4xl font-bold ml-6 mr-6 font-slab">
+                                {{ char_array[loop.index - 1] }}</p></p>
+                                <input
+                                        type="radio"
+                                        name="radio_option"
+                                        value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
+                                        class="class form-radio h-12 w-12" >
+                                <span>
+                                {% if row.code %}
+                                    <code class="ml-6 text-xl">{{ row.code }}</code>
+                                {% elif row.option_text %}
+                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
+                                {% endif %}
+                            </span>
+                            </label>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <div class="p-10 button-bar border-t-8 border-green-600">
