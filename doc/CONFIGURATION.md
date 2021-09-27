@@ -63,6 +63,12 @@ To set up the port of the app through an env variable (helpful to start multiple
 PORT
 ```
 
+To turn off development mode
+
+```
+NO_DEBUG_MODE
+```
+
 ## Heroku Metadata
 
 This app depends on some environment variables that require Heroku dyno metadata.

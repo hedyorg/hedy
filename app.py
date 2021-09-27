@@ -102,6 +102,10 @@ def load_adventures_per_level(lang, level):
     for short_name, adventure in adventures.items ():
         if not level in adventure['levels']:
             continue
+        # end adventure is the quiz
+        # if quizzes are not enabled, do not load it
+        if short_name == 'end' and not config['quiz-enabled']:
+            continue
         all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
@@ -217,7 +221,7 @@ def after_request_log_status(response):
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-        'X-Frame-Options': 'DENY',
+        'X-Frame-Options': None if re.match ('.*/quiz', request.url) else 'DENY',
         'X-XSS-Protection': '1; mode=block',
     }
     response.headers.update(security_headers)
@@ -464,7 +468,7 @@ def get_quiz(level_source, question_nr, attempt):
 
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
-        
+
         if int(attempt) == 1:
             questionStatus = 'start'
 
@@ -495,7 +499,7 @@ def get_quiz(level_source, question_nr, attempt):
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
-@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+@app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
     if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404
@@ -1104,7 +1108,7 @@ if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    utils.set_debug_mode(True)
+    utils.set_debug_mode(not os.getenv ('NO_DEBUG_MODE'))
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
