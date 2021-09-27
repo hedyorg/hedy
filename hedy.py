@@ -464,6 +464,9 @@ class ConvertToPython_1(Transformer):
             parameter = int(args[0])
         except:
             parameter = 50
+        return self.make_forward(parameter)
+
+    def make_forward(self, parameter):
         return f"t.forward({parameter})""\ntime.sleep(0.1)"
 
     def turn(self, args):
@@ -544,7 +547,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 parameter = int(parameter)
         except:
             parameter = 50
-        return f"t.forward({parameter})\ntime.sleep(0.1)"""
+        return self.make_forward(parameter)
 
     def ask(self, args):
         var = args[0]
