@@ -1,6 +1,7 @@
-{% extends "layout.html" %}
-
-{% block body %}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+        <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+        <link rel="stylesheet" href="{{static('/css/additional.css')}}">
+        <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
         <div class="flex-container">
             <div class="center-picture p-10"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
             </div>
@@ -10,12 +11,7 @@
             </div>
         </div>
         <div class="p-10 button-bar border-t-8 border-green-600 ">
-            <button class="green-btn"
-                    onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">Ga terug naar
-                level {{ level }} </button>
-
             <button class="green-btn ml-1 " onclick="window.location = '/quiz/quiz_questions/{{level }}/1/1'"> Ga naar
                 vraag 1 van de quiz
             </button>
         </div>
-{% endblock %}
