@@ -22,11 +22,17 @@ class LogRecord:
             self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         self.attributes = kwargs
         self.running_timers = set([])
-        self.set(
-            start_time=dtfmt(self.start_time),
-            pid=os.getpid(),
-            loadavg=os.getloadavg()[0],
-            fault=0)
+        if IS_WINDOWS:
+            self.set(
+                start_time=dtfmt(self.start_time),
+                pid=os.getpid(),
+                fault=0)
+        else:
+            self.set(
+                start_time=dtfmt(self.start_time),
+                pid=os.getpid(),
+                loadavg=os.getloadavg()[0],
+                fault=0)
 
         dyno = os.getenv('DYNO')
         if dyno:
