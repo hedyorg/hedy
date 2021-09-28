@@ -300,6 +300,9 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Too Big":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
                 error_template = hedy_errors[E.error_code]
                 # Localize the names of characters. If we can't do that, just show the original
