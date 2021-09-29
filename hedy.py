@@ -464,7 +464,10 @@ class ConvertToPython_1(Transformer):
             parameter = int(args[0])
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return self.make_forward(parameter)
+
+    def make_forward(self, parameter):
+        return f"t.forward({parameter})""\ntime.sleep(0.1)"
 
     def turn(self, args):
         if len(args) == 0:
@@ -532,20 +535,19 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, args):
         # no args received? default to 50
-        if len(args) == 0:
-            return "t.forward(50)"
+        parameter = 50
 
-        parameter = args[0]
+        if len(args) > 0:
+            parameter = args[0]
+
         #if the parameter is a variable, print as is
-        if parameter in self.lookup:
-            return f"t.forward({parameter})"
-
         # otherwise, see if we got a number. if not, simply use 50 as default
         try:
-            parameter = int(args[0])
+            if parameter not in self.lookup:
+                parameter = int(parameter)
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return self.make_forward(parameter)
 
     def ask(self, args):
         var = args[0]

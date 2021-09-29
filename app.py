@@ -289,7 +289,7 @@ def parse():
 
             response['has_turtle'] = has_turtle
             if has_turtle:
-                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+                response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
             else:
                 response["Code"] = "# coding=utf8\nimport random\n" + python_code
         except hedy.HedyException as E:
