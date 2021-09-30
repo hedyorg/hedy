@@ -82,7 +82,8 @@ class TestsLevel1(unittest.TestCase):
   def test_transpile_one_forward(self):
     result = hedy.transpile("forward 50", self.level)
     expected = textwrap.dedent("""\
-    t.forward(50)""")
+    t.forward(50)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
 
   def test_transpile_turn_no_args(self):
@@ -117,7 +118,9 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("forward\nforward", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
-    t.forward(50)""")
+    time.sleep(0.1)
+    t.forward(50)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -125,8 +128,10 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 

@@ -10,33 +10,34 @@ import re
 
 # Some useful constants
 HEDY_MAX_LEVEL = 22
+MAX_LINES = 100
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['print', 'ask', 'echo'] ,
-                      2: ['print', 'ask', 'echo', 'is'],
-                      3: ['print', 'ask', 'is'],
-                      4: ['print', 'ask', 'is', 'if'],
-                      5: ['print', 'ask', 'is', 'if', 'repeat'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat'],
-                      7: ['print', 'ask', 'is', 'if', 'repeat'],
-                      8: ['print', 'ask', 'is', 'if', 'for'],
-                      9: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      11: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      12: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      14: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      16: ['print', 'ask', 'is', 'if', 'for', 'elif'],
-                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while']
+commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
+                      2: ['print', 'ask', 'echo', 'is', 'turn', 'forward'],
+                      3: ['print', 'ask', 'is', 'turn', 'forward'],
+                      4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
+                      5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+                      6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+                      7: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+                      8: ['print', 'ask', 'is', 'if', 'for', 'turn', 'forward'],
+                      9: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      10: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      11: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      12: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      13: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      14: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      15: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      16: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -463,7 +464,10 @@ class ConvertToPython_1(Transformer):
             parameter = int(args[0])
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return self.make_forward(parameter)
+
+    def make_forward(self, parameter):
+        return f"t.forward({parameter})""\ntime.sleep(0.1)"
 
     def turn(self, args):
         if len(args) == 0:
@@ -531,20 +535,19 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, args):
         # no args received? default to 50
-        if len(args) == 0:
-            return "t.forward(50)"
+        parameter = 50
 
-        parameter = args[0]
+        if len(args) > 0:
+            parameter = args[0]
+
         #if the parameter is a variable, print as is
-        if parameter in self.lookup:
-            return f"t.forward({parameter})"
-
         # otherwise, see if we got a number. if not, simply use 50 as default
         try:
-            parameter = int(args[0])
+            if parameter not in self.lookup:
+                parameter = int(parameter)
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return self.make_forward(parameter)
 
     def ask(self, args):
         var = args[0]
@@ -1092,7 +1095,6 @@ ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, sub = 0):
     try:
-        input_string = input_string.replace('\r\n', '\n')
         transpile_result = transpile_inner(input_string, level, sub)
         return transpile_result
     except Exception as E:
@@ -1219,6 +1221,13 @@ def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
 def transpile_inner(input_string, level, sub=0):
+    number_of_lines = input_string.count('\n')
+
+    #parser is not made for huge programs!
+    if number_of_lines > MAX_LINES:
+        raise HedyException('Too Big', lines_of_code = number_of_lines, max_lines = MAX_LINES)
+
+    input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = get_parser(level, sub)
