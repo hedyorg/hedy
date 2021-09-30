@@ -220,11 +220,11 @@
          ```
          colore is ask 'Qual è il tuo colore preferito?'
          if colore is verde
-           repeat 3 times
-               print 'carino!'
+             repeat 3 times
+                 print 'carino!'
          else
-           repeat 5 times
-               print 'mah'
+             repeat 5 times
+                 print 'mah'
          ```
     commands:
     -   name: "print"
@@ -236,12 +236,12 @@
         example: "Esempio: risposta is ask 'Quanto fa 5 più 5?'"
         demo_code: |-
             risposta is ask 'Quanto fa 5 più 5?'
-            if risposta è 10
+            if risposta is 10
                 print 'Ben fatto!'
                 print 'Esatto, la risposta corretta era ' risposta
-            invece
-                scrivi 'Ops!'
-                scrivi 'La risposta è ' risposta
+            else
+                print 'Ops!'
+                print 'La risposta è ' risposta
     -   name: "if e repeat insieme"
         explanation: "`if` e `repeat` insieme"
         example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"

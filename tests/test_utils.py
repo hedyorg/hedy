@@ -1,6 +1,7 @@
 import unittest
 import utils
 import bcrypt
+import os
 import time
 
 class TestUtils(unittest.TestCase):
@@ -17,9 +18,21 @@ class TestUtils(unittest.TestCase):
     salt = bcrypt.gensalt ().decode ('utf-8')
     self.assertEqual(12, utils.extract_bcrypt_rounds(salt))
 
-  def test_load_yaml_speed(self):
+  def test_load_yaml_equivalent(self):
+    """Test that when we load a YAML file uncached and cached, it produces the same data.
+
+    Also get a gauge for the speedup we get from loading a pickled file,
+    although we're not going to fail the test on the numbers we get from that.
+    """
     n = 50
-    file = 'coursedata/adventures/hu.yaml'
+
+    # Pick a file with unicode in it so we're sure it gets handled properly
+    file = os.path.join(os.path.dirname(__file__), '..', 'coursedata/adventures/hu.yaml')
+
+    # Remove pickled version of this file if it exists, it may
+    # influence the tests
+    if os.path.isfile(f'{file}.pickle'):
+      os.unlink(f'{file}.pickle')
 
     start = time.time()
     for _ in range(n):

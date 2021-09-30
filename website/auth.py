@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring, load_yaml_uncached
 import datetime
 from functools import wraps
 from config import config
@@ -55,6 +55,7 @@ def is_teacher (request):
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
 TRANSLATIONS = hedyweb.Translations ()
+EMAILS = load_yaml_uncached ('website/emails.yaml')
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login (f):
@@ -78,14 +79,6 @@ def requires_login (f):
 def routes (app, database, requested_lang):
     global DATABASE
     DATABASE = database
-
-    @app.route('/auth/texts', methods=['GET'])
-    def auth_texts():
-        response = make_response(jsonify(TRANSLATIONS.get_translations (requested_lang (), 'Auth')))
-        if not is_debug_mode():
-            # Cache for longer when not devving
-            response.cache_control.max_age = 60 * 60  # Seconds
-        return response
 
     @app.route ('/auth/login', methods=['POST'])
     def login ():
@@ -231,7 +224,7 @@ def routes (app, database, requested_lang):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
-            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
+            send_email_template ('welcome_verify', email, os.getenv ('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             resp = make_response ({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
@@ -300,7 +293,7 @@ def routes (app, database, requested_lang):
 
         DATABASE.update_user(user ['username'], {'password': hashed})
         if not is_testing_request (request):
-            send_email_template ('change_password', user ['email'], requested_lang (), None)
+            send_email_template ('change_password', user ['email'], None)
 
         return '', 200
 
@@ -348,7 +341,7 @@ def routes (app, database, requested_lang):
                 if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
-                    send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
+                    send_email_template ('welcome_verify', email, os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         username = user ['username']
 
@@ -376,8 +369,6 @@ def routes (app, database, requested_lang):
             output ['verification_pending'] = True
 
         output ['student_classes'] = DATABASE.get_student_classes (user ['username'])
-        if bool ('is_teacher' in user and user ['is_teacher']):
-            output ['teacher_classes'] = DATABASE.get_teacher_classes (user ['username'], True)
 
         output ['session_expires_at'] = timems () + session_length * 1000
 
@@ -410,7 +401,7 @@ def routes (app, database, requested_lang):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify ({'username': user ['username'], 'token': token}), 200
         else:
-            send_email_template ('recover_password', user ['email'], requested_lang (), os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
+            send_email_template ('recover_password', user ['email'], os.getenv ('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (token))
             return '', 200
 
     @app.route ('/auth/reset', methods=['POST'])
@@ -442,7 +433,7 @@ def routes (app, database, requested_lang):
         user = DATABASE.user_by_username(body ['username'])
 
         if not is_testing_request (request):
-            send_email_template ('reset_password', user ['email'], requested_lang (), None)
+            send_email_template ('reset_password', user ['email'], None)
 
         return '', 200
 
@@ -469,6 +460,9 @@ def routes (app, database, requested_lang):
             return 'invalid username', 400
 
         DATABASE.update_user(user ['username'], {'is_teacher': 1 if body ['is_teacher'] else 0})
+
+        if body ['is_teacher'] and not is_testing_request (request):
+            send_email_template ('welcome_teacher', user ['email'], '')
 
         return '', 200
 
@@ -504,7 +498,7 @@ def routes (app, database, requested_lang):
         if is_testing_request (request):
            resp = {'username': user ['username'], 'token': hashed_token}
         else:
-            send_email_template ('welcome_verify', body ['email'], requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
+            send_email_template ('welcome_verify', body ['email'], os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user ['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
         return '', 200
 
@@ -537,8 +531,8 @@ def send_email (recipient, subject, body_plain, body_html):
     else:
         print ('Email sent to ' + recipient)
 
-def send_email_template (template, email, lang, link):
-    texts = TRANSLATIONS.get_translations (lang, 'Auth')
+def send_email_template (template, email, link):
+    texts = EMAILS
     subject = texts ['email_' + template + '_subject']
     body = texts ['email_' + template + '_body'].split ('\n')
     body = [texts ['email_hello']] + body
@@ -547,19 +541,22 @@ def send_email_template (template, email, lang, link):
     body = body + texts ['email_goodbye'].split ('\n')
 
     body_plain = '\n'.join (body)
-    body_html = '<p>' + '</p><p>'.join (body) + '</p>'
+
+    with open('templates/base_email.html', 'r', encoding='utf-8') as f:
+        body_html = f.read ()
+    body_html += '<p>' + '</p><p>'.join (body) + '</p>'
+    body_html += '</div>'
     if link:
         body_plain = body_plain.replace ('@@LINK@@', 'Please copy and paste this link into a new tab: ' + link)
         body_html = body_html.replace ('@@LINK@@', '<a href="' + link + '">Link</a>')
-    body_html += '<br><img style="max-width: 100px" src="http://www.hedycode.com/images/Hedy-logo.png">'
 
     send_email (email, subject, body_plain, body_html)
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='my-profile')
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='login')
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request (request) and not is_admin (request):
             return 'unauthorized', 403

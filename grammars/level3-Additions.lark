@@ -1,21 +1,21 @@
 command: print | ask | turtle | assign_list | ask_no_quotes| assign | print_no_quotes | invalid //catch all at the end
 
-//ask_no_quotes can conflict with assign (color is ask wat? -> color = 'ask wat?')
-// so it needs to go before
+// we need a separate rule for a var when used in a print argument
+// it parses the same, but should not be counted towards lookup table creation
+var_access : NAME
 
 //since ask allows for quotes, there is some duplication between ask and print
-//so maybe (_SPACE| list_access | quoted_text | var)* should be something like 'print_argument'?)
+//so maybe (_SPACE| list_access | quoted_text | var_access)* should be something like 'print_argument'?)
 
-//same holds for the unquoted arguments
-
-print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var)*  -> print
-print_no_quotes: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
-ask: var _SPACE _IS _SPACE _ASK _SPACE (_SPACE| list_access | quoted_text | var)*
+print: _PRINT _SPACE (_SPACE| list_access | quoted_text | var_access)*  -> print
+print_no_quotes: _PRINT _SPACE text -> print_nq
+ask: var _SPACE _IS _SPACE _ASK _SPACE (_SPACE| list_access | quoted_text | var_access)*
 ask_no_quotes: var _SPACE _IS _SPACE _ASK _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*  -> print_nq
 
 
+
 //anything can be parsed except for spaces, and a newlines and commas for list separators
-textwithoutspaces: /([^\r\n,!?. *+-\/]+)/ -> text
+textwithoutspaces: /([^\r\n, *+-\/]+)/ -> text
 index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 
 //anything can be parsed except for a newline and a comma for list separators

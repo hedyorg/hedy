@@ -40,7 +40,7 @@ HedyErrorMessages:
     Invalid Space: "Oops! Começaste uma linha com um espaço na linha {line_number}. Espaços confundem os computadores, podes apagá-lo?"
     Parse: "O código que introduziste não é um código Hedy válido. Existe um erro na linha {location[0]}, na posição {location[1]}. Tu digitaste {character_found}, mas isso não é permitido."
     Unquoted Text: "Tem cuidado. Se queres escrever algo, o texto deve começar e acabar com aspas simples. Esqueceste-te de uma algures."
-    VarUndefined: "Tentaste escrever {name}, mas não o instanciastes."
+    Var Undefined: "Tentaste escrever {name}, mas não o instanciastes."
     space: "um espaço"
     comma: "uma vírgula"
     question mark: "um ponto de interrogação"
@@ -107,27 +107,11 @@ Auth:
     invalid_reset_link: "Ligação para recuperação de palavra-passe inválida."
     exists_email: "Este email já é utilizado."
     exists_username: "Este utilizador já existe."
-    email_hello: "Olá!"
-    email_goodbye: |-
-        Obrigado!
-        A equipa Hedy
-    email_welcome_verify_subject: "Bem-vind@ à Hedy"
-    email_welcome_verify_body: |-
-        A tua conta Hedy foi criada com sucesso. Bem-vind@!
-        Por favor clica na ligação para verificar o teu endereço de email:
-    email_change_password_subject: "A tua palavra-passe Hedy foi mudada"
-    email_change_password_body: |-
-        A tua palavra-passe Hedy foi alterada. Se fizeste isto, está tudo bem.
-        Se não mudaste a tua palavra-passe, por favor, contacta-nos imediatamente, respondendo a este email.
-    email_recover_password_subject: "Recupera a tua palavra-passe Hedy"
-    email_recover_password_body: "Clicando nesta ligação, consegues definir uma nova palavra-passe Hedy. Se não solicitaste a recuperação de palavra-passe, por favor, ignora este email."
-    email_reset_password_subject: "A tua palavra-passe Hedy foi reiniciada"
-    email_reset_password_body: |-
-        A tua palavra-passe Hedy foi substituída por uma nova. Se fizeste isto, está tudo bem.
-        Se não alteraste a tua palavra-passe, por favor, contacta-nos imediatamente, respondendo a este email.
     programming_experience: "Tens alguma experiência em programação?"
     yes: "Sim"
     no: "Não"
+    ok: "OK"
+    cancel: "Cancel"
     languages: "Quais destas linguagens de programação usaste anteriormente?"
     other_block: "Outro bloco de linguagem"
     other_text: "Outra linguagem de texto"
@@ -150,18 +134,22 @@ Auth:
     student_classes: "My classes"
     teacher_classes: "My classes"
     create_class: "Create new class"
+    rename_class: "Rename class"
     delete_class: "Delete class permanently"
     class_link: "Link to join class"
     prompt_join_class: "Do you want to join this class?"
     join_class: "Join class"
     class_overview: "Class overview"
     class_join_confirmation: "You have successfully joined the class"
+    class_already_joined: "You are already part of the class"
+    goto_profile: "Go to my profile"
     last_login: "Last login"
     highest_level_reached: "Highest level reached"
     number_programs: "Number of programs"
     latest_shared_program: "Latest shared program"
     remove_student: "Remove student"
     students: "students"
+    back_to_class_list: "Go back to list of classes"
     copy_class_link: "Copy link to join class"
     join_prompt: "You need to have an account to join a class. Would you like to login now?"
 Programs:

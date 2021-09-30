@@ -1,0 +1,151 @@
+1: 
+   intro_text: "हेडी मे आपका स्वागत है! स्तर 1 में आप `print`, `ask` और `echo` जैसे आदेशों  का उपयोग कर सकते है। नीले बटन को दबाने से आपका कोड आपके लिये टाइप हो जाएगा। अब प्रोग्रामिंग क्षेत्र में नीचे बाएं  जाकर हरे बटन “रन द  कोड दबाएं ।"
+   start_code: "print हेलो दुनिया!"
+   commands:
+     - name: "print"
+       explanation: "`print` का इस्तेमाल करके कुछ छापो"
+       example: "उदाहरण: print हेलो हेडी में आपका स्वागत है!"
+       demo_code: "print हेलो हेडी में आपका स्वागत है!"
+     - name: "ask"
+       explanation: "`ask` का इस्तेमाल करके कुछ पूछो। "
+       example: "उदाहरण: ask आपका पसंदीदा रंग कौन सा है?"
+       demo_code: "ask आपका पसंदीदा रंग कौन सा है?"
+     - name: "echo "
+       explanation: "`echo` का इस्तेमाल करके कुछ दोहराओ।"
+       example: "उदाहरण: echo तो आपका पसंदीदा रंग है..."
+       demo_code: |
+         ask आपका पसंदीदा रंग कौन सा है?
+         echo  तो आपका पसंदीदा रंग है...
+2:
+   intro_text: "print वैसे ही काम करेगा जैसे स्तर १ में किया, लेकिन ask बदल गया है और अब उसको किसी नाम की ज़रूरत है, जो कि आप `print` कर सकते हैं| `echo` की अब कोई ज़रूरत नहीं है| अब आप इन आदेशों का भी इस्तेमाल कर सकते हैं:"
+   start_code: "print हेलो दुनिया  !"
+   commands:
+     - name: "is"
+       explanation: |
+          एक शब्द को नाम दीजिए जो उस प्रोग्राम में उपयोग हो सके जिस में
+          ‘is‘ का इस्तेमाल हो रहा हो|
+       example: "उदाहरण : नाम is हेडी|"
+       demo_code: "नाम is हेडी\nprint नाम का स्वागत  है|"
+     - name: "ask "
+       explanation: "`ask` का इस्तेमाल करके कुछ पूछो| खबरदार! आपको अब उत्तर का नाम ‘is’ से देना है|"
+       example: "उदाहरण : रंग is ask आपका पसंदीदा रंग क्या है?"
+       demo_code: |
+         रंग is ask आपका  पसंदीदा रंग क्या है?
+         print रंग आपका पसंदीदा है!"
+     - name: "choose_random"
+       explanation: "एक समूह से एक क्रमरहित शब्द चुनें जो `at` और `random` का इस्तेमाल करें"
+       example: "उदाहरण: जानवर है कुत्ता, बिल्ली, कंगेरू"
+       demo_code: |
+         जानवर is कुत्ता, बिल्ली, कंगेरू
+         print जानवर at random
+3:
+   start_code: "print 'हेलो  दुनिया'"
+   intro_text: "`ask` अभी भी स्तर ३ में बिल्कुल वैसा ही है, लेकिन `print` अब अलग है| जो भी टेक्स्ट आपको `print` करवाना है उसको दोहरा उदाहरण चिन्ह में रखना होगा| "
+   commands:
+     - name: "print"
+       explanation: "इकहरा उदाहरण चिन्ह का इस्तेमाल करके सटीक प्रिंट कीजिए "
+       example: "उदाहरण : print 'हेडी में आपका स्वागत है|'"
+       demo_code: "print 'हेडी में आपका स्वागत है|'"
+     - name: "is"
+       explanation: " किसी टेक्स्ट को कुछ नाम दीजिए और ‘प्रिंट’ करवाएं बिना इकहरा उदाहरण चिन्ह के"
+       example: "उदाहरण: नाम is हेडी|"
+       demo_code: |
+         नाम is हेडी
+         print 'मेरा नाम is ' नाम
+     - name: "ask "
+       explanation: "`ask` का इस्तेमाल करके कुछ पूछो!"
+       example: "उदाहरण: रंग is ask आपका पसंदीदा रंग कौनसा है?"
+       demo_code: |
+         रंग is ask 'आपका पसंदीदा रंग कोनसा है?'
+         print रंग ' आपका पसंदीदा है!'
+4:
+   start_code: "नाम is ask आपका नाम क्या है?\nif नाम is हेडी print 'कूल!' else print 'मेह'"
+   intro_text: "`ask` और `print` दोनों बिल्कुल वैसा ही काम करते है जैसा स्तर ३ में किया था| स्तर ४ में `if` आदेश जुड़ा है|"
+   commands:
+     - name: "print"
+       explanation: "इकहरा उदाहरण चिन्ह का इस्तेमाल करके सटीक प्रिंट कीजिए"
+       example: "उदाहरण : print 'हेलो हेडी में आपका स्वागत है|'"
+       demo_code: "print 'हेलो हेडी में आपका स्वागत है|'"
+     - name: "ask"
+       explanation: "`ask` का इस्तेमाल करके कुछ पूछो"
+       example: "उदाहरण : रंग is ask 'आपका पसंदीदा रंग कोनसा है?'"
+       demo_code: "रंग is ask 'आपका पसंदीदा रंग कोनसा है?'\nprint  रंग ' आपका पसंदीदा है!'"
+     - name: "if"
+       explanation: "अपनी पसंद बनाइये ’if’ का इस्तेमाल करके"
+       example: "उदाहरण: if रंग हरा है तो print ‘सुन्दर!’ else print ‘मेह’"
+       demo_code: |
+          रंग is ask 'पसंदीदा रंग कौन सा है?'
+          if रंग is हैतो print 'सुन्दर!' else print 'मेह'
+5:
+   start_code: "repeat 3 times print 'हेडी मजेदार है!'"
+   intro_text: "`ask`, `print` और `if` वैसे ही काम करते है जैसा स्तर ४ में करते थे| लेकिन स्तर ५ में `repeat` आदेश जुड़ जाता है| repeat एक कोड की लाइन को बहुत बार निष्पादित करने के काम आता है|"
+   commands:
+     - name: "print"
+       explanation: "इकहरा उदहारण चिन्ह का इस्तेमाल करके सटीक प्रिंट कीजिए"
+       example: "उदाहरण : print 'हेलो हेडी में आपका स्वागत है|'"
+       demo_code: "print 'हेलो हेडी में आपका स्वागत है|'"
+     - name: "ask"
+       explanation: "`ask` का इस्तेमाल करके कुछ पूछिए "
+       example: "उदाहरण : रंग is ask 'आपका पसंदीदा रंग कौनसा है?'"
+       demo_code: "रंग is ask 'आपका पसंदीदा रंग कौनसा है?'\nprint रंग ' आपका पसंदीदा है!'"
+     - name: "if"
+       explanation: "अपनी पसंद बनाइये ’if’ का इस्तेमाल करके"
+       example: "उदाहरण: if रंग हरा है तो print ‘सुन्दर!’ else print ‘मेह’"
+       demo_code: |
+         रंग is ask 'आपका पसंदीदा रंग कौन सा है?'
+         if रंग is हरा print 'सुन्दर!' else print 'मेह'
+     - name: "repeat"
+       explanation: "`repeat` और `if` एक साथ"
+       example: "उदाहरण: if रंग is हरा repeat ३ बार print 'सुन्दर!’ else repeat ५ बार print 'मेह’"
+       demo_code: |
+         रंग is ask 'पसंदीदा रंग कौन सा है?'
+         if रंग is हरा repeat 3 times print 'सुन्दर!' else repeat 4 times print 'मेह'
+6:
+   start_code: "print '५ गुणा ५ है ' 5 * 5"
+   intro_text: "`ask`, `print`, `if` और `repeat` वैसे ही हैं जैसे स्तर ४ और ५ में हैं| स्तर ६ में कुछ नया है ... अब आप हिसाब कर सकते हैं|"
+   commands:
+     - name: "print"
+       explanation: "बिलकुल वैसा ही छापने के लिए इकहरा उदाहरण चिन्ह इस्तेमाल करें"
+       example: "उदाहरण: print '५ गुणा ५ है ' 5 * 5"
+       demo_code: "print '५ गुणा ५ है ' 5 * 5"
+     - name: "`ask` और `if` हिसाब के साथ"
+       explanation: "हिसाब के लिए पूछें और जांचें कि वह सही है।"
+       example: "उदाहरण: उत्तर is ask '१० जमा १० क्या होता है?'"
+       demo_code: "उत्तर is ask '१० जमा १० क्या है?'\nif उत्तर is २० print 'हाँ!' else  print 'उफ़'"
+     - name: "repeat"
+       explanation: "`repeat` और `if` एक साथ "
+       example: "उदाहरण: if रंग is हरा repeat ३ बार print 'सुंदर!' else repeat 5 times print 'मेह'"
+       demo_code: "रंग is ask 'आपका पसंदीदा रंग कोनसा है?'\nif रंग is हरा repeat 3 times print 'सुन्दर' else repeat 5 times print 'मेह'"
+7:
+   start_code: |
+     repeat 5 times
+       print 'हेलो दोस्तों'
+       print 'ये सब ५ बार प्रिंट होंगे'
+   intro_text: "ask और print दोनों वैसा ही काम करेंगे जैसे हमें पता है|लेकिन if और repeat बदल चुके है! अब आप एक साथ कोड के समूहों को चला सकते हैं, लेकिन आपको कोड को इंडेंट करना होगा| इसका मतलब है कि लाइन की शुरुआत में चार रिक्त स्थान डालने होंगे |यह तब भी लागू होगा जब आप केवल एक पंक्ति का एक ब्लॉक बनाना चाहते हैं| यदि आप एक repeat और if को जोड़ते हैं, तो आपको प्रत्येक ब्लॉक को इंडेंट करना होगा| अधिक जानकारी के लिए उदाहरण कोड पर एक नज़र डालें!"
+   commands:
+     - name: "print"
+       explanation: "कुछ छापो| बिलकुल वैसा ही छापने के लिए इकहरा उदाहरण चिन्ह इस्तेमाल करें|"
+       example: "उदाहरण: print '५ बार ५ है' 5 * 5"
+       demo_code: "print '५ बार ५ है' 5 * 5"
+     - name: "`if` बहुत सारी लाइनों के साथ"
+       explanation: " एक जमा के लिए उत्तर पूछें और जांचें कि क्या यह सही है। अब हम दो लाइनों को print कर सकते हैं।"
+       example: "उदाहरण: उत्तर is ask '५ जमा ५ क्या है?'"
+       demo_code: |
+         उत्तर is ask '५ जमा ५ क्या है?'
+         if उत्तर is १०
+             print 'शाबाश!!'
+             print 'वास्तव में जवाब था ' उत्तर
+         else
+             print 'उफ़!'
+             print 'जवाब है १०'
+     - name: "if और repeat एक साथ"
+       explanation: "`if` और `repeat` एक साथ"
+       example: "उदाहरण: if रंग is हरा repeat 3 times print 'सुंदर!' else repeat ५ बार print 'मेह'"
+       demo_code: |
+         रंग is ask 'आपका पसंदीदा रंग कोनसा है?'
+         if रंग is हरा
+           repeat 3 times
+             print 'सुंदर!'
+         else
+           repeat 5 times
+             print 'मेह'

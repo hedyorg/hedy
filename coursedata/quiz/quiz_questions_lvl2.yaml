@@ -60,7 +60,7 @@ questions:
       hint: "De naam van de variabele (het lijstje) is opties."
       question_score: 10
   - 6:
-      question_text: "Wat is er mis met deze code?"
+      question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige prijs te printen?"
       code: |-
         prijzen is 1 euro, 100 euro, 1 miljoen euro
         print prijs at random
@@ -79,7 +79,7 @@ questions:
         antwoorden zijn ja, nee, misschien
         print antwoorden at random
       mp_choice_options:
-        - { option_text: "In regel 1 vragen staan in plaats van vraag", code: , feedback: "vraag is goed" }
+        - { option_text: "In regel 1 moet vragen staan in plaats van vraag", code: , feedback: "vraag is goed" }
         - { option_text: "In regel 2 moet is staan in plaats van zijn" , code: , feedback: "Correct" }
         - { option_text: "In regel 3 moet antwoord staan in plaats van antwoorden", code: , feedback: "Nee, in regel 2 heet de variabele namelijk ook antwoorden" }
         - { option_text: "Niets! Deze code is goed!" , code: , feedback: "In regel 2 zit een foutje.." }
@@ -92,10 +92,10 @@ questions:
         naam is Marleen
         print naam gaat naar de supermarkt en ze koopt een appel.
       mp_choice_options:
-        - { option_text: "naam gaat naar de supermarkt en ze koopt een appel", code: , feedback: "Het woord naam wordt vervangen door Marleen" }
-        - { option_text: "Marleen gaat naar de supermarkt" , code: , feedback: "het tweede deel van de zin wordt ook geprint!" }
-        - { option_text: "Marleen gaat naar de supermarkt en ze koopt een appel", code: , feedback: "Juist!" }
-        - { option_text: "Marleen gaat naar de supermarkt en Marleen koopt een appel",  code: , feedback: "Het woord 'ze' wordt niet vervangen" }
+        - { option_text: "naam gaat naar de supermarkt en ze koopt een appel.", code: , feedback: "Het woord naam wordt vervangen door Marleen" }
+        - { option_text: "Marleen gaat naar de supermarkt." , code: , feedback: "het tweede deel van de zin wordt ook geprint!" }
+        - { option_text: "Marleen gaat naar de supermarkt en ze koopt een appel.", code: , feedback: "Juist!" }
+        - { option_text: "Marleen gaat naar de supermarkt en Marleen koopt een appel.",  code: , feedback: "Het woord 'ze' wordt niet vervangen" }
       correct_answer: "C"
       hint: "Het woord naam wordt vervangen door Marleen"
       question_score: 10
@@ -124,6 +124,6 @@ questions:
         - { option_text:  "Hoi mijn naam is Hedy", code:, feedback: "Het woord naam wordt vervangen door Hedy" }
         - { option_text:  "Hoi mijn Hedy is naam", code:, feedback: "Het woord naam wordt vervangen door Hedy" }
         - { option_text:  "Hoi mijn Hedy is Hedy", code:, feedback: "Juist! Dit probleem wordt opgelost in level 3!" }
-      correct_answer: "A"
+      correct_answer: "D"
       hint: "'naam' wordt beide keren vervangen door 'Hedy'"
       question_score: 10

@@ -37,7 +37,7 @@ class TestsLevel5(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet'+naam)""")
+    print(f'ik heet{naam}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -52,7 +52,7 @@ class TestsLevel5(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    print('ik heet,'+naam)""")
+    print(f'ik heet,{naam}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -61,8 +61,10 @@ class TestsLevel5(unittest.TestCase):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -73,7 +75,8 @@ class TestsLevel5(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
-    t.forward(afstand)""")
+    t.forward(afstand)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -84,7 +87,7 @@ class TestsLevel5(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('Cuál es tu color favorito?')""")
+    print(f'Cuál es tu color favorito?')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -111,7 +114,8 @@ class TestsLevel5(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     for i in range(int('3')):
-      t.forward(100)""")
+      t.forward(100)
+      time.sleep(0.1)""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
@@ -134,7 +138,7 @@ class TestsLevel5(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     for i in range(int('5')):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -160,7 +164,7 @@ class TestsLevel5(unittest.TestCase):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -186,7 +190,7 @@ class TestsLevel5(unittest.TestCase):
     kleur = input('Wat is je lievelingskleur?')
     if kleur == 'groen':
       for i in range(int('3')):
-        print('mooi!')""")
+        print(f'mooi!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -200,7 +204,7 @@ class TestsLevel5(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     for i in range(int('10')):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)

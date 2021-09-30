@@ -55,8 +55,10 @@ class TestsLevel7(unittest.TestCase):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_with_ask(self):
@@ -66,7 +68,8 @@ class TestsLevel7(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
-    t.forward(afstand)""")
+    t.forward(afstand)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
 
   def test_print_with_calc_no_spaces(self):
@@ -136,6 +139,8 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
 
+
+
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -147,6 +152,30 @@ class TestsLevel7(unittest.TestCase):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
+      print('me wants a cookie!')""")
+
+    self.assertEqual(expected, result.code)
+
+    expected_output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    self.assertEqual(expected_output, run_code(result))
+
+  def test_repeat_with_non_latin_variable_print(self):
+    code = textwrap.dedent("""\
+    állatok is 5
+    repeat állatok times
+        print 'me wants a cookie!'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    v79de0191e90551f058d466c5e8c267ff = '5'
+    for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
       print('me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
