@@ -40,12 +40,6 @@ class Translations:
 
 def render_code_editor_with_tabs(request, course, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
 
-  if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
-    quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
-    quiz_data_level = quiz_data['level']
-  else:
-    quiz_data_level = 0
-
   sublevel = None
   if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
     sublevel     = int (level_number [level_number.index ('-') + 1])
@@ -79,8 +73,6 @@ def render_code_editor_with_tabs(request, course, level_number, menu, translatio
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
-  arguments_dict['quiz_data_level'] = quiz_data_level
-  arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))

@@ -102,6 +102,10 @@ def load_adventures_per_level(lang, level):
     for short_name, adventure in adventures.items ():
         if not level in adventure['levels']:
             continue
+        # end adventure is the quiz
+        # if quizzes are not enabled, do not load it
+        if short_name == 'end' and not config['quiz-enabled']:
+            continue
         all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
@@ -217,7 +221,7 @@ def after_request_log_status(response):
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-        'X-Frame-Options': 'DENY',
+        'X-Frame-Options': None if re.match ('.*/quiz', request.url) else 'DENY',
         'X-XSS-Protection': '1; mode=block',
     }
     response.headers.update(security_headers)
@@ -285,7 +289,7 @@ def parse():
 
             response['has_turtle'] = has_turtle
             if has_turtle:
-                response["Code"] = "# coding=utf8\nimport random\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+                response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
             else:
                 response["Code"] = "# coding=utf8\nimport random\n" + python_code
         except hedy.HedyException as E:
@@ -296,6 +300,9 @@ def parse():
                 error_template = hedy_errors[E.error_code]
                 response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
                 response["Warning"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Too Big":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
             elif E.args[0] == "Parse":
                 error_template = hedy_errors[E.error_code]
                 # Localize the names of characters. If we can't do that, just show the original
@@ -495,7 +502,7 @@ def get_quiz(level_source, question_nr, attempt):
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
-@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+@app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
     if not config.get('quiz-enabled') and g.lang != 'nl':
         return 'Hedy quiz disabled!', 404

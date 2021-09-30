@@ -10,6 +10,7 @@ import re
 
 # Some useful constants
 HEDY_MAX_LEVEL = 22
+MAX_LINES = 100
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
@@ -463,7 +464,10 @@ class ConvertToPython_1(Transformer):
             parameter = int(args[0])
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return self.make_forward(parameter)
+
+    def make_forward(self, parameter):
+        return f"t.forward({parameter})""\ntime.sleep(0.1)"
 
     def turn(self, args):
         if len(args) == 0:
@@ -531,20 +535,19 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, args):
         # no args received? default to 50
-        if len(args) == 0:
-            return "t.forward(50)"
+        parameter = 50
 
-        parameter = args[0]
+        if len(args) > 0:
+            parameter = args[0]
+
         #if the parameter is a variable, print as is
-        if parameter in self.lookup:
-            return f"t.forward({parameter})"
-
         # otherwise, see if we got a number. if not, simply use 50 as default
         try:
-            parameter = int(args[0])
+            if parameter not in self.lookup:
+                parameter = int(parameter)
         except:
             parameter = 50
-        return f"t.forward({parameter})"""
+        return self.make_forward(parameter)
 
     def ask(self, args):
         var = args[0]
@@ -1092,7 +1095,6 @@ ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, sub = 0):
     try:
-        input_string = input_string.replace('\r\n', '\n')
         transpile_result = transpile_inner(input_string, level, sub)
         return transpile_result
     except Exception as E:
@@ -1219,6 +1221,13 @@ def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
 def transpile_inner(input_string, level, sub=0):
+    number_of_lines = input_string.count('\n')
+
+    #parser is not made for huge programs!
+    if number_of_lines > MAX_LINES:
+        raise HedyException('Too Big', lines_of_code = number_of_lines, max_lines = MAX_LINES)
+
+    input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
     parser = get_parser(level, sub)
