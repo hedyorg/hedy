@@ -6,11 +6,13 @@ questions:
           for i in range 1 to 10
               print i
       mp_choice_options:
-        - { option_text: , code: |-
-            1
-            2
-            3
-            , feedback: "Correct!" }
+        - option_text:
+          code: |-
+              1
+              2
+              3
+          feedback: |-
+              Correct! 
         - { option_text: , code: "1 2 3", feedback: "That's not it" }
         - { option_text: , code: " 1, 2, 3" , feedback: "That's not it" }
         - { option_t ext: , code: "123" , feedback: "That's not it" }
@@ -27,26 +29,34 @@ questions:
           5
           Once I caught a fish alive!
       mp_choice_options:
-        - { option_text: , code: |-
-            for i in range 1 to 5
-                print i
-            print 'Once I caught a fish alive!'
-            , feedback: "Perfect!" }
-        - { option_text: , code: |-
-            for i in range 1 to 5
-            print i
-            print 'Once I caught a fish alive!'
-            , feedback: "This code won't work. You need an indent after for" }
-        - { option_text: , code: |-
-            for i in range 1 to 5
-                print i
-                print 'Once I caught a fish alive!'
-            , feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc." }
-        - { option_text: , code: |-
-            for i in range 1 to 5
-                print 'i'
-            print 'Once I caught a fish alive!'
-            , feedback: " i is a variable and shouldn't have quotation marks" }
+        - option_text:
+          code: |-
+              for i in range 1 to 5
+                  print i
+              print 'Once I caught a fish alive!'
+          feedback: |-
+              Perfect
+        - option_text:
+          code: |-
+              for i in range 1 to 5
+              print i
+              print 'Once I caught a fish alive!'
+          feedback: |-
+              This code won't work. You need an indent after for.
+        - option_text:
+          code: |-
+              for i in range 1 to 5
+                  print i
+                  print 'Once I caught a fish alive!'
+          feedback: |-
+              Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
+        - option_text:
+          code: |-
+              for i in range 1 to 5
+                  print 'i'
+              print 'Once I caught a fish alive!'
+          feedback: |-
+              i is a variable and shouldn't have quotation marks
       correct_answer: "A"
       hint: "First all the numbers, then the sentence"
       question_score: 10
@@ -65,22 +75,30 @@ questions:
           1
           0
       mp_choice_options:
-        - { option_text: , code: |-
-            for i in range 0 to 10
-                print i
-            , feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0." }
-        - { option_text: , code: |-
-            for i in range 0 to 10
-                print - i
-            , feedback: "Hedy would print negative numbers in this case." }
-        - { option_text: , code: |-
-            for i in range 10 to 0
-                print i
-            , feedback: "Unfortunately this does not exist." }
-        - { option_text: , code: |-
-            for i in range 0 to 10
-                print 10 - i
-            , feedback: "That's right!" }
+        - option_text:
+          code: |-
+              for i in range 0 to 10
+                  print i
+          feedback: |-
+              Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
+        - option_text:
+          code: |-
+              for i in range 0 to 10
+                  print - i
+          feedback: |-
+              Hedy would print negative numbers in this case.
+        - option_text:
+          code: |-
+              for i in range 10 to 0
+                  print i
+          feedback: |-
+              Unfortunately this does not exist.
+        - option_text: 
+          code: |-
+              for i in range 0 to 10
+                  print 10 - i
+          feedback: |-
+              That's right!
       correct_answer: "D"
       hint: "It has to be a calculation..."
       question_score: 10
@@ -99,6 +117,7 @@ questions:
       question_score: 10
   - 5:
       question_text: "What word should be at the place of the question mark?"
+      code: |-
           for i in ? 1 to 10
               print i
       mp_choice_options:
@@ -144,22 +163,32 @@ questions:
           for i in range 23 to 25
               print 'hi'
       mp_choice_options:
-        - { option_text: , code: |-
-            23
-            24
-            25
-            , feedback: "The numbers don't appear. It doesn't say print i." }
-        - { option_text: , code:
-            23 hi
-            24 hi
-            25 hi
-            , feedback: "The numbers don't appear. It doesn't say print i" }
-        - { option_text: , code: |-
-            hi
-            hi
-            hi
-            , feedback: "Correct" }
-        - { option_text: "The word 'hi' will appear 25 times in a row." , code: , feedback: "No it will only appear 3 times." }
+        - option_text: 
+          code: |-
+              23
+              24
+              25
+          feedback: |-
+              The numbers don't appear. It doesn't say print i.
+        - option_text:
+          code:
+              23 hi
+              24 hi
+              25 hi
+          feedback: |-
+              The numbers don't appear. It doesn't say print i
+        - option_text:
+          code: |-
+              hi
+              hi
+              hi
+          feedback: |-
+              Correct
+        - option_text: |-
+              The word 'hi' will appear 25 times in a row.
+          code:
+          feedback: |-
+              No it will only appear 3 times.
       correct_answer: "C"
       hint: "It doesn't say print i"
       question_score: 10
@@ -185,26 +214,34 @@ questions:
           Baby shark tututudutudu
           Baby shark
       mp_choice_options:
-        - { option_text: , code:|-
-            for i in range 1 to 3
-                print Baby shark tututudutudu
-                print Baby shark
-                , feedback: "Mind the indention" }
-        - { option_text: , code:|-
-            for i in range 1 to 3
-                print Baby shark tututudutudu
-            print Baby shark
-                , feedback: "That's right!" }
-        - { option_text: , code:|-
-            for i in range 0 to 3
-                print Baby shark tututudutudu
-                print Baby shark
-                , feedback: "range 0 to 3 is 4 times." }
-        - { option_text: , code:|-
-            for i in range 0 to 3
-                print Baby shark tututudutudu
-            print Baby shark
-                , feedback: "range 0 to 3 is 4 times." }
+        - option_text:
+          code: |-
+              for i in range 1 to 3
+                  print Baby shark tututudutudu
+                  print Baby shark
+          feedback: |-
+              Mind the indention
+        - option_text:
+          code: |-
+              for i in range 1 to 3
+                  print Baby shark tututudutudu
+              print Baby shark
+          feedback: |-
+              That's right!
+        - option_text:
+          code: |-
+              for i in range 0 to 3
+                  print Baby shark tututudutudu
+                  print Baby shark
+          feedback: |-
+              range 0 to 3 is 4 times.
+        - option_text:
+          code: |-
+              for i in range 0 to 3
+                  print Baby shark tututudutudu
+              print Baby shark
+          feedback: |-
+              range 0 to 3 is 4 times.
       correct_answer: "B"
       hint: "Mind the indention"
       question_score: 10
