@@ -34,6 +34,12 @@ you can wrap the command in a loop to restart the server quickly).
 (.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
 ```
 
+If you prefer to avoid development mode (which might make the app reloads slower when opening Hedy in the browser), pass the `NO_DEBUG_MODE` environment variable.
+
+```bash
+(.env)$ env NO_DEBUG_MODE=1 python app.py
+```
+
 If you want to run the website locally, but would prefer to use Docker instead of installing python, you can build a container image and run it like so:
 
 ```bash
