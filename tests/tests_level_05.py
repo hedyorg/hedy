@@ -85,11 +85,18 @@ class TestsLevel5(unittest.TestCase):
 
 
   def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
+    code = textwrap.dedent("""\
+    forward 50
+    turn
+    forward 100""")
+
+    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -100,7 +107,8 @@ class TestsLevel5(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
-    t.forward(afstand)""")
+    t.forward(afstand)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
