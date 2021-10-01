@@ -33,11 +33,15 @@ class TestsLevel1(unittest.TestCase):
       result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual('Invalid', str(context.exception))
 
-  def test_transpile_incomplete(self):
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile("print", self.level)
-    self.assertEqual('Incomplete', str(context.exception))
-    self.assertEqual('print', str(context.exception.arguments['incomplete_command']))
+  def test_print_without_argument_upto_22(self):
+    max_level = 22
+    for level in range(self.level, max_level + 1):
+      code = "print"
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('Incomplete', str(context.exception))
+      print(f'{self.test_name()} level {level}')
+
 
   def test_transpile_incomplete_on_line_2(self):
     with self.assertRaises(Exception) as context:
@@ -207,15 +211,6 @@ class TestsLevel1(unittest.TestCase):
     expected = "answer = input('wat?')\nprint(answer)"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
-  def test_print_without_argument_upto_22(self):
-    max_level = 22
-    for level in range(self.level, max_level + 1):
-      code = "print"
-      with self.assertRaises(Exception) as context:
-        result = hedy.transpile(code, level)
-      self.assertEqual('Incomplete', str(context.exception))
-      print(f'{self.test_name()} level {level}')
 
 
   def test_use_quotes_in_print_allowed(self):
