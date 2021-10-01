@@ -402,8 +402,9 @@ def valid_echo(ast):
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
 
 
-
 class IsComplete(Filter):
+    def __init__(self, level):
+        self.level = level
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
@@ -411,7 +412,7 @@ class IsComplete(Filter):
     def ask(self, args):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
-        incomplete = (args == []) or (len(args)==1)
+        incomplete = (args == [] and self.level==1) or (len(args) == 1 and self.level >= 2)
         return not incomplete, 'ask'
     def print(self, args):
         return args != [], 'print'
@@ -1296,7 +1297,7 @@ def transpile_inner(input_string, level, sub=0):
                 raise HedyException('Parse', level=level, location=["?", "?"], keyword_found=invalid_command)
             raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
 
-    is_complete = IsComplete().transform(program_root)
+    is_complete = IsComplete(level).transform(program_root)
     if not is_complete[0]:
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
