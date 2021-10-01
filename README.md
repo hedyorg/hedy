@@ -20,15 +20,13 @@ Note that at this point we only support left to right languages, but we are work
 I have an idea for what you should build!
 ------------
 
-Great! If is is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). If it is a new idea, [start a discussion](https://github.com/Felienne/hedy/discussions/categories/ideas).
+Great! We have two ways of monitoring ideas. 
 
-To help you decide between an issue and a discussion, this might help: 
-
-Issues are meant for things we know that we want to work on, such as:
+If is is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
 * Error messages that need to be improved
 * Crashes or bugs
 
-Discussions are a place to chat about stuff we do not know if we want to work on yet, or we are not sure how to do, such as:
+If it is a new idea, [start a discussion](https://github.com/Felienne/hedy/discussions/categories/ideas). Discussions are a place to chat about stuff we do not know if we want to work on yet, or we are not sure how to do, such as:
 
 * New keywords
 * new meanings for existing keywords
