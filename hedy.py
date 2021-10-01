@@ -409,7 +409,10 @@ class IsComplete(Filter):
     # tree is transformed to a node of [True] or [False, args, line_number]
 
     def ask(self, args):
-        return args != [], 'ask'
+        # in level 1 ask without arguments means args == []
+        # in level 2 and up, ask without arguments is a list of 1, namely the var name
+        incomplete = (args == []) or (len(args)==1)
+        return not incomplete, 'ask'
     def print(self, args):
         return args != [], 'print'
     def input(self, args):

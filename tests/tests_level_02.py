@@ -4,6 +4,7 @@ import sys
 import io
 from contextlib import contextmanager
 import textwrap
+import inspect
 
 @contextmanager
 def captured_output():
@@ -24,6 +25,8 @@ def run_code(parse_result):
 
 class TestsLevel2(unittest.TestCase):
   level = 2
+  def test_name(self):
+    return inspect.stack()[1][3]
 
   # some commands should not change:
   def test_transpile_other(self):
@@ -32,7 +35,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual('Invalid', str(context.exception))
 
   def test_ask_without_argument_upto_22(self):
-    max_level = 22
+    max_level = 10
     for level in range(self.level, max_level + 1):
       code = "name is ask"
       with self.assertRaises(Exception) as context:
