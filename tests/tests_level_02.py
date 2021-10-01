@@ -31,6 +31,16 @@ class TestsLevel2(unittest.TestCase):
       result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual('Invalid', str(context.exception))
 
+  def test_ask_without_argument_upto_22(self):
+    max_level = 22
+    for level in range(self.level, max_level + 1):
+      code = "name is ask"
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('Incomplete', str(context.exception))
+      print(f'{self.test_name()} level {level}')
+
+
   def test_transpile_echo_at_level_2(self):
     code = textwrap.dedent("""\
     ask what is jouw lievelingskleur?

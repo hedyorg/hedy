@@ -42,7 +42,6 @@ class TestsLevel1(unittest.TestCase):
       self.assertEqual('Incomplete', str(context.exception))
       print(f'{self.test_name()} level {level}')
 
-
   def test_transpile_incomplete_on_line_2(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("print lalalala\nprint", self.level)
