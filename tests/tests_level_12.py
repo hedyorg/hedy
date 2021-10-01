@@ -239,6 +239,19 @@ else:
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_list_multiple_spaces(self):
+    code = textwrap.dedent("""\
+    fruit is ['appel',  'banaan',    'kers']
+    print(fruit)""")
+    expected = textwrap.dedent("""\
+    fruit = ['appel', 'banaan', 'kers']
+    print(str(fruit))""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
   def test_random(self):
     code = textwrap.dedent("""\
     fruit is ['banaan', 'appel', 'kers']
@@ -294,7 +307,7 @@ else:
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-      
+
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
     for i in range(0, 10):
