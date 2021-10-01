@@ -131,6 +131,42 @@
             colore is ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
 5:
+    start_code: "print '5 per 5 è ' 5 * 5"
+    intro_text: |
+        `ask`,` print`, `if` e` repeat` funzionano ancora come nei livelli 4.
+        Ma nel livello 5 c'è qualcosa di nuovo, ora puoi anche calcolare.
+
+        Nel livello 5 vengono aggiunti nuovi codici, ora puoi iniziare a calcolare nel tuo codice.
+
+        Il vantaggio è facile, lo scrivi come con la matematica: `5 + 5` per esempio. Anche il segno meno funziona bene, che è `5 - 5`.
+
+        I tempi sono un po 'diversi, perché non ci sono orari sulla tastiera. Basta cercare, non c'è davvero!
+        Questo è il motivo per cui eseguiamo i tempi con l'asterisco sopra 8: `5 * 5`. Leggilo come 5 per 5, quindi lo ricorderai nel modo più semplice.
+        ## Esempio di codice Hedy
+        ```
+        print '5 più 5 è ' 5 + 5
+        print '5 meno 5 è ' 5 - 5
+        print '5 per 5 è ' 5 * 5
+         ```
+    commands:
+    -   name: "print"
+        explanation: "Scrivi esattamente quello che metti tra virgolette"
+        example: "Example: print '5 per 5 è ' 5 * 5"
+        demo_code: "print '5 per 5 è ' 5 * 5"
+    -   name: "ask e if con calcoli"
+        explanation: "Chiedi di fare un calcolo e giudicalo."
+        example: "Esempio: risposta is ask 'Quanto fa 10 più 10?'"
+        demo_code: |-
+            risposta is ask 'Quanto fa 10 più 10?'
+            if risposta is 20 print 'Yes!' else print 'Ops'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
     start_code: "repeat 3 times print 'Hedy è divertente!'"
     intro_text: |
         `ask`, `print` e `if` funzionano esattamente come funzionavano nel quarto livello.
@@ -157,47 +193,11 @@
         demo_code: |-
             colore is ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` combinati insieme"
-        example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            if colore is verde repeat 3 times print 'carino' else repeat 5 times print 'mah'
-6:
-    start_code: "print '5 per 5 è ' 5 * 5"
-    intro_text: |
-        `ask`,` print`, `if` e` repeat` funzionano ancora come nei livelli 4 e 5.
-        Ma nel livello 6 c'è qualcosa di nuovo, ora puoi anche calcolare.
-
-        Nel livello 6 vengono aggiunti nuovi codici, ora puoi iniziare a calcolare nel tuo codice.
-
-        Il vantaggio è facile, lo scrivi come con la matematica: `5 + 5` per esempio. Anche il segno meno funziona bene, che è `5 - 5`.
-
-        I tempi sono un po 'diversi, perché non ci sono orari sulla tastiera. Basta cercare, non c'è davvero!
-        Questo è il motivo per cui eseguiamo i tempi con l'asterisco sopra 8: `5 * 5`. Leggilo come 5 per 5, quindi lo ricorderai nel modo più semplice.
-        ## Esempio di codice Hedy
-        ```
-        print '5 più 5 è ' 5 + 5
-        print '5 meno 5 è ' 5 - 5
-        print '5 per 5 è ' 5 * 5
-         ```
-    commands:
-    -   name: "print"
-        explanation: "Scrivi esattamente quello che metti tra virgolette"
-        example: "Example: print '5 per 5 è ' 5 * 5"
-        demo_code: "print '5 per 5 è ' 5 * 5"
-    -   name: "ask e if con calcoli"
-        explanation: "Chiedi di fare un calcolo e giudicalo."
-        example: "Esempio: risposta is ask 'Quanto fa 10 più 10?'"
-        demo_code: |-
-            risposta is ask 'Quanto fa 10 più 10?'
-            if risposta is 20 print 'Yes!' else print 'Ops'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` combinati"
-        example: "Example: if prodotto is 50 repeat 3 times print 'corretto!' else repeat 5 times print 'errato!'"
-        demo_code: |-
-            prodotto is ask 'Quanto fa 10 per 5?'
-            if prodotto is 50 repeat 3 times print 'corretto!' else repeat 5 times print 'errato!'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

@@ -51,7 +51,7 @@
         answer is ask What is your name?
         ```
 
-        Print still works as in Level 1, and you no longer need `echo`.
+        Print still works as in level 1, and you no longer need `echo`.
 
         In level 2 you can also make a list. You can have the computer choose something random from the list. You do that with `at random`.
 
@@ -167,43 +167,12 @@
             answer is ask 'How far should I walk?'
             if answer is far forward 100 else forward 5
 5:
-    start_code: "repeat 3 times print 'Hedy is fun!'"
-    intro_text: |
-        `ask`, `print` and `if` work exactly like they did in Level 4.
-        But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times.
-        ## Example Hedy code
-        ```
-        repeat 3 times print 'Hedy is fun!'
-        ```
-    commands:
-    -   name: "print"
-        explanation: "Print exactly using quotation marks"
-        example: "Example: print 'Hello welcome to Hedy.'"
-        demo_code: "print 'Hello welcome to Hedy.'"
-    -   name: "ask"
-        explanation: "Ask something with `ask`."
-        example: "Example: color is ask 'What is your favorite color?'"
-        demo_code: |-
-            color is ask 'What is your favorite color?'
-            print color ' is your favorite!'
-    -   name: "if"
-        explanation: "Make a choice with `if`"
-        example: "Example: if color is green print 'pretty!' else print 'meh'"
-        demo_code: |-
-            color is ask 'What is your favorite color?'
-            if color is green print 'pretty!' else print 'meh'
-    -   name: "repeat - turtle"
-        explanation: "Repeat a line of code with `repeat`."
-        example: "Example: repeat 3 times forward 10"
-        demo_code: |-
-            repeat 3 times forward 10
-6:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
-        `ask`,` print`, `if` and` repeat` still work as in level 4 and 5.
-         But in Level 6 there is something new, you can now also calculate.
+        `ask`,` print`, `if` and` repeat` still work as in level 4.
+         But in level 5 there is something new, you can now also calculate.
 
-         In level 6 new codes are added, you can now start calculating in your code.
+         In level 5 new codes are added, you can now start calculating in your code.
 
          The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
@@ -233,6 +202,37 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
+6:
+    start_code: "repeat 3 times print 'Hedy is fun!'"
+    intro_text: |
+        `ask`, `print` and `if` work exactly like they did in level 4 and 5.
+        But level 6 adds the `repeat` command. Repeat can be used to execute one line of code multiple times.
+        ## Example Hedy code
+        ```
+        repeat 3 times print 'Hedy is fun!'
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print exactly using quotation marks"
+        example: "Example: print 'Hello welcome to Hedy.'"
+        demo_code: "print 'Hello welcome to Hedy.'"
+    -   name: "ask"
+        explanation: "Ask something with `ask`."
+        example: "Example: color is ask 'What is your favorite color?'"
+        demo_code: |-
+            color is ask 'What is your favorite color?'
+            print color ' is your favorite!'
+    -   name: "if"
+        explanation: "Make a choice with `if`"
+        example: "Example: if color is green print 'pretty!' else print 'meh'"
+        demo_code: |-
+            color is ask 'What is your favorite color?'
+            if color is green print 'pretty!' else print 'meh'
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

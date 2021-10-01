@@ -134,10 +134,47 @@
             farbe is ask 'Was ist deine Lieblingsfarbe?'
             if farbe is grün print 'Hübsch!' else print 'Bäh'
 5:
+    start_code: "print '5 mal 5 ist ' 5 * 5"
+    intro_text: |
+        `ask`,` print`, `if` und `repeat` funktionieren immer noch wie in Level 4.
+        Aber in Level 5 gibt es etwas Neues, das du jetzt auch berechnen kannst.
+
+        In Level 5 werden neue Befehle hinzugefügt. Damit kannst du in deinem Code rechnen.
+
+        Das Plus schreibst du wie in Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert genauso, zum Beispiel `5 - 5`.
+
+        Das Mal sind etwas anders, da auf deiner Tastatur kein Malzeichen (`·`) vorhanden ist. Suche mal, das gibt es wirklich nicht!
+        Deshalb multiplizieren wir mit dem Stern über dem Plus: `5 * 5`. Lies dies als 5 mal 5, dann kannst du dich am einfachsten daran erinnern.
+        ## Beispiel Hedy Code
+        ```
+        print '5 plus 5 ist ' 5 + 5
+        print '5 minus 5 ist ' 5 - 5
+        print '5 mal 5 ist ' 5 * 5
+        ```
+
+    commands:
+    -   name: "print"
+        explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
+        example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
+        demo_code: "print '5 mal 5 ist ' 5 * 5"
+    -   name: "`ask` und `if` mit Berechnungen"
+        explanation: "Frage nach einer Rechenaufgabe."
+        example: "Beispiel: antwort is ask 'Was ist 10 plus 10?'"
+        demo_code: |-
+            antwort is ask 'Was ist 10 plus 10?'
+            if antwort is 20 print 'Ja!' else print 'Ups'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
     start_code: "repeat 3 times print 'Hedy macht Spaß!'"
     intro_text: |
-        `ask`, `print` und `if` funktionieren genau wie in Stufe 4.
-        Aber in Stufe 5 kommt der `repeat` Befehl dazu. 
+        `ask`, `print` und `if` funktionieren genau wie in Stufe 4 und 5.
+        Aber in Stufe 6 kommt der `repeat` Befehl dazu.
         `repeat` bedeutet wiederhole.
         Mit `repeat` kannst du eine Befehlszeile mehrmals auszuführen. 
         Dabei kannst du angeben, wie oft etwas wiederholt werden soll.
@@ -164,48 +201,11 @@
         demo_code: |-
             farbe is ask 'Was ist deine Lieblingsfarbe?'
             if farbe is grün print 'Hübsch!' else print 'Bäh'
-    -   name: "repeat"
-        explanation: "`repeat` und `if` kombiniert"
-        example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            farbe is ask 'Was ist deine Lieblingsfarbe?'
-            if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'
-6:
-    start_code: "print '5 mal 5 ist ' 5 * 5"
-    intro_text: |
-        `ask`,` print`, `if` und `repeat` funktionieren immer noch wie in Level 4 und 5.
-        Aber in Level 6 gibt es etwas Neues, das du jetzt auch berechnen kannst.
-
-        In Level 6 werden neue Befehle hinzugefügt. Damit kannst du in deinem Code rechnen.
-
-        Das Plus schreibst du wie in Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert genauso, zum Beispiel `5 - 5`.
-
-        Das Mal sind etwas anders, da auf deiner Tastatur kein Malzeichen (`·`) vorhanden ist. Suche mal, das gibt es wirklich nicht!
-        Deshalb multiplizieren wir mit dem Stern über dem Plus: `5 * 5`. Lies dies als 5 mal 5, dann kannst du dich am einfachsten daran erinnern.
-        ## Beispiel Hedy Code
-        ```
-        print '5 plus 5 ist ' 5 + 5
-        print '5 minus 5 ist ' 5 - 5
-        print '5 mal 5 ist ' 5 * 5
-        ```
-
-    commands:
-    -   name: "print"
-        explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
-        example: "Beispiel: print '5 mal 5 ist ' 5 * 5"
-        demo_code: "print '5 mal 5 ist ' 5 * 5"
-    -   name: "`ask` und `if` mit Berechnungen"
-        explanation: "Frage nach einer Rechenaufgabe."
-        example: "Beispiel: antwort is ask 'Was ist 10 plus 10?'"
-        demo_code: |-
-            antwort is ask 'Was ist 10 plus 10?'
-            if antwort is 20 print 'Ja!' else print 'Ups'
-    -   name: "repeat"
-        explanation: "`repeat` und `if` kombiniert"
-        example: "Beispiel: if antwort is 50 repeat 3 times print 'Richtig!' else repeat 5 times print 'Ups'"
-        demo_code: |-
-            antwort is ask 'Was ist 5 mal 10?'
-            if antwort is 50 repeat 3 times print 'Richtig!' else repeat 5 times print 'Ups'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

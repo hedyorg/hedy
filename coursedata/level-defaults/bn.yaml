@@ -77,9 +77,30 @@
           রং is ask 'আপনার প্রিয় রং কি?'
           if রং is হয় print 'সুন্দর!' else print 'মন্দ'
 5:
+  start_code: "print '5 বার 5 is  ' 5 * 5"
+  intro_text: " স্তর 4 চার এবং পাঁচে `ask`, `print`, `if` এবং `repeat` ঠিক একই  ভাবেই কাজ করবে. স্তর 5  ছয়ে একটা নতুন নির্দেশ যুক্ত হয়ে যায়.. আপনি এখন গণণা করতে পারবেন"
+  commands:
+  - name: "print"
+    explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে"
+    example: "উদাহরণ: print '5 বার 5 is ' 5 * 5"
+    demo_code: "print  '5 বার 5 is ' 5 * 5"
+  - name: " ask` এবং `if` গণনা সহ"
+    explanation: "একটি গণনা ask করুন এবং ত্রটি সঠিক কিনা তা পরীক্ষা করুন."
+    example: "উদাহরণ: উত্তর হল ask করুন 10 প্লাস 10 কি?"
+    demo_code: |
+      উত্তর is ask 'করুন 10 প্লাস 10 কি?'
+      if উত্তর is 20 print 'সঠিক!' else print 'ভুল'
+  -   name: "`ask` and `if` turtle"
+      explanation: "Ask the user how many angles they want"
+      example: "Example: angles is ask 'How many angles?'"
+      demo_code: |-
+          angles is ask 'How many angles?'
+          angle is 360 / angles
+          forward 50
+6:
   start_code: |
     repeat 3 times print 'হেডি মজাদার!'
-  intro_text: "স্তর 4 চারের মতই  ask,`if` আর `print` ঠিক একই  ভাবেই কাজ করবে | স্তর 5  থেকে “পুনরাবৃত্তি” যুক্ত হয়ে যায় “পুনরাবৃত্তি” ব্যবহার করতে পারেন যে কোন বাক্য একাধিকবার এক্সিকিউট করার জন্যে"
+  intro_text: "স্তর 4 & 5 চারের মতই  ask,`if` আর `print` ঠিক একই  ভাবেই কাজ করবে | স্তর 6  থেকে “পুনরাবৃত্তি” যুক্ত হয়ে যায় “পুনরাবৃত্তি” ব্যবহার করতে পারেন যে কোন বাক্য একাধিকবার এক্সিকিউট করার জন্যে"
   commands:
   - name: "print"
     explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে"
@@ -97,26 +118,6 @@
     demo_code: |
        রং is ask 'আপনার প্রিয় রং কি?'
        if রং is হয print 'সুন্দর!' else print 'মন্দ'
-  - name: "repeat"
-    explanation: "`repeat` এবং `if` সম্মিলিত"
-    example: "উদাহরণ: if রং সবুজ হয় print 'সুন্দর 3 বার repeat নাহলে print 'মন্দ' 5 বার repeat"
-    demo_code: |
-       রং is ask 'আপনার প্রিয় রং কি?'
-       if রং is হয় repeat 3 times print 'সুন্দর' else repeat 5 times print 'মন্দ'
-6:
-  start_code: "print '5 বার 5 is  ' 5 * 5"
-  intro_text: " স্তর 4 চার এবং 5 পাঁচে `ask`, `print`, `if` এবং `repeat` ঠিক একই  ভাবেই কাজ করবে. স্তর 6  ছয়ে একটা নতুন নির্দেশ যুক্ত হয়ে যায়.. আপনি এখন গণণা করতে পারবেন"
-  commands:
-  - name: "print"
-    explanation: "হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে"
-    example: "উদাহরণ: print '5 বার 5 is ' 5 * 5"
-    demo_code: "print  '5 বার 5 is ' 5 * 5"
-  - name: " ask` এবং `if` গণনা সহ"
-    explanation: "একটি গণনা ask করুন এবং ত্রটি সঠিক কিনা তা পরীক্ষা করুন."
-    example: "উদাহরণ: উত্তর হল ask করুন 10 প্লাস 10 কি?"
-    demo_code: |
-      উত্তর is ask 'করুন 10 প্লাস 10 কি?'
-      if উত্তর is 20 print 'সঠিক!' else print 'ভুল'
   - name: "repeat"
     explanation: "`repeat` এবং `if` সম্মিলিত"
     example: "উদাহরণ: if রং সবুজ হয় print 'সুন্দর 3 বার repeat নাহলে print 'মন্দ' 5 বার repeat"

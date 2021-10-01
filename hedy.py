@@ -653,16 +653,6 @@ else:
         return f"{arg0} in {arg1}"
 
 class ConvertToPython_5(ConvertToPython_4):
-    def number(self, args):
-        return ''.join(args)
-
-    def repeat(self, args):
-        times = process_variable(args[0], self.lookup)
-        command = args[1]
-        return f"""for i in range(int({str(times)})):
-{indent(command)}"""
-
-class ConvertToPython_6(ConvertToPython_5):
     #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
@@ -712,6 +702,16 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def division(self, args):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
+
+class ConvertToPython_6(ConvertToPython_5):
+    def number(self, args):
+        return ''.join(args)
+
+    def repeat(self, args):
+        times = process_variable(args[0], self.lookup)
+        command = args[1]
+        return f"""for i in range(int({str(times)})):
+{indent(command)}"""
 
 class ConvertToPython_7(ConvertToPython_6):
     def __init__(self, punctuation_symbols, lookup):

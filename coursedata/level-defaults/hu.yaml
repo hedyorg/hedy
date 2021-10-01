@@ -139,47 +139,12 @@
             szin is ask Mi a kedvenc színed?
             if szin is zöld print 'szép!' else print 'csúnya'
 5:
-    start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
-    intro_text: |
-        ask`, `print` és `if` ugyanúgy működik mint a 4. szinten.
-        De az 5. szinten megjelenik a `repeat` parancs. A ‘repeat’ utasítást parancsok
-        ismételt végrehajtásánál lehet használni.
-        ##Hedy code példa
-        ```
-        repeat 3 times print 'A Hedy vicces'
-        ```
-    commands:
-    -   name: "print"
-        explanation: "Pontos kiíratás idézójelekkel."
-        example: "Példa: print Szia, üdvözlünk a Hedy-nél.'"
-        demo_code: "print 'Szia, üdvözlünk a Hedy-nél.'"
-    -   name: "ask"
-        explanation: "Kérdezz valamit az `ask`utasítással."
-        example: "Példa: szin is ask Mi a kedvenc színed?"
-        demo_code: |-
-            szin is ask Mi a kedvenc színed?
-            print szin ' a kedvenced!'
-    -   name: "if"
-        explanation: "Készíts elágazást az `if` és az 'else' utasítással"
-        example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
-        demo_code: |-
-            szin is ask Mi a kedvenc színed?
-            if szin is zöld print 'szép!' else print 'csúnya'
-
-
-    -   name: "repeat"
-        explanation: "`repeat` és `if` együtt"
-        example: "Példa: if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'"
-        demo_code: |-
-            szin is ask Mi a kedvenc színed?
-            if szin is zöld repeat 3 times print 'szép!' else repeat 5 times print 'csúnya'
-6:
     start_code: "print '5-ször 5 az ' 5 * 5"
     intro_text: |-
-        `ask`, `print`, `if` és `repeat` még mindig ugyanolyanok, mint a 4. és az 5. szinten.
+        `ask`, `print`, `if` és `repeat` még mindig ugyanolyanok, mint a 4. szinten.
         De a 6. szinten jön valami új, tudsz majd számolni.
 
-        A 6. szinten új kódok jönnek, most már képes leszel számolni a kódodban.
+        A 5. szinten új kódok jönnek, most már képes leszel számolni a kódodban.
 
         Az összeadás könnyű, ugyanúgy írod, mint a matekban: `5+5`. A kivonás is jól működik,
         így írjuk: `5-5`
@@ -204,12 +169,45 @@
         demo_code: |-
             valasz is ask 'Mennyi 10+10?'
             if valasz is 20 print 'Igen!' else print 'Hoppá'
-    -   name: "repeat"
-        explanation: "`repeat` és `if` együtt"
-        example: "Példa: if szorzat is 50 repeat 3 times print 'helyes!' else repeat 5 times print 'hibás'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            szorzat is ask 'Mennyi 10-szer 5?'
-            if szorzat is 50 repeat 3 times print 'helyes!' else repeat 5 times print 'hibás'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
+    start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
+    intro_text: |
+        ask`, `print` és `if` ugyanúgy működik mint a 4. és az 5. szinten szinten.
+        De az 6. szinten megjelenik a `repeat` parancs. A ‘repeat’ utasítást parancsok
+        ismételt végrehajtásánál lehet használni.
+        ##Hedy code példa
+        ```
+        repeat 3 times print 'A Hedy vicces'
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Pontos kiíratás idézójelekkel."
+        example: "Példa: print Szia, üdvözlünk a Hedy-nél.'"
+        demo_code: "print 'Szia, üdvözlünk a Hedy-nél.'"
+    -   name: "ask"
+        explanation: "Kérdezz valamit az `ask`utasítással."
+        example: "Példa: szin is ask Mi a kedvenc színed?"
+        demo_code: |-
+            szin is ask 'Mi a kedvenc színed?'
+            print szin ' a kedvenced!'
+    -   name: "if"
+        explanation: "Készíts elágazást az `if` és az 'else' utasítással"
+        example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
+        demo_code: |-
+            szin is ask 'Mi a kedvenc színed?'
+            if szin is zöld print 'szép!' else print 'csúnya'
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times
