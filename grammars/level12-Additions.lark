@@ -6,7 +6,7 @@
 command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item | assign
 
 assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces | list_access _SPACE _IS _SPACE sum | list_access _SPACE _IS _SPACE textwithoutspaces
-assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET quoted_text ((", "|",") quoted_text)+ _RIGHT_SQUARE_BRACKET
+assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET quoted_text (_COMMA _SPACE? quoted_text)+ _RIGHT_SQUARE_BRACKET
 
 //new for level 12, assignment of list[i]
 change_list_item: var _LEFT_SQUARE_BRACKET (index | var) _RIGHT_SQUARE_BRACKET _SPACE _IS _SPACE (var | textwithoutspaces)

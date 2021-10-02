@@ -140,6 +140,22 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
     self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
+  def test_list_multiple_spaces(self):
+    code = textwrap.dedent("""\
+    dieren is Hond,  Kat,       Kangoeroe
+    dier is dieren at random
+    print dier""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    dier=random.choice(dieren)
+    print(f'{dier}')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
   def test_print_Spanish(self):
     code = textwrap.dedent("""\
     print 'Cuál es tu color favorito?'""")
