@@ -378,6 +378,10 @@ class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
+    def program(self, args):
+        if len(args) == 0:
+            return False, "empty program", 1
+        return super().program(args)
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
@@ -1317,6 +1321,8 @@ def transpile_inner(input_string, level, sub=0):
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise HedyException('Unquoted Text', level=level)
+        elif args == 'empty program':
+            raise HedyException('Empty Program')
         else:
             invalid_command = args
             closest = closest_command(invalid_command, commands_per_level[level])
