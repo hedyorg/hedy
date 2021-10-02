@@ -907,7 +907,7 @@ adventures:
                         turn __
                         forward __
                     ```
-                start_code: szogek is ask "Hány szöget kell rajzolnom?"
+                start_code: szogek is ask 'Hány szöget kell rajzolnom?'
     fortune:
         name: Jósnő
         description: Hadd jósolja meg Hedy a jövőt
@@ -948,7 +948,7 @@ adventures:
                     ## Példa Hedy -kódra
                     Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
                     ```
-                    print Szia, Hedy, a jósnő vagyok!
+                    print Szia Hedy a jósnő vagyok!
                     kerdes is ask Mit akarsz tudni?
                     print Ez az amit tudni akarsz: kerdes
                     valasz is igen, nem, talan
@@ -973,8 +973,8 @@ adventures:
                     ## Példa Hedy -kódra
                     ```
                     print 'Szia, Hedy, a jósnő vagyok!'
-                    kerdes is ask 'Mit akarsz tudni'?
-                    print Ez az amit tudni akarsz:  kerdes
+                    kerdes is ask 'Mit akarsz tudni?'
+                    print 'Ez az amit tudni akarsz: ' kerdes
                     valasz is igen, nem, talan
                     print 'A kristálygömböm azt mondja... ' valasz at random
                     ```
