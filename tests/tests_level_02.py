@@ -4,6 +4,7 @@ import sys
 import io
 from contextlib import contextmanager
 import textwrap
+import inspect
 
 @contextmanager
 def captured_output():
@@ -24,12 +25,24 @@ def run_code(parse_result):
 
 class TestsLevel2(unittest.TestCase):
   level = 2
+  def test_name(self):
+    return inspect.stack()[1][3]
 
   # some commands should not change:
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual('Invalid', str(context.exception))
+
+  def test_ask_without_argument_upto_22(self):
+    max_level = 10
+    for level in range(self.level, max_level + 1):
+      code = "name is ask"
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('Incomplete', str(context.exception))
+      print(f'{self.test_name()} level {level}')
+
 
   def test_transpile_echo_at_level_2(self):
     code = textwrap.dedent("""\
