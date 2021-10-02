@@ -27,6 +27,18 @@
         demo_code: |-
             ask Mi a kedvenc színed?
             echo a kedvenc színed...
+    -   name: forward
+        explanation: Rajzolj egy vonalat a `forward` utasítással.
+        example: 'Példa: forward 100'
+        demo_code: forward 100
+    -   name: turn
+        explanation: Fordulj a rajzoló teknőssel a `turn` utasítással
+        example: 'Példa: turn'
+        demo_code: |-
+            forward 25
+            turn left
+            forward 25
+            turn right
 2:
     intro_text: |
         A 2. szinten valami újat tanulunk. El tudsz nevezni egy szót az 'is' utasítással.
@@ -67,10 +79,16 @@
         demo_code: |-
             állatok is kutya, macska, kenguru
             print állatok at random
+    -   name: choose_random
+        explanation: Válassz véletlenszerűen egy szót az `at` és a `random` utasításokkal
+        example: 'Példa: allatok is kutya, cica, kenguru.'
+        demo_code: |-
+            allatok is kutya, cica, kenguru
+            print allatok at random
 3:
     start_code: "print 'Helló világ'"
     intro_text: |-
-        ask` ugyanolyan, a 3. szinten, mint eddig, de `print` most más lesz.
+        `ask` ugyanolyan, a 3. szinten, mint eddig, de `print` most más lesz.
 
         Amit ki akarsz íratni, idézőjelbe kell tenned.
 
@@ -80,10 +98,8 @@
         A legtöbb programozási nyelv idézőjelet (szimpla idézőjel, más néven aposztróf) használ
         a kiíratáshoz, így egy kicsit közelebb kerülünk az igazi programozáshoz.
 
-        ##A feladatok egyre nehezebbek lesznek. Most is megtalálod a parancsokat a
-        baloldalon, a feladatokat pedig a füleken. A feladatok egyre nehezebbé válnak az
-        egymást követő füleken. A legjobb, ha a baloldalon kezded a feladatokat a történettel
-        és így haladsz jobbra a nagyobb kihívást jelentő feladatok felé
+        ## A feladatok egyre nehezebbek lesznek. 
+        Most is megtalálod a parancsokat a baloldalon, a feladatokat pedig a füleken. A feladatok egyre nehezebbé válnak az egymást követő füleken. A legjobb, ha a baloldalon kezded a feladatokat a történettel és így haladsz jobbra a nagyobb kihívást jelentő feladatok felé.
     commands:
     -   name: "print"
         explanation: "Kiíratás idézőjelekkel"
@@ -103,13 +119,14 @@
             print szin ' a kedvenc színed !'
 4:
     start_code: |-
-        nev is ask Hogy hívnak?
+        nev is ask 'Hogy hívnak?'
         if nev is Hedy print 'klassz!' else print 'ajaj'
     intro_text: |-
         `ask` és `print` ugyanúgy működnek, mint a 3. szinten. A 4. szinten hozzájön az `if`
         parancs! Az 'if' paranccsal két különböző lehetőség között választhatsz.
 
-        ##Hedy Code példa
+        ## Hedy Code példa
+
         ```
         nev is ask mi a neved?
         if nev is Hedy print 'klassz' else print 'úhh'
@@ -117,7 +134,7 @@
         Ez a kód kiírja, hogy klassz, ha a Hedy nevet adod meg névként, és úhh-t, ha valami
         mást írsz be.
 
-        ####A feladatok egyre nehezebbek lesznek.
+        ## A feladatok egyre nehezebbek lesznek.
 
         A feladatok a 4. szinten a füleken egyre nehezebbek lesznek. Csináld őket balról jobbra
         haladva.
@@ -138,6 +155,12 @@
         demo_code: |-
             szin is ask Mi a kedvenc színed?
             if szin is zöld print 'szép!' else print 'csúnya'
+    -   name: if utasítás a teknőssel
+        explanation: Válassz az `if` utasítással
+        example: 'Példa: if valasz is messze forward 100 else forward 5'
+        demo_code: |-
+            valasz is ask 'Milyen messze menjek?'
+            if valasz is messze forward 100 else forward 5
 5:
     start_code: "print '5-ször 5 az ' 5 * 5"
     intro_text: |-
@@ -148,11 +171,11 @@
         így írjuk: `5-5`
 
         A szorzás egy kicsit különbözik, ugyanis nincs szorzásjel a billentyűzeten. Nézd meg,
-        tényleg nincs! Ezért használjuk a *-t: `5*5`. Olvasd et "5-ször 5-nek", így könnyen
+        tényleg nincs! Ezért használjuk a *-t: `5*5`. Olvasd ezt "5-ször 5-nek", így könnyen
         megjegyzed.
-        ##Hedy Code példa
+        ## Hedy Code példa
         ```
-        print '5 plusz 5 egyenlő' 5 + 5
+        print '5 plusz 5 egyenlő ' 5 + 5
         print '5 mínusz 5 egyenlő ' 5 - 5
         print '5 ször 5 egyenlő ' 5 * 5
         ```
@@ -167,20 +190,22 @@
         demo_code: |-
             valasz is ask 'Mennyi 10+10?'
             if valasz is 20 print 'Igen!' else print 'Hoppá'
-    -   name: "`ask` and `if` turtle"
-        explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+    -   name: "`ask` és `if` teknős"
+        explanation: "Kérdezd meg a felhasználót mennyi szöget akar"
+        example: "Example: szogek is ask 'Hány szög?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            szogek is ask 'Hány szög?'
+            szog is 360 / szogek
             forward 50
 6:
     start_code: "repeat 3 times print 'A Hedy szórakoztató!'"
     intro_text: |
-        ask`, `print` és `if` ugyanúgy működik mint a 4. és az 5. szinten szinten.
+        	
+        `ask`, `print` és `if` ugyanúgy működik mint a 4. és az 5. szinten szinten.
         De az 6. szinten megjelenik a `repeat` parancs. A ‘repeat’ utasítást parancsok
         ismételt végrehajtásánál lehet használni.
-        ##Hedy code példa
+
+        ## Hedy code példa
         ```
         repeat 3 times print 'A Hedy vicces'
         ```
@@ -196,14 +221,14 @@
             szin is ask 'Mi a kedvenc színed?'
             print szin ' a kedvenced!'
     -   name: "if"
-        explanation: "Készíts elágazást az `if` és az 'else' utasítással"
+        explanation: "Készíts elágazást az `if` utasítással"
         example: "Példa: if szin is zöld print 'szép!' else print 'csúnya'"
         demo_code: |-
             szin is ask 'Mi a kedvenc színed?'
             if szin is zöld print 'szép!' else print 'csúnya'
-    -   name: "repeat - turtle"
-        explanation: "Repeat a line of code with `repeat`."
-        example: "Example: repeat 3 times forward 10"
+    -   name: "repeat - teknős"
+        explanation: "Ismétej meg egy kódsort `repeat` utasítással."
+        example: "Példa: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
 7:
@@ -212,22 +237,21 @@
             print 'Sziasztok'
             print 'Ez 5-szor lett kiírva'
     intro_text: |-
-        ask és print még mindig úgy működik, ahogyan ismered. De az if és a repeat utasítások
-        megváltoztak!
+        `ask` és `print` még mindig úgy működik, ahogyan ismered. De az `if` és a `repeat` utasítások megváltoztak!
         Most különböző utasítások egy csoportját futtathatod egyszerre, de behúzással
         tagolnod kell a kódot.
         Ez azt jelenti, hogy négy szóközt kell tennünk a sor elejére. Ez akkor is érvényes, ha csak
         egy sor blokkját akarod létrehozni.
 
-        ##Hedy Code példa
+        ## Hedy Code példa
         ```
         repeat 5 times
           print 'Sziasztok'
           print 'Ez 5-ször ismétlődik'
         ```
-        Ha kombinálsz egy repeat-et és egy if-et, akkor minden blokkot be kell húznod. Nézd
+        Ha kombinálsz egy `repeat`-et és egy `if`-et, akkor minden blokkot be kell húznod. Nézd
         meg a példakódot a részletekért'
-        ##Hedy code példa
+        ## Hedy code példa
         ```
         szin is ask 'Mi a kedvenc színed?'
         if szin is zöld
@@ -269,7 +293,7 @@
         for i in range 1 to 10
             print i
         print 'Aki bújt, aki nem, megyek!'
-    intro_text: "`print` ugyanúgy működik, mint eddig, de a `repeat` utasítást `for` helyettesíti! `for i in range 1 to 5` utasításokat fogod használni, `repeat 5 times` helyett. Használhatsz `i` -t is a programban! Ne felejts el behúzásokat használni a 'for' és 'if' utasítások után (ez azt jelenti, hogy egy sort négy szóközzel kell kezdned) "
+    intro_text: "`print` ugyanúgy működik, mint eddig, de a `repeat` utasítást `for` helyettesíti! `for i in range 1 to 5` utasításokat fogod használni, `repeat 5 times` helyett. Használhatsz `i` -t is a programban! Ne felejts el behúzásokat használni a `for` és `if` utasítások után (ez azt jelenti, hogy egy sort négy szóközzel kell kezdned) "
     commands:
     -   name: "repeat"
         explanation: "a `repeat` utasítást `for` utasítással helyettesítjük "
@@ -284,12 +308,13 @@
             Példa: valasz is ask 'Mennyi 5+5?'
         demo_code: |-
             valasz is ask 'Mennyi 5+5?'
-            if valaszr is 10
+            if valasz is 10
                 print 'Jól van!'
-                print 'Valóban, a válasz ez volt ' answer
+                print 'Valóban, a válasz ez volt ' valasz
             else
                 print 'Juj!'
                 print 'A válasz 10'
+        name: ask
 9:
     start_code: |-
         for i in range 1 to 10:
@@ -298,7 +323,7 @@
     intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
     commands:
     -   name: "for ezzel:"
-        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` állítás végére!"
+        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
         example: "for i in range 1 to 10:"
         demo_code: |-
             for i in range 1 to 11:
@@ -331,14 +356,14 @@
                 print 'körök száma: ' i ' a számlálás: ' j
     intro_text: "Mostantól többször ismételhetünk egy ciklust. A példában 5-ig számolunk, és ezt háromszor megtesszük. Tehát 3 kört teszünk meg, és minden alkalommal 5-ig számolunk."
     commands:
-    -   name: "for egymás alatt"
-        explanation: "Ez egy példa a for állításra"
+    -   name: "for"
+        explanation: "Ez egy példa a `for` utasításra"
         demo_code: |-
             for i in range 1 to 3:
                 for j in range 1 to 5:
                     print 'körök száma: ' i ' a számlálás: ' j
-    -   name: "if egymás alatt"
-        explanation: "Ugyanezt megtehetjük if állítással"
+    -   name: "if"
+        explanation: "Ugyanezt megtehetjük `if` utasítással"
         demo_code: |-
             szin is kék
             szinketto is sárga
@@ -349,16 +374,16 @@
     start_code: |-
         kor is input('Hány éves vagy?')
         print('Akkor már voltál ennyi éves:')
-        for i in range(0,age):
+        for i in range(0,kor):
             print(i)
     intro_text: "Kerek zárójeleket fogunk használni és változtatni fogunk az ask utasításon! Az  ask utasítás input-ra változik! A print, az ask és a for utasításoknál ezek után kerekzárójelet használunk."
     commands:
-    -   name: "Print"
+    -   name: "zárójelek"
         explanation: " Kerek zárójeleket fogunk használni a kiíratásnál!"
         example: "Példa: print('Helló világ')"
         demo_code: "print('Helló világ')"
     -   name: "Ask helyett input!"
-        explanation: "Eltávolítjuk az ask utasítást és mostantól input-nak fogjuk nevezni, itt is kerek zárójeleket fogunk használni."
+        explanation: "Eltávolítjuk az ask utasítást és mostantól input-nak fogjuk nevezni. Itt is kerek zárójeleket fogunk használni."
         example: "Példa: valasz is input('Mi a neved?')"
         demo_code: |-
             valasz is input('Mi a neved?')
@@ -372,30 +397,30 @@
             print('Aki bújt, aki nem, megyek!')
 12:
     start_code: |-
-        gyümölcs is ['alma', 'banán', 'cseresznye']
-        print(gyümölcs)
+        gyumolcs is ['alma', 'banán', 'cseresznye']
+        print(gyumolcs)
     intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
     commands:
     -   name: "Szögletes zárójel listák körül"
         explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
         example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
         demo_code: |-
-            gyümölcs is ['alma', 'banán', 'cseresznye']
-            print(gyümölcs)
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            print(gyumolcs)
     -   name: "Vegyünk ki egy elemet a listából"
         explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
         example: "Példa: elsogyumolcs is gyumolcs[1]"
-        demo_code: |4-
-            gyümölcs is ['alma', 'banán', 'cseresznye']
-            elsogyumolcs is gyümölcs[1]
-            print(gyümölcs)
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            elsogyumolcs is gyumolcs[1]
+            print(gyumolcs)
     -   name: "Elem véletlenszerű kiválasztása listából"
         explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
         example: "Példa: veletlengyumolcs is gyumolcs[random]"
-        demo_code: |4-
-            gyümölcs is ['alma', 'banán', 'cseresznye']
-            veletlengyümölcs is gyümölcs[random]
-            print(veletlengyümölcs)
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            veletlengyumolcs is gyumolcs[random]
+            print(veletlengyumolcs)
 13:
     start_code: |-
         meg_mindig_itt_vagy is False
@@ -407,9 +432,9 @@
         if meg_mindig_itt_vagy is False:
           print('Viszlát!')
     intro_text: |-
-        Most egy "True" vagy "False" változó készítéséről beszélünk (Igaz vagy Hamis),
-        változóknak lehet a "True" és a "False" értékeket adni. Ezt felhasználhatod egy adott
-        válasz nyomon követésére
+        Most egy `True` vagy `False` változó készítéséről beszélünk (Igaz vagy Hamis), a
+        változóknak lehet a `True` és  `False` értékeket adni. Ezt felhasználhatod egy adott
+        válasz nyomon követésére.
     commands:
     -   name: "Példa"
         explanation: |-
@@ -430,17 +455,17 @@
                     print('Hibás ' 5-i ' kísérlet van hátra')
 14:
     start_code: |
-        meg_itt_vagy_here is False
+        meg_itt_vagy is False
         itt_vagy_meg is input('Itt vagy még? igen vagy nem?')
-        if itt_vagy_meg is igen:
+        if itt_vagy_meg is True:
          meg_itt_vagy is True
         valasz is input('What is 5*5?')
         if meg_itt_vagy is True and valasz is 25:
          print('azt mondtad, hogy igen és ez a helyes válasz')
     intro_text: |
-        Most megtanuljuk `and` és` or` kifejezések használatát! Ha két állítást szeretnél
-        ellenőrizni, akkor nem kell kettő 'if' utasítást használnod, használhatod az „and` és
-        az ` or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
+        Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
+        ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
+        az  `or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
         oldalán mindkét állításnak igaznak kell lennie. Használhatjuk az `or` kifejezést is.
         Ekkor csak egy állításnak kell helyesnek lennie.
     commands:
@@ -479,7 +504,7 @@
             if valasz is helyes_valasz:
                 print(valasz ' helyes')
             else:
-                print ('Mindkét válasz hibás!')
+                print ('Ez hibás, feltételezem ennyi: ' i*5)
     intro_text: |-
         Ha nagyobb programokat készítesz, meg kell találnod a módját, hogy emlékezz
         arra, melyik kódrészlet mit csinál. Ehhez megjegyzéseket használunk. Egy
@@ -521,8 +546,8 @@
              print('Fiatalabb vagy, mint én!')
     -   name: Nagyobb
         explanation: |
-            A `>` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
-            ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
+            A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
+            ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
         example: |
             Például: kor>12
         demo_code: |
@@ -541,7 +566,7 @@
     intro_text: |
         Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
         igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
-        választ. Ha soha nem adják meg a helyes választ, akkor a hurok soha nem ér véget!
+        választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
     commands:
     -   name: |
             Logikai amíg
@@ -559,8 +584,8 @@
     -   name: |
             Kisebb amíg
         explanation: |-
-            Használhatjuk a `while` ciklust a` <`és`> `karakterekkel is. Légy óvatos, meg kell
-            változtatnod a számot, hogy a hurok véget érjen. Ezt úgy tesszük, hogy a szam
+            Használhatjuk a `while` ciklust a `<` és `>` karakterekkel is. Légy óvatos, meg kell
+            változtatnod a számot, hogy a ciklus véget érjen. Ezt úgy tesszük, hogy a szam
             változó értéke szam + 1 lesz.
         example: 'For example: while szam < 3'
         demo_code: |
@@ -594,7 +619,7 @@
     intro_text: A for ciklussal egy listában is mindent láthatunk. Mivel a listában három dolog van, a ciklust 1-től 3-ig vesszük. Most mindent kiíratunk a ciklusban.
     commands:
     -   name: Lista hossza
-        explanation: A `hosszúsággal 'láthatjuk a lista méretét. A példában szereplő lista hossza 3, mert három dolog van a lis-ben
+        explanation: A `length` utasítással láthatjuk a lista méretét. A példában szereplő lista hossza 3, mert három dolog van a listában
         example: length(lista)
         demo_code: |-
             gyumolcs is ['alma', 'banán', 'cseresznye']
