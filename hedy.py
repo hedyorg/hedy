@@ -609,10 +609,8 @@ class ConvertToPython_3(ConvertToPython_2):
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
             return make_f_string(args, self.lookup)
         else:
-            # I would like to raise normally but that is caught by the transformer :(
             first_unquoted_var = unquoted_args[0]
-            return f"HedyException:{first_unquoted_var}"
-            #raise HedyException('Var Undefined', name=args[0])
+            raise HedyException('Var Undefined', name=first_unquoted_var)
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -1306,58 +1304,63 @@ def transpile_inner(input_string, level, sub=0):
     if not valid_echo(program_root):
         raise HedyException('Lonely Echo')
 
-    if level == 1:
-        python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 2:
-        python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 3:
-        python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 4:
-        # Sublevel has the same grammar
-        python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 5:
-        python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 6:
-        python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 7:
-        python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 8:
-        # Sublevel has the same conversion
-        python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 9:
-        python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 10:
-        # Code does not change for nesting
-        python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 11:
-        python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 12:
-        python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 13:
-        python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 14:
-        python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 15:
-        python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 16:
-        python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 17:
-        python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 18 or level == 19:
-        python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 20:
-        python = ConvertToPython_20(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 21:
-        python = ConvertToPython_21(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    elif level == 22:
-        python = ConvertToPython_22(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-    else:
-        raise Exception('Levels over 22 are not implemented yet')
+    try:
+        if level == 1:
+            python = ConvertToPython_1(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 2:
+            python = ConvertToPython_2(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 3:
+            python = ConvertToPython_3(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 4:
+            # Sublevel has the same grammar
+            python = ConvertToPython_4(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 5:
+            python = ConvertToPython_5(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 6:
+            python = ConvertToPython_6(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 7:
+            python = ConvertToPython_7(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 8:
+            # Sublevel has the same conversion
+            python = ConvertToPython_8(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 9:
+            python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 10:
+            # Code does not change for nesting
+            python = ConvertToPython_9_10(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 11:
+            python = ConvertToPython_11(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 12:
+            python = ConvertToPython_12(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 13:
+            python = ConvertToPython_13(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 14:
+            python = ConvertToPython_14(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 15:
+            python = ConvertToPython_15(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 16:
+            python = ConvertToPython_16(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 17:
+            python = ConvertToPython_17(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 18 or level == 19:
+            python = ConvertToPython_18_19(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 20:
+            python = ConvertToPython_20(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 21:
+            python = ConvertToPython_21(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        elif level == 22:
+            python = ConvertToPython_22(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
+        else:
+            raise Exception('Levels over 22 are not implemented yet')
+    except visitors.VisitError as E:
+        # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
+        # HedyException to show the intended error message.
+        if isinstance(E.orig_exc, HedyException):
+            raise E.orig_exc
+        else:
+            raise E
 
     has_turtle = UsesTurtle().transform(program_root)
-    if 'HedyException' in python:
-        var = python.split(':')
-        raise HedyException('Var Undefined', name=var[1])
 
     return ParseResult(python, has_turtle)
 
