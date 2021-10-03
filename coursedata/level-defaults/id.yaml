@@ -9,7 +9,7 @@
         Coba jalankan kodenya sendiri dengan menekan tombol 'Run code' di bawah kiri tampilan kode.
 
         Tidak tahu apa yang mau dibuat? Pada tab-tab berikutnya kamu akan menemukan beberapa ide tentang apa yang bisa dibuat.
-    start_code: Tampilkan halo dunia!
+    start_code: print halo dunia!
     commands:
     -   explanation: Tampilkan sesuatu dengan 'print'.
         example: 'Contoh: print Halo selamat datang di Hedy!'
@@ -161,7 +161,7 @@
             favorit is biru, hijau, merah
             warna is ask 'Apa warna favoritmu?'
             if warna in favorit print 'cantik!' else print 'meh'
-5:
+6:
     start_code: repeat 3 times print 'Hedy itu menyenangkan!'
     intro_text: |-
         'ask', 'print', dan 'if' berfungsi sama persis dengan yang ada pada level 4. 
@@ -190,8 +190,8 @@
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
             if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
-6:
-    start_code: print '5 kali 5 adalah' 5 * 5
+5:
+    start_code: print '5 kali 5 adalah ' 5 * 5
     intro_text: |-
         'ask', 'print', dan 'if' berfungsi sama persis dengan yang ada pada level 4 dan level 5.
         Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
@@ -300,7 +300,7 @@
                 print 'Jawabannya adalah 10'
 8-1:
     start_code: |-
-        for pembilang is 1 to 5
+        for pembilang in range 1 to 5
             print pembilang
     intro_text: "'print' berfungsi sama namun 'repeat' kali ini diganti dengan 'for'! Kamu sekarang dapat menulis 'for pembilang in range 1 to 5' dan menggunakan 'pembilang' pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah 'for' dan 'if' (Ini artinya mengawali baris dengan empat spasi)."
     commands:
