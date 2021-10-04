@@ -460,8 +460,8 @@ def get_quiz(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
-        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        if os.path.isfile(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml')
         else:
             return 'No quiz yaml file found for this level', 404
 
@@ -486,6 +486,7 @@ def get_quiz(level_source, question_nr, attempt):
             i  = 0
             for option in question['mp_choice_options']:
                 option.update({'char_index': char_array[i]})
+                print(option)
                 i+=1
 
             print(question)
@@ -518,8 +519,8 @@ def submit_answer(level_source, question_nr, attempt):
         option = request.form["radio_option"]
 
         # Reading yaml file
-        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        if os.path.isfile(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml')
         else:
             return 'No quiz yaml file found for this level', 404
 

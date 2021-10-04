@@ -35,10 +35,13 @@
             {%  set counter = namespace(value=0) %}
                 {% for row in question.mp_choice_options|batch(2) %}
                     <div class="flex flex-row">
-                    {% for column in row %}
+                    {% for key, option in row.iteritems() %}
+                         {{  option}}
+
+                         {{  option.option_text}}
                         <div class="flex flex-col">
                             {% if question.correct_answer == chosen_option and not chosen_option %}
-                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block id={{column.char_index}}>
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block" id={{column.char_index}}>
                                     <label class="inline-flex items-center"><p
                                             class="text-4xl font-bold ml-6 mr-6 font-slab">
                                         {{column.char_index }}</p></p>
@@ -96,7 +99,6 @@
                                 </div>
                             {% endif %}
                              </div>
-
                         {% endfor %}
                     </div>
                     {% set counter.value = counter.value + 1%}
