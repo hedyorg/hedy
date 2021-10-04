@@ -173,6 +173,26 @@ class TestsLevel8(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
 
+  def test_reverse_range(self):
+    code = textwrap.dedent("""\
+    for i in range 10 to 1
+      print i
+    print 'wie niet weg is is gezien'""")
+    expected = textwrap.dedent("""\
+    if int(10) <= int(1):
+      for i in range(int(10), int(1)+1):
+        print(str(i))
+    else:
+      for i in range(int(10), int(1)-1, -1):
+        print(str(i))
+    print('wie niet weg is is gezien')""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
     for i in range 0 to 10
@@ -185,14 +205,24 @@ class TestsLevel8(unittest.TestCase):
         i is 10""")
 
     expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
-      antwoord = input('Wat is 5*5')
-      if str(antwoord) == str('24'):
-        print('Dat is fout!')
-      else:
-        print('Dat is goed!')
-      if str(antwoord) == str('25'):
-        i = '10'""")
+    if int(0) <= int(10):
+      for i in range(int(0), int(10)+1):
+        antwoord = input('Wat is 5*5')
+        if str(antwoord) == str('24'):
+          print('Dat is fout!')
+        else:
+          print('Dat is goed!')
+        if str(antwoord) == str('25'):
+          i = '10'
+    else:
+      for i in range(int(0), int(10)-1, -1):
+        antwoord = input('Wat is 5*5')
+        if str(antwoord) == str('24'):
+          print('Dat is fout!')
+        else:
+          print('Dat is goed!')
+        if str(antwoord) == str('25'):
+          i = '10'""")
 
     result = hedy.transpile(code, self.level)
 
