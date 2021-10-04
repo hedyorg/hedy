@@ -120,38 +120,10 @@
             color is ask '你最喜欢的颜色是什么?'
             if color is 绿色 print '漂亮!' else print '呵呵'
 5:
-    start_code: "repeat 3 times print '海迪很好玩!'"
-    intro_text: |
-        `ask`, `print` 和 `if-else条件语句` 的使用方法和在第4级里面一样.
-        但是在第5级的学习内容里面增加了repeat循环命令. Repeat循环语句可以用来多次执行一段代码.
-        ## Voorbeeld 海迪 代码
-        ```
-        repeat 3 times print '海迪很好玩!'
-        ```
-    commands:
-    -   explanation: "Print的意思是打印，可以用print打印的内容前后两边都要用单引号标注清楚."
-        example: "例如: print '你好欢迎来到海迪.'"
-        demo_code: "print '你好欢迎来到海迪.'"
-    -   explanation: "Ask的意思是提问，用`ask`提出问题."
-        example: "例如: color is ask 你最喜欢的颜色是什么?"
-        demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
-            print color ' is your favorite!'
-    -   explanation: "Make a choice with `if`"
-        example: "Example: if color is green print 'pretty!' else print 'meh'"
-        demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
-            if color is green print 'pretty!' else print 'meh'
-    -   explanation: "`repeat` and `if` combined"
-        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
-        demo_code: |-
-            color is ask 你最喜欢的颜色是什么?
-            if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
-6:
     start_code: "print '5乘以5 is ' 5 * 5"
     intro_text: |
-         ask提问, print打印, if-else条件语句和repeat循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
-         但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦. 
+         ask提问, print打印, if-else条件语句和r循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
+         但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦.
 
          在第6级的学习内容里面增加了新的代码,你现在可以用代码进行计算了.
 
@@ -174,11 +146,42 @@
         demo_code: |-
             answer is ask '10加10等于几?'
             if answer is 20 print '做得好!' else print '糟糕,算错啦'
-    -   explanation: "`repeat`循环语句 and `if-else` 条件语句的组合"
-        example: "例如: if 乘积 is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            product is ask '10乘以5等于几?'
-            if product is 50 repeat 3 times print '正确!' else repeat 5 times print '不正确!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
+    start_code: "repeat 3 times print '海迪很好玩!'"
+    intro_text: |
+        `ask`, `print` 和 `if-else条件语句` 的使用方法和在第4级里面一样.
+        但是在第5级的学习内容里面增加了repeat循环命令. Repeat循环语句可以用来多次执行一段代码.
+        ## Voorbeeld 海迪 代码
+        ```
+        repeat 3 times print '海迪很好玩!'
+        ```
+    commands:
+    -   explanation: "Print的意思是打印，可以用print打印的内容前后两边都要用单引号标注清楚."
+        example: "例如: print '你好欢迎来到海迪.'"
+        demo_code: "print '你好欢迎来到海迪.'"
+    -   explanation: "Ask的意思是提问，用`ask`提出问题."
+        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        demo_code: |-
+            color is ask '你最喜欢的颜色是什么?'
+            print color ' is your favorite!'
+    -   explanation: "Make a choice with `if`"
+        example: "Example: if color is green print 'pretty!' else print 'meh'"
+        demo_code: |-
+            color is ask '你最喜欢的颜色是什么?'
+            if color is green print 'pretty!' else print 'meh'
+    -   explanation: "`repeat` and `if` combined"
+        example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
+        demo_code: |-
+            color is ask '你最喜欢的颜色是什么?'
+            if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
+
 7:
     start_code: |-
         repeat 5 times

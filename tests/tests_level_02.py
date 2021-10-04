@@ -4,6 +4,7 @@ import sys
 import io
 from contextlib import contextmanager
 import textwrap
+import inspect
 
 @contextmanager
 def captured_output():
@@ -24,12 +25,24 @@ def run_code(parse_result):
 
 class TestsLevel2(unittest.TestCase):
   level = 2
+  def test_name(self):
+    return inspect.stack()[1][3]
 
   # some commands should not change:
   def test_transpile_other(self):
     with self.assertRaises(Exception) as context:
       result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual('Invalid', str(context.exception))
+
+  def test_ask_without_argument_upto_22(self):
+    max_level = 10
+    for level in range(self.level, max_level + 1):
+      code = "name is ask"
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('Incomplete', str(context.exception))
+      print(f'{self.test_name()} level {level}')
+
 
   def test_transpile_echo_at_level_2(self):
     code = textwrap.dedent("""\
@@ -129,8 +142,10 @@ class TestsLevel2(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -143,7 +158,8 @@ class TestsLevel2(unittest.TestCase):
     expected = textwrap.dedent("""\
     hoek = '90'
     t.right(hoek)
-    t.forward(50)""")
+    t.forward(50)
+    time.sleep(0.1)""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
@@ -155,7 +171,8 @@ class TestsLevel2(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan'+'?')
-    t.forward(afstand)""")
+    t.forward(afstand)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -328,13 +345,26 @@ class TestsLevel2(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print(f'Welcome to O\ceanView')""")
+    print(f'Welcome to O\\\\ceanView')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
     expected_output = run_code(result)
     self.assertEqual("Welcome to O\ceanView", expected_output)
+
+  def test_use_slashes_at_end_of_print_allowed(self):
+    code = "print Welcome to \\"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print(f'Welcome to \\\\')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
 
   def test_allow_use_of_quotes_in_ask(self):
     code = "print 'Welcome to OceanView!'"

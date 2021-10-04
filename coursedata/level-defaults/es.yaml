@@ -136,10 +136,44 @@
             color is ask '¿Cuál es tu color favorito?'
             if color is verde print 'qué bonito!' else print 'no es tan bonito'
 5:
+    start_code: "print '5 veces 5 es ' 5 * 5"
+    intro_text: |
+        `ask`,` print` y `if` siguen funcionando como en los niveles 4.
+         Pero en el nivel 5 hay algo nuevo, ahora también puedes calcular.
+
+         El signo más es fácil, lo escribes como en las matemáticas: `5 + 5` por ejemplo. El signo menos también funciona: `5 - 5`.
+
+         La multiplicación es un poco diferente, ya que no hay signo de multiplicación en el teclado. ¡Búscalo, verás que no lo hay!
+         Es por eso que usamos el asterisco para multiplicar: `5 * 5`. Lee esto como "5 veces 5", entonces lo recordarás con mayor facilidad.
+         ## Ejemplo de código Hedy
+         ```
+         print '5 más 5 es ' 5 + 5
+         print '5 menos 5 es ' 5 - 5
+         print '5 multiplicado por 5 es ' 5 * 5
+         ```
+    commands:
+    -   name: "print"
+        explanation: "Mostrar un texto literal con `print` usando comillas simples."
+        example: "Ejemplo: print '5 multiplicado por 5 es ' 5 * 5"
+        demo_code: "print '5 multiplicado por 5 es ' 5 * 5"
+    -   name: "ask e if con operaciones"
+        explanation: "Pregunta por una operación y comprueba que sea correcta."
+        example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
+        demo_code: |-
+            resultado is ask '¿Cuánto es 10 más 10?'
+            if resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
     start_code: "repeat 3 times print 'Hedy es divertido!'"
     intro_text: |
-        `ask`, `print` e `if` funcionan como en el nivel 4.
-        Pero en el nivel 5 hay algo nuevo: `repeat`.
+        `ask`, `print` e `if` funcionan como en el nivel 4 y 5.
+        Pero en el nivel 6 hay algo nuevo: `repeat`.
         Con `repeat` puedes repetir una línea de código varias veces.
         ## Ejemplo de código Hedy
         ```
@@ -162,47 +196,11 @@
         demo_code: |-
             color is ask '¿Cuál es tu color favorito?'
             if color is verde print '¡qué bonito!' else print 'no es tan bonito'
-    -   name: "repeat"
-        explanation: "Repetir algo con `repeat` e `if`."
-        example: "Ejemplo: if color is verde repeat 3 times print '¡qué bonito!' else repeat 5 times print 'no es tan bonito'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            color is ask '¿Cuál es tu color favorito?'
-            if color is verde repeat 3 times print '¡qué bonito!' else repeat 5 times print 'no es tan bonito'
-6:
-    start_code: "print '5 veces 5 es ' 5 * 5"
-    intro_text: |
-        `ask`,` print`, `if` y` repeat` siguen funcionando como en los niveles 4 y 5.
-         Pero en el nivel 6 hay algo nuevo, ahora también puedes calcular.
-
-         En el nivel 6 se agregan nuevos códigos, ahora puedes comenzar a calcular en tu código.
-
-         El signo más es fácil, lo escribes como en las matemáticas: `5 + 5` por ejemplo. El signo menos también funciona: `5 - 5`.
-
-         La multiplicación es un poco diferente, ya que no hay signo de multiplicación en el teclado. ¡Búscalo, verás que no lo hay!
-         Es por eso que usamos el asterisco para multiplicar: `5 * 5`. Lee esto como 5 veces 5, entonces lo recordarás con mayor facilidad.
-         ## Ejemplo de código Hedy
-         ```
-         print '5 más 5 es ' 5 + 5
-         print '5 menos 5 es ' 5 - 5
-         print '5 multiplicado por 5 es ' 5 * 5
-         ```
-    commands:
-    -   name: "print"
-        explanation: "Mostrar un texto literal con `print` usando comillas simples."
-        example: "Ejemplo: print '5 multiplicado por 5 es ' 5 * 5"
-        demo_code: "print '5 multiplicado por 5 es ' 5 * 5"
-    -   name: "ask e if con operaciones"
-        explanation: "Pregunta por una operación y comprueba que sea correcta."
-        example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
-        demo_code: |-
-            resultado is ask '¿Cuánto es 10 más 10?'
-            if resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'
-    -   name: "repeat"
-        explanation: "`repeat` e `if` combinados"
-        example: "Ejemplo: if producto is 50 repeat 3 times print '¡correcto!' else repeat 5 times print '¡incorrecto!'"
-        demo_code: |-
-            producto is ask 'Cuanto es 10 multiplicado por 5?'
-            if producto is 50 repeat 3 times print '¡correcto!' else repeat 5 times print '¡incorrecto!'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

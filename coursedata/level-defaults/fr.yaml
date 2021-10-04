@@ -132,9 +132,43 @@
             couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert print 'joli!' else print 'bof'
 5:
+    start_code: "print '5 fois 5 font ' 5 * 5"
+    intro_text: |
+        `ask`,` print` et `if` fonctionnent toujours comme dans les niveaux 4.
+         Mais au niveau 5, il y a quelque chose de nouveau, vous pouvez maintenant aussi calculer.
+
+         Le plus est simple, vous l'écrivez comme avec les maths: `5 + 5` par exemple. Le moins fonctionne également très bien, qui est `5 - 5`.
+
+         Le fois sont un peu différentes, car il n'y a pas de fois sur votre clavier. Cherchez, il n'y en a vraiment pas!
+         C'est pourquoi nous faisons les temps avec l'astérisque au-dessus de 8: `5 * 5`. Lisez cela comme "5 fois 5", alors vous vous en souviendrez le plus facile.
+         ## Exemple de code Hedy
+         ```
+         print '5 plus 5 est ' 5 + 5
+         print '5 moins 5 est ' 5 - 5
+         print '5 fois 5 est ' 5 * 5
+         ```
+    commands:
+    -   name: "print"
+        explanation: "Affiche exactement ce qui est entre les guilllemets"
+        example: "Exemple: print '5 fois 5 font ' 5 * 5"
+        demo_code: "print '5 fois 5 font ' 5 * 5"
+    -   name: "ask et if avec des calculs"
+        explanation: "Pose une question sur un calcul avec `ask` et compare le résultat..."
+        example: "Exemple: reponse is ask 'Combien font 10 plus 10?'"
+        demo_code: |-
+            reponse is ask 'Combien font 10 plus 10?'
+            if reponse is 20 print 'Oui!' else print 'Oups'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
     intro_text: |
-        `ask`, `print` et `if` fonctionnent exactement comme au niveau 4.
+        `ask`, `print` et `if` fonctionnent exactement comme au niveau 4 et 5.
         Le niveau 5 ajoute la commande `repeat`.
         `repeat` te permet d’exécuter une ligne de commande plusieurs fois.
         ## Exemple de code Hedy
@@ -158,47 +192,11 @@
         demo_code: |-
             couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert print 'joli!' else print 'bof'
-    -   name: "repeat"
-        explanation: "`repeat` et `if` combiné"
-        example: "Exemple: if couleur is vert  repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            couleur is ask 'Quelle est ta couleur préférée?'
-            if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'
-6:
-    start_code: "print '5 fois 5 font ' 5 * 5"
-    intro_text: |
-        `ask`,` print`, `if` et `repeat` fonctionnent toujours comme dans les niveaux 4 et 5.
-         Mais au niveau 6, il y a quelque chose de nouveau, vous pouvez maintenant aussi calculer.
-
-         Au niveau 6, de nouveaux codes sont ajoutés, vous pouvez maintenant commencer à calculer dans votre code.
-
-         Le plus est simple, vous l'écrivez comme avec les maths: `5 + 5` par exemple. Le moins fonctionne également très bien, qui est `5 - 5`.
-
-         Le fois sont un peu différentes, car il n'y a pas de fois sur votre clavier. Cherchez, il n'y en a vraiment pas!
-         C'est pourquoi nous faisons les temps avec l'astérisque au-dessus de 8: `5 * 5`. Lisez cela comme 5 fois 5, alors vous vous en souviendrez le plus facile.
-         ## Exemple de code Hedy
-         ```
-         print '5 plus 5 est ' 5 + 5
-         print '5 moins 5 est ' 5 - 5
-         print '5 fois 5 est ' 5 * 5
-         ```
-    commands:
-    -   name: "print"
-        explanation: "Affiche exactement ce qui est entre les guilllemets"
-        example: "Exemple: print '5 fois 5 font ' 5 * 5"
-        demo_code: "print '5 fois 5 font ' 5 * 5"
-    -   name: "ask et if avec des calculs"
-        explanation: "Pose une question sur un calcul avec `ask` et compare le résultat..."
-        example: "Exemple: reponse is ask 'Combien font 10 plus 10?'"
-        demo_code: |-
-            reponse is ask 'Combien font 10 plus 10?'
-            if reponse is 20 print 'Oui!' else print 'Oups'
-    -   name: "repeat"
-        explanation: "`repeat` et `if` combinés"
-        example: "Exemple: if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'"
-        demo_code: |-
-            produit is ask 'Combien font 10 fois 5?'
-            if produit is 50 repeat 3 times print 'correct!' else repeat 5 times print 'incorrect!'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

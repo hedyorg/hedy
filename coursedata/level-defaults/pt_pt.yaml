@@ -119,40 +119,12 @@
             cor is ask Qual é a tua cor favorita?
             if cor is verde print 'Linda!' else print 'pff'
 5:
-    start_code: "repeat 3 times print 'Hedy é divertida!'"
-    intro_text: |
-        `ask`, `print` e `if` funcionam, exactamente, como acontecia no nível 4.
-        Mas o nível 5 acrescenta o comando `repeat`.  `repeat` pode ser usado para executar uma linha de código múltiplas vezes.
-        ## Exemplo de Código Hedy
-        ```
-        repeat 3 times print 'Hedy é divertida!'
-        ```
-    commands:
-    -   explanation: "Escreve com exactidão utilizando aspas simples."
-        example: "Exemplo: print 'Olá, bem-vindo(a) à Hedy.'"
-        demo_code: "print 'Olá, bem-vindo(a) à Hedy.'"
-    -   explanation: "Pergunta alguma coisa usando `ask`."
-        example: "Exemplo: cor is ask Qual é a tua cor favorita?"
-        demo_code: |-
-            cor is ask Qual é a tua cor favorita?
-            print cor ' é a tua favorita!'
-    -   explanation: "Faz uma escolha utilizando o `if`."
-        example: "Exemplo: if cor is verde print 'Linda!' else print 'pff'"
-        demo_code: |-
-            cor is ask Qual é a tua cor favorita?
-            if cor is verde print 'Linda!' else print 'pff'
-    -   explanation: "`repeat` e `if` juntos."
-        example: "Exemplo: if cor is verde repeat 3 times print 'Linda!' else repeat 5 times print 'pff'"
-        demo_code: |-
-            cor is ask Qual é a tua cor favorita?
-            if color is green repeat 3 times print 'Linda!' else repeat 5 times print 'pff'
-6:
     start_code: "print '5 vezes 5 é ' 5 * 5"
     intro_text: |
-        `ask`, `print`, `if` e `repeat` ainda funcionam como nos níveis 4 e 5.
-         Mas no nível 6 temos algo novo, também podes fazer cálculos.
+        `ask`, `print` e `if` ainda funcionam como nos nível 4.
+         Mas no nível 5 temos algo novo, também podes fazer cálculos.
 
-         No nível 6 acrescentamos novos símbolos e agora tu podes fazer cálculos dentro do teu código.
+         No nível 5 acrescentamos novos símbolos e agora tu podes fazer cálculos dentro do teu código.
 
          A soma é fácil, escreves tal como fazes em Matemática: `5 + 5`, por exemplo. A subtração também funciona na perfeição, é `5 - 5`.
 
@@ -173,11 +145,42 @@
         demo_code: |-
             resultado is ask 'Quanto é 10 mais 10?'
             if resultado is 20 print 'Sim!' else print 'Oops'
-    -   explanation: "`repeat` e `if` juntos."
-        example: "Exemplo: if produto is 50 repeat 3 times print 'Correcto!' else repeat 5 times print 'Errado!'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            produto is ask 'Quanto é 10 vezes 5?'
-            if produto is 50 repeat 3 times print 'Correcto!' else repeat 5 times print 'Errado!'
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
+    start_code: "repeat 3 times print 'Hedy é divertida!'"
+    intro_text: |
+        `ask`, `print` e `if` funcionam, exactamente, como acontecia no nível 4 e 5.
+        Mas o nível 5 acrescenta o comando `repeat`.  `repeat` pode ser usado para executar uma linha de código múltiplas vezes.
+        ## Exemplo de Código Hedy
+        ```
+        repeat 3 times print 'Hedy é divertida!'
+        ```
+    commands:
+    -   explanation: "Escreve com exactidão utilizando aspas simples."
+        example: "Exemplo: print 'Olá, bem-vindo(a) à Hedy.'"
+        demo_code: "print 'Olá, bem-vindo(a) à Hedy.'"
+    -   explanation: "Pergunta alguma coisa usando `ask`."
+        example: "Exemplo: cor is ask Qual é a tua cor favorita?"
+        demo_code: |-
+            cor is ask 'Qual é a tua cor favorita?'
+            print cor ' é a tua favorita!'
+    -   explanation: "Faz uma escolha utilizando o `if`."
+        example: "Exemplo: if cor is verde print 'Linda!' else print 'pff'"
+        demo_code: |-
+            cor is ask 'Qual é a tua cor favorita?'
+            if cor is verde print 'Linda!' else print 'pff'
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
+
 7:
     start_code: |-
         repeat 5 times
@@ -558,7 +561,7 @@
 21:
     start_code: |-
         pais = input('Onde vives?')
-        if lugar != Portugal:
+        if pais != Portugal:
             print('Fixe!')
         else:
             print('Também vivo em Portugal!')

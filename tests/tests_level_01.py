@@ -33,11 +33,14 @@ class TestsLevel1(unittest.TestCase):
       result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual('Invalid', str(context.exception))
 
-  def test_transpile_incomplete(self):
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile("print", self.level)
-    self.assertEqual('Incomplete', str(context.exception))
-    self.assertEqual('print', str(context.exception.arguments['incomplete_command']))
+  def test_print_without_argument_upto_22(self):
+    max_level = 22
+    for level in range(self.level, max_level + 1):
+      code = "print"
+      with self.assertRaises(Exception) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('Incomplete', str(context.exception))
+      print(f'{self.test_name()} level {level}')
 
   def test_transpile_incomplete_on_line_2(self):
     with self.assertRaises(Exception) as context:
@@ -82,7 +85,8 @@ class TestsLevel1(unittest.TestCase):
   def test_transpile_one_forward(self):
     result = hedy.transpile("forward 50", self.level)
     expected = textwrap.dedent("""\
-    t.forward(50)""")
+    t.forward(50)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
 
   def test_transpile_turn_no_args(self):
@@ -117,7 +121,9 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("forward\nforward", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
-    t.forward(50)""")
+    time.sleep(0.1)
+    t.forward(50)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -125,8 +131,10 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -197,12 +205,12 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-
   def test_transpile_echo_without_argument(self):
     result = hedy.transpile("ask wat?\necho", self.level)
     expected = "answer = input('wat?')\nprint(answer)"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
 
   def test_use_quotes_in_print_allowed(self):
     code = "print 'Welcome to OceanView!'"
@@ -222,13 +230,26 @@ class TestsLevel1(unittest.TestCase):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print('\\'Welcome to \O/ceanView!\\'')""")
+    print('\\'Welcome to \\\\O/ceanView!\\'')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
     expected_output = run_code(result)
     self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+
+  def test_use_slashes_at_end_of_print_allowed(self):
+    code = "print Welcome to \\"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print('Welcome to \\\\')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+    expected_output = run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
 
   def test_use_quotes_in_ask_allowed(self):
     code = "ask 'Welcome to OceanView?'"

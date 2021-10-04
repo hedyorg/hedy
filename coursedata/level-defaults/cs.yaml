@@ -120,10 +120,42 @@
             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj...'
 5:
+    start_code: print '5 krát 5 je ' 5 * 5
+    intro_text: |-
+        `ask`,` print` a `if` stále fungují jako na úrovních 4.
+         V úrovni 5 je ale něco nového, nyní můžeš také počítat!
+
+         Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
+
+         S krát je to trochu jiné, protože na klávesnici pro něj není žádný symbol. Zkus ho najít, opravdu tam není!
+         Písmenko x by se nám pletlo se slovy, proto násobíme hvězdičkou: `5 * 5`. Přečti si to jako "5 krát 5", pak si to zapamatujete nejsnáze.
+         ## Příklad kódu v Hedy
+         ```
+         print '5 plus 5 je ' 5 + 5
+         print '5 mínus 5 je ' 5 - 5
+         print '5 krát 5 je ' 5 * 5
+         ```
+    commands:
+    -   explanation: Zkus si přesný výpis pomocí uvozovek.
+        example: "Příklad: print '5 krát 5 je ' 5 * 5"
+        demo_code: print '5 krát 5 je ' 5 * 5
+    -   explanation: Zadej příklad a ověř výsledek.
+        example: "Příklad: vysledek is ask 'Kolik je 10 plus 10?'"
+        demo_code: |-
+            vysledek is ask 'Kolik je 10 plus 10?'
+            if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
     start_code: repeat 3 times print 'Hedy je zábavná!'
     intro_text: |-
-        `ask`, `print` a `if` fungují stejně jako na úrovni 4.
-        Úroveň 5 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
+        `ask`, `print` a `if` fungují stejně jako na úrovni 4 a 6.
+        Úroveň 6 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
         ## Příklad kódu v Hedy
         ```
         repeat 3 times print 'Hedy je zábavná!'
@@ -142,43 +174,11 @@
         demo_code: |-
             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj...'
-    -   explanation: Zkombinuj `repeat` a `if`.
-        example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
         demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-            if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'
-6:
-    start_code: print '5 krát 5 je ' 5 * 5
-    intro_text: |-
-        `ask`,` print`, `if` a` repeat` stále fungují jako na úrovních 4 a 5.
-         V úrovni 6 je ale něco nového, nyní můžeš také počítat!
-
-         V úrovni 6 přibyly nové znaky, díky kterým můžeš ve svých kódech dělat základní výpočty.
-
-         Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
-
-         S krát je to trochu jiné, protože na klávesnici pro něj není žádný symbol. Zkus ho najít, opravdu tam není!
-         Písmenko x by se nám pletlo se slovy, proto násobíme hvězdičkou: `5 * 5`. Přečti si to jako 5 krát 5, pak si to zapamatujete nejsnáze.
-         ## Příklad kódu v Hedy
-         ```
-         print '5 plus 5 je ' 5 + 5
-         print '5 mínus 5 je ' 5 - 5
-         print '5 krát 5 je ' 5 * 5
-         ```
-    commands:
-    -   explanation: Zkus si přesný výpis pomocí uvozovek.
-        example: "Příklad: print '5 krát 5 je ' 5 * 5"
-        demo_code: print '5 krát 5 je ' 5 * 5
-    -   explanation: Zadej příklad a ověř výsledek.
-        example: "Příklad: vysledek is ask 'Kolik je 10 plus 10?'"
-        demo_code: |-
-            vysledek is ask 'Kolik je 10 plus 10?'
-            if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
-    -   explanation: Zkombinuj `repeat` a `if`.
-        example: "Příklad: if vysledek is 50 repeat 3 times print 'Správně!' else repeat 5 times print 'Špatně!'"
-        demo_code: |-
-            vysledek is ask 'Kolik je 10 krát 5?'
-            if vysledek is 50 repeat 3 times print 'Správně!' else repeat 5 times print 'Špatně!'
+            repeat 3 times forward 10
 7:
     start_code: |-
         repeat 5 times

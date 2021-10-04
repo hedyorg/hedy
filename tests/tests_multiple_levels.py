@@ -35,7 +35,7 @@ class TestsForMultipleLevels(unittest.TestCase):
 
     def test_print_with_list_var_random(self):
         min_level = 2
-        max_level = 5
+        max_level = 4
         for i in range(min_level, max_level + 1):
             code = textwrap.dedent("""\
             dieren is Hond, Kat, Kangoeroe

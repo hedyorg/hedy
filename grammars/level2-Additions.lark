@@ -1,7 +1,7 @@
 command: print | ask | turtle | assign | assign_list | invalid_space | invalid
 
-print: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*
-ask: var _SPACE _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
+print: _PRINT (_SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*)?
+ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text | punctuation)*)?
 
 //in level 2, forward may also depend on a variable
 turtle: _FORWARD (_SPACE (NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
@@ -19,7 +19,7 @@ index : DIGIT+
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree
 
-list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
+list_access: var _SPACE _AT _SPACE (index | random) -> list_access //todo: could be merged with list_access_var?
 
 var: NAME -> var
 

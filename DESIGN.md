@@ -42,9 +42,7 @@ The overarching goal of Hedy is to successively add syntactic complexity to a Py
 4.  **Adding syntactic elements like brackets and colons is deferred to the latest moment possible:**
 
     Previous research in the computer
-    science education domain has shown that operators such as == and : can be especially hard for novices. In a [study](https://www.felienne.com/archives/5947) with high-schoolers we found that that might be due to their pronunciation.
-
-   Research from natural language acquisition also indicates that parentheses and the
+    science education domain has shown that operators such as == and : can be especially hard for novices. In a [study](https://www.felienne.com/archives/5947) with high-schoolers we found that that might be due to their pronunciation. Research from natural language acquisition also indicates that parentheses and the
     colon are among the latest element of punctuation that learners
     typically learn. Given the choice between
     colons and parenthesis and other elements like indentation, the

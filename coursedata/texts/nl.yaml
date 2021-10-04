@@ -25,6 +25,7 @@ ui:
     switch_to_another_adventure: "Kies een ander avontuur"
     commands_title: "Commando's"
     by: "door"
+    start_quiz: "Naar de quiz"
 ClientErrorMessages:
     Transpile_warning: "Let op!"
     Transpile_error: "We konden je code niet goed lezen."
@@ -34,7 +35,7 @@ ClientErrorMessages:
     CheckInternet: "Controleer even of je internetverbinding het nog doet?"
     ServerError: "Je hebt een programma geschreven dat we niet verwacht hadden. Als je wilt helpen, stuur ons dan een mailtje met het level en je programma op hedy@felienne.com. Probeer om verder te gaan je programma een beetje aan te passen en kijk nog eens goed naar de voorbeelden. Bedankt!"
 HedyErrorMessages:
-    Wrong Level: "Dat was goede code hoor, maar niet op het goede level. Je schreef code voor level {original_level} op level {working_level}."
+    Wrong Level: "Dat was goede code hoor, maar niet op het goede level. Je schreef code voor level {working_level} op level {original_level}."
     Incomplete: "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter {incomplete_command} nog tekst komen."
     Invalid: "{invalid_command} is geen commando in Hedy level {level}. Bedoelde je {guessed_command}?"
     Invalid Space: "Oeps! Regel {line_number} begint met een spatie. Computers kunnen niet zo goed tegen spaties, kun je 'm weghalen?"
@@ -43,6 +44,7 @@ HedyErrorMessages:
     Unquoted Text: "Let op! Bij print en ask moet voor én achter de tekst een aanhalingsteken komen. Jij bent er ergens eentje vergeten."
     Var Undefined: "Je probeert de variabele {name} te printen, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde printen en aanhalingstekens vergeten bent."
     Lonely Echo: "Je gebruikt een echo voor een ask, of een echo zonder een ask. Vraag eerst met een ask om invoer voordat je die herhaalt met een echo."
+    Too Big: "Wow! Jouw programma is wel {lines_of_code} regels lang! Maar... wij kunnen maar {max_lines} regels aan in dit level. Maak je programma wat kleiner en probeer het nog eens."
     space: "een spatie"
     comma: "een komma"
     question mark: "een vraagteken"
@@ -109,24 +111,6 @@ Auth:
     invalid_reset_link: "Ongeldige reset wachtwoord link."
     exists_email: "Dat emailadres is al in gebruik."
     exists_username: "Die gebruikersnaam is al in gebruik."
-    email_hello: "Hoi!"
-    email_goodbye: |-
-        Dankjewel!
-        Groetjes van Het Hedy team
-    email_welcome_verify_subject: "Welkom bij Hedy"
-    email_welcome_verify_body: |-
-        Je Hedy account is aangemaakt. Welkom!
-        Klik op deze link om je email adres te bevestigen:
-    email_change_password_subject: "Je Hedy wachtwoord is veranderd"
-    email_change_password_body: |-
-        Je Hedy wachtwoord is veranderd. Heb jij dat zelf aangevraagd? Dan is alles in orde.
-        Heb jij dat niet gedaan? Dan kan het zijn dat iemand probeert jouw Hedy account over te nemen. Reageer op deze mail zodat we kunnen controleren of alles in orde is.
-    email_recover_password_subject: "Verander je Hedy wachtwoord"
-    email_recover_password_body: "Als je op deze link klikt, kun je een nieuw Hedy wachtwoord instellen:"
-    email_reset_password_subject: "Je Hedy wachtwoord is veranderd"
-    email_reset_password_body: |-
-        Je Hedy wachtwoord is veranderd in een nieuw wachtwoord. eb jij dat zelf aangevraagd? Dan is alles in orde.
-        Heb jij dat niet gedaan? Dan kan het zijn dat iemand probeert jouw Hedy account over te nemen. Reageer op deze mail zodat we kunnen controleren of alles in orde is.
     programming_experience: "Heb jij al eens geprogrammeerd?"
     yes: "Ja"
     no: "Nee"
