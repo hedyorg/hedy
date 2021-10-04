@@ -12,6 +12,9 @@ import re
 HEDY_MAX_LEVEL = 22
 MAX_LINES = 100
 
+#dictionary to store transpilers
+TRANSPILER_LOOKUP = {}
+
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
@@ -434,7 +437,14 @@ def process_characters_needing_escape(value):
         value = value.replace(c, f'\{c}')
     return value
 
+#decorator used to store each class in the lookup table
+def hedy_transpiler(level):
+  def decorator(c):
+    TRANSPILER_LOOKUP[level] = c
+    return c
+  return decorator
 
+@hedy_transpiler(level=1)
 class ConvertToPython_1(Transformer):
 
     def __init__(self, punctuation_symbols, lookup):
@@ -487,7 +497,6 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
-
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
@@ -502,6 +511,7 @@ def process_hash(name):
     else:
         return name
 
+@hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
@@ -593,6 +603,7 @@ def make_f_string(args, lookup):
     return f"print(f'{argument_string}')"
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
+@hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
 
     def var_access(self, args):
@@ -626,6 +637,7 @@ def indent(s):
     lines = s.split('\n')
     return '\n'.join(['  ' + l for l in lines])
 
+@hedy_transpiler(level=4)
 class ConvertToPython_4(ConvertToPython_3):
     def list_access_var(self, args):
         var = hash_var(args[0])
@@ -654,6 +666,7 @@ else:
         arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} in {arg1}"
 
+@hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
     #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
@@ -705,6 +718,7 @@ class ConvertToPython_5(ConvertToPython_4):
     def division(self, args):
         return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
 
+@hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
     def number(self, args):
         return ''.join(args)
@@ -715,6 +729,7 @@ class ConvertToPython_6(ConvertToPython_5):
         return f"""for i in range(int({str(times)})):
 {indent(command)}"""
 
+@hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
@@ -764,18 +779,22 @@ class ConvertToPython_7(ConvertToPython_6):
         # this is list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
+@hedy_transpiler(level=8)
 class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[3:]]
         return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
 
+@hedy_transpiler(level=9)
+@hedy_transpiler(level=10)
 class ConvertToPython_9_10(ConvertToPython_8):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
+@hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_9_10):
     def input(self, args):
         args_new = []
@@ -790,6 +809,7 @@ class ConvertToPython_11(ConvertToPython_9_10):
 
         return f'{var} = input(' + '+'.join(args_new) + ")"
 
+@hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def assign_list(self, args):
         parameter = args[0]
@@ -814,6 +834,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
 
+@hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
@@ -849,16 +870,19 @@ class ConvertToPython_13(ConvertToPython_12):
         else:
             return f"str({arg0}) == str({arg1})" #no and statements
 
+@hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
     def andcondition(self, args):
         return ' and '.join(args)
     def orcondition(self, args):
         return ' or '.join(args)
 
+@hedy_transpiler(level=15)
 class ConvertToPython_15(ConvertToPython_14):
     def comment(self, args):
         return f"# {args}"
 
+@hedy_transpiler(level=16)
 class ConvertToPython_16(ConvertToPython_15):
     def smaller(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -876,12 +900,15 @@ class ConvertToPython_16(ConvertToPython_15):
         else:
             return f"int({arg0}) > int({arg1}) and {args[2]}"
 
+@hedy_transpiler(level=17)
 class ConvertToPython_17(ConvertToPython_16):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
+@hedy_transpiler(level=18)
+@hedy_transpiler(level=19)
 class ConvertToPython_18_19(ConvertToPython_17):
     def length(self, args):
         arg0 = args[0]
@@ -910,6 +937,7 @@ class ConvertToPython_18_19(ConvertToPython_17):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
+@hedy_transpiler(level=20)
 class ConvertToPython_20(ConvertToPython_18_19):
     def equality_check(self, args):
         if type(args[0]) is Tree:
@@ -925,6 +953,7 @@ class ConvertToPython_20(ConvertToPython_18_19):
         else:
             return f"str({arg0}) == str({arg1})"  # no and statements
 
+@hedy_transpiler(level=21)
 class ConvertToPython_21(ConvertToPython_20):
     def not_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -934,6 +963,7 @@ class ConvertToPython_21(ConvertToPython_20):
         else:
             return f"str({arg0}) != str({arg1}) and {args[2]}"
 
+@hedy_transpiler(level=22)
 class ConvertToPython_22(ConvertToPython_21):
     def smaller_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -1222,30 +1252,6 @@ def preprocess_blocks(code):
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
-transpiler_lookup = {1: ConvertToPython_1,
-                     2: ConvertToPython_2,
-                     3: ConvertToPython_3,
-                     4: ConvertToPython_4,
-                     5: ConvertToPython_5,
-                     6: ConvertToPython_6,
-                     7: ConvertToPython_7,
-                     8: ConvertToPython_8,
-                     9: ConvertToPython_9_10,
-                     10: ConvertToPython_9_10,
-                     11: ConvertToPython_11,
-                     12: ConvertToPython_12,
-                     13: ConvertToPython_13,
-                     14: ConvertToPython_15,
-                     15: ConvertToPython_15,
-                     16: ConvertToPython_16,
-                     17: ConvertToPython_17,
-                     18: ConvertToPython_18_19,
-                     19: ConvertToPython_18_19,
-                     20: ConvertToPython_20,
-                     21: ConvertToPython_21,
-                     22: ConvertToPython_22
-                    }
-
 def transpile_inner(input_string, level, sub=0):
     number_of_lines = input_string.count('\n')
 
@@ -1329,9 +1335,9 @@ def transpile_inner(input_string, level, sub=0):
         raise HedyException('Lonely Echo')
 
     try:
-        if level < HEDY_MAX_LEVEL:
+        if level <= HEDY_MAX_LEVEL:
             #grab the right transpiler from the lookup
-            transpiler = transpiler_lookup[level]
+            transpiler = TRANSPILER_LOOKUP[level]
             python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         else:
            raise Exception('Levels over 22 are not implemented yet')
