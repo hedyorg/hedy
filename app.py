@@ -276,58 +276,53 @@ def parse():
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
-    # Check if user sent code
-    if not code:
-        response["Error"] = "no code found, please send code."
-    # is so, parse
-    else:
-        try:
-            hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-            with querylog.log_time('transpile'):
-                transpile_result = hedy.transpile(code, level, sublevel)
-                python_code = transpile_result.code
-                has_turtle = transpile_result.has_turtle
+    try:
+        hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+        with querylog.log_time('transpile'):
+            transpile_result = hedy.transpile(code, level, sublevel)
+            python_code = transpile_result.code
+            has_turtle = transpile_result.has_turtle
 
-            response['has_turtle'] = has_turtle
-            if has_turtle:
-                response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
-            else:
-                response["Code"] = "# coding=utf8\nimport random\n" + python_code
-        except hedy.HedyException as E:
-            traceback.print_exc()
-            # some 'errors' can be fixed, for these we throw an exception, but also
-            # return fixed code, so it can be ran
-            if E.args[0] == "Invalid Space":
-                error_template = hedy_errors[E.error_code]
-                response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
-                response["Warning"] = error_template.format(**E.arguments)
-            elif E.args[0] == "Too Big":
-                error_template = hedy_errors[E.error_code]
-                response["Error"] = error_template.format(**E.arguments)
-            elif E.args[0] == "Parse":
-                error_template = hedy_errors[E.error_code]
-                # Localize the names of characters. If we can't do that, just show the original
-                # character.
-                if 'character_found' in E.arguments.keys():
-                    E.arguments['character_found'] = hedy_errors.get(E.arguments['character_found'], E.arguments['character_found'])
-                elif 'keyword_found' in E.arguments.keys():
-                    #if we find an invalid keyword, place it in the same location in the error message but without translating
-                    E.arguments['character_found'] = E.arguments['keyword_found']
+        response['has_turtle'] = has_turtle
+        if has_turtle:
+            response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+        else:
+            response["Code"] = "# coding=utf8\nimport random\n" + python_code
+    except hedy.HedyException as E:
+        traceback.print_exc()
+        # some 'errors' can be fixed, for these we throw an exception, but also
+        # return fixed code, so it can be ran
+        if E.args[0] == "Invalid Space":
+            error_template = hedy_errors[E.error_code]
+            response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
+            response["Warning"] = error_template.format(**E.arguments)
+        elif E.args[0] == "Too Big":
+            error_template = hedy_errors[E.error_code]
+            response["Error"] = error_template.format(**E.arguments)
+        elif E.args[0] == "Parse":
+            error_template = hedy_errors[E.error_code]
+            # Localize the names of characters. If we can't do that, just show the original
+            # character.
+            if 'character_found' in E.arguments.keys():
+                E.arguments['character_found'] = hedy_errors.get(E.arguments['character_found'], E.arguments['character_found'])
+            elif 'keyword_found' in E.arguments.keys():
+                #if we find an invalid keyword, place it in the same location in the error message but without translating
+                E.arguments['character_found'] = E.arguments['keyword_found']
 
-                response["Error"] = error_template.format(**E.arguments)
-            elif E.args[0] == "Unquoted Text":
-                error_template = hedy_errors[E.error_code]
-                response["Error"] = error_template.format(**E.arguments)
-            elif E.args[0] == "Has Blanks":
-                error_template = hedy_errors[E.error_code]
-                response["Error"] = error_template.format(**E.arguments)
-            else:
-                error_template = hedy_errors[E.error_code]
-                response["Error"] = error_template.format(**E.arguments)
-        except Exception as E:
-            traceback.print_exc()
-            print(f"error transpiling {code}")
-            response["Error"] = str(E)
+            response["Error"] = error_template.format(**E.arguments)
+        elif E.args[0] == "Unquoted Text":
+            error_template = hedy_errors[E.error_code]
+            response["Error"] = error_template.format(**E.arguments)
+        elif E.args[0] == "Has Blanks":
+            error_template = hedy_errors[E.error_code]
+            response["Error"] = error_template.format(**E.arguments)
+        else:
+            error_template = hedy_errors[E.error_code]
+            response["Error"] = error_template.format(**E.arguments)
+    except Exception as E:
+        traceback.print_exc()
+        print(f"error transpiling {code}")
+        response["Error"] = str(E)
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log ({
         'session': session_id(),

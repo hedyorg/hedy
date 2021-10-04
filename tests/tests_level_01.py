@@ -290,7 +290,6 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
   def test_two_spaces_after_print(self):
-
     code = "print        hallo!"
 
     result = hedy.transpile(code, self.level)
@@ -300,3 +299,11 @@ class TestsLevel1(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  def test_newlines_only(self):
+    code = textwrap.dedent("""\
+
+    """)
+    with self.assertRaises(Exception) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Empty Program', str(context.exception))
