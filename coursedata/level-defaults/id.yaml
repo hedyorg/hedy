@@ -126,41 +126,6 @@
         demo_code: |-
             warna is ask 'Apa warna favorit kamu?'
             if warna is hijau print 'cantik!' else print 'meh!'
-4-1:
-    start_code: |-
-        hewan2 is anjing, kucing, kelinci
-        hewan is ask 'Hewan mana yang paling kamu sukai?'
-        if hewan in hewan2 print 'Keren!' else print 'Meh'
-    intro_text: |-
-        Sekarang kamu sudah tahu bagaimana 'if' bekerja. Mari kita lihat apa lagi yang dapat dilakukan perintah ini! Misal kamu ingin tahu apakah seseorang menyukai hewan yang sama dengan kamu, tapi kamu menyukai lebih dari satu hewan. Kamu dapat menggunakan sebuah list untuk menampung nama hewan-hewan kesukaanmu, tanya seseorang tentang hewan favoritnya, dan cek menggunakan perintah 'in' apakah hewan kesukaannya ada dalam list hewanmu. Contoh kode berikut menampilkan sebuah program yang melakukan hal tersebut.
-
-        ## Contoh kode Hedy
-        '''
-        hewan2 is anjing, kucing, kelinci
-        hewan is ask 'Hewan mana yang paling kamu sukai?'
-        if hewan in hewan2 print 'Keren!' else print 'Meh'
-        '''
-
-        Kode ini menampilkan Cool! jika kamu memasukkan anjing, kucing, atau kelinci dan Meh jika kamu memasukkan yang lain.
-
-        ## Tugas-tugas
-
-        Tugas-tugas yang diberikan serupa dengan yang ada di level 4. Cobalah lihat apakah kamu bisa menggunakan perintah 'in' untuk membuat program yang lebih baik! 
-    commands:
-    -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
-        example: "Contoh: print 'Halo selamat datang di Hedy'"
-        demo_code: print 'Halo selamat datang di Hedy'
-    -   explanation: Tanyakan sesuatu dengan 'ask'
-        example: "Contoh: warna is ask 'Apa warna favoritmu?'"
-        demo_code: |-
-            warna is ask 'Apa warna favoritmu?'
-            print warna ' adalah warna favoritmu!'
-    -   explanation: Bandingkan jawabanmu dengan sebuah list menggunakan 'if' dan 'in'
-        example: "Contoh: if warna in favorit print 'cantik!' else print 'meh'"
-        demo_code: |-
-            favorit is biru, hijau, merah
-            warna is ask 'Apa warna favoritmu?'
-            if warna in favorit print 'cantik!' else print 'meh'
 6:
     start_code: repeat 3 times print 'Hedy itu menyenangkan!'
     intro_text: |-
@@ -205,9 +170,9 @@
 
         ## Contoh kode Hedy
         '''
-        print '5 tambah 5 is ' 5 + 5
-        print '5 kurang 5 is ' 5 - 5
-        print '5 kali 5 is ' 5 * 5
+        print '5 tambah 5 adalah ' 5 + 5
+        print '5 kurang 5 adalah ' 5 - 5
+        print '5 kali 5 adalah ' 5 * 5
         ''''
     commands:
     -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
@@ -218,11 +183,6 @@
         demo_code: |-
             jawaban is ask 'Apa hasil dari 10 tambah 10?'
             if jawaban is 20 print 'Yeah!' else print 'Ups'
-    -   explanation: Gabungan 'repeat' dan 'if'
-        example: "Contoh: if hasil is 50 repeat 3 times print 'Betul!' else repeat 5 times print 'Salah!'"
-        demo_code: |-
-            hasil is ask 'Apa hasil dari 10 kali 5?'
-            if hasil is 50 repeat 3 times print 'Betul!' else repeat 5 times print 'Salah!'
 7:
     start_code: |-
         repeat 5 times
@@ -277,28 +237,6 @@
                 repeat 5 times
                     print 'meh'
 8:
-    start_code: |-
-        for pembilang in range 1 to 5
-            print pembilang
-    intro_text: "'print' berfungsi sama namun 'repeat' kali ini diganti dengan 'for'! Kamu sekarang dapat menulis 'for pembilang in range 1 to 5' dan menggunakan 'pembilang' pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah 'for' dan 'if' (Ini artinya mengawali baris dengan empat spasi)."
-    commands:
-    -   name: Pengulangan 'for'
-        explanation: Kami mengganti 'repeat' dengan 'for' dan menambahkan batasan untuk pembilang
-        example: for pembilang in range 1 to 5
-        demo_code: |-
-            for pembilang in range 1 to 5
-                print pembilang
-    -   explanation: Tanyakan jawaban dari sebuah penjumlahan dan cek apakah itu benar. Kita sekarang bisa menampilkan dua baris.
-        example: "Contoh: jawaban is ask 'Apa hasil dari 5 tambah 5?'"
-        demo_code: |-
-            jawaban is ask 'Apa hasil dari 5 tambah 5?'
-            if jawaban is 10
-                print 'Kerja bagus!'
-                print 'Betul, jawabannya adalah ' jawaban
-            else
-                print 'Ups!'
-                print 'Jawabannya adalah 10'
-8-1:
     start_code: |-
         for pembilang in range 1 to 5
             print pembilang
