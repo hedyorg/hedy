@@ -51,7 +51,7 @@
         answer is ask What is your name?
         ```
 
-        Print still works as in Level 1, and you no longer need `echo`.
+        Print still works as in level 1, and you no longer need `echo`.
 
         In level 2 you can also make a list. You can have the computer choose something random from the list. You do that with `at random`.
 
@@ -167,10 +167,44 @@
             answer is ask 'How far should I walk?'
             if answer is far forward 100 else forward 5
 5:
+    start_code: "print '5 times 5 is ' 5 * 5"
+    intro_text: |
+        `ask`,` print` and `if` still work as in level 4.
+         But in level 5 you learn something new: you can now also calculate.
+
+         The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+
+         The times is a bit different, because there are is no times symbol on your keyboard. Just search, there really isn't!
+         That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+         ## Example Hedy code
+         ```
+         print '5 plus 5 is ' 5 + 5
+         print '5 minus 5 is ' 5 - 5
+         print '5 times 5 is ' 5 * 5
+         ```
+    commands:
+    -   name: "print"
+        explanation: "Print exactly using quotation marks"
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "ask"
+        explanation: "Ask for a calculation and check whether it is correct."
+        example: "Example: answer is ask 'What is 10 plus 10?'"
+        demo_code: |-
+            answer is ask 'What is 10 plus 10?'
+            if answer is 20 print 'Yes!' else print 'Oops'
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
     start_code: "repeat 3 times print 'Hedy is fun!'"
     intro_text: |
-        `ask`, `print` and `if` work exactly like they did in Level 4.
-        But Level 5 adds the `repeat` command. Repeat can be used to execute a line of code multiple times.
+        `ask`, `print` and `if` work exactly like they did in level 4 and 5.
+        But level 6 adds the `repeat` command. Repeat can be used to execute one line of code multiple times.
         ## Example Hedy code
         ```
         repeat 3 times print 'Hedy is fun!'
@@ -197,42 +231,6 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-6:
-    start_code: "print '5 times 5 is ' 5 * 5"
-    intro_text: |
-        `ask`,` print`, `if` and` repeat` still work as in level 4 and 5.
-         But in Level 6 there is something new, you can now also calculate.
-
-         In level 6 new codes are added, you can now start calculating in your code.
-
-         The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-         The times is a bit different, because there are is no times symbol on your keyboard. Just search, there really isn't!
-         That is why we multiply with the asterisk above 8: `5 * 5`. Read that as 5 times 5 then you will remember it the easiest.
-         ## Example Hedy code
-         ```
-         print '5 plus 5 is ' 5 + 5
-         print '5 minus 5 is ' 5 - 5
-         print '5 times 5 is ' 5 * 5
-         ```
-    commands:
-    -   name: "print"
-        explanation: "Print exactly using quotation marks"
-        example: "Example: print '5 times 5 is ' 5 * 5"
-        demo_code: "print '5 times 5 is ' 5 * 5"
-    -   name: "ask"
-        explanation: "Ask for a calculation and check whether it is correct."
-        example: "Example: answer is ask 'What is 10 plus 10?'"
-        demo_code: |-
-            answer is ask 'What is 10 plus 10?'
-            if answer is 20 print 'Yes!' else print 'Oops'
-    -   name: "`ask` and `if` turtle"
-        explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
-        demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
-            forward 50
 7:
     start_code: |-
         repeat 5 times

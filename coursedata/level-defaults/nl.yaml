@@ -169,10 +169,44 @@
             antwoord is ask 'Hoe ver moet ik lopen?'
             if antwoord is ver forward 100 else forward 5
 5:
-    start_code: "repeat 3 times print 'Hedy is leuk!'"
+    start_code: "print '5 keer 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` en `if` werken nog zoals in level 4.
-        Maar in Level 5 is er iets nieuws: de `repeat`.
+        Maar in Level 5 is er iets nieuws, je kunt nu ook rekenen.
+
+        De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
+
+        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
+        Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je het het makkeljkst.
+        ## Voorbeeld Hedy code
+        ```
+        print '5 plus 5 is ' 5 + 5
+        print '5 min 5 is ' 5 - 5
+        print '5 keer 5 is ' 5 * 5
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Iets letterlijk printen met `print`."
+        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+    -   name: "`ask` en `if` samen met rekenen"
+        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
+        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
+        demo_code: |-
+            antwoord is ask 'Hoeveel is 10 plus 10?'
+            if antwoord is 20 print 'Goedzo!' else print 'Foutje'
+    -   name: "`ask` en `if` turtle"
+        explanation: "De gebruiker vragen hoeveel hoeken hij wil"
+        example: "Bijvoorbeeld: hoeken is ask 'hoeveel hoeken krijgt dit figuur?'"
+        demo_code: |-
+            hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
+            hoek is 360 / hoeken
+            forward 50
+6:
+    start_code: "repeat 3 times print 'Hedy is leuk!'"
+    intro_text: |
+        `ask`, `print` en `if` werken nog zoals in level 4 en 5.
+        Maar in Level 6 is er iets nieuws: de `repeat`.
         Met `repeat` kun je codes een aantal keer herhalen.
 
         ## Voorbeeld Hedy code
@@ -206,43 +240,6 @@
         example: "Bijvoorbeeld: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-6:
-    start_code: "print '5 keer 5 is ' 5 * 5"
-    intro_text: |
-        `ask`, `print`, `if` en `repeat` werken nog zoals in level 4 en 5.
-        Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen.
-
-        In level 6 komen er weer een nieuwe codes bij, je kunt nu namelijk gaan rekenen in je code.
-
-        De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
-
-        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-        Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als 5 keer 5 dan onthoud je het het makkeljkst.
-        ## Voorbeeld Hedy code
-        ```
-        print '5 plus 5 is ' 5 + 5
-        print '5 min 5 is ' 5 - 5
-        print '5 keer 5 is ' 5 * 5
-        print '25 gedeeld door 5 is ' 25 / 5
-        ```
-    commands:
-    -   name: "print"
-        explanation: "Iets letterlijk printen met `print`."
-        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
-    -   name: "`ask` en `if` samen met rekenen"
-        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
-        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
-        demo_code: |-
-            antwoord is ask 'Hoeveel is 10 plus 10?'
-            if antwoord is 20 print 'Goedzo!' else print 'Foutje'
-    -   name: "`ask` en `if` turtle"
-        explanation: "De gebruiker vragen hoeveel hoeken hij wil"
-        example: "Bijvoorbeeld: hoeken is ask 'hoeveel hoeken krijgt dit figuur?'"
-        demo_code: |-
-            hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
-            hoek is 360 / hoeken
-            forward 50
 7:
     start_code: |-
         repeat 5 times

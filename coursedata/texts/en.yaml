@@ -25,6 +25,7 @@ ui:
     switch_to_another_adventure: "Choose a different adventure"
     commands_title: "Commands"
     by: "by"
+    start_quiz: "Start quiz"
 ClientErrorMessages:
     Transpile_warning: "Warning!"
     Transpile_error: "We can't run your program."
@@ -34,7 +35,7 @@ ClientErrorMessages:
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
-    Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {original_level} at level {working_level}."
+    Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {working_level} at level {original_level}."
     Incomplete: "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind {incomplete_command}."
     Invalid: "{invalid_command} is not a Hedy level {level} command. Did you mean {guessed_command}?"
     Invalid Space: "Oops! You started a line with a space on line {line_number}. Spaces confuse computers, can you remove it?"
@@ -43,6 +44,7 @@ HedyErrorMessages:
     Unquoted Text: "Be careful. If you ask or print something the text should start and finish with a quotation mark. You forgot one somewhere."
     Var Undefined: "You tried to print the variable {name}, but you did not set it. It is also possible that you were trying to print the word {name} but forgot quotation marks."
     Lonely Echo: "You used an echo before an ask, or an echo without an ask. First ask for input, then echo."
+    Too Big: "Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again."
     space: "a space"
     comma: "a comma"
     question mark: "a question mark"

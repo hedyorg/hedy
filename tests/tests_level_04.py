@@ -70,8 +70,10 @@ class TestsLevel4(unittest.TestCase):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -89,7 +91,8 @@ class TestsLevel4(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
-    t.forward(afstand)""")
+    t.forward(afstand)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -136,6 +139,22 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
     self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+
+  def test_list_multiple_spaces(self):
+    code = textwrap.dedent("""\
+    dieren is Hond,  Kat,       Kangoeroe
+    dier is dieren at random
+    print dier""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    dier=random.choice(dieren)
+    print(f'{dier}')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_print_Spanish(self):
     code = textwrap.dedent("""\
@@ -331,7 +350,7 @@ class TestsLevel4(unittest.TestCase):
 
 
   def test_ifelse_should_go_before_assign(self):
-    maxlevel = 5
+    maxlevel = 4
     code = textwrap.dedent("""\
     kleur is geel
     if kleur is groen antwoord is ok else antwoord is stom

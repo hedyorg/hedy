@@ -58,8 +58,10 @@ class TestsLevel3(unittest.TestCase):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
+    time.sleep(0.1)
     t.right(90)
-    t.forward(100)""")
+    t.forward(100)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -70,7 +72,8 @@ class TestsLevel3(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     afstand = input('hoe ver dan?')
-    t.forward(afstand)""")
+    t.forward(afstand)
+    time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
@@ -271,7 +274,7 @@ class TestsLevel3(unittest.TestCase):
 
 
   def test_transpile_missing_all_quotes(self):
-    max_level = 5
+    max_level = 4
 
     code = textwrap.dedent("""\
       print hallo wereld""")
@@ -310,7 +313,7 @@ class TestsLevel3(unittest.TestCase):
 
   def test_two_spaces_after_print(self):
 
-    max_level = 5
+    max_level = 4
     code = "print        'hallo!'"
 
     for level in range(self.level, max_level+1):
