@@ -4,6 +4,9 @@ import utils
 import hedy
 import unittest
 
+# file is called tests_z_ so they are executed last
+# because programs are more of a priority than level defaults, which change less and take longer to run
+
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
 
