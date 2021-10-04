@@ -4,10 +4,22 @@ questions:
       question_text: "What's this programming language called?"
       code: "..."
       mp_choice_options:
-        - { option_text: "Hedy", code: , feedback: "Good job!" }
-        - { option_text: "Heddy", code: , feedback: "Not this one!" }
-        - { option_text: "Haydie", code: , feedback: "Not this one!" }
-        - { option_text: "Henk", code: , feedback: "Not this one!" }
+        - 1:
+          -  option_text: "Hedy"
+          -  code:
+          -  feedback: "Good job!" }
+        - 2:
+          - option_text: "Heddy"
+          - code:
+          - feedback: "Not this one!"
+        - 3:
+          - option_text: "Haydie"
+          - code:
+          - feedback: "Not this one!"
+        - 4:
+          - option_text: "Henk"
+          - code:
+          - feedback: "Not this one!
       correct_answer: "A"
       hint: "It's named after Hedy Lamarr."
       question_score: 10
@@ -15,10 +27,22 @@ questions:
       question_text: "Which command makes text appear?"
       code: "..."
       mp_choice_options:
-        - { option_text:, code: "echo", feedback: "Echo repeats a given answer." }
-        - { option_text:, code: "print", feedback: "Correct!" }
-        - { option_text:, code: "hello", feedback: "Hello isn't a command." }
-        - { option_text:, code: "ask", feedback: "With ask you can ask a question" }
+        - 1:
+          - option_text:
+          - code: "echo"
+          - feedback: "Echo repeats a given answer."
+        - 2:
+          - option_text:
+          - code: "print"
+          - feedback: "Correct!"
+        - 3:
+          - option_text:
+          - code: "hello"
+          - feedback: "Hello isn't a command."
+        - 4:
+          - option_text:
+          - code: "ask"
+          - feedback: "With ask you can ask a question"
       correct_answer: "B"
       hint: "(?) Hello world! "
       question_score: 10
@@ -26,10 +50,22 @@ questions:
       question_text: "How do you ask what someones favorite color is?"
       code: "..."
       mp_choice_options:
-        - { option_text:, code: "print What is your favorite color?", feedback: "Print prints text, but it doesn't ask questions" }
-        - { option_text:, code: "ask print What is your favorite color?", feedback: "You don't need 2 commands, only one." }
-        - { option_text:, code: "ask What is your favorite color?", feedback: "Great!" }
-        - { option_text:, code: "echo What is your favorite color?", feedback: "Echo repeats your answer back to you." }
+        - 1:
+          - option_text:
+          - code: "print What is your favorite color?"
+          - feedback: "Print prints text, but it doesn't ask questions"
+        - 2:
+          - option_text:
+          - code: "ask print What is your favorite color?"
+          - feedback: "You don't need 2 commands, only one."
+        - 3:
+          - option_text:
+          - code: "ask What is your favorite color?"
+          - feedback: "Great!"
+        - 4:
+          - option_text:
+          - code: "echo What is your favorite color?"
+         - feedback: "Echo repeats your answer back to you."
       correct_answer: "C"
       hint: "You can ask something with the ask command"
       question_score: 10
@@ -40,12 +76,24 @@ questions:
         ask Who are you?
         echo Hi...
       mp_choice_options:
-        - { option_text: "print in line 1 is missing.", code: , feedback: "Correct!" }
-        - { option_text: "Im in line 1 is spelled wrong.", code: , feedback: "Im is spelled wrong on purpose, Hedy doesn't understand the apostrophes yet." }
-        - { option_text: "Echo isn't a command,", code: , feedback: "Echo is a command, there's another mistake." }
-        - { option_text: "Nothing! This is a perfect code!", code: , feedback: "Wrong, look carefully!" }
+        - 1:
+          - option_text: "print in line 1 is missing."
+          - code:
+          - feedback: "Correct!"
+        - 2:
+          - option_text: "Im in line 1 is spelled wrong."
+          - code:
+          - feedback: "Im is spelled wrong on purpose, Hedy doesn't understand the apostrophes yet."
+        - 3:
+          - option_text: "Echo isn't a command."
+          - code:
+          - feedback: "Echo is a command, there's another mistake."
+        - 4:
+          - option_text: "Nothing! This is a perfect code!"
+          - code:
+          - feedback: "Wrong, look carefully!"
       correct_answer: "A"
-      hint: "Line 1 doens't seem right"
+      hint: "Line 1 doesn't seem right"
       question_score: 10
   - 5:
       question_text: "Which command is missing in line 2?"
@@ -53,10 +101,22 @@ questions:
         ask What is your favorite pet?
         ? So your favorite pet is..."
       mp_choice_options:
-        - { option_text:, code: "print", feedback: "No, you want the answer to be repeated back to you" }
-        - { option_text:, code: "ego", feedback: "ego isn't a  command." }
-        - { option_text:, code: "ask", feedback: "With ask you can ask a question." }
-        - { option_text:, code: "echo", feedback: "Right on!" }
+        - 1:
+          - option_text:
+          - code: "print"
+          - feedback: "No, you want the answer to be repeated back to you"
+        - 2:
+          - option_text:
+          - code: "ego"
+          - feedback: "ego isn't a  command."
+        - 3:
+          - option_text:
+          - code: "ask"
+          - feedback: "With ask you can ask a question."
+        - 4:
+          - option_text:
+          - code: "echo"
+          - feedback: "Right on!"
       correct_answer: "D"
       hint: "You want to see the answer at the end of line 2..."
       question_score: 10
@@ -68,10 +128,22 @@ questions:
         echo You support...
         print Cool! Me too!
       mp_choice_options:
-        - { option_text: "In line 1 print should be replaced with ask.", code: , feedback: "Print in line 1 is corrcet, mind the spelling of the words." }
-        - { option_text: "In line 2 ask is spelled wrong", code: , feedback: "Great! You paid attention!" }
-        - { option_text: "Line 3 has to begin with print instead of echo.", code: , feedback: "Echo iscorrect, check the spelling of the commands." }
-        - { option_text: "In line 4 print is spelled wrong.", code: , feedback: "There is a spelling error somewhere else" }
+        - 1:
+          - option_text: "In line 1 print should be replaced with ask."
+          - code:
+          - feedback: "Print in line 1 is corrcet, mind the spelling of the words." }
+        - 2:
+          - option_text: "In line 2 ask is spelled wrong"
+          - code:
+          - feedback: "Great! You paid attention!"
+        - 3:
+          - option_text: "Line 3 has to begin with print instead of echo."
+          - code:
+          - feedback: "Echo iscorrect, check the spelling of the commands."
+        - 4:
+          - option_text: "In line 4 print is spelled wrong."
+          - code:
+          - feedback: "There is a spelling error somewhere else"
       correct_answer: "B"
       hint: "Check the way the commands are spelled."
       question_score: 10
@@ -83,10 +155,22 @@ questions:
         echo So you want to order ...
         print Coming right up! Enjoy!"
       mp_choice_options:
-        - { option_text: "In line 1 print needs to be replaced with ask", code: , feedback: "Are you sure something is wrong?" }
-        - { option_text: "In line 1 moet print needs to be replaced with echo" , code: , feedback: "Are you sure something's worng?" }
-        - { option_text: "In line 3 echo needs to be replaced with print", code: , feedback: "Are you sure something is wrong?" }
-        - { option_text: "Nothing! This is a perfect code!" , code: , feedback: "Correct!" }
+        - 1:
+          - option_text: "In line 1 print needs to be replaced with ask"
+          - code:
+          - feedback: "Are you sure something is wrong?"
+        - 2:
+          - option_text: "In line 1 moet print needs to be replaced with echo"
+          - code:
+          - feedback: "Are you sure something's wrong?"
+        - 3:
+          - option_text: "In line 3 echo needs to be replaced with print"
+          - code:
+          - feedback: "Are you sure something is wrong?"
+        - 4:
+          - option_text: "Nothing! This is a perfect code!"
+          - code:
+          - feedback: "Correct!"
       correct_answer: "D"
       hint: "Check the code line by line"
       question_score: 10
@@ -94,24 +178,49 @@ questions:
       question_text: "How do you use the echo command?"
       code: "..."
       mp_choice_options:
-        - { option_text: "You can use it to ask a question", code: , feedback: "That's what ask is for" }
-        - { option_text: "You can use it to print text" , code: , feedback: "That's what print is for" }
-        - { option_text: "You can use it to repeat an answer", code: , feedback: "Good job!" }
-        - { option_text: "You can use it to make text disappear",  code: , feedback: "That's not right" }
+        - 1:
+          - option_text: "You can use it to ask a question"
+          - code:
+          - feedback: "That's what ask is for"
+        - 2:
+          - option_text: "You can use it to print text"
+          - code:
+          - feedback: "That's what print is for"
+        - 3:
+          - option_text: "You can use it to repeat an answer"
+          - code:
+          - feedback: "Good job!"
+        - 4:
+          - option_text: "You can use it to make text disappear"
+          - code:
+          - feedback: "That's not right"
       correct_answer: "C"
       hint: "Echo is used after a ask command."
       question_score: 10
   - 9:
-      question_text: "What's wrong with this code?"
+      1:
+      - question_text: "What's wrong with this code?"
       code: |-
         print Hello!
         print How are you doing?
         echo So you are doing..."
       mp_choice_options:
-        - { option_text: " print in line 1 should be ask", code: , feedback: "No, print is right. Where is the question being asked?" }
-        - { option_text: " print in line 2 should be aks", code: , feedback: "Super!" }
-        - { option_text: " echo in line 3 should be ask", code: , feedback: "No, echo is right. Where is the question being asked?" }
-        - { option_text: "Nothing. this is a perfect code!", code: , feedback: "Look carefully for the mistake.." }
+        - 1:
+            - option_text: " print in line 1 should be ask"
+            - code:
+            - feedback: "No, print is right. Where is the question being asked?"
+        - 2:
+          - option_text: " print in line 2 should be aks"
+          - code:
+          - feedback: "Super!"
+        - 3:
+          - option_text: " echo in line 3 should be ask"
+          - code:
+          - feedback: "No, echo is right. Where is the question being asked?"
+        - 4 :
+          - option_text: "Nothing. this is a perfect code!"
+          - code:
+          - feedback: "Look carefully for the mistake.." }
       correct_answer: "B"
       hint: "ask allows you to ask a question"
       question_score: 10
@@ -119,8 +228,14 @@ questions:
       question_text: "Are you ready for level 2?"
       code: "..."
       mp_choice_options:
-        - { option_text:  "Yes!", code:, feedback: "Great! Let's go to the next level!" }
-        - { option_text: "No", code: , feedback: "Too bad... You can practice some more in level 1" }
+        - 1:
+          - option_text:  "Yes!"
+          - code:
+          - feedback: "Great! Let's go to the next level!"
+        - 2:
+          - option_text: "No"
+          - code:
+          - feedback: "Too bad... You can practice some more in level 1"
       correct_answer: "A"
       hint: "Let's go!"
       question_score: 10
