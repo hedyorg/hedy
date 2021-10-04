@@ -4,6 +4,9 @@ import utils
 import hedy
 import unittest
 
+# file is called tests_z_ so they are executed last
+# because programs are more of a priority than adventures, which change less and take longer to run
+
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
 
@@ -32,10 +35,10 @@ class TestsAdventurePrograms(unittest.TestCase):
         adventure_fails = []
 
         for f in files:
-            f = os.path.join (path, f)
+            f = os.path.join(path, f)
             yaml = utils.load_yaml_uncached (f)
 
-            for adventure in yaml ['adventures'].values ():
+            for adventure in yaml['adventures'].values ():
                 for level_number in adventure['levels']:
                     level = adventure['levels'][level_number]
                     adventure_name = adventure['name']
@@ -53,8 +56,15 @@ class TestsAdventurePrograms(unittest.TestCase):
                             adventure_fails.append(result)
 
                     # start_code
-                    result = check_code(f, level_number, 'start_code', level ['start_code'], adventure_name)
-                    if result != True:
-                        adventure_fails.append(result)
+                    try:
+                        start_code = level['start_code']
+                        result = check_code(f, level_number, 'start_code', start_code, adventure_name)
+                        if result != True:
+                            adventure_fails.append(result)
+                    except KeyError:
+                        #create startcode not found error
+                        message = f'Adventure {adventure_name} misses start_code at level {level_number}'
+                        adventure_fails.append(message)
+                        print(message)
 
         self.assertEqual(0, len(adventure_fails))
