@@ -51,7 +51,8 @@ ALL_LANGUAGES = {
     'zh': "简体中文",
     'cs': 'Čeština',
     'bn': 'বাংলা',
-    'hi': 'हिंदी'
+    'hi': 'हिंदी',
+    'id': 'Bahasa Indonesia'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
