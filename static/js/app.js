@@ -415,8 +415,12 @@ function runPythonProgram(code, hasTurtle, cb) {
   }).catch(function(err) {
     // Extract error message from error
     console.log(err);
-    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
-    if (errorMessage === 'Program exceeded run time limit.') window.modal.alert ('Your program takes too long to run.');
+    var errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+    if (errorMessage === 'Program exceeded run time limit.') {
+      // TODO: internationalize this text.
+      errorMessage = 'Your program takes too long to run.';
+      window.modal.alert (errorMessage);
+    }
     throw new Error(errorMessage);
   });
 
