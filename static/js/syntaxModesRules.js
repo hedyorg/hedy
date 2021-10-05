@@ -480,16 +480,16 @@ function rule_expressions() {
 function rule_ifElse() {
   return comp(
     recognize('start', {
-      regex: 'if',
+      regex: '\\bif\\b',
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: 'else',
+      regex: '\\belse\\b',
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: 'is',
+      regex: '\\bis\\b',
       token: 'keyword',
       next: 'start',
     }),
