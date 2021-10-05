@@ -480,16 +480,16 @@ function rule_expressions() {
 function rule_ifElse() {
   return comp(
     recognize('start', {
-      regex: '\\bif\\b',
+      regex: completeKeyword('if'),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: '\\belse\\b',
+      regex: completeKeyword('else'),
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: '\\bis\\b',
+      regex: completeKeyword('is'),
       token: 'keyword',
       next: 'start',
     }),
@@ -578,4 +578,14 @@ for (const level of LEVELS) {
 
     exports.Mode = Mode;
   });
+}
+
+/**
+ * Wrap a keyword in word-boundary markers for use in the tokenizer regexes
+ *
+ * Use this to only recognize a word if it's a complete word by itself (and
+ * not accidentally a part of a larger word).
+ */
+function completeKeyword(keyword) {
+  return '\\b' + keyword + '\\b';
 }
