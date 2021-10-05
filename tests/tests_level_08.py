@@ -179,12 +179,8 @@ class TestsLevel8(unittest.TestCase):
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    if int(10) <= int(1):
-      for i in range(int(10), int(1)+1):
-        print(str(i))
-    else:
-      for i in range(int(10), int(1)-1, -1):
-        print(str(i))
+    for i in range(int(10), int(1)+(1 if int(10) < int(1) else -1), 1 if int(10) < int(1) else -1):
+      print(str(i))
     print('wie niet weg is is gezien')""")
 
     result = hedy.transpile(code, self.level)
@@ -205,24 +201,14 @@ class TestsLevel8(unittest.TestCase):
         i is 10""")
 
     expected = textwrap.dedent("""\
-    if int(0) <= int(10):
-      for i in range(int(0), int(10)+1):
-        antwoord = input('Wat is 5*5')
-        if str(antwoord) == str('24'):
-          print('Dat is fout!')
-        else:
-          print('Dat is goed!')
-        if str(antwoord) == str('25'):
-          i = '10'
-    else:
-      for i in range(int(0), int(10)-1, -1):
-        antwoord = input('Wat is 5*5')
-        if str(antwoord) == str('24'):
-          print('Dat is fout!')
-        else:
-          print('Dat is goed!')
-        if str(antwoord) == str('25'):
-          i = '10'""")
+    for i in range(int(0), int(10)+(1 if int(0) < int(10) else -1), 1 if int(0) < int(10) else -1):
+      antwoord = input('Wat is 5*5')
+      if str(antwoord) == str('24'):
+        print('Dat is fout!')
+      else:
+        print('Dat is goed!')
+      if str(antwoord) == str('25'):
+        i = '10'""")
 
     result = hedy.transpile(code, self.level)
 
