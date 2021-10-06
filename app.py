@@ -461,8 +461,8 @@ def get_quiz(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
-        if os.path.isfile(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml')
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
         else:
             return 'No quiz yaml file found for this level', 404
 
@@ -485,16 +485,22 @@ def get_quiz(level_source, question_nr, attempt):
                 char_array.append(chr(ord('@') + (i + 1)))
 
             i  = 0
-            for option in question['mp_choice_options']:
-                option.update({'char_index': char_array[i]})
-                print(option)
-                i+=1
-
-            print(question)
+            question_obj = []
+            for options in question['mp_choice_options']:
+                option_obj = {}
+                for key, value in options.items():
+                    for option in value:
+                        option_obj.update(option)
+                        option_obj.update({'char_index': char_array[i]})
+                    i+=1
+                question_obj.append(option_obj)
+                
             return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
                                    questionStatus= questionStatus,
                                    questions=quiz_data['questions'],
-                                   question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                                   question_options=question_obj,
+                                   question=quiz_data['questions'][q_nr - 1].get(q_nr),
+                                   question_nr=q_nr,
                                    correct=session.get('correct_answer'),
                                    attempt = attempt,
                                    char_array=char_array,
@@ -520,8 +526,8 @@ def submit_answer(level_source, question_nr, attempt):
         option = request.form["radio_option"]
 
         # Reading yaml file
-        if os.path.isfile(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/en_quiz_questions_lvl{level_source}.yaml')
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
         else:
             return 'No quiz yaml file found for this level', 404
 
