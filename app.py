@@ -495,7 +495,9 @@ def get_quiz(level_source, question_nr, attempt):
                     i+=1
                 question_obj.append(option_obj)
                 
-            return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+            return render_template('quiz_question.html',
+                                   quiz=quiz_data,
+                                   level_source=level_source,
                                    questionStatus= questionStatus,
                                    questions=quiz_data['questions'],
                                    question_options=question_obj,
@@ -569,20 +571,38 @@ def submit_answer(level_source, question_nr, attempt):
             elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
                 question = quiz_data['questions'][q_nr - 1].get(q_nr)
                 # Convert the indices to the corresponding characters
+
+                # Convert the indices to the corresponding characters
                 char_array = []
                 for i in range(len(question['mp_choice_options'])):
                     char_array.append(chr(ord('@') + (i + 1)))
-                return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
-                                       questions=quiz_data['questions'],
-                                       question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
-                                       correct=session.get('correct_answer'),
-                                       attempt= session.get('quiz-attempt') ,
+
+                i = 0
+                question_obj = []
+                for options in question['mp_choice_options']:
+                    option_obj = {}
+                    for key, value in options.items():
+                        for option in value:
+                            option_obj.update(option)
+                            option_obj.update({'char_index': char_array[i]})
+                        i += 1
+                    question_obj.append(option_obj)
+
+                return render_template('quiz_question.html',
+                                       quiz=quiz_data,
+                                       level_source=level_source,
                                        questionStatus=questionStatus,
-                                       chosen_option = session.get('chosen_option'),
+                                       questions=quiz_data['questions'],
+                                       question_options=question_obj,
+                                       question=quiz_data['questions'][q_nr - 1].get(q_nr),
+                                       question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       attempt=attempt,
                                        char_array=char_array,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
-                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                                       is_teacher=is_teacher(request),
+                                       auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
             elif session.get('quiz-attempt') > config.get('quiz-max-attempts'):
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
