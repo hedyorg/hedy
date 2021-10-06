@@ -146,9 +146,9 @@ class TestsLevel6(unittest.TestCase):
     self.assertEqual(expected_output, run_code(result))
 
   def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual(str(context.exception), 'Invalid')
+    self.assertEqual('Invalid', context.exception.error_code)
 
   # todo: a few more things repeated from 4 here?
 

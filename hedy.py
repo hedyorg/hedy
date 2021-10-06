@@ -125,6 +125,57 @@ class HedyException(Exception):
         self.error_code = message
         self.arguments = arguments
 
+class InvalidSpaceException(HedyException):
+    def __init__(self, level, line_number, fixed_code):
+        super().__init__('Invalid Space')
+        self.level = level
+        self.line_number = line_number
+        self.fixed_code = fixed_code
+
+class ParseException(HedyException):
+    def __init__(self, level, location, keyword_found=None, character_found=None):
+        super().__init__('Parse')
+        self.level = level
+        self.location = location
+        self.keyword_found = keyword_found
+        self.character_found = character_found
+
+class UnderfinedVarException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Var Undefined', **arguments)
+
+class WrongLevelException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Wrong Level', **arguments)
+
+class InputTooBigException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Too Big', **arguments)
+
+class InvalidCommandException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Invalid', **arguments)
+
+class IncompleteCommandException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Incomplete', **arguments)
+
+class UnquotedTextException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unquoted Text', **arguments)
+
+class EmptyProgramException(HedyException):
+    def __init__(self):
+        super().__init__('Empty Program')
+
+class LonelyEchoException(HedyException):
+    def __init__(self):
+        super().__init__('Lonely Echo')
+
+class CodePlaceholdersPresentException(HedyException):
+    def __init__(self):
+        super().__init__('Has Blanks')
+
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
@@ -625,7 +676,7 @@ class ConvertToPython_3(ConvertToPython_2):
             return make_f_string(args, self.lookup)
         else:
             first_unquoted_var = unquoted_args[0]
-            raise HedyException('Var Undefined', name=first_unquoted_var)
+            raise UnderfinedVarException(name=first_unquoted_var)
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -1133,22 +1184,22 @@ def transpile(input_string, level, sub = 0):
     try:
         transpile_result = transpile_inner(input_string, level, sub)
         return transpile_result
-    except Exception as E:
+    except ParseException as ex:
         # This is the 'fall back' transpilation
         # that should surely be improved!!
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
-        if E.args[0] == 'Parse':
-            #try 1 level lower
-            if level > 1 and sub == 0:
-                try:
-                    new_level = level - 1
-                    result = transpile_inner(input_string, new_level, sub)
-                except (LarkError, HedyException) as innerE:
-                    # Parse at `level - 1` failed as well, just re-raise original error
-                    raise E
-                # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-                raise HedyException('Wrong Level', correct_code=result.code, working_level=new_level, original_level=level) from E
-        raise E
+
+        #try 1 level lower
+        if level > 1 and sub == 0:
+            try:
+                new_level = level - 1
+                result = transpile_inner(input_string, new_level, sub)
+            except (LarkError, HedyException) as innerE:
+                # Parse at `level - 1` failed as well, just re-raise original error
+                raise ex
+            # If the parse at `level - 1` succeeded, then a better error is "wrong level"
+            raise WrongLevelException(correct_code=result.code, working_level=new_level, original_level=level) from ex
+
 
 def repair(input_string):
     #the only repair we can do now is remove leading spaces, more can be added!
@@ -1261,7 +1312,7 @@ def transpile_inner(input_string, level, sub=0):
 
     #parser is not made for huge programs!
     if number_of_lines > MAX_LINES:
-        raise HedyException('Too Big', lines_of_code = number_of_lines, max_lines = MAX_LINES)
+        raise InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
     input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
@@ -1269,7 +1320,7 @@ def transpile_inner(input_string, level, sub=0):
     parser = get_parser(level, sub)
 
     if contains_blanks(input_string):
-        raise HedyException('Has Blanks')
+        raise CodePlaceholdersPresentException()
 
 
     if level >= 3:
@@ -1296,7 +1347,7 @@ def transpile_inner(input_string, level, sub=0):
             character_found  = beautify_parse_error(e.char)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
-            raise HedyException('Parse', level=level, location=location, character_found=character_found) from e
+            raise ParseException(level=level, location=location, character_found=character_found) from e
         except UnexpectedEOF:
             # this one can't be beautified (for now), so give up :)
             raise e
@@ -1317,28 +1368,28 @@ def transpile_inner(input_string, level, sub=0):
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, sub)
-            raise HedyException('Invalid Space', level=level, line_number=line, fixed_code = result.code)
+            raise InvalidSpaceException(level, line, result.code)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
-            raise HedyException('Unquoted Text', level=level)
+            raise UnquotedTextException(level=level)
         elif args == 'empty program':
-            raise HedyException('Empty Program')
+            raise EmptyProgramException()
         else:
             invalid_command = args
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # clearly the error message here should be better or it should be a different one!
-                raise HedyException('Parse', level=level, location=["?", "?"], keyword_found=invalid_command)
-            raise HedyException('Invalid', invalid_command=invalid_command, level=level, guessed_command=closest)
+                raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
+            raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)
 
     is_complete = IsComplete(level).transform(program_root)
     if not is_complete[0]:
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
-        raise HedyException('Incomplete', incomplete_command=incomplete_command, level=level, line_number=line)
+        raise IncompleteCommandException(incomplete_command=incomplete_command, level=level, line_number=line)
 
     if not valid_echo(program_root):
-        raise HedyException('Lonely Echo')
+        raise LonelyEchoException()
 
     try:
         if level <= HEDY_MAX_LEVEL:

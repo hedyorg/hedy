@@ -30,17 +30,17 @@ class TestsLevel2(unittest.TestCase):
 
   # some commands should not change:
   def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', str(context.exception))
+    self.assertEqual('Invalid', context.exception.error_code)
 
   def test_ask_without_argument_upto_22(self):
     max_level = 10
     for level in range(self.level, max_level + 1):
       code = "name is ask"
-      with self.assertRaises(Exception) as context:
+      with self.assertRaises(hedy.IncompleteCommandException) as context:
         result = hedy.transpile(code, level)
-      self.assertEqual('Incomplete', str(context.exception))
+      self.assertEqual('Incomplete', context.exception.error_code)
       print(f'{self.test_name()} level {level}')
 
 
@@ -48,9 +48,9 @@ class TestsLevel2(unittest.TestCase):
     code = textwrap.dedent("""\
     ask what is jouw lievelingskleur?
     echo Jouw lievelingskleur is dus...""")
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.WrongLevelException) as context:
       result = hedy.transpile(code, self.level)
-    self.assertEqual('Wrong Level', str(context.exception))
+    self.assertEqual('Wrong Level', context.exception.error_code)
 
   def test_spaces_in_arguments(self):
     result = hedy.transpile("print hallo      wereld", self.level)
