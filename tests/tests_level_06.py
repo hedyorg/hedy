@@ -204,3 +204,30 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, run_code(result))
+
+  def test_repeat_with_collision(self):
+      code = textwrap.dedent("""\
+      i is hallo!
+      repeat 5 times print 'me wants a cookie!'
+      print i""")
+
+      result = hedy.transpile(code, self.level)
+
+      expected = textwrap.dedent("""\
+      i = 'hallo!'
+      for _i in range(int('5')):
+        print('me wants a cookie!')
+      print(str(i))""")
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
+      expected_output = textwrap.dedent("""\
+      me wants a cookie!
+      me wants a cookie!
+      me wants a cookie!
+      me wants a cookie!
+      me wants a cookie!
+      hallo!""")
+
+      self.assertEqual(expected_output, run_code(result))
