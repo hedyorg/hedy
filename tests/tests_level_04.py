@@ -31,9 +31,9 @@ class TestsLevel4(unittest.TestCase):
 
   # invalid, ask and print should still work as in level 4
   def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual(str(context.exception), 'Invalid')
+    self.assertEqual('Invalid', context.exception.error_code)
 
   def test_print_with_var(self):
 
@@ -323,9 +323,9 @@ class TestsLevel4(unittest.TestCase):
   def test_pront_should_suggest_print(self):
     code = "pront 'Hedy is leuk!'"
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
-    self.assertEqual('Invalid', str(context.exception))
+    self.assertEqual('Invalid', context.exception.error_code)
     self.assertEqual('print', str(context.exception.arguments['guessed_command']))
 
   def test_parser_errors_should_be_caught_and_beautified(self):
@@ -335,9 +335,9 @@ class TestsLevel4(unittest.TestCase):
     if option is Scissors
         print 'Its a tie!'""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.ParseException) as context:
       result = hedy.transpile(code, self.level)
-    self.assertEqual('Parse', str(context.exception))
+    self.assertEqual('Parse', context.exception.error_code)
 
 
   def test_single_quote_in_assign_should_not_break(self):
