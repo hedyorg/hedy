@@ -266,6 +266,24 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
 
+  def test_allow_space_after_else_line(self):
+    code = textwrap.dedent("""\
+    if a is 1
+      print a
+    else   
+      print 'nee'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
+
+    self.assertEqual(expected, result.code)
+
+
   def test_addition_simple(self):
     code = textwrap.dedent("""\
     var is 5
