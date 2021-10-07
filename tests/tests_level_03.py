@@ -278,10 +278,10 @@ class TestsLevel3(unittest.TestCase):
 
     code = textwrap.dedent("""\
       print hallo wereld""")
-    
+
     for level in range(self.level, max_level+1):
 
-      with self.assertRaises(hedy.UnderfinedVarException) as context:
+      with self.assertRaises(hedy.UndefinedVarException) as context:
         result = hedy.transpile(code, level)
 
       self.assertEqual('Var Undefined', context.exception.error_code)
@@ -294,7 +294,7 @@ class TestsLevel3(unittest.TestCase):
       naam is Hedy
       print 'ik heet ' name""")
 
-    with self.assertRaises(hedy.UnderfinedVarException) as context:
+    with self.assertRaises(hedy.UndefinedVarException) as context:
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Var Undefined', context.exception.error_code)
