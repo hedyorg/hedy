@@ -86,9 +86,9 @@ class TestsForMultipleLevels(unittest.TestCase):
         try:
             hedy.transpile("printHelloworld!", 5)
             self.fail('Should have thrown')
-        except hedy.HedyException as e:
-            self.assertEqual(e.error_code, 'Parse')
-            self.assertEqual(e.arguments.get('level'), 5)
+        except hedy.ParseException as e:
+            self.assertEqual('Parse', e.error_code)
+            self.assertEqual(5, e.level)
 
     # def test_print_undefined_var(self):
     #     min_level = 7
