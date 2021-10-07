@@ -365,24 +365,6 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  # def test_trailing_space_after_else_line(self):
-  #   code = textwrap.dedent("""\
-  #     a is 2
-  #     if a is 1 print a
-  #     else print 'nee'""")
-  #
-  #   expected = textwrap.dedent("""\
-  #   a = '2'
-  #   if a == '1':
-  #     print(f'{a}')
-  #   else:
-  #     print(f'nee')
-  #   """)
-  #
-  #   result = hedy.transpile(code, self.level)
-  #   self.assertEqual(expected, result.code)
-  #   self.assertEqual(False, result.has_turtle)
-
 
   def test_ifelse_should_go_before_assign(self):
     maxlevel = 4
