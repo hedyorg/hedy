@@ -4,19 +4,19 @@ questions:
       question_text: "Wat is de naam van de programmeertaal die je hier leert?"
       code: "..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text: "Hedy"
           - code:
           - feedback: "Goed zo!"
-        - 2:
+        - 1:
           - option_text: "Heddy"
           - code:
           - feedback: "Deze is het niet!"
-        - 3:
+        - 2:
           - option_text: "Haydie"
           - code:
           - feedback: "Deze is het niet!"
-        - 4:
+        - 3:
           - option_text: "Henk"
           - code:
           - feedback: "Deze is het niet!"
@@ -27,19 +27,19 @@ questions:
       question_text: "Met welk commando kun je tekst laten verschijnen?"
       code: "..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text:
           - code: "echo"
           - feedback: "Met echo herhaal je een antwoord..."
-        - 2:
+        - 1:
           - option_text:
           - code: "print"
           - feedback: "Goed! Met print kun je tekst printen!"
+        - 2:
+          - option_text:
+          - code: "hello"
+          - feedback: "Hello is geen commando, probeer het nog eens..."
         - 3:
-            option_text:
-            code: "hello"
-            feedback: "Hello is geen commando, probeer het nog eens..."
-        - 4:
           - option_text:
           - code: "ask"
           - feedback: "Met ask kun je een vraag stellen..."
@@ -50,19 +50,19 @@ questions:
       question_text: "Hoe vraag je: Wat is je lievelingskleur?"
       code: "..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text:
           - code: "print Wat is je lievelingskleur?"
           - feedback: "Met print print je iets"
-        - 2:
+        - 1:
           - option_text:
           - code: "ask print Wat is je lievelingskleur?"
           - feedback: "Ask en print is dubbelop, je hebt maar één commando nodig."
-        - 3:
+        - 2:
           - option_text:
           - code: "ask Wat is je lievelingskleur?"
           - feedback: "Goed zo!"
-        - 4:
+        - 3:
           - option_text:
           - code: "echo Wat is je lievelingskleur?"
           - feedback: "Echo herhaalt het antwoord."
@@ -76,22 +76,22 @@ questions:
         ask Wie ben jij?
         echo Hoi...
       mp_choice_options:
+        - 0:
+          - option_text: "print in regel 1 mist."
+          - code:
+          - feedback: "Goedzo!"
         - 1:
-        - option_text: "print in regel 1 mist."
-        - code:
-        - feedback: "Goedzo!"
+          - option_text: "ask in regel 2 is fout gespeld, het moet aks zijn."
+          - code:
+          - feedback: "Ask is goed gespeld."
         - 2:
-        - option_text: "ask in regel 2 is fout gespeld, het moet aks zijn."
-        - code:
-        - feedback: "Ask is goed gespeld."
+          - option_text: "echo is geen commando in level 1,"
+          - code:
+          - feedback: "Echo is goed, er is een ander foutje"
         - 3:
-        - option_text: "echo is geen commando in level 1,"
-        - code:
-        - feedback: "Echo is goed, er is een ander foutje"
-        - 4:
-        - option_text: "Niets! De code is goed!"
-        - code:
-        - feedback: "Er zit een foutje in, kijk goed!"
+          - option_text: "Niets! De code is goed!"
+          - code:
+          - feedback: "Er zit een foutje in, kijk goed!"
       correct_answer: "A"
       hint: "Er mist een commando in het begin van de code"
       question_score: 10
@@ -101,19 +101,19 @@ questions:
         ask Wat is jouw lievelingsdier?
         ? Dus jouw lievelingsdier is..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text:
           - code: "print"
           - feedback: "Je wilt dat in regel 2 het antwoord herhaald wordt..."
-        - 2:
+        - 1:
           - option_text:
           - code: "ego"
           - feedback: "ego is geen commando, probeer het nog eens..."
-        - 3:
+        - 2:
           - option_text:
           - code: "ask"
           - feedback: "Met ask kun je een vraag stellen..."
-        - 4:
+        - 3:
           - option_text:
           - code: "echo"
           - feedback: "Goedzo!"
@@ -128,19 +128,19 @@ questions:
         echo Jij bent voor...
         print Cool! Ik ook!
       mp_choice_options:
-        1:
+        0:
           - option_text: "In regel 1 moet het print commando worden vervangen door ask."
           - code:
           - feedback: "Print in regel 1 is goed, let op de spelling van de commando's"
-        2:
+        1:
           - option_text: "In regel 2 is ask fout gespeld."
           - code:
           - feedback: "Goed opgelet!"
-        3:
+        2:
           - option_text: "Regel 3 moet beginnen met print in plaats van echo."
           - code:
           - feedback: "Echo is goed! Kijk naar de spelling van de commando's."
-        4:
+        3:
           - option_text: "In regel 4 is print verkeerd gespeld."
           - code:
           - feedback: "Er zit ergens anders een spelfout"
@@ -155,19 +155,19 @@ questions:
         echo Dus u wilt graag ...
         print Komt er aan! Eet smakelijk!"
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text: "In regel 1 moest ask staan in plaats van print"
           - code:
           - feedback: "Weet je zeker dat er iets mis is?"
-        - 2:
+        - 1:
           - option_text: "In regel 1 moet echo staan in plaats van print"
           - code:
           - feedback: "Weet je zeker dat er iets mis is?"
-        - 3:
+        - 2:
           - option_text: "In regel 3 moet print staan in plaats van echo"
           - code:
           - feedback: "Weet je zeker dat er iets mis is?"
-        - 4:
+        - 3:
           - option_text: "Niets! Deze code is goed!"
           - code:
           - feedback: "Correct!"
@@ -178,19 +178,19 @@ questions:
       question_text: "Wat doet het commando echo?"
       code: "..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text: "Met echo stel je een vraag"
           - code:
           - feedback: "Dat doe je met ask"
-        - 2:
+        - 1:
           - option_text: "Met echo laat je tekst verschijnen"
           - code:
           - feedback: "Dat doe je met print"
-        - 3:
+        - 2:
           - option_text: "Met echo herhaal je een gegeven antwoord"
           - code:
           - feedback: "Goed zo!"
-        - 4:
+        - 3:
           - option_text: "Met echo laat je tekst verdwijnen"
           - code:
           - feedback: "Dat klopt niet"
@@ -204,19 +204,19 @@ questions:
         print Hoe gaat het met jou?
         echo Dus het gaat..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text: " print in regel 1 moet ask zijn"
           - code:
           - feedback: "Nee, print is goed. Waar wordt de vraag gesteld?"
-        - 2:
+        - 1:
           - option_text: " print in regel 2 moet ask zijn"
           - code:
           - feedback: "Super!"
-        - 3:
+        - 2:
           - option_text: " echo in regel 3 moet ask zijn"
           - code:
           - feedback: "Nee, echo is goed. Waar wordt de vraag gesteld?"
-        - 4:
+        - 3:
           - option_text: "Niets, alles is goed!"
           - code:
           - feedback: "Er zit wel een foutje in..."
@@ -227,11 +227,11 @@ questions:
       question_text: "Heb je zin om naar level 2 te gaan?"
       code: "..."
       mp_choice_options:
-        - 1:
+        - 0:
           - option_text:  "Ja!"
           - code:
           - feedback: "Mooizo! Op naar level 2!"
-        - 2:
+        - 1:
           - option_text: "Nee"
           - code:
           - feedback: "Jammer..."
