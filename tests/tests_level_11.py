@@ -182,6 +182,27 @@ class TestsLevel11(unittest.TestCase):
       self.assertEqual(expected, result.code)
       print(f'{self.test_name()} level {level}')
 
+  def test_allow_space_before_colon(self):
+    max_level = 19
+    for level in range(self.level, max_level + 1):
+
+      code = textwrap.dedent("""\
+      if a is 1  :
+        print(a)
+      else:   
+        print('nee')""")
+
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      if str(a) == str('1'):
+        print(str(a))
+      else:
+        print('nee')""")
+
+      self.assertEqual(expected, result.code)
+      print(f'{self.test_name()} level {level}')
+
   def test_forloop(self):
     code = textwrap.dedent("""\
     for i in range(1, 10):

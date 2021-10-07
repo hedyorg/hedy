@@ -197,7 +197,7 @@ class TestsLevel9(unittest.TestCase):
       print(f'{self.test_name()} level {level}')
 
   def test_allow_space_before_colon(self):
-    max_level = 22
+    max_level = 10
     for level in range(self.level, max_level + 1):
 
       code = textwrap.dedent("""\
