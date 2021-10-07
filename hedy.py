@@ -506,6 +506,11 @@ class ConvertToPython_1(Transformer):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
 
+    def get_fresh_var(self, name):
+        while name in self.lookup:
+            name = '_' + name
+        return name
+
     def program(self, args):
         return '\n'.join([str(c) for c in args])
     def command(self, args):
@@ -779,9 +784,10 @@ class ConvertToPython_6(ConvertToPython_5):
         return ''.join(args)
 
     def repeat(self, args):
+        var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
         command = args[1]
-        return f"""for i in range(int({str(times)})):
+        return f"""for {var_name} in range(int({str(times)})):
 {indent(command)}"""
 
 @hedy_transpiler(level=7)
