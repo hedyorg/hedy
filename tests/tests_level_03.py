@@ -29,15 +29,15 @@ class TestsLevel3(unittest.TestCase):
     return inspect.stack()[1][3]
 
   def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual(str(context.exception), 'Invalid')
+    self.assertEqual('Invalid', context.exception.error_code)
 
   def test_transpile_print_level_2(self):
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.UnquotedTextException) as context:
       result = hedy.transpile("print felienne 123", self.level)
 
-    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
 
 
   def test_print(self):
@@ -245,10 +245,10 @@ class TestsLevel3(unittest.TestCase):
     kleur is ask Wat is je lievelingskleur'
     print 'Jouw favoriet is dus ' kleur""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.UnquotedTextException) as context:
       result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
+    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
 
   def test_use_slashes_at_end_of_print_allowed(self):
     code = "print 'Welcome to \\'"
@@ -267,10 +267,10 @@ class TestsLevel3(unittest.TestCase):
     code = textwrap.dedent("""\
       print hallo wereld'""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.UnquotedTextException) as context:
       result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Unquoted Text', context.exception.args[0])
+    self.assertEqual('Unquoted Text', context.exception.error_code)
 
 
   def test_transpile_missing_all_quotes(self):
@@ -281,10 +281,10 @@ class TestsLevel3(unittest.TestCase):
     
     for level in range(self.level, max_level+1):
 
-      with self.assertRaises(Exception) as context:
+      with self.assertRaises(hedy.UnderfinedVarException) as context:
         result = hedy.transpile(code, level)
 
-      self.assertEqual('Var Undefined', context.exception.args[0])
+      self.assertEqual('Var Undefined', context.exception.error_code)
 
       print(f'{self.test_name()} level {level}')
 
@@ -294,10 +294,10 @@ class TestsLevel3(unittest.TestCase):
       naam is Hedy
       print 'ik heet ' name""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.UnderfinedVarException) as context:
       result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Var Undefined', context.exception.args[0])
+    self.assertEqual('Var Undefined', context.exception.error_code)
     self.assertEqual('name', context.exception.arguments['name'])
 
 
@@ -306,10 +306,10 @@ class TestsLevel3(unittest.TestCase):
       is Foobar
       print welcome""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.ParseException) as context:
       result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Parse', context.exception.args[0])
+    self.assertEqual('Parse', context.exception.error_code)
 
   def test_two_spaces_after_print(self):
 
