@@ -404,7 +404,11 @@ function runPythonProgram(code, hasTurtle, cb) {
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
     // Give up after three seconds of execution, there might be an infinite loop.
-    execLimit: 3000
+    // This function can be customized later to yield different timeouts for different levels.
+    execLimit: (function () {
+      const level = window.State.level;
+      return 3000;
+    }) ()
   });
 
   return Sk.misceval.asyncToPromise(function () {
@@ -417,9 +421,7 @@ function runPythonProgram(code, hasTurtle, cb) {
     console.log(err);
     var errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
     if (errorMessage === 'Program exceeded run time limit.') {
-      // TODO: internationalize this text.
-      errorMessage = 'Your program takes too long to run.';
-      window.modal.alert (errorMessage);
+      errorMessage = ErrorMessages.Program_too_long;
     }
     throw new Error(errorMessage);
   });
