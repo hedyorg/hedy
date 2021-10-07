@@ -140,7 +140,7 @@ class ParseException(HedyException):
         self.keyword_found = keyword_found
         self.character_found = character_found
 
-class UnderfinedVarException(HedyException):
+class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
 
@@ -681,7 +681,7 @@ class ConvertToPython_3(ConvertToPython_2):
             return make_f_string(args, self.lookup)
         else:
             first_unquoted_var = unquoted_args[0]
-            raise UnderfinedVarException(name=first_unquoted_var)
+            raise UndefinedVarException(name=first_unquoted_var)
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
