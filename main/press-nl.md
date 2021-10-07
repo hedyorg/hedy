@@ -3,7 +3,7 @@ page_title: Pers — Hedy
 # Hedy in het nieuws
 
 Soms schrijven websites en kranten iets over Hedy, dat houden we op deze lijst bij:
-
+*  [Vives, CodeWeek Special oktober 2021](images/Vives-174-Codeweek "CodeWeek Special met Hedy")
 * [Opensource.com (Engels), april 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [IO Magazine (Engels), april 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
 * [Ingeniería De Software (Spaans), februari 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
