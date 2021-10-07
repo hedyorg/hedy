@@ -4,6 +4,7 @@ import sys
 import io
 import textwrap
 from contextlib import contextmanager
+import inspect
 
 
 @contextmanager
@@ -26,6 +27,8 @@ def run_code(parse_result):
 
 class TestsLevel7(unittest.TestCase):
   level = 7
+  def test_name(self):
+    return inspect.stack()[1][3]
   
   def test_print(self):
     code = textwrap.dedent("""\
@@ -267,21 +270,25 @@ class TestsLevel7(unittest.TestCase):
     self.assertEqual(expected, result.code)
 
   def test_allow_space_after_else_line(self):
-    code = textwrap.dedent("""\
-    if a is 1
-      print a
-    else   
-      print 'nee'""")
+    max_level = 8
+    for level in range(self.level, max_level + 1):
 
-    result = hedy.transpile(code, self.level)
+      code = textwrap.dedent("""\
+      if a is 1
+        print a
+      else   
+        print 'nee'""")
 
-    expected = textwrap.dedent("""\
-    if str('a') == str('1'):
-      print('a')
-    else:
-      print('nee')""")
+      result = hedy.transpile(code, level)
 
-    self.assertEqual(expected, result.code)
+      expected = textwrap.dedent("""\
+      if str('a') == str('1'):
+        print('a')
+      else:
+        print('nee')""")
+
+      self.assertEqual(expected, result.code)
+      print(f'{self.test_name()} level {level}')
 
 
   def test_addition_simple(self):
