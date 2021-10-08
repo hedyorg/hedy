@@ -3,6 +3,7 @@ import hedy
 import sys
 import io
 import textwrap
+import inspect
 from contextlib import contextmanager
 
 
@@ -26,6 +27,9 @@ def run_code(parse_result):
 class TestsLevel20(unittest.TestCase):
     maxDiff = None
     level = 20
+
+    def test_name(self):
+        return inspect.stack()[1][3]
 
     def test_print(self):
         result = hedy.transpile("print('ik heet')", self.level)
@@ -68,6 +72,46 @@ class TestsLevel20(unittest.TestCase):
         self.assertEqual(False, result.has_turtle)
 
         self.assertEqual("30", run_code(result))
+
+    def test_allow_space_after_else_line(self):
+        max_level = 22
+        for level in range(self.level, max_level + 1):
+            code = textwrap.dedent("""\
+        if a == 1:
+          print(a)
+        else:   
+          print('nee')""")
+
+            result = hedy.transpile(code, level)
+
+            expected = textwrap.dedent("""\
+        if str(a) == str('1'):
+          print(str(a))
+        else:
+          print('nee')""")
+
+            self.assertEqual(expected, result.code)
+            print(f'{self.test_name()} level {level}')
+
+    def test_allow_space_before_colon(self):
+        max_level = 22
+        for level in range(self.level, max_level + 1):
+            code = textwrap.dedent("""\
+        if a == 1  :
+          print(a)
+        else:   
+          print('nee')""")
+
+            result = hedy.transpile(code, level)
+
+            expected = textwrap.dedent("""\
+        if str(a) == str('1'):
+          print(str(a))
+        else:
+          print('nee')""")
+
+            self.assertEqual(expected, result.code)
+            print(f'{self.test_name()} level {level}')
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
