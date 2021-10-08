@@ -214,7 +214,7 @@ class AllAssignmentCommands(Transformer):
             # strings (vars remaining in the tree) are added directly
             if type(a) is str:
                 ask_assign.append(a)
-            #lists are seached further for string members (vars)
+            # lists are seached further for string members (vars)
             elif type(a) is list:
                 sub_a_ask_assign = self.filter_ask_assign(a)
                 for sub_a in sub_a_ask_assign:
@@ -228,7 +228,7 @@ class AllAssignmentCommands(Transformer):
       return [iterator] + self.filter_ask_assign(args)
 
     def input(self, args):
-        #return left side of the =
+        # return left side of the =
         return args[0]
 
     def ask(self, args):
@@ -261,7 +261,7 @@ class AllAssignmentCommands(Transformer):
         return args[0]
 
     def text(self, args):
-        #text never contains a variable
+        # text never contains a variable
         return None
 
     def var_access(self, args):
@@ -274,7 +274,7 @@ class AllAssignmentCommands(Transformer):
         return name
 
     def punctuation(self, args):
-        #is never a variable (but should be removed from the tree or it will be seen as one!)
+        # is never a variable (but should be removed from the tree or it will be seen as one!)
         return None
 
     def __default__(self, args, children, meta):
@@ -292,7 +292,7 @@ class AllAssignmentCommandsHashed(Transformer):
             # strings (vars remaining in the tree) are added directly
             if type(a) is str:
                 ask_assign.append(a)
-            #lists are seached further for string members (vars)
+            # lists are seached further for string members (vars)
             elif type(a) is list:
                 sub_a_ask_assign = self.filter_ask_assign(a)
                 for sub_a in sub_a_ask_assign:
@@ -306,7 +306,7 @@ class AllAssignmentCommandsHashed(Transformer):
       return [iterator_hashed] + self.filter_ask_assign(args)
 
     def input(self, args):
-        #return left side of the =
+        # return left side of the =
         return hash_var(args[0])
 
     def ask(self, args):
@@ -339,7 +339,7 @@ class AllAssignmentCommandsHashed(Transformer):
         return hash_var(args[0])
 
     def text(self, args):
-        #text never contains a variable
+        # text never contains a variable
         return None
 
     def var_access(self, args):
@@ -352,7 +352,7 @@ class AllAssignmentCommandsHashed(Transformer):
         return name
 
     def punctuation(self, args):
-        #is never a variable (but should be removed from the tree or it will be seen as one!)
+        # is never a variable (but should be removed from the tree or it will be seen as one!)
         return None
 
     def __default__(self, args, children, meta):
