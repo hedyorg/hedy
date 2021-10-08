@@ -65,6 +65,23 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_allow_space_after_else_line(self):
+    #this code has a space at the end of line 2
+    code = textwrap.dedent("""\
+    a is 2
+    if a is 1 print a 
+    else print 'nee'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    a = '2'
+    if a == '1':
+      print(f'{a}')
+    else:
+      print(f'nee')""")
+
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
