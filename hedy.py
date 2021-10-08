@@ -232,7 +232,7 @@ class AllAssignmentCommands(Transformer):
         return args[0]
 
     def ask(self, args):
-        #try is needed cause in level 1 sk has not variable in front
+        # try is needed cause in level 1 ask has not variable in front
         try:
             return args[0]
         except:
@@ -284,7 +284,7 @@ class AllAssignmentCommandsHashed(Transformer):
     # returns a list of variable and list access
     # so these can be excluded when printing
 
-    #this version returns all hashe var names
+    # this version returns all hashed var names
 
     def filter_ask_assign(self, args):
         ask_assign = []
@@ -310,7 +310,7 @@ class AllAssignmentCommandsHashed(Transformer):
         return hash_var(args[0])
 
     def ask(self, args):
-        #try is needed cause in level 1 sk has not variable in front
+        # try is needed cause in level 1 ask has not variable in front
         try:
             return hash_var(args[0])
         except:
