@@ -1,10 +1,11 @@
 import os
+from website.yaml_file import YamlFile
 import bcrypt
 import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring, load_yaml_uncached
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
 from functools import wraps
 from config import config
@@ -55,7 +56,7 @@ def is_teacher (request):
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
 TRANSLATIONS = hedyweb.Translations ()
-EMAILS = load_yaml_uncached ('website/emails.yaml')
+EMAILS = YamlFile.for_file('website/emails.yaml')
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login (f):

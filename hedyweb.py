@@ -1,6 +1,5 @@
 import collections
-import os
-
+from website.yaml_file import YamlFile
 import attr
 import glob
 from os import path
@@ -16,18 +15,12 @@ from config import config
 
 class Translations:
   def __init__(self):
-    self._data = None
+    self.data = {}
 
-  @property
-  def data(self):
-    # In debug mode, always reload all translations
-    if self._data is None or utils.is_debug_mode():
-      translations = glob.glob('coursedata/texts/*.yaml')
-      self._data = {}
-      for trans_file in translations:
-        lang = path.splitext(path.basename(trans_file))[0]
-        self._data[lang] = courses.load_yaml(trans_file)
-    return self._data
+    translations = glob.glob('coursedata/texts/*.yaml')
+    for trans_file in translations:
+      lang = path.splitext(path.basename(trans_file))[0]
+      self.data[lang] = YamlFile.for_file(trans_file)
 
   def get_translations(self, language, section):
     # Merge with English when lacking translations

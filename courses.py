@@ -1,18 +1,12 @@
-import json
 import copy
 import attr
-from utils import load_yaml
-
-import docs
+from website.yaml_file import YamlFile
 
 
 class LevelDefaults:
   def __init__(self, language):
     self.language = language
-
-  @property
-  def levels(self):
-    return load_yaml(f'coursedata/level-defaults/{self.language}.yaml')
+    self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
   def get_defaults(self, level, sub=0):
     """Return the level defaults for a given level number.
@@ -36,21 +30,21 @@ class Course:
     self.language = language
     self.defaults = defaults
     self._validated = False
-    custom = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('custom')
-    self.custom = False if custom is None else custom
-    adventures = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('adventures')
-    self.adventures = False if adventures is None else adventures
+    self.course_file = YamlFile.for_file(f'coursedata/course/{self.course_name}/{self.language}.yaml')
+    self.custom = self.course_file.get('custom', False)
+    self.adventures = self.course_file.get('adventures', False)
 
   @property
   def course(self):
-    ret = load_yaml(f'coursedata/course/{self.course_name}/{self.language}.yaml').get('course')
+    ret = self.course_file.get('course')
 
     if not ret:
       raise RuntimeError(f'File should have top-level "course" field: coursedata/course/{self.course_name}/{self.language}.yaml')
 
     if not self._validated:
       self._validated = True
-      self.validate_course()
+      self.validate_course(ret)
+
     return ret
 
   def max_level(self):
@@ -69,12 +63,12 @@ class Course:
 
     return DefaultValues(**default_values)
 
-  def validate_course(self):
+  def validate_course(self, course):
     """Check that the 'level' and 'step' fields have the right number in the entire course.
 
     This information is redundant, but it helps the human locate their way in the YAML file.
     """
-    for level_i, level in enumerate(self.course):
+    for level_i, level in enumerate(course):
       expected_value = str(level_i + 1)
       actual_value = level.get('level')
 
