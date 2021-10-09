@@ -22,6 +22,7 @@ from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
+import textwrap
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
@@ -272,6 +273,9 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
 
+    # true if kid enabled the read aloud option
+    read_aloud = body.get('read_aloud', False)
+
     response = {}
     username = current_user(request) ['username'] or None
 
@@ -286,7 +290,18 @@ def parse():
 
         response['has_turtle'] = has_turtle
         if has_turtle:
-            response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+            response["Code"] = textwrap.dedent("""\
+            # coding=utf8
+            import random, time, turtle
+            t = turtle.Turtle()
+            t.hideturtle()
+            t.speed(0)
+            t.penup()
+            t.goto(50,100)
+            t.showturtle()
+            t.pendown()
+            t.speed(3)
+            """) + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
 
@@ -314,6 +329,7 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
+        'read_aloud': read_aloud,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })

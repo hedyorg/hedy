@@ -176,6 +176,10 @@ class CodePlaceholdersPresentException(HedyException):
     def __init__(self):
         super().__init__('Has Blanks')
 
+class IndentationException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unexpected Indentation', **arguments)
+
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
@@ -1280,7 +1284,9 @@ def preprocess_blocks(code):
     current_number_of_indents = 0
     previous_number_of_indents = 0
     indent_size = None #we don't fix indent size but the first encounter sets it
+    line_number = 0
     for line in lines:
+        line_number += 1
         leading_spaces = find_indent_length(line)
 
         #first encounter sets indent size for this program
@@ -1290,6 +1296,9 @@ def preprocess_blocks(code):
         #calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
+
+        if current_number_of_indents - previous_number_of_indents > 1:
+            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in

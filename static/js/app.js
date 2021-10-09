@@ -160,6 +160,7 @@ function runit(level, lang, cb) {
         sublevel: window.State.sublevel ? window.State.sublevel : undefined,
         code: code,
         lang: lang,
+        read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
