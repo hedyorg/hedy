@@ -323,6 +323,21 @@ class TestsLevel7(unittest.TestCase):
 
 # programs with issues to see if we catch them properly
 
+  def test_issue_902(self):
+    code = textwrap.dedent("""\
+    print 'kassabon'
+    prijs is 0
+    repeat 7 times
+      ingredient is ask 'wat wil je kopen?'
+      if ingredient is appel
+          prijs is prijs + 1
+    print 'Dat is in totaal ' prijs ' euro.'""")
+
+    with self.assertRaises(hedy.IndentationException) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Unexpected Indentation', context.exception.error_code)
+
+
   def test_issue_396(self):
     code = textwrap.dedent("""\
     repeat 5 times
