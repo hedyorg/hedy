@@ -119,7 +119,8 @@ class TestsLevel8_1(unittest.TestCase):
     expected = textwrap.dedent("""\
     a = '2'
     a = '3'
-    for a in range(int(2), int(4)+1):
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
@@ -151,7 +152,8 @@ class TestsLevel8_1(unittest.TestCase):
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    for i in range(int(1), int(10)+1):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
 

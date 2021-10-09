@@ -129,7 +129,8 @@ else:
         expected = textwrap.dedent("""\
     a = '2'
     a = '3'
-    for a in range(int(2), int(4)+1):
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
@@ -161,7 +162,8 @@ else:
       print(i)
     print('wie niet weg is is gezien')""")
         expected = textwrap.dedent("""\
-    for i in range(int(1), int(10)+1):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
@@ -175,8 +177,10 @@ else:
       for j in range(1,4):
         print('rondje: ' i ' tel: ' j)""")
         expected = textwrap.dedent("""\
-    for i in range(int(1), int(3)+1):
-      for j in range(int(1), int(4)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
+      step = 1 if int(1) < int(4) else -1
+      for j in range(int(1), int(4) + step, step):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
         result = hedy.transpile(code, self.level)
@@ -210,7 +214,8 @@ else:
         expected = textwrap.dedent("""\
     leeftijd = input('Hoe oud ben jij?')
     print('Dus jij hebt zo veel verjaardagen gehad:')
-    for i in range(int(0), int(leeftijd)+1):
+    step = 1 if int(0) < int(leeftijd) else -1
+    for i in range(int(0), int(leeftijd) + step, step):
       print(str(i))""")
 
         result = hedy.transpile(code, self.level)
@@ -272,7 +277,8 @@ else:
     score = ['100', '300', '500']
     highscore=random.choice(score)
     print('De highscore is: '+str(highscore))
-    for i in range(int(1), int(3)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
       scorenu=score[i-1]
       print('Score is nu '+str(scorenu))
       if str(highscore) == str('score[i]'):
@@ -294,7 +300,8 @@ else:
         i is 10""")
 
         expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
+    step = 1 if int(0) < int(10) else -1
+    for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
         print('Dat is fout!')
@@ -595,7 +602,8 @@ else:
         print(fruit[i])""")
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
-    for i in range(int(1), int(len(fruit))+1):
+    step = 1 if int(1) < int(len(fruit)) else -1
+    for i in range(int(1), int(len(fruit)) + step, step):
       print(str(fruit[i-1]))""")
 
         result = hedy.transpile(code, self.level)
@@ -611,7 +619,8 @@ else:
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
     print('lengte van de lijst is'+str(len(fruit)))
-    for i in range(int(1), int(3)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
       print(str(fruit[i-1]))""")
 
         result = hedy.transpile(code, self.level)

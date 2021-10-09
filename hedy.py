@@ -844,9 +844,11 @@ class ConvertToPython_7(ConvertToPython_6):
 class ConvertToPython_8(ConvertToPython_7):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [indent(x) for x in args[3:]]
-        return "for " + args[0] + " in range(" + "int(" + args[1] + ")" + ", " + "int(" + args[2] + ")+1" + "):\n"+"\n".join(all_lines)
-
+        body = "\n".join([indent(x) for x in args[3:]])
+        stepvar_name = self.get_fresh_var('step')
+        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
+for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+{body}"""
 @hedy_transpiler(level=9)
 @hedy_transpiler(level=10)
 class ConvertToPython_9_10(ConvertToPython_8):
