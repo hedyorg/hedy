@@ -2,7 +2,6 @@ from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
 from lark import Tree, Transformer, visitors
 from os import path
-import sys
 import utils
 from collections import namedtuple
 import hashlib
@@ -175,6 +174,10 @@ class LonelyEchoException(HedyException):
 class CodePlaceholdersPresentException(HedyException):
     def __init__(self):
         super().__init__('Has Blanks')
+
+class IndentationException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unexpected Indentation', **arguments)
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -529,9 +532,12 @@ class ConvertToPython_1(Transformer):
 
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
+
     def ask(self, args):
+
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
+
     def forward(self,args):
         # when a not-number is given, we simply use 50 as default
         try:
@@ -1089,68 +1095,29 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     return '\n'.join(merged_grammar)
 
 
-def create_grammar(level, sub):
+def create_grammar(level):
+    # start with creating the grammar for level 1
+    result = get_full_grammar_for_level(1)
+
+    # then keep merging new grammars in
+    for i in range(2, level+1):
+        grammar_text_i = get_additional_rules_for_level(i)
+        result = merge_grammars(result, grammar_text_i)
+
+    # ready? Save to file to ease debugging
+    # this could also be done on each merge for performance reasons
+    save_total_grammar_file(level, result)
+
+    return result
+
+def save_total_grammar_file(level, grammar):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-
-    # Load Lark grammars relative to directory of current file
-    script_dir = path.abspath(path.dirname(__file__))
-
-    # we start with creating the grammar for level 1
-    grammar_text_1 = get_full_grammar_for_level(1)
-
-    if sub:
-        #grep
-        if level == 1:
-            # this is a level 1 sublevel, so get the sublevel grammar and return
-            grammar_text_sub = get_additional_rules_for_level(1, sub)
-            grammar_text = merge_grammars(grammar_text_1, grammar_text_sub)
-            return grammar_text
-
-        grammar_text_2 = get_additional_rules_for_level(2)
-
-        #start at 1 and keep merging new grammars in
-        new = merge_grammars(grammar_text_1, grammar_text_2)
-
-        for i in range(3, level+1):
-            grammar_text_i = get_additional_rules_for_level(i)
-            new = merge_grammars(new, grammar_text_i)
-
-        # get grammar for the sublevel and merge it
-        grammar_text_sub = get_additional_rules_for_level(level, sub)
-        new = merge_grammars(new, grammar_text_sub)
-
-        # ready? Save to file to ease debugging
-        # this could also be done on each merge for performance reasons
-        filename = "level" + str(level) + "-" + str(sub) + "-Total.lark"
-        loc = path.join(script_dir, "grammars-Total", filename)
-        file = open(loc, "w", encoding="utf-8")
-        file.write(new)
-        file.close()
-    else:
-        #grep
-        if level == 1:
-            grammar_text = get_full_grammar_for_level(level)
-            return grammar_text
-
-        grammar_text_2 = get_additional_rules_for_level(2)
-
-        #start at 1 and keep merging new grammars in
-        new = merge_grammars(grammar_text_1, grammar_text_2)
-
-        for i in range(3, level+1):
-            grammar_text_i = get_additional_rules_for_level(i)
-            new = merge_grammars(new, grammar_text_i)
-
-        # ready? Save to file to ease debugging
-        # this could also be done on each merge for performance reasons
-        filename = "level" + str(level) + "-Total.lark"
-        loc = path.join(script_dir, "grammars-Total", filename)
-        file = open(loc, "w", encoding="utf-8")
-        file.write(new)
-        file.close()
-
-    return new
+    filename = "level" + str(level) + "-Total.lark"
+    loc = path.join(script_dir, "grammars-Total", filename)
+    file = open(loc, "w", encoding="utf-8")
+    file.write(grammar)
+    file.close()
 
 def get_additional_rules_for_level(level, sub = 0):
     script_dir = path.abspath(path.dirname(__file__))
@@ -1172,25 +1139,25 @@ def get_full_grammar_for_level(level):
 PARSER_CACHE = {}
 
 
-def get_parser(level, sub):
+def get_parser(level):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level) + "." + str(sub)
+    key = str(level)
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    grammar = create_grammar(level, sub)
+    grammar = create_grammar(level)
     ret = Lark(grammar, regex=True)
     PARSER_CACHE[key] = ret
     return ret
 
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
-def transpile(input_string, level, sub = 0):
+def transpile(input_string, level):
     try:
-        transpile_result = transpile_inner(input_string, level, sub)
+        transpile_result = transpile_inner(input_string, level)
         return transpile_result
     except ParseException as ex:
         # This is the 'fall back' transpilation
@@ -1198,10 +1165,10 @@ def transpile(input_string, level, sub = 0):
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
 
         #try 1 level lower
-        if level > 1 and sub == 0:
+        if level > 1:
             try:
                 new_level = level - 1
-                result = transpile_inner(input_string, new_level, sub)
+                result = transpile_inner(input_string, new_level)
             except (LarkError, HedyException) as innerE:
                 # Parse at `level - 1` failed as well, just re-raise original error
                 raise ex
@@ -1280,7 +1247,9 @@ def preprocess_blocks(code):
     current_number_of_indents = 0
     previous_number_of_indents = 0
     indent_size = None #we don't fix indent size but the first encounter sets it
+    line_number = 0
     for line in lines:
+        line_number += 1
         leading_spaces = find_indent_length(line)
 
         #first encounter sets indent size for this program
@@ -1290,6 +1259,9 @@ def preprocess_blocks(code):
         #calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
+
+        if current_number_of_indents - previous_number_of_indents > 1:
+            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
@@ -1315,7 +1287,7 @@ def preprocess_blocks(code):
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
-def transpile_inner(input_string, level, sub=0):
+def transpile_inner(input_string, level):
     number_of_lines = input_string.count('\n')
 
     #parser is not made for huge programs!
@@ -1325,7 +1297,7 @@ def transpile_inner(input_string, level, sub=0):
     input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = get_parser(level, sub)
+    parser = get_parser(level)
 
     if contains_blanks(input_string):
         raise CodePlaceholdersPresentException()
@@ -1343,9 +1315,13 @@ def transpile_inner(input_string, level, sub=0):
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
-        #also add hashes to list
+        # also add hashes to list
+        # note that we do not (and cannot) hash the var names only, we also need to be able to process
+        # random.choice(প্রাণী)
         hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
 
+        if lookup_table != hashed_lookups:
+            print(lookup_table, hashed_lookups)
         lookup_table += hashed_lookups
 
     except UnexpectedCharacters as e:
@@ -1375,7 +1351,7 @@ def transpile_inner(input_string, level, sub=0):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level, sub)
+                result = transpile_inner(fixed_code, level)
             raise InvalidSpaceException(level, line, result.code)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here

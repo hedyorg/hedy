@@ -4,7 +4,7 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 
 # This is expected to run from the repo root
-cd $scriptdir/..
+cd $scriptdir/../..
 
 pids=""
 trap 'kill $pids' EXIT

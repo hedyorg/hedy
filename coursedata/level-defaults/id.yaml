@@ -18,10 +18,10 @@
         example: 'Contoh: ask Apa warna favoritmu?'
         demo_code: ask Apa warna favoritmu?
     -   explanation: Ulangi sesuatu dengan `echo`
-        example: 'Contoh: echo maka warna favoritmu adalah'
+        example: 'Contoh: echo maka warna favoritmu adalah '
         demo_code: |-
             ask Apa warna favoritmu?
-            echo maka warna favoritmu adalah
+            echo maka warna favoritmu adalah 
 2:
     intro_text: |-
         Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `is`.
@@ -126,6 +126,34 @@
         demo_code: |-
             warna is ask 'Apa warna favorit kamu?'
             if warna is hijau print 'cantik!' else print 'meh!'
+5:
+    start_code: print '5 kali 5 adalah ' 5 * 5
+    intro_text: |-
+        `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
+        Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
+
+        Pada level 6, kode baru sudah ditambahkan untuk perhitungan matematika.
+
+        Penambahan itu mudah, kamu menuliskannya persis seperti di matematika: `5 + 5` sebagai contoh. Pengurangan juga mudah dituliskan, seperti `5 - 5`.
+
+        Perkalian sedikit berbeda, karena tidak ada simbol perkalian di keyboard kita. Cobalah cari, ini beneran tidak ada!
+        Karenanya kita melakukan perkalian dengan tanda bintang diatas tombol '8': `5 * 5`. Baca itu sebagai 5 kali 5 dan kamu akan lebih mudah mengingatnya.
+
+        ## Contoh kode Hedy
+        ```
+        print '5 tambah 5 adalah ' 5 + 5
+        print '5 kurang 5 adalah ' 5 - 5
+        print '5 kali 5 adalah ' 5 * 5
+        ```
+    commands:
+    -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
+        example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
+        demo_code: print '5 kali 5 adalah ' 5 * 5
+    -   explanation: Tanyakan hasil suatu perhitungan dan cek apakah hasilnya benar
+        example: "Contoh: jawaban is ask 'Apa hasil dari 10 tambah 10?'"
+        demo_code: |-
+            jawaban is ask 'Apa hasil dari 10 tambah 10?'
+            if jawaban is 20 print 'Yeah!' else print 'Ups'
 6:
     start_code: repeat 3 times print 'Hedy itu menyenangkan!'
     intro_text: |-
@@ -155,34 +183,6 @@
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
             if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
-5:
-    start_code: print '5 kali 5 adalah ' 5 * 5
-    intro_text: |-
-        `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
-        Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
-
-        Pada level 6, kode baru sudah ditambahkan untuk perhitungan matematika.
-
-        Penambahan itu mudah, kamu menuliskannya persis seperti di matematika: `5 + 5` sebagai contoh. Pengurangan juga mudah dituliskan, seperti `5 - 5`.
-
-        Perkalian sedikit berbeda, karena tidak ada simbol perkalian di keyboard kita. Cobalah cari, ini beneran tidak ada!
-        Karenanya kita melakukan perkalian dengan tanda bintang diatas tombol '8': `5 * 5`. Baca itu sebagai 5 kali 5 dan kamu akan lebih mudah mengingatnya.
-
-        ## Contoh kode Hedy
-        ```
-        print '5 tambah 5 adalah ' 5 + 5
-        print '5 kurang 5 adalah ' 5 - 5
-        print '5 kali 5 adalah ' 5 * 5
-        ```
-    commands:
-    -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
-        example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
-        demo_code: print '5 kali 5 adalah ' 5 * 5
-    -   explanation: Tanyakan hasil suatu perhitungan dan cek apakah hasilnya benar
-        example: "Contoh: jawaban is ask 'Apa hasil dari 10 tambah 10?'"
-        demo_code: |-
-            jawaban is ask 'Apa hasil dari 10 tambah 10?'
-            if jawaban is 20 print 'Yeah!' else print 'Ups'
 7:
     start_code: |-
         repeat 5 times

@@ -1,5 +1,6 @@
 import os
 import re
+from website.yaml_file import YamlFile
 import utils
 import hedy
 import unittest
@@ -36,7 +37,7 @@ class TestsAdventurePrograms(unittest.TestCase):
 
         for f in files:
             f = os.path.join(path, f)
-            yaml = utils.load_yaml_uncached (f)
+            yaml = YamlFile.for_file(f)
 
             for adventure in yaml['adventures'].values ():
                 for level_number in adventure['levels']:
