@@ -88,7 +88,7 @@
 3:
     start_code: "print 'hallo wereld'"
     intro_text: |
-        In level 3 zijn print `ask` en `print` nu anders.
+        In level 3 zijn `ask` en `print` nu anders.
 
         Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
 
@@ -299,7 +299,7 @@
         for i in range 1 to 10:
             print i
         print 'Wie niet weg is is gezien'
-    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel er voor zetten."
+    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
     commands:
     -   name: "for met :"
         explanation: "Bij `for` moet je dus een `:` er achter zetten!"
@@ -318,7 +318,7 @@
             else:
                 print 'De kleur is niet groen'
     -   name: "(Optioneel) elif"
-        explanation: "Verder is er een nieuw commando die je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
+        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
         example: "elif a is 5:"
         demo_code: |-
             a is 2
@@ -449,7 +449,7 @@
             else:
                 print('Minimaal 1 antwoord is fout!')
     -   name: "Or"
-        explanation: "`Or` is dus of. Minimaal 1 van de twee tussen de `or` moet goed zijn. Allebei goed mag ook."
+        explanation: "`Or` is dus of. Minimaal 1 van de 2 tussen de `or` moet goed zijn. Allebei goed mag ook."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
             antwoord1 is input('hoeveel is 3+2?')
@@ -462,7 +462,7 @@
     start_code: |-
         # Dit is een programma die een aantal sommen gaat vragen
         for i in range(1, 10):
-            # We gaan de van de tafel van 5 vragen
+            # We gaan de tafel van 5 vragen
             antwoord is input('Hoeveel is ' i ' keer 5?')
             # We kijken of de som gelijk is aan het antwoord
             goed_antwoord is i * 5
@@ -556,7 +556,7 @@
         fruit is ['appel', 'banaan', 'kers']
         for i in range(1, 3):
             print(fruit[i])
-    intro_text: "We kunnen ook alles van de lijst bekijken. Omdat er drie dingen in zitten, pakken we de for loop van 1 tot 3. Nu printen we alles uit wat in de loop zit."
+    intro_text: "We kunnen ook alles van de lijst bekijken. Omdat er drie dingen in zitten, pakken we de for loop van 1 tot 3. Nu printen we alles uit wat in de lijst zit."
     commands:
     -   name: "Lengte van een lijst"
         explanation: "Met `length` kan je zien hoe groot een lijst is. Hier is length bijvoorbeeld 3 want we hebben 3 dingen in de lijst"
