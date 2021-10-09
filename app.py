@@ -273,7 +273,7 @@ def parse():
     lang = body.get('lang', requested_lang())
 
     # true if kid enabled the read aloud option
-    read_aloud = body.read_aloud
+    read_aloud = body.get('read_aloud', False)
 
     response = {}
     username = current_user(request) ['username'] or None
