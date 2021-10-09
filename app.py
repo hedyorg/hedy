@@ -1,4 +1,5 @@
 import sys
+from website.yaml_file import YamlFile
 if (sys.version_info.major < 3 or sys.version_info.minor < 6):
     print ('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join ([str (sys.version_info.major), str (sys.version_info.minor), str (sys.version_info.micro)]))
     quit ()
@@ -19,7 +20,7 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
+from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
 
@@ -73,7 +74,7 @@ DATABASE = database.Database()
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys ():
-        adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
+        adventures[lang] = YamlFile.for_file(f'coursedata/adventures/{lang}.yaml')
     return adventures
 
 
@@ -467,6 +468,9 @@ def get_quiz_start(level):
                                auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
 
+def quiz_data_file_for(level):
+    return YamlFile.for_file(f'coursedata/quiz/quiz_questions_lvl{level}.yaml')
+
 # Quiz mode
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
@@ -475,9 +479,8 @@ def get_quiz(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
-        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
-        else:
+        quiz_data = quiz_data_file_for(level_source)
+        if not quiz_data.exists():
             return 'No quiz yaml file found for this level', 404
 
         # set globals
@@ -526,9 +529,8 @@ def submit_answer(level_source, question_nr, attempt):
         option = request.form["radio_option"]
 
         # Reading yaml file
-        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
-        else:
+        quiz_data = quiz_data_file_for(level_source)
+        if not quiz_data.exists():
             return 'No quiz yaml file found for this level', 404
 
         # Convert question_nr to an integer
@@ -1050,13 +1052,13 @@ def share_unshare_program(user):
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
     # FIXME: right now loading source file on demand. We might need to cache this...
-    source_adventures = load_yaml(f'coursedata/adventures/{source}.yaml')
-    source_levels = load_yaml(f'coursedata/level-defaults/{source}.yaml')
-    source_texts = load_yaml(f'coursedata/texts/{source}.yaml')
+    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml')
+    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml')
+    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml')
 
-    target_adventures = load_yaml(f'coursedata/adventures/{target}.yaml')
-    target_levels = load_yaml(f'coursedata/level-defaults/{target}.yaml')
-    target_texts = load_yaml(f'coursedata/texts/{target}.yaml')
+    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml')
+    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml')
+    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml')
 
     files = []
 
