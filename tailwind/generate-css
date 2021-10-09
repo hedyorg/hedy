@@ -1,8 +1,0 @@
-#!/bin/bash
-set -eu
-scriptdir=$(cd $(dirname $0) && pwd)
-cd $scriptdir
-
-npx tailwindcss build styles.css -o ../static/css/generated.css
-npx minify ../static/css/generated.css > ../static/css/generated.css.min
-mv ../static/css/generated.css{.min,}
