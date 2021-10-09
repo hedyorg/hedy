@@ -271,6 +271,9 @@ def parse():
     # reason.
     lang = body.get('lang', requested_lang())
 
+    # true if kid enabled the read aloud option
+    read_aloud = body.read_aloud
+
     response = {}
     username = current_user(request) ['username'] or None
 
@@ -313,6 +316,7 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
+        'read_aloud': read_aloud,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
