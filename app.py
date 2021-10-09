@@ -21,6 +21,7 @@ from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
 from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
+import textwrap
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
@@ -288,7 +289,18 @@ def parse():
 
         response['has_turtle'] = has_turtle
         if has_turtle:
-            response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+            response["Code"] = textwrap.dedent("""\
+            # coding=utf8
+            import random, time, turtle
+            t = turtle.Turtle()
+            t.hideturtle()
+            t.speed(0)
+            t.penup()
+            t.goto(50,100)
+            t.showturtle()
+            t.pendown()
+            t.speed(3)
+            """) + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
 
