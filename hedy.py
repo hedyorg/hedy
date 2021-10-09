@@ -532,9 +532,12 @@ class ConvertToPython_1(Transformer):
 
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
+
     def ask(self, args):
+
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
+
     def forward(self,args):
         # when a not-number is given, we simply use 50 as default
         try:
@@ -1312,9 +1315,13 @@ def transpile_inner(input_string, level):
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
-        #also add hashes to list
+        # also add hashes to list
+        # note that we do not (and cannot) hash the var names only, we also need to be able to process
+        # random.choice(প্রাণী)
         hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
 
+        if lookup_table != hashed_lookups:
+            print(lookup_table, hashed_lookups)
         lookup_table += hashed_lookups
 
     except UnexpectedCharacters as e:
