@@ -259,14 +259,11 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
-    if 'sublevel' in body and not isinstance(body ['sublevel'], int):
-        return "If present, body.sublevel must be an integer", 400
     if 'adventure_name' in body and not isinstance(body ['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
     level = int(body ['level'])
-    sublevel = body.get ('sublevel') or 0
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
@@ -284,7 +281,7 @@ def parse():
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
         with querylog.log_time('transpile'):
-            transpile_result = hedy.transpile(code, level, sublevel)
+            transpile_result = hedy.transpile(code, level)
             python_code = transpile_result.code
             has_turtle = transpile_result.has_turtle
 
@@ -663,12 +660,7 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    # Sublevel requested
-    if re.match ('\d+-\d+', level):
-        pass
-        # If level has a dash, we keep it as a string
-    # Normal level requested
-    elif re.match ('\d', level):
+    if re.match('\d', level):
         try:
             g.level = level = int(level)
         except:

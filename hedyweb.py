@@ -33,12 +33,7 @@ class Translations:
 
 def render_code_editor_with_tabs(request, course, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
 
-  sublevel = None
-  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
-    sublevel     = int (level_number [level_number.index ('-') + 1])
-    level_number = int (level_number [0:level_number.index ('-')])
-
-  defaults = course.get_default_text(level_number, sublevel)
+  defaults = course.get_default_text(level_number)
 
   if not defaults:
     abort(404)
@@ -51,7 +46,6 @@ def render_code_editor_with_tabs(request, course, level_number, menu, translatio
   # Meta stuff
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
-  arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
   arguments_dict['lang'] = course.language
   arguments_dict['level'] = defaults.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
