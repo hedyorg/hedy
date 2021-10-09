@@ -1,3 +1,6 @@
+import { modal } from './modal';
+import { auth } from './auth';
+
 /**
  * Activate tabs
  *
@@ -17,7 +20,7 @@
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
-  function switchToTab(tabName) {
+  function switchToTab(tabName: string) {
     // Find the tab that leads to this selection, and its siblings
     const tab = $('*[data-tab="' + tabName + '"]');
     const allTabs = tab.siblings('*[data-tab]');
@@ -33,8 +36,8 @@ $(function() {
     allTargets.addClass('hidden');
     target.removeClass('hidden');
 
-    const adventures = {};
-    window.State.adventures.map (function (adventure) {
+    const adventures: Record<string, Adventure> = {};
+    window.State.adventures?.map (function(adventure: Adventure) {
       adventures [adventure.short_name] = adventure;
     });
 
@@ -48,25 +51,25 @@ $(function() {
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);
-      window.editor.setValue (window.State.loaded_program.code);
+      window.editor?.setValue (window.State.loaded_program.code);
     }
     // If there's a loaded program for the adventure or level now selected, use it.
-    else if (adventures [tabName] && adventures[tabName].loaded_program) {
-      $ ('#program_name').val (adventures [tabName].loaded_program.name);
-      window.editor.setValue (adventures [tabName].loaded_program.code);
+    else if (adventures[tabName]?.loaded_program) {
+      $ ('#program_name').val (adventures[tabName].loaded_program!.name);
+      window.editor?.setValue (adventures[tabName].loaded_program!.code);
     }
     // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
-    else if (tabName === 'level') {
-      $ ('#program_name').val (window.State.default_program_name);
-      window.editor.setValue (window.State.default_program);
+    else if (tabName === 'level' && window.State.default_program_name && window.State.default_program) {
+      $ ('#program_name').val(window.State.default_program_name);
+      window.editor?.setValue(window.State.default_program);
     }
     else {
       $ ('#program_name').val (adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
-      window.editor.setValue (adventures [tabName].start_code);
+      window.editor?.setValue (adventures [tabName].start_code);
     }
 
     window.State.adventure_name = tabName === 'level' ? undefined : tabName;
-    window.editor.clearSelection();
+    window.editor?.clearSelection();
     // If user wants to override the unsaved program, reset unsaved_changes
     window.State.unsaved_changes = false;
   }
@@ -78,12 +81,12 @@ $(function() {
     e.preventDefault ();
 
     // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) window.modal.confirm(window.auth.texts.unsaved_changes, () => switchToTab(tabName));
+    if (window.State.unsaved_changes) modal.confirm(auth.texts['unsaved_changes'], () => switchToTab(tabName));
     else switchToTab(tabName);
 
     // Do a 'replaceState' to add a '#anchor' to the URL
     const hashFragment = tabName !== 'level' ? tabName : '';
-    if (window.history) { window.history.replaceState(null, null, '#' + hashFragment); }
+    if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
   });
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
@@ -99,7 +102,3 @@ $(function() {
     }
   }
 });
-
-window.load_quiz = function (level) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
-}

@@ -1,0 +1,24 @@
+#!/bin/bash
+set -eu
+# Recompile the TypeScript and generate a minified JavaScript bundle using esbuild.
+#
+# We commit the generated JavaScript bundle to minimize the burden on contributors--
+# they don't need to install any of the NPM/esbuild tools and remember to run build
+# scripts if they don't need to work on the browser code.
+#
+# We minimize the generated bundle so that contributors aren't tempted to accidentally
+# edit straight in the JavaScript.
+root=$(cd $(PWD)/../.. && pwd)
+
+# esbuild does not TypeCheck, it just bundles. So run TSC (without emitting)
+# to validate that everything compiles properly, then run esbuild to generate
+# the bundle.
+npx tsc
+
+npx esbuild static/js/index.ts \
+    --bundle \
+    --sourcemap \
+    --minify \
+    --target=es2017 \
+    --global-name=hedyBrowser \
+    --outfile=static/js/appbundle.js

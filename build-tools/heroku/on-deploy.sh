@@ -23,3 +23,6 @@ cd $scriptdir
 
 echo '-----> Doing a Tailwind build'
 tailwind/generate-css
+
+echo '-----> Compiling TypeScript'
+./generate-typescript

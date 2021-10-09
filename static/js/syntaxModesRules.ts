@@ -1,10 +1,18 @@
+interface Rule {
+  readonly regex: string;
+  readonly token: string | string[];
+  readonly next?: string;
+}
+
+type Rules = Record<string, Rule[]>;
+
 // Basic highlighter rules we can use in most levels
 // - Highlighters always begin in the 'start' state, and see line by line (no newlines!)
 // - We try to recognize as many commands and tokens as possible in 'start', only deviating
 //   to another state to avoid highlighting something.
 // - 'expression_eol' is the state to contain arbitrary values that will always eat the rest of the line
 // - 'gobble' is the state that will eat whatever is left in the line and go back to 'start'
-function baseRules() {
+function baseRules(): Rules {
   return {
     // gobble is a state in which we can read anything (.*), used after print
     gobble: [
@@ -309,7 +317,7 @@ const LEVELS = [
  *
  * 2nd one comes first to have the right precedence.
  */
-function finishLine(rules) {
+function finishLine(rules: Rule[]) {
   const ret = [];
   for (const rule of rules) {
     if (rule.regex) {
@@ -333,8 +341,8 @@ function finishLine(rules) {
  * - recognize(['start', 'expression'], { regex, token, next })
  * - recognize('start', [{ ... }, {...}])
  */
-function recognize(stateOrStates, ruleOrRules) {
-  return (rules) => {
+function recognize(stateOrStates: string | string[], ruleOrRules: Rule | Rule[]) {
+  return (rules: Rules) => {
     if (!Array.isArray(stateOrStates)) {
       stateOrStates = [stateOrStates];
     }
@@ -359,8 +367,8 @@ function recognize(stateOrStates, ruleOrRules) {
  *
  * Returns f1 ○ f2 ○ f3 ○ ...
  */
-function comp(...fns) {
-  return (val) => {
+function comp(...fns: Array<(x: any) => any>) {
+  return (val: any) => {
     for (const fn of fns) {
       val = fn(val);
     }
@@ -375,14 +383,14 @@ function comp(...fns) {
  *
  * (Same as X |> f1 |> f2 |> f3 |> ...)
  */
-function pipe(val, ...fns) {
+function pipe(val: any, ...fns: Array<(x: any) => any>) {
   return comp(...fns)(val);
 }
 
 /**
  * Add a 'print' rule, going to the indicated 'next' state (start if omitted)
  */
-function rule_print(next) {
+function rule_print(next?: string) {
   return recognize('start', {
     regex: 'print',
     token: 'keyword',
@@ -393,7 +401,7 @@ function rule_print(next) {
 /**
  * Add an 'is ask' rule, going to the indicated 'next' state (expression_eol if omitted)
  */
-function rule_isAsk(next) {
+function rule_isAsk(next?: string) {
   return recognize('start', {
     regex: '(\\w+)( is ask )',
     token: ['text', 'keyword'],
@@ -404,7 +412,7 @@ function rule_isAsk(next) {
 /**
  * Add an 'is' rule, going to the indicated 'next' state (expression_eol if omitted)
  */
-function rule_is(next) {
+function rule_is(next?: string) {
   return recognize('start', {
     regex: '(\\w+)( is )',
     token: ['text', 'keyword'],
@@ -543,35 +551,38 @@ function rule_forRangeParen() {
 /**
  * Modify the given ruleset, replacing literal spaces with "one or more spaces"
  */
-function loosenRules(rules) {
+function loosenRules(rules: Rules) {
   for (const ruleSets of Object.values(rules)) {
     for (const rule of ruleSets) {
-      if (rule.regex && !rule._loosened) {
-        rule.regex = rule.regex.replace(/ /g, ' +');
-        rule._loosened = true;
+      if (rule.regex && !(rule as any)._loosened) {
+        (rule as any).regex = rule.regex.replace(/ /g, ' +');
+        (rule as any)._loosened = true;
       }
     }
   }
   return rules;
 }
 
+type Module = any;
+type RequireFunction = (name: string) => Module;
+declare function define(name: string, dependencies: string[], handler: (require: RequireFunction, exports: Module, module: Module) => void): void;
+
 // Define the modes based on the level definitions above
 for (const level of LEVELS) {
 
   // This is a local definition of the file 'ace/mode/level1.js', etc.
-  define('ace/mode/' + level.name, [], function(require, exports, module) {
+  define('ace/mode/' + level.name, [], function(require, exports, _module) {
     var oop = require('ace/lib/oop');
     var TextMode = require('ace/mode/text').Mode;
     var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
 
-    function ThisLevelHighlightRules() {
+    function ThisLevelHighlightRules(this: any) {
       this.$rules = loosenRules(level.rules);
-      console.log(level.name, this.$rules);
       this.normalizeRules();
     };
     oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
 
-    function Mode() {
+    function Mode(this: any) {
       this.HighlightRules = ThisLevelHighlightRules;
     };
     oop.inherits(Mode, TextMode);
@@ -586,6 +597,6 @@ for (const level of LEVELS) {
  * Use this to only recognize a word if it's a complete word by itself (and
  * not accidentally a part of a larger word).
  */
-function completeKeyword(keyword) {
+function completeKeyword(keyword: string) {
   return '\\b' + keyword + '\\b';
 }

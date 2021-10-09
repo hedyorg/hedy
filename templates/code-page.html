@@ -53,11 +53,7 @@
     window.State.loaded_program = {{ loaded_program|tojson }};
     window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
   </script>
-  {# Important syntaxModeRules.js gets loaded first #}
-  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}
