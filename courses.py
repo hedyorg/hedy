@@ -50,7 +50,7 @@ class Course:
   def max_level(self):
     return len(self.course)
 
-  def get_default_text(self, level, sublevel=0):
+  def get_default_text(self, level):
 
     """Return the 1-based Assignment from this course."""
     level_ix = int(level) - 1
@@ -71,16 +71,6 @@ class Course:
     for level_i, level in enumerate(course):
       expected_value = str(level_i + 1)
       actual_value = level.get('level')
-
-      # Check for sub levels
-      subs = level.get('subs')
-      if (subs):
-        for sub_i, sub in enumerate(subs):
-          expected_sub = str(sub_i + 1)
-          actual_sub = sub.get('sub')
-          if expected_sub != actual_sub:
-            raise RuntimeError(f'Expected \'sub: "{expected_sub}"\' but got "{actual_sub}" in {self.course_name}-{self.language}')
-
 
       if expected_value != actual_value:
         raise RuntimeError(f'Expected \'level: "{expected_value}"\' but found "{actual_value}" in {self.course_name}-{self.language}')
