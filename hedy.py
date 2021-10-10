@@ -771,18 +771,28 @@ class ConvertToPython_5(ConvertToPython_4):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
+    def process_calculation(self, args, operator):
+        # arguments of a sum are either a token or a
+        # tree resulting from earlier processing
+        # for trees we need to grap the inner string
+
+        if type(args[0]) is Tree:
+          args[0] = f'{str(args[0].children)}'
+        if type(args[1]) is Tree:
+          args[1] = f'{str(args[0].children)}'
+        return Tree('sum', f'int({str(args[0])}) {operator} int({str(args[1])})')
 
     def addition(self, args):
-        return Tree('sum', f'int({str(args[0])}) + int({str(args[1])})')
+        return self.process_calculation(args, '+')
 
     def substraction(self, args):
-        return Tree('sum', f'int({str(args[0])}) - int({str(args[1])})')
+        return self.process_calculation(args, '-')
 
     def multiplication(self, args):
-        return Tree('sum', f'int({str(args[0])}) * int({str(args[1])})')
+        return self.process_calculation(args, '*')
 
     def division(self, args):
-        return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
+        return self.process_calculation(args, '//')
 
 @hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
