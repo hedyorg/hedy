@@ -117,7 +117,7 @@ class TestsLevel5(unittest.TestCase):
     print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
 
     expected = textwrap.dedent("""\
-    print('5 keer 5 keer 5 is '+str(int(int(5) * int(5)) * int(5)))""")
+    print('5 keer 5 keer 5 is '+str(int(5) * int(5) * int(5)))""")
 
     result = hedy.transpile(code, self.level)
     self.assertEqual(expected, result.code)
