@@ -1,7 +1,7 @@
 command: print | ask | turtle | assign | assign_list | invalid_space | invalid
 
 print: _PRINT (_SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*)?
-ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text | punctuation)*)?
+ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
 
 //in level 2, forward may also depend on a variable
 turtle: _FORWARD (_SPACE (NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
@@ -13,6 +13,8 @@ invalid_space: _SPACE text
 
 textwithoutspaces: /([^\r\n,!?. ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 text: /([^\r\n,!?.]+)/ -> text
+
+text_ask: /([^\r\n!?.]+)/ -> text //as ask may contain commas
 
 index : DIGIT+
 
