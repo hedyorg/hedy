@@ -460,6 +460,23 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+
+  def test_allow_exclamation_mark_in_list(self):
+    code = textwrap.dedent("""\
+    antwoorden is ja, NEE!, misschien
+    print antwoorden at random""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    antwoorden = ['ja', 'NEE!', 'misschien']
+    print(f'{random.choice(antwoorden)}')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
+
   def test_turn_ask(self):
     code = textwrap.dedent("""\
     print Turtle race
