@@ -307,6 +307,3 @@ class TestsLevel1(unittest.TestCase):
     with self.assertRaises(hedy.EmptyProgramException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Empty Program', context.exception.error_code)
-
-
-
