@@ -245,25 +245,25 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
 
   def test_allow_space_after_else_line(self):
-    max_level = 8
-    for level in range(self.level, max_level + 1):
+    code = textwrap.dedent("""\
+    if a is 1
+      print a
+    else   
+      print 'nee'""")
 
-      code = textwrap.dedent("""\
-      if a is 1
-        print a
-      else   
-        print 'nee'""")
+    expected = textwrap.dedent("""\
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
 
-      result = hedy.transpile(code, level)
+    self.multi_level_tester(
+      max_level=8,
+      code=code,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
-      expected = textwrap.dedent("""\
-      if str('a') == str('1'):
-        print('a')
-      else:
-        print('nee')""")
-
-      self.assertEqual(expected, result.code)
-      print(f'{self.test_name()} level {level}')
 
 
   def test_addition_simple(self):

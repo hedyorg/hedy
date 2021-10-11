@@ -118,6 +118,7 @@ class TestsLevel6(HedyTester):
     self.assertEqual(True, result.has_turtle)
 
 
+
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -201,6 +202,29 @@ class TestsLevel6(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
+
+
+  def test_random(self):
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(str(random.choice(dieren)))""")
+
+    # check if result is in the expected list
+    check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=check_in_list
+    )
+
+
 
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\

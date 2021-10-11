@@ -223,6 +223,28 @@ else:
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_random(self):
+    code = textwrap.dedent("""\
+    dieren is ['Hond', 'Kat', 'Kangoeroe']
+    print(dieren[random])""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(str(random.choice(dieren)))""")
+
+    # check if result is in the expected list
+    check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+    self.multi_level_tester(
+      max_level=19,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=check_in_list
+    )
+
+
+
   def test_list_multiple_spaces(self):
     code = textwrap.dedent("""\
     fruit is ['appel',  'banaan',    'kers']

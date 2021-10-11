@@ -3,7 +3,7 @@ import textwrap
 from tests_level_01 import HedyTester
 
 class TestsLevel4(HedyTester):
-  level = 4
+  level=4
 
   # invalid, ask and print should still work as in level 4
   def test_transpile_other(self):
@@ -161,8 +161,6 @@ class TestsLevel4(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-
-  # now adds if
   def test_print_if_else(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -185,51 +183,54 @@ class TestsLevel4(HedyTester):
 
   def test_print_if_else_with_line_break(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
-
-    max_level = 6
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
     if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
-    for level in range(self.level, max_level + 1):
-      result = hedy.transpile(code, self.level)
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if naam == 'Hedy':
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
 
-      expected = textwrap.dedent("""\
-      naam = 'Hedy'
-      print(f'ik heet{naam}')
-      if naam == 'Hedy':
-        print(f'leuk')
-      else:
-        print(f'minder leuk')""")
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
 
   def test_print_if_else_with_line_break_and_space(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
 
-    max_level = 6
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
     if naam is Hedy print 'leuk'     
     else print 'minder leuk'""")
 
-    for level in range(self.level, max_level + 1):
-      result = hedy.transpile(code, self.level)
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if naam == 'Hedy':
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
 
-      expected = textwrap.dedent("""\
-      naam = 'Hedy'
-      print(f'ik heet{naam}')
-      if naam == 'Hedy':
-        print(f'leuk')
-      else:
-        print(f'minder leuk')""")
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
 
   def test_print_if_else_with_ask(self):
 
@@ -381,21 +382,17 @@ class TestsLevel4(HedyTester):
 
 
   def test_no_space_after_keyword(self):
-    max_level = 22
 
-    code = textwrap.dedent("""\
-    print'test'""")
-
-    expected = textwrap.dedent("""\
-    print(f'test')""")
+    code = textwrap.dedent("print'test'")
 
     self.multi_level_tester(
+      max_level=22,
       code=code,
-      expected=hedy.InvalidCommandException,
-      exception=True,
+      exception=hedy.InvalidCommandException,
       test_name=self.test_name()
     )
 
+    #we don't have a function now for testing more exceptoion logic
     # self.assertEqual('print', str(context.exception.arguments['guessed_command']))
 
 

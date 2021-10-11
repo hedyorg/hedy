@@ -257,7 +257,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      expected=hedy.UndefinedVarException,
+      exception=hedy.UndefinedVarException,
       test_name=self.test_name()
     )
 
@@ -285,21 +285,17 @@ class TestsLevel3(HedyTester):
     self.assertEqual('Parse', context.exception.error_code)
 
   def test_two_spaces_after_print(self):
-
-    max_level = 4
     code = "print        'hallo!'"
 
     expected = textwrap.dedent("""\
     print(f'hallo!')""")
 
-    is_not_turtle = (lambda x: not x.has_turtle)
-
     self.multi_level_tester(
       code=code,
-      max_level=max_level,
+      max_level=4,
       expected=expected,
       test_name=self.test_name(),
-      extra_check_function=is_not_turtle
+      extra_check_function=self.is_not_turtle()
     )
 
 

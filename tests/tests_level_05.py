@@ -91,6 +91,58 @@ class TestsLevel5(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_print_if_else_with_line_break(self):
+    # todo: this and the next can be merged into 5 when we have f strings everywhere
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet'+str(naam))
+    if str(naam) == str('Hedy'):
+      print('leuk')
+    else:
+      print('minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+
+  def test_print_if_else_with_line_break_and_space(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'     
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet'+str(naam))
+    if str(naam) == str('Hedy'):
+      print('leuk')
+    else:
+      print('minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+
   def test_transpile_multiple_calcs(self):
     code = textwrap.dedent("""\
     print '5 keer 5 keer 5 is ' 5 * 5 * 5""")

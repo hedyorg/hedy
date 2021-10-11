@@ -16,9 +16,8 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       code = "name is ask",
       max_level=10,
-      exception=True,
-      expected= hedy.IncompleteCommandException,
-      test_name = self.test_name()
+      exception=hedy.IncompleteCommandException,
+      test_name=self.test_name()
     )
 
 
@@ -78,38 +77,6 @@ class TestsLevel2(HedyTester):
       extra_check_function=check_in_list,
       test_name=self.test_name()
     )
-
-
-
-      # min_level = 6
-      # max_level = 10
-      # for i in range(min_level, max_level + 1):
-      #     result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
-      #     self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-      #     self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-      #     print('Passed at level ', i)
-      #
-      # result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint(dieren at random)", 11)
-      # self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-      # self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-      # print('Passed at level ', 11)
-      #
-      # min_level = 12
-      # max_level = 19
-      # for i in range(min_level, max_level + 1):
-      #     result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
-      #     self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-      #     self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-      #     print('Passed at level ', i)
-      #
-      # min_level = 20
-      # max_level = 22
-      # for i in range(min_level, max_level + 1):
-      #     result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
-      #     self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-      #     self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-      #     print('Passed at level ', i)
-
 
 
   def test_transpile_ask(self):
