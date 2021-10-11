@@ -114,5 +114,5 @@ $(function() {
 });
 
 window.load_quiz = function (level) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" style="display: inline-block; margin: auto; text-align: center;" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
