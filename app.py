@@ -74,7 +74,9 @@ DATABASE = database.Database()
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys ():
-        adventures[lang] = YamlFile.for_file(f'coursedata/adventures/{lang}.yaml')
+        filename = f'coursedata/adventures/{lang}.yaml'
+        if os.path.exists(filename):
+            adventures[lang] = YamlFile.for_file(filename)
     return adventures
 
 
