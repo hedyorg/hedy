@@ -11,14 +11,11 @@ class TestsLevel2(HedyTester):
       result = hedy.transpile("abc felienne 123", self.level)
     self.assertEqual('Invalid', context.exception.error_code)
 
+
+
+
   def test_ask_without_argument_upto_22(self):
-    max_level = 10
-    for level in range(self.level, max_level + 1):
-      code = "name is ask"
-      with self.assertRaises(hedy.IncompleteCommandException) as context:
-        result = hedy.transpile(code, level)
-      self.assertEqual('Incomplete', context.exception.error_code)
-      print(f'{self.test_name()} level {level}')
+    self.multi_level_tester(code = "name is ask", max_level=10, exception=True, expected= hedy.IncompleteCommandException)
 
 
   def test_transpile_echo_at_level_2(self):
@@ -58,48 +55,65 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    def test_print_with_list_var_random(self):
-        max_level = 4
-        for i in range(self.level, max_level + 1):
-            code = textwrap.dedent("""\
-            dieren is Hond, Kat, Kangoeroe
-            print dieren at random""")
-            result = hedy.transpile(code, i)
-            expected = textwrap.dedent("""\
-            dieren = ['Hond', 'Kat', 'Kangoeroe']
-            print(f'{random.choice(dieren)}')""")
-            self.assertEqual(expected, result.code)
-            self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-            print('Passed at level ', i)
+  def multi_level_tester(self, test_name, code, max_level, exception, expected):
+    for level in range(self.level, max_level + 1):
+      if exception:
+        with self.assertRaises(expected) as context:
+          result = hedy.transpile(code, level)
+      else:
+        result = hedy.transpile(code, level)
+        self.assertEqual(expected, result.code)
 
-        min_level = 6
-        max_level = 10
-        for i in range(min_level, max_level + 1):
-            result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
-            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-            print('Passed at level ', i)
+      print(f'{test_name} level {level}')
 
-        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint(dieren at random)", 11)
-        self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-        print('Passed at level ', 11)
+  def test_print_with_list_var_random(self):
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print dieren at random""")
 
-        min_level = 12
-        max_level = 19
-        for i in range(min_level, max_level + 1):
-            result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
-            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-            print('Passed at level ', i)
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(f'{random.choice(dieren)}')""")
 
-        min_level = 20
-        max_level = 22
-        for i in range(min_level, max_level + 1):
-            result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
-            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
-            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-            print('Passed at level ', i)
+    self.multi_level_tester(
+      max_level = 4,
+      code = code,
+      exception=False,
+      expected=expected,
+      test_name = self.test_name()
+    )
+
+    # self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+    # print('Passed at level ', i)
+
+      # min_level = 6
+      # max_level = 10
+      # for i in range(min_level, max_level + 1):
+      #     result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
+      #     self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+      #     self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+      #     print('Passed at level ', i)
+      #
+      # result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint(dieren at random)", 11)
+      # self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+      # self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+      # print('Passed at level ', 11)
+      #
+      # min_level = 12
+      # max_level = 19
+      # for i in range(min_level, max_level + 1):
+      #     result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
+      #     self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+      #     self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+      #     print('Passed at level ', i)
+      #
+      # min_level = 20
+      # max_level = 22
+      # for i in range(min_level, max_level + 1):
+      #     result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
+      #     self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+      #     self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+      #     print('Passed at level ', i)
 
 
 
