@@ -258,21 +258,6 @@ else:
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_random(self):
-    code = textwrap.dedent("""\
-    fruit is ['banaan', 'appel', 'kers']
-    randomfruit is fruit[random]
-    print(randomfruit)""")
-    expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit=random.choice(fruit)
-    print(str(randomfruit))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
   def test_specific_access(self):
     code = textwrap.dedent("""\
     fruit is ['banaan', 'appel', 'kers']
