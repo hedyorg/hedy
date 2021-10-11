@@ -48,6 +48,9 @@ $(function() {
     $ ('#editor-area').show ();
     $ ('#errorbox').hide (); //To prevent the error message from remaining when switching tabs
 
+    $ ('#output').empty ();
+    $('#turtlecanvas').empty ();
+
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);
