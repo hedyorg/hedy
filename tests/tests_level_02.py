@@ -12,10 +12,14 @@ class TestsLevel2(HedyTester):
     self.assertEqual('Invalid', context.exception.error_code)
 
 
-
-
   def test_ask_without_argument_upto_22(self):
-    self.multi_level_tester(code = "name is ask", max_level=10, exception=True, expected= hedy.IncompleteCommandException)
+    self.multi_level_tester(
+      code = "name is ask",
+      max_level=10,
+      exception=True,
+      expected= hedy.IncompleteCommandException,
+      test_name = self.test_name()
+    )
 
 
   def test_transpile_echo_at_level_2(self):
@@ -55,17 +59,6 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def multi_level_tester(self, test_name, code, max_level, exception, expected):
-    for level in range(self.level, max_level + 1):
-      if exception:
-        with self.assertRaises(expected) as context:
-          result = hedy.transpile(code, level)
-      else:
-        result = hedy.transpile(code, level)
-        self.assertEqual(expected, result.code)
-
-      print(f'{test_name} level {level}')
-
   def test_print_with_list_var_random(self):
     code = textwrap.dedent("""\
     dieren is Hond, Kat, Kangoeroe
@@ -83,6 +76,7 @@ class TestsLevel2(HedyTester):
       test_name = self.test_name()
     )
 
+    # do we want to pass an extra function to check additional things?
     # self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
     # print('Passed at level ', i)
 

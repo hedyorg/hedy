@@ -251,19 +251,16 @@ class TestsLevel3(HedyTester):
 
 
   def test_transpile_missing_all_quotes(self):
-    max_level = 4
-
     code = textwrap.dedent("""\
       print hallo wereld""")
 
-    for level in range(self.level, max_level+1):
-
-      with self.assertRaises(hedy.UndefinedVarException) as context:
-        result = hedy.transpile(code, level)
-
-      self.assertEqual('Var Undefined', context.exception.error_code)
-
-      print(f'{self.test_name()} level {level}')
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      exception=True,
+      expected=hedy.UndefinedVarException,
+      test_name=self.test_name()
+    )
 
   def test_var_undefined_error_message(self):
 
@@ -293,15 +290,18 @@ class TestsLevel3(HedyTester):
     max_level = 4
     code = "print        'hallo!'"
 
-    for level in range(self.level, max_level+1):
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
 
-      expected = textwrap.dedent("""\
-      print(f'hallo!')""")
+    self.multi_level_tester(
+      code=code,
+      max_level=max_level,
+      exception=False,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
-      print(f'{self.test_name()} level {level}')
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+      # self.assertEqual(False, result.has_turtle)
 
 
   def test_bengali_assign(self):

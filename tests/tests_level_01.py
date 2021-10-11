@@ -26,6 +26,20 @@ class HedyTester(unittest.TestCase):
   def test_name(self):
     return inspect.stack()[1][3]
 
+  def multi_level_tester(self, test_name, code, max_level, exception, expected):
+    # used to test the same code snippet over multiple levels
+    # set exception to True to test occurrrence of an exception
+    # or use False and an expected Python program
+    for level in range(self.level, max_level + 1):
+      if exception:
+        with self.assertRaises(expected) as context:
+          result = hedy.transpile(code, level)
+      else:
+        result = hedy.transpile(code, level)
+        self.assertEqual(expected, result.code)
+
+      print(f'{test_name} level {level}')
+
 class TestsLevel1(HedyTester):
   level = 1
 
