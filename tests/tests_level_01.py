@@ -26,19 +26,24 @@ class HedyTester(unittest.TestCase):
   def test_name(self):
     return inspect.stack()[1][3]
 
-  def multi_level_tester(self, test_name, code, max_level, exception, expected):
+  def multi_level_tester(self, test_name, code, max_level, expected=None, exception=None, extra_check_function=None):
     # used to test the same code snippet over multiple levels
-    # set exception to True to test occurrrence of an exception
-    # or use False and an expected Python program
+    # Use exception to check for an exception
+
+    # Or use expect to check for an expected Python program
+    # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      if exception:
+      if exception is not None:
         with self.assertRaises(expected) as context:
           result = hedy.transpile(code, level)
-      else:
+      if expected is not None:
         result = hedy.transpile(code, level)
         self.assertEqual(expected, result.code)
 
-      print(f'{test_name} level {level}')
+      if extra_check_function is not None:
+        self.assertTrue(extra_check_function(result))
+
+      print(f'{test_name} passed for level {level}')
 
 class TestsLevel1(HedyTester):
   level = 1

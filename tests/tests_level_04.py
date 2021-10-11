@@ -382,18 +382,22 @@ class TestsLevel4(HedyTester):
 
   def test_no_space_after_keyword(self):
     max_level = 22
-    for level in range(self.level, max_level+1):
 
-      code = textwrap.dedent("""\
-      print'test'""")
+    code = textwrap.dedent("""\
+    print'test'""")
 
-      expected = textwrap.dedent("""\
-          print(f'test')""")
+    expected = textwrap.dedent("""\
+    print(f'test')""")
 
-      with self.assertRaises(hedy.InvalidCommandException) as context:
-        result = hedy.transpile(code, level)
-      self.assertEqual('print', str(context.exception.arguments['guessed_command']))
-      print(f'{self.test_name()} level {level}')
+    self.multi_level_tester(
+      code=code,
+      expected=hedy.InvalidCommandException,
+      exception=True,
+      test_name=self.test_name()
+    )
+
+    # self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+
 
 
 

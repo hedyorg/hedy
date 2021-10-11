@@ -68,17 +68,18 @@ class TestsLevel2(HedyTester):
     dieren = ['Hond', 'Kat', 'Kangoeroe']
     print(f'{random.choice(dieren)}')""")
 
+    # check if result is in the expected list
+    check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
     self.multi_level_tester(
-      max_level = 4,
-      code = code,
-      exception=False,
+      max_level=4,
+      code=code,
       expected=expected,
-      test_name = self.test_name()
+      extra_check_function=check_in_list,
+      test_name=self.test_name()
     )
 
-    # do we want to pass an extra function to check additional things?
-    # self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
-    # print('Passed at level ', i)
+
 
       # min_level = 6
       # max_level = 10

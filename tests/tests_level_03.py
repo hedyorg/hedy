@@ -257,7 +257,6 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      exception=True,
       expected=hedy.UndefinedVarException,
       test_name=self.test_name()
     )
@@ -293,15 +292,17 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     print(f'hallo!')""")
 
+    is_not_turtle = (lambda x: not x.has_turtle)
+
     self.multi_level_tester(
       code=code,
       max_level=max_level,
-      exception=False,
       expected=expected,
-      test_name=self.test_name()
+      test_name=self.test_name(),
+      extra_check_function=is_not_turtle
     )
 
-      # self.assertEqual(False, result.has_turtle)
+
 
 
   def test_bengali_assign(self):
