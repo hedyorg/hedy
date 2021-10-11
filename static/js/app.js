@@ -476,6 +476,7 @@ function runPythonProgram(code, hasTurtle, cb) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
+    $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
