@@ -403,6 +403,26 @@ class TestsLevel4(unittest.TestCase):
         result = hedy.transpile(code, self.level)
       self.assertEqual(str(context.exception), 'Invalid')
 
+
+  def test_no_space_after_keyword(self):
+    max_level = 22
+    for level in range(self.level, max_level+1):
+
+      code = textwrap.dedent("""\
+      print'test'""")
+
+      expected = textwrap.dedent("""\
+          print(f'test')""")
+
+      with self.assertRaises(hedy.InvalidCommandException) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+      print(f'{self.test_name()} level {level}')
+
+
+
+
+
   # def test_list_find_issue(self):
   #   #'list' object has no attribute 'find'
   #   # FH dd sept 2021 for later fixing!

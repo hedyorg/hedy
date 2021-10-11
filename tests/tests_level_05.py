@@ -83,7 +83,6 @@ class TestsLevel5(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-
   def test_transpile_turtle_basic(self):
     code = textwrap.dedent("""\
     forward 50
@@ -99,6 +98,33 @@ class TestsLevel5(unittest.TestCase):
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
+
+
+  def test_basic_calc(self):
+    code = textwrap.dedent("""\
+    print '5 keer 5 is ' 5 * 5""")
+
+    expected = textwrap.dedent("""\
+    print('5 keer 5 is '+str(int(5) * int(5)))""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_transpile_multiple_calcs(self):
+    code = textwrap.dedent("""\
+    print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
+
+    expected = textwrap.dedent("""\
+    print('5 keer 5 keer 5 is '+str(int(5) * int(5) * int(5)))""")
+
+    result = hedy.transpile(code, self.level)
+    self.assertEqual(expected, result.code)
+
+    output = run_code(result)
+    self.assertEqual(output, '5 keer 5 keer 5 is 125')
+    self.assertEqual(False, result.has_turtle)
 
   def test_allow_space_after_else_line(self):
     #this code has a space at the end of line 2

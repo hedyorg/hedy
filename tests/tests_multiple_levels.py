@@ -83,8 +83,13 @@ class TestsForMultipleLevels(unittest.TestCase):
         """Check that a parse error that can't be fixed by downgrading the level is propagated properly."""
 
         # This isn't correct Hedy at level 5 nor level 4
+        code = textwrap.dedent("""\
+        if option is Scissors
+            print
+            'Its a tie!""")
+
         try:
-            hedy.transpile("printHelloworld!", 5)
+            hedy.transpile(code, 5)
             self.fail('Should have thrown')
         except hedy.ParseException as e:
             self.assertEqual('Parse', e.error_code)
