@@ -12,12 +12,15 @@
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
+    //$(preview).css({height: 50});
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-
+    if (exampleEditor.getValue().split("\n").length == 1) {
+      exampleEditor.setValue(exampleEditor.getValue() + "\n");
+    }
     // And add an overlay button to the editor
     const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
     $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
