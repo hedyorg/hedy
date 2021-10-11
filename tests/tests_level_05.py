@@ -1,29 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-class TestsLevel5(unittest.TestCase):
+class TestsLevel5(HedyTester):
   level = 5
   
   def test_print_with_var(self):
@@ -122,7 +101,7 @@ class TestsLevel5(unittest.TestCase):
     result = hedy.transpile(code, self.level)
     self.assertEqual(expected, result.code)
 
-    output = run_code(result)
+    output = self.run_code(result)
     self.assertEqual(output, '5 keer 5 keer 5 is 125')
     self.assertEqual(False, result.has_turtle)
 
@@ -170,7 +149,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("9", run_code(result))
+    self.assertEqual("9", self.run_code(result))
 
   def test_calculation_with_vars(self):
     code = textwrap.dedent("""\
@@ -189,7 +168,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_print_calculation_times_directly(self):
     code = textwrap.dedent("""\
@@ -206,7 +185,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_print_calculation_divide_directly(self):
     code = textwrap.dedent("""\
@@ -223,7 +202,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("0", run_code(result))
+    self.assertEqual("0", self.run_code(result))
 
   def test_issue_andras(self):
       code = textwrap.dedent("""\
@@ -295,3 +274,19 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+    def test_parse_error_shows_right_level(self):
+        """Check that a parse error that can't be fixed by downgrading the level is propagated properly."""
+
+        # This isn't correct Hedy at level 5 nor level 4
+        code = textwrap.dedent("""\
+        if option is Scissors
+            print
+            'Its a tie!""")
+
+        try:
+            hedy.transpile(code, self.level)
+            self.fail('Should have thrown')
+        except hedy.ParseException as e:
+            self.assertEqual('Parse', e.error_code)
+            self.assertEqual(self.level, e.level)

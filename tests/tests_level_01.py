@@ -6,27 +6,28 @@ from contextlib import contextmanager
 import textwrap
 import inspect
 
-@contextmanager
-def captured_output():
+class HedyTester(unittest.TestCase):
+  @contextmanager
+  def captured_output(self):
     new_out, new_err = io.StringIO(), io.StringIO()
     old_out, old_err = sys.stdout, sys.stderr
     try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
+      sys.stdout, sys.stderr = new_out, new_err
+      yield sys.stdout, sys.stderr
     finally:
-        sys.stdout, sys.stderr = old_out, old_err
+      sys.stdout, sys.stderr = old_out, old_err
 
+  def run_code(self, parse_result):
+    code = "import random\n" + parse_result.code
+    with self.captured_output() as (out, err):
+      exec(code)
+    return out.getvalue().strip()
 
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-class TestsLevel1(unittest.TestCase):
-  level = 1
   def test_name(self):
     return inspect.stack()[1][3]
+
+class TestsLevel1(HedyTester):
+  level = 1
 
   def test_transpile_other(self):
     with self.assertRaises(hedy.InvalidCommandException) as context:
@@ -70,7 +71,7 @@ class TestsLevel1(unittest.TestCase):
     expected = "print('Hallo welkom bij Hedy!')"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
+    self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
 
   def test_print_has_no_turtle(self):
     result = hedy.transpile_inner("print koekoek", self.level)
@@ -150,7 +151,7 @@ class TestsLevel1(unittest.TestCase):
     expected = "print('Hallo welkom bij Hedy! ')"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('Hallo welkom bij Hedy!', run_code(result))
+    self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
 
   def test_lines_may_not_start_with_spaces(self):
     with self.assertRaises(hedy.InvalidSpaceException) as context:
@@ -222,7 +223,7 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
 
   def test_use_slashes_in_print_allowed(self):
@@ -235,7 +236,7 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
 
   def test_use_slashes_at_end_of_print_allowed(self):
@@ -248,7 +249,7 @@ class TestsLevel1(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
   def test_use_quotes_in_ask_allowed(self):

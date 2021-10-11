@@ -1,33 +1,9 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
-import inspect
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-class TestsLevel4(unittest.TestCase):
+class TestsLevel4(HedyTester):
   level = 4
-  def test_name(self):
-    return inspect.stack()[1][3]
 
   # invalid, ask and print should still work as in level 4
   def test_transpile_other(self):
@@ -155,7 +131,7 @@ class TestsLevel4(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+    self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
 
   def test_list_multiple_spaces(self):
     code = textwrap.dedent("""\
@@ -291,7 +267,7 @@ class TestsLevel4(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual(run_code(result), 'jij wint')
+    self.assertEqual(self.run_code(result), 'jij wint')
 
   def test_turtle_with_if_has_no_turtle(self):
     code = textwrap.dedent("""\
@@ -317,7 +293,7 @@ class TestsLevel4(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual(run_code(result), 'gelijkspel!')
+    self.assertEqual(self.run_code(result), 'gelijkspel!')
 
   def test_if_in_array(self):
     code = textwrap.dedent("""\
@@ -335,7 +311,7 @@ class TestsLevel4(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('found!', run_code(result))
+    self.assertEqual('found!', self.run_code(result))
 
   def test_pront_should_suggest_print(self):
     code = "pront 'Hedy is leuk!'"

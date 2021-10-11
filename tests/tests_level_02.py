@@ -1,32 +1,9 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
-import inspect
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-class TestsLevel2(unittest.TestCase):
+class TestsLevel2(HedyTester):
   level = 2
-  def test_name(self):
-    return inspect.stack()[1][3]
 
   # some commands should not change:
   def test_transpile_other(self):
@@ -81,6 +58,50 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+    def test_print_with_list_var_random(self):
+        max_level = 4
+        for i in range(self.level, max_level + 1):
+            code = textwrap.dedent("""\
+            dieren is Hond, Kat, Kangoeroe
+            print dieren at random""")
+            result = hedy.transpile(code, i)
+            expected = textwrap.dedent("""\
+            dieren = ['Hond', 'Kat', 'Kangoeroe']
+            print(f'{random.choice(dieren)}')""")
+            self.assertEqual(expected, result.code)
+            self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+        min_level = 6
+        max_level = 10
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint dieren at random", i)
+            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+        result = hedy.transpile("dieren is Hond, Kat, Kangoeroe\nprint(dieren at random)", 11)
+        self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+        self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+        print('Passed at level ', 11)
+
+        min_level = 12
+        max_level = 19
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren is ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
+            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+        min_level = 20
+        max_level = 22
+        for i in range(min_level, max_level + 1):
+            result = hedy.transpile("dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(dieren[random])", i)
+            self.assertEqual(result.code, "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(str(random.choice(dieren)))")
+            self.assertIn(run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+            print('Passed at level ', i)
+
+
 
   def test_transpile_ask(self):
     result = hedy.transpile("kleur is ask wat is je lievelingskleur?", self.level)
@@ -132,7 +153,7 @@ class TestsLevel2(unittest.TestCase):
     Hallo welkom bij Hedy!
     Mooi hoor""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
 
   def test_transpile_turtle_basic(self):
     code = textwrap.dedent("""\
@@ -297,7 +318,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual(run_code(result), "Kat")
+    self.assertEqual(self.run_code(result), "Kat")
 
   def test_failing_car_program(self):
 
@@ -324,7 +345,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
 
   def test_allow_use_of_slashes_in_print(self):
@@ -337,7 +358,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
 
   def test_allow_use_of_backslashes_in_print(self):
@@ -350,7 +371,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("Welcome to O\ceanView", expected_output)
 
   def test_use_slashes_at_end_of_print_allowed(self):
@@ -363,7 +384,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
   def test_allow_use_of_quotes_in_ask(self):
@@ -376,7 +397,7 @@ class TestsLevel2(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
 
   def test_allow_use_of_quotes_in_echo(self):
