@@ -488,10 +488,8 @@ def get_quiz(level_source, question_nr, attempt):
             question_obj = []
             for options in question['mp_choice_options']:
                 option_obj = {}
-                print(options)
                 for options_key, options_value in options.items():
                     for option in options_value:
-                        print(option)
                         for key, value in option.items():
                             option_obj[key] = value
                             option_obj['char_index'] = char_array[i]
@@ -529,6 +527,7 @@ def submit_answer(level_source, question_nr, attempt):
     else:
         # Get the chosen option from the request form with radio buttons
         chosen_option = request.form["radio_option"]
+
         # Reading yaml file
         if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
             quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
@@ -598,6 +597,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        questions=quiz_data['questions'],
                                        question_options=question_obj,
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr),
+                                       chosen_option=chosen_option,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        attempt=attempt,

@@ -37,7 +37,7 @@
                     <div class="flex flex-row">
                     {% for column in row %}
                         <div class="flex flex-col">
-                            {% if question.correct_answer == chosen_option and not chosen_option %}
+                            {% if question.correct_answer in chosen_option %}
                                 <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block"
                                      id={{ question_options[counter.value].char_index }}>
                                     <label class="inline-flex items-center"><p
@@ -56,9 +56,9 @@
                                         {% endif %}</span>
                                     </label>
                                 </div>
-                            {% elif chosen_option == question_options[counter.value].char_index %}
+                            {% elif question_options[counter.value].char_index in chosen_option %}
                                 <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" radio-block
-                                     id="answer-disabled {{ question_options[counter.value].char_index }}">
+                                     id="answer-disabled-{{ question_options[counter.value].char_index }}">
                                     <label class="inline-flex items-center"><p
                                             class="text-4xl font-bold ml-6 mr-6 font-slab">
                                         {{ question_options[counter.value].char_index }}</p></p>
