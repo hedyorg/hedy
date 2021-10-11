@@ -2,7 +2,7 @@
 # Run pylint against all Python code
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
-cd $scriptdir/..
+cd $scriptdir/../..
 
 # There are MANY pep8 style violations in the code base currently.
 # Let's just check for definite errors.

@@ -157,9 +157,9 @@ function runit(level, lang, cb) {
       url: '/parse',
       data: JSON.stringify({
         level: level,
-        sublevel: window.State.sublevel ? window.State.sublevel : undefined,
         code: code,
         lang: lang,
+        read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
@@ -207,7 +207,6 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
-  if (window.State.sublevel) return window.modal.alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;

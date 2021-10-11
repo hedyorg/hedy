@@ -1,0 +1,18 @@
+{
+  "name": "hedy",
+  "private": true,
+  "version": "0.0.1",
+  "description": "This file exists to bring in NPM dependencies and orchestrate deploy-time build commands.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Felienne/hedy.git"
+  },
+  "scripts": {
+      "build": "build-tools/heroku/on-deploy.sh"
+  },
+  "devDependencies": {
+    "minify": "^7.0.1",
+    "tailwindcss": "^1.9.6"
+  },
+  "license": "ISC"
+}

@@ -129,7 +129,8 @@ class TestsLevel8(unittest.TestCase):
     expected = textwrap.dedent("""\
     a = '2'
     a = '3'
-    for a in range(int(2), int(4)+1):
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
@@ -163,7 +164,25 @@ class TestsLevel8(unittest.TestCase):
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    for i in range(int(1), int(10)+1):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
+      print(str(i))
+    print('wie niet weg is is gezien')""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
+  def test_reverse_range(self):
+    code = textwrap.dedent("""\
+    for i in range 10 to 1
+      print i
+    print 'wie niet weg is is gezien'""")
+    expected = textwrap.dedent("""\
+    step = 1 if int(10) < int(1) else -1
+    for i in range(int(10), int(1) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
@@ -185,7 +204,8 @@ class TestsLevel8(unittest.TestCase):
         i is 10""")
 
     expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
+    step = 1 if int(0) < int(10) else -1
+    for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
         print('Dat is fout!')
@@ -210,7 +230,8 @@ class TestsLevel8(unittest.TestCase):
     print 'klaar met for loop'""")
 
     expected = textwrap.dedent("""\
-      for i in range(int(0), int(10)+1):
+      step = 1 if int(0) < int(10) else -1
+      for i in range(int(0), int(10) + step, step):
         antwoord = input('Wat is 5*5')
         if str(antwoord) == str('24'):
           print('fout')
@@ -228,7 +249,8 @@ class TestsLevel8(unittest.TestCase):
         print '2'""")
 
     expected = textwrap.dedent("""\
-      for i in range(int(0), int(10)+1):
+      step = 1 if int(0) < int(10) else -1
+      for i in range(int(0), int(10) + step, step):
         if str(i) == str('2'):
           print('2')""")
 

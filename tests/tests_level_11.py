@@ -134,7 +134,8 @@ class TestsLevel11(unittest.TestCase):
     expected = textwrap.dedent("""\
     a = '2'
     a = '3'
-    for a in range(int(2), int(4)+1):
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
@@ -161,13 +162,56 @@ class TestsLevel11(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_allow_space_after_else_line(self):
+    max_level = 19
+    for level in range(self.level, max_level + 1):
+
+      code = textwrap.dedent("""\
+      if a is 1:
+        print(a)
+      else:   
+        print('nee')""")
+
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      if str(a) == str('1'):
+        print(str(a))
+      else:
+        print('nee')""")
+
+      self.assertEqual(expected, result.code)
+      print(f'{self.test_name()} level {level}')
+
+  def test_allow_space_before_colon(self):
+    max_level = 19
+    for level in range(self.level, max_level + 1):
+
+      code = textwrap.dedent("""\
+      if a is 1  :
+        print(a)
+      else:   
+        print('nee')""")
+
+      result = hedy.transpile(code, level)
+
+      expected = textwrap.dedent("""\
+      if str(a) == str('1'):
+        print(str(a))
+      else:
+        print('nee')""")
+
+      self.assertEqual(expected, result.code)
+      print(f'{self.test_name()} level {level}')
+
   def test_forloop(self):
     code = textwrap.dedent("""\
     for i in range(1, 10):
       print(i)
     print('wie niet weg is is gezien')""")
     expected = textwrap.dedent("""\
-    for i in range(int(1), int(10)+1):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
@@ -182,8 +226,10 @@ class TestsLevel11(unittest.TestCase):
       for j in range(1,4):
         print('rondje: ' i ' tel: ' j)""")
     expected = textwrap.dedent("""\
-    for i in range(int(1), int(3)+1):
-      for j in range(int(1), int(4)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
+      step = 1 if int(1) < int(4) else -1
+      for j in range(int(1), int(4) + step, step):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
     result = hedy.transpile(code, self.level)
@@ -219,7 +265,8 @@ class TestsLevel11(unittest.TestCase):
     expected = textwrap.dedent("""\
     leeftijd = input('Hoe oud ben jij?')
     print('Dus jij hebt zo veel verjaardagen gehad:')
-    for i in range(int(0), int(leeftijd)+1):
+    step = 1 if int(0) < int(leeftijd) else -1
+    for i in range(int(0), int(leeftijd) + step, step):
       print(str(i))""")
 
     result = hedy.transpile(code, self.level)
@@ -239,7 +286,8 @@ class TestsLevel11(unittest.TestCase):
         i is 10""")
 
     expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
+    step = 1 if int(0) < int(10) else -1
+    for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
         print('Dat is fout!')

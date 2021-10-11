@@ -1,0 +1,665 @@
+1:
+    intro_text: |
+        Wolkom by Hedy! Kinst de kommando's `print`, `ask` en `echo` brûke.
+
+        Yn de linker balke sjochst alle opdrachtwurden dytst brûke kinst yn level 1.
+
+        Atst op de blauwe knop drukst, wurdt de koade alfêst foar dy ynfolle!
+
+        Besykje de koade sels te draaien mei de griene 'Koade draaie'-knop ûnder it linker programmearfjild.
+
+        Witst net watst meitsje silst? Yn de oare tabs stean wat ideeën.
+    start_code: "print oant moarn!"
+    commands:
+    -   name: "printe"
+        explanation: "Eat printe mei `print`."
+        example: "Foarbyld: print Hoi wolkom by Hedy!"
+        demo_code: "print Hoi wolkom by Hedy!"
+    -   name: "freegje"
+        explanation: "Eat freegje mei `ask`."
+        example: "Foarbyld: ask Wat is dyn favorite kleur?"
+        demo_code: "ask Wat is dyn favorite kleur?"
+    -   name: "echo"
+        explanation: "Eat werhelje mei `echo`."
+        example: "Foarbyld: echo Dus dyn favorite kleur is"
+        demo_code: |-
+            ask Wat is dyn favorite kleur?
+            echo Dus dyn favorite kleur is...
+    -   name: "foarút" 
+        explanation: "Een line tekenje mei `forward`."
+        example: "Foarbyld: forward 100"
+        demo_code: "forward 100"
+    -   name: "draaie"
+        explanation: "De teken-skyldpod draaie mei `turn`"
+        example: "Foarbyld: turn"
+        demo_code: |-
+            forward 25
+            turn left
+            forward 25
+            turn right
+2:
+    intro_text: |
+        Yn level 2 leare wy wat nijs. Kinst in wurd in namme jaan mei `is`. Dernei kinst oeral yn dyn koade dy namme brûke. Hedy ferfangt dat dan. Dat giet sa:
+        ```
+        namme is Hedy
+        print hoi namme
+        ```
+
+        De opdracht `ask` is yn level 2 ek feroare. It antwurd ûnthaldst ek mei in namme:
+
+        ```
+        antwurd is ask Wat is dyn namme?
+        ```
+
+        `print` wurket noch lykas yn level 1, en `echo` hast net mear nedich.
+
+        Yn level 2 kinst ek in list meitsje. Ut de list kinst dan eat willekeurichs kieze. Dat dochst mei `at random` (sprek út: et ren-dum).
+
+        Alle koade fan level 2 stiet wer in de linkerbalke. Yn de tabkes stean wer opdrachten.
+    start_code: "print oant moarn!"
+    commands:
+    -   name: "is"
+        explanation: "In wurd in namme jaan mei `is`. Meist de namme sels kieze."
+        example: "Foarbyld: foarnamme is Hedy."
+        demo_code: |-
+            foarnamme is Hedy
+            print ik bin foarnamme
+    -   name: "is - teken-skyldpod"
+        explanation: "In getal in namme jaan mei `is`. Meist de namme sels kieze."
+        example: "Foarbyld: hoek is 90."
+        demo_code: |-
+            hoeke is 90
+            turn hoeke
+            forward 100
+    -   name: "ask"
+        explanation: "Eat freegje mei `ask`. Mar tink derom! Moatst dyn antwurd in namme jaan mei `is`."
+        example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
+        demo_code: |-
+            kleur is ask Wat is dyn favorite kleur?
+            print Dyn favorite is dus kleur
+    -   name: "kies_random"
+        explanation: "Eat willekeurichs út in groepke wurden kieze mei `at` en `random`."
+        example: "Foarbyld: bisten is hûn, kat, kangeroe."
+        demo_code: |-
+            bisten is hûn, kat, kangeroe
+            print bisten at random
+3:
+    start_code: "print 'oant moarn'"
+    intro_text: |
+        Yn level 3 binne `ask` en `print` feroare.
+
+        Tekst dytst letterlik printe wolst, moatst no tusken oanhellingstekens sette.
+
+        Dat is wol sa handich, want no kinst alle wurden printe dytst mar wolst. Ek de wurden dytst brûkt hast om eat mei te ûnthalden mei `is`.
+
+        De measte programmeartalen brûke ek oanhellingstekens by it printen, dat sa komme we al in stap tichterby echt programmearje!
+
+        ## Opdrachten wurde dreger
+        De kommando's stean wer links, en de opdrachten in de oare tabkes. De opdrachten wurde stadichoan dreger. Begjin dus links mei it ferhaal, en wurkje sa troch om mear en mear útdage te wurden.
+
+    commands:
+    -   name: "print"
+        explanation: "Eat letterlik printe mei `print`."
+        example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
+        demo_code: "print 'Hoi wolkom by Hedy'"
+    -   name: "is"
+        explanation: "In stikje tekst in namme jaan mei `is` en printe sûnder oanhellingstekens"
+        example: "Foarbyld: namme is Hedy."
+        demo_code: |-
+            namme is Hedy
+            print 'ik bin ' namme
+    -   name: "ask"
+        explanation: "Eat freegje mei `ask`"
+        example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            print 'Dyn favorite is dus ' kleur
+4:
+    start_code: |-
+        namme is ask 'Wat is dyn namme?'
+        if namme is Hedy print 'leuk' else print 'minder leuk!'
+    intro_text: |
+        `ask` en `print` wurkje noch lykas yn level 3.
+
+        Yn level 4 is der wat nijs, de `if`! If is Ingelsk foar 'as'. Mei de `if` kinst in kar (keus) meitsje tusken twa ferskillende opsjes.
+
+        ## Foarbyld Hedy koade
+        ```
+        namme is ask 'Wat is dyn namme?'
+        if namme is Hedy print 'leuk' else print 'minder leuk!'
+        ```
+
+        Dizze koade print 'leuk' ast Hedy als namme ynfolst, en 'minder leuk' ast wat oars ynfolst.
+
+        ## Tip
+        Koade mei in `if` kin tige lang wurde en dan past it net mear goed yn it tekstfakje. Brûk yn dat gefal in 'enter' om de koade oer twa rigels te ferdielen. Begjin dan de twadde rigel mei in `else`:
+        ```
+        namme is ask 'Wat is dyn namme?'
+        if namme is Hedy print 'leuk'
+        else print 'minder leuk!'
+        ```
+
+        ## Opdrachten wurde dreger
+
+        Ek yn level 4 wurde de opdrachten yn de tabkes stadichoan wat dreger. Doch se dus fan links nei rjochts.
+
+    commands:
+    -   name: "print"
+        explanation: "Eat letterlik printe mei `print`."
+        example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
+        demo_code: "print 'Hoi wolkom by Hedy.'"
+    -   name: "ask"
+        explanation: "Eat freegje mei `ask`."
+        example: "Foarbyld: kleur is ask 'Wat is dyn favorite kleur?'"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            print 'Dyn favorite is dus ' kleur
+    -   name: "if"
+        explanation: "In kar meitsje mei `if`"
+        example: "Foarbyld: if kleur is grien print 'kreas!' else print 'minder kreas'"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            if kleur is grien print 'kreas!' else print 'minder kreas'
+    -   name: "if mei teken-skyldpod"
+        explanation: "In kar meitsje mei `if`"
+        example: "Foarbyld: if antwurd is fier forward 100 else forward 5"
+        demo_code: |-
+            antwurd is ask 'Hoe fier moat ik rinne?'
+            if antwurd is fier forward 100 else forward 5
+5:
+    start_code: "print '5 kear 5 is ' 5 * 5"
+    intro_text: |
+        `ask`, `print` en `if` wurkje noch lykas yn level 4.
+        Mar yn Level 5 is der wat nijs, kinst no ek rekkenje.
+
+        De plus is maklik, dy skriuwst as by rekkenjen: `5 + 5` bygelyks. De min giet krekt sa, dat is `5 - 5`.
+
+        De kear is wat anders, want dy sit net op dyn toetseboerd. Sykje mar ris, dy is der echt net!
+        Dêrom dogge we de kear mei it stjêrke boppe de 8: `5 * 5`. Lês dat mar as "5 kear 5", dan ûnthâldst it it maklikst.
+        ## Foarbyld Hedy koade
+        ```
+        print '5 plus 5 is ' 5 + 5
+        print '5 min 5 is ' 5 - 5
+        print '5 kear 5 is ' 5 * 5
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Eat letterlik printe mei `print`."
+        example: "Foarbyld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+    -   name: "`ask` en `if` - rekkenje"
+        explanation: "It antwurd fan in som freegje mei `ask` en sjen of't it goed is."
+        example: "Foarbyld: antwurd is ask 'Hoefolle is 10 plus 10?'"
+        demo_code: |-
+            antwurd is ask 'Hoefolle is 10 plus 10?'
+            if antwurd is 20 print 'Bêst genôch!' else print 'Flaterke'
+    -   name: "`ask` en `if` turtle"
+        explanation: "De brûker freegje hoefolle hoeken hy wol"
+        example: "Foarbyld: hoeken is ask 'hoefolle hoeken kriget dit figuur?'"
+        demo_code: |-
+            hoeken is ask 'Hoefolle hoeken kriget dit figuur?'
+            hoek is 360 / hoeken
+            forward 50
+6:
+    start_code: "repeat 3 times print 'Hedy is leuk!'"
+    intro_text: |
+        `ask`, `print` en `if` wurkje noch lykas yn level 4 en 5.
+        Mar yn Level 6 is er eat nijs: de `repeat`.
+        Met `repeat` kinst koade in tal kear werhelje.
+
+        ## Foarbyld Hedy koade
+        ```
+        repeat 3 times print 'Hedy is leuk!'
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Eat letterlik printe mei `print`."
+        example: "Foarbyld: print 'Hoi wolkom by Hedy.'"
+        demo_code: "print 'Hoi wolkom by Hedy'"
+    -   name: "ask"
+        explanation: "Eat freegje mei `ask`."
+        example: "Foarbyld: kleur is ask 'Wat is dyn favorite kleur?'"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            print 'Dyn favorite is dus ' kleur
+    -   name: "if"
+        explanation: "In kar meitsje mei `if`"
+        example: "Foarbyld: if kleur is grien print 'kreas!' else print 'minder kreas'"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            if kleur is grien print 'kreas!' else print 'minder kreas'
+    -   name: "repeat"
+        explanation: "Eat herhelje met `repeat`."
+        example: "Foarbyld: repeat 3 times print 'Hedy is leuk!'"
+        demo_code: |-
+            repeat 3 times print 'Hedy is leuk!'
+    -   name: "repeat - teken-skyldpod"
+        explanation: "In rigel code werhelje met `repeat`."
+        example: "Foarbyld: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
+7:
+    start_code: |-
+        repeat 5 times
+            print 'Goeie allegearre'
+            print 'Dit wurdt allegearre 5 kear werhelle'
+    intro_text: |
+        `ask` en `print` wurkje noch as east, mar `if` en `repeat` binne no oars!
+        Kinst no meardere rigels tegearre werhelje. Dan moatst de rigel dytst werhelje wolst wol ynspringe,
+        dat wol sizze dat se mei fjouwer spaasjes begjinne moatte.
+        Ek atst mar ien rigel werhelje wolst, moatst ynspringe!
+
+        ## Foarbyld Hedy koade
+        ```
+        repeat 5 times
+            print 'Goeie allegearre'
+            print 'Dit wurdt allegearre 5 keer werhelle'
+        ```
+
+    commands:
+    -   name: "print"
+        explanation: "Eat letterlik printe mei `print`."
+        example: "Foarbyld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+    -   name: "`if` mei mear rigels"
+        explanation: "It antwurd fan in som freegje mei `ask` en sjen oft it goed is. No printe wy twa rigels!"
+        example: "Foarbyld: antwurd is ask 'Hoefolle is 10 plus 10?'"
+        demo_code: |-
+            antwurd is ask 'Hoefolle is 10 plus 10?'
+            if antwurd is 20
+                print 'Kreas!'
+                print 'It antwurd wie yndie ' antwurd
+            else
+                print 'Flaterke'
+                print 'It antwurd moast 20 wêze'
+    -   name: "`repeat` mei de teken-skyldpod"
+        explanation: "Mear rigels tegearre werhelje"
+        example: "Foarbyld: in fjouwerkant meitsje"
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
+8:
+    start_code: |-
+        for i in range 1 to 10
+            print i
+        print 'Wie niet weg is is gezien'
+    intro_text: |-
+        Wy feroarje no `repeat` yn `for`! No typst `for i in range 1 to 5`, ynstee fan `repeat 5 times`. 
+        It leuke is datst dy fariabele `i` ek yn dyn programma brûke kinst!
+        Tink derom datst noch hieltiid alle rigels dy't werhelle wurde moatte, ynspringst mei 4 spaasjes.
+    commands:
+    -   name: "repeat ferfange troch for"
+        explanation: "`repeat` ferfange"
+        example: "for i in range 1 to 10"
+        demo_code: |
+            for i in range 1 to 10
+                print i
+            print 'Wie niet weg is is gezien'
+9:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
+    intro_text: |-
+        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+    commands:
+    -   name: "for met :"
+        explanation: "By `for` moatst no in `:` efteroan sette!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Wie niet weg is is gezien'
+    -   name: "if met :"
+        explanation: "We moatte itselde dwaan mei al ús `if`"
+        example: "if kleur is grien:"
+        demo_code: |-
+            kleur is grien
+            if kleur is grien:
+                print 'De kleur is grien'
+            else:
+                print 'De kleur is net grien'
+    -   name: "(Optioneel) elif"
+        explanation: |-
+            Meist ek in nij kommando brûke: `elif`. 
+            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+            en als dy net wier is dan giest nei de `else`.
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is net 1 of 2'
+10:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+                print 'We sitte noch yn ronde: ' i ' en de tel is: ' j
+    intro_text: "Fan no ôf meite we ek in luske faker útfiere. In it foarbyld telle we 3 kear oant 5. Dus we dogge 3 rûntsjes en tellen eltse kear oant 5"
+    commands:
+    -   name: "`for` ûnder inoar"
+        explanation: "Dit is in foarbyld fan `for`-luskes ûnder/yn inoar sette"
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                    print 'we sitte no yn ronde: ' i ' en de tel is: ' j
+    -   name: "`if` ûnder inoar"
+        explanation: "We kinne itselde dwaan mei `if` kommando's"
+        demo_code: |-
+            kleur is blauw
+            kleurtwa is giel
+            if kleur is blauw:
+                if kleurtwa is giel:
+                    print 'Tegearre is dit grien!'
+11:
+    start_code: |-
+        leeftyd is input('Hoe âld bisto?')
+        print('Do hast safolle jierdeien hân:')
+        for i in range(0, leeftyd):
+            print(i)
+    intro_text: "We sille no rûne heakjes tafoegje en `ask` oanpasse! `ask` neame we no input! By `print`, `input` en `for` sille we no heakjes sette!"
+    commands:
+    -   name: "Print"
+        explanation: "We gaan nu haakjes om print heen zetten!"
+        example: "Foarbyld: print('Oant moarn')"
+        demo_code: "print('Oant moarn')"
+    -   name: "`ask` wurdt `input`!"
+        explanation: "We ferfange `ask` en neame it no `input`, ek sette we der heakjes omhinne"
+        example: "Foarbyld: namme is input('Wat is dyn namme?')"
+        demo_code: |-
+            namme is input('Wat is dyn namme?')
+            print('Dus jij heet ' namme)
+    -   name: "`For` mei heakjes"
+        explanation: "We sille no ynstee fan `for i in range 1 to 10:`, heakjes sette om de getallen: `for i in range(0, 10):`"
+        example: "Foarbyld: for i in range(0, 10):"
+        demo_code: |-
+            for i in range(0, 10):
+                print(i)
+            print('Wie niet weg is is gezien')
+12:
+    start_code: |-
+        fruit is ['apel', 'banaan', 'kjers']
+        print(fruit)
+    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
+    commands:
+    -   name: "Heakjes om listen"
+        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
+        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            print(fruit)
+    -   name: "Pak eat út in list"
+        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
+        example: "Foarbyld: earstefruit is fruit[1]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            earstefruit is fruit[1]
+            print(earstefruit)
+    -   name: "Nim in willekeurich ding út 'e list"
+        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
+        example: "Foarbyld: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            randomfruit is fruit[random]
+            print(randomfruit)
+13:
+    start_code: |-
+        do_bist_der_noch is False
+        bist_der_noch is input('ben je er noch? ja of nee?')
+        if bist_der_noch is ja:
+            do_bist_der_noch is True
+        if do_bist_der_noch is True:
+            print('Hallo!')
+        if do_bist_der_noch is False:
+            print('Doei!')
+    intro_text: |-
+        Wy sille it no ha oer 'wier' en 'net wier'. Kinst in fariabele op 'wier' sette (`True`) en op 'net wier': `False`.
+        Dit kinst bygelyks brûke om by te hâlden oftst eat al dien hast.
+    commands:
+      - name: "Foarbyld"
+        explanation: "Hjir in foarbyldsje fan in fraach om in rekkensom te antwurdzjen. Meist 5 kear in antwurd jaan. As it goed is, makket it goed_antwurd `True` (dus wier)"
+        example: "goed_antwurd is `False`"
+        demo_code: |-
+            for i in range(0, 5):
+                goed_antwurd is False
+                antwurd is input('Wat is 5*5')
+                if antwurd is 25:
+                    goed_antwurd is True
+                else:
+                    goed_antwurd is False
+                if goed_antwurd is True:
+                    print('Dat is goed!')
+                if goed_antwurd is False:
+                    print('Dat is fout! Meist it noch ' 5-i ' kear besykje')
+14:
+    start_code: |-
+        do_bist_der_noch is False
+        bist_der_noch is input('Bist der noch? ja as nee?')
+        if bist_der_noch is ja:
+            do_bist_der_noch is True
+        antwurd is input('Wat is 5*5?')
+        if do_bist_der_noch is True and antwurd is 25:
+            print('Do hast ja sein en in goed antwurd jûn!')
+    intro_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `if`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
+    commands:
+    -   name: "And"
+        explanation: "`And` is dus en. Beide dingen links en rechts fan de `and` moeten waar zijn."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            antwurd1 is input('Hoefolle is 3+2?')
+            antwurd2 is input('Hoefolle is 2+2?')
+            if antwurd1 is 5 and antwurd2 is 4:
+                print('Beide antwurden binne goed!')
+            else:
+                print('Minimaal 1 antwurd is fout!')
+    -   name: "Or"
+        explanation: "`Or` is dus of. Minimaal 1 fan de 2 tusken de `or` moat goed wêze. beide goed mei ek."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            antwurd1 is input('Hoefolle is 3+2?')
+            antwurd2 is input('Hoefolle is 2+2?')
+            if antwurd1 is 5 or antwurd2 is 4:
+                print('Je hebt minimaal 1 antwurd goed!')
+            else:
+                print('Beide antwurden binne fout!')
+15:
+    start_code: |-
+        # Dit is een programma dat in tal sommen freegjen giet
+        
+        for i in range(1, 10):
+            # We sille de tafel fan 5 freegje
+            antwurd is input('Hoefolle is ' i ' kear 5?')
+            # We sjogge oft de som lyk is oan it antwurd
+            goed_antwurd is i * 5
+            if antwurd is goed_antwurd:
+                print(antwurd ' is goed')
+            else:
+                print('Dat is fout, it moat: ' i*5 ' wêze')
+    intro_text: |- 
+        Ast gruttere programma's makkest, silst byhâlde moatte wat elts stikje koade docht. Hjir brûke wy 'comments' foar.
+        In comment sjocht der sa út:
+        `# dit is in comment`. 
+        Alles wat op de rigel nei de # skreaun wurdt, brûkt Hedy net yn it programma.
+    commands:
+    -   name: "Comment"
+        explanation: "We kinne oeral wêr't wy wolle comments delsette."
+        example: "# Dit is in comment"
+        demo_code: |-
+            # Dit programma print goeie
+            # It is gemaakt in Hedy
+            # It docht eins neat fierder!
+            print('goeie')
+16:
+    start_code: |-
+        leeftyd is input('Hoe âld bisto?')
+        if leeftyd < 12:
+            print('Dan bist jonger as ik!')
+        elif leeftyd > 12:
+            print('Dan bist âlder as ik!')
+    intro_text: |-
+        We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal 
+        lytser is as it twadde lykas `4 < 5`. De `>` sjocht oft eat grutter is as it twadde getal, lykas `6 > 5`.
+    commands:
+    -   name: "Lytser"
+        explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+        example: "Foarbyld: leeftyd < 12"
+        demo_code: |-
+            leeftyd is input('Hoe âld bisto?')
+            if leeftyd < 12:
+                print('Dan bist jonger as ik!')
+    -   name: "Grutter"
+        explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+        example: "Foarbyld: leeftyd > 12"
+        demo_code: |-
+            leeftyd is input('Hoe âld bisto?')
+            if leeftyd > 12:
+                print('Dan bist âlder as ik!')
+17:
+    start_code: |-
+        goed_antwurd is False
+        # We gean troch oant der in goed antwurd jûn is!
+        while goed_antwurd is False:
+            antwurd is input('Wat is 5 kear 5?')
+            if antwurd is 25:
+                goed_antwurd is True
+                print('Dat wie it goede antwurd!')
+    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
+    commands:
+    -   name: "Boolean while"
+        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
+        example: "Foarbyld: while goed_antwurd is False"
+        demo_code: |-
+            goed_antwurd is False
+            # We gean troch oant der in goed antwurd jûn is!
+            while goed_antwurd is False:
+                antwurd is input('Wat is 5 kear 5?')
+                if antwurd is 25:
+                    goed_antwurd is True
+                    print('Dat wie it goede antwurd')
+    -   name: "Smaller while"
+        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
+        example: "Foarbyld: while tel < 3"
+        demo_code: |-
+            tel is 1
+            # we gean troch oant de tel 3 is!
+            while tel < 3:
+                print('Dit is de ' tel 'e kear')
+                tel is tel + 1
+            print('We zijn klaar')
+18:
+    start_code: |-
+        list is ['earste', 'twadde', 'tredde']
+        twaddewearde is list[2]
+        print(twaddewearde)
+    intro_text: "Bij een list kan je een specifieke waarde pakken. Stel je wilt It twade ding in de list hebben, dan typ je `list[2]`."
+    commands:
+    -   name: "Optellen"
+        explanation: "We kinne bygelyks alles bij inoar optelle"
+        example: "list[1]"
+        demo_code: |-
+            list is ['1', '2', '3']
+            opteld is list[1] + list[2]
+            opteld is opteld + list[3]
+            # we ferwachtsje hjir 6
+            print(opteld)
+19:
+    start_code: |-
+        fruit is ['apel', 'banaan', 'kjers']
+        for i in range(1, 3):
+            print(fruit[i])
+    intro_text: "We kinne ek alles fan de list sjen litte. Omt er trije dingen yn sitte, pakke we de `for`-lus fan 1 oant 3. No printe we alles út wat yn de list sit."
+    commands:
+    -   name: "Lingte fan in list"
+        explanation: "Mei `length` kinst sjen hoe grut in list is. Hjir is `length` bygelyks 3 want we ha 3 dingen yn de list"
+        example: "length(fruit)"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            print('lingte fan de list is ' length(fruit))
+            for i in range(1, length(fruit)):
+                print(fruit[i])
+20:
+    start_code: |-
+        print('Hoefolle is 5+3?')
+        antwurd = 5+3
+        print('antwurd is nu:')
+        print(antwurd)
+        if antwurd == 8:
+            print('Dat is goed!')
+        else:
+            print('Spitich, dat is fout!')
+    intro_text: "No feroarje wy is yn `=` en `==`. Brûkst `=` ast eat in getal meitsje wolst. Ast bygelyks antwurd 8 meitsje wolst, seist `antwurd = 8`. `==` brûkst om te sjen of twa dingen itselde binne."
+    commands:
+    -   name: "Fergelykje"
+        explanation: "As we fergelykje wolle, brûke we dus `==`. `5+3 == 8` sjoch of 5+3 gelyk is oan 8"
+        example: "Foarbyld: 5+3 == 8"
+        demo_code: |-
+            if 5+3 == 8:
+                print('5+3 is yndie 8')
+            else:
+                print('Dit wurdt net printe, want 5+3 is 8!')
+    -   name: "Wearde jaan"
+        explanation: "As wy sizze wolle dat in fariabele mei de namme `antwurd` 8 is, dan dogge wy `antwurd = 8`."
+        example: "Foarbyld: antwurd = 8"
+        demo_code: |-
+            print('Hoefolle is 5+3?')
+            antwurd = 5+3
+            print('antwurd is no:')
+            print(antwurd)
+    -   name: "Fergelykje en wearde jaan"
+        explanation: "As we fergelykje wolle, brûke we dus `==`. As we in wearde jouwe dan brûke we `=`."
+        example: "Foarbyld: antwurd == 8, antwurd = 8"
+        demo_code: |-
+            print('Hoefolle is 5+3?')
+            antwurd = 5+3
+            print('antwurd is no:')
+            print(antwurd)
+            if antwurd == 8:
+                print('Dat is goed!')
+            else:
+                print('Spitich leave, dat is fout!')
+21:
+    start_code: |-
+        lân = input('Yn hokker (welk) lân wennest do?')
+        if lân != Nederland:
+            print('Tsjom!')
+        else:
+            print('Ik ek!')
+    intro_text: "We sille wer in nij teken leare, de `!=` . De ! betsjut 'net' en de = betsjut 'gelyk' dus != is 'net gelyk'. Foarbyld: `5 != 4`."
+    commands:
+    -   name: "Net gelyk"
+        explanation: "As wy witte wolle oft dingen net itselde binne, brûke we dus `!=`"
+        example: "Foarbyld: 5+3 != 9"
+        demo_code: |-
+            getal = input('Meist gjin 5 sizze: wat is in leuk getal?')
+            if getal != 5:
+                print('Kreas hear!')
+            else:
+                print('Fout! Mochst 5 sizze')
+22:
+    start_code: |-
+        leeftyd = input('Ik bin 12 jier, hoe âld bisto?')
+        if leeftyd <= 11:
+            print('Dan bisto jonger as ik!')
+        elif leeftyd >= 13:
+            print('Dan bisto âlder as ik!')
+    intro_text: "No sille wy < en = tegearre brûke. As we witte wolle oft eat lytser of gelyk oan it twadde getal is dan brûke wy `<=`. Itselde kinst dwaan mei `>=`"
+    commands:
+    -   name: "Lytser gelyk"
+        explanation: "De `<=` sjocht dus oft it earste getal lytser of gelyk is oan it twadde getal. Dus 5 < 5 is 'net wier' want 5 is net lytser as 5 mar 5 <= 5 is wol 'wier' want 5 is gelyk oan 5. 6 <= 5 is dus net wier."
+        example: "Foarbyld: leeftyd <= 12"
+        demo_code: |-
+            leeftyd = input('Ik bin 13 jier, hoe âld bisto?')
+            if leeftyd <= 12:
+                print('Dan bist jonger as ik!')
+    -   name: "Grutter gelyk"
+        explanation: "De `>=` sjocht dus oft it earste getal grutter as gelyk is oan it twadde getal. Dus 5 > 5 is 'net wier' want 5 is net grutter as 5 mar 5 >= 5 is wol 'wier' want 5 is gelyk oan 5. 4 >= 5 is dus net wier."
+        example: "Foarbyld: leeftyd >= 12"
+        demo_code: |-
+            leeftyd = input('Ik bin 11 jier, hoe âld bisto?')
+            if leeftyd >= 12:
+                print('Dan bistâlder as ik!')

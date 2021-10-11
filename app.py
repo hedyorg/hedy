@@ -1,4 +1,5 @@
 import sys
+from website.yaml_file import YamlFile
 if (sys.version_info.major < 3 or sys.version_info.minor < 6):
     print ('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join ([str (sys.version_info.major), str (sys.version_info.minor), str (sys.version_info.micro)]))
     quit ()
@@ -19,8 +20,9 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
+from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
+import textwrap
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
@@ -72,7 +74,7 @@ DATABASE = database.Database()
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys ():
-        adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
+        adventures[lang] = YamlFile.for_file(f'coursedata/adventures/{lang}.yaml')
     return adventures
 
 
@@ -257,19 +259,19 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
-    if 'sublevel' in body and not isinstance(body ['sublevel'], int):
-        return "If present, body.sublevel must be an integer", 400
     if 'adventure_name' in body and not isinstance(body ['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
     level = int(body ['level'])
-    sublevel = body.get ('sublevel') or 0
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+
+    # true if kid enabled the read aloud option
+    read_aloud = body.get('read_aloud', False)
 
     response = {}
     username = current_user(request) ['username'] or None
@@ -279,13 +281,24 @@ def parse():
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
         with querylog.log_time('transpile'):
-            transpile_result = hedy.transpile(code, level, sublevel)
+            transpile_result = hedy.transpile(code, level)
             python_code = transpile_result.code
             has_turtle = transpile_result.has_turtle
 
         response['has_turtle'] = has_turtle
         if has_turtle:
-            response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+            response["Code"] = textwrap.dedent("""\
+            # coding=utf8
+            import random, time, turtle
+            t = turtle.Turtle()
+            t.hideturtle()
+            t.speed(0)
+            t.penup()
+            t.goto(50,100)
+            t.showturtle()
+            t.pendown()
+            t.speed(3)
+            """) + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
 
@@ -313,6 +326,7 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
+        'read_aloud': read_aloud,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
@@ -451,6 +465,9 @@ def get_quiz_start(level):
                                auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
 
+def quiz_data_file_for(level):
+    return YamlFile.for_file(f'coursedata/quiz/quiz_questions_lvl{level}.yaml')
+
 # Quiz mode
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
@@ -459,9 +476,8 @@ def get_quiz(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
-        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
-        else:
+        quiz_data = quiz_data_file_for(level_source)
+        if not quiz_data.exists():
             return 'No quiz yaml file found for this level', 404
 
         # set globals
@@ -527,9 +543,8 @@ def submit_answer(level_source, question_nr, attempt):
         chosen_option = request.form["radio_option"]
 
         # Reading yaml file
-        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
-            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
-        else:
+        quiz_data = quiz_data_file_for(level_source)
+        if not quiz_data.exists():
             return 'No quiz yaml file found for this level', 404
 
         # Convert question_nr to an integer
@@ -685,12 +700,7 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    # Sublevel requested
-    if re.match ('\d+-\d+', level):
-        pass
-        # If level has a dash, we keep it as a string
-    # Normal level requested
-    elif re.match ('\d', level):
+    if re.match('\d', level):
         try:
             g.level = level = int(level)
         except:
@@ -1074,13 +1084,13 @@ def share_unshare_program(user):
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
     # FIXME: right now loading source file on demand. We might need to cache this...
-    source_adventures = load_yaml(f'coursedata/adventures/{source}.yaml')
-    source_levels = load_yaml(f'coursedata/level-defaults/{source}.yaml')
-    source_texts = load_yaml(f'coursedata/texts/{source}.yaml')
+    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml')
+    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml')
+    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml')
 
-    target_adventures = load_yaml(f'coursedata/adventures/{target}.yaml')
-    target_levels = load_yaml(f'coursedata/level-defaults/{target}.yaml')
-    target_texts = load_yaml(f'coursedata/texts/{target}.yaml')
+    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml')
+    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml')
+    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml')
 
     files = []
 

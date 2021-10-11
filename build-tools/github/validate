@@ -1,8 +1,9 @@
 #!/bin/bash
-# Run all validation scripts
+# Run all validation scripts.
+# This script runs on GitHub in the PR build, NOT ON HEROKU. It can therefore not
+# rely on the dependencies of the top-level package.json having been installed.
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
-
 
 $scriptdir/validate-python
 $scriptdir/validate-tests

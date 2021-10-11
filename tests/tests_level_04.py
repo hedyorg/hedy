@@ -65,6 +65,23 @@ class TestsLevel4(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_allow_space_after_else_line(self):
+    #this code has a space at the end of line 2
+    code = textwrap.dedent("""\
+    a is 2
+    if a is 1 print a 
+    else print 'nee'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    a = '2'
+    if a == '1':
+      print(f'{a}')
+    else:
+      print(f'nee')""")
+
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
@@ -385,6 +402,26 @@ class TestsLevel4(unittest.TestCase):
       with self.assertRaises(Exception) as context:
         result = hedy.transpile(code, self.level)
       self.assertEqual(str(context.exception), 'Invalid')
+
+
+  def test_no_space_after_keyword(self):
+    max_level = 22
+    for level in range(self.level, max_level+1):
+
+      code = textwrap.dedent("""\
+      print'test'""")
+
+      expected = textwrap.dedent("""\
+          print(f'test')""")
+
+      with self.assertRaises(hedy.InvalidCommandException) as context:
+        result = hedy.transpile(code, level)
+      self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+      print(f'{self.test_name()} level {level}')
+
+
+
+
 
   # def test_list_find_issue(self):
   #   #'list' object has no attribute 'find'
