@@ -7,10 +7,10 @@ questions:
                     print 'Hallo'
                     print 'Ik ben Hedy!'
             mp_choice_options:
-              - {option_text: "Hallo /n Ik ben Hedy", code: "", feedback: "Helaas. Alles wordt 2x herhaald."}
-              - {option_text: "Hallo /n Hallo /n Ik ben Hedy", code: "", feedback: "Helaas. Ook de tweede zin wordt 2x herhaald."}
-              - {option_text: "Hallo /n ik ben Hedy /n Hallo /n Ik ben Hedy", code: "", feedback: Super!"}
-              - {option_text: "Hallo /n Ik ben Hedy /n Ik ben Hedy", code: "", feedback: "Helaas. Beide zinnen worden 2x herhaald"}
+              - {option_text: "Hallo \n Ik ben Hedy", code: "", feedback: "Helaas. Alles wordt 2x herhaald."}
+              - {option_text: "Hallo \n Hallo \n Ik ben Hedy", code: "", feedback: "Helaas. Ook de tweede zin wordt 2x herhaald."}
+              - {option_text: "Hallo \n ik ben Hedy \n Hallo \n Ik ben Hedy", code: "", feedback: Super!"}
+              - {option_text: "Hallo \n Ik ben Hedy \n Ik ben Hedy", code: "", feedback: "Helaas. Beide zinnen worden 2x herhaald"}
             correct_answer: "C"
             hint: "Beide zinnen onder het repeat commando worden 2x herhaald."
             question_score: 10
@@ -34,10 +34,10 @@ questions:
                     print 'Baby shark tututudutudu'
                 print Baby shark
             mp_choice_options:
-              - {option_text: "Baby shark tututudutudu /n Baby shark", code: "", feedback: "Helaas. Let op het repeat commando!"}
-              - {option_text: "Baby shark tututudutudu /n Baby shark /n Baby shark tututudutudu /n Baby shark /n Baby shark tututudutudu /n Baby shark", code: "", feedback: "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus niet herhaald."}
-              - {option_text: "Baby shark tututudutudu /n Baby shark tututudutudu /n Baby shark tututudutudu /n Baby shark" , code: "", feedback: "Juist!"}
-              - {option_text: "Baby shark tututudutudu /n Baby shark /n Baby shark /n Baby shark", code: "", feedback: "Helaas, kijk goed naar wat er wel en niet herhaald wordt."}
+              - {option_text: "Baby shark tututudutudu \n Baby shark", code: "", feedback: "Helaas. Let op het repeat commando!"}
+              - {option_text: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark", code: "", feedback: "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus niet herhaald."}
+              - {option_text: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark" , code: "", feedback: "Juist!"}
+              - {option_text: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark", code: "", feedback: "Helaas, kijk goed naar wat er wel en niet herhaald wordt."}
             correct_answer: "C"
             hint: "Regel 2 springt in en wordt dus drie keer herhaald. Daarna komt regel 3 pas, die niet inspringt en dus ook niet herhaald wordt."
             question_score: 10
@@ -49,10 +49,10 @@ questions:
                     print 'Hoera!'
                     print 'We gaan op vakantie!'
             mp_choice_options:
-              - {option_text: "De kinderen riepen: /n Hoera! /n We gaan op vakantie!", code: "", feedback: "Helaas. Let op het repeat commando!"}
-              - {option_text: "De kinderen riepen: /n Hoera! /n We gaan op vakantie! /n Hoera! /n We gaan op vakantie!", code: "", feedback: "Correct!"}
-              - {option_text: "De kinderen riepen: /n Hoera! /n Hoera! /n We gaan op vakantie! /n We gaan op vakantie", code: "", feedback: "Helaas. Deze volgorde klopt niet."}
-              - {option_text: "De kinderen riepen: /n Hoera! /n Hoera! /n We gaan op vakantie!", code: "", feedback: "Helaas. Ook de laatste zin wordt 2x herhaald."}
+              - {option_text: "De kinderen riepen: \n Hoera! \n We gaan op vakantie!", code: "", feedback: "Helaas. Let op het repeat commando!"}
+              - {option_text: "De kinderen riepen: \n Hoera! \n We gaan op vakantie! \n Hoera! \n We gaan op vakantie!", code: "", feedback: "Correct!"}
+              - {option_text: "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie! \n We gaan op vakantie", code: "", feedback: "Helaas. Deze volgorde klopt niet."}
+              - {option_text: "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie!", code: "", feedback: "Helaas. Ook de laatste zin wordt 2x herhaald."}
             correct_answer: "B"
             hint: "Het blokje onder het repeat commando wordt 2x herhaald."
             question_score: 10
@@ -143,10 +143,10 @@ questions:
                 else
                     print 'De computer ontploft in 5... 4... 3... 2... 1...'
             mp_choice_options:
-              - {option_text: "Goed gedaan! n/ Goed gedaan!", code: "", feedback: ""}
+              - {option_text: "Goed gedaan! \n Goed gedaan!", code: "", feedback: ""}
               - {option_text: "De computer ontploft in 5... 4... 3... 2... 1...", code: "", feedback: ""}
-              - {option_text: "Goed gedaan! n/ Goed gedaan! n/ Je mag computeren" , code: "", feedback: ""}
-              - {option_text: "Goed gedaan! n/ Je mag computeren! n/ Goed gedaan!d n/ Je mag computeren", code: "", feedback: ""}
+              - {option_text: "Goed gedaan! \n Goed gedaan! \n Je mag computeren" , code: "", feedback: ""}
+              - {option_text: "Goed gedaan! \n Je mag computeren! \n Goed gedaan! \n Je mag computeren", code: "", feedback: ""}
             correct_answer: "D"
             hint: "Alles onder de repeat wordt 2 keer herhaald"
             question_score: 10

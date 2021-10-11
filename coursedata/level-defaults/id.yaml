@@ -1,6 +1,6 @@
 1:
     intro_text: |-
-        Selamat datang di Hedy! Pada level 1 kamu dapat menggunakan perintah 'print', 'ask' dan 'echo'.
+        Selamat datang di Hedy! Pada level 1 kamu dapat menggunakan perintah `print`, `ask` dan `echo`.
 
         Pada bagian kiri kamu dapat melihat semua perintah untuk level 1.
 
@@ -11,46 +11,46 @@
         Tidak tahu apa yang mau dibuat? Pada tab-tab berikutnya kamu akan menemukan beberapa ide tentang apa yang bisa dibuat.
     start_code: print halo dunia!
     commands:
-    -   explanation: Tampilkan sesuatu dengan 'print'.
+    -   explanation: Tampilkan sesuatu dengan `print`.
         example: 'Contoh: print Halo selamat datang di Hedy!'
         demo_code: print Halo selamat datang di Hedy!
-    -   explanation: Tanyakan sesuatu dengan 'ask'
+    -   explanation: Tanyakan sesuatu dengan `ask`
         example: 'Contoh: ask Apa warna favoritmu?'
         demo_code: ask Apa warna favoritmu?
-    -   explanation: Ulangi sesuatu dengan 'echo'
+    -   explanation: Ulangi sesuatu dengan `echo`
         example: 'Contoh: echo maka warna favoritmu adalah'
         demo_code: |-
             ask Apa warna favoritmu?
             echo maka warna favoritmu adalah
 2:
     intro_text: |-
-        Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan 'is'.
+        Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `is`.
 
-        Jika kamu menggunakan kode 'nama is Hedy', kamu dapat menggunakan 'nama' tersebut dimanapun pada kodemu dan semuanya akan digantikan dengan 'Hedy'.
+        Jika kamu menggunakan kode `nama is Hedy`, kamu dapat menggunakan 'nama' tersebut dimanapun pada kodemu dan semuanya akan digantikan dengan 'Hedy'.
 
-        Catatan: perintah 'ask' sudah diupdate. Kamu juga dapat menyimpan jawaban dari perintah tersebut dengan sebuah nama, seperti ini:
-        '''
+        Catatan: perintah `ask` sudah diupdate. Kamu juga dapat menyimpan jawaban dari perintah tersebut dengan sebuah nama, seperti ini:
+        ```
         jawaban is ask What is your name?
-        '''
+        ```
 
-        'print' tetap berfungsi sama dengan di level 1, dan kamu tidak lagi membutuhkan 'echo'.
+        `print` tetap berfungsi sama dengan di level 1, dan kamu tidak lagi membutuhkan `echo`.
 
-        Pada level 2 kamu juga dapat membuat list. Kamu dapat meminta komputer memilih sesuatu secara acak dari list tersebut. Kamu dapat melakukan itu dengan 'at random'.
+        Pada level 2 kamu juga dapat membuat list. Kamu dapat meminta komputer memilih sesuatu secara acak dari list tersebut. Kamu dapat melakukan itu dengan `at random`.
 
         Kamu bisa menemukan semua kode contoh level 2 pada bagian kiri. Ada juga diberikan latihan pada tab-tab diatas.
     start_code: print halo dunia!
     commands:
-    -   explanation: Berikan sebuah kata nama untuk digunakan di program dengan menggunakan 'is'
+    -   explanation: Berikan sebuah kata nama untuk digunakan di program dengan menggunakan `is`
         example: 'Contoh: nama is Hedy'
         demo_code: |-
             nama is Hedy
             print selamat datang nama
-    -   explanation: Tanyakan sesuatu dengan 'ask'. Ingat, kamu harus memberikan jawabannya sebuah nama menggunakan 'is'
+    -   explanation: Tanyakan sesuatu dengan `ask`. Ingat, kamu harus memberikan jawabannya sebuah nama menggunakan `is`
         example: 'Contoh: warna is ask Apa warna favoritmu?'
         demo_code: |-
             warna is ask Apa warna favoritmu?
             print warna ini kesukaanmu
-    -   explanation: Pilih satu kata acak dari kumpulan kata dengan 'at' dan 'random'
+    -   explanation: Pilih satu kata acak dari kumpulan kata dengan `at` dan `random`
         example: 'Contoh: hewan is anjing, kucing, kangguru'
         demo_code: |-
             hewan is anjing, kucing, kangguru
@@ -58,11 +58,11 @@
 3:
     start_code: print 'Halo dunia'
     intro_text: |-
-        Pada level 3 perintah 'ask' dan 'print' sudah diupdate.
+        Pada level 3 perintah `ask` dan `print` sudah diupdate.
 
         Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip satu.
 
-        Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan 'is'.
+        Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan `is`.
 
         Kebanyakan bahasa pemrograman juga menggunakan tanda kutip ketika menampilkan, jadi sebenarnya kita satu langkah lebih dekat dengan pemrograman yang sebenarnya!
 
@@ -73,12 +73,12 @@
     -   explanation: Tampilkan sama persis dengan menggunakan tanda kutip
         example: "Contoh: print 'Halo selamat datang di Hedy'"
         demo_code: print 'Halo selamat datang di Hedy'
-    -   explanation: Berikan sebuah nama ke sebuah teks dan 'print' tanpa tanda kutip
+    -   explanation: Berikan sebuah nama ke sebuah teks dan `print` tanpa tanda kutip
         example: 'Contoh: nama is Hedy'
         demo_code: |-
             nama is Hedy
-            print 'nama saya adalah 'nama
-    -   explanation: Tanyakan sesuatu dengan 'ask'
+            print 'nama saya adalah ' nama
+    -   explanation: Tanyakan sesuatu dengan `ask`
         example: "Contoh: warna is ask 'Apa warna favoritmu?'"
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
@@ -88,26 +88,26 @@
         nama is ask 'siapa nama kamu?'
         if nama is Hedy print 'keren' else print 'boo'
     intro_text: |-
-        Perintah 'ask' dan 'print' tetap sama seperti pada level 3.
+        Perintah `ask` dan `print` tetap sama seperti pada level 3.
 
-        Pada level 4, ada hal baru, 'if'! Dengan 'if' kamu bisa memilih antara dua pilihan.
+        Pada level 4, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.
 
         ## Contoh kode Hedy
-        '''
+        ```
         nama is ask 'siapa nama kamu?'
         if nama is Hedy print 'keren' else print 'boo'
-        '''
+        ```
 
         Kode ini menampilkan keren jika kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.
 
         ## Tips
-        Terkadang kode dengan 'if' bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> 
-        Kamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan 'else' seperti ini:
-        '''
+        Terkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> 
+        Kamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:
+        ```
         nama is ask 'siapa nama kamu?'
         if nama is Hedy print 'keren' 
         else print 'boo'
-        '''
+        ```
 
         ## Tugas-tugas akan menjadi semakin kompleks
 
@@ -116,12 +116,12 @@
     -   explanation: Tampilkan sama persis dengan menggunakan tanda kutip
         example: "Contoh: print 'Halo selamat datang di Hedy'"
         demo_code: print 'Halo selamat datang di Hedy'
-    -   explanation: Tanyakan sesuatu dengan 'ask'
+    -   explanation: Tanyakan sesuatu dengan `ask`
         example: "Contoh: warna is ask 'Apa warna favoritmu?'"
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
             print warna ' ini adalah kesukaanmu!'
-    -   explanation: Ambillah sebuah pilihan dengan 'if'
+    -   explanation: Ambillah sebuah pilihan dengan `if`
         example: "Contoh: if warna is hijau print 'cantik!' else print 'meh!'"
         demo_code: |-
             warna is ask 'Apa warna favorit kamu?'
@@ -129,28 +129,28 @@
 6:
     start_code: repeat 3 times print 'Hedy itu menyenangkan!'
     intro_text: |-
-        'ask', 'print', dan 'if' berfungsi sama persis dengan yang ada pada level 4. 
-        Tapi level 5 menambahkan perintah 'repeat'. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
+        `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4. 
+        Tapi level 5 menambahkan perintah `repeat`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
 
         ## Contoh kode Hedy
-        '''
+        ```
         repeat 3 times print 'Hedy itu menyenangkan!'
-        '''
+        ```
     commands:
     -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
         example: "Contoh: print 'Halo selamat datang di Hedy'"
         demo_code: print 'Halo selamat datang di Hedy'
-    -   explanation: Tanyakan sesuatu dengan 'ask'
+    -   explanation: Tanyakan sesuatu dengan `ask`
         example: "Contoh: warna is ask 'Apa warna favoritmu?'"
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
             print warna ' adalah warna favoritmu!'
-    -   explanation: Ambillah sebuah pilihan dengan 'if'
+    -   explanation: Ambillah sebuah pilihan dengan `if`
         example: "Contoh: if warna is hijau print 'cantik!' else print 'meh!'"
         demo_code: |-
             warna is ask 'Apa warna favorit kamu?'
             if warna is hijau print 'cantik!' else print 'meh!'
-    -   explanation: Gabungan 'repeat' dan 'if'
+    -   explanation: Gabungan `repeat` dan `if`
         example: "Contoh: if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
@@ -158,26 +158,26 @@
 5:
     start_code: print '5 kali 5 adalah ' 5 * 5
     intro_text: |-
-        'ask', 'print', dan 'if' berfungsi sama persis dengan yang ada pada level 4 dan level 5.
+        `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
         Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
 
         Pada level 6, kode baru sudah ditambahkan untuk perhitungan matematika.
 
-        Penambahan itu mudah, kamu menuliskannya persis seperti di matematika: '5 + 5' sebagai contoh. Pengurangan juga mudah dituliskan, seperti '5 - 5'.
+        Penambahan itu mudah, kamu menuliskannya persis seperti di matematika: `5 + 5` sebagai contoh. Pengurangan juga mudah dituliskan, seperti `5 - 5`.
 
         Perkalian sedikit berbeda, karena tidak ada simbol perkalian di keyboard kita. Cobalah cari, ini beneran tidak ada!
-        Karenanya kita melakukan perkalian dengan tanda bintang diatas tombol '8': '5 * 5'. Baca itu sebagai 5 kali 5 dan kamu akan lebih mudah mengingatnya.
+        Karenanya kita melakukan perkalian dengan tanda bintang diatas tombol '8': `5 * 5`. Baca itu sebagai 5 kali 5 dan kamu akan lebih mudah mengingatnya.
 
         ## Contoh kode Hedy
-        '''
+        ```
         print '5 tambah 5 adalah ' 5 + 5
         print '5 kurang 5 adalah ' 5 - 5
         print '5 kali 5 adalah ' 5 * 5
-        ''''
+        ```
     commands:
     -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
-        example: "Contoh: print '5 kali 5 adalah' 5 * 5"
-        demo_code: print '5 kali 5 adalah' 5 * 5
+        example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
+        demo_code: print '5 kali 5 adalah ' 5 * 5
     -   explanation: Tanyakan hasil suatu perhitungan dan cek apakah hasilnya benar
         example: "Contoh: jawaban is ask 'Apa hasil dari 10 tambah 10?'"
         demo_code: |-
@@ -189,18 +189,18 @@
             print 'Halo semua'
             print 'Ini akan ditampilkan lima kali'
     intro_text: |-
-        'ask' dan 'print' tetap berfungsi sama seperti sebelumnya. Tapi 'if' dan 'repeat' berubah. 
+        `ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. 
         Kamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.
         Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.
 
         ## Contoh kode Hedy
-        '''
+        ```
         repeat 5 times
             print 'halo semua'
             print 'Ini akan ditampilkan lima kali'
-        '''
+        ```
 
-        Jika kamu menggabungkan sebuah perintah 'repeat' dan 'if', kamu perlu memberikan indentasi untuk setiap kumpulan kode program. Lihatlah contoh kode ini untuk detil lebih lanjut!
+        Jika kamu menggabungkan sebuah perintah `repeat` dan `if`, kamu perlu memberikan indentasi untuk setiap kumpulan kode program. Lihatlah contoh kode ini untuk detil lebih lanjut!
 
         ## Contoh kode Hedy
          ```
@@ -226,7 +226,7 @@
             else
                 print 'Ups!'
                 print 'Jawabannya adalah 10'
-    -   explanation: Gabungan perintah 'if' dan 'repeat'
+    -   explanation: Gabungan perintah `if` dan `repeat`
         example: "Contoh: if warna is hijau repeat 3 times print 'cantik!' else repeat 5 times print 'meh'"
         demo_code: |-
             warna is ask 'Apa warna favoritmu?'
@@ -240,10 +240,10 @@
     start_code: |-
         for pembilang in range 1 to 5
             print pembilang
-    intro_text: "'print' berfungsi sama namun 'repeat' kali ini diganti dengan 'for'! Kamu sekarang dapat menulis 'for pembilang in range 1 to 5' dan menggunakan 'pembilang' pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah 'for' dan 'if' (Ini artinya mengawali baris dengan empat spasi)."
+    intro_text: "`print` berfungsi sama namun `repeat` kali ini diganti dengan `for`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `for` dan `if` (Ini artinya mengawali baris dengan empat spasi)."
     commands:
-    -   name: Pengulangan 'for'
-        explanation: Kami mengganti 'repeat' dengan 'for' dan menambahkan batasan untuk pembilang
+    -   name: Pengulangan `for`
+        explanation: Kami mengganti `repeat` dengan `for` dan menambahkan batasan untuk pembilang
         example: for pembilang in range 1 to 5
         demo_code: |-
             for pembilang in range 1 to 5
@@ -263,15 +263,15 @@
         for i in range 1 to 10:
             print i
         print 'Siap atau tidak, aku datang!'
-    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan ':' pada akhir baris sebelumnya
+    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
     commands:
-    -   explanation: Ketika kita menggunakan 'for', kita perlu menambahkan ':' diakhir statemen 'for'
+    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
         example: 'for i in range 1 to 10:'
         demo_code: |-
             for i in range 1 to 10:
                 print i
             print 'Siap atau tidak, aku datang!'
-    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen 'if'
+    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
         example: 'if warna is hijau:'
         demo_code: |-
             warna is hijau
@@ -279,7 +279,7 @@
                 print 'Warnanya hijau'
             else:
                 print 'Warnanya bukan hijau'
-    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:'e;if'. 'elif' berarti 'else if'. Program akan mulai mengecek apakah kondisi di 'if' dipenuhi. Jika tidak, program akan mengecek 'elif' dan jika tidak memenuhi juga, program akan ke 'else'.
+    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
         example: 'elif a is 5:'
         demo_code: |-
             a is 2
@@ -297,13 +297,13 @@
     intro_text: Dimulai dari sekarang, kita bisa melakukan pengulangan lebih sering. Pada contoh, kita menghitung satu hingga lima dan melakukannya sebanyak tiga kali. Jadi kita melakukan tiga ronde dan tiap ronde menghitung dari satu ke lima.
     commands:
     -   name: for
-        explanation: Ini adalah contoh penggunaaan perintah 'for'
+        explanation: Ini adalah contoh penggunaaan perintah `for`
         demo_code: |-
             for i in range 1 to 3:
                 for j in range 1 to 5:
                     print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
     -   name: if
-        explanation: Kita dapat melakukan hal yang sama dengan perintah 'if'
+        explanation: Kita dapat melakukan hal yang sama dengan perintah `if`
         demo_code: |-
             warna is biru
             warnadua is kuning
@@ -316,20 +316,20 @@
         print('Jadi kamu sudah pernah berumur:')
         for i in range(0, umur):
             print(i)
-    intro_text: Kita akan menggunakan kurung dan kita akan mengubah perintah 'ask'! Kita mengubah perintah 'ask' dengan 'input' dan akan menggunakan kurung di perintah tersebut.
+    intro_text: Kita akan menggunakan kurung dan kita akan mengubah perintah `ask`! Kita mengubah perintah `ask` dengan `input` dan akan menggunakan kurung di perintah tersebut.
     commands:
     -   name: Kurung
-        explanation: Kita akan menggunakan kurung di perintah 'print' sekarang!
+        explanation: Kita akan menggunakan kurung di perintah `print` sekarang!
         example: "Sebagai contoh: print('Halo Dunia')"
         demo_code: print('Halo Dunia')
     -   name: Input
-        explanation: Kita membuang perintah 'ask' dan menggantinya dengan 'input', kita juga akan menggunakan kurung.
+        explanation: Kita membuang perintah `ask` dan menggantinya dengan `input`, kita juga akan menggunakan kurung.
         example: "Sebagai contoh: nama is input('Siapa namamu?')"
         demo_code: |-
             nama is input('Siapa namamu?')
             print('Jadi, nama kamu adalah ' nama)
     -   name: for
-        explanation: 'Kita sekarang akan menggunakan kurung untuk membungkus angka-angka yang ada di pengulangan. for i in range(0,10):'
+        explanation: Kita sekarang akan menggunakan kurung untuk membungkus angka-angka yang ada di pengulangan. `for i in range(0,10):`
         example: 'Sebagai contoh: for i in range(0,10):'
         demo_code: |-
             for i in range(0,10):
@@ -371,10 +371,10 @@
             print('Halo!')
         if kamu_tetap_di_sini is False:
             print('Bye!')
-    intro_text: Kita sekarang akan berbicara tentang pembuatan variabel 'True' atau 'False'. Kamu dapat membuat variabel untuk menyimpan nilai 'True' atau 'False'. Kami dapat menggunakan ini untuk menyimpan hasil dari sebuah jawaban.
+    intro_text: Kita sekarang akan berbicara tentang pembuatan variabel `True` atau `False`. Kamu dapat membuat variabel untuk menyimpan nilai `True` atau `False`. Kami dapat menggunakan ini untuk menyimpan hasil dari sebuah jawaban.
     commands:
     -   name: Contoh
-        explanation: Pada contoh ini, kita menggunakan 'True' dan 'False' untuk menyimpan jawaban dari sebuah pertanyaan. Kamu dapat mencoba menjawab 5 kali. Jika jawabannya benar, jawaban_benar akan bernilai 'True'
+        explanation: Pada contoh ini, kita menggunakan `True` dan `False` untuk menyimpan jawaban dari sebuah pertanyaan. Kamu dapat mencoba menjawab 5 kali. Jika jawabannya benar, jawaban_benar akan bernilai `True`
         example: jawaban_benar is 'False'
         demo_code: |-
             for i in range(1, 5):
@@ -397,10 +397,10 @@
         jawaban is input('Apa hasil dari 5*5?')
         if kamu_tetap_di_sini is True and jawaban is 25:
             print('Kamu menjawab iya dan memberi jawaban yang benar')
-    intro_text: "Kita sekarang akan belajar menggunakan perintah 'and' dan 'or'! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua 'if'. Kamu dapat menggunakan 'and' untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari 'and' harus terpenuhi keduanya. Kamu dapat menggunakan 'or' jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
+    intro_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
     commands:
     -   name: And
-        explanation: Kedua kondisi (kiri dan kanan dari perintah 'and') harus bernilai benar
+        explanation: Kedua kondisi (kiri dan kanan dari perintah `and`) harus bernilai benar
         example: if 3+2 is 5 and 2+2 is 4
         demo_code: |-
             jawaban1 is input('Apa hasil dari 3+2?')
@@ -410,7 +410,7 @@
             else:
                 print('Paling tidak salah satu jawaban salah!')
     -   name: Or
-        explanation: Perintah 'or' memastikan bahwa paling tidak satu dari dua kondisi yang diberikan di kiri dan kanan 'or' harus terpenuhi. Keduanya terpenuhi pun tidak masalah.
+        explanation: Perintah `or` memastikan bahwa paling tidak satu dari dua kondisi yang diberikan di kiri dan kanan `or` harus terpenuhi. Keduanya terpenuhi pun tidak masalah.
         example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
             jawaban1 is input('Apa hasil dari 3+2?')
@@ -448,17 +448,17 @@
             print('Kamu lebih muda daripada aku!')
         elif umur > 12:
             print('Kamu lebih tua daripada aku!')
-    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol '<' dan '>'. Simbol '<' mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti '4 < 5'. Simbol '>' mengecek apakah angka pertama lebih besar daripada angka kedua, seperti '6 > 5'."
+    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
     commands:
     -   name: Lebih kecil
-        explanation: Kita menggunakan '<' untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan 'variabel < 15'.
+        explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
         example: 'Sebagai contoh: umur < 12'
         demo_code: |-
             umur is input('Berapa umur mu?')
             if umur < 12:
                 print('Kamu lebih muda daripada aku!')
     -   name: Lebih besar
-        explanation: Kita menggunakan '>' untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan 'variabel > 15'.
+        explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
         example: 'Sebagai contoh: umur > 12'
         demo_code: |-
             umur is input('Berapa umur mu?')
@@ -473,10 +473,10 @@
             if jawaban is 25:
                 jawaban_benar is True
                 print('Sebuah jawaban benar telah diberikan')
-    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan 'while'! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
+    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
     commands:
     -   name: Pengulangan while dengan boolean
-        explanation: Kita dapat menggunakan pengulangan 'while' dengan 'True' dan 'False'
+        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
         example: 'Contoh: while jawaban_benar is False'
         demo_code: |-
             jawaban_benar is False
@@ -487,7 +487,7 @@
                     jawaban_benar is True
                     print('Sebuah jawaban benar telah diberikan')
     -   name: Pengulangan while dengan cakupan lebih kecil
-        explanation: Kita dapat juga menggunakan pengulangan 'while' dengan '<' dan '>'. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan 'pembilang is pembilang + 1' untuk sekarang.
+        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
         example: 'Sebagai contoh: while pembilang < 3'
         demo_code: |-
             pembilang is 1
@@ -501,7 +501,7 @@
         list is ['pertama','kedua','ketiga']
         nilaikedua is list[2]
         print(nilaikedua)
-    intro_text: Ketika kita memiliki list, kita bisa mengambil satu nilai spesifik dari list. Jika kita ingin mengambil nilai kedua dari list, kita menuliskan 'list[2]'
+    intro_text: Ketika kita memiliki list, kita bisa mengambil satu nilai spesifik dari list. Jika kita ingin mengambil nilai kedua dari list, kita menuliskan `list[2]`
     commands:
     -   name: Penjumlahan
         explanation: Kita juga bisa menjumlahkan semua nilai didalam list
@@ -520,7 +520,7 @@
     intro_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
     commands:
     -   name: Ukuran dari list
-        explanation: Dengan 'length' kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
+        explanation: Dengan `length` kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
         example: length(list)
         demo_code: |-
             buah is ['apel', 'pisang', 'ceri']
@@ -537,10 +537,10 @@
             print('Itu benar!')
         else:
             print('Oh tidak, jawaban itu salah!')
-    intro_text: Sekarang kita akan mengubah perintah 'is' ke '=' dan '=='. Kita menggunakan '=' jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama 'jawaban', kamu harus menuliskan 'jawaban = 8'. Simbol '==' digunakan jika kita ingin mengecek apakah dua nilai sama.
+    intro_text: Sekarang kita akan mengubah perintah `is` ke `=` dan `==`. Kita menggunakan `=` jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama `jawaban`, kamu harus menuliskan `jawaban = 8`. Simbol `==` digunakan jika kita ingin mengecek apakah dua nilai sama.
     commands:
     -   name: Perbandingan
-        explanation: Jika kita ingin membandingkan, kita menggunakan '=='. Misal '5+3 == 8' mengecek apakah 5+3 sama dengan 8.
+        explanation: Jika kita ingin membandingkan, kita menggunakan `==`. Misal `5+3 == 8` mengecek apakah 5+3 sama dengan 8.
         example: 'Sebagai contoh: 5+3 == 8'
         demo_code: |-
             if 5+3 == 8:
@@ -548,7 +548,7 @@
             else:
                 print('Ini tidak akan ditambilkan karena 5+3 selalu 8!')
     -   name: Pengisian nilai
-        explanation: Jika kita ingin mengatakan bahwa sebuah variabel bernama 'jawaban' bernilai 8, kita menuliskan 'jawaban = 8'.
+        explanation: Jika kita ingin mengatakan bahwa sebuah variabel bernama `jawaban` bernilai 8, kita menuliskan `jawaban = 8`.
         example: 'Sebagai contoh: jawaban = 8'
         demo_code: |-
             print('Apa hasil dari 5+3?')
@@ -556,7 +556,7 @@
             print('Jawaban adalah :')
             print(jawaban)
     -   name: Perbandingan dan pengisian nilai
-        explanation: Jika kita akan membandingkan dua nilai, kita menggunakan '=='. Jika kita akan mengisi sebuah variabel dengan nilai, kita menggunakan '='.
+        explanation: Jika kita akan membandingkan dua nilai, kita menggunakan `==`. Jika kita akan mengisi sebuah variabel dengan nilai, kita menggunakan `=`.
         example: Sebagai contoh, '5+3 == 8' dan 'answer = 8'
         demo_code: |-
             print('Apakah hasil dari 5+3?')
@@ -574,10 +574,10 @@
             print('Keren!')
         else:
             print('Aku juga dari Indonesia!')
-    intro_text: "Kita akan belajar hal baru, simbol '!='. Karakter '!' menyatakan 'tidak' dan karakter '=' menyatakan 'sama'. Jadi '!=' artinya 'tidak sama'. Sebagai contoh: '5 != 4'."
+    intro_text: "Kita akan belajar hal baru, simbol `!=`. Karakter `!` menyatakan 'tidak' dan karakter `=` menyatakan 'sama'. Jadi `!=` artinya 'tidak sama'. Sebagai contoh: `5 != 4`."
     commands:
     -   name: Tidak sama
-        explanation: Jika kita sedang membandingkan dua hal yang tidak sama, kita menggunakan '!='
+        explanation: Jika kita sedang membandingkan dua hal yang tidak sama, kita menggunakan `!=`
         example: 'Sebagai contoh: 5+3 != 9'
         demo_code: |-
             angka = input('Kamu tidak boleh menjawab dengan angka 5, nomor apa yang keren?')
@@ -592,17 +592,17 @@
             print('Kamu lebih muda dari aku!')
         elif umur >= 13:
             print('Kamu lebih tua dari aku!')
-    intro_text: Kita akan menggabungkan '<' dan '='. Jika kita ingin mengecek apakah suatu nilai lebih kecil atau sama dengan nilai lainnya, kita menggunakan '<='. Kita juga bisa mengecek apakah suatu nilai lebih besar atau sama dengan nilai lainnya dengan menggunakan '>='.
+    intro_text: Kita akan menggabungkan `<` dan `=`. Jika kita ingin mengecek apakah suatu nilai lebih kecil atau sama dengan nilai lainnya, kita menggunakan `<=`. Kita juga bisa mengecek apakah suatu nilai lebih besar atau sama dengan nilai lainnya dengan menggunakan `>=`.
     commands:
     -   name: Lebih kecil sama dengan
-        explanation: "'<=' mengecek apakah angka di kiri simbol '<=' lebih kecil atau sama dengan angka di kanannya. Jadi '5 < 5' tidak benar karena 5 tidak lebih kecil daripada 5 namun '5 <= 5' benar karena 5 itu lebih kecil atau sama dengan 5. '6 <= 5' tidak bernilai benar."
+        explanation: "`<=` mengecek apakah angka di kiri simbol `<=` lebih kecil atau sama dengan angka di kanannya. Jadi `5 < 5` tidak benar karena 5 tidak lebih kecil daripada 5 namun `5 <= 5` benar karena 5 itu lebih kecil atau sama dengan 5. `6 <= 5` tidak bernilai benar."
         example: 'Sebagai contoh: umur <= 12'
         demo_code: |-
             umur = input('Saya berumur 12 tahun, berapakah umur mu?')
             if umur <= 12:
                 print('Kamu lebih muda atau seumuran dengan aku!')
     -   name: Lebih besar
-        explanation: "'>=' mengecek apakah angka di kiri simbol '>=' lebih besar atau sama dengan angka di kanannya. Jadi '5 > 5' tidak benar karena 5 tidak lebih besar daripada 5 namun '5 >= 5' benar karena 5 itu lebih besar atau sama dengan 5. '4 >= 5' tidak bernilai benar."
+        explanation: "`>=` mengecek apakah angka di kiri simbol `>=` lebih besar atau sama dengan angka di kanannya. Jadi `5 > 5` tidak benar karena 5 tidak lebih besar daripada 5 namun `5 >= 5` benar karena 5 itu lebih besar atau sama dengan 5. `4 >= 5` tidak bernilai benar."
         example: 'Sebagai contoh: umur >= 12'
         demo_code: |-
             umur = input('Saya berumur 12 tahun, berapakah umur mu?')

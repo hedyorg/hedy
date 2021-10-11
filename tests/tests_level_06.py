@@ -146,9 +146,9 @@ class TestsLevel6(unittest.TestCase):
     self.assertEqual(expected_output, run_code(result))
 
   def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual(str(context.exception), 'Invalid')
+    self.assertEqual('Invalid', context.exception.error_code)
 
   # todo: a few more things repeated from 4 here?
 
@@ -204,3 +204,30 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, run_code(result))
+
+  def test_repeat_with_collision(self):
+      code = textwrap.dedent("""\
+      i is hallo!
+      repeat 5 times print 'me wants a cookie!'
+      print i""")
+
+      result = hedy.transpile(code, self.level)
+
+      expected = textwrap.dedent("""\
+      i = 'hallo!'
+      for _i in range(int('5')):
+        print('me wants a cookie!')
+      print(str(i))""")
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
+      expected_output = textwrap.dedent("""\
+      me wants a cookie!
+      me wants a cookie!
+      me wants a cookie!
+      me wants a cookie!
+      me wants a cookie!
+      hallo!""")
+
+      self.assertEqual(expected_output, run_code(result))
