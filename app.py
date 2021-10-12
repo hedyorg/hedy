@@ -660,6 +660,7 @@ def adventure_page(adventure_name, level):
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
 @app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
