@@ -1104,6 +1104,10 @@ def create_grammar(level):
         grammar_text_i = get_additional_rules_for_level(i)
         result = merge_grammars(result, grammar_text_i)
 
+    # add in the keywords (currently just the default english ones) afterwards
+    keys = get_keywords_for_language("en")
+    result = merge_grammars(result, keys)
+
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
     save_total_grammar_file(level, result)
@@ -1132,6 +1136,13 @@ def get_additional_rules_for_level(level, sub = 0):
 def get_full_grammar_for_level(level):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "level" + str(level) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
+
+def get_keywords_for_language(language):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "keywords-" + str(language) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
