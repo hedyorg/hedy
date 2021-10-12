@@ -1,6 +1,7 @@
 import copy
 import attr
 from website.yaml_file import YamlFile
+import os
 
 
 class LevelDefaults:
@@ -30,7 +31,14 @@ class Course:
     self.language = language
     self.defaults = defaults
     self._validated = False
-    self.course_file = YamlFile.for_file(f'coursedata/course/{self.course_name}/{self.language}.yaml')
+
+    # no course file? default to en
+    filename = f'coursedata/course/{self.course_name}/{self.language}.yaml'
+    filename_en = f'coursedata/course/{self.course_name}/en.yaml'
+    if os.path.exists(filename):
+      self.course_file = YamlFile.for_file(filename)
+    else:
+      self.course_file = YamlFile.for_file(filename_en)
     self.custom = self.course_file.get('custom', False)
     self.adventures = self.course_file.get('adventures', False)
 
