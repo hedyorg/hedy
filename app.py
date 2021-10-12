@@ -607,10 +607,10 @@ def adventure_page(adventure_name, level):
     adventures = load_adventure_for_language(requested_lang())
 
     # If requested adventure does not exist, return 404
-    if not adventure_name in adventures['adventures']:
+    if not adventure_name in adventures:
         return 'No such Hedy adventure!', 404
 
-    adventure = adventures['adventures'][adventure_name]
+    adventure = adventures[adventure_name]
 
     # If no level is specified(this will happen if the last element of the path(minus the query parameter) is the same as the adventure_name)
     if re.sub(r'\?.+', '', request.url.split('/')[len(request.url.split('/')) - 1]) == adventure_name:
@@ -636,18 +636,10 @@ def adventure_page(adventure_name, level):
     if not level in adventure['levels']:
         abort(404)
 
-    adventures = load_adventures_per_level(requested_lang(), level)
-
-    default_values = LEVEL_DEFAULTS[requested_lang()].levels[level]
-
-    default_type = {
-      "level": str(level),
-    }
-    default_type.update(**default_values)
-
-    defaults = hedy_content.DefaultValues(**default_type)
-
-    max_level = LEVEL_DEFAULTS[requested_lang()].max_level()
+    adventures_for_level = load_adventures_per_level(requested_lang(), level)
+    level_defaults_for_lang = LEVEL_DEFAULTS[requested_lang()]
+    defaults = level_defaults_for_lang.get_defaults_for_level(level)
+    max_level = level_defaults_for_lang.max_level()
 
     g.prefix = '/hedy'
     return hedyweb.render_code_editor_with_tabs(
@@ -659,7 +651,7 @@ def adventure_page(adventure_name, level):
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventures=adventures,
+        adventures=adventures_for_level,
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
@@ -701,22 +693,14 @@ def index(level, step):
             adventure_name = result['adventure_name']
 
     adventures = load_adventures_per_level(requested_lang(), level)
-
-    default_values = LEVEL_DEFAULTS[requested_lang()].levels[level]
-
-    default_type = {
-      "level": str(level),
-    }
-    default_type.update(**default_values)
-
-    default = hedy_content.DefaultValues(**default_type)
-
-    max_level = LEVEL_DEFAULTS[requested_lang()].max_level()
+    level_defaults_for_lang = LEVEL_DEFAULTS[requested_lang()]
+    defaults = level_defaults_for_lang.get_defaults_for_level(level)
+    max_level = level_defaults_for_lang.max_level()
 
     return hedyweb.render_code_editor_with_tabs(
         request=request,
         lang=g.lang,
-        level_defaults=default,
+        level_defaults=defaults,
         max_level=max_level,
         level_number=level,
         menu=render_main_menu('hedy'),
