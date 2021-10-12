@@ -32,7 +32,7 @@
     <div class="mb-4">
         <label for="gender">{{auth.gender}}</label>
         <select id="gender" name="gender">
-          <option value="">{{auth.select}}</option>
+          <option value="" selected disabled hidden>{{auth.select}}</option>
           <option value="f">{{auth.female}}</option>
           <option value="m">{{auth.male}}</option>
           <option value="o">{{auth.other}}</option>
@@ -40,7 +40,9 @@
     </div>
     <div class="mb-4">
         <label for="country">{{auth.country}}</label>
-        <select id="country" name="country"></select>
+        <select id="country" name="country">
+            <option value="" selected disabled hidden>{{auth.select}}</option>
+        </select>
     </div>
     <div class="flex flex-row justify-evenly mb-4">
       <label>{{auth.programming_experience}}</label>
