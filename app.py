@@ -638,15 +638,16 @@ def adventure_page(adventure_name, level):
 
     adventures = load_adventures_per_level(requested_lang(), level)
 
-    default_values = LEVEL_DEFAULTS[requested_lang()]
+    default_values = LEVEL_DEFAULTS[requested_lang()].levels[level]
 
-    default = {
+    default_type = {
       "level": str(level),
     }
-    default.update(**default_values)
+    default_type.update(**default_values)
 
-    all_levels = LEVEL_DEFAULTS[requested_lang()].levels.keys()
-    max_level = max(all_levels)
+    defaults = hedy_content.DefaultValues(**default_type)
+
+    max_level = LEVEL_DEFAULTS[requested_lang()].max_level()
 
     g.prefix = '/hedy'
     return hedyweb.render_code_editor_with_tabs(
@@ -710,8 +711,7 @@ def index(level, step):
 
     default = hedy_content.DefaultValues(**default_type)
 
-    all_levels = LEVEL_DEFAULTS[requested_lang()].levels.data.keys()
-    max_level = max(all_levels)
+    max_level = LEVEL_DEFAULTS[requested_lang()].max_level()
 
     return hedyweb.render_code_editor_with_tabs(
         request=request,

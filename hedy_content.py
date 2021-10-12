@@ -8,6 +8,10 @@ class LevelDefaults:
     self.language = language
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
+  def max_level(self):
+    all_levels = self.levels.data.keys()
+    return max(all_levels)
+
   def get_defaults(self, level):
     """Return the level defaults for a given level number."""
 
@@ -28,13 +32,6 @@ class Adventures:
 class NoSuchAdventure:
   def get_defaults(self, level):
     return {}
-
-@attr.s(slots=True, frozen=True)
-class Command:
-  name = attr.ib(default='')
-  explanation = attr.ib(default='')
-  example = attr.ib(default='')
-  demo_code = attr.ib(default='')
 
 
 @attr.s(slots=True, frozen=True)
