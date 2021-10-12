@@ -178,7 +178,7 @@ function runit(level, lang, cb) {
             {
               row: response.Location[0] - 1,
               column: response.Location[1] - 1,
-              text: response.Error,
+              text: ErrorMessages.Error_Hover,
               type: "error",
             }
           ]);
