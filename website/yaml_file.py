@@ -10,6 +10,15 @@ YAML_FILES_CACHE = {}
 class YamlFile:
     """Data from a YAML file, accessible as if it is a dictionary.
 
+    Use like so:
+
+        file = YamlFile.for_file('path/to/file.yaml')
+
+        if file.exists():
+            print(file['key1'])
+        else:
+            print('oh no')
+
     Since loading the YAML files tends to be slow:
 
     - Caches the loaded data in memory.
@@ -45,6 +54,17 @@ class YamlFile:
 
     def exists(self):
         return os.path.exists(self.filename)
+
+    def to_dict(self):
+        """Return the contents of the file as a plain dict, or an empty dict if the file doesn't exist.
+
+        You should generally not need to use this: this object can be used in places
+        where dicts are expected (except if the file doesn't exist, then accessing it will throw; we
+        can consider changing that behavior to always return an empty dict).
+        """
+        if self.exists():
+            return self.access()
+        return {}
 
     def access(self):
         """Access the data from memory.
