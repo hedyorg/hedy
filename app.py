@@ -69,8 +69,6 @@ HEDY_COURSE = collections.defaultdict(hedy_content.NoSuchCourse)
 for lang in ALL_LANGUAGES.keys():
     HEDY_COURSE[lang] = hedy_content.Course('hedy', lang, LEVEL_DEFAULTS[lang])
 
-ONLINE_MASTERS_COURSE = hedy_content.Course('online_masters', 'nl', LEVEL_DEFAULTS['nl'])
-
 TRANSLATIONS = hedyweb.Translations()
 
 DATABASE = database.Database()
@@ -83,7 +81,6 @@ def load_adventure_for_language(lang):
         adventures_for_lang = ADVENTURES['en']
 
     return adventures_for_lang.adventures_file['adventures']
-
 
 def load_adventures_per_level(lang, level):
 
@@ -664,6 +661,8 @@ def adventure_page(adventure_name, level):
 
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
+@app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
 @app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
@@ -748,48 +747,6 @@ def view_program(id):
 
     return render_template("view-program-page.html", **arguments_dict)
 
-
-@app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
-@app.route('/onlinemasters/<int:level>/<int:step>', methods=['GET'])
-def onlinemasters(level, step):
-    g.level = level = int(level)
-    g.lang = lang = requested_lang()
-    g.prefix = '/onlinemasters'
-
-    adventures = load_adventures_per_level(g.lang, level)
-
-    return hedyweb.render_code_editor_with_tabs(
-        request=request,
-        course=ONLINE_MASTERS_COURSE,
-        level_number=level,
-        translations=TRANSLATIONS,
-        version=version(),
-        menu=None,
-        adventures=adventures,
-        loaded_program='',
-        adventure_name='')
-
-@app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
-@app.route('/space_eu/<int:level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu/<int:level>/<int:step>', methods=['GET'])
-def space_eu(level, step):
-    g.level = level = int(level)
-    g.lang = requested_lang()
-    g.prefix = '/space_eu'
-
-    adventures = load_adventures_per_level(g.lang, level)
-
-    return hedyweb.render_code_editor_with_tabs(
-        request=request,
-        course=HEDY_COURSE[g.lang],
-        level_number=level,
-        translations=TRANSLATIONS,
-        version=version(),
-        menu=None,
-        adventures=adventures,
-        loaded_program='',
-        adventure_name='')
 
 
 
