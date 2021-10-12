@@ -8,21 +8,24 @@ class LevelDefaults:
     self.language = language
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
-  def get_defaults(self, level, sub=0):
-    """Return the level defaults for a given level number.
+  def get_defaults(self, level):
+    """Return the level defaults for a given level number."""
 
-    Returns: Default
-    """
-    if sub:
-      return copy.deepcopy(self.levels.get(str(level) + "-" + str(sub), {}))
-    else:
-      return copy.deepcopy(self.levels.get(int(level), {}))
-
+    return copy.deepcopy(self.levels.get(int(level), {}))
 
 class NoSuchDefaults:
   def get_defaults(self, level):
     return {}
 
+
+class Adventures:
+  def __init__(self, language):
+    self.language = language
+    self.adventures = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+
+class NoSuchAdventure:
+  def get_defaults(self, level):
+    return {}
 
 class Course:
   def __init__(self, course_name, language, defaults):
