@@ -1,35 +1,9 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-import inspect
-from contextlib import contextmanager
+from tests_level_01 import HedyTester
 
-
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-class TestsLevel20(unittest.TestCase):
-    maxDiff = None
+class TestsLevel15(HedyTester):
     level = 20
-
-    def test_name(self):
-        return inspect.stack()[1][3]
 
     def test_print(self):
         result = hedy.transpile("print('ik heet')", self.level)
@@ -71,47 +45,71 @@ class TestsLevel20(unittest.TestCase):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-        self.assertEqual("30", run_code(result))
+        self.assertEqual("30", self.run_code(result))
 
     def test_allow_space_after_else_line(self):
-        max_level = 22
-        for level in range(self.level, max_level + 1):
-            code = textwrap.dedent("""\
+
+        code = textwrap.dedent("""\
         if a == 1:
           print(a)
         else:   
           print('nee')""")
 
-            result = hedy.transpile(code, level)
-
-            expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
         if str(a) == str('1'):
           print(str(a))
         else:
           print('nee')""")
 
-            self.assertEqual(expected, result.code)
-            print(f'{self.test_name()} level {level}')
+        self.multi_level_tester(
+            code=code,
+            max_level=22,
+            expected=expected,
+            test_name=self.test_name(),
+            extra_check_function=self.is_not_turtle()
+        )
+
+
 
     def test_allow_space_before_colon(self):
-        max_level = 22
-        for level in range(self.level, max_level + 1):
-            code = textwrap.dedent("""\
+        code = textwrap.dedent("""\
         if a == 1  :
           print(a)
         else:   
           print('nee')""")
 
-            result = hedy.transpile(code, level)
-
-            expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
         if str(a) == str('1'):
           print(str(a))
         else:
           print('nee')""")
 
-            self.assertEqual(expected, result.code)
-            print(f'{self.test_name()} level {level}')
+        self.multi_level_tester(
+            code=code,
+            max_level=22,
+            expected=expected,
+            test_name=self.test_name(),
+        )
+
+    def test_random(self):
+        code = textwrap.dedent("""\
+        dieren = ['Hond', 'Kat', 'Kangoeroe']
+        print(dieren[random])""")
+
+        expected = textwrap.dedent("""\
+        dieren = ['Hond', 'Kat', 'Kangoeroe']
+        print(str(random.choice(dieren)))""")
+
+        # check if result is in the expected list
+        check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+        self.multi_level_tester(
+        max_level=22,
+        code=code,
+        expected=expected,
+        test_name=self.test_name(),
+        extra_check_function=check_in_list
+        )
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -274,20 +272,6 @@ else:
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
     print(str(fruit))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_random(self):
-        code = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit = fruit[random]
-    print(randomfruit)""")
-        expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit=random.choice(fruit)
-    print(str(randomfruit))""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
