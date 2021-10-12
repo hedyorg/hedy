@@ -9,7 +9,7 @@ class LevelDefaults:
     self.levels = YamlFile.for_file(f'coursedata/level-defaults/{self.language}.yaml')
 
   def max_level(self):
-    all_levels = self.levels.data.keys()
+    all_levels = self.levels.keys()
     return max(all_levels)
 
   def get_defaults_for_level(self, level):
