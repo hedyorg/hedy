@@ -342,11 +342,13 @@ def parse_error_to_response(ex, translations):
         # If we find an invalid keyword, place it in the same location in the error message but without translating
         ex.character_found = ex.keyword_found
     error_message = translate_error(ex.error_code, translations, vars(ex))
-    return {"Error": error_message}
+    location = ex.location if hasattr(ex, "location") else None
+    return {"Error": error_message, "Location": location}
 
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
-    return {"Error": error_message}
+    location = ex.location if hasattr(ex, "location") else None
+    return {"Error": error_message, "Location": location}
 
 def translate_error(code, translations, arguments):
     error_template = translations[code]

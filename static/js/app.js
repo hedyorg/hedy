@@ -151,6 +151,8 @@ function runit(level, lang, cb) {
     var editor = ace.edit("editor");
     var code = editor.getValue();
 
+    editor.session.clearAnnotations();
+
     console.log('Original program:\n', code);
     $.ajax({
       type: 'POST',
@@ -171,6 +173,16 @@ function runit(level, lang, cb) {
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
+        if (response.Location) {
+          editor.session.setAnnotations([
+            {
+              row: response.Location[0] - 1,
+              column: response.Location[1] - 1,
+              text: response.Error,
+              type: "error",
+            }
+          ]);
+        }
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
