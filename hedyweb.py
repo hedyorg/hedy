@@ -31,9 +31,9 @@ class Translations:
     return d
 
 
-def render_code_editor_with_tabs(request, defaults, lang, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
+def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
 
-  if not defaults:
+  if not level_defaults:
     abort(404)
 
 
@@ -42,7 +42,7 @@ def render_code_editor_with_tabs(request, defaults, lang, max_level, level_numbe
   # Meta stuff
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['lang'] = lang
-  arguments_dict['level'] = defaults.level
+  arguments_dict['level'] = level_number
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
   arguments_dict['menu'] = menu
@@ -59,7 +59,7 @@ def render_code_editor_with_tabs(request, defaults, lang, max_level, level_numbe
   # Translations
   arguments_dict.update(**translations.get_translations(lang, 'ui'))
 
-  # Actual assignment
-  arguments_dict.update(**attr.asdict(defaults))
+  # Merge level defaults into adventures so it is rendered as the first tab
+  arguments_dict.update(**attr.asdict(level_defaults))
 
   return render_template("code-page.html", **arguments_dict)

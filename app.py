@@ -65,10 +65,6 @@ ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
-HEDY_COURSE = collections.defaultdict(hedy_content.NoSuchCourse)
-for lang in ALL_LANGUAGES.keys():
-    HEDY_COURSE[lang] = hedy_content.Course('hedy', lang, LEVEL_DEFAULTS[lang])
-
 TRANSLATIONS = hedyweb.Translations()
 
 DATABASE = database.Database()
@@ -599,7 +595,8 @@ def submit_answer(level_source, question_nr, attempt):
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
-    return render_template('adventures.html', lang=lang, adventures=load_adventure_for_language(requested_lang()), menu=render_main_menu('adventures'), username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+    adventures = load_adventure_for_language(requested_lang())
+    return render_template('adventures.html', lang=lang, adventures=adventures, menu=render_main_menu('adventures'), username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
 
 @app.route('/hedy/adventures/<adventure_name>', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/adventures/<adventure_name>/<level>', methods=['GET'])
@@ -641,13 +638,20 @@ def adventure_page(adventure_name, level):
 
     adventures = load_adventures_per_level(requested_lang(), level)
 
-    defaults = HEDY_COURSE[requested_lang()].get_default_text(level)
-    max_level = HEDY_COURSE[requested_lang()].max_level()
+    default_values = LEVEL_DEFAULTS[requested_lang()]
+
+    default = {
+      "level": str(level),
+    }
+    default.update(**default_values)
+
+    all_levels = LEVEL_DEFAULTS[requested_lang()].levels.keys()
+    max_level = max(all_levels)
 
     g.prefix = '/hedy'
     return hedyweb.render_code_editor_with_tabs(
         request=request,
-        defaults=defaults,
+        level_defaults=defaults,
         max_level=max_level,
         lang=requested_lang(),
         level_number=level,
@@ -695,15 +699,24 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(g.lang, level)
+    adventures = load_adventures_per_level(requested_lang(), level)
 
-    defaults = HEDY_COURSE[g.lang].get_default_text(level)
-    max_level = HEDY_COURSE[g.lang].max_level()
+    default_values = LEVEL_DEFAULTS[requested_lang()].levels[level]
+
+    default_type = {
+      "level": str(level),
+    }
+    default_type.update(**default_values)
+
+    default = hedy_content.DefaultValues(**default_type)
+
+    all_levels = LEVEL_DEFAULTS[requested_lang()].levels.data.keys()
+    max_level = max(all_levels)
 
     return hedyweb.render_code_editor_with_tabs(
         request=request,
         lang=g.lang,
-        defaults=defaults,
+        level_defaults=default,
         max_level=max_level,
         level_number=level,
         menu=render_main_menu('hedy'),

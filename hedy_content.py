@@ -17,7 +17,6 @@ class NoSuchDefaults:
   def get_defaults(self, level):
     return {}
 
-
 class Adventures:
   def __init__(self, language):
     self.language = language
@@ -88,7 +87,6 @@ class Course:
           actual_ass = ass.get('step')
           if expected_value != actual_value:
             raise RuntimeError(f'Expected \'step: "{expected_ass}"\' but got "{actual_ass}" in {self.course_name}-{self.language}')
-
 
 class NoSuchCourse:
   def get_assignment(self, level, number):

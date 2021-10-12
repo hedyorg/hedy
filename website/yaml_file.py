@@ -12,7 +12,7 @@ class YamlFile:
 
     Use like so:
 
-        file = YamlFile.for('path/to/file.yaml')
+        file = YamlFile.for_file('path/to/file.yaml')
 
         if file.exists():
             print(file['key1'])
