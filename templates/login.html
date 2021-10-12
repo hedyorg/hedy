@@ -16,11 +16,9 @@
     <div id="error" class="flex-0 mt-8 mb-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
     <div id="success" class="flex-0 mt-8 mb-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
   </form>
-  <form id="create-account" onsubmit="event.preventDefault (); window.location.href = 'signup{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'">
-    <br>
+  <form id="create-account" class="py-2" onsubmit="event.preventDefault (); window.location.href = 'signup{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'">
     {{auth.no_account}}&nbsp;&nbsp;<button type="submit" class="green-btn">{{auth.create_account}}</button>
-    <br><br>
   </form>
-  <form onsubmit="event.preventDefault (); window.location.href = 'recover{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'"><button type="submit" class="btn">{{auth.forgot_password}}</button></form>
+  <form class="py-2" onsubmit="event.preventDefault (); window.location.href = 'recover{% if lang and lang != "en" %}?lang={{lang}}{% endif %}'"><button type="submit" class="btn">{{auth.forgot_password}}</button></form>
 </div>
 {% endblock %}
