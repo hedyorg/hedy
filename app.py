@@ -596,7 +596,8 @@ def submit_answer(level_source, question_nr, attempt):
 @app.route('/hedy/adventures', methods=['GET'])
 def adventures_list():
     adventures = load_adventure_for_language(requested_lang())
-    return render_template('adventures.html', lang=lang, adventures=adventures, menu=render_main_menu('adventures'), username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+    menu = render_main_menu('adventures')
+    return render_template('adventures.html', lang=lang, adventures=adventures, menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
 
 @app.route('/hedy/adventures/<adventure_name>', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/adventures/<adventure_name>/<level>', methods=['GET'])
