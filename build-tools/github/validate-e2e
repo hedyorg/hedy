@@ -27,8 +27,16 @@ done
 
 if ! $up; then
   echo "Server didn't start in time..." >&2
+  echo "Here's what it had to say:" >&2
+  echo "-------------------------------------------" >&2
+  cat e2e-server.log >&2
+  echo "-------------------------------------------" >&2
   exit 1
 fi
 
 # Finally!
-python e2e_tests.py --endpoint http://localhost:$PORT
+if ! python e2e_tests.py --endpoint http://localhost:$PORT; then
+    echo "Some e2e test failed. Here's the tail of the server log:" >&2
+    tail -n 50 e2e-server.log >&2
+    exit 1
+fi
