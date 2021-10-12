@@ -53,6 +53,29 @@ class HedyTester(unittest.TestCase):
 
       print(f'{test_name} passed for level {level}')
 
+
+  def multi_level_tester(self, test_name, code, max_level, expected=None, exception=None, extra_check_function=None):
+    # TODO: test_name could be stored in __init__ of test method
+    #  if we created our own method (not sure it that is worth it?)
+
+    # used to test the same code snippet over multiple levels
+    # Use exception to check for an exception
+
+    # Or use expect to check for an expected Python program
+    # In the second case, you can also pass an extra function to check
+    for level in range(self.level, max_level + 1):
+      if exception is not None:
+        with self.assertRaises(exception) as context:
+          result = hedy.transpile(code, level)
+      if expected is not None:
+        result = hedy.transpile(code, level)
+        self.assertEqual(expected, result.code)
+
+      if extra_check_function is not None:
+        self.assertTrue(extra_check_function(result))
+
+      print(f'{test_name} passed for level {level}')
+
 class TestsLevel1(HedyTester):
   level = 1
 
