@@ -422,7 +422,7 @@ def programs_page(request):
 
     texts=TRANSLATIONS.get_translations(requested_lang(), 'Programs')
     ui=TRANSLATIONS.get_translations(requested_lang(), 'ui')
-    adventures = load_adventure_for_language(requested_lang())['adventures']
+    adventures = load_adventure_for_language(requested_lang())
 
     result = DATABASE.programs_for_user(from_user or username)
     programs =[]
