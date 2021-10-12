@@ -15,12 +15,12 @@
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
+    exampleEditor.setOptions({ minLines: 2 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-
     // And add an overlay button to the editor
-    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
-    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto'}).appendTo(preview);
+    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif'}).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
       window.editor.setValue(exampleEditor.getValue() + '\n');
     });
   }
@@ -476,6 +476,7 @@ function runPythonProgram(code, hasTurtle, cb) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
+    $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
