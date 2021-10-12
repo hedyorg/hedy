@@ -277,7 +277,7 @@ def parse():
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
         with querylog.log_time('transpile'):
-            transpile_result = hedy.transpile(code, level)
+            transpile_result = hedy.transpile(code, level, lang)
             python_code = transpile_result.code
             has_turtle = transpile_result.has_turtle
 

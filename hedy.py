@@ -1104,7 +1104,7 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     return '\n'.join(merged_grammar)
 
 
-def create_grammar(level):
+def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
 
@@ -1114,7 +1114,7 @@ def create_grammar(level):
         result = merge_grammars(result, grammar_text_i)
 
     # add in the keywords (currently just the default english ones) afterwards
-    keys = get_keywords_for_language("en")
+    keys = get_keywords_for_language(lang)
     result = merge_grammars(result, keys)
 
     # ready? Save to file to ease debugging
@@ -1149,9 +1149,9 @@ def get_full_grammar_for_level(level):
         grammar_text = file.read()
     return grammar_text
 
-def get_keywords_for_language(language):
+def get_keywords_for_language(lang):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "keywords-" + str(language) + ".lark"
+    filename = "keywords-" + str(lang) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
@@ -1159,25 +1159,25 @@ def get_keywords_for_language(language):
 PARSER_CACHE = {}
 
 
-def get_parser(level):
+def get_parser(level, lang):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level)
+    key = str(level) + "." + lang
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    grammar = create_grammar(level)
+    grammar = create_grammar(level, lang)
     ret = Lark(grammar, regex=True)
     PARSER_CACHE[key] = ret
     return ret
 
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
-def transpile(input_string, level):
+def transpile(input_string, level, lang="en"):
     try:
-        transpile_result = transpile_inner(input_string, level)
+        transpile_result = transpile_inner(input_string, level, lang)
         return transpile_result
     except ParseException as ex:
         # This is the 'fall back' transpilation
@@ -1188,7 +1188,7 @@ def transpile(input_string, level):
         if level > 1:
             try:
                 new_level = level - 1
-                result = transpile_inner(input_string, new_level)
+                result = transpile_inner(input_string, new_level, lang)
             except (LarkError, HedyException) as innerE:
                 # Parse at `level - 1` failed as well, just re-raise original error
                 raise ex
@@ -1307,7 +1307,7 @@ def preprocess_blocks(code):
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
-def transpile_inner(input_string, level):
+def transpile_inner(input_string, level, lang="en"):
     number_of_lines = input_string.count('\n')
 
     #parser is not made for huge programs!
@@ -1317,7 +1317,7 @@ def transpile_inner(input_string, level):
     input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = get_parser(level)
+    parser = get_parser(level, lang)
 
     if contains_blanks(input_string):
         raise CodePlaceholdersPresentException()
@@ -1371,7 +1371,7 @@ def transpile_inner(input_string, level):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                result = transpile_inner(fixed_code, level, lang)
             raise InvalidSpaceException(level, line, result.code)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
