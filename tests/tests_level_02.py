@@ -17,7 +17,7 @@ class TestsLevel2(HedyTester):
     )
 
 
-  def test_transpile_echo_at_level_2(self):
+  def test_echo_at_level_2(self):
     code = textwrap.dedent("""\
     ask what is jouw lievelingskleur?
     echo Jouw lievelingskleur is dus...""")
@@ -33,7 +33,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_print(self):
+  def test_print(self):
     result = hedy.transpile("print Hallo welkom bij Hedy!", self.level)
     expected = textwrap.dedent("""\
     print(f'Hallo welkom bij Hedy!')""")
@@ -75,7 +75,7 @@ class TestsLevel2(HedyTester):
     )
 
 
-  def test_transpile_ask(self):
+  def test_ask(self):
     result = hedy.transpile("kleur is ask wat is je lievelingskleur?", self.level)
 
     expected = textwrap.dedent("""\
@@ -85,7 +85,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_transpile_ask_Spanish(self):
+  def test_ask_Spanish(self):
     result = hedy.transpile("color is ask ask Cuál es tu color favorito?", self.level)
 
     expected = textwrap.dedent("""\
@@ -95,7 +95,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_transpile_ask_with_print(self):
+  def test_ask_with_print(self):
     result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint kleur!", self.level)
 
     expected = textwrap.dedent("""\
@@ -107,7 +107,7 @@ class TestsLevel2(HedyTester):
 
 
 
-  def test_transpile_print_multiple_lines(self):
+  def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
     print Hallo welkom bij Hedy!
     print Mooi hoor""")
@@ -127,7 +127,7 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected_output, self.run_code(result))
 
-  def test_transpile_turtle_basic(self):
+  def test_turtle_basic(self):
     code = textwrap.dedent("""\
     forward 50
     turn
@@ -142,7 +142,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
-  def test_transpile_forward_without_argument(self):
+  def test_forward_without_argument(self):
     code = textwrap.dedent("""\
     hoek is 90
     turn hoek
@@ -157,7 +157,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
-  def test_transpile_turtle_with_ask(self):
+  def test_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask hoe ver dan?
     forward afstand""")
@@ -169,7 +169,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
-  def test_transpile_assign(self):
+  def test_assign(self):
     result = hedy.transpile("naam is Felienne", self.level)
 
     expected = textwrap.dedent("""\
@@ -178,7 +178,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_assign_2_integer(self):
+  def test_assign_2_integer(self):
     result = hedy.transpile("naam is 14", self.level)
 
     expected = textwrap.dedent("""\
@@ -187,7 +187,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_assign_and_print(self):
+  def test_assign_and_print(self):
     code = textwrap.dedent("""\
     naam is Felienne
     print naam""")
@@ -202,7 +202,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_transpile_assign_and_print_more_words(self):
+  def test_assign_and_print_more_words(self):
     code = textwrap.dedent("""\
     naam is Felienne
     print hallo naam""")
@@ -216,7 +216,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_assign_and_print_punctuation(self):
+  def test_assign_and_print_punctuation(self):
     code = textwrap.dedent("""\
     naam is Hedy
     print Hallo naam!""")
@@ -232,7 +232,7 @@ class TestsLevel2(HedyTester):
 
 
 
-  def test_transpile_assign_and_print_in_sentence(self):
+  def test_assign_and_print_in_sentence(self):
     code = textwrap.dedent("""\
     naam is Hedy
     print naam is jouw voornaam""")
@@ -247,7 +247,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_transpile_assign_and_print_something_else(self):
+  def test_assign_and_print_something_else(self):
 
     code = textwrap.dedent("""\
     naam is Felienne

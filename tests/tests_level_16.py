@@ -23,7 +23,7 @@ class TestsLevel16(HedyTester):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_transpile_ask(self):
+    def test_ask(self):
         result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
         expected = "antwoord = input('wat is je lievelingskleur?')"
         self.assertEqual(expected, result.code)
