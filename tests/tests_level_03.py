@@ -5,10 +5,6 @@ from tests_level_01 import HedyTester
 class TestsLevel3(HedyTester):
   level = 3
 
-  def test_transpile_other(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', context.exception.error_code)
 
   def test_transpile_print_level_2(self):
     with self.assertRaises(hedy.UnquotedTextException) as context:

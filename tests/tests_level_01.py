@@ -57,9 +57,12 @@ class TestsLevel1(HedyTester):
   level = 1
 
   def test_transpile_other(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', context.exception.error_code)
+    self.multi_level_tester(
+      max_level=22,
+      code="abc felienne 123",
+      exception=hedy.InvalidCommandException,
+      test_name=self.test_name()
+    )
 
   def test_print_without_argument_upto_22(self):
     self.multi_level_tester(

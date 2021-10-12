@@ -143,11 +143,6 @@ class TestsLevel6(HedyTester):
 
     self.assertEqual(expected_output, self.run_code(result))
 
-  def test_transpile_other(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', context.exception.error_code)
-
   # todo: a few more things repeated from 4 here?
 
 
