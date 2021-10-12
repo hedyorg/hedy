@@ -566,16 +566,10 @@ class ConvertToPython_1(Transformer):
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
-        return process_hash(name)
+        return hash_var(name)
     else:
         return f"'{name}'"
 
-
-def process_hash(name):
-    if hash_needed(name):
-        return hash_var(name)
-    else:
-        return name
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -602,7 +596,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
             if argument in self.lookup:
                 #variables are placed in {} in the f string
-                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += "{" + hash_var(argument) + "}"
                 argument_string += space
             else:
                 #strings are written regularly
@@ -659,7 +653,7 @@ def make_f_string(args, lookup):
     for argument in args:
         if argument in lookup:
             # variables are placed in {} in the f string
-            argument_string += "{" + process_hash(argument) + "}"
+            argument_string += "{" + hash_var(argument) + "}"
         else:
             # strings are written regularly
             # however we no longer need the enclosing quotes in the f-string
