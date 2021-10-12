@@ -1,34 +1,9 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
-import inspect
+from tests_level_01 import HedyTester
 
-
-@contextmanager
-def captured_output():
-  new_out, new_err = io.StringIO(), io.StringIO()
-  old_out, old_err = sys.stdout, sys.stderr
-  try:
-    sys.stdout, sys.stderr = new_out, new_err
-    yield sys.stdout, sys.stderr
-  finally:
-    sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-class TestsLevel7(unittest.TestCase):
+class TestsLevel2(HedyTester):
   level = 7
-  def test_name(self):
-    return inspect.stack()[1][3]
   
   def test_print(self):
     code = textwrap.dedent("""\
@@ -101,7 +76,7 @@ class TestsLevel7(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
 
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_transpile_ask(self):
     code = textwrap.dedent("""\
@@ -166,7 +141,7 @@ class TestsLevel7(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
 
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
@@ -190,7 +165,7 @@ class TestsLevel7(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
 
   def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
@@ -252,7 +227,7 @@ class TestsLevel7(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
 
   def test_print_random(self):
     code = textwrap.dedent("""\
@@ -270,25 +245,25 @@ class TestsLevel7(unittest.TestCase):
     self.assertEqual(expected, result.code)
 
   def test_allow_space_after_else_line(self):
-    max_level = 8
-    for level in range(self.level, max_level + 1):
+    code = textwrap.dedent("""\
+    if a is 1
+      print a
+    else   
+      print 'nee'""")
 
-      code = textwrap.dedent("""\
-      if a is 1
-        print a
-      else   
-        print 'nee'""")
+    expected = textwrap.dedent("""\
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
 
-      result = hedy.transpile(code, level)
+    self.multi_level_tester(
+      max_level=8,
+      code=code,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
-      expected = textwrap.dedent("""\
-      if str('a') == str('1'):
-        print('a')
-      else:
-        print('nee')""")
-
-      self.assertEqual(expected, result.code)
-      print(f'{self.test_name()} level {level}')
 
 
   def test_addition_simple(self):

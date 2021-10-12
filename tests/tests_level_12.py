@@ -1,29 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-
-class TestsLevel12(unittest.TestCase):
-  maxDiff = None
+class TestsLevel12(HedyTester):
   level = 12
 
   def test_print(self):
@@ -60,7 +39,7 @@ class TestsLevel12(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_transpile_ask(self):
     result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
@@ -244,6 +223,28 @@ else:
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_random(self):
+    code = textwrap.dedent("""\
+    dieren is ['Hond', 'Kat', 'Kangoeroe']
+    print(dieren[random])""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(str(random.choice(dieren)))""")
+
+    # check if result is in the expected list
+    check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+    self.multi_level_tester(
+      max_level=19,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=check_in_list
+    )
+
+
+
   def test_list_multiple_spaces(self):
     code = textwrap.dedent("""\
     fruit is ['appel',  'banaan',    'kers']
@@ -251,21 +252,6 @@ else:
     expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
     print(str(fruit))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_random(self):
-    code = textwrap.dedent("""\
-    fruit is ['banaan', 'appel', 'kers']
-    randomfruit is fruit[random]
-    print(randomfruit)""")
-    expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit=random.choice(fruit)
-    print(str(randomfruit))""")
 
     result = hedy.transpile(code, self.level)
 

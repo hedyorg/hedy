@@ -1,30 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-
-class TestsLevel6(unittest.TestCase):
+class TestsLevel6(HedyTester):
   level = 6
   
   # print should still work
@@ -140,6 +118,7 @@ class TestsLevel6(unittest.TestCase):
     self.assertEqual(True, result.has_turtle)
 
 
+
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -162,7 +141,7 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
 
   def test_transpile_other(self):
     with self.assertRaises(hedy.InvalidCommandException) as context:
@@ -193,7 +172,7 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
 
 
   def test_repeat_over_9_times(self):
@@ -222,7 +201,30 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
+    self.assertEqual(expected_output, self.run_code(result))
+
+
+  def test_random(self):
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print dieren at random""")
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(str(random.choice(dieren)))""")
+
+    # check if result is in the expected list
+    check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=check_in_list
+    )
+
+
 
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\
@@ -249,4 +251,4 @@ class TestsLevel6(unittest.TestCase):
       me wants a cookie!
       hallo!""")
 
-      self.assertEqual(expected_output, run_code(result))
+      self.assertEqual(expected_output, self.run_code(result))
