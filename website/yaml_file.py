@@ -10,6 +10,15 @@ YAML_FILES_CACHE = {}
 class YamlFile:
     """Data from a YAML file, accessible as if it is a dictionary.
 
+    Use like so:
+
+        file = YamlFile.for('path/to/file.yaml')
+
+        if file.exists():
+            print(file['key1'])
+        else:
+            print('oh no')
+
     Since loading the YAML files tends to be slow:
 
     - Caches the loaded data in memory.

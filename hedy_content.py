@@ -21,7 +21,10 @@ class NoSuchDefaults:
 class Adventures:
   def __init__(self, language):
     self.language = language
-    self.adventures = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+    self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+
+  def has_adventures(self):
+    return self.adventures_file.exists() and self.adventures_file.get('adventures')
 
 class NoSuchAdventure:
   def get_defaults(self, level):

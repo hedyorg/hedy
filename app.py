@@ -76,18 +76,13 @@ TRANSLATIONS = hedyweb.Translations()
 DATABASE = database.Database()
 
 def load_adventure_for_language(lang):
-    adventures = ADVENTURES
-    adventures_for_lang = adventures[lang]
+    adventures_for_lang = ADVENTURES[lang]
 
-    if adventures_for_lang.adventures.data is None:
-        adventures_for_en = adventures['en']
-        deeper1 = adventures_for_en.adventures
-        deeper2 = deeper1.data
-        deeper3 = deeper2['adventures']
-        return deeper3
+    if not adventures_for_lang.has_adventures():
+        # Fall back to English
+        adventures_for_lang = ADVENTURES['en']
 
-    adventures_for_lang_deeper = adventures_for_lang.adventures.data['adventures']
-    return adventures_for_lang_deeper
+    return adventures_for_lang.adventures_file['adventures']
 
 
 def load_adventures_per_level(lang, level):
