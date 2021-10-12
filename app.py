@@ -1,5 +1,4 @@
 import sys
-from website.yaml_file import YamlFile
 if (sys.version_info.major < 3 or sys.version_info.minor < 6):
     print ('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join ([str (sys.version_info.major), str (sys.version_info.minor), str (sys.version_info.micro)]))
     quit ()
@@ -20,9 +19,8 @@ from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
 from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
-from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
+from utils import timems, load_yaml, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
-import textwrap
 
 # app.py
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response
@@ -53,8 +51,7 @@ ALL_LANGUAGES = {
     'zh': "简体中文",
     'cs': 'Čeština',
     'bn': 'বাংলা',
-    'hi': 'हिंदी',
-    'id': 'Bahasa Indonesia'
+    'hi': 'हिंदी'
 }
 
 LEVEL_DEFAULTS = collections.defaultdict(courses.NoSuchDefaults)
@@ -74,7 +71,7 @@ DATABASE = database.Database()
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys ():
-        adventures[lang] = YamlFile.for_file(f'coursedata/adventures/{lang}.yaml')
+        adventures[lang] = load_yaml(f'coursedata/adventures/{lang}.yaml')
     return adventures
 
 
@@ -259,63 +256,77 @@ def parse():
         return "body.code must be a string", 400
     if 'level' not in body:
         return "body.level must be a string", 400
+    if 'sublevel' in body and not isinstance(body ['sublevel'], int):
+        return "If present, body.sublevel must be an integer", 400
     if 'adventure_name' in body and not isinstance(body ['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
 
     code = body ['code']
     level = int(body ['level'])
+    sublevel = body.get ('sublevel') or 0
 
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
 
-    # true if kid enabled the read aloud option
-    read_aloud = body.get('read_aloud', False)
-
     response = {}
     username = current_user(request) ['username'] or None
 
     querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
 
-    try:
-        hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
-        with querylog.log_time('transpile'):
-            transpile_result = hedy.transpile(code, level)
-            python_code = transpile_result.code
-            has_turtle = transpile_result.has_turtle
+    # Check if user sent code
+    if not code:
+        response["Error"] = "no code found, please send code."
+    # is so, parse
+    else:
+        try:
+            hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+            with querylog.log_time('transpile'):
+                transpile_result = hedy.transpile(lang,code, level, sublevel)
+                python_code = transpile_result.code
+                has_turtle = transpile_result.has_turtle
 
-        response['has_turtle'] = has_turtle
-        if has_turtle:
-            response["Code"] = textwrap.dedent("""\
-            # coding=utf8
-            import random, time, turtle
-            t = turtle.Turtle()
-            t.hideturtle()
-            t.speed(0)
-            t.penup()
-            t.goto(50,100)
-            t.showturtle()
-            t.pendown()
-            t.speed(3)
-            """) + python_code
-        else:
-            response["Code"] = "# coding=utf8\nimport random\n" + python_code
+            response['has_turtle'] = has_turtle
+            if has_turtle:
+                response["Code"] = "# coding=utf8\nimport random\nimport time\nimport turtle\nt = turtle.Turtle()\nt.forward(0)\n" + python_code
+            else:
+                response["Code"] = "# coding=utf8\nimport random\n" + python_code
+        except hedy.HedyException as E:
+            traceback.print_exc()
+            # some 'errors' can be fixed, for these we throw an exception, but also
+            # return fixed code, so it can be ran
+            if E.args[0] == "Invalid Space":
+                error_template = hedy_errors[E.error_code]
+                response["Code"] = "# coding=utf8\n" + E.arguments['fixed_code']
+                response["Warning"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Too Big":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Parse":
+                error_template = hedy_errors[E.error_code]
+                # Localize the names of characters. If we can't do that, just show the original
+                # character.
+                if 'character_found' in E.arguments.keys():
+                    E.arguments['character_found'] = hedy_errors.get(E.arguments['character_found'], E.arguments['character_found'])
+                elif 'keyword_found' in E.arguments.keys():
+                    #if we find an invalid keyword, place it in the same location in the error message but without translating
+                    E.arguments['character_found'] = E.arguments['keyword_found']
 
-    except hedy.InvalidSpaceException as ex:
-        traceback.print_exc()
-        response = invalid_space_error_to_response(ex, hedy_errors)
-    except hedy.ParseException as ex:
-        traceback.print_exc()
-        response = parse_error_to_response(ex, hedy_errors)
-    except hedy.HedyException as ex:
-        traceback.print_exc()
-        response = hedy_error_to_response(ex, hedy_errors)
-
-    except Exception as E:
-        traceback.print_exc()
-        print(f"error transpiling {code}")
-        response["Error"] = str(E)
+                response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Unquoted Text":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+            elif E.args[0] == "Has Blanks":
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+            else:
+                error_template = hedy_errors[E.error_code]
+                response["Error"] = error_template.format(**E.arguments)
+        except Exception as E:
+            traceback.print_exc()
+            print(f"error transpiling {code}")
+            response["Error"] = str(E)
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log ({
         'session': session_id(),
@@ -326,35 +337,11 @@ def parse():
         'server_error': response.get('Error'),
         'version': version(),
         'username': username,
-        'read_aloud': read_aloud,
         'is_test': 1 if os.getenv ('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
 
     return jsonify(response)
-
-def invalid_space_error_to_response(ex, translations):
-    warning = translate_error(ex.error_code, translations, vars(ex))
-    code = "# coding=utf8\n" + ex.fixed_code
-    return {"Code": code, "Warning": warning}
-
-def parse_error_to_response(ex, translations):
-    if ex.character_found is not None:
-        # Localize the names of characters. If we can't do that, just show the original character.
-        ex.character_found = translations.get(ex.character_found, ex.character_found)
-    elif ex.keyword_found is not None:
-        # If we find an invalid keyword, place it in the same location in the error message but without translating
-        ex.character_found = ex.keyword_found
-    error_message = translate_error(ex.error_code, translations, vars(ex))
-    return {"Error": error_message}
-
-def hedy_error_to_response(ex, translations):
-    error_message = translate_error(ex.error_code, translations, ex.arguments)
-    return {"Error": error_message}
-
-def translate_error(code, translations, arguments):
-    error_template = translations[code]
-    return error_template.format(**arguments)
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
@@ -465,9 +452,6 @@ def get_quiz_start(level):
                                auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
 
 
-def quiz_data_file_for(level):
-    return YamlFile.for_file(f'coursedata/quiz/quiz_questions_lvl{level}.yaml')
-
 # Quiz mode
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
@@ -476,8 +460,9 @@ def get_quiz(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Reading the yaml file
-        quiz_data = quiz_data_file_for(level_source)
-        if not quiz_data.exists():
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
             return 'No quiz yaml file found for this level', 404
 
         # set globals
@@ -526,8 +511,9 @@ def submit_answer(level_source, question_nr, attempt):
         option = request.form["radio_option"]
 
         # Reading yaml file
-        quiz_data = quiz_data_file_for(level_source)
-        if not quiz_data.exists():
+        if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
+            quiz_data = load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml')
+        else:
             return 'No quiz yaml file found for this level', 404
 
         # Convert question_nr to an integer
@@ -660,7 +646,12 @@ def adventure_page(adventure_name, level):
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    if re.match('\d', level):
+    # Sublevel requested
+    if re.match ('\d+-\d+', level):
+        pass
+        # If level has a dash, we keep it as a string
+    # Normal level requested
+    elif re.match ('\d', level):
         try:
             g.level = level = int(level)
         except:
@@ -1044,13 +1035,13 @@ def share_unshare_program(user):
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
     # FIXME: right now loading source file on demand. We might need to cache this...
-    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml')
-    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml')
-    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml')
+    source_adventures = load_yaml(f'coursedata/adventures/{source}.yaml')
+    source_levels = load_yaml(f'coursedata/level-defaults/{source}.yaml')
+    source_texts = load_yaml(f'coursedata/texts/{source}.yaml')
 
-    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml')
-    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml')
-    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml')
+    target_adventures = load_yaml(f'coursedata/adventures/{target}.yaml')
+    target_levels = load_yaml(f'coursedata/level-defaults/{target}.yaml')
+    target_texts = load_yaml(f'coursedata/texts/{target}.yaml')
 
     files = []
 
