@@ -1,32 +1,9 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
-import inspect
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-
-class TestsLevel9(unittest.TestCase):
+class TestsLevel9(HedyTester):
   level = 9
-  def test_name(self):
-    return inspect.stack()[1][3]
   
   def test_print(self):
     result = hedy.transpile("print 'ik heet'", self.level)
@@ -62,7 +39,7 @@ class TestsLevel9(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_transpile_ask(self):
     result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", self.level)
@@ -178,46 +155,49 @@ class TestsLevel9(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
   def test_allow_space_after_else_line(self):
-    max_level = 10
-    for level in range(self.level, max_level + 1):
 
-      code = textwrap.dedent("""\
-      if a is 1:
-        print a
-      else:   
-        print 'nee'""")
+    code = textwrap.dedent("""\
+    if a is 1:
+      print a
+    else:   
+      print 'nee'""")
 
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
 
-      expected = textwrap.dedent("""\
-      if str('a') == str('1'):
-        print('a')
-      else:
-        print('nee')""")
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
-      self.assertEqual(expected, result.code)
-      print(f'{self.test_name()} level {level}')
 
   def test_allow_space_before_colon(self):
-    max_level = 10
-    for level in range(self.level, max_level + 1):
+    max_level=10
 
-      code = textwrap.dedent("""\
-      if a is 1  :
-        print a
-      else:   
-        print 'nee'""")
+    code = textwrap.dedent("""\
+    if a is 1  :
+      print a
+    else:   
+      print 'nee'""")
 
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
 
-      expected = textwrap.dedent("""\
-      if str('a') == str('1'):
-        print('a')
-      else:
-        print('nee')""")
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
-      self.assertEqual(expected, result.code)
-      print(f'{self.test_name()} level {level}')
 
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\

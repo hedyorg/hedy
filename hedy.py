@@ -566,16 +566,10 @@ class ConvertToPython_1(Transformer):
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
-        return process_hash(name)
+        return hash_var(name)
     else:
         return f"'{name}'"
 
-
-def process_hash(name):
-    if hash_needed(name):
-        return hash_var(name)
-    else:
-        return name
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -602,7 +596,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
             if argument in self.lookup:
                 #variables are placed in {} in the f string
-                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += "{" + hash_var(argument) + "}"
                 argument_string += space
             else:
                 #strings are written regularly
@@ -659,7 +653,7 @@ def make_f_string(args, lookup):
     for argument in args:
         if argument in lookup:
             # variables are placed in {} in the f string
-            argument_string += "{" + process_hash(argument) + "}"
+            argument_string += "{" + hash_var(argument) + "}"
         else:
             # strings are written regularly
             # however we no longer need the enclosing quotes in the f-string
@@ -753,6 +747,7 @@ class ConvertToPython_5(ConvertToPython_4):
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
+        #TODO if we start using fstrings here, this str can go
         if len(args) == 2:
             return f"str({arg0}) == str({arg1})" #no and statements
         else:
@@ -771,18 +766,32 @@ class ConvertToPython_5(ConvertToPython_4):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
+    def process_token_or_tree(self, argument):
+        if type(argument) is Tree:
+            return f'{str(argument.children)}'
+        else:
+            return f'int({argument})'
+
+    def process_calculation(self, args, operator):
+        # arguments of a sum are either a token or a
+        # tree resulting from earlier processing
+        # for trees we need to grap the inner string
+        # for tokens we add int around them
+
+        args = [self.process_token_or_tree(a) for a in args]
+        return Tree('sum', f'{args[0]} {operator} {args[1]}')
 
     def addition(self, args):
-        return Tree('sum', f'int({str(args[0])}) + int({str(args[1])})')
+        return self.process_calculation(args, '+')
 
     def substraction(self, args):
-        return Tree('sum', f'int({str(args[0])}) - int({str(args[1])})')
+        return self.process_calculation(args, '-')
 
     def multiplication(self, args):
-        return Tree('sum', f'int({str(args[0])}) * int({str(args[1])})')
+        return self.process_calculation(args, '*')
 
     def division(self, args):
-        return Tree('sum', f'int({str(args[0])}) // int({str(args[1])})')
+        return self.process_calculation(args, '//')
 
 @hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
