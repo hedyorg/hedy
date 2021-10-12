@@ -1013,14 +1013,13 @@ def share_unshare_program(user):
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
-    # FIXME: right now loading source file on demand. We might need to cache this...
-    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml')
-    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml')
-    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml')
+    source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
+    source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
+    source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
 
-    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml')
-    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml')
-    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml')
+    target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
+    target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
+    target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
 
     files =[]
 

@@ -55,6 +55,17 @@ class YamlFile:
     def exists(self):
         return os.path.exists(self.filename)
 
+    def to_dict(self):
+        """Return the contents of the file as a plain dict, or an empty dict if the file doesn't exist.
+
+        You should generally not need to use this: this object can be used in places
+        where dicts are expected (except if the file doesn't exist, then accessing it will throw; we
+        can consider changing that behavior to always return an empty dict).
+        """
+        if self.exists():
+            return self.access()
+        return {}
+
     def access(self):
         """Access the data from memory.
 
