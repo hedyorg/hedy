@@ -182,9 +182,9 @@ def markdown_to_html_tags (markdown):
 def page_404 (translations, menu, lang, username, *page_error):
     if page_error:
         page_error = page_error [0]
-    return render_template("404.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or '')
+    return render_template("404.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 404
 
 def page_500 (translations, menu, lang, username, *page_error):
     if page_error:
         page_error = page_error [0]
-    return render_template("500.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or '')
+    return render_template("500.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 500
