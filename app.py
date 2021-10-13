@@ -437,7 +437,7 @@ def programs_page (request):
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         g.lang = lang = requested_lang()
         g.prefix = '/hedy'
@@ -456,7 +456,7 @@ def get_quiz_start(level):
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
 def get_quiz(level_source, question_nr, attempt):
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         # Reading the yaml file
         if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_source}.yaml'):
@@ -504,7 +504,7 @@ def get_quiz(level_source, question_nr, attempt):
 @app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         # Get the chosen option from the request form with radio buttons
         option = request.form["radio_option"]
@@ -597,7 +597,7 @@ def adventure_page(adventure_name, level):
 
     # If requested adventure does not exist, return 404
     if not adventure_name in adventures ['adventures']:
-        return 'No such Hedy adventure!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_adventure'))
 
     adventure = adventures ['adventures'] [adventure_name]
 
@@ -623,7 +623,7 @@ def adventure_page(adventure_name, level):
 
     # If requested level is not in adventure, return 404
     if not level in adventure ['levels']:
-        abort(404)
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_adventure_level'))
 
     adventures = load_adventures_per_level(requested_lang(), level)
     g.prefix = '/hedy'
@@ -654,9 +654,9 @@ def index(level, step):
         try:
             g.level = level = int(level)
         except:
-            return 'No such Hedy level!', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_level'))
     else:
-        return 'No such Hedy level!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_level'))
 
     g.lang = requested_lang()
     g.prefix = '/hedy'
@@ -668,12 +668,12 @@ def index(level, step):
     if step and isinstance(step, str) and len (step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
-            return 'No such program', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_program'))
         # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
         user = current_user (request)
         public_program = 'public' in result and result ['public']
         if not public_program and user ['username'] != result ['username'] and not is_admin (request) and not is_teacher (request):
-            return 'No such program!', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_program'))
         loaded_program = {'code': result ['code'], 'name': result ['name'], 'adventure_name': result.get ('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result ['adventure_name']
@@ -698,7 +698,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return 'No such program', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_program'))
 
     # Default to the language of the program's author (but still respect)
     # the switch if given.
@@ -791,7 +791,7 @@ def client_messages():
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return "<h1>500 Internal Server Error</h1>", 500
+    return utils.page_500 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang ())
 
 @app.route('/index.html')
 @app.route('/')

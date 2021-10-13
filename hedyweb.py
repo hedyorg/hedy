@@ -48,7 +48,7 @@ def render_code_editor_with_tabs(request, course, level_number, menu, translatio
   defaults = course.get_default_text(level_number, sublevel)
 
   if not defaults:
-    abort(404)
+    return utils.page_404 (translations, menu, current_user(request) ['username'], course.language, translations.get_translations (course.language, 'ui').get ('no_such_level'))
 
   if course.custom:
     adventures = [x for x in adventures if x['short_name'] in course.adventures]
