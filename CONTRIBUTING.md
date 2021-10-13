@@ -1,13 +1,11 @@
 Helping build Hedy
 ------------
 
-We would be grateful if you help make Hedy better. 
-
-First you will want to follow the instructions below to run the code locally and configuring your manchine as explained below.
+We would be grateful if you help make Hedy better! First you will want to follow the instructions below to run the code locally and configuring your manchine as explained below. After that, you want to look at these things:
 
 **Open issues**
 
-After that, the best thing to do is to have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too, if they are unassigned, we are not planning to work on them in the near future. 
+First have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too! Issues that are currently unassigned, are not planning to be picked up by us in the near future. 
 
 **Project boards**
 
