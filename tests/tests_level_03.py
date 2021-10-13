@@ -5,12 +5,8 @@ from tests_level_01 import HedyTester
 class TestsLevel3(HedyTester):
   level = 3
 
-  def test_transpile_other(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', context.exception.error_code)
 
-  def test_transpile_print_level_2(self):
+  def test_print_level_2(self):
     with self.assertRaises(hedy.UnquotedTextException) as context:
       result = hedy.transpile("print felienne 123", self.level)
 
@@ -31,7 +27,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_transpile_turtle_basic(self):
+  def test_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
@@ -42,7 +38,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
-  def test_transpile_turtle_with_ask(self):
+  def test_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
@@ -144,7 +140,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(False, result.has_turtle)
     self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
 
-  def test_transpile_ask_Spanish(self):
+  def test_ask_Spanish(self):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
 
@@ -184,7 +180,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_ask_with_print(self):
+  def test_ask_with_print(self):
 
     code = textwrap.dedent("""
     kleur is ask 'wat is je lievelingskleur?'
@@ -199,7 +195,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_ask_with_var(self):
+  def test_ask_with_var(self):
 
     code = textwrap.dedent("""
     ding is kleur
@@ -216,7 +212,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_ask_no_quotes(self):
+  def test_ask_no_quotes(self):
     code = textwrap.dedent("""
     ding is kleur
     kleur is ask Wat is je lievelingskleur'
@@ -240,7 +236,7 @@ class TestsLevel3(HedyTester):
     expected_output = self.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
-  def test_transpile_missing_opening_quote(self):
+  def test_missing_opening_quote(self):
     code = textwrap.dedent("""\
       print hallo wereld'""")
 
@@ -250,7 +246,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual('Unquoted Text', context.exception.error_code)
 
 
-  def test_transpile_missing_all_quotes(self):
+  def test_missing_all_quotes(self):
     code = textwrap.dedent("""\
       print hallo wereld""")
 
@@ -274,7 +270,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual('name', context.exception.arguments['name'])
 
 
-  def test_transpile_issue_375(self):
+  def test_issue_375(self):
     code = textwrap.dedent("""
       is Foobar
       print welcome""")
