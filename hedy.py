@@ -21,7 +21,7 @@ reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal'
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
-                      2: ['print', 'ask', 'echo', 'is', 'turn', 'forward'],
+                      2: ['print', 'ask', 'is', 'turn', 'forward'],
                       3: ['print', 'ask', 'is', 'turn', 'forward'],
                       4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
                       5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
