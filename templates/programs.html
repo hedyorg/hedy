@@ -7,7 +7,7 @@
   {% else %}<h2>{{texts.recent}}</h2>{% endif %}
   <div class="programs w-full">
   {% for program in programs %}
-    <div class="program w-full border-solid border-2 border-orange-400 p-4">
+    <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
         <table id="program_header" class="table-auto mb-4">
         <thead>
             <tr class="text-left">
@@ -28,7 +28,7 @@
             </tr>
         </tbody>
         </table>
-        <div id="code" class="w-3/4 border-solid border-2 w-1/2 p-2 mb-4">
+        <div id="code" class="w-3/4 border-solid border-2 rounded w-1/2 p-2 mb-4">
           <pre>{{program.code | truncate (50) }}</pre>
         </div>
         <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}"><button class="green-btn">{{ texts.open }}</button></a>
