@@ -46,10 +46,15 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
 # \ also needs to be escaped because it eats the next character
 characters_that_need_escaping = ["\\", "'"]
 
+character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 def hash_needed(name):
-    pattern = re.compile('[^a-zA-Z0-9_]')
-    return name in reserved_words or pattern.match(name) != None
+    # some elements are not names but processed names, i.e. random.choice(dieren)
+    # they should not be hashed (this won't break because these characters cannot be used in vars
+    if '[' in name or '(' in name:
+        return False
+
+    return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
     if hash_needed(name):
@@ -566,16 +571,10 @@ class ConvertToPython_1(Transformer):
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
-        return process_hash(name)
+        return hash_var(name)
     else:
         return f"'{name}'"
 
-
-def process_hash(name):
-    if hash_needed(name):
-        return hash_var(name)
-    else:
-        return name
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -602,7 +601,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
             if argument in self.lookup:
                 #variables are placed in {} in the f string
-                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += "{" + hash_var(argument) + "}"
                 argument_string += space
             else:
                 #strings are written regularly
@@ -659,7 +658,7 @@ def make_f_string(args, lookup):
     for argument in args:
         if argument in lookup:
             # variables are placed in {} in the f string
-            argument_string += "{" + process_hash(argument) + "}"
+            argument_string += "{" + hash_var(argument) + "}"
         else:
             # strings are written regularly
             # however we no longer need the enclosing quotes in the f-string
