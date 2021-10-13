@@ -5,11 +5,11 @@ We would be grateful if you help make Hedy better! First you will want to follow
 
 **Open issues**
 
-First have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too! Issues that are currently unassigned, are not planning to be picked up by us in the near future. 
+First have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too! Issues that are currently unassigned, are not planning to be picked up by us in the near future. For issues that look interesting but are already assigned, just reply on the issue to see if your help can be used.
 
 **Project boards**
 
-The core team (currently consisting of [Felienne](https://github.com/Felienne) & [boryanagoncharenko](https://github.com/boryanagoncharenko)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there is stuff you want to help out with, that is always welcome, but do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
+The core team (currently consisting of [Felienne](https://github.com/Felienne) & [boryanagoncharenko](https://github.com/boryanagoncharenko)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
 
 Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :) 
 
