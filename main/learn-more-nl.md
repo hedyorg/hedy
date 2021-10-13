@@ -1,6 +1,5 @@
 page_title: Learn More — Hedy
----
-
+--
 <!-- Begin Mailchimp Signup Form -->
 <div class="w-full">
     <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
