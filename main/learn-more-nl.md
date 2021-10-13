@@ -73,7 +73,7 @@ Wil je nog meer weten? Lees dan het [research paper](https://www.felienne.com/wp
 # Hedy in het nieuws
 
 Soms schrijven websites en kranten iets over Hedy, dat houden we op deze lijst bij:
-
+*  [Vives, CodeWeek Special oktober 2021](images/Vives-174-Codeweek.pdf)
 * [CodeWeek.eu - Haunted House Challenge,(Engels) September 2021](https://codeweek.eu/2021/challenges/haunted-house)
 * [Opensource.com (Engels), april 2021](https://opensource.com/article/21/4/hedy-teach-code)
 * [IO Magazine (Engels), april 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)

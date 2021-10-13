@@ -25,7 +25,7 @@ adventures:
                     ```
                     ask The main character of this story is
                     print The main character is now going to walk in the forest
-                    echo He's a bit scared,
+                    echo He's a bit scared, 
                     print He hears crazy noises everywhere
                     print He's afraid this is a haunted forest
                     ```
@@ -548,7 +548,7 @@ adventures:
                     ```
                     print what do you choose?
                     ask choose from rock, paper or scissors
-                    echo so your choice was:
+                    echo so your choice was: 
                     ```
 
                 start_code: "print Welcome to your own rock scissors paper!"
@@ -694,7 +694,7 @@ adventures:
                      ```
                     print Welcome to Hedy's restaurant
                     ask What would you like to order?
-                    echo So you would like to order...
+                    echo So you would like to order 
                     print Thanks you for your order!
                     print It's on its way!
                     ```
@@ -859,7 +859,7 @@ adventures:
                     ```
                     print 'Welcome to Hedys restaurant!'
                     people is ask 'How many people are joining us today?'
-                    repeat people times food is ask 'What whould you like to eat?'
+                    repeat people times food is ask 'What would you like to eat?'
                     print 'Thanks for your order! Its coming right up!'
                     ```
                     In level 5 you can ask multiple people what they'd like to eat, but you can't print each order individually, because you can only repeat one line of code.
@@ -877,7 +877,7 @@ adventures:
                     print 'Great!'
                     print 'Todays menu has pizza or salad'
                     repeat people times
-                        food is ask 'What whould you like to order?'
+                        food is ask 'What would you like to order?'
                         print food
                         if food is pizza
                             price is price + 10
@@ -934,9 +934,9 @@ adventures:
                     ```
                     print Hello, I'm Hedy the fortune teller!
                     ask Who are you?
-                    print Let me take a look in my crystall ball
+                    print Let me take a look in my crystal ball
                     print I see... I see...
-                    echo Your name is...
+                    echo Your name is 
                     ```
 
                     ## Challenge
@@ -976,7 +976,7 @@ adventures:
                     The quotation marks in level 3 make this possible!
 
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostophes and change the spelling to Im or Whats.
+                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
 
                     ## Example Hedy Code
                     ```
@@ -1003,7 +1003,7 @@ adventures:
                     ```
 
                     Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!
-                    Of course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers everytime you run the code.
+                    Of course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.
                     But of course, still gives you a positive answer and the other players a negative one.
 
                     ## Example Hedy Code 2
@@ -1012,7 +1012,7 @@ adventures:
                     print 'I can predict if you will win the lottery tomorrow!'
                     person is ask 'Who are you?'
                     goodanswer is Hurray! You win!, You will definitely win!, We have a winner!
-                    badanswer is Bad luck! Try again!, Aother person will win, You lose!
+                    badanswer is Bad luck! Try again!, Another person will win, You lose!
                     if person is Hedy print goodanswer at random else print badanswer at random
                     ```
 
@@ -1066,16 +1066,16 @@ adventures:
                    print 'You can ask 3 questions!'
                    repeat 3 times question is ask 'What do you want to know?'
                    answer is yes, no, maybe
-                   repeat 3 times print 'My crystall ball says... ' answer at random
+                   repeat 3 times print 'My crystal ball says... ' answer at random
                    ```
 
                    ## Challenge
                    As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
-                   Everytime the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
+                   Every time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
                    This means you can't print all the questions this way.
 
                    By using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and print the questions.
-                   This does mean that you can only use `repeat` for the answers, and you will have to ask and print all the questions seperately.
+                   This does mean that you can only use `repeat` for the answers, and you will have to ask and print all the questions separately.
                    Can you do it?
 
                    In level 7 the layout of repeat command will change, which enables you to repeat multiple lines at once.
@@ -1095,13 +1095,13 @@ adventures:
                  repeat 3 times
                     question is ask 'What do you want to know?'
                     print question
-                    print 'My crystall ball says...' answers at random
+                    print 'My crystal ball says...' answers at random
                  ```
               start_code: ""
     haunted:
         name: "Haunted House"
         description: "escape from the haunted house"
-        image: ""
+        image: "hauntedhouse.png"
         default_save_name: "Haunted House"
         levels:
             1:
@@ -1125,7 +1125,7 @@ adventures:
                     print I need to get out of here!
                     print There are 3 doors in front of me..
                     ask Which door should i pick?
-                    echo I choose door...
+                    echo I choose door 
                     print ...?
                     ```
 
@@ -1265,11 +1265,11 @@ adventures:
                     ```
                     print Welcome at Hedy's
                     ask What would you like to eat?
-                    echo So you want...
+                    echo So you want 
                     ask what would you like to drink?
-                    echo So you want...
+                    echo So you want 
                     ```
-                    If the player types a hamburger and coke, you can't say `so you woudl like a hamburger and coke`, but you have to make two seperate line. 
+                    If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. 
                     Also, the `echo` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.
                     
                     That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
