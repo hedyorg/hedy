@@ -264,8 +264,6 @@ class TestsLevel2(HedyTester):
     forward """)
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
-    hoek = '90'
-    t.right(hoek)
     t.forward(50)
     time.sleep(0.1)""")
 
