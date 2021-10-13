@@ -402,6 +402,7 @@ function runPythonProgram(code, hasTurtle, cb) {
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
+    timeoutMsg: function () {return ErrorMessages.Program_too_long},
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
@@ -413,15 +414,11 @@ function runPythonProgram(code, hasTurtle, cb) {
   return Sk.misceval.asyncToPromise(function () {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
-    console.log('Program executed');
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
     console.log(err);
-    var errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
-    if (errorMessage === 'Program exceeded run time limit.') {
-      errorMessage = ErrorMessages.Program_too_long;
-    }
+    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
     throw new Error(errorMessage);
   });
 
@@ -485,6 +482,8 @@ function runPythonProgram(code, hasTurtle, cb) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
+    // We give the user time to give input.
+    Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
@@ -507,6 +506,8 @@ function runPythonProgram(code, hasTurtle, cb) {
 
         event.preventDefault();
         $('#inline-modal').hide();
+        // We reset the timer to the present moment.
+        Sk.execStart = new Date ();
         ok(input.val());
         $ ('#output').focus ();
 
