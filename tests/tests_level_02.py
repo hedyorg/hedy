@@ -124,18 +124,6 @@ class TestsLevel2(HedyTester):
 
     expected_output = self.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
-  def test_print_quotes(self):
-    code = "print 'Welcome to OceanView!'"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'\\'Welcome to OceanView! \\'')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = self.run_code(result)
-    self.assertEqual("'Welcome to OceanView! '", expected_output)
 
   #is tests
   def test_assign(self):
