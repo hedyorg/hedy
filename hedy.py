@@ -869,9 +869,7 @@ class ConvertToPython_8(ConvertToPython_7):
 
       body = "\n".join([indent(x) for x in args[2:]])
 
-      return textwrap.dedent(f"""\
-      for {args[0]} in {args[1]}:
-        {body}""")
+      return f"for {args[0]} in {args[1]}:\n{body}"
 
 
 

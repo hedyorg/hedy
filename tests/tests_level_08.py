@@ -16,6 +16,28 @@ class TestsLevel8(HedyTester):
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
-        print(str(dier))""")
+      print(str(dier))""")
 
     self.assertEqual(expected, result.code)
+
+  def test_for_list_multiple_lines(self):
+    code = textwrap.dedent("""\
+    familie is baby, mommy, daddy, grandpa, grandma
+    for shark in familie
+      print shark ' shark tudutudutudu'
+      print shark ' shark tudutudutudu'
+      print shark ' shark tudutudutudu'
+      print shark ' shark'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']
+    for shark in familie:
+      print(str(shark)+' shark tudutudutudu')
+      print(str(shark)+' shark tudutudutudu')
+      print(str(shark)+' shark tudutudutudu')
+      print(str(shark)+' shark')""")
+
+    self.assertEqual(expected, result.code)
+
