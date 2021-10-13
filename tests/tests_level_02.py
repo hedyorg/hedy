@@ -374,7 +374,7 @@ class TestsLevel2(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=check_in_list,
-      test_name=self.test_name()
+      test_name=self.name()
     )
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
@@ -448,7 +448,7 @@ class TestsLevel2(HedyTester):
       code="name is ask",
       max_level=10,
       exception=hedy.IncompleteCommandException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
   # test for 297 (not easy to fix, not giving prio now)

@@ -2,9 +2,8 @@ import hedy
 import textwrap
 from tests_level_01 import HedyTester
 
-class TestsLevel15(HedyTester):
+class TestsLevel20(HedyTester):
     level = 20
-
     def test_print(self):
         result = hedy.transpile("print('ik heet')", self.level)
         expected = "print('ik heet')"
@@ -12,7 +11,7 @@ class TestsLevel15(HedyTester):
         self.assertEqual(False, result.has_turtle)
 
     def test_print_with_var(self):
-        result = hedy.transpile("naam = Hedy\nprint('ik heet' naam)", self.level)
+        result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
         expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
@@ -24,15 +23,15 @@ class TestsLevel15(HedyTester):
         self.assertEqual(False, result.has_turtle)
 
     def test_ask(self):
-        result = hedy.transpile("antwoord = input('wat is je lievelingskleur?')", self.level)
+        result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
         expected = "antwoord = input('wat is je lievelingskleur?')"
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
     def test_print_calculation_times_directly(self):
         code = textwrap.dedent("""\
-    nummer = 5
-    nummertwee = 6
+    nummer is 5
+    nummertwee is 6
     print(nummer * nummertwee)""")
 
         result = hedy.transpile(code, self.level)
@@ -47,74 +46,10 @@ class TestsLevel15(HedyTester):
 
         self.assertEqual("30", self.run_code(result))
 
-    def test_allow_space_after_else_line(self):
-
-        code = textwrap.dedent("""\
-        if a == 1:
-          print(a)
-        else:   
-          print('nee')""")
-
-        expected = textwrap.dedent("""\
-        if str(a) == str('1'):
-          print(str(a))
-        else:
-          print('nee')""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=22,
-            expected=expected,
-            test_name=self.test_name(),
-            extra_check_function=self.is_not_turtle()
-        )
-
-
-
-    def test_allow_space_before_colon(self):
-        code = textwrap.dedent("""\
-        if a == 1  :
-          print(a)
-        else:   
-          print('nee')""")
-
-        expected = textwrap.dedent("""\
-        if str(a) == str('1'):
-          print(str(a))
-        else:
-          print('nee')""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=22,
-            expected=expected,
-            test_name=self.test_name(),
-        )
-
-    def test_random(self):
-        code = textwrap.dedent("""\
-        dieren = ['Hond', 'Kat', 'Kangoeroe']
-        print(dieren[random])""")
-
-        expected = textwrap.dedent("""\
-        dieren = ['Hond', 'Kat', 'Kangoeroe']
-        print(str(random.choice(dieren)))""")
-
-        # check if result is in the expected list
-        check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
-
-        self.multi_level_tester(
-        max_level=22,
-        code=code,
-        expected=expected,
-        test_name=self.test_name(),
-        extra_check_function=check_in_list
-        )
-
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
-naam = Hedy
-if naam == Hedy:
+naam is Hedy
+if naam is Hedy:
     print('koekoek')""")
         expected = textwrap.dedent("""\
 naam = 'Hedy'
@@ -127,8 +62,8 @@ if str(naam) == str('Hedy'):
 
     def test_if_else(self):
         code = textwrap.dedent("""\
-antwoord = input('Hoeveel is 10 plus 10?')
-if antwoord == 20:
+antwoord is input('Hoeveel is 10 plus 10?')
+if antwoord is 20:
     print('Goedzo!')
     print('Het antwoord was inderdaad ' antwoord)
 else:
@@ -150,8 +85,8 @@ else:
 
     def test_print_random(self):
         code = textwrap.dedent("""\
-    keuzes = ['steen', 'schaar', 'papier']
-    computerkeuze = keuzes[random]
+    keuzes is ['steen', 'schaar', 'papier']
+    computerkeuze is keuzes[random]
     print('computer koos ' computerkeuze)""")
         expected = textwrap.dedent("""\
     keuzes = ['steen', 'schaar', 'papier']
@@ -164,11 +99,11 @@ else:
 
     def test_for_loop(self):
         code = textwrap.dedent("""\
-    a = 2
-    a = 3
+    a is 2
+    a is 3
     for a in range(2,4):
-      a = a + 2
-      b = b + 2""")
+      a is a + 2
+      b is b + 2""")
         expected = textwrap.dedent("""\
     a = '2'
     a = '3'
@@ -183,11 +118,11 @@ else:
 
     def test_if__else(self):
         code = textwrap.dedent("""\
-    a = 5
-    if a == 1:
-      x = 2
+    a is 5
+    if a is 1:
+      x is 2
     else:
-      x = 222""")
+      x is 222""")
         expected = textwrap.dedent("""\
     a = '5'
     if str(a) == str('1'):
@@ -232,10 +167,10 @@ else:
 
     def test_if_nesting(self):
         code = textwrap.dedent("""\
-    kleur = blauw
-    kleurtwee = geel
-    if kleur == blauw:
-      if kleurtwee == geel:
+    kleur is blauw
+    kleurtwee is geel
+    if kleur is blauw:
+      if kleurtwee is geel:
         print('Samen is dit groen!')""")
         expected = textwrap.dedent("""\
     kleur = 'blauw'
@@ -250,7 +185,7 @@ else:
 
     def test_newprint(self):
         code = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
+    leeftijd is input('Hoe oud ben jij?')
     print('Dus jij hebt zo veel verjaardagen gehad:')
     for i in range(0,leeftijd):
         print(i)""")
@@ -267,7 +202,7 @@ else:
 
     def test_list(self):
         code = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
+    fruit is ['appel', 'banaan', 'kers']
     print(fruit)""")
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
@@ -277,10 +212,24 @@ else:
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
+    def test_random(self):
+        code = textwrap.dedent("""\
+    fruit is ['banaan', 'appel', 'kers']
+    randomfruit is fruit[random]
+    print(randomfruit)""")
+        expected = textwrap.dedent("""\
+    fruit = ['banaan', 'appel', 'kers']
+    randomfruit=random.choice(fruit)
+    print(str(randomfruit))""")
+
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
+
     def test_specific_access(self):
         code = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    eerstefruit = fruit[1]
+    fruit is ['banaan', 'appel', 'kers']
+    eerstefruit is fruit[1]
     print(eerstefruit)""")
         expected = textwrap.dedent("""\
     fruit = ['banaan', 'appel', 'kers']
@@ -294,13 +243,13 @@ else:
     # note that print(str(highscore)) will not print as it will compare 'score[i]' as str to a variable
     def test_everything_combined(self):
         code = textwrap.dedent("""\
-    score = ['100', '300', '500']
-    highscore = score[random]
+    score is ['100', '300', '500']
+    highscore is score[random]
     print('De highscore is: ' highscore)
     for i in range(1,3):
-        scorenu = score[i]
+        scorenu is score[i]
         print('Score is nu ' scorenu)
-        if highscore == score[i]:
+        if highscore is score[i]:
             print(highscore)""")
         expected = textwrap.dedent("""\
     score = ['100', '300', '500']
@@ -320,13 +269,13 @@ else:
     def test_if_under_else_in_for(self):
         code = textwrap.dedent("""\
     for i in range(0, 10):
-      antwoord = input('Wat is 5*5')
-      if antwoord == 24:
+      antwoord is input('Wat is 5*5')
+      if antwoord is 24:
         print('Dat is fout!')
       else:
         print('Dat is goed!')
-      if antwoord == 25:
-        i = 10""")
+      if antwoord is 25:
+        i is 10""")
 
         expected = textwrap.dedent("""\
     step = 1 if int(0) < int(10) else -1
@@ -345,8 +294,8 @@ else:
 
     def test_bool_true(self):
         code = textwrap.dedent("""\
-    ja = True
-    if ja == True:
+    ja is True
+    if ja is True:
         print('ja')""")
         expected = textwrap.dedent("""\
     ja = True
@@ -359,8 +308,8 @@ else:
 
     def test_bool_false(self):
         code = textwrap.dedent("""\
-    ja = False
-    if ja == False:
+    ja is False
+    if ja is False:
         print('ja')""")
         expected = textwrap.dedent("""\
     ja = False
@@ -372,8 +321,8 @@ else:
 
     def test_bool_true2(self):
         code = textwrap.dedent("""\
-    ja = true
-    if ja == True:
+    ja is true
+    if ja is True:
         print('ja')""")
         expected = textwrap.dedent("""\
     ja = True
@@ -386,8 +335,8 @@ else:
 
     def test_bool_false2(self):
         code = textwrap.dedent("""\
-    ja = false
-    if ja == False:
+    ja is false
+    if ja is False:
         print('ja')""")
         expected = textwrap.dedent("""\
     ja = False
@@ -400,13 +349,13 @@ else:
 
     def test_bool_total(self):
         code = textwrap.dedent("""\
-    jebenternog = False
-    benjeernog = input('ben je er nog? ja of nee?')
-    if benjeernog == ja:
-        jebenternog = True
-    if jebenternog == True:
+    jebenternog is False
+    benjeernog is input('ben je er nog? ja of nee?')
+    if benjeernog is ja:
+        jebenternog is True
+    if jebenternog is True:
         print('Hallo!')
-    if jebenternog == False:
+    if jebenternog is False:
         print('Doei!')""")
         expected = textwrap.dedent("""\
     jebenternog = False
@@ -424,7 +373,7 @@ else:
 
     def test_and(self):
         code = textwrap.dedent("""\
-    if 5 == 5 and 4 == 4:
+    if 5 is 5 and 4 is 4:
         print('hallo')""")
         expected = textwrap.dedent("""\
     if str('5') == str('5') and str('4') == str('4'):
@@ -436,7 +385,7 @@ else:
 
     def test_or(self):
         code = textwrap.dedent("""\
-    if 5 == 5 or 4 == 4:
+    if 5 is 5 or 4 is 4:
         print('hallo')""")
         expected = textwrap.dedent("""\
     if str('5') == str('5') or str('4') == str('4'):
@@ -448,7 +397,7 @@ else:
 
     def test_comment(self):
         code = textwrap.dedent("""\
-    if 5 == 5 or 4 == 4:
+    if 5 is 5 or 4 is 4:
         print('hallo')
         #comment""")
         expected = textwrap.dedent("""\
@@ -462,7 +411,7 @@ else:
     def test_commentbegin(self):
         code = textwrap.dedent("""\
     # comment word
-    if 5 == 5 or 4 == 4:
+    if 5 is 5 or 4 is 4:
         print('hallo')
         """)
         expected = textwrap.dedent("""\
@@ -476,7 +425,7 @@ else:
     def test_commentresult(self):
         code = textwrap.dedent("""\
     # comment word
-    if 5 == 5 or 4 == 4:
+    if 5 is 5 or 4 is 4:
         print('hallo')
         """)
         expected = textwrap.dedent("""\
@@ -489,7 +438,7 @@ else:
 
     def test_smaller(self):
         code = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
+    leeftijd is input('Hoe oud ben jij?')
     if leeftijd < 12:
         print('Dan ben je jonger dan ik!')""")
         expected = textwrap.dedent("""\
@@ -503,7 +452,7 @@ else:
 
     def test_bigger(self):
         code = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
+    leeftijd is input('Hoe oud ben jij?')
     if leeftijd > 12:
         print('Dan ben je ouder dan ik!')""")
         expected = textwrap.dedent("""\
@@ -517,7 +466,7 @@ else:
 
     def test_big_and_small(self):
         code = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
+    leeftijd is input('Hoe oud ben jij?')
     if leeftijd < 12:
         print('Dan ben je jonger dan ik!')
     elif leeftijd > 12:
@@ -535,11 +484,11 @@ else:
 
     def test_whileloop(self):
         code = textwrap.dedent("""\
-    goedantwoord = False
-    while goedantwoord == False:
-        antwoord = input('Wat is 5 keer 5?')
-        if antwoord == 25:
-            goedantwoord = True""")
+    goedantwoord is False
+    while goedantwoord is False:
+        antwoord is input('Wat is 5 keer 5?')
+        if antwoord is 25:
+            goedantwoord is True""")
         expected = textwrap.dedent("""\
     goedantwoord = False
     while goedantwoord == False:
@@ -553,11 +502,11 @@ else:
 
     def test_whileloop2(self):
         code = textwrap.dedent("""\
-    tel = 1
+    tel is 1
     # we gaan door totdat tel 3 is!
     while tel < 3:
         print('Dit is de ' tel 'e keer')
-        tel = tel + 1
+        tel is tel + 1
     print('We zijn klaar')""")
         expected = textwrap.dedent("""\
     tel = '1'
@@ -573,12 +522,12 @@ else:
 
     def test_whileloop3(self):
         code = textwrap.dedent("""\
-    goedantwoord = False
+    goedantwoord is False
     # we gaan door totdat een goed antwoord is gegeven!
-    while goedantwoord == False:
-        antwoord = input('Wat is 5 keer 5?')
-        if antwoord == 25:
-            goedantwoord = True
+    while goedantwoord is False:
+        antwoord is input('Wat is 5 keer 5?')
+        if antwoord is 25:
+            goedantwoord is True
             print('Er is een goed antwoord gegeven')""")
         expected = textwrap.dedent("""\
     goedantwoord = False
@@ -595,9 +544,9 @@ else:
 
     def test_access_plus(self):
         code = textwrap.dedent("""\
-    lijst = ['1', '2', '3']
-    optellen = lijst[1] + lijst[2]
-    optellen = optellen + lijst[3]
+    lijst is ['1', '2', '3']
+    optellen is lijst[1] + lijst[2]
+    optellen is optellen + lijst[3]
     # we verwachten hier 6
     print(optellen)""")
         expected = textwrap.dedent("""\
@@ -612,8 +561,8 @@ else:
         self.assertEqual(False, result.has_turtle)
     def test_length(self):
         code = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
-    hoi = length(fruit)
+    fruit is ['appel', 'banaan', 'kers']
+    hoi is length(fruit)
     print(hoi)""")
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
@@ -626,7 +575,7 @@ else:
 
     def test_length2(self):
         code = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
+    fruit is ['appel', 'banaan', 'kers']
     for i in range(1, length(fruit)):
         print(fruit[i])""")
         expected = textwrap.dedent("""\
@@ -641,7 +590,7 @@ else:
 
     def test_print_length(self):
         code = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
+    fruit is ['appel', 'banaan', 'kers']
     print('lengte van de lijst is' length(fruit))
     for i in range(1, 3):
         print(fruit[i])""")
@@ -651,70 +600,6 @@ else:
     step = 1 if int(1) < int(3) else -1
     for i in range(int(1), int(3) + step, step):
       print(str(fruit[i-1]))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_sum_in_if(self):
-        code = textwrap.dedent("""\
-    if 5+3 == 8:
-        print('5+3 is inderdaad 8')
-    else:
-        print('Dit wordt niet geprint want 5+3 is 8!')""")
-        expected = textwrap.dedent("""\
-    if int(5) + int(3) == int(8):
-      print('5+3 is inderdaad 8')
-    else:
-      print('Dit wordt niet geprint want 5+3 is 8!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_sum_in_right_side_if(self):
-        code = textwrap.dedent("""\
-    if 8 == 5+3:
-        print('5+3 is inderdaad 8')
-    else:
-        print('Dit wordt niet geprint want 5+3 is 8!')""")
-        expected = textwrap.dedent("""\
-    if int(8) == int(5) + int(3):
-      print('5+3 is inderdaad 8')
-    else:
-      print('Dit wordt niet geprint want 5+3 is 8!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_min_in_if(self):
-        code = textwrap.dedent("""\
-    if 5-3 == 2:
-        print('5-3 is inderdaad 2')
-    else:
-        print('Dit wordt niet geprint want 5+3 is 8!')""")
-        expected = textwrap.dedent("""\
-    if int(5) - int(3) == int(2):
-      print('5-3 is inderdaad 2')
-    else:
-      print('Dit wordt niet geprint want 5+3 is 8!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_multiply_in_if(self):
-        code = textwrap.dedent("""\
-    if 5*3 == 15:
-        print('5*3 is inderdaad 15')
-    else:
-        print('Dit wordt niet geprint want 5+3 is 8!')""")
-        expected = textwrap.dedent("""\
-    if int(5) * int(3) == int(15):
-      print('5*3 is inderdaad 15')
-    else:
-      print('Dit wordt niet geprint want 5+3 is 8!')""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)

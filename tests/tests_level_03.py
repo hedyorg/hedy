@@ -254,7 +254,7 @@ class TestsLevel3(HedyTester):
       code=code,
       max_level=4,
       exception=hedy.UndefinedVarException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
   def test_var_undefined_error_message(self):
@@ -290,7 +290,7 @@ class TestsLevel3(HedyTester):
       code=code,
       max_level=4,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 

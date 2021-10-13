@@ -1,3 +1,5 @@
+import textwrap
+
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
 from lark import Tree, Transformer, visitors
@@ -8,7 +10,7 @@ import hashlib
 import re
 
 # Some useful constants
-HEDY_MAX_LEVEL = 22
+HEDY_MAX_LEVEL = 23
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -862,6 +864,19 @@ class ConvertToPython_7(ConvertToPython_6):
 
 @hedy_transpiler(level=8)
 class ConvertToPython_8(ConvertToPython_7):
+    def repeat_list(self, args):
+      args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+      body = "\n".join([indent(x) for x in args[2:]])
+
+      return textwrap.dedent(f"""\
+      for {args[0]} in {args[1]}:
+        {body}""")
+
+
+
+@hedy_transpiler(level=9)
+class ConvertToPython_9(ConvertToPython_8):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
@@ -869,16 +884,16 @@ class ConvertToPython_8(ConvertToPython_7):
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
-@hedy_transpiler(level=9)
 @hedy_transpiler(level=10)
-class ConvertToPython_9_10(ConvertToPython_8):
+@hedy_transpiler(level=11)
+class ConvertToPython_10_11(ConvertToPython_9):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-@hedy_transpiler(level=11)
-class ConvertToPython_11(ConvertToPython_9_10):
+@hedy_transpiler(level=12)
+class ConvertToPython_12(ConvertToPython_10_11):
     def input(self, args):
         args_new = []
         var = args[0]
@@ -892,8 +907,8 @@ class ConvertToPython_11(ConvertToPython_9_10):
 
         return f'{var} = input(' + '+'.join(args_new) + ")"
 
-@hedy_transpiler(level=12)
-class ConvertToPython_12(ConvertToPython_11):
+@hedy_transpiler(level=13)
+class ConvertToPython_13(ConvertToPython_12):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -917,8 +932,8 @@ class ConvertToPython_12(ConvertToPython_11):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
 
-@hedy_transpiler(level=13)
-class ConvertToPython_13(ConvertToPython_12):
+@hedy_transpiler(level=14)
+class ConvertToPython_14(ConvertToPython_13):
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
@@ -953,20 +968,20 @@ class ConvertToPython_13(ConvertToPython_12):
         else:
             return f"str({arg0}) == str({arg1})" #no and statements
 
-@hedy_transpiler(level=14)
-class ConvertToPython_14(ConvertToPython_13):
+@hedy_transpiler(level=15)
+class ConvertToPython_15(ConvertToPython_14):
     def andcondition(self, args):
         return ' and '.join(args)
     def orcondition(self, args):
         return ' or '.join(args)
 
-@hedy_transpiler(level=15)
-class ConvertToPython_15(ConvertToPython_14):
+@hedy_transpiler(level=16)
+class ConvertToPython_16(ConvertToPython_15):
     def comment(self, args):
         return f"# {args}"
 
-@hedy_transpiler(level=16)
-class ConvertToPython_16(ConvertToPython_15):
+@hedy_transpiler(level=17)
+class ConvertToPython_17(ConvertToPython_16):
     def smaller(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -983,16 +998,16 @@ class ConvertToPython_16(ConvertToPython_15):
         else:
             return f"int({arg0}) > int({arg1}) and {args[2]}"
 
-@hedy_transpiler(level=17)
-class ConvertToPython_17(ConvertToPython_16):
+@hedy_transpiler(level=18)
+class ConvertToPython_18(ConvertToPython_17):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
-@hedy_transpiler(level=18)
 @hedy_transpiler(level=19)
-class ConvertToPython_18_19(ConvertToPython_17):
+@hedy_transpiler(level=20)
+class ConvertToPython_19_20(ConvertToPython_18):
     def length(self, args):
         arg0 = args[0]
         return f"len({arg0})"
@@ -1020,8 +1035,8 @@ class ConvertToPython_18_19(ConvertToPython_17):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
-@hedy_transpiler(level=20)
-class ConvertToPython_20(ConvertToPython_18_19):
+@hedy_transpiler(level=21)
+class ConvertToPython_21(ConvertToPython_19_20):
     def equality_check(self, args):
         if type(args[0]) is Tree:
             return args[0].children + " == int(" + args[1] + ")"
@@ -1036,8 +1051,8 @@ class ConvertToPython_20(ConvertToPython_18_19):
         else:
             return f"str({arg0}) == str({arg1})"  # no and statements
 
-@hedy_transpiler(level=21)
-class ConvertToPython_21(ConvertToPython_20):
+@hedy_transpiler(level=22)
+class ConvertToPython_22(ConvertToPython_21):
     def not_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1046,8 +1061,8 @@ class ConvertToPython_21(ConvertToPython_20):
         else:
             return f"str({arg0}) != str({arg1}) and {args[2]}"
 
-@hedy_transpiler(level=22)
-class ConvertToPython_22(ConvertToPython_21):
+@hedy_transpiler(level=23)
+class ConvertToPython_23(ConvertToPython_22):
     def smaller_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1395,7 +1410,7 @@ def transpile_inner(input_string, level):
             transpiler = TRANSPILER_LOOKUP[level]
             python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         else:
-           raise Exception('Levels over 22 are not implemented yet')
+           raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
     except visitors.VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.

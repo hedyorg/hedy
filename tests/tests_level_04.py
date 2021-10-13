@@ -201,7 +201,7 @@ class TestsLevel4(HedyTester):
       max_level=4,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 
@@ -227,7 +227,7 @@ class TestsLevel4(HedyTester):
       max_level=4,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 
@@ -363,7 +363,7 @@ class TestsLevel4(HedyTester):
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
-      print(f'{self.test_name()} level {level}')
+      print(f'{self.name()} level {level}')
 
 
 
@@ -389,7 +389,7 @@ class TestsLevel4(HedyTester):
       max_level=22,
       code=code,
       exception=hedy.InvalidCommandException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
     #we don't have a function now for testing more exceptoion logic
