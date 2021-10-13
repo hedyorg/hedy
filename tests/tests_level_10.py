@@ -41,7 +41,7 @@ class TestsLevel10(HedyTester):
 
     self.assertEqual("30", self.run_code(result))
 
-  def test_transpile_ask(self):
+  def test_ask(self):
     result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", self.level)
     expected = "antwoord = input('wat is je lievelingskleur?')"
     self.assertEqual(expected, result.code)
