@@ -378,19 +378,6 @@ class TestsLevel2(HedyTester):
       extra_check_function=check_in_list,
       test_name=self.test_name()
     )
-  def test_assign_print(self):
-    code = textwrap.dedent("""\
-    naam is Felienne
-    print hallo naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Felienne'
-    print(f'hallo {naam}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
     naam is Hedy
