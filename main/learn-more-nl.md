@@ -1,40 +1,39 @@
 page_title: Learn More — Hedy
 ---
 
-# Schrijf je in voor de Hedy nieuwsbrief
-
 <!-- Begin Mailchimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-<div id="mc_embed_signup" class=" bg-white shadow-md rounded px-4 pb-4 mb-4">
-<form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-    <div id="mc_embed_signup_scroll">
-<div class="mc-field-group">
-	<label for="mce-EMAIL">Emailadres  <span class="asterisk">*</span>
-</label>
-	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-</div>
-<div class="mc-field-group">
-	<label for="mce-FNAME">Voornaam </label>
-	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-</div>
-<div class="mc-field-group">
-	<label for="mce-LNAME">Achternaam </label>
-	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-</div>
-<div class="mc-field-group">
-	<label for="mce-COUNTRY">Land </label>
-	<input type="text" value="" name="COUNTRY" class="" id="mce-COUNTRY">
-</div>
-	<div id="mce-responses" class="clear">
-		<div class="response" id="mce-error-response" style="display:none"></div>
-		<div class="response" id="mce-success-response" style="display:none"></div>
-	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
-    <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn">Schrijf je in</button>
-</div>
-<a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" target="_blank" title="View previous campaigns">Bekijk het nieuwsbrievenarchief</a>
-</form>
-
+<div class="w-full">
+    <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <h2 class="py-2">Schrijf je in voor de Hedy nieuwsbrief</h2>
+    <div>
+        <div class="mb-4">
+            <label for="mce-EMAIL">Emailadres  <span class="asterisk">*</span></label>
+            <input type="email" value="" name="EMAIL" class="required email w-3/4" id="mce-EMAIL" required>
+        </div>
+        <div class="mb-4">
+            <label for="mce-FNAME">Voornaam </label>
+            <input type="text" value="" name="FNAME" class="w-3/4" id="mce-FNAME">
+        </div>
+        <div class="mb-4">
+            <label for="mce-LNAME">Achternaam </label>
+            <input type="text" value="" name="LNAME" class="w-3/4" id="mce-LNAME">
+        </div>
+        <div class="mb-4">
+            <label for="mce-COUNTRY">Land </label>
+            <input type="text" value="" name="COUNTRY" class="w-3/4" id="mce-COUNTRY">
+        </div>
+        <div class="mb-4">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
+        <div class="flex flex-row">
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn mb-4">Schrijf je in</button>
+            <p class="ml-4 text-base">Velden met een <sup>*</sup> zijn verplicht</p>
+        </div>
+    </div>
+    <a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" target="_blank" title="View previous campaigns">Bekijk het nieuwsbrievenarchief</a>
+    </form>
 </div>
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 <!--End mc_embed_signup-->
