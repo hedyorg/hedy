@@ -49,6 +49,11 @@ characters_that_need_escaping = ["\\", "'"]
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 def hash_needed(name):
+    # some elements are not names but processed names, i.e. random.choice(dieren)
+    # they should not be hashed (this won't break because these characters cannot be used in vars
+    if '[' in name or '(' in name:
+        return False
+
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
