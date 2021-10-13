@@ -268,7 +268,7 @@ class TestsLevel1(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
   # negative tests
