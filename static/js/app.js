@@ -414,6 +414,11 @@ function runPythonProgram(code, hasTurtle, cb) {
   return Sk.misceval.asyncToPromise(function () {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
+    console.log('Program executed');
+    // Check if the program was correct but the output window is empty: Return a warning
+    if ($('#output').is(':empty')) {
+      error.showWarning(ErrorMessages.Transpile_warning, ErrorMessages.Empty_output);
+    }
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
