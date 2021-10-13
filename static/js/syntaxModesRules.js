@@ -485,7 +485,7 @@ function rule_ifElse() {
       next: 'condition',
     }),
     recognize('start', {
-      regex: keywordWithSpace('else'),
+      regex: '\\b' + 'else',
       token: 'keyword',
     }),
     recognize('condition', {
