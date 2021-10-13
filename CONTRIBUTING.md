@@ -1,3 +1,25 @@
+Helping build Hedy
+------------
+
+We would be grateful if you help make Hedy better. 
+
+First you will want to follow the instructions below to run the code locally and configuring your manchine as explained below.
+
+**Open issues**
+
+After that, the best thing to do is to have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too, if they are unassigned, we are not planning to work on them in the near future. 
+
+**Project boards**
+
+The core team (currently consisting of [Felienne](https://github.com/Felienne) & [boryanagoncharenko](https://github.com/boryanagoncharenko)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there is stuff you want to help out with, that is always welcome, but do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
+
+Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :) 
+
+**Discussions**
+
+The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the langauge or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hedy@felienne.com) and read the corresponding discussion to see what has alrady been thought about.
+
+
 Run Hedy code on your machine
 ------------
 
