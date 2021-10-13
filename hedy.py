@@ -1349,8 +1349,6 @@ def transpile_inner(input_string, level):
         # random.choice(প্রাণী)
         hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
 
-        if lookup_table != hashed_lookups:
-            print(lookup_table, hashed_lookups)
         lookup_table += hashed_lookups
 
     except UnexpectedCharacters as e:
