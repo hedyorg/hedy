@@ -1,5 +1,6 @@
 import os
 import re
+from website.yaml_file import YamlFile
 import utils
 import hedy
 import unittest
@@ -36,7 +37,7 @@ class TestsLevelDefaultsPrograms(unittest.TestCase):
 
         for file in files:
             file = os.path.join (path, file)
-            yaml = utils.load_yaml_uncached (file)
+            yaml = YamlFile.for_file(file)
 
             for level in yaml:
                 # start_code
