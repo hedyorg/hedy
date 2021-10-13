@@ -347,6 +347,10 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
 
+  def test_detect_accented_chars(self):
+    self.assertEqual(True, hedy.hash_needed('éyyy'))
+    self.assertEqual(True, hedy.hash_needed('héyyy'))
+    self.assertEqual(False, hedy.hash_needed('heyyy'))
 
 
 

@@ -46,10 +46,10 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
 # \ also needs to be escaped because it eats the next character
 characters_that_need_escaping = ["\\", "'"]
 
+character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 def hash_needed(name):
-    pattern = re.compile('[^a-zA-Z0-9_]')
-    return name in reserved_words or pattern.match(name) != None
+    return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
     if hash_needed(name):
