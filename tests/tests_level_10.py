@@ -1,28 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-
-class TestsLevel10(unittest.TestCase):
+class TestsLevel10(HedyTester):
   level = 10
   
   def test_print(self):
@@ -59,7 +39,7 @@ class TestsLevel10(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_transpile_ask(self):
     result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", self.level)
@@ -131,7 +111,8 @@ class TestsLevel10(unittest.TestCase):
     expected = textwrap.dedent("""\
     a = '2'
     a = '3'
-    for a in range(int(2), int(4)+1):
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
@@ -139,6 +120,8 @@ class TestsLevel10(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -165,7 +148,8 @@ class TestsLevel10(unittest.TestCase):
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    for i in range(int(1), int(10)+1):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
     result = hedy.transpile(code, self.level)
@@ -179,8 +163,10 @@ class TestsLevel10(unittest.TestCase):
       for j in range 1 to 4:
         print 'rondje: ' i ' tel: ' j""")
     expected = textwrap.dedent("""\
-    for i in range(int(1), int(3)+1):
-      for j in range(int(1), int(4)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
+      step = 1 if int(1) < int(4) else -1
+      for j in range(int(1), int(4) + step, step):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
     result = hedy.transpile(code, self.level)
@@ -219,7 +205,8 @@ class TestsLevel10(unittest.TestCase):
         i is 10""")
 
     expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
+    step = 1 if int(0) < int(10) else -1
+    for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
         print('Dat is fout!')

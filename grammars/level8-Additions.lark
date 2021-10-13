@@ -3,5 +3,3 @@ command: print | ifs elses? | ask | for_loop | assign_list | list_access_var | a
 //new for level 8, for loop and the end-blocks
 for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (NUMBER | var) _SPACE _TO _SPACE (NUMBER | var) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
-elses: _EOL (_SPACE)* _ELSE _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
-ifs: _IF _SPACE condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'

@@ -1,30 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
+from tests_level_01 import HedyTester
 
-
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-class TestsLevel20(unittest.TestCase):
-    maxDiff = None
+class TestsLevel15(HedyTester):
     level = 20
 
     def test_print(self):
@@ -67,7 +45,71 @@ class TestsLevel20(unittest.TestCase):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-        self.assertEqual("30", run_code(result))
+        self.assertEqual("30", self.run_code(result))
+
+    def test_allow_space_after_else_line(self):
+
+        code = textwrap.dedent("""\
+        if a == 1:
+          print(a)
+        else:   
+          print('nee')""")
+
+        expected = textwrap.dedent("""\
+        if str(a) == str('1'):
+          print(str(a))
+        else:
+          print('nee')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=22,
+            expected=expected,
+            test_name=self.test_name(),
+            extra_check_function=self.is_not_turtle()
+        )
+
+
+
+    def test_allow_space_before_colon(self):
+        code = textwrap.dedent("""\
+        if a == 1  :
+          print(a)
+        else:   
+          print('nee')""")
+
+        expected = textwrap.dedent("""\
+        if str(a) == str('1'):
+          print(str(a))
+        else:
+          print('nee')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=22,
+            expected=expected,
+            test_name=self.test_name(),
+        )
+
+    def test_random(self):
+        code = textwrap.dedent("""\
+        dieren = ['Hond', 'Kat', 'Kangoeroe']
+        print(dieren[random])""")
+
+        expected = textwrap.dedent("""\
+        dieren = ['Hond', 'Kat', 'Kangoeroe']
+        print(str(random.choice(dieren)))""")
+
+        # check if result is in the expected list
+        check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+        self.multi_level_tester(
+        max_level=22,
+        code=code,
+        expected=expected,
+        test_name=self.test_name(),
+        extra_check_function=check_in_list
+        )
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -130,7 +172,8 @@ else:
         expected = textwrap.dedent("""\
     a = '2'
     a = '3'
-    for a in range(int(2), int(4)+1):
+    step = 1 if int(2) < int(4) else -1
+    for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
@@ -162,7 +205,8 @@ else:
       print(i)
     print('wie niet weg is is gezien')""")
         expected = textwrap.dedent("""\
-    for i in range(int(1), int(10)+1):
+    step = 1 if int(1) < int(10) else -1
+    for i in range(int(1), int(10) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
 
@@ -176,8 +220,10 @@ else:
       for j in range(1,4):
         print('rondje: ' i ' tel: ' j)""")
         expected = textwrap.dedent("""\
-    for i in range(int(1), int(3)+1):
-      for j in range(int(1), int(4)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
+      step = 1 if int(1) < int(4) else -1
+      for j in range(int(1), int(4) + step, step):
         print('rondje: '+str(i)+' tel: '+str(j))""")
 
         result = hedy.transpile(code, self.level)
@@ -211,7 +257,8 @@ else:
         expected = textwrap.dedent("""\
     leeftijd = input('Hoe oud ben jij?')
     print('Dus jij hebt zo veel verjaardagen gehad:')
-    for i in range(int(0), int(leeftijd)+1):
+    step = 1 if int(0) < int(leeftijd) else -1
+    for i in range(int(0), int(leeftijd) + step, step):
       print(str(i))""")
 
         result = hedy.transpile(code, self.level)
@@ -225,20 +272,6 @@ else:
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
     print(str(fruit))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_random(self):
-        code = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit = fruit[random]
-    print(randomfruit)""")
-        expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit=random.choice(fruit)
-    print(str(randomfruit))""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
@@ -273,7 +306,8 @@ else:
     score = ['100', '300', '500']
     highscore=random.choice(score)
     print('De highscore is: '+str(highscore))
-    for i in range(int(1), int(3)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
       scorenu=score[i-1]
       print('Score is nu '+str(scorenu))
       if str(highscore) == str('score[i]'):
@@ -295,7 +329,8 @@ else:
         i = 10""")
 
         expected = textwrap.dedent("""\
-    for i in range(int(0), int(10)+1):
+    step = 1 if int(0) < int(10) else -1
+    for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
         print('Dat is fout!')
@@ -596,7 +631,8 @@ else:
         print(fruit[i])""")
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
-    for i in range(int(1), int(len(fruit))+1):
+    step = 1 if int(1) < int(len(fruit)) else -1
+    for i in range(int(1), int(len(fruit)) + step, step):
       print(str(fruit[i-1]))""")
 
         result = hedy.transpile(code, self.level)
@@ -612,7 +648,8 @@ else:
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
     print('lengte van de lijst is'+str(len(fruit)))
-    for i in range(int(1), int(3)+1):
+    step = 1 if int(1) < int(3) else -1
+    for i in range(int(1), int(3) + step, step):
       print(str(fruit[i-1]))""")
 
         result = hedy.transpile(code, self.level)

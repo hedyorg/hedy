@@ -1,32 +1,9 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
-import inspect
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-class TestsLevel3(unittest.TestCase):
+class TestsLevel3(HedyTester):
   level = 3
-  def test_name(self):
-    return inspect.stack()[1][3]
 
   def test_transpile_other(self):
     with self.assertRaises(hedy.InvalidCommandException) as context:
@@ -149,7 +126,7 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual(run_code(result), "Kat")
+    self.assertEqual(self.run_code(result), "Kat")
 
   def test_print_with_list_var_random(self):
 
@@ -165,7 +142,7 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
+    self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
 
   def test_transpile_ask_Spanish(self):
     code = textwrap.dedent("""\
@@ -260,7 +237,7 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = run_code(result)
+    expected_output = self.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
   def test_transpile_missing_opening_quote(self):
@@ -274,19 +251,15 @@ class TestsLevel3(unittest.TestCase):
 
 
   def test_transpile_missing_all_quotes(self):
-    max_level = 4
-
     code = textwrap.dedent("""\
       print hallo wereld""")
-    
-    for level in range(self.level, max_level+1):
 
-      with self.assertRaises(hedy.UnderfinedVarException) as context:
-        result = hedy.transpile(code, level)
-
-      self.assertEqual('Var Undefined', context.exception.error_code)
-
-      print(f'{self.test_name()} level {level}')
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      exception=hedy.UndefinedVarException,
+      test_name=self.test_name()
+    )
 
   def test_var_undefined_error_message(self):
 
@@ -294,7 +267,7 @@ class TestsLevel3(unittest.TestCase):
       naam is Hedy
       print 'ik heet ' name""")
 
-    with self.assertRaises(hedy.UnderfinedVarException) as context:
+    with self.assertRaises(hedy.UndefinedVarException) as context:
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Var Undefined', context.exception.error_code)
@@ -312,19 +285,20 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual('Parse', context.exception.error_code)
 
   def test_two_spaces_after_print(self):
-
-    max_level = 4
     code = "print        'hallo!'"
 
-    for level in range(self.level, max_level+1):
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
 
-      expected = textwrap.dedent("""\
-      print(f'hallo!')""")
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
-      print(f'{self.test_name()} level {level}')
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+
 
 
   def test_bengali_assign(self):
@@ -372,7 +346,6 @@ class TestsLevel3(unittest.TestCase):
     print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
 
     self.assertEqual(expected, result.code)
-
 
 
 

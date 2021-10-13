@@ -1,29 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-class TestsLevel5(unittest.TestCase):
+class TestsLevel5(HedyTester):
   level = 5
   
   def test_print_with_var(self):
@@ -83,7 +62,6 @@ class TestsLevel5(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-
   def test_transpile_turtle_basic(self):
     code = textwrap.dedent("""\
     forward 50
@@ -99,6 +77,103 @@ class TestsLevel5(unittest.TestCase):
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
+
+
+  def test_basic_calc(self):
+    code = textwrap.dedent("""\
+    print '5 keer 5 is ' 5 * 5""")
+
+    expected = textwrap.dedent("""\
+    print('5 keer 5 is '+str(int(5) * int(5)))""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_print_if_else_with_line_break(self):
+    # todo: this and the next can be merged into 5 when we have f strings everywhere
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet'+str(naam))
+    if str(naam) == str('Hedy'):
+      print('leuk')
+    else:
+      print('minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+
+  def test_print_if_else_with_line_break_and_space(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'     
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print('ik heet'+str(naam))
+    if str(naam) == str('Hedy'):
+      print('leuk')
+    else:
+      print('minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+
+  def test_transpile_multiple_calcs(self):
+    code = textwrap.dedent("""\
+    print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
+
+    expected = textwrap.dedent("""\
+    print('5 keer 5 keer 5 is '+str(int(5) * int(5) * int(5)))""")
+
+    result = hedy.transpile(code, self.level)
+    self.assertEqual(expected, result.code)
+
+    output = self.run_code(result)
+    self.assertEqual(output, '5 keer 5 keer 5 is 125')
+    self.assertEqual(False, result.has_turtle)
+
+  def test_allow_space_after_else_line(self):
+    #this code has a space at the end of line 2
+    code = textwrap.dedent("""\
+    a is 2
+    if a is 1 print a 
+    else print 'nee'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    a = '2'
+    if str(a) == str('1'):
+      print(str(a))
+    else:
+      print('nee')""")
+
+    self.assertEqual(expected, result.code)
 
   def test_transpile_turtle_with_ask(self):
     code = textwrap.dedent("""\
@@ -126,7 +201,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("9", run_code(result))
+    self.assertEqual("9", self.run_code(result))
 
   def test_calculation_with_vars(self):
     code = textwrap.dedent("""\
@@ -145,7 +220,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_print_calculation_times_directly(self):
     code = textwrap.dedent("""\
@@ -162,7 +237,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_print_calculation_divide_directly(self):
     code = textwrap.dedent("""\
@@ -179,7 +254,7 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("0", run_code(result))
+    self.assertEqual("0", self.run_code(result))
 
   def test_issue_andras(self):
       code = textwrap.dedent("""\
@@ -251,3 +326,19 @@ class TestsLevel5(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+    def test_parse_error_shows_right_level(self):
+        """Check that a parse error that can't be fixed by downgrading the level is propagated properly."""
+
+        # This isn't correct Hedy at level 5 nor level 4
+        code = textwrap.dedent("""\
+        if option is Scissors
+            print
+            'Its a tie!""")
+
+        try:
+            hedy.transpile(code, self.level)
+            self.fail('Should have thrown')
+        except hedy.ParseException as e:
+            self.assertEqual('Parse', e.error_code)
+            self.assertEqual(self.level, e.level)
