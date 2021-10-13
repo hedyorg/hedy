@@ -20,7 +20,7 @@ class TestsLevel5(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
-  def test_transpile_ask(self):
+  def test_ask(self):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
@@ -62,7 +62,7 @@ class TestsLevel5(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_turtle_basic(self):
+  def test_turtle_basic(self):
     code = textwrap.dedent("""\
     forward 50
     turn
@@ -143,7 +143,7 @@ class TestsLevel5(HedyTester):
     )
 
 
-  def test_transpile_multiple_calcs(self):
+  def test_multiple_calcs(self):
     code = textwrap.dedent("""\
     print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
 
@@ -175,7 +175,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
 
-  def test_transpile_turtle_with_ask(self):
+  def test_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
