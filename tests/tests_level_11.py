@@ -1,33 +1,10 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
-import inspect
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-
-class TestsLevel11(unittest.TestCase):
+class TestsLevel11(HedyTester):
   level = 11
-  def test_name(self):
-    return inspect.stack()[1][3]
-
+  
   def test_print(self):
     result = hedy.transpile("print('ik heet')", self.level)
     expected = "print('ik heet')"
@@ -62,7 +39,7 @@ class TestsLevel11(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual("30", run_code(result))
+    self.assertEqual("30", self.run_code(result))
 
   def test_transpile_ask(self):
     result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
@@ -163,46 +140,44 @@ class TestsLevel11(unittest.TestCase):
     self.assertEqual(False, result.has_turtle)
 
   def test_allow_space_after_else_line(self):
-    max_level = 19
-    for level in range(self.level, max_level + 1):
+    code = textwrap.dedent("""\
+    if a is 1:
+      print(a)
+    else:   
+      print('nee')""")
 
-      code = textwrap.dedent("""\
-      if a is 1:
-        print(a)
-      else:   
-        print('nee')""")
+    expected = textwrap.dedent("""\
+    if str(a) == str('1'):
+      print(str(a))
+    else:
+      print('nee')""")
 
-      result = hedy.transpile(code, level)
-
-      expected = textwrap.dedent("""\
-      if str(a) == str('1'):
-        print(str(a))
-      else:
-        print('nee')""")
-
-      self.assertEqual(expected, result.code)
-      print(f'{self.test_name()} level {level}')
+    self.multi_level_tester(
+      code=code,
+      max_level=19,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
   def test_allow_space_before_colon(self):
-    max_level = 19
-    for level in range(self.level, max_level + 1):
+    code = textwrap.dedent("""\
+    if a is 1  :
+      print(a)
+    else:   
+      print('nee')""")
 
-      code = textwrap.dedent("""\
-      if a is 1  :
-        print(a)
-      else:   
-        print('nee')""")
+    expected = textwrap.dedent("""\
+    if str(a) == str('1'):
+      print(str(a))
+    else:
+      print('nee')""")
 
-      result = hedy.transpile(code, level)
-
-      expected = textwrap.dedent("""\
-      if str(a) == str('1'):
-        print(str(a))
-      else:
-        print('nee')""")
-
-      self.assertEqual(expected, result.code)
-      print(f'{self.test_name()} level {level}')
+    self.multi_level_tester(
+      code=code,
+      max_level=19,
+      expected=expected,
+      test_name=self.test_name()
+    )
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -320,46 +295,43 @@ class TestsLevel11(unittest.TestCase):
   #   self.assertEqual(str(context.exception), 'Parse')
 
   def test_multiple_spaces_after_print(self):
-
-    max_level = 22
     code = "print    ('hallo!')"
 
-    for level in range(self.level, max_level+1):
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    print('hallo!')""")
 
-      expected = textwrap.dedent("""\
-      print('hallo!')""")
-
-      print(f'{self.test_name()} level {level}')
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      code=code,
+      max_level=22,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
   def test_two_spaces_after_bracket(self):
-
-    max_level = 22
     code = "print(   'hallo!')"
 
-    for level in range(self.level, max_level + 1):
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    print('hallo!')""")
 
-      expected = textwrap.dedent("""\
-      print('hallo!')""")
-
-      print(f'{self.test_name()} level {level}')
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      code=code,
+      max_level=22,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
   def test_multiple_spaces_before_and_after_bracket(self):
-
-    max_level = 22
     code = "print  (   'hallo!')"
 
-    for level in range(self.level, max_level+1):
-      result = hedy.transpile(code, level)
+    expected = textwrap.dedent("""\
+    print('hallo!')""")
 
-      expected = textwrap.dedent("""\
-      print('hallo!')""")
-
-      print(f'{self.test_name()} level {level}')
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      code=code,
+      max_level=22,
+      expected=expected,
+      test_name=self.test_name(),
+      extra_check_function=self.is_not_turtle()
+    )
