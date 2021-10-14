@@ -1,7 +1,6 @@
-// Level 22 adds <= to combine < and =
+// Level 21 introduces the !=
 
-condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
+condition: (equality_check|in_list_check|smaller|bigger|not_equal)
+not_equal: (length | textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (length | textwithoutspaces | list_access)
 
-//new for level 22
-smaller_equal: (textwithoutspaces | list_access | length) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access | length)
-bigger_equal: (textwithoutspaces | list_access | length) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access | length)
+//space hierboven kan met + want hoeft niet?

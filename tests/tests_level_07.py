@@ -2,7 +2,7 @@ import hedy
 import textwrap
 from tests_level_01 import HedyTester
 
-class TestsLevel2(HedyTester):
+class TestsLevel7(HedyTester):
   level = 7
   
   def test_print(self):
@@ -261,7 +261,7 @@ class TestsLevel2(HedyTester):
       max_level=8,
       code=code,
       expected=expected,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
 

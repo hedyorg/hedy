@@ -25,7 +25,7 @@ class HedyTester(unittest.TestCase):
       exec(code)
     return out.getvalue().strip()
 
-  def test_name(self):
+  def name(self):
     return inspect.stack()[1][3]
 
   def is_not_turtle(self):
@@ -268,7 +268,7 @@ class TestsLevel1(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
   # negative tests
@@ -324,14 +324,14 @@ class TestsLevel1(HedyTester):
       max_level=22,
       code="print",
       exception=hedy.IncompleteCommandException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
   def test_non_keyword_with_argument_gives_invalid(self):
     self.multi_level_tester(
       max_level=22,
       code="abc felienne 123",
       exception=hedy.InvalidCommandException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
 

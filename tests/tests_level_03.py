@@ -66,7 +66,7 @@ class TestsLevel3(HedyTester):
       code=code,
       max_level=4,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
   def test_print_with_slashes(self):
@@ -263,7 +263,7 @@ class TestsLevel3(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
-      test_name=self.test_name()
+      test_name=self.name()
     )
   def test_assign_print(self):
     code = textwrap.dedent("""\
@@ -279,7 +279,7 @@ class TestsLevel3(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
   #negative tests
@@ -318,8 +318,8 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
+      test_name=self.name(),
       exception=hedy.UndefinedVarException,
-      test_name=self.test_name()
     )
 
   #assorti

@@ -22,7 +22,7 @@ class TestsLevel5(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
 
@@ -118,7 +118,7 @@ class TestsLevel5(HedyTester):
       max_level=6,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 
@@ -144,7 +144,7 @@ class TestsLevel5(HedyTester):
       max_level=6,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 

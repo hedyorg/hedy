@@ -281,6 +281,33 @@
                 forward 50
 8:
     start_code: |-
+        dieren is hond, kat, papegaai
+        for dier in dieren
+          print dier ' is een leuk dier!'
+    intro_text: |
+        In dit level leren we een nieuwe code, de code `for`. Met `for` kun je alle dingen in een lijstje gebruiken.
+        `for` mag meerdere regels gebruiken, net zoals de `repeat` and `if`, dus alle regels eronder moeten met spaties beginnen.
+
+        ## Voorbeeld Hedy code
+        ```
+        dieren is hond, kat, papegaai
+        for dier in dieren
+          print dier ' is een leuk dier!'
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Iets letterlijk printen met `print`."
+        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+    -   name: "for met een lijst"
+        explanation: "Alle dingen in een lijstje printen "
+        example: "Bijvoorbeeld: for dier in dieren"
+        demo_code: |-
+            dieren is hond, kat, papegaai
+            for dier in dieren
+              print dier
+9:
+    start_code: |-
         for i in range 1 to 10
             print i
         print 'Wie niet weg is is gezien'
@@ -296,7 +323,7 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -335,7 +362,7 @@
                 print 'a is 2'
             else:
                 print 'a is net 1 of 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -356,7 +383,7 @@
             if kleur is blauw:
                 if kleurtwa is giel:
                     print 'Tegearre is dit grien!'
-11:
+12:
     start_code: |-
         leeftyd is input('Hoe âld bisto?')
         print('Do hast safolle jierdeien hân:')
@@ -381,7 +408,7 @@
             for i in range(0, 10):
                 print(i)
             print('Wie niet weg is is gezien')
-12:
+13:
     start_code: |-
         fruit is ['apel', 'banaan', 'kjers']
         print(fruit)
@@ -407,7 +434,7 @@
             fruit is ['apel', 'banaan', 'kjers']
             randomfruit is fruit[random]
             print(randomfruit)
-13:
+14:
     start_code: |-
         do_bist_der_noch is False
         bist_der_noch is input('ben je er noch? ja of nee?')
@@ -436,7 +463,7 @@
                     print('Dat is goed!')
                 if goed_antwurd is False:
                     print('Dat is fout! Meist it noch ' 5-i ' kear besykje')
-14:
+15:
     start_code: |-
         do_bist_der_noch is False
         bist_der_noch is input('Bist der noch? ja as nee?')
@@ -467,7 +494,7 @@
                 print('Je hebt minimaal 1 antwurd goed!')
             else:
                 print('Beide antwurden binne fout!')
-15:
+16:
     start_code: |-
         # Dit is een programma dat in tal sommen freegjen giet
         
@@ -494,12 +521,12 @@
             # It is gemaakt in Hedy
             # It docht eins neat fierder!
             print('goeie')
-16:
+17:
     start_code: |-
         leeftyd is input('Hoe âld bisto?')
-        if leeftyd < 12:
+        if leeftyd < 13:
             print('Dan bist jonger as ik!')
-        elif leeftyd > 12:
+        elif leeftyd > 13:
             print('Dan bist âlder as ik!')
     intro_text: |-
         We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal 
@@ -510,16 +537,16 @@
         example: "Foarbyld: leeftyd < 12"
         demo_code: |-
             leeftyd is input('Hoe âld bisto?')
-            if leeftyd < 12:
+            if leeftyd < 13:
                 print('Dan bist jonger as ik!')
     -   name: "Grutter"
         explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
         example: "Foarbyld: leeftyd > 12"
         demo_code: |-
             leeftyd is input('Hoe âld bisto?')
-            if leeftyd > 12:
+            if leeftyd > 13:
                 print('Dan bist âlder as ik!')
-17:
+18:
     start_code: |-
         goed_antwurd is False
         # We gean troch oant der in goed antwurd jûn is!
@@ -551,7 +578,7 @@
                 print('Dit is de ' tel 'e kear')
                 tel is tel + 1
             print('We zijn klaar')
-18:
+19:
     start_code: |-
         list is ['earste', 'twadde', 'tredde']
         twaddewearde is list[2]
@@ -567,7 +594,7 @@
             opteld is opteld + list[3]
             # we ferwachtsje hjir 6
             print(opteld)
-19:
+20:
     start_code: |-
         fruit is ['apel', 'banaan', 'kjers']
         for i in range(1, 3):
@@ -582,7 +609,7 @@
             print('lingte fan de list is ' length(fruit))
             for i in range(1, length(fruit)):
                 print(fruit[i])
-20:
+21:
     start_code: |-
         print('Hoefolle is 5+3?')
         antwurd = 5+3
@@ -622,7 +649,7 @@
                 print('Dat is goed!')
             else:
                 print('Spitich leave, dat is fout!')
-21:
+22:
     start_code: |-
         lân = input('Yn hokker (welk) lân wennest do?')
         if lân != Nederland:
@@ -640,12 +667,12 @@
                 print('Kreas hear!')
             else:
                 print('Fout! Mochst 5 sizze')
-22:
+23:
     start_code: |-
         leeftyd = input('Ik bin 12 jier, hoe âld bisto?')
-        if leeftyd <= 11:
+        if leeftyd <= 12:
             print('Dan bisto jonger as ik!')
-        elif leeftyd >= 13:
+        elif leeftyd >= 14:
             print('Dan bisto âlder as ik!')
     intro_text: "No sille wy < en = tegearre brûke. As we witte wolle oft eat lytser of gelyk oan it twadde getal is dan brûke wy `<=`. Itselde kinst dwaan mei `>=`"
     commands:
@@ -654,12 +681,12 @@
         example: "Foarbyld: leeftyd <= 12"
         demo_code: |-
             leeftyd = input('Ik bin 13 jier, hoe âld bisto?')
-            if leeftyd <= 12:
+            if leeftyd <= 13:
                 print('Dan bist jonger as ik!')
     -   name: "Grutter gelyk"
         explanation: "De `>=` sjocht dus oft it earste getal grutter as gelyk is oan it twadde getal. Dus 5 > 5 is 'net wier' want 5 is net grutter as 5 mar 5 >= 5 is wol 'wier' want 5 is gelyk oan 5. 4 >= 5 is dus net wier."
         example: "Foarbyld: leeftyd >= 12"
         demo_code: |-
             leeftyd = input('Ik bin 11 jier, hoe âld bisto?')
-            if leeftyd >= 12:
+            if leeftyd >= 13:
                 print('Dan bistâlder as ik!')

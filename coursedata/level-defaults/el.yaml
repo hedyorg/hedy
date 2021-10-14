@@ -245,6 +245,33 @@
                 print 'έτσι κι έτσι'
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for i in range 1 to 10
             print i
         print 'Έτοιμοι ή όχι, έρχομαι!'
@@ -257,7 +284,7 @@
             for i in range 1 to 10
               print i
             print 'Έτοιμοι ή όχι, έρχομαι!'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -268,7 +295,7 @@
         explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
         example: 'for i in range 1 to 10:'
         demo_code: |-
-            for i in range 1 to 11:
+            for i in range 1 to 12:
                 print i
             print 'Έτοιμοι ή όχι, έρχομαι!'
     -   name: 'if με :'
@@ -291,7 +318,7 @@
                 print 'το a είναι 2'
             else:
                 print 'το a δεν είναι 1 ή 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -312,7 +339,7 @@
             if colour is μπλε:
                 if colourtwo is κίτρινο:
                     print 'Μαζί κάνουμε το χρώμα πράσινο!'
-11:
+12:
     start_code: |-
         age is input('Ποιά είναι η ηλικία σου;')
         print('Άρα έχεις υπάρξει σε αυτές τις ηλικίες:')
@@ -337,7 +364,7 @@
             for i in range(0,10):
                 print(i)
             print('Έτοιμοι ή όχι, έρχομαι!')
-12:
+13:
     start_code: |-
         fruit is ['μήλο', 'μπανάνα', 'κεράσι']
         print(fruit)
@@ -363,7 +390,7 @@
             fruit is ['μήλο', 'μπανάνα', 'κεράσι']
             randomfruit is fruit[random]
             print(randomfruit)
-13:
+14:
     start_code: |-
         you_are_still_here is False
         are_you_still_here is input('Είσαι ακόμα εδώ; ναι ή όχι;')
@@ -390,7 +417,7 @@
                     print('Αυτό είναι σωστό!')
                 if good_answer is False:
                     print('Αυτό είναι λάθος! Απομένουν ' 5-i ' προσπάθειες ')
-14:
+15:
     start_code: |-
         you_are_still_here is False
         are_you_still_here is input('Είσαι ακόμα εδώ; ναι ή όχι;')
@@ -421,7 +448,7 @@
                 print('Τουλάχιστον μία απάντηση είναι σωστή!')
             else:
                 print('Και οι δύο απαντήσεις είναι λανθασμένες!')
-15:
+16:
     start_code: |-
         # Αυτό είναι ένα πρόγραμμα που θα ρωτήσεις κάποιες ερωτήσεις μαθηματικών
         for i in range(1,10):
@@ -446,12 +473,12 @@
             # Δημιουργήθηκε με τη Hedy
             # Δεν κάνει τίποτα άλλο εκτός από το να εμφανίζει Γειά
             print('γειά!')
-16:
+17:
     start_code: |-
         age is input('Πόσο χρονών είσαι;')
-        if age < 12:
+        if age < 13:
             print('Είσαι νεότερη από εμένα!')
-        elif age > 12:
+        elif age > 13:
             print('Είσαι μεγαλύτερη από εμένα!')
     intro_text: Θα μάθουμε μερικά ακόμα νέα πράγματα! Ίσως να τα γνωρίζεις ήδη από τα μαθηματικά, τα `<` και `>`. Το `<` ελέγχει αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο, πχ `4 < 5`. To `>` ελέγχει αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο, πχ `6 > 5`.
     commands:
@@ -460,16 +487,16 @@
         example: 'Για παράδειγμα: age < 12'
         demo_code: |-
             age is input('Πόσο χρονών είσαι?')
-            if age < 12:
+            if age < 13:
                 print('Είσαι νεότερη από εμένα!')
     -   name: Μεγαλύτερο
         explanation: Χρησιμοποιούμε το `>` για να ελέγξουμε αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μεγαλύτερη από 15, χρησιμοποιούμε `variable > 15`
         example: 'Για παράδειγμα: age > 12'
         demo_code: |-
             age is input('Πόσο χρονών είσαι?')
-            if age > 12:
+            if age > 13:
                 print('Είσαι μεγαλύτερη από εμένα!')
-17:
+18:
     start_code: |-
         correct_answer is False
         # συνεχίζουμε ώσπου να δοθεί η σωστή απάντηση!
