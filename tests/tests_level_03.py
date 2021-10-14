@@ -6,7 +6,7 @@ class TestsLevel3(HedyTester):
   level = 3
 
   # tests should be ordered as follows:
-  # * commands in the order of hedy.py e..g for level 3: ['print', 'ask', 'is', 'turn', 'forward'],
+  # * commands in the order of hedy.py for level 3: ['print', 'ask', 'is', 'turn', 'forward'],
   # * combined tests
   # * markup tests
   # * multilevel tests (positive multilevel)
@@ -217,20 +217,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
     self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
-  def test_assign_print(self):
 
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet{naam}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
   def test_ask_print(self):
 
     code = textwrap.dedent("""
@@ -278,7 +265,22 @@ class TestsLevel3(HedyTester):
       extra_check_function=self.is_turtle(),
       test_name=self.test_name()
     )
+  def test_assign_print(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
 
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.test_name()
+    )
 
   #negative tests
   def test_var_undefined_error_message(self):

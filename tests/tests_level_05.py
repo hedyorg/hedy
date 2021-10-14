@@ -5,19 +5,25 @@ from tests_level_01 import HedyTester
 class TestsLevel5(HedyTester):
   level = 5
   
-  def test_print_with_var(self):
+
+  # mutlilevel tests
+  def test_assign_print(self):
+    #todo can be merged with 2 to 4 when we have f strings everywhere
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam""")
-
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     print('ik heet'+str(naam))""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.test_name()
+    )
 
 
   def test_ask(self):
