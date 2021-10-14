@@ -58,6 +58,8 @@
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
+
+        clearErrors(editor);
       });
     }
 
@@ -142,6 +144,13 @@ function reloadOnExpiredSession () {
    return true;
 }
 
+function clearErrors(editor) {
+  editor.session.clearAnnotations();
+  for (var marker in editor.session.getMarkers()) {
+    editor.session.removeMarker(marker);
+  }
+}
+
 function runit(level, lang, cb) {
   if (window.State.disable_run) return window.modal.alert (window.auth.texts.answer_question);
 
@@ -153,10 +162,7 @@ function runit(level, lang, cb) {
     var editor = ace.edit("editor");
     var code = editor.getValue();
 
-    editor.session.clearAnnotations();
-    for (var marker in editor.session.getMarkers()) {
-      editor.session.removeMarker(marker);
-    }
+    clearErrors(editor);
 
     console.log('Original program:\n', code);
     $.ajax({
