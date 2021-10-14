@@ -34,6 +34,8 @@
     // We expose the editor globally so it's available to other functions for resizing
     var editor = window.editor = turnIntoAceEditor($editor.get(0), $editor.data('readonly'));
 
+    window.Range = ace.require('ace/range').Range // get reference to ace/range
+
     // Load existing code from session, if it exists
     const storage = window.sessionStorage;
     if (storage) {
@@ -152,6 +154,9 @@ function runit(level, lang, cb) {
     var code = editor.getValue();
 
     editor.session.clearAnnotations();
+    for (var marker in editor.session.getMarkers()) {
+      editor.session.removeMarker(marker);
+    }
 
     console.log('Original program:\n', code);
     $.ajax({
@@ -173,7 +178,7 @@ function runit(level, lang, cb) {
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
-        if (response.Location) {
+        if (response.Location && response.Location[0] != "?") {
           editor.session.setAnnotations([
             {
               row: response.Location[0] - 1,
@@ -182,6 +187,16 @@ function runit(level, lang, cb) {
               type: "error",
             }
           ]);
+          // FIXME change this to apply only to the error span once errors have an end location.
+          editor.session.addMarker(
+            new Range(
+                response.Location[0] - 1,
+                response.Location[1] - 1,
+                response.Location[0] - 1,
+                response.Location[1],
+            ),
+            "editor-error", "fullLine"
+          );
         }
         return;
       }
