@@ -192,7 +192,7 @@ class TestsLevel4(HedyTester):
       max_level=4,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
   def test_print_if_else_line_break_and_space(self):
@@ -216,7 +216,7 @@ class TestsLevel4(HedyTester):
       max_level=4,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
   def test_print_if_else_and_var(self):
@@ -292,6 +292,13 @@ class TestsLevel4(HedyTester):
         antwoord = 'stom'
       print(f'{antwoord}')""")
 
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   #negative tests
   def test_indent_gives_parse_error(self):
@@ -318,7 +325,7 @@ class TestsLevel4(HedyTester):
       max_level=22,
       code=code,
       exception=hedy.InvalidCommandException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
     #we don't have a function now for testing more exceptoion logic

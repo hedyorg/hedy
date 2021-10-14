@@ -233,6 +233,33 @@
                      print 'Znám i lepší...'
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for pocitadlo in range 1 to 5
             print pocitadlo
     intro_text: '`print` funguje stejně, ale místo`repeat` odteď budeme používat `for`! Teď můžeš napsat `for pocitadlo in range 1 to 5` a použít `pocitadlo` ve svém programu. Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení za příkazy `for` a `if` (To znamená začínat řádek čtyřmi mezerami).'
@@ -253,7 +280,7 @@
             else
                 print 'Ups, těsně vedle...'
                 print 'Správný výsledek je 10.'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -284,7 +311,7 @@
                 print 'a je 2'
             else:
                 print 'a není ani 1 ani 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -303,7 +330,7 @@
             if barva is modrá:
                 if druhabarva is žlutá:
                     print 'Dohromady dáme zelenou!'
-11:
+12:
     start_code: |-
         vek is input('Kolik je ti let?')
         print('Takže už ti někdy bylo:')
@@ -325,7 +352,7 @@
             for i in range(0, 10):
                 print(i)
             print('Už jdu!')
-12:
+13:
     start_code: |-
         ovoce is ['jablko', 'banán', 'třešně']
         print(ovoce)
@@ -350,7 +377,7 @@
             ovoce is ['jablko', 'banán', 'třešně']
             nahodneovoce is ovoce[random]
             print(nahodneovoce)
-13:
+14:
     start_code: |-
         jsi_tady is False
         jsi_opravdu_tady is input('Jsi tady stále s námi? ano nebo ne?')
@@ -377,7 +404,7 @@
                     print('Správně!')
                 if spravna_odpoved is False:
                     print('Špatně! Zbývající pokusy: ' 5 - i)
-14:
+15:
     start_code: |-
         jsi_tady is False
         jsi_opravdu_tady is input('Jsi tady stále s námi? ano nebo ne?')
@@ -408,7 +435,7 @@
                 print('Alespoň jedna odpověď je správně!')
             else:
                 print('Obě odpovědi jsou špatně!')
-15:
+16:
     start_code: |-
         # Tento program se tě zeptá na pár matematických otázek
         for i in range(1, 10):
@@ -430,12 +457,12 @@
             # Je napsaný v Hedy
             # Nedělá nic jiného kromě výpisu Ahoj!
             print('Ahoj!')
-16:
+17:
     start_code: |-
         vek is input('Kolik je ti let?')
-        if vek < 12:
+        if vek < 13:
             print('Jsi mladší než já!')
-        elif vek > 12:
+        elif vek > 13:
             print('Jsi starší než já!')
     intro_text: |-
         Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
@@ -447,16 +474,16 @@
         example: 'Příklad: vek < 12'
         demo_code: |-
             vek is input('Kolik je ti let?')
-            if vek < 12:
+            if vek < 13:
                 print('Jsi mladší než já!')
     -   name: Větší
         explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
         example: 'Příklad: vek > 12'
         demo_code: |-
             vek is input('Kolik je ti let?')
-            if vek > 12:
+            if vek > 13:
                 print('Jsi starší než já!')
-17:
+18:
     start_code: |-
         spravna_odpoved is False
         # pokračujeme dokud nedostaneme správnou odpověď!
@@ -488,7 +515,7 @@
                 print('Toto zopakujeme ještě ' 3 - pocet 'krát')
                 pocet is pocet + 1
             print('Hotovo')
-18:
+19:
     start_code: |-
         seznam is ['první', 'druhý', 'třetí']
         druhahodnota is seznam[2]
@@ -504,7 +531,7 @@
             soucet is soucet + seznam[3]
             # Tady očekáváme číslo 6
             print(soucet)
-19:
+20:
     start_code: |-
         ovoce is ['jablko', 'banán', 'třešeň']
         for i in range(1, 3):
@@ -519,7 +546,7 @@
             print('Délka seznamu je ' length(ovoce))
             for i in range(1, length(ovoce)):
                 print(ovoce[i])
-20:
+21:
     start_code: |-
         print('Kolik je 5+3?')
         odpoved = 5+3
@@ -562,7 +589,7 @@
                 print('Správně!')
             else:
                 print('Ale ne, špatně!')
-21:
+22:
     start_code: |-
         zeme = input('V jaké zemi žiješ?')
         if zeme != Nizozemí:
@@ -580,12 +607,12 @@
                 print('Dobrá práce!')
             else:
                 print('5 nemůžeš říct, ta je moje!')
-22:
+23:
     start_code: |-
         vek = input('Je mi 12 let, kolik je tobě?')
-        if vek <= 11:
+        if vek <= 12:
             print('Jsi mladší než já!')
-        elif vek >= 13:
+        elif vek >= 14:
             print('Jsi starší než já!')
     intro_text: Nyní zkombinujeme < a =. Když budeme chtít zjistit, jestli je první čislo menší nebo rovno druhému číslo, použijeme `<=`. Obdobně pokud budeme chtít zjistit, jestli je větší nebo rovno, použijeme `>=`.
     commands:
@@ -594,12 +621,12 @@
         example: 'Příklad: vek <= 12'
         demo_code: |-
             vek = input('Je mi 13 let, kolik je tobě?')
-            if vek <= 12:
+            if vek <= 13:
                 print('Jsi mladší než já!')
     -   name: Větší nebo rovno
         explanation: '`>=` ověřuje, jestli je číslo nalevo od `>=` větší nebo rovno číslu napravo. Takže 5 > 5 není pravda, protože 5 není větší než 5, ale 5 >= 5 je pravda, protože 5 je větší nebo rovno 5. 4 >= 5 není pravda.'
         example: 'Příklad: vek >= 12'
         demo_code: |-
             vek = input('Je mi 11 let, kolik je tobě?')
-            if vek >= 12:
+            if vek >= 13:
                 print('Jsi starší než já!')
