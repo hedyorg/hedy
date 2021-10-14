@@ -9,8 +9,8 @@ class TestsLevel2(HedyTester):
   # * commands in the order of hedy.py e..g for level 2: ['print', 'ask', 'echo', 'is', 'turn', 'forward']
   # * combined tests
   # * markup tests
-  # * negative tests
-  # * multilevel tests
+  # * multilevel tests (positive multilevel)
+  # * negative tests (inc. negative & multilevel)
 
   # test name conventions are like this:
   # * single keyword positive tests are just keyword or keyword_special_case
@@ -313,20 +313,6 @@ class TestsLevel2(HedyTester):
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-  def test_forward_turn(self):
-    code = textwrap.dedent("""\
-    forward 50
-    turn
-    forward 100""")
-    result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
   def test_turn_ask(self):
     code = textwrap.dedent("""\
     print Turtle race
@@ -374,7 +360,7 @@ class TestsLevel2(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=check_in_list,
-      test_name=self.test_name()
+      test_name=self.name()
     )
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
@@ -433,6 +419,9 @@ class TestsLevel2(HedyTester):
     self.assertEqual(self.run_code(result), "Kat")
 
 
+  #multilevel tests
+  #no positive ones
+
   #negative tests
   def test_echo(self):
     code = textwrap.dedent("""\
@@ -441,14 +430,12 @@ class TestsLevel2(HedyTester):
     with self.assertRaises(hedy.WrongLevelException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Wrong Level', context.exception.error_code)
-
-  #multilevel tests
   def test_ask_without_argument_upto_22(self):
     self.multi_level_tester(
       code="name is ask",
       max_level=10,
       exception=hedy.IncompleteCommandException,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
   # test for 297 (not easy to fix, not giving prio now)

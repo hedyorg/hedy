@@ -50,7 +50,7 @@ class TestsLevel9(HedyTester):
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
     naam is Hedy
-    if naam is Hedy:
+    if naam is Hedy
         print 'koekoek'""")
     expected = textwrap.dedent("""\
     naam = 'Hedy'
@@ -64,10 +64,10 @@ class TestsLevel9(HedyTester):
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
-    if antwoord is 20:
+    if antwoord is 20
         print 'Goedzo!'
         print 'Het antwoord was inderdaad ' antwoord
-    else:
+    else
         print 'Foutje'
         print 'Het antwoord moest zijn ' antwoord""")
 
@@ -103,7 +103,7 @@ class TestsLevel9(HedyTester):
     code = textwrap.dedent("""\
     a is 2
     a is 3
-    for a in range 2 to 4:
+    for a in range 2 to 4
       a is a + 2
       b is b + 2""")
     expected = textwrap.dedent("""\
@@ -122,9 +122,9 @@ class TestsLevel9(HedyTester):
   def test_if__else(self):
     code = textwrap.dedent("""\
     a is 5
-    if a is 1:
+    if a is 1
       x is 2
-    else:
+    else
       x is 222""")
     expected = textwrap.dedent("""\
     a = '5'
@@ -140,7 +140,7 @@ class TestsLevel9(HedyTester):
 
   def test_forloop(self):
     code = textwrap.dedent("""\
-    for i in range 1 to 10:
+    for i in range 1 to 10
       print i
     print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
@@ -154,60 +154,33 @@ class TestsLevel9(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_allow_space_after_else_line(self):
 
+  def test_reverse_range(self):
     code = textwrap.dedent("""\
-    if a is 1:
-      print a
-    else:   
-      print 'nee'""")
-
+    for i in range 10 to 1
+      print i
+    print 'wie niet weg is is gezien'""")
     expected = textwrap.dedent("""\
-    if str('a') == str('1'):
-      print('a')
-    else:
-      print('nee')""")
+    step = 1 if int(10) < int(1) else -1
+    for i in range(int(10), int(1) + step, step):
+      print(str(i))
+    print('wie niet weg is is gezien')""")
 
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      test_name=self.test_name()
-    )
+    result = hedy.transpile(code, self.level)
 
-
-  def test_allow_space_before_colon(self):
-    max_level=10
-
-    code = textwrap.dedent("""\
-    if a is 1  :
-      print a
-    else:   
-      print 'nee'""")
-
-    expected = textwrap.dedent("""\
-    if str('a') == str('1'):
-      print('a')
-    else:
-      print('nee')""")
-
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      test_name=self.test_name()
-    )
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
 
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
-    for i in range 0 to 10:
+    for i in range 0 to 10
       antwoord is ask 'Wat is 5*5'
-      if antwoord is 24:
+      if antwoord is 24
         print 'Dat is fout!'
-      else:
+      else
         print 'Dat is goed!'
-      if antwoord is 25:
+      if antwoord is 25
         i is 10""")
 
     expected = textwrap.dedent("""\
@@ -226,47 +199,46 @@ class TestsLevel9(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_if_elif(self):
-      code = textwrap.dedent("""\
-      a is 5
-      if a is 1:
-        x is 2
-      elif a is 2:
-        x is 222""")
-      expected = textwrap.dedent("""\
-      a = '5'
-      if str(a) == str('1'):
-        x = '2'
-      elif str(a) == str('2'):
-        x = '222'""")
+    #fails, issue 363
 
-      result = hedy.transpile(code, self.level)
+  def test_for_ifbug(self):
+    code = textwrap.dedent("""\
+    for i in range 0 to 10
+      antwoord is ask 'Wat is 5*5'
+      if antwoord is 24
+        print 'fout'
+    print 'klaar met for loop'""")
 
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+    expected = textwrap.dedent("""\
+      step = 1 if int(0) < int(10) else -1
+      for i in range(int(0), int(10) + step, step):
+        antwoord = input('Wat is 5*5')
+        if str(antwoord) == str('24'):
+          print('fout')
+      print('klaar met for loop')""")
 
-  def test_if_with_multiple_elifs(self):
-      code = textwrap.dedent("""\
-      a is 5
-      if a is 1:
-        x is 2
-      elif a is 4:
-        x is 3
-      elif a is 2:
-        x is 222""")
-      expected = textwrap.dedent("""\
-      a = '5'
-      if str(a) == str('1'):
-        x = '2'
-      elif str(a) == str('4'):
-        x = '3'
-      elif str(a) == str('2'):
-        x = '222'""")
+    result = hedy.transpile(code, self.level)
 
-      result = hedy.transpile(code, self.level)
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+  def test_for_loopbug599(self):
+    code = textwrap.dedent("""\
+    for i in range 0 to 10
+      if i is 2
+        print '2'""")
+
+    expected = textwrap.dedent("""\
+      step = 1 if int(0) < int(10) else -1
+      for i in range(int(0), int(10) + step, step):
+        if str(i) == str('2'):
+          print('2')""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
 
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)

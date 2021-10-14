@@ -1,3 +1,5 @@
-// Level 18 adds list access with numbers
+// Level 17 adds the while loop
 
-?atom: NUMBER | var | NAME | list_access
+command: print | ifs (elifs)* elses? | input | for_loop | while_loop | assign_list | list_access_var | change_list_item| comment | assign
+
+while_loop: _WHILE _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK

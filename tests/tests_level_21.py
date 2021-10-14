@@ -47,6 +47,70 @@ class TestsLevel21(HedyTester):
 
         self.assertEqual("30", self.run_code(result))
 
+    def test_allow_space_after_else_line(self):
+
+        code = textwrap.dedent("""\
+        if a == 1:
+          print(a)
+        else:   
+          print('nee')""")
+
+        expected = textwrap.dedent("""\
+        if str(a) == str('1'):
+          print(str(a))
+        else:
+          print('nee')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=22,
+            expected=expected,
+            test_name=self.name(),
+            extra_check_function=self.is_not_turtle()
+        )
+
+
+
+    def test_allow_space_before_colon(self):
+        code = textwrap.dedent("""\
+        if a == 1  :
+          print(a)
+        else:   
+          print('nee')""")
+
+        expected = textwrap.dedent("""\
+        if str(a) == str('1'):
+          print(str(a))
+        else:
+          print('nee')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=22,
+            expected=expected,
+            test_name=self.name(),
+        )
+
+    def test_random(self):
+        code = textwrap.dedent("""\
+        dieren = ['Hond', 'Kat', 'Kangoeroe']
+        print(dieren[random])""")
+
+        expected = textwrap.dedent("""\
+        dieren = ['Hond', 'Kat', 'Kangoeroe']
+        print(str(random.choice(dieren)))""")
+
+        # check if result is in the expected list
+        check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+        self.multi_level_tester(
+        max_level=22,
+        code=code,
+        expected=expected,
+        test_name=self.name(),
+        extra_check_function=check_in_list
+        )
+
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
 naam = Hedy
@@ -64,7 +128,7 @@ if str(naam) == str('Hedy'):
     def test_if_else(self):
         code = textwrap.dedent("""\
 antwoord = input('Hoeveel is 10 plus 10?')
-if antwoord == 21:
+if antwoord == 20:
     print('Goedzo!')
     print('Het antwoord was inderdaad ' antwoord)
 else:
@@ -73,7 +137,7 @@ else:
 
         expected = textwrap.dedent("""\
 antwoord = input('Hoeveel is 10 plus 10?')
-if str(antwoord) == str('21'):
+if str(antwoord) == str('20'):
   print('Goedzo!')
   print('Het antwoord was inderdaad '+str(antwoord))
 else:
@@ -208,20 +272,6 @@ else:
         expected = textwrap.dedent("""\
     fruit = ['appel', 'banaan', 'kers']
     print(str(fruit))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_random(self):
-        code = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit = fruit[random]
-    print(randomfruit)""")
-        expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit=random.choice(fruit)
-    print(str(randomfruit))""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
@@ -606,40 +656,6 @@ else:
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_not_equal_one(self):
-        code = textwrap.dedent("""\
-    land = input('In welk land woon jij?')
-    if land != Nederland:
-        print('Cool!')
-    else:
-        print('Ik kom ook uit Nederland!')""")
-        expected = textwrap.dedent("""\
-    land = input('In welk land woon jij?')
-    if str(land) != str('Nederland'):
-      print('Cool!')
-    else:
-      print('Ik kom ook uit Nederland!')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_not_equal_two(self):
-        code = textwrap.dedent("""\
-    getal = input('Je mag geen 5 zeggen, wat is een leuk getal?')
-    if getal != 5:
-        print('Goed zo!')
-    else:
-        print('Fout! Je mocht geen 5 zeggen')""")
-        expected = textwrap.dedent("""\
-    getal = input('Je mag geen 5 zeggen, wat is een leuk getal?')
-    if str(getal) != str('5'):
-      print('Goed zo!')
-    else:
-      print('Fout! Je mocht geen 5 zeggen')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
     def test_sum_in_if(self):
         code = textwrap.dedent("""\
     if 5+3 == 8:
@@ -703,6 +719,7 @@ else:
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
+
 # programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message

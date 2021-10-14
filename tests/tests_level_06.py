@@ -215,7 +215,7 @@ class TestsLevel6(HedyTester):
       max_level=10,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=check_in_list
     )
 

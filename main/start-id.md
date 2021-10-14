@@ -6,7 +6,7 @@ page_title: Selamat datang di Hedy!
     <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Sebuah bahasa pemrograman bertahap</h2>
   </div>
   <div class="flex-none">
-    <a class="green-btn text-white px-8 py-4" href="/hedy?lang=en">Coba</a>
+    <a href="/hedy?lang=en"><button class="green-btn text-white px-8 py-4">Coba</button></a>
   </div>
 </div>
 
