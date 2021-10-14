@@ -35,4 +35,4 @@ def rewrite_quiz_to_new_structure(level_source, quiz_data, filename):
     return quiz_data
 
 
-get_original_quiz(3)
+get_original_quiz(1)
