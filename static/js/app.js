@@ -407,7 +407,7 @@ function runPythonProgram(code, hasTurtle, cb) {
   }).then(function(mod) {
     console.log('Program executed');
     // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty')) {
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       error.showWarning(ErrorMessages.Transpile_warning, ErrorMessages.Empty_output);
     }
     if (cb) cb ();
