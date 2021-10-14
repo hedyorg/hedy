@@ -6,7 +6,7 @@ page_title: Köszöntünk a Hedyben!
     <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">A fokozatos programozási nyelv</h2>
   </div>
   <div class="flex-none">
-    <a class="green-btn text-white px-8 py-4" href="/hedy?lang=hu">Try it</a>
+    <a href="/hedy?lang=hu"><button class="green-btn text-white px-8 py-4">Try it</button></a>
   </div>
 </div>
 

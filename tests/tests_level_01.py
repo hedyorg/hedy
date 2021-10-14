@@ -31,6 +31,9 @@ class HedyTester(unittest.TestCase):
   def is_not_turtle(self):
     return (lambda x: not x.has_turtle)
 
+  def is_turtle(self):
+    return (lambda x: x.has_turtle)
+
   def multi_level_tester(self, test_name, code, max_level, expected=None, exception=None, extra_check_function=None):
     # TODO: test_name could be stored in __init__ of test method
     #  if we created our own method (not sure it that is worth it?)
@@ -60,8 +63,8 @@ class TestsLevel1(HedyTester):
   # * commands in the order of hedy.py e..g for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
   # * combined tests
   # * markup tests
-  # * negative tests
-  # * multilevel tests
+  # * multilevel tests (positive multilevel)
+  # * negative tests (inc. negative & multilevel)
 
   # test name conventions are like this:
   # * single keyword positive tests are just keyword or keyword_special_case
@@ -227,16 +230,7 @@ class TestsLevel1(HedyTester):
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-  def test_forward_turn_combined(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
+
   def test_print_ask_echo(self):
       input = textwrap.dedent("""\
       print Hallo
@@ -259,6 +253,23 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
     self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
+
+  #multilevel tests
+  def test_forward_turn_combined(self):
+    code = "forward 50\nturn\nforward 100"
+    expected = textwrap.dedent("""\
+    t.forward(50)
+    time.sleep(0.1)
+    t.right(90)
+    t.forward(100)
+    time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.test_name()
+    )
 
   # negative tests
   def test_lines_with_space_gives_invalid(self):
@@ -308,8 +319,6 @@ class TestsLevel1(HedyTester):
       result = hedy.transpile("print lalalala\nprint", self.level)
     self.assertEqual('Incomplete', context.exception.error_code)
     self.assertEqual('print', str(context.exception.arguments['incomplete_command']))
-
-  #multilevel tests
   def test_print_without_argument_gives_incomplete(self):
     self.multi_level_tester(
       max_level=22,
@@ -324,6 +333,10 @@ class TestsLevel1(HedyTester):
       exception=hedy.InvalidCommandException,
       test_name=self.test_name()
     )
+
+
+
+
 
 
 
