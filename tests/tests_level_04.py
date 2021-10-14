@@ -7,46 +7,7 @@ class TestsLevel4(HedyTester):
 
   # test/command order: ['print', 'ask', 'is', 'if', 'turn', 'forward']
 
-  # invalid, ask and print should still work as in level 3
-
-  # print
-  def test_print_comma(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet,' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet,{naam}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_print_Spanish(self):
-    code = textwrap.dedent("""\
-    print 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  # ask
-  def test_ask_Spanish(self):
-    code = textwrap.dedent("""\
-    color is ask 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    color = input('Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+  # print & ask -> no changes, covered by tests of earlier levels
 
   # is
   def test_assign_list_access(self):
@@ -117,12 +78,6 @@ class TestsLevel4(HedyTester):
     t.forward(100)
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_turtle_forward_ask(self):
-    code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    result = hedy.transpile_inner(code, self.level)
     self.assertEqual(True, result.has_turtle)
   def test_ask_print(self):
     code = textwrap.dedent("""\
@@ -278,12 +233,10 @@ class TestsLevel4(HedyTester):
 
   #multilevel tests
   def test_ifelse_should_go_before_assign(self):
-    #todo this can be merged when we have fstrings in hogh levels
     code = textwrap.dedent("""\
     kleur is geel
     if kleur is groen antwoord is ok else antwoord is stom
     print antwoord""")
-
     expected = textwrap.dedent("""\
       kleur = 'geel'
       if kleur == 'groen':
@@ -299,6 +252,7 @@ class TestsLevel4(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+
 
   #negative tests
   def test_indent_gives_parse_error(self):

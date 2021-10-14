@@ -12,10 +12,16 @@ class TestsLevel12(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
   def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
-    expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    code = "naam is Hedy\nprint('ik heet' naam)"
+    expected = "naam = 'Hedy'\nprint(f'ik heet{naam}')"
+
+    self.multi_level_tester(
+      max_level=18,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   def test_print_with_calc_no_spaces(self):
     result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)

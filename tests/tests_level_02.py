@@ -356,7 +356,7 @@ class TestsLevel2(HedyTester):
     check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=11,
       code=code,
       expected=expected,
       extra_check_function=check_in_list,

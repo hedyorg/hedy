@@ -11,12 +11,6 @@ class TestsLevel13(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
-    expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
   def test_print_with_calc_no_spaces(self):
     result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
     expected = "print('5 keer 5 is '+str(int(5) * int(5)))"

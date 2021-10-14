@@ -5,48 +5,6 @@ from tests_level_01 import HedyTester
 class TestsLevel16(HedyTester):
     level = 16
 
-    def test_print(self):
-        result = hedy.transpile("print('ik heet')", self.level)
-        expected = "print('ik heet')"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_print_with_var(self):
-        result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
-        expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_print_with_calc_no_spaces(self):
-        result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
-        expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_ask(self):
-        result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
-        expected = "antwoord = input('wat is je lievelingskleur?')"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_print_calculation_times_directly(self):
-        code = textwrap.dedent("""\
-    nummer is 5
-    nummertwee is 6
-    print(nummer * nummertwee)""")
-
-        result = hedy.transpile(code, self.level)
-
-        expected = textwrap.dedent("""\
-    nummer = '5'
-    nummertwee = '6'
-    print(str(int(nummer) * int(nummertwee)))""")
-
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-        self.assertEqual("30", self.run_code(result))
-
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\

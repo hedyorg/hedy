@@ -4,90 +4,6 @@ from tests_level_01 import HedyTester
 
 class TestsLevel7(HedyTester):
   level = 7
-  
-  def test_print(self):
-    code = textwrap.dedent("""\
-    print 'ik heet'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print('ik heet')""")
-
-    self.assertEqual(expected, result.code)
-
-  def test_print_with_var(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print('ik heet'+str(naam))""")
-
-    self.assertEqual(expected, result.code)
-
-  def test_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-
-  def test_turtle_with_ask(self):
-    code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-
-  def test_print_with_calc_no_spaces(self):
-    code = textwrap.dedent("""\
-    print '5 keer 5 is ' 5*5""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print('5 keer 5 is '+str(int(5) * int(5)))""")
-
-    self.assertEqual(expected, result.code)
-
-  def test_print_calculation_times_directly(self):
-    code = textwrap.dedent("""\
-    nummer is 5
-    nummertwee is 6
-    print nummer * nummertwee""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    nummer = '5'
-    nummertwee = '6'
-    print(str(int(nummer) * int(nummertwee)))""")
-
-    self.assertEqual(expected, result.code)
-
-    self.assertEqual("30", self.run_code(result))
-
-  def test_ask(self):
-    code = textwrap.dedent("""\
-    antwoord is ask 'wat is je lievelingskleur?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    antwoord = input('wat is je lievelingskleur?')""")
-
-    self.assertEqual(expected, result.code)
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
@@ -229,20 +145,6 @@ class TestsLevel7(HedyTester):
 
     self.assertEqual(expected_output, self.run_code(result))
 
-  def test_print_random(self):
-    code = textwrap.dedent("""\
-    keuzes is steen, schaar, papier
-    computerkeuze is keuzes at random
-    print 'computer koos ' computerkeuze""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    keuzes = ['steen', 'schaar', 'papier']
-    computerkeuze=random.choice(keuzes)
-    print('computer koos '+str(computerkeuze))""")
-
-    self.assertEqual(expected, result.code)
 
   def test_allow_space_after_else_line(self):
     code = textwrap.dedent("""\
@@ -264,20 +166,6 @@ class TestsLevel7(HedyTester):
       test_name=self.name()
     )
 
-
-
-  def test_addition_simple(self):
-    code = textwrap.dedent("""\
-    var is 5
-    print var + 5""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    var = '5'
-    print(str(int(var) + int(5)))""")
-
-    self.assertEqual(expected, result.code)
 
   def test_issue_297(self):
     code = textwrap.dedent("""\

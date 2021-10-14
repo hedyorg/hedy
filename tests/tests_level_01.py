@@ -230,7 +230,6 @@ class TestsLevel1(HedyTester):
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-
   def test_print_ask_echo(self):
       input = textwrap.dedent("""\
       print Hallo

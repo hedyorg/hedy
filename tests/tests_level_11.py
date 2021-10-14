@@ -11,17 +11,8 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  # def test_print_with_var(self):
-  #   code = "naam is Hedy\nprint('ik heet' naam)"
-  #   expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
-  #
-  #   self.multi_level_tester(
-  #     max_level=18,
-  #     code=code,
-  #     expected=expected,
-  #     extra_check_function=self.is_not_turtle(),
-  #     test_name=self.name()
-  #   )
+
+
   def test_assign_print(self):
     #todo can be merged with 2 to 4 when we have f strings everywhere
     code = textwrap.dedent("""\
