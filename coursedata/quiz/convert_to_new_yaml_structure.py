@@ -7,18 +7,18 @@ from ruamel.yaml.scalarstring import SingleQuotedScalarString, DoubleQuotedScala
 
 
 def get_original_quiz(level_source):
-    filename = f'quiz_questions_lvl{level_source}.yaml'
+    filename = f'en_quiz_questions_lvl{level_source}.yaml'
     yaml = YAML()
     yaml.preserve_quotes = True
     yaml.explicit_start = True
     yaml.default_flow_style = False
     quiz_data = yaml.load(Path(filename))
-    quiz_data = rewrite_quiz_to_new_structure(level_source,quiz_data,filename)
+    quiz_data = rewrite_quiz_to_new_structure(quiz_data)
     quiz_data.yaml_add_eol_comment('# <- double quotes added', 'foo', column=20)
     yaml.dump(quiz_data, Path(filename))
 
 
-def rewrite_quiz_to_new_structure(level_source, quiz_data, filename):
+def rewrite_quiz_to_new_structure(quiz_data):
     for nr in range(len(quiz_data['questions'])):
         q_nr = nr+1
         if quiz_data['questions'][q_nr-1].get(q_nr):
@@ -36,3 +36,9 @@ def rewrite_quiz_to_new_structure(level_source, quiz_data, filename):
 
 
 get_original_quiz(1)
+get_original_quiz(2)
+get_original_quiz(3)
+get_original_quiz(4)
+get_original_quiz(5)
+get_original_quiz(6)
+get_original_quiz(8)
