@@ -257,6 +257,33 @@
                     print 'não gostei'
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for contador in range 1 to 5
             print contador
     intro_text:
@@ -270,7 +297,7 @@
         demo_code: |-
             for contador in range 1 to 5
                 print contador
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -280,7 +307,7 @@
     -   explanation: "Quando usamos um `for`, temos de colocar `:` após a instrução `for`!"
         example: "for i in range 1 to 10:"
         demo_code: |-
-            for i in range 1 to 11:
+            for i in range 1 to 12:
                 print i
             print 'Preparados ou não, aqui vou eu!'
     -   explanation: "Precisamos fazer a mesma coisa para todas as instruções `if`."
@@ -301,7 +328,7 @@
                 print 'a é 2'
             else:
                 print 'a não é 1 nem 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -320,7 +347,7 @@
             if cor is azul:
                 if segundacor is amarelo:
                     print 'Juntos fazemos verde!'
-11:
+12:
     start_code: |-
         idade is input('Quantos anos você tem?')
         print('Então você já teve estas idades:')
@@ -342,7 +369,7 @@
             for i in range(0, 10):
                 print(i)
             print('Preparados ou não, aqui vou eu!')
-12:
+13:
     start_code: |-
         fruta is ['maçã', 'banana', 'cereja']
         print(fruta)
@@ -367,7 +394,7 @@
             fruta is ['banana', 'maçã', 'cereja']
             qualquerfruta is fruta[random]
             print(qualquerfruta)
-13:
+14:
     start_code: |-
         ainda_esta_aqui is Falso
         resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
@@ -394,7 +421,7 @@
                   print('Está certo!')
               if resposta_certa is Falso:
                   print('Está errado! ' 5-i ' tentativas restantes')
-14:
+15:
     start_code: |-
         ainda_esta_aqui is Falso
         resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
@@ -425,7 +452,7 @@
               print('Pelo menos uma resposta está correta!')
           else:
               print('Ambas as respostas estão erradas!')
-15:
+16:
     start_code: |-
         # Este é um programa que vai perguntar algumas questões de Matemática
         for i in range(1, 10):
@@ -452,12 +479,12 @@
             # Este programa foi feito em Hedy
             # Não faz mais nada além de escrever Olá!
             print('Olá!')
-16:
+17:
     start_code: |-
         idade is input('Quantos anos você tem?')
-        if idade < 12:
+        if idade < 13:
             print('Você é mais novo(a) do que eu!')
-        elif idade > 12:
+        elif idade > 13:
             print('Você é mais velho(a) do que eu!')
     intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
     commands:
@@ -466,16 +493,16 @@
         example: "Por exemplo: idade < 12"
         demo_code: |-
             idade is input('Quantos anos você tem?')
-            if idade < 12:
+            if idade < 13:
                 print('Você é mais novo(a) do que eu!')
     -   name: "Maior"
         explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
         example: "Por exemplo: idade > 12"
         demo_code: |-
             idade is input('Quantos anos você tem?')
-            if age > 12:
+            if age > 13:
                 print('Você é mais velho(a) do que eu!')
-17:
+18:
     start_code: |-
         resposta_certa is Falso
         # Continuamos até ser dada a resposta certa!
@@ -515,7 +542,7 @@
                 print('Fazemos isto mais ' 3 - contagem ' vezes.')
                 contagem is contagem + 1
             print('Acabamos!')
-18:
+19:
     start_code: |-
         lista is ['primeiro', 'segundo', 'terceiro']
         segundovalor is lista[2]
@@ -534,7 +561,7 @@
             soma is soma + lista[3]
             # Esperamos um resultado de 6
             print(soma)
-19:
+20:
     start_code: |-
         fruta is ['maçã', 'banana', 'cereja']
         for i in range(1, 3):
@@ -554,7 +581,7 @@
             print('tamanho da lista é ' length(fruta))
             for i in range(1, length(fruta)):
                 print(fruta[i])
-20:
+21:
     start_code: |-
         print('Quanto é 5+3?')
         resposta = 5+3
@@ -603,7 +630,7 @@
                 print('Está certo!')
             else:
                 print('Não, está errado!')
-21:
+22:
     start_code: |-
         pais = input('Onde você mora?')
         if pais != Brasil:
@@ -626,12 +653,12 @@
                 print('Bom trabalho!')
             else:
                 print('Você não pode responder 5!')
-22:
+23:
     start_code: |-
         idade = input('Tenho 12 anos, quantos anos você tem?')
-        if idade <= 11:
+        if idade <= 12:
             print('Você é mais novo(a) do que eu!')
-        elif idade >= 13:
+        elif idade >= 14:
             print('Você é mais velho(a) do que eu!')
     intro_text: |-
         Vamos juntar < e = agora. Se quisermos descobrir se algo é
@@ -648,7 +675,7 @@
         example: "Por exemplo: idade <= 12"
         demo_code: |-
             idade = input('Eu tenho 13 anos, que idade você tem?')
-            if idade <= 12:
+            if idade <= 13:
                 print('Você é mais novo(a) do que eu!')
     -   name: "Maior ou igual"
         explanation: |-
@@ -659,5 +686,5 @@
         example: "Por exemplo: idade >= 12"
         demo_code: |-
             idade = input('Eu tenho 11 anos, quantos anos você tem?')
-            if idade >= 12:
+            if idade >= 13:
                 print('Você é mais velho(a) do que eu!')

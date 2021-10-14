@@ -116,12 +116,10 @@
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table.
       const modeExceptions = {
-        8: 'ace/mode/level8and9',
-        9: 'ace/mode/level8and9',
-        17: 'ace/mode/level17and18',
-        18: 'ace/mode/level17and18',
-        21: 'ace/mode/level21and22',
-        22: 'ace/mode/level21and22',
+        9: 'ace/mode/level9and10',
+        10: 'ace/mode/level9and10',
+        18: 'ace/mode/level18and19',
+        19: 'ace/mode/level18and19',
       };
 
       const mode = modeExceptions[window.State.level] || `ace/mode/level${window.State.level}`;
@@ -416,7 +414,7 @@ function runPythonProgram(code, hasTurtle, cb) {
   }).then(function(mod) {
     console.log('Program executed');
     // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty')) {
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       error.showWarning(ErrorMessages.Transpile_warning, ErrorMessages.Empty_output);
     }
     if (cb) cb ();

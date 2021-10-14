@@ -410,6 +410,21 @@ else:
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
+
+    def test_comment_with_comma(self):
+        code = textwrap.dedent("""\
+    if 5 is 5 or 4 is 4:
+        print('hallo')
+        # comment1, comment2""")
+
+        expected = textwrap.dedent("""\
+    if str('5') == str('5') or str('4') == str('4'):
+      print('hallo')
+      # [' comment1', ' comment2']""")
+        result = hedy.transpile(code, self.level)
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
+
     def test_commentbegin(self):
         code = textwrap.dedent("""\
     # comment word
@@ -434,52 +449,6 @@ else:
     # [' comment word']
     if str('5') == str('5') or str('4') == str('4'):
       print('hallo')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_smaller(self):
-        code = textwrap.dedent("""\
-    leeftijd is input('Hoe oud ben jij?')
-    if leeftijd < 12:
-        print('Dan ben je jonger dan ik!')""")
-        expected = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
-    if int(leeftijd) < int('12'):
-      print('Dan ben je jonger dan ik!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_bigger(self):
-        code = textwrap.dedent("""\
-    leeftijd is input('Hoe oud ben jij?')
-    if leeftijd > 12:
-        print('Dan ben je ouder dan ik!')""")
-        expected = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
-    if int(leeftijd) > int('12'):
-      print('Dan ben je ouder dan ik!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_big_and_small(self):
-        code = textwrap.dedent("""\
-    leeftijd is input('Hoe oud ben jij?')
-    if leeftijd < 12:
-        print('Dan ben je jonger dan ik!')
-    elif leeftijd > 12:
-        print('Dan ben je ouder dan ik!')""")
-        expected = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
-    if int(leeftijd) < int('12'):
-      print('Dan ben je jonger dan ik!')
-    elif int(leeftijd) > int('12'):
-      print('Dan ben je ouder dan ik!')""")
-
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
