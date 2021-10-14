@@ -22,7 +22,7 @@ class TestsLevel5(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
 
