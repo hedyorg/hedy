@@ -9,7 +9,6 @@ class TestsLevel3(HedyTester):
   # * commands in the order of hedy.py for level 3: ['print', 'ask', 'is', 'turn', 'forward'],
   # * combined tests
   # * markup tests
-  # * multilevel tests (positive multilevel)
   # * negative tests (inc. negative & multilevel)
 
   # test name conventions are like this:
@@ -35,27 +34,16 @@ class TestsLevel3(HedyTester):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet ,'""")
-
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     print(f'ik heet ,')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_print_Spanish(self):
-
-    code = textwrap.dedent("""\
-    print 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
   def test_print_two_spaces(self):
     code = "print        'hallo!'"
 
@@ -83,17 +71,35 @@ class TestsLevel3(HedyTester):
     self.assertEqual("Welcome to \\", expected_output)
 
   # ask
+  def test_assign_print(self):
+    # todo make version for over level 11
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
   def test_ask_Spanish(self):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     color = input('Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
   def test_ask_without_quotes(self):
     code = textwrap.dedent("""
     ding is kleur
@@ -217,7 +223,6 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
     self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
-
   def test_ask_print(self):
 
     code = textwrap.dedent("""
@@ -248,8 +253,6 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
-  #multi level tests
   def test_forward_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
@@ -265,22 +268,7 @@ class TestsLevel3(HedyTester):
       extra_check_function=self.is_turtle(),
       test_name=self.name()
     )
-  def test_assign_print(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam""")
 
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet{naam}')""")
-
-    self.multi_level_tester(
-      max_level=4,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
-    )
 
   #negative tests
   def test_var_undefined_error_message(self):
@@ -320,6 +308,19 @@ class TestsLevel3(HedyTester):
       max_level=4,
       test_name=self.name(),
       exception=hedy.UndefinedVarException,
+    )
+  def test_print_Spanish(self):
+    code = textwrap.dedent("""\
+    print 'Cuál es tu color favorito?'""")
+    expected = textwrap.dedent("""\
+    print(f'Cuál es tu color favorito?')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      test_name=self.name(),
+      expected=expected,
+      extra_check_function=self.is_not_turtle()
     )
 
   #assorti
