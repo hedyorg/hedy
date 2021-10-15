@@ -110,6 +110,17 @@
 
          Este código imprime legal se você inserir Hedy como um nome, e não tão legal se você inserir outra coisa.
 
+         Se quisermos conferir se algo está numa lista, agora podemos usar `in` entre a coisa e a lista.
+
+         ## Exemplo de código Hedy
+         ```
+         cores_bonitas is amarelo, verde
+         cor is ask 'Qual sua cor favorita?'
+         if cor in cores_bonitas print 'bonita!' else print 'certo'
+         ```
+
+         Este código imprime bonita! se você escolher amarelo ou verde, e certo caso contrário.
+
          ## As atribuições estão ficando cada vez mais difíceis
          Também no nível 4, as atribuições nas guias tornam-se cada vez mais difíceis. Então, faça-os da esquerda para a direita.
 
@@ -130,6 +141,13 @@
         demo_code: |-
             cor is ask 'Qual a sua cor favorita?'
             if cor is verde print 'bonita!' else print 'não gostei'
+    -   name: "in"
+        explanation: "Confira itens de listas com `in`"
+        example: "Exemplo: if cor in cores_bonitas print 'bonita!' else print 'certo'"
+        demo_code: |-
+            cores_bonitas is amarelo, verde
+            cor is ask 'Qual sua cor favorita?'
+            if cor in cores_bonitas print 'bonita!' else print 'certo'
 5:
     start_code: "print '5 vezes 5 é ' 5 * 5"
     intro_text: |
