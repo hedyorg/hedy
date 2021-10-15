@@ -35,7 +35,7 @@ class HedyTester(unittest.TestCase):
   def is_turtle(self):
     return (lambda x: x.has_turtle)
 
-  def multi_level_tester(self, test_name, code, max_level, expected=None, exception=None, extra_check_function=None):
+  def multi_level_tester(self, test_name, code, max_level=max_Hedy_level, expected=None, exception=None, extra_check_function=None):
     # TODO: test_name could be stored in __init__ of test method
     #  if we created our own method (not sure it that is worth it?)
 

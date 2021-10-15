@@ -14,9 +14,13 @@ class TestsLevel23(HedyTester):
     leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
     if int(leeftijd) <= int('11'):
       print(f'Dan ben je jonger dan ik!')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
     def test_bigger_equal(self):
         code = textwrap.dedent("""\
     leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
@@ -26,22 +30,30 @@ class TestsLevel23(HedyTester):
     leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
     if int(leeftijd) >= int('11'):
       print(f'Dan ben je jonger dan ik!')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
     def test_smaller_bigger_equal(self):
         code = textwrap.dedent("""\
-    leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
-    if leeftijd <= 11:
-        print('Dan ben je jonger dan ik!')
-    elif leeftijd >= 13:
-        print('Dan ben je ouder dan ik!')""")
+        leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
+        if leeftijd <= 11:
+            print('Dan ben je jonger dan ik!')
+        elif leeftijd >= 13:
+            print('Dan ben je ouder dan ik!')""")
         expected = textwrap.dedent("""\
-    leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
-    if int(leeftijd) <= int('11'):
-      print(f'Dan ben je jonger dan ik!')
-    elif int(leeftijd) >= int('13'):
-      print(f'Dan ben je ouder dan ik!')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
+        if int(leeftijd) <= int('11'):
+          print(f'Dan ben je jonger dan ik!')
+        elif int(leeftijd) >= int('13'):
+          print(f'Dan ben je ouder dan ik!')""")
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )

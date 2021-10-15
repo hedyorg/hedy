@@ -17,9 +17,13 @@ class TestsLevel21(HedyTester):
     else:
       print(f'Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
     def test_sum_in_right_side_if(self):
         code = textwrap.dedent("""\
     if 8 == 5+3:
@@ -32,9 +36,13 @@ class TestsLevel21(HedyTester):
     else:
       print(f'Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
     def test_min_in_if(self):
         code = textwrap.dedent("""\
     if 5-3 == 2:
@@ -47,9 +55,13 @@ class TestsLevel21(HedyTester):
     else:
       print(f'Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
     def test_multiply_in_if(self):
         code = textwrap.dedent("""\
     if 5*3 == 15:
@@ -62,9 +74,13 @@ class TestsLevel21(HedyTester):
     else:
       print(f'Dit wordt niet geprint want 5+3 is 8!')""")
 
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+        self.multi_level_tester(
+          
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
     def test_print_brackets(self):
         code = textwrap.dedent("""\
         leeftijd = input('Hoe oud ben jij?')
@@ -79,7 +95,7 @@ class TestsLevel21(HedyTester):
           print(f'{i}')""")
 
         self.multi_level_tester(
-          max_level=self.max_Hedy_level,
+          
           code=code,
           expected=expected,
           extra_check_function=self.is_not_turtle(),
@@ -111,7 +127,7 @@ class TestsLevel21(HedyTester):
             print(f'Samen is dit groen!')""")
 
         self.multi_level_tester(
-          max_level=self.max_Hedy_level,
+          
           code=code,
           expected=expected,
           extra_check_function=self.is_not_turtle(),

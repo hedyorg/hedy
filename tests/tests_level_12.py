@@ -140,7 +140,6 @@ class TestsLevel12(HedyTester):
     print(f'wie niet weg is is gezien')""")
 
     self.multi_level_tester(
-      max_level=self.max_Hedy_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
@@ -160,7 +159,7 @@ class TestsLevel12(HedyTester):
         print(f'rondje: {i} tel: {j}')""")
 
     self.multi_level_tester(
-      max_level=self.max_Hedy_level,
+      
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
