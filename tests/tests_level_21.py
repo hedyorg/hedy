@@ -707,22 +707,4 @@ else:
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-# programs with issues to see if we catch them properly
-# (so this should fail, for now)
-# at one point we want a real "Indent" error and a better error message
-# for this!
-
-# def test_level_7_no_indentation(self):
-#   #test that we get a parse error here
-#   code = textwrap.dedent("""\
-#   antwoord is ask Hoeveel is 10 keer tien?
-#   if antwoord is 100
-#   print 'goed zo'
-#   else
-#   print 'bah slecht'""")
-#
-#   with self.assertRaises(Exception) as context:
-#     result = hedy.transpile(code, 10)
-#   self.assertEqual(str(context.exception), 'Parse')
-
 
