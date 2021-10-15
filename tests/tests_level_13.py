@@ -14,10 +14,14 @@ class TestsLevel13(HedyTester):
     fruit = ['appel', 'banaan', 'kers']
     print(f'{fruit}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+      
   def test_random(self):
     code = textwrap.dedent("""\
     dieren is ['Hond', 'Kat', 'Kangoeroe']
@@ -45,10 +49,13 @@ class TestsLevel13(HedyTester):
     fruit = ['appel', 'banaan', 'kers']
     print(f'{fruit}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
   def test_specific_access(self):
     code = textwrap.dedent("""\
     fruit is ['banaan', 'appel', 'kers']
@@ -59,10 +66,13 @@ class TestsLevel13(HedyTester):
     eerstefruit=fruit[1-1]
     print(f'{eerstefruit}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
 #note that print(str(highscore)) will not print as it will compare 'score[i]' as str to a variable
   def test_everything_combined(self):
@@ -86,8 +96,11 @@ class TestsLevel13(HedyTester):
       if str(highscore) == str('score[i]'):
         print(f'{highscore}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
