@@ -4,6 +4,7 @@ from tests_level_01 import HedyTester
 
 class TestsLevel19(HedyTester):
     level = 19
+
     def test_print(self):
         result = hedy.transpile("print('ik heet')", self.level)
         expected = "print('ik heet')"
@@ -22,7 +23,7 @@ class TestsLevel19(HedyTester):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_transpile_ask(self):
+    def test_ask(self):
         result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
         expected = "antwoord = input('wat is je lievelingskleur?')"
         self.assertEqual(expected, result.code)
@@ -45,6 +46,7 @@ class TestsLevel19(HedyTester):
         self.assertEqual(False, result.has_turtle)
 
         self.assertEqual("30", self.run_code(result))
+
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -555,51 +557,6 @@ else:
     optellen = int(optellen) + int(lijst[3-1])
     # [' we verwachten hier 6']
     print(str(optellen))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-    def test_length(self):
-        code = textwrap.dedent("""\
-    fruit is ['appel', 'banaan', 'kers']
-    hoi is length(fruit)
-    print(hoi)""")
-        expected = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
-    hoi = len(fruit)
-    print(str(hoi))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_length2(self):
-        code = textwrap.dedent("""\
-    fruit is ['appel', 'banaan', 'kers']
-    for i in range(1, length(fruit)):
-        print(fruit[i])""")
-        expected = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
-    step = 1 if int(1) < int(len(fruit)) else -1
-    for i in range(int(1), int(len(fruit)) + step, step):
-      print(str(fruit[i-1]))""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_print_length(self):
-        code = textwrap.dedent("""\
-    fruit is ['appel', 'banaan', 'kers']
-    print('lengte van de lijst is' length(fruit))
-    for i in range(1, 3):
-        print(fruit[i])""")
-        expected = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
-    print('lengte van de lijst is'+str(len(fruit)))
-    step = 1 if int(1) < int(3) else -1
-    for i in range(int(1), int(3) + step, step):
-      print(str(fruit[i-1]))""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)

@@ -6,7 +6,7 @@ page_title: Bienvenidos a Hedy!
     <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Un lenguaje de programación gradual</h2>
   </div>
   <div class="flex-none">
-    <a class="green-btn text-white px-8 py-4" href="/hedy?lang=es">Pruébalo</a>
+    <a href="/hedy?lang=es"><button class="green-btn text-white px-8 py-4">Pruébalo</button></a>
   </div>
 </div>
 

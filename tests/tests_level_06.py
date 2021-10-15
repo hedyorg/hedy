@@ -35,7 +35,7 @@ class TestsLevel6(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_turtle_basic(self):
+  def test_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
@@ -65,7 +65,7 @@ class TestsLevel6(HedyTester):
 
     self.assertEqual(expected, result.code)
 
-  def test_transpile_turtle_with_ask(self):
+  def test_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
@@ -89,7 +89,7 @@ class TestsLevel6(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_ask_Spanish(self):
+  def test_ask_Spanish(self):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
 
@@ -142,11 +142,6 @@ class TestsLevel6(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-
-  def test_transpile_other(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', context.exception.error_code)
 
   # todo: a few more things repeated from 4 here?
 
@@ -220,7 +215,7 @@ class TestsLevel6(HedyTester):
       max_level=10,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=check_in_list
     )
 

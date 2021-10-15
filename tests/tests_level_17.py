@@ -23,7 +23,7 @@ class TestsLevel17(HedyTester):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_transpile_ask(self):
+    def test_ask(self):
         result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
         expected = "antwoord = input('wat is je lievelingskleur?')"
         self.assertEqual(expected, result.code)
@@ -46,6 +46,7 @@ class TestsLevel17(HedyTester):
         self.assertEqual(False, result.has_turtle)
 
         self.assertEqual("30", self.run_code(result))
+
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -478,66 +479,6 @@ else:
       print('Dan ben je jonger dan ik!')
     elif int(leeftijd) > int('12'):
       print('Dan ben je ouder dan ik!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_whileloop(self):
-        code = textwrap.dedent("""\
-    goedantwoord is False
-    while goedantwoord is False:
-        antwoord is input('Wat is 5 keer 5?')
-        if antwoord is 25:
-            goedantwoord is True""")
-        expected = textwrap.dedent("""\
-    goedantwoord = False
-    while goedantwoord == False:
-      antwoord = input('Wat is 5 keer 5?')
-      if str(antwoord) == str('25'):
-        goedantwoord = True""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_whileloop2(self):
-        code = textwrap.dedent("""\
-    tel is 1
-    # we gaan door totdat tel 3 is!
-    while tel < 3:
-        print('Dit is de ' tel 'e keer')
-        tel is tel + 1
-    print('We zijn klaar')""")
-        expected = textwrap.dedent("""\
-    tel = '1'
-    # [' we gaan door totdat tel 3 is!']
-    while int(tel) < int('3'):
-      print('Dit is de '+str(tel)+'e keer')
-      tel = int(tel) + int(1)
-    print('We zijn klaar')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_whileloop3(self):
-        code = textwrap.dedent("""\
-    goedantwoord is False
-    # we gaan door totdat een goed antwoord is gegeven!
-    while goedantwoord is False:
-        antwoord is input('Wat is 5 keer 5?')
-        if antwoord is 25:
-            goedantwoord is True
-            print('Er is een goed antwoord gegeven')""")
-        expected = textwrap.dedent("""\
-    goedantwoord = False
-    # [' we gaan door totdat een goed antwoord is gegeven!']
-    while goedantwoord == False:
-      antwoord = input('Wat is 5 keer 5?')
-      if str(antwoord) == str('25'):
-        goedantwoord = True
-        print('Er is een goed antwoord gegeven')""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
