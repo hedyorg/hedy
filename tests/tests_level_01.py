@@ -7,7 +7,8 @@ import textwrap
 import inspect
 
 class HedyTester(unittest.TestCase):
-  level=None
+  level = None
+  max_Hedy_level = 23
 
   @contextmanager
   def captured_output(self):

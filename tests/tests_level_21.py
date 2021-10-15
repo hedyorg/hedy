@@ -65,5 +65,55 @@ class TestsLevel21(HedyTester):
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
+    def test_print_brackets(self):
+        code = textwrap.dedent("""\
+        leeftijd = input('Hoe oud ben jij?')
+        print('Dus jij hebt zo veel verjaardagen gehad:')
+        for i in range(0,leeftijd):
+            print(i)""")
+        expected = textwrap.dedent("""\
+        leeftijd = input('Hoe oud ben jij?')
+        print(f'Dus jij hebt zo veel verjaardagen gehad:')
+        step = 1 if int(0) < int(leeftijd) else -1
+        for i in range(int(0), int(leeftijd) + step, step):
+          print(f'{i}')""")
 
+        self.multi_level_tester(
+          max_level=self.max_Hedy_level,
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
+    def test_print_var_brackets(self):
+        code = "naam = Hedy\nprint('ik heet' naam)"
+        expected = "naam = 'Hedy'\nprint(f'ik heet{naam}')"
 
+        self.multi_level_tester(
+          max_level=18,
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
+    def test_if_nesting(self):
+        code = textwrap.dedent("""\
+        kleur = blauw
+        kleurtwee = geel
+        if kleur == blauw:
+          if kleurtwee == geel:
+            print('Samen is dit groen!')""")
+        expected = textwrap.dedent("""\
+        kleur = 'blauw'
+        kleurtwee = 'geel'
+        if str(kleur) == str('blauw'):
+          if str(kleurtwee) == str('geel'):
+            print(f'Samen is dit groen!')""")
+
+        self.multi_level_tester(
+          max_level=self.max_Hedy_level,
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+        )
