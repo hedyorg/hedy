@@ -12,7 +12,7 @@ class TestsLevel16(HedyTester):
         #comment""")
         expected = textwrap.dedent("""\
     if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')
+      print(f'hallo')
       # ['comment']""")
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
@@ -25,7 +25,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
     if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')
+      print(f'hallo')
       # [' comment1', ' comment2']""")
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
@@ -39,7 +39,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
     # [' comment word']
     if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')""")
+      print(f'hallo')""")
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
@@ -52,7 +52,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
     # [' comment word']
     if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')""")
+      print(f'hallo')""")
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)

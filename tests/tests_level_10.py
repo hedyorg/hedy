@@ -13,7 +13,7 @@ class TestsLevel10(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      print('koekoek')""")
+      print(f'koekoek')""")
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
@@ -31,11 +31,11 @@ class TestsLevel10(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = input('Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
-      print('Goedzo!')
-      print('Het antwoord was inderdaad '+str(antwoord))
+      print(f'Goedzo!')
+      print(f'Het antwoord was inderdaad {antwoord}')
     else:
-      print('Foutje')
-      print('Het antwoord moest zijn '+str(antwoord))""")
+      print(f'Foutje')
+      print(f'Het antwoord moest zijn {antwoord}')""")
 
     result = hedy.transpile(code, self.level)
 
@@ -87,8 +87,8 @@ class TestsLevel10(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
-      print(str(i))
-    print('wie niet weg is is gezien')""")
+      print(f'{i}')
+    print(f'wie niet weg is is gezien')""")
 
     result = hedy.transpile(code, self.level)
 
@@ -105,9 +105,9 @@ class TestsLevel10(HedyTester):
 
     expected = textwrap.dedent("""\
     if str('a') == str('1'):
-      print('a')
+      print(f'a')
     else:
-      print('nee')""")
+      print(f'nee')""")
 
     self.multi_level_tester(
       max_level=10,
@@ -128,9 +128,9 @@ class TestsLevel10(HedyTester):
 
     expected = textwrap.dedent("""\
     if str('a') == str('1'):
-      print('a')
+      print(f'a')
     else:
-      print('nee')""")
+      print(f'nee')""")
 
     self.multi_level_tester(
       max_level=10,
@@ -157,9 +157,9 @@ class TestsLevel10(HedyTester):
     for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
-        print('Dat is fout!')
+        print(f'Dat is fout!')
       else:
-        print('Dat is goed!')
+        print(f'Dat is goed!')
       if str(antwoord) == str('25'):
         i = '10'""")
 
