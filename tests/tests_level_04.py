@@ -7,46 +7,7 @@ class TestsLevel4(HedyTester):
 
   # test/command order: ['print', 'ask', 'is', 'if', 'turn', 'forward']
 
-  # invalid, ask and print should still work as in level 3
-
-  # print
-  def test_print_comma(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet,' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet,{naam}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_print_Spanish(self):
-    code = textwrap.dedent("""\
-    print 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  # ask
-  def test_ask_Spanish(self):
-    code = textwrap.dedent("""\
-    color is ask 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    color = input('Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+  # print & ask -> no changes, covered by tests of earlier levels
 
   # is
   def test_assign_list_access(self):
@@ -106,6 +67,29 @@ class TestsLevel4(HedyTester):
       print(f'nee')""")
 
     self.assertEqual(expected, result.code)
+  def test_ifelse_should_go_before_assign(self):
+    code = textwrap.dedent("""\
+    kleur is geel
+    if kleur is groen antwoord is ok else antwoord is stom
+    print antwoord""")
+    expected = textwrap.dedent("""\
+      kleur = 'geel'
+      if kleur == 'groen':
+        antwoord = 'ok'
+      else:
+        antwoord = 'stom'
+      print(f'{antwoord}')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+
+  # turn forward
+  # no new tests, covered by lower levels.
 
   # combined tests
   def test_turn_forward(self):
@@ -117,12 +101,6 @@ class TestsLevel4(HedyTester):
     t.forward(100)
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_turtle_forward_ask(self):
-    code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    result = hedy.transpile_inner(code, self.level)
     self.assertEqual(True, result.has_turtle)
   def test_ask_print(self):
     code = textwrap.dedent("""\
@@ -271,34 +249,9 @@ class TestsLevel4(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
     self.assertEqual('found!', self.run_code(result))
-
-  # turn forward
-  # no new tests, covered by lower levels.
   # todo would be good to make combinations with if and turtle
 
-  #multilevel tests
-  def test_ifelse_should_go_before_assign(self):
-    #todo this can be merged when we have fstrings in hogh levels
-    code = textwrap.dedent("""\
-    kleur is geel
-    if kleur is groen antwoord is ok else antwoord is stom
-    print antwoord""")
 
-    expected = textwrap.dedent("""\
-      kleur = 'geel'
-      if kleur == 'groen':
-        antwoord = 'ok'
-      else:
-        antwoord = 'stom'
-      print(f'{antwoord}')""")
-
-    self.multi_level_tester(
-      max_level=4,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
-    )
 
   #negative tests
   def test_indent_gives_parse_error(self):
