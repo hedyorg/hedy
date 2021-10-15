@@ -735,20 +735,20 @@ else:
 
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
-    #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
             if type(a) is Tree:
-                args_new.append(f'str({a.children})')
+                args_new.append("{" + a.children + "}")
             elif "'" not in a:
-                args_new.append(f'str({a})')
+                args_new.append("{" + a + "}")
             else:
-                args_new.append(a)
+                args_new.append(a.replace("'", ""))
 
-        return "print(" + '+'.join(args_new) + ')'
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
 
     #we can now have ints as types so chck must force str
     def equality_check(self, args):
