@@ -5,18 +5,10 @@ from tests_level_01 import HedyTester
 class TestsLevel21(HedyTester):
     level = 21
 
-    def test_print(self):
-        result = hedy.transpile("print('ik heet')", self.level)
-        expected = "print('ik heet')"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
 
 
-    def test_print_with_calc_no_spaces(self):
-        result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
-        expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+
+
 
     def test_ask(self):
         result = hedy.transpile("antwoord = input('wat is je lievelingskleur?')", self.level)

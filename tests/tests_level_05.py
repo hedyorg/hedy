@@ -23,7 +23,74 @@ class TestsLevel5(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
   #if tests
+  def test_print_if_else_with_line_break(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'
+    else print 'minder leuk'""")
 
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_if_else_with_line_break_and_space(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'     
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if str(naam) == str('Hedy'):
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_if_else_with_space(self):
+    #this code has a space at the end of line 2
+    code = textwrap.dedent("""\
+    a is 2
+    if a is 1 print a 
+    else print 'nee'""")
+
+    expected = textwrap.dedent("""\
+    a = '2'
+    if str(a) == str('1'):
+      print(f'{a}')
+    else:
+      print(f'nee')""")
+
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
   # calculation tests
   # todo should all be tested for higher levels too!
@@ -167,7 +234,6 @@ class TestsLevel5(HedyTester):
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
-
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
     kleur is geel
@@ -187,74 +253,4 @@ class TestsLevel5(HedyTester):
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
-    )
-
-  # multilevel tests
-  def test_print_if_else_with_line_break(self):
-    # line breaks should be allowed in if-elses until level 7 when we start with indentation
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam
-    if naam is Hedy print 'leuk'
-    else print 'minder leuk'""")
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet{naam}')
-    if str(naam) == str('Hedy'):
-      print(f'leuk')
-    else:
-      print(f'minder leuk')""")
-
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
-    )
-  def test_print_if_else_with_line_break_and_space(self):
-    # line breaks should be allowed in if-elses until level 7 when we start with indentation
-
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam
-    if naam is Hedy print 'leuk'     
-    else print 'minder leuk'""")
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet{naam}')
-    if str(naam) == str('Hedy'):
-      print(f'leuk')
-    else:
-      print(f'minder leuk')""")
-
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
-    )
-  def test_if_else_with_space(self):
-    #this code has a space at the end of line 2
-    code = textwrap.dedent("""\
-    a is 2
-    if a is 1 print a 
-    else print 'nee'""")
-
-    expected = textwrap.dedent("""\
-    a = '2'
-    if str(a) == str('1'):
-      print(f'{a}')
-    else:
-      print(f'nee')""")
-
-    self.multi_level_tester(
-      max_level=6,
-      code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
     )

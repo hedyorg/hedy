@@ -19,7 +19,6 @@ class TestsLevel8(HedyTester):
       print(str(dier))""")
 
     self.assertEqual(expected, result.code)
-
   def test_for_list_multiple_lines(self):
     code = textwrap.dedent("""\
     familie is baby, mommy, daddy, grandpa, grandma

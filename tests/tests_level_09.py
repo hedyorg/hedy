@@ -4,42 +4,6 @@ from tests_level_01 import HedyTester
 
 class TestsLevel9(HedyTester):
   level = 9
-  
-  def test_print(self):
-    result = hedy.transpile("print 'ik heet'", self.level)
-    expected = "print('ik heet')"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_with_calc_no_spaces(self):
-    result = hedy.transpile("print '5 keer 5 is ' 5*5", self.level)
-    expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_calculation_times_directly(self):
-    code = textwrap.dedent("""\
-    nummer is 5
-    nummertwee is 6
-    print nummer * nummertwee""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    nummer = '5'
-    nummertwee = '6'
-    print(str(int(nummer) * int(nummertwee)))""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    self.assertEqual("30", self.run_code(result))
-
-  def test_ask(self):
-    result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", self.level)
-    expected = "antwoord = input('wat is je lievelingskleur?')"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
   def test_if_with_indent(self):
     code = textwrap.dedent("""\
@@ -49,7 +13,7 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      print('koekoek')""")
+      print(f'koekoek')""")
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
@@ -68,30 +32,18 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = input('Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
-      print('Goedzo!')
-      print('Het antwoord was inderdaad '+str(antwoord))
+      print(f'Goedzo!')
+      print(f'Het antwoord was inderdaad {antwoord}')
     else:
-      print('Foutje')
-      print('Het antwoord moest zijn '+str(antwoord))""")
+      print(f'Foutje')
+      print(f'Het antwoord moest zijn {antwoord}')""")
 
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_print_random(self):
-    code = textwrap.dedent("""\
-    keuzes is steen, schaar, papier
-    computerkeuze is keuzes at random
-    print 'computer koos ' computerkeuze""")
-    expected = textwrap.dedent("""\
-    keuzes = ['steen', 'schaar', 'papier']
-    computerkeuze=random.choice(keuzes)
-    print('computer koos '+str(computerkeuze))""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
@@ -140,8 +92,8 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
-      print(str(i))
-    print('wie niet weg is is gezien')""")
+      print(f'{i}')
+    print(f'wie niet weg is is gezien')""")
 
     result = hedy.transpile(code, self.level)
 
@@ -157,8 +109,8 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(10) < int(1) else -1
     for i in range(int(10), int(1) + step, step):
-      print(str(i))
-    print('wie niet weg is is gezien')""")
+      print(f'{i}')
+    print(f'wie niet weg is is gezien')""")
 
     result = hedy.transpile(code, self.level)
 
@@ -182,9 +134,9 @@ class TestsLevel9(HedyTester):
     for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
-        print('Dat is fout!')
+        print(f'Dat is fout!')
       else:
-        print('Dat is goed!')
+        print(f'Dat is goed!')
       if str(antwoord) == str('25'):
         i = '10'""")
 
@@ -208,8 +160,8 @@ class TestsLevel9(HedyTester):
       for i in range(int(0), int(10) + step, step):
         antwoord = input('Wat is 5*5')
         if str(antwoord) == str('24'):
-          print('fout')
-      print('klaar met for loop')""")
+          print(f'fout')
+      print(f'klaar met for loop')""")
 
     result = hedy.transpile(code, self.level)
 
@@ -226,7 +178,7 @@ class TestsLevel9(HedyTester):
       step = 1 if int(0) < int(10) else -1
       for i in range(int(0), int(10) + step, step):
         if str(i) == str('2'):
-          print('2')""")
+          print(f'2')""")
 
     result = hedy.transpile(code, self.level)
 

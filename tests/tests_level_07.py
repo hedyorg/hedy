@@ -6,6 +6,7 @@ class TestsLevel7(HedyTester):
   level = 7
 
   def test_if_with_indent(self):
+    # todo should be tested for all levels!
     code = textwrap.dedent("""\
     naam is Hedy
     if naam is Hedy
@@ -16,10 +17,9 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
-      print('koekoek')""")
+      print(f'koekoek')""")
 
     self.assertEqual(expected, result.code)
-
   def test_repeat_with_indent(self):
     code = textwrap.dedent("""\
     repeat 5 times
@@ -29,12 +29,9 @@ class TestsLevel7(HedyTester):
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
-      print('koekoek')""")
+      print(f'koekoek')""")
 
     self.assertEqual(expected, result.code)
-
-
-
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -46,7 +43,7 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
 
@@ -58,7 +55,6 @@ class TestsLevel7(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
     állatok is 5
@@ -70,7 +66,7 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     v79de0191e90551f058d466c5e8c267ff = '5'
     for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
 
@@ -82,7 +78,6 @@ class TestsLevel7(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-
   def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
     kleur is groen
@@ -96,10 +91,9 @@ class TestsLevel7(HedyTester):
     kleur = 'groen'
     if str(kleur) == str('groen'):
       for i in range(int(3)):
-        print('mooi')""")
+        print(f'mooi')""")
 
     self.assertEqual(expected, result.code)
-
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
@@ -115,14 +109,13 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = input('Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
-      print('Goedzo!')
-      print('Het antwoord was inderdaad '+str(antwoord))
+      print(f'Goedzo!')
+      print(f'Het antwoord was inderdaad {antwoord}')
     else:
-      print('Foutje')
-      print('Het antwoord moest zijn '+str(antwoord))""")
+      print(f'Foutje')
+      print(f'Het antwoord moest zijn {antwoord}')""")
 
     self.assertEqual(expected, result.code)
-
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times
@@ -132,7 +125,7 @@ class TestsLevel7(HedyTester):
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
 
@@ -144,9 +137,8 @@ class TestsLevel7(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-
-
   def test_allow_space_after_else_line(self):
+    #todo should work up to 11??
     code = textwrap.dedent("""\
     if a is 1
       print a
@@ -155,17 +147,16 @@ class TestsLevel7(HedyTester):
 
     expected = textwrap.dedent("""\
     if str('a') == str('1'):
-      print('a')
+      print(f'a')
     else:
-      print('nee')""")
+      print(f'nee')""")
 
     self.multi_level_tester(
-      max_level=8,
+      max_level=9,
       code=code,
       expected=expected,
       test_name=self.name()
     )
-
 
   def test_issue_297(self):
     code = textwrap.dedent("""\
@@ -179,7 +170,7 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     count = '1'
     for i in range(int(12)):
-      print(str(count)+' times 12 is '+str(int(count) * int(12)))
+      print(f'{count} times 12 is {int(count) * int(12)}')
       count = int(count) + int(1)""")
 
     self.assertEqual(expected, result.code)
@@ -214,9 +205,9 @@ class TestsLevel7(HedyTester):
     expected = textwrap.dedent("""\
     for i in range(int(5)):
       if str('antwoord2') == str('10'):
-        print('Goedzo')
+        print(f'Goedzo')
       else:
-        print('lalala')""")
+        print(f'lalala')""")
 
     self.assertEqual(expected, result.code)
 

@@ -67,6 +67,29 @@ class TestsLevel4(HedyTester):
       print(f'nee')""")
 
     self.assertEqual(expected, result.code)
+  def test_ifelse_should_go_before_assign(self):
+    code = textwrap.dedent("""\
+    kleur is geel
+    if kleur is groen antwoord is ok else antwoord is stom
+    print antwoord""")
+    expected = textwrap.dedent("""\
+      kleur = 'geel'
+      if kleur == 'groen':
+        antwoord = 'ok'
+      else:
+        antwoord = 'stom'
+      print(f'{antwoord}')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+
+  # turn forward
+  # no new tests, covered by lower levels.
 
   # combined tests
   def test_turn_forward(self):
@@ -226,32 +249,8 @@ class TestsLevel4(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
     self.assertEqual('found!', self.run_code(result))
-
-  # turn forward
-  # no new tests, covered by lower levels.
   # todo would be good to make combinations with if and turtle
 
-  #multilevel tests
-  def test_ifelse_should_go_before_assign(self):
-    code = textwrap.dedent("""\
-    kleur is geel
-    if kleur is groen antwoord is ok else antwoord is stom
-    print antwoord""")
-    expected = textwrap.dedent("""\
-      kleur = 'geel'
-      if kleur == 'groen':
-        antwoord = 'ok'
-      else:
-        antwoord = 'stom'
-      print(f'{antwoord}')""")
-
-    self.multi_level_tester(
-      max_level=4,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
-    )
 
 
   #negative tests

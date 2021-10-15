@@ -63,7 +63,6 @@ class TestsLevel1(HedyTester):
   # * commands in the order of hedy.py e..g for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
   # * combined tests
   # * markup tests
-  # * multilevel tests (positive multilevel)
   # * negative tests (inc. negative & multilevel)
 
   # test name conventions are like this:
@@ -244,16 +243,6 @@ class TestsLevel1(HedyTester):
       result = hedy.transpile(input, self.level)
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
-
-  # markup tests
-  def test_lines_may_end_in_spaces(self):
-    result = hedy.transpile("print Hallo welkom bij Hedy! ", self.level)
-    expected = "print('Hallo welkom bij Hedy! ')"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
-
-  #multilevel tests
   def test_forward_turn_combined(self):
     code = "forward 50\nturn\nforward 100"
     expected = textwrap.dedent("""\
@@ -269,6 +258,14 @@ class TestsLevel1(HedyTester):
       extra_check_function=self.is_turtle(),
       test_name=self.name()
     )
+
+  # markup tests
+  def test_lines_may_end_in_spaces(self):
+    result = hedy.transpile("print Hallo welkom bij Hedy! ", self.level)
+    expected = "print('Hallo welkom bij Hedy! ')"
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+    self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
 
   # negative tests
   def test_lines_with_space_gives_invalid(self):

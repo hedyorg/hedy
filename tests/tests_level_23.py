@@ -5,11 +5,7 @@ from tests_level_01 import HedyTester
 class TestsLevel23(HedyTester):
     level = 23
 
-    def test_print(self):
-        result = hedy.transpile("print('ik heet')", self.level)
-        expected = "print('ik heet')"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
+
 
 
     def test_if_with_indent(self):

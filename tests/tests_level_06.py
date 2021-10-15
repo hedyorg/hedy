@@ -6,8 +6,7 @@ class TestsLevel6(HedyTester):
   level = 6
 
 
-
-
+  #repeat tests
   def test_repeat_turtle(self):
     code = textwrap.dedent("""\
     repeat 3 times forward 100""")
@@ -21,9 +20,6 @@ class TestsLevel6(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-
-
-
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -47,11 +43,6 @@ class TestsLevel6(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-
-  # todo: a few more things repeated from 4 here?
-
-
-  # now add repeat
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times print 'me wants a cookie!'""")
@@ -73,8 +64,6 @@ class TestsLevel6(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-
-
   def test_repeat_over_9_times(self):
 
     code = textwrap.dedent("""\
@@ -101,8 +90,6 @@ class TestsLevel6(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
     self.assertEqual(expected_output, self.run_code(result))
-
-
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\
       i is hallo!
