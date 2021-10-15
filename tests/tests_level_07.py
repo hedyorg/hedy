@@ -2,7 +2,7 @@ import hedy
 import textwrap
 from tests_level_01 import HedyTester
 
-class TestsLevel2(HedyTester):
+class TestsLevel7(HedyTester):
   level = 7
   
   def test_print(self):
@@ -29,7 +29,7 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
 
-  def test_transpile_turtle_basic(self):
+  def test_turtle_basic(self):
     result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
@@ -39,7 +39,7 @@ class TestsLevel2(HedyTester):
     time.sleep(0.1)""")
     self.assertEqual(expected, result.code)
 
-  def test_transpile_turtle_with_ask(self):
+  def test_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")
@@ -78,7 +78,7 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual("30", self.run_code(result))
 
-  def test_transpile_ask(self):
+  def test_ask(self):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
@@ -261,7 +261,7 @@ class TestsLevel2(HedyTester):
       max_level=8,
       code=code,
       expected=expected,
-      test_name=self.test_name()
+      test_name=self.name()
     )
 
 

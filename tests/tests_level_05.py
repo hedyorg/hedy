@@ -5,22 +5,28 @@ from tests_level_01 import HedyTester
 class TestsLevel5(HedyTester):
   level = 5
   
-  def test_print_with_var(self):
+
+  # mutlilevel tests
+  def test_assign_print(self):
+    #todo can be merged with 2 to 4 when we have f strings everywhere
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam""")
-
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     print('ik heet'+str(naam))""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
 
-  def test_transpile_ask(self):
+  def test_ask(self):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
@@ -62,7 +68,7 @@ class TestsLevel5(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_transpile_turtle_basic(self):
+  def test_turtle_basic(self):
     code = textwrap.dedent("""\
     forward 50
     turn
@@ -112,7 +118,7 @@ class TestsLevel5(HedyTester):
       max_level=6,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 
@@ -138,12 +144,12 @@ class TestsLevel5(HedyTester):
       max_level=6,
       code=code,
       expected=expected,
-      test_name=self.test_name(),
+      test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
 
 
-  def test_transpile_multiple_calcs(self):
+  def test_multiple_calcs(self):
     code = textwrap.dedent("""\
     print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
 
@@ -175,7 +181,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
 
-  def test_transpile_turtle_with_ask(self):
+  def test_turtle_with_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
     forward afstand""")

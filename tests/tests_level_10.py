@@ -41,7 +41,7 @@ class TestsLevel10(HedyTester):
 
     self.assertEqual("30", self.run_code(result))
 
-  def test_transpile_ask(self):
+  def test_ask(self):
     result = hedy.transpile("antwoord is ask 'wat is je lievelingskleur?'", self.level)
     expected = "antwoord = input('wat is je lievelingskleur?')"
     self.assertEqual(expected, result.code)
@@ -56,7 +56,6 @@ class TestsLevel10(HedyTester):
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print('koekoek')""")
-
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
@@ -95,7 +94,6 @@ class TestsLevel10(HedyTester):
     keuzes = ['steen', 'schaar', 'papier']
     computerkeuze=random.choice(keuzes)
     print('computer koos '+str(computerkeuze))""")
-
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
@@ -120,8 +118,6 @@ class TestsLevel10(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
-
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -152,46 +148,56 @@ class TestsLevel10(HedyTester):
     for i in range(int(1), int(10) + step, step):
       print(str(i))
     print('wie niet weg is is gezien')""")
+
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_for_nesting(self):
+  def test_allow_space_after_else_line(self):
+
     code = textwrap.dedent("""\
-    for i in range 1 to 3:
-      for j in range 1 to 4:
-        print 'rondje: ' i ' tel: ' j""")
+    if a is 1:
+      print a
+    else:   
+      print 'nee'""")
+
     expected = textwrap.dedent("""\
-    step = 1 if int(1) < int(3) else -1
-    for i in range(int(1), int(3) + step, step):
-      step = 1 if int(1) < int(4) else -1
-      for j in range(int(1), int(4) + step, step):
-        print('rondje: '+str(i)+' tel: '+str(j))""")
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
 
-    result = hedy.transpile(code, self.level)
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
-  def test_if_nesting(self):
+  def test_allow_space_before_colon(self):
+    max_level=10
+
     code = textwrap.dedent("""\
-    kleur is blauw
-    kleurtwee is geel
-    if kleur is blauw:
-      if kleurtwee is geel:
-        print 'Samen is dit groen!'""")
+    if a is 1  :
+      print a
+    else:   
+      print 'nee'""")
+
     expected = textwrap.dedent("""\
-    kleur = 'blauw'
-    kleurtwee = 'geel'
-    if str(kleur) == str('blauw'):
-      if str(kleurtwee) == str('geel'):
-        print('Samen is dit groen!')""")
+    if str('a') == str('1'):
+      print('a')
+    else:
+      print('nee')""")
 
-    result = hedy.transpile(code, self.level)
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
@@ -219,6 +225,49 @@ class TestsLevel10(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  def test_if_elif(self):
+      code = textwrap.dedent("""\
+      a is 5
+      if a is 1:
+        x is 2
+      elif a is 2:
+        x is 222""")
+      expected = textwrap.dedent("""\
+      a = '5'
+      if str(a) == str('1'):
+        x = '2'
+      elif str(a) == str('2'):
+        x = '222'""")
+
+      result = hedy.transpile(code, self.level)
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
+  def test_if_with_multiple_elifs(self):
+      code = textwrap.dedent("""\
+      a is 5
+      if a is 1:
+        x is 2
+      elif a is 4:
+        x is 3
+      elif a is 2:
+        x is 222""")
+      expected = textwrap.dedent("""\
+      a = '5'
+      if str(a) == str('1'):
+        x = '2'
+      elif str(a) == str('4'):
+        x = '3'
+      elif str(a) == str('2'):
+        x = '222'""")
+
+      result = hedy.transpile(code, self.level)
+
+      self.assertEqual(expected, result.code)
+      self.assertEqual(False, result.has_turtle)
+
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message

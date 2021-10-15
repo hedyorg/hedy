@@ -23,7 +23,7 @@ class TestsLevel15(HedyTester):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_transpile_ask(self):
+    def test_ask(self):
         result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
         expected = "antwoord = input('wat is je lievelingskleur?')"
         self.assertEqual(expected, result.code)
@@ -46,7 +46,6 @@ class TestsLevel15(HedyTester):
         self.assertEqual(False, result.has_turtle)
 
         self.assertEqual("30", self.run_code(result))
-
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -393,62 +392,6 @@ else:
     if str('5') == str('5') or str('4') == str('4'):
       print('hallo')""")
 
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_comment(self):
-        code = textwrap.dedent("""\
-    if 5 is 5 or 4 is 4:
-        print('hallo')
-        #comment""")
-        expected = textwrap.dedent("""\
-    if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')
-      # ['comment']""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-
-    def test_comment_with_comma(self):
-        code = textwrap.dedent("""\
-    if 5 is 5 or 4 is 4:
-        print('hallo')
-        # comment1, comment2""")
-
-        expected = textwrap.dedent("""\
-    if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')
-      # [' comment1', ' comment2']""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_commentbegin(self):
-        code = textwrap.dedent("""\
-    # comment word
-    if 5 is 5 or 4 is 4:
-        print('hallo')
-        """)
-        expected = textwrap.dedent("""\
-    # [' comment word']
-    if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')""")
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_commentresult(self):
-        code = textwrap.dedent("""\
-    # comment word
-    if 5 is 5 or 4 is 4:
-        print('hallo')
-        """)
-        expected = textwrap.dedent("""\
-    # [' comment word']
-    if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')""")
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)

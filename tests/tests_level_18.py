@@ -23,7 +23,7 @@ class TestsLevel18(HedyTester):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_transpile_ask(self):
+    def test_ask(self):
         result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
         expected = "antwoord = input('wat is je lievelingskleur?')"
         self.assertEqual(expected, result.code)
@@ -46,7 +46,6 @@ class TestsLevel18(HedyTester):
         self.assertEqual(False, result.has_turtle)
 
         self.assertEqual("30", self.run_code(result))
-
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -539,24 +538,6 @@ else:
       if str(antwoord) == str('25'):
         goedantwoord = True
         print('Er is een goed antwoord gegeven')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_access_plus(self):
-        code = textwrap.dedent("""\
-    lijst is ['1', '2', '3']
-    optellen is lijst[1] + lijst[2]
-    optellen is optellen + lijst[3]
-    # we verwachten hier 6
-    print(optellen)""")
-        expected = textwrap.dedent("""\
-    lijst = ['1', '2', '3']
-    optellen = int(lijst[1-1]) + int(lijst[2-1])
-    optellen = int(optellen) + int(lijst[3-1])
-    # [' we verwachten hier 6']
-    print(str(optellen))""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)

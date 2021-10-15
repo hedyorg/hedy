@@ -23,11 +23,6 @@ class TestsLevel14(HedyTester):
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
 
-    def test_transpile_ask(self):
-        result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
-        expected = "antwoord = input('wat is je lievelingskleur?')"
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
 
     def test_print_calculation_times_directly(self):
         code = textwrap.dedent("""\
@@ -44,8 +39,13 @@ class TestsLevel14(HedyTester):
 
         self.assertEqual(expected, result.code)
         self.assertEqual(False, result.has_turtle)
-
         self.assertEqual("30", self.run_code(result))
+
+    def test_ask(self):
+        result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
+        expected = "antwoord = input('wat is je lievelingskleur?')"
+        self.assertEqual(expected, result.code)
+        self.assertEqual(False, result.has_turtle)
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -295,13 +295,13 @@ else:
 
     def test_bool_true(self):
         code = textwrap.dedent("""\
-    ja is True
-    if ja is True:
-        print('ja')""")
+        ja is True
+        if ja is True:
+            print('ja')""")
         expected = textwrap.dedent("""\
-    ja = True
-    if ja == True:
-      print('ja')""")
+        ja = True
+        if ja == True:
+          print('ja')""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
@@ -367,30 +367,6 @@ else:
       print('Hallo!')
     if jebenternog == False:
       print('Doei!')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_and(self):
-        code = textwrap.dedent("""\
-    if 5 is 5 and 4 is 4:
-        print('hallo')""")
-        expected = textwrap.dedent("""\
-    if str('5') == str('5') and str('4') == str('4'):
-      print('hallo')""")
-
-        result = hedy.transpile(code, self.level)
-        self.assertEqual(expected, result.code)
-        self.assertEqual(False, result.has_turtle)
-
-    def test_or(self):
-        code = textwrap.dedent("""\
-    if 5 is 5 or 4 is 4:
-        print('hallo')""")
-        expected = textwrap.dedent("""\
-    if str('5') == str('5') or str('4') == str('4'):
-      print('hallo')""")
 
         result = hedy.transpile(code, self.level)
         self.assertEqual(expected, result.code)
