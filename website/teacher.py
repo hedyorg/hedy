@@ -29,7 +29,7 @@ def routes (app, database, requested_lang):
             return 'Only teachers can retrieve classes', 403
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
-            return 'No such class', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_class'))
         students = []
         for student_username in Class.get ('students', []):
             student = DATABASE.user_by_username (student_username)
@@ -108,7 +108,7 @@ def routes (app, database, requested_lang):
     def prejoin_class (class_id, link):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['link'] != link:
-            return 'No such class', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('invalid_class_link'))
         user = {}
         if request.cookies.get (cookie_name):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
@@ -124,7 +124,7 @@ def routes (app, database, requested_lang):
     def join_class (user, class_id, link):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['link'] != link:
-            return 'No such class', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('invalid_class_link'))
 
         DATABASE.add_student_to_class (Class ['id'], user ['username'])
 
@@ -146,5 +146,5 @@ def routes (app, database, requested_lang):
     def resolve_class_link (link_id):
         Class = DATABASE.resolve_class_link (link_id)
         if not Class:
-            return 'Invalid link', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('invalid_class_link'))
         return redirect(request.url.replace('/hedy/l/' + link_id, '/class/' + Class ['id'] + '/prejoin/' + link_id), code=302)
