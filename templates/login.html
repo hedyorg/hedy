@@ -2,7 +2,7 @@
 
 {% block main %}
 <div class="px-8">
-  <form class="auth" onsubmit="event.preventDefault (); window.auth.submit ('login')">
+  <form class="auth" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
     <h2>{{auth.login_long}}</h2>
     <br>
     <label>{{auth.username}} / {{auth.email}}</label>
