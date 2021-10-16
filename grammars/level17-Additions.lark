@@ -1,5 +1,6 @@
-// Level 17 adds the while loop
+// Level 16 adds comparison
 
-command: print | ifs (elifs)* elses? | input | for_loop | while_loop | assign_list | list_access_var | change_list_item| comment | assign
+condition: (equality_check|in_list_check|smaller|bigger)
 
-while_loop: _WHILE _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block"
+smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
+bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)

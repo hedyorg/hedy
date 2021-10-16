@@ -261,7 +261,7 @@ window.auth = {
 // *** LOADERS ***
 
 if ($ ('#country')) {
-  var html = '<option value="">Select</option>';
+  var html = $ ('#country').html();
   Object.keys (countries).map (function (code) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });

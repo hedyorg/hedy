@@ -15,12 +15,12 @@
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
+    exampleEditor.setOptions({ minLines: 2 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-
     // And add an overlay button to the editor
-    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
-    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto'}).appendTo(preview);
+    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif'}).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
       window.editor.setValue(exampleEditor.getValue() + '\n');
     });
   }
@@ -116,12 +116,10 @@
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table.
       const modeExceptions = {
-        8: 'ace/mode/level8and9',
-        9: 'ace/mode/level8and9',
-        17: 'ace/mode/level17and18',
-        18: 'ace/mode/level17and18',
-        21: 'ace/mode/level21and22',
-        22: 'ace/mode/level21and22',
+        9: 'ace/mode/level9and10',
+        10: 'ace/mode/level9and10',
+        18: 'ace/mode/level18and19',
+        19: 'ace/mode/level18and19',
       };
 
       const mode = modeExceptions[window.State.level] || `ace/mode/level${window.State.level}`;
@@ -157,9 +155,9 @@ function runit(level, lang, cb) {
       url: '/parse',
       data: JSON.stringify({
         level: level,
-        sublevel: window.State.sublevel ? window.State.sublevel : undefined,
         code: code,
         lang: lang,
+        read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
@@ -207,7 +205,6 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
-  if (window.State.sublevel) return window.modal.alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;
@@ -409,6 +406,10 @@ function runPythonProgram(code, hasTurtle, cb) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
     console.log('Program executed');
+    // Check if the program was correct but the output window is empty: Return a warning
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      error.showWarning(ErrorMessages.Transpile_warning, ErrorMessages.Empty_output);
+    }
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -477,6 +478,7 @@ function runPythonProgram(code, hasTurtle, cb) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
+    $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;

@@ -1,16 +1,8 @@
-// Level 12 adds square brackets around lists
-// string list elements also need single quotation marks (') now
+// level 11 adds brackets to for and print and changes ask to input
 
-// and list items can be assigned to
+command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | assign
 
-command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item | assign
+print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))* _RIGHT_BRACKET)?
+input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var | sum) (_SPACE (quoted_text | list_access | var | sum))*  _RIGHT_BRACKET
 
-assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces | list_access _SPACE _IS _SPACE sum | list_access _SPACE _IS _SPACE textwithoutspaces
-assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET quoted_text ((", "|",") quoted_text)+ _RIGHT_SQUARE_BRACKET
-
-//new for level 12, assignment of list[i]
-change_list_item: var _LEFT_SQUARE_BRACKET (index | var) _RIGHT_SQUARE_BRACKET _SPACE _IS _SPACE (var | textwithoutspaces)
-
-list_access: var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
-list_access_var: var _SPACE _IS _SPACE var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
-equality_check: (textwithoutspaces | list_access) _SPACE _IS _SPACE (textwithoutspaces | list_access)
+for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _LEFT_BRACKET (NUMBER | var) (_COMMA _SPACE|_COMMA) (NUMBER | var) ((_COMMA _SPACE |_COMMA) (NUMBER | var))? _RIGHT_BRACKET _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK

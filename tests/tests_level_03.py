@@ -1,47 +1,25 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
-import inspect
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-class TestsLevel3(unittest.TestCase):
+class TestsLevel3(HedyTester):
   level = 3
-  def test_name(self):
-    return inspect.stack()[1][3]
 
-  def test_transpile_other(self):
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual(str(context.exception), 'Invalid')
+  # tests should be ordered as follows:
+  # * commands in the order of hedy.py for level 3: ['print', 'ask', 'is', 'turn', 'forward'],
+  # * combined tests
+  # * markup tests
+  # * negative tests (inc. negative & multilevel)
 
-  def test_transpile_print_level_2(self):
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile("print felienne 123", self.level)
+  # test name conventions are like this:
+  # * single keyword positive tests are just keyword or keyword_special_case
+  # * multi keyword positive tests are keyword1_keywords_2
+  # * negative tests should be
+  # * situation_gives_exception
 
-    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
 
-
+  # print tests
   def test_print(self):
-
     code = textwrap.dedent("""\
     print 'hallo wereld!'""")
 
@@ -52,46 +30,89 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
-
-  def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-
-  def test_transpile_turtle_with_ask(self):
-    code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-
-  def test_print_with_comma(self):
+  def test_print_comma(self):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet ,'""")
-
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     print(f'ik heet ,')""")
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_two_spaces(self):
+    code = "print        'hallo!'"
+
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_with_slashes(self):
+    code = "print 'Welcome to \\'"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print(f'Welcome to \\\\')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_name_with_underscore(self):
+    expected_output = self.run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
+
+  # ask
+  def test_assign_print(self):
+    # todo make version for over level 11
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_ask_Spanish(self):
+    code = textwrap.dedent("""\
+    color is ask 'Cuál es tu color favorito?'""")
+    expected = textwrap.dedent("""\
+    color = input('Cuál es tu color favorito?')""")
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_ask_without_quotes(self):
+    code = textwrap.dedent("""
+    ding is kleur
+    kleur is ask Wat is je lievelingskleur'
+    print 'Jouw favoriet is dus ' kleur""")
+
+    with self.assertRaises(hedy.UnquotedTextException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
+
+  # is - assign tests
+  def test_assign_underscore(self):
     code = textwrap.dedent("""\
     voor_naam is Hedy
     print 'ik heet '""")
@@ -104,8 +125,20 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+  def test_assign_bengali(self):
+    hashed_var = hedy.hash_var("নাম")
 
-  def test_name_that_is_keyword(self):
+    code = textwrap.dedent("""\
+    নাম is হেডি""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent(f"""\
+    {hashed_var} = 'হেডি'""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+  def test_assign_Python_keyword(self):
     hashed_var = hedy.hash_var("for")
 
     code = textwrap.dedent("""\
@@ -121,20 +154,45 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_print_Spanish(self):
+  # negative tests
+  def test_print_without_quotes(self):
+    with self.assertRaises(hedy.UnquotedTextException) as context:
+      result = hedy.transpile("print felienne 123", self.level)
+
+    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
+
+  #combined tests
+  def test_assign_print_bengali(self):
+    hashed_var = hedy.hash_var("নাম")
+    self.assertEqual('veb9b5c786e8cde0910df4197f630ee75', hashed_var)
 
     code = textwrap.dedent("""\
-    print 'Cuál es tu color favorito?'""")
+    নাম is হেডি
+    print 'আমার নাম is ' নাম """)
 
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    print(f'Cuál es tu color favorito?')""")
+    veb9b5c786e8cde0910df4197f630ee75 = 'হেডি'
+    print(f'আমার নাম is {veb9b5c786e8cde0910df4197f630ee75}')""")
 
     self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+  def test_assign_print_chinese(self):
+    hashed_var = hedy.hash_var("你好世界")
+    self.assertEqual('v65396ee4aad0b4f17aacd1c6112ee364', hashed_var)
 
-  def test_print_with_list_var(self):
+    code = textwrap.dedent("""\
+    你好世界 is 你好世界
+    print 你好世界""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    v65396ee4aad0b4f17aacd1c6112ee364 = '你好世界'
+    print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
+
+    self.assertEqual(expected, result.code)
+  def test_print_list_(self):
 
     code = textwrap.dedent("""\
     dieren is Hond, Kat, Kangoeroe
@@ -149,9 +207,8 @@ class TestsLevel3(unittest.TestCase):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual(run_code(result), "Kat")
-
-  def test_print_with_list_var_random(self):
+    self.assertEqual(self.run_code(result), "Kat")
+  def test_print_list_var_random(self):
 
     code = textwrap.dedent("""\
     dieren is Hond, Kat, Kangoeroe
@@ -165,49 +222,8 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
-
-  def test_transpile_ask_Spanish(self):
-    code = textwrap.dedent("""\
-    color is ask 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    color = input('Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_2(self):
-
-    code = textwrap.dedent("""\
-    print 'ik heet henk'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'ik heet henk')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_with_var(self):
-
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'ik heet{naam}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_transpile_ask_with_print(self):
+    self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
+  def test_ask_print(self):
 
     code = textwrap.dedent("""
     kleur is ask 'wat is je lievelingskleur?'
@@ -221,8 +237,7 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
-  def test_transpile_ask_with_var(self):
+  def test_ask_assign(self):
 
     code = textwrap.dedent("""
     ding is kleur
@@ -238,146 +253,81 @@ class TestsLevel3(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
-  def test_transpile_ask_no_quotes(self):
-    code = textwrap.dedent("""
-    ding is kleur
-    kleur is ask Wat is je lievelingskleur'
-    print 'Jouw favoriet is dus ' kleur""")
-
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile(code, self.level)
-
-    self.assertEqual('Unquoted Text', context.exception.args[0])  # hier moet nog we een andere foutmelding komen!
-
-  def test_use_slashes_at_end_of_print_allowed(self):
-    code = "print 'Welcome to \\'"
-    result = hedy.transpile(code, self.level)
-
+  def test_forward_ask(self):
+    code = textwrap.dedent("""\
+    afstand is ask 'hoe ver dan?'
+    forward afstand""")
     expected = textwrap.dedent("""\
-    print(f'Welcome to \\\\')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = run_code(result)
-    self.assertEqual("Welcome to \\", expected_output)
-
-  def test_transpile_missing_opening_quote(self):
-    code = textwrap.dedent("""\
-      print hallo wereld'""")
-
-    with self.assertRaises(Exception) as context:
-      result = hedy.transpile(code, self.level)
-
-    self.assertEqual('Unquoted Text', context.exception.args[0])
+    afstand = input('hoe ver dan?')
+    t.forward(afstand)
+    time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
 
 
-  def test_transpile_missing_all_quotes(self):
-    max_level = 5
-
-    code = textwrap.dedent("""\
-      print hallo wereld""")
-    
-    for level in range(self.level, max_level+1):
-
-      with self.assertRaises(Exception) as context:
-        result = hedy.transpile(code, level)
-
-      self.assertEqual('Var Undefined', context.exception.args[0])
-
-      print(f'{self.test_name()} level {level}')
-
+  #negative tests
   def test_var_undefined_error_message(self):
 
     code = textwrap.dedent("""\
       naam is Hedy
       print 'ik heet ' name""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.UndefinedVarException) as context:
       result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Var Undefined', context.exception.args[0])
+    self.assertEqual('Var Undefined', context.exception.error_code)
     self.assertEqual('name', context.exception.arguments['name'])
-
-
-  def test_transpile_issue_375(self):
+  def test_issue_375(self):
     code = textwrap.dedent("""
       is Foobar
       print welcome""")
 
-    with self.assertRaises(Exception) as context:
+    with self.assertRaises(hedy.ParseException) as context:
       result = hedy.transpile(code, self.level)
 
-    self.assertEqual('Parse', context.exception.args[0])
-
-  def test_two_spaces_after_print(self):
-
-    max_level = 5
-    code = "print        'hallo!'"
-
-    for level in range(self.level, max_level+1):
-      result = hedy.transpile(code, level)
-
-      expected = textwrap.dedent("""\
-      print(f'hallo!')""")
-
-      print(f'{self.test_name()} level {level}')
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
-
-
-  def test_bengali_assign(self):
-    hashed_var = hedy.hash_var("নাম")
-
+    self.assertEqual('Parse', context.exception.error_code)
+  def test_missing_opening_quote(self):
     code = textwrap.dedent("""\
-    নাম is হেডি""")
+      print hallo wereld'""")
 
-    result = hedy.transpile(code, self.level)
+    with self.assertRaises(hedy.UnquotedTextException) as context:
+      result = hedy.transpile(code, self.level)
 
-    expected = textwrap.dedent(f"""\
-    {hashed_var} = 'হেডি'""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_bengali_assign_and_use(self):
-    hashed_var = hedy.hash_var("নাম")
-    self.assertEqual('veb9b5c786e8cde0910df4197f630ee75', hashed_var)
-
+    self.assertEqual('Unquoted Text', context.exception.error_code)
+  def test_missing_all_quotes(self):
     code = textwrap.dedent("""\
-    নাম is হেডি
-    print 'আমার নাম is ' নাম """)
+      print hallo wereld""")
 
-    result = hedy.transpile(code, self.level)
-
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      test_name=self.name(),
+      exception=hedy.UndefinedVarException,
+    )
+  def test_print_Spanish(self):
+    code = textwrap.dedent("""\
+    print 'Cuál es tu color favorito?'""")
     expected = textwrap.dedent("""\
-    veb9b5c786e8cde0910df4197f630ee75 = 'হেডি'
-    print(f'আমার নাম is {veb9b5c786e8cde0910df4197f630ee75}')""")
+    print(f'Cuál es tu color favorito?')""")
 
-    self.assertEqual(expected, result.code)
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      test_name=self.name(),
+      expected=expected,
+      extra_check_function=self.is_not_turtle()
+    )
 
-  def test_chinese_assign_and_use(self):
-    hashed_var = hedy.hash_var("你好世界")
-    self.assertEqual('v65396ee4aad0b4f17aacd1c6112ee364', hashed_var)
-
-    code = textwrap.dedent("""\
-    你好世界 is 你好世界
-    print 你好世界""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    v65396ee4aad0b4f17aacd1c6112ee364 = '你好世界'
-    print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
-
-    self.assertEqual(expected, result.code)
-
-
-
-
-
-
+  #assorti
+  def test_detect_accented_chars(self):
+    self.assertEqual(True, hedy.hash_needed('éyyy'))
+    self.assertEqual(True, hedy.hash_needed('héyyy'))
+    self.assertEqual(False, hedy.hash_needed('heyyy'))
 
 
 

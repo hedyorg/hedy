@@ -12,8 +12,8 @@
       demo_code: "ask Unaitwa nani?"
     -
       explanation: "Rudia kuchapisha kitu kwa kutumia neno `echo`."
-      example: "Mfano: echo Sawa Kumbe unaitwa..."
-      demo_code: "ask Unaitwa nani?\necho Sawa, Kumbe unaitwa..."
+      example: "Mfano: echo Sawa Kumbe unaitwa "
+      demo_code: "ask Unaitwa nani?\necho Sawa, Kumbe unaitwa "
 2:
   intro_text: "`ask` na `print` mabadiliko katika kiwango cha 3. Hizi mabadiliko, kinamaanisha neno `echo` haitakiwi tena kuchapisha maneno. Kwanzia hii kiwango, unaweza kutumia maneno zifuatao:"
   start_code: "print salamu dunia!"
@@ -63,6 +63,25 @@
       example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
       demo_code: "jibu is ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
 5:
+  start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
+  intro_text: "Matumizi ya `ask`, `print` na `if` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
+  commands:
+    -
+      explanation: "Tumia fungua semi na funga semi ya aina ''"
+      example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
+      demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
+    -
+      explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
+      example: "Mfano: answer is ask '10 jumlisha 10 ni sawa sawa na?'"
+      demo_code: "jibu is ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
+    -   name: "`ask` and `if` turtle"
+        explanation: "Ask the user how many angles they want"
+        example: "Example: angles is ask 'How many angles?'"
+        demo_code: |-
+            angles is ask 'How many angles?'
+            angle is 360 / angles
+            forward 50
+6:
   start_code: "repeat 3 times print 'Hedy ni furaha!'"
   intro_text: "Matumizi ya `ask`, `print` na `if` zinabaki kama ziliwio. Ila kwa kiwango cha tano, tutasoma neno `repeat`. Neno `repeat` kinatumika kurudia utekelezaji mara nyingi."
   commands:
@@ -78,26 +97,11 @@
       explanation: "Fanya uamuzi kwa kutumia neno `if`"
       example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
       demo_code: "jibu is ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
-    -
-      explanation: "`repeat` na `if` zinaweza kutumika kwapamoja"
-      example: "Mfano: if rangi is kijani repeat 3 times print 'nzuri!' else repeat 5 times print 'meh'"
-      demo_code: "rangi is ask 'Rangi ambayo unapenda ni kipi?'\nif rangi is kijani repeat 3 times print 'vizuri sana!' else repeat 5 times print 'meh'"
-6:
-  start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-  intro_text: "Matumizi ya `ask`, `print`, `if` na `repeat` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
-  commands:
-    -
-      explanation: "Tumia fungua semi na funga semi ya aina ''"
-      example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
-      demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-    -
-      explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
-      example: "Mfano: answer is ask '10 jumlisha 10 ni sawa sawa na?'"
-      demo_code: "jibu is ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
-    -
-      explanation: "Matumizi ya `repeat` na `if` pamoja"
-      example: "Mfano: if jibu is 50 repeat 3 times print 'Sahihi!' else repeat 5 times print 'Sio Sahihi!'"
-      demo_code: "jibu is ask '10 mara 5 in sawa sawa na?'\nif jibu is 50 repeat 3 times print 'Sahihi!' else repeat 5 times print 'Sio Sahihi!'"
+    -   name: "repeat - turtle"
+        explanation: "Repeat a line of code with `repeat`."
+        example: "Example: repeat 3 times forward 10"
+        demo_code: |-
+            repeat 3 times forward 10
 7:
   start_code: "repeat 5 times\n    print 'Jambu!! rafiki'\n    print 'Hii itachapishwa kwenye skrini mara 5'"
   intro_text: "ask na print zinatumika kama tulivio zitumia kwenye kiwango cha sita. Ila matumizi ya if na repeat zimebadilika! Sasa unaweza kutekeleza kikundi cha code kwa pamoja, ila utatakiwa kuweka ujazo(indent). Kinamaanisha utaweka nafasi(space) mara nne ukianza ukiandika kwenye mstari. Utafanya hivyo ataukiandika kikundi(block) cha code ata kama ni mstari moja tu. Kama utatumia if na repeat, utatakiwa ujazo kila kikundi(block) cha code. Rejea mfano zifuatazo kwa maelezo zaid!"
@@ -115,6 +119,33 @@
       example: "Mfano: if rangi is kijani repeat 3 times print 'mzuri!' else repeat 5 times print 'meh'"
       demo_code: "rangi is ask 'Rangi ambayo unapenda ni kipi?'\nif rangi is kijani\n    repeat 3 times\n        print 'mzuri!'\nelse\n    repeat 5 times\n        print 'meh'"
 8:
+    start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
   start_code: "for i in range 1 to 10\n    print i\nprint 'Tayari au la, nakuja!'"
   intro_text:
     "`print` kinatumika kama kawaida ila `repeat` kimebadilishwa kuwa `for`!
@@ -128,13 +159,13 @@
              for i in range 1 to 10
                print i
              print 'Tayari au la, nakuja!'
-9:
+10:
   start_code: "for i in range 1 to 10:\n    print i\nprint 'Tayari au la, nakuja!'"
   intro_text: "Sasa tutabadiliasha mfumo kidogo kuhusu ujazo(indent) mstari. Kama utaka ujazo kwenye mstari, tutatakiwa kutumia `:` kwenye mstari kinacho tokea kabla ya mstari ambapo tutaweka ujazo(indentataion)."
   commands:
     - explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
       example: "for i in range 1 to 10:"
-      demo_code: "for i in range 1 to 11:\n    print i\nprint 'Tayari au la, nakuja!'"
+      demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
     - explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
       example: "if rangi is kijani:'"
       demo_code: "rangi is kijani\nif rangi is kijani:\n    print 'Rangi ni ya Kijani'\nelse:\n    print 'Rangi sio ya Kijani'"
@@ -142,7 +173,7 @@
       explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
       example: "elif a is 5:"
       demo_code: "a is 2\nif a is 1:\n    print 'a ni 1'\nelif a is 2:\n    print 'a ni 2'\nelse:\n    print 'a sio 1 wala 2'"
-10:
+11:
   start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n        print 'we are in round: ' i ' na tunahesabu : ' j"
   intro_text: "Kwanzia sasa, tunawe kurudia utekelezaji mara nyingi. Kwenya mfano, tumechapisha 1 hadi 5 mara 3. Tunatekeleza mzunguko tatu na kwa kila mzunguko, tunachapisha 1 hadi 5."
   commands:
@@ -153,7 +184,7 @@
             print 'tupo kwenye utekelezaji wa mzunguko: ' i ' na tunachapisha ' j
     - explanation: "Tumaweza kutumia hi mfumo tukitumia kauli ya if"
       demo_code: "rangi is bluu\nrangiyapili is manjano\nif rangi is bluu:\n    if rangiyapili is manjano:\n        print 'Kwapamoja sisi ni kijani!'"
-11:
+12:
   start_code: "umri is input('Una miaka mingapi?')\nprint('Kumbe umri wako in:')\nfor i in range(0,umri):\n    print(i)"
   intro_text: "Tutanza kutumia mabano na tutabadilike mfumo wa kutumia as! Tutatumia input badala ya ask. Mfumo wa tukumia print, input na for, tutatumia mabano ya aina ya ()."
   commands:
@@ -166,7 +197,7 @@
     - explanation: "Sasa tutatumia mabano katika mfumo wa tukumia kauli ya for. Tutaweka numberi yaliyo katika kauli ya for. for i in range (0,10):"
       example: "Mfano: for i in range(0,10):"
       demo_code: "for i in range(0,10):\n    print(i)\nprint('Tayari au la, nakuja!')"
-12:
+13:
   start_code: |-
     matunda is ['embe', 'machungwa', 'ndizi']
     print(matunda)
