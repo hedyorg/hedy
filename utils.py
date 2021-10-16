@@ -13,6 +13,7 @@ import commonmark
 commonmark_parser = commonmark.Parser ()
 commonmark_renderer = commonmark.HtmlRenderer ()
 from bs4 import BeautifulSoup
+from flask_helpers import render_template
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -177,3 +178,13 @@ def markdown_to_html_tags (markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse (markdown))
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all ()
+
+def page_404 (translations, menu, lang, username, *page_error):
+    if page_error:
+        page_error = page_error [0]
+    return render_template("404.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 404
+
+def page_500 (translations, menu, lang, username, *page_error):
+    if page_error:
+        page_error = page_error [0]
+    return render_template("500.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 500
