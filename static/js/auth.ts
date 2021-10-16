@@ -88,7 +88,7 @@ export const auth = {
       if (! values.email?.match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
       if (values.email    !== values.mail_repeat)    return auth.error (auth.texts['repeat_match_email'],    'mail_repeat');
       if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match_password'], 'password_repeat');
-      if (typeof values.birth_year === 'string') {
+      if (values.birth_year) {
         if (!validBirthYearString(values.birth_year)) {
            return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
         }
@@ -147,7 +147,7 @@ export const auth = {
     if (op === 'profile') {
       if (! (values.email ?? '').match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
 
-      if (typeof values.birth_year === 'string') {
+      if (values.birth_year) {
         if (!validBirthYearString(values.birth_year)) {
           return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
         }
@@ -155,7 +155,7 @@ export const auth = {
 
       const payload: User = {
         email: values['email'],
-        birth_year: parseInt(values['birth_year']!),
+        birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
         country: values['country'],
         gender: values['gender'],
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
@@ -164,11 +164,13 @@ export const auth = {
           : undefined,
       };
 
+      console.log(payload);
+
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts['profile_updated']);
-      }).fail (function (_response) {
-        auth.error (auth.texts['ajax_error']);
+      }).fail (function (response) {
+        auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
       });
     }
 

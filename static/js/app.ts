@@ -4,6 +4,8 @@ import './syntaxModesRules';
 import { modal, error } from './modal';
 import { auth } from './auth';
 
+export let theGlobalEditor: AceAjax.Editor;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -27,7 +29,7 @@ import { auth } from './auth';
     // And add an overlay button to the editor
     const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
     $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
-      window.editor?.setValue(exampleEditor.getValue() + '\n');
+      theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
     });
   }
 
@@ -39,6 +41,7 @@ import { auth } from './auth';
 
     // We expose the editor globally so it's available to other functions for resizing
     var editor = turnIntoAceEditor($editor.get(0), $editor.data('readonly'));
+    theGlobalEditor = editor;
     error.setEditor(editor);
 
     // Load existing code from session, if it exists
@@ -313,7 +316,7 @@ export function saveitP(level: number | [number, string], lang: string, name: st
   });
 }
 
-function viewProgramLink(programId: string) {
+export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
