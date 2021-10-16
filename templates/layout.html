@@ -9,31 +9,31 @@
     <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo.png')}}"/>
     <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
   </head>
-
   <body class="bg-gray-400">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal-mask" class="hidden absolute bg-gray-400 z-50 w-full h-full" style="opacity: 40%"></div>
-    <div id="modal-content" class="hidden absolute z-50 p-16 bg-gray-200 border-2 border-black" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="modal-mask" class="hidden absolute bg-black z-50 w-full h-full opacity-75"></div>
+    <div id="modal-content" class="hidden absolute z-50 p-12 pl-16 pr-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
        <div id="modal-alert" class="hidden">
-          <div id="modal-alert-text"></div>
-          <div style="margin: auto; text-align: center;">
-            <button id="modal-confirm-button" class="btn block mt-4" style="min-width:6em">{{auth.ok}}</button>
+          <div id="modal-alert-text" class="text-white mb-8 text-xl"></div>
+          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-confirm-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
           </div>
        </div>
        <div id="modal-confirm" class="hidden">
-          <div id="modal-confirm-text"></div>
-          <div style="margin: auto; text-align: center;">
-            <button id="modal-yes-button" class="btn block mt-4" style="min-width:6em">{{auth.yes}}</button>
-            <button id="modal-no-button" class="btn block mt-4 ml-2" style="min-width:6em">{{auth.no}}</button>
+          <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
+          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.yes}}</button>
+            <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.no}}</button>
           </div>
        </div>
        <div id="modal-prompt" class="hidden">
-          <div id="modal-prompt-text"></div>
-          <div style="margin: auto; text-align: center;">
+          <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
+          <div class="ml-auto mr-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
-            <br>
-            <button id="modal-ok-buton" class="btn block mt-4" style="min-width:6em">{{auth.ok}}</button>
-            <button id="modal-cancel-button" class="btn block mt-4 ml-2" style="min-width:6em">{{auth.cancel}}</button>
+            <div class="mt-4 flex flex-row justify-center">
+                <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
+                <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.cancel}}</button>
+            </div>
           </div>
        </div>
     </div>

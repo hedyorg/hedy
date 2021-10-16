@@ -1,127 +1,70 @@
-import unittest
 import hedy
-import sys
-import io
 import textwrap
-from contextlib import contextmanager
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-def run_code(parse_result):
-    code = "import random\n" + parse_result.code
-    with captured_output() as (out, err):
-        exec(code)
-    return out.getvalue().strip()
-
-
-class TestsLevel12(unittest.TestCase):
-  maxDiff = None
+class TestsLevel12(HedyTester):
   level = 12
+  #level 12 adds round brackets
 
-  def test_print(self):
-    result = hedy.transpile("print('ik heet')", self.level)
-    expected = "print('ik heet')"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
-  def test_print_with_var(self):
-    result = hedy.transpile("naam is Hedy\nprint('ik heet' naam)", self.level)
-    expected = "naam = 'Hedy'\nprint('ik heet'+str(naam))"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_with_calc_no_spaces(self):
-    result = hedy.transpile("print('5 keer 5 is ' 5*5)", self.level)
-    expected = "print('5 keer 5 is '+str(int(5) * int(5)))"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_calculation_times_directly(self):
+  def test_print_brackets(self):
     code = textwrap.dedent("""\
-    nummer is 5
-    nummertwee is 6
-    print(nummer * nummertwee)""")
-
-    result = hedy.transpile(code, self.level)
-
+    leeftijd is input('Hoe oud ben jij?')
+    print('Dus jij hebt zo veel verjaardagen gehad:')
+    for i in range(0,leeftijd):
+        print(i)""")
     expected = textwrap.dedent("""\
-    nummer = '5'
-    nummertwee = '6'
-    print(str(int(nummer) * int(nummertwee)))""")
+    leeftijd = input('Hoe oud ben jij?')
+    print(f'Dus jij hebt zo veel verjaardagen gehad:')
+    step = 1 if int(0) < int(leeftijd) else -1
+    for i in range(int(0), int(leeftijd) + step, step):
+      print(f'{i}')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_print_var_brackets(self):
+    code = "naam is Hedy\nprint('ik heet' naam)"
+    expected = "naam = 'Hedy'\nprint(f'ik heet{naam}')"
 
-    self.assertEqual("30", run_code(result))
-
-  def test_transpile_ask(self):
-    result = hedy.transpile("antwoord is input('wat is je lievelingskleur?')", self.level)
-    expected = "antwoord = input('wat is je lievelingskleur?')"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_if_with_indent(self):
-    code = textwrap.dedent("""\
-naam is Hedy
-if naam is Hedy:
-    print('koekoek')""")
-    expected = textwrap.dedent("""\
-naam = 'Hedy'
-if str(naam) == str('Hedy'):
-  print('koekoek')""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=18,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   def test_if_else(self):
     code = textwrap.dedent("""\
-antwoord is input('Hoeveel is 10 plus 10?')
-if antwoord is 20:
-    print('Goedzo!')
-    print('Het antwoord was inderdaad ' antwoord)
-else:
-    print('Foutje')
-    print('Het antwoord moest zijn ' antwoord)""")
+    antwoord is input('Hoeveel is 10 plus 10?')
+    if antwoord is 20:
+        print('Goedzo!')
+        print('Het antwoord was inderdaad ' antwoord)
+    else:
+        print('Foutje')
+        print('Het antwoord moest zijn ' antwoord)""")
 
     expected = textwrap.dedent("""\
-antwoord = input('Hoeveel is 10 plus 10?')
-if str(antwoord) == str('20'):
-  print('Goedzo!')
-  print('Het antwoord was inderdaad '+str(antwoord))
-else:
-  print('Foutje')
-  print('Het antwoord moest zijn '+str(antwoord))""")
+    antwoord = input('Hoeveel is 10 plus 10?')
+    if str(antwoord) == str('20'):
+      print(f'Goedzo!')
+      print(f'Het antwoord was inderdaad {antwoord}')
+    else:
+      print(f'Foutje')
+      print(f'Het antwoord moest zijn {antwoord}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_random(self):
-    code = textwrap.dedent("""\
-    keuzes is ['steen', 'schaar', 'papier']
-    computerkeuze is keuzes[random]
-    print('computer koos ' computerkeuze)""")
-    expected = textwrap.dedent("""\
-    keuzes = ['steen', 'schaar', 'papier']
-    computerkeuze=random.choice(keuzes)
-    print('computer koos '+str(computerkeuze))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
   def test_for_loop(self):
     code = textwrap.dedent("""\
     a is 2
@@ -137,29 +80,53 @@ else:
       a = int(a) + int(2)
       b = int(b) + int(2)""")
 
-    result = hedy.transpile(code, self.level)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_if__else(self):
+  def test_allow_space_after_else_line(self):
     code = textwrap.dedent("""\
-    a is 5
     if a is 1:
-      x is 2
-    else:
-      x is 222""")
+      print(a)
+    else:   
+      print('nee')""")
+
     expected = textwrap.dedent("""\
-    a = '5'
     if str(a) == str('1'):
-      x = '2'
+      print(f'{a}')
     else:
-      x = '222'""")
+      print(f'nee')""")
 
-    result = hedy.transpile(code, self.level)
+    self.multi_level_tester(
+      code=code,
+      max_level=19,
+      expected=expected,
+      test_name=self.name()
+    )
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+  def test_allow_space_before_colon(self):
+    code = textwrap.dedent("""\
+    if a is 1  :
+      print(a)
+    else:   
+      print('nee')""")
+
+    expected = textwrap.dedent("""\
+    if str(a) == str('1'):
+      print(f'{a}')
+    else:
+      print(f'nee')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=19,
+      expected=expected,
+      test_name=self.name()
+    )
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -169,13 +136,15 @@ else:
     expected = textwrap.dedent("""\
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
-      print(str(i))
-    print('wie niet weg is is gezien')""")
+      print(f'{i}')
+    print(f'wie niet weg is is gezien')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   def test_for_nesting(self):
     code = textwrap.dedent("""\
@@ -187,12 +156,15 @@ else:
     for i in range(int(1), int(3) + step, step):
       step = 1 if int(1) < int(4) else -1
       for j in range(int(1), int(4) + step, step):
-        print('rondje: '+str(i)+' tel: '+str(j))""")
+        print(f'rondje: {i} tel: {j}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   def test_if_nesting(self):
     code = textwrap.dedent("""\
@@ -206,113 +178,15 @@ else:
     kleurtwee = 'geel'
     if str(kleur) == str('blauw'):
       if str(kleurtwee) == str('geel'):
-        print('Samen is dit groen!')""")
+        print(f'Samen is dit groen!')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_newprint(self):
-    code = textwrap.dedent("""\
-    leeftijd is input('Hoe oud ben jij?')
-    print('Dus jij hebt zo veel verjaardagen gehad:')
-    for i in range(0,leeftijd):
-        print(i)""")
-    expected = textwrap.dedent("""\
-    leeftijd = input('Hoe oud ben jij?')
-    print('Dus jij hebt zo veel verjaardagen gehad:')
-    step = 1 if int(0) < int(leeftijd) else -1
-    for i in range(int(0), int(leeftijd) + step, step):
-      print(str(i))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_list(self):
-    code = textwrap.dedent("""\
-    fruit is ['appel', 'banaan', 'kers']
-    print(fruit)""")
-    expected = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
-    print(str(fruit))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_list_multiple_spaces(self):
-    code = textwrap.dedent("""\
-    fruit is ['appel',  'banaan',    'kers']
-    print(fruit)""")
-    expected = textwrap.dedent("""\
-    fruit = ['appel', 'banaan', 'kers']
-    print(str(fruit))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_random(self):
-    code = textwrap.dedent("""\
-    fruit is ['banaan', 'appel', 'kers']
-    randomfruit is fruit[random]
-    print(randomfruit)""")
-    expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    randomfruit=random.choice(fruit)
-    print(str(randomfruit))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_specific_access(self):
-    code = textwrap.dedent("""\
-    fruit is ['banaan', 'appel', 'kers']
-    eerstefruit is fruit[1]
-    print(eerstefruit)""")
-    expected = textwrap.dedent("""\
-    fruit = ['banaan', 'appel', 'kers']
-    eerstefruit=fruit[1-1]
-    print(str(eerstefruit))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-#note that print(str(highscore)) will not print as it will compare 'score[i]' as str to a variable
-  def test_everything_combined(self):
-    code = textwrap.dedent("""\
-    score is ['100', '300', '500']
-    highscore is score[random]
-    print('De highscore is: ' highscore)
-    for i in range(1,3):
-        scorenu is score[i]
-        print('Score is nu ' scorenu)
-        if highscore is score[i]:
-            print(highscore)""")
-    expected = textwrap.dedent("""\
-    score = ['100', '300', '500']
-    highscore=random.choice(score)
-    print('De highscore is: '+str(highscore))
-    step = 1 if int(1) < int(3) else -1
-    for i in range(int(1), int(3) + step, step):
-      scorenu=score[i-1]
-      print('Score is nu '+str(scorenu))
-      if str(highscore) == str('score[i]'):
-        print(str(highscore))""")
-
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   def test_if_under_else_in_for(self):
     code = textwrap.dedent("""\
@@ -330,16 +204,19 @@ else:
     for i in range(int(0), int(10) + step, step):
       antwoord = input('Wat is 5*5')
       if str(antwoord) == str('24'):
-        print('Dat is fout!')
+        print(f'Dat is fout!')
       else:
-        print('Dat is goed!')
+        print(f'Dat is goed!')
       if str(antwoord) == str('25'):
         i = '10'""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
 #programs with issues to see if we catch them properly
 # (so this should fail, for now)
@@ -359,4 +236,44 @@ else:
   #     result = hedy.transpile(code, 10)
   #   self.assertEqual(str(context.exception), 'Parse')
 
+  def test_multiple_spaces_after_print(self):
+    code = "print    ('hallo!')"
 
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=22,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+  def test_two_spaces_after_bracket(self):
+    code = "print(   'hallo!')"
+
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=22,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+  def test_multiple_spaces_before_and_after_bracket(self):
+    code = "print  (   'hallo!')"
+
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=22,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )

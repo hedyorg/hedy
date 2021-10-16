@@ -256,7 +256,7 @@ export const auth = {
 // *** LOADERS ***
 
 if ($ ('#country')) {
-  let html = '<option value="">Select</option>';
+  let html = $('#country').html();
   Object.keys (countries).map (function (code) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });

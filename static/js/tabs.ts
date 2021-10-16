@@ -21,6 +21,14 @@ import { theGlobalEditor } from './app';
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
+  function resetWindow() {
+    $ ('#warningbox').hide ();
+    $ ('#errorbox').hide ();
+    $ ('#output').empty ();
+    $ ('#turtlecanvas').empty ();
+    window.State.unsaved_changes = false;
+  }
+
   function switchToTab(tabName: string) {
     // Find the tab that leads to this selection, and its siblings
     const tab = $('*[data-tab="' + tabName + '"]');
@@ -42,6 +50,8 @@ $(function() {
       adventures [adventure.short_name] = adventure;
     });
 
+    resetWindow();
+
     if (tabName === 'end') {
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
@@ -49,6 +59,8 @@ $(function() {
     }
     $ ('#level-header input').show ();
     $ ('#editor-area').show ();
+
+
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);

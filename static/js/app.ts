@@ -23,9 +23,9 @@ export let theGlobalEditor: AceAjax.Editor;
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
+    exampleEditor.setOptions({ minLines: 2 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-
     // And add an overlay button to the editor
     const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
     $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
@@ -136,14 +136,12 @@ export let theGlobalEditor: AceAjax.Editor;
 
     if (highlighter == 1) {
       // Everything turns into 'ace/mode/levelX', except what's in
-      // this table.
+      // this table. Yes the numbers are strings. That's just JavaScript for you.
       const modeExceptions: Record<string, string> = {
-        '8': 'ace/mode/level8and9',
-        '9': 'ace/mode/level8and9',
-        '17': 'ace/mode/level17and18',
-        '18': 'ace/mode/level17and18',
-        '21': 'ace/mode/level21and22',
-        '22': 'ace/mode/level21and22',
+        '9': 'ace/mode/level9and10',
+        '10': 'ace/mode/level9and10',
+        '18': 'ace/mode/level18and19',
+        '19': 'ace/mode/level18and19',
       };
 
       if (window.State.level) {
@@ -451,6 +449,10 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(_mod) {
     console.log('Program executed');
+    // Check if the program was correct but the output window is empty: Return a warning
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+    }
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -493,6 +495,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
+    $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;

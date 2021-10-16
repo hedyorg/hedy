@@ -1,6 +1,6 @@
-// Level 16 adds comparison
+// Level 15 add comments
 
-condition: (equality_check|in_list_check|smaller|bigger)
+command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item| comment | assign
 
-smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
-bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
+//new for level 15
+comment: _HASH (textwithspaces | _COMMA)*

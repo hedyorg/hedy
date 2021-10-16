@@ -46,15 +46,15 @@ const LEVELS = [
   {
     name: 'level1',
     rules: pipe(baseRules(),
-      rule_print('gobble'),
+      rule_printSpace('gobble'),
       rule_turtle(),
       recognize('start', {
-        regex: 'echo ',
+        regex: keywordWithSpace('echo'),
         token: 'keyword',
         next: 'gobble',
       }),
       recognize('start', {
-        regex: 'ask ',
+        regex: keywordWithSpace('ask'),
         token: 'keyword',
         next: 'gobble',
       }),
@@ -65,7 +65,7 @@ const LEVELS = [
     name: 'level2',
     rules: pipe(baseRules(),
 
-      rule_print('expression_eol'),
+      rule_printSpace('expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
 
@@ -78,7 +78,7 @@ const LEVELS = [
     name: 'level3',
     rules: pipe(baseRules(),
       rule_turtle(),
-      rule_print('expression_eol'),
+      rule_printSpace('expression_eol'),
       rule_isAsk(),
       rule_is(),
     ),
@@ -87,7 +87,7 @@ const LEVELS = [
     // Adds if/else
     name: 'level4',
     rules: pipe(baseRules(),
-      rule_print(),
+      rule_printSpace(),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -98,7 +98,7 @@ const LEVELS = [
     // Adds repeat
     name: 'level5',
     rules: pipe(baseRules(),
-      rule_print(),
+      rule_printSpace(),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -110,7 +110,7 @@ const LEVELS = [
     // Adds arithmetic
     name: 'level6',
     rules: pipe(baseRules(),
-      rule_print(),
+      rule_printSpace(),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -123,7 +123,7 @@ const LEVELS = [
     // Adds indented blocks -- no changes to highlighter necessary
     name: 'level7',
     rules: pipe(baseRules(),
-      rule_print(),
+      rule_printSpace(),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -134,22 +134,36 @@ const LEVELS = [
   },
   {
     // Replaces 'repeat' with 'for'
-    name: 'level8and9',
+    name: 'level8',
     rules: pipe(baseRules(),
-      rule_print(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_for()
+    ),
+  },
+  {
+    // Replaces 'repeat' with 'for'
+    name: 'level9and10',
+    rules: pipe(baseRules(),
+      rule_printSpace(),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRange(),
+      rule_for()
     ),
   },
   {
     // Nesting of 'for' loops (no changes necessary)
-    name: 'level10',
+    name: 'level11',
     rules: pipe(baseRules(),
-      rule_print(),
+      rule_printSpace(),
       rule_isAsk(),
       rule_is(),
       rule_ifElse(),
@@ -160,7 +174,7 @@ const LEVELS = [
   },
   {
     // Adding fncall parens
-    name: 'level11',
+    name: 'level12',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -176,18 +190,6 @@ const LEVELS = [
 // ----------------------------------------------------------------
   {
     name: 'level11',
-    rules: pipe(baseRules(),
-      rule_printParen(),
-      rule_isInputParen(),
-      rule_is(),
-      rule_ifElse(),
-      rule_expressions(),
-      rule_arithmetic(),
-      rule_forRangeParen(),
-    ),
-  },
-  {
-    name: 'level12',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -247,7 +249,7 @@ const LEVELS = [
     ),
   },
   {
-    name: 'level17and18',
+    name: 'level17',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -259,7 +261,7 @@ const LEVELS = [
     ),
   },
   {
-    name: 'level19',
+    name: 'level18and19',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -296,6 +298,18 @@ const LEVELS = [
   },
   {
     name: 'level22',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level23',
     rules: pipe(baseRules(),
       rule_printParen(),
       rule_isInputParen(),
@@ -390,9 +404,9 @@ function pipe(val: any, ...fns: Array<(x: any) => any>) {
 /**
  * Add a 'print' rule, going to the indicated 'next' state (start if omitted)
  */
-function rule_print(next?: string) {
+function rule_printSpace(next?: string) {
   return recognize('start', {
-    regex: 'print',
+    regex: keywordWithSpace('print'),
     token: 'keyword',
     next: next ?? 'start',
   });
@@ -488,16 +502,16 @@ function rule_expressions() {
 function rule_ifElse() {
   return comp(
     recognize('start', {
-      regex: completeKeyword('if'),
+      regex: keywordWithSpace('if'),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: completeKeyword('else'),
+      regex: '\\b' + 'else',
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: completeKeyword('is'),
+      regex: keywordWithSpace('is'),
       token: 'keyword',
       next: 'start',
     }),
@@ -531,6 +545,13 @@ function rule_repeat() {
   return recognize('start', {
     regex: '(repeat)( \\w+ )(times)',
     token: ['keyword', 'text', 'keyword'],
+  });
+}
+
+function rule_for(){
+  return recognize('start', {
+    regex: '(for )(\\w+)( in )(\\w+)',
+    token: ['keyword', 'text', 'keyword', 'text'],
   });
 }
 
@@ -603,7 +624,9 @@ if ((window as any).define) {
  *
  * Use this to only recognize a word if it's a complete word by itself (and
  * not accidentally a part of a larger word).
+ *
+ * The keyword must be followed by space.
  */
-function completeKeyword(keyword: string) {
-  return '\\b' + keyword + '\\b';
+function keywordWithSpace(keyword: string) {
+  return '\\b' + keyword + ' ';
 }
