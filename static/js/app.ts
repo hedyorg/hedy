@@ -298,6 +298,21 @@ export function saveit(level: number | [number, string], lang: string, name: str
   }
 }
 
+/**
+ * The 'saveit' function, as an async function
+ */
+export function saveitP(level: number | [number, string], lang: string, name: string, code: string) {
+  return new Promise<any>((ok, ko) => {
+    saveit(level, lang, name, code, (err, response) => {
+      if (err) {
+        ko(err);
+      } else {
+        ok(response);
+      }
+    });
+  });
+}
+
 function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }

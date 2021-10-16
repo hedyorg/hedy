@@ -1,8 +1,8 @@
 import { modal } from './modal';
 import { join_class } from './teachers';
-import { saveit } from './app';
+import { saveitP } from './app';
 
-var countries: Record<string, string> = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Algeria','AS':'American Samoa','AD':'Andorra','AO':'Angola','AI':'Anguilla','AQ':'Antarctica','AG':'Antigua and Barbuda','AR':'Argentina','AM':'Armenia','AW':'Aruba','AU':'Australia','AT':'Austria','AZ':'Azerbaijan','BS':'Bahamas','BH':'Bahrain','BD':'Bangladesh','BB':'Barbados','BY':'Belarus','BE':'Belgium','BZ':'Belize','BJ':'Benin','BM':'Bermuda','BT':'Bhutan','BO':'Bolivia, Plurinational State of','BQ':'Bonaire, Sint Eustatius and Saba','BA':'Bosnia and Herzegovina','BW':'Botswana','BV':'Bouvet Island','BR':'Brazil','IO':'British Indian Ocean Territory','BN':'Brunei Darussalam','BG':'Bulgaria','BF':'Burkina Faso','BI':'Burundi','KH':'Cambodia','CM':'Cameroon','CA':'Canada','CV':'Cape Verde','KY':'Cayman Islands','CF':'Central African Republic','TD':'Chad','CL':'Chile','CN':'China','CX':'Christmas Island','CC':'Cocos (Keeling) Islands','CO':'Colombia','KM':'Comoros','CG':'Congo','CD':'Congo, the Democratic Republic of the','CK':'Cook Islands','CR':'Costa Rica','CI':'Côte d\'Ivoire','HR':'Croatia','CU':'Cuba','CW':'Curaçao','CY':'Cyprus','CZ':'Czech Republic','DK':'Denmark','DJ':'Djibouti','DM':'Dominica','DO':'Dominican Republic','EC':'Ecuador','EG':'Egypt','SV':'El Salvador','GQ':'Equatorial Guinea','ER':'Eritrea','EE':'Estonia','ET':'Ethiopia','FK':'Falkland Islands (Malvinas)','FO':'Faroe Islands','FJ':'Fiji','FI':'Finland','FR':'France','GF':'French Guiana','PF':'French Polynesia','TF':'French Southern Territories','GA':'Gabon','GM':'Gambia','GE':'Georgia','DE':'Germany','GH':'Ghana','GI':'Gibraltar','GR':'Greece','GL':'Greenland','GD':'Grenada','GP':'Guadeloupe','GU':'Guam','GT':'Guatemala','GG':'Guernsey','GN':'Guinea','GW':'Guinea-Bissau','GY':'Guyana','HT':'Haiti','HM':'Heard Island and McDonald Islands','VA':'Holy See (Vatican City State)','HN':'Honduras','HK':'Hong Kong','HU':'Hungary','IS':'Iceland','IN':'India','ID':'Indonesia','IR':'Iran, Islamic Republic of','IQ':'Iraq','IE':'Ireland','IM':'Isle of Man','IL':'Israel','IT':'Italy','JM':'Jamaica','JP':'Japan','JE':'Jersey','JO':'Jordan','KZ':'Kazakhstan','KE':'Kenya','KI':'Kiribati','KP':'Korea, Democratic People\'s Republic of','KR':'Korea, Republic of','KW':'Kuwait','KG':'Kyrgyzstan','LA':'Lao People\'s Democratic Republic','LV':'Latvia','LB':'Lebanon','LS':'Lesotho','LR':'Liberia','LY':'Libya','LI':'Liechtenstein','LT':'Lithuania','LU':'Luxembourg','MO':'Macao','MK':'Macedonia, the Former Yugoslav Republic of','MG':'Madagascar','MW':'Malawi','MY':'Malaysia','MV':'Maldives','ML':'Mali','MT':'Malta','MH':'Marshall Islands','MQ':'Martinique','MR':'Mauritania','MU':'Mauritius','YT':'Mayotte','MX':'Mexico','FM':'Micronesia, Federated States of','MD':'Moldova, Republic of','MC':'Monaco','MN':'Mongolia','ME':'Montenegro','MS':'Montserrat','MA':'Morocco','MZ':'Mozambique','MM':'Myanmar','NA':'Namibia','NR':'Nauru','NP':'Nepal','NL':'Netherlands','NC':'New Caledonia','NZ':'New Zealand','NI':'Nicaragua','NE':'Niger','NG':'Nigeria','NU':'Niue','NF':'Norfolk Island','MP':'Northern Mariana Islands','NO':'Norway','OM':'Oman','PK':'Pakistan','PW':'Palau','PS':'Palestine, State of','PA':'Panama','PG':'Papua New Guinea','PY':'Paraguay','PE':'Peru','PH':'Philippines','PN':'Pitcairn','PL':'Poland','PT':'Portugal','PR':'Puerto Rico','QA':'Qatar','RE':'Réunion','RO':'Romania','RU':'Russian Federation','RW':'Rwanda','BL':'Saint Barthélemy','SH':'Saint Helena, Ascension and Tristan da Cunha','KN':'Saint Kitts and Nevis','LC':'Saint Lucia','MF':'Saint Martin (French part)','PM':'Saint Pierre and Miquelon','VC':'Saint Vincent and the Grenadines','WS':'Samoa','SM':'San Marino','ST':'Sao Tome and Principe','SA':'Saudi Arabia','SN':'Senegal','RS':'Serbia','SC':'Seychelles','SL':'Sierra Leone','SG':'Singapore','SX':'Sint Maarten (Dutch part)','SK':'Slovakia','SI':'Slovenia','SB':'Solomon Islands','SO':'Somalia','ZA':'South Africa','GS':'South Georgia and the South Sandwich Islands','SS':'South Sudan','ES':'Spain','LK':'Sri Lanka','SD':'Sudan','SR':'Suriname','SJ':'Svalbard and Jan Mayen','SZ':'Swaziland','SE':'Sweden','CH':'Switzerland','SY':'Syrian Arab Republic','TW':'Taiwan, Province of China','TJ':'Tajikistan','TZ':'Tanzania, United Republic of','TH':'Thailand','TL':'Timor-Leste','TG':'Togo','TK':'Tokelau','TO':'Tonga','TT':'Trinidad and Tobago','TN':'Tunisia','TR':'Turkey','TM':'Turkmenistan','TC':'Turks and Caicos Islands','TV':'Tuvalu','UG':'Uganda','UA':'Ukraine','AE':'United Arab Emirates','GB':'United Kingdom','US':'United States','UM':'United States Minor Outlying Islands','UY':'Uruguay','UZ':'Uzbekistan','VU':'Vanuatu','VE':'Venezuela, Bolivarian Republic of','VN':'Viet Nam','VG':'Virgin Islands, British','VI':'Virgin Islands, U.S.','WF':'Wallis and Futuna','EH':'Western Sahara','YE':'Yemen','ZM':'Zambia','ZW':'Zimbabwe'};
+const countries: Record<string, string> = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Algeria','AS':'American Samoa','AD':'Andorra','AO':'Angola','AI':'Anguilla','AQ':'Antarctica','AG':'Antigua and Barbuda','AR':'Argentina','AM':'Armenia','AW':'Aruba','AU':'Australia','AT':'Austria','AZ':'Azerbaijan','BS':'Bahamas','BH':'Bahrain','BD':'Bangladesh','BB':'Barbados','BY':'Belarus','BE':'Belgium','BZ':'Belize','BJ':'Benin','BM':'Bermuda','BT':'Bhutan','BO':'Bolivia, Plurinational State of','BQ':'Bonaire, Sint Eustatius and Saba','BA':'Bosnia and Herzegovina','BW':'Botswana','BV':'Bouvet Island','BR':'Brazil','IO':'British Indian Ocean Territory','BN':'Brunei Darussalam','BG':'Bulgaria','BF':'Burkina Faso','BI':'Burundi','KH':'Cambodia','CM':'Cameroon','CA':'Canada','CV':'Cape Verde','KY':'Cayman Islands','CF':'Central African Republic','TD':'Chad','CL':'Chile','CN':'China','CX':'Christmas Island','CC':'Cocos (Keeling) Islands','CO':'Colombia','KM':'Comoros','CG':'Congo','CD':'Congo, the Democratic Republic of the','CK':'Cook Islands','CR':'Costa Rica','CI':'Côte d\'Ivoire','HR':'Croatia','CU':'Cuba','CW':'Curaçao','CY':'Cyprus','CZ':'Czech Republic','DK':'Denmark','DJ':'Djibouti','DM':'Dominica','DO':'Dominican Republic','EC':'Ecuador','EG':'Egypt','SV':'El Salvador','GQ':'Equatorial Guinea','ER':'Eritrea','EE':'Estonia','ET':'Ethiopia','FK':'Falkland Islands (Malvinas)','FO':'Faroe Islands','FJ':'Fiji','FI':'Finland','FR':'France','GF':'French Guiana','PF':'French Polynesia','TF':'French Southern Territories','GA':'Gabon','GM':'Gambia','GE':'Georgia','DE':'Germany','GH':'Ghana','GI':'Gibraltar','GR':'Greece','GL':'Greenland','GD':'Grenada','GP':'Guadeloupe','GU':'Guam','GT':'Guatemala','GG':'Guernsey','GN':'Guinea','GW':'Guinea-Bissau','GY':'Guyana','HT':'Haiti','HM':'Heard Island and McDonald Islands','VA':'Holy See (Vatican City State)','HN':'Honduras','HK':'Hong Kong','HU':'Hungary','IS':'Iceland','IN':'India','ID':'Indonesia','IR':'Iran, Islamic Republic of','IQ':'Iraq','IE':'Ireland','IM':'Isle of Man','IL':'Israel','IT':'Italy','JM':'Jamaica','JP':'Japan','JE':'Jersey','JO':'Jordan','KZ':'Kazakhstan','KE':'Kenya','KI':'Kiribati','KP':'Korea, Democratic People\'s Republic of','KR':'Korea, Republic of','KW':'Kuwait','KG':'Kyrgyzstan','LA':'Lao People\'s Democratic Republic','LV':'Latvia','LB':'Lebanon','LS':'Lesotho','LR':'Liberia','LY':'Libya','LI':'Liechtenstein','LT':'Lithuania','LU':'Luxembourg','MO':'Macao','MK':'Macedonia, the Former Yugoslav Republic of','MG':'Madagascar','MW':'Malawi','MY':'Malaysia','MV':'Maldives','ML':'Mali','MT':'Malta','MH':'Marshall Islands','MQ':'Martinique','MR':'Mauritania','MU':'Mauritius','YT':'Mayotte','MX':'Mexico','FM':'Micronesia, Federated States of','MD':'Moldova, Republic of','MC':'Monaco','MN':'Mongolia','ME':'Montenegro','MS':'Montserrat','MA':'Morocco','MZ':'Mozambique','MM':'Myanmar','NA':'Namibia','NR':'Nauru','NP':'Nepal','NL':'Netherlands','NC':'New Caledonia','NZ':'New Zealand','NI':'Nicaragua','NE':'Niger','NG':'Nigeria','NU':'Niue','NF':'Norfolk Island','MP':'Northern Mariana Islands','NO':'Norway','OM':'Oman','PK':'Pakistan','PW':'Palau','PS':'Palestine, State of','PA':'Panama','PG':'Papua New Guinea','PY':'Paraguay','PE':'Peru','PH':'Philippines','PN':'Pitcairn','PL':'Poland','PT':'Portugal','PR':'Puerto Rico','QA':'Qatar','RE':'Réunion','RO':'Romania','RU':'Russian Federation','RW':'Rwanda','BL':'Saint Barthélemy','SH':'Saint Helena, Ascension and Tristan da Cunha','KN':'Saint Kitts and Nevis','LC':'Saint Lucia','MF':'Saint Martin (French part)','PM':'Saint Pierre and Miquelon','VC':'Saint Vincent and the Grenadines','WS':'Samoa','SM':'San Marino','ST':'Sao Tome and Principe','SA':'Saudi Arabia','SN':'Senegal','RS':'Serbia','SC':'Seychelles','SL':'Sierra Leone','SG':'Singapore','SX':'Sint Maarten (Dutch part)','SK':'Slovakia','SI':'Slovenia','SB':'Solomon Islands','SO':'Somalia','ZA':'South Africa','GS':'South Georgia and the South Sandwich Islands','SS':'South Sudan','ES':'Spain','LK':'Sri Lanka','SD':'Sudan','SR':'Suriname','SJ':'Svalbard and Jan Mayen','SZ':'Swaziland','SE':'Sweden','CH':'Switzerland','SY':'Syrian Arab Republic','TW':'Taiwan, Province of China','TJ':'Tajikistan','TZ':'Tanzania, United Republic of','TH':'Thailand','TL':'Timor-Leste','TG':'Togo','TK':'Tokelau','TO':'Tonga','TT':'Trinidad and Tobago','TN':'Tunisia','TR':'Turkey','TM':'Turkmenistan','TC':'Turks and Caicos Islands','TV':'Tuvalu','UG':'Uganda','UA':'Ukraine','AE':'United Arab Emirates','GB':'United Kingdom','US':'United States','UM':'United States Minor Outlying Islands','UY':'Uruguay','UZ':'Uzbekistan','VU':'Vanuatu','VE':'Venezuela, Bolivarian Republic of','VN':'Viet Nam','VG':'Virgin Islands, British','VI':'Virgin Islands, U.S.','WF':'Wallis and Futuna','EH':'Western Sahara','YE':'Yemen','ZM':'Zambia','ZW':'Zimbabwe'};
 
 export interface Profile {
   session_expires_at: number;
@@ -30,6 +30,7 @@ interface UserForm {
   subscribe?: string;
   mail_repeat?: string;
   password_repeat?: string;
+  old_password?: string;
 }
 
 export const auth = {
@@ -72,7 +73,7 @@ export const auth = {
     $ (id || '#success').css ('display', 'block');
   },
   submit: function (op: string) {
-    var values: UserForm = {};
+    const values: UserForm = {};
     $ ('form.auth *').map (function (_k, el) {
       if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
     });
@@ -88,11 +89,12 @@ export const auth = {
       if (values.email    !== values.mail_repeat)    return auth.error (auth.texts['repeat_match_email'],    'mail_repeat');
       if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match_password'], 'password_repeat');
       if (typeof values.birth_year === 'string') {
-        const birth_year = parseInt (values.birth_year);
-        if (! birth_year || birth_year < 1900 || birth_year > new Date ().getFullYear ()) return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
+        if (!validBirthYearString(values.birth_year)) {
+           return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
+        }
       }
 
-      var payload: User = {
+      const payload: User = {
         username: values.username,
         email: values.email,
         password: values.password,
@@ -112,30 +114,9 @@ export const auth = {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
 
-        var savedProgram = localStorage.getItem ('hedy-first-save');
-        var joinClass    = localStorage.getItem ('hedy-join');
-        if (! savedProgram) {
-           if (! joinClass) return auth.redirect ('programs');
-           joinClass = JSON.parse (joinClass);
-           localStorage.removeItem ('hedy-join');
-           return join_class (joinClass.link, joinClass.name);
-        }
-
-        savedProgram = JSON.parse (savedProgram);
-        saveit(savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
-           localStorage.removeItem ('hedy-first-save');
-           if (joinClass) {
-             joinClass = JSON.parse (joinClass);
-             localStorage.removeItem ('hedy-join');
-             join_class (joinClass.link, joinClass.name, true);
-           }
-           var redirect = localStorage.getItem ('hedy-save-redirect');
-           if (redirect) localStorage.removeItem ('hedy-save-redirect');
-           auth.redirect (redirect || 'programs');
-        });
-
+        afterLogin();
       }).fail (function (response) {
-        var error = response.responseText || '';
+        const error = response.responseText || '';
         if (error.match ('email'))         auth.error (auth.texts['exists_email']);
         else if (error.match ('username')) auth.error (auth.texts['exists_username']);
         else                               auth.error (auth.texts['ajax_error']);
@@ -152,63 +133,41 @@ export const auth = {
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
 
-        var savedProgram = localStorage.getItem ('hedy-first-save');
-        var joinClass    = localStorage.getItem ('hedy-join');
-        if (! savedProgram) {
-           if (! joinClass) return auth.redirect ('programs');
-           joinClass = JSON.parse (joinClass);
-           localStorage.removeItem ('hedy-join');
-           return join_class (joinClass.link, joinClass.name);
-        }
-
-        savedProgram = JSON.parse (savedProgram);
-        saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
-           localStorage.removeItem ('hedy-first-save');
-           if (joinClass) {
-             joinClass = JSON.parse (joinClass);
-             localStorage.removeItem ('hedy-join');
-             join_class (joinClass.link, joinClass.name, true);
-           }
-           var redirect = localStorage.getItem ('hedy-save-redirect');
-           if (redirect) localStorage.removeItem ('hedy-save-redirect');
-           auth.redirect (redirect || 'programs');
-        });
-
+        afterLogin();
       }).fail (function (response) {
         if (response.status === 403) {
            auth.error (auth.texts['invalid_username_password'] + ' ' + auth.texts['no_account'] + ' &nbsp;<button class="green-btn" onclick="auth.redirect (\'signup\')">' + auth.texts['create_account'] + '</button>');
            $ ('#create-account').hide ();
-           localStorage.setItem ('hedy-login-username', values.username);
+           localStorage.setItem ('hedy-login-username', values.username ?? '');
         }
-        else                         auth.error (auth.texts['ajax_error']);
+        else auth.error (auth.texts['ajax_error']);
       });
     }
 
     if (op === 'profile') {
-      if (! values.email.match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
-      if (values.birth_year) {
-        values.birth_year = parseInt (values.birth_year);
-        if (! values.birth_year || values.birth_year < 1900 || values.birth_year > new Date ().getFullYear ()) return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
+      if (! (values.email ?? '').match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
+
+      if (typeof values.birth_year === 'string') {
+        if (!validBirthYearString(values.birth_year)) {
+          return auth.error (auth.texts['valid_year'] + new Date ().getFullYear (), 'birth_year');
+        }
       }
 
-      var payload = {};
-      ['email', 'birth_year', 'country', 'gender'].map (function (k) {
-        if (! values [k]) return;
-        if (k === 'birth_year') payload [k] = parseInt (values [k]);
-        payload [k] = values [k];
-      });
-
-      payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
-      var languages = [];
-      // We ignore the languages checkboxes if the section is hidden
-      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
-      // When updating the profile, we can remove all languages, so in this case we send the empty array. This doesn't happen on signup.
-      payload.experience_languages = languages;
+      const payload: User = {
+        email: values['email'],
+        birth_year: parseInt(values['birth_year']!),
+        country: values['country'],
+        gender: values['gender'],
+        prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
+        experience_languages: $('#languages').is(':visible')
+          ? $('input[name=languages]').filter(':checked').map(() => $(this).val() as string).get()
+          : undefined,
+      };
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts['profile_updated']);
-      }).fail (function (response) {
+      }).fail (function (_response) {
         auth.error (auth.texts['ajax_error']);
       });
     }
@@ -218,7 +177,7 @@ export const auth = {
       if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password', '#error-password');
       if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match'], 'password_repeat', '#error-password');
 
-      var payload = {old_password: values.old_password, new_password: values.password};
+      const payload = {old_password: values.old_password, new_password: values.password};
 
       auth.clear_error ('#error-password');
       $.ajax ({type: 'POST', url: '/auth/change_password', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -235,7 +194,7 @@ export const auth = {
     if (op === 'recover') {
       if (! values.username) return auth.error (auth.texts['please_username'], 'username');
 
-      var payload = {username: values.username};
+      const payload = {username: values.username};
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/recover', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -252,7 +211,7 @@ export const auth = {
       if (values.password.length < 6) return auth.error(auth.texts['password_six'], 'password');
       if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match'], 'password_repeat');
 
-      var payload = {username: auth.reset?.['username'], token: auth.reset?.['token'], password: values.password};
+      const payload = {username: auth.reset?.['username'], token: auth.reset?.['token'], password: values.password};
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/reset', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -295,7 +254,7 @@ export const auth = {
 // *** LOADERS ***
 
 if ($ ('#country')) {
-  var html = '<option value="">Select</option>';
+  let html = '<option value="">Select</option>';
   Object.keys (countries).map (function (code) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });
@@ -334,8 +293,8 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
 });
 
 if (window.location.pathname === '/reset') {
-  var query = window.location.search.slice (1).split ('&');
-  var params: Record<string, string> = {};
+  const query = window.location.search.slice (1).split ('&');
+  const params: Record<string, string> = {};
   query.map (function (item) {
     const split = item.split ('=');
     params [split [0]] = decodeURIComponent (split [1]);
@@ -346,7 +305,7 @@ if (window.location.pathname === '/reset') {
 }
 
 if (window.location.pathname === '/signup') {
-  var login_username = localStorage.getItem ('hedy-login-username');
+  const login_username = localStorage.getItem ('hedy-login-username');
   if (login_username) {
     localStorage.removeItem ('hedy-login-username');
     if (login_username.match ('@')) $ ('#email').val (login_username);
@@ -361,4 +320,42 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
 
 interface Class {
   name: string;
+}
+
+/**
+ * After login:
+ *
+ * - Check if there's a saved program in localstorage. If so, save it.
+ * - Check if we were supposed to be joining a class. If so, join it.
+ * - Otherwise redirect to "my programs".
+ */
+async function afterLogin() {
+  const savedProgramString = localStorage.getItem('hedy-first-save');
+  const savedProgram = savedProgramString ? JSON.parse(savedProgramString) : undefined;
+
+  if (savedProgram) {
+    await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
+    localStorage.removeItem('hedy-first-save');
+
+    const redirect = localStorage.getItem('hedy-save-redirect');
+    if (redirect) {
+      localStorage.removeItem('hedy-save-redirect');
+      auth.redirect(redirect);
+    }
+  }
+
+  const joinClassString = localStorage.getItem('hedy-join');
+  const joinClass = joinClassString ? JSON.parse(joinClassString) : undefined;
+  if (joinClass) {
+    localStorage.removeItem('hedy-join');
+    return join_class(joinClass.link, joinClass.name);
+  }
+
+  auth.redirect('programs');
+}
+
+function validBirthYearString(year: string) {
+  const birth_year = parseInt (year);
+  if (! birth_year || birth_year < 1900 || birth_year > new Date ().getFullYear ()) return false;
+  return true;
 }

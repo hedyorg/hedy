@@ -20,5 +20,5 @@ npx esbuild static/js/index.ts \
     --sourcemap \
     --minify \
     --target=es2017 \
-    --global-name=hedyBrowser \
-    --outfile=static/js/appbundle.js
+    --global-name=hedyApp \
+    --outfile=static/js/appbundle.js "$@"

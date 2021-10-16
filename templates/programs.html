@@ -17,12 +17,12 @@
       {{ texts.level }} {{ program.level }} - {{ program.date }}
       <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}">{{ texts.open }}</a>
 
-      <a href="#" onclick="window.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</a>
+      <a href="#" onclick="hedyApp.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</a>
       {% if program.public %}
-        <a href="#" onclick="window.modal.confirm ('{{ texts.unshare_confirm }}', function () {window.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</a>
-        <a href="#" onclick="window.copy_to_clipboard(viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</a>
+        <a href="#" onclick="hedyApp.modal.confirm ('{{ texts.unshare_confirm }}', function () {window.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</a>
+        <a href="#" onclick="hedyApp.copy_to_clipboard(viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</a>
       {% else %}
-        <a href="#" onclick="window.modal.confirm ('{{ texts.share_confirm }}', function () {window.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</a>
+        <a href="#" onclick="hedyApp.modal.confirm ('{{ texts.share_confirm }}', function () {window.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</a>
       {% endif %}
       <pre>{{program.code | truncate (50) }}</pre>
     </li>

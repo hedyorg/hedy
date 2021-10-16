@@ -33,6 +33,9 @@ bundle by running:
 
 ```
 $ build-tools/heroku/generate-typescript
+
+# Automatically regenerate the bundle every time you save
+$ build-tools/heroku/generate-typescript --watch
 ```
 
 Before reloading your browser.

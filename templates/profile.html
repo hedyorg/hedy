@@ -13,7 +13,7 @@
   {% if is_teacher %}
     <p class="p-8 bg-green-500 rounded-b font-bold text-white">The list of your classes has been moved to <a class="text-blue-700" href="{{localize_link ('/for-teachers')}}">For Teachers section</a></p>
   {% endif %}
-  <h2 class="pl-8">{{auth.profile}} &nbsp;&nbsp;<button class="green-btn text-xl" onclick="window.auth.logout ()">{{auth.logout}}</button></h2>
+  <h2 class="pl-8">{{auth.profile}} &nbsp;&nbsp;<button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button></h2>
   <form class="pl-8 auth" id="profile" onsubmit="event.preventDefault (); window.auth.submit ('profile')">
     <br><br>
     <label>{{auth.username}}</label>
@@ -76,7 +76,7 @@
   </form>
   <br><br>
 
-  <button class="red-btn ml-8" onclick="window.auth.destroy ()">{{auth.destroy}}</button>
+  <button class="red-btn ml-8" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
   <br><br>
 </div>
 {% endblock %}
