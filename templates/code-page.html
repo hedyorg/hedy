@@ -1,7 +1,7 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
 <div class='flex mt-1 justify-center'>
-  <button class="green-btn absolute " id="toggle-button" onclick="toggleCommands();">&#8592;</button>
+  <button class="green-btn absolute ml-10" id="toggle-button" onclick="toggleCommands();">&#8592; Verbergen</button>
 </div>
 <div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
   <div class="p-3 shadow-md">
@@ -65,13 +65,22 @@
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script>
+        var showed = true;
+        var content = null;
         function toggleCommands() {
-            if ($('#commands-window').is(":hidden")) {
-                $('#toggle-button').html('&#8592;');
-                $('#commands-window').show();
-            } else {
+            if (showed) {
+                showed = false;
                 $('#toggle-button').html('&#8594;');
-                $('#commands-window').hide();
+                $('#toggle-button').removeClass('ml-10');
+                content = $('#commands-window').html();
+                $('#commands-window').html("");
+                $('#commands-window').width(30);
+            } else {
+                showed = true;
+                $('#toggle-button').html('&#8592; Verbergen');
+                $('#toggle-button').addClass('ml-10');
+                $('#commands-window').html(content);
+                $('#commands-window').width(250);
             }
         }
     </script>
