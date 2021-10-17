@@ -1,7 +1,7 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div class='flex items-center justify-center'>
-  <button class="green-btn absolute " id="toggle-button" onclick="toggleCommands();">Commando's verbergen</button>
+<div class='flex mt-1 justify-center'>
+  <button class="green-btn absolute " id="toggle-button" onclick="toggleCommands();">&#8592;</button>
 </div>
 <div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
   <div class="p-3 shadow-md">
@@ -67,10 +67,10 @@
     <script>
         function toggleCommands() {
             if ($('#commands-window').is(":hidden")) {
-                $('#toggle-button').html("Commando's verbergen");
+                $('#toggle-button').html('&#8592;');
                 $('#commands-window').show();
             } else {
-                $('#toggle-button').html("Commando's weergeven");
+                $('#toggle-button').html('&#8594;');
                 $('#commands-window').hide();
             }
         }
