@@ -1,6 +1,9 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div style="width: 250px;" class="right-hand-shadow flex-none">
+<div class='flex items-center justify-center'>
+  <button class="green-btn absolute " id="toggle-button" onclick="toggleCommands();">Commando's verbergen</button>
+</div>
+<div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
   <div class="p-3 shadow-md">
     <div></div>
     <h2>{{ commands_title }}</h2>
@@ -60,4 +63,16 @@
   <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script>
+        function toggleCommands() {
+            if ($('#commands-window').is(":hidden")) {
+                $('#toggle-button').html("Commando's verbergen");
+                $('#commands-window').show();
+            } else {
+                $('#toggle-button').html("Commando's weergeven");
+                $('#commands-window').hide();
+            }
+        }
+    </script>
 {% endblock %}
