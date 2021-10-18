@@ -65,21 +65,22 @@
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script>
-        var showed = true;
         var content = null;
         var button_text = $('#toggle-button').html();
         function toggleCommands() {
-            if (showed) {
-                showed = false;
+            if ($('#commands-window').width() == 250) {
                 $('#toggle-button').html('&#8594;');
                 content = $('#commands-window').html();
                 $('#commands-window').html("");
-                $('#commands-window').width(55);
+                $( "#commands-window" ).animate({
+               width: "55px",
+                }, 500 );
             } else {
-                showed = true;
                 $('#toggle-button').html(button_text);
+                $( "#commands-window" ).animate({
+               width: "250px",
+                }, 500 );
                 $('#commands-window').html(content);
-                $('#commands-window').width(250);
             }
         }
     </script>
