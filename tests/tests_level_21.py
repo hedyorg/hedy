@@ -133,3 +133,20 @@ class TestsLevel21(HedyTester):
           extra_check_function=self.is_not_turtle(),
           test_name=self.name()
         )
+
+    # negative tests
+    def test_var_undefined_error_message(self):
+      code = textwrap.dedent("""\
+        naam = Hedy
+        print('ik heet ' name)""")
+
+      self.multi_level_tester(
+        code=code,
+        exception=hedy.UndefinedVarException,
+        max_level=self.max_Hedy_level,
+        test_name=self.name()
+      )
+
+      # deze extra check functie kan nu niet mee omdat die altijd op result werkt
+      # evt toch splitsen in 2 (pos en neg?)
+      # self.assertEqual('name', context.exception.arguments['name'])
