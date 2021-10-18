@@ -82,7 +82,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
     ),
   },
@@ -93,7 +93,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
       rule_repeat(),
     ),
@@ -105,7 +105,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
       rule_repeat(),
       rule_arithmetic(),
@@ -118,7 +118,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_repeat(),
       rule_arithmetic(),
@@ -144,7 +144,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRange(),
@@ -158,7 +158,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRange(),
@@ -171,7 +171,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -186,7 +186,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -198,7 +198,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -210,7 +210,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -222,7 +222,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -234,7 +234,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -246,7 +246,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -258,7 +258,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -270,7 +270,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -282,7 +282,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -294,7 +294,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -306,7 +306,7 @@ const LEVELS = [
       rule_printParen(),
       rule_isInputParen(),
       rule_is(),
-      rule_ifElseIndent(),
+      rule_ifElse(),
       rule_expressions(),
       rule_arithmetic(),
       rule_forRangeParen(),
@@ -491,7 +491,7 @@ function rule_expressions() {
 /**
  * Add highlighting for if/else, also add a condition
  */
-function rule_ifElse() {
+function rule_ifElseOneLine() {
   return comp(
     recognize('start', {
       regex: keywordWithSpace('if'),
@@ -510,7 +510,7 @@ function rule_ifElse() {
   );
 }
 
-function rule_ifElseIndent() {
+function rule_ifElse() {
   return comp(
     recognize('start', {
       regex: keywordWithSpace('if'),
@@ -518,7 +518,7 @@ function rule_ifElseIndent() {
       next: 'condition',
     }),
     recognize('start', {
-      regex: '\\b' + 'else',
+      regex: '\\b' + 'else' + '\\b',
       token: 'keyword',
     }),
     recognize('condition', {
