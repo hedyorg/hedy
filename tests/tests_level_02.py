@@ -418,7 +418,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(self.run_code(result), "Kat")
 
   #negative tests
-  def test_echo(self):
+  def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\
     ask what is jouw lievelingskleur?
     echo Jouw lievelingskleur is dus...""")
@@ -432,6 +432,18 @@ class TestsLevel2(HedyTester):
       exception=hedy.IncompleteCommandException,
       test_name=self.name()
     )
+  def test_random_from_string(self):
+    code = textwrap.dedent("""\
+      items is aap noot mies
+      print items at random""")
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      exception=hedy.InvalidTypeException,
+      test_name=self.name()
+    )
+
+
 
   # test for 297 (not easy to fix, not giving prio now)
   # def test_print_space_after_excl(self):

@@ -4,6 +4,8 @@ from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
 from lark import Tree, Transformer, visitors
 from os import path
+
+import hedy
 import utils
 from collections import namedtuple
 import hashlib
@@ -18,6 +20,9 @@ TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
+
+# type used in lookup table
+Assignment = namedtuple('Assignment', ['name', 'type'])
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
@@ -51,10 +56,18 @@ characters_that_need_escaping = ["\\", "'"]
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 def hash_needed(name):
+    # this function is now applied on something str sometimes Assignment
+    # no pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
+
+    if not isinstance(name, str):
+        name = name.name
+
     # some elements are not names but processed names, i.e. random.choice(dieren)
-    # they should not be hashed (this won't break because these characters cannot be used in vars
-    if '[' in name or '(' in name:
+    # they should not be hashed
+    if type(name) is Assignment and name.type == 'operation':
         return False
+
+
 
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
@@ -150,6 +163,10 @@ class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
 
+class InvalidTypeException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Invalid Type', **arguments)
+
 class WrongLevelException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Wrong Level', **arguments)
@@ -215,16 +232,16 @@ class AllAssignmentCommands(Transformer):
     # returns a list of variable and list access
     # so these can be excluded when printing
 
-    # relevant nodes (list acces, ask, assign) are transformed into strings
+    # relevant nodes (list acces, ask, assign) are transformed into tuples of their name and type
     # higher in the tree (through default rule), we filter on only string arguments, of lists with string arguments
 
     def filter_ask_assign(self, args):
         ask_assign = []
         for a in args:
             # strings (vars remaining in the tree) are added directly
-            if type(a) is str:
+            if type(a) is Assignment:
                 ask_assign.append(a)
-            # lists are seached further for string members (vars)
+            # lists are searched further for string members (vars)
             elif type(a) is list:
                 sub_a_ask_assign = self.filter_ask_assign(a)
                 for sub_a in sub_a_ask_assign:
@@ -242,33 +259,34 @@ class AllAssignmentCommands(Transformer):
         return args[0]
 
     def ask(self, args):
-        # try is needed cause in level 1 ask has not variable in front
+        # try is needed cause in level 1 ask has no variable in front
         try:
-            return args[0]
+            return Assignment(args[0], 'string')
         except:
             return None
 
     def assign(self, args):
-        return args[0]
+        # todo now all assigns are strings, later (form 5) this should distinguish int and str
+        return Assignment(args[0], 'string')
 
     def assign_list(self, args):
-        return args[0]
+        return Assignment(args[0], 'list')
 
     # list access is accessing a variable, so must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
         listname = args[0]
         if args[1] == 'random':
-            return 'random.choice(' + listname + ')'
+            return Assignment('random.choice(' + listname + ')', 'operation')
         else:
-            return listname + '[' + args[1] + ']'
+            return Assignment(listname + '[' + args[1] + ']', 'operation')
 
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
-        return args[0]
+        return Assignment(args[0], 'operation')
 
     def change_list_item(self, args):
-        return args[0]
+        return Assignment(args[0], 'operation')
 
     def text(self, args):
         # text never contains a variable
@@ -294,15 +312,16 @@ class AllAssignmentCommandsHashed(Transformer):
     # returns a list of variable and list access
     # so these can be excluded when printing
 
+    Assignment = namedtuple('Assignment', ['name', 'type'])
     # this version returns all hashed var names
 
     def filter_ask_assign(self, args):
         ask_assign = []
         for a in args:
             # strings (vars remaining in the tree) are added directly
-            if type(a) is str:
+            if type(a) is Assignment:
                 ask_assign.append(a)
-            # lists are seached further for string members (vars)
+            # lists are searched further for string members (vars)
             elif type(a) is list:
                 sub_a_ask_assign = self.filter_ask_assign(a)
                 for sub_a in sub_a_ask_assign:
@@ -317,36 +336,36 @@ class AllAssignmentCommandsHashed(Transformer):
 
     def input(self, args):
         # return left side of the =
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'string')
 
     def ask(self, args):
-        # try is needed cause in level 1 ask has not variable in front
+        # try is needed cause in level 1 ask has no variable in front
         try:
-            return hash_var(args[0])
+            return Assignment(hash_var(args[0]), 'string')
         except:
             return None
 
     def assign(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'string')
 
     def assign_list(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'list')
 
     # list access is accessing a variable, so must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
         listname = hash_var(args[0])
         if args[1] == 'random':
-            return 'random.choice(' + listname + ')'
+            return Assignment('random.choice(' + listname + ')', 'operation')
         else:
-            return listname + '[' + args[1] + ']'
+            return Assignment(listname + '[' + args[1] + ']', 'operation')
 
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'operation')
 
     def change_list_item(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'operation')
 
     def text(self, args):
         # text never contains a variable
@@ -647,6 +666,15 @@ class ConvertToPython_2(ConvertToPython_1):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
+        # this now grabs the first occurrence, once we have slicing we want to be more precise!
+        arg0_from_lookups = [a for a in self.lookup if a.name == args[0]]
+        arg0_from_lookup = arg0_from_lookups[0]
+        type_args0 = arg0_from_lookup.type
+
+        # we can only apply random to a list
+        if type_args0 != 'list':
+            raise hedy.InvalidTypeException
+
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
