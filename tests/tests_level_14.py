@@ -13,7 +13,7 @@ class TestsLevel14(HedyTester):
         expected = textwrap.dedent("""\
         ja = True
         if ja == True:
-          print(f'ja')""")
+          print(f'{ja}')""")
 
         self.multi_level_tester(
           max_level=20,
@@ -31,7 +31,7 @@ class TestsLevel14(HedyTester):
         expected = textwrap.dedent("""\
         ja = False
         if ja == False:
-          print(f'ja')""")
+          print(f'{ja}')""")
         self.multi_level_tester(
           max_level=20,
           code=code,
@@ -48,7 +48,7 @@ class TestsLevel14(HedyTester):
         expected = textwrap.dedent("""\
         ja = True
         if ja == True:
-          print(f'ja')""")
+          print(f'{ja}')""")
 
         self.multi_level_tester(
           max_level=20,
@@ -66,7 +66,7 @@ class TestsLevel14(HedyTester):
         expected = textwrap.dedent("""\
         ja = False
         if ja == False:
-          print(f'ja')""")
+          print(f'{ja}')""")
 
         self.multi_level_tester(
           max_level=20,

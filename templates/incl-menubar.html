@@ -1,6 +1,5 @@
-<nav class="bg-blue-500 px-8 shadow-sm text-white">
-  <div class="-mb-px flex">
-    <div class="py-1 mr-6 mt-1">
+<nav class="bg-blue-500 px-4 text-white flex flex-row items-center">
+    <div class="py-1 mr-6">
       <a href="{{localize_link ('/')}}">
         <img src="{{static('/images/Hedy-logo.png')}}" style="width: 2.5em;"/>
       </a>
@@ -23,7 +22,7 @@
     {% endif %}
     {% endblock %}
 
-    <div class="dropdown inline-block relative ml-auto py-2 z-50">
+    <div class="dropdown inline-block relative ml-auto py-2 z-10">
       <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
         <span class="mr-1">{{ current_language().sym }}</span>
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
@@ -34,5 +33,4 @@
         {% endfor %}
       </ul>
     </div>
-  </div>
 </nav>
