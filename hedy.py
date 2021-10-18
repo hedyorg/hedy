@@ -589,6 +589,11 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
+# next step is to make all
+# "in self.lookup"
+# into a function called something like is_var and use lookup names for that!!
+
+
 # todo: should be moved into the class
 def lookup_names(lookup):
     return [a.name for a in lookup]
