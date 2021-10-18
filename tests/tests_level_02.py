@@ -442,17 +442,16 @@ class TestsLevel2(HedyTester):
       exception=hedy.InvalidTypeException,
       test_name=self.name()
     )
+  def test_random_undefined_var(self):
+    # todo could be added for higher levels but that is a lot of variations so I am not doing it now :) (FH, oct 2021)
+    code = textwrap.dedent("""\
+    dieren is hond, kat, kangoeroe
+    print dier at random""")
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      exception=hedy.UndefinedVarException,
+      test_name=self.name()
+    )
 
-
-
-  # test for 297 (not easy to fix, not giving prio now)
-  # def test_print_space_after_excl(self):
-  #   code = "print hello world!koekie!"
-  #   result = hedy.transpile(code, self.level)
-  #
-  #   expected = textwrap.dedent("""\
-  #   print('hello'+' '+'world'+'!'+'koekie'+'!')""")
-  #
-  #   self.assertEqual(expected, result.code)
-  #   self.assertEqual(False, result.has_turtle)
 
