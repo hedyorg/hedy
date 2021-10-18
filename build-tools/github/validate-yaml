@@ -15,19 +15,19 @@ npm ci --silent
 # the JSON error outputs of this tool and re-interpreting them with useful
 # error messages.
 cd ../../coursedata/adventures/
-$scriptdir/node_modules/.bin/pajv validate \
+npx pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
 
 cd ../level-defaults/
-$scriptdir/node_modules/.bin/pajv validate \
+npx pajv validate \
     --errors=text \
     -s "levels.schema.json" \
     -d "*.yaml"
 
 cd ../quiz/
-$scriptdir/node_modules/.bin/pajv validate \
+npx pajv validate \
     --errors=text \
     -s "quiz_questions.schema.json" \
     -d "*.yaml"
