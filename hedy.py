@@ -232,7 +232,7 @@ class AllAssignmentCommands(Transformer):
         return ask_assign
 
     def for_loop(self, args):
-        # for loop iterator is a var so should be added to the list of vars
+      # for loop iterator is a var so should be added to the list of vars
       iterator = str(args[0])
       commands = args[1:]
       return [iterator] + self.filter_ask_assign(args)
@@ -577,6 +577,12 @@ def process_variable(name, lookup):
     else:
         return f"'{name}'"
 
+def process_variable_for_fstring(name, lookup):
+    #processes a variable by hashing and escaping when needed
+    if name in lookup:
+        return "{" + hash_var(name) + "}"
+    else:
+        return name
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -680,15 +686,26 @@ class ConvertToPython_3(ConvertToPython_2):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def print(self, args):
+    def check_print_arguments(self, args):
+        # this function checks whether arguments of a print are valid
+        #we can print if all arguments are either quoted OR they are all variables
+
         unquoted_args = [a for a in args if not is_quoted(a)]
         unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
-        #we can print if all arguments are quoted OR they are all variables
+
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            return make_f_string(args, self.lookup)
+            # all good? return for further processing
+            return args
         else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
             first_unquoted_var = unquoted_args[0]
             raise UndefinedVarException(name=first_unquoted_var)
+
+    def print(self, args):
+        args = self.check_print_arguments(args)
+        return make_f_string(args, self.lookup)
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -737,15 +754,18 @@ else:
 class ConvertToPython_5(ConvertToPython_4):
 
     def print(self, args):
+        # we only check non-Tree (= non calculation) arguments
+        self.check_print_arguments([a for a in args if not type(a) is Tree])
+
+
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
             if type(a) is Tree:
                 args_new.append("{" + a.children + "}")
-            elif "'" not in a:
-                args_new.append("{" + a + "}")
             else:
-                args_new.append(a.replace("'", ""))
+                a = a.replace("'", "") #no quotes needed in fstring
+                args_new.append(process_variable_for_fstring(a, self.lookup))
 
         arguments = ''.join(args_new)
         return "print(f'" + arguments + "')"
@@ -857,7 +877,7 @@ class ConvertToPython_7(ConvertToPython_6):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return process_variable(args[0], self.lookup)
+            return args[0]
         else:
         # this is list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
@@ -924,7 +944,10 @@ class ConvertToPython_13(ConvertToPython_12):
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1] + '-1]'
+            list_access_shifted = args[0] + '[' + args[1] + '-1]'
+            # when printing later, we need to know this is a var
+            self.lookup.append(list_access_shifted)
+            return list_access_shifted
 
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
@@ -1008,7 +1031,11 @@ class ConvertToPython_18(ConvertToPython_17):
 class ConvertToPython_19_20(ConvertToPython_18):
     def length(self, args):
         arg0 = args[0]
-        return f"len({arg0})"
+        length_string = f"len({arg0})"
+
+        #when accessing len we need to know it is a var
+        self.lookup.append(length_string)
+        return length_string
 
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:

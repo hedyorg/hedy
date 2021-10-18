@@ -25,7 +25,11 @@ def check_code(filename, level, field_name, code, adventure_name):
         filename_shorter = filename.split("/")[3]
         language = filename_shorter.split(".")[0]
         if not isinstance(E, hedy.CodePlaceholdersPresentException):  # code with blanks is ok!
-            error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.args}'
+            if isinstance(E, hedy.UndefinedVarException):
+                error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.arguments}'
+            else:
+                error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.args}'
+
             print(error)
             return error
     return True
