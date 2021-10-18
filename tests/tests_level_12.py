@@ -6,7 +6,7 @@ class TestsLevel12(HedyTester):
   level = 12
   #level 12 adds round brackets
 
-
+  # print tests
   def test_print_brackets(self):
     code = textwrap.dedent("""\
     leeftijd is input('Hoe oud ben jij?')
@@ -90,12 +90,14 @@ class TestsLevel12(HedyTester):
 
   def test_allow_space_after_else_line(self):
     code = textwrap.dedent("""\
+    a is 1
     if a is 1:
       print(a)
     else:   
       print('nee')""")
 
     expected = textwrap.dedent("""\
+    a = '1'
     if str(a) == str('1'):
       print(f'{a}')
     else:
@@ -110,12 +112,14 @@ class TestsLevel12(HedyTester):
 
   def test_allow_space_before_colon(self):
     code = textwrap.dedent("""\
+    a is 1
     if a is 1  :
       print(a)
     else:   
       print('nee')""")
 
     expected = textwrap.dedent("""\
+    a = '1'
     if str(a) == str('1'):
       print(f'{a}')
     else:
@@ -218,23 +222,7 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
-#programs with issues to see if we catch them properly
-# (so this should fail, for now)
-# at one point we want a real "Indent" error and a better error message
-# for this!
 
-  # def test_level_7_no_indentation(self):
-  #   #test that we get a parse error here
-  #   code = textwrap.dedent("""\
-  #   antwoord is ask Hoeveel is 10 keer tien?
-  #   if antwoord is 100
-  #   print 'goed zo'
-  #   else
-  #   print 'bah slecht'""")
-  #
-  #   with self.assertRaises(Exception) as context:
-  #     result = hedy.transpile(code, 10)
-  #   self.assertEqual(str(context.exception), 'Parse')
 
   def test_multiple_spaces_after_print(self):
     code = "print    ('hallo!')"
@@ -277,3 +265,20 @@ class TestsLevel12(HedyTester):
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
+
+  # negative tests
+  def test_var_undefined_error_message(self):
+    code = textwrap.dedent("""\
+      naam is Hedy
+      print('ik heet ' name)""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.UndefinedVarException,
+      max_level=20,
+      test_name=self.name()
+    )
+
+    # deze extra check functie kan nu niet mee omdat die altijd op result werkt
+    # evt toch splitsen in 2 (pos en neg?)
+    # self.assertEqual('name', context.exception.arguments['name'])
