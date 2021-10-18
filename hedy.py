@@ -589,16 +589,20 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
+# todo: should be moved into the class
+def lookup_names(lookup):
+    return [a.name for a in lookup]
+
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
-    if name in lookup:
+    if name in lookup_names(lookup):
         return hash_var(name)
     else:
         return f"'{name}'"
 
 def process_variable_for_fstring(name, lookup):
     #processes a variable by hashing and escaping when needed
-    if name in lookup:
+    if name in lookup_names(lookup):
         return "{" + hash_var(name) + "}"
     else:
         return name
@@ -626,14 +630,7 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 space = " "
 
-            if argument in self.lookup:
-                #variables are placed in {} in the f string
-                argument_string += "{" + hash_var(argument) + "}"
-                argument_string += space
-            else:
-                #strings are written regularly
-                argument_string += argument
-                argument_string += space
+            argument_string += process_variable_for_fstring(argument, self.lookup) + space
 
             i = i + 1
 
