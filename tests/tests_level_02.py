@@ -26,18 +26,18 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  # issue #745
   def test_print_list(self):
     code = textwrap.dedent("""\
-    plaatsen is een stad, een  dorp, een strand 
-    print test plaatsen""")
+        plaatsen is een stad, een  dorp, een strand
+        print test plaatsen""")
 
-    result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    plaatsen = ['een stad', 'een  dorp', 'een strand ']
-    print(f'test {plaatsen}')""")
+    with self.assertRaises(hedy.InvalidListArgumentException) as context:
+      result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.assertEqual('Invalid List Argument', context.exception.error_code)
+
   def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
     print Hallo welkom bij Hedy!
@@ -439,7 +439,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      exception=hedy.InvalidTypeException,
+      exception=hedy.RequiredListArgumentException,
       test_name=self.name()
     )
   def test_random_undefined_var(self):
