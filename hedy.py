@@ -166,6 +166,14 @@ class InvalidTypeException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Invalid Type', **arguments)
 
+class RequiredListArgumentException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Required List Argument', **arguments)
+
+class InvalidListArgumentException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Invalid List Argument', **arguments)
+
 class WrongLevelException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Wrong Level', **arguments)
@@ -609,6 +617,17 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
+    def check_arg_types(self, args, command, check):
+        for arg in args:
+            assignment = self.find_in_lookup(arg)
+            if assignment:
+                check(assignment, command)
+
+    def find_in_lookup(self, variable):
+        lookup_vars = [a for a in self.lookup if a.name == variable]
+        # this now grabs the first occurrence, once we have slicing we want to be more precise!
+        return lookup_vars[0] if lookup_vars else None
+
 
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
@@ -627,6 +646,15 @@ def process_variable_for_fstring(name, lookup):
         return "{" + hash_var(name) + "}"
     else:
         return name
+
+def raise_if_list(assignment, command):
+    if assignment.type == 'list':
+        raise hedy.InvalidListArgumentException(command=command, variable=assignment.name)
+
+def raise_if_not_list(assignment, command):
+    if assignment.type != 'list':
+        raise hedy.RequiredListArgumentException(command=command, variable=assignment.name)
+
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -655,6 +683,8 @@ class ConvertToPython_2(ConvertToPython_1):
         return hash_var(name)
         # return "_" + name if name in reserved_words else name
     def print(self, args):
+        self.check_arg_types(args, 'print', raise_if_list)
+
         argument_string = ""
         i = 0
 
@@ -709,16 +739,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-
-        # this now grabs the first occurrence, once we have slicing we want to be more precise!
-        arg0_from_lookups = [a for a in self.lookup if a.name == args[0]]
-        arg0_from_lookup = arg0_from_lookups[0]
-
-        type_args0 = arg0_from_lookup.type
-
-        # we can only apply random to a list
-        if type_args0 != 'list':
-            raise hedy.InvalidTypeException
+        self.check_arg_types(args, 'at random', raise_if_not_list)
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
@@ -755,6 +776,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_var_usage(args)
+        self.check_arg_types(args, 'print', raise_if_list)
         return make_f_string(args, self.lookup)
 
     def print_nq(self, args):
@@ -806,8 +828,10 @@ class ConvertToPython_5(ConvertToPython_4):
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_arg_types(args, 'print', raise_if_list)
+        return self.print_inner(args)
 
-
+    def print_inner(self, args):
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
@@ -977,6 +1001,10 @@ class ConvertToPython_12(ConvertToPython_10_11):
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
+    def print(self, args):
+        self.check_var_usage([a for a in args if not type(a) is Tree])
+        return self.print_inner(args)
+
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]

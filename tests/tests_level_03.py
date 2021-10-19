@@ -88,6 +88,20 @@ class TestsLevel3(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+
+  # issue #745
+  def test_print_list(self):
+    code = textwrap.dedent("""\
+        plaatsen is een stad, een  dorp, een strand
+        print 'test' plaatsen""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      exception=hedy.InvalidListArgumentException,
+      test_name=self.name()
+    )
+
   def test_ask_Spanish(self):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
