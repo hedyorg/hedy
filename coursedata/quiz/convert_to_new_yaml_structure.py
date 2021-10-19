@@ -31,14 +31,7 @@ def rewrite_quiz_to_new_structure(quiz_data):
                 options_array.append({index: option_obj})
                 index += 1
             quiz_data['questions'][q_nr - 1].get(q_nr)['mp_choice_options'] = options_array
-    print(quiz_data)
     return quiz_data
 
 
 get_original_quiz(1)
-get_original_quiz(2)
-get_original_quiz(3)
-get_original_quiz(4)
-get_original_quiz(5)
-get_original_quiz(6)
-get_original_quiz(8)

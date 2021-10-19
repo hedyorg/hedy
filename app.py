@@ -506,12 +506,13 @@ def get_quiz(level_source, question_nr, attempt):
                 for options_key, options_value in options.items():
                     for option in options_value:
                         for key, value in option.items():
-                            option_obj[key] = value
+                            if value:
+                                option_obj[key] = value.replace("\n", '\\n')
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
                 
-            return render_template('quiz_question.html',
+            html_obj = render_template('quiz_question.html',
                                    quiz=quiz_data,
                                    level_source=level_source,
                                    questionStatus= questionStatus,
@@ -526,6 +527,7 @@ def get_quiz(level_source, question_nr, attempt):
                                    username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+            return html_obj.replace("\\n", '<br />')
         else:
             return render_template('endquiz.html', correct=session.get('correct_answer'),
                                    total_score=session.get('total_score'),
@@ -587,7 +589,8 @@ def submit_answer(level_source, question_nr, attempt):
                 for options_key, options_value in options.items():
                     for option in options_value:
                         for key, value in option.items():
-                            option_obj[key] = value
+                            if value:
+                                option_obj[key] = value.replace("\n", '\\n')
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
@@ -604,7 +607,8 @@ def submit_answer(level_source, question_nr, attempt):
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
             elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
-                return render_template('quiz_question.html',
+
+                html_obj =  render_template('quiz_question.html',
                                        quiz=quiz_data,
                                        level_source=level_source,
                                        questionStatus=questionStatus,
@@ -620,6 +624,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        username=current_user(request)['username'],
                                        is_teacher=is_teacher(request),
                                        auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+                return html_obj.replace("\\n", '<br />')
             elif session.get('quiz-attempt') > config.get('quiz-max-attempts'):
                 return render_template('feedback.html',
                                        quiz=quiz_data,
