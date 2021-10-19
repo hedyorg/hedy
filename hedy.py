@@ -1,3 +1,5 @@
+import textwrap
+
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
 from lark import Tree, Transformer, visitors
@@ -8,7 +10,7 @@ import hashlib
 import re
 
 # Some useful constants
-HEDY_MAX_LEVEL = 22
+HEDY_MAX_LEVEL = 23
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -19,7 +21,7 @@ reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal'
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
-                      2: ['print', 'ask', 'echo', 'is', 'turn', 'forward'],
+                      2: ['print', 'ask', 'is', 'turn', 'forward'],
                       3: ['print', 'ask', 'is', 'turn', 'forward'],
                       4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
                       5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
@@ -46,10 +48,15 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
 # \ also needs to be escaped because it eats the next character
 characters_that_need_escaping = ["\\", "'"]
 
+character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 def hash_needed(name):
-    pattern = re.compile('[^a-zA-Z0-9_]')
-    return name in reserved_words or pattern.match(name) != None
+    # some elements are not names but processed names, i.e. random.choice(dieren)
+    # they should not be hashed (this won't break because these characters cannot be used in vars
+    if '[' in name or '(' in name:
+        return False
+
+    return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
     if hash_needed(name):
@@ -225,7 +232,7 @@ class AllAssignmentCommands(Transformer):
         return ask_assign
 
     def for_loop(self, args):
-        # for loop iterator is a var so should be added to the list of vars
+      # for loop iterator is a var so should be added to the list of vars
       iterator = str(args[0])
       commands = args[1:]
       return [iterator] + self.filter_ask_assign(args)
@@ -566,14 +573,14 @@ class ConvertToPython_1(Transformer):
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if name in lookup:
-        return process_hash(name)
+        return hash_var(name)
     else:
         return f"'{name}'"
 
-
-def process_hash(name):
-    if hash_needed(name):
-        return hash_var(name)
+def process_variable_for_fstring(name, lookup):
+    #processes a variable by hashing and escaping when needed
+    if name in lookup:
+        return "{" + hash_var(name) + "}"
     else:
         return name
 
@@ -602,7 +609,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
             if argument in self.lookup:
                 #variables are placed in {} in the f string
-                argument_string += "{" + process_hash(argument) + "}"
+                argument_string += "{" + hash_var(argument) + "}"
                 argument_string += space
             else:
                 #strings are written regularly
@@ -659,7 +666,7 @@ def make_f_string(args, lookup):
     for argument in args:
         if argument in lookup:
             # variables are placed in {} in the f string
-            argument_string += "{" + process_hash(argument) + "}"
+            argument_string += "{" + hash_var(argument) + "}"
         else:
             # strings are written regularly
             # however we no longer need the enclosing quotes in the f-string
@@ -679,15 +686,26 @@ class ConvertToPython_3(ConvertToPython_2):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def print(self, args):
+    def check_print_arguments(self, args):
+        # this function checks whether arguments of a print are valid
+        #we can print if all arguments are either quoted OR they are all variables
+
         unquoted_args = [a for a in args if not is_quoted(a)]
         unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
-        #we can print if all arguments are quoted OR they are all variables
+
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            return make_f_string(args, self.lookup)
+            # all good? return for further processing
+            return args
         else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
             first_unquoted_var = unquoted_args[0]
             raise UndefinedVarException(name=first_unquoted_var)
+
+    def print(self, args):
+        args = self.check_print_arguments(args)
+        return make_f_string(args, self.lookup)
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -734,20 +752,23 @@ else:
 
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
-    #todo: now that Skulpt can do it, we would love fstrings here too, looks nicer and is less error prine!
 
     def print(self, args):
+        # we only check non-Tree (= non calculation) arguments
+        self.check_print_arguments([a for a in args if not type(a) is Tree])
+
+
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
             if type(a) is Tree:
-                args_new.append(f'str({a.children})')
-            elif "'" not in a:
-                args_new.append(f'str({a})')
+                args_new.append("{" + a.children + "}")
             else:
-                args_new.append(a)
+                a = a.replace("'", "") #no quotes needed in fstring
+                args_new.append(process_variable_for_fstring(a, self.lookup))
 
-        return "print(" + '+'.join(args_new) + ')'
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
 
     #we can now have ints as types so chck must force str
     def equality_check(self, args):
@@ -856,13 +877,24 @@ class ConvertToPython_7(ConvertToPython_6):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return process_variable(args[0], self.lookup)
+            return args[0]
         else:
         # this is list_access
             return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
 
 @hedy_transpiler(level=8)
 class ConvertToPython_8(ConvertToPython_7):
+    def repeat_list(self, args):
+      args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+      body = "\n".join([indent(x) for x in args[2:]])
+
+      return f"for {args[0]} in {args[1]}:\n{body}"
+
+
+
+@hedy_transpiler(level=9)
+class ConvertToPython_9(ConvertToPython_8):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
@@ -870,16 +902,16 @@ class ConvertToPython_8(ConvertToPython_7):
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
-@hedy_transpiler(level=9)
 @hedy_transpiler(level=10)
-class ConvertToPython_9_10(ConvertToPython_8):
+@hedy_transpiler(level=11)
+class ConvertToPython_10_11(ConvertToPython_9):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-@hedy_transpiler(level=11)
-class ConvertToPython_11(ConvertToPython_9_10):
+@hedy_transpiler(level=12)
+class ConvertToPython_12(ConvertToPython_10_11):
     def input(self, args):
         args_new = []
         var = args[0]
@@ -893,8 +925,8 @@ class ConvertToPython_11(ConvertToPython_9_10):
 
         return f'{var} = input(' + '+'.join(args_new) + ")"
 
-@hedy_transpiler(level=12)
-class ConvertToPython_12(ConvertToPython_11):
+@hedy_transpiler(level=13)
+class ConvertToPython_13(ConvertToPython_12):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -912,14 +944,17 @@ class ConvertToPython_12(ConvertToPython_11):
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1] + '-1]'
+            list_access_shifted = args[0] + '[' + args[1] + '-1]'
+            # when printing later, we need to know this is a var
+            self.lookup.append(list_access_shifted)
+            return list_access_shifted
 
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 # Custom transformer that can both be used bottom-up or top-down
 
-@hedy_transpiler(level=13)
-class ConvertToPython_13(ConvertToPython_12):
+@hedy_transpiler(level=14)
+class ConvertToPython_14(ConvertToPython_13):
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
@@ -954,20 +989,20 @@ class ConvertToPython_13(ConvertToPython_12):
         else:
             return f"str({arg0}) == str({arg1})" #no and statements
 
-@hedy_transpiler(level=14)
-class ConvertToPython_14(ConvertToPython_13):
+@hedy_transpiler(level=15)
+class ConvertToPython_15(ConvertToPython_14):
     def andcondition(self, args):
         return ' and '.join(args)
     def orcondition(self, args):
         return ' or '.join(args)
 
-@hedy_transpiler(level=15)
-class ConvertToPython_15(ConvertToPython_14):
+@hedy_transpiler(level=16)
+class ConvertToPython_16(ConvertToPython_15):
     def comment(self, args):
         return f"# {args}"
 
-@hedy_transpiler(level=16)
-class ConvertToPython_16(ConvertToPython_15):
+@hedy_transpiler(level=17)
+class ConvertToPython_17(ConvertToPython_16):
     def smaller(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -984,19 +1019,23 @@ class ConvertToPython_16(ConvertToPython_15):
         else:
             return f"int({arg0}) > int({arg1}) and {args[2]}"
 
-@hedy_transpiler(level=17)
-class ConvertToPython_17(ConvertToPython_16):
+@hedy_transpiler(level=18)
+class ConvertToPython_18(ConvertToPython_17):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
-@hedy_transpiler(level=18)
 @hedy_transpiler(level=19)
-class ConvertToPython_18_19(ConvertToPython_17):
+@hedy_transpiler(level=20)
+class ConvertToPython_19_20(ConvertToPython_18):
     def length(self, args):
         arg0 = args[0]
-        return f"len({arg0})"
+        length_string = f"len({arg0})"
+
+        #when accessing len we need to know it is a var
+        self.lookup.append(length_string)
+        return length_string
 
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
@@ -1021,8 +1060,8 @@ class ConvertToPython_18_19(ConvertToPython_17):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
-@hedy_transpiler(level=20)
-class ConvertToPython_20(ConvertToPython_18_19):
+@hedy_transpiler(level=21)
+class ConvertToPython_21(ConvertToPython_19_20):
     def equality_check(self, args):
         if type(args[0]) is Tree:
             return args[0].children + " == int(" + args[1] + ")"
@@ -1037,8 +1076,8 @@ class ConvertToPython_20(ConvertToPython_18_19):
         else:
             return f"str({arg0}) == str({arg1})"  # no and statements
 
-@hedy_transpiler(level=21)
-class ConvertToPython_21(ConvertToPython_20):
+@hedy_transpiler(level=22)
+class ConvertToPython_22(ConvertToPython_21):
     def not_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1047,8 +1086,8 @@ class ConvertToPython_21(ConvertToPython_20):
         else:
             return f"str({arg0}) != str({arg1}) and {args[2]}"
 
-@hedy_transpiler(level=22)
-class ConvertToPython_22(ConvertToPython_21):
+@hedy_transpiler(level=23)
+class ConvertToPython_23(ConvertToPython_22):
     def smaller_equal(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1335,8 +1374,6 @@ def transpile_inner(input_string, level):
         # random.choice(প্রাণী)
         hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
 
-        if lookup_table != hashed_lookups:
-            print(lookup_table, hashed_lookups)
         lookup_table += hashed_lookups
 
     except UnexpectedCharacters as e:
@@ -1396,7 +1433,7 @@ def transpile_inner(input_string, level):
             transpiler = TRANSPILER_LOOKUP[level]
             python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         else:
-           raise Exception('Levels over 22 are not implemented yet')
+           raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
     except visitors.VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.

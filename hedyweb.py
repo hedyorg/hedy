@@ -34,7 +34,7 @@ class Translations:
 def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
 
   if not level_defaults:
-    abort(404)
+    return utils.page_404 (translations, menu, current_user(request) ['username'], lang, translations.get_translations (lang, 'ui').get ('no_such_level'))
 
 
   arguments_dict = {}

@@ -1,25 +1,30 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div style="width: 250px;" class="right-hand-shadow flex-none">
-  <div class="p-3 shadow-md">
-    <div></div>
-    <h2>{{ commands_title }}</h2>
-  </div>
-  <div>
-    {% for command in commands %}
-    <div class="justify-between my-2 shadow-md p-3 pl-4">
-      <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
-        {{ command.explanation|commonmark }}
+<div>
+  <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
+</div>
+<div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
+  <div id="command_window_content">
+      <div class="p-3 shadow-md">
+        <div></div>
+        <h2>{{ commands_title }}</h2>
       </div>
-      <div class="flex">
-        <div class="font-thin text-sm flex-grow" tabindex=0>
-          {# placeholder to make button go right, was originally in use for the example code 3#}
+      <div>
+        {% for command in commands %}
+        <div class="justify-between my-2 shadow-md p-3 pl-4">
+          <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
+            {{ command.explanation|commonmark }}
+          </div>
+          <div class="flex">
+            <div class="font-thin text-sm flex-grow" tabindex=0>
+              {# placeholder to make button go right, was originally in use for the example code 3#}
+            </div>
+            <button class="btn block flex-none self-end ml-1" style="min-width:6em"
+              onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
+          </div>
         </div>
-        <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-          onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
+        {% endfor %}
       </div>
-    </div>
-    {% endfor %}
   </div>
 </div>
 <div tabindex="0" class="flex-grow p-8">
@@ -52,6 +57,21 @@
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
     window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
+    function toggleCommands() {
+        if ($('#commands-window').width() == 250) {
+            $('#toggle-button').html('&#8594;');
+            $('#command_window_content').hide();
+            $( "#commands-window" ).animate({
+           width: "55px",
+            }, 500 );
+        } else {
+            $('#toggle-button').html('&#8592; ' + '{{ hide_commands }}');
+            $( "#commands-window" ).animate({
+           width: "250px",
+            }, 500 );
+            $('#command_window_content').show();
+        }
+    }
   </script>
   {# Important syntaxModeRules.js gets loaded first #}
   <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
@@ -60,4 +80,5 @@
   <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}

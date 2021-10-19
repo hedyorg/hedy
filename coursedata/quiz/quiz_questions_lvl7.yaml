@@ -1,197 +1,315 @@
+---
 level: 7
 questions:
+- 1:
+    question_text: "Welke uitvoer komt er uit Hedy als je deze code uitvoert?"
+    code: |-
+      repeat 2 times
+          print 'Hallo'
+          print 'Ik ben Hedy!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Hallo \n Ik ben Hedy"
+      - "code": ""
+      - "feedback": "Helaas. Alles wordt 2x herhaald."
     - 1:
-            question_text: "Welke uitvoer komt er uit Hedy als je deze code uitvoert?"
-            code: |-
-                repeat 2 times
-                    print 'Hallo'
-                    print 'Ik ben Hedy!'
-            mp_choice_options:
-              - {option_text: "Hallo \n Ik ben Hedy", code: "", feedback: "Helaas. Alles wordt 2x herhaald."}
-              - {option_text: "Hallo \n Hallo \n Ik ben Hedy", code: "", feedback: "Helaas. Ook de tweede zin wordt 2x herhaald."}
-              - {option_text: "Hallo \n ik ben Hedy \n Hallo \n Ik ben Hedy", code: "", feedback: Super!"}
-              - {option_text: "Hallo \n Ik ben Hedy \n Ik ben Hedy", code: "", feedback: "Helaas. Beide zinnen worden 2x herhaald"}
-            correct_answer: "C"
-            hint: "Beide zinnen onder het repeat commando worden 2x herhaald."
-            question_score: 10
+      - "option_text": "Hallo \n Hallo \n Ik ben Hedy"
+      - "code": ""
+      - "feedback": "Helaas. Ook de tweede zin wordt 2x herhaald."
     - 2:
-            question_text: "Wat is er mis met deze code?"
-            code: |-
-                repeat 5 times
-                print 'Hedy is gaaf!'
-            mp_choice_options:
-              - {option_text: "De twee regels moeten samen op dezelfde regel staan", code: "", feedback: "Helaas. In level 7 moet het wel op twee regels."}
-              - {option_text: "Het woord print moet weg, dat is niet nodig", code: "", feedback: "Helaas. Het print commando is wel nodig."}
-              - {option_text: "repeat is fout gespeld, het moet repeet zijn.", code: "", feedback: "Nee, repeat is de goede spelling"}
-              - {option_text: "De tweede regel moet inspringen met 4 spaties.", code: "", feedback: "Juist!"}
-            correct_answer: "D"
-            hint: "Kijk goed naar het begin van zin 2, wat mist er?"
-            question_score: 10
+      - "option_text": "Hallo \n ik ben Hedy \n Hallo \n Ik ben Hedy"
+      - "code": ""
+      - "feedback": "Super!\""
     - 3:
-            question_text: "Welke uitvoer komt er uit deze code?"
-            code: |-
-                repeat 3 times
-                    print 'Baby shark tututudutudu'
-                print 'Baby shark'
-            mp_choice_options:
-              - {option_text: "Baby shark tututudutudu \n Baby shark", code: "", feedback: "Helaas. Let op het repeat commando!"}
-              - {option_text: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark", code: "", feedback: "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus niet herhaald."}
-              - {option_text: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark" , code: "", feedback: "Juist!"}
-              - {option_text: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark", code: "", feedback: "Helaas, kijk goed naar wat er wel en niet herhaald wordt."}
-            correct_answer: "C"
-            hint: "Regel 2 springt in en wordt dus drie keer herhaald. Daarna komt regel 3 pas, die niet inspringt en dus ook niet herhaald wordt."
-            question_score: 10
-    - 4:
-            question_text: "Welke uitvoer komt er uit Hedy als je deze code uitvoert?"
-            code: |-
-                print 'De kinderen riepen:'
-                repeat 2 times
-                    print 'Hoera!'
-                    print 'We gaan op vakantie!'
-            mp_choice_options:
-              - {option_text: "De kinderen riepen: \n Hoera! \n We gaan op vakantie!", code: "", feedback: "Helaas. Let op het repeat commando!"}
-              - {option_text: "De kinderen riepen: \n Hoera! \n We gaan op vakantie! \n Hoera! \n We gaan op vakantie!", code: "", feedback: "Correct!"}
-              - {option_text: "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie! \n We gaan op vakantie", code: "", feedback: "Helaas. Deze volgorde klopt niet."}
-              - {option_text: "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie!", code: "", feedback: "Helaas. Ook de laatste zin wordt 2x herhaald."}
-            correct_answer: "B"
-            hint: "Het blokje onder het repeat commando wordt 2x herhaald."
-            question_score: 10
-    - 5:
-            question_text: "Wat is er mis met deze code?"
-            code: |-
-                einde is ask 'Wil je een goed of een slecht einde?'
-                if einde is goed print 'en ze leefden nog lang en gelukkig' 
-                if einde is slecht print 'En toen ontplofte de wereld. Einde'
-            mp_choice_options:
-              - {option_text: "De print commando's van de laatste twee regels moeten op een nieuwe regel beginnen en inspringen met 4 spaties. ", code: "", feedback: "Dat klopt!"}
-              - {option_text: "Je mag niet 2x een if hebben na een vraag!", code: "", feedback: "Dat mag wel!"}
-              - {option_text: "De laatste twee regels moeten beginnen met 4 spaties, omdat ze met if beginnen." , code: "", feedback: "Helaas. Er is inderdaad wat mis met het inspringen, maar niet daar..."}
-              - {option_text: "ask is geen commando meer in level 7", code: "", feedback: "helaas, ask blijft een commando in level 7."}
-            correct_answer: "A"
-            hint: "Er is iets mis met het inspringen..."
-            question_score: 10
-    - 6:
-            question_text: "Welke code hoort bij deze uitvoer?"
-            code: |-
-                Welkom bij restaurant Hedy
-                Pizza
-                Hamburger
-            mp_choice_options:
-              - option_text: 
-                code: |- 
-                    print 'Welkom bij restaurant Hedy'
-                    eten is ask 'Wat wilt u bestellen?
-                    print eten
-                feedback: |-
-                    Hier zit geen herhaling in, er zijn twee bestellingen.
-              - option_text:
-                code: |- 
-                    repeat 2 times
-                        print 'Welkom bij restaurant Hedy'
-                        eten is ask 'Wat wilt u bestellen?'
-                        print eten
-                feedback: |-
-                    Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy' 2x
-              - option_text:
-                code: |-
-                    print 'Welkom bij restaurant Hedy'
-                    repeat 2 times
-                        eten is ask 'Wat wilt u bestellen?'
-                    print eten
-                feedback: |-
-                    De code is bijna goed, maar het eten moet ook 2x geprint worden.
-              - option_text:
-                code: |-
-                    print 'Welkom bij restaurant Hedy'
-                    repeat 2 times
-                        eten is ask 'Wat wilt u bestellen?'
-                        print eten
-                feedback: |-
-                    Goed gezien!
-            correct_answer: "D"
-            hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
-            question_score: 10
-    - 7:
-            question_text: "Wat is er mis met deze code?"
-            code: |-
-                repeat 3 times
-                   ask Wat wilt u bestellen?
-                   if eten is friet
-                       saus is ask 'Welke saus wilt u daarbij?'
-                       print 'Een friet met ' saus
-                   if eten is pizza
-                       topping is ask 'Wat wilt u op uw pizza?'
-                       print 'Een pizza met ' topping
-                print 'Bedankt voor uw bestelling'
-            mp_choice_options:
-              - {option_text: "Niks! De code klopt!", code: "", feedback: "Correct! Dit is een goede code."}
-              - {option_text: "Je kunt geen if commando gebruiken, als je al een repeat hebt gebruikt.", code: "", feedback: "Dat mag wel."}
-              - {option_text: "Onder het if commando hoef je niet meer in te springen als je dat al hebt gedaan voor het repeat commando.", code: "", feedback: "Je moet altijd inspringen na een if commando."}
-              - {option_text: "Als je patat bestelt, vraagt Hedy nog steeds wat je op je pizza wilt, omdat er niet goed is ingesprongen." , code: "", feedback: "Het inspringen is wel goed gedaan."}
-            correct_answer: "A"
-            hint: "Het inspringen klopt overal."
-            question_score: 10
-    - 8:
-            question_text: "Wat print Hedy als je het goede wachtwoord 'Hedy' intypt?"
-            code: |-
-                wachtwoord is ask 'Wat is het wachtwoord?'
-                goedewachtwoord is Hedy
-                if wachtwoord is goedewachtwoord
-                    repeat 2 times
-                        print 'Goed gedaan!'
-                        print 'Je mag computeren!'
-                else
-                    print 'De computer ontploft in 5... 4... 3... 2... 1...'
-            mp_choice_options:
-              - {option_text: "Goed gedaan! \n Goed gedaan!", code: "", feedback: ""}
-              - {option_text: "De computer ontploft in 5... 4... 3... 2... 1...", code: "", feedback: ""}
-              - {option_text: "Goed gedaan! \n Goed gedaan! \n Je mag computeren" , code: "", feedback: ""}
-              - {option_text: "Goed gedaan! \n Je mag computeren! \n Goed gedaan! \n Je mag computeren", code: "", feedback: ""}
-            correct_answer: "D"
-            hint: "Alles onder de repeat wordt 2 keer herhaald"
-            question_score: 10
-    - 9:
-            question_text: "Wat moet je in dit spel kiezen om een miljoen te winnen?"
-            code: |-
-                print 'Kies je juiste koffer en win een prijs!'
-                koffer is ask 'Welke koffer kies je? 1 of 2?'
-                if koffer is 1
-                     actie is ask 'Wil je de koffer verkopen of openen?'
-                         if actie is verkopen
-                             print 'Je verkoopt je koffer en krijgt 10 euro'
-                         if actie is openen
-                             print 'Je maakt de koffer open en wint een appeltaart'
-                if koffer is 2
-                     verkoop is ask 'wil je de koffer verkopen of openen?
-                         if actie is verkopen
-                             print 'Je verkoopt je koffer en krijgt 500 euro'
-                         if actie is openen
-                             print 'Je maakt de koffer open en wint een miljoen!'
-            mp_choice_options:
-              - {option_text: "koffer 1, verkopen", code: "", feedback: "Helaas, geen miljoen voor jou..."}
-              - {option_text: "koffer 1, openen", code: "", feedback: "Helaas, geen miljoen voor jou..."}
-              - {option_text: "koffer 2, verkopen" , code: "", feedback: "Helaas, geen miljoen voor jou..."}
-              - {option_text: "koffer 2, openen", code: "", feedback: "Geweldig! Je wint het miljoen!"}
-            correct_answer: "D"
-            hint: ""
-            question_score: 10
-    - 10:
-            question_text: "Wat is waar?"
-            code: |-
-                naam is ask 'Hoe heet je?'
-                schoenmaat is ask 'Welke schoenmaat heb je?'
-                if schoenmaat is 38 
-                    if naam is Assepoester
-                        print 'Naar jou was ik op zoek!'
-                    else
-                        print 'Jou zoek ik niet!'
-                else
-                    print 'Helaas, ik zoek weer verder'
-            mp_choice_options:
-              - {option_text: "Doornroosje met schoenmaat 38 krijgt de uitvoer: 'Helaas, ik zoek weer verder.'", code: "", feedback: "Nee, ze krijgt 'Naar jou zoek ik niet'"}
-              - {option_text: "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek!' ", code: "", feedback: " Nee, ze krijgt 'Helaas, ik zoek weer verder'"}
-              - {option_text: "Doornroosje met schoenmaat 40 krijgt de uitvoer: 'Helaas, ik zoek weer verder' " , code: "", feedback: "Dat klopt!"}
-              - {option_text: "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek!'", code: "", feedback: "Nee, ze krijgt 'Helaas, ik zoek weer verder'"}
-            correct_answer: "Als je niet schoenmaat 38 hebt, krijg je 'Helaas, ik zoek weer verder' ongeacht je naam."
-            hint: "C"
-            question_score: 10
+      - "option_text": "Hallo \n Ik ben Hedy \n Ik ben Hedy"
+      - "code": ""
+      - "feedback": "Helaas. Beide zinnen worden 2x herhaald"
+    correct_answer: "C"
+    hint: "Beide zinnen onder het repeat commando worden 2x herhaald."
+    question_score: 10
+- 2:
+    question_text: "Wat is er mis met deze code?"
+    code: |-
+      repeat 5 times
+      print 'Hedy is gaaf!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "De twee regels moeten samen op dezelfde regel staan"
+      - "code": ""
+      - "feedback": "Helaas. In level 7 moet het wel op twee regels."
+    - 1:
+      - "option_text": "Het woord print moet weg, dat is niet nodig"
+      - "code": ""
+      - "feedback": "Helaas. Het print commando is wel nodig."
+    - 2:
+      - "option_text": "repeat is fout gespeld, het moet repeet zijn."
+      - "code": ""
+      - "feedback": "Nee, repeat is de goede spelling"
+    - 3:
+      - "option_text": "De tweede regel moet inspringen met 4 spaties."
+      - "code": ""
+      - "feedback": "Juist!"
+    correct_answer: "D"
+    hint: "Kijk goed naar het begin van zin 2, wat mist er?"
+    question_score: 10
+- 3:
+    question_text: "Welke uitvoer komt er uit deze code?"
+    code: |-
+      repeat 3 times
+          print 'Baby shark tututudutudu'
+      print 'Baby shark'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Baby shark tututudutudu \n Baby shark"
+      - "code": ""
+      - "feedback": "Helaas. Let op het repeat commando!"
+    - 1:
+      - "option_text": "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu\
+          \ \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+      - "code": ""
+      - "feedback": "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus\
+          \ niet herhaald."
+    - 2:
+      - "option_text": "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby\
+          \ shark tututudutudu \n Baby shark"
+      - "code": ""
+      - "feedback": "Juist!"
+    - 3:
+      - "option_text": "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby\
+          \ shark"
+      - "code": ""
+      - "feedback": "Helaas, kijk goed naar wat er wel en niet herhaald wordt."
+    correct_answer: "C"
+    hint: "Regel 2 springt in en wordt dus drie keer herhaald. Daarna komt regel 3\
+      \ pas, die niet inspringt en dus ook niet herhaald wordt."
+    question_score: 10
+- 4:
+    question_text: "Welke uitvoer komt er uit Hedy als je deze code uitvoert?"
+    code: |-
+      print 'De kinderen riepen:'
+      repeat 2 times
+          print 'Hoera!'
+          print 'We gaan op vakantie!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "De kinderen riepen: \n Hoera! \n We gaan op vakantie!"
+      - "code": ""
+      - "feedback": "Helaas. Let op het repeat commando!"
+    - 1:
+      - "option_text": "De kinderen riepen: \n Hoera! \n We gaan op vakantie! \n Hoera!\
+          \ \n We gaan op vakantie!"
+      - "code": ""
+      - "feedback": "Correct!"
+    - 2:
+      - "option_text": "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie!\
+          \ \n We gaan op vakantie"
+      - "code": ""
+      - "feedback": "Helaas. Deze volgorde klopt niet."
+    - 3:
+      - "option_text": "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie!"
+      - "code": ""
+      - "feedback": "Helaas. Ook de laatste zin wordt 2x herhaald."
+    correct_answer: "B"
+    hint: "Het blokje onder het repeat commando wordt 2x herhaald."
+    question_score: 10
+- 5:
+    question_text: "Wat is er mis met deze code?"
+    code: |-
+      einde is ask 'Wil je een goed of een slecht einde?'
+      if einde is goed print 'en ze leefden nog lang en gelukkig' 
+      if einde is slecht print 'En toen ontplofte de wereld. Einde'
+    mp_choice_options:
+    - 0:
+      - "option_text": "De print commando's van de laatste twee regels moeten op een\
+          \ nieuwe regel beginnen en inspringen met 4 spaties. "
+      - "code": ""
+      - "feedback": "Dat klopt!"
+    - 1:
+      - "option_text": "Je mag niet 2x een if hebben na een vraag!"
+      - "code": ""
+      - "feedback": "Dat mag wel!"
+    - 2:
+      - "option_text": "De laatste twee regels moeten beginnen met 4 spaties, omdat\
+          \ ze met if beginnen."
+      - "code": ""
+      - "feedback": "Helaas. Er is inderdaad wat mis met het inspringen, maar niet\
+          \ daar..."
+    - 3:
+      - "option_text": "ask is geen commando meer in level 7"
+      - "code": ""
+      - "feedback": "helaas, ask blijft een commando in level 7."
+    correct_answer: "A"
+    hint: "Er is iets mis met het inspringen..."
+    question_score: 10
+- 6:
+    question_text: "Welke code hoort bij deze uitvoer?"
+    code: |-
+      Welkom bij restaurant Hedy
+      Pizza
+      Hamburger
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "print 'Welkom bij restaurant Hedy'\neten is ask 'Wat wilt u bestellen?\n\
+          print eten"
+      - "feedback": "Hier zit geen herhaling in, er zijn twee bestellingen."
+    - 1:
+      - "option_text": "None"
+      - "code": "repeat 2 times\n    print 'Welkom bij restaurant Hedy'\n    eten\
+          \ is ask 'Wat wilt u bestellen?'\n    print eten"
+      - "feedback": "Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy'\
+          \ 2x"
+    - 2:
+      - "option_text": "None"
+      - "code": "print 'Welkom bij restaurant Hedy'\nrepeat 2 times\n    eten is ask\
+          \ 'Wat wilt u bestellen?'\nprint eten"
+      - "feedback": "De code is bijna goed, maar het eten moet ook 2x geprint worden."
+    - 3:
+      - "option_text": "None"
+      - "code": "print 'Welkom bij restaurant Hedy'\nrepeat 2 times\n    eten is ask\
+          \ 'Wat wilt u bestellen?'\n    print eten"
+      - "feedback": "Goed gezien!"
+    correct_answer: "D"
+    hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
+    question_score: 10
+- 7:
+    question_text: "Wat is er mis met deze code?"
+    code: |-
+      repeat 3 times
+         ask Wat wilt u bestellen?
+         if eten is friet
+             saus is ask 'Welke saus wilt u daarbij?'
+             print 'Een friet met ' saus
+         if eten is pizza
+             topping is ask 'Wat wilt u op uw pizza?'
+             print 'Een pizza met ' topping
+      print 'Bedankt voor uw bestelling'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Niks! De code klopt!"
+      - "code": ""
+      - "feedback": "Correct! Dit is een goede code."
+    - 1:
+      - "option_text": "Je kunt geen if commando gebruiken, als je al een repeat hebt\
+          \ gebruikt."
+      - "code": ""
+      - "feedback": "Dat mag wel."
+    - 2:
+      - "option_text": "Onder het if commando hoef je niet meer in te springen als\
+          \ je dat al hebt gedaan voor het repeat commando."
+      - "code": ""
+      - "feedback": "Je moet altijd inspringen na een if commando."
+    - 3:
+      - "option_text": "Als je patat bestelt, vraagt Hedy nog steeds wat je op je\
+          \ pizza wilt, omdat er niet goed is ingesprongen."
+      - "code": ""
+      - "feedback": "Het inspringen is wel goed gedaan."
+    correct_answer: "A"
+    hint: "Het inspringen klopt overal."
+    question_score: 10
+- 8:
+    question_text: "Wat print Hedy als je het goede wachtwoord 'Hedy' intypt?"
+    code: |-
+      wachtwoord is ask 'Wat is het wachtwoord?'
+      goedewachtwoord is Hedy
+      if wachtwoord is goedewachtwoord
+          repeat 2 times
+              print 'Goed gedaan!'
+              print 'Je mag computeren!'
+      else
+          print 'De computer ontploft in 5... 4... 3... 2... 1...'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goed gedaan! \n Goed gedaan!"
+      - "code": ""
+      - "feedback": ""
+    - 1:
+      - "option_text": "De computer ontploft in 5... 4... 3... 2... 1..."
+      - "code": ""
+      - "feedback": ""
+    - 2:
+      - "option_text": "Goed gedaan! \n Goed gedaan! \n Je mag computeren"
+      - "code": ""
+      - "feedback": ""
+    - 3:
+      - "option_text": "Goed gedaan! \n Je mag computeren! \n Goed gedaan! \n Je mag\
+          \ computeren"
+      - "code": ""
+      - "feedback": ""
+    correct_answer: "D"
+    hint: "Alles onder de repeat wordt 2 keer herhaald"
+    question_score: 10
+- 9:
+    question_text: "Wat moet je in dit spel kiezen om een miljoen te winnen?"
+    code: |-
+      print 'Kies je juiste koffer en win een prijs!'
+      koffer is ask 'Welke koffer kies je? 1 of 2?'
+      if koffer is 1
+           actie is ask 'Wil je de koffer verkopen of openen?'
+               if actie is verkopen
+                   print 'Je verkoopt je koffer en krijgt 10 euro'
+               if actie is openen
+                   print 'Je maakt de koffer open en wint een appeltaart'
+      if koffer is 2
+           verkoop is ask 'wil je de koffer verkopen of openen?
+               if actie is verkopen
+                   print 'Je verkoopt je koffer en krijgt 500 euro'
+               if actie is openen
+                   print 'Je maakt de koffer open en wint een miljoen!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "koffer 1, verkopen"
+      - "code": ""
+      - "feedback": "Helaas, geen miljoen voor jou..."
+    - 1:
+      - "option_text": "koffer 1, openen"
+      - "code": ""
+      - "feedback": "Helaas, geen miljoen voor jou..."
+    - 2:
+      - "option_text": "koffer 2, verkopen"
+      - "code": ""
+      - "feedback": "Helaas, geen miljoen voor jou..."
+    - 3:
+      - "option_text": "koffer 2, openen"
+      - "code": ""
+      - "feedback": "Geweldig! Je wint het miljoen!"
+    correct_answer: "D"
+    hint: ""
+    question_score: 10
+- 10:
+    question_text: "Wat is waar?"
+    code: |-
+      naam is ask 'Hoe heet je?'
+      schoenmaat is ask 'Welke schoenmaat heb je?'
+      if schoenmaat is 38 
+          if naam is Assepoester
+              print 'Naar jou was ik op zoek!'
+          else
+              print 'Jou zoek ik niet!'
+      else
+          print 'Helaas, ik zoek weer verder'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Doornroosje met schoenmaat 38 krijgt de uitvoer: 'Helaas,\
+          \ ik zoek weer verder.'"
+      - "code": ""
+      - "feedback": "Nee, ze krijgt 'Naar jou zoek ik niet'"
+    - 1:
+      - "option_text": "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou\
+          \ was ik op zoek!' "
+      - "code": ""
+      - "feedback": " Nee, ze krijgt 'Helaas, ik zoek weer verder'"
+    - 2:
+      - "option_text": "Doornroosje met schoenmaat 40 krijgt de uitvoer: 'Helaas,\
+          \ ik zoek weer verder' "
+      - "code": ""
+      - "feedback": "Dat klopt!"
+    - 3:
+      - "option_text": "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou\
+          \ was ik op zoek!'"
+      - "code": ""
+      - "feedback": "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
+    correct_answer: "Als je niet schoenmaat 38 hebt, krijg je 'Helaas, ik zoek weer\
+      \ verder' ongeacht je naam."
+    hint: "C"
+    question_score: 10
