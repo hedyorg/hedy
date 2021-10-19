@@ -622,7 +622,7 @@ adventures:
                     jawaban_benar is 11 * 27
                     jawaban is ask 'Berapa hasil 11 dikali 27?'
                     if jawaban is jawaban_benar print 'bagus!'
-                    else print 'Salah! Jawaban benarnya ' correct_answer
+                    else print 'Salah! Jawaban benarnya ' jawaban_benar
                     ```
 
                     ## Angka-angka acak
@@ -639,7 +639,7 @@ adventures:
                     jawaban_benar is angka_satu * angka_dua
                     jawaban is ask 'berapa hasil dari ' angka_satu ' dikali ' angka_dua '?'
                     if jawaban is jawaban_benar print 'oke'
-                    else print 'salah! jawaban seharusnya adalah ' correct_answer
+                    else print 'salah! jawaban seharusnya adalah ' jawaban_benar
                     ```
                 start_code: print 'Selamat datang di kalkulator ini!'
             7:
@@ -795,7 +795,7 @@ adventures:
                     if main is lasagna harga is 12000
                     if main is spaghetti harga is 8000
                     print 'Kamu sudah memesan ' main
-                    print 'Itu akan seharga ' price ' rupiah'
+                    print 'Itu akan seharga ' harga ' rupiah'
                     print 'Terima kasih, selamat menikmati!'
                     ```
                     Tapi kamu juga dapat menambahkan hal-hal lain di rumah makan virtual kamu, misalnya menu makanan yang lebih banyak.
@@ -820,7 +820,7 @@ adventures:
                     if penutup is eskrim harga is harga + 5000
                     if penutup is susu harga is harga + 4000
                     print 'Kamu sudah memesan ' pembuka ' , ' main ' dan ' penutup
-                    print 'Harganya menjadi ' price ' rupiah'
+                    print 'Harganya menjadi ' harga ' rupiah'
                     print 'Terima kasih, selamat menikmati!'
                     ```
 
@@ -831,7 +831,7 @@ adventures:
                     - memberikan diskon juga pembeli memberikan kode kupon rahasia?
                     - menambahkan menu khusus anak-anak?
                     - memikirkan hal lain lagi untuk ditambahkan?
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
             6:
                 story_text: |-
                     ## Rumah makan
@@ -847,7 +847,7 @@ adventures:
 
                     Pada level 5 kamu dapat menanyakan ke beberapa orang tentang apa yang mau dia makan namun kamu tidak bisa menampilkan pesanannya secara terpisah karena kamu hanya bisa mengulang satu baris kode.
                     Pada level 7 kamu akan bisa mengulang beberapa baris kode sekaligus, memungkinkan kamu untuk menanyakan beberapa pesanan dan menampilkannya juga.
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
             7:
                 story_text: |-
                     ## Rumah makan
@@ -872,7 +872,7 @@ adventures:
 
                     ## Tantangan
                     Tentu, kode kamu dapat diperdetil dengan penambahan jenis makanan dan minuman pada menu. Jadi, silakan menambahkan pilihan-pilihan tersebut sesuai dengan keinginanmu!
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
             9:
                 story_text: |-
                     ## Rumah makan
@@ -894,7 +894,7 @@ adventures:
                     harga is 40000 * orang
                     print 'Harganya akan menjadi ' harga ' rupiah!'
                     ```
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
     fortune:
         name: Peramal
         description: Minta Hedy untuk meramal masa depan

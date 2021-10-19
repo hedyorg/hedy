@@ -272,16 +272,21 @@ class TestsLevel3(HedyTester):
 
   #negative tests
   def test_var_undefined_error_message(self):
-
     code = textwrap.dedent("""\
       naam is Hedy
       print 'ik heet ' name""")
 
-    with self.assertRaises(hedy.UndefinedVarException) as context:
-      result = hedy.transpile(code, self.level)
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.UndefinedVarException,
+      max_level=11,
+      test_name=self.name()
+    )
 
-    self.assertEqual('Var Undefined', context.exception.error_code)
-    self.assertEqual('name', context.exception.arguments['name'])
+    # deze extra check functie kan nu niet mee omdat die altijd op result werkt
+    # evt toch splitsen in 2 (pos en neg?)
+    # self.assertEqual('name', context.exception.arguments['name'])
+
   def test_issue_375(self):
     code = textwrap.dedent("""
       is Foobar

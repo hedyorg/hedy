@@ -98,14 +98,16 @@ class TestsLevel10(HedyTester):
   def test_allow_space_after_else_line(self):
 
     code = textwrap.dedent("""\
+    a is 1
     if a is 1:
       print a
     else:   
       print 'nee'""")
 
     expected = textwrap.dedent("""\
-    if str('a') == str('1'):
-      print(f'a')
+    a = '1'
+    if str(a) == str('1'):
+      print(f'{a}')
     else:
       print(f'nee')""")
 
@@ -121,14 +123,16 @@ class TestsLevel10(HedyTester):
     max_level=10
 
     code = textwrap.dedent("""\
+    a is 1
     if a is 1  :
       print a
     else:   
       print 'nee'""")
 
     expected = textwrap.dedent("""\
-    if str('a') == str('1'):
-      print(f'a')
+    a = '1'
+    if str(a) == str('1'):
+      print(f'{a}')
     else:
       print(f'nee')""")
 
