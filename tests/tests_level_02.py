@@ -9,7 +9,6 @@ class TestsLevel2(HedyTester):
   # * commands in the order of hedy.py e..g for level 2: ['print', 'ask', 'echo', 'is', 'turn', 'forward']
   # * combined tests
   # * markup tests
-  # * multilevel tests (positive multilevel)
   # * negative tests (inc. negative & multilevel)
 
   # test name conventions are like this:
@@ -356,7 +355,7 @@ class TestsLevel2(HedyTester):
     check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
 
     self.multi_level_tester(
-      max_level=4,
+      max_level=11,
       code=code,
       expected=expected,
       extra_check_function=check_in_list,
@@ -417,10 +416,6 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
     self.assertEqual(self.run_code(result), "Kat")
-
-
-  #multilevel tests
-  #no positive ones
 
   #negative tests
   def test_echo(self):

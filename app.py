@@ -57,6 +57,11 @@ ALL_LANGUAGES = {
     'id': 'Bahasa Indonesia',
     'fy': 'Frysk'
 }
+# Define fall back languages for adventures
+FALL_BACK_ADVENTURE = {
+    'fy': 'nl',
+    'pt_br': 'pt_pt'
+}
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
@@ -74,9 +79,9 @@ def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
 
     if not adventures_for_lang.has_adventures():
-        # Fall back to English
-        adventures_for_lang = ADVENTURES['en']
-
+        # The default fall back language is English
+        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")        
+        adventures_for_lang = ADVENTURES[fall_back]
     return adventures_for_lang.adventures_file['adventures']
 
 def load_adventures_per_level(lang, level):
@@ -447,7 +452,7 @@ def programs_page(request):
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         g.lang = lang = requested_lang()
         g.prefix = '/hedy'
@@ -469,7 +474,7 @@ def quiz_data_file_for(level):
 @app.route('/quiz/quiz_questions/<level_source>/<question_nr>/<attempt>', methods=['GET'])
 def get_quiz(level_source, question_nr, attempt):
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         # Reading the yaml file
         quiz_data = quiz_data_file_for(level_source)
@@ -516,7 +521,7 @@ def get_quiz(level_source, question_nr, attempt):
 @app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         # Get the chosen option from the request form with radio buttons
         option = request.form["radio_option"]
@@ -610,7 +615,7 @@ def adventure_page(adventure_name, level):
 
     # If requested adventure does not exist, return 404
     if not adventure_name in adventures:
-        return 'No such Hedy adventure!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_adventure'))
 
     adventure = adventures[adventure_name]
 
@@ -636,7 +641,7 @@ def adventure_page(adventure_name, level):
 
     # If requested level is not in adventure, return 404
     if not level in adventure['levels']:
-        abort(404)
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_adventure_level'))
 
     adventures_for_level = load_adventures_per_level(requested_lang(), level)
     level_defaults_for_lang = LEVEL_DEFAULTS[requested_lang()]
@@ -671,9 +676,9 @@ def index(level, step):
         try:
             g.level = level = int(level)
         except:
-            return 'No such Hedy level!', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_level'))
     else:
-        return 'No such Hedy level!', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_level'))
 
     g.lang = requested_lang()
     g.prefix = '/hedy'
@@ -685,12 +690,12 @@ def index(level, step):
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
-            return 'No such program', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_program'))
         # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
         user = current_user(request)
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(request) and not is_teacher(request):
-            return 'No such program!', 404
+            return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_program'))
         loaded_program = {'code': result['code'], 'name': result['name'], 'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
@@ -720,7 +725,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return 'No such program', 404
+        return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_program'))
 
     # Default to the language of the program's author(but still respect)
     # the switch if given.
@@ -771,7 +776,7 @@ def client_messages():
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return "<h1>500 Internal Server Error</h1>", 500
+    return utils.page_500 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang ())
 
 @app.route('/index.html')
 @app.route('/')
