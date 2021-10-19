@@ -57,6 +57,11 @@ ALL_LANGUAGES = {
     'id': 'Bahasa Indonesia',
     'fy': 'Frysk'
 }
+# Define fall back languages for adventures
+FALL_BACK_ADVENTURE = {
+    'fy': 'nl',
+    'pt_br': 'pt_pt'
+}
 
 LEVEL_DEFAULTS = collections.defaultdict(hedy_content.NoSuchDefaults)
 for lang in ALL_LANGUAGES.keys():
@@ -74,9 +79,9 @@ def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
 
     if not adventures_for_lang.has_adventures():
-        # Fall back to English
-        adventures_for_lang = ADVENTURES['en']
-
+        # The default fall back language is English
+        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")        
+        adventures_for_lang = ADVENTURES[fall_back]
     return adventures_for_lang.adventures_file['adventures']
 
 def load_adventures_per_level(lang, level):

@@ -82,7 +82,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
     ),
   },
@@ -93,7 +93,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
       rule_repeat(),
     ),
@@ -105,7 +105,7 @@ const LEVELS = [
       rule_printSpace(),
       rule_isAsk(),
       rule_is(),
-      rule_ifElse(),
+      rule_ifElseOneLine(),
       rule_expressions(),
       rule_repeat(),
       rule_arithmetic(),
@@ -491,6 +491,25 @@ function rule_expressions() {
 /**
  * Add highlighting for if/else, also add a condition
  */
+function rule_ifElseOneLine() {
+  return comp(
+    recognize('start', {
+      regex: keywordWithSpace('if'),
+      token: 'keyword',
+      next: 'condition',
+    }),
+    recognize('start', {
+      regex: keywordWithSpace('else'),
+      token: 'keyword',
+    }),
+    recognize('condition', {
+      regex: keywordWithSpace('is'),
+      token: 'keyword',
+      next: 'start',
+    }),
+  );
+}
+
 function rule_ifElse() {
   return comp(
     recognize('start', {
@@ -499,11 +518,11 @@ function rule_ifElse() {
       next: 'condition',
     }),
     recognize('start', {
-      regex: '\\b' + 'else',
+      regex: '\\b' + 'else' + '\\b',
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('is'),
+      regex: keywordWithSpace('((is)|(in))'),
       token: 'keyword',
       next: 'start',
     }),
