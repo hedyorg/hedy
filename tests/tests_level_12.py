@@ -69,7 +69,7 @@ class TestsLevel12(HedyTester):
     code = textwrap.dedent("""\
     a is 2
     a is 3
-    for a in range(2,4):
+    for a in range (2,4):
       a is a + 2
       b is b + 2""")
     expected = textwrap.dedent("""\
@@ -79,6 +79,48 @@ class TestsLevel12(HedyTester):
     for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
       b = int(b) + int(2)""")
+
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_for_loop_hindi_range(self):
+    code = textwrap.dedent("""\
+    उम्र is input('आपकी उम्र कितनी है?')
+    print ('तो आप यह उम्र के रह चुके हैं:')
+    for i in range(0,उम्र):
+        print(i)""")
+
+    expected = textwrap.dedent("""\
+    v6cdeb9dc4e33aa47ac927755899137f2 = input('आपकी उम्र कितनी है?')
+    print(f'तो आप यह उम्र के रह चुके हैं:')
+    step = 1 if int(0) < int(v6cdeb9dc4e33aa47ac927755899137f2) else -1
+    for i in range(int(0), int(v6cdeb9dc4e33aa47ac927755899137f2) + step, step):
+      print(f'{i}')""")
+
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_for_loop_hindi_iterator(self):
+    code = textwrap.dedent("""\
+    उम्र is input('आपकी उम्र कितनी है?')
+    print ('तो आप यह उम्र के रह चुके हैं:')
+    for इ in range(0, 5):
+        print(इ)""")
+
+    expected = textwrap.dedent("""\
+    v6cdeb9dc4e33aa47ac927755899137f2 = input('आपकी उम्र कितनी है?')
+    print(f'तो आप यह उम्र के रह चुके हैं:')
+    step = 1 if int(0) < int(5) else -1
+    for vcd4bb37fd7505830fa4bb20d20db9d0f in range(int(0), int(5) + step, step):
+      print(f'{vcd4bb37fd7505830fa4bb20d20db9d0f}')""")
 
     self.multi_level_tester(
       max_level=20,
