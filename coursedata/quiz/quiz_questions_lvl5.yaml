@@ -1,135 +1,254 @@
+---
 level: 5
 questions:
+- 1:
+    question_text: "Wat print Hedy bij deze code?"
+    code: "print 2*10"
+    mp_choice_options:
+    - 0:
+      - "option_text": "20"
+      - "code": ""
+      - "feedback": "Correct!"
     - 1:
-            question_text: "Wat print Hedy bij deze code?"
-            code: "print 2*10"
-            mp_choice_options:
-              - {option_text: "20", code: "", feedback: "Correct!"}
-              - {option_text: "12", code: "?", feedback: "Helaas, plus doe je met +"}
-              - {option_text: "2*10", code: "", feedback: "Helaas, Hedy rekent de som uit..."}
-              - {option_text: "210", code: "", feedback: "Let op! Het is een som."}
-            correct_answer: "A"
-            hint: "Het * gebruik je als keerteken"
-            question_score: 5
+      - "option_text": "12"
+      - "code": "?"
+      - "feedback": "Helaas, plus doe je met +"
     - 2:
-            question_text: "Welk teken gebruik je voor plussommen?"
-            code: "..."
-            mp_choice_options:
-              - {option_text: "-", code: "", feedback: "Helaas"}
-              - {option_text: "plus", code: "", feedback: "Helaas"}
-              - {option_text: "*", code: "", feedback: "Helaas"}
-              - {option_text: "+", code: "", feedback: "Juist!"}
-            correct_answer: "D"
-            hint: "Het is het teken dat je gewoonlijk ook voor plus gebruikt"
-            question_score: 10
+      - "option_text": "2*10"
+      - "code": ""
+      - "feedback": "Helaas, Hedy rekent de som uit..."
     - 3:
-            question_text: "Wat print Hedy bij deze code?"
-            code: "print '3*10'"
-            mp_choice_options:
-              - {option_text: "30", code: "", feedback: "Helaas, dit antwoord zou goed zijn als er geen aanhalingstekens stonden.."}
-              - {option_text: "13", code: "?", feedback: "Helaas, probeer het nog eens..."}
-              - {option_text: "3*10", code: "", feedback: "Correct! Er staan aanhalingstekens omheen, dus Hedy print letterlijk wat er staat"}
-              - {option_text: "Niks, Hedy geeft een error.", code: "", feedback: "Nee hoor, Hedy print gewoon letterlijk wat er staat."}
-            correct_answer: "C"
-            hint: "Let op de aanhalingstekens"
-            question_score: 5
-    - 4:
-            question_text: "Kim is 10. Wat print Hedy voor haar?"
-            code: |-
-              naam is ask 'Hoeveel letters zitten er in je naam?'
-              leeftijd is ask 'Hoe oud ben je?'
-              geluksgetal is naam * leeftijd
-              print 'Jouw geluksgetal is...' geluksgetal
-            mp_choice_options:
-              - {option_text: "30", code: "", feedback: "Let op, Hedy print ook 'Jouw geluksgetal is...'"}
-              - {option_text: "10", code: "", feedback: "Helaas! Kijk nog eens goed."}
-              - {option_text: "Jouw geluksgetal is... 30", code: "", feedback: " Juist!"}
-              - {option_text: "Jouw geluksgetal is... 10", code: "", feedback: "Helaas! Geluksgetal is naam * leeftijd, dus 3 * 10..."}
-            correct_answer: "C"
-            hint: "Kim heeft 3 letters en is 10 jaar oud, dus haar geluksgetal = 3*10 = 30."
-            question_score: 10    
-    - 5:
-            question_text: "Hoeveel moeten je betalen als je met 5 mensen komt eten?"
-            code: |-
-              print 'Welkom in restaurant Hedy!'
-              mensen is 'Met hoeveel mensen komt u vanavond eten?'
-              prijs is mensen * 10
-              print 'Dat wordt dan ' prijs 'euro alstublieft'
-            mp_choice_options:
-              - {option_text: "5", code: "", feedback: "Helaas, 5 mensen betalen wel meer."}
-              - {option_text: "10", code: "", feedback: "Helaas. Het is 10 euro per persoon."}
-              - {option_text: "15", code: "", feedback: "Helaas. Het sterretje betekent keer."}
-              - {option_text: "50", code: "", feedback: "Goedzo!"}
-            correct_answer: "D"
-            hint: "prijs is mensen keer 10"
-            question_score: 10    
-    - 6:
-            question_text: "Hoe duur is een hamburger in dit virtuele restaurant?"
-            code: |-
-              print 'Welkom in restaurant Hedy'
-              eten is ask 'Wat wilt u eten?'
-              prijs is 0
-              if eten is hamburger prijs is 15
-              if eten is friet prijs is 6
-            mp_choice_options:
-              - {option_text: "15 euro", code: "", feedback: "Super!"}
-              - {option_text: "6 euro", code: "", feedback: "De friet is 6 euro."}
-              - {option_text: "0 euro", code: "", feedback: "De hamburger is niet gratis!"}
-              - {option_text: "21 euro", code: "", feedback: "De hamburger is goedkoper!"}
-            correct_answer: "A"
-            hint: "Kijk goed op regel 4."
-            question_score: 10
-    - 7:
-            question_text: "Waarom staat er in regel 7 'prijs is prijs + 3' en niet gewoon 'prijs is 3'?"
-            code: |-
-              print 'Welkom in restaurant Hedy'
-              eten is ask 'Wat wilt u eten?'
-              prijs is 0
-              if eten is hamburger prijs is prijs + 15
-              if eten is friet prijs is prijs + 6
-              drinken is ask 'Wat wilt u drinken?'
-              if drinken is cola prijs is prijs + 3
-              if drinken is water prijs is prijs + 1
-              print prijs ' euro alstublieft'
-            mp_choice_options:
-              - {option_text: "Er had net zo goed 'prijs is 3' kunnen staan.", code: "", feedback: "Nee, dat is niet waar! Het is belangrijk dat de prijs 3 meer wordt."}
-              - {option_text: "Omdat Hedy 'prijs is 3' niet begrijpt.", code: "", feedback: "Hedy begrijpt het wel, maar het betekent wat anders."}
-              - {option_text: "Omdat Hedy anders de prijs van het eten anders vergeet. De totaalprijs zou dan dus maar 3 euro worden.", code: "", feedback: "Klopt!"}
-              - {option_text: "Omdat de prijs in het begin 0 is.", code: "", feedback: "De prijs is inderdaad 0 in het begin, maar dat is niet de reden."}
-            correct_answer: "C"
-            hint: "De prijs moet niet 3 zijn, maar 3 meer dan het al was..."
-            question_score: 10
-    - 8:
-            question_text: "Waarom klopt deze code niet?"
-            code: |-
-              goede antwoord is 3*12
-              antwoord is ask 'Wat is 3 keer 12?'
-              if antwoord is goede antwoord print 'Goedzo!'
-              else print 'Helaas... Het was ' goede antwoord
-            mp_choice_options:
-              - {option_text: "Er moeten geen aanhalingstekens staan op regel 2", code: "", feedback: "Helaas, die moeten er wel staan!"}
-              - {option_text: "De variabele heet goede antwoord, maar een variabelenaam mag maar 1 woord zijn. Dus het moet goedeantwoord zijn.", code: "", feedback: "Correct!"}
-              - {option_text: "De if en else moeten per se op dezelfde regel staan", code: "", feedback: "Nee, dat is niet waar."}
-              - {option_text: "De variabele antwoord mag geen antwoord heten, want de andere variabele heet al goede antwoord en dat lijkt te veel op elkaar.", code: "", feedback: "Helaas. Variabelenamen mogen op elkaar lijken, zolang ze maar niet precies hetzelfde zijn."}
-            correct_answer: "B"
-            hint: "Kijk goed naar de namen van de variabelen."
-            question_score: 10
-    - 9:
-            question_text: "Stel: Je houdt 10 van Ajax, je hebt 2 bananen gegeten deze week en je hebt 3 keer je handen gewassen vandaag. Hoe slim vindt de malle waarzegger je? "
-            code: |-
-              print 'Ik ben Hedy de malle waarzegger!'
-              print 'Ik ga voorspellen hoe slim jij bent!'
-              ajax is ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
-              bananen is ask 'Hoeveel bananen heb jij deze week gegeten?'
-              hygiene is ask 'Hoevaak heb jij je handen al gewassen vandaag?'
-              resultaat is bananen + hygiene
-              resultaat is resultaat * ajax
-              print 'Jij bent ' resultaat 'procent slim.'
-            mp_choice_options:
-              - {option_text: "10%", code: "", feedback: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"}
-              - {option_text: "32%", code: "", feedback: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"}
-              - {option_text: "50%", code: "", feedback: "Super!"}
-              - {option_text: "100%", code: "", feedback: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"}
-            correct_answer: "C"
-            hint: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
-            question_score: 10
+      - "option_text": "210"
+      - "code": ""
+      - "feedback": "Let op! Het is een som."
+    correct_answer: "A"
+    hint: "Het * gebruik je als keerteken"
+    question_score: 5
+- 2:
+    question_text: "Welk teken gebruik je voor plussommen?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "-"
+      - "code": ""
+      - "feedback": "Helaas"
+    - 1:
+      - "option_text": "plus"
+      - "code": ""
+      - "feedback": "Helaas"
+    - 2:
+      - "option_text": "*"
+      - "code": ""
+      - "feedback": "Helaas"
+    - 3:
+      - "option_text": "+"
+      - "code": ""
+      - "feedback": "Juist!"
+    correct_answer: "D"
+    hint: "Het is het teken dat je gewoonlijk ook voor plus gebruikt"
+    question_score: 10
+- 3:
+    question_text: "Wat print Hedy bij deze code?"
+    code: "print '3*10'"
+    mp_choice_options:
+    - 0:
+      - "option_text": "30"
+      - "code": ""
+      - "feedback": "Helaas, dit antwoord zou goed zijn als er geen aanhalingstekens\
+          \ stonden.."
+    - 1:
+      - "option_text": "13"
+      - "code": "?"
+      - "feedback": "Helaas, probeer het nog eens..."
+    - 2:
+      - "option_text": "3*10"
+      - "code": ""
+      - "feedback": "Correct! Er staan aanhalingstekens omheen, dus Hedy print letterlijk\
+          \ wat er staat"
+    - 3:
+      - "option_text": "Niks, Hedy geeft een error."
+      - "code": ""
+      - "feedback": "Nee hoor, Hedy print gewoon letterlijk wat er staat."
+    correct_answer: "C"
+    hint: "Let op de aanhalingstekens"
+    question_score: 5
+- 4:
+    question_text: "Kim is 10. Wat print Hedy voor haar?"
+    code: |-
+      naam is ask 'Hoeveel letters zitten er in je naam?'
+      leeftijd is ask 'Hoe oud ben je?'
+      geluksgetal is naam * leeftijd
+      print 'Jouw geluksgetal is...' geluksgetal
+    mp_choice_options:
+    - 0:
+      - "option_text": "30"
+      - "code": ""
+      - "feedback": "Let op, Hedy print ook 'Jouw geluksgetal is...'"
+    - 1:
+      - "option_text": "10"
+      - "code": ""
+      - "feedback": "Helaas! Kijk nog eens goed."
+    - 2:
+      - "option_text": "Jouw geluksgetal is... 30"
+      - "code": ""
+      - "feedback": " Juist!"
+    - 3:
+      - "option_text": "Jouw geluksgetal is... 10"
+      - "code": ""
+      - "feedback": "Helaas! Geluksgetal is naam * leeftijd, dus 3 * 10..."
+    correct_answer: "C"
+    hint: "Kim heeft 3 letters en is 10 jaar oud, dus haar geluksgetal = 3*10 = 30."
+    question_score: 10
+- 5:
+    question_text: "Hoeveel moeten je betalen als je met 5 mensen komt eten?"
+    code: |-
+      print 'Welkom in restaurant Hedy!'
+      mensen is 'Met hoeveel mensen komt u vanavond eten?'
+      prijs is mensen * 10
+      print 'Dat wordt dan ' prijs 'euro alstublieft'
+    mp_choice_options:
+    - 0:
+      - "option_text": "5"
+      - "code": ""
+      - "feedback": "Helaas, 5 mensen betalen wel meer."
+    - 1:
+      - "option_text": "10"
+      - "code": ""
+      - "feedback": "Helaas. Het is 10 euro per persoon."
+    - 2:
+      - "option_text": "15"
+      - "code": ""
+      - "feedback": "Helaas. Het sterretje betekent keer."
+    - 3:
+      - "option_text": "50"
+      - "code": ""
+      - "feedback": "Goedzo!"
+    correct_answer: "D"
+    hint: "prijs is mensen keer 10"
+    question_score: 10
+- 6:
+    question_text: "Hoe duur is een hamburger in dit virtuele restaurant?"
+    code: |-
+      print 'Welkom in restaurant Hedy'
+      eten is ask 'Wat wilt u eten?'
+      prijs is 0
+      if eten is hamburger prijs is 15
+      if eten is friet prijs is 6
+    mp_choice_options:
+    - 0:
+      - "option_text": "15 euro"
+      - "code": ""
+      - "feedback": "Super!"
+    - 1:
+      - "option_text": "6 euro"
+      - "code": ""
+      - "feedback": "De friet is 6 euro."
+    - 2:
+      - "option_text": "0 euro"
+      - "code": ""
+      - "feedback": "De hamburger is niet gratis!"
+    - 3:
+      - "option_text": "21 euro"
+      - "code": ""
+      - "feedback": "De hamburger is goedkoper!"
+    correct_answer: "A"
+    hint: "Kijk goed op regel 4."
+    question_score: 10
+- 7:
+    question_text: "Waarom staat er in regel 7 'prijs is prijs + 3' en niet gewoon\
+      \ 'prijs is 3'?"
+    code: |-
+      print 'Welkom in restaurant Hedy'
+      eten is ask 'Wat wilt u eten?'
+      prijs is 0
+      if eten is hamburger prijs is prijs + 15
+      if eten is friet prijs is prijs + 6
+      drinken is ask 'Wat wilt u drinken?'
+      if drinken is cola prijs is prijs + 3
+      if drinken is water prijs is prijs + 1
+      print prijs ' euro alstublieft'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Er had net zo goed 'prijs is 3' kunnen staan."
+      - "code": ""
+      - "feedback": "Nee, dat is niet waar! Het is belangrijk dat de prijs 3 meer\
+          \ wordt."
+    - 1:
+      - "option_text": "Omdat Hedy 'prijs is 3' niet begrijpt."
+      - "code": ""
+      - "feedback": "Hedy begrijpt het wel, maar het betekent wat anders."
+    - 2:
+      - "option_text": "Omdat Hedy anders de prijs van het eten anders vergeet. De\
+          \ totaalprijs zou dan dus maar 3 euro worden."
+      - "code": ""
+      - "feedback": "Klopt!"
+    - 3:
+      - "option_text": "Omdat de prijs in het begin 0 is."
+      - "code": ""
+      - "feedback": "De prijs is inderdaad 0 in het begin, maar dat is niet de reden."
+    correct_answer: "C"
+    hint: "De prijs moet niet 3 zijn, maar 3 meer dan het al was..."
+    question_score: 10
+- 8:
+    question_text: "Waarom klopt deze code niet?"
+    code: |-
+      goede antwoord is 3*12
+      antwoord is ask 'Wat is 3 keer 12?'
+      if antwoord is goede antwoord print 'Goedzo!'
+      else print 'Helaas... Het was ' goede antwoord
+    mp_choice_options:
+    - 0:
+      - "option_text": "Er moeten geen aanhalingstekens staan op regel 2"
+      - "code": ""
+      - "feedback": "Helaas, die moeten er wel staan!"
+    - 1:
+      - "option_text": "De variabele heet goede antwoord, maar een variabelenaam mag\
+          \ maar 1 woord zijn. Dus het moet goedeantwoord zijn."
+      - "code": ""
+      - "feedback": "Correct!"
+    - 2:
+      - "option_text": "De if en else moeten per se op dezelfde regel staan"
+      - "code": ""
+      - "feedback": "Nee, dat is niet waar."
+    - 3:
+      - "option_text": "De variabele antwoord mag geen antwoord heten, want de andere\
+          \ variabele heet al goede antwoord en dat lijkt te veel op elkaar."
+      - "code": ""
+      - "feedback": "Helaas. Variabelenamen mogen op elkaar lijken, zolang ze maar\
+          \ niet precies hetzelfde zijn."
+    correct_answer: "B"
+    hint: "Kijk goed naar de namen van de variabelen."
+    question_score: 10
+- 9:
+    question_text: "Stel: Je houdt 10 van Ajax, je hebt 2 bananen gegeten deze week\
+      \ en je hebt 3 keer je handen gewassen vandaag. Hoe slim vindt de malle waarzegger\
+      \ je? "
+    code: |-
+      print 'Ik ben Hedy de malle waarzegger!'
+      print 'Ik ga voorspellen hoe slim jij bent!'
+      ajax is ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
+      bananen is ask 'Hoeveel bananen heb jij deze week gegeten?'
+      hygiene is ask 'Hoevaak heb jij je handen al gewassen vandaag?'
+      resultaat is bananen + hygiene
+      resultaat is resultaat * ajax
+      print 'Jij bent ' resultaat 'procent slim.'
+    mp_choice_options:
+    - 0:
+      - "option_text": "10%"
+      - "code": ""
+      - "feedback": "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+    - 1:
+      - "option_text": "32%"
+      - "code": ""
+      - "feedback": "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+    - 2:
+      - "option_text": "50%"
+      - "code": ""
+      - "feedback": "Super!"
+    - 3:
+      - "option_text": "100%"
+      - "code": ""
+      - "feedback": "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+    correct_answer: "C"
+    hint: "(2 bananen + 3 hygiene) * 10 ajax = 5*10 = ?"
+    question_score: 10
