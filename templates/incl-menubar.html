@@ -27,7 +27,7 @@
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
       </button>
       <ul class="dropdown-menu absolute hidden text-black rounded bg-yellow-400 mt-2 pt-1 list-none ml-0 right-0 w-48">
-          <li class="p-2"><input id="search_language" class="border-2 border-black rounded h-8 px-2 mt-2 w-full"></li>
+          <li class="p-2"><input id="search_language" placeholder="{{search}}" class="border-2 border-black rounded h-8 px-2 mt-2 w-full"></li>
         {% for lang in other_languages() %}
         <a class="no-underline" href="{{ modify_query(lang=lang.lang) }}"><li class="hover:bg-yellow-600 text-black py-2 px-4 block border-b border-black language">{{ lang.sym }}</li></a>
         {% endfor %}
