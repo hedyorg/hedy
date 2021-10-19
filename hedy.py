@@ -1420,6 +1420,34 @@ def execute(input_string, level):
         raise HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
 
+
+# TODO: Change the program to use the parse method from the parser and not the lex method
+def translate_keywords(input_string, from_lang="en", to_lang="nl",level=1):
+    parser = get_parser(level, from_lang)
+    keyword_list = []
+
+    #program_root = parser.parse(input_string + '\n').children[0]
+    #abstract_syntaxtree = ExtractAST().transform(program_root)
+
+
+    tokens = parser.lex(input_string)
+    for token in tokens:
+        keyword_list.append([token.type, str(token)])
+
+    keywords = get_keywords_for_language(to_lang)
+    newString = ''
+    for token in keyword_list:
+        if token[0] != '__ANON_1' and token[0] != '_EOL' and token[0] != '_SPACE':
+            start = keywords.find(token[0]) + len(token[0]) + 4
+            end = keywords.find('\n', start) - 1
+            token[1] = keywords[start:end]
+
+        newString += token[1]
+
+    print(newString)
+    return
+
+
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
