@@ -2,221 +2,240 @@
 level: 1
 questions:
 - 1:
-    question_text: "What's this programming language called?"
+    question_text: "Wat is de naam van de programmeertaal die je hier leert?"
     code: "..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', 'Hedy')]), ordereddict([('code', None)]),\
-          \ ordereddict([('feedback', 'Good job!')])]"
+      - "option_text": "Hedy"
+      - "code": "None"
+      - "feedback": "Goed zo!"
     - 1:
-      - "1": "[ordereddict([('option_text', 'Heddy')]), ordereddict([('code', None)]),\
-          \ ordereddict([('feedback', 'Not this one!')])]"
+      - "option_text": "Heddy"
+      - "code": "None"
+      - "feedback": "Deze is het niet!"
     - 2:
-      - "2": "[ordereddict([('option_text', 'Haydie')]), ordereddict([('code', None)]),\
-          \ ordereddict([('feedback', 'Not this one!')])]"
+      - "option_text": "Haydie"
+      - "code": "None"
+      - "feedback": "Deze is het niet!"
     - 3:
-      - "3": "[ordereddict([('option_text', 'Henk')]), ordereddict([('code', None)]),\
-          \ ordereddict([('feedback', 'Not this one!')])]"
+      - "option_text": "Henk"
+      - "code": "None"
+      - "feedback": "Deze is het niet!"
     correct_answer: "A"
-    hint: "It's named after Hedy Lamarr."
+    hint: "We beginnen met een simpele vraag."
     question_score: 10
 - 2:
-    question_text: "Which command makes text appear?"
+    question_text: "Met welk commando kun je tekst laten verschijnen?"
     code: "..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', None)]), ordereddict([('code', 'echo')]),\
-          \ ordereddict([('feedback', 'Echo repeats a given answer.')])]"
+      - "option_text:": "None"
+      - "code": "echo"
+      - "feedback": "Met echo herhaal je een antwoord..."
     - 1:
-      - "1": "[ordereddict([('option_text', None)]), ordereddict([('code', 'print')]),\
-          \ ordereddict([('feedback', 'Correct!')])]"
+      - "option_text:": "None"
+      - "code": "print"
+      - "feedback": "Goed! Met print kun je tekst printen!"
     - 2:
-      - "2": "[ordereddict([('option_text', None)]), ordereddict([('code', 'hello')]),\
-          \ ordereddict([('feedback', \"Hello isn't a command.\")])]"
+      - "option_text:": "None"
+      - "code": "hello"
+      - "feedback": "Hello is geen commando, probeer het nog eens..."
     - 3:
-      - "3": "[ordereddict([('option_text', None)]), ordereddict([('code', 'ask')]),\
-          \ ordereddict([('feedback', 'With ask you can ask a question')])]"
+      - "option_text:": "None"
+      - "code": "ask"
+      - "feedback": "Met ask kun je een vraag stellen..."
     correct_answer: "B"
     hint: "(?) Hello world! "
     question_score: 10
 - 3:
-    question_text: "How do you ask what someones favorite color is?"
+    question_text: "Hoe vraag je: Wat is je lievelingskleur?"
     code: "..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', None)]), ordereddict([('code', 'print\
-          \ What is your favorite color?')]), ordereddict([('feedback', \"Print prints\
-          \ text, but it doesn't ask questions\")])]"
+      - "option_text:": "None"
+      - "code": "print Wat is je lievelingskleur?"
+      - "feedback": "Met print print je iets"
     - 1:
-      - "1": "[ordereddict([('option_text', None)]), ordereddict([('code', 'ask print\
-          \ What is your favorite color?')]), ordereddict([('feedback', \"You don't\
-          \ need 2 commands, only one.\")])]"
+      - "option_text:": "None"
+      - "code": "ask print Wat is je lievelingskleur?"
+      - "feedback": "Ask en print is dubbelop, je hebt maar één commando nodig."
     - 2:
-      - "2": "[ordereddict([('option_text', None)]), ordereddict([('code', 'ask What\
-          \ is your favorite color?')]), ordereddict([('feedback', 'Great!')])]"
+      - "option_text:": "None"
+      - "code": "ask Wat is je lievelingskleur?"
+      - "feedback": "Goed zo!"
     - 3:
-      - "3": "[ordereddict([('option_text', None)]), ordereddict([('code', 'echo What\
-          \ is your favorite color?')]), ordereddict([('feedback', 'Echo repeats your\
-          \ answer back to you.')])]"
+      - "option_text:": "None"
+      - "code": "echo Wat is je lievelingskleur?"
+      - "feedback": "Echo herhaalt het antwoord."
     correct_answer: "C"
-    hint: "You can ask something with the ask command"
+    hint: "Het Engelse woord voor vragen is ask"
     question_score: 10
 - 4:
-    question_text: "What is wrong with this code?"
+    question_text: "Wat is er mis met deze code?"
     code: |-
-      Hi Im Hedy!
-      ask Who are you?
-      echo Hi...
+      Hoi ik ben Hedy!
+      ask Wie ben jij?
+      echo Hoi...
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', 'print in line 1 is missing.')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', 'Correct!')])]"
+      - "option_text": "print in regel 1 mist."
+      - "code": "None"
+      - "feedback": "Goedzo!"
     - 1:
-      - "1": "[ordereddict([('option_text', 'Im in line 1 is spelled wrong.')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', \"Im is spelled wrong on purpose, Hedy\
-          \ doesn't understand the apostrophes yet.\")])]"
+      - "option_text": "ask in regel 2 is fout gespeld, het moet aks zijn."
+      - "code": "None"
+      - "feedback": "Ask is goed gespeld."
     - 2:
-      - "2": "[ordereddict([('option_text', \"Echo isn't a command.\")]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', \"Echo is a command, there's another\
-          \ mistake.\")])]"
+      - "option_text": "echo is geen commando in level 1,"
+      - "code": "None"
+      - "feedback": "Echo is goed, er is een ander foutje"
     - 3:
-      - "3": "[ordereddict([('option_text', 'Nothing! This is a perfect code!')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', 'Wrong, look\
-          \ carefully!')])]"
+      - "option_text": "Niets! De code is goed!"
+      - "code": "None"
+      - "feedback": "Er zit een foutje in, kijk goed!"
     correct_answer: "A"
-    hint: "Line 1 doesn't seem right"
+    hint: "Er mist een commando in het begin van de code"
     question_score: 10
 - 5:
-    question_text: "Which command is missing in line 2?"
+    question_text: "Welk commando mist in regel 2?"
     code: |-
-      ask What is your favorite pet?
-      ? So your favorite pet is..."
+      ask Wat is jouw lievelingsdier?
+      ? Dus jouw lievelingsdier is..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', None)]), ordereddict([('code', 'print')]),\
-          \ ordereddict([('feedback', 'No, you want the answer to be repeated back\
-          \ to you')])]"
+      - "option_text:": "None"
+      - "code": "print"
+      - "feedback": "Je wilt dat in regel 2 het antwoord herhaald wordt..."
     - 1:
-      - "1": "[ordereddict([('option_text', None)]), ordereddict([('code', 'ego')]),\
-          \ ordereddict([('feedback', \"ego isn't a  command.\")])]"
+      - "option_text:": "None"
+      - "code": "ego"
+      - "feedback": "ego is geen commando, probeer het nog eens..."
     - 2:
-      - "2": "[ordereddict([('option_text', None)]), ordereddict([('code', 'ask')]),\
-          \ ordereddict([('feedback', 'With ask you can ask a question.')])]"
+      - "option_text:": "None"
+      - "code": "ask"
+      - "feedback": "Met ask kun je een vraag stellen..."
     - 3:
-      - "3": "[ordereddict([('option_text', None)]), ordereddict([('code', 'echo')]),\
-          \ ordereddict([('feedback', 'Right on!')])]"
+      - "option_text:": "None"
+      - "code": "echo"
+      - "feedback": "Goedzo!"
     correct_answer: "D"
-    hint: "You want to see the answer at the end of line 2..."
+    hint: "met 'ask' kun je iets vragen"
     question_score: 10
 - 6:
-    question_text: "What's wrong with this code?"
+    question_text: "Wat is er mis met deze code?"
     code: |-
-      print Hi im Hedy!
-      aks Which football team do you support?
-      echo You support...
-      print Cool! Me too!
+      print Hoi ik ben Hedy!
+      aks Voor welke voetbalclub ben jij?
+      echo Jij bent voor...
+      print Cool! Ik ook!
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', 'In line 1 print should be replaced with\
-          \ ask.')]), ordereddict([('code', None)]), ordereddict([('feedback', 'Print\
-          \ in line 1 is corrcet, mind the spelling of the words.')])]"
+      - "option_text": "In regel 1 moet het print commando worden vervangen door ask."
+      - "code": "None"
+      - "feedback": "Print in regel 1 is goed, let op de spelling van de commando's"
     - 1:
-      - "1": "[ordereddict([('option_text', 'In line 2 ask is spelled wrong')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', 'Great! You paid attention!')])]"
+      - "option_text": "In regel 2 is ask fout gespeld."
+      - "code": "None"
+      - "feedback": "Goed opgelet!"
     - 2:
-      - "2": "[ordereddict([('option_text', 'Line 3 has to begin with print instead\
-          \ of echo.')]), ordereddict([('code', None)]), ordereddict([('feedback',\
-          \ 'Echo iscorrect, check the spelling of the commands.')])]"
+      - "option_text": "Regel 3 moet beginnen met print in plaats van echo."
+      - "code": "None"
+      - "feedback": "Echo is goed! Kijk naar de spelling van de commando's."
     - 3:
-      - "3": "[ordereddict([('option_text', 'In line 4 print is spelled wrong.')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', 'There is a spelling\
-          \ error somewhere else')])]"
+      - "option_text": "In regel 4 is print verkeerd gespeld."
+      - "code": "None"
+      - "feedback": "Er zit ergens anders een spelfout"
     correct_answer: "B"
-    hint: "Check the way the commands are spelled."
+    hint: "Kijk goed naar de spelling van de commando's"
     question_score: 10
 - 7:
-    question_text: "What's wrong with this code?"
+    question_text: "Wat is er mis met deze code?"
     code: |-
-      print Welcome at Hedys restaurant!
-      ask What would you like to eat?
-      echo So you want to order ...
-      print Coming right up! Enjoy!"
+      print Welkom bij Restaurant Hedy!
+      ask Wat wilt u eten?
+      echo Dus u wilt graag ...
+      print Komt er aan! Eet smakelijk!"
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', 'In line 1 print needs to be replaced\
-          \ with ask')]), ordereddict([('code', None)]), ordereddict([('feedback',\
-          \ 'Are you sure something is wrong?')])]"
+      - "option_text": "In regel 1 moest ask staan in plaats van print"
+      - "code": "None"
+      - "feedback": "Weet je zeker dat er iets mis is?"
     - 1:
-      - "1": "[ordereddict([('option_text', 'In line 1 moet print needs to be replaced\
-          \ with echo')]), ordereddict([('code', None)]), ordereddict([('feedback',\
-          \ \"Are you sure something's wrong?\")])]"
+      - "option_text": "In regel 1 moet echo staan in plaats van print"
+      - "code": "None"
+      - "feedback": "Weet je zeker dat er iets mis is?"
     - 2:
-      - "2": "[ordereddict([('option_text', 'In line 3 echo needs to be replaced with\
-          \ print')]), ordereddict([('code', None)]), ordereddict([('feedback', 'Are\
-          \ you sure something is wrong?')])]"
+      - "option_text": "In regel 3 moet print staan in plaats van echo"
+      - "code": "None"
+      - "feedback": "Weet je zeker dat er iets mis is?"
     - 3:
-      - "3": "[ordereddict([('option_text', 'Nothing! This is a perfect code!')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', 'Correct!')])]"
+      - "option_text": "Niets! Deze code is goed!"
+      - "code": "None"
+      - "feedback": "Correct!"
     correct_answer: "D"
-    hint: "Check the code line by line"
+    hint: "Controleer de code regel voor regel."
     question_score: 10
 - 8:
-    question_text: "How do you use the echo command?"
+    question_text: "Wat doet het commando echo?"
     code: "..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', 'You can use it to ask a question')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', \"That's what\
-          \ ask is for\")])]"
+      - "option_text": "Met echo stel je een vraag"
+      - "code": "None"
+      - "feedback": "Dat doe je met ask"
     - 1:
-      - "1": "[ordereddict([('option_text', 'You can use it to print text')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', \"That's what print is for\")])]"
+      - "option_text": "Met echo laat je tekst verschijnen"
+      - "code": "None"
+      - "feedback": "Dat doe je met print"
     - 2:
-      - "2": "[ordereddict([('option_text', 'You can use it to repeat an answer')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', 'Good job!')])]"
+      - "option_text": "Met echo herhaal je een gegeven antwoord"
+      - "code": "None"
+      - "feedback": "Goed zo!"
     - 3:
-      - "3": "[ordereddict([('option_text', 'You can use it to make text disappear')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', \"That's not\
-          \ right\")])]"
+      - "option_text": "Met echo laat je tekst verdwijnen"
+      - "code": "None"
+      - "feedback": "Dat klopt niet"
     correct_answer: "C"
-    hint: "Echo is used after a ask command."
+    hint: "echo gebruik je nadat iemand een antwoord gegeven heeft bij ask."
     question_score: 10
 - 9:
-    question_text: "What's wrong with this code?"
+    question_text: "Wat is er mis met deze code?"
     code: |-
-      print Hello!
-      print How are you doing?
-      echo So you are doing..."
+      print Hallo!
+      print Hoe gaat het met jou?
+      echo Dus het gaat..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', ' print in line 1 should be ask')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', 'No, print is right. Where is the question\
-          \ being asked?')])]"
+      - "option_text": " print in regel 1 moet ask zijn"
+      - "code": "None"
+      - "feedback": "Nee, print is goed. Waar wordt de vraag gesteld?"
     - 1:
-      - "1": "[ordereddict([('option_text', ' print in line 2 should be aks')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', 'Super!')])]"
+      - "option_text": " print in regel 2 moet ask zijn"
+      - "code": "None"
+      - "feedback": "Super!"
     - 2:
-      - "2": "[ordereddict([('option_text', ' echo in line 3 should be ask')]), ordereddict([('code',\
-          \ None)]), ordereddict([('feedback', 'No, echo is right. Where is the question\
-          \ being asked?')])]"
+      - "option_text": " echo in regel 3 moet ask zijn"
+      - "code": "None"
+      - "feedback": "Nee, echo is goed. Waar wordt de vraag gesteld?"
     - 3:
-      - "3": "[ordereddict([('option_text', 'Nothing. this is a perfect code!')]),\
-          \ ordereddict([('code', None)]), ordereddict([('feedback', 'Look carefully\
-          \ for the mistake..')])]"
+      - "option_text": "Niets, alles is goed!"
+      - "code": "None"
+      - "feedback": "Er zit wel een foutje in..."
     correct_answer: "B"
-    hint: "ask allows you to ask a question"
+    hint: "met 'ask' kun je iets vragen"
     question_score: 10
 - 10:
-    question_text: "Are you ready for level 2?"
+    question_text: "Heb je zin om naar level 2 te gaan?"
     code: "..."
     mp_choice_options:
     - 0:
-      - "0": "[ordereddict([('option_text', 'Yes!')]), ordereddict([('code', None)]),\
-          \ ordereddict([('feedback', \"Great! Let's go to the next level!\")])]"
+      - "option_text": "Ja!"
+      - "code:": "None"
+      - "feedback": "Mooizo! Op naar level 2!"
     - 1:
-      - "1": "[ordereddict([('option_text', 'No')]), ordereddict([('code', None)]),\
-          \ ordereddict([('feedback', 'Too bad... You can practice some more in level\
-          \ 1')])]"
+      - "option_text": "Nee"
+      - "code": "None"
+      - "feedback": "Jammer..."
     correct_answer: "A"
-    hint: "Let's go!"
+    hint: "Op naar level 2!"
     question_score: 10

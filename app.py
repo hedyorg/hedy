@@ -501,7 +501,8 @@ def get_quiz(level_source, question_nr, attempt):
                 for options_key, options_value in options.items():
                     for option in options_value:
                         for key, value in option.items():
-                            option_obj[key] = value.replace("\n", '\\n')
+                            if value:
+                                option_obj[key] = value.replace("\n", '\\n')
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
@@ -521,7 +522,6 @@ def get_quiz(level_source, question_nr, attempt):
                                    username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
-            print(html_obj)
             return html_obj.replace("\\n", '<br />')
         else:
             return render_template('endquiz.html', correct=session.get('correct_answer'),
@@ -584,8 +584,8 @@ def submit_answer(level_source, question_nr, attempt):
                 for options_key, options_value in options.items():
                     for option in options_value:
                         for key, value in option.items():
-                            option_obj[key] = value.replace("\n", '\\n')
-
+                            if value:
+                                option_obj[key] = value.replace("\n", '\\n')
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
