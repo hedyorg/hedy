@@ -34,6 +34,8 @@
     // We expose the editor globally so it's available to other functions for resizing
     var editor = window.editor = turnIntoAceEditor($editor.get(0), $editor.data('readonly'));
 
+    window.Range = ace.require('ace/range').Range // get reference to ace/range
+
     // Load existing code from session, if it exists
     const storage = window.sessionStorage;
     if (storage) {
@@ -56,6 +58,8 @@
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
+
+        clearErrors(editor);
       });
     }
 
@@ -138,6 +142,13 @@ function reloadOnExpiredSession () {
    return true;
 }
 
+function clearErrors(editor) {
+  editor.session.clearAnnotations();
+  for (var marker in editor.session.getMarkers()) {
+    editor.session.removeMarker(marker);
+  }
+}
+
 function runit(level, lang, cb) {
   if (window.State.disable_run) return window.modal.alert (window.auth.texts.answer_question);
 
@@ -148,6 +159,8 @@ function runit(level, lang, cb) {
     level = level.toString();
     var editor = ace.edit("editor");
     var code = editor.getValue();
+
+    clearErrors(editor);
 
     console.log('Original program:\n', code);
     $.ajax({
@@ -169,6 +182,26 @@ function runit(level, lang, cb) {
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
+        if (response.Location && response.Location[0] != "?") {
+          editor.session.setAnnotations([
+            {
+              row: response.Location[0] - 1,
+              column: response.Location[1] - 1,
+              text: "",
+              type: "error",
+            }
+          ]);
+          // FIXME change this to apply only to the error span once errors have an end location.
+          editor.session.addMarker(
+            new Range(
+                response.Location[0] - 1,
+                response.Location[1] - 1,
+                response.Location[0] - 1,
+                response.Location[1],
+            ),
+            "editor-error", "fullLine"
+          );
+        }
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
