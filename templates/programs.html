@@ -35,7 +35,7 @@
         <button class="red-btn" onclick="hedyApp.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</button>
           {% if program.public %}
             <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.unshare_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</button>
-            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</button>
+            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</button>
           {% else %}
               <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.share_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</button>
           {% endif %}
