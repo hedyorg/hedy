@@ -3,6 +3,8 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir
 
+echo "------> Validating YAML"
+
 # Validate adventure files against their schema
 #
 # The error messages produced by pajv are pretty bad, but we will just
