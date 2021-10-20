@@ -11,7 +11,7 @@ First have a look at the open issues. [Good first issues](https://github.com/Fel
 
 The core team (currently consisting of [Felienne](https://github.com/Felienne), [fpereiro](https://github.com/fpereiro) & [boryanagoncharenko](https://github.com/boryanagoncharenko)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
 
-Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :) 
+Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :)
 
 **Discussions**
 
@@ -52,9 +52,10 @@ you need to edit the TypeScript source files and regenerate the JavaScript
 bundle by running:
 
 ```
-$ build-tools/heroku/generate-typescript
+# You only need to run 'npm ci' once to install the tools
+$ npm ci
 
-# Automatically regenerate the bundle every time you save
+# Afterwards run this:
 $ build-tools/heroku/generate-typescript --watch
 ```
 
