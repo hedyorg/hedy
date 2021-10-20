@@ -53,10 +53,12 @@ $(function() {
     resetWindow();
 
     if (tabName === 'end') {
+      $ ('#adventures-tab').css('max-height', '100%')
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
       return;
     }
+    $ ('#adventures-tab').css('max-height', '20em')
     $ ('#level-header input').show ();
     $ ('#editor-area').show ();
 
