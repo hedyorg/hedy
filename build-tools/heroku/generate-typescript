@@ -8,17 +8,49 @@ set -eu
 #
 # We minimize the generated bundle so that contributors aren't tempted to accidentally
 # edit straight in the JavaScript.
+#
+#----------------------------------------------------------------------
+#
+# This script does two similar, but different jobs:
+#
+# In normal build mode, we first compile TypeScript -> JavaScript using the
+# TypeScript compiler (TSC), and then bundle it all into one file using esbuild.
+# The reason we do this is because TSC can translate certain desirable idioms
+# that are are not supposed in old browsers, like `async`, `?.` and `??` to
+# plain old JavaScript. `esbuild` does not do that, which is why have TSC do
+# this job first.
+#
+# We can also run in `--watch` mode, in which case we bypass the TypeScript
+# compiler and only run esbuild. This is because the TypeScript compiler is
+# rather slow (think 5-10 seconds to do a compilation), and we want to
+# optimize for iteration speed in that case. That does mean that the generated
+# JavaScript is slightly different between those cases--however, the final
+# JavaScript will always be generated on deploy using the previous deploy
+# method.
 root=$(cd $(PWD)/../.. && pwd)
 
-# esbuild does not TypeCheck, it just bundles. So run TSC (without emitting)
-# to validate that everything compiles properly, then run esbuild to generate
-# the bundle.
-npx tsc
+if [[ "${1:-}" == "--watch" ]]; then
+    echo "👀 Running TypeScript compilation in watch mode. 👀"
+    echo "Leave this window open and edit (and save) .ts files to your heart's content."
+    echo ""
+    # Watch mode, just use esbuild and nothing else
+    npx esbuild static/js/index.ts \
+        --watch \
+        --bundle \
+        --sourcemap \
+        --minify \
+        --target=es2017 \
+        --global-name=hedyApp \
+        --outfile=static/js/appbundle.js
+else
+    # Use tsc to generate .js
+    npx tsc --outDir __tmp__
 
-npx esbuild static/js/index.ts \
-    --bundle \
-    --sourcemap \
-    --minify \
-    --target=es2017 \
-    --global-name=hedyApp \
-    --outfile=static/js/appbundle.js "$@"
+    npx esbuild __tmp__/index.js \
+        --bundle \
+        --sourcemap \
+        --minify \
+        --target=es2017 \
+        --global-name=hedyApp \
+        --outfile=static/js/appbundle.js "$@"
+fi
