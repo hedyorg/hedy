@@ -1,129 +1,252 @@
+---
 level: 2
 questions:
-  - 1:
-      question_text: "Which statement is true?"
-      code: "..."
-      mp_choice_options:
-        - { option_text: "In level 2 the print command doesn't exist anymore", code: , feedback: "Print still works" }
-        - { option_text: "In level 2 the ask command doesn't exist anymore", code: , feedback: "Ask still works!" }
-        - { option_text: "In level 2 the echo command doesn't exist anymore ", code: , feedback: "Good" }
-        - { option_text: "In level 2 all the level 1 commands still work", code: , feedback: "No one command doesn't work anymore." }
-      correct_answer: "C"
-      hint: "print and ask still exist."
-      question_score: 10
-  - 2:
-      question_text: "Which code is correct?"
-      code: "..."
-      mp_choice_options:
-        - { option_text:, code: "name is ask What is your name?", feedback: "Super!" }
-        - { option_text:, code: "ask is name What is your name", feedback: "The words are right, the order is not!" }
-        - { option_text:, code: "ask What is your name?", feedback: "This worked in level 1, but in level 2 and up it works differently." }
-        - { option_text:, code: "ask What is your name? is name", feedback: "The words are right, the order isn't!" }
-      correct_answer: "A"
-      hint: "ask doesn't work like in level 1"
-      question_score: 10
-  - 3:
-      question_text: "What command do you use to let Hedy pick something arbitrarily?"
-      code: "..."
-      mp_choice_options:
-        - { option_text:, code: "print", feedback: "print is used to print text" }
-        - { option_text:, code: "ask", feedback: "ask is used to ask a question" }
-        - { option_text:, code: "is", feedback: "is is used to make a list" }
-        - { option_text:, code: "at random", feedback: "Correct!" }
-      correct_answer: "D"
-      hint: "Arbitrarily means without a plan or randomly."
-      question_score: 10
-  - 4:
-      question_text: "What's wrong with this code?"
-      code: |-
-        animals is dog cat cow
-        print animals at random
-      mp_choice_options:
-        - { option_text: "You need commas in line 1: dog, cat, cow.", code: , feedback: "Good job!" }
-        - { option_text: "Line 1 needs to start with print.", code: , feedback: "No, you don't need print" }
-        - { option_text: "Line 2 needs to say 'animal' instead of 'animals'',", code: , feedback: "animals is correct." }
-        - { option_text: " 'at random is spelled incorrectly, it should be at ramdon", code: , feedback: "At random is the correct spelling" }
-      correct_answer: "A"
-      hint: "There's something wrong in line 1"
-      question_score: 10
-  - 5:
-      question_text: "What's wrong in line 2 of this code?"
-      code: |-
-        options is rock, paper, scissors
-        print rock, paper, scissors at random
-      mp_choice_options:
-        - { option_text:, code: "at random print options", feedback: "You're almost there. The order of the words isn't right yet." }
-        - { option_text:, code: "print rock at random", feedback: "you don't always want the Hedy to print rock, sometimes you want scissors or paper." }
-        - { option_text:, code: "print options at random", feedback: "Very good!" }
-        - { option_text: "Nothing, the code is correct!", code:, feedback: "Look carefully for the mistake" }
-      correct_answer: "C"
-      hint: "The variable (the list) is called options."
-      question_score: 10
-  - 6:
-      question_text: "What should change in line to to print a random price?"
-      code: |-
-        prices is 1 dollar, 100 dollar, 1 million dollar
-        print price at random
-      mp_choice_options:
-        - { option_text:, code: "print price", feedback: "You don't want to print the word price, but you want to print one price out of your list at random" }
-        - { option_text:, code: "print prices at random", feedback: "Great! You've really paid attention." }
-        - { option_text:, code: "print at random price", feedback: " At random is places behind the variable." }
-        - { option_text: "Nothing, this code is alright.", code: , feedback: "Look carefully for the mistake you missed!" }
-      correct_answer: "B"
-      hint: "The variable name is prices"
-      question_score: 10
-  - 7:
-      question_text: "What's wrong with this code?"
-      code: |-
-        question is ask What do you want to know?
-        answers are yes, no, maybe
-        print answers at random
-      mp_choice_options:
-        - { option_text: "Line 2 needs to say question instead of answers", code: , feedback: "No that's not right" }
-        - { option_text: "Line 2 needs to say is instead of are" , code: , feedback: "Correct" }
-        - { option_text: "Line 3 needs to say answer instead of answers", code: , feedback: "No the variable's called answers" }
-        - { option_text: "Nothing! This code is great!" , code: , feedback: "Actually, line 2 has a mistake." }
-      correct_answer: "B"
-      hint: "Are is not a command."
-      question_score: 10
-  - 8:
-      question_text: "What appears on your output screen when you run this code?"
-      code: |-
-        naam is Marleen
-        print naam goes to the market and she buys an apple.
-      mp_choice_options:
-        - { option_text: "naam goes to the market and she buys an apple.", code: , feedback: "The word name is replaced with Marleen" }
-        - { option_text: "Marleen goes to the market." , code: , feedback: "The second part of the sentence isn't left out!" }
-        - { option_text: "Marleen goes to the market and she buys an apple.", code: , feedback: "Right on!" }
-        - { option_text: "Marleen goes to the market and Marleen buys an apple.",  code: , feedback: "She is not replaced with the name" }
-      correct_answer: "C"
-      hint: "The word name is replaced with Marleen"
-      question_score: 10
-  - 9:
-      question_text: "What is wrong in this code?"
-      code: |-
-        question is ask What do you want to know?
-        print question
-        answers is yes, no, maybe
-        print answers at random
-      mp_choice_options:
-        - { option_text: "Line 1 needs ot say print instead of ask", code: , feedback: "No, that's not wrong with it.?" }
-        - { option_text: "Line 2 need to say ask instead of print", code: , feedback: "No that's not wrong with it." }
-        - { option_text: "Line 2 needs to say answers at random is yes, no, maybe", code: , feedback: "No, that's not wrong with it." }
-        - { option_text: "Nothing, this code is perfect", code: , feedback: "That's right!" }
-      correct_answer: "D"
-      hint: "Does this code even have a mistake?"
-      question_score: 10
-  - 10:
-      question_text: "What will you see on the output screen when you run this code?"
-      code: |-
-        name is Hedy
-        print Hi my name is name!
-      mp_choice_options:
-        - { option_text:  "Hi my name is name", code:, feedback: "The variable name is replaced with Hedy" }
-        - { option_text:  "Hi my name is Hedy", code:, feedback: "The variable name is replaced with Hedy" }
-        - { option_text:  "Hi my Hedy is name", code:, feedback: "The variable name is replaced with Hedy" }
-        - { option_text:  "Hi my Hedy is Hedy", code:, feedback: "Correct, this mistake will be fixed in level 3!" }
-      correct_answer: "D"
-      hint: "'name' is being replaced with 'Hedy' bith times"
-      question_score: 10
+- 1:
+    question_text: "Which statement is true?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "In level 2 the print command doesn't exist anymore"
+      - "code": "None"
+      - "feedback": "Print still works"
+    - 1:
+      - "option_text": "In level 2 the ask command doesn't exist anymore"
+      - "code": "None"
+      - "feedback": "Ask still works!"
+    - 2:
+      - "option_text": "In level 2 the echo command doesn't exist anymore "
+      - "code": "None"
+      - "feedback": "Good"
+    - 3:
+      - "option_text": "In level 2 all the level 1 commands still work"
+      - "code": "None"
+      - "feedback": "No one command doesn't work anymore."
+    correct_answer: "C"
+    hint: "print and ask still exist."
+    question_score: 10
+- 2:
+    question_text: "Which code is correct?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "name is ask What is your name?"
+      - "feedback": "Super!"
+    - 1:
+      - "option_text:": "None"
+      - "code": "ask is name What is your name"
+      - "feedback": "The words are right, the order is not!"
+    - 2:
+      - "option_text:": "None"
+      - "code": "ask What is your name?"
+      - "feedback": "This worked in level 1, but in level 2 and up it works differently."
+    - 3:
+      - "option_text:": "None"
+      - "code": "ask What is your name? is name"
+      - "feedback": "The words are right, the order isn't!"
+    correct_answer: "A"
+    hint: "ask doesn't work like in level 1"
+    question_score: 10
+- 3:
+    question_text: "What command do you use to let Hedy pick something arbitrarily?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "print"
+      - "feedback": "print is used to print text"
+    - 1:
+      - "option_text:": "None"
+      - "code": "ask"
+      - "feedback": "ask is used to ask a question"
+    - 2:
+      - "option_text:": "None"
+      - "code": "is"
+      - "feedback": "is is used to make a list"
+    - 3:
+      - "option_text:": "None"
+      - "code": "at random"
+      - "feedback": "Correct!"
+    correct_answer: "D"
+    hint: "Arbitrarily means without a plan or randomly."
+    question_score: 10
+- 4:
+    question_text: "What's wrong with this code?"
+    code: |-
+      animals is dog cat cow
+      print animals at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "You need commas in line 1: dog, cat, cow."
+      - "code": "None"
+      - "feedback": "Good job!"
+    - 1:
+      - "option_text": "Line 1 needs to start with print."
+      - "code": "None"
+      - "feedback": "No, you don't need print"
+    - 2:
+      - "option_text": "Line 2 needs to say 'animal' instead of 'animals'',"
+      - "code": "None"
+      - "feedback": "animals is correct."
+    - 3:
+      - "option_text": " 'at random is spelled incorrectly, it should be at ramdon"
+      - "code": "None"
+      - "feedback": "At random is the correct spelling"
+    correct_answer: "A"
+    hint: "There's something wrong in line 1"
+    question_score: 10
+- 5:
+    question_text: "What's wrong in line 2 of this code?"
+    code: |-
+      options is rock, paper, scissors
+      print rock, paper, scissors at random
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "at random print options"
+      - "feedback": "You're almost there. The order of the words isn't right yet."
+    - 1:
+      - "option_text:": "None"
+      - "code": "print rock at random"
+      - "feedback": "you don't always want the Hedy to print rock, sometimes you want\
+          \ scissors or paper."
+    - 2:
+      - "option_text:": "None"
+      - "code": "print options at random"
+      - "feedback": "Very good!"
+    - 3:
+      - "option_text": "Nothing, the code is correct!"
+      - "code:": "None"
+      - "feedback": "Look carefully for the mistake"
+    correct_answer: "C"
+    hint: "The variable (the list) is called options."
+    question_score: 10
+- 6:
+    question_text: "What should change in line to to print a random price?"
+    code: |-
+      prices is 1 dollar, 100 dollar, 1 million dollar
+      print price at random
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "print price"
+      - "feedback": "You don't want to print the word price, but you want to print\
+          \ one price out of your list at random"
+    - 1:
+      - "option_text:": "None"
+      - "code": "print prices at random"
+      - "feedback": "Great! You've really paid attention."
+    - 2:
+      - "option_text:": "None"
+      - "code": "print at random price"
+      - "feedback": " At random is places behind the variable."
+    - 3:
+      - "option_text": "Nothing, this code is alright."
+      - "code": "None"
+      - "feedback": "Look carefully for the mistake you missed!"
+    correct_answer: "B"
+    hint: "The variable name is prices"
+    question_score: 10
+- 7:
+    question_text: "What's wrong with this code?"
+    code: |-
+      question is ask What do you want to know?
+      answers are yes, no, maybe
+      print answers at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "Line 2 needs to say question instead of answers"
+      - "code": "None"
+      - "feedback": "No that's not right"
+    - 1:
+      - "option_text": "Line 2 needs to say is instead of are"
+      - "code": "None"
+      - "feedback": "Correct"
+    - 2:
+      - "option_text": "Line 3 needs to say answer instead of answers"
+      - "code": "None"
+      - "feedback": "No the variable's called answers"
+    - 3:
+      - "option_text": "Nothing! This code is great!"
+      - "code": "None"
+      - "feedback": "Actually, line 2 has a mistake."
+    correct_answer: "B"
+    hint: "Are is not a command."
+    question_score: 10
+- 8:
+    question_text: "What appears on your output screen when you run this code?"
+    code: |-
+      naam is Marleen
+      print naam goes to the market and she buys an apple.
+    mp_choice_options:
+    - 0:
+      - "option_text": "naam goes to the market and she buys an apple."
+      - "code": "None"
+      - "feedback": "The word name is replaced with Marleen"
+    - 1:
+      - "option_text": "Marleen goes to the market."
+      - "code": "None"
+      - "feedback": "The second part of the sentence isn't left out!"
+    - 2:
+      - "option_text": "Marleen goes to the market and she buys an apple."
+      - "code": "None"
+      - "feedback": "Right on!"
+    - 3:
+      - "option_text": "Marleen goes to the market and Marleen buys an apple."
+      - "code": "None"
+      - "feedback": "She is not replaced with the name"
+    correct_answer: "C"
+    hint: "The word name is replaced with Marleen"
+    question_score: 10
+- 9:
+    question_text: "What is wrong in this code?"
+    code: |-
+      question is ask What do you want to know?
+      print question
+      answers is yes, no, maybe
+      print answers at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "Line 1 needs ot say print instead of ask"
+      - "code": "None"
+      - "feedback": "No, that's not wrong with it.?"
+    - 1:
+      - "option_text": "Line 2 need to say ask instead of print"
+      - "code": "None"
+      - "feedback": "No that's not wrong with it."
+    - 2:
+      - "option_text": "Line 2 needs to say answers at random is yes, no, maybe"
+      - "code": "None"
+      - "feedback": "No, that's not wrong with it."
+    - 3:
+      - "option_text": "Nothing, this code is perfect"
+      - "code": "None"
+      - "feedback": "That's right!"
+    correct_answer: "D"
+    hint: "Does this code even have a mistake?"
+    question_score: 10
+- 10:
+    question_text: "What will you see on the output screen when you run this code?"
+    code: |-
+      name is Hedy
+      print Hi my name is name!
+    mp_choice_options:
+    - 0:
+      - "option_text": "Hi my name is name"
+      - "code:": "None"
+      - "feedback": "The variable name is replaced with Hedy"
+    - 1:
+      - "option_text": "Hi my name is Hedy"
+      - "code:": "None"
+      - "feedback": "The variable name is replaced with Hedy"
+    - 2:
+      - "option_text": "Hi my Hedy is name"
+      - "code:": "None"
+      - "feedback": "The variable name is replaced with Hedy"
+    - 3:
+      - "option_text": "Hi my Hedy is Hedy"
+      - "code:": "None"
+      - "feedback": "Correct, this mistake will be fixed in level 3!"
+    correct_answer: "D"
+    hint: "'name' is being replaced with 'Hedy' bith times"
+    question_score: 10

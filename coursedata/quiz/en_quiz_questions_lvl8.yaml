@@ -1,247 +1,280 @@
+---
 level: 8
 questions:
-  - 1:
-      question_text: "What will be the output from this code?"
-      code: |-
-          for i in range 1 to 10
-              print i
-      mp_choice_options:
-        - option_text:
-          code: |-
-              1
-              2
-              3
-          feedback: |-
-              Correct! 
-        - { option_text: , code: "1 2 3", feedback: "That's not it" }
-        - { option_text: , code: " 1, 2, 3" , feedback: "That's not it" }
-        - { option_t ext: , code: "123" , feedback: "That's not it" }
-      correct_answer: "A"
-      hint: "How do the numbers appear in the screen?"
-      question_score: 10
-  - 2:
-      question_text: "Which code was used to get this output?"
-      code: |-
-          1
-          2
-          3
-          4
-          5
-          Once I caught a fish alive!
-      mp_choice_options:
-        - option_text:
-          code: |-
-              for i in range 1 to 5
-                  print i
-              print 'Once I caught a fish alive!'
-          feedback: |-
-              Perfect
-        - option_text:
-          code: |-
-              for i in range 1 to 5
-              print i
-              print 'Once I caught a fish alive!'
-          feedback: |-
-              This code won't work. You need an indent after for.
-        - option_text:
-          code: |-
-              for i in range 1 to 5
-                  print i
-                  print 'Once I caught a fish alive!'
-          feedback: |-
-              Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
-        - option_text:
-          code: |-
-              for i in range 1 to 5
-                  print 'i'
-              print 'Once I caught a fish alive!'
-          feedback: |-
-              i is a variable and shouldn't have quotation marks
-      correct_answer: "A"
-      hint: "First all the numbers, then the sentence"
-      question_score: 10
-  - 3:
-      question_text: "Which code was used to get this output?"
-      code: |-
-          10
-          9
-          8
-          7
-          6
-          5
-          4
-          3
-          2
-          1
-          0
-      mp_choice_options:
-        - option_text:
-          code: |-
-              for i in range 0 to 10
-                  print i
-          feedback: |-
-              Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
-        - option_text:
-          code: |-
-              for i in range 0 to 10
-                  print - i
-          feedback: |-
-              Hedy would print negative numbers in this case.
-        - option_text:
-          code: |-
-              for i in range 10 to 0
-                  print i
-          feedback: |-
-              Unfortunately this does not exist.
-        - option_text: 
-          code: |-
-              for i in range 0 to 10
-                  print 10 - i
-          feedback: |-
-              That's right!
-      correct_answer: "D"
-      hint: "It has to be a calculation..."
-      question_score: 10
-  - 4:
-      question_text: "What's wrong with this code?"
-      code: |-
-          for i in range 1 to 10
+- 1:
+    question_text: "What will be the output from this code?"
+    code: |-
+      for i in range 1 to 10
           print i
-      mp_choice_options:
-        - { option_text: "The i in the last line need quotation marks", code: , feedback: "No it doesn't." }
-        - { option_text: "You can't use 'range 1 to 5' only 'range 1 to 10'", code: , feedback: "You could use 1 to 5 just as well!" }
-        - { option_text: "Line 1 needs to start with an indention.", code: , feedback: "Not line 1..." }
-        - { option_text: "Line 2 needs to start with an indention", code: , feedback: "Perfect!" }
-      correct_answer: "D"
-      hint: "There is something wrong with the indention"
-      question_score: 10
-  - 5:
-      question_text: "What word should be at the place of the question mark?"
-      code: |-
-          for i in ? 1 to 10
-              print i
-      mp_choice_options:
-        - { option_text: , code: "rang" , feedback: "No" }
-        - { option_text: , code: "range" , feedback: "Correct" }
-        - { option_text: , code: "ragne", feedback: "No" }
-        - { option_text: , code: "ranch", feedback: "No" }
-      correct_answer: "B"
-      hint: "What's the correct spelling?"
-      question_score: 10
-  - 6:
-      question_text: "How many times does the word Hello appear on your screen when you run the code?"
-      code: |-
-          for i in range 0 to 2
-              print 'Hello'
-      mp_choice_options:
-        - { option_text: "1 time", code: , feedback: "No" }
-        - { option_text: "2 times", code: , feedback: "No" }
-        - { option_text: "3 times", code: , feedback: "That's right!" }
-        - { option_text: "Never", code: , feedback: "No" }
-      correct_answer: "C"
-      hint: "0 also counts. So 0,1,2 that's 3 times."
-      question_score: 10
-  - 7:
-      question_text: "What should be on the place of the question mark?"
-      code: |-
-          print 'Welcome to Hedy's diner'
-          people is ask 'How many people will be eating here tonight?'
-          ?
-              food is ask 'What would you like to order?'
-              print food
-      mp_choice_options:
-        - { option_text: , code: "for i in range 0 to 3" , feedback: "There's not always 3 people" }
-        - { option_text: , code: "for i in range 1 to guests", feedback: "The variable is not named guests" }
-        - { option_text: , code: "for i in range 1 to people" , feedback: "Great!" }
-        - { option_text: , code: "for i in range 0 to people", feedback: "That's one order too many!" }
-      correct_answer: "C"
-      hint: "Use the variable 'people'"
-      question_score: 10
-  - 8:
-      question_text: "What will be the output from this code?"
-      code: |-
-          for i in range 23 to 25
-              print 'hi'
-      mp_choice_options:
-        - option_text: 
-          code: |-
-              23
-              24
-              25
-          feedback: |-
-              The numbers don't appear. It doesn't say print i.
-        - option_text:
-          code:
-              23 hi
-              24 hi
-              25 hi
-          feedback: |-
-              The numbers don't appear. It doesn't say print i
-        - option_text:
-          code: |-
-              hi
-              hi
-              hi
-          feedback: |-
-              Correct
-        - option_text: |-
-              The word 'hi' will appear 25 times in a row.
-          code:
-          feedback: |-
-              No it will only appear 3 times.
-      correct_answer: "C"
-      hint: "It doesn't say print i"
-      question_score: 10
-  - 9:
-      question_text: "How many times does Hedy chant Hip Hip Hooray?"
-      code: |-
-          age is ask 'How old are you?'
-          for i in range 1 to age
-              print is 'Hip Hip Hoorray!'
-      mp_choice_options:
-        - { option_text: 1 time, code: , feedback: "Try again" }
-        - { option_text: 2 times, code: , feedback: "Try again" }
-        - { option_text: Never, code: , feedback: "Try again" }
-        - { option_text: That depends on how old you are, code: , feedback: "That's right!" }
-      correct_answer: "for i in range 1 to leeftijd"
-      hint: ""
-      question_score: 10
-  - 10:
-      question_text: "Which code belongs to this output?"
-      code: |-
-          Baby shark tututudutudu
-          Baby shark tututudutudu
-          Baby shark tututudutudu
-          Baby shark
-      mp_choice_options:
-        - option_text:
-          code: |-
-              for i in range 1 to 3
-                  print Baby shark tututudutudu
-                  print Baby shark
-          feedback: |-
-              Mind the indention
-        - option_text:
-          code: |-
-              for i in range 1 to 3
-                  print Baby shark tututudutudu
-              print Baby shark
-          feedback: |-
-              That's right!
-        - option_text:
-          code: |-
-              for i in range 0 to 3
-                  print Baby shark tututudutudu
-                  print Baby shark
-          feedback: |-
-              range 0 to 3 is 4 times.
-        - option_text:
-          code: |-
-              for i in range 0 to 3
-                  print Baby shark tututudutudu
-              print Baby shark
-          feedback: |-
-              range 0 to 3 is 4 times.
-      correct_answer: "B"
-      hint: "Mind the indention"
-      question_score: 10
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "1\n2\n3"
+      - "feedback": "Correct! "
+    - 1:
+      - "option_text": "None"
+      - "code": "1 2 3"
+      - "feedback": "That's not it"
+    - 2:
+      - "option_text": "None"
+      - "code": " 1, 2, 3"
+      - "feedback": "That's not it"
+    - 3:
+      - "option_t ext": "None"
+      - "code": "123"
+      - "feedback": "That's not it"
+    correct_answer: "A"
+    hint: "How do the numbers appear in the screen?"
+    question_score: 10
+- 2:
+    question_text: "Which code was used to get this output?"
+    code: |-
+      1
+      2
+      3
+      4
+      5
+      Once I caught a fish alive!
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "for i in range 1 to 5\n    print i\nprint 'Once I caught a fish alive!'"
+      - "feedback": "Perfect"
+    - 1:
+      - "option_text": "None"
+      - "code": "for i in range 1 to 5\nprint i\nprint 'Once I caught a fish alive!'"
+      - "feedback": "This code won't work. You need an indent after for."
+    - 2:
+      - "option_text": "None"
+      - "code": "for i in range 1 to 5\n    print i\n    print 'Once I caught a fish\
+          \ alive!'"
+      - "feedback": "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I\
+          \ caught a fish alive! etc."
+    - 3:
+      - "option_text": "None"
+      - "code": "for i in range 1 to 5\n    print 'i'\nprint 'Once I caught a fish\
+          \ alive!'"
+      - "feedback": "i is a variable and shouldn't have quotation marks"
+    correct_answer: "A"
+    hint: "First all the numbers, then the sentence"
+    question_score: 10
+- 3:
+    question_text: "Which code was used to get this output?"
+    code: |-
+      10
+      9
+      8
+      7
+      6
+      5
+      4
+      3
+      2
+      1
+      0
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "for i in range 0 to 10\n    print i"
+      - "feedback": "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
+    - 1:
+      - "option_text": "None"
+      - "code": "for i in range 0 to 10\n    print - i"
+      - "feedback": "Hedy would print negative numbers in this case."
+    - 2:
+      - "option_text": "None"
+      - "code": "for i in range 10 to 0\n    print i"
+      - "feedback": "Unfortunately this does not exist."
+    - 3:
+      - "option_text": "None"
+      - "code": "for i in range 0 to 10\n    print 10 - i"
+      - "feedback": "That's right!"
+    correct_answer: "D"
+    hint: "It has to be a calculation..."
+    question_score: 10
+- 4:
+    question_text: "What's wrong with this code?"
+    code: |-
+      for i in range 1 to 10
+      print i
+    mp_choice_options:
+    - 0:
+      - "option_text": "The i in the last line need quotation marks"
+      - "code": "None"
+      - "feedback": "No it doesn't."
+    - 1:
+      - "option_text": "You can't use 'range 1 to 5' only 'range 1 to 10'"
+      - "code": "None"
+      - "feedback": "You could use 1 to 5 just as well!"
+    - 2:
+      - "option_text": "Line 1 needs to start with an indention."
+      - "code": "None"
+      - "feedback": "Not line 1..."
+    - 3:
+      - "option_text": "Line 2 needs to start with an indention"
+      - "code": "None"
+      - "feedback": "Perfect!"
+    correct_answer: "D"
+    hint: "There is something wrong with the indention"
+    question_score: 10
+- 5:
+    question_text: "What word should be at the place of the question mark?"
+    code: |-
+      for i in ? 1 to 10
+          print i
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "rang"
+      - "feedback": "No"
+    - 1:
+      - "option_text": "None"
+      - "code": "range"
+      - "feedback": "Correct"
+    - 2:
+      - "option_text": "None"
+      - "code": "ragne"
+      - "feedback": "No"
+    - 3:
+      - "option_text": "None"
+      - "code": "ranch"
+      - "feedback": "No"
+    correct_answer: "B"
+    hint: "What's the correct spelling?"
+    question_score: 10
+- 6:
+    question_text: "How many times does the word Hello appear on your screen when\
+      \ you run the code?"
+    code: |-
+      for i in range 0 to 2
+          print 'Hello'
+    mp_choice_options:
+    - 0:
+      - "option_text": "1 time"
+      - "code": "None"
+      - "feedback": "No"
+    - 1:
+      - "option_text": "2 times"
+      - "code": "None"
+      - "feedback": "No"
+    - 2:
+      - "option_text": "3 times"
+      - "code": "None"
+      - "feedback": "That's right!"
+    - 3:
+      - "option_text": "Never"
+      - "code": "None"
+      - "feedback": "No"
+    correct_answer: "C"
+    hint: "0 also counts. So 0,1,2 that's 3 times."
+    question_score: 10
+- 7:
+    question_text: "What should be on the place of the question mark?"
+    code: |-
+      print 'Welcome to Hedy's diner'
+      people is ask 'How many people will be eating here tonight?'
+      ?
+          food is ask 'What would you like to order?'
+          print food
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "for i in range 0 to 3"
+      - "feedback": "There's not always 3 people"
+    - 1:
+      - "option_text": "None"
+      - "code": "for i in range 1 to guests"
+      - "feedback": "The variable is not named guests"
+    - 2:
+      - "option_text": "None"
+      - "code": "for i in range 1 to people"
+      - "feedback": "Great!"
+    - 3:
+      - "option_text": "None"
+      - "code": "for i in range 0 to people"
+      - "feedback": "That's one order too many!"
+    correct_answer: "C"
+    hint: "Use the variable 'people'"
+    question_score: 10
+- 8:
+    question_text: "What will be the output from this code?"
+    code: |-
+      for i in range 23 to 25
+          print 'hi'
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "23\n24\n25"
+      - "feedback": "The numbers don't appear. It doesn't say print i."
+    - 1:
+      - "option_text": "None"
+      - "code": "23 hi 24 hi 25 hi"
+      - "feedback": "The numbers don't appear. It doesn't say print i"
+    - 2:
+      - "option_text": "None"
+      - "code": "hi\nhi\nhi"
+      - "feedback": "Correct"
+    - 3:
+      - "option_text": "The word 'hi' will appear 25 times in a row."
+      - "code": "None"
+      - "feedback": "No it will only appear 3 times."
+    correct_answer: "C"
+    hint: "It doesn't say print i"
+    question_score: 10
+- 9:
+    question_text: "How many times does Hedy chant Hip Hip Hooray?"
+    code: |-
+      age is ask 'How old are you?'
+      for i in range 1 to age
+          print is 'Hip Hip Hoorray!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "1 time"
+      - "code": "None"
+      - "feedback": "Try again"
+    - 1:
+      - "option_text": "2 times"
+      - "code": "None"
+      - "feedback": "Try again"
+    - 2:
+      - "option_text": "Never"
+      - "code": "None"
+      - "feedback": "Try again"
+    - 3:
+      - "option_text": "That depends on how old you are"
+      - "code": "None"
+      - "feedback": "That's right!"
+    correct_answer: "for i in range 1 to leeftijd"
+    hint: ""
+    question_score: 10
+- 10:
+    question_text: "Which code belongs to this output?"
+    code: |-
+      Baby shark tututudutudu
+      Baby shark tututudutudu
+      Baby shark tututudutudu
+      Baby shark
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "for i in range 1 to 3\n    print Baby shark tututudutudu\n    print\
+          \ Baby shark"
+      - "feedback": "Mind the indention"
+    - 1:
+      - "option_text": "None"
+      - "code": "for i in range 1 to 3\n    print Baby shark tututudutudu\nprint Baby\
+          \ shark"
+      - "feedback": "That's right!"
+    - 2:
+      - "option_text": "None"
+      - "code": "for i in range 0 to 3\n    print Baby shark tututudutudu\n    print\
+          \ Baby shark"
+      - "feedback": "range 0 to 3 is 4 times."
+    - 3:
+      - "option_text": "None"
+      - "code": "for i in range 0 to 3\n    print Baby shark tututudutudu\nprint Baby\
+          \ shark"
+      - "feedback": "range 0 to 3 is 4 times."
+    correct_answer: "B"
+    hint: "Mind the indention"
+    question_score: 10

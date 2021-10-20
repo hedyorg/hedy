@@ -9,3 +9,18 @@
 #output {
   white-space: pre-wrap;
 }
+
+/* #868 hide ace's default mobile context menu until there is configuration to remove it */
+.ace_mobile-menu {
+  display: none;
+}
+
+.editor-error {
+  position: absolute;
+  background: red !important;
+}
+
+.bg-white.p-4.mb-8.shadow-md.turn-pre-into-ace {
+  max-height: 20em;
+  overflow: auto;
+}
