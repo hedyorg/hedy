@@ -1,3 +1,4 @@
+from genericpath import isfile
 import textwrap
 
 from lark import Lark
@@ -1197,6 +1198,8 @@ def get_full_grammar_for_level(level):
 def get_keywords_for_language(lang):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "keywords-" + str(lang) + ".lark"
+    if not (path.isfile(path.join(script_dir, "grammars", filename))):
+        filename = "keywords-en.lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
