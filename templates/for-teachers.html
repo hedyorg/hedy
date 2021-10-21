@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div id="teacher_classes" class="w-3/4 flex flex-col items-center p-4 border-b-2">
+<div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
   <h2>{{auth.teacher_classes}}</h2>
   <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
     <thead class="bg-gray-200">
@@ -21,22 +21,16 @@
 <div class="w-full text-center mt-4">
 <h2>Hedy Docs</h2>
 <div class="mb-4">{{sections[0].content|safe}}</div>
-<div class="flex flex-row justify-center mb-4">
+<div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
 {% for section in sections %}
     {% if loop.index > 1 %}
-        {% if loop.index == 2 %}
-        <button class="blue-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection ({{loop.index}})">{{section.title}}</button>
-        {% else %}
-        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection ({{loop.index}})">{{section.title}}</button>
-        {% endif %}
+    <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection ({{loop.index}})">{{section.title}}</button>
     {% endif %}
 {% endfor %}
 </div>
 </div>
 {% for section in sections %}
-    {% if loop.index == 2 %}
-    <div class="section turn-pre-into-ace" id="section-{{loop.index}}">{{section.content|safe}}</div>
-    {% else %}
+    {% if loop.index > 1 %}
     <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">{{section.content|safe}}</div>
     {% endif %}
 {% endfor %}
@@ -44,15 +38,24 @@
 <script>
 var showSection = function (index) {
    $(".section-button").each(function(){
-       $(this).removeClass("blue-btn");
-       $(this).addClass("green-btn");
+       if ($(this).hasClass('blue-btn')) {
+           $(this).removeClass("blue-btn");
+           $(this).addClass("green-btn");
+       }
    });
    $("#button-" + index).removeClass("green-btn");
    $("#button-" + index).addClass("blue-btn");
 
-   if ($ ('#section-' + index).is (':visible')) return $ ('.section').hide ();
+   if ($ ('#section-' + index).is (':visible')) {
+       $("#button-" + index).removeClass("blue-btn");
+       $("#button-" + index).addClass("green-btn");
+       return $ ('.section').hide ();
+   }
    $ ('.section').hide ();
    $ ('#section-' + index).slideToggle (400);
+   $('html, body').animate({
+        scrollTop: $ ('#section-' + index).offset().top
+    }, 2000);
 }
 </script>
 {% endblock %}
