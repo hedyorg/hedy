@@ -22,17 +22,13 @@
 <h2>Hedy Docs</h2>
 <div class="mb-4">{{sections[0].content|safe}}</div>
 <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
-{% for section in sections %}
-    {% if loop.index > 1 %}
+{% for section in sections[1:] %}
     <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection ({{loop.index}})">{{section.title}}</button>
-    {% endif %}
 {% endfor %}
 </div>
 </div>
-{% for section in sections %}
-    {% if loop.index > 1 %}
+{% for section in sections[1:] %}
     <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">{{section.content|safe}}</div>
-    {% endif %}
 {% endfor %}
 
 <script>
