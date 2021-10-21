@@ -14,8 +14,12 @@ echo "------> Validating YAML"
 # If we ever care enough to do something about this, we should be interpreting
 # the JSON error outputs of this tool and re-interpreting them with useful
 # error messages.
+which npx
+npx pajv help
+
+
 cd ../../coursedata/adventures/
-npx pajv validate \
+$scriptdir/../../node_modules/.bin/pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
