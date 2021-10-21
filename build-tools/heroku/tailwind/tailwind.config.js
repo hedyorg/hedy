@@ -23,22 +23,6 @@ module.exports = {
   },
   variants: {},
   corePlugins: {
-    opacity: false,
-    // No animations
-    transitionDuration: false,
-    transitionProperty: false,
-    transitionTimingFunction: false,
-
-    // No fancy CSS transforms
-    scale: false,
-    rotate: false,
-    translate: false,
-    skew: false,
-    transformOrigin: false,
-
-    // No need for placeholder colors
-    placeholderColor: false,
-
   },
   plugins: [],
 }

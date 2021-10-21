@@ -138,13 +138,13 @@ adventures:
                         print 'Dapper stapt ' hoofdpersoon ' op het geluid af'
                         print _
                     else
-                        print 'Snel zoekt 'hoofdpersoon ' een verstopplek'
+                        print 'Snel zoekt ' hoofdpersoon ' een verstopplek'
                         print _
                     ```
                     In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: ""
                 
-            8: 
+            9: 
                 story_text: |
                     ## Verhaal
                     Hoe langer en meer if commandos in je verhaal, hoe interectiever het verhaal wordt. Het wordt natuurlijk ook lastiger dus let goed op het inspringen!
@@ -262,13 +262,32 @@ adventures:
                     
             8:
                 story_text: |
+                    ## Zing een liedje!
+                    Ook in level 8 kunnen we weer liedjes zingen, bijv. Baby Shark.
+                    Met de nieuwe code `for` kunnen we voor de hele familie in een keer printen.
+                    Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
+
+                    Dat scheelt een hoop regels code!
+
+                    ## Baby Shark
+                    ```
+                    familie is baby, mommy, daddy, grandpa, grandma
+                    for shark in familie
+                      print shark ' shark tudutudutudu'
+                      print shark ' shark tudutudutudu'
+                      print shark ' shark tudutudutudu'
+                      print shark ' shark'
+                    ```
+                start_code: ""
+
+            9:
+                story_text: |
                     ## Zing een stapelliedje!
-                    In level 8 kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren. 
+                    In level 9 kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
                     
                     ## 10 kleine visjes
                     ```
-                    for i in range 0 to 8
-                        i is 10-i
+                    for i in range 10 to 1
                         print i ' kleine visjes zwommen naar de zee'
                         print 'Moeder zei: ik ga niet mee'
                         print 'Ik blijf liever in de vieze oude sloot'
@@ -455,8 +474,8 @@ adventures:
                     hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
                     hoek is 360 / hoeken
                     repeat hoeken times
-                        turn __
-                        forward __
+                        turn _
+                        forward_
                     ```
                 start_code: |
                     hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
@@ -760,7 +779,7 @@ adventures:
                     if antwoord is goede_antwoord print 'goedzo'
                     else print 'foutje! het was ' goede_antwoord
                     ```
-                start_code: "print Welkom bij jouw rekenmachine"
+                start_code: "print 'Welkom bij jouw rekenmachine'"
             7:
                 story_text: |
                   ## Rekenmachine
@@ -1177,7 +1196,7 @@ adventures:
                     ```
                 start_code: "print 'Welkom bij McHedy!' "    
                 
-            8:
+            9:
                 story_text: |
                     ## Maak je eigen restaurant
                     In level 8 kun je de functie `i in range 1 to 5` gebruiken om een bestelling te printen voor meerdere mensen. 
@@ -1321,7 +1340,7 @@ adventures:
                     
                 start_code: "print 'Ontsnap uit het spookhuis!'"
                 
-            8:
+            9:
                 story_text: |
                     ## Spookhuis
                     In level 8 kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele i te gebruiken. 
@@ -1458,7 +1477,7 @@ adventures:
                     Ben je benieuwd hoe dat eruit ziet? Ga dan snel naar level 8. 
                                  
                 start_code: "print 'Op naar het volgende level!'"
-            8:
+            9:
                 story_text: |
                     ## Vooruitblik
                     In level 8 lijkt je code al wat meer op Pyhton, zometeen zul je in level 9 nog een toevoeging van Pyhton leren! 
@@ -1526,7 +1545,7 @@ adventures:
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
                 ## start_code is only added because it is required by the schema of Adventures
                 start_code: ""
-            8:
+            9:
                 story_text: |
                     ## Eind
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.

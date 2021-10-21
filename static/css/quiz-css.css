@@ -40,18 +40,30 @@ input:disabled{
     background-color: darkgray !important;
 }
 
-#answer-disabled{
-    background-color: rgba(194, 25, 25, 0.42) !important;
-    border-color: #c21919 !important;
-}
-.radio-block div{
-    margin: 1rem;
-}
-.radio-block div:nth-child(even){
-    background-color: #bee3f8;
+#answer-disabled-A, #answer-disabled-B, #answer-disabled-C,#answer-disabled-D{
+    background-color: rgba(194, 25, 25, 0.42)!important;
+    border-color: #c21919!important;
 }
 
-.radio-block div:nth-child(odd) {
-    background-color: #c6f6d5 !important;
-    border-color: #2d9068!important;
+#A, #D, #answer-disabled-A, #answer-disabled-D{
+    padding: 1.5rem;
+    background-color: #bee3f8;
+    flex-direction: row;
+    flex-grow: 1;
+    margin: 1rem;
 }
+
+#B, #C, #answer-disabled-B, #answer-disabled-C {
+    padding: 1.5rem;
+    background-color: #c6f6d5;
+    border-color: #2d9068;
+    flex-direction: row;
+    flex-grow: 1;
+    margin: 1rem;
+}
+
+.flex-col{
+    display: flex;
+    width: 100%
+}
+
