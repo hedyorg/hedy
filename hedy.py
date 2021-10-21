@@ -655,14 +655,6 @@ class ConvertToPython_2(ConvertToPython_1):
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
-def make_f_string(args, lookup):
-    argument_string = ''
-    for argument in args:
-        argument = argument.replace("'", '') #no quotes needed in fstring
-        argument_string += process_variable_for_fstring(argument, lookup)
-
-    return f"print(f'{argument_string}')"
-
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
@@ -693,7 +685,12 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_print_arguments(args)
-        return make_f_string(args, self.lookup)
+        argument_string = ''
+        for argument in args:
+            argument = argument.replace("'", '') #no quotes needed in fstring
+            argument_string += process_variable_for_fstring(argument, self.lookup)
+
+        return f"print(f'{argument_string}')"
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
