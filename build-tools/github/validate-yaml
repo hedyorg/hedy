@@ -42,4 +42,7 @@ $pajv validate \
     -s "quiz_questions.schema.json" \
     -d "*.yaml"
 
-node $scriptdir/validate-texts.js $scriptdir
+
+# Validate-texts is producing a lot of noise and it will never fail the build outright
+# anyway (if it would, pajv would have complained earlier), so might as well disable it for now.
+# node $scriptdir/validate-texts.js $scriptdir
