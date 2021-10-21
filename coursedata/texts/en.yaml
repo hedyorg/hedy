@@ -19,22 +19,36 @@ ui:
     assignment_header: "Assignment"
     show_explanation: "Show explanation"
     hide_explanation: "Hide explanation"
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: "Adventure"
     switch_to_levels: "Leave adventure mode"
     switch_to_adventures: "Go to adventures"
     switch_to_another_adventure: "Choose a different adventure"
     commands_title: "Commands"
     by: "by"
+    start_quiz: "Start quiz"
+    default_404: "We could not find that page..."
+    default_500: "Something went wrong..."
+    go_back_to_main: "Go back to the main page"
+    no_such_level: "No such Hedy level!"
+    no_such_class: "No such Hedy class!"
+    invalid_class_link: "Invalid link for joining the class"
+    no_such_adventure: "No such Hedy adventure!"
+    no_such_adventure_level: "No such level for this Hedy adventure!"
+    no_such_program: "No such Hedy program!"
 ClientErrorMessages:
     Transpile_warning: "Warning!"
     Transpile_error: "We can't run your program."
     Connection_error: "We couldn't reach the server."
     Other_error: "Oops! Maybe we made a little mistake."
     Execute_error: "Something went wrong while running the program."
+    Empty_output: "This code works but does not print anything. Add a print command to your code or use the turtle to get output."
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
-    Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {original_level} at level {working_level}."
+    Empty Program: "You created an empty program. Type Hedy code in the left field and try again"
+    Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {working_level} at level {original_level}."
     Incomplete: "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind {incomplete_command}."
     Invalid: "{invalid_command} is not a Hedy level {level} command. Did you mean {guessed_command}?"
     Invalid Space: "Oops! You started a line with a space on line {line_number}. Spaces confuse computers, can you remove it?"
@@ -43,6 +57,8 @@ HedyErrorMessages:
     Unquoted Text: "Be careful. If you ask or print something the text should start and finish with a quotation mark. You forgot one somewhere."
     Var Undefined: "You tried to print the variable {name}, but you did not set it. It is also possible that you were trying to print the word {name} but forgot quotation marks."
     Lonely Echo: "You used an echo before an ask, or an echo without an ask. First ask for input, then echo."
+    Unexpected Indentation: "You used too many spaces in line {line_number}. You uses {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces."
+    Too Big: "Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again."
     space: "a space"
     comma: "a comma"
     question mark: "a question mark"
@@ -109,27 +125,11 @@ Auth:
     invalid_reset_link: "Invalid reset password link."
     exists_email: "That email is already in use."
     exists_username: "That username is already in use."
-    email_hello: "Hi!"
-    email_goodbye: |-
-        Thank you!
-        The Hedy team
-    email_welcome_verify_subject: "Welcome to Hedy"
-    email_welcome_verify_body: |-
-        Your Hedy account has been created successfully. Welcome!
-        Please click on this link to verify your email address:
-    email_change_password_subject: "Your Hedy password has been changed"
-    email_change_password_body: |-
-        Your Hedy password has been changed. If you did this, all is good.
-        If you didn't change your password, please contact us immediately by replying to this email.
-    email_recover_password_subject: "Reset your Hedy password"
-    email_recover_password_body: "By clicking on this link, you can set a new Hedy password. If you haven't required a password reset, please ignore this email."
-    email_reset_password_subject: "Your Hedy password has been reset"
-    email_reset_password_body: |-
-        Your Hedy password has been reset to a new one. If you did this, all is good.
-        If you didn't change your password, please contact us immediately by replying to this email.
     programming_experience: "Do you have programming experience?"
     yes: "Yes"
     no: "No"
+    ok: "OK"
+    cancel: "Cancel"
     languages: "Which of these programming languages have you used before?"
     other_block: "Another block language"
     other_text: "Another text language"
@@ -155,6 +155,7 @@ Auth:
     create_class: "Create new class"
     rename_class: "Rename class"
     delete_class: "Delete class permanently"
+    back_to_class_list: "Go back to list of classes"
     class_link: "Link to join class"
     prompt_join_class: "Do you want to join this class?"
     join_class: "Join class"
@@ -175,6 +176,8 @@ Auth:
 Programs:
     recent: "My recent programs"
     level: "Level"
+    title: "Title"
+    created: "When created"
     minutes: "minutes"
     hours: "hours"
     days: "days"

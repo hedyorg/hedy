@@ -27,6 +27,7 @@ _TURN: "turn"
 
 //level 2
 _IS: "is"
+_AT: "at"
 random : "random" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
 
 //level 4
@@ -34,7 +35,6 @@ _IN: "in"
 _IF: "if"
 _ELSE: "else"
 _AND: "and"
-_AT: "at"
 
 //level 5
 _REPEAT: "repeat"
@@ -68,7 +68,7 @@ _WHILE: "while"
 _LENGTH: "length"
 
 start: program
-program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
+program: _EOL* (command (_SPACE)* _EOL+)* (command (_SPACE)*)? //lines may end on spaces and might be separated by many newlines
 command: print | ask | echo | turtle | invalid_space | invalid
 
 print: _PRINT (_SPACE text)?
@@ -88,11 +88,13 @@ textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for 
 %import common.NEWLINE
 %import common.SIGNED_INT -> NUMBER
 
-// FH Sept 2021: Frankly I have no clue what any of this means but they are Python compliant var names (aka include unicode)
-// this allows for var names in non-Latin names like Chinese and Bengali
-// stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
+// FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
+// Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
 
 NAME: ID_START ID_CONTINUE*
 ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
 ID_CONTINUE: ID_START | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
 
+// Internal symbol added by the preprocess_blocks function to indicate the end of blocks
+// FIXME ensure that the user can't write this token
+_END_BLOCK: "end-block"

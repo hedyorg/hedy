@@ -1,6 +1,6 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+<div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1" style="min-height: 22rem">
+    <div class="flex flex-col order-1" style="min-height: 22rem; max-height: 22rem;">
       <div class="w-full flex-1 flex flex-col">
         <div id="editor"
           style="background: #272822; font-family: monospace; color: white"
@@ -11,7 +11,7 @@
         <div id="errorbox"
           class="flex-0 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
           style="display: none;">
-          <p class="close-dialog" onclick="window.error.hide ()">X</p>
+          <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -29,7 +29,7 @@
         <div id="warningbox"
           class="flex-0 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
-          <p class="close-dialog" onclick="window.error.hide ()">X</p>
+          <p class="close-dialog" onclick="hedyApp.error.hide ()">X</p>
           <div class="flex">
             <div class="py-1">
               <svg class="fill-current h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col order-3" style="min-height: 22rem">
+    <div class="flex flex-col order-3" style="min-height: 22rem; max-height: 22rem;">
       <!-- tabindex=0 makes the div focusable -->
       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem"></div>
       <div id="turtlecanvas" class="flex-0"></div>
@@ -88,7 +88,7 @@
     <div class="order-2 lg:order-4">
       <br>
       <div class="flex justify-between">
-        <button id="runit" class="green-btn" onclick="runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
         {% if show_edit_button %}
         <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{edit_code_button}}</a>
         {% endif %}
@@ -103,21 +103,11 @@
       <br>
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
         {% if prev_level %}
-          <button class="green-btn" onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{regress_button}} {{ prev_level }}</button>
+          <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level %}
-            {% if (next_level == quiz_data_level + 1) and quiz_enabled %}
-                <button class="green-btn ml-1"
-                        onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'});">{{ advance_button }} {{ next_level }}</button>
-                <button class="green-btn ml-1" onclick="window.prompt_unsaved (function () {window.location = '/quiz/start/{{ quiz_data_level }}'})">Ga
-                    naar de
-                    quiz
-                    van level {{ level }}</button>
-            {% else %}
-                <button class="green-btn ml-1"
-                        onclick="window.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
-            {% endif %}
-          {% endif %}
+            <button class="green-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
+        {% endif %}
       </div>
     </div>
   </div>

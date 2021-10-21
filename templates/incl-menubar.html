@@ -1,6 +1,5 @@
-<nav class="bg-blue-500 px-8 shadow-sm text-white">
-  <div class="-mb-px flex">
-    <div class="py-1 mr-6 mt-1">
+<nav class="bg-blue-500 px-4 text-white flex flex-row items-center">
+    <div class="py-1 mr-6">
       <a href="{{localize_link ('/')}}">
         <img src="{{static('/images/Hedy-logo.png')}}" style="width: 2.5em;"/>
       </a>
@@ -22,17 +21,30 @@
       <a class="menubar-btn border-{% if current_page == 'login' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
     {% endif %}
     {% endblock %}
-
-    <div class="dropdown inline-block relative ml-auto py-2 z-50">
-      <button class="bg-blue-400 text-white border-blue-200 font-semibold py-1 px-2 rounded inline-flex items-center">
+    <div class="dropdown inline-block relative ml-auto py-2 z-40">
+      <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
         <span class="mr-1">{{ current_language().sym }}</span>
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
       </button>
-      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-500 pt-1 list-none ml-0">
+      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-400 mt-2 pt-1 list-none ml-0 right-0 w-48">
+          <li class="p-2"><input id="search_language" placeholder="{{search}}" class="border-2 text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
         {% for lang in other_languages() %}
-        <li><a class="hover:bg-blue-700 py-2 px-4 block whitespace-no-wrap text-white" href="{{ modify_query(lang=lang.lang) }}">{{ lang.sym }}</a></li>
+        <a class="no-underline" href="{{ modify_query(lang=lang.lang) }}"><li class="hover:bg-blue-600 text-white py-2 px-4 block border-b border-black language">{{ lang.sym }}</li></a>
         {% endfor %}
       </ul>
     </div>
-  </div>
 </nav>
+<script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+<script>
+    $("#search_language").keyup(function() {
+        let search_query = $("#search_language").val().toLowerCase();
+        console.log(search_query);
+        $(".language").each(function(){
+            if ($(this).html().toLowerCase().includes(search_query)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+</script>

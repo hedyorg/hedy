@@ -10,7 +10,7 @@
         </ul>
       </div>
       {# PANES #}
-      <div style='width: 100%; min-height: 10em;' class="bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
+      <div style='min-height: 20em;' id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         <div data-tabtarget="level">
           {{intro_text|commonmark}}
         </div>
@@ -22,6 +22,9 @@
               {% endif %}
               <div>
               {{ assignment.text|commonmark }}
+              {% if assignment.short_name == 'end' %}
+                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ start_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+              {% endif %}
               </div>
               <div class="clear-right"></div>
             </div>

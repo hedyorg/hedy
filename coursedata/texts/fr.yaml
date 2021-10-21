@@ -19,6 +19,8 @@ ui:
     assignment_header: "Exercice"
     show_explanation: "Montrer l'explication"
     hide_explanation: "Cacher l'explication"
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: "Aventure"
     switch_to_levels: "Aller aux niveaux"
     switch_to_adventures: "Aller aux aventures"
@@ -34,7 +36,7 @@ ClientErrorMessages:
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
-    Wrong Level: "Ce code est du code Hedy valide, mais pas du bon niveau. Tu as saisis du code {original_level} au niveau {working_level}."
+    Wrong Level: "Ce code est du code Hedy valide, mais pas du bon niveau. Tu as saisis du code {working_level} au niveau {original_level}."
     Incomplete: "Oups ! Tu as oublié un morceau de code ! À la ligne {line_number}, tu dois écrire du texte après {incomplete_command}."
     Invalid: "{invalid_command} n’est pas une commande valide pour le niveau {level} de Hedy. Voulais-tu utiliser {guessed_command} ?"
     Invalid Space: "Oups ! Tu as commencé une ligne avec un espace à la ligne {line_number}. Ces espaces faussent tes programmes. Peux-tu le supprimer ?"
@@ -107,27 +109,11 @@ Auth:
     invalid_reset_link: "Lien de réinitialisation de mot de passe incorrect."
     exists_email: "Cette adresse email est déjà utilisée."
     exists_username: "Cet identifiant est déjà utilisé."
-    email_hello: "Bonjour !"
-    email_goodbye: |-
-        Merci !
-        L'équipe Hedy
-    email_welcome_verify_subject: "Bienvenue sur Hedy"
-    email_welcome_verify_body: |-
-        Ton compte Hedy a été créé avec succès. Bienvenue !
-        Clique sur ce lien pour vérifier ton adresse email :
-    email_change_password_subject: "Ton mot de passe Hedy a été modifié"
-    email_change_password_body: |-
-        Ton mot de passe sur Hedy a été modifié. Si tu as fait ce changement toi-même, tout va bien.
-        Si tu n'as pas procédé à ce changement, merci de nous contacter immédiatement en répondant à cet email.
-    email_recover_password_subject: "Réinitialiser mon mot de passe Hedy"
-    email_recover_password_body: "En cliquant sur ce lien, tu pourras définir un nouveau mot de passe sur Hedy. Si tu n'as pas demandé cette réinitialisation, merci d'ignorer ceet email."
-    email_reset_password_subject: "Ton mot de passe Hedy a été réinitialisé"
-    email_reset_password_body: |-
-        Ton mot de passe sur Hedy a été réinitialisé. Si tu as fait ce changement toi-même, tout va bien.
-        Si tu n'as pas changé ton mot de passe, merci de nous contacter immédiatement en répondant à cet email.
     programming_experience: "Do you have programming experience?"
     yes: "Yes"
     no: "No"
+    ok: "OK"
+    cancel: "Cancel"
     languages: "Which of these programming languages have you used before?"
     other_block: "Another block language"
     other_text: "Another text language"
@@ -151,6 +137,7 @@ Auth:
     create_class: "Create new class"
     rename_class: "Rename class"
     delete_class: "Delete class permanently"
+    back_to_class_list: "Go back to list of classes"
     class_link: "Link to join class"
     prompt_join_class: "Do you want to join this class?"
     join_class: "Join class"

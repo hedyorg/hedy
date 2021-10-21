@@ -1,139 +1,264 @@
+---
 level: 4
 questions:
-  - 1:
-      question_text: "Wat is waar?"
-      code: "..."
-      mp_choice_options:
-        - { option_text: "In level 4 werkt print anders dan in level 3", code: , feedback: "print werkt nog hetzelfde" }
-        - { option_text: "In level 4 werkt ask anders dan in level 3", code: , feedback: "ask werkt nog hetzelfde" }
-        - { option_text: "In level 4 werken print en ask anders dan in level 3 ", code: , feedback: "Nee hoor, ze werken hetzelfde!" }
-        - { option_text: "In level 4 werken print en ask nog hetzelfde als in level 3", code: , feedback: "Klopt!." }
-      correct_answer: "D"
-      hint: "Er is alleen een commando bijgekomen."
-      question_score: 10
-  - 2:
-      question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam?"
-      code: |-
-        naam is ask Hoe heet je?
-        if naam is Hedy print 'leuk' else print 'minder leuk'
-      mp_choice_options:
-        - { option_text: "leuk", code: , feedback: "Klopt!" }
-        - { option_text: "minder leuk", code: , feedback: "Als de naam Hedy is, zegt Hedy juist 'leuk'" }
-        - { option_text: "Hedy ", code: , feedback: "Nee, er staat niet print naam" }
-        - { option_text: "Error", code: , feedback: "Gelukkig niet!" }
-      correct_answer: "A"
-      hint: "Als je naam Hedy is, wat wordt er dan geprint..?"
-      question_score: 10
-  - 3: 
-      question_text: "Wat is het goede wachtwoord?"
-      code: |-
-        wachtwoord is ask Wat is het wachtwoord?
-        if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
-      mp_choice_options:
-        - { option_text: "Goed", code: , feedback: "Goed wordt geprint als je het juiste wachtwoord invult, maar het is niet het wachtwoord" }
-        - { option_text: "GEHEIM", code: , feedback: "Klopt!'" }
-        - { option_text: "wachtwoord ", code: , feedback: "het wachtwoord is niet wachtwoord" }
-        - { option_text: "ALARM INDRINGER", code: , feedback: "Dat wordt er geprint als je het foute antwoord intypt!" }
-      correct_answer: "B"
-      hint: "if wachtwoord is ... print 'Goed!'"
-      question_score: 10
-  - 4: 
-      question_text: "Wat print Hedy als je een fout wachtwoord intypt?"
-      code: |-
-        wachtwoord is ask Wat is het wachtwoord?
-        if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
-      mp_choice_options:
-        - { option_text: "Goed", code: , feedback: "Dat wordt geprint bij een goed antwoord, niet bij een foute.." }
-        - { option_text: "GEHEIM", code: , feedback: "Dat is het juiste wachtwoord." }
-        - { option_text: "fout ", code: , feedback: "Nee, Hedy print wat anders..." }
-        - { option_text: "ALARM! INDRINGER!", code: , feedback: "Juist!" }
-      correct_answer: "D"
-      hint: "Als je een fout wachtwoord intypt slaat je computer alarm!"
-      question_score: 10
-  - 5: 
-      question_text: "Waarom zegt Hedy 'ALARM! INDRINGER!' als je 'geheim' antwoordt op de vraag?"
-      code: |-
-        wachtwoord is ask Wat is het wachtwoord?
-        if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
-      mp_choice_options:
-        - { option_text: "Omdat je het in hoofdletters moet typen, dus GEHEIM", code: , feedback: "Klopt!" }
-        - { option_text: "Omdat het wachtwoord 'alarm' is", code: , feedback: "Nee, dat is niet het wachtwoord." }
-        - { option_text: "Omdat het gehijm is, met lange ij. ", code: , feedback: "Nee, zo spel je dat woord niet" }
-        - { option_text: "Omdat Hedy een fout maakt", code: , feedback: "Nee hoor, dat is geen fout!" }
-      correct_answer: "A"
-      hint: "De spelling moet precies hetzelfde zijn."
-      question_score: 10
-  - 6:
-      question_text: "Welk woord mist op de plek van het vraagteken?"
-      code: |-
-        print 'Hoi ik ben Hedy de voetbalvoorspeller!'
-        print 'Ik kan voorspellen op welke plek jouw club eindigt!'
-        club is ask Voor welke club ben je?
-        if club is ajax print 'Ajax wordt eerste natuurlijk!' ? print 'Helaas jouw club wordt laatste...'
-      mp_choice_options:
-        - { option_text: "", code: "if", feedback: "Nee, if staat vooraan de zin." }
-        - { option_text: "", code: "at random", feedback: "Nee, je hebt hier else nodig." }
-        - { option_text: "", code: "else" , feedback: "Goed!" }
-        - { option_text: "", code: "print", feedback: "Er staat al print!" }
-      correct_answer: "C"
-      hint: "In level 4 leer je 2 nieuwe commando's if en ...?"
-      question_score: 10
-  - 7:
-      question_text: "Welk woord mist op de plek van het vraagteken?"
-      code: |-
-        print 'Ik kan voorspellen of jij miljonair wordt!'
-        naam is ask Hoe heet jij?
-        if naam is Hedy print 'Jij wordt miljonair!' else ? 'Helaas, geen miljoen voor jou.'
-      mp_choice_options:
-        - { option_text: "", code: "if", feedback: "Nee, if staat vooraan de zin." }
-        - { option_text: "", code: "at random", feedback: "Nee, die heb je hier niet nodig." }
-        - { option_text: "", code: "else" , feedback: "Er staat al else" }
-        - { option_text: "", code: "print", feedback: "Top!" }
-      correct_answer: "D"
-      hint: "Na else volgt nog een print"
-      question_score: 10
-  - 8:
-      question_text: "Welk woord mist op de plek van het vraagteken?"
-      code: |-
-        dier is ask Wat is je lievelingsdier?
-        if ? is pinguin print 'Dat is ook mijn lievelingsdier!' else print 'Ik houd meer van pinguins.'
-      mp_choice_options:
-        - { option_text: "", code: "lievelingsdier", feedback: "Dat is niet de naam van de variabele." }
-        - { option_text: "", code: "dier", feedback: "Knap hoor!" }
-        - { option_text: "", code: "if" , feedback: "Er staat al if" }
-        - { option_text: "", code: "print", feedback: "Nee, dat is hem niet.." }
-      correct_answer: "B"
-      hint: "Wat is de naam van de variabele?"
-      question_score: 10
-  - 9:
-      question_text: "Met welke deur ontsnap je uit dit spookhuis?"
-      code: |-
-        print 'Ontsnap uit het spookhuis!'
-        print 'Voor je staan 3 deuren'
-        deur is ask Welke deur kies jij?
-        monsters is vampier, weerwolf, reuzespin
-        if deur is 2 print 'Joepie! Je ontsnapt!' else print 'Je wordt opgegeten door een... ' monsters at random
-      mp_choice_options:
-        - { option_text: "1", code: , feedback: "Helaas... Jij wordt opgepeuzeld..." }
-        - { option_text: "2", code: , feedback: "Super! Ontsnapt!" }
-        - { option_text: "3", code: , feedback: "Helaas... Jij wordt opgepeuzeld..." }
-        - { option_text: "Het is een valstrik, je wordt altijd opgegeten!", code: , feedback: "Gelukkig niet!" }
-      correct_answer: "B"
-      hint: "Bij een van de deuren kom je geen monsters tegen..."
-      question_score: 10
-  - 10:
-      question_text: "Wat voor monster eet je op als je deur 1 kiest?"
-      code: |-
-        print 'Ontsnap uit het spookhuis!'
-        print 'Voor je staan 3 deuren'
-        deur is ask Welke deur kies jij?
-        monsters is vampier, weerwolf, reuzespin
-        if deur is 2 print 'Joepie! je ontsnapt!' else print 'Je wordt opgegeten door een... ' monsters at random
-      mp_choice_options:
-        - { option_text: "Hedy kiest steeds een random monster dat je opeet.", code: , feedback: "Geweldig!" }
-        - { option_text: "vampier", code: , feedback: "Niet altijd..." }
-        - { option_text: "weerwolf", code: , feedback: "Niet altijd..." }
-        - { option_text: "reuzespin", code: , feedback: "Niet altijd..." }
-      correct_answer: "A"
-      hint: "kijk goed naar de laatste drie woorden: monsters at random"
-      question_score: 10
+- 1:
+    question_text: "Wat is waar?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "In level 4 werkt print anders dan in level 3"
+      - "code": "None"
+      - "feedback": "print werkt nog hetzelfde"
+    - 1:
+      - "option_text": "In level 4 werkt ask anders dan in level 3"
+      - "code": "None"
+      - "feedback": "ask werkt nog hetzelfde"
+    - 2:
+      - "option_text": "In level 4 werken print en ask anders dan in level 3 "
+      - "code": "None"
+      - "feedback": "Nee hoor, ze werken hetzelfde!"
+    - 3:
+      - "option_text": "In level 4 werken print en ask nog hetzelfde als in level\
+          \ 3"
+      - "code": "None"
+      - "feedback": "Klopt!."
+    correct_answer: "D"
+    hint: "Er is alleen een commando bijgekomen."
+    question_score: 10
+- 2:
+    question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als\
+      \ naam?"
+    code: |-
+      naam is ask Hoe heet je?
+      if naam is Hedy print 'leuk' else print 'minder leuk'
+    mp_choice_options:
+    - 0:
+      - "option_text": "leuk"
+      - "code": "None"
+      - "feedback": "Klopt!"
+    - 1:
+      - "option_text": "minder leuk"
+      - "code": "None"
+      - "feedback": "Als de naam Hedy is, zegt Hedy juist 'leuk'"
+    - 2:
+      - "option_text": "Hedy "
+      - "code": "None"
+      - "feedback": "Nee, er staat niet print naam"
+    - 3:
+      - "option_text": "Error"
+      - "code": "None"
+      - "feedback": "Gelukkig niet!"
+    correct_answer: "A"
+    hint: "Als je naam Hedy is, wat wordt er dan geprint..?"
+    question_score: 10
+- 3:
+    question_text: "Wat is het goede wachtwoord?"
+    code: |-
+      wachtwoord is ask Wat is het wachtwoord?
+      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goed"
+      - "code": "None"
+      - "feedback": "Goed wordt geprint als je het juiste wachtwoord invult, maar\
+          \ het is niet het wachtwoord"
+    - 1:
+      - "option_text": "GEHEIM"
+      - "code": "None"
+      - "feedback": "Klopt!'"
+    - 2:
+      - "option_text": "wachtwoord "
+      - "code": "None"
+      - "feedback": "het wachtwoord is niet wachtwoord"
+    - 3:
+      - "option_text": "ALARM INDRINGER"
+      - "code": "None"
+      - "feedback": "Dat wordt er geprint als je het foute antwoord intypt!"
+    correct_answer: "B"
+    hint: "if wachtwoord is ... print 'Goed!'"
+    question_score: 10
+- 4:
+    question_text: "Wat print Hedy als je een fout wachtwoord intypt?"
+    code: |-
+      wachtwoord is ask Wat is het wachtwoord?
+      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goed"
+      - "code": "None"
+      - "feedback": "Dat wordt geprint bij een goed antwoord, niet bij een foute.."
+    - 1:
+      - "option_text": "GEHEIM"
+      - "code": "None"
+      - "feedback": "Dat is het juiste wachtwoord."
+    - 2:
+      - "option_text": "fout "
+      - "code": "None"
+      - "feedback": "Nee, Hedy print wat anders..."
+    - 3:
+      - "option_text": "ALARM! INDRINGER!"
+      - "code": "None"
+      - "feedback": "Juist!"
+    correct_answer: "D"
+    hint: "Als je een fout wachtwoord intypt slaat je computer alarm!"
+    question_score: 10
+- 5:
+    question_text: "Waarom zegt Hedy 'ALARM! INDRINGER!' als je 'geheim' antwoordt\
+      \ op de vraag?"
+    code: |-
+      wachtwoord is ask Wat is het wachtwoord?
+      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Omdat je het in hoofdletters moet typen, dus GEHEIM"
+      - "code": "None"
+      - "feedback": "Klopt!"
+    - 1:
+      - "option_text": "Omdat het wachtwoord 'alarm' is"
+      - "code": "None"
+      - "feedback": "Nee, dat is niet het wachtwoord."
+    - 2:
+      - "option_text": "Omdat het gehijm is, met lange ij. "
+      - "code": "None"
+      - "feedback": "Nee, zo spel je dat woord niet"
+    - 3:
+      - "option_text": "Omdat Hedy een fout maakt"
+      - "code": "None"
+      - "feedback": "Nee hoor, dat is geen fout!"
+    correct_answer: "A"
+    hint: "De spelling moet precies hetzelfde zijn."
+    question_score: 10
+- 6:
+    question_text: "Welk woord mist op de plek van het vraagteken?"
+    code: |-
+      print 'Hoi ik ben Hedy de voetbalvoorspeller!'
+      print 'Ik kan voorspellen op welke plek jouw club eindigt!'
+      club is ask Voor welke club ben je?
+      if club is ajax print 'Ajax wordt eerste natuurlijk!' ? print 'Helaas jouw club wordt laatste...'
+    mp_choice_options:
+    - 0:
+      - "option_text": ""
+      - "code": "if"
+      - "feedback": "Nee, if staat vooraan de zin."
+    - 1:
+      - "option_text": ""
+      - "code": "at random"
+      - "feedback": "Nee, je hebt hier else nodig."
+    - 2:
+      - "option_text": ""
+      - "code": "else"
+      - "feedback": "Goed!"
+    - 3:
+      - "option_text": ""
+      - "code": "print"
+      - "feedback": "Er staat al print!"
+    correct_answer: "C"
+    hint: "In level 4 leer je 2 nieuwe commando's if en ...?"
+    question_score: 10
+- 7:
+    question_text: "Welk woord mist op de plek van het vraagteken?"
+    code: |-
+      print 'Ik kan voorspellen of jij miljonair wordt!'
+      naam is ask Hoe heet jij?
+      if naam is Hedy print 'Jij wordt miljonair!' else ? 'Helaas, geen miljoen voor jou.'
+    mp_choice_options:
+    - 0:
+      - "option_text": ""
+      - "code": "if"
+      - "feedback": "Nee, if staat vooraan de zin."
+    - 1:
+      - "option_text": ""
+      - "code": "at random"
+      - "feedback": "Nee, die heb je hier niet nodig."
+    - 2:
+      - "option_text": ""
+      - "code": "else"
+      - "feedback": "Er staat al else"
+    - 3:
+      - "option_text": ""
+      - "code": "print"
+      - "feedback": "Top!"
+    correct_answer: "D"
+    hint: "Na else volgt nog een print"
+    question_score: 10
+- 8:
+    question_text: "Welk woord mist op de plek van het vraagteken?"
+    code: |-
+      dier is ask Wat is je lievelingsdier?
+      if ? is pinguin print 'Dat is ook mijn lievelingsdier!' else print 'Ik houd meer van pinguins.'
+    mp_choice_options:
+    - 0:
+      - "option_text": ""
+      - "code": "lievelingsdier"
+      - "feedback": "Dat is niet de naam van de variabele."
+    - 1:
+      - "option_text": ""
+      - "code": "dier"
+      - "feedback": "Knap hoor!"
+    - 2:
+      - "option_text": ""
+      - "code": "if"
+      - "feedback": "Er staat al if"
+    - 3:
+      - "option_text": ""
+      - "code": "print"
+      - "feedback": "Nee, dat is hem niet.."
+    correct_answer: "B"
+    hint: "Wat is de naam van de variabele?"
+    question_score: 10
+- 9:
+    question_text: "Met welke deur ontsnap je uit dit spookhuis?"
+    code: |-
+      print 'Ontsnap uit het spookhuis!'
+      print 'Voor je staan 3 deuren'
+      deur is ask Welke deur kies jij?
+      monsters is vampier, weerwolf, reuzespin
+      if deur is 2 print 'Joepie! Je ontsnapt!' else print 'Je wordt opgegeten door een... ' monsters at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "1"
+      - "code": "None"
+      - "feedback": "Helaas... Jij wordt opgepeuzeld..."
+    - 1:
+      - "option_text": "2"
+      - "code": "None"
+      - "feedback": "Super! Ontsnapt!"
+    - 2:
+      - "option_text": "3"
+      - "code": "None"
+      - "feedback": "Helaas... Jij wordt opgepeuzeld..."
+    - 3:
+      - "option_text": "Het is een valstrik, je wordt altijd opgegeten!"
+      - "code": "None"
+      - "feedback": "Gelukkig niet!"
+    correct_answer: "B"
+    hint: "Bij een van de deuren kom je geen monsters tegen..."
+    question_score: 10
+- 10:
+    question_text: "Wat voor monster eet je op als je deur 1 kiest?"
+    code: |-
+      print 'Ontsnap uit het spookhuis!'
+      print 'Voor je staan 3 deuren'
+      deur is ask Welke deur kies jij?
+      monsters is vampier, weerwolf, reuzespin
+      if deur is 2 print 'Joepie! je ontsnapt!' else print 'Je wordt opgegeten door een... ' monsters at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "Hedy kiest steeds een random monster dat je opeet."
+      - "code": "None"
+      - "feedback": "Geweldig!"
+    - 1:
+      - "option_text": "vampier"
+      - "code": "None"
+      - "feedback": "Niet altijd..."
+    - 2:
+      - "option_text": "weerwolf"
+      - "code": "None"
+      - "feedback": "Niet altijd..."
+    - 3:
+      - "option_text": "reuzespin"
+      - "code": "None"
+      - "feedback": "Niet altijd..."
+    correct_answer: "A"
+    hint: "kijk goed naar de laatste drie woorden: monsters at random"
+    question_score: 10

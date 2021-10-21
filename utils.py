@@ -13,6 +13,7 @@ import commonmark
 commonmark_parser = commonmark.Parser ()
 commonmark_renderer = commonmark.HtmlRenderer ()
 from bs4 import BeautifulSoup
+from flask_helpers import render_template
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -62,72 +63,6 @@ def set_debug_mode(debug_mode):
     """Switch debug mode to given value."""
     global DEBUG_MODE
     DEBUG_MODE = debug_mode
-
-
-YAML_CACHE = {}
-
-@querylog.timed
-def load_yaml(filename):
-    """Load the given YAML file.
-
-    The file load will be cached in production, but reloaded everytime in
-    development mode for much iterating. Because YAML loading is still
-    somewhat slow, in production we'll have two levels of caching:
-
-    - In-memory cache: each of the N processes on the box will only need to
-      load the YAML file once (per restart).
-
-    - On-disk pickle cache: "pickle" is a more efficient Python serialization
-      format, and loads 400x quicker than YAML. We will prefer loading a pickle
-      file to loading the source YAML file if possible. Hopefully only 1/N
-      processes on the box will have to do the full load per deploy.
-
-    We should be generating the pickled files at build time, but Heroku doesn't
-    make it easy to have a build/deploy time... so for now let's just make sure
-    we only do it once per box per deploy.
-    """
-    if is_debug_mode():
-        return load_yaml_uncached(filename)
-
-    # Production mode, check our two-level cache
-    if filename not in YAML_CACHE:
-        data = load_yaml_pickled(filename)
-        YAML_CACHE[filename] = data
-        return data
-    else:
-        return YAML_CACHE[filename]
-
-
-def load_yaml_pickled(filename):
-    # Let's not even attempt the pickling on Windows, because we have
-    # no pattern to atomatically write the pickled result file.
-    if IS_WINDOWS:
-        return load_yaml_uncached(filename)
-
-    pickle_file = f'{filename}.pickle'
-    if not os.path.exists(pickle_file):
-        data = load_yaml_uncached(filename)
-
-        # Write a pickle file, first write to a tempfile then rename
-        # into place because multiple processes might try to do this in parallel,
-        # plus we only want `path.exists(pickle_file)` to return True once the
-        # file is actually complete and readable.
-        with atomic_write_file(pickle_file) as f:
-            pickle.dump(data, f)
-
-        return data
-    else:
-        with open(pickle_file, 'rb') as f:
-            return pickle.load(f)
-
-
-def load_yaml_uncached(filename):
-    try:
-        y = yaml.YAML(typ='safe', pure=True)
-        with open(filename, 'r', encoding='utf-8') as f:
-            return y.load(f)
-    except IOError:
-        return {}
 
 
 def load_yaml_rt(filename):
@@ -243,3 +178,13 @@ def markdown_to_html_tags (markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse (markdown))
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all ()
+
+def page_404 (translations, menu, lang, username, *page_error):
+    if page_error:
+        page_error = page_error [0]
+    return render_template("404.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 404
+
+def page_500 (translations, menu, lang, username, *page_error):
+    if page_error:
+        page_error = page_error [0]
+    return render_template("500.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 500
