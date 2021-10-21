@@ -1,3 +1,5 @@
+const whitespace = require("ace/ext/whitespace");
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -158,7 +160,7 @@ function runit(level, lang, cb) {
   try {
     level = level.toString();
     var editor = ace.edit("editor");
-    var code = editor.getValue();
+    var code = get_trimmed_code();
 
     clearErrors(editor);
 
@@ -344,7 +346,7 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
   // Saving the program makes things way simpler for many reasons: it covers the cases where:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
   var name = $ ('#program_name').val ();
-  var code = ace.edit('editor').getValue();
+  var code = get_trimmed_code();
   return saveit(level, lang, name, code, function (err, resp) {
     if (err && err.Warning) return error.showWarning(ErrorMessages.Transpile_warning, err.Warning);
     if (err && err.Error) return error.show(ErrorMessages.Transpile_error, err.Error);
@@ -740,3 +742,9 @@ window.prompt_unsaved = function prompt_unsaved(cb) {
   window.State.no_unload_prompt = true;
   window.modal.confirm (window.auth.texts.unsaved_changes, cb);
 }
+
+window.get_trimmed_code = function() {
+  whitespace.trimTrailingSpace(window.editor.session, true);
+  return window.editor.getValue()
+}
+
