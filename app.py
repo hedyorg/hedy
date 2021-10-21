@@ -952,7 +952,7 @@ def split_markdown_front_matter(md):
     return front_matter, parts[1]
 
 def split_teacher_docs(contents):
-    next_correct = False
+    next_tag_multiline_code = False
     tags = utils.markdown_to_html_tags(contents)
     sections =[]
     for tag in tags:
@@ -964,11 +964,11 @@ def split_teacher_docs(contents):
                 tag = tag.replace('page_title: ', '')
             sections.append({'title': tag, 'content': ''})
         else:
-            if (next_correct):
+            if (next_tag_multiline_code):
                 sections[-1]['content'] += str(tag).replace("<code>", "<pre>").replace("</code>", "</pre>")
-                next_correct = False
+                next_tag_multiline_code = False
             elif re.match('^<pre><code>', str(tag)):
-                next_correct = True
+                next_tag_multiline_code = True
             else:
                 sections[-1]['content'] += str(tag)
     return sections
