@@ -27,7 +27,9 @@ set -eu
 # JavaScript is slightly different between those cases--however, the final
 # JavaScript will always be generated on deploy using the previous deploy
 # method.
-root=$(cd $(PWD)/../.. && pwd)
+root=$(cd $(dirname $0)/../.. && pwd)
+
+cd $root
 
 if [[ "${1:-}" == "--watch" ]]; then
     echo "👀 Running TypeScript compilation in watch mode. 👀"
