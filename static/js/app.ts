@@ -4,6 +4,8 @@ import './syntaxModesRules';
 import { modal, error } from './modal';
 import { auth } from './auth';
 
+const whitespace = require("ace/ext/whitespace");
+
 export let theGlobalEditor: AceAjax.Editor;
 
 (function() {
@@ -40,7 +42,7 @@ export let theGlobalEditor: AceAjax.Editor;
     if (!$editor.length) return;
 
     // We expose the editor globally so it's available to other functions for resizing
-    var editor = turnIntoAceEditor($editor.get(0), $editor.data('readonly'));
+    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     error.setEditor(editor);
 
@@ -181,8 +183,8 @@ export function runit(level: string, lang: string, cb: () => void) {
   error.hide();
   try {
     level = level.toString();
-    var editor = ace.edit("editor");
-    var code = editor.getValue();
+    var editor = theGlobalEditor;
+    var code = get_trimmed_code();
 
     clearErrors(editor);
 
@@ -381,8 +383,8 @@ export function share_program (level: number, lang: string, id: string | true, P
   // Otherwise, we save the program and then share it.
   // Saving the program makes things way simpler for many reasons: it covers the cases where:
   // 1) there's no saved program; 2) there's no saved program for that user; 3) the program has unsaved changes.
-  var name = `${$('#program_name').val()}`;
-  var code = ace.edit('editor').getValue();
+  const name = `${$('#program_name').val()}`;
+  const code = get_trimmed_code();
   return saveit(level, lang, name, code, (err: any, resp: any) => {
       if (err && err.Warning)
         return error.showWarning(ErrorMessages['Transpile_warning'], err.Warning);
@@ -629,3 +631,9 @@ export function prompt_unsaved(cb: () => void) {
 export function load_quiz(level: string) {
   $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
+
+export function get_trimmed_code() {
+  whitespace.trimTrailingSpace(theGlobalEditor.session, true);
+  return theGlobalEditor.getValue();
+}
+

@@ -603,9 +603,6 @@ function loosenRules(rules: Rules) {
   return rules;
 }
 
-type Module = any;
-type RequireFunction = (name: string) => Module;
-declare function define(name: string, dependencies: string[], handler: (require: RequireFunction, exports: Module, module: Module) => void): void;
 
 
 // Only do this work if the 'define' function is actually available at runtime.
