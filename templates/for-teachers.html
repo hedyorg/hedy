@@ -43,14 +43,14 @@ var showSection = function (index) {
            $(this).addClass("green-btn");
        }
    });
-   $("#button-" + index).removeClass("green-btn");
-   $("#button-" + index).addClass("blue-btn");
-
    if ($ ('#section-' + index).is (':visible')) {
        $("#button-" + index).removeClass("blue-btn");
        $("#button-" + index).addClass("green-btn");
        return $ ('.section').hide ();
    }
+   $("#button-" + index).removeClass("green-btn");
+   $("#button-" + index).addClass("blue-btn");
+
    $ ('.section').hide ();
    $ ('#section-' + index).slideToggle (400);
    $('html, body').animate({
