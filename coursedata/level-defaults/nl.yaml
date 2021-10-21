@@ -113,7 +113,7 @@
             print 'ik heet ' naam
     -   name: "ask"
         explanation: "Iets vragen met `ask`"
-        example: "Bijvoorbeeld: kleur is ask Wat is je lievelingskleur?"
+        example: "Bijvoorbeeld: kleur is ask 'Wat is je lievelingskleur?'"
         demo_code: |-
             kleur is ask 'Wat is je lievelingskleur?'
             print 'Jouw favoriet is dus ' kleur
@@ -157,16 +157,6 @@
 
         Ook in level 4 worden de opdrachten in de tabjes steeds iets moeilijker. Doe ze dus van links naar rechts.
     commands:
-    -   name: "print"
-        explanation: "Iets letterlijk printen met `print`."
-        example: "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'"
-        demo_code: "print 'Hallo welkom bij Hedy'"
-    -   name: "ask"
-        explanation: "Iets vragen met `ask`."
-        example: "Bijvoorbeeld: kleur is ask 'Wat is je lievelingskleur?'"
-        demo_code: |-
-            kleur is ask 'Wat is je lievelingskleur?'
-            print 'Jouw favoriet is dus ' kleur
     -   name: "if"
         explanation: "Een keuze maken met `if`"
         example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
@@ -225,22 +215,6 @@
         repeat 3 times print 'Hedy is leuk!'
         ```
     commands:
-    -   name: "print"
-        explanation: "Iets letterlijk printen met `print`."
-        example: "Bijvoorbeeld: print 'Hallo welkom bij Hedy.'"
-        demo_code: "print 'Hallo welkom bij Hedy'"
-    -   name: "ask"
-        explanation: "Iets vragen met `ask`."
-        example: "Bijvoorbeeld: kleur is ask 'Wat is je lievelingskleur?'"
-        demo_code: |-
-            kleur is ask 'Wat is je lievelingskleur?'
-            print 'Jouw favoriet is dus ' kleur
-    -   name: "if"
-        explanation: "Een keuze maken met `if`"
-        example: "Bijvoorbeeld: if kleur is groen print 'mooi!' else print 'niet zo mooi'"
-        demo_code: |-
-            kleur is ask 'Wat is je lievelingskleur?'
-            if kleur is groen print 'mooi!' else print 'niet zo mooi'
     -   name: "repeat"
         explanation: "Iets herhalen met `repeat`."
         example: "Bijvoorbeeld: repeat 3 times print 'Hedy is leuk!'"
@@ -269,10 +243,6 @@
         ```
 
     commands:
-    -   name: "print"
-        explanation: "Iets letterlijk printen met `print`."
-        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
     -   name: "`if` met meerdere regels"
         explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
         example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
@@ -293,6 +263,48 @@
                 forward 50
 8:
     start_code: |-
+        repeat 3 times
+            eten is ask 'Wat wil je bestellen?'
+            if eten is 'pizza'
+                print 'lekker'
+            else
+                print 'pizza is lekkerder'
+    intro_text: |
+        In dit level kun je niet alleen meerdere regels gebruiken bij `if` en `repeat`, maar je kunt ze ook nog eens in elkaar zetten!
+        In het voorbeeldje zie je een if commando in een repeat commando staan. Andersom mag het ook en een if mag ook in een if en een repeat in een repeat. 
+        Probeer het maar eens!
+        
+        ## Voorbeeld Hedy code
+        ```
+        repeat 3 times
+            eten is ask 'Wat wil je bestellen?'
+            if eten is 'pizza'
+                print 'lekker'
+            else
+                print 'pizza is lekkerder'
+        ```
+
+    commands:
+    -   name: "`if` met meerdere regels"
+        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is. Nu printen we twee regels uit."
+        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
+        demo_code: |-
+            antwoord is ask 'Hoeveel is 10 plus 10?'
+            if antwoord is 20
+                print 'Goedzo!'
+                print 'Het antwoord was inderdaad ' antwoord
+            else
+                print 'Foutje'
+                print 'Het antwoord moest zijn 20'
+    -   name: "`repeat` met de turtle"
+        explanation: "Meerdere regels samen herhalen"
+        example: "Bijvoorbeeld: een vierkant maken"
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
+9:
+    start_code: |-
         dieren is hond, kat, papegaai
         for dier in dieren
           print dier ' is een leuk dier!'
@@ -307,10 +319,6 @@
           print dier ' is een leuk dier!'
         ```
     commands:
-    -   name: "print"
-        explanation: "Iets letterlijk printen met `print`."
-        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
     -   name: "for met een lijst"
         explanation: "Alle dingen in een lijstje printen "
         example: "Bijvoorbeeld: for dier in dieren"
@@ -318,7 +326,7 @@
             dieren is hond, kat, papegaai
             for dier in dieren
               print dier
-9:
+10:
     start_code: |-
         for i in range 1 to 10
             print i
@@ -335,7 +343,7 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-10:
+11:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -369,7 +377,7 @@
                 print 'a is 2'
             else:
                 print 'a is niet 1 of 2'
-11:
+12:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -390,7 +398,7 @@
             if kleur is blauw:
                 if kleurtwee is geel:
                     print 'Samen is dit groen!'
-12:
+13:
     start_code: |-
         leeftijd is input('Hoe oud ben jij?')
         print('Dus jij hebt zo veel verjaardagen gehad:')
@@ -415,7 +423,7 @@
             for i in range(0, 10):
                 print(i)
             print('Wie niet weg is is gezien')
-13:
+14:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         print(fruit)
@@ -441,7 +449,7 @@
             fruit is ['banaan', 'appel', 'kers']
             randomfruit is fruit[random]
             print(randomfruit)
-14:
+15:
     start_code: |-
         je_bent_er_nog is False
         ben_je_er_nog is input('ben je er nog? ja of nee?')
@@ -468,7 +476,7 @@
                     print('Dat is goed!')
                 if goed_antwoord is False:
                     print('Dat is fout! Nog ' 5-i ' pogingen over')
-15:
+16:
     start_code: |-
         je_bent_er_nog is False
         ben_je_er_nog is input('ben je er nog? ja of nee?')
@@ -499,7 +507,7 @@
                 print('Je hebt minimaal 1 antwoord goed!')
             else:
                 print('Beide antwoorden zijn fout!')
-16:
+17:
     start_code: |-
         # Dit is een programma die een aantal sommen gaat vragen
         for i in range(1, 10):
@@ -521,7 +529,7 @@
             # Het is gemaakt in Hedy
             # Het doet eigenlijk verder niets!
             print('hallo!')
-17:
+18:
     start_code: |-
         leeftijd is input('Hoe oud ben jij?')
         if leeftijd < 13:
@@ -544,7 +552,7 @@
             leeftijd is input('Hoe oud ben jij?')
             if leeftijd > 13:
                 print('Dan ben je ouder dan ik!')
-18:
+19:
     start_code: |-
         goed_antwoord is False
         # we gaan door totdat een goed antwoord is gegeven!
@@ -576,7 +584,7 @@
                 print('Dit is de ' tel 'e keer')
                 tel is tel + 1
             print('We zijn klaar')
-19:
+20:
     start_code: |-
         lijst is ['eerste', 'tweede', 'derde']
         tweedewaarde is lijst[2]
@@ -592,7 +600,7 @@
             optellen is optellen + lijst[3]
             # we verwachten hier 6
             print(optellen)
-20:
+21:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         for i in range(1, 3):
@@ -607,7 +615,7 @@
             print('lengte van de lijst is ' length(fruit))
             for i in range(1, length(fruit)):
                 print(fruit[i])
-21:
+22:
     start_code: |-
         print('Hoeveel is 5+3?')
         antwoord = 5+3
@@ -647,7 +655,7 @@
                 print('Dat is goed!')
             else:
                 print('Helaas dat is fout!')
-22:
+23:
     start_code: |-
         land = input('In welk land woon jij?')
         if land != Nederland:
@@ -665,7 +673,7 @@
                 print('Goed zo!')
             else:
                 print('Fout! Je mocht geen 5 zeggen')
-23:
+24:
     start_code: |-
         leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
         if leeftijd <= 12:
