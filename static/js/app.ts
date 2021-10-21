@@ -4,8 +4,6 @@ import './syntaxModesRules';
 import { modal, error } from './modal';
 import { auth } from './auth';
 
-const whitespace = require("ace/ext/whitespace");
-
 export let theGlobalEditor: AceAjax.Editor;
 
 (function() {
@@ -633,7 +631,14 @@ export function load_quiz(level: string) {
 }
 
 export function get_trimmed_code() {
-  whitespace.trimTrailingSpace(theGlobalEditor.session, true);
+  try {
+    // This module may or may not exist, and even the 'require()' function may or may not exist...
+    // So let's be extra careful here.
+    const whitespace = require("ace/ext/whitespace");
+    whitespace.trimTrailingSpace(theGlobalEditor.session, true);
+  } catch (e) {
+    console.error(e);
+  }
   return theGlobalEditor.getValue();
 }
 
