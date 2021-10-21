@@ -5,9 +5,9 @@
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 
-#$scriptdir/validate-python
-#$scriptdir/validate-tests
+$scriptdir/validate-python
+$scriptdir/validate-tests
 $scriptdir/validate-yaml
-#$scriptdir/validate-e2e
+$scriptdir/validate-e2e
 
 echo "Everything is great! 🍰"

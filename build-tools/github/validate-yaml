@@ -14,24 +14,30 @@ echo "------> Validating YAML"
 # If we ever care enough to do something about this, we should be interpreting
 # the JSON error outputs of this tool and re-interpreting them with useful
 # error messages.
-which npx
-npx pajv help
 
+
+# For magical and mysterious reasons, on GitHub actions using 'npx pajv validate' (which
+# would normally be the way to run this command), hangs. It works fine on two of my machines,
+# and also in an Ubuntu Docker container, and 'npx pajv help' works as well... but
+# 'npx pajv validate' just hangs. Running the 'pajv' binary directly without the use of
+# 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
+
+pajv=$scriptdir/../../node_modules/.bin/pavj
 
 cd ../../coursedata/adventures/
-npx --no-install pajv validate \
+$pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
 
 cd ../level-defaults/
-npx pajv validate \
+$pajv validate \
     --errors=text \
     -s "levels.schema.json" \
     -d "*.yaml"
 
 cd ../quiz/
-npx pajv validate \
+$pajv validate \
     --errors=text \
     -s "quiz_questions.schema.json" \
     -d "*.yaml"
