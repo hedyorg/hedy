@@ -217,7 +217,7 @@ export function runit(level: string, lang: string, cb: () => void) {
           ]);
           // FIXME change this to apply only to the error span once errors have an end location.
           editor.session.addMarker(
-            new AceAjax.Range(
+            new ace.Range(
                 response.Location[0] - 1,
                 response.Location[1] - 1,
                 response.Location[0] - 1,
@@ -632,13 +632,12 @@ export function load_quiz(level: string) {
 
 export function get_trimmed_code() {
   try {
-    // This module may or may not exist, and even the 'require()' function may or may not exist...
-    // So let's be extra careful here.
-    const whitespace = require("ace/ext/whitespace");
+    // This module may or may not exist, so let's be extra careful here.
+    const whitespace = ace.require("ace/ext/whitespace");
     whitespace.trimTrailingSpace(theGlobalEditor.session, true);
   } catch (e) {
     console.error(e);
   }
-  return theGlobalEditor.getValue();
+  return theGlobalEditor?.getValue();
 }
 
