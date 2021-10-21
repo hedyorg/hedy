@@ -50,7 +50,7 @@ Bij mijn programma's vind je alle codes terug die je hebt opgeslagen.
 
 Je kunt je projecten simpel opslaan door je project een naam te geven in het witte balkje en dan op de groene knop Code opslaan ernaast te klikken.
 
-![](RackMultipart20210420-4-19s02r2_html_5657fc35812eb727.png)
+<!-- ![](RackMultipart20210420-4-19s02r2_html_5657fc35812eb727.png) -->
 
 Veel programmeer plezier!
 

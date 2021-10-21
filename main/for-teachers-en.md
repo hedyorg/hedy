@@ -45,7 +45,7 @@ In My programs you can find all the codes that you've saved.
 
 You can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
 
-![](RackMultipart20210420-4-19s02r2_html_5657fc35812eb727.png)
+<!-- ![](RackMultipart20210420-4-19s02r2_html_5657fc35812eb727.png) -->
 
 Let the programming fun begin! 
 
