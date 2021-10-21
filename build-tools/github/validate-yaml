@@ -19,7 +19,7 @@ npx pajv help
 
 
 cd ../../coursedata/adventures/
-$scriptdir/../../node_modules/.bin/pajv validate \
+npx --no-install pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
