@@ -35,4 +35,4 @@ type RequireFunction = (name: string) => Module;
 declare function define(name: string, dependencies: string[], handler: (require: RequireFunction, exports: Module, module: Module) => void): void;
 
 // Apparently Ace also comes with a global require()
-declare function require(name: string) => Module;
+declare function require(name: string): Module;

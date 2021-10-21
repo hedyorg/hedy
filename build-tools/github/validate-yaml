@@ -22,7 +22,7 @@ echo "------> Validating YAML"
 # 'npx pajv validate' just hangs. Running the 'pajv' binary directly without the use of
 # 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
 
-pajv=$scriptdir/../../node_modules/.bin/pavj
+pajv=$scriptdir/../../node_modules/.bin/pajv
 
 cd ../../coursedata/adventures/
 $pajv validate \
