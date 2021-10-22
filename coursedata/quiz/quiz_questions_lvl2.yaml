@@ -1,129 +1,255 @@
+---
 level: 2
 questions:
-  - 1:
-      question_text: "Wat is waar?"
-      code: "..."
-      mp_choice_options:
-        - { option_text: "In level 2 bestaat het commando print niet meer", code: , feedback: "Print werkt nog steeds hetzelfde" }
-        - { option_text: "In level 2 bestaat het commando ask niet meer", code: , feedback: "Ask werkt anders, maar het bestaat nog wel!" }
-        - { option_text: "In level 2 bestaat het commando echo niet meer ", code: , feedback: "Goedzo!" }
-        - { option_text: "In level 2 bestaan alle commando's van level 1 nog", code: , feedback: "Nee, een commando is weg." }
-      correct_answer: "C"
-      hint: "print en ask bestaan nog."
-      question_score: 10
-  - 2:
-      question_text: "Welke code is goed?"
-      code: "..."
-      mp_choice_options:
-        - { option_text:, code: "naam is ask Hoe heet jij?", feedback: "Super!" }
-        - { option_text:, code: "ask is naam Hoe heet jij?", feedback: "De woorden zijn goed, maar de volgorde niet!" }
-        - { option_text:, code: "ask Hoe heet jij?", feedback: "Zo werkte het in level 1, nu niet meer." }
-        - { option_text:, code: "ask Hoe heet jij? is naam", feedback: "De woorden zijn goed, maar de volgorde niet!" }
-      correct_answer: "A"
-      hint: "ask werkt niet meer zoals in level 1 "
-      question_score: 10
-  - 3:
-      question_text: "Wat is het commando om Hedy een willekeurig woord uit een rijtje te laten kiezen?"
-      code: "..."
-      mp_choice_options:
-        - { option_text:, code: "print", feedback: "Met print laat je tekst verschijnen" }
-        - { option_text:, code: "ask", feedback: "ask is om een vraag te stellen" }
-        - { option_text:, code: "is", feedback: "is gebruik je om het rijtje te maken" }
-        - { option_text:, code: "at random", feedback: "Juist!" }
-      correct_answer: "D"
-      hint: "Willekeurig betekent 'zomaar eentje' er wordt telkens een ander woord gekozen."
-      question_score: 10
-  - 4:
-      question_text: "Wat is er mis met deze code?"
-      code: |-
-        dieren is hond koe aap
-        print dieren at random
-      mp_choice_options:
-        - { option_text: "Er moeten komma's tussen: hond, koe, aap.", code: , feedback: "Goedzo!" }
-        - { option_text: "In regel 1 moet print staan.", code: , feedback: "Nee, je hebt geen print nodig." }
-        - { option_text: "In regel 2 moet 'dier' staan in plaats van 'dieren',", code: , feedback: "Dieren is goed." }
-        - { option_text: " 'At random' is fout gespeld, het moet 'et rendom' zijn", code: , feedback: "At random is de goede spelling" }
-      correct_answer: "A"
-      hint: "De fout zit in regel 1"
-      question_score: 10
-  - 5:
-      question_text: "Wat klopt er niet aan regel 2 van deze code?"
-      code: |-
-        opties is steen, papier, schaar
-        print steen, papier, schaar at random
-      mp_choice_options:
-        - { option_text:, code: "at random print opties", feedback: "Je bent er bijna, opties is goed, maar deze volgorde niet." }
-        - { option_text:, code: "print steen at random", feedback: "Je wilt niet altijd steen printen, maar willekeurig een van de opties." }
-        - { option_text:, code: "print opties at random", feedback: "Heel goed!" }
-        - { option_text: "Niets, de code is goed!", code:, feedback: "Kijk goed! Er zit wel een fout in!" }
-      correct_answer: "C"
-      hint: "De naam van de variabele (het lijstje) is opties."
-      question_score: 10
-  - 6:
-      question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige prijs te printen?"
-      code: |-
-        prijzen is 1 euro, 100 euro, 1 miljoen euro
-        print prijs at random
-      mp_choice_options:
-        - { option_text:, code: "print prijs", feedback: "Je wilt niet het woord prijs printen, maar een random prijs uit het lijstje prijzen" }
-        - { option_text:, code: "print prijzen at random", feedback: "Goed opgelet!" }
-        - { option_text:, code: "print at random prijs", feedback: " At random moet achter de variabele." }
-        - { option_text: "Niets de code is goed!", code: , feedback: "Kijk goed! Er zit wel een fout in!" }
-      correct_answer: "B"
-      hint: "Kijk goed de naam van de variabele 'prijzen'"
-      question_score: 10
-  - 7:
-      question_text: "Wat is er mis met deze code?"
-      code: |-
-        vraag is ask Wat wil je weten?
-        antwoorden zijn ja, nee, misschien
-        print antwoorden at random
-      mp_choice_options:
-        - { option_text: "In regel 1 moet vragen staan in plaats van vraag", code: , feedback: "vraag is goed" }
-        - { option_text: "In regel 2 moet is staan in plaats van zijn" , code: , feedback: "Correct" }
-        - { option_text: "In regel 3 moet antwoord staan in plaats van antwoorden", code: , feedback: "Nee, in regel 2 heet de variabele namelijk ook antwoorden" }
-        - { option_text: "Niets! Deze code is goed!" , code: , feedback: "In regel 2 zit een foutje.." }
-      correct_answer: "B"
-      hint: "Zijn is geen commando."
-      question_score: 10
-  - 8:
-      question_text: "Wat verschijnt er op het uitvoerscherm als je de code uitvoert?"
-      code: |-
-        naam is Marleen
-        print naam gaat naar de supermarkt en ze koopt een appel.
-      mp_choice_options:
-        - { option_text: "naam gaat naar de supermarkt en ze koopt een appel.", code: , feedback: "Het woord naam wordt vervangen door Marleen" }
-        - { option_text: "Marleen gaat naar de supermarkt." , code: , feedback: "het tweede deel van de zin wordt ook geprint!" }
-        - { option_text: "Marleen gaat naar de supermarkt en ze koopt een appel.", code: , feedback: "Juist!" }
-        - { option_text: "Marleen gaat naar de supermarkt en Marleen koopt een appel.",  code: , feedback: "Het woord 'ze' wordt niet vervangen" }
-      correct_answer: "C"
-      hint: "Het woord naam wordt vervangen door Marleen"
-      question_score: 10
-  - 9:
-      question_text: "Wat is het foutje in deze code?"
-      code: |-
-        vraag is ask Wat wil je weten?
-        print vraag
-        antwoorden is ja, nee, misschien
-        print antwoorden at random
-      mp_choice_options:
-        - { option_text: "In regel 1 moet er print staan in plaats van ask", code: , feedback: "Zit er wel een fout in?" }
-        - { option_text: "In regel 2 moet er ask staan in plaats van print", code: , feedback: "Zit er wel een fout in?" }
-        - { option_text: " In regel 3 moet er staan antwoorden at random is ja, nee, misschien", code: , feedback: "Zit er wel een fout in?" }
-        - { option_text: "Niets, alles is goed!", code: , feedback: "Klopt!" }
-      correct_answer: "D"
-      hint: "Deze code was goed!"
-      question_score: 10
-  - 10:
-      question_text: "Wat verschijnt er op het uitvoerscherm?"
-      code: |-
-        naam is Hedy
-        print Hoi mijn naam is naam!
-      mp_choice_options:
-        - { option_text:  "Hoi mijn naam is naam", code:, feedback: "Het woord naam wordt vervangen door Hedy" }
-        - { option_text:  "Hoi mijn naam is Hedy", code:, feedback: "Het woord naam wordt vervangen door Hedy" }
-        - { option_text:  "Hoi mijn Hedy is naam", code:, feedback: "Het woord naam wordt vervangen door Hedy" }
-        - { option_text:  "Hoi mijn Hedy is Hedy", code:, feedback: "Juist! Dit probleem wordt opgelost in level 3!" }
-      correct_answer: "D"
-      hint: "'naam' wordt beide keren vervangen door 'Hedy'"
-      question_score: 10
+- 1:
+    question_text: "Wat is waar?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "In level 2 bestaat het commando print niet meer"
+      - "code": "None"
+      - "feedback": "Print werkt nog steeds hetzelfde"
+    - 1:
+      - "option_text": "In level 2 bestaat het commando ask niet meer"
+      - "code": "None"
+      - "feedback": "Ask werkt anders, maar het bestaat nog wel!"
+    - 2:
+      - "option_text": "In level 2 bestaat het commando echo niet meer "
+      - "code": "None"
+      - "feedback": "Goedzo!"
+    - 3:
+      - "option_text": "In level 2 bestaan alle commando's van level 1 nog"
+      - "code": "None"
+      - "feedback": "Nee, een commando is weg."
+    correct_answer: "C"
+    hint: "print en ask bestaan nog."
+    question_score: 10
+- 2:
+    question_text: "Welke code is goed?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "naam is ask Hoe heet jij?"
+      - "feedback": "Super!"
+    - 1:
+      - "option_text:": "None"
+      - "code": "ask is naam Hoe heet jij?"
+      - "feedback": "De woorden zijn goed, maar de volgorde niet!"
+    - 2:
+      - "option_text:": "None"
+      - "code": "ask Hoe heet jij?"
+      - "feedback": "Zo werkte het in level 1, nu niet meer."
+    - 3:
+      - "option_text:": "None"
+      - "code": "ask Hoe heet jij? is naam"
+      - "feedback": "De woorden zijn goed, maar de volgorde niet!"
+    correct_answer: "A"
+    hint: "ask werkt niet meer zoals in level 1 "
+    question_score: 10
+- 3:
+    question_text: "Wat is het commando om Hedy een willekeurig woord uit een rijtje\
+      \ te laten kiezen?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "print"
+      - "feedback": "Met print laat je tekst verschijnen"
+    - 1:
+      - "option_text:": "None"
+      - "code": "ask"
+      - "feedback": "ask is om een vraag te stellen"
+    - 2:
+      - "option_text:": "None"
+      - "code": "is"
+      - "feedback": "is gebruik je om het rijtje te maken"
+    - 3:
+      - "option_text:": "None"
+      - "code": "at random"
+      - "feedback": "Juist!"
+    correct_answer: "D"
+    hint: "Willekeurig betekent 'zomaar eentje' er wordt telkens een ander woord gekozen."
+    question_score: 10
+- 4:
+    question_text: "Wat is er mis met deze code?"
+    code: |-
+      dieren is hond koe aap
+      print dieren at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "Er moeten komma's tussen: hond, koe, aap."
+      - "code": "None"
+      - "feedback": "Goedzo!"
+    - 1:
+      - "option_text": "In regel 1 moet print staan."
+      - "code": "None"
+      - "feedback": "Nee, je hebt geen print nodig."
+    - 2:
+      - "option_text": "In regel 2 moet 'dier' staan in plaats van 'dieren',"
+      - "code": "None"
+      - "feedback": "Dieren is goed."
+    - 3:
+      - "option_text": " 'At random' is fout gespeld, het moet 'et rendom' zijn"
+      - "code": "None"
+      - "feedback": "At random is de goede spelling"
+    correct_answer: "A"
+    hint: "De fout zit in regel 1"
+    question_score: 10
+- 5:
+    question_text: "Wat klopt er niet aan regel 2 van deze code?"
+    code: |-
+      opties is steen, papier, schaar
+      print steen, papier, schaar at random
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "at random print opties"
+      - "feedback": "Je bent er bijna, opties is goed, maar deze volgorde niet."
+    - 1:
+      - "option_text:": "None"
+      - "code": "print steen at random"
+      - "feedback": "Je wilt niet altijd steen printen, maar willekeurig een van de\
+          \ opties."
+    - 2:
+      - "option_text:": "None"
+      - "code": "print opties at random"
+      - "feedback": "Heel goed!"
+    - 3:
+      - "option_text": "Niets, de code is goed!"
+      - "code:": "None"
+      - "feedback": "Kijk goed! Er zit wel een fout in!"
+    correct_answer: "C"
+    hint: "De naam van de variabele (het lijstje) is opties."
+    question_score: 10
+- 6:
+    question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige prijs\
+      \ te printen?"
+    code: |-
+      prijzen is 1 euro, 100 euro, 1 miljoen euro
+      print prijs at random
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "print prijs"
+      - "feedback": "Je wilt niet het woord prijs printen, maar een random prijs uit\
+          \ het lijstje prijzen"
+    - 1:
+      - "option_text:": "None"
+      - "code": "print prijzen at random"
+      - "feedback": "Goed opgelet!"
+    - 2:
+      - "option_text:": "None"
+      - "code": "print at random prijs"
+      - "feedback": " At random moet achter de variabele."
+    - 3:
+      - "option_text": "Niets de code is goed!"
+      - "code": "None"
+      - "feedback": "Kijk goed! Er zit wel een fout in!"
+    correct_answer: "B"
+    hint: "Kijk goed de naam van de variabele 'prijzen'"
+    question_score: 10
+- 7:
+    question_text: "Wat is er mis met deze code?"
+    code: |-
+      vraag is ask Wat wil je weten?
+      antwoorden zijn ja, nee, misschien
+      print antwoorden at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "In regel 1 moet vragen staan in plaats van vraag"
+      - "code": "None"
+      - "feedback": "vraag is goed"
+    - 1:
+      - "option_text": "In regel 2 moet is staan in plaats van zijn"
+      - "code": "None"
+      - "feedback": "Correct"
+    - 2:
+      - "option_text": "In regel 3 moet antwoord staan in plaats van antwoorden"
+      - "code": "None"
+      - "feedback": "Nee, in regel 2 heet de variabele namelijk ook antwoorden"
+    - 3:
+      - "option_text": "Niets! Deze code is goed!"
+      - "code": "None"
+      - "feedback": "In regel 2 zit een foutje.."
+    correct_answer: "B"
+    hint: "Zijn is geen commando."
+    question_score: 10
+- 8:
+    question_text: "Wat verschijnt er op het uitvoerscherm als je de code uitvoert?"
+    code: |-
+      naam is Marleen
+      print naam gaat naar de supermarkt en ze koopt een appel.
+    mp_choice_options:
+    - 0:
+      - "option_text": "naam gaat naar de supermarkt en ze koopt een appel."
+      - "code": "None"
+      - "feedback": "Het woord naam wordt vervangen door Marleen"
+    - 1:
+      - "option_text": "Marleen gaat naar de supermarkt."
+      - "code": "None"
+      - "feedback": "het tweede deel van de zin wordt ook geprint!"
+    - 2:
+      - "option_text": "Marleen gaat naar de supermarkt en ze koopt een appel."
+      - "code": "None"
+      - "feedback": "Juist!"
+    - 3:
+      - "option_text": "Marleen gaat naar de supermarkt en Marleen koopt een appel."
+      - "code": "None"
+      - "feedback": "Het woord 'ze' wordt niet vervangen"
+    correct_answer: "C"
+    hint: "Het woord naam wordt vervangen door Marleen"
+    question_score: 10
+- 9:
+    question_text: "Wat is het foutje in deze code?"
+    code: |-
+      vraag is ask Wat wil je weten?
+      print vraag
+      antwoorden is ja, nee, misschien
+      print antwoorden at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "In regel 1 moet er print staan in plaats van ask"
+      - "code": "None"
+      - "feedback": "Zit er wel een fout in?"
+    - 1:
+      - "option_text": "In regel 2 moet er ask staan in plaats van print"
+      - "code": "None"
+      - "feedback": "Zit er wel een fout in?"
+    - 2:
+      - "option_text": " In regel 3 moet er staan antwoorden at random is ja, nee,\
+          \ misschien"
+      - "code": "None"
+      - "feedback": "Zit er wel een fout in?"
+    - 3:
+      - "option_text": "Niets, alles is goed!"
+      - "code": "None"
+      - "feedback": "Klopt!"
+    correct_answer: "D"
+    hint: "Deze code was goed!"
+    question_score: 10
+- 10:
+    question_text: "Wat verschijnt er op het uitvoerscherm?"
+    code: |-
+      naam is Hedy
+      print Hoi mijn naam is naam!
+    mp_choice_options:
+    - 0:
+      - "option_text": "Hoi mijn naam is naam"
+      - "code:": "None"
+      - "feedback": "Het woord naam wordt vervangen door Hedy"
+    - 1:
+      - "option_text": "Hoi mijn naam is Hedy"
+      - "code:": "None"
+      - "feedback": "Het woord naam wordt vervangen door Hedy"
+    - 2:
+      - "option_text": "Hoi mijn Hedy is naam"
+      - "code:": "None"
+      - "feedback": "Het woord naam wordt vervangen door Hedy"
+    - 3:
+      - "option_text": "Hoi mijn Hedy is Hedy"
+      - "code:": "None"
+      - "feedback": "Juist! Dit probleem wordt opgelost in level 3!"
+    correct_answer: "D"
+    hint: "'naam' wordt beide keren vervangen door 'Hedy'"
+    question_score: 10

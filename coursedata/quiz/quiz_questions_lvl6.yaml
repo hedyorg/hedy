@@ -1,90 +1,170 @@
+---
 level: 6
 questions:
-  - 1:
-      question_text: "Wat is de juiste spelling van het commando herhalen?"
-      code: "..."
-      mp_choice_options:
-        - { option_text: "repaet", code: , feedback: }
-        - { option_text: "repete", code: , feedback: }
-        - { option_text: "repite", code: , feedback: }
-        - { option_text: "repeat", code: , feedback: }
-      correct_answer: "D"
-      hint: "Je spelt: repeat"
-      question_score: 10
-  - 2:
-      question_text: "Welk aanhalingsteken gebruik je bij het print commando?"
-      code: "..."
-      mp_choice_options:
-        - { option_text:, code: " ` ", feedback: "Dit is het schuine aanhalingsteken, je hebt een rechte nodig." }
-        - { option_text:, code: " ' ", feedback: "Juist!" }
-        - { option_text:, code: " \" ", feedback: "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig" }
-        - { option_text:, code: " , ", feedback: "Dit is een komma, je hebt een hoge komma nodig." }
-      correct_answer: "B"
-      hint: "Je spelt: repeat"
-      question_score: 10
-  - 3:
-      question_text: "Is deze code goed of fout"
-      code: "repeat 100 times 'Hoi!'"
-      mp_choice_options:
-        - { option_text: "Goed", code: , feedback: }
-        - { option_text: "Fout", code: , feedback: }
-      correct_answer: "B"
-      hint: "Het antwoord is: repeat 100 times print 'Hoi'"
-      question_score: 10
-  - 4:
-      question_text: "Welk woord in de code is fout"
-      code: |-
-        print 'I'm blue'
-        repeat 7 times print 'da ba dee, da ba dee'
-      mp_choice_options:
-        - { option_text:, code: "I'm", feedback: }
-        - { option_text:, code: "print", feedback: }
-        - { option_text:, code: "repeat", feedback: }
-        - { option_text:, code: "times", feedback: }
-      correct_answer: "A"
-      hint: "I'm is fout, je mag geen hoge komma's gebruiken"
-      question_score: 10
-  - 5:
-      question_text: "Is deze code goed of fout?"
-      code: |-
-        repeat 100 print 'Hedy is gaaf!'
-      mp_choice_options:
-        - { option_text: "Goed", code: , feedback: }
-        - { option_text: "Fout", code: , feedback: }
-      correct_answer: "B"
-      hint: "Bij repeat hoort nog een ander commando"
-      question_score: 10
-  - 6:
-      question_text: "Wat is er mis met deze code?"
-      code: |-
-        repeat 3 times print 'Hi'
-        repeat 3 times print 'Ha'
-        print 'Ik stond er bij en ik keek er naar'
-      mp_choice_options:
-        - { option_text: "Er missen aanhalingstekens in regel 1", code: , feedback: "ask heeft geen aanhalingstekens nodig" }
-        - { option_text: "Er missen aanhalingstekens in regel 2" , code: , feedback: "een variabele heeft geen aanhalingstekens nodig" }
-        - { option_text: "Er missen aanhalingstekens in regel 3", code: , feedback: " Je wil niet dat er letterlijk 'antwoorden at random' worst geprint, dus geen aanhalingstekens hier!" }
-        - { option_text: "Niets! Deze code is goed!" , code: , feedback: "Juist! Alles is goed!" }
-      correct_answer: "D"
-      hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
-      question_score: 10
-  - 7:
-      question_text: "Als je dit liedje 'potje met vet' een paar keer wil kopieëren, welke zin moet je dan weglaten in de kopieën zodat de teller (2e couplet, 3e couplet etc) werkt?"
-      code: |-
-        couplet is 1
-        print 'Ik heb het potje met vet'
-        print 'al op de tafel gezet'
-        print 'Ik heb het'
-        repeat 4 times print 'potje'
-        print 'veeeeeet'
-        print 'al op de tafel gezet'
-        couplet is couplet + 1
-        print 'Door naar het ' couplet 'e couplet'
-      mp_choice_options:
-        - {option_text: "couplet is 1", code: "", feedback: "Goed gezien! Als deze blijft staan, zul je nooit verder kunnen tellen dan twee, want je zet de variabele couplet elke keer weer op 1."}
-        - {option_text: "repeat 4 times print 'potje'", code: "", feedback: "Nee, dit is prima."}
-        - {option_text: "couplet is couplet + 1", code: "", feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."}
-        - {option_text: "print 'Door naar het ' couplet 'e couplet'", code: "", feedback: "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds opnieuw op 1 wordt gezet."}
-      correct_answer: "A"
-      hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds op 1 wordt gezet."
-      question_score: 10  
+- 1:
+    question_text: "Wat is de juiste spelling van het commando herhalen?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "repaet"
+      - "code": "None"
+      - "feedback": "None"
+    - 1:
+      - "option_text": "repete"
+      - "code": "None"
+      - "feedback": "None"
+    - 2:
+      - "option_text": "repite"
+      - "code": "None"
+      - "feedback": "None"
+    - 3:
+      - "option_text": "repeat"
+      - "code": "None"
+      - "feedback": "None"
+    correct_answer: "D"
+    hint: "Je spelt: repeat"
+    question_score: 10
+- 2:
+    question_text: "Welk aanhalingsteken gebruik je bij het print commando?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": " ` "
+      - "feedback": "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
+    - 1:
+      - "option_text:": "None"
+      - "code": " ' "
+      - "feedback": "Juist!"
+    - 2:
+      - "option_text:": "None"
+      - "code": " \" "
+      - "feedback": "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
+    - 3:
+      - "option_text:": "None"
+      - "code": " , "
+      - "feedback": "Dit is een komma, je hebt een hoge komma nodig."
+    correct_answer: "B"
+    hint: "Je spelt: repeat"
+    question_score: 10
+- 3:
+    question_text: "Is deze code goed of fout"
+    code: "repeat 100 times 'Hoi!'"
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goed"
+      - "code": "None"
+      - "feedback": "None"
+    - 1:
+      - "option_text": "Fout"
+      - "code": "None"
+      - "feedback": "None"
+    correct_answer: "B"
+    hint: "Het antwoord is: repeat 100 times print 'Hoi'"
+    question_score: 10
+- 4:
+    question_text: "Welk woord in de code is fout"
+    code: |-
+      print 'I'm blue'
+      repeat 7 times print 'da ba dee, da ba dee'
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "I'm"
+      - "feedback": "None"
+    - 1:
+      - "option_text:": "None"
+      - "code": "print"
+      - "feedback": "None"
+    - 2:
+      - "option_text:": "None"
+      - "code": "repeat"
+      - "feedback": "None"
+    - 3:
+      - "option_text:": "None"
+      - "code": "times"
+      - "feedback": "None"
+    correct_answer: "A"
+    hint: "I'm is fout, je mag geen hoge komma's gebruiken"
+    question_score: 10
+- 5:
+    question_text: "Is deze code goed of fout?"
+    code: |-
+      repeat 100 print 'Hedy is gaaf!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goed"
+      - "code": "None"
+      - "feedback": "None"
+    - 1:
+      - "option_text": "Fout"
+      - "code": "None"
+      - "feedback": "None"
+    correct_answer: "B"
+    hint: "Bij repeat hoort nog een ander commando"
+    question_score: 10
+- 6:
+    question_text: "Wat is er mis met deze code?"
+    code: |-
+      repeat 3 times print 'Hi'
+      repeat 3 times print 'Ha'
+      print 'Ik stond er bij en ik keek er naar'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Er missen aanhalingstekens in regel 1"
+      - "code": "None"
+      - "feedback": "ask heeft geen aanhalingstekens nodig"
+    - 1:
+      - "option_text": "Er missen aanhalingstekens in regel 2"
+      - "code": "None"
+      - "feedback": "een variabele heeft geen aanhalingstekens nodig"
+    - 2:
+      - "option_text": "Er missen aanhalingstekens in regel 3"
+      - "code": "None"
+      - "feedback": " Je wil niet dat er letterlijk 'antwoorden at random' worst geprint,\
+          \ dus geen aanhalingstekens hier!"
+    - 3:
+      - "option_text": "Niets! Deze code is goed!"
+      - "code": "None"
+      - "feedback": "Juist! Alles is goed!"
+    correct_answer: "D"
+    hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
+    question_score: 10
+- 7:
+    question_text: "Als je dit liedje 'potje met vet' een paar keer wil kopieëren,\
+      \ welke zin moet je dan weglaten in de kopieën zodat de teller (2e couplet,\
+      \ 3e couplet etc) werkt?"
+    code: |-
+      couplet is 1
+      print 'Ik heb het potje met vet'
+      print 'al op de tafel gezet'
+      print 'Ik heb het'
+      repeat 4 times print 'potje'
+      print 'veeeeeet'
+      print 'al op de tafel gezet'
+      couplet is couplet + 1
+      print 'Door naar het ' couplet 'e couplet'
+    mp_choice_options:
+    - 0:
+      - "option_text": "couplet is 1"
+      - "code": ""
+      - "feedback": "Goed gezien! Als deze blijft staan, zul je nooit verder kunnen\
+          \ tellen dan twee, want je zet de variabele couplet elke keer weer op 1."
+    - 1:
+      - "option_text": "repeat 4 times print 'potje'"
+      - "code": ""
+      - "feedback": "Nee, dit is prima."
+    - 2:
+      - "option_text": "couplet is couplet + 1"
+      - "code": ""
+      - "feedback": "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds\
+          \ opnieuw op 1 wordt gezet."
+    - 3:
+      - "option_text": "print 'Door naar het ' couplet 'e couplet'"
+      - "code": ""
+      - "feedback": "Nee, dit werkt goed, zolang de variabele couplet maar niet steeds\
+          \ opnieuw op 1 wordt gezet."
+    correct_answer: "A"
+    hint: "De variabele couplet moet blijven doortellen, dat lukt niet als hij steeds\
+      \ op 1 wordt gezet."
+    question_score: 10

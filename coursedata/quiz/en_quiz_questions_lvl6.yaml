@@ -1,247 +1,269 @@
+---
 level: 5
 questions:
-  - 1:
-      question_text: "How many lines can you repeat at once with the repeat command at this level?"
-      code: "..."
-      mp_choice_options:
-        - { option_text: "0", code: , feedback: "No you can repeat a line." }
-        - { option_text: "1", code: , feedback: "Correct, one line at a time"}
-        - { option_text: "2", code: , feedback: "In this level only one line at a time"}
-        - { option_text: "infinite", code: , feedback: "In this level you can only repeat one line at a time"}
-      correct_answer: "B"
-      hint: "You can only repeat 1 line at a time"
-      question_score: 10
-  - 2:
-      question_text: "Which code is right?"
-      code: "..."
-      mp_choice_options:
-        - { option_text:, code: " print 100 times 'hello' ", feedback: "repeat 100 times print 'hello'." }
-        - { option_text:, code: " print repeat 100 times 'hello' ", feedback: "repeat 100 times print 'hello'" }
-        -  option_text:
-           code: |-
-                repeat 'hello' 100 times "
-           feedback: |-
-                repeat 100 times print 'hello'
-        - { option_text:, code: " repeat 100 times print 'hello' ", feedback: "That's right!" }
-      correct_answer: "D"
-      hint: "First the repeat command, then the print command"
-      question_score: 10
-  - 3:
-      question_text: "Is this code right or wrong?"
-      code: "repeat 100 times 'Hello!'"
-      mp_choice_options:
-        - { option_text: "Right", code: , feedback: "No a word is missing" }
-        - { option_text: "Wrong, the word repeat is missing", code: , feedback: "The word repeat is there, another word is missing" }
-        - { option_text: "Wrong, the word times is missing", code: , feedback: "The word times is there, another word is missing."}
-        - { option_text: "Wrong, the word print is missing", code: , feedback: "Correct"}
-      correct_answer: "B"
-      hint: "It should be: repeat 100 times print 'Hello'"
-      question_score: 10
-  - 4:
-      question_text: "Which word is wrong in the code?"
-      code: |-
-        print 'I'm blue'
-        repeat 7 times print 'da ba dee, da ba da'
-      mp_choice_options:
-        - { option_text:, code: "I'm", feedback: "That's right!"}
-        - { option_text:, code: "print", feedback: "print is spelled correctcly" }
-        - { option_text:, code: "repeat", feedback: "repeat is spelled correctcly"}
-        - { option_text:, code: "times", feedback: "times is spelled correctcly"}
-      correct_answer: "A"
-      hint: "I'm is wrong, you can't use apostrophes"
-      question_score: 10
-  - 5:
-      question_text: "Is this code right or wrong?"
-      code: |-
-        repeat 100 print 'Hedy is awesome!'
-      mp_choice_options:
-        - { option_text: "Goed", code: , feedback: }
-        - { option_text: "Fout", code: , feedback: }
-      correct_answer: "A"
-      hint: "De code is correct!"
-      question_score: 10
-  - 6:
-      question_text: "What will be the output from this code?"
-      code: |-
-        print 'The wheels on the bus go'
-        repeat 3 times print ' round and round'
-      mp_choice_options:
-        - option_text:
-          code: |-
-            the wheels on the bus go
-            round and round
-          feedback: "Only the second line is repeated 3 times"
-        - option_text:
-          code: |-
-            the wheels on the bus go
-            the wheels on the bus go
-            the wheels on the bus go
-            round and round
-          feedback: "Only the second line is repeated 3 times"
-        - option_text:
-          code: |-
-            the wheels on the bus go
-            round and round
-            the wheels on the bus go
-            round and round
-            the wheels on the bus go
-            round and round
-          feedback: "Only the second line is repeated 3 times"
-        - option_text:
-          code: |-
-            the wheels on the bus go
-            round and round
-            round and round
-            round and round
-          feedback: "All though the town! Perfect!"
-      correct_answer: "D"
-      hint: "Only 'round and round' is repeated 3 times."
-      question_score: 10
-  - 7:
-      question_text: "What will be the output from this code?"
-      code: |-
-        repeat 2 times 'We will'
-        print 'ROCK YOU!'
-      mp_choice_options:
-        - option_text:
-          code: |-
-            We will We will
-            ROCK YOU!
-          feedback: "'We will' won't appear twice in the same line"
-        - option_text:
-          code: |-
-            We will
-            We will
-            ROCK YOU!
-          feedback: "Great!"
-        - option_text:
-          code: |-
-            We will
-            ROCK YOU!
-            We will
-            ROCK YOU!
-          feedback: "ROCK YOU! won't be repeated"
-        - option_text:
-          code: |-
-            We will
-            ROCK YOU!
-          feedback: "Mind the repeat command"
-      correct_answer: "B"
-      hint: "Mind the repeat command."
-      question_score: 10
-  - 8:
-      question_text: "What Hedy code belongs to this output?"
-      code: |-
-        Here comes the sun
-        Do do do do
-        Here comes the sun
-        And I say
-        Its alright
-      mp_choice_options:
-        - option_text:
-          code: |-
-            print 'Here comes the sun'
-            print 'Do do do do'
-            print 'Here comes the sun'
-            print 'And I say'
-            print 'Its alright'
-          feedback: "Perfect, you can't use the repeat command here."
-        - option_text:
-          code: |-
-            repeat 2 times print 'Here comes the sun'
-            print 'And I say'
-            print 'Its alright'
-          feedback: "Where did the 'Do do do do' go?"
-        - option_text:
-          code: |-
-            repeat 2 times print 'Here comes the sun'
-            print 'Do do do do'
-            print 'And I say'
-            print 'Its alright'
-          feedback: "This is not in the right order"
-        - option_text:
-          code: |-
-            repeat 2 times print 'Here comes the sun'
-            repeat 2 times print 'Do do'
-            print 'And I say'
-            print 'Its alright'
-          feedback: "This is not in the right order"
-      correct_answer: "D"
-      hint: "Repeat can only be used if you want the exact same line 2 (or more) times in a row."
-      question_score: 10
-  - 9:
-      question_text: "What Hedy code belongs to this output?"
-      code: |-
-        Batman was flying though Gotham. 
-        When suddenly he heard someone screaming...
-        Help!
-        Help!
-        Help!
-        Please help me!
-      mp_choice_options:
-        - option_text:
-          code: |-
-            print 'Batman was flying though Gotham. '
-            print 'When suddenly he heard someone screaming...'
-            print 'Help!'
-            repeat 3 times print 'Please help me!'
-          feedback: "You repeated the wrong line"
-        - option_text:
-          code: |-
-            print 'Batman was flying though Gotham.' 
-            print 'When suddenly he heard someone screaming...'
-            repeat 3 times 'Help!'
-            print 'Please help me!'
-            feedback: "You missed the word print in line 3"
-        - option_text:
-          code: |-
-            print Batman was flying though Gotham.
-            print When suddenly he heard someone screaming...
-            repeat 3 times print Help!
-            print Please help me!
-          feedback: "You forgot about the quotation marks"
-        - option_text:
-          code: |-
-            print 'Batman was flying though Gotham.' 
-            print 'When suddenly he heard someone screaming...'
-            repeat 3 times print 'Help!'
-            print 'Please help me!'
-          feedback: "Perfect"
-      correct_answer: "D"
-      hint: "'Help!' is repeated 3 times."
-      question_score: 10
-  - 10:
-      question_text: "What Hedy code belongs to this output?"
-      code: |-
-        if youre happy and you know it clap your hands
-        if youre happy and you know it clap your hands
-        if youre happy and you know it and you really want to show it
-        if youre happy and you know it clap your hands
-      mp_choice_options:
-        - option_text:
-          code: |-
-            repeat 2 times 'if youre happy and you know it clap your hands'
-            print 'if youre happy and you know it and you really want to show it'
-            print 'if youre happy and you know it clap your hands'
-          feedback: "Almost! the first line needs an extra word"
-        - option_text:
-          code: |-
-            repeat 2 times print 'if youre happy and you know it clap your hands'
-            print 'if youre happy and you know it and you really want to show it'
-            print 'if youre happy and you know it clap your hands'
-          feedback: "Great!"
-        - option_text:
-          code: |-
-            repeat 3 times print 'if youre happy and you know it clap your hands'
-            print 'if youre happy and you know it and you really want to show it'
-          feedback: "This is not in the right order."
-        - option_text:
-          code: |-
-            repeat 4 times 'if youre happy and you know it'
-            repeat 2 times 'clap your hands'
-            print 'and you really want to show it'
-            print 'clap your hands'
-          feedback: "This is not in the right order."
-      correct_answer: "B"
-      hint: "Mind the order of the sentences."
-      question_score: 10
+- 1:
+    question_text: "How many lines can you repeat at once with the repeat command\
+      \ at this level?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "0"
+      - "code": "None"
+      - "feedback": "No you can repeat a line."
+    - 1:
+      - "option_text": "1"
+      - "code": "None"
+      - "feedback": "Correct, one line at a time"
+    - 2:
+      - "option_text": "2"
+      - "code": "None"
+      - "feedback": "In this level only one line at a time"
+    - 3:
+      - "option_text": "infinite"
+      - "code": "None"
+      - "feedback": "In this level you can only repeat one line at a time"
+    correct_answer: "B"
+    hint: "You can only repeat 1 line at a time"
+    question_score: 10
+- 2:
+    question_text: "Which code is right?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": " print 100 times 'hello' "
+      - "feedback": "repeat 100 times print 'hello'."
+    - 1:
+      - "option_text:": "None"
+      - "code": " print repeat 100 times 'hello' "
+      - "feedback": "repeat 100 times print 'hello'"
+    - 2:
+      - "option_text": "None"
+      - "code": "repeat 'hello' 100 times \""
+      - "feedback": "repeat 100 times print 'hello'"
+    - 3:
+      - "option_text:": "None"
+      - "code": " repeat 100 times print 'hello' "
+      - "feedback": "That's right!"
+    correct_answer: "D"
+    hint: "First the repeat command, then the print command"
+    question_score: 10
+- 3:
+    question_text: "Is this code right or wrong?"
+    code: "repeat 100 times 'Hello!'"
+    mp_choice_options:
+    - 0:
+      - "option_text": "Right"
+      - "code": "None"
+      - "feedback": "No a word is missing"
+    - 1:
+      - "option_text": "Wrong, the word repeat is missing"
+      - "code": "None"
+      - "feedback": "The word repeat is there, another word is missing"
+    - 2:
+      - "option_text": "Wrong, the word times is missing"
+      - "code": "None"
+      - "feedback": "The word times is there, another word is missing."
+    - 3:
+      - "option_text": "Wrong, the word print is missing"
+      - "code": "None"
+      - "feedback": "Correct"
+    correct_answer: "B"
+    hint: "It should be: repeat 100 times print 'Hello'"
+    question_score: 10
+- 4:
+    question_text: "Which word is wrong in the code?"
+    code: |-
+      print 'I'm blue'
+      repeat 7 times print 'da ba dee, da ba da'
+    mp_choice_options:
+    - 0:
+      - "option_text:": "None"
+      - "code": "I'm"
+      - "feedback": "That's right!"
+    - 1:
+      - "option_text:": "None"
+      - "code": "print"
+      - "feedback": "print is spelled correctcly"
+    - 2:
+      - "option_text:": "None"
+      - "code": "repeat"
+      - "feedback": "repeat is spelled correctcly"
+    - 3:
+      - "option_text:": "None"
+      - "code": "times"
+      - "feedback": "times is spelled correctcly"
+    correct_answer: "A"
+    hint: "I'm is wrong, you can't use apostrophes"
+    question_score: 10
+- 5:
+    question_text: "Is this code right or wrong?"
+    code: |-
+      repeat 100 print 'Hedy is awesome!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goed"
+      - "code": "None"
+      - "feedback": "None"
+    - 1:
+      - "option_text": "Fout"
+      - "code": "None"
+      - "feedback": "None"
+    correct_answer: "A"
+    hint: "De code is correct!"
+    question_score: 10
+- 6:
+    question_text: "What will be the output from this code?"
+    code: |-
+      print 'The wheels on the bus go'
+      repeat 3 times print ' round and round'
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "the wheels on the bus go\nround and round"
+      - "feedback": "Only the second line is repeated 3 times"
+    - 1:
+      - "option_text": "None"
+      - "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on\
+          \ the bus go\nround and round"
+      - "feedback": "Only the second line is repeated 3 times"
+    - 2:
+      - "option_text": "None"
+      - "code": "the wheels on the bus go\nround and round\nthe wheels on the bus\
+          \ go\nround and round\nthe wheels on the bus go\nround and round"
+      - "feedback": "Only the second line is repeated 3 times"
+    - 3:
+      - "option_text": "None"
+      - "code": "the wheels on the bus go\nround and round\nround and round\nround\
+          \ and round"
+      - "feedback": "All though the town! Perfect!"
+    correct_answer: "D"
+    hint: "Only 'round and round' is repeated 3 times."
+    question_score: 10
+- 7:
+    question_text: "What will be the output from this code?"
+    code: |-
+      repeat 2 times 'We will'
+      print 'ROCK YOU!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "We will We will\nROCK YOU!"
+      - "feedback": "'We will' won't appear twice in the same line"
+    - 1:
+      - "option_text": "None"
+      - "code": "We will\nWe will\nROCK YOU!"
+      - "feedback": "Great!"
+    - 2:
+      - "option_text": "None"
+      - "code": "We will\nROCK YOU!\nWe will\nROCK YOU!"
+      - "feedback": "ROCK YOU! won't be repeated"
+    - 3:
+      - "option_text": "None"
+      - "code": "We will\nROCK YOU!"
+      - "feedback": "Mind the repeat command"
+    correct_answer: "B"
+    hint: "Mind the repeat command."
+    question_score: 10
+- 8:
+    question_text: "What Hedy code belongs to this output?"
+    code: |-
+      Here comes the sun
+      Do do do do
+      Here comes the sun
+      And I say
+      Its alright
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes\
+          \ the sun'\nprint 'And I say'\nprint 'Its alright'"
+      - "feedback": "Perfect, you can't use the repeat command here."
+    - 1:
+      - "option_text": "None"
+      - "code": "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint\
+          \ 'Its alright'"
+      - "feedback": "Where did the 'Do do do do' go?"
+    - 2:
+      - "option_text": "None"
+      - "code": "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\n\
+          print 'And I say'\nprint 'Its alright'"
+      - "feedback": "This is not in the right order"
+    - 3:
+      - "option_text": "None"
+      - "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do\
+          \ do'\nprint 'And I say'\nprint 'Its alright'"
+      - "feedback": "This is not in the right order"
+    correct_answer: "D"
+    hint: "Repeat can only be used if you want the exact same line 2 (or more) times\
+      \ in a row."
+    question_score: 10
+- 9:
+    question_text: "What Hedy code belongs to this output?"
+    code: |-
+      Batman was flying though Gotham. 
+      When suddenly he heard someone screaming...
+      Help!
+      Help!
+      Help!
+      Please help me!
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "print 'Batman was flying though Gotham. '\nprint 'When suddenly he\
+          \ heard someone screaming...'\nprint 'Help!'\nrepeat 3 times print 'Please\
+          \ help me!'"
+      - "feedback": "You repeated the wrong line"
+    - 1:
+      - "option_text": "None"
+      - "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
+          \ heard someone screaming...'\nrepeat 3 times 'Help!'\nprint 'Please help\
+          \ me!'\nfeedback: \"You missed the word print in line 3\""
+    - 2:
+      - "option_text": "None"
+      - "code": "print Batman was flying though Gotham.\nprint When suddenly he heard\
+          \ someone screaming...\nrepeat 3 times print Help!\nprint Please help me!"
+      - "feedback": "You forgot about the quotation marks"
+    - 3:
+      - "option_text": "None"
+      - "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
+          \ heard someone screaming...'\nrepeat 3 times print 'Help!'\nprint 'Please\
+          \ help me!'"
+      - "feedback": "Perfect"
+    correct_answer: "D"
+    hint: "'Help!' is repeated 3 times."
+    question_score: 10
+- 10:
+    question_text: "What Hedy code belongs to this output?"
+    code: |-
+      if youre happy and you know it clap your hands
+      if youre happy and you know it clap your hands
+      if youre happy and you know it and you really want to show it
+      if youre happy and you know it clap your hands
+    mp_choice_options:
+    - 0:
+      - "option_text": "None"
+      - "code": "repeat 2 times 'if youre happy and you know it clap your hands'\n\
+          print 'if youre happy and you know it and you really want to show it'\n\
+          print 'if youre happy and you know it clap your hands'"
+      - "feedback": "Almost! the first line needs an extra word"
+    - 1:
+      - "option_text": "None"
+      - "code": "repeat 2 times print 'if youre happy and you know it clap your hands'\n\
+          print 'if youre happy and you know it and you really want to show it'\n\
+          print 'if youre happy and you know it clap your hands'"
+      - "feedback": "Great!"
+    - 2:
+      - "option_text": "None"
+      - "code": "repeat 3 times print 'if youre happy and you know it clap your hands'\n\
+          print 'if youre happy and you know it and you really want to show it'"
+      - "feedback": "This is not in the right order."
+    - 3:
+      - "option_text": "None"
+      - "code": "repeat 4 times 'if youre happy and you know it'\nrepeat 2 times 'clap\
+          \ your hands'\nprint 'and you really want to show it'\nprint 'clap your\
+          \ hands'"
+      - "feedback": "This is not in the right order."
+    correct_answer: "B"
+    hint: "Mind the order of the sentences."
+    question_score: 10
