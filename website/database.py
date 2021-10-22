@@ -8,7 +8,27 @@ TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
 
+QUIZ_ANSWER = dynamo.Table(storage, 'quizAnswer', 'quizAnswerId')
+QUIZ_ATTEMPT = dynamo.Table(storage, 'quizAttempt', 'quizAttemptId')
+
 class Database:
+    def store_quiz_answer(self,quiz_answer):
+
+        return QUIZ_ANSWER.create(quiz_answer)
+
+    def get_quiz_answer(self, answer_id):
+        """Load a quiz answer from the database."""
+
+        return QUIZ_ANSWER.get({'quizAnswerId': answer_id})
+
+    def store_quiz_attempt(self,quiz_attempt):
+        return QUIZ_ATTEMPT.create(quiz_attempt)
+
+    def get_quiz_attempt(self, quiz_attempt_id):
+        """Load a quiz answer from the database."""
+
+        return QUIZ_ATTEMPT.get({'quizAttemptId': quiz_attempt_id})
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 

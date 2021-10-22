@@ -531,18 +531,73 @@ def get_quiz(level_source, question_nr, attempt):
                                    auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
             return html_obj.replace("\\n", '<br />')
         else:
+            quiz_attempt_id = uuid.uuid4().hex
+            session["quiz-attempt-id"] = quiz_attempt_id
+            stored_quiz_attempt = {
+                'quizAttemptId': quiz_attempt_id,
+                'quizLevel': level_source,
+                'answerIds': session.get('list-of-answer-ids'),
+                'completedAt': timems(),
+                'totalPoints': session.get('total_score'),
+            }
+
+            DATABASE.store_quiz_attempt(stored_quiz_attempt)
             return render_template('endquiz.html', correct=session.get('correct_answer'),
                                    total_score=session.get('total_score'),
                                    menu=render_main_menu('adventures'), lang=lang,
                                    quiz=quiz_data, level=int(level_source) + 1, questions=quiz_data['questions'],
                                    next_assignment=1, username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
+                                   auth=TRANSLATIONS.get_translations (requested_lang(), 'Auth'))
+
+@app.route('/quiz/results/<level_source>', methods=["GET"])
+def get_result_info_quiz(level_source):
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        # Reading the yaml file
+        quiz_data = quiz_data_file_for(level_source)
+        if not quiz_data.exists():
+            return 'No quiz yaml file found for this level', 404
+        # set globals
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
+
+    attempt_data = DATABASE.get_quiz_attempt(session.get('quiz-attempt-id'))
+
+    return render_template('results-quiz.html', attempt_data = attempt_data, quiz=quiz_data, level=int(level_source)-1,  menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
+                                   is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
 
-@app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+@app.route('/quiz/quiz_questions/answer/<level_source>', methods=["GET"])
+def get_answer_info(level_source):
+
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
+    else:
+        # Reading the yaml file
+        quiz_data = quiz_data_file_for(level_source)
+        if not quiz_data.exists():
+            return 'No quiz yaml file found for this level', 404
+
+        # set globals
+        g.lang = lang = requested_lang()
+        g.prefix = '/hedy'
+
+    answer_data = DATABASE.get_quiz_answer(session.get('quiz-answer-id'))
+    return render_template('results-answer-quiz.html', answer_data=answer_data, quiz=quiz_data, level=int(level_source) - 1,
+                           menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],
+                           is_teacher=is_teacher(request),
+                           auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+
+
+@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
-    if not config.get('quiz-enabled') and g.lang != 'nl':
-        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
+    if session.get('list-of-answer-ids') is None:
+        session['list-of-answer-ids'] = []
+
+    if not config['quiz-enabled'] and g.lang != 'nl':
+        return 'Hedy quiz disabled!', 404
     else:
         # Get the chosen option from the request form with radio buttons
         chosen_option = request.form["radio_option"]
@@ -576,10 +631,28 @@ def submit_answer(level_source, question_nr, attempt):
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
         if q_nr <= len(quiz_data['questions']) :
+            answer_id = uuid.uuid4().hex
+            session['quiz-answer-id'] = answer_id
+
+            list_answers = session['list-of-answer-ids']
+            list_answers.append(answer_id)
+            session['list-of-answer-ids'] = list_answers
+
+            answerIsCorrect = True if question['correct_answer'] in chosen_option else False
+            stored_quiz_answer = {
+                'quizAnswerId': answer_id,
+                'quizQuestionText': question['question_text'],
+                'option': chosen_option,
+                'isCorrectAnswer': answerIsCorrect,
+                'points': session.get('total_score'),
+                'questionType': 'mp-choice-question',
+                'questionAttempt': attempt,
+                'date': timems(),
+            }
+
             question = quiz_data['questions'][q_nr - 1].get(q_nr)
             # Convert the indices to the corresponding characters
 
-            # Convert the indices to the corresponding characters
             char_array = []
             for i in range(len(question['mp_choice_options'])):
                 char_array.append(chr(ord('@') + (i + 1)))
