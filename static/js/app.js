@@ -511,8 +511,13 @@ function runPythonProgram(code, hasTurtle, cb) {
         $('#inline-modal').hide();
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
-        ok(input.val());
-        $ ('#output').focus ();
+        // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
+        // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
+        // replying to a query.
+        setTimeout (function () {
+           ok(input.val());
+           $ ('#output').focus ();
+        }, 0);
 
         return false;
       });
