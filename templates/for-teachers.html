@@ -32,6 +32,11 @@
 {% endfor %}
 
 <script>
+$( document ).ready(function() {
+    $( "pre" ).each(function() {
+        $(this).find("button").hide();
+    });
+});
 var showSection = function (index) {
    $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {
