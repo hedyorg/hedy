@@ -10,7 +10,7 @@ declare const Sk: {
     worldWidth?: number;
     worldHeight?: number;
   };
-  execStart: number;
+  execStart: date;
 
   builtinFiles?: {
     files: Record<string, string>;

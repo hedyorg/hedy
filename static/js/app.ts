@@ -476,7 +476,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
-    timeoutMsg: function () {return ErrorMessages.Program_too_long},
+    timeoutMsg: function () {return ErrorMessages ['Program_too_long']},
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
