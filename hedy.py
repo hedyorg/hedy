@@ -1341,6 +1341,12 @@ def preprocess_blocks(code):
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
+def first_string(args):
+    if isinstance(args, list):
+        return first_string(args[0])
+    else:
+        return args
+
 def transpile_inner(input_string, level):
     number_of_lines = input_string.count('\n')
 
@@ -1397,8 +1403,7 @@ def transpile_inner(input_string, level):
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
-        if isinstance(args, list):
-            args = args[0]
+        args = first_string(args)
         if args == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
