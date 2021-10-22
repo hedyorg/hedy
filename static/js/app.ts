@@ -480,7 +480,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
-      const level = window.State.level;
+      // const level = window.State.level;
       return 3000;
     }) ()
   });
