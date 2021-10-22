@@ -27,16 +27,6 @@ Hedy is webbased, which means it works on any device with a browser (Google Chro
 
 ## Preparations
 
-### Log in 
-
-To start programming with Hedy, visit this website: 
-
-[https://www.hedycode.com/](https://www.hedycode.com/)
-
-Click on Login in the upper right corner. Here you can log in with your username and password. Is this your first time using Hedy? Click the green button Create an account. 
-
-Mind: Choose a username and password that you can easily remember, or write it down somewhere! 
-
 ### Saving programs
 
 As soon as you are logged in, you'll see the blue banner with My profile and My programs. 
