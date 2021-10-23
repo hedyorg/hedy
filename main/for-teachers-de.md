@@ -35,16 +35,6 @@ Sie müssen nichts herunterladen, bevor Sie mit Hedy arbeiten, gehen Sie einfach
 
 ## Vorbereitungen
 
-### Anmelden 
-
-Um mit der Programmieren mit Hedy zu beginnen, besuchen Sie diese Website: 
-
-[https://www.hedycode.com/](https://www.hedycode.com/)
-
-Klicken Sie auf "Anmelden" in der oberen rechten Ecke. Hier können Sie sich mit Ihrem Benutzernamen und Passwort anmelden. Benutzen Sie Hedy zum ersten Mal? Klicken Sie auf den grünen Button "Neues Konto anlegen". 
-
-Hinweis: Wählen Sie einen Benutzernamen und ein Passwort, das Sie sich leicht merken können, oder nutzen Sie einen Passwortmanager!
-
 ### Programme speichern
 
 Sobald Sie eingeloggt sind, sehen Sie das blaue Banner mit "Mein Profil" und "Meine Programme". 

@@ -32,21 +32,10 @@ Hedy is werkt via internet en werkt op alle apparaten waar een browser (Google C
 
 ## Voorbereidingen
 
-### Inloggen
-
-Om te programmeren met Hedy ga je naar deze website:
-
-[https://www.hedycode.com/](https://www.hedycode.com/)
-
-Klik op Log in rechtsboven. Hier kun je je inloggegevens invullen. Werk je voor het eerst met Hedy? Klik dan op de groene knop Maak een account.
-
-Let op: Kies een inlognaam en wachtwoord die je niet snel zult vergeten, of schrijf het ergens op!
-
 ### Opslaan
 
 Als je bent ingelogd, zie je in de blauwe balk nu ook Mijn profiel en Mijn programma's.
-
-Bij mijn programma's vind je alle codes terug die je hebt opgeslagen.
+Die tabjes hebben je leerlingen ook. Bij mijn programma's vind je alle programma's terug die je hebt opgeslagen.
 
 Je kunt je projecten simpel opslaan door je project een naam te geven in het witte balkje en dan op de groene knop Code opslaan ernaast te klikken.
 
