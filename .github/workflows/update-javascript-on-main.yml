@@ -15,6 +15,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 1
+        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
     - name: Install Nodejs dependencies
       run: |
         npm ci
