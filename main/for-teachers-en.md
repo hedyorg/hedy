@@ -29,9 +29,8 @@ Hedy is webbased, which means it works on any device with a browser (Google Chro
 
 ### Saving programs
 
-As soon as you are logged in, you'll see the blue banner with My profile and My programs. 
-
-In My programs you can find all the codes that you've saved. 
+Because you are now logged in, you'll see the blue banner with My profile and My programs. 
+These tabs exist for you students too. In My programs you can find all the codes that have been saved. 
 
 You can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.
 
