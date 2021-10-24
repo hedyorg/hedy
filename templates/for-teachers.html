@@ -32,6 +32,12 @@
 {% endfor %}
 
 <script>
+{% if welcome_teacher %}
+  window.onload = function() {
+    hedyApp.modal.alert('{{auth.teacher_welcome}}');
+  };
+{% endif %}
+
 var showSection = function (index) {
    $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {

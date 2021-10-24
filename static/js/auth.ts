@@ -339,10 +339,9 @@ async function afterLogin() {
     await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3]);
     localStorage.removeItem('hedy-first-save');
 
-    const redirect = localStorage.getItem('hedy-save-redirect');
+    const redirect = getSavedRedirectPath();
     if (redirect) {
-      localStorage.removeItem('hedy-save-redirect');
-      auth.redirect(redirect);
+      return auth.redirect(redirect);
     }
   }
 
@@ -353,7 +352,20 @@ async function afterLogin() {
     return join_class(joinClass.link, joinClass.name);
   }
 
+  const redirect = getSavedRedirectPath();
+  if (redirect) {
+    return auth.redirect(redirect);
+  }
+
   auth.redirect('programs');
+}
+
+function getSavedRedirectPath() {
+  const redirect = localStorage.getItem('hedy-save-redirect');
+  if (redirect) {
+    localStorage.removeItem('hedy-save-redirect');
+  }
+  return redirect;
 }
 
 function validBirthYearString(year: string) {
