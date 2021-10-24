@@ -267,6 +267,19 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  def test_ask_assign_list(self):
+    code = textwrap.dedent("""
+    color is gree, blue
+    choice is ask 'Is your favorite color one of: ' color""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.InvalidListArgumentException,
+      max_level=11,
+      test_name=self.name()
+    )
+
   def test_forward_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'

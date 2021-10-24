@@ -222,7 +222,14 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
+  def test_input_disallows_lists(self):
+    code = textwrap.dedent("""
+    color is green, blue
+    choice is input('Is your favorite color one of: ' color)""")
 
+    with self.assertRaises(hedy.InvalidListArgumentException) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Invalid List Argument', context.exception.error_code)
 
   def test_multiple_spaces_after_print(self):
     code = "print    ('hallo!')"

@@ -104,3 +104,14 @@ class TestsLevel13(HedyTester):
       test_name=self.name()
     )
 
+  def test_input_disallows_lists(self):
+    code = textwrap.dedent("""
+      color is ['green', 'blue']
+      choice is input('Is your favorite color one of ' color)""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.InvalidListArgumentException,
+      max_level=20,
+      test_name=self.name()
+    )

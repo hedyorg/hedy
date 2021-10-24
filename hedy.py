@@ -51,40 +51,13 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
-    1: { 'print': ['string'],
-         'ask': ['string'],
-         'echo': ['string'],
-         'turn': ['string'],
-         'forward': ['string']
-        },
-    2: { 'print': ['string'],
-         'at random': ['list'],
-         'ask': ['string'],
-         'echo': ['string'],
-         'turn': ['string'],
-         'forward': ['string']
-        },
-    3: {'print': ['string'],
-        'at random': ['list'],
+    1: {'print': ['string'],
         'ask': ['string'],
-        'echo': ['string'],
         'turn': ['string'],
-        'forward': ['string']
-        },
-    4: {'print': ['string'],
-        'at random': ['list'],
-        'ask': ['string'],
-        'echo': ['string'],
-        'turn': ['string'],
-        'forward': ['string']
-        },
-    5: {'print': ['string'],
-        'at random': ['list'],
-        'ask': ['string'],
-        'echo': ['string'],
-        'turn': ['string'],
-        'forward': ['string']
-        }
+        'forward': ['string']},
+    2: {'at random': ['list']},
+    12: {'input': ['string']},
+    13: {'print': ['string', 'list']}
   }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -587,12 +560,13 @@ def process_characters_needing_escape(value):
         value = value.replace(c, f'\{c}')
     return value
 
-#decorator used to store each class in the lookup table
+# decorator used to store each class in the lookup table
 def hedy_transpiler(level):
-  def decorator(c):
-    TRANSPILER_LOOKUP[level] = c
-    return c
-  return decorator
+    def decorator(c):
+        TRANSPILER_LOOKUP[level] = c
+        c.level = level
+        return c
+    return decorator
 
 @hedy_transpiler(level=1)
 class ConvertToPython_1(Transformer):
@@ -600,6 +574,7 @@ class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
+        __class__.level = 1
 
     def get_fresh_var(self, name):
         while is_variable(name, self.lookup):
@@ -655,25 +630,34 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
-    def check_arg_types(self, args, command, allowed_types):
+    def check_arg_types(self, args, command, level):
+        allowed_types = self.get_allowed_types(command, level)
         for arg in args:
             assignment = self.find_in_lookup(arg)
             if assignment:
-                if not assignment.type in allowed_types:
-                  # we first try to raise if we expect 1 thing exactly for more precise error messages
+                if assignment.type != 'operation' and assignment.type not in allowed_types:
+                    # we first try to raise if we expect 1 thing exactly for more precise error messages
                     if len(allowed_types) == 1:
                         if allowed_types[0] == 'list':
                             raise hedy.RequiredListArgumentException(command=command, variable=assignment.name)
                         # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
 
                     if assignment.type == 'list':
-                        raise hedy.InvalidListArgumentException(command=command, variable=assignment.name, allowed_types=allowed_types)
-                        #same elif here for different types
+                        types = ','.join(allowed_types)
+                        raise hedy.InvalidListArgumentException(command=command, variable=assignment.name, allowed_types=types)
+                        # same elif here for different types
+
+    def get_allowed_types(self, command, level):
+        # get only the allowed types of the command for all levels before the requested level
+        allowed = [values[command] for key, values in commands_and_types_per_level.items()
+                   if command in values and key <= level]
+        # use the allowed types of the highest level available
+        return allowed[-1] if allowed else []
 
     def find_in_lookup(self, variable):
         lookup_vars = [a for a in self.lookup if a.name == variable]
-        # this now grabs the first occurrence, once we have slicing we want to be more precise!
-        return lookup_vars[0] if lookup_vars else None
+        # this now grabs the last occurrence, once we have slicing we want to be more precise!
+        return lookup_vars[-1] if lookup_vars else None
 
 
 # todo: could be moved into the transpiler class
@@ -693,14 +677,6 @@ def process_variable_for_fstring(name, lookup):
         return "{" + hash_var(name) + "}"
     else:
         return name
-
-def raise_if_list(assignment, command):
-    pass
-
-def raise_if_not_list(assignment, command):
-    if assignment.type != 'list':
-        raise hedy.RequiredListArgumentException(command=command, variable=assignment.name)
-
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -730,11 +706,7 @@ class ConvertToPython_2(ConvertToPython_1):
         # return "_" + name if name in reserved_words else name
     def print(self, args):
         # grab the allowed arguments from the dictionary
-
-        # todo: turns out we do not have a level available here!
-        # guess we never needed it but for this use case we need to loop it in
-        allowed_types = commands_and_types_per_level[2]['print']
-        self.check_arg_types(args, 'print', allowed_types)
+        self.check_arg_types(args, 'print', self.level)
 
         argument_string = ""
         i = 0
@@ -790,10 +762,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-
-        # grab allowed types
-        allowed_types = commands_and_types_per_level[2]['at random']
-        self.check_arg_types(args, 'at random', allowed_types)
+        self.check_arg_types(args, 'at random', self.level)
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
@@ -830,8 +799,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_var_usage(args)
-        allowed_types = commands_and_types_per_level[3]['print']
-        self.check_arg_types(args, 'print', allowed_types)
+        self.check_arg_types(args, 'print', self.level)
 
         return make_f_string(args, self.lookup)
 
@@ -842,7 +810,7 @@ class ConvertToPython_3(ConvertToPython_2):
         args_new = []
         var = args[0]
         remaining_args = args[1:]
-
+        self.check_arg_types(remaining_args, 'ask', self.level)
         return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
@@ -884,11 +852,8 @@ class ConvertToPython_5(ConvertToPython_4):
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage([a for a in args if not type(a) is Tree])
-        allowed_types = commands_and_types_per_level[5]['print']
-        self.check_arg_types(args, 'print', allowed_types)
-        return self.print_inner(args)
+        self.check_arg_types(args, 'print', self.level)
 
-    def print_inner(self, args):
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
@@ -1046,7 +1011,9 @@ class ConvertToPython_12(ConvertToPython_10_11):
     def input(self, args):
         args_new = []
         var = args[0]
-        for a in args[1:]:
+        arguments = args[1:]
+        self.check_arg_types(arguments, 'input', self.level)
+        for a in arguments:
             if type(a) is Tree:
                 args_new.append(f'str({a.children})')
             elif "'" not in a:
@@ -1058,10 +1025,6 @@ class ConvertToPython_12(ConvertToPython_10_11):
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
-    def print(self, args):
-        self.check_var_usage([a for a in args if not type(a) is Tree])
-        return self.print_inner(args)
-
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
