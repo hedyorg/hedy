@@ -1042,7 +1042,6 @@ def split_teacher_docs(contents):
             sections.append({'title': tag, 'content': ''})
         else:
             sections[-1]['content'] += str(tag)
-
     return sections
 
 def render_main_menu(current_page):

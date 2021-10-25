@@ -2,7 +2,7 @@
 
 {% block main %}
 <div class="w-full max-w-xl text-center ml-auto mr-auto">
-  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); window.auth.submit ('signup')">
+  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
     <h2 class="py-2">{{auth.create_account}}</h2>
     <h4 class="text-blue-500 py-2">{{auth.create_account_explanation}}</h4>
     <div class="mb-4">
