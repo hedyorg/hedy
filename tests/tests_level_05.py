@@ -158,6 +158,19 @@ class TestsLevel5(HedyTester):
     print(f'{int(var) + int(5)}')""")
 
     self.assertEqual(expected, result.code)
+
+  def test_assign_parses_periods(self):
+    code = "period is ."
+    expected = "period = '.'"
+
+    self.multi_level_tester(
+      max_level=20,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+
   def test_calc_vars(self):
     code = textwrap.dedent("""\
     nummer is 5
