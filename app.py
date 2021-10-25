@@ -462,6 +462,8 @@ def get_quiz_start(level):
          #Sets the values of total_score and correct on the beginning of the quiz at 0
         session['total_score'] = 0
         session['correct_answer'] = 0
+        #reset the list-of-answer-id's to None
+        session['list-of-answer-ids'] = None
         return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
                                lang=lang,
                                username=current_user(request)['username'], is_teacher=is_teacher(request),
@@ -534,10 +536,11 @@ def get_quiz(level_source, question_nr, attempt):
             quiz_attempt_id = uuid.uuid4().hex
             session["quiz-attempt-id"] = quiz_attempt_id
             stored_quiz_attempt = {
-                'quizAttemptId': quiz_attempt_id,
+                'id': quiz_attempt_id,
+                'user': current_user(request)['username'],
                 'quizLevel': level_source,
                 'answerIds': session.get('list-of-answer-ids'),
-                'completedAt': timems(),
+                'date': timems(),
                 'totalPoints': session.get('total_score'),
             }
 
@@ -600,7 +603,7 @@ def submit_answer(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Get the chosen option from the request form with radio buttons
-        chosen_option = request.form["radio_option"]
+        chosenOption = request.form["radio_option"]
 
         # Reading yaml file
         quiz_data = quiz_data_file_for(level_source)
@@ -616,14 +619,16 @@ def submit_answer(level_source, question_nr, attempt):
             questionStatus = 'start'
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
-        index_option = ord(chosen_option.split("-")[1]) - 65
-        session['chosen_option'] =chosen_option.split("-")[1]
+        index_option = ord(chosenOption.split("-")[1]) - 65
+        session['chosenOption'] = chosenOption.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
-        if question['correct_answer'] in chosen_option:
+
+        MAX_ATTEMPTS = 3
+        if question['correct_answer'] in chosenOption:
             if session.get('total_score'):
-                session['total_score'] = session.get('total_score') +(config.get('quiz-max-attempts') -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
+                session['total_score'] = session.get('total_score') + (MAX_ATTEMPTS -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
             else:
-                session['total_score'] =(config.get('quiz-max-attempts') - session.get('quiz-attempt')  )* 0.5 * question['question_score']
+                session['total_score'] =(MAX_ATTEMPTS - session.get('quiz-attempt')  )* 0.5 * question['question_score']
             if session.get('correct_answer'):
                 session['correct_answer'] = session.get('correct_answer') + 1
             else:
@@ -638,11 +643,11 @@ def submit_answer(level_source, question_nr, attempt):
             list_answers.append(answer_id)
             session['list-of-answer-ids'] = list_answers
 
-            answerIsCorrect = True if question['correct_answer'] in chosen_option else False
+            answerIsCorrect = True if question['correct_answer'] in chosenOption else False
             stored_quiz_answer = {
-                'quizAnswerId': answer_id,
+                'id': answer_id,
                 'quizQuestionText': question['question_text'],
-                'option': chosen_option,
+                'option': chosenOption,
                 'isCorrectAnswer': answerIsCorrect,
                 'points': session.get('total_score'),
                 'questionType': 'mp-choice-question',
@@ -669,19 +674,19 @@ def submit_answer(level_source, question_nr, attempt):
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
-            if question['correct_answer'] in chosen_option:
+            if question['correct_answer'] in chosenOption:
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        question_options=question_obj,
                                        level_source=level_source,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
-                                       option=chosen_option,
+                                       option=chosenOption,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
+            elif session.get('quiz-attempt')  <= MAX_ATTEMPTS:
 
                 html_obj =  render_template('quiz_question.html',
                                        quiz=quiz_data,
@@ -690,7 +695,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        questions=quiz_data['questions'],
                                        question_options=question_obj,
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr),
-                                       chosen_option=chosen_option,
+                                       chosenOption=chosenOption,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        attempt=attempt,
@@ -710,7 +715,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        questionStatus = questionStatus,
-                                       option=chosen_option,
+                                       option=chosenOption,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
