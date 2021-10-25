@@ -439,6 +439,8 @@ def get_quiz_start(level):
          #Sets the values of total_score and correct on the beginning of the quiz at 0
         session['total_score'] = 0
         session['correct_answer'] = 0
+        #reset the list-of-answer-id's to None
+        session['list-of-answer-ids'] = None
         return render_template('startquiz.html', level=level, next_assignment=1, menu=render_main_menu('adventures'),
                                lang=lang,
                                username=current_user(request)['username'], is_teacher=is_teacher (request),
@@ -485,10 +487,11 @@ def get_quiz(level_source, question_nr, attempt):
             quiz_attempt_id = uuid.uuid4().hex
             session["quiz-attempt-id"] = quiz_attempt_id
             stored_quiz_attempt = {
-                'quizAttemptId': quiz_attempt_id,
+                'id': quiz_attempt_id,
+                'user': current_user(request)['username'],
                 'quizLevel': level_source,
                 'answerIds': session.get('list-of-answer-ids'),
-                'completedAt': timems(),
+                'date': timems(),
                 'totalPoints': session.get('total_score'),
             }
 
@@ -571,11 +574,13 @@ def submit_answer(level_source, question_nr, attempt):
         index_option = ord(option.split("-")[1]) - 65
 
         # If the correct answer is chosen, update the total score and the number of correct answered questions
+
+        NO_ANSWERS = 4
         if question['correct_answer'] in option:
             if session.get('total_score'):
-                session['total_score'] = session.get('total_score') +(4 - attempt )* 0.5 * question['question_score']
+                session['total_score'] = session.get('total_score') +(NO_ANSWERS - attempt )* 0.5 * question['question_score']
             else:
-                session['total_score'] = (4 - attempt )* 0.5 * question['question_score']
+                session['total_score'] = (NO_ANSWERS- attempt )* 0.5 * question['question_score']
             if session.get('correct_answer'):
                 session['correct_answer'] = session.get('correct_answer') + 1
             else:
@@ -592,7 +597,7 @@ def submit_answer(level_source, question_nr, attempt):
 
             answerIsCorrect = True if question['correct_answer'] in option else False
             stored_quiz_answer = {
-                'quizAnswerId': answer_id,
+                'id': answer_id,
                 'quizQuestionText': question['question_text'],
                 'option': option,
                 'isCorrectAnswer': answerIsCorrect,
@@ -615,7 +620,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif attempt <= 3:
+            elif attempt <= NO_ANSWERS-1:
                 question = quiz_data['questions'][q_nr - 1].get(q_nr)
                 # Convert the indices to the corresponding characters
                 char_array = []
@@ -634,7 +639,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-            elif attempt >= 3:
+            elif attempt >= NO_ANSWERS-1:
                 answer_id = uuid.uuid4().hex
                 session['quiz-answer-id'] = answer_id
                 list_answers = session['list-of-answer-ids']
