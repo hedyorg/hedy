@@ -389,7 +389,7 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['feedback_level'] == 3:
             similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
-            if similar_code is None:
+            if similar_code is 0:
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
@@ -406,11 +406,11 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
 
 
 def preprocess_code_similarity_measure(code, level):
-    return None
+    return 0
 
 
 def get_similar_code(code, language, level):
-    return None
+    return 0
 
 
 def invalid_space_error_to_response(ex, translations):
