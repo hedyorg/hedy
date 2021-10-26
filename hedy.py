@@ -84,8 +84,11 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
+    return style_closest_command(min_command)
+ 
 
-    return min_command
+def style_closest_command(command):
+    return '<span style="background-color: #272822; color: #ff6188; padding: 0.25rem; font-family: monospace; border-radius: 0.25rem;"> '+command+' </span>'
 
 
 def closest_command_with_min_distance(command, commands):

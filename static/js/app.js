@@ -538,7 +538,7 @@ var error = {
 
   show(caption, message) {
     $('#errorbox .caption').text(caption);
-    $('#errorbox .details').text(message);
+    $('#errorbox .details').html(message);
     $('#errorbox').show();
     if ($('#editor').length) editor.resize ();
   }
