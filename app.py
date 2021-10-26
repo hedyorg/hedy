@@ -287,7 +287,7 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
-    if not ('error_level' in session):
+    if not ('feedback_level' in session):
         # We store the feedback level to return the correct feedback from the model and the code to check for identical code
         session['feedback_level'] = 0
         session['code'] = None
@@ -369,6 +369,7 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
 
+    print(response)
     return jsonify(response)
 
 
@@ -389,7 +390,7 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['feedback_level'] == 3:
             similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
-            if similar_code is 0:
+            if similar_code == 0:
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
