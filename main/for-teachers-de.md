@@ -167,7 +167,7 @@ Z.B. programmieren sie: `print Hello, I'm Hedy` statt `print Hello I'm Hedy`
 
 Z.B. programmieren sie: 
 
-<pre>
+<pre class="no-copy-button">
 tiere is Hund, Katze, Kuh
 print die besten tiere sind...
 print tiere at random
@@ -176,7 +176,7 @@ print tiere at random
 Stattdessen sollten sie ein anderes Wort als tiere in der zweiten Zeile verwenden. 
 Zum Beispiel: 
 
-<pre>
+<pre class="no-copy-button">
 tiere is Hund, Katze, Kuh
 print das beste tier ist…
 print tiere at random
@@ -199,7 +199,7 @@ All diese Zahlen sind Variablen.
 
 Eine Variable muss nicht unbedingt eine Zahl sein, sie kann auch (eine Liste von) Wörtern sein, wie Ihr Name. Sie können dieses Beispiel in Hedy zur Demonstration verwenden: 
 
-<pre>
+<pre class="no-copy-button">
 name is Hedy
 print Hallo name!
 </pre>
@@ -208,14 +208,14 @@ Dies zeigt, dass Sie den Wert einer Variablen in Ihrem Code bestimmen können.
 Sie können aber auch den Spieler fragen, welchen Wert die Variable haben soll. 
 Wie im nächsten Beispiel:
 
-<pre>
+<pre class="no-copy-button">
 name is ask Wie heißt du?
 print Hallo name!
 </pre>
 
 Erweitern Sie das Beispiel, indem Sie die Variable `alter` hinzufügen: 
 
-<pre>
+<pre class="no-copy-button">
 name is ask Wie heißt du?
 print Hallo name!
 alter is ask Wie alt sind Sie?
@@ -228,12 +228,12 @@ Lassen Sie Ihre Schüler versuchen, diese Befehle selbst zu benutzen, oder lasse
 #### Nach dem Zufallsprinzip (15 Minuten) 
 Das Lustige an Variablen ist, dass Sie Hedy einen Zufallswert aus Ihrer Liste auswählen lassen können. Zeigen Sie Ihren Schülern dieses Beispiel und lassen Sie sie anschließend an ihren eigenen Programmierungen arbeiten: 
 
-<pre>
+<pre class="no-copy-button">
 auswahl is Stein, Papier, Schere
 print auswahl at random
 </pre>
 
-<pre>
+<pre class="no-copy-button">
 vereine is FC Barcelona, Bayern München, Manchester United
 print Der beste Fußballverein ist...
 print vereine at random
@@ -241,7 +241,7 @@ print vereine at random
 
 #### Aufgabe: Die Wahrsagerin (20 min) 
 
-<pre>
+<pre class="no-copy-button">
 print Ich bin Hedy, die Wahrsagerin!
 frage is Was willst du wissen?
 print Das ist es, was du wissen willst: frage
@@ -289,7 +289,7 @@ Erklären Sie, dass in Level 3 nach der Verwendung des `print`-Befehls Anführun
 Das folgende Beispiel zeigt, wie wichtig bzw. praktisch es ist, Anführungszeichen zu verwenden. 
 Hinweis: Zeigen Sie Ihren Schülern zuerst den Code in Level 2! 
 
-<pre>
+<pre class="no-copy-button">
 Haustier is Hund, Katze, Hase
 print Du bekommst dies Haustier: 
 print Haustier at random
@@ -301,7 +301,7 @@ In Level 3 wird dieses Problem durch die Verwendung der Anführungszeichen gelö
 Die Anführungszeichen sagen Hedy, dass alles, was zwischen den Anführungszeichen steht, ein normales Wort sein soll, das gedruckt werden soll. 
 Alles außerhalb der Anführungszeichen ist eine Variable oder ein Befehl. Zeigen Sie dieses Beispiel in Level 3. 
 
-<pre>
+<pre class="no-copy-button">
 Haustier is Hund, Katze, Hase
 print 'Du bekommst dies Haustier: '
 print Haustier at random
@@ -311,13 +311,13 @@ Beachten Sie, dass die Anführungszeichen verwendet werden, um Hedy mitzuteilen,
 Das bedeutet, dass Sie die Anführungszeichen nicht für andere Zwecke verwenden können, wie z. B. zum Zusammenziehen von Wörtern. 
 Zeigen Sie Ihren Schülern, dass dies bedeutet, dass dieser Code wegen des Apostrophs in Zeile 2 nicht funktionieren wird. 
 
-<pre>
+<pre class="no-copy-button">
 print 'Wie geht's?'
 </pre>
 
 Korrigieren Sie es, indem Sie das Apostroph entfernen. 
 
-<pre>
+<pre class="no-copy-button">
 print 'Wie gehts?'
 </pre>
 
@@ -362,77 +362,77 @@ Dies sind die häufigsten Fehler, die von Schülern im Level 4 gemacht werden:
 
 - Fehler: Die Schüler setzen `else` in die nächste Zeile, aber es sollte in der gleichen Zeile stehen wie der `if`-Befehl. 
 Beispiel: 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'Toll!'
 else print 'Buh!'
 </pre>
 Solution: `else` should be in the same line as `if`. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'Toll!' else print 'Buh!'
 </pre>
 
 - Fehler: Schüler verwenden Apostrophe nach einem `print`-Befehl. 
-<pre>
+<pre class="no-copy-button">
 print 'Wie geht's?'
 </pre>
 Lösung: Verwenden Sie keine Apostrophe.
-<pre>
+<pre class="no-copy-button">
 print 'Wie gehts?'
 </pre>
 
 - Fehler: Die Schüler vergessen, den `print`-Befehl zu verwenden, wenn sie einen `if`-Befehl verwenden.
-<pre>
+<pre class="no-copy-button">
 if name is Hedy 'Toll!' else 'Buh!'
 </pre>
 Lösung: Verwenden Sie `print` zweimal, wenn Sie sowohl `if` als auch `else` verwenden. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'Toll!' else print 'Buh!'
 </pre>
 
 - Fehler: Schüler verwenden unterschiedliche Namen für dieselbe Variable.
-<pre>
+<pre class="no-copy-button">
 Pferd is ask Wie heißt dein Pferd?
 if name is Spirit print 'Toll!' else print 'Buh!'
 </pre>
 Lösung: Verwenden Sie immer den gleichen Namen für Ihre Variable (prüfen Sie auch, ob der Variablenname im Singular oder Plural steht (Antwort/Antworten) und achten sie auf Groß- und Kleinschreibung). 
-<pre>
+<pre class="no-copy-button">
 Pferd is ask Wie heißt dein Pferd?
 if Pferd is Spirit print 'Toll!' else print 'Buh!'
 </pre>
 
 - Fehler: Schüler vergessen, bei der Verwendung von `if` und `else` die beiden Anführungszeichen nach `print` zu setzen. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print Toll! else print 'Buh!
 </pre>
 Lösung: Verwenden Sie immer zwei Anführungszeichen (sowohl vor als auch hinter dem Text) für jeden `print`-Befehl in Ihrem Code. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'Toll!' else print 'Buh!'
 </pre>
 
 - Fehler: Schüler verwenden Anführungszeichen um eine Variable. 
-<pre>
+<pre class="no-copy-button">
 if 'name' is 'Hedy' print 'Toll!' else print 'Buh!'
 </pre>
 Lösung: Verwenden Sie keine Anführungszeichen um eine Variable. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'Toll!' else print 'Buh!'
 </pre>
 
 - Fehler: Schüler vergeben Namen für Variablen, die aus mehreren Wörtern bestehen. 
-<pre>
+<pre class="no-copy-button">
 Gewaehlte Tuer is ask Welche Tür wählst du?
 </pre>
 Lösung: Ein Variablenname sollte immer nur aus einem Wort bestehen, d.h. kein Leerzeichen enthalten.  
-<pre>
+<pre class="no-copy-button">
 gewaehltetuer is ask Welche Tür wählst du?
 </pre>
 
 - Fehler: Schüler wollen, dass mehrere Antworten richtig sind, wenn sie if verwenden. 
-<pre>
+<pre class="no-copy-button">
 if name is Jonas, David, Said print 'Du bist lustig!' else print 'Du bist nicht lustig!'
 </pre>
 Lösung: Dies ist leider nicht erlaubt. Sie können nur einen Namen für jeden if-Befehl wählen. Andererseits können Sie mehrere if-Befehle in einem Code verwenden, wie im Beispiel unten: 
-<pre>
+<pre class="no-copy-button">
 name is ask Wie heißt du?
 
 if name is Jonas print 'Du bist lustig!'
@@ -443,12 +443,12 @@ if name is Said print 'Du bist lustig!'
 </pre>
 
 - Fehler: Die Schüler geben in `ask` die gleiche Antwort wie den Variablennamen. Zum Beispiel hat dieser Schüler das Kennwort 'Passwort' gemacht.  
-<pre>
+<pre class="no-copy-button">
 Passwort is ask Wie lautet das geheime Passwort?
 if Passwort is Passwort print 'Hereinspaziert!' else print 'Zugriff verweigert!' 
 </pre>
 Lösung: Wählen Sie einen anderen Namen für die Variable.
-<pre>
+<pre class="no-copy-button">
 kennwort is ask Wie lautet das geheime Passwort?
 if kennwort is Passwort print 'Hereinspaziert!' else print 'Zugriff verweigert!' 
 </pre>
@@ -464,7 +464,7 @@ Wiederholen Sie kurz die vorangegangene Lektion und erinnern Sie sich auch an di
 
 #### Anweisung: `if`-Konstruktionen (10 Minuten)
 Die `if`-Konstruktion ermöglicht es Hedy, auf zwei verschiedene Arten auf die Antworten des Spielers zu reagieren. Demonstrieren Sie das an diesem Beispiel: 
-<pre>
+<pre class="no-copy-button">
 name is Wie heißt du?
 if name is Hedy print 'Hereinspaziert!' else print 'Zugriff verweigert!'
 </pre>
@@ -530,7 +530,7 @@ Eine gute Möglichkeit, die Stunde zu beginnen, besteht darin, alle verschiedene
 Mit dem Befehl `repeat` können Sie eine Codezeile mehrfach wiederholen. 
 Um das Lied "Baby Shark" zu programmieren, hätten wir in früheren Levels eine Zeile mehrfach wiederholen müssen: 
 
-<pre>
+<pre class="no-copy-button">
 print 'Baby Shark tututututudu'
 print 'Baby Shark tututututudu'
 print 'Baby Shark tututututudu'
@@ -539,7 +539,7 @@ print 'Baby Shark'
 
 Jetzt, mit `repeat`, ist es viel einfacher, Code wie diesen zu erstellen: 
 
-<pre>
+<pre class="no-copy-button">
 repeat 3 times print 'Baby Shark tututututudu'
 print 'Baby Shark'
 </pre>
