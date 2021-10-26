@@ -1,46 +1,39 @@
 page_title: 了解更多-海迪
 ---
-# 订阅Hedy海迪通讯报
 
 <!-- Begin Mailchimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
-<div id="mc_embed_signup">
-<form action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-    <div id="mc_embed_signup_scroll">
-
-<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-<div class="mc-field-group">
-	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-</label>
-	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-</div>
-<div class="mc-field-group">
-	<label for="mce-FNAME">First Name </label>
-	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-</div>
-<div class="mc-field-group">
-	<label for="mce-LNAME">Last Name </label>
-	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-</div>
-<div class="mc-field-group">
-	<label for="mce-COUNTRY">Country </label>
-	<input type="text" value="" name="COUNTRY" class="" id="mce-COUNTRY">
-</div>
-	<div id="mce-responses" class="clear">
-		<div class="response" id="mce-error-response" style="display:none"></div>
-		<div class="response" id="mce-success-response" style="display:none"></div>
-	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
-    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+<div class="w-full">
+    <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <h2 class="py-2">订阅Hedy海迪通讯报</h2>
+    <div>
+        <div class="mb-4">
+            <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
+            <input type="email" value="" name="EMAIL" class="required email w-3/4" id="mce-EMAIL" required>
+        </div>
+        <div class="mb-4">
+            <label for="mce-FNAME">First Name </label>
+            <input type="text" value="" name="FNAME" class="w-3/4" id="mce-FNAME">
+        </div>
+        <div class="mb-4">
+            <label for="mce-LNAME">Last Name </label>
+            <input type="text" value="" name="LNAME" class="w-3/4" id="mce-LNAME">
+        </div>
+        <div class="mb-4">
+            <label for="mce-COUNTRY">Country </label>
+            <input type="text" value="" name="COUNTRY" class="w-3/4" id="mce-COUNTRY">
+        </div>
+        <div class="mb-4">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
+        <div class="flex flex-row">
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn mb-4">Subscribe</button>
+            <p class="ml-4 text-base">Fields marked with an <sup>*</sup> are required</p>
+        </div>
     </div>
-    <p><a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" title="查看以往的活动">View previous campaigns.</a></p>
-
-</form>
+    <a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" target="_blank" title="View previous campaigns">View previous campaigns</a>
+    </form>
 </div>
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 <!--End mc_embed_signup-->
@@ -69,6 +62,7 @@ page_title: 了解更多-海迪
 
 # 有关Hedy 的新闻
 自从我们在2020年初发布Hedy（海迪）以来，已经有多个媒体发布了相关新闻! 列表如下:
+* [CodeWeek.eu - Haunted House Challenge,(英语) September 2021](https://codeweek.eu/2021/challenges/haunted-house)
 * [2021年4月，用Hedy教任何人如何编码，Opensource.com](https://opensource.com/article/21/4/hedy-teach-code)
 * [2021年4月，平衡权力和理解能力-与Felienne Hermans对话，IO Magazine](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
 * [2021年2月，Hedy--向 "不那么小的孩子 "教授编程的最佳语言，Ingeniería De Software (西班牙语)](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)

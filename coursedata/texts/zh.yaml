@@ -19,6 +19,8 @@ ui:
     assignment_header: "任务"
     show_explanation: "显示解释"
     hide_explanation: "隐藏解释"
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: "Adventure"
     switch_to_levels: "Leave adventure mode"
     switch_to_adventures: "Go to adventures"
@@ -34,7 +36,7 @@ ClientErrorMessages:
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
-    Wrong Level: "这个 Hedy代码是正确的，但级别不对.你在第{working_level}级使用的是第{original_level}级的代码."
+    Wrong Level: "这个 Hedy代码是正确的，但级别不对.你在第{original_level}级使用的是第{working_level}级的代码."
     Incomplete: "糟糕! 你好像在第 {line_number}行忘写了一段代码!, 你需要在{incomplete_command}后面输入文字."
     Invalid: "{invalid_command} 不是一个第{level}级的 Hedy命令. 你编写的是{guessed_command}吗?"
     Invalid Space: "糟糕!你在第{line_number}行句首空了一格. 这个空格让计算机产生了困惑，你能不能删除这个空格?"
@@ -107,27 +109,11 @@ Auth:
     invalid_reset_link: "无效的重置密码链接."
     exists_email: "有人已经使用了该邮箱注册."
     exists_username: "有人已经使用了该用户名注册."
-    email_hello: "嗨!"
-    email_goodbye: |-
-        谢谢你!
-        Hedy团队
-    email_welcome_verify_subject: "欢迎来到Hedy(海迪)"
-    email_welcome_verify_body: |-
-        你已经成功注册了Hedy账号. 欢迎!
-        请点击这个链接来验证你的电子邮箱:
-    email_change_password_subject: "你的Hedy账号的密码已更改"
-    email_change_password_body: |-
-        你的Hedy账号的密码已被更改. 如果是你更改了密码, 那就没问题.
-        如果您没有更改密码，请立即联系我们，并回复此邮件.
-    email_recover_password_subject: "重置你的Hedy账号的密码"
-    email_recover_password_body: "点击此链接, 您可以设置一个新的海迪密码. 如果您没有要求重置密码, 请忽略这封邮件."
-    email_reset_password_subject: "你的Hedy账号的密码已被重置"
-    email_reset_password_body: |-
-        你的Hedy账号的密码已被更改. 如果是你更改了密码, 那就没问题.
-        如果您没有更改密码，请立即联系我们，并回复此邮件..
     programming_experience: "Do you have programming experience?"
     yes: "Yes"
     no: "No"
+    ok: "OK"
+    cancel: "Cancel"
     languages: "Which of these programming languages have you used before?"
     other_block: "Another block language"
     other_text: "Another text language"

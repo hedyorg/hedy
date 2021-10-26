@@ -1,13 +1,19 @@
-{% extends "layout.html" %}
-
-{% block body %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+    <link rel="stylesheet" href="{{static('/css/additional.css')}}">
+    <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <div class="px-6 bg-blue-200 border-b-8 border-blue-600" >
         <div class="flex justify-around bg-blue-200">
-            <div></div>
             <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-start bg-blue-600 p-4 m-8"> Level {{ quiz.level }} </div>
+            {% if questionStatus == 'false' %}
+                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-red-600 p-4 m-8">Onjuist!</div>
+            {% elif questionStatus== 'start'%}
+                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8">Vraag {{question_nr }}</div>
+            {% else %}
+                <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-green-600 p-4 m-8">Juist</div>
+            {% endif %}
+
             <div class="font-slab italic text-white text-xl font-normal rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8"> {{ correct }} van de {{ questions|length }} vragen goed</div>
         </div>
     </div>
-    {% block question %}
-    {% endblock %}
-{% endblock %}
+{% block question %}{% endblock %}

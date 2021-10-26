@@ -19,6 +19,8 @@ ui:
     assignment_header: Úkol
     show_explanation: Ukázat vysvětlení
     hide_explanation: Skrýt vysvětlení
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: Dobrodružství
     switch_to_levels: Opustit dobrodružství
     switch_to_adventures: Otevřít dobrodružství
@@ -34,7 +36,7 @@ ClientErrorMessages:
     CheckInternet: Prosím zkontroluj své připojení k internetu.
     ServerError: Napsal*a jsi program, který jsme nečekali. Pokud potřebuješ pomoc, pošli nám email s číslem úrovně a svým kódem na hedy@felienne.com. Mezitím můžeš zkusit úkol vyřešit nějak jinak nebo se znova podívat na příklady. Díky!
 HedyErrorMessages:
-    Wrong Level: Toto je správný kód v Hedy, ale na špatné úrovni. Napsal jsi kód úrovně {original_level} na úrovni {working_level}.
+    Wrong Level: Toto je správný kód v Hedy, ale na špatné úrovni. Napsal jsi kód úrovně {working_level} na úrovni {original_level}.
     Incomplete: Jejda, zapomněl*a jsi kousek kódu! Na řádku {line_number} musíš ještě něco dopsat za {incomplete_command}.
     Invalid: '{invalid_command} není příkaz v Hedy na úrovni {level}. Nemyslel*a jsi spíš {guessed_command}?'
     Invalid Space: Jejda, řádek číslo {line_number} začíná mezerou! Mezery dokáží počítač pořádně zmást, mohl*a bys ji prosím vymazat?
@@ -107,27 +109,11 @@ Auth:
     invalid_reset_link: Neplatný odkaz pro obnovu hesla.
     exists_email: Tento email už někdo používá.
     exists_username: Toto uživatelské jméno už někdo používá.
-    email_hello: Ahoj!
-    email_goodbye: |-
-        Děkujeme!
-        Tým Hedy
-    email_welcome_verify_subject: Vítej v Hedy
-    email_welcome_verify_body: |-
-        Tvůj Hedy účet byl úspěšně vytvořen. Vítej!
-        Prosím klikni na následující odkaz pro ověřění tvé emailové adresy:
-    email_change_password_subject: Tvé Hedy heslo bylo změněno.
-    email_change_password_body: |-
-        Tvé Hedy heslo bylo změněno. Pokud jsi to udělal*a ty, je vše v pořádku.
-        Pokud jsi své heslo neměnil*a, prosím ihned nás kontaktuj odpovědí na tento email.
-    email_recover_password_subject: Obnovit Hedy heslo
-    email_recover_password_body: Kliknutím na tento odkaz můžeš nastavit nové heslo pro svůj Hedy účet. Pokud jsi o obnovu hesla nežádal*a, prosím ignotuj tento email.
-    email_reset_password_subject: Tvé heslo pro Hedy účet bylo obnoveno.
-    email_reset_password_body: |-
-        Tvé Hedy heslo bylo nastaveno na nové. Pokud jsi to udělal*a ty, je vše v pořádku.
-        Pokud jsi své heslo neměnil*a, prosím ihned nás kontaktuj odpovědí na tento email.
     programming_experience: Máš nějaké skušenosti s programováním?
     yes: Ano
     no: Ne
+    ok: OK
+    cancel: Cancel
     languages: Které z těchto programovacích jazyku jsi už někdy použil*a?
     other_block: Jiný blokový jazyk
     other_text: Jiný textový jazyk

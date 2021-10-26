@@ -17,6 +17,14 @@
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
+  function resetWindow() {
+    $ ('#warningbox').hide ();
+    $ ('#errorbox').hide ();
+    $ ('#output').empty ();
+    $ ('#turtlecanvas').empty ();
+    window.State.unsaved_changes = false;
+  }
+
   function switchToTab(tabName) {
     // Find the tab that leads to this selection, and its siblings
     const tab = $('*[data-tab="' + tabName + '"]');
@@ -38,10 +46,22 @@ $(function() {
       adventures [adventure.short_name] = adventure;
     });
 
+    resetWindow();
+
+    if (tabName === 'end') {
+      $ ('#level-header input').hide ();
+      $ ('#editor-area').hide ();
+      return;
+    }
+    $ ('#level-header input').show ();
+    $ ('#editor-area').show ();
+
+
     // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
     if (window.State.loaded_program && (window.State.adventure_name_onload || 'level') === tabName) {
       $ ('#program_name').val (window.State.loaded_program.name);
       window.editor.setValue (window.State.loaded_program.code);
+
     }
     // If there's a loaded program for the adventure or level now selected, use it.
     else if (adventures [tabName] && adventures[tabName].loaded_program) {
@@ -92,3 +112,7 @@ $(function() {
     }
   }
 });
+
+window.load_quiz = function (level) {
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+}

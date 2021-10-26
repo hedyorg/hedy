@@ -235,7 +235,8 @@ window.auth = {
   },
   markAsTeacher: function (username, is_teacher) {
     $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      window.modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
+      window.modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '), 4000);
+      location.reload ();
     }).fail (function (error) {
       console.log (error);
       window.modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
@@ -243,7 +244,7 @@ window.auth = {
   },
 
   changeUserEmail: function (username, email) {
-    window.modal.prompt ('Please enter the corrected email', function (correctedEmail) {
+    window.modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
       if (correctedEmail === email) return;
       if (! correctedEmail.match (window.auth.emailRegex)) return window.modal.alert ('Please enter a valid email.');
       $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -260,7 +261,7 @@ window.auth = {
 // *** LOADERS ***
 
 if ($ ('#country')) {
-  var html = '<option value="">Select</option>';
+  var html = $ ('#country').html();
   Object.keys (countries).map (function (code) {
     html += '<option value="' + code + '">' + countries [code] + '</option>';
   });

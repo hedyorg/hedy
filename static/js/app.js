@@ -15,12 +15,12 @@
     const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
+    exampleEditor.setOptions({ minLines: 2 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-
     // And add an overlay button to the editor
-    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
-    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto'}).appendTo(preview);
+    $('<button>').attr('title', UiMessages.try_button).css({ fontFamily: 'sans-serif'}).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
       window.editor.setValue(exampleEditor.getValue() + '\n');
     });
   }
@@ -33,6 +33,8 @@
 
     // We expose the editor globally so it's available to other functions for resizing
     var editor = window.editor = turnIntoAceEditor($editor.get(0), $editor.data('readonly'));
+
+    window.Range = ace.require('ace/range').Range // get reference to ace/range
 
     // Load existing code from session, if it exists
     const storage = window.sessionStorage;
@@ -56,6 +58,8 @@
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
+
+        clearErrors(editor);
       });
     }
 
@@ -116,12 +120,10 @@
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table.
       const modeExceptions = {
-        8: 'ace/mode/level8and9',
-        9: 'ace/mode/level8and9',
-        17: 'ace/mode/level17and18',
-        18: 'ace/mode/level17and18',
-        21: 'ace/mode/level21and22',
-        22: 'ace/mode/level21and22',
+        9: 'ace/mode/level9and10',
+        10: 'ace/mode/level9and10',
+        18: 'ace/mode/level18and19',
+        19: 'ace/mode/level18and19',
       };
 
       const mode = modeExceptions[window.State.level] || `ace/mode/level${window.State.level}`;
@@ -140,6 +142,13 @@ function reloadOnExpiredSession () {
    return true;
 }
 
+function clearErrors(editor) {
+  editor.session.clearAnnotations();
+  for (var marker in editor.session.getMarkers()) {
+    editor.session.removeMarker(marker);
+  }
+}
+
 function runit(level, lang, cb) {
   if (window.State.disable_run) return window.modal.alert (window.auth.texts.answer_question);
 
@@ -151,15 +160,17 @@ function runit(level, lang, cb) {
     var editor = ace.edit("editor");
     var code = editor.getValue();
 
+    clearErrors(editor);
+
     console.log('Original program:\n', code);
     $.ajax({
       type: 'POST',
       url: '/parse',
       data: JSON.stringify({
         level: level,
-        sublevel: window.State.sublevel ? window.State.sublevel : undefined,
         code: code,
         lang: lang,
+        read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
       contentType: 'application/json',
@@ -171,6 +182,26 @@ function runit(level, lang, cb) {
       }
       if (response.Error) {
         error.show(ErrorMessages.Transpile_error, response.Error);
+        if (response.Location && response.Location[0] != "?") {
+          editor.session.setAnnotations([
+            {
+              row: response.Location[0] - 1,
+              column: response.Location[1] - 1,
+              text: "",
+              type: "error",
+            }
+          ]);
+          // FIXME change this to apply only to the error span once errors have an end location.
+          editor.session.addMarker(
+            new Range(
+                response.Location[0] - 1,
+                response.Location[1] - 1,
+                response.Location[0] - 1,
+                response.Location[1],
+            ),
+            "editor-error", "fullLine"
+          );
+        }
         return;
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
@@ -207,7 +238,6 @@ function tryPaletteCode(exampleCode) {
 
 
 window.saveit = function saveit(level, lang, name, code, cb) {
-  if (window.State.sublevel) return window.modal.alert ('Sorry, you cannot save programs when in a sublevel.');
   error.hide();
 
   if (reloadOnExpiredSession ()) return;
@@ -254,12 +284,7 @@ window.saveit = function saveit(level, lang, name, code, cb) {
         error.show(ErrorMessages.Transpile_error, response.Error);
         return;
       }
-      $ ('#okbox').show ();
-      $ ('#okbox .caption').html (window.auth.texts.save_success);
-      $ ('#okbox .details').html (window.auth.texts.save_success_detail);
-      setTimeout (function () {
-         $ ('#okbox').hide ();
-      }, 2000);
+      window.modal.alert (window.auth.texts.save_success_detail, 4000);
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
       // The name of the program might have been changed by the server, so we use the name stated by the server.
@@ -302,18 +327,9 @@ window.share_program = function share_program (level, lang, id, Public, reload) 
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if ($ ('#okbox') && $ ('#okbox').length) {
-        $ ('#okbox').show ();
-        $ ('#okbox .caption').html (window.auth.texts.save_success);
-        $ ('#okbox .details').html (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-        // If we're sharing the program, copy the link to the clipboard.
-        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-      }
-      else {
-        // If we're sharing the program, copy the link to the clipboard.
-        if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
-        window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail);
-      }
+      // If we're sharing the program, copy the link to the clipboard.
+      if (Public) window.copy_to_clipboard (viewProgramLink(id), true);
+      window.modal.alert (Public ? window.auth.texts.share_success_detail : window.auth.texts.unshare_success_detail, 4000);
       if (reload) setTimeout (function () {location.reload ()}, 1000);
     }).fail(function(err) {
       console.error(err);
@@ -353,7 +369,7 @@ window.copy_to_clipboard = function copy_to_clipboard (string, noAlert) {
      document.getSelection ().removeAllRanges ();
      document.getSelection ().addRange (selected);
   }
-  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard);
+  if (! noAlert) window.modal.alert (window.auth.texts.copy_clipboard, 4000);
 }
 
 /**
@@ -423,6 +439,10 @@ function runPythonProgram(code, hasTurtle, cb) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(mod) {
     console.log('Program executed');
+    // Check if the program was correct but the output window is empty: Return a warning
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      error.showWarning(ErrorMessages.Transpile_warning, ErrorMessages.Empty_output);
+    }
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -491,6 +511,7 @@ function runPythonProgram(code, hasTurtle, cb) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt) {
+    $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
@@ -618,7 +639,7 @@ function buildUrl(url, params) {
 })();
 
 window.create_class = function create_class() {
-  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
+  window.modal.prompt (window.auth.texts.class_name_prompt, '', function (class_name) {
 
     $.ajax({
       type: 'POST',
@@ -638,7 +659,7 @@ window.create_class = function create_class() {
 }
 
 window.rename_class = function rename_class(id) {
-  window.modal.prompt (window.auth.texts.class_name_prompt, function (class_name) {
+  window.modal.prompt (window.auth.texts.class_name_prompt, '', function (class_name) {
 
     $.ajax({
       type: 'PUT',

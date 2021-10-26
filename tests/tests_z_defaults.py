@@ -1,8 +1,12 @@
 import os
 import re
+from website.yaml_file import YamlFile
 import utils
 import hedy
 import unittest
+
+# file is called tests_z_ so they are executed last
+# because programs are more of a priority than level defaults, which change less and take longer to run
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file__), '')))
@@ -17,13 +21,21 @@ def check_code(filename, level, field_name, code):
     try:
         hedy.transpile(code, int(level))
     except Exception as E:
-        if E.args[0] != 'Has Blanks':  # code with blanks is ok!
+        if len(E.args) == 0:
             filename_shorter = filename.split("/")[3]
             language = filename_shorter.split(".")[0]
-            error = f'{language}: level #{level} - {field_name}. Error: {E.args[0]}'
+            error = f'{language}: level #{level} - {field_name}. Error: {E.args}'
             # We print the error for readability, since otherwise they get accumulated on a long list
-            print (error)
+            print(error)
             return error
+        else:
+            if E.args[0] != 'Has Blanks':  # code with blanks is ok!
+                filename_shorter = filename.split("/")[3]
+                language = filename_shorter.split(".")[0]
+                error = f'{language}: level #{level} - {field_name}. Error: {E.args[0]}'
+                # We print the error for readability, since otherwise they get accumulated on a long list
+                print(error)
+                return error
     return True
 
 class TestsLevelDefaultsPrograms(unittest.TestCase):
@@ -33,7 +45,7 @@ class TestsLevelDefaultsPrograms(unittest.TestCase):
 
         for file in files:
             file = os.path.join (path, file)
-            yaml = utils.load_yaml_uncached (file)
+            yaml = YamlFile.for_file(file)
 
             for level in yaml:
                 # start_code

@@ -25,7 +25,7 @@
         example: "Bijvoorbeeld: echo dus je lievelingskleur is"
         demo_code: |-
             ask Wat is je lievelingskleur?
-            echo dus je lievelingskleur is
+            echo dus je lievelingskleur is 
     -   name: "forward"
         explanation: "Een lijn trekken met `forward`."
         example: "Bijvoorbeeld: forward 100"
@@ -88,7 +88,7 @@
 3:
     start_code: "print 'hallo wereld'"
     intro_text: |
-        In level 3 zijn print `ask` en `print` nu anders.
+        In level 3 zijn `ask` en `print` nu anders.
 
         Je moet tekst die je letterlijk wilt printen tussen aanhalingstekens zetten.
 
@@ -134,6 +134,17 @@
 
         Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
 
+        Je mag `if` ook combineren met `in`, om te kijken of iets in een lijst zit.
+
+        ## Voorbeeld Hedy Code
+        ```
+        mooie_kleuren is geel, rood
+        kleur is ask 'Wat is jouw lievelingskleur?'
+        if kleur in mooie_kleuren print 'mooi' else print 'meh!'
+        ```
+
+        Deze code print mooi als je geel of rood antwoord, en anders meh!
+
         ## Tip
         Soms wordt code met een `if` erg lang en past het niet meer goed in het tekstvlak. Je mag dan een enter gebruiken en de code over twee regels verdelen. Begin dan de tweede regel met een `else`:
         ```
@@ -167,12 +178,46 @@
         example: "Bijvoorbeeld: if antwoord is ver forward 100 else forward 5"
         demo_code: |-
             antwoord is ask 'Hoe ver moet ik lopen?'
-            if antwoord is ver forward 100 else forward 100
+            if antwoord is ver forward 100 else forward 5
 5:
-    start_code: "repeat 3 times print 'Hedy is leuk!'"
+    start_code: "print '5 keer 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` en `if` werken nog zoals in level 4.
-        Maar in Level 5 is er iets nieuws: de `repeat`.
+        Maar in Level 5 is er iets nieuws, je kunt nu ook rekenen.
+
+        De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
+
+        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
+        Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je het het makkeljkst.
+        ## Voorbeeld Hedy code
+        ```
+        print '5 plus 5 is ' 5 + 5
+        print '5 min 5 is ' 5 - 5
+        print '5 keer 5 is ' 5 * 5
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Iets letterlijk printen met `print`."
+        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+    -   name: "`ask` en `if` samen met rekenen"
+        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
+        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
+        demo_code: |-
+            antwoord is ask 'Hoeveel is 10 plus 10?'
+            if antwoord is 20 print 'Goedzo!' else print 'Foutje'
+    -   name: "`ask` en `if` turtle"
+        explanation: "De gebruiker vragen hoeveel hoeken hij wil"
+        example: "Bijvoorbeeld: hoeken is ask 'hoeveel hoeken krijgt dit figuur?'"
+        demo_code: |-
+            hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
+            hoek is 360 / hoeken
+            forward 50
+6:
+    start_code: "repeat 3 times print 'Hedy is leuk!'"
+    intro_text: |
+        `ask`, `print` en `if` werken nog zoals in level 4 en 5.
+        Maar in Level 6 is er iets nieuws: de `repeat`.
         Met `repeat` kun je codes een aantal keer herhalen.
 
         ## Voorbeeld Hedy code
@@ -206,48 +251,11 @@
         example: "Bijvoorbeeld: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-6:
-    start_code: "print '5 keer 5 is ' 5 * 5"
-    intro_text: |
-        `ask`, `print`, `if` en `repeat` werken nog zoals in level 4 en 5.
-        Maar in Level 6 is er iets nieuws, je kunt nu ook rekenen.
-
-        In level 6 komen er weer een nieuwe codes bij, je kunt nu namelijk gaan rekenen in je code.
-
-        De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
-
-        De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-        Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als 5 keer 5 dan onthoud je het het makkeljkst.
-        ## Voorbeeld Hedy code
-        ```
-        print '5 plus 5 is ' 5 + 5
-        print '5 min 5 is ' 5 - 5
-        print '5 keer 5 is ' 5 * 5
-        print '25 gedeeld door 5 is ' 25 / 5
-        ```
-    commands:
-    -   name: "print"
-        explanation: "Iets letterlijk printen met `print`."
-        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
-        demo_code: "print '5 keer 5 is ' 5 * 5"
-    -   name: "`ask` en `if` samen met rekenen"
-        explanation: "Het antwoord van een som vragen met `ask` en kijken of het goed is."
-        example: "Bijvoorbeeld: antwoord is ask 'Hoeveel is 10 plus 10?'"
-        demo_code: |-
-            antwoord is ask 'Hoeveel is 10 plus 10?'
-            if antwoord is 20 print 'Goedzo!' else print 'Foutje'
-    -   name: "`ask` en `if` turtle"
-        explanation: "De gebruiker vragen hoeveel hoeken hij wil"
-        example: "Bijvoorbeeld: hoeken is ask 'hoeveel hoeken krijgt dit figuur?'"
-        demo_code: |-
-            hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
-            hoek is 360 / hoeken
-            forward 50
 7:
     start_code: |-
         repeat 5 times
-          print 'Hallo allemaal'
-          print 'Dit wordt allemaal 5 keer herhaald'
+            print 'Hallo allemaal'
+            print 'Dit wordt allemaal 5 keer herhaald'
     intro_text: |
         `ask` en `print` werken nog zoals eerst, maar `if` en `repeat` zijn nu veranderd!
         Je kunt nu meerdere regels samen herhalen. Dan moet je de regels die herhaald worden wel inspringen,
@@ -285,24 +293,54 @@
                 forward 50
 8:
     start_code: |-
+        dieren is hond, kat, papegaai
+        for dier in dieren
+          print dier ' is een leuk dier!'
+    intro_text: |
+        In dit level leren we een nieuwe code, de code `for`. Met `for` kun je alle dingen in een lijstje gebruiken.
+        `for` mag meerdere regels gebruiken, net zoals de `repeat` and `if`, dus alle regels eronder moeten met spaties beginnen.
+
+        ## Voorbeeld Hedy code
+        ```
+        dieren is hond, kat, papegaai
+        for dier in dieren
+          print dier ' is een leuk dier!'
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Iets letterlijk printen met `print`."
+        example: "Bijvoorbeeld: print '5 keer 5 is ' 5 * 5"
+        demo_code: "print '5 keer 5 is ' 5 * 5"
+    -   name: "for met een lijst"
+        explanation: "Alle dingen in een lijstje printen "
+        example: "Bijvoorbeeld: for dier in dieren"
+        demo_code: |-
+            dieren is hond, kat, papegaai
+            for dier in dieren
+              print dier
+9:
+    start_code: |-
         for i in range 1 to 10
             print i
         print 'Wie niet weg is is gezien'
-    intro_text: "We gaan nu `repeat` veranderen in `for`! Je typt nu `for i in range 1 to 5`, in plaats van `repeat 5 times`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)"
+    intro_text:
+        We gaan nu een extra vorm van de `for` toevoegen! Je mag ook `for i in range 1 to 5` typen in plaats van `repeat 5 times`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken!
+        Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
+
     commands:
-    -   name: "repeat vervangen met for"
-        explanation: "`repeat` vervangen"
+    -   name: "for met i"
+        explanation: "`for` met getallen"
         example: "for i in range 1 to 10"
         demo_code: |
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
         print 'Wie niet weg is is gezien'
-    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel er voor zetten."
+    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
     commands:
     -   name: "for met :"
         explanation: "Bij `for` moet je dus een `:` er achter zetten!"
@@ -321,7 +359,7 @@
             else:
                 print 'De kleur is niet groen'
     -   name: "(Optioneel) elif"
-        explanation: "Verder is er een nieuw commando die je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
+        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
         example: "elif a is 5:"
         demo_code: |-
             a is 2
@@ -331,7 +369,7 @@
                 print 'a is 2'
             else:
                 print 'a is niet 1 of 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -352,7 +390,7 @@
             if kleur is blauw:
                 if kleurtwee is geel:
                     print 'Samen is dit groen!'
-11:
+12:
     start_code: |-
         leeftijd is input('Hoe oud ben jij?')
         print('Dus jij hebt zo veel verjaardagen gehad:')
@@ -377,7 +415,7 @@
             for i in range(0, 10):
                 print(i)
             print('Wie niet weg is is gezien')
-12:
+13:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         print(fruit)
@@ -403,7 +441,7 @@
             fruit is ['banaan', 'appel', 'kers']
             randomfruit is fruit[random]
             print(randomfruit)
-13:
+14:
     start_code: |-
         je_bent_er_nog is False
         ben_je_er_nog is input('ben je er nog? ja of nee?')
@@ -430,7 +468,7 @@
                     print('Dat is goed!')
                 if goed_antwoord is False:
                     print('Dat is fout! Nog ' 5-i ' pogingen over')
-14:
+15:
     start_code: |-
         je_bent_er_nog is False
         ben_je_er_nog is input('ben je er nog? ja of nee?')
@@ -452,7 +490,7 @@
             else:
                 print('Minimaal 1 antwoord is fout!')
     -   name: "Or"
-        explanation: "`Or` is dus of. Minimaal 1 van de twee tussen de `or` moet goed zijn. Allebei goed mag ook."
+        explanation: "`Or` is dus of. Minimaal 1 van de 2 tussen de `or` moet goed zijn. Allebei goed mag ook."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
             antwoord1 is input('hoeveel is 3+2?')
@@ -461,11 +499,11 @@
                 print('Je hebt minimaal 1 antwoord goed!')
             else:
                 print('Beide antwoorden zijn fout!')
-15:
+16:
     start_code: |-
         # Dit is een programma die een aantal sommen gaat vragen
         for i in range(1, 10):
-            # We gaan de van de tafel van 5 vragen
+            # We gaan de tafel van 5 vragen
             antwoord is input('Hoeveel is ' i ' keer 5?')
             # We kijken of de som gelijk is aan het antwoord
             goed_antwoord is i * 5
@@ -483,12 +521,12 @@
             # Het is gemaakt in Hedy
             # Het doet eigenlijk verder niets!
             print('hallo!')
-16:
+17:
     start_code: |-
         leeftijd is input('Hoe oud ben jij?')
-        if leeftijd < 12:
+        if leeftijd < 13:
             print('Dan ben je jonger dan ik!')
-        elif leeftijd > 12:
+        elif leeftijd > 13:
             print('Dan ben je ouder dan ik!')
     intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
     commands:
@@ -497,16 +535,16 @@
         example: "Bijvoorbeeld: leeftijd < 12"
         demo_code: |-
             leeftijd is input('Hoe oud ben jij?')
-            if leeftijd < 12:
+            if leeftijd < 13:
                 print('Dan ben je jonger dan ik!')
     -   name: "Groter"
         explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je `variabele > 15`"
         example: "Bijvoorbeeld: leeftijd > 12"
         demo_code: |-
             leeftijd is input('Hoe oud ben jij?')
-            if leeftijd > 12:
+            if leeftijd > 13:
                 print('Dan ben je ouder dan ik!')
-17:
+18:
     start_code: |-
         goed_antwoord is False
         # we gaan door totdat een goed antwoord is gegeven!
@@ -538,7 +576,7 @@
                 print('Dit is de ' tel 'e keer')
                 tel is tel + 1
             print('We zijn klaar')
-18:
+19:
     start_code: |-
         lijst is ['eerste', 'tweede', 'derde']
         tweedewaarde is lijst[2]
@@ -554,12 +592,12 @@
             optellen is optellen + lijst[3]
             # we verwachten hier 6
             print(optellen)
-19:
+20:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         for i in range(1, 3):
             print(fruit[i])
-    intro_text: "We kunnen ook alles van de lijst bekijken. Omdat er drie dingen in zitten, pakken we de for loop van 1 tot 3. Nu printen we alles uit wat in de loop zit."
+    intro_text: "We kunnen ook alles van de lijst bekijken. Omdat er drie dingen in zitten, pakken we de for loop van 1 tot 3. Nu printen we alles uit wat in de lijst zit."
     commands:
     -   name: "Lengte van een lijst"
         explanation: "Met `length` kan je zien hoe groot een lijst is. Hier is length bijvoorbeeld 3 want we hebben 3 dingen in de lijst"
@@ -569,7 +607,7 @@
             print('lengte van de lijst is ' length(fruit))
             for i in range(1, length(fruit)):
                 print(fruit[i])
-20:
+21:
     start_code: |-
         print('Hoeveel is 5+3?')
         antwoord = 5+3
@@ -609,7 +647,7 @@
                 print('Dat is goed!')
             else:
                 print('Helaas dat is fout!')
-21:
+22:
     start_code: |-
         land = input('In welk land woon jij?')
         if land != Nederland:
@@ -627,12 +665,12 @@
                 print('Goed zo!')
             else:
                 print('Fout! Je mocht geen 5 zeggen')
-22:
+23:
     start_code: |-
         leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
-        if leeftijd <= 11:
+        if leeftijd <= 12:
             print('Dan ben je jonger dan ik!')
-        elif leeftijd >= 13:
+        elif leeftijd >= 14:
             print('Dan ben je ouder dan ik!')
     intro_text: "Nu gaan we < en = combineren. Als we willen kijken of iets kleiner of gelijk aan het tweede getal is dan gebruiken we `<=`. Hetzelfde kunnen we doen met `>=`"
     commands:
@@ -641,12 +679,12 @@
         example: "Bijvoorbeeld: leeftijd <= 12"
         demo_code: |-
             leeftijd = input('Ik ben 13 jaar, hoe oud ben jij?')
-            if leeftijd <= 12:
+            if leeftijd <= 13:
                 print('Dan ben je jonger dan ik!')
     -   name: "Groter gelijk"
         explanation: "De `>=` kijkt dus of het eerste getal groter of gelijk is aan het tweede getal. Dus 5 > 5 is niet waar want 5 is niet groter dan 5 maar 5 >= 5 is wel waar want 5 is gelijk aan 5. 4 >= 5 is dus niet waar."
         example: "Bijvoorbeeld: leeftijd >= 12"
         demo_code: |-
             leeftijd = input('Ik ben 11 jaar, hoe oud ben jij?')
-            if leeftijd >= 12:
+            if leeftijd >= 13:
                 print('Dan ben je ouder dan ik!')

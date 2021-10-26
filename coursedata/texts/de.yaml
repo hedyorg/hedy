@@ -19,6 +19,8 @@ ui:
     assignment_header: "Aufgabe"
     show_explanation: "Zeige Erklärung"
     hide_explanation: "Verstecke Erklärung"
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: "Abenteuer"
     switch_to_levels: "Gehe zu Levels"
     switch_to_adventures: "Gehe zu Abenteuern"
@@ -34,7 +36,7 @@ ClientErrorMessages:
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
 HedyErrorMessages:
-    Wrong Level: "Das war richtige Hedy-Sprache, aber nicht in der richtigen Stufe. Du hast Sprache aus Stufe {original_level} in Stufe {working_level} verwendet."
+    Wrong Level: "Das war richtige Hedy-Sprache, aber nicht in der richtigen Stufe. Du hast Sprache aus Stufe {working_level} in Stufe {original_level} verwendet."
     Incomplete: "Hoppla! Du hast ein Programm-Stück vergessen! In Zeile {line_number}, musst du nach {incomplete_command} noch Text eingeben."
     Invalid: "{invalid_command} ist kein Hedy-Stufe-{level}-Befehl. Meintest du {guessed_command}?"
     Invalid Space: "Hoppla! Du hast Zeile {line_number} mit einem Leerzeichen begonnen. Leerzeichen bringen Computer durcheinander. Kannst du es entfernen?"
@@ -107,27 +109,11 @@ Auth:
     invalid_reset_link: "Wiederherstellungslink für Passwort ist ungültig."
     exists_email: "Diese Email-Adresse wird bereits verwendet."
     exists_username: "Dieser Benutzername wird bereits verwendet."
-    email_hello: "Hallo!"
-    email_goodbye: |-
-        Danke!
-        Das Hedy Team
-    email_welcome_verify_subject: "Willkommen bei Hedy"
-    email_welcome_verify_body: |-
-        Dein Hedy-Konto wurde erfolgreich eingerichtet. Willkommen!
-        Bitte klicke auf diesen Link um deine Email-Adresse zu bestätigen:
-    email_change_password_subject: "Dein Hedy-Passwort wurde geändert"
-    email_change_password_body: |-
-        Dein Hedy-Passwort wurde geändert. Wenn du das veranlasst hast, ist alles in Ordnung.
-        Wenn du dein Passwort nicht geändert hast, nimm bitte sofort Kontakt mit uns auf, indem du auf diese E-mail antwortest.
-    email_recover_password_subject: "Setze dein Hedy Passwort zurück"
-    email_recover_password_body: "Wenn du auf diesen Link klickst, kannst du ein neues Hedy-Passwort erstellen. Wenn du keine Passwort-Reset angefordert hast, ignoriere diese Email bitte."
-    email_reset_password_subject: "Dein Hedy-Passwort wurde zurück gesetzt"
-    email_reset_password_body: |-
-        Dein Hedy-Passwort wurde zurückgesetzt. Wenn du das veranlasst hast, ist alles in Ordnung.
-        Wenn du dein Passwort nicht geändert hast, nimm bitte sofort mit uns Kontakt auf, indem du auf diese E-mail antwortest.
     programming_experience: "Do you have programming experience?"
     yes: "Ja"
     no: "Nein"
+    ok: "OK"
+    cancel: "Cancel"
     languages: "Which of these programming languages have you used before?"
     other_block: "Another block language"
     other_text: "Another text language"
