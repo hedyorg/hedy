@@ -102,18 +102,18 @@ Misal mereka menulis`print Halo, aku Hedy` instead of `print Halo aku Hedy`
 
 Misal mereka menulis:
 
-```
+<pre>
 hewan is anjing, kucing, sapi
 print hewan terbaik adalah…
 print hewan at random
-```
+</pre>
 Seharusnya mereka mengganti kata hewan di baris kedua menjadi kata lain misalnya:
 
-```
+<pre>
 hewan is anjing, kucing, sapi
 print binatang terbaik adalah…
 print hewan at random
-```
+</pre>
 
 ### Kesalahan-kesalahan yang sering terjadi di level 3
 
@@ -130,77 +130,77 @@ Berikut adalah kesalahan-kesalahan yang sering dilakukan para siswa pada level 4
 
 - Kesalahan: Siswa menuliskan `else` di baris berikutnya, walaupun itu seharusnya satu baris dengan perintah `if`
 Kode: 
-```
+<pre>
 if nama is Hedy print 'bagus'
 else print 'huu!'
-```
+</pre>
 Solusi: `else` harus berada di baris yang sama dengan if.
 
-```
+<pre>
 if nama is Hedy print 'bagus' else print 'huu!'
-```
+</pre>
 - Kesalahan: Siswa menggunakan kutip satu di dalam teks yang akan ditampilkan `print`. 
-```
+<pre>
 print 'Aku Hedy pernah belajar 'Python''
-```
+</pre>
 Solusi: Jangan menggunakan kutip satu dalam teks yang akan ditampilkan.
-```
+<pre>
 print 'Aku Hedy pernah belajar Python'
-```
+</pre>
 - Kesalahan: Siswa lupa menggunakan perintah `print` ketika sedang menggunakan perintah `if`.
-```
+<pre>
 if nama is Hedy 'bagus' else 'huu!'
-```
+</pre>
 Solusi: Gunakan `print` setiap kali menampilkan teks didalam perintah `if`. 
-``` 
+<pre>
 if nama is Hedy print 'bagus' else print 'huu!'
-```
+</pre>
 
 - Kesalahan: Siswa menggunakan nama yang berbeda untuk sebuah variabel.
-```
+<pre>
 kuda is ask Apa nama kuda kamu?
 if aku is api print 'bagus' else print 'huu!'
-```
+</pre>
 
 Solusi: Selalu gunakan nama yang sama untuk variabel (cek juga apakah variabelnya menggunakan penulisan yang sama, misal 'nama' dan 'name'). 
-```
+<pre>
 kuda is ask Apa nama kuda kamu?
 if kuda is api print 'bagus' else print 'huu!'
-```
+</pre>
 
 - Kesalahan: Siswa lupa menuliskan kutip satu pembuka dan penutup pada teks yang akan ditampilkan perintah `print`, ketika menggunakan perintah `if` dan `else`. 
-```
+<pre>
 if nama is Hedy print bagus else print 'huu!
-```
+</pre>
 Solusi: Selalu gunakan dua tanda kutip (awal dan akhir teks) untuk setiap perintah `print` di kode. 
-```
+<pre>
 if name is Hedy print 'nice' else print 'boo!'
-```
+</pre>
 
 - Kesalahan: Siswa menggunakan kutip satu untuk nama variabel. 
-```
+<pre>
 if 'name' is 'Hedy' print 'nice' else print 'boo!'
-```
+</pre>
 Solusi: Jangan gunakan kutip satu untuk nama variabel. 
-```
+<pre>
 if nama is Hedy print 'bagus' else print 'huu!'
-```
+</pre>
 
 - Kesalahan: Siswa memberikan nama lebih dari satu kata untuk sebuah variabel (termasuk menggunakan tanda penghubung). 
-```
+<pre>
 pintu terpilih is ask Pintu mana yang mau kamu pilih?
-```
+</pre>
 Solusi: Variabel harus diberi nama satu kata dan tidak menggunakan tanda penghubung  
-```
+<pre>
 pintuterpilih is ask Pintu mana yang mau kamu pilih?
-```
+</pre>
 
 - Kesalahan: Siswa menginginkan beberapa jawaban sebagai jawaban benar, ketika menggunakan `if`. 
-```
+<pre>
 if nama is Jesse, David, Souf print 'kamu lucu' else print 'kamu tidak lucu'
-```
+</pre>
 Solusi: Sayangnya, hal ini tidak dimungkinkan. Kamu hanya bisa memilih satu nama untuk setiap perintah `if`. Sebagai alternatif, kamu dapat menggunakan beberapa perintah `if` seperti berikut:
-```
+<pre>
 nama is ask Siapa nama kamu?
 
 if nama is Jesse print 'kamu lucu'
@@ -208,17 +208,17 @@ if nama is Jesse print 'kamu lucu'
 if nama is David print 'kamu lucu'
 
 if nama is Souf print 'kamu lucu'
-```
+</pre>
 - Kesalahan: Siswa memberikan jawaban di perintah 'ask' yang sama dengan nama variabel. Sebagai contoh siswa ini membuat passwordnya 'password'. 
-```
+<pre>
 password is ask Apa password rahasianya?
 If password is password print 'Kamu bisa masuk!' else print 'Akses ditolak!' 
-```
+</pre>
 Solusi: Pilih nama yang berbeda untuk variabel.
-```
+<pre>
 passwordrahasia is ask Apa password rahasianya?
 If passwordrahasia is password print 'Kamu bisa masuk!' else print 'Akses ditolak!' 
-```
+</pre>
 
 ### Kesalahan-kesalahan yang sering terjadi di level 5
 
