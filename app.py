@@ -270,6 +270,10 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+    if not ('error_level' in session):
+        #We store the feedback level to return the correct feedback from the model and the code to check for identical code
+        session['feedback_level'] = 0
+        session['code'] = None
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
@@ -302,9 +306,9 @@ def parse():
             """) + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
-        #Did we succesful finish the try? Then we reset the feedback level to 0!
+        session['feedback_level'] = 0 #Reset if succesfull
 
-    # Notes Timon
+    # Todo: Notes Timon
     # This is were the magic happens!
     # First, at any except: raise the feedback level
     # Then, retrieve corresponding feedback from GFM() function
@@ -341,6 +345,42 @@ def parse():
     })
 
     return jsonify(response)
+
+def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
+    response = {}
+    response['GFM'] = True
+
+    if session['code'] == code:
+        response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
+        response["Duplicate"] = True
+    else:
+        response["Duplicate"] = False
+        if session['feedback_level'] < 5:  # Raise feedback level if is it not 5 (yet)
+            session ['feedback_level'] = session['feedback_level'] + 1
+        if session['feedback_level'] == 2:  # Give a more explanatory error message
+            if hedy_exception:
+                print("The current error code is: ")
+                print(E.error_code)
+                response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
+            else:
+                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
+        elif session['feedback_level'] == 3:  # Give a reminder what is new in this specific level
+            # similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
+            similar_code = None
+            if similar_code is None:  # No similar code is found against a, to be defined, threshold
+                response["Feedback"] = gradual_feedback["No_similar_code"]
+            else:
+                response["Feedback"] = similar_code
+                session ['similar_code'] = similar_code
+        elif session['feedback_level'] == 4:
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
+                response["Feedback"] = gradual_feedback["Expanded_Uknown"]
+        elif session['feedback_level'] == 5:
+            response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
+    response["feedback_level"] = session['feedback_level']
+    return response
 
 def invalid_space_error_to_response(ex, translations):
     warning = translate_error(ex.error_code, translations, vars(ex))
