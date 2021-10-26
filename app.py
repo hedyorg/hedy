@@ -302,6 +302,14 @@ def parse():
             """) + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
+        #Did we succesful finish the try? Then we reset the feedback level to 0!
+
+    # Notes Timon
+    # This is were the magic happens!
+    # First, at any except: raise the feedback level
+    # Then, retrieve corresponding feedback from GFM() function
+    # Add this to the response[]
+    # Catch response in app.ts to process in front-end
 
     except hedy.InvalidSpaceException as ex:
         traceback.print_exc()
