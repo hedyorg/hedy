@@ -319,17 +319,24 @@ def parse():
     except hedy.InvalidSpaceException as ex:
         traceback.print_exc()
         response = invalid_space_error_to_response(ex, hedy_errors)
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, ex, hedy_exception=True))
     except hedy.ParseException as ex:
         traceback.print_exc()
         response = parse_error_to_response(ex, hedy_errors)
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, ex, hedy_exception=True))
     except hedy.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, ex, hedy_exception=True))
 
     except Exception as E:
         traceback.print_exc()
         print(f"error transpiling {code}")
         response["Error"] = str(E)
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=True))
+
+    session['code'] = code
+
     querylog.log_value(server_error=response.get('Error'))
     parse_logger.log({
         'session': session_id(),
@@ -352,11 +359,11 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
     response['GFM'] = True
 
     if session['code'] == code:
-        response["Feedback"] = gradual_feedback["Identical_code"]  # Don't raise the feedback level!
+        response["Feedback"] = gradual_feedback["Identical_code"]
         response["Duplicate"] = True
     else:
         response["Duplicate"] = False
-        if session['feedback_level'] < 5:  # Raise feedback level if is it not 5 (yet)
+        if session['feedback_level'] < 5:
             session ['feedback_level'] = session['feedback_level'] + 1
         if session['feedback_level'] == 2:  # Give a more explanatory error message
             if hedy_exception:
@@ -365,10 +372,9 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
                 response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
             else:
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
-        elif session['feedback_level'] == 3:  # Give a reminder what is new in this specific level
-            # similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
-            similar_code = None
-            if similar_code is None:  # No similar code is found against a, to be defined, threshold
+        elif session['feedback_level'] == 3:
+            similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
+            if similar_code is None:
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
@@ -382,6 +388,12 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
             response["Feedback"] = gradual_feedback["Break"]  # Suggest a break
     response["feedback_level"] = session['feedback_level']
     return response
+
+def preprocess_code_similarity_measure(code, level):
+    return None
+
+def get_similar_code(code, language, level):
+    return None
 
 def invalid_space_error_to_response(ex, translations):
     warning = translate_error(ex.error_code, translations, vars(ex))
