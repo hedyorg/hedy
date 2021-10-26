@@ -290,7 +290,17 @@ class TestsLevel4(HedyTester):
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
     self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+  def test_if_with_print_backtick(self):
+    code = textwrap.dedent("""\
+    name is ask 'ποιό είναι το όνομά σου;'
+    if name is Hedy print `ωραία` else print `μπου!`""")
 
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      exception=hedy.UnquotedTextException,
+      test_name=self.name()
+    )
 
   # def test_list_find_issue(self):
   #   #'list' object has no attribute 'find'

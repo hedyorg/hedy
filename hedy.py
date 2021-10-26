@@ -368,10 +368,20 @@ class AllAssignmentCommandsHashed(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+def flatten_list_of_lists_to_list(args):
+    flat_list = []
+    for element in args:
+        if isinstance(element, str): #str needs a special case before list because a str is also a list and we don't want to split all letters out
+            flat_list.append(element)
+        elif isinstance(element, list):
+            flat_list += flatten_list_of_lists_to_list(element)
+        else:
+            flat_list.append(element)
+    return flat_list
 
 def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
-    arguments_of_false_nodes = [x[1] for x in args if not x[0]]
+    arguments_of_false_nodes = flatten_list_of_lists_to_list([x[1] for x in args if not x[0]])
     return all(bool_arguments), arguments_of_false_nodes
 
 # this class contains code shared between IsValid and IsComplete, which are quite similar
@@ -1341,11 +1351,6 @@ def preprocess_blocks(code):
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
-def first_string(args):
-    if isinstance(args, list):
-        return first_string(args[0])
-    else:
-        return args
 
 def transpile_inner(input_string, level):
     number_of_lines = input_string.count('\n')
@@ -1403,7 +1408,8 @@ def transpile_inner(input_string, level):
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
-        args = first_string(args)
+        if isinstance(args, list):
+            args = args[0]
         if args == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
