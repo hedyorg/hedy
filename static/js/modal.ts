@@ -83,6 +83,16 @@ export const error = {
     editor?.resize();
   },
 
+  showFeedback(caption: string, message: string) {
+    $('#feedbackbox .caption').text(caption);
+    var obj = $("#feedbackbox .details").text(message);
+    obj.html(obj.html().replace(/\n/g,'<br/>'));
+    obj.html(obj.html().replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp'));
+    $('#feedbackbox').show();
+    $("#feedbackbox .details").hide();
+    editor?.resize();
+  },
+
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
     $('#errorbox .details').text(message);

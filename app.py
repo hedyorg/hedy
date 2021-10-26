@@ -374,7 +374,7 @@ def parse():
 
 
 def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
-    response = {'GFM': True}
+    response = {}
 
     if session['code'] == code:
         response["Feedback"] = gradual_feedback["Identical_code"]

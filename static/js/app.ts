@@ -204,6 +204,9 @@ export function runit(level: string, lang: string, cb: () => void) {
       if (response.Warning) {
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
+      if (response.Feedback) {
+        error.showFeedback("Test header", response.Feedback);
+      }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
