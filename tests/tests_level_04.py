@@ -88,6 +88,10 @@ class TestsLevel4(HedyTester):
       test_name=self.name()
     )
 
+  def test_identifies_backtick_inside_conditional(self):
+    self.assertRaises(hedy.UnquotedTextException, lambda: hedy.transpile("if 1 is 1 print `yay!` else print `nay`", self.level))
+
+
   # turn forward
   # no new tests, covered by lower levels.
 
