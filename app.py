@@ -347,11 +347,13 @@ def parse_error_to_response(ex, translations):
         # If we find an invalid keyword, place it in the same location in the error message but without translating
         ex.character_found = ex.keyword_found
     error_message = translate_error(ex.error_code, translations, vars(ex))
-    return {"Error": error_message}
+    location = ex.location if hasattr(ex, "location") else None
+    return {"Error": error_message, "Location": location}
 
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
-    return {"Error": error_message}
+    location = ex.location if hasattr(ex, "location") else None
+    return {"Error": error_message, "Location": location}
 
 def translate_error(code, translations, arguments):
     error_template = translations[code]
@@ -497,11 +499,29 @@ def get_quiz(level_source, question_nr, attempt):
             # Convert the indices to the corresponding characters
             char_array =[]
             for i in range(len(question['mp_choice_options'])):
-                char_array.append(chr(ord('@') +(i + 1)))
-            return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
+                char_array.append(chr(ord('@') + (i + 1)))
+
+            i = 0
+            question_obj = []
+            for options in question['mp_choice_options']:
+                option_obj = {}
+                for options_key, options_value in options.items():
+                    for option in options_value:
+                        for key, value in option.items():
+                            if value:
+                                option_obj[key] = value.replace("\n", '\\n')
+                            option_obj['char_index'] = char_array[i]
+                    i += 1
+                question_obj.append(option_obj)
+                
+            html_obj = render_template('quiz_question.html',
+                                   quiz=quiz_data,
+                                   level_source=level_source,
                                    questionStatus= questionStatus,
                                    questions=quiz_data['questions'],
-                                   question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                                   question_options=question_obj,
+                                   question=quiz_data['questions'][q_nr - 1].get(q_nr),
+                                   question_nr=q_nr,
                                    correct=session.get('correct_answer'),
                                    attempt = attempt,
                                    char_array=char_array,
@@ -509,6 +529,7 @@ def get_quiz(level_source, question_nr, attempt):
                                    username=current_user(request)['username'],
                                    is_teacher=is_teacher(request),
                                    auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+            return html_obj.replace("\\n", '<br />')
         else:
             return render_template('endquiz.html', correct=session.get('correct_answer'),
                                    total_score=session.get('total_score'),
@@ -524,7 +545,7 @@ def submit_answer(level_source, question_nr, attempt):
         return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
     else:
         # Get the chosen option from the request form with radio buttons
-        option = request.form["radio_option"]
+        chosen_option = request.form["radio_option"]
 
         # Reading yaml file
         quiz_data = quiz_data_file_for(level_source)
@@ -540,10 +561,10 @@ def submit_answer(level_source, question_nr, attempt):
             questionStatus = 'start'
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
-        index_option = ord(option.split("-")[1]) - 65
-        session['chosen_option'] =option.split("-")[1]
+        index_option = ord(chosen_option.split("-")[1]) - 65
+        session['chosen_option'] =chosen_option.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
-        if question['correct_answer'] in option:
+        if question['correct_answer'] in chosen_option:
             if session.get('total_score'):
                 session['total_score'] = session.get('total_score') +(config.get('quiz-max-attempts') -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
             else:
@@ -555,42 +576,68 @@ def submit_answer(level_source, question_nr, attempt):
         # Loop through the questions and check that the loop doesn't reach out of bounds
         q_nr = int(question_nr)
         if q_nr <= len(quiz_data['questions']) :
-            if question['correct_answer'] in option:
+            question = quiz_data['questions'][q_nr - 1].get(q_nr)
+            # Convert the indices to the corresponding characters
+
+            # Convert the indices to the corresponding characters
+            char_array = []
+            for i in range(len(question['mp_choice_options'])):
+                char_array.append(chr(ord('@') + (i + 1)))
+
+            i = 0
+            question_obj = []
+            for options in question['mp_choice_options']:
+                option_obj = {}
+                for options_key, options_value in options.items():
+                    for option in options_value:
+                        for key, value in option.items():
+                            if value:
+                                option_obj[key] = value.replace("\n", '\\n')
+                            option_obj['char_index'] = char_array[i]
+                    i += 1
+                question_obj.append(option_obj)
+            if question['correct_answer'] in chosen_option:
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
+                                       question_options=question_obj,
                                        level_source=level_source,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
-                                       option=option,
+                                       option=chosen_option,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
                                        auth=TRANSLATIONS.data[requested_lang()]['Auth'])
             elif session.get('quiz-attempt')  <= config.get('quiz-max-attempts'):
-                question = quiz_data['questions'][q_nr - 1].get(q_nr)
-                # Convert the indices to the corresponding characters
-                char_array =[]
-                for i in range(len(question['mp_choice_options'])):
-                    char_array.append(chr(ord('@') +(i + 1)))
-                return render_template('quiz_question.html', quiz=quiz_data, level_source=level_source,
-                                       questions=quiz_data['questions'],
-                                       question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
-                                       correct=session.get('correct_answer'),
-                                       attempt= session.get('quiz-attempt') ,
+
+                html_obj =  render_template('quiz_question.html',
+                                       quiz=quiz_data,
+                                       level_source=level_source,
                                        questionStatus=questionStatus,
-                                       chosen_option = session.get('chosen_option'),
+                                       questions=quiz_data['questions'],
+                                       question_options=question_obj,
+                                       question=quiz_data['questions'][q_nr - 1].get(q_nr),
+                                       chosen_option=chosen_option,
+                                       question_nr=q_nr,
+                                       correct=session.get('correct_answer'),
+                                       attempt=attempt,
                                        char_array=char_array,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
-                                       auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                                       is_teacher=is_teacher(request),
+                                       auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
+                return html_obj.replace("\\n", '<br />')
             elif session.get('quiz-attempt') > config.get('quiz-max-attempts'):
-                return render_template('feedback.html', quiz=quiz_data, question=question,
+                return render_template('feedback.html',
+                                       quiz=quiz_data,
+                                       question=question,
+                                       question_options=question_obj,
                                        questions=quiz_data['questions'],
                                        level_source=level_source,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        questionStatus = questionStatus,
-                                       option=option,
+                                       option=chosen_option,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
@@ -917,7 +964,6 @@ def split_teacher_docs(contents):
             sections.append({'title': tag, 'content': ''})
         else:
             sections[-1]['content'] += str(tag)
-
     return sections
 
 def render_main_menu(current_page):

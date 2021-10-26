@@ -35,16 +35,6 @@ Sie müssen nichts herunterladen, bevor Sie mit Hedy arbeiten, gehen Sie einfach
 
 ## Vorbereitungen
 
-### Anmelden 
-
-Um mit der Programmieren mit Hedy zu beginnen, besuchen Sie diese Website: 
-
-[https://www.hedycode.com/](https://www.hedycode.com/)
-
-Klicken Sie auf "Anmelden" in der oberen rechten Ecke. Hier können Sie sich mit Ihrem Benutzernamen und Passwort anmelden. Benutzen Sie Hedy zum ersten Mal? Klicken Sie auf den grünen Button "Neues Konto anlegen". 
-
-Hinweis: Wählen Sie einen Benutzernamen und ein Passwort, das Sie sich leicht merken können, oder nutzen Sie einen Passwortmanager!
-
 ### Programme speichern
 
 Sobald Sie eingeloggt sind, sehen Sie das blaue Banner mit "Mein Profil" und "Meine Programme". 
@@ -177,20 +167,20 @@ Z.B. programmieren sie: `print Hello, I'm Hedy` statt `print Hello I'm Hedy`
 
 Z.B. programmieren sie: 
 
-```
+<pre>
 tiere is Hund, Katze, Kuh
 print die besten tiere sind...
 print tiere at random
-```
+</pre>
 
 Stattdessen sollten sie ein anderes Wort als tiere in der zweiten Zeile verwenden. 
 Zum Beispiel: 
 
-```
+<pre>
 tiere is Hund, Katze, Kuh
 print das beste tier ist…
 print tiere at random
-```
+</pre>
 
 ### Lehrplan 2
 
@@ -209,28 +199,28 @@ All diese Zahlen sind Variablen.
 
 Eine Variable muss nicht unbedingt eine Zahl sein, sie kann auch (eine Liste von) Wörtern sein, wie Ihr Name. Sie können dieses Beispiel in Hedy zur Demonstration verwenden: 
 
-```
+<pre>
 name is Hedy
 print Hallo name!
-```
+</pre>
 
 Dies zeigt, dass Sie den Wert einer Variablen in Ihrem Code bestimmen können. 
 Sie können aber auch den Spieler fragen, welchen Wert die Variable haben soll. 
 Wie im nächsten Beispiel:
 
-```
+<pre>
 name is ask Wie heißt du?
 print Hallo name!
-```
+</pre>
 
 Erweitern Sie das Beispiel, indem Sie die Variable `alter` hinzufügen: 
 
-```
+<pre>
 name is ask Wie heißt du?
 print Hallo name!
 alter is ask Wie alt sind Sie?
 print Sie sind alter Jahre alt
-```
+</pre>
 
 #### Probieren Sie es aus! (10 Minuten) 
 Lassen Sie Ihre Schüler versuchen, diese Befehle selbst zu benutzen, oder lassen Sie sie sich ihre eigenen Versionen ausdenken. 
@@ -238,27 +228,27 @@ Lassen Sie Ihre Schüler versuchen, diese Befehle selbst zu benutzen, oder lasse
 #### Nach dem Zufallsprinzip (15 Minuten) 
 Das Lustige an Variablen ist, dass Sie Hedy einen Zufallswert aus Ihrer Liste auswählen lassen können. Zeigen Sie Ihren Schülern dieses Beispiel und lassen Sie sie anschließend an ihren eigenen Programmierungen arbeiten: 
 
-```
+<pre>
 auswahl is Stein, Papier, Schere
 print auswahl at random
-```
+</pre>
 
-```
+<pre>
 vereine is FC Barcelona, Bayern München, Manchester United
 print Der beste Fußballverein ist...
 print vereine at random
-```
+</pre>
 
 #### Aufgabe: Die Wahrsagerin (20 min) 
 
-```
+<pre>
 print Ich bin Hedy, die Wahrsagerin!
 frage is Was willst du wissen?
 print Das ist es, was du wissen willst: frage
 antworten is ja, nein, vielleicht 
 print Meine Kristallkugel sagt...
 print antworten at random
-```
+</pre>
 
 #### Auswertung (5 min)
 Werten Sie die Lektion kurz mit Ihren Schülern aus, um die Lektion abzurunden. 
@@ -299,11 +289,11 @@ Erklären Sie, dass in Level 3 nach der Verwendung des `print`-Befehls Anführun
 Das folgende Beispiel zeigt, wie wichtig bzw. praktisch es ist, Anführungszeichen zu verwenden. 
 Hinweis: Zeigen Sie Ihren Schülern zuerst den Code in Level 2! 
 
-```
+<pre>
 Haustier is Hund, Katze, Hase
 print Du bekommst dies Haustier: 
 print Haustier at random
-```
+</pre>
 
 Sie werden sehen, dass das Wort `Haustier` in Zeile 2 nicht funktioniert. 
 Es wurde in den Wert der Variable Haustier geändert, obwohl Sie es als normales Wort verwenden wollten. 
@@ -311,25 +301,25 @@ In Level 3 wird dieses Problem durch die Verwendung der Anführungszeichen gelö
 Die Anführungszeichen sagen Hedy, dass alles, was zwischen den Anführungszeichen steht, ein normales Wort sein soll, das gedruckt werden soll. 
 Alles außerhalb der Anführungszeichen ist eine Variable oder ein Befehl. Zeigen Sie dieses Beispiel in Level 3. 
 
-```
+<pre>
 Haustier is Hund, Katze, Hase
 print 'Du bekommst dies Haustier: '
 print Haustier at random
-```
+</pre>
 
 Beachten Sie, dass die Anführungszeichen verwendet werden, um Hedy mitzuteilen, welcher Text gedruckt werden soll. 
 Das bedeutet, dass Sie die Anführungszeichen nicht für andere Zwecke verwenden können, wie z. B. zum Zusammenziehen von Wörtern. 
 Zeigen Sie Ihren Schülern, dass dies bedeutet, dass dieser Code wegen des Apostrophs in Zeile 2 nicht funktionieren wird. 
 
-```
+<pre>
 print 'Wie geht's?'
-```
+</pre>
 
 Korrigieren Sie es, indem Sie das Apostroph entfernen. 
 
-```
+<pre>
 print 'Wie gehts?'
-```
+</pre>
 
 Bevor sich die Schüler an die Arbeit machen, achten Sie auf die häufig gemachten Fehler: 
 Es sollte immer ein Anführungszeichen vor und eines nach dem Text stehen, den Sie ausgeben wollen. Prüfen Sie also immer, ob alle `print`-Befehle 2 Anführungszeichen haben. 
@@ -372,77 +362,77 @@ Dies sind die häufigsten Fehler, die von Schülern im Level 4 gemacht werden:
 
 - Fehler: Die Schüler setzen `else` in die nächste Zeile, aber es sollte in der gleichen Zeile stehen wie der `if`-Befehl. 
 Beispiel: 
-```
+<pre>
 if name is Hedy print 'Toll!'
 else print 'Buh!'
-```
+</pre>
 Solution: `else` should be in the same line as `if`. 
-```
+<pre>
 if name is Hedy print 'Toll!' else print 'Buh!'
-```
+</pre>
 
 - Fehler: Schüler verwenden Apostrophe nach einem `print`-Befehl. 
-```
+<pre>
 print 'Wie geht's?'
-```
+</pre>
 Lösung: Verwenden Sie keine Apostrophe.
-```
+<pre>
 print 'Wie gehts?'
-```
+</pre>
 
 - Fehler: Die Schüler vergessen, den `print`-Befehl zu verwenden, wenn sie einen `if`-Befehl verwenden.
-```
+<pre>
 if name is Hedy 'Toll!' else 'Buh!'
-```
+</pre>
 Lösung: Verwenden Sie `print` zweimal, wenn Sie sowohl `if` als auch `else` verwenden. 
-``` 
+<pre>
 if name is Hedy print 'Toll!' else print 'Buh!'
-```
+</pre>
 
 - Fehler: Schüler verwenden unterschiedliche Namen für dieselbe Variable.
-```
+<pre>
 Pferd is ask Wie heißt dein Pferd?
 if name is Spirit print 'Toll!' else print 'Buh!'
-```
+</pre>
 Lösung: Verwenden Sie immer den gleichen Namen für Ihre Variable (prüfen Sie auch, ob der Variablenname im Singular oder Plural steht (Antwort/Antworten) und achten sie auf Groß- und Kleinschreibung). 
-```
+<pre>
 Pferd is ask Wie heißt dein Pferd?
 if Pferd is Spirit print 'Toll!' else print 'Buh!'
-```
+</pre>
 
 - Fehler: Schüler vergessen, bei der Verwendung von `if` und `else` die beiden Anführungszeichen nach `print` zu setzen. 
-```
+<pre>
 if name is Hedy print Toll! else print 'Buh!
-```
+</pre>
 Lösung: Verwenden Sie immer zwei Anführungszeichen (sowohl vor als auch hinter dem Text) für jeden `print`-Befehl in Ihrem Code. 
-```
+<pre>
 if name is Hedy print 'Toll!' else print 'Buh!'
-```
+</pre>
 
 - Fehler: Schüler verwenden Anführungszeichen um eine Variable. 
-```
+<pre>
 if 'name' is 'Hedy' print 'Toll!' else print 'Buh!'
-```
+</pre>
 Lösung: Verwenden Sie keine Anführungszeichen um eine Variable. 
-```
+<pre>
 if name is Hedy print 'Toll!' else print 'Buh!'
-```
+</pre>
 
 - Fehler: Schüler vergeben Namen für Variablen, die aus mehreren Wörtern bestehen. 
-```
+<pre>
 Gewaehlte Tuer is ask Welche Tür wählst du?
-```
+</pre>
 Lösung: Ein Variablenname sollte immer nur aus einem Wort bestehen, d.h. kein Leerzeichen enthalten.  
-```
+<pre>
 gewaehltetuer is ask Welche Tür wählst du?
-```
+</pre>
 
 - Fehler: Schüler wollen, dass mehrere Antworten richtig sind, wenn sie if verwenden. 
-```
+<pre>
 if name is Jonas, David, Said print 'Du bist lustig!' else print 'Du bist nicht lustig!'
-```
+</pre>
 Lösung: Dies ist leider nicht erlaubt. Sie können nur einen Namen für jeden if-Befehl wählen. Andererseits können Sie mehrere if-Befehle in einem Code verwenden, wie im Beispiel unten: 
-```
+<pre>
 name is ask Wie heißt du?
 
 if name is Jonas print 'Du bist lustig!'
@@ -450,18 +440,18 @@ if name is Jonas print 'Du bist lustig!'
 if name is David print 'Du bist lustig!'
 
 if name is Said print 'Du bist lustig!'
-```
+</pre>
 
 - Fehler: Die Schüler geben in `ask` die gleiche Antwort wie den Variablennamen. Zum Beispiel hat dieser Schüler das Kennwort 'Passwort' gemacht.  
-```
+<pre>
 Passwort is ask Wie lautet das geheime Passwort?
 if Passwort is Passwort print 'Hereinspaziert!' else print 'Zugriff verweigert!' 
-```
+</pre>
 Lösung: Wählen Sie einen anderen Namen für die Variable.
-```
+<pre>
 kennwort is ask Wie lautet das geheime Passwort?
 if kennwort is Passwort print 'Hereinspaziert!' else print 'Zugriff verweigert!' 
-```
+</pre>
 
 ### Lehrplan 4
 Durch die Hinzufügung des `if`-Befehls haben sich in Level 4 eine Menge Möglichkeiten eröffnet. Deshalb empfehlen wir, zwei Unterrichtseinheiten in Level 4 zu verbringen, bevor Sie mit Level 5 fortfahren. Es bietet den Schülern die Möglichkeit, sich mit den `if`-Konstruktionen wirklich vertraut zu machen, bevor sie zum nächsten Level übergehen. 
@@ -474,10 +464,10 @@ Wiederholen Sie kurz die vorangegangene Lektion und erinnern Sie sich auch an di
 
 #### Anweisung: `if`-Konstruktionen (10 Minuten)
 Die `if`-Konstruktion ermöglicht es Hedy, auf zwei verschiedene Arten auf die Antworten des Spielers zu reagieren. Demonstrieren Sie das an diesem Beispiel: 
-```
+<pre>
 name is Wie heißt du?
 if name is Hedy print 'Hereinspaziert!' else print 'Zugriff verweigert!'
-```
+</pre>
 
 #### Machen wir uns an die Arbeit: Die Wahrsagerin (20 Minuten) 
 Die Schüler können die Aufgabe der Wahrsagerin selbstständig bearbeiten, oder Sie können die Aufgaben Schritt für Schritt gemeinsam mit Ihren Schülern bearbeiten. 
@@ -540,19 +530,19 @@ Eine gute Möglichkeit, die Stunde zu beginnen, besteht darin, alle verschiedene
 Mit dem Befehl `repeat` können Sie eine Codezeile mehrfach wiederholen. 
 Um das Lied "Baby Shark" zu programmieren, hätten wir in früheren Levels eine Zeile mehrfach wiederholen müssen: 
 
-```
+<pre>
 print 'Baby Shark tututututudu'
 print 'Baby Shark tututututudu'
 print 'Baby Shark tututututudu'
 print 'Baby Shark'
-```
+</pre>
 
 Jetzt, mit `repeat`, ist es viel einfacher, Code wie diesen zu erstellen: 
 
-```
+<pre>
 repeat 3 times print 'Baby Shark tututututudu'
 print 'Baby Shark'
-```
+</pre>
 
 #### Auf geht's: Hedy die Sängerin!  (20 - 30 Minuten) 
 Nach dieser kurzen Einweisung können die Schüler die anderen Lieder in den Übungen selbständig bearbeiten. 

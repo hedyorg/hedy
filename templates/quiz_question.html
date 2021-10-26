@@ -31,84 +31,95 @@
             <pre><code class="ml-6 text-xl">{{ question.code }}</code></pre>
         {% endif %}
         <form action='/quiz/submit_answer/{{ level_source }}/{{ question_nr }}/{{ attempt|int + 1 }}' method="POST">
-            <div class="grid gap-1 rounded-t-xl radio-block">
-                {% for row in question.mp_choice_options %}
-                    {% if question.correct_answer == chosen_option and not chosen_option %}
-                        <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
-                            <label class="inline-flex items-center"><p
-                                    class="text-4xl font-bold ml-6 mr-6 font-slab">
-                                {{ char_array[loop.index - 1] }}</p></p>
-                                <input
-                                        type="radio"
-                                        name="radio_option"
-                                        value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
-                                        class="class form-radio h-12 w-12">
-                                <span>
-                                {% if row.code %}
-                                    <code class="ml-6 text-xl">{{ row.code }}</code>
-                                {% elif row.option_text %}
-                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
-                                {% endif %}
-                            </span>
-                            </label>
+            <div class="grid gap-1 rounded-t-xl">
+                {% set counter = namespace(value=0) %}
+                {% for row in question.mp_choice_options|batch(2) %}
+                    <div class="flex flex-row">
+                    {% for column in row %}
+                        <div class="flex flex-col">
+                            {% if question.correct_answer in chosen_option %}
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block"
+                                     id={{ question_options[counter.value].char_index }}>
+                                    <label class="inline-flex items-center"><p
+                                            class="text-4xl font-bold ml-6 mr-6 font-slab">
+                                        {{ question_options[counter.value].char_index }}</p>
+                                        <input
+                                                type="radio"
+                                                name="radio_option"
+                                                value="{{ question_nr }}-{{ question_options[counter.value].char_index }}"
+                                                class="class form-radio h-12 w-12">
+                                        <span>
+
+                                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                                            <code class="ml-6 text-xl">{{ question_options[counter.value].code }}</code>
+                                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
+                                            <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text }}</p>
+                                        {% endif %}</span>
+                                    </label>
+                                </div>
+                            {% elif question_options[counter.value].char_index in chosen_option %}
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" radio-block
+                                     id="answer-disabled-{{ question_options[counter.value].char_index }}">
+                                    <label class="inline-flex items-center"><p
+                                            class="text-4xl font-bold ml-6 mr-6 font-slab">
+                                        {{ question_options[counter.value].char_index }}</p></p>
+                                        <input
+                                                type="radio"
+                                                name="radio_option"
+                                                value="{{ question_nr }}-{{ question_options[counter.value].char_index }}"
+                                                class="class form-radio h-12 w-12" disabled="disabled">
+                                        <span>
+                                        {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                                            <code class="ml-6 text-xl">{{ question_options[counter.value].code  }}</code>
+                                        {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'   %}
+                                            <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text }}</p>
+                                        {% endif %}
+                                        </span>
+                                    </label>
+                                </div>
+                            {% else %}
+                                <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block"
+                                     id={{ question_options[counter.value].char_index }}>
+                                    <label class="inline-flex items-center"><p
+                                            class="text-4xl font-bold ml-6 mr-6 font-slab">
+                                        {{ question_options[counter.value].char_index }}</p>
+                                        <input
+                                                type="radio"
+                                                name="radio_option"
+                                                value="{{ question_nr }}-{{ question_options[counter.value].char_index }}"
+                                                class="class form-radio h-12 w-12">
+                                        <span>
+                                                {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
+                                                    <code class="ml-6 text-xl">{{ question_options[counter.value].code }}</code>
+                                                {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
+                                                    <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text }}</p>
+                                                {% endif %}
+                                            </span>
+                                    </label>
+                                </div>
+                            {% endif %}
                         </div>
-                    {% elif chosen_option == char_array[loop.index - 1] %}
-                        <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" id="answer-disabled">
-                            <label class="inline-flex items-center"><p
-                                    class="text-4xl font-bold ml-6 mr-6 font-slab">
-                                {{ char_array[loop.index - 1] }}</p></p>
-                                <input
-                                        type="radio"
-                                        name="radio_option"
-                                        value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
-                                        class="class form-radio h-12 w-12" disabled="disabled">
-                                <span>
-                                {% if row.code %}
-                                    <code class="ml-6 text-xl">{{ row.code }}</code>
-                                {% elif row.option_text %}
-                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
-                                {% endif %}
-                                </span>
-                            </label>
-                        </div>
-                    {% else %}
-                        <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg">
-                            <label class="inline-flex items-center"><p
-                                    class="text-4xl font-bold ml-6 mr-6 font-slab">
-                                {{ char_array[loop.index - 1] }}</p></p>
-                                <input
-                                        type="radio"
-                                        name="radio_option"
-                                        value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
-                                        class="class form-radio h-12 w-12" >
-                                <span>
-                                {% if row.code %}
-                                    <code class="ml-6 text-xl">{{ row.code }}</code>
-                                {% elif row.option_text %}
-                                    <p class="ml-6 text-xl font-bold"> {{ row.option_text }}</p>
-                                {% endif %}
-                            </span>
-                            </label>
-                        </div>
-                    {% endif %}
+                        {% set counter.value = counter.value + 1 %}
+                    {% endfor %}
+                       </div>
                 {% endfor %}
-            </div>
-            <div class="p-10 button-bar border-t-8 border-green-600">
-                <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
-                <div>
-                    <button type="button" onclick="changeHint()"
-                            class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
-                            name="hint-button" id="hint-button">Hint?
-                    </button>
                 </div>
-                {% if attempt == config['quiz-max-attempts'] %}
-                    <input class="green-btn ml-1" type="submit" name="submit-button"
-                           value="Ga naar het antwoord" disabled="disabled">
-                {% else %}
-                    <input class="green-btn ml-1" type="submit" name="submit-button"
-                           value="Beantwoord vraag {{ question_nr }}" disabled="disabled">
-                {% endif %}
-            </div>
+                <div class="p-10 button-bar border-t-8 border-green-600">
+                    <div class="invisible" id="hidden-hint"> {{ question.hint }}</div>
+                    <div>
+                        <button type="button" onclick="changeHint()"
+                                class="ml-1 bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600"
+                                name="hint-button" id="hint-button">Hint?
+                        </button>
+                    </div>
+                    {% if attempt == config['quiz-max-attempts'] %}
+                        <input class="green-btn ml-1" type="submit" name="submit-button"
+                               value="Ga naar het antwoord" disabled="disabled">
+                    {% else %}
+                        <input class="green-btn ml-1" type="submit" name="submit-button"
+                               value="Beantwoord vraag {{ question_nr }}" disabled="disabled">
+                    {% endif %}
+                </div>
         </form>
 
     </div>

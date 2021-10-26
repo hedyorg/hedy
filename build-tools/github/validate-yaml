@@ -3,8 +3,7 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir
 
-# Install NPM-based tools we need
-npm ci --silent
+echo "------> Validating YAML"
 
 # Validate adventure files against their schema
 #
@@ -14,22 +13,35 @@ npm ci --silent
 # If we ever care enough to do something about this, we should be interpreting
 # the JSON error outputs of this tool and re-interpreting them with useful
 # error messages.
+
+
+# For magical and mysterious reasons, on GitHub actions using 'npx pajv validate' (which
+# would normally be the way to run this command), hangs. It works fine on two of my machines,
+# and also in an Ubuntu Docker container, and 'npx pajv help' works as well... but
+# 'npx pajv validate' just hangs. Running the 'pajv' binary directly without the use of
+# 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
+
+pajv=$scriptdir/../../node_modules/.bin/pajv
+
 cd ../../coursedata/adventures/
-$scriptdir/node_modules/.bin/pajv validate \
+$pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
 
 cd ../level-defaults/
-$scriptdir/node_modules/.bin/pajv validate \
+$pajv validate \
     --errors=text \
     -s "levels.schema.json" \
     -d "*.yaml"
 
 cd ../quiz/
-$scriptdir/node_modules/.bin/pajv validate \
+$pajv validate \
     --errors=text \
     -s "quiz_questions.schema.json" \
     -d "*.yaml"
 
-node $scriptdir/validate-texts.js $scriptdir
+
+# Validate-texts is producing a lot of noise and it will never fail the build outright
+# anyway (if it would, pajv would have complained earlier), so might as well disable it for now.
+# node $scriptdir/validate-texts.js $scriptdir

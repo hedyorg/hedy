@@ -11,7 +11,7 @@ First have a look at the open issues. [Good first issues](https://github.com/Fel
 
 The core team (currently consisting of [Felienne](https://github.com/Felienne), [fpereiro](https://github.com/fpereiro) & [boryanagoncharenko](https://github.com/boryanagoncharenko)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
 
-Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :) 
+Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :)
 
 **Discussions**
 
@@ -40,50 +40,64 @@ To run the unit tests:
 (.env)$ python -m unittest discover -s tests
 ```
 
-To make debugging a lot more convenient, enable **development mode**. If you do this, any HTML templates and Python
-source files you change and save will automatically be reloaded.
+## Working on the browser JavaScript
 
-(Be aware that your program may stop with a `SyntaxError` if you save a Python file
-while the code is not complete. If this happens too often because you reflexively hit Ctrl-S 😉
-you can wrap the command in a loop to restart the server quickly).
+Part of the code base of Hedy is written in Python, which runs on the server.
+The parts that run in the browser are written in TypeScript, and are compiled to
+JavaScript.
 
+So that most people won't have to install special tools, the generated
+JavaScript code is checked in. However, if you are working on the browser code,
+you need to edit the TypeScript source files and regenerate the JavaScript
+bundle by running:
 
-```bash
-(.env)$ env FLASK_ENV=development python app.py
-# or in a loop if it stops too often
-(.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
+```
+# You only need to run 'npm ci' once to install the tools
+$ npm ci
+
+# Afterwards run this:
+$ build-tools/heroku/generate-typescript --watch
 ```
 
-If you prefer to avoid development mode (which might make the app reloads slower when opening Hedy in the browser), pass the `NO_DEBUG_MODE` environment variable.
+Before reloading your browser.
 
-```bash
-(.env)$ env NO_DEBUG_MODE=1 python app.py
-```
+## Using Docker
 
-If you want to run the website locally, but would prefer to use Docker instead of installing python, you can build a container image and run it like so:
+If you want to run the website locally, but would prefer to use Docker instead
+of installing python, you can build a container image and run it like so:
 
 ```bash
 docker build -t hedy .
 ```
-and then
+
+and then:
+
 ```bash
 docker run -it --rm -p 5000:5000 hedy
 ```
 
+## Running Hedy files from the command line
+
 If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:
+
 ```bash
 $ touch FILENAME.hedy
 ```
+
 If you use a higher level than 1, specify the level at the top of the file by typing ```#LEVEL 1-8```. This will let the interpreter know which level you want to run the code on. Now to acctually run the code, type the following command in the terminal:
+
 ```bash
 (.env)$ python runhedy.py FILENAME.hedy
 ```
+
 If all did correctly, you will see the output of your code right into the terminal.
 
 If you don't want to specify the level itself in the file, you can use the ```--level``` argument after the filename. You can do it like this:
+
 ```bash
 (.env)$ python runhedy.py FILENAME.hedy --level 1-8
 ```
+
 When you execute this, the interpreter will use the specified level.
 
 Pre-release environment

@@ -1,147 +1,272 @@
+---
 level: 4
 questions:
-  - 1:
-      question_text: "Whcih statement is true?"
-      code: "..."
-      mp_choice_options:
-        - { option_text: "In level 4 print works differently than in level 3", code: , feedback: "No, there have been no changes!" }
-        - { option_text: "In level 4 ask works differently than in level 3", code: , feedback: "No, there have been no changes!" }
-        - { option_text: "In level 4 both print and ask work differently than in level 3 ", code: , feedback: "No, there have been no changes!" }
-        - { option_text: "In level 4 neither print nor ask works differently than in level 3", code: , feedback: "That's right!." }
-      correct_answer: "D"
-      hint: "There are no changes in the existing commands."
-      question_score: 10
-  - 2:
-      question_text: "What appears in your output screen when you type in the name Hedy?"
-      code: |-
-        name is ask 'What is your name?'
-        if name is Hedy print 'fun' else print 'less fun'
-      mp_choice_options:
-        - { option_text: "fun", code: , feedback: "That's right!" }
-        - { option_text: "less fun", code: , feedback: "If the name is Hedy, it will say 'fun''" }
-        - { option_text: "Hedy ", code: , feedback: "Nee, it doesn't print the name" }
-        - { option_text: "Error", code: , feedback: "Fortunately not!" }
-      correct_answer: "A"
-      hint: "if name is Hedy print ...?"
-      question_score: 10
-  - 3: 
-      question_text: "What is the right password"
-      code: |-
-        password is ask 'What is the password?'
-        if password is SECRET print 'Correct!' 
-        else print 'ALARM! INTRUDER!'
-      mp_choice_options:
-        - { option_text: "Correct!", code: , feedback: "This is printed when you type in the correct password" }
-        - { option_text: "SECRET", code: , feedback: "That's right!'" }
-        - { option_text: "password", code: , feedback: "The password isn't password..." }
-        - { option_text: "ALARM INTRUDER", code: , feedback: "This is printed when you type in the incorrect password!" }
-      correct_answer: "B"
-      hint: "if password is ... print 'Correct!'!'"
-      question_score: 10
-  - 4: 
-      question_text: "What does Hedy print when you type in the wrong password?"
-      code: |-
-        password is ask 'What is the password?'
-        if password is SECRET print 'Correct!' 
-        else print 'ALARM! INTRUDER!'
-      mp_choice_options:
-        - { option_text: "Goood", code: , feedback: "That's being printed if the correct answer is given, not the wrong one..." }
-        - { option_text: "SECRET", code: , feedback: "That's the right answer" }
-        - { option_text: "Wrong! ", code: , feedback: "No, this is not what Hedy will print" }
-        - { option_text: "ALARM! INTRUDER!", code: , feedback: "Great job!" }
-      correct_answer: "D"
-      hint: "Your computer will sound the alarm for intruders!"
-      question_score: 10
-  - 5: 
-      question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
-      code: |-
-        password is ask 'What is the password?'
-        if password is SECRET print 'Correct!' 
-        else print 'ALARM! INTRUDER!'
-      mp_choice_options:
-        - { option_text: "Because it needs to be in captitals, so SECRET", code: , feedback: "Indeed!" }
-        - { option_text: "Because the password is alarm", code: , feedback: "Nee, dat is niet het wachtwoord." }
-        - { option_text: "Because it's spelled secert. ", code: , feedback: "That's not how you spell secret" }
-        - { option_text: "Because Hedy makes a mistake", code: , feedback: "No, Hedy is right" }
-      correct_answer: "A"
-      hint: "The spelling of the word has to be the exact same."
-      question_score: 10
-  - 6:
-      question_text: "Which word should be on the place of the question mark in the last line?"
-      code: |-
-        print 'Im Hedy the football fortune teller!'
-        print 'I will predict what place your team will end up!'
-        club is ask 'Which club is your favorite?'
-        if club is ajax print 'Ajax is going to win of course!' 
-        ? print 'Sorry, your club is gonna be in last place...'
-      mp_choice_options:
-        - { option_text: "", code: "if", feedback: "if is already in the line above" }
-        - { option_text: "", code: "at random", feedback: "No, you need else." }
-        - { option_text: "", code: "else" , feedback: "Great!" }
-        - { option_text: "", code: "print", feedback: "Print is already there, we need a word before it!" }
-      correct_answer: "C"
-      hint: "In level 4 you learn 2 new commands, if and ...?"
-      question_score: 10
-  - 7:
-      question_text: "Which word should be in the place of the question mark?"
-      code: |-
-        print 'I can predict if you will be a millionair or not!'
-        name is ask 'Whats your name?'
-        if name is Hedy print 'You will be a millionair!' 
-        else ? 'Unfortunately... No big money for you.'
-      mp_choice_options:
-        - { option_text: "", code: "if", feedback: "if is in the line above." }
-        - { option_text: "", code: "at random", feedback: "No, you dont need at random." }
-        - { option_text: "", code: "else" , feedback: "It already said else" }
-        - { option_text: "", code: "print", feedback: "Awesome!" }
-      correct_answer: "D"
-      hint: "After else a print command follows"
-      question_score: 10
-  - 8:
-      question_text: "Which word should be on the place of the question mark?"
-      code: |-
-        animal is ask 'What is your favorite animal?'
-        if ? is penguin print 'Thats my favorite animal too!' 
-        else print 'Cool! I like penguins.'
-      mp_choice_options:
-        - { option_text: "", code: "favorite animal", feedback: "Thats not the variable name." }
-        - { option_text: "", code: "animal", feedback: "Great job!" }
-        - { option_text: "", code: "if" , feedback: "If is already there" }
-        - { option_text: "", code: "print", feedback: "No, that's not it." }
-      correct_answer: "B"
-      hint: "What the variable name?"
-      question_score: 10
-  - 9:
-      question_text: "Which door should you choose to escape??"
-      code: |-
-        print 'Escape from the haunted house!'
-        print 'There are 3 doors in front of you'
-        door is ask 'Which door do you choose?'
-        monsters is vampire, werewolf, giant spider
-        if door is 2 print 'Yay, you can escape!' 
-        else print 'You are being devoured by a... ' monsters at random
-      mp_choice_options:
-        - { option_text: "1", code: , feedback: "Bad choice! You're being eaten" }
-        - { option_text: "2", code: , feedback: "Super! You escaped!" }
-        - { option_text: "3", code: , feedback: "Bad choice! You're being eaten." }
-        - { option_text: "It's a trap, you will always be eaten!", code: , feedback: "Luckily not!" }
-      correct_answer: "B"
-      hint: "One of the doors will keep you safe.."
-      question_score: 10
-  - 10:
-      question_text: "Which monster is standing behind door 1?"
-      code: |-
-        print 'Escape from the haunted house!'
-        print 'There are 3 doors in front of you'
-        door is ask 'Which door do you choose?'
-        monsters is vampire, werewolf, giant spider
-        if door is 2 print 'Yay, you can escape!' 
-        else print 'You are being devoured by a... ' monsters at random
-      mp_choice_options:
-        - { option_text: "Hedy picks a random monster each time.", code: , feedback: "Geweldig!" }
-        - { option_text: "vampire", code: , feedback: "Not always..." }
-        - { option_text: "werewolf", code: , feedback: "Not always..." }
-        - { option_text: "giant spider", code: , feedback: "Not always..." }
-      correct_answer: "A"
-      hint: "Mind the last 3 words... monsters at random..."
-      question_score: 10
+- 1:
+    question_text: "Whcih statement is true?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "In level 4 print works differently than in level 3"
+      - "code": "None"
+      - "feedback": "No, there have been no changes!"
+    - 1:
+      - "option_text": "In level 4 ask works differently than in level 3"
+      - "code": "None"
+      - "feedback": "No, there have been no changes!"
+    - 2:
+      - "option_text": "In level 4 both print and ask work differently than in level\
+          \ 3 "
+      - "code": "None"
+      - "feedback": "No, there have been no changes!"
+    - 3:
+      - "option_text": "In level 4 neither print nor ask works differently than in\
+          \ level 3"
+      - "code": "None"
+      - "feedback": "That's right!."
+    correct_answer: "D"
+    hint: "There are no changes in the existing commands."
+    question_score: 10
+- 2:
+    question_text: "What appears in your output screen when you type in the name Hedy?"
+    code: |-
+      name is ask 'What is your name?'
+      if name is Hedy print 'fun' else print 'less fun'
+    mp_choice_options:
+    - 0:
+      - "option_text": "fun"
+      - "code": "None"
+      - "feedback": "That's right!"
+    - 1:
+      - "option_text": "less fun"
+      - "code": "None"
+      - "feedback": "If the name is Hedy, it will say 'fun''"
+    - 2:
+      - "option_text": "Hedy "
+      - "code": "None"
+      - "feedback": "Nee, it doesn't print the name"
+    - 3:
+      - "option_text": "Error"
+      - "code": "None"
+      - "feedback": "Fortunately not!"
+    correct_answer: "A"
+    hint: "if name is Hedy print ...?"
+    question_score: 10
+- 3:
+    question_text: "What is the right password"
+    code: |-
+      password is ask 'What is the password?'
+      if password is SECRET print 'Correct!' 
+      else print 'ALARM! INTRUDER!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Correct!"
+      - "code": "None"
+      - "feedback": "This is printed when you type in the correct password"
+    - 1:
+      - "option_text": "SECRET"
+      - "code": "None"
+      - "feedback": "That's right!'"
+    - 2:
+      - "option_text": "password"
+      - "code": "None"
+      - "feedback": "The password isn't password..."
+    - 3:
+      - "option_text": "ALARM INTRUDER"
+      - "code": "None"
+      - "feedback": "This is printed when you type in the incorrect password!"
+    correct_answer: "B"
+    hint: "if password is ... print 'Correct!'!'"
+    question_score: 10
+- 4:
+    question_text: "What does Hedy print when you type in the wrong password?"
+    code: |-
+      password is ask 'What is the password?'
+      if password is SECRET print 'Correct!' 
+      else print 'ALARM! INTRUDER!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Goood"
+      - "code": "None"
+      - "feedback": "That's being printed if the correct answer is given, not the\
+          \ wrong one..."
+    - 1:
+      - "option_text": "SECRET"
+      - "code": "None"
+      - "feedback": "That's the right answer"
+    - 2:
+      - "option_text": "Wrong! "
+      - "code": "None"
+      - "feedback": "No, this is not what Hedy will print"
+    - 3:
+      - "option_text": "ALARM! INTRUDER!"
+      - "code": "None"
+      - "feedback": "Great job!"
+    correct_answer: "D"
+    hint: "Your computer will sound the alarm for intruders!"
+    question_score: 10
+- 5:
+    question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
+    code: |-
+      password is ask 'What is the password?'
+      if password is SECRET print 'Correct!' 
+      else print 'ALARM! INTRUDER!'
+    mp_choice_options:
+    - 0:
+      - "option_text": "Because it needs to be in captitals, so SECRET"
+      - "code": "None"
+      - "feedback": "Indeed!"
+    - 1:
+      - "option_text": "Because the password is alarm"
+      - "code": "None"
+      - "feedback": "Nee, dat is niet het wachtwoord."
+    - 2:
+      - "option_text": "Because it's spelled secert. "
+      - "code": "None"
+      - "feedback": "That's not how you spell secret"
+    - 3:
+      - "option_text": "Because Hedy makes a mistake"
+      - "code": "None"
+      - "feedback": "No, Hedy is right"
+    correct_answer: "A"
+    hint: "The spelling of the word has to be the exact same."
+    question_score: 10
+- 6:
+    question_text: "Which word should be on the place of the question mark in the\
+      \ last line?"
+    code: |-
+      print 'Im Hedy the football fortune teller!'
+      print 'I will predict what place your team will end up!'
+      club is ask 'Which club is your favorite?'
+      if club is ajax print 'Ajax is going to win of course!' 
+      ? print 'Sorry, your club is gonna be in last place...'
+    mp_choice_options:
+    - 0:
+      - "option_text": ""
+      - "code": "if"
+      - "feedback": "if is already in the line above"
+    - 1:
+      - "option_text": ""
+      - "code": "at random"
+      - "feedback": "No, you need else."
+    - 2:
+      - "option_text": ""
+      - "code": "else"
+      - "feedback": "Great!"
+    - 3:
+      - "option_text": ""
+      - "code": "print"
+      - "feedback": "Print is already there, we need a word before it!"
+    correct_answer: "C"
+    hint: "In level 4 you learn 2 new commands, if and ...?"
+    question_score: 10
+- 7:
+    question_text: "Which word should be in the place of the question mark?"
+    code: |-
+      print 'I can predict if you will be a millionair or not!'
+      name is ask 'Whats your name?'
+      if name is Hedy print 'You will be a millionair!' 
+      else ? 'Unfortunately... No big money for you.'
+    mp_choice_options:
+    - 0:
+      - "option_text": ""
+      - "code": "if"
+      - "feedback": "if is in the line above."
+    - 1:
+      - "option_text": ""
+      - "code": "at random"
+      - "feedback": "No, you dont need at random."
+    - 2:
+      - "option_text": ""
+      - "code": "else"
+      - "feedback": "It already said else"
+    - 3:
+      - "option_text": ""
+      - "code": "print"
+      - "feedback": "Awesome!"
+    correct_answer: "D"
+    hint: "After else a print command follows"
+    question_score: 10
+- 8:
+    question_text: "Which word should be on the place of the question mark?"
+    code: |-
+      animal is ask 'What is your favorite animal?'
+      if ? is penguin print 'Thats my favorite animal too!' 
+      else print 'Cool! I like penguins.'
+    mp_choice_options:
+    - 0:
+      - "option_text": ""
+      - "code": "favorite animal"
+      - "feedback": "Thats not the variable name."
+    - 1:
+      - "option_text": ""
+      - "code": "animal"
+      - "feedback": "Great job!"
+    - 2:
+      - "option_text": ""
+      - "code": "if"
+      - "feedback": "If is already there"
+    - 3:
+      - "option_text": ""
+      - "code": "print"
+      - "feedback": "No, that's not it."
+    correct_answer: "B"
+    hint: "What the variable name?"
+    question_score: 10
+- 9:
+    question_text: "Which door should you choose to escape??"
+    code: |-
+      print 'Escape from the haunted house!'
+      print 'There are 3 doors in front of you'
+      door is ask 'Which door do you choose?'
+      monsters is vampire, werewolf, giant spider
+      if door is 2 print 'Yay, you can escape!' 
+      else print 'You are being devoured by a... ' monsters at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "1"
+      - "code": "None"
+      - "feedback": "Bad choice! You're being eaten"
+    - 1:
+      - "option_text": "2"
+      - "code": "None"
+      - "feedback": "Super! You escaped!"
+    - 2:
+      - "option_text": "3"
+      - "code": "None"
+      - "feedback": "Bad choice! You're being eaten."
+    - 3:
+      - "option_text": "It's a trap, you will always be eaten!"
+      - "code": "None"
+      - "feedback": "Luckily not!"
+    correct_answer: "B"
+    hint: "One of the doors will keep you safe.."
+    question_score: 10
+- 10:
+    question_text: "Which monster is standing behind door 1?"
+    code: |-
+      print 'Escape from the haunted house!'
+      print 'There are 3 doors in front of you'
+      door is ask 'Which door do you choose?'
+      monsters is vampire, werewolf, giant spider
+      if door is 2 print 'Yay, you can escape!' 
+      else print 'You are being devoured by a... ' monsters at random
+    mp_choice_options:
+    - 0:
+      - "option_text": "Hedy picks a random monster each time."
+      - "code": "None"
+      - "feedback": "Geweldig!"
+    - 1:
+      - "option_text": "vampire"
+      - "code": "None"
+      - "feedback": "Not always..."
+    - 2:
+      - "option_text": "werewolf"
+      - "code": "None"
+      - "feedback": "Not always..."
+    - 3:
+      - "option_text": "giant spider"
+      - "code": "None"
+      - "feedback": "Not always..."
+    correct_answer: "A"
+    hint: "Mind the last 3 words... monsters at random..."
+    question_score: 10

@@ -20,7 +20,7 @@
               {# placeholder to make button go right, was originally in use for the example code 3#}
             </div>
             <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-              onclick='tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
+              onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
           </div>
         </div>
         {% endfor %}
@@ -42,6 +42,7 @@
 
 {% block scripts %}
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="/client_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script>
@@ -60,7 +61,6 @@
     function toggleCommands() {
         if ($('#commands-window').width() == 250) {
             $('#toggle-button').html('&#8594;');
-            content = $('#commands-window').html();
             $('#command_window_content').hide();
             $( "#commands-window" ).animate({
            width: "55px",
@@ -74,11 +74,7 @@
         }
     }
   </script>
-  {# Important syntaxModeRules.js gets loaded first #}
-  <script src="{{static('/js/syntaxModesRules.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/tabs.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
