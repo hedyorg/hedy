@@ -150,24 +150,35 @@ questions:
     mp_choice_options:
     - 0:
       - "option_text": "None"
-      - "code": "print 'Welkom bij restaurant Hedy'\neten is ask 'Wat wilt u bestellen?\n\
-          print eten"
+      - "code": |-
+            print 'Welkom bij restaurant Hedy'
+            eten is ask 'Wat wilt u bestellen?
+            print eten
       - "feedback": "Hier zit geen herhaling in, er zijn twee bestellingen."
     - 1:
       - "option_text": "None"
-      - "code": "repeat 2 times\n    print 'Welkom bij restaurant Hedy'\n    eten\
-          \ is ask 'Wat wilt u bestellen?'\n    print eten"
+      - "code": |-
+          repeat 2 times
+              print 'Welkom bij restaurant Hedy'
+              eten is ask 'Wat wilt u bestellen?'
+              print eten
       - "feedback": "Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy'\
           \ 2x"
     - 2:
       - "option_text": "None"
-      - "code": "print 'Welkom bij restaurant Hedy'\nrepeat 2 times\n    eten is ask\
-          \ 'Wat wilt u bestellen?'\nprint eten"
+      - "code": |-
+          print 'Welkom bij restaurant Hedy'
+          repeat 2 times
+              eten is ask 'Wat wilt u bestellen?'
+          print eten
       - "feedback": "De code is bijna goed, maar het eten moet ook 2x geprint worden."
     - 3:
       - "option_text": "None"
-      - "code": "print 'Welkom bij restaurant Hedy'\nrepeat 2 times\n    eten is ask\
-          \ 'Wat wilt u bestellen?'\n    print eten"
+      - "code": |-
+          print 'Welkom bij restaurant Hedy'
+          repeat 2 times
+              eten is ask 'Wat wilt u bestellen?'
+              print eten
       - "feedback": "Goed gezien!"
     correct_answer: "D"
     hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
