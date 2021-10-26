@@ -15,6 +15,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 1
+
+        # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
+        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
     - name: Install Nodejs dependencies
       run: |
         npm ci
@@ -29,4 +32,5 @@ jobs:
         branch: main
         file_pattern: static/js/*.js*
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
+        GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
