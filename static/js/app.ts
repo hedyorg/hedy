@@ -205,9 +205,29 @@ export function runit(level: string, lang: string, cb: () => void) {
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.Feedback) {
-        error.showFeedback("Test header", response.Feedback);
+        $ ('#feedbackbox .expand-dialog').text("▲ " + ErrorMessages['Click_expand'] + " ▲")
+          if (response.feedback_level === 3) {
+            error.showFeedback(ErrorMessages['Feedback_similar_code'], response.Feedback);
+          } else if (response.feedback_level == 4) {
+            error.showFeedback(ErrorMessages['Feedback_new'], response.Feedback);
+          } else if (response.feedback_level == 5) {
+            error.showFeedback(ErrorMessages['Feedback_suggestion'], response.Feedback);
+          }  else {
+            error.showFeedback(ErrorMessages['Feedback_error'], response.Feedback);
+          }
       }
       if (response.Error) {
+        var btn = $('#runit');
+        btn.prop('disabled', true);
+        btn.css("background", "gray");
+        btn.css("border-bottom", "4px solid black");
+        $("#runit").animate({backgroundColor:"#68d391"}, 3000);
+        setTimeout(function () {
+          btn.prop('disabled', false);
+          btn.css('background-color', ''); //reset to original color
+          btn.css("border-bottom", '');
+          window.State.disable_run = false;
+        }, 3000);
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           editor.session.setAnnotations([

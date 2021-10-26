@@ -89,7 +89,6 @@ export const error = {
     obj.html(obj.html().replace(/\n/g,'<br/>'));
     obj.html(obj.html().replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp'));
     $('#feedbackbox').show();
-    $("#feedbackbox .details").hide();
     editor?.resize();
   },
 
