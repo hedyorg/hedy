@@ -88,8 +88,7 @@ def closest_command(invalid_command, known_commands):
  
 
 def style_closest_command(command):
-    return '<span style="background-color: #272822; color: #ff6188; padding: 0.25rem; font-family: monospace; border-radius: 0.25rem;"> '+command+' </span>'
-
+    return f'<span class="command-highlighted">{command}</span>'
 
 def closest_command_with_min_distance(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
