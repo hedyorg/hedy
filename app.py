@@ -285,6 +285,7 @@ def parse():
 
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+        gradual_feedback = TRANSLATIONS.get_translations(lang, 'GradualFeedback')
         with querylog.log_time('transpile'):
             transpile_result = hedy.transpile(code, level)
             python_code = transpile_result.code
