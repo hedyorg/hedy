@@ -400,22 +400,37 @@ def gradual_feedback_model(code, level, gradual_feedback, language):
     response["feedback_level"] = session['feedback_level']
     return response
 
+
 def get_concepts(level):
-    if level == 1:
-        return ['print', 'ask', 'echo']
-    elif level == 2:
-        return ['print', 'ask', 'at', 'random']
-    elif level == 3:
-        return ['print', 'is', 'ask', 'at', 'random']
-    elif level == 4:
-        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else']
-    elif level == 5:
-        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'repeat', 'times']
-    elif level in [6, 7]:
-        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'repeat', 'times', '+', '-', '*']
-    elif level in [8, 9, 10]:
-        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'for', 'in', 'range', '+', '-', '*']
-    return []
+    # Dictionary is copied from Hedy.py, might be nice to store it at one place in the future
+    commands_per_level = {
+        1: ['print', 'ask', 'echo', 'turn', 'forward'],
+        2: ['print', 'ask', 'is', 'turn', 'forward'],
+        3: ['print', 'ask', 'is', 'turn', 'forward'],
+        4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
+        5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+        6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+        7: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
+        8: ['print', 'ask', 'is', 'if', 'for', 'turn', 'forward'],
+        9: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        10: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        11: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        12: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        13: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        14: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        15: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        16: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
+        17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+        18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+        19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+        20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+        21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+        22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
+    }
+    try:
+        return commands_per_level[level]
+    except:
+        return []
 
 
 def preprocess_code_similarity_measure(code, level):
@@ -449,7 +464,7 @@ def get_similar_code(processed_code, language, level):
         with open(filename, mode='r', encoding='utf-8') as file:
             csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
             for lines in csvFile:
-                distance = 1000 #lev(processed_code, lines[1])
+                distance = 1000  # lev(processed_code, lines[1])
                 if distance < 1:  # The code is identical, no need to search any further
                     similar_code = lines[0]
                     break
@@ -714,7 +729,7 @@ def submit_answer(level_source, question_nr, attempt):
         if question['correct_answer'] in chosen_option:
             if session.get('total_score'):
                 session['total_score'] = session.get('total_score') + (
-                            config.get('quiz-max-attempts') - session.get('quiz-attempt')) * 0.5 * question[
+                        config.get('quiz-max-attempts') - session.get('quiz-attempt')) * 0.5 * question[
                                              'question_score']
             else:
                 session['total_score'] = (config.get('quiz-max-attempts') - session.get('quiz-attempt')) * 0.5 * \
