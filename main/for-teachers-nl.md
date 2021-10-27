@@ -98,13 +98,13 @@ Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
 Bijvoorbeeld: `print Hallo, ik ben Hedy.` oplossing: `print Hallo ik ben Hedy`
 - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando, maar dat kan pas vanaf level 3.
 Bijvoorbeeld: 
-<pre>
+<pre class="no-copy-button">
 dier is hond, kat, koe
 print Het leukste dier is…
 print dier at random
 </pre>
 In regel 2 van deze code staat het woord dier, terwijl dat ook de naam van de variabele is. Los dit op door de variabele een andere naam te geven, bijvoorbeeld:
-<pre>
+<pre class="no-copy-button">
 dieren is hond, kat, koe
 print Het leukste dier is...
 print dieren at random
@@ -121,15 +121,15 @@ Bijvoorbeeld: `print 'Hallo ` Oplossing: `print 'Hallo'`
 - Leerlingen vergeten dat ook bij ask aanhalingstekens gebruikt moeten worden. 
 Bijvoorbeeld: `naam is ask Hoe heet je?` oplossing `naam is ask 'Hoe heet je?'`
 - Leerlingen gebruiken hoge komma's na een print commando. Bijvoorbeeld:
-<pre>
+<pre class="no-copy-button">
 print 'Er lopen twee oma's door het park'
 </pre>
 Oplossing: Gebruik de andere hoge komma (naast de 1 toets met het ~)
-<pre>
+<pre class="no-copy-button">
 print 'Er lopen twee oma`s door het park'
 </pre>
 Oplossing 2: Gebruik geen hoge komma en spel het woord fout.
-<pre>
+<pre class="no-copy-button">
 print 'Er lopen twee omas door het park'
 </pre>
 
@@ -139,67 +139,67 @@ In level 4 zijn dit veelgemaakte fouten door de leerlingen:
 
 - Fout: Leerlingen vergeten het woord print bij een if commando.
 
-<pre>
+<pre class="no-copy-button">
 if naam is Hedy 'leuk' 
 else 'minder leuk!'
 </pre>
 Oplossing: gebruik twee keer een print commando na een if commando
-<pre>
+<pre class="no-copy-button">
 if naam is Hedy print 'leuk' 
 else print 'minder leuk!'
 </pre>
 
 - Fout: Leerlingen gebruiken twee verschillende namen voor dezelfde variabele.
-<pre>
+<pre class="no-copy-button">
 paard is ask 'Hoe heet jouw paard?'
 if naam is Bonfire print 'leuk' 
 else print 'minder leuk!'
 </pre>
 
 Oplossing: Gebruik altijd dezelfde naam voor een variabele. Controleer ook of de variabelenaam enkelvoud of meervoud is, daar lees je gemakkelijk overheen (antwoord/antwoorden). 
-<pre>
+<pre class="no-copy-button">
 paard is ask 'Hoe heet jouw paard?'
 if paard is Bonfire print 'leuk' 
 else print 'minder leuk!'
 </pre>
 
 - Fout: Leerlingen vergeten beide aanhalingstekens bij de print commando's.
-<pre>
+<pre class="no-copy-button">
 if naam is Hedy print leuk 
 else print 'minder leuk!
 </pre>
 Oplossing: Gebruik altijd twee aanhalingstekens per printcommando, een vooraan en een achteraan.
-<pre>
+<pre class="no-copy-button">
 if naam is Hedy print 'leuk' 
 else print 'minder leuk!'
 </pre>
 
 - Fout: Leerlingen gebruiken aanhalingstekens rond de naam van de variabele.
-<pre>
+<pre class="no-copy-button">
 if 'naam' is 'Hedy' print 'leuk' 
 else print 'minder leuk!'
 </pre>
 Oplossing: rond een variabele moeten geen aanhalingstekens.
-<pre>
+<pre class="no-copy-button">
 if naam is Hedy print 'leuk' 
 else print 'minder leuk!'
 </pre>
 
 - Fout: Leerlingen geven variabelen namen met meerdere woorden.
-<pre>
+<pre class="no-copy-button">
 gekozen deur is ask 'Welke deur kies jij?'
 </pre>
 Oplossing: Een variabelenaam mag maar een woord zijn.
-<pre>
+<pre class="no-copy-button">
 gekozendeur is ask 'Welke deur kies jij?'
 </pre>
 
 - Fout: Leerlingen willen dat bij de if meerdere antwoorden goed zijn.
-<pre>
+<pre class="no-copy-button">
 if naam is Jesse, David, Souf print 'jij bent grappig' else print 'jij bent niet grappig'
 </pre>
 Oplossing: Dit mag helaas niet, je mag maar een naam kiezen per if commando. Je kunt wel meerdere if commando's toevoegen zoals het voorbeeld hieronder:
-<pre>
+<pre class="no-copy-button">
 naam is ask hoe heet jij?
 
 if naam is Jesse print 'leuk'
@@ -209,34 +209,34 @@ if naam is David print 'leuk'
 if naam is Souf print 'leuk'
 </pre>
 Alternatieve oplossing: Je kunt ook een lijstje maken met vrienden en Hedy laten controleren of het antwoord in het lijstje staat met in. 
-<pre>
+<pre class="no-copy-button">
 vrienden is Jesse, David, Souf
 naam is ask 'Wie ben jij?'
 if naam in vrienden print 'leuk'
 else print 'minder leuk'
 </pre>
 - Fout: De leerlingen vullen bij ask hetzelfde in als bij de variabelenaam, dus de variabele wordt de zelfde waarde als de variabelenaam. In het voorbeeld hieronder was bijvoorbeeld het wachtwoord 'wachtwoord'
-<pre>
+<pre class="no-copy-button">
 wachtwoord is ask 'Wat is het wachtwoord?'
 if wachtwoord is wachtwoord print 'Je mag er door!' 
 else print 'Verboden toegang!'
 </pre>
 Oplossing: Kies een andere naam voor je variabele
-<pre>
+<pre class="no-copy-button">
 geheimwachtwoord is ask 'Wat is het wachtwoord?'
 if geheimwachtwoord is wachtwoord print 'Je mag er door!' else print 'Verboden toegang!'
 </pre>
 
 - Fout: Leerlingen gebruiken hoge komma's na een print commando.
-<pre>
+<pre class="no-copy-button">
 print 'Er lopen twee oma's door het park'
 </pre>
 Oplossing: Gebruik de andere hoge komma (naast de 1 toets met het ~)
-<pre>
+<pre class="no-copy-button">
 print 'Er lopen twee oma`s door het park'
 </pre>
 Oplossing 2: Gebruik geen hoge komma en spel het woord fout.
-<pre>
+<pre class="no-copy-button">
 print 'Er lopen twee omas door het park'
 </pre>
 

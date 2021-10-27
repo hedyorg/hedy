@@ -91,14 +91,14 @@ E.g. they program: `print Hello, I'm Hedy` instead of `print Hello I'm Hedy`
 
 E.g. They program: 
 
-<pre>
+<pre class="no-copy-button">
 animals is dog, cat, cow
 print the best animals are…
 print animals at random
 </pre>
 Instead they should change the word animals in the second line into something other than animals. For example: 
 
-<pre>
+<pre class="no-copy-button">
 animals is dog, cat, cow
 print the best animal is…
 print animals at random
@@ -119,77 +119,77 @@ These are the frequently made mistakes by students in level 4:
 
 - Mistake: Students put else on the next line, but it should be in the same line as the if command. 
 Code: 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'nice'
 else print 'boo!'
 </pre>
 Solution: Else should be in the same line as if. 
 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'nice' else print 'boo!'
 </pre>
 - Mistake: Students use apostrophes after a print command. 
-<pre>
+<pre class="no-copy-button">
 print 'I'm Hedy'
 </pre>
 Solution: Don't use apostrophes.
-<pre>
+<pre class="no-copy-button">
 print 'Im Hedy'
 </pre>
 - Mistake: Students forget to use the print command when using an if command.
-<pre>
+<pre class="no-copy-button">
 if name is Hedy 'nice' else 'boo!'
 </pre>
 Solution: Use print twice when using both if and else. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'nice' else print 'boo!'
 </pre>
 
 - Mistake: Students use different names for the same variable.
-<pre>
+<pre class="no-copy-button">
 horse is ask What is your horse called?
 if me is Bonfire print 'nice' else print 'boo!'
 </pre>
 
 Solution: Always use the same name for your variable (also check whether the variable name is singular or plural (answer/answers)). 
-<pre>
+<pre class="no-copy-button">
 horse is ask what is your horse called?
 if horse is Bonfire print 'nice' else print 'boo!'
 </pre>
 
 - Mistake: Students forget to type both of the quotation marks after print, when using if and else. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print nice else print 'boo!
 </pre>
 Solution: Always use two quotation marks (both in front of and behind the text) for each print command in your code. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'nice' else print 'boo!'
 </pre>
 
 - Mistake: Students use quotation marks around a variable. 
-<pre>
+<pre class="no-copy-button">
 if 'name' is 'Hedy' print 'nice' else print 'boo!'
 </pre>
 Solution: Don't use quotation marks around a variable. 
-<pre>
+<pre class="no-copy-button">
 if name is Hedy print 'nice' else print 'boo!'
 </pre>
 
 - Mistake: Students give names to variables that consist of multiple words. 
-<pre>
+<pre class="no-copy-button">
 Chosen door is ask Which door do you choose?
 </pre>
 Solution: A variable name should always just be one word. 
-<pre>
+<pre class="no-copy-button">
 chosendoor is ask Which door do you choose?
 </pre>
 
 - Mistake: Students want multiple answers to be correct, when using if. 
-<pre>
+<pre class="no-copy-button">
 if name is Jesse, David, Souf print 'you are funny' else print 'you are not funny'
 </pre>
 Solution: Unfortunately, this is not allowed. You can only pick one name for each if command. On the other hand, you can use multiple if commands in one code, like the example beneath: 
-<pre>
+<pre class="no-copy-button">
 name is ask What is your name?
 
 if name is Jesse print 'you are funny'
@@ -199,12 +199,12 @@ if name is David print 'you are funny'
 if name is Souf print 'you are funny'
 </pre>
 - Mistake: Students give the same answer in ask as the variable name. For example this student made the password 'password'. 
-<pre>
+<pre class="no-copy-button">
 password is ask What is the secret password?
 If password is password print 'You can enter!' else print 'Access denied!' 
 </pre>
 Solution: Choose a different name for the variable.
-<pre>
+<pre class="no-copy-button">
 secretpassword is ask What is the secret password?
 If secretpassword is password print 'You can enter!' else print 'Access denied!' 
 </pre>

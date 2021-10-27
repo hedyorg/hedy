@@ -617,14 +617,8 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 space = " "
 
-            if argument in self.lookup:
-                #variables are placed in {} in the f string
-                argument_string += "{" + hash_var(argument) + "}"
-                argument_string += space
-            else:
-                #strings are written regularly
-                argument_string += argument
-                argument_string += space
+            argument_string += process_variable_for_fstring(argument, self.lookup)
+            argument_string += space
 
             i = i + 1
 
@@ -671,20 +665,6 @@ class ConvertToPython_2(ConvertToPython_1):
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
-def make_f_string(args, lookup):
-    argument_string = ''
-    for argument in args:
-        if argument in lookup:
-            # variables are placed in {} in the f string
-            argument_string += "{" + hash_var(argument) + "}"
-        else:
-            # strings are written regularly
-            # however we no longer need the enclosing quotes in the f-string
-            # the quotes are only left on the argument to check if they are there.
-            argument_string += argument.replace("'", '')
-
-    return f"print(f'{argument_string}')"
-
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
@@ -715,7 +695,12 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_print_arguments(args)
-        return make_f_string(args, self.lookup)
+        argument_string = ''
+        for argument in args:
+            argument = argument.replace("'", '') #no quotes needed in fstring
+            argument_string += process_variable_for_fstring(argument, self.lookup)
+
+        return f"print(f'{argument_string}')"
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
