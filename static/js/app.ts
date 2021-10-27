@@ -209,14 +209,12 @@ export function runit(level: string, lang: string, cb: () => void) {
         if (response.Duplicate) {
           error.showFeedback(ErrorMessages['Feedback_duplicate'], response.Feedback);
         } else {
-          if (response.feedback_level === 3) {
+          if (response.feedback_level == 2) {
             error.showFeedback(ErrorMessages['Feedback_similar_code'], response.Feedback);
-          } else if (response.feedback_level == 4) {
+          } else if (response.feedback_level == 3) {
             error.showFeedback(ErrorMessages['Feedback_new'], response.Feedback);
-          } else if (response.feedback_level == 5) {
+          } else if (response.feedback_level == 4) {
             error.showFeedback(ErrorMessages['Feedback_suggestion'], response.Feedback);
-          } else {
-            error.showFeedback(ErrorMessages['Feedback_error'], response.Feedback);
           }
         }
       }
