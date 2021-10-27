@@ -76,6 +76,11 @@ export const error = {
     editor?.resize();
   },
 
+  hideFeedback() {
+    $('#feedbackbox').hide();
+    editor?.resize();
+  },
+
   showWarning(caption: string, message: string) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
