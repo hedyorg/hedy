@@ -227,9 +227,9 @@ class TestsLevel12(HedyTester):
     color is green, blue
     choice is input('Is your favorite color one of: ' color)""")
 
-    with self.assertRaises(hedy.InvalidListArgumentException) as context:
+    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
       result = hedy.transpile(code, self.level)
-    self.assertEqual('Invalid List Argument', context.exception.error_code)
+    self.assertEqual('Invalid Argument Type', context.exception.error_code)
 
   def test_multiple_spaces_after_print(self):
     code = "print    ('hallo!')"

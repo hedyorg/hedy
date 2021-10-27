@@ -177,13 +177,13 @@ class InvalidTypeException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Invalid Type', **arguments)
 
-class RequiredListArgumentException(HedyException):
+class RequiredArgumentTypeException(HedyException):
     def __init__(self, **arguments):
-        super().__init__('Required List Argument', **arguments)
+        super().__init__('Required Argument Type', **arguments)
 
-class InvalidListArgumentException(HedyException):
+class InvalidArgumentTypeException(HedyException):
     def __init__(self, **arguments):
-        super().__init__('Invalid List Argument', **arguments)
+        super().__init__('Invalid Argument Type', **arguments)
 
 class WrongLevelException(HedyException):
     def __init__(self, **arguments):
@@ -649,12 +649,12 @@ class ConvertToPython_1(Transformer):
                     # we first try to raise if we expect 1 thing exactly for more precise error messages
                     if len(allowed_types) == 1:
                         if allowed_types[0] == 'list':
-                            raise hedy.RequiredListArgumentException(command=command, variable=assignment.name)
+                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name)
                         # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
 
                     if assignment.type == 'list':
                         types = ','.join(allowed_types)
-                        raise hedy.InvalidListArgumentException(command=command, variable=assignment.name, allowed_types=types)
+                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name, allowed_types=types)
                         # same elif here for different types
 
     def get_allowed_types(self, command, level):
@@ -813,7 +813,7 @@ class ConvertToPython_3(ConvertToPython_2):
         # we can print if all arguments are either quoted OR they are all variables
 
         unquoted_args = [a for a in args if not is_quoted(a)]
-        unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
+        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
             # all good? return for further processing
@@ -826,8 +826,8 @@ class ConvertToPython_3(ConvertToPython_2):
             raise UndefinedVarException(name=first_unquoted_var)
 
     def print(self, args):
-
         args = self.check_print_arguments(args)
+        self.check_arg_types(args, 'print', self.level)
         argument_string = ''
         for argument in args:
             argument = argument.replace("'", '') #no quotes needed in fstring

@@ -152,7 +152,7 @@ class TestsLevel21(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.InvalidListArgumentException,
+            exception=hedy.InvalidArgumentTypeException,
             test_name=self.name()
         )
 
