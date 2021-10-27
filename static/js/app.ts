@@ -287,6 +287,10 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
+export function toggleFeedback() {
+  $ ('#feedbackbox .details').toggle();
+}
+
 export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
   error.hide();
 
