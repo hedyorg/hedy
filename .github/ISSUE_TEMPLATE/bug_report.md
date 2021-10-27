@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Tell us about a bug to make Hedy better!
-title: ''
+title: "[BUG]"
 labels: ''
 assignees: ''
 
