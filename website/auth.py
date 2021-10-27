@@ -4,7 +4,7 @@ import re
 import urllib
 from flask import request, make_response, jsonify, redirect
 from flask_helpers import render_template
-from utils import type_check, object_check, timems, times, db_get, db_create, db_update, db_del, db_del_many, db_scan, db_describe, db_get_many, extract_bcrypt_rounds, is_testing_request, valid_email
+from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
 from functools import wraps
 from config import config
@@ -12,12 +12,14 @@ import boto3
 from botocore.exceptions import ClientError as email_error
 import json
 import requests
-from website import querylog
+from website import querylog, database
 
 cookie_name     = config ['session'] ['cookie_name']
 session_length  = config ['session'] ['session_length'] * 60
 
 env = os.getenv ('HEROKU_APP_NAME')
+
+DATABASE: database.Database = None
 
 @querylog.timed
 def check_password (password, hash):
@@ -35,9 +37,9 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 @querylog.timed
 def current_user (request):
     if request.cookies.get (cookie_name):
-        token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
+        token = DATABASE.get_token(request.cookies.get (cookie_name))
         if token:
-            user = db_get ('users',  {'username': token ['username']})
+            user = DATABASE.user_by_username(token ['username'])
             if user:
                 return user
     return {'username': '', 'email': ''}
@@ -58,12 +60,12 @@ TRANSLATIONS = hedyweb.Translations ()
 def requires_login (f):
     @wraps (f)
     def inner (*args, **kws):
-        User = None
+        user = None
         if request.cookies.get (cookie_name):
-            token = db_get ('tokens', {'id': request.cookies.get (cookie_name)})
+            token = DATABASE.get_token(request.cookies.get (cookie_name))
             if not token:
                 return 'unauthorized', 403
-            user = db_get ('users', {'username': token ['username']})
+            user = DATABASE.user_by_username(token ['username'])
             if not user:
                 return 'unauthorized', 403
         else:
@@ -73,28 +75,34 @@ def requires_login (f):
     return inner
 
 # Note: translations are used only for texts that will be seen by a GUI user.
-def routes (app, requested_lang):
+def routes (app, database, requested_lang):
+    global DATABASE
+    DATABASE = database
 
     @app.route('/auth/texts', methods=['GET'])
     def auth_texts():
-        return jsonify (TRANSLATIONS.data [requested_lang ()] ['Auth'])
+        response = make_response(jsonify(TRANSLATIONS.get_translations (requested_lang (), 'Auth')))
+        if not is_debug_mode():
+            # Cache for longer when not devving
+            response.cache_control.max_age = 60 * 60  # Seconds
+        return response
 
     @app.route ('/auth/login', methods=['POST'])
     def login ():
         body = request.json
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance(body.get('username'), str):
             return 'username must be a string', 400
-        if not object_check (body, 'password', 'str'):
+        if not isinstance(body.get('password'), str):
             return 'password must be a string', 400
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-            user = db_get ('users', {'email': body ['username'].strip ().lower ()}, True)
+            user = DATABASE.user_by_email(body ['username'].strip ().lower ())
         else:
-            user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+            user = DATABASE.user_by_username(body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username/password', 403
@@ -107,24 +115,24 @@ def routes (app, requested_lang):
             new_hash = hash (body ['password'], make_salt ())
 
         cookie = make_salt ()
-        db_create ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        DATABASE.store_token({'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
         if new_hash:
-            db_update ('users', {'username': user ['username'], 'password': new_hash, 'last_login': timems ()})
+            DATABASE.record_login(user['username'], new_hash)
         else:
-            db_update ('users', {'username': user ['username'], 'last_login': timems ()})
+            DATABASE.record_login(user['username'])
         resp = make_response ({})
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         return resp
 
     @app.route ('/auth/signup', methods=['POST'])
     def signup ():
         body = request.json
         # Validations, mandatory fields
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'username must be a string', 400
         if '@' in body ['username']:
             return 'username cannot contain an @-sign', 400
@@ -132,11 +140,11 @@ def routes (app, requested_lang):
             return 'username cannot contain a colon', 400
         if len (body ['username'].strip ()) < 3:
             return 'username must be at least three characters long', 400
-        if not object_check (body, 'password', 'str'):
+        if not isinstance (body.get('password'), str):
             return 'password must be a string', 400
         if len (body ['password']) < 6:
             return 'password must be at least six characters long', 400
-        if not object_check (body, 'email', 'str'):
+        if not isinstance(body.get('email'), str):
             return 'email must be a string', 400
         if not valid_email (body ['email']):
             return 'email must be a valid email', 400
@@ -145,16 +153,24 @@ def routes (app, requested_lang):
             if not body ['country'] in countries:
                 return 'country must be a valid country', 400
         if 'birth_year' in body:
-            if not object_check (body, 'birth_year', 'int') or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
+            if not isinstance(body.get('birth_year'), int) or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
                 return 'birth_year must be a year between 1900 and ' + datetime.datetime.now ().year, 400
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'gender must be m/f/o', 400
+        if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
+            return 'If present, prog_experience must be "yes" or "no"', 400
+        if 'experience_languages' in body:
+            if not isinstance(body ['experience_languages'], list):
+                return 'If present, experience_languages must be an array', 400
+            for language in body ['experience_languages']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                    return 'Invalid language: ' + str (language), 400
 
-        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+        user = DATABASE.user_by_username(body ['username'].strip ().lower ())
         if user:
             return 'username exists', 403
-        email = db_get ('users', {'email': body ['email'].strip ().lower ()}, True)
+        email = DATABASE.user_by_email (body ['email'].strip ().lower ())
         if email:
             return 'email exists', 403
 
@@ -165,27 +181,27 @@ def routes (app, requested_lang):
         username = body ['username'].strip ().lower ()
         email = body ['email'].strip ().lower ()
 
-        if not is_testing_request (request) and 'subscribe' in body and body ['subscribe'] == True:
-            # If we have a Mailchimp API key, we use it to add the subscriber through the API
-            if os.getenv ('MAILCHIMP_API_KEY') and os.getenv ('MAILCHIMP_AUDIENCE_ID'):
-                # The first domain in the path is the server name, which is contained in the Mailchimp API key
-                request_path = 'https://' + os.getenv ('MAILCHIMP_API_KEY').split ('-') [1] + '.api.mailchimp.com/3.0/lists/' + os.getenv ('MAILCHIMP_AUDIENCE_ID') + '/members'
-                request_headers = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv ('MAILCHIMP_API_KEY')}
-                request_body = {'email_address': email, 'status': 'subscribed'}
-                r = requests.post (request_path, headers=request_headers, data=json.dumps (request_body))
+        # if not is_testing_request (request) and 'subscribe' in body and body ['subscribe'] == True:
+        #     # If we have a Mailchimp API key, we use it to add the subscriber through the API
+        #     if os.getenv ('MAILCHIMP_API_KEY') and os.getenv ('MAILCHIMP_AUDIENCE_ID'):
+        #         # The first domain in the path is the server name, which is contained in the Mailchimp API key
+        #         request_path = 'https://' + os.getenv ('MAILCHIMP_API_KEY').split ('-') [1] + '.api.mailchimp.com/3.0/lists/' + os.getenv ('MAILCHIMP_AUDIENCE_ID') + '/members'
+        #         request_headers = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv ('MAILCHIMP_API_KEY')}
+        #         request_body = {'email_address': email, 'status': 'subscribed'}
+        #         r = requests.post (request_path, headers=request_headers, data=json.dumps (request_body))
 
-                subscription_error = None
-                if r.status_code != 200 and r.status_code != 400:
-                   subscription_error = True
-                # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-                if r.status_code == 400 and not re.match ('.*already a list member', r.text):
-                   subscription_error = True
-                # If there's an error in subscription through the API, we report it to the main email address
-                if subscription_error:
-                    send_email (config ['email'] ['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str (r.status_code) + '    Body:' + r.text + '</pre>')
-            # Otherwise, we send an email to notify about this to the main email address
-            else:
-                send_email (config ['email'] ['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+        #         subscription_error = None
+        #         if r.status_code != 200 and r.status_code != 400:
+        #            subscription_error = True
+        #         # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
+        #         if r.status_code == 400 and not re.match ('.*already a list member', r.text):
+        #            subscription_error = True
+        #         # If there's an error in subscription through the API, we report it to the main email address
+        #         if subscription_error:
+        #             send_email (config ['email'] ['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str (r.status_code) + '    Body:' + r.text + '</pre>')
+        #     # Otherwise, we send an email to notify about this to the main email address
+        #     else:
+        #         send_email (config ['email'] ['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
         user = {
             'username': username,
@@ -193,33 +209,36 @@ def routes (app, requested_lang):
             'email':    email,
             'created':  timems (),
             'verification_pending': hashed_token,
-            'last_login': timems ()
+            'last_login': timems (),
+            'level': 1,
+            'ad_index' : 0
         }
 
-        if 'country' in body:
-            user ['country'] = body ['country']
-        if 'birth_year' in body:
-            user ['birth_year'] = body ['birth_year']
-        if 'gender' in body:
-            user ['gender'] = body ['gender']
+        for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+           if field in body:
+               if field == 'experience_languages' and len (body [field]) == 0:
+                   continue
+               user [field] = body [field]
 
-        db_create ('users', user)
+        DATABASE.store_user(user)
+
+        print(user)
 
         # We automatically login the user
         cookie = make_salt ()
-        db_create ('tokens', {'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
+        DATABASE.store_token({'id': cookie, 'username': user ['username'], 'ttl': times () + session_length})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request (request):
             resp = make_response ({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
-            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
+            send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus (username) + '&token=' + urllib.parse.quote_plus (hashed_token))
             resp = make_response ({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=True, samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        resp.set_cookie (cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
         return resp
 
     @app.route ('/auth/verify', methods=['GET'])
@@ -231,7 +250,9 @@ def routes (app, requested_lang):
         if not username:
             return 'no username', 400
 
-        user = db_get ('users', {'username': username})
+        print(username)
+
+        user = DATABASE.user_by_username(username)
 
         if not user:
             return 'invalid username/token', 403
@@ -243,23 +264,20 @@ def routes (app, requested_lang):
         if token != user ['verification_pending']:
             return 'invalid username/token', 403
 
-        db_update ('users', {'username': username, 'verification_pending': None})
+        DATABASE.update_user(username, {'verification_pending': None})
         return redirect ('/')
 
     @app.route ('/auth/logout', methods=['POST'])
     def logout ():
         if request.cookies.get (cookie_name):
-            db_del ('tokens', {'id': request.cookies.get (cookie_name)})
+            DATABASE.forget_token(request.cookies.get (cookie_name))
         return '', 200
 
     @app.route ('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy (user):
-        db_del ('tokens', {'id': request.cookies.get (cookie_name)})
-        db_del ('users', {'username': user ['username']})
-        # The recover password token may exist, so we delete it
-        db_del ('tokens', {'id': user ['username']})
-        db_del_many ('programs', {'username': user ['username']}, True)
+        DATABASE.forget_token(request.cookies.get (cookie_name))
+        DATABASE.forget_user(user ['username'])
         return '', 200
 
     @app.route ('/auth/change_password', methods=['POST'])
@@ -267,11 +285,11 @@ def routes (app, requested_lang):
     def change_password (user):
 
         body = request.json
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'old_password', 'str'):
+        if not isinstance (body.get('old_password'), str):
             return 'body.old_password must be a string', 400
-        if not object_check (body, 'new_password', 'str'):
+        if not isinstance (body.get( 'new_password'), str):
             return 'body.new_password must be a string', 400
 
         if len (body ['new_password']) < 6:
@@ -282,7 +300,7 @@ def routes (app, requested_lang):
 
         hashed = hash (body ['new_password'], make_salt ())
 
-        db_update ('users', {'username': user ['username'], 'password': hashed})
+        DATABASE.update_user(user ['username'], {'password': hashed})
         if not is_testing_request (request):
             send_email_template ('change_password', user ['email'], requested_lang (), None)
 
@@ -293,10 +311,10 @@ def routes (app, requested_lang):
     def update_profile (user):
 
         body = request.json
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
         if 'email' in body:
-            if not object_check (body, 'email', 'str'):
+            if not isinstance (body.get('email'), str):
                 return 'body.email must be a string', 400
             if not valid_email (body ['email']):
                 return 'body.email must be a valid email', 400
@@ -304,34 +322,48 @@ def routes (app, requested_lang):
             if not body ['country'] in countries:
                 return 'body.country must be a valid country', 400
         if 'birth_year' in body:
-            if not object_check (body, 'birth_year', 'int') or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
+            if not isinstance (body.get('birth_year'), int) or body ['birth_year'] <= 1900 or body ['birth_year'] > datetime.datetime.now ().year:
                 return 'birth_year must be a year between 1900 and ' + str (datetime.datetime.now ().year), 400
         if 'gender' in body:
             if body ['gender'] != 'm' and body ['gender'] != 'f' and body ['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
+        if 'prog_experience' in body and body ['prog_experience'] not in ['yes', 'no']:
+            return 'If present, prog_experience must be "yes" or "no"', 400
+        if 'experience_languages' in body:
+            if not isinstance(body ['experience_languages'], list):
+                return 'If present, experience_languages must be an array', 400
+            for language in body ['experience_languages']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
+                    return 'Invalid language: ' + str (language), 400
 
         resp = {}
         if 'email' in body:
             email = body ['email'].strip ().lower ()
             if email != user ['email']:
-                exists = db_get ('users', {'email': email}, True)
+                exists = DATABASE.user_by_email(email)
                 if exists:
                     return 'email exists', 403
                 token = make_salt ()
                 hashed_token = hash (token, make_salt ())
-                db_update ('users', {'username': user ['username'], 'email': email, 'verification_pending': hashed_token})
+                DATABASE.update_user(user ['username'], {'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
                 if is_testing_request (request):
                    resp = {'username': user ['username'], 'token': hashed_token}
                 else:
                     send_email_template ('welcome_verify', email, requested_lang (), os.getenv ('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus (user['username']) + '&token=' + urllib.parse.quote_plus (hashed_token))
 
-        if 'country' in body:
-            db_update ('users', {'username': user ['username'], 'country': body ['country']})
-        if 'birth_year' in body:
-            db_update ('users', {'username': user ['username'], 'birth_year': body ['birth_year']})
-        if 'gender' in body:
-            db_update ('users', {'username': user ['username'], 'gender': body ['gender']})
+        username = user ['username']
+
+        updates = {}
+        for field in ['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+           if field in body:
+               if field == 'experience_languages' and len (body [field]) == 0:
+                   updates [field] = None
+               else:
+                   updates [field] = body [field]
+
+        if updates:
+            DATABASE.update_user(username, updates)
 
         return jsonify (resp)
 
@@ -339,14 +371,16 @@ def routes (app, requested_lang):
     @requires_login
     def get_profile (user):
         output = {'username': user ['username'], 'email': user ['email']}
-        if 'birth_year' in user:
-            output ['birth_year'] = user ['birth_year']
-        if 'country' in user:
-            output ['country'] = user ['country']
-        if 'gender' in user:
-            output ['gender'] = user ['gender']
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+            if field in user:
+                output [field] = user [field]
         if 'verification_pending' in user:
             output ['verification_pending'] = True
+
+        output ['student_classes'] = DATABASE.get_student_classes (user ['username'])
+        if bool ('is_teacher' in user and user ['is_teacher']):
+            output ['teacher_classes'] = DATABASE.get_teacher_classes (user ['username'], True)
+
         output ['session_expires_at'] = timems () + session_length * 1000
 
         return jsonify (output), 200
@@ -355,16 +389,16 @@ def routes (app, requested_lang):
     def recover ():
         body = request.json
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
 
         # If username has an @-sign, then it's an email
         if '@' in body ['username']:
-            user = db_get ('users', {'email': body ['username'].strip ().lower ()}, True)
+            user = DATABASE.user_by_email(body ['username'].strip ().lower ())
         else:
-            user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+            user = DATABASE.user_by_username(body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username', 403
@@ -372,7 +406,7 @@ def routes (app, requested_lang):
         token = make_salt ()
         hashed = hash (token, make_salt ())
 
-        db_create ('tokens', {'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
+        DATABASE.store_token({'id': user ['username'], 'token': hashed, 'ttl': times () + session_length})
 
         if is_testing_request (request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
@@ -385,29 +419,29 @@ def routes (app, requested_lang):
     def reset ():
         body = request.json
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
-        if not object_check (body, 'token', 'str'):
+        if not isinstance (body.get('token'), str):
             return 'body.token must be a string', 400
-        if not object_check (body, 'password', 'str'):
+        if not isinstance (body.get('password'), str):
             return 'body.password be a string', 400
 
         if len (body ['password']) < 6:
             return 'password must be at least six characters long', 400
 
         # There's no need to trim or lowercase username, because it should come within a link prepared by the app itself and not inputted manually by the user.
-        token = db_get ('tokens', {'id': body ['username']})
+        token = DATABASE.get_token(body ['username'])
         if not token:
             return 'invalid username/token', 403
         if not check_password (body ['token'], token ['token']):
             return 'invalid username/token', 403
 
         hashed = hash (body ['password'], make_salt ())
-        token = db_del ('tokens', {'id': body ['username']})
-        db_update ('users', {'username': body ['username'], 'password': hashed})
-        user = db_get ('users', {'username': body ['username']})
+        token = DATABASE.forget_token(body ['username'])
+        DATABASE.update_user(body ['username'], {'password': hashed})
+        user = DATABASE.user_by_username(body ['username'])
 
         if not is_testing_request (request):
             send_email_template ('reset_password', user ['email'], requested_lang (), None)
@@ -418,25 +452,25 @@ def routes (app, requested_lang):
 
     @app.route ('/admin/markAsTeacher', methods=['POST'])
     def mark_as_teacher ():
-        if not is_admin (request):
+        if not is_admin (request) and not is_testing_request (request):
             return 'unauthorized', 403
 
         body = request.json
 
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
-        if not object_check (body, 'is_teacher', 'bool'):
+        if not isinstance (body.get('is_teacher'), bool):
             return 'body.is_teacher must be boolean', 400
 
-        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+        user = DATABASE.user_by_username(body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username', 400
 
-        db_update ('users', {'username': user ['username'], 'is_teacher': 1 if body ['is_teacher'] else 0})
+        DATABASE.update_user(user ['username'], {'is_teacher': 1 if body ['is_teacher'] else 0})
 
         return '', 200
 
@@ -448,16 +482,16 @@ def routes (app, requested_lang):
         body = request.json
 
         # Validations
-        if not type_check (body, 'dict'):
+        if not isinstance (body, dict):
             return 'body must be an object', 400
-        if not object_check (body, 'username', 'str'):
+        if not isinstance (body.get('username'), str):
             return 'body.username must be a string', 400
-        if not object_check (body, 'email', 'str'):
+        if not isinstance (body.get('email'), str):
             return 'body.email must be a string', 400
         if not valid_email (body ['email']):
             return 'email must be a valid email', 400
 
-        user = db_get ('users', {'username': body ['username'].strip ().lower ()})
+        user = DATABASE.user_by_username (body ['username'].strip ().lower ())
 
         if not user:
             return 'invalid username', 400
@@ -466,7 +500,7 @@ def routes (app, requested_lang):
         hashed_token = hash (token, make_salt ())
 
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
-        db_update ('users', {'username': user ['username'], 'email': body ['email'], 'verification_pending': hashed_token})
+        DATABASE.update_user (user ['username'], {'email': body ['email'], 'verification_pending': hashed_token})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request (request):
@@ -506,7 +540,7 @@ def send_email (recipient, subject, body_plain, body_html):
         print ('Email sent to ' + recipient)
 
 def send_email_template (template, email, lang, link):
-    texts = TRANSLATIONS.data [lang] ['Auth']
+    texts = TRANSLATIONS.get_translations (lang, 'Auth')
     subject = texts ['email_' + template + '_subject']
     body = texts ['email_' + template + '_body'].split ('\n')
     body = [texts ['email_hello']] + body
@@ -525,17 +559,17 @@ def send_email_template (template, email, lang, link):
 
 def auth_templates (page, lang, menu, request):
     if page == 'my-profile':
-        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='my-profile')
+        return render_template ('profile.html', lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='my-profile')
     if page in ['signup', 'login', 'recover', 'reset']:
-        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.data [lang] ['Auth'], menu=menu, username=current_user (request) ['username'], current_page='login')
+        return render_template (page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations (lang, 'Auth'), menu=menu, username=current_user (request) ['username'], current_page='login')
     if page == 'admin':
-        if not is_admin (request):
+        if not is_testing_request (request) and not is_admin (request):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
-        users = db_scan ('users')
+        users = DATABASE.all_users()
         userdata = []
-        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count']
+        fields = ['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
         for user in users:
             data = {}
@@ -546,9 +580,9 @@ def auth_templates (page, lang, menu, request):
                     data [field] = None
             data ['email_verified'] = not bool (data ['verification_pending'])
             data ['is_teacher']     = bool (data ['is_teacher'])
-            data ['created'] = datetime.datetime.fromtimestamp (int (str (data ['created']) [:-3])).isoformat ()
+            data ['created'] = mstoisostring (data ['created'])
             if data ['last_login']:
-                data ['last_login'] = datetime.datetime.fromtimestamp (int (str (data ['last_login']) [:-3])).isoformat ()
+                data ['last_login'] = mstoisostring (data ['last_login'])
             userdata.append (data)
 
         userdata.sort(key=lambda user: user ['created'], reverse=True)
@@ -557,4 +591,4 @@ def auth_templates (page, lang, menu, request):
             user ['index'] = counter
             counter = counter + 1
 
-        return render_template ('admin.html', users=userdata, program_count=db_describe ('programs') ['Table'] ['ItemCount'], user_count=db_describe ('users') ['Table'] ['ItemCount'])
+        return render_template ('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations (lang, 'Auth'))

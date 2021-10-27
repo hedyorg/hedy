@@ -20,6 +20,7 @@ _EOL: "\r"?"\n"
 _EQUALS: "="
 _EXCLAMATION_MARK: "!"
 _FOR: "for"
+_FORWARD : "forward"
 _HASH: "#"
 _IF: "if"
 _IN: "in"
@@ -42,20 +43,21 @@ _RIGHT_BRACKET : ")"
 _RIGHT_SQUARE_BRACKET : "]"
 _SMALLER : "<"
 _SMALLER_EQUALS : "<="
-_SPACE: " "
+_SPACE: " "+
 _STEP: "step"
 _SUBTRACT: "-"
 _TIMES: "times"
 _TO: "to"
+_TURN: "turn"
 _WHILE: "while"
-ask: var _SPACE+ _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
+ask: var _SPACE _IS _SPACE _ASK _SPACE + (_SPACE | text | punctuation)*
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text ((_COMMA _SPACE|_COMMA) text)+
-command: print | ask | assign | assign_list | invalid_space | invalid
+command: print | ask | turtle | assign | assign_list | invalid_space | invalid
 echo: _ECHO (_SPACE text)?
 index : DIGIT+
 invalid: textwithoutspaces text?
-invalid_space: _SPACE+ text
+invalid_space: _SPACE text
 list_access: var " at " (index | random) -> list_access //todo: could be merged with list_access_var?
 print: _PRINT _SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*
 program: _EOL* command (_SPACE)* (_EOL+ command (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
@@ -63,5 +65,6 @@ punctuation : PUNCTUATION -> punctuation
 random : "random" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
 start: program
 text: /([^\r\n,!?.]+)/ -> text
-textwithoutspaces: /([^\r\n,!?. *+-]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+textwithoutspaces: /([^\r\n,!?. ]+)/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+turtle: _FORWARD (_SPACE NUMBER | _SPACE textwithoutspaces)? -> forward | _TURN (_SPACE text)? -> turn
 var: NAME -> var

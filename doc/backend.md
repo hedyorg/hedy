@@ -102,18 +102,54 @@
     - This route requires a session, otherwise it returns 403.
     - Body must be of the shape `{level: INT, name: STRING, code: STRING}`.
 
+### Classes
+
+- `GET /class/ID`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+   - Returns a template containing a table, filled with the following information: `{id: STRING, name: STRING, link: STRING, students: [{username: STRING, last_login: INTEGER|UNDEFINED, programs: INTEGER, highest_level: INTEGER|UNDEFINED, latest_shared: PROGRAM|UNDEFINED}, ...]}`.
+
+- `POST /class`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - Body must be of the shape `{name: STRING}`.
+
+- `PUT /class/ID`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+   - Body must be of the shape `{name: STRING}`.
+
+- `DELETE /class/ID`
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+
+- `GET /class/ID/join/LINK
+   - This route requires a session of an user, otherwise it returns 403.
+   - The route adds the user as a student of the class.
+   - The route returns a 302 to redirect the user that joined to `/profile`.
+
+- `DELETE /class/ID/student/STUDENT_ID
+   - This route requires a session of an user that is marked as teacher, otherwise it returns 403.
+   - The class must be owned by the user, otherwise it returns 404.
+   - The route removes a student from a class. This action can only be done by the teacher who owns the class.
+
+- `GET /hedy/l/LINK_ID`
+   - If there's a class with a LINK_ID, this route will redirect you with a 302 to the full URL for prejoining a class.
+
 ## DynamoDB
 
 ```
 table users:
-    username:    STRING (main index)
-    password:    STRING (not the original password, but a bcrypt hash of it)
-    email:       STRING (secondary index)
-    birth_year:  INTEGER|UNDEFINED
-    country:     STRING|UNDEFINED
-    gender:      m|f|UNDEFINED
-    created:     INTEGER (epoch milliseconds)
-    last_login:  INTEGER|UNDEFINED (epoch milliseconds)
+    username:             STRING (main index)
+    password:             STRING (not the original password, but a bcrypt hash of it)
+    email:                STRING (secondary index)
+    birth_year:           INTEGER|UNDEFINED
+    country:              STRING|UNDEFINED
+    gender:               m|f|o|UNDEFINED
+    created:              INTEGER (epoch milliseconds)
+    last_login:           INTEGER|UNDEFINED (epoch milliseconds)
+    prog_experience:      UNDEFINED|'yes'|'no',
+    experience_languages: UNDEFINED|['scratch'|'other_block'|'python'|'other_text']
+    classes:              UNDEFINED|[STRING, ...] (ids of the classes of which the user is a member)
 
 table tokens:
     id:       STRING (main index; for password reset tokens, id is the username)
@@ -131,6 +167,14 @@ table programs:
     lang:         STRING
     code:         STRING
     version:      STRING
+
+table classes:
+    id:       STRING (main index)
+    date:     INTEGER
+    teacher:  STRING (secondary index)
+    link:     STRING (secondary index)
+    name:     STRING
+    students: [STRING, ...]
 ```
 
 ## Test environment
@@ -145,3 +189,7 @@ test environment and then gives the result back to the client.
 The main environment passes the `session_id` to the test environment so that the test environment can use that session_id for logging. The session variables set by the test environment are read by the main environment by parsing the cookie header returned by the test environment. Other session variables set by the main environment will be available to the test environment since they will be also present in the session cookie sent by the main environment to the test environment.
 
 All the auth routes are *never* reverse proxied, to keep all the cookie setting within the scope of the main environment. The test environment, however, needs access to the same tables as the main environment to make sure that the cookies forwarded by the main environment are indeed valid. In other words, the test environment must be able to read and validate cookies. To do this, the test environment should have the same value for the environment variable `AWS_DYNAMODB_TABLE_PREFIX` as that of the main environment.
+
+Whenever enabling a test, please make sure of the following:
+1. All the code deployed in the production environment is also merged and deployed to the test environment.
+2. The `AWS_DYNAMODB_TABLE_PREFIX` configuration variable is the same for both the production and the test environment.

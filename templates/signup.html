@@ -13,7 +13,7 @@
     <input id="email" type="email">
     <br><br>
     <label>{{auth.email_repeat}}</label>
-    <input id="email_repeat" type="email">
+    <input id="mail_repeat" type="text" autocomplete="off">
     <br><br>
     <label>{{auth.password}}</label>
     <input id="password" type=password>
@@ -34,9 +34,29 @@
     <br><br>
     <label>{{auth.country}}</label>
     <select id="country"></select>
-    <br><br>
-    <label>{{auth.subscribe_newsletter}}</label>
-    <input type="checkbox" id="subscribe">
+    <div>
+      <br><br>
+      <label class="inline-block float-left">{{auth.programming_experience}}</label>
+      <div class="float-left">
+        <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
+        <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
+      </div>
+    </div>
+    <div class="clear-both hidden" id="languages">
+      <br><br>
+      <label class="inline-block float-left">{{auth.languages}}</label>
+      <div class="float-left">
+        <input type="checkbox" name="languages" value="scratch"><span class="pl-2">Scratch</span><br>
+        <input type="checkbox" name="languages" value="other_block"><span class="pl-2">{{auth.other_block}}</span><br>
+        <input type="checkbox" name="languages" value="python"><span class="pl-2">Python</span><br>
+        <input type="checkbox" name="languages" value="other_text"><span class="pl-2">{{auth.other_text}}</span><br>
+      </div>
+    </div>
+    <div class="clear-both">
+      <br>
+      <label>{{auth.subscribe_newsletter}}</label>
+      <input type="checkbox" id="subscribe">
+    </div>
     <br><br>
     <button type="submit" class="green-btn">{{auth.create_account}}</button>
     <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;">

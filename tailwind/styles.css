@@ -42,6 +42,7 @@ strong {
 
 .btn-shape {
   @apply font-bold py-2 px-4 border-b-4 rounded;
+  display: inline-block;
 }
 
 .green-btn {
@@ -128,9 +129,7 @@ pre code {
 code {
   @apply font-mono inline rounded py-1 px-2;
   background: #272822 !important;
-  /* color: #ff6188; */
-  /* Temporarily back to white because syntax highlighting in Ace is not implemented yet for all levels */
-  color: white;
+  color: #ff6188;
   font-size: 90%;
 }
 
@@ -144,7 +143,7 @@ code {
 
 .btn {
   @apply btn-shape;
-  @apply bg-blue-500 text-white border-blue-700;
+  @apply bg-blue-500 text-white border-blue-700 no-underline;
 }
 
 .btn:hover {
@@ -152,8 +151,11 @@ code {
 }
 
 .menubar-btn {
-  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl px-4 py-3 mr-4;
+  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 mr-4;
 }
+
+@screen lg { .menubar-btn { @apply px-2; }};
+@screen xl { .menubar-btn { @apply px-4; }};
 
 .codebar-btn {
   @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 mr-4;
@@ -235,10 +237,13 @@ table.users td {
 }
 
 .tab {
-  @apply py-1 px-6 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm;
+  @apply py-1 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm;
   box-shadow:
     /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
 }
+
+@screen lg { .tab { @apply px-2; }};
+@screen xl { .tab { @apply px-4; }};
 
 .tab + .tab {
   box-shadow:
@@ -247,7 +252,7 @@ table.users td {
 }
 
 .tab-selected {
-  @apply py-1 px-6 mt-0 pt-2 bg-white rounded-t-lg border-t-8 border-r border-l border-pink-500 text-sm;
+  @apply mt-0 pt-2 bg-white rounded-t-lg border-t-8 border-r border-l border-pink-500 text-sm;
   box-shadow: none !important;
 }
 

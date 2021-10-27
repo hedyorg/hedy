@@ -1,22 +1,54 @@
       {# TABS #}
       <div>
         <div class="flex cursor-pointer flex-end">
-        <a tabindex="0" href="#" data-tab="t-level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
-        {% for assignment in adventure_assignments %}
+          {% for level_inf in level_info1 %}
+          {% if level_inf == level_nr %}
+          <a  href="{{url_for('index', level=level_inf)}}"  class=" block text-black no-underline font-light tab level-selected" >level {{level_inf}}</a>
+          {% elif level_inf|int > lock_level %}
+          <a   class="greytab text-black no-underline font-light" ><i>level {{level_inf}}</i></a>
+          {% else %}
+          <a  href="{{url_for('index', level=level_inf)}}"  class="block text-black no-underline font-light tab " >level {{level_inf}}</a>
+          {%endif%}
+          {% endfor %}
+        </div>
+        <div class="flex cursor-pointer flex-end">
+        {% for level_inf in level_info2 %}
+        {% if level_inf == level_nr %}
+        <a href="{{url_for('index', level=level_inf)}}"  class="block text-black no-underline font-light tab level-selected" >level {{level_inf}}</a>
+        {% elif level_inf|int > lock_level %}
+        <a    class="greytab text-black no-underline font-light" ><i>level {{level_inf}}</i></a>
+
+        {% else %}
+        <a href="{{url_for('index', level=level_inf)}}"  class="block text-black no-underline font-light tab " >level {{level_inf}}</a>
+        {%endif%}
+        {% endfor %}
+        </div>
+        <p>   </p>
+        <div class="flex cursor-pointer flex-end">
+        <a href="{{url_for('index', level=level_nr)}}"  tabindex="0"  data-tab="level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
+        
+        
+        {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <a tabindex="0" href="#" data-tab="t-{{assignment.short_name}}" class="block text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
-          {% endif %}
+            <!-- <a tabindex="0"  data-tab="{{assignment.short_name}}"   class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a> -->
+            {% if assignment.lock == '1' %}
+            <a tabindex="0"   class="block text-black no-underline font-light greytab " tabindex="0" title="编辑"  href ="javascript:return false;" onclick="return false;" ><i>{{ assignment.name }}</i></a>
+            {% else %}
+            <a tabindex="0"  data-tab="{{assignment.short_name}}"   class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
+            {% endif %}
+
+            {% endif %}
         {% endfor %}
         </ul>
       </div>
       {# PANES #}
-      <div style='width: 100%; min-height: 10em;' class="bg-white p-4 mb-8 shadow-md">
-        <div data-tabtarget="t-level">
+      <div style='width: 100%; min-height: 10em;' class="bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
+        <div data-tabtarget="level">
           {{intro_text|commonmark}}
         </div>
-        {% for assignment in adventure_assignments %}
+        {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
-            <div data-tabtarget="t-{{assignment.short_name}}" class="hidden">
+            <div data-tabtarget="{{assignment.short_name}}" class="hidden">
               {% if assignment.image %}
                 <img class="float-right w-48" src="{{static('/images/' + assignment.image)}}">
               {% endif %}

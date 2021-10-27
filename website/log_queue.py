@@ -145,7 +145,7 @@ class LogQueue:
                 # with numbers lower than next_wake)
                 self.transmit_now(next_wake)
             except Exception as e:
-                traceback.print_exc(e)
+                traceback.print_exc()
             next_wake += self.batch_window_s
 
 

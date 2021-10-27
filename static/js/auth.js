@@ -2,6 +2,9 @@ var countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'A
 
 window.auth = {
   texts: {},
+  entityify: function (string) {
+      return string.replace (/&/g, '&amp;').replace (/</g, '&lt;').replace (/>/g, '&gt;').replace (/"/g, '&quot;').replace (/'/g, '&#39;').replace (/`/g, '&#96;');
+   },
   emailRegex: /^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$/,
   redirect: function (where) {
     where = '/' + where;
@@ -13,9 +16,10 @@ window.auth = {
     });
   },
   destroy: function () {
-    if (! confirm (auth.texts.are_you_sure)) return;
-    $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
-      auth.redirect ('');
+    window.modal.confirm (auth.texts.are_you_sure, function () {
+      $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
+        auth.redirect ('');
+      });
     });
   },
   error: function (message, element, id) {
@@ -47,7 +51,7 @@ window.auth = {
       if (! values.password) return auth.error (auth.texts.please_password, 'password');
       if (values.password.length < 6) return auth.error (auth.texts.password_six, 'password');
       if (! values.email.match (window.auth.emailRegex)) return auth.error (auth.texts.valid_email, 'email');
-      if (values.email    !== values.email_repeat)    return auth.error (auth.texts.repeat_match_email,    'email_repeat');
+      if (values.email    !== values.mail_repeat)    return auth.error (auth.texts.repeat_match_email,    'mail_repeat');
       if (values.password !== values.password_repeat) return auth.error (auth.texts.repeat_match_password, 'password_repeat');
       if (values.birth_year) {
         values.birth_year = parseInt (values.birth_year);
@@ -62,16 +66,35 @@ window.auth = {
         else payload [k] = values [k];
       });
 
+      payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
+      var languages = [];
+      // We ignore the languages checkboxes if the section is hidden
+      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      if (languages.length) payload.experience_languages = languages;
+
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts.signup_success);
 
+        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
+        window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+
         var savedProgram = localStorage.getItem ('hedy-first-save');
-        if (! savedProgram) return auth.redirect ('programs');
+        var joinClass    = localStorage.getItem ('hedy-join');
+        if (! savedProgram) {
+           if (! joinClass) return auth.redirect ('programs');
+           joinClass = JSON.parse (joinClass);
+           localStorage.removeItem ('hedy-join');
+           return window.join_class (joinClass.link, joinClass.name);
+        }
+
         savedProgram = JSON.parse (savedProgram);
-        // We set up a non-falsy profile to let `saveit` know that we're logged in.
-        window.auth.profile = {};
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
+           if (joinClass) {
+             joinClass = JSON.parse (joinClass);
+             localStorage.removeItem ('hedy-join');
+             window.join_class (joinClass.link, joinClass.name, true);
+           }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
            auth.redirect (redirect || 'programs');
@@ -92,13 +115,26 @@ window.auth = {
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/auth/login', data: JSON.stringify ({username: values.username, password: values.password}), contentType: 'application/json; charset=utf-8'}).done (function () {
 
-        var savedProgram = localStorage.getItem ('hedy-first-save');
-        if (! savedProgram) return auth.redirect ('programs');
-        savedProgram = JSON.parse (savedProgram);
         // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
         window.auth.profile = {session_expires_at: Date.now () + 1000 * 60 * 60 * 24};
+
+        var savedProgram = localStorage.getItem ('hedy-first-save');
+        var joinClass    = localStorage.getItem ('hedy-join');
+        if (! savedProgram) {
+           if (! joinClass) return auth.redirect ('programs');
+           joinClass = JSON.parse (joinClass);
+           localStorage.removeItem ('hedy-join');
+           return window.join_class (joinClass.link, joinClass.name);
+        }
+
+        savedProgram = JSON.parse (savedProgram);
         window.saveit (savedProgram [0], savedProgram [1], savedProgram [2], savedProgram [3], function () {
            localStorage.removeItem ('hedy-first-save');
+           if (joinClass) {
+             joinClass = JSON.parse (joinClass);
+             localStorage.removeItem ('hedy-join');
+             window.join_class (joinClass.link, joinClass.name, true);
+           }
            var redirect = localStorage.getItem ('hedy-save-redirect');
            if (redirect) localStorage.removeItem ('hedy-save-redirect');
            auth.redirect (redirect || 'programs');
@@ -127,6 +163,13 @@ window.auth = {
         if (k === 'birth_year') payload [k] = parseInt (values [k]);
         payload [k] = values [k];
       });
+
+      payload.prog_experience = $ ('input[name=has_experience]:checked').val ();
+      var languages = [];
+      // We ignore the languages checkboxes if the section is hidden
+      if ($ ('#languages').is (':visible')) $ ('input[name=languages]').filter (':checked').map (function (v) {languages.push ($ (this).val ())});
+      // When updating the profile, we can remove all languages, so in this case we send the empty array. This doesn't happen on signup.
+      payload.experience_languages = languages;
 
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
@@ -192,23 +235,24 @@ window.auth = {
   },
   markAsTeacher: function (username, is_teacher) {
     $.ajax ({type: 'POST', url: '/admin/markAsTeacher', data: JSON.stringify ({username: username, is_teacher: is_teacher}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
+      window.modal.alert (['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join (' '));
     }).fail (function (error) {
       console.log (error);
-      alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
+      window.modal.alert (['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join (' '));
     });
   },
 
   changeUserEmail: function (username, email) {
-    var correctedEmail = prompt ('Please enter the corrected email', email);
-    if (correctedEmail === email) return;
-    if (! correctedEmail.match (window.auth.emailRegex)) return alert ('Please enter a valid email.');
-    $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
-      alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
-      location.reload ();
-    }).fail (function (error) {
-      console.log (error);
-      alert (['Error when changing the email for User', username].join (' '));
+    window.modal.prompt ('Please enter the corrected email', function (correctedEmail) {
+      if (correctedEmail === email) return;
+      if (! correctedEmail.match (window.auth.emailRegex)) return window.modal.alert ('Please enter a valid email.');
+      $.ajax ({type: 'POST', url: '/admin/changeUserEmail', data: JSON.stringify ({username: username, email: correctedEmail}), contentType: 'application/json; charset=utf-8'}).done (function () {
+        window.modal.alert (['Successfully changed the email for User', username, 'to', correctedEmail].join (' '));
+        location.reload ();
+      }).fail (function (error) {
+        console.log (error);
+        window.modal.alert (['Error when changing the email for User', username].join (' '));
+      });
     });
   },
 }
@@ -230,22 +274,39 @@ $ ('.auth input').get ().map (function (el) {
 
 $.ajax ({type: 'GET', url: '/auth/texts' + window.location.search}).done (function (response) {
   auth.texts = response;
-});
 
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+   $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
+     if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
 
-  auth.profile = response;
-  if ($ ('#profile').html ()) {
-    $ ('#username').html (response.username);
-    $ ('#email').val (response.email);
-    $ ('#birth_year').val (response.birth_year);
-    $ ('#gender').val (response.gender);
-    $ ('#country').val (response.country);
-  }
-}).fail (function (response) {
-  if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+     auth.profile = response;
+     if ($ ('#profile').html ()) {
+       $ ('#username').html (response.username);
+       $ ('#email').val (response.email);
+       $ ('#birth_year').val (response.birth_year);
+       $ ('#gender').val (response.gender);
+       $ ('#country').val (response.country);
+       if (response.prog_experience) {
+         $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
+         if (response.prog_experience === 'yes') $ ('#languages').show ();
+       }
+       (response.experience_languages || []).map (function (lang) {
+          $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
+       });
+       $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class) {
+          return '<li>' + auth.entityify (Class.name) + '</li>';
+       }).join (''));
+       if (response.teacher_classes) {
+          $ ('#teacher_classes ul').html ((response.teacher_classes || []).map (function (Class) {
+             return '<li><a href="/class/' + Class.id + window.location.search + '">' + auth.entityify (Class.name) + '</a> (' + Class.students.length + ' ' + window.auth.texts.students + ')</li>';
+          }).join (''));
+          $ ('#teacher_classes').show ();
+          $ ('#student_classes').hide ();
+       }
+     }
+   }).fail (function (response) {
+     if (window.location.pathname.indexOf (['/my-profile']) !== -1) auth.redirect ('login');
+   });
 });
 
 if (window.location.pathname === '/reset') {
@@ -269,7 +330,7 @@ if (window.location.pathname === '/signup') {
   }
 }
 
-$ ('#email, #email_repeat').on ('cut copy paste', function (e) {
+$ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
 });

@@ -1,1095 +1,581 @@
- //  MODE LEVEL 1 SETUP
-define('ace/mode/level1', [], function(require, exports, module) {
+// Basic highlighter rules we can use in most levels
+// - Highlighters always begin in the 'start' state, and see line by line (no newlines!)
+// - We try to recognize as many commands and tokens as possible in 'start', only deviating
+//   to another state to avoid highlighting something.
+// - 'expression_eol' is the state to contain arbitrary values that will always eat the rest of the line
+// - 'gobble' is the state that will eat whatever is left in the line and go back to 'start'
+function baseRules() {
+  return {
+    // gobble is a state in which we can read anything (.*), used after print
+    gobble: [
+      {
+        regex: '.*',
+        token: 'text',
+        next: 'start',
+      }
+    ],
 
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level1_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 1
-define('ace/mode/level1_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print "
-      },{
-          token: "keyword",
-          regex: "^ask "
+    // this function creates two rules, one to recognize strings and at random within a line (staying in the same state)
+    // and one where it is recognized at the end of the line (going back to start)
+    expression_eol: finishLine([
+      {
+        regex: "'[^']*'",
+        token: 'constant.character',
       },
       {
-          token: "keyword",
-          regex: "^echo "
-      },{
-          token: "comment",
-          regex: "#"
-      }],
-
-    };
-    this.normalizeRules();
+        regex: 'at random',
+        token: 'keyword'
+      },
+      {
+        regex: '$', // $ matches with end of line
+        token: 'text',
+      },
+    ]),
   };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
- //  MODE LEVEL 2 SETUP
-define('ace/mode/level2', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level2_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 2
-define('ace/mode/level2_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print ",
-        next: "print rest"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "rest"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 3 SETUP
-define('ace/mode/level3', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level3_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 3
-define('ace/mode/level3_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-        next: "rest"
-      }],
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "rest"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 4 SETUP
-define('ace/mode/level4', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level4_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 4
-define('ace/mode/level4_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-        //next: "rest"
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " else ",
-        next: "ifElseSpace"
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      }],
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 5 SETUP
-define('ace/mode/level5', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level5_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 5
-define('ace/mode/level5_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " else ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^repeat "
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "repeat "
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$|' ",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-
-//  MODE LEVEL 6 SETUP
-define('ace/mode/level6', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level6_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 6
-define('ace/mode/level6_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " else ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^repeat "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "repeat "
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
+}
+
+const LEVELS = [
+  {
+    name: 'level1',
+    rules: pipe(baseRules(),
+      rule_print('gobble'),
+      rule_turtle(),
+      recognize('start', {
+        regex: 'echo ',
+        token: 'keyword',
+        next: 'gobble',
+      }),
+      recognize('start', {
+        regex: 'ask ',
+        token: 'keyword',
+        next: 'gobble',
+      }),
+    ),
+  },
+  {
+    // Adds lists and 'at random'
+    name: 'level2',
+    rules: pipe(baseRules(),
+
+      rule_print('expression_eol'),
+      rule_isAsk('gobble'),
+      rule_is('gobble'),
+
+      rule_turtle(),
+
+    ),
+  },
+  {
+    // Adds quoted text
+    name: 'level3',
+    rules: pipe(baseRules(),
+      rule_turtle(),
+      rule_print('expression_eol'),
+      rule_isAsk(),
+      rule_is(),
+    ),
+  },
+  {
+    // Adds if/else
+    name: 'level4',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+    ),
+  },
+  {
+    // Adds repeat
+    name: 'level5',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
+    ),
+  },
+  {
+    // Adds arithmetic
+    name: 'level6',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
+      rule_arithmetic(),
+    ),
+  },
+  {
+    // Adds indented blocks -- no changes to highlighter necessary
+    name: 'level7',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
+      rule_arithmetic(),
+    ),
+  },
+  {
+    // Replaces 'repeat' with 'for'
+    name: 'level8and9',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRange(),
+    ),
+  },
+  {
+    // Nesting of 'for' loops (no changes necessary)
+    name: 'level10',
+    rules: pipe(baseRules(),
+      rule_print(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRange(),
+    ),
+  },
+  {
+    // Adding fncall parens
+    name: 'level11',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+// ----------------------------------------------------------------
+//  Everything below this line hasn't been done yet
+// ----------------------------------------------------------------
+  {
+    name: 'level11',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level12',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level13',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level14',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level15',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level16',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level17and18',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level19',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level20',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level21',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+  {
+    name: 'level22',
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_arithmetic(),
+      rule_forRangeParen(),
+    ),
+  },
+];
+
+
+/**
+ * From a list of rules, duplicate all rules
+ *
+ * - 1 is the rule that's given
+ * - 2 is the same rule, adding an '$' which returns to the 'start' state
+ *
+ * 2nd one comes first to have the right precedence.
+ */
+function finishLine(rules) {
+  const ret = [];
+  for (const rule of rules) {
+    if (rule.regex) {
+      ret.push({
+        regex: rule.regex + '$',
+        token: rule.token,
+        next: 'start',
+      });
+    }
+    ret.push(rule);
+  }
+  return ret;
+}
+
+/**
+ * Add a single rule, or multiple rules, to a given state, or multiple states
+ *
+ * Examples:
+ *
+ * - recognize('start', { regex, token, next })
+ * - recognize(['start', 'expression'], { regex, token, next })
+ * - recognize('start', [{ ... }, {...}])
+ */
+function recognize(stateOrStates, ruleOrRules) {
+  return (rules) => {
+    if (!Array.isArray(stateOrStates)) {
+      stateOrStates = [stateOrStates];
+    }
+
+    for (const state of stateOrStates) {
+      if (!rules[state]) {
+        rules[state] = [];
       }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
+      if (Array.isArray(ruleOrRules)) {
+        rules[state].push(...ruleOrRules);
+      } else {
+        rules[state].push(ruleOrRules);
       }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      }],
+    }
 
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
+    return rules;
   };
+}
 
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 7 SETUP
-define('ace/mode/level7', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level7_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
+/**
+ * comp(f1, f2, f3, ...)
+ *
+ * Returns f1 ○ f2 ○ f3 ○ ...
+ */
+function comp(...fns) {
+  return (val) => {
+    for (const fn of fns) {
+      val = fn(val);
+    }
+    return val;
   };
-  oop.inherits(Mode, TextMode);
+}
 
-  (function() {
-    this.lineCommentStart = "#";
+/**
+ * pipe(X, f1, f2, f3, ...)
+ *
+ * Returns ...(f3(f2(f1(X)))
+ *
+ * (Same as X |> f1 |> f2 |> f3 |> ...)
+ */
+function pipe(val, ...fns) {
+  return comp(...fns)(val);
+}
 
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
+/**
+ * Add a 'print' rule, going to the indicated 'next' state (start if omitted)
+ */
+function rule_print(next) {
+  return recognize('start', {
+    regex: 'print',
+    token: 'keyword',
+    next: next ?? 'start',
+  });
+}
 
-  }).call(Mode.prototype);
+/**
+ * Add an 'is ask' rule, going to the indicated 'next' state (expression_eol if omitted)
+ */
+function rule_isAsk(next) {
+  return recognize('start', {
+    regex: '(\\w+)( is ask )',
+    token: ['text', 'keyword'],
+    next: next ?? 'expression_eol',
+  });
+}
 
-  exports.Mode = Mode;
-});
+/**
+ * Add an 'is' rule, going to the indicated 'next' state (expression_eol if omitted)
+ */
+function rule_is(next) {
+  return recognize('start', {
+    regex: '(\\w+)( is )',
+    token: ['text', 'keyword'],
+    next: next ?? 'expression_eol',
+  });
+}
+
+/**
+ * Add a 'print' rule with brackets
+ */
+function rule_printParen() {
+  return recognize('start', {
+    regex: '(print)(\\()',
+    token: ['keyword', 'paren.lparen'],
+    next: 'start'
+  });
+}
+
+function rule_turtle() {
+    return comp(
+      recognize('start', {
+        regex: 'turn (left|right)?',
+        token: 'keyword',
+        next: 'start',
+      }),
+      recognize('start', {
+        regex: 'forward',
+        token: 'keyword',
+        next: 'start',
+      })
+    )
+}
 
 
- //  Syntax rules level 7
-define('ace/mode/level7_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
 
-  var ExampleHighlightRules = function() {
 
-    this.$rules = {
 
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^repeat "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      }],
+/**
+ * Add an 'is input' rule with brackets
+ */
+function rule_isInputParen() {
+  return recognize('start', {
+    regex: '(\\w+)( is input)(\\()',
+    token: ['text', 'keyword', 'paren.lparen'],
+    next: 'start'
+  });
+}
 
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "repeat "
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
+/**
+ * Recognize expressions as part of the 'start' state
+ */
+function rule_expressions() {
+  return comp(
+    recognize('start', {
+      regex: "'[^']*'",
+      token: 'constant.character',
+    }),
+    recognize('start', {
+      regex: 'at random',
+      token: 'keyword'
+    }),
+    recognize('start', {
+      regex: '[, ]+',
+      token: 'punctuation.operator',
+    }),
+  );
+}
+
+
+/**
+ * Add highlighting for if/else, also add a condition
+ */
+function rule_ifElse() {
+  return comp(
+    recognize('start', {
+      regex: 'if',
+      token: 'keyword',
+      next: 'condition',
+    }),
+    recognize('start', {
+      regex: 'else',
+      token: 'keyword',
+    }),
+    recognize('condition', {
+      regex: 'is',
+      token: 'keyword',
+      next: 'start',
+    }),
+  );
+}
+
+/**
+ * Add numbers and arithmetic
+ */
+function rule_arithmetic() {
+  return recognize(['start', 'expression_eol'], [
+    {
+      regex: ' \\* ',
+      token: 'keyword',
+    },
+    {
+      regex: ' \\+ ',
+      token: 'keyword',
+    },
+    {
+      regex: ' \\- ',
+      token: 'keyword',
+    },
+  ]);
+}
+
+/**
+ * Add highlighting for repeat
+ */
+function rule_repeat() {
+  return recognize('start', {
+    regex: '(repeat)( \\w+ )(times)',
+    token: ['keyword', 'text', 'keyword'],
+  });
+}
+
+function rule_forRange() {
+  return recognize('start', {
+    regex: '(for )(\\w+)( in range )(\\w+)( to )(\\w+)',
+    token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
+  });
+}
+
+function rule_forRangeParen() {
+  return recognize('start', {
+    regex: '(for )(\\w+)( in range)(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
+  });
+}
+
+/**
+ * Modify the given ruleset, replacing literal spaces with "one or more spaces"
+ */
+function loosenRules(rules) {
+  for (const ruleSets of Object.values(rules)) {
+    for (const rule of ruleSets) {
+      if (rule.regex && !rule._loosened) {
+        rule.regex = rule.regex.replace(/ /g, ' +');
+        rule._loosened = true;
       }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      }],
+    }
+  }
+  return rules;
+}
 
+// Define the modes based on the level definitions above
+for (const level of LEVELS) {
 
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        defaultToken : "text"
-      }],
+  // This is a local definition of the file 'ace/mode/level1.js', etc.
+  define('ace/mode/' + level.name, [], function(require, exports, module) {
+    var oop = require('ace/lib/oop');
+    var TextMode = require('ace/mode/text').Mode;
+    var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
 
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
+    function ThisLevelHighlightRules() {
+      this.$rules = loosenRules(level.rules);
+      console.log(level.name, this.$rules);
+      this.normalizeRules();
     };
-    this.normalizeRules();
-  };
+    oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
 
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 8 and 9 SETUP
-define('ace/mode/level8and9', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level8and9_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
+    function Mode() {
+      this.HighlightRules = ThisLevelHighlightRules;
     };
+    oop.inherits(Mode, TextMode);
 
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 8 and 9
-define('ace/mode/level8and9_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "keyword",
-        regex: "^for ",
-        next: "forloop1"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range ",
-        next: "forloop2"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: " to ",
-        next: "forloop3"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop3": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'",
-        next: "start"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
-
-//  MODE LEVEL 10 SETUP
-define('ace/mode/level10', [], function(require, exports, module) {
-
-  var oop = require("ace/lib/oop");
-  var TextMode = require("ace/mode/text").Mode;
-  var Tokenizer = require("ace/tokenizer").Tokenizer;
-  var ExampleHighlightRules = require("ace/mode/level10_highlight_rules").ExampleHighlightRules;
-
-  var Mode = function() {
-    this.HighlightRules = ExampleHighlightRules;
-  };
-  oop.inherits(Mode, TextMode);
-
-  (function() {
-    this.lineCommentStart = "#";
-
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/mynew_worker", "NewWorker");
-        worker.attachToDocument(session.getDocument());
-        worker.on("errors", function(e) {
-            session.setAnnotations(e.data);
-        });
-        return worker;
-    };
-
-  }).call(Mode.prototype);
-
-  exports.Mode = Mode;
-});
-
-
- //  Syntax rules level 10
-define('ace/mode/level10_highlight_rules', [], function(require, exports, module) {
-  var oop = require("ace/lib/oop");
-  var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-  var ExampleHighlightRules = function() {
-
-    this.$rules = {
-
-      "start": [{
-        token: "keyword",
-        regex: "^print | print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: " is ask ",
-        next: "rest"
-      },{
-        token: "keyword",
-        regex: " is ",
-      },{
-        token: "keyword",
-        regex: "^if |    if ",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: "^else$",
-        next: "ifElseSpace"
-      },{
-        token: "keyword",
-        regex: " \\* "
-      },{
-        token: "keyword",
-        regex: " \\+ "
-      },{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "keyword",
-        regex: "^for | for ",
-        next: "forloop1"
-      }],
-
-      "forloop1": [{
-        token: "keyword",
-        regex: " in range ",
-        next: "forloop2"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop2": [{
-        token: "keyword",
-        regex: " to ",
-        next: "forloop3"
-      },{
-        defaultToken : "text"
-      }],
-
-      "forloop3": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "ifElseSpace": [{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "print ",
-        next: "print option"
-      },{
-        token: "keyword",
-        regex: "is "
-      },{
-        token: "keyword",
-        regex: " \\* "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\+ "
-      }
-      ,{
-        token: "keyword",
-        regex: " \\- "
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      }],
-
-
-      "print option": [{
-        token: "constant.character",
-        regex: "'",
-        next: "print rest"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }],
-
-      "print rest": [{
-        token: "keyword",
-        regex: " at random | at random$",
-      },{
-        token: "constant.character", // constant.character
-        regex: "'$",
-        next: "start"
-      },{
-        token: "constant.character",
-        regex: "' ",
-        next: "print option"
-      },{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "constant.character"
-      }],
-
-      "rest": [{
-        token: "text",
-        regex: "$",
-        next: "start"
-      },{
-        defaultToken : "text"
-      }]
-    };
-    this.normalizeRules();
-  };
-
-  oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-  exports.ExampleHighlightRules = ExampleHighlightRules;
-
-});
+    exports.Mode = Mode;
+  });
+}

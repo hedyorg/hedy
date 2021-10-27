@@ -1,4 +1,6 @@
 import collections
+import os
+
 import attr
 import glob
 from os import path
@@ -8,9 +10,10 @@ from flask_helpers import render_template
 
 import courses
 from website.auth import current_user
-from utils import type_check
 import re
 import utils
+from config import config
+from website import database
 
 class Translations:
   def __init__(self):
@@ -36,17 +39,26 @@ class Translations:
     return d
 
 
-def render_assignment_editor(request, course, level_number, assignment_number, menu, translations, version, loaded_program, loaded_program_name, adventure_assignments, adventure_name):
+def render_code_editor_with_tabs(request, course, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
+
+  if os.path.isfile(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml'):
+    quiz_data = utils.load_yaml(f'coursedata/quiz/quiz_questions_lvl{level_number}.yaml')
+    quiz_data_level = quiz_data['level']
+  else:
+    quiz_data_level = 0
 
   sublevel = None
-  if type_check (level_number, 'str') and re.match ('\d+-\d+', level_number):
+  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
     sublevel     = int (level_number [level_number.index ('-') + 1])
     level_number = int (level_number [0:level_number.index ('-')])
 
-  assignment = course.get_assignment(level_number, assignment_number, sublevel)
+  defaults = course.get_default_text(level_number, sublevel)
 
-  if not assignment:
+  if not defaults:
     abort(404)
+
+  if course.custom:
+    adventures = [x for x in adventures if x['short_name'] in course.adventures]
 
   arguments_dict = {}
 
@@ -54,32 +66,32 @@ def render_assignment_editor(request, course, level_number, assignment_number, m
   arguments_dict['course'] = course
   arguments_dict['level_nr'] = str(level_number)
   arguments_dict['sublevel'] = str(sublevel) if (sublevel) else None
-  arguments_dict['assignment_nr'] = assignment.step  # Give this a chance to be 'None'
   arguments_dict['lang'] = course.language
-  arguments_dict['level'] = assignment.level
+  arguments_dict['level'] = defaults.level
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < course.max_level() else None
-  arguments_dict['next_assignment'] = int(assignment_number) + 1 if int(assignment_number) < course.max_step(level_number) else None
+  arguments_dict['lock_level'] = (database.Database()).get_level(current_user (request) ['username']) 
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['docs'] = [attr.asdict(d) for d in assignment.docs]
-  arguments_dict['auth'] = translations.data [course.language] ['Auth']
+  arguments_dict['auth'] = translations.get_translations (course.language, 'Auth')
   arguments_dict['username'] = current_user(request) ['username']
   arguments_dict['loaded_program'] = loaded_program
-  arguments_dict['loaded_program_name'] = loaded_program_name
-  arguments_dict['adventure_assignments'] = adventure_assignments
+  arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
+  arguments_dict['quiz_data_level'] = quiz_data_level
+  arguments_dict['quiz_enabled'] = config['quiz-enabled'] and course.language == 'nl'
+
+  # level info 
+  arguments_dict['level_info1'] = ['1', '2', '3', '4', '5', '6', '7', '8',
+                                  '9', '10', '11', '12']
+  arguments_dict['level_info2']   =  [ '13', '14', '15', '16','17']
 
   # Translations
   arguments_dict.update(**translations.get_translations(course.language, 'ui'))
 
   # Actual assignment
-  arguments_dict.update(**attr.asdict(assignment))
-
-  # Add markdowns to docs
-  for doc in arguments_dict ['docs']:
-    doc ['markdown'] = (course.docs.get(int(level_number), doc ['slug']) or {'markdown': ''}).markdown
+  arguments_dict.update(**attr.asdict(defaults))
 
   return render_template("code-page.html", **arguments_dict)

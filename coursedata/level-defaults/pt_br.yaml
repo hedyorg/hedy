@@ -34,12 +34,12 @@
         O `ask` mudou no nível 2, você também salva a resposta com um nome:
 
         ```
-        resposta is Qual é o seu nome?
+        resposta is ask Qual é o seu nome?
         ```
 
         A impressão ainda funciona como no Nível 1 e você não precisa mais de um ultrassom.
 
-        No nível 2, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com 'at random' (você diz: et ren-dom).
+        No nível 2, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com `at random` (você diz: et ren-dom).
 
         Você encontrará todos os códigos do nível 2 na barra esquerda. Também existem guias com atribuições.
     start_code: "print olá mundo!"
@@ -65,7 +65,7 @@
 3:
     start_code: "print 'Olá mundo'"
     intro_text: |
-        `ask` funciona da mesma forma no nível 3 e no nível 2, mas `print` é diferente agora.
+        `ask` e` print` mudam no nível 3.
 
         Você deve colocar o texto que deseja imprimir entre aspas.
 
@@ -89,13 +89,13 @@
             print 'meu nome is ' nome
     -   name: "ask"
         explanation: "Pergunta algo com `ask`."
-        example: "Exemplo: cor is ask Qual a sua cor favorita?"
+        example: "Exemplo: cor is ask 'Qual a sua cor favorita?'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             print cor ' é a sua favorita!'
 4:
     start_code: |-
-        nome is ask qual o seu nome?
+        nome is ask 'qual o seu nome?'
         if nome is Hedy print 'legal!' else print 'não tão legal'
     intro_text: |
         `ask` e `print` ainda funcionam como no nível 3.
@@ -104,7 +104,7 @@
 
          ## Exemplo de código Hedy
          ```
-         nome is ask qual é o seu nome?
+         nome is ask 'qual é o seu nome?'
          if nome is Hedy print 'legal' else print 'não tão legal'
          ```
 
@@ -120,15 +120,15 @@
         demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
     -   name: "ask"
         explanation: "Pergunta algo com `ask`."
-        example: "Exemplo: cor is ask Qual a sua cor favorita?"
+        example: "Exemplo: cor is ask 'Qual a sua cor favorita?'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             print cor ' é a sua favorita!'
     -   name: "if"
         explanation: "Faça uma escolha com `if`."
         example: "Exemplo: if cor is verde print 'bonita!' else print 'não gostei'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             if cor is verde print 'bonita!' else print 'não gostei'
 5:
     start_code: "repeat 3 times print 'Hedy é divertido!'"
@@ -147,21 +147,21 @@
         demo_code: "print 'Olá seja bem-vindo(a) à Hedy.'"
     -   name: "ask"
         explanation: "Pergunta algo com `ask`."
-        example: "Exemplo: cor is ask Qual a sua cor favorita?"
+        example: "Exemplo: cor is ask 'Qual a sua cor favorita?'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             print cor ' is your favorite!'
     -   name: "if"
         explanation: "Faz uma escolha com `if`."
         example: "Exemplo: if cor is verde print 'bonita!' else print 'não gostei'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             if cor is verde print 'bonita!' else print 'não gostei'
     -   name: "repeat"
         explanation: "`repeat` e `if` juntos"
         example: "Exemplo: if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'
 6:
     start_code: "print '5 vezes 5 é ' 5 * 5"
@@ -187,17 +187,17 @@
         explanation: "Printa o texto usando aspas simples"
         example: "Exemplo: print '5 vezes 5 é ' 5 * 5"
         demo_code: "print '5 vezes 5 é ' 5 * 5"
-    -   name: "ask e if com operações"
+    -   name: "ask 'e if com operações'"
         explanation: "Pede por uma operação e verifique se está correta."
-        example: "Exemplo: resposta is ask Quanto é 10 mais 10?"
+        example: "Exemplo: resposta is ask 'Quanto é 10 mais 10?'"
         demo_code: |-
-            resposta is ask Quanto é 10 mais 10?
+            resposta is ask 'Quanto é 10 mais 10?'
             if resposta is 20 print 'Acertou!' else print 'Errou! Tente de novo'
     -   name: "repeat"
         explanation: "`repeat` e `if` juntos"
         example: "Example: if produto is 50 repeat 3 times print 'correto!' else repeat 5 times print 'incorreto!'"
         demo_code: |-
-            produto is ask Quanto e 10 vezes 5?
+            produto is ask 'Quanto e 10 vezes 5?'
             if produto is 50 repeat 3 times print 'correto!' else repeat 5 times print 'incorreto!'
 7:
     start_code: |-
@@ -205,11 +205,22 @@
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
     intro_text: |
-        Os comandos `ask` e `print` ainda funcionam da mesma forma. Mas `if` e `repeat` mudaram! Você agora pode executar grupos de códigos juntos, mas você terá que identar o código. Isso significa colocar espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha. ## Exemplo de código Hedy ``` repeat 5 times
+        Os comandos `ask` e `print` ainda funcionam da mesma forma. Mas `if` e `repeat` mudaram!
+        Você agora pode executar grupos de códigos juntos, mas você terá que identar o código.
+        Isso significa colocar espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha.
+
+        ## Exemplo de código Hedy
+        ```
+        repeat 5 times
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
         ```
-        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código. ## Exemplo de código Hedy ``` cor is ask Qual a sua cor favorita? if cor is verde
+        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
+
+        ## Exemplo de código Hedy
+        ```
+        cor is ask 'Qual a sua cor favorita?'
+        if cor is verde
             repeat 3 times
                 print 'bonita!'
         else
@@ -224,9 +235,9 @@
         demo_code: "print '5 vezes 5 é ' 5 * 5"
     -   name: "if com múltiplas linhas"
         explanation: "Pergunta à resposta de uma soma e verifica se está correta. Agora nós podemos printar 2 linhas."
-        example: "Exemplo: resposta is ask Quanto é 5 mais 5?"
+        example: "Exemplo: resposta is ask 'Quanto é 5 mais 5?'"
         demo_code: |-
-            resposta is ask Quanto é 5 mais 5?
+            resposta is ask 'Quanto é 5 mais 5?'
             if resposta is 10
                 print 'Muito bem!'
                 print 'De fato, a resposta foi ' resposta
@@ -237,12 +248,25 @@
         explanation: "`if` e `repeat` juntos"
         example: "Exemplo: if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
         demo_code: |-
-            cor is ask Qual a sua cor favorita?
+            cor is ask 'Qual a sua cor favorita?'
             if cor is verde
                 repeat 3 times
                     print 'bonita!'
             else
                 repeat 5 times
                     print 'não gostei'
-
-
+8:
+    start_code: |-
+        for contador in range 1 to 5
+            print contador
+    intro_text:
+        "O `print` continua funcionando do mesmo modo, mas `repeat` é substituído por `for`!
+        Agora dá para escrever `for contador in range 1 to 5` e usar `contador` no seu programa. Experimente para ver o que acontece!
+        Lembre-se de usar endentações depois dos comandos `for` e `if` (que significa começar uma frase com quatro espaços)"
+    commands:
+    -   name: "for loop"
+        explanation: "Trocamos `repeat` por `for` e acrescentamos uma faixa de valores"
+        example: "for contador in range 1 to 5"
+        demo_code: |-
+            for contador in range 1 to 5
+                print contador

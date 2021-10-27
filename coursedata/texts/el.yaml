@@ -6,7 +6,10 @@ ui:
     contact: 'Επικοινωνία'
     video_title: 'Βίντεο'
     run_code_button: 'Εκτέλεσε κώδικα'
+    read_code_label: 'Εκφωνούν'
     save_code_button: 'Αποθήκευσε κώδικα'
+    edit_code_button: "Edit code"
+    share_code_button: "Save & share code"
     regress_button: 'Επιστροφή στο επίπεδο'
     advance_button: 'Πήγαινε στο επίπεδο'
     advance_step_button: 'Πήγαινε στην άσκηση'
@@ -21,6 +24,7 @@ ui:
     switch_to_adventures: Πήγαινε σε περιπέτειες
     switch_to_another_adventure: Επίλεξε μια διαφορετική περιπέτεια
     commands_title: Εντολές
+    by: "by"
 ClientErrorMessages:
     Transpile_warning: 'Προσοχή!'
     Transpile_error: 'Δεν μπορούμε να εκτελέσουμε το πρόγραμμά σου.'
@@ -36,7 +40,7 @@ HedyErrorMessages:
     Invalid Space: 'Ουπς! Ξεκίνησες μια γραμμή με κενό στη γραμμή {line_number}. Τα κενά μπερδεύουν τους υπολογιστές, μπορείς να τα αφαιρέσεις;'
     Parse: 'Ο κώδικας που εισήγαγες δεν είναι έγκυρος κώδικας Hedy. Υπάρχει ένα σφάλμα στη γραμμή {location[0]}, στη θέση {location[1]}. Πληκτρολόγησες {character_found}, όμως αυτό δεν επιτρέπεται.'
     Unquoted Text: 'Πρόσεξε. Αν εμφανίσεις κάτι το κείμενο θα πρέπει να ξεκινάει και να τελειώνει με εισαγωγικά. Κάπου ξέχασες ένα.'
-    VarUndefined: 'Προσπάθησες να εμφανίσεις το {name}, όμως δεν το αρχικοποίησες.'
+    Var Undefined: 'Προσπάθησες να εμφανίσεις το {name}, όμως δεν το αρχικοποίησες.'
     space: 'ένα κενό'
     comma: 'ένα κόμμα'
     question mark: 'ένα ερωτηματικό'
@@ -65,6 +69,7 @@ Auth:
     country: 'Χώρα'
     subscribe_newsletter: 'Εγγράψου στο newsletter'
     already_account: 'Έχεις ήδη λογαριασμό;'
+    login_long: 'Συνδέσου στο λογαριασμό σου'
     login: 'Σύνδεση'
     no_account: 'Ακόμα χωρίς λογαριασμό;'
     profile: 'Το προφίλ μου'
@@ -119,6 +124,12 @@ Auth:
     email_reset_password_body: |-
         Το Hedy συνθηματικό σου επαναφέρθηκε σε ένα νέο. Αν αυτό ήταν δική σου ενέργεια, όλα καλα.
         Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
+    programming_experience: "Do you have programming experience?"
+    yes: "Yes"
+    no: "No"
+    languages: "Which of these programming languages have you used before?"
+    other_block: "Another block language"
+    other_text: "Another text language"
 
     # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: 'Τα προγράμματά μου'
@@ -130,7 +141,27 @@ Auth:
     unshare_success_detail: "Program unshared successfully"
     copy_clipboard: "Successfully copied to clipboard"
     answer_question: 'Δεν μπορείς να εκτελέσεις το πρόγραμμα πριν να απαντήσεις την ερώτηση'
-    login_long: Συνδέσου στο λογαριασμό σου
+    must_be_logged: "You must be logged in to save a program"
+    class_name_prompt: "Please enter the name of the class"
+    delete_class_prompt: "Are you sure you want to delete the class?"
+    remove_student_prompt: "Are you sure you want to remove the student from the class?"
+    student_classes: "My classes"
+    teacher_classes: "My classes"
+    create_class: "Create new class"
+    delete_class: "Delete class permanently"
+    class_link: "Link to join class"
+    prompt_join_class: "Do you want to join this class?"
+    join_class: "Join class"
+    class_overview: "Class overview"
+    class_join_confirmation: "You have successfully joined the class"
+    last_login: "Last login"
+    highest_level_reached: "Highest level reached"
+    number_programs: "Number of programs"
+    latest_shared_program: "Latest shared program"
+    remove_student: "Remove student"
+    students: "students"
+    copy_class_link: "Copy link to join class"
+    join_prompt: "You need to have an account to join a class. Would you like to login now?"
 Programs:
     recent: 'Τα πρόσφατα προγράμματά μου'
     level: 'Επίπεδο'

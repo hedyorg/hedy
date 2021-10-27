@@ -36,8 +36,8 @@ class LogRecord:
         end_time = time.time()
         if not IS_WINDOWS:
             end_rusage = resource.getrusage(resource.RUSAGE_SELF)
-            user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime),
-            sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime),
+            user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime)
+            sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime)
         else:
             user_ms = None
             sys_ms = None
@@ -112,6 +112,7 @@ class NullRecord(LogRecord):
     def _forget_timer(self, _): pass
     def _terminate_running_timers(self): pass
     def inc_timer(self, _, _2): pass
+    def inc(self, name, amount=1): pass
 
     def record_exception(self, exc):
         self.set(fault=1, error_message=str(exc))
@@ -140,7 +141,9 @@ def finish_global_log_record(exc=None):
 
 def log_value(**kwargs):
     """Log values into the currently globally active Log Record."""
-    THREAD_LOCAL.current_log_record.set(**kwargs)
+    if hasattr(THREAD_LOCAL, 'current_log_record'):
+        # For some malformed URLs, the records are not initialized, so we check whether there's a current_log_record
+        THREAD_LOCAL.current_log_record.set(**kwargs)
 
 
 def log_time(name):
@@ -160,6 +163,19 @@ def timed(fn):
             return fn(*args, **kwargs)
 
     return wrapped
+
+def timed_as(name):
+    """Function decorator to make the given function timed into the currently active log record.
+
+    Use a different name from the actual function name.
+    """
+    def decoractor(fn):
+        @functools.wraps(fn)
+        def wrapped(*args, **kwargs):
+            with log_time(name):
+                return fn(*args, **kwargs)
+        return wrapped
+    return decoractor
 
 
 def emergency_shutdown():
