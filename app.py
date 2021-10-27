@@ -380,7 +380,6 @@ def gradual_feedback_model(code, level, gradual_feedback, language):
         response["Feedback"] = gradual_feedback["Identical_code"]
         response["Duplicate"] = True
     else:
-        response["Duplicate"] = False
         if session['feedback_level'] < 4:
             session['feedback_level'] = session['feedback_level'] + 1
         if session['feedback_level'] == 2:

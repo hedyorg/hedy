@@ -206,15 +206,19 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Feedback) {
         $ ('#feedbackbox .expand-dialog').text("▲ " + ErrorMessages['Click_expand'] + " ▲")
+        if (response.Duplicate) {
+          error.showFeedback(ErrorMessages['Feedback_duplicate'], response.Feedback);
+        } else {
           if (response.feedback_level === 3) {
             error.showFeedback(ErrorMessages['Feedback_similar_code'], response.Feedback);
           } else if (response.feedback_level == 4) {
             error.showFeedback(ErrorMessages['Feedback_new'], response.Feedback);
           } else if (response.feedback_level == 5) {
             error.showFeedback(ErrorMessages['Feedback_suggestion'], response.Feedback);
-          }  else {
+          } else {
             error.showFeedback(ErrorMessages['Feedback_error'], response.Feedback);
           }
+        }
       }
       if (response.Error) {
         var btn = $('#runit');
