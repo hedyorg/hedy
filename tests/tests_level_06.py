@@ -1,131 +1,13 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
+from tests_level_01 import HedyTester
 
-@contextmanager
-def captured_output():
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-        sys.stdout, sys.stderr = new_out, new_err
-        yield sys.stdout, sys.stderr
-    finally:
-        sys.stdout, sys.stderr = old_out, old_err
-
-
-def run_code(parse_result):
-  code = "import random\n" + parse_result.code
-  with captured_output() as (out, err):
-    exec(code)
-  return out.getvalue().strip()
-
-
-
-class TestsLevel6(unittest.TestCase):
+class TestsLevel6(HedyTester):
   level = 6
-  
-  # print should still work
-  def test_print_with_var(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print('ik heet'+str(naam))""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
 
-  def test_print_with_comma(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print 'ik heet,' naam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print('ik heet,'+str(naam))""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_transpile_turtle_basic(self):
-    result = hedy.transpile("forward 50\nturn\nforward 100", self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)
-    t.right(90)
-    t.forward(100)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-
-  def test_allow_space_after_else_line(self):
-    # can gemerged met 5?
-    #this code has a space at the end of line 2
-    code = textwrap.dedent("""\
-    a is 2
-    if a is 1 print a 
-    else print 'nee'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    a = '2'
-    if str(a) == str('1'):
-      print(str(a))
-    else:
-      print('nee')""")
-
-    self.assertEqual(expected, result.code)
-
-  def test_transpile_turtle_with_ask(self):
-    code = textwrap.dedent("""\
-    afstand is ask 'hoe ver dan?'
-    forward afstand""")
-    result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan?')
-    t.forward(afstand)
-    time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-
-  def test_print_Spanish(self):
-    code = textwrap.dedent("""\
-    print 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print('Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_transpile_ask_Spanish(self):
-    code = textwrap.dedent("""\
-    color is ask 'Cuál es tu color favorito?'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    color = input('Cuál es tu color favorito?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-
+  #repeat tests
   def test_repeat_turtle(self):
-
     code = textwrap.dedent("""\
     repeat 3 times forward 100""")
 
@@ -138,8 +20,6 @@ class TestsLevel6(unittest.TestCase):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-
-
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
@@ -150,7 +30,7 @@ class TestsLevel6(unittest.TestCase):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -162,17 +42,7 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
-
-  def test_transpile_other(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
-      result = hedy.transpile("abc felienne 123", self.level)
-    self.assertEqual('Invalid', context.exception.error_code)
-
-  # todo: a few more things repeated from 4 here?
-
-
-  # now add repeat
+    self.assertEqual(expected_output, self.run_code(result))
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times print 'me wants a cookie!'""")
@@ -181,7 +51,7 @@ class TestsLevel6(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     for i in range(int('5')):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -193,9 +63,7 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, run_code(result))
-
-
+    self.assertEqual(expected_output, self.run_code(result))
   def test_repeat_over_9_times(self):
 
     code = textwrap.dedent("""\
@@ -205,7 +73,7 @@ class TestsLevel6(unittest.TestCase):
 
     expected = textwrap.dedent("""\
     for i in range(int('10')):
-      print('me wants a cookie!')""")
+      print(f'me wants a cookie!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -221,9 +89,7 @@ class TestsLevel6(unittest.TestCase):
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
-
-    self.assertEqual(expected_output, run_code(result))
-
+    self.assertEqual(expected_output, self.run_code(result))
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\
       i is hallo!
@@ -235,8 +101,8 @@ class TestsLevel6(unittest.TestCase):
       expected = textwrap.dedent("""\
       i = 'hallo!'
       for _i in range(int('5')):
-        print('me wants a cookie!')
-      print(str(i))""")
+        print(f'me wants a cookie!')
+      print(f'{i}')""")
 
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
@@ -249,4 +115,4 @@ class TestsLevel6(unittest.TestCase):
       me wants a cookie!
       hallo!""")
 
-      self.assertEqual(expected_output, run_code(result))
+      self.assertEqual(expected_output, self.run_code(result))

@@ -8,11 +8,17 @@
     "url": "git+https://github.com/Felienne/hedy.git"
   },
   "scripts": {
-      "build": "build-tools/on-deploy.sh"
+    "build": "build-tools/heroku/on-deploy.sh"
   },
   "devDependencies": {
+    "@types/ace": "^0.0.47",
+    "@types/jquery": "^3.5.6",
+    "esbuild": "^0.13.4",
     "minify": "^7.0.1",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^1.9.6",
+    "typescript": "^4.4.3",
+    "pajv": "^1.2.0",
+    "yaml": "1.10.2"
   },
   "license": "ISC"
 }

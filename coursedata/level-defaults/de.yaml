@@ -264,6 +264,33 @@
                     print 'Bäh'
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for i in range 1 to 10
             print i
         print 'Bereit oder nicht, hier komme ich!'
@@ -280,7 +307,7 @@
             for i in range 1 to 10
               print i
             print 'Bereit oder nicht, hier komme ich!'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -292,7 +319,7 @@
     -   explanation: "Wenn wir ein `for` verwenden, müssen wir ein `:` hinter die `for`-Anweisung setzen!"
         example: "for i in range 1 to 10:"
         demo_code: |-
-            for i in range 1 to 11:
+            for i in range 1 to 12:
                 print i
             print 'Bereit oder nicht, hier komme ich!'
     -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
@@ -316,7 +343,7 @@
                 print 'a ist 2'
             else:
                 print 'a ist nicht 1 oder 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -338,7 +365,7 @@
             if farbe is blau:
                 if farbezwei is gelb:
                     print 'Zusammen ergeben wir grün!'
-11:
+12:
     start_code: |-
         alter is input('Wie alt bist du?')
         print('Also hast du bis jetzt diese Geburtstage gefeiert: ')
@@ -362,7 +389,7 @@
             for i in range(0,10):
                 print(i)
             print('Bereit oder nicht, hier komme ich!')
-12:
+13:
     start_code: |-
         fruechte is ['Apfel', 'Banane', 'Kirsche']
         print(fruechte)
@@ -395,7 +422,7 @@
             fruechte is ['Apfel', 'Banane', 'Kirsche']
             zufaellige_frucht is fruechte[random]
             print(zufaellige_frucht)
-13:
+14:
     start_code: |-
         du_bist_noch_hier is False
         bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
@@ -427,7 +454,7 @@
                   print('Das ist richtig!')
               if richtige_antwort is False:
                   print('Das ist leider falsch! Du hast noch ' 5-i ' Versuche übrig.')
-14:
+15:
     start_code: |-
         du_bist_noch_hier is False
         bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
@@ -464,7 +491,7 @@
               print('Mindestens eine Antwort ist richtig!')
           else:
               print('Beide Antworten sind falsch.')
-15:
+16:
     start_code: |-
         # Dieses Programm wird ein paar mathematische Fragen stellen
         for i in range(1,10):
@@ -490,12 +517,12 @@
             # Es ist in Hedy erstellt worden
             # Es macht nichts außer Hallo! zu auszugeben
             print('Hallo!')
-16:
+17:
     start_code: |-
         alter is input('Wie alt bist du?')
-        if alter < 12:
+        if alter < 13:
             print('Du bist jünger als ich!')
-        elif alter > 12:
+        elif alter > 13:
             print('Du bist älter als ich!')
     intro_text: |-
         Wir lernen weitere neue Elemente kennen! 
@@ -510,7 +537,7 @@
         example: "alter < 12"
         demo_code: |-
             alter is input('Wie alt bist du?')
-            if alter < 12:
+            if alter < 13:
                 print('Du bist jünger als ich!')
     -   name: "Größer"
         explanation: |-
@@ -519,9 +546,9 @@
         example: "alter > 12"
         demo_code: |-
             alter is input('Wie alt bist du?')
-            if alter > 12:
+            if alter > 13:
                 print('Du bist älter als ich!')
-17:
+18:
     start_code: |-
         richtige_antwort is False
         # wir fahren fort bis die richtige Antwort gegeben wurde!
