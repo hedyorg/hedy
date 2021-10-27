@@ -336,21 +336,21 @@ def parse():
     except hedy.InvalidSpaceException as ex:
         traceback.print_exc()
         response = invalid_space_error_to_response(ex, hedy_errors)
-        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, ex, hedy_exception=True))
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang))
     except hedy.ParseException as ex:
         traceback.print_exc()
         response = parse_error_to_response(ex, hedy_errors)
-        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, ex, hedy_exception=True))
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang))
     except hedy.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
-        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, ex, hedy_exception=True))
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang))
 
     except Exception as E:
         traceback.print_exc()
         print(f"error transpiling {code}")
         response["Error"] = str(E)
-        response.update(gradual_feedback_model(code, level, gradual_feedback, lang, E, hedy_exception=True))
+        response.update(gradual_feedback_model(code, level, gradual_feedback, lang))
 
     session['code'] = code
 
@@ -373,7 +373,7 @@ def parse():
     return jsonify(response)
 
 
-def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exception):
+def gradual_feedback_model(code, level, gradual_feedback, language):
     response = {}
 
     if session['code'] == code:
@@ -381,12 +381,12 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
         response["Duplicate"] = True
     else:
         response["Duplicate"] = False
-        if session['feedback_level'] < 5:
+        if session['feedback_level'] < 4:
             session['feedback_level'] = session['feedback_level'] + 1
         if session['feedback_level'] == 2:
-            if hedy_exception:
-                response["Feedback"] = gradual_feedback["Expanded_" + E.error_code]
-            else:
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
                 response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['feedback_level'] == 3:
             similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
@@ -396,11 +396,6 @@ def gradual_feedback_model(code, level, gradual_feedback, language, E, hedy_exce
                 response["Feedback"] = similar_code
                 session['similar_code'] = similar_code
         elif session['feedback_level'] == 4:
-            try:
-                response["Feedback"] = gradual_feedback["New_level" + str(level)]
-            except:
-                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
-        elif session['feedback_level'] == 5:
             response["Feedback"] = gradual_feedback["Break"]
     response["feedback_level"] = session['feedback_level']
     return response
