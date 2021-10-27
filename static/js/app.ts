@@ -26,11 +26,13 @@ export let theGlobalEditor: AceAjax.Editor;
     exampleEditor.setOptions({ minLines: 2 });
     // Strip trailing newline, it renders better
     exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-    // And add an overlay button to the editor
-    const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
-    $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
-      theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-    });
+    // And add an overlay button to the editor, if the no-copy-button attribute isn't there
+    if (! $(preview).hasClass('no-copy-button')) {
+      const buttonContainer = $('<div>').css({ position: 'absolute', top: 5, right: 5, width: 'auto' }).appendTo(preview);
+      $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
+        theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+      });
+    }
   }
 
   /**
@@ -475,7 +477,14 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     read: builtinRead,
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
-    __future__: Sk.python3
+    __future__: Sk.python3,
+    timeoutMsg: function () {return ErrorMessages ['Program_too_long']},
+    // Give up after three seconds of execution, there might be an infinite loop.
+    // This function can be customized later to yield different timeouts for different levels.
+    execLimit: (function () {
+      // const level = window.State.level;
+      return 3000;
+    }) ()
   });
 
   return Sk.misceval.asyncToPromise(function () {
@@ -528,6 +537,8 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
+    // We give the user time to give input.
+    Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
@@ -550,8 +561,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
         event.preventDefault();
         $('#inline-modal').hide();
-        ok(input.val());
-        $ ('#output').focus ();
+        // We reset the timer to the present moment.
+        Sk.execStart = new Date ();
+        // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
+        // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
+        // replying to a query.
+        setTimeout (function () {
+           ok(input.val());
+           $ ('#output').focus ();
+        }, 0);
 
         return false;
       });

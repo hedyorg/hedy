@@ -426,10 +426,20 @@ class AllAssignmentCommandsHashed(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+def flatten_list_of_lists_to_list(args):
+    flat_list = []
+    for element in args:
+        if isinstance(element, str): #str needs a special case before list because a str is also a list and we don't want to split all letters out
+            flat_list.append(element)
+        elif isinstance(element, list):
+            flat_list += flatten_list_of_lists_to_list(element)
+        else:
+            flat_list.append(element)
+    return flat_list
 
 def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
-    arguments_of_false_nodes = [x[1] for x in args if not x[0]]
+    arguments_of_false_nodes = flatten_list_of_lists_to_list([x[1] for x in args if not x[0]])
     return all(bool_arguments), arguments_of_false_nodes
 
 # this class contains code shared between IsValid and IsComplete, which are quite similar
@@ -786,6 +796,7 @@ def make_f_string(args, lookup):
 
     return f"print(f'{argument_string}')"
 
+
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
@@ -798,10 +809,15 @@ class ConvertToPython_3(ConvertToPython_2):
         return ''.join([str(c) for c in args])
 
     def print(self, args):
-        args = self.check_var_usage(args)
-        self.check_arg_types(args, 'print', self.level)
 
-        return make_f_string(args, self.lookup)
+        args = self.check_print_arguments(args)
+        argument_string = ''
+        for argument in args:
+            argument = argument.replace("'", '') #no quotes needed in fstring
+            argument_string += process_variable_for_fstring(argument, self.lookup)
+
+        return f"print(f'{argument_string}')"
+
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -1440,6 +1456,7 @@ def preprocess_blocks(code):
 
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
+
 
 def transpile_inner(input_string, level):
     number_of_lines = input_string.count('\n')

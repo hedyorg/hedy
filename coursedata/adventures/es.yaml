@@ -890,121 +890,121 @@ adventures:
                       - piensa en otras cosas divertidas para agregar?
 
                 start_code: ""
-    #         6:
-    #             story_text: |
-    #                 ## Restaurant
-    #                 In level 5 you've learned how to use the repeat command to repeat a line of code a certain amount of times.
-    #                 You can use that in your restaurant to ask multiple people what they'd like to eat. Like this:
+            6:
+                story_text: |
+                    ## Restaurante
+                    En nivel 5 ha aprendido a utilizar el comando Repeat para repetir una línea de código una cierta cantidad de veces.
+                    Puedes usar eso en tu restaurante para preguntar a varias personas qué les gustaría comer. Así:
 
-    #                 ```
-    #                 print 'Welcome to Hedys restaurant!'
-    #                 people is ask 'How many people are joining us today?'
-    #                 repeat people times food is ask 'What would you like to eat?'
-    #                 print 'Thanks for your order! Its coming right up!'
-    #                 ```
-    #                 In level 5 you can ask multiple people what they'd like to eat, but you can't print each order individually, because you can only repeat one line of code.
-    #                 In level 7 you'll learn how to repeat multiple lines of code at once, which allows you to ask multiple orders and print them too!
+                    ```
+                    print '¡Bienvenido al restaurante Hedys!'
+                    people is ask '¿Cuántas personas se unen a nosotros hoy?'
+                    repeat people times food is ask '¿Qué te gustaría comer?'
+                    print '¡Gracias por su orden! ¡Se acerca!'
+                    ```
+                    En nivel 5 puedes preguntar a varias personas qué les gustaría comer, pero no puede imprimir cada pedido individualmente, porque sólo puede repetir una línea de código.
+                    En nivel 7 aprenderá a repetir varias líneas de código a la vez, ¡lo que le permite pedir múltiples pedidos e imprimirlos también!
 
-    #             start_code: ""
-    #         7:
-    #             story_text: |
-    #                 ## Restaurant
-    #                 In level 7 you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+                start_code: ""
+            7:
+                story_text: |
+                    ## Restaurante
+                    En nivel 7 puede hacer que su restaurante virtual sea más elaborado repitiendo varias líneas de código. Así:
 
-    #                 ```
-    #                 print 'Welcome to Hedys restaurant!'
-    #                 people is ask 'How many people will be joining us today?'
-    #                 print 'Great!'
-    #                 print 'Todays menu has pizza or salad'
-    #                 repeat people times
-    #                     food is ask 'What would you like to order?'
-    #                     print food
-    #                     if food is pizza
-    #                         price is price + 10
-    #                     else
-    #                         price is price + 8
-    #                 print 'Thank you for ordering!'
-    #                 print 'That will be ' price 'dollar'
-    #                 print 'Enjoy your meal!'
-    #                 ```
+                    ```
+                    print '¡Bienvenido al restaurante Hedys!'
+                    people is ask '¿Cuántas personas se unirán a nosotros hoy?'
+                    print '¡Excelente!'
+                    print 'El menú de hoy tiene pizza o ensalada'
+                    repeat people times
+                        food is ask '¿Qué quieres pedir?'
+                        print food
+                        if food is pizza
+                            price is price + 10
+                        else
+                            price is price + 8
+                    print '¡Gracias por pedir!'
+                    print 'Eso será ' price 'dólar/dólares'
+                    print '¡Buen provecho!'
+                    ```
 
-    #                 ## Challenge
-    #                 Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-    #             start_code: ""
-    #         8:
-    #             story_text: |
-    #                 ## Restaurant
-    #                 We can use the `for i in range 1 to 5` to print the orders from multiple customers in an orderly manner. 
+                    ## Reto
+                    Por supuesto, Este código se puede ampliar con más elementos en el menú, oferta de bebidas, y/o múltiples cursos, ¡así que siéntase libre de agregar tantas opciones como desee!
+                start_code: ""
+            9:
+                story_text: |
+                    ## Restaurante
+                    Podemos usar `for i in range 1 to 5` para imprimir los pedidos de varios clientes de manera ordenada. 
                     
-    #                 ## Example Hedy code
-    #                 ```
-    #                 print 'Welcome to Restaurant Hedy!'
-    #                 people is ask 'For how many people would you like to order?'
-    #                 for i in range 1 to people
-    #                     print 'Order number ' i
-    #                     food is ask 'What would you like to eat?'
-    #                     print food
-    #                     if food is fries
-    #                         sauce is ask 'What kind of sauce would you like with that?'
-    #                         print sauce
-    #                     drinks is ask 'What would you like to drink?'
-    #                     print drinks
-    #                 price is 4 * people
-    #                 print 'That will be ' price ' dollars, please!'
-    #                 ```
-    #             start_code: ""
+                    ## Example Hedy código
+                    ```
+                    print '¡Bienvenido al restaurante Hedys!'
+                    people is ask '¿Para cuántas personas te gustaría pedir?'
+                    for i in range 1 to people
+                        print 'El número de pedido ' i
+                        food is ask '¿Qué te gustaría comer?'
+                        print food
+                        if food is fries
+                            sauce is ask '¿Qué tipo de salsa te gustaría con eso?'
+                            print sauce
+                        drinks is ask '¿Qué quieres tomar?'
+                        print drinks
+                    price is 4 * people
+                    print 'Eso será ' price ' dólar/dólares, ¡por favor!'
+                    ```
+                start_code: ""
                  
-    # fortune:
-    #     name: "Fortune teller"
-    #     description: "Let Hedy predict the future"
-    #     image: "fortuneteller.png"
-    #     default_save_name: "Fortune Teller"
-    #     levels:
-    #         1:
-    #             story_text: |
-    #                 ## Fortune Teller
-    #                 Have you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?
-    #                 Then you probably know that they can't really predict your future, but it's still fun to play!
+    fortune:
+        name: "El adivino"
+        description: "Deja que Hedy prediga el futuro"
+        image: "fortuneteller.png"
+        default_save_name: "El adivino"
+        levels:
+            1:
+                story_text: |
+                    ## El adivino
+                    ¿Alguna vez has estado en un carnaval y tu futuro ha sido predicho por un adivino? ¿O alguna vez has jugado con una bola mágica de ocho?
+                    Entonces probablemente sepas que realmente no pueden predecir tu futuro, ¡pero sigue siendo divertido jugar!
 
-    #                 In the upcoming levels you can learn how to create your own fortune telling machine!
-    #                 In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her echo the players' answers.
-    #                 Like this:
+                    ¡En los próximos niveles puedes aprender a crear tu propia máquina de adivinación!
+                    En nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que se haga eco de las respuestas de los jugadores.
+                    Así:
 
-    #                 ## Example Hedy code
-    #                 ```
-    #                 print Hello, I'm Hedy the fortune teller!
-    #                 ask Who are you?
-    #                 print Let me take a look in my crystal ball
-    #                 print I see... I see...
-    #                 echo Your name is 
-    #                 ```
+                    ## Example Hedy código
+                    ```
+                    print Hola, soy Hedy la adivina!
+                    ask ¿Quién eres?
+                    print Déjame echar un vistazo a mi bola de cristal
+                    print Veo... Veo...
+                    echo Te llamas 
+                    ```
 
-    #                 ## Challenge
-    #                 Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
+                    ## Reto
+                    Hedy ahora solo te dice tu nombre. ¿Puedes expandir el código para que Hedy pueda predecir más cosas sobre ti?
 
-    #                 Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
-    #                 Take a look in level 2 to improve your fortune teller.
+                    Obviamente, Hedy aún no es una muy buena adivina, ¡ya que solo puede repetir las respuestas que dieron los jugadores!
+                    Echa un vistazo en el nivel 2 para mejorar tu adivino.
 
-    #             start_code: ""
-    #         2:
-    #             story_text: |
-    #                 ## Fortune Teller
-    #                 In level 1 you've created your first fortune telling machine, but Hedy couldn't really predict anything, only echo.
-    #                 In level 2 you can use a variable and the `at random` command to really let Hedy choose an answer for you. Check out this code for instance:
+                start_code: ""
+            2:
+                story_text: |
+                    ## El adivino
+                    En nivel 1 has creado tu primera máquina de adivinación, pero Hedy realmente no podía predecir nada, sólo eco.
+                    En nivel 2 puede utilizar una variable y `at random` ordene realmente dejar que Hedy elija una respuesta para usted. Echa un vistazo a este código, por ejemplo:
 
-    #                 ## Example Hedy Code
-    #                 In this example the player can ask Hedy a yes-no question and Hedy will pick a random answer for you.
-    #                 ```
-    #                 print I’m Hedy the fortune teller!
-    #                 question is ask What do you want to know?
-    #                 print This is what you want to know: question
-    #                 answers is yes, no, maybe
-    #                 print My crystal ball says... answers at random
-    #                 ```
+                    ## Example Hedy código
+                    En este ejemplo, el jugador puede hacerle a Hedy una pregunta de sí-no y Hedy elegirá una respuesta aleatoria para usted.
+                    ```
+                    print ¡Soy Hedy la adivina!
+                    question is ask ¿Qué quieres saber?
+                    print Esto es lo que quieres saber: question
+                    answers is yes, no, maybe
+                    print Mi bola de cristal dice... answers at random
+                    ```
 
-    #                 ## Challenges
-    #                 Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
-    #             start_code: ""
+                    ## Retos
+                    Ahora, Hedy solo puede responder sí, no o tal vez. ¿Puedes darle a Hedy más opciones de respuesta, como 'definitivamente' o 'preguntar de nuevo'?
+                start_code: ""
 
     #         3:
     #             story_text: |

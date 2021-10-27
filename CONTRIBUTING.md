@@ -37,7 +37,7 @@ If you want to run the website version locally, run:
 To run the unit tests:
 
 ```bash
-(.env)$ python -m unittest discover -s tests
+(.env)$ python -m pytest tests/*.py
 ```
 
 ## Working on the browser JavaScript

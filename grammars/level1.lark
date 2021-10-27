@@ -68,7 +68,7 @@ _WHILE: "while"
 _LENGTH: "length"
 
 start: program
-program: _EOL* (command (_SPACE)* _EOL+)* (command (_SPACE)*)? //lines may end on spaces and might be separated by many newlines
+program: _EOL* (command _EOL+)* command?
 command: print | ask | echo | turtle | invalid_space | invalid
 
 print: _PRINT (_SPACE text)?

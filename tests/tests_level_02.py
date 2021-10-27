@@ -260,7 +260,7 @@ class TestsLevel2(HedyTester):
   #forward tests
   def test_forward_without_argument(self):
     code = textwrap.dedent("""\
-    forward """)
+    forward""")
     result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
     t.forward(50)
