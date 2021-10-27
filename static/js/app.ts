@@ -289,6 +289,11 @@ export function tryPaletteCode(exampleCode: string) {
 
 export function toggleFeedback() {
   $ ('#feedbackbox .details').toggle();
+  if ($ ('#feedbackbox .expand-dialog').text().indexOf("▼") != -1){
+    $ ('#feedbackbox .expand-dialog').text("▲ " + ErrorMessages['Click_expand'] + " ▲");
+  } else {
+    $ ('#feedbackbox .expand-dialog').text("▼ " + ErrorMessages['Click_shrink'] + " ▼");
+  }
 }
 
 export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
