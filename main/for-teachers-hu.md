@@ -27,16 +27,6 @@ A Hedy webalapú, ami azt jelenti, hogy bármilyen böngészővel rendelkező es
 
 ## Előkészületek
 
-### Belépés 
-
-A Hedy programozásának megkezdéséhez keresd fel ezt a webhelyet:
-
-[https://www.hedycode.com/](https://www.hedycode.com/)
-
-Kattints a Bejelentkezés gombra a jobb felső sarokban. Itt bejelentkezhetsz a felhasználóneveddel és jelszavaddal. Ez az első alkalom, hogy Hedy -t használsz? Kattints a zöld gombra Fiók létrehozása.
-
-Figyelj: Válassz olyan felhasználónevet és jelszót, amely könnyen megjegyezhető, vagy írd le valahová!
-
 ### Programok mentése
 
 Amint bejelentkezel, egy kék sáv jelenik meg a Saját profil és a Saját programok elemmel.
