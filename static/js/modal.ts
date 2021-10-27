@@ -81,6 +81,10 @@ export const error = {
     editor?.resize();
   },
 
+  toggleFeedback() {
+    $ ('#feedbackbox .details').toggle();
+  },
+
   showWarning(caption: string, message: string) {
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
