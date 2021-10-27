@@ -1147,16 +1147,15 @@ def merge_grammars(grammar_text_1, grammar_text_2):
 
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
+    # then add in the keywords
     result = get_full_grammar_for_level(1)
+    keys = get_keywords_for_language(lang)
+    result = merge_grammars(result, keys)
 
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
         result = merge_grammars(result, grammar_text_i)
-
-    # add in the keywords (currently just the default english ones) afterwards
-    keys = get_keywords_for_language(lang)
-    result = merge_grammars(result, keys)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
@@ -1202,7 +1201,7 @@ def get_keywords_for_language(lang):
 PARSER_CACHE = {}
 
 
-def get_parser(level, lang):
+def get_parser(level, lang = "en"):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.

@@ -11,7 +11,7 @@ invalid: textwithoutspaces text?
 
 _EOL: "\r"?"\n"
 
-text: /([^\n]+)/ -> text  //text anything can be parsed except for a newline
+text: /([^\n]+)/ -> text  //anything can be parsed except for a newline
 textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
 %import common.DIGIT
