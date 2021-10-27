@@ -17,6 +17,7 @@ from os import path
 import re
 import traceback
 import uuid
+import csv
 from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
@@ -399,13 +400,67 @@ def gradual_feedback_model(code, level, gradual_feedback, language):
     response["feedback_level"] = session['feedback_level']
     return response
 
+def get_concepts(level):
+    if level == 1:
+        return ['print', 'ask', 'echo']
+    elif level == 2:
+        return ['print', 'ask', 'at', 'random']
+    elif level == 3:
+        return ['print', 'is', 'ask', 'at', 'random']
+    elif level == 4:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else']
+    elif level == 5:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'repeat', 'times']
+    elif level in [6, 7]:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'repeat', 'times', '+', '-', '*']
+    elif level in [8, 9, 10]:
+        return ['print', 'is', 'ask', 'at', 'random', 'if', 'else', 'for', 'in', 'range', '+', '-', '*']
+    return []
+
 
 def preprocess_code_similarity_measure(code, level):
-    return 0
+    print(code)
+    concepts = get_concepts(int(level))
+    words = code.split()
+    code = ""
+    for word in words:
+        if word not in concepts:
+            code += re.sub(r"[a-z|A-Z|0-9|!?,''{}]", "%", word)
+            code += " "
+        else:
+            code += word + " "
+    code = code.split()
+    temp = ""
+    for processed in code:
+        if "%" in processed:
+            temp += "% "
+        else:
+            temp += processed + " "
+    code = temp
+    print(code)
+    return code
 
 
-def get_similar_code(code, language, level):
-    return 0
+def get_similar_code(processed_code, language, level):
+    filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + ".csv"
+    shortest_distance = 75  # This is the threshold: when differ more than this value it's no longer similar code
+    similar_code = None
+    try:
+        with open(filename, mode='r', encoding='utf-8') as file:
+            csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
+            for lines in csvFile:
+                distance = 1000 #lev(processed_code, lines[1])
+                if distance < 1:  # The code is identical, no need to search any further
+                    similar_code = lines[0]
+                    break
+                else:
+                    if distance < shortest_distance:
+                        shortest_distance = distance
+                        similar_code = lines[0]
+        similar_code = similar_code.replace("    ", "\t")
+    except:
+        similar_code = None
+    return similar_code
 
 
 def invalid_space_error_to_response(ex, translations):
