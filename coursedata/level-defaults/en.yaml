@@ -131,6 +131,17 @@
 
          This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
 
+         When we want to check if something is in a list, we can now use `in` between the thing and the list.
+
+         ## Example Hedy Code
+         ```
+         pretty_colors is green, yellow
+         color is ask 'What is your favorite color?'
+         if color in pretty_colors print 'pretty!' else print 'meh'
+         ```
+
+         This code prints pretty! if you choose green or yellow, and meh otherwise.
+
          ## Tip
          Sometimes code with an `if` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `else` like this:
          ```
@@ -166,6 +177,13 @@
         demo_code: |-
             answer is ask 'How far should I walk?'
             if answer is far forward 100 else forward 5
+    -   name: "in"
+        explanation: "Check elements with `in`"
+        example: "Example: if color in pretty_colors print 'pretty!' else print 'meh'"
+        demo_code: |-
+            pretty_colors is green, yellow
+            color is ask 'What is your favorite color?'
+            if color in pretty_colors print 'pretty!' else print 'meh'
 5:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
