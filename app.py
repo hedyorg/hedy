@@ -80,7 +80,7 @@ def load_adventure_for_language(lang):
 
     if not adventures_for_lang.has_adventures():
         # The default fall back language is English
-        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")        
+        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
         adventures_for_lang = ADVENTURES[fall_back]
     return adventures_for_lang.adventures_file['adventures']
 
@@ -513,7 +513,7 @@ def get_quiz(level_source, question_nr, attempt):
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
-                
+
             html_obj = render_template('quiz_question.html',
                                    quiz=quiz_data,
                                    level_source=level_source,
@@ -818,6 +818,10 @@ def client_messages():
         response.cache_control.max_age = 60 * 60  # Seconds
 
     return response
+
+@app.errorhandler(404)
+def not_found(exception):
+    return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('page_not_found'))
 
 @app.errorhandler(500)
 def internal_error(exception):
