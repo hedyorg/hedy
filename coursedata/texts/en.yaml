@@ -33,10 +33,12 @@ ui:
     go_back_to_main: "Go back to the main page"
     no_such_level: "No such Hedy level!"
     no_such_class: "No such Hedy class!"
-    invalid_class_link: "Invalid link for joining the class"
+    invalid_class_link: "Invalid link for joining the class."
     no_such_adventure: "No such Hedy adventure!"
     no_such_adventure_level: "No such level for this Hedy adventure!"
     no_such_program: "No such Hedy program!"
+    invalid_teacher_invitation_code: "The teacher invitation code is invalid. To become a teacher, reach out to hedy@felienne.com."
+    page_not_found: "We could not find that page!"
 ClientErrorMessages:
     Transpile_warning: "Warning!"
     Transpile_error: "We can't run your program."
@@ -46,6 +48,7 @@ ClientErrorMessages:
     Empty_output: "This code works but does not print anything. Add a print command to your code or use the turtle to get output."
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
+    Program_too_long: "Your program takes too long to run."
 HedyErrorMessages:
     Empty Program: "You created an empty program. Type Hedy code in the left field and try again"
     Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {working_level} at level {original_level}."
@@ -59,6 +62,8 @@ HedyErrorMessages:
     Lonely Echo: "You used an echo before an ask, or an echo without an ask. First ask for input, then echo."
     Unexpected Indentation: "You used too many spaces in line {line_number}. You uses {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces."
     Too Big: "Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again."
+    Required Argument Type: "You cannot use {command} with the variable {variable} because {variable} is not a list."
+    Invalid Argument Type: "You cannot use {command} with a list. Try using {command} with {allowed_types}."
     space: "a space"
     comma: "a comma"
     question mark: "a question mark"
@@ -133,7 +138,8 @@ Auth:
     languages: "Which of these programming languages have you used before?"
     other_block: "Another block language"
     other_text: "Another text language"
-
+    teacher_invitation_require_login: "To set up your profile as a teacher we will need you to log in. If you don't have an account, please create one."
+    teacher_welcome: "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "My programs"

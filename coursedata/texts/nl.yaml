@@ -28,6 +28,8 @@ ui:
     commands_title: "Commando's"
     by: "door"
     start_quiz: "Naar de quiz"
+    invalid_teacher_invitation_code: "Deze leerkrachtenuitnodigingscode is niet geldig. Als je een nieuwe uitnodiging nodig hebt, neem dan contact op met hedy@felienne.com"
+    page_not_found: "We konden deze pagina niet vinden!"
 ClientErrorMessages:
     Transpile_warning: "Let op!"
     Transpile_error: "We konden je code niet goed lezen."
@@ -37,6 +39,7 @@ ClientErrorMessages:
     Empty_output: "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen."
     CheckInternet: "Controleer even of je internetverbinding het nog doet?"
     ServerError: "Je hebt een programma geschreven dat we niet verwacht hadden. Als je wilt helpen, stuur ons dan een mailtje met het level en je programma op hedy@felienne.com. Probeer om verder te gaan je programma een beetje aan te passen en kijk nog eens goed naar de voorbeelden. Bedankt!"
+    Program_too_long: "Your program takes too long to run."
 HedyErrorMessages:
     Empty Program: "Je hebt een leeg programma gemaakt. Typ Hedy code in het linkerveld en probeer het opnieuw."
     Wrong Level: "Dat was goede code hoor, maar niet op het goede level. Je schreef code voor level {working_level} op level {original_level}."
@@ -50,6 +53,8 @@ HedyErrorMessages:
     Var Undefined: "Je probeert de variabele {name} te printen, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde printen en aanhalingstekens vergeten bent."
     Lonely Echo: "Je gebruikt een echo voor een ask, of een echo zonder een ask. Vraag eerst met een ask om invoer voordat je die herhaalt met een echo."
     Too Big: "Wow! Jouw programma is wel {lines_of_code} regels lang! Maar... wij kunnen maar {max_lines} regels aan in dit level. Maak je programma wat kleiner en probeer het nog eens."
+    Required Argument Type: "Je kan {command} niet gebruiken met {variable} omdat {variable} geen lijst is."
+    Invalid Argument Type: "Je kan {command} niet gebruiken met {variable} omdat {variable} een lijst is. Je kan {command} wel gebruiken met {allowed_types}."
     space: "een spatie"
     comma: "een komma"
     question mark: "een vraagteken"
@@ -124,6 +129,9 @@ Auth:
     languages: "Welke programmeertaal heb je wel eens gebruikt?"
     other_block: "Een andere blokkentaal"
     other_text: "Een andere teksttaal"
+    teacher_invitation_require_login: "Om je leerkrachtenaccount te activeren moet je eerst inloggen. Als je nog geen account hebt, maak dan eerst een account aan."
+    teacher_welcome: "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je kan nu klassen maken en er leerlingen in uitnodigen."
+
 
   # These variables are added here to make the code simpler, but conceptually they belong to the UI.
     program_header: "Mijn programma's"
