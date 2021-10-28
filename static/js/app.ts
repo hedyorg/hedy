@@ -455,6 +455,12 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
+
+  // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
+  // Please see note at the top of the `outf` function.
+  if (! window.State.programsInExecution) window.State.programsInExecution = 0;
+  window.State.programsInExecution++;
+
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -492,9 +498,10 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   }).then(function(_mod) {
     console.log('Program executed');
     // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+    if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
+    window.State.programsInExecution--;
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -525,6 +532,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   // output functions are configurable.  This one just appends some text
   // to a pre element.
   function outf(text: string) {
+    // If there's more than one program being executed at a time, we ignore it.
+    // This happens when a program requiring user input is suspended when the user changes the code.
+    if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
   }
