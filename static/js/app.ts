@@ -455,6 +455,12 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
+
+  // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
+  // Please see note at the top of the `outf` function.
+  if (! window.State.programsInExecution) window.State.programsInExecution = 0;
+  window.State.programsInExecution++;
+
   const outputDiv = $('#output');
   outputDiv.empty();
 
@@ -477,7 +483,14 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     read: builtinRead,
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
-    __future__: Sk.python3
+    __future__: Sk.python3,
+    timeoutMsg: function () {return ErrorMessages ['Program_too_long']},
+    // Give up after three seconds of execution, there might be an infinite loop.
+    // This function can be customized later to yield different timeouts for different levels.
+    execLimit: (function () {
+      // const level = window.State.level;
+      return ((hasTurtle) ? 20000 : 3000);
+    }) ()
   });
 
   return Sk.misceval.asyncToPromise(function () {
@@ -485,9 +498,10 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   }).then(function(_mod) {
     console.log('Program executed');
     // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+    if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
+    window.State.programsInExecution--;
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -518,6 +532,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   // output functions are configurable.  This one just appends some text
   // to a pre element.
   function outf(text: string) {
+    // If there's more than one program being executed at a time, we ignore it.
+    // This happens when a program requiring user input is suspended when the user changes the code.
+    if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
   }
@@ -530,6 +547,8 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
+    // We give the user time to give input.
+    Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').empty();
     return new Promise(function(ok) {
 
@@ -552,8 +571,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
         event.preventDefault();
         $('#inline-modal').hide();
-        ok(input.val());
-        $ ('#output').focus ();
+        // We reset the timer to the present moment.
+        Sk.execStart = new Date ();
+        // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
+        // Since processing the program might take some time, this timeout increases the responsiveness of the UI after
+        // replying to a query.
+        setTimeout (function () {
+           ok(input.val());
+           $ ('#output').focus ();
+        }, 0);
 
         return false;
       });
