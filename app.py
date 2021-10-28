@@ -18,6 +18,7 @@ import re
 import traceback
 import uuid
 import csv
+from Levenshtein import distance as lev
 from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
@@ -457,14 +458,14 @@ def preprocess_code_similarity_measure(code, level):
 
 
 def get_similar_code(processed_code, language, level):
-    filename = "coursedata/similar-code-files/" + language + "/level" + str(level) + ".csv"
+    filename = "coursedata/similar-code-files/level" + str(level) + str(language) + ".csv"
     shortest_distance = 75  # This is the threshold: when differ more than this value it's no longer similar code
     similar_code = None
     try:
         with open(filename, mode='r', encoding='utf-8') as file:
             csvFile = csv.reader(file, quoting=csv.QUOTE_MINIMAL)
             for lines in csvFile:
-                distance = 1000  # lev(processed_code, lines[1])
+                lev(processed_code, lines[1])
                 if distance < 1:  # The code is identical, no need to search any further
                     similar_code = lines[0]
                     break
