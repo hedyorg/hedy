@@ -78,22 +78,6 @@ class TestsLevel7(HedyTester):
     me wants a cookie!""")
 
     self.assertEqual(expected_output, self.run_code(result))
-  def test_repeat_nested_in_if(self):
-    code = textwrap.dedent("""\
-    kleur is groen
-    if kleur is groen
-        repeat 3 times
-            print 'mooi'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    kleur = 'groen'
-    if str(kleur) == str('groen'):
-      for i in range(int(3)):
-        print(f'mooi')""")
-
-    self.assertEqual(expected, result.code)
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
@@ -177,7 +161,7 @@ class TestsLevel7(HedyTester):
 
     self.assertEqual(expected, result.code)
 
-# programs with issues to see if we catch them properly
+  # negative tests
 
   def test_issue_902(self):
     code = textwrap.dedent("""\
@@ -192,26 +176,16 @@ class TestsLevel7(HedyTester):
     with self.assertRaises(hedy.IndentationException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Unexpected Indentation', context.exception.error_code)
-
-
-  def test_issue_396(self):
+  def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
-    repeat 5 times
-        if antwoord2 is 10
-            print 'Goedzo'
-        else
-            print 'lalala'""")
+    kleur is groen
+    if kleur is groen
+        repeat 3 times
+            print 'mooi'""")
 
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    for i in range(int(5)):
-      if str('antwoord2') == str('10'):
-        print(f'Goedzo')
-      else:
-        print(f'lalala')""")
-
-    self.assertEqual(expected, result.code)
+    with self.assertRaises(hedy.IndentationException) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Unexpected Indentation', context.exception.error_code)
 
     
 # (so this should fail, for now)
