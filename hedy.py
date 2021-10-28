@@ -221,6 +221,10 @@ class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
 
+class LockedLanguageFeatureException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Locked Language Feature', **arguments)
+
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
@@ -1447,10 +1451,13 @@ def preprocess_blocks(code, level):
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == 7:
-                raise hedy.IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
+                raise hedy.LockedLanguageFeatureException(command="block in a block")
 
         if current_number_of_indents - previous_number_of_indents > 1:
-            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
+            raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                            indent_size=indent_size)
+
+
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
