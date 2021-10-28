@@ -256,6 +256,13 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+  # issue #792
+  def test_turn_right_number(self):
+    self.multi_level_tester(
+      code="turn right 90",
+      exception=hedy.SyntaxErrorException,
+      test_name=self.name()
+    )
 
   #forward tests
   def test_forward_without_argument(self):

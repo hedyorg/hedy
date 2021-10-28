@@ -10,6 +10,7 @@ import utils
 from collections import namedtuple
 import hashlib
 import re
+from dataclasses import dataclass, field
 
 # Some useful constants
 HEDY_MAX_LEVEL = 23
@@ -46,7 +47,8 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
                       20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
                       21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
 # Commands and their types per level (only partially filled!)
@@ -149,6 +151,16 @@ def minimum_distance(s1, s2):
         distances = new_distances
     return distances[-1]
 
+
+@dataclass
+class InvalidInfo:
+    error_type: str
+    command: str = ''
+    arguments: list = field(default_factory=list)
+    line: int = 0
+
+
+
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
@@ -220,6 +232,11 @@ class CodePlaceholdersPresentException(HedyException):
 class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
+
+class SyntaxErrorException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Syntax Error', **arguments)
+
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -509,21 +526,22 @@ class IsValid(Filter):
     # tree is transformed to a node of [Bool, args, command number]
     def program(self, args):
         if len(args) == 0:
-            return False, "empty program", 1
+            return False, InvalidInfo("empty program"), 1
         return super().program(args)
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
-        return False, " "
+        return False, InvalidInfo(" ")
 
     def print_nq(self, args):
         # return error source to indicate what went wrong
-        return False, "print without quotes"
+        return False, InvalidInfo("print without quotes")
 
     def invalid(self, args):
-        # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
-        return False, args[0][1]
+        # TODO: add more information to the InvalidInfo
+        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]])
+        return False, error
 
     #other rules are inherited from Filter
 
@@ -1533,21 +1551,25 @@ def transpile_inner(input_string, level):
         # strings, just take the first string and proceed.
         if isinstance(args, list):
             args = args[0]
-        if args == ' ':
+        if args.error_type == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise InvalidSpaceException(level, line, result.code)
-        elif args == 'print without quotes':
-            # grammar rule is ignostic of line number so we can't easily return that here
+        elif args.error_type == 'print without quotes':
+            # grammar rule is agnostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
-        elif args == 'empty program':
+        elif args.error_type == 'empty program':
             raise EmptyProgramException()
         else:
-            invalid_command = args
+            invalid_command = args.command
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
+                # making the error super-specific for the turn command for now
+                # is it possible to have a generic and meaningful syntax error message for different commands?
+                if invalid_command == 'turn':
+                    raise SyntaxErrorException(command=args.command, argument=''.join(args.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)
