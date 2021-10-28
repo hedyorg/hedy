@@ -19,7 +19,7 @@ from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher
+from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -81,7 +81,7 @@ def load_adventure_for_language(lang):
 
     if not adventures_for_lang.has_adventures():
         # The default fall back language is English
-        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")        
+        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
         adventures_for_lang = ADVENTURES[fall_back]
     return adventures_for_lang.adventures_file['adventures']
 
@@ -514,7 +514,7 @@ def get_quiz(level_source, question_nr, attempt):
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
-                
+
             html_obj = render_template('quiz_question.html',
                                    quiz=quiz_data,
                                    level_source=level_source,
@@ -820,6 +820,10 @@ def client_messages():
 
     return response
 
+@app.errorhandler(404)
+def not_found(exception):
+    return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('page_not_found'))
+
 @app.errorhandler(500)
 def internal_error(exception):
     import traceback
@@ -859,8 +863,13 @@ def main_page(page):
 
     menu = render_main_menu(page)
     if page == 'for-teachers':
+        welcome_teacher = session.get('welcome-teacher') or False
+        session['welcome-teacher'] = False
         teacher_classes =[] if not current_user(request)['username'] else DATABASE.get_teacher_classes(current_user(request)['username'], True)
-        return render_template('for-teachers.html', sections=split_teacher_docs(contents), lang=lang, menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(lang, 'Auth'), teacher_classes=teacher_classes, **front_matter)
+        return render_template('for-teachers.html', sections=split_teacher_docs(contents), lang=lang, menu=menu,
+                               username=current_user(request)['username'], is_teacher=is_teacher(request),
+                               auth=TRANSLATIONS.get_translations(lang, 'Auth'), teacher_classes=teacher_classes,
+                               welcome_teacher=welcome_teacher, **front_matter)
 
     return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(lang, 'Auth'), **front_matter)
 
@@ -1116,6 +1125,24 @@ def update_yaml():
         mimetype='application/x-yaml',
         headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
+
+@app.route('/invite/<code>', methods=['GET'])
+def teacher_invitation(code):
+    user = current_user(request)
+    lang = requested_lang()
+
+    if os.getenv('TEACHER_INVITE_CODE') != code:
+        return utils.page_404(TRANSLATIONS, render_main_menu('invite'), user['username'], lang,
+                              TRANSLATIONS.get_translations(requested_lang(), 'ui').get('invalid_teacher_invitation_code'))
+    if not user['username']:
+        return render_template('teacher-invitation.html', lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'),
+                               menu=render_main_menu('invite'))
+
+    update_is_teacher(user)
+
+    session['welcome-teacher'] = True
+    url = request.url.replace(f'/invite/{code}', '/for-teachers')
+    return redirect(url)
 
 # *** AUTH ***
 

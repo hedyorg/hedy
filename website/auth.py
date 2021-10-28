@@ -53,6 +53,16 @@ def is_teacher(request):
     user = current_user(request)
     return bool('is_teacher' in user and user['is_teacher'])
 
+def update_is_teacher(user, is_teacher_value=1):
+    user_is_teacher = 'is_teacher' in user and user['is_teacher']
+    user_becomes_teacher = is_teacher_value and not user_is_teacher
+
+    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
+
+    if user_becomes_teacher and not is_testing_request(request):
+        send_email_template('welcome_teacher', user['email'], '')
+
+
 # The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
 import hedyweb
 TRANSLATIONS = hedyweb.Translations()
@@ -460,10 +470,8 @@ def routes(app, database, requested_lang):
         if not user:
             return 'invalid username', 400
 
-        DATABASE.update_user(user['username'], {'is_teacher': 1 if body['is_teacher'] else 0})
-
-        if body['is_teacher'] and not is_testing_request(request):
-            send_email_template('welcome_teacher', user['email'], '')
+        is_teacher_value = 1 if body['is_teacher'] else 0
+        update_is_teacher(user, is_teacher_value)
 
         return '', 200
 
