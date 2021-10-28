@@ -237,6 +237,10 @@ class SyntaxErrorException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Syntax Error', **arguments)
 
+class UnsupportedFloatException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unsupported Float', **arguments)
+
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -260,6 +264,9 @@ class ExtractAST(Transformer):
             return Tree('list_access', [args[0], args[1]])
 
     #level 5
+    def unsupported_number(self, args):
+        return Tree('unsupported_number', [''.join([str(c) for c in args])])
+
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
 
@@ -443,6 +450,7 @@ class AllAssignmentCommandsHashed(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+
 def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
@@ -541,6 +549,10 @@ class IsValid(Filter):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]])
+        return False, error
+
+    def unsupported_number(self, args):
+        error = InvalidInfo('unsupported number', arguments=[str(args[0])])
         return False, error
 
     #other rules are inherited from Filter
@@ -1544,32 +1556,34 @@ def transpile_inner(input_string, level):
     is_valid = IsValid().transform(program_root)
 
     if not is_valid[0]:
-        _, args, line = is_valid
+        _, invalid_info, line = is_valid
 
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
-        if isinstance(args, list):
-            args = args[0]
-        if args.error_type == ' ':
+        if isinstance(invalid_info, list):
+            invalid_info = invalid_info[0]
+        if invalid_info.error_type == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise InvalidSpaceException(level, line, result.code)
-        elif args.error_type == 'print without quotes':
+        elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
-        elif args.error_type == 'empty program':
+        elif invalid_info.error_type == 'empty program':
             raise EmptyProgramException()
+        elif invalid_info.error_type == 'unsupported number':
+            raise UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
-            invalid_command = args.command
+            invalid_command = invalid_info.command
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?
                 if invalid_command == 'turn':
-                    raise SyntaxErrorException(command=args.command, argument=''.join(args.arguments))
+                    raise SyntaxErrorException(command=invalid_info.command, argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)
