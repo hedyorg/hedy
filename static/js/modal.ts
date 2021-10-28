@@ -73,6 +73,17 @@ export const error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
+    $('#feedbackbox').hide();
+    editor?.resize();
+  },
+
+  hideError() {
+    $('#errorbox').hide();
+    editor?.resize();
+  },
+
+  hideWarning() {
+    $('#warningbox').hide();
     editor?.resize();
   },
 
