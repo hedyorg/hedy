@@ -913,6 +913,9 @@ def index(level, step):
     loaded_program = ''
     adventure_name = ''
 
+    if 'feedback_level' in session:
+        session['feedback_level'] = 0
+
     # If step is a string that has more than two characters, it must be an id of a program
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
