@@ -4,6 +4,8 @@ from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
 from lark import Tree, Transformer, visitors
 from os import path
+
+import hedy
 import utils
 from collections import namedtuple
 import hashlib
@@ -18,6 +20,9 @@ TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
+
+# type used in lookup table
+Assignment = namedtuple('Assignment', ['name', 'type'])
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
@@ -44,6 +49,17 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
+# Commands and their types per level (only partially filled!)
+commands_and_types_per_level = {
+    1: {'print': ['string'],
+        'ask': ['string'],
+        'turn': ['string'],
+        'forward': ['string']},
+    2: {'at random': ['list']},
+    12: {'input': ['string']},
+    13: {'print': ['string', 'list']}
+  }
+
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
 # \ also needs to be escaped because it eats the next character
 characters_that_need_escaping = ["\\", "'"]
@@ -51,9 +67,16 @@ characters_that_need_escaping = ["\\", "'"]
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 def hash_needed(name):
+    # this function is now applied on something str sometimes Assignment
+    # no pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
+
+    if not isinstance(name, str):
+        name = name.name
+
     # some elements are not names but processed names, i.e. random.choice(dieren)
-    # they should not be hashed (this won't break because these characters cannot be used in vars
-    if '[' in name or '(' in name:
+    # they should not be hashed
+    # these are either of type assignment and operation or already processed and then contain ( or [
+    if (type(name) is Assignment and name.type == 'operation') or (isinstance(name, str) and '[' in name or '(' in name):
         return False
 
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
@@ -150,6 +173,18 @@ class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
 
+class InvalidTypeException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Invalid Type', **arguments)
+
+class RequiredArgumentTypeException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Required Argument Type', **arguments)
+
+class InvalidArgumentTypeException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Invalid Argument Type', **arguments)
+
 class WrongLevelException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Wrong Level', **arguments)
@@ -215,60 +250,72 @@ class AllAssignmentCommands(Transformer):
     # returns a list of variable and list access
     # so these can be excluded when printing
 
-    # relevant nodes (list acces, ask, assign) are transformed into strings
+    # relevant nodes (list acces, ask, assign) are transformed into tuples of their name and type
     # higher in the tree (through default rule), we filter on only string arguments, of lists with string arguments
 
     def filter_ask_assign(self, args):
         ask_assign = []
         for a in args:
             # strings (vars remaining in the tree) are added directly
-            if type(a) is str:
+            if type(a) is Assignment:
                 ask_assign.append(a)
-            # lists are seached further for string members (vars)
+            # lists are searched further for string members (vars)
             elif type(a) is list:
                 sub_a_ask_assign = self.filter_ask_assign(a)
                 for sub_a in sub_a_ask_assign:
                     ask_assign.append(sub_a)
         return ask_assign
 
+    # level 8
+    def repeat_list(self, args):
+      # for loop iterator is a var so should be added to the list of vars
+      iterator = str(args[0])
+      commands = args[1:]
+      # in level 8 always a string
+      return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
+
+    # level 9
     def for_loop(self, args):
       # for loop iterator is a var so should be added to the list of vars
       iterator = str(args[0])
       commands = args[1:]
-      return [iterator] + self.filter_ask_assign(args)
+      # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
+      return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
+
 
     def input(self, args):
         # return left side of the =
         return args[0]
 
     def ask(self, args):
-        # try is needed cause in level 1 ask has not variable in front
+        # try is needed cause in level 1 ask has no variable in front
         try:
-            return args[0]
+            return Assignment(args[0], 'string')
         except:
             return None
 
     def assign(self, args):
-        return args[0]
+        # todo now all assigns are strings, later (form 5) this should distinguish int and str
+        return Assignment(args[0], 'string')
 
     def assign_list(self, args):
-        return args[0]
+        return Assignment(args[0], 'list')
 
     # list access is accessing a variable, so must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
         listname = args[0]
         if args[1] == 'random':
-            return 'random.choice(' + listname + ')'
+            return Assignment('random.choice(' + listname + ')', 'operation')
         else:
-            return listname + '[' + args[1] + ']'
+            return Assignment(listname + '[' + args[1] + ']', 'operation')
 
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
-        return args[0]
+        return Assignment(args[0], 'operation')
 
     def change_list_item(self, args):
-        return args[0]
+        return Assignment(args[0], 'operation')
 
     def text(self, args):
         # text never contains a variable
@@ -294,59 +341,70 @@ class AllAssignmentCommandsHashed(Transformer):
     # returns a list of variable and list access
     # so these can be excluded when printing
 
+    Assignment = namedtuple('Assignment', ['name', 'type'])
     # this version returns all hashed var names
 
     def filter_ask_assign(self, args):
         ask_assign = []
         for a in args:
             # strings (vars remaining in the tree) are added directly
-            if type(a) is str:
+            if type(a) is Assignment:
                 ask_assign.append(a)
-            # lists are seached further for string members (vars)
+            # lists are searched further for string members (vars)
             elif type(a) is list:
                 sub_a_ask_assign = self.filter_ask_assign(a)
                 for sub_a in sub_a_ask_assign:
                     ask_assign.append(sub_a)
         return ask_assign
 
+    # level 8
+    def repeat_list(self, args):
+      # for loop iterator is a var so should be added to the list of vars
+      iterator = str(args[0])
+      commands = args[1:]
+      # in level 8 always a string
+      return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
+
+    # level 9
     def for_loop(self, args):
       # for loop iterator is a var so should be added to the list of vars
       iterator = str(args[0])
-      iterator_hashed = hash_var(iterator)
-      return [iterator_hashed] + self.filter_ask_assign(args)
+      commands = args[1:]
+      # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
+      return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
 
     def input(self, args):
         # return left side of the =
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'string')
 
     def ask(self, args):
-        # try is needed cause in level 1 ask has not variable in front
+        # try is needed cause in level 1 ask has no variable in front
         try:
-            return hash_var(args[0])
+            return Assignment(hash_var(args[0]), 'string')
         except:
             return None
 
     def assign(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'string')
 
     def assign_list(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'list')
 
     # list access is accessing a variable, so must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, args):
         listname = hash_var(args[0])
         if args[1] == 'random':
-            return 'random.choice(' + listname + ')'
+            return Assignment('random.choice(' + listname + ')', 'operation')
         else:
-            return listname + '[' + args[1] + ']'
+            return Assignment(listname + '[' + args[1] + ']', 'operation')
 
     # additions Laura, to be checked for higher levels:
     def list_access_var(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'operation')
 
     def change_list_item(self, args):
-        return hash_var(args[0])
+        return Assignment(hash_var(args[0]), 'operation')
 
     def text(self, args):
         # text never contains a variable
@@ -512,12 +570,13 @@ def process_characters_needing_escape(value):
         value = value.replace(c, f'\{c}')
     return value
 
-#decorator used to store each class in the lookup table
+# decorator used to store each class in the lookup table
 def hedy_transpiler(level):
-  def decorator(c):
-    TRANSPILER_LOOKUP[level] = c
-    return c
-  return decorator
+    def decorator(c):
+        TRANSPILER_LOOKUP[level] = c
+        c.level = level
+        return c
+    return decorator
 
 @hedy_transpiler(level=1)
 class ConvertToPython_1(Transformer):
@@ -525,9 +584,10 @@ class ConvertToPython_1(Transformer):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
+        __class__.level = 1
 
     def get_fresh_var(self, name):
-        while name in self.lookup:
+        while is_variable(name, self.lookup):
             name = '_' + name
         return name
 
@@ -571,7 +631,7 @@ class ConvertToPython_1(Transformer):
             return "t.right(90)" #no arguments works, and means a right turn
 
         argument = args[0]
-        if argument in self.lookup:        #is the argument a variable? if so, use that
+        if is_variable(argument, self.lookup):        #is the argument a variable? if so, use that
             return f"t.right({argument})"
         elif argument.isnumeric():         #numbers can also be passed through
             return f"t.right({argument})"
@@ -580,22 +640,73 @@ class ConvertToPython_1(Transformer):
         else:
             return "t.right(90)" #something else also defaults to right turn
 
+    def check_arg_types(self, args, command, level):
+        allowed_types = self.get_allowed_types(command, level)
+        for arg in args:
+            assignment = self.find_in_lookup(arg)
+            if assignment:
+                if assignment.type != 'operation' and assignment.type not in allowed_types:
+                    # we first try to raise if we expect 1 thing exactly for more precise error messages
+                    if len(allowed_types) == 1:
+                        if allowed_types[0] == 'list':
+                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name)
+                        # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
+
+                    if assignment.type == 'list':
+                        types = ','.join(allowed_types)
+                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name, allowed_types=types)
+                        # same elif here for different types
+
+    def get_allowed_types(self, command, level):
+        # get only the allowed types of the command for all levels before the requested level
+        allowed = [values[command] for key, values in commands_and_types_per_level.items()
+                   if command in values and key <= level]
+        # use the allowed types of the highest level available
+        return allowed[-1] if allowed else []
+
+    def find_in_lookup(self, variable):
+        lookup_vars = [a for a in self.lookup if a.name == variable]
+        # this now grabs the last occurrence, once we have slicing we want to be more precise!
+        return lookup_vars[-1] if lookup_vars else None
+
+
+# todo: could be moved into the transpiler class
+def is_variable(name, lookup):
+    all_names = [a.name for a in lookup]
+    return name in all_names
+
 def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
-    if name in lookup:
+    if is_variable(name, lookup):
         return hash_var(name)
     else:
         return f"'{name}'"
 
 def process_variable_for_fstring(name, lookup):
-    #processes a variable by hashing and escaping when needed
-    if name in lookup:
+    if is_variable(name, lookup):
         return "{" + hash_var(name) + "}"
     else:
         return name
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
+    def check_var_usage(self, args):
+        # this function checks whether arguments are valid
+        # we can proceed if all arguments are either quoted OR all variables
+
+        unquoted_args = [a for a in args if not is_quoted(a)]
+        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
+
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            # all good? return for further processing
+            return args
+        else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
+            first_unquoted_var = unquoted_args[0]
+            raise UndefinedVarException(name=first_unquoted_var)
+
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
     def var(self, args):
@@ -604,6 +715,9 @@ class ConvertToPython_2(ConvertToPython_1):
         return hash_var(name)
         # return "_" + name if name in reserved_words else name
     def print(self, args):
+        # grab the allowed arguments from the dictionary
+        self.check_arg_types(args, 'print', self.level)
+
         argument_string = ""
         i = 0
 
@@ -617,8 +731,7 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 space = " "
 
-            argument_string += process_variable_for_fstring(argument, self.lookup)
-            argument_string += space
+            argument_string += process_variable_for_fstring(argument, self.lookup) + space
 
             i = i + 1
 
@@ -634,7 +747,7 @@ class ConvertToPython_2(ConvertToPython_1):
         #if the parameter is a variable, print as is
         # otherwise, see if we got a number. if not, simply use 50 as default
         try:
-            if parameter not in self.lookup:
+            if not is_variable(parameter, self.lookup):
                 parameter = int(parameter)
         except:
             parameter = 50
@@ -657,6 +770,10 @@ class ConvertToPython_2(ConvertToPython_1):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
+        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
+        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+        self.check_arg_types(args, 'at random', self.level)
+
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
@@ -664,6 +781,21 @@ class ConvertToPython_2(ConvertToPython_1):
 
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
+
+def make_f_string(args, lookup):
+    argument_string = ''
+    for argument in args:
+        if is_variable(argument, lookup):
+            # variables are placed in {} in the f string
+            argument_string += "{" + hash_var(argument) + "}"
+        else:
+            # strings are written regularly
+            # however we no longer need the enclosing quotes in the f-string
+            # the quotes are only left on the argument to check if they are there.
+            argument_string += argument.replace("'", '')
+
+    return f"print(f'{argument_string}')"
+
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=3)
@@ -678,10 +810,10 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def check_print_arguments(self, args):
         # this function checks whether arguments of a print are valid
-        #we can print if all arguments are either quoted OR they are all variables
+        # we can print if all arguments are either quoted OR they are all variables
 
         unquoted_args = [a for a in args if not is_quoted(a)]
-        unquoted_in_lookup = [a in self.lookup for a in unquoted_args]
+        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
             # all good? return for further processing
@@ -695,12 +827,14 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_print_arguments(args)
+        self.check_arg_types(args, 'print', self.level)
         argument_string = ''
         for argument in args:
             argument = argument.replace("'", '') #no quotes needed in fstring
             argument_string += process_variable_for_fstring(argument, self.lookup)
 
         return f"print(f'{argument_string}')"
+
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -709,7 +843,7 @@ class ConvertToPython_3(ConvertToPython_2):
         args_new = []
         var = args[0]
         remaining_args = args[1:]
-
+        self.check_arg_types(remaining_args, 'ask', self.level)
         return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
@@ -750,8 +884,8 @@ class ConvertToPython_5(ConvertToPython_4):
 
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
-        self.check_print_arguments([a for a in args if not type(a) is Tree])
-
+        self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_arg_types(args, 'print', self.level)
 
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
@@ -910,7 +1044,9 @@ class ConvertToPython_12(ConvertToPython_10_11):
     def input(self, args):
         args_new = []
         var = args[0]
-        for a in args[1:]:
+        arguments = args[1:]
+        self.check_arg_types(arguments, 'input', self.level)
+        for a in arguments:
             if type(a) is Tree:
                 args_new.append(f'str({a.children})')
             elif "'" not in a:
@@ -940,8 +1076,9 @@ class ConvertToPython_13(ConvertToPython_12):
             return 'random.choice(' + args[0] + ')'
         else:
             list_access_shifted = args[0] + '[' + args[1] + '-1]'
-            # when printing later, we need to know this is a var
-            self.lookup.append(list_access_shifted)
+            # when printing later, we need to know this is a var\
+            # todo (could be done in the AllAssignments?)
+            self.lookup.append(Assignment(list_access_shifted, 'operation'))
             return list_access_shifted
 
     def change_list_item(self, args):
@@ -1028,8 +1165,9 @@ class ConvertToPython_19_20(ConvertToPython_18):
         arg0 = args[0]
         length_string = f"len({arg0})"
 
-        #when accessing len we need to know it is a var
-        self.lookup.append(length_string)
+        # when accessing len we need to know it is a var
+        # todo (could be done in the AllAssignments?)
+        self.lookup.append(Assignment(length_string, 'operation'))
         return length_string
 
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
