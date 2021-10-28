@@ -151,7 +151,7 @@ adventures:
                         if book is yes
                             print 'Robin buys the book and goes home'
                         else
-                            print 'Robin leaves teh shop and goes home'
+                            print 'Robin leaves the shop and goes home'
                     else
                         print 'Robin goes home'
                     ```
@@ -298,23 +298,39 @@ adventures:
                     ```
                     animals is pig, dog, cow
                     for animal in animals
-                    if animal is pig
-                        sound is oink
-                    if animal is dog
-                        sound is woof
-                    if animal is cow
-                         sound is moo
-                    print 'Old McDonald had a farm'
-                    print 'E I E I O!'
-                    print 'and on that farm he had a ' animal
-                    print 'E I E I O!'
-                    print 'with a ' sound sound ' here'
-                    print 'and a ' sound sound ' there'
-                    print 'here a ' sound
-                    print 'there a ' sound
-                    print 'everywhere a ' sound sound
+                        if animal is pig
+                            sound is oink
+                        if animal is dog
+                            sound is woof
+                        if animal is cow
+                            sound is moo
+                        print 'Old McDonald had a farm'
+                        print 'E I E I O!'
+                        print 'and on that farm he had a ' animal
+                        print 'E I E I O!'
+                        print 'with a ' sound sound ' here'
+                        print 'and a ' sound sound ' there'
+                        print 'here a ' sound
+                        print 'there a ' sound
+                        print 'everywhere a ' sound sound
                     ```
                 start_code: ""
+            10:
+                story_text: |
+                    ## Songs
+                    In level 10 you can use the `for i ing range` command to make songs that use counting.
+                    
+                    ## 5 little monkeys
+                    ```
+                    for i in range 5 to 1
+                        print i ' little monkeys jumping on the bed'
+                        print 'One fell off and bumped his head'
+                        print 'Mama called the doctor and the doctor said'
+                        if i is 1
+                            print 'PUT THOSE MONKEYS RIGHT TO BED!'
+                        else
+                            print 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    ```
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
@@ -1082,7 +1098,7 @@ adventures:
             8:
                 story_text: |
                     ## Restaurant
-                    In level 7 you can use nesting to make your restaurant more realistic and more fun! 
+                    In this level you can use nesting to make your restaurant more realistic and more fun! 
                     For example you would ask for sauce if somebody orders fries, but you wouldn't if someone orders pizza! 
                     Check out the example, and try this at your own virtual restaurant!
                     
@@ -1341,7 +1357,7 @@ adventures:
             9:
               story_text: |
                  ## Fortune Teller
-                 In level 8 you'll learn how to programm the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like. 
+                 In this level you'll learn how to programm the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like. 
                  
                  ## Example Hedy Code
                  ```
@@ -1630,9 +1646,27 @@ adventures:
             8:
                 story_text: |
                     ## What's next?  
-                    You have reached the end of level 8, you're doing great! You are about to go to level 9. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python. 
-                    In Python there is no `repeat` command, but there is a command that works like repeat. Are you curious to find out how to say `repeat` in Python language? Quickly go to level 8 to find out!
+                    You're doing great! In this level we still face a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line. 
+                    For example if you want to sing the song 'if you're happy and you knwo it'
+                    
+                    It would look like this: 
+                    ```
+                    repeat 2 times
+                        print 'if youre happy and you know it clap your hands'
+                    print 'if youre happy and you know it and you really want to show it'
+                    print if you're happy and you know it clap your hands'
+                    ```
+                    
+                    If you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.
+                    In the next level you'll learn the `for` command, which allows you to make a list of actions and repeat the code with another action each time!
+                    Please take a look!
                 start_code: "print 'Lets go to the next level!'"
+            9:
+                story_text: |
+                    ## What's next?
+                    You have reached the end of level 9, you're doing great! You are about to go to level 10. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python. 
+                    In Python there is no `repeat` command, but there is a command that works like repeat. Are you curious to find out how to say `repeat` in Python language? Quickly go to level 10 to find out!
+               start_code: "print 'Lets go to the next level!'"
             10:
                 story_text: |
                     ## What's next?
