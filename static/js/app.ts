@@ -287,10 +287,10 @@ export function tryPaletteCode(exampleCode: string) {
 
 export function toggleFeedback() {
   $ ('#feedbackbox .details').toggle();
-  if ($ ('#feedbackbox .expand-dialog').text().indexOf("▼") != -1){
-    $ ('#feedbackbox .expand-dialog').text("▲ " + ErrorMessages['Click_expand'] + " ▲");
-  } else {
+  if ($ ('#feedbackbox .expand-dialog').is(':visible')){
     $ ('#feedbackbox .expand-dialog').text("▼ " + ErrorMessages['Click_shrink'] + " ▼");
+  } else {
+    $ ('#feedbackbox .expand-dialog').text("▲ " + ErrorMessages['Click_expand'] + " ▲");
   }
 }
 
