@@ -384,17 +384,17 @@ def gradual_feedback_model(code, level, gradual_feedback, language):
         if session['feedback_level'] < 4:
             session['feedback_level'] = session['feedback_level'] + 1
         if session['feedback_level'] == 2:
-            try:
-                response["Feedback"] = gradual_feedback["New_level" + str(level)]
-            except:
-                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
-        elif session['feedback_level'] == 3:
             similar_code = get_similar_code(preprocess_code_similarity_measure(code, level), language, level)
             if similar_code == 0:
                 response["Feedback"] = gradual_feedback["No_similar_code"]
             else:
                 response["Feedback"] = similar_code
                 session['similar_code'] = similar_code
+        elif session['feedback_level'] == 3:
+            try:
+                response["Feedback"] = gradual_feedback["New_level" + str(level)]
+            except:
+                response["Feedback"] = gradual_feedback["Expanded_Unknown"]
         elif session['feedback_level'] == 4:
             response["Feedback"] = gradual_feedback["Break"]
     response["feedback_level"] = session['feedback_level']
