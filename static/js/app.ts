@@ -483,7 +483,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
-      return 3000;
+      return ((hasTurtle) ? 20000 : 3000);
     }) ()
   });
 
