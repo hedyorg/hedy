@@ -1365,6 +1365,8 @@ def transpile(input_string, level):
                 raise ex
             # If the parse at `level - 1` succeeded, then a better error is "wrong level"
             raise WrongLevelException(correct_code=result.code, working_level=new_level, original_level=level) from ex
+        else:
+            raise
 
 
 def repair(input_string):
