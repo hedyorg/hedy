@@ -1,0 +1,67 @@
+title: "Авантюрите в Хеди!"
+subtitle: "Измисли твоя собствена история или игра, за да научиш Хеди най-лесно."
+adventures:
+    story:
+        name: "История"
+        description: "История"
+        image: "story.png"
+        default_save_name: "История"
+        levels:
+            1:
+                story_text: |
+                    ## Съчини история
+                    В първо ниво можеш да съчиниш история с различен главен герой, измислен от теб.
+
+                    Ползвай кода отдолу за начало в историята ти:
+
+                    ```
+                    ask кой е главниат герой в твоята история?
+                    ```
+
+                    Под първия ред напиши `print`, за да принтираш изречението.
+                    Ползвай ключовата дума `echo`, за да се притира името на героя ти в края на изречението.
+
+                    ## Примерен Хеди код
+                    ```
+                    ask Главният герой в тази история е
+                    print Героят навлиза в гората
+                    echo Героят е леко уплашен
+                    print Той чува странни шумове наоколо
+                    print Той се опасява, че гората е омагьосана
+                    ```
+
+                start_code: "print Твоята история започва тук"
+            2:
+                story_text: |
+                    ## История
+                    Във второ ниво можеш да направиш историята си по-внушителна и интересна. Името на твоя герой може да
+                    бъде принтирано на което и да е място в изречението.
+
+                    You do have to program a little bit extra for that. You must now name your main character first.
+
+                    You can then put that name anywhere in a sentence.
+
+                    ## Example Hedy code
+
+                    ```
+                    name is ask What is the name of the main character?
+                    print name is now going to run in the woods
+                    print name is a bit scared
+                    print He hears crazy noises everywhere
+                    print name is afraid this is a haunted forest
+                    ```
+
+                    ## Randomness
+                    You can also add something random to your story. Any monster, animal or other obstacle.
+
+                    It goes like this:
+                    ```
+                    animals is owl, hedgehog, armadillo
+                    print He now hears the sound of an animals at random
+                    ```
+                start_code: "print Your story"
+
+
+
+
+

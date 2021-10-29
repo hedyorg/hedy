@@ -233,18 +233,6 @@
             print 'Olá galera'
             print 'Isso vai ser printado 5 vezes'
         ```
-        Se você juntar um `repeat` e um `if`, você terá que identar cada bloco de código.
-
-        ## Exemplo de código Hedy
-        ```
-        cor is ask 'Qual a sua cor favorita?'
-        if cor is verde
-            repeat 3 times
-                print 'bonita!'
-        else
-            repeat 5 times
-                print 'não gostei'
-        ```
 
     commands:
     -   name: "print"
@@ -262,17 +250,6 @@
             else
                 print 'Opa!'
                 print 'A resposta é 10'
-    -   name: "if e repeat juntos"
-        explanation: "`if` e `repeat` juntos"
-        example: "Exemplo: if cor is verde repeat 3 times print 'bonita!' else repeat 5 times print 'não gostei'"
-        demo_code: |-
-            cor is ask 'Qual a sua cor favorita?'
-            if cor is verde
-                repeat 3 times
-                    print 'bonita!'
-            else
-                repeat 5 times
-                    print 'não gostei'
 8:
     start_code: |-
         animals is dog, cat, blobfish

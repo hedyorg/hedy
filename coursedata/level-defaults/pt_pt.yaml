@@ -198,18 +198,6 @@
             print 'Tudo isto é repetido 5 vezes.'
         ```
         Se juntares um `repeat` e um `if`, terás de indentar cada bloco. Observa o exemplo de código para mais detalhes!"
-
-        ## Exemplo de Código Hedy
-        ```
-        cor is ask 'Qual é a tua cor favorita?'
-        if cor is verde
-            repeat 3 times
-                print 'Linda!'
-        else
-            repeat 5 times
-                print 'Não é assim tão bonita.'
-        ```
-
     commands:
     -   explanation: "Escreve alguma coisa. Lembra-te de usar aspas simples para escreveres com exactidão."
         example: "Exemplo: print '5 vezes 5 é ' 5 * 5"
@@ -224,16 +212,6 @@
             else
                 print 'Oops!'
                 print 'A resposta certa é 10'
-    -   explanation: "`if` e `repeat` juntos."
-        example: "Exemplo: if cor is verde repeat 3 times print 'Linda!' else repeat 5 times print 'pff'"
-        demo_code: |-
-            cor is ask 'Qual é a tua cor favorita?'
-            if cor is verde
-                repeat 3 times
-                    print 'Linda!'
-            else
-                repeat 5 times
-                    print 'pff'
 8:
     start_code: |-
         animals is dog, cat, blobfish

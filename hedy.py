@@ -119,9 +119,11 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
+    return style_closest_command(min_command)
+ 
 
-    return min_command
-
+def style_closest_command(command):
+    return f'<span class="command-highlighted">{command}</span>'
 
 def closest_command_with_min_distance(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
@@ -220,6 +222,10 @@ class CodePlaceholdersPresentException(HedyException):
 class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
+
+class LockedLanguageFeatureException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Locked Language Feature', **arguments)
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -1361,6 +1367,8 @@ def transpile(input_string, level):
                 raise ex
             # If the parse at `level - 1` succeeded, then a better error is "wrong level"
             raise WrongLevelException(correct_code=result.code, working_level=new_level, original_level=level) from ex
+        else:
+            raise
 
 
 def repair(input_string):
@@ -1398,22 +1406,6 @@ def translate_characters(s):
     else:
         return s
 
-def filter_and_translate_terminals(list):
-    # in giving error messages, it does not make sense to include
-    # ANONs, and some things like EOL need kid friendly translations
-    new_terminals = []
-    for terminal in list:
-        if terminal[:4] == "ANON":
-            continue
-
-        if terminal == "EOL":
-            new_terminals.append("Newline")
-            break
-
-        #not translated or filtered out? simply add as is:
-        new_terminals.append(terminal)
-
-    return new_terminals
 
 def beautify_parse_error(character_found):
     character_found = translate_characters(character_found)
@@ -1428,7 +1420,7 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def preprocess_blocks(code):
+def preprocess_blocks(code, level):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
@@ -1446,9 +1438,14 @@ def preprocess_blocks(code):
         #calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
+            if current_number_of_indents > 1 and level == 7:
+                raise hedy.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents - previous_number_of_indents > 1:
-            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
+            raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                            indent_size=indent_size)
+
+
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
@@ -1496,7 +1493,7 @@ def transpile_inner(input_string, level):
 
     #in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
-        input_string = preprocess_blocks(input_string)
+        input_string = preprocess_blocks(input_string, level)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer

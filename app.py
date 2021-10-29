@@ -52,6 +52,7 @@ ALL_LANGUAGES = {
     'el': 'Ελληνικά',
     'zh': "简体中文",
     'cs': 'Čeština',
+    'bg': 'Български',
     'bn': 'বাংলা',
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
@@ -340,23 +341,30 @@ def invalid_space_error_to_response(ex, translations):
     return {"Code": code, "Warning": warning}
 
 def parse_error_to_response(ex, translations):
-    if ex.character_found is not None:
-        # Localize the names of characters. If we can't do that, just show the original character.
-        ex.character_found = translations.get(ex.character_found, ex.character_found)
-    elif ex.keyword_found is not None:
+    if ex.keyword_found is not None:
         # If we find an invalid keyword, place it in the same location in the error message but without translating
         ex.character_found = ex.keyword_found
     error_message = translate_error(ex.error_code, translations, vars(ex))
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
+arguments_that_require_translation = ['allowed_types', 'character_found', 'concept']
+
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
+
 def translate_error(code, translations, arguments):
+    # fetch the error template
     error_template = translations[code]
+
+    # some arguments like allowed types or characters need to be translated in the error message
+    for k, v in arguments.items():
+        if k in arguments_that_require_translation:
+            arguments[k] = translations.get(v, v)
+
     return error_template.format(**arguments)
 
 @app.route('/report_error', methods=['POST'])
