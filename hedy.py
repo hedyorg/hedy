@@ -187,10 +187,6 @@ class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
 
-class InvalidTypeException(HedyException):
-    def __init__(self, **arguments):
-        super().__init__('Invalid Type', **arguments)
-
 class RequiredArgumentTypeException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Required Argument Type', **arguments)
@@ -234,10 +230,6 @@ class CodePlaceholdersPresentException(HedyException):
 class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
-
-class SyntaxErrorException(HedyException):
-    def __init__(self, **arguments):
-        super().__init__('Syntax Error', **arguments)
 
 class UnsupportedFloatException(HedyException):
     def __init__(self, **arguments):
@@ -681,12 +673,13 @@ class ConvertToPython_1(Transformer):
                     # we first try to raise if we expect 1 thing exactly for more precise error messages
                     if len(allowed_types) == 1:
                         if allowed_types[0] == 'list':
-                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name)
+                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name,
+                                                                     required_type=allowed_types[0])
                         # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
 
                     if assignment.type == 'list':
-                        types = ','.join(allowed_types)
-                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name, allowed_types=types)
+                        raise hedy.InvalidArgumentTypeException(command=command, invalid_type=assignment.type,
+                                                                invalid_argument='', allowed_types=','.join(allowed_types))
                         # same elif here for different types
 
     def get_allowed_types(self, command, level):
@@ -1587,7 +1580,9 @@ def transpile_inner(input_string, level):
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?
                 if invalid_command == 'turn':
-                    raise SyntaxErrorException(command=invalid_info.command, argument=''.join(invalid_info.arguments))
+                    raise hedy.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
+                                                       allowed_types='right, left or a number',
+                                                       invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)

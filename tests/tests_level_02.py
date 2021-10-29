@@ -260,7 +260,7 @@ class TestsLevel2(HedyTester):
   def test_turn_right_number(self):
     self.multi_level_tester(
       code="turn right 90",
-      exception=hedy.SyntaxErrorException,
+      exception=hedy.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
