@@ -1439,7 +1439,7 @@ def preprocess_blocks(code, level):
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == 7:
-                raise hedy.LockedLanguageFeatureException(command="block in a block")
+                raise hedy.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents - previous_number_of_indents > 1:
             raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
