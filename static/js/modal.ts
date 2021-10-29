@@ -85,7 +85,7 @@ export const error = {
 
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
-    $('#errorbox .details').text(message);
+    $('#errorbox .details').html(message);
     $('#errorbox').show();
     editor?.resize();
   }

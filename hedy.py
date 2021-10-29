@@ -119,9 +119,11 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
+    return style_closest_command(min_command)
+ 
 
-    return min_command
-
+def style_closest_command(command):
+    return f'<span class="command-highlighted">{command}</span>'
 
 def closest_command_with_min_distance(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
@@ -1404,22 +1406,6 @@ def translate_characters(s):
     else:
         return s
 
-def filter_and_translate_terminals(list):
-    # in giving error messages, it does not make sense to include
-    # ANONs, and some things like EOL need kid friendly translations
-    new_terminals = []
-    for terminal in list:
-        if terminal[:4] == "ANON":
-            continue
-
-        if terminal == "EOL":
-            new_terminals.append("Newline")
-            break
-
-        #not translated or filtered out? simply add as is:
-        new_terminals.append(terminal)
-
-    return new_terminals
 
 def beautify_parse_error(character_found):
     character_found = translate_characters(character_found)
