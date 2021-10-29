@@ -25,7 +25,7 @@ adventures:
                     ```
                     ask A történet főszereplője
                     print A főszereplő most az erdőben fog sétálni
-                    echo Kicsit fél, aki ...
+                    echo Kicsit fél, aki
                     print Őrült zajokat hall mindenütt
                     print Fél, hogy ez egy kísértetjárta erdő
                     ```
@@ -199,7 +199,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
-                    print people at emberek
+                    print emberek at random
                     ```
 
                     ## Mi a következő lépés?
@@ -366,7 +366,7 @@ adventures:
                     ## Példa Hedy kód
                     ```
                     dobások is 1, 2, 3, 4, 5, giliszta
-                    repeat _ _ print ___
+                    repeat _ _ print _ _
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
     rock:
@@ -388,7 +388,7 @@ adventures:
                     ```
                     print Mit választottál?
                     ask Válassz kő, papír és olló közül
-                    echo ez volt a választásod: 
+                    echo ez volt a választásod:
                     ```
 
                     ## Mi a következő lépés?
@@ -526,7 +526,7 @@ adventures:
                     ```
                     print Üdvözlünk a Hedy étteremben
                     ask Mit rendelsz?
-                    echo Szóval ezt szeretnéd megrendelni ... 
+                    echo Szóval ezt szeretnéd megrendelni
                     print Köszönjük a rendelésedet!
                     print Már úton van!
                     ```
@@ -719,7 +719,7 @@ adventures:
 
                     ## Kihívás
                     Természetesen ez a kód bővíthető a menü további elemeivel, italokkal és/vagy több fogással, így nyugodtan adj hozzá annyi lehetőséget, amennyit csak akarsz!
-            8:
+            9:
                 start_code: print 'Üdvözlünk a Hedy étteremben!'
                 story_text: |-
                     ## Étterem
@@ -904,8 +904,8 @@ adventures:
                     szogek is ask 'How many angles should I draw?'
                     szog is 360 / szogek
                     repeat szog times
-                        turn __
-                        forward __
+                        turn _
+                        forward_
                     ```
                 start_code: szogek is ask 'Hány szöget kell rajzolnom?'
     fortune:
@@ -931,7 +931,7 @@ adventures:
                     ask Ki vagy te?
                     print Hadd nézzek bele a kristálygömbömbe
                     print Látom... Látom...
-                    echo A neved...
+                    echo A neved
                     ```
                     ## Kihívás
                     Hedy most csak a nevedet mondja meg. Ki tudod bővíteni a kódot, hogy Hedy több dolgot meg tudjon jósolni rólad?
@@ -1095,6 +1095,7 @@ adventures:
     haunted:
         name: Kísértetház
         description: menekülés a kísértetjárta házból
+        image: "hauntedhouse.png"
         default_save_name: Kísértetház
         levels:
             1:
@@ -1205,7 +1206,7 @@ adventures:
                     Most nagyon nehéz megnyerni ezt a játékot, meg tudod könnyíteni a győzelmet?
                     Például úgy, hogy csak 1 rossz ajtó és 2 helyes ajtó van, 1 helyes  és 2 rossz ajtó helyett?
                 start_code: print 'Szabadulj ki a kísértetházból'
-            8:
+            9:
                 story_text: |-
                     ## Kísértetház
                     A 8. szinten megváltoztattuk az ismétlés parancsot, és hozzáadtunk egy sort a kísértetjárta házunkhoz, amely megmondja a játékosnak, hogy melyik szobában vannak.
@@ -1247,9 +1248,9 @@ adventures:
                     ```
                     print Üdvözlünk a Hedynél
                     ask Mit szeretnél enni?
-                    echo Szóval ezt akarod...
+                    echo Szóval ezt akarod
                     ask Mit akarsz inni?
-                    echo Szóval ezt akarod...
+                    echo Szóval ezt akarod
                     ```
                     Ha a játékos hamburgert és kólát ír be, akkor nem mondhatja azt, hogy "Szóval ezt akarod..  hamburger és kóla", két külön sort kell készíteni.
                     Ezenkívül az "echo" parancs csak a mondat végén visszhangozza a szót. Tehát nem mondhatod, hogy „A hamburger hamarosan jön neked!”.
@@ -1319,7 +1320,7 @@ adventures:
                     Elérted a 7. szint végét, remekül csinálod! A 8. szintre készülsz. A magasabb szinteken Hedy egyre inkább a Python programozási nyelv megtanítására összpontosít.
                     A Pythonban nincs `repeat` parancs, de van olyan parancs, amely úgy működik, mint az repeat. Kíváncsi vagy, hogyan működik "repeat" parancs "valódi" programozási nyelven? Gyorsan lépj a 8. szintre, hogy megtudd!
                 start_code: print 'Menjünk a következő szintre!'
-            8:
+            9:
                 story_text: |-
                     ## Mi a következő lépés?
                     A kódod egyre jobban hasonlít egy python kódra, remek! A 9. szinten megtanulsz egy újabb kis lépést, hogy még inkább hasonlítson a pythonra.

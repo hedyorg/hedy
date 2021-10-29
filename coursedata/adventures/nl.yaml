@@ -25,7 +25,7 @@ adventures:
                     ```
                     ask De hoofdpersoon van dit verhaal is
                     print De hoofdpersoon gaat nu in het bos lopen
-                    echo Hij is wel een beetje bang, die
+                    echo Hij is wel een beetje bang, die 
                     print Overal hoort hij gekke geluiden
                     print Hij is bang dat dit een spookbos is
                     ```
@@ -138,13 +138,13 @@ adventures:
                         print 'Dapper stapt ' hoofdpersoon ' op het geluid af'
                         print _
                     else
-                        print 'Snel zoekt 'hoofdpersoon ' een verstopplek'
+                        print 'Snel zoekt ' hoofdpersoon ' een verstopplek'
                         print _
                     ```
                     In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: ""
                 
-            8: 
+            9: 
                 story_text: |
                     ## Verhaal
                     Hoe langer en meer if commandos in je verhaal, hoe interectiever het verhaal wordt. Het wordt natuurlijk ook lastiger dus let goed op het inspringen!
@@ -262,13 +262,32 @@ adventures:
                     
             8:
                 story_text: |
+                    ## Zing een liedje!
+                    Ook in level 8 kunnen we weer liedjes zingen, bijv. Baby Shark.
+                    Met de nieuwe code `for` kunnen we voor de hele familie in een keer printen.
+                    Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
+
+                    Dat scheelt een hoop regels code!
+
+                    ## Baby Shark
+                    ```
+                    familie is baby, mommy, daddy, grandpa, grandma
+                    for shark in familie
+                      print shark ' shark tudutudutudu'
+                      print shark ' shark tudutudutudu'
+                      print shark ' shark tudutudutudu'
+                      print shark ' shark'
+                    ```
+                start_code: ""
+
+            9:
+                story_text: |
                     ## Zing een stapelliedje!
-                    In level 8 kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren. 
+                    In level 9 kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
                     
                     ## 10 kleine visjes
                     ```
-                    for i in range 0 to 8
-                        i is 10-i
+                    for i in range 10 to 1
                         print i ' kleine visjes zwommen naar de zee'
                         print 'Moeder zei: ik ga niet mee'
                         print 'Ik blijf liever in de vieze oude sloot'
@@ -305,7 +324,7 @@ adventures:
                     forward 50
                     turn right
                     ```
-                start_code: "forward 50\nturn left"
+                start_code: "forward 50\nturn right"
             2:
                 story_text: |
                     ## Tekenen maar
@@ -455,8 +474,8 @@ adventures:
                     hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
                     hoek is 360 / hoeken
                     repeat hoeken times
-                        turn __
-                        forward __
+                        turn _
+                        forward_
                     ```
                 start_code: |
                     hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
@@ -661,7 +680,7 @@ adventures:
                     ```
                     print wat kies jij?
                     ask kies uit steen, schaar of papier
-                    echo dus jouw keuze was:
+                    echo dus jouw keuze was: 
                     ```
                 start_code: "print Welkom bij jouw eigen steen schaar papier!"
             2:
@@ -760,7 +779,7 @@ adventures:
                     if antwoord is goede_antwoord print 'goedzo'
                     else print 'foutje! het was ' goede_antwoord
                     ```
-                start_code: "print Welkom bij jouw rekenmachine"
+                start_code: "print 'Welkom bij jouw rekenmachine'"
             7:
                 story_text: |
                   ## Rekenmachine
@@ -770,15 +789,15 @@ adventures:
                   ```
                   score is 0
                   repeat 10 times
-                    getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    getal1 is getallen at random
-                    getal2 is getallen at random
-                    goedeantwoord is getal1 * getal2
-                    print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
-                    antwoord is ask 'Vul hier het antwoord in:'
-                    print 'Jouw antwoord is ' antwoord
-                    if antwoord is goedeantwoord
-                      score is score +1
+                      getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                      getal1 is getallen at random
+                      getal2 is getallen at random
+                      goedeantwoord is getal1 * getal2
+                      print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
+                      antwoord is ask 'Vul hier het antwoord in:'
+                      print 'Jouw antwoord is ' antwoord
+                      if antwoord is goedeantwoord
+                          score is score +1
                   print 'Je score is ' score
                   ```
                 start_code: ""
@@ -802,7 +821,7 @@ adventures:
                     print Hoi, ik ben Hedy de waarzegger!
                     ask Wie ben jij?
                     print Ik voorspel... Ik voorspel...
-                    echo Jouw naam is...
+                    echo Jouw naam is 
                     ```
                     
                     ## Uitdaging
@@ -976,7 +995,7 @@ adventures:
                     ```
                     print Welkom bij McHedy!
                     ask Wat wilt u bestellen?
-                    echo Dus u wilt graag... 
+                    echo Dus u wilt graag 
                     print Bedankt voor uw bestelling!
                     ```
                     
@@ -1177,7 +1196,7 @@ adventures:
                     ```
                 start_code: "print 'Welkom bij McHedy!' "    
                 
-            8:
+            9:
                 story_text: |
                     ## Maak je eigen restaurant
                     In level 8 kun je de functie `i in range 1 to 5` gebruiken om een bestelling te printen voor meerdere mensen. 
@@ -1205,7 +1224,7 @@ adventures:
     haunted:
         name: "Spookhuis"
         description: "Ontsnap uit het spookhuis"
-        image: ""
+        image: "hauntedhouse.png"
         default_save_name: "Spookhuis"
         levels:
             1:
@@ -1227,7 +1246,7 @@ adventures:
                     print Ik moet maken dat ik wegkom!
                     print Er staan drie deuren voor me, maar welke moet ik kiezen?
                     ask Welke deur kies ik?
-                    echo Ik kies deur... 
+                    echo Ik kies deur 
                     print ...?
                     ```
                     ## Challenge
@@ -1245,7 +1264,7 @@ adventures:
                     print Ontsnap uit het spookhuis!
                     print Voor je staan drie deuren...
                     keuze is ask Welke deur kies je?
-                    print Je koos deur ... keuze
+                    print Je koos deur keuze
                     monsters is een zombie, een vampier, NIKS JE ONTSNAPT
                     print Jij ziet...
                     print monsters at random
@@ -1321,7 +1340,7 @@ adventures:
                     
                 start_code: "print 'Ontsnap uit het spookhuis!'"
                 
-            8:
+            9:
                 story_text: |
                     ## Spookhuis
                     In level 8 kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele i te gebruiken. 
@@ -1370,9 +1389,9 @@ adventures:
                     ```
                     print Welkom bij restaurant Hedy
                     ask wat wilt u eten?
-                    echo Dus dit wilt u eten...
+                    echo Dus dit wilt u eten 
                     ask wat wilt u drinken
-                    echo Dus dit wilt u drinken...
+                    echo Dus dit wilt u drinken 
                     ```
                     Als de speler hamburger en cola invult, kun je nog niet zeggen `dus u wilt een hamburger en cola`, maar je moet daar twee lossen zinnen van maken.
                     Daarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'
@@ -1458,7 +1477,7 @@ adventures:
                     Ben je benieuwd hoe dat eruit ziet? Ga dan snel naar level 8. 
                                  
                 start_code: "print 'Op naar het volgende level!'"
-            8:
+            9:
                 story_text: |
                     ## Vooruitblik
                     In level 8 lijkt je code al wat meer op Pyhton, zometeen zul je in level 9 nog een toevoeging van Pyhton leren! 
@@ -1526,7 +1545,7 @@ adventures:
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.
                 ## start_code is only added because it is required by the schema of Adventures
                 start_code: ""
-            8:
+            9:
                 story_text: |
                     ## Eind
                     Dat was het einde van dit level! Doe nu de quiz om je kennis te testen.

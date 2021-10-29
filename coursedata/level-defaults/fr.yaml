@@ -21,10 +21,10 @@
         demo_code: "ask Quelle est ta couleur préférée?"
     -   name: "echo"
         explanation: "Répète quelque chose avec `echo`."
-        example: "Exemple: echo donc ta couleur préférée est..."
+        example: "Exemple: echo donc ta couleur préférée est "
         demo_code: |-
             ask Quelle est ta couleur préférée?
-            echo donc ta couleur préférée est...
+            echo donc ta couleur préférée est 
 2:
     intro_text: |
         Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `is`.
@@ -259,6 +259,33 @@
 
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for i in range 1 to 11
             print i
         print ' Cache toi ou je te verrai !'
@@ -271,7 +298,7 @@
             for i in range 1 to 11
                 print i
             print ' Cache toi ou je te verrai !'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -307,7 +334,7 @@
                 print 'a est ni 1 ni 2'
 
 
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:

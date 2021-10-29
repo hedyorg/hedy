@@ -243,3 +243,20 @@ In level 21, we introduce the != in the equality checks. This is introduced afte
 
 In level 22, we introduce <= and >=. This is introduced after the change to = and
 == as to make it easier to understand when you already know the syntax for =.
+
+Technical Design
+----------------
+
+### Grammars
+
+Every level of Hedy is essentially a new language which requires its own grammar. Due to the gradual nature of Hedy,
+however, the grammar of each level is only slightly different from the grammar of the previous one. To avoid massive
+duplication, grammar code in Hedy is organized in the following manner:
+
+* A `level1.lark` file serving as a base grammar file.
+* A `level[1-9+]-Additions.lark` file for every level. Each file describes **only** the grammar changes compared to the
+previous level. *Addition* files can add new grammar rules or override existing ones.
+
+To get the grammar of a concrete level, Hedy takes the grammar of level 1 and merges consecutively all the changes
+specified in the *Addition* files until the required level is reached. The final merged grammars for all levels
+are generated in the `/grammars-Total` folder.

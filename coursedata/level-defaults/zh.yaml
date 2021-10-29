@@ -19,10 +19,10 @@
         example: "例如: ask 你最喜欢的颜色是什么?"
         demo_code: "ask 你最喜欢的颜色是什么?"
     -   explanation: "echo的意思是回声, 用echo可以重复执行某一任务."
-        example: "例如: echo 你最喜欢的颜色是什么..."
+        example: "例如: echo 你最喜欢的颜色是什么 "
         demo_code: |-
             ask 你最喜欢的颜色是什么?
-            echo 你最喜欢的颜色是什么...
+            echo 你最喜欢的颜色是什么 
 2:
     intro_text: |
         在第2级学习内容中,我们会学习新的内容. 你可以用`is`来命名一个词.
@@ -237,6 +237,33 @@
                     print '呵呵'
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for i in range 1 to 10
             print i
         print 'Ready or not, here I come!'
@@ -248,7 +275,7 @@
             for i in range 1 to 10
               print i
             print '无论你是否准备好了，我都会来的!'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -258,7 +285,7 @@
     -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
         example: "for i in range 1 to 10:"
         demo_code: |-
-            for i in range 1 to 11:
+            for i in range 1 to 12:
                 print i
             print '无论你是否准备好了，我都会来的!'
     -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
@@ -279,7 +306,7 @@
                 print 'a 是 2'
             else:
                 print 'a 既不是1也不是2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -298,7 +325,7 @@
             if colour is 蓝色:
                 if colourtwo is 黄色:
                     print '我们一起践行绿色生活!'
-11:
+12:
     start_code: |-
         age is input('你现在几岁了?')
         print('所以你的年龄曾经是:')
@@ -322,7 +349,7 @@
             print('无论你是否准备好了，我都会来的')
 
 
-12:
+13:
     start_code: |-
         fruit is ['苹果', '香蕉', '樱桃']
         print(fruit)
@@ -347,7 +374,7 @@
             fruit is ['香蕉', '苹果', '樱桃']
             randomfruit is fruit[random]
             print(randomfruit)
-13:
+14:
     start_code: |-
         you_are_still_here is False
         are_you_still_here is input('你还在这里吗? 是 或 不是?')
@@ -374,7 +401,7 @@
                   print('正确!')
               if good_answer is False:
                   print('错误! ' 5-i ' 试图离开')
-14:
+15:
     start_code: |-
         you_are_still_here is False
         are_you_still_here is input('你还在这里吗? 是 或 不是?')
@@ -405,7 +432,7 @@
               print('至少有一个答案是正确的!')
           else:
               print('这两个答案都是错的!')
-15:
+16:
     start_code: |-
         # 这是一个要问几个数学问题的程序
         for i in range(1,10):
@@ -427,12 +454,12 @@
             # 这是用海迪编写的
             # 除了打印 "你好"，它什么也没做
             print('你好!')
-16:
+17:
     start_code: |-
         age is input('你今年几岁了?')
-        if age < 12:
+        if age < 13:
             print('你比我年纪小!')
-        elif age > 12:
+        elif age > 13:
             print('你比我年纪大!')
     intro_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
     commands:
@@ -441,16 +468,16 @@
         example: "例如: age < 12"
         demo_code: |-
             age is input('你今年几岁了?')
-            if age < 12:
+            if age < 13:
                 print('你比我年纪小!')
     -   name: "Bigger 大于"
         explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
         example: "例如: age > 12"
         demo_code: |-
             age is input('你今年几岁了?')
-            if age > 12:
+            if age > 13:
                 print('你比我年纪大!')
-17:
+18:
     start_code: |-
         correct_answer is False
         # 我们继续知道正确答案被给出!

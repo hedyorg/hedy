@@ -23,10 +23,10 @@
         demo_code: "ask 'Mi a kedvenc színed?'"
     -   name: "echo"
         explanation: "Ismételj valamit: `echo`."
-        example: "Példa: echo a kedvenc színed..."
+        example: "Példa: echo a kedvenc színed "
         demo_code: |-
             ask Mi a kedvenc színed?
-            echo a kedvenc színed...
+            echo a kedvenc színed 
     -   name: forward
         explanation: Rajzolj egy vonalat a `forward` utasítással.
         example: 'Példa: forward 100'
@@ -290,6 +290,33 @@
                     print 'ajaj'
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for i in range 1 to 10
             print i
         print 'Aki bújt, aki nem, megyek!'
@@ -315,7 +342,7 @@
                 print 'Juj!'
                 print 'A válasz 10'
         name: ask
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -326,7 +353,7 @@
         explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
         example: "for i in range 1 to 10:"
         demo_code: |-
-            for i in range 1 to 11:
+            for i in range 1 to 12:
                 print i
             print 'Aki bújt, aki nem, megyek!'
     -   name: "if ezzel:"
@@ -349,7 +376,7 @@
                 print 'a értéke 2'
             else:
                 print 'a értéke nem 1 vagy 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -370,7 +397,7 @@
             if szin is kék:
                 if szinketto is sárga:
                     print 'Együtt zöld!'
-11:
+12:
     start_code: |-
         kor is input('Hány éves vagy?')
         print('Akkor már voltál ennyi éves:')
@@ -395,7 +422,7 @@
             for i in range(0,10):
                 print(i)
             print('Aki bújt, aki nem, megyek!')
-12:
+13:
     start_code: |-
         gyumolcs is ['alma', 'banán', 'cseresznye']
         print(gyumolcs)
@@ -421,7 +448,7 @@
             gyumolcs is ['alma', 'banán', 'cseresznye']
             veletlengyumolcs is gyumolcs[random]
             print(veletlengyumolcs)
-13:
+14:
     start_code: |-
         meg_mindig_itt_vagy is False
         meg_mindig_itt_vagy is input('Itt vagy még? igen vagy nem?')
@@ -453,7 +480,7 @@
                     print('Ez helyes!')
                 if jo_valasz is False:
                     print('Hibás ' 5-i ' kísérlet van hátra')
-14:
+15:
     start_code: |
         meg_itt_vagy is False
         itt_vagy_meg is input('Itt vagy még? igen vagy nem?')
@@ -493,7 +520,7 @@
              print('Legalább egy válasz helyes!')
             else:
              print('Mindkét válasz hibás!')
-15:
+16:
     start_code: |-
         # Ez egy olyan program amely néhány matematikai kérdést fog feltenni
         for i in range(1, 10):
@@ -521,12 +548,12 @@
             # Ez Hedy-ben készült
             # Ez nem csinál mást mint kiírja Szia
             print('szia!')
-16:
+17:
     start_code: |
         kor is input('Hány éves vagy?')
-        if kor < 12:
+        if kor < 13:
          print('Fiatalabb vagy nálam!')
-        elif kor > 12:
+        elif kor > 13:
          print('Idősebb vagy nálam!')
     intro_text: |
         További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
@@ -542,7 +569,7 @@
             Például: kor<12
         demo_code: |
             kor is input('Hány éves vagy?')
-            if kor < 12:
+            if kor < 13:
              print('Fiatalabb vagy, mint én!')
     -   name: Nagyobb
         explanation: |
@@ -552,9 +579,9 @@
             Például: kor>12
         demo_code: |
             kor is input('Hány éves vagy?')
-            if kor < 12:
+            if kor < 13:
              print('Idősebb vagy, mint én!')
-17:
+18:
     start_code: |-
         jo_valasz is False
         # addig folytatjuk míg helyes választ nem kapunk!
@@ -595,7 +622,7 @@
               print('Ezt ' 3 - szam ' alkalommal ismételjük')
               szam is szam + 1
             print('Készen vagyunk')
-18:
+19:
     start_code: |-
         lista is ['első', 'második', 'harmadik']
         masodikertek is lista[2]
@@ -611,7 +638,7 @@
             osszeg is osszeg + lista[3]
             # itt 6-ra számítunk
             print(osszeg)
-19:
+20:
     start_code: |-
         gyumolcs is ['alma', 'banán', 'cseresznye']
         for i in range(1, 3):
@@ -626,7 +653,7 @@
             print('a lista hossza ' length(gyumolcs))
             for i in range(1, length(gyumolcs)):
                 print(gyumolcs[i])
-20:
+21:
     start_code: |-
         print('Mennyi 5+3?')
         valasz = 5+3
@@ -667,7 +694,7 @@
                 print('Ez helyes')
             else:
                 print('Ó nem, ez hibás!')
-21:
+22:
     start_code: |-
         orszag = input('Hol élsz?')
         if orszag != Magyarorszag:
@@ -685,12 +712,12 @@
                 print('Szép munka')
             else:
                 print('Nem volt szabad 5 -öt mondani!')
-22:
+23:
     start_code: |-
         kor = input('Én 12 éves vagyok, te hány éves vagy?')
-        if kor <= 11:
+        if kor <= 12:
             print('Fiatalabb vagy nálam!')
-        elif kor >= 13:
+        elif kor >= 14:
             print('Idősebb vagy nálam!')
     intro_text: Most összekapcsoljuk a < jelet és a = jele-t. Ha látni akarjuk, hogy valami kisebb vagy egyenlő-e a második számnál, akkor a "<=" karaktert használjuk. Azt is ellenőrizhetjük, hogy valami nagyobb vagy egyenlő-e a második számnál a "> =" karakterrekkel.
     commands:
@@ -699,12 +726,12 @@
         example: 'Például: kor <= 12'
         demo_code: |-
             kor = input('Én 13 éves vagyok, te hány éves vagy?')
-            if kor <= 12:
+            if kor <= 13:
                 print('Fiatalabb vagy nálam!')
     -   name: Nagyobb egyenlő
         explanation: '"> =" ellenőrzi, hogy a "> =" bal oldali szám nagyobb vagy egyenlő -e, mint a jobb oldali. Tehát 5> 5 nem igaz, mert 5 nem nagyobb 5 -nél, de 5> = 5 igaz, mert 5 nagyobb vagy egyenlő 5. 4> = 5 nem igaz.'
         example: 'Például: kor >= 12'
         demo_code: |-
             kor = input('Én 12 éves vagyok, te hány éves vagy?')
-            if kor >= 12:
+            if kor >= 13:
                 print('Idősebb vagy nálam!')

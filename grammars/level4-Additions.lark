@@ -4,7 +4,7 @@ command: print | ifelse | ifs | ask | turtle | assign_list | list_access_var | a
 
 assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
 assign: var _SPACE _IS _SPACE textwithspaces
-invalid: textwithoutspaces _SPACE textwithspaces
+invalid: textwithoutspaces (_SPACE textwithspaces)?
 
 print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
 

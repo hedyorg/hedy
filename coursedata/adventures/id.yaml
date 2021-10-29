@@ -25,7 +25,7 @@ adventures:
                     ```
                     ask Karakter utama dalam cerita ini adalah
                     print Karakter utama ini sekarang akan berjalan di dalam hutan
-                    echo Dia sedikit ketakutan, si
+                    echo Dia sedikit ketakutan, si 
                     print Dia mendengar bunyi-bunyi menyeramkan dari sekitar
                     print Dia takut kalau hutan tersebut berhantu
                     ```
@@ -341,8 +341,8 @@ adventures:
                     jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
                     sudut is 360 / jumlahsudut
                     repeat sudut times
-                        turn __
-                        forward __
+                        turn _
+                        forward_
                     ```
                 start_code: hoeken is ask 'Berapa banyak sudut yang aku harus gambar?'
     dishes:
@@ -536,7 +536,7 @@ adventures:
                     ```
                     print apa yang kamu pilih?
                     ask pilih dari batu, gunting, atau kertas
-                    echo jadi pilhan kamu adalah:
+                    echo jadi pilhan kamu adalah: 
                     ```
                 start_code: print Selamat datang di permainan batu guning kertas mu sendiri!
             2:
@@ -622,7 +622,7 @@ adventures:
                     jawaban_benar is 11 * 27
                     jawaban is ask 'Berapa hasil 11 dikali 27?'
                     if jawaban is jawaban_benar print 'bagus!'
-                    else print 'Salah! Jawaban benarnya ' correct_answer
+                    else print 'Salah! Jawaban benarnya ' jawaban_benar
                     ```
 
                     ## Angka-angka acak
@@ -639,7 +639,7 @@ adventures:
                     jawaban_benar is angka_satu * angka_dua
                     jawaban is ask 'berapa hasil dari ' angka_satu ' dikali ' angka_dua '?'
                     if jawaban is jawaban_benar print 'oke'
-                    else print 'salah! jawaban seharusnya adalah ' correct_answer
+                    else print 'salah! jawaban seharusnya adalah ' jawaban_benar
                     ```
                 start_code: print 'Selamat datang di kalkulator ini!'
             7:
@@ -678,7 +678,7 @@ adventures:
                       ```
                      print Selamat datang di rumah makan Hedy
                      ask Apa yang mau kamu pesan?
-                     echo Jadi kamu mau pesan...
+                     echo Jadi kamu mau pesan 
                      print Terima kasih atas pesanannya!
                      print Makanan kamu sedang disiapkan!
                      ```
@@ -795,7 +795,7 @@ adventures:
                     if main is lasagna harga is 12000
                     if main is spaghetti harga is 8000
                     print 'Kamu sudah memesan ' main
-                    print 'Itu akan seharga ' price ' rupiah'
+                    print 'Itu akan seharga ' harga ' rupiah'
                     print 'Terima kasih, selamat menikmati!'
                     ```
                     Tapi kamu juga dapat menambahkan hal-hal lain di rumah makan virtual kamu, misalnya menu makanan yang lebih banyak.
@@ -820,7 +820,7 @@ adventures:
                     if penutup is eskrim harga is harga + 5000
                     if penutup is susu harga is harga + 4000
                     print 'Kamu sudah memesan ' pembuka ' , ' main ' dan ' penutup
-                    print 'Harganya menjadi ' price ' rupiah'
+                    print 'Harganya menjadi ' harga ' rupiah'
                     print 'Terima kasih, selamat menikmati!'
                     ```
 
@@ -831,7 +831,7 @@ adventures:
                     - memberikan diskon juga pembeli memberikan kode kupon rahasia?
                     - menambahkan menu khusus anak-anak?
                     - memikirkan hal lain lagi untuk ditambahkan?
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
             6:
                 story_text: |-
                     ## Rumah makan
@@ -847,7 +847,7 @@ adventures:
 
                     Pada level 5 kamu dapat menanyakan ke beberapa orang tentang apa yang mau dia makan namun kamu tidak bisa menampilkan pesanannya secara terpisah karena kamu hanya bisa mengulang satu baris kode.
                     Pada level 7 kamu akan bisa mengulang beberapa baris kode sekaligus, memungkinkan kamu untuk menanyakan beberapa pesanan dan menampilkannya juga.
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
             7:
                 story_text: |-
                     ## Rumah makan
@@ -872,8 +872,8 @@ adventures:
 
                     ## Tantangan
                     Tentu, kode kamu dapat diperdetil dengan penambahan jenis makanan dan minuman pada menu. Jadi, silakan menambahkan pilihan-pilihan tersebut sesuai dengan keinginanmu!
-                start_code: print Selamat datang di rumah makan Hedy
-            8:
+                start_code: print 'Selamat datang di rumah makan Hedy'
+            9:
                 story_text: |-
                     ## Rumah makan
                     Kamu dapat menggunakan `for i in range 1 to 5` untuk menampilkan pesanan dari berbagai pembeli secara terurut.
@@ -894,7 +894,7 @@ adventures:
                     harga is 40000 * orang
                     print 'Harganya akan menjadi ' harga ' rupiah!'
                     ```
-                start_code: print Selamat datang di rumah makan Hedy
+                start_code: print 'Selamat datang di rumah makan Hedy'
     fortune:
         name: Peramal
         description: Minta Hedy untuk meramal masa depan
@@ -917,7 +917,7 @@ adventures:
                     ask Siapa kamu?
                     print Ijinkan aku melihat bola kristal ku
                     print Aku lihat... Aku lihat...
-                    echo Nama kamu adalah...
+                    echo Nama kamu adalah 
                     ```
 
                     ## Tantangan
@@ -1076,6 +1076,7 @@ adventures:
     haunted:
         name: Rumah berhantu
         description: Keluar dari rumah berhantu
+        image: "hauntedhouse.png"
         default_save_name: rumahhantu
         levels:
             1:
@@ -1096,9 +1097,9 @@ adventures:
                     print Suara apa itu?
                     print Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!
                     print Aku perlu keluar dari sini!
-                    print Ada 3 pintu didepanku..
+                    print Ada 3 pintu didepanku...
                     ask Pintu mana yang harus kupilih?
-                    echo Aku memilih pintu...
+                    echo Aku memilih pintu 
                     print ...?
                     ```
 
@@ -1188,7 +1189,7 @@ adventures:
                     Sekarang permainan ini jadi cukup sulit untuk dimenangkan. Dapatkah kamu membuat permainan ini lebih mudah?
                     Sebagai contoh dengan hanya memiliki 1 pintu yang salah dan 2 pintu benar ketimbang 2 pintu salah dan 1 pintu benar?
                 start_code: print 'Kabur dari rumah berhantu!'
-            8:
+            9:
                 story_text: |-
                     ## Rumah berhantu
                     Pada level 8 kita telah mengubah perintah `repeat` dan menambahkan beberapa baris ke kode permainan rumah berhantu kita, yang menginformasikan ke pemain lokasi ruangan mereka.
@@ -1232,9 +1233,9 @@ adventures:
                     ```
                     print Selamat datang di Hedy
                     ask Apa yang ingin kamu makan?
-                    echo Jadi kamu ingin makan...
+                    echo Jadi kamu ingin makan 
                     ask Apa yang ingin kamu minum?
-                    echo Jadi kamu ingin minum...
+                    echo Jadi kamu ingin minum 
                     ```
 
                     Jika pembeli menuliskan hamburger dan coke, kamu tidak dapat menampilkan 'jadi kamu mau hamburger dan coke', tapi kamu harus membuat dua baris berbeda.
@@ -1309,7 +1310,7 @@ adventures:
                     Python tidak memiliki perintah `repeat`, tapi dia punya perintah yang serupa.
                     Apakah kamu penasaran untuk mengetahui bagaimana mengulang di bahasa pemrograman sesungguhnya? Cepatlah ke level 8 dan lihat!
                 start_code: print 'Ayo bergerak ke level berikutnya!'
-            8:
+            9:
                 story_text: |-
                     ## Apa berikutnya?
                     Kode kamu sekarang terlihat semakin mirip dengan kode Python. Bagus! Pada level 9 kamu akan belajar satu langkah lagi untuk membuat kode kamu semakin mirip Python.

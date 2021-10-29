@@ -19,6 +19,8 @@ ui:
     assignment_header: Tugas
     show_explanation: Tampilkan penjelasan
     hide_explanation: Sembunyikan penjelasan
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: Petualangan
     switch_to_levels: Keluar dari mode petualangan
     switch_to_adventures: Lanjut ke petualangan
@@ -33,6 +35,7 @@ ClientErrorMessages:
     Execute_error: Sesuatu berjalan tidak seharusnya ketika program sedang dijalankan
     CheckInternet: Cobalah cek apakah internet kamu berjalan dengan baik?
     ServerError: Kamu menuliskan sebuah program yang tidak kami duga. Jika kamu butuh bantuan, kirimkan email dengan informasi level dan program kamu ke hedy@felienne.com. Sembari menunggu respon, cobalah cara lain atau lihat kembali contoh-contoh yang disediakan. Terima kasih!
+    Program_too_long: Your program takes too long to run.
 HedyErrorMessages:
     Wrong Level: Itu adalah kode Hedy yang benar, namun tidak pada level yang tepat. Kamu menulis kode untuk level {original_level} pada level {working_level}.
     Incomplete: Ups! Kamu melupakan sedikit bagian kode! Pada baris {line_number}, kamu perlu memberikan teks sebelum {incomplete_command}.
@@ -42,7 +45,7 @@ HedyErrorMessages:
     Parse: Kode yang kamu masukan bukan kode Hedy yang valid. Ada kesalahan pada baris {location[0]}, pada posisi {location[1]}. Kamu menuliskan {character_found}, tapi itu tidak diperbolehkan.
     Unquoted Text: Berhati-hatilah. Jika kamu meminta masukan atau menampilkan sesuatu, teksnya harus diawali dan diakhiri dengan kutip satu. Kamu melupakan salah satu tanda kutip.
     Var Undefined: Kamu mencoba untuk menampilkan variabel {name}, tapi kamu belum mengisinya dengan nilai. Ada kemungkinan bahwa kamu sedang mencoba untuk menampilkan kata {name} tapi melupakan tanda kutip.
-    Lonely Echo: Kamu menggunakan perintah 'echo' sebelum perintah 'ask', atau perintah 'echo' tanpa perintah 'ask'. Pertama tanyakan dengan 'ask' baru lakukan 'echo'.
+    Lonely Echo: Kamu menggunakan perintah echo sebelum perintah ask, atau perintah echo tanpa perintah ask. Pertama tanyakan dengan ask baru lakukan echo.
     space: spasi
     comma: koma
     question mark: tanda tanya
@@ -85,7 +88,7 @@ Auth:
     are_you_sure: Apakah kamu yakin? Kamu tidak dapat membatalkan aksi ini.
     please_username: Silakan masukkan username
     username_three: Username harus berisi paling tidak tiga karakter
-    username_special: Username tidak boleh berisi `:` atau `@`.
+    username_special: Username tidak boleh berisi ':' atau '@'.
     please_password: Silakan masukkan password
     password_six: Password harus berisi paling tidak enam karakter
     repeat_match_email: Email yang dimasukkan ulang tidak sesuai.

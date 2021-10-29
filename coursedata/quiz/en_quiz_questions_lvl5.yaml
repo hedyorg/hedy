@@ -1,135 +1,251 @@
+---
 level: 6
 questions:
+- 1:
+    question_text: "What's Hedy's output when you run this code?"
+    code: "print 2*10"
+    mp_choice_options:
+    - 0:
+      - "option_text": "20"
+      - "code": ""
+      - "feedback": "Correct!"
     - 1:
-            question_text: "What's Hedy's output when you run this code?"
-            code: "print 2*10"
-            mp_choice_options:
-              - {option_text: "20", code: "", feedback: "Correct!"}
-              - {option_text: "12", code: "?", feedback: "No, the plus sign is used in addition"}
-              - {option_text: "2*10", code: "", feedback: "No, Hedy will calculate the answer"}
-              - {option_text: "210", code: "", feedback: "Mind it's a calculation."}
-            correct_answer: "A"
-            hint: "The * is used a a multiplication sign"
-            question_score: 10
+      - "option_text": "12"
+      - "code": "?"
+      - "feedback": "No, the plus sign is used in addition"
     - 2:
-            question_text: "Which sign do you use for a addition?"
-            code: "..."
-            mp_choice_options:
-              - {option_text: "-", code: "", feedback: "That's not it"}
-              - {option_text: "plus", code: "", feedback: "That's not it"}
-              - {option_text: "*", code: "", feedback: "That's not it"}
-              - {option_text: "+", code: "", feedback: "Correct!"}
-            correct_answer: "D"
-            hint: "It's the plus sign."
-            question_score: 10
+      - "option_text": "2*10"
+      - "code": ""
+      - "feedback": "No, Hedy will calculate the answer"
     - 3:
-            question_text: "What's Hedy's output when you run this code?"
-            code: "print '3*10'"
-            mp_choice_options:
-              - {option_text: "30", code: "", feedback: "This would be the right answer if there were no quotation marks."}
-              - {option_text: "13", code: "?", feedback: "Try again.."}
-              - {option_text: "3*10", code: "", feedback: "Correct! There are quotation marks, so Hedy will print it literally."}
-              - {option_text: "Nothing, Hedy will give an error message.", code: "", feedback: "No, Hedy will print it literally."}
-            correct_answer: "C"
-            hint: "Mind the quotation marks!!"
-            question_score: 10
-    - 4:
-            question_text: "Kim is 10 years old. What will Hedy print for her?"
-            code: |-
-              name is ask 'How many letters are in your name?'
-              age is ask 'How old are you?'
-              luckynumber is name*age
-              print 'Your lucky number is...' luckynumber
-            mp_choice_options:
-              - {option_text: "30", code: "", feedback: "Mind, Hedy also prints 'Your lucky number is...'"}
-              - {option_text: "10", code: "", feedback: "Please try again."}
-              - {option_text: "Your lucky number is... 30", code: "", feedback: " That's right!"}
-              - {option_text: "Your lucky number is... 10", code: "", feedback: "Her lucky number is name times age..."}
-            correct_answer: "C"
-            hint: "Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30."
-            question_score: 10    
-    - 5:
-            question_text: "If 5 people eat at this restaurant, how much do tehy have to pay in total?"
-            code: |-
-              print 'Welcome to Hedys!'
-              mensen is 'How many people are eating with us tonight?'
-              price is people * 10
-              print 'That will be ' price 'dollar please'
-            mp_choice_options:
-              - {option_text: "5 dollars", code: "", feedback: "Unfortunately, it's not that cheap."}
-              - {option_text: "10 dollars", code: "", feedback: "No, it's 10 dollars each."}
-              - {option_text: "15 dollars", code: "", feedback: "The * means multiplication."}
-              - {option_text: "50 dollars", code: "", feedback: "Great!"}
-            correct_answer: "D"
-            hint: "price is people times 10"
-            question_score: 10    
-    - 6:
-            question_text: "How much does a hamburger cost is this virtual restaurant?"
-            code: |-
-              print 'Welcome at Hedys diner'
-              food is ask 'What would you like to eat?'
-              price is 0
-              if food is hamburger price is 15
-              if food is fries price is 6
-            mp_choice_options:
-              - {option_text: "15 dollars", code: "", feedback: "Super!"}
-              - {option_text: "6 dollars", code: "", feedback: "The fries are 6 dollars"}
-              - {option_text: "0 dollars", code: "", feedback: "The hamburger isn't free!"}
-              - {option_text: "21 dollars", code: "", feedback: "That's the price for a humburger and fries!"}
-            correct_answer: "A"
-            hint: "Mind the fourth line."
-            question_score: 10
-    - 7:
-            question_text: "Why does line 7 say 'price is price + 3' instead of 'price is 3'?"
-            code: |-
-              print 'Welcome at Hedys diner'
-              food is ask 'What would you like to eat?'
-              price is 0
-              if food is hamburger price is price + 15
-              if food is fries price is price + 6
-              drinks is 'What would you like to drink?'
-              if drinks is coke price is price + 3
-              if drinks is water price ie sprice + 1
-              print price ' dollars please' 
-            mp_choice_options:
-              - {option_text: "It could have been 'price is 3' just as well.", code: "", feedback: "No, that's not true. Hedy needs to add 3 dollars to the total."}
-              - {option_text: "Because Hedy doesn't understand 'price is 3'.", code: "", feedback: "Hedy would understand, but it wouldn't be right."}
-              - {option_text: "Because Hedy would otherwise forget about the preious order. The price would be 3 dollars in total.", code: "", feedback: "That's right!"}
-              - {option_text: "Because the price is 0 dollars to begin with.", code: "", feedback: "That's true, but not the reason"}
-            correct_answer: "C"
-            hint: "The price shouldn't be 3, but 3 dolalrs more than it already was"
-            question_score: 10
-    - 8:
-            question_text: "Why is this code incorrect?"
-            code: |-
-              correct answer is 3*12
-              answer is ask 'What is 3 times 12?'
-              if answer is correct answer print 'Good job!'
-              else print 'No... It was ' correct answer
-            mp_choice_options:
-              - {option_text: "There shouldn't be quotation marks in line 2", code: "", feedback: "No, there shoud be!"}
-              - {option_text: " The variable is called correct answer, but a variable's name can only be 1 word. So it should be correctanswer", code: "", feedback: "Correct!"}
-              - {option_text: " The if and else commands should be in the same line.", code: "", feedback: "No, that's not true."}
-              - {option_text: "The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.", code: "", feedback: "Variable names can be similar, but they can't be 2 words..."}
-            correct_answer: "B"
-            hint: "Inspect what the variables are called."
-            question_score: 10
-    - 9:
-            question_text: " Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are? "
-            code: |-
-              print 'Im Hedy the silly fortune teller'
-              print 'I will predict how smart you are!'
-              football is ask 'On a scale of 0 to 10 how much do you love football?'
-              bananas is ask 'How many bananas have you eaten this week?'
-              hygiene is ask 'How many times did you wash your hands today??'
-              result is bananas + hygiene
-              result is result * football
-              print 'You are ' result 'percent smart.'
-            mp_choice_options:
-              - {option_text: "10%", code: "", feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"}
-              - {option_text: "32%", code: "", feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"}
-              - {option_text: "50%", code: "", feedback: "Super! You are 100 percent smart!"}
-              - {option_text: "100%", code: "", feedback: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"}
-            correct_answer: "C"
-            hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
-            question_score: 10
+      - "option_text": "210"
+      - "code": ""
+      - "feedback": "Mind it's a calculation."
+    correct_answer: "A"
+    hint: "The * is used a a multiplication sign"
+    question_score: 10
+- 2:
+    question_text: "Which sign do you use for a addition?"
+    code: "..."
+    mp_choice_options:
+    - 0:
+      - "option_text": "-"
+      - "code": ""
+      - "feedback": "That's not it"
+    - 1:
+      - "option_text": "plus"
+      - "code": ""
+      - "feedback": "That's not it"
+    - 2:
+      - "option_text": "*"
+      - "code": ""
+      - "feedback": "That's not it"
+    - 3:
+      - "option_text": "+"
+      - "code": ""
+      - "feedback": "Correct!"
+    correct_answer: "D"
+    hint: "It's the plus sign."
+    question_score: 10
+- 3:
+    question_text: "What's Hedy's output when you run this code?"
+    code: "print '3*10'"
+    mp_choice_options:
+    - 0:
+      - "option_text": "30"
+      - "code": ""
+      - "feedback": "This would be the right answer if there were no quotation marks."
+    - 1:
+      - "option_text": "13"
+      - "code": "?"
+      - "feedback": "Try again.."
+    - 2:
+      - "option_text": "3*10"
+      - "code": ""
+      - "feedback": "Correct! There are quotation marks, so Hedy will print it literally."
+    - 3:
+      - "option_text": "Nothing, Hedy will give an error message."
+      - "code": ""
+      - "feedback": "No, Hedy will print it literally."
+    correct_answer: "C"
+    hint: "Mind the quotation marks!!"
+    question_score: 10
+- 4:
+    question_text: "Kim is 10 years old. What will Hedy print for her?"
+    code: |-
+      name is ask 'How many letters are in your name?'
+      age is ask 'How old are you?'
+      luckynumber is name*age
+      print 'Your lucky number is...' luckynumber
+    mp_choice_options:
+    - 0:
+      - "option_text": "30"
+      - "code": ""
+      - "feedback": "Mind, Hedy also prints 'Your lucky number is...'"
+    - 1:
+      - "option_text": "10"
+      - "code": ""
+      - "feedback": "Please try again."
+    - 2:
+      - "option_text": "Your lucky number is... 30"
+      - "code": ""
+      - "feedback": " That's right!"
+    - 3:
+      - "option_text": "Your lucky number is... 10"
+      - "code": ""
+      - "feedback": "Her lucky number is name times age..."
+    correct_answer: "C"
+    hint: "Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30."
+    question_score: 10
+- 5:
+    question_text: "If 5 people eat at this restaurant, how much do tehy have to pay\
+      \ in total?"
+    code: |-
+      print 'Welcome to Hedys!'
+      mensen is 'How many people are eating with us tonight?'
+      price is people * 10
+      print 'That will be ' price 'dollar please'
+    mp_choice_options:
+    - 0:
+      - "option_text": "5 dollars"
+      - "code": ""
+      - "feedback": "Unfortunately, it's not that cheap."
+    - 1:
+      - "option_text": "10 dollars"
+      - "code": ""
+      - "feedback": "No, it's 10 dollars each."
+    - 2:
+      - "option_text": "15 dollars"
+      - "code": ""
+      - "feedback": "The * means multiplication."
+    - 3:
+      - "option_text": "50 dollars"
+      - "code": ""
+      - "feedback": "Great!"
+    correct_answer: "D"
+    hint: "price is people times 10"
+    question_score: 10
+- 6:
+    question_text: "How much does a hamburger cost is this virtual restaurant?"
+    code: |-
+      print 'Welcome at Hedys diner'
+      food is ask 'What would you like to eat?'
+      price is 0
+      if food is hamburger price is 15
+      if food is fries price is 6
+    mp_choice_options:
+    - 0:
+      - "option_text": "15 dollars"
+      - "code": ""
+      - "feedback": "Super!"
+    - 1:
+      - "option_text": "6 dollars"
+      - "code": ""
+      - "feedback": "The fries are 6 dollars"
+    - 2:
+      - "option_text": "0 dollars"
+      - "code": ""
+      - "feedback": "The hamburger isn't free!"
+    - 3:
+      - "option_text": "21 dollars"
+      - "code": ""
+      - "feedback": "That's the price for a humburger and fries!"
+    correct_answer: "A"
+    hint: "Mind the fourth line."
+    question_score: 10
+- 7:
+    question_text: "Why does line 7 say 'price is price + 3' instead of 'price is\
+      \ 3'?"
+    code: |-
+      print 'Welcome at Hedys diner'
+      food is ask 'What would you like to eat?'
+      price is 0
+      if food is hamburger price is price + 15
+      if food is fries price is price + 6
+      drinks is 'What would you like to drink?'
+      if drinks is coke price is price + 3
+      if drinks is water price ie sprice + 1
+      print price ' dollars please' 
+    mp_choice_options:
+    - 0:
+      - "option_text": "It could have been 'price is 3' just as well."
+      - "code": ""
+      - "feedback": "No, that's not true. Hedy needs to add 3 dollars to the total."
+    - 1:
+      - "option_text": "Because Hedy doesn't understand 'price is 3'."
+      - "code": ""
+      - "feedback": "Hedy would understand, but it wouldn't be right."
+    - 2:
+      - "option_text": "Because Hedy would otherwise forget about the preious order.\
+          \ The price would be 3 dollars in total."
+      - "code": ""
+      - "feedback": "That's right!"
+    - 3:
+      - "option_text": "Because the price is 0 dollars to begin with."
+      - "code": ""
+      - "feedback": "That's true, but not the reason"
+    correct_answer: "C"
+    hint: "The price shouldn't be 3, but 3 dolalrs more than it already was"
+    question_score: 10
+- 8:
+    question_text: "Why is this code incorrect?"
+    code: |-
+      correct answer is 3*12
+      answer is ask 'What is 3 times 12?'
+      if answer is correct answer print 'Good job!'
+      else print 'No... It was ' correct answer
+    mp_choice_options:
+    - 0:
+      - "option_text": "There shouldn't be quotation marks in line 2"
+      - "code": ""
+      - "feedback": "No, there shoud be!"
+    - 1:
+      - "option_text": " The variable is called correct answer, but a variable's name\
+          \ can only be 1 word. So it should be correctanswer"
+      - "code": ""
+      - "feedback": "Correct!"
+    - 2:
+      - "option_text": " The if and else commands should be in the same line."
+      - "code": ""
+      - "feedback": "No, that's not true."
+    - 3:
+      - "option_text": "The variable in line 2 can't be called answer, because it\
+          \ is too similar to the variable correct answer."
+      - "code": ""
+      - "feedback": "Variable names can be similar, but they can't be 2 words..."
+    correct_answer: "B"
+    hint: "Inspect what the variables are called."
+    question_score: 10
+- 9:
+    question_text: " Imagine you love football a 10, you've eaten 2 bananas and have\
+      \ washed your hands 3 times today. How smart does the silly fortune teller think\
+      \ you are? "
+    code: |-
+      print 'Im Hedy the silly fortune teller'
+      print 'I will predict how smart you are!'
+      football is ask 'On a scale of 0 to 10 how much do you love football?'
+      bananas is ask 'How many bananas have you eaten this week?'
+      hygiene is ask 'How many times did you wash your hands today??'
+      result is bananas + hygiene
+      result is result * football
+      print 'You are ' result 'percent smart.'
+    mp_choice_options:
+    - 0:
+      - "option_text": "10%"
+      - "code": ""
+      - "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+    - 1:
+      - "option_text": "32%"
+      - "code": ""
+      - "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+    - 2:
+      - "option_text": "50%"
+      - "code": ""
+      - "feedback": "Super! You are 100 percent smart!"
+    - 3:
+      - "option_text": "100%"
+      - "code": ""
+      - "feedback": "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+    correct_answer: "C"
+    hint: "(2 bananas + 3 hygiene) * 10 football = 5*10 = ?"
+    question_score: 10

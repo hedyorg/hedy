@@ -21,10 +21,10 @@
         demo_code: "ask What is your favorite color?"
     -   name: "echo"
         explanation: "Repeat something using `echo`."
-        example: "Example: echo so your favorite color is..."
+        example: "Example: echo so your favorite color is "
         demo_code: |-
             ask What is your favorite color?
-            echo so your favorite color is...
+            echo so your favorite color is 
     -   name: "forward"
         explanation: "Draw a line with `forward`."
         example: "Example: forward 100"
@@ -131,6 +131,17 @@
 
          This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
 
+         When we want to check if something is in a list, we can now use `in` between the thing and the list.
+
+         ## Example Hedy Code
+         ```
+         pretty_colors is green, yellow
+         color is ask 'What is your favorite color?'
+         if color in pretty_colors print 'pretty!' else print 'meh'
+         ```
+
+         This code prints pretty! if you choose green or yellow, and meh otherwise.
+
          ## Tip
          Sometimes code with an `if` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `else` like this:
          ```
@@ -166,6 +177,13 @@
         demo_code: |-
             answer is ask 'How far should I walk?'
             if answer is far forward 100 else forward 5
+    -   name: "in"
+        explanation: "Check elements with `in`"
+        example: "Example: if color in pretty_colors print 'pretty!' else print 'meh'"
+        demo_code: |-
+            pretty_colors is green, yellow
+            color is ask 'What is your favorite color?'
+            if color in pretty_colors print 'pretty!' else print 'meh'
 5:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
@@ -272,12 +290,39 @@
                 forward 50
 8:
     start_code: |-
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+    intro_text: |
+        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
+        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+
+        ## Example Hedy code
+        ```
+        animals is dog, cat, blobfish
+        for animal in animals
+          print 'I love ' animal
+        ```
+    commands:
+    -   name: "print"
+        explanation: "Print something. Remember to use a quotation mark for literal printing."
+        example: "Example: print '5 times 5 is ' 5 * 5"
+        demo_code: "print '5 times 5 is ' 5 * 5"
+    -   name: "for with a list"
+        explanation: "print all things in a list "
+        example: "Example: for dier in dieren"
+        demo_code: |-
+            animals is dog, cat, blobfish
+            for animal in animals
+              print 'I love ' animal
+9:
+    start_code: |-
         for counter in range 1 to 5
             print counter
-    intro_text: "`print` works just the same but the `repeat` is now replaced by `for`! You can now write `for counter in range 1 to 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
+    intro_text: "`print` works just the same but the we add a new form of the `for`. You can now write `for counter in range 1 to 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `for` and `if` statements (That means starting a sentence with four spaces)"
     commands:
     -   name: "for loop"
-        explanation: "We replace `repeat` with `for` and add a range"
+        explanation: "We can use `for` with a range"
         example: "for counter in range 1 to 5"
         demo_code: |-
             for counter in range 1 to 5
@@ -293,7 +338,7 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
-9:
+10:
     start_code: |-
         for i in range 1 to 10:
             print i
@@ -304,7 +349,7 @@
         explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
         example: "for i in range 1 to 10:"
         demo_code: |-
-            for i in range 1 to 11:
+            for i in range 1 to 12:
                 print i
             print 'Ready or not, here I come!'
     -   name: "if"
@@ -327,7 +372,7 @@
                 print 'a is 2'
             else:
                 print 'a is not 1 or 2'
-10:
+11:
     start_code: |-
         for i in range 1 to 3:
             for j in range 1 to 5:
@@ -348,7 +393,7 @@
             if colour is blue:
                 if colourtwo is yellow:
                     print 'Together we make green!'
-11:
+12:
     start_code: |-
         age is input('What is your age?')
         print('So you have been these ages:')
@@ -373,7 +418,7 @@
             for i in range(0, 10):
                 print(i)
             print('Ready or not, here I come')
-12:
+13:
     start_code: |-
         fruit is ['apple', 'banana', 'cherry']
         print(fruit)
@@ -399,7 +444,7 @@
             fruit is ['banana', 'apple', 'cherry']
             randomfruit is fruit[random]
             print(randomfruit)
-13:
+14:
     start_code: |-
         you_are_still_here is False
         are_you_still_here is input('Are you still here? yes or no?')
@@ -426,7 +471,7 @@
                     print('That is correct!')
                 if good_answer is False:
                     print('That is wrong! ' 5-i ' attempts left')
-14:
+15:
     start_code: |-
         you_are_still_here is False
         are_you_still_here is input('Are you still here? yes or no?')
@@ -457,7 +502,7 @@
                 print('At least one answer is correct!')
             else:
                 print('Both answers are wrong!')
-15:
+16:
     start_code: |-
         # This is a program that is going to ask a couple of math questions
         for i in range(1, 10):
@@ -481,12 +526,12 @@
             # It has been made in Hedy
             # It does nothing except print Hello!
             print('Ηello!')
-16:
+17:
     start_code: |-
         age is input('How old are you?')
-        if age < 12:
+        if age < 13:
             print('You are younger than me!')
-        elif age > 12:
+        elif age > 13:
             print('You are older than me!')
     intro_text: "We are going to learn more new items! You might know them already from mathematics, the `<` and `>`. The `<` checks if the first number is smaller than the second, like `4 < 5`. The `>` checks if the first number is bigger than the second, like `6 > 5`."
     commands:
@@ -495,16 +540,16 @@
         example: "For example: age < 12"
         demo_code: |-
             age is input('How old are you?')
-            if age < 12:
+            if age < 13:
                 print('You are younger than me!')
     -   name: "Bigger"
         explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`."
         example: "For example: age > 12"
         demo_code: |-
             age is input('How old are you?')
-            if age > 12:
+            if age > 13:
                 print('You are older than me!')
-17:
+18:
     start_code: |-
         correct_answer is False
         # we continue until the correct answer has been given!
@@ -536,7 +581,7 @@
                 print('We do this ' 3 - count ' more times')
                 count is count + 1
             print('We are done')
-18:
+19:
     start_code: |-
         list is ['first', 'second', 'third']
         secondvalue is list[2]
@@ -552,7 +597,7 @@
             sum is sum + list[3]
             # we expect a 6 here
             print(sum)
-19:
+20:
     start_code: |-
         fruit is ['apple', 'banana', 'cherry']
         for i in range(1, 3):
@@ -567,7 +612,7 @@
             print('length of list is ' length(fruit))
             for i in range(1, length(fruit)):
                 print(fruit[i])
-20:
+21:
     start_code: |-
         print('What is 5+3?')
         answer = 5+3
@@ -607,7 +652,7 @@
                 print('That is correct!')
             else:
                 print('No, that is wrong!')
-21:
+22:
     start_code: |-
         country = input('Where do you live?')
         if country != Netherlands:
@@ -625,12 +670,12 @@
                 print('Good job!')
             else:
                 print('You were not allowed to say 5!')
-22:
+23:
     start_code: |-
         age = input('I am 12 years old, how old are you?')
-        if age <= 11:
+        if age <= 12:
             print('You are younger than I am!')
-        elif age >= 13:
+        elif age >= 14:
             print('You are older than I am!')
     intro_text: "We are going to combine < and = now. If we want to see if something is smaller or equal than the second number, we use `<=`. We can also check if something is bigger or equal than the second number with `>=`."
     commands:
@@ -639,12 +684,12 @@
         example: "For example: age <= 12"
         demo_code: |-
             age = input('I am 13 years old, how old are you?')
-            if age <= 12:
+            if age <= 13:
                 print('You are younger than I am!')
     -   name: "Larger equal"
         explanation: "`>=` checks if the number on the left of the `>=` is bigger or equal than the one on the right. So 5 > 5 is not true because 5 is not bigger than 5 but 5 >= 5 is true because 5 is bigger or equal to 5. 4 >= 5 is not true."
         example: "For example: age >= 12"
         demo_code: |-
             age = input('I am 11 years old, how old are you?')
-            if age >= 12:
+            if age >= 13:
                 print('You are older than I am!')
