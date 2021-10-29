@@ -672,7 +672,9 @@ class ConvertToPython_1(Transformer):
         elif argument == 'right':
             return "t.right(90)"
         else:
-            raise InvalidArgumentException(command = "turn", arg = argument)
+            raise InvalidArgumentTypeException(command='turn', invalid_type='',
+                                                            allowed_types=['right', 'left', 'number'],
+                                                            invalid_argument=argument)
 
     def check_arg_types(self, args, command, level):
         allowed_types = self.get_allowed_types(command, level)
