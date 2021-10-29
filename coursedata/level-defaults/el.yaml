@@ -202,18 +202,7 @@
             print 'Γειά σας'
             print 'Αυτό θα επαναληφθεί 5 φορές'
         ```
-        Αν συνδυάσετε μια repeat με μια if, θα πρέπει να βάλετε εσοχή σε κάθε μπλοκ. Δείτε το παράδειγμα κώδικα για περισσότερες λεπτομέρειες!
 
-        ## Παράδειγμα κώδικα Hedy
-         ```
-         color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-         if color is πράσινο
-             repeat 3 times
-                 print 'όμορφο!'
-         else
-             repeat 5 times
-                 print 'όχι τόσο όμορφο'
-         ```
 
 
     commands:
@@ -232,17 +221,6 @@
             else
                 print 'Ουπς!'
                 print 'Η απάντηση είναι 10'
-    -   name: 'if and repeat combined'
-        explanation: 'Οι `if` και `repeat` σε συνδυασμό'
-        example: "Παράδειγμα: if color is πράσινο repeat 3 times print 'όμορφο!' else repeat 5 times print 'έτσι κι έτσι'"
-        demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-            if color is πράσινο
-              repeat 3 times
-                print 'όμορφο!'
-            else
-              repeat 5 times
-                print 'έτσι κι έτσι'
 8:
     start_code: |-
         animals is dog, cat, blobfish

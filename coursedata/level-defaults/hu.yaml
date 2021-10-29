@@ -249,18 +249,6 @@
           print 'Sziasztok'
           print 'Ez 5-ször ismétlődik'
         ```
-        Ha kombinálsz egy `repeat`-et és egy `if`-et, akkor minden blokkot be kell húznod. Nézd
-        meg a példakódot a részletekért'
-        ## Hedy code példa
-        ```
-        szin is ask 'Mi a kedvenc színed?'
-        if szin is zöld
-            repeat 3 times
-                print 'szép!'
-        else
-            repeat 5 times
-                print 'nem olyan szép'
-         ```
     commands:
     -   name: "print"
         explanation: "Írass ki valamit. Ne felejts el a posztrófot használni a helyes kiíratáshoz."
@@ -277,17 +265,6 @@
             else
                 print 'Hoppá!'
                 print 'A válasz 10'
-    -   name: "if és repeat együtt"
-        explanation: "`if` és `repeat` együtt"
-        example: "Példa: if szin is zöld repeat 3 times print 'csodás!' else repeat 5 times print 'Ajaj'"
-        demo_code: |-
-            szin is ask 'Mi a kedvenc színed?'
-            if szin is zöld
-                repeat 3 times
-                    print 'csodás!'
-            else
-                repeat 5 times
-                    print 'ajaj'
 8:
     start_code: |-
         animals is dog, cat, blobfish

@@ -44,11 +44,17 @@ We vinden het heel leuk om te horen wat jij allemaal maakt!
 
 [Klik hier om een mailtje te sturen](mailto:hedy@felienne.com "Stuur een mail")
 
+# Workshop programmeren met Hedy voor leerkrachten
+
+Voor wie: Leerkrachten bovenbouw po, onderbouw vo, ICT-coördinatoren, plusklassen. Programmeerervaring niet nodig!
+
+Wanneer: Donderdag 25 november 16.00 - 17.00
+
+Waar: Online via Zoom [Aanmelden](https://forms.gle/FeAxyKiczs93mSwG6).
+
 # Foutje gevonden?
 
 [Geef het door via GitHub](https://github.com/Felienne/hedy/issues/new)
-
-
 
 # Code week talk
 Wil je meer weten? Felienne gaf een praatje op de European Code Week 2020 (in het Engels):
