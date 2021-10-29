@@ -195,18 +195,7 @@
             print 'Ahoj všichni'
             print 'Tohle všechno se 5krát zopakuje'
         ```
-        Pokud kombinuješ `repeat` a `if`, musíš každý blok odsadit. Podívej na příklad kódu, ať víš, jak se to správně dělá!"
 
-         ## Příklad kódu v Hedy
-         ```
-         barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-         if barva is zelená
-             repeat 3 times
-                 print 'Nádherná!'
-         else
-             repeat 5 times
-                 print 'Znám i lepší...'
-         ```
     commands:
     -   explanation: Něco vypiš a hlavně nezapomeň na uvozovky!
         example: "Příklad: print '5 krát 5 je ' 5 * 5"
@@ -221,16 +210,6 @@
             else
                 print 'Ups, těsně vedle...'
                 print 'Správný výsledek je 10.'
-    -   explanation: Zkombinuj `if` a `repeat`.
-        example: "Příklad: if barva is zelená repeat 3 times print 'Pěkná!' else repeat 5 times print 'Fuj'"
-        demo_code: |-
-             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-             if barva is zelená
-                 repeat 3 times
-                     print 'Nádherná!'
-             else
-                 repeat 5 times
-                     print 'Znám i lepší...'
 8:
     start_code: |-
         animals is dog, cat, blobfish

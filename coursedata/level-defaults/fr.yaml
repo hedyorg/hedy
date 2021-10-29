@@ -215,19 +215,6 @@
             print 'Ceci sera affiché 5 fois'
         ```
 
-        Si tu combines un if et un repeat, tu devras indenter chaque bloc. Regarde les exemples pour plus de détails!"
-
-        ## Exemple de code Hedy
-        ```
-        couleur is ask 'Quelle est ta couleur préférée?'
-        if couleur is vert
-            repeat 3 times
-                print 'joli!'
-        else
-            repeat 5 times
-                print 'bof'
-        ```
-
     commands:
     -   name: "print"
         explanation: "Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi."
@@ -244,19 +231,6 @@
             else
                 print 'Oups!'
                 print 'La réponse devrait être 10.'
-    -   name: "`if` et `repeat` combinés"
-        explanation: "`if` et `repeat` combinés"
-        example: "Exemple: if couleur is vert repeat 3 times print 'joli!' else repeat 5 times print 'bof'"
-        demo_code: |-
-            couleur is ask 'Quelle est ta couleur préférée?'
-            if couleur is vert
-                repeat 3 times
-                    print 'joli!'
-            else
-                repeat 5 times
-                    print 'bof'
-
-
 8:
     start_code: |-
         animals is dog, cat, blobfish

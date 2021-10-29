@@ -223,6 +223,10 @@ class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
 
+class LockedLanguageFeatureException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Locked Language Feature', **arguments)
+
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
@@ -1416,7 +1420,7 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def preprocess_blocks(code):
+def preprocess_blocks(code, level):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
@@ -1434,9 +1438,14 @@ def preprocess_blocks(code):
         #calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
+            if current_number_of_indents > 1 and level == 7:
+                raise hedy.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents - previous_number_of_indents > 1:
-            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
+            raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                            indent_size=indent_size)
+
+
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
@@ -1484,7 +1493,7 @@ def transpile_inner(input_string, level):
 
     #in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
-        input_string = preprocess_blocks(input_string)
+        input_string = preprocess_blocks(input_string, level)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer

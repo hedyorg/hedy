@@ -217,19 +217,6 @@
             print 'Hola amigos'
             print 'Esto se va a mostrar 5 veces'
         ```
-
-        Si combinas `repeat` e `if`, vas a tener que respetar el sangrado. ¡Vamos a ver el ejemplo para entenderlo mejor!"
-
-        ## Ejemplo de código Hedy
-        ```
-        color is ask '¿Cuál es tu color favorito?'
-        if color is verde
-            repeat 3 times
-                print '¡Qué bonito!'
-        else
-            repeat 5 times
-                print 'A mi me gusta otro'
-        ```
     commands:
     -   name: "print"
         explanation: "Imprime algo con `print`. Recuerda usar las comillas simples para mostrar el texto literal."
@@ -246,14 +233,3 @@
             else
                 print '¡Ups!'
                 print 'La respuesta es 10'
-    -   name: "`if` y `repeat` combinados"
-        explanation: "`if` y `repeat` combinados"
-        example: "Ejemplo: if color is verde repeat 3 times print '¡Qué bonito!' else repeat 5 times print 'A mi me gusta otro'"
-        demo_code: |-
-            color is ask '¿Cuál es tu color favorito?'
-            if color is verde
-                repeat 3 times
-                    print '¡Qué bonito!'
-            else
-                repeat 5 times
-                    print 'A mi me gusta otro'
