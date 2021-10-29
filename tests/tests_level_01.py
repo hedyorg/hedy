@@ -42,6 +42,9 @@ class HedyTester(unittest.TestCase):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
+    #ensure we never test levels above the max (sueful for debugging)
+    max_level = min(max_level, hedy.HEDY_MAX_LEVEL)
+
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
