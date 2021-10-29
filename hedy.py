@@ -119,9 +119,11 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
+    return style_closest_command(min_command)
+ 
 
-    return min_command
-
+def style_closest_command(command):
+    return f'<span class="command-highlighted">{command}</span>'
 
 def closest_command_with_min_distance(command, commands):
     #simple string distance, could be more sophisticated MACHINE LEARNING!
