@@ -190,8 +190,6 @@ class IndentationException(HedyException):
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
-        for c in args:
-            print(c)
         return Tree('text', [''.join([str(c) for c in args])])
 
     #level 2
@@ -1366,7 +1364,6 @@ def transpile_inner(input_string, level):
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
-        print(abstract_syntaxtree.pretty())
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
         # also add hashes to list
