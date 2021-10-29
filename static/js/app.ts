@@ -20,7 +20,7 @@ export let theGlobalEditor: AceAjax.Editor;
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
-    const exampleEditor = turnIntoAceEditor(preview, true)
+    var exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
@@ -33,20 +33,18 @@ export let theGlobalEditor: AceAjax.Editor;
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
     } else {
-      console.log($(preview).attr('id'));
       if($(preview).attr('id')){
         // @ts-ignore
-        let level = $(preview).attr('id').substring(1);
+        let level = String($(preview).attr('id'));
+        console.log(level);
         const modeExceptions: Record<string, string> = {
           '9': 'ace/mode/level9and10',
           '10': 'ace/mode/level9and10',
           '18': 'ace/mode/level18and19',
           '19': 'ace/mode/level18and19',
         };
-
-        console.log("Hier komen we ook!");
-        const mode = modeExceptions[$(preview).attr('id') || `ace/mode/level` + level];
-        console.log(mode);
+        console.log(`ace/mode/level` + level);
+        const mode = modeExceptions[level] || `ace/mode/level` + level;
         exampleEditor.session.setMode(mode);
       }
     }
