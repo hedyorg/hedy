@@ -32,6 +32,23 @@ export let theGlobalEditor: AceAjax.Editor;
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
+    } else {
+      console.log($(preview).attr('id'));
+      if($(preview).attr('id')){
+        // @ts-ignore
+        let level = $(preview).attr('id').substring(1);
+        const modeExceptions: Record<string, string> = {
+          '9': 'ace/mode/level9and10',
+          '10': 'ace/mode/level9and10',
+          '18': 'ace/mode/level18and19',
+          '19': 'ace/mode/level18and19',
+        };
+
+        console.log("Hier komen we ook!");
+        const mode = modeExceptions[$(preview).attr('id') || `ace/mode/level` + level];
+        console.log(mode);
+        exampleEditor.session.setMode(mode);
+      }
     }
   }
 

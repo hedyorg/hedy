@@ -98,13 +98,13 @@ Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
 Bijvoorbeeld: `print Hallo, ik ben Hedy.` oplossing: `print Hallo ik ben Hedy`
 - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando, maar dat kan pas vanaf level 3.
 Bijvoorbeeld: 
-<pre class="no-copy-button">
+<pre class="no-copy-button" id="2">
 dier is hond, kat, koe
 print Het leukste dier is…
 print dier at random
 </pre>
 In regel 2 van deze code staat het woord dier, terwijl dat ook de naam van de variabele is. Los dit op door de variabele een andere naam te geven, bijvoorbeeld:
-<pre class="no-copy-button">
+<pre class="no-copy-button" id="2">
 dieren is hond, kat, koe
 print Het leukste dier is...
 print dieren at random
