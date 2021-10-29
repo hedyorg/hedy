@@ -52,6 +52,7 @@ ALL_LANGUAGES = {
     'el': 'Ελληνικά',
     'zh': "简体中文",
     'cs': 'Čeština',
+    'bg': 'Български',
     'bn': 'বাংলা',
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
