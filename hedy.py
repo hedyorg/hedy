@@ -235,6 +235,9 @@ class UnsupportedFloatException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unsupported Float', **arguments)
 
+class LockedLanguageFeatureException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Locked Language Feature', **arguments)
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -679,7 +682,7 @@ class ConvertToPython_1(Transformer):
 
                     if assignment.type == 'list':
                         raise hedy.InvalidArgumentTypeException(command=command, invalid_type=assignment.type,
-                                                                invalid_argument='', allowed_types=','.join(allowed_types))
+                                                                invalid_argument='', allowed_types=allowed_types)
                         # same elif here for different types
 
     def get_allowed_types(self, command, level):
@@ -1439,7 +1442,7 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def preprocess_blocks(code):
+def preprocess_blocks(code, level):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
@@ -1457,9 +1460,14 @@ def preprocess_blocks(code):
         #calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
+            if current_number_of_indents > 1 and level == 7:
+                raise hedy.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents - previous_number_of_indents > 1:
-            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
+            raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                            indent_size=indent_size)
+
+
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
@@ -1507,7 +1515,7 @@ def transpile_inner(input_string, level):
 
     #in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
-        input_string = preprocess_blocks(input_string)
+        input_string = preprocess_blocks(input_string, level)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -1565,8 +1573,8 @@ def transpile_inner(input_string, level):
                 # is it possible to have a generic and meaningful syntax error message for different commands?
                 if invalid_command == 'turn':
                     raise hedy.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
-                                                       allowed_types='right, left or a number',
-                                                       invalid_argument=''.join(invalid_info.arguments))
+                                                            allowed_types=['right', 'left', 'number'],
+                                                            invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)

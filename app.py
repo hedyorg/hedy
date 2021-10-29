@@ -348,7 +348,7 @@ def parse_error_to_response(ex, translations):
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
-arguments_that_require_translation = ['allowed_types', 'character_found']
+arguments_that_require_translation = ['allowed_types', 'character_found', 'concept']
 
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
