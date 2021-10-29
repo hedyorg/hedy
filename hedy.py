@@ -132,11 +132,12 @@ class HedyException(Exception):
         self.arguments = arguments
 
 class InvalidSpaceException(HedyException):
-    def __init__(self, level, line_number, fixed_code):
+    def __init__(self, level, line_number, fixed_code, has_turtle):
         super().__init__('Invalid Space')
         self.level = level
         self.line_number = line_number
         self.fixed_code = fixed_code
+        self.has_turtle = has_turtle
 
 class ParseException(HedyException):
     def __init__(self, level, location, keyword_found=None, character_found=None):
@@ -189,6 +190,8 @@ class IndentationException(HedyException):
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
+        for c in args:
+            print(c)
         return Tree('text', [''.join([str(c) for c in args])])
 
     #level 2
@@ -1363,6 +1366,7 @@ def transpile_inner(input_string, level):
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
+        print(abstract_syntaxtree.pretty())
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
         # also add hashes to list
@@ -1400,7 +1404,7 @@ def transpile_inner(input_string, level):
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
-            raise InvalidSpaceException(level, line, result.code)
+            raise InvalidSpaceException(level, line, result.code, result.has_turtle)
         elif args == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
@@ -1444,6 +1448,7 @@ def transpile_inner(input_string, level):
 
 def execute(input_string, level):
     python = transpile(input_string, level)
+    print(python)
     if python.has_turtle:
         raise HedyException("hedy.execute doesn't support turtle")
     exec(python.code)

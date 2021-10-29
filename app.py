@@ -336,7 +336,21 @@ def parse():
 
 def invalid_space_error_to_response(ex, translations):
     warning = translate_error(ex.error_code, translations, vars(ex))
-    code = "# coding=utf8\n" + ex.fixed_code
+    if ex.has_turtle:
+        code = textwrap.dedent("""\
+                # coding=utf8
+                import random, time, turtle
+                t = turtle.Turtle()
+                t.hideturtle()
+                t.speed(0)
+                t.penup()
+                t.goto(50,100)
+                t.showturtle()
+                t.pendown()
+                t.speed(3)
+                """) + ex.fixed_code
+    else:
+        code = "# coding=utf8\nimport random\n" + ex.fixed_code
     return {"Code": code, "Warning": warning}
 
 def parse_error_to_response(ex, translations):
