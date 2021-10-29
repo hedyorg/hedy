@@ -348,7 +348,7 @@ def parse_error_to_response(ex, translations):
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
-arguments_that_require_translation = ['allowed_types', 'character_found', 'concept']
+arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
 
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
@@ -363,7 +363,10 @@ def translate_error(code, translations, arguments):
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
         if k in arguments_that_require_translation:
-            arguments[k] = translations.get(v, v)
+            if isinstance(v, list):
+                arguments[k] = ', '.join([translations.get(a, a) for a in v])
+            else:
+                arguments[k] = translations.get(v, v)
 
     return error_template.format(**arguments)
 

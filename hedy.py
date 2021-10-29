@@ -10,6 +10,7 @@ import utils
 from collections import namedtuple
 import hashlib
 import re
+from dataclasses import dataclass, field
 
 # Some useful constants
 HEDY_MAX_LEVEL = 23
@@ -46,7 +47,8 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
                       20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
                       21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
 # Commands and their types per level (only partially filled!)
@@ -151,6 +153,16 @@ def minimum_distance(s1, s2):
         distances = new_distances
     return distances[-1]
 
+
+@dataclass
+class InvalidInfo:
+    error_type: str
+    command: str = ''
+    arguments: list = field(default_factory=list)
+    line: int = 0
+
+
+
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
@@ -174,10 +186,6 @@ class ParseException(HedyException):
 class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
-
-class InvalidTypeException(HedyException):
-    def __init__(self, **arguments):
-        super().__init__('Invalid Type', **arguments)
 
 class RequiredArgumentTypeException(HedyException):
     def __init__(self, **arguments):
@@ -223,6 +231,10 @@ class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
 
+class UnsupportedFloatException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unsupported Float', **arguments)
+
 class LockedLanguageFeatureException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Locked Language Feature', **arguments)
@@ -249,6 +261,9 @@ class ExtractAST(Transformer):
             return Tree('list_access', [args[0], args[1]])
 
     #level 5
+    def unsupported_number(self, args):
+        return Tree('unsupported_number', [''.join([str(c) for c in args])])
+
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
 
@@ -432,6 +447,7 @@ class AllAssignmentCommandsHashed(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+
 def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
@@ -515,21 +531,26 @@ class IsValid(Filter):
     # tree is transformed to a node of [Bool, args, command number]
     def program(self, args):
         if len(args) == 0:
-            return False, "empty program", 1
+            return False, InvalidInfo("empty program"), 1
         return super().program(args)
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
-        return False, " "
+        return False, InvalidInfo(" ")
 
     def print_nq(self, args):
         # return error source to indicate what went wrong
-        return False, "print without quotes"
+        return False, InvalidInfo("print without quotes")
 
     def invalid(self, args):
-        # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
-        return False, args[0][1]
+        # TODO: add more information to the InvalidInfo
+        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]])
+        return False, error
+
+    def unsupported_number(self, args):
+        error = InvalidInfo('unsupported number', arguments=[str(args[0])])
+        return False, error
 
     #other rules are inherited from Filter
 
@@ -655,12 +676,13 @@ class ConvertToPython_1(Transformer):
                     # we first try to raise if we expect 1 thing exactly for more precise error messages
                     if len(allowed_types) == 1:
                         if allowed_types[0] == 'list':
-                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name)
+                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name,
+                                                                     required_type=allowed_types[0])
                         # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
 
                     if assignment.type == 'list':
-                        types = ','.join(allowed_types)
-                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name, allowed_types=types)
+                        raise hedy.InvalidArgumentTypeException(command=command, invalid_type=assignment.type,
+                                                                invalid_argument='', allowed_types=allowed_types)
                         # same elif here for different types
 
     def get_allowed_types(self, command, level):
@@ -1523,28 +1545,36 @@ def transpile_inner(input_string, level):
     is_valid = IsValid().transform(program_root)
 
     if not is_valid[0]:
-        _, args, line = is_valid
+        _, invalid_info, line = is_valid
 
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
-        if isinstance(args, list):
-            args = args[0]
-        if args == ' ':
+        if isinstance(invalid_info, list):
+            invalid_info = invalid_info[0]
+        if invalid_info.error_type == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise InvalidSpaceException(level, line, result.code)
-        elif args == 'print without quotes':
-            # grammar rule is ignostic of line number so we can't easily return that here
+        elif invalid_info.error_type == 'print without quotes':
+            # grammar rule is agnostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
-        elif args == 'empty program':
+        elif invalid_info.error_type == 'empty program':
             raise EmptyProgramException()
+        elif invalid_info.error_type == 'unsupported number':
+            raise UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
-            invalid_command = args
+            invalid_command = invalid_info.command
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
+                # making the error super-specific for the turn command for now
+                # is it possible to have a generic and meaningful syntax error message for different commands?
+                if invalid_command == 'turn':
+                    raise hedy.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
+                                                            allowed_types=['right', 'left', 'number'],
+                                                            invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)
