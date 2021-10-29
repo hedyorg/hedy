@@ -173,9 +173,8 @@ class TestsLevel7(HedyTester):
           prijs is prijs + 1
     print 'Dat is in totaal ' prijs ' euro.'""")
 
-    with self.assertRaises(hedy.IndentationException) as context:
+    with self.assertRaises(hedy.LockedLanguageFeatureException) as context:
       result = hedy.transpile(code, self.level)
-    self.assertEqual('Unexpected Indentation', context.exception.error_code)
   def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
     kleur is groen
@@ -183,9 +182,8 @@ class TestsLevel7(HedyTester):
         repeat 3 times
             print 'mooi'""")
 
-    with self.assertRaises(hedy.IndentationException) as context:
+    with self.assertRaises(hedy.LockedLanguageFeatureException) as context:
       result = hedy.transpile(code, self.level)
-    self.assertEqual('Unexpected Indentation', context.exception.error_code)
 
     
 # (so this should fail, for now)
