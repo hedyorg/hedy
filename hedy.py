@@ -238,7 +238,7 @@ class UnsupportedFloatException(HedyException):
 class LockedLanguageFeatureException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Locked Language Feature', **arguments)
-class InvalidArgumentError(HedyException):
+class InvalidArgumentException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Invalid Argument', **arguments)
 
@@ -652,7 +652,7 @@ class ConvertToPython_1(Transformer):
         try:
             parameter = int(args[0])
         except:
-            raise InvalidArgumentError(command = "forward", arg = args[0])
+            raise InvalidArgumentException(command = "forward", arg = args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -672,7 +672,7 @@ class ConvertToPython_1(Transformer):
         elif argument == 'right':
             return "t.right(90)"
         else:
-            raise InvalidArgumentError(command = "turn", arg = argument)
+            raise InvalidArgumentException(command = "turn", arg = argument)
 
     def check_arg_types(self, args, command, level):
         allowed_types = self.get_allowed_types(command, level)
@@ -784,7 +784,7 @@ class ConvertToPython_2(ConvertToPython_1):
             if not is_variable(parameter, self.lookup):
                 parameter = int(parameter)
         except:
-            raise InvalidArgumentError(command = "forward", arg = args[0])
+            raise InvalidArgumentException(command = "forward", arg = args[0])
         return self.make_forward(parameter)
 
     def ask(self, args):

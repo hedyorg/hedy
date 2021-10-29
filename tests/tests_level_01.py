@@ -208,7 +208,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
   def test_one_turn_with_var(self):
-    with self.assertRaises(hedy.InvalidArgumentError) as context:
+    with self.assertRaises(hedy.InvalidArgumentException) as context:
       result = hedy.transpile("turn koekoek", self.level)
     self.assertEqual('Invalid Argument', context.exception.error_code)
   def test_one_turn_left(self):
