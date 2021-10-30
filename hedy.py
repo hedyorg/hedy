@@ -238,9 +238,6 @@ class UnsupportedFloatException(HedyException):
 class LockedLanguageFeatureException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Locked Language Feature', **arguments)
-class InvalidArgumentException(HedyException):
-    def __init__(self, **arguments):
-        super().__init__('Invalid Argument', **arguments)
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -780,15 +777,15 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return self.make_forward(50)
 
-        parameter = args[0]
-
-        #if the parameter is a variable, print as is
-        # otherwise, see if we got a number. if not, give an error
+        # if the parameter is a number, use it as is
+        # otherwise, see if we got a defined variable. if not, give an error
         try:
-            if not is_variable(parameter, self.lookup):
-                parameter = int(parameter)
+            parameter = int(args[0])
         except:
-            raise InvalidArgumentException(command = "forward", arg = args[0])
+            if is_variable(args[0], self.lookup):
+                parameter = args[0]
+            else:
+                raise UndefinedVarException(name=args[0])
         return self.make_forward(parameter)
 
     def ask(self, args):
