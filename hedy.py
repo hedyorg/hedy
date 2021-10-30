@@ -652,7 +652,9 @@ class ConvertToPython_1(Transformer):
         try:
             parameter = int(args[0])
         except:
-            raise InvalidArgumentException(command = "forward", arg = args[0])
+            raise InvalidArgumentTypeException(command='forward', invalid_type='',
+                                                            allowed_types=['number'],
+                                                            invalid_argument=args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
