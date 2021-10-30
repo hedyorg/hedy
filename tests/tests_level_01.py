@@ -275,6 +275,22 @@ class TestsLevel1(HedyTester):
     with self.assertRaises(hedy.InvalidSpaceException) as context:
       result = hedy.transpile(" print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!", self.level)
     self.assertEqual('Invalid Space', context.exception.error_code)
+  def test_forward_without_number_gives_type_error(self):
+    code = "forward lalalala"
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+  def test_turn_without_number_gives_type_error(self):
+    code = "forward lalalala"
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
   def test_word_plus_period_gives_invalid(self):
     with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("word.", self.level)

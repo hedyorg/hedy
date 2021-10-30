@@ -785,7 +785,9 @@ class ConvertToPython_2(ConvertToPython_1):
             if is_variable(args[0], self.lookup):
                 parameter = args[0]
             else:
-                raise UndefinedVarException(name=args[0])
+                raise InvalidArgumentTypeException(command='forward', invalid_type='',
+                                                   allowed_types=['number'],
+                                                   invalid_argument=args[0])
         return self.make_forward(parameter)
 
     def ask(self, args):
