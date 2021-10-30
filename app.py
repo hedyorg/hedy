@@ -52,6 +52,7 @@ ALL_LANGUAGES = {
     'el': 'Ελληνικά',
     'zh': "简体中文",
     'cs': 'Čeština',
+    'bg': 'Български',
     'bn': 'বাংলা',
     'hi': 'हिंदी',
     'id': 'Bahasa Indonesia',
@@ -80,7 +81,7 @@ def load_adventure_for_language(lang):
 
     if not adventures_for_lang.has_adventures():
         # The default fall back language is English
-        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")        
+        fall_back = FALL_BACK_ADVENTURE.get(lang, "en")
         adventures_for_lang = ADVENTURES[fall_back]
     return adventures_for_lang.adventures_file['adventures']
 
@@ -354,23 +355,33 @@ def invalid_space_error_to_response(ex, translations):
     return {"Code": code, "Warning": warning}
 
 def parse_error_to_response(ex, translations):
-    if ex.character_found is not None:
-        # Localize the names of characters. If we can't do that, just show the original character.
-        ex.character_found = translations.get(ex.character_found, ex.character_found)
-    elif ex.keyword_found is not None:
+    if ex.keyword_found is not None:
         # If we find an invalid keyword, place it in the same location in the error message but without translating
         ex.character_found = ex.keyword_found
     error_message = translate_error(ex.error_code, translations, vars(ex))
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
+arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
+
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
+
 def translate_error(code, translations, arguments):
+    # fetch the error template
     error_template = translations[code]
+
+    # some arguments like allowed types or characters need to be translated in the error message
+    for k, v in arguments.items():
+        if k in arguments_that_require_translation:
+            if isinstance(v, list):
+                arguments[k] = ', '.join([translations.get(a, a) for a in v])
+            else:
+                arguments[k] = translations.get(v, v)
+
     return error_template.format(**arguments)
 
 @app.route('/report_error', methods=['POST'])
@@ -527,7 +538,7 @@ def get_quiz(level_source, question_nr, attempt):
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
-                
+
             html_obj = render_template('quiz_question.html',
                                    quiz=quiz_data,
                                    level_source=level_source,
@@ -832,6 +843,10 @@ def client_messages():
         response.cache_control.max_age = 60 * 60  # Seconds
 
     return response
+
+@app.errorhandler(404)
+def not_found(exception):
+    return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('page_not_found'))
 
 @app.errorhandler(500)
 def internal_error(exception):

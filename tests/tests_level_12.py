@@ -39,6 +39,20 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
+  def test_unsupported_float_with_dot(self):
+    self.multi_level_tester(
+      code="print(1.5 + 1)",
+      exception=hedy.UnsupportedFloatException,
+      test_name=self.name()
+    )
+
+  def test_unsupported_float_with_comma(self):
+    self.multi_level_tester(
+      code="print(1,5 + 1)",
+      exception=hedy.UnsupportedFloatException,
+      test_name=self.name()
+    )
+
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is input('Hoeveel is 10 plus 10?')
@@ -222,7 +236,14 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
+  def test_input_disallows_lists(self):
+    code = textwrap.dedent("""
+    color is green, blue
+    choice is input('Is your favorite color one of: ' color)""")
 
+    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
+      result = hedy.transpile(code, self.level)
+    self.assertEqual('Invalid Argument Type', context.exception.error_code)
 
   def test_multiple_spaces_after_print(self):
     code = "print    ('hallo!')"

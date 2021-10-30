@@ -1,0 +1,88 @@
+1:
+    intro_text: |
+        Добре дошли при Хеди! В първо ниво можеш да позлаваш инструкциите `print`, `ask` и `echo`.
+
+        Отляво можеш да разгледаш всички инструкции (команди) в първо ниво.
+
+        Натисни синия бутон и кодът на програмата ще бъде написан автоматочно!
+
+        Тествай този код като натиснеш зеления бутон 'Run code' в долното ляво поле.
+
+        Нямаш идея какво да създадеш? В следващите табове ще откриеш някои идеи за какво да прграмираш.
+
+    start_code: "print hello world!"
+    commands:
+    -   name: "print"
+        explanation: "Принтирай дума с `print`."
+        example: "Пример: print Привет, добре дошли при Хеди!"
+        demo_code: "print Привет, добре дошли при Хеди!"
+    -   name: "ask"
+        explanation: "Задай въпрос с `ask`."
+        example: "Пример: ask Кой е любимият ти цвят?"
+        demo_code: "ask Кой е любимият ти цвят?"
+    -   name: "echo"
+        explanation: "Повтори това, което си написал(а) с `echo`."
+        example: "Example: echo значи любимият ти цвят е "
+        demo_code: |-
+            ask Кой е любимият ти цвят?
+            echo значи любимият ти цвят е
+    -   name: "forward"
+        explanation: "Нарисувай линия с `forward`."
+        example: "Пример: forward 100"
+        demo_code: "forward 100"
+    -   name: "turn"
+        explanation: "Обърни нарисуваната костенурка с `turn`"
+        example: "Пример: turn"
+        demo_code: |-
+            forward 25
+            turn left
+            forward 25
+            turn right
+2:
+    intro_text: |
+        Във второ ниво ще научим нещо ново. Можеш да назовеш име с `is`. След това ще можеш да ползваш името навсякъде в програмата, ето как:
+
+        ```
+        име is Хеди
+        print Здравей име
+        ```
+
+        Внимание: запитването с `ask` се променя във второ ниво, така че отговорът се "записва" и "запомня" с име, например:
+
+        ```
+        отговорът is ask Как се казваш?
+        ```
+
+        Print работи също както в предното ниво, а от `echo` повече няма да имаш нужда.
+
+        Във второ ниво ще можеш да състатвиш списък с думи и програмата сама ще може да избере дума от твоя списък.
+        Това се прави с командата `at random`.
+
+        Кодът във второ ниво се намира на левия панел, както и табове с нови задачи. Сега.
+    start_code: "print hello world!"
+    commands:
+    -   name: "is"
+        explanation: "Give a word a name to use in the program using `is`. You can choose the name yourself."
+        example: "Example: name is Hedy."
+        demo_code: |-
+            name is Hedy
+            print welcome name
+    -   name: "ask"
+        explanation: "Ask something with `ask`. Beware! You need to give the answer a name with `is`."
+        example: "Example: color is ask What is your favorite color?"
+        demo_code: |-
+            color is ask What is your favorite color?
+            print color is your favorite!
+    -   explanation: "Give a number a name using `is`. You can choose the name yourself."
+        example: "Example: angle is 90"
+        demo_code: |-
+            angle is 90
+            turn angle
+            forward 100
+        name: is - turtle
+    -   name: choose_random
+        explanation: Choose a random word from a group with `at` and `random`
+        example: 'Example: animals is dog, cat, kangaroo.'
+        demo_code: |-
+            animals is dog, cat, kangaroo
+            print animals at random

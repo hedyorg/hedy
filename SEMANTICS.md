@@ -84,5 +84,80 @@ Level 1 supports:
   </tr>
  
 
+## Level 2
+
+### Commands
+
+In Level 2 variables and the keyword `is` are added, they keyword `echo` is removed, and `print` and `ask` change their syntax. Thus, this level supports:
+
+* `print`
+
+* `ask`
+
+* `forward`
+
+* `turn`
+
+* `ask`
+
+* variables  
 
 
+### Correct Programs
+
+<table>
+<thead>
+  <tr>
+    <th>Hedy</th>
+    <th>Python</th>
+  </tr>
+</thead>
+<tbody>
+	<tr>
+		<td>
+<pre>
+name is Hedy
+print Welcome name
+</pre>
+        </td>
+		<td>
+<pre>
+name = 'Hedy'
+print(f'Welcome {name}')
+</pre>           
+        </td>
+    </tr>
+    <tr>
+		<td>
+<pre>
+answer is ask What is your name?
+print answer
+</pre>
+        </td>
+		<td>
+<pre>
+answer = input('What is your name'+'?')
+print(f'{answer}')
+</pre>           
+        </td>
+    </tr>
+        <tr>
+		<td>
+<pre>
+angle is 90
+turn angle
+forward angle
+</pre>
+        </td>
+		<td>
+<pre>
+t = turtle.Turtle()
+angle = '90'
+t.right(angle)
+t.forward(angle)
+time.sleep(0.1)
+</pre>           
+        </td>
+    </tr>	
+</tbody>
+</table>

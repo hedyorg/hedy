@@ -61,6 +61,8 @@ interface State {
   unsaved_changes?: boolean;
 
   no_unload_prompt?: boolean;
+
+  programsInExecution?: integer;
 }
 
 declare interface Window {

@@ -26,18 +26,18 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  # issue #745
   def test_print_list(self):
     code = textwrap.dedent("""\
-    plaatsen is een stad, een  dorp, een strand 
-    print test plaatsen""")
+        plaatsen is een stad, een  dorp, een strand
+        print test plaatsen""")
 
-    result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    plaatsen = ['een stad', 'een  dorp', 'een strand ']
-    print(f'test {plaatsen}')""")
+    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
+      result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.assertEqual('Invalid Argument Type', context.exception.error_code)
+
   def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
     print Hallo welkom bij Hedy!
@@ -256,6 +256,13 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+  # issue #792
+  def test_turn_right_number(self):
+    self.multi_level_tester(
+      code="turn right 90",
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   #forward tests
   def test_forward_without_argument(self):
@@ -418,7 +425,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(self.run_code(result), "Kat")
 
   #negative tests
-  def test_echo(self):
+  def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\
     ask what is jouw lievelingskleur?
     echo Jouw lievelingskleur is dus...""")
@@ -432,15 +439,26 @@ class TestsLevel2(HedyTester):
       exception=hedy.IncompleteCommandException,
       test_name=self.name()
     )
+  def test_random_from_string(self):
+    code = textwrap.dedent("""\
+      items is aap noot mies
+      print items at random""")
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      exception=hedy.RequiredArgumentTypeException,
+      test_name=self.name()
+    )
+  def test_random_undefined_var(self):
+    # todo could be added for higher levels but that is a lot of variations so I am not doing it now :) (FH, oct 2021)
+    code = textwrap.dedent("""\
+    dieren is hond, kat, kangoeroe
+    print dier at random""")
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      exception=hedy.UndefinedVarException,
+      test_name=self.name()
+    )
 
-  # test for 297 (not easy to fix, not giving prio now)
-  # def test_print_space_after_excl(self):
-  #   code = "print hello world!koekie!"
-  #   result = hedy.transpile(code, self.level)
-  #
-  #   expected = textwrap.dedent("""\
-  #   print('hello'+' '+'world'+'!'+'koekie'+'!')""")
-  #
-  #   self.assertEqual(expected, result.code)
-  #   self.assertEqual(False, result.has_turtle)
 

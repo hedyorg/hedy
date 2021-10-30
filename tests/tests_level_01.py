@@ -330,8 +330,11 @@ class TestsLevel1(HedyTester):
       exception=hedy.InvalidCommandException,
       test_name=self.name()
     )
-
-
+  # This will only test valid programs
+  def random_test(self):
+    hedy_program = """angle is 90\nturn angle\nforward angle"""
+    result = hedy.transpile(hedy_program,2)
+    print(result)
 
 
 
