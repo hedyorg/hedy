@@ -1559,7 +1559,7 @@ def transpile_inner(input_string, level):
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
             raise InvalidSpaceException(level, line, result.code, result.has_turtle)
-        elif args == 'print without quotes':
+        elif invalid_info == 'print without quotes':
             # grammar rule is ignostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
         elif invalid_info.error_type == 'empty program':
@@ -1609,8 +1609,7 @@ def transpile_inner(input_string, level):
     return ParseResult(python, has_turtle)
 
 def execute(input_string, level):
-    python = transpile(input_string, level)
-    print(python)
+    python = transpile(input_string, level)    
     if python.has_turtle:
         raise HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
