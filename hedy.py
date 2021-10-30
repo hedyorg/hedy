@@ -1560,7 +1560,7 @@ def transpile_inner(input_string, level):
                 result = transpile_inner(fixed_code, level)
             raise InvalidSpaceException(level, line, result.code, result.has_turtle)
         elif invalid_info == 'print without quotes':
-            # grammar rule is ignostic of line number so we can't easily return that here
+            # grammar rule is agnostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
         elif invalid_info.error_type == 'empty program':
             raise EmptyProgramException()

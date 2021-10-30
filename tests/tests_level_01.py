@@ -208,11 +208,9 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
   def test_one_turn_with_var(self):
-    result = hedy.transpile("turn koekoek", self.level)
-    expected = textwrap.dedent("""\
-    t.right(90)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
+    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
+      result = hedy.transpile("turn koekoek", self.level)
+    self.assertEqual('Invalid Argument Type', context.exception.error_code)
   def test_one_turn_left(self):
     result = hedy.transpile("turn left", self.level)
     expected = textwrap.dedent("""\
@@ -277,6 +275,22 @@ class TestsLevel1(HedyTester):
     with self.assertRaises(hedy.InvalidSpaceException) as context:
       result = hedy.transpile(" print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!", self.level)
     self.assertEqual('Invalid Space', context.exception.error_code)
+  def test_forward_without_number_gives_type_error(self):
+    code = "forward lalalala"
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+  def test_turn_without_number_gives_type_error(self):
+    code = "forward lalalala"
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
   def test_word_plus_period_gives_invalid(self):
     with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("word.", self.level)
@@ -302,7 +316,6 @@ class TestsLevel1(HedyTester):
     self.assertEqual('Lonely Echo', context.exception.error_code)
   def test_newlines_only_gives_EmptyProgram(self):
     code = textwrap.dedent("""\
-
     """)
     with self.assertRaises(hedy.EmptyProgramException) as context:
       result = hedy.transpile(code, self.level)
@@ -330,11 +343,8 @@ class TestsLevel1(HedyTester):
       exception=hedy.InvalidCommandException,
       test_name=self.name()
     )
-  # This will only test valid programs
-  def random_test(self):
-    hedy_program = """angle is 90\nturn angle\nforward angle"""
-    result = hedy.transpile(hedy_program,2)
-    print(result)
+
+
 
 
 
@@ -354,5 +364,4 @@ class TestsLevel1(HedyTester):
   #   self.assertEqual(str(context.exception), 'Invalid')
   #   self.assertEqual(str(context.exception.arguments),
   #                    "{'invalid_command': 'abc', 'level': 1, 'guessed_command': 'ask'}")
-
 
