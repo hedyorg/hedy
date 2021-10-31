@@ -169,11 +169,12 @@ class HedyException(Exception):
         self.arguments = arguments
 
 class InvalidSpaceException(HedyException):
-    def __init__(self, level, line_number, fixed_code):
+    def __init__(self, level, line_number, fixed_code, has_turtle):
         super().__init__('Invalid Space')
         self.level = level
         self.line_number = line_number
         self.fixed_code = fixed_code
+        self.has_turtle = has_turtle
 
 class ParseException(HedyException):
     def __init__(self, level, location, keyword_found=None, character_found=None):
@@ -1584,7 +1585,7 @@ def transpile_inner(input_string, level):
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
-            raise InvalidSpaceException(level, line, result.code)
+            raise InvalidSpaceException(level, line, result.code, result.has_turtle)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
@@ -1635,7 +1636,7 @@ def transpile_inner(input_string, level):
     return ParseResult(python, has_turtle)
 
 def execute(input_string, level):
-    python = transpile(input_string, level)
+    python = transpile(input_string, level)    
     if python.has_turtle:
         raise HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
