@@ -1,5 +1,5 @@
 program: _EOL* (command | invalid) (_SPACE)* (_EOL+ (command | invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: print | ifelse | ifs | ask | turtle | assign_list | list_access_var | assign | print_no_quotes
+command: print | ifelse | ifs | ask | turtle | assign_list | list_access_var | assign | print_no_quotes | invalid_space
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
 
 assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
