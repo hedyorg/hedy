@@ -316,6 +316,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual('Lonely Echo', context.exception.error_code)
   def test_newlines_only_gives_EmptyProgram(self):
     code = textwrap.dedent("""\
+      
     """)
     with self.assertRaises(hedy.EmptyProgramException) as context:
       result = hedy.transpile(code, self.level)
