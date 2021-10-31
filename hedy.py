@@ -122,7 +122,7 @@ def closest_command(invalid_command, known_commands):
     if min_command == invalid_command:
         return None
     return style_closest_command(min_command)
- 
+
 
 def style_closest_command(command):
     return f'<span class="command-highlighted">{command}</span>'
@@ -644,11 +644,15 @@ class ConvertToPython_1(Transformer):
         return "answer = input('" + argument + "')"
 
     def forward(self,args):
-        # when a not-number is given, we simply use 50 as default
+        if len(args) == 0:
+            return self.make_forward(50)
+
         try:
             parameter = int(args[0])
         except:
-            parameter = 50
+            raise InvalidArgumentTypeException(command='forward', invalid_type='',
+                                                            allowed_types=['number'],
+                                                            invalid_argument=args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -665,8 +669,12 @@ class ConvertToPython_1(Transformer):
             return f"t.right({argument})"
         elif argument == 'left':
             return "t.left(90)"
+        elif argument == 'right':
+            return "t.right(90)"
         else:
-            return "t.right(90)" #something else also defaults to right turn
+            raise InvalidArgumentTypeException(command='turn', invalid_type='',
+                                                            allowed_types=['right', 'left', 'number'],
+                                                            invalid_argument=argument)
 
     def check_arg_types(self, args, command, level):
         allowed_types = self.get_allowed_types(command, level)
@@ -767,19 +775,20 @@ class ConvertToPython_2(ConvertToPython_1):
         return f"print(f'{argument_string}')"
 
     def forward(self, args):
-        # no args received? default to 50
-        parameter = 50
+        if len(args) == 0:
+            return self.make_forward(50)
 
-        if len(args) > 0:
-            parameter = args[0]
-
-        #if the parameter is a variable, print as is
-        # otherwise, see if we got a number. if not, simply use 50 as default
+        # if the parameter is a number, use it as is
+        # otherwise, see if we got a defined variable. if not, give an error
         try:
-            if not is_variable(parameter, self.lookup):
-                parameter = int(parameter)
+            parameter = int(args[0])
         except:
-            parameter = 50
+            if is_variable(args[0], self.lookup):
+                parameter = args[0]
+            else:
+                raise InvalidArgumentTypeException(command='forward', invalid_type='',
+                                                   allowed_types=['number'],
+                                                   invalid_argument=args[0])
         return self.make_forward(parameter)
 
     def ask(self, args):
