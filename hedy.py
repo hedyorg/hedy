@@ -1096,6 +1096,22 @@ class ConvertToPython_12(ConvertToPython_10_11):
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
+    def print(self, args):
+        # we only check non-Tree (= non calculation) arguments
+        self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_arg_types(args, 'print', self.level)
+
+        #force all to be printed as strings (since there can not be int arguments)
+        args_new = []
+        for a in args:
+            if type(a) is Tree:
+                args_new.append("{" + a.children + "}")
+            else:
+                args_new.append(process_variable_for_fstring(a, self.lookup).replace("'",""))
+
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
+
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -1125,6 +1141,8 @@ class ConvertToPython_13(ConvertToPython_12):
 
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
+    def print(self,args):
+        return ConvertToPython_5.print(self,args)
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
