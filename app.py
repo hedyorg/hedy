@@ -76,6 +76,20 @@ TRANSLATIONS = hedyweb.Translations()
 
 DATABASE = database.Database()
 
+# Define code that will be used if some turtle command is present
+TURTLE_PREFIX_CODE = textwrap.dedent("""\
+    # coding=utf8
+    import random, time, turtle
+    t = turtle.Turtle()
+    t.hideturtle()
+    t.speed(0)
+    t.penup()
+    t.goto(50,100)
+    t.showturtle()
+    t.pendown()
+    t.speed(3)
+""")
+
 def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
 
@@ -289,18 +303,7 @@ def parse():
 
         response['has_turtle'] = has_turtle
         if has_turtle:
-            response["Code"] = textwrap.dedent("""\
-            # coding=utf8
-            import random, time, turtle
-            t = turtle.Turtle()
-            t.hideturtle()
-            t.speed(0)
-            t.penup()
-            t.goto(50,100)
-            t.showturtle()
-            t.pendown()
-            t.speed(3)
-            """) + python_code
+            response["Code"] = TURTLE_PREFIX_CODE + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
 
@@ -337,7 +340,10 @@ def parse():
 
 def invalid_space_error_to_response(ex, translations):
     warning = translate_error(ex.error_code, translations, vars(ex))
-    code = "# coding=utf8\n" + ex.fixed_code
+    if ex.has_turtle:
+        code = TURTLE_PREFIX_CODE + ex.fixed_code
+    else:
+        code = "# coding=utf8\nimport random\n" + ex.fixed_code
     return {"Code": code, "Warning": warning}
 
 def parse_error_to_response(ex, translations):
