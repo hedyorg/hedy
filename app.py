@@ -358,7 +358,7 @@ arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required
 
 def hedy_error_to_response(ex, translations):
     #error_message = translate_error(ex.error_code, translations, ex.arguments)
-    location = ex.location if hasattr(ex, "location") else print(dir(ex))
+    location = ex.location if hasattr(ex, "location") else None
     invalid_command = ex.invalid_command if hasattr(ex, "invalid_command") else None
     return {"Error": "error_message", "Location": location, "Invalid_command": invalid_command}
 

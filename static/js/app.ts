@@ -208,11 +208,18 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
-        if (response.Invalid_command)  {
+          if (response.Invalid_command)  {
+            var range = editor.find(response.Invalid_command, {
+              wrap: true,
+              caseSensitive: true, 
+              wholeWord: true,
+              regExp: false,
+              preventScroll: true
+          })
           editor.session.setAnnotations([
             {
               row: response.Location[0] - 1,
-              column: 0,
+              column: range.start.column - 1,
               text: "",
               type: "error",
             }
@@ -220,9 +227,9 @@ export function runit(level: string, lang: string, cb: () => void) {
           editor.session.addMarker(
             new ace.Range(
                 response.Location[0] - 1,
-                0,
+                range.start.column,
                 response.Location[0] - 1,
-                response.Invalid_command.length,
+                range.start.column + response.Invalid_command.length,
             ),
             "editor-error", "text", false
           );
