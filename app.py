@@ -766,6 +766,8 @@ def index(level, step):
 
     adventures = load_adventures_per_level(requested_lang(), level)
     level_defaults_for_lang = LEVEL_DEFAULTS[requested_lang()]
+    if level not in level_defaults_for_lang.levels:
+        return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_level'))
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
