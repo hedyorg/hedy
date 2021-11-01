@@ -208,7 +208,26 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
-        if (response.Location && response.Location[0] != "?") {
+        if (response.Invalid_command)  {
+          editor.session.setAnnotations([
+            {
+              row: response.Location[0] - 1,
+              column: 0,
+              text: "",
+              type: "error",
+            }
+          ]);
+          editor.session.addMarker(
+            new ace.Range(
+                response.Location[0] - 1,
+                0,
+                response.Location[0] - 1,
+                response.Invalid_command.length,
+            ),
+            "editor-error", "text", false
+          );
+        }
+        else if (response.Location && response.Location[0] != "?") {
           editor.session.setAnnotations([
             {
               row: response.Location[0] - 1,
@@ -225,7 +244,7 @@ export function runit(level: string, lang: string, cb: () => void) {
                 response.Location[0] - 1,
                 response.Location[1],
             ),
-            "editor-error", "fullLine", false
+            "editor-error", "text", false
           );
         }
         return;
