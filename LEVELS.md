@@ -107,6 +107,8 @@ the change is made small, and to do so (following Design Goal 4),
 brackets and colons are deferred to a later level, but indentation which
 was learned in Level 7 remains.
 
+See for a discussion of fruther levels: https://github.com/Felienne/hedy/discussions/903
+
 
 Old Levels
 ------
