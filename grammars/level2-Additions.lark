@@ -7,7 +7,6 @@ ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
 turtle: _FORWARD (_SPACE (NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text_list ((_COMMA _SPACE|_COMMA) text_list)+
-invalid_space: _SPACE text
 
 //in Level 2 we need to treat punctuation differently, since it can be used to separate arguments (variables)
 

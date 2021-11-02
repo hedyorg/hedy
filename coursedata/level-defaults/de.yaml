@@ -221,20 +221,6 @@
             print 'Hallo Leute'
             print 'Dies wird 5 mal wiederholt'
         ```
-
-        Wenn du einen `repeat` mit einem `if` Befehl kombinierst, musst du jeden Block einrücken. Schau dir die Beispiele an, um es genauer zu sehen!"
-
-        ## Beispiel Hedy-Code
-        ```
-        farbe is ask 'Was ist deine Lieblingsfarbe?'
-        if farbe is grün
-            repeat 3 times
-                print 'Hübsch!'
-        else
-            repeat 5 times
-                print 'Bäh'
-        ```
-
     commands:
     -   name: "print"
         explanation: "Gib etwas aus. Denke daran, Anführungszeichen für eine wörtliche Ausgabe zu verwenden."
@@ -251,17 +237,6 @@
             else
                 print 'Ups!'
                 print 'Die Antwort is 10'
-    -   name: "`if` und `repeat` kombiniert"
-        explanation: "`if` und `repeat` kombiniert"
-        example: "Beispiel: if farbe is grün repeat 3 times print 'Hübsch!' else repeat 5 times print 'Bäh'"
-        demo_code: |-
-            farbe is ask 'Was ist deine Lieblingsfarbe?'
-            if farbe is grün
-                repeat 3 times
-                    print 'Hübsch!'
-            else
-                repeat 5 times
-                    print 'Bäh'
 8:
     start_code: |-
         animals is dog, cat, blobfish

@@ -10,6 +10,7 @@ import utils
 from collections import namedtuple
 import hashlib
 import re
+from dataclasses import dataclass, field
 
 # Some useful constants
 HEDY_MAX_LEVEL = 23
@@ -46,7 +47,8 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
                       20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
                       21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
+                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
+                      23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
 # Commands and their types per level (only partially filled!)
@@ -120,7 +122,7 @@ def closest_command(invalid_command, known_commands):
     if min_command == invalid_command:
         return None
     return style_closest_command(min_command)
- 
+
 
 def style_closest_command(command):
     return f'<span class="command-highlighted">{command}</span>'
@@ -151,17 +153,28 @@ def minimum_distance(s1, s2):
         distances = new_distances
     return distances[-1]
 
+
+@dataclass
+class InvalidInfo:
+    error_type: str
+    command: str = ''
+    arguments: list = field(default_factory=list)
+    line: int = 0
+
+
+
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
         self.arguments = arguments
 
 class InvalidSpaceException(HedyException):
-    def __init__(self, level, line_number, fixed_code):
+    def __init__(self, level, line_number, fixed_code, has_turtle):
         super().__init__('Invalid Space')
         self.level = level
         self.line_number = line_number
         self.fixed_code = fixed_code
+        self.has_turtle = has_turtle
 
 class ParseException(HedyException):
     def __init__(self, level, location, keyword_found=None, character_found=None):
@@ -174,10 +187,6 @@ class ParseException(HedyException):
 class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
-
-class InvalidTypeException(HedyException):
-    def __init__(self, **arguments):
-        super().__init__('Invalid Type', **arguments)
 
 class RequiredArgumentTypeException(HedyException):
     def __init__(self, **arguments):
@@ -223,6 +232,14 @@ class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
 
+class UnsupportedFloatException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unsupported Float', **arguments)
+
+class LockedLanguageFeatureException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Locked Language Feature', **arguments)
+
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
@@ -245,6 +262,9 @@ class ExtractAST(Transformer):
             return Tree('list_access', [args[0], args[1]])
 
     #level 5
+    def unsupported_number(self, args):
+        return Tree('unsupported_number', [''.join([str(c) for c in args])])
+
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
 
@@ -428,6 +448,7 @@ class AllAssignmentCommandsHashed(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+
 def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
@@ -511,21 +532,26 @@ class IsValid(Filter):
     # tree is transformed to a node of [Bool, args, command number]
     def program(self, args):
         if len(args) == 0:
-            return False, "empty program", 1
+            return False, InvalidInfo("empty program"), 1
         return super().program(args)
 
     def invalid_space(self, args):
         # return space to indicate that line starts in a space
-        return False, " "
+        return False, InvalidInfo(" ")
 
     def print_nq(self, args):
         # return error source to indicate what went wrong
-        return False, "print without quotes"
+        return False, InvalidInfo("print without quotes")
 
     def invalid(self, args):
-        # return the first argument to place in the error message
         # TODO: this will not work for misspelling 'at', needs to be improved!
-        return False, args[0][1]
+        # TODO: add more information to the InvalidInfo
+        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]])
+        return False, error
+
+    def unsupported_number(self, args):
+        error = InvalidInfo('unsupported number', arguments=[str(args[0])])
+        return False, error
 
     #other rules are inherited from Filter
 
@@ -618,11 +644,15 @@ class ConvertToPython_1(Transformer):
         return "answer = input('" + argument + "')"
 
     def forward(self,args):
-        # when a not-number is given, we simply use 50 as default
+        if len(args) == 0:
+            return self.make_forward(50)
+
         try:
             parameter = int(args[0])
         except:
-            parameter = 50
+            raise InvalidArgumentTypeException(command='forward', invalid_type='',
+                                                            allowed_types=['number'],
+                                                            invalid_argument=args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -639,8 +669,12 @@ class ConvertToPython_1(Transformer):
             return f"t.right({argument})"
         elif argument == 'left':
             return "t.left(90)"
+        elif argument == 'right':
+            return "t.right(90)"
         else:
-            return "t.right(90)" #something else also defaults to right turn
+            raise InvalidArgumentTypeException(command='turn', invalid_type='',
+                                                            allowed_types=['right', 'left', 'number'],
+                                                            invalid_argument=argument)
 
     def check_arg_types(self, args, command, level):
         allowed_types = self.get_allowed_types(command, level)
@@ -651,12 +685,13 @@ class ConvertToPython_1(Transformer):
                     # we first try to raise if we expect 1 thing exactly for more precise error messages
                     if len(allowed_types) == 1:
                         if allowed_types[0] == 'list':
-                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name)
+                            raise hedy.RequiredArgumentTypeException(command=command, variable=assignment.name,
+                                                                     required_type=allowed_types[0])
                         # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
 
                     if assignment.type == 'list':
-                        types = ','.join(allowed_types)
-                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name, allowed_types=types)
+                        raise hedy.InvalidArgumentTypeException(command=command, invalid_type=assignment.type,
+                                                                invalid_argument='', allowed_types=allowed_types)
                         # same elif here for different types
 
     def get_allowed_types(self, command, level):
@@ -740,19 +775,20 @@ class ConvertToPython_2(ConvertToPython_1):
         return f"print(f'{argument_string}')"
 
     def forward(self, args):
-        # no args received? default to 50
-        parameter = 50
+        if len(args) == 0:
+            return self.make_forward(50)
 
-        if len(args) > 0:
-            parameter = args[0]
-
-        #if the parameter is a variable, print as is
-        # otherwise, see if we got a number. if not, simply use 50 as default
+        # if the parameter is a number, use it as is
+        # otherwise, see if we got a defined variable. if not, give an error
         try:
-            if not is_variable(parameter, self.lookup):
-                parameter = int(parameter)
+            parameter = int(args[0])
         except:
-            parameter = 50
+            if is_variable(args[0], self.lookup):
+                parameter = args[0]
+            else:
+                raise InvalidArgumentTypeException(command='forward', invalid_type='',
+                                                   allowed_types=['number'],
+                                                   invalid_argument=args[0])
         return self.make_forward(parameter)
 
     def ask(self, args):
@@ -1060,6 +1096,22 @@ class ConvertToPython_12(ConvertToPython_10_11):
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
+    def print(self, args):
+        # we only check non-Tree (= non calculation) arguments
+        self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_arg_types(args, 'print', self.level)
+
+        #force all to be printed as strings (since there can not be int arguments)
+        args_new = []
+        for a in args:
+            if type(a) is Tree:
+                args_new.append("{" + a.children + "}")
+            else:
+                args_new.append(process_variable_for_fstring(a, self.lookup).replace("'",""))
+
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
+
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -1089,6 +1141,8 @@ class ConvertToPython_13(ConvertToPython_12):
 
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
+    def print(self,args):
+        return ConvertToPython_5.print(self,args)
     def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
         if len(args) == 2:
             parameter = args[0]
@@ -1402,22 +1456,6 @@ def translate_characters(s):
     else:
         return s
 
-def filter_and_translate_terminals(list):
-    # in giving error messages, it does not make sense to include
-    # ANONs, and some things like EOL need kid friendly translations
-    new_terminals = []
-    for terminal in list:
-        if terminal[:4] == "ANON":
-            continue
-
-        if terminal == "EOL":
-            new_terminals.append("Newline")
-            break
-
-        #not translated or filtered out? simply add as is:
-        new_terminals.append(terminal)
-
-    return new_terminals
 
 def beautify_parse_error(character_found):
     character_found = translate_characters(character_found)
@@ -1432,7 +1470,7 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def preprocess_blocks(code):
+def preprocess_blocks(code, level):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
@@ -1450,9 +1488,14 @@ def preprocess_blocks(code):
         #calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
+            if current_number_of_indents > 1 and level == 7:
+                raise hedy.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents - previous_number_of_indents > 1:
-            raise IndentationException(line_number = line_number, leading_spaces = leading_spaces, indent_size = indent_size)
+            raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                            indent_size=indent_size)
+
+
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
@@ -1500,7 +1543,7 @@ def transpile_inner(input_string, level):
 
     #in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
-        input_string = preprocess_blocks(input_string)
+        input_string = preprocess_blocks(input_string, level)
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -1530,28 +1573,36 @@ def transpile_inner(input_string, level):
     is_valid = IsValid().transform(program_root)
 
     if not is_valid[0]:
-        _, args, line = is_valid
+        _, invalid_info, line = is_valid
 
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
-        if isinstance(args, list):
-            args = args[0]
-        if args == ' ':
+        if isinstance(invalid_info, list):
+            invalid_info = invalid_info[0]
+        if invalid_info.error_type == ' ':
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 result = transpile_inner(fixed_code, level)
-            raise InvalidSpaceException(level, line, result.code)
-        elif args == 'print without quotes':
-            # grammar rule is ignostic of line number so we can't easily return that here
+            raise InvalidSpaceException(level, line, result.code, result.has_turtle)
+        elif invalid_info.error_type == 'print without quotes':
+            # grammar rule is agnostic of line number so we can't easily return that here
             raise UnquotedTextException(level=level)
-        elif args == 'empty program':
+        elif invalid_info.error_type == 'empty program':
             raise EmptyProgramException()
+        elif invalid_info.error_type == 'unsupported number':
+            raise UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
-            invalid_command = args
+            invalid_command = invalid_info.command
             closest = closest_command(invalid_command, commands_per_level[level])
             if closest == None: #we couldn't find a suggestion because the command itself was found
+                # making the error super-specific for the turn command for now
+                # is it possible to have a generic and meaningful syntax error message for different commands?
+                if invalid_command == 'turn':
+                    raise hedy.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
+                                                            allowed_types=['right', 'left', 'number'],
+                                                            invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)
@@ -1585,7 +1636,7 @@ def transpile_inner(input_string, level):
     return ParseResult(python, has_turtle)
 
 def execute(input_string, level):
-    python = transpile(input_string, level)
+    python = transpile(input_string, level)    
     if python.has_turtle:
         raise HedyException("hedy.execute doesn't support turtle")
     exec(python.code)

@@ -8,6 +8,21 @@ class TestsLevel5(HedyTester):
   # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
 
   # print tests
+  def test_unsupported_float_with_dot(self):
+    self.multi_level_tester(
+      max_level=11,
+      code="print 1.5 + 1",
+      exception=hedy.UnsupportedFloatException,
+      test_name=self.name()
+    )
+
+  def test_unsupported_float_with_comma(self):
+    self.multi_level_tester(
+      max_level=11,
+      code="print 1,5 + 1",
+      exception=hedy.UnsupportedFloatException,
+      test_name=self.name()
+    )
 
   #ask tests
   def test_ask(self):
