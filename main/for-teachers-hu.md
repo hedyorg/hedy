@@ -39,7 +39,9 @@ Könnyen mentheted a projektjeidet, ha nevet adsz a projektnek a fehér sávban,
 
 Kezdődjön a programozási móka! 
 
-## Tanítás a Hedy-vel 1. szint
+## Tanítás a Hedy-vel 
+
+### 1. szint
 
 ### Mit tanulnak a diákok ezen a szinten?
 
@@ -100,7 +102,7 @@ Mutasd meg az 1. szint 3 parancsát a tanulóidnak, és hagyd, hogy maguk kész�
 #### Értékelés (5 perc)
 Röviden értékeld az órát, és ellenőrizd, hogy minden tanuló eljutott-e a kód elkészítéséhez. Azt is megkérdezheted diákjaidtól, hogy tetszett nekik a programozás (először). Lehetséges, hogy néhány diák megmutathatja kódját az egész osztálynak.
 
-## 2. szint
+### 2. szint
 
 ### Mit tanulnak a diákok ezen a szinten?
 
@@ -214,7 +216,7 @@ print valasz at random
 #### Értékelés (5 perc)
 Röviden értékeld a leckét a diákokkal a lecke lezárásához.
 
-## 3. szint
+### 3. szint
 
 ### Mit tanulnak a diákok ezen a szinten?
 
