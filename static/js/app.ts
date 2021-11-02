@@ -20,7 +20,7 @@ export let theGlobalEditor: AceAjax.Editor;
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
-    var exampleEditor = turnIntoAceEditor(preview, true)
+    const exampleEditor = turnIntoAceEditor(preview, true)
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     exampleEditor.setOptions({ minLines: 2 });
