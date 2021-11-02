@@ -60,24 +60,29 @@
     <div class="mb-4 clear-both">
         <button type="submit" class="green-btn">{{auth.update_profile}}</button>
     </div>
-      <div class="mb-4">
+    <div class="mb-4">
         <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
         <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
     </div>
   </form>
   <h2 class="pl-8">{{auth.change_password}}</h2>
-  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')"> <br>
-    <label>{{auth.current_password}}</label>
-    <input id="old_password" type=password>
-    <br><br>
-    <label>{{auth.new_password}}</label>
-    <input id="password" type=password>
-    <br><br>
-    <label>{{auth.repeat_new_password}}</label>
-    <input id="password_repeat" type=password>
-    <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <br><br>
+  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
+    <div class="mb-4">
+        <label for="old_password">{{auth.current_password}}</label>
+        <input id="old_password" type=password>
+    </div>
+    <div class="mb-4">
+        <label for="password">{{auth.new_password}}</label>
+        <input id="password" type=password>
+    </div>
+    <div class="mb-4">
+        <label for="password_repeat">{{auth.repeat_new_password}}</label>
+        <input id="password_repeat" type=password>
+    </div>
+    <div class="mb-4">
+        <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    </div>
     <button type="submit" class="green-btn">{{auth.change_password}}</button>
   </form>
   <button class="red-btn ml-8" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
