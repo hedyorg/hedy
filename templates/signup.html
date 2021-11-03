@@ -7,23 +7,23 @@
     <h4 class="text-blue-500 py-2">{{auth.create_account_explanation}}</h4>
     <div class="mb-4">
         <label for="username">{{auth.username}}</label>
-        <input id="username" name="username">
+        <input id="username" name="username" required>
     </div>
     <div class="mb-4">
         <label for="email">{{auth.email}}</label>
-        <input id="email" name="email" type="email">
+        <input id="email" name="email" type="email" required>
     </div>
     <div class="mb-4">
         <label for="mail_repeat">{{auth.email_repeat}}</label>
-        <input id="mail_repeat" name="mail_repeat" type="text" autocomplete="off">
+        <input id="mail_repeat" name="mail_repeat" type="text" autocomplete="off" required>
     </div>
     <div class="mb-4">
         <label for="password">{{auth.password}}</label>
-        <input id="password" name="password" type=password>
+        <input id="password" name="password" type=password required>
     </div>
     <div class="mb-4">
         <label for="password_repeat">{{auth.password_repeat}}</label>
-        <input id="password_repeat" name="password_repeat" type=password>
+        <input id="password_repeat" name="password_repeat" type=password required>
     </div>
     <div class="mb-4">
         <label for="birth_year">{{auth.birth_year}}</label>
@@ -60,22 +60,22 @@
     <div class="flex flex-row mb-4" style="display: none;" id="languages">
         <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
       {{auth.languages}}
-      <ul class="flex flex-col list-none">
+      <ul class="flex flex-col list-none block">
         <li>
             <input type="checkbox" name="languages" value="scratch">
-            <label style="width: 200px;">Scratch</label>
+            <label>Scratch</label>
         </li>
         <li>
             <input type="checkbox" name="languages" value="other_block">
-            <label style="width: 200px;">{{auth.other_block}}</label>
+            <label>{{auth.other_block}}</label>
         </li>
         <li>
             <input type="checkbox" name="languages" value="python">
-            <label style="width: 200px;">Python</label>
+            <label>Python</label>
         </li>
         <li>
             <input type="checkbox" name="languages" value="other_text">
-            <label style="width: 200px;">{{auth.other_text}}</label>
+            <label>{{auth.other_text}}</label>
         </li>
       </ul>
     </div>
