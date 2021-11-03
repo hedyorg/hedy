@@ -44,34 +44,40 @@
             <option value="" selected disabled hidden>{{auth.select}}</option>
         </select>
     </div>
-    <div class="flex flex-row ml-8 mb-4">
+    <div class="flex flex-row justify-center mb-4">
       <label>{{auth.programming_experience}}</label>
-      <div class="flex flex-col">
-            <label for="has_experience"><input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"> {{auth.yes}}</label>
-            <label  for="has_experience"><input type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"> {{auth.no}}</label>
-      </div>
+      <ul class="flex flex-col align-center list-none">
+          <li>
+              <input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()">
+              <label for="has_experience">{{auth.yes}}</label>
+          </li>
+          <li>
+              <input type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()">
+              <label  for="has_experience">{{auth.no}}</label>
+          </li>
+      </ul>
     </div>
-    <div class="flex flex-row justify-evenly mb-4" style="display: none;" id="languages">
+    <div class="flex flex-row mb-4" style="display: none;" id="languages">
         <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
       <label>{{auth.languages}}</label>
-      <div class="flex flex-col">
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="scratch">
-            <div class="mb-2" style="margin-top: -0.3em;">Scratch</div>
-        </label>
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="other_block">
-          <div class="mb-2" style="margin-top: -0.3em;">{{auth.other_block}}</div>
-        </label>
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="python">
-          <div class="mb-2" style="margin-top: -0.3em;">Python</div>
-        </label>
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="other_text">
-          <div class="mb-2" style="margin-top: -0.3em;">{{auth.other_text}}</div>
-        </label>
-      </div>
+      <ul class="flex flex-col align-center list-none">
+        <li>
+            <input type="checkbox" name="languages" value="scratch">
+            <label style="width: 200px;">Scratch</label>
+        </li>
+        <li>
+            <input type="checkbox" name="languages" value="other_block">
+            <label style="width: 200px;">{{auth.other_block}}</label>
+        </li>
+        <li>
+            <input type="checkbox" name="languages" value="python">
+            <label style="width: 200px;">Python</label>
+        </li>
+        <li>
+            <input type="checkbox" name="languages" value="other_text">
+            <label style="width: 200px;">{{auth.other_text}}</label>
+        </li>
+      </ul>
     </div>
     <div class="flex flex-row justify-center mb-4">
       <label for="subscribe">
