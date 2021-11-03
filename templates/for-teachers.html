@@ -2,20 +2,22 @@
 
 {% block main %}
 <div id="teacher_classes" class="flex flex-col items-center pb-4 border-b-2">
-  <h2>{{auth.teacher_classes}}</h2>
-  <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
-    <thead class="bg-gray-200">
-      <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
-    </thead>
-    <tbody>
-      {% for class in teacher_classes %}
-        <tr>
-          <td class="text-center p-2"><a href="{{localize_link ('/class/' + class.id)}}">{{class.name|e}}</a></td>
-          <td class="text-center p-2">{{class.students|length}}</td></tr>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% if teacher_classes %}
+      <h2>{{auth.teacher_classes}}</h2>
+      <table class="table-auto border-separate space-y-6 border border-black mt-4 mb-4">
+        <thead class="bg-gray-200">
+          <tr><th class="p-2 w-1/4">{{auth.name}}</th><th class="p-2 w-1/4">{{auth.students[0]|upper}}{{auth.students[1:]}}</th></tr>
+        </thead>
+        <tbody>
+          {% for class in teacher_classes %}
+            <tr>
+              <td class="text-center p-2"><a href="{{localize_link ('/class/' + class.id)}}">{{class.name|e}}</a></td>
+              <td class="text-center p-2">{{class.students|length}}</td></tr>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  {% endif %}
   <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
 </div>
 <div class="w-full text-center mt-4">

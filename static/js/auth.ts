@@ -293,9 +293,13 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
     (response.experience_languages || []).map (function (lang: string) {
        $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
     });
-    $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class: Class) {
-       return '<li>' + auth.entityify (Class.name) + '</li>';
-    }).join (''));
+    if (! jQuery.isEmptyObject(response.student_classes)) {
+      $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class: Class) {
+        return '<li>' + auth.entityify (Class.name) + '</li>';
+      }).join (''));
+    } else {
+      $ ('#student_classes').hide();
+    }
   }
 }).fail (function (_response) {
   if (window.location.pathname.indexOf ('/my-profile') !== -1) auth.redirect ('login');
