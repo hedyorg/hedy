@@ -44,20 +44,13 @@
             <option value="" selected disabled hidden>{{auth.select}}</option>
         </select>
     </div>
-    <div class="flex flex-row justify-evenly mb-4">
+    <div class="flex flex-row ml-8 mb-4">
       <label>{{auth.programming_experience}}</label>
       <div class="flex flex-col">
-        <label for="has_experience">
-          <input class="float-left" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()">
-            <div class="mb-2" style="margin-top: -0.3em;">{{auth.yes}}</div>
-        </label>
-        <label  for="has_experience">
-          <input class="float-left" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()">
-           <div class="mb-2" style="margin-top: -0.3em;">{{auth.no}}</div>
-        </label>
+            <label for="has_experience"><input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"> {{auth.yes}}</label>
+            <label  for="has_experience"><input type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"> {{auth.no}}</label>
       </div>
     </div>
-
     <div class="flex flex-row justify-evenly mb-4" style="display: none;" id="languages">
         <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
       <label>{{auth.languages}}</label>
