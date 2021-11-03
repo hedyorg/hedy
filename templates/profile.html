@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-  {% if not is_teacher and classes %}
+  {% if not is_teacher %}
     <div id="student_classes" class="pl-8">
       <h2>{{auth.student_classes}}</h2>
       <ul class="list-none" style="margin: 0"></ul>
