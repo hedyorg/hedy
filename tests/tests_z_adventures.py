@@ -41,31 +41,34 @@ class TestsAdventurePrograms(unittest.TestCase):
 
             for adventure in yaml['adventures'].values ():
                 for level_number in adventure['levels']:
-                    level = adventure['levels'][level_number]
-                    adventure_name = adventure['name']
+                    if level_number > hedy.HEDY_MAX_LEVEL:
+                        print('content above max level!')
+                    else:
+                        level = adventure['levels'][level_number]
+                        adventure_name = adventure['name']
 
-                    code_snippet_counter = 0
-                    # code snippets inside story_text
-                    for tag in utils.markdown_to_html_tags(level['story_text']):
-                        if tag.name != 'pre' or not tag.contents[0]:
-                            continue
-                        code_snippet_counter += 1
-                        code = tag.contents[0].contents[0]
+                        code_snippet_counter = 0
+                        # code snippets inside story_text
+                        for tag in utils.markdown_to_html_tags(level['story_text']):
+                            if tag.name != 'pre' or not tag.contents[0]:
+                                continue
+                            code_snippet_counter += 1
+                            code = tag.contents[0].contents[0]
 
-                        result = check_code(f, level_number, 'story_text code snippet #' + str (code_snippet_counter), code, adventure_name)
-                        if result != True:
-                            adventure_fails.append(result)
+                            result = check_code(f, level_number, 'story_text code snippet #' + str (code_snippet_counter), code, adventure_name)
+                            if result != True:
+                                adventure_fails.append(result)
 
-                    # start_code
-                    try:
-                        start_code = level['start_code']
-                        result = check_code(f, level_number, 'start_code', start_code, adventure_name)
-                        if result != True:
-                            adventure_fails.append(result)
-                    except KeyError:
-                        #create startcode not found error
-                        message = f'Adventure {adventure_name} misses start_code at level {level_number}'
-                        adventure_fails.append(message)
-                        print(message)
+                        # start_code
+                        try:
+                            start_code = level['start_code']
+                            result = check_code(f, level_number, 'start_code', start_code, adventure_name)
+                            if result != True:
+                                adventure_fails.append(result)
+                        except KeyError:
+                            #create startcode not found error
+                            message = f'Adventure {adventure_name} misses start_code at level {level_number}'
+                            adventure_fails.append(message)
+                            print(message)
 
         self.assertEqual(0, len(adventure_fails))
