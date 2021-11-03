@@ -8,17 +8,31 @@ class TestsLevel5(HedyTester):
   # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
 
   # print tests
+  def test_print_quoted_var(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+
   def test_unsupported_float_with_dot(self):
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code="print 1.5 + 1",
       exception=hedy.UnsupportedFloatException,
       test_name=self.name()
     )
-
   def test_unsupported_float_with_comma(self):
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code="print 1,5 + 1",
       exception=hedy.UnsupportedFloatException,
       test_name=self.name()

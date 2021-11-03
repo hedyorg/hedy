@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass, field
 
 # Some useful constants
-HEDY_MAX_LEVEL = 10
+HEDY_MAX_LEVEL = 11
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -317,7 +317,7 @@ class AllAssignmentCommands(Transformer):
             return None
 
     def assign(self, args):
-        # todo now all assigns are strings, later (form 5) this should distinguish int and str
+        # todo now all assigns are strings, later (from 11) this should distinguish int and str
         return Assignment(args[0], 'string')
 
     def assign_list(self, args):
@@ -516,7 +516,7 @@ class UsesTurtle(Transformer):
 
     # somehow a token (or only this token?) is not picked up by the default rule so it needs
     # its own rule
-    def NUMBER(self, args):
+    def INT(self, args):
         return False
 
     def NAME(self, args):
@@ -564,7 +564,6 @@ def valid_echo(ast):
 
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
-
 
 class IsComplete(Filter):
     def __init__(self, level):
@@ -705,7 +704,6 @@ class ConvertToPython_1(Transformer):
         lookup_vars = [a for a in self.lookup if a.name == variable]
         # this now grabs the last occurrence, once we have slicing we want to be more precise!
         return lookup_vars[-1] if lookup_vars else None
-
 
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
@@ -920,24 +918,6 @@ else:
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
 
-    def print(self, args):
-        # we only check non-Tree (= non calculation) arguments
-        self.check_var_usage([a for a in args if not type(a) is Tree])
-        self.check_arg_types(args, 'print', self.level)
-
-        #force all to be printed as strings (since there can not be int arguments)
-        args_new = []
-        for a in args:
-            if type(a) is Tree:
-                args_new.append("{" + a.children + "}")
-            else:
-                a = a.replace("'", "") #no quotes needed in fstring
-                args_new.append(process_variable_for_fstring(a, self.lookup))
-
-        arguments = ''.join(args_new)
-        return "print(f'" + arguments + "')"
-
-    #we can now have ints as types so chck must force str
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -954,6 +934,8 @@ class ConvertToPython_5(ConvertToPython_4):
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
+                #assigns may contain string (accidentally) i.e. name = 'Hedy'
+                value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
         else:
             parameter = args[0]
@@ -991,7 +973,6 @@ class ConvertToPython_5(ConvertToPython_4):
 class ConvertToPython_6(ConvertToPython_5):
     def number(self, args):
         return ''.join(args)
-
     def repeat(self, args):
         var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
@@ -1027,22 +1008,6 @@ class ConvertToPython_7_8(ConvertToPython_6):
 
         return "\nelse:\n" + "\n".join(all_lines)
 
-    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
-        if len(args) == 2:
-            parameter = args[0]
-            value = args[1]
-            if type(value) is Tree:
-                return parameter + " = " + value.children
-            else:
-                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
-                    return parameter + " = " + value
-                else:
-                    return parameter + " = '" + value + "'"
-        else:
-            parameter = args[0]
-            values = args[1:]
-            return parameter + " = [" + ", ".join(values) + "]"
-
     def var_access(self, args):
         if len(args) == 1: #accessing a var
             return args[0]
@@ -1068,6 +1033,56 @@ class ConvertToPython_10(ConvertToPython_9):
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
+
+@hedy_transpiler(level=11)
+class ConvertToPython_11(ConvertToPython_10):
+    def process_token_or_tree(self, argument):
+        if type(argument) is Tree:
+            return f'{str(argument.children)}'
+        else:
+            return f'{argument}'
+    def process_calculation(self, args, operator):
+        # arguments of a sum are either a token or a
+        # tree resulting from earlier processing
+        # for trees we need to grap the inner string
+        # for tokens we simply return the argument (no more casting to str needed)
+
+        args = [self.process_token_or_tree(a) for a in args]
+        return Tree('sum', f'{args[0]} {operator} {args[1]}')
+
+    def print(self, args):
+        # TODO: new type checking is needed for string assignment
+        self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_arg_types(args, 'print', self.level)
+
+        args_new = []
+        for a in args:
+            if type(a) is Tree:
+                args_new.append("{" + a.children + "}")
+            else:
+                a = a.replace("'", "")  # no quotes needed in fstring
+                args_new.append(process_variable_for_fstring(a, self.lookup))
+
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
+
+    def text_in_quotes(self, args):
+        text = args[0]
+        return "'" + text + "'" # keep quotes in the Python code (producing name = 'Henk')
+
+    def assign(self, args):
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                # we no longer escape quotes here because they are now needed
+                return parameter + " = " + value + ""
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
 
 # @hedy_transpiler(level=10)
 # @hedy_transpiler(level=11)
