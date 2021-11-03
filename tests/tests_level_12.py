@@ -39,6 +39,20 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
+  def test_unsupported_float_with_dot(self):
+    self.multi_level_tester(
+      code="print(1.5 + 1)",
+      exception=hedy.UnsupportedFloatException,
+      test_name=self.name()
+    )
+
+  def test_unsupported_float_with_comma(self):
+    self.multi_level_tester(
+      code="print(1,5 + 1)",
+      exception=hedy.UnsupportedFloatException,
+      test_name=self.name()
+    )
+
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is input('Hoeveel is 10 plus 10?')

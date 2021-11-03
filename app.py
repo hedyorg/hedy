@@ -76,6 +76,20 @@ TRANSLATIONS = hedyweb.Translations()
 
 DATABASE = database.Database()
 
+# Define code that will be used if some turtle command is present
+TURTLE_PREFIX_CODE = textwrap.dedent("""\
+    # coding=utf8
+    import random, time, turtle
+    t = turtle.Turtle()
+    t.hideturtle()
+    t.speed(0)
+    t.penup()
+    t.goto(50,100)
+    t.showturtle()
+    t.pendown()
+    t.speed(3)
+""")
+
 def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
 
@@ -289,18 +303,7 @@ def parse():
 
         response['has_turtle'] = has_turtle
         if has_turtle:
-            response["Code"] = textwrap.dedent("""\
-            # coding=utf8
-            import random, time, turtle
-            t = turtle.Turtle()
-            t.hideturtle()
-            t.speed(0)
-            t.penup()
-            t.goto(50,100)
-            t.showturtle()
-            t.pendown()
-            t.speed(3)
-            """) + python_code
+            response["Code"] = TURTLE_PREFIX_CODE + python_code
         else:
             response["Code"] = "# coding=utf8\nimport random\n" + python_code
 
@@ -337,7 +340,10 @@ def parse():
 
 def invalid_space_error_to_response(ex, translations):
     warning = translate_error(ex.error_code, translations, vars(ex))
-    code = "# coding=utf8\n" + ex.fixed_code
+    if ex.has_turtle:
+        code = TURTLE_PREFIX_CODE + ex.fixed_code
+    else:
+        code = "# coding=utf8\nimport random\n" + ex.fixed_code
     return {"Code": code, "Warning": warning}
 
 def parse_error_to_response(ex, translations):
@@ -348,7 +354,7 @@ def parse_error_to_response(ex, translations):
     location = ex.location if hasattr(ex, "location") else None
     return {"Error": error_message, "Location": location}
 
-arguments_that_require_translation = ['allowed_types', 'character_found', 'concept']
+arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
 
 def hedy_error_to_response(ex, translations):
     error_message = translate_error(ex.error_code, translations, ex.arguments)
@@ -363,7 +369,10 @@ def translate_error(code, translations, arguments):
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
         if k in arguments_that_require_translation:
-            arguments[k] = translations.get(v, v)
+            if isinstance(v, list):
+                arguments[k] = ', '.join([translations.get(a, a) for a in v])
+            else:
+                arguments[k] = translations.get(v, v)
 
     return error_template.format(**arguments)
 
@@ -835,6 +844,8 @@ def index(level, step):
 
     adventures = load_adventures_per_level(requested_lang(), level)
     level_defaults_for_lang = LEVEL_DEFAULTS[requested_lang()]
+    if level not in level_defaults_for_lang.levels:
+        return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user(request) ['username'], requested_lang (), TRANSLATIONS.get_translations (requested_lang (), 'ui').get ('no_such_level'))
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
