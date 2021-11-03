@@ -193,7 +193,7 @@ class TestsLevel5(HedyTester):
     expected = "period = '.'"
 
     self.multi_level_tester(
-      max_level=20,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),

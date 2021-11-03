@@ -347,22 +347,53 @@
     start_code: |-
         print 'kommagetallen gaan met een punt!'
         print 2.5 + 2.5
-    intro_text:
-        Tot nu toe mocht je nog geen kommagetallen gebruiken, maar nu wel!
-        Let wek heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
+    intro_text: |
+        Tot nu toe mocht je nog geen kommagetallen gebruiken zoals bijv anderhalf, maar nu wel!
+        Let wel heel goed op... kommagetallen gaan op de computer met een punt en niet met een komma.
+
+        ## Voorbeeld Hedy code
+        ```
+        print 'Kommagetallen gaan met een punt!'
+        print 2.5 + 2.5
+        ```
+
+        ## Tekst moet altijd met aanhalingstekens
+        Nu we verder zijn met programmeren moet je ook weten dat tekst altijd tussen aanhalingstekens hoort. Ook in de `is`.
+
+        ```
+        naam is 'Hedy'
+        print 'Hallo ' naam
+        ```
+
+        Maar, zoals je ziet gaan variabelen, zoals naam, wel zonder aanhalingstekens. We bedoelen immers niet het woordje 'naam'.
+
+        Alleen bij getallen gebruik je geen aanhalingstekens in de `is`:
+        ```
+        score is 25
+        print 'Jij hebt ' score ' gehaald!'
+        ```
+
+
+
     commands:
+    -   name: "assign text"
+        explanation: "Opslaan van tekst met is"
+        example: "naam is 'Hedy'"
+        demo_code: |
+            naam is 'Hedy'
+            print 'Hallo ' naam
     -   name: "float directly"
-        explanation: "een som met kommagetallen"
+        explanation: "Een som met kommagetallen"
         example: "print 2.5 + 2.5"
         demo_code: |
             print 'Rekenen maar!'
             print 'Tweeenhalf plus tweeenhalf is...'
             print 2.5 + 2.5
     -   name: "float in var"
-        explanation: "een som met kommagetallen opslaan"
+        explanation: "Een som met kommagetallen opslaan"
         example: "antwoord is 2.5 + 2.5"
         demo_code: |
-            antwoord = 2.5 + 2.5
+            antwoord is 2.5 + 2.5
             print 'Rekenen maar!'
             print 'Tweeenhalf plus tweeenhalf is...'
             print antwoord

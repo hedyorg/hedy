@@ -29,6 +29,17 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+  def test_float_addition_in_var(self):
+    code = textwrap.dedent("""\
+    antwoord is 2.5 + 2.5
+    print antwoord
+    """)
+    expected = textwrap.dedent("""\
+    antwoord = 2.5 + 2.5
+    print(f'{antwoord}')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
 
   def test_add_string_vars(self):
     code = textwrap.dedent("""\
@@ -93,5 +104,5 @@ class TestsLevel11(HedyTester):
     name is felienne
     print name""")
 
-    with self.assertRaises(hedy.UnquotedTextException) as context:
+    with self.assertRaises(hedy.UnquotedAssignTextException) as context:
       result = hedy.transpile(code, self.level)

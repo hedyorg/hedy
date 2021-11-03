@@ -39,7 +39,7 @@ class TestsLevel3(HedyTester):
     print(f'ik heet ,')""")
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=10,
       expected=expected,
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
@@ -72,7 +72,6 @@ class TestsLevel3(HedyTester):
 
   # ask
   def test_assign_print(self):
-    # todo make version for over level 11
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam""")
@@ -82,7 +81,7 @@ class TestsLevel3(HedyTester):
     print(f'ik heet{naam}')""")
 
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
@@ -306,7 +305,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.UndefinedVarException,
-      max_level=11,
+      max_level=10,
       test_name=self.name()
     )
 

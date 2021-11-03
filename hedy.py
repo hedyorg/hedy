@@ -216,6 +216,10 @@ class UnquotedTextException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unquoted Text', **arguments)
 
+class UnquotedAssignTextException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unquoted Assignment', **arguments)
+
 class EmptyProgramException(HedyException):
     def __init__(self):
         super().__init__('Empty Program')
@@ -729,7 +733,9 @@ class ConvertToPython_2(ConvertToPython_1):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
-        unquoted_args = [a for a in args if not is_quoted(a)]
+        args_to_process = [a for a in args if not type(a) is Tree] #we do not check trees (calcs) they are always ok
+
+        unquoted_args = [a for a in args_to_process if not is_quoted(a)]
         unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
@@ -918,6 +924,23 @@ else:
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
 
+    def print(self, args):
+        # we only check non-Tree (= non calculation) arguments
+        self.check_var_usage(args)
+        self.check_arg_types(args, 'print', self.level)
+
+        #force all to be printed as strings (since there can not be int arguments)
+        args_new = []
+        for a in args:
+            if type(a) is Tree:
+                args_new.append("{" + a.children + "}")
+            else:
+                a = a.replace("'", "") #no quotes needed in fstring
+                args_new.append(process_variable_for_fstring(a, self.lookup))
+
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
+
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -1036,6 +1059,7 @@ for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar
 
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
+
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children)}'
@@ -1052,7 +1076,7 @@ class ConvertToPython_11(ConvertToPython_10):
 
     def print(self, args):
         # TODO: new type checking is needed for string assignment
-        self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_var_usage(args)
         self.check_arg_types(args, 'print', self.level)
 
         args_new = []
@@ -1071,6 +1095,18 @@ class ConvertToPython_11(ConvertToPython_10):
         return "'" + text + "'" # keep quotes in the Python code (producing name = 'Henk')
 
     def assign(self, args):
+        right_hand_side = args[1]
+
+        # we now need to check if the right hand side of te assign is
+        # either a var or quoted, if it is not (and undefined var is raised)
+        # the real issue is probably that the kid forgot quotes
+        try:
+            correct_rhs = self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
+        except UndefinedVarException as E:
+            # is the text a number? then no quotes are fine. if not, raise maar!
+            if not str.isnumeric(right_hand_side):
+                raise UnquotedAssignTextException(text = args[1])
+
         if len(args) == 2:
             parameter = args[0]
             value = args[1]
@@ -1113,7 +1149,7 @@ class ConvertToPython_11(ConvertToPython_10):
 # class ConvertToPython_13(ConvertToPython_12):
 #     def print(self, args):
 #         # we only check non-Tree (= non calculation) arguments
-#         self.check_var_usage([a for a in args if not type(a) is Tree])
+#         self.check_var_usage(args)
 #         self.check_arg_types(args, 'print', self.level)
 #
 #         #force all to be printed as strings (since there can not be int arguments)
