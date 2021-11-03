@@ -11,9 +11,8 @@
   {% if is_teacher %}
     <p class="p-8 bg-green-500 rounded-b font-bold text-white">The list of your classes has been moved to <a class="text-blue-700" href="{{localize_link ('/for-teachers')}}">For Teachers section</a></p>
   {% endif %}
-  <h2 class="pl-8">{{auth.profile}}</h2>
-  <!-- <button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button> -->
-  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
+  <h2 class="pl-8">{{auth.profile}} <button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button></h2>
+  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4" id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
     <div class="mb-4">
         <label for="username">{{auth.username}}</label>
         <strong id="username"></strong>
@@ -41,10 +40,8 @@
     </div>
     <div class="mb-4">
       <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
-      <div class="float-left">
-        <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
-        <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
-      </div>
+      <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
+      <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
     </div>
     <div class="clear-both hidden mb-4" id="languages">
       <div class="mb-4">
@@ -66,7 +63,7 @@
     </div>
   </form>
   <h2 class="pl-8">{{auth.change_password}}</h2>
-  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
+  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
     <div class="mb-4">
         <label for="old_password">{{auth.current_password}}</label>
         <input id="old_password" type=password>
