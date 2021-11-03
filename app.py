@@ -890,7 +890,7 @@ def main_page(page):
                                    auth=TRANSLATIONS.get_translations(lang, 'Auth'), teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher, **front_matter)
         else:
-            return redirect('index.html')
+            return "unauthorized", 403
 
     return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(lang, 'Auth'), **front_matter)
 
