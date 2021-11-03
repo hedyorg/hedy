@@ -44,8 +44,8 @@
             <option value="" selected disabled hidden>{{auth.select}}</option>
         </select>
     </div>
-    <div class="flex flex-row justify-center mb-4">
-      <label>{{auth.programming_experience}}</label>
+    <div class="flex flex-row align-center mb-4">
+      {{auth.programming_experience}}
       <ul class="flex flex-col align-center list-none">
           <li>
               <input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()">
@@ -59,8 +59,8 @@
     </div>
     <div class="flex flex-row mb-4" style="display: none;" id="languages">
         <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-      <label>{{auth.languages}}</label>
-      <ul class="flex flex-col align-center list-none">
+      {{auth.languages}}
+      <ul class="flex flex-col list-none">
         <li>
             <input type="checkbox" name="languages" value="scratch">
             <label style="width: 200px;">Scratch</label>
