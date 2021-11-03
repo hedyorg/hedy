@@ -33,6 +33,10 @@ interface UserForm {
   old_password?: string;
 }
 
+if (!(window as any).AuthMessages) {
+  throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
+}
+
 export const auth = {
   texts: AuthMessages,
   profile: undefined as (Profile | undefined),
