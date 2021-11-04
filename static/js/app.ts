@@ -658,7 +658,7 @@ function speak(text: string) {
 })();
 
 export function prompt_unsaved(cb: () => void) {
-  if (! window.State.unsaved_changes) return cb ();
+  if (! window.State.unsaved_changes || ! auth.profile) return cb ();
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
   modal.confirm(auth.texts['unsaved_changes'], cb);
