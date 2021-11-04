@@ -6,6 +6,8 @@ import { auth } from './auth';
 
 export let theGlobalEditor: AceAjax.Editor;
 
+declare var range: any;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
@@ -208,14 +210,14 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
-          if (response.Invalid_command)  {
-            var range = editor.find(response.Invalid_command, {
-              wrap: true,
-              caseSensitive: true, 
-              wholeWord: true,
-              regExp: false,
-              preventScroll: true
-          })
+        if (response.Invalid_command)  {
+          range = editor.find(response.Invalid_command, {
+            wrap: true,
+            caseSensitive: true, 
+            wholeWord: true,
+            regExp: false,
+            preventScroll: true
+          });
           editor.session.setAnnotations([
             {
               row: response.Location[0] - 1,
