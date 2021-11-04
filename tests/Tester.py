@@ -83,5 +83,8 @@ class HedyTester(unittest.TestCase):
     try:
       hedy.transpile(snippet.code, int(snippet.level))
     except hedy.CodePlaceholdersPresentException as E:
-      pass
+      # Code with blanks is allowed
+      return True
+    except:
+      return False
 

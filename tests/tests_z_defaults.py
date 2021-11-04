@@ -51,6 +51,7 @@ class TestsLevelDefaultsPrograms(unittest.TestCase):
         if snippet is not None:
             print(snippet.code)
             result = HedyTester.validate_Hedy_code(snippet)
+            self.assertTrue(result)
 
 
 
