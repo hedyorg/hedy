@@ -111,7 +111,7 @@ export const auth = {
         subscribe: $('#subscribe').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map(() => $(this).val() as string).get()
+          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
 
@@ -167,7 +167,7 @@ export const auth = {
         gender: values['gender'],
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
         experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map(() => $(this).val() as string).get()
+          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
 
