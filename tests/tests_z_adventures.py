@@ -14,21 +14,6 @@ os.chdir(os.path.join (os.getcwd (), __file__.replace (os.path.basename (__file_
 path = '../coursedata/adventures'
 files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith ('.yaml')]
 
-def check_code(filename, level, field_name, code, adventure_name):
-    # We ignore empty code snippets or those of length 1
-    if len(code) == 0:
-        return True
-    try:
-        hedy.transpile(code, int(level))
-    except Exception as E:
-        #shorter file name for beter readability
-        filename_shorter = filename.split("/")[3]
-        language = filename_shorter.split(".")[0]
-        if not isinstance(E, hedy.CodePlaceholdersPresentException):  # code with blanks is ok!
-            error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.args}'
-            print(error)
-            return error
-    return True
 
 class TestsAdventurePrograms(unittest.TestCase):
 
