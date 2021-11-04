@@ -17,21 +17,26 @@
       <a class="menubar-btn border-{% if current_page == 'my-profile' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/my-profile')}}">{{auth.profile}}</a>
       <a class="menubar-btn border-{% if current_page == 'programs' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/programs')}}">{{auth.program_header}}</a>
     {% endif %}
+    <div id="left_container" class="ml-auto">
+    {% if username %}
+      <button class="red-btn ml-auto" style="border: none;"  onclick="hedyApp.auth.logout ()">{{auth.logout}}</button>
+    {% endif %}
     {% if not username %}
-      <a class="menubar-btn border-{% if current_page == 'login' %}white{% else %}transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
+      <a href="{{localize_link ('/login')}}"><button class="green-btn" style="border: none;" onclick="hedyApp.auth.logout ()">{{auth.login}}</button></a>
     {% endif %}
     {% endblock %}
-    <div class="dropdown inline-block relative ml-auto py-2 z-40">
-      <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
-        <span class="mr-1">{{ current_language().sym }}</span>
-        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
-      </button>
-      <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-400 mt-2 pt-1 list-none ml-0 right-0 w-48">
-          <li class="p-2"><input id="search_language" placeholder="{{search}}" class="border-2 text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
-        {% for lang in other_languages() %}
-        <a class="no-underline" href="{{ modify_query(lang=lang.lang) }}"><li class="hover:bg-blue-600 text-white py-2 px-4 block border-b border-black language">{{ lang.sym }}</li></a>
-        {% endfor %}
-      </ul>
+        <div class="dropdown inline-block relative py-2 z-40 ml-4">
+          <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
+            <span class="mr-1">{{ current_language().sym }}</span>
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+          </button>
+          <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-400 mt-2 pt-1 list-none ml-0 right-0 w-48">
+              <li class="p-2"><input id="search_language" placeholder="{{search}}" class="border-2 text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
+            {% for lang in other_languages() %}
+            <a class="no-underline" href="{{ modify_query(lang=lang.lang) }}"><li class="hover:bg-blue-600 text-white py-2 px-4 block border-b border-black language">{{ lang.sym }}</li></a>
+            {% endfor %}
+          </ul>
+        </div>
     </div>
 </nav>
 <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
