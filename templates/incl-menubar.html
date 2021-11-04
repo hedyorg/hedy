@@ -19,10 +19,10 @@
     {% endif %}
     <div id="left_container" class="ml-auto">
     {% if username %}
-      <button class="red-btn ml-auto" style="border: none;"  onclick="hedyApp.auth.logout ()">{{auth.logout}}</button>
+      <button class="red-btn ml-auto" style="border: none;"  onclick="logout ()">{{auth.logout}}</button>
     {% endif %}
     {% if not username %}
-      <a href="{{localize_link ('/login')}}"><button class="green-btn" style="border: none;" onclick="hedyApp.auth.logout ()">{{auth.login}}</button></a>
+      <a href="{{localize_link ('/login')}}"><button class="green-btn" style="border: none;">{{auth.login}}</button></a>
     {% endif %}
     {% endblock %}
         <div class="dropdown inline-block relative py-2 z-40 ml-4">
@@ -40,6 +40,13 @@
     </div>
 </nav>
 <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+<script>
+function logout() {
+    $.ajax ({type: 'POST', url: '/auth/logout'}).done (function () {
+      window.location.pathname = '/login';
+    });
+  }
+</script>
 <script>
     $("#search_language").keyup(function() {
         let search_query = $("#search_language").val().toLowerCase();
