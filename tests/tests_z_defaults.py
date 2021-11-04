@@ -20,7 +20,7 @@ def collect_snippets(path):
 
         for level in yaml:
             # start_code
-            Hedy_snippets.append(Snippet(file, level, 'start_code', yaml[level]['start_code']))
+            Hedy_snippets.append(Snippet(filename=file, level=level, field_name='start_code', code=yaml[level]['start_code']))
 
             # commands.k.demo_code
             for k, command in enumerate(yaml[level]['commands']):
@@ -28,7 +28,7 @@ def collect_snippets(path):
 
                 command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
                 Hedy_snippets.append(
-                    Snippet(file, level, 'command ' + command_text_short + ' demo_code', command['demo_code']))
+                    Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code', code=command['demo_code']))
 
             # code snippets inside intro_text
             code_snippet_counter = 0
@@ -36,8 +36,8 @@ def collect_snippets(path):
                 if tag.name != 'pre' or not tag.contents[0]:
                     continue
                 code_snippet_counter += 1
-                Hedy_snippets.append(Snippet(file, level, 'intro_text snippet #' + str(code_snippet_counter),
-                                             tag.contents[0].contents[0]))
+                Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
+                                             code=tag.contents[0].contents[0]))
     return Hedy_snippets
 
 
