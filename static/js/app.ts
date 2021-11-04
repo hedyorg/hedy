@@ -34,6 +34,13 @@ declare var range: any;
       $('<button>').attr('title', UiMessages['try_button']).css({ fontFamily: 'sans-serif' }).addClass('green-btn').text('⇥').appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
       });
+    } else {
+      if($(preview).attr('id')){
+        // @ts-ignore
+        let level = String($(preview).attr('id'));
+        const mode = getHighlighter(parseInt(level));
+        exampleEditor.session.setMode(mode);
+      }
     }
   }
 
@@ -145,15 +152,8 @@ declare var range: any;
     if (highlighter == 1) {
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
-      const modeExceptions: Record<string, string> = {
-        '9': 'ace/mode/level9and10',
-        '10': 'ace/mode/level9and10',
-        '18': 'ace/mode/level18and19',
-        '19': 'ace/mode/level18and19',
-      };
-
       if (window.State.level) {
-        const mode = modeExceptions[window.State.level] || `ace/mode/level${window.State.level}`;
+        const mode = getHighlighter(parseInt(window.State.level));
         editor.session.setMode(mode);
       }
     }
@@ -161,6 +161,16 @@ declare var range: any;
     return editor;
   }
 })();
+
+function getHighlighter(level: number) {
+  const modeExceptions: Record<string, string> = {
+        '9': 'ace/mode/level9and10',
+        '10': 'ace/mode/level9and10',
+        '18': 'ace/mode/level18and19',
+        '19': 'ace/mode/level18and19',
+      };
+  return modeExceptions[level] || `ace/mode/level` + level;
+}
 
 function reloadOnExpiredSession () {
    // If user is not logged in or session is not expired, return false.
