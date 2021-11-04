@@ -67,12 +67,18 @@ class HedyTester(unittest.TestCase):
       return True  # We ignore empty code snippets or those of length 0
     try:
       hedy.transpile(code, int(level))
-    except Exception as E:
-      # shorter file name for beter readability
       filename_shorter = filename.split("/")[3]
       language = filename_shorter.split(".")[0]
-      if not isinstance(E, hedy.CodePlaceholdersPresentException):  # code with blanks is ok!
+    except Exception as E:
+      if len(E.args) == 0:
         error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.args}'
+        # We print the error for readability, since otherwise they get accumulated on a long list
         print(error)
         return error
-    return True
+      else:
+        if E.args[0] != 'Has Blanks':  # code with blanks is ok!
+          error = f'{language}: level #{level} - {field_name}. Error: {E.args[0]}'
+          # We print the error for readability, since otherwise they get accumulated on a long list
+          print(error)
+          return error
+    return  True
