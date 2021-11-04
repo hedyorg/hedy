@@ -1113,14 +1113,14 @@ adventures:
                         print food
                         if food is fries
                             price is price + 3
-                            sauce ask 'What kind of sauce would you like with your fries?'
+                            sauce is ask 'What kind of sauce would you like with your fries?'
                             if sauce is no
                                 print 'no sauce'
                             else
                                price is price + 1
                                print 'with ' sauce
                         if food is pizza
-                            pice is price + 4
+                            price is price + 4
                     print 'That will be ' price ' dollar'
                     print 'Enjoy your meal!'
                     ```
