@@ -58,6 +58,6 @@ class TestsAdventurePrograms(unittest.TestCase):
 
   @parameterized.expand(Hedy_snippets)
   def test_adventures(self, name, snippet):
-    if input is not None:
+    if snippet is not None:
+      print(snippet.code)
       result = HedyTester.validate_Hedy_code(snippet)
-      self.assertTrue(result)

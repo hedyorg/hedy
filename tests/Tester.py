@@ -82,13 +82,6 @@ class HedyTester(unittest.TestCase):
       return True  # We ignore empty code snippets or those of length 0
     try:
       hedy.transpile(snippet.code, int(snippet.level))
-    except Exception as E:
-      if len(E.args) == 0:
-        error = f': adventure {snippet.adventure_name} - level #{snippet.level} - {snippet.field_name}. Error: {E.args}'
-        return error
-      else:
-        if E.args[0] != 'Has Blanks':  # code with blanks is ok!
-          error = f': level #{snippet.level} - {snippet.field_name}. Error: {E.args[0]}'
-          return error
-    return  True
+    except hedy.CodePlaceholdersPresentException as E:
+      pass
 
