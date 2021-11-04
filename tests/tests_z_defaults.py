@@ -1,12 +1,9 @@
 import os
 from website.yaml_file import YamlFile
 import utils
-import hedy
 import unittest
-import pytest
-from Tester import HedyTester
-from parameterized import parameterized, parameterized_class
-import math
+from Tester import HedyTester, Snippet
+from parameterized import parameterized
 
 # file is called tests_z_ so they are executed last
 # because programs are more of a priority than level defaults, which change less and take longer to run
@@ -43,15 +40,6 @@ def collect_snippets(path):
                                              tag.contents[0].contents[0]))
     return Hedy_snippets
 
-class Snippet:
-    def __init__(self, filename, level, field_name, code, adventure_name = None):
-        self.filename = filename
-        self.level = level
-        self.field_name = field_name
-        self.code = code
-        self.adventure_name = adventure_name
-        self.name = f'{level}-{field_name}'
-
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../coursedata/level-defaults')]
 
@@ -63,16 +51,6 @@ class TestsLevelDefaultsPrograms(unittest.TestCase):
         if input is not None:
             result = HedyTester.validate_Hedy_code(snippet)
             self.assertTrue(result)
-
-
-
-
-        # for snippet in Hedy_snippets:
-        #     result = HedyTester.validate_Hedy_code(snippet)
-        #     if not result:
-        #         level_default_fails.append(result)
-        #
-        # self.assertEqual(0, len(level_default_fails))
 
 
 

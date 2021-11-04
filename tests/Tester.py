@@ -6,6 +6,17 @@ from contextlib import contextmanager
 import inspect
 import unittest
 
+
+class Snippet:
+  def __init__(self, filename, level, field_name, code, adventure_name=None):
+    self.filename = filename
+    self.level = level
+    self.field_name = field_name
+    self.code = code
+    self.adventure_name = adventure_name
+    self.name = f'{level}-{field_name}'
+
+
 class HedyTester(unittest.TestCase):
   level = None
   max_Hedy_level = 23
@@ -67,19 +78,16 @@ class HedyTester(unittest.TestCase):
     if len(snippet.code) == 0:
       return True  # We ignore empty code snippets or those of length 0
     try:
-      hedy.transpile(snippet.code, int(snippet.level))
       filename_shorter = snippet.filename.split("/")[3]
       language = filename_shorter.split(".")[0]
+      hedy.transpile(snippet.code, int(snippet.level))
     except Exception as E:
       if len(E.args) == 0:
         error = f'{language}: adventure {snippet.adventure_name} - level #{snippet.level} - {snippet.field_name}. Error: {E.args}'
-        # We print the error for readability, since otherwise they get accumulated on a long list
-        print(error)
         return error
       else:
         if E.args[0] != 'Has Blanks':  # code with blanks is ok!
           error = f'{language}: level #{snippet.level} - {snippet.field_name}. Error: {E.args[0]}'
-          # We print the error for readability, since otherwise they get accumulated on a long list
-          print(error)
           return error
     return  True
+
