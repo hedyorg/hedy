@@ -60,24 +60,25 @@ class HedyTester(unittest.TestCase):
 
       print(f'{test_name} passed for level {level}')
 
-  def validate_Hedy_code(filename, level, field_name, code, adventure_name):
-    # Code used in the Adventure and LEvel Deafults tester to validate Hedy code
+  @staticmethod
+  def validate_Hedy_code(snippet):
+    # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
-    if len(code) == 0:
+    if len(snippet.code) == 0:
       return True  # We ignore empty code snippets or those of length 0
     try:
-      hedy.transpile(code, int(level))
-      filename_shorter = filename.split("/")[3]
+      hedy.transpile(snippet.code, int(snippet.level))
+      filename_shorter = snippet.filename.split("/")[3]
       language = filename_shorter.split(".")[0]
     except Exception as E:
       if len(E.args) == 0:
-        error = f'{language}: adventure {adventure_name} - level #{level} - {field_name}. Error: {E.args}'
+        error = f'{language}: adventure {snippet.adventure_name} - level #{snippet.level} - {snippet.field_name}. Error: {E.args}'
         # We print the error for readability, since otherwise they get accumulated on a long list
         print(error)
         return error
       else:
         if E.args[0] != 'Has Blanks':  # code with blanks is ok!
-          error = f'{language}: level #{level} - {field_name}. Error: {E.args[0]}'
+          error = f'{language}: level #{snippet.level} - {snippet.field_name}. Error: {E.args[0]}'
           # We print the error for readability, since otherwise they get accumulated on a long list
           print(error)
           return error

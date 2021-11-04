@@ -52,7 +52,7 @@ class TestsLevelDefaultsPrograms(unittest.TestCase):
                     Hedy_snippets.append(Snippet(file, level, 'intro_text snippet #' + str(code_snippet_counter), tag.contents[0].contents[0], 'level_defaults'))
 
         for snippet in Hedy_snippets:
-            result = HedyTester.validate_Hedy_code(snippet.filename, snippet.level, snippet.field_name, snippet.code, snippet.adventure_name)
+            result = HedyTester.validate_Hedy_code(snippet)
             if not result:
                 level_default_fails.append(result)
 
