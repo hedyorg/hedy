@@ -78,13 +78,12 @@ class HedyTester(unittest.TestCase):
   def validate_Hedy_code(snippet):
     # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
-    if len(snippet.code) == 0:
-      return True  # We ignore empty code snippets or those of length 0
     try:
-      hedy.transpile(snippet.code, int(snippet.level))
-    except hedy.CodePlaceholdersPresentException as E:
-      # Code with blanks is allowed
-      return True
+      if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
+        hedy.transpile(snippet.code, int(snippet.level))
+    except hedy.CodePlaceholdersPresentException as E: # Code with blanks is allowed
+      pass
     except:
       return False
+    return True
 
