@@ -13,8 +13,11 @@ class Snippet:
     self.level = level
     self.field_name = field_name
     self.code = code
+    filename_shorter = filename.split("/")[3]
+    self.language = filename_shorter.split(".")[0]
     self.adventure_name = adventure_name
-    self.name = f'{level}-{field_name}'
+    self.name = f'{self.language}-{self.level}-{self.field_name}'
+
 
 
 class HedyTester(unittest.TestCase):
@@ -78,16 +81,14 @@ class HedyTester(unittest.TestCase):
     if len(snippet.code) == 0:
       return True  # We ignore empty code snippets or those of length 0
     try:
-      filename_shorter = snippet.filename.split("/")[3]
-      language = filename_shorter.split(".")[0]
       hedy.transpile(snippet.code, int(snippet.level))
     except Exception as E:
       if len(E.args) == 0:
-        error = f'{language}: adventure {snippet.adventure_name} - level #{snippet.level} - {snippet.field_name}. Error: {E.args}'
+        error = f': adventure {snippet.adventure_name} - level #{snippet.level} - {snippet.field_name}. Error: {E.args}'
         return error
       else:
         if E.args[0] != 'Has Blanks':  # code with blanks is ok!
-          error = f'{language}: level #{snippet.level} - {snippet.field_name}. Error: {E.args[0]}'
+          error = f': level #{snippet.level} - {snippet.field_name}. Error: {E.args[0]}'
           return error
     return  True
 
