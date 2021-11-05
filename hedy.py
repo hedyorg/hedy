@@ -595,7 +595,7 @@ class IsComplete(Filter):
 def process_characters_needing_escape(value):
     # defines what happens if a kids uses ' or \ in in a string
     for c in characters_that_need_escaping:
-        value = value.replace(c, f'\{c}')
+        value = value.replace(c, f'\\{c}')
     return value
 
 # decorator used to store each class in the lookup table
