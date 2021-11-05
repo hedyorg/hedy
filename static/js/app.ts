@@ -274,7 +274,7 @@ export function runit(level: string, lang: string, cb: () => void) {
  */
 export function tryPaletteCode(exampleCode: string) {
   if (auth.profile) {
-    if (window.State.examples_left >= 1) {
+    if (window.State.examples_left > 1) {
       window.State.examples_left = window.State.examples_left - 1;
       if (window.State.examples_left == 1) {
         $("#examples_attempts_left").text(auth.texts["example_left"]);
@@ -282,15 +282,15 @@ export function tryPaletteCode(exampleCode: string) {
         $("#examples_attempts_left").text(auth.texts["examples_left"].replace("...", window.State.examples_left));
       }
     } else {
+      window.State.examples_left = window.State.examples_left - 1;
       if (window.State.examples_left == 0) { // We first want to return the string, later on the alert()
-        window.State.examples_left = window.State.examples_left - 1;
         $("#examples_attempts_left").text(auth.texts["no_examples_left"]);
         $("#commands-window").hide();
         $("#toggle-button").hide();
       } else {
         modal.alert(auth.texts['examples_used']);
+        return
       }
-      return;
     }
   }
   var editor = ace.edit("editor");
