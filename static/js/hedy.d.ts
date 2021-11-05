@@ -60,6 +60,8 @@ interface State {
 
   unsaved_changes?: boolean;
 
+  examples_used?: integer;
+
   no_unload_prompt?: boolean;
 
   programsInExecution?: integer;

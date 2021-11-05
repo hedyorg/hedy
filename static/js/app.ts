@@ -265,11 +265,16 @@ export function runit(level: string, lang: string, cb: () => void) {
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  var editor = ace.edit("editor");
+  window.State.examples_used += 1;
+  if (window.State.examples_used >= 3) {
+    modal.alert(auth.texts['examples_used']);
+  } else {
+    var editor = ace.edit("editor");
 
-  var MOVE_CURSOR_TO_END = 1;
-  editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
-  window.State.unsaved_changes = false;
+    var MOVE_CURSOR_TO_END = 1;
+    editor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+    window.State.unsaved_changes = false;
+  }
 }
 
 export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
