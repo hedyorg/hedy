@@ -274,16 +274,22 @@ export function runit(level: string, lang: string, cb: () => void) {
  */
 export function tryPaletteCode(exampleCode: string) {
   if (auth.profile) {
-    window.State.examples_left = window.State.examples_left - 1;
-    if (window.State.examples_left > 1) {
-      $("#examples_attempts_left").text(auth.texts["examples_left"].replace("...", window.State.examples_left));
-    } else if (window.State.examples_left == 1) {
-      $("#examples_attempts_left").text(auth.texts["example_left"]);
+    if (window.State.examples_left >= 1) {
+      window.State.examples_left = window.State.examples_left - 1;
+      if (window.State.examples_left == 1) {
+        $("#examples_attempts_left").text(auth.texts["example_left"]);
+      } else {
+        $("#examples_attempts_left").text(auth.texts["examples_left"].replace("...", window.State.examples_left));
+      }
     } else {
-      modal.alert(auth.texts['examples_used']);
-      $("#examples_attempts_left").text(auth.texts["no_examples_left"]);
-      $("#commands-window").hide();
-      $("#toggle-button").hide();
+      if (window.State.examples_left == 0) { // We first want to return the string, later on the alert()
+        window.State.examples_left = window.State.examples_left - 1;
+        $("#examples_attempts_left").text(auth.texts["no_examples_left"]);
+        $("#commands-window").hide();
+        $("#toggle-button").hide();
+      } else {
+        modal.alert(auth.texts['examples_used']);
+      }
       return;
     }
   }
