@@ -683,5 +683,5 @@ export function confetti_cannon(){
   // timeout for the confetti to fall down
   setTimeout(function(){canvas?.classList.add('hidden')}, 3000);
   jsConfetti.addConfetti();
-
+  document.getElementById('confetti-button').style.visibility='hidden';
 }
