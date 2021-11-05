@@ -669,3 +669,10 @@ export function get_trimmed_code() {
   return theGlobalEditor?.getValue();
 }
 
+export function confetti_cannon(){
+  const canvas = document.getElementById('confetti')
+
+const jsConfetti = new JSConfetti({canvas})
+jsConfetti.addConfetti();
+
+}

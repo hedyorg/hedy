@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo.png')}}"/>
     <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
+          <script type="module">
+      import jsConfetti from 'https://cdn.skypack.dev/js-confetti';
+        </script>
   </head>
   <body class="bg-gray-400">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
@@ -44,6 +47,7 @@
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block body %}{% endblock %}
     </div>
+     <canvas id="confetti" style="width: 100%; height:auto;"></canvas>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
   </body>
