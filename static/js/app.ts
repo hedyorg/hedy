@@ -266,18 +266,19 @@ export function runit(level: string, lang: string, cb: () => void) {
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  window.State.examples_left = window.State.examples_left - 1;
-  if (window.State.examples_left > 1) {
-    $("#examples_attempts_left").text(auth.texts["examples_left"].replace("...", window.State.examples_left));
-  } else if (window.State.examples_left == 1) {
-    $("#examples_attempts_left").text(auth.texts["example_left"]);
-  }
-  else {
-    modal.alert(auth.texts['examples_used']);
-    $("#examples_attempts_left").text(auth.texts["no_examples_left"]);
-    $("#commands-window").hide();
-    $("#toggle-button").hide();
-    return;
+  if (auth.profile) {
+    window.State.examples_left = window.State.examples_left - 1;
+    if (window.State.examples_left > 1) {
+      $("#examples_attempts_left").text(auth.texts["examples_left"].replace("...", window.State.examples_left));
+    } else if (window.State.examples_left == 1) {
+      $("#examples_attempts_left").text(auth.texts["example_left"]);
+    } else {
+      modal.alert(auth.texts['examples_used']);
+      $("#examples_attempts_left").text(auth.texts["no_examples_left"]);
+      $("#commands-window").hide();
+      $("#toggle-button").hide();
+      return;
+    }
   }
   var editor = ace.edit("editor");
 
