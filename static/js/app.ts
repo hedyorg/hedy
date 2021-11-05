@@ -230,7 +230,7 @@ export function runit(level: string, lang: string, cb: () => void) {
           });
           editor.session.setAnnotations([
             {
-              row: response.Location[0] - 1,
+              row: response.Line - 1,
               column: range.start.column - 1,
               text: "",
               type: "error",
@@ -238,9 +238,9 @@ export function runit(level: string, lang: string, cb: () => void) {
           ]);
           editor.session.addMarker(
             new ace.Range(
-                response.Location[0] - 1,
+                response.Line - 1,
                 range.start.column,
-                response.Location[0] - 1,
+                response.Line - 1,
                 range.start.column + response.Invalid_command.length,
             ),
             "editor-error", "text", false

@@ -205,12 +205,8 @@ class InputTooBigException(HedyException):
         super().__init__('Too Big', **arguments)
 
 class InvalidCommandException(HedyException):
-    def __init__(self, level, location, invalid_command, guessed_command):
-        super().__init__('Invalid')
-        self.level = level
-        self.location = location
-        self.invalid_command = invalid_command
-        self.guessed_command = guessed_command
+    def __init__(self, **arguments):
+        super().__init__('Invalid', **arguments)
 
 class IncompleteCommandException(HedyException):
     def __init__(self, **arguments):
@@ -1609,7 +1605,7 @@ def transpile_inner(input_string, level):
                                                             invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
-            raise hedy.InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, location=[line, "?"])
+            raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, line_number=line)
 
     is_complete = IsComplete(level).transform(program_root)
     if not is_complete[0]:

@@ -357,10 +357,10 @@ def parse_error_to_response(ex, translations):
 arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
 
 def hedy_error_to_response(ex, translations):
-    #error_message = translate_error(ex.error_code, translations, ex.arguments)
-    location = ex.location if hasattr(ex, "location") else None
-    invalid_command = ex.invalid_command if hasattr(ex, "invalid_command") else None
-    return {"Error": "error_message", "Location": location, "Invalid_command": invalid_command}
+    error_message = translate_error(ex.error_code, translations, ex.arguments)
+    line = ex.arguments['line_number'] if "line_number" in ex.arguments else None
+    invalid_command = ex.arguments['invalid_command'] if "invalid_command" in ex.arguments else None
+    return {"Error": error_message, "Line": line, "Invalid_command": invalid_command}
 
 def translate_error(code, translations, arguments):
     # fetch the error template
@@ -881,16 +881,13 @@ def main_page(page):
 
     menu = render_main_menu(page)
     if page == 'for-teachers':
-        if is_teacher(request):
-            welcome_teacher = session.get('welcome-teacher') or False
-            session['welcome-teacher'] = False
-            teacher_classes =[] if not current_user(request)['username'] else DATABASE.get_teacher_classes(current_user(request)['username'], True)
-            return render_template('for-teachers.html', sections=split_teacher_docs(contents), lang=lang, menu=menu,
-                                   username=current_user(request)['username'], is_teacher=is_teacher(request),
-                                   auth=TRANSLATIONS.get_translations(lang, 'Auth'), teacher_classes=teacher_classes,
-                                   welcome_teacher=welcome_teacher, **front_matter)
-        else:
-            return "unauthorized", 403
+        welcome_teacher = session.get('welcome-teacher') or False
+        session['welcome-teacher'] = False
+        teacher_classes =[] if not current_user(request)['username'] else DATABASE.get_teacher_classes(current_user(request)['username'], True)
+        return render_template('for-teachers.html', sections=split_teacher_docs(contents), lang=lang, menu=menu,
+                               username=current_user(request)['username'], is_teacher=is_teacher(request),
+                               auth=TRANSLATIONS.get_translations(lang, 'Auth'), teacher_classes=teacher_classes,
+                               welcome_teacher=welcome_teacher, **front_matter)
 
     return render_template('main-page.html', mkd=markdown, lang=lang, menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), auth=TRANSLATIONS.get_translations(lang, 'Auth'), **front_matter)
 
