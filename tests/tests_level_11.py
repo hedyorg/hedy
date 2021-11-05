@@ -13,6 +13,7 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
   def test_float_addition_directly(self):
     code = textwrap.dedent("""\
     print 2.5 + 2.5""")
@@ -21,6 +22,7 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
   def test_float_addition_with_string(self):
     code = textwrap.dedent("""\
     print 'het antwoord is ' 2.5 + 2.5""")
@@ -29,6 +31,7 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
   def test_float_addition_in_var(self):
     code = textwrap.dedent("""\
     antwoord is 2.5 + 2.5
@@ -40,6 +43,22 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+  def test_store_calc_in_var(self):
+    code = textwrap.dedent("""\
+    a is 1
+    b is 2
+    c is a + b
+    print c ' is 3'""")
+    expected = textwrap.dedent("""\
+    a = 1
+    b = 2
+    c = a + b
+    print(f'{c} is 3')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_add_string_vars(self):
     code = textwrap.dedent("""\
@@ -53,6 +72,7 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
     output = self.run_code(result)
     expected_output = 'dat is dan: 56'
@@ -86,6 +106,7 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
   def test_assign_string_with_quotes_and_string_value(self):
     code = textwrap.dedent("""\
     name is 'felienne'
@@ -96,7 +117,7 @@ class TestsLevel11(HedyTester):
     result = hedy.transpile(code, self.level)
 
     self.assertEqual(expected, result.code)
-
+    self.assertEqual(False, result.has_turtle)
 
   # negative tests
   def test_assign_string_without_quotes(self):
