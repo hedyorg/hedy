@@ -262,61 +262,61 @@
             for i in range 1 to 10
               print i
             print 'Έτοιμοι ή όχι, έρχομαι!'
-10-old:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Έτοιμοι ή όχι, έρχομαι!'
-    intro_text: 'Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.'
-    commands:
-    -   name: 'for με :'
-        explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
-        example: 'for i in range 1 to 10:'
-        demo_code: |-
-            for i in range 1 to 12:
-                print i
-            print 'Έτοιμοι ή όχι, έρχομαι!'
-    -   name: 'if με :'
-        explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
-        example: "if colour is πράσινο:'"
-        demo_code: |-
-            colour is πράσινο
-            if colour is πράσινο:
-                print 'To χρώμα είναι πράσινο'
-            else:
-                print 'Το χρώμα δεν είναι πράσινο'
-    -   name: '(Προαιρετικό) elif'
-        explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
-        example: 'elif a is 5:'
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'το a είναι 2'
-            else:
-                print 'το a δεν είναι 1 ή 2'
-11-old:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j
-    intro_text: 'Από εδώ και στο εξής, μπορούμε να επαναλαμβάνουμε ένα βρόχο περισσότερες φορές. Στο παράδειγμα, μετράμε ως το 5 και το κάνουμε αυτό 3 φορές. Άρα, κάνουμε 3 γύρους και μετράμε ως το 5 κάθε φορά.'
-    commands:
-    -   name: 'διαδοχικές for'
-        explanation: 'Αυτό είναι ένα παράδειγμα με τη δήλωση for'
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j
-    -   name: 'διαδοχικές if'
-        explanation: 'Μπορούμε να κάνουμε το ίδιο με τις δηλώσεις if'
-        demo_code: |-
-            colour is μπλε
-            colourtwo is κίτρινο
-            if colour is μπλε:
-                if colourtwo is κίτρινο:
-                    print 'Μαζί κάνουμε το χρώμα πράσινο!'
+#10-old:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Έτοιμοι ή όχι, έρχομαι!'
+#    intro_text: 'Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.'
+#    commands:
+#    -   name: 'for με :'
+#        explanation: 'Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!'
+#        example: 'for i in range 1 to 10:'
+#        demo_code: |-
+#            for i in range 1 to 12:
+#                print i
+#            print 'Έτοιμοι ή όχι, έρχομαι!'
+#    -   name: 'if με :'
+#        explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
+#        example: "if colour is πράσινο:'"
+#        demo_code: |-
+#            colour is πράσινο
+#            if colour is πράσινο:
+#                print 'To χρώμα είναι πράσινο'
+#            else:
+#                print 'Το χρώμα δεν είναι πράσινο'
+#    -   name: '(Προαιρετικό) elif'
+#        explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
+#        example: 'elif a is 5:'
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a is 1'
+#            elif a is 2:
+#                print 'το a είναι 2'
+#            else:
+#                print 'το a δεν είναι 1 ή 2'
+#11-old:
+#    start_code: |-
+#        for i in range 1 to 3:
+#            for j in range 1 to 5:
+#                print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j
+#    intro_text: 'Από εδώ και στο εξής, μπορούμε να επαναλαμβάνουμε ένα βρόχο περισσότερες φορές. Στο παράδειγμα, μετράμε ως το 5 και το κάνουμε αυτό 3 φορές. Άρα, κάνουμε 3 γύρους και μετράμε ως το 5 κάθε φορά.'
+#    commands:
+#    -   name: 'διαδοχικές for'
+#        explanation: 'Αυτό είναι ένα παράδειγμα με τη δήλωση for'
+#        demo_code: |-
+#            for i in range 1 to 3:
+#                for j in range 1 to 5:
+#                    print 'βρισκόμαστε στο γύρο: ' i ' και μετράμε: ' j
+#    -   name: 'διαδοχικές if'
+#        explanation: 'Μπορούμε να κάνουμε το ίδιο με τις δηλώσεις if'
+#        demo_code: |-
+#            colour is μπλε
+#            colourtwo is κίτρινο
+#            if colour is μπλε:
+#                if colourtwo is κίτρινο:
+#                    print 'Μαζί κάνουμε το χρώμα πράσινο!'
 12:
     start_code: |-
         age is ask 'Πόσο χρονών είσαι;'

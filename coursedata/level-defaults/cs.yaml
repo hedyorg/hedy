@@ -259,56 +259,56 @@
             else
                 print 'Ups, těsně vedle...'
                 print 'Správný výsledek je 10.'
-10-old:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Už jdu!'
-    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
-    commands:
-    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
-        example: 'for i in range 1 to 10:'
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print 'Už jdu!'
-    -   explanation: To stejné musíme udělat i u `if`.
-        example: 'if barva is zelená:'
-        demo_code: |-
-            barva is zelená
-            if barva is zelená:
-                print 'Barva je zelená.'
-            else:
-                print 'Barva není zelená.'
-    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
-        example: 'elif a is 5:'
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a je 1'
-            elif a is 2:
-                print 'a je 2'
-            else:
-                print 'a není ani 1 ani 2'
-11-old:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'jsme v ' i '. kole a napočítali jsme do ' j
-    intro_text: Odteď může cykly opakovat víckrát za sebou. V příkladu počítáme do 5 a 3x to zopakujeme, takže budeme mít 3 kola v každém z něj napočítáme od 1 do 5.
-    commands:
-    -   explanation: Příklad použití `for`cyklu.
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'jsme v ' i '. kole a napočítali jsme do ' j
-    -   explanation: To stejné můžeme udělat i s `if`y.
-        demo_code: |-
-            barva is modrá
-            druhabarva is žlutá
-            if barva is modrá:
-                if druhabarva is žlutá:
-                    print 'Dohromady dáme zelenou!'
+#10-old:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Už jdu!'
+#    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
+#    commands:
+#    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
+#        example: 'for i in range 1 to 10:'
+#        demo_code: |-
+#            for i in range 1 to 10:
+#                print i
+#            print 'Už jdu!'
+#    -   explanation: To stejné musíme udělat i u `if`.
+#        example: 'if barva is zelená:'
+#        demo_code: |-
+#            barva is zelená
+#            if barva is zelená:
+#                print 'Barva je zelená.'
+#            else:
+#                print 'Barva není zelená.'
+#    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+#        example: 'elif a is 5:'
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a je 1'
+#            elif a is 2:
+#                print 'a je 2'
+#            else:
+#                print 'a není ani 1 ani 2'
+#11-old:
+#    start_code: |-
+#        for i in range 1 to 3:
+#            for j in range 1 to 5:
+#                print 'jsme v ' i '. kole a napočítali jsme do ' j
+#    intro_text: Odteď může cykly opakovat víckrát za sebou. V příkladu počítáme do 5 a 3x to zopakujeme, takže budeme mít 3 kola v každém z něj napočítáme od 1 do 5.
+#    commands:
+#    -   explanation: Příklad použití `for`cyklu.
+#        demo_code: |-
+#            for i in range 1 to 3:
+#                for j in range 1 to 5:
+#                    print 'jsme v ' i '. kole a napočítali jsme do ' j
+#    -   explanation: To stejné můžeme udělat i s `if`y.
+#        demo_code: |-
+#            barva is modrá
+#            druhabarva is žlutá
+#            if barva is modrá:
+#                if druhabarva is žlutá:
+#                    print 'Dohromady dáme zelenou!'
 12:
     start_code: |-
         vek is ask 'Kolik je ti let?'

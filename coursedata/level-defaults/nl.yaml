@@ -396,61 +396,61 @@
             print 'Tweeenhalf plus tweeenhalf is...'
             print antwoord
 
-10-old:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Wie niet weg is is gezien'
-    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
-    commands:
-    -   name: "for met :"
-        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
-        example: "for i in range 1 to 10:"
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print 'wie niet weg is is gezien'
-    -   name: "if met :"
-        explanation: "We moeten hetzelfde doen met al onze `if` statements"
-        example: "if kleur is groen:"
-        demo_code: |-
-            kleur is groen
-            if kleur is groen:
-                print 'De kleur is groen'
-            else:
-                print 'De kleur is niet groen'
-    -   name: "(Optioneel) elif"
-        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
-        example: "elif a is 5:"
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'a is 2'
-            else:
-                print 'a is niet 1 of 2'
-11-old:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'we zitten nu in rondje: ' i ' en de tel is: ' j
-    intro_text: "Vanaf nu mogen we ook een loopje vaker uitvoeren. In het voorbeeld tellen we 3 maal tot 5. Dus we doen 3 rondjes en tellen elke keer tot 5"
-    commands:
-    -   name: "for onder elkaar"
-        explanation: "Dit is een voorbeeld van for loopjes onder/in elkaar zetten"
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'we zitten nu in rondje: ' i ' en de tel is: ' j
-    -   name: "if onder elkaar"
-        explanation: "We kunnen hetzelfde doen met if statements"
-        demo_code: |-
-            kleur is blauw
-            kleurtwee is geel
-            if kleur is blauw:
-                if kleurtwee is geel:
-                    print 'Samen is dit groen!'
+#10-old:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Wie niet weg is is gezien'
+#    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
+#    commands:
+#    -   name: "for met :"
+#        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
+#        example: "for i in range 1 to 10:"
+#        demo_code: |-
+#            for i in range 1 to 10:
+#                print i
+#            print 'wie niet weg is is gezien'
+#    -   name: "if met :"
+#        explanation: "We moeten hetzelfde doen met al onze `if` statements"
+#        example: "if kleur is groen:"
+#        demo_code: |-
+#            kleur is groen
+#            if kleur is groen:
+#                print 'De kleur is groen'
+#            else:
+#                print 'De kleur is niet groen'
+#    -   name: "(Optioneel) elif"
+#        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
+#        example: "elif a is 5:"
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a is 1'
+#            elif a is 2:
+#                print 'a is 2'
+#            else:
+#                print 'a is niet 1 of 2'
+#11-old:
+#    start_code: |-
+#        for i in range 1 to 3:
+#            for j in range 1 to 5:
+#                print 'we zitten nu in rondje: ' i ' en de tel is: ' j
+#    intro_text: "Vanaf nu mogen we ook een loopje vaker uitvoeren. In het voorbeeld tellen we 3 maal tot 5. Dus we doen 3 rondjes en tellen elke keer tot 5"
+#    commands:
+#    -   name: "for onder elkaar"
+#        explanation: "Dit is een voorbeeld van for loopjes onder/in elkaar zetten"
+#        demo_code: |-
+#            for i in range 1 to 3:
+#                for j in range 1 to 5:
+#                    print 'we zitten nu in rondje: ' i ' en de tel is: ' j
+#    -   name: "if onder elkaar"
+#        explanation: "We kunnen hetzelfde doen met if statements"
+#        demo_code: |-
+#            kleur is blauw
+#            kleurtwee is geel
+#            if kleur is blauw:
+#                if kleurtwee is geel:
+#                    print 'Samen is dit groen!'
 12:
     start_code: |-
         leeftijd is ask 'Hoe oud ben jij?'

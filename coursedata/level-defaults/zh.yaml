@@ -252,56 +252,56 @@
             for i in range 1 to 10
               print i
             print '无论你是否准备好了，我都会来的!'
-10-old:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print '无论你是否准备好了，我都会来的!'
-    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
-    commands:
-    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
-        example: "for i in range 1 to 10:"
-        demo_code: |-
-            for i in range 1 to 12:
-                print i
-            print '无论你是否准备好了，我都会来的!'
-    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
-        example: "if colour is 绿色:'"
-        demo_code: |-
-            colour is 绿色
-            if colour is 绿色:
-                print 'The colour 是绿色'
-            else:
-                print 'The colour 不是绿色'
-    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
-        example: "elif a is 5:"
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a 是 1'
-            elif a is 2:
-                print 'a 是 2'
-            else:
-                print 'a 既不是1也不是2'
-11-old:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'we are in round: ' i ' and we count: ' j '.'
-    intro_text: "从现在开始，我们可以更频繁地重复一个循环。在这个例子中，我们数到5连做3遍。所以我们一共做了3轮，每次都数到5."
-    commands:
-    -   explanation: "This is an example with the for statement"
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'we are in round: ' i ' and we count: ' j '.'
-    -   explanation: "我们可以用if条件语句做同样的事情s"
-        demo_code: |-
-            colour is 蓝色
-            colourtwo is 黄色
-            if colour is 蓝色:
-                if colourtwo is 黄色:
-                    print '我们一起践行绿色生活!'
+#10-old:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print '无论你是否准备好了，我都会来的!'
+#    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
+#    commands:
+#    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
+#        example: "for i in range 1 to 10:"
+#        demo_code: |-
+#            for i in range 1 to 12:
+#                print i
+#            print '无论你是否准备好了，我都会来的!'
+#    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
+#        example: "if colour is 绿色:'"
+#        demo_code: |-
+#            colour is 绿色
+#            if colour is 绿色:
+#                print 'The colour 是绿色'
+#            else:
+#                print 'The colour 不是绿色'
+#    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
+#        example: "elif a is 5:"
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a 是 1'
+#            elif a is 2:
+#                print 'a 是 2'
+#            else:
+#                print 'a 既不是1也不是2'
+#11-old:
+#    start_code: |-
+#        for i in range 1 to 3:
+#            for j in range 1 to 5:
+#                print 'we are in round: ' i ' and we count: ' j '.'
+#    intro_text: "从现在开始，我们可以更频繁地重复一个循环。在这个例子中，我们数到5连做3遍。所以我们一共做了3轮，每次都数到5."
+#    commands:
+#    -   explanation: "This is an example with the for statement"
+#        demo_code: |-
+#            for i in range 1 to 3:
+#                for j in range 1 to 5:
+#                    print 'we are in round: ' i ' and we count: ' j '.'
+#    -   explanation: "我们可以用if条件语句做同样的事情s"
+#        demo_code: |-
+#            colour is 蓝色
+#            colourtwo is 黄色
+#            if colour is 蓝色:
+#                if colourtwo is 黄色:
+#                    print '我们一起践行绿色生活!'
 12:
     start_code: |-
         age is ask '你今年几岁了?'
