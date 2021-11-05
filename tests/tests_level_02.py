@@ -110,7 +110,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
     expected_output = self.run_code(result)
-    self.assertEqual("Welcome to O\ceanView", expected_output)
+    self.assertEqual("Welcome to O\\ceanView", expected_output)
   def test_print_slash_end(self):
     code = "print Welcome to \\"
     result = hedy.transpile(code, self.level)

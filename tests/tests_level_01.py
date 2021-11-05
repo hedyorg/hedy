@@ -54,7 +54,7 @@ class TestsLevel1(HedyTester):
     expected_output = self.run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
   def test_print_with_slashes(self):
-    code = "print 'Welcome to \O/ceanView!'"
+    code = "print 'Welcome to \\O/ceanView!'"
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
@@ -64,7 +64,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
     expected_output = self.run_code(result)
-    self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+    self.assertEqual("'Welcome to \\O/ceanView!'", expected_output)
   def test_print_with_slashed_at_end(self):
     code = "print Welcome to \\"
     result = hedy.transpile(code, self.level)
