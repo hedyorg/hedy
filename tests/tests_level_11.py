@@ -5,6 +5,31 @@ from tests_level_01 import HedyTester
 class TestsLevel11(HedyTester):
   level = 11
 
+  # ask tests
+  def test_ask_number_answer(self):
+    code = textwrap.dedent("""\
+    prijs is ask 'hoeveel?'
+    gespaard is 7
+    sparen is prijs - gespaard
+    print 'hallo' sparen""")
+    expected = textwrap.dedent("""\
+    prijs = input('hoeveel?')
+    try:
+      prijs = int(prijs)
+    except ValueError:
+      try:
+        prijs = float(prijs)
+      except ValueError:
+        pass
+    gespaard = 7
+    sparen = prijs - gespaard
+    print(f'hallo{sparen}')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  #new calculations
   def test_int_addition_directly(self):
     code = textwrap.dedent("""\
     print 2 + 2""")
@@ -44,6 +69,22 @@ class TestsLevel11(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+  def test_float_addition_with_var(self):
+    code = textwrap.dedent("""\
+    getal1 is 5
+    getal2 is 4.3
+    print 'dat is dan: ' getal1 + getal2
+    """)
+    expected = textwrap.dedent("""\
+    getal1 = 5
+    getal2 = 4.3
+    print(f'dat is dan: {getal1 + getal2}')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
   def test_store_calc_in_var(self):
     code = textwrap.dedent("""\
     a is 1

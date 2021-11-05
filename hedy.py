@@ -518,8 +518,7 @@ class UsesTurtle(Transformer):
     def turn(self, args):
         return True
 
-    # somehow a token (or only this token?) is not picked up by the default rule so it needs
-    # its own rule
+    # somehow tokens are not picked up by the default rule so they need their own rule
     def INT(self, args):
         return False
 
@@ -1067,6 +1066,37 @@ class ConvertToPython_11(ConvertToPython_10):
             return f'{str(argument.children)}'
         else:
             return f'{argument}'
+
+    def is_int(self, n):
+        try:
+            to_int = int(n)
+            return to_int == n
+        except ValueError:
+            return False
+    def is_float(self, n):
+        try:
+            float(n)
+            return True
+        except ValueError:
+            return False
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        self.check_arg_types(remaining_args, 'ask', self.level)
+
+        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
+
+        tryblock = textwrap.dedent(f"""
+        try:
+          prijs = int({var})
+        except ValueError:
+          try:
+            prijs = float({var})
+          except ValueError:
+            pass""") #no number? leave as string
+        return assign + tryblock
+
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
@@ -1074,6 +1104,18 @@ class ConvertToPython_11(ConvertToPython_10):
         # for tokens we simply return the argument (no more casting to str needed)
 
         args = [self.process_token_or_tree(a) for a in args]
+
+        # convert types of the arguments
+        converted_args = []
+        for arg in args:
+            if self.is_float(arg):
+                converted_args.append(f'float({arg})')
+            elif self.is_int(arg):
+                converted_args.append(f'int({arg})')
+            else:
+                # variable? default to float for now (todo: use typesystem here)
+                converted_args.append(f'float({arg})')
+
         return Tree('sum', f'{args[0]} {operator} {args[1]}')
 
     def print(self, args):
@@ -1106,7 +1148,8 @@ class ConvertToPython_11(ConvertToPython_10):
             correct_rhs = self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
         except UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
-            if not str.isnumeric(right_hand_side):
+
+            if not (self.is_int(right_hand_side) or self.is_float(right_hand_side)):
                 raise UnquotedAssignTextException(text = args[1])
 
         if len(args) == 2:
