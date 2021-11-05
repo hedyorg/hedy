@@ -54,7 +54,6 @@
     window.State.level_title = "{{ level_title }}";
     {% if username %}
         window.State.examples_left = 3;
-        $("#examples_attempts_left").show();
     {% endif %}
     {% if not username %}
         window.State.examples_left = Number.MAX_SAFE_INTEGER; // We want to give the user unlimited tries
