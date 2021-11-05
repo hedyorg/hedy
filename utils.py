@@ -89,10 +89,10 @@ def slash_join(*args):
     return ''.join(ret)
 
 def is_testing_request(request):
-    return bool ('X-Testing' in request.headers and request.headers ['X-Testing'])
+    return bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
 def extract_bcrypt_rounds (hash):
-    return int (re.match ('\$2b\$\d+', hash) [0].replace ('$2b$', ''))
+    return int(re.match('\\$2b\\$\\d+', hash)[0].replace('$2b$', ''))
 
 def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
@@ -135,7 +135,7 @@ def version():
     return the_date.strftime('%b %d') + f' ({commit})'
 
 def valid_email(s):
-    return bool (re.match ('^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    return bool(re.match('^(([a-zA-Z0-9_+\\.\\-]+)@([\da-zA-Z\\.\\-]+)\.([a-zA-Z\\.]{2,6})\s*)$', s))
 
 
 @contextlib.contextmanager

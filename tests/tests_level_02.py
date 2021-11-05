@@ -100,7 +100,7 @@ class TestsLevel2(HedyTester):
     expected_output = self.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
   def test_print_backslashes(self):
-    code = "print Welcome to O\ceanView"
+    code = "print Welcome to O\\ceanView"
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
