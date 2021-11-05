@@ -47,12 +47,12 @@ def transform_adventures(transformations):
 def transform_levels_in_all_YAMLs(transformations):
   # Set the current directory to the root Hedy folder
   os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-  # transform_level_defaults(transformations)
-  transform_adventures(transformations)
+  transform_level_defaults(transformations)
+  # transform_adventures(transformations)
 
 
 
 
 
-tranformations = [(5, 17)]
+tranformations = [(17, 12)]
 transform_levels_in_all_YAMLs(tranformations)

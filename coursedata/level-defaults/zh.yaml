@@ -9,7 +9,7 @@
         使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行这段代码.
 
         不知道自己想要创建些什么？你也许能在下面的内容里面找到灵感. 
-        
+
     start_code: "print 你好世界!"
     commands:
     -   explanation: "Print的意思是打印,用print可以打印一些东西."
@@ -122,21 +122,21 @@
 5:
     start_code: "print '5乘以5 is ' 5 * 5"
     intro_text: |
-         ask提问, print打印, if-else条件语句和r循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
-         但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦.
+        ask提问, print打印, if-else条件语句和r循环语句在这一级目标中的使用方法与在第4级和第5级目标里面一样.
+        但是第6级学习内容里面增加了一些新的内容, 现在你可以计算啦.
 
-         在第6级的学习内容里面增加了新的代码,你现在可以用代码进行计算了.
+        在第6级的学习内容里面增加了新的代码,你现在可以用代码进行计算了.
 
-         加法运算很简单, 和你在数学课上学的加法运算的知识很类似, 例如''5加5记做 `5 + 5`. 减法运算也很简单, 例如'5减5'记做 `5 - 5`.
+        加法运算很简单, 和你在数学课上学的加法运算的知识很类似, 例如''5加5记做 `5 + 5`. 减法运算也很简单, 例如'5减5'记做 `5 - 5`.
 
-         乘法运算有点不同, 因为键盘上面没有乘法符号. 你可以找一下, 确实没有!
-         这就是为什么我们要把数字8上面的星号当做乘法符号: `5 * 5`. 读作5乘以5,你会很容易记住它.
-         ## 海迪代码范例
-         ```
-         print '5加5等于 ' 5 + 5
-         print '5减5等于 ' 5 - 5
-         print '5乘以5等于 ' 5 * 5
-         ```
+        乘法运算有点不同, 因为键盘上面没有乘法符号. 你可以找一下, 确实没有!
+        这就是为什么我们要把数字8上面的星号当做乘法符号: `5 * 5`. 读作5乘以5,你会很容易记住它.
+        ## 海迪代码范例
+        ```
+        print '5加5等于 ' 5 + 5
+        print '5减5等于 ' 5 - 5
+        print '5乘以5等于 ' 5 * 5
+        ```
     commands:
     -   explanation: "Print的意思是打印，现在打印内容的前后两边都需要用单引号标注清楚."
         example: "例如: print '5乘以5等于 ' 5 * 5"
@@ -252,237 +252,213 @@
             for i in range 1 to 10
               print i
             print '无论你是否准备好了，我都会来的!'
-#11:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print '无论你是否准备好了，我都会来的!'
-#    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
-#    commands:
-#    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print '无论你是否准备好了，我都会来的!'
-#    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
-#        example: "if colour is 绿色:'"
-#        demo_code: |-
-#            colour is 绿色
-#            if colour is 绿色:
-#                print 'The colour 是绿色'
-#            else:
-#                print 'The colour 不是绿色'
-#    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a 是 1'
-#            elif a is 2:
-#                print 'a 是 2'
-#            else:
-#                print 'a 既不是1也不是2'
-#12:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'we are in round: ' i ' and we count: ' j '.'
-#    intro_text: "从现在开始，我们可以更频繁地重复一个循环。在这个例子中，我们数到5连做3遍。所以我们一共做了3轮，每次都数到5."
-#    commands:
-#    -   explanation: "This is an example with the for statement"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'we are in round: ' i ' and we count: ' j '.'
-#    -   explanation: "我们可以用if条件语句做同样的事情s"
-#        demo_code: |-
-#            colour is 蓝色
-#            colourtwo is 黄色
-#            if colour is 蓝色:
-#                if colourtwo is 黄色:
-#                    print '我们一起践行绿色生活!'
-#13:
-#    start_code: |-
-#        age is input('你现在几岁了?')
-#        print('所以你的年龄曾经是:')
-#        for i in range(0,age):
-#            print(i)
-#    intro_text: "我们要开始用小括号还要改变ask(提问)! 我们把ask(提问)替换为input(输入)! 我们现在使用print, ask和for的时候要加上小括号."
-#    commands:
-#    -   explanation: "我们现在要把print(打印)的内容用小括号括起来!"
-#        example: "例如: print('你好世界')"
-#        demo_code: "print('你好世界')"
-#    -   explanation: ", also we are going to put brackets around it我们现在要用input(输入)代替ask，同时要在input(输入)的内容前后添加小括号."
-#        example: "例如: answer is input('你的名字是什么?')"
-#        demo_code: |-
-#            answer is input('你的名字是什么?')
-#            print('那你的名字是 ' answer)
-#    -   explanation: "我们现在要在for循环语句的前后添加小括号. for i in range (0,10):"
-#        example: "例如: for i in range(0,10):"
-#        demo_code: |-
-#            for i in range(0,10):
-#                print(i)
-#            print('无论你是否准备好了，我都会来的')
-#
-#
-#14:
-#    start_code: |-
-#        fruit is ['苹果', '香蕉', '樱桃']
-#        print(fruit)
-#    intro_text: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
-#    commands:
-#    -   explanation: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
-#        example: "例如: fruit is ['苹果', '香蕉', '樱桃']"
-#        demo_code: |-
-#            fruit is ['苹果', '香蕉', '樱桃']
-#            print(fruit)
-#    -   name: "从一个列表中检索元素"
-#        explanation: "我们用[数字]从一个列表中检索元素，因此 fruit[1] 的意思就是从列表fruit中检索第一个元素t!"
-#        example: "例如: firstfruit is fruit[1]"
-#        demo_code: |-
-#            fruit is ['香蕉', '苹果', '樱桃']
-#            firstfruit is fruit[1]
-#            print(firstfruit)
-#    -   name: "从一个列表中随机选择元素"
-#        explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
-#        example: "例如: randomfruit is fruit[random]"
-#        demo_code: |-
-#            fruit is ['香蕉', '苹果', '樱桃']
-#            randomfruit is fruit[random]
-#            print(randomfruit)
-#15:
-#    start_code: |-
-#        you_are_still_here is False
-#        are_you_still_here is input('你还在这里吗? 是 或 不是?')
-#        if are_you_still_here is yes:
-#            you_are_still_here is True
-#        if you_are_still_here is True:
-#            print('你好!')
-#        if you_are_still_here is False:
-#            print('再见!')
-#    intro_text: "我们现在讨论将创建一个变量，即`True` (真)或 'False`(假), 你可以将`True` (真)` 和 'False`(假) 赋值给一个变量. 你可以用这个来记录某个答案."
-#    commands:
-#    -   name: "Example例子"
-#        explanation: "在这个例子中, 我们用`True` (真)和 'False`(假)来记录一个问题的答案. 你可以回答5次. 如果答案正确, good_answer 将会为 `True`(真)"
-#        example: "good_answer is 'False'"
-#        demo_code: |-
-#          for i in range(1,5):
-#              good_answer is False
-#              answer is input('5*5等于 ')
-#              if answer is 25:
-#                  good_answer is True
-#              else:
-#                  good_answer is False
-#              if good_answer is True:
-#                  print('正确!')
-#              if good_answer is False:
-#                  print('错误! ' 5-i ' 试图离开')
-#16:
-#    start_code: |-
-#        you_are_still_here is False
-#        are_you_still_here is input('你还在这里吗? 是 或 不是?')
-#        if are_you_still_here is yes:
-#            you_are_still_here is True
-#        answer is input('5*5等于几?')
-#        if you_are_still_here is True and answer is 25:
-#            print('你说yes，并给出了一个很好的答案')
-#    intro_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
-#    commands:
-#    -   name: "And(且)"
-#        explanation: "'and`的左边和右边的两个语句都必须是正确的."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#          answer1 is input('3+2等于几?')
-#          answer2 is input('2+2等于几?')
-#          if answer1 is 5 and answer2 is 4:
-#              print('这两个答案都正确!')
-#          else:
-#              print('至少有一个答案是错的!')
-#    -   name: "Or(或)"
-#        explanation: " 在`or`(或)的左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的."
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#          answer1 is input('3+2等于几?')
-#          answer2 is input('2+2等于几?')
-#          if answer1 is 5 or answer2 is 4:
-#              print('至少有一个答案是正确的!')
-#          else:
-#              print('这两个答案都是错的!')
-#17:
-#    start_code: |-
-#        # 这是一个要问几个数学问题的程序
-#        for i in range(1,10):
-#            # 我们将要问一些有关五五乘法表的问题
-#            answer is input('' i ' 乘以 5等于几?')
-#            # 我们判断答案是否正确
-#            correct_answer is i * 5
-#            if answer is correct_answer:
-#                print(answer ' 是正确的')
-#            else:
-#                print('错了, 应该是: ' i*5)
-#    intro_text: "当你在编写更大的程序时, 你将需要找到一种方法来记住每一段代码的作用. 我们使用 comments(注释)来实现这一点. 注释的格式如下:\n ` # 这是一个注释`. 在 # 后面的所有内容对代码来说都是不可见的."
-#    commands:
-#    -   name: "Comment注释"
-#        explanation: "我们可以把注释放在任何我们想放的地方."
-#        example: "# 这是一个注释"
-#        demo_code: |-
-#            # 这段代码是为了打印你好
-#            # 这是用海迪编写的
-#            # 除了打印 "你好"，它什么也没做
-#            print('你好!')
-#18:
-#    start_code: |-
-#        age is input('你今年几岁了?')
-#        if age < 13:
-#            print('你比我年纪小!')
-#        elif age > 13:
-#            print('你比我年纪大!')
-#    intro_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
-#    commands:
-#    -   name: "Smaller 小于"
-#        explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
-#        example: "例如: age < 12"
-#        demo_code: |-
-#            age is input('你今年几岁了?')
-#            if age < 13:
-#                print('你比我年纪小!')
-#    -   name: "Bigger 大于"
-#        explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
-#        example: "例如: age > 12"
-#        demo_code: |-
-#            age is input('你今年几岁了?')
-#            if age > 13:
-#                print('你比我年纪大!')
-#19:
-#    start_code: |-
-#        correct_answer is False
-#        # 我们继续知道正确答案被给出!
-#        while correct_answer is False:
-#            answer is input('5乘以5等于几?')
-#            if answer is 25:
-#                correct_answer is True
-#                print('已经给出了一个很好的答案')
-#    intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
-#    commands:
-#    -   name: "布尔 while循环语句"
-#        explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
-#        example: "例如: while correct_answer is False"
-#        demo_code: |-
-#            correct_answer is False
-#            # 我们继续知道正确答案被给出!
-#            while correct_answer is False:
-#                answer is input('5乘以5等于几?')
-#                if answer is 25:
-#                    correct_answer is True
-#                    print('已经给出了一个很好的答案')
-#    -   name: "Smaller while (直到小于)"
-#        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
-#        example: "例如: while count < 3"
-#        demo_code: |-
-#            count is 1
-#            # 我们继续，直到count数到3为止!
-#            while count < 3:
-#                print('我们计算 ' 3 - count ' 的次数更多了')
-#                count is count + 1
-#            print('我们完成啦')
+10-old:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print '无论你是否准备好了，我都会来的!'
+    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
+    commands:
+    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print '无论你是否准备好了，我都会来的!'
+    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
+        example: "if colour is 绿色:'"
+        demo_code: |-
+            colour is 绿色
+            if colour is 绿色:
+                print 'The colour 是绿色'
+            else:
+                print 'The colour 不是绿色'
+    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a 是 1'
+            elif a is 2:
+                print 'a 是 2'
+            else:
+                print 'a 既不是1也不是2'
+11-old:
+    start_code: |-
+        for i in range 1 to 3:
+            for j in range 1 to 5:
+                print 'we are in round: ' i ' and we count: ' j '.'
+    intro_text: "从现在开始，我们可以更频繁地重复一个循环。在这个例子中，我们数到5连做3遍。所以我们一共做了3轮，每次都数到5."
+    commands:
+    -   explanation: "This is an example with the for statement"
+        demo_code: |-
+            for i in range 1 to 3:
+                for j in range 1 to 5:
+                    print 'we are in round: ' i ' and we count: ' j '.'
+    -   explanation: "我们可以用if条件语句做同样的事情s"
+        demo_code: |-
+            colour is 蓝色
+            colourtwo is 黄色
+            if colour is 蓝色:
+                if colourtwo is 黄色:
+                    print '我们一起践行绿色生活!'
+12:
+    start_code: |-
+        age is ask '你今年几岁了?'
+        if age < 13
+            print '你比我年纪小!'
+        else
+            print '你比我年纪大!'
+    intro_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
+    commands:
+    -   name: "Smaller 小于"
+        explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
+        example: "例如: age < 13"
+        demo_code: |-
+            age is ask '你今年几岁了?'
+            if age < 13
+                print '你比我年纪小!'
+    -   name: "Bigger 大于"
+        explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
+        example: "例如: age > 13"
+        demo_code: |-
+            age is ask '你今年几岁了?'
+            if age > 13
+                print '你比我年纪大!'
+13:
+    start_code: |-
+        fruit is ['苹果', '香蕉', '樱桃']
+        print(fruit)
+    intro_text: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
+    commands:
+    -   explanation: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
+        example: "例如: fruit is ['苹果', '香蕉', '樱桃']"
+        demo_code: |-
+            fruit is ['苹果', '香蕉', '樱桃']
+            print(fruit)
+    -   name: "从一个列表中检索元素"
+        explanation: "我们用[数字]从一个列表中检索元素，因此 fruit[1] 的意思就是从列表fruit中检索第一个元素t!"
+        example: "例如: firstfruit is fruit[1]"
+        demo_code: |-
+            fruit is ['香蕉', '苹果', '樱桃']
+            firstfruit is fruit[1]
+            print(firstfruit)
+    -   name: "从一个列表中随机选择元素"
+        explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
+        example: "例如: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['香蕉', '苹果', '樱桃']
+            randomfruit is fruit[random]
+            print(randomfruit)
+14:
+    start_code: |-
+        you_are_still_here is False
+        are_you_still_here is input('你还在这里吗? 是 或 不是?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        if you_are_still_here is True:
+            print('你好!')
+        if you_are_still_here is False:
+            print('再见!')
+    intro_text: "我们现在讨论将创建一个变量，即`True` (真)或 'False`(假), 你可以将`True` (真)` 和 'False`(假) 赋值给一个变量. 你可以用这个来记录某个答案."
+    commands:
+    -   name: "Example例子"
+        explanation: "在这个例子中, 我们用`True` (真)和 'False`(假)来记录一个问题的答案. 你可以回答5次. 如果答案正确, good_answer 将会为 `True`(真)"
+        example: "good_answer is 'False'"
+        demo_code: |-
+            for i in range(1,5):
+                good_answer is False
+                answer is input('5*5等于 ')
+                if answer is 25:
+                    good_answer is True
+                else:
+                    good_answer is False
+                if good_answer is True:
+                    print('正确!')
+                if good_answer is False:
+                    print('错误! ' 5-i ' 试图离开')
+15:
+    start_code: |-
+        you_are_still_here is False
+        are_you_still_here is input('你还在这里吗? 是 或 不是?')
+        if are_you_still_here is yes:
+            you_are_still_here is True
+        answer is input('5*5等于几?')
+        if you_are_still_here is True and answer is 25:
+            print('你说yes，并给出了一个很好的答案')
+    intro_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
+    commands:
+    -   name: "And(且)"
+        explanation: "'and`的左边和右边的两个语句都必须是正确的."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            answer1 is input('3+2等于几?')
+            answer2 is input('2+2等于几?')
+            if answer1 is 5 and answer2 is 4:
+                print('这两个答案都正确!')
+            else:
+                print('至少有一个答案是错的!')
+    -   name: "Or(或)"
+        explanation: " 在`or`(或)的左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            answer1 is input('3+2等于几?')
+            answer2 is input('2+2等于几?')
+            if answer1 is 5 or answer2 is 4:
+                print('至少有一个答案是正确的!')
+            else:
+                print('这两个答案都是错的!')
+16:
+    start_code: |-
+        # 这是一个要问几个数学问题的程序
+        for i in range(1,10):
+            # 我们将要问一些有关五五乘法表的问题
+            answer is input('' i ' 乘以 5等于几?')
+            # 我们判断答案是否正确
+            correct_answer is i * 5
+            if answer is correct_answer:
+                print(answer ' 是正确的')
+            else:
+                print('错了, 应该是: ' i*5)
+    intro_text: "当你在编写更大的程序时, 你将需要找到一种方法来记住每一段代码的作用. 我们使用 comments(注释)来实现这一点. 注释的格式如下:\n ` # 这是一个注释`. 在 # 后面的所有内容对代码来说都是不可见的."
+    commands:
+    -   name: "Comment注释"
+        explanation: "我们可以把注释放在任何我们想放的地方."
+        example: "# 这是一个注释"
+        demo_code: |-
+            # 这段代码是为了打印你好
+            # 这是用海迪编写的
+            # 除了打印 "你好"，它什么也没做
+            print('你好!')
+18:
+    start_code: |-
+        correct_answer is False
+        # 我们继续知道正确答案被给出!
+        while correct_answer is False:
+            answer is input('5乘以5等于几?')
+            if answer is 25:
+                correct_answer is True
+                print('已经给出了一个很好的答案')
+    intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
+    commands:
+    -   name: "布尔 while循环语句"
+        explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
+        example: "例如: while correct_answer is False"
+        demo_code: |-
+            correct_answer is False
+            # 我们继续知道正确答案被给出!
+            while correct_answer is False:
+                answer is input('5乘以5等于几?')
+                if answer is 25:
+                    correct_answer is True
+                    print('已经给出了一个很好的答案')
+    -   name: "Smaller while (直到小于)"
+        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
+        example: "例如: while count < 3"
+        demo_code: |-
+            count is 1
+            # 我们继续，直到count数到3为止!
+            while count < 3:
+                print('我们计算 ' 3 - count ' 的次数更多了')
+                count is count + 1
+            print('我们完成啦')
