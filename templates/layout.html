@@ -46,8 +46,9 @@
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block body %}{% endblock %}
+      <canvas id="confetti" class="hidden"></canvas>
     </div>
-     <canvas id="confetti" style="width: 100%; height:auto;"></canvas>
+    
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
   </body>

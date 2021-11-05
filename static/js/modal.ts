@@ -65,6 +65,31 @@ let editor: AceAjax.Editor | undefined;
 /**
  * The error that appears underneath the code editor
  */
+export const success = {
+  setEditor(e: AceAjax.Editor) {
+    editor = e;
+  },
+
+  hide() {
+    $('#okbox').hide();
+    $('#okbox').hide();
+    editor?.resize();
+  },
+
+  showWarning(caption: string, message: string) {
+    $('#okbox .caption').text(caption);
+    $('#okbox .details').text(message);
+    $('#okbox').show();
+    editor?.resize();
+  },
+
+  show(caption: string) {
+    $('#okbox .caption').text(caption);
+    $('#okbox').show();
+    editor?.resize();
+  }
+}
+
 export const error = {
   setEditor(e: AceAjax.Editor) {
     editor = e;

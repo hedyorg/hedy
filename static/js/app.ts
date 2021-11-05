@@ -1,7 +1,7 @@
 // It's important that this file gets loaded first
 import './syntaxModesRules';
 
-import { modal, error } from './modal';
+import { modal, error, success } from './modal';
 import { auth } from './auth';
 
 export let theGlobalEditor: AceAjax.Editor;
@@ -181,6 +181,7 @@ export function runit(level: string, lang: string, cb: () => void) {
   if (reloadOnExpiredSession ()) return;
 
   error.hide();
+  success.hide();
   try {
     level = level.toString();
     var editor = theGlobalEditor;
@@ -230,6 +231,10 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
+      if (response.Code){
+        console.log("success!");
+        success.show(ErrorMessages['Transpile_success']);
+      }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
@@ -264,6 +269,7 @@ export function tryPaletteCode(exampleCode: string) {
 
 export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
   error.hide();
+  success.hide();
 
   if (reloadOnExpiredSession ()) return;
 
@@ -670,9 +676,12 @@ export function get_trimmed_code() {
 }
 
 export function confetti_cannon(){
-  const canvas = document.getElementById('confetti')
-
-const jsConfetti = new JSConfetti({canvas})
-jsConfetti.addConfetti();
+  let canvas = document.getElementById('confetti');
+  canvas?.classList.remove('hidden');
+  // ignore this error, the function comes from CDN for now
+  const jsConfetti = new JSConfetti({canvas})
+  // timeout for the confetti to fall down
+  setTimeout(function(){canvas?.classList.add('hidden')}, 3000);
+  jsConfetti.addConfetti();
 
 }
