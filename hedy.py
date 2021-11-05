@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass, field
 
 # Some useful constants
-HEDY_MAX_LEVEL = 11
+HEDY_MAX_LEVEL = 12
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -1165,6 +1165,24 @@ class ConvertToPython_11(ConvertToPython_10):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
+@hedy_transpiler(level=12)
+class ConvertToPython_12(ConvertToPython_11):
+    def smaller(self, args):
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
+        if len(args) == 2:
+            return f"int({arg0}) < int({arg1})"  # no and statements
+        else:
+            return f"int({arg0}) < int({arg1}) and {args[2]}"
+
+    def bigger(self, args):
+        arg0 = process_variable(args[0], self.lookup)
+        arg1 = process_variable(args[1], self.lookup)
+        if len(args) == 2:
+            return f"int({arg0}) > int({arg1})"  # no and statements
+        else:
+            return f"int({arg0}) > int({arg1}) and {args[2]}"
+
 # @hedy_transpiler(level=10)
 # @hedy_transpiler(level=11)
 # class ConvertToPython_10_11(ConvertToPython_9):
@@ -1285,23 +1303,7 @@ class ConvertToPython_11(ConvertToPython_10):
 #     def comment(self, args):
 #         return f"# {args}"
 #
-# @hedy_transpiler(level=17)
-# class ConvertToPython_17(ConvertToPython_16):
-#     def smaller(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"int({arg0}) < int({arg1})"  # no and statements
-#         else:
-#             return f"int({arg0}) < int({arg1}) and {args[2]}"
-#
-#     def bigger(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"int({arg0}) > int({arg1})"  # no and statements
-#         else:
-#             return f"int({arg0}) > int({arg1}) and {args[2]}"
+
 #
 # @hedy_transpiler(level=18)
 # class ConvertToPython_18(ConvertToPython_17):
