@@ -285,7 +285,7 @@ class TestsLevel1(HedyTester):
     )
   def test_non_keyword_with_argument_gives_invalid(self):
     self.multi_level_tester(
-      max_level=22,
+      max_level=10,
       code="abc felienne 123",
       exception=hedy.InvalidCommandException,
       test_name=self.name()
