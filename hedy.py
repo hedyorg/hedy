@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass, field
 
 # Some useful constants
-HEDY_MAX_LEVEL = 12
+HEDY_MAX_LEVEL = 13
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -1205,6 +1205,13 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             return f"str({arg0}) != str({arg1}) and {args[2]}"
 
+@hedy_transpiler(level=13)
+class ConvertToPython_13(ConvertToPython_12):
+    def while_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "while " + args[0] + ":\n"+"\n".join(all_lines)
+
 # @hedy_transpiler(level=10)
 # @hedy_transpiler(level=11)
 # class ConvertToPython_10_11(ConvertToPython_9):
@@ -1326,13 +1333,6 @@ class ConvertToPython_12(ConvertToPython_11):
 #         return f"# {args}"
 #
 
-#
-# @hedy_transpiler(level=18)
-# class ConvertToPython_18(ConvertToPython_17):
-#     def while_loop(self, args):
-#         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-#         all_lines = [indent(x) for x in args[1:]]
-#         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 #
 # @hedy_transpiler(level=19)
 # @hedy_transpiler(level=20)
