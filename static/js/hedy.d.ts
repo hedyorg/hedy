@@ -60,7 +60,7 @@ interface State {
 
   unsaved_changes?: boolean;
 
-  examples_used?: integer;
+  examples_left?: integer;
 
   no_unload_prompt?: boolean;
 
