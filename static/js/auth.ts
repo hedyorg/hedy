@@ -79,7 +79,7 @@ export const auth = {
   },
   submit: function (op: string) {
     const values: UserForm = {};
-    $ ('form#signup *').map (function (_k, el) {
+    $ ('form.js-validated-form *').map (function (_k, el) {
       if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
     });
 
