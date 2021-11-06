@@ -7,16 +7,16 @@ questions:
       for i in range 1 to 3
           print i
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "1\n2\n3"
       "feedback": "Inderdaad"
-    - "option_text": "None"
+    -
       "code": "1 2 3"
       "feedback": "Helaas"
-    - "option_text": "None"
+    -
       "code": " 1, 2, 3"
       "feedback": "Helaas"
-    - "option_text": "None"
+    -
       "code": "123"
       "feedback": "Helaas"
     correct_answer: "A"
@@ -31,16 +31,16 @@ questions:
       4
       Hoedje van papier
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to 4\n    print i\nprint 'Hoedje van papier'"
       "feedback": "Perfect!"
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to 4\nprint i\nprint 'Hoedje van papier'"
       "feedback": "Deze code werkt niet. Je moet inspringen na een for."
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to 4\n    print i\n    print 'Hoedje van papier'"
       "feedback": "Nu telt Hedy '1 Hoedje van papier, 2 Hoedje van papier etc."
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to 4\n    print 'i'\nprint 'Hoedje van papier'"
       "feedback": "i is een variabele en moet geen aanhalingstekens."
     correct_answer: "A"
@@ -61,16 +61,16 @@ questions:
       1
       0
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to 10\n    print i"
       "feedback": "Nu print Hedy de getallen van 0 tot 10 en niet van 10 naar 0"
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to 10\n    print - i"
       "feedback": "Dit klopt niet, dan zou Hedy mingetallen printen."
-    - "option_text": "None"
+    -
       "code": "for i in range 10 to 0\n    print i"
       "feedback": "Dit kan helaas niet."
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to 10\n    print 10 - i"
       "feedback": "Juist!"
     correct_answer: "D"
@@ -83,17 +83,13 @@ questions:
       print i
     mp_choice_options:
     - "option_text": "De i op regel 2 moet binnen aanhalingstekens"
-      "code": "None"
       "feedback": "De variabele hoeft niet binnen aanhalingstekens."
     - "option_text": "Je mag alleen 'for i in range 1 to 10' gebruiken, niet 1 to\
         \ 5"
-      "code": "None"
       "feedback": "1 to 5 mag ook!"
     - "option_text": "De eerste regel moet beginnen met een inspringing"
-      "code": "None"
       "feedback": "Niet de eerste regel.."
     - "option_text": "De tweede regel moet beginnen met een inspringing"
-      "code": "None"
       "feedback": "Klopt!"
     correct_answer: "D"
     hint: "Er is iets mis met het inspringen"
@@ -104,16 +100,16 @@ questions:
       for i in ? 1 to 10
           print i
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "rang"
       "feedback": "Nee, helaas"
-    - "option_text": "None"
+    -
       "code": "range"
       "feedback": "Correct"
-    - "option_text": "None"
+    -
       "code": "ragne"
       "feedback": "Nee, helaas"
-    - "option_text": "None"
+    -
       "code": "ranch"
       "feedback": "Nee, helaas"
     correct_answer: "B"
@@ -126,16 +122,12 @@ questions:
           print 'Hallo'
     mp_choice_options:
     - "option_text": "1 keer"
-      "code": "None"
       "feedback": "Helaas"
     - "option_text": "2 keer"
-      "code": "None"
       "feedback": "Helaas"
     - "option_text": "3 keer"
-      "code": "None"
       "feedback": "Juist!"
     - "option_text": "Nooit"
-      "code": "None"
       "feedback": "Helaas"
     correct_answer: "C"
     hint: "0 telt ook mee als getal. Dus 0,1,2 dat is dus 3x"
@@ -149,16 +141,16 @@ questions:
           eten is ask 'Wat wilt u bestellen?'
           print eten
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to 3"
       "feedback": "Er zijn niet altijd 3 mensen"
-    - "option_text": "None"
+    -
       "code": "for i in range 1 tot mensen"
       "feedback": "Bijna... Niet tot maar to!"
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to mensen"
       "feedback": "Goed zo!"
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to mensen"
       "feedback": "Dat is een bestelling te veel"
     correct_answer: "C"
@@ -170,17 +162,16 @@ questions:
       for i in range 23 to 25
           print 'Hoi'
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "23\n24\n25"
       "feedback": "De nummer verschijnen niet. Er staat nergen print i."
-    - "option_text": "None"
+    -
       "code": "23 hoi 24 hoi 25 hoi"
       "feedback": "De nummer verschijnen niet. Er staat nergen print i."
-    - "option_text": "None"
+    -
       "code": "hoi\nhoi\nhoi"
       "feedback": "Dit klopt!"
     - "option_text": "Er verschijnt 25x het woord 'Hoi' onder elkaar."
-      "code": "None"
       "feedback": "Nee maar 3x"
     correct_answer: "C"
     hint: "Er staat nergen print i"
@@ -193,16 +184,12 @@ questions:
           print 'Hieperdepiep Hoera!
     mp_choice_options:
     - "option_text": "1 keer"
-      "code": "None"
       "feedback": "Probeer het opnieuw"
     - "option_text": "2 keer"
-      "code": "None"
       "feedback": "Probeer het opnieuw"
     - "option_text": "Nooit"
-      "code": "None"
       "feedback": "Probeer het opnieuw"
     - "option_text": "Dat ligt eraan hoe oud je bent"
-      "code": "None"
       "feedback": "Dat is waar!"
     correct_answer: "D"
     hint: "for i in range 1 to leeftijd"
@@ -215,19 +202,19 @@ questions:
       Baby shark tututudutudu
       Baby shark
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to 3\n    print Baby shark tututudutudu\n    print\
         \ Baby shark"
       "feedback": "Let op inspringen."
-    - "option_text": "None"
+    -
       "code": "for i in range 1 to 3\n    print Baby shark tututudutudu\nprint Baby\
         \ shark"
       "feedback": "Dat klopt!"
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to 3\n    print Baby shark tututudutudu\n    print\
         \ Baby shark"
       "feedback": "range 0 to 3 is 4 keer."
-    - "option_text": "None"
+    -
       "code": "for i in range 0 to 3\n    print Baby shark tututudutudu\nprint Baby\
         \ shark"
       "feedback": "range 0 to 3 is 4 keer."

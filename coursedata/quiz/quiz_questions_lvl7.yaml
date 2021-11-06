@@ -100,7 +100,7 @@ questions:
     question_text: "Wat is er mis met deze code?"
     code: |-
       einde is ask 'Wil je een goed of een slecht einde?'
-      if einde is goed print 'en ze leefden nog lang en gelukkig' 
+      if einde is goed print 'en ze leefden nog lang en gelukkig'
       if einde is slecht print 'En toen ontplofte de wereld. Einde'
     mp_choice_options:
     - "option_text": "De print commando's van de laatste twee regels moeten op een\
@@ -127,27 +127,27 @@ questions:
       Pizza
       Hamburger
     mp_choice_options:
-    - "option_text": "None"
+    -
       "code": |-
         print 'Welkom bij restaurant Hedy'
         eten is ask 'Wat wilt u bestellen?
         print eten
       "feedback": "Hier zit geen herhaling in, er zijn twee bestellingen."
-    - "option_text": "None"
+    -
       "code": |-
         repeat 2 times
             print 'Welkom bij restaurant Hedy'
             eten is ask 'Wat wilt u bestellen?'
             print eten
       "feedback": "Bijna, maar nu herhaalt Hedy ook 'Welkom bij restaurant Hedy' 2x"
-    - "option_text": "None"
+    -
       "code": |-
         print 'Welkom bij restaurant Hedy'
         repeat 2 times
             eten is ask 'Wat wilt u bestellen?'
         print eten
       "feedback": "De code is bijna goed, maar het eten moet ook 2x geprint worden."
-    - "option_text": "None"
+    -
       "code": |-
         print 'Welkom bij restaurant Hedy'
         repeat 2 times
@@ -254,7 +254,7 @@ questions:
     code: |-
       naam is ask 'Hoe heet je?'
       schoenmaat is ask 'Welke schoenmaat heb je?'
-      if schoenmaat is 38 
+      if schoenmaat is 38
           if naam is Assepoester
               print 'Naar jou was ik op zoek!'
           else
