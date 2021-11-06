@@ -279,7 +279,7 @@ class TestsLevel4(HedyTester):
     code = textwrap.dedent("print'test'")
 
     self.multi_level_tester(
-      max_level=22,
+      max_level=10,
       code=code,
       exception=hedy.InvalidCommandException,
       test_name=self.name()

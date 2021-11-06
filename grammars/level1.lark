@@ -18,6 +18,7 @@ _LARGER_EQUALS: ">="
 _EXCLAMATION_MARK: "!"
 _QUESTION_MARK: "?"
 _PERIOD: "."
+_SINGLE_QUOTE: "'"
 
 _PRINT : "print"
 _ASK : "ask"
@@ -86,7 +87,8 @@ textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for 
 %import common.DIGIT
 %import common.WS_INLINE
 %import common.NEWLINE
-%import common.SIGNED_INT -> NUMBER
+%import common.SIGNED_INT -> INT
+%import common.NUMBER -> NUMBER
 
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
 // Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
