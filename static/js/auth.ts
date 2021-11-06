@@ -18,6 +18,7 @@ interface User {
   subscribe?: string;
   prog_experience?: 'yes' | 'no';
   experience_languages?: string[];
+  is_teacher?: string;
 }
 
 interface UserForm {
@@ -78,7 +79,7 @@ export const auth = {
   },
   submit: function (op: string) {
     const values: UserForm = {};
-    $ ('form.auth *').map (function (_k, el) {
+    $ ('form#signup *').map (function (_k, el) {
       if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
     });
 
@@ -109,6 +110,7 @@ export const auth = {
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
         subscribe: $('#subscribe').prop('checked'),
+        is_teacher: $('#is_teacher').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
