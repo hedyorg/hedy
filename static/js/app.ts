@@ -212,7 +212,7 @@ export function runit(level: string, lang: string, cb: () => void) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(response) {
+    }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
@@ -220,24 +220,9 @@ export function runit(level: string, lang: string, cb: () => void) {
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
-          editor.session.setAnnotations([
-            {
-              row: response.Location[0] - 1,
-              column: response.Location[1] - 1,
-              text: "",
-              type: "error",
-            }
-          ]);
-          // FIXME change this to apply only to the error span once errors have an end location.
-          editor.session.addMarker(
-            new ace.Range(
-                response.Location[0] - 1,
-                response.Location[1] - 1,
-                response.Location[0] - 1,
-                response.Location[1],
-            ),
-            "editor-error", "fullLine", false
-          );
+          // Location can be either [row, col] or just [row].
+
+          highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
       }
@@ -264,6 +249,50 @@ export function runit(level: string, lang: string, cb: () => void) {
     console.error(e);
     error.show(ErrorMessages['Other_error'], e.message);
   }
+}
+
+/**
+ * Mark an error location in the ace editor
+ *
+ * The error occurs at the given row, and optionally has a column and
+ * and a length.
+ *
+ * If 'col' is not given, the entire line will be highlighted red. Otherwise
+ * the character at 'col' will be highlighted, optionally extending for
+ * 'length' characters.
+ *
+ * 'row' and 'col' are 1-based.
+ */
+function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, length=1) {
+  // This adds a red cross in the left margin.
+  // Not sure what the "column" argument does here -- it doesn't seem
+  // to make a difference.
+  editor.session.setAnnotations([
+    {
+      row: row - 1,
+      column: (col ?? 1) - 1,
+      text: '',
+      type: 'error',
+    }
+  ]);
+
+  if (col === undefined) {
+    // Higlight entire row
+    editor.session.addMarker(
+      new ace.Range(row - 1, 1, row - 1, 2),
+      "editor-error", "fullLine", false
+    );
+    return;
+  }
+
+  // Highlight span
+  editor.session.addMarker(
+    new ace.Range(
+      row - 1, col - 1,
+      row - 1, col - 1 + length,
+    ),
+    "editor-error", "text", false
+  );
 }
 
 /**
@@ -664,9 +693,9 @@ function speak(text: string) {
 })();
 
 export function prompt_unsaved(cb: () => void) {
-  if (! window.State.unsaved_changes) return cb ();
   // This variable avoids showing the generic native `onbeforeunload` prompt
   window.State.no_unload_prompt = true;
+  if (! window.State.unsaved_changes || ! auth.profile) return cb ();
   modal.confirm(auth.texts['unsaved_changes'], cb);
 }
 
