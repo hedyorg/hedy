@@ -620,7 +620,7 @@ def submit_answer(level_source, question_nr, attempt):
         return 'Hedy quiz disabled!', 404
     else:
         # Get the chosen option from the request form with radio buttons
-        chosenOption = request.form["radio_option"]
+        chosen_option = request.form["radio_option"]
 
         # Reading yaml file
         quiz_data = quiz_data_file_for(level_source)
@@ -636,12 +636,12 @@ def submit_answer(level_source, question_nr, attempt):
             questionStatus = 'start'
         # Convert the corresponding chosen option to the index of an option
         question = quiz_data['questions'][q_nr - 1].get(q_nr)
-        index_option = ord(chosenOption.split("-")[1]) - 65
-        session['chosenOption'] = chosenOption.split("-")[1]
+        index_option = ord(chosen_option.split("-")[1]) - 65
+        session['chosenOption'] = chosen_option.split("-")[1]
         # If the correct answer is chosen, update the total score and the number of correct answered questions
 
         MAX_ATTEMPTS = 3
-        if question['correct_answer'] in chosenOption:
+        if question['correct_answer'] in chosen_option:
             if session.get('total_score'):
                 session['total_score'] = session.get('total_score') + (MAX_ATTEMPTS -  session.get('quiz-attempt')  )* 0.5 * question['question_score']
             else:
@@ -660,11 +660,11 @@ def submit_answer(level_source, question_nr, attempt):
             list_answers.append(answer_id)
             session['list-of-answer-ids'] = list_answers
 
-            answerIsCorrect = True if question['correct_answer'] in chosenOption else False
+            answerIsCorrect = True if question['correct_answer'] in chosen_option else False
             stored_quiz_answer = {
                 'id': answer_id,
                 'quizQuestionText': question['question_text'],
-                'option': chosenOption,
+                'option': chosen_option,
                 'isCorrectAnswer': answerIsCorrect,
                 'points': session.get('total_score'),
                 'questionType': 'mp-choice-question',
@@ -691,14 +691,14 @@ def submit_answer(level_source, question_nr, attempt):
                             option_obj['char_index'] = char_array[i]
                     i += 1
                 question_obj.append(option_obj)
-            if question['correct_answer'] in chosenOption:
+            if question['correct_answer'] in chosen_option:
                 return render_template('feedback.html', quiz=quiz_data, question=question,
                                        questions=quiz_data['questions'],
                                        question_options=question_obj,
                                        level_source=level_source,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
-                                       option=chosenOption,
+                                       option=chosen_option,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
@@ -712,7 +712,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        questions=quiz_data['questions'],
                                        question_options=question_obj,
                                        question=quiz_data['questions'][q_nr - 1].get(q_nr),
-                                       chosenOption=chosenOption,
+                                       chosenOption=chosen_option,
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        attempt=attempt,
@@ -732,7 +732,7 @@ def submit_answer(level_source, question_nr, attempt):
                                        question_nr=q_nr,
                                        correct=session.get('correct_answer'),
                                        questionStatus = questionStatus,
-                                       option=chosenOption,
+                                       option=chosen_option,
                                        index_option=index_option,
                                        menu=render_main_menu('adventures'), lang=lang,
                                        username=current_user(request)['username'],
