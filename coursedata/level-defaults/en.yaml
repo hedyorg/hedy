@@ -338,6 +338,44 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
+11:
+    start_code: |-
+        print 'decimal numbers now need to use a dot'
+        print 2.5 + 2.5
+    intro_text: |
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+
+        For this level on you will also have to use quotation marks when storing a text with `is`:
+
+        ```
+        name is 'Hedy'
+        print 'Hello ' name
+        ```
+
+        For numbers, you do not use quotation marks in the `is`:
+        ```
+        score is 25
+        print 'You got ' score
+        ```
+# Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
+    # jaja hermans, ik ben al bezig!
+    commands:
+    -   name: "float directly"
+        explanation: "Calculation with decimals"
+        example: "print 2.5 + 2.5"
+        demo_code: |
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print 2.5 + 2.5
+    -   name: "float in var"
+        explanation: "Storing a calculation with decimals"
+        example: "antwoord is 2.5 + 2.5"
+        demo_code: |
+            answer is 2.5 + 2.5
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print answer
+
 #10:
 #    start_code: |-
 #        for i in range 1 to 10:

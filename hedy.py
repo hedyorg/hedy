@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass, field
 
 # Some useful constants
-HEDY_MAX_LEVEL = 10
+HEDY_MAX_LEVEL = 11
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -216,6 +216,10 @@ class UnquotedTextException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unquoted Text', **arguments)
 
+class UnquotedAssignTextException(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Unquoted Assignment', **arguments)
+
 class EmptyProgramException(HedyException):
     def __init__(self):
         super().__init__('Empty Program')
@@ -317,7 +321,7 @@ class AllAssignmentCommands(Transformer):
             return None
 
     def assign(self, args):
-        # todo now all assigns are strings, later (form 5) this should distinguish int and str
+        # todo now all assigns are strings, later (from 11) this should distinguish int and str
         return Assignment(args[0], 'string')
 
     def assign_list(self, args):
@@ -514,14 +518,15 @@ class UsesTurtle(Transformer):
     def turn(self, args):
         return True
 
-    # somehow a token (or only this token?) is not picked up by the default rule so it needs
-    # its own rule
-    def NUMBER(self, args):
+    # somehow tokens are not picked up by the default rule so they need their own rule
+    def INT(self, args):
         return False
 
     def NAME(self, args):
         return False
 
+    def NUMBER(self, args):
+        return False
 
 
 
@@ -565,7 +570,6 @@ def valid_echo(ast):
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
 
-
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
@@ -595,7 +599,7 @@ class IsComplete(Filter):
 def process_characters_needing_escape(value):
     # defines what happens if a kids uses ' or \ in in a string
     for c in characters_that_need_escaping:
-        value = value.replace(c, f'\{c}')
+        value = value.replace(c, f'\\{c}')
     return value
 
 # decorator used to store each class in the lookup table
@@ -706,7 +710,6 @@ class ConvertToPython_1(Transformer):
         # this now grabs the last occurrence, once we have slicing we want to be more precise!
         return lookup_vars[-1] if lookup_vars else None
 
-
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
@@ -731,7 +734,9 @@ class ConvertToPython_2(ConvertToPython_1):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
-        unquoted_args = [a for a in args if not is_quoted(a)]
+        args_to_process = [a for a in args if not type(a) is Tree] #we do not check trees (calcs) they are always ok
+
+        unquoted_args = [a for a in args_to_process if not is_quoted(a)]
         unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
@@ -922,7 +927,7 @@ class ConvertToPython_5(ConvertToPython_4):
 
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
-        self.check_var_usage([a for a in args if not type(a) is Tree])
+        self.check_var_usage(args)
         self.check_arg_types(args, 'print', self.level)
 
         #force all to be printed as strings (since there can not be int arguments)
@@ -937,7 +942,6 @@ class ConvertToPython_5(ConvertToPython_4):
         arguments = ''.join(args_new)
         return "print(f'" + arguments + "')"
 
-    #we can now have ints as types so chck must force str
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
@@ -954,6 +958,8 @@ class ConvertToPython_5(ConvertToPython_4):
             if type(value) is Tree:
                 return parameter + " = " + value.children
             else:
+                #assigns may contain string (accidentally) i.e. name = 'Hedy'
+                value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
         else:
             parameter = args[0]
@@ -991,7 +997,6 @@ class ConvertToPython_5(ConvertToPython_4):
 class ConvertToPython_6(ConvertToPython_5):
     def number(self, args):
         return ''.join(args)
-
     def repeat(self, args):
         var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
@@ -1027,22 +1032,6 @@ class ConvertToPython_7_8(ConvertToPython_6):
 
         return "\nelse:\n" + "\n".join(all_lines)
 
-    def assign(self, args):  # TODO: needs to be merged with 6, when 6 is improved to with printing expressions directly
-        if len(args) == 2:
-            parameter = args[0]
-            value = args[1]
-            if type(value) is Tree:
-                return parameter + " = " + value.children
-            else:
-                if "'" in value or 'random.choice' in value:  # TODO: should be a call to wrap nonvarargument is quotes!
-                    return parameter + " = " + value
-                else:
-                    return parameter + " = '" + value + "'"
-        else:
-            parameter = args[0]
-            values = args[1:]
-            return parameter + " = [" + ", ".join(values) + "]"
-
     def var_access(self, args):
         if len(args) == 1: #accessing a var
             return args[0]
@@ -1068,6 +1057,113 @@ class ConvertToPython_10(ConvertToPython_9):
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
+
+@hedy_transpiler(level=11)
+class ConvertToPython_11(ConvertToPython_10):
+
+    def process_token_or_tree(self, argument):
+        if type(argument) is Tree:
+            return f'{str(argument.children)}'
+        else:
+            return f'{argument}'
+
+    def is_int(self, n):
+        try:
+            to_int = int(n)
+            return to_int == n
+        except ValueError:
+            return False
+    def is_float(self, n):
+        try:
+            float(n)
+            return True
+        except ValueError:
+            return False
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        self.check_arg_types(remaining_args, 'ask', self.level)
+
+        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
+
+        tryblock = textwrap.dedent(f"""
+        try:
+          prijs = int({var})
+        except ValueError:
+          try:
+            prijs = float({var})
+          except ValueError:
+            pass""") #no number? leave as string
+        return assign + tryblock
+
+    def process_calculation(self, args, operator):
+        # arguments of a sum are either a token or a
+        # tree resulting from earlier processing
+        # for trees we need to grap the inner string
+        # for tokens we simply return the argument (no more casting to str needed)
+
+        args = [self.process_token_or_tree(a) for a in args]
+
+        # convert types of the arguments
+        converted_args = []
+        for arg in args:
+            if self.is_float(arg):
+                converted_args.append(f'float({arg})')
+            elif self.is_int(arg):
+                converted_args.append(f'int({arg})')
+            else:
+                # variable? default to float for now (todo: use typesystem here)
+                converted_args.append(f'float({arg})')
+
+        return Tree('sum', f'{args[0]} {operator} {args[1]}')
+
+    def print(self, args):
+        # TODO: new type checking is needed for string assignment
+        self.check_var_usage(args)
+        self.check_arg_types(args, 'print', self.level)
+
+        args_new = []
+        for a in args:
+            if type(a) is Tree:
+                args_new.append("{" + a.children + "}")
+            else:
+                a = a.replace("'", "")  # no quotes needed in fstring
+                args_new.append(process_variable_for_fstring(a, self.lookup))
+
+        arguments = ''.join(args_new)
+        return "print(f'" + arguments + "')"
+
+    def text_in_quotes(self, args):
+        text = args[0]
+        return "'" + text + "'" # keep quotes in the Python code (producing name = 'Henk')
+
+    def assign(self, args):
+        right_hand_side = args[1]
+
+        # we now need to check if the right hand side of te assign is
+        # either a var or quoted, if it is not (and undefined var is raised)
+        # the real issue is probably that the kid forgot quotes
+        try:
+            correct_rhs = self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
+        except UndefinedVarException as E:
+            # is the text a number? then no quotes are fine. if not, raise maar!
+
+            if not (self.is_int(right_hand_side) or self.is_float(right_hand_side)):
+                raise UnquotedAssignTextException(text = args[1])
+
+        if len(args) == 2:
+            parameter = args[0]
+            value = args[1]
+            if type(value) is Tree:
+                return parameter + " = " + value.children
+            else:
+                # we no longer escape quotes here because they are now needed
+                return parameter + " = " + value + ""
+        else:
+            parameter = args[0]
+            values = args[1:]
+            return parameter + " = [" + ", ".join(values) + "]"
 
 # @hedy_transpiler(level=10)
 # @hedy_transpiler(level=11)
@@ -1098,7 +1194,7 @@ for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar
 # class ConvertToPython_13(ConvertToPython_12):
 #     def print(self, args):
 #         # we only check non-Tree (= non calculation) arguments
-#         self.check_var_usage([a for a in args if not type(a) is Tree])
+#         self.check_var_usage(args)
 #         self.check_arg_types(args, 'print', self.level)
 #
 #         #force all to be printed as strings (since there can not be int arguments)
