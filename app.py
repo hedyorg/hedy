@@ -611,7 +611,7 @@ def get_answer_info(level_source):
                            auth=TRANSLATIONS.get_translations(requested_lang(), 'Auth'))
 
 
-@app.route('/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
+@app.route('/quiz/submit_answer/<level_source>/<question_nr>/<attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
     if session.get('list-of-answer-ids') is None:
         session['list-of-answer-ids'] = []
