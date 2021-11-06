@@ -370,11 +370,19 @@ def translate_error(code, translations, arguments):
     for k, v in arguments.items():
         if k in arguments_that_require_translation:
             if isinstance(v, list):
-                arguments[k] = ', '.join([translations.get(a, a) for a in v])
+                arguments[k] = translate_list(translations, v)
             else:
                 arguments[k] = translations.get(v, v)
 
     return error_template.format(**arguments)
+
+def translate_list(translations, args):
+    if len(args) > 1:
+        # TODO: is this correct syntax for all supported languages?
+        return f"{', '.join([translations.get(a, a) for a in args[0:-1]])}" \
+               f" {translations.get('or', 'or')} " \
+               f"{translations.get(args[-1], args[-1])}"
+    return ''.join([translations.get(a, a) for a in args])
 
 @app.route('/report_error', methods=['POST'])
 def report_error():
