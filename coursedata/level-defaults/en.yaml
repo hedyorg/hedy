@@ -288,6 +288,48 @@
             repeat 4 times
                 turn 90
                 forward 50
+8:
+    start_code: |-
+        repeat 3 times
+            food is ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+    intro_text: |
+        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
+        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+        Give it a try!
+
+        ## Example Hedy code
+        ```
+        repeat 3 times
+            food is ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+        ```
+
+    commands:
+    -   name: "`if` with multiple lines"
+        explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
+        example: "Example: answer is ask 'What is 20 plus 20?'"
+        demo_code: |-
+            answer is ask 'What is 20 plus 20?'
+            if answer is 20
+                print 'Well done!!'
+                print 'The answer is indeed' antwoord
+            else
+                print 'Wrong'
+                print 'The answer is 20'
+    -   name: "`repeat` and turtle"
+        explanation: "Repeat multiple lines"
+        example: "Example: create a square"
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
 9:
     start_code: |-
         animals is dog, cat, blobfish
