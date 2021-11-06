@@ -335,31 +335,6 @@
             vek is ask 'Kolik je ti let?'
             if vek > 13
                 print 'Jsi mladší než já!'
-13:
-    start_code: |-
-        ovoce is ['jablko', 'banán', 'třešně']
-        print(ovoce)
-    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
-    commands:
-    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
-        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            print(ovoce)
-    -   name: Vyber položku ze seznamu.
-        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
-        example: 'Příklad: prvniovoce is ovoce[1]'
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            prvniovoce is ovoce[1]
-            print(prvniovoce)
-    -   name: Získej náhodnou položku ze seznamu.
-        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
-        example: 'Příklad: nahodneovoce is ovoce[random]'
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            nahodneovoce is ovoce[random]
-            print(nahodneovoce)
 14:
     start_code: |-
         jsi_tady is False
@@ -440,38 +415,6 @@
             # Je napsaný v Hedy
             # Nedělá nic jiného kromě výpisu Ahoj!
             print('Ahoj!')
-18:
-    start_code: |-
-        spravna_odpoved is False
-        # pokračujeme dokud nedostaneme správnou odpověď!
-        while spravna_odpoved is False:
-            odpoved is input('Kolik je 5 * 5?')
-            if odpoved is 25:
-                spravna_odpoved is True
-                print('Dostala jsem správnou odpověď!')
-    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
-    commands:
-    -   name: Pravdivostní while
-        explanation: Můžeme použít `while` cyklus s `True` a `False`.
-        example: 'Příklad: while spravna_odpoved is False'
-        demo_code: |-
-            spravna_odpoved is False
-            # pokračujeme dokud nedostaneme správnou odpověď!
-            while spravna_odpoved is False:
-                odpoved is input('Kolik je 5 * 5?')
-                if odpoved is 25:
-                    spravna_odpoved is True
-                    print('Dostala jsem správnou odpověď!')
-    -   name: While s operátory menší/větší než
-        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
-        example: 'Příklad: while pocet < 3'
-        demo_code: |-
-            pocet is 1
-            # Opakujeme dokud není pocet 3!
-            while pocet < 3:
-                print('Toto zopakujeme ještě ' 3 - pocet 'krát')
-                pocet is pocet + 1
-            print('Hotovo')
 19:
     start_code: |-
         seznam is ['první', 'druhý', 'třetí']
@@ -587,3 +530,54 @@
             vek = input('Je mi 11 let, kolik je tobě?')
             if vek >= 13:
                 print('Jsi starší než já!')
+#13-old:
+#    start_code: |-
+#        ovoce is ['jablko', 'banán', 'třešně']
+#        print(ovoce)
+#    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
+#    commands:
+#    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
+#        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
+#        demo_code: |-
+#            ovoce is ['jablko', 'banán', 'třešně']
+#            print(ovoce)
+#    -   name: Vyber položku ze seznamu.
+#        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
+#        example: 'Příklad: prvniovoce is ovoce[1]'
+#        demo_code: |-
+#            ovoce is ['jablko', 'banán', 'třešně']
+#            prvniovoce is ovoce[1]
+#            print(prvniovoce)
+#    -   name: Získej náhodnou položku ze seznamu.
+#        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
+#        example: 'Příklad: nahodneovoce is ovoce[random]'
+#        demo_code: |-
+#            ovoce is ['jablko', 'banán', 'třešně']
+#            nahodneovoce is ovoce[random]
+#            print(nahodneovoce)
+13:
+    start_code: |-
+        odpoved is 0
+        while spravna_odpoved != 25:
+            odpoved is ask 'Kolik je 5 * 5?'
+        print 'Dostala jsem správnou odpověď!'
+
+    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+    commands:
+    -   name: Pravdivostní while
+        explanation: Můžeme použít `while` cyklus s `True` a `False`.
+        example: 'Příklad: while spravna_odpoved is False'
+        demo_code: |-
+            odpoved is 0
+            while spravna_odpoved != 25
+                odpoved is ask 'Kolik je 5 * 5?'
+            print 'Dostala jsem správnou odpověď!'
+    -   name: While s operátory menší/větší než
+        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+        example: 'Příklad: while pocet < 3'
+        demo_code: |-
+            pocet is 1
+            while pocet < 3
+                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+                pocet is pocet + 1
+            print 'Hotovo'

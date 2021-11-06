@@ -456,30 +456,30 @@
                 print 'You are older than me!'
 13:
     start_code: |-
-        fruit is ['apple', 'banana', 'cherry']
-        print(fruit)
-    intro_text: "We are going to put square brackets around lists! Also we now need to put single quotation marks (') around items in lists. "
+        answer is 0
+        while correct_answer != 25:
+            answer is ask 'What is 5 times 5?'
+        print 'A correct answer has been given'
+    intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
     commands:
-    -   name: "square brackets"
-        explanation: "We are going to put square brackets around lists! We also need to put ' around items in lists."
-        example: "For example: fruit is ['apple', 'banana', 'cherry']"
+    -   name: "while"
+        explanation: "We can use the `while` loop with `True` and `False`"
+        example: "Example: while correct_answer is False"
         demo_code: |-
-            fruit is ['apple', 'banana', 'cherry']
-            print(fruit)
-    -   name: "Get an item from a list"
-        explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
-        example: "For example: firstfruit is fruit[1]"
+            answer is 0
+            while correct_answer != 25:
+                answer is ask 'What is 5 times 5?'
+            print 'A correct answer has been given'
+    -   name: "Smaller while"
+        explanation: "We can also use the `while` loop with `<` and `>`. Be careful, you need to change the number so the loop ends. We do that with count is count + 1 now."
+        example: "For example: while count < 3"
         demo_code: |-
-            fruit is ['banana', 'apple', 'cherry']
-            firstfruit is fruit[1]
-            print(firstfruit)
-    -   name: "Get a random item from a list"
-        explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
-        example: "For example: randomfruit is fruit[random]"
-        demo_code: |-
-            fruit is ['banana', 'apple', 'cherry']
-            randomfruit is fruit[random]
-            print(randomfruit)
+            count is 1
+            while count < 3
+                print 'We do this ' 3 - count ' more times'
+                count is count + 1
+            print 'We are done'
+
 14:
     start_code: |-
         you_are_still_here is False
@@ -562,38 +562,6 @@
             # It has been made in Hedy
             # It does nothing except print Hello!
             print('Ηello!')
-18:
-    start_code: |-
-        correct_answer is False
-        # we continue until the correct answer has been given!
-        while correct_answer is False:
-            answer is input('What is 5 times 5?')
-            if answer is 25:
-                correct_answer is True
-                print('A good answer has been given')
-    intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
-    commands:
-    -   name: "Boolean while"
-        explanation: "We can use the `while` loop with `True` and `False`"
-        example: "Example: while correct_answer is False"
-        demo_code: |-
-            correct_answer is False
-            # we continue until the correct answer has been given!
-            while correct_answer is False:
-                answer is input('What is 5 times 5?')
-                if answer is 25:
-                    correct_answer is True
-                    print('A good answer has been given')
-    -   name: "Smaller while"
-        explanation: "We can also use the `while` loop with `<` and `>`. Be careful, you need to change the number so the loop ends. We do that with count is count + 1 now."
-        example: "For example: while count < 3"
-        demo_code: |-
-            count is 1
-            # we continue until count is 3!
-            while count < 3:
-                print('We do this ' 3 - count ' more times')
-                count is count + 1
-            print('We are done')
 19:
     start_code: |-
         list is ['first', 'second', 'third']
@@ -706,3 +674,29 @@
             age = input('I am 11 years old, how old are you?')
             if age >= 13:
                 print('You are older than I am!')
+#13-old:
+#    start_code: |-
+#        fruit is ['apple', 'banana', 'cherry']
+#        print(fruit)
+#    intro_text: "We are going to put square brackets around lists! Also we now need to put single quotation marks (') around items in lists. "
+#    commands:
+#    -   name: "square brackets"
+#        explanation: "We are going to put square brackets around lists! We also need to put ' around items in lists."
+#        example: "For example: fruit is ['apple', 'banana', 'cherry']"
+#        demo_code: |-
+#            fruit is ['apple', 'banana', 'cherry']
+#            print(fruit)
+#    -   name: "Get an item from a list"
+#        explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
+#        example: "For example: firstfruit is fruit[1]"
+#        demo_code: |-
+#            fruit is ['banana', 'apple', 'cherry']
+#            firstfruit is fruit[1]
+#            print(firstfruit)
+#    -   name: "Get a random item from a list"
+#        explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
+#        example: "For example: randomfruit is fruit[random]"
+#        demo_code: |-
+#            fruit is ['banana', 'apple', 'cherry']
+#            randomfruit is fruit[random]
+#            print(randomfruit)

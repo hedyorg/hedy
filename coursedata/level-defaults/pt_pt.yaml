@@ -281,6 +281,32 @@
             if idade > 13
                 print 'És mais velho(a) do que eu!'
 
+13:
+    start_code: |-
+        resultado is 0
+        while resultado != 25:
+            resultado is ask 'Quanto é 5 vezes 5?'
+        print 'Foi dada a resposta correcta.'
+    intro_text: "Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o ciclo enquanto a instrução for verdadeira/válida! Portanto, no exemplo de código, continuamos até ser dada a resposta certa. Se a resposta correcta nunca for dada, o ciclo nunca acaba!"
+    commands:
+    -   name: "Booleano while"
+        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
+        example: "Exemplo: while resposta_certa is Falso"
+        demo_code: |-
+            resultado is 0
+            while resultado != 25:
+                resultado is ask 'Quanto é 5 vezes 5?'
+            print 'Foi dada a resposta correcta.'
+    -   name: "while menor"
+        explanation: "Também podemos utilizar o ciclo `while` com `<` e `>`. Mas cuidado, tens de mudar o número para que ciclo termine. Fazemos isso agora com contagem is contagem + 1."
+        example: "Por exemplo: while count < 3"
+        demo_code: |-
+            contagem is 1
+            while contagem < 3
+                print 'Fazemos isto mais ' 3 - contagem ' vezes.'
+                contagem is contagem + 1
+            print 'Acabamos!'
+
 #10-old:
 #    start_code: |-
 #        for i in range 1 to 10:
@@ -353,31 +379,6 @@
 #            for i in range(0, 10):
 #                print(i)
 #            print('Preparados ou não, aqui vou eu!')
-13:
-    start_code: |-
-        fruta is ['maçã', 'banana', 'cereja']
-        print(fruta)
-    intro_text: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
-    commands:
-    -   explanation: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
-        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
-        demo_code: |-
-            fruta is ['maçã', 'banana', 'cereja']
-            print(fruta)
-    -   name: "Obtém um elemento da lista."
-        explanation: "Para obter um elemento da lista usamos [número], pelo que, fruta[1] significa: obtém a primeira fruta da lista!"
-        example: "Por exemplo: primeirafruta is fruta[1]"
-        demo_code: |-
-            fruta is ['banana', 'maçã', 'cereja']
-            primeirafruta is fruta[1]
-            print(primeirafruta)
-    -   name: "Obtém um elemento aleatório da lista."
-        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
-        example: "For example: randomfruit is fruit[random]"
-        demo_code: |-
-            fruta is ['banana', 'maçã', 'cereja']
-            qualquerfruta is fruta[random]
-            print(qualquerfruta)
 14:
     start_code: |-
         ainda_estas_aqui is Falso
@@ -458,38 +459,6 @@
             # Este programa foi feito em Hedy
             # Não faz mais nada excepto escrever Olá!
             print('Olá!')
-18:
-    start_code: |-
-        resposta_certa is Falso
-        # Continuamos até ser dada a resposta certa!
-        while resposta_certa is Falso:
-            resultado is input('Quanto é 5 vezes 5?')
-            if resultado is 25:
-                resposta_certa is True
-                print('Foi dada a resposta correcta.')
-    intro_text: "Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o ciclo enquanto a instrução for verdadeira/válida! Portanto, no exemplo de código, continuamos até ser dada a resposta certa. Se a resposta correcta nunca for dada, o ciclo nunca acaba!"
-    commands:
-    -   name: "Booleano while"
-        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
-        example: "Exemplo: while resposta_certa is Falso"
-        demo_code: |-
-            resposta_certa is Falso
-            # Continuamos até termos a resposta certa!
-            while resposta_certa is Falso:
-                resultado is input('Quanto é 5 vezes 5?')
-                if resultado is 25:
-                    resposta_certa is Verdadeiro
-                    print('Foi dada uma resposta correcta!')
-    -   name: "while menor"
-        explanation: "Também podemos utilizar o ciclo `while` com `<` e `>`. Mas cuidado, tens de mudar o número para que ciclo termine. Fazemos isso agora com contagem is contagem + 1."
-        example: "Por exemplo: while count < 3"
-        demo_code: |-
-            contagem is 1
-            # Continuamos até a contagem ser 3!
-            while contagem < 3:
-                print('Fazemos isto mais ' 3 - contagem ' vezes.')
-                contagem is contagem + 1
-            print('Acabamos!')
 19:
     start_code: |-
         lista is ['primeiro', 'segundo', 'terceiro']
@@ -602,3 +571,28 @@
             idade = input('Eu tenho 11 anos, quantos anos tens?')
             if idade >= 13:
                 print('És mais velho(a) do que eu!')
+#13-old:
+#    start_code: |-
+#        fruta is ['maçã', 'banana', 'cereja']
+#        print(fruta)
+#    intro_text: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
+#    commands:
+#    -   explanation: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
+#        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
+#        demo_code: |-
+#            fruta is ['maçã', 'banana', 'cereja']
+#            print(fruta)
+#    -   name: "Obtém um elemento da lista."
+#        explanation: "Para obter um elemento da lista usamos [número], pelo que, fruta[1] significa: obtém a primeira fruta da lista!"
+#        example: "Por exemplo: primeirafruta is fruta[1]"
+#        demo_code: |-
+#            fruta is ['banana', 'maçã', 'cereja']
+#            primeirafruta is fruta[1]
+#            print(primeirafruta)
+#    -   name: "Obtém um elemento aleatório da lista."
+#        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
+#        example: "For example: randomfruit is fruit[random]"
+#        demo_code: |-
+#            fruta is ['banana', 'maçã', 'cereja']
+#            qualquerfruta is fruta[random]
+#            print(qualquerfruta)

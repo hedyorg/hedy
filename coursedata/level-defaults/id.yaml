@@ -340,30 +340,30 @@
                 print 'Kamu lebih tua daripada aku!'
 13:
     start_code: |-
-        buah is ['apel', 'pisang', 'ceri']
-        print(buah)
-    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+        jawaban is 0
+        while jawaban_benar != 25
+            jawaban is ask 'Apa hasil 5 kali 5?'
+        print 'Sebuah jawaban benar telah diberikan'
+    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
     commands:
-    -   name: Kurung siku
-        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
+    -   name: Pengulangan while dengan boolean
+        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
+        example: 'Contoh: while jawaban_benar is False'
         demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            print(buah)
-    -   name: Mengambil sebuah nilai dari dalam list
-        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
-        example: 'Sebagai contoh: buahpertama is buah[1]'
+            jawaban is 0
+            while jawaban_benar != 25
+                jawaban is ask 'Apa hasil 5 kali 5?'
+            print 'Sebuah jawaban benar telah diberikan'
+    -   name: Pengulangan while dengan cakupan lebih kecil
+        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
+        example: 'Sebagai contoh: while pembilang < 3'
         demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            buahpertama is buah[1]
-            print(buahpertama)
-    -   name: Mengambil sebuah nilai dari dalam list secara acak
-        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
-        example: 'Sebagai contoh: buahacak is buah[random]'
-        demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            buahacak is buah[random]
-            print(buahacak)
+            pembilang is 1
+            while pembilang < 3
+                print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
+                pembilang is pembilang + 1
+            print 'Kita selesai'
+
 14:
     start_code: |-
         kamu_tetap_di_sini is False
@@ -444,38 +444,6 @@
             # Ini dibuat di Hedy
             # Ini tidak melakukan apa-apa selain menampilkan Halo!
             print('Halo!')
-18:
-    start_code: |-
-        jawaban_benar is False
-        # kita terus melakukan ini sampai jawaban benar diberikan!
-        while jawaban_benar is False:
-            jawaban is input('Apa hasil 5 kali 5?')
-            if jawaban is 25:
-                jawaban_benar is True
-                print('Sebuah jawaban benar telah diberikan')
-    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
-    commands:
-    -   name: Pengulangan while dengan boolean
-        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
-        example: 'Contoh: while jawaban_benar is False'
-        demo_code: |-
-            jawaban_benar is False
-            # kita terus melakukan ini sampai jawaban benar diberikan!
-            while jawaban_benar is False:
-                jawaban is input('Apa hasil 5 kali 5?')
-                if jawaban is 25:
-                    jawaban_benar is True
-                    print('Sebuah jawaban benar telah diberikan')
-    -   name: Pengulangan while dengan cakupan lebih kecil
-        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
-        example: 'Sebagai contoh: while pembilang < 3'
-        demo_code: |-
-            pembilang is 1
-            # kita akan terus melakukan mengulangan hingga pembilang bernilai 3
-            while pembilang < 3:
-                print('Kita lakukan ini ' 3 - pembilang ' kali lagi')
-                pembilang is pembilang + 1
-            print('Kita selesai')
 19:
     start_code: |-
         list is ['pertama','kedua','ketiga']
@@ -588,3 +556,29 @@
             umur = input('Saya berumur 12 tahun, berapakah umur mu?')
             if umur >= 13:
                 print('Kamu lebih tua atau seumuran dengan aku!')
+#13-old:
+#    start_code: |-
+#        buah is ['apel', 'pisang', 'ceri']
+#        print(buah)
+#    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+#    commands:
+#    -   name: Kurung siku
+#        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+#        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            print(buah)
+#    -   name: Mengambil sebuah nilai dari dalam list
+#        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
+#        example: 'Sebagai contoh: buahpertama is buah[1]'
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            buahpertama is buah[1]
+#            print(buahpertama)
+#    -   name: Mengambil sebuah nilai dari dalam list secara acak
+#        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
+#        example: 'Sebagai contoh: buahacak is buah[random]'
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            buahacak is buah[random]
+#            print(buahacak)

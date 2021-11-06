@@ -410,30 +410,30 @@
                 print 'Dan bist âlder as ik!'
 13:
     start_code: |-
-        fruit is ['apel', 'banaan', 'kjers']
-        print(fruit)
-    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
+        antwoord is 0
+        while antwoord != 25
+            antwurd is ask 'Wat is 5 kear 5?'
+        print 'Dat wie it goede antwurd!'
+    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
     commands:
-    -   name: "Heakjes om listen"
-        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
-        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
+    -   name: "while"
+        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
+        example: "Foarbyld: while goed_antwurd is False"
         demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            print(fruit)
-    -   name: "Pak eat út in list"
-        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
-        example: "Foarbyld: earstefruit is fruit[1]"
+            antwoord is 0
+            while antwoord != 25
+                antwurd is ask 'Wat is 5 kear 5?'
+            print 'Dat wie it goede antwurd!'
+    -   name: "Smaller while"
+        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
+        example: "Foarbyld: while tel < 3"
         demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            earstefruit is fruit[1]
-            print(earstefruit)
-    -   name: "Nim in willekeurich ding út 'e list"
-        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
-        example: "Foarbyld: randomfruit is fruit[random]"
-        demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            randomfruit is fruit[random]
-            print(randomfruit)
+            tel is 1
+            while tel < 3
+                print 'Dit is de ' tel 'e kear'
+                tel is tel + 1
+            print 'We zijn klaar'
+
 14:
     start_code: |-
         do_bist_der_noch is False
@@ -521,38 +521,6 @@
             # It is gemaakt in Hedy
             # It docht eins neat fierder!
             print('goeie')
-18:
-    start_code: |-
-        goed_antwurd is False
-        # We gean troch oant der in goed antwurd jûn is!
-        while goed_antwurd is False:
-            antwurd is input('Wat is 5 kear 5?')
-            if antwurd is 25:
-                goed_antwurd is True
-                print('Dat wie it goede antwurd!')
-    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
-    commands:
-    -   name: "Boolean while"
-        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
-        example: "Foarbyld: while goed_antwurd is False"
-        demo_code: |-
-            goed_antwurd is False
-            # We gean troch oant der in goed antwurd jûn is!
-            while goed_antwurd is False:
-                antwurd is input('Wat is 5 kear 5?')
-                if antwurd is 25:
-                    goed_antwurd is True
-                    print('Dat wie it goede antwurd')
-    -   name: "Smaller while"
-        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
-        example: "Foarbyld: while tel < 3"
-        demo_code: |-
-            tel is 1
-            # we gean troch oant de tel 3 is!
-            while tel < 3:
-                print('Dit is de ' tel 'e kear')
-                tel is tel + 1
-            print('We zijn klaar')
 19:
     start_code: |-
         list is ['earste', 'twadde', 'tredde']
@@ -665,3 +633,29 @@
             leeftyd = input('Ik bin 11 jier, hoe âld bisto?')
             if leeftyd >= 13:
                 print('Dan bistâlder as ik!')
+#13-old:
+#    start_code: |-
+#        fruit is ['apel', 'banaan', 'kjers']
+#        print(fruit)
+#    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
+#    commands:
+#    -   name: "Heakjes om listen"
+#        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
+#        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
+#        demo_code: |-
+#            fruit is ['apel', 'banaan', 'kjers']
+#            print(fruit)
+#    -   name: "Pak eat út in list"
+#        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
+#        example: "Foarbyld: earstefruit is fruit[1]"
+#        demo_code: |-
+#            fruit is ['apel', 'banaan', 'kjers']
+#            earstefruit is fruit[1]
+#            print(earstefruit)
+#    -   name: "Nim in willekeurich ding út 'e list"
+#        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
+#        example: "Foarbyld: randomfruit is fruit[random]"
+#        demo_code: |-
+#            fruit is ['apel', 'banaan', 'kjers']
+#            randomfruit is fruit[random]
+#            print(randomfruit)

@@ -373,37 +373,36 @@
                 print 'Du bist älter als ich!'
 13:
     start_code: |-
-        fruechte is ['Apfel', 'Banane', 'Kirsche']
-        print(fruechte)
+        antwort is 0
+        while antwort != 25:
+            antwort is ask 'Wieviel ist 5 mal 5?'
+            print 'Das ist die richtge Antwort!'
     intro_text: |-
-        Wir werden eckige Klammern um Listen setzen!
-        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
+        Wir werden eine neue Schleife lernen, die `while`-Schleife!
+        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
+        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
+        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
     commands:
-    -   explanation: |-
-            Wir werden eckige Klammern um Listen setzen!
-            Wir müssen auch `'` um Elemente in Listen setzen.
-        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
+    -   name: "while"
+        explanation: "Wir können die `while`-Schleife verwenden."
+        example: "while richtige_antwort is False"
         demo_code: |-
-            fruechte is ['Apfel', 'Banane', 'Kirsche']
-            print(fruechte)
-    -   name: "Nimm ein Element aus einer Liste"
+            antwort is 0
+            while antwort != 25:
+                antwort is ask 'Wieviel ist 5 mal 5?'
+                print 'Das ist die richtge Antwort!'
+    -   name: "while mit Ungleichungen"
         explanation: |-
-            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
-            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-        example: "erste_frucht is fruechte[1]"
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
+            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
+            Wir machen das hier mit `zaehler is zaehler + 1`.
+        example: "while zaehler < 3"
         demo_code: |-
-            fruechte is ['Apfel', 'Banane', 'Kirsche']
-            erste_frucht is fruechte[1]
-            print(erste_frucht)
-    -   name: "Nimm ein zufälliges Element aus einer Liste"
-        explanation: |-
-            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
-            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-        example: "zufaellige_frucht is fruechte[random]"
-        demo_code: |-
-            fruechte is ['Apfel', 'Banane', 'Kirsche']
-            zufaellige_frucht is fruechte[random]
-            print(zufaellige_frucht)
+            zaehler is 1
+            while zaehler < 3
+                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
+                zaehler is zaehler + 1
+            print 'Wir sind fertig!'
 14:
     start_code: |-
         du_bist_noch_hier is False
@@ -499,42 +498,36 @@
             # Es ist in Hedy erstellt worden
             # Es macht nichts außer Hallo! zu auszugeben
             print('Hallo!')
-18:
-    start_code: |-
-        richtige_antwort is False
-        # wir fahren fort bis die richtige Antwort gegeben wurde!
-        while richtige_antwort is False:
-            antwort is input('Wieviel ist 5 mal 5?')
-            if antwort is 25:
-                richtige_antwort is True
-                print('Das ist die richtge Antwort!')
-    intro_text: |-
-        Wir werden eine neue Schleife lernen, die `while`-Schleife!
-        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
-        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
-        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
-    commands:
-    -   name: "Boolesches while"
-        explanation: "Wir können die `while`-Schleife mit `True` und `False` verwenden."
-        example: "while richtige_antwort is False"
-        demo_code: |-
-            richtige_antwort is False
-            # wir fahren fort bis die richtige Antwort gegeben wurde!
-            while richtige_antwort is False:
-                antwort is input('Wieviel ist 5 mal 5?')
-                if antwort is 25:
-                    richtige_antwort is True
-                    print('Das ist die richtge Antwort!')
-    -   name: "while mit Ungleichungen"
-        explanation: |-
-            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
-            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zaehler is zaehler + 1`.
-        example: "while zaehler < 3"
-        demo_code: |-
-            zaehler is 1
-            # wir fahren fort bis der Zählerstand 3 ist!
-            while zaehler < 3:
-                print('Wir machen dies noch ' 3 - zaehler ' mal.')
-                zaehler is zaehler + 1
-            print('Wir sind fertig!')
+#13-old:
+#    start_code: |-
+#        fruechte is ['Apfel', 'Banane', 'Kirsche']
+#        print(fruechte)
+#    intro_text: |-
+#        Wir werden eckige Klammern um Listen setzen!
+#        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
+#    commands:
+#    -   explanation: |-
+#            Wir werden eckige Klammern um Listen setzen!
+#            Wir müssen auch `'` um Elemente in Listen setzen.
+#        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
+#        demo_code: |-
+#            fruechte is ['Apfel', 'Banane', 'Kirsche']
+#            print(fruechte)
+#    -   name: "Nimm ein Element aus einer Liste"
+#        explanation: |-
+#            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
+#            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
+#        example: "erste_frucht is fruechte[1]"
+#        demo_code: |-
+#            fruechte is ['Apfel', 'Banane', 'Kirsche']
+#            erste_frucht is fruechte[1]
+#            print(erste_frucht)
+#    -   name: "Nimm ein zufälliges Element aus einer Liste"
+#        explanation: |-
+#            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
+#            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
+#        example: "zufaellige_frucht is fruechte[random]"
+#        demo_code: |-
+#            fruechte is ['Apfel', 'Banane', 'Kirsche']
+#            zufaellige_frucht is fruechte[random]
+#            print(zufaellige_frucht)

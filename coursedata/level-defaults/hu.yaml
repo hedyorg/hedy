@@ -409,30 +409,39 @@
              print 'Idősebb vagy, mint én!'
 13:
     start_code: |-
-        gyumolcs is ['alma', 'banán', 'cseresznye']
-        print(gyumolcs)
-    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
+        valasz is 0
+        while jo_valasz != 25
+          valasz is ask 'Mennyi 5-ször 5?'
+        print 'A helyes válasz megadásra került'
+    intro_text: |
+        Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
+        igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
+        választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
     commands:
-    -   name: "Szögletes zárójel listák körül"
-        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
-        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            print(gyumolcs)
-    -   name: "Vegyünk ki egy elemet a listából"
-        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
-        example: "Példa: elsogyumolcs is gyumolcs[1]"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            elsogyumolcs is gyumolcs[1]
-            print(gyumolcs)
-    -   name: "Elem véletlenszerű kiválasztása listából"
-        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
-        example: "Példa: veletlengyumolcs is gyumolcs[random]"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            veletlengyumolcs is gyumolcs[random]
-            print(veletlengyumolcs)
+    -   name: |
+            Logikai amíg
+        explanation: A `while` ciklust `True` és `False` segítségével használhatjuk.
+        example: |
+            while jo_valasz is False
+        demo_code: |
+            valasz is 0
+            while jo_valasz != 25
+              valasz is ask 'Mennyi 5-ször 5?'
+            print 'A helyes válasz megadásra került'
+    -   name: |
+            Kisebb amíg
+        explanation: |-
+            Használhatjuk a `while` ciklust a `<` és `>` karakterekkel is. Légy óvatos, meg kell
+            változtatnod a számot, hogy a ciklus véget érjen. Ezt úgy tesszük, hogy a szam
+            változó értéke szam + 1 lesz.
+        example: 'For example: while szam < 3'
+        demo_code: |
+            szam is 1
+            while szam < 3
+              print 'Ezt ' 3 - szam ' alkalommal ismételjük'
+              szam is szam + 1
+            print 'Készen vagyunk'
+
 14:
     start_code: |-
         meg_mindig_itt_vagy is False
@@ -533,47 +542,6 @@
             # Ez Hedy-ben készült
             # Ez nem csinál mást mint kiírja Szia
             print('szia!')
-18:
-    start_code: |-
-        jo_valasz is False
-        # addig folytatjuk míg helyes választ nem kapunk!
-        while jo_valasz is False:
-          valasz is input('Mennyi 5-ször 5?')
-          if valasz is 25:
-            jo_valasz is True
-            print('A helyes válasz megadásra került')
-    intro_text: |
-        Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
-        igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
-        választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
-    commands:
-    -   name: |
-            Logikai amíg
-        explanation: A `while` ciklust `True` és `False` segítségével használhatjuk.
-        example: |
-            while jo_valasz is False
-        demo_code: |
-            valasz_answer is False
-            # addig folytatjuk míg helyes választ nem kapunk!
-            while valasz_answer is False:
-                valasz is input('Mennyi 5-ször 5?')
-                if valasz is 25:
-                    jo_valasz is True
-                    print('Megadtad a jó választ')
-    -   name: |
-            Kisebb amíg
-        explanation: |-
-            Használhatjuk a `while` ciklust a `<` és `>` karakterekkel is. Légy óvatos, meg kell
-            változtatnod a számot, hogy a ciklus véget érjen. Ezt úgy tesszük, hogy a szam
-            változó értéke szam + 1 lesz.
-        example: 'For example: while szam < 3'
-        demo_code: |
-            szam is 1
-            # addig folytatjuk amígy szam 3 nem lesz!
-            while szam < 3:
-              print('Ezt ' 3 - szam ' alkalommal ismételjük')
-              szam is szam + 1
-            print('Készen vagyunk')
 19:
     start_code: |-
         lista is ['első', 'második', 'harmadik']
@@ -687,3 +655,29 @@
             kor = input('Én 12 éves vagyok, te hány éves vagy?')
             if kor >= 13:
                 print('Idősebb vagy nálam!')
+#13-old:
+#    start_code: |-
+#        gyumolcs is ['alma', 'banán', 'cseresznye']
+#        print(gyumolcs)
+#    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
+#    commands:
+#    -   name: "Szögletes zárójel listák körül"
+#        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
+#        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
+#        demo_code: |-
+#            gyumolcs is ['alma', 'banán', 'cseresznye']
+#            print(gyumolcs)
+#    -   name: "Vegyünk ki egy elemet a listából"
+#        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
+#        example: "Példa: elsogyumolcs is gyumolcs[1]"
+#        demo_code: |-
+#            gyumolcs is ['alma', 'banán', 'cseresznye']
+#            elsogyumolcs is gyumolcs[1]
+#            print(gyumolcs)
+#    -   name: "Elem véletlenszerű kiválasztása listából"
+#        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
+#        example: "Példa: veletlengyumolcs is gyumolcs[random]"
+#        demo_code: |-
+#            gyumolcs is ['alma', 'banán', 'cseresznye']
+#            veletlengyumolcs is gyumolcs[random]
+#            print(veletlengyumolcs)
