@@ -207,6 +207,9 @@ def routes(app, database, requested_lang):
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
+        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
         user = {
             'username': username,
             'password': hashed,
