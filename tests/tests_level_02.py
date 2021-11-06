@@ -100,7 +100,7 @@ class TestsLevel2(HedyTester):
     expected_output = self.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
   def test_print_backslashes(self):
-    code = "print Welcome to O\ceanView"
+    code = "print Welcome to O\\ceanView"
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
@@ -110,7 +110,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
     expected_output = self.run_code(result)
-    self.assertEqual("Welcome to O\ceanView", expected_output)
+    self.assertEqual("Welcome to O\\ceanView", expected_output)
   def test_print_slash_end(self):
     code = "print Welcome to \\"
     result = hedy.transpile(code, self.level)
@@ -256,6 +256,14 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+  # issue #792
+  def test_turn_right_number(self):
+    self.multi_level_tester(
+      max_level=10,
+      code="turn right 90",
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   #forward tests
   def test_forward_without_argument(self):

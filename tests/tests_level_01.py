@@ -1,61 +1,8 @@
-import unittest
 import hedy
-import sys
-import io
-from contextlib import contextmanager
 import textwrap
-import inspect
+from Tester import HedyTester
 
-class HedyTester(unittest.TestCase):
-  level = None
-  max_Hedy_level = 23
 
-  @contextmanager
-  def captured_output(self):
-    new_out, new_err = io.StringIO(), io.StringIO()
-    old_out, old_err = sys.stdout, sys.stderr
-    try:
-      sys.stdout, sys.stderr = new_out, new_err
-      yield sys.stdout, sys.stderr
-    finally:
-      sys.stdout, sys.stderr = old_out, old_err
-
-  def run_code(self, parse_result):
-    code = "import random\n" + parse_result.code
-    with self.captured_output() as (out, err):
-      exec(code)
-    return out.getvalue().strip()
-
-  def name(self):
-    return inspect.stack()[1][3]
-
-  def is_not_turtle(self):
-    return (lambda x: not x.has_turtle)
-
-  def is_turtle(self):
-    return (lambda x: x.has_turtle)
-
-  def multi_level_tester(self, test_name, code, max_level=max_Hedy_level, expected=None, exception=None, extra_check_function=None):
-    # TODO: test_name could be stored in __init__ of test method
-    #  if we created our own method (not sure it that is worth it?)
-
-    # used to test the same code snippet over multiple levels
-    # Use exception to check for an exception
-
-    # Or use expect to check for an expected Python program
-    # In the second case, you can also pass an extra function to check
-    for level in range(self.level, max_level + 1):
-      if exception is not None:
-        with self.assertRaises(exception) as context:
-          result = hedy.transpile(code, level)
-      if expected is not None:
-        result = hedy.transpile(code, level)
-        self.assertEqual(expected, result.code)
-
-      if extra_check_function is not None:
-        self.assertTrue(extra_check_function(result))
-
-      print(f'{test_name} passed for level {level}')
 
 class TestsLevel1(HedyTester):
   level = 1
@@ -107,7 +54,7 @@ class TestsLevel1(HedyTester):
     expected_output = self.run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
   def test_print_with_slashes(self):
-    code = "print 'Welcome to \O/ceanView!'"
+    code = "print 'Welcome to \\O/ceanView!'"
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
@@ -117,7 +64,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
     expected_output = self.run_code(result)
-    self.assertEqual("'Welcome to \O/ceanView!'", expected_output)
+    self.assertEqual("'Welcome to \\O/ceanView!'", expected_output)
   def test_print_with_slashed_at_end(self):
     code = "print Welcome to \\"
     result = hedy.transpile(code, self.level)
@@ -208,11 +155,9 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
   def test_one_turn_with_var(self):
-    result = hedy.transpile("turn koekoek", self.level)
-    expected = textwrap.dedent("""\
-    t.right(90)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
+    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
+      result = hedy.transpile("turn koekoek", self.level)
+    self.assertEqual('Invalid Argument Type', context.exception.error_code)
   def test_one_turn_left(self):
     result = hedy.transpile("turn left", self.level)
     expected = textwrap.dedent("""\
@@ -277,6 +222,22 @@ class TestsLevel1(HedyTester):
     with self.assertRaises(hedy.InvalidSpaceException) as context:
       result = hedy.transpile(" print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!", self.level)
     self.assertEqual('Invalid Space', context.exception.error_code)
+  def test_forward_without_number_gives_type_error(self):
+    code = "forward lalalala"
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+  def test_turn_without_number_gives_type_error(self):
+    code = "forward lalalala"
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
   def test_word_plus_period_gives_invalid(self):
     with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile("word.", self.level)
@@ -302,7 +263,6 @@ class TestsLevel1(HedyTester):
     self.assertEqual('Lonely Echo', context.exception.error_code)
   def test_newlines_only_gives_EmptyProgram(self):
     code = textwrap.dedent("""\
-
     """)
     with self.assertRaises(hedy.EmptyProgramException) as context:
       result = hedy.transpile(code, self.level)
@@ -325,7 +285,7 @@ class TestsLevel1(HedyTester):
     )
   def test_non_keyword_with_argument_gives_invalid(self):
     self.multi_level_tester(
-      max_level=22,
+      max_level=10,
       code="abc felienne 123",
       exception=hedy.InvalidCommandException,
       test_name=self.name()
@@ -351,5 +311,4 @@ class TestsLevel1(HedyTester):
   #   self.assertEqual(str(context.exception), 'Invalid')
   #   self.assertEqual(str(context.exception.arguments),
   #                    "{'invalid_command': 'abc', 'level': 1, 'guessed_command': 'ask'}")
-
 

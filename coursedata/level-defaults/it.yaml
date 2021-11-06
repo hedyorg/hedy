@@ -212,18 +212,7 @@
              print 'Ciao a tutti'
              print 'Questo sarà scritto 5 volte'
          ```
-         Se usi un `repeat` e un `if` insieme devi indentare più e più volte.
 
-         ## Esempio di codice Hedy
-         ```
-         colore is ask 'Qual è il tuo colore preferito?'
-         if colore is verde
-             repeat 3 times
-                 print 'carino!'
-         else
-             repeat 5 times
-                 print 'mah'
-         ```
     commands:
     -   name: "print"
         explanation: "Scrivi qualcosa. Ricorda di usare le virgolette per scrivere parole e frasi."
@@ -240,14 +229,3 @@
             else
                 print 'Ops!'
                 print 'La risposta è ' risposta
-    -   name: "if e repeat insieme"
-        explanation: "`if` e `repeat` insieme"
-        example: "Esempio: if colore is verde repeat 3 times print 'carino!' else repeat 5 times print 'mah'"
-        demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
-            if colore is verde
-                repeat 3 times
-                    print 'carino!'
-            else
-                repeat 5 times
-                    print 'mah'

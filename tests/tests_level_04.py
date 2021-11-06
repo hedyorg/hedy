@@ -279,7 +279,7 @@ class TestsLevel4(HedyTester):
     code = textwrap.dedent("print'test'")
 
     self.multi_level_tester(
-      max_level=22,
+      max_level=10,
       code=code,
       exception=hedy.InvalidCommandException,
       test_name=self.name()
@@ -293,7 +293,7 @@ class TestsLevel4(HedyTester):
     with self.assertRaises(hedy.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
-    self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+    self.assertEqual('<span class="command-highlighted">print</span>', str(context.exception.arguments['guessed_command']))
   def test_if_with_print_backtick(self):
     code = textwrap.dedent("""\
     name is ask 'ποιό είναι το όνομά σου;'

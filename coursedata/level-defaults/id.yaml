@@ -200,18 +200,6 @@
             print 'Ini akan ditampilkan lima kali'
         ```
 
-        Jika kamu menggabungkan sebuah perintah `repeat` dan `if`, kamu perlu memberikan indentasi untuk setiap kumpulan kode program. Lihatlah contoh kode ini untuk detil lebih lanjut!
-
-        ## Contoh kode Hedy
-         ```
-         warna is ask 'Apa warna favoritmu?'
-         if warna is hijau
-             repeat 3 times
-                 print 'cantik!'
-         else
-             repeat 5 times
-                 print 'tidak terlalu cantik!'
-         ```
     commands:
     -   explanation: Tampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu jika ingin menampilkan teks sama persis.
         example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
@@ -226,17 +214,7 @@
             else
                 print 'Ups!'
                 print 'Jawabannya adalah 10'
-    -   explanation: Gabungan perintah `if` dan `repeat`
-        example: "Contoh: if warna is hijau repeat 3 times print 'cantik!' else repeat 5 times print 'meh'"
-        demo_code: |-
-            warna is ask 'Apa warna favoritmu?'
-            if warna is hijau
-                repeat 3 times
-                    print 'cantik!'
-            else
-                repeat 5 times
-                    print 'meh'
-8:
+9:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -263,7 +241,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-9:
+10:
     start_code: |-
         for pembilang in range 1 to 5
             print pembilang
@@ -285,353 +263,353 @@
             else
                 print 'Ups!'
                 print 'Jawabannya adalah 10'
-10:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Siap atau tidak, aku datang!'
-    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
-    commands:
-    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
-        example: 'for i in range 1 to 10:'
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print 'Siap atau tidak, aku datang!'
-    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
-        example: 'if warna is hijau:'
-        demo_code: |-
-            warna is hijau
-            if warna is hijau:
-                print 'Warnanya hijau'
-            else:
-                print 'Warnanya bukan hijau'
-    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
-        example: 'elif a is 5:'
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a bernilai 1'
-            elif a is 2:
-                print 'a bernilai 2'
-            else:
-                print 'a bukan bernilai 1 atau 2'
-11:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
-    intro_text: Dimulai dari sekarang, kita bisa melakukan pengulangan lebih sering. Pada contoh, kita menghitung satu hingga lima dan melakukannya sebanyak tiga kali. Jadi kita melakukan tiga ronde dan tiap ronde menghitung dari satu ke lima.
-    commands:
-    -   name: for
-        explanation: Ini adalah contoh penggunaaan perintah `for`
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
-    -   name: if
-        explanation: Kita dapat melakukan hal yang sama dengan perintah `if`
-        demo_code: |-
-            warna is biru
-            warnadua is kuning
-            if warna is biru:
-                if warnadua is kuning:
-                    print 'Bersama, kita membentuk warna hijau!'
-12:
-    start_code: |-
-        umur is input('Berapa umurmu?')
-        print('Jadi kamu sudah pernah berumur:')
-        for i in range(0, umur):
-            print(i)
-    intro_text: Kita akan menggunakan kurung dan kita akan mengubah perintah `ask`! Kita mengubah perintah `ask` dengan `input` dan akan menggunakan kurung di perintah tersebut.
-    commands:
-    -   name: Kurung
-        explanation: Kita akan menggunakan kurung di perintah `print` sekarang!
-        example: "Sebagai contoh: print('Halo Dunia')"
-        demo_code: print('Halo Dunia')
-    -   name: Input
-        explanation: Kita membuang perintah `ask` dan menggantinya dengan `input`, kita juga akan menggunakan kurung.
-        example: "Sebagai contoh: nama is input('Siapa namamu?')"
-        demo_code: |-
-            nama is input('Siapa namamu?')
-            print('Jadi, nama kamu adalah ' nama)
-    -   name: for
-        explanation: Kita sekarang akan menggunakan kurung untuk membungkus angka-angka yang ada di pengulangan. `for i in range(0,10):`
-        example: 'Sebagai contoh: for i in range(0,10):'
-        demo_code: |-
-            for i in range(0,10):
-                print(i)
-            print('Siap atau tidak, aku datang')
-13:
-    start_code: |-
-        buah is ['apel', 'pisang', 'ceri']
-        print(buah)
-    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-    commands:
-    -   name: Kurung siku
-        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
-        demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            print(buah)
-    -   name: Mengambil sebuah nilai dari dalam list
-        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
-        example: 'Sebagai contoh: buahpertama is buah[1]'
-        demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            buahpertama is buah[1]
-            print(buahpertama)
-    -   name: Mengambil sebuah nilai dari dalam list secara acak
-        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
-        example: 'Sebagai contoh: buahacak is buah[random]'
-        demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            buahacak is buah[random]
-            print(buahacak)
-14:
-    start_code: |-
-        kamu_tetap_di_sini is False
-        apakah_kamu_tetap_disini is input('Apakah kamu tetap disini? ya atau tidak?')
-        if apakah_kamu_tetap_disini is ya:
-            kamu_tetap_di_sini is True
-        if kamu_tetap_di_sini is True:
-            print('Halo!')
-        if kamu_tetap_di_sini is False:
-            print('Bye!')
-    intro_text: Kita sekarang akan berbicara tentang pembuatan variabel `True` atau `False`. Kamu dapat membuat variabel untuk menyimpan nilai `True` atau `False`. Kami dapat menggunakan ini untuk menyimpan hasil dari sebuah jawaban.
-    commands:
-    -   name: Contoh
-        explanation: Pada contoh ini, kita menggunakan `True` dan `False` untuk menyimpan jawaban dari sebuah pertanyaan. Kamu dapat mencoba menjawab 5 kali. Jika jawabannya benar, jawaban_benar akan bernilai `True`
-        example: jawaban_benar is 'False'
-        demo_code: |-
-            for i in range(1, 5):
-                jawaban_benar is False
-                jawaban is input('Apa hasil dari 5*5?')
-                if jawaban is 25:
-                    jawaban_benar is True
-                else:
-                    jawaban_benar is False
-                if jawaban_benar is True:
-                    print('Itu benar!')
-                if jawaban_benar is False:
-                    print('Itu salah! ' 5-i ' kesempatan menjawab tersisa')
-15:
-    start_code: |-
-        kamu_tetap_di_sini is False
-        apakah_kamu_tetap_disini is input('Apakah kamu tetap disini? ya atau tidak?')
-        if apakah_kamu_tetap_disini is ya:
-            kamu_tetap_di_sini is True
-        jawaban is input('Apa hasil dari 5*5?')
-        if kamu_tetap_di_sini is True and jawaban is 25:
-            print('Kamu menjawab iya dan memberi jawaban yang benar')
-    intro_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
-    commands:
-    -   name: And
-        explanation: Kedua kondisi (kiri dan kanan dari perintah `and`) harus bernilai benar
-        example: if 3+2 is 5 and 2+2 is 4
-        demo_code: |-
-            jawaban1 is input('Apa hasil dari 3+2?')
-            jawaban2 is input('Apa hasil dari 2+2?')
-            if jawaban1 is 5 and jawaban2 is 4:
-                print('Kedua jawaban benar!')
-            else:
-                print('Paling tidak salah satu jawaban salah!')
-    -   name: Or
-        explanation: Perintah `or` memastikan bahwa paling tidak satu dari dua kondisi yang diberikan di kiri dan kanan `or` harus terpenuhi. Keduanya terpenuhi pun tidak masalah.
-        example: if 3+2 is 5 or 2+2 is 4
-        demo_code: |-
-            jawaban1 is input('Apa hasil dari 3+2?')
-            jawaban2 is input('Apa hasil dari 2+2?')
-            if jawaban1 is 5 or jawaban2 is 4:
-                print('Paling tidak salah satu jawaban benar!')
-            else:
-                print('Kedua jawaban salah!')
-16:
-    start_code: |-
-        # Ini adalah sebuah program yang akan menanyakan beberapa pertanyaan matematika
-        for i in range(1, 10):
-            # Kita akan mulai menanyakan tabel perkalian 5
-            jawaban is input('Apa hasil dari ' i ' kali 5?')
-            # Kita mengecek apakah jawaban tersebut benar
-            jawaban_benar is i * 5
-            if jawaban is jawaban_benar:
-                print(jawaban ' benar')
-            else:
-                print('Itu salah, seharusnya dijawab: ' i*5)
-    intro_text: 'Ketika kita membuat program yang lebih besar, kita perlu sebuah cara untuk mengingat apa yang dilakukan oleh setiap bagian program. Kita dapat menggunakan komentar untuk ini. Sebuah komentar terlihat sebagai berikut: ` # Ini sebuah komentar`. Apapun yang ada setelah simbol # tidak akan diperhitungkan oleh program.'
-    commands:
-    -   name: Komentar
-        explanation: Kita dapat menggunakan komentar kapanpun kita mau
-        example: '# Ini sebuah komentar'
-        demo_code: |-
-            # Program ini menampilkan Halo!
-            # Ini dibuat di Hedy
-            # Ini tidak melakukan apa-apa selain menampilkan Halo!
-            print('Halo!')
-17:
-    start_code: |-
-        umur is input('Berapa umur mu?')
-        if umur < 13:
-            print('Kamu lebih muda daripada aku!')
-        elif umur > 13:
-            print('Kamu lebih tua daripada aku!')
-    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
-    commands:
-    -   name: Lebih kecil
-        explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
-        example: 'Sebagai contoh: umur < 12'
-        demo_code: |-
-            umur is input('Berapa umur mu?')
-            if umur < 13:
-                print('Kamu lebih muda daripada aku!')
-    -   name: Lebih besar
-        explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
-        example: 'Sebagai contoh: umur > 12'
-        demo_code: |-
-            umur is input('Berapa umur mu?')
-            if umur > 13:
-                print('Kamu lebih tua daripada aku!')
-18:
-    start_code: |-
-        jawaban_benar is False
-        # kita terus melakukan ini sampai jawaban benar diberikan!
-        while jawaban_benar is False:
-            jawaban is input('Apa hasil 5 kali 5?')
-            if jawaban is 25:
-                jawaban_benar is True
-                print('Sebuah jawaban benar telah diberikan')
-    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
-    commands:
-    -   name: Pengulangan while dengan boolean
-        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
-        example: 'Contoh: while jawaban_benar is False'
-        demo_code: |-
-            jawaban_benar is False
-            # kita terus melakukan ini sampai jawaban benar diberikan!
-            while jawaban_benar is False:
-                jawaban is input('Apa hasil 5 kali 5?')
-                if jawaban is 25:
-                    jawaban_benar is True
-                    print('Sebuah jawaban benar telah diberikan')
-    -   name: Pengulangan while dengan cakupan lebih kecil
-        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
-        example: 'Sebagai contoh: while pembilang < 3'
-        demo_code: |-
-            pembilang is 1
-            # kita akan terus melakukan mengulangan hingga pembilang bernilai 3
-            while pembilang < 3:
-                print('Kita lakukan ini ' 3 - pembilang ' kali lagi')
-                pembilang is pembilang + 1
-            print('Kita selesai')
-19:
-    start_code: |-
-        list is ['pertama','kedua','ketiga']
-        nilaikedua is list[2]
-        print(nilaikedua)
-    intro_text: Ketika kita memiliki list, kita bisa mengambil satu nilai spesifik dari list. Jika kita ingin mengambil nilai kedua dari list, kita menuliskan `list[2]`
-    commands:
-    -   name: Penjumlahan
-        explanation: Kita juga bisa menjumlahkan semua nilai didalam list
-        example: list[1]
-        demo_code: |-
-            list is ['1','2','3']
-            jumlah is list[1] + list[2]
-            jumlah is jumlah + list[3]
-            # kita berharap jumlah bernilai 6 disini
-            print(jumlah)
-20:
-    start_code: |-
-        buah is ['apel', 'pisang', 'ceri']
-        for i in range(1, 3):
-            print(buah[i])
-    intro_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
-    commands:
-    -   name: Ukuran dari list
-        explanation: Dengan `length` kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
-        example: length(list)
-        demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            print('Ukuran dari sebuah list adalah ' length(buah))
-            for i in range(1, length(buah)):
-                print(buah[i])
-21:
-    start_code: |-
-        print('Apakah hasil 5+3?')
-        jawaban = 5+3
-        print('Jawaban adalah:')
-        print(jawaban)
-        if jawaban == 8:
-            print('Itu benar!')
-        else:
-            print('Oh tidak, jawaban itu salah!')
-    intro_text: Sekarang kita akan mengubah perintah `is` ke `=` dan `==`. Kita menggunakan `=` jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama `jawaban`, kamu harus menuliskan `jawaban = 8`. Simbol `==` digunakan jika kita ingin mengecek apakah dua nilai sama.
-    commands:
-    -   name: Perbandingan
-        explanation: Jika kita ingin membandingkan, kita menggunakan `==`. Misal `5+3 == 8` mengecek apakah 5+3 sama dengan 8.
-        example: 'Sebagai contoh: 5+3 == 8'
-        demo_code: |-
-            if 5+3 == 8:
-                print('5+3 adalah betul 8')
-            else:
-                print('Ini tidak akan ditambilkan karena 5+3 selalu 8!')
-    -   name: Pengisian nilai
-        explanation: Jika kita ingin mengatakan bahwa sebuah variabel bernama `jawaban` bernilai 8, kita menuliskan `jawaban = 8`.
-        example: 'Sebagai contoh: jawaban = 8'
-        demo_code: |-
-            print('Apa hasil dari 5+3?')
-            jawaban = 5+3
-            print('Jawaban adalah :')
-            print(jawaban)
-    -   name: Perbandingan dan pengisian nilai
-        explanation: Jika kita akan membandingkan dua nilai, kita menggunakan `==`. Jika kita akan mengisi sebuah variabel dengan nilai, kita menggunakan `=`.
-        example: Sebagai contoh, '5+3 == 8' dan 'answer = 8'
-        demo_code: |-
-            print('Apakah hasil dari 5+3?')
-            jawaban = 5+3
-            print('jawaban adalah:')
-            print(jawaban)
-            if jawaban == 8:
-                print('Itu benar!')
-            else:
-                print('Tidak, itu salah!')
-22:
-    start_code: |-
-        negara = input('Dimana kamu tinggal?')
-        if negara != Indonesia:
-            print('Keren!')
-        else:
-            print('Aku juga dari Indonesia!')
-    intro_text: "Kita akan belajar hal baru, simbol `!=`. Karakter `!` menyatakan 'tidak' dan karakter `=` menyatakan 'sama'. Jadi `!=` artinya 'tidak sama'. Sebagai contoh: `5 != 4`."
-    commands:
-    -   name: Tidak sama
-        explanation: Jika kita sedang membandingkan dua hal yang tidak sama, kita menggunakan `!=`
-        example: 'Sebagai contoh: 5+3 != 9'
-        demo_code: |-
-            angka = input('Kamu tidak boleh menjawab dengan angka 5, nomor apa yang keren?')
-            if angka != 5:
-                print('Bagus!')
-            else:
-                print('Kamu tidak boleh menjawab dengan angka 5!')
-23:
-    start_code: |-
-        umur = input('Saya berumur 12 tahun, berapakah umur mu?')
-        if umur <= 12:
-            print('Kamu lebih muda dari aku!')
-        elif umur >= 14:
-            print('Kamu lebih tua dari aku!')
-    intro_text: Kita akan menggabungkan `<` dan `=`. Jika kita ingin mengecek apakah suatu nilai lebih kecil atau sama dengan nilai lainnya, kita menggunakan `<=`. Kita juga bisa mengecek apakah suatu nilai lebih besar atau sama dengan nilai lainnya dengan menggunakan `>=`.
-    commands:
-    -   name: Lebih kecil sama dengan
-        explanation: "`<=` mengecek apakah angka di kiri simbol `<=` lebih kecil atau sama dengan angka di kanannya. Jadi `5 < 5` tidak benar karena 5 tidak lebih kecil daripada 5 namun `5 <= 5` benar karena 5 itu lebih kecil atau sama dengan 5. `6 <= 5` tidak bernilai benar."
-        example: 'Sebagai contoh: umur <= 12'
-        demo_code: |-
-            umur = input('Saya berumur 12 tahun, berapakah umur mu?')
-            if umur <= 13:
-                print('Kamu lebih muda atau seumuran dengan aku!')
-    -   name: Lebih besar
-        explanation: "`>=` mengecek apakah angka di kiri simbol `>=` lebih besar atau sama dengan angka di kanannya. Jadi `5 > 5` tidak benar karena 5 tidak lebih besar daripada 5 namun `5 >= 5` benar karena 5 itu lebih besar atau sama dengan 5. `4 >= 5` tidak bernilai benar."
-        example: 'Sebagai contoh: umur >= 12'
-        demo_code: |-
-            umur = input('Saya berumur 12 tahun, berapakah umur mu?')
-            if umur >= 13:
-                print('Kamu lebih tua atau seumuran dengan aku!')
+#10:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Siap atau tidak, aku datang!'
+#    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
+#    commands:
+#    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
+#        example: 'for i in range 1 to 10:'
+#        demo_code: |-
+#            for i in range 1 to 10:
+#                print i
+#            print 'Siap atau tidak, aku datang!'
+#    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
+#        example: 'if warna is hijau:'
+#        demo_code: |-
+#            warna is hijau
+#            if warna is hijau:
+#                print 'Warnanya hijau'
+#            else:
+#                print 'Warnanya bukan hijau'
+#    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
+#        example: 'elif a is 5:'
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a bernilai 1'
+#            elif a is 2:
+#                print 'a bernilai 2'
+#            else:
+#                print 'a bukan bernilai 1 atau 2'
+#11:
+#    start_code: |-
+#        for i in range 1 to 3:
+#            for j in range 1 to 5:
+#                print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
+#    intro_text: Dimulai dari sekarang, kita bisa melakukan pengulangan lebih sering. Pada contoh, kita menghitung satu hingga lima dan melakukannya sebanyak tiga kali. Jadi kita melakukan tiga ronde dan tiap ronde menghitung dari satu ke lima.
+#    commands:
+#    -   name: for
+#        explanation: Ini adalah contoh penggunaaan perintah `for`
+#        demo_code: |-
+#            for i in range 1 to 3:
+#                for j in range 1 to 5:
+#                    print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
+#    -   name: if
+#        explanation: Kita dapat melakukan hal yang sama dengan perintah `if`
+#        demo_code: |-
+#            warna is biru
+#            warnadua is kuning
+#            if warna is biru:
+#                if warnadua is kuning:
+#                    print 'Bersama, kita membentuk warna hijau!'
+#12:
+#    start_code: |-
+#        umur is input('Berapa umurmu?')
+#        print('Jadi kamu sudah pernah berumur:')
+#        for i in range(0, umur):
+#            print(i)
+#    intro_text: Kita akan menggunakan kurung dan kita akan mengubah perintah `ask`! Kita mengubah perintah `ask` dengan `input` dan akan menggunakan kurung di perintah tersebut.
+#    commands:
+#    -   name: Kurung
+#        explanation: Kita akan menggunakan kurung di perintah `print` sekarang!
+#        example: "Sebagai contoh: print('Halo Dunia')"
+#        demo_code: print('Halo Dunia')
+#    -   name: Input
+#        explanation: Kita membuang perintah `ask` dan menggantinya dengan `input`, kita juga akan menggunakan kurung.
+#        example: "Sebagai contoh: nama is input('Siapa namamu?')"
+#        demo_code: |-
+#            nama is input('Siapa namamu?')
+#            print('Jadi, nama kamu adalah ' nama)
+#    -   name: for
+#        explanation: Kita sekarang akan menggunakan kurung untuk membungkus angka-angka yang ada di pengulangan. `for i in range(0,10):`
+#        example: 'Sebagai contoh: for i in range(0,10):'
+#        demo_code: |-
+#            for i in range(0,10):
+#                print(i)
+#            print('Siap atau tidak, aku datang')
+#13:
+#    start_code: |-
+#        buah is ['apel', 'pisang', 'ceri']
+#        print(buah)
+#    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+#    commands:
+#    -   name: Kurung siku
+#        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+#        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            print(buah)
+#    -   name: Mengambil sebuah nilai dari dalam list
+#        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
+#        example: 'Sebagai contoh: buahpertama is buah[1]'
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            buahpertama is buah[1]
+#            print(buahpertama)
+#    -   name: Mengambil sebuah nilai dari dalam list secara acak
+#        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
+#        example: 'Sebagai contoh: buahacak is buah[random]'
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            buahacak is buah[random]
+#            print(buahacak)
+#14:
+#    start_code: |-
+#        kamu_tetap_di_sini is False
+#        apakah_kamu_tetap_disini is input('Apakah kamu tetap disini? ya atau tidak?')
+#        if apakah_kamu_tetap_disini is ya:
+#            kamu_tetap_di_sini is True
+#        if kamu_tetap_di_sini is True:
+#            print('Halo!')
+#        if kamu_tetap_di_sini is False:
+#            print('Bye!')
+#    intro_text: Kita sekarang akan berbicara tentang pembuatan variabel `True` atau `False`. Kamu dapat membuat variabel untuk menyimpan nilai `True` atau `False`. Kami dapat menggunakan ini untuk menyimpan hasil dari sebuah jawaban.
+#    commands:
+#    -   name: Contoh
+#        explanation: Pada contoh ini, kita menggunakan `True` dan `False` untuk menyimpan jawaban dari sebuah pertanyaan. Kamu dapat mencoba menjawab 5 kali. Jika jawabannya benar, jawaban_benar akan bernilai `True`
+#        example: jawaban_benar is 'False'
+#        demo_code: |-
+#            for i in range(1, 5):
+#                jawaban_benar is False
+#                jawaban is input('Apa hasil dari 5*5?')
+#                if jawaban is 25:
+#                    jawaban_benar is True
+#                else:
+#                    jawaban_benar is False
+#                if jawaban_benar is True:
+#                    print('Itu benar!')
+#                if jawaban_benar is False:
+#                    print('Itu salah! ' 5-i ' kesempatan menjawab tersisa')
+#15:
+#    start_code: |-
+#        kamu_tetap_di_sini is False
+#        apakah_kamu_tetap_disini is input('Apakah kamu tetap disini? ya atau tidak?')
+#        if apakah_kamu_tetap_disini is ya:
+#            kamu_tetap_di_sini is True
+#        jawaban is input('Apa hasil dari 5*5?')
+#        if kamu_tetap_di_sini is True and jawaban is 25:
+#            print('Kamu menjawab iya dan memberi jawaban yang benar')
+#    intro_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
+#    commands:
+#    -   name: And
+#        explanation: Kedua kondisi (kiri dan kanan dari perintah `and`) harus bernilai benar
+#        example: if 3+2 is 5 and 2+2 is 4
+#        demo_code: |-
+#            jawaban1 is input('Apa hasil dari 3+2?')
+#            jawaban2 is input('Apa hasil dari 2+2?')
+#            if jawaban1 is 5 and jawaban2 is 4:
+#                print('Kedua jawaban benar!')
+#            else:
+#                print('Paling tidak salah satu jawaban salah!')
+#    -   name: Or
+#        explanation: Perintah `or` memastikan bahwa paling tidak satu dari dua kondisi yang diberikan di kiri dan kanan `or` harus terpenuhi. Keduanya terpenuhi pun tidak masalah.
+#        example: if 3+2 is 5 or 2+2 is 4
+#        demo_code: |-
+#            jawaban1 is input('Apa hasil dari 3+2?')
+#            jawaban2 is input('Apa hasil dari 2+2?')
+#            if jawaban1 is 5 or jawaban2 is 4:
+#                print('Paling tidak salah satu jawaban benar!')
+#            else:
+#                print('Kedua jawaban salah!')
+#16:
+#    start_code: |-
+#        # Ini adalah sebuah program yang akan menanyakan beberapa pertanyaan matematika
+#        for i in range(1, 10):
+#            # Kita akan mulai menanyakan tabel perkalian 5
+#            jawaban is input('Apa hasil dari ' i ' kali 5?')
+#            # Kita mengecek apakah jawaban tersebut benar
+#            jawaban_benar is i * 5
+#            if jawaban is jawaban_benar:
+#                print(jawaban ' benar')
+#            else:
+#                print('Itu salah, seharusnya dijawab: ' i*5)
+#    intro_text: 'Ketika kita membuat program yang lebih besar, kita perlu sebuah cara untuk mengingat apa yang dilakukan oleh setiap bagian program. Kita dapat menggunakan komentar untuk ini. Sebuah komentar terlihat sebagai berikut: ` # Ini sebuah komentar`. Apapun yang ada setelah simbol # tidak akan diperhitungkan oleh program.'
+#    commands:
+#    -   name: Komentar
+#        explanation: Kita dapat menggunakan komentar kapanpun kita mau
+#        example: '# Ini sebuah komentar'
+#        demo_code: |-
+#            # Program ini menampilkan Halo!
+#            # Ini dibuat di Hedy
+#            # Ini tidak melakukan apa-apa selain menampilkan Halo!
+#            print('Halo!')
+#17:
+#    start_code: |-
+#        umur is input('Berapa umur mu?')
+#        if umur < 13:
+#            print('Kamu lebih muda daripada aku!')
+#        elif umur > 13:
+#            print('Kamu lebih tua daripada aku!')
+#    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
+#    commands:
+#    -   name: Lebih kecil
+#        explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
+#        example: 'Sebagai contoh: umur < 12'
+#        demo_code: |-
+#            umur is input('Berapa umur mu?')
+#            if umur < 13:
+#                print('Kamu lebih muda daripada aku!')
+#    -   name: Lebih besar
+#        explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
+#        example: 'Sebagai contoh: umur > 12'
+#        demo_code: |-
+#            umur is input('Berapa umur mu?')
+#            if umur > 13:
+#                print('Kamu lebih tua daripada aku!')
+#18:
+#    start_code: |-
+#        jawaban_benar is False
+#        # kita terus melakukan ini sampai jawaban benar diberikan!
+#        while jawaban_benar is False:
+#            jawaban is input('Apa hasil 5 kali 5?')
+#            if jawaban is 25:
+#                jawaban_benar is True
+#                print('Sebuah jawaban benar telah diberikan')
+#    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
+#    commands:
+#    -   name: Pengulangan while dengan boolean
+#        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
+#        example: 'Contoh: while jawaban_benar is False'
+#        demo_code: |-
+#            jawaban_benar is False
+#            # kita terus melakukan ini sampai jawaban benar diberikan!
+#            while jawaban_benar is False:
+#                jawaban is input('Apa hasil 5 kali 5?')
+#                if jawaban is 25:
+#                    jawaban_benar is True
+#                    print('Sebuah jawaban benar telah diberikan')
+#    -   name: Pengulangan while dengan cakupan lebih kecil
+#        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
+#        example: 'Sebagai contoh: while pembilang < 3'
+#        demo_code: |-
+#            pembilang is 1
+#            # kita akan terus melakukan mengulangan hingga pembilang bernilai 3
+#            while pembilang < 3:
+#                print('Kita lakukan ini ' 3 - pembilang ' kali lagi')
+#                pembilang is pembilang + 1
+#            print('Kita selesai')
+#19:
+#    start_code: |-
+#        list is ['pertama','kedua','ketiga']
+#        nilaikedua is list[2]
+#        print(nilaikedua)
+#    intro_text: Ketika kita memiliki list, kita bisa mengambil satu nilai spesifik dari list. Jika kita ingin mengambil nilai kedua dari list, kita menuliskan `list[2]`
+#    commands:
+#    -   name: Penjumlahan
+#        explanation: Kita juga bisa menjumlahkan semua nilai didalam list
+#        example: list[1]
+#        demo_code: |-
+#            list is ['1','2','3']
+#            jumlah is list[1] + list[2]
+#            jumlah is jumlah + list[3]
+#            # kita berharap jumlah bernilai 6 disini
+#            print(jumlah)
+#20:
+#    start_code: |-
+#        buah is ['apel', 'pisang', 'ceri']
+#        for i in range(1, 3):
+#            print(buah[i])
+#    intro_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
+#    commands:
+#    -   name: Ukuran dari list
+#        explanation: Dengan `length` kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
+#        example: length(list)
+#        demo_code: |-
+#            buah is ['apel', 'pisang', 'ceri']
+#            print('Ukuran dari sebuah list adalah ' length(buah))
+#            for i in range(1, length(buah)):
+#                print(buah[i])
+#21:
+#    start_code: |-
+#        print('Apakah hasil 5+3?')
+#        jawaban = 5+3
+#        print('Jawaban adalah:')
+#        print(jawaban)
+#        if jawaban == 8:
+#            print('Itu benar!')
+#        else:
+#            print('Oh tidak, jawaban itu salah!')
+#    intro_text: Sekarang kita akan mengubah perintah `is` ke `=` dan `==`. Kita menggunakan `=` jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama `jawaban`, kamu harus menuliskan `jawaban = 8`. Simbol `==` digunakan jika kita ingin mengecek apakah dua nilai sama.
+#    commands:
+#    -   name: Perbandingan
+#        explanation: Jika kita ingin membandingkan, kita menggunakan `==`. Misal `5+3 == 8` mengecek apakah 5+3 sama dengan 8.
+#        example: 'Sebagai contoh: 5+3 == 8'
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5+3 adalah betul 8')
+#            else:
+#                print('Ini tidak akan ditambilkan karena 5+3 selalu 8!')
+#    -   name: Pengisian nilai
+#        explanation: Jika kita ingin mengatakan bahwa sebuah variabel bernama `jawaban` bernilai 8, kita menuliskan `jawaban = 8`.
+#        example: 'Sebagai contoh: jawaban = 8'
+#        demo_code: |-
+#            print('Apa hasil dari 5+3?')
+#            jawaban = 5+3
+#            print('Jawaban adalah :')
+#            print(jawaban)
+#    -   name: Perbandingan dan pengisian nilai
+#        explanation: Jika kita akan membandingkan dua nilai, kita menggunakan `==`. Jika kita akan mengisi sebuah variabel dengan nilai, kita menggunakan `=`.
+#        example: Sebagai contoh, '5+3 == 8' dan 'answer = 8'
+#        demo_code: |-
+#            print('Apakah hasil dari 5+3?')
+#            jawaban = 5+3
+#            print('jawaban adalah:')
+#            print(jawaban)
+#            if jawaban == 8:
+#                print('Itu benar!')
+#            else:
+#                print('Tidak, itu salah!')
+#22:
+#    start_code: |-
+#        negara = input('Dimana kamu tinggal?')
+#        if negara != Indonesia:
+#            print('Keren!')
+#        else:
+#            print('Aku juga dari Indonesia!')
+#    intro_text: "Kita akan belajar hal baru, simbol `!=`. Karakter `!` menyatakan 'tidak' dan karakter `=` menyatakan 'sama'. Jadi `!=` artinya 'tidak sama'. Sebagai contoh: `5 != 4`."
+#    commands:
+#    -   name: Tidak sama
+#        explanation: Jika kita sedang membandingkan dua hal yang tidak sama, kita menggunakan `!=`
+#        example: 'Sebagai contoh: 5+3 != 9'
+#        demo_code: |-
+#            angka = input('Kamu tidak boleh menjawab dengan angka 5, nomor apa yang keren?')
+#            if angka != 5:
+#                print('Bagus!')
+#            else:
+#                print('Kamu tidak boleh menjawab dengan angka 5!')
+#23:
+#    start_code: |-
+#        umur = input('Saya berumur 12 tahun, berapakah umur mu?')
+#        if umur <= 12:
+#            print('Kamu lebih muda dari aku!')
+#        elif umur >= 14:
+#            print('Kamu lebih tua dari aku!')
+#    intro_text: Kita akan menggabungkan `<` dan `=`. Jika kita ingin mengecek apakah suatu nilai lebih kecil atau sama dengan nilai lainnya, kita menggunakan `<=`. Kita juga bisa mengecek apakah suatu nilai lebih besar atau sama dengan nilai lainnya dengan menggunakan `>=`.
+#    commands:
+#    -   name: Lebih kecil sama dengan
+#        explanation: "`<=` mengecek apakah angka di kiri simbol `<=` lebih kecil atau sama dengan angka di kanannya. Jadi `5 < 5` tidak benar karena 5 tidak lebih kecil daripada 5 namun `5 <= 5` benar karena 5 itu lebih kecil atau sama dengan 5. `6 <= 5` tidak bernilai benar."
+#        example: 'Sebagai contoh: umur <= 12'
+#        demo_code: |-
+#            umur = input('Saya berumur 12 tahun, berapakah umur mu?')
+#            if umur <= 13:
+#                print('Kamu lebih muda atau seumuran dengan aku!')
+#    -   name: Lebih besar
+#        explanation: "`>=` mengecek apakah angka di kiri simbol `>=` lebih besar atau sama dengan angka di kanannya. Jadi `5 > 5` tidak benar karena 5 tidak lebih besar daripada 5 namun `5 >= 5` benar karena 5 itu lebih besar atau sama dengan 5. `4 >= 5` tidak bernilai benar."
+#        example: 'Sebagai contoh: umur >= 12'
+#        demo_code: |-
+#            umur = input('Saya berumur 12 tahun, berapakah umur mu?')
+#            if umur >= 13:
+#                print('Kamu lebih tua atau seumuran dengan aku!')

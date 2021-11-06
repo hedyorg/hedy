@@ -39,7 +39,9 @@ Könnyen mentheted a projektjeidet, ha nevet adsz a projektnek a fehér sávban,
 
 Kezdődjön a programozási móka! 
 
-## Tanítás a Hedy-vel 1. szint
+## Tanítás a Hedy-vel 
+
+### 1. szint
 
 ### Mit tanulnak a diákok ezen a szinten?
 
@@ -100,7 +102,7 @@ Mutasd meg az 1. szint 3 parancsát a tanulóidnak, és hagyd, hogy maguk kész�
 #### Értékelés (5 perc)
 Röviden értékeld az órát, és ellenőrizd, hogy minden tanuló eljutott-e a kód elkészítéséhez. Azt is megkérdezheted diákjaidtól, hogy tetszett nekik a programozás (először). Lehetséges, hogy néhány diák megmutathatja kódját az egész osztálynak.
 
-## 2. szint
+### 2. szint
 
 ### Mit tanulnak a diákok ezen a szinten?
 
@@ -164,24 +166,24 @@ A bevezető után bemutathatod diákjainak a változó fogalmát. A változó ol
 
 A változónak nem feltétlenül számnak kell lennie, hanem lehet szavak listája is, például a neved. Ezt a példát használhatod Hedyben a következők bemutatására: 
 
-```
+<pre class="no-copy-button" id="2">
 nev is Hedy
 print Hi nev!
-```
+</pre>
 Ez azt mutatja, hogy meghatározhatod egy változó értékét a kódban. De azt is megkérdezheted a játékostól, hogy mi legyen a változó. Mint a következő példában:
 
-```
+<pre class="no-copy-button" id="2">
 nev is ask Hogy hívnak?
 print Hi nev
-```
+</pre>
 
 Bővítsd a példát az életkor változó hozzáadásával:
-```
+<pre class="no-copy-button" id="2">
 nev is ask Hogy hívnak?
 print Hi nev!
 kor is ask Hány éves vagy?
 print Te kor éves vagy
-```
+</pre>
 
 #### Próbáld ki! (10 perc)
 Hagyd, hogy diákjai megpróbálják saját maguk elkészíteni ezeket a kódokat, vagy saját verzióikat hozzanak létre.
@@ -189,32 +191,32 @@ Hagyd, hogy diákjai megpróbálják saját maguk elkészíteni ezeket a kódoka
 #### Véletlenszerűen (15 perc)
 A változók szórakoztató tulajdonsága az, hogy hagyhatod, hogy Hedy véletlenszerű értéket válasszon a listájából. Mutasd meg a diákoknak ezt a példát, és hagyd, hogy utána a saját kódjaikon dolgozzanak:
 
-```
+<pre class="no-copy-button" id="2">
 valasztas is kő, papír, olló
 print valasztas at random
-```
+</pre>
 
-```
+<pre class="no-copy-button" id="2">
 klubok is FC Barcelona, Bayern München, Manchester United
 print a legjobb fociklub...
 print klubok at random
-```
+</pre>
 
 #### Tanulói feladat: A jósnő (20 perc)
 
-```
+<pre class="no-copy-button" id="2">
 print Hedy vagyok a jósnő!
 kerdes is ask Mit akarsz tudni?
 print Ez az, amit tudni akarsz: kerdes
 valasz is igen, nem, talán
 print A kristálygömböm azt mondja...
 print valasz at random
-```
+</pre>
 
 #### Értékelés (5 perc)
 Röviden értékeld a leckét a diákokkal a lecke lezárásához.
 
-## 3. szint
+### 3. szint
 
 ### Mit tanulnak a diákok ezen a szinten?
 
