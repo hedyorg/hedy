@@ -686,12 +686,18 @@ export function get_trimmed_code() {
 }
 
 export function confetti_cannon(){
-  let canvas = document.getElementById('confetti');
-  canvas?.classList.remove('hidden');
-  // ignore this error, the function comes from CDN for now
-  const jsConfetti = new JSConfetti({canvas})
-  // timeout for the confetti to fall down
-  setTimeout(function(){canvas?.classList.add('hidden')}, 3000);
-  jsConfetti.addConfetti();
-  document.getElementById('confetti-button').style.visibility='hidden';
+  const canvas = document.getElementById('confetti');
+  if (canvas) {
+    canvas.classList.remove('hidden');
+    // ignore this error, the function comes from CDN for now
+    const jsConfetti = new JSConfetti({canvas})
+    // timeout for the confetti to fall down
+    setTimeout(function(){canvas.classList.add('hidden')}, 3000);
+    jsConfetti.addConfetti();
+
+    const confettiButton = document.getElementById('confetti-button');
+    if (confettiButton) {
+      confettiButton.style.visibility='hidden';
+    }
+  }
 }
