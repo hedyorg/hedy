@@ -335,6 +335,32 @@
             vek is ask 'Kolik je ti let?'
             if vek > 13
                 print 'Jsi mladší než já!'
+13:
+    start_code: |-
+        odpoved is 0
+        while spravna_odpoved != 25:
+            odpoved is ask 'Kolik je 5 * 5?'
+        print 'Dostala jsem správnou odpověď!'
+
+    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+    commands:
+    -   name: Pravdivostní while
+        explanation: Můžeme použít `while` cyklus s `True` a `False`.
+        example: 'Příklad: while spravna_odpoved is False'
+        demo_code: |-
+            odpoved is 0
+            while spravna_odpoved != 25
+                odpoved is ask 'Kolik je 5 * 5?'
+            print 'Dostala jsem správnou odpověď!'
+    -   name: While s operátory menší/větší než
+        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+        example: 'Příklad: while pocet < 3'
+        demo_code: |-
+            pocet is 1
+            while pocet < 3
+                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+                pocet is pocet + 1
+            print 'Hotovo'
 14:
     start_code: |-
         jsi_tady is False
@@ -489,95 +515,4 @@
                 print('Správně!')
             else:
                 print('Ale ne, špatně!')
-22:
-    start_code: |-
-        zeme = input('V jaké zemi žiješ?')
-        if zeme != Nizozemí:
-            print('Super, tam jsem ještě nebyla!')
-        else:
-            print('Také jsem z Nizozemí!')
-    intro_text: Teď se naučíme nové znaménko, `!=`. '!' znamená 'ne' a '=' znamená 'rovná se', takže '!=' znamená 'nerovná se'. Například `5 != 4`.
-    commands:
-    -   name: Nerovná se
-        explanation: Když chceme zjistit, jestli dvě věci nejsou stejné, použijeme `!=`.
-        example: 'Příklad: 5+3 != 9'
-        demo_code: |-
-            cislo = input('Nesmíš říct 5, jaké je tvé oblíbené číslo?')
-            if cislo != 5:
-                print('Dobrá práce!')
-            else:
-                print('5 nemůžeš říct, ta je moje!')
-23:
-    start_code: |-
-        vek = input('Je mi 12 let, kolik je tobě?')
-        if vek <= 12:
-            print('Jsi mladší než já!')
-        elif vek >= 14:
-            print('Jsi starší než já!')
-    intro_text: Nyní zkombinujeme < a =. Když budeme chtít zjistit, jestli je první čislo menší nebo rovno druhému číslo, použijeme `<=`. Obdobně pokud budeme chtít zjistit, jestli je větší nebo rovno, použijeme `>=`.
-    commands:
-    -   name: Menší nebo rovno
-        explanation: '`<=` ověřuje, jestli je číslo nalevo od `<=` menší nebo rovno číslu napravo. Takže 5 < 5 není pravda, protože 5 není menší než 5, ale 5 <= 5 je pravda, protože 5 je menší nebo rovno 5. 6 <= 5 není pravda.'
-        example: 'Příklad: vek <= 12'
-        demo_code: |-
-            vek = input('Je mi 13 let, kolik je tobě?')
-            if vek <= 13:
-                print('Jsi mladší než já!')
-    -   name: Větší nebo rovno
-        explanation: '`>=` ověřuje, jestli je číslo nalevo od `>=` větší nebo rovno číslu napravo. Takže 5 > 5 není pravda, protože 5 není větší než 5, ale 5 >= 5 je pravda, protože 5 je větší nebo rovno 5. 4 >= 5 není pravda.'
-        example: 'Příklad: vek >= 12'
-        demo_code: |-
-            vek = input('Je mi 11 let, kolik je tobě?')
-            if vek >= 13:
-                print('Jsi starší než já!')
-#13-old:
-#    start_code: |-
-#        ovoce is ['jablko', 'banán', 'třešně']
-#        print(ovoce)
-#    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
-#    commands:
-#    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
-#        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
-#        demo_code: |-
-#            ovoce is ['jablko', 'banán', 'třešně']
-#            print(ovoce)
-#    -   name: Vyber položku ze seznamu.
-#        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
-#        example: 'Příklad: prvniovoce is ovoce[1]'
-#        demo_code: |-
-#            ovoce is ['jablko', 'banán', 'třešně']
-#            prvniovoce is ovoce[1]
-#            print(prvniovoce)
-#    -   name: Získej náhodnou položku ze seznamu.
-#        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
-#        example: 'Příklad: nahodneovoce is ovoce[random]'
-#        demo_code: |-
-#            ovoce is ['jablko', 'banán', 'třešně']
-#            nahodneovoce is ovoce[random]
-#            print(nahodneovoce)
-13:
-    start_code: |-
-        odpoved is 0
-        while spravna_odpoved != 25:
-            odpoved is ask 'Kolik je 5 * 5?'
-        print 'Dostala jsem správnou odpověď!'
 
-    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
-    commands:
-    -   name: Pravdivostní while
-        explanation: Můžeme použít `while` cyklus s `True` a `False`.
-        example: 'Příklad: while spravna_odpoved is False'
-        demo_code: |-
-            odpoved is 0
-            while spravna_odpoved != 25
-                odpoved is ask 'Kolik je 5 * 5?'
-            print 'Dostala jsem správnou odpověď!'
-    -   name: While s operátory menší/větší než
-        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
-        example: 'Příklad: while pocet < 3'
-        demo_code: |-
-            pocet is 1
-            while pocet < 3
-                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
-                pocet is pocet + 1
-            print 'Hotovo'

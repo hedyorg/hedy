@@ -515,47 +515,7 @@
                 print('Itu benar!')
             else:
                 print('Tidak, itu salah!')
-22:
-    start_code: |-
-        negara = input('Dimana kamu tinggal?')
-        if negara != Indonesia:
-            print('Keren!')
-        else:
-            print('Aku juga dari Indonesia!')
-    intro_text: "Kita akan belajar hal baru, simbol `!=`. Karakter `!` menyatakan 'tidak' dan karakter `=` menyatakan 'sama'. Jadi `!=` artinya 'tidak sama'. Sebagai contoh: `5 != 4`."
-    commands:
-    -   name: Tidak sama
-        explanation: Jika kita sedang membandingkan dua hal yang tidak sama, kita menggunakan `!=`
-        example: 'Sebagai contoh: 5+3 != 9'
-        demo_code: |-
-            angka = input('Kamu tidak boleh menjawab dengan angka 5, nomor apa yang keren?')
-            if angka != 5:
-                print('Bagus!')
-            else:
-                print('Kamu tidak boleh menjawab dengan angka 5!')
-23:
-    start_code: |-
-        umur = input('Saya berumur 12 tahun, berapakah umur mu?')
-        if umur <= 12:
-            print('Kamu lebih muda dari aku!')
-        elif umur >= 14:
-            print('Kamu lebih tua dari aku!')
-    intro_text: Kita akan menggabungkan `<` dan `=`. Jika kita ingin mengecek apakah suatu nilai lebih kecil atau sama dengan nilai lainnya, kita menggunakan `<=`. Kita juga bisa mengecek apakah suatu nilai lebih besar atau sama dengan nilai lainnya dengan menggunakan `>=`.
-    commands:
-    -   name: Lebih kecil sama dengan
-        explanation: "`<=` mengecek apakah angka di kiri simbol `<=` lebih kecil atau sama dengan angka di kanannya. Jadi `5 < 5` tidak benar karena 5 tidak lebih kecil daripada 5 namun `5 <= 5` benar karena 5 itu lebih kecil atau sama dengan 5. `6 <= 5` tidak bernilai benar."
-        example: 'Sebagai contoh: umur <= 12'
-        demo_code: |-
-            umur = input('Saya berumur 12 tahun, berapakah umur mu?')
-            if umur <= 13:
-                print('Kamu lebih muda atau seumuran dengan aku!')
-    -   name: Lebih besar
-        explanation: "`>=` mengecek apakah angka di kiri simbol `>=` lebih besar atau sama dengan angka di kanannya. Jadi `5 > 5` tidak benar karena 5 tidak lebih besar daripada 5 namun `5 >= 5` benar karena 5 itu lebih besar atau sama dengan 5. `4 >= 5` tidak bernilai benar."
-        example: 'Sebagai contoh: umur >= 12'
-        demo_code: |-
-            umur = input('Saya berumur 12 tahun, berapakah umur mu?')
-            if umur >= 13:
-                print('Kamu lebih tua atau seumuran dengan aku!')
+
 #13-old:
 #    start_code: |-
 #        buah is ['apel', 'pisang', 'ceri']

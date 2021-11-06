@@ -614,47 +614,6 @@
                 print('Ez helyes')
             else:
                 print('Ó nem, ez hibás!')
-22:
-    start_code: |-
-        orszag = input('Hol élsz?')
-        if orszag != Magyarorszag:
-            print('Király!')
-        else:
-            print('Én is Magyarországon élek!')
-    intro_text: Egy új elemet fogunk megtanulni, a `! =` jelet. Az ! azt jelenti, hogy nem és a = azt jelenti, hogy egyenlő Így a ! = azt jelenti, hogy nem egyenlő. Például 5! = 4.
-    commands:
-    -   name: Nem egyenlő
-        explanation: Ha azt ellenőrizzük, hogy két dolog nem egyenlő -e, akkor a `! =` kifejezést használjuk
-        example: Például 5+3 != 9
-        demo_code: |-
-            szam = input('Nem szabad 5 -öt mondani, mi a jó szám?')
-            if szam != 5:
-                print('Szép munka')
-            else:
-                print('Nem volt szabad 5 -öt mondani!')
-23:
-    start_code: |-
-        kor = input('Én 12 éves vagyok, te hány éves vagy?')
-        if kor <= 12:
-            print('Fiatalabb vagy nálam!')
-        elif kor >= 14:
-            print('Idősebb vagy nálam!')
-    intro_text: Most összekapcsoljuk a < jelet és a = jele-t. Ha látni akarjuk, hogy valami kisebb vagy egyenlő-e a második számnál, akkor a "<=" karaktert használjuk. Azt is ellenőrizhetjük, hogy valami nagyobb vagy egyenlő-e a második számnál a "> =" karakterrekkel.
-    commands:
-    -   name: Kisebb egyenlő
-        explanation: '"<=" ellenőrzi, hogy a "<=" bal oldalán lévő szám kisebb vagy egyenlő -e, mint a jobb oldali. Tehát 5 <5 nem igaz, mert 5 nem kisebb 5 -nél, de 5 <= 5 igaz, mert 5 kisebb vagy egyenlő 5 -vel. 6 <= 5 nem igaz.'
-        example: 'Például: kor <= 12'
-        demo_code: |-
-            kor = input('Én 13 éves vagyok, te hány éves vagy?')
-            if kor <= 13:
-                print('Fiatalabb vagy nálam!')
-    -   name: Nagyobb egyenlő
-        explanation: '"> =" ellenőrzi, hogy a "> =" bal oldali szám nagyobb vagy egyenlő -e, mint a jobb oldali. Tehát 5> 5 nem igaz, mert 5 nem nagyobb 5 -nél, de 5> = 5 igaz, mert 5 nagyobb vagy egyenlő 5. 4> = 5 nem igaz.'
-        example: 'Például: kor >= 12'
-        demo_code: |-
-            kor = input('Én 12 éves vagyok, te hány éves vagy?')
-            if kor >= 13:
-                print('Idősebb vagy nálam!')
 #13-old:
 #    start_code: |-
 #        gyumolcs is ['alma', 'banán', 'cseresznye']

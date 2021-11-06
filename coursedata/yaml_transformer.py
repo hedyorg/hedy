@@ -60,5 +60,5 @@ def transform_levels_in_all_YAMLs(transformations):
 
 
 
-tranformations = [(22, "z") (23, "zz")]
+tranformations = [(22, "z"), (23, "zz")]
 transform_levels_in_all_YAMLs(tranformations)

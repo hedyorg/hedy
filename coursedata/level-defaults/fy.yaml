@@ -592,47 +592,6 @@
                 print('Dat is goed!')
             else:
                 print('Spitich leave, dat is fout!')
-22:
-    start_code: |-
-        lân = input('Yn hokker (welk) lân wennest do?')
-        if lân != Nederland:
-            print('Tsjom!')
-        else:
-            print('Ik ek!')
-    intro_text: "We sille wer in nij teken leare, de `!=` . De ! betsjut 'net' en de = betsjut 'gelyk' dus != is 'net gelyk'. Foarbyld: `5 != 4`."
-    commands:
-    -   name: "Net gelyk"
-        explanation: "As wy witte wolle oft dingen net itselde binne, brûke we dus `!=`"
-        example: "Foarbyld: 5+3 != 9"
-        demo_code: |-
-            getal = input('Meist gjin 5 sizze: wat is in leuk getal?')
-            if getal != 5:
-                print('Kreas hear!')
-            else:
-                print('Fout! Mochst 5 sizze')
-23:
-    start_code: |-
-        leeftyd = input('Ik bin 12 jier, hoe âld bisto?')
-        if leeftyd <= 12:
-            print('Dan bisto jonger as ik!')
-        elif leeftyd >= 14:
-            print('Dan bisto âlder as ik!')
-    intro_text: "No sille wy < en = tegearre brûke. As we witte wolle oft eat lytser of gelyk oan it twadde getal is dan brûke wy `<=`. Itselde kinst dwaan mei `>=`"
-    commands:
-    -   name: "Lytser gelyk"
-        explanation: "De `<=` sjocht dus oft it earste getal lytser of gelyk is oan it twadde getal. Dus 5 < 5 is 'net wier' want 5 is net lytser as 5 mar 5 <= 5 is wol 'wier' want 5 is gelyk oan 5. 6 <= 5 is dus net wier."
-        example: "Foarbyld: leeftyd <= 12"
-        demo_code: |-
-            leeftyd = input('Ik bin 13 jier, hoe âld bisto?')
-            if leeftyd <= 13:
-                print('Dan bist jonger as ik!')
-    -   name: "Grutter gelyk"
-        explanation: "De `>=` sjocht dus oft it earste getal grutter as gelyk is oan it twadde getal. Dus 5 > 5 is 'net wier' want 5 is net grutter as 5 mar 5 >= 5 is wol 'wier' want 5 is gelyk oan 5. 4 >= 5 is dus net wier."
-        example: "Foarbyld: leeftyd >= 12"
-        demo_code: |-
-            leeftyd = input('Ik bin 11 jier, hoe âld bisto?')
-            if leeftyd >= 13:
-                print('Dan bistâlder as ik!')
 #13-old:
 #    start_code: |-
 #        fruit is ['apel', 'banaan', 'kjers']

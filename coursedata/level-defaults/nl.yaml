@@ -476,20 +476,20 @@
                 print 'Dan ben je ouder dan ik!'
 13:
     start_code: |-
-          antwoord is 0
-          while antwoord != 25
-              antwoord is ask 'Wat is 5 keer 5?'
-          print 'Goed gedaan!'
+        antwoord is 0
+        while antwoord != 25
+            antwoord is ask 'Wat is 5 keer 5?'
+        print 'Goed gedaan!'
     intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
     commands:
     -   name: "While"
         explanation: "We kunnen dus een `while` loop gebruiken"
         example: "Bijvoorbeeld: while antwoord is != 25"
         demo_code: |-
-              antwoord is 0
-              while antwoord != 25
-                  antwoord is ask 'Wat is 5 keer 5?'
-              print 'Goed gedaan!'
+            antwoord is 0
+            while antwoord != 25
+                antwoord is ask 'Wat is 5 keer 5?'
+            print 'Goed gedaan!'
     -   name: "Smaller while"
         explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
         example: "Bijvoorbeeld: while tel < 3"
@@ -651,47 +651,7 @@
                 print('Dat is goed!')
             else:
                 print('Helaas dat is fout!')
-22:
-    start_code: |-
-        land = input('In welk land woon jij?')
-        if land != Nederland:
-            print('Cool!')
-        else:
-            print('Ik kom ook uit Nederland!')
-    intro_text: "We gaan een nieuw teken leren, de `!=` . De ! betekent niet en de = betekent gelijk dus != is niet gelijk. Als voorbeeldje is 5 != 4."
-    commands:
-    -   name: "Niet gelijk"
-        explanation: "Als we gaan kijken of dingen anders zijn, gebruiken we dus `!=`"
-        example: "Bijvoorbeeld: 5+3 != 9"
-        demo_code: |-
-            getal = input('Je mag geen 5 zeggen, wat is een leuk getal?')
-            if getal != 5:
-                print('Goed zo!')
-            else:
-                print('Fout! Je mocht geen 5 zeggen')
-23:
-    start_code: |-
-        leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
-        if leeftijd <= 12:
-            print('Dan ben je jonger dan ik!')
-        elif leeftijd >= 14:
-            print('Dan ben je ouder dan ik!')
-    intro_text: "Nu gaan we < en = combineren. Als we willen kijken of iets kleiner of gelijk aan het tweede getal is dan gebruiken we `<=`. Hetzelfde kunnen we doen met `>=`"
-    commands:
-    -   name: "Kleiner gelijk"
-        explanation: "De `<=` kijkt dus of het eerste getal kleiner of gelijk is aan het tweede getal. Dus 5 < 5 is niet waar want 5 is niet kleiner dan 5 maar 5 <= 5 is wel waar want 5 is gelijk aan 5. 6 <= 5 is dus niet waar."
-        example: "Bijvoorbeeld: leeftijd <= 12"
-        demo_code: |-
-            leeftijd = input('Ik ben 13 jaar, hoe oud ben jij?')
-            if leeftijd <= 13:
-                print('Dan ben je jonger dan ik!')
-    -   name: "Groter gelijk"
-        explanation: "De `>=` kijkt dus of het eerste getal groter of gelijk is aan het tweede getal. Dus 5 > 5 is niet waar want 5 is niet groter dan 5 maar 5 >= 5 is wel waar want 5 is gelijk aan 5. 4 >= 5 is dus niet waar."
-        example: "Bijvoorbeeld: leeftijd >= 12"
-        demo_code: |-
-            leeftijd = input('Ik ben 11 jaar, hoe oud ben jij?')
-            if leeftijd >= 13:
-                print('Dan ben je ouder dan ik!')
+
 #13-old:
 #    start_code: |-
 #        fruit is ['appel', 'banaan', 'kers']
