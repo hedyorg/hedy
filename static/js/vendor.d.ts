@@ -48,3 +48,13 @@ declare function require(name: string): Module;
 // So I'm overriding the type definitions to include both the complete `AceAjax` space (where
 // the classes live) as well as the `AceAjax.Ace` interface (where the functions live).
 declare var ace: AceAjax & AceAjax.Ace;
+
+
+// Types for JSConfetti
+declare class JSConfetti {
+    constructor(options: {
+        canvas: HTMLElement
+    });
+
+    public addConfetti(): void;
+}
