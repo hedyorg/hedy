@@ -259,56 +259,6 @@
             else
                 print 'Ups, těsně vedle...'
                 print 'Správný výsledek je 10.'
-#10-old:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Už jdu!'
-#    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
-#    commands:
-#    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
-#        example: 'for i in range 1 to 10:'
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Už jdu!'
-#    -   explanation: To stejné musíme udělat i u `if`.
-#        example: 'if barva is zelená:'
-#        demo_code: |-
-#            barva is zelená
-#            if barva is zelená:
-#                print 'Barva je zelená.'
-#            else:
-#                print 'Barva není zelená.'
-#    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
-#        example: 'elif a is 5:'
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a je 1'
-#            elif a is 2:
-#                print 'a je 2'
-#            else:
-#                print 'a není ani 1 ani 2'
-#11-old:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'jsme v ' i '. kole a napočítali jsme do ' j
-#    intro_text: Odteď může cykly opakovat víckrát za sebou. V příkladu počítáme do 5 a 3x to zopakujeme, takže budeme mít 3 kola v každém z něj napočítáme od 1 do 5.
-#    commands:
-#    -   explanation: Příklad použití `for`cyklu.
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'jsme v ' i '. kole a napočítali jsme do ' j
-#    -   explanation: To stejné můžeme udělat i s `if`y.
-#        demo_code: |-
-#            barva is modrá
-#            druhabarva is žlutá
-#            if barva is modrá:
-#                if druhabarva is žlutá:
-#                    print 'Dohromady dáme zelenou!'
 12:
     start_code: |-
         vek is ask 'Kolik je ti let?'
@@ -363,31 +313,30 @@
             print 'Hotovo'
 14:
     start_code: |-
-        jsi_tady is False
-        jsi_opravdu_tady is input('Jsi tady stále s námi? ano nebo ne?')
-        if jsi_opravdu_tady is ano:
-            jsi_tady is True
-        if jsi_tady is True:
-            print('Ahoj!')
-        if jsi_tady is False:
-            print('Měj se!')
-    intro_text: Teď si ukážeme, jak uložit do proměnné `True` (pravda) a `False` (nepravda). Je to užitečné, když například chceš ověřovat správnou odpověď od uživatele.
+        ovoce is ['jablko', 'banán', 'třešně']
+        print ovoce
+    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
     commands:
-    -   name: Příklad
-        explanation: V tomto příkladu používáme `True` a `False`, abychom zjistili, zda bylo správně odpovězeno na otázku. Můžeš hádat 5x, pokud bude odpověď správná `spravna_odpoved` se nastaví na `True`.
-        example: spravna_odpoved is False
+    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
+        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
         demo_code: |-
-            for i in range(1, 5):
-                spravna_odpoved is False
-                odpoved is input('Kolik je 5 * 5')
-                if odpoved is 25:
-                    spravna_odpoved is True
-                else:
-                    spravna_odpoved is False
-                if spravna_odpoved is True:
-                    print('Správně!')
-                if spravna_odpoved is False:
-                    print('Špatně! Zbývající pokusy: ' 5 - i)
+            ovoce is ['jablko', 'banán', 'třešně']
+            print ovoce
+    -   name: Vyber položku ze seznamu.
+        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
+        example: 'Příklad: prvniovoce is ovoce[1]'
+        demo_code: |-
+            ovoce is ['jablko', 'banán', 'třešně']
+            prvniovoce is ovoce[1]
+            print prvniovoce
+    -   name: Získej náhodnou položku ze seznamu.
+        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
+        example: 'Příklad: nahodneovoce is ovoce[random]'
+        demo_code: |-
+            ovoce is ['jablko', 'banán', 'třešně']
+            nahodneovoce is ovoce[random]
+            print nahodneovoce
+
 15:
     start_code: |-
         jsi_tady is False
@@ -441,22 +390,6 @@
             # Je napsaný v Hedy
             # Nedělá nic jiného kromě výpisu Ahoj!
             print('Ahoj!')
-19:
-    start_code: |-
-        seznam is ['první', 'druhý', 'třetí']
-        druhahodnota is seznam[2]
-        print(druhahodnota)
-    intro_text: Ze seznamu můžeme vybrat konkrétní položku. Pokud chceme 2. člena, napíšeme `seznam[2]`.
-    commands:
-    -   name: Počet
-        explanation: Můžeme sečíst všechny položky seznamu.
-        example: 'Příklad: seznam[1]'
-        demo_code: |-
-            seznam is ['1', '2', '3']
-            soucet is seznam[1] + seznam[2]
-            soucet is soucet + seznam[3]
-            # Tady očekáváme číslo 6
-            print(soucet)
 20:
     start_code: |-
         ovoce is ['jablko', 'banán', 'třešeň']
@@ -516,3 +449,35 @@
             else:
                 print('Ale ne, špatně!')
 
+
+#colon:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Už jdu!'
+#    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
+#    commands:
+#    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
+#        example: 'for i in range 1 to 10:'
+#        demo_code: |-
+#            for i in range 1 to 10:
+#                print i
+#            print 'Už jdu!'
+#    -   explanation: To stejné musíme udělat i u `if`.
+#        example: 'if barva is zelená:'
+#        demo_code: |-
+#            barva is zelená
+#            if barva is zelená:
+#                print 'Barva je zelená.'
+#            else:
+#                print 'Barva není zelená.'
+#    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+#        example: 'elif a is 5:'
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a je 1'
+#            elif a is 2:
+#                print 'a je 2'
+#            else:
+#                print 'a není ani 1 ani 2'

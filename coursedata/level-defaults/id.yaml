@@ -263,58 +263,6 @@
             else
                 print 'Ups!'
                 print 'Jawabannya adalah 10'
-#10-old:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Siap atau tidak, aku datang!'
-#    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
-#    commands:
-#    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
-#        example: 'for i in range 1 to 10:'
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Siap atau tidak, aku datang!'
-#    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
-#        example: 'if warna is hijau:'
-#        demo_code: |-
-#            warna is hijau
-#            if warna is hijau:
-#                print 'Warnanya hijau'
-#            else:
-#                print 'Warnanya bukan hijau'
-#    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
-#        example: 'elif a is 5:'
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a bernilai 1'
-#            elif a is 2:
-#                print 'a bernilai 2'
-#            else:
-#                print 'a bukan bernilai 1 atau 2'
-#11-old:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
-#    intro_text: Dimulai dari sekarang, kita bisa melakukan pengulangan lebih sering. Pada contoh, kita menghitung satu hingga lima dan melakukannya sebanyak tiga kali. Jadi kita melakukan tiga ronde dan tiap ronde menghitung dari satu ke lima.
-#    commands:
-#    -   name: for
-#        explanation: Ini adalah contoh penggunaaan perintah `for`
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'kita sedang berada didalam ronde: ' i ' dan kita menghitung ' j
-#    -   name: if
-#        explanation: Kita dapat melakukan hal yang sama dengan perintah `if`
-#        demo_code: |-
-#            warna is biru
-#            warnadua is kuning
-#            if warna is biru:
-#                if warnadua is kuning:
-#                    print 'Bersama, kita membentuk warna hijau!'
 12:
     start_code: |-
         umur is ask 'Berapa umur mu?'
@@ -366,31 +314,30 @@
 
 14:
     start_code: |-
-        kamu_tetap_di_sini is False
-        apakah_kamu_tetap_disini is input('Apakah kamu tetap disini? ya atau tidak?')
-        if apakah_kamu_tetap_disini is ya:
-            kamu_tetap_di_sini is True
-        if kamu_tetap_di_sini is True:
-            print('Halo!')
-        if kamu_tetap_di_sini is False:
-            print('Bye!')
-    intro_text: Kita sekarang akan berbicara tentang pembuatan variabel `True` atau `False`. Kamu dapat membuat variabel untuk menyimpan nilai `True` atau `False`. Kami dapat menggunakan ini untuk menyimpan hasil dari sebuah jawaban.
+        buah is ['apel', 'pisang', 'ceri']
+        print buah 
+    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
     commands:
-    -   name: Contoh
-        explanation: Pada contoh ini, kita menggunakan `True` dan `False` untuk menyimpan jawaban dari sebuah pertanyaan. Kamu dapat mencoba menjawab 5 kali. Jika jawabannya benar, jawaban_benar akan bernilai `True`
-        example: jawaban_benar is 'False'
+    -   name: Kurung siku
+        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
         demo_code: |-
-            for i in range(1, 5):
-                jawaban_benar is False
-                jawaban is input('Apa hasil dari 5*5?')
-                if jawaban is 25:
-                    jawaban_benar is True
-                else:
-                    jawaban_benar is False
-                if jawaban_benar is True:
-                    print('Itu benar!')
-                if jawaban_benar is False:
-                    print('Itu salah! ' 5-i ' kesempatan menjawab tersisa')
+            buah is ['apel', 'pisang', 'ceri']
+            print buah 
+    -   name: Mengambil sebuah nilai dari dalam list
+        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
+        example: 'Sebagai contoh: buahpertama is buah[1]'
+        demo_code: |-
+            buah is ['apel', 'pisang', 'ceri']
+            buahpertama is buah[1]
+            print buahpertama 
+    -   name: Mengambil sebuah nilai dari dalam list secara acak
+        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
+        example: 'Sebagai contoh: buahacak is buah[random]'
+        demo_code: |-
+            buah is ['apel', 'pisang', 'ceri']
+            buahacak is buah[random]
+            print buahacak 
 15:
     start_code: |-
         kamu_tetap_di_sini is False
@@ -444,22 +391,6 @@
             # Ini dibuat di Hedy
             # Ini tidak melakukan apa-apa selain menampilkan Halo!
             print('Halo!')
-19:
-    start_code: |-
-        list is ['pertama','kedua','ketiga']
-        nilaikedua is list[2]
-        print(nilaikedua)
-    intro_text: Ketika kita memiliki list, kita bisa mengambil satu nilai spesifik dari list. Jika kita ingin mengambil nilai kedua dari list, kita menuliskan `list[2]`
-    commands:
-    -   name: Penjumlahan
-        explanation: Kita juga bisa menjumlahkan semua nilai didalam list
-        example: list[1]
-        demo_code: |-
-            list is ['1','2','3']
-            jumlah is list[1] + list[2]
-            jumlah is jumlah + list[3]
-            # kita berharap jumlah bernilai 6 disini
-            print(jumlah)
 20:
     start_code: |-
         buah is ['apel', 'pisang', 'ceri']
@@ -516,29 +447,34 @@
             else:
                 print('Tidak, itu salah!')
 
-#13-old:
-#    start_code: |-
-#        buah is ['apel', 'pisang', 'ceri']
-#        print(buah)
-#    intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-#    commands:
-#    -   name: Kurung siku
-#        explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-#        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
-#        demo_code: |-
-#            buah is ['apel', 'pisang', 'ceri']
-#            print(buah)
-#    -   name: Mengambil sebuah nilai dari dalam list
-#        explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
-#        example: 'Sebagai contoh: buahpertama is buah[1]'
-#        demo_code: |-
-#            buah is ['apel', 'pisang', 'ceri']
-#            buahpertama is buah[1]
-#            print(buahpertama)
-#    -   name: Mengambil sebuah nilai dari dalam list secara acak
-#        explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
-#        example: 'Sebagai contoh: buahacak is buah[random]'
-#        demo_code: |-
-#            buah is ['apel', 'pisang', 'ceri']
-#            buahacak is buah[random]
-#            print(buahacak)
+colon:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Siap atau tidak, aku datang!'
+    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
+    commands:
+    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
+        example: 'for i in range 1 to 10:'
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Siap atau tidak, aku datang!'
+    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
+        example: 'if warna is hijau:'
+        demo_code: |-
+            warna is hijau
+            if warna is hijau:
+                print 'Warnanya hijau'
+            else:
+                print 'Warnanya bukan hijau'
+    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
+        example: 'elif a is 5:'
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a bernilai 1'
+            elif a is 2:
+                print 'a bernilai 2'
+            else:
+                print 'a bukan bernilai 1 atau 2'

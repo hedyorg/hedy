@@ -282,64 +282,6 @@
             for i in range 1 to 10
               print i
             print 'Bereit oder nicht, hier komme ich!'
-#10-old:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Bereit oder nicht, hier komme ich!'
-#    intro_text: |-
-#        Jetzt werden wir ein wenig an der Einrückung ändern.
-#        Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
-#    commands:
-#    -   explanation: "Wenn wir ein `for` verwenden, müssen wir ein `:` hinter die `for`-Anweisung setzen!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Bereit oder nicht, hier komme ich!'
-#    -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
-#        example: "if farbe is grün:'"
-#        demo_code: |-
-#            farbe is grün
-#            if farbe is grün:
-#                print 'Die Farbe ist grün.'
-#            else:
-#                print 'Die Farbe ist nicht grün.'
-#    -   explanation: |-
-#            Wir zeigen euch einen neuen Befehl, den ihr verwenden könnt: `elif`.
-#            `elif` steht für \"else if\".
-#            Wir überprüfen zuerst, ob das `if` korrekt ist, wenn das nicht wahr ist, überprüfen wir das `elif` und wenn das auch nicht wahr ist, gehen wir zum `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a ist 1'
-#            elif a is 2:
-#                print 'a ist 2'
-#            else:
-#                print 'a ist nicht 1 oder 2'
-#11-old:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'wir sind in Runde: ' i ' bei Nummer: ' j
-#    intro_text: |-
-#        Ab jetzt können wir eine Schleife öfters wiederholen.
-#        Im Beispiel zählen wir bis 5 und machen das 3 Mal.
-#        Wir machen also 3 Runden und zählen jedes Mal bis 5.
-#    commands:
-#    -   explanation: "Dies ist ein Beispiel der `for`-Anweisung."
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'wir sind in Runde: ' i ' bei Nummer: ' j
-#    -   explanation: "Dasselbe können wir mit `if`-Anweisungen machen"
-#        demo_code: |-
-#            farbe is blau
-#            farbezwei is gelb
-#            if farbe is blau:
-#                if farbezwei is gelb:
-#                    print 'Zusammen ergeben wir grün!'
 12:
     start_code: |-
         alter is ask 'Wie alt bist du?'
@@ -405,36 +347,38 @@
             print 'Wir sind fertig!'
 14:
     start_code: |-
-        du_bist_noch_hier is False
-        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
-        if bist_du_noch_hier is ja:
-            du_bist_noch_hier is True
-        if du_bist_noch_hier is True:
-            print('Hallo!')
-        if du_bist_noch_hier is False:
-            print('Tschüss!')
+        fruechte is ['Apfel', 'Banane', 'Kirsche']
+        print fruechte
     intro_text: |-
-        Ab jetzt kannst du Variablen als wahr (`True`) oder falsch (`False`) definieren.
-        Du kannst dies zum Beispiel verwenden, um abzuspeichern, ob eine Antwort wahr oder falsch war.
+        Wir werden eckige Klammern um Listen setzen!
+        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
     commands:
-    -   name: "Beispiel"
-        explanation: |-
-            In diesem Beispiel verwenden wir `True` und `False`, um die Antwort auf eine Frage festzuhalten.
-            Du kannst 5 Mal antworten.
-            Wenn die Antwort richtig ist, wird `richtige_antwort` `True` sein.
-        example: "`richtige_antwort` ist `False`"
+    -   explanation: |-
+            Wir werden eckige Klammern um Listen setzen!
+            Wir müssen auch `'` um Elemente in Listen setzen.
+        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
         demo_code: |-
-            for i in range(1,5):
-                richtige_antwort is False
-                antwort is input('Wieviel ist 5*5')
-                if antwort is 25:
-                    richtige_antwort is True
-                else:
-                    richtige_antwort is False
-                if richtige_antwort is True:
-                    print('Das ist richtig!')
-                if richtige_antwort is False:
-                    print('Das ist leider falsch! Du hast noch ' 5-i ' Versuche übrig.')
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            print fruechte
+    -   name: "Nimm ein Element aus einer Liste"
+        explanation: |-
+            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
+            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
+        example: "erste_frucht is fruechte[1]"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            erste_frucht is fruechte[1]
+            print erste_frucht
+    -   name: "Nimm ein zufälliges Element aus einer Liste"
+        explanation: |-
+            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
+            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
+        example: "zufaellige_frucht is fruechte[random]"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            zufaellige_frucht is fruechte[random]
+            print zufaellige_frucht
+
 15:
     start_code: |-
         du_bist_noch_hier is False
@@ -498,36 +442,39 @@
             # Es ist in Hedy erstellt worden
             # Es macht nichts außer Hallo! zu auszugeben
             print('Hallo!')
-#13-old:
+#colon:
 #    start_code: |-
-#        fruechte is ['Apfel', 'Banane', 'Kirsche']
-#        print(fruechte)
+#        for i in range 1 to 10:
+#            print i
+#        print 'Bereit oder nicht, hier komme ich!'
 #    intro_text: |-
-#        Wir werden eckige Klammern um Listen setzen!
-#        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
+#        Jetzt werden wir ein wenig an der Einrückung ändern.
+#        Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 #    commands:
+#    -   explanation: "Wenn wir ein `for` verwenden, müssen wir ein `:` hinter die `for`-Anweisung setzen!"
+#        example: "for i in range 1 to 10:"
+#        demo_code: |-
+#            for i in range 1 to 12:
+#                print i
+#            print 'Bereit oder nicht, hier komme ich!'
+#    -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
+#        example: "if farbe is grün:'"
+#        demo_code: |-
+#            farbe is grün
+#            if farbe is grün:
+#                print 'Die Farbe ist grün.'
+#            else:
+#                print 'Die Farbe ist nicht grün.'
 #    -   explanation: |-
-#            Wir werden eckige Klammern um Listen setzen!
-#            Wir müssen auch `'` um Elemente in Listen setzen.
-#        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
+#            Wir zeigen euch einen neuen Befehl, den ihr verwenden könnt: `elif`.
+#            `elif` steht für \"else if\".
+#            Wir überprüfen zuerst, ob das `if` korrekt ist, wenn das nicht wahr ist, überprüfen wir das `elif` und wenn das auch nicht wahr ist, gehen wir zum `else`."
+#        example: "elif a is 5:"
 #        demo_code: |-
-#            fruechte is ['Apfel', 'Banane', 'Kirsche']
-#            print(fruechte)
-#    -   name: "Nimm ein Element aus einer Liste"
-#        explanation: |-
-#            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
-#            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-#        example: "erste_frucht is fruechte[1]"
-#        demo_code: |-
-#            fruechte is ['Apfel', 'Banane', 'Kirsche']
-#            erste_frucht is fruechte[1]
-#            print(erste_frucht)
-#    -   name: "Nimm ein zufälliges Element aus einer Liste"
-#        explanation: |-
-#            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
-#            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-#        example: "zufaellige_frucht is fruechte[random]"
-#        demo_code: |-
-#            fruechte is ['Apfel', 'Banane', 'Kirsche']
-#            zufaellige_frucht is fruechte[random]
-#            print(zufaellige_frucht)
+#            a is 2
+#            if a is 1:
+#                print 'a ist 1'
+#            elif a is 2:
+#                print 'a ist 2'
+#            else:
+#                print 'a ist nicht 1 oder 2'

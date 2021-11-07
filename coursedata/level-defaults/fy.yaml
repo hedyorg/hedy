@@ -323,66 +323,6 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-#10-old:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: |-
-#        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
-#        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
-#    commands:
-#    -   name: "for met :"
-#        explanation: "By `for` moatst no in `:` efteroan sette!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moatte itselde dwaan mei al ús `if`"
-#        example: "if kleur is grien:"
-#        demo_code: |-
-#            kleur is grien
-#            if kleur is grien:
-#                print 'De kleur is grien'
-#            else:
-#                print 'De kleur is net grien'
-#    -   name: "(Optioneel) elif"
-#        explanation: |-
-#            Meist ek in nij kommando brûke: `elif`.
-#            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-#            en als dy net wier is dan giest nei de `else`.
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is net 1 of 2'
-#11-old:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'We sitte noch yn ronde: ' i ' en de tel is: ' j
-#    intro_text: "Fan no ôf meite we ek in luske faker útfiere. In it foarbyld telle we 3 kear oant 5. Dus we dogge 3 rûntsjes en tellen eltse kear oant 5"
-#    commands:
-#    -   name: "`for` ûnder inoar"
-#        explanation: "Dit is in foarbyld fan `for`-luskes ûnder/yn inoar sette"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'we sitte no yn ronde: ' i ' en de tel is: ' j
-#    -   name: "`if` ûnder inoar"
-#        explanation: "We kinne itselde dwaan mei `if` kommando's"
-#        demo_code: |-
-#            kleur is blauw
-#            kleurtwa is giel
-#            if kleur is blauw:
-#                if kleurtwa is giel:
-#                    print 'Tegearre is dit grien!'
 12:
     start_code: |-
         leeftyd is ask 'Hoe âld bisto?'
@@ -436,33 +376,30 @@
 
 14:
     start_code: |-
-        do_bist_der_noch is False
-        bist_der_noch is input('ben je er noch? ja of nee?')
-        if bist_der_noch is ja:
-            do_bist_der_noch is True
-        if do_bist_der_noch is True:
-            print('Hallo!')
-        if do_bist_der_noch is False:
-            print('Doei!')
-    intro_text: |-
-        Wy sille it no ha oer 'wier' en 'net wier'. Kinst in fariabele op 'wier' sette (`True`) en op 'net wier': `False`.
-        Dit kinst bygelyks brûke om by te hâlden oftst eat al dien hast.
+        fruit is ['apel', 'banaan', 'kjers']
+        print fruit 
+    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
     commands:
-    -   name: "Foarbyld"
-        explanation: "Hjir in foarbyldsje fan in fraach om in rekkensom te antwurdzjen. Meist 5 kear in antwurd jaan. As it goed is, makket it goed_antwurd `True` (dus wier)"
-        example: "goed_antwurd is `False`"
+    -   name: "Heakjes om listen"
+        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
+        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
         demo_code: |-
-            for i in range(0, 5):
-                goed_antwurd is False
-                antwurd is input('Wat is 5*5')
-                if antwurd is 25:
-                    goed_antwurd is True
-                else:
-                    goed_antwurd is False
-                if goed_antwurd is True:
-                    print('Dat is goed!')
-                if goed_antwurd is False:
-                    print('Dat is fout! Meist it noch ' 5-i ' kear besykje')
+            fruit is ['apel', 'banaan', 'kjers']
+            print fruit 
+    -   name: "Pak eat út in list"
+        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
+        example: "Foarbyld: earstefruit is fruit[1]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            earstefruit is fruit[1]
+            print earstefruit 
+    -   name: "Nim in willekeurich ding út 'e list"
+        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
+        example: "Foarbyld: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            randomfruit is fruit[random]
+            print randomfruit 
 15:
     start_code: |-
         do_bist_der_noch is False
@@ -521,22 +458,6 @@
             # It is gemaakt in Hedy
             # It docht eins neat fierder!
             print('goeie')
-19:
-    start_code: |-
-        list is ['earste', 'twadde', 'tredde']
-        twaddewearde is list[2]
-        print(twaddewearde)
-    intro_text: "Bij een list kan je een specifieke waarde pakken. Stel je wilt It twade ding in de list hebben, dan typ je `list[2]`."
-    commands:
-    -   name: "Optellen"
-        explanation: "We kinne bygelyks alles bij inoar optelle"
-        example: "list[1]"
-        demo_code: |-
-            list is ['1', '2', '3']
-            opteld is list[1] + list[2]
-            opteld is opteld + list[3]
-            # we ferwachtsje hjir 6
-            print(opteld)
 20:
     start_code: |-
         fruit is ['apel', 'banaan', 'kjers']
@@ -592,29 +513,42 @@
                 print('Dat is goed!')
             else:
                 print('Spitich leave, dat is fout!')
-#13-old:
-#    start_code: |-
-#        fruit is ['apel', 'banaan', 'kjers']
-#        print(fruit)
-#    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
-#    commands:
-#    -   name: "Heakjes om listen"
-#        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
-#        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
-#        demo_code: |-
-#            fruit is ['apel', 'banaan', 'kjers']
-#            print(fruit)
-#    -   name: "Pak eat út in list"
-#        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
-#        example: "Foarbyld: earstefruit is fruit[1]"
-#        demo_code: |-
-#            fruit is ['apel', 'banaan', 'kjers']
-#            earstefruit is fruit[1]
-#            print(earstefruit)
-#    -   name: "Nim in willekeurich ding út 'e list"
-#        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
-#        example: "Foarbyld: randomfruit is fruit[random]"
-#        demo_code: |-
-#            fruit is ['apel', 'banaan', 'kjers']
-#            randomfruit is fruit[random]
-#            print(randomfruit)
+colon:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
+    intro_text: |-
+        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+    commands:
+    -   name: "for met :"
+        explanation: "By `for` moatst no in `:` efteroan sette!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Wie niet weg is is gezien'
+    -   name: "if met :"
+        explanation: "We moatte itselde dwaan mei al ús `if`"
+        example: "if kleur is grien:"
+        demo_code: |-
+            kleur is grien
+            if kleur is grien:
+                print 'De kleur is grien'
+            else:
+                print 'De kleur is net grien'
+    -   name: "(Optioneel) elif"
+        explanation: |-
+            Meist ek in nij kommando brûke: `elif`.
+            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+            en als dy net wier is dan giest nei de `else`.
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is net 1 of 2'

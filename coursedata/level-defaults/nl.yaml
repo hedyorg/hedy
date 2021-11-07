@@ -396,61 +396,6 @@
             print 'Tweeenhalf plus tweeenhalf is...'
             print antwoord
 
-#10-old:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
-#    commands:
-#    -   name: "for met :"
-#        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moeten hetzelfde doen met al onze `if` statements"
-#        example: "if kleur is groen:"
-#        demo_code: |-
-#            kleur is groen
-#            if kleur is groen:
-#                print 'De kleur is groen'
-#            else:
-#                print 'De kleur is niet groen'
-#    -   name: "(Optioneel) elif"
-#        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is niet 1 of 2'
-#11-old:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'we zitten nu in rondje: ' i ' en de tel is: ' j
-#    intro_text: "Vanaf nu mogen we ook een loopje vaker uitvoeren. In het voorbeeld tellen we 3 maal tot 5. Dus we doen 3 rondjes en tellen elke keer tot 5"
-#    commands:
-#    -   name: "for onder elkaar"
-#        explanation: "Dit is een voorbeeld van for loopjes onder/in elkaar zetten"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'we zitten nu in rondje: ' i ' en de tel is: ' j
-#    -   name: "if onder elkaar"
-#        explanation: "We kunnen hetzelfde doen met if statements"
-#        demo_code: |-
-#            kleur is blauw
-#            kleurtwee is geel
-#            if kleur is blauw:
-#                if kleurtwee is geel:
-#                    print 'Samen is dit groen!'
 12:
     start_code: |-
         leeftijd is ask 'Hoe oud ben jij?'
@@ -502,31 +447,30 @@
 
 14:
     start_code: |-
-        je_bent_er_nog is False
-        ben_je_er_nog is input('ben je er nog? ja of nee?')
-        if ben_je_er_nog is ja:
-            je_bent_er_nog is True
-        if je_bent_er_nog is True:
-            print('Hallo!')
-        if je_bent_er_nog is False:
-            print('Doei!')
-    intro_text: "We gaan nu het hebben over waar en niet waar, je kan een variabele op waar zetten (`True`) en op niet waar zetten: (`False`). Dit kan je bijvoorbeeld gebruiken om bij te houden of je al iets heb gedaan."
+        fruit is ['appel', 'banaan', 'kers']
+        print fruit 
+    intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
     commands:
-    -   name: "Voorbeeld"
-        explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goed_antwoord `True` (dus waar)"
-        example: "goed_antwoord is `False`"
+    -   name: "Haakjes om lijstjes"
+        explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
+        example: "Bijvoorbeeld: fruit is ['appel', 'banaan', 'kers']"
         demo_code: |-
-            for i in range(0, 5):
-                goed_antwoord is False
-                antwoord is input('Wat is 5*5')
-                if antwoord is 25:
-                    goed_antwoord is True
-                else:
-                    goed_antwoord is False
-                if goed_antwoord is True:
-                    print('Dat is goed!')
-                if goed_antwoord is False:
-                    print('Dat is fout! Nog ' 5-i ' pogingen over')
+            fruit is ['appel', 'banaan', 'kers']
+            print fruit 
+    -   name: "Pak iets uit een lijst"
+        explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
+        example: "Bijvoorbeeld: eerstefruit is fruit[1]"
+        demo_code: |-
+            fruit is ['banaan', 'appel', 'kers']
+            eerstefruit is fruit[1]
+            print eerstefruit 
+    -   name: "Pak een random item uit een lijst"
+        explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] is pak een random fruit uit de lijst!"
+        example: "Bijvoorbeeld: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['banaan', 'appel', 'kers']
+            randomfruit is fruit[random]
+            print randomfruit 
 15:
     start_code: |-
         je_bent_er_nog is False
@@ -580,22 +524,6 @@
             # Het is gemaakt in Hedy
             # Het doet eigenlijk verder niets!
             print('hallo!')
-19:
-    start_code: |-
-        lijst is ['eerste', 'tweede', 'derde']
-        tweedewaarde is lijst[2]
-        print(tweedewaarde)
-    intro_text: "Bij een lijst kan je een specifieke waarde pakken. Stel je wilt het tweede ding in de lijst hebben, dan typ je `lijst[2]`."
-    commands:
-    -   name: "Optellen"
-        explanation: "We kunnen bijvoorbeeld alles bij elkaar optellen"
-        example: "lijst[1]"
-        demo_code: |-
-            lijst is ['1', '2', '3']
-            optellen is lijst[1] + lijst[2]
-            optellen is optellen + lijst[3]
-            # we verwachten hier 6
-            print(optellen)
 20:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
@@ -652,29 +580,37 @@
             else:
                 print('Helaas dat is fout!')
 
-#13-old:
+#colon:
 #    start_code: |-
-#        fruit is ['appel', 'banaan', 'kers']
-#        print(fruit)
-#    intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
+#        for i in range 1 to 10:
+#            print i
+#        print 'Wie niet weg is is gezien'
+#    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
 #    commands:
-#    -   name: "Haakjes om lijstjes"
-#        explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
-#        example: "Bijvoorbeeld: fruit is ['appel', 'banaan', 'kers']"
+#    -   name: "for met :"
+#        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
+#        example: "for i in range 1 to 10:"
 #        demo_code: |-
-#            fruit is ['appel', 'banaan', 'kers']
-#            print(fruit)
-#    -   name: "Pak iets uit een lijst"
-#        explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
-#        example: "Bijvoorbeeld: eerstefruit is fruit[1]"
+#            for i in range 1 to 10:
+#                print i
+#            print 'wie niet weg is is gezien'
+#    -   name: "if met :"
+#        explanation: "We moeten hetzelfde doen met al onze `if` statements"
+#        example: "if kleur is groen:"
 #        demo_code: |-
-#            fruit is ['banaan', 'appel', 'kers']
-#            eerstefruit is fruit[1]
-#            print(eerstefruit)
-#    -   name: "Pak een random item uit een lijst"
-#        explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] is pak een random fruit uit de lijst!"
-#        example: "Bijvoorbeeld: randomfruit is fruit[random]"
+#            kleur is groen
+#            if kleur is groen:
+#                print 'De kleur is groen'
+#            else:
+#                print 'De kleur is niet groen'
+#    -   name: "(Optioneel) elif"
+#        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
+#        example: "elif a is 5:"
 #        demo_code: |-
-#            fruit is ['banaan', 'appel', 'kers']
-#            randomfruit is fruit[random]
-#            print(randomfruit)
+#            a is 2
+#            if a is 1:
+#                print 'a is 1'
+#            elif a is 2:
+#                print 'a is 2'
+#            else:
+#                print 'a is niet 1 of 2'

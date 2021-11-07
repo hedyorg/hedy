@@ -1083,6 +1083,8 @@ def is_float(n):
         return True
     except ValueError:
         return False
+def is_random(s):
+    return 'random.choice' in s
 
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
@@ -1163,7 +1165,7 @@ class ConvertToPython_11(ConvertToPython_10):
         except UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 
-            if not (is_int(right_hand_side) or is_float(right_hand_side)):
+            if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise UnquotedAssignTextException(text = args[1])
 
         if len(args) == 2:

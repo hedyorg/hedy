@@ -319,61 +319,6 @@
                 print 'Juj!'
                 print 'A válasz 10'
         name: ask
-#10-old:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Aki bújt, aki nem, megyek!'
-#    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
-#    commands:
-#    -   name: "for ezzel:"
-#        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Aki bújt, aki nem, megyek!'
-#    -   name: "if ezzel:"
-#        explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
-#        example: "if szin is zöld:'"
-#        demo_code: |-
-#            szin is zöld
-#            if szin is zöld:
-#                print 'a szín zöld'
-#            else:
-#                print 'A szin nem zöld'
-#    -   name: "(Optional) elif"
-#        explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a értéke 1'
-#            elif a is 2:
-#                print 'a értéke 2'
-#            else:
-#                print 'a értéke nem 1 vagy 2'
-#11-old:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'körök száma: ' i ' a számlálás: ' j
-#    intro_text: "Mostantól többször ismételhetünk egy ciklust. A példában 5-ig számolunk, és ezt háromszor megtesszük. Tehát 3 kört teszünk meg, és minden alkalommal 5-ig számolunk."
-#    commands:
-#    -   name: "for"
-#        explanation: "Ez egy példa a `for` utasításra"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'körök száma: ' i ' a számlálás: ' j
-#    -   name: "if"
-#        explanation: "Ugyanezt megtehetjük `if` utasítással"
-#        demo_code: |-
-#            szin is kék
-#            szinketto is sárga
-#            if szin is kék:
-#                if szinketto is sárga:
-#                    print 'Együtt zöld!'
 12:
     start_code: |
         kor is ask 'Hány éves vagy?'
@@ -444,36 +389,30 @@
 
 14:
     start_code: |-
-        meg_mindig_itt_vagy is False
-        meg_mindig_itt_vagy is input('Itt vagy még? igen vagy nem?')
-        if meg_mindig_itt_vagy is igen:
-          meg_mindig_itt_vagy is True
-        if meg_mindig_itt_vagy is True:
-          print('Szia!')
-        if meg_mindig_itt_vagy is False:
-          print('Viszlát!')
-    intro_text: |-
-        Most egy `True` vagy `False` változó készítéséről beszélünk (Igaz vagy Hamis), a
-        változóknak lehet a `True` és  `False` értékeket adni. Ezt felhasználhatod egy adott
-        válasz nyomon követésére.
+        gyumolcs is ['alma', 'banán', 'cseresznye']
+        print gyumolcs 
+    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
     commands:
-    -   name: "Példa"
-        explanation: |-
-            Ebben a példában az `True` és `False` kifejezéseket használjuk a kérdésre adott válasz
-            nyomon követésére. Ötször válaszolhatsz. Ha a válasz helyes, a jo_valasz értéke `True`
-        example: "jo_valasz is `False`"
+    -   name: "Szögletes zárójel listák körül"
+        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
+        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
         demo_code: |-
-            for i in range(1,5):
-                jo_valasz is False
-                valasz is input('Mennyi 5*5')
-                if valasz is 25:
-                    jo_valasz is True
-                else:
-                    jo_valasz is False
-                if jo_valasz is True:
-                    print('Ez helyes!')
-                if jo_valasz is False:
-                    print('Hibás ' 5-i ' kísérlet van hátra')
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            print gyumolcs 
+    -   name: "Vegyünk ki egy elemet a listából"
+        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
+        example: "Példa: elsogyumolcs is gyumolcs[1]"
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            elsogyumolcs is gyumolcs[1]
+            print gyumolcs 
+    -   name: "Elem véletlenszerű kiválasztása listából"
+        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
+        example: "Példa: veletlengyumolcs is gyumolcs[random]"
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            veletlengyumolcs is gyumolcs[random]
+            print veletlengyumolcs 
 15:
     start_code: |
         meg_itt_vagy is False
@@ -542,22 +481,6 @@
             # Ez Hedy-ben készült
             # Ez nem csinál mást mint kiírja Szia
             print('szia!')
-19:
-    start_code: |-
-        lista is ['első', 'második', 'harmadik']
-        masodikertek is lista[2]
-        print(masodikertek)
-    intro_text: Ha van egy listánk, akkor kivehetünk egy adott értéket a listából. Ha a második elemet akarjuk kivenni a listából, akkor beírjuk a `lista [2]` parancsot.
-    commands:
-    -   name: Számolás
-        explanation: Összegezhetjük az egy listában szereplő összes értéket is
-        example: lista[1]
-        demo_code: |-
-            lista is ['1', '2', '3']
-            osszeg is lista[1] + lista[2]
-            osszeg is osszeg + lista[3]
-            # itt 6-ra számítunk
-            print(osszeg)
 20:
     start_code: |-
         gyumolcs is ['alma', 'banán', 'cseresznye']
@@ -614,29 +537,37 @@
                 print('Ez helyes')
             else:
                 print('Ó nem, ez hibás!')
-#13-old:
-#    start_code: |-
-#        gyumolcs is ['alma', 'banán', 'cseresznye']
-#        print(gyumolcs)
-#    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
-#    commands:
-#    -   name: "Szögletes zárójel listák körül"
-#        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
-#        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
-#        demo_code: |-
-#            gyumolcs is ['alma', 'banán', 'cseresznye']
-#            print(gyumolcs)
-#    -   name: "Vegyünk ki egy elemet a listából"
-#        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
-#        example: "Példa: elsogyumolcs is gyumolcs[1]"
-#        demo_code: |-
-#            gyumolcs is ['alma', 'banán', 'cseresznye']
-#            elsogyumolcs is gyumolcs[1]
-#            print(gyumolcs)
-#    -   name: "Elem véletlenszerű kiválasztása listából"
-#        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
-#        example: "Példa: veletlengyumolcs is gyumolcs[random]"
-#        demo_code: |-
-#            gyumolcs is ['alma', 'banán', 'cseresznye']
-#            veletlengyumolcs is gyumolcs[random]
-#            print(veletlengyumolcs)
+colon:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Aki bújt, aki nem, megyek!'
+    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
+    commands:
+    -   name: "for ezzel:"
+        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print 'Aki bújt, aki nem, megyek!'
+    -   name: "if ezzel:"
+        explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
+        example: "if szin is zöld:'"
+        demo_code: |-
+            szin is zöld
+            if szin is zöld:
+                print 'a szín zöld'
+            else:
+                print 'A szin nem zöld'
+    -   name: "(Optional) elif"
+        explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a értéke 1'
+            elif a is 2:
+                print 'a értéke 2'
+            else:
+                print 'a értéke nem 1 vagy 2'
