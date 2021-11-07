@@ -91,6 +91,9 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
     t.speed(3)
 """)
 
+# Preamble that will be used for non-Turtle programs
+NORMAL_PREFIX_CODE = "# coding=utf8\nimport random\n"
+
 def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
 
@@ -304,23 +307,21 @@ def parse():
     try:
         hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
         with querylog.log_time('transpile'):
-            transpile_result = hedy.transpile(code, level)
-            python_code = transpile_result.code
-            has_turtle = transpile_result.has_turtle
 
-        response['has_turtle'] = has_turtle
-        if has_turtle:
-            response["Code"] = TURTLE_PREFIX_CODE + python_code
+            try:
+                transpile_result = hedy.transpile(code, level)
+            except hedy.exceptions.FtfyException as ex:
+                # The code was fixed with a warning
+                response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                transpile_result = ex.fixed_result
+
+        if transpile_result.has_turtle:
+            response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
+            response['has_turtle'] = True
         else:
-            response["Code"] = "# coding=utf8\nimport random\n" + python_code
+            response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
 
-    except hedy.InvalidSpaceException as ex:
-        traceback.print_exc()
-        response = invalid_space_error_to_response(ex, hedy_errors)
-    except hedy.ParseException as ex:
-        traceback.print_exc()
-        response = parse_error_to_response(ex, hedy_errors)
-    except hedy.HedyException as ex:
+    except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
 
@@ -345,31 +346,16 @@ def parse():
 
     return jsonify(response)
 
-def invalid_space_error_to_response(ex, translations):
-    warning = translate_error(ex.error_code, translations, vars(ex))
-    if ex.has_turtle:
-        code = TURTLE_PREFIX_CODE + ex.fixed_code
-    else:
-        code = "# coding=utf8\nimport random\n" + ex.fixed_code
-    return {"Code": code, "Warning": warning}
-
-def parse_error_to_response(ex, translations):
-    if ex.keyword_found is not None:
-        # If we find an invalid keyword, place it in the same location in the error message but without translating
-        ex.character_found = ex.keyword_found
-    error_message = translate_error(ex.error_code, translations, vars(ex))
-    location = ex.location if hasattr(ex, "location") else None
-    return {"Error": error_message, "Location": location}
-
-arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
-
 def hedy_error_to_response(ex, translations):
-    error_message = translate_error(ex.error_code, translations, ex.arguments)
-    location = ex.location if hasattr(ex, "location") else None
-    return {"Error": error_message, "Location": location}
+    return {
+        "Error": translate_error(ex.error_code, translations, ex.arguments),
+        "Location": ex.error_location
+    }
 
 
 def translate_error(code, translations, arguments):
+    arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
+
     # fetch the error template
     error_template = translations[code]
 

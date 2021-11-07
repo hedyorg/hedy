@@ -54,7 +54,7 @@ class TestsLevel4(HedyTester):
     #this code has a space at the end of line 2
     code = textwrap.dedent("""\
     a is 2
-    if a is 1 print a 
+    if a is 1 print a
     else print 'nee'""")
 
     result = hedy.transpile(code, self.level)
@@ -89,7 +89,7 @@ class TestsLevel4(HedyTester):
     )
 
   def test_identifies_backtick_inside_conditional(self):
-    self.assertRaises(hedy.UnquotedTextException, lambda: hedy.transpile("if 1 is 1 print `yay!` else print `nay`", self.level))
+    self.assertRaises(hedy.exceptions.UnquotedTextException, lambda: hedy.transpile("if 1 is 1 print `yay!` else print `nay`", self.level))
 
 
   # turn forward
@@ -183,7 +183,7 @@ class TestsLevel4(HedyTester):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
-    if naam is Hedy print 'leuk'     
+    if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
@@ -265,7 +265,7 @@ class TestsLevel4(HedyTester):
     if option is Scissors
         print 'Its a tie!'""")
 
-    with self.assertRaises(hedy.ParseException) as context:
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Parse', context.exception.error_code)
   def test_if_print_has_no_turtle(self):
@@ -281,7 +281,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      exception=hedy.InvalidCommandException,
+      exception=hedy.exceptions.InvalidCommandException,
       test_name=self.name()
     )
 
@@ -290,7 +290,7 @@ class TestsLevel4(HedyTester):
   def test_pront_should_suggest_print(self):
     code = "pront 'Hedy is leuk!'"
 
-    with self.assertRaises(hedy.InvalidCommandException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
     self.assertEqual('<span class="command-highlighted">print</span>', str(context.exception.arguments['guessed_command']))
@@ -302,7 +302,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      exception=hedy.UnquotedTextException,
+      exception=hedy.exceptions.UnquotedTextException,
       test_name=self.name()
     )
 
