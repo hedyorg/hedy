@@ -86,11 +86,11 @@ class Database:
 
     def user_by_username(self, username):
         """Return a user object from the username."""
-        return USERS.get({'username': username})
+        return USERS.get({'username': username.strip().lower()})
 
     def user_by_email(self, email):
         """Return a user object from the email address."""
-        return USERS.get({'email': email})
+        return USERS.get({'email': email.strip().lower()})
 
     def get_token(self, token_id):
         """Load a token from the database."""
