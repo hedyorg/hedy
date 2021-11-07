@@ -7,8 +7,9 @@ def transform_level_defaults(transformations):
   output_path = '../coursedata/level-defaults-transformed/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
-  for yaml_filesname_without_path in yaml_filesnames:
 
+  for yaml_filesname_without_path in yaml_filesnames:
+    file_transformed = False
     yaml_filesname_with_path = os.path.join(input_path, yaml_filesname_without_path)
 
     yaml_dict = utils.load_yaml_rt(yaml_filesname_with_path)
@@ -18,9 +19,11 @@ def transform_level_defaults(transformations):
         if level == old_level:
           transformed_dict[new_level] = transformed_dict[old_level]
           del transformed_dict[old_level]
+          file_transformed = True
 
-    with open(output_path + yaml_filesname_without_path, 'w') as f:
-      f.write(utils.dump_yaml_rt(transformed_dict))
+    if file_transformed:  #only write updated files
+      with open(output_path + yaml_filesname_without_path, 'w') as f:
+        f.write(utils.dump_yaml_rt(transformed_dict))
 
 def transform_adventures(transformations):
   input_path = '../coursedata/adventures'
@@ -29,6 +32,7 @@ def transform_adventures(transformations):
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
   for yaml_filesname_without_path in yaml_filesnames:
+    file_transformed = False
     yaml_filesname_with_path = os.path.join(input_path, yaml_filesname_without_path)
 
     yaml_dict = utils.load_yaml_rt(yaml_filesname_with_path)
@@ -40,19 +44,21 @@ def transform_adventures(transformations):
           if level == old_level:
             transformed_dict['adventures'][akey]['levels'][new_level] = transformed_dict['adventures'][akey]['levels'][old_level]
             del transformed_dict['adventures'][akey]['levels'][old_level]
+            file_transformed = True
 
-    with open(output_path + yaml_filesname_without_path, 'w') as f:
-      f.write(utils.dump_yaml_rt(transformed_dict))
+    if file_transformed: #only write updated files
+      with open(output_path + yaml_filesname_without_path, 'w') as f:
+        f.write(utils.dump_yaml_rt(transformed_dict))
 
 def transform_levels_in_all_YAMLs(transformations):
   # Set the current directory to the root Hedy folder
   os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-  # transform_level_defaults(transformations)
-  transform_adventures(transformations)
+  transform_level_defaults(transformations)
+  # transform_adventures(transformations)
 
 
 
 
 
-tranformations = [(5, 17)]
+tranformations = [(22, "z"), (23, "zz")]
 transform_levels_in_all_YAMLs(tranformations)
