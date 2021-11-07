@@ -1451,7 +1451,8 @@ def merge_grammars(grammar_text_1, grammar_text_2):
 def create_grammar(level):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
-
+    keys = get_keywords_for_language("en")
+    result = merge_grammars(result, keys)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
@@ -1485,6 +1486,13 @@ def get_additional_rules_for_level(level, sub = 0):
 def get_full_grammar_for_level(level):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "level" + str(level) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
+
+def get_keywords_for_language(language):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "keywords-" + str(language) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
