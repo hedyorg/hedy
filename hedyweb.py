@@ -32,7 +32,7 @@ class Translations:
 
 
 def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
-  user = session.get('user', {'username': '', 'email': ''})
+  user = current_user()
 
   if not level_defaults:
     return utils.page_404 (translations, menu, user['username'], lang, translations.get_translations (lang, 'ui').get ('no_such_level'))
