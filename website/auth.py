@@ -45,16 +45,16 @@ def current_user(request):
                 return user
     return {'username': '', 'email': ''}
 
-def is_admin(request):
-    user = current_user(request)
-    return user['username'] == os.getenv('ADMIN_USER') or user['email'] == os.getenv('ADMIN_USER')
+def is_admin(user):
+    admin_user = os.getenv('ADMIN_USER')
+    return user['username'] == admin_user or user['email'] == admin_user
 
-def is_teacher(request):
-    user = current_user(request)
-    return bool('is_teacher' in user and user['is_teacher'])
+def is_teacher(user):
+    # the `is_teacher` field is either `0`, `1` or not present.
+    return bool(user.get('is_teacher', False))
 
 def update_is_teacher(user, is_teacher_value=1):
-    user_is_teacher = 'is_teacher' in user and user['is_teacher']
+    user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
@@ -460,7 +460,8 @@ def routes(app, database, requested_lang):
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
     def mark_as_teacher():
-        if not is_admin(request) and not is_testing_request(request):
+        user = session.get('user', {'username': '', 'email': ''})
+        if not is_admin(user) and not is_testing_request(request):
             return 'unauthorized', 403
 
         body = request.json
@@ -485,7 +486,8 @@ def routes(app, database, requested_lang):
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
     def change_user_email():
-        if not is_admin(request):
+        user = session.get('user', {'username': '', 'email': ''})
+        if not is_admin(user):
             return 'unauthorized', 403
 
         body = request.json
@@ -571,11 +573,12 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, lang, menu, request):
     if page == 'my-profile':
-        return render_template('profile.html', lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), current_page='my-profile')
+        return render_template('profile.html', lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, username=current_user(request)['username'], is_teacher=False, current_page='login')
+        return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
     if page == 'admin':
-        if not is_testing_request(request) and not is_admin(request):
+        user = session.get('user', {'username': '', 'email': ''})
+        if not is_testing_request(request) and not is_admin(user):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.

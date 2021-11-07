@@ -18,14 +18,14 @@ def routes (app, database, requested_lang):
     @app.route('/classes', methods=['GET'])
     @requires_login
     def get_classes (user):
-        if not is_teacher (request):
+        if not is_teacher(user):
             return 'Only teachers can retrieve classes', 403
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
     @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
-        if not is_teacher (request):
+        if not is_teacher(user):
             return 'Only teachers can retrieve classes', 403
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
@@ -45,12 +45,12 @@ def routes (app, database, requested_lang):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
     def create_class (user):
-        if not is_teacher (request):
+        if not is_teacher(user):
             return 'Only teachers can create classes', 403
 
         body = request.json
@@ -75,7 +75,7 @@ def routes (app, database, requested_lang):
     @app.route('/class/<class_id>', methods=['PUT'])
     @requires_login
     def update_class (user, class_id):
-        if not is_teacher (request):
+        if not is_teacher(user):
             return 'Only teachers can update classes', 403
 
         body = request.json
@@ -117,7 +117,7 @@ def routes (app, database, requested_lang):
                     return render_template ('class-already-joined.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), username=current_user (request) ['username'], is_teacher=is_teacher (request), current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
+        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
 
     @app.route('/class/<class_id>/join/<link>', methods=['GET'])
     @requires_login
