@@ -59,6 +59,43 @@ class TestDynamoAbstraction(unittest.TestCase):
       self.assertEqual(final['values'], set(['a', 'b', 'c']))
 
 
+class TestDynamoWithSortKeys(unittest.TestCase):
+  """Test that the operations work on a table with a sort key."""
+  def setUp(self):
+    self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', partition_key='id', sort_key='sort')
+
+  def test_put_and_get(self):
+    self.table.create(dict(
+      id='key',
+      sort='sort',
+      value='V',
+    ))
+
+    ret = self.table.get(dict(id='key', sort='sort'))
+    self.assertEqual(ret['value'], 'V')
+
+  def test_put_and_get_many(self):
+    # Insert in reverse order
+    self.table.create(dict(id='key', sort='b', value='B'))
+    self.table.create(dict(id='key', sort='a', value='A'))
+
+    # Get them back in the right order
+    ret = self.table.get_many(dict(id='key'))
+    self.assertEqual(ret, [
+      dict(id='key', sort='a', value='A'),
+      dict(id='key', sort='b', value='B'),
+    ])
+
+  def test_updates(self):
+    # Two updates to a record with a sort key
+    self.table.update(dict(id='key', sort='s'), dict(x='x'))
+    self.table.update(dict(id='key', sort='s'), dict(y='y'))
+
+    print(self.table.storage.tables)
+
+    ret = self.table.get(dict(id='key', sort='s'))
+    self.assertEqual(ret, dict(id='key', sort='s', x='x', y='y'))
+
 def try_to_delete(filename):
   if os.path.exists(filename):
     os.unlink(filename)

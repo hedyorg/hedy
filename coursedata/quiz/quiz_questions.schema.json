@@ -8,7 +8,7 @@
       "description": "Level number of the quiz"
     },
     "questions": {
-      "type": "array",
+      "type": "object",
       "description": "Questions for the Hedy Quiz, key/value map",
       "additionalProperties": {
         "$ref": "#/Question"
@@ -31,44 +31,44 @@
       "mp_choice_options": {
         "type": "array",
         "items": {
-          "type": "string",
-          "minItems": 2,
-          "uniqueItems": true
+          "$ref": "#/Option"
         }
-      },
-      "correct_answer": {
-        "type": "string",
-        "enum": [
-          "A",
-          "B",
-          "C",
-          "D"
-        ]
-      },
-      "hint": {
-        "type": "string"
-      },
-      "question_score": {
-        "type": "integer"
       }
+    },
+    "correct_answer": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "hint": {
+      "type": "string"
+    },
+    "question_score": {
+      "type": "integer"
     },
     "required": [
       "mp_choice_options",
       "correct_answer",
       "question_score"
-    ],
-    "anyOf": [
-      {
-        "required": [
-          "option_text"
-        ]
+    ]
+  },
+  "Option": {
+    "type": "object",
+    "properties": {
+      "option_text": {
+        "type": "string"
       },
-      {
-        "required": [
-          "code"
-        ]
+      "code": {
+        "type": "string"
+      },
+      "feedback": {
+        "type": "string"
       }
-    ],
+    },
     "additionalProperties": false
   }
 }

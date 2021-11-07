@@ -8,7 +8,50 @@ TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
 
+# Information on quizzes. We will update this record in-place as the user completes
+# more of the quiz. The database is formatted like this:
+#
+# { user -> [ { levelAttempt [SORT KEY],
+#               user,
+#               level,
+#               date,
+#               q1: ["A", "A", "C"],
+#               q2: ["B", "C"],
+#               ...
+#               correct: { 1, 5, 10 }
+#             } }
+#
+# We will add to the q1, q2, q3... sets as the user submits answers, and add to the
+# 'correct' set as users submit correct answers.
+#
+# 'levelAttempt' is a combination of level and attemptId, to distinguish attempts
+# by a user. 'level' is padded to 4 characters, then attemptId is added.
+#
+QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
+
 class Database:
+    def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
+        """Update the current quiz record with a new answer.
+
+        Uses a DynamoDB update to add to the exising record.
+        """
+        key = {
+            "user": username,
+            "levelAttempt": str(level).zfill(4) + '_' + attempt_id,
+        }
+
+        updates = {
+            "attemptId": attempt_id,
+            "level": level,
+            "date": timems(),
+            "q" + str(question_number): dynamo.DynamoAddToList(answer),
+        }
+
+        if is_correct:
+            updates['correct'] = dynamo.DynamoAddToNumberSet(int(question_number))
+
+        return QUIZ_ANSWERS.update(key, updates)
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
@@ -120,11 +163,11 @@ class Database:
         """Return all the classes belonging to a teacher."""
         classes = None
         if dynamo.is_dynamo_available ():
-            classes = CLASSES.get_many({'teacher': username})
+            classes = CLASSES.get_many({'teacher': username}, reverse=True)
         # If we're using the in-memory database, we need to make a shallow copy of the classes before changing the `students` key from a set to list, otherwise the field will remain a list later and that will break the set methods.
         else:
             classes = []
-            for Class in CLASSES.get_many({'teacher': username}):
+            for Class in CLASSES.get_many({'teacher': username}, reverse=True):
                 classes.append (Class.copy())
         if students_to_list:
             for Class in classes:
@@ -137,7 +180,7 @@ class Database:
     def get_teacher_students(self, username):
         """Return all the students belonging to a teacher."""
         students = []
-        classes = CLASSES.get_many({'teacher': username})
+        classes = CLASSES.get_many({'teacher': username}, reverse=True)
         for Class in classes:
             for student in Class.get ('students', []):
                 if student not in students:

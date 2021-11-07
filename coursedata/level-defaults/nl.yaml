@@ -25,7 +25,7 @@
         example: "Bijvoorbeeld: echo dus je lievelingskleur is"
         demo_code: |-
             ask Wat is je lievelingskleur?
-            echo dus je lievelingskleur is 
+            echo dus je lievelingskleur is
     -   name: "forward"
         explanation: "Een lijn trekken met `forward`."
         example: "Bijvoorbeeld: forward 100"
@@ -271,9 +271,9 @@
                 print 'pizza is lekkerder'
     intro_text: |
         In dit level kun je niet alleen meerdere regels gebruiken bij `if` en `repeat`, maar je kunt ze ook nog eens in elkaar zetten!
-        In het voorbeeldje zie je een if commando in een repeat commando staan. Andersom mag het ook en een if mag ook in een if en een repeat in een repeat. 
+        In het voorbeeldje zie je een if commando in een repeat commando staan. Andersom mag het ook en een if mag ook in een if en een repeat in een repeat.
         Probeer het maar eens!
-        
+
         ## Voorbeeld Hedy code
         ```
         repeat 3 times
@@ -331,9 +331,7 @@
         for i in range 1 to 10
             print i
         print 'Wie niet weg is is gezien'
-    intro_text:
-        We gaan nu een extra vorm van de `for` toevoegen! Je mag ook `for i in range 1 to 5` typen in plaats van `repeat 5 times`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken!
-        Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
+    intro_text: We gaan nu een extra vorm van de `for` toevoegen! Je mag ook `for i in range 1 to 5` typen in plaats van `repeat 5 times`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
 
     commands:
     -   name: "for met i"
@@ -398,139 +396,81 @@
             print 'Tweeenhalf plus tweeenhalf is...'
             print antwoord
 
-#10:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
-#    commands:
-#    -   name: "for met :"
-#        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moeten hetzelfde doen met al onze `if` statements"
-#        example: "if kleur is groen:"
-#        demo_code: |-
-#            kleur is groen
-#            if kleur is groen:
-#                print 'De kleur is groen'
-#            else:
-#                print 'De kleur is niet groen'
-#    -   name: "(Optioneel) elif"
-#        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is niet 1 of 2'
-#11:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'we zitten nu in rondje: ' i ' en de tel is: ' j
-#    intro_text: "Vanaf nu mogen we ook een loopje vaker uitvoeren. In het voorbeeld tellen we 3 maal tot 5. Dus we doen 3 rondjes en tellen elke keer tot 5"
-#    commands:
-#    -   name: "for onder elkaar"
-#        explanation: "Dit is een voorbeeld van for loopjes onder/in elkaar zetten"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'we zitten nu in rondje: ' i ' en de tel is: ' j
-#    -   name: "if onder elkaar"
-#        explanation: "We kunnen hetzelfde doen met if statements"
-#        demo_code: |-
-#            kleur is blauw
-#            kleurtwee is geel
-#            if kleur is blauw:
-#                if kleurtwee is geel:
-#                    print 'Samen is dit groen!'
-#12:
-#    start_code: |-
-#        leeftijd is input('Hoe oud ben jij?')
-#        print('Dus jij hebt zo veel verjaardagen gehad:')
-#        for i in range(0, leeftijd):
-#            print(i)
-#    intro_text: "We gaan nu ronde haakjes toevoegen en ask veranderen! Ask noemen we nu input! Bij print, input en for gaan we nu haakjes zetten!"
-#    commands:
-#    -   name: "Print"
-#        explanation: "We gaan nu haakjes om print heen zetten!"
-#        example: "Bijvoorbeeld: print('Hallo Wereld')"
-#        demo_code: "print('Hallo Wereld')"
-#    -   name: "Ask naar input!"
-#        explanation: "We zetten ask om en noemen het nu input, ook zetten we haakjes er omheen"
-#        example: "Bijvoorbeeld: naam is input('Hoe heet jij?')"
-#        demo_code: |-
-#            naam is input('Hoe heet jij?')
-#            print('Dus jij heet ' naam)
-#    -   name: "For met haakjes"
-#        explanation: "We gaan nu in plaats van for i in range 1 to 10, haakjes zetten om de getallen. for i in range(0, 10):"
-#        example: "Bijvoorbeeld: for i in range(0, 10):"
-#        demo_code: |-
-#            for i in range(0, 10):
-#                print(i)
-#            print('Wie niet weg is is gezien')
-#13:
-#    start_code: |-
-#        fruit is ['appel', 'banaan', 'kers']
-#        print(fruit)
-#    intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
-#    commands:
-#    -   name: "Haakjes om lijstjes"
-#        explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
-#        example: "Bijvoorbeeld: fruit is ['appel', 'banaan', 'kers']"
-#        demo_code: |-
-#            fruit is ['appel', 'banaan', 'kers']
-#            print(fruit)
-#    -   name: "Pak iets uit een lijst"
-#        explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
-#        example: "Bijvoorbeeld: eerstefruit is fruit[1]"
-#        demo_code: |-
-#            fruit is ['banaan', 'appel', 'kers']
-#            eerstefruit is fruit[1]
-#            print(eerstefruit)
-#    -   name: "Pak een random item uit een lijst"
-#        explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] is pak een random fruit uit de lijst!"
-#        example: "Bijvoorbeeld: randomfruit is fruit[random]"
-#        demo_code: |-
-#            fruit is ['banaan', 'appel', 'kers']
-#            randomfruit is fruit[random]
-#            print(randomfruit)
-#14:
-#    start_code: |-
-#        je_bent_er_nog is False
-#        ben_je_er_nog is input('ben je er nog? ja of nee?')
-#        if ben_je_er_nog is ja:
-#            je_bent_er_nog is True
-#        if je_bent_er_nog is True:
-#            print('Hallo!')
-#        if je_bent_er_nog is False:
-#            print('Doei!')
-#    intro_text: "We gaan nu het hebben over waar en niet waar, je kan een variabele op waar zetten (`True`) en op niet waar zetten: (`False`). Dit kan je bijvoorbeeld gebruiken om bij te houden of je al iets heb gedaan."
-#    commands:
-#      - name: "Voorbeeld"
-#        explanation: "Hierbij een voorbeeldje van een vraag om een rekensom te beantwoorden. Je mag 5 keer antwoord geven. Als het goed is, maakt het goed_antwoord `True` (dus waar)"
-#        example: "goed_antwoord is `False`"
-#        demo_code: |-
-#            for i in range(0, 5):
-#                goed_antwoord is False
-#                antwoord is input('Wat is 5*5')
-#                if antwoord is 25:
-#                    goed_antwoord is True
-#                else:
-#                    goed_antwoord is False
-#                if goed_antwoord is True:
-#                    print('Dat is goed!')
-#                if goed_antwoord is False:
-#                    print('Dat is fout! Nog ' 5-i ' pogingen over')
+12:
+    start_code: |-
+        leeftijd is ask 'Hoe oud ben jij?'
+        if leeftijd < 13
+            print 'Dan ben je jonger dan ik!'
+        else
+            print 'Dan ben je ouder dan ik!'
+    intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
+    commands:
+    -   name: "Kleiner"
+        explanation: "De `<` kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 15 gebruik je `variabele < 15`"
+        example: "Bijvoorbeeld: leeftijd < 13"
+        demo_code: |-
+            leeftijd is ask 'Hoe oud ben jij?'
+            if leeftijd < 13
+                print 'Dan ben je jonger dan ik!'
+    -   name: "Groter"
+        explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je `variabele > 15`"
+        example: "Bijvoorbeeld: leeftijd > 13"
+        demo_code: |-
+            leeftijd is ask 'Hoe oud ben jij?'
+            if leeftijd > 13
+                print 'Dan ben je ouder dan ik!'
+13:
+    start_code: |-
+        antwoord is 0
+        while antwoord != 25
+            antwoord is ask 'Wat is 5 keer 5?'
+        print 'Goed gedaan!'
+    intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
+    commands:
+    -   name: "While"
+        explanation: "We kunnen dus een `while` loop gebruiken"
+        example: "Bijvoorbeeld: while antwoord is != 25"
+        demo_code: |-
+            antwoord is 0
+            while antwoord != 25
+                antwoord is ask 'Wat is 5 keer 5?'
+            print 'Goed gedaan!'
+    -   name: "Smaller while"
+        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
+        example: "Bijvoorbeeld: while tel < 3"
+        demo_code: |-
+            tel is 1
+            while tel < 3
+                print 'Dit is de ' tel 'e keer'
+                tel is tel + 1
+            print 'We zijn klaar'
+
+14:
+    start_code: |-
+        fruit is ['appel', 'banaan', 'kers']
+        print fruit 
+    intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
+    commands:
+    -   name: "Haakjes om lijstjes"
+        explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
+        example: "Bijvoorbeeld: fruit is ['appel', 'banaan', 'kers']"
+        demo_code: |-
+            fruit is ['appel', 'banaan', 'kers']
+            print fruit 
+    -   name: "Pak iets uit een lijst"
+        explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst !"
+        example: "Bijvoorbeeld: eerstefruit is fruit[1]"
+        demo_code: |-
+            fruit is ['banaan', 'appel', 'kers']
+            eerstefruit is fruit[1]
+            print eerstefruit 
+    -   name: "Pak een random item uit een lijst"
+        explanation: "Om een random item uit een lijst te pakken, gebruiken we [random]. Dus fruit[random] is pak een random fruit uit de lijst!"
+        example: "Bijvoorbeeld: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['banaan', 'appel', 'kers']
+            randomfruit is fruit[random]
+            print randomfruit 
 #15:
 #    start_code: |-
 #        je_bent_er_nog is False
@@ -584,77 +524,6 @@
 #            # Het is gemaakt in Hedy
 #            # Het doet eigenlijk verder niets!
 #            print('hallo!')
-#17:
-#    start_code: |-
-#        leeftijd is input('Hoe oud ben jij?')
-#        if leeftijd < 13:
-#            print('Dan ben je jonger dan ik!')
-#        elif leeftijd > 13:
-#            print('Dan ben je ouder dan ik!')
-#    intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
-#    commands:
-#    -   name: "Kleiner"
-#        explanation: "De `<` kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 15 gebruik je `variabele < 15`"
-#        example: "Bijvoorbeeld: leeftijd < 12"
-#        demo_code: |-
-#            leeftijd is input('Hoe oud ben jij?')
-#            if leeftijd < 13:
-#                print('Dan ben je jonger dan ik!')
-#    -   name: "Groter"
-#        explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je `variabele > 15`"
-#        example: "Bijvoorbeeld: leeftijd > 12"
-#        demo_code: |-
-#            leeftijd is input('Hoe oud ben jij?')
-#            if leeftijd > 13:
-#                print('Dan ben je ouder dan ik!')
-#18:
-#    start_code: |-
-#        goed_antwoord is False
-#        # we gaan door totdat een goed antwoord is gegeven!
-#        while goed_antwoord is False:
-#            antwoord is input('Wat is 5 keer 5?')
-#            if antwoord is 25:
-#                goed_antwoord is True
-#                print('Er is een goed antwoord gegeven')
-#    intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
-#    commands:
-#    -   name: "Boolean while"
-#        explanation: "We kunnen dus een `while` loop gebruiken met de `True` en `False`"
-#        example: "Bijvoorbeeld: while goed_antwoord is False"
-#        demo_code: |-
-#            goed_antwoord is False
-#            # we gaan door totdat een goed antwoord is gegeven!
-#            while goed_antwoord is False:
-#                antwoord is input('Wat is 5 keer 5?')
-#                if antwoord is 25:
-#                    goed_antwoord is True
-#                    print('Er is een goed antwoord gegeven')
-#    -   name: "Smaller while"
-#        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
-#        example: "Bijvoorbeeld: while tel < 3"
-#        demo_code: |-
-#            tel is 1
-#            # we gaan door totdat tel 3 is!
-#            while tel < 3:
-#                print('Dit is de ' tel 'e keer')
-#                tel is tel + 1
-#            print('We zijn klaar')
-#19:
-#    start_code: |-
-#        lijst is ['eerste', 'tweede', 'derde']
-#        tweedewaarde is lijst[2]
-#        print(tweedewaarde)
-#    intro_text: "Bij een lijst kan je een specifieke waarde pakken. Stel je wilt het tweede ding in de lijst hebben, dan typ je `lijst[2]`."
-#    commands:
-#    -   name: "Optellen"
-#        explanation: "We kunnen bijvoorbeeld alles bij elkaar optellen"
-#        example: "lijst[1]"
-#        demo_code: |-
-#            lijst is ['1', '2', '3']
-#            optellen is lijst[1] + lijst[2]
-#            optellen is optellen + lijst[3]
-#            # we verwachten hier 6
-#            print(optellen)
 #20:
 #    start_code: |-
 #        fruit is ['appel', 'banaan', 'kers']
@@ -710,44 +579,38 @@
 #                print('Dat is goed!')
 #            else:
 #                print('Helaas dat is fout!')
-#22:
+
+#colon:
 #    start_code: |-
-#        land = input('In welk land woon jij?')
-#        if land != Nederland:
-#            print('Cool!')
-#        else:
-#            print('Ik kom ook uit Nederland!')
-#    intro_text: "We gaan een nieuw teken leren, de `!=` . De ! betekent niet en de = betekent gelijk dus != is niet gelijk. Als voorbeeldje is 5 != 4."
+#        for i in range 1 to 10:
+#            print i
+#        print 'Wie niet weg is is gezien'
+#    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
 #    commands:
-#    -   name: "Niet gelijk"
-#        explanation: "Als we gaan kijken of dingen anders zijn, gebruiken we dus `!=`"
-#        example: "Bijvoorbeeld: 5+3 != 9"
+#    -   name: "for met :"
+#        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
+#        example: "for i in range 1 to 10:"
 #        demo_code: |-
-#            getal = input('Je mag geen 5 zeggen, wat is een leuk getal?')
-#            if getal != 5:
-#                print('Goed zo!')
+#            for i in range 1 to 10:
+#                print i
+#            print 'wie niet weg is is gezien'
+#    -   name: "if met :"
+#        explanation: "We moeten hetzelfde doen met al onze `if` statements"
+#        example: "if kleur is groen:"
+#        demo_code: |-
+#            kleur is groen
+#            if kleur is groen:
+#                print 'De kleur is groen'
 #            else:
-#                print('Fout! Je mocht geen 5 zeggen')
-#23:
-#    start_code: |-
-#        leeftijd = input('Ik ben 12 jaar, hoe oud ben jij?')
-#        if leeftijd <= 12:
-#            print('Dan ben je jonger dan ik!')
-#        elif leeftijd >= 14:
-#            print('Dan ben je ouder dan ik!')
-#    intro_text: "Nu gaan we < en = combineren. Als we willen kijken of iets kleiner of gelijk aan het tweede getal is dan gebruiken we `<=`. Hetzelfde kunnen we doen met `>=`"
-#    commands:
-#    -   name: "Kleiner gelijk"
-#        explanation: "De `<=` kijkt dus of het eerste getal kleiner of gelijk is aan het tweede getal. Dus 5 < 5 is niet waar want 5 is niet kleiner dan 5 maar 5 <= 5 is wel waar want 5 is gelijk aan 5. 6 <= 5 is dus niet waar."
-#        example: "Bijvoorbeeld: leeftijd <= 12"
+#                print 'De kleur is niet groen'
+#    -   name: "(Optioneel) elif"
+#        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
+#        example: "elif a is 5:"
 #        demo_code: |-
-#            leeftijd = input('Ik ben 13 jaar, hoe oud ben jij?')
-#            if leeftijd <= 13:
-#                print('Dan ben je jonger dan ik!')
-#    -   name: "Groter gelijk"
-#        explanation: "De `>=` kijkt dus of het eerste getal groter of gelijk is aan het tweede getal. Dus 5 > 5 is niet waar want 5 is niet groter dan 5 maar 5 >= 5 is wel waar want 5 is gelijk aan 5. 4 >= 5 is dus niet waar."
-#        example: "Bijvoorbeeld: leeftijd >= 12"
-#        demo_code: |-
-#            leeftijd = input('Ik ben 11 jaar, hoe oud ben jij?')
-#            if leeftijd >= 13:
-#                print('Dan ben je ouder dan ik!')
+#            a is 2
+#            if a is 1:
+#                print 'a is 1'
+#            elif a is 2:
+#                print 'a is 2'
+#            else:
+#                print 'a is niet 1 of 2'
