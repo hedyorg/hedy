@@ -599,14 +599,7 @@ def auth_templates(page, lang, menu, request):
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
     if page == 'admin':
-        username = current_user()['username']
-
-        user = DATABASE.user_by_username(username)
-
-        if not user:
-            raise RuntimeError(f'Could not load user we find in session: {current_user()}')
-
-        if not is_testing_request(request) and not is_admin(user):
+        if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
