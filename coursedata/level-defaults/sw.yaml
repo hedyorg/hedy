@@ -132,30 +132,25 @@
             for i in range 1 to 10
               print i
             print 'Tayari au la, nakuja!'
-#10-old:
-#    start_code: "for i in range 1 to 10:\n    print i\nprint 'Tayari au la, nakuja!'"
-#    intro_text: "Sasa tutabadiliasha mfumo kidogo kuhusu ujazo(indent) mstari. Kama utaka ujazo kwenye mstari, tutatakiwa kutumia `:` kwenye mstari kinacho tokea kabla ya mstari ambapo tutaweka ujazo(indentataion)."
-#    commands:
-#    -   explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
-#    -   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
-#        example: "if rangi is kijani:'"
-#        demo_code: "rangi is kijani\nif rangi is kijani:\n    print 'Rangi ni ya Kijani'\nelse:\n    print 'Rangi sio ya Kijani'"
-#    -   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
-#        example: "elif a is 5:"
-#        demo_code: "a is 2\nif a is 1:\n    print 'a ni 1'\nelif a is 2:\n    print 'a ni 2'\nelse:\n    print 'a sio 1 wala 2'"
-#11-old:
-#    start_code: "for i in range 1 to 3:\n    for j in range 1 to 5:\n        print 'we are in round: ' i ' na tunahesabu : ' j"
-#    intro_text: "Kwanzia sasa, tunawe kurudia utekelezaji mara nyingi. Kwenya mfano, tumechapisha 1 hadi 5 mara 3. Tunatekeleza mzunguko tatu na kwa kila mzunguko, tunachapisha 1 hadi 5."
-#    commands:
-#    -   explanation: "Hii ni mfano ya jinsi ya kutumia kauli ya for"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#              for j in range 1 to 5:
-#                print 'tupo kwenye utekelezaji wa mzunguko: ' i ' na tunachapisha ' j
-#    -   explanation: "Tumaweza kutumia hi mfumo tukitumia kauli ya if"
-#        demo_code: "rangi is bluu\nrangiyapili is manjano\nif rangi is bluu:\n    if rangiyapili is manjano:\n        print 'Kwapamoja sisi ni kijani!'"
+14:
+    start_code: |-
+        matunda is ['embe', 'machungwa', 'ndizi']
+        print matunda 
+    intro_text: "Tutatumia mabano ya aina ya [ ] tukitaka kujenga orodha. Sasa tutatakiwa kutumia fungua semi na funga semi ya aina '' katika orodha(list). "
+    commands:
+    -   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
+        example: "Mfano: matunda is ['embe', 'machungwa', 'ndizi']"
+        demo_code: |-
+            matunda is ['embe', 'machungwa', 'ndizi']
+            print matunda 
+    -   name: "Chagua kitu kutoka kwenye orodha."
+        explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
+        example: "Mfano: matundayaywanya is matunda[1]"
+        demo_code: "matunda is ['embe', 'machungwa', 'ndizi']\nmatundayaywanya is matunda[1]\nprint matundayaywanya "
+    -   name: "Kuchagua matunda nasibu kutoka kwa orodha"
+        explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
+        example: "Mfano matundanasibu is matunda[random]"
+        demo_code: "matunda is ['embe', 'machungwa', 'ndizi']\nmatundanasibu is matunda[random]\nprint matundanasibu "
 #12-old:
 #    start_code: "umri is input('Una miaka mingapi?')\nprint('Kumbe umri wako in:')\nfor i in range(0,umri):\n    print(i)"
 #    intro_text: "Tutanza kutumia mabano na tutabadilike mfumo wa kutumia as! Tutatumia input badala ya ask. Mfumo wa tukumia print, input na for, tutatumia mabano ya aina ya ()."
@@ -169,22 +164,16 @@
 #    -   explanation: "Sasa tutatumia mabano katika mfumo wa tukumia kauli ya for. Tutaweka numberi yaliyo katika kauli ya for. for i in range (0,10):"
 #        example: "Mfano: for i in range(0,10):"
 #        demo_code: "for i in range(0,10):\n    print(i)\nprint('Tayari au la, nakuja!')"
-#13-old:
-#    start_code: |-
-#        matunda is ['embe', 'machungwa', 'ndizi']
-#        print(matunda)
-#    intro_text: "Tutatumia mabano ya aina ya [ ] tukitaka kujenga orodha. Sasa tutatakiwa kutumia fungua semi na funga semi ya aina '' katika orodha(list). "
+#colon:
+#    start_code: "for i in range 1 to 10:\n    print i\nprint 'Tayari au la, nakuja!'"
+#    intro_text: "Sasa tutabadiliasha mfumo kidogo kuhusu ujazo(indent) mstari. Kama utaka ujazo kwenye mstari, tutatakiwa kutumia `:` kwenye mstari kinacho tokea kabla ya mstari ambapo tutaweka ujazo(indentataion)."
 #    commands:
-#    -   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
-#        example: "Mfano: matunda is ['embe', 'machungwa', 'ndizi']"
-#        demo_code: |-
-#            matunda is ['embe', 'machungwa', 'ndizi']
-#            print(matunda)
-#    -   name: "Chagua kitu kutoka kwenye orodha."
-#        explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
-#        example: "Mfano: matundayaywanya is matunda[1]"
-#        demo_code: "matunda is ['embe', 'machungwa', 'ndizi']\nmatundayaywanya is matunda[1]\nprint(matundayaywanya)"
-#    -   name: "Kuchagua matunda nasibu kutoka kwa orodha"
-#        explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
-#        example: "Mfano matundanasibu is matunda[random]"
-#        demo_code: "matunda is ['embe', 'machungwa', 'ndizi']\nmatundanasibu is matunda[random]\nprint(matundanasibu)"
+#    -   explanation: "Tukitumia `for`, tunatakiwa kutumia pia `:` baada ya kauli ya `for`!"
+#        example: "for i in range 1 to 10:"
+#        demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
+#    -   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
+#        example: "if rangi is kijani:'"
+#        demo_code: "rangi is kijani\nif rangi is kijani:\n    print 'Rangi ni ya Kijani'\nelse:\n    print 'Rangi sio ya Kijani'"
+#    -   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
+#        example: "elif a is 5:"
+#        demo_code: "a is 2\nif a is 1:\n    print 'a ni 1'\nelif a is 2:\n    print 'a ni 2'\nelse:\n    print 'a sio 1 wala 2'"

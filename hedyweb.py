@@ -4,11 +4,11 @@ import attr
 import glob
 from os import path
 
-from flask import abort
+from flask import abort, session
 from flask_helpers import render_template
 
 import hedy_content
-from website.auth import current_user, is_teacher
+from website.auth import current_user, is_teacher 
 import re
 import utils
 from config import config
@@ -32,9 +32,10 @@ class Translations:
 
 
 def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
+  user = current_user()
 
   if not level_defaults:
-    return utils.page_404 (translations, menu, current_user(request) ['username'], lang, translations.get_translations (lang, 'ui').get ('no_such_level'))
+    return utils.page_404 (translations, menu, user['username'], lang, translations.get_translations (lang, 'ui').get ('no_such_level'))
 
 
   arguments_dict = {}
@@ -50,8 +51,8 @@ def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
   arguments_dict['auth'] = translations.get_translations (lang, 'Auth')
-  arguments_dict['username'] = current_user(request) ['username']
-  arguments_dict['is_teacher'] = is_teacher(request)
+  arguments_dict['username'] = user['username']
+  arguments_dict['is_teacher'] = is_teacher(user)
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name

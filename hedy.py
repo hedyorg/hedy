@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass, field
 
 # Some useful constants
-HEDY_MAX_LEVEL = 13
+HEDY_MAX_LEVEL = 14
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -1083,6 +1083,8 @@ def is_float(n):
         return True
     except ValueError:
         return False
+def is_random(s):
+    return 'random.choice' in s
 
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
@@ -1163,7 +1165,7 @@ class ConvertToPython_11(ConvertToPython_10):
         except UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 
-            if not (is_int(right_hand_side) or is_float(right_hand_side)):
+            if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise UnquotedAssignTextException(text = args[1])
 
         if len(args) == 2:
@@ -1223,6 +1225,35 @@ class ConvertToPython_13(ConvertToPython_12):
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
+@hedy_transpiler(level=14)
+class ConvertToPython_14(ConvertToPython_13):
+    def assign_list(self, args):
+        parameter = args[0]
+        values = [a for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+
+    def list_access_var(self, args):
+        var = hash_var(args[0])
+        if not isinstance(args[2], str):
+            if args[2].data == 'random':
+                return var + '=random.choice(' + args[1] + ')'
+        else:
+            return var + '=' + args[1] + '[' + args[2] + '-1]'
+
+    def list_access(self, args):
+        if args[1] == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            list_access_shifted = args[0] + '[' + args[1] + '-1]'
+            # when printing later, we need to know this is a var\
+            # todo (could be done in the AllAssignments?)
+            self.lookup.append(Assignment(list_access_shifted, 'operation'))
+            return list_access_shifted
+
+    def change_list_item(self, args):
+        return args[0] + '[' + args[1] + '-1] = ' + args[2]
+
+
 # @hedy_transpiler(level=10)
 # @hedy_transpiler(level=11)
 # class ConvertToPython_10_11(ConvertToPython_9):
@@ -1266,33 +1297,6 @@ class ConvertToPython_13(ConvertToPython_12):
 #         arguments = ''.join(args_new)
 #         return "print(f'" + arguments + "')"
 
-#     def assign_list(self, args):
-#         parameter = args[0]
-#         values = [a for a in args[1:]]
-#         return parameter + " = [" + ", ".join(values) + "]"
-#
-#     def list_access_var(self, args):
-#         var = hash_var(args[0])
-#         if not isinstance(args[2], str):
-#             if args[2].data == 'random':
-#                 return var + '=random.choice(' + args[1] + ')'
-#         else:
-#             return var + '=' + args[1] + '[' + args[2] + '-1]'
-#
-#     def list_access(self, args):
-#         if args[1] == 'random':
-#             return 'random.choice(' + args[0] + ')'
-#         else:
-#             list_access_shifted = args[0] + '[' + args[1] + '-1]'
-#             # when printing later, we need to know this is a var\
-#             # todo (could be done in the AllAssignments?)
-#             self.lookup.append(Assignment(list_access_shifted, 'operation'))
-#             return list_access_shifted
-#
-#     def change_list_item(self, args):
-#         return args[0] + '[' + args[1] + '-1] = ' + args[2]
-# # Custom transformer that can both be used bottom-up or top-down
-#
 # @hedy_transpiler(level=14)
 # class ConvertToPython_14(ConvertToPython_13):
 #     def print(self,args):
