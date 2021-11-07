@@ -139,8 +139,6 @@ def routes(app, database, requested_lang):
         if not check_password(body['password'], user['password']):
             return 'invalid username/password', 403
 
-        remember_current_user(user)
-
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
         if config['bcrypt_rounds'] != extract_bcrypt_rounds(user['password']):
@@ -153,9 +151,15 @@ def routes(app, database, requested_lang):
         else:
             DATABASE.record_login(user['username'])
         resp = make_response({})
+
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+
+        # Remember the current user on the session. This is "new style" logins, which should ultimately
+        # replace "old style" logins (with the cookie above), as it requires fewer database calls.
+        remember_current_user(user)
+
         return resp
 
     @app.route('/auth/signup', methods=['POST'])
