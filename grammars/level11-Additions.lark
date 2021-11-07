@@ -1,1 +1,10 @@
-// no grammar changes in this level
+
+//assigning a string now must be done with quotes
+
+assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
+
+?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
+
+invalid: "Supercalifragilisticexpialidocious" //should be deleted but this probably never matches anything :D
+textwithspaces: /(?:[^\n,' ]| (?!else))+/ -> text //anything can be parsed except for a newline and a comma for list separators, and now single quotes
+text_in_quotes: _SINGLE_QUOTE textwithspaces _SINGLE_QUOTE

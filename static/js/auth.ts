@@ -18,6 +18,7 @@ interface User {
   subscribe?: string;
   prog_experience?: 'yes' | 'no';
   experience_languages?: string[];
+  is_teacher?: string;
 }
 
 interface UserForm {
@@ -31,6 +32,10 @@ interface UserForm {
   mail_repeat?: string;
   password_repeat?: string;
   old_password?: string;
+}
+
+if (!(window as any).AuthMessages) {
+  throw new Error('On a page where you load this JavaScript, you must also load the "client_messages.js" script');
 }
 
 export const auth = {
@@ -74,7 +79,7 @@ export const auth = {
   },
   submit: function (op: string) {
     const values: UserForm = {};
-    $ ('form.auth *').map (function (_k, el) {
+    $ ('form.js-validated-form *').map (function (_k, el) {
       if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
     });
 
@@ -105,9 +110,10 @@ export const auth = {
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
         subscribe: $('#subscribe').prop('checked'),
+        is_teacher: $('#is_teacher').prop('checked'),
         prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
         experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map(() => $(this).val() as string).get()
+          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
 
@@ -163,7 +169,7 @@ export const auth = {
         gender: values['gender'],
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
         experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map(() => $(this).val() as string).get()
+          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
 
@@ -289,9 +295,13 @@ $.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
     (response.experience_languages || []).map (function (lang: string) {
        $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
     });
-    $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class: Class) {
-       return '<li>' + auth.entityify (Class.name) + '</li>';
-    }).join (''));
+    if (! jQuery.isEmptyObject(response.student_classes)) {
+      $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class: Class) {
+        return '<li>' + auth.entityify (Class.name) + '</li>';
+      }).join (''));
+    } else {
+      $ ('#student_classes').hide();
+    }
   }
 }).fail (function (_response) {
   if (window.location.pathname.indexOf ('/my-profile') !== -1) auth.redirect ('login');

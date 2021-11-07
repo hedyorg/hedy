@@ -5,7 +5,7 @@
 {% block message %}{% endblock %}
 
 <div class="w-full max-w-md text-center ml-auto mr-auto">
-  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
+  <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')">
     <h2 class="py-2">{{auth.login_long}}</h2>
     <div class="mb-4">
         <label for="username">{{auth.username}} / {{auth.email}}</label>
