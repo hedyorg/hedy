@@ -45,7 +45,7 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 #
 # The current user should be retrieved with `current_user` function since it will return a sane default.
 # You can remove the current user from the Flask session with the `forget_current_user`.
-def create_current_user(db_user):
+def remember_current_user(db_user):
     session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
 
