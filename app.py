@@ -444,8 +444,9 @@ def version_page():
         heroku_release_time=the_date,
         commit=commit)
 
-
 def programs_page(request):
+    print(session)
+    print(current_user())
     user = current_user()
     username = user['username']
     if not username:

@@ -117,7 +117,15 @@ def routes (app, database, requested_lang):
                     return render_template ('class-already-joined.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (), 'name': Class ['name']})
+        return render_template ('class-prejoin.html',
+            lang=requested_lang (),
+            auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'),
+            menu=render_main_menu('my-profile'),
+            current_page='my-profile',
+            class_info={
+                'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (),
+                'name': Class ['name'],
+            })
 
     @app.route('/class/<class_id>/join/<link>', methods=['GET'])
     @requires_login

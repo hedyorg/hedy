@@ -130,9 +130,9 @@ def routes(app, database, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
-            user = DATABASE.user_by_email(body['username'].strip().lower())
+            user = DATABASE.user_by_email(body['username'])
         else:
-            user = DATABASE.user_by_username(body['username'].strip().lower())
+            user = DATABASE.user_by_username(body['username'])
 
         if not user:
             return 'invalid username/password', 403
