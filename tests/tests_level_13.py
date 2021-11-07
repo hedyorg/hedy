@@ -13,7 +13,7 @@ class TestsLevel13(HedyTester):
       print 'Goed gedaan!'""")
     expected = textwrap.dedent("""\
     antwoord = 0
-    while str(antwoord) != str(\'25\'):
+    while str(antwoord).zfill(100)!=str(25).zfill(100):
       antwoord = input(\'Wat is 5 keer 5?\')
       try:
         antwoord = int(antwoord)
@@ -39,7 +39,7 @@ class TestsLevel13(HedyTester):
       print 'Hoog he?'""")
     expected = textwrap.dedent("""\
     getal = 0
-    while str(getal) < str('100000'):
+    while str(getal).zfill(100)<str(100000).zfill(100):
       getal = input('HOGER!!!!!')
       try:
         getal = int(getal)

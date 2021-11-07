@@ -19,7 +19,7 @@ class TestsLevel12(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if int(leeftijd) < int('12'):
+      if str(leeftijd).zfill(100)<str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
     self.multi_level_tester(
@@ -42,7 +42,7 @@ class TestsLevel12(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if int(leeftijd) > int('12'):
+      if str(leeftijd).zfill(100)>str(12).zfill(100):
         print(f'Dan ben je ouder dan ik!')""")
 
     self.multi_level_tester(
@@ -67,7 +67,7 @@ class TestsLevel12(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if int(leeftijd) < int('12'):
+      if str(leeftijd).zfill(100)<str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')
       else:
         print(f'Dan ben je ouder dan ik!')""")
@@ -95,7 +95,7 @@ class TestsLevel12(HedyTester):
             land = float(land)
           except ValueError:
             pass
-        if str(land) != str('Nederland'):
+        if str(land).zfill(100)!='Nederland'.zfill(100):
           print(f'Cool!')
         else:
           print(f'Ik kom ook uit Nederland!')""")
@@ -121,7 +121,7 @@ class TestsLevel12(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if int(leeftijd) <= int('12'):
+      if str(leeftijd).zfill(100)<=str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
     self.multi_level_tester(
@@ -144,7 +144,7 @@ class TestsLevel12(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if int(leeftijd) >= int('12'):
+      if str(leeftijd).zfill(100)>=str(12).zfill(100):
         print(f'Dan ben je ouder dan ik!')""")
 
     self.multi_level_tester(
@@ -169,7 +169,7 @@ class TestsLevel12(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if int(leeftijd) <= int('12'):
+      if str(leeftijd).zfill(100)<=str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')
       else:
         print(f'Dan ben je ouder dan ik!')""")
