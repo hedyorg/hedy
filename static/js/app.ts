@@ -726,7 +726,7 @@ export function confetti_cannon(){
 
     const confettiButton = document.getElementById('confetti-button');
     if (confettiButton) {
-      confettiButton.style.visibility='hidden';
+      confettiButton.classList.add('hidden');
     }
   }
 }
