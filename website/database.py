@@ -1,4 +1,5 @@
 from utils import timems
+import uuid
 from . import dynamo
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
@@ -8,7 +9,48 @@ TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
 
+# Information on quizzes. We will update this record in-place as the user completes
+# more of the quiz. The database is formatted like this:
+#
+# { attemptId -> { user,
+#                  level,
+#                  date,
+#                  q1: ["A", "A", "C"],
+#                  q2: ["B", "C"],
+#                  ...
+#                  correct: { 1, 5, 10 }
+#                } }
+#
+# We will add to the q1, q2, q3... sets as the user submits answers, and add to the
+# 'correct' set as users submit correct answers.
+#
+# 'points' will be updated to the points based on the correct answers.
+
+QUIZ_ATTEMPT = dynamo.Table(storage, 'quizAttempt', 'quizAttemptId')
+
 class Database:
+    def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
+        """Update the current quiz record with a new answer.
+
+        Uses a DynamoDB update to add to the exising record.
+        """
+        updates = {
+            "user": username,
+            "quizLevel": level,
+            "date": timems(),
+            "q" + str(question_number): dynamo.DynamoAddToList(answer),
+        }
+
+        if is_correct:
+            updates['correct'] = dynamo.DynamoAddToNumberSet(int(question_number))
+
+        return QUIZ_ATTEMPT.update({ "quizAttemptId": attempt_id }, updates)
+
+    def get_quiz_attempt(self, quiz_attempt_id):
+        """Load a quiz answer from the database."""
+
+        return QUIZ_ATTEMPT.get({'quizAttemptId': quiz_attempt_id})
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
