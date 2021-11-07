@@ -1,4 +1,4 @@
-from utils import times
+from utils import timems, times
 from . import dynamo
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
