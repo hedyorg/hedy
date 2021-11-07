@@ -39,11 +39,20 @@ def timer(fn):
   return wrapper
 
 
-
 def timems():
+    """Return the UNIX timestamp in milliseconds.
+
+    You only need to use this function if you are doing performance-sensitive
+    timing. Otherwise, `times` (which returns second-resolution) is probably
+    a better choice.
+    """
     return int(round(time.time() * 1000))
 
 def times():
+    """Return the UNIX timestamp in seconds.
+
+    If you need to store a date/time in the database, prefer this function.
+    """
     return int(round(time.time()))
 
 
