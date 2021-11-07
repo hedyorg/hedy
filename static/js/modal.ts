@@ -70,10 +70,15 @@ export const success = {
     editor = e;
   },
 
-  hide() {
+  hide: function () {
     $('#okbox').hide();
     $('#okbox').hide();
     editor?.resize();
+
+    const confettiButton = document.getElementById('confetti-button');
+    if (confettiButton) {
+      confettiButton.classList.remove('hidden');
+    }
   },
 
   showWarning(caption: string, message: string) {
