@@ -1,4 +1,4 @@
-from utils import timems
+from utils import timems, times
 from . import dynamo
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
@@ -43,7 +43,7 @@ class Database:
         updates = {
             "attemptId": attempt_id,
             "level": level,
-            "date": timems(),
+            "date": times(),
             "q" + str(question_number): dynamo.DynamoAddToList(answer),
         }
 

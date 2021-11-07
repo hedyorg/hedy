@@ -86,6 +86,8 @@ class Table:
         """Put a single complete record into the database."""
         if self.partition_key not in data:
             raise ValueError(f"Expecting '{self.partition_key}' field in create() call, got: {data}")
+        if self.sort_key and self.sort_key not in data:
+            raise ValueError(f"Expecting '{self.sort_key}' field in create() call, got: {data}")
 
         querylog.log_counter(f'db_create:{self.table_name}')
         self.storage.put(self.table_name, self._extract_key(data), data)
@@ -99,8 +101,7 @@ class Table:
         updates that aren't representable as plain values.
         """
         querylog.log_counter(f'db_update:{self.table_name}')
-        if key.keys() != self._key_names():
-            raise RuntimeError(f'update: key fields incorrect: {key} != {self._key_names()}')
+        self._validate_key(key)
 
         return self.storage.update(self.table_name, key, updates)
 
@@ -111,8 +112,7 @@ class Table:
         Returns the delete item.
         """
         querylog.log_counter('db_del:' + self.table_name)
-        if key.keys() != self._key_names():
-            raise RuntimeError(f'update: key fields incorrect: {key} != {self._key_names()}')
+        self._validate_key(key)
 
         return self.storage.delete(self.table_name, key)
 
@@ -138,7 +138,7 @@ class Table:
     def scan(self):
         """Reads the entire table into memory."""
         querylog.log_counter('db_scan:' + self.table_name)
-        return self.storage.scan (self.table_name)
+        return self.storage.scan(self.table_name)
 
 
     @querylog.timed_as('db_describe')
@@ -147,6 +147,9 @@ class Table:
         return self.storage.item_count(self.table_name)
 
     def _determine_lookup(self, key_data, many):
+        if any(not v for v in key_data.values()):
+            raise ValueError(f'Key data cannot have empty values: {key_data}')
+
         keys = set(key_data.keys())
         expected_keys = self._key_names()
 
@@ -185,6 +188,12 @@ class Table:
 
     def _key_names(self):
         return set(x for x in [self.partition_key, self.sort_key] if x is not None)
+
+    def _validate_key(self, key):
+        if key.keys() != self._key_names():
+            raise RuntimeError(f'key fields incorrect: {key} != {self._key_names()}')
+        if any(not v for v in key.values()):
+            raise RuntimeError(f'key fields cannot be empty: {key}')
 
 DDB_SERIALIZER = TypeSerializer()
 DDB_DESERIALIZER = TypeDeserializer()
