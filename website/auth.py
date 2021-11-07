@@ -255,8 +255,6 @@ def routes(app, database, requested_lang):
 
         DATABASE.store_user(user)
 
-        print(user)
-
         # We automatically login the user
         cookie = make_salt()
         DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
@@ -282,8 +280,6 @@ def routes(app, database, requested_lang):
             return 'no token', 400
         if not username:
             return 'no username', 400
-
-        print(username)
 
         user = DATABASE.user_by_username(username)
 
@@ -603,7 +599,13 @@ def auth_templates(page, lang, menu, request):
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
     if page == 'admin':
-        user = current_user()
+        username = current_user()['username']
+
+        user = DATABASE.user_by_username(username)
+
+        if not user:
+            raise RuntimeError(f'Could not load user we find in session: {current_user()}')
+
         if not is_testing_request(request) and not is_admin(user):
             return 'unauthorized', 403
 
@@ -613,17 +615,12 @@ def auth_templates(page, lang, menu, request):
         fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
         for user in users:
-            data = {}
-            for field in fields:
-                if field in user:
-                    data[field] = user[field]
-                else:
-                    data[field] = None
+            data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher']     = bool(data['is_teacher'])
-            data['created'] = mstoisostring(data['created'])
+            data['created'] = mstoisostring(data['created']) if data['created'] else '?'
             if data['last_login']:
-                data['last_login'] = mstoisostring(data['last_login'])
+                data['last_login'] = mstoisostring(data['last_login']) if data['last_login'] else '?'
             userdata.append(data)
 
         userdata.sort(key=lambda user: user['created'], reverse=True)

@@ -552,7 +552,7 @@ def get_quiz(level_source, question_nr, attempt):
 def quiz_finished(level):
     """Results page at the end of the quiz."""
     if not config.get('quiz-enabled') and g.lang != 'nl':
-        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user(request) ['username'], requested_lang (), 'Hedy quiz disabled!')
+        return utils.page_404 (TRANSLATIONS, render_main_menu('adventures'), current_user() ['username'], requested_lang (), 'Hedy quiz disabled!')
 
     # Reading the yaml file
     quiz_data = quiz.quiz_data_file_for(level)
