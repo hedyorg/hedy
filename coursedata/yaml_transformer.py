@@ -21,7 +21,7 @@ def transform_level_defaults(transformations):
           del transformed_dict[old_level]
           file_transformed = True
 
-    if file_transformed:
+    if file_transformed:  #only write updated files
       with open(output_path + yaml_filesname_without_path, 'w') as f:
         f.write(utils.dump_yaml_rt(transformed_dict))
 

@@ -733,6 +733,7 @@ def process_variable_for_fstring(name, lookup):
         return name
 
 def process_variable_for_fstring_padded(name, lookup):
+    # used to transform variables in comparisons 
     if is_variable(name, lookup):
         return f"str({hash_var(name)}).zfill(100)"
     elif is_float(name):
@@ -1186,7 +1187,7 @@ class ConvertToPython_12(ConvertToPython_11):
         arg0 = process_variable_for_fstring_padded(args[0], self.lookup)
         arg1 = process_variable_for_fstring_padded(args[1], self.lookup)
 
-        # zfill(100) leftpads variable to length 100 with zeroes (hence the z fill)
+        # zfill(100) in process_variable_for_fstring_padded leftpads variables to length 100 with zeroes (hence the z fill)
         # that is to make sure that string comparison works well "ish" for numbers
         # this at one point could be improved with a better type system, of course!
         # the issue is that we can't do everything in here because
