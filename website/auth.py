@@ -63,7 +63,7 @@ def current_user():
         username = user['username']
         if username:
             db_user = DATABASE.user_by_username(username)
-            create_current_user(db_user)
+            remember_current_user(db_user)
 
     return user
 
