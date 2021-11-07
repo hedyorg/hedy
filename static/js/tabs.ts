@@ -24,6 +24,7 @@ $(function() {
   function resetWindow() {
     $ ('#warningbox').hide ();
     $ ('#errorbox').hide ();
+    $ ('#okbox').hide ();
     $ ('#output').empty ();
     $ ('#turtlecanvas').empty ();
     window.State.unsaved_changes = false;
