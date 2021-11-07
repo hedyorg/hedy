@@ -139,7 +139,7 @@ def routes(app, database, requested_lang):
         if not check_password(body['password'], user['password']):
             return 'invalid username/password', 403
 
-        create_current_user(user)
+        remember_current_user(user)
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
