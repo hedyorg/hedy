@@ -41,17 +41,31 @@ countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Alger
 # * email
 # * is_teacher
 #
+# Since the is_teacher can be changed during a session we also store a time-to-live. When retrieving the current user, we can check if we need to reload data from the database.
+#
 # The current user should be retrieved with `current_user` function since it will return a sane default.
 # You can remove the current user from the Flask session with the `forget_current_user`.
 def create_current_user(db_user):
+    session['user-ttl'] = times() + 5 * 60
     session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
 
 def pick(d, *requested_keys):
     return { key : d.get(key, None) for key in requested_keys }
 
 # Retrieve the current user from the Flask session.
+#
+# If the current user is to old, as determined by the time-to-live, we repopulate from the database.
 def current_user():
-    return session.get('user', {'username': '', 'email': ''})
+    now = times()
+    user = session.get('user', {'username': '', 'email': ''})
+    ttl = session.get('user-ttl', None)
+    if ttl == None or now >= ttl:
+        username = user['username']
+        if username:
+            db_user = DATABASE.user_by_username(username)
+            create_current_user(db_user)
+
+    return user
 
 # Remove the current user from the Flask session.
 def forget_current_user():
