@@ -1,4 +1,5 @@
 import os
+import hedy
 from website.yaml_file import YamlFile
 import utils
 import unittest
@@ -19,25 +20,32 @@ def collect_snippets(path):
         yaml = YamlFile.for_file(file)
 
         for level in yaml:
-            # start_code
-            Hedy_snippets.append(Snippet(filename=file, level=level, field_name='start_code', code=yaml[level]['start_code']))
+            try:
+                level_number = int(level)
+            except:
+                continue #level nummer geen int -> dan is het oude content, bijv 10-old en is ok
+            if level_number > hedy.HEDY_MAX_LEVEL:
+                print('content above max level!')
+            else:
+                # start_code
+                Hedy_snippets.append(Snippet(filename=file, level=level, field_name='start_code', code=yaml[level]['start_code']))
 
-            # commands.k.demo_code
-            for k, command in enumerate(yaml[level]['commands']):
-                # todo: at one point all commands should have names again!
+                # commands.k.demo_code
+                for k, command in enumerate(yaml[level]['commands']):
+                    # todo: at one point all commands should have names again!
 
-                command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
-                Hedy_snippets.append(
-                    Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code', code=command['demo_code']))
+                    command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
+                    Hedy_snippets.append(
+                        Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code', code=command['demo_code']))
 
-            # code snippets inside intro_text
-            code_snippet_counter = 0
-            for tag in utils.markdown_to_html_tags(yaml[level]['intro_text']):
-                if tag.name != 'pre' or not tag.contents[0]:
-                    continue
-                code_snippet_counter += 1
-                Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
-                                             code=tag.contents[0].contents[0]))
+                # code snippets inside intro_text
+                code_snippet_counter = 0
+                for tag in utils.markdown_to_html_tags(yaml[level]['intro_text']):
+                    if tag.name != 'pre' or not tag.contents[0]:
+                        continue
+                    code_snippet_counter += 1
+                    Hedy_snippets.append(Snippet(filename=file, level=level, field_name='intro_text snippet #' + str(code_snippet_counter),
+                                                 code=tag.contents[0].contents[0]))
     return Hedy_snippets
 
 

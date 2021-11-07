@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass, field
 
 # Some useful constants
-HEDY_MAX_LEVEL = 11
+HEDY_MAX_LEVEL = 13
 MAX_LINES = 100
 
 #dictionary to store transpilers
@@ -732,6 +732,15 @@ def process_variable_for_fstring(name, lookup):
     else:
         return name
 
+def process_variable_for_fstring_padded(name, lookup):
+    # used to transform variables in comparisons 
+    if is_variable(name, lookup):
+        return f"str({hash_var(name)}).zfill(100)"
+    elif is_float(name):
+        return f"str({name}).zfill(100)"
+    else:
+        return f"'{name}'.zfill(100)"
+
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
     def check_var_usage(self, args):
@@ -1062,6 +1071,19 @@ class ConvertToPython_10(ConvertToPython_9):
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
+def is_int(n):
+    try:
+        to_int = int(n)
+        return to_int == n
+    except ValueError:
+        return False
+def is_float(n):
+    try:
+        float(n)
+        return True
+    except ValueError:
+        return False
+
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
 
@@ -1071,18 +1093,6 @@ class ConvertToPython_11(ConvertToPython_10):
         else:
             return f'{argument}'
 
-    def is_int(self, n):
-        try:
-            to_int = int(n)
-            return to_int == n
-        except ValueError:
-            return False
-    def is_float(self, n):
-        try:
-            float(n)
-            return True
-        except ValueError:
-            return False
 
     def ask(self, args):
         var = args[0]
@@ -1093,10 +1103,10 @@ class ConvertToPython_11(ConvertToPython_10):
 
         tryblock = textwrap.dedent(f"""
         try:
-          prijs = int({var})
+          {var} = int({var})
         except ValueError:
           try:
-            prijs = float({var})
+            {var} = float({var})
           except ValueError:
             pass""") #no number? leave as string
         return assign + tryblock
@@ -1112,9 +1122,9 @@ class ConvertToPython_11(ConvertToPython_10):
         # convert types of the arguments
         converted_args = []
         for arg in args:
-            if self.is_float(arg):
+            if is_float(arg):
                 converted_args.append(f'float({arg})')
-            elif self.is_int(arg):
+            elif is_int(arg):
                 converted_args.append(f'int({arg})')
             else:
                 # variable? default to float for now (todo: use typesystem here)
@@ -1153,7 +1163,7 @@ class ConvertToPython_11(ConvertToPython_10):
         except UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 
-            if not (self.is_int(right_hand_side) or self.is_float(right_hand_side)):
+            if not (is_int(right_hand_side) or is_float(right_hand_side)):
                 raise UnquotedAssignTextException(text = args[1])
 
         if len(args) == 2:
@@ -1168,6 +1178,50 @@ class ConvertToPython_11(ConvertToPython_10):
             parameter = args[0]
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
+
+@hedy_transpiler(level=12)
+class ConvertToPython_12(ConvertToPython_11):
+    def process_comparison(self, args, operator):
+
+        # we are generating an fstring now
+        arg0 = process_variable_for_fstring_padded(args[0], self.lookup)
+        arg1 = process_variable_for_fstring_padded(args[1], self.lookup)
+
+        # zfill(100) in process_variable_for_fstring_padded leftpads variables to length 100 with zeroes (hence the z fill)
+        # that is to make sure that string comparison works well "ish" for numbers
+        # this at one point could be improved with a better type system, of course!
+        # the issue is that we can't do everything in here because
+        # kids submit things with the ask command that wew do not ask them to cast (yet)
+
+        simple_comparison = arg0 + operator + arg1
+
+        if len(args) == 2:
+            return simple_comparison  # no and statements
+        else:
+            return f"{simple_comparison} and {args[2]}"
+
+
+    def smaller(self, args):
+        return self.process_comparison(args, "<")
+
+    def bigger(self, args):
+        return self.process_comparison(args, ">")
+
+    def smaller_equal(self, args):
+        return self.process_comparison(args, "<=")
+
+    def bigger_equal(self, args):
+        return self.process_comparison(args, ">=")
+
+    def not_equal(self, args):
+        return self.process_comparison(args, "!=")
+
+@hedy_transpiler(level=13)
+class ConvertToPython_13(ConvertToPython_12):
+    def while_loop(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
 # @hedy_transpiler(level=10)
 # @hedy_transpiler(level=11)
@@ -1289,30 +1343,7 @@ class ConvertToPython_11(ConvertToPython_10):
 #     def comment(self, args):
 #         return f"# {args}"
 #
-# @hedy_transpiler(level=17)
-# class ConvertToPython_17(ConvertToPython_16):
-#     def smaller(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"int({arg0}) < int({arg1})"  # no and statements
-#         else:
-#             return f"int({arg0}) < int({arg1}) and {args[2]}"
-#
-#     def bigger(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"int({arg0}) > int({arg1})"  # no and statements
-#         else:
-#             return f"int({arg0}) > int({arg1}) and {args[2]}"
-#
-# @hedy_transpiler(level=18)
-# class ConvertToPython_18(ConvertToPython_17):
-#     def while_loop(self, args):
-#         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-#         all_lines = [indent(x) for x in args[1:]]
-#         return "while " + args[0] + ":\n"+"\n".join(all_lines)
+
 #
 # @hedy_transpiler(level=19)
 # @hedy_transpiler(level=20)
@@ -1365,34 +1396,9 @@ class ConvertToPython_11(ConvertToPython_10):
 #         else:
 #             return f"str({arg0}) == str({arg1})"  # no and statements
 #
-# @hedy_transpiler(level=22)
-# class ConvertToPython_22(ConvertToPython_21):
-#     def not_equal(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"str({arg0}) != str({arg1})"  # no and statements
-#         else:
-#             return f"str({arg0}) != str({arg1}) and {args[2]}"
-#
-# @hedy_transpiler(level=23)
-# class ConvertToPython_23(ConvertToPython_22):
-#     def smaller_equal(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"int({arg0}) <= int({arg1})"  # no and statements
-#         else:
-#             return f"int({arg0}) <= int({arg1}) and {args[2]}"
-#
-#     def bigger_equal(self, args):
-#         arg0 = process_variable(args[0], self.lookup)
-#         arg1 = process_variable(args[1], self.lookup)
-#         if len(args) == 2:
-#             return f"int({arg0}) >= int({arg1})"  # no and statements
-#         else:
-#             return f"int({arg0}) >= int({arg1}) and {args[2]}"
-#
+
+
+
 
 def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
