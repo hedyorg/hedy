@@ -72,7 +72,6 @@ export const success = {
 
   hide: function () {
     $('#okbox').hide();
-    $('#okbox').hide();
     editor?.resize();
 
     const confettiButton = document.getElementById('confetti-button');
