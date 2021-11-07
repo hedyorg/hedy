@@ -272,6 +272,8 @@ def routes(app, database, requested_lang):
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        remember_current_user(user)
+
         return resp
 
     @app.route('/auth/verify', methods=['GET'])
