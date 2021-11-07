@@ -1,5 +1,6 @@
 import functools
 import boto3
+import numbers
 from abc import ABCMeta
 import os
 import logging
@@ -72,7 +73,8 @@ class Table:
     @querylog.timed_as('db_create')
     def create(self, data):
         """Put a single complete record into the database."""
-        assert(self.partition_key in data)
+        if self.partition_key not in data:
+            raise ValueError(f"Expecting '{self.partition_key}' field in create() call, got: {data}")
 
         querylog.log_counter(f'db_create:{self.table_name}')
         self.storage.put(self.table_name, self._extract_key(data), data)
@@ -148,11 +150,11 @@ class Table:
         key_value = data.get(self.partition_key)
         return { self.partition_key: key_value }
 
+DDB_SERIALIZER = TypeSerializer()
+DDB_DESERIALIZER = TypeDeserializer()
+
 
 class AwsDynamoStorage(TableStorage):
-    SERIALIZER = TypeSerializer()
-    DESERIALIZER = TypeDeserializer()
-
     @staticmethod
     def from_env():
         if is_dynamo_available():
@@ -178,7 +180,7 @@ class AwsDynamoStorage(TableStorage):
         result = self.db.query(
             TableName=self.db_prefix + '-' + table_name,
             KeyConditionExpression = key_field + ' = :value',
-            ExpressionAttributeValues = {':value': self.SERIALIZER.serialize (key_value)},
+            ExpressionAttributeValues = {':value': DDB_SERIALIZER.serialize (key_value)},
             ScanIndexForward = not reverse)
         return list(map(self._decode, result.get('Items', [])))
 
@@ -225,7 +227,7 @@ class AwsDynamoStorage(TableStorage):
         return list(map(self._decode, result.get('Items', [])))
 
     def _encode (self, data):
-        return {k: self.SERIALIZER.serialize(v) for k, v in data.items()}
+        return {k: DDB_SERIALIZER.serialize(v) for k, v in data.items()}
 
     def _encode_updates (self, data):
         def encode_update(value):
@@ -233,14 +235,14 @@ class AwsDynamoStorage(TableStorage):
             if value is None:
                 return {'Action': 'DELETE'}
             else:
-                return {'Value': self.SERIALIZER.serialize(value)}
+                return {'Value': DDB_SERIALIZER.serialize(value)}
         return {k: encode_update(v) for k, v in data.items()}
 
     def _decode (self, data):
         if data is None:
             return None
 
-        return {k: replace_decimals(self.DESERIALIZER.deserialize(v)) for k, v in data.items()}
+        return {k: replace_decimals(DDB_DESERIALIZER.deserialize(v)) for k, v in data.items()}
 
 
 class Lock:
@@ -307,7 +309,8 @@ class MemoryStorage(TableStorage):
         records = self.tables.get(table_name, [])
         index = self._find_index(records, key)
         if index is None:
-            return {}
+            records.append(key.copy())
+            index = len(records) - 1
 
         record = records[index]
         for name, update in updates.items():
@@ -324,6 +327,16 @@ class MemoryStorage(TableStorage):
                     if not isinstance(existing, set):
                         raise TypeError(f'Expected a set in {name}, got: {existing}')
                     record[name] = existing - set(update.elements)
+                elif isinstance(update, DynamoAddToList):
+                    existing = record.get(name, [])
+                    if not isinstance(existing, list):
+                        raise TypeError(f'Expected a list in {name}, got: {existing}')
+                    record[name] = existing + list(update.elements)
+                elif isinstance(update, DynamoAddToNumberSet):
+                    existing = record.get(name, set())
+                    if not isinstance(existing, set):
+                        raise TypeError(f'Expected a set in {name}, got: {existing}')
+                    record[name] = existing | set(update.elements)
                 else:
                     raise RuntimeError(f'Unsupported update type for in-memory database: {update}')
             elif update is None:
@@ -411,6 +424,32 @@ class DynamoAddToStringSet(DynamoUpdate):
         return {
                 'Action': 'ADD',
                 'Value': { 'SS': list(self.elements) },
+            }
+
+class DynamoAddToNumberSet(DynamoUpdate):
+    """Add one or more elements to a number set."""
+    def __init__(self, *elements):
+        for el in elements:
+            if not isinstance(el, numbers.Real):
+                raise ValueError(f'Must be a number, got: {el}')
+        self.elements = elements
+
+    def to_dynamo(self):
+        return {
+                'Action': 'ADD',
+                'Value': { 'NS': [str(x) for x in self.elements] },
+            }
+
+
+class DynamoAddToList(DynamoUpdate):
+    """Add one or more elements to a list."""
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def to_dynamo(self):
+        return {
+                'Action': 'ADD',
+                'Value': { 'L': [DDB_SERIALIZER.serialize(x) for x in self.elements] },
             }
 
 
