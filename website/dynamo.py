@@ -155,19 +155,20 @@ class Table:
         if keys == expected_keys:
             return TableLookup(self.table_name, key_data)
 
-        if len(keys) == 1 and not many:
-            raise RuntimeError(f'Only have one key: {key_data}, but expecting: {keys}')
-
+        if len(keys) != 1:
+            raise RuntimeError(f'Getting key data: {key_data}, but expecting: {expected_keys}')
         one_key = list(keys)[0]
-
-        # If the one key matches the partition key, it must be because we also have a
-        # sort key, but that's allowed because we are looking for 'many' records.
-        if one_key == self.partition_key:
-            return TableLookup(self.table_name, key_data)
 
         # We do an index lookup if we have one key that matches an index
         if one_key in self.indexed_fields:
             return IndexLookup(self.table_name, f'{one_key}-index', key_data)
+
+        # If the one key matches the partition key, it must be because we also have a
+        # sort key, but that's allowed because we are looking for 'many' records.
+        if one_key == self.partition_key:
+            if not many:
+                raise RuntimeError(f'Looking up one value, but missing sort key: {self.sort_key} in {key_data}')
+            return TableLookup(self.table_name, key_data)
 
         raise RuntimeError(f'Field not partition key or index: {one_key}')
 
