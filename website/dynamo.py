@@ -14,7 +14,10 @@ import threading
 
 class TableStorage(metaclass=ABCMeta):
     def get_item(self, table_name, key): ...
-    def query(self, table_name, key, reverse=False): ...
+
+    # The 'sort_key' argument here is only necessary for the memory storage --
+    # because it itself can't know what the sort keys is. Hacky hacky :).
+    def query(self, table_name, key, sort_key=None, reverse=False): ...
     def query_index(self, table_name, index_name, key, reverse=False): ...
     def put(self, table_name, key, data): ...
     def update(self, table_name, key, updates): ...
@@ -27,11 +30,19 @@ class Table:
     """Dynamo table access
 
     Transparently handles indexes, and doesn't support sort keys yet.
+
+    Parameters:
+        - partition_key: the partition key for the table.
+        - indexed_fields: a list of fields that have a (global) index on them.
+          Each individual index must be named '{field}-index', and each must
+          project the full set of attributes.
+        - sort_key: a field that is the sort key for the table.
     """
-    def __init__(self, storage: TableStorage, table_name, partition_key, indexed_fields=None):
+    def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexed_fields=None):
         self.storage = storage
         self.table_name = table_name
         self.partition_key = partition_key
+        self.sort_key = sort_key
         self.indexed_fields = indexed_fields or []
 
     @querylog.timed_as('db_get')
@@ -42,15 +53,15 @@ class Table:
         partition key or an index key.
         """
         querylog.log_counter(f'db_get:{self.table_name}')
-        lookup = self._determine_lookup(key)
+        lookup = self._determine_lookup(key, many=False)
         if isinstance(lookup, TableLookup):
-            return self.storage.get_item(lookup.table_name, key)
+            return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
-            return first_or_none(self.storage.query_index(lookup.table_name, lookup.index_name, key))
+            return first_or_none(self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key))
         assert False
 
     @querylog.timed_as('db_get_many')
-    def get_many(self, key, reverse=True):
+    def get_many(self, key, reverse=False):
         """Gets a list of items by key from the database.
 
         The key must be a dict with a single entry which references the
@@ -60,11 +71,11 @@ class Table:
         """
         querylog.log_counter(f'db_get_many:{self.table_name}')
 
-        lookup = self._determine_lookup(key)
+        lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
-            items = self.storage.query(lookup.table_name, key, reverse=reverse)
+            items = self.storage.query(lookup.table_name, lookup.key, sort_key=self.sort_key, reverse=reverse)
         elif isinstance(lookup, IndexLookup):
-            items = self.storage.query_index(lookup.table_name, lookup.index_name, key, reverse=reverse)
+            items = self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, reverse=reverse)
         else:
             assert False
         querylog.log_counter('db_get_many_items', len(items))
@@ -88,6 +99,8 @@ class Table:
         updates that aren't representable as plain values.
         """
         querylog.log_counter(f'db_update:{self.table_name}')
+        if key.keys() != self._key_names():
+            raise RuntimeError(f'update: key fields incorrect: {key} != {self._key_names()}')
 
         return self.storage.update(self.table_name, key, updates)
 
@@ -98,6 +111,9 @@ class Table:
         Returns the delete item.
         """
         querylog.log_counter('db_del:' + self.table_name)
+        if key.keys() != self._key_names():
+            raise RuntimeError(f'update: key fields incorrect: {key} != {self._key_names()}')
+
         return self.storage.delete(self.table_name, key)
 
     @querylog.timed_as('db_del_many')
@@ -130,25 +146,44 @@ class Table:
         querylog.log_counter('db_describe:' + self.table_name)
         return self.storage.item_count(self.table_name)
 
-    def _determine_lookup(self, key_data):
-        keys = list(key_data.keys())
-        if len(keys) != 1:
-            raise RuntimeError('Only supporting 1 (partition) key for now')
-        key_field = keys[0]
-        if key_field == self.partition_key:
-            return TableLookup(self.table_name)
-        if key_field in self.indexed_fields:
-            return IndexLookup(self.table_name, f'{key_field}-index')
-        raise RuntimeError(f'Field not indexed: {key_field}')
+    def _determine_lookup(self, key_data, many):
+        keys = set(key_data.keys())
+        expected_keys = self._key_names()
+
+        # We do a regular table lookup if both partition key and sort key occur
+        # in the given key.
+        if keys == expected_keys:
+            return TableLookup(self.table_name, key_data)
+
+        if len(keys) == 1 and not many:
+            raise RuntimeError(f'Only have one key: {key_data}, but expecting: {keys}')
+
+        one_key = list(keys)[0]
+
+        # If the one key matches the partition key, it must be because we also have a
+        # sort key, but that's allowed because we are looking for 'many' records.
+        if one_key == self.partition_key:
+            return TableLookup(self.table_name, key_data)
+
+        # We do an index lookup if we have one key that matches an index
+        if one_key in self.indexed_fields:
+            return IndexLookup(self.table_name, f'{one_key}-index', key_data)
+
+        raise RuntimeError(f'Field not partition key or index: {one_key}')
 
     def _extract_key(self, data):
         """
         Extract the key data out of plain data.
         """
         if self.partition_key not in data:
-            raise RuntimeError(f'Partition key {self.partition_key} missing from data: {data}')
-        key_value = data.get(self.partition_key)
-        return { self.partition_key: key_value }
+            raise RuntimeError(f"Partition key '{self.partition_key}' missing from data: {data}")
+        if self.sort_key and self.sort_key not in data:
+            raise RuntimeError(f"Sort key '{self.sort_key}' missing from data: {data}")
+
+        return { k: data[k] for k in self._key_names() }
+
+    def _key_names(self):
+        return set(x for x in [self.partition_key, self.sort_key] if x is not None)
 
 DDB_SERIALIZER = TypeSerializer()
 DDB_DESERIALIZER = TypeDeserializer()
@@ -173,15 +208,17 @@ class AwsDynamoStorage(TableStorage):
             Key = self._encode(key))
         return self._decode(result.get('Item', None))
 
-    def query(self, table_name, key, reverse=False):
-        assert len(key.keys ()) == 1
-        key_field = list (key.keys ()) [0]
-        key_value = key [key_field]
+    def query(self, table_name, key, sort_key=None, reverse=False):
+        # DynamoDB knows what the sort key is already so it doesn't need to use the passed field
+
+        key_expression = ' AND '.join(f'{field} = :{field}' for field in key.keys())
+        key_values = { f':{field}': DDB_SERIALIZER.serialize(key[field]) for field in key.keys() }
+
         result = self.db.query(
             TableName=self.db_prefix + '-' + table_name,
-            KeyConditionExpression = key_field + ' = :value',
-            ExpressionAttributeValues = {':value': DDB_SERIALIZER.serialize (key_value)},
-            ScanIndexForward = not reverse)
+            KeyConditionExpression=key_expression,
+            ExpressionAttributeValues=key_values,
+            ScanIndexForward=not reverse)
         return list(map(self._decode, result.get('Items', [])))
 
     def query_index(self, table_name, index_name, key, reverse=False):
@@ -283,11 +320,16 @@ class MemoryStorage(TableStorage):
         return first_or_none(self.query(table_name, key))
 
     @lock.synchronized
-    def query(self, table_name, key, reverse=False):
+    def query(self, table_name, key, sort_key=None, reverse=False):
         records = self.tables.get(table_name, [])
         filtered = [r for r in records if self._matches(r, key)]
+
+        if sort_key:
+            filtered.sort(key=lambda x: x[sort_key])
+
         if reverse:
             filtered.reverse()
+
         return filtered
 
     # NOTE: on purpose not @synchronized here
@@ -306,7 +348,7 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def update(self, table_name, key, updates):
-        records = self.tables.get(table_name, [])
+        records = self.tables.setdefault(table_name, [])
         index = self._find_index(records, key)
         if index is None:
             records.append(key.copy())
@@ -347,7 +389,7 @@ class MemoryStorage(TableStorage):
                 record[name] = update
 
         self._flush()
-        return record
+        return record.copy()
 
     @lock.synchronized
     def delete(self, table_name, key):
@@ -394,11 +436,13 @@ def first_or_none(xs):
 @dataclass
 class TableLookup:
     table_name: str
+    key: dict
 
 @dataclass
 class IndexLookup:
     table_name: str
     index_name: str
+    key: dict
 
 
 class DynamoUpdate:
