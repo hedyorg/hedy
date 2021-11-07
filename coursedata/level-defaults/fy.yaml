@@ -400,155 +400,155 @@
             fruit is ['apel', 'banaan', 'kjers']
             randomfruit is fruit[random]
             print randomfruit 
-15:
-    start_code: |-
-        do_bist_der_noch is False
-        bist_der_noch is input('Bist der noch? ja as nee?')
-        if bist_der_noch is ja:
-            do_bist_der_noch is True
-        antwurd is input('Wat is 5*5?')
-        if do_bist_der_noch is True and antwurd is 25:
-            print('Do hast ja sein en in goed antwurd jûn!')
-    intro_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `if`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
-    commands:
-    -   name: "And"
-        explanation: "`And` is dus en. Beide dingen links en rechts fan de `and` moeten waar zijn."
-        example: "if 3+2 is 5 and 2+2 is 4"
-        demo_code: |-
-            antwurd1 is input('Hoefolle is 3+2?')
-            antwurd2 is input('Hoefolle is 2+2?')
-            if antwurd1 is 5 and antwurd2 is 4:
-                print('Beide antwurden binne goed!')
-            else:
-                print('Minimaal 1 antwurd is fout!')
-    -   name: "Or"
-        explanation: "`Or` is dus of. Minimaal 1 fan de 2 tusken de `or` moat goed wêze. beide goed mei ek."
-        example: "if 3+2 is 5 or 2+2 is 4"
-        demo_code: |-
-            antwurd1 is input('Hoefolle is 3+2?')
-            antwurd2 is input('Hoefolle is 2+2?')
-            if antwurd1 is 5 or antwurd2 is 4:
-                print('Je hebt minimaal 1 antwurd goed!')
-            else:
-                print('Beide antwurden binne fout!')
-16:
-    start_code: |-
-        # Dit is een programma dat in tal sommen freegjen giet
-
-        for i in range(1, 10):
-            # We sille de tafel fan 5 freegje
-            antwurd is input('Hoefolle is ' i ' kear 5?')
-            # We sjogge oft de som lyk is oan it antwurd
-            goed_antwurd is i * 5
-            if antwurd is goed_antwurd:
-                print(antwurd ' is goed')
-            else:
-                print('Dat is fout, it moat: ' i*5 ' wêze')
-    intro_text: |-
-        Ast gruttere programma's makkest, silst byhâlde moatte wat elts stikje koade docht. Hjir brûke wy 'comments' foar.
-        In comment sjocht der sa út:
-        `# dit is in comment`.
-        Alles wat op de rigel nei de # skreaun wurdt, brûkt Hedy net yn it programma.
-    commands:
-    -   name: "Comment"
-        explanation: "We kinne oeral wêr't wy wolle comments delsette."
-        example: "# Dit is in comment"
-        demo_code: |-
-            # Dit programma print goeie
-            # It is gemaakt in Hedy
-            # It docht eins neat fierder!
-            print('goeie')
-20:
-    start_code: |-
-        fruit is ['apel', 'banaan', 'kjers']
-        for i in range(1, 3):
-            print(fruit[i])
-    intro_text: "We kinne ek alles fan de list sjen litte. Omt er trije dingen yn sitte, pakke we de `for`-lus fan 1 oant 3. No printe we alles út wat yn de list sit."
-    commands:
-    -   name: "Lingte fan in list"
-        explanation: "Mei `length` kinst sjen hoe grut in list is. Hjir is `length` bygelyks 3 want we ha 3 dingen yn de list"
-        example: "length(fruit)"
-        demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            print('lingte fan de list is ' length(fruit))
-            for i in range(1, length(fruit)):
-                print(fruit[i])
-21:
-    start_code: |-
-        print('Hoefolle is 5+3?')
-        antwurd = 5+3
-        print('antwurd is nu:')
-        print(antwurd)
-        if antwurd == 8:
-            print('Dat is goed!')
-        else:
-            print('Spitich, dat is fout!')
-    intro_text: "No feroarje wy is yn `=` en `==`. Brûkst `=` ast eat in getal meitsje wolst. Ast bygelyks antwurd 8 meitsje wolst, seist `antwurd = 8`. `==` brûkst om te sjen of twa dingen itselde binne."
-    commands:
-    -   name: "Fergelykje"
-        explanation: "As we fergelykje wolle, brûke we dus `==`. `5+3 == 8` sjoch of 5+3 gelyk is oan 8"
-        example: "Foarbyld: 5+3 == 8"
-        demo_code: |-
-            if 5+3 == 8:
-                print('5+3 is yndie 8')
-            else:
-                print('Dit wurdt net printe, want 5+3 is 8!')
-    -   name: "Wearde jaan"
-        explanation: "As wy sizze wolle dat in fariabele mei de namme `antwurd` 8 is, dan dogge wy `antwurd = 8`."
-        example: "Foarbyld: antwurd = 8"
-        demo_code: |-
-            print('Hoefolle is 5+3?')
-            antwurd = 5+3
-            print('antwurd is no:')
-            print(antwurd)
-    -   name: "Fergelykje en wearde jaan"
-        explanation: "As we fergelykje wolle, brûke we dus `==`. As we in wearde jouwe dan brûke we `=`."
-        example: "Foarbyld: antwurd == 8, antwurd = 8"
-        demo_code: |-
-            print('Hoefolle is 5+3?')
-            antwurd = 5+3
-            print('antwurd is no:')
-            print(antwurd)
-            if antwurd == 8:
-                print('Dat is goed!')
-            else:
-                print('Spitich leave, dat is fout!')
-colon:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Wie niet weg is is gezien'
-    intro_text: |-
-        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
-        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
-    commands:
-    -   name: "for met :"
-        explanation: "By `for` moatst no in `:` efteroan sette!"
-        example: "for i in range 1 to 10:"
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print 'Wie niet weg is is gezien'
-    -   name: "if met :"
-        explanation: "We moatte itselde dwaan mei al ús `if`"
-        example: "if kleur is grien:"
-        demo_code: |-
-            kleur is grien
-            if kleur is grien:
-                print 'De kleur is grien'
-            else:
-                print 'De kleur is net grien'
-    -   name: "(Optioneel) elif"
-        explanation: |-
-            Meist ek in nij kommando brûke: `elif`.
-            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-            en als dy net wier is dan giest nei de `else`.
-        example: "elif a is 5:"
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a is 1'
-            elif a is 2:
-                print 'a is 2'
-            else:
-                print 'a is net 1 of 2'
+#15:
+#    start_code: |-
+#        do_bist_der_noch is False
+#        bist_der_noch is input('Bist der noch? ja as nee?')
+#        if bist_der_noch is ja:
+#            do_bist_der_noch is True
+#        antwurd is input('Wat is 5*5?')
+#        if do_bist_der_noch is True and antwurd is 25:
+#            print('Do hast ja sein en in goed antwurd jûn!')
+#    intro_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `if`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
+#    commands:
+#    -   name: "And"
+#        explanation: "`And` is dus en. Beide dingen links en rechts fan de `and` moeten waar zijn."
+#        example: "if 3+2 is 5 and 2+2 is 4"
+#        demo_code: |-
+#            antwurd1 is input('Hoefolle is 3+2?')
+#            antwurd2 is input('Hoefolle is 2+2?')
+#            if antwurd1 is 5 and antwurd2 is 4:
+#                print('Beide antwurden binne goed!')
+#            else:
+#                print('Minimaal 1 antwurd is fout!')
+#    -   name: "Or"
+#        explanation: "`Or` is dus of. Minimaal 1 fan de 2 tusken de `or` moat goed wêze. beide goed mei ek."
+#        example: "if 3+2 is 5 or 2+2 is 4"
+#        demo_code: |-
+#            antwurd1 is input('Hoefolle is 3+2?')
+#            antwurd2 is input('Hoefolle is 2+2?')
+#            if antwurd1 is 5 or antwurd2 is 4:
+#                print('Je hebt minimaal 1 antwurd goed!')
+#            else:
+#                print('Beide antwurden binne fout!')
+#16:
+#    start_code: |-
+#        # Dit is een programma dat in tal sommen freegjen giet
+#
+#        for i in range(1, 10):
+#            # We sille de tafel fan 5 freegje
+#            antwurd is input('Hoefolle is ' i ' kear 5?')
+#            # We sjogge oft de som lyk is oan it antwurd
+#            goed_antwurd is i * 5
+#            if antwurd is goed_antwurd:
+#                print(antwurd ' is goed')
+#            else:
+#                print('Dat is fout, it moat: ' i*5 ' wêze')
+#    intro_text: |-
+#        Ast gruttere programma's makkest, silst byhâlde moatte wat elts stikje koade docht. Hjir brûke wy 'comments' foar.
+#        In comment sjocht der sa út:
+#        `# dit is in comment`.
+#        Alles wat op de rigel nei de # skreaun wurdt, brûkt Hedy net yn it programma.
+#    commands:
+#    -   name: "Comment"
+#        explanation: "We kinne oeral wêr't wy wolle comments delsette."
+#        example: "# Dit is in comment"
+#        demo_code: |-
+#            # Dit programma print goeie
+#            # It is gemaakt in Hedy
+#            # It docht eins neat fierder!
+#            print('goeie')
+#20:
+#    start_code: |-
+#        fruit is ['apel', 'banaan', 'kjers']
+#        for i in range(1, 3):
+#            print(fruit[i])
+#    intro_text: "We kinne ek alles fan de list sjen litte. Omt er trije dingen yn sitte, pakke we de `for`-lus fan 1 oant 3. No printe we alles út wat yn de list sit."
+#    commands:
+#    -   name: "Lingte fan in list"
+#        explanation: "Mei `length` kinst sjen hoe grut in list is. Hjir is `length` bygelyks 3 want we ha 3 dingen yn de list"
+#        example: "length(fruit)"
+#        demo_code: |-
+#            fruit is ['apel', 'banaan', 'kjers']
+#            print('lingte fan de list is ' length(fruit))
+#            for i in range(1, length(fruit)):
+#                print(fruit[i])
+#21:
+#    start_code: |-
+#        print('Hoefolle is 5+3?')
+#        antwurd = 5+3
+#        print('antwurd is nu:')
+#        print(antwurd)
+#        if antwurd == 8:
+#            print('Dat is goed!')
+#        else:
+#            print('Spitich, dat is fout!')
+#    intro_text: "No feroarje wy is yn `=` en `==`. Brûkst `=` ast eat in getal meitsje wolst. Ast bygelyks antwurd 8 meitsje wolst, seist `antwurd = 8`. `==` brûkst om te sjen of twa dingen itselde binne."
+#    commands:
+#    -   name: "Fergelykje"
+#        explanation: "As we fergelykje wolle, brûke we dus `==`. `5+3 == 8` sjoch of 5+3 gelyk is oan 8"
+#        example: "Foarbyld: 5+3 == 8"
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5+3 is yndie 8')
+#            else:
+#                print('Dit wurdt net printe, want 5+3 is 8!')
+#    -   name: "Wearde jaan"
+#        explanation: "As wy sizze wolle dat in fariabele mei de namme `antwurd` 8 is, dan dogge wy `antwurd = 8`."
+#        example: "Foarbyld: antwurd = 8"
+#        demo_code: |-
+#            print('Hoefolle is 5+3?')
+#            antwurd = 5+3
+#            print('antwurd is no:')
+#            print(antwurd)
+#    -   name: "Fergelykje en wearde jaan"
+#        explanation: "As we fergelykje wolle, brûke we dus `==`. As we in wearde jouwe dan brûke we `=`."
+#        example: "Foarbyld: antwurd == 8, antwurd = 8"
+#        demo_code: |-
+#            print('Hoefolle is 5+3?')
+#            antwurd = 5+3
+#            print('antwurd is no:')
+#            print(antwurd)
+#            if antwurd == 8:
+#                print('Dat is goed!')
+#            else:
+#                print('Spitich leave, dat is fout!')
+#colon:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Wie niet weg is is gezien'
+#    intro_text: |-
+#        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+#        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+#    commands:
+#    -   name: "for met :"
+#        explanation: "By `for` moatst no in `:` efteroan sette!"
+#        example: "for i in range 1 to 10:"
+#        demo_code: |-
+#            for i in range 1 to 10:
+#                print i
+#            print 'Wie niet weg is is gezien'
+#    -   name: "if met :"
+#        explanation: "We moatte itselde dwaan mei al ús `if`"
+#        example: "if kleur is grien:"
+#        demo_code: |-
+#            kleur is grien
+#            if kleur is grien:
+#                print 'De kleur is grien'
+#            else:
+#                print 'De kleur is net grien'
+#    -   name: "(Optioneel) elif"
+#        explanation: |-
+#            Meist ek in nij kommando brûke: `elif`.
+#            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+#            en als dy net wier is dan giest nei de `else`.
+#        example: "elif a is 5:"
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a is 1'
+#            elif a is 2:
+#                print 'a is 2'
+#            else:
+#                print 'a is net 1 of 2'

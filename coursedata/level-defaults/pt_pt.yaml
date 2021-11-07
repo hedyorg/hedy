@@ -332,114 +332,114 @@
             fruta is ['banana', 'maçã', 'cereja']
             qualquerfruta is fruta[random]
             print qualquerfruta 
-15:
-    start_code: |-
-        ainda_estas_aqui is Falso
-        resposta_ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
-        if resposta_ainda_estas_aqui is sim:
-            ainda_estas_aqui is Verdadeiro
-        resultado is input('Quanto é 5*5?')
-        if ainda_estas_aqui is Verdadeiro and resultado is 25:
-            print('Disseste sim e respondeste certo!')
-    intro_text: "Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
-    commands:
-    -   name: "And"
-        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser correctas."
-        example: "if 3+2 is 5 and 2+2 is 4"
-        demo_code: |-
-            resultado1 is input('Quanto é 3+2?')
-            resultado2 is input('Quanto é 2+2?')
-            if resultado1 is 5 and resultado2 is 4:
-                print('Ambas as respostas estão certas!')
-            else:
-                print('Pelo menos uma resposta está errada!')
-    -   name: "Or"
-        explanation: "`or` Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correcta. Se ambas estiverem correctas, também não tem problema."
-        example: "if 3+2 is 5 or 2+2 is 4"
-        demo_code: |-
-            resultado1 is input('Quanto é 3+2?')
-            resultado2 is input('Quanto é 2+2?')
-            if resultado1 is 5 or resultado2 is 4:
-                print('Pelo menos uma resposta está correcta!')
-            else:
-                print('Ambas as respostas estão erradas!')
-16:
-    start_code: |-
-        # Este é um programa que vai colocar algumas questões de Matemática
-        for i in range(1, 10):
-            # Vamos perguntar pela tabuada do 5
-            resultado is input('Quanto é ' i ' vezes 5?')
-            # Verificamos se o resultado é igual ao nosso cálculo
-            resposta_certa is i * 5
-            if resultado is resposta_certa:
-                print(resultado ' está certo!')
-            else:
-                print('Está errado, a resposta devia ser: ' i*5)
-    intro_text: "Quando estás a criar programas maiores, tens de arranjar uma maneira de te lembrares o que cada bocado de código faz. Usamos os comentários para esse efeito. Um comentário é semelhante a isto:\n ` # Isto é um comentário`. Tudo o que aparece depois do # será invisível para o código."
-    commands:
-    -   name: "Comentário"
-        explanation: "Podemos colocar comentários onde quisermos."
-        example: "# Isto é um comentário"
-        demo_code: |-
-            # Este programa escreve Olá!
-            # Este programa foi feito em Hedy
-            # Não faz mais nada excepto escrever Olá!
-            print('Olá!')
-20:
-    start_code: |-
-        fruta is ['maçã', 'banana', 'cereja']
-        for i in range(1, 3):
-            print(fruta[i])
-    intro_text: "Podemos também ver tudo na lista com o ciclo `for`. Como existem três coisas na lista, passamos o ciclo de 1 até 3. Agora escrevemos tudo durante o ciclo."
-    commands:
-    -   name: "Tamanho da lista"
-        explanation: "Com `length` podemos saber o tamanho da lista. A lista no exemplo tem tamanho 3, porque existem três coisas na lista."
-        example: "length(lista)"
-        demo_code: |-
-            fruta is ['maçã', 'banana', 'cereja']
-            print('tamanho da lista é ' length(fruta))
-            for i in range(1, length(fruta)):
-                print(fruta[i])
-21:
-    start_code: |-
-        print('Quanto é 5+3?')
-        resposta = 5+3
-        print('Resposta é agora:')
-        print(resposta)
-        if resposta == 8:
-            print('Está certo!')
-        else:
-            print('Oh não, está errado!')
-    intro_text: "Agora vamos mudar o is para `=` e `==`. Usamos `=` se queremos atribuir um determinado valor a uma variável. Se queremos atribuir 8 à variável chamada resposta, então colocamos resposta = 8. `==` utilizamos quando queremos saber se duas coisas são iguais entre elas."
-    commands:
-    -   name: "Compara"
-        explanation: "Se queremos comparar, usamos ==. 5+3 == 8 verifica se 5+3 é igual a 8"
-        example: "Por exemplo: 5+3 == 8"
-        demo_code: |-
-            if 5+3 == 8:
-                print('5+3 é de facto 8')
-            else:
-                print('Isto não será escrito, porque 5+3 é 8!')
-    -   name: "Atribui valor"
-        explanation: "Se pretendemos dizer que uma variável chamada resposta é 8, então colocamos resposta = 8."
-        example: "Por exemplo: resposta = 8"
-        demo_code: |-
-            print('Quanto é 5+3?')
-            resposta = 5+3
-            print('Resposta é agora:')
-            print(resposta)
-    -   name: "Compara e atribui um valor"
-        explanation: "Se vamos comparar dois valores, utilizamos `==`. Se formos atribuir um valor a uma variável, usamos `=`. "
-        example: "Por exemplo: 5+3 == 8, resposta = 8"
-        demo_code: |-
-            print('Quanto é 5+3?')
-            resposta = 5+3
-            print('Resposta é agora:')
-            print(resposta)
-            if resposta == 8:
-                print('Está certo!')
-            else:
-                print('Não, está errado!')
+#15:
+#    start_code: |-
+#        ainda_estas_aqui is Falso
+#        resposta_ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
+#        if resposta_ainda_estas_aqui is sim:
+#            ainda_estas_aqui is Verdadeiro
+#        resultado is input('Quanto é 5*5?')
+#        if ainda_estas_aqui is Verdadeiro and resultado is 25:
+#            print('Disseste sim e respondeste certo!')
+#    intro_text: "Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
+#    commands:
+#    -   name: "And"
+#        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser correctas."
+#        example: "if 3+2 is 5 and 2+2 is 4"
+#        demo_code: |-
+#            resultado1 is input('Quanto é 3+2?')
+#            resultado2 is input('Quanto é 2+2?')
+#            if resultado1 is 5 and resultado2 is 4:
+#                print('Ambas as respostas estão certas!')
+#            else:
+#                print('Pelo menos uma resposta está errada!')
+#    -   name: "Or"
+#        explanation: "`or` Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correcta. Se ambas estiverem correctas, também não tem problema."
+#        example: "if 3+2 is 5 or 2+2 is 4"
+#        demo_code: |-
+#            resultado1 is input('Quanto é 3+2?')
+#            resultado2 is input('Quanto é 2+2?')
+#            if resultado1 is 5 or resultado2 is 4:
+#                print('Pelo menos uma resposta está correcta!')
+#            else:
+#                print('Ambas as respostas estão erradas!')
+#16:
+#    start_code: |-
+#        # Este é um programa que vai colocar algumas questões de Matemática
+#        for i in range(1, 10):
+#            # Vamos perguntar pela tabuada do 5
+#            resultado is input('Quanto é ' i ' vezes 5?')
+#            # Verificamos se o resultado é igual ao nosso cálculo
+#            resposta_certa is i * 5
+#            if resultado is resposta_certa:
+#                print(resultado ' está certo!')
+#            else:
+#                print('Está errado, a resposta devia ser: ' i*5)
+#    intro_text: "Quando estás a criar programas maiores, tens de arranjar uma maneira de te lembrares o que cada bocado de código faz. Usamos os comentários para esse efeito. Um comentário é semelhante a isto:\n ` # Isto é um comentário`. Tudo o que aparece depois do # será invisível para o código."
+#    commands:
+#    -   name: "Comentário"
+#        explanation: "Podemos colocar comentários onde quisermos."
+#        example: "# Isto é um comentário"
+#        demo_code: |-
+#            # Este programa escreve Olá!
+#            # Este programa foi feito em Hedy
+#            # Não faz mais nada excepto escrever Olá!
+#            print('Olá!')
+#20:
+#    start_code: |-
+#        fruta is ['maçã', 'banana', 'cereja']
+#        for i in range(1, 3):
+#            print(fruta[i])
+#    intro_text: "Podemos também ver tudo na lista com o ciclo `for`. Como existem três coisas na lista, passamos o ciclo de 1 até 3. Agora escrevemos tudo durante o ciclo."
+#    commands:
+#    -   name: "Tamanho da lista"
+#        explanation: "Com `length` podemos saber o tamanho da lista. A lista no exemplo tem tamanho 3, porque existem três coisas na lista."
+#        example: "length(lista)"
+#        demo_code: |-
+#            fruta is ['maçã', 'banana', 'cereja']
+#            print('tamanho da lista é ' length(fruta))
+#            for i in range(1, length(fruta)):
+#                print(fruta[i])
+#21:
+#    start_code: |-
+#        print('Quanto é 5+3?')
+#        resposta = 5+3
+#        print('Resposta é agora:')
+#        print(resposta)
+#        if resposta == 8:
+#            print('Está certo!')
+#        else:
+#            print('Oh não, está errado!')
+#    intro_text: "Agora vamos mudar o is para `=` e `==`. Usamos `=` se queremos atribuir um determinado valor a uma variável. Se queremos atribuir 8 à variável chamada resposta, então colocamos resposta = 8. `==` utilizamos quando queremos saber se duas coisas são iguais entre elas."
+#    commands:
+#    -   name: "Compara"
+#        explanation: "Se queremos comparar, usamos ==. 5+3 == 8 verifica se 5+3 é igual a 8"
+#        example: "Por exemplo: 5+3 == 8"
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5+3 é de facto 8')
+#            else:
+#                print('Isto não será escrito, porque 5+3 é 8!')
+#    -   name: "Atribui valor"
+#        explanation: "Se pretendemos dizer que uma variável chamada resposta é 8, então colocamos resposta = 8."
+#        example: "Por exemplo: resposta = 8"
+#        demo_code: |-
+#            print('Quanto é 5+3?')
+#            resposta = 5+3
+#            print('Resposta é agora:')
+#            print(resposta)
+#    -   name: "Compara e atribui um valor"
+#        explanation: "Se vamos comparar dois valores, utilizamos `==`. Se formos atribuir um valor a uma variável, usamos `=`. "
+#        example: "Por exemplo: 5+3 == 8, resposta = 8"
+#        demo_code: |-
+#            print('Quanto é 5+3?')
+#            resposta = 5+3
+#            print('Resposta é agora:')
+#            print(resposta)
+#            if resposta == 8:
+#                print('Está certo!')
+#            else:
+#                print('Não, está errado!')
 #12-old:
 #    start_code: |-
 #        idade is input('Quantos anos tens?')

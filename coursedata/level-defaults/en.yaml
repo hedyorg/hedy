@@ -494,116 +494,116 @@
             randomfruit is fruit[random]
             print randomfruit 
 
-15:
-    start_code: |-
-        you_are_still_here is False
-        are_you_still_here is input('Are you still here? yes or no?')
-        if are_you_still_here is yes:
-            you_are_still_here is True
-        answer is input('What is 5*5?')
-        if you_are_still_here is True and answer is 25:
-            print('You said yes and gave a good answer')
-    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
-    commands:
-    -   name: "And"
-        explanation: "Both statements (left and right of the `and`) need to be correct."
-        example: "if 3+2 is 5 and 2+2 is 4"
-        demo_code: |-
-            answer1 is input('What is 3+2?')
-            answer2 is input('What is 2+2?')
-            if answer1 is 5 and answer2 is 4:
-                print('Both answers are correct!')
-            else:
-                print('At least one answer is wrong!')
-    -   name: "Or"
-        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
-        example: "if 3+2 is 5 or 2+2 is 4"
-        demo_code: |-
-            answer1 is input('What is 3+2?')
-            answer2 is input('What is 2+2?')
-            if answer1 is 5 or answer2 is 4:
-                print('At least one answer is correct!')
-            else:
-                print('Both answers are wrong!')
-16:
-    start_code: |-
-        # This is a program that is going to ask a couple of math questions
-        for i in range(1, 10):
-            # We are going to ask the multiplication table of 5
-            answer is input('What is ' i ' times 5?')
-            # We check if the answer is the same as our sum
-            correct_answer is i * 5
-            if answer is correct_answer:
-                print(answer ' is correct')
-            else:
-                print('That is wrong, it is supposed to be: ' i*5)
-    intro_text: |-
-        When you are making bigger programs, you will need to find a way to remember what every piece of code does. We use comments for this. A comment looks the following:
-         ` # This is a comment`. Everything after the # will be invisible for the code.
-    commands:
-    -   name: "Comment"
-        explanation: "We can place comments wherever we want."
-        example: "# This is a comment"
-        demo_code: |-
-            # This program prints Ηello!
-            # It has been made in Hedy
-            # It does nothing except print Hello!
-            print('Ηello!')
-20:
-    start_code: |-
-        fruit is ['apple', 'banana', 'cherry']
-        for i in range(1, 3):
-            print(fruit[i])
-    intro_text: "We can also see everything in a list with the for loop. Because there are three things in the list, we take the loop from 1 to 3. Now we print everything in the loop."
-    commands:
-    -   name: "Length of list"
-        explanation: "With `length` we can see the size of a list. The list in the example is 3 because there are three things in the list"
-        example: "length(list)"
-        demo_code: |-
-            fruit is ['apple', 'banana', 'cherry']
-            print('length of list is ' length(fruit))
-            for i in range(1, length(fruit)):
-                print(fruit[i])
-21:
-    start_code: |-
-        print('What is 5+3?')
-        answer = 5+3
-        print('answer is now:')
-        print(answer)
-        if answer == 8:
-            print('That is correct!')
-        else:
-            print('Oh no, that is wrong!')
-    intro_text: "Now we are going to change `is` into `=` and `==`. We use `=` if we want to assign a value to a variable. If you want to assign 8 to the variable called answer, we do answer = 8. `==` we use when we want to see if two things are the same."
-    commands:
-    -   name: "Compare"
-        explanation: "If we want to compare, we use ==. 5+3 == 8 checks if 5+3 equals 8"
-        example: "For example: 5+3 == 8"
-        demo_code: |-
-            if 5+3 == 8:
-                print('5+3 is indeed 8')
-            else:
-                print('This will not be printed because 5+3 is 8!')
-    -   name: "Assign Value"
-        explanation: "If we want to say that a variable called answer is 8, we do answer = 8."
-        example: "For example: answer = 8"
-        demo_code: |-
-            print('What is 5+3?')
-            answer = 5+3
-            print('answer is now:')
-            print(answer)
-    -   name: "Compare and assign value"
-        explanation: "If we are going to compare two values, we use `==`. If we are going to assign a variable, we use `=`. "
-        example: "For example: 5+3 == 8, answer = 8"
-        demo_code: |-
-            print('What is 5+3?')
-            answer = 5+3
-            print('answer is now:')
-            print(answer)
-            if answer == 8:
-                print('That is correct!')
-            else:
-                print('No, that is wrong!')
+#15:
+#    start_code: |-
+#        you_are_still_here is False
+#        are_you_still_here is input('Are you still here? yes or no?')
+#        if are_you_still_here is yes:
+#            you_are_still_here is True
+#        answer is input('What is 5*5?')
+#        if you_are_still_here is True and answer is 25:
+#            print('You said yes and gave a good answer')
+#    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
+#    commands:
+#    -   name: "And"
+#        explanation: "Both statements (left and right of the `and`) need to be correct."
+#        example: "if 3+2 is 5 and 2+2 is 4"
+#        demo_code: |-
+#            answer1 is input('What is 3+2?')
+#            answer2 is input('What is 2+2?')
+#            if answer1 is 5 and answer2 is 4:
+#                print('Both answers are correct!')
+#            else:
+#                print('At least one answer is wrong!')
+#    -   name: "Or"
+#        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
+#        example: "if 3+2 is 5 or 2+2 is 4"
+#        demo_code: |-
+#            answer1 is input('What is 3+2?')
+#            answer2 is input('What is 2+2?')
+#            if answer1 is 5 or answer2 is 4:
+#                print('At least one answer is correct!')
+#            else:
+#                print('Both answers are wrong!')
+#16:
+#    start_code: |-
+#        # This is a program that is going to ask a couple of math questions
+#        for i in range(1, 10):
+#            # We are going to ask the multiplication table of 5
+#            answer is input('What is ' i ' times 5?')
+#            # We check if the answer is the same as our sum
+#            correct_answer is i * 5
+#            if answer is correct_answer:
+#                print(answer ' is correct')
+#            else:
+#                print('That is wrong, it is supposed to be: ' i*5)
+#    intro_text: |-
+#        When you are making bigger programs, you will need to find a way to remember what every piece of code does. We use comments for this. A comment looks the following:
+#         ` # This is a comment`. Everything after the # will be invisible for the code.
+#    commands:
+#    -   name: "Comment"
+#        explanation: "We can place comments wherever we want."
+#        example: "# This is a comment"
+#        demo_code: |-
+#            # This program prints Ηello!
+#            # It has been made in Hedy
+#            # It does nothing except print Hello!
+#            print('Ηello!')
+#20:
+#    start_code: |-
+#        fruit is ['apple', 'banana', 'cherry']
+#        for i in range(1, 3):
+#            print(fruit[i])
+#    intro_text: "We can also see everything in a list with the for loop. Because there are three things in the list, we take the loop from 1 to 3. Now we print everything in the loop."
+#    commands:
+#    -   name: "Length of list"
+#        explanation: "With `length` we can see the size of a list. The list in the example is 3 because there are three things in the list"
+#        example: "length(list)"
+#        demo_code: |-
+#            fruit is ['apple', 'banana', 'cherry']
+#            print('length of list is ' length(fruit))
+#            for i in range(1, length(fruit)):
+#                print(fruit[i])
+#21:
+#    start_code: |-
+#        print('What is 5+3?')
+#        answer = 5+3
+#        print('answer is now:')
+#        print(answer)
+#        if answer == 8:
+#            print('That is correct!')
+#        else:
+#            print('Oh no, that is wrong!')
+#    intro_text: "Now we are going to change `is` into `=` and `==`. We use `=` if we want to assign a value to a variable. If you want to assign 8 to the variable called answer, we do answer = 8. `==` we use when we want to see if two things are the same."
+#    commands:
+#    -   name: "Compare"
+#        explanation: "If we want to compare, we use ==. 5+3 == 8 checks if 5+3 equals 8"
+#        example: "For example: 5+3 == 8"
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5+3 is indeed 8')
+#            else:
+#                print('This will not be printed because 5+3 is 8!')
+#    -   name: "Assign Value"
+#        explanation: "If we want to say that a variable called answer is 8, we do answer = 8."
+#        example: "For example: answer = 8"
+#        demo_code: |-
+#            print('What is 5+3?')
+#            answer = 5+3
+#            print('answer is now:')
+#            print(answer)
+#    -   name: "Compare and assign value"
+#        explanation: "If we are going to compare two values, we use `==`. If we are going to assign a variable, we use `=`. "
+#        example: "For example: 5+3 == 8, answer = 8"
+#        demo_code: |-
+#            print('What is 5+3?')
+#            answer = 5+3
+#            print('answer is now:')
+#            print(answer)
+#            if answer == 8:
+#                print('That is correct!')
+#            else:
+#                print('No, that is wrong!')
 #colon:
 #    start_code: |-
 #        for i in range 1 to 10:

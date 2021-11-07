@@ -337,118 +337,118 @@
             nahodneovoce is ovoce[random]
             print nahodneovoce
 
-15:
-    start_code: |-
-        jsi_tady is False
-        jsi_opravdu_tady is input('Jsi tady stále s námi? ano nebo ne?')
-        if jsi_opravdu_tady is ano:
-            jsi_tady is True
-        odpoved is input('Kolik je 5 * 5?')
-        if jsi_tady is True and odpoved is 25:
-            print('Jsi tady a víš, kolik je 5 * 5. Skvělá práce!')
-    intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
-    commands:
-    -   name: and
-        explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
-        example: if 3+2 is 5 and 2+2 is 4
-        demo_code: |-
-            odpoved1 is input('Kolik je 3 + 2?')
-            odpoved2 is input('Kolik je 2 + 2?')
-            if odpoved1 is 5 and odpoved2 is 4:
-                print('Obě odpovědi jsou správně!')
-            else:
-                print('Minimálně jedna z odpovědí je špatně!')
-    -   name: or
-        explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
-        example: if 3+2 is 5 or 2+2 is 4
-        demo_code: |-
-            odpoved1 is input('Kolik je 3 + 2?')
-            odpoved2 is input('Kolik je 2 + 2?')
-            if odpoved1 is 5 or odpoved2 is 4:
-                print('Alespoň jedna odpověď je správně!')
-            else:
-                print('Obě odpovědi jsou špatně!')
-16:
-    start_code: |-
-        # Tento program se tě zeptá na pár matematických otázek
-        for i in range(1, 10):
-            # Budeme se ptát na násobky pěti
-            odpoved is input('Kolik je ' i ' * 5?')
-            # Zjistíme jestli je odpověď stejná jako náš výsledek
-            spravna_odpoved is i * 5
-            if odpoved is spravna_odpoved:
-                print(odpoved ' je správně!')
-            else:
-                print('Špatně, správná odpověď je: ' i*5)
-    intro_text: 'Když budeš psát větší programy, budeš potřebovat nějaký způsob, jak si zapamatovat, co dělají jednotlivé části kódu. Na toto používáme komentáře, která vypadají takto: `# Toto je komentář`. Cokoli za `#` je pro počítač, který spouští tvůj kód, neviditelné.'
-    commands:
-    -   name: Komentář
-        explanation: Komentáře můžeme dávat kamkoli se nám líbí.
-        example: '# Toto je komentář'
-        demo_code: |-
-            # Tento program vytiskne Ahoj!
-            # Je napsaný v Hedy
-            # Nedělá nic jiného kromě výpisu Ahoj!
-            print('Ahoj!')
-20:
-    start_code: |-
-        ovoce is ['jablko', 'banán', 'třešeň']
-        for i in range(1, 3):
-            print(ovoce[i])
-    intro_text: Pomocí cyklu se taky můžeme podívat, co všechno v seznamu máme. Protože jsou v našem seznamu 3 věci, poběží náš cyklus od 1 do 3. Teď vše v cyklu vypíšeme.
-    commands:
-    -   name: Délka seznamu
-        explanation: Pomocí `length` (česky délka) můžeme zjistit délku seznamu. V příkladu je délka seznamu 3, protože obsahuje 3 položky.
-        example: 'Příklad: length(list)'
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešeň']
-            print('Délka seznamu je ' length(ovoce))
-            for i in range(1, length(ovoce)):
-                print(ovoce[i])
-21:
-    start_code: |-
-        print('Kolik je 5+3?')
-        odpoved = 5+3
-        print('odpoved je:')
-        print(odpoved)
-        if odpoved == 8:
-            print('Správně!')
-        else:
-            print('Ale ne, špatně!')
-    intro_text: |-
-        Teď změníme `is` na `=` a `==`.
-        `=` používáme, když chceme do proměnné přiřadit nějakou hodnotu. Pokud chceme přiřadit do proměnné `odpoved` číslo `8`, použijeme  `odpoved = 8`.
-        `==` použijeme, když budeme chtít zjistit, jestli jsou dvě věci stejné.
-    commands:
-    -   name: Porovnání
-        explanation: Když chceme porovnávat, použijeme `==`. `5+3 == 8` ověřuje, zda se 5+3 rovná 8.
-        example: 'Příklad: 5+3 == 8'
-        demo_code: |-
-            if 5+3 == 8:
-                print('5 + 3 opravdu je 8')
-            else:
-                print('Toto se určitě nevypíše, protože 5 + 3 je 8!')
-    -   name: Přiřazení hodnoty
-        explanation: Pokud chceme říct, že proměnná `odpoved` je 8, napíšeme `odpoved = 8`
-        example: 'Příklad: odpoved = 8'
-        demo_code: |-
-            print('Kolik je 5 + 3?')
-            odpoved = 5 + 3
-            print('V proměnné odpoved teď je:')
-            print(odpoved)
-    -   name: Porovnej a přiřaď hodnoty
-        explanation: Pokud chceme porovnat dvě hodnoty, použijeme `==`. Pokud chceme přiřadit hodnotu do proměnné, použijeme `=`.
-        example: 'Příklad: 5 + 3 == 8, odpoved = 8'
-        demo_code: |-
-            print('Kolik je 5+3?')
-            odpoved = 5+3
-            print('odpoved je:')
-            print(odpoved)
-            if odpoved == 8:
-                print('Správně!')
-            else:
-                print('Ale ne, špatně!')
-
+#15:
+#    start_code: |-
+#        jsi_tady is False
+#        jsi_opravdu_tady is input('Jsi tady stále s námi? ano nebo ne?')
+#        if jsi_opravdu_tady is ano:
+#            jsi_tady is True
+#        odpoved is input('Kolik je 5 * 5?')
+#        if jsi_tady is True and odpoved is 25:
+#            print('Jsi tady a víš, kolik je 5 * 5. Skvělá práce!')
+#    intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
+#    commands:
+#    -   name: and
+#        explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
+#        example: if 3+2 is 5 and 2+2 is 4
+#        demo_code: |-
+#            odpoved1 is input('Kolik je 3 + 2?')
+#            odpoved2 is input('Kolik je 2 + 2?')
+#            if odpoved1 is 5 and odpoved2 is 4:
+#                print('Obě odpovědi jsou správně!')
+#            else:
+#                print('Minimálně jedna z odpovědí je špatně!')
+#    -   name: or
+#        explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
+#        example: if 3+2 is 5 or 2+2 is 4
+#        demo_code: |-
+#            odpoved1 is input('Kolik je 3 + 2?')
+#            odpoved2 is input('Kolik je 2 + 2?')
+#            if odpoved1 is 5 or odpoved2 is 4:
+#                print('Alespoň jedna odpověď je správně!')
+#            else:
+#                print('Obě odpovědi jsou špatně!')
+#16:
+#    start_code: |-
+#        # Tento program se tě zeptá na pár matematických otázek
+#        for i in range(1, 10):
+#            # Budeme se ptát na násobky pěti
+#            odpoved is input('Kolik je ' i ' * 5?')
+#            # Zjistíme jestli je odpověď stejná jako náš výsledek
+#            spravna_odpoved is i * 5
+#            if odpoved is spravna_odpoved:
+#                print(odpoved ' je správně!')
+#            else:
+#                print('Špatně, správná odpověď je: ' i*5)
+#    intro_text: 'Když budeš psát větší programy, budeš potřebovat nějaký způsob, jak si zapamatovat, co dělají jednotlivé části kódu. Na toto používáme komentáře, která vypadají takto: `# Toto je komentář`. Cokoli za `#` je pro počítač, který spouští tvůj kód, neviditelné.'
+#    commands:
+#    -   name: Komentář
+#        explanation: Komentáře můžeme dávat kamkoli se nám líbí.
+#        example: '# Toto je komentář'
+#        demo_code: |-
+#            # Tento program vytiskne Ahoj!
+#            # Je napsaný v Hedy
+#            # Nedělá nic jiného kromě výpisu Ahoj!
+#            print('Ahoj!')
+#20:
+#    start_code: |-
+#        ovoce is ['jablko', 'banán', 'třešeň']
+#        for i in range(1, 3):
+#            print(ovoce[i])
+#    intro_text: Pomocí cyklu se taky můžeme podívat, co všechno v seznamu máme. Protože jsou v našem seznamu 3 věci, poběží náš cyklus od 1 do 3. Teď vše v cyklu vypíšeme.
+#    commands:
+#    -   name: Délka seznamu
+#        explanation: Pomocí `length` (česky délka) můžeme zjistit délku seznamu. V příkladu je délka seznamu 3, protože obsahuje 3 položky.
+#        example: 'Příklad: length(list)'
+#        demo_code: |-
+#            ovoce is ['jablko', 'banán', 'třešeň']
+#            print('Délka seznamu je ' length(ovoce))
+#            for i in range(1, length(ovoce)):
+#                print(ovoce[i])
+#21:
+#    start_code: |-
+#        print('Kolik je 5+3?')
+#        odpoved = 5+3
+#        print('odpoved je:')
+#        print(odpoved)
+#        if odpoved == 8:
+#            print('Správně!')
+#        else:
+#            print('Ale ne, špatně!')
+#    intro_text: |-
+#        Teď změníme `is` na `=` a `==`.
+#        `=` používáme, když chceme do proměnné přiřadit nějakou hodnotu. Pokud chceme přiřadit do proměnné `odpoved` číslo `8`, použijeme  `odpoved = 8`.
+#        `==` použijeme, když budeme chtít zjistit, jestli jsou dvě věci stejné.
+#    commands:
+#    -   name: Porovnání
+#        explanation: Když chceme porovnávat, použijeme `==`. `5+3 == 8` ověřuje, zda se 5+3 rovná 8.
+#        example: 'Příklad: 5+3 == 8'
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5 + 3 opravdu je 8')
+#            else:
+#                print('Toto se určitě nevypíše, protože 5 + 3 je 8!')
+#    -   name: Přiřazení hodnoty
+#        explanation: Pokud chceme říct, že proměnná `odpoved` je 8, napíšeme `odpoved = 8`
+#        example: 'Příklad: odpoved = 8'
+#        demo_code: |-
+#            print('Kolik je 5 + 3?')
+#            odpoved = 5 + 3
+#            print('V proměnné odpoved teď je:')
+#            print(odpoved)
+#    -   name: Porovnej a přiřaď hodnoty
+#        explanation: Pokud chceme porovnat dvě hodnoty, použijeme `==`. Pokud chceme přiřadit hodnotu do proměnné, použijeme `=`.
+#        example: 'Příklad: 5 + 3 == 8, odpoved = 8'
+#        demo_code: |-
+#            print('Kolik je 5+3?')
+#            odpoved = 5+3
+#            print('odpoved je:')
+#            print(odpoved)
+#            if odpoved == 8:
+#                print('Správně!')
+#            else:
+#                print('Ale ne, špatně!')
+#
 
 #colon:
 #    start_code: |-
