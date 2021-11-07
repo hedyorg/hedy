@@ -3,7 +3,7 @@ from website.yaml_file import YamlFile
 import bcrypt
 import re
 import urllib
-from flask import request, make_response, jsonify, redirect
+from flask import request, session, make_response, jsonify, redirect
 from flask_helpers import render_template
 from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
@@ -112,6 +112,8 @@ def routes(app, database, requested_lang):
             return 'invalid username/password', 403
         if not check_password(body['password'], user['password']):
             return 'invalid username/password', 403
+
+        session['user'] = user
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -274,6 +276,7 @@ def routes(app, database, requested_lang):
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
+        session.pop('user', None) # We are only interested in removing the user from the session, not in its value.
         if request.cookies.get(cookie_name):
             DATABASE.forget_token(request.cookies.get(cookie_name))
         return '', 200
@@ -281,6 +284,7 @@ def routes(app, database, requested_lang):
     @app.route('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy(user):
+        session.pop('user', None) # We are only interested in removing the user from the session, not in its value.
         DATABASE.forget_token(request.cookies.get(cookie_name))
         DATABASE.forget_user(user['username'])
         return '', 200
@@ -306,6 +310,7 @@ def routes(app, database, requested_lang):
         hashed = hash(body['new_password'], make_salt())
 
         DATABASE.update_user(user['username'], {'password': hashed})
+        # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
             send_email_template('change_password', user['email'], None)
 
