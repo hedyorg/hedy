@@ -33,7 +33,7 @@ class TestsLevel2(HedyTester):
         plaatsen is een stad, een  dorp, een strand
         print test plaatsen""")
 
-    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Invalid Argument Type', context.exception.error_code)
@@ -261,7 +261,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code="turn right 90",
-      exception=hedy.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
@@ -430,14 +430,14 @@ class TestsLevel2(HedyTester):
     code = textwrap.dedent("""\
     ask what is jouw lievelingskleur?
     echo Jouw lievelingskleur is dus...""")
-    with self.assertRaises(hedy.WrongLevelException) as context:
+    with self.assertRaises(hedy.exceptions.WrongLevelException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Wrong Level', context.exception.error_code)
   def test_ask_without_argument_upto_22(self):
     self.multi_level_tester(
       code="name is ask",
       max_level=10,
-      exception=hedy.IncompleteCommandException,
+      exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()
     )
   def test_random_from_string(self):
@@ -447,7 +447,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      exception=hedy.RequiredArgumentTypeException,
+      exception=hedy.exceptions.RequiredArgumentTypeException,
       test_name=self.name()
     )
   def test_random_undefined_var(self):
@@ -458,7 +458,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=11,
-      exception=hedy.UndefinedVarException,
+      exception=hedy.exceptions.UndefinedVarException,
       test_name=self.name()
     )
 

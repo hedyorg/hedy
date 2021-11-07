@@ -81,7 +81,7 @@ class HedyTester(unittest.TestCase):
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
         hedy.transpile(snippet.code, int(snippet.level))
-    except hedy.CodePlaceholdersPresentException as E: # Code with blanks is allowed
+    except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
     except:
       return False
