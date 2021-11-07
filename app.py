@@ -599,9 +599,12 @@ def submit_answer(level_source, question_nr, attempt):
 
     is_correct = quiz.is_correct_answer(question, chosen_letter)
 
-    # Store the answer in the database
+    # Store the answer in the database. If we don't have a username,
+    # use the session ID as a username.
+    username = current_user(request)['username'] or f'anonymous:{session_id()}'
+
     DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-            username=current_user(request)['username'],
+            username=username,
             level=level_source,
             is_correct=is_correct,
             question_number=question_nr,
