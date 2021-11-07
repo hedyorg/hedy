@@ -127,7 +127,7 @@ class TestsLevel7(HedyTester):
     a is 1
     if a is 1
       print a
-    else   
+    else
       print 'nee'""")
 
     expected = textwrap.dedent("""\
@@ -173,7 +173,7 @@ class TestsLevel7(HedyTester):
           prijs is prijs + 1
     print 'Dat is in totaal ' prijs ' euro.'""")
 
-    with self.assertRaises(hedy.LockedLanguageFeatureException) as context:
+    with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
       result = hedy.transpile(code, self.level)
   def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
@@ -182,10 +182,10 @@ class TestsLevel7(HedyTester):
         repeat 3 times
             print 'mooi'""")
 
-    with self.assertRaises(hedy.LockedLanguageFeatureException) as context:
+    with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
       result = hedy.transpile(code, self.level)
 
-    
+
 # (so this should fail, for now)
 # at one point we want a real "Indent" error and a better error message
 # for this!

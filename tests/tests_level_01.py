@@ -155,7 +155,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
   def test_one_turn_with_var(self):
-    with self.assertRaises(hedy.InvalidArgumentTypeException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
       result = hedy.transpile("turn koekoek", self.level)
     self.assertEqual('Invalid Argument Type', context.exception.error_code)
   def test_one_turn_left(self):
@@ -215,11 +215,11 @@ class TestsLevel1(HedyTester):
 
   # negative tests
   def test_lines_with_space_gives_invalid(self):
-    with self.assertRaises(hedy.InvalidSpaceException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidSpaceException) as context:
       result = hedy.transpile(" print Hallo welkom bij Hedy! ", self.level)
     self.assertEqual('Invalid Space', context.exception.error_code)
   def test_lines_with_spaces_gives_invalid(self):
-    with self.assertRaises(hedy.InvalidSpaceException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidSpaceException) as context:
       result = hedy.transpile(" print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!", self.level)
     self.assertEqual('Invalid Space', context.exception.error_code)
   def test_forward_without_number_gives_type_error(self):
@@ -227,44 +227,44 @@ class TestsLevel1(HedyTester):
     self.multi_level_tester(
       max_level=7,
       code=code,
-      exception=hedy.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
   def test_word_plus_period_gives_invalid(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile("word.", self.level)
     self.assertEqual('Invalid', context.exception.error_code)
   def test_empty_gives_exception(self):
-    with self.assertRaises(hedy.EmptyProgramException) as context:
+    with self.assertRaises(hedy.exceptions.EmptyProgramException) as context:
       result = hedy.transpile("", self.level)
   def test_non_keyword_gives_Invalid(self):
-    with self.assertRaises(hedy.InvalidCommandException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile("groen", self.level)
     self.assertEqual('Invalid', context.exception.error_code)
   def test_lonely_echo_gives_LonelyEcho(self):
     code = "echo wat dan?"
-    with self.assertRaises(hedy.LonelyEchoException) as context:
+    with self.assertRaises(hedy.exceptions.LonelyEchoException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Lonely Echo', context.exception.error_code)
   def test_echo_before_ask_gives_LonelyEcho(self):
     code = textwrap.dedent("""\
     echo what can't we do?
     ask time travel """)
-    with self.assertRaises(hedy.LonelyEchoException) as context:
+    with self.assertRaises(hedy.exceptions.LonelyEchoException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Lonely Echo', context.exception.error_code)
   def test_newlines_only_gives_EmptyProgram(self):
     code = textwrap.dedent("""\
     """)
-    with self.assertRaises(hedy.EmptyProgramException) as context:
+    with self.assertRaises(hedy.exceptions.EmptyProgramException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Empty Program', context.exception.error_code)
   def test_incomplete_gives_Incomplete(self):
-    with self.assertRaises(hedy.IncompleteCommandException) as context:
+    with self.assertRaises(hedy.exceptions.IncompleteCommandException) as context:
       result = hedy.transpile("print", self.level)
     self.assertEqual('Incomplete', context.exception.error_code)
   def test_incomplete_on_line_2_gives_Incomplete(self):
-    with self.assertRaises(hedy.IncompleteCommandException) as context:
+    with self.assertRaises(hedy.exceptions.IncompleteCommandException) as context:
       result = hedy.transpile("print lalalala\nprint", self.level)
     self.assertEqual('Incomplete', context.exception.error_code)
     self.assertEqual('print', str(context.exception.arguments['incomplete_command']))
@@ -272,14 +272,14 @@ class TestsLevel1(HedyTester):
     self.multi_level_tester(
       max_level=22,
       code="print",
-      exception=hedy.IncompleteCommandException,
+      exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()
     )
   def test_non_keyword_with_argument_gives_invalid(self):
     self.multi_level_tester(
       max_level=10,
       code="abc felienne 123",
-      exception=hedy.InvalidCommandException,
+      exception=hedy.exceptions.InvalidCommandException,
       test_name=self.name()
     )
 
