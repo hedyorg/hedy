@@ -1171,43 +1171,40 @@ class ConvertToPython_11(ConvertToPython_10):
 
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
-    def smaller(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
+    def process_comparison(self, args, operator):
+
+        # quotes need to go because we are generating an fstring now
+        arg0 = process_variable(args[0], self.lookup).replace("'", "")
+        arg1 = process_variable(args[1], self.lookup).replace("'", "")
+
+        # f'{arg0:0100}' converts leftpads variable arg0 to lenth 100
+        # that is to make sure that string comparison works well "ish" for numbers
+        # this at one point could be improved with a better type system, of course!
+        # the issue is that we can't do everything in here because
+        # kids submit things with the ask command that wew do not ask them to cast (yet)
+
+        simple_comparison = "f'{" + arg0 + ":0100}'" + operator + "f'{" + arg1 + ":0100}'"
+
         if len(args) == 2:
-            return f"int({arg0}) < int({arg1})"  # no and statements
+            return simple_comparison  # no and statements
         else:
-            return f"int({arg0}) < int({arg1}) and {args[2]}"
+            return f"{simple_comparison} and {args[2]}"
+
+
+    def smaller(self, args):
+        return self.process_comparison(args, "<")
 
     def bigger(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
-        if len(args) == 2:
-            return f"int({arg0}) > int({arg1})"  # no and statements
-        else:
-            return f"int({arg0}) > int({arg1}) and {args[2]}"
+        return self.process_comparison(args, ">")
 
     def smaller_equal(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
-        if len(args) == 2:
-            return f"int({arg0}) <= int({arg1})"  # no and statements
-        else:
-            return f"int({arg0}) <= int({arg1}) and {args[2]}"
+        return self.process_comparison(args, "<=")
+
     def bigger_equal(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
-        if len(args) == 2:
-            return f"int({arg0}) >= int({arg1})"  # no and statements
-        else:
-            return f"int({arg0}) >= int({arg1}) and {args[2]}"
+        return self.process_comparison(args, ">=")
+
     def not_equal(self, args):
-        arg0 = process_variable(args[0], self.lookup)
-        arg1 = process_variable(args[1], self.lookup)
-        if len(args) == 2:
-            return f"str({arg0}) != str({arg1})"  # no and statements
-        else:
-            return f"str({arg0}) != str({arg1}) and {args[2]}"
+        return self.process_comparison(args, "!=")
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):

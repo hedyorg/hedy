@@ -39,7 +39,7 @@ class TestsLevel13(HedyTester):
       print 'Hoog he?'""")
     expected = textwrap.dedent("""\
     getal = 0
-    while int(getal) < int('100000'):
+    while str(getal) < str('100000'):
       getal = input('HOGER!!!!!')
       try:
         getal = int(getal)
