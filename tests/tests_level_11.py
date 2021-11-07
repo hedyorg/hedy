@@ -166,5 +166,5 @@ class TestsLevel11(HedyTester):
     name is felienne
     print name""")
 
-    with self.assertRaises(hedy.UnquotedAssignTextException) as context:
+    with self.assertRaises(hedy.exceptions.UnquotedAssignTextException) as context:
       result = hedy.transpile(code, self.level)
