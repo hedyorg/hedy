@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel12(HedyTester):
   level = 12

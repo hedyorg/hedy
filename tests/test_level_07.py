@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel7(HedyTester):
   level = 7
@@ -184,6 +184,24 @@ class TestsLevel7(HedyTester):
 
     with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
       result = hedy.transpile(code, self.level)
+
+
+  def test_quote_in_if(self):
+    code = textwrap.dedent("""\
+    if eten is 'pizza'
+      print 'lekker'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    if str('eten') == str('pizza'):
+      print(f'lekker')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
 
 
 # (so this should fail, for now)
