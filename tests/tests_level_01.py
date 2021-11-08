@@ -25,7 +25,7 @@ class TestsLevel1(HedyTester):
     expected = "print('Hallo welkom bij Hedy!')"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
+    self.assertEqual('Hallo welkom bij Hedy!', HedyTester.run_code(result))
   def test_print_has_no_turtle(self):
     result = hedy.transpile_inner("print koekoek", self.level)
     expected = False
@@ -51,7 +51,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("'Welcome to OceanView!'", expected_output)
   def test_print_with_slashes(self):
     code = "print 'Welcome to \\O/ceanView!'"
@@ -63,7 +63,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("'Welcome to \\O/ceanView!'", expected_output)
   def test_print_with_slashed_at_end(self):
     code = "print Welcome to \\"
@@ -75,7 +75,7 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
   def test_print_with_spaces(self):
     code = "print        hallo!"
@@ -211,7 +211,7 @@ class TestsLevel1(HedyTester):
     expected = "print('Hallo welkom bij Hedy! ')"
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('Hallo welkom bij Hedy!', self.run_code(result))
+    self.assertEqual('Hallo welkom bij Hedy!', HedyTester.run_code(result))
 
   # negative tests
   def test_lines_with_space_gives_invalid(self):

@@ -24,8 +24,9 @@ class HedyTester(unittest.TestCase):
   level = None
   max_Hedy_level = 23
 
+  @staticmethod
   @contextmanager
-  def captured_output(self):
+  def captured_output():
     new_out, new_err = io.StringIO(), io.StringIO()
     old_out, old_err = sys.stdout, sys.stderr
     try:
@@ -34,9 +35,10 @@ class HedyTester(unittest.TestCase):
     finally:
       sys.stdout, sys.stderr = old_out, old_err
 
-  def run_code(self, parse_result):
+  @staticmethod
+  def run_code(parse_result):
     code = "import random\n" + parse_result.code
-    with self.captured_output() as (out, err):
+    with HedyTester.captured_output() as (out, err):
       exec(code)
     return out.getvalue().strip()
 
@@ -80,10 +82,14 @@ class HedyTester(unittest.TestCase):
 
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
-        hedy.transpile(snippet.code, int(snippet.level))
+        result = hedy.transpile(snippet.code, int(snippet.level))
+        if not result.has_turtle: #ouput from turtle cannot be captured
+          output = HedyTester.run_code(result)
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
-    except:
+    except OSError as E:
+      return True # programs with ask cannot be tested with output :(
+    except Exception as E:
       return False
     return True
 

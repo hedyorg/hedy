@@ -54,7 +54,7 @@ class TestsLevel8(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
 
   # neesting
 

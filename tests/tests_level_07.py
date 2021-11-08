@@ -54,7 +54,7 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
     állatok is 5
@@ -77,7 +77,7 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
@@ -120,7 +120,7 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_allow_space_after_else_line(self):
     #todo should work up to 11??
     code = textwrap.dedent("""\
