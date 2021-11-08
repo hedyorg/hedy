@@ -1461,7 +1461,7 @@ def translate_characters(s):
         return 'comma'
     elif s == '?':
         return 'question mark'
-    elif s == '\\n':
+    elif s == '\n':
         return 'newline'
     elif s == '.':
         return 'period'
