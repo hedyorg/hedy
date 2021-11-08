@@ -1529,13 +1529,22 @@ def preprocess_blocks(code, level):
 
         #calculate nuber of indents if possible
         if indent_size != None:
+            if (leading_spaces % indent_size) != 0:
+                # there is inconsistent indentation, not sure if that is too much or too little!
+                if leading_spaces < current_number_of_indents * indent_size:
+                    raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                                 indent_size=indent_size)
+                else:
+                    raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                                 indent_size=indent_size)
+
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == 7:
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
-        if next_line_needs_indentation and current_number_of_indents == previous_number_of_indents:
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                            indent_size=indent_size)
+        if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
+            raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                         indent_size=indent_size)
 
         if needs_indentation(line):
             next_line_needs_indentation = True

@@ -191,10 +191,27 @@ class TestsLevel10(HedyTester):
      for y in range 1 to 10
      print 'x*y'""")
 
-    with self.assertRaises(hedy.exceptions.IndentationException) as context:
+    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
       result = hedy.transpile(code, self.level)
 
+  def test_dedented_second_loop_1209(self):
+    code = textwrap.dedent("""\
+    for x in range 1 to 10
+     for y in range 1 to 10
+    print 'x*y'""")
 
+    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
+      result = hedy.transpile(code, self.level)
+
+  def test_zigzag_indented_loop_1209(self):
+    code = textwrap.dedent("""\
+    for x in range 1 to 10
+      for y in range 1 to 10
+         print 'this number is'
+        print x*y""")
+
+    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
+      result = hedy.transpile(code, self.level)
 
 
 
