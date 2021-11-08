@@ -210,7 +210,7 @@ class TestsLevel10(HedyTester):
          print 'this number is'
         print x*y""")
 
-    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
+    with self.assertRaises(hedy.exceptions.IndentationException) as context:
       result = hedy.transpile(code, self.level)
 
 
