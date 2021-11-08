@@ -1,9 +1,12 @@
-// Adds brackets to for and print and changes ask to input
+// adds comparisons
 
-command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | assign
+condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
 
-print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))* _RIGHT_BRACKET)?
-input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))*  _RIGHT_BRACKET
+//smaller and smaller_equal could be merged or refactored to minimize overlap?
 
-// todo: some of these vars sould alse be var_access (things that do not define like the loop var)
-for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _LEFT_BRACKET (NUMBER | var) (_COMMA _SPACE|_COMMA) (NUMBER | var) ((_COMMA _SPACE |_COMMA) (NUMBER | var))? _RIGHT_BRACKET _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
+bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
+smaller_equal: (textwithoutspaces | list_access) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access)
+bigger_equal: (textwithoutspaces | list_access) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access)
+not_equal: (textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (textwithoutspaces | list_access)
+

@@ -511,7 +511,7 @@ function rule_ifElseOneLine() {
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('is'),
+      regex: keywordWithSpace('((is)|(in))'),
       token: 'keyword',
       next: 'start',
     }),

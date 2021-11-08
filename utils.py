@@ -10,8 +10,8 @@ import random
 from ruamel import yaml
 from website import querylog
 import commonmark
-commonmark_parser = commonmark.Parser ()
-commonmark_renderer = commonmark.HtmlRenderer ()
+commonmark_parser = commonmark.Parser()
+commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
 from flask_helpers import render_template
 
@@ -39,12 +39,21 @@ def timer(fn):
   return wrapper
 
 
+def timems():
+    """Return the UNIX timestamp in milliseconds.
 
-def timems ():
-    return int (round (time.time () * 1000))
+    You only need to use this function if you are doing performance-sensitive
+    timing. Otherwise, `times` (which returns second-resolution) is probably
+    a better choice.
+    """
+    return int(round(time.time() * 1000))
 
-def times ():
-    return int (round (time.time ()))
+def times():
+    """Return the UNIX timestamp in seconds.
+
+    If you need to store a date/time in the database, prefer this function.
+    """
+    return int(round(time.time()))
 
 
 
@@ -79,7 +88,7 @@ def dump_yaml_rt(data):
     return yaml.round_trip_dump(data, indent=4, width=999)
 
 def slash_join(*args):
-    ret = []
+    ret =[]
     for arg in args:
         if not arg: continue
 
@@ -89,10 +98,10 @@ def slash_join(*args):
     return ''.join(ret)
 
 def is_testing_request(request):
-    return bool ('X-Testing' in request.headers and request.headers ['X-Testing'])
+    return bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
-def extract_bcrypt_rounds (hash):
-    return int (re.match ('\$2b\$\d+', hash) [0].replace ('$2b$', ''))
+def extract_bcrypt_rounds(hash):
+    return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
 
 def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
@@ -132,10 +141,10 @@ def version():
     the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%b %d') + f' ({commit})'
+    return the_date.strftime('%b %d') + f'({commit})'
 
 def valid_email(s):
-    return bool (re.match ('^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
 
 
 @contextlib.contextmanager
@@ -150,7 +159,7 @@ def atomic_write_file(filename, mode='wb'):
 
     THIS WON'T WORK ON WINDOWS -- atomic file renames don't overwrite
     on Windows. We could potentially do something else to make it work
-    (just swallow the exception, someone else already wrote the file?)
+   (just swallow the exception, someone else already wrote the file?)
     but for now we just don't support it.
     """
     if IS_WINDOWS:
@@ -166,25 +175,31 @@ def atomic_write_file(filename, mode='wb'):
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
 def mstoisostring(date):
-    return datetime.datetime.fromtimestamp (int (str (date) [:-3])).isoformat ()
+    unix_ts = date / 1000
+    dt = datetime.datetime.fromtimestamp(unix_ts)
+
+    print('dt', dt)
+    return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
-    return ''.join (random.choice (chars) for _ in range (size))
+    return ''.join(random.choice(chars) for _ in range(size))
 
 # This function takes a markdown string and returns a list with each of the HTML elements obtained
 # by rendering the markdown into HTML.
-def markdown_to_html_tags (markdown):
-    _html = commonmark_renderer.render(commonmark_parser.parse (markdown))
+def markdown_to_html_tags(markdown):
+    _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')
-    return soup.find_all ()
+    return soup.find_all()
 
-def page_404 (translations, menu, lang, username, *page_error):
+def page_404(translations, menu, lang, username, *page_error):
     if page_error:
-        page_error = page_error [0]
+        page_error = page_error[0]
     return render_template("404.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 404
 
-def page_500 (translations, menu, lang, username, *page_error):
+def page_500(translations, menu, lang, username, *page_error):
     if page_error:
-        page_error = page_error [0]
+        page_error = page_error[0]
     return render_template("500.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 500
+
+

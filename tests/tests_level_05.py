@@ -4,23 +4,37 @@ from tests_level_01 import HedyTester
 
 class TestsLevel5(HedyTester):
   level = 5
-  
+
   # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
 
   # print tests
-  def test_unsupported_float_with_dot(self):
+  def test_print_quoted_var(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
     self.multi_level_tester(
-      max_level=11,
-      code="print 1.5 + 1",
-      exception=hedy.UnsupportedFloatException,
+      max_level=10,
+      code=code,
+      expected=expected,
       test_name=self.name()
     )
 
+  def test_unsupported_float_with_dot(self):
+    self.multi_level_tester(
+      max_level=10,
+      code="print 1.5 + 1",
+      exception=hedy.exceptions.UnsupportedFloatException,
+      test_name=self.name()
+    )
   def test_unsupported_float_with_comma(self):
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code="print 1,5 + 1",
-      exception=hedy.UnsupportedFloatException,
+      exception=hedy.exceptions.UnsupportedFloatException,
       test_name=self.name()
     )
 
@@ -67,7 +81,7 @@ class TestsLevel5(HedyTester):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
-    if naam is Hedy print 'leuk'     
+    if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
@@ -89,7 +103,7 @@ class TestsLevel5(HedyTester):
     #this code has a space at the end of line 2
     code = textwrap.dedent("""\
     a is 2
-    if a is 1 print a 
+    if a is 1 print a
     else print 'nee'""")
 
     expected = textwrap.dedent("""\
@@ -179,7 +193,7 @@ class TestsLevel5(HedyTester):
     expected = "period = '.'"
 
     self.multi_level_tester(
-      max_level=20,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),

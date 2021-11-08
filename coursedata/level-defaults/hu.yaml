@@ -265,7 +265,7 @@
             else
                 print 'Hoppá!'
                 print 'A válasz 10'
-8:
+9:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -292,7 +292,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-9:
+10:
     start_code: |-
         for i in range 1 to 10
             print i
@@ -319,219 +319,13 @@
                 print 'Juj!'
                 print 'A válasz 10'
         name: ask
-10:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Aki bújt, aki nem, megyek!'
-    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
-    commands:
-    -   name: "for ezzel:"
-        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
-        example: "for i in range 1 to 10:"
-        demo_code: |-
-            for i in range 1 to 12:
-                print i
-            print 'Aki bújt, aki nem, megyek!'
-    -   name: "if ezzel:"
-        explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
-        example: "if szin is zöld:'"
-        demo_code: |-
-            szin is zöld
-            if szin is zöld:
-                print 'a szín zöld'
-            else:
-                print 'A szin nem zöld'
-    -   name: "(Optional) elif"
-        explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
-        example: "elif a is 5:"
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a értéke 1'
-            elif a is 2:
-                print 'a értéke 2'
-            else:
-                print 'a értéke nem 1 vagy 2'
-11:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'körök száma: ' i ' a számlálás: ' j
-    intro_text: "Mostantól többször ismételhetünk egy ciklust. A példában 5-ig számolunk, és ezt háromszor megtesszük. Tehát 3 kört teszünk meg, és minden alkalommal 5-ig számolunk."
-    commands:
-    -   name: "for"
-        explanation: "Ez egy példa a `for` utasításra"
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'körök száma: ' i ' a számlálás: ' j
-    -   name: "if"
-        explanation: "Ugyanezt megtehetjük `if` utasítással"
-        demo_code: |-
-            szin is kék
-            szinketto is sárga
-            if szin is kék:
-                if szinketto is sárga:
-                    print 'Együtt zöld!'
 12:
-    start_code: |-
-        kor is input('Hány éves vagy?')
-        print('Akkor már voltál ennyi éves:')
-        for i in range(0,kor):
-            print(i)
-    intro_text: "Kerek zárójeleket fogunk használni és változtatni fogunk az ask utasításon! Az  ask utasítás input-ra változik! A print, az ask és a for utasításoknál ezek után kerekzárójelet használunk."
-    commands:
-    -   name: "zárójelek"
-        explanation: " Kerek zárójeleket fogunk használni a kiíratásnál!"
-        example: "Példa: print('Helló világ')"
-        demo_code: "print('Helló világ')"
-    -   name: "Ask helyett input!"
-        explanation: "Eltávolítjuk az ask utasítást és mostantól input-nak fogjuk nevezni. Itt is kerek zárójeleket fogunk használni."
-        example: "Példa: valasz is input('Mi a neved?')"
-        demo_code: |-
-            valasz is input('Mi a neved?')
-            print('Így a neved: ' valasz)
-    -   name: "For utasítás zárójelekkel"
-        explanation: "Most zárójelbe tesszük a for ciklusban szereplő számokat. for i in range (0,10):"
-        example: "Péla: for i in range(0,10):"
-        demo_code: |-
-            for i in range(0,10):
-                print(i)
-            print('Aki bújt, aki nem, megyek!')
-13:
-    start_code: |-
-        gyumolcs is ['alma', 'banán', 'cseresznye']
-        print(gyumolcs)
-    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
-    commands:
-    -   name: "Szögletes zárójel listák körül"
-        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
-        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            print(gyumolcs)
-    -   name: "Vegyünk ki egy elemet a listából"
-        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
-        example: "Példa: elsogyumolcs is gyumolcs[1]"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            elsogyumolcs is gyumolcs[1]
-            print(gyumolcs)
-    -   name: "Elem véletlenszerű kiválasztása listából"
-        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
-        example: "Példa: veletlengyumolcs is gyumolcs[random]"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            veletlengyumolcs is gyumolcs[random]
-            print(veletlengyumolcs)
-14:
-    start_code: |-
-        meg_mindig_itt_vagy is False
-        meg_mindig_itt_vagy is input('Itt vagy még? igen vagy nem?')
-        if meg_mindig_itt_vagy is igen:
-          meg_mindig_itt_vagy is True
-        if meg_mindig_itt_vagy is True:
-          print('Szia!')
-        if meg_mindig_itt_vagy is False:
-          print('Viszlát!')
-    intro_text: |-
-        Most egy `True` vagy `False` változó készítéséről beszélünk (Igaz vagy Hamis), a
-        változóknak lehet a `True` és  `False` értékeket adni. Ezt felhasználhatod egy adott
-        válasz nyomon követésére.
-    commands:
-    -   name: "Példa"
-        explanation: |-
-            Ebben a példában az `True` és `False` kifejezéseket használjuk a kérdésre adott válasz
-            nyomon követésére. Ötször válaszolhatsz. Ha a válasz helyes, a jo_valasz értéke `True`
-        example: "jo_valasz is `False`"
-        demo_code: |-
-            for i in range(1,5):
-                jo_valasz is False
-                valasz is input('Mennyi 5*5')
-                if valasz is 25:
-                    jo_valasz is True
-                else:
-                    jo_valasz is False
-                if jo_valasz is True:
-                    print('Ez helyes!')
-                if jo_valasz is False:
-                    print('Hibás ' 5-i ' kísérlet van hátra')
-15:
     start_code: |
-        meg_itt_vagy is False
-        itt_vagy_meg is input('Itt vagy még? igen vagy nem?')
-        if itt_vagy_meg is True:
-         meg_itt_vagy is True
-        valasz is input('What is 5*5?')
-        if meg_itt_vagy is True and valasz is 25:
-         print('azt mondtad, hogy igen és ez a helyes válasz')
-    intro_text: |
-        Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
-        ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
-        az  `or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
-        oldalán mindkét állításnak igaznak kell lennie. Használhatjuk az `or` kifejezést is.
-        Ekkor csak egy állításnak kell helyesnek lennie.
-    commands:
-    -   name: És
-        explanation: |
-            Mindkét állításnak (az `and` bal és jobb oldalán) igaznak kell lenni.
-        example: |
-            if 3+2 is 5 and 2+2 is 4
-        demo_code: |-
-            valasz1 is input('Mennyi 3+2?')
-            valasz2 is input('Mennyi 2+2?')
-            if valasz1 is 5 and valasz2 is 4:
-             print('Mindkét válasz helyes')
-            else:
-             print('Legalább egy válasz hibás!')
-    -   name: Vagy
-        explanation: |
-            `Or` Az `or` jobb vagy baloldalán legalább az egyik válasznak igaznak kell lenni, ha
-            mindkettő igaz, az is jó.
-        example: if 3+2 is 5 or 2+2 is 4
-        demo_code: |-
-            valasz1 is input('Mennyi 3+2?')
-            valasz2 is input('Mennyi 2+2?')
-            if valasz1 is 5 or valasz2 is 4:
-             print('Legalább egy válasz helyes!')
-            else:
-             print('Mindkét válasz hibás!')
-16:
-    start_code: |-
-        # Ez egy olyan program amely néhány matematikai kérdést fog feltenni
-        for i in range(1, 10):
-            # Ki fogjuk kérdezni az 5 ös szorzótáblát
-            valasz is input('Mennyi ' i ' szorozva 5-tel?')
-            # Leellenőrizzük hogy a valasz megegyezik-e a mi eredményünkkel
-            helyes_valasz is i * 5
-            if valasz is helyes_valasz:
-                print(valasz ' helyes')
-            else:
-                print ('Ez hibás, feltételezem ennyi: ' i*5)
-    intro_text: |-
-        Ha nagyobb programokat készítesz, meg kell találnod a módját, hogy emlékezz
-        arra, melyik kódrészlet mit csinál. Ehhez megjegyzéseket használunk. Egy
-        megjegyzés a következőképpen néz ki:
-         "# Ez egy megjegyzés". A # után minden láthatatlan lesz a kód számára
-    commands:
-    -   name: Megjegyzés
-        explanation: |
-            Oda teszünk megjegyzést, ahova csak akarunk.
-        example: |
-            #Ez egy megjegyzés
-        demo_code: |
-            # Ez a program kiírja hogy szia
-            # Ez Hedy-ben készült
-            # Ez nem csinál mást mint kiírja Szia
-            print('szia!')
-17:
-    start_code: |
-        kor is input('Hány éves vagy?')
+        kor is ask 'Hány éves vagy?'
         if kor < 13:
-         print('Fiatalabb vagy nálam!')
-        elif kor > 13:
-         print('Idősebb vagy nálam!')
+         print 'Fiatalabb vagy nálam!'
+        else
+         print 'Idősebb vagy nálam!'
     intro_text: |
         További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
         ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
@@ -543,30 +337,27 @@
             A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
             ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo< 15` utasítást használjuk.
         example: |
-            Például: kor<12
+            Például: kor<13
         demo_code: |
-            kor is input('Hány éves vagy?')
-            if kor < 13:
-             print('Fiatalabb vagy, mint én!')
+            kor is ask 'Hány éves vagy?'
+            if kor < 13
+             print 'Fiatalabb vagy, mint én!'
     -   name: Nagyobb
         explanation: |
             A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
             ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
         example: |
-            Például: kor>12
+            Például: kor>13
         demo_code: |
-            kor is input('Hány éves vagy?')
-            if kor < 13:
-             print('Idősebb vagy, mint én!')
-18:
+            kor is ask 'Hány éves vagy?'
+            if kor < 13
+             print 'Idősebb vagy, mint én!'
+13:
     start_code: |-
-        jo_valasz is False
-        # addig folytatjuk míg helyes választ nem kapunk!
-        while jo_valasz is False:
-          valasz is input('Mennyi 5-ször 5?')
-          if valasz is 25:
-            jo_valasz is True
-            print('A helyes válasz megadásra került')
+        valasz is 0
+        while jo_valasz != 25
+          valasz is ask 'Mennyi 5-ször 5?'
+        print 'A helyes válasz megadásra került'
     intro_text: |
         Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
         igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
@@ -578,13 +369,10 @@
         example: |
             while jo_valasz is False
         demo_code: |
-            valasz_answer is False
-            # addig folytatjuk míg helyes választ nem kapunk!
-            while valasz_answer is False:
-                valasz is input('Mennyi 5-ször 5?')
-                if valasz is 25:
-                    jo_valasz is True
-                    print('Megadtad a jó választ')
+            valasz is 0
+            while jo_valasz != 25
+              valasz is ask 'Mennyi 5-ször 5?'
+            print 'A helyes válasz megadásra került'
     -   name: |
             Kisebb amíg
         explanation: |-
@@ -594,121 +382,192 @@
         example: 'For example: while szam < 3'
         demo_code: |
             szam is 1
-            # addig folytatjuk amígy szam 3 nem lesz!
-            while szam < 3:
-              print('Ezt ' 3 - szam ' alkalommal ismételjük')
+            while szam < 3
+              print 'Ezt ' 3 - szam ' alkalommal ismételjük'
               szam is szam + 1
-            print('Készen vagyunk')
-19:
-    start_code: |-
-        lista is ['első', 'második', 'harmadik']
-        masodikertek is lista[2]
-        print(masodikertek)
-    intro_text: Ha van egy listánk, akkor kivehetünk egy adott értéket a listából. Ha a második elemet akarjuk kivenni a listából, akkor beírjuk a `lista [2]` parancsot.
-    commands:
-    -   name: Számolás
-        explanation: Összegezhetjük az egy listában szereplő összes értéket is
-        example: lista[1]
-        demo_code: |-
-            lista is ['1', '2', '3']
-            osszeg is lista[1] + lista[2]
-            osszeg is osszeg + lista[3]
-            # itt 6-ra számítunk
-            print(osszeg)
-20:
+            print 'Készen vagyunk'
+
+14:
     start_code: |-
         gyumolcs is ['alma', 'banán', 'cseresznye']
-        for i in range(1, 3):
-            print(gyumolcs[i])
-    intro_text: A for ciklussal egy listában is mindent láthatunk. Mivel a listában három dolog van, a ciklust 1-től 3-ig vesszük. Most mindent kiíratunk a ciklusban.
+        print gyumolcs 
+    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
     commands:
-    -   name: Lista hossza
-        explanation: A `length` utasítással láthatjuk a lista méretét. A példában szereplő lista hossza 3, mert három dolog van a listában
-        example: length(lista)
+    -   name: "Szögletes zárójel listák körül"
+        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
+        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
         demo_code: |-
             gyumolcs is ['alma', 'banán', 'cseresznye']
-            print('a lista hossza ' length(gyumolcs))
-            for i in range(1, length(gyumolcs)):
-                print(gyumolcs[i])
-21:
-    start_code: |-
-        print('Mennyi 5+3?')
-        valasz = 5+3
-        print('a válasz:')
-        print(valasz)
-        if valasz == 8:
-            print('Ez helyes')
-        else:
-            print('Ó nem, ez hibás!')
-    intro_text: 'Most megváltoztatjuk a következőt: "=" és "==". A "=" kifejezést akkor használjuk, ha értéket szeretnénk hozzárendelni egy változóhoz. Ha 8 -at szeretnél rendelni az valasz nevű változóhoz, akkor valasz = 8. `==` jelet akkor használjuk, ha azt akarjuk látni, hogy két dolog ugyanaz-e.'
-    commands:
-    -   name: Összehasonlítás
-        explanation: Ha összehasonlítani akarunk, akkor a == jelet használjuk. 5+3 == 8 ellenőrzi, hogy az 5+3 egyenlő -e 8 -cal
-        example: 'Például: 5+3 == 8'
+            print gyumolcs 
+    -   name: "Vegyünk ki egy elemet a listából"
+        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
+        example: "Példa: elsogyumolcs is gyumolcs[1]"
         demo_code: |-
-            if 5+3 == 8:
-                print('5+3 valóban 8')
-            else:
-                print('Ezt nem íratjuk ki, mert az 5+3 az 8!')
-    -   name: Érték hozzárendelése
-        explanation: Ha azt akarjuk mondani, hogy a valasz nevű változó értéke 8, akkor a valasz = 8 utasítást használjuk.
-        example: |-
-            Például: valasz = 8
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            elsogyumolcs is gyumolcs[1]
+            print gyumolcs 
+    -   name: "Elem véletlenszerű kiválasztása listából"
+        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
+        example: "Példa: veletlengyumolcs is gyumolcs[random]"
         demo_code: |-
-            print('Mennyi 5+3?')
-            valasz = 5+3
-            print('a válasz most:')
-            print(valasz)
-    -   name: Összehasonlítás és érték hozzárendelése
-        explanation: Ha két értéket akarunk összehasonlítani, akkor a "==" jelet használjuk. Ha változót akarunk hozzárendelni, akkor a "=" karaktert használjuk.
-        example: 'Például: 5+3 == 8, valasz=8'
-        demo_code: |-
-            print('Mennyi 5+3?')
-            valasz = 5+3
-            print('a válasz:')
-            print(valasz)
-            if valasz == 8:
-                print('Ez helyes')
-            else:
-                print('Ó nem, ez hibás!')
-22:
-    start_code: |-
-        orszag = input('Hol élsz?')
-        if orszag != Magyarorszag:
-            print('Király!')
-        else:
-            print('Én is Magyarországon élek!')
-    intro_text: Egy új elemet fogunk megtanulni, a `! =` jelet. Az ! azt jelenti, hogy nem és a = azt jelenti, hogy egyenlő Így a ! = azt jelenti, hogy nem egyenlő. Például 5! = 4.
-    commands:
-    -   name: Nem egyenlő
-        explanation: Ha azt ellenőrizzük, hogy két dolog nem egyenlő -e, akkor a `! =` kifejezést használjuk
-        example: Például 5+3 != 9
-        demo_code: |-
-            szam = input('Nem szabad 5 -öt mondani, mi a jó szám?')
-            if szam != 5:
-                print('Szép munka')
-            else:
-                print('Nem volt szabad 5 -öt mondani!')
-23:
-    start_code: |-
-        kor = input('Én 12 éves vagyok, te hány éves vagy?')
-        if kor <= 12:
-            print('Fiatalabb vagy nálam!')
-        elif kor >= 14:
-            print('Idősebb vagy nálam!')
-    intro_text: Most összekapcsoljuk a < jelet és a = jele-t. Ha látni akarjuk, hogy valami kisebb vagy egyenlő-e a második számnál, akkor a "<=" karaktert használjuk. Azt is ellenőrizhetjük, hogy valami nagyobb vagy egyenlő-e a második számnál a "> =" karakterrekkel.
-    commands:
-    -   name: Kisebb egyenlő
-        explanation: '"<=" ellenőrzi, hogy a "<=" bal oldalán lévő szám kisebb vagy egyenlő -e, mint a jobb oldali. Tehát 5 <5 nem igaz, mert 5 nem kisebb 5 -nél, de 5 <= 5 igaz, mert 5 kisebb vagy egyenlő 5 -vel. 6 <= 5 nem igaz.'
-        example: 'Például: kor <= 12'
-        demo_code: |-
-            kor = input('Én 13 éves vagyok, te hány éves vagy?')
-            if kor <= 13:
-                print('Fiatalabb vagy nálam!')
-    -   name: Nagyobb egyenlő
-        explanation: '"> =" ellenőrzi, hogy a "> =" bal oldali szám nagyobb vagy egyenlő -e, mint a jobb oldali. Tehát 5> 5 nem igaz, mert 5 nem nagyobb 5 -nél, de 5> = 5 igaz, mert 5 nagyobb vagy egyenlő 5. 4> = 5 nem igaz.'
-        example: 'Például: kor >= 12'
-        demo_code: |-
-            kor = input('Én 12 éves vagyok, te hány éves vagy?')
-            if kor >= 13:
-                print('Idősebb vagy nálam!')
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            veletlengyumolcs is gyumolcs[random]
+            print veletlengyumolcs 
+#15:
+#    start_code: |
+#        meg_itt_vagy is False
+#        itt_vagy_meg is input('Itt vagy még? igen vagy nem?')
+#        if itt_vagy_meg is True:
+#         meg_itt_vagy is True
+#        valasz is input('What is 5*5?')
+#        if meg_itt_vagy is True and valasz is 25:
+#         print('azt mondtad, hogy igen és ez a helyes válasz')
+#    intro_text: |
+#        Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
+#        ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
+#        az  `or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
+#        oldalán mindkét állításnak igaznak kell lennie. Használhatjuk az `or` kifejezést is.
+#        Ekkor csak egy állításnak kell helyesnek lennie.
+#    commands:
+#    -   name: És
+#        explanation: |
+#            Mindkét állításnak (az `and` bal és jobb oldalán) igaznak kell lenni.
+#        example: |
+#            if 3+2 is 5 and 2+2 is 4
+#        demo_code: |-
+#            valasz1 is input('Mennyi 3+2?')
+#            valasz2 is input('Mennyi 2+2?')
+#            if valasz1 is 5 and valasz2 is 4:
+#             print('Mindkét válasz helyes')
+#            else:
+#             print('Legalább egy válasz hibás!')
+#    -   name: Vagy
+#        explanation: |
+#            `Or` Az `or` jobb vagy baloldalán legalább az egyik válasznak igaznak kell lenni, ha
+#            mindkettő igaz, az is jó.
+#        example: if 3+2 is 5 or 2+2 is 4
+#        demo_code: |-
+#            valasz1 is input('Mennyi 3+2?')
+#            valasz2 is input('Mennyi 2+2?')
+#            if valasz1 is 5 or valasz2 is 4:
+#             print('Legalább egy válasz helyes!')
+#            else:
+#             print('Mindkét válasz hibás!')
+#16:
+#    start_code: |-
+#        # Ez egy olyan program amely néhány matematikai kérdést fog feltenni
+#        for i in range(1, 10):
+#            # Ki fogjuk kérdezni az 5 ös szorzótáblát
+#            valasz is input('Mennyi ' i ' szorozva 5-tel?')
+#            # Leellenőrizzük hogy a valasz megegyezik-e a mi eredményünkkel
+#            helyes_valasz is i * 5
+#            if valasz is helyes_valasz:
+#                print(valasz ' helyes')
+#            else:
+#                print ('Ez hibás, feltételezem ennyi: ' i*5)
+#    intro_text: |-
+#        Ha nagyobb programokat készítesz, meg kell találnod a módját, hogy emlékezz
+#        arra, melyik kódrészlet mit csinál. Ehhez megjegyzéseket használunk. Egy
+#        megjegyzés a következőképpen néz ki:
+#         "# Ez egy megjegyzés". A # után minden láthatatlan lesz a kód számára
+#    commands:
+#    -   name: Megjegyzés
+#        explanation: |
+#            Oda teszünk megjegyzést, ahova csak akarunk.
+#        example: |
+#            #Ez egy megjegyzés
+#        demo_code: |
+#            # Ez a program kiírja hogy szia
+#            # Ez Hedy-ben készült
+#            # Ez nem csinál mást mint kiírja Szia
+#            print('szia!')
+#20:
+#    start_code: |-
+#        gyumolcs is ['alma', 'banán', 'cseresznye']
+#        for i in range(1, 3):
+#            print(gyumolcs[i])
+#    intro_text: A for ciklussal egy listában is mindent láthatunk. Mivel a listában három dolog van, a ciklust 1-től 3-ig vesszük. Most mindent kiíratunk a ciklusban.
+#    commands:
+#    -   name: Lista hossza
+#        explanation: A `length` utasítással láthatjuk a lista méretét. A példában szereplő lista hossza 3, mert három dolog van a listában
+#        example: length(lista)
+#        demo_code: |-
+#            gyumolcs is ['alma', 'banán', 'cseresznye']
+#            print('a lista hossza ' length(gyumolcs))
+#            for i in range(1, length(gyumolcs)):
+#                print(gyumolcs[i])
+#21:
+#    start_code: |-
+#        print('Mennyi 5+3?')
+#        valasz = 5+3
+#        print('a válasz:')
+#        print(valasz)
+#        if valasz == 8:
+#            print('Ez helyes')
+#        else:
+#            print('Ó nem, ez hibás!')
+#    intro_text: 'Most megváltoztatjuk a következőt: "=" és "==". A "=" kifejezést akkor használjuk, ha értéket szeretnénk hozzárendelni egy változóhoz. Ha 8 -at szeretnél rendelni az valasz nevű változóhoz, akkor valasz = 8. `==` jelet akkor használjuk, ha azt akarjuk látni, hogy két dolog ugyanaz-e.'
+#    commands:
+#    -   name: Összehasonlítás
+#        explanation: Ha összehasonlítani akarunk, akkor a == jelet használjuk. 5+3 == 8 ellenőrzi, hogy az 5+3 egyenlő -e 8 -cal
+#        example: 'Például: 5+3 == 8'
+#        demo_code: |-
+#            if 5+3 == 8:
+#                print('5+3 valóban 8')
+#            else:
+#                print('Ezt nem íratjuk ki, mert az 5+3 az 8!')
+#    -   name: Érték hozzárendelése
+#        explanation: Ha azt akarjuk mondani, hogy a valasz nevű változó értéke 8, akkor a valasz = 8 utasítást használjuk.
+#        example: |-
+#            Például: valasz = 8
+#        demo_code: |-
+#            print('Mennyi 5+3?')
+#            valasz = 5+3
+#            print('a válasz most:')
+#            print(valasz)
+#    -   name: Összehasonlítás és érték hozzárendelése
+#        explanation: Ha két értéket akarunk összehasonlítani, akkor a "==" jelet használjuk. Ha változót akarunk hozzárendelni, akkor a "=" karaktert használjuk.
+#        example: 'Például: 5+3 == 8, valasz=8'
+#        demo_code: |-
+#            print('Mennyi 5+3?')
+#            valasz = 5+3
+#            print('a válasz:')
+#            print(valasz)
+#            if valasz == 8:
+#                print('Ez helyes')
+#            else:
+#                print('Ó nem, ez hibás!')
+#colon:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Aki bújt, aki nem, megyek!'
+#    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
+#    commands:
+#    -   name: "for ezzel:"
+#        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
+#        example: "for i in range 1 to 10:"
+#        demo_code: |-
+#            for i in range 1 to 12:
+#                print i
+#            print 'Aki bújt, aki nem, megyek!'
+#    -   name: "if ezzel:"
+#        explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
+#        example: "if szin is zöld:'"
+#        demo_code: |-
+#            szin is zöld
+#            if szin is zöld:
+#                print 'a szín zöld'
+#            else:
+#                print 'A szin nem zöld'
+#    -   name: "(Optional) elif"
+#        explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
+#        example: "elif a is 5:"
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a értéke 1'
+#            elif a is 2:
+#                print 'a értéke 2'
+#            else:
+#                print 'a értéke nem 1 vagy 2'

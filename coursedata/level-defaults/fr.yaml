@@ -64,7 +64,7 @@
             print animaux at random
 3:
     start_code: "print 'Bonjour le monde'"
-    intro_text: |
+    intro_text: |4
 
         `Print` et `impreso` changent au niveau 3.
 
@@ -231,7 +231,7 @@
             else
                 print 'Oups!'
                 print 'La réponse devrait être 10.'
-8:
+9:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -258,7 +258,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-9:
+10:
     start_code: |-
         for i in range 1 to 11
             print i
@@ -272,60 +272,39 @@
             for i in range 1 to 11
                 print i
             print ' Cache toi ou je te verrai !'
-10:
-    start_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Cache toi ou je te verrai !'
-    intro_text: "Maintenant on change encore un petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin du règle précédente."
-    commands:
-    -   name: "`for` avec `:`"
-        explanation: "Utilisant un `for` sur plusieurs lignes, il te faut un `:` à la fin"
-        example: "for i in range 1 to 10:"
-        demo_code: |-
-            for i in range 1 to 10:
-                print i
-            print ' Cache toi ou je te verrai !.'
-    -   name: "`if` avec `:`"
-        explanation: "Nous faisons de la même manière avec tous nos commandes `if`."
-        example: "if couleur is vert:"
-        demo_code: |-
-            couleur is ask 'Quelle couleur préfères-tu ?'
-            if couleur is vert:
-                print 'Tu as choisi le vert.'
-            else:
-                print 'Tu as choisi un autre couleur que le vert.'
-    -   name: "(Optionnel) `elif`"
-        explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `elif`. `Elif` signifie `else if`. Tu regardes alors auparavant à `if` et quand ça n'est pas vrai, tu avances à `elif`. Quand ça n'est pas vrai aussi, tu avances à `else`."
-        example: "elif a is 5"
-        demo_code: |-
-            a is 2
-            if a is 1:
-                print 'a est égal à 1'
-            elif a is 2:
-                print 'a est égal à 2'
-            else:
-                print 'a est ni 1 ni 2'
-
-
-11:
-    start_code: |-
-        for i in range 1 to 3:
-            for j in range 1 to 5:
-                print 'Le résultat de: ' i ' fois ' j ' fait ' i*j
-    intro_text: "À partir de maintenant nous pouvons exécuter un boucle plusieurs fois. Dans l'exemple nous comptons trois fois de un à cinq. Alors nous répétons trois fois un boucle de cinq fois."
-    commands:
-    -   name: "`for` dans un autre `for`."
-        explanation: "Ceci est un exemple de deux boucles de `for` combinés."
-        demo_code: |-
-            for i in range 1 to 3:
-                for j in range 1 to 5:
-                    print 'Le résultat de: ' i ' fois ' j ' fait ' i*j
-    -   name: "`if` dans un autre `if`."
-        explanation: "Nous pouvons faire le même truc avec `if`."
-        demo_code: |-
-            couleur1 is ask 'Donne-moi une couleur :'
-            couleur2 is ask 'Donne-moi encore une couleur'
-            if couleur1 is bleu:
-                if couleur2 is jaune:
-                    print 'Ensemble ça donne vert !'
+#colon:
+#    start_code: |-
+#        for i in range 1 to 10:
+#            print i
+#        print 'Cache toi ou je te verrai !'
+#    intro_text: "Maintenant on change encore un petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin du règle précédente."
+#    commands:
+#    -   name: "`for` avec `:`"
+#        explanation: "Utilisant un `for` sur plusieurs lignes, il te faut un `:` à la fin"
+#        example: "for i in range 1 to 10:"
+#        demo_code: |-
+#            for i in range 1 to 10:
+#                print i
+#            print ' Cache toi ou je te verrai !.'
+#    -   name: "`if` avec `:`"
+#        explanation: "Nous faisons de la même manière avec tous nos commandes `if`."
+#        example: "if couleur is vert:"
+#        demo_code: |-
+#            couleur is ask 'Quelle couleur préfères-tu ?'
+#            if couleur is vert:
+#                print 'Tu as choisi le vert.'
+#            else:
+#                print 'Tu as choisi un autre couleur que le vert.'
+#    -   name: "(Optionnel) `elif`"
+#        explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `elif`. `Elif` signifie `else if`. Tu regardes alors auparavant à `if` et quand ça n'est pas vrai, tu avances à `elif`. Quand ça n'est pas vrai aussi, tu avances à `else`."
+#        example: "elif a is 5"
+#        demo_code: |-
+#            a is 2
+#            if a is 1:
+#                print 'a est égal à 1'
+#            elif a is 2:
+#                print 'a est égal à 2'
+#            else:
+#                print 'a est ni 1 ni 2'
+#
+#
