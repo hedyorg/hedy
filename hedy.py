@@ -1376,14 +1376,14 @@ def create_grammar(level, lang="en"):
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result)
+    save_total_grammar_file(level, result, lang)
 
     return result
 
-def save_total_grammar_file(level, grammar):
+def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "-Total.lark"
+    filename = "level" + str(level) + "." + lang + "-Total.lark"
     loc = path.join(script_dir, "grammars-Total", filename)
     file = open(loc, "w", encoding="utf-8")
     file.write(grammar)
