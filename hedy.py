@@ -1499,8 +1499,16 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
-    first_keyword = code.split()[0]
+    # this is done a bit half-assed, clearly *parsing* the one line would be superior
+    # because now a line like
+    # repeat is 5 would also require indentation!
+    all_words = code.split()
+    if len(all_words) == 0:
+        return False
+
+    first_keyword = all_words[0]
     return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
+
 
 
 def preprocess_blocks(code, level):
