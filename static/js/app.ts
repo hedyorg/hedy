@@ -731,3 +731,8 @@ export function confetti_cannon(){
     }
   }
 }
+
+export function modalStepOne(){
+  return modal.alert (auth.texts['answer_question']);
+  console.log('testing')
+}
