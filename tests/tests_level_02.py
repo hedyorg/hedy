@@ -469,8 +469,8 @@ class TestsLevel2(HedyTester):
     ask is de papier goed?""")
     self.multi_level_tester(
       code=code,
-      max_level=11,
-      exception=hedy.exceptions.UndefinedVarException,
+      max_level=2,
+      exception=hedy.exceptions.ParseException,
       test_name=self.name()
     )
 
