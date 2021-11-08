@@ -54,7 +54,7 @@ class TestsLevel4(HedyTester):
     #this code has a space at the end of line 2
     code = textwrap.dedent("""\
     a is 2
-    if a is 1 print a
+    if a is 1 print a""" + ' ' + """
     else print 'nee'""")
 
     result = hedy.transpile(code, self.level)
