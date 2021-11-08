@@ -52,10 +52,10 @@ class TestsLevel4(HedyTester):
   # if
   def test_allow_space_after_else_line(self):
     #this code has a space at the end of line 2
-    code = textwrap.dedent("""\
-    a is 2
-    if a is 1 print a""" + ' ' + """
-    else print 'nee'""")
+    code = '\n'.join([
+      'a is 2',
+      'if a is 1 print a ',
+      "else print 'nee'"])
 
     result = hedy.transpile(code, self.level)
 
