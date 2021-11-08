@@ -221,7 +221,8 @@ export function runit(level: string, lang: string, cb: () => void) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           // Location can be either [row, col] or just [row].
-
+          // @ts-ignore
+          document.getElementById("repair_button").style.visibility = "visible";
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
