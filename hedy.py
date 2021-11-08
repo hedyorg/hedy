@@ -16,17 +16,19 @@ import re
 HEDY_MAX_LEVEL = 23
 MAX_LINES = 100
 
-#dictionary to store transpilers
+# dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
-reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
+reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None',
+                  'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if',
+                  'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
 # type used in lookup table
 Assignment = namedtuple('Assignment', ['name', 'type'])
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
+commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'],
                       2: ['print', 'ask', 'is', 'turn', 'forward'],
                       3: ['print', 'ask', 'is', 'turn', 'forward'],
                       4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
@@ -59,13 +61,14 @@ commands_and_types_per_level = {
     2: {'at random': ['list']},
     12: {'input': ['string']},
     13: {'print': ['string', 'list']}
-  }
+}
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
 # \ also needs to be escaped because it eats the next character
 characters_that_need_escaping = ["\\", "'"]
 
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
+
 
 def hash_needed(name):
     # this function is now applied on something str sometimes Assignment
@@ -77,10 +80,12 @@ def hash_needed(name):
     # some elements are not names but processed names, i.e. random.choice(dieren)
     # they should not be hashed
     # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(name) is Assignment and name.type == 'operation') or (isinstance(name, str) and '[' in name or '(' in name):
+    if (type(name) is Assignment and name.type == 'operation') or (
+            isinstance(name, str) and '[' in name or '(' in name):
         return False
 
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
+
 
 def hash_var(name):
     if hash_needed(name):
@@ -93,6 +98,7 @@ def hash_var(name):
         return "v" + hash_object.hexdigest()
     else:
         return name
+
 
 def closest_command(invalid_command, known_commands):
     # First search for 100% match of known commands
@@ -121,13 +127,14 @@ def closest_command(invalid_command, known_commands):
     if min_command == invalid_command:
         return None
     return style_closest_command(min_command)
- 
+
 
 def style_closest_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
+
 def closest_command_with_min_distance(command, commands):
-    #simple string distance, could be more sophisticated MACHINE LEARNING!
+    # simple string distance, could be more sophisticated MACHINE LEARNING!
     min = 1000
     min_command = ''
     for c in commands:
@@ -136,6 +143,7 @@ def closest_command_with_min_distance(command, commands):
             min = min_c
             min_command = c
     return min_command
+
 
 def minimum_distance(s1, s2):
     """Return string distance between 2 strings."""
@@ -152,10 +160,12 @@ def minimum_distance(s1, s2):
         distances = new_distances
     return distances[-1]
 
+
 class HedyException(Exception):
     def __init__(self, message, **arguments):
         self.error_code = message
         self.arguments = arguments
+
 
 class InvalidSpaceException(HedyException):
     def __init__(self, level, line_number, fixed_code):
@@ -163,6 +173,7 @@ class InvalidSpaceException(HedyException):
         self.level = level
         self.line_number = line_number
         self.fixed_code = fixed_code
+
 
 class ParseException(HedyException):
     def __init__(self, level, location, keyword_found=None, character_found=None):
@@ -172,74 +183,92 @@ class ParseException(HedyException):
         self.keyword_found = keyword_found
         self.character_found = character_found
 
+
 class UndefinedVarException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Var Undefined', **arguments)
+
 
 class InvalidTypeException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Invalid Type', **arguments)
 
+
 class RequiredArgumentTypeException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Required Argument Type', **arguments)
+
 
 class InvalidArgumentTypeException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Invalid Argument Type', **arguments)
 
+
 class WrongLevelException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Wrong Level', **arguments)
+
 
 class InputTooBigException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Too Big', **arguments)
 
+
 class InvalidCommandException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Invalid', **arguments)
+
 
 class IncompleteCommandException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Incomplete', **arguments)
 
+
 class UnquotedTextException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unquoted Text', **arguments)
+
 
 class EmptyProgramException(HedyException):
     def __init__(self):
         super().__init__('Empty Program')
 
+
 class LonelyEchoException(HedyException):
     def __init__(self):
         super().__init__('Lonely Echo')
+
 
 class CodePlaceholdersPresentException(HedyException):
     def __init__(self):
         super().__init__('Has Blanks')
 
+
 class IndentationException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Unexpected Indentation', **arguments)
 
+
 class LockedLanguageFeatureException(HedyException):
     def __init__(self, **arguments):
         super().__init__('Locked Language Feature', **arguments)
+
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
         return Tree('text', [''.join([str(c) for c in args])])
 
-    #level 2
+    # level 2
     def var(self, args):
         return Tree('var', [''.join([str(c) for c in args])])
+
     def punctuation(self, args):
         return Tree('punctuation', [''.join([str(c) for c in args])])
+
     def index(self, args):
         return ''.join([str(c) for c in args])
+
     def list_access(self, args):
         if type(args[1]) == Tree:
             if "random" in args[1].data:
@@ -249,9 +278,10 @@ class ExtractAST(Transformer):
         else:
             return Tree('list_access', [args[0], args[1]])
 
-    #level 5
+    # level 5
     def number(self, args):
         return Tree('number', ''.join([str(c) for c in args]))
+
 
 class AllAssignmentCommands(Transformer):
     # returns a list of variable and list access
@@ -275,20 +305,19 @@ class AllAssignmentCommands(Transformer):
 
     # level 8
     def repeat_list(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # in level 8 always a string
-      return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
+        # for loop iterator is a var so should be added to the list of vars
+        iterator = str(args[0])
+        commands = args[1:]
+        # in level 8 always a string
+        return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
 
     # level 9
     def for_loop(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
-      return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
-
+        # for loop iterator is a var so should be added to the list of vars
+        iterator = str(args[0])
+        commands = args[1:]
+        # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
+        return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
 
     def input(self, args):
         # return left side of the =
@@ -344,11 +373,13 @@ class AllAssignmentCommands(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+
 class AllAssignmentCommandsHashed(Transformer):
     # returns a list of variable and list access
     # so these can be excluded when printing
 
     Assignment = namedtuple('Assignment', ['name', 'type'])
+
     # this version returns all hashed var names
 
     def filter_ask_assign(self, args):
@@ -366,19 +397,19 @@ class AllAssignmentCommandsHashed(Transformer):
 
     # level 8
     def repeat_list(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # in level 8 always a string
-      return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
+        # for loop iterator is a var so should be added to the list of vars
+        iterator = str(args[0])
+        commands = args[1:]
+        # in level 8 always a string
+        return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
 
     # level 9
     def for_loop(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
-      return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
+        # for loop iterator is a var so should be added to the list of vars
+        iterator = str(args[0])
+        commands = args[1:]
+        # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
+        return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
 
     def input(self, args):
         # return left side of the =
@@ -433,10 +464,12 @@ class AllAssignmentCommandsHashed(Transformer):
     def __default__(self, args, children, meta):
         return self.filter_ask_assign(children)
 
+
 def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
-        if isinstance(element, str): #str needs a special case before list because a str is also a list and we don't want to split all letters out
+        if isinstance(element,
+                      str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
             flat_list.append(element)
         elif isinstance(element, list):
             flat_list += flatten_list_of_lists_to_list(element)
@@ -444,10 +477,12 @@ def flatten_list_of_lists_to_list(args):
             flat_list.append(element)
     return flat_list
 
+
 def are_all_arguments_true(args):
     bool_arguments = [x[0] for x in args]
     arguments_of_false_nodes = flatten_list_of_lists_to_list([x[1] for x in args if not x[0]])
     return all(bool_arguments), arguments_of_false_nodes
+
 
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
@@ -459,7 +494,7 @@ class Filter(Transformer):
     def program(self, args):
         bool_arguments = [x[0] for x in args]
         if all(bool_arguments):
-            return [True] #all complete
+            return [True]  # all complete
         else:
             command_num = 1
             for a in args:
@@ -467,19 +502,25 @@ class Filter(Transformer):
                     return False, a[1], command_num
                 command_num += 1
 
-    #leafs are treated differently, they are True + their arguments flattened
+    # leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
         return True, ''.join([str(c) for c in args])
+
     def random(self, args):
         return True, 'random'
+
     def index(self, args):
         return True, ''.join([str(c) for c in args])
+
     def punctuation(self, args):
         return True, ''.join([c for c in args])
+
     def number(self, args):
         return True, ''.join([c for c in args])
+
     def text(self, args):
         return all(args), ''.join([c for c in args])
+
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -488,9 +529,9 @@ class UsesTurtle(Transformer):
             return False
         else:
             if type(children[0]) == bool:
-                return any(children) # children? if any is true there is a Turtle leaf
+                return any(children)  # children? if any is true there is a Turtle leaf
             else:
-                return False # some nodes like text and punctuation have text children (their letters) these are not turtles
+                return False  # some nodes like text and punctuation have text children (their letters) these are not turtles
 
     def forward(self, args):
         return True
@@ -505,9 +546,6 @@ class UsesTurtle(Transformer):
 
     def NAME(self, args):
         return False
-
-
-
 
 
 class IsValid(Filter):
@@ -532,22 +570,25 @@ class IsValid(Filter):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         return False, args[0][1]
 
-    #other rules are inherited from Filter
+    # other rules are inherited from Filter
+
 
 def valid_echo(ast):
     commands = ast.children
     command_names = [x.children[0].data for x in commands]
     no_echo = not 'echo' in command_names
 
-    #no echo is always ok!
+    # no echo is always ok!
 
-    #otherwise, both have to be in the list and echo shold come after
-    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
+    # otherwise, both have to be in the list and echo shold come after
+    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index(
+        'echo') > command_names.index('ask')
 
 
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
+
     # print, ask an echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
@@ -555,21 +596,27 @@ class IsComplete(Filter):
     def ask(self, args):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
-        incomplete = (args == [] and self.level==1) or (len(args) == 1 and self.level >= 2)
+        incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
         return not incomplete, 'ask'
+
     def print(self, args):
         return args != [], 'print'
+
     def input(self, args):
         return args != [], 'input'
+
     def length(self, args):
         return args != [], 'len'
+
     def print_nq(self, args):
         return args != [], 'print level 2'
+
     def echo(self, args):
-        #echo may miss an argument
+        # echo may miss an argument
         return True, 'echo'
 
-    #other rules are inherited from Filter
+    # other rules are inherited from Filter
+
 
 def process_characters_needing_escape(value):
     # defines what happens if a kids uses ' or \ in in a string
@@ -577,13 +624,16 @@ def process_characters_needing_escape(value):
         value = value.replace(c, f'\{c}')
     return value
 
+
 # decorator used to store each class in the lookup table
 def hedy_transpiler(level):
     def decorator(c):
         TRANSPILER_LOOKUP[level] = c
         c.level = level
         return c
+
     return decorator
+
 
 @hedy_transpiler(level=1)
 class ConvertToPython_1(Transformer):
@@ -600,19 +650,22 @@ class ConvertToPython_1(Transformer):
 
     def program(self, args):
         return '\n'.join([str(c) for c in args])
+
     def command(self, args):
         return args[0]
 
     def text(self, args):
         return ''.join([str(c) for c in args])
+
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
 
         return "print('" + argument + "')"
+
     def echo(self, args):
         if len(args) == 0:
-            return "print(answer)" #no arguments, just print answer
+            return "print(answer)"  # no arguments, just print answer
 
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
@@ -622,7 +675,7 @@ class ConvertToPython_1(Transformer):
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
-    def forward(self,args):
+    def forward(self, args):
         # when a not-number is given, we simply use 50 as default
         try:
             parameter = int(args[0])
@@ -635,17 +688,17 @@ class ConvertToPython_1(Transformer):
 
     def turn(self, args):
         if len(args) == 0:
-            return "t.right(90)" #no arguments works, and means a right turn
+            return "t.right(90)"  # no arguments works, and means a right turn
 
         argument = args[0]
-        if is_variable(argument, self.lookup):        #is the argument a variable? if so, use that
+        if is_variable(argument, self.lookup):  # is the argument a variable? if so, use that
             return f"t.right({argument})"
-        elif argument.isnumeric():         #numbers can also be passed through
+        elif argument.isnumeric():  # numbers can also be passed through
             return f"t.right({argument})"
         elif argument == 'left':
             return "t.left(90)"
         else:
-            return "t.right(90)" #something else also defaults to right turn
+            return "t.right(90)"  # something else also defaults to right turn
 
     def check_arg_types(self, args, command, level):
         allowed_types = self.get_allowed_types(command, level)
@@ -661,7 +714,8 @@ class ConvertToPython_1(Transformer):
 
                     if assignment.type == 'list':
                         types = ','.join(allowed_types)
-                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name, allowed_types=types)
+                        raise hedy.InvalidArgumentTypeException(command=command, variable=assignment.name,
+                                                                allowed_types=types)
                         # same elif here for different types
 
     def get_allowed_types(self, command, level):
@@ -682,18 +736,21 @@ def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
     return name in all_names
 
+
 def process_variable(name, lookup):
-    #processes a variable by hashing and escaping when needed
+    # processes a variable by hashing and escaping when needed
     if is_variable(name, lookup):
         return hash_var(name)
     else:
         return f"'{name}'"
+
 
 def process_variable_for_fstring(name, lookup):
     if is_variable(name, lookup):
         return "{" + hash_var(name) + "}"
     else:
         return name
+
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
@@ -716,11 +773,13 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
+
     def var(self, args):
         name = ''.join(args)
         name = args[0]
         return hash_var(name)
         # return "_" + name if name in reserved_words else name
+
     def print(self, args):
         # grab the allowed arguments from the dictionary
         self.check_arg_types(args, 'print', self.level)
@@ -733,7 +792,7 @@ class ConvertToPython_2(ConvertToPython_1):
             argument = process_characters_needing_escape(argument)
 
             # final argument and punctuation arguments do not have to be separated with a space, other do
-            if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
+            if i == len(args) - 1 or args[i + 1] in self.punctuation_symbols:
                 space = ''
             else:
                 space = " "
@@ -751,7 +810,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) > 0:
             parameter = args[0]
 
-        #if the parameter is a variable, print as is
+        # if the parameter is a variable, print as is
         # otherwise, see if we got a number. if not, simply use 50 as default
         try:
             if not is_variable(parameter, self.lookup):
@@ -764,10 +823,11 @@ class ConvertToPython_2(ConvertToPython_1):
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
+
     def assign(self, args):
         parameter = args[0]
         value = args[1]
-        #if the assigned value contains single quotes, escape them
+        # if the assigned value contains single quotes, escape them
         value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
@@ -786,8 +846,10 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             return args[0] + '[' + args[1] + ']'
 
+
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
+
 
 def make_f_string(args, lookup):
     argument_string = ''
@@ -804,7 +866,7 @@ def make_f_string(args, lookup):
     return f"print(f'{argument_string}')"
 
 
-#TODO: punctuation chars not be needed for level2 and up anymore, could be removed
+# TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
 
@@ -837,11 +899,10 @@ class ConvertToPython_3(ConvertToPython_2):
         self.check_arg_types(args, 'print', self.level)
         argument_string = ''
         for argument in args:
-            argument = argument.replace("'", '') #no quotes needed in fstring
+            argument = argument.replace("'", '')  # no quotes needed in fstring
             argument_string += process_variable_for_fstring(argument, self.lookup)
 
         return f"print(f'{argument_string}')"
-
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
@@ -853,9 +914,11 @@ class ConvertToPython_3(ConvertToPython_2):
         self.check_arg_types(remaining_args, 'ask', self.level)
         return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
+
 def indent(s):
     lines = s.split('\n')
     return '\n'.join(['  ' + l for l in lines])
+
 
 @hedy_transpiler(level=4)
 class ConvertToPython_4(ConvertToPython_3):
@@ -875,16 +938,20 @@ class ConvertToPython_4(ConvertToPython_3):
 {indent(args[1])}
 else:
 {indent(args[2])}"""
+
     def condition(self, args):
         return ' and '.join(args)
+
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
-        return f"{arg0} == {arg1}" #no and statements
+        return f"{arg0} == {arg1}"  # no and statements
+
     def in_list_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} in {arg1}"
+
 
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
@@ -894,25 +961,25 @@ class ConvertToPython_5(ConvertToPython_4):
         self.check_var_usage([a for a in args if not type(a) is Tree])
         self.check_arg_types(args, 'print', self.level)
 
-        #force all to be printed as strings (since there can not be int arguments)
+        # force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
             if type(a) is Tree:
                 args_new.append("{" + a.children + "}")
             else:
-                a = a.replace("'", "") #no quotes needed in fstring
+                a = a.replace("'", "")  # no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
 
         arguments = ''.join(args_new)
         return "print(f'" + arguments + "')"
 
-    #we can now have ints as types so chck must force str
+    # we can now have ints as types so chck must force str
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
         arg1 = process_variable(args[1], self.lookup)
-        #TODO if we start using fstrings here, this str can go
+        # TODO if we start using fstrings here, this str can go
         if len(args) == 2:
-            return f"str({arg0}) == str({arg1})" #no and statements
+            return f"str({arg0}) == str({arg1})"  # no and statements
         else:
             return f"str({arg0}) == str({arg1}) and {args[2]}"
 
@@ -956,6 +1023,7 @@ class ConvertToPython_5(ConvertToPython_4):
     def division(self, args):
         return self.process_calculation(args, '//')
 
+
 @hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
     def number(self, args):
@@ -967,6 +1035,7 @@ class ConvertToPython_6(ConvertToPython_5):
         command = args[1]
         return f"""for {var_name} in range(int({str(times)})):
 {indent(command)}"""
+
 
 @hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
@@ -982,14 +1051,14 @@ class ConvertToPython_7(ConvertToPython_6):
         return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
 
     def ifs(self, args):
-        args = [a for a in args if a != ""] # filter out in|dedent tokens
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = [indent(x) for x in args[1:]]
 
         return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
     def elses(self, args):
-        args = [a for a in args if a != ""] # filter out in|dedent tokens
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = [indent(x) for x in args]
 
@@ -1012,21 +1081,22 @@ class ConvertToPython_7(ConvertToPython_6):
             return parameter + " = [" + ", ".join(values) + "]"
 
     def var_access(self, args):
-        if len(args) == 1: #accessing a var
+        if len(args) == 1:  # accessing a var
             return args[0]
         else:
-        # this is list_access
-            return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
+            # this is list_access
+            return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(
+                args[0]) + ")"
+
 
 @hedy_transpiler(level=8)
 class ConvertToPython_8(ConvertToPython_7):
     def repeat_list(self, args):
-      args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
-      body = "\n".join([indent(x) for x in args[2:]])
+        body = "\n".join([indent(x) for x in args[2:]])
 
-      return f"for {args[0]} in {args[1]}:\n{body}"
-
+        return f"for {args[0]} in {args[1]}:\n{body}"
 
 
 @hedy_transpiler(level=9)
@@ -1038,6 +1108,8 @@ class ConvertToPython_9(ConvertToPython_8):
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
+
+
 @hedy_transpiler(level=10)
 @hedy_transpiler(level=11)
 class ConvertToPython_10_11(ConvertToPython_9):
@@ -1045,6 +1117,7 @@ class ConvertToPython_10_11(ConvertToPython_9):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+
 
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_10_11):
@@ -1062,6 +1135,7 @@ class ConvertToPython_12(ConvertToPython_10_11):
                 args_new.append(a)
 
         return f'{var} = input(' + '+'.join(args_new) + ")"
+
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
@@ -1090,6 +1164,8 @@ class ConvertToPython_13(ConvertToPython_12):
 
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
+
+
 # Custom transformer that can both be used bottom-up or top-down
 
 @hedy_transpiler(level=14)
@@ -1109,7 +1185,8 @@ class ConvertToPython_14(ConvertToPython_13):
 
                     if value == 'true' or value == 'True' or value == hash_var('True') or value == hash_var('true'):
                         return parameter + " = True"
-                    elif value == 'false' or value == 'False' or value == hash_var('False') or value == hash_var('false'):
+                    elif value == 'false' or value == 'False' or value == hash_var('False') or value == hash_var(
+                            'false'):
                         return parameter + " = False"
                     else:
                         return parameter + " = '" + value + "'"
@@ -1126,19 +1203,23 @@ class ConvertToPython_14(ConvertToPython_13):
         elif arg1 == '\'False\'' or arg1 == '\'false\'':
             return f"{arg0} == False"
         else:
-            return f"str({arg0}) == str({arg1})" #no and statements
+            return f"str({arg0}) == str({arg1})"  # no and statements
+
 
 @hedy_transpiler(level=15)
 class ConvertToPython_15(ConvertToPython_14):
     def andcondition(self, args):
         return ' and '.join(args)
+
     def orcondition(self, args):
         return ' or '.join(args)
+
 
 @hedy_transpiler(level=16)
 class ConvertToPython_16(ConvertToPython_15):
     def comment(self, args):
         return f"# {args}"
+
 
 @hedy_transpiler(level=17)
 class ConvertToPython_17(ConvertToPython_16):
@@ -1158,12 +1239,14 @@ class ConvertToPython_17(ConvertToPython_16):
         else:
             return f"int({arg0}) > int({arg1}) and {args[2]}"
 
+
 @hedy_transpiler(level=18)
 class ConvertToPython_18(ConvertToPython_17):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
-        return "while " + args[0] + ":\n"+"\n".join(all_lines)
+        return "while " + args[0] + ":\n" + "\n".join(all_lines)
+
 
 @hedy_transpiler(level=19)
 @hedy_transpiler(level=20)
@@ -1200,6 +1283,7 @@ class ConvertToPython_19_20(ConvertToPython_18):
             values = args[1:]
             return parameter + " = [" + ", ".join(values) + "]"
 
+
 @hedy_transpiler(level=21)
 class ConvertToPython_21(ConvertToPython_19_20):
     def equality_check(self, args):
@@ -1216,6 +1300,7 @@ class ConvertToPython_21(ConvertToPython_19_20):
         else:
             return f"str({arg0}) == str({arg1})"  # no and statements
 
+
 @hedy_transpiler(level=22)
 class ConvertToPython_22(ConvertToPython_21):
     def not_equal(self, args):
@@ -1225,6 +1310,7 @@ class ConvertToPython_22(ConvertToPython_21):
             return f"str({arg0}) != str({arg1})"  # no and statements
         else:
             return f"str({arg0}) != str({arg1}) and {args[2]}"
+
 
 @hedy_transpiler(level=23)
 class ConvertToPython_23(ConvertToPython_22):
@@ -1255,10 +1341,11 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     rules_grammar_1 = grammar_text_1.split('\n')
     remaining_rules_grammar_2 = grammar_text_2.split('\n')
     for line_1 in rules_grammar_1:
-        if line_1 == '' or line_1[0] == '/': #skip comments and empty lines:
+        if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
             continue
         parts = line_1.split(':')
-        name_1, definition_1 = parts[0], ''.join(parts[1:]) #get part before are after : (this is a join because there can be : in the rule)
+        name_1, definition_1 = parts[0], ''.join(
+            parts[1:])  # get part before are after : (this is a join because there can be : in the rule)
 
         rules_grammar_2 = grammar_text_2.split('\n')
         override_found = False
@@ -1266,7 +1353,7 @@ def merge_grammars(grammar_text_1, grammar_text_2):
             if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
                 continue
             parts = line_2.split(':')
-            name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+            name_2, definition_2 = parts[0], ''.join(parts[1])  # get part before are after :
             if name_1 == name_2:
                 override_found = True
                 new_rule = line_2
@@ -1280,9 +1367,9 @@ def merge_grammars(grammar_text_1, grammar_text_2):
         else:
             merged_grammar.append(line_1)
 
-    #all rules that were not overlapping are new in the grammar, add these too
+    # all rules that were not overlapping are new in the grammar, add these too
     for rule in remaining_rules_grammar_2:
-        if not(rule == '' or rule[0] == '/'):
+        if not (rule == '' or rule[0] == '/'):
             merged_grammar.append(rule)
 
     merged_grammar = sorted(merged_grammar)
@@ -1297,7 +1384,7 @@ def create_grammar(level, lang="en"):
     result = merge_grammars(result, keys)
 
     # then keep merging new grammars in
-    for i in range(2, level+1):
+    for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
         result = merge_grammars(result, grammar_text_i)
 
@@ -1306,6 +1393,7 @@ def create_grammar(level, lang="en"):
     save_total_grammar_file(level, result)
 
     return result
+
 
 def save_total_grammar_file(level, grammar):
     # Load Lark grammars relative to directory of current file
@@ -1316,7 +1404,8 @@ def save_total_grammar_file(level, grammar):
     file.write(grammar)
     file.close()
 
-def get_additional_rules_for_level(level, sub = 0):
+
+def get_additional_rules_for_level(level, sub=0):
     script_dir = path.abspath(path.dirname(__file__))
     if sub:
         filename = "level" + str(level) + "-" + str(sub) + "-Additions.lark"
@@ -1326,12 +1415,14 @@ def get_additional_rules_for_level(level, sub = 0):
         grammar_text = file.read()
     return grammar_text
 
+
 def get_full_grammar_for_level(level):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "level" + str(level) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
+
 
 def get_keywords_for_language(lang):
     script_dir = path.abspath(path.dirname(__file__))
@@ -1342,10 +1433,11 @@ def get_keywords_for_language(lang):
         grammar_text = file.read()
     return grammar_text
 
+
 PARSER_CACHE = {}
 
 
-def get_parser(level, lang = "en"):
+def get_parser(level, lang="en"):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
@@ -1359,7 +1451,9 @@ def get_parser(level, lang = "en"):
     PARSER_CACHE[key] = ret
     return ret
 
+
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
+
 
 def transpile(input_string, level, lang="en"):
     try:
@@ -1370,7 +1464,7 @@ def transpile(input_string, level, lang="en"):
         # that should surely be improved!!
         # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
 
-        #try 1 level lower
+        # try 1 level lower
         if level > 1:
             try:
                 new_level = level - 1
@@ -1385,13 +1479,14 @@ def transpile(input_string, level, lang="en"):
 
 
 def repair(input_string):
-    #the only repair we can do now is remove leading spaces, more can be added!
+    # the only repair we can do now is remove leading spaces, more can be added!
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
 
+
 def translate_characters(s):
-# this method is used to make it more clear to kids what is meant in error messages
-# for example ' ' is hard to read, space is easier
-# this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
+    # this method is used to make it more clear to kids what is meant in error messages
+    # for example ' ' is hard to read, space is easier
+    # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
     if s == ' ':
         return 'space'
     elif s == ',':
@@ -1424,6 +1519,7 @@ def beautify_parse_error(character_found):
     character_found = translate_characters(character_found)
     return character_found
 
+
 def find_indent_length(line):
     number_of_spaces = 0
     for x in line:
@@ -1433,22 +1529,23 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
+
 def preprocess_blocks(code, level):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
     previous_number_of_indents = 0
-    indent_size = None #we don't fix indent size but the first encounter sets it
+    indent_size = None  # we don't fix indent size but the first encounter sets it
     line_number = 0
     for line in lines:
         line_number += 1
         leading_spaces = find_indent_length(line)
 
-        #first encounter sets indent size for this program
+        # first encounter sets indent size for this program
         if indent_size == None and leading_spaces > 0:
             indent_size = leading_spaces
 
-        #calculate nuber of indents if possible
+        # calculate nuber of indents if possible
         if indent_size != None:
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == 7:
@@ -1457,8 +1554,6 @@ def preprocess_blocks(code, level):
         if current_number_of_indents - previous_number_of_indents > 1:
             raise hedy.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                             indent_size=indent_size)
-
-
 
         if current_number_of_indents < previous_number_of_indents:
             # we springen 'terug' dus er moeten end-blocken in
@@ -1469,10 +1564,10 @@ def preprocess_blocks(code, level):
             for i in range(difference_in_indents):
                 processed_code.append('end-block')
 
-        #save to compare for next line
+        # save to compare for next line
         previous_number_of_indents = current_number_of_indents
 
-        #if indent remains the same, do nothing, just add line
+        # if indent remains the same, do nothing, just add line
         processed_code.append(line)
 
     # if the last line is indented, the end of the program is also the end of all indents
@@ -1481,13 +1576,15 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
+
 
 def transpile_inner(input_string, level, lang="en"):
     number_of_lines = input_string.count('\n')
 
-    #parser is not made for huge programs!
+    # parser is not made for huge programs!
     if number_of_lines > MAX_LINES:
         raise InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
@@ -1499,16 +1596,16 @@ def transpile_inner(input_string, level, lang="en"):
     if contains_blanks(input_string):
         raise CodePlaceholdersPresentException()
 
-
     if level >= 3:
         input_string = input_string.replace("\\", "\\\\")
 
-    #in level 7 we add indent-dedent blocks to the code before parsing
+    # in level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
         input_string = preprocess_blocks(input_string, level)
 
     try:
-        program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
+        program_root = parser.parse(input_string + '\n').children[
+            0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
@@ -1522,8 +1619,9 @@ def transpile_inner(input_string, level, lang="en"):
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
-            characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
-            character_found  = beautify_parse_error(e.char)
+            characters_expected = str(
+                e.allowed)  # not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
+            character_found = beautify_parse_error(e.char)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
             raise ParseException(level=level, location=location, character_found=character_found) from e
@@ -1543,9 +1641,9 @@ def transpile_inner(input_string, level, lang="en"):
         if isinstance(args, list):
             args = args[0]
         if args == ' ':
-            #the error here is a space at the beginning of a line, we can fix that!
+            # the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
-            if fixed_code != input_string: #only if we have made a successful fix
+            if fixed_code != input_string:  # only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, lang)
             raise InvalidSpaceException(level, line, result.code)
         elif args == 'print without quotes':
@@ -1556,7 +1654,7 @@ def transpile_inner(input_string, level, lang="en"):
         else:
             invalid_command = args
             closest = closest_command(invalid_command, commands_per_level[level])
-            if closest == None: #we couldn't find a suggestion because the command itself was found
+            if closest == None:  # we couldn't find a suggestion because the command itself was found
                 # clearly the error message here should be better or it should be a different one!
                 raise ParseException(level=level, location=["?", "?"], keyword_found=invalid_command)
             raise InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest)
@@ -1572,11 +1670,11 @@ def transpile_inner(input_string, level, lang="en"):
 
     try:
         if level <= HEDY_MAX_LEVEL:
-            #grab the right transpiler from the lookup
+            # grab the right transpiler from the lookup
             transpiler = TRANSPILER_LOOKUP[level]
             python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
         else:
-           raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+            raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
     except visitors.VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.
@@ -1589,6 +1687,7 @@ def transpile_inner(input_string, level, lang="en"):
 
     return ParseResult(python, has_turtle)
 
+
 def execute(input_string, level):
     python = transpile(input_string, level)
     if python.has_turtle:
@@ -1596,33 +1695,80 @@ def execute(input_string, level):
     exec(python.code)
 
 
-# TODO: Change the program to use the parse method from the parser and not the lex method
-def translate_keywords(input_string, from_lang="en", to_lang="nl",level=1):
+def keywordsToDict(to_lang="nl"):
+    keywords = {}
+    keywords_from = get_keywords_for_language("en").replace("\n\n", "\n").splitlines()
+
+    keywords_to = get_keywords_for_language(to_lang).replace("\n\n", "\n").splitlines()
+
+    for line in range(len(keywords_from)):
+        if keywords_from[line][0] != '/':
+            keywords[(keywords_from[line].split('"'))[1]] = keywords_to[line].split('"')[1]
+
+    return keywords
+
+
+def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
     parser = get_parser(level, from_lang)
-    keyword_list = []
 
-    #program_root = parser.parse(input_string + '\n').children[0]
-    #abstract_syntaxtree = ExtractAST().transform(program_root)
+    keywordDict = keywordsToDict(to_lang)
+    program_root = parser.parse(input_string + '\n').children[0]
+    abstract_syntaxtree = ExtractAST().transform(program_root)
+    abstract_syntaxtree = ConvertToLang2(keywordDict).transform(program_root)
 
-
-    tokens = parser.lex(input_string)
-    for token in tokens:
-        keyword_list.append([token.type, str(token)])
-
-    keywords = get_keywords_for_language(to_lang)
-    newString = ''
-    for token in keyword_list:
-        if token[0] != '__ANON_1' and token[0] != '_EOL' and token[0] != '_SPACE':
-            start = keywords.find(token[0]) + len(token[0]) + 4
-            end = keywords.find('\n', start) - 1
-            token[1] = keywords[start:end]
-
-        newString += token[1]
-
-    print(newString)
     return
 
 
+class ConvertToLang1(Transformer):
+    keywords = {}
+
+    def __init__(self, keywords):
+        self.keywords = keywords
+
+    def command(self, args):
+        return args[0]
+
+    def program(self, args):
+        return '\n'.join([str(c) for c in args])
+
+    def text(self, args):
+        return ''.join([str(c) for c in args])
+
+    def print(self, args):
+        return self.keywords["print"] + " " + "".join([str(c) for c in args])
+
+    def echo(self, args):
+        return self.keywords["echo"] + " " + "".join([str(c) for c in args])
+
+    def ask(self, args):
+        return self.keywords["ask"] + " " + "".join([str(c) for c in args])
+
+    def turn(self, args):
+        return self.keywords["turn"] + " " + "".join([str(c) for c in args])
+
+    def forward(self, args):
+        return self.keywords["forward"] + " " + "".join([str(c) for c in args])
+
+
+    def __default__(self, data, children, meta):
+        return Tree(data, children, meta)
+
+
+class ConvertToLang2(ConvertToLang1):
+
+    def assign(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
+
+    def punctuation(self, args):
+        return ''.join([str(c) for c in args])
+
+    def var(self, args):
+        return ''.join([str(c) for c in args])
+
+    def assign_list(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+
+#translate_keywords("people is mom, dad\nforward 50",from_lang="en", level =2)
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
