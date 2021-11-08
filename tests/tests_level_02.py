@@ -462,4 +462,17 @@ class TestsLevel2(HedyTester):
       test_name=self.name()
     )
 
+  def test_ask_level_2(self):
+    code = textwrap.dedent("""\
+    keuzes is steen, schaar, papier
+    print keuzes at random
+    ask is de papier goed?""")
+    self.multi_level_tester(
+      code=code,
+      max_level=2,
+      exception=hedy.exceptions.ParseException,
+      test_name=self.name()
+    )
+
+
 
