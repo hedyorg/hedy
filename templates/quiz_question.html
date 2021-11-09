@@ -33,11 +33,21 @@
         <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt) }}" method="POST">
             <div class="grid gap-1 rounded-t-xl">
                 {% set counter = namespace(value=0) %}
+                {% set index = namespace(value=0) %}
+                {% for row in question.mp_choice_options|batch(2) %}
+                    {% for column in row %}
+                        {% if question_options[index.value].char_index == chosen_letter %}
+                   <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab font-semibold">Feedback : {{question_options[index.value].feedback}}</div>
+                            <div class="grid gap-1 rounded-t-xl">
+                        {% endif %}
+                        {% set index.value = index.value + 1 %}
+                    {% endfor %}
+                {% endfor %}
                 {% for row in question.mp_choice_options|batch(2) %}
                     <div class="flex flex-row">
                     {% for column in row %}
                         <div class="flex flex-col">
-                            {% if question.correct_answer in chosen_option %}
+                            {% if question.correct_answer == chosen_letter %}
                                 <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg radio-block"
                                      id={{ question_options[counter.value].char_index }}>
                                     <label class="inline-flex items-center"><p
@@ -57,7 +67,7 @@
                                         {% endif %}</span>
                                     </label>
                                 </div>
-                            {% elif question_options[counter.value].char_index in chosen_option %}
+                            {% elif question_options[counter.value].char_index == chosen_letter %}
                                 <div class="p-1 border-blue-600 border-4 rounded-lg shadow-lg" radio-block
                                      id="answer-disabled-{{ question_options[counter.value].char_index }}">
                                     <label class="inline-flex items-center"><p

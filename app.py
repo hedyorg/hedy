@@ -520,12 +520,14 @@ def get_quiz(level_source, question_nr, attempt):
     question = quiz.get_question(quiz_data, question_nr)
     question_obj = quiz.question_options_for(question)
 
+    chosen_letter = 'X' if session.get('chosenOption') is None else session.get('chosenOption')
     return render_template('quiz_question.html',
                            quiz=quiz_data,
                            level_source=level_source,
                            questionStatus=questionStatus,
                            questions=quiz_data['questions'],
                            question_options=question_obj,
+                           chosen_letter = chosen_letter,
                            question=question,
                            question_nr=question_nr,
                            correct=session.get('correct_answer'),
@@ -604,6 +606,7 @@ def submit_answer(level_source, question_nr, attempt):
         score = quiz.correct_answer_score(question, attempt)
         session['total_score'] = session.get('total_score', 0) + score
         session['correct_answer'] = session.get('correct_answer', 0) + 1
+
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
 
     # Not a correct answer. You can try again if you haven't hit your max attempts yet.
@@ -611,7 +614,7 @@ def submit_answer(level_source, question_nr, attempt):
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
 
     # Redirect to the display page to try again
-    return redirect(url_for('get_quiz', level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
+    return redirect(url_for('get_quiz', chosen_letter= chosen_letter, level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
 
 @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
 def quiz_feedback(level_source, question_nr):
@@ -634,6 +637,9 @@ def quiz_feedback(level_source, question_nr):
     correct_option = quiz.get_correct_answer(question)
 
     question_options = quiz.question_options_for(question)
+
+    #Reset the chosenOption session variable after the feedback page
+    session['chosenOption'] = None
     return render_template('feedback.html', quiz=quiz_data, question=question,
                            questions=quiz_data['questions'],
                            question_options=question_options,
