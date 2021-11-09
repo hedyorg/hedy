@@ -233,7 +233,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 
 @app.before_request
 def before_request_begin_logging():
-    querylog.begin_global_log_record(path=request.path, method=request.method)
+    path = (str(request.path) + '?' + str(request.query_string)) if request.query_string else str(request.path)
+    querylog.begin_global_log_record(path=path, method=request.method)
 
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
@@ -714,9 +715,9 @@ def adventure_page(adventure_name, level):
 
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
-@app.route('/onlinemasters', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'step': 1})
-@app.route('/space_eu', methods=['GET'], defaults={'level': 1, 'step': 1})
+@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy', methods=['GET'], defaults={'level': '1', 'step': 1})
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])

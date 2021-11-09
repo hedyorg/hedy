@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel4(HedyTester):
   level=4
@@ -25,7 +25,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+    self.assertIn(HedyTester.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
   def test_assign_list_multiple_spaces(self):
     code = textwrap.dedent("""\
     dieren is Hond,  Kat,       Kangoeroe
@@ -218,7 +218,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual(self.run_code(result), 'jij wint')
+    self.assertEqual(HedyTester.run_code(result), 'jij wint')
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -235,7 +235,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual(self.run_code(result), 'gelijkspel!')
+    self.assertEqual(HedyTester.run_code(result), 'gelijkspel!')
   def test_if_in_list(self):
     code = textwrap.dedent("""\
     items is red, green
@@ -252,7 +252,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('found!', self.run_code(result))
+    self.assertEqual('found!', HedyTester.run_code(result))
   # todo would be good to make combinations with if and turtle
 
 
