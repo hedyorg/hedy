@@ -1,82 +1,86 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
   {% if not is_teacher %}
     <div id="student_classes" class="pl-8">
       <h2>{{auth.student_classes}}</h2>
       <ul class="list-none" style="margin: 0"></ul>
-      <br><br>
     </div>
   {% endif %}
   {# Temporary message for teachers #}
   {% if is_teacher %}
     <p class="p-8 bg-green-500 rounded-b font-bold text-white">The list of your classes has been moved to <a class="text-blue-700" href="{{localize_link ('/for-teachers')}}">For Teachers section</a></p>
   {% endif %}
-  <h2 class="pl-8">{{auth.profile}} &nbsp;&nbsp;<button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button></h2>
-  <form class="pl-8 auth" id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
-    <br><br>
-    <label>{{auth.username}}</label>
-    <strong id="username"></strong>
-    <br><br>
-    <label>{{auth.email}}</label>
-    <input id="email">
-    <br><br>
-    <label>{{auth.birth_year}}</label>
-    <input id="birth_year">
-    <br><br>
-    <label>{{auth.gender}}</label>
-    <select id="gender">
-      <option value="">{{auth.select}}</option>
-      <option value="f">{{auth.female}}</option>
-      <option value="m">{{auth.male}}</option>
-      <option value="o">{{auth.other}}</option>
-    </select>
-    <br><br>
-    <label>{{auth.country}}</label>
-    <select id="country"></select>
-    <div>
-      <br><br>
-      <label class="inline-block float-left">{{auth.programming_experience}}</label>
-      <div class="float-left">
-        <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
-        <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
-      </div>
+  <h2 class="pl-8">{{auth.profile}} <button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button></h2>
+  <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4" id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
+    <div class="mb-4">
+        <label for="username">{{auth.username}}</label>
+        <strong id="username"></strong>
     </div>
-    <div class="clear-both hidden" id="languages">
-      <br><br>
-      <label class="inline-block float-left">{{auth.languages}}</label>
-      <div class="float-left">
+    <div class="mb-4">
+        <label for="email">{{auth.email}}</label>
+        <input id="email">
+    </div>
+    <div class="mb-4">
+        <label for="birth_year">{{auth.birth_year}}</label>
+        <input id="birth_year">
+    </div>
+    <div class="mb-4">
+        <label for="gender">{{auth.gender}}</label>
+        <select id="gender">
+          <option value="">{{auth.select}}</option>
+          <option value="f">{{auth.female}}</option>
+          <option value="m">{{auth.male}}</option>
+          <option value="o">{{auth.other}}</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label>{{auth.country}}</label>
+        <select id="country"></select>
+    </div>
+    <div class="mb-4">
+      <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
+      <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
+      <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
+    </div>
+    <div class="clear-both hidden mb-4" id="languages">
+      <div class="mb-4">
+        <label class="inline-block float-left">{{auth.languages}}</label>
+      </div>
+      <div class="float-left mb-4">
         <input type="checkbox" name="languages" value="scratch"><span class="pl-2">Scratch</span><br>
         <input type="checkbox" name="languages" value="other_block"><span class="pl-2">{{auth.other_block}}</span><br>
         <input type="checkbox" name="languages" value="python"><span class="pl-2">Python</span><br>
         <input type="checkbox" name="languages" value="other_text"><span class="pl-2">{{auth.other_text}}</span><br>
       </div>
     </div>
-    <div class="clear-both"></div>
-    <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <br><br>
-    <button type="submit" class="green-btn">{{auth.update_profile}}</button>
+    <div class="mb-4 clear-both">
+        <button type="submit" class="green-btn">{{auth.update_profile}}</button>
+    </div>
+    <div class="mb-4">
+        <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="success" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    </div>
   </form>
-  <br>
-  <form class="pl-8 auth" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')"> <br>
-    <label>{{auth.current_password}}</label>
-    <input id="old_password" type=password>
-    <br><br>
-    <label>{{auth.new_password}}</label>
-    <input id="password" type=password>
-    <br><br>
-    <label>{{auth.repeat_new_password}}</label>
-    <input id="password_repeat" type=password>
-    <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
-    <br><br>
+  <h2 class="pl-8">{{auth.change_password}}</h2>
+  <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
+    <div class="mb-4">
+        <label for="old_password">{{auth.current_password}}</label>
+        <input id="old_password" type=password>
+    </div>
+    <div class="mb-4">
+        <label for="password">{{auth.new_password}}</label>
+        <input id="password" type=password>
+    </div>
+    <div class="mb-4">
+        <label for="password_repeat">{{auth.repeat_new_password}}</label>
+        <input id="password_repeat" type=password>
+    </div>
+    <div class="mb-4">
+        <div id="error-password" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+        <div id="success-password" class="flex-0 mt-8 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
+    </div>
     <button type="submit" class="green-btn">{{auth.change_password}}</button>
   </form>
-  <br><br>
-
   <button class="red-btn ml-8" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
-  <br><br>
-</div>
 {% endblock %}

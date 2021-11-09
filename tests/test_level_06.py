@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel6(HedyTester):
   level = 6
@@ -42,7 +42,7 @@ class TestsLevel6(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times print 'me wants a cookie!'""")
@@ -63,7 +63,7 @@ class TestsLevel6(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_repeat_over_9_times(self):
 
     code = textwrap.dedent("""\
@@ -89,7 +89,7 @@ class TestsLevel6(HedyTester):
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_repeat_with_collision(self):
       code = textwrap.dedent("""\
       i is hallo!
@@ -115,4 +115,4 @@ class TestsLevel6(HedyTester):
       me wants a cookie!
       hallo!""")
 
-      self.assertEqual(expected_output, self.run_code(result))
+      self.assertEqual(expected_output, HedyTester.run_code(result))

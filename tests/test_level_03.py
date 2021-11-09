@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel3(HedyTester):
   level = 3
@@ -39,7 +39,7 @@ class TestsLevel3(HedyTester):
     print(f'ik heet ,')""")
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=10,
       expected=expected,
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
@@ -67,12 +67,11 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
   # ask
   def test_assign_print(self):
-    # todo make version for over level 11
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam""")
@@ -82,7 +81,7 @@ class TestsLevel3(HedyTester):
     print(f'ik heet{naam}')""")
 
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
@@ -98,7 +97,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=11,
-      exception=hedy.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
@@ -108,7 +107,7 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     color = input('Cuál es tu color favorito?')""")
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
@@ -120,7 +119,7 @@ class TestsLevel3(HedyTester):
     kleur is ask Wat is je lievelingskleur'
     print 'Jouw favoriet is dus ' kleur""")
 
-    with self.assertRaises(hedy.UnquotedTextException) as context:
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
@@ -170,7 +169,7 @@ class TestsLevel3(HedyTester):
 
   # negative tests
   def test_print_without_quotes(self):
-    with self.assertRaises(hedy.UnquotedTextException) as context:
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
       result = hedy.transpile("print felienne 123", self.level)
 
     self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
@@ -221,7 +220,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual(self.run_code(result), "Kat")
+    self.assertEqual(HedyTester.run_code(result), "Kat")
   def test_print_list_var_random(self):
 
     code = textwrap.dedent("""\
@@ -236,7 +235,7 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
+    self.assertIn(HedyTester.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
   def test_ask_print(self):
 
     code = textwrap.dedent("""
@@ -269,13 +268,13 @@ class TestsLevel3(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
   def test_ask_assign_list(self):
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
     color is gree, blue
     choice is ask 'Is your favorite color one of: ' color""")
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       max_level=11,
       test_name=self.name()
     )
@@ -305,8 +304,8 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.UndefinedVarException,
-      max_level=11,
+      exception=hedy.exceptions.UndefinedVarException,
+      max_level=10,
       test_name=self.name()
     )
 
@@ -319,7 +318,7 @@ class TestsLevel3(HedyTester):
       is Foobar
       print welcome""")
 
-    with self.assertRaises(hedy.ParseException) as context:
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Parse', context.exception.error_code)
@@ -327,7 +326,7 @@ class TestsLevel3(HedyTester):
     code = textwrap.dedent("""\
       print hallo wereld'""")
 
-    with self.assertRaises(hedy.UnquotedTextException) as context:
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Unquoted Text', context.exception.error_code)
@@ -339,7 +338,7 @@ class TestsLevel3(HedyTester):
       code=code,
       max_level=4,
       test_name=self.name(),
-      exception=hedy.UndefinedVarException,
+      exception=hedy.exceptions.UndefinedVarException,
     )
   def test_print_Spanish(self):
     code = textwrap.dedent("""\

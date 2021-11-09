@@ -1,96 +1,88 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="w-full max-w-xl text-center ml-auto mr-auto">
-  <form class="auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
-    <h2 class="py-2">{{auth.create_account}}</h2>
-    <h4 class="text-blue-500 py-2">{{auth.create_account_explanation}}</h4>
-    <div class="mb-4">
-        <label for="username">{{auth.username}}</label>
-        <input id="username" name="username">
-    </div>
-    <div class="mb-4">
-        <label for="email">{{auth.email}}</label>
-        <input id="email" name="email" type="email">
-    </div>
-    <div class="mb-4">
-        <label for="mail_repeat">{{auth.email_repeat}}</label>
-        <input id="mail_repeat" name="mail_repeat" type="text" autocomplete="off">
-    </div>
-    <div class="mb-4">
-        <label for="password">{{auth.password}}</label>
-        <input id="password" name="password" type=password>
-    </div>
-    <div class="mb-4">
-        <label for="password_repeat">{{auth.password_repeat}}</label>
-        <input id="password_repeat" name="password_repeat" type=password>
-    </div>
-    <div class="mb-4">
-        <label for="birth_year">{{auth.birth_year}}</label>
-        <input id="birth_year" name="birth_year" placeholder="1995" type="number">
-    </div>
-    <div class="mb-4">
-        <label for="gender">{{auth.gender}}</label>
-        <select id="gender" name="gender">
-          <option value="" selected disabled hidden>{{auth.select}}</option>
-          <option value="f">{{auth.female}}</option>
-          <option value="m">{{auth.male}}</option>
-          <option value="o">{{auth.other}}</option>
-        </select>
-    </div>
-    <div class="mb-4">
-        <label for="country">{{auth.country}}</label>
-        <select id="country" name="country">
-            <option value="" selected disabled hidden>{{auth.select}}</option>
-        </select>
-    </div>
-    <div class="flex flex-row justify-evenly mb-4">
-      <label>{{auth.programming_experience}}</label>
-      <div class="flex flex-col">
-        <label for="has_experience">
-          <input class="float-left" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()">
-            <div class="mb-2" style="margin-top: -0.3em;">{{auth.yes}}</div>
-        </label>
-        <label  for="has_experience">
-          <input class="float-left" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()">
-           <div class="mb-2" style="margin-top: -0.3em;">{{auth.no}}</div>
-        </label>
-      </div>
-    </div>
-
-    <div class="flex flex-row justify-evenly mb-4" style="display: none;" id="languages">
-        <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-      <label>{{auth.languages}}</label>
-      <div class="flex flex-col">
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="scratch">
-            <div class="mb-2" style="margin-top: -0.3em;">Scratch</div>
-        </label>
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="other_block">
-          <div class="mb-2" style="margin-top: -0.3em;">{{auth.other_block}}</div>
-        </label>
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="python">
-          <div class="mb-2" style="margin-top: -0.3em;">Python</div>
-        </label>
-        <label>
-          <input class="float-left"  type="checkbox" name="languages" value="other_text">
-          <div class="mb-2" style="margin-top: -0.3em;">{{auth.other_text}}</div>
-        </label>
-      </div>
-    </div>
-    <div class="flex flex-row justify-center mb-4">
-      <label for="subscribe">
-        <input class="float-left" type="checkbox" id="subscribe" name="subscribe">
-        <div style="margin-top: -0.3em;">{{auth.subscribe_newsletter}}</div>
-      </label>
-    </div>
-    <button type="submit" class="green-btn mb-4">{{auth.create_account}}</button>
+</style>
+<div class="w-1/2 bg-white shadow-md rounded p-4 mb-4 ml-auto mr-auto">
+  <form id="signup" class="js-validated-form mx-auto w-3/4" style="border: none;" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')">
+        <h2 class="text-center">{{auth.create_account}}</h2>
+        <h4 class="text-blue-500 mb-4 text-center">{{auth.create_account_explanation}}</h4>
+        <div class="mb-4 w-full">
+            <label class="inline-block w-1/2" for="username">{{auth.username}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="username" name="username" required>
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="email">{{auth.email}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="email" name="email" type="email" required>
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="mail_repeat">{{auth.email_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="mail_repeat" name="mail_repeat" type="text" autocomplete="off" required>
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="password">{{auth.password}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="password" name="password" type=password required>
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="password_repeat">{{auth.password_repeat}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="password_repeat" name="password_repeat" type=password required>
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="birth_year" name="birth_year" placeholder="1995" type="number">
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="inline-block w-1/2" id="gender" name="gender">
+              <option value="" selected disabled hidden>{{auth.select}}</option>
+              <option value="f">{{auth.female}}</option>
+              <option value="m">{{auth.male}}</option>
+              <option value="o">{{auth.other}}</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="inline-block w-1/2" for="country">{{auth.country}}</label><select  class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400"id="country" name="country">
+                <option value="" selected disabled hidden>{{auth.select}}</option>
+            </select>
+        </div>
+        <div class="mb-4">
+          <label class="inline-block w-1/2" for="has_experience">{{auth.programming_experience}}</label><ul class="inline-block w-1/2 list-none ml-0" style="margin-top: -0.3em;">
+              <li>
+                  <input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()">
+                  <label for="has_experience"> {{auth.yes}}</label>
+              </li>
+              <li>
+                  <input type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()">
+                  <label  for="has_experience"> {{auth.no}}</label>
+              </li>
+          </ul>
+        </div>
+        <div class="flex flex-row items-center mb-4 border-2 border-gray-400 px-2 pb-4" style="display: none;" id="languages">
+            <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
+          <label class="inline-block w-1/2" for="languages">{{auth.languages}}</label><ul class="inline-block w-1/2 list-none ml-0 pl-4">
+            <li>
+                <input type="checkbox" name="languages" value="scratch">
+                <label style>Scratch</label>
+            </li>
+            <li>
+                <input type="checkbox" name="languages" value="other_block">
+                <label>{{auth.other_block}}</label>
+            </li>
+            <li>
+                <input type="checkbox" name="languages" value="python">
+                <label>Python</label>
+            </li>
+            <li>
+                <input type="checkbox" name="languages" value="other_text">
+                <label>{{auth.other_text}}</label>
+            </li>
+          </ul>
+        </div>
+        <div class="flex flex-row items-center mb-4">
+          <label class="inline-block w-1/2" for="is_teacher">{{auth.is_teacher}}</label><input class="inline-block ml-0" type="checkbox" id="is_teacher" name="is_teacher">
+        </div>
+        <div class="flex flex-row items-center mb-4">
+          <label class="inline-block w-1/2" for="subscribe">{{auth.subscribe_newsletter}}</label><input class="inline-block ml-0" type="checkbox" id="subscribe" name="subscribe">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="green-btn mb-4">{{auth.create_account}}</button>
+        </div>
         <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
         <div id="success" class="flex-0 mt-8 bg-red-100 border-t-4 border-green-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
   </form>
-  <form onsubmit="event.preventDefault (); window.location.href = '{{localize_link ('/login')}}'">
+  <form class="text-center" onsubmit="event.preventDefault (); window.location.href = '{{localize_link ('/login')}}'">
     {{auth.already_account}}&nbsp;&nbsp;<button type="submit" class="btn">{{auth.login}}</button>
   </form>
 </div>

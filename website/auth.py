@@ -3,7 +3,7 @@ from website.yaml_file import YamlFile
 import bcrypt
 import re
 import urllib
-from flask import request, make_response, jsonify, redirect
+from flask import request, session, make_response, jsonify, redirect
 from flask_helpers import render_template
 from utils import timems, times, extract_bcrypt_rounds, is_testing_request, is_debug_mode, valid_email, is_heroku, mstoisostring
 import datetime
@@ -35,26 +35,52 @@ def hash(password, salt):
 
 countries = {'AF':'Afghanistan','AX':'Åland Islands','AL':'Albania','DZ':'Algeria','AS':'American Samoa','AD':'Andorra','AO':'Angola','AI':'Anguilla','AQ':'Antarctica','AG':'Antigua and Barbuda','AR':'Argentina','AM':'Armenia','AW':'Aruba','AU':'Australia','AT':'Austria','AZ':'Azerbaijan','BS':'Bahamas','BH':'Bahrain','BD':'Bangladesh','BB':'Barbados','BY':'Belarus','BE':'Belgium','BZ':'Belize','BJ':'Benin','BM':'Bermuda','BT':'Bhutan','BO':'Bolivia, Plurinational State of','BQ':'Bonaire, Sint Eustatius and Saba','BA':'Bosnia and Herzegovina','BW':'Botswana','BV':'Bouvet Island','BR':'Brazil','IO':'British Indian Ocean Territory','BN':'Brunei Darussalam','BG':'Bulgaria','BF':'Burkina Faso','BI':'Burundi','KH':'Cambodia','CM':'Cameroon','CA':'Canada','CV':'Cape Verde','KY':'Cayman Islands','CF':'Central African Republic','TD':'Chad','CL':'Chile','CN':'China','CX':'Christmas Island','CC':'Cocos(Keeling) Islands','CO':'Colombia','KM':'Comoros','CG':'Congo','CD':'Congo, the Democratic Republic of the','CK':'Cook Islands','CR':'Costa Rica','CI':'Côte d\'Ivoire','HR':'Croatia','CU':'Cuba','CW':'Curaçao','CY':'Cyprus','CZ':'Czech Republic','DK':'Denmark','DJ':'Djibouti','DM':'Dominica','DO':'Dominican Republic','EC':'Ecuador','EG':'Egypt','SV':'El Salvador','GQ':'Equatorial Guinea','ER':'Eritrea','EE':'Estonia','ET':'Ethiopia','FK':'Falkland Islands(Malvinas)','FO':'Faroe Islands','FJ':'Fiji','FI':'Finland','FR':'France','GF':'French Guiana','PF':'French Polynesia','TF':'French Southern Territories','GA':'Gabon','GM':'Gambia','GE':'Georgia','DE':'Germany','GH':'Ghana','GI':'Gibraltar','GR':'Greece','GL':'Greenland','GD':'Grenada','GP':'Guadeloupe','GU':'Guam','GT':'Guatemala','GG':'Guernsey','GN':'Guinea','GW':'Guinea-Bissau','GY':'Guyana','HT':'Haiti','HM':'Heard Island and McDonald Islands','VA':'Holy See(Vatican City State)','HN':'Honduras','HK':'Hong Kong','HU':'Hungary','IS':'Iceland','IN':'India','ID':'Indonesia','IR':'Iran, Islamic Republic of','IQ':'Iraq','IE':'Ireland','IM':'Isle of Man','IL':'Israel','IT':'Italy','JM':'Jamaica','JP':'Japan','JE':'Jersey','JO':'Jordan','KZ':'Kazakhstan','KE':'Kenya','KI':'Kiribati','KP':'Korea, Democratic People\'s Republic of','KR':'Korea, Republic of','KW':'Kuwait','KG':'Kyrgyzstan','LA':'Lao People\'s Democratic Republic','LV':'Latvia','LB':'Lebanon','LS':'Lesotho','LR':'Liberia','LY':'Libya','LI':'Liechtenstein','LT':'Lithuania','LU':'Luxembourg','MO':'Macao','MK':'Macedonia, the Former Yugoslav Republic of','MG':'Madagascar','MW':'Malawi','MY':'Malaysia','MV':'Maldives','ML':'Mali','MT':'Malta','MH':'Marshall Islands','MQ':'Martinique','MR':'Mauritania','MU':'Mauritius','YT':'Mayotte','MX':'Mexico','FM':'Micronesia, Federated States of','MD':'Moldova, Republic of','MC':'Monaco','MN':'Mongolia','ME':'Montenegro','MS':'Montserrat','MA':'Morocco','MZ':'Mozambique','MM':'Myanmar','NA':'Namibia','NR':'Nauru','NP':'Nepal','NL':'Netherlands','NC':'New Caledonia','NZ':'New Zealand','NI':'Nicaragua','NE':'Niger','NG':'Nigeria','NU':'Niue','NF':'Norfolk Island','MP':'Northern Mariana Islands','NO':'Norway','OM':'Oman','PK':'Pakistan','PW':'Palau','PS':'Palestine, State of','PA':'Panama','PG':'Papua New Guinea','PY':'Paraguay','PE':'Peru','PH':'Philippines','PN':'Pitcairn','PL':'Poland','PT':'Portugal','PR':'Puerto Rico','QA':'Qatar','RE':'Réunion','RO':'Romania','RU':'Russian Federation','RW':'Rwanda','BL':'Saint Barthélemy','SH':'Saint Helena, Ascension and Tristan da Cunha','KN':'Saint Kitts and Nevis','LC':'Saint Lucia','MF':'Saint Martin(French part)','PM':'Saint Pierre and Miquelon','VC':'Saint Vincent and the Grenadines','WS':'Samoa','SM':'San Marino','ST':'Sao Tome and Principe','SA':'Saudi Arabia','SN':'Senegal','RS':'Serbia','SC':'Seychelles','SL':'Sierra Leone','SG':'Singapore','SX':'Sint Maarten(Dutch part)','SK':'Slovakia','SI':'Slovenia','SB':'Solomon Islands','SO':'Somalia','ZA':'South Africa','GS':'South Georgia and the South Sandwich Islands','SS':'South Sudan','ES':'Spain','LK':'Sri Lanka','SD':'Sudan','SR':'Suriname','SJ':'Svalbard and Jan Mayen','SZ':'Swaziland','SE':'Sweden','CH':'Switzerland','SY':'Syrian Arab Republic','TW':'Taiwan, Province of China','TJ':'Tajikistan','TZ':'Tanzania, United Republic of','TH':'Thailand','TL':'Timor-Leste','TG':'Togo','TK':'Tokelau','TO':'Tonga','TT':'Trinidad and Tobago','TN':'Tunisia','TR':'Turkey','TM':'Turkmenistan','TC':'Turks and Caicos Islands','TV':'Tuvalu','UG':'Uganda','UA':'Ukraine','AE':'United Arab Emirates','GB':'United Kingdom','US':'United States','UM':'United States Minor Outlying Islands','UY':'Uruguay','UZ':'Uzbekistan','VU':'Vanuatu','VE':'Venezuela, Bolivarian Republic of','VN':'Viet Nam','VG':'Virgin Islands, British','VI':'Virgin Islands, U.S.','WF':'Wallis and Futuna','EH':'Western Sahara','YE':'Yemen','ZM':'Zambia','ZW':'Zimbabwe'};
 
-@querylog.timed
-def current_user(request):
-    if request.cookies.get(cookie_name):
-        token = DATABASE.get_token(request.cookies.get(cookie_name))
-        if token:
-            user = DATABASE.user_by_username(token['username'])
-            if user:
-                return user
-    return {'username': '', 'email': ''}
+# The current user is a slice of the user information from the database and placed on the Flask session.
+# The main purpose of the current user is to provide a convenient container for
+# * username
+# * email
+# * is_teacher
+#
+# Since the is_teacher can be changed during a session we also store a time-to-live. When retrieving the current user, we can check if we need to reload data from the database.
+#
+# The current user should be retrieved with `current_user` function since it will return a sane default.
+# You can remove the current user from the Flask session with the `forget_current_user`.
+def remember_current_user(db_user):
+    session['user-ttl'] = times() + 5 * 60
+    session['user'] = pick(db_user, 'username', 'email', 'is_teacher')
 
-def is_admin(request):
-    user = current_user(request)
-    return user['username'] == os.getenv('ADMIN_USER') or user['email'] == os.getenv('ADMIN_USER')
+def pick(d, *requested_keys):
+    return { key : d.get(key, None) for key in requested_keys }
 
-def is_teacher(request):
-    user = current_user(request)
-    return bool('is_teacher' in user and user['is_teacher'])
+# Retrieve the current user from the Flask session.
+#
+# If the current user is to old, as determined by the time-to-live, we repopulate from the database.
+def current_user():
+    now = times()
+    user = session.get('user', {'username': '', 'email': ''})
+    ttl = session.get('user-ttl', None)
+    if ttl == None or now >= ttl:
+        username = user['username']
+        if username:
+            db_user = DATABASE.user_by_username(username)
+            remember_current_user(db_user)
+
+    return user
+
+# Remove the current user from the Flask session.
+def forget_current_user():
+    session.pop('user', None) # We are not interested in the value of the use key.
+
+def is_admin(user):
+    admin_user = os.getenv('ADMIN_USER')
+    return user['username'] == admin_user or user['email'] == admin_user
+
+def is_teacher(user):
+    # the `is_teacher` field is either `0`, `1` or not present.
+    return bool(user.get('is_teacher', False))
 
 def update_is_teacher(user, is_teacher_value=1):
-    user_is_teacher = 'is_teacher' in user and user['is_teacher']
+    user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
@@ -104,9 +130,9 @@ def routes(app, database, requested_lang):
 
         # If username has an @-sign, then it's an email
         if '@' in body['username']:
-            user = DATABASE.user_by_email(body['username'].strip().lower())
+            user = DATABASE.user_by_email(body['username'])
         else:
-            user = DATABASE.user_by_username(body['username'].strip().lower())
+            user = DATABASE.user_by_username(body['username'])
 
         if not user:
             return 'invalid username/password', 403
@@ -125,9 +151,15 @@ def routes(app, database, requested_lang):
         else:
             DATABASE.record_login(user['username'])
         resp = make_response({})
+
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+
+        # Remember the current user on the session. This is "new style" logins, which should ultimately
+        # replace "old style" logins (with the cookie above), as it requires fewer database calls.
+        remember_current_user(user)
+
         return resp
 
     @app.route('/auth/signup', methods=['POST'])
@@ -207,6 +239,9 @@ def routes(app, database, requested_lang):
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
+        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
+            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+
         user = {
             'username': username,
             'password': hashed,
@@ -224,8 +259,6 @@ def routes(app, database, requested_lang):
 
         DATABASE.store_user(user)
 
-        print(user)
-
         # We automatically login the user
         cookie = make_salt()
         DATABASE.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + session_length})
@@ -241,6 +274,8 @@ def routes(app, database, requested_lang):
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(cookie_name, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/', max_age=365 * 24 * 60 * 60)
+        remember_current_user(user)
+
         return resp
 
     @app.route('/auth/verify', methods=['GET'])
@@ -251,8 +286,6 @@ def routes(app, database, requested_lang):
             return 'no token', 400
         if not username:
             return 'no username', 400
-
-        print(username)
 
         user = DATABASE.user_by_username(username)
 
@@ -271,6 +304,7 @@ def routes(app, database, requested_lang):
 
     @app.route('/auth/logout', methods=['POST'])
     def logout():
+        forget_current_user()
         if request.cookies.get(cookie_name):
             DATABASE.forget_token(request.cookies.get(cookie_name))
         return '', 200
@@ -278,6 +312,7 @@ def routes(app, database, requested_lang):
     @app.route('/auth/destroy', methods=['POST'])
     @requires_login
     def destroy(user):
+        forget_current_user()
         DATABASE.forget_token(request.cookies.get(cookie_name))
         DATABASE.forget_user(user['username'])
         return '', 200
@@ -303,6 +338,7 @@ def routes(app, database, requested_lang):
         hashed = hash(body['new_password'], make_salt())
 
         DATABASE.update_user(user['username'], {'password': hashed})
+        # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
             send_email_template('change_password', user['email'], None)
 
@@ -452,7 +488,8 @@ def routes(app, database, requested_lang):
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
     def mark_as_teacher():
-        if not is_admin(request) and not is_testing_request(request):
+        user = current_user()
+        if not is_admin(user) and not is_testing_request(request):
             return 'unauthorized', 403
 
         body = request.json
@@ -477,7 +514,8 @@ def routes(app, database, requested_lang):
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
     def change_user_email():
-        if not is_admin(request):
+        user = current_user()
+        if not is_admin(user):
             return 'unauthorized', 403
 
         body = request.json
@@ -563,11 +601,11 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, lang, menu, request):
     if page == 'my-profile':
-        return render_template('profile.html', lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, username=current_user(request)['username'], is_teacher=is_teacher(request), current_page='my-profile')
+        return render_template('profile.html', lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, username=current_user(request)['username'], is_teacher=False, current_page='login')
+        return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
     if page == 'admin':
-        if not is_testing_request(request) and not is_admin(request):
+        if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
 
         # After hitting 1k users, it'd be wise to add pagination.
@@ -576,17 +614,12 @@ def auth_templates(page, lang, menu, request):
         fields =['username', 'email', 'birth_year', 'country', 'gender', 'created', 'last_login', 'verification_pending', 'is_teacher', 'program_count', 'prog_experience', 'experience_languages']
 
         for user in users:
-            data = {}
-            for field in fields:
-                if field in user:
-                    data[field] = user[field]
-                else:
-                    data[field] = None
+            data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher']     = bool(data['is_teacher'])
-            data['created'] = mstoisostring(data['created'])
+            data['created'] = mstoisostring(data['created']) if data['created'] else '?'
             if data['last_login']:
-                data['last_login'] = mstoisostring(data['last_login'])
+                data['last_login'] = mstoisostring(data['last_login']) if data['last_login'] else '?'
             userdata.append(data)
 
         userdata.sort(key=lambda user: user['created'], reverse=True)

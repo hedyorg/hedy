@@ -1,9 +1,9 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
-class TestsLevel8(HedyTester):
-  level = 8
+class TestsLevel9(HedyTester):
+  level = 9
   
   def test_for_list(self):
     code = textwrap.dedent("""\

@@ -30,7 +30,7 @@
         {% if question.code and question.code!= "..." %}
             <pre><code class="ml-6 text-xl">{{ question.code }}</code></pre>
         {% endif %}
-        <form action='/quiz/submit_answer/{{ level_source }}/{{ question_nr }}/{{ attempt|int + 1 }}' method="POST">
+        <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt) }}" method="POST">
             <div class="grid gap-1 rounded-t-xl">
                 {% set counter = namespace(value=0) %}
                 {% for row in question.mp_choice_options|batch(2) %}
@@ -51,9 +51,9 @@
                                         <span>
 
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-6 text-xl">{{ question_options[counter.value].code }}</code>
+                                            <code class="ml-6 text-xl">{{ question_options[counter.value].code|nl2br }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
-                                            <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text }}</p>
+                                            <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text|nl2br }}</p>
                                         {% endif %}</span>
                                     </label>
                                 </div>
@@ -70,9 +70,9 @@
                                                 class="class form-radio h-12 w-12" disabled="disabled">
                                         <span>
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                            <code class="ml-6 text-xl">{{ question_options[counter.value].code  }}</code>
+                                            <code class="ml-6 text-xl">{{ question_options[counter.value].code | nl2br  }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'   %}
-                                            <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text }}</p>
+                                            <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
                                         {% endif %}
                                         </span>
                                     </label>
@@ -90,9 +90,9 @@
                                                 class="class form-radio h-12 w-12">
                                         <span>
                                                 {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
-                                                    <code class="ml-6 text-xl">{{ question_options[counter.value].code }}</code>
+                                                    <code class="ml-6 text-xl">{{ question_options[counter.value].code | nl2br }}</code>
                                                 {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
-                                                    <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text }}</p>
+                                                    <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
                                                 {% endif %}
                                             </span>
                                     </label>
@@ -112,7 +112,7 @@
                                 name="hint-button" id="hint-button">Hint?
                         </button>
                     </div>
-                    {% if attempt == config['quiz-max-attempts'] %}
+                    {% if is_last_attempt %}
                         <input class="green-btn ml-1" type="submit" name="submit-button"
                                value="Ga naar het antwoord" disabled="disabled">
                     {% else %}

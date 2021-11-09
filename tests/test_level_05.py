@@ -1,13 +1,42 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel5(HedyTester):
   level = 5
-  
+
   # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
 
   # print tests
+  def test_print_quoted_var(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    print 'ik heet ' naam""")
+    expected = textwrap.dedent("""\
+    naam = '\\'Hedy\\''
+    print(f'ik heet {naam}')""")
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+
+  def test_unsupported_float_with_dot(self):
+    self.multi_level_tester(
+      max_level=10,
+      code="print 1.5 + 1",
+      exception=hedy.exceptions.UnsupportedFloatException,
+      test_name=self.name()
+    )
+  def test_unsupported_float_with_comma(self):
+    self.multi_level_tester(
+      max_level=10,
+      code="print 1,5 + 1",
+      exception=hedy.exceptions.UnsupportedFloatException,
+      test_name=self.name()
+    )
 
   #ask tests
   def test_ask(self):
@@ -52,7 +81,7 @@ class TestsLevel5(HedyTester):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
-    if naam is Hedy print 'leuk'     
+    if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
@@ -74,7 +103,7 @@ class TestsLevel5(HedyTester):
     #this code has a space at the end of line 2
     code = textwrap.dedent("""\
     a is 2
-    if a is 1 print a 
+    if a is 1 print a
     else print 'nee'""")
 
     expected = textwrap.dedent("""\
@@ -115,7 +144,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
     self.assertEqual(expected, result.code)
 
-    output = self.run_code(result)
+    output = HedyTester.run_code(result)
     self.assertEqual(output, '5 keer 5 keer 5 is 125')
     self.assertEqual(False, result.has_turtle)
   def test_calc_print(self):
@@ -131,7 +160,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("9", self.run_code(result))
+    self.assertEqual("9", HedyTester.run_code(result))
   def test_calc_assign(self):
     code = "nummer is 4 + 5"
     result = hedy.transpile(code, self.level)
@@ -164,7 +193,7 @@ class TestsLevel5(HedyTester):
     expected = "period = '.'"
 
     self.multi_level_tester(
-      max_level=20,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
@@ -188,7 +217,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", self.run_code(result))
+    self.assertEqual("30", HedyTester.run_code(result))
   def test_calc_vars_print(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -204,7 +233,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", self.run_code(result))
+    self.assertEqual("30", HedyTester.run_code(result))
   def test_calc_vars_print_divide(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -220,7 +249,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("0", self.run_code(result))
+    self.assertEqual("0", HedyTester.run_code(result))
 
 
   # combined tests
