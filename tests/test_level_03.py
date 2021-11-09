@@ -268,7 +268,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
   def test_ask_assign_list(self):
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
     color is gree, blue
     choice is ask 'Is your favorite color one of: ' color""")
 
