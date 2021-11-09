@@ -185,22 +185,33 @@ class TestsLevel10(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  # def test_unindented_second_loop_1209(self):
-  #   code = textwrap.dedent("""\
-  #   for x in range 1 to 10
-  #    for y in range 1 to 10
-  #    print 'x*y'""")
-  #
-  #   expected = textwrap.dedent("""\
-  #     step = 1 if int(0) < int(10) else -1
-  #     for i in range(int(0), int(10) + step, step):
-  #       if str(i) == str('2'):
-  #         print(f'2')""")
-  #
-  #   result = hedy.transpile(code, self.level)
-  #
-  #   self.assertEqual(expected, result.code)
-  #   self.assertEqual(False, result.has_turtle)
+  def test_unindented_second_loop_1209(self):
+    code = textwrap.dedent("""\
+    for x in range 1 to 10
+     for y in range 1 to 10
+     print 'x*y'""")
+
+    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
+      result = hedy.transpile(code, self.level)
+
+  def test_dedented_second_loop_1209(self):
+    code = textwrap.dedent("""\
+    for x in range 1 to 10
+     for y in range 1 to 10
+    print 'x*y'""")
+
+    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
+      result = hedy.transpile(code, self.level)
+
+  def test_zigzag_indented_loop_1209(self):
+    code = textwrap.dedent("""\
+    for x in range 1 to 10
+      for y in range 1 to 10
+         print 'this number is'
+        print x*y""")
+
+    with self.assertRaises(hedy.exceptions.IndentationException) as context:
+      result = hedy.transpile(code, self.level)
 
 
 
