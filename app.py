@@ -233,7 +233,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 
 @app.before_request
 def before_request_begin_logging():
-    querylog.begin_global_log_record(path=request.path, method=request.method)
+    path = (request.path + '?' + request.query_string) if request.query_string else request.path
+    querylog.begin_global_log_record(path=path, method=request.method)
 
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
