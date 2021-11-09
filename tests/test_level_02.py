@@ -56,7 +56,7 @@ class TestsLevel2(HedyTester):
     Hallo welkom bij Hedy!
     Mooi hoor""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_print_spaces(self):
     code = "print        hallo!"
     result = hedy.transpile(code, self.level)
@@ -85,7 +85,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("'Welcome to OceanView! '", expected_output)
   def test_print_slashes(self):
     code = "print Welcome to O/ceanView"
@@ -97,7 +97,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
   def test_print_backslashes(self):
     code = "print Welcome to O\\ceanView"
@@ -109,7 +109,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to O\\ceanView", expected_output)
   def test_print_slash_end(self):
     code = "print Welcome to \\"
@@ -121,7 +121,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
   #is tests
@@ -360,7 +360,7 @@ class TestsLevel2(HedyTester):
     print(f'{random.choice(dieren)}')""")
 
     # check if result is in the expected list
-    check_in_list = (lambda x: self.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+    check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
 
     self.multi_level_tester(
       max_level=11,
@@ -423,7 +423,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    self.assertEqual(self.run_code(result), "Kat")
+    self.assertEqual(HedyTester.run_code(result), "Kat")
 
   #negative tests
   def test_echo_no_longer_in_use(self):
