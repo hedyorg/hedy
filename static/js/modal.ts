@@ -24,7 +24,8 @@ class Modal {
   }
 
   public alert(message: string, timeoutMs?: number) {
-    $('#modal-alert-text').text(message);
+    // $('#modal-alert-text').text(message);
+    $('#modal-alert-text').html(message);
     this.show();
     $('#modal-alert').show();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
@@ -119,5 +120,6 @@ export const error = {
     editor?.resize();
   }
 }
+
 
 export const modal = new Modal();

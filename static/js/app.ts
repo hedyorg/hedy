@@ -5,6 +5,7 @@ import { modal, error, success } from './modal';
 import { auth } from './auth';
 
 export let theGlobalEditor: AceAjax.Editor;
+export let theModalEditor: AceAjax.Editor;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -733,6 +734,173 @@ export function confetti_cannon(){
 }
 
 export function modalStepOne(){
-  return modal.alert (auth.texts['answer_question']);
-  console.log('testing')
+  createModal();
+  let modal_editor = $('#modal-editor');
+  initializeModalEditor(modal_editor);
+
+  let editor_field = <HTMLElement>document.getElementsByClassName('ace_line')[0];
+  	// var typer = document.getElementById('typewriter');
+
+	let typewriter = setupTypewriter(editor_field);
+
+	typewriter.type();
+}
+function createModal(){
+  let editor = "<div id='modal-editor' data-lskey=\"level_1__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>";
+  modal.alert(editor);
+}
+ function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
+    const editor = ace.edit(element);
+    editor.setTheme("ace/theme/monokai");
+    if (isReadOnly) {
+      editor.setOptions({
+        readOnly: true,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
+    }
+
+    // a variable which turns on(1) highlighter or turns it off(0)
+    var highlighter = 1;
+
+    if (highlighter == 1) {
+      // Everything turns into 'ace/mode/levelX', except what's in
+      // this table. Yes the numbers are strings. That's just JavaScript for you.
+      if (window.State.level) {
+        const mode = getHighlighter(parseInt(window.State.level));
+        editor.session.setMode(mode);
+      }
+    }
+
+    return editor;
+  }
+
+  function initializeModalEditor($editor: JQuery) {
+    if (!$editor.length) return;
+    // We expose the editor globally so it's available to other functions for resizing
+    let editor = turnIntoAceEditor($editor.get(0), true);
+    theModalEditor = editor;
+    error.setEditor(editor);
+
+    window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+    // Load existing code from session, if it exists
+    const storage = window.sessionStorage;
+    if (storage) {
+      const levelKey = $editor.data('lskey');
+      // const loadedProgram = $editor.data('loaded-program');
+
+      // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
+      // const programFromStorage = storage.getItem(levelKey);
+      // if (loadedProgram !== 'True' && programFromStorage) {
+        editor.setValue('print Hier hoort het juiste programma! :D', 1);
+      // }
+    }
+
+    window.onbeforeunload = () => {
+      // The browser doesn't show this message, rather it shows a default message.
+      if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
+        return auth.texts['unsaved_changes'];
+      } else {
+        return undefined;
+      }
+    };
+
+    // *** KEYBOARD SHORTCUTS ***
+
+    let altPressed: boolean | undefined;
+
+    // alt is 18, enter is 13
+    window.addEventListener ('keydown', function (ev) {
+      const keyCode = ev.keyCode;
+      if (keyCode === 18) {
+        altPressed = true;
+        return;
+      }
+      if (keyCode === 13 && altPressed) {
+        if (!window.State.level || !window.State.lang) {
+          throw new Error('Oh no');
+        }
+        runit (window.State.level, window.State.lang, function () {
+          $ ('#output').focus ();
+        });
+      }
+      // We don't use jquery because it doesn't return true for this equality check.
+      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+        editor.focus ();
+        editor.navigateFileEnd ();
+      }
+    });
+    window.addEventListener ('keyup', function (ev) {
+      const keyCode = ev.keyCode;
+      if (keyCode === 18) {
+        altPressed = false;
+        return;
+      }
+    });
+    return editor;
+  }
+
+function setupTypewriter(t :HTMLElement) {
+  var HTML = t.innerHTML;
+
+  t.innerHTML = "";
+
+  var cursorPosition = 0,
+      tag = "",
+      writingTag = false,
+      tagOpen = false,
+      typeSpeed = 100,
+      tempTypeSpeed = 0;
+
+  var type = function () {
+
+    if (writingTag === true) {
+      tag += HTML[cursorPosition];
+    }
+
+    if (HTML[cursorPosition] === "<") {
+      tempTypeSpeed = 0;
+      if (tagOpen) {
+        tagOpen = false;
+        writingTag = true;
+      } else {
+        tag = "";
+        tagOpen = true;
+        writingTag = true;
+        tag += HTML[cursorPosition];
+      }
+    }
+    if (!writingTag && tagOpen) {
+      tag.innerHTML += HTML[cursorPosition];
+    }
+    if (!writingTag && !tagOpen) {
+      if (HTML[cursorPosition] === " ") {
+        tempTypeSpeed = 0;
+      } else {
+        tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+      }
+      t.innerHTML += HTML[cursorPosition];
+    }
+    if (writingTag === true && HTML[cursorPosition] === ">") {
+      tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+      writingTag = false;
+      if (tagOpen) {
+        var newSpan = document.createElement("span");
+        t.appendChild(newSpan);
+        newSpan.innerHTML = tag;
+        tag = newSpan.firstChild;
+      }
+    }
+
+    cursorPosition += 1;
+    if (cursorPosition < HTML.length - 1) {
+      setTimeout(type, tempTypeSpeed);
+    }
+  };
+
+  return {
+    type: type
+  };
 }
