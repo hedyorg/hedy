@@ -22,10 +22,11 @@ class LogRecord:
             self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         self.attributes = kwargs
         self.running_timers = set([])
+        loadavg = os.getloadavg()[0] if not IS_WINDOWS else None
         self.set(
             start_time=dtfmt(self.start_time),
             pid=os.getpid(),
-            loadavg=os.getloadavg()[0],
+            loadavg=loadavg,
             fault=0)
 
         dyno = os.getenv('DYNO')
@@ -38,14 +39,20 @@ class LogRecord:
             end_rusage = resource.getrusage(resource.RUSAGE_SELF)
             user_ms = ms_from_fsec(end_rusage.ru_utime - self.start_rusage.ru_utime)
             sys_ms = ms_from_fsec(end_rusage.ru_stime - self.start_rusage.ru_stime)
+            max_rss = end_rusage.ru_maxrss
+            inc_max_rss = max_rss - self.start_rusage.ru_maxrss
         else:
             user_ms = None
             sys_ms = None
+            max_rss = None
+            inc_max_rss = None
 
         self.set(
             end_time=dtfmt(end_time),
             user_ms=user_ms,
             sys_ms=sys_ms,
+            max_rss=max_rss,
+            inc_max_rss=inc_max_rss,
             duration_ms=ms_from_fsec(end_time - self.start_time))
 
         # There should be 0, but who knows

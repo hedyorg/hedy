@@ -1,245 +1,113 @@
-#!/bin/env python3
-""" Usage: batchhedy.py [--help] [--level <level>]... [--output <output>]
-         [--report <csvfile>] [--check <checkfile>] <filename>...
-
-Batch transpiling of Hedy files with option to check the results and
-benchmark it. If <output> is set the resulting python files
-will be written in that directory if not the result will be print.
-
--h, --help                           Show this help
--l <level>, --level <level>          Only do those levels
--o <output>, --output <output>       Directory were to output python files
--r <csvfile, --report <csvfile>      Write report info in <csvfile>
--c <checkfile>, --check <checkfile>  Compare with a previous report
-"""
-
-# Python standard lib
 from pathlib import Path
 from time import perf_counter
 from typing import Optional, List, Tuple, ClassVar
 import csv
+import os
+from os import path
+import glob
 
 # Hedy lib
 import hedy
 
 # External lib
-from docopt import docopt
-from pydantic import BaseModel, ValidationError, FilePath
+from pydantic import BaseModel, FilePath
 from lark.exceptions import GrammarError, UnexpectedEOF
 from lazy.lazy import lazy
 
+def run(filenames, report, top, check = None, ):
+        jobs = create_jobs(filenames)
+        #skip empty programs
+        jobs = [j for j in jobs if not is_empty(j.code)]
 
-class RunHedy(BaseModel):
-    """ For each file in `filename`, do a timed transpilling from Hedy code
-    to Python code.
-
-    After the object creating, use RunHedy.run(self) to do the transpiling.
-
-    Arguments:
-        filename: List[FilePath]
-            A list of .hedy file to transpile/test. The first line need to
-            be the Hedy level in the format "# level X" or "# level = X" (case
-            insensitive) where 'X' is a valid level.
-        report: Optional[Path]
-            If present and a valid path, will save information of the
-            transpilings (timing, error, line of code,...) in csv format.
-        check: Optional[FilePath]
-            If present and a valid csv file from a previous run, will
-            compare the results from this run with the one from the file and
-            report any change in error and the time difference.
-        level: Optional[List[int]]
-            If present, only file with Hedy level in `level` will be
-            transpiled/tested.
-        output: Optional[Path]
-            If present, the resulting python code will be save in the
-            direction `output`. The name of the python files will be the same
-            than the Hedy files, with the extension changed from .hedy to .py.
-            If the path doesn't exist, it will be created.
-    """
-    filename: List[FilePath]
-    report: Optional[Path]
-    check: Optional[FilePath]
-    level: Optional[List[int]]
-    output: Optional[Path]
-    help: Optional[bool]       # no used, but needed for CLI interface
-
-    jobs: ClassVar[None]
-    checkdata: ClassVar[None]
-
-    def run(self):
-        """ Execute runhedy with the validated parameters """
-
-        if self.output:
-            self.output.mkdir(parents=True, exist_ok=True)
-
-        # for display
-        maxfilelength = max(len(str(f.stem)) for f in self.filename)
-
-        # For table display
-        sep = "  "
-        header = sep.join([
-            f"{'filename':{maxfilelength}}",
-            f"{'lev.':>3}",
-            f"{'loc':>4}",
-            f"{'0loc':>4}",
-            f"{'tokens':>6}",
-            f"{'time':>14}",
-            f"{'time/tokens':>14}",
-            f"{'pyloc':>5}",
-            f"{'error msg':>10}",
-        ])
-
-        if self.checkdata is not None:
-            header = sep.join([
-                header,
-                f"{'time diff.':>9}",
-                f"{'error msg':>10}",
-            ])
-
-        # This will print any errors or warning before the header
-        jobs = self.jobs
-
-        print(header)
         number_of_error_programs = 0
 
         for job in jobs:
-            # Basic info on the file
-            print(sep.join([f"{str(job.filename.stem):{maxfilelength}}",
-                            f"{job.level:3}",
-                            f"{job.src_loc:4}",
-                            f"{job.src_loc_empty:4}",
-                            f"{job.src_tokens:6}", ]), end=sep)
-
             job.transpile()
-
             if job.error_msg != '':
                 number_of_error_programs += 1
 
-            if self.output is not None:
-                # Write python file
-                with open(self.output / (job.filename.stem + ".py"), "w") as f:
-                    f.write(job.pycode)
-
-            # Run info
-            infos = [
-                f"{job.transpile_time:13.8f}s",
-                (f"{'-':>14}" if job.src_tokens == 0 else
-                    f"{job.transpile_time/job.src_tokens:13.8f}s"),
-                f"{job.py_loc:5}",
-                f"{job.error_msg[:10]:10}"]
-
-            if self.checkdata is not None:
+            checkdata = create_checkdata(check)
+            if checkdata is not None:
                 # Compare with previous run
-                chkjob = self.checkdata[job.filename.stem]
-                chktime = float(chkjob["transpile time"])
-                diff = 100 * job.transpile_time / chktime
-                infos.append(f"{diff:9.2f}%")
+                try:
+                    chkjob = checkdata[job.filename]
+                    chktime = float(chkjob["transpile time"])
+                    diff = 0 if chktime == 0 else 100 * job.transpile_time / chktime
 
-                if (job.error is True) and (chkjob["error"] == "False"):
-                    infos.append(f"{'no error->error':15}")
-                elif (job.error is True) and (chkjob["error"] == "True"):
-                    # only check the first line, args position change
-                    if (job.error_msg.splitlines()[0] !=
-                            chkjob["error message"].splitlines()[0]):
-                        infos.append(f"{'error diff.':15}")
-                elif (job.error is False) and (chkjob["error"] == "True"):
-                    infos.append(f"{'error->no error':15}")
-                elif job.py_loc != int(chkjob["py_loc"]):
-                    infos.append(f"{'loc different':15}")
+                    if (job.error is True) and (chkjob["error"] == "False"):
+                        job.error_change = f"{'no error->error':15}"
+                    elif (job.error is True) and (chkjob["error"] == "True"):
+                        # only check the first line, args position change
+                        if (job.error_msg.splitlines()[0] !=
+                                chkjob["error message"].splitlines()[0]):
+                            job.error_change = f"{'error diff.':15}"
+                    elif (job.error is False) and (chkjob["error"] == "True"):
+                        job.error_change = f"{'error->no error':15}"
+                except Exception as e:
+                    print('checking failed')
 
-            print(sep.join(infos))
-
-        # Reprint header for easy read
-        print(header)
-
-        if self.report is not None:
-            self._save_report()
+        if report is not None:
+            _save_report(jobs, report)
 
         # print run informations
-        runtimes = [r.transpile_time for r in self.jobs]
+        runtimes_and_files = [(r.filename, r.transpile_time) for r in jobs]
+        ordered_runtimes = sorted(runtimes_and_files, key=lambda x: x[1], reverse = True)
+        slowest_top_x = [x[0] for x in ordered_runtimes[:top]]
+
+        runtimes = [x[1] for x in runtimes_and_files]
+
         maxvalue = max(runtimes)
         minvalue = min(runtimes)
-        maxfilename = self.jobs[runtimes.index(maxvalue)].filename
+        name_of_slowest_file = jobs[runtimes.index(maxvalue)].filename
 
-        if self.checkdata is None:
+        if checkdata is None:
             # Simple run
             print(f"Total transpile time: {sum(runtimes):10f}s ")
             print(f"Average transpile time: {sum(runtimes)/len(runtimes):10f}s ")
         else:
             # Compare with previous data
             previous_total_time = sum(float(
-                self.checkdata[job.filename.stem]["transpile time"]
-                ) for job in self.jobs)
+                checkdata[job.filename]["transpile time"]
+                ) for job in jobs)
             diff = 100 * sum(runtimes) / previous_total_time
             print(f"Total transpile time: {sum(runtimes):10f}s ({diff:6.2f}%)")
 
-        print(f"Max transpile time:   {maxvalue:10f}s (file: {maxfilename})")
+        print(f"Number of files:  {len(jobs)}")
+        print(f"Max transpile time:   {maxvalue:10f}s (files: {name_of_slowest_file})")
+        print(f"Slowest files: {slowest_top_x})")
         print(f"Min transpile time:   {minvalue:10f}s")
         print(f"Number of error files:  {number_of_error_programs} ({100*number_of_error_programs/len(jobs):3f}) ")
 
+def create_jobs(filenames):
+    """ The list of jobs to be run """
+    # Create object list
+    jobs = [TranspileJob(f) for f in filenames]
 
-    @lazy
-    def jobs(self):
-        """ The list of jobs to be run """
-        # Create object list
-        jobs = [TranspileJob(f) for f in self.filename]
+    # Remove files with invalid level
+    invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
+    if len(invalidjob) > 0:
+        print(f"WARNING: There are {len(invalidjob)} files with"
+              f" invalid Hedy level (> {hedy.HEDY_MAX_LEVEL})")
+        jobs = [j for j in jobs if j.level <= hedy.HEDY_MAX_LEVEL]
 
-        if self.level and len(self.level) > 0:
-            jobs = [r for r in jobs if r.level in self.level]
+    return jobs
 
-        # Remove files with invalid level
-        invalidjob = [j for j in jobs if j.level > hedy.HEDY_MAX_LEVEL]
-        if len(invalidjob) > 0:
-            print(f"WARNING: There are {len(invalidjob)} files with"
-                  f" invalid Hedy level (> {hedy.HEDY_MAX_LEVEL})")
-            jobs = [j for j in jobs if j.level <= hedy.HEDY_MAX_LEVEL]
+def create_checkdata(check):
+    """ Data of a previous run. Return None is self.check is not set."""
+    if check is None:
+        return None
 
-        return jobs
+    comparedata = {}
+    with open(check, newline="") as csvfile:
+        reader = csv.reader(csvfile)
+        fields = None
+        for row in reader:
+            if fields is None:
+                fields = row
+            else:
+                comparedata[row[0]] = ({k: v for k, v in zip(fields, row)})
+    return comparedata
 
-    @lazy
-    def checkdata(self):
-        """ Data of a previous run. Return None is self.check is not set."""
-        if self.check is None:
-            return None
-
-        comparedata = {}
-        with open(self.check, newline="") as csvfile:
-            reader = csv.reader(csvfile)
-            fields = None
-            for row in reader:
-                if fields is None:
-                    fields = row
-                else:
-                    comparedata[row[0]] = ({k: v for k, v in zip(fields, row)})
-        return comparedata
-
-    def _save_report(self, file=None):
-        with open(file or self.report, "w", newline="") as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=[
-                "filename",
-                "level",
-                "transpile time",
-                "error",
-                "error message",
-                "src_loc",
-                "src_loc_empty",
-                "src_tokens",
-                "py_loc",
-            ])
-
-            writer.writeheader()
-            for job in self.jobs:
-                writer.writerow({
-                    "filename": str(job.filename.stem),
-                    "level": self.level,
-                    "transpile time": job.transpile_time,
-                    "error": job.error,
-                    "error message": job.error_msg,
-                    "src_loc": job.src_loc,
-                    "src_loc_empty": job.src_loc_empty,
-                    "src_tokens": job.src_tokens,
-                    "py_loc": job.py_loc,
-                })
 
 
 class TranspileJob:
@@ -248,13 +116,11 @@ class TranspileJob:
     Attributes:
         code: The Hedy code
         pycode: The Python code
-        src_loc: Number of lines of code in the Hedy code
-        src_loc_empty: Number of empty line of code in the Hedy code
         src_tokens: Number of tokens in the Hedy code
-        py_loc: Number of lines of code in the Python code
         error: True if there was an error during transpiling
         error_msg: The error message
         transpile_time: The time took for transpiling in seconds
+        error_change: if the new error is different
 
     Functions:
         transpile: (re)run the transpiling
@@ -267,10 +133,11 @@ class TranspileJob:
         to transpile() or pycode is made.
         """
 
-        self.filename = filename
+        self.filename = os.path.basename(filename)
         self.error = False
         self.error_msg = ""
         self.transpile_time = 0.0
+        self.error_change = None
 
         # Get the level and code position
         try:
@@ -278,7 +145,9 @@ class TranspileJob:
                 all_lines = f.readlines()
                 # remove header info
                 firstline = all_lines[0]
-                self.code = '\n'.join(all_lines[3:])
+                self.date = all_lines[1]
+                non_empty_lines = [a for a in all_lines[4:] if a != '']
+                self.code = ''.join(non_empty_lines) + '\n'
 
             self.level = 0
 
@@ -296,36 +165,14 @@ class TranspileJob:
             self.error_msg = str(e)
 
 
-
     def transpile(self) -> str:
-        """ (Re)run the transpiling """
-        try:
-            del self.pycode   # force rerun of the transpiling
-        except AttributeError:
-            pass
-        return self.pycode
-
-    @lazy
-    def code(self) -> str:
-        """ The hedy code"""
-        code = self.code
-
-        # Make sure that the last line is "\n".
-        if len(code) > 0:
-            return code if code[-1] == "\n" else code + "\n"
-        else:
-            return ""
-
-    @lazy
-    def pycode(self) -> str:
-        """ The transpiled code """
         if self.error:
             return ""
         try:
             pycode = ""
             t1 = perf_counter()
             pycode = hedy.transpile(self.code, self.level).code
-        except hedy.HedyException as e:
+        except hedy.exceptions.HedyException as e:
             self.error = True
             self.error_msg = str(e)
         except UnexpectedEOF as e:
@@ -339,7 +186,7 @@ class TranspileJob:
             self.error = True
             self.error_msg = str(e)
 
-        #TODO: Catch any error ?
+        # TODO: Catch any error ?
         finally:
             t2 = perf_counter()
 
@@ -347,24 +194,18 @@ class TranspileJob:
         return pycode
 
     @lazy
-    def src_loc(self) -> int:
-        """ Lines of code in the Hedy file """
-        return len(self.code.split("\n"))
+    def code(self) -> str:
+        """ The hedy code"""
+        code = self.code
 
-    @lazy
-    def src_loc_empty(self) -> int:
-        """ Empty Line of code in the Hedy file """
-        return len([line for line in self.code.split("\n") if len(line) == 0])
+        # Make sure that the last line is "\n".
+        if len(code) > 0:
+            return code if code[-1] == "\n" else code + "\n"
+        else:
+            return ""
 
-    @lazy
-    def src_tokens(self) -> int:
-        """ Tokens in the Hedy file """
-        return (len(self.code.split()))
 
-    @lazy
-    def py_loc(self) -> int:
-        """ Lines of code in the Python file """
-        return len(self.pycode.split("\n"))
+
 
 
 def extract_level_from_code(code: str) -> Tuple[int, str]:
@@ -385,15 +226,46 @@ def extract_level_from_code(code: str) -> Tuple[int, str]:
                 pass
     return None, code
 
+def is_empty(program):
+    all_lines = program.split('\n')
+    return all(line == '' for line in all_lines)
 
-if __name__ == "__main__":
-    try:
-        RunHedy(**{
-            # Remove unwanted characters from the parsed args
-            "".join([k for k in key if k not in "-<>"]): value
-            for key, value in docopt(__doc__).items()
-        }).run()
-        exit(0)
-    except ValidationError as e:
-        print(e)
-        exit(1)
+def _save_report(jobs, report):
+        with open(report, "w", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=[
+                "filename",
+                "date",
+                "level",
+                "code",
+                "transpile time",
+                "error",
+                "error message",
+                "error_change"
+            ])
+
+
+            writer.writeheader()
+            for job in jobs:
+                code = job.code.replace("\\n", "")
+                writer.writerow({
+                    "filename": job.filename,
+                    "date": job.date,
+                    "level": job.level,
+                    "code": f'{code}',
+                    "transpile time": job.transpile_time,
+                    "error": job.error,
+                    "error message": job.error_msg,
+                    "error_change": job.error_change,
+                })
+
+os.chdir(path.dirname(path.abspath(__file__)))
+filenames_list = glob.glob('../../input_small/*.hedy')
+
+#report determines if we are generating a fresh report
+#check determines if we are comparing against an existing report
+
+if __name__ == '__main__':
+    if len(filenames_list) == 0:
+        print("no files found!")
+    else:
+        run(filenames=filenames_list, check = 'output_report_small.csv', report = 'output_report_small.csv', top=10)

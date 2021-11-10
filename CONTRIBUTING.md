@@ -1,55 +1,21 @@
-Contributing to Hedy
-======================
-
-Hedy is now available in Dutch, French, English, Brazilian Portugese, Greek Mandarin, Hungarian and Spanish, but we'd love to support more languages!
-
-Help Hedy with translations (easy, no programming needed!)
+Helping build Hedy
 ------------
 
-The easiest way to translate Hedy is by using or translation UI website!
+We would be grateful if you help make Hedy better! First you will want to follow the instructions below to run the code locally and configuring your manchine as explained below. After that, you want to look at these things:
 
-Simply go to https://www.hedycode.com/translate/en/new and translate our texts that are shown on the left in the boxes on the right. When you are done, you can use the three download button at the end of the page, and [send us the files](mailto:hedy@felienne.com).
+**Open issues**
 
-![image](https://user-images.githubusercontent.com/1003685/116811756-3ed55f80-ab4b-11eb-881a-85677a30ef5e.png)
+First have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too! Issues that are currently unassigned, are not planning to be picked up by us in the near future. For issues that look interesting but are already assigned, just reply on the issue to see if your help can be used.
 
-You can also use this interface to extend or repair existing translations, then you have to use the iso code of the langage that you want to work with in the url instead of new, f.e. https://www.hedycode.com/translate/en/es for Spanish. That will show the existing translated texts for you to update. After you have made changes again download the files and send them to us per email.
+**Project boards**
 
+The core team (currently consisting of [Felienne](https://github.com/Felienne), [fpereiro](https://github.com/fpereiro), [boryanagoncharenko](https://github.com/boryanagoncharenko) and [tibiba](https://github.com/tibiba)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
 
-Help Hedy with translations (in the code base, some coding experience needed)
-------------
+Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :)
 
-If you would like to add a new translation, there are four places where files are located that need to be translated:
+**Discussions**
 
-1) The folder [level-defaults](https://github.com/Felienne/hedy/blob/main/coursedata/level-defaults/) has a file for each language. That file controls what the landing page for each levels looks like. It is probably easiest to copy the [English file](https://github.com/Felienne/hedy/blob/main/coursedata/level-defaults/en.yaml), rename it and translate that. Tip: example variables can be translated too, that is probably helpful for learners!
-
-2) In the folder [texts](https://github.com/Felienne/hedy/tree/main/coursedata/texts) there is a file for each language too. That file translate UI-elements like menu headers, and, important, the error messages Hedy programmers will see. As above, copying the [English file](https://github.com/Felienne/hedy/blob/main/coursedata/texts/en.yaml) and translate that.
-
-3) The [folder](https://github.com/Felienne/hedy/tree/main/coursedata/adventures) that control the assignments kids see in the user interface for each of the levels. While not mandatory, the assignments in this section are of help for kids to better explore each level. If you do not translate them, the English version will be shown.
-
-4) *optional* The folder [main](https://github.com/Felienne/hedy/tree/main/main) controls the web pages around Hedy. [start](https://github.com/Felienne/hedy/blob/main/main/start-en.md) holds the content of the start page, and there are page with press, contact info too. These do not necessariyl have to be translated, if you don't people will then see the English version, but kids can still program in their own native language.
-
-
-Translated all of that?
-
-Two more small things to do!
-
-1) Add your language to the [menu](https://github.com/Felienne/hedy/blob/main/main/menu.json).
-
-2) Now go to [app.py](https://github.com/Felienne/hedy/blob/main/app.py) and add your language to this list:
-
-```
-ALL_LANGUAGES = {
-    'en': 'English',
-    'nl': 'Nederlands',
-    'es': 'Español',
-    'fr': 'Français',
-    'pt_br': 'Português',
-    'de': 'Deutsch',
-    'it': 'Italiano'
-}
-```
-
-In some places, we are missing translations to the existing language. You can find those locations as [issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22translation+needed%22)
+The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the langauge or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hedy@felienne.com) and read the corresponding discussion to see what has alrady been thought about.
 
 
 Run Hedy code on your machine
@@ -71,47 +37,67 @@ If you want to run the website version locally, run:
 To run the unit tests:
 
 ```bash
-(.env)$ python -m unittest discover -s tests
+(.env)$ python -m pytest tests/*.py
 ```
 
-To make debugging a lot more convenient, enable **development mode**. If you do this, any HTML templates and Python
-source files you change and save will automatically be reloaded.
+## Working on the browser JavaScript
 
-(Be aware that your program may stop with a `SyntaxError` if you save a Python file
-while the code is not complete. If this happens too often because you reflexively hit Ctrl-S 😉
-you can wrap the command in a loop to restart the server quickly).
+Part of the code base of Hedy is written in Python, which runs on the server.
+The parts that run in the browser are written in TypeScript, and are compiled to
+JavaScript.
 
+So that most people won't have to install special tools, the generated
+JavaScript code is checked in. However, if you are working on the browser code,
+you need to edit the TypeScript source files and regenerate the JavaScript
+bundle by running:
 
-```bash
-(.env)$ env FLASK_ENV=development python app.py
-# or in a loop if it stops too often
-(.env)$ while true; do env FLASK_ENV=development python app.py; sleep 1; done
+```
+# You only need to run 'npm ci' once to install the tools
+$ npm ci
+
+# Afterwards run this:
+$ build-tools/heroku/generate-typescript --watch
 ```
 
-If you want to run the website locally, but would prefer to use Docker instead of installing python, you can build a container image and run it like so:
+Before reloading your browser.
+
+## Using Docker
+
+If you want to run the website locally, but would prefer to use Docker instead
+of installing python, you can build a container image and run it like so:
 
 ```bash
 docker build -t hedy .
 ```
-and then
+
+and then:
+
 ```bash
 docker run -it --rm -p 5000:5000 hedy
 ```
 
+## Running Hedy files from the command line
+
 If you don't want to use a website, you can run the code locally without the need of a website. To create a file use:
+
 ```bash
 $ touch FILENAME.hedy
 ```
+
 If you use a higher level than 1, specify the level at the top of the file by typing ```#LEVEL 1-8```. This will let the interpreter know which level you want to run the code on. Now to acctually run the code, type the following command in the terminal:
+
 ```bash
 (.env)$ python runhedy.py FILENAME.hedy
 ```
+
 If all did correctly, you will see the output of your code right into the terminal.
 
 If you don't want to specify the level itself in the file, you can use the ```--level``` argument after the filename. You can do it like this:
+
 ```bash
 (.env)$ python runhedy.py FILENAME.hedy --level 1-8
 ```
+
 When you execute this, the interpreter will use the specified level.
 
 Pre-release environment

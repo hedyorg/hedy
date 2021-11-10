@@ -1,16 +1,12 @@
-// Level 12 adds square brackets around lists
-// string list elements also need single quotation marks (') now
+// adds comparisons
 
-// and list items can be assigned to
+condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
 
-command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | change_list_item | assign
+//smaller and smaller_equal could be merged or refactored to minimize overlap?
 
-assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces | list_access _SPACE _IS _SPACE sum | list_access _SPACE _IS _SPACE textwithoutspaces
-assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET quoted_text ((", "|",") quoted_text)+ _RIGHT_SQUARE_BRACKET
+smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
+bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
+smaller_equal: (textwithoutspaces | list_access) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access)
+bigger_equal: (textwithoutspaces | list_access) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access)
+not_equal: (textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (textwithoutspaces | list_access)
 
-//new for level 12, assignment of list[i]
-change_list_item: var _LEFT_SQUARE_BRACKET (index | var) _RIGHT_SQUARE_BRACKET _SPACE _IS _SPACE (var | textwithoutspaces)
-
-list_access: var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
-list_access_var: var _SPACE _IS _SPACE var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
-equality_check: (textwithoutspaces | list_access) _SPACE _IS _SPACE (textwithoutspaces | list_access)

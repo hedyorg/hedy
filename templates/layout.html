@@ -8,35 +8,32 @@
 	<link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo.png')}}"/>
     <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
-    <link href="{{ static('/window/window.css') }}" rel="stylesheet" />
-    <script src="{{ static('/js/jquery-1.7.1.min.js') }}"></script>
-    <script src="{{ static('/window/window.js') }}"></script>
   </head>
-
   <body class="bg-gray-400">
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal-mask" class="hidden absolute bg-gray-400 z-50 w-full h-full" style="opacity: 40%"></div>
-    <div id="modal-content" class="hidden absolute z-50 p-16 bg-gray-200 border-2 border-black" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
+    <div id="modal-content" class="hidden fixed z-50 p-12 pl-16 pr-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
        <div id="modal-alert" class="hidden">
-          <div id="modal-alert-text"></div>
-          <div style="margin: auto; text-align: center;">
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.hide ()">{{auth.yes}}</button>
+          <div id="modal-alert-text" class="text-white mb-8 text-xl"></div>
+          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-confirm-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
           </div>
        </div>
        <div id="modal-confirm" class="hidden">
-          <div id="modal-confirm-text"></div>
-          <div style="margin: auto; text-align: center;">
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.confirmcb (true)">{{auth.yes}}</button>
-            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.confirmcb (false)">{{auth.no}}</button>
+          <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
+          <div class="ml-auto mr-auto mt-4 flex flex-row justify-center">
+            <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.yes}}</button>
+            <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.no}}</button>
           </div>
        </div>
        <div id="modal-prompt" class="hidden">
-          <div id="modal-prompt-text"></div>
-          <div style="margin: auto; text-align: center;">
+          <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
+          <div class="ml-auto mr-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
-            <br>
-            <button class="btn block mt-4" style="min-width:6em" onclick="window.modal.promptcb ()">{{auth.yes}}</button>
-            <button class="btn block mt-4 ml-2" style="min-width:6em" onclick="window.modal.promptcb (true)">{{auth.no}}</button>
+            <div class="mt-4 flex flex-row justify-center">
+                <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{auth.ok}}</button>
+                <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{auth.cancel}}</button>
+            </div>
           </div>
        </div>
     </div>
@@ -46,48 +43,11 @@
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block body %}{% endblock %}
+      <canvas id="confetti" class="hidden"></canvas>
     </div>
+
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script>
-      window.modal = {
-         show: function () {
-            $ ('#modal-mask').show ();
-            $ ('#modal-content').show ();
-            window.scrollTo (0, 0);
-         },
-         hide: function () {
-            $ ('#modal-mask').hide ();
-            $ ('#modal-content').hide ();
-            $ ('#modal-alert').hide ();
-            $ ('#modal-prompt').hide ();
-            $ ('#modal-confirm').hide ();
-         },
-         alert: function (message) {
-            $ ('#modal-alert-text').text (message);
-            window.modal.show ();
-            $ ('#modal-alert').show ();
-         },
-         confirm: function (message, cb) {
-            $ ('#modal-confirm-text').text (message);
-            window.modal.show ();
-            $ ('#modal-confirm').show ();
-            window.modal.confirmcb = function (proceed) {
-              window.modal.hide ();
-              if (proceed) cb ();
-            }
-         },
-         prompt: function (message, cb) {
-            $ ('#modal-prompt-text').text (message);
-            window.modal.show ();
-            $ ('#modal-prompt').show ();
-            window.modal.promptcb = function (cancel) {
-              window.modal.hide ();
-              if (cancel) return;
-              cb ($ ('#modal-prompt-input').val ());
-            }
-         }
-      }
-    </script>
+    <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
   </body>
 </html>

@@ -5,27 +5,41 @@
 <div class="px-8">
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{texts.recent}}</h2>{% endif %}
-  <ul class="programs">
+  <div class="programs w-full">
   {% for program in programs %}
-    <li>
-      {% if program.adventure_name %}
-        <strong>{{ui.adventure}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</strong>
-      {% else %}
-        <strong>{{program.name}} </strong>
-      {% endif %}
-      -&nbsp;
-      {{ texts.level }} {{ program.level }} - {{ program.date }}
-      <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}">{{ texts.open }}</a>
-
-      <a href="#" onclick="window.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</a>
-      {% if program.public %}
-        <a href="#" onclick="window.modal.confirm ('{{ texts.unshare_confirm }}', function () {window.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</a>
-        <a href="#" onclick="window.copy_to_clipboard(viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</a>
-      {% else %}
-        <a href="#" onclick="window.modal.confirm ('{{ texts.share_confirm }}', function () {window.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</a>
-      {% endif %}
-      <pre>{{program.code | truncate (50) }}</pre>
-    </li>
+    <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+        <table class="table-auto mb-4">
+        <thead>
+            <tr class="text-left">
+                <th class="w-1/4 text-blue-600">{{ texts.title }}</th>
+                <th class="w-1/4 text-blue-600">{{ texts.level }}</th>
+                <th class="w-1/4 text-blue-600">{{ texts.created }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              {% if program.adventure_name %}
+                <td>{{ui.adventure}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</td>
+              {% else %}
+                <td>{{program.name}}</td>
+              {% endif %}
+              <td>{{ texts.level }} {{ program.level }}</td>
+              <td>{{ program.date }}</td>
+            </tr>
+        </tbody>
+        </table>
+        <div class="w-3/4 border-solid border-2 rounded w-1/2 p-2 mb-4">
+          <pre>{{program.code | truncate (50) }}</pre>
+        </div>
+        <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}"><button class="green-btn">{{ texts.open }}</button></a>
+        <button class="red-btn" onclick="hedyApp.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</button>
+          {% if program.public %}
+            <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.unshare_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</button>
+            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</button>
+          {% else %}
+              <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.share_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</button>
+          {% endif %}
+    </div>
     <br>
   {% endfor %}
   {% if programs|length == 0 and not from_user %}
@@ -34,12 +48,12 @@
     <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{texts.write_first}}</button>
   </p>
   {% endif %}
-  </ul>
+  </div>
 </div>
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="{{static('/js/app.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/js/auth.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/client_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
 {% endblock %}

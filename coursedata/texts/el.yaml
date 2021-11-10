@@ -19,6 +19,8 @@ ui:
     assignment_header: 'Άσκηση'
     show_explanation: 'Εμφάνισε εξήγηση'
     hide_explanation: 'Κρύψε εξήγηση'
+    hide_commands: "Hide"
+    search: "Search..."
     adventure: Περιπέτεια
     switch_to_levels: Έξοδος από περιπέτειες
     switch_to_adventures: Πήγαινε σε περιπέτειες
@@ -26,6 +28,7 @@ ui:
     commands_title: Εντολές
     by: "by"
 ClientErrorMessages:
+    Transpile_success: "Great job!"
     Transpile_warning: 'Προσοχή!'
     Transpile_error: 'Δεν μπορούμε να εκτελέσουμε το πρόγραμμά σου.'
     Connection_error: 'Δεν μπορέσαμε να βρούμε το διακομιστή.'
@@ -33,8 +36,9 @@ ClientErrorMessages:
     Execute_error: 'Κάτι πήγε στραβά όσο εκτελούσαμε το πρόγραμμα.'
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
+    Program_too_long: "Your program takes too long to run."
 HedyErrorMessages:
-    Wrong Level: 'Αυτός ήταν σωστός κώδικας Hedy, αλλά όχι στο σωστό επίπεδο. Έγραψες κώδικα για το επίπεδο {original_level} στο επίπεδο {working_level}.'
+    Wrong Level: 'Αυτός ήταν σωστός κώδικας Hedy, αλλά όχι στο σωστό επίπεδο. Έγραψες κώδικα για το επίπεδο {working_level} στο επίπεδο {original_level}.'
     Incomplete: 'Ουπς! Ξέχασες ένα κομμάτι κώδικα! Στη γραμμή {line_number}, πρέπει να γράψεις κείμενο ύστερα από την {incomplete_command}.'
     Invalid: 'Η εντολή {invalid_command} δεν είναι μια εντολή του επιπέδου {level} της Hedy. Μήπως εννοούσες {guessed_command};'
     Invalid Space: 'Ουπς! Ξεκίνησες μια γραμμή με κενό στη γραμμή {line_number}. Τα κενά μπερδεύουν τους υπολογιστές, μπορείς να τα αφαιρέσεις;'
@@ -107,23 +111,6 @@ Auth:
     invalid_reset_link: 'Άκυρος σύνδεσμος επαναφοράς συνθηματικού.'
     exists_email: 'Αυτό το email χρησιμοποιείται ήδη.'
     exists_username: 'Αυτό το όνομα χρήστη χρησιμοποιείται ήδη.'
-    email_hello: 'Γειά!'
-    email_goodbye: |-
-        Σε ευχαριστούμε!
-        Η ομάδα της Hedy
-    email_welcome_verify_subject: 'Καλωσήλθες στη Hedy'
-    email_welcome_verify_body: |-
-        Ο Hedy λογαριασμός σου δημιουργήθηκε επιτυχώς. Καλωσήλθες!
-        Παρακαλώ πάτησε σε αυτόν το σύνδεσμο για να επιβεβαιώσεις το email σου:
-    email_change_password_subject: 'To Hedy συνθηματικό σου έχει αλλάξει'
-    email_change_password_body: |-
-        Το Hedy συνθηματικό σου έχει αλλάξει. Αν αυτό ήταν δική σου ενέργεια, όλα καλά. Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
-    email_recover_password_subject: 'Επαναφορά του Hedy συνθηματικού σου'
-    email_recover_password_body: 'Πατώντας σε αυτόν το σύνδεσμο, μπορείς να ορίσεις ένα νέο Hedy password. Αν δεν ζήτησες επαναφορά συνθηματικού, παρακαλούμε αγνόησε αυτό το email.'
-    email_reset_password_subject: 'Έχει γίνει επαναφορά του Hedy συνθηματικού σου'
-    email_reset_password_body: |-
-        Το Hedy συνθηματικό σου επαναφέρθηκε σε ένα νέο. Αν αυτό ήταν δική σου ενέργεια, όλα καλα.
-        Αν δεν άλλαξες το συνθηματικό σου, παρακαλώ επικοινώνησε μαζί μας άμεσα, απαντώντας σε αυτό το email.
     programming_experience: "Do you have programming experience?"
     yes: "Yes"
     no: "No"
@@ -148,12 +135,16 @@ Auth:
     student_classes: "My classes"
     teacher_classes: "My classes"
     create_class: "Create new class"
+    rename_class: "Rename class"
     delete_class: "Delete class permanently"
+    back_to_class_list: "Go back to list of classes"
     class_link: "Link to join class"
     prompt_join_class: "Do you want to join this class?"
     join_class: "Join class"
     class_overview: "Class overview"
     class_join_confirmation: "You have successfully joined the class"
+    class_already_joined: "You are already part of the class"
+    goto_profile: "Go to my profile"
     last_login: "Last login"
     highest_level_reached: "Highest level reached"
     number_programs: "Number of programs"

@@ -1,9 +1,7 @@
-// Level 14 adds and and or
+// adds list access with numbers and brackets
 
-ifs: _IF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block" //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-elifs: _EOL (" ")* _ELIF _SPACE (condition|andcondition|orcondition) _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL "end-block"
-condition: (equality_check|in_list_check)
-
-
-andcondition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
-orcondition: (equality_check|in_list_check) (_SPACE _OR _SPACE condition)*
+?atom: NUMBER | var | NAME | list_access | unsupported_number
+list_access: var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
+change_list_item: var _LEFT_SQUARE_BRACKET (index | var) _RIGHT_SQUARE_BRACKET _SPACE _EQUALS _SPACE (var | textwithoutspaces)
+list_access_var: var _SPACE _EQUALS _SPACE var _LEFT_SQUARE_BRACKET (index | random | var) _RIGHT_SQUARE_BRACKET
+assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET (quoted_text | NUMBER) (_COMMA _SPACE? (quoted_text | NUMBER))+ _RIGHT_SQUARE_BRACKET

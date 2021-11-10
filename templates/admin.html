@@ -28,7 +28,7 @@
         <td>{{user.username}}</td>
         <td><a href="programs?user={{user.username}}">Programs</a></td>
         <td>{{user.program_count or 0}}</td>
-        <td>{{user.email}}&nbsp;<a style="cursor: pointer" onclick="window.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">change</a></td>
+        <td>{{user.email}}&nbsp;<a style="cursor: pointer" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">change</a></td>
         <td>{{user.created}}</td>
         <td>{{user.last_login}}</td>
         <td>{{user.birth_year}}</td>
@@ -36,7 +36,7 @@
         <td>{{user.gender}}</td>
         <td>{{user.prog_experience}}</td>
         <td>{{user.experience_languages}}</td>
-        <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="window.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"</td>
+        <td><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher ('{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"</td>
         <td>{{user.email_verified}}</td>
       </tr>
       {% endfor %}
