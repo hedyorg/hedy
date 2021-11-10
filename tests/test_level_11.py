@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel11(HedyTester):
   level = 11
@@ -115,7 +115,7 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    output = self.run_code(result)
+    output = HedyTester.run_code(result)
     expected_output = 'dat is dan: 56'
 
     self.assertEqual(expected_output, output)
@@ -132,7 +132,7 @@ class TestsLevel11(HedyTester):
 
     self.assertEqual(expected, result.code)
 
-    output = self.run_code(result)
+    output = HedyTester.run_code(result)
     expected_output = 'dat is dan: 11'
 
     self.assertEqual(expected_output, output)
