@@ -1421,7 +1421,6 @@ def create_grammar(level, lang="en"):
     result = get_full_grammar_for_level(1)
     keys = get_keywords_for_language(lang)
     result = merge_grammars(result, keys)
-
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
@@ -1432,7 +1431,6 @@ def create_grammar(level, lang="en"):
     save_total_grammar_file(level, result, lang)
 
     return result
-
 
 def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
@@ -1462,16 +1460,12 @@ def get_full_grammar_for_level(level):
         grammar_text = file.read()
     return grammar_text
 
-
-def get_keywords_for_language(lang):
+def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "keywords-" + str(lang) + ".lark"
-    if not (path.isfile(path.join(script_dir, "grammars", filename))):
-        filename = "keywords-en.lark"
+    filename = "keywords-" + str(language) + ".lark"
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
-
 
 PARSER_CACHE = {}
 
@@ -1492,7 +1486,6 @@ def get_parser(level, lang="en"):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
-
 
 def transpile(input_string, level, lang="en"):
     try:
