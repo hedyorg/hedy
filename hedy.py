@@ -1544,7 +1544,7 @@ def preprocess_blocks(code, level):
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=indent_size)
+                                                         indent_size=4)
 
         if needs_indentation(line):
             next_line_needs_indentation = True
