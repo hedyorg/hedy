@@ -20,8 +20,8 @@ textwithspaces: /(?:[^\n, ]| (?!else))+/ -> text //anything can be parsed except
 //a space is allowed, of course but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
 //That is because allowing else in strings leads to issue #303
 textwithoutspaces: /(?:[^\n, ei]|e(?!lse)|i(?!f))+/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-                                                            //the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
-                                                            // this is because allowing else and if in invalid leads to ambiguity in the grammar                                            
+//the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
+// this is because allowing else and if in invalid leads to ambiguity in the grammar                                            
 
 
 
