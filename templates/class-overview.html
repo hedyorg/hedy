@@ -3,28 +3,34 @@
 {% block main %}
 <div class="px-8">
   <h2>{{auth.class_overview}}: {{class_info.name}}</h2>
-  <table class="table-auto">
-    <tr class="font-bold">
-      <td class="p-2">{{auth.username}}</td>
-      <td class="p-2">{{auth.last_login}}</td>
-      <td class="p-2">{{auth.highest_level_reached}}</td>
-      <td class="p-2">{{auth.number_programs}}</td>
-      <td class="p-2">{{auth.programs}}</td>
-      <td class="p-2">{{auth.latest_shared_program}}</td>
-      <td class="p-2">{{auth.remove_student}}</td>
-    </tr>
-    {% for student in class_info.students %}
-      <tr>
-        <td class="p-2">{{student.username}}</td>
-        <td class="p-2">{{student.last_login}}</td>
-        <td class="p-2">{{student.highest_level}}</td>
-        <td class="p-2">{{student.programs}}</td>
-        <td class="p-2"><a href="{{localize_link ('/programs?user=' + student.username)}}">{{auth.programs}}</a></td>
-        <td class="p-2">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-        <td class="p-2"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove_student}}</a></td>
-      </tr>
-    {% endfor %}
-  </table>
+  <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+      <table class="table-auto mb-4">
+      <thead>
+        <tr class="font-bold">
+          <th class="p-2">{{auth.username}}</th>
+          <th class="p-2">{{auth.last_login}}</th>
+          <th class="p-2">{{auth.highest_level_reached}}</th>
+          <th class="p-2">{{auth.number_programs}}</th>
+          <th class="p-2">{{auth.programs}}</th>
+          <th class="p-2">{{auth.latest_shared_program}}</th>
+          <th class="p-2">{{auth.remove_student}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in class_info.students %}
+          <tr>
+            <td class="p-2">{{student.username}}</td>
+            <td class="p-2">{{student.last_login}}</td>
+            <td class="p-2">{{student.highest_level}}</td>
+            <td class="p-2">{{student.programs}}</td>
+            <td class="p-2"><a href="{{localize_link ('/programs?user=' + student.username)}}">{{auth.programs}}</a></td>
+            <td class="p-2">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
+            <td class="p-2"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove_student}}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+  </div>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"<span class="text-blue-500">{{class_info.link}}</span></a></p>
   <br>
   <button class="green-btn mr-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
