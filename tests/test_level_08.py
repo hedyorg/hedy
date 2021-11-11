@@ -116,6 +116,28 @@ class TestsLevel8(HedyTester):
 
     self.assertEqual(expected, result.code)
 
+  def test_empty_line_with_whitespace(self):
+    code = textwrap.dedent("""\
+    repeat 3 times
+      food is ask 'What do you want?'
+      if food is 'pizza'
+        print 'nice!'
+         
+      else
+        print 'pizza is better'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    for i in range(int(3)):
+      food = input('What do you want?')
+      if str(food) == str('pizza'):
+        print(f'nice!')
+      else:
+        print(f'pizza is better')""")
+
+    self.assertEqual(expected, result.code)
+
 
 
 
