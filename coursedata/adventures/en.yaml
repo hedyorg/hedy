@@ -1536,20 +1536,19 @@ adventures:
         levels:
             11:
                 story_text: |
-                    ## Spaarvarken
-                    In dit avontuur kun je een digitaal spaarvarkentje maken, waarmee je je zakgeld kunt tellen en kan berekenen hoe lang het duurt voordat je iets kunt kopen!
+                    ## Piggy Bank
+                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
 
-                    ## Voorbeeld Hedy Code
+                    ## Example Hedy Code
                     ```
-                    print 'Het digitale spaarvarken'
-                    wens is ask 'Wat zou je graag willen hebben?'
-                    prijs is ask 'Hoeveel kost dat?'
-                    gespaard is ask 'Hoeveel geld heb je al gespaard?'
-                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
-                    sparen is prijs - gespaard
-                    weken is sparen / zakgeld
-                    print 'Je kunt over' weken ' weken een ' wens ' kopen!'
-                    ```
+                    print 'The digital piggy bank'
+                    wish is ask 'What would you like to buy?'
+                    price is ask 'How much does that cost?'
+                    saved is ask 'How much money have you saved already?'
+                    allowance is ask 'How much pocket money do you get per week?'
+                    tosave is price - saved
+                    weeks is tosave / allowance
+                    print 'You can buy a ' wish ' in ' weeks ' weeks.'
                 start_code: ""
     next:
         name: "What's next?"
