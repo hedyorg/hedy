@@ -1083,6 +1083,11 @@ class ConvertToPython_11(ConvertToPython_10):
         text = args[0]
         return "'" + text + "'" # keep quotes in the Python code (producing name = 'Henk')
 
+    def assign_list(self, args):
+        parameter = args[0]
+        values = args[1:]
+        return parameter + " = [" + ", ".join(values) + "]"
+
     def assign(self, args):
         right_hand_side = args[1]
 
