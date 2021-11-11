@@ -179,7 +179,16 @@ def mstoisostring(date):
     dt = datetime.datetime.fromtimestamp(unix_ts)
 
     print('dt', dt)
-    return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat().replace("T", " ")
+    return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
+
+# For the class overview we would like to show only the time, if the date is today. Otherwise, we want to
+# pre-process the layout a bit to be better readable, replacing the "T" with a space
+def datetotimeordate(date):
+    datestamp = date.split("T")[0]
+    if (datestamp == datetime.date.fromtimestamp(time.time()).isoformat()):
+        return date.split("T")[1]
+    else:
+        return date.replace("T", " ")
 
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
