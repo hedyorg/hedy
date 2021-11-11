@@ -185,6 +185,7 @@ def mstoisostring(date):
 # pre-process the layout a bit to be better readable, replacing the "T" with a space
 def datetotimeordate(date):
     datestamp = date.split("T")[0]
+    # if the date is the same as the date of today: only return the time, otherwise both
     if (datestamp == datetime.date.fromtimestamp(time.time()).isoformat()):
         return date.split("T")[1]
     else:
