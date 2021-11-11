@@ -33,10 +33,17 @@ class Database:
 
 
     def get_level(self, username):
-        return USERS.get({'username': username})['level']
+        if username:
+            return USERS.get({'username': username})['level']
+        else:
+            return 1
+
 
     def get_ad(self, username):
-        return USERS.get({'username': username})['ad_index']
+        if username:
+            return USERS.get({'username': username})['ad_index']
+        else:
+            return 0
         
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
