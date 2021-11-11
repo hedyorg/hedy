@@ -196,9 +196,6 @@ class ExtractAST(Transformer):
     def punctuation(self, args):
         return Tree('punctuation', [''.join([str(c) for c in args])])
 
-    def index(self, args):
-        return args[0]
-
     def list_access(self, args):
         if type(args[1]) == Tree:
             if "random" in args[1].data:
@@ -478,8 +475,6 @@ class Filter(Transformer):
         return True, ''.join([str(c) for c in args])
     def random(self, args):
         return True, 'random'
-    def index(self, args):
-        return True, ''.join([str(c) for c in args])
     def punctuation(self, args):
         return True, ''.join([c for c in args])
     def number(self, args):
