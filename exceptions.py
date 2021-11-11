@@ -82,7 +82,7 @@ class InvalidArgumentTypeException(HedyException):
             invalid_argument=invalid_argument)
 
 class WrongLevelException(HedyException):
-    def __init__(self, original_level, working_level, offending_keyword, correct_code, tip):
+    def __init__(self, working_level, offending_keyword, tip):
         super().__init__('Wrong Level',
             working_level=working_level,
             offending_keyword=offending_keyword,

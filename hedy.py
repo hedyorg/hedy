@@ -666,11 +666,11 @@ class ConvertToPython_2(ConvertToPython_1):
     def ask_dep_2(self, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(2, 1, 'ask', "ask_needs_var")
+        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
     def echo_dep_2(self, args):
         # echo is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
-        raise hedy.exceptions.WrongLevelException(2, 1, 'echo', "ask_needs_var")
+        raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
 
     def check_var_usage(self, args):
         # this function checks whether arguments are valid
