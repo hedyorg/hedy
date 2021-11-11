@@ -20,54 +20,6 @@ _QUESTION_MARK: "?"
 _PERIOD: "."
 _SINGLE_QUOTE: "'"
 
-_PRINT : "print"
-_ASK : "ask"
-_ECHO : "echo"
-_FORWARD : "forward"
-_TURN: "turn"
-
-//level 2
-_IS: "is"
-_AT: "at"
-random : "random" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
-
-//level 4
-_IN: "in"
-_IF: "if"
-_ELSE: "else"
-_AND: "and"
-
-//level 5
-_REPEAT: "repeat"
-_TIMES: "times"
-
-//level 6
-_MULTIPLY: "*"
-_ADD: "+"
-_SUBTRACT: "-"
-_DIVIDE: "/"
-
-//level 8
-_FOR: "for"
-_RANGE: "range"
-_TO: "to"
-_STEP: "step"
-
-//level 9
-_ELIF: "elif"
-
-//level 11
-_INPUT: "input"
-
-//level 14
-_OR: "or"
-
-//level 17
-_WHILE: "while"
-
-//level 19
-_LENGTH: "length"
-
 start: program
 program: _EOL* (command _EOL+)* command?
 command: print | ask | echo | turtle | invalid_space | invalid
