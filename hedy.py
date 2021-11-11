@@ -1536,6 +1536,10 @@ def preprocess_blocks(code, level):
         if indent_size == None and leading_spaces > 0:
             indent_size = leading_spaces
 
+        # ignore whitespace-only lines
+        if leading_spaces == len(line):
+            continue
+
         #calculate nuber of indents if possible
         if indent_size != None:
             if (leading_spaces % indent_size) != 0:
