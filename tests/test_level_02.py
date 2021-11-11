@@ -496,7 +496,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=2,
-      exception=hedy.exceptions.ParseException,
+      exception=hedy.exceptions.WrongLevelException,
       test_name=self.name()
     )
 

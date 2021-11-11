@@ -744,6 +744,16 @@ def process_variable_for_fstring_padded(name, lookup):
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
+
+    def ask_dep_2(self, args):
+        # ask is no longer usable this way, raise!
+        # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
+        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
+    def echo_dep_2(self, args):
+        # echo is no longer usable this way, raise!
+        # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
+        raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
+
     def check_var_usage(self, args):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
@@ -1499,26 +1509,10 @@ def get_parser(level, lang="en"):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
-    try:
-        transpile_result = transpile_inner(input_string, level, lang)
-        return transpile_result
-    except exceptions.ParseException as ex:
-        # This is the 'fall back' transpilation
-        # that should surely be improved!!
-        # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
+    transpile_result = transpile_inner(input_string, level, lang)
+    return transpile_result
 
-        #try 1 level lower
-        if level > 1:
-            try:
-                new_level = level - 1
-                result = transpile_inner(input_string, new_level, lang)
-            except (LarkError, exceptions.HedyException) as innerE:
-                # Parse at `level - 1` failed as well, just re-raise original error
-                raise ex
-            # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-            raise exceptions.WrongLevelException(correct_code=result.code, working_level=new_level, original_level=level) from ex
-        else:
-            raise
+
 
 
 def repair(input_string):
