@@ -409,7 +409,7 @@ def parse():
             ad_index_db = 0
             level_db += 1
             # write to database
-            DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            DATABASE.update_user(current_user () ['username'], {'level':level_db, 'ad_index':ad_index_db})
             
         # else:
         #     ad_index_db += 1
