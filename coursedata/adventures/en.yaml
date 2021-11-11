@@ -1551,6 +1551,33 @@ adventures:
                         print 'Great! You survived!'
                     ```
                 start_code: "print 'Escape from the haunted house!'"
+    piggybank:
+        name: Piggy Bank
+        description: Count your pocketmoney!
+        image: hauntedhouse.png
+        default_save_name: Piggy Bank
+        levels:
+            12:
+                story_text: |
+                    ## Piggybank
+                    In this level you can let Hedy tell you if you have saved up enough money!
+
+                    ## Example Hedy Code
+                    ```
+                    money is ask 'How much money have you saved?'
+                    wish is ask 'How much money do you need?'
+                    allowance is ask 'How much pocket money do you get each week?'
+                    to_save is wish - money
+                    weeks is to_save / allowance
+                    if wish > money
+                        print 'You need to save up some more!'
+                        print 'Youll need ' weeks ' more weeks.'
+                    else
+                        print 'Great! You have enough'
+                        print 'Lets go shopping!'
+                    ```
+                start_code: ""
+
     next:
         name: "What's next?"
         description: "What's Next?"

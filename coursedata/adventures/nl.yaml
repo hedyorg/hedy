@@ -1570,6 +1570,32 @@ adventures:
                         print ' Hoera! Je bent ontsnapt!'
                     ```
                 start_code: "print 'Ontsnap uit het spookhuis!'"
+    piggybank:
+        name: Spaarvarken
+        description: Tel je zakgeld!
+        image: hauntedhouse.png
+        default_save_name: Spaarvarken
+        levels:
+            12:
+                story_text: |
+                    ## Spaarvarken
+                    In dit level kun je Hedy laten vertellen of je al genoeg geld hebt gespaard of niet!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    geld is ask 'Hoeveel geld heb je al gespaard?'
+                    wens is ask 'Hoeveel geld heb je nodig?'
+                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
+                    sparen is wens - geld
+                    weken is sparen / zakgeld
+                    if wens > geld
+                        print 'Helaas even doorsparen!'
+                        print 'Je moet nog ' weken ' weken.'
+                    else
+                        print 'Hoera, je hebt genoeg!'
+                        print 'Op naar de winkel!'
+                    ```
+                start_code: ""
     next:
         name: "Vooruitblik"
         description: "Vooruitblik"
