@@ -1179,13 +1179,13 @@ adventures:
                     price is 0
                     food is ask 'What would you like to order?'
                     drinks is ask 'What would you like to drink?'
-                    if food is hamburger
+                    if food is 'hamburger'
                         price is price + 6.50
-                    if food is pizza
+                    if food is 'pizza'
                         price is price + 5.75
-                    if drinks is water
+                    if drinks is 'water'
                         price is price + 1.20
-                    if drink is soda
+                    if drink is 'soda'
                         price is price + 2.35
                     print 'That will be ' price ' dollar, please'
                     ```
