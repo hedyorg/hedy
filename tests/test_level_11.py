@@ -95,6 +95,35 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+
+  def test_list_creation_2(self):
+    code = textwrap.dedent("""\
+    actions is 'clap your hands', 'stomp your feet', 'shout Hurray'
+    for action in actions
+        for i in range 1 to 2
+            print 'if youre happy and you know it'
+            print action
+        print 'if youre happy and you know it and you really want to show it'
+        print 'if youre happy and you know it'
+        print action""")
+    expected = textwrap.dedent("""\
+    actions = ['clap your hands', 'stomp your feet', 'shout Hurray']
+    for action in actions:
+      step = 1 if int(1) < int(2) else -1
+      for i in range(int(1), int(2) + step, step):
+        print(f'if youre happy and you know it')
+        print(f'{action}')
+      print(f'if youre happy and you know it and you really want to show it')
+      print(f'if youre happy and you know it')
+      print(f'{action}')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
+
+
   def test_store_calc_in_var(self):
     code = textwrap.dedent("""\
     a is 1
