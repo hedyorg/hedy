@@ -201,7 +201,7 @@ class TestsLevel4(HedyTester):
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
-  def test_pr_1217(self):
+  def test_if_else_newline_list_assigment_print(self):
     # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
     code = textwrap.dedent("""\
     people is mom, dad, Emma, Sophie
@@ -244,6 +244,31 @@ class TestsLevel4(HedyTester):
       print(f'leuk')
     else:
       print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_if_linebreak_statement(self):
+    # Breaking an if statement and its following statement should be
+    # permited until level 7 
+    
+    code = textwrap.dedent("""\
+    people is 1, 2, 3, 3
+    dishwasher is people at random
+    test is 1
+    if dishwasher is test
+    print 'too bad I have to do the dishes!'""")
+
+    expected = textwrap.dedent("""\
+    people = ['1', '2', '3', '3']
+    dishwasher=random.choice(people)
+    test = '1'
+    if dishwasher == test:
+      print(f'too bad I have to do the dishes!')""")
 
     self.multi_level_tester(
       max_level=4,
