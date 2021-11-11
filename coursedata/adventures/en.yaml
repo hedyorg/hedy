@@ -1551,6 +1551,35 @@ adventures:
                         print 'Great! You survived!'
                     ```
                 start_code: "print 'Escape from the haunted house!'"
+#Issue1231            12:
+#Issue1231                story_text: |
+#Issue1231                    ## Haunted House
+#Issue1231                    In this level you can use the < and > symbol to introduce lives to your game.
+#Issue1231
+#Issue1231                    ## Example Hedy code
+#Issue1231                    ```
+#Issue1231                    print 'Escape from the haunted house'
+#Issue1231                    lives is 3
+#Issue1231                    doors is 1, 2, 3
+#Issue1231                    monsters is 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+#Issue1231                    for i in range 1 to 10
+#Issue1231                        if lives > 0
+#Issue1231                            good_door is doors at random
+#Issue1231                            monster is monsters at random
+#Issue1231                            chosen_door is ask 'Which door do you choose?'
+#Issue1231                            if good_door is chosen_door
+#Issue1231                                print 'You have chosen the correct door'
+#Issue1231                            else
+#Issue1231                                print 'You see...' monster
+#Issue1231                                if monster is 'a sleeping 3 headed dog'
+#Issue1231                                    print 'Pffieuw.... Its asleep'
+#Issue1231                                else
+#Issue1231                                    print 'You lose one life'
+#Issue1231                                    lives is lives -1
+#Issue1231                        else
+#Issue1231                            print 'GAME OVER'
+#Issue1231                    ```
+#Issue1231                start_code: ""
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!

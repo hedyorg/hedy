@@ -1570,6 +1570,35 @@ adventures:
                         print ' Hoera! Je bent ontsnapt!'
                     ```
                 start_code: "print 'Ontsnap uit het spookhuis!'"
+#Issue1231            12:
+#Issue1231                story_text: |
+#Issue1231                    ## Spookhuis
+#Issue1231                    In dit level gebruik je < en > om levens toe te voegen aan je spel
+#Issue1231
+#Issue1231                    ## Voorbeeld Hedy code
+#Issue1231                    ```
+#Issue1231                    print 'Ontsnap uit het spookhuis'
+#Issue1231                    levens is 3
+#Issue1231                    deuren is 1, 2, 3
+#Issue1231                    monsters is 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
+#Issue1231                    for i in range 1 to 10
+#Issue1231                        if lives > 0
+#Issue1231                            goede_deur is deuren at random
+#Issue1231                            monster is monsters at random
+#Issue1231                            gekozen_deur is ask 'Welke deur kies jij?'
+#Issue1231                            if goede_deur is gekozen_deur
+#Issue1231                                print 'Je hebt de goede deur gekozen'
+#Issue1231                            else
+#Issue1231                                print 'Je ziet...' monster
+#Issue1231                                if monster is 'een slapende 3 koppige hond'
+#Issue1231                                    print 'Pffieuw.... Hij slaapt'
+#Issue1231                                else
+#Issue1231                                    print 'Je hebt een leven kwijt!'
+#Issue1231                                    levens is levens -1
+#Issue1231                        else
+#Issue1231                            print 'GAME OVER'
+#Issue1231                    ```
+#Issue1231                start_code: ""
     piggybank:
         name: Spaarvarken
         description: Tel je zakgeld!
