@@ -427,10 +427,11 @@ class UsesTurtle(Transformer):
         if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
         else:
-            if type(children[0]) == bool:
+            if all(type(c) == bool for c in children):
                 return any(children) # children? if any is true there is a Turtle leaf
             else:
                 return False # some nodes like text and punctuation have text children (their letters) these are not turtles
+
 
     def forward(self, args):
         return True
@@ -1366,10 +1367,11 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     return '\n'.join(merged_grammar)
 
 
-def create_grammar(level):
+def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
-
+    keys = get_keywords_for_language(lang)
+    result = merge_grammars(result, keys)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
@@ -1377,14 +1379,14 @@ def create_grammar(level):
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result)
+    save_total_grammar_file(level, result, lang)
 
     return result
 
-def save_total_grammar_file(level, grammar):
+def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "-Total.lark"
+    filename = "level" + str(level) + "." + lang + "-Total.lark"
     loc = path.join(script_dir, "grammars-Total", filename)
     file = open(loc, "w", encoding="utf-8")
     file.write(grammar)
@@ -1407,28 +1409,35 @@ def get_full_grammar_for_level(level):
         grammar_text = file.read()
     return grammar_text
 
+def get_keywords_for_language(language):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "keywords-" + str(language) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
+
 PARSER_CACHE = {}
 
 
-def get_parser(level):
+def get_parser(level, lang="en"):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level)
+    key = str(level) + "." + lang
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    grammar = create_grammar(level)
-    ret = Lark(grammar, regex=True)
+    grammar = create_grammar(level, lang)
+    ret = Lark(grammar, regex=True) #ambiguity='explicit'
     PARSER_CACHE[key] = ret
     return ret
 
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
-def transpile(input_string, level):
+def transpile(input_string, level, lang="en"):
     try:
-        transpile_result = transpile_inner(input_string, level)
+        transpile_result = transpile_inner(input_string, level, lang)
         return transpile_result
     except exceptions.ParseException as ex:
         # This is the 'fall back' transpilation
@@ -1439,7 +1448,7 @@ def transpile(input_string, level):
         if level > 1:
             try:
                 new_level = level - 1
-                result = transpile_inner(input_string, new_level)
+                result = transpile_inner(input_string, new_level, lang)
             except (LarkError, exceptions.HedyException) as innerE:
                 # Parse at `level - 1` failed as well, just re-raise original error
                 raise ex
@@ -1582,7 +1591,7 @@ def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
 
-def transpile_inner(input_string, level):
+def transpile_inner(input_string, level, lang="en"):
     number_of_lines = input_string.count('\n')
 
     #parser is not made for huge programs!
@@ -1592,7 +1601,7 @@ def transpile_inner(input_string, level):
     input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = get_parser(level)
+    parser = get_parser(level, lang)
 
     if contains_blanks(input_string):
         raise exceptions.CodePlaceholdersPresentException()
@@ -1606,7 +1615,8 @@ def transpile_inner(input_string, level):
         input_string = preprocess_blocks(input_string, level)
 
     try:
-        program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
+        parse_result = parser.parse(input_string+ '\n')
+        program_root = parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
@@ -1644,7 +1654,7 @@ def transpile_inner(input_string, level):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                result = transpile_inner(fixed_code, level, lang)
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
@@ -1667,13 +1677,13 @@ def transpile_inner(input_string, level):
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, line_number=line)
 
-    is_complete = IsComplete(level).transform(program_root)
+    is_complete = IsComplete(level).transform(abstract_syntaxtree)
     if not is_complete[0]:
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise exceptions.IncompleteCommandException(incomplete_command=incomplete_command, level=level, line_number=line)
 
-    if not valid_echo(program_root):
+    if not valid_echo(abstract_syntaxtree):
         raise exceptions.LonelyEchoException()
 
     try:
@@ -1691,7 +1701,7 @@ def transpile_inner(input_string, level):
         else:
             raise E
 
-    has_turtle = UsesTurtle().transform(program_root)
+    has_turtle = UsesTurtle().transform(abstract_syntaxtree)
 
     return ParseResult(python, has_turtle)
 
