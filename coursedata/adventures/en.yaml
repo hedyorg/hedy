@@ -1606,7 +1606,39 @@ adventures:
                         print 'Lets go shopping!'
                     ```
                 start_code: ""
+    quizmaster:
+        name: Quizmaster
+        description: Make your own quiz!
+        image: hauntedhouse.png
+        default_save_name: Quizmaster
+        levels:
+            12:
+                story_text: |
+                    ## Make your own quiz
+                    In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
+                    You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
 
+                    ## Example Hedy code
+                    ```
+                    print 'Make your own quiz'
+                    points_a is 0
+                    points_b is 0
+                    print 'Question'
+                    print 'Answeroption A'
+                    print 'Answeroption B'
+                    answer is ask 'Which answer?'
+                    if answer is 'A'
+                        points_a is points_a + 1
+                    if answer is 'B'
+                        points_b is points_b + 1
+                    print 'End of the quiz!'
+                    print 'Lets see the results!'
+                    if points_a > points_b
+                        print 'You belong to the A club'
+                    if points_b > points_a
+                        print 'You belong to the B club'
+                    ```
+                start_code: ""
     next:
         name: "What's next?"
         description: "What's Next?"
