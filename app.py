@@ -355,7 +355,7 @@ def hedy_error_to_response(ex, translations):
 
 
 def translate_error(code, translations, arguments):
-    arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept']
+    arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept', 'tip']
 
     # fetch the error template
     error_template = translations[code]
