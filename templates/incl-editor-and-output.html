@@ -102,16 +102,11 @@
         {% endif %}
         {% if next_level %}
           {% if next_level - 1 >= lock_level %}
-        {% if next_level %}
-            <button class="grey-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
-        {% endif %}
-
+            <button class="grey-btn ml-1" >{{ advance_button }} {{ next_level }}</button>
           {% else %}
-        {% if next_level %}
             <button class="green-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
+          {% endif %}
         {% endif %}
-          {% endif %}
-          {% endif %}
       </div>
     </div>
   </div>
