@@ -427,10 +427,11 @@ class UsesTurtle(Transformer):
         if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
         else:
-            if type(children[0]) == bool:
+            if all(type(c) == bool for c in children):
                 return any(children) # children? if any is true there is a Turtle leaf
             else:
                 return False # some nodes like text and punctuation have text children (their letters) these are not turtles
+
 
     def forward(self, args):
         return True
@@ -1428,7 +1429,7 @@ def get_parser(level, lang="en"):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True)
+    ret = Lark(grammar, regex=True) #ambiguity='explicit'
     PARSER_CACHE[key] = ret
     return ret
 
@@ -1614,7 +1615,8 @@ def transpile_inner(input_string, level, lang="en"):
         input_string = preprocess_blocks(input_string, level)
 
     try:
-        program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
+        parse_result = parser.parse(input_string+ '\n')
+        program_root = parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
         abstract_syntaxtree = ExtractAST().transform(program_root)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
@@ -1675,13 +1677,13 @@ def transpile_inner(input_string, level, lang="en"):
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, line_number=line)
 
-    is_complete = IsComplete(level).transform(program_root)
+    is_complete = IsComplete(level).transform(abstract_syntaxtree)
     if not is_complete[0]:
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
         raise exceptions.IncompleteCommandException(incomplete_command=incomplete_command, level=level, line_number=line)
 
-    if not valid_echo(program_root):
+    if not valid_echo(abstract_syntaxtree):
         raise exceptions.LonelyEchoException()
 
     try:
@@ -1699,7 +1701,7 @@ def transpile_inner(input_string, level, lang="en"):
         else:
             raise E
 
-    has_turtle = UsesTurtle().transform(program_root)
+    has_turtle = UsesTurtle().transform(abstract_syntaxtree)
 
     return ParseResult(python, has_turtle)
 
