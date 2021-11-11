@@ -1528,6 +1528,29 @@ adventures:
                         print 'Great! You survived!'
                     ```
                 start_code: "print 'Escape from the haunted house!'"
+    piggybank:
+        name: Spaarvarken
+        description: Tel je zakgeld!
+        image: hauntedhouse.png
+        default_save_name: Piggy Bank
+        levels:
+            11:
+                story_text: |
+                    ## Spaarvarken
+                    In dit avontuur kun je een digitaal spaarvarkentje maken, waarmee je je zakgeld kunt tellen en kan berekenen hoe lang het duurt voordat je iets kunt kopen!
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Het digitale spaarvarken'
+                    wens is ask 'Wat zou je graag willen hebben?'
+                    prijs is ask 'Hoeveel kost dat?'
+                    gespaard is ask 'Hoeveel geld heb je al gespaard?'
+                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
+                    sparen is prijs - gespaard
+                    weken is sparen / zakgeld
+                    print 'Je kunt over' weken ' weken een ' wens ' kopen!'
+                    ```
+                start_code: ""
     next:
         name: "What's next?"
         description: "What's Next?"
