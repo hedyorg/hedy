@@ -274,7 +274,7 @@ export function runit(level: string, lang: string, cb: () => void) {
  */
 export function tryPaletteCode(exampleCode: string) {
   if (auth.profile) {
-    if (window.State.examples_left >= 0) {
+    if (window.State.examples_left > 0) {
       window.State.examples_left = window.State.examples_left - 1;
     } else {
       $("#commands-window").hide();
