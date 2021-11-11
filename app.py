@@ -304,6 +304,7 @@ def echo_session_vars_main():
         return 'This endpoint is only meant for E2E tests', 400
     return jsonify({'session': dict(session), 'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
+RUN_COMMAND = [0, 0, 0]
 @app.route('/parse', methods=['POST'])
 def parse():
     flag = 0
@@ -330,10 +331,10 @@ def parse():
     cur_level = int(body['level'])
     ad_index = ad_name2index[(cur_level,ad_name)]
 
-    ad_index_db = DATABASE.get_ad(current_user (request) ['username'])
-    level_db = DATABASE.get_level(current_user (request) ['username'])
+    ad_index_db = DATABASE.get_ad(current_user () ['username'])
+    level_db = DATABASE.get_level(current_user () ['username'])
 
-    level_def = load_yaml(f'coursedata/level-defaults/{lang}.yaml')
+    level_def = load_yaml_rt(f'coursedata/level-defaults/{lang}.yaml')
     commands = level_def[cur_level]['commands']
 
     if level_db == cur_level:
