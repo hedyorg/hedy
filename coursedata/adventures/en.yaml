@@ -1169,6 +1169,25 @@ adventures:
                     print 'That will be ' price ' dollars, please!'
                     ```
                 start_code: ""
+            11:
+                story_text: |
+                    ## Restaurant
+                    From this level on you can use decimal numbers to make you menu more realistic.
+
+                    ## Example Hedy code
+                    ```
+                    food is 'What would you like to order?'
+                    drinks is 'What would you like to drink?'
+                    if food is hamburger
+                        price is price + 6.50
+                    if food is pizza
+                        price is price + 5.75
+                    if drinks is water
+                        price is price + 1.20
+                    if drink is soda
+                        price is price + 2.35
+                    print 'That will be ' price ' dollar, please'
+                    ```
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
