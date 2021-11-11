@@ -237,10 +237,10 @@ export function runit(level: string, lang: string, cb: () => void) {
       });
 
       if(response.flag == 1){
-        alert('Congratulations on unlocking the next adventure!!!');
+        modal.alert('Congratulations on unlocking the next adventure!!!');
       }
       if(response.flag == 2){
-        alert('Congratulations on unlocking the next level!!!');
+        modal.alert('Congratulations on unlocking the next level!!!');
       }
     }).fail(function(xhr) {
       console.error(xhr);
