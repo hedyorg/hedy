@@ -1446,26 +1446,10 @@ def get_parser(level, lang="en"):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
-    try:
-        transpile_result = transpile_inner(input_string, level, lang)
-        return transpile_result
-    except exceptions.ParseException as ex:
-        # This is the 'fall back' transpilation
-        # that should surely be improved!!
-        # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
+    transpile_result = transpile_inner(input_string, level, lang)
+    return transpile_result
 
-        #try 1 level lower
-        if level > 1:
-            try:
-                new_level = level - 1
-                result = transpile_inner(input_string, new_level, lang)
-            except (LarkError, exceptions.HedyException) as innerE:
-                # Parse at `level - 1` failed as well, just re-raise original error
-                raise ex
-            # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-            raise exceptions.WrongLevelException(correct_code=result.code, working_level=new_level, original_level=level) from ex
-        else:
-            raise
+
 
 
 def repair(input_string):
