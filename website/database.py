@@ -30,6 +30,14 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'lin
 QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
 
 class Database:
+
+
+    def get_level(self, username):
+        return USERS.get({'username': username})['level']
+
+    def get_ad(self, username):
+        return USERS.get({'username': username})['ad_index']
+        
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
 

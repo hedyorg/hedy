@@ -12,6 +12,8 @@ from website.auth import current_user, is_teacher
 import re
 import utils
 from config import config
+from website import database
+import os
 
 class Translations:
   def __init__(self):
@@ -34,6 +36,12 @@ class Translations:
 def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
   user = current_user()
 
+  sublevel = None
+  if isinstance (level_number, str) and re.match ('\d+-\d+', level_number):
+    sublevel     = int (level_number [level_number.index ('-') + 1])
+    level_number = int (level_number [0:level_number.index ('-')])
+
+
   if not level_defaults:
     return utils.page_404 (translations, menu, user['username'], lang, translations.get_translations (lang, 'ui').get ('no_such_level'))
 
@@ -46,6 +54,10 @@ def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level
   arguments_dict['level'] = level_number
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
+  
+  arguments_dict['lock_level'] = (database.Database()).get_level(current_user () ['username']) 
+
+  
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
@@ -56,6 +68,11 @@ def render_code_editor_with_tabs(request, level_defaults, lang, max_level, level
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
+
+  # level info 
+  arguments_dict['level_info1'] = ['1', '2', '3', '4', '5', '6', '7', '8',
+                                  '9', '10', '11', '12']
+  arguments_dict['level_info2']   =  [ '13', '14', '15', '16','17']
 
   # Translations
   arguments_dict.update(**translations.get_translations(lang, 'ui'))

@@ -217,30 +217,30 @@ def routes(app, database, requested_lang):
         username = body['username'].strip().lower()
         email = body['email'].strip().lower()
 
-        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
-            # If we have a Mailchimp API key, we use it to add the subscriber through the API
-            if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
-                # The first domain in the path is the server name, which is contained in the Mailchimp API key
-                request_path = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID') + '/members'
-                request_headers = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
-                request_body = {'email_address': email, 'status': 'subscribed'}
-                r = requests.post(request_path, headers=request_headers, data=json.dumps(request_body))
+        # if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
+        #     # If we have a Mailchimp API key, we use it to add the subscriber through the API
+        #     if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
+        #         # The first domain in the path is the server name, which is contained in the Mailchimp API key
+        #         request_path = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID') + '/members'
+        #         request_headers = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
+        #         request_body = {'email_address': email, 'status': 'subscribed'}
+        #         r = requests.post(request_path, headers=request_headers, data=json.dumps(request_body))
 
-                subscription_error = None
-                if r.status_code != 200 and r.status_code != 400:
-                   subscription_error = True
-                # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-                if r.status_code == 400 and not re.match('.*already a list member', r.text):
-                   subscription_error = True
-                # If there's an error in subscription through the API, we report it to the main email address
-                if subscription_error:
-                    send_email(config['email']['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str(r.status_code) + '    Body:' + r.text + '</pre>')
-            # Otherwise, we send an email to notify about this to the main email address
-            else:
-                send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
+        #         subscription_error = None
+        #         if r.status_code != 200 and r.status_code != 400:
+        #            subscription_error = True
+        #         # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
+        #         if r.status_code == 400 and not re.match('.*already a list member', r.text):
+        #            subscription_error = True
+        #         # If there's an error in subscription through the API, we report it to the main email address
+        #         if subscription_error:
+        #             send_email(config['email']['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str(r.status_code) + '    Body:' + r.text + '</pre>')
+        #     # Otherwise, we send an email to notify about this to the main email address
+        #     else:
+        #         send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
-        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
+        # if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
+        #     send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', email, f'<p>{email}</p>')
 
         user = {
             'username': username,
@@ -248,6 +248,8 @@ def routes(app, database, requested_lang):
             'email':    email,
             'created':  timems(),
             'verification_pending': hashed_token,
+            'level': 1,
+            'ad_index' : 0,
             'last_login': timems()
         }
 

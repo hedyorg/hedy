@@ -35,8 +35,18 @@ import hedyweb
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database
 import quiz
 
+# store map
+from store_map import ad_name2index
+
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
+
+LEVEL_MAX_NUM = {
+    1:6,
+    2:8,
+    3:8,
+    4:7
+}
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -122,25 +132,42 @@ def load_adventures_per_level(lang, level):
 
     adventures = load_adventure_for_language(lang)
 
-    for short_name, adventure in adventures.items():
+    id_count = 0
+    for short_name, adventure in adventures.items ():
+        ad_index = DATABASE.get_ad(current_user () ['username'])
+        cur_level =  DATABASE.get_level(current_user () ['username'])
         if not level in adventure['levels']:
             continue
-        # end adventure is the quiz
-        # if quizzes are not enabled, do not load it
-        if short_name == 'end' and not config['quiz-enabled']:
-            continue
-        all_adventures.append({
+
+        if id_count <= ad_index or cur_level > level:
+            all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
+            'lock':'0',
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-            'start_code': adventure['levels'][level].get('start_code', ''),
-            'loaded_program': '' if not loaded_programs.get(short_name) else {
-                'name': loaded_programs.get(short_name)['name'],
-                'code': loaded_programs.get(short_name)['code']
+            'start_code': adventure['levels'][level].get ('start_code', ''),
+            'loaded_program': '' if not loaded_programs.get (short_name) else {
+                'name': loaded_programs.get (short_name) ['name'],
+                'code': loaded_programs.get (short_name) ['code']
              }
-        })
+            })
+        else:
+            all_adventures.append({
+            'short_name': short_name,
+            'name': adventure['name'],
+            'lock':'1',
+            'image': adventure.get('image', None),
+            'default_save_name': adventure['default_save_name'],
+            'text': adventure['levels'][level].get('story_text', 'No Story Text'),
+            'start_code': adventure['levels'][level].get ('start_code', ''),
+            'loaded_program': '' if not loaded_programs.get (short_name) else {
+                'name': loaded_programs.get (short_name) ['name'],
+                'code': loaded_programs.get (short_name) ['code']
+             }
+            })
+        id_count = id_count + 1
     # We create a 'level' pseudo assignment to store the loaded program for level mode, if any.
     all_adventures.append({
         'short_name': 'level',
@@ -279,6 +306,7 @@ def echo_session_vars_main():
 
 @app.route('/parse', methods=['POST'])
 def parse():
+    flag = 0
     body = request.json
     if not body:
         return "body must be an object", 400
@@ -296,6 +324,35 @@ def parse():
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
     lang = body.get('lang', requested_lang())
+
+# begin
+    ad_name = body['adventure_name']
+    cur_level = int(body['level'])
+    ad_index = ad_name2index[(cur_level,ad_name)]
+
+    ad_index_db = DATABASE.get_ad(current_user (request) ['username'])
+    level_db = DATABASE.get_level(current_user (request) ['username'])
+
+    level_def = load_yaml(f'coursedata/level-defaults/{lang}.yaml')
+    commands = level_def[cur_level]['commands']
+
+    if level_db == cur_level:
+        # may unlock, flag may be set to 1
+        index = 0
+        for com in commands:
+            demo_code = com['demo_code']
+            demo_code += '\n'
+            print(code)
+            print(demo_code)
+            if code == demo_code:
+                RUN_COMMAND[index] = 1
+            index += 1
+        print(RUN_COMMAND)
+        flag = 1
+        for i in RUN_COMMAND:
+            if i == 0:
+                flag = 0
+
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
@@ -344,7 +401,40 @@ def parse():
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
-
+    if flag == 1:
+        max_index = LEVEL_MAX_NUM[cur_level]
+        if level_db == cur_level:
+            # unlock next level
+            ad_index_db = 0
+            level_db += 1
+            # write to database
+            DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            
+        # else:
+        #     ad_index_db += 1
+        #     DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        
+        for i in range(len(RUN_COMMAND)):
+            RUN_COMMAND[i] = 0
+    
+        response['flag'] = flag + 1
+        return jsonify(response)
+    
+    if ad_index == ad_index_db:
+        flag = 1
+    if flag == 1:
+        max_index = LEVEL_MAX_NUM[cur_level]
+        if max_index == ad_index_db:
+            # unlock next level
+            ad_index_db = 0
+            level_db += 1
+            # write to database
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        else:
+            ad_index_db += 1
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        
+    response['flag'] = flag
     return jsonify(response)
 
 def hedy_error_to_response(ex, translations):
