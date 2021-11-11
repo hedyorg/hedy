@@ -179,7 +179,7 @@ def mstoisostring(date):
     dt = datetime.datetime.fromtimestamp(unix_ts)
 
     print('dt', dt)
-    return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
+    return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat().replace("T", " ")
 
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
