@@ -894,19 +894,14 @@ class ConvertToPython_5(ConvertToPython_4):
             return f"str({arg0}) == str({arg1}) and {args[2]}"
 
     def assign(self, args):
-        if len(args) == 2:
-            parameter = args[0]
-            value = args[1]
-            if type(value) is Tree:
-                return parameter + " = " + value.children
-            else:
-                #assigns may contain string (accidentally) i.e. name = 'Hedy'
-                value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'"
+        parameter = args[0]
+        value = args[1]
+        if type(value) is Tree:
+            return parameter + " = " + value.children
         else:
-            parameter = args[0]
-            values = args[1:]
-            return parameter + " = [" + ", ".join(values) + "]"
+            #assigns may contain string (accidentally) i.e. name = 'Hedy'
+            value = process_characters_needing_escape(value)
+            return parameter + " = '" + value + "'"
 
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
@@ -1102,18 +1097,13 @@ class ConvertToPython_11(ConvertToPython_10):
             if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise exceptions.UnquotedAssignTextException(text = args[1])
 
-        if len(args) == 2:
-            parameter = args[0]
-            value = args[1]
-            if type(value) is Tree:
-                return parameter + " = " + value.children
-            else:
-                # we no longer escape quotes here because they are now needed
-                return parameter + " = " + value + ""
+        parameter = args[0]
+        value = args[1]
+        if type(value) is Tree:
+            return parameter + " = " + value.children
         else:
-            parameter = args[0]
-            values = args[1:]
-            return parameter + " = [" + ", ".join(values) + "]"
+            # we no longer escape quotes here because they are now needed
+            return parameter + " = " + value + ""
 
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
