@@ -1408,13 +1408,13 @@ adventures:
                     prijs is 0
                     eten is ask 'Wat wil je eten?'
                     drinken is ask 'Wat wil je drinken?'
-                    if eten is hamburger
+                    if eten is 'hamburger'
                         prijs is prijs + 6.50
-                    if food is pizza
+                    if food is 'pizza'
                         prijs is prijs + 5.75
-                    if drinks is water
+                    if drinks is 'water'
                         prijs is prijs + 1.20
-                    if drink is frisdrank
+                    if drink is 'frisdrank'
                         prijs is prijs + 2.35
                     print 'Dat wordt dan ' prijs ' euro, alsjeblieft'
                     ```
