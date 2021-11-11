@@ -1,7 +1,11 @@
-command: print | ask | turtle | assign | assign_list | invalid_space | invalid
+command: print | ask | turtle | assign | assign_list | invalid_space | ask_2| invalid
 
 print: _PRINT (_SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*)?
 ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
+
+//level 2 commands manually added for better errors
+ask_2: _ASK (_SPACE text_2)?
+text_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
 
 //in level 2, forward may also depend on a variable
 turtle: _FORWARD (_SPACE (NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
