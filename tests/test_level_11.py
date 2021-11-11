@@ -85,6 +85,16 @@ class TestsLevel11(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
+  def test_list_creation(self):
+    code = textwrap.dedent("""\
+    animals is 'duck', 'dog', 'penguin'""")
+    expected = textwrap.dedent("""\
+    animals = ['duck', 'dog', 'penguin']""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
   def test_store_calc_in_var(self):
     code = textwrap.dedent("""\
     a is 1
