@@ -235,6 +235,13 @@ export function runit(level: string, lang: string, cb: () => void) {
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
       });
+
+      if(response.flag == 1){
+        alert('Congratulations on unlocking the next adventure!!!');
+      }
+      if(response.flag == 2){
+        alert('Congratulations on unlocking the next level!!!');
+      }
     }).fail(function(xhr) {
       console.error(xhr);
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
