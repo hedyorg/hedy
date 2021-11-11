@@ -662,6 +662,16 @@ def process_variable_for_fstring_padded(name, lookup):
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
+
+    def ask_dep_2(self, args):
+        # ask is no longer usable this way, raise!
+        # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
+        raise hedy.exceptions.WrongLevelException(2, 1, 'ask', "ask_needs_var")
+    def echo_dep_2(self, args):
+        # echo is no longer usable this way, raise!
+        # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
+        raise hedy.exceptions.WrongLevelException(2, 1, 'echo', "ask_needs_var")
+
     def check_var_usage(self, args):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
