@@ -160,6 +160,64 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_print_multiple_calcs(self):
+    code = textwrap.dedent("""\
+      name is 1 + 2 + 3
+      print name""")
+
+    expected = textwrap.dedent("""\
+        name = 1 + 2 + 3
+        print(f'{name}')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_calc_string_and_int(self):
+    code = textwrap.dedent("""\
+      x is 'test1'
+      y is x + 1""")
+
+    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
+      result = hedy.transpile(code, self.level)
+
+  def test_assign_string_without_quotes22333(self):
+    code = textwrap.dedent("""\
+      x is 1 + 2
+      y is x + 3
+      print y + 4""")
+
+    expected = textwrap.dedent("""\
+        x = 1 + 2
+        y = x + 3
+        print(f'{y + 4}')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_assign_calc(self):
+    code = textwrap.dedent("""\
+    var is 5
+    print var + 5""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    var = 5
+    print(f'{var + 5}')""")
+
+    self.assertEqual(expected, result.code)
+
+  def test_for_list_multiple_lines(self):
+    code = textwrap.dedent("""\
+a is b
+b is 3
+print a
+        """)
+
+    result = hedy.transpile(code, self.level)
+
   # negative tests
   def test_assign_string_without_quotes(self):
     code = textwrap.dedent("""\
