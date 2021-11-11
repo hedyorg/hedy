@@ -921,17 +921,17 @@ adventures:
                 start_code: ""
             11:
                 story_text: |
-                    ## Rekenmachine
-                    In dit level kun je ook met kommagetallen werken met de rekenmachine. Onthoud wel dat je geen komma gebruikt, maar een punt!
+                    ## Calculator
+                    Now you can make a calculator that works for decimal numbers.
 
-                    ## Voorbeeld Hedy Code
+                    ## Example Hedy Code
                     ```
-                    getal1 is ask 'Wat is het eerste getal?'
-                    getal2 is ask 'Wat is het tweede getal?'
-                    antwoord is getal1 + getal2
-                    print getal1 ' plus ' getal2 ' is ' antwoord
+                    number1 is ask 'What is the first number?'
+                    number2 is ask 'What is the second number?'
+                    answer is number1 + number2
+                    print number1 ' plus ' number2 ' is ' answer
                     ```
-                start_code: ""
+                start_code: """"
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
@@ -1620,8 +1620,8 @@ adventures:
                     price is ask 'How much does that cost?'
                     saved is ask 'How much money have you saved already?'
                     allowance is ask 'How much pocket money do you get per week?'
-                    tosave is price - saved
-                    weeks is tosave / allowance
+                    to_save is price - saved
+                    weeks is to_save / allowance
                     print 'You can buy a ' wish ' in ' weeks ' weeks.'
                 start_code: ""
     next:
