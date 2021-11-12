@@ -277,6 +277,28 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+  def test_forward_with_string_variable(self):
+    code = textwrap.dedent("""\
+        a is test
+        forward a""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_forward_with_list_variable(self):
+    code = textwrap.dedent("""\
+        a is 1, 2, 3
+        forward a""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
   #markup tests
   def test_spaces_in_arguments(self):
     result = hedy.transpile("print hallo      wereld", self.level)
@@ -409,21 +431,25 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
   def test_print_list_var(self):
     code = textwrap.dedent("""\
     dieren is Hond, Kat, Kangoeroe
     print dieren at 1""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{dieren[1]}')""")
+    print(f'{dieren[1-1]}')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
-    self.assertEqual(HedyTester.run_code(result), "Kat")
+    self.multi_level_tester(
+      max_level=13,
+      code=code,
+      expected=expected,
+      extra_check_function=check_in_list,
+      test_name=self.name()
+    )
 
   #negative tests
   def test_echo_no_longer_in_use(self):
