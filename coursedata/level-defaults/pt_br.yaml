@@ -262,41 +262,42 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
+            comida is ask 'O que você deseja?'
+            if comida is 'pizza'
+                print 'excelente!'
             else
-                print 'pizza is better'
+                print 'pizza é melhor'
     intro_text: |
-        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
-        Give it a try!
+        Neste nível você pode não só usar múltiplas linhas com `if` e `repeat`, mas também juntar os dois!
+        Neste exemplo você encontra um comando `if` dentro de um comando `repeat`. Também é possível fazer o contrário, e um `if`
+        também pode aparecer dentro de outro `if` e um `repeat` dentro de outro `repeat`.
+        Experimente!
 
-        ## Example Hedy code
+        ## Exemplo de código Hedy
         ```
         repeat 3 times
-            food is ask 'What do you want?'
-            if food is 'pizza'
-                print 'nice!'
+            comida is ask 'O que você deseja?'
+            if comida is 'pizza'
+                print 'excelente!'
             else
-                print 'pizza is better'
+                print 'pizza é melhor'
         ```
 
     commands:
-    -   name: "`if` with multiple lines"
-        explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+    -   name: "`if` com múltiplas linhas"
+        explanation: "Pedimos a resposta de uma soma com 'ask' e conferimos se está correto. Depois imprimos duas linhas."
+        example: "Exemplo: resposta is ask 'Quanto é 20 mais 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
-            if answer is 20
-                print 'Well done!!'
-                print 'The answer is indeed' answer
+            resposta is ask 'Quanto é 40 mais 40?'
+            if resposta is 40
+                print 'Muito bem!!'
+                print 'A resposta é realmente' resposta
             else
-                print 'Wrong'
-                print 'The answer is 20'
-    -   name: "`repeat` and turtle"
-        explanation: "Repeat multiple lines"
-        example: "Example: create a square"
+                print 'Errado'
+                print 'A resposta é 40'
+    -   name: "`repeat` e a tartaruga"
+        explanation: "Repeat de múltiplas linhas"
+        example: "Exemplo: criar um quadrado"
         demo_code: |-
             repeat 4 times
                 turn 90
