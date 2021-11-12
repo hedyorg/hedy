@@ -385,7 +385,7 @@ class TestsLevel2(HedyTester):
     check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
 
     self.multi_level_tester(
-      max_level=11,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=check_in_list,
@@ -444,7 +444,7 @@ class TestsLevel2(HedyTester):
     check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
     self.multi_level_tester(
-      max_level=13,
+      max_level=10,
       code=code,
       expected=expected,
       extra_check_function=check_in_list,
@@ -483,7 +483,7 @@ class TestsLevel2(HedyTester):
     print dier at random""")
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=10,
       exception=hedy.exceptions.UndefinedVarException,
       test_name=self.name()
     )

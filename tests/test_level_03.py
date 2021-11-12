@@ -96,7 +96,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=10,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
@@ -260,7 +260,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
-      max_level=11,
+      max_level=10,
       test_name=self.name()
     )
 
