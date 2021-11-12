@@ -520,14 +520,14 @@ def get_quiz(level_source, question_nr, attempt):
     question = quiz.get_question(quiz_data, question_nr)
     question_obj = quiz.question_options_for(question)
 
-    chosen_letter = 'X' if session.get('chosenOption') is None else session.get('chosenOption')
+    chosen_option = 'X' if session.get('chosenOption') is None else session.get('chosenOption')
     return render_template('quiz_question.html',
                            quiz=quiz_data,
                            level_source=level_source,
                            questionStatus=questionStatus,
                            questions=quiz_data['questions'],
                            question_options=question_obj,
-                           chosen_letter = chosen_letter,
+                           chosen_option = chosen_option,
                            question=question,
                            question_nr=question_nr,
                            correct=session.get('correct_answer'),
@@ -575,7 +575,7 @@ def submit_answer(level_source, question_nr, attempt):
     # The number should always be the same as 'question_nr', or otherwise
     # be 'question_nr - 1', so is unnecessary. But we'll leave it here for now.
     chosen_option = request.form["radio_option"]
-    chosen_letter = chosen_option.split('-')[1]
+    chosen_option = chosen_option.split('-')[1]
 
     # Reading yaml file
     quiz_data = quiz.quiz_data_file_for(level_source)
@@ -587,9 +587,9 @@ def submit_answer(level_source, question_nr, attempt):
 
     # Convert the corresponding chosen option to the index of an option
     question = quiz.get_question(quiz_data, q_nr)
-    session['chosenOption'] = chosen_letter
+    session['chosenOption'] = chosen_option
 
-    is_correct = quiz.is_correct_answer(question, chosen_letter)
+    is_correct = quiz.is_correct_answer(question, chosen_option)
 
     # Store the answer in the database. If we don't have a username,
     # use the session ID as a username.
@@ -600,7 +600,7 @@ def submit_answer(level_source, question_nr, attempt):
             level=level_source,
             is_correct=is_correct,
             question_number=question_nr,
-            answer=chosen_letter)
+            answer=chosen_option)
 
     if is_correct:
         score = quiz.correct_answer_score(question, attempt)
@@ -614,7 +614,7 @@ def submit_answer(level_source, question_nr, attempt):
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
 
     # Redirect to the display page to try again
-    return redirect(url_for('get_quiz', chosen_letter= chosen_letter, level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
+    return redirect(url_for('get_quiz', chosen_option= chosen_option, level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
 
 @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
 def quiz_feedback(level_source, question_nr):
@@ -630,10 +630,10 @@ def quiz_feedback(level_source, question_nr):
         return 'No quiz yaml file found for this level', 404
 
     question = quiz.get_question(quiz_data, question_nr)
-    chosen_letter = session['chosenOption']
-    answer_was_correct = quiz.is_correct_answer(question, chosen_letter)
+    chosen_option = session['chosenOption']
+    answer_was_correct = quiz.is_correct_answer(question, chosen_option)
 
-    index_option = quiz.index_from_letter(chosen_letter)
+    index_option = quiz.index_from_letter(chosen_option)
     correct_option = quiz.get_correct_answer(question)
 
     question_options = quiz.question_options_for(question)
