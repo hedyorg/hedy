@@ -180,6 +180,10 @@ class TypedTree(Tree):
         super().__init__(data, children, meta)
         self.type_ = type_
 
+class RemoveAmbiguity(Transformer):
+    def _ambig(self, args):
+        # ambig node? Simply pick the first option for now
+        return args[0]
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
@@ -1498,7 +1502,7 @@ def get_parser(level, lang="en"):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True) #ambiguity='explicit'
+    ret = Lark(grammar, regex=True, ambiguity='explicit')
     PARSER_CACHE[key] = ret
     return ret
 
@@ -1765,11 +1769,20 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
-    is_program_valid(program_root, input_string, level, lang)
+
+    if program_root.data == "_ambig": # het is een ambig dus children is een lijst programma's
+        programs = program_root.children
+        program_root = programs[0]
+
+
+    program_root = RemoveAmbiguity().transform(program_root)
+
+
 
     try:
         abstract_syntax_tree = ExtractAST().transform(program_root)
 
+        is_program_valid(abstract_syntax_tree, input_string, level, lang)
         is_program_complete(abstract_syntax_tree, level)
 
         if not valid_echo(abstract_syntax_tree):
