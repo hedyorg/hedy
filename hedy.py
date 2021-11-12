@@ -639,6 +639,8 @@ def process_variable(name, lookup):
     #processes a variable by hashing and escaping when needed
     if is_variable(name, lookup):
         return hash_var(name)
+    elif is_quoted(name): #sometimes kids accidentally quote strings, then we do not want them quoted again
+        return f"{name}"
     else:
         return f"'{name}'"
 
@@ -1364,10 +1366,11 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     return '\n'.join(merged_grammar)
 
 
-def create_grammar(level):
+def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
-
+    keys = get_keywords_for_language(lang)
+    result = merge_grammars(result, keys)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
@@ -1375,14 +1378,14 @@ def create_grammar(level):
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result)
+    save_total_grammar_file(level, result, lang)
 
     return result
 
-def save_total_grammar_file(level, grammar):
+def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "-Total.lark"
+    filename = "level" + str(level) + "." + lang + "-Total.lark"
     loc = path.join(script_dir, "grammars-Total", filename)
     file = open(loc, "w", encoding="utf-8")
     file.write(grammar)
@@ -1405,28 +1408,35 @@ def get_full_grammar_for_level(level):
         grammar_text = file.read()
     return grammar_text
 
+def get_keywords_for_language(language):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "keywords-" + str(language) + ".lark"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        grammar_text = file.read()
+    return grammar_text
+
 PARSER_CACHE = {}
 
 
-def get_parser(level):
+def get_parser(level, lang="en"):
     """Return the Lark parser for a given level.
 
     Uses caching if Hedy is NOT running in development mode.
     """
-    key = str(level)
+    key = str(level) + "." + lang
     existing = PARSER_CACHE.get(key)
     if existing and not utils.is_debug_mode():
         return existing
-    grammar = create_grammar(level)
+    grammar = create_grammar(level, lang)
     ret = Lark(grammar, regex=True)
     PARSER_CACHE[key] = ret
     return ret
 
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
-def transpile(input_string, level):
+def transpile(input_string, level, lang="en"):
     try:
-        transpile_result = transpile_inner(input_string, level)
+        transpile_result = transpile_inner(input_string, level, lang)
         return transpile_result
     except exceptions.ParseException as ex:
         # This is the 'fall back' transpilation
@@ -1437,7 +1447,7 @@ def transpile(input_string, level):
         if level > 1:
             try:
                 new_level = level - 1
-                result = transpile_inner(input_string, new_level)
+                result = transpile_inner(input_string, new_level, lang)
             except (LarkError, exceptions.HedyException) as innerE:
                 # Parse at `level - 1` failed as well, just re-raise original error
                 raise ex
@@ -1461,7 +1471,7 @@ def translate_characters(s):
         return 'comma'
     elif s == '?':
         return 'question mark'
-    elif s == '\\n':
+    elif s == '\n':
         return 'newline'
     elif s == '.':
         return 'period'
@@ -1496,26 +1506,58 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
+def needs_indentation(code):
+    # this is done a bit half-assed, clearly *parsing* the one line would be superior
+    # because now a line like
+    # repeat is 5 would also require indentation!
+    all_words = code.split()
+    if len(all_words) == 0:
+        return False
+
+    first_keyword = all_words[0]
+    return first_keyword == "for" or first_keyword == "repeat" or first_keyword == "if"
+
+
+
 def preprocess_blocks(code, level):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
     previous_number_of_indents = 0
-    indent_size = None #we don't fix indent size but the first encounter sets it
+    indent_size = None # we don't fix indent size but the first encounter sets it
     line_number = 0
+    next_line_needs_indentation = False
     for line in lines:
-        line_number += 1
         leading_spaces = find_indent_length(line)
 
+        line_number += 1
         #first encounter sets indent size for this program
         if indent_size == None and leading_spaces > 0:
             indent_size = leading_spaces
 
         #calculate nuber of indents if possible
         if indent_size != None:
+            if (leading_spaces % indent_size) != 0:
+                # there is inconsistent indentation, not sure if that is too much or too little!
+                if leading_spaces < current_number_of_indents * indent_size:
+                    raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                                 indent_size=indent_size)
+                else:
+                    raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                                 indent_size=indent_size)
+
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == 7:
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+
+        if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
+            raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                         indent_size=indent_size)
+
+        if needs_indentation(line):
+            next_line_needs_indentation = True
+        else:
+            next_line_needs_indentation = False
 
         if current_number_of_indents - previous_number_of_indents > 1:
             raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
@@ -1548,7 +1590,7 @@ def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
 
-def transpile_inner(input_string, level):
+def transpile_inner(input_string, level, lang="en"):
     number_of_lines = input_string.count('\n')
 
     #parser is not made for huge programs!
@@ -1558,7 +1600,7 @@ def transpile_inner(input_string, level):
     input_string = input_string.replace('\r\n', '\n')
     punctuation_symbols = ['!', '?', '.']
     level = int(level)
-    parser = get_parser(level)
+    parser = get_parser(level, lang)
 
     if contains_blanks(input_string):
         raise exceptions.CodePlaceholdersPresentException()
@@ -1610,7 +1652,7 @@ def transpile_inner(input_string, level):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                result = transpile_inner(fixed_code, level, lang)
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here

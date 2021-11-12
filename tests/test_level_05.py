@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel5(HedyTester):
   level = 5
@@ -144,7 +144,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
     self.assertEqual(expected, result.code)
 
-    output = self.run_code(result)
+    output = HedyTester.run_code(result)
     self.assertEqual(output, '5 keer 5 keer 5 is 125')
     self.assertEqual(False, result.has_turtle)
   def test_calc_print(self):
@@ -160,7 +160,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("9", self.run_code(result))
+    self.assertEqual("9", HedyTester.run_code(result))
   def test_calc_assign(self):
     code = "nummer is 4 + 5"
     result = hedy.transpile(code, self.level)
@@ -217,7 +217,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", self.run_code(result))
+    self.assertEqual("30", HedyTester.run_code(result))
   def test_calc_vars_print(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -233,7 +233,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", self.run_code(result))
+    self.assertEqual("30", HedyTester.run_code(result))
   def test_calc_vars_print_divide(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -249,7 +249,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("0", self.run_code(result))
+    self.assertEqual("0", HedyTester.run_code(result))
 
 
   # combined tests

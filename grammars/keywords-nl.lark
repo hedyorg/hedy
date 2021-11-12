@@ -1,0 +1,50 @@
+//symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
+
+_PRINT : "drukaf"
+_ASK : "vraag"
+_ECHO : "herhaal"
+_FORWARD : "vooruit"
+_TURN: "draai"
+
+//level 2
+_IS: "is"
+_AT: "opplek"
+random : "willekeurig" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
+
+//level 4
+_IN: "in"
+_IF: "als"
+_ELSE: "anders"
+_AND: "en"
+
+//level 5
+_REPEAT: "herhaal"
+_TIMES: "keer"
+
+//level 6
+_MULTIPLY: "*"
+_ADD: "+"
+_SUBTRACT: "-"
+_DIVIDE: "/"
+
+//level 8
+_FOR: "voor"
+_RANGE: "bereik"
+_TO: "tot"
+_STEP: "stap"
+
+//level 9
+_ELIF: "anders"
+
+//level 11
+_INPUT: "invoer"
+
+//level 14
+_OR: "of"
+
+//level 17
+_WHILE: "zolang"
+
+//level 19
+_LENGTH: "lengte"
+
