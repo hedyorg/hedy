@@ -1,8 +1,8 @@
 import textwrap
 
 from lark import Lark
-from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters
-from lark import Tree, Transformer, visitors
+from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
+from lark import Tree, Transformer, visitors, v_args
 from os import path
 
 import hedy
@@ -22,9 +22,6 @@ TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
-
-# type used in lookup table
-Assignment = namedtuple('Assignment', ['name', 'type'])
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
@@ -54,13 +51,19 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
-    1: {'print': ['string'],
+    1: {'print': ['string', 'integer'],
         'ask': ['string'],
-        'turn': ['string'],
-        'forward': ['string']},
+        'turn': ['string', 'integer'],
+        'forward': ['integer']},
     2: {'at random': ['list']},
+    5: {'sum': ['integer'],
+        'addition': ['integer', 'float']},
+    10: {'for_loop': ['integer']},
+    11: {'sum': ['integer', 'float'],
+         'addition': ['integer', 'float', 'string'],
+         'print': ['string', 'integer', 'float']},
     12: {'input': ['string']},
-    13: {'print': ['string', 'list']}
+    13: {'print': ['string', 'integer', 'float', 'list']}
   }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -79,7 +82,7 @@ def hash_needed(name):
     # some elements are not names but processed names, i.e. random.choice(dieren)
     # they should not be hashed
     # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(name) is Assignment and name.type == 'operation') or (isinstance(name, str) and '[' in name or '(' in name):
+    if (type(name) is LookupEntry and name.skip_hashing) or (isinstance(name, str) and '[' in name or '(' in name):
         return False
 
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
@@ -163,19 +166,36 @@ class InvalidInfo:
     line: int = 0
 
 
+# used in to construct lookup table entries and infer their type
+@dataclass
+class LookupEntry:
+    name: str
+    tree: Tree
+    skip_hashing: bool
+    type_: str = None
+
+
+class TypedTree(Tree):
+    def __init__(self, data, children, meta, type_):
+        super().__init__(data, children, meta)
+        self.type_ = type_
+
 
 class ExtractAST(Transformer):
     # simplifies the tree: f.e. flattens arguments of text, var and punctuation for further processing
     def text(self, args):
         return Tree('text', [''.join([str(c) for c in args])])
 
+    def INT(self, args):
+        return Tree('integer', [str(args)])
+
     #level 2
     def var(self, args):
         return Tree('var', [''.join([str(c) for c in args])])
+
     def punctuation(self, args):
         return Tree('punctuation', [''.join([str(c) for c in args])])
-    def index(self, args):
-        return ''.join([str(c) for c in args])
+
     def list_access(self, args):
         if type(args[1]) == Tree:
             if "random" in args[1].data:
@@ -189,188 +209,231 @@ class ExtractAST(Transformer):
     def unsupported_number(self, args):
         return Tree('unsupported_number', [''.join([str(c) for c in args])])
 
-    def number(self, args):
-        return Tree('number', ''.join([str(c) for c in args]))
-
-class AllAssignmentCommands(Transformer):
-    # returns a list of variable and list access
-    # so these can be excluded when printing
-
-    # relevant nodes (list acces, ask, assign) are transformed into tuples of their name and type
-    # higher in the tree (through default rule), we filter on only string arguments, of lists with string arguments
-
-    def filter_ask_assign(self, args):
-        ask_assign = []
-        for a in args:
-            # strings (vars remaining in the tree) are added directly
-            if type(a) is Assignment:
-                ask_assign.append(a)
-            # lists are searched further for string members (vars)
-            elif type(a) is list:
-                sub_a_ask_assign = self.filter_ask_assign(a)
-                for sub_a in sub_a_ask_assign:
-                    ask_assign.append(sub_a)
-        return ask_assign
-
-    # level 8
-    def repeat_list(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # in level 8 always a string
-      return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
-
-    # level 9
-    def for_loop(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
-      return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
+    #level 11
+    def NUMBER(self, args):
+        return Tree('number', [str(args)])
 
 
-    def input(self, args):
-        # return left side of the =
-        return args[0]
+# This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
+# (e.g. 'animal') and its value as a tree node (e.g. Tree['text', ['cat']]) which is later used to infer the type
+# of the entry. This preliminary traversal is needed to avoid issues with loops in which an iterator variable is
+# used in the inner commands which are visited before the iterator variable is added to the lookup.
+class LookupEntryCollector(visitors.Visitor):
+    def __init__(self, level):
+        super().__init__()
+        self.level = level
+        self.lookup = []
 
-    def ask(self, args):
-        # try is needed cause in level 1 ask has no variable in front
-        try:
-            return Assignment(args[0], 'string')
-        except:
-            return None
+    def ask(self, tree):
+        # in level 1 there is no variable name on the left side of the ask command
+        if self.level > 1:
+            self.add_to_lookup(tree.children[0].children[0], tree)
 
-    def assign(self, args):
-        # todo now all assigns are strings, later (from 11) this should distinguish int and str
-        return Assignment(args[0], 'string')
+    def input(self, tree):
+        var_name = tree.children[0].children[0]
+        self.add_to_lookup(var_name, tree)
 
-    def assign_list(self, args):
-        return Assignment(args[0], 'list')
+    def assign(self, tree):
+        var_name = tree.children[0].children[0]
+        self.add_to_lookup(var_name, tree.children[1])
 
-    # list access is accessing a variable, so must be escaped
+    def assign_list(self, tree):
+        var_name = tree.children[0].children[0]
+        self.add_to_lookup(var_name, tree)
+
+    # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
-    def list_access(self, args):
-        listname = args[0]
-        if args[1] == 'random':
-            return Assignment('random.choice(' + listname + ')', 'operation')
+    def list_access(self, tree):
+        list_name = hash_var(tree.children[0].children[0])
+        if tree.children[1] == 'random':
+            name = f'random.choice({list_name})'
         else:
-            return Assignment(listname + '[' + args[1] + ']', 'operation')
+            # We want list access to be 1-based instead of 0-based, hence the -1
+            name = f'{list_name}[{tree.children[1]}-1]'
+        self.add_to_lookup(name, tree, True)
 
-    # additions Laura, to be checked for higher levels:
-    def list_access_var(self, args):
-        return Assignment(args[0], 'operation')
+    def list_access_var(self, tree):
+        self.add_to_lookup(tree.children[0].children[0], tree, True)
 
-    def change_list_item(self, args):
-        return Assignment(args[0], 'operation')
+    def change_list_item(self, tree):
+        self.add_to_lookup(tree.children[0].children[0], tree, True)
 
-    def text(self, args):
-        # text never contains a variable
-        return None
+    def repeat_list(self, tree):
+        iterator = str(tree.children[0].children[0])
+        # the tree is trimmed to skip contain the inner commands of the loop since
+        # they are not needed to infer the type of the iterator variable
+        trimmed_tree = Tree(tree.data, tree.children[0:2], tree.meta)
+        self.add_to_lookup(iterator, trimmed_tree)
 
-    def var_access(self, args):
-        # just accessing (printing) a variable does not count toward the lookup table
-        return None
+    def for_loop(self, tree):
+        iterator = str(tree.children[0])
+        # the tree is trimmed to skip contain the inner commands of the loop since
+        # they are not needed to infer the type of the iterator variable
+        trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
+        self.add_to_lookup(iterator, trimmed_tree)
 
-    def var(self, args):
-        # the var itself (when in an assignment) should be added
-        name = args[0]
-        return name
+    def add_to_lookup(self, name, tree, skip_hashing=False):
+        self.lookup.append(LookupEntry(name, tree, skip_hashing))
 
-    def punctuation(self, args):
-        # is never a variable (but should be removed from the tree or it will be seen as one!)
-        return None
 
-    def __default__(self, args, children, meta):
-        return self.filter_ask_assign(children)
+# The transformer infers the type of the partial trees collected in the lookup entries. The type 'any' is used when the
+# type cannot be inferred, and the type 'None' is used when the node does not have a return type, e.g. a command.
+# The transformer is meant to be non-intrusive and avoid false positives. However, it will raise an error if the type
+# of a lookup entry is inferred and it is obviously wrong, e.g:
+# a is 'test'
+# b is a + 1
+@v_args(tree=True)
+class TypeInferrer(Transformer):
+    def __init__(self, lookup, level):
+        super().__init__()
+        self.lookup = lookup
+        self.level = level
 
-class AllAssignmentCommandsHashed(Transformer):
-    # returns a list of variable and list access
-    # so these can be excluded when printing
+    def ask(self, tree):
+        return self.to_typed_tree(tree, 'any')
 
-    Assignment = namedtuple('Assignment', ['name', 'type'])
-    # this version returns all hashed var names
+    def input(self, tree):
+        return self.to_typed_tree(tree, 'any')
 
-    def filter_ask_assign(self, args):
-        ask_assign = []
-        for a in args:
-            # strings (vars remaining in the tree) are added directly
-            if type(a) is Assignment:
-                ask_assign.append(a)
-            # lists are searched further for string members (vars)
-            elif type(a) is list:
-                sub_a_ask_assign = self.filter_ask_assign(a)
-                for sub_a in sub_a_ask_assign:
-                    ask_assign.append(sub_a)
-        return ask_assign
+    def assign_list(self, tree):
+        return self.to_typed_tree(tree, 'list')
 
-    # level 8
-    def repeat_list(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # in level 8 always a string
-      return [Assignment(iterator, 'string')] + self.filter_ask_assign(commands)
+    # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
+    def list_access(self, tree):
+        return self.to_typed_tree(tree, 'any')
 
-    # level 9
-    def for_loop(self, args):
-      # for loop iterator is a var so should be added to the list of vars
-      iterator = str(args[0])
-      commands = args[1:]
-      # for loop iterators can be numbers (for i in range... or strings (for dier in dieren)
-      return [Assignment(iterator, 'any')] + self.filter_ask_assign(commands)
+    def list_access_var(self, tree):
+        return self.to_typed_tree(tree, 'any')
 
-    def input(self, args):
-        # return left side of the =
-        return Assignment(hash_var(args[0]), 'string')
+    def repeat_list(self, tree):
+        return self.to_typed_tree(tree, 'any')
 
-    def ask(self, args):
-        # try is needed cause in level 1 ask has no variable in front
-        try:
-            return Assignment(hash_var(args[0]), 'string')
-        except:
-            return None
+    def for_loop(self, tree):
+        command = 'for_loop'
+        allowed_types = get_allowed_types(command, self.level)
 
-    def assign(self, args):
-        return Assignment(hash_var(args[0]), 'string')
+        start_type = self.check_type_allowed(command, allowed_types, tree.children[1])
+        self.check_type_allowed(command, allowed_types, tree.children[2])
 
-    def assign_list(self, args):
-        return Assignment(hash_var(args[0]), 'list')
+        return self.to_typed_tree(tree, start_type)
 
-    # list access is accessing a variable, so must be escaped
-    # for example we print(dieren[1]) not print('dieren[1]')
-    def list_access(self, args):
-        listname = hash_var(args[0])
-        if args[1] == 'random':
-            return Assignment('random.choice(' + listname + ')', 'operation')
+    def integer(self, tree):
+        return self.to_typed_tree(tree, 'integer')
+
+    def text(self, tree):
+        return self.to_typed_tree(tree, 'string')
+
+    def text_in_quotes(self, tree):
+        return self.to_typed_tree(tree, 'string')
+
+    def var_access(self, tree):
+        return self.to_typed_tree(tree, 'string')
+
+    def var(self, tree):
+        type_ = self.get_type(tree)
+        return self.to_typed_tree(tree, type_)
+
+    def number(self, tree):
+        number = tree.children[0]
+        if is_int(number):
+            return self.to_typed_tree(tree, 'integer')
+        if is_float(number):
+            return self.to_typed_tree(tree, 'float')
+        # We managed to parse a number that cannot be parsed by python
+        raise exceptions.ParseException(level=self.level, location='', found=number)
+
+    def substraction(self, tree):
+        return self.to_sum_typed_tree(tree, 'sum')
+
+    def addition(self, tree):
+        return self.to_sum_typed_tree(tree, 'addition')
+
+    def multiplication(self, tree):
+        return self.to_sum_typed_tree(tree, 'sum')
+
+    def division(self, tree):
+        return self.to_sum_typed_tree(tree, 'sum')
+
+    def to_sum_typed_tree(self, tree, command):
+        expr_type = self.get_sum_type(tree, command)
+        return TypedTree(tree.data, tree.children, tree.meta, expr_type)
+
+    def get_sum_type(self, tree, command):
+        allowed_types = get_allowed_types(command, self.level)
+
+        left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
+        right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
+
+        if self.ignore_type(left_type) or self.ignore_type(right_type):
+            return 'any'
+
+        if (left_type == 'string' or right_type == 'string') and left_type != right_type:
+            # TODO: probably this requires a separate exception
+            raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type, invalid_argument='',
+                                                          allowed_types=allowed_types)
+        if left_type == 'float' or right_type == 'float':
+            return 'float'
+
+        return left_type
+
+    def get_type(self, tree):
+        if type(tree) is TypedTree:
+            # TypedTree with type 'None' and 'string' could be in the lookup
+            if tree.type_ in ['None', 'string']:
+                in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
+                if in_lookup:
+                    return type_in_lookup
+            # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
+            return tree.type_
         else:
-            return Assignment(listname + '[' + args[1] + ']', 'operation')
+            name = tree.children[0] if type(tree) is Tree else str(tree)
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(name)
+            if in_lookup:
+                return type_in_lookup
+            # For now default to 'string' type
+            return 'string'
 
-    # additions Laura, to be checked for higher levels:
-    def list_access_var(self, args):
-        return Assignment(hash_var(args[0]), 'operation')
+    def check_type_allowed(self, command, allowed_types, tree):
+        arg_type = self.get_type(tree)
+        if arg_type not in allowed_types and not self.ignore_type(arg_type):
+            raise_invalid_type_error(allowed_types, command, str(tree), arg_type)
+        return arg_type
 
-    def change_list_item(self, args):
-        return Assignment(hash_var(args[0]), 'operation')
+    def ignore_type(self, type_):
+        return type_ in ['any', 'None']
 
-    def text(self, args):
-        # text never contains a variable
-        return None
+    def try_get_type_from_lookup(self, name):
+        # TODO: we should not just take the first match
+        matches = [entry for entry in self.lookup if entry.name == name]
+        if matches:
+            return True, self.lookup_type_fallback(matches[0].type_)
+        hashed_matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
+        if hashed_matches:
+            return True, self.lookup_type_fallback(hashed_matches[0].type_)
+        return False, None
 
-    def var_access(self, args):
-        # just accessing (printing) a variable does not count toward the lookup table
-        return None
+    def lookup_type_fallback(self, type_in_lookup):
+        # If the entry is in the lookup table but its type has not been evaluated yet, then most probably this is a
+        # variable referenced before it is defined. In this case, we rely on python to return an error. For now.
+        return 'any' if type_in_lookup is None else type_in_lookup
 
-    def var(self, args):
-        # the var itself (when in an assignment) should be added
-        name = hash_var(args[0])
-        return name
+    def to_typed_tree(self, tree, type_='None'):
+        return TypedTree(tree.data, tree.children, tree.meta, type_)
 
-    def punctuation(self, args):
-        # is never a variable (but should be removed from the tree or it will be seen as one!)
-        return None
+    def __default__(self, data, children, meta):
+        return TypedTree(data, children, meta, 'None')
 
-    def __default__(self, args, children, meta):
-        return self.filter_ask_assign(children)
+
+def raise_invalid_type_error(allowed_types, command, variable, used_invalid_type):
+    # we first try to raise if we expect 1 thing exactly for more precise error messages
+    if len(allowed_types) == 1:
+        # TODO: the exception could be reused not only for lists
+        if allowed_types[0] == 'list':
+            raise exceptions.RequiredArgumentTypeException(command=command, variable=variable,
+                                                           required_type=allowed_types[0])
+
+    raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=used_invalid_type,
+                                                  invalid_argument='', allowed_types=allowed_types)
 
 
 def flatten_list_of_lists_to_list(args):
@@ -412,8 +475,6 @@ class Filter(Transformer):
         return True, ''.join([str(c) for c in args])
     def random(self, args):
         return True, 'random'
-    def index(self, args):
-        return True, ''.join([str(c) for c in args])
     def punctuation(self, args):
         return True, ''.join([c for c in args])
     def number(self, args):
@@ -523,6 +584,15 @@ def process_characters_needing_escape(value):
         value = value.replace(c, f'\\{c}')
     return value
 
+
+def get_allowed_types(command, level):
+    # get only the allowed types of the command for all levels before the requested level
+    allowed = [values[command] for key, values in commands_and_types_per_level.items()
+               if command in values and key <= level]
+    # use the allowed types of the highest level available
+    return allowed[-1] if allowed else []
+
+
 # decorator used to store each class in the lookup table
 def hedy_transpiler(level):
     def decorator(c):
@@ -551,6 +621,8 @@ class ConvertToPython_1(Transformer):
 
     def text(self, args):
         return ''.join([str(c) for c in args])
+    def integer(self, args):
+        return str(args[0])
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
@@ -568,16 +640,13 @@ class ConvertToPython_1(Transformer):
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
-    def forward(self,args):
+    def forward(self, args):
         if len(args) == 0:
             return self.make_forward(50)
 
-        try:
-            parameter = int(args[0])
-        except:
-            raise exceptions.InvalidArgumentTypeException(command='forward', invalid_type='',
-                                                            allowed_types=['number'],
-                                                            invalid_argument=args[0])
+        self.check_args_type_allowed(args, 'forward', self.level)
+
+        parameter = int(get_value(args[0]))
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -601,30 +670,32 @@ class ConvertToPython_1(Transformer):
                                                             allowed_types=['right', 'left', 'number'],
                                                             invalid_argument=argument)
 
-    def check_arg_types(self, args, command, level):
-        allowed_types = self.get_allowed_types(command, level)
+    def check_args_type_allowed(self, args, command, level):
+        allowed_types = get_allowed_types(command, level)
         for arg in args:
             assignment = self.find_in_lookup(arg)
             if assignment:
-                if assignment.type != 'operation' and assignment.type not in allowed_types:
-                    # we first try to raise if we expect 1 thing exactly for more precise error messages
-                    if len(allowed_types) == 1:
-                        if allowed_types[0] == 'list':
-                            raise exceptions.RequiredArgumentTypeException(command=command, variable=assignment.name,
-                                                                     required_type=allowed_types[0])
-                        # here of course we will have a long elif for different types, or maybe we have 1 required exception with a parameter?
+                if assignment.type_ not in ['any'] and assignment.type_ not in allowed_types:
+                    raise_invalid_type_error(allowed_types, command, assignment.name, assignment.type_)
+            else:
+                type_ = self.get_arg_type(arg)
+                if type_ not in ['any'] and type_ not in allowed_types:
+                    raise exceptions.InvalidArgumentTypeException(command=command, invalid_type='',
+                                                                  allowed_types=allowed_types,
+                                                                  invalid_argument=arg if isinstance(arg, str) else args[0].children[0])
 
-                    if assignment.type == 'list':
-                        raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=assignment.type,
-                                                                invalid_argument='', allowed_types=allowed_types)
-                        # same elif here for different types
+    def get_arg_type(self, arg):
+        # TODO: Improve type inferring logic. For now, fallback to 'any' which means no type checks will be done if
+        #  the arg is a Tree. Note that we do not have access to the TypeInferrer logic (and we cannot use it to
+        #  determine the type since we do not have the full Tree object here). Maybe we can still reuse some logic?
+        if type(arg) is Tree:
+            return 'any'
+        if is_int(arg):
+            return 'integer'
+        if is_float(arg):
+            return 'float'
+        return 'string'
 
-    def get_allowed_types(self, command, level):
-        # get only the allowed types of the command for all levels before the requested level
-        allowed = [values[command] for key, values in commands_and_types_per_level.items()
-                   if command in values and key <= level]
-        # use the allowed types of the highest level available
-        return allowed[-1] if allowed else []
 
     def find_in_lookup(self, variable):
         lookup_vars = [a for a in self.lookup if a.name == variable]
@@ -636,8 +707,19 @@ def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
     return name in all_names
 
-def process_variable(name, lookup):
+
+def get_value(arg):
+    # TODO: this func compensates for the mixed approach of handling leaf nodes, e.g. text => string and
+    #  integer => Tree('integer', ['5']). Ideally, they will be handled in the same manner
+    if isinstance(arg, Tree):
+        if type(arg.children) is list:
+            return arg.children[0]
+        return arg.children
+    return arg
+
+def process_variable(arg, lookup):
     #processes a variable by hashing and escaping when needed
+    name = get_value(arg)
     if is_variable(name, lookup):
         return hash_var(name)
     elif is_quoted(name): #sometimes kids accidentally quote strings, then we do not want them quoted again
@@ -662,11 +744,21 @@ def process_variable_for_fstring_padded(name, lookup):
 
 @hedy_transpiler(level=2)
 class ConvertToPython_2(ConvertToPython_1):
+
+    def ask_dep_2(self, args):
+        # ask is no longer usable this way, raise!
+        # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
+        raise hedy.exceptions.WrongLevelException(1, 'ask', "ask_needs_var")
+    def echo_dep_2(self, args):
+        # echo is no longer usable this way, raise!
+        # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
+        raise hedy.exceptions.WrongLevelException(1,  'echo', "echo_out")
+
     def check_var_usage(self, args):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
-        args_to_process = [a for a in args if not type(a) is Tree] #we do not check trees (calcs) they are always ok
+        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
 
         unquoted_args = [a for a in args_to_process if not is_quoted(a)]
         unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
@@ -684,13 +776,14 @@ class ConvertToPython_2(ConvertToPython_1):
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
     def var(self, args):
-        name = ''.join(args)
         name = args[0]
         return hash_var(name)
-        # return "_" + name if name in reserved_words else name
+    def var_access(self, args):
+        name = args[0]
+        return hash_var(name)
     def print(self, args):
         # grab the allowed arguments from the dictionary
-        self.check_arg_types(args, 'print', self.level)
+        self.check_args_type_allowed(args, 'print', self.level)
 
         argument_string = ""
         i = 0
@@ -715,16 +808,18 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return self.make_forward(50)
 
+        self.check_args_type_allowed(args, 'forward', self.level)
+
         # if the parameter is a number, use it as is
         # otherwise, see if we got a defined variable. if not, give an error
         try:
-            parameter = int(args[0])
+            parameter = int(get_value(args[0]))
         except:
             if is_variable(args[0], self.lookup):
                 parameter = args[0]
             else:
                 raise exceptions.InvalidArgumentTypeException(command='forward', invalid_type='',
-                                                   allowed_types=['number'],
+                                                   allowed_types=get_allowed_types('forward', self.level),
                                                    invalid_argument=args[0])
         return self.make_forward(parameter)
 
@@ -741,18 +836,18 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + a + "'" for a in args[1:]]
+        values = ["'" + get_value(a) + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
 
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-        self.check_arg_types(args, 'at random', self.level)
+        self.check_args_type_allowed([args[0]], 'at random', self.level)
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
         else:
-            return args[0] + '[' + args[1] + ']'
+            return args[0] + '[' + args[1] + '-1]'
 
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
@@ -802,7 +897,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_print_arguments(args)
-        self.check_arg_types(args, 'print', self.level)
+        self.check_args_type_allowed(args, 'print', self.level)
         argument_string = ''
         for argument in args:
             argument = argument.replace("'", '') #no quotes needed in fstring
@@ -818,7 +913,7 @@ class ConvertToPython_3(ConvertToPython_2):
         args_new = []
         var = args[0]
         remaining_args = args[1:]
-        self.check_arg_types(remaining_args, 'ask', self.level)
+        self.check_args_type_allowed(remaining_args, 'ask', self.level)
         return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
@@ -832,7 +927,7 @@ class ConvertToPython_4(ConvertToPython_3):
         if args[2].data == 'random':
             return var + '=random.choice(' + args[1] + ')'
         else:
-            return var + '=' + args[1] + '[' + args[2].children[0] + ']'
+            return var + '=' + args[1] + '[' + args[2].children[0] + '-1]'
 
     def ifs(self, args):
         return f"""if {args[0]}:
@@ -860,13 +955,13 @@ class ConvertToPython_5(ConvertToPython_4):
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args)
-        self.check_arg_types(args, 'print', self.level)
+        self.check_args_type_allowed(args, 'print', self.level)
 
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
         for a in args:
-            if type(a) is Tree:
-                args_new.append("{" + a.children + "}")
+            if isinstance(a, Tree):
+                args_new.append("{" + a.children[0] + "}")
             else:
                 a = a.replace("'", "") #no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
@@ -884,25 +979,19 @@ class ConvertToPython_5(ConvertToPython_4):
             return f"str({arg0}) == str({arg1}) and {args[2]}"
 
     def assign(self, args):
-        if len(args) == 2:
-            parameter = args[0]
-            value = args[1]
-            if type(value) is Tree:
-                return parameter + " = " + value.children
-            else:
-                #assigns may contain string (accidentally) i.e. name = 'Hedy'
-                value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'"
+        parameter = args[0]
+        value = args[1]
+        if type(value) is Tree:
+            return parameter + " = " + value.children[0]
         else:
-            parameter = args[0]
-            values = args[1:]
-            return parameter + " = [" + ", ".join(values) + "]"
+            #assigns may contain string (accidentally) i.e. name = 'Hedy'
+            value = process_characters_needing_escape(value)
+            return parameter + " = '" + value + "'"
 
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
-            return f'{str(argument.children)}'
-        else:
-            return f'int({argument})'
+            return f'{str(argument.children[0])}'
+        return f"int({argument})"
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -910,8 +999,10 @@ class ConvertToPython_5(ConvertToPython_4):
         # for trees we need to grap the inner string
         # for tokens we add int around them
 
+        self.check_args_type_allowed(args, 'sum', self.level)
+
         args = [self.process_token_or_tree(a) for a in args]
-        return Tree('sum', f'{args[0]} {operator} {args[1]}')
+        return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def addition(self, args):
         return self.process_calculation(args, '+')
@@ -927,8 +1018,6 @@ class ConvertToPython_5(ConvertToPython_4):
 
 @hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
-    def number(self, args):
-        return ''.join(args)
     def repeat(self, args):
         var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
@@ -948,7 +1037,7 @@ class ConvertToPython_7_8(ConvertToPython_6):
 
     def repeat(self, args):
         all_lines = [indent(x) for x in args[1:]]
-        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
+        return "for i in range(int(" + str(get_value(args[0])) + ")):\n" + "\n".join(all_lines)
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -966,10 +1055,10 @@ class ConvertToPython_7_8(ConvertToPython_6):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return args[0]
+            return hash_var(args[0])
         else:
         # this is list_access
-            return args[0] + "[" + str(args[1]) + "]" if type(args[1]) is not Tree else "random.choice(" + str(args[0]) + ")"
+            return hash_var(args[0]) + "[" + str(hash_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(hash_var(args[0])) + ")"
 
 @hedy_transpiler(level=9)
 class ConvertToPython_9(ConvertToPython_7_8):
@@ -986,31 +1075,39 @@ class ConvertToPython_10(ConvertToPython_9):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+        return f"""{stepvar_name} = 1 if int({get_value(args[1])}) < int({get_value(args[2])}) else -1
+for {args[0]} in range(int({get_value(args[1])}), int({get_value(args[2])}) + {stepvar_name}, {stepvar_name}):
 {body}"""
+
 
 def is_int(n):
     try:
-        to_int = int(n)
-        return to_int == n
+        int(n)
+        return True
     except ValueError:
         return False
+
+
 def is_float(n):
     try:
         float(n)
         return True
     except ValueError:
         return False
+
+
 def is_random(s):
     return 'random.choice' in s
 
+
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
+    def number(self, args):
+        return ''.join(args)
 
     def process_token_or_tree(self, argument):
-        if type(argument) is Tree:
-            return f'{str(argument.children)}'
+        if isinstance(argument, Tree):
+            return f'{str(argument.children[0])}'
         else:
             return f'{argument}'
 
@@ -1018,7 +1115,7 @@ class ConvertToPython_11(ConvertToPython_10):
     def ask(self, args):
         var = args[0]
         remaining_args = args[1:]
-        self.check_arg_types(remaining_args, 'ask', self.level)
+        self.check_args_type_allowed(remaining_args, 'ask', self.level)
 
         assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
 
@@ -1040,28 +1137,17 @@ class ConvertToPython_11(ConvertToPython_10):
 
         args = [self.process_token_or_tree(a) for a in args]
 
-        # convert types of the arguments
-        converted_args = []
-        for arg in args:
-            if is_float(arg):
-                converted_args.append(f'float({arg})')
-            elif is_int(arg):
-                converted_args.append(f'int({arg})')
-            else:
-                # variable? default to float for now (todo: use typesystem here)
-                converted_args.append(f'float({arg})')
-
-        return Tree('sum', f'{args[0]} {operator} {args[1]}')
+        return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def print(self, args):
         # TODO: new type checking is needed for string assignment
         self.check_var_usage(args)
-        self.check_arg_types(args, 'print', self.level)
+        self.check_args_type_allowed(args, 'print', self.level)
 
         args_new = []
         for a in args:
-            if type(a) is Tree:
-                args_new.append("{" + a.children + "}")
+            if isinstance(a, Tree):
+                args_new.append("{" + get_value(a) + "}")
             else:
                 a = a.replace("'", "")  # no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
@@ -1072,6 +1158,11 @@ class ConvertToPython_11(ConvertToPython_10):
     def text_in_quotes(self, args):
         text = args[0]
         return "'" + text + "'" # keep quotes in the Python code (producing name = 'Henk')
+
+    def assign_list(self, args):
+        parameter = args[0]
+        values = args[1:]
+        return parameter + " = [" + ", ".join(values) + "]"
 
     def assign(self, args):
         right_hand_side = args[1]
@@ -1087,18 +1178,14 @@ class ConvertToPython_11(ConvertToPython_10):
             if not (is_int(right_hand_side) or is_float(right_hand_side) or is_random(right_hand_side)):
                 raise exceptions.UnquotedAssignTextException(text = args[1])
 
-        if len(args) == 2:
-            parameter = args[0]
-            value = args[1]
-            if type(value) is Tree:
-                return parameter + " = " + value.children
-            else:
-                # we no longer escape quotes here because they are now needed
-                return parameter + " = " + value + ""
+        parameter = args[0]
+        value = args[1]
+
+        if isinstance(value, Tree):
+            return parameter + " = " + value.children[0]
         else:
-            parameter = args[0]
-            values = args[1:]
-            return parameter + " = [" + ", ".join(values) + "]"
+            # we no longer escape quotes here because they are now needed
+            return parameter + " = " + value + ""
 
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
@@ -1150,24 +1237,6 @@ class ConvertToPython_14(ConvertToPython_13):
         parameter = args[0]
         values = [a for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
-
-    def list_access_var(self, args):
-        var = hash_var(args[0])
-        if not isinstance(args[2], str):
-            if args[2].data == 'random':
-                return var + '=random.choice(' + args[1] + ')'
-        else:
-            return var + '=' + args[1] + '[' + args[2] + '-1]'
-
-    def list_access(self, args):
-        if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
-        else:
-            list_access_shifted = args[0] + '[' + args[1] + '-1]'
-            # when printing later, we need to know this is a var\
-            # todo (could be done in the AllAssignments?)
-            self.lookup.append(Assignment(list_access_shifted, 'operation'))
-            return list_access_shifted
 
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
@@ -1436,26 +1505,10 @@ def get_parser(level, lang="en"):
 ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 
 def transpile(input_string, level, lang="en"):
-    try:
-        transpile_result = transpile_inner(input_string, level, lang)
-        return transpile_result
-    except exceptions.ParseException as ex:
-        # This is the 'fall back' transpilation
-        # that should surely be improved!!
-        # we retry HedyExceptions of the type Parse (and Lark Errors) but we raise Invalids
+    transpile_result = transpile_inner(input_string, level, lang)
+    return transpile_result
 
-        #try 1 level lower
-        if level > 1:
-            try:
-                new_level = level - 1
-                result = transpile_inner(input_string, new_level, lang)
-            except (LarkError, exceptions.HedyException) as innerE:
-                # Parse at `level - 1` failed as well, just re-raise original error
-                raise ex
-            # If the parse at `level - 1` succeeded, then a better error is "wrong level"
-            raise exceptions.WrongLevelException(correct_code=result.code, working_level=new_level, original_level=level) from ex
-        else:
-            raise
+
 
 
 def repair(input_string):
@@ -1536,6 +1589,10 @@ def preprocess_blocks(code, level):
         if indent_size == None and leading_spaces > 0:
             indent_size = leading_spaces
 
+        # ignore whitespace-only lines
+        if leading_spaces == len(line):
+            continue
+
         #calculate nuber of indents if possible
         if indent_size != None:
             if (leading_spaces % indent_size) != 0:
@@ -1591,47 +1648,39 @@ def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
 
-def transpile_inner(input_string, level, lang="en"):
+def check_program_size_is_valid(input_string):
     number_of_lines = input_string.count('\n')
-
-    #parser is not made for huge programs!
+    # parser is not made for huge programs!
     if number_of_lines > MAX_LINES:
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
-    input_string = input_string.replace('\r\n', '\n')
-    punctuation_symbols = ['!', '?', '.']
-    level = int(level)
-    parser = get_parser(level, lang)
 
-    if contains_blanks(input_string):
+def process_input_string(input_string, level):
+    result = input_string.replace('\r\n', '\n')
+
+    if contains_blanks(result):
         raise exceptions.CodePlaceholdersPresentException()
 
-
     if level >= 3:
-        input_string = input_string.replace("\\", "\\\\")
+        result = result.replace("\\", "\\\\")
 
-    #in level 7 we add indent-dedent blocks to the code before parsing
+    # In level 7 we add indent-dedent blocks to the code before parsing
     if level >= 7:
-        input_string = preprocess_blocks(input_string, level)
+        result = preprocess_blocks(result, level)
 
+    return result
+
+
+def parse_input(input_string, level, lang):
+    parser = get_parser(level, lang)
     try:
-        parse_result = parser.parse(input_string+ '\n')
-        program_root = parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
-        abstract_syntaxtree = ExtractAST().transform(program_root)
-        lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
-
-        # also add hashes to list
-        # note that we do not (and cannot) hash the var names only, we also need to be able to process
-        # random.choice(প্রাণী)
-        hashed_lookups = AllAssignmentCommandsHashed().transform(abstract_syntaxtree)
-
-        lookup_table += hashed_lookups
-
+        parse_result = parser.parse(input_string + '\n')
+        return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
     except UnexpectedCharacters as e:
         try:
             location = e.line, e.column
             characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
-            character_found  = beautify_parse_error(e.char)
+            character_found = beautify_parse_error(e.char)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
             raise exceptions.ParseException(level=level, location=location, found=character_found) from e
@@ -1639,6 +1688,8 @@ def transpile_inner(input_string, level, lang="en"):
             # this one can't be beautified (for now), so give up :)
             raise e
 
+
+def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args, line)
     is_valid = IsValid().transform(program_root)
 
@@ -1651,11 +1702,12 @@ def transpile_inner(input_string, level, lang="en"):
         if isinstance(invalid_info, list):
             invalid_info = invalid_info[0]
         if invalid_info.error_type == ' ':
-            #the error here is a space at the beginning of a line, we can fix that!
+            # the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
-            if fixed_code != input_string: #only if we have made a successful fix
+            if fixed_code != input_string:  # only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, lang)
-            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code,
+                                                   fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
@@ -1666,34 +1718,73 @@ def transpile_inner(input_string, level, lang="en"):
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, commands_per_level[level])
-            if closest == None: #we couldn't find a suggestion because the command itself was found
+            if closest == None:  # we couldn't find a suggestion because the command itself was found
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?
                 if invalid_command == 'turn':
                     raise hedy.exceptions.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
-                                                            allowed_types=['right', 'left', 'number'],
-                                                            invalid_argument=''.join(invalid_info.arguments))
+                                                                       allowed_types=['right', 'left', 'number'],
+                                                                       invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
-            raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, line_number=line)
+            raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
+                                                     guessed_command=closest, line_number=line)
 
-    is_complete = IsComplete(level).transform(abstract_syntaxtree)
+
+def is_program_complete(abstract_syntax_tree, level):
+    is_complete = IsComplete(level).transform(abstract_syntax_tree)
     if not is_complete[0]:
         incomplete_command = is_complete[1][0]
         line = is_complete[2]
-        raise exceptions.IncompleteCommandException(incomplete_command=incomplete_command, level=level, line_number=line)
+        raise exceptions.IncompleteCommandException(incomplete_command=incomplete_command, level=level,
+                                                    line_number=line)
 
-    if not valid_echo(abstract_syntaxtree):
-        raise exceptions.LonelyEchoException()
+
+def create_lookup_table(abstract_syntax_tree, level):
+    visitor = LookupEntryCollector(level)
+    visitor.visit_topdown(abstract_syntax_tree)
+    entries = visitor.lookup
+
+    for entry in entries:
+        typed_tree = TypeInferrer(entries, level).transform(entry.tree)
+        entry.type_ = typed_tree.type_
+
+    # For now the lookup table should contain the entries with their names in plain text and hashed
+    return entries + [LookupEntry(hash_var(e.name), e.tree, e.skip_hashing, e.type_) for e in entries]
+
+
+def transpile_inner(input_string, level, lang="en"):
+    check_program_size_is_valid(input_string)
+
+    punctuation_symbols = ['!', '?', '.']
+
+    level = int(level)
+    if level > HEDY_MAX_LEVEL:
+        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+
+    input_string = process_input_string(input_string, level)
+
+    program_root = parse_input(input_string, level, lang)
+    is_program_valid(program_root, input_string, level, lang)
 
     try:
-        if level <= HEDY_MAX_LEVEL:
-            #grab the right transpiler from the lookup
-            transpiler = TRANSPILER_LOOKUP[level]
-            python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntaxtree)
-        else:
-           raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
-    except visitors.VisitError as E:
+        abstract_syntax_tree = ExtractAST().transform(program_root)
+
+        is_program_complete(abstract_syntax_tree, level)
+
+        if not valid_echo(abstract_syntax_tree):
+            raise exceptions.LonelyEchoException()
+
+        lookup_table = create_lookup_table(abstract_syntax_tree, level)
+
+        # grab the right transpiler from the lookup
+        transpiler = TRANSPILER_LOOKUP[level]
+        python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntax_tree)
+
+
+        has_turtle = UsesTurtle().transform(abstract_syntax_tree)
+        return ParseResult(python, has_turtle)
+    except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.
         if isinstance(E.orig_exc, exceptions.HedyException):
@@ -1701,9 +1792,6 @@ def transpile_inner(input_string, level, lang="en"):
         else:
             raise E
 
-    has_turtle = UsesTurtle().transform(abstract_syntaxtree)
-
-    return ParseResult(python, has_turtle)
 
 def execute(input_string, level):
     python = transpile(input_string, level)
