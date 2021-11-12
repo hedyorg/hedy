@@ -1615,7 +1615,16 @@ def transpile_inner(input_string, level, lang="en"):
 
     try:
         program_root = parser.parse(input_string+ '\n').children[0]  # getting rid of the root could also be done in the transformer would be nicer
-        abstract_syntaxtree = ExtractAST().transform(program_root)
+
+
+        if program_root.data == "progam":
+            program = program_root
+        else: # het is een ambig dus children is een lijst programma's
+            programs = program_root.children
+            program = programs[0]
+
+
+        abstract_syntaxtree = ExtractAST().transform(program)
         lookup_table = AllAssignmentCommands().transform(abstract_syntaxtree)
 
         # also add hashes to list
