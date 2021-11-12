@@ -82,11 +82,11 @@ class InvalidArgumentTypeException(HedyException):
             invalid_argument=invalid_argument)
 
 class WrongLevelException(HedyException):
-    def __init__(self, original_level, working_level, correct_code):
+    def __init__(self, working_level, offending_keyword, tip):
         super().__init__('Wrong Level',
-            original_level=original_level,
             working_level=working_level,
-            correct_code=correct_code)
+            offending_keyword=offending_keyword,
+            tip=tip)
 
 class InputTooBigException(HedyException):
     def __init__(self, lines_of_code, max_lines):

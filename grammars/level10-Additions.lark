@@ -1,4 +1,4 @@
-command: print | ifs elses? | ask | for_loop | assign_list | list_access_var | assign
+command: print | ifs elses? | ask | for_loop | repeat_list | assign_list | list_access_var | assign
 
 //new : for loop
 for_loop: _FOR _SPACE (NAME | var) _SPACE _IN _SPACE _RANGE _SPACE (INT | var) _SPACE _TO _SPACE (INT | var) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
