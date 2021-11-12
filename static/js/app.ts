@@ -228,7 +228,7 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Code){
         console.log("success!");
-        success.show(ErrorMessages['Transpile_success']);
+        success.show(ErrorMessages['Transpile_success1']);
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
