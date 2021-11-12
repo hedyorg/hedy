@@ -791,11 +791,24 @@ function createModal(){
       const levelKey = $editor.data('lskey');
       // const loadedProgram = $editor.data('loaded-program');
 
+      //not needed for now, since we need the "correct" code first.
+
+      
       // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
       // const programFromStorage = storage.getItem(levelKey);
       // if (loadedProgram !== 'True' && programFromStorage) {
-        editor.setValue('print Hier hoort het juiste programma! :D', 1);
-      // }
+
+        let tempIndex = 0;
+        let resultString = "print Hier Komt een mooi antwoord! :D";
+        let tempString = ""
+        for (let i = 0; i < resultString.length; i++) {
+          setTimeout(function() {
+            editor.setValue(tempString,tempIndex);
+            tempString += resultString[tempIndex];
+            tempIndex++;
+          }, 200 * i);
+        }
+    
     }
 
     window.onbeforeunload = () => {
