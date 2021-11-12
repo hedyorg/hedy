@@ -217,6 +217,17 @@ adventures:
                     print 'Ik zie alle dieren en daar kijk ik naar!'
                     ```
                 start_code: ""
+            11:
+                story_text: |
+                    ## Verhaal
+                    In dit level kun je meerdere woorden opslaan in een variabele. Hierdoor kun je je hoofdpersoon bijvoorbeeld een voor- en achternaam geven.
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    naam is 'De Koningin van Engeland'
+                    print naam ' zat te genieten van een lekker taartje, toen plotseling...'
+                    ```
+                start_code: ""
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
@@ -345,6 +356,22 @@ adventures:
                             print 'Blubblubblub, blub, blubblubblub'
                     ```
                 start_code: ""
+#Issue1231            11:
+#Issue1231                story_text: |
+#Issue1231                    ## Zing een liedje
+#Issue1231                    In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'. Kijk maar:
+#Issue1231                    ## Voorbeeld Hedy code
+#Issue1231                    ```
+#Issue1231                    actions is 'clap your hands', 'stomp your feet', 'shout Hurray!'
+#Issue1231                    for action in actions
+#Issue1231                        for i in range 1 to 2
+#Issue1231                            print 'if youre happy and you know it'
+#Issue1231                            print action
+#Issue1231                        print 'if youre happy and you know it and you really want to show it'
+#Issue1231                        print 'if youre happy and you know it'
+#Issue1231                        print action
+#Issue1231                    ```
+#Issue1231                start_code: ""
     turtle:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"
@@ -903,6 +930,41 @@ adventures:
                                 print 'Foutje! Het was... ' goed
                     ```
                 start_code: ""
+            11:
+                story_text: |
+                    ## Rekenmachine
+                    In dit level kun je ook met kommagetallen werken met de rekenmachine. Onthoud wel dat je geen komma gebruikt, maar een punt!
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    getal1 is ask 'Wat is het eerste getal?'
+                    getal2 is ask 'Wat is het tweede getal?'
+                    antwoord is getal1 + getal2
+                    print getal1 ' plus ' getal2 ' is ' antwoord
+                    ```
+                start_code: ""
+            12:
+                story_text: |
+                    ## Raad mijn getal
+                    In dit level kun je het spelletje 'Raad mijn getal' programmeren!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Raad mijn getal'
+                    getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    getal is getallen at random
+                    spel is 'aan'
+                    for i in range 1 to 10
+                        if spel is 'aan'
+                            gok is ask 'Welk getal denk je?'
+                            if gok > getal
+                                print 'Lager!'
+                            if gok < getal
+                                print 'Hoger!'
+                            if gok is getal
+                                print 'Hoera!'
+                                spel is 'af'
+                start_code: ""
     fortune:
         name: "Waarzegger"
         description: "Laat Hedy jouw toekomst voorspellen"
@@ -1060,8 +1122,7 @@ adventures:
                     Lukt het jou dit te maken?
                    
                     In level 7 verandert de opmaak van het repeat-commando, waardoor dit probleem verdwijnt!
-                start_code: "" 
-
+                start_code: ""
             7: 
                  story_text: |
                      ## Hedy de waarzegger
@@ -1110,6 +1171,19 @@ adventures:
                          print naam 's grootste angst is ' angsten at random
                      ```
                  start_code: ""
+#Issue1231            11:
+#Issue1231                story_text: |
+#Issue1231                    ## Waarzegger
+#Issue1231                    In dit level kun je langere voorspellingen maken! Kijk maar:
+#Issue1231
+#Issue1231                    ## Voorbeeld Hedy Code
+#Issue1231                    ```
+#Issue1231                    voorspellingen is 'je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil'
+#Issue1231                    print 'Ik pak mijn glazen bol erbij...'
+#Issue1231                    print 'Ik zie... Ik zie...'
+#Issue1231                    print voorspellingen at random
+#Issue1231                    ```
+#Issue1231                start_code: ""
     restaurant:
         name: "Restaurant"
         description: "Maak een virtueel restaurant"
@@ -1398,6 +1472,27 @@ adventures:
                     ## Uitdaging
                     Alle uitdagingen die in level 7 worden genoemd zoals de extra `if` statements of de verbeterde prijzen, kun je natuurlijk in dit level nog steeds gebruiken!
                 start_code: "print 'Welkom bij McHedy!' "
+            11:
+                story_text: |
+                    ## Restaurant
+                    In dit level kun je kommagetallen gebruiken op je menukaart, kijk maar!
+
+                    ## Example Hedy code
+                    ```
+                    prijs is 0
+                    eten is ask 'Wat wil je eten?'
+                    drinken is ask 'Wat wil je drinken?'
+                    if eten is 'hamburger'
+                        prijs is prijs + 6.50
+                    if food is 'pizza'
+                        prijs is prijs + 5.75
+                    if drinks is 'water'
+                        prijs is prijs + 1.20
+                    if drink is 'frisdrank'
+                        prijs is prijs + 2.35
+                    print 'Dat wordt dan ' prijs ' euro, alsjeblieft'
+                    ```
+                start_code: ""
     haunted:
         name: "Spookhuis"
         description: "Ontsnap uit het spookhuis"
@@ -1547,6 +1642,111 @@ adventures:
                         print ' Hoera! Je bent ontsnapt!'
                     ```
                 start_code: "print 'Ontsnap uit het spookhuis!'"
+#Issue1231            12:
+#Issue1231                story_text: |
+#Issue1231                    ## Spookhuis
+#Issue1231                    In dit level gebruik je < en > om levens toe te voegen aan je spel
+#Issue1231
+#Issue1231                    ## Voorbeeld Hedy code
+#Issue1231                    ```
+#Issue1231                    print 'Ontsnap uit het spookhuis'
+#Issue1231                    levens is 3
+#Issue1231                    deuren is 1, 2, 3
+#Issue1231                    monsters is 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
+#Issue1231                    for i in range 1 to 10
+#Issue1231                        if lives > 0
+#Issue1231                            goede_deur is deuren at random
+#Issue1231                            monster is monsters at random
+#Issue1231                            gekozen_deur is ask 'Welke deur kies jij?'
+#Issue1231                            if goede_deur is gekozen_deur
+#Issue1231                                print 'Je hebt de goede deur gekozen'
+#Issue1231                            else
+#Issue1231                                print 'Je ziet...' monster
+#Issue1231                                if monster is 'een slapende 3 koppige hond'
+#Issue1231                                    print 'Pffieuw.... Hij slaapt'
+#Issue1231                                else
+#Issue1231                                    print 'Je hebt een leven kwijt!'
+#Issue1231                                    levens is levens -1
+#Issue1231                        else
+#Issue1231                            print 'GAME OVER'
+#Issue1231                    ```
+#Issue1231                start_code: ""
+    piggybank:
+        name: Spaarvarken
+        description: Tel je zakgeld!
+        image: hauntedhouse.png
+        default_save_name: Spaarvarken
+        levels:
+            11:
+                story_text: |
+                    ## Spaarvarken
+                    In dit avontuur kun je een digitaal spaarvarkentje maken, waarmee je je zakgeld kunt tellen en kan berekenen hoe lang het duurt voordat je iets kunt kopen!
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    print 'Het digitale spaarvarken'
+                    wens is ask 'Wat zou je graag willen hebben?'
+                    prijs is ask 'Hoeveel kost dat?'
+                    gespaard is ask 'Hoeveel geld heb je al gespaard?'
+                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
+                    sparen is prijs - gespaard
+                    weken is sparen / zakgeld
+                    print 'Je kunt over ' weken ' weken een ' wens ' kopen!'
+                    ```
+                start_code: ""
+            12:
+                story_text: |
+                    ## Spaarvarken
+                    In dit level kun je Hedy laten vertellen of je al genoeg geld hebt gespaard of niet!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    geld is ask 'Hoeveel geld heb je al gespaard?'
+                    wens is ask 'Hoeveel geld heb je nodig?'
+                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
+                    sparen is wens - geld
+                    weken is sparen / zakgeld
+                    if wens > geld
+                        print 'Helaas even doorsparen!'
+                        print 'Je moet nog ' weken ' weken.'
+                    else
+                        print 'Hoera, je hebt genoeg!'
+                        print 'Op naar de winkel!'
+                    ```
+                start_code: ""
+    quizmaster:
+        name: Quizmaster
+        description: Maak je eigen quiz!
+        image: hauntedhouse.png
+        default_save_name: Quizmaster
+        levels:
+            12:
+                story_text: |
+                    ## Maak je eigen quiz!
+                    In dit avontuur leer je je eigen quiz maken. Vul het voorbeeld in, maak extra vragen en geniet van je eigen quiz!
+                    Je kunt de quiz maken over wat je maar wil: je hobby, lievelingsdier, lievelingsboek of ...?
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Maak je eigen quiz'
+                    punten_a is 0
+                    punten_b is 0
+                    print 'Vraag'
+                    print 'Antwoordoptie A'
+                    print 'Antwoordoptie B'
+                    antwoord is ask 'Welk antwoord?'
+                    if antwoord is 'A'
+                        punten_a is punten_a + 1
+                    if antwoord is 'B'
+                        punten_b is punten_b + 1
+                    print 'Einde van de quiz!'
+                    print 'We kijken naar de resultaten!'
+                    if punten_a > punten_b
+                        print 'Jij hoort in club A'
+                    if punten_b > punten_a
+                        print 'Jij hoort in club B'
+                    ```
+                start_code: ""
     next:
         name: "Vooruitblik"
         description: "Vooruitblik"
