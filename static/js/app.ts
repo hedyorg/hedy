@@ -228,7 +228,23 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Code){
         console.log("success!");
-        success.show(ErrorMessages['Transpile_success1']);
+        // var randomnum: number = Math.floor(Math.random() * 5);
+        // if (randomnum == 0) {
+        //   success.show(ErrorMessages['Transpile_success1']);
+        // }
+        // if (randomnum == 1) {
+        //   success.show(ErrorMessages['Transpile_success2']);
+        // }
+        // if (randomnum == 2) {
+        //   success.show(ErrorMessages['Transpile_success3']);
+        // }
+        // if (randomnum == 3) {
+        //   success.show(ErrorMessages['Transpile_success4']);
+        // }
+        // if (randomnum == 4) {
+        //   success.show(ErrorMessages['Transpile_success5']);
+        // }
+        success.show(ErrorMessages['Transpile_success5']);
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
