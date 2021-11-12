@@ -1480,9 +1480,14 @@ def get_full_grammar_for_level(level):
 
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "keywords-" + str(language) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
+    try: 
+        filename = "keywords-" + str(language) + ".lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+    except FileNotFoundError: 
+        filename = "keywords-en.lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
     return grammar_text
 
 PARSER_CACHE = {}
