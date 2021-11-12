@@ -930,6 +930,7 @@ adventures:
                     number2 is ask 'What is the second number?'
                     answer is number1 + number2
                     print number1 ' plus ' number2 ' is ' answer
+                start_code: ""
             12:
                 story_text: |
                     ## Guess which number
@@ -1659,6 +1660,22 @@ adventures:
         image: hauntedhouse.png
         default_save_name: Piggy Bank
         levels:
+            11:
+                story_text: |
+                    ## Piggy Bank
+                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
+
+                    ## Example Hedy Code
+                    ```
+                    print 'The digital piggy bank'
+                    wish is ask 'What would you like to buy?'
+                    price is ask 'How much does that cost?'
+                    saved is ask 'How much money have you saved already?'
+                    allowance is ask 'How much pocket money do you get per week?'
+                    to_save is price - saved
+                    weeks is to_save / allowance
+                    print 'You can buy a ' wish ' in ' weeks ' weeks.'
+                start_code: ""
             12:
                 story_text: |
                     ## Piggybank
@@ -1711,27 +1728,7 @@ adventures:
                     if points_b > points_a
                         print 'You belong to the B club'
                     ```
-    piggybank:
-        name: Piggy bank
-        description: Count your pocket money!
-        image: hauntedhouse.png
-        default_save_name: Piggy Bank
-        levels:
-            11:
-                story_text: |
-                    ## Piggy Bank
-                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
 
-                    ## Example Hedy Code
-                    ```
-                    print 'The digital piggy bank'
-                    wish is ask 'What would you like to buy?'
-                    price is ask 'How much does that cost?'
-                    saved is ask 'How much money have you saved already?'
-                    allowance is ask 'How much pocket money do you get per week?'
-                    to_save is price - saved
-                    weeks is to_save / allowance
-                    print 'You can buy a ' wish ' in ' weeks ' weeks.'
                 start_code: ""
     next:
         name: "What's next?"

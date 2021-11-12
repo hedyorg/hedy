@@ -293,7 +293,7 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_list_creation_2(self):
+  def test_list_creation_with_spaces(self):
     code = textwrap.dedent("""\
     actions is 'clap your hands', 'stomp your feet', 'shout Hurray'
     for action in actions
@@ -318,4 +318,16 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+
+  def test_list_creation_with_numbers(self):
+    code = textwrap.dedent("""\
+    getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    getal is getallen at random""")
+    expected = textwrap.dedent("""\
+    getallen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    getal=random.choice(getallen)""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
