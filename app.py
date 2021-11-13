@@ -320,8 +320,6 @@ def fix_code():
                 transpile_result = ex.fixed_result
                 print("transpile_result", transpile_result)
 
-        
-
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
@@ -346,7 +344,6 @@ def fix_code():
     })
 
     return jsonify(response)
-
 
 @app.route('/parse', methods=['POST'])
 def parse():

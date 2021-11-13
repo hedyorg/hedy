@@ -223,7 +223,6 @@ export function runit(level: string, lang: string, cb: () => void) {
         if (response.Location && response.Location[0] != "?") {
           // Location can be either [row, col] or just [row].
           // @ts-ignore
-
           const repair_button = document.getElementById("repair_button");
           repair_button.style.visibility = "visible";
           repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(level, lang)};
@@ -818,7 +817,6 @@ function createModal(level){
         editor.session.setMode(mode);
       }
     }
-
     return editor;
   }
 
@@ -837,15 +835,6 @@ function createModal(level){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
-      // const loadedProgram = $editor.data('loaded-program');
-
-      //not needed for now, since we need the "correct" code first.
-
-      
-      // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-      // const programFromStorage = storage.getItem(levelKey);
-      // if (loadedProgram !== 'True' && programFromStorage) {
-
         let tempIndex = 0;
         let resultString = "";
         
