@@ -343,12 +343,9 @@ def parse():
         for com in commands:
             demo_code = com['demo_code']
             demo_code += '\n'
-            print(code)
-            print(demo_code)
             if code == demo_code:
                 RUN_COMMAND[index] = 1
             index += 1
-        print(RUN_COMMAND)
         flag = 1
         for i in RUN_COMMAND:
             if i == 0:
