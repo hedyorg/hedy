@@ -1862,16 +1862,27 @@ def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
     keywordDict = keywordsToDict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
     abstract_syntaxtree = ExtractAST().transform(program_root)
-    abstract_syntaxtree = ConvertToLang2(keywordDict, punctuation_symbols).transform(program_root)
+    translator = TRANSPILER_LOOKUP[level]
+    abstract_syntaxtree = translator(keywordDict, punctuation_symbols).transform(program_root)
 
     return abstract_syntaxtree
 
 
+def hedy_translator(level):
+    def decorator(c):
+        TRANSPILER_LOOKUP[level] = c
+        c.level = level
+        return c
+
+    return decorator
+
+@hedy_translator(level=1)
 class ConvertToLang1(Transformer):
 
     def __init__(self, keywords, punctuation_symbols):
         self.keywords = keywords
         self.punctuation_symbols = punctuation_symbols
+        __class__.level = 1
 
     def command(self, args):
         return args[0]
@@ -1886,7 +1897,10 @@ class ConvertToLang1(Transformer):
         return self.keywords["print"] + " " + "".join([str(c) for c in args])
 
     def echo(self, args):
-        return self.keywords["echo"] + " " + "".join([str(c) for c in args])
+        all_args = self.keywords["echo"]
+        if args:
+            all_args += " "
+        return all_args + "".join([str(c) for c in args])
 
     def ask(self, args):
         return self.keywords["ask"] + " " + "".join([str(c) for c in args])
@@ -1904,6 +1918,7 @@ class ConvertToLang1(Transformer):
         return Tree(data, children, meta)
 
 
+@hedy_translator(level=2)
 class ConvertToLang2(ConvertToLang1):
 
     def assign(self, args):
@@ -1951,6 +1966,7 @@ class ConvertToLang2(ConvertToLang1):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
 
 
+translate_keywords("ask stel je vraag\necho tekst", "en", "nl", 1)
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
