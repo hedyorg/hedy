@@ -276,6 +276,78 @@ def echo_session_vars_main():
         return 'This endpoint is only meant for E2E tests', 400
     return jsonify({'session': dict(session), 'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
+@app.route('/fix-code', methods=['POST'])
+def fix_code():
+    body = request.json
+    if not body:
+        return "body must be an object", 400
+    if 'code' not in body:
+        return "body.code must be a string", 400
+    if 'level' not in body:
+        return "body.level must be a string", 400
+    if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
+        return "if present, body.adventure_name must be a string", 400
+
+    code = body['code']
+    level = int(body['level'])
+
+    # Language should come principally from the request body,
+    # but we'll fall back to browser default if it's missing for whatever
+    # reason.
+    lang = body.get('lang', requested_lang())
+
+    # true if kid enabled the read aloud option
+    read_aloud = body.get('read_aloud', False)
+
+    response = {}
+    username = current_user()['username'] or None
+
+    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
+
+    try:
+        hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+        with querylog.log_time('transpile'):
+
+            try:
+                transpile_result = hedy.transpile(code, level)
+                response = "OK"
+            except hedy.exceptions.FtfyException as ex:
+                # The code was fixed with a warning
+                # response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['FixedCode'] = ex.fixed_code
+                response['Location'] = ex.error_location
+                transpile_result = ex.fixed_result
+                print("transpile_result", transpile_result)
+
+        
+
+    except hedy.exceptions.HedyException as ex:
+        traceback.print_exc()
+        response = hedy_error_to_response(ex, hedy_errors)
+
+    except Exception as E:
+        traceback.print_exc()
+        print(f"error transpiling {code}")
+        response["Error"] = str(E)
+    querylog.log_value(server_error=response.get('Error'))
+    parse_logger.log({
+        'session': session_id(),
+        'date': str(datetime.datetime.now()),
+        'level': level,
+        'lang': lang,
+        'code': code,
+        'server_error': response.get('Error'),
+        'version': version(),
+        'username': username,
+        'read_aloud': read_aloud,
+        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
+        'adventure_name': body.get('adventure_name', None)
+    })
+
+    return jsonify(response)
+
+
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
@@ -311,8 +383,8 @@ def parse():
             try:
                 transpile_result = hedy.transpile(code, level)
             except hedy.exceptions.FtfyException as ex:
-                # The code was fixed with a warning
-                response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
 
         if transpile_result.has_turtle:

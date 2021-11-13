@@ -223,7 +223,11 @@ export function runit(level: string, lang: string, cb: () => void) {
         if (response.Location && response.Location[0] != "?") {
           // Location can be either [row, col] or just [row].
           // @ts-ignore
-          document.getElementById("repair_button").style.visibility = "visible";
+
+          const repair_button = document.getElementById("repair_button");
+          repair_button.style.visibility = "visible";
+          repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(level, lang)};
+          fix_code(level, lang);
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
@@ -237,6 +241,54 @@ export function runit(level: string, lang: string, cb: () => void) {
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
       });
+    }).fail(function(xhr) {
+      console.error(xhr);
+      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+      if (xhr.readyState < 4) {
+        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
+      } else {
+        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
+      }
+    });
+
+  } catch (e: any) {
+    console.error(e);
+    error.show(ErrorMessages['Other_error'], e.message);
+  }
+}
+
+export function fix_code(level: string, lang: string){
+ 
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+
+  if (reloadOnExpiredSession ()) return;
+
+  try {
+    level = level.toString();
+    var code = get_trimmed_code();
+
+    console.log('Fixed\n', code);
+    $.ajax({
+      type: 'POST',
+      url: '/fix-code',
+      data: JSON.stringify({
+        level: level,
+        code: code,
+        lang: lang,
+        read_aloud : !!$('#speak_dropdown').val(),
+        adventure_name: window.State.adventure_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response: any) {
+      console.log('Fixed Code call', response);
+      if (response.Warning) {
+
+        sessionStorage.setItem ("warning_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+      }
+      if (response.FixedCode){
+        sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+      }
     }).fail(function(xhr) {
       console.error(xhr);
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
@@ -733,20 +785,14 @@ export function confetti_cannon(){
   }
 }
 
-export function modalStepOne(){
-  createModal();
+export function modalStepOne(level, lang){
+  createModal(level);
   let modal_editor = $('#modal-editor');
   initializeModalEditor(modal_editor);
-
-  let editor_field = <HTMLElement>document.getElementsByClassName('ace_line')[0];
-  	// var typer = document.getElementById('typewriter');
-
-	let typewriter = setupTypewriter(editor_field);
-
-	typewriter.type();
 }
-function createModal(){
-  let editor = "<div id='modal-editor' data-lskey=\"level_1__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>";
+
+function createModal(level){
+  let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   modal.alert(editor);
 }
  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
@@ -782,6 +828,8 @@ function createModal(){
     let editor = turnIntoAceEditor($editor.get(0), true);
     theModalEditor = editor;
     error.setEditor(editor);
+    //small timeout to make sure the call with fixed code is complete.
+    setTimeout(function(){}, 2000);
 
     window.Range = ace.require('ace/range').Range // get reference to ace/range
 
@@ -799,15 +847,25 @@ function createModal(){
       // if (loadedProgram !== 'True' && programFromStorage) {
 
         let tempIndex = 0;
-        let resultString = "print Hier Komt een mooi antwoord! :D";
-        let tempString = ""
-        for (let i = 0; i < resultString.length; i++) {
-          setTimeout(function() {
-            editor.setValue(tempString,tempIndex);
-            tempString += resultString[tempIndex];
-            tempIndex++;
-          }, 200 * i);
+        let resultString = "";
+        
+        if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
+          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey));
+          let tempString = ""
+          for (let i = 0; i < resultString.length + 1; i++) {
+            setTimeout(function() {
+              editor.setValue(tempString,tempIndex);
+              tempString += resultString[tempIndex];
+              tempIndex++;
+            }, 150 * i);
+          }
         }
+        else{
+          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey));
+          editor.setValue(resultString);
+        }
+
+  
     
     }
 
@@ -855,65 +913,3 @@ function createModal(){
     return editor;
   }
 
-function setupTypewriter(t :HTMLElement) {
-  var HTML = t.innerHTML;
-
-  t.innerHTML = "";
-
-  var cursorPosition = 0,
-      tag = "",
-      writingTag = false,
-      tagOpen = false,
-      typeSpeed = 100,
-      tempTypeSpeed = 0;
-
-  var type = function () {
-
-    if (writingTag === true) {
-      tag += HTML[cursorPosition];
-    }
-
-    if (HTML[cursorPosition] === "<") {
-      tempTypeSpeed = 0;
-      if (tagOpen) {
-        tagOpen = false;
-        writingTag = true;
-      } else {
-        tag = "";
-        tagOpen = true;
-        writingTag = true;
-        tag += HTML[cursorPosition];
-      }
-    }
-    if (!writingTag && tagOpen) {
-      tag.innerHTML += HTML[cursorPosition];
-    }
-    if (!writingTag && !tagOpen) {
-      if (HTML[cursorPosition] === " ") {
-        tempTypeSpeed = 0;
-      } else {
-        tempTypeSpeed = (Math.random() * typeSpeed) + 50;
-      }
-      t.innerHTML += HTML[cursorPosition];
-    }
-    if (writingTag === true && HTML[cursorPosition] === ">") {
-      tempTypeSpeed = (Math.random() * typeSpeed) + 50;
-      writingTag = false;
-      if (tagOpen) {
-        var newSpan = document.createElement("span");
-        t.appendChild(newSpan);
-        newSpan.innerHTML = tag;
-        tag = newSpan.firstChild;
-      }
-    }
-
-    cursorPosition += 1;
-    if (cursorPosition < HTML.length - 1) {
-      setTimeout(type, tempTypeSpeed);
-    }
-  };
-
-  return {
-    type: type
-  };
-}

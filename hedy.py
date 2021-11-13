@@ -122,7 +122,7 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
-    return style_closest_command(min_command)
+    return min_command
 
 
 def style_closest_command(command):
@@ -1621,7 +1621,12 @@ def transpile_inner(input_string, level):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, commands_per_level[level])
+            closestmatch = closest_command(invalid_command, commands_per_level[level])
+            closest = style_closest_command(closestmatch)
+            if closestmatch:
+                fixed_code = input_string.replace(invalid_command, closestmatch)
+                if fixed_code != input_string: #only if we have made a successful fix
+                    result = transpile_inner(fixed_code, level)
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?
@@ -1631,7 +1636,7 @@ def transpile_inner(input_string, level):
                                                             invalid_argument=''.join(invalid_info.arguments))
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
-            raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, line_number=line)
+            raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level, guessed_command=closest, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
     is_complete = IsComplete(level).transform(program_root)
     if not is_complete[0]:
