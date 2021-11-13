@@ -1857,19 +1857,21 @@ def keywordsToDict(to_lang="nl"):
 def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
     parser = get_parser(level, from_lang)
 
+    punctuation_symbols = ['!', '?', '.']
+
     keywordDict = keywordsToDict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
     abstract_syntaxtree = ExtractAST().transform(program_root)
-    abstract_syntaxtree = ConvertToLang2(keywordDict).transform(program_root)
+    abstract_syntaxtree = ConvertToLang2(keywordDict, punctuation_symbols).transform(program_root)
 
-    return
+    return abstract_syntaxtree
 
 
 class ConvertToLang1(Transformer):
-    keywords = {}
 
-    def __init__(self, keywords):
+    def __init__(self, keywords, punctuation_symbols):
         self.keywords = keywords
+        self.punctuation_symbols = punctuation_symbols
 
     def command(self, args):
         return args[0]
@@ -1895,6 +1897,8 @@ class ConvertToLang1(Transformer):
     def forward(self, args):
         return self.keywords["forward"] + " " + "".join([str(c) for c in args])
 
+    def random(self, args):
+        return self.keywords["random"] + " " + "".join([str(c) for c in args])
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
@@ -1905,16 +1909,48 @@ class ConvertToLang2(ConvertToLang1):
     def assign(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
 
+    def print(self, args):
+
+        argument_string = ""
+        i = 0
+
+        for argument in args:
+            # escape quotes if kids accidentally use them at level 2
+            argument = process_characters_needing_escape(argument)
+
+            # final argument and punctuation arguments do not have to be separated with a space, other do
+            if i == len(args) - 1 or args[i + 1] in self.punctuation_symbols:
+                space = ''
+            else:
+                space = " "
+
+            argument_string += argument + space
+
+            i = i + 1
+
+        return self.keywords["print"] + " " + argument_string
+
     def punctuation(self, args):
         return ''.join([str(c) for c in args])
 
     def var(self, args):
-        return ''.join([str(c) for c in args])
+        var = args[0]
+        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
+        return f'{var} is' + ''.join(all_parameters)
+
+    def ask(self, args):
+        var = args[0]
+        all_parameters = [process_characters_needing_escape(a) for a in args]
+
+        return all_parameters[0] + " " + self.keywords["ask"] + " " + ''.join(all_parameters[1:])
 
     def assign_list(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
 
-#translate_keywords("people is mom, dad\nforward 50",from_lang="en", level =2)
+    def list_access(self, args):
+        return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
+
+
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
