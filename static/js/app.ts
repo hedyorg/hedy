@@ -864,9 +864,6 @@ function createModal(level){
           resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey));
           editor.setValue(resultString);
         }
-
-  
-    
     }
 
     window.onbeforeunload = () => {
@@ -912,4 +909,3 @@ function createModal(level){
     });
     return editor;
   }
-
