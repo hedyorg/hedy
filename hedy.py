@@ -1794,7 +1794,7 @@ def transpile_inner(input_string, level, lang="en"):
 
 
 def execute(input_string, level):
-    python = transpile(input_string, level)
+    python = transpile(input_string, level)    
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
