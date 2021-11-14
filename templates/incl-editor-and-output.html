@@ -83,7 +83,7 @@
     <div class="order-2 lg:order-4">
       <br>
       <div class="flex justify-between">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ lang }}')">{{run_code_button}}</button>
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{run_code_button}}</button>
         {% if show_edit_button %}
         <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{edit_code_button}}</a>
         {% endif %}

@@ -27,11 +27,15 @@ def get_question(quiz_data, question_number):
 def is_correct_answer(question, letter):
     return question['correct_answer'] == letter
 
-
 def get_correct_answer(question):
     """Return the correct answer option from a question."""
     i = index_from_letter(question['correct_answer'])
     return question['mp_choice_options'][i]
+
+
+def get_hint(question, letter):
+    i = index_from_letter(letter)
+    return question['mp_choice_options'][i].get('feedback')
 
 
 def highest_question(quiz_data):
