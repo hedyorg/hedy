@@ -261,9 +261,10 @@ def after_request_log_status(response):
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-        'X-Frame-Options': None if re.match('.*/quiz', request.url) else 'DENY',
         'X-XSS-Protection': '1; mode=block',
     }
+    # Not X-Frame-Options on purpose -- we are being embedded by Online Masters
+    # and that's okay.
     response.headers.update(security_headers)
     return response
 
