@@ -177,6 +177,20 @@ class TestsLevel1(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
+<<<<<<< Updated upstream
+=======
+  # comment test
+  def test_comment(self):
+    code = "# geen commentaar, helemaal geen!"
+    expected = "# geen commentaar, helemaal geen!"
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+
+>>>>>>> Stashed changes
   # combined keywords tests
   def test_multiple_forward_without_arguments(self):
     result = hedy.transpile("forward\nforward", self.level)
