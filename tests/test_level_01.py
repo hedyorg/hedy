@@ -19,6 +19,8 @@ class TestsLevel1(HedyTester):
   # * negative tests should be
   # * situation_gives_exception
 
+
+
   # print tests
   def test_print(self):
     result = hedy.transpile("print Hallo welkom bij Hedy!", self.level)
@@ -176,6 +178,17 @@ class TestsLevel1(HedyTester):
     t.left(90)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
+
+  # comment test
+  def test_comment(self):
+    code = "# geen commentaar"
+    expected = "# geen commentaar"
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   # combined keywords tests
   def test_multiple_forward_without_arguments(self):

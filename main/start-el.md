@@ -6,7 +6,7 @@
     <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Μια βαθμιαία γλώσσα προγραμματισμού</h2>
   </div>
   <div class="flex-none">
-    <a href="/hedy?lang=en"><button class="green-btn text-white px-8 py-4">Δοκίμασέ τη</button></a>
+    <a href="/hedy?lang=el"><button class="green-btn text-white px-8 py-4">Δοκίμασέ τη</button></a>
   </div>
 </div>
 
