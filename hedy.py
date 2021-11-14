@@ -18,7 +18,7 @@ HEDY_MAX_LEVEL = 14
 MAX_LINES = 100
 
 # Boolean variables to allow code which is under construction to not be executed
-local_keywords_enabled = True # If this is True, only the keywords in the specified language can be used for now
+local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
 
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
