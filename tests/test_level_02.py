@@ -27,6 +27,15 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_print_comma(self):
+    result = hedy.transpile("print welkom bij steen, schaar, papier", self.level)
+    expected = textwrap.dedent("""\
+    print(f'welkom bij steen, schaar, papier')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
   # issue #745
   def test_print_list(self):
     code = textwrap.dedent("""\

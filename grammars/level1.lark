@@ -31,7 +31,7 @@ turtle: _FORWARD (_SPACE (text | NUMBER))? -> forward | _TURN (_SPACE text)? -> 
 invalid_space: _SPACE text?
 invalid: textwithoutspaces text?
 
-comment: _HASH text
+comment: _HASH /([^\n]+)/
 
 _EOL: "\r"?"\n"
 

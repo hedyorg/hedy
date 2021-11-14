@@ -181,8 +181,8 @@ class TestsLevel1(HedyTester):
 
   # comment test
   def test_comment(self):
-    code = "# geen commentaar"
-    expected = "# geen commentaar"
+    code = "# geen commentaar, helemaal geen!"
+    expected = "# geen commentaar, helemaal geen!"
     self.multi_level_tester(
       code=code,
       expected=expected,
