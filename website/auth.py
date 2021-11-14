@@ -113,7 +113,7 @@ def requires_login(f):
     return inner
 
 # Note: translations are used only for texts that will be seen by a GUI user.
-def routes(app, database, requested_lang):
+def routes(app, database):
     global DATABASE
     DATABASE = database
 
@@ -601,9 +601,9 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, lang, menu, request):
     if page == 'my-profile':
-        return render_template('profile.html', lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, current_page='my-profile')
+        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  lang=lang, auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
+        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
@@ -628,4 +628,4 @@ def auth_templates(page, lang, menu, request):
             user['index'] = counter
             counter = counter + 1
 
-        return render_template('admin.html', lang=lang, users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations(lang, 'Auth'))
+        return render_template('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations(lang, 'Auth'))
