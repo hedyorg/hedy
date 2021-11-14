@@ -633,7 +633,7 @@ class ConvertToPython_1(Transformer):
             return "print(answer)" #no arguments, just print answer
 
         argument = process_characters_needing_escape(args[0])
-        return "print('" + argument + "'+answer)"
+        return "print('" + argument + " '+answer)"
 
     def comment(self, args):
         return f"#{''.join(args)}"
