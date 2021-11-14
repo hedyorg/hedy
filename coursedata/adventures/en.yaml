@@ -207,6 +207,17 @@ adventures:
                     print 'I see all the animals looking at me!'
                     ```
                 start_code: ""
+            11:
+                story_text: |
+                    ## Story
+                    In this level you can use the quotation marks to save multiple words in a variable.
+
+                    ## Example Hedy code
+                    ```
+                    name is 'The Queen of England'
+                    print name ' was eating a piece of cake, when suddenly...'
+                    ```
+                start_code: ""
     songs:
         name: "Sing a song!"
         description: "Print a song"
@@ -332,6 +343,22 @@ adventures:
                             print 'NO MORE MONKEYS JUMPING ON THE BED!'
                     ```
                 start_code: ""
+#Issue1231            11:
+#Issue1231                story_text: |
+#Issue1231                    ## Sing a song!
+#Issue1231                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+#Issue1231                    ## Example Hedy code
+#Issue1231                    ```
+#Issue1231                    actions is 'clap your hands', 'stomp your feet', 'shout Hurray!'
+#Issue1231                    for action in actions
+#Issue1231                        for i in range 1 to 2
+#Issue1231                            print 'if youre happy and you know it'
+#Issue1231                            print action
+#Issue1231                        print 'if youre happy and you know it and you really want to show it'
+#Issue1231                        print 'if youre happy and you know it'
+#Issue1231                        print action
+#Issue1231                    ```
+#Issue1231                start_code: ""
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
@@ -892,6 +919,42 @@ adventures:
                                 print 'Thats wrong. The right answer is ' correct
                     ```
                 start_code: ""
+            11:
+                story_text: |
+                    ## Calculator
+                    Now you can make a calculator that works for decimal numbers.
+
+                    ## Example Hedy Code
+                    ```
+                    number1 is ask 'What is the first number?'
+                    number2 is ask 'What is the second number?'
+                    answer is number1 + number2
+                    print number1 ' plus ' number2 ' is ' answer
+                start_code: ""
+            12:
+                story_text: |
+                    ## Guess which number
+                    In this level you can programm the game 'Guess which number'
+
+                    ## Example Hedy code
+                    ```
+                    print 'Guess which number'
+                    numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number is numbers at random
+                    game is 'on'
+                    for i in range 1 to 10
+                        if game is 'on'
+                            guess is ask 'Which number do you think it is?'
+                            if guess > number
+                                print 'Lower!'
+                            if guess < number
+                                print 'Higher!'
+                            if guess is number
+                                print 'You win!'
+                                game is 'over'
+
+
+                start_code: ""
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
@@ -1169,6 +1232,27 @@ adventures:
                     print 'That will be ' price ' dollars, please!'
                     ```
                 start_code: ""
+            11:
+                story_text: |
+                    ## Restaurant
+                    From this level on you can use decimal numbers to make you menu more realistic.
+
+                    ## Example Hedy code
+                    ```
+                    price is 0
+                    food is ask 'What would you like to order?'
+                    drinks is ask 'What would you like to drink?'
+                    if food is 'hamburger'
+                        price is price + 6.50
+                    if food is 'pizza'
+                        price is price + 5.75
+                    if drinks is 'water'
+                        price is price + 1.20
+                    if drink is 'soda'
+                        price is price + 2.35
+                    print 'That will be ' price ' dollar, please'
+                    ```
+                start_code: ""
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
@@ -1381,6 +1465,19 @@ adventures:
                      print name 's greatest fear is ' fears at random
                  ```
               start_code: ""
+#Issue1231            11:
+#Issue1231                story_text: |
+#Issue1231                    ## Fortune Teller
+#Issue1231                    In this level you can make your fortunes multiple words. Like in this example below:
+#Issue1231
+#Issue1231                    ## Example Hedy Code
+#Issue1231                    ```
+#Issue1231                    fortunes is 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
+#Issue1231                    print 'I will take a look in my crystall ball for your future.'
+#Issue1231                    print 'I see... I see...'
+#Issue1231                    print fortunes at random
+#Issue1231                    ```
+#Issue1231                start_code: ""
     haunted:
         name: "Haunted House"
         description: "escape from the haunted house"
@@ -1528,6 +1625,111 @@ adventures:
                         print 'Great! You survived!'
                     ```
                 start_code: "print 'Escape from the haunted house!'"
+#Issue1231            12:
+#Issue1231                story_text: |
+#Issue1231                    ## Haunted House
+#Issue1231                    In this level you can use the < and > symbol to introduce lives to your game.
+#Issue1231
+#Issue1231                    ## Example Hedy code
+#Issue1231                    ```
+#Issue1231                    print 'Escape from the haunted house'
+#Issue1231                    lives is 3
+#Issue1231                    doors is 1, 2, 3
+#Issue1231                    monsters is 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+#Issue1231                    for i in range 1 to 10
+#Issue1231                        if lives > 0
+#Issue1231                            good_door is doors at random
+#Issue1231                            monster is monsters at random
+#Issue1231                            chosen_door is ask 'Which door do you choose?'
+#Issue1231                            if good_door is chosen_door
+#Issue1231                                print 'You have chosen the correct door'
+#Issue1231                            else
+#Issue1231                                print 'You see...' monster
+#Issue1231                                if monster is 'a sleeping 3 headed dog'
+#Issue1231                                    print 'Pffieuw.... Its asleep'
+#Issue1231                                else
+#Issue1231                                    print 'You lose one life'
+#Issue1231                                    lives is lives -1
+#Issue1231                        else
+#Issue1231                            print 'GAME OVER'
+#Issue1231                    ```
+#Issue1231                start_code: ""
+    piggybank:
+        name: Piggy Bank
+        description: Count your pocketmoney!
+        image: hauntedhouse.png
+        default_save_name: Piggy Bank
+        levels:
+            11:
+                story_text: |
+                    ## Piggy Bank
+                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
+
+                    ## Example Hedy Code
+                    ```
+                    print 'The digital piggy bank'
+                    wish is ask 'What would you like to buy?'
+                    price is ask 'How much does that cost?'
+                    saved is ask 'How much money have you saved already?'
+                    allowance is ask 'How much pocket money do you get per week?'
+                    to_save is price - saved
+                    weeks is to_save / allowance
+                    print 'You can buy a ' wish ' in ' weeks ' weeks.'
+                start_code: ""
+            12:
+                story_text: |
+                    ## Piggybank
+                    In this level you can let Hedy tell you if you have saved up enough money!
+
+                    ## Example Hedy Code
+                    ```
+                    money is ask 'How much money have you saved?'
+                    wish is ask 'How much money do you need?'
+                    allowance is ask 'How much pocket money do you get each week?'
+                    to_save is wish - money
+                    weeks is to_save / allowance
+                    if wish > money
+                        print 'You need to save up some more!'
+                        print 'Youll need ' weeks ' more weeks.'
+                    else
+                        print 'Great! You have enough'
+                        print 'Lets go shopping!'
+                    ```
+                start_code: ""
+    quizmaster:
+        name: Quizmaster
+        description: Make your own quiz!
+        image: hauntedhouse.png
+        default_save_name: Quizmaster
+        levels:
+            12:
+                story_text: |
+                    ## Make your own quiz
+                    In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
+                    You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
+
+                    ## Example Hedy code
+                    ```
+                    print 'Make your own quiz'
+                    points_a is 0
+                    points_b is 0
+                    print 'Question'
+                    print 'Answeroption A'
+                    print 'Answeroption B'
+                    answer is ask 'Which answer?'
+                    if answer is 'A'
+                        points_a is points_a + 1
+                    if answer is 'B'
+                        points_b is points_b + 1
+                    print 'End of the quiz!'
+                    print 'Lets see the results!'
+                    if points_a > points_b
+                        print 'You belong to the A club'
+                    if points_b > points_a
+                        print 'You belong to the B club'
+                    ```
+
+                start_code: ""
     next:
         name: "What's next?"
         description: "What's Next?"

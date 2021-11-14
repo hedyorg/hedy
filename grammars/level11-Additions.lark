@@ -3,6 +3,8 @@
 
 assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
 
+assign_list: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) ((_COMMA _SPACE|_COMMA) (text_in_quotes|NUMBER))+
+
 ?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
 
 invalid: "Supercalifragilisticexpialidocious" //should be deleted but this probably never matches anything :D

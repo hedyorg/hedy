@@ -1,4 +1,4 @@
-command: print | ask | turtle | assign_list | ask_no_quotes| assign | print_no_quotes | invalid //catch all at the end
+command: print | ask | turtle | assign_list | ask_no_quotes| assign | print_no_quotes | comment | invalid //catch all at the end
 
 // we need a separate rule for a var when used in a print argument
 // it parses the same, but should not be counted towards lookup table creation
@@ -13,7 +13,6 @@ _print_argument: (_SPACE | list_access | quoted_text | var_access)*
 
 //anything can be parsed except for spaces, and a newlines and commas for list separators
 textwithoutspaces: /([^\r\n, *+-\/]+)/ -> text
-index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 
 //anything can be parsed except for a newline and a comma for list separators
 //punctuation does not need to be treated differently anymore

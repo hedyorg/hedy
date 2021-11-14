@@ -39,4 +39,17 @@ class TestsLevel9(HedyTester):
       print(f'{shark} shark')""")
 
     self.assertEqual(expected, result.code)
+  def test_for_list_dutch(self):
+    code = textwrap.dedent("""\
+    dieren is hond, kat, papegaai
+    voor dier in dieren
+      drukaf dier""")
 
+    result = hedy.transpile(code, self.level, lang="nl")
+
+    expected = textwrap.dedent("""\
+    dieren = ['hond', 'kat', 'papegaai']
+    for dier in dieren:
+      print(f'{dier}')""")
+
+    self.assertEqual(expected, result.code)
