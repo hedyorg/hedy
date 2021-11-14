@@ -13,7 +13,6 @@ _print_argument: (_SPACE | list_access | quoted_text | var_access)*
 
 //anything can be parsed except for spaces, and a newlines and commas for list separators
 textwithoutspaces: /([^\r\n, *+-\/]+)/ -> text
-index : NUMBER //todo FH-June 21 : why does this need its own rule? can't it just be a token
 
 //anything can be parsed except for a newline and a comma for list separators
 //punctuation does not need to be treated differently anymore

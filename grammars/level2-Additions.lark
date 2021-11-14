@@ -1,10 +1,17 @@
-command: print | ask | turtle | assign | assign_list | invalid_space | invalid
+command: print | ask | turtle | assign | assign_list | invalid_space | ask_dep_2 | echo_dep_2 | invalid
 
 print: _PRINT (_SPACE (_SPACE| list_access | textwithoutspaces | punctuation)*)?
 ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
 
+//level 2 deprecated commands, for now manually added for better errors
+ask_dep_2: _ASK (_SPACE text_dep_2)?
+echo_dep_2: _ECHO (_SPACE text_dep_2)?
+//text is also changed and these commands of course need the old text
+text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
+
+
 //in level 2, forward may also depend on a variable
-turtle: _FORWARD (_SPACE (NUMBER | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
+turtle: _FORWARD (_SPACE (INT | list_access | textwithoutspaces))? -> forward | _TURN (_SPACE (list_access | textwithoutspaces))? -> turn
 assign: var _SPACE _IS _SPACE text -> assign
 assign_list: var _SPACE _IS _SPACE text_list ((_COMMA _SPACE|_COMMA) text_list)+
 
@@ -16,12 +23,12 @@ text: /([^\r\n,!?.]+)/ -> text
 text_ask: /([^\r\n!?.]+)/ -> text //as ask may contain commas (punctionation is still needed separately so they can be printed after vars)
 text_list: /([^\r\n,]+)/ -> text // list elements may contain punctionationm but not commas or course, these are separators
 
-index : DIGIT+
+//index : INT //todo FH-June 21 : why does this need its own rule? can't it just be a token
 
 punctuation : PUNCTUATION -> punctuation
 PUNCTUATION: _EXCLAMATION_MARK | _QUESTION_MARK | _PERIOD //uppercase places tokens in tree
 
-list_access: var _SPACE _AT _SPACE (index | random) -> list_access //todo: could be merged with list_access_var?
+list_access: var _SPACE _AT _SPACE (INT | random) -> list_access //todo: could be merged with list_access_var?
 
 var: NAME -> var
 

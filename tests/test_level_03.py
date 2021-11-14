@@ -96,7 +96,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=10,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
@@ -205,22 +205,7 @@ class TestsLevel3(HedyTester):
     print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
 
     self.assertEqual(expected, result.code)
-  def test_print_list_(self):
 
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    print dieren at 1""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{dieren[1]}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    self.assertEqual(HedyTester.run_code(result), "Kat")
   def test_print_list_var_random(self):
 
     code = textwrap.dedent("""\
@@ -275,7 +260,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
-      max_level=11,
+      max_level=10,
       test_name=self.name()
     )
 
