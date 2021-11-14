@@ -228,9 +228,15 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Code){
         console.log("success!");
-        var errormessageslist: string[] = ['Transpile_success1','Transpile_success2', 'Transpile_success3','Transpile_success4','Transpile_success5'];
-        var randomnum: number = Math.floor(Math.random() * 5);
+        var errormessageslist = 'Transpile_success';
+        var splitted = errormessageslist.split(",", 5);
+
+        //console.log(errormessageslist);
+        //console.log('Transpile_success');
+        console.log('7aas');
+        var randomnum: number = Math.floor(Math.random() * splitted.length);
         success.show(ErrorMessages[errormessageslist[randomnum]]);
+        //success.show(ErrorMessages['Transpile_success']);
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
