@@ -19,6 +19,8 @@ class TestsLevel1(HedyTester):
   # * negative tests should be
   # * situation_gives_exception
 
+
+
   # print tests
   def test_print(self):
     result = hedy.transpile("print Hallo welkom bij Hedy!", self.level)
