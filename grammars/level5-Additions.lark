@@ -5,4 +5,4 @@ assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
 ?atom: INT | var_access | unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
 unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> unsupported_number
 
-textwithoutspaces: /([^\n, *+\-\/]+)/ -> text //new cause in level 5 calculation elements need to be escaped too
+textwithoutspaces: /(?:[^\n, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 5 calculation elements need to be escaped too                
