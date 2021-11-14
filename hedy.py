@@ -635,8 +635,10 @@ class ConvertToPython_1(Transformer):
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
 
-    def ask(self, args):
+    def comment(self, args):
+        return f"#{''.join(args)}"
 
+    def ask(self, args):
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
@@ -1329,12 +1331,7 @@ class ConvertToPython_14(ConvertToPython_13):
 #         return ' and '.join(args)
 #     def orcondition(self, args):
 #         return ' or '.join(args)
-#
-# @hedy_transpiler(level=16)
-# class ConvertToPython_16(ConvertToPython_15):
-#     def comment(self, args):
-#         return f"# {args}"
-#
+
 
 #
 # @hedy_transpiler(level=19)
@@ -1578,16 +1575,19 @@ def preprocess_blocks(code, level):
     lines = code.split("\n")
     current_number_of_indents = 0
     previous_number_of_indents = 0
-    indent_size = None # we don't fix indent size but the first encounter sets it
+    indent_size = 4 # set at 4 for now
+    indent_size_adapted = False
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
         leading_spaces = find_indent_length(line)
 
         line_number += 1
-        #first encounter sets indent size for this program
-        if indent_size == None and leading_spaces > 0:
+
+        # first encounter sets indent size for this program
+        if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
+            indent_size_adapted = True
 
         # ignore whitespace-only lines
         if leading_spaces == len(line):

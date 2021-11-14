@@ -19,6 +19,8 @@ class TestsLevel1(HedyTester):
   # * negative tests should be
   # * situation_gives_exception
 
+
+
   # print tests
   def test_print(self):
     result = hedy.transpile("print Hallo welkom bij Hedy!", self.level)
@@ -87,6 +89,18 @@ class TestsLevel1(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+  def test_print_dutch(self):
+    result = hedy.transpile("drukaf Hallo welkom bij Hedy!", self.level, lang="nl")
+    expected = "print('Hallo welkom bij Hedy!')"
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+    self.assertEqual('Hallo welkom bij Hedy!', HedyTester.run_code(result))
+  def test_print_dutch_error(self):
+    code = textwrap.dedent("""print Hallo welkom bij Hedy!""")
+
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
+      result = hedy.transpile(code, self.level, lang="nl")
+    self.assertEqual('Parse', context.exception.error_code)
 
   # ask tests
   def test_ask(self):
@@ -164,6 +178,17 @@ class TestsLevel1(HedyTester):
     t.left(90)""")
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
+
+  # comment test
+  def test_comment(self):
+    code = "# geen commentaar"
+    expected = "# geen commentaar"
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   # combined keywords tests
   def test_multiple_forward_without_arguments(self):
