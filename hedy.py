@@ -1516,16 +1516,19 @@ def preprocess_blocks(code, level):
     lines = code.split("\n")
     current_number_of_indents = 0
     previous_number_of_indents = 0
-    indent_size = None # we don't fix indent size but the first encounter sets it
+    indent_size = 4 # set at 4 for now
+    indent_size_adapted = False
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
         leading_spaces = find_indent_length(line)
 
         line_number += 1
-        #first encounter sets indent size for this program
-        if indent_size == None and leading_spaces > 0:
+
+        # first encounter sets indent size for this program
+        if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
+            indent_size_adapted = True
 
         #calculate nuber of indents if possible
         if indent_size != None:
@@ -1544,7 +1547,7 @@ def preprocess_blocks(code, level):
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=4)
+                                                         indent_size=indent_size)
 
         if needs_indentation(line):
             next_line_needs_indentation = True
