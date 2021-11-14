@@ -638,8 +638,10 @@ class ConvertToPython_1(Transformer):
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + "'+answer)"
 
-    def ask(self, args):
+    def comment(self, args):
+        return f"#{''.join(args)}"
 
+    def ask(self, args):
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
@@ -1332,12 +1334,7 @@ class ConvertToPython_14(ConvertToPython_13):
 #         return ' and '.join(args)
 #     def orcondition(self, args):
 #         return ' or '.join(args)
-#
-# @hedy_transpiler(level=16)
-# class ConvertToPython_16(ConvertToPython_15):
-#     def comment(self, args):
-#         return f"# {args}"
-#
+
 
 #
 # @hedy_transpiler(level=19)
