@@ -521,14 +521,20 @@ def get_quiz(level_source, question_nr, attempt):
     question = quiz.get_question(quiz_data, question_nr)
     question_obj = quiz.question_options_for(question)
 
-    chosen_option = 'X' if session.get('chosenOption') is None else session.get('chosenOption')
+    # Read from session. Don't remove yet: If the user refreshes the
+    # page here, we want to keep this same information in place (otherwise
+    # if we removed from the session here it would be gone on page refresh).
+    chosen_option = session.get('chosenOption', None)
+    wrong_answer_hint = session.get('wrong_answer_hint', None)
+
     return render_template('quiz_question.html',
                            quiz=quiz_data,
                            level_source=level_source,
                            questionStatus=questionStatus,
                            questions=quiz_data['questions'],
                            question_options=question_obj,
-                           chosen_option = chosen_option,
+                           chosen_option=chosen_option,
+                           wrong_answer_hint=wrong_answer_hint,
                            question=question,
                            question_nr=question_nr,
                            correct=session.get('correct_answer'),
@@ -588,9 +594,15 @@ def submit_answer(level_source, question_nr, attempt):
 
     # Convert the corresponding chosen option to the index of an option
     question = quiz.get_question(quiz_data, q_nr)
-    session['chosenOption'] = chosen_option
 
     is_correct = quiz.is_correct_answer(question, chosen_option)
+
+    session['chosenOption'] = chosen_option
+    if not is_correct:
+        session['wrong_answer_hint'] = quiz.get_hint(question, chosen_option)
+    else:
+        # Correct answer -- make sure there is no hint on the next display page
+        session.pop('wrong_answer_hint', None)
 
     # Store the answer in the database. If we don't have a username,
     # use the session ID as a username.
@@ -615,7 +627,7 @@ def submit_answer(level_source, question_nr, attempt):
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
 
     # Redirect to the display page to try again
-    return redirect(url_for('get_quiz', chosen_option= chosen_option, level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
+    return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
 
 @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
 def quiz_feedback(level_source, question_nr):
@@ -631,7 +643,13 @@ def quiz_feedback(level_source, question_nr):
         return 'No quiz yaml file found for this level', 404
 
     question = quiz.get_question(quiz_data, question_nr)
-    chosen_option = session['chosenOption']
+
+
+    # Read from session and remove the variables from it (this is the
+    # feedback page, the previous answers will never apply anymore).
+    chosen_option = session.pop('chosenOption', None)
+    wrong_answer_hint = session.pop('wrong_answer_hint', None)
+
     answer_was_correct = quiz.is_correct_answer(question, chosen_option)
 
     index_option = quiz.index_from_letter(chosen_option)
@@ -639,8 +657,6 @@ def quiz_feedback(level_source, question_nr):
 
     question_options = quiz.question_options_for(question)
 
-    #Reset the chosenOption session variable after the feedback page
-    session['chosenOption'] = None
     return render_template('feedback.html', quiz=quiz_data, question=question,
                            questions=quiz_data['questions'],
                            question_options=question_options,
@@ -648,6 +664,7 @@ def quiz_feedback(level_source, question_nr):
                            question_nr=question_nr,
                            correct=session.get('correct_answer'),
                            answer_was_correct=answer_was_correct,
+                           wrong_answer_hint=wrong_answer_hint,
                            index_option=index_option,
                            correct_option=correct_option,
                            menu=render_main_menu('adventures'), lang=lang,
