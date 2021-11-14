@@ -31,11 +31,8 @@ turtle: _FORWARD (_SPACE (text | NUMBER))? -> forward | _TURN (_SPACE text)? -> 
 invalid_space: _SPACE text?
 invalid: textwithoutspaces text?
 
-<<<<<<< Updated upstream
-=======
 comment: _HASH /([^\n]+)/
 
->>>>>>> Stashed changes
 _EOL: "\r"?"\n"
 
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
