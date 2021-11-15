@@ -1,7 +1,7 @@
 1:
     intro_text: |
         Willkommen bei Hedy! In Level 1 kannst du die Befehle `print`, `ask` und `echo` verwenden. 
-        
+
         Hedy benutzt englische Wörter für Befehle wie die meisten Programmiersprachen. `print` bedeutet drucken oder auf den Bildschirm ausgeben, `ask` bedeutet fragen und `echo` bedeutet wiederholen.
 
         Auf der linken Seite deines Bildschirms befinden sich alle Befehle des Level 1.
@@ -237,6 +237,48 @@
             else
                 print 'Ups!'
                 print 'Die Antwort is 10'
+8:
+    start_code: |-
+        repeat 3 times
+            food is ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+    intro_text: |
+        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
+        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+        Give it a try!
+
+        ## Example Hedy code
+        ```
+        repeat 3 times
+            food is ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+        ```
+
+    commands:
+    -   name: "`if` with multiple lines"
+        explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
+        example: "Example: answer is ask 'What is 20 plus 20?'"
+        demo_code: |-
+            answer is ask 'What is 20 plus 20?'
+            if answer is 20
+                print 'Well done!!'
+                print 'The answer is indeed' answer
+            else
+                print 'Wrong'
+                print 'The answer is 20'
+    -   name: "`repeat` and turtle"
+        explanation: "Repeat multiple lines"
+        example: "Example: create a square"
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
 9:
     start_code: |-
         animals is dog, cat, blobfish
@@ -282,7 +324,205 @@
             for i in range 1 to 10
               print i
             print 'Bereit oder nicht, hier komme ich!'
-#10:
+11:
+    start_code: |-
+        print 'decimal numbers now need to use a dot'
+        print 2.5 + 2.5
+    intro_text: |
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+
+        For this level on you will also have to use quotation marks when storing a text with `is`:
+
+        ```
+        name is 'Hedy'
+        print 'Hello ' name
+        ```
+
+        For numbers, you do not use quotation marks in the `is`:
+        ```
+        score is 25
+        print 'You got ' score
+        ```
+# Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
+    # jaja hermans, ik ben al bezig!
+    commands:
+    -   name: "float directly"
+        explanation: "Calculation with decimals"
+        example: "print 2.5 + 2.5"
+        demo_code: |
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print 2.5 + 2.5
+    -   name: "float in var"
+        explanation: "Storing a calculation with decimals"
+        example: "antwoord is 2.5 + 2.5"
+        demo_code: |
+            answer is 2.5 + 2.5
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print answer
+
+12:
+    start_code: |-
+        alter is ask 'Wie alt bist du?'
+        if alter < 13
+            print 'Du bist jünger als ich!'
+        else
+            print 'Du bist älter als ich!'
+    intro_text: |-
+        Wir lernen weitere neue Elemente kennen!
+        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
+        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
+        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
+    commands:
+    -   name: "Kleiner"
+        explanation: |-
+            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+        example: "alter < 13"
+        demo_code: |-
+            alter is ask 'Wie alt bist du?'
+            if alter < 13
+                print 'Du bist jünger als ich!'
+    -   name: "Größer"
+        explanation: |-
+            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+        example: "alter > 13"
+        demo_code: |-
+            alter is ask 'Wie alt bist du?'
+            if alter > 13
+                print 'Du bist älter als ich!'
+13:
+    start_code: |-
+        antwort is 0
+        while antwort != 25:
+            antwort is ask 'Wieviel ist 5 mal 5?'
+            print 'Das ist die richtge Antwort!'
+    intro_text: |-
+        Wir werden eine neue Schleife lernen, die `while`-Schleife!
+        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
+        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
+        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
+    commands:
+    -   name: "while"
+        explanation: "Wir können die `while`-Schleife verwenden."
+        example: "while richtige_antwort is False"
+        demo_code: |-
+            antwort is 0
+            while antwort != 25:
+                antwort is ask 'Wieviel ist 5 mal 5?'
+                print 'Das ist die richtge Antwort!'
+    -   name: "while mit Ungleichungen"
+        explanation: |-
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
+            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
+            Wir machen das hier mit `zaehler is zaehler + 1`.
+        example: "while zaehler < 3"
+        demo_code: |-
+            zaehler is 1
+            while zaehler < 3
+                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
+                zaehler is zaehler + 1
+            print 'Wir sind fertig!'
+14:
+    start_code: |-
+        fruechte is ['Apfel', 'Banane', 'Kirsche']
+        print fruechte
+    intro_text: |-
+        Wir werden eckige Klammern um Listen setzen!
+        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
+    commands:
+    -   explanation: |-
+            Wir werden eckige Klammern um Listen setzen!
+            Wir müssen auch `'` um Elemente in Listen setzen.
+        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            print fruechte
+    -   name: "Nimm ein Element aus einer Liste"
+        explanation: |-
+            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
+            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
+        example: "erste_frucht is fruechte[1]"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            erste_frucht is fruechte[1]
+            print erste_frucht
+    -   name: "Nimm ein zufälliges Element aus einer Liste"
+        explanation: |-
+            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
+            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
+        example: "zufaellige_frucht is fruechte[random]"
+        demo_code: |-
+            fruechte is ['Apfel', 'Banane', 'Kirsche']
+            zufaellige_frucht is fruechte[random]
+            print zufaellige_frucht
+
+#15:
+#    start_code: |-
+#        du_bist_noch_hier is False
+#        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
+#        if bist_du_noch_hier is ja:
+#            du_bist_noch_hier is True
+#        antwort is input('Wieviel ist 5*5')
+#        if du_bist_noch_hier is True and antwort is 25:
+#            print('Du hast ja gesagt und die richtige Antwort gegeben!')
+#    intro_text: |-
+#        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
+#        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
+#        Du kannst auch `oder` verwenden.
+#        Dann muss nur eine Aussage richtig sein.
+#    commands:
+#    -   name: "`and`"
+#        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
+#        example: "if 3+2 is 5 and 2+2 is 4"
+#        demo_code: |-
+#            antwort1 is input('Was ergibt 3+2?')
+#            antwort2 is input('Was ergibt 2+2?')
+#            if antwort1 is 5 and antwort2 is 4:
+#                print('Beide Antworten sind richtig!')
+#            else:
+#                print('Mindestens eine Antwort ist falsch.')
+#    -   name: "`or`"
+#        explanation: |-
+#            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
+#            Wenn beide richtig sind, ist es auch in Ordnung.
+#        example: "if 3+2 is 5 or 2+2 is 4"
+#        demo_code: |-
+#            antwort1 is input('Was ergibt 3+2?')
+#            antwort2 is input('Was ergibt 2+2?')
+#            if antwort1 is 5 or antwort2 is 4:
+#                print('Mindestens eine Antwort ist richtig!')
+#            else:
+#                print('Beide Antworten sind falsch.')
+#16:
+#    start_code: |-
+#        # Dieses Programm wird ein paar mathematische Fragen stellen
+#        for i in range(1,10):
+#            # Wir werden die Multiplikationstabelle der 5 abfragen
+#            antwort is input('Was ergibt ' i ' mal 5?')
+#            # Wir prüfen ob die Antwort mit unserer übereinstimmt
+#            korrekte_antwort is i * 5
+#            if antwort is korrekte_antwort:
+#                print(antwort ' ist korrekt!')
+#            else:
+#                print('Das ist falsch. Die richtige Antwort lautet: ' i*5)
+#    intro_text: |-
+#        Wenn du größere Programme erstellst, brauchst du einen Weg, um dir zu merken, was jedes Codestück tut.
+#        Wir verwenden dafür Kommentare.
+#        Ein Kommentar sieht folgendermaßen aus:\n ` # Dies ist ein Kommentar`.
+#        Alles nach dem `#` wird für den Code unsichtbar.
+#    commands:
+#    -   name: "Kommentar"
+#        explanation: "Wir können Kommentare platzieren, wo immer wir wollen."
+#        example: "# Dies ist ein Kommentar"
+#        demo_code: |-
+#            # Dieses Programm gibt Hallo! aus
+#            # Es ist in Hedy erstellt worden
+#            # Es macht nichts außer Hallo! zu auszugeben
+#            print('Hallo!')
+#colon:
 #    start_code: |-
 #        for i in range 1 to 10:
 #            print i
@@ -318,247 +558,3 @@
 #                print 'a ist 2'
 #            else:
 #                print 'a ist nicht 1 oder 2'
-#11:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'wir sind in Runde: ' i ' bei Nummer: ' j
-#    intro_text: |-
-#        Ab jetzt können wir eine Schleife öfters wiederholen.
-#        Im Beispiel zählen wir bis 5 und machen das 3 Mal.
-#        Wir machen also 3 Runden und zählen jedes Mal bis 5.
-#    commands:
-#    -   explanation: "Dies ist ein Beispiel der `for`-Anweisung."
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'wir sind in Runde: ' i ' bei Nummer: ' j
-#    -   explanation: "Dasselbe können wir mit `if`-Anweisungen machen"
-#        demo_code: |-
-#            farbe is blau
-#            farbezwei is gelb
-#            if farbe is blau:
-#                if farbezwei is gelb:
-#                    print 'Zusammen ergeben wir grün!'
-#12:
-#    start_code: |-
-#        alter is input('Wie alt bist du?')
-#        print('Also hast du bis jetzt diese Geburtstage gefeiert: ')
-#        for i in range(0,alter):
-#            print(i)
-#    intro_text: |-
-#        Statt `ask` benutzen wir jetzt den `input`-Befehl.
-#        Außerdem benutzen wir setzen wir jetzt immer runde Klammern, wenn wir `print`, `input` oder `for` verwenden.
-#    commands:
-#    -   explanation: "Wir setzen jetzt Klammern hinter den `print`-Befehl!"
-#        example: "print('Hallo Welt')"
-#        demo_code: "print('Hallo Welt')"
-#    -   explanation: "Wir ersetzen `ask` und nennen es jetzt `input`. Außerdem verwenden wir Klammern."
-#        example: "name is input('Wie heißt du?')"
-#        demo_code: |-
-#            name is input('Wie heißt du?')
-#            print('Dein Name ist also ' name)
-#    -   explanation: "Wir setzen nun Klammern um die Zahlen in der `for`-Schleife."
-#        example: "for i in range(0,10):"
-#        demo_code: |-
-#            for i in range(0,10):
-#                print(i)
-#            print('Bereit oder nicht, hier komme ich!')
-#13:
-#    start_code: |-
-#        fruechte is ['Apfel', 'Banane', 'Kirsche']
-#        print(fruechte)
-#    intro_text: |-
-#        Wir werden eckige Klammern um Listen setzen!
-#        Außerdem müssen wir jetzt einfache Anführungszeichen `'` um Elemente in Listen setzen.
-#    commands:
-#    -   explanation: |-
-#            Wir werden eckige Klammern um Listen setzen!
-#            Wir müssen auch `'` um Elemente in Listen setzen.
-#        example: "fruechte is ['Apfel', 'Banane', 'Kirsche']"
-#        demo_code: |-
-#            fruechte is ['Apfel', 'Banane', 'Kirsche']
-#            print(fruechte)
-#    -   name: "Nimm ein Element aus einer Liste"
-#        explanation: |-
-#            Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
-#            Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-#        example: "erste_frucht is fruechte[1]"
-#        demo_code: |-
-#            fruechte is ['Apfel', 'Banane', 'Kirsche']
-#            erste_frucht is fruechte[1]
-#            print(erste_frucht)
-#    -   name: "Nimm ein zufälliges Element aus einer Liste"
-#        explanation: |-
-#            Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
-#            Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-#        example: "zufaellige_frucht is fruechte[random]"
-#        demo_code: |-
-#            fruechte is ['Apfel', 'Banane', 'Kirsche']
-#            zufaellige_frucht is fruechte[random]
-#            print(zufaellige_frucht)
-#14:
-#    start_code: |-
-#        du_bist_noch_hier is False
-#        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
-#        if bist_du_noch_hier is ja:
-#            du_bist_noch_hier is True
-#        if du_bist_noch_hier is True:
-#            print('Hallo!')
-#        if du_bist_noch_hier is False:
-#            print('Tschüss!')
-#    intro_text: |-
-#        Ab jetzt kannst du Variablen als wahr (`True`) oder falsch (`False`) definieren.
-#        Du kannst dies zum Beispiel verwenden, um abzuspeichern, ob eine Antwort wahr oder falsch war.
-#    commands:
-#    -   name: "Beispiel"
-#        explanation: |-
-#            In diesem Beispiel verwenden wir `True` und `False`, um die Antwort auf eine Frage festzuhalten.
-#            Du kannst 5 Mal antworten.
-#            Wenn die Antwort richtig ist, wird `richtige_antwort` `True` sein.
-#        example: "`richtige_antwort` ist `False`"
-#        demo_code: |-
-#          for i in range(1,5):
-#              richtige_antwort is False
-#              antwort is input('Wieviel ist 5*5')
-#              if antwort is 25:
-#                  richtige_antwort is True
-#              else:
-#                  richtige_antwort is False
-#              if richtige_antwort is True:
-#                  print('Das ist richtig!')
-#              if richtige_antwort is False:
-#                  print('Das ist leider falsch! Du hast noch ' 5-i ' Versuche übrig.')
-#15:
-#    start_code: |-
-#        du_bist_noch_hier is False
-#        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
-#        if bist_du_noch_hier is ja:
-#            du_bist_noch_hier is True
-#        antwort is input('Wieviel ist 5*5')
-#        if du_bist_noch_hier is True and antwort is 25:
-#            print('Du hast ja gesagt und die richtige Antwort gegeben!')
-#    intro_text: |-
-#        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
-#        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
-#        Du kannst auch `oder` verwenden.
-#        Dann muss nur eine Aussage richtig sein.
-#    commands:
-#    -   name: "`and`"
-#        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#          antwort1 is input('Was ergibt 3+2?')
-#          antwort2 is input('Was ergibt 2+2?')
-#          if antwort1 is 5 and antwort2 is 4:
-#              print('Beide Antworten sind richtig!')
-#          else:
-#              print('Mindestens eine Antwort ist falsch.')
-#    -   name: "`or`"
-#        explanation: |-
-#            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
-#            Wenn beide richtig sind, ist es auch in Ordnung.
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#          antwort1 is input('Was ergibt 3+2?')
-#          antwort2 is input('Was ergibt 2+2?')
-#          if antwort1 is 5 or antwort2 is 4:
-#              print('Mindestens eine Antwort ist richtig!')
-#          else:
-#              print('Beide Antworten sind falsch.')
-#16:
-#    start_code: |-
-#        # Dieses Programm wird ein paar mathematische Fragen stellen
-#        for i in range(1,10):
-#            # Wir werden die Multiplikationstabelle der 5 abfragen
-#            antwort is input('Was ergibt ' i ' mal 5?')
-#            # Wir prüfen ob die Antwort mit unserer übereinstimmt
-#            korrekte_antwort is i * 5
-#            if antwort is korrekte_antwort:
-#                print(antwort ' ist korrekt!')
-#            else:
-#                print('Das ist falsch. Die richtige Antwort lautet: ' i*5)
-#    intro_text: |-
-#        Wenn du größere Programme erstellst, brauchst du einen Weg, um dir zu merken, was jedes Codestück tut.
-#        Wir verwenden dafür Kommentare.
-#        Ein Kommentar sieht folgendermaßen aus:\n ` # Dies ist ein Kommentar`.
-#        Alles nach dem `#` wird für den Code unsichtbar.
-#    commands:
-#    -   name: "Kommentar"
-#        explanation: "Wir können Kommentare platzieren, wo immer wir wollen."
-#        example: "# Dies ist ein Kommentar"
-#        demo_code: |-
-#            # Dieses Programm gibt Hallo! aus
-#            # Es ist in Hedy erstellt worden
-#            # Es macht nichts außer Hallo! zu auszugeben
-#            print('Hallo!')
-#17:
-#    start_code: |-
-#        alter is input('Wie alt bist du?')
-#        if alter < 13:
-#            print('Du bist jünger als ich!')
-#        elif alter > 13:
-#            print('Du bist älter als ich!')
-#    intro_text: |-
-#        Wir lernen weitere neue Elemente kennen!
-#        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
-#        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
-#        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
-#    commands:
-#    -   name: "Kleiner"
-#        explanation: |-
-#            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
-#            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
-#        example: "alter < 12"
-#        demo_code: |-
-#            alter is input('Wie alt bist du?')
-#            if alter < 13:
-#                print('Du bist jünger als ich!')
-#    -   name: "Größer"
-#        explanation: |-
-#            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
-#            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
-#        example: "alter > 12"
-#        demo_code: |-
-#            alter is input('Wie alt bist du?')
-#            if alter > 13:
-#                print('Du bist älter als ich!')
-#18:
-#    start_code: |-
-#        richtige_antwort is False
-#        # wir fahren fort bis die richtige Antwort gegeben wurde!
-#        while richtige_antwort is False:
-#            antwort is input('Wieviel ist 5 mal 5?')
-#            if antwort is 25:
-#                richtige_antwort is True
-#                print('Das ist die richtge Antwort!')
-#    intro_text: |-
-#        Wir werden eine neue Schleife lernen, die `while`-Schleife!
-#        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
-#        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
-#        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
-#    commands:
-#    -   name: "Boolesches while"
-#        explanation: "Wir können die `while`-Schleife mit `True` und `False` verwenden."
-#        example: "while richtige_antwort is False"
-#        demo_code: |-
-#            richtige_antwort is False
-#            # wir fahren fort bis die richtige Antwort gegeben wurde!
-#            while richtige_antwort is False:
-#                antwort is input('Wieviel ist 5 mal 5?')
-#                if antwort is 25:
-#                    richtige_antwort is True
-#                    print('Das ist die richtge Antwort!')
-#    -   name: "while mit Ungleichungen"
-#        explanation: |-
-#            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
-#            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-#            Wir machen das hier mit `zaehler is zaehler + 1`.
-#        example: "while zaehler < 3"
-#        demo_code: |-
-#            zaehler is 1
-#            # wir fahren fort bis der Zählerstand 3 ist!
-#            while zaehler < 3:
-#                print('Wir machen dies noch ' 3 - zaehler ' mal.')
-#                zaehler is zaehler + 1
-#            print('Wir sind fertig!')

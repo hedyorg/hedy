@@ -34,10 +34,10 @@
         <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}"><button class="green-btn">{{ texts.open }}</button></a>
         <button class="red-btn" onclick="hedyApp.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</button>
           {% if program.public %}
-            <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.unshare_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{ lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</button>
+            <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.unshare_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{ g.lang }}', '{{program.id}}', false, true)})">{{ texts.unshare}}</button>
             <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</button>
           {% else %}
-              <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.share_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</button>
+              <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.share_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{g.lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</button>
           {% endif %}
     </div>
     <br>
@@ -53,7 +53,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src="/client_messages.js?lang={{ lang }}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="/client_messages.js?lang={{ g.lang }}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script>window.State = {lang: "{{ lang }}", level: "{{ level }}"}</script>
+  <script>window.State = {lang: "{{ g.lang }}", level: "{{ level }}"}</script>
 {% endblock %}

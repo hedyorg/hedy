@@ -25,7 +25,7 @@
         demo_code: |-
             ask Wat is dyn favorite kleur?
             echo Dus dyn favorite kleur is...
-    -   name: "foarút" 
+    -   name: "foarút"
         explanation: "Een line tekenje mei `forward`."
         example: "Foarbyld: forward 100"
         demo_code: "forward 100"
@@ -279,6 +279,48 @@
             repeat 4 times
                 turn 90
                 forward 50
+8:
+    start_code: |-
+        repeat 3 times
+            food is ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+    intro_text: |
+        In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
+        In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+        Give it a try!
+
+        ## Example Hedy code
+        ```
+        repeat 3 times
+            food is ask 'What do you want?'
+            if food is 'pizza'
+                print 'nice!'
+            else
+                print 'pizza is better'
+        ```
+
+    commands:
+    -   name: "`if` with multiple lines"
+        explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
+        example: "Example: answer is ask 'What is 20 plus 20?'"
+        demo_code: |-
+            answer is ask 'What is 20 plus 20?'
+            if answer is 20
+                print 'Well done!!'
+                print 'The answer is indeed' answer
+            else
+                print 'Wrong'
+                print 'The answer is 20'
+    -   name: "`repeat` and turtle"
+        explanation: "Repeat multiple lines"
+        example: "Example: create a square"
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
 9:
     start_code: |-
         dieren is hond, kat, papegaai
@@ -323,146 +365,121 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-#10:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: |-
-#        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
-#        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
-#    commands:
-#    -   name: "for met :"
-#        explanation: "By `for` moatst no in `:` efteroan sette!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moatte itselde dwaan mei al ús `if`"
-#        example: "if kleur is grien:"
-#        demo_code: |-
-#            kleur is grien
-#            if kleur is grien:
-#                print 'De kleur is grien'
-#            else:
-#                print 'De kleur is net grien'
-#    -   name: "(Optioneel) elif"
-#        explanation: |-
-#            Meist ek in nij kommando brûke: `elif`.
-#            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-#            en als dy net wier is dan giest nei de `else`.
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is net 1 of 2'
-#11:
-#    start_code: |-
-#        for i in range 1 to 3:
-#            for j in range 1 to 5:
-#                print 'We sitte noch yn ronde: ' i ' en de tel is: ' j
-#    intro_text: "Fan no ôf meite we ek in luske faker útfiere. In it foarbyld telle we 3 kear oant 5. Dus we dogge 3 rûntsjes en tellen eltse kear oant 5"
-#    commands:
-#    -   name: "`for` ûnder inoar"
-#        explanation: "Dit is in foarbyld fan `for`-luskes ûnder/yn inoar sette"
-#        demo_code: |-
-#            for i in range 1 to 3:
-#                for j in range 1 to 5:
-#                    print 'we sitte no yn ronde: ' i ' en de tel is: ' j
-#    -   name: "`if` ûnder inoar"
-#        explanation: "We kinne itselde dwaan mei `if` kommando's"
-#        demo_code: |-
-#            kleur is blauw
-#            kleurtwa is giel
-#            if kleur is blauw:
-#                if kleurtwa is giel:
-#                    print 'Tegearre is dit grien!'
-#12:
-#    start_code: |-
-#        leeftyd is input('Hoe âld bisto?')
-#        print('Do hast safolle jierdeien hân:')
-#        for i in range(0, leeftyd):
-#            print(i)
-#    intro_text: "We sille no rûne heakjes tafoegje en `ask` oanpasse! `ask` neame we no input! By `print`, `input` en `for` sille we no heakjes sette!"
-#    commands:
-#    -   name: "Print"
-#        explanation: "We gaan nu haakjes om print heen zetten!"
-#        example: "Foarbyld: print('Oant moarn')"
-#        demo_code: "print('Oant moarn')"
-#    -   name: "`ask` wurdt `input`!"
-#        explanation: "We ferfange `ask` en neame it no `input`, ek sette we der heakjes omhinne"
-#        example: "Foarbyld: namme is input('Wat is dyn namme?')"
-#        demo_code: |-
-#            namme is input('Wat is dyn namme?')
-#            print('Dus jij heet ' namme)
-#    -   name: "`For` mei heakjes"
-#        explanation: "We sille no ynstee fan `for i in range 1 to 10:`, heakjes sette om de getallen: `for i in range(0, 10):`"
-#        example: "Foarbyld: for i in range(0, 10):"
-#        demo_code: |-
-#            for i in range(0, 10):
-#                print(i)
-#            print('Wie niet weg is is gezien')
-#13:
-#    start_code: |-
-#        fruit is ['apel', 'banaan', 'kjers']
-#        print(fruit)
-#    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
-#    commands:
-#    -   name: "Heakjes om listen"
-#        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
-#        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
-#        demo_code: |-
-#            fruit is ['apel', 'banaan', 'kjers']
-#            print(fruit)
-#    -   name: "Pak eat út in list"
-#        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
-#        example: "Foarbyld: earstefruit is fruit[1]"
-#        demo_code: |-
-#            fruit is ['apel', 'banaan', 'kjers']
-#            earstefruit is fruit[1]
-#            print(earstefruit)
-#    -   name: "Nim in willekeurich ding út 'e list"
-#        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
-#        example: "Foarbyld: randomfruit is fruit[random]"
-#        demo_code: |-
-#            fruit is ['apel', 'banaan', 'kjers']
-#            randomfruit is fruit[random]
-#            print(randomfruit)
-#14:
-#    start_code: |-
-#        do_bist_der_noch is False
-#        bist_der_noch is input('ben je er noch? ja of nee?')
-#        if bist_der_noch is ja:
-#            do_bist_der_noch is True
-#        if do_bist_der_noch is True:
-#            print('Hallo!')
-#        if do_bist_der_noch is False:
-#            print('Doei!')
-#    intro_text: |-
-#        Wy sille it no ha oer 'wier' en 'net wier'. Kinst in fariabele op 'wier' sette (`True`) en op 'net wier': `False`.
-#        Dit kinst bygelyks brûke om by te hâlden oftst eat al dien hast.
-#    commands:
-#      - name: "Foarbyld"
-#        explanation: "Hjir in foarbyldsje fan in fraach om in rekkensom te antwurdzjen. Meist 5 kear in antwurd jaan. As it goed is, makket it goed_antwurd `True` (dus wier)"
-#        example: "goed_antwurd is `False`"
-#        demo_code: |-
-#            for i in range(0, 5):
-#                goed_antwurd is False
-#                antwurd is input('Wat is 5*5')
-#                if antwurd is 25:
-#                    goed_antwurd is True
-#                else:
-#                    goed_antwurd is False
-#                if goed_antwurd is True:
-#                    print('Dat is goed!')
-#                if goed_antwurd is False:
-#                    print('Dat is fout! Meist it noch ' 5-i ' kear besykje')
+11:
+    start_code: |-
+        print 'decimal numbers now need to use a dot'
+        print 2.5 + 2.5
+    intro_text: |
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+
+        For this level on you will also have to use quotation marks when storing a text with `is`:
+
+        ```
+        name is 'Hedy'
+        print 'Hello ' name
+        ```
+
+        For numbers, you do not use quotation marks in the `is`:
+        ```
+        score is 25
+        print 'You got ' score
+        ```
+# Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
+    # jaja hermans, ik ben al bezig!
+    commands:
+    -   name: "float directly"
+        explanation: "Calculation with decimals"
+        example: "print 2.5 + 2.5"
+        demo_code: |
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print 2.5 + 2.5
+    -   name: "float in var"
+        explanation: "Storing a calculation with decimals"
+        example: "antwoord is 2.5 + 2.5"
+        demo_code: |
+            answer is 2.5 + 2.5
+            print 'Calculate away!'
+            print 'Two and a half plus two and a half is...'
+            print answer
+
+12:
+    start_code: |-
+        leeftyd is ask 'Hoe âld bisto?'
+        if leeftyd < 13
+            print 'Dan bist jonger as ik!'
+        else
+            print 'Dan bist âlder as ik!'
+    intro_text: |-
+        We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal
+        lytser is as it twadde lykas `4 < 5`. De `>` sjocht oft eat grutter is as it twadde getal, lykas `6 > 5`.
+    commands:
+    -   name: "Lytser"
+        explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+        example: "Foarbyld: leeftyd < 12"
+        demo_code: |-
+            leeftyd is ask 'Hoe âld bisto?'
+            if leeftyd < 13
+                print 'Dan bist jonger as ik!'
+    -   name: "Grutter"
+        explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+        example: "Foarbyld: leeftyd > 12"
+        demo_code: |-
+            leeftyd is ask 'Hoe âld bisto?'
+            if leeftyd < 13
+                print 'Dan bist âlder as ik!'
+13:
+    start_code: |-
+        antwoord is 0
+        while antwoord != 25
+            antwurd is ask 'Wat is 5 kear 5?'
+        print 'Dat wie it goede antwurd!'
+    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
+    commands:
+    -   name: "while"
+        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
+        example: "Foarbyld: while goed_antwurd is False"
+        demo_code: |-
+            antwoord is 0
+            while antwoord != 25
+                antwurd is ask 'Wat is 5 kear 5?'
+            print 'Dat wie it goede antwurd!'
+    -   name: "Smaller while"
+        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
+        example: "Foarbyld: while tel < 3"
+        demo_code: |-
+            tel is 1
+            while tel < 3
+                print 'Dit is de ' tel 'e kear'
+                tel is tel + 1
+            print 'We zijn klaar'
+
+14:
+    start_code: |-
+        fruit is ['apel', 'banaan', 'kjers']
+        print fruit 
+    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
+    commands:
+    -   name: "Heakjes om listen"
+        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
+        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            print fruit 
+    -   name: "Pak eat út in list"
+        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
+        example: "Foarbyld: earstefruit is fruit[1]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            earstefruit is fruit[1]
+            print earstefruit 
+    -   name: "Nim in willekeurich ding út 'e list"
+        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
+        example: "Foarbyld: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            randomfruit is fruit[random]
+            print randomfruit 
 #15:
 #    start_code: |-
 #        do_bist_der_noch is False
@@ -521,79 +538,6 @@
 #            # It is gemaakt in Hedy
 #            # It docht eins neat fierder!
 #            print('goeie')
-#17:
-#    start_code: |-
-#        leeftyd is input('Hoe âld bisto?')
-#        if leeftyd < 13:
-#            print('Dan bist jonger as ik!')
-#        elif leeftyd > 13:
-#            print('Dan bist âlder as ik!')
-#    intro_text: |-
-#        We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal
-#        lytser is as it twadde lykas `4 < 5`. De `>` sjocht oft eat grutter is as it twadde getal, lykas `6 > 5`.
-#    commands:
-#    -   name: "Lytser"
-#        explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
-#        example: "Foarbyld: leeftyd < 12"
-#        demo_code: |-
-#            leeftyd is input('Hoe âld bisto?')
-#            if leeftyd < 13:
-#                print('Dan bist jonger as ik!')
-#    -   name: "Grutter"
-#        explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
-#        example: "Foarbyld: leeftyd > 12"
-#        demo_code: |-
-#            leeftyd is input('Hoe âld bisto?')
-#            if leeftyd > 13:
-#                print('Dan bist âlder as ik!')
-#18:
-#    start_code: |-
-#        goed_antwurd is False
-#        # We gean troch oant der in goed antwurd jûn is!
-#        while goed_antwurd is False:
-#            antwurd is input('Wat is 5 kear 5?')
-#            if antwurd is 25:
-#                goed_antwurd is True
-#                print('Dat wie it goede antwurd!')
-#    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
-#    commands:
-#    -   name: "Boolean while"
-#        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
-#        example: "Foarbyld: while goed_antwurd is False"
-#        demo_code: |-
-#            goed_antwurd is False
-#            # We gean troch oant der in goed antwurd jûn is!
-#            while goed_antwurd is False:
-#                antwurd is input('Wat is 5 kear 5?')
-#                if antwurd is 25:
-#                    goed_antwurd is True
-#                    print('Dat wie it goede antwurd')
-#    -   name: "Smaller while"
-#        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
-#        example: "Foarbyld: while tel < 3"
-#        demo_code: |-
-#            tel is 1
-#            # we gean troch oant de tel 3 is!
-#            while tel < 3:
-#                print('Dit is de ' tel 'e kear')
-#                tel is tel + 1
-#            print('We zijn klaar')
-#19:
-#    start_code: |-
-#        list is ['earste', 'twadde', 'tredde']
-#        twaddewearde is list[2]
-#        print(twaddewearde)
-#    intro_text: "Bij een list kan je een specifieke waarde pakken. Stel je wilt It twade ding in de list hebben, dan typ je `list[2]`."
-#    commands:
-#    -   name: "Optellen"
-#        explanation: "We kinne bygelyks alles bij inoar optelle"
-#        example: "list[1]"
-#        demo_code: |-
-#            list is ['1', '2', '3']
-#            opteld is list[1] + list[2]
-#            opteld is opteld + list[3]
-#            # we ferwachtsje hjir 6
-#            print(opteld)
 #20:
 #    start_code: |-
 #        fruit is ['apel', 'banaan', 'kjers']
@@ -649,44 +593,42 @@
 #                print('Dat is goed!')
 #            else:
 #                print('Spitich leave, dat is fout!')
-#22:
+#colon:
 #    start_code: |-
-#        lân = input('Yn hokker (welk) lân wennest do?')
-#        if lân != Nederland:
-#            print('Tsjom!')
-#        else:
-#            print('Ik ek!')
-#    intro_text: "We sille wer in nij teken leare, de `!=` . De ! betsjut 'net' en de = betsjut 'gelyk' dus != is 'net gelyk'. Foarbyld: `5 != 4`."
+#        for i in range 1 to 10:
+#            print i
+#        print 'Wie niet weg is is gezien'
+#    intro_text: |-
+#        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+#        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
 #    commands:
-#    -   name: "Net gelyk"
-#        explanation: "As wy witte wolle oft dingen net itselde binne, brûke we dus `!=`"
-#        example: "Foarbyld: 5+3 != 9"
+#    -   name: "for met :"
+#        explanation: "By `for` moatst no in `:` efteroan sette!"
+#        example: "for i in range 1 to 10:"
 #        demo_code: |-
-#            getal = input('Meist gjin 5 sizze: wat is in leuk getal?')
-#            if getal != 5:
-#                print('Kreas hear!')
+#            for i in range 1 to 10:
+#                print i
+#            print 'Wie niet weg is is gezien'
+#    -   name: "if met :"
+#        explanation: "We moatte itselde dwaan mei al ús `if`"
+#        example: "if kleur is grien:"
+#        demo_code: |-
+#            kleur is grien
+#            if kleur is grien:
+#                print 'De kleur is grien'
 #            else:
-#                print('Fout! Mochst 5 sizze')
-#23:
-#    start_code: |-
-#        leeftyd = input('Ik bin 12 jier, hoe âld bisto?')
-#        if leeftyd <= 12:
-#            print('Dan bisto jonger as ik!')
-#        elif leeftyd >= 14:
-#            print('Dan bisto âlder as ik!')
-#    intro_text: "No sille wy < en = tegearre brûke. As we witte wolle oft eat lytser of gelyk oan it twadde getal is dan brûke wy `<=`. Itselde kinst dwaan mei `>=`"
-#    commands:
-#    -   name: "Lytser gelyk"
-#        explanation: "De `<=` sjocht dus oft it earste getal lytser of gelyk is oan it twadde getal. Dus 5 < 5 is 'net wier' want 5 is net lytser as 5 mar 5 <= 5 is wol 'wier' want 5 is gelyk oan 5. 6 <= 5 is dus net wier."
-#        example: "Foarbyld: leeftyd <= 12"
+#                print 'De kleur is net grien'
+#    -   name: "(Optioneel) elif"
+#        explanation: |-
+#            Meist ek in nij kommando brûke: `elif`.
+#            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+#            en als dy net wier is dan giest nei de `else`.
+#        example: "elif a is 5:"
 #        demo_code: |-
-#            leeftyd = input('Ik bin 13 jier, hoe âld bisto?')
-#            if leeftyd <= 13:
-#                print('Dan bist jonger as ik!')
-#    -   name: "Grutter gelyk"
-#        explanation: "De `>=` sjocht dus oft it earste getal grutter as gelyk is oan it twadde getal. Dus 5 > 5 is 'net wier' want 5 is net grutter as 5 mar 5 >= 5 is wol 'wier' want 5 is gelyk oan 5. 4 >= 5 is dus net wier."
-#        example: "Foarbyld: leeftyd >= 12"
-#        demo_code: |-
-#            leeftyd = input('Ik bin 11 jier, hoe âld bisto?')
-#            if leeftyd >= 13:
-#                print('Dan bistâlder as ik!')
+#            a is 2
+#            if a is 1:
+#                print 'a is 1'
+#            elif a is 2:
+#                print 'a is 2'
+#            else:
+#                print 'a is net 1 of 2'

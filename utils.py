@@ -39,11 +39,20 @@ def timer(fn):
   return wrapper
 
 
-
 def timems():
+    """Return the UNIX timestamp in milliseconds.
+
+    You only need to use this function if you are doing performance-sensitive
+    timing. Otherwise, `times` (which returns second-resolution) is probably
+    a better choice.
+    """
     return int(round(time.time() * 1000))
 
 def times():
+    """Return the UNIX timestamp in seconds.
+
+    If you need to store a date/time in the database, prefer this function.
+    """
     return int(round(time.time()))
 
 
@@ -166,6 +175,10 @@ def atomic_write_file(filename, mode='wb'):
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
 def mstoisostring(date):
+    unix_ts = date / 1000
+    dt = datetime.datetime.fromtimestamp(unix_ts)
+
+    print('dt', dt)
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
 # https://stackoverflow.com/a/2257449

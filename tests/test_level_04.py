@@ -1,6 +1,6 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel4(HedyTester):
   level=4
@@ -25,7 +25,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(self.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
+    self.assertIn(HedyTester.run_code(result), ['Hond', 'Kat', 'Kangoeroe'])
   def test_assign_list_multiple_spaces(self):
     code = textwrap.dedent("""\
     dieren is Hond,  Kat,       Kangoeroe
@@ -54,7 +54,7 @@ class TestsLevel4(HedyTester):
     #this code has a space at the end of line 2
     code = textwrap.dedent("""\
     a is 2
-    if a is 1 print a 
+    if a is 1 print a
     else print 'nee'""")
 
     result = hedy.transpile(code, self.level)
@@ -89,7 +89,7 @@ class TestsLevel4(HedyTester):
     )
 
   def test_identifies_backtick_inside_conditional(self):
-    self.assertRaises(hedy.UnquotedTextException, lambda: hedy.transpile("if 1 is 1 print `yay!` else print `nay`", self.level))
+    self.assertRaises(hedy.exceptions.UnquotedTextException, lambda: hedy.transpile("if 1 is 1 print `yay!` else print `nay`", self.level))
 
 
   # turn forward
@@ -177,13 +177,13 @@ class TestsLevel4(HedyTester):
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
-  def test_print_if_else_line_break_and_space(self):
-    # line breaks should be allowed in if-elses until level 7 when we start with indentation
-
+  def test_print_if_else_with_line_break_after_condition(self):
+    # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
-    if naam is Hedy print 'leuk'     
+    if naam is Hedy
+    print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
@@ -193,6 +193,82 @@ class TestsLevel4(HedyTester):
       print(f'leuk')
     else:
       print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_if_else_newline_list_assigment_print(self):
+    # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
+    code = textwrap.dedent("""\
+    people is mom, dad, Emma, Sophie
+    dishwasher is people at random
+    if dishwasher is Sophie
+    print 'too bad I have to do the dishes'
+    else
+    print 'luckily no dishes because' dishwasher 'is already washing up'""")
+
+    expected = textwrap.dedent("""\
+    people = ['mom', 'dad', 'Emma', 'Sophie']
+    dishwasher=random.choice(people)
+    if dishwasher == 'Sophie':
+      print(f'too bad I have to do the dishes')
+    else:
+      print(f'luckily no dishes because{dishwasher}is already washing up')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+
+  def test_print_if_else_line_break_and_space(self):
+    # line breaks should be allowed in if-elses until level 7 when we start with indentation
+
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy print 'leuk'
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if naam == 'Hedy':
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_if_linebreak_statement(self):
+    # Breaking an if statement and its following statement should be
+    # permited until level 7 
+    
+    code = textwrap.dedent("""\
+    people is 1, 2, 3, 3
+    dishwasher is people at random
+    test is 1
+    if dishwasher is test
+    print 'too bad I have to do the dishes!'""")
+
+    expected = textwrap.dedent("""\
+    people = ['1', '2', '3', '3']
+    dishwasher=random.choice(people)
+    test = '1'
+    if dishwasher == test:
+      print(f'too bad I have to do the dishes!')""")
 
     self.multi_level_tester(
       max_level=4,
@@ -218,7 +294,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual(self.run_code(result), 'jij wint')
+    self.assertEqual(HedyTester.run_code(result), 'jij wint')
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -235,7 +311,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual(self.run_code(result), 'gelijkspel!')
+    self.assertEqual(HedyTester.run_code(result), 'gelijkspel!')
   def test_if_in_list(self):
     code = textwrap.dedent("""\
     items is red, green
@@ -252,7 +328,7 @@ class TestsLevel4(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual('found!', self.run_code(result))
+    self.assertEqual('found!', HedyTester.run_code(result))
   # todo would be good to make combinations with if and turtle
 
 
@@ -265,7 +341,7 @@ class TestsLevel4(HedyTester):
     if option is Scissors
         print 'Its a tie!'""")
 
-    with self.assertRaises(hedy.ParseException) as context:
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Parse', context.exception.error_code)
   def test_if_print_has_no_turtle(self):
@@ -281,7 +357,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      exception=hedy.InvalidCommandException,
+      exception=hedy.exceptions.InvalidCommandException,
       test_name=self.name()
     )
 
@@ -290,7 +366,7 @@ class TestsLevel4(HedyTester):
   def test_pront_should_suggest_print(self):
     code = "pront 'Hedy is leuk!'"
 
-    with self.assertRaises(hedy.InvalidCommandException) as context:
+    with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
     self.assertEqual('<span class="command-highlighted">print</span>', str(context.exception.arguments['guessed_command']))
@@ -302,7 +378,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      exception=hedy.UnquotedTextException,
+      exception=hedy.exceptions.UnquotedTextException,
       test_name=self.name()
     )
 

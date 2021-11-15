@@ -8,7 +8,7 @@
                     class="font-semibold">Vraag {{ question_nr }} </p>
                 <p> / {{ questions|length }} </p></div>
             <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center justify-center font-slab"> {{ question.question_text }} </p>
-            {% if question.correct_answer in option %}
+            {% if answer_was_correct %}
 
                 <div class="rounded-full bg-green-500  flex h-32 w-32 text-center flex items-center justify-center place-self-center">
                     <p
@@ -23,9 +23,11 @@
                 {{ question_options[index_option].feedback }} {% endif %}</i></p>
             <p
                     class="m-4 text-black  text-center font-extrabold  text-4xl font-slab ">Het juiste antwoord is:
-                {% if question_options[index_option].option_text %}
-                    {{ question_options[index_option].option_text }} {% elif question_options[index_option].code %}
-                    {{ question_options[index_option].code }} {% endif %}</p></div>
+                {% if correct_option.option_text %}
+                    {{ correct_option.option_text }}
+                {% elif correct_option.code %}
+                    {{ correct_option.code }}
+                {% endif %}</p></div>
     </div>
 
     <div class="p-10 button-bar border-t-8 border-green-600">

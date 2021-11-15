@@ -1,10 +1,10 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
 class TestsLevel5(HedyTester):
   level = 5
-  
+
   # test/command order: 6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward', calculations]
 
   # print tests
@@ -27,14 +27,14 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code="print 1.5 + 1",
-      exception=hedy.UnsupportedFloatException,
+      exception=hedy.exceptions.UnsupportedFloatException,
       test_name=self.name()
     )
   def test_unsupported_float_with_comma(self):
     self.multi_level_tester(
       max_level=10,
       code="print 1,5 + 1",
-      exception=hedy.UnsupportedFloatException,
+      exception=hedy.exceptions.UnsupportedFloatException,
       test_name=self.name()
     )
 
@@ -81,7 +81,7 @@ class TestsLevel5(HedyTester):
     code = textwrap.dedent("""\
     naam is Hedy
     print 'ik heet' naam
-    if naam is Hedy print 'leuk'     
+    if naam is Hedy print 'leuk'
     else print 'minder leuk'""")
 
     expected = textwrap.dedent("""\
@@ -103,7 +103,7 @@ class TestsLevel5(HedyTester):
     #this code has a space at the end of line 2
     code = textwrap.dedent("""\
     a is 2
-    if a is 1 print a 
+    if a is 1 print a
     else print 'nee'""")
 
     expected = textwrap.dedent("""\
@@ -144,7 +144,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
     self.assertEqual(expected, result.code)
 
-    output = self.run_code(result)
+    output = HedyTester.run_code(result)
     self.assertEqual(output, '5 keer 5 keer 5 is 125')
     self.assertEqual(False, result.has_turtle)
   def test_calc_print(self):
@@ -160,7 +160,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("9", self.run_code(result))
+    self.assertEqual("9", HedyTester.run_code(result))
   def test_calc_assign(self):
     code = "nummer is 4 + 5"
     result = hedy.transpile(code, self.level)
@@ -217,7 +217,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", self.run_code(result))
+    self.assertEqual("30", HedyTester.run_code(result))
   def test_calc_vars_print(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -233,7 +233,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", self.run_code(result))
+    self.assertEqual("30", HedyTester.run_code(result))
   def test_calc_vars_print_divide(self):
     code = textwrap.dedent("""\
     nummer is 5
@@ -249,7 +249,7 @@ class TestsLevel5(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertEqual("0", self.run_code(result))
+    self.assertEqual("0", HedyTester.run_code(result))
 
 
   # combined tests
@@ -289,6 +289,50 @@ class TestsLevel5(HedyTester):
       antwoord = 'stom'
     print(f'{antwoord}')""")
 
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_ifelse_calc_vars(self):
+    code =  textwrap.dedent("""\
+    cmp is 1
+    test is 2
+    acu is 0
+    if test is cmp
+    acu is acu + 1
+    else
+    acu is acu + 5""")
+    expected = textwrap.dedent("""\
+    cmp = '1'
+    test = '2'
+    acu = '0'
+    if str(test) == str(cmp):
+      acu = int(acu) + int(1)
+    else:
+      acu = int(acu) + int(5)""")
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_if_calc_vars(self):
+    code =  textwrap.dedent("""\
+    cmp is 1
+    test is 2
+    acu is 0
+    if test is cmp
+    acu is acu + 1""")
+    expected = textwrap.dedent("""\
+    cmp = '1'
+    test = '2'
+    acu = '0'
+    if str(test) == str(cmp):
+      acu = int(acu) + int(1)""")
     self.multi_level_tester(
       max_level=6,
       code=code,
