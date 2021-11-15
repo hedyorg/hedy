@@ -214,33 +214,74 @@
             else
                 print 'Ups!'
                 print 'Jawabannya adalah 10'
-9:
+8:
     start_code: |-
-        animals is dog, cat, blobfish
-        for animal in animals
-          print 'I love ' animal
-    intro_text: |
-        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+        repeat 3 times
+            makanan is ask 'Apa yang kamu mau?'
+            if makanan is 'pizza'
+                print 'bagus!'
+            else
+                print 'pizza lebih enak'
+    intro_text: |-
+        Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `if` and `repeat`, namun juga dapat menggabungkan mereka!
+        Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
+        Cobalah!
 
-        ## Example Hedy code
+        ## Contoh kode Hedy
         ```
-        animals is dog, cat, blobfish
-        for animal in animals
-          print 'I love ' animal
+        repeat 3 times
+            makanan is ask 'Apa yang kamu mau?'
+            if makanan is 'pizza'
+                print 'bagus!'
+            else
+                print 'pizza lebih enak'
         ```
     commands:
-    -   name: "print"
-        explanation: "Print something. Remember to use a quotation mark for literal printing."
-        example: "Example: print '5 times 5 is ' 5 * 5"
-        demo_code: "print '5 times 5 is ' 5 * 5"
-    -   name: "for with a list"
-        explanation: "print all things in a list "
-        example: "Example: for dier in dieren"
+    -   name: '`if` dengan beberapa baris'
+        explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.
+        example: "Contoh: jawaban is ask 'Apa hasil dari 20 tambah 20?'"
         demo_code: |-
-            animals is dog, cat, blobfish
-            for animal in animals
-              print 'I love ' animal
+            jawaban is ask 'Apa hasil dari 20 tambah 20?'
+            if jawaban is 20
+                print 'Bagus!!'
+                print 'Jawabannya betul' jawaban
+            else
+                print 'Salah'
+                print 'Jawabannya adalah 20'
+    -   name: '`repeat` dan kura-kura'
+        explanation: Ulangi beberapa kali
+        example: 'Contoh: buatlah sebuah kotak'
+        demo_code: |-
+            repeat 4 times
+                turn 90
+                forward 50
+9:
+    start_code: |-
+        hewanhewan is anjing, kucing, ikan
+        for hewan in hewanhewan
+          print 'Aku suka ' hewan
+    intro_text: |
+        Pada level ini kita akan belajar perintah `for`. Dengan `for` kamu dapat membuat sebuah daftar dan mengakses semua isinya.
+        `for` membentuk sebuah blok seperti `repeat` dan `if` jadi semua baris untuk aksi harus diawali dengan beberapa spasi.
+
+        ## Contoh kode Hedy
+        ```
+        hewanhewan is anjing, kucing, ikan
+        for hewan in hewanhewan
+          print 'Aku suka ' hewan
+        ```
+    commands:
+    -   name: print
+        explanation: Menampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu untuk menampilkan teks apa adanya.
+        example: "Example: print '5 kali 5 adalah ' 5 * 5"
+        demo_code: print '5 kali 5 adalah ' 5 * 5
+    -   name: for dengan daftar
+        explanation: menampilkan semua barang dari sebuah daftar
+        example: 'Contoh: for hewan in hewanhewan'
+        demo_code: |-
+            hewanhewan is anjing, kucing, ikan
+            for hewan in hewanhewan
+              print 'Aku suka ' hewan
 10:
     start_code: |-
         for pembilang in range 1 to 5
@@ -263,6 +304,42 @@
             else
                 print 'Ups!'
                 print 'Jawabannya adalah 10'
+11:
+    start_code: |-
+        print 'angka-angka desimal kini harus menggunakan titik'
+        print 2.5 + 2.5
+    intro_text: |-
+        Sejauh ini, Hedy tidak mengijinkan penggunaan angka desimal seperti 1.5, tapi sekarang bisa.
+        Perlu diingat bahwa komputer menggunakan titik (.) untuk menandai angka desimal.
+
+        Pada level ini kamu juga perlu menggunakan kutip satu ketika menyimpan teks dengan `is`:
+
+        ```
+        nama is 'Hedy'
+        print 'Halo ' nama
+        ```
+
+        Untuk angka, kamu tidak perlu menggunakan kutip satu untuk `is`:
+        ```
+        skor is 25
+        print 'Kamu mendapatkan ' skor
+        ```
+    commands:
+    -   name: Angka desimal langsung
+        explanation: Perhitungan dengan angka desimal
+        example: print 2.5 + 2.5
+        demo_code: |-
+            print 'Hitung langsung!'
+            print 'Dua setengah tambah dua setengah adalah...'
+            print 2.5 + 2.5
+    -   name: desimal di variabel
+        explanation: Menyimpan hasil perhitungan desimal
+        example: hasil is 2.5 + 2.5
+        demo_code: |-
+            jawaban is 2.5 + 2.5
+            print 'Hitung langsung!'
+            print 'Dua setengah tambah dua setengah adalah...'
+            print jawaban
 12:
     start_code: |-
         umur is ask 'Berapa umur mu?'
@@ -289,7 +366,7 @@
 13:
     start_code: |-
         jawaban is 0
-        while jawaban_benar != 25
+        while jawaban != 25
             jawaban is ask 'Apa hasil 5 kali 5?'
         print 'Sebuah jawaban benar telah diberikan'
     intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
@@ -299,7 +376,7 @@
         example: 'Contoh: while jawaban_benar is False'
         demo_code: |-
             jawaban is 0
-            while jawaban_benar != 25
+            while jawaban != 25
                 jawaban is ask 'Apa hasil 5 kali 5?'
             print 'Sebuah jawaban benar telah diberikan'
     -   name: Pengulangan while dengan cakupan lebih kecil

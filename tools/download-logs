@@ -26,4 +26,8 @@ sed -e '$a\' $cache_dir/* > $finalfile
 
 echo "Now run a command like:"
 echo ""
+echo "Page loads that take a long time:"
 echo "   cat $finalfile | recs grep '{{duration_ms}} > 1000' | tee _lastquery.jsonl | recs totable -k start_time,duration_ms,method,path,'!_ms\$!' | less -S"
+echo ""
+echo "Count of failures:"
+echo "   cat $finalfile | recs grep '{{http_code}} ne 200' | tee _lastquery.jsonl | recs collate -k http_code,method,path -a count | recs sort -k count=-n | recs totable | less -S"

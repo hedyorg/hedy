@@ -10,7 +10,17 @@ class LevelDefaults:
 
   def max_level(self):
     all_levels = self.levels.keys()
-    return max(all_levels)
+    max_consecutive_level = 1
+    previous_level = 0
+    for level in all_levels:
+      if level == previous_level + 1:
+        previous_level = level
+        max_consecutive_level = level
+      else:
+        return previous_level
+
+
+    return max_consecutive_level
 
   def get_defaults_for_level(self, level):
     #grabs level defaults from yaml and converts to DefaultValues type
