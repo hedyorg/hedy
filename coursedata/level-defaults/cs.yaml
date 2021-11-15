@@ -339,59 +339,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
-    start_code: |-
-        vek is ask 'Kolik je ti let?'
-        if vek < 13
-            print 'Jsi mladší než já!'
-        else
-            print 'Jsi starší než já!'
-    intro_text: |-
-        Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
-        `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
-        `>` naopak zjišťuje, jestli je první číslo větší, jako v `6 > 5`.
-    commands:
-    -   name: Menší
-        explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
-        example: 'Příklad: vek < 13'
-        demo_code: |-
-            vek is ask 'Kolik je ti let?'
-            if vek < 13
-                print 'Jsi mladší než já!'
-    -   name: Větší
-        explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
-        example: 'Příklad: vek > 13'
-        demo_code: |-
-            vek is ask 'Kolik je ti let?'
-            if vek > 13
-                print 'Jsi mladší než já!'
-13:
-    start_code: |-
-        odpoved is 0
-        while spravna_odpoved != 25:
-            odpoved is ask 'Kolik je 5 * 5?'
-        print 'Dostala jsem správnou odpověď!'
-
-    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
-    commands:
-    -   name: Pravdivostní while
-        explanation: Můžeme použít `while` cyklus s `True` a `False`.
-        example: 'Příklad: while spravna_odpoved is False'
-        demo_code: |-
-            odpoved is 0
-            while spravna_odpoved != 25
-                odpoved is ask 'Kolik je 5 * 5?'
-            print 'Dostala jsem správnou odpověď!'
-    -   name: While s operátory menší/větší než
-        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
-        example: 'Příklad: while pocet < 3'
-        demo_code: |-
-            pocet is 1
-            while pocet < 3
-                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
-                pocet is pocet + 1
-            print 'Hotovo'
-14:
+15:
     start_code: |-
         ovoce is ['jablko', 'banán', 'třešně']
         print ovoce
@@ -561,3 +509,55 @@
 #                print 'a je 2'
 #            else:
 #                print 'a není ani 1 ani 2'
+14:
+    start_code: |-
+        odpoved is 0
+        while spravna_odpoved != 25:
+            odpoved is ask 'Kolik je 5 * 5?'
+        print 'Dostala jsem správnou odpověď!'
+
+    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+    commands:
+    -   name: Pravdivostní while
+        explanation: Můžeme použít `while` cyklus s `True` a `False`.
+        example: 'Příklad: while spravna_odpoved is False'
+        demo_code: |-
+            odpoved is 0
+            while spravna_odpoved != 25
+                odpoved is ask 'Kolik je 5 * 5?'
+            print 'Dostala jsem správnou odpověď!'
+    -   name: While s operátory menší/větší než
+        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+        example: 'Příklad: while pocet < 3'
+        demo_code: |-
+            pocet is 1
+            while pocet < 3
+                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+                pocet is pocet + 1
+            print 'Hotovo'
+13:
+    start_code: |-
+        vek is ask 'Kolik je ti let?'
+        if vek < 13
+            print 'Jsi mladší než já!'
+        else
+            print 'Jsi starší než já!'
+    intro_text: |-
+        Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
+        `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
+        `>` naopak zjišťuje, jestli je první číslo větší, jako v `6 > 5`.
+    commands:
+    -   name: Menší
+        explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
+        example: 'Příklad: vek < 13'
+        demo_code: |-
+            vek is ask 'Kolik je ti let?'
+            if vek < 13
+                print 'Jsi mladší než já!'
+    -   name: Větší
+        explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
+        example: 'Příklad: vek > 13'
+        demo_code: |-
+            vek is ask 'Kolik je ti let?'
+            if vek > 13
+                print 'Jsi mladší než já!'

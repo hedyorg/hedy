@@ -362,70 +362,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
-    start_code: |-
-        alter is ask 'Wie alt bist du?'
-        if alter < 13
-            print 'Du bist jünger als ich!'
-        else
-            print 'Du bist älter als ich!'
-    intro_text: |-
-        Wir lernen weitere neue Elemente kennen!
-        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
-        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
-        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
-    commands:
-    -   name: "Kleiner"
-        explanation: |-
-            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
-            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
-        example: "alter < 13"
-        demo_code: |-
-            alter is ask 'Wie alt bist du?'
-            if alter < 13
-                print 'Du bist jünger als ich!'
-    -   name: "Größer"
-        explanation: |-
-            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
-            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
-        example: "alter > 13"
-        demo_code: |-
-            alter is ask 'Wie alt bist du?'
-            if alter > 13
-                print 'Du bist älter als ich!'
-13:
-    start_code: |-
-        antwort is 0
-        while antwort != 25:
-            antwort is ask 'Wieviel ist 5 mal 5?'
-            print 'Das ist die richtge Antwort!'
-    intro_text: |-
-        Wir werden eine neue Schleife lernen, die `while`-Schleife!
-        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
-        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
-        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
-    commands:
-    -   name: "while"
-        explanation: "Wir können die `while`-Schleife verwenden."
-        example: "while richtige_antwort is False"
-        demo_code: |-
-            antwort is 0
-            while antwort != 25:
-                antwort is ask 'Wieviel ist 5 mal 5?'
-                print 'Das ist die richtge Antwort!'
-    -   name: "while mit Ungleichungen"
-        explanation: |-
-            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
-            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zaehler is zaehler + 1`.
-        example: "while zaehler < 3"
-        demo_code: |-
-            zaehler is 1
-            while zaehler < 3
-                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
-                zaehler is zaehler + 1
-            print 'Wir sind fertig!'
-14:
+15:
     start_code: |-
         fruechte is ['Apfel', 'Banane', 'Kirsche']
         print fruechte
@@ -558,3 +495,66 @@
 #                print 'a ist 2'
 #            else:
 #                print 'a ist nicht 1 oder 2'
+14:
+    start_code: |-
+        antwort is 0
+        while antwort != 25:
+            antwort is ask 'Wieviel ist 5 mal 5?'
+            print 'Das ist die richtge Antwort!'
+    intro_text: |-
+        Wir werden eine neue Schleife lernen, die `while`-Schleife!
+        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
+        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
+        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
+    commands:
+    -   name: "while"
+        explanation: "Wir können die `while`-Schleife verwenden."
+        example: "while richtige_antwort is False"
+        demo_code: |-
+            antwort is 0
+            while antwort != 25:
+                antwort is ask 'Wieviel ist 5 mal 5?'
+                print 'Das ist die richtge Antwort!'
+    -   name: "while mit Ungleichungen"
+        explanation: |-
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
+            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
+            Wir machen das hier mit `zaehler is zaehler + 1`.
+        example: "while zaehler < 3"
+        demo_code: |-
+            zaehler is 1
+            while zaehler < 3
+                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
+                zaehler is zaehler + 1
+            print 'Wir sind fertig!'
+13:
+    start_code: |-
+        alter is ask 'Wie alt bist du?'
+        if alter < 13
+            print 'Du bist jünger als ich!'
+        else
+            print 'Du bist älter als ich!'
+    intro_text: |-
+        Wir lernen weitere neue Elemente kennen!
+        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
+        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
+        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
+    commands:
+    -   name: "Kleiner"
+        explanation: |-
+            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+        example: "alter < 13"
+        demo_code: |-
+            alter is ask 'Wie alt bist du?'
+            if alter < 13
+                print 'Du bist jünger als ich!'
+    -   name: "Größer"
+        explanation: |-
+            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+        example: "alter > 13"
+        demo_code: |-
+            alter is ask 'Wie alt bist du?'
+            if alter > 13
+                print 'Du bist älter als ich!'

@@ -396,56 +396,7 @@
             print 'Tweeenhalf plus tweeenhalf is...'
             print antwoord
 
-12:
-    start_code: |-
-        leeftijd is ask 'Hoe oud ben jij?'
-        if leeftijd < 13
-            print 'Dan ben je jonger dan ik!'
-        else
-            print 'Dan ben je ouder dan ik!'
-    intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
-    commands:
-    -   name: "Kleiner"
-        explanation: "De `<` kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 15 gebruik je `variabele < 15`"
-        example: "Bijvoorbeeld: leeftijd < 13"
-        demo_code: |-
-            leeftijd is ask 'Hoe oud ben jij?'
-            if leeftijd < 13
-                print 'Dan ben je jonger dan ik!'
-    -   name: "Groter"
-        explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je `variabele > 15`"
-        example: "Bijvoorbeeld: leeftijd > 13"
-        demo_code: |-
-            leeftijd is ask 'Hoe oud ben jij?'
-            if leeftijd > 13
-                print 'Dan ben je ouder dan ik!'
-13:
-    start_code: |-
-        antwoord is 0
-        while antwoord != 25
-            antwoord is ask 'Wat is 5 keer 5?'
-        print 'Goed gedaan!'
-    intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
-    commands:
-    -   name: "While"
-        explanation: "We kunnen dus een `while` loop gebruiken"
-        example: "Bijvoorbeeld: while antwoord is != 25"
-        demo_code: |-
-            antwoord is 0
-            while antwoord != 25
-                antwoord is ask 'Wat is 5 keer 5?'
-            print 'Goed gedaan!'
-    -   name: "Smaller while"
-        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
-        example: "Bijvoorbeeld: while tel < 3"
-        demo_code: |-
-            tel is 1
-            while tel < 3
-                print 'Dit is de ' tel 'e keer'
-                tel is tel + 1
-            print 'We zijn klaar'
-
-14:
+15:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         print fruit 
@@ -614,3 +565,52 @@
 #                print 'a is 2'
 #            else:
 #                print 'a is niet 1 of 2'
+14:
+    start_code: |-
+        antwoord is 0
+        while antwoord != 25
+            antwoord is ask 'Wat is 5 keer 5?'
+        print 'Goed gedaan!'
+    intro_text: "Nu gaan we een nieuwe loop leren: De `while` loop! We gaan door zo lang het statement dat we hebben waar is! Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!"
+    commands:
+    -   name: "While"
+        explanation: "We kunnen dus een `while` loop gebruiken"
+        example: "Bijvoorbeeld: while antwoord is != 25"
+        demo_code: |-
+            antwoord is 0
+            while antwoord != 25
+                antwoord is ask 'Wat is 5 keer 5?'
+            print 'Goed gedaan!'
+    -   name: "Smaller while"
+        explanation: "We kunnen een `while` loop ook gebruiken met `<` en `>`. Let wel op dat je het getal ooit groter maakt. Anders ga je de loop nooit uit"
+        example: "Bijvoorbeeld: while tel < 3"
+        demo_code: |-
+            tel is 1
+            while tel < 3
+                print 'Dit is de ' tel 'e keer'
+                tel is tel + 1
+            print 'We zijn klaar'
+
+13:
+    start_code: |-
+        leeftijd is ask 'Hoe oud ben jij?'
+        if leeftijd < 13
+            print 'Dan ben je jonger dan ik!'
+        else
+            print 'Dan ben je ouder dan ik!'
+    intro_text: "We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`. De `<` kijkt of het eerste getal kleiner is dan de tweede zoals `4 < 5`. De `>` kijkt of iets groter is dan het tweede getal zoals `6 > 5`."
+    commands:
+    -   name: "Kleiner"
+        explanation: "De `<` kijkt dus of het eerste getal kleiner is dan het tweede getal. Als je wilt kijken of een variabele kleiner is dan 15 gebruik je `variabele < 15`"
+        example: "Bijvoorbeeld: leeftijd < 13"
+        demo_code: |-
+            leeftijd is ask 'Hoe oud ben jij?'
+            if leeftijd < 13
+                print 'Dan ben je jonger dan ik!'
+    -   name: "Groter"
+        explanation: "De `>` kijkt dus of het eerste getal groter is dan het tweede getal. Als je wilt kijken of een variabele groter is dan 15 gebruik je `variabele > 15`"
+        example: "Bijvoorbeeld: leeftijd > 13"
+        demo_code: |-
+            leeftijd is ask 'Hoe oud ben jij?'
+            if leeftijd > 13
+                print 'Dan ben je ouder dan ik!'

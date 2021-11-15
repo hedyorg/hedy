@@ -295,55 +295,7 @@
               print i
             print '无论你是否准备好了，我都会来的!'
 
-12:
-    start_code: |-
-        age is ask '你今年几岁了?'
-        if age < 13
-            print '你比我年纪小!'
-        else
-            print '你比我年纪大!'
-    intro_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
-    commands:
-    -   name: "Smaller 小于"
-        explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
-        example: "例如: age < 13"
-        demo_code: |-
-            age is ask '你今年几岁了?'
-            if age < 13
-                print '你比我年纪小!'
-    -   name: "Bigger 大于"
-        explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
-        example: "例如: age > 13"
-        demo_code: |-
-            age is ask '你今年几岁了?'
-            if age > 13
-                print '你比我年纪大!'
-13:
-    start_code: |-
-        answer is 0
-        while correct_answer != 25
-            answer is ask '5乘以5等于几?'
-        print '已经给出了一个很好的答案'
-    intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
-    commands:
-    -   name: "布尔 while循环语句"
-        explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
-        example: "例如: while correct_answer is False"
-        demo_code: |-
-            answer is 0
-            while correct_answer != 25
-                answer is ask '5乘以5等于几?'
-            print '已经给出了一个很好的答案'
-    -   name: "Smaller while (直到小于)"
-        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
-        example: "例如: while count < 3"
-        demo_code: |-
-            count is 1
-            while count < 3
-                print '我们计算 ' 3 - count ' 的次数更多了'
-                count is count + 1
-            print '我们完成啦'
-14:
+15:
     start_code: |-
         fruit is ['苹果', '香蕉', '樱桃']
         print fruit 
@@ -453,3 +405,51 @@
 #                print 'a 是 2'
 #            else:
 #                print 'a 既不是1也不是2'
+14:
+    start_code: |-
+        answer is 0
+        while correct_answer != 25
+            answer is ask '5乘以5等于几?'
+        print '已经给出了一个很好的答案'
+    intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
+    commands:
+    -   name: "布尔 while循环语句"
+        explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
+        example: "例如: while correct_answer is False"
+        demo_code: |-
+            answer is 0
+            while correct_answer != 25
+                answer is ask '5乘以5等于几?'
+            print '已经给出了一个很好的答案'
+    -   name: "Smaller while (直到小于)"
+        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
+        example: "例如: while count < 3"
+        demo_code: |-
+            count is 1
+            while count < 3
+                print '我们计算 ' 3 - count ' 的次数更多了'
+                count is count + 1
+            print '我们完成啦'
+13:
+    start_code: |-
+        age is ask '你今年几岁了?'
+        if age < 13
+            print '你比我年纪小!'
+        else
+            print '你比我年纪大!'
+    intro_text: "我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`. 小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 `4 < 5`. 大于号`>` 用来判断c第一个数字是否大于第二个数字, 比如 `6 > 5`."
+    commands:
+    -   name: "Smaller 小于"
+        explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
+        example: "例如: age < 13"
+        demo_code: |-
+            age is ask '你今年几岁了?'
+            if age < 13
+                print '你比我年纪小!'
+    -   name: "Bigger 大于"
+        explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
+        example: "例如: age > 13"
+        demo_code: |-
+            age is ask '你今年几岁了?'
+            if age > 13
+                print '你比我年纪大!'

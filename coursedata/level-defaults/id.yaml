@@ -340,56 +340,7 @@
             print 'Hitung langsung!'
             print 'Dua setengah tambah dua setengah adalah...'
             print jawaban
-12:
-    start_code: |-
-        umur is ask 'Berapa umur mu?'
-        if umur < 13
-            print 'Kamu lebih muda daripada aku!'
-        else
-            print 'Kamu lebih tua daripada aku!'
-    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
-    commands:
-    -   name: Lebih kecil
-        explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
-        example: 'Sebagai contoh: umur < 12'
-        demo_code: |-
-            umur is ask 'Berapa umur mu?'
-            if umur < 13
-                print 'Kamu lebih muda daripada aku!'
-    -   name: Lebih besar
-        explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
-        example: 'Sebagai contoh: umur > 12'
-        demo_code: |-
-            umur is ask 'Berapa umur mu?'
-            if umur > 13
-                print 'Kamu lebih tua daripada aku!'
-13:
-    start_code: |-
-        jawaban is 0
-        while jawaban != 25
-            jawaban is ask 'Apa hasil 5 kali 5?'
-        print 'Sebuah jawaban benar telah diberikan'
-    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
-    commands:
-    -   name: Pengulangan while dengan boolean
-        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
-        example: 'Contoh: while jawaban_benar is False'
-        demo_code: |-
-            jawaban is 0
-            while jawaban != 25
-                jawaban is ask 'Apa hasil 5 kali 5?'
-            print 'Sebuah jawaban benar telah diberikan'
-    -   name: Pengulangan while dengan cakupan lebih kecil
-        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
-        example: 'Sebagai contoh: while pembilang < 3'
-        demo_code: |-
-            pembilang is 1
-            while pembilang < 3
-                print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
-                pembilang is pembilang + 1
-            print 'Kita selesai'
-
-14:
+15:
     start_code: |-
         buah is ['apel', 'pisang', 'ceri']
         print buah 
@@ -555,3 +506,52 @@
 #                print 'a bernilai 2'
 #            else:
 #                print 'a bukan bernilai 1 atau 2'
+14:
+    start_code: |-
+        jawaban is 0
+        while jawaban != 25
+            jawaban is ask 'Apa hasil 5 kali 5?'
+        print 'Sebuah jawaban benar telah diberikan'
+    intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
+    commands:
+    -   name: Pengulangan while dengan boolean
+        explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
+        example: 'Contoh: while jawaban_benar is False'
+        demo_code: |-
+            jawaban is 0
+            while jawaban != 25
+                jawaban is ask 'Apa hasil 5 kali 5?'
+            print 'Sebuah jawaban benar telah diberikan'
+    -   name: Pengulangan while dengan cakupan lebih kecil
+        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
+        example: 'Sebagai contoh: while pembilang < 3'
+        demo_code: |-
+            pembilang is 1
+            while pembilang < 3
+                print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
+                pembilang is pembilang + 1
+            print 'Kita selesai'
+
+13:
+    start_code: |-
+        umur is ask 'Berapa umur mu?'
+        if umur < 13
+            print 'Kamu lebih muda daripada aku!'
+        else
+            print 'Kamu lebih tua daripada aku!'
+    intro_text: "Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`."
+    commands:
+    -   name: Lebih kecil
+        explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
+        example: 'Sebagai contoh: umur < 12'
+        demo_code: |-
+            umur is ask 'Berapa umur mu?'
+            if umur < 13
+                print 'Kamu lebih muda daripada aku!'
+    -   name: Lebih besar
+        explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
+        example: 'Sebagai contoh: umur > 12'
+        demo_code: |-
+            umur is ask 'Berapa umur mu?'
+            if umur > 13
+                print 'Kamu lebih tua daripada aku!'
