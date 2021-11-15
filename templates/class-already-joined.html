@@ -1,8 +1,9 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
-  <h2>{{auth.class_already_joined}}: {{class_info.name}}</h2>
-  <a href="{{localize_link ('/my-profile')}}">{{auth.goto_profile}}</a>
+<div class="px-8 text-center">
+  <h2>{{auth.class_already_joined}}!</h2>
+  <h3>"{{class_info.name}}"</h3>
+  <a href="{{localize_link ('/my-profile')}}"><button class="green-btn mt-4">{{auth.goto_profile}}</button></a>
 </div>
 {% endblock %}
