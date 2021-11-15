@@ -111,4 +111,4 @@ def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
 transform_yaml_to_lark(True)
-# transform_levels_in_all_YAMLs("13-old", 14, remove_brackets)
+transform_levels_in_all_YAMLs("13-old", 14, remove_brackets)
