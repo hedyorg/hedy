@@ -3,43 +3,50 @@ page_title: Welcome to Hedy!
 <div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
   <div class="flex-1">
     <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">Hedy</h1>
-    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">A gradual programming language</h2>
+    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Градуален език за програмиране</h2>
   </div>
   <div class="flex-none">
     <a class="green-btn text-white px-8 py-4" href="/hedy?lang=bg">Опитай</a>
   </div>
 </div>
-Какво е градуален език за програмиране?
+Какво е това "градуален" език за програмиране?
 
-Да се научиш да програмираш е трудоемка задача. Самото писане на код не е трудно, но за да програмираш е нужно да помниш много 
-правила - също като граматическите правила в бългрския езиик, които учиш в училище. 
+Да се научиш да програмираш е трудоемка задача. Самото писане на код всъщност не е трудно, но за да програмираш е нужно да запомниш много 
+правила. Примерно, когато играеш на настолни игри, знаеш, че всяка игра си има свои правила. Същото е и когато изучаваш бългрски език в училище. 
+Там действат граматическите правила!
 
 По подобен начин ще са ти нужни упражнения по програмиране.
 
-You can read these sentences with ease. But do you remember when you were learning to read? You took some time then for each letter!
-That is true for programming too, it might be hard in the beginning, but it will get easier!
+Сега четеш този текст с лекота. А, помниш ли времето, когато се учеше да четеш за първи път? Тогава ти започна с азбуката и буквите, нали?
+По същия начин се учим и да програмираме. Началото може да е трудно, но колкото по-често го правим, толкова по-лесно ни става!
 
-The nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.
-The first few levels do not have that many rules, so you can get used to programming comfortably.
-In every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.
+Ето, че езикът за програмиране Хеди **постепенно** те въвежда в света на програмирането. Това означава и думата **градуален** (постепенен).
+С Хеди ще учиш правилата постепенно.
 
-## Why is Hedy gradual?
-In this video Felienne, the creator of Hedy, explains why Hedy is gradual.
+Това е среда за програмиране разделена на нива. В първите нива има само няколко прости правила за запоняне. 
+В по-горните нива ще се появяват нови правила и **команди**, който ще добавяш в колекцията си със знания. Командите, това са инструкции, 
+които задаваме към компютъра, а той ги изпълнява.
 
+## Защо Хеди е градуален език?
+Това видео е на холандски език, в което Felienne, създателката на Хеди (Hedy), обяснява:
+<br>
+<br>
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
-## Who is Hedy for?
-Hedy is meant for all kids that want to learn programming! You do need to be able to read English with ease.
+## Кой има полза от езика Хеди?
+Хеди е направен за всички деца и ученици, които искат да се научат да програмират и дори разбират малко английски език.
 
-## Do I need programming experience?
-No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.
+## Трябва ли да умея да програмирам преди да започна тук?
+Няма нужда да умееш още. Ако случайно си запознат(а) с езиците Scratch (скрач) или Python (пайтън), някои команди тук ще ти изглеждат познати!
 
-## Is Hedy free?
-Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone who can program can help us make Hedy better. You can find the code on [GitHub](https://github.com/Felienne/hedy).
-If you like Hedy and want to contribute, we do accept (and are very grateful for) [donations](https://www.steunleiden.nl/project/hedy)!
+## Безплатно ли е да се учиш на Хеди?
+Да! Лайденският университет ни позволява да го ползваме и споделяме с други хора съвсем безплатно! 
+Хеди е 'Open source', което означава, че всеки, който може да програмира може и да помага за обогатеването и подобряването на средата и езика. 
+Ако си програмист можеш да погледнеш тук в [GitHub](https://github.com/Felienne/hedy).
+Ако Хеди вече ти харесва и искаш да помогнеш с парични средства, ние с благодарност приемаме <a href="https://www.steunleiden.nl/project/hedy" target="_blank">тук</a>!
+## Ще трябва ли да инсталирам нещо?
+Не. Няма нужда. Хеди работи изцяло в твоя браузър на компютъра или на таблета ти! За предпочитане ползвай един от браузърите Chrome, Edge или FireFox.
 
-## Do I need to install anything?
-No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or FireFox. Hedy also works on your phone or tablet.
 
