@@ -736,8 +736,8 @@ export function toggle_developers_mode() {
   $('#adventures').toggle();
   if ($('#adventures').is(":hidden")) {
     $('#editor-area').removeClass('mt-5');
-    $('#code_editor').css('height', 40 + "em");
-    $('#code_output').css('height', 40 + "em");
+    $('#code_editor').css('height', 36 + "em");
+    $('#code_output').css('height', 36 + "em");
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
