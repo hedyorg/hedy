@@ -425,15 +425,80 @@
             gyumolcs is ['alma', 'banán', 'cseresznye']
             veletlengyumolcs is gyumolcs[random]
             print veletlengyumolcs 
-and:
+14:
+    start_code: |-
+        valasz is 0
+        while jo_valasz != 25
+          valasz is ask 'Mennyi 5-ször 5?'
+        print 'A helyes válasz megadásra került'
+    intro_text: |
+        Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
+        igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
+        választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
+    commands:
+    -   name: |
+            Logikai amíg
+        explanation: A `while` ciklust `True` és `False` segítségével használhatjuk.
+        example: |
+            while jo_valasz is False
+        demo_code: |
+            valasz is 0
+            while jo_valasz != 25
+              valasz is ask 'Mennyi 5-ször 5?'
+            print 'A helyes válasz megadásra került'
+    -   name: |
+            Kisebb amíg
+        explanation: |-
+            Használhatjuk a `while` ciklust a `<` és `>` karakterekkel is. Légy óvatos, meg kell
+            változtatnod a számot, hogy a ciklus véget érjen. Ezt úgy tesszük, hogy a szam
+            változó értéke szam + 1 lesz.
+        example: 'For example: while szam < 3'
+        demo_code: |
+            szam is 1
+            while szam < 3
+              print 'Ezt ' 3 - szam ' alkalommal ismételjük'
+              szam is szam + 1
+            print 'Készen vagyunk'
+
+13:
     start_code: |
-        meg_itt_vagy is False
-        itt_vagy_meg is input('Itt vagy még? igen vagy nem?')
-        if itt_vagy_meg is True:
-         meg_itt_vagy is True
-        valasz is input('What is 5*5?')
-        if meg_itt_vagy is True and valasz is 25:
-         print('azt mondtad, hogy igen és ez a helyes válasz')
+        kor is ask 'Hány éves vagy?'
+        if kor < 13:
+         print 'Fiatalabb vagy nálam!'
+        else
+         print 'Idősebb vagy nálam!'
+    intro_text: |
+        További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
+        ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
+        második, például `4 < 5`. A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a
+        második, például `6 > 5`.
+    commands:
+    -   name: Kisebb
+        explanation: |
+            A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
+            ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo< 15` utasítást használjuk.
+        example: |
+            Például: kor<13
+        demo_code: |
+            kor is ask 'Hány éves vagy?'
+            if kor < 13
+             print 'Fiatalabb vagy, mint én!'
+    -   name: Nagyobb
+        explanation: |
+            A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
+            ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
+        example: |
+            Például: kor>13
+        demo_code: |
+            kor is ask 'Hány éves vagy?'
+            if kor < 13
+             print 'Idősebb vagy, mint én!'
+12:
+    start_code: |
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
     intro_text: |
         Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
         ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
@@ -447,24 +512,24 @@ and:
         example: |
             if 3+2 is 5 and 2+2 is 4
         demo_code: |-
-            valasz1 is input('Mennyi 3+2?')
-            valasz2 is input('Mennyi 2+2?')
-            if valasz1 is 5 and valasz2 is 4:
-             print('Mindkét válasz helyes')
-            else:
-             print('Legalább egy válasz hibás!')
+            valasz1 is ask 'Mennyi 3+2?'
+            valasz2 is ask 'Mennyi 2+2?'
+            if valasz1 is 5 and valasz2 is 4
+             print 'Mindkét válasz helyes'
+            else
+             print 'Legalább egy válasz hibás!'
     -   name: Vagy
         explanation: |
             `Or` Az `or` jobb vagy baloldalán legalább az egyik válasznak igaznak kell lenni, ha
             mindkettő igaz, az is jó.
         example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
-            valasz1 is input('Mennyi 3+2?')
-            valasz2 is input('Mennyi 2+2?')
-            if valasz1 is 5 or valasz2 is 4:
-             print('Legalább egy válasz helyes!')
-            else:
-             print('Mindkét válasz hibás!')
+            valasz1 is ask 'Mennyi 3+2?'
+            valasz2 is ask 'Mennyi 2+2?'
+            if valasz1 is 5 or valasz2 is 4
+             print 'Legalább egy válasz helyes!'
+            else
+             print 'Mindkét válasz hibás!'
 #16:
 #    start_code: |-
 #        # Ez egy olyan program amely néhány matematikai kérdést fog feltenni
@@ -583,71 +648,3 @@ and:
 #                print 'a értéke 2'
 #            else:
 #                print 'a értéke nem 1 vagy 2'
-14:
-    start_code: |-
-        valasz is 0
-        while jo_valasz != 25
-          valasz is ask 'Mennyi 5-ször 5?'
-        print 'A helyes válasz megadásra került'
-    intro_text: |
-        Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
-        igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
-        választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
-    commands:
-    -   name: |
-            Logikai amíg
-        explanation: A `while` ciklust `True` és `False` segítségével használhatjuk.
-        example: |
-            while jo_valasz is False
-        demo_code: |
-            valasz is 0
-            while jo_valasz != 25
-              valasz is ask 'Mennyi 5-ször 5?'
-            print 'A helyes válasz megadásra került'
-    -   name: |
-            Kisebb amíg
-        explanation: |-
-            Használhatjuk a `while` ciklust a `<` és `>` karakterekkel is. Légy óvatos, meg kell
-            változtatnod a számot, hogy a ciklus véget érjen. Ezt úgy tesszük, hogy a szam
-            változó értéke szam + 1 lesz.
-        example: 'For example: while szam < 3'
-        demo_code: |
-            szam is 1
-            while szam < 3
-              print 'Ezt ' 3 - szam ' alkalommal ismételjük'
-              szam is szam + 1
-            print 'Készen vagyunk'
-
-13:
-    start_code: |
-        kor is ask 'Hány éves vagy?'
-        if kor < 13:
-         print 'Fiatalabb vagy nálam!'
-        else
-         print 'Idősebb vagy nálam!'
-    intro_text: |
-        További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
-        ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
-        második, például `4 < 5`. A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a
-        második, például `6 > 5`.
-    commands:
-    -   name: Kisebb
-        explanation: |
-            A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
-            ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo< 15` utasítást használjuk.
-        example: |
-            Például: kor<13
-        demo_code: |
-            kor is ask 'Hány éves vagy?'
-            if kor < 13
-             print 'Fiatalabb vagy, mint én!'
-    -   name: Nagyobb
-        explanation: |
-            A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
-            ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
-        example: |
-            Például: kor>13
-        demo_code: |
-            kor is ask 'Hány éves vagy?'
-            if kor < 13
-             print 'Idősebb vagy, mint én!'
