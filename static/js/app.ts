@@ -512,10 +512,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+  if ($('#adventures').is(":hidden")) {
+      turtleConfig.height = 600;
+      turtleConfig.worldHeight = 600;
+  } else {
+      turtleConfig.height = 300;
+      turtleConfig.worldHeight = 300;
+  }
   turtleConfig.width = 400;
-  turtleConfig.height = 300;
   turtleConfig.worldWidth = 400;
-  turtleConfig.worldHeight = 300;
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
