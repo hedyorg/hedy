@@ -1,12 +1,9 @@
-// adds comparisons
+//  adds and and or
 
-condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
+ifs: _IF _SPACE (condition|andcondition|orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+elifs: _EOL _SPACE? _ELIF _SPACE (condition|andcondition|orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+condition: (equality_check|in_list_check)
 
-//smaller and smaller_equal could be merged or refactored to minimize overlap?
 
-smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
-bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
-smaller_equal: (textwithoutspaces | list_access) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access)
-bigger_equal: (textwithoutspaces | list_access) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access)
-not_equal: (textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (textwithoutspaces | list_access)
-
+andcondition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
+orcondition: (equality_check|in_list_check) (_SPACE _OR _SPACE condition)*

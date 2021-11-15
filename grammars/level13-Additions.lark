@@ -1,6 +1,12 @@
-// adds the while loop
+// adds comparisons
 
-command: print | ifs elses? | ask | for_loop | while_loop| assign_list | list_access_var | assign | comment
-while_loop: _WHILE _SPACE (condition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
 
+//smaller and smaller_equal could be merged or refactored to minimize overlap?
+
+smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
+bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
+smaller_equal: (textwithoutspaces | list_access) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access)
+bigger_equal: (textwithoutspaces | list_access) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access)
+not_equal: (textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (textwithoutspaces | list_access)
 

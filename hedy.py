@@ -1191,6 +1191,13 @@ class ConvertToPython_11(ConvertToPython_10):
 
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
+    def andcondition(self, args):
+        return ' and '.join(args)
+    def orcondition(self, args):
+        return ' or '.join(args)
+
+@hedy_transpiler(level=13)
+class ConvertToPython_13(ConvertToPython_12):
     def process_comparison(self, args, operator):
 
         # we are generating an fstring now
@@ -1226,15 +1233,15 @@ class ConvertToPython_12(ConvertToPython_11):
     def not_equal(self, args):
         return self.process_comparison(args, "!=")
 
-@hedy_transpiler(level=13)
-class ConvertToPython_13(ConvertToPython_12):
+@hedy_transpiler(level=14)
+class ConvertToPython_14(ConvertToPython_13):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
-@hedy_transpiler(level=14)
-class ConvertToPython_14(ConvertToPython_13):
+@hedy_transpiler(level=15)
+class ConvertToPython_15(ConvertToPython_14):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -1325,15 +1332,7 @@ class ConvertToPython_14(ConvertToPython_13):
 #         else:
 #             return f"str({arg0}) == str({arg1})" #no and statements
 #
-# @hedy_transpiler(level=15)
-# class ConvertToPython_15(ConvertToPython_14):
-#     def andcondition(self, args):
-#         return ' and '.join(args)
-#     def orcondition(self, args):
-#         return ' or '.join(args)
 
-
-#
 # @hedy_transpiler(level=19)
 # @hedy_transpiler(level=20)
 # class ConvertToPython_19_20(ConvertToPython_18):
