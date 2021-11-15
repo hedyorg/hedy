@@ -337,31 +337,32 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
+15:
     start_code: |-
-        idade is ask 'Quantos anos tens?'
-        if idade < 13
-            print 'És mais novo(a) do que eu!'
-        else
-            print 'És mais velho(a) do que eu!'
-    intro_text: "Vamos aprender mais coisas novas! Podes já ter aprendido sobre elas na Matemática, o `<` e `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
+        fruta is ['maçã', 'banana', 'cereja']
+        print fruta 
+    intro_text: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
     commands:
-    -   name: "Menor"
-        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se queremos saber se uma variável é menor que 15, usamos `variavel < 15`"
-        example: "Por exemplo: idade < 13"
+    -   explanation: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
+        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
         demo_code: |-
-            idade is ask 'Quantos anos tens?'
-            if idade < 13
-                print 'És mais novo(a) do que eu!'
-    -   name: "Maior"
-        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se queres saber se uma variável é maior do que 15, usamos, utilizamos `variavel > 15`."
-        example: "Por exemplo: idade > 13"
+            fruta is ['maçã', 'banana', 'cereja']
+            print fruta 
+    -   name: "Obtém um elemento da lista."
+        explanation: "Para obter um elemento da lista usamos [número], pelo que, fruta[1] significa: obtém a primeira fruta da lista!"
+        example: "Por exemplo: primeirafruta is fruta[1]"
         demo_code: |-
-            idade is ask 'Quantos anos tens?'
-            if idade > 13
-                print 'És mais velho(a) do que eu!'
-
-13:
+            fruta is ['banana', 'maçã', 'cereja']
+            primeirafruta is fruta[1]
+            print primeirafruta 
+    -   name: "Obtém um elemento aleatório da lista."
+        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
+        example: "For example: randomfruit is fruit[random]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            qualquerfruta is fruta[random]
+            print qualquerfruta 
+14:
     start_code: |-
         resultado is 0
         while resultado != 25:
@@ -387,62 +388,58 @@
                 contagem is contagem + 1
             print 'Acabamos!'
 
-14:
+13:
     start_code: |-
-        fruta is ['maçã', 'banana', 'cereja']
-        print fruta 
-    intro_text: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
+        idade is ask 'Quantos anos tens?'
+        if idade < 13
+            print 'És mais novo(a) do que eu!'
+        else
+            print 'És mais velho(a) do que eu!'
+    intro_text: "Vamos aprender mais coisas novas! Podes já ter aprendido sobre elas na Matemática, o `<` e `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
     commands:
-    -   explanation: "Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
-        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
+    -   name: "Menor"
+        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se queremos saber se uma variável é menor que 15, usamos `variavel < 15`"
+        example: "Por exemplo: idade < 13"
         demo_code: |-
-            fruta is ['maçã', 'banana', 'cereja']
-            print fruta 
-    -   name: "Obtém um elemento da lista."
-        explanation: "Para obter um elemento da lista usamos [número], pelo que, fruta[1] significa: obtém a primeira fruta da lista!"
-        example: "Por exemplo: primeirafruta is fruta[1]"
+            idade is ask 'Quantos anos tens?'
+            if idade < 13
+                print 'És mais novo(a) do que eu!'
+    -   name: "Maior"
+        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se queres saber se uma variável é maior do que 15, usamos, utilizamos `variavel > 15`."
+        example: "Por exemplo: idade > 13"
         demo_code: |-
-            fruta is ['banana', 'maçã', 'cereja']
-            primeirafruta is fruta[1]
-            print primeirafruta 
-    -   name: "Obtém um elemento aleatório da lista."
-        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
-        example: "For example: randomfruit is fruit[random]"
+            idade is ask 'Quantos anos tens?'
+            if idade > 13
+                print 'És mais velho(a) do que eu!'
+
+12:
+    start_code: |-
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: "Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
+    commands:
+    -   name: "And"
+        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser correctas."
+        example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            fruta is ['banana', 'maçã', 'cereja']
-            qualquerfruta is fruta[random]
-            print qualquerfruta 
-#15:
-#    start_code: |-
-#        ainda_estas_aqui is Falso
-#        resposta_ainda_estas_aqui is input('Ainda está aqui? sim ou não?')
-#        if resposta_ainda_estas_aqui is sim:
-#            ainda_estas_aqui is Verdadeiro
-#        resultado is input('Quanto é 5*5?')
-#        if ainda_estas_aqui is Verdadeiro and resultado is 25:
-#            print('Disseste sim e respondeste certo!')
-#    intro_text: "Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
-#    commands:
-#    -   name: "And"
-#        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser correctas."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#            resultado1 is input('Quanto é 3+2?')
-#            resultado2 is input('Quanto é 2+2?')
-#            if resultado1 is 5 and resultado2 is 4:
-#                print('Ambas as respostas estão certas!')
-#            else:
-#                print('Pelo menos uma resposta está errada!')
-#    -   name: "Or"
-#        explanation: "`or` Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correcta. Se ambas estiverem correctas, também não tem problema."
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#            resultado1 is input('Quanto é 3+2?')
-#            resultado2 is input('Quanto é 2+2?')
-#            if resultado1 is 5 or resultado2 is 4:
-#                print('Pelo menos uma resposta está correcta!')
-#            else:
-#                print('Ambas as respostas estão erradas!')
+            resultado1 is ask 'Quanto é 3+2?'
+            resultado2 is ask 'Quanto é 2+2?'
+            if resultado1 is 5 and resultado2 is 4
+                print 'Ambas as respostas estão certas!'
+            else
+                print 'Pelo menos uma resposta está errada!'
+    -   name: "Or"
+        explanation: "`or` Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correcta. Se ambas estiverem correctas, também não tem problema."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            resultado1 is ask 'Quanto é 3+2?'
+            resultado2 is ask 'Quanto é 2+2?'
+            if resultado1 is 5 or resultado2 is 4
+                print 'Pelo menos uma resposta está correcta!'
+            else
+                print 'Ambas as respostas estão erradas!'
 #16:
 #    start_code: |-
 #        # Este é um programa que vai colocar algumas questões de Matemática
