@@ -555,7 +555,7 @@
 14:
     start_code: |-
         resultado is 0
-        while resposta_certa is Falso:
+        while resultado != 25:
             resultado is ask 'Quanto é 5 vezes 5?'
         print 'Foi dada uma boa resposta'
     intro_text: |-
@@ -570,7 +570,7 @@
         example: "Exemplo: while resposta_certa is Falso"
         demo_code: |-
             resultado is 0
-            while resposta_certa is Falso:
+            while resultado != 25:
                 resultado is ask 'Quanto é 5 vezes 5?'
             print 'Foi dada uma boa resposta'
     -   name: "while menor"

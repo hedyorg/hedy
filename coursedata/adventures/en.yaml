@@ -1625,35 +1625,35 @@ adventures:
                         print 'Great! You survived!'
                     ```
                 start_code: "print 'Escape from the haunted house!'"
-#            13:
-#                story_text: |
-#                    ## Haunted House
-#                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
-#
-#                    ## Example Hedy code
-#                    ```
-#                    print 'Escape from the haunted house'
-#                    lives is 3
-#                    doors is 1, 2, 3
-#                    monsters is 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
-#                    for i in range 1 to 10
-#                        if lives > 0
-#                            good_door is doors at random
-#                            monster is monsters at random
-#                            chosen_door is ask 'Which door do you choose?'
-#                            if good_door is chosen_door
-#                                print 'You have chosen the correct door'
-#                            else
-#                                print 'You see...' monster
-#                                if monster is 'a sleeping 3 headed dog'
-#                                    print 'Pffieuw.... Its asleep'
-#                                else
-#                                    print 'You lose one life'
-#                                    lives is lives -1
-#                        else
-#                            print 'GAME OVER'
-#                    ```
-#                start_code: ""
+            13:
+                story_text: |
+                    ## Haunted House
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Escape from the haunted house'
+                    lives is 3
+                    doors is 1, 2, 3
+                    monsters is 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    for i in range 1 to 10
+                        if lives > 0
+                            good_door is doors at random
+                            monster is monsters at random
+                            chosen_door is ask 'Which door do you choose?'
+                            if good_door is chosen_door
+                                print 'You have chosen the correct door'
+                            else
+                                print 'You see...' monster
+                                if monster is 'a sleeping 3 headed dog'
+                                    print 'Pffieuw.... Its asleep'
+                                else
+                                    print 'You lose one life'
+                                    lives is lives -1
+                        else
+                            print 'GAME OVER'
+                    ```
+                start_code: ""
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
