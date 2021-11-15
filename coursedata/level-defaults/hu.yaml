@@ -399,40 +399,33 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
-    start_code: |
-        kor is ask 'Hány éves vagy?'
-        if kor < 13:
-         print 'Fiatalabb vagy nálam!'
-        else
-         print 'Idősebb vagy nálam!'
-    intro_text: |
-        További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
-        ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
-        második, például `4 < 5`. A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a
-        második, például `6 > 5`.
+15:
+    start_code: |-
+        gyumolcs is ['alma', 'banán', 'cseresznye']
+        print gyumolcs 
+    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
     commands:
-    -   name: Kisebb
-        explanation: |
-            A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
-            ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo< 15` utasítást használjuk.
-        example: |
-            Például: kor<13
-        demo_code: |
-            kor is ask 'Hány éves vagy?'
-            if kor < 13
-             print 'Fiatalabb vagy, mint én!'
-    -   name: Nagyobb
-        explanation: |
-            A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
-            ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
-        example: |
-            Például: kor>13
-        demo_code: |
-            kor is ask 'Hány éves vagy?'
-            if kor < 13
-             print 'Idősebb vagy, mint én!'
-13:
+    -   name: "Szögletes zárójel listák körül"
+        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
+        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            print gyumolcs 
+    -   name: "Vegyünk ki egy elemet a listából"
+        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
+        example: "Példa: elsogyumolcs is gyumolcs[1]"
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            elsogyumolcs is gyumolcs[1]
+            print gyumolcs 
+    -   name: "Elem véletlenszerű kiválasztása listából"
+        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
+        example: "Példa: veletlengyumolcs is gyumolcs[random]"
+        demo_code: |-
+            gyumolcs is ['alma', 'banán', 'cseresznye']
+            veletlengyumolcs is gyumolcs[random]
+            print veletlengyumolcs 
+14:
     start_code: |-
         valasz is 0
         while jo_valasz != 25
@@ -467,72 +460,76 @@
               szam is szam + 1
             print 'Készen vagyunk'
 
-14:
-    start_code: |-
-        gyumolcs is ['alma', 'banán', 'cseresznye']
-        print gyumolcs 
-    intro_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
+13:
+    start_code: |
+        kor is ask 'Hány éves vagy?'
+        if kor < 13:
+         print 'Fiatalabb vagy nálam!'
+        else
+         print 'Idősebb vagy nálam!'
+    intro_text: |
+        További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
+        ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
+        második, például `4 < 5`. A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a
+        második, például `6 > 5`.
     commands:
-    -   name: "Szögletes zárójel listák körül"
-        explanation: " Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük."
-        example: "Példa: gyumolcs is ['alma', 'banán', 'cseresznye']"
+    -   name: Kisebb
+        explanation: |
+            A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
+            ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo< 15` utasítást használjuk.
+        example: |
+            Például: kor<13
+        demo_code: |
+            kor is ask 'Hány éves vagy?'
+            if kor < 13
+             print 'Fiatalabb vagy, mint én!'
+    -   name: Nagyobb
+        explanation: |
+            A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
+            ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
+        example: |
+            Például: kor>13
+        demo_code: |
+            kor is ask 'Hány éves vagy?'
+            if kor < 13
+             print 'Idősebb vagy, mint én!'
+12:
+    start_code: |
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: |
+        Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
+        ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
+        az  `or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
+        oldalán mindkét állításnak igaznak kell lennie. Használhatjuk az `or` kifejezést is.
+        Ekkor csak egy állításnak kell helyesnek lennie.
+    commands:
+    -   name: És
+        explanation: |
+            Mindkét állításnak (az `and` bal és jobb oldalán) igaznak kell lenni.
+        example: |
+            if 3+2 is 5 and 2+2 is 4
         demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            print gyumolcs 
-    -   name: "Vegyünk ki egy elemet a listából"
-        explanation: "Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!"
-        example: "Példa: elsogyumolcs is gyumolcs[1]"
+            valasz1 is ask 'Mennyi 3+2?'
+            valasz2 is ask 'Mennyi 2+2?'
+            if valasz1 is 5 and valasz2 is 4
+             print 'Mindkét válasz helyes'
+            else
+             print 'Legalább egy válasz hibás!'
+    -   name: Vagy
+        explanation: |
+            `Or` Az `or` jobb vagy baloldalán legalább az egyik válasznak igaznak kell lenni, ha
+            mindkettő igaz, az is jó.
+        example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            elsogyumolcs is gyumolcs[1]
-            print gyumolcs 
-    -   name: "Elem véletlenszerű kiválasztása listából"
-        explanation: " Véletlenszerű elem kiválasztása listából a [random] utasítással történik, például gyumolcs[random] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!"
-        example: "Példa: veletlengyumolcs is gyumolcs[random]"
-        demo_code: |-
-            gyumolcs is ['alma', 'banán', 'cseresznye']
-            veletlengyumolcs is gyumolcs[random]
-            print veletlengyumolcs 
-#15:
-#    start_code: |
-#        meg_itt_vagy is False
-#        itt_vagy_meg is input('Itt vagy még? igen vagy nem?')
-#        if itt_vagy_meg is True:
-#         meg_itt_vagy is True
-#        valasz is input('What is 5*5?')
-#        if meg_itt_vagy is True and valasz is 25:
-#         print('azt mondtad, hogy igen és ez a helyes válasz')
-#    intro_text: |
-#        Most megtanuljuk `and` és ` or` kifejezések használatát! Ha két állítást szeretnél
-#        ellenőrizni, akkor nem kell kettő `if` utasítást használnod, használhatod az `and` és
-#        az  `or` parancsokat. Ha az `and` parancsot használod, akkor az `and` bal és jobb
-#        oldalán mindkét állításnak igaznak kell lennie. Használhatjuk az `or` kifejezést is.
-#        Ekkor csak egy állításnak kell helyesnek lennie.
-#    commands:
-#    -   name: És
-#        explanation: |
-#            Mindkét állításnak (az `and` bal és jobb oldalán) igaznak kell lenni.
-#        example: |
-#            if 3+2 is 5 and 2+2 is 4
-#        demo_code: |-
-#            valasz1 is input('Mennyi 3+2?')
-#            valasz2 is input('Mennyi 2+2?')
-#            if valasz1 is 5 and valasz2 is 4:
-#             print('Mindkét válasz helyes')
-#            else:
-#             print('Legalább egy válasz hibás!')
-#    -   name: Vagy
-#        explanation: |
-#            `Or` Az `or` jobb vagy baloldalán legalább az egyik válasznak igaznak kell lenni, ha
-#            mindkettő igaz, az is jó.
-#        example: if 3+2 is 5 or 2+2 is 4
-#        demo_code: |-
-#            valasz1 is input('Mennyi 3+2?')
-#            valasz2 is input('Mennyi 2+2?')
-#            if valasz1 is 5 or valasz2 is 4:
-#             print('Legalább egy válasz helyes!')
-#            else:
-#             print('Mindkét válasz hibás!')
+            valasz1 is ask 'Mennyi 3+2?'
+            valasz2 is ask 'Mennyi 2+2?'
+            if valasz1 is 5 or valasz2 is 4
+             print 'Legalább egy válasz helyes!'
+            else
+             print 'Mindkét válasz hibás!'
 #16:
 #    start_code: |-
 #        # Ez egy olyan program amely néhány matematikai kérdést fog feltenni

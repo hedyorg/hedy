@@ -271,28 +271,6 @@ class TestsLevel11(HedyTester):
       test_name=self.name()
     )
 
-  # negative tests
-  def test_assign_string_without_quotes(self):
-    code = textwrap.dedent("""\
-            name is felienne
-            print name""")
-
-    self.multi_level_tester(
-      code=code,
-      exception=hedy.exceptions.UnquotedAssignTextException,
-      test_name=self.name()
-    )
-  
-  def test_list_creation(self):
-    code = textwrap.dedent("""\
-    animals is 'duck', 'dog', 'penguin'""")
-    expected = textwrap.dedent("""\
-    animals = ['duck', 'dog', 'penguin']""")
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
   def test_list_creation_with_spaces(self):
     code = textwrap.dedent("""\
     actions is 'clap your hands', 'stomp your feet', 'shout Hurray'
@@ -318,7 +296,6 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-
   def test_list_creation_with_numbers(self):
     code = textwrap.dedent("""\
     getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -330,4 +307,105 @@ class TestsLevel11(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  def test_if_quotes_in_condition(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam is 'Hedy'
+        print 'koekoek'""")
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_if_quotes_and_spaces_in_condition(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy is top'
+    if naam is 'Hedy is top'
+        print 'koekoek'""")
+    expected = textwrap.dedent("""\
+    naam = 'Hedy is top'
+    if str(naam) == str('Hedy is top'):
+      print(f'koekoek')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_if_else_quotes_in_condition(self):
+    code = textwrap.dedent("""\
+    naam is 'Hedy'
+    if naam is 'Hedy'
+        print 'koekoek'
+    else
+        print 'soepkip'""")
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    if str(naam) == str('Hedy'):
+      print(f'koekoek')
+    else:
+      print(f'soepkip')""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_if_else_no_quotes_for_num_in_condition(self):
+    code = textwrap.dedent("""\
+    antwoord is ask 'Hoeveel is 10 plus 10?'
+    if antwoord is 20
+        print 'Goedzo!'
+        print 'Het antwoord was inderdaad ' antwoord
+    else
+        print 'Foutje'
+        print 'Het antwoord moest zijn ' antwoord""")
+
+    expected = textwrap.dedent("""\
+    antwoord = input('Hoeveel is 10 plus 10?')
+    try:
+      antwoord = int(antwoord)
+    except ValueError:
+      try:
+        antwoord = float(antwoord)
+      except ValueError:
+        pass
+    if str(antwoord) == str('20'):
+      print(f'Goedzo!')
+      print(f'Het antwoord was inderdaad {antwoord}')
+    else:
+      print(f'Foutje')
+      print(f'Het antwoord moest zijn {antwoord}')""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+
+  # negative tests
+  def test_assign_string_without_quotes(self):
+    code = textwrap.dedent("""\
+            name is felienne
+            print name""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.UnquotedAssignTextException,
+      test_name=self.name()
+    )
+  
+  def test_list_creation(self):
+    code = textwrap.dedent("""\
+    animals is 'duck', 'dog', 'penguin'""")
+    expected = textwrap.dedent("""\
+    animals = ['duck', 'dog', 'penguin']""")
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
 
