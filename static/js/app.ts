@@ -730,3 +730,17 @@ export function confetti_cannon(){
     }
   }
 }
+
+export function toggle_developers_mode() {
+  $('#commands-window-total').toggle();
+  $('#adventures').toggle();
+  if ($('#adventures').is(":hidden")) {
+    $('#editor-area').removeClass('mt-5');
+    $('#code_editor').css('height', 40 + "em");
+    $('#code_output').css('height', 40 + "em");
+  } else {
+    $('#editor-area').addClass('mt-5');
+    $('#code_editor').height('22rem');
+    $('#code_output').height('22rem');
+  }
+}
