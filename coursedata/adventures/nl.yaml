@@ -1642,35 +1642,35 @@ adventures:
                         print ' Hoera! Je bent ontsnapt!'
                     ```
                 start_code: "print 'Ontsnap uit het spookhuis!'"
-            13:
-                story_text: |
-                    ## Spookhuis
-                    In dit level gebruik je < en > om levens toe te voegen aan je spel
-
-                    ## Voorbeeld Hedy code
-                    ```
-                    print 'Ontsnap uit het spookhuis'
-                    levens is 3
-                    deuren is 1, 2, 3
-                    monsters is 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
-                    for i in range 1 to 10
-                        if lives > 0
-                            goede_deur is deuren at random
-                            monster is monsters at random
-                            gekozen_deur is ask 'Welke deur kies jij?'
-                            if goede_deur is gekozen_deur
-                                print 'Je hebt de goede deur gekozen'
-                            else
-                                print 'Je ziet...' monster
-                                if monster is 'een slapende 3 koppige hond'
-                                    print 'Pffieuw.... Hij slaapt'
-                                else
-                                    print 'Je hebt een leven kwijt!'
-                                    levens is levens -1
-                        else
-                            print 'GAME OVER'
-                    ```
-                start_code: ""
+#            13:
+#                story_text: |
+#                    ## Spookhuis
+#                    In dit level gebruik je < en > om levens toe te voegen aan je spel
+#
+#                    ## Voorbeeld Hedy code
+#                    ```
+#                    print 'Ontsnap uit het spookhuis'
+#                    levens is 3
+#                    deuren is 1, 2, 3
+#                    monsters is 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
+#                    for i in range 1 to 10
+#                        if lives > 0
+#                            goede_deur is deuren at random
+#                            monster is monsters at random
+#                            gekozen_deur is ask 'Welke deur kies jij?'
+#                            if goede_deur is gekozen_deur
+#                                print 'Je hebt de goede deur gekozen'
+#                            else
+#                                print 'Je ziet...' monster
+#                                if monster is 'een slapende 3 koppige hond'
+#                                    print 'Pffieuw.... Hij slaapt'
+#                                else
+#                                    print 'Je hebt een leven kwijt!'
+#                                    levens is levens -1
+#                        else
+#                            print 'GAME OVER'
+#                    ```
+#                start_code: ""
     piggybank:
         name: Spaarvarken
         description: Tel je zakgeld!

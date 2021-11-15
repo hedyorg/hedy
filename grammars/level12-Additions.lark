@@ -1,7 +1,6 @@
 //  adds and and or
 
 ifs: _IF _SPACE (condition|andcondition|orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-elifs: _EOL _SPACE? _ELIF _SPACE (condition|andcondition|orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 condition: (equality_check|in_list_check)
 
 
