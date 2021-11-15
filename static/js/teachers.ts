@@ -23,7 +23,10 @@ export function create_class() {
 
 export function rename_class(id: string) {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
-
+    if (! class_name) {
+      modal.alert(auth.texts['class_name_empty']);
+      return;
+    }
     $.ajax({
       type: 'PUT',
       url: '/class/' + id,
