@@ -32,11 +32,13 @@
       </table>
   </div>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
-  <br>
-  <button class="green-btn mr-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
-  <button class="green-btn mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-  <button class="red-btn mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
-  <br><br>
-  <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+  <div class="mt-4 flex flex-row">
+    <button class="green-btn" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
+    <button class="green-btn ml-auto mx-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
+    <button class="red-btn" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+  </div>
+  <div class="mt-4">
+    <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+  </div>
 </div>
 {% endblock %}
