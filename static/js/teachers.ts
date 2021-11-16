@@ -38,6 +38,10 @@ export function rename_class(id: string) {
     }).done(function(_response) {
       location.reload ();
     }).fail(function(err) {
+      if (err.responseText == "duplicate") {
+        modal.alert(auth.texts['class_name_duplicate']);
+        return;
+      }
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });

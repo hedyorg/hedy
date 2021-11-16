@@ -89,6 +89,12 @@ def routes (app, database):
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
+        # We use this line to verify if the class name doesn't already exist, otherwise it's a duplicate!
+        Classes = DATABASE.get_teacher_classes(user ['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
+
         Class = DATABASE.update_class (class_id, body ['name'])
 
         return {}, 200
