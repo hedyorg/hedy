@@ -60,13 +60,12 @@
                                                 value="{{ question_nr }}-{{ question_options[counter.value].char_index }}"
                                                 class="class form-radio h-12 w-12">
                                         </div>
-                                        <span>
 
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
                                             <code class="ml-6 text-xl">{{ question_options[counter.value].code|nl2br }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
                                             <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text|nl2br }}</p>
-                                        {% endif %}</span>
+                                        {% endif %}
                                     </label>
                                 </div>
                             {% elif question_options[counter.value].char_index == chosen_option %}
@@ -85,13 +84,11 @@
 
 
                                             </div>
-                                        <span>
                                         {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
                                             <code class="ml-6 text-xl">{{ question_options[counter.value].code | nl2br  }}</code>
                                         {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'   %}
                                             <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
                                         {% endif %}
-                                        </span>
                                     </label>
                                 </div>
                             {% else %}
@@ -108,14 +105,11 @@
                                                 class="class form-radio h-12 w-12">
 
                                            </div>
-                                        <span>
                                                 {% if not question_options[counter.value].option_text or question_options[counter.value].option_text == 'None' %}
                                                     <code class="ml-6 text-xl">{{ question_options[counter.value].code | nl2br }}</code>
                                                 {% elif not question_options[counter.value].code or question_options[counter.value].code == 'None'  %}
                                                     <p class="ml-6 text-xl font-bold"> {{ question_options[counter.value].option_text | nl2br }}</p>
                                                 {% endif %}
-                                            </span>
-
                                     </label>
                                 </div>
                             {% endif %}

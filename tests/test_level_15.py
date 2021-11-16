@@ -1,3 +1,4 @@
+import hedy
 import textwrap
 from test_level_01 import HedyTester
 

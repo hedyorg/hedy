@@ -118,8 +118,8 @@ class TestsLevel16(HedyTester):
 
     def test_ask_with_list_gives_type_error(self):
         code = textwrap.dedent("""\
-         colors is ['orange', 'blue', 'green']
-         favorite is ask 'Is your fav color' colors""")
+        colors is ['orange', 'blue', 'green']
+        favorite is ask 'Is your fav color' colors""")
 
         self.multi_level_tester(
             code=code,

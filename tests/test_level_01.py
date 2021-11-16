@@ -171,7 +171,7 @@ class TestsLevel1(HedyTester):
       test_name=self.name()
     )
 
-  def test_forward_without_number_gives_type_error(self):
+  def test_forward_with_text_gives_type_error(self):
     code = "forward lalalala"
     self.multi_level_tester(
       max_level=9,
