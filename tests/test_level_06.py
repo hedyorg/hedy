@@ -320,6 +320,7 @@ class TestsLevel6(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+
   def test_if_calc_vars(self):
     code =  textwrap.dedent("""\
     cmp is 1
@@ -338,5 +339,36 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+
+  def test_calc_chained_vars(self):
+    code = textwrap.dedent("""\
+      a is 5
+      b is a + 1
+      print a + b""")
+
+    expected = textwrap.dedent("""\
+      a = '5'
+      b = int(a) + int(1)
+      print(f'{int(a) + int(b)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      extra_check_function=lambda x: self.run_code(x) == "11",
+      test_name=self.name()
+    )
+
+  def test_cyclic_var_reference_does_not_give_error(self):
+    code = "b is b + 1"
+
+    expected = "b = int(b) + int(1)"
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
       test_name=self.name()
     )

@@ -120,6 +120,36 @@ class TestsLevel2(HedyTester):
     expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
+    def test_print_list_access(self):
+      code = textwrap.dedent("""\
+      animals is cat, dog, platypus
+      print animals at random""")
+
+      expected = textwrap.dedent("""\
+      animals = ['cat', 'dog', 'platypus']
+      print(f'{random.choice(animals)}')""")
+
+      self.multi_level_tester(
+        code=code,
+        max_level=10,
+        expected=expected,
+        test_name=self.name(),
+        extra_check_function=self.is_not_turtle()
+      )
+
+    # issue #745
+    def test_print_list_gives_type_error(self):
+      code = textwrap.dedent("""\
+      plaatsen is een stad, een  dorp, een strand
+      print plaatsen""")
+
+      self.multi_level_tester(
+        code=code,
+        max_level=10,
+        exception=hedy.exceptions.InvalidArgumentTypeException,
+        test_name=self.name()
+      )
+
   #is tests
   def test_assign(self):
     result = hedy.transpile("naam is Felienne", self.level)
@@ -218,37 +248,79 @@ class TestsLevel2(HedyTester):
     )
 
   #turn tests
-  def test_turn_number(self):
-    code = textwrap.dedent("""\
-    print Turtle race
-    turn 90""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    t.right(90)""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
   def test_turn_number_var(self):
     code = textwrap.dedent("""\
-    print Turtle race
-    direction is 70
-    turn direction""")
-
-    result = hedy.transpile(code, self.level)
-
+      direction is 70
+      turn direction""")
     expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    direction = '70'
-    t.right(direction)""")
+      direction = '70'
+      t.right(direction)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
+  def test_turn_list_access(self):
+    code = textwrap.dedent("""\
+      directions is 10, 20, 30
+      turn directions at random""")
+    expected = textwrap.dedent("""\
+      directions = ['10', '20', '30']
+      t.right(random.choice(directions))""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
+
+  def test_turn_string_var(self):
+    code = textwrap.dedent("""\
+      direction is ten
+      turn direction""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_turn_var_called_left_takes_precedence(self):
+    code = textwrap.dedent("""\
+      left is 180
+      turn left""")
+    expected = textwrap.dedent("""\
+      left = '180'
+      t.right(left)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
+
+  def test_turn_var_called_right_takes_precedence(self):
+    code = textwrap.dedent("""\
+      right is 180
+      turn right""")
+    expected = textwrap.dedent("""\
+      right = '180'
+      t.right(right)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
 
   # issue #792
-  def test_turn_right_number(self):
+  def test_turn_right_number_gives_type_error(self):
     self.multi_level_tester(
       max_level=10,
       code="turn right 90",
@@ -257,20 +329,53 @@ class TestsLevel2(HedyTester):
     )
 
   #forward tests
-  def test_forward_without_argument(self):
+  def test_forward_with_integer_variable(self):
     code = textwrap.dedent("""\
-    forward""")
-    result = hedy.transpile(code, self.level)
+      a is 50
+      forward a""")
     expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)""")
+      a = '50'
+      t.forward(a)
+      time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_forward_with_string_variable(self):
+  def test_forward_with_list_access(self):
     code = textwrap.dedent("""\
-        a is test
-        forward a""")
+      a is 10, 20, 30
+      forward a at random""")
+    expected = textwrap.dedent("""\
+      a = ['10', '20', '30']
+      t.forward(random.choice(a))
+      time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
+
+  def test_forward_with_string_variable_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is test
+      forward a""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_forward_with_list_variable_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is 1, 2, 3
+      forward a""")
     self.multi_level_tester(
       max_level=9,
       code=code,
@@ -401,10 +506,9 @@ class TestsLevel2(HedyTester):
     with self.assertRaises(hedy.exceptions.WrongLevelException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Wrong Level', context.exception.error_code)
-  def test_ask_without_argument_upto_22(self):
+  def test_ask_without_argument(self):
     self.multi_level_tester(
       code="name is ask",
-      max_level=10,
       exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()
     )

@@ -19,11 +19,37 @@ HEDY_MAX_LEVEL = 16
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
+# Boolean variables to allow code which is under construction to not be executed
+local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
+
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
+
+
+class Command:
+    print = 'print'
+    ask = 'ask'
+    echo = 'echo'
+    turn = 'turn'
+    forward = 'forward'
+    for_loop = 'for'
+    sum = 'sum'
+    addition = 'addition'
+    list_access = 'at random'
+
+
+class HedyType:
+    any = 'any'
+    none = 'none'
+    string = 'string'
+    integer = 'integer'
+    list = 'list'
+    float = 'float'
+    boolean = 'boolean'
+
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
@@ -51,22 +77,31 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
+
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
-    1: {'print': ['string', 'integer'],
-        'ask': ['string'],
-        'turn': ['string', 'integer'],
-        'forward': ['integer']},
-    2: {'at random': ['list']},
-    5: {'sum': ['integer'],
-        'addition': ['integer', 'float']},
-    10: {'for_loop': ['integer']},
-    11: {'sum': ['integer', 'float'],
-         'addition': ['integer', 'float', 'string'],
-         'print': ['string', 'integer', 'float']},
-    12: {'input': ['string']},
-    13: {'print': ['string', 'integer', 'float', 'list']}
-  }
+    Command.print: {
+        1: [HedyType.string, HedyType.integer],
+        12: [HedyType.string, HedyType.integer, HedyType.float],
+        16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
+    },
+    Command.ask: {
+        1: [HedyType.string, HedyType.integer],  # until level 11 integers can be used as strings
+        12: [HedyType.string]
+    },
+    Command.turn: {1: ['right', 'left', HedyType.integer]},  # turn command accepts the literals `right` and `left`
+    Command.forward: {1: [HedyType.integer]},
+    Command.list_access: {1: [HedyType.list]},
+    Command.sum: {
+        6: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
+    },
+    Command.addition: {
+        6: [HedyType.integer, HedyType.string],
+        12: [HedyType.string, HedyType.integer, HedyType.float]
+    },
+    Command.for_loop: {11: [HedyType.integer]}
+}
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
 # \ also needs to be escaped because it eats the next character
@@ -175,6 +210,8 @@ class LookupEntry:
     tree: Tree
     skip_hashing: bool
     type_: str = None
+    inferred: bool = False  # types of lookup entries are inferred on demand
+    inferring: bool = False  # used to detect cyclic type inference
 
 
 class TypedTree(Tree):
@@ -255,7 +292,7 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(name, tree, True)
 
     def list_access_var(self, tree):
-        self.add_to_lookup(tree.children[0].children[0], tree, True)
+        self.add_to_lookup(tree.children[0].children[0], tree)
 
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
@@ -278,83 +315,125 @@ class LookupEntryCollector(visitors.Visitor):
         self.lookup.append(LookupEntry(name, tree, skip_hashing))
 
 
-# The transformer infers the type of the partial trees collected in the lookup entries. The type 'any' is used when the
-# type cannot be inferred, and the type 'None' is used when the node does not have a return type, e.g. a command.
-# The transformer is meant to be non-intrusive and avoid false positives. However, it will raise an error if the type
-# of a lookup entry is inferred and it is obviously wrong, e.g:
-# a is 'test'
-# b is a + 1
+# The transformer traverses the whole AST and infers the type of each node. It alters the lookup table entries with
+# their inferred type. It also performs type validation for commands, e.g. 'text' + 1 results in error.
 @v_args(tree=True)
-class TypeInferrer(Transformer):
+class TypeValidator(Transformer):
     def __init__(self, lookup, level):
         super().__init__()
         self.lookup = lookup
         self.level = level
 
-    def ask(self, tree):
-        return self.to_typed_tree(tree, 'any')
+    def print(self, tree):
+        self.validate_args_type(tree.children, Command.print)
+        return self.to_typed_tree(tree)
 
-    def input(self, tree):
-        return self.to_typed_tree(tree, 'any')
+    def ask(self, tree):
+        if self.level > 1:
+            self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        self.validate_args_type(tree.children[1:], Command.ask)
+        return self.to_typed_tree(tree, HedyType.any)
+
+    def forward(self, tree):
+        if tree.children:
+            self.validate_args_type(tree.children, Command.forward)
+        return self.to_typed_tree(tree)
+
+    def turn(self, tree):
+        if tree.children:
+            name = tree.children[0].children[0]
+            # The `turn` command accepts the literal values 'left' and 'right'. However, if there are
+            #  variables with such names, they take precedence and we need to type check them.
+            if name not in ['left', 'right'] or is_variable(name, self.lookup):
+                self.validate_args_type(tree.children, Command.turn)
+        return self.to_typed_tree(tree)
+
+    def assign(self, tree):
+        type_ = self.get_type(tree.children[1])
+        self.save_type_to_lookup(tree.children[0].children[0], type_)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def assign_list(self, tree):
-        return self.to_typed_tree(tree, 'list')
+        self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
+        return self.to_typed_tree(tree, HedyType.list)
 
     # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.validate_args_type(tree.children[0:1], Command.list_access)
+
+        list_name = hash_var(tree.children[0].children[0])
+        if tree.children[1] == 'random':
+            name = f'random.choice({list_name})'
+        else:
+            # We want list access to be 1-based instead of 0-based, hence the -1
+            name = f'{list_name}[{tree.children[1]}-1]'
+        self.save_type_to_lookup(name, HedyType.any)
+
+        return self.to_typed_tree(tree, HedyType.any)
 
     def list_access_var(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def repeat_list(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def for_loop(self, tree):
-        command = 'for_loop'
+        command = Command.for_loop
         allowed_types = get_allowed_types(command, self.level)
 
         start_type = self.check_type_allowed(command, allowed_types, tree.children[1])
         self.check_type_allowed(command, allowed_types, tree.children[2])
 
-        return self.to_typed_tree(tree, start_type)
+        iterator = str(tree.children[0])
+        self.save_type_to_lookup(iterator, start_type)
+
+        return self.to_typed_tree(tree, HedyType.none)
 
     def integer(self, tree):
-        return self.to_typed_tree(tree, 'integer')
+        return self.to_typed_tree(tree, HedyType.integer)
 
     def text(self, tree):
-        return self.to_typed_tree(tree, 'string')
+        # under level 12 integers appear as text, so we parse them
+        if self.level < 12:
+            type_ = HedyType.integer if is_int(tree.children[0]) else HedyType.string
+        else:
+            type_ = HedyType.string
+        return self.to_typed_tree(tree, type_)
+
+    def punctuation(self, tree):
+        return self.to_typed_tree(tree, HedyType.string)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree, 'string')
+        return self.to_typed_tree(tree, HedyType.string)
 
     def var_access(self, tree):
-        return self.to_typed_tree(tree, 'string')
+        return self.to_typed_tree(tree, HedyType.string)
 
     def var(self, tree):
-        type_ = self.get_type(tree)
-        return self.to_typed_tree(tree, type_)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def number(self, tree):
         number = tree.children[0]
         if is_int(number):
-            return self.to_typed_tree(tree, 'integer')
+            return self.to_typed_tree(tree, HedyType.integer)
         if is_float(number):
-            return self.to_typed_tree(tree, 'float')
+            return self.to_typed_tree(tree, HedyType.float)
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
     def substraction(self, tree):
-        return self.to_sum_typed_tree(tree, 'sum')
+        return self.to_sum_typed_tree(tree, Command.sum)
 
     def addition(self, tree):
-        return self.to_sum_typed_tree(tree, 'addition')
+        return self.to_sum_typed_tree(tree, Command.addition)
 
     def multiplication(self, tree):
-        return self.to_sum_typed_tree(tree, 'sum')
+        return self.to_sum_typed_tree(tree, Command.sum)
 
     def division(self, tree):
-        return self.to_sum_typed_tree(tree, 'sum')
+        return self.to_sum_typed_tree(tree, Command.sum)
 
     def to_sum_typed_tree(self, tree, command):
         expr_type = self.get_sum_type(tree, command)
@@ -367,75 +446,94 @@ class TypeInferrer(Transformer):
         right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
 
         if self.ignore_type(left_type) or self.ignore_type(right_type):
-            return 'any'
+            return HedyType.any
 
-        if (left_type == 'string' or right_type == 'string') and left_type != right_type:
+        if (left_type == HedyType.string or right_type == HedyType.string) and left_type != right_type:
             # TODO: probably this requires a separate exception
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type, invalid_argument='',
                                                           allowed_types=allowed_types)
-        if left_type == 'float' or right_type == 'float':
-            return 'float'
+        if left_type == HedyType.float or right_type == HedyType.float:
+            return HedyType.float
 
         return left_type
-
-    def get_type(self, tree):
-        if type(tree) is TypedTree:
-            # TypedTree with type 'None' and 'string' could be in the lookup
-            if tree.type_ in ['None', 'string']:
-                in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
-                if in_lookup:
-                    return type_in_lookup
-            # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
-            return tree.type_
-        else:
-            name = tree.children[0] if type(tree) is Tree else str(tree)
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(name)
-            if in_lookup:
-                return type_in_lookup
-            # For now default to 'string' type
-            return 'string'
 
     def check_type_allowed(self, command, allowed_types, tree):
         arg_type = self.get_type(tree)
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
-            raise_invalid_type_error(allowed_types, command, str(tree), arg_type)
+            self.raise_invalid_type_error(allowed_types, command, tree, arg_type)
         return arg_type
 
-    def ignore_type(self, type_):
-        return type_ in ['any', 'None']
+    def raise_invalid_type_error(self, allowed_types, command, variable, used_invalid_type):
+        # we first try to raise if we expect 1 thing exactly for more precise error messages
+        if len(allowed_types) == 1:
+            variable = variable.children[0]
+            # TODO: the exception could be reused not only for lists
+            if allowed_types[0] == 'list':
+                raise exceptions.RequiredArgumentTypeException(command=command, variable=variable,
+                                                               required_type=allowed_types[0])
 
+        raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=used_invalid_type,
+                                                      invalid_argument='', allowed_types=allowed_types)
+
+    def validate_args_type(self, children, command):
+        allowed_types = get_allowed_types(command, self.level)
+        for child in children:
+            self.check_type_allowed(command, allowed_types, child)
+
+    def get_type(self, tree):
+        # TypedTree with type 'None' and 'string' could be in the lookup
+        if tree.type_ in [HedyType.none, HedyType.string]:
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
+            if in_lookup:
+                return type_in_lookup
+        # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
+        return tree.type_
+
+    def ignore_type(self, type_):
+        return type_ in [HedyType.any, HedyType.none]
+
+    def save_type_to_lookup(self, name, inferred_type):
+        for entry in self.lookup:
+            if entry.name == name and not entry.inferred:
+                entry.type_ = inferred_type
+                entry.inferred = True
+
+    # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
+    #  be inferred. However, there are valid cases in which the lookup entries will be accessed before their type
+    #  is inferred. This is the case with for loops:
+    #      for i in 1 to 10
+    #          print i
+    #  In the above case, we visit `print i`, before the definition of i in the for cycle. In this case, the tree of
+    #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
+    #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
-        # TODO: we should not just take the first match
+        # TODO: we should not just take the first match, take into account var reassignments
         matches = [entry for entry in self.lookup if entry.name == name]
         if matches:
+            if not matches[0].inferred:
+                if matches[0].inferring:
+                    # TODO we know at this point there is a cyclic var reference, e.g. b = b + 1, for now do not raise
+                    matches[0].inferring = False
+                    matches[0].type_ = HedyType.any
+                    matches[0].inferred = True
+                else:
+                    matches[0].inferring = True
+                    TypeValidator(self.lookup, self.level).transform(matches[0].tree)
+                    matches[0].inferring = False
+
             return True, self.lookup_type_fallback(matches[0].type_)
-        hashed_matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
-        if hashed_matches:
-            return True, self.lookup_type_fallback(hashed_matches[0].type_)
         return False, None
 
     def lookup_type_fallback(self, type_in_lookup):
         # If the entry is in the lookup table but its type has not been evaluated yet, then most probably this is a
         # variable referenced before it is defined. In this case, we rely on python to return an error. For now.
-        return 'any' if type_in_lookup is None else type_in_lookup
+        return HedyType.any if type_in_lookup is None else type_in_lookup
 
-    def to_typed_tree(self, tree, type_='None'):
+    def to_typed_tree(self, tree, type_=HedyType.none):
         return TypedTree(tree.data, tree.children, tree.meta, type_)
 
     def __default__(self, data, children, meta):
-        return TypedTree(data, children, meta, 'None')
-
-
-def raise_invalid_type_error(allowed_types, command, variable, used_invalid_type):
-    # we first try to raise if we expect 1 thing exactly for more precise error messages
-    if len(allowed_types) == 1:
-        # TODO: the exception could be reused not only for lists
-        if allowed_types[0] == 'list':
-            raise exceptions.RequiredArgumentTypeException(command=command, variable=variable,
-                                                           required_type=allowed_types[0])
-
-    raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=used_invalid_type,
-                                                  invalid_argument='', allowed_types=allowed_types)
+        return TypedTree(data, children, meta, HedyType.none)
 
 
 def flatten_list_of_lists_to_list(args):
@@ -589,8 +687,7 @@ def process_characters_needing_escape(value):
 
 def get_allowed_types(command, level):
     # get only the allowed types of the command for all levels before the requested level
-    allowed = [values[command] for key, values in commands_and_types_per_level.items()
-               if command in values and key <= level]
+    allowed = [values for key, values in commands_and_types_per_level[command].items() if key <= level]
     # use the allowed types of the highest level available
     return allowed[-1] if allowed else []
 
@@ -648,8 +745,6 @@ class ConvertToPython_1(Transformer):
         if len(args) == 0:
             return self.make_forward(50)
 
-        self.check_args_type_allowed(args, 'forward', self.level)
-
         parameter = int(get_value(args[0]))
         return self.make_forward(parameter)
 
@@ -658,12 +753,12 @@ class ConvertToPython_1(Transformer):
 
     def turn(self, args):
         if len(args) == 0:
-            return "t.right(90)" #no arguments works, and means a right turn
+            return "t.right(90)"  # no arguments defaults to a right turn
 
         argument = args[0]
-        if is_variable(argument, self.lookup):        #is the argument a variable? if so, use that
+        if is_variable(argument, self.lookup):  # is the argument a variable? if so, use that
             return f"t.right({argument})"
-        elif argument.isnumeric():         #numbers can also be passed through
+        elif argument.isnumeric():  # numbers can also be passed through
             return f"t.right({argument})"
         elif argument == 'left':
             return "t.left(90)"
@@ -671,40 +766,9 @@ class ConvertToPython_1(Transformer):
             return "t.right(90)"
         else:
             raise exceptions.InvalidArgumentTypeException(command='turn', invalid_type='',
-                                                            allowed_types=['right', 'left', 'number'],
-                                                            invalid_argument=argument)
+                                                          allowed_types=get_allowed_types('turn', self.level),
+                                                          invalid_argument=argument)
 
-    def check_args_type_allowed(self, args, command, level):
-        allowed_types = get_allowed_types(command, level)
-        for arg in args:
-            assignment = self.find_in_lookup(arg)
-            if assignment:
-                if assignment.type_ not in ['any'] and assignment.type_ not in allowed_types:
-                    raise_invalid_type_error(allowed_types, command, assignment.name, assignment.type_)
-            else:
-                type_ = self.get_arg_type(arg)
-                if type_ not in ['any'] and type_ not in allowed_types:
-                    raise exceptions.InvalidArgumentTypeException(command=command, invalid_type='',
-                                                                  allowed_types=allowed_types,
-                                                                  invalid_argument=arg if isinstance(arg, str) else args[0].children[0])
-
-    def get_arg_type(self, arg):
-        # TODO: Improve type inferring logic. For now, fallback to 'any' which means no type checks will be done if
-        #  the arg is a Tree. Note that we do not have access to the TypeInferrer logic (and we cannot use it to
-        #  determine the type since we do not have the full Tree object here). Maybe we can still reuse some logic?
-        if type(arg) is Tree:
-            return 'any'
-        if is_int(arg):
-            return 'integer'
-        if is_float(arg):
-            return 'float'
-        return 'string'
-
-
-    def find_in_lookup(self, variable):
-        lookup_vars = [a for a in self.lookup if a.name == variable]
-        # this now grabs the last occurrence, once we have slicing we want to be more precise!
-        return lookup_vars[-1] if lookup_vars else None
 
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
@@ -787,9 +851,6 @@ class ConvertToPython_2(ConvertToPython_1):
         name = args[0]
         return hash_var(name)
     def print(self, args):
-        # grab the allowed arguments from the dictionary
-        self.check_args_type_allowed(args, 'print', self.level)
-
         argument_string = ""
         i = 0
 
@@ -813,19 +874,12 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return self.make_forward(50)
 
-        self.check_args_type_allowed(args, 'forward', self.level)
-
-        # if the parameter is a number, use it as is
-        # otherwise, see if we got a defined variable. if not, give an error
-        try:
+        if is_int(get_value(args[0])):
             parameter = int(get_value(args[0]))
-        except:
-            if is_variable(args[0], self.lookup):
-                parameter = args[0]
-            else:
-                raise exceptions.InvalidArgumentTypeException(command='forward', invalid_type='',
-                                                   allowed_types=get_allowed_types('forward', self.level),
-                                                   invalid_argument=args[0])
+        else:
+            # if not an int, then it is a variable
+            parameter = args[0]
+
         return self.make_forward(parameter)
 
     def ask(self, args):
@@ -847,7 +901,6 @@ class ConvertToPython_2(ConvertToPython_1):
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-        self.check_args_type_allowed([args[0]], 'at random', self.level)
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
@@ -909,7 +962,6 @@ class ConvertToPython_4(ConvertToPython_2):
 
     def print(self, args):
         args = self.check_print_arguments(args)
-        self.check_args_type_allowed(args, 'print', self.level)
         argument_string = ''
         for argument in args:
             argument = argument.replace("'", '') #no quotes needed in fstring
@@ -922,10 +974,8 @@ class ConvertToPython_4(ConvertToPython_2):
         return ConvertToPython_2.print(self, args)
 
     def ask(self, args):
-        args_new = []
         var = args[0]
         remaining_args = args[1:]
-        self.check_args_type_allowed(remaining_args, 'ask', self.level)
         return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
@@ -967,7 +1017,6 @@ class ConvertToPython_6(ConvertToPython_5):
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args)
-        self.check_args_type_allowed(args, 'print', self.level)
 
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
@@ -1010,8 +1059,6 @@ class ConvertToPython_6(ConvertToPython_5):
         # tree resulting from earlier processing
         # for trees we need to grap the inner string
         # for tokens we add int around them
-
-        self.check_args_type_allowed(args, 'sum', self.level)
 
         args = [self.process_token_or_tree(a) for a in args]
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
@@ -1127,7 +1174,6 @@ class ConvertToPython_12(ConvertToPython_11):
     def ask(self, args):
         var = args[0]
         remaining_args = args[1:]
-        self.check_args_type_allowed(remaining_args, 'ask', self.level)
 
         assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
 
@@ -1154,7 +1200,6 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, args):
         # TODO: new type checking is needed for string assignment
         self.check_var_usage(args)
-        self.check_args_type_allowed(args, 'print', self.level)
 
         args_new = []
         for a in args:
@@ -1486,9 +1531,16 @@ def get_full_grammar_for_level(level):
 
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "keywords-" + str(language) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
+    try: 
+        if not local_keywords_enabled: 
+            raise FileNotFoundError("Local keywords are not enabled")
+        filename = "keywords-" + str(language) + ".lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+    except FileNotFoundError: 
+        filename = "keywords-en.lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
     return grammar_text
 
 PARSER_CACHE = {}
@@ -1747,12 +1799,11 @@ def create_lookup_table(abstract_syntax_tree, level):
     visitor.visit_topdown(abstract_syntax_tree)
     entries = visitor.lookup
 
-    for entry in entries:
-        typed_tree = TypeInferrer(entries, level).transform(entry.tree)
-        entry.type_ = typed_tree.type_
+    TypeValidator(entries, level).transform(abstract_syntax_tree)
 
     # For now the lookup table should contain the entries with their names in plain text and hashed
-    return entries + [LookupEntry(hash_var(e.name), e.tree, e.skip_hashing, e.type_) for e in entries]
+    return entries + [LookupEntry(hash_var(e.name), e.tree, e.skip_hashing, e.type_)
+                      for e in entries if not e.skip_hashing]
 
 
 def transpile_inner(input_string, level, lang="en"):

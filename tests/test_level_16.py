@@ -1,3 +1,4 @@
+import hedy
 import textwrap
 from test_level_01 import HedyTester
 
@@ -88,5 +89,40 @@ class TestsLevel16(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
+            test_name=self.name()
+        )
+
+    # ask tests
+    def test_ask_with_list_var(self):
+        code = textwrap.dedent("""\
+        colors is ['orange', 'blue', 'green']
+        favorite is ask 'Is your fav color' colors[1]""")
+
+        expected = textwrap.dedent("""\
+        colors = ['orange', 'blue', 'green']
+        favorite = input('Is your fav color'+colors[1-1])
+        try:
+          favorite = int(favorite)
+        except ValueError:
+          try:
+            favorite = float(favorite)
+          except ValueError:
+            pass""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_not_turtle(),
+            test_name=self.name()
+        )
+
+    def test_ask_with_list_gives_type_error(self):
+        code = textwrap.dedent("""\
+        colors is ['orange', 'blue', 'green']
+        favorite is ask 'Is your fav color' colors""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
             test_name=self.name()
         )

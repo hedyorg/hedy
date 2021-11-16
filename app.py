@@ -324,7 +324,7 @@ def parse():
         with querylog.log_time('transpile'):
 
             try:
-                transpile_result = hedy.transpile(code, level)
+                transpile_result = hedy.transpile(code, level, lang)
             except hedy.exceptions.FtfyException as ex:
                 # The code was fixed with a warning
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
