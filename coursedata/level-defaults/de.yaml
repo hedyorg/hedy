@@ -362,70 +362,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
-    start_code: |-
-        alter is ask 'Wie alt bist du?'
-        if alter < 13
-            print 'Du bist jünger als ich!'
-        else
-            print 'Du bist älter als ich!'
-    intro_text: |-
-        Wir lernen weitere neue Elemente kennen!
-        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
-        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
-        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
-    commands:
-    -   name: "Kleiner"
-        explanation: |-
-            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
-            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
-        example: "alter < 13"
-        demo_code: |-
-            alter is ask 'Wie alt bist du?'
-            if alter < 13
-                print 'Du bist jünger als ich!'
-    -   name: "Größer"
-        explanation: |-
-            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
-            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
-        example: "alter > 13"
-        demo_code: |-
-            alter is ask 'Wie alt bist du?'
-            if alter > 13
-                print 'Du bist älter als ich!'
-13:
-    start_code: |-
-        antwort is 0
-        while antwort != 25:
-            antwort is ask 'Wieviel ist 5 mal 5?'
-            print 'Das ist die richtge Antwort!'
-    intro_text: |-
-        Wir werden eine neue Schleife lernen, die `while`-Schleife!
-        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
-        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
-        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
-    commands:
-    -   name: "while"
-        explanation: "Wir können die `while`-Schleife verwenden."
-        example: "while richtige_antwort is False"
-        demo_code: |-
-            antwort is 0
-            while antwort != 25:
-                antwort is ask 'Wieviel ist 5 mal 5?'
-                print 'Das ist die richtge Antwort!'
-    -   name: "while mit Ungleichungen"
-        explanation: |-
-            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
-            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zaehler is zaehler + 1`.
-        example: "while zaehler < 3"
-        demo_code: |-
-            zaehler is 1
-            while zaehler < 3
-                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
-                zaehler is zaehler + 1
-            print 'Wir sind fertig!'
-14:
+15:
     start_code: |-
         fruechte is ['Apfel', 'Banane', 'Kirsche']
         print fruechte
@@ -459,43 +396,103 @@
             zufaellige_frucht is fruechte[random]
             print zufaellige_frucht
 
-#15:
-#    start_code: |-
-#        du_bist_noch_hier is False
-#        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
-#        if bist_du_noch_hier is ja:
-#            du_bist_noch_hier is True
-#        antwort is input('Wieviel ist 5*5')
-#        if du_bist_noch_hier is True and antwort is 25:
-#            print('Du hast ja gesagt und die richtige Antwort gegeben!')
-#    intro_text: |-
-#        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
-#        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
-#        Du kannst auch `oder` verwenden.
-#        Dann muss nur eine Aussage richtig sein.
-#    commands:
-#    -   name: "`and`"
-#        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#            antwort1 is input('Was ergibt 3+2?')
-#            antwort2 is input('Was ergibt 2+2?')
-#            if antwort1 is 5 and antwort2 is 4:
-#                print('Beide Antworten sind richtig!')
-#            else:
-#                print('Mindestens eine Antwort ist falsch.')
-#    -   name: "`or`"
-#        explanation: |-
-#            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
-#            Wenn beide richtig sind, ist es auch in Ordnung.
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#            antwort1 is input('Was ergibt 3+2?')
-#            antwort2 is input('Was ergibt 2+2?')
-#            if antwort1 is 5 or antwort2 is 4:
-#                print('Mindestens eine Antwort ist richtig!')
-#            else:
-#                print('Beide Antworten sind falsch.')
+14:
+    start_code: |-
+        antwort is 0
+        while antwort != 25:
+            antwort is ask 'Wieviel ist 5 mal 5?'
+            print 'Das ist die richtge Antwort!'
+    intro_text: |-
+        Wir werden eine neue Schleife lernen, die `while`-Schleife!
+        Wir setzen die Schleife so lange fort, bis die Anweisung wahr/gültig ist!
+        Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
+        Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
+    commands:
+    -   name: "while"
+        explanation: "Wir können die `while`-Schleife verwenden."
+        example: "while richtige_antwort is False"
+        demo_code: |-
+            antwort is 0
+            while antwort != 25:
+                antwort is ask 'Wieviel ist 5 mal 5?'
+                print 'Das ist die richtge Antwort!'
+    -   name: "while mit Ungleichungen"
+        explanation: |-
+            Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
+            Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
+            Wir machen das hier mit `zaehler is zaehler + 1`.
+        example: "while zaehler < 3"
+        demo_code: |-
+            zaehler is 1
+            while zaehler < 3
+                print 'Wir machen dies noch ' 3 - zaehler ' mal.'
+                zaehler is zaehler + 1
+            print 'Wir sind fertig!'
+13:
+    start_code: |-
+        alter is ask 'Wie alt bist du?'
+        if alter < 13
+            print 'Du bist jünger als ich!'
+        else
+            print 'Du bist älter als ich!'
+    intro_text: |-
+        Wir lernen weitere neue Elemente kennen!
+        Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen
+        Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, wie `4 < 5`.
+        Das `>` prüft, ob die erste Zahl größer als die zweite ist, wie z.B. `6 > 5`.
+    commands:
+    -   name: "Kleiner"
+        explanation: |-
+            Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+        example: "alter < 13"
+        demo_code: |-
+            alter is ask 'Wie alt bist du?'
+            if alter < 13
+                print 'Du bist jünger als ich!'
+    -   name: "Größer"
+        explanation: |-
+            Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
+            Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+        example: "alter > 13"
+        demo_code: |-
+            alter is ask 'Wie alt bist du?'
+            if alter > 13
+                print 'Du bist älter als ich!'
+12:
+    start_code: |-
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: |-
+        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
+        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
+        Du kannst auch `oder` verwenden.
+        Dann muss nur eine Aussage richtig sein.
+    commands:
+    -   name: "`and`"
+        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            antwort1 is ask 'Was ergibt 3+2?'
+            antwort2 is ask 'Was ergibt 2+2?'
+            if antwort1 is 5 and antwort2 is 4
+                print 'Beide Antworten sind richtig!'
+            else
+                print 'Mindestens eine Antwort ist falsch.'
+    -   name: "`or`"
+        explanation: |-
+            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
+            Wenn beide richtig sind, ist es auch in Ordnung.
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            antwort1 is ask 'Was ergibt 3+2?'
+            antwort2 is ask 'Was ergibt 2+2?'
+            if antwort1 is 5 or antwort2 is 4
+                print 'Mindestens eine Antwort ist richtig!'
+            else
+                print 'Beide Antworten sind falsch.'
 #16:
 #    start_code: |-
 #        # Dieses Programm wird ein paar mathematische Fragen stellen
