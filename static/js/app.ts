@@ -583,7 +583,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
   }
 
-
   // output functions are configurable.  This one just appends some text
   // to a pre element.
   function outf(text: string) {
