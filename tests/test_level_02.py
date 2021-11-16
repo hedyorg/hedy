@@ -26,7 +26,6 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-
   def test_print_comma(self):
     result = hedy.transpile("print welkom bij steen, schaar, papier", self.level)
     expected = textwrap.dedent("""\
@@ -235,6 +234,26 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  #sleep tests
+  def test_sleep_with_number(self):
+    code = "sleep 2"
+    expected = "time.sleep(2)"
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+  def test_sleep_without_number(self):
+    code = "sleep"
+    expected = "time.sleep(1)"
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+
   #turn tests
   def test_turn_number(self):
     code = textwrap.dedent("""\
@@ -285,7 +304,6 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-
   def test_forward_with_string_variable(self):
     code = textwrap.dedent("""\
         a is test
@@ -296,7 +314,6 @@ class TestsLevel2(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
-
   def test_forward_with_list_variable(self):
     code = textwrap.dedent("""\
         a is 1, 2, 3
