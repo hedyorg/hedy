@@ -138,7 +138,7 @@ class TestsLevel1(HedyTester):
   def test_echo_with_quotes(self):
     code = textwrap.dedent("""\
     ask waar?
-    echo oma's aan de """)
+    echo oma's aan de""")
 
     result = hedy.transpile(code, self.level)
 
@@ -211,7 +211,7 @@ class TestsLevel1(HedyTester):
       expected = textwrap.dedent("""\
       print('Hallo')
       answer = input('Wat is je lievelingskleur')
-      print('je lievelingskleur is'+answer)""")
+      print('je lievelingskleur is '+answer)""")
 
       result = hedy.transpile(input, self.level)
       self.assertEqual(expected, result.code)
