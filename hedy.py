@@ -851,6 +851,13 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             return args[0] + '[' + args[1] + '-1]'
 
+    def sleep(self, args):
+        if args == []:
+            return "time.sleep(1)"
+        else:
+            return f"time.sleep({args[0]})"
+
+
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
