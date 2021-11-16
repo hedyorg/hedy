@@ -92,7 +92,10 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 # Preamble that will be used for non-Turtle programs
-NORMAL_PREFIX_CODE = "# coding=utf8\nimport random\n"
+NORMAL_PREFIX_CODE = textwrap.dedent("""\
+    # coding=utf8
+    import random, time
+""")
 
 def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]

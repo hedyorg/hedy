@@ -1,28 +1,35 @@
-import hedy
+
 import textwrap
 from test_level_01 import HedyTester
 
 class TestsLevel13(HedyTester):
   level = 13
 
-  def test_while_equals(self):
+  def test_and(self):
     code = textwrap.dedent("""\
-      antwoord is 0
-      while antwoord != 25
-          antwoord is ask 'Wat is 5 keer 5?'
-      print 'Goed gedaan!'""")
+      naam is ask 'hoe heet jij?'
+      leeftijd is ask 'hoe oud ben jij?'
+      if naam is 'Felienne' and leeftijd is 37
+          print 'hallo jij!'""")
     expected = textwrap.dedent("""\
-    antwoord = 0
-    while str(antwoord).zfill(100)!=str(25).zfill(100):
-      antwoord = input(\'Wat is 5 keer 5?\')
+      naam = input('hoe heet jij?')
       try:
-        antwoord = int(antwoord)
+        naam = int(naam)
       except ValueError:
         try:
-          antwoord = float(antwoord)
+          naam = float(naam)
         except ValueError:
           pass
-    print(f'Goed gedaan!')""")
+      leeftijd = input('hoe oud ben jij?')
+      try:
+        leeftijd = int(leeftijd)
+      except ValueError:
+        try:
+          leeftijd = float(leeftijd)
+        except ValueError:
+          pass
+      if str(naam) == str('Felienne') and str(leeftijd) == str('37'):
+        print(f'hallo jij!')""")
 
     self.multi_level_tester(
       code=code,
@@ -31,24 +38,13 @@ class TestsLevel13(HedyTester):
       test_name=self.name()
     )
 
-  def test_while_smaller(self):
+  def test_or(self):
     code = textwrap.dedent("""\
-      getal is 0
-      while getal < 100000
-          getal is ask 'HOGER!!!!!'
-      print 'Hoog he?'""")
+      if 5 is 5 or 4 is 4
+          print 'hallo'""")
     expected = textwrap.dedent("""\
-    getal = 0
-    while str(getal).zfill(100)<str(100000).zfill(100):
-      getal = input('HOGER!!!!!')
-      try:
-        getal = int(getal)
-      except ValueError:
-        try:
-          getal = float(getal)
-        except ValueError:
-          pass
-    print(f'Hoog he?')""")
+      if str('5') == str('5') or str('4') == str('4'):
+        print(f'hallo')""")
 
     self.multi_level_tester(
       code=code,
@@ -56,3 +52,6 @@ class TestsLevel13(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+
+
+

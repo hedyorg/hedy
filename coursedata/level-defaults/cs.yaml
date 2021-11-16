@@ -35,10 +35,6 @@
         ```
 
         `print` stále funguje jako v úrovni 1 a už nepotřebuješ `echo`.
-
-        V úrovni 2 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `at random`.
-
-        Všechny kódy úrovně 2 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
     start_code: print Ahoj světe!
     commands:
     -   explanation: Pojmenuj slovo pomocí `is` pro další použití v kódu.
@@ -51,12 +47,23 @@
         demo_code: |-
             barva is ask Jaká je tvoje nejoblíbenější barva?
             print barva je tvoje nejoblíbenější!
+3:
+    intro_text: |-
+        V úrovni 3 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `at random`.
+        ```
+        zvirata is pes, kočka, klokan
+        print zvirata at random
+        ```
+
+        Všechny kódy úrovně 3 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
+    start_code: print Ahoj světe!
+    commands:
     -   explanation: Vyber náhodné slovo ze seznamu pomocí `at` a `random`.
         example: 'Příklad: zvirata is pes, kočka, klokan'
         demo_code: |-
             zvirata is pes, kočka, klokan
             print zvirata at random
-3:
+4:
     start_code: print 'Ahoj světe!'
     intro_text: |4
 
@@ -85,7 +92,7 @@
         demo_code: |-
             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             print barva ' je tvoje nejoblíbenější barva.'
-4:
+5:
     start_code: |-
         jmeno is ask 'Jak se jmenuješ?'
         if jmeno is Hedy print 'Super!' else print 'Ok, tebe neznám.'
@@ -119,7 +126,7 @@
         demo_code: |-
             barva is ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj'
-5:
+6:
     start_code: print '5 krát 5 je ' 5 * 5
     intro_text: |-
         `ask`,` print` a `if` stále fungují jako na úrovních 4.
@@ -151,7 +158,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: repeat 3 times print 'Hedy je zábavná!'
     intro_text: |-
         `ask`, `print` a `if` fungují stejně jako na úrovni 4 a 6.
@@ -179,7 +186,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Ahojte, kamarádi'
@@ -210,7 +217,7 @@
             else
                 print 'Ups, těsně vedle...'
                 print 'Správný výsledek je 10.'
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -252,7 +259,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -279,7 +286,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-10:
+11:
     start_code: |-
         for pocitadlo in range 1 to 5
             print pocitadlo
@@ -301,7 +308,7 @@
             else
                 print 'Ups, těsně vedle...'
                 print 'Správný výsledek je 10.'
-11:
+12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
@@ -339,115 +346,34 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
-    start_code: |-
-        vek is ask 'Kolik je ti let?'
-        if vek < 13
-            print 'Jsi mladší než já!'
-        else
-            print 'Jsi starší než já!'
-    intro_text: |-
-        Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
-        `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
-        `>` naopak zjišťuje, jestli je první číslo větší, jako v `6 > 5`.
-    commands:
-    -   name: Menší
-        explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
-        example: 'Příklad: vek < 13'
-        demo_code: |-
-            vek is ask 'Kolik je ti let?'
-            if vek < 13
-                print 'Jsi mladší než já!'
-    -   name: Větší
-        explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
-        example: 'Příklad: vek > 13'
-        demo_code: |-
-            vek is ask 'Kolik je ti let?'
-            if vek > 13
-                print 'Jsi mladší než já!'
 13:
     start_code: |-
-        odpoved is 0
-        while spravna_odpoved != 25:
-            odpoved is ask 'Kolik je 5 * 5?'
-        print 'Dostala jsem správnou odpověď!'
-
-    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
     commands:
-    -   name: Pravdivostní while
-        explanation: Můžeme použít `while` cyklus s `True` a `False`.
-        example: 'Příklad: while spravna_odpoved is False'
+    -   name: and
+        explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
+        example: if 3+2 is 5 and 2+2 is 4
         demo_code: |-
-            odpoved is 0
-            while spravna_odpoved != 25
-                odpoved is ask 'Kolik je 5 * 5?'
-            print 'Dostala jsem správnou odpověď!'
-    -   name: While s operátory menší/větší než
-        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
-        example: 'Příklad: while pocet < 3'
+            odpoved1 is ask 'Kolik je 3 + 2?'
+            odpoved2 is ask 'Kolik je 2 + 2?'
+            if odpoved1 is 5 and odpoved2 is 4
+                print 'Obě odpovědi jsou správně!'
+            else
+                print 'Minimálně jedna z odpovědí je špatně!'
+    -   name: or
+        explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
+        example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
-            pocet is 1
-            while pocet < 3
-                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
-                pocet is pocet + 1
-            print 'Hotovo'
-14:
-    start_code: |-
-        ovoce is ['jablko', 'banán', 'třešně']
-        print ovoce
-    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
-    commands:
-    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
-        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            print ovoce
-    -   name: Vyber položku ze seznamu.
-        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
-        example: 'Příklad: prvniovoce is ovoce[1]'
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            prvniovoce is ovoce[1]
-            print prvniovoce
-    -   name: Získej náhodnou položku ze seznamu.
-        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
-        example: 'Příklad: nahodneovoce is ovoce[random]'
-        demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            nahodneovoce is ovoce[random]
-            print nahodneovoce
-
-#15:
-#    start_code: |-
-#        jsi_tady is False
-#        jsi_opravdu_tady is input('Jsi tady stále s námi? ano nebo ne?')
-#        if jsi_opravdu_tady is ano:
-#            jsi_tady is True
-#        odpoved is input('Kolik je 5 * 5?')
-#        if jsi_tady is True and odpoved is 25:
-#            print('Jsi tady a víš, kolik je 5 * 5. Skvělá práce!')
-#    intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
-#    commands:
-#    -   name: and
-#        explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
-#        example: if 3+2 is 5 and 2+2 is 4
-#        demo_code: |-
-#            odpoved1 is input('Kolik je 3 + 2?')
-#            odpoved2 is input('Kolik je 2 + 2?')
-#            if odpoved1 is 5 and odpoved2 is 4:
-#                print('Obě odpovědi jsou správně!')
-#            else:
-#                print('Minimálně jedna z odpovědí je špatně!')
-#    -   name: or
-#        explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
-#        example: if 3+2 is 5 or 2+2 is 4
-#        demo_code: |-
-#            odpoved1 is input('Kolik je 3 + 2?')
-#            odpoved2 is input('Kolik je 2 + 2?')
-#            if odpoved1 is 5 or odpoved2 is 4:
-#                print('Alespoň jedna odpověď je správně!')
-#            else:
-#                print('Obě odpovědi jsou špatně!')
+            odpoved1 is ask 'Kolik je 3 + 2?'
+            odpoved2 is ask 'Kolik je 2 + 2?'
+            if odpoved1 is 5 or odpoved2 is 4
+                print 'Alespoň jedna odpověď je správně!'
+            else
+                print 'Obě odpovědi jsou špatně!'
 #16:
 #    start_code: |-
 #        # Tento program se tě zeptá na pár matematických otázek
@@ -561,3 +487,80 @@
 #                print 'a je 2'
 #            else:
 #                print 'a není ani 1 ani 2'
+14:
+    start_code: |-
+        vek is ask 'Kolik je ti let?'
+        if vek < 13
+            print 'Jsi mladší než já!'
+        else
+            print 'Jsi starší než já!'
+    intro_text: |-
+        Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
+        `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
+        `>` naopak zjišťuje, jestli je první číslo větší, jako v `6 > 5`.
+    commands:
+    -   name: Menší
+        explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
+        example: 'Příklad: vek < 13'
+        demo_code: |-
+            vek is ask 'Kolik je ti let?'
+            if vek < 13
+                print 'Jsi mladší než já!'
+    -   name: Větší
+        explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
+        example: 'Příklad: vek > 13'
+        demo_code: |-
+            vek is ask 'Kolik je ti let?'
+            if vek > 13
+                print 'Jsi mladší než já!'
+15:
+    start_code: |-
+        odpoved is 0
+        while spravna_odpoved != 25
+            odpoved is ask 'Kolik je 5 * 5?'
+        print 'Dostala jsem správnou odpověď!'
+
+    intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+    commands:
+    -   name: Pravdivostní while
+        explanation: Můžeme použít `while` cyklus s `True` a `False`.
+        example: 'Příklad: while spravna_odpoved is False'
+        demo_code: |-
+            odpoved is 0
+            while spravna_odpoved != 25
+                odpoved is ask 'Kolik je 5 * 5?'
+            print 'Dostala jsem správnou odpověď!'
+    -   name: While s operátory menší/větší než
+        explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+        example: 'Příklad: while pocet < 3'
+        demo_code: |-
+            pocet is 1
+            while pocet < 3
+                print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+                pocet is pocet + 1
+            print 'Hotovo'
+16:
+    start_code: |-
+        ovoce is ['jablko', 'banán', 'třešně']
+        print ovoce
+    intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
+    commands:
+    -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
+        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
+        demo_code: |-
+            ovoce is ['jablko', 'banán', 'třešně']
+            print ovoce
+    -   name: Vyber položku ze seznamu.
+        explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
+        example: 'Příklad: prvniovoce is ovoce[1]'
+        demo_code: |-
+            ovoce is ['jablko', 'banán', 'třešně']
+            prvniovoce is ovoce[1]
+            print prvniovoce
+    -   name: Získej náhodnou položku ze seznamu.
+        explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
+        example: 'Příklad: nahodneovoce is ovoce[random]'
+        demo_code: |-
+            ovoce is ['jablko', 'banán', 'třešně']
+            nahodneovoce is ovoce[random]
+            print nahodneovoce
