@@ -1697,7 +1697,7 @@ def is_program_valid(program_root, input_string, level, lang):
             invalid_info = invalid_info[0]
         if invalid_info.error_type == ' ':
             # the error here is a space at the beginning of a line, we can fix that!
-            fixed_code = program_repair.repair(input_string)
+            fixed_code = program_repair.remove_leading_spaces(input_string)
             if fixed_code != input_string:  # only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, lang)
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code,
