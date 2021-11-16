@@ -18,6 +18,9 @@ HEDY_MAX_LEVEL = 16
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
+# Boolean variables to allow code which is under construction to not be executed
+local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
+
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
@@ -1485,9 +1488,16 @@ def get_full_grammar_for_level(level):
 
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    filename = "keywords-" + str(language) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
+    try: 
+        if not local_keywords_enabled: 
+            raise FileNotFoundError("Local keywords are not enabled")
+        filename = "keywords-" + str(language) + ".lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+    except FileNotFoundError: 
+        filename = "keywords-en.lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
     return grammar_text
 
 PARSER_CACHE = {}
