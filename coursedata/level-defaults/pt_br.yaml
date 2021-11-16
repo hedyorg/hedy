@@ -369,64 +369,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
-    start_code: |-
-        idade is ask 'Quantos anos você tem?'
-        if idade < 13
-            print 'Você é mais novo(a) do que eu!'
-        else
-            print 'Você é mais velho(a) do que eu!'
-    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
-    commands:
-    -   name: "Menor"
-        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
-        example: "Por exemplo: idade < 13"
-        demo_code: |-
-            idade is ask 'Quantos anos você tem?'
-            if idade < 13
-                print 'Você é mais novo(a) do que eu!'
-    -   name: "Maior"
-        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
-        example: "Por exemplo: idade > 13"
-        demo_code: |-
-            idade is ask 'Quantos anos você tem?'
-            if idade > 13
-                print 'Você é mais velho(a) do que eu!'
-13:
-    start_code: |-
-        resultado is 0
-        while resposta_certa is Falso:
-            resultado is ask 'Quanto é 5 vezes 5?'
-        print 'Foi dada uma boa resposta'
-    intro_text: |-
-        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
-        ciclo enquanto a instrução for verdadeira/válida! Portanto,
-        no exemplo de código, continuamos até ser dada a resposta
-        certa. Se a resposta correta nunca for dada, o ciclo nunca
-        acaba!
-    commands:
-    -   name: "While booleano"
-        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
-        example: "Exemplo: while resposta_certa is Falso"
-        demo_code: |-
-            resultado is 0
-            while resposta_certa is Falso:
-                resultado is ask 'Quanto é 5 vezes 5?'
-            print 'Foi dada uma boa resposta'
-    -   name: "while menor"
-        explanation: |-
-            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
-            cuidado, é preciso mudar o número para que ciclo termine.
-            Aqui nós fazemos isso com `contagem is contagem + 1`.
-        example: "Por exemplo: while contagem < 3"
-        demo_code: |-
-            contagem is 1
-            while contagem < 3
-                print 'Fazemos isto mais ' 3 - contagem ' vezes.'
-                contagem is contagem + 1
-            print 'Acabamos!'
-
-14:
+15:
     start_code: |-
         fruta is ['maçã', 'banana', 'cereja']
         print fruta 
@@ -451,37 +394,91 @@
             fruta is ['banana', 'maçã', 'cereja']
             qualquerfruta is fruta[random]
             print qualquerfruta 
-#15:
-#    start_code: |-
-#        ainda_esta_aqui is Falso
-#        resposta_ainda_esta_aqui is input('Você ainda está aqui? sim ou não?')
-#        if resposta_ainda_esta_aqui is sim:
-#            ainda_esta_aqui is Verdadeiro
-#        resultado is input('Quanto é 5*5?')
-#        if ainda_esta_aqui is Verdadeiro and resultado is 25:
-#            print('Você disse sim e respondeu corretamente!')
-#    intro_text: "Agora vamos aprender `and` e `or`! Se você quiser verificar duas instruções, não é necessário usar dois `if` porque você pode usar `and` e `or`. Se você usar `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
-#    commands:
-#    -   name: "And"
-#        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser verdadeiras."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#            resposta1 is input('Quanto é 3+2?')
-#            resposta2 is input('Quanto é 2+2?')
-#            if resposta1 is 5 and resposta2 is 4:
-#                print('Ambas as respostas estão corretas!')
-#            else:
-#                print('Pelo menos uma resposta está errada!')
-#    -   name: "Or"
-#        explanation: "Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correta. Se ambas estiverem corretas, também não tem problema."
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#            resposta1 is input('Quanto é 3+2?')
-#            resposta2 is input('Quanto é 2+2?')
-#            if resposta1 is 5 or resposta2 is 4:
-#                print('Pelo menos uma resposta está correta!')
-#            else:
-#                print('Ambas as respostas estão erradas!')
+14:
+    start_code: |-
+        resultado is 0
+        while resultado != 25:
+            resultado is ask 'Quanto é 5 vezes 5?'
+        print 'Foi dada uma boa resposta'
+    intro_text: |-
+        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
+        ciclo enquanto a instrução for verdadeira/válida! Portanto,
+        no exemplo de código, continuamos até ser dada a resposta
+        certa. Se a resposta correta nunca for dada, o ciclo nunca
+        acaba!
+    commands:
+    -   name: "While booleano"
+        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
+        example: "Exemplo: while resposta_certa is Falso"
+        demo_code: |-
+            resultado is 0
+            while resultado != 25:
+                resultado is ask 'Quanto é 5 vezes 5?'
+            print 'Foi dada uma boa resposta'
+    -   name: "while menor"
+        explanation: |-
+            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
+            cuidado, é preciso mudar o número para que ciclo termine.
+            Aqui nós fazemos isso com `contagem is contagem + 1`.
+        example: "Por exemplo: while contagem < 3"
+        demo_code: |-
+            contagem is 1
+            while contagem < 3
+                print 'Fazemos isto mais ' 3 - contagem ' vezes.'
+                contagem is contagem + 1
+            print 'Acabamos!'
+
+13:
+    start_code: |-
+        idade is ask 'Quantos anos você tem?'
+        if idade < 13
+            print 'Você é mais novo(a) do que eu!'
+        else
+            print 'Você é mais velho(a) do que eu!'
+    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
+    commands:
+    -   name: "Menor"
+        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
+        example: "Por exemplo: idade < 13"
+        demo_code: |-
+            idade is ask 'Quantos anos você tem?'
+            if idade < 13
+                print 'Você é mais novo(a) do que eu!'
+    -   name: "Maior"
+        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
+        example: "Por exemplo: idade > 13"
+        demo_code: |-
+            idade is ask 'Quantos anos você tem?'
+            if idade > 13
+                print 'Você é mais velho(a) do que eu!'
+12:
+    start_code: |-
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: "Agora vamos aprender `and` e `or`! Se você quiser verificar duas instruções, não é necessário usar dois `if` porque você pode usar `and` e `or`. Se você usar `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
+    commands:
+    -   name: "And"
+        explanation: "Ambas as instruções (à esquerda e à direita do `and`) têm de ser verdadeiras."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            resposta1 is ask 'Quanto é 3+2?'
+            resposta2 is ask 'Quanto é 2+2?'
+            if resposta1 is 5 and resposta2 is 4
+                print 'Ambas as respostas estão corretas!'
+            else
+                print 'Pelo menos uma resposta está errada!'
+    -   name: "Or"
+        explanation: "Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correta. Se ambas estiverem corretas, também não tem problema."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            resposta1 is ask 'Quanto é 3+2?'
+            resposta2 is ask 'Quanto é 2+2?'
+            if resposta1 is 5 or resposta2 is 4
+                print 'Pelo menos uma resposta está correta!'
+            else
+                print 'Ambas as respostas estão erradas!'
 #16:
 #    start_code: |-
 #        # Este é um programa que vai perguntar algumas questões de Matemática

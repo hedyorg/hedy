@@ -66,10 +66,10 @@ def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
   os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
   transform_level_defaults(old_level, new_level, function)
   # WARNING: adventure do not properly use the transformer function yet!
-  # transform_adventures(old_level, new_level=None, function=nop)
+  # transform_adventures(old_level, new_level, function=nop)
 
 
 def remove_brackets(s):
-  return s.replace('(', ' ').replace(')', '')
+  return s.replace('(', ' ').replace(')', '').replace(':', '').replace('input', 'ask')
 
-transform_levels_in_all_YAMLs("13-old", 14, remove_brackets)
+transform_levels_in_all_YAMLs('and', 12, remove_brackets)
