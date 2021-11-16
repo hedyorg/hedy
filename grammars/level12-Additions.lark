@@ -1,8 +1,17 @@
-//  adds and and or
 
-ifs: _IF _SPACE (condition|andcondition|orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-condition: (equality_check|in_list_check)
+//assigning a string now must be done with quotes
+assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
+assign_list: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) ((_COMMA _SPACE|_COMMA) (text_in_quotes|NUMBER))+
+
+?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
+
+//conditions with strings now also use quotes:
+condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
+
+equality_check: (var | text_in_quotes | NUMBER) _SPACE _IS _SPACE (var | text_in_quotes | NUMBER)
+in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
 
 
-andcondition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
-orcondition: (equality_check|in_list_check) (_SPACE _OR _SPACE condition)*
+invalid: "Supercalifragilisticexpialidocious" //invalid node should be deleted but this probably never matches anything :D
+textwithspaces: /(?:[^\n,' ]| (?!else))+/ -> text //anything can be parsed except for a newline and a comma for list separators, and now single quotes
+text_in_quotes: _SINGLE_QUOTE textwithspaces _SINGLE_QUOTE

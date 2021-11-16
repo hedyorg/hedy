@@ -52,10 +52,6 @@
         ```
 
         Print still works as in level 1, and you no longer need `echo`.
-
-        In level 2 you can also make a list. You can have the computer choose something random from the list. You do that with `at random`.
-
-        You find all the codes of level 2 in the left bar. There are also tabs with assignments.
     start_code: "print hello world!"
     commands:
     -   name: "is"
@@ -77,13 +73,24 @@
             turn angle
             forward 100
         name: is - turtle
+3:
+    intro_text: |
+        In level 3 you can also make a list. You can let the computer choose something random from the list. You do that with `at random`.
+        ```
+        animals is dog, cat, kangaroo
+        print animals at random
+        ```
+
+        You find all the codes of level 3 in the left bar. There are also tabs with assignments.
+    start_code: "print hello world!"
+    commands:
     -   name: choose_random
         explanation: Choose a random word from a group with `at` and `random`
         example: 'Example: animals is dog, cat, kangaroo.'
         demo_code: |-
             animals is dog, cat, kangaroo
             print animals at random
-3:
+4:
     start_code: "print 'Hello world'"
     intro_text: |
         In level 3 `ask` and `print` have changed.
@@ -114,7 +121,7 @@
         demo_code: |-
             color is ask 'What is your favorite color?'
             print color ' is your favorite!'
-4:
+5:
     start_code: |-
         name is ask 'what is your name?'
         if name is Hedy print 'cool!' else print 'meh'
@@ -184,7 +191,7 @@
             pretty_colors is green, yellow
             color is ask 'What is your favorite color?'
             if color in pretty_colors print 'pretty!' else print 'meh'
-5:
+6:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` and `if` still work as in level 4.
@@ -218,7 +225,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy is fun!'"
     intro_text: |
         `ask`, `print` and `if` work exactly like they did in level 4 and 5.
@@ -249,7 +256,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Hello folks'
@@ -288,7 +295,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -330,7 +337,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -357,7 +364,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-10:
+11:
     start_code: |-
         for counter in range 1 to 5
             print counter
@@ -380,7 +387,7 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
-11:
+12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
@@ -418,7 +425,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
+13:
     start_code: |-
         name is ask 'what is your name?'
         leeftijd is ask 'what is your age?'
@@ -446,7 +453,7 @@
                 print 'At least one answer is correct!'
             else
                 print 'Both answers are wrong!'
-13:
+14:
     start_code: |-
         age is ask 'How old are you?'
         if age < 13
@@ -470,10 +477,10 @@
             if age > 13
                 print 'You are older than me!'
 
-14:
+15:
     start_code: |-
         answer is 0
-        while answer != 25:
+        while answer != 25
             answer is ask 'What is 5 times 5?'
         print 'A correct answer has been given'
     intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
@@ -483,7 +490,7 @@
         example: "Example: while correct_answer is False"
         demo_code: |-
             answer is 0
-            while correct_answer != 25:
+            while correct_answer != 25
                 answer is ask 'What is 5 times 5?'
             print 'A correct answer has been given'
     -   name: "Smaller while"
@@ -496,7 +503,7 @@
                 count is count + 1
             print 'We are done'
 
-15:
+16:
     start_code: |-
         fruit is ['apple', 'banana', 'cherry']
         print fruit 

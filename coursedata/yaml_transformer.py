@@ -7,7 +7,7 @@ def nop(s):
 
 def transform_level_defaults(old_level, new_level=None, function=nop):
   input_path = '../coursedata/level-defaults'
-  output_path = '../coursedata/level-defaults-transformed/'
+  output_path = '../coursedata/level-defaults/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
@@ -27,18 +27,21 @@ def transform_level_defaults(old_level, new_level=None, function=nop):
           for c in old_content['commands']:
             c['demo_code'] = function(c['demo_code'])
 
-
-          transformed_dict[new_level] = old_content
+          transformed_dict[new_level] = copy.deepcopy(old_content)
         del transformed_dict[old_level]
         file_transformed = True
 
     if file_transformed:  #only write updated files
+      sorted_dict = {}
+      for key in sorted(transformed_dict):
+        sorted_dict[key] = transformed_dict[key]
+
       with open(output_path + yaml_filesname_without_path, 'w') as f:
-        f.write(utils.dump_yaml_rt(transformed_dict))
+        f.write(utils.dump_yaml_rt(sorted_dict))
 
 def transform_adventures(old_level, new_level=None, function=nop):
   input_path = '../coursedata/adventures'
-  output_path = '../coursedata/adventures-transformed/'
+  output_path = '../coursedata/adventures/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
@@ -53,8 +56,8 @@ def transform_adventures(old_level, new_level=None, function=nop):
       for level in adventure['levels']:
         if level == old_level:
           if new_level != None:
-            transformed_dict['adventures'][akey]['levels'][new_level] = transformed_dict['adventures'][akey]['levels'][old_level]
-          del transformed_dict['adventures'][akey]['levels'][old_level]
+            transformed_dict['adventures'][akey]['levels'][new_level] = copy.deepcopy(transformed_dict['adventures'][akey]['levels'][old_level])
+          # del transformed_dict['adventures'][akey]['levels'][old_level]
           file_transformed = True
 
     if file_transformed: #only write updated files
@@ -64,12 +67,12 @@ def transform_adventures(old_level, new_level=None, function=nop):
 def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
   # Set the current directory to the root Hedy folder
   os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-  transform_level_defaults(old_level, new_level, function)
+  # transform_level_defaults(old_level, new_level, function)
   # WARNING: adventure do not properly use the transformer function yet!
-  # transform_adventures(old_level, new_level, function=nop)
+  transform_adventures(old_level, new_level, function=nop)
 
 
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '').replace(':', '').replace('input', 'ask')
 
-transform_levels_in_all_YAMLs('and', 12, remove_brackets)
+transform_levels_in_all_YAMLs(2, 3)

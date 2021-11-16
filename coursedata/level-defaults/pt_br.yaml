@@ -38,24 +38,8 @@
         ```
 
         A impressão ainda funciona como no nível 1 e você não precisa mais de um ultrassom.
-
-        No nível 2, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com `at random` (você diz: et ren-dom).
-
-        Você encontrará todos os códigos do nível 2 na barra esquerda. Também existem guias com atribuições.
     start_code: "print olá mundo!"
     commands:
-    -   name: "is"
-        explanation: "Dê um nome para uma palavra para usar no programa com `is`."
-        example: "Exemplo: nome is Hedy."
-        demo_code: |-
-            nome is Hedy
-            print bem-vindo(a) nome
-    -   name: "ask"
-        explanation: "Pergunte algo com `ask`. Cuidado! Você precisa dar à resposta um nome com `is`."
-        example: "Exemplo: cor is ask Qual a sua cor favorita?"
-        demo_code: |-
-            cor is ask Qual a sua cor favorita?
-            print cor é a sua favorita!
     -   name: "choose_random"
         explanation: "Escolha uma palavra aleatória para formar um grupo com `at` e `random`"
         example: "Exemplo: animais is cachorro, gato, canguru."
@@ -63,6 +47,25 @@
             animais is cachorro, gato, canguru
             print animais at random
 3:
+    intro_text: |
+        No nível 3, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com `at random` (você diz: et ren-dom).
+
+        ```
+        animais is cachorro, gato, canguru
+        print animais at random
+        ```
+
+
+        Você encontrará todos os códigos do nível 3 na barra esquerda. Também existem guias com atribuições.
+    start_code: "print olá mundo!"
+    commands:
+    -   name: "choose_random"
+        explanation: "Escolha uma palavra aleatória para formar um grupo com `at` e `random`"
+        example: "Exemplo: animais is cachorro, gato, canguru."
+        demo_code: |-
+            animais is cachorro, gato, canguru
+            print animais at random
+4:
     start_code: "print 'Olá mundo'"
     intro_text: |
         `ask` e` print` mudam no nível 3.
@@ -93,7 +96,7 @@
         demo_code: |-
             cor is ask 'Qual a sua cor favorita?'
             print cor ' é a sua favorita!'
-4:
+5:
     start_code: |-
         nome is ask 'qual o seu nome?'
         if nome is Hedy print 'legal!' else print 'não tão legal'
@@ -148,7 +151,7 @@
             cores_bonitas is amarelo, verde
             cor is ask 'Qual sua cor favorita?'
             if cor in cores_bonitas print 'bonita!' else print 'certo'
-5:
+6:
     start_code: "print '5 vezes 5 é ' 5 * 5"
     intro_text: |
         `ask`,` print` e `if` ainda funcionam como no nível 4.
@@ -185,7 +188,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy é divertido!'"
     intro_text: |
         Os comandos `ask`, `print` e `if` funcionam exatamente como no nível 4 e 5.
@@ -217,7 +220,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Olá galera'
@@ -250,7 +253,7 @@
             else
                 print 'Opa!'
                 print 'A resposta é 10'
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -292,7 +295,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -319,7 +322,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-10:
+11:
     start_code: |-
         for contador in range 1 to 5
             print contador
@@ -331,7 +334,7 @@
         demo_code: |-
             for contador in range 1 to 5
                 print contador
-11:
+12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
@@ -369,89 +372,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-15:
-    start_code: |-
-        fruta is ['maçã', 'banana', 'cereja']
-        print fruta 
-    intro_text: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
-    commands:
-    -   explanation: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
-        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
-        demo_code: |-
-            fruta is ['maçã', 'banana', 'cereja']
-            print fruta 
-    -   name: "Obtém um elemento da lista."
-        explanation: "Para obter um elemento da lista usamos [número] onde fruta[1] significa: obtenha a primeira fruta da lista!"
-        example: "Por exemplo: primeirafruta is fruta[1]"
-        demo_code: |-
-            fruta is ['banana', 'maçã', 'cereja']
-            primeirafruta is fruta[1]
-            print primeirafruta 
-    -   name: "Obtém um elemento aleatório da lista."
-        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
-        example: "For example: randomfruit is fruit[random]"
-        demo_code: |-
-            fruta is ['banana', 'maçã', 'cereja']
-            qualquerfruta is fruta[random]
-            print qualquerfruta 
-14:
-    start_code: |-
-        resultado is 0
-        while resultado != 25:
-            resultado is ask 'Quanto é 5 vezes 5?'
-        print 'Foi dada uma boa resposta'
-    intro_text: |-
-        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
-        ciclo enquanto a instrução for verdadeira/válida! Portanto,
-        no exemplo de código, continuamos até ser dada a resposta
-        certa. Se a resposta correta nunca for dada, o ciclo nunca
-        acaba!
-    commands:
-    -   name: "While booleano"
-        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
-        example: "Exemplo: while resposta_certa is Falso"
-        demo_code: |-
-            resultado is 0
-            while resultado != 25:
-                resultado is ask 'Quanto é 5 vezes 5?'
-            print 'Foi dada uma boa resposta'
-    -   name: "while menor"
-        explanation: |-
-            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
-            cuidado, é preciso mudar o número para que ciclo termine.
-            Aqui nós fazemos isso com `contagem is contagem + 1`.
-        example: "Por exemplo: while contagem < 3"
-        demo_code: |-
-            contagem is 1
-            while contagem < 3
-                print 'Fazemos isto mais ' 3 - contagem ' vezes.'
-                contagem is contagem + 1
-            print 'Acabamos!'
-
 13:
-    start_code: |-
-        idade is ask 'Quantos anos você tem?'
-        if idade < 13
-            print 'Você é mais novo(a) do que eu!'
-        else
-            print 'Você é mais velho(a) do que eu!'
-    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
-    commands:
-    -   name: "Menor"
-        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
-        example: "Por exemplo: idade < 13"
-        demo_code: |-
-            idade is ask 'Quantos anos você tem?'
-            if idade < 13
-                print 'Você é mais novo(a) do que eu!'
-    -   name: "Maior"
-        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
-        example: "Por exemplo: idade > 13"
-        demo_code: |-
-            idade is ask 'Quantos anos você tem?'
-            if idade > 13
-                print 'Você é mais velho(a) do que eu!'
-12:
     start_code: |-
         name is ask 'what is your name?'
         leeftijd is ask 'what is your age?'
@@ -606,3 +527,85 @@
 #                print 'a é 2'
 #            else:
 #                print 'a não é 1 nem 2'
+14:
+    start_code: |-
+        idade is ask 'Quantos anos você tem?'
+        if idade < 13
+            print 'Você é mais novo a do que eu!'
+        else
+            print 'Você é mais velho a do que eu!'
+    intro_text: "Vamos aprender mais coisas novas! Você pode já ter aprendido sobre elas em Matemática: o `<` e o `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`."
+    commands:
+    -   name: "Menor"
+        explanation: "Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se quisermos saber se uma variável é menor que 15, usamos `variavel < 15`"
+        example: "Por exemplo: idade < 13"
+        demo_code: |-
+            idade is ask 'Quantos anos você tem?'
+            if idade < 13
+                print 'Você é mais novo a do que eu!'
+    -   name: "Maior"
+        explanation: "Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se quisermos saber se uma variável é maior do que 15, usamos `variavel > 15`."
+        example: "Por exemplo: idade > 13"
+        demo_code: |-
+            idade is ask 'Quantos anos você tem?'
+            if idade > 13
+                print 'Você é mais velho a do que eu!'
+15:
+    start_code: |-
+        resultado is 0
+        while resultado != 25
+            resultado is ask 'Quanto é 5 vezes 5?'
+        print 'Foi dada uma boa resposta'
+    intro_text: |-
+        Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o
+        ciclo enquanto a instrução for verdadeira/válida! Portanto,
+        no exemplo de código, continuamos até ser dada a resposta
+        certa. Se a resposta correta nunca for dada, o ciclo nunca
+        acaba!
+    commands:
+    -   name: "While booleano"
+        explanation: "Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`."
+        example: "Exemplo: while resposta_certa is Falso"
+        demo_code: |-
+            resultado is 0
+            while resultado != 25
+                resultado is ask 'Quanto é 5 vezes 5?'
+            print 'Foi dada uma boa resposta'
+    -   name: "while menor"
+        explanation: |-
+            Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
+            cuidado, é preciso mudar o número para que ciclo termine.
+            Aqui nós fazemos isso com `contagem is contagem + 1`.
+        example: "Por exemplo: while contagem < 3"
+        demo_code: |-
+            contagem is 1
+            while contagem < 3
+                print 'Fazemos isto mais ' 3 - contagem ' vezes.'
+                contagem is contagem + 1
+            print 'Acabamos!'
+
+16:
+    start_code: |-
+        fruta is ['maçã', 'banana', 'cereja']
+        print fruta 
+    intro_text: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples ('). "
+    commands:
+    -   explanation: "Vamos colocar as listas entre colchetes! Também vamos ter de colocar cada elemento da lista entre aspas simples (')."
+        example: "Por exemplo: fruta is ['maçã', 'banana', 'cereja']"
+        demo_code: |-
+            fruta is ['maçã', 'banana', 'cereja']
+            print fruta 
+    -   name: "Obtém um elemento da lista."
+        explanation: "Para obter um elemento da lista usamos [número] onde fruta[1] significa: obtenha a primeira fruta da lista!"
+        example: "Por exemplo: primeirafruta is fruta[1]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            primeirafruta is fruta[1]
+            print primeirafruta 
+    -   name: "Obtém um elemento aleatório da lista."
+        explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
+        example: "For example: randomfruit is fruit[random]"
+        demo_code: |-
+            fruta is ['banana', 'maçã', 'cereja']
+            qualquerfruta is fruta[random]
+            print qualquerfruta 
