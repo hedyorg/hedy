@@ -63,6 +63,43 @@
             animaux is chien, chat, kangourou
             print animaux at random
 3:
+    intro_text: |
+        Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `is`.
+
+        Si vous mettez le code `name is Hedy` en haut de votre programme, vous pouvez alors utiliser name partout. Cela sera alors remplacé par Hedy.
+
+        Le `ask` a changé au niveau 2, vous enregistrez également la réponse avec un nom:
+
+        ```
+        reponse is ask quel est votre nom?
+        ```
+
+        L'impression fonctionne toujours comme au niveau 1 et vous n'avez plus besoin d'une échographie.
+
+        Au niveau 2, vous pouvez également faire une liste. Vous pouvez ensuite choisir n'importe quoi dans la liste. Vous faites cela avec `at random` (vous dites: et ren-dom).
+
+        Vous trouverez tous les codes du niveau 2 dans la barre de gauche. Il existe également des onglets avec des affectations.
+    start_code: "print bonjour le monde!"
+    commands:
+    -   name: "is"
+        explanation: "Donne un nom à un mot que tu peux utiliser dans le programme avec `is`"
+        example: "Exemple: nom is Hedy."
+        demo_code: |-
+            nom is Hedy
+            print bienvenue nom
+    -   name: "ask"
+        explanation: "Demande quelque chose avec `ask`. Attention! Tu dois donner à la réponse un nom avec `is`."
+        example: "Exemple: couleur is ask Quelle est ta couleur préférée?"
+        demo_code: |-
+            couleur is ask Quelle est ta couleur préférée?
+            print couleur est ton préféré !
+    -   name: "choisi_au hasard"
+        explanation: "Choisi un mot au hasard dans un groupe avec `at random`"
+        example: "Exemple: animaux is chien, chat, kangourou"
+        demo_code: |-
+            animaux is chien, chat, kangourou
+            print animaux at random
+4:
     start_code: "print 'Bonjour le monde'"
     intro_text: |4
 
@@ -94,7 +131,7 @@
         demo_code: |-
             couleur is ask 'Quelle est ta couleur préférée?'
             print couleur ' est ta couleur préférée!'
-4:
+5:
     start_code: |-
         nom is ask 'quel est ton nom?'
         if nom is Hedy print 'cool!' else print 'mouais'
@@ -131,7 +168,7 @@
         demo_code: |-
             couleur is ask 'Quelle est ta couleur préférée?'
             if couleur is vert print 'joli!' else print 'bof'
-5:
+6:
     start_code: "print '5 fois 5 font ' 5 * 5"
     intro_text: |
         `ask`,` print` et `if` fonctionnent toujours comme dans les niveaux 4.
@@ -165,7 +202,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy est amusant!'"
     intro_text: |
         `ask`, `print` et `if` fonctionnent exactement comme au niveau 4 et 5.
@@ -197,7 +234,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Bonjour les amis'
@@ -231,7 +268,7 @@
             else
                 print 'Oups!'
                 print 'La réponse devrait être 10.'
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -273,7 +310,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -300,7 +337,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-10:
+11:
     start_code: |-
         for i in range 1 to 11
             print i

@@ -112,33 +112,6 @@ adventures:
                     print nama ' takut kalau hutan tersebut berhantu'
                     ```
                 start_code: print 'Cerita kamu akan ditampilkan disini!'
-            3:
-                story_text: |-
-                    ## Cerita
-                    Pada level 2, kamu dapat membuat ceritanya lebih menyenangkan. Karakter utama kamu sekarang dapat muncul dimanapun pada kalimat-kalimatnya.
-
-                    Kamu dapat memiliki program yang lebih baik dari itu. Tapi kamu harus memberi nama karakter utama kamu terlebih dahulu.
-
-                    Kamu lalu dapat menuliskan nama tersebut dimanapun pada sebuah kalimat.
-
-                    ## Contoh kode Hedy
-                    ```
-                    nama is ask Siapa nama karakter utama dalam cerita ini?
-                    print nama sekarang akan berjalan di dalam hutan
-                    print nama sedikit ketakutan
-                    print Dia mendengar bunyi-bunyi menyeramkan dari sekitar
-                    print nama takut kalau hutan tersebut berhantu
-                    ```
-
-                    ## Pengacakan
-                    Kamu dapat menambahkan sesuatu secara acak di cerita kamu. Monster, hewan, atau benda apapun.
-
-                    Contohnya seperti ini:
-                    ```
-                    hewan is burung, landak, armadilo
-                    print Dia sekarang mendengar suara seekor hewan at random
-                    ```
-                start_code: print Cerita kamu
     songs:
         name: Nyanyikan sebuah lagu!
         description: Tampilkan sebuah lagu
@@ -372,38 +345,6 @@ adventures:
                     sudut is 90
                     turn sudut
                     forward 25
-            3:
-                story_text: |-
-                    Pada level 1 sang kura-kura hanya bisa menghadap kiri dan kanan. Itu cukup membosankan!
-                    Pada level 2, dia dapat menghadap ke berbagai arah.
-
-                    Gunakan 90 untuk memindahkan arahnya seperempat lingkaran. Kita sebut ini sudut. Satu putaran penuh bernilai 360 derajat. Dapatkah kamu mengerti hasil kode ini? Mungkinkah sebuah segitiga atau sebuah lingkaran?
-
-                    ## Contoh kode Hedy
-                    ```
-                    print Menggambar bentuk
-                    sudut is 90
-                    turn sudut
-                    forward 25
-                    turn sudut
-                    forward 25
-                    ```
-
-                    ## Mencari kura-kura
-                    Kamu juga dapat menggunakan `random` ketika menggambar dengan kura-kura. Pergerakan acak akan membuat sang kura-kura bergerak dalam jalur tidak terduga untuk setiap eksekusi program.
-                    Gunakan `at random` untuk memilih nilai dari sebuah list. Kamu dapat menyalin baris 2 dan 3 sehingga membentuk jalur pergerakan yang lebih acak.
-
-                    ## Contoh kode Hedy
-                    ```
-                    sudut is 10, 50, 90, 150, 250
-                    turn sudut at random
-                    forward 25
-                    ```
-                start_code: |-
-                    print Balapan kura-kura!
-                    hoek is 90
-                    turn hoek
-                    forward 25
     dishes:
         name: Cuci piring?
         description: Gunakan komputer untuk mengetahui siapa yang akan mencuci piring (dimulai di level 2)
@@ -485,21 +426,6 @@ adventures:
                     print orang at _
                     ```
                 start_code: print 'Siapa yang mencuci piring?'
-            3:
-                story_text: |-
-                    ## Cuci piring
-                    Apakah kamu selalu berdebat di rumah tentang siapa yang harus mencuci piring atau membuang sampah hari ini?
-
-                    Maka kamu dapat meminta komputer untuk memilih secara adil. Kamu dapat membuat programnya di level 2!
-
-                    Kamu pertama harus membuat daftar anggota keluargamu. Lalu pilihlah dengan `at random` dari dalam daftar tersebut.
-
-                    ## Contoh kode Hedy
-                    ```
-                    orang is ibu, ayah, Emma, Sophie
-                    print orang at random
-                    ```
-                start_code: print Siapa yang mencuci piring?
     dice:
         name: Dadu
         description: Membuat dadu kamu sendiri
@@ -592,25 +518,6 @@ adventures:
                     print _ _ _ <- disini kamu harus memprogram pilihannya
                     ```
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
-            3:
-                story_text: |-
-                    ## Dadu
-                    Pada level 2 kamu dapat memilih dari dalam list. Dengan itu, kamu dapat meminta komputer untuk memilih salah satu sisi dari dadu.
-
-                    Lihatlah permainan yang kamu punya di rumah.
-
-                    Apakah ada permainan yang menggunakan dadu khusus? Kamu juga bisa mengimplementasikannya dalam kode ini.
-
-                    Sebagai contoh, dadu permainan Earthworms memiliki angka 1 hingga 5 dan satu sisi bergambar cacing tanah.
-
-                    ![Dadu earthworms dengan angka 1 sampai 5 dan sebuah cacing tanah](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
-
-                    ## Contoh kode Hedy
-                    ```
-                    pilihan is 1, 2, 3, 4, 5, cacing
-                    print pilihan at random
-                    ```
-                start_code: print Apakah yang akan dihasilkan dari lemparan dadu kali ini?
     rock:
         name: Batu, gunting, kertas
         description: Buat permainan batu gunting kertas sendiri
@@ -698,32 +605,6 @@ adventures:
                     print _ Komputer memilih: _ _ at _
                     ```
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
-            3:
-                story_text: |-
-                    ## Batu, gunting, kertas
-
-                    Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
-
-                    Kamu pertama-tama perlu membuat daftar dengan `is`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
-
-                    Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
-
-                    ## Contoh kode Hedy
-                    ```
-                    pilihan is batu, gunting, kertas
-                    print pilihan at random
-                    ```
-
-                    Kamu dapat menggunakan perintah `ask` lagi pada level 2. Dapatkah kamu menampilkan pilihan kamu dan pilihan komputer?
-                    Berhati-hatilah, `ask` sedikit berbeda dengan yang kamu gunakan di level 1. Sekarang perrintah ini memerlukan nama didepannya.
-
-                    ## Melihat kedepan
-                    Apakah kamu sempat mencoba membuat kalimat yang menggunakan kata 'pilihan'? misal
-
-                    ``print Saya memilih dari pilihan```
-
-                    Cobalah jika belum. Ini tidak akan berjalan dengan baik! Kamu akan mendapatkan hasil 'Saya memilih dari ' dan salah satu nilai dari batu, gunting, dan kertas. Kamu dapat menyelesaikan masalah ini di level 3.
-                start_code: print Selamat datang di permainan batu guning kertas mu sendiri!
     calculator:
         name: Kalkulator
         description: Membuat sebuah kalkulator
@@ -1014,51 +895,6 @@ adventures:
                     print makanan ' dan ' minuman ' kamu akan segera tersedia!'
                     ```
                 start_code: print 'Selamat datang di rumah makan Hedy'
-            3:
-                story_text: |-
-                    ## Rumah makan
-                    Pada level 2 kamu bisa mengembangkan kode rumah makan kamu dengan menggunakan variabel. Pada level 1 Hedy hanya dapat mengulang pesanan dan hanya mengingat pesanan terakhir.
-                    Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
-
-                    ## Contoh kode Hedy
-                    ```
-                    print Selamat datang di rumah makan Hedy!
-                    print Hari ini kami menyediakan pizza atau lasagna.
-                    makanan is ask Apa yang ingin kamu makan?
-                    print Pilihan baik! makanan itu juga kesukaanku!
-                    topping is ask Apakah kamu mau daging atau sayuran diatas makanan itu?
-                    print makanan dengan topping sedang dipersiapkan!
-                    minuman is ask Apa minuman yang kamu inginkan?
-                    print Terima kasih atas pesanannya.
-                    print makanan dan minuman kamu akan segera tersedia!
-                    ```
-
-                    ## Rumah makan acak
-                    Punya masalah untuk menentukan apa yang akan kamu makan untuk malam? Kamu dapat meminta Hedy untuk memilihkannya untukmu!
-                    Tambahkan daftar makanan kesukaan kamu dan Hedy dapat memilih makan malam kamu secara acak.
-                    Kamu juga dapat membuat ini menjadi lebih menyenangkan, dengan meminta Hedy untuk memilih harga makan malam kamu juga. Berapa harga yang akan kamu dapatkan?
-
-                    ## Contoh kode Hedy rumah makan acak
-
-                    ```
-                    print Selamat datang di rumah makan Hedy!
-                    print Satu-satunya rumah makan yang akan memilih makananmu secara acak juga harganya!
-                    pembuka is salad, sup, carpaccio
-                    makanan_utama is pizza, kubis, spaghetti
-                    penutup is brownies, es krim, keju
-                    minuman is cola, sirup, air
-                    harga is sepuluh ribu rupiah, seratus ribu rupiah, satu juta rupiah
-                    print Kamu akan mulai dengan: pembuka at random
-                    print Lalu kami akan menyajikan: makanan_utama at random
-                    print Dan sebagai pencuci mulut: penutup at random
-                    print Kamu akan mendapatkan minuman at random untuk diminum
-                    print Harganya akan menjadi harga at random
-                    print Terima kasih dan selamat menikmati!
-                    ```
-
-                    ## Tantangan
-                    Dapatkan kamu memikirkan hal apa yang bisa membuat kode rumah makan kamu semakin menarik?
-                start_code: print Selamat datang di rumah makan Hedy
     fortune:
         name: Peramal
         description: Minta Hedy untuk meramal masa depan
@@ -1237,25 +1073,6 @@ adventures:
                     print 'Bola kristal ku menyatakan.. ' jawaban at random
                     ```
                 start_code: print 'Halo, aku Hedy sang peramal!'
-            3:
-                story_text: |-
-                    ## Peramal
-                    Pada level 1 kamu telah membuat mesin peramal pertama kamu, tapi Hedy tidak bisa benar-benar meramal, hanya mengulang.
-                    Pada level 2 kamu dapat menggunakan variabel dan perintah `at random` untuk membantu Hedy memilih sebuah jawaban untukmu. Lihatlah kode berikut sebagai contoh.
-
-                    ## Contoh kode Hedy
-                    Pada contoh ini kamu bisa menanyakan pertanyaan benar-salah ke Hedy dan Hedy akan merespon dengan jawaban acak untukmu.
-                    ```
-                    print Aku Hedy sang peramal!
-                    pertanyaan is ask Apa yang ingin kamu tahu?
-                    print Ini apa yang ingin kamu tahu: pertanyaan
-                    jawaban is ya, tidak, mungkin
-                    print Bola kristal ku menyatakan.. jawaban at random
-                    ```
-
-                    ## Tantangan
-                    Sekarang, Hedy hanya dapat menjawab ya, tidak, atau mungkin. Dapatkah kamu memberikan Hedy alternatif jawaban yang lebih banyak, seperti 'tentu saja' atau 'tanya lagi'.
-                start_code: print Halo aku Hedy sang peramal!
     haunted:
         name: Rumah berhantu
         description: Keluar dari rumah berhantu
@@ -1400,32 +1217,6 @@ adventures:
                     Pada level 3 kamu belajar bagaimana menggunakan tanda kutip satu di permainan kamu.
                     Dapatkah kamu membuat permainan rumah berhantu kamu berjalan di level 3?
                 start_code: print 'Kenapa aku ada disini?'
-            3:
-                story_text: |-
-                    ## Permainan rumah berhantu
-                    Pada level 1 kamu telah membuat pendahuluan tentang permainan rumah berhantu kamu, tapi seperti yang mungkin sudah kamu ketahui, ceritanya selalu memiliki akhir yang mengerikan.
-                    Pada level 2 kamu bisa membuat ceritanya lebih interaktif dengan mengganti akhir dari permainan; kadang kamu akan dimakan monster; kadang kamu akan berhasil kabur!
-                    Biarkan Hedy menentukannya secara acak!
-
-                    ## Contoh kode Hedy
-                    ```
-                    print Kabur dari rumah berhantu!
-                    print Ada 3 pintu di depan kamu...
-                    pilihan is ask Pintu mana yang mau kamu pilih?
-                    print Kamu memilih pintu ... pilihan
-                    monster is zombie, vampir, TIDAK ADA MONSTER DAN KAMU BERHASIL KABUR
-                    print Kamu melihat...
-                    print monster at random
-                    ```
-
-                    ## Tantangan
-                    Cerita ini cukup mudah ditebak, mungkin kamu bisa membuatnya lebih menyeramkan dengan membuat ceritanya lebih menarik.
-                    Lalu kamu sekarang hanya memiliki akhir cerita yang terbatas. Hanya ada 3 pilihan tentang apa yang ada dibelakang pintu. Mungkin kamu dapat memikirkan monster-monster lain yang dapat ditambahkan ke daftar!
-
-                    ## Ubah permainan menjadi sebuah acara TV!
-                    Terakhir, kami ingin menantang kamu untuk mengubah permainan ini menjadi sebuah acara TV; ketika kamu memilih sebuah pintu atau koper, salah satunya akan berisi hadiah yang besar!
-                    Dapatkah kamu melakukannya?
-                start_code: print Kenapa aku ada disini?
     next:
         name: Apa berikutnya?
         description: Apa berikutnya?
@@ -1536,17 +1327,4 @@ adventures:
 
                     Pada level 4 kamu akan belajar menggunakan perintah `if` yang memungkinkan kamu untuk memberikan respon berbeda di program kamu. Dengan cara ini kamu bisa membuat program kata kunci untuk komputer misalnya. 
                     Maka, mari kita lihat level 4.
-                start_code: print 'Ayo bergerak ke level berikutnya!'
-            3:
-                story_text: |-
-                    ## Apa berikutnya?
-                    Pada level 2 kamu telah berlatih menggunakan variabel, tapi kamu mungkin menemukan beberapa masalah.
-
-                    Cobalah jalankan kode berikut 
-                    ```
-                    nama is Sophie
-                    print nama saya adalah nama
-                    ```
-                    Tentu kamu ingin menampilkan 'nama saya adalah Sophie', tapi Hedy menampilkan 'Sophie saya adalah Sophie'.
-                    Pada level 3, masalah ini dapat dipecahkan dengan tanda kutip satu.
                 start_code: print 'Ayo bergerak ke level berikutnya!'

@@ -114,34 +114,6 @@ adventures:
                     print 'Hallja a következő állat hangját: ' allatok at random
                     print nev ' fél, hogy ez egy kísértetjárta erdő'
                     ```
-            3:
-                start_code: print A te történeted
-                story_text: |+
-                    ## Történet
-                    A 2. szinten szórakoztatóbbá teheted a történetedet. Fő karaktered neve mostantól
-                    bárhol lehet a mondatban.
-
-                    Ehhez egy kicsit fel kell javítanod a kódodat. Most először el kell nevezned a főszereplődet. Olyan nevet válassz, amely nem tartalmaz ékezetes betűt.
-
-                    Ezt a nevet bárhol elhelyezheted a mondatban.
-
-                    ## Példa Hedy kódra
-                    ```
-                    nev is ask Mi a neve a főszereplőnek?
-                    print nev most futni fog az erdőben
-                    print nev kissé fél
-                    print Őrült zajokat hall mindenütt
-                    print nev fél hogy ez egy kísértetjárta erdő
-                    ```
-                    ## Véletlenszerűség
-                    Hozzáadhatsz valami véletlenszerűt is a történetéhez. Bármilyen szörnyet, állatot vagy
-                    más akadályt.
-                    Így hangzik:
-                    ```
-                    allatok is bagoly, sündisznó, tatu
-                    print Most hallja a allatok at random hangját
-                    ```
-
     songs:
         image: songs.png
         name: Énekelj egy dalt!
@@ -302,29 +274,6 @@ adventures:
                     print _ ő mosogat: _
                     print emberek at _
                     ```
-            3:
-                start_code: |-
-                    print Ki mosogat?
-                story_text: |-
-                    ## Mosogatóprogram
-                    Otthon általában nem értesz egyet abban, hogy kinek kell ma mosogatnia vagy kicserélnie az alomdobozt?
-
-                    Ezután hagyhatod, hogy a számítógép nagyon tisztességesen válasszon. Ezt beprogramozhatod a 2. szinten!
-
-                    Először állítsd össze a családja tagjainak listáját. Ezután válaszd az 'at random' lehetőséget a listából.
-
-                    ## Példa Hedy kód
-                    ```
-                    emberek is anya, apa, Edit, Gizi
-                    print emberek at random
-                    ```
-
-                    ## Mi a következő lépés?
-                    Véletlenül megpróbáltál olyan mondatot alkotni, amely az emberek szót tartalmazta?
-
-                    Pl. `print Ezek közül az emberek közül választottam`. Próbáld ki, ha még nem tetted meg.
-
-                    Ez nem működik megfelelően! Aztán megkapod: [apu, anya, Edit, Gizi] közül választottam. Ezt meg tudod majd oldani a 3. szinten.
     dice:
         description: Készítsd el a saját kockádat
         name: Készítsd el a saját kockádat
@@ -420,27 +369,6 @@ adventures:
                     print _ _ _ <- itt kell beprogramozni a dobást
                     ```
                 start_code: print 'Mit dobunk ezúttal?'
-            3:
-                start_code: print Mit dobunk ezúttal?
-                story_text: |-
-                    ## Kocka
-                    A 2. szinten választhatunk egy listából. Ezzel hagyhatjuk, hogy a számítógép válassza ki
-                    a kocka egyik oldalát.
-                    Vess egy pillantást azokra a játékokra, amelyek otthon vannak a szekrényedben.
-                    Vannak (speciális) kockával játszott játékok? Ezzel a kóddal másolhatod is.
-                    Például a Giliszta játék kockája a 1–5-ig számokkal és egy gilisztával.
-                    ! [Giliszta játék kockája a 1–5-ig számokkal és egy gilisztával]
-                    ## Példa Hedy kód
-                    ```
-                    dobasok is 1, 2, 3, 4, 5, giliszta
-                    print dobasok at random
-                    ```
-                    ## Mi a következő lépés?
-                    Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a
-                    dobásokat?
-                    Például. `print Választottam a dobasok közül`. Próbáld ki, ha még nem tetted meg.
-                    Ez nem működik megfelelően! Aztán megkapod: Az [1, 2, 3, 4, 5, földigiliszta] közül
-                    választottam. Ezt meg tudod majd oldani a 3. szinten.
     rock:
         description: Készíts saját kő, papír, olló játékot
         default_save_name: Kő
@@ -527,27 +455,6 @@ adventures:
                     valasztas is kő, papír, olló
                     print _ A számítógép ezt választotta: _ _ at _
                     ```
-            3:
-                story_text: |
-                    ## Kő, papír, olló
-                    A 2. szinten listákat írhatunk be, és választhatunk belőlük dolgokat.
-                    Először készíts egy listát az `is` segítségével. Ezután hagyhatod, hogy a számítógép a `at
-                    random` segítségével válasszon ki valamit a listából.
-                    Például megengedheted, hogy a számítógép kő, papír és olló közül válogasson.
-                    ## Példa Hedy kód
-                    ```
-                    valasztas is kő, papír, olló
-                    print valasztas at random
-                    ```
-                    Újra használhatod a `ask'-t a 2. szinten. Kiírathatod számítógép a választását?
-                    Vigyázz, a `ask` most másképp működik, mint az 1. szinten. Előtte el kell nevezni.
-                    ## Előretekintés
-                    Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a valasztas
-                    változót?
-                    Például. ```print Az enyém: valasztas```. Próbáld ki, ha még nem tetted meg.
-                    Ez nem működik megfelelően! Aztán megkapod: a [kő, papír, olló] közül választottam.
-                    Ezt meg tudod majd oldani a 3. szinten.
-                start_code: print Üdvözlünk saját kő papír olló játékodon!
     calculator:
         name: Számológép
         description: Készíts számológépet
@@ -834,48 +741,6 @@ adventures:
                     print 'Köszönjük a rendelésedet.'
                     print 'A(z) ' etel ' és a(z) ' ital ' mindjárt itt lesz!'
                     ```
-            3:
-                start_code: ''
-                story_text: |-
-                    ## Étterem
-                    A 2. szinten változók segítségével bővítheted éttermedet. Az 1. szinten Hedy csak egyszer tudta visszhangozni a sorrendet, és csak az utolsó dologra emlékezett, amit rendeltek.
-                    Most már használhatsz változókat, és Hedy emlékszik mind az ételekre, mind az italokra!
-
-                    ## Példa Hedy étterem
-                    ```
-                    print Üdvözlünk a Hedy étteremben!
-                    print Ma pizzát vagy lasagnat szolgálunk fel.
-                    etel is ask Mit szeretnél enni?
-                    print Jó választás! A etel a kedvencem!
-                    feltet is ask 'Szeretnél rá húst vagy zöldséget?'
-                    print etel rajta feltet úton van!
-                    ital is ask 'Mit szeretnél inni?'
-                    print Köszönjük a rendelésedet.
-                    print A etel és ital mindjárt itt lesz!
-                    ```
-
-                    ## Véletlenszerű étterem
-                    Nehezen tudod eldönteni, mit szeretnél vacsorázni? Engedheted, hogy Hedy válasszon neked!
-                    Egyszerűen add hozzá kedvenc (vagy legkevésbé kedvenc) ételeidnek listáját, és Hedy véletlenszerűen választhatja ki a vacsorádat.
-                    Szórakozhatsz egy kicsit, ha hagyod, hogy Hedy megválassza a vacsora árát is! Mit fogsz kapni?
-
-                    ## Példa Hedy Code véletlenszerű étterem
-
-                    ```
-                    print Üdvözöljük a Hedy's Random étteremben!
-                    print Az egyetlen étterem amely véletlenszerűen kiválasztja az étkezést és annak árát az Ön számára!
-                    eloetelek is saláta, leves, sajt
-                    foetel is pizza, kelbimbó, spagetti
-                    desszertek is brownie, fagylalt, francia sajtok
-                    ital is kóla, sör, víz
-                    arak is 1000 forint, 2000 forint, 3000 forint
-                    print A következővel indul: eloetelek at random
-                    print Ezután kiszolgáljuk: foetel at random
-                    print És desszertként: desszertek at random
-                    print Igyon egy italt
-                    print Ez lesz: arak at random
-                    print Köszönöm és élvezze az étkezést!
-                    ```
     turtle:
         name: Teknős
         description: Készíts saját rajzot
@@ -1043,40 +908,6 @@ adventures:
                     turn irany
                     tavolsag is ask 'Milyen messze menjen?'
                     forward tavolsag
-            3:
-                story_text: |-
-                    Az 1. szinten a teknős csak balra vagy jobbra tudott fordulni. Ez egy kicsit unalmas!
-                    A 2. szinten minden irányba tudja mutatni az orrát.
-
-                    Használd a 90-et a negyed fordulathoz. Ezeket fokoknak hívjuk. A teljes fordulat 360 fok.
-                    Tudsz ábrát készíteni ezzel a kóddal? Talán egy háromszög vagy egy kör?
-
-                    ## Példa Hedy kódra
-
-                    ```
-                    print Ábrák rajzolása
-                    angle is 90
-                    turn angle
-                    forward 25
-                    turn angle
-                    forward 25
-                    ```
-                    ## Együttműködés
-
-                    A 2. szinten interaktív rajzot is készíthetsz az "ask" kombinálásával.
-                    Ezzel a kóddal megkéred a felhasználót, hogy mondja meg a teknősnek, hány fokkal kell fordulnia. Ezután megkérdezi a teknőst, meddig kell mennie. Ezt a kódot lemásolva a teknős messzire juthat
-
-                    ## Példa Hedy kódra
-                    ```
-                    print Turtle race
-                    angle is ask Where to turn?
-                    turn angle
-                    distance is ask How far?
-                    forward distance
-                    ```
-                start_code: |-
-                    forward 50
-                    turn left
     fortune:
         name: Jósnő
         description: Hadd jósolja meg Hedy a jövőt
@@ -1261,25 +1092,6 @@ adventures:
                     valasz is igen, nem, talan
                     print 'A kristálygömböm azt mondja... ' valasz at random
                     ```
-            3:
-                start_code: print Szia Hedy a jósnő vagyok!
-                story_text: |-
-                    ## Jósnő
-                    Az 1. szinten megalkottad első jóslásgépedet, de Hedy nem tudott igazán megjósolni semmit, csak visszhangot.
-                    A 2. szinten használhatsz egy változót és az `at random`  parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
-
-                    ## Példa Hedy -kódra
-                    Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
-                    ```
-                    print Szia Hedy a jósnő vagyok!
-                    kerdes is ask Mit akarsz tudni?
-                    print Ez az amit tudni akarsz: kerdes
-                    valasz is igen, nem, talan
-                    print A kristálygömböm azt mondja... valasz at random
-                    ```
-
-                    ## Kihívások
-                    Most Hedy csak igennel, nemmel vagy talán válaszolhat. Adhatsz Hedynek több válaszlehetőséget, például „határozottan” vagy „kérdezz újra”
     haunted:
         name: Kísértetház
         description: menekülés a kísértetjárta házból
@@ -1421,31 +1233,6 @@ adventures:
                     A 3. szinten megtanulod használni az idézőjeleket a játékaidban.
                     Át tudod alakítani a kisértetház játékot úgy, hogy megfeleljen a 3. szintnek?
                 start_code: print 'Szabadulj ki a kísértetházból'
-            3:
-                story_text: |-
-                    ## Kísértetház játék
-                    Az 1. szinten bemutatkoztál a kísértetház játékodnak, de ahogy észrevetted, a történetnek mindig rettenetes vége lesz.
-                    A 2. szinten interaktívabbá teheted a történetet a játék kimenetelének megváltoztatásával; néha megesznek, néha megmenekülsz!
-                    Hadd döntsön Hedy véletlenszerűen!
-
-                    ## Példa Hedy -kódra
-                    ```
-                    print Szabadulj ki a kísértetházból!
-                    print Három ajtó van előtted...
-                    valaszt is ask Melyik ajtót választod?
-                    print Ezt az ajtót választottad ... valaszt
-                    szornyek is a zombi, a vámpír, SEMMI, AMITŐL ELMENEKÜLHETSZ
-                    print Amit látsz...
-                    print szornyek at random
-                    ```
-                    ## Kihívás
-                    Ez a történet meglehetősen egyszerű, talán egy kicsit érdekesebbé teheted egy izgalmasabb történet hozzáadásával.
-                    Továbbá nagyon korlátozott eredményeket érhetsz el, csak 3 lehetőség van arra, hogy mi van az ajtók mögött. Talán még több szörnyetegre gondolhatsz, amelyet felvehetsz a listába!
-
-                    ## Változtasd a játékot tévéműsorrá!
-                    Végezetül szeretnénk egy kihívást küldeni Neked,  hogy változtasd meg ezt a játékot olyan játékműsorrá (mint amilyenek a tévében vannak), ahol a játékosok ajtót vagy bőröndöt választanak, és valamelyik nagy díjat tartalmaz!
-                    Meg tudod csinálni?
-                start_code: print 'Szabadulj ki a kísértetházból'
     next:
         name: Mi a következő lépés?
         description: Mi a következő lépés?
@@ -1551,16 +1338,3 @@ adventures:
                     A 4. szinten meg fogod tanulni az "if" parancsot, amely lehetővé teszi, hogy különböző válaszokat adjon a programban. Így például titkos jelszót programozhatsz a számítógépedhez.
                     Vegyünk tehát egy csúcsot a 4 -es szinten.
                 start_code: print 'Menjünk a következő szintre!'
-            3:
-                story_text: |-
-                    ## Mi a következő lépés?
-                    A 2. szinten a változókkal gyakoroltál, de talán találkoztál ezzel a hibával.
-
-                    Próbálja meg futtatni ezt a kódot:
-                    ```
-                    nevem is Zita
-                    print A nevem nevem
-                    ```
-                    Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
-                    A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
-                start_code: print Menjünk a következő szintre!

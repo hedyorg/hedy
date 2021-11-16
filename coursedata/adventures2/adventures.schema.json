@@ -1,0 +1,58 @@
+{
+  "title": "JSON Schema for Hedy Adventures",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Short title of the adventure"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Slightly longer introductory description of the adventure"
+    },
+    "adventures": {
+      "type": "object",
+      "description": "Individual adventures, key/value map",
+      "additionalProperties": { "$ref": "#/definitions/Adventure" }
+    }
+  },
+  "definitions": {
+    "Adventure": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "default_save_name": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "levels": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/Story" }
+        }
+      },
+      "required": ["name", "default_save_name", "description", "levels"],
+      "additionalProperties": false
+    },
+    "Story": {
+      "type": "object",
+      "properties": {
+        "intro_text": { "type": "string" },
+        "story_text": { "type": "string" },
+        "start_code": { "type": "string" }
+      },
+      "required": ["start_code"],
+      "additionalProperties": false
+    },
+    "StoryCommand": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "example": { "type": "string" },
+        "explanation": { "type": "string" },
+        "demo_code": { "type": "string" }
+      },
+      "required": ["demo_code"],
+      "additionalProperties": false
+    }
+  }
+}

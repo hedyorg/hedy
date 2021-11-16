@@ -84,6 +84,52 @@
             bisten is hûn, kat, kangeroe
             print bisten at random
 3:
+    intro_text: |
+        Yn level 2 leare wy wat nijs. Kinst in wurd in namme jaan mei `is`. Dernei kinst oeral yn dyn koade dy namme brûke. Hedy ferfangt dat dan. Dat giet sa:
+        ```
+        namme is Hedy
+        print hoi namme
+        ```
+
+        It kommando `ask` is yn level 2 ek feroare. It antwurd ûnthaldst ek mei in namme:
+
+        ```
+        antwurd is ask Wat is dyn namme?
+        ```
+
+        `print` wurket noch lykas yn level 1, en `echo` hast net mear nedich.
+
+        Yn level 2 kinst ek in list meitsje. Ut de list kinst dan eat willekeurichs kieze. Dat dochst mei `at random` (sprek út: et ren-dum).
+
+        Alle koade fan level 2 stiet wer in de linkerbalke. Yn de tabkes stean wer opjeften.
+    start_code: "print oant moarn!"
+    commands:
+    -   name: "is"
+        explanation: "In wurd in namme jaan mei `is`. Meist de namme sels kieze."
+        example: "Foarbyld: foarnamme is Hedy."
+        demo_code: |-
+            foarnamme is Hedy
+            print ik bin foarnamme
+    -   name: "is - teken-skyldpod"
+        explanation: "In getal in namme jaan mei `is`. Meist de namme sels kieze."
+        example: "Foarbyld: hoek is 90."
+        demo_code: |-
+            hoeke is 90
+            turn hoeke
+            forward 100
+    -   name: "ask"
+        explanation: "Eat freegje mei `ask`. Mar tink derom! Moatst dyn antwurd in namme jaan mei `is`."
+        example: "Foarbyld: kleur is ask Wat is dyn favorite kleur?"
+        demo_code: |-
+            kleur is ask Wat is dyn favorite kleur?
+            print Dyn favorite is dus kleur
+    -   name: "kies_random"
+        explanation: "Eat willekeurichs út in groepke wurden kieze mei `at` en `random`."
+        example: "Foarbyld: bisten is hûn, kat, kangeroe."
+        demo_code: |-
+            bisten is hûn, kat, kangeroe
+            print bisten at random
+4:
     start_code: "print 'oant moarn'"
     intro_text: |
         Yn level 3 binne `ask` en `print` feroare.
@@ -114,7 +160,7 @@
         demo_code: |-
             kleur is ask 'Wat is dyn favorite kleur?'
             print 'Dyn favorite is dus ' kleur
-4:
+5:
     start_code: |-
         namme is ask 'Wat is dyn namme?'
         if namme is Hedy print 'leuk' else print 'minder leuk!'
@@ -166,7 +212,7 @@
         demo_code: |-
             antwurd is ask 'Hoe fier moat ik rinne?'
             if antwurd is fier forward 100 else forward 5
-5:
+6:
     start_code: "print '5 kear 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` en `if` wurkje noch lykas yn level 4.
@@ -200,7 +246,7 @@
             hoeken is ask 'Hoefolle hoeken kriget dit figuur?'
             hoek is 360 / hoeken
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: |
         `ask`, `print` en `if` wurkje noch lykas yn level 4 en 5.
@@ -238,7 +284,7 @@
         example: "Foarbyld: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Goeie allegearre'
@@ -279,7 +325,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -321,7 +367,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         dieren is hond, kat, papegaai
         for dier in dieren
@@ -348,7 +394,7 @@
             dieren is hond, kat, papegaai
             for dier in dieren
               print dier
-10:
+11:
     start_code: |-
         for i in range 1 to 10
             print i
@@ -365,7 +411,7 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-11:
+12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
@@ -403,84 +449,7 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-15:
-    start_code: |-
-        fruit is ['apel', 'banaan', 'kjers']
-        print fruit 
-    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
-    commands:
-    -   name: "Heakjes om listen"
-        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
-        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
-        demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            print fruit 
-    -   name: "Pak eat út in list"
-        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
-        example: "Foarbyld: earstefruit is fruit[1]"
-        demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            earstefruit is fruit[1]
-            print earstefruit 
-    -   name: "Nim in willekeurich ding út 'e list"
-        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
-        example: "Foarbyld: randomfruit is fruit[random]"
-        demo_code: |-
-            fruit is ['apel', 'banaan', 'kjers']
-            randomfruit is fruit[random]
-            print randomfruit 
-14:
-    start_code: |-
-        antwoord is 0
-        while antwoord != 25
-            antwurd is ask 'Wat is 5 kear 5?'
-        print 'Dat wie it goede antwurd!'
-    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
-    commands:
-    -   name: "while"
-        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
-        example: "Foarbyld: while goed_antwurd is False"
-        demo_code: |-
-            antwoord is 0
-            while antwoord != 25
-                antwurd is ask 'Wat is 5 kear 5?'
-            print 'Dat wie it goede antwurd!'
-    -   name: "Smaller while"
-        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
-        example: "Foarbyld: while tel < 3"
-        demo_code: |-
-            tel is 1
-            while tel < 3
-                print 'Dit is de ' tel 'e kear'
-                tel is tel + 1
-            print 'We zijn klaar'
-
 13:
-    start_code: |-
-        leeftyd is ask 'Hoe âld bisto?'
-        if leeftyd < 13
-            print 'Dan bist jonger as ik!'
-        else
-            print 'Dan bist âlder as ik!'
-    intro_text: |-
-        We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal
-        lytser is as it twadde lykas `4 < 5`. De `>` sjocht oft eat grutter is as it twadde getal, lykas `6 > 5`.
-    commands:
-    -   name: "Lytser"
-        explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
-        example: "Foarbyld: leeftyd < 12"
-        demo_code: |-
-            leeftyd is ask 'Hoe âld bisto?'
-            if leeftyd < 13
-                print 'Dan bist jonger as ik!'
-    -   name: "Grutter"
-        explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
-        example: "Foarbyld: leeftyd > 12"
-        demo_code: |-
-            leeftyd is ask 'Hoe âld bisto?'
-            if leeftyd < 13
-                print 'Dan bist âlder as ik!'
-12:
     start_code: |-
         name is ask 'what is your name?'
         leeftijd is ask 'what is your age?'
@@ -629,3 +598,80 @@
 #                print 'a is 2'
 #            else:
 #                print 'a is net 1 of 2'
+14:
+    start_code: |-
+        leeftyd is ask 'Hoe âld bisto?'
+        if leeftyd < 13
+            print 'Dan bist jonger as ik!'
+        else
+            print 'Dan bist âlder as ik!'
+    intro_text: |-
+        We sille nije tekens leare, do kinst se miskien al fan rekkenjen as wiskunde: `<` en `>`. De `<` sjocht oft it earste getal
+        lytser is as it twadde lykas `4 < 5`. De `>` sjocht oft eat grutter is as it twadde getal, lykas `6 > 5`.
+    commands:
+    -   name: "Lytser"
+        explanation: "De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+        example: "Foarbyld: leeftyd < 12"
+        demo_code: |-
+            leeftyd is ask 'Hoe âld bisto?'
+            if leeftyd < 13
+                print 'Dan bist jonger as ik!'
+    -   name: "Grutter"
+        explanation: "De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`"
+        example: "Foarbyld: leeftyd > 12"
+        demo_code: |-
+            leeftyd is ask 'Hoe âld bisto?'
+            if leeftyd < 13
+                print 'Dan bist âlder as ik!'
+15:
+    start_code: |-
+        antwoord is 0
+        while antwoord != 25
+            antwurd is ask 'Wat is 5 kear 5?'
+        print 'Dat wie it goede antwurd!'
+    intro_text: "No sille wy in nije lus leare: De `while`-lus. We gean troch sa lang de koade dy't yn'e lus stiet `True` is. Dus bij de foarbyldkoade gean wy troch oant der in goed antwurd jûn is. As der nea in goed antwurd jûn wurdt, dan stoppet de lus nea!"
+    commands:
+    -   name: "while"
+        explanation: "We kinne dus in `while`-lus brûke mei de `True` en `False`"
+        example: "Foarbyld: while goed_antwurd is False"
+        demo_code: |-
+            antwoord is 0
+            while antwoord != 25
+                antwurd is ask 'Wat is 5 kear 5?'
+            print 'Dat wie it goede antwurd!'
+    -   name: "Smaller while"
+        explanation: "We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út."
+        example: "Foarbyld: while tel < 3"
+        demo_code: |-
+            tel is 1
+            while tel < 3
+                print 'Dit is de ' tel 'e kear'
+                tel is tel + 1
+            print 'We zijn klaar'
+
+16:
+    start_code: |-
+        fruit is ['apel', 'banaan', 'kjers']
+        print fruit 
+    intro_text: "No sette wy fjouwerkante heakjes om listen. We moatte no ek inkele oanhellingstekens (') om dingen in listen sette."
+    commands:
+    -   name: "Heakjes om listen"
+        explanation: "We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!"
+        example: "Foarbyld: fruit is ['apel', 'banaan', 'kjers']"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            print fruit 
+    -   name: "Pak eat út in list"
+        explanation: "Om in ding út in list te krijen, brûke we `[nûmer]`. Dus mei fruit[1] krigest it earste fruit út 'e list!"
+        example: "Foarbyld: earstefruit is fruit[1]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            earstefruit is fruit[1]
+            print earstefruit 
+    -   name: "Nim in willekeurich ding út 'e list"
+        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
+        example: "Foarbyld: randomfruit is fruit[random]"
+        demo_code: |-
+            fruit is ['apel', 'banaan', 'kjers']
+            randomfruit is fruit[random]
+            print randomfruit 
