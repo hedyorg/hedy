@@ -26,17 +26,13 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+  def test_print_comma(self):
+    result = hedy.transpile("print welkom bij steen, schaar, papier", self.level)
+    expected = textwrap.dedent("""\
+    print(f'welkom bij steen, schaar, papier')""")
 
-  # issue #745
-  def test_print_list(self):
-    code = textwrap.dedent("""\
-        plaatsen is een stad, een  dorp, een strand
-        print test plaatsen""")
-
-    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
-      result = hedy.transpile(code, self.level)
-
-    self.assertEqual('Invalid Argument Type', context.exception.error_code)
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
@@ -141,31 +137,6 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-  def test_assign_list(self):
-
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_list_exclamation_mark(self):
-    code = textwrap.dedent("""\
-    antwoorden is ja, NEE!, misschien
-    print antwoorden at random""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    antwoorden = ['ja', 'NEE!', 'misschien']
-    print(f'{random.choice(antwoorden)}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
 
   #ask tests
   def test_ask(self):
@@ -226,6 +197,26 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  #sleep tests
+  def test_sleep_with_number(self):
+    code = "sleep 2"
+    expected = "time.sleep(2)"
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+  def test_sleep_without_number(self):
+    code = "sleep"
+    expected = "time.sleep(1)"
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+
   #turn tests
   def test_turn_number(self):
     code = textwrap.dedent("""\
@@ -276,21 +267,9 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-
   def test_forward_with_string_variable(self):
     code = textwrap.dedent("""\
         a is test
-        forward a""")
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
-  def test_forward_with_list_variable(self):
-    code = textwrap.dedent("""\
-        a is 1, 2, 3
         forward a""")
     self.multi_level_tester(
       max_level=9,
@@ -372,25 +351,6 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-  def test_print_list_random(self):
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    print dieren at random""")
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{random.choice(dieren)}')""")
-
-    # check if result is in the expected list
-    check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
-
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
-    )
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -432,24 +392,6 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_print_list_var(self):
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    print dieren at 1""")
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{dieren[1-1]}')""")
-
-    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
-
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
-    )
 
   #negative tests
   def test_echo_no_longer_in_use(self):

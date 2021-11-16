@@ -14,8 +14,9 @@ from dataclasses import dataclass, field
 import exceptions
 
 # Some useful constants
-HEDY_MAX_LEVEL = 14
+HEDY_MAX_LEVEL = 16
 MAX_LINES = 100
+LEVEL_STARTING_INDENTATION = 8
 
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
@@ -633,10 +634,12 @@ class ConvertToPython_1(Transformer):
             return "print(answer)" #no arguments, just print answer
 
         argument = process_characters_needing_escape(args[0])
-        return "print('" + argument + "'+answer)"
+        return "print('" + argument + " '+answer)"
+
+    def comment(self, args):
+        return f"#{''.join(args)}"
 
     def ask(self, args):
-
         argument = process_characters_needing_escape(args[0])
         return "answer = input('" + argument + "')"
 
@@ -743,6 +746,7 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"'{name}'.zfill(100)"
 
 @hedy_transpiler(level=2)
+@hedy_transpiler(level=3)
 class ConvertToPython_2(ConvertToPython_1):
 
     def ask_dep_2(self, args):
@@ -849,6 +853,13 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             return args[0] + '[' + args[1] + '-1]'
 
+    def sleep(self, args):
+        if args == []:
+            return "time.sleep(1)"
+        else:
+            return f"time.sleep({args[0]})"
+
+
 def is_quoted(s):
     return s[0] == "'" and s[-1] == "'"
 
@@ -868,8 +879,8 @@ def make_f_string(args, lookup):
 
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
-@hedy_transpiler(level=3)
-class ConvertToPython_3(ConvertToPython_2):
+@hedy_transpiler(level=4)
+class ConvertToPython_4(ConvertToPython_2):
 
     def var_access(self, args):
         name = args[0]
@@ -920,8 +931,8 @@ def indent(s):
     lines = s.split('\n')
     return '\n'.join(['  ' + l for l in lines])
 
-@hedy_transpiler(level=4)
-class ConvertToPython_4(ConvertToPython_3):
+@hedy_transpiler(level=5)
+class ConvertToPython_5(ConvertToPython_4):
     def list_access_var(self, args):
         var = hash_var(args[0])
         if args[2].data == 'random':
@@ -949,8 +960,8 @@ else:
         arg1 = process_variable(args[1], self.lookup)
         return f"{arg0} in {arg1}"
 
-@hedy_transpiler(level=5)
-class ConvertToPython_5(ConvertToPython_4):
+@hedy_transpiler(level=6)
+class ConvertToPython_6(ConvertToPython_5):
 
     def print(self, args):
         # we only check non-Tree (= non calculation) arguments
@@ -1016,8 +1027,8 @@ class ConvertToPython_5(ConvertToPython_4):
     def division(self, args):
         return self.process_calculation(args, '//')
 
-@hedy_transpiler(level=6)
-class ConvertToPython_6(ConvertToPython_5):
+@hedy_transpiler(level=7)
+class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, args):
         var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
@@ -1025,9 +1036,9 @@ class ConvertToPython_6(ConvertToPython_5):
         return f"""for {var_name} in range(int({str(times)})):
 {indent(command)}"""
 
-@hedy_transpiler(level=7)
 @hedy_transpiler(level=8)
-class ConvertToPython_7_8(ConvertToPython_6):
+@hedy_transpiler(level=9)
+class ConvertToPython_8_9(ConvertToPython_7):
     def __init__(self, punctuation_symbols, lookup):
         self.punctuation_symbols = punctuation_symbols
         self.lookup = lookup
@@ -1060,8 +1071,8 @@ class ConvertToPython_7_8(ConvertToPython_6):
         # this is list_access
             return hash_var(args[0]) + "[" + str(hash_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(hash_var(args[0])) + ")"
 
-@hedy_transpiler(level=9)
-class ConvertToPython_9(ConvertToPython_7_8):
+@hedy_transpiler(level=10)
+class ConvertToPython_10(ConvertToPython_8_9):
     def repeat_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
@@ -1069,8 +1080,8 @@ class ConvertToPython_9(ConvertToPython_7_8):
 
       return f"for {args[0]} in {args[1]}:\n{body}"
 
-@hedy_transpiler(level=10)
-class ConvertToPython_10(ConvertToPython_9):
+@hedy_transpiler(level=11)
+class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
@@ -1100,8 +1111,8 @@ def is_random(s):
     return 'random.choice' in s
 
 
-@hedy_transpiler(level=11)
-class ConvertToPython_11(ConvertToPython_10):
+@hedy_transpiler(level=12)
+class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
         return ''.join(args)
 
@@ -1187,8 +1198,15 @@ class ConvertToPython_11(ConvertToPython_10):
             # we no longer escape quotes here because they are now needed
             return parameter + " = " + value + ""
 
-@hedy_transpiler(level=12)
-class ConvertToPython_12(ConvertToPython_11):
+@hedy_transpiler(level=13)
+class ConvertToPython_13(ConvertToPython_12):
+    def andcondition(self, args):
+        return ' and '.join(args)
+    def orcondition(self, args):
+        return ' or '.join(args)
+
+@hedy_transpiler(level=14)
+class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, args, operator):
 
         # we are generating an fstring now
@@ -1224,15 +1242,15 @@ class ConvertToPython_12(ConvertToPython_11):
     def not_equal(self, args):
         return self.process_comparison(args, "!=")
 
-@hedy_transpiler(level=13)
-class ConvertToPython_13(ConvertToPython_12):
+@hedy_transpiler(level=15)
+class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
         return "while " + args[0] + ":\n"+"\n".join(all_lines)
 
-@hedy_transpiler(level=14)
-class ConvertToPython_14(ConvertToPython_13):
+@hedy_transpiler(level=16)
+class ConvertToPython_16(ConvertToPython_15):
     def assign_list(self, args):
         parameter = args[0]
         values = [a for a in args[1:]]
@@ -1323,20 +1341,7 @@ class ConvertToPython_14(ConvertToPython_13):
 #         else:
 #             return f"str({arg0}) == str({arg1})" #no and statements
 #
-# @hedy_transpiler(level=15)
-# class ConvertToPython_15(ConvertToPython_14):
-#     def andcondition(self, args):
-#         return ' and '.join(args)
-#     def orcondition(self, args):
-#         return ' or '.join(args)
-#
-# @hedy_transpiler(level=16)
-# class ConvertToPython_16(ConvertToPython_15):
-#     def comment(self, args):
-#         return f"# {args}"
-#
 
-#
 # @hedy_transpiler(level=19)
 # @hedy_transpiler(level=20)
 # class ConvertToPython_19_20(ConvertToPython_18):
@@ -1578,16 +1583,19 @@ def preprocess_blocks(code, level):
     lines = code.split("\n")
     current_number_of_indents = 0
     previous_number_of_indents = 0
-    indent_size = None # we don't fix indent size but the first encounter sets it
+    indent_size = 4 # set at 4 for now
+    indent_size_adapted = False
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
         leading_spaces = find_indent_length(line)
 
         line_number += 1
-        #first encounter sets indent size for this program
-        if indent_size == None and leading_spaces > 0:
+
+        # first encounter sets indent size for this program
+        if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
+            indent_size_adapted = True
 
         # ignore whitespace-only lines
         if leading_spaces == len(line):
@@ -1605,7 +1613,7 @@ def preprocess_blocks(code, level):
                                                                  indent_size=indent_size)
 
             current_number_of_indents = leading_spaces // indent_size
-            if current_number_of_indents > 1 and level == 7:
+            if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
@@ -1664,8 +1672,8 @@ def process_input_string(input_string, level):
     if level >= 3:
         result = result.replace("\\", "\\\\")
 
-    # In level 7 we add indent-dedent blocks to the code before parsing
-    if level >= 7:
+    # In level 8 we add indent-dedent blocks to the code before parsing
+    if level >= hedy.LEVEL_STARTING_INDENTATION:
         result = preprocess_blocks(result, level)
 
     return result
@@ -1794,7 +1802,7 @@ def transpile_inner(input_string, level, lang="en"):
 
 
 def execute(input_string, level):
-    python = transpile(input_string, level)
+    python = transpile(input_string, level)    
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
