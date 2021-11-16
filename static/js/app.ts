@@ -227,10 +227,18 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.Code){
-        console.log("success!");
-        var allsuccessmessages = ErrorMessages['Transpile_success'];
-        var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-        success.show(allsuccessmessages[randomnum]);
+        var necessary_commands = { 1: "print", 2: "ask", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "",
+          9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: "", 16: "", 17: "", 18: "",
+          19: "", 20: "", 21: "", 22: "", 23: "" }; 
+        if ( code.includes(necessary_commands[parseInt(level)]) ) {
+          console.log("success!");
+          var allsuccessmessages = ErrorMessages['Transpile_success'];
+          var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
+          success.show(allsuccessmessages[randomnum]);
+        }
+        else {
+          success.show("Your code works, but you forgot to use " + directory[parseInt(level)] + "!");
+        } // eventually: make sure layout of the commands is the same as in errors
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
