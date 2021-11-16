@@ -23,9 +23,9 @@
             <td>{{student.last_login}}</td>
             <td>{{student.highest_level}}</td>
             <td>{{student.programs}}</td>
-            <td><a href="{{localize_link ('/programs?user=' + student.username)}}">{{auth.programs}}</a></td>
+            <td><a href="{{localize_link ('/programs?user=' + student.username)}}">{{student.username}}'s {{auth.page}}</a></td>
             <td>{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-            <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove_student}}</a></td>
+            <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove}}</a></td>
           </tr>
         {% endfor %}
       </tbody>
