@@ -12,6 +12,7 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
+import program_repair
 
 # Some useful constants
 HEDY_MAX_LEVEL = 16
@@ -1565,13 +1566,6 @@ def transpile(input_string, level, lang="en"):
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
-
-
-
-def repair(input_string):
-    #the only repair we can do now is remove leading spaces, more can be added!
-    return '\n'.join([x.lstrip() for x in input_string.split('\n')])
-
 def translate_characters(s):
 # this method is used to make it more clear to kids what is meant in error messages
 # for example ' ' is hard to read, space is easier
@@ -1763,7 +1757,7 @@ def is_program_valid(program_root, input_string, level, lang):
             invalid_info = invalid_info[0]
         if invalid_info.error_type == ' ':
             # the error here is a space at the beginning of a line, we can fix that!
-            fixed_code = repair(input_string)
+            fixed_code = program_repair.remove_leading_spaces(input_string)
             if fixed_code != input_string:  # only if we have made a successful fix
                 result = transpile_inner(fixed_code, level, lang)
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code,
