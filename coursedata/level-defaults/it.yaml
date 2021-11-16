@@ -37,11 +37,8 @@
         risposta is ask come ti chiami?
         ```
 
-        La stampa funziona ancora come nel livello 1 e non è più necessaria un'ecografia.
+        `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
 
-        Nel livello 2 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
-
-        Troverai tutti i codici di livello 2 nella barra di sinistra. Ci sono anche schede con compiti.
     start_code: "print ciao mondo!"
     commands:
     -   name: "is"
@@ -56,13 +53,25 @@
         demo_code: |-
             colore is ask Qual è il tuo colore preferito?
             print colore è il tuo preferito!
+3:
+    intro_text: |
+        Nel livello 3 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
+
+        ```
+        animali is cane, gatto, canguro
+        print animali at random
+        ```
+
+        Troverai tutti i codici di livello 3 nella barra di sinistra. Ci sono anche schede con compiti.
+    start_code: "print ciao mondo!"
+    commands:
     -   name: "scegli_acaso"
         explanation: "Scegli una parola a caso da un gruppo con `at` e `random`"
         example: "Esempio: animali is cane, gatto, canguro."
         demo_code: |-
             animali is cane, gatto, canguro
             print animali at random
-3:
+4:
     start_code: "print 'Ciao mondo'"
     intro_text: |
         `print` e `ask` cambiano al livello 3.
@@ -93,7 +102,7 @@
         demo_code: |-
             colore is ask 'Qual è il tuo colore preferito?'
             print colore ' è il tuo preferito!'
-4:
+5:
     start_code: |-
         nome is ask 'Come ti chiami?'
         if nome is Hedy print 'che bello!' else print 'mah'
@@ -130,7 +139,7 @@
         demo_code: |-
             colore is ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
-5:
+6:
     start_code: "print '5 per 5 è ' 5 * 5"
     intro_text: |
         `ask`,` print` e `if` funzionano ancora come nei livelli 4.
@@ -164,7 +173,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy è divertente!'"
     intro_text: |
         `ask`, `print` e `if` funzionano esattamente come funzionavano nel quarto livello.
@@ -196,7 +205,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Ciao a tutti'
