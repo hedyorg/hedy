@@ -50,3 +50,21 @@ class TestsTranslationLevel3(HedyTester):
         expected = "vraag stel je vraag\nherhaal tekst"
 
         self.assertEqual(result, expected)
+
+    def test_forward(self):
+        result = hedy.translate_keywords("forward 50", "en", "nl", self.level)
+        expected = "vooruit 50"
+
+        self.assertEqual(result, expected)
+
+    def test_turn(self):
+        result = hedy.translate_keywords("turn left", "en", "nl", self.level)
+        expected = "draai left"
+
+        self.assertEqual(result, expected)
+
+    def test_turn_value(self):
+        result = hedy.translate_keywords("turn 50", "en", "nl", self.level)
+        expected = "draai 50"
+
+        self.assertEqual(result, expected)

@@ -1912,7 +1912,7 @@ class ConvertToLang1(Transformer):
         return self.keywords["forward"] + " " + "".join([str(c) for c in args])
 
     def random(self, args):
-        return self.keywords["random"] + " " + "".join([str(c) for c in args])
+        return self.keywords["random"] + "".join([str(c) for c in args])
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
@@ -1951,13 +1951,13 @@ class ConvertToLang2(ConvertToLang1):
     def var(self, args):
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
-        return f'{var} is' + ''.join(all_parameters)
+        return var + ''.join(all_parameters)
 
     def ask(self, args):
         var = args[0]
         all_parameters = [process_characters_needing_escape(a) for a in args]
 
-        return all_parameters[0] + " " + self.keywords["ask"] + " " + ''.join(all_parameters[1:])
+        return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(all_parameters[1:])
 
     def assign_list(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
@@ -1966,7 +1966,7 @@ class ConvertToLang2(ConvertToLang1):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
 
 
-translate_keywords("ask stel je vraag\necho tekst", "en", "nl", 1)
+translate_keywords("mens is papa mama oma\nprint mens at random", "en", "nl", 2)
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
