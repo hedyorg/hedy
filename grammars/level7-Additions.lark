@@ -1,8 +1,4 @@
-command: print | repeat | ifs elses? | turtle | ask | assign_list | sleep | list_access_var | assign | comment  //placing assign at the end means print is will print 'is' and print is Felienne will print 'is Felienne'
+command: print | repeat | ifelse | ifs | turtle | ask | assign_list | sleep | list_access_var | assign | comment
 
-repeat: _REPEAT _SPACE (INT | var) _SPACE _TIMES _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
-
-// from level 7 on if is implemented slightly differently
-elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
-//'if' cannot be used in Python, hence the name of the rule is 'ifs'
-ifs: _IF _SPACE condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+//new in level 6
+repeat: _REPEAT _SPACE (INT | var) _SPACE _TIMES _SPACE command
