@@ -8,6 +8,7 @@ import hedyweb
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
+import sys
 
 def routes (app, database):
     global DATABASE
@@ -19,14 +20,17 @@ def routes (app, database):
     @requires_login
     def get_classes (user):
         if not is_teacher(user):
-            return 'Only teachers can retrieve classes', 403
+            # return 'Only teachers can retrieve classes', 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
     @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
+        app.logger.info('This is info output')
         if not is_teacher(user):
-            return 'Only teachers can retrieve classes', 403
+            # return 'Only teachers can retrieve classes', 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
             return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
@@ -52,7 +56,6 @@ def routes (app, database):
     def create_class (user):
         if not is_teacher(user):
             return 'Only teachers can create classes', 403
-
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -77,7 +80,6 @@ def routes (app, database):
     def update_class (user, class_id):
         if not is_teacher(user):
             return 'Only teachers can update classes', 403
-
         body = request.json
         # Validations
         if not isinstance(body, dict):
