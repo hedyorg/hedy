@@ -75,8 +75,8 @@ def transform_yaml_to_lark(overwrite=False):
   Args:
       overwrite (bool, optional): Specifies if the current lark files for keywords should be overwritten. Defaults to False.
   """
-  input_path = './coursedata/keywords/'
-  output_path = './grammars/'
+  input_path = '../coursedata/keywords/'
+  output_path = '../grammars-transformed/'
   
   yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
@@ -111,4 +111,4 @@ def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
 transform_yaml_to_lark(True)
-transform_levels_in_all_YAMLs("13-old", 14, remove_brackets)
+# transform_levels_in_all_YAMLs("13-old", 14, remove_brackets)
