@@ -16,8 +16,6 @@ export let theGlobalEditor: AceAjax.Editor;
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
 
-  initializedExampleCounter();
-
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
@@ -41,12 +39,6 @@ export let theGlobalEditor: AceAjax.Editor;
         const mode = getHighlighter(parseInt(level));
         exampleEditor.session.setMode(mode);
       }
-    }
-  }
-
-  function initializedExampleCounter() {
-    if (window.State.examples_left <= 3) {
-      $("#examples_attempts_left").text(auth.texts["examples_left"].replace("...", window.State.examples_left));
     }
   }
 
