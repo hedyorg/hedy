@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 import exceptions
 
 # Some useful constants
-HEDY_MAX_LEVEL = 14
+HEDY_MAX_LEVEL = 16
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 

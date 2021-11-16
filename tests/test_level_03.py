@@ -107,30 +107,6 @@ class TestsLevel3(HedyTester):
 
     expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
-  def test_print_backslashes(self):
-    code = "print Welcome to O\\ceanView"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Welcome to O\\\\ceanView')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = HedyTester.run_code(result)
-    self.assertEqual("Welcome to O\\ceanView", expected_output)
-  def test_print_slash_end(self):
-    code = "print Welcome to \\"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Welcome to \\\\')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = HedyTester.run_code(result)
-    self.assertEqual("Welcome to \\", expected_output)
 
   #is tests
   def test_assign(self):
