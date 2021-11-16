@@ -34,26 +34,6 @@ class TestsLevel2(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  #sleep tests
-  def test_sleep_with_number(self):
-    code = "sleep 2"
-    expected = "time.sleep(2)"
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      test_name=self.name()
-    )
-  def test_sleep_without_number(self):
-    code = "sleep"
-    expected = "time.sleep(1)"
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      test_name=self.name()
-    )
-
   def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
     print Hallo welkom bij Hedy!
