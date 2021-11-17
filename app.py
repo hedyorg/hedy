@@ -35,8 +35,6 @@ import hedyweb
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database
 import quiz
 
-# store map
-from store_map import ad_name2index
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
@@ -412,7 +410,7 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
     if flag == 1:
-        max_index = len(load_adventures_per_level(current_level))
+        max_index = len(load_adventures_per_level(g.lang, current_level))
         if level_db == current_level:
             # unlock next level
             adventure_index_db = 0
@@ -433,7 +431,7 @@ def parse():
     if adventure_index == adventure_index_db:
         flag = 1
     if flag == 1:
-        max_index = len(load_adventures_per_level(current_level))
+        max_index = len(load_adventures_per_level(g.lang, current_level))
         if max_index == adventure_index_db:
             # unlock next level
             adventure_index_db = 0
