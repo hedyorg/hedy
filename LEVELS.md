@@ -1,7 +1,7 @@
 Levels
 ------
 
-In its current form, Hedy consists of 10 different levels. The levels loosely
+In its current form, Hedy consists of 14 different levels. The levels loosely
 follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
 ("Python in the classroom") in such a way that these existing lessons can be
 executed with Hedy instead of with Python.
@@ -109,6 +109,33 @@ was learned in Level 7 remains.
 
 See for a discussion of fruther levels: https://github.com/Felienne/hedy/discussions/903
 
+### Level 11: Datatypes
+
+Learners are now allowed to use floats and need to place quotation marks around
+strings to distinguish them from numbers
+
+### Level 12: Smaller and bigger
+
+In level 12, Learners learn about < and > in preparation for while loops
+
+### Level 13: While loops
+
+In level 13, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
+can make basic while loops.
+
+### Level 14: Adding rectangular brackets
+
+In this level, learners encounter different types of brackets for the
+first time, because it adds rectangular brackets for list access, which
+up to now was done with the keyword [`at`], following Design Goal 2.
+
+Additional features
+------
+### Comments
+
+All levels allow for the use of comments, and it is up the the teachers
+to explain their different uses.
+
 
 Old Levels
 ------
@@ -127,11 +154,6 @@ every indentation, and have them practice that extensively.
 Level 11 adds round brackets in [`print`], [`range`] and
 [`input`]. As per Design Goal 4, these are added as late as possible.
 
-### Level 12: Adding rectangular brackets
-
-In level 12, learners encounter different types of brackets for the
-first time, because it adds rectangular brackets for list access, which
-up to now was done with the keyword [`at`], following Design Goal 2.
 
 ### Level 13: Booleans
 
@@ -141,18 +163,6 @@ In level 13, booleans are added. Learners encounter True and False and how to us
 
 In level 14, Learners learn about and and or in if statements.
 
-### Level 15: Comments
-
-In level 15, comments are introduced. The learner will now know how to comment code
-
-### Level 16: Smaller and bigger
-
-In level 16, Learners learn about < and > in preparation for while loops
-
-### Level 17: While loops
-
-In level 17, learners are introduced to the while loop. With the previous knowledge of booleans and < and >, learners
-can make basic while loops.
 
 ### Level 18: Access specific value in list
 

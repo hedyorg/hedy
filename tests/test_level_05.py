@@ -296,3 +296,47 @@ class TestsLevel5(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+  def test_ifelse_calc_vars(self):
+    code =  textwrap.dedent("""\
+    cmp is 1
+    test is 2
+    acu is 0
+    if test is cmp
+    acu is acu + 1
+    else
+    acu is acu + 5""")
+    expected = textwrap.dedent("""\
+    cmp = '1'
+    test = '2'
+    acu = '0'
+    if str(test) == str(cmp):
+      acu = int(acu) + int(1)
+    else:
+      acu = int(acu) + int(5)""")
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+  def test_if_calc_vars(self):
+    code =  textwrap.dedent("""\
+    cmp is 1
+    test is 2
+    acu is 0
+    if test is cmp
+    acu is acu + 1""")
+    expected = textwrap.dedent("""\
+    cmp = '1'
+    test = '2'
+    acu = '0'
+    if str(test) == str(cmp):
+      acu = int(acu) + int(1)""")
+    self.multi_level_tester(
+      max_level=6,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )

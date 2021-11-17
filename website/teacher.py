@@ -1,7 +1,7 @@
 from website.auth import requires_login, is_teacher, current_user
 import utils
 import uuid
-from flask import request, jsonify, redirect
+from flask import g, request, jsonify, redirect
 from flask_helpers import render_template
 import os
 import hedyweb
@@ -9,7 +9,7 @@ TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
 
-def routes (app, database, requested_lang):
+def routes (app, database):
     global DATABASE
     DATABASE = database
 
@@ -29,7 +29,7 @@ def routes (app, database, requested_lang):
             return 'Only teachers can retrieve classes', 403
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
-            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], requested_lang(), TRANSLATIONS.get_translations(requested_lang(), 'ui').get('no_such_class'))
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
         students = []
         for student_username in Class.get ('students', []):
             student = DATABASE.user_by_username (student_username)
@@ -45,7 +45,7 @@ def routes (app, database, requested_lang):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -59,6 +59,12 @@ def routes (app, database, requested_lang):
             return 'body must be an object', 400
         if not isinstance(body.get('name'), str):
             return 'name must be a string', 400
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
 
         Class = {
             'id': uuid.uuid4().hex,
@@ -89,6 +95,12 @@ def routes (app, database, requested_lang):
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user ['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
+
         Class = DATABASE.update_class (class_id, body ['name'])
 
         return {}, 200
@@ -108,22 +120,21 @@ def routes (app, database, requested_lang):
     def prejoin_class (class_id, link):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['link'] != link:
-            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], requested_lang(), TRANSLATIONS.get_translations(requested_lang(), 'ui').get('invalid_class_link'))
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('invalid_class_link'))
         user = {}
         if request.cookies.get (cookie_name):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
                 if token ['username'] in Class.get ('students', []):
-                    return render_template ('class-already-joined.html', lang=requested_lang (), auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'name': Class ['name']})
+                    return render_template ('class-already-joined.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
         return render_template ('class-prejoin.html',
-            lang=requested_lang (),
-            auth=TRANSLATIONS.get_translations (requested_lang (), 'Auth'),
+            auth=TRANSLATIONS.get_translations (g.lang, 'Auth'),
             menu=render_main_menu('my-profile'),
             current_page='my-profile',
             class_info={
-                'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + requested_lang (),
+                'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + g.lang,
                 'name': Class ['name'],
             })
 
@@ -132,7 +143,7 @@ def routes (app, database, requested_lang):
     def join_class (user, class_id, link):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['link'] != link:
-            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], requested_lang(), TRANSLATIONS.get_translations(requested_lang(), 'ui').get('invalid_class_link'))
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('invalid_class_link'))
 
         DATABASE.add_student_to_class (Class ['id'], user ['username'])
 
@@ -154,5 +165,5 @@ def routes (app, database, requested_lang):
     def resolve_class_link (link_id):
         Class = DATABASE.resolve_class_link (link_id)
         if not Class:
-            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], requested_lang(), TRANSLATIONS.get_translations(requested_lang(), 'ui').get('invalid_class_link'))
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('invalid_class_link'))
         return redirect(request.url.replace('/hedy/l/' + link_id, '/class/' + Class ['id'] + '/prejoin/' + link_id), code=302)

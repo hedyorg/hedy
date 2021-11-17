@@ -177,6 +177,57 @@ class TestsLevel4(HedyTester):
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
+  def test_print_if_else_with_line_break_after_condition(self):
+    # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam
+    if naam is Hedy
+    print 'leuk'
+    else print 'minder leuk'""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')
+    if naam == 'Hedy':
+      print(f'leuk')
+    else:
+      print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_if_else_newline_list_assigment_print(self):
+    # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
+    code = textwrap.dedent("""\
+    people is mom, dad, Emma, Sophie
+    dishwasher is people at random
+    if dishwasher is Sophie
+    print 'too bad I have to do the dishes'
+    else
+    print 'luckily no dishes because' dishwasher 'is already washing up'""")
+
+    expected = textwrap.dedent("""\
+    people = ['mom', 'dad', 'Emma', 'Sophie']
+    dishwasher=random.choice(people)
+    if dishwasher == 'Sophie':
+      print(f'too bad I have to do the dishes')
+    else:
+      print(f'luckily no dishes because{dishwasher}is already washing up')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+
+
   def test_print_if_else_line_break_and_space(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
 
@@ -193,6 +244,31 @@ class TestsLevel4(HedyTester):
       print(f'leuk')
     else:
       print(f'minder leuk')""")
+
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_if_linebreak_statement(self):
+    # Breaking an if statement and its following statement should be
+    # permited until level 7 
+    
+    code = textwrap.dedent("""\
+    people is 1, 2, 3, 3
+    dishwasher is people at random
+    test is 1
+    if dishwasher is test
+    print 'too bad I have to do the dishes!'""")
+
+    expected = textwrap.dedent("""\
+    people = ['1', '2', '3', '3']
+    dishwasher=random.choice(people)
+    test = '1'
+    if dishwasher == test:
+      print(f'too bad I have to do the dishes!')""")
 
     self.multi_level_tester(
       max_level=4,

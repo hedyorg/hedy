@@ -1,6 +1,6 @@
 // adds the while loop
 
-command: print | ifs elses? | ask | for_loop | while_loop| assign_list | list_access_var | assign
+command: print | ifs elses? | ask | for_loop | while_loop| assign_list | list_access_var | assign | comment
 while_loop: _WHILE _SPACE (condition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
 
