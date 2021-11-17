@@ -174,13 +174,13 @@ def routes (app, database):
         adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
         preferences = 0;
-        #preferences = DATABASE.get_customizations (class_id)
+        #preferences = DATABASE.get_preferences_class(class_id)
 
         return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name'], 'id': Class ['id']}, levels=levels, adventures=adventures, preferences=preferences, current_page='for-teachers')
 
-    @app.route('/customize/<class_id>', methods=['PUT'])
+    @app.route('/customize-class/<class_id>', methods=['PUT'])
     @requires_login
-    def update_level_preferences (user):
+    def update_level_preferences (user, class_id):
         if not is_teacher(user):
             return 'Only teachers can update class preferences', 403
 
@@ -188,10 +188,20 @@ def routes (app, database):
         # Validations
         if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not isinstance(body.get('name'), str):
-            return 'name must be a string', 400
+        if not isinstance(body.get('attempts'), int):
+            return 'amount of example programs must be an integer', 400
+        if not isinstance(body.get('next_level'), int):
+            return 'amount of correct programs must be an integer', 400
+        if not isinstance(body.get('hide_level'), bool):
+            return 'level switch must be a boolean', 400
+        if not isinstance(body.get('level'), int):
+            return 'level must ben an integer', 400
 
-        #Do the actual db magic in this spot!
+        Class = DATABASE.get_class(class_id)
+        if not Class or Class ['teacher'] != user ['username']:
+            return 'No such class', 404
+
+        Class = DATABASE.update_preferences_class(class_id, body['level'], body['adventures'], body['attempts'], body['progress'], body['hide_level'])
 
         return {}, 200
 

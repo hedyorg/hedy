@@ -111,7 +111,7 @@ export function remove_student(class_id: string, student_id: string) {
   });
 }
 
-export function save_level_settings(id: string, level: string) {
+export function save_level_settings(id: string, level: number) {
     let selected_adventures: (string | null)[] = [];
     $('#adventures_overview li').each(function() {
         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
@@ -128,7 +128,7 @@ export function save_level_settings(id: string, level: string) {
 
     $.ajax({
       type: 'PUT',
-      url: '/customize/' + id,
+      url: '/customize-class/' + id,
       data: JSON.stringify({
         adventures: selected_adventures,
         attempts: max_attempts,
