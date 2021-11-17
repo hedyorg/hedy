@@ -249,7 +249,7 @@ def routes(app, database):
             'created':  timems(),
             'verification_pending': hashed_token,
             'level': 1,
-            'ad_index' : 0,
+            'adventure_index' : 0,
             'last_login': timems()
         }
 

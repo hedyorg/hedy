@@ -41,7 +41,7 @@ class Database:
 
     def get_ad(self, username):
         if username:
-            return USERS.get({'username': username})['ad_index']
+            return USERS.get({'username': username})['adventure_index']
         else:
             return 0
         

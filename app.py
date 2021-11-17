@@ -137,12 +137,12 @@ def load_adventures_per_level(lang, level):
 
     id_count = 0
     for short_name, adventure in adventures.items ():
-        ad_index = DATABASE.get_ad(current_user () ['username'])
+        adventure_index = DATABASE.get_ad(current_user () ['username'])
         cur_level =  DATABASE.get_level(current_user () ['username'])
         if not level in adventure['levels']:
             continue
 
-        if id_count <= ad_index or cur_level > level:
+        if id_count <= adventure_index or cur_level > level:
             all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
@@ -343,9 +343,9 @@ def parse():
 # begin
     ad_name = body['adventure_name']
     cur_level = int(body['level'])
-    ad_index = ad_name2index[(cur_level,ad_name)]
+    adventure_index = ad_name2index[(cur_level,ad_name)]
 
-    ad_index_db = DATABASE.get_ad(current_user () ['username'])
+    adventure_index_db = DATABASE.get_ad(current_user () ['username'])
     level_db = DATABASE.get_level(current_user () ['username'])
 
     level_def = load_yaml_rt(f'coursedata/level-defaults/{lang}.yaml')
@@ -417,14 +417,14 @@ def parse():
         max_index = LEVEL_MAX_NUM[cur_level]
         if level_db == cur_level:
             # unlock next level
-            ad_index_db = 0
+            adventure_index_db = 0
             level_db += 1
             # write to database
-            DATABASE.update_user(current_user () ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            DATABASE.update_user(current_user () ['username'], {'level':level_db, 'adventure_index':adventure_index_db})
             
         # else:
-        #     ad_index_db += 1
-        #     DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'ad_index':ad_index_db})
+        #     adventure_index_db += 1
+        #     DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'adventure_index':adventure_index_db})
         
         for i in range(len(RUN_COMMAND)):
             RUN_COMMAND[i] = 0
@@ -432,19 +432,19 @@ def parse():
         response['flag'] = flag + 1
         return jsonify(response)
     
-    if ad_index == ad_index_db:
+    if adventure_index == adventure_index_db:
         flag = 1
     if flag == 1:
         max_index = LEVEL_MAX_NUM[cur_level]
-        if max_index == ad_index_db:
+        if max_index == adventure_index_db:
             # unlock next level
-            ad_index_db = 0
+            adventure_index_db = 0
             level_db += 1
             # write to database
-            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'adventure_index':adventure_index_db})
         else:
-            ad_index_db += 1
-            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'ad_index':ad_index_db})
+            adventure_index_db += 1
+            DATABASE.update_user(current_user() ['username'], {'level':level_db, 'adventure_index':adventure_index_db})
         
     response['flag'] = flag
     return jsonify(response)
