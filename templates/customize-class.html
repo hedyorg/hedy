@@ -4,16 +4,18 @@
 <div class="px-8">
     <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
     <div class="mt-4 w-full" id="explanation_text">
+        <!--
         Kies een level en selecteer vervolgens de mogelijkheden die je wilt voor bovenstaande klas.
         Het is mogelijk om per level specifieke "adventures" te selecteren die beschikbaar zijn voor de studenten.
         Ook is er een optie om een restrictie te zetten op het aantal "example programs" dat de studenten kunnen gebruiken.
         Na het bereiken van de limiet zullen deze automatisch verdwijnen.
         Daarnaast kun je instellen hoeveel correcte programma's er nodig zijn voordat het volgende level beschikbaar komt.
         Of een level compleet verbergen.
+        -->
     </div>
-    <div class="mt-4" id="customize_level_button_container">
+    <div class="mt-4 text-center" id="customize_level_button_container">
         {% for level in levels %}
-            <button class="green-btn mr-4 mt-2 w-40" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
+            <button class="green-btn mr-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
         {% endfor %}
     </div>
     <!--
