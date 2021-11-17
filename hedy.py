@@ -23,6 +23,9 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
+# Boolean variables to allow code which is under construction to not be executed
+local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
+
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       2: ['print', 'ask', 'is', 'turn', 'forward'],
@@ -1478,8 +1481,16 @@ def get_full_grammar_for_level(level):
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
     filename = "keywords-" + str(language) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
+    try: 
+        if not local_keywords_enabled: 
+            raise FileNotFoundError("Local keywords are not enabled")
+        filename = "keywords-" + str(language) + ".lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
+    except FileNotFoundError: 
+        filename = "keywords-en.lark"
+        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+            grammar_text = file.read()
     return grammar_text
 
 PARSER_CACHE = {}
