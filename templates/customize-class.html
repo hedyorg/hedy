@@ -12,16 +12,9 @@
         Of een level compleet verbergen.
     </div>
     <div class="mt-4" id="customize_level_button_container">
-        <button class="green-btn mr-4" id="test" level="1">{{ui.level_title}} 1</button>
-        <button class="green-btn mr-4" level="2">{{ui.level_title}} 2</button>
-        <button class="green-btn mr-4" level="3">{{ui.level_title}} 3</button>
-        <button class="green-btn mr-4" level="4">{{ui.level_title}} 4</button>
-        <button class="green-btn mr-4" level="5">{{ui.level_title}} 5</button>
-        <button class="green-btn mr-4" level="6">{{ui.level_title}} 6</button>
-        <button class="green-btn mr-4" level="7">{{ui.level_title}} 7</button>
-        <button class="green-btn mr-4" level="8">{{ui.level_title}} 8</button>
-        <button class="green-btn mr-4" level="9">{{ui.level_title}} 9</button>
-        <button class="green-btn mr-4" level="10">{{ui.level_title}} 10</button>
+        {% for level in levels %}
+            <button class="green-btn mr-4 mt-2 w-40" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
+        {% endfor %}
     </div>
     <!--
     This is where the magic happens, when a user presses a level button retrieve the corresponding info from the db
