@@ -32,10 +32,10 @@
                 <form>
                     <div class="flex flex-row items-center">
                     <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
-                        {% for id, name_levels in adventures.items() %}
+                        {% for key_name, name_levels in adventures.items() %}
                             {% for name, levels in name_levels.items() %}
                                 {% for level in levels %}
-                                    <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{adventure_id}}">
+                                    <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
                                         <input type="checkbox" name="adventures" class="mr-4" value="">
                                         <label style>{{ name }}</label>
                                     </li>
@@ -60,14 +60,15 @@
             </div>
         </div>
         <div class="mt-4">
-            <button class="blue-btn" onclick="hedyApp.save_level_settings ()">{{auth.save}}</button>
+            <button class="blue-btn" onclick="hedyApp.save_level_settings (level)">{{auth.save}}</button>
             <button class="red-btn" onclick="hedyApp.reset_level_preferences ()">{{auth.reset}}</button>
         </div>
     </div>
 </div>
 <script>
+    let level = 1;
     $('#customize_level_button_container button').click(function(){
-        let level = this.getAttribute('level');
+        level = this.getAttribute('level');
         $('#level_settings').hide();
         $('#settings_header').text("Instellingen level " + level);
         $('#adventures_overview li').each(function(index, value) {

@@ -171,7 +171,7 @@ def routes (app, database):
         if not Class or Class ['teacher'] != user ['username']:
             return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
 
-        adventures = hedy_content.Adventures(g.lang).get_adventure_id_name_levels()
+        adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
         preferences = 0;
         #preferences = DATABASE.get_customizations (class_id)
