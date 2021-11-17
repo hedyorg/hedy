@@ -138,11 +138,11 @@ def load_adventures_per_level(lang, level):
     id_count = 0
     for short_name, adventure in adventures.items ():
         adventure_index = DATABASE.get_ad(current_user () ['username'])
-        cur_level =  DATABASE.get_level(current_user () ['username'])
+        current_level =  DATABASE.get_level(current_user () ['username'])
         if not level in adventure['levels']:
             continue
 
-        if id_count <= adventure_index or cur_level > level:
+        if id_count <= adventure_index or current_level > level:
             all_adventures.append({
             'short_name': short_name,
             'name': adventure['name'],
@@ -342,16 +342,16 @@ def parse():
 
 # begin
     ad_name = body['adventure_name']
-    cur_level = int(body['level'])
-    adventure_index = ad_name2index[(cur_level,ad_name)]
+    current_level = int(body['level'])
+    adventure_index = ad_name2index[(current_level,ad_name)]
 
     adventure_index_db = DATABASE.get_ad(current_user () ['username'])
     level_db = DATABASE.get_level(current_user () ['username'])
 
     level_def = load_yaml_rt(f'coursedata/level-defaults/{lang}.yaml')
-    commands = level_def[cur_level]['commands']
+    commands = level_def[current_level]['commands']
 
-    if level_db == cur_level:
+    if level_db == current_level:
         # may unlock, flag may be set to 1
         index = 0
         for com in commands:
@@ -414,8 +414,8 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
     if flag == 1:
-        max_index = LEVEL_MAX_NUM[cur_level]
-        if level_db == cur_level:
+        max_index = LEVEL_MAX_NUM[current_level]
+        if level_db == current_level:
             # unlock next level
             adventure_index_db = 0
             level_db += 1
@@ -435,7 +435,7 @@ def parse():
     if adventure_index == adventure_index_db:
         flag = 1
     if flag == 1:
-        max_index = LEVEL_MAX_NUM[cur_level]
+        max_index = LEVEL_MAX_NUM[current_level]
         if max_index == adventure_index_db:
             # unlock next level
             adventure_index_db = 0
