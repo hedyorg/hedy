@@ -930,7 +930,30 @@ adventures:
                     number2 is ask 'What is the second number?'
                     answer is number1 + number2
                     print number1 ' plus ' number2 ' is ' answer
+                start_code: ""
+            12:
+                story_text: |
+                    ## Guess which number
+                    In this level you can programm the game 'Guess which number'
+
+                    ## Example Hedy code
                     ```
+                    print 'Guess which number'
+                    numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number is numbers at random
+                    game is 'on'
+                    for i in range 1 to 10
+                        if game is 'on'
+                            guess is ask 'Which number do you think it is?'
+                            if guess > number
+                                print 'Lower!'
+                            if guess < number
+                                print 'Higher!'
+                            if guess is number
+                                print 'You win!'
+                                game is 'over'
+
+
                 start_code: ""
     restaurant:
         name: "Restaurant"
@@ -1602,9 +1625,38 @@ adventures:
                         print 'Great! You survived!'
                     ```
                 start_code: "print 'Escape from the haunted house!'"
+#Issue1231            12:
+#Issue1231                story_text: |
+#Issue1231                    ## Haunted House
+#Issue1231                    In this level you can use the < and > symbol to introduce lives to your game.
+#Issue1231
+#Issue1231                    ## Example Hedy code
+#Issue1231                    ```
+#Issue1231                    print 'Escape from the haunted house'
+#Issue1231                    lives is 3
+#Issue1231                    doors is 1, 2, 3
+#Issue1231                    monsters is 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+#Issue1231                    for i in range 1 to 10
+#Issue1231                        if lives > 0
+#Issue1231                            good_door is doors at random
+#Issue1231                            monster is monsters at random
+#Issue1231                            chosen_door is ask 'Which door do you choose?'
+#Issue1231                            if good_door is chosen_door
+#Issue1231                                print 'You have chosen the correct door'
+#Issue1231                            else
+#Issue1231                                print 'You see...' monster
+#Issue1231                                if monster is 'a sleeping 3 headed dog'
+#Issue1231                                    print 'Pffieuw.... Its asleep'
+#Issue1231                                else
+#Issue1231                                    print 'You lose one life'
+#Issue1231                                    lives is lives -1
+#Issue1231                        else
+#Issue1231                            print 'GAME OVER'
+#Issue1231                    ```
+#Issue1231                start_code: ""
     piggybank:
-        name: Piggy bank
-        description: Count your pocket money!
+        name: Piggy Bank
+        description: Count your pocketmoney!
         image: hauntedhouse.png
         default_save_name: Piggy Bank
         levels:
@@ -1623,6 +1675,60 @@ adventures:
                     to_save is price - saved
                     weeks is to_save / allowance
                     print 'You can buy a ' wish ' in ' weeks ' weeks.'
+                start_code: ""
+            12:
+                story_text: |
+                    ## Piggybank
+                    In this level you can let Hedy tell you if you have saved up enough money!
+
+                    ## Example Hedy Code
+                    ```
+                    money is ask 'How much money have you saved?'
+                    wish is ask 'How much money do you need?'
+                    allowance is ask 'How much pocket money do you get each week?'
+                    to_save is wish - money
+                    weeks is to_save / allowance
+                    if wish > money
+                        print 'You need to save up some more!'
+                        print 'Youll need ' weeks ' more weeks.'
+                    else
+                        print 'Great! You have enough'
+                        print 'Lets go shopping!'
+                    ```
+                start_code: ""
+    quizmaster:
+        name: Quizmaster
+        description: Make your own quiz!
+        image: hauntedhouse.png
+        default_save_name: Quizmaster
+        levels:
+            12:
+                story_text: |
+                    ## Make your own quiz
+                    In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
+                    You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
+
+                    ## Example Hedy code
+                    ```
+                    print 'Make your own quiz'
+                    points_a is 0
+                    points_b is 0
+                    print 'Question'
+                    print 'Answeroption A'
+                    print 'Answeroption B'
+                    answer is ask 'Which answer?'
+                    if answer is 'A'
+                        points_a is points_a + 1
+                    if answer is 'B'
+                        points_b is points_b + 1
+                    print 'End of the quiz!'
+                    print 'Lets see the results!'
+                    if points_a > points_b
+                        print 'You belong to the A club'
+                    if points_b > points_a
+                        print 'You belong to the B club'
+                    ```
+
                 start_code: ""
     next:
         name: "What's next?"

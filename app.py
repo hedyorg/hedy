@@ -25,7 +25,7 @@ import utils
 import textwrap
 
 # app.py
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, url_for
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, url_for, Markup
 from flask_helpers import render_template
 from flask_compress import Compress
 
@@ -910,7 +910,14 @@ def current_language():
 @app.template_filter()
 def nl2br(x):
     """Turn newlines into <br>"""
-    return x.replace('\n', '<br />')
+    # The input to this object will either be a literal string or a 'Markup' object.
+    # In case of a literal string, we need to escape it first, because we have
+    # to be able to make a distinction between safe and unsafe characters.
+    #
+    # In case of a Markup object, make sure to tell it the <br> we're adding is safe
+    if not isinstance(x, Markup):
+      x = Markup.escape(x)
+    return x.replace('\n', Markup('<br />'))
 
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None, lang=None):
