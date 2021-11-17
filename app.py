@@ -92,7 +92,10 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 # Preamble that will be used for non-Turtle programs
-NORMAL_PREFIX_CODE = "# coding=utf8\nimport random\n"
+NORMAL_PREFIX_CODE = textwrap.dedent("""\
+    # coding=utf8
+    import random, time
+""")
 
 def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
@@ -321,7 +324,7 @@ def parse():
         with querylog.log_time('transpile'):
 
             try:
-                transpile_result = hedy.transpile(code, level)
+                transpile_result = hedy.transpile(code, level, lang)
             except hedy.exceptions.FtfyException as ex:
                 # The code was fixed with a warning
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
@@ -567,7 +570,7 @@ def quiz_finished(level):
     g.prefix = '/hedy'
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
-                           total_score=session.get('total_score', 0),
+                           total_score= round(session.get('total_score', 0) / quiz.max_score(quiz_data) * 100),
                            menu=render_main_menu('adventures'),
                            quiz=quiz_data, level=int(level) + 1, questions=quiz_data['questions'],
                            next_assignment=1,
@@ -623,8 +626,8 @@ def submit_answer(level_source, question_nr, attempt):
             answer=chosen_option)
 
     if is_correct:
-        score = quiz.correct_answer_score(question, attempt)
-        session['total_score'] = session.get('total_score', 0) + score
+        score = quiz.correct_answer_score(question)
+        session['total_score'] = session.get('total_score',0) + score
         session['correct_answer'] = session.get('correct_answer', 0) + 1
 
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))

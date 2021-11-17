@@ -32,13 +32,17 @@
         demo_code: |
             रंग is ask आपका  पसंदीदा रंग क्या है?
             print रंग आपका पसंदीदा है!"
+3:
+    intro_text: "अब आप इन आदेशों का भी इस्तेमाल कर सकते हैं:"
+    start_code: "print हेलो दुनिया  !"
+    commands:
     -   name: "choose_random"
         explanation: "एक समूह से एक क्रमरहित शब्द चुनें जो `at` और `random` का इस्तेमाल करें"
         example: "उदाहरण: जानवर है कुत्ता, बिल्ली, कंगेरू"
         demo_code: |
             जानवर is कुत्ता, बिल्ली, कंगेरू
             print जानवर at random
-3:
+4:
     start_code: "print 'हेलो  दुनिया'"
     intro_text: "`ask` अभी भी स्तर ३ में बिल्कुल वैसा ही है, लेकिन `print` अब अलग है| जो भी टेक्स्ट आपको `print` करवाना है उसको दोहरा उदाहरण चिन्ह में रखना होगा| "
     commands:
@@ -58,7 +62,7 @@
         demo_code: |
             रंग is ask 'आपका पसंदीदा रंग कोनसा है?'
             print रंग ' आपका पसंदीदा है!'
-4:
+5:
     start_code: "नाम is ask आपका नाम क्या है?\nif नाम is हेडी print 'कूल!' else print 'मेह'"
     intro_text: "`ask` और `print` दोनों बिल्कुल वैसा ही काम करते है जैसा स्तर ३ में किया था| स्तर ४ में `if` आदेश जुड़ा है|"
     commands:
@@ -76,7 +80,7 @@
         demo_code: |
             रंग is ask 'पसंदीदा रंग कौन सा है?'
             if रंग is हैतो print 'सुन्दर!' else print 'मेह'
-5:
+6:
     start_code: "print '५ गुणा ५ है ' 5 * 5"
     intro_text: "`ask`, `print` और  `if` वैसे ही हैं जैसे स्तर ४ में हैं| स्तर ५ में कुछ नया है ... अब आप हिसाब कर सकते हैं|"
     commands:
@@ -95,7 +99,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'हेडी मजेदार है!'"
     intro_text: "`ask`, `print` और `if` वैसे ही काम करते है जैसा स्तर ४ और ५ में करते थे| लेकिन स्तर ६ में `repeat` आदेश जुड़ जाता है| repeat एक कोड की लाइन को बहुत बार निष्पादित करने के काम आता है|"
     commands:
@@ -118,7 +122,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |
         repeat 5 times
           print 'हेलो दोस्तों'
