@@ -5,6 +5,7 @@ from flask import g, request, jsonify, redirect
 from flask_helpers import render_template
 import os
 import hedyweb
+import hedy_content
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
@@ -175,7 +176,8 @@ def routes (app, database):
         # - Write new functions in database.py to retrieve correct info
         # - Store in a dict and return to our template
 
-        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('for-teachers'), current_page='for-teachers')
+        adventures = hedy_content.Adventures(g.lang).adventures_file['adventures']
+        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name']}, adventures=adventures, current_page='for-teachers')
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):

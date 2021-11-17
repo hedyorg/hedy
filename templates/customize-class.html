@@ -2,9 +2,14 @@
 
 {% block main %}
 <div class="px-8">
-    <h2>"Klas naam"</h2>
-    <div class="mt-4" id="explanation_text">
+    <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
+    <div class="mt-4 w-full" id="explanation_text">
         Kies een level en selecteer vervolgens de mogelijkheden die je wilt voor bovenstaande klas.
+        Het is mogelijk om per level specifieke "adventures" te selecteren die beschikbaar zijn voor de studenten.
+        Ook is er een optie om een restrictie te zetten op het aantal "example programs" dat de studenten kunnen gebruiken.
+        Na het bereiken van de limiet zullen deze automatisch verdwijnen.
+        Daarnaast kun je instellen hoeveel correcte programma's er nodig zijn voordat het volgende level beschikbaar komt.
+        Of een level compleet verbergen.
     </div>
     <div class="mt-4" id="customize_level_button_container">
         <button class="green-btn mr-4" id="test" level="1">Level 1</button>
@@ -24,36 +29,22 @@
     It would be best to store this js functionality in in teachers.ts
     But, for now we can store it below (temporary!)
     -->
-    <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
-        <h3 class="mt-4" id="settings_header">Instellingen level 1</h3>
+    <div class="mt-4 border-gray-400 border-2 pb-4 px-4 hidden" id="level_settings">
+        <h3 class="mt-4" id="settings_header"></h3>
         <div class="mt-4 flex flex-row">
-            <div class="mr-4" id="adventure_selector">
+            <div class="mr-4 w-1/2" id="adventure_selector">
                 <h4>Welke avonturen wil je beschikbaar maken?</h4>
                 <form>
                     <div class="flex flex-row items-center">
-                    <ul class="inline-block w-1/2 list-none ml-0 pl-4">
-                        <!--
-                        These adventures should be dynamically loaded!
-                        Meaning that we should retrieve them in teachers.py and parse as dict to template
-                        The retrieval in turn should come from the database and/or yaml files
-                        Todo: What is the adventures are updated? We should create an efficient structure!
-                        -->
-                        <li>
-                            <input type="checkbox" name="adventures" class="mr-4" value="">
-                            <label style>Adventure 1</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="adventures" class="mr-4" value="">
-                            <label>Adventure 2</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="adventures" class="mr-4" value="">
-                            <label>Adventure 3</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="adventures" class="mr-4" value="">
-                            <label>Adventure 4</label>
-                        </li>
+                    <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
+                        {% for adventure in adventures.items() %}
+                            {% for level in adventure[1]['levels'].keys() %}
+                                <li class="hidden" level="{{level}}">
+                                    <input type="checkbox" name="adventures" class="mr-4" value="">
+                                    <label style>{{ adventure[1].name }}</label>
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
                     </ul>
                     </div>
                 </form>
@@ -79,9 +70,15 @@
 </div>
 <script>
     $('#customize_level_button_container button').click(function(){
+        let level = this.getAttribute('level');
         $('#level_settings').hide();
-        $('#settings_header').text("Instellingen level " + this.getAttribute('level'));
-        // Retrieve all data and show div again
+        $('#settings_header').text("Instellingen level " + level);
+        $('#adventures_overview li').each(function(index, value) {
+            $(this).hide();
+            if (this.getAttribute('level') == level) {
+                $(this).show();
+            }
+        });
         $('#level_settings').show();
     });
 </script>
