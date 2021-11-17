@@ -40,12 +40,18 @@
         A impressão ainda funciona como no nível 1 e você não precisa mais de um ultrassom.
     start_code: "print olá mundo!"
     commands:
-    -   name: "choose_random"
-        explanation: "Escolha uma palavra aleatória para formar um grupo com `at` e `random`"
-        example: "Exemplo: animais is cachorro, gato, canguru."
+    -   name: "is"
+        explanation: "Dê um nome para uma palavra para usar no programa com `is`."
+        example: "Exemplo: nome is Hedy."
         demo_code: |-
-            animais is cachorro, gato, canguru
-            print animais at random
+            nome is Hedy
+            print bem-vindo(a) nome
+    -   name: "ask"
+        explanation: "Pergunte algo com `ask`. Cuidado! Você precisa dar à resposta um nome com `is`."
+        example: "Exemplo: cor is ask Qual a sua cor favorita?"
+        demo_code: |-
+            cor is ask Qual a sua cor favorita?
+            print cor é a sua favorita!
 3:
     intro_text: |
         No nível 3, você também pode fazer uma lista. Você pode então escolher qualquer coisa da lista. Você faz isso com `at random` (você diz: et ren-dom).
