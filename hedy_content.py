@@ -52,7 +52,6 @@ class Adventures:
     adventures = self.adventures_file['adventures']
     adventures_dict = {}
     for adventure in adventures.items():
-        print(adventure)
         adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
     return adventures_dict
 

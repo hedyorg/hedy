@@ -173,8 +173,8 @@ def routes (app, database):
 
         adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
-        preferences = 0;
-        #preferences = DATABASE.get_preferences_class(class_id)
+        preferences = DATABASE.get_preferences_class(class_id)
+        print(preferences)
 
         return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name'], 'id': Class ['id']}, levels=levels, adventures=adventures, preferences=preferences, current_page='for-teachers')
 
@@ -185,23 +185,31 @@ def routes (app, database):
             return 'Only teachers can update class preferences', 403
 
         body = request.json
+        print(body)
         # Validations
         if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not isinstance(body.get('attempts'), int):
+        if not isinstance(int(body.get('attempts')), int):
             return 'amount of example programs must be an integer', 400
-        if not isinstance(body.get('next_level'), int):
+        if not isinstance(int(body.get('next_level')), int):
             return 'amount of correct programs must be an integer', 400
         if not isinstance(body.get('hide_level'), bool):
             return 'level switch must be a boolean', 400
-        if not isinstance(body.get('level'), int):
+        if not isinstance(int(body.get('level')), int):
             return 'level must ben an integer', 400
 
         Class = DATABASE.get_class(class_id)
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
 
-        Class = DATABASE.update_preferences_class(class_id, body['level'], body['adventures'], body['attempts'], body['progress'], body['hide_level'])
+        preferences = {}
+        preferences['level'] = int(body.get('level'))
+        preferences['adventures'] = body.get('adventures')
+        preferences['attempts'] = body.get('attempts')
+        preferences['hide'] = body.get('hide_level')
+        preferences['progress'] = body.get('next_level')
+
+        Class = DATABASE.update_preferences_class(class_id, preferences)
 
         return {}, 200
 

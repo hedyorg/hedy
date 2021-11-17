@@ -69,6 +69,7 @@ class Database:
 
     def store_program(self, program):
         """Store a program."""
+        print(program)
         PROGRAMS.create(program)
 
     def set_program_public_by_id(self, id, public):
@@ -220,14 +221,14 @@ class Database:
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CLASSES.delete({'id': Class ['id']})
-        #PREFERENCES.delete({'id': Class ['id']})
+        PREFERENCES.delete({'id': Class ['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
-    def update_preferences_class(self, class_id, level, adventures, attempts, progress, hide_level):
-        """Update class preferences"""
-        PREFERENCES.update ({'id': class_id}, {'level': level}, {'adventures': adventures}, {'attempts': attempts}, {'progress': progress}, {'hide_level': hide_level})
+    def update_preferences_class(self, class_id, preferences):
+        preferences['id'] = class_id
+        PREFERENCES.create (preferences)
 
     def get_preferences_class(self, class_id):
         levels = []
