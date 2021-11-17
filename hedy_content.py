@@ -55,7 +55,6 @@ class Adventures:
         adventures_dict[adventure[1]['name']] = list(adventure[1]['levels'].keys())
     return adventures_dict
 
-
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')
 

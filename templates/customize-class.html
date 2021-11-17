@@ -29,8 +29,8 @@
     It would be best to store this js functionality in in teachers.ts
     But, for now we can store it below (temporary!)
     -->
-    <div class="mt-4 border-gray-400 border-2 pb-4 px-4 hidden" id="level_settings">
-        <h3 class="mt-4" id="settings_header"></h3>
+    <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
+        <h3 class="mt-4" id="settings_header">Voorkeuren level 1</h3>
         <div class="mt-4 flex flex-row">
             <div class="mr-4 w-1/2" id="adventure_selector">
                 <h4>Welke avonturen wil je beschikbaar maken?</h4>
@@ -39,7 +39,7 @@
                     <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
                         {% for name, levels in adventures.items() %}
                             {% for level in levels %}
-                                <li class="hidden" level="{{level}}">
+                                <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{adventure_id}}">
                                     <input type="checkbox" name="adventures" class="mr-4" value="">
                                     <label style>{{ name }}</label>
                                 </li>
