@@ -52,7 +52,7 @@ class Adventures:
     adventures = self.adventures_file['adventures']
     adventures_dict = {}
     for adventure in adventures.items():
-        adventures_dict[adventure[1]['name']] = list(adventure[1]['levels'].keys())
+        adventures_dict[adventure[1]['id']] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
     return adventures_dict
 
   def has_adventures(self):
