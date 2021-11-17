@@ -173,7 +173,7 @@ def routes (app, database):
 
         #It would be nice to improve this to only retrieve the name, id and level of each adventure
         #The current complicated processing on the front-end is not desirable!
-        adventures = hedy_content.Adventures(g.lang).adventures_file['adventures']
+        adventures = hedy_content.Adventures(g.lang).get_adventure_name_levels()
 
         # We basically want the change the structure of the adventure storage
         # Suggestion: give each adventure a unique id, independent of language

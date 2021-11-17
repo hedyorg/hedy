@@ -37,11 +37,11 @@
                 <form>
                     <div class="flex flex-row items-center">
                     <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
-                        {% for adventure in adventures.items() %}
-                            {% for level in adventure[1]['levels'].keys() %}
+                        {% for name, levels in adventures.items() %}
+                            {% for level in levels %}
                                 <li class="hidden" level="{{level}}">
                                     <input type="checkbox" name="adventures" class="mr-4" value="">
-                                    <label style>{{ adventure[1].name }}</label>
+                                    <label style>{{ name }}</label>
                                 </li>
                             {% endfor %}
                         {% endfor %}
