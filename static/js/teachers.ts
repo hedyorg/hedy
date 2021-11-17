@@ -111,3 +111,17 @@ export function remove_student(class_id: string, student_id: string) {
   });
 }
 
+export function save_level_settings() {
+    console.log("Make a db call in the future...");
+}
+
+export  function reset_level_preferences() {
+    $('#adventures_overview li').each(function() {
+        if ($(this).is(':visible')) {
+            $(this).find(':input').prop("checked", false);
+        }
+    });
+    $('#attempts').val(5);
+    $('#progress').val(5);
+    $('#hide_level').prop("checked", false);
+}

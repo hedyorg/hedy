@@ -58,13 +58,13 @@
                     <label class="inline-block w-1/2" for="progress">Aantal volgend level</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="progress" name="progress" value="5" type="number">
                 </div>
                 <div class="mb-4">
-                    <label class="inline-block w-1/2" for="hide_level">Level verbergen?</label><input type="checkbox" name="hide_level" value="">
+                    <label class="inline-block w-1/2" for="hide_level">Level verbergen?</label><input type="checkbox" id="hide_level" name="hide_level" value="">
                 </div>
             </div>
         </div>
         <div class="mt-4">
             <button class="blue-btn" onclick="hedyApp.save_level_settings ()">Opslaan</button>
-            <button class="red-btn" onclick="hedyApp.reset_level ()">Reset level</button>
+            <button class="red-btn" onclick="hedyApp.reset_level_preferences ()">Reset level</button>
         </div>
     </div>
 </div>
