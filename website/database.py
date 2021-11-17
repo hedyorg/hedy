@@ -235,4 +235,8 @@ class Database:
         preferences = PREFERENCES.get_many({'id': class_id})
         for level in preferences:
             levels.append(level)
-        return levels
+        temp = {}
+        for preference in preferences:
+            temp[preference['level']] = preference
+            temp[preference['level']].pop('level', None)
+        return temp

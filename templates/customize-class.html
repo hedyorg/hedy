@@ -36,7 +36,7 @@
                             {% for name, levels in name_levels.items() %}
                                 {% for level in levels %}
                                     <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
-                                        <input type="checkbox" name="adventures" class="mr-4" value="">
+                                        <input type="checkbox" name="adventures" class="mr-4" value="" {% if preferences[level] and key_name in preferences[level]['adventures'] %} checked {% endif %}>
                                         <label style>{{ name }}</label>
                                     </li>
                                 {% endfor %}
@@ -46,27 +46,29 @@
                     </div>
                 </form>
             </div>
-            <div>
-                {% for preference in prefences %}
-                {{ preference }}
-                {% endfor %}
-            </div>
-            <div id="other_settings">
-                <h4>{{auth.other_settings}}</h4>
-                <div class="mb-4">
-                    <label class="inline-block w-1/2" for="attempts">{{auth.amount_example}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="attempts" name="attempts" value="5" type="number">
+            {% for level in levels %}
+                <div class="other_settings {% if level != 1 %} hidden {% endif %}" level="{{level}}">
+                    <h4>{{auth.other_settings}}</h4>
+                        <div class="mb-4">
+                            <label class="inline-block w-1/2" for="attempts">{{auth.amount_example}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400"
+                                                                                                                   id="attempts{{ level }}" name="attempts" {% if preferences[level] %}
+                                                                                                                   value="{{ preferences[level]['attempts'] }}" {% else %} value="5" {% endif %}  type="number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="inline-block w-1/2" for="progress">{{auth.amount_next_level}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400"
+                                                                                                                      id="progress{{ level }}" name="progress" {% if preferences[level] %}
+                                                                                                                      value="{{ preferences[level]['progress'] }}" {% else %} value="5" {% endif %} type="number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="inline-block w-1/2" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level"
+                                                                                                                 value="" {% if preferences[level] and preferences[level]['hide'] %} checked {% endif %}>
+                        </div>
                 </div>
-                <div class="mb-4">
-                    <label class="inline-block w-1/2" for="progress">{{auth.amount_next_level}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="progress" name="progress" value="5" type="number">
-                </div>
-                <div class="mb-4">
-                    <label class="inline-block w-1/2" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level" name="hide_level" value="">
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="mt-4">
             <button class="blue-btn" onclick="hedyApp.save_level_settings ('{{class_info.id}}', level)">{{auth.save}}</button>
-            <button class="red-btn" onclick="hedyApp.reset_level_preferences ()">{{auth.reset}}</button>
+            <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
         </div>
     </div>
 </div>
@@ -75,14 +77,23 @@
     $('#customize_level_button_container button').click(function(){
         level = this.getAttribute('level');
         $('#level_settings').hide();
+        $('.other_settings').each(function() {
+            $(this).hide();
+        });
         $('#settings_header').text("Instellingen level " + level);
-        $('#adventures_overview li').each(function(index, value) {
+        $('#adventures_overview li').each(function() {
             $(this).hide();
             if (this.getAttribute('level') == level) {
                 $(this).show();
             }
         });
         $('#level_settings').show();
+        $('.other_settings').each(function() {
+            if (this.getAttribute('level') == level) {
+                $(this).show();
+            }
+        });
+
     });
 </script>
 {% endblock %}

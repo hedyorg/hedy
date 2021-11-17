@@ -119,10 +119,10 @@ export function save_level_settings(id: string, level: number) {
         }
     });
 
-    let max_attempts = $('#attempts').val();
-    let progress = $('#progress').val();
+    let max_attempts = $('#attempts' + level).val();
+    let progress = $('#progress'+ level).val();
     let toggle_level = false;
-    if ($('#hide_level').prop('checked')) {
+    if ($('#hide_level' + level).prop('checked')) {
       toggle_level = true;
     }
 
@@ -146,13 +146,13 @@ export function save_level_settings(id: string, level: number) {
     });
 }
 
-export  function reset_level_preferences() {
+export  function reset_level_preferences(level: number) {
     $('#adventures_overview li').each(function() {
         if ($(this).is(':visible')) {
             $(this).find(':input').prop("checked", false);
         }
     });
-    $('#attempts').val(5);
-    $('#progress').val(5);
-    $('#hide_level').prop("checked", false);
+    $('#attempts' + level).val(5);
+    $('#progress'+ level).val(5);
+    $('#hide_level' + level).prop("checked", false);
 }

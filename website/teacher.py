@@ -174,7 +174,6 @@ def routes (app, database):
         adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
         preferences = DATABASE.get_preferences_class(class_id)
-        print(preferences)
 
         return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name'], 'id': Class ['id']}, levels=levels, adventures=adventures, preferences=preferences, current_page='for-teachers')
 
