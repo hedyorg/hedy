@@ -171,12 +171,16 @@ def routes (app, database):
         if not Class or Class ['teacher'] != user ['username']:
             return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
 
-        #Todo: Now we have to do some magic:
-        # - Implement a new database containing the customization options of the specific class
-        # - Write new functions in database.py to retrieve correct info
-        # - Store in a dict and return to our template
-
+        #It would be nice to improve this to only retrieve the name, id and level of each adventure
+        #The current complicated processing on the front-end is not desirable!
         adventures = hedy_content.Adventures(g.lang).adventures_file['adventures']
+
+        # We basically want the change the structure of the adventure storage
+        # Suggestion: give each adventure a unique id, independent of language
+        # Retrieve these together with all relevant adventure information
+        # If a combination of level/id is true in the db for the current class: mark checkbox as selected, otherwise leave it empty
+        # Store the selected adventures as a dict with a list of id's like this: {1: [1,2,3,4]} in the db
+
         return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name']}, adventures=adventures, current_page='for-teachers')
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
