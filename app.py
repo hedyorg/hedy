@@ -341,6 +341,10 @@ def parse():
         if adventures_for_level[i]['short_name'] == ad_name:
             adventure_index = i
 
+    # get the adventure_index and level from the database
+    # they will be used to determine whether the next adventure will be unlocked.
+    # if current level isn't the level stored in database, it means that 
+    # the user is in previous adventure, He can't unlock next adventure at this time. 
     adventure_index_db = DATABASE.get_ad(current_user () ['username'])
     level_db = DATABASE.get_level(current_user () ['username'])
 
@@ -409,6 +413,9 @@ def parse():
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
         'adventure_name': body.get('adventure_name', None)
     })
+
+
+
     if flag == 1:
         max_index = len(load_adventures_per_level(g.lang, current_level))
         if level_db == current_level:
@@ -417,11 +424,7 @@ def parse():
             level_db += 1
             # write to database
             DATABASE.update_user(current_user () ['username'], {'level':level_db, 'adventure_index':adventure_index_db})
-            
-        # else:
-        #     adventure_index_db += 1
-        #     DATABASE.update_user(current_user (request) ['username'], {'level':level_db, 'adventure_index':adventure_index_db})
-        
+                  
         for i in range(len(RUN_COMMAND)):
             RUN_COMMAND[i] = 0
     
