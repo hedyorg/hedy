@@ -343,7 +343,11 @@ def parse():
 # begin
     ad_name = body['adventure_name']
     current_level = int(body['level'])
-    adventure_index = ad_name2index[(current_level,ad_name)]
+
+    adventures_for_level = load_adventures_per_level(g.lang, level)
+    for i in range(len(adventures_for_level)):
+        if adventures_for_level[i]['short_name'] == ad_name:
+            adventure_index = i
 
     adventure_index_db = DATABASE.get_ad(current_user () ['username'])
     level_db = DATABASE.get_level(current_user () ['username'])
