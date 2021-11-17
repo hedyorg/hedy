@@ -2,6 +2,79 @@
 
 {% block main %}
 <div class="px-8">
-  Dit is een test bericht
+    <h2>"Klas naam"</h2>
+    <div class="mt-4" id="explanation_text">
+        Kies een level en selecteer vervolgens de mogelijkheden die je wilt voor bovenstaande klas.
+    </div>
+    <div class="mt-4" id="customize_level_button_container">
+        <button class="green-btn mr-4" id="test" level="1">Level 1</button>
+        <button class="green-btn mr-4" level="2">Level 2</button>
+        <button class="green-btn mr-4" level="3">Level 3</button>
+        <button class="green-btn mr-4" level="4">Level 4</button>
+        <button class="green-btn mr-4" level="5">Level 5</button>
+        <button class="green-btn mr-4" level="6">Level 6</button>
+        <button class="green-btn mr-4" level="7">Level 7</button>
+        <button class="green-btn mr-4" level="8">Level 8</button>
+        <button class="green-btn mr-4" level="9">Level 9</button>
+        <button class="green-btn mr-4" level="10">Level 10</button>
+    </div>
+    <!--
+    This is where the magic happens, when a user presses a level button retrieve the corresponding info from the db
+    Then update the info when the corresponding button is pressed.
+    It would be best to store this js functionality in in teachers.ts
+    But, for now we can store it below (temporary!)
+    -->
+    <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
+        <h3 class="mt-4" id="settings_header">Instellingen level 1</h3>
+        <div class="mt-4 flex flex-row">
+            <div class="mr-4" id="adventure_selector">
+                <h4>Welke avonturen wil je beschikbaar maken?</h4>
+                <form>
+                    <div class="flex flex-row items-center">
+                    <ul class="inline-block w-1/2 list-none ml-0 pl-4">
+                        <!--
+                        These adventures should be dynamically loaded!
+                        Meaning that we should retrieve them in teachers.py and parse as dict to template
+                        The retrieval in turn should come from the database and/or yaml files
+                        Todo: What is the adventures are updated? We should create an efficient structure!
+                        -->
+                        <li>
+                            <input type="checkbox" name="adventures" class="mr-4" value="">
+                            <label style>Adventure 1</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="adventures" class="mr-4" value="">
+                            <label>Adventure 2</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="adventures" class="mr-4" value="">
+                            <label>Adventure 3</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="adventures" class="mr-4" value="">
+                            <label>Adventure 4</label>
+                        </li>
+                    </ul>
+                    </div>
+                </form>
+            </div>
+            <div id="other settings">
+                <h4>Overige instellingen</h4>
+
+            </div>
+        </div>
+        <div class="mt-4">
+            <button class="blue-btn" onclick="hedyApp.save_level_settings ()">Opslaan</button>
+            <button class="red-btn" onclick="hedyApp.reset_level ()">Reset level</button>
+        </div>
+    </div>
 </div>
+<script>
+    $('#customize_level_button_container button').click(function(){
+        $('#level_settings').hide();
+        $('#settings_header').text("Instellingen level " + this.getAttribute('level'));
+        // Retrieve all data and show div again
+        $('#level_settings').show();
+    });
+</script>
 {% endblock %}

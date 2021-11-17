@@ -175,7 +175,7 @@ def routes (app, database):
         # - Write new functions in database.py to retrieve correct info
         # - Store in a dict and return to our template
 
-        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile')
+        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('for-teachers'), current_page='for-teachers')
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
