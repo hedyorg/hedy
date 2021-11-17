@@ -48,7 +48,7 @@ class Adventures:
     self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
 
   #When customizing classes we only want to retrieve the name, (id) and level of each adventure
-  def get_adventure_name_levels(self):
+  def get_adventure_id_name_levels(self):
     adventures = self.adventures_file['adventures']
     adventures_dict = {}
     for adventure in adventures.items():
