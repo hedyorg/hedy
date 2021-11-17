@@ -161,6 +161,22 @@ def routes (app, database):
 
         return {}, 200
 
+    @app.route('/customize-class/<class_id>', methods=['GET'])
+    @requires_login
+    def get_class_info(user, class_id):
+        if not is_teacher(user):
+            return 'Only teachers can retrieve classes', 403
+        Class = DATABASE.get_class (class_id)
+        if not Class or Class ['teacher'] != user ['username']:
+            return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
+
+        #Todo: Now we have to do some magic:
+        # - Implement a new database containing the customization options of the specific class
+        # - Write new functions in database.py to retrieve correct info
+        # - Store in a dict and return to our template
+
+        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile')
+
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
         Class = DATABASE.resolve_class_link (link_id)
