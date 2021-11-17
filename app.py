@@ -41,12 +41,6 @@ from store_map import ad_name2index
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-LEVEL_MAX_NUM = {
-    1:6,
-    2:8,
-    3:8,
-    4:7
-}
 
 # Define and load all available language data
 ALL_LANGUAGES = {
@@ -418,7 +412,7 @@ def parse():
         'adventure_name': body.get('adventure_name', None)
     })
     if flag == 1:
-        max_index = LEVEL_MAX_NUM[current_level]
+        max_index = len(load_adventures_per_level(current_level))
         if level_db == current_level:
             # unlock next level
             adventure_index_db = 0
@@ -439,7 +433,7 @@ def parse():
     if adventure_index == adventure_index_db:
         flag = 1
     if flag == 1:
-        max_index = LEVEL_MAX_NUM[current_level]
+        max_index = len(load_adventures_per_level(current_level))
         if max_index == adventure_index_db:
             # unlock next level
             adventure_index_db = 0
