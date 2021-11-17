@@ -111,14 +111,39 @@ export function remove_student(class_id: string, student_id: string) {
   });
 }
 
-export function save_level_settings() {
+export function save_level_settings(id: string, level: string) {
     let selected_adventures: (string | null)[] = [];
     $('#adventures_overview li').each(function() {
         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
             selected_adventures.push(this.getAttribute('id'));
         }
     });
-    console.log(selected_adventures);
+
+    let max_attemps = $('#attempts').val();
+    let progress = $('#progress').val();
+    let toggle_level = false;
+    if ($('#hide_level').prop('checked')) {
+      toggle_level = true;
+    }
+
+    $.ajax({
+      type: 'PUT',
+      url: '/customize/' + id,
+      data: JSON.stringify({
+        adventures: selected_adventures,
+        attempts: max_attemps,
+        next_level: progress,
+        hide_level: toggle_level,
+        level: level
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(_response) {
+      location.reload ();
+    }).fail(function(err) {
+      console.error(err);
+      error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    });
 }
 
 export  function reset_level_preferences() {

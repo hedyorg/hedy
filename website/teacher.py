@@ -182,7 +182,7 @@ def routes (app, database):
         # If a combination of level/id is true in the db for the current class: mark checkbox as selected, otherwise leave it empty
         # Store the selected adventures as a dict with a list of id's like this: {1: [1,2,3,4]} in the db
 
-        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name']}, levels=levels, adventures=adventures, preferences=preferences, current_page='for-teachers')
+        return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name'], 'id': Class ['id']}, levels=levels, adventures=adventures, preferences=preferences, current_page='for-teachers')
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
