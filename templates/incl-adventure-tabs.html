@@ -11,18 +11,7 @@
           {%endif%}
           {% endfor %}
         </div>
-        <div class="flex cursor-pointer flex-end">
-        {% for level_inf in level_info2 %}
-        {% if level_inf == level_nr %}
-        <a href="{{url_for('index', level=level_inf)}}"  class="block text-black no-underline font-light tab level-selected" >level {{level_inf}}</a>
-        {% elif level_inf|int > lock_level %}
-        <a    class="greytab text-black no-underline font-light" ><i>level {{level_inf}}</i></a>
 
-        {% else %}
-        <a href="{{url_for('index', level=level_inf)}}"  class="block text-black no-underline font-light tab " >level {{level_inf}}</a>
-        {%endif%}
-        {% endfor %}
-        </div>
         <p>   </p>
         <div class="flex cursor-pointer flex-end">
         <a href="{{url_for('index', level=level_nr)}}"  tabindex="0"  data-tab="level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>

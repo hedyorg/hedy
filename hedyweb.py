@@ -14,6 +14,7 @@ import utils
 from config import config
 from website import database
 import os
+import hedy
 
 class Translations:
   def __init__(self):
@@ -69,9 +70,15 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, menu, 
   arguments_dict['adventure_name'] = adventure_name
 
   # level info 
-  arguments_dict['level_info1'] = ['1', '2', '3', '4', '5', '6', '7', '8',
-                                  '9', '10', '11', '12']
-  arguments_dict['level_info2']   =  [ '13', '14', '15', '16','17']
+  # arguments_dict['level_info1'] = ['1', '2', '3', '4', '5', '6', '7', '8',
+  #                                 '9', '10', '11', '12']
+  # arguments_dict['level_info2']   =  [ '13', '14', '15', '16','17']
+
+  temp = []
+  for i in range(hedy.HEDY_MAX_LEVEL):
+    temp.append(str(i+1))
+  arguments_dict['level_info1'] = temp
+
 
   # Translations
   arguments_dict.update(**translations.get_translations(g.lang, 'ui'))
