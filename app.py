@@ -164,10 +164,10 @@ def load_adventures_per_level(lang, level):
             'image': adventure.get('image', None),
             'default_save_name': adventure['default_save_name'],
             'text': adventure['levels'][level].get('story_text', 'No Story Text'),
-            'start_code': adventure['levels'][level].get ('start_code', ''),
-            'loaded_program': '' if not loaded_programs.get (short_name) else {
-                'name': loaded_programs.get (short_name) ['name'],
-                'code': loaded_programs.get (short_name) ['code']
+            'start_code': adventure['levels'][level].get('start_code', ''),
+            'loaded_program': '' if not loaded_programs.get(short_name) else {
+                'name': loaded_programs.get(short_name)['name'],
+                'code': loaded_programs.get(short_name)['code']
              }
             })
         id_count = id_count + 1
