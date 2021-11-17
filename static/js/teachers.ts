@@ -3,7 +3,10 @@ import { auth } from './auth';
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
-
+    if (!class_name) {
+      modal.alert(auth.texts['class_name_empty']);
+      return;
+    }
     $.ajax({
       type: 'POST',
       url: '/class',
@@ -15,6 +18,10 @@ export function create_class() {
     }).done(function(_response) {
       location.reload ();
     }).fail(function(err) {
+      if (err.responseText == "duplicate") {
+        modal.alert(auth.texts['class_name_duplicate']);
+        return;
+      }
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
