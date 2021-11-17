@@ -60,6 +60,12 @@ def routes (app, database):
         if not isinstance(body.get('name'), str):
             return 'name must be a string', 400
 
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
+
         Class = {
             'id': uuid.uuid4().hex,
             'date': utils.timems (),
@@ -88,6 +94,12 @@ def routes (app, database):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user ['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
 
         Class = DATABASE.update_class (class_id, body ['name'])
 

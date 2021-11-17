@@ -1,31 +1,33 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div>
-  <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
-</div>
-<div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
-  <div id="command_window_content">
-      <div class="p-3 shadow-md">
-        <div></div>
-        <h2>{{ commands_title }}</h2>
-      </div>
-      <div>
-        {% for command in commands %}
-        <div class="justify-between my-2 shadow-md p-3 pl-4">
-          <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
-            {{ command.explanation|commonmark }}
+<div id="commands-window-total" class="right-hand-shadow flex-none">
+    <div>
+      <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
+    </div>
+    <div style="width: 250px;" id="commands-window">
+      <div id="command_window_content">
+          <div class="p-3 shadow-md">
+            <div></div>
+            <h2>{{ commands_title }}</h2>
           </div>
-          <div class="flex">
-            <div class="font-thin text-sm flex-grow" tabindex=0>
-              {# placeholder to make button go right, was originally in use for the example code 3#}
+          <div>
+            {% for command in commands %}
+            <div class="justify-between my-2 shadow-md p-3 pl-4">
+              <div class="font-thin text-lg flex-grow mb-1" tabindex=0>
+                {{ command.explanation|commonmark }}
+              </div>
+              <div class="flex">
+                <div class="font-thin text-sm flex-grow" tabindex=0>
+                  {# placeholder to make button go right, was originally in use for the example code 3#}
+                </div>
+                <button class="btn block flex-none self-end ml-1" style="min-width:6em"
+                  onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
+              </div>
             </div>
-            <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-              onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
+            {% endfor %}
           </div>
-        </div>
-        {% endfor %}
       </div>
-  </div>
+    </div>
 </div>
 <div tabindex="0" class="flex-grow p-4">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
