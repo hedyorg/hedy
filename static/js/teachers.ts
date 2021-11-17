@@ -119,7 +119,7 @@ export function save_level_settings(id: string, level: string) {
         }
     });
 
-    let max_attemps = $('#attempts').val();
+    let max_attempts = $('#attempts').val();
     let progress = $('#progress').val();
     let toggle_level = false;
     if ($('#hide_level').prop('checked')) {
@@ -131,7 +131,7 @@ export function save_level_settings(id: string, level: string) {
       url: '/customize/' + id,
       data: JSON.stringify({
         adventures: selected_adventures,
-        attempts: max_attemps,
+        attempts: max_attempts,
         next_level: progress,
         hide_level: toggle_level,
         level: level

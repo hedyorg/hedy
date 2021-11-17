@@ -176,13 +176,25 @@ def routes (app, database):
         preferences = 0;
         #preferences = DATABASE.get_customizations (class_id)
 
-        # We basically want the change the structure of the adventure storage
-        # Suggestion: give each adventure a unique id, independent of language
-        # Retrieve these together with all relevant adventure information
-        # If a combination of level/id is true in the db for the current class: mark checkbox as selected, otherwise leave it empty
-        # Store the selected adventures as a dict with a list of id's like this: {1: [1,2,3,4]} in the db
-
         return render_template ('customize-class.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'), class_info={'name': Class ['name'], 'id': Class ['id']}, levels=levels, adventures=adventures, preferences=preferences, current_page='for-teachers')
+
+    @app.route('/customize/<class_id>', methods=['PUT'])
+    @requires_login
+    def update_level_preferences (user):
+        if not is_teacher(user):
+            return 'Only teachers can update class preferences', 403
+
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(body.get('name'), str):
+            return 'name must be a string', 400
+
+        #Do the actual db magic in this spot!
+
+        return {}, 200
+
 
     @app.route('/hedy/l/<link_id>', methods=['GET'])
     def resolve_class_link (link_id):
