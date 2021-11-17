@@ -68,8 +68,8 @@ const LEVELS = [
       rule_printSpace('expression_eol'),
       rule_isAsk('gobble'),
       rule_is('gobble'),
+
       rule_turtle(),
-      rule_sleep(),
 
     ),
   },
@@ -457,15 +457,6 @@ function rule_turtle() {
         token: 'keyword',
         next: 'start',
       })
-    )
-}
-
-function rule_sleep() {
-    return recognize('start', {
-        regex: 'sleep',
-        token: 'keyword',
-        next: 'start',
-      }
     )
 }
 

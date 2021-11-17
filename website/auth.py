@@ -10,7 +10,7 @@ import datetime
 from functools import wraps
 from config import config
 import boto3
-from botocore.exceptions import ClientError as email_error, NoCredentialsError
+from botocore.exceptions import ClientError as email_error
 import json
 import requests
 from website import querylog, database
@@ -575,9 +575,6 @@ def send_email(recipient, subject, body_plain, body_html):
         )
     except email_error as error:
         print('Email send error', error.response['Error']['Message'])
-    except NoCredentialsError as e:
-        if not is_debug_mode():
-            raise e
     else:
         print('Email sent to ' + recipient)
 

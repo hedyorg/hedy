@@ -1,8 +1,6 @@
-//  adds and and or
+// adds the while loop
 
-ifs: _IF _SPACE (condition|andcondition|orcondition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-condition: (equality_check|in_list_check)
+command: print | ifs elses? | ask | for_loop | while_loop| assign_list | list_access_var | assign | comment
+while_loop: _WHILE _SPACE (condition) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
 
-andcondition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
-orcondition: (equality_check|in_list_check) (_SPACE _OR _SPACE condition)*

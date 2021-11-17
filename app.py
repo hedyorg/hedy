@@ -92,10 +92,7 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
 """)
 
 # Preamble that will be used for non-Turtle programs
-NORMAL_PREFIX_CODE = textwrap.dedent("""\
-    # coding=utf8
-    import random, time
-""")
+NORMAL_PREFIX_CODE = "# coding=utf8\nimport random\n"
 
 def load_adventure_for_language(lang):
     adventures_for_lang = ADVENTURES[lang]
@@ -324,7 +321,7 @@ def parse():
         with querylog.log_time('transpile'):
 
             try:
-                transpile_result = hedy.transpile(code, level, lang)
+                transpile_result = hedy.transpile(code, level)
             except hedy.exceptions.FtfyException as ex:
                 # The code was fixed with a warning
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)

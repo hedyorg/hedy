@@ -1,28 +1,8 @@
-program: _EOL* (command | invalid) (_SPACE)* (_EOL+ (command | invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
-command: print | ifelse | ifs | ask | turtle | assign_list | sleep | list_access_var | assign | print_no_quotes | comment
-//placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
+print: _PRINT (_SPACE (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))*)?
+assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
+?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> substraction
+?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
+?atom: INT | var_access | unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?
+unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> unsupported_number
 
-list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
-assign_list: var _SPACE _IS _SPACE textwithspaces (_COMMA _SPACE? textwithspaces)+
-assign: var _SPACE _IS _SPACE textwithspaces
-invalid: textwithoutspaces (_SPACE textwithspaces)?
-
-print_no_quotes: _PRINT _SPACE (textwithoutspaces | list_access | var) (_SPACE (textwithoutspaces | list_access | var))*  -> print_nq
-
-// new commands for level 4
-ifelse: _IF _SPACE condition (_SPACE|_EOL*) command (_SPACE|_EOL*) _ELSE (_SPACE|_EOL*) command
-ifs: _IF _SPACE condition (_SPACE|_EOL*) command //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
-
-equality_check: textwithoutspaces _SPACE _IS _SPACE textwithoutspaces //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 11 handles this nicer now, could be done here too
-in_list_check: textwithoutspaces _SPACE _IN _SPACE var
-
-textwithspaces: /(?:[^\n, ]| (?!else))+/ -> text //anything can be parsed except for a newline and a comma for list separators
-//a space is allowed, of course but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
-//That is because allowing else in strings leads to issue #303
-textwithoutspaces: /(?:[^\n, ei]|e(?!lse)|i(?!f))+/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-//the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
-// this is because allowing else and if in invalid leads to ambiguity in the grammar                                            
-
-
-
+textwithoutspaces: /(?:[^\n, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 5 calculation elements need to be escaped too                

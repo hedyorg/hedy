@@ -6,7 +6,7 @@ class TestsLevel3(HedyTester):
   level = 3
 
   # tests should be ordered as follows:
-  # * commands in the order of hedy.py e..g for level 2: ['print', 'ask', 'echo', 'is', 'turn', 'forward']
+  # * commands in the order of hedy.py for level 3: ['print', 'ask', 'is', 'turn', 'forward'],
   # * combined tests
   # * markup tests
   # * negative tests (inc. negative & multilevel)
@@ -18,489 +18,339 @@ class TestsLevel3(HedyTester):
   # * situation_gives_exception
 
 
-  #print tests
+  # print tests
   def test_print(self):
-    result = hedy.transpile("print Hallo welkom bij Hedy!", self.level)
+    code = textwrap.dedent("""\
+    print 'hallo wereld!'""")
+
+    result = hedy.transpile(code, self.level)
+
     expected = textwrap.dedent("""\
-    print(f'Hallo welkom bij Hedy!')""")
+    print(f'hallo wereld!')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
   def test_print_comma(self):
-    result = hedy.transpile("print welkom bij steen, schaar, papier", self.level)
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet ,'""")
     expected = textwrap.dedent("""\
-    print(f'welkom bij steen, schaar, papier')""")
+    naam = 'Hedy'
+    print(f'ik heet ,')""")
+    self.multi_level_tester(
+      code=code,
+      max_level=10,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_two_spaces(self):
+    code = "print        'hallo!'"
+
+    expected = textwrap.dedent("""\
+    print(f'hallo!')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
+  def test_print_with_slashes(self):
+    code = "print 'Welcome to \\'"
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print(f'Welcome to \\\\')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+    expected_output = HedyTester.run_code(result)
+    self.assertEqual("Welcome to \\", expected_output)
+
+  # ask
+  def test_assign_print(self):
+    code = textwrap.dedent("""\
+    naam is Hedy
+    print 'ik heet' naam""")
+
+    expected = textwrap.dedent("""\
+    naam = 'Hedy'
+    print(f'ik heet{naam}')""")
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
   # issue #745
   def test_print_list(self):
     code = textwrap.dedent("""\
         plaatsen is een stad, een  dorp, een strand
-        print test plaatsen""")
-
-    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
-      result = hedy.transpile(code, self.level)
-
-    self.assertEqual('Invalid Argument Type', context.exception.error_code)
-
-  def test_print_multiple_lines(self):
-    code = textwrap.dedent("""\
-    print Hallo welkom bij Hedy!
-    print Mooi hoor""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Hallo welkom bij Hedy!')
-    print(f'Mooi hoor')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = textwrap.dedent("""\
-    Hallo welkom bij Hedy!
-    Mooi hoor""")
-
-    self.assertEqual(expected_output, HedyTester.run_code(result))
-  def test_print_spaces(self):
-    code = "print        hallo!"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'hallo!')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_print_asterisk(self):
-    code = "print *Jouw* favoriet is dus kleur"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'*Jouw* favoriet is dus kleur')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_print_quotes(self):
-    code = "print 'Welcome to OceanView!'"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'\\'Welcome to OceanView! \\'')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = HedyTester.run_code(result)
-    self.assertEqual("'Welcome to OceanView! '", expected_output)
-  def test_print_slashes(self):
-    code = "print Welcome to O/ceanView"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Welcome to O/ceanView')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    expected_output = HedyTester.run_code(result)
-    self.assertEqual("Welcome to O/ceanView", expected_output)
-
-  #is tests
-  def test_assign(self):
-    result = hedy.transpile("naam is Felienne", self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Felienne'""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_integer(self):
-    result = hedy.transpile("naam is 14", self.level)
-
-    expected = textwrap.dedent("""\
-    naam = '14'""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_list(self):
-
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_list_exclamation_mark(self):
-    code = textwrap.dedent("""\
-    antwoorden is ja, NEE!, misschien
-    print antwoorden at random""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    antwoorden = ['ja', 'NEE!', 'misschien']
-    print(f'{random.choice(antwoorden)}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  #ask tests
-  def test_ask(self):
-    result = hedy.transpile("kleur is ask wat is je lievelingskleur?", self.level)
-
-    expected = textwrap.dedent("""\
-    kleur = input('wat is je lievelingskleur'+'?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_ask_quotes(self):
-    code = "name is ask 'What restaurant'"
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    name = input('\\'What restaurant\\'')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_ask_Spanish_text(self):
-    result = hedy.transpile("color is ask ask Cuál es tu color favorito?", self.level)
-
-    expected = textwrap.dedent("""\
-    color = input('ask Cuál es tu color favorito'+'?')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_ask_bengali_var(self):
-    code = textwrap.dedent("""\
-      রং is ask আপনার প্রিয় রং কি?
-      print রং is আপনার প্রিয""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
-    print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_ask_Hungarian_var(self):
-    code = textwrap.dedent("""\
-      állatok is kutya, macska, kenguru
-      print állatok at random""")
-
-    result = hedy.transpile(code, self.level)
-  def test_ask_with_comma(self):
-    code = textwrap.dedent("""\
-    dieren is ask hond, kat, kangoeroe
-    print dieren""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    dieren = input('hond, kat, kangoeroe')
-    print(f'{dieren}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  #sleep tests
-  def test_sleep_with_number(self):
-    code = "sleep 2"
-    expected = "time.sleep(2)"
+        print 'test' plaatsen""")
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
-    )
-  def test_sleep_without_number(self):
-    code = "sleep"
-    expected = "time.sleep(1)"
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
+      max_level=10,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
-  #turn tests
-  def test_turn_number(self):
+  def test_ask_Spanish(self):
     code = textwrap.dedent("""\
-    print Turtle race
-    turn 90""")
-
-    result = hedy.transpile(code, self.level)
-
+    color is ask 'Cuál es tu color favorito?'""")
     expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    t.right(90)""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_turn_number_var(self):
-    code = textwrap.dedent("""\
-    print Turtle race
-    direction is 70
-    turn direction""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    direction = '70'
-    t.right(direction)""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-
-  # issue #792
-  def test_turn_right_number(self):
+    color = input('Cuál es tu color favorito?')""")
     self.multi_level_tester(
       max_level=10,
-      code="turn right 90",
-      exception=hedy.exceptions.InvalidArgumentTypeException,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+  def test_ask_without_quotes(self):
+    code = textwrap.dedent("""
+    ding is kleur
+    kleur is ask Wat is je lievelingskleur'
+    print 'Jouw favoriet is dus ' kleur""")
 
-  #forward tests
-  def test_forward_without_argument(self):
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
+
+  # is - assign tests
+  def test_assign_underscore(self):
     code = textwrap.dedent("""\
-    forward""")
+    voor_naam is Hedy
+    print 'ik heet '""")
+
     result = hedy.transpile(code, self.level)
-    expected = textwrap.dedent("""\
-    t.forward(50)
-    time.sleep(0.1)""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_forward_with_string_variable(self):
-    code = textwrap.dedent("""\
-        a is test
-        forward a""")
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-  def test_forward_with_list_variable(self):
-    code = textwrap.dedent("""\
-        a is 1, 2, 3
-        forward a""")
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
-  #markup tests
-  def test_spaces_in_arguments(self):
-    result = hedy.transpile("print hallo      wereld", self.level)
     expected = textwrap.dedent("""\
-    print(f'hallo wereld')""")
+    voor_naam = 'Hedy'
+    print(f'ik heet ')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+  def test_assign_bengali(self):
+    hashed_var = hedy.hash_var("নাম")
+
+    code = textwrap.dedent("""\
+    নাম is হেডি""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent(f"""\
+    {hashed_var} = 'হেডি'""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+  def test_assign_Python_keyword(self):
+    hashed_var = hedy.hash_var("for")
+
+    code = textwrap.dedent("""\
+    for is Hedy
+    print 'ik heet ' for """)
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'
+    print(f'ik heet {vd55669822f1a8cf72ec1911e462a54eb}')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  # negative tests
+  def test_print_without_quotes(self):
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
+      result = hedy.transpile("print felienne 123", self.level)
+
+    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
 
   #combined tests
-  def test_ask_print(self):
-    result = hedy.transpile("kleur is ask wat is je lievelingskleur?\nprint kleur!", self.level)
+  def test_assign_print_bengali(self):
+    hashed_var = hedy.hash_var("নাম")
+    self.assertEqual('veb9b5c786e8cde0910df4197f630ee75', hashed_var)
 
-    expected = textwrap.dedent("""\
-    kleur = input('wat is je lievelingskleur'+'?')
-    print(f'{kleur}!')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_print(self):
     code = textwrap.dedent("""\
-    naam is Felienne
-    print naam""")
+    নাম is হেডি
+    print 'আমার নাম is ' নাম """)
 
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    naam = 'Felienne'
-    print(f'{naam}')""")
+    veb9b5c786e8cde0910df4197f630ee75 = 'হেডি'
+    print(f'আমার নাম is {veb9b5c786e8cde0910df4197f630ee75}')""")
+
+    self.assertEqual(expected, result.code)
+  def test_assign_print_chinese(self):
+    hashed_var = hedy.hash_var("你好世界")
+    self.assertEqual('v65396ee4aad0b4f17aacd1c6112ee364', hashed_var)
+
+    code = textwrap.dedent("""\
+    你好世界 is 你好世界
+    print 你好世界""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    v65396ee4aad0b4f17aacd1c6112ee364 = '你好世界'
+    print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
+
+    self.assertEqual(expected, result.code)
+
+  def test_print_list_var_random(self):
+
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print 'hallo ' dieren at random""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    dieren = ['Hond', 'Kat', 'Kangoeroe']
+    print(f'hallo {random.choice(dieren)}')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+    self.assertIn(HedyTester.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
+  def test_ask_print(self):
+
+    code = textwrap.dedent("""
+    kleur is ask 'wat is je lievelingskleur?'
+    print 'jouw lievelingskleur is dus' kleur '!'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    kleur = input('wat is je lievelingskleur?')
+    print(f'jouw lievelingskleur is dus{kleur}!')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+  def test_ask_assign(self):
+
+    code = textwrap.dedent("""
+    ding is kleur
+    kleur is ask 'Wat is je lievelings' ding
+    print 'Jouw favoriet is dus ' kleur""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    ding = 'kleur'
+    kleur = input('Wat is je lievelings'+ding)
+    print(f'Jouw favoriet is dus {kleur}')""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
+  def test_ask_assign_list(self):
+    code = textwrap.dedent("""\
+    color is gree, blue
+    choice is ask 'Is your favorite color one of: ' color""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      max_level=10,
+      test_name=self.name()
+    )
+
   def test_forward_ask(self):
     code = textwrap.dedent("""\
-    afstand is ask hoe ver dan?
+    afstand is ask 'hoe ver dan?'
     forward afstand""")
-    result = hedy.transpile(code, self.level)
     expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan'+'?')
+    afstand = input('hoe ver dan?')
     t.forward(afstand)
     time.sleep(0.1)""")
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_turn_ask(self):
-    code = textwrap.dedent("""\
-    print Turtle race
-    direction is ask Where to turn?
-    turn direction""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    direction = input('Where to turn'+'?')
-    t.right(direction)""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_random_turn(self):
-    code = textwrap.dedent("""\
-    print Turtle race
-    directions is 10, 100, 360
-    turn directions at random""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    print(f'Turtle race')
-    directions = ['10', '100', '360']
-    t.right(random.choice(directions))""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(True, result.has_turtle)
-  def test_print_list_random(self):
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    print dieren at random""")
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{random.choice(dieren)}')""")
-
-    # check if result is in the expected list
-    check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
-
     self.multi_level_tester(
-      max_level=10,
+      max_level=7,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
+      extra_check_function=self.is_turtle(),
       test_name=self.name()
     )
-  def test_assign_print_punctuation(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print Hallo naam!""")
 
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'Hallo {naam}!')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_print_sentence(self):
-    code = textwrap.dedent("""\
-    naam is Hedy
-    print naam is jouw voornaam""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    print(f'{naam} is jouw voornaam')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-  def test_assign_print_something_else(self):
-
-    code = textwrap.dedent("""\
-    naam is Felienne
-    print Hallo""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    naam = 'Felienne'
-    print(f'Hallo')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-  def test_print_list_var(self):
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    print dieren at 1""")
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{dieren[1-1]}')""")
-
-    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
-
-    self.multi_level_tester(
-      max_level=10,
-      code=code,
-      expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
-    )
 
   #negative tests
-  def test_echo_no_longer_in_use(self):
+  def test_var_undefined_error_message(self):
     code = textwrap.dedent("""\
-    ask what is jouw lievelingskleur?
-    echo Jouw lievelingskleur is dus...""")
-    with self.assertRaises(hedy.exceptions.WrongLevelException) as context:
-      result = hedy.transpile(code, self.level)
-    self.assertEqual('Wrong Level', context.exception.error_code)
-  def test_ask_without_argument_upto_22(self):
+      naam is Hedy
+      print 'ik heet ' name""")
+
     self.multi_level_tester(
-      code="name is ask",
+      code=code,
+      exception=hedy.exceptions.UndefinedVarException,
       max_level=10,
-      exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()
     )
-  def test_random_from_string(self):
+
+    # deze extra check functie kan nu niet mee omdat die altijd op result werkt
+    # evt toch splitsen in 2 (pos en neg?)
+    # self.assertEqual('name', context.exception.arguments['name'])
+
+  def test_issue_375(self):
+    code = textwrap.dedent("""
+      is Foobar
+      print welcome""")
+
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual('Parse', context.exception.error_code)
+  def test_missing_opening_quote(self):
     code = textwrap.dedent("""\
-      items is aap noot mies
-      print items at random""")
+      print hallo wereld'""")
+
+    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual('Unquoted Text', context.exception.error_code)
+  def test_missing_all_quotes(self):
+    code = textwrap.dedent("""\
+      print hallo wereld""")
+
     self.multi_level_tester(
       code=code,
       max_level=4,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
-      test_name=self.name()
+      test_name=self.name(),
+      exception=hedy.exceptions.UndefinedVarException,
     )
-  def test_random_undefined_var(self):
-    # todo could be added for higher levels but that is a lot of variations so I am not doing it now :) (FH, oct 2021)
+  def test_print_Spanish(self):
     code = textwrap.dedent("""\
-    dieren is hond, kat, kangoeroe
-    print dier at random""")
+    print 'Cuál es tu color favorito?'""")
+    expected = textwrap.dedent("""\
+    print(f'Cuál es tu color favorito?')""")
+
     self.multi_level_tester(
       code=code,
-      max_level=10,
-      exception=hedy.exceptions.UndefinedVarException,
-      test_name=self.name()
+      max_level=11,
+      test_name=self.name(),
+      expected=expected,
+      extra_check_function=self.is_not_turtle()
     )
 
-  def test_ask_level_2(self):
-    code = textwrap.dedent("""\
-    keuzes is steen, schaar, papier
-    print keuzes at random
-    ask is de papier goed?""")
-    self.multi_level_tester(
-      code=code,
-      max_level=2,
-      exception=hedy.exceptions.WrongLevelException,
-      test_name=self.name()
-    )
+  #assorti
+  def test_detect_accented_chars(self):
+    self.assertEqual(True, hedy.hash_needed('éyyy'))
+    self.assertEqual(True, hedy.hash_needed('héyyy'))
+    self.assertEqual(False, hedy.hash_needed('heyyy'))
+
+
+
+
+
+
+
 
 
 
