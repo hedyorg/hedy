@@ -35,7 +35,7 @@
                          {% for name, levels in name_levels.items() %}
                              {% for level in levels %}
                                  <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
-                                     <input type="checkbox" name="adventures" class="mr-4" value="" {% if preferences[level] and key_name in preferences[level]['adventures'] %} checked {% endif %}>
+                                     <input type="checkbox" name="adventures" class="mr-4" value="" {% if preferences[level] and key_name not in preferences[level]['adventures'] %} unchecked {% else %} checked {% endif %}>
                                      <label style>{{ name }}</label>
                                  </li>
                              {% endfor %}
