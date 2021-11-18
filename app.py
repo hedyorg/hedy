@@ -777,23 +777,9 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
+    #If the user is currently logged and exists in a class, retrieve possible restrictions and filter on adventures
     adventures = load_adventures_per_level(g.lang, level)
-    print(adventures)
-    if (current_user()['username']):
-        student_class = DATABASE.get_student_classes(current_user()['username'])
-        if student_class:
-            selected_adventures = DATABASE.get_level_preferences_class(student_class[0]['id'], level)
-            if selected_adventures:
-                display_adventures = []
-                for adventure in adventures:
-                    if adventure['short_name'] in selected_adventures:
-                        display_adventures.append(adventure)
-            else:
-                display_adventures = adventures
-        else:
-            display_adventures = adventures
-    else:
-        display_adventures = adventures
+    adventures, restrictions = get_restrictions(adventures, current_user()['username'], level)
 
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
@@ -812,6 +798,33 @@ def index(level, step):
         adventures=display_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
+
+def get_restrictions(adventures, user, level):
+    restrictions = {}
+    found_restrictions = False
+    if user:
+        student_classes = DATABASE.get_student_classes(user)
+        if student_classes:
+            level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level)
+            if level_preferences:
+                found_restrictions = True
+                display_adventures = []
+                for adventure in adventures:
+                    if adventure['short_name'] in level_preferences['adventures']:
+                        display_adventures.append(adventure)
+                restrictions['amount_next_level'] = level_preferences['progress']
+                restrictions['example_programs'] = level_preferences['example_programs']
+                restrictions['prev_level'] = True
+                restrictions['next_level'] = True
+
+    if not found_restrictions:
+        display_adventures = adventures
+        restrictions['amount_next_level'] = 0
+        restrictions['example_programs'] = True
+        restrictions['prev_level'] = True
+        restrictions['next_level'] = True
+
+    return display_adventures, restrictions
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):

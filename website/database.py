@@ -245,5 +245,5 @@ class Database:
         preferences = PREFERENCES.get_many({'id': class_id})
         for preference in preferences:
             if preference['level'] == level:
-                return preference['adventures']
+                return preference
         return None
