@@ -41,7 +41,7 @@ def routes (app, database):
                 latest_shared['link'] = os.getenv ('BASE_URL') + f"/hedy/{latest_shared['id']}/view"
             else:
                 latest_shared = None
-            students.append ({'username': student_username, 'last_login': utils.mstoisostring (student ['last_login']), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
+            students.append ({'username': student_username, 'last_login': utils.datetotimeordate (utils.mstoisostring (student ['last_login'])), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
@@ -59,6 +59,12 @@ def routes (app, database):
             return 'body must be an object', 400
         if not isinstance(body.get('name'), str):
             return 'name must be a string', 400
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
 
         Class = {
             'id': uuid.uuid4().hex,
@@ -88,6 +94,12 @@ def routes (app, database):
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
             return 'No such class', 404
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user ['username'], True)
+        for Class in Classes:
+            if Class['name'] == body['name']:
+                return "duplicate", 200
 
         Class = DATABASE.update_class (class_id, body ['name'])
 

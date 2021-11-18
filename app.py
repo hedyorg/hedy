@@ -657,7 +657,7 @@ def quiz_finished(level):
     g.prefix = '/hedy'
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
-                           total_score=session.get('total_score', 0),
+                           total_score= round(session.get('total_score', 0) / quiz.max_score(quiz_data) * 100),
                            menu=render_main_menu('adventures'),
                            quiz=quiz_data, level=int(level) + 1, questions=quiz_data['questions'],
                            next_assignment=1,
@@ -713,8 +713,8 @@ def submit_answer(level_source, question_nr, attempt):
             answer=chosen_option)
 
     if is_correct:
-        score = quiz.correct_answer_score(question, attempt)
-        session['total_score'] = session.get('total_score', 0) + score
+        score = quiz.correct_answer_score(question)
+        session['total_score'] = session.get('total_score',0) + score
         session['correct_answer'] = session.get('correct_answer', 0) + 1
 
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
@@ -1196,10 +1196,12 @@ def translate_fromto(source, target):
     source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
     source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
     source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
+    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
 
     target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
     target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
     target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
+    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
 
     files =[]
 
@@ -1217,6 +1219,11 @@ def translate_fromto(source, target):
       'Adventures',
       f'adventures/{target}.yaml',
       translating.struct_to_sections(source_adventures, target_adventures)))
+                 
+    files.append(translating.TranslatableFile(
+      'Keywords',
+      f'keywords/{target}.yaml',
+      translating.struct_to_sections(source_keywords, target_keywords)))
 
     return render_template('translate-fromto.html',
         source_lang=source,
