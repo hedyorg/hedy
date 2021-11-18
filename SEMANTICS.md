@@ -82,6 +82,8 @@ Level 1 supports:
     <td>_SPACE (print | ask | forward | turn | echo) (any text)?</td>
     <td>Invalid space</td>
   </tr>
+</tbody>
+</table>
 
 ## Level 2
 
@@ -163,6 +165,8 @@ Level 2 supports:
     <td>_SPACE (any text) is (any text)?</td>
     <td>Invalid space</td>
   </tr>
+</tbody>
+</table>
 
 ## Level 3
 
@@ -248,3 +252,5 @@ Level 3 supports:
     <td>_SPACE (any text) is (any text)?</td>
     <td>Invalid space</td>
   </tr>
+</tbody>
+</table>
