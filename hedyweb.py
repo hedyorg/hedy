@@ -31,7 +31,7 @@ class Translations:
     return d
 
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, menu, translations, version, loaded_program, adventures, adventure_name):
+def render_code_editor_with_tabs(level_defaults, max_level, level_number, menu, translations, version, loaded_program, adventures, restrictions, adventure_name):
   user = current_user()
 
   if not level_defaults:
@@ -45,6 +45,10 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, menu, 
   arguments_dict['level'] = level_number
   arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
   arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
+  arguments_dict['amount_next_level'] = restrictions['amount_next_level']
+  arguments_dict['example_programs'] = restrictions['example_programs']
+  arguments_dict['hide_prev_level'] = restrictions['hide_prev_level']
+  arguments_dict['hide_next_level'] = restrictions['hide_next_level']
   arguments_dict['menu'] = menu
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'

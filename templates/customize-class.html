@@ -1,0 +1,98 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+ <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
+ <div class="mt-4 w-full" id="explanation_text">
+     <!--
+     Kies een level en selecteer vervolgens de mogelijkheden die je wilt voor bovenstaande klas.
+     Het is mogelijk om per level specifieke "adventures" te selecteren die beschikbaar zijn voor de studenten.
+     Ook is er een optie om een restrictie te zetten op het aantal "example programs" dat de studenten kunnen gebruiken.
+     Na het bereiken van de limiet zullen deze automatisch verdwijnen.
+     Daarnaast kun je instellen hoeveel correcte programma's er nodig zijn voordat het volgende level beschikbaar komt.
+     Of een level compleet verbergen.
+     -->
+ </div>
+ <div class="mt-4 text-center" id="customize_level_button_container">
+     {% for level in levels %}
+         <button class="green-btn mr-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
+     {% endfor %}
+ </div>
+ <!--
+ This is where the magic happens, when a user presses a level button retrieve the corresponding info from the db
+ Then update the info when the corresponding button is pressed.
+ It would be best to store this js functionality in in teachers.ts
+ But, for now we can store it below (temporary!)
+ -->
+ <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
+     <h3 class="mt-4" id="settings_header">{{ui.settings}} {{ui.level_title}} 1</h3>
+     <div class="mt-4 flex flex-row">
+         <div class="mr-4 w-1/2" id="adventure_selector">
+             <h4>{{auth.available_adventures}}</h4>
+             <form>
+                 <div class="flex flex-row items-center">
+                 <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
+                     {% for key_name, name_levels in adventures.items() %}
+                         {% for name, levels in name_levels.items() %}
+                             {% for level in levels %}
+                                 <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
+                                     <input type="checkbox" name="adventures" class="mr-4" value="" {% if preferences[level] and key_name in preferences[level]['adventures'] %} checked {% endif %}>
+                                     <label style>{{ name }}</label>
+                                 </li>
+                             {% endfor %}
+                         {% endfor %}
+                     {% endfor %}
+                 </ul>
+                 </div>
+             </form>
+         </div>
+         {% for level in levels %}
+             <div class="other_settings {% if level != 1 %} hidden {% endif %}" level="{{level}}">
+                 <h4>{{auth.other_settings}}</h4>
+                     <div class="mb-4">
+                         <label class="inline-block w-3/4" for="progress">{{auth.amount_next_level}}</label><input class="inline-block w-1/4 px-2 py-1 border-2 border-gray-400"
+                                                                                                                   id="progress{{ level }}" name="progress" {% if preferences[level] %}
+                                                                                                                   value="{{ preferences[level]['progress'] }}" {% else %} value="5" {% endif %} type="number">
+                     </div>
+                     <div class="mb-4">
+                         <label class="inline-block w-3/4" for="example_programs">{{auth.example_programs}}</label><input type="checkbox" id="example_programs{{ level }}" name="example_program"
+                                                                                                                value=""{% if preferences[level] and preferences[level]['example_programs'] %} checked {% endif %}>
+                     </div>
+                     <div class="mb-4">
+                         <label class="inline-block w-3/4" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level"
+                                                                                                              value="" {% if preferences[level] and preferences[level]['hide'] %} checked {% endif %}>
+                     </div>
+             </div>
+         {% endfor %}
+     </div>
+     <div class="mt-4">
+         <button class="blue-btn" onclick="hedyApp.save_level_settings ('{{class_info.id}}', level)">{{auth.save}}</button>
+         <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
+     </div>
+ </div>
+</div>
+<script>
+ let level = 1;
+ $('#customize_level_button_container button').click(function(){
+     level = this.getAttribute('level');
+     $('#level_settings').hide();
+     $('.other_settings').each(function() {
+         $(this).hide();
+     });
+     $('#settings_header').text("{{ui.settings}} {{ui.level_title}} " + level);
+     $('#adventures_overview li').each(function() {
+         $(this).hide();
+         if (this.getAttribute('level') == level) {
+             $(this).show();
+         }
+     });
+     $('#level_settings').show();
+     $('.other_settings').each(function() {
+         if (this.getAttribute('level') == level) {
+             $(this).show();
+         }
+     });
+
+ });
+</script>
+{% endblock %}

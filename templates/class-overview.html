@@ -32,5 +32,6 @@
   <button class="red-btn mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
   <br><br>
   <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+  <button class="green-btn" onclick="window.location.href = '{{localize_link ('/customize-class/' + class_info.id)}}'">{{ auth.customize_class }}</button>
 </div>
 {% endblock %}
