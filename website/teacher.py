@@ -46,7 +46,7 @@ def routes (app, database):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('my-profile'), current_page='my-profile', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), menu=render_main_menu('for-teachers'), current_page='for-teachers', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
