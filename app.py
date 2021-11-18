@@ -777,10 +777,7 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    #If the user is currently logged and exists in a class, retrieve possible restrictions and filter on adventures
-    adventures = load_adventures_per_level(g.lang, level)
-    adventures, restrictions = get_restrictions(adventures, current_user()['username'], level)
-
+    adventures, restrictions = get_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels:
@@ -795,9 +792,10 @@ def index(level, step):
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventures=display_adventures,
+        adventures=adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
+
 
 def get_restrictions(adventures, user, level):
     restrictions = {}
