@@ -247,6 +247,8 @@ def routes(app, database):
             'password': hashed,
             'email':    email,
             'created':  timems(),
+            'level': 1,
+            'adventure_index' : 0,
             'verification_pending': hashed_token,
             'last_login': timems()
         }
