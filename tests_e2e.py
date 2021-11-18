@@ -61,6 +61,7 @@ def request (method, path, headers={}, body=''):
     return response
 
 class AuthHelper ():
+    @staticmethod
     def makeUsername ():
         # We create usernames with a random component so that if a test fails, we don't have to do a cleaning of the DB so that the test suite can run again
         # This also allows us to run concurrent tests without having username conflicts.
@@ -68,6 +69,7 @@ class AuthHelper ():
         return username
 
     # If user with `username` exists, return it. Otherwise, create it.
+    @staticmethod
     def assertUserExists (username):
         if not isinstance (username, str):
             raise Exception ('AuthHelper.assertUserExists - Invalid username: ' + str (username))
@@ -83,12 +85,14 @@ class AuthHelper ():
         return USERS [username]
 
     # Returns the first created user, if any; otherwise, creates one.
+    @staticmethod
     def getAnyUser ():
         if len (USERS.keys ()) > 0:
             return USERS [next (iter (USERS))]
         return AuthHelper.assertUserExists (AuthHelper.makeUsername ())
 
     # Returns the first logged in user, if any; otherwise, logs in a user; if no user exists, creates and then logs in the user.
+    @staticmethod
     def getAnyLoggedUser ():
         for user in USERS:
             if 'cookie' in user:
@@ -98,6 +102,7 @@ class AuthHelper ():
         user = AuthHelper.getAnyUser ()
         return AuthHelper.loginUser (user ['username'])
 
+    @staticmethod
     def loginUser (username):
         user = USERS [username]
         response = request ('post', 'auth/login', {}, {'username': user ['username'], 'password': user ['password']})
@@ -107,10 +112,12 @@ class AuthHelper ():
         USERS [user ['username']] ['cookie'] = CONFIG ['session'] ['cookie_name'] + '=' + cookie.value + ';'
         return user
 
+    @staticmethod
     def assertUserIsLogged (username):
         AuthHelper.assertUserExists (username)
         return AuthHelper.loginUser (username)
 
+    @staticmethod
     def getHedyCookie (cookieString):
         cookie = SimpleCookie ()
         cookie.load (cookieString)
