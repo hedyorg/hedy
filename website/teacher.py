@@ -5,6 +5,7 @@ from flask import g, request, jsonify, redirect
 from flask_helpers import render_template
 import os
 import hedyweb
+import hedy_content
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
@@ -158,6 +159,60 @@ def routes (app, database):
             return 'No such class', 404
 
         DATABASE.remove_student_from_class (Class ['id'], student_id)
+
+        return {}, 200
+
+    @app.route('/customize-class/<class_id>', methods=['GET'])
+    @requires_login
+    def get_class_info(user, class_id):
+        if not is_teacher(user):
+            return 'Only teachers can retrieve classes', 403
+        Class = DATABASE.get_class(class_id)
+        if not Class or Class['teacher'] != user['username']:
+            return utils.page_404(TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang,
+                                  TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
+
+        adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        levels = hedy_content.LevelDefaults(g.lang).levels
+        preferences = DATABASE.get_preferences_class(class_id)
+
+        return render_template('customize-class.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                               ui=TRANSLATIONS.get_translations(g.lang, 'ui'), menu=render_main_menu('for-teachers'),
+                               class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
+                               adventures=adventures, preferences=preferences, current_page='for-teachers')
+
+    @app.route('/customize-class/<class_id>', methods=['PUT'])
+    @requires_login
+    def update_level_preferences(user, class_id):
+        if not is_teacher(user):
+            return 'Only teachers can update class preferences', 403
+
+        body = request.json
+        print(body)
+        # Validations
+        if not isinstance(body, dict):
+            return 'body must be an object', 400
+        if not isinstance(int(body.get('next_level')), int):
+            return 'amount of correct programs must be an integer', 400
+        if not isinstance(body.get('example_programs'), bool):
+            return 'amount of example programs must be an integer', 400
+        if not isinstance(body.get('hide_level'), bool):
+            return 'level switch must be a boolean', 400
+        if not isinstance(int(body.get('level')), int):
+            return 'level must ben an integer', 400
+
+        Class = DATABASE.get_class(class_id)
+        if not Class or Class['teacher'] != user['username']:
+            return 'No such class', 404
+
+        preferences = {}
+        preferences['level'] = int(body.get('level'))
+        preferences['adventures'] = body.get('adventures')
+        preferences['progress'] = body.get('next_level')
+        preferences['example_programs'] = body.get('example_programs')
+        preferences['hide'] = body.get('hide_level')
+
+        Class = DATABASE.update_preferences_class(class_id, preferences)
 
         return {}, 200
 
