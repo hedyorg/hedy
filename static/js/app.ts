@@ -753,10 +753,7 @@ export function toggle_developers_mode(hide_commands: boolean) {
       $('#adventures').hide();
   } else {
       // If the example programs are hidden by class customization: keep hidden!
-      console.log("Even kijken wat er mis gaat....");
-      console.log(hide_commands);
       if (hide_commands) {
-        console.log("We komen hier alleen als de commands WEL gezien mogen worden!");
         $('#commands-window-total').show();
       }
       $('#adventures').show();
