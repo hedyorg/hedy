@@ -1,9 +1,9 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
 <div>
-  <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
+  <button class="green-btn absolute mt-1 ml-1 {% if not example_programs %} hidden {% endif %}" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
 </div>
-<div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none">
+<div style="width: 250px;" id="commands-window" class="right-hand-shadow flex-none {% if not example_programs %} hidden {% endif %}">
   <div id="command_window_content">
       <div class="p-3 shadow-md">
         <div></div>
