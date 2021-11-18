@@ -52,7 +52,7 @@ ClientErrorMessages:
     Program_too_long: "Your program takes too long to run."
 HedyErrorMessages:
     Empty Program: "You created an empty program. Type Hedy code in the left field and try again"
-    Wrong Level: "That was correct Hedy code, but not at the right level. You wrote code for level {working_level} at level {original_level}."
+    Wrong Level: "That was correct Hedy code, but not at the right level. You wrote {offending_keyword} for level {working_level}. Tip: {tip}"
     Incomplete: "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind {incomplete_command}."
     Invalid: "{invalid_command} is not a Hedy level {level} command. Did you mean {guessed_command}?"
     Invalid Space: "Oops! You started a line with a space on line {line_number}. Spaces confuse computers, can you remove it?"
@@ -69,6 +69,8 @@ HedyErrorMessages:
     Invalid Argument Type: "You cannot use {command} with {invalid_type}{invalid_argument}. Try using {command} with {allowed_types}."
     Unsupported Float: "Unfortunately, Hedy does not support non-integer numbers. Try changing {value} to an integer."
     Locked Language Feature: "You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level."
+    ask_needs_var: "Starting in level 2, ask needs to be used with a variable and quotation marks. Example: name is ask 'What are you called?'"
+    echo_out: "Starting in level 2 echo is no longer needed. You can repeat an answer with ask and print now. Example: name is ask 'What are you called?' print 'hello' name"
     space: "a space"
     comma: "a comma"
     question mark: "a question mark"
