@@ -747,12 +747,15 @@ export function confetti_cannon(){
   }
 }
 
-export function toggle_developers_mode() {
+export function toggle_developers_mode(hide_commands: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
   } else {
-      $('#commands-window-total').show();
+      // If the example programs are hidden by class customization: keep hidden!
+      if (! hide_commands) {
+        $('#commands-window-total').show();
+      }
       $('#adventures').show();
   }
 
