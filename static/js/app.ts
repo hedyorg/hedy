@@ -228,7 +228,9 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Code){
         console.log("success!");
-        success.show(ErrorMessages['Transpile_success']);
+        var allsuccessmessages = ErrorMessages['Transpile_success'];
+        var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
+        success.show(allsuccessmessages[randomnum]);
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
@@ -522,10 +524,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+  if ($('#adventures').is(":hidden")) {
+      turtleConfig.height = 600;
+      turtleConfig.worldHeight = 600;
+  } else {
+      turtleConfig.height = 300;
+      turtleConfig.worldHeight = 300;
+  }
   turtleConfig.width = 400;
-  turtleConfig.height = 300;
   turtleConfig.worldWidth = 400;
-  turtleConfig.worldHeight = 300;
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
@@ -737,5 +744,19 @@ export function confetti_cannon(){
     if (confettiButton) {
       confettiButton.classList.add('hidden');
     }
+  }
+}
+
+export function toggle_developers_mode() {
+  $('#commands-window-total').toggle();
+  $('#adventures').toggle();
+  if ($('#adventures').is(":hidden")) {
+    $('#editor-area').removeClass('mt-5');
+    $('#code_editor').css('height', 36 + "em");
+    $('#code_output').css('height', 36 + "em");
+  } else {
+    $('#editor-area').addClass('mt-5');
+    $('#code_editor').height('22rem');
+    $('#code_output').height('22rem');
   }
 }

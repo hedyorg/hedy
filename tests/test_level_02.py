@@ -209,8 +209,8 @@ class TestsLevel2(HedyTester):
     self.assertEqual(False, result.has_turtle)
   def test_ask_Hungarian_var(self):
     code = textwrap.dedent("""\
-      állatok is kutya
-      print állatok""")
+      állatok is kutya, macska, kenguru
+      print állatok at random""")
 
     result = hedy.transpile(code, self.level)
   def test_ask_with_comma(self):
@@ -255,6 +255,21 @@ class TestsLevel2(HedyTester):
     expected = textwrap.dedent("""\
       direction = '70'
       t.right(direction)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
+
+  def test_turn_list_access(self):
+    code = textwrap.dedent("""\
+      directions is 10, 20, 30
+      turn directions at random""")
+    expected = textwrap.dedent("""\
+      directions = ['10', '20', '30']
+      t.right(random.choice(directions))""")
     self.multi_level_tester(
       max_level=9,
       code=code,
@@ -330,6 +345,21 @@ class TestsLevel2(HedyTester):
       test_name=self.name()
     )
 
+  def test_forward_with_list_access(self):
+    code = textwrap.dedent("""\
+      a is 10, 20, 30
+      forward a at random""")
+    expected = textwrap.dedent("""\
+      a = ['10', '20', '30']
+      t.forward(random.choice(a))
+      time.sleep(0.1)""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_turtle(),
+      test_name=self.name()
+    )
 
   def test_forward_with_string_variable_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -342,6 +372,16 @@ class TestsLevel2(HedyTester):
       test_name=self.name()
     )
 
+  def test_forward_with_list_variable_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is 1, 2, 3
+      forward a""")
+    self.multi_level_tester(
+      max_level=9,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   #markup tests
   def test_spaces_in_arguments(self):
@@ -401,6 +441,21 @@ class TestsLevel2(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
+  def test_random_turn(self):
+    code = textwrap.dedent("""\
+    print Turtle race
+    directions is 10, 100, 360
+    turn directions at random""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    print(f'Turtle race')
+    directions = ['10', '100', '360']
+    t.right(random.choice(directions))""")
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
     naam is Hedy
@@ -457,9 +512,32 @@ class TestsLevel2(HedyTester):
       exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()
     )
+  def test_random_from_string(self):
+    code = textwrap.dedent("""\
+      items is aap noot mies
+      print items at random""")
+    self.multi_level_tester(
+      code=code,
+      max_level=4,
+      exception=hedy.exceptions.RequiredArgumentTypeException,
+      test_name=self.name()
+    )
+  def test_random_undefined_var(self):
+    # todo could be added for higher levels but that is a lot of variations so I am not doing it now :) (FH, oct 2021)
+    code = textwrap.dedent("""\
+    dieren is hond, kat, kangoeroe
+    print dier at random""")
+    self.multi_level_tester(
+      code=code,
+      max_level=10,
+      exception=hedy.exceptions.UndefinedVarException,
+      test_name=self.name()
+    )
 
   def test_ask_level_2(self):
     code = textwrap.dedent("""\
+    keuzes is steen, schaar, papier
+    print keuzes at random
     ask is de papier goed?""")
     self.multi_level_tester(
       code=code,
