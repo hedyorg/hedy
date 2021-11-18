@@ -740,6 +740,7 @@ def adventure_page(adventure_name, level):
         translations=TRANSLATIONS,
         version=version(),
         adventures=adventures_for_level,
+        restrictions='',
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
