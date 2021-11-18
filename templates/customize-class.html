@@ -69,6 +69,9 @@
          <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
      </div>
  </div>
+ <div class="mt-4">
+        <button class="green-btn" onclick="window.location.href = '{{localize_link ('/class/' + class_info.id)}}'">{{auth.back_to_class}}</button>
+ </div>
 </div>
 <script>
  let level = 1;
