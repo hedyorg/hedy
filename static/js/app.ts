@@ -748,8 +748,14 @@ export function confetti_cannon(){
 }
 
 export function toggle_developers_mode() {
-  $('#commands-window-total').toggle();
-  $('#adventures').toggle();
+  if ($('#developers_toggle').is(":checked")) {
+      $('#commands-window-total').hide();
+      $('#adventures').hide();
+  } else {
+      $('#commands-window-total').show();
+      $('#adventures').show();
+  }
+
   if ($('#adventures').is(":hidden")) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
