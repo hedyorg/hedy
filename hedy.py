@@ -1966,7 +1966,51 @@ class ConvertToLang2(ConvertToLang1):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
 
 
-translate_keywords("mens is papa mama oma\nprint mens at random", "en", "nl", 2)
+#translate_keywords("mens is papa mama oma\nprint mens at random", "en", "nl", 2)
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
+
+@hedy_transpiler(level=3)
+class ConvertToLang3(ConvertToLang2):
+
+    def check_print_arguments(self, args):
+        # this function checks whether arguments of a print are valid
+        # we can print if all arguments are either quoted OR they are all variables
+
+        quoted_args=[a for a in args if is_quoted(a)]
+        unquoted_args = [a for a in args if not is_quoted(a)]
+        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
+
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            # all good? return for further processing
+            return args
+        else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
+            first_unquoted_var = unquoted_args[0]
+            raise exceptions.UndefinedVarException(name=first_unquoted_var)
+
+    def print(self, args):
+        i=0
+        args = self.check_print_arguments(args)
+   #     self.check_args_type_allowed(args, 'print', self.level)
+        argument_string = ""
+        for argument in args:
+            if i==len(args) -1 or args[i+1] in self.punctuation_symbols:
+                space=''
+            else:
+                space=" "
+            argument_string += space + argument
+            i+=1
+        return self.keywords["print"] + " " + argument_string
+
+  #  def print_nq(self, args):
+  #      return ConvertToLang2.print(self, args)
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return  var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+
