@@ -796,6 +796,7 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         adventures=adventures,
+        restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
