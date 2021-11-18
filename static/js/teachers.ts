@@ -153,7 +153,7 @@ export function save_level_settings(id: string, level: number) {
  export  function reset_level_preferences(level: number) {
      $('#adventures_overview li').each(function() {
          if ($(this).is(':visible')) {
-             $(this).find(':input').prop("checked", false);
+             $(this).find(':input').prop("checked", true);
          }
      });
      $('#progress'+ level).val(5);
