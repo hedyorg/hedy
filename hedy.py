@@ -1610,7 +1610,12 @@ def transpile_inner(input_string, level):
             #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = repair(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
-                result = transpile_inner(fixed_code, level)
+                try:
+                    fixed_result = transpile_inner(fixed_code, level)
+                    result = fixed_result
+                except exceptions.HedyException:
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
@@ -1621,12 +1626,18 @@ def transpile_inner(input_string, level):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closestmatch = closest_command(invalid_command, commands_per_level[level])
-            closest = style_closest_command(closestmatch)
-            if closestmatch:
-                fixed_code = input_string.replace(invalid_command, closestmatch)
+            closest = closest_command(invalid_command, commands_per_level[level])
+            fixed_code = None
+            result = None
+            if closest:
+                fixed_code = input_string.replace(invalid_command, closest)
                 if fixed_code != input_string: #only if we have made a successful fix
-                    result = transpile_inner(fixed_code, level)
+                    try:
+                        fixed_result = transpile_inner(fixed_code, level)
+                        result = fixed_result
+                    except exceptions.HedyException:
+                        # The fixed code contains another error. Only report the original error for now.
+                        pass
             if closest == None: #we couldn't find a suggestion because the command itself was found
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?

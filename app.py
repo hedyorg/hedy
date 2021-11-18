@@ -430,6 +430,9 @@ def translate_error(code, translations, arguments):
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
+        if k == "guessed_command":
+            arguments[k] = hedy.style_closest_command(v)
+
         if k in arguments_that_require_translation:
             if isinstance(v, list):
                 arguments[k] = translate_list(translations, v)
