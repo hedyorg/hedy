@@ -935,11 +935,15 @@ class ConvertToPython_3(ConvertToPython_2):
         var = args[0]
         list = args[1]
         return f"{list}.append({var})"
-
     def remove(self, args):
         var = args[0]
         list = args[1]
-        return f"{list}.remove({var})"
+        return textwrap.dedent(f"""\
+        try:
+            {list}.remove({var})
+        except:
+           pass""")
+
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=4)

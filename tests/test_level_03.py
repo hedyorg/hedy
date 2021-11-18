@@ -467,16 +467,12 @@ class TestsLevel3(HedyTester):
     colors.append(color)
     print(f'{random.choice(colors)}')""")
 
-    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
-
     self.multi_level_tester(
-      max_level=10,
+      max_level=3,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
       test_name=self.name()
     )
-
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
     colors is green, red, blue
@@ -487,16 +483,16 @@ class TestsLevel3(HedyTester):
     expected = textwrap.dedent("""\
     colors = ['green', 'red', 'blue']
     color = input('what color to remove'+'?')
-    colors.remove(color)
+    try:
+        colors.remove(color)
+    except:
+       pass
     print(f'{random.choice(colors)}')""")
 
-    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
-
     self.multi_level_tester(
-      max_level=10,
+      max_level=3,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
       test_name=self.name()
     )
 
