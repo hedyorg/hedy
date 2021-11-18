@@ -740,6 +740,7 @@ def adventure_page(adventure_name, level):
         translations=TRANSLATIONS,
         version=version(),
         adventures=adventures_for_level,
+        restrictions='',
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
@@ -780,9 +781,10 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(g.lang, level)
+    adventures, restrictions = get_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    if level not in level_defaults_for_lang.levels:
+
+    if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
         return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_level'))
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -795,8 +797,48 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         adventures=adventures,
+        restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
+
+
+def get_restrictions(adventures, user, level):
+    restrictions = {}
+    found_restrictions = False
+    if user:
+        student_classes = DATABASE.get_student_classes(user)
+        if student_classes:
+            level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level)
+            if level_preferences:
+                found_restrictions = True
+                display_adventures = []
+                for adventure in adventures:
+                    if adventure['short_name'] in level_preferences['adventures']:
+                        display_adventures.append(adventure)
+                restrictions['amount_next_level'] = level_preferences['progress']
+                restrictions['example_programs'] = level_preferences['example_programs']
+                restrictions['hide_level'] = level_preferences['hide']
+                prev_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level - 1)
+                next_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level + 1)
+                print(next_level_preferences)
+                if prev_level_preferences:
+                    restrictions['hide_prev_level'] = prev_level_preferences['hide']
+                else:
+                    restrictions['hide_prev_level'] = False
+                if next_level_preferences:
+                    restrictions['hide_next_level'] = next_level_preferences['hide']
+                else:
+                    restrictions['hide_next_level'] = False
+
+    if not found_restrictions:
+        display_adventures = adventures
+        restrictions['amount_next_level'] = 0
+        restrictions['example_programs'] = True
+        restrictions['hide_level'] = False
+        restrictions['hide_prev_level'] = False
+        restrictions['hide_next_level'] = False
+
+    return display_adventures, restrictions
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):

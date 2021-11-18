@@ -39,6 +39,7 @@
   </div>
   <div class="mt-4">
     <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+    <button class="green-btn" onclick="window.location.href = '{{localize_link ('/customize-class/' + class_info.id)}}'">{{ auth.customize_class }}</button>
   </div>
 </div>
 {% endblock %}
