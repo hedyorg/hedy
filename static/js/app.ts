@@ -299,6 +299,16 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
+  if (auth.profile) {
+    if (window.State.examples_left > 0) {
+      window.State.examples_left = window.State.examples_left - 1;
+    } else {
+      $("#commands-window").hide();
+      $("#toggle-button").hide();
+      modal.alert(auth.texts['examples_used']);
+      return;
+    }
+  }
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;
@@ -572,7 +582,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
   }
-
 
   // output functions are configurable.  This one just appends some text
   // to a pre element.

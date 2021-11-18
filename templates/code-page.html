@@ -27,15 +27,15 @@
       </div>
   </div>
 </div>
-<div tabindex="0" class="flex-grow p-8">
-  {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
-  {% include "incl-adventure-tabs.html" %}
+<div tabindex="0" class="flex-grow p-4">
+    {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
+    {% include "incl-adventure-tabs.html" %}
 
-  {% include "incl-editor-and-output.html" %}
+    {% include "incl-editor-and-output.html" %}
 
-  <div class="text-sm mt-10 mr-5 font-thin">
+    <div class="text-sm mt-10 mr-5 font-thin">
     Latest update: {{latest}}
-  </div>
+    </div>
 </div>
 
 {% endblock %}
@@ -50,6 +50,12 @@
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ level_title }}";
+    {% if username %}
+        window.State.examples_left = 20;
+    {% endif %}
+    {% if not username %}
+        window.State.examples_left = Number.MAX_SAFE_INTEGER; // We want to give the user unlimited tries
+    {% endif %}
     window.State.adventure_name = "{{ adventure_name }}";
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
     window.State.adventure_name_onload = window.State.adventure_name;
