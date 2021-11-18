@@ -248,6 +248,7 @@ def routes(app, database):
             'email':    email,
             'created':  timems(),
             'verification_pending': hashed_token,
+            # I add level & adventure_index here
             'level': 1,
             'adventure_index' : 0,
             'last_login': timems()
