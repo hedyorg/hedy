@@ -232,6 +232,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.Code){
+        removeBulb();
         console.log("success!");
         success.show(ErrorMessages['Transpile_success']);
       }
@@ -254,6 +255,11 @@ export function runit(level: string, lang: string, cb: () => void) {
     console.error(e);
     error.show(ErrorMessages['Other_error'], e.message);
   }
+}
+
+function removeBulb(){
+    const repair_button = document.getElementById("repair_button");
+    repair_button.style.visibility = "hidden";
 }
 
 export function fix_code(level: string, lang: string){
