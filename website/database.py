@@ -1,6 +1,7 @@
 from utils import timems, times
 from . import dynamo
 
+
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
@@ -163,9 +164,16 @@ class Database:
     def get_teacher_classes(self, username, students_to_list):
         """Return all the classes belonging to a teacher."""
         classes = None
-        if dynamo.is_dynamo_available ():
+        if isinstance(storage, dynamo.AwsDynamoStorage):
             classes = CLASSES.get_many({'teacher': username}, reverse=True)
-        # If we're using the in-memory database, we need to make a shallow copy of the classes before changing the `students` key from a set to list, otherwise the field will remain a list later and that will break the set methods.
+
+        # If we're using the in-memory database, we need to make a shallow copy
+        # of the classes before changing the `students` key from a set to list,
+        # otherwise the field will remain a list later and that will break the
+        # set methods.
+        #
+        # FIXME: I don't understand what the above comment is saying, but I'm
+        # skeptical that it's accurate.
         else:
             classes = []
             for Class in CLASSES.get_many({'teacher': username}, reverse=True):
