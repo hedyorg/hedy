@@ -157,7 +157,7 @@ export function save_level_settings(id: string, level: number) {
          }
      });
      $('#progress'+ level).val(5);
-     $('#example_programs' + level).prop("checked", false);
+     $('#example_programs' + level).prop("checked", true);
      $('#hide_level' + level).prop("checked", false);
  }
 
