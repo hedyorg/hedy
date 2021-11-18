@@ -240,3 +240,10 @@ class Database:
             temp[preference['level']] = preference
             temp[preference['level']].pop('level', None)
         return temp
+
+    def get_level_preferences_class(self, class_id, level):
+        preferences = PREFERENCES.get_many({'id': class_id})
+        for preference in preferences:
+            if preference['level'] == level:
+                return preference['adventures']
+        return None

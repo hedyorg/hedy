@@ -778,7 +778,25 @@ def index(level, step):
             adventure_name = result['adventure_name']
 
     adventures = load_adventures_per_level(g.lang, level)
+    print(adventures)
+    if (current_user()['username']):
+        student_class = DATABASE.get_student_classes(current_user()['username'])
+        if student_class:
+            selected_adventures = DATABASE.get_level_preferences_class(student_class[0]['id'], level)
+            if selected_adventures:
+                display_adventures = []
+                for adventure in adventures:
+                    if adventure['short_name'] in selected_adventures:
+                        display_adventures.append(adventure)
+            else:
+                display_adventures = adventures
+        else:
+            display_adventures = adventures
+    else:
+        display_adventures = adventures
+
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
+
     if level not in level_defaults_for_lang.levels:
         return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_level'))
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
@@ -791,7 +809,7 @@ def index(level, step):
         menu=render_main_menu('hedy'),
         translations=TRANSLATIONS,
         version=version(),
-        adventures=adventures,
+        adventures=display_adventures,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
 
