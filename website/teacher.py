@@ -172,7 +172,10 @@ def routes (app, database):
             return utils.page_404(TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang,
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
 
-        adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
         preferences = DATABASE.get_preferences_class(class_id)
 
