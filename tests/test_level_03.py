@@ -453,6 +453,53 @@ class TestsLevel3(HedyTester):
       test_name=self.name()
     )
 
+  #add/remove tests
+  def test_add_to_list(self):
+    code = textwrap.dedent("""\
+    color is ask what is your favorite color? 
+    colors is green, red, blue
+    add color to colors
+    print colors at random""")
+
+    expected = textwrap.dedent("""\
+    color = input('what is your favorite color'+'?')
+    colors = ['green', 'red', 'blue']
+    colors.append(color)
+    print(f'{random.choice(colors)}')""")
+
+    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=check_in_list,
+      test_name=self.name()
+    )
+
+  def test_remove_from_list(self):
+    code = textwrap.dedent("""\
+    colors is green, red, blue
+    color is ask what color to remove?
+    remove color from colors
+    print colors at random""")
+
+    expected = textwrap.dedent("""\
+    colors = ['green', 'red', 'blue']
+    color = input('what color to remove'+'?')
+    colors.remove(color)
+    print(f'{random.choice(colors)}')""")
+
+    check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      expected=expected,
+      extra_check_function=check_in_list,
+      test_name=self.name()
+    )
+
   #negative tests
   def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\
