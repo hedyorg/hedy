@@ -809,7 +809,7 @@ export function confetti_cannon(){
 
 export function modalStepOne(level: number){
   createModal(level);
-  let modal_editor = $('#modal-editor');
+  let modal_editor = document.getElementById('modal-editor');
   initializeModalEditor(modal_editor);
 }
 
