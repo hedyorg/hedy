@@ -162,7 +162,7 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
-    return style_closest_command(min_command)
+    return min_command
 
 
 def style_closest_command(command):
@@ -1543,13 +1543,13 @@ def get_full_grammar_for_level(level):
 
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    try: 
-        if not local_keywords_enabled: 
+    try:
+        if not local_keywords_enabled:
             raise FileNotFoundError("Local keywords are not enabled")
         filename = "keywords-" + str(language) + ".lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             grammar_text = file.read()
-    except FileNotFoundError: 
+    except FileNotFoundError:
         filename = "keywords-en.lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             grammar_text = file.read()
@@ -1768,12 +1768,19 @@ def is_program_valid(program_root, input_string, level, lang):
         if isinstance(invalid_info, list):
             invalid_info = invalid_info[0]
         if invalid_info.error_type == ' ':
-            # the error here is a space at the beginning of a line, we can fix that!
+            #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = program_repair.remove_leading_spaces(input_string)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                result = transpile_inner(fixed_code, level, lang)
-            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code,
-                                                   fixed_result=result)
+            if fixed_code != input_string: #only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, level, lang)
+                    result = fixed_result
+                    raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+                except exceptions.HedyException:
+                    invalid_info.error_type = None
+                    transpile_inner(fixed_code, level)
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
+            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
@@ -1784,6 +1791,17 @@ def is_program_valid(program_root, input_string, level, lang):
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, commands_per_level[level])
+            fixed_code = None
+            result = None
+            if closest:
+                fixed_code = input_string.replace(invalid_command, closest)
+                if fixed_code != input_string:  # only if we have made a successful fix
+                    try:
+                        fixed_result = transpile_inner(fixed_code, level)
+                        result = fixed_result
+                    except exceptions.HedyException:
+                        # The fixed code contains another error. Only report the original error for now.
+                        pass
             if closest == None:  # we couldn't find a suggestion because the command itself was found
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?
@@ -1794,7 +1812,8 @@ def is_program_valid(program_root, input_string, level, lang):
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
-                                                     guessed_command=closest, line_number=line)
+                                                     guessed_command=closest, line_number=line,
+                                                     fixed_code=fixed_code, fixed_result=result)
 
 
 def is_program_complete(abstract_syntax_tree, level):
@@ -1859,7 +1878,7 @@ def transpile_inner(input_string, level, lang="en"):
 
 
 def execute(input_string, level):
-    python = transpile(input_string, level)    
+    python = transpile(input_string, level)
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
