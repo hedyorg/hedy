@@ -807,13 +807,13 @@ export function confetti_cannon(){
   }
 }
 
-export function modalStepOne(level, lang){
+export function modalStepOne(level: number){
   createModal(level);
   let modal_editor = $('#modal-editor');
   initializeModalEditor(modal_editor);
 }
 
-function createModal(level){
+function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   modal.alert(editor);
 }
@@ -862,7 +862,7 @@ function createModal(level){
         let resultString = "";
 
         if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey));
+          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
           let tempString = ""
           for (let i = 0; i < resultString.length + 1; i++) {
             setTimeout(function() {
@@ -873,7 +873,7 @@ function createModal(level){
           }
         }
         else{
-          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey));
+          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
           editor.setValue(resultString);
         }
     }
