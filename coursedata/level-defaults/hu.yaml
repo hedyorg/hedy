@@ -522,40 +522,6 @@
 #                print('Ez helyes')
 #            else:
 #                print('Ó nem, ez hibás!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Aki bújt, aki nem, megyek!'
-#    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
-#    commands:
-#    -   name: "for ezzel:"
-#        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Aki bújt, aki nem, megyek!'
-#    -   name: "if ezzel:"
-#        explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
-#        example: "if szin is zöld:'"
-#        demo_code: |-
-#            szin is zöld
-#            if szin is zöld:
-#                print 'a szín zöld'
-#            else:
-#                print 'A szin nem zöld'
-#    -   name: "(Optional) elif"
-#        explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a értéke 1'
-#            elif a is 2:
-#                print 'a értéke 2'
-#            else:
-#                print 'a értéke nem 1 vagy 2'
 14:
     start_code: |
         kor is ask 'Hány éves vagy?'
@@ -650,3 +616,37 @@
             gyumolcs is ['alma', 'banán', 'cseresznye']
             veletlengyumolcs is gyumolcs[random]
             print veletlengyumolcs 
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Aki bújt, aki nem, megyek!'
+    intro_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
+    commands:
+    -   name: "for ezzel:"
+        explanation: "Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print 'Aki bújt, aki nem, megyek!'
+    -   name: "if ezzel:"
+        explanation: "Ugyanúgy kell eljárnunk `if` állítás esetén"
+        example: "if szin is zöld:'"
+        demo_code: |-
+            szin is ask 'Mi a kedvenc színed?'
+            if szin is zöld:
+                print 'a szín zöld'
+            else:
+                print 'A szin nem zöld'
+    -   name: "elif"
+        explanation: "Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti \"else if\". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a értéke 1'
+            elif a is 2:
+                print 'a értéke 2'
+            else:
+                print 'a értéke nem 1 vagy 2'

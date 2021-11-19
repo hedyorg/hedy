@@ -15,7 +15,7 @@ import exceptions
 import program_repair
 
 # Some useful constants
-HEDY_MAX_LEVEL = 16
+HEDY_MAX_LEVEL = 17
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
@@ -852,7 +852,6 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"'{name}'.zfill(100)"
 
 @hedy_transpiler(level=2)
-@hedy_transpiler(level=3)
 class ConvertToPython_2(ConvertToPython_1):
 
     def ask_dep_2(self, args):
@@ -934,19 +933,6 @@ class ConvertToPython_2(ConvertToPython_1):
         value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
-    def assign_list(self, args):
-        parameter = args[0]
-        values = ["'" + get_value(a) + "'" for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
-
-    def list_access(self, args):
-        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
-        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-
-        if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
-        else:
-            return args[0] + '[' + args[1] + '-1]'
 
     def sleep(self, args):
         if args == []:
@@ -972,10 +958,37 @@ def make_f_string(args, lookup):
 
     return f"print(f'{argument_string}')"
 
+@hedy_transpiler(level=3)
+class ConvertToPython_3(ConvertToPython_2):
+    def assign_list(self, args):
+        parameter = args[0]
+        values = ["'" + get_value(a) + "'" for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+    def list_access(self, args):
+        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
+        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+
+        if args[1] == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            return args[0] + '[' + args[1] + '-1]'
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f"{list}.append({var})"
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return textwrap.dedent(f"""\
+        try:
+            {list}.remove({var})
+        except:
+           pass""")
+
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=4)
-class ConvertToPython_4(ConvertToPython_2):
+class ConvertToPython_4(ConvertToPython_3):
 
     def var_access(self, args):
         name = args[0]
@@ -1346,15 +1359,14 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 
+@hedy_transpiler(level=17)
+class ConvertToPython_17(ConvertToPython_16):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-# @hedy_transpiler(level=10)
-# @hedy_transpiler(level=11)
-# class ConvertToPython_10_11(ConvertToPython_9):
-#     def elifs(self, args):
-#         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-#         all_lines = [indent(x) for x in args[1:]]
-#         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
-#
+
 # @hedy_transpiler(level=12)
 # class ConvertToPython_12(ConvertToPython_10_11):
 #     def input(self, args):

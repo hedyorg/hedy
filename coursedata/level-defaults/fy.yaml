@@ -521,45 +521,6 @@
 #                print('Dat is goed!')
 #            else:
 #                print('Spitich leave, dat is fout!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: |-
-#        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
-#        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
-#    commands:
-#    -   name: "for met :"
-#        explanation: "By `for` moatst no in `:` efteroan sette!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moatte itselde dwaan mei al ús `if`"
-#        example: "if kleur is grien:"
-#        demo_code: |-
-#            kleur is grien
-#            if kleur is grien:
-#                print 'De kleur is grien'
-#            else:
-#                print 'De kleur is net grien'
-#    -   name: "(Optioneel) elif"
-#        explanation: |-
-#            Meist ek in nij kommando brûke: `elif`.
-#            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-#            en als dy net wier is dan giest nei de `else`.
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is net 1 of 2'
 14:
     start_code: |-
         leeftyd is ask 'Hoe âld bisto?'
@@ -637,3 +598,42 @@
             fruit is ['apel', 'banaan', 'kjers']
             randomfruit is fruit[random]
             print randomfruit 
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
+    intro_text: |-
+        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+    commands:
+    -   name: "for met :"
+        explanation: "By `for` moatst no in `:` efteroan sette!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Wie niet weg is is gezien'
+    -   name: "if met :"
+        explanation: "We moatte itselde dwaan mei al ús `if`"
+        example: "if kleur is grien:"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            if kleur is grien:
+                print 'De kleur is grien'
+            else:
+                print 'De kleur is net grien'
+    -   name: "(Optioneel) elif"
+        explanation: |-
+            Meist ek in nij kommando brûke: `elif`.
+            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+            en als dy net wier is dan giest nei de `else`.
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is net 1 of 2'
