@@ -121,6 +121,7 @@ class TestsLevel17(HedyTester):
       print(f'nee')""")
 
     self.multi_level_tester(
+      max_level=17,
       code=code,
       expected=expected,
       test_name=self.name()
@@ -144,6 +145,7 @@ class TestsLevel17(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       test_name=self.name()
     )
@@ -224,3 +226,53 @@ class TestsLevel17(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
+
+  # not working yet, does work for conditions with 'is'?
+  # def tests_smaller(self):
+  #   code = textwrap.dedent("""\
+  #     leeftijd is ask 'Hoe oud ben jij?'
+  #     if leeftijd < 12:
+  #         print 'Dan ben je jonger dan ik!'""")
+  #   expected = textwrap.dedent("""\
+  #     leeftijd = input('Hoe oud ben jij?')
+  #     try:
+  #       leeftijd = int(leeftijd)
+  #     except ValueError:
+  #       try:
+  #         leeftijd = float(leeftijd)
+  #       except ValueError:
+  #         pass
+  #     if str(leeftijd).zfill(100)<str(12).zfill(100):
+  #       print(f'Dan ben je jonger dan ik!')""")
+  #
+  #   self.multi_level_tester(
+  #     code=code,
+  #     max_level=17,
+  #     expected=expected,
+  #     extra_check_function=self.is_not_turtle(),
+  #     test_name=self.name()
+  #   )
+  # def tests_bigger(self):
+  #   code = textwrap.dedent("""\
+  #     leeftijd is ask 'Hoe oud ben jij?'
+  #     if leeftijd > 12:
+  #         print 'Dan ben je ouder dan ik!'""")
+  #   expected = textwrap.dedent("""\
+  #     leeftijd = input('Hoe oud ben jij?')
+  #     try:
+  #       leeftijd = int(leeftijd)
+  #     except ValueError:
+  #       try:
+  #         leeftijd = float(leeftijd)
+  #       except ValueError:
+  #         pass
+  #     if str(leeftijd).zfill(100)>str(12).zfill(100):
+  #       print(f'Dan ben je ouder dan ik!')""")
+  #
+  #   self.multi_level_tester(
+  #     code=code,
+  #     max_level=17,
+  #     expected=expected,
+  #     extra_check_function=self.is_not_turtle(),
+  #     test_name=self.name()
+  #   )
