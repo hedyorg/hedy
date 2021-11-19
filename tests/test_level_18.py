@@ -172,16 +172,13 @@ class TestsLevel18(HedyTester):
         test_name=self.name()
       )
 
+    def test_input_disallows_printing_lists(self):
+      code = textwrap.dedent("""
+      color is ['green', 'blue']
+      choice is input('Is your favorite color one of: ' color)""")
 
-    # Boryana, this does not fail but Ia m not sure why
-    # def test_input_disallows_printing_lists(self):
-    #   code = textwrap.dedent("""
-    #   color is ['green', 'blue']
-    #   choice is input('Is your favorite color one of: ' color)""")
-    #
-    #   with self.assertRaises(hedy.hedy.exceptions.InvalidArgumentTypeException) as context:
-    #     result = hedy.transpile(code, self.level)
-
+      with self.assertRaises(hedy.hedy.exceptions.InvalidArgumentTypeException):
+        hedy.transpile(code, self.level)
 
     # negative tests
     def test_var_undefined_error_message(self):

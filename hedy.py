@@ -334,6 +334,10 @@ class TypeValidator(Transformer):
         self.validate_args_type(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.any)
 
+    def input(self, tree):
+        self.validate_args_type(tree.children[1:], Command.ask)
+        return self.to_typed_tree(tree, HedyType.any)
+
     def forward(self, tree):
         if tree.children:
             self.validate_args_type(tree.children, Command.forward)
