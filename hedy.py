@@ -15,7 +15,7 @@ import exceptions
 import program_repair
 
 # Some useful constants
-HEDY_MAX_LEVEL = 16
+HEDY_MAX_LEVEL = 17
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
@@ -1318,15 +1318,14 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 
+@hedy_transpiler(level=17)
+class ConvertToPython_17(ConvertToPython_16):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-# @hedy_transpiler(level=10)
-# @hedy_transpiler(level=11)
-# class ConvertToPython_10_11(ConvertToPython_9):
-#     def elifs(self, args):
-#         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-#         all_lines = [indent(x) for x in args[1:]]
-#         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
-#
+
 # @hedy_transpiler(level=12)
 # class ConvertToPython_12(ConvertToPython_10_11):
 #     def input(self, args):

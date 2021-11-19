@@ -24,6 +24,7 @@ class TestsLevel14(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -47,6 +48,7 @@ class TestsLevel14(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -75,6 +77,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       expected=expected,
+      max_level=16,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
@@ -102,6 +105,7 @@ class TestsLevel14(HedyTester):
       self.multi_level_tester(
 
         code=code,
+        max_level=16,
         expected=expected,
         extra_check_function=self.is_not_turtle(),
         test_name=self.name()
@@ -126,6 +130,7 @@ class TestsLevel14(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -149,6 +154,7 @@ class TestsLevel14(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -176,6 +182,7 @@ class TestsLevel14(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
