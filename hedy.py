@@ -1306,7 +1306,7 @@ class ConvertToPython_16(ConvertToPython_15):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 
 @hedy_transpiler(level=17)
-class ConvertToPython_7(ConvertToPython_16):
+class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
