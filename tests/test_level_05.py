@@ -277,24 +277,6 @@ class TestsLevel5(HedyTester):
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
-  def test_print_if_else_and_var(self):
-
-    code = textwrap.dedent("""\
-    jouwkeuze is steen
-    computerkeuze is schaar
-    if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    jouwkeuze = 'steen'
-    computerkeuze = 'schaar'
-    if computerkeuze == 'schaar' and jouwkeuze == 'steen':
-      print(f'jij wint')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual(HedyTester.run_code(result), 'jij wint')
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -369,7 +351,7 @@ class TestsLevel5(HedyTester):
     with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
-    self.assertEqual('<span class="command-highlighted">print</span>', str(context.exception.arguments['guessed_command']))
+    self.assertEqual('print', str(context.exception.arguments['guessed_command']))
   def test_if_with_print_backtick(self):
     code = textwrap.dedent("""\
     name is ask 'ποιό είναι το όνομά σου;'

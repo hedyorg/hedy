@@ -489,7 +489,21 @@
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         print fruit 
-    intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
+    intro_text: |-
+        We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Pythoncodes.
+        In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: [ en ].
+        Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
+        We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
+
+        #Voorbeeld Hedy code
+        ```
+        vrienden is ['Ahmed', 'Ben', 'Cayden']
+        geluksgetallen is [15, 18, 6]
+        for i in range 1 to 3
+           print 'het geluksgetal van ' vrienden[i]
+           print 'is ' geluksgetallen[i]
+        ```
+
     commands:
     -   name: "Haakjes om lijstjes"
         explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"
@@ -513,21 +527,74 @@
             print randomfruit 
 
 
-#20:
-#    start_code: |-
-#        fruit is ['appel', 'banaan', 'kers']
-#        for i in range(1, 3):
-#            print(fruit[i])
-#    intro_text: "We kunnen ook alles van de lijst bekijken. Omdat er drie dingen in zitten, pakken we de for loop van 1 tot 3. Nu printen we alles uit wat in de lijst zit."
-#    commands:
-#    -   name: "Lengte van een lijst"
-#        explanation: "Met `length` kan je zien hoe groot een lijst is. Hier is length bijvoorbeeld 3 want we hebben 3 dingen in de lijst"
-#        example: "length(fruit)"
-#        demo_code: |-
-#            fruit is ['appel', 'banaan', 'kers']
-#            print('lengte van de lijst is ' length(fruit))
-#            for i in range(1, length(fruit)):
-#                print(fruit[i])
+
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
+    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
+    commands:
+    -   name: "for met :"
+        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'wie niet weg is is gezien'
+    -   name: "if met :"
+        explanation: "We moeten hetzelfde doen met al onze `if` statements"
+        example: "if kleur is groen:"
+        demo_code: |-
+            kleur is ask 'Wat vind jij de mooiste kleur?'
+            if kleur is groen:
+                print 'Jouw kleur is groen'
+            else:
+                print 'Jouw kleur is zeker niet groen'
+    -   name: "elif"
+        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is niet 1 of 2'
+18:
+    start_code: |-
+        naam is 'Hedy'
+        print('ik heet', naam)
+    intro_text: |-
+        We zijn aangekomen bij echte Pythoncode! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij print en bij range.
+        Zo gaat dat:
+
+        ```
+        print('ik heet Hedy!')
+        ```
+
+        Wil je meerdere dingen printen? Dan moeten daar steeds komma's tussen.
+
+        ```
+        naam is 'Hedy'
+        print('ik heet', naam)
+        ```
+
+
+    commands:
+    -   name: "print"
+        explanation: "Bij `print` moet je haakjes gebruiken"
+        example: "print"
+        demo_code: |-
+            print('hallo!')
+    -   name: "print met var"
+        explanation: "Bij `print` moet je haakjes gebruiken en komma's als je meerdere dingen print"
+        example: "print"
+        demo_code: |-
+            naam is 'Hedy'
+            print('ik heet', naam)
+
 #21:
 #    start_code: |-
 #        print('Hoeveel is 5+3?')
@@ -568,38 +635,3 @@
 #                print('Dat is goed!')
 #            else:
 #                print('Helaas dat is fout!')
-
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: "Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een : bij de regel ervoor zetten."
-#    commands:
-#    -   name: "for met :"
-#        explanation: "Bij `for` moet je dus een `:` er achter zetten!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moeten hetzelfde doen met al onze `if` statements"
-#        example: "if kleur is groen:"
-#        demo_code: |-
-#            kleur is groen
-#            if kleur is groen:
-#                print 'De kleur is groen'
-#            else:
-#                print 'De kleur is niet groen'
-#    -   name: "(Optioneel) elif"
-#        explanation: "Verder is er een nieuw commando dat je mag gebruiken: `elif`. `elif` is eigenlijk else if. Je kijkt dus eerst naar `if` en als die niet waar is dan probeer je `elif` en als die niet waar is dan ga je naar de `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is niet 1 of 2'

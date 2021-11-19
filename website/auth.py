@@ -557,7 +557,7 @@ for name in logging.Logger.manager.loggerDict.keys():
         logging.getLogger(name).setLevel(logging.CRITICAL)
 
 # https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
-email_client = boto3.client('ses', region_name = config['email']['region'], aws_access_key_id = os.getenv('AWS_SES_ACCESS_KEY'), aws_secret_access_key = os.getenv('AWS_SES_SECRET_KEY'))
+email_client = boto3.client('ses', region_name = config['email']['region'])
 
 @querylog.timed
 def send_email(recipient, subject, body_plain, body_html):

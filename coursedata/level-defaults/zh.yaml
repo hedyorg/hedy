@@ -354,37 +354,6 @@
 #            # 除了打印 "你好"，它什么也没做
 #            print('你好!')
 #
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print '无论你是否准备好了，我都会来的!'
-#    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
-#    commands:
-#    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print '无论你是否准备好了，我都会来的!'
-#    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
-#        example: "if colour is 绿色:'"
-#        demo_code: |-
-#            colour is 绿色
-#            if colour is 绿色:
-#                print 'The colour 是绿色'
-#            else:
-#                print 'The colour 不是绿色'
-#    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a 是 1'
-#            elif a is 2:
-#                print 'a 是 2'
-#            else:
-#                print 'a 既不是1也不是2'
 14:
     start_code: |-
         age is ask '你今年几岁了?'
@@ -458,3 +427,34 @@
             fruit is ['香蕉', '苹果', '樱桃']
             randomfruit is fruit[random]
             print randomfruit 
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print '无论你是否准备好了，我都会来的!'
+    intro_text: "现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` ."
+    commands:
+    -   explanation: "当我们使用`for`循环语句的时候， 我们需要在 `for`循环语句后面加一个冒号`:` !"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print '无论你是否准备好了，我都会来的!'
+    -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
+        example: "if colour is 绿色:'"
+        demo_code: |-
+            colour is '绿色'
+            if colour is 绿色:
+                print 'The colour 是绿色'
+            else:
+                print 'The colour 不是绿色'
+    -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a 是 1'
+            elif a is 2:
+                print 'a 是 2'
+            else:
+                print 'a 既不是1也不是2'

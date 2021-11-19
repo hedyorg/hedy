@@ -15,7 +15,7 @@ import exceptions
 import program_repair
 
 # Some useful constants
-HEDY_MAX_LEVEL = 16
+HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
@@ -162,7 +162,7 @@ def closest_command(invalid_command, known_commands):
 
     if min_command == invalid_command:
         return None
-    return style_closest_command(min_command)
+    return min_command
 
 
 def style_closest_command(command):
@@ -331,6 +331,10 @@ class TypeValidator(Transformer):
     def ask(self, tree):
         if self.level > 1:
             self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        self.validate_args_type(tree.children[1:], Command.ask)
+        return self.to_typed_tree(tree, HedyType.any)
+
+    def input(self, tree):
         self.validate_args_type(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.any)
 
@@ -811,7 +815,6 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"'{name}'.zfill(100)"
 
 @hedy_transpiler(level=2)
-@hedy_transpiler(level=3)
 class ConvertToPython_2(ConvertToPython_1):
 
     def ask_dep_2(self, args):
@@ -893,19 +896,6 @@ class ConvertToPython_2(ConvertToPython_1):
         value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
-    def assign_list(self, args):
-        parameter = args[0]
-        values = ["'" + get_value(a) + "'" for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
-
-    def list_access(self, args):
-        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
-        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-
-        if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
-        else:
-            return args[0] + '[' + args[1] + '-1]'
 
     def sleep(self, args):
         if args == []:
@@ -931,10 +921,37 @@ def make_f_string(args, lookup):
 
     return f"print(f'{argument_string}')"
 
+@hedy_transpiler(level=3)
+class ConvertToPython_3(ConvertToPython_2):
+    def assign_list(self, args):
+        parameter = args[0]
+        values = ["'" + get_value(a) + "'" for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+    def list_access(self, args):
+        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
+        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+
+        if args[1] == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            return args[0] + '[' + args[1] + '-1]'
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f"{list}.append({var})"
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return textwrap.dedent(f"""\
+        try:
+            {list}.remove({var})
+        except:
+           pass""")
+
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=4)
-class ConvertToPython_4(ConvertToPython_2):
+class ConvertToPython_4(ConvertToPython_3):
 
     def var_access(self, args):
         name = args[0]
@@ -1305,32 +1322,34 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 
+@hedy_transpiler(level=17)
+class ConvertToPython_17(ConvertToPython_16):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-# @hedy_transpiler(level=10)
-# @hedy_transpiler(level=11)
-# class ConvertToPython_10_11(ConvertToPython_9):
-#     def elifs(self, args):
-#         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-#         all_lines = [indent(x) for x in args[1:]]
-#         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
-#
-# @hedy_transpiler(level=12)
-# class ConvertToPython_12(ConvertToPython_10_11):
-#     def input(self, args):
-#         args_new = []
-#         var = args[0]
-#         arguments = args[1:]
-#         self.check_arg_types(arguments, 'input', self.level)
-#         for a in arguments:
-#             if type(a) is Tree:
-#                 args_new.append(f'str({a.children})')
-#             elif "'" not in a:
-#                 args_new.append(f'str({a})')
-#             else:
-#                 args_new.append(a)
-#
-#         return f'{var} = input(' + '+'.join(args_new) + ")"
-#
+@hedy_transpiler(level=18)
+class ConvertToPython_18(ConvertToPython_17):
+    # FH, nov 2021
+    # this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
+
+    def input(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+
+        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
+
+        tryblock = textwrap.dedent(f"""
+        try:
+          {var} = int({var})
+        except ValueError:
+          try:
+            {var} = float({var})
+          except ValueError:
+            pass""")  # no number? leave as string
+        return assign + tryblock
+
 # @hedy_transpiler(level=13)
 # class ConvertToPython_13(ConvertToPython_12):
 #     def print(self, args):
@@ -1531,13 +1550,13 @@ def get_full_grammar_for_level(level):
 
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    try: 
-        if not local_keywords_enabled: 
+    try:
+        if not local_keywords_enabled:
             raise FileNotFoundError("Local keywords are not enabled")
         filename = "keywords-" + str(language) + ".lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             grammar_text = file.read()
-    except FileNotFoundError: 
+    except FileNotFoundError:
         filename = "keywords-en.lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             grammar_text = file.read()
@@ -1756,12 +1775,19 @@ def is_program_valid(program_root, input_string, level, lang):
         if isinstance(invalid_info, list):
             invalid_info = invalid_info[0]
         if invalid_info.error_type == ' ':
-            # the error here is a space at the beginning of a line, we can fix that!
+            #the error here is a space at the beginning of a line, we can fix that!
             fixed_code = program_repair.remove_leading_spaces(input_string)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                result = transpile_inner(fixed_code, level, lang)
-            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code,
-                                                   fixed_result=result)
+            if fixed_code != input_string: #only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, level, lang)
+                    result = fixed_result
+                    raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+                except exceptions.HedyException:
+                    invalid_info.error_type = None
+                    transpile_inner(fixed_code, level)
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
+            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
@@ -1772,6 +1798,17 @@ def is_program_valid(program_root, input_string, level, lang):
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, commands_per_level[level])
+            fixed_code = None
+            result = None
+            if closest:
+                fixed_code = input_string.replace(invalid_command, closest)
+                if fixed_code != input_string:  # only if we have made a successful fix
+                    try:
+                        fixed_result = transpile_inner(fixed_code, level)
+                        result = fixed_result
+                    except exceptions.HedyException:
+                        # The fixed code contains another error. Only report the original error for now.
+                        pass
             if closest == None:  # we couldn't find a suggestion because the command itself was found
                 # making the error super-specific for the turn command for now
                 # is it possible to have a generic and meaningful syntax error message for different commands?
@@ -1782,7 +1819,8 @@ def is_program_valid(program_root, input_string, level, lang):
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
-                                                     guessed_command=closest, line_number=line)
+                                                     guessed_command=closest, line_number=line,
+                                                     fixed_code=fixed_code, fixed_result=result)
 
 
 def is_program_complete(abstract_syntax_tree, level):
@@ -1847,7 +1885,7 @@ def transpile_inner(input_string, level, lang="en"):
 
 
 def execute(input_string, level):
-    python = transpile(input_string, level)    
+    python = transpile(input_string, level)
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
