@@ -809,7 +809,7 @@ export function confetti_cannon(){
 
 export function modalStepOne(level: number){
   createModal(level);
-  let modal_editor = document.getElementById('modal-editor');
+  let modal_editor = $('#modal-editor');
   initializeModalEditor(modal_editor);
 }
 
@@ -846,7 +846,7 @@ function createModal(level:number ){
   function initializeModalEditor($editor: JQuery) {
     if (!$editor.length) return;
     // We expose the editor globally so it's available to other functions for resizing
-    let editor = turnIntoAceEditor($editor.get(0), true);
+    let editor = turnIntoAceEditor($editor.get(0)!, true);
     theModalEditor = editor;
     error.setEditor(editor);
     //small timeout to make sure the call with fixed code is complete.
