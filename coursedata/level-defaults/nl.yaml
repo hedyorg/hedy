@@ -54,10 +54,6 @@
         ```
 
         Print werkt nog zoals in Level 1, en echo heb je niet meer nodig.
-
-        In level 2 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `at random` (je zegt: et ren-dom).
-
-        Je vindt alle codes van level 2 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
     start_code: "print hallo wereld!"
     commands:
     -   name: "is"
@@ -79,13 +75,25 @@
         demo_code: |-
             kleur is ask Wat is je lievelingskleur?
             print Jouw favoriet is dus kleur
+3:
+    intro_text: |
+        In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `at random` (je zegt: et ren-dom).
+
+        ```
+        dieren is hond, kat, kangoeroe
+        print dieren at random
+        ```
+
+        Je vindt alle codes van level 2 weer in de linkerbalk. Ook zijn er weer tabjes met opdrachten.
+    start_code: "print hallo wereld!"
+    commands:
     -   name: "kies_random"
         explanation: "Iets willekeurigs uit een groep woorden kiezen met `at` en `random`."
         example: "Bijvoorbeeld: dieren is hond, kat, kangoeroe."
         demo_code: |-
             dieren is hond, kat, kangoeroe
             print dieren at random
-3:
+4:
     start_code: "print 'hallo wereld'"
     intro_text: |
         In level 3 zijn `ask` en `print` nu anders.
@@ -117,7 +125,7 @@
         demo_code: |-
             kleur is ask 'Wat is je lievelingskleur?'
             print 'Jouw favoriet is dus ' kleur
-4:
+5:
     start_code: |-
         naam is ask 'hoe heet jij?'
         if naam is Hedy print 'leuk' else print 'minder leuk!'
@@ -169,7 +177,7 @@
         demo_code: |-
             antwoord is ask 'Hoe ver moet ik lopen?'
             if antwoord is ver forward 100 else forward 5
-5:
+6:
     start_code: "print '5 keer 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` en `if` werken nog zoals in level 4.
@@ -203,7 +211,7 @@
             hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
             hoek is 360 / hoeken
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: |
         `ask`, `print` en `if` werken nog zoals in level 4 en 5.
@@ -225,7 +233,7 @@
         example: "Bijvoorbeeld: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Hallo allemaal'
@@ -261,11 +269,11 @@
             repeat 4 times
                 turn 90
                 forward 50
-8:
+9:
     start_code: |-
         repeat 3 times
             eten is ask 'Wat wil je bestellen?'
-            if eten is 'pizza'
+            if eten is pizza
                 print 'lekker'
             else
                 print 'pizza is lekkerder'
@@ -278,7 +286,7 @@
         ```
         repeat 3 times
             eten is ask 'Wat wil je bestellen?'
-            if eten is 'pizza'
+            if eten is pizza
                 print 'lekker'
             else
                 print 'pizza is lekkerder'
@@ -303,7 +311,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         dieren is hond, kat, papegaai
         for dier in dieren
@@ -326,7 +334,7 @@
             dieren is hond, kat, papegaai
             for dier in dieren
               print dier
-10:
+11:
     start_code: |-
         for i in range 1 to 10
             print i
@@ -341,7 +349,7 @@
             for i in range 1 to 10
                 print i
             print 'Wie niet weg is is gezien'
-11:
+12:
     start_code: |-
         print 'kommagetallen gaan met een punt!'
         print 2.5 + 2.5
@@ -396,7 +404,38 @@
             print 'Tweeenhalf plus tweeenhalf is...'
             print antwoord
 
-12:
+13:
+    start_code: |-
+        naam is ask 'hoe heet jij?'
+        leeftijd is ask 'hoe oud ben jij?'
+        if naam is 'Hedy' and leeftijd is 2
+            print 'Jij bent de echte Hedy!'
+    intro_text: "We gaan nu `and` en `or` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee ifjes in elkaar te doen maar kan je nu `and` gebruiken. Beide dingen in de `if` moeten waar zijn als je een `and` gebruikt. We kunnen ook `or` gebruiken. Daarbij moet er één van de twee waar zijn."
+    commands:
+    -   name: "And"
+        explanation: "`And` is dus en. Beide dingen links en rechts van de `and` moeten waar zijn."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            antwoord1 is ask 'hoeveel is 3+2?'
+            antwoord2 is ask 'hoeveel is 2+2?'
+            if antwoord1 is 5 and antwoord2 is 4
+                print 'beide antwoorden zijn goed!'
+            else
+                print 'Minimaal 1 antwoord is fout!'
+    -   name: "Or"
+        explanation: "`Or` is dus of. Minimaal 1 van de 2 tussen de `or` moet goed zijn. Allebei goed mag ook."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            antwoord1 is ask 'hoeveel is 3+2?'
+            antwoord2 is ask 'hoeveel is 2+2?'
+            if antwoord1 is 5 or antwoord2 is 4
+                print 'Je hebt minimaal 1 antwoord goed!'
+            else
+                print 'Beide antwoorden zijn fout!'
+
+
+
+14:
     start_code: |-
         leeftijd is ask 'Hoe oud ben jij?'
         if leeftijd < 13
@@ -419,7 +458,8 @@
             leeftijd is ask 'Hoe oud ben jij?'
             if leeftijd > 13
                 print 'Dan ben je ouder dan ik!'
-13:
+
+15:
     start_code: |-
         antwoord is 0
         while antwoord != 25
@@ -445,7 +485,7 @@
                 tel is tel + 1
             print 'We zijn klaar'
 
-14:
+16:
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         print fruit 
@@ -471,59 +511,8 @@
             fruit is ['banaan', 'appel', 'kers']
             randomfruit is fruit[random]
             print randomfruit 
-#15:
-#    start_code: |-
-#        je_bent_er_nog is False
-#        ben_je_er_nog is input('ben je er nog? ja of nee?')
-#        if ben_je_er_nog is ja:
-#            je_bent_er_nog is True
-#        antwoord is input('Wat is 5*5?')
-#        if je_bent_er_nog is True and antwoord is 25:
-#            print('Je hebt ja gezegd en een goed antwoord gegeven!')
-#    intro_text: "We gaan nu `and` en `or` gebruiken! Als je 2 dingen wilt checken hoef je niet meer 2 ifjes in elkaar te doen maar kan je nu `and` gebruiken. Beide dingen in de if moeten waar zijn als je een `and` gebruikt. We kunnen ook `or` gebruiken. Daarbij moet er 1 van de twee waar zijn."
-#    commands:
-#    -   name: "And"
-#        explanation: "`And` is dus en. Beide dingen links en rechts van de `and` moeten waar zijn."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#            antwoord1 is input('hoeveel is 3+2?')
-#            antwoord2 is input('hoeveel is 2+2?')
-#            if antwoord1 is 5 and antwoord2 is 4:
-#                print('beide antwoorden zijn goed!')
-#            else:
-#                print('Minimaal 1 antwoord is fout!')
-#    -   name: "Or"
-#        explanation: "`Or` is dus of. Minimaal 1 van de 2 tussen de `or` moet goed zijn. Allebei goed mag ook."
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#            antwoord1 is input('hoeveel is 3+2?')
-#            antwoord2 is input('hoeveel is 2+2?')
-#            if antwoord1 is 5 or antwoord2 is 4:
-#                print('Je hebt minimaal 1 antwoord goed!')
-#            else:
-#                print('Beide antwoorden zijn fout!')
-#16:
-#    start_code: |-
-#        # Dit is een programma die een aantal sommen gaat vragen
-#        for i in range(1, 10):
-#            # We gaan de tafel van 5 vragen
-#            antwoord is input('Hoeveel is ' i ' keer 5?')
-#            # We kijken of de som gelijk is aan het antwoord
-#            goed_antwoord is i * 5
-#            if antwoord is goed_antwoord:
-#                print(antwoord ' is goed')
-#            else:
-#                print('Dat is fout, het moet zijn: ' i*5)
-#    intro_text: "Als je grotere programma's maakt dan heb je ook een manier nodig om bij te houden wat welk stukje code doet. Hiervoor gebruiken we comments. Een comment ziet er het volgende uit:\n `# dit is een comment`. Alles dat na de # wordt geschreven is dus onzichtbaar voor de code"
-#    commands:
-#    -   name: "Comment"
-#        explanation: "We kunnen overal waar we willen comments plaatsen."
-#        example: "# Dit is een comment"
-#        demo_code: |-
-#            # Dit programma print hallo
-#            # Het is gemaakt in Hedy
-#            # Het doet eigenlijk verder niets!
-#            print('hallo!')
+
+
 #20:
 #    start_code: |-
 #        fruit is ['appel', 'banaan', 'kers']

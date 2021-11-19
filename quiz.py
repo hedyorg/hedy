@@ -34,13 +34,28 @@ def get_correct_answer(question):
     return question['mp_choice_options'][i]
 
 
+def get_hint(question, letter):
+    i = index_from_letter(letter)
+    return question['mp_choice_options'][i].get('feedback')
+
+
 def highest_question(quiz_data):
     """Return the highest possible question for the given level."""
     return len(quiz_data['questions'])
 
 
-def correct_answer_score(question, attempt_count):
-    return (MAX_ATTEMPTS - attempt_count) * 0.5 * question['question_score']
+def correct_answer_score(question):
+    return question['question_score']
+
+
+def max_score(quiz_data):
+    index = 1
+    max_score = 0
+    for question_key, question_value in quiz_data['questions'].items():
+        index = index + 1
+        max_score = max_score + question_value['question_score']
+    return max_score
+
 
 def question_options_for(question):
     """Return a list with a set of answers to the question.

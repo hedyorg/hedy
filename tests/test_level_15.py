@@ -1,9 +1,9 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
-class TestsLevel13(HedyTester):
-  level = 13
+class TestsLevel15(HedyTester):
+  level = 15
 
   def test_while_equals(self):
     code = textwrap.dedent("""\

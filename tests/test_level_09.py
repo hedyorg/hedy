@@ -1,9 +1,9 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
-class TestsLevel8(HedyTester):
-  level = 8
+class TestsLevel9(HedyTester):
+  level = 9
 
   def test_if_with_indent(self):
     # todo should be tested for all levels!
@@ -54,7 +54,7 @@ class TestsLevel8(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
 
   # neesting
 
@@ -115,3 +115,29 @@ class TestsLevel8(HedyTester):
         print(f'lalala')""")
 
     self.assertEqual(expected, result.code)
+
+  def test_empty_line_with_whitespace(self):
+    code = textwrap.dedent("""\
+    repeat 3 times
+      food is ask 'What do you want?'
+      if food is 'pizza'
+        print 'nice!'
+         
+      else
+        print 'pizza is better'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    for i in range(int(3)):
+      food = input('What do you want?')
+      if str(food) == str('pizza'):
+        print(f'nice!')
+      else:
+        print(f'pizza is better')""")
+
+    self.assertEqual(expected, result.code)
+
+
+
+

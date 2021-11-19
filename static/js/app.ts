@@ -232,9 +232,11 @@ export function runit(level: string, lang: string, cb: () => void) {
       }
       if (response.Code && !response.Error && !response.Warning) {
         removeBulb();
-        success.show(ErrorMessages['Transpile_success']);
+        var allsuccessmessages = ErrorMessages['Transpile_success'];
+        var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
+        success.show(allsuccessmessages[randomnum]);
       }
-      runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
+        runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
@@ -359,6 +361,16 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
+  if (auth.profile) {
+    if (window.State.examples_left > 0) {
+      window.State.examples_left = window.State.examples_left - 1;
+    } else {
+      $("#commands-window").hide();
+      $("#toggle-button").hide();
+      modal.alert(auth.texts['examples_used']);
+      return;
+    }
+  }
   var editor = ace.edit("editor");
 
   var MOVE_CURSOR_TO_END = 1;
@@ -572,10 +584,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
+  if ($('#adventures').is(":hidden")) {
+      turtleConfig.height = 600;
+      turtleConfig.worldHeight = 600;
+  } else {
+      turtleConfig.height = 300;
+      turtleConfig.worldHeight = 300;
+  }
   turtleConfig.width = 400;
-  turtleConfig.height = 300;
   turtleConfig.worldWidth = 400;
-  turtleConfig.worldHeight = 300;
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
@@ -632,7 +649,6 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
   }
-
 
   // output functions are configurable.  This one just appends some text
   // to a pre element.
@@ -844,7 +860,7 @@ function createModal(level){
       const levelKey = $editor.data('lskey');
         let tempIndex = 0;
         let resultString = "";
-        
+
         if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
           resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey));
           let tempString = ""
@@ -905,3 +921,25 @@ function createModal(level){
     });
     return editor;
   }
+export function toggle_developers_mode(hide_commands: boolean) {
+  if ($('#developers_toggle').is(":checked")) {
+      $('#commands-window-total').hide();
+      $('#adventures').hide();
+  } else {
+      // If the example programs are hidden by class customization: keep hidden!
+      if (hide_commands) {
+        $('#commands-window-total').show();
+      }
+      $('#adventures').show();
+  }
+
+  if ($('#adventures').is(":hidden")) {
+    $('#editor-area').removeClass('mt-5');
+    $('#code_editor').css('height', 36 + "em");
+    $('#code_output').css('height', 36 + "em");
+  } else {
+    $('#editor-area').addClass('mt-5');
+    $('#code_editor').height('22rem');
+    $('#code_output').height('22rem');
+  }
+}

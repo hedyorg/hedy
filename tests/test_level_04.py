@@ -1,9 +1,9 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
-class TestsLevel3(HedyTester):
-  level = 3
+class TestsLevel4(HedyTester):
+  level = 4
 
   # tests should be ordered as follows:
   # * commands in the order of hedy.py for level 3: ['print', 'ask', 'is', 'turn', 'forward'],
@@ -67,7 +67,7 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-    expected_output = self.run_code(result)
+    expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
   # ask
@@ -96,7 +96,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      max_level=11,
+      max_level=10,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
@@ -123,6 +123,69 @@ class TestsLevel3(HedyTester):
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
+
+  def test_ask_with_list_var(self):
+    code = textwrap.dedent("""\
+    colors is orange, blue, green
+    favorite is ask 'Is your fav color' colors at random""")
+
+    expected = textwrap.dedent("""\
+    colors = ['orange', 'blue', 'green']
+    favorite = input('Is your fav color'+random.choice(colors))""")
+
+    self.multi_level_tester(
+        max_level=10,
+        code=code,
+        expected=expected,
+        extra_check_function=self.is_not_turtle(),
+        test_name=self.name()
+    )
+
+  def test_ask_with_list_gives_type_error(self):
+    code = textwrap.dedent("""\
+    colors is orange, blue, green
+    favorite is ask 'Is your fav color' colors""")
+
+    self.multi_level_tester(
+        max_level=10,
+        code=code,
+        exception=hedy.exceptions.InvalidArgumentTypeException,
+        test_name=self.name()
+    )
+
+  def test_ask_with_string_var(self):
+    code = textwrap.dedent("""\
+    color is orange
+    favorite is ask 'Is your fav color' color""")
+
+    expected = textwrap.dedent("""\
+    color = 'orange'
+    favorite = input('Is your fav color'+color)""")
+
+    self.multi_level_tester(
+        max_level=10,
+        code=code,
+        expected=expected,
+        extra_check_function=self.is_not_turtle(),
+        test_name=self.name()
+    )
+
+  def test_ask_with_integer_var(self):
+    code = textwrap.dedent("""\
+    number is 10
+    favorite is ask 'Is your fav number' number""")
+
+    expected = textwrap.dedent("""\
+    number = '10'
+    favorite = input('Is your fav number'+number)""")
+
+    self.multi_level_tester(
+        max_level=10,
+        code=code,
+        expected=expected,
+        extra_check_function=self.is_not_turtle(),
+        test_name=self.name()
+    )
 
   # is - assign tests
   def test_assign_underscore(self):
@@ -205,22 +268,7 @@ class TestsLevel3(HedyTester):
     print(f'{v65396ee4aad0b4f17aacd1c6112ee364}')""")
 
     self.assertEqual(expected, result.code)
-  def test_print_list_(self):
 
-    code = textwrap.dedent("""\
-    dieren is Hond, Kat, Kangoeroe
-    print dieren at 1""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    dieren = ['Hond', 'Kat', 'Kangoeroe']
-    print(f'{dieren[1]}')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-
-    self.assertEqual(self.run_code(result), "Kat")
   def test_print_list_var_random(self):
 
     code = textwrap.dedent("""\
@@ -235,7 +283,7 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
-    self.assertIn(self.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
+    self.assertIn(HedyTester.run_code(result), ['hallo Hond', 'hallo Kat', 'hallo Kangoeroe'])
   def test_ask_print(self):
 
     code = textwrap.dedent("""
@@ -268,14 +316,14 @@ class TestsLevel3(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
   def test_ask_assign_list(self):
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
     color is gree, blue
     choice is ask 'Is your favorite color one of: ' color""")
 
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
-      max_level=11,
+      max_level=10,
       test_name=self.name()
     )
 
@@ -361,6 +409,23 @@ class TestsLevel3(HedyTester):
     self.assertEqual(False, hedy.hash_needed('heyyy'))
 
 
+  def test_chained_assignments(self):
+    code = textwrap.dedent("""\
+    a is dog
+    b is a
+    print a b""")
+
+    expected = textwrap.dedent("""\
+    a = 'dog'
+    b = 'a'
+    print(f'{a}{b}')""")  # TODO: @Felienne, in level 2, there is a space between {a} {b}, not {a}{b}. Is this expected?
+    self.multi_level_tester(
+      max_level=4,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
 
 

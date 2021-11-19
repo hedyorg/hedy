@@ -3,7 +3,10 @@ import { auth } from './auth';
 
 export function create_class() {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
-
+    if (!class_name) {
+      modal.alert(auth.texts['class_name_empty']);
+      return;
+    }
     $.ajax({
       type: 'POST',
       url: '/class',
@@ -15,6 +18,10 @@ export function create_class() {
     }).done(function(_response) {
       location.reload ();
     }).fail(function(err) {
+      if (err.responseText == "duplicate") {
+        modal.alert(auth.texts['class_name_duplicate']);
+        return;
+      }
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
@@ -23,7 +30,10 @@ export function create_class() {
 
 export function rename_class(id: string) {
   modal.prompt (auth.texts['class_name_prompt'], '', function (class_name) {
-
+    if (!class_name) {
+      modal.alert(auth.texts['class_name_empty']);
+      return;
+    }
     $.ajax({
       type: 'PUT',
       url: '/class/' + id,
@@ -35,6 +45,10 @@ export function rename_class(id: string) {
     }).done(function(_response) {
       location.reload ();
     }).fail(function(err) {
+      if (err.responseText == "duplicate") {
+        modal.alert(auth.texts['class_name_duplicate']);
+        return;
+      }
       console.error(err);
       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
     });
@@ -96,4 +110,54 @@ export function remove_student(class_id: string, student_id: string) {
     });
   });
 }
+
+export function save_level_settings(id: string, level: number) {
+     let selected_adventures: (string | null)[] = [];
+     $('#adventures_overview li').each(function() {
+         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
+             selected_adventures.push(this.getAttribute('id'));
+         }
+     });
+
+     let progress = $('#progress'+ level).val();
+     let toggle_example_programs = false;
+     let toggle_level = false;
+     if ($('#hide_level' + level).prop('checked')) {
+       toggle_level = true;
+     }
+     if ($('#example_programs' + level).prop('checked')) {
+       toggle_example_programs = true;
+     }
+
+
+     $.ajax({
+       type: 'PUT',
+       url: '/customize-class/' + id,
+       data: JSON.stringify({
+         adventures: selected_adventures,
+         next_level: progress,
+         example_programs: toggle_example_programs,
+         hide_level: toggle_level,
+         level: level
+       }),
+       contentType: 'application/json',
+       dataType: 'json'
+     }).done(function(_response) {
+       location.reload ();
+     }).fail(function(err) {
+       console.error(err);
+       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+     });
+ }
+
+ export  function reset_level_preferences(level: number) {
+     $('#adventures_overview li').each(function() {
+         if ($(this).is(':visible')) {
+             $(this).find(':input').prop("checked", true);
+         }
+     });
+     $('#progress'+ level).val(5);
+     $('#example_programs' + level).prop("checked", true);
+     $('#hide_level' + level).prop("checked", false);
+ }
 

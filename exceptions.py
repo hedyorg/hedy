@@ -82,11 +82,11 @@ class InvalidArgumentTypeException(HedyException):
             invalid_argument=invalid_argument)
 
 class WrongLevelException(HedyException):
-    def __init__(self, original_level, working_level, correct_code):
+    def __init__(self, working_level, offending_keyword, tip):
         super().__init__('Wrong Level',
-            original_level=original_level,
             working_level=working_level,
-            correct_code=correct_code)
+            offending_keyword=offending_keyword,
+            tip=tip)
 
 class InputTooBigException(HedyException):
     def __init__(self, lines_of_code, max_lines):
@@ -136,6 +136,13 @@ class LonelyEchoException(HedyException):
 class CodePlaceholdersPresentException(HedyException):
     def __init__(self):
         super().__init__('Has Blanks')
+
+class NoIndentationException(HedyException):
+    def __init__(self, line_number, leading_spaces, indent_size):
+        super().__init__('No Indentation',
+            line_number=line_number,
+            leading_spaces=leading_spaces,
+            indent_size=indent_size)
 
 class IndentationException(HedyException):
     def __init__(self, line_number, leading_spaces, indent_size):

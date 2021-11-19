@@ -74,10 +74,6 @@ export const success = {
     $('#okbox').hide();
     editor?.resize();
 
-    const confettiButton = document.getElementById('confetti-button');
-    if (confettiButton) {
-      confettiButton.classList.remove('hidden');
-    }
   },
 
   showWarning(caption: string, message: string) {
@@ -91,6 +87,8 @@ export const success = {
     $('#okbox .caption').text(caption);
     $('#okbox').show();
     editor?.resize();
+    setTimeout(function(){     $('#okbox').hide();
+    editor?.resize(); }, 3000);
   }
 }
 

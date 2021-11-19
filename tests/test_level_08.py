@@ -1,9 +1,9 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
+from test_level_01 import HedyTester
 
-class TestsLevel7(HedyTester):
-  level = 7
+class TestsLevel8(HedyTester):
+  level = 8
 
   def test_if_with_indent(self):
     # todo should be tested for all levels!
@@ -54,7 +54,7 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
     állatok is 5
@@ -77,7 +77,7 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
@@ -120,7 +120,7 @@ class TestsLevel7(HedyTester):
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, self.run_code(result))
+    self.assertEqual(expected_output, HedyTester.run_code(result))
   def test_allow_space_after_else_line(self):
     #todo should work up to 11??
     code = textwrap.dedent("""\
@@ -168,9 +168,9 @@ class TestsLevel7(HedyTester):
     print 'kassabon'
     prijs is 0
     repeat 7 times
-      ingredient is ask 'wat wil je kopen?'
-      if ingredient is appel
-          prijs is prijs + 1
+        ingredient is ask 'wat wil je kopen?'
+        if ingredient is appel
+            prijs is prijs + 1
     print 'Dat is in totaal ' prijs ' euro.'""")
 
     with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
@@ -184,6 +184,24 @@ class TestsLevel7(HedyTester):
 
     with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
       result = hedy.transpile(code, self.level)
+
+
+  def test_quote_in_if(self):
+    code = textwrap.dedent("""\
+    if eten is 'pizza'
+      print 'lekker'""")
+
+    result = hedy.transpile(code, self.level)
+
+    expected = textwrap.dedent("""\
+    if str('eten') == str('pizza'):
+      print(f'lekker')""")
+
+    self.multi_level_tester(
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
 
 
 # (so this should fail, for now)

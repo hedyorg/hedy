@@ -10,7 +10,17 @@ class LevelDefaults:
 
   def max_level(self):
     all_levels = self.levels.keys()
-    return max(all_levels)
+    max_consecutive_level = 1
+    previous_level = 0
+    for level in all_levels:
+      if level == previous_level + 1:
+        previous_level = level
+        max_consecutive_level = level
+      else:
+        return previous_level
+
+
+    return max_consecutive_level
 
   def get_defaults_for_level(self, level):
     #grabs level defaults from yaml and converts to DefaultValues type
@@ -36,6 +46,14 @@ class Adventures:
   def __init__(self, language):
     self.language = language
     self.adventures_file = YamlFile.for_file(f'coursedata/adventures/{self.language}.yaml')
+
+    # When customizing classes we only want to retrieve the name, (id) and level of each adventure
+  def get_adventure_keyname_name_levels(self):
+    adventures = self.adventures_file['adventures']
+    adventures_dict = {}
+    for adventure in adventures.items():
+      adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
+    return adventures_dict
 
   def has_adventures(self):
     return self.adventures_file.exists() and self.adventures_file.get('adventures')

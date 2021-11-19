@@ -1,9 +1,9 @@
 import hedy
 import textwrap
-from tests_level_01 import HedyTester
-
-class TestsLevel9(HedyTester):
-  level = 9
+from test_level_01 import HedyTester
+from hedy import local_keywords_enabled
+class TestsLevel10(HedyTester):
+  level = 10
   
   def test_for_list(self):
     code = textwrap.dedent("""\
@@ -39,4 +39,18 @@ class TestsLevel9(HedyTester):
       print(f'{shark} shark')""")
 
     self.assertEqual(expected, result.code)
+  if local_keywords_enabled: 
+    def test_for_list_dutch(self):
+      code = textwrap.dedent("""\
+      dieren is hond, kat, papegaai
+      voor dier in dieren
+        drukaf dier""")
 
+      result = hedy.transpile(code, self.level, lang="nl")
+
+      expected = textwrap.dedent("""\
+      dieren = ['hond', 'kat', 'papegaai']
+      for dier in dieren:
+        print(f'{dier}')""")
+
+      self.assertEqual(expected, result.code)
