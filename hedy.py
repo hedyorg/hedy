@@ -35,6 +35,8 @@ class Command:
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    in_list = 'in'
+    equality = 'is'
     for_loop = 'for'
     sum = 'sum'
     addition = 'addition'
@@ -49,6 +51,20 @@ class HedyType:
     list = 'list'
     float = 'float'
     boolean = 'boolean'
+
+
+# Type promotion rules are used to implicitly convert one type to another, e.g. integer should be auto converted
+# to float in 1 + 1.5. Additionally, before level 12, we want to convert numbers to strings, e.g. in equality checks.
+int_to_float = (HedyType.integer, HedyType.float)
+int_to_string = (HedyType.integer, HedyType.string)
+float_to_string = (HedyType.float, HedyType.string)
+
+
+def promote_types(types, rules):
+    for (from_type, to_type) in rules:
+        if to_type in types:
+            types = [to_type if t == from_type else t for t in types]
+    return types
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
@@ -92,12 +108,14 @@ commands_and_types_per_level = {
     Command.turn: {1: ['right', 'left', HedyType.integer]},  # turn command accepts the literals `right` and `left`
     Command.forward: {1: [HedyType.integer]},
     Command.list_access: {1: [HedyType.list]},
+    Command.in_list: {1: [HedyType.list]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.float, HedyType.boolean]},
     Command.sum: {
         6: [HedyType.integer],
         12: [HedyType.integer, HedyType.float],
     },
     Command.addition: {
-        6: [HedyType.integer, HedyType.string],
+        6: [HedyType.integer],
         12: [HedyType.string, HedyType.integer, HedyType.float]
     },
     Command.for_loop: {11: [HedyType.integer]}
@@ -375,6 +393,29 @@ class TypeValidator(Transformer):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree, HedyType.none)
 
+    def condition(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def in_list_check(self, tree):
+        self.validate_args_type(tree.children[1:2], Command.in_list)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def equality_check(self, tree):
+        command = Command.equality
+        allowed_types = get_allowed_types(command, self.level)
+
+        left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
+        right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
+
+        if not self.ignore_type(left_type) and not self.ignore_type(right_type):
+            # Until level 12, numbers should be converted to strings in equality checks
+            rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
+            prom_left_type, prom_right_type = promote_types([left_type, right_type], rules)
+            if prom_left_type != prom_right_type:
+                raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type,
+                                                              invalid_argument='', allowed_types=allowed_types)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
     def repeat_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree, HedyType.none)
@@ -448,14 +489,14 @@ class TypeValidator(Transformer):
         if self.ignore_type(left_type) or self.ignore_type(right_type):
             return HedyType.any
 
-        if (left_type == HedyType.string or right_type == HedyType.string) and left_type != right_type:
+        rules = [int_to_float]
+        prom_left_type, prom_right_type = promote_types([left_type, right_type], rules)
+
+        if prom_left_type != prom_right_type:
             # TODO: probably this requires a separate exception
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type, invalid_argument='',
                                                           allowed_types=allowed_types)
-        if left_type == HedyType.float or right_type == HedyType.float:
-            return HedyType.float
-
-        return left_type
+        return prom_left_type
 
     def check_type_allowed(self, command, allowed_types, tree):
         arg_type = self.get_type(tree)

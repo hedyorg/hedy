@@ -331,7 +331,27 @@ class TestsLevel5(HedyTester):
     self.assertEqual('found!', HedyTester.run_code(result))
   # todo would be good to make combinations with if and turtle
 
+  def test_if_in_list_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is red
+    if red in items print 'found!'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.RequiredArgumentTypeException,
+      test_name=self.name()
+    )
 
+  def test_equality_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+    color is 5, 6, 7
+    if red is color print 'success!'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   #negative tests
   def test_indent_gives_parse_error(self):

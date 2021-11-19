@@ -159,6 +159,29 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
+  def test_if_in_list_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is 'red'
+    if 'red' in items
+        print 'found!'""")
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.RequiredArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+    color is 5, 6, 7
+    if 1 is color
+        print 'success!'""")
+    self.multi_level_tester(
+      max_level=15,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
   # new calculations
   def test_int_addition_directly(self):
     code = textwrap.dedent("""\
