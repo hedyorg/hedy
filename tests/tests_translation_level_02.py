@@ -82,3 +82,21 @@ class TestsTranslationLevel2(HedyTester):
         expected = "value is 50\nvooruit value"
 
         self.assertEqual(result, expected)
+
+    def test_invalid(self):
+        result = hedy.translate_keywords("hallo", "en", "nl", self.level)
+        expected = "hallo"
+
+        self.assertEqual(result, expected)
+
+    def test_invalid_space(self):
+        result = hedy.translate_keywords(" print Hedy", "en", "nl", self.level)
+        expected = " print Hedy"
+
+        self.assertEqual(result, expected)
+
+    def no_argument_ask(self):
+        result = hedy.translate_keywords("ask", "en", "nl", self.level)
+        expected = "vraag"
+
+        self.assertEqual(result, expected)

@@ -1841,7 +1841,7 @@ def execute(input_string, level):
     exec(python.code)
 
 
-def keywordsToDict(to_lang="nl"):
+def keywords_to_dict(to_lang="nl"):
     keywords = {}
     keywords_from = get_keywords_for_language("en").replace("\n\n", "\n").splitlines()
 
@@ -1859,7 +1859,7 @@ def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
 
     punctuation_symbols = ['!', '?', '.']
 
-    keywordDict = keywordsToDict(to_lang)
+    keywordDict = keywords_to_dict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
     abstract_syntaxtree = ExtractAST().transform(program_root)
     translator = TRANSPILER_LOOKUP[level]
@@ -1893,6 +1893,9 @@ class ConvertToLang1(Transformer):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
+    def invalid_space(self, args):
+        return " " + ''.join([str(c) for c in args])
+
     def print(self, args):
         return self.keywords["print"] + " " + "".join([str(c) for c in args])
 
@@ -1913,6 +1916,9 @@ class ConvertToLang1(Transformer):
 
     def random(self, args):
         return self.keywords["random"] + "".join([str(c) for c in args])
+
+    def invalid(self, args):
+        return ' '.join([str(c) for c in args])
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
@@ -1959,14 +1965,81 @@ class ConvertToLang2(ConvertToLang1):
 
         return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(all_parameters[1:])
 
+    def ask_dep_2(self, args):
+        return self.keywords["ask"] + ''.join([str(c) for c in args])
+
     def assign_list(self, args):
         return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
 
     def list_access(self, args):
         return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
 
+@hedy_transpiler(level=3)
+class ConvertToLang3(ConvertToLang2):
 
-translate_keywords("mens is papa mama oma\nprint mens at random", "en", "nl", 2)
+    def check_print_arguments(self, args):
+        # this function checks whether arguments of a print are valid
+        # we can print if all arguments are either quoted OR they are all variables
+
+        quoted_args=[a for a in args if is_quoted(a)]
+        unquoted_args = [a for a in args if not is_quoted(a)]
+        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
+
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            # all good? return for further processing
+            return args
+        else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
+            first_unquoted_var = unquoted_args[0]
+            raise exceptions.UndefinedVarException(name=first_unquoted_var)
+
+    def print(self, args):
+        i=0
+   #    self.check_args_type_allowed(args, 'print', self.level)
+        argument_string = ""
+        for argument in args:
+            if i==len(args) or args[i] in self.punctuation_symbols:
+                space=''
+            else:
+                space=" "
+            argument_string += space + argument
+            i+=1
+        return self.keywords["print"] + argument_string
+
+    def print_nq(self, args):
+        return ConvertToLang2.print(self, args)
+
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+
+    def var_access(self, args):
+        return ''.join([str(c) for c in args])
+
+@hedy_transpiler(level=4)
+class ConvertToLang4(ConvertToLang3):
+
+    def ifs(self, args):
+        return self.keywords["if"] + " " + ''.join([str(c) for c in args])
+
+    def  ifelse(self, args):
+        return self.keywords["else"] + " " + ''.join([str(c) for c in args])
+
+    def condition(self, args):
+        return ' and '.join(args)
+
+    def equality_check(self, args):
+        return args[0] + " " +  self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "
+
+    def in_list_check(self, args):
+        return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
+
+
+hedy.translate_keywords("naam is papa, mama, oma\nif papa in naam print 'ho'", "en", "nl", level=4)
 # f = open('output.py', 'w+')
 # f.write(python)
 # f.close()
+
