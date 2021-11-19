@@ -289,20 +289,26 @@ class TestAuth(unittest.TestCase):
         self.assertEqual(response['code'], 403)
 
     def test_ChangePassword(self):
+        # GIVEN a logged in user
         user = AuthHelper.getAnyLoggedUser()
         response = request('post', 'auth/change_password', {'cookie': user['cookie']}, {'old_password': user['password'], 'new_password': user['password'] + 'foo'})
         self.assertEqual(response['code'], 200)
 
-        # Attempt login with old password
+        # WHEN attempting to login with old password
         response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']})
+
+        # THEN
         self.assertEqual(response['code'], 403)
 
-        # Attempt login with new password
-        response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password'] + 'foo'})
+        # GIVEN the same user
+
+        # WHEN attempting to login with new password
+        new_password = 'pas1234'
+        response = request('post', 'auth/login', {}, {'username': user['username'], 'password': new_password})
         self.assertEqual(response['code'], 200)
 
-        # Update password on user
-        USERS[user['username']]['password'] = user['password'] + 'foo'
+        # THEN update password on user
+        USERS[user['username']]['password'] = new_password
 
     # TODO MISSING TESTS
     #def test_Profile(self):
