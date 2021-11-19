@@ -126,3 +126,4 @@ class TestsLevel16(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException,
             test_name=self.name()
         )
+

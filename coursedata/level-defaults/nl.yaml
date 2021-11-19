@@ -489,7 +489,21 @@
     start_code: |-
         fruit is ['appel', 'banaan', 'kers']
         print fruit 
-    intro_text: "Nu gaan we vierkante haakjes zetten om lijstjes! We moeten nu ook enkele aanhalingstekens (') om items in lijstjes zetten!"
+    intro_text: |-
+        We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Pythoncodes.
+        In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: [ en ].
+        Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
+        We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
+
+        #Voorbeeld Hedy code
+        ```
+        vrienden is ['Ahmed', 'Ben', 'Cayden']
+        geluksgetallen is [15, 18, 6]
+        for i in range 1 to 3
+           print 'het geluksgetal van ' vrienden[i]
+           print 'is ' geluksgetallen[i]
+        ```
+
     commands:
     -   name: "Haakjes om lijstjes"
         explanation: "We gaan nu haakjes om lijstjes heen zetten! Let ook op de enkele aanhalingstekens om items in het lijstje!"

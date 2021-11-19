@@ -27,17 +27,6 @@ class TestsLevel12(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
-  def test_print_var_brackets(self):
-    code = "naam is Hedy\nprint('ik heet' naam)"
-    expected = "naam = 'Hedy'\nprint(f'ik heet{naam}')"
-
-    self.multi_level_tester(
-      max_level=18,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
-    )
 
   def test_unsupported_float_with_dot(self):
     self.multi_level_tester(
