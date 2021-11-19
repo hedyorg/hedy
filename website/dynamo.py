@@ -202,8 +202,9 @@ DDB_DESERIALIZER = TypeDeserializer()
 class AwsDynamoStorage(TableStorage):
     @staticmethod
     def from_env():
-        if is_dynamo_available():
-            db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'], aws_access_key_id = os.getenv ('AWS_DYNAMODB_ACCESS_KEY'), aws_secret_access_key = os.getenv ('AWS_DYNAMODB_SECRET_KEY'))
+        # If we have AWS credentials, use the real DynamoDB
+        if os.getenv('AWS_ACCESS_KEY_ID'):
+            db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'])
             db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX', '')
             return AwsDynamoStorage(db, db_prefix)
         return None
@@ -435,10 +436,6 @@ class MemoryStorage(TableStorage):
                     json.dump(self.tables, f, indent=2, cls=CustomEncoder)
             except IOError:
                 pass
-
-def is_dynamo_available():
-    return bool(os.getenv ('AWS_DYNAMODB_ACCESS_KEY'))
-
 
 def first_or_none(xs):
     return xs[0] if xs else None
