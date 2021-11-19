@@ -26,8 +26,11 @@ def main():
                 try:
                     level = int(args[2])
                     if level > 8:
-                        print("Level has been set to 8, because the value specified was to high")
+                        print("Level has been set to 8, because the value specified was too high")
                         level = 8
+                    elif level <= 0:
+                        print("Level has been set to 1, because the value specified was too low")
+                        level = 1
                 except ValueError:
                     print("Level argument is not an integer, skipping argument.")
 
@@ -41,8 +44,14 @@ def main():
             if len(parts) >= 2:
                 level = int(parts[1])
                 if level > 8:
-                    print("Level has been set to 8, because the value specified was to high")
+                    print("Level has been set to 8, because the value specified was too high")
                     level = 8
+                elif level <= 0:
+                    print("Level has been set to 1, because the value specified was too low")
+                    level = 1
+
+    if level == 0:
+        level = 1 # Set level to 1 if not provided through other means
 
     program = '\n'.join([line
         for line in lines
