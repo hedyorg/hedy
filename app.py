@@ -379,7 +379,11 @@ def parse():
 
             try:
                 transpile_result = hedy.transpile(code, level)
-            except hedy.exceptions.FtfyException as ex:
+            except hedy.exceptions.InvalidSpaceException as ex:
+                response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
+                transpile_result = ex.fixed_result
+            except hedy.exceptions.InvalidCommandException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result

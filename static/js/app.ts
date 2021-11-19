@@ -216,22 +216,20 @@ export function runit(level: string, lang: string, cb: () => void) {
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
+        showBulb(level, lang);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           // Location can be either [row, col] or just [row].
-          // @ts-ignore
-          const repair_button = document.getElementById("repair_button");
-          repair_button.style.visibility = "visible";
-          repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(level, lang)};
-          fix_code(level, lang);
+
+          showBulb(level, lang);
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
       }
-      if (response.Code){
+      if (response.Code && !response.Error && !response.Warning) {
         removeBulb();
         console.log("success!");
         success.show(ErrorMessages['Transpile_success']);
@@ -255,6 +253,13 @@ export function runit(level: string, lang: string, cb: () => void) {
     console.error(e);
     error.show(ErrorMessages['Other_error'], e.message);
   }
+}
+
+function showBulb(level, lang) {
+  const repair_button = document.getElementById("repair_button");
+  repair_button.style.visibility = "visible";
+  repair_button.onclick = function (e) { e.preventDefault(); modalStepOne(level, lang)};
+  fix_code(level, lang);
 }
 
 function removeBulb(){
