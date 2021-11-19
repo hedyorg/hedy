@@ -121,6 +121,7 @@ class TestsLevel17(HedyTester):
       print(f'nee')""")
 
     self.multi_level_tester(
+      max_level=17,
       code=code,
       expected=expected,
       test_name=self.name()
@@ -144,6 +145,7 @@ class TestsLevel17(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       test_name=self.name()
     )
@@ -225,7 +227,7 @@ class TestsLevel17(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  # not working yet
+  # not working yet, does work for conditions with 'is'?
   # def tests_smaller(self):
   #   code = textwrap.dedent("""\
   #     leeftijd is ask 'Hoe oud ben jij?'
