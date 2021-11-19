@@ -199,7 +199,7 @@ export function runit(level: string, lang: string, cb: () => void) {
     var code = get_trimmed_code();
 
     clearErrors(editor);
-
+    removeBulb();
     console.log('Original program:\n', code);
     $.ajax({
       type: 'POST',
@@ -216,6 +216,7 @@ export function runit(level: string, lang: string, cb: () => void) {
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
+        fix_code(level, lang);
         showBulb(level, lang);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
@@ -223,15 +224,14 @@ export function runit(level: string, lang: string, cb: () => void) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           // Location can be either [row, col] or just [row].
-
-          showBulb(level, lang);
+          // @ts-ignore
+          fix_code(level, lang);
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
       }
       if (response.Code && !response.Error && !response.Warning) {
         removeBulb();
-        console.log("success!");
         success.show(ErrorMessages['Transpile_success']);
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
@@ -254,12 +254,14 @@ export function runit(level: string, lang: string, cb: () => void) {
     error.show(ErrorMessages['Other_error'], e.message);
   }
 }
+function showBulb(level, lang){
+  level = parseInt(level);
+  if(level <= 2){
+    const repair_button = document.getElementById("repair_button");
+    repair_button.style.visibility = "visible";
+    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(level, lang)};
+  }
 
-function showBulb(level, lang) {
-  const repair_button = document.getElementById("repair_button");
-  repair_button.style.visibility = "visible";
-  repair_button.onclick = function (e) { e.preventDefault(); modalStepOne(level, lang)};
-  fix_code(level, lang);
 }
 
 function removeBulb(){
@@ -268,7 +270,7 @@ function removeBulb(){
 }
 
 export function fix_code(level: string, lang: string){
- 
+
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
 
   if (reloadOnExpiredSession ()) return;
@@ -276,8 +278,6 @@ export function fix_code(level: string, lang: string){
   try {
     level = level.toString();
     var code = get_trimmed_code();
-
-    console.log('Fixed\n', code);
     $.ajax({
       type: 'POST',
       url: '/fix-code',
@@ -291,13 +291,9 @@ export function fix_code(level: string, lang: string){
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response: any) {
-      console.log('Fixed Code call', response);
-      if (response.Warning) {
-
-        sessionStorage.setItem ("warning_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-      }
       if (response.FixedCode){
         sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+        showBulb(level,lang);
       }
     }).fail(function(xhr) {
       console.error(xhr);

@@ -313,12 +313,10 @@ def fix_code():
                 response = "OK"
             except hedy.exceptions.FtfyException as ex:
                 # The code was fixed with a warning
-                # response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['FixedCode'] = ex.fixed_code
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
-                print("transpile_result", transpile_result)
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -387,12 +385,18 @@ def parse():
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
-
-        if transpile_result.has_turtle:
-            response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
-            response['has_turtle'] = True
-        else:
-            response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
+            except hedy.exceptions.FtfyException as ex:
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
+                transpile_result = ex.fixed_result
+        try:
+            if transpile_result.has_turtle:
+                response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
+                response['has_turtle'] = True
+            else:
+                response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
+        except:
+            pass
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()

@@ -1613,7 +1613,10 @@ def transpile_inner(input_string, level):
                 try:
                     fixed_result = transpile_inner(fixed_code, level)
                     result = fixed_result
+                    raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
                 except exceptions.HedyException:
+                    invalid_info.error_type = None
+                    transpile_inner(fixed_code, level)
                     # The fixed code contains another error. Only report the original error for now.
                     pass
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
