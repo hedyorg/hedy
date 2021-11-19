@@ -217,7 +217,7 @@ export function runit(level: string, lang: string, cb: () => void) {
       console.log('Response', response);
       if (response.Warning) {
         fix_code(level, lang);
-        showBulb(level, lang);
+        showBulb(level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.Error) {
@@ -295,7 +295,7 @@ export function fix_code(level: string, lang: string){
     }).done(function(response: any) {
       if (response.FixedCode){
         sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-        showBulb(level,lang);
+        showBulb(level);
       }
     }).fail(function(xhr) {
       console.error(xhr);
