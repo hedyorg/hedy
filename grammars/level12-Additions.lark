@@ -6,7 +6,7 @@ assign_list: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) ((_COMMA _SPACE|_COMM
 ?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
 
 //conditions with strings now also use quotes:
-condition: (equality_check|in_list_check) (_SPACE _AND _SPACE condition)*
+condition: (equality_check|in_list_check)
 
 equality_check: (var | text_in_quotes | NUMBER) _SPACE _IS _SPACE (var | text_in_quotes | NUMBER)
 in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
