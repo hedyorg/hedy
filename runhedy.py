@@ -50,6 +50,9 @@ def main():
                     print("Level has been set to 1, because the value specified was too low")
                     level = 1
 
+    if level == 0:
+        level = 1 # Set level to 1 if not provided through other means
+
     program = '\n'.join([line
         for line in lines
         if not line.startswith('#')])
