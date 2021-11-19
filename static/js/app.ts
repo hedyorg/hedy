@@ -256,18 +256,18 @@ export function runit(level: string, lang: string, cb: () => void) {
     error.show(ErrorMessages['Other_error'], e.message);
   }
 }
-function showBulb(level, lang){
-  level = parseInt(level);
-  if(level <= 2){
-    const repair_button = document.getElementById("repair_button");
+function showBulb(level: string){
+  let parsedlevel = parseInt(level);
+  if(parsedlevel <= 2){
+    const repair_button = document.getElementById("repair_button")!;
     repair_button.style.visibility = "visible";
-    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(level, lang)};
+    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
   }
 
 }
 
 function removeBulb(){
-    const repair_button = document.getElementById("repair_button");
+    const repair_button = document.getElementById("repair_button")!;
     repair_button.style.visibility = "hidden";
 }
 
