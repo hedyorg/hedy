@@ -240,6 +240,11 @@ class TestAuth (unittest.TestCase):
         # Remove token from user since it's already been used.
         USERS [user ['username']].pop ('verify_token')
 
+        # Retrieve profile to see that the user is no longer marked with `verification_pending`
+        AuthHelper.assertUserIsLogged (username)
+        profile = request ('get', 'profile', {'cookie': user ['cookie']}, '') ['body']
+        self.assertNotIn ('verification_pending', profile)
+
     def test_Logout (self):
         user = AuthHelper.getAnyLoggedUser ()
 
@@ -304,11 +309,136 @@ class TestAuth (unittest.TestCase):
         # Update password on user
         USERS [user ['username']] ['password'] = user ['password'] + 'foo'
 
-    # TODO MISSING TESTS
-    #def test_Profile (self):
-    #def test_RecoverPassword (self):
+    def test_ProfileGet (self):
+        # We create a new user to ensure that the user has a new profile
+        user = AuthHelper.assertUserIsLogged (AuthHelper.makeUsername ())
 
-# *** TESTS ***
+        response = request ('get', 'profile', {'cookie': user ['cookie']}, '')
+        self.assertEqual (response ['code'], 200)
+
+        profile = response ['body']
+        self.assertIsInstance (profile, dict)
+        self.assertEqual (profile ['username'], user ['username']),
+        self.assertEqual (profile ['email'],    user ['email']),
+        self.assertEqual (profile ['verification_pending'], True)
+        self.assertIsInstance (profile ['student_classes'], list)
+        self.assertEqual (len (profile ['student_classes']), 0)
+        self.assertIsInstance (profile ['session_expires_at'], int)
+
+    def test_InvalidProfileModify (self):
+        user = AuthHelper.getAnyLoggedUser ()
+
+        # Send malformed payloads
+        invalid_payloads = [
+            '',
+            [],
+            {'email': 'foobar'},
+            {'birth_year': 'a'},
+            {'birth_year': 20},
+            {'country': 'Netherlands'},
+            {'gender': 0},
+            {'gender': 'a'},
+            {'prog_experience': 1},
+            {'prog_experience': 'foo'},
+            {'prog_experience': True},
+            {'experience_languages': 'python'},
+            {'experience_languages': ['python', 'foo']}
+        ]
+
+        for invalid_payload in invalid_payloads:
+            response = request ('post', 'profile', {'cookie': user ['cookie']}, invalid_payload)
+            self.assertEqual (response ['code'], 400)
+
+    def test_ProfileModify (self):
+        # We create a new user to ensure that the user has a new profile
+        user = AuthHelper.assertUserIsLogged (AuthHelper.makeUsername ())
+
+        profile_changes = {
+           'birth_year': 1989,
+           'country': 'NL',
+           'gender': 'o',
+           'prog_experience': 'yes',
+           'experience_languages': ['python', 'other_block']
+        }
+
+        for key in profile_changes:
+            body = {}
+            body [key] = profile_changes [key]
+            response = request ('post', 'profile', {'cookie': user ['cookie']}, body)
+            self.assertEqual (response ['code'], 200)
+
+            profile = request ('get', 'profile', {'cookie': user ['cookie']}, '') ['body']
+            self.assertEqual (profile [key], profile_changes [key])
+
+        # We check email change separately since it involves a flow with a token
+        response = request ('post', 'profile', {'cookie': user ['cookie']}, {'email': user ['username'] + '@newhedy.com'})
+        self.assertIsInstance (response ['body'] ['token'], str)
+
+        # Update email & token on user
+        USERS [user ['username']] ['email'] = user ['username'] + '@newhedy.com'
+        USERS [user ['username']] ['verify_token'] = response ['body'] ['token']
+
+    def test_InvalidRecoverPassword (self):
+        user = AuthHelper.getAnyUser ()
+
+        # Send malformed payloads
+        invalid_payloads = [
+            '',
+            [],
+            {},
+            {'username': 1}
+        ]
+
+        for invalid_payload in invalid_payloads:
+            response = request ('post', 'auth/recover', {}, invalid_payload)
+            self.assertEqual (response ['code'], 400)
+
+        # No such user
+        response = request ('post', 'auth/recover', {}, {'username': AuthHelper.makeUsername ()})
+        self.assertEqual (response ['code'], 403)
+
+    def test_RecoverPassword (self):
+        user = AuthHelper.getAnyUser ()
+
+        response = request ('post', 'auth/recover', {}, {'username': user ['username']})
+        self.assertEqual (response ['code'], 200)
+        self.assertIsInstance (response ['body'] ['token'], str)
+
+    def test_InvalidResetPassword (self):
+        user = AuthHelper.getAnyUser ()
+
+        # Send malformed payloads
+        invalid_payloads = [
+            '',
+            [],
+            {},
+            {'username': 1},
+            {'username': 'foobar', 'token': 1},
+            {'username': 'foobar', 'token': 'some'},
+            {'username': 'foobar', 'token': 'some', 'password': 1},
+            {'username': 'foobar', 'token': 'some', 'password': 'short'}
+        ]
+
+        for invalid_payload in invalid_payloads:
+            response = request ('post', 'auth/reset', {}, invalid_payload)
+            self.assertEqual (response ['code'], 400)
+
+        # No such token
+        response = request ('post', 'auth/reset', {}, {'username': user ['username'], 'password': '123456', 'token': 'foobar'})
+        self.assertEqual (response ['code'], 403)
+
+    def test_ResetPassword (self):
+        user = AuthHelper.getAnyUser ()
+
+        recover_token = request ('post', 'auth/recover', {}, {'username': user ['username']}) ['body'] ['token']
+
+        response = request ('post', 'auth/reset', {},   {'username': user ['username'], 'password': user ['password'] + '1', 'token': recover_token})
+        self.assertEqual (response ['code'], 200)
+
+        # Update user's password and attempt login with new password
+        USERS [user ['username']] ['password'] = user ['password'] + '1'
+        response = request ('post', 'auth/login', {}, {'username': user ['username'], 'password': user ['password']})
+        self.assertEqual (response ['code'], 200)
 
 class TestProgram (unittest.TestCase):
     def test_GetPrograms (self):
