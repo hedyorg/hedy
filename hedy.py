@@ -15,7 +15,7 @@ import exceptions
 import program_repair
 
 # Some useful constants
-HEDY_MAX_LEVEL = 17
+HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
@@ -1325,24 +1325,27 @@ class ConvertToPython_17(ConvertToPython_16):
         all_lines = [indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
+@hedy_transpiler(level=18)
+class ConvertToPython_18(ConvertToPython_17):
+    # FH, nov 2021
+    # this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
 
-# @hedy_transpiler(level=12)
-# class ConvertToPython_12(ConvertToPython_10_11):
-#     def input(self, args):
-#         args_new = []
-#         var = args[0]
-#         arguments = args[1:]
-#         self.check_arg_types(arguments, 'input', self.level)
-#         for a in arguments:
-#             if type(a) is Tree:
-#                 args_new.append(f'str({a.children})')
-#             elif "'" not in a:
-#                 args_new.append(f'str({a})')
-#             else:
-#                 args_new.append(a)
-#
-#         return f'{var} = input(' + '+'.join(args_new) + ")"
-#
+    def input(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+
+        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
+
+        tryblock = textwrap.dedent(f"""
+        try:
+          {var} = int({var})
+        except ValueError:
+          try:
+            {var} = float({var})
+          except ValueError:
+            pass""")  # no number? leave as string
+        return assign + tryblock
+
 # @hedy_transpiler(level=13)
 # class ConvertToPython_13(ConvertToPython_12):
 #     def print(self, args):
