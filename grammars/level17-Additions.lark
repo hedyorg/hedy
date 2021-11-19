@@ -3,6 +3,7 @@
 command: print | ifs (elifs)* elses? | ask | for_loop | repeat_list | while_loop| assign_list | add | remove | sleep | list_access_var | assign | comment
 
 //spaces are allowed before and after colon
+//TODO: this could be an attribute on the rule that we add in the merger
 _COLON: _SPACE* ":" _SPACE*
 
 elses: _EOL _SPACE* _ELSE _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK

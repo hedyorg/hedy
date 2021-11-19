@@ -121,6 +121,7 @@ class TestsLevel17(HedyTester):
       print(f'nee')""")
 
     self.multi_level_tester(
+      max_level=17,
       code=code,
       expected=expected,
       test_name=self.name()
@@ -144,6 +145,7 @@ class TestsLevel17(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       test_name=self.name()
     )
@@ -273,3 +275,4 @@ class TestsLevel17(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
+
