@@ -46,6 +46,9 @@ def main():
                 if level > 8:
                     print("Level has been set to 8, because the value specified was to high")
                     level = 8
+                elif level <= 0:
+                    print("Level has been set to 1, because the value specified was too low")
+                    level = 1
 
     program = '\n'.join([line
         for line in lines
