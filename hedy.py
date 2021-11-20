@@ -38,14 +38,19 @@ class Command:
     forward = 'forward'
     add_to_list = 'add to list'
     remove_from_list = 'remove from list'
-    in_list = 'in'
-    equality = 'is'
+    list_access = 'at random'
+    in_list = 'in list'
+    equality = 'is (equality)'
     for_loop = 'for'
     addition = 'addition'
     subtraction = 'subtraction'
     multiplication = 'multiplication'
     division = 'division'
-    list_access = 'at random'
+    smaller = '<'
+    smaller_equal = '<='
+    bigger = '>'
+    bigger_equal = '>='
+    not_equal = '!='
 
 
 class HedyType:
@@ -136,7 +141,12 @@ commands_and_types_per_level = {
         1: [HedyType.integer],
         12: [HedyType.integer, HedyType.float],
     },
-    Command.for_loop: {11: [HedyType.integer]}
+    Command.for_loop: {11: [HedyType.integer]},
+    Command.smaller: {14: [HedyType.integer, HedyType.float]},
+    Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
+    Command.bigger: {14: [HedyType.integer, HedyType.float]},
+    Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
+    Command.not_equal: {14: [HedyType.integer, HedyType.float]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -421,9 +431,6 @@ class TypeValidator(Transformer):
         self.validate_args_type(tree.children[1], Command.remove_from_list)
         return self.to_typed_tree(tree)
 
-    def condition(self, tree):
-        return self.to_typed_tree(tree, HedyType.boolean)
-
     def in_list_check(self, tree):
         self.validate_args_type(tree.children[1], Command.in_list)
         return self.to_typed_tree(tree, HedyType.boolean)
@@ -526,6 +533,27 @@ class TypeValidator(Transformer):
             right_arg = tree.children[1].children[0]
             raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
         return prom_left_type
+
+    def smaller(self, tree):
+        return self.to_comparison_tree(Command.smaller, tree)
+
+    def smaller_equal(self, tree):
+        return self.to_comparison_tree(Command.smaller_equal, tree)
+
+    def bigger(self, tree):
+        return self.to_comparison_tree(Command.bigger, tree)
+
+    def bigger_equal(self, tree):
+        return self.to_comparison_tree(Command.bigger_equal, tree)
+
+    def not_equal(self, tree):
+        return self.to_comparison_tree(Command.not_equal, tree)
+
+    def to_comparison_tree(self, command, tree):
+        allowed_types = get_allowed_types(command, self.level)
+        self.check_type_allowed(command, allowed_types, tree.children[0])
+        self.check_type_allowed(command, allowed_types, tree.children[1])
+        return self.to_typed_tree(tree, HedyType.boolean)
 
     def check_type_allowed(self, command, allowed_types, tree):
         arg_type = self.get_type(tree)
