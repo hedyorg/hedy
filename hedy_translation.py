@@ -97,6 +97,3 @@ class ConvertToLang1(Transformer):
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
-
-code = translate_keywords('print Hallo welkom bij Hedy\nask hoe heet je\necho','en','nl', level=1)
-translate_keywords(code,'nl','en', level=1)

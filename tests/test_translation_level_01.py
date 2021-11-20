@@ -54,10 +54,10 @@ class TestsTranslationLevel1(HedyTester):
 
     @check_local_lang_bool
     def test_ask_echo_english_dutch(self):
-        code = 'print Hallo welkom bij Hedy\nvraag hoe heet je\nherhaal'
+        code = 'print Hallo welkom bij Hedy\'\'\nvraag hoe heet je\nherhaal'
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = 'print Hallo welkom bij Hedy\nask hoe heet je\necho'
+        expected = 'print Hallo welkom bij Hedy\'\'\nask hoe heet je\necho'
 
         self.assertEqual(result, expected)
 
