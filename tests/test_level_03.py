@@ -496,6 +496,31 @@ class TestsLevel3(HedyTester):
       test_name=self.name()
     )
 
+  def test_add_to_list_with_string_var_gives_error(self):
+    code = textwrap.dedent("""\
+    color is yellow 
+    colors is green, red, blue
+    add colors to color""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.RequiredArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_remove_from_list_with_string_var_gives_error(self):
+    code = textwrap.dedent("""\
+    color is yellow 
+    colors is green, red, blue
+    remove colors from color""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.RequiredArgumentTypeException,
+      test_name=self.name()
+    )
   #negative tests
   def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\

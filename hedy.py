@@ -29,12 +29,15 @@ TRANSPILER_LOOKUP = {}
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
 
+# TODO: in error messages we need to translate the names of the commands to the used language
 class Command:
     print = 'print'
     ask = 'ask'
     echo = 'echo'
     turn = 'turn'
     forward = 'forward'
+    add_to_list = 'add to list'
+    remove_from_list = 'remove from list'
     in_list = 'in'
     equality = 'is'
     for_loop = 'for'
@@ -93,6 +96,7 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
+# TODO: these need to be taken from the translated grammar keywords based on the language
 command_turn_literals = ['right', 'left']
 
 # Commands and their types per level (only partially filled!)
@@ -111,6 +115,8 @@ commands_and_types_per_level = {
     Command.forward: {1: [HedyType.integer]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
+    Command.add_to_list: {1: [HedyType.list]},
+    Command.remove_from_list: {1: [HedyType.list]},
     Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.float, HedyType.boolean]},
     Command.sum: {
         6: [HedyType.integer],
@@ -385,7 +391,7 @@ class TypeValidator(Transformer):
 
     # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
-        self.validate_args_type(tree.children[0:1], Command.list_access)
+        self.validate_args_type(tree.children[0], Command.list_access)
 
         list_name = hash_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
@@ -399,13 +405,21 @@ class TypeValidator(Transformer):
 
     def list_access_var(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
-        return self.to_typed_tree(tree, HedyType.none)
+        return self.to_typed_tree(tree)
+
+    def add(self, tree):
+        self.validate_args_type(tree.children[1], Command.add_to_list)
+        return self.to_typed_tree(tree)
+
+    def remove(self, tree):
+        self.validate_args_type(tree.children[1], Command.remove_from_list)
+        return self.to_typed_tree(tree)
 
     def condition(self, tree):
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def in_list_check(self, tree):
-        self.validate_args_type(tree.children[1:2], Command.in_list)
+        self.validate_args_type(tree.children[1], Command.in_list)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
@@ -526,6 +540,7 @@ class TypeValidator(Transformer):
 
     def validate_args_type(self, children, command):
         allowed_types = get_allowed_types(command, self.level)
+        children = children if type(children) is list else [children]
         for child in children:
             self.check_type_allowed(command, allowed_types, child)
 
