@@ -1,12 +1,14 @@
 from utils import timems, times
 from . import dynamo
 
+
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
+PREFERENCES = dynamo.Table(storage, 'preferences', 'id')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -162,9 +164,16 @@ class Database:
     def get_teacher_classes(self, username, students_to_list):
         """Return all the classes belonging to a teacher."""
         classes = None
-        if dynamo.is_dynamo_available ():
+        if isinstance(storage, dynamo.AwsDynamoStorage):
             classes = CLASSES.get_many({'teacher': username}, reverse=True)
-        # If we're using the in-memory database, we need to make a shallow copy of the classes before changing the `students` key from a set to list, otherwise the field will remain a list later and that will break the set methods.
+
+        # If we're using the in-memory database, we need to make a shallow copy
+        # of the classes before changing the `students` key from a set to list,
+        # otherwise the field will remain a list later and that will break the
+        # set methods.
+        #
+        # FIXME: I don't understand what the above comment is saying, but I'm
+        # skeptical that it's accurate.
         else:
             classes = []
             for Class in CLASSES.get_many({'teacher': username}, reverse=True):
@@ -219,6 +228,29 @@ class Database:
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CLASSES.delete({'id': Class ['id']})
+        PREFERENCES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
+
+    def update_preferences_class(self, class_id, preferences):
+        preferences['id'] = class_id
+        PREFERENCES.create(preferences)
+
+    def get_preferences_class(self, class_id):
+        levels = []
+        preferences = PREFERENCES.get_many({'id': class_id})
+        for level in preferences:
+            levels.append(level)
+        temp = {}
+        for preference in preferences:
+            temp[preference['level']] = preference
+            temp[preference['level']].pop('level', None)
+        return temp
+
+    def get_level_preferences_class(self, class_id, level):
+        preferences = PREFERENCES.get_many({'id': class_id})
+        for preference in preferences:
+            if preference['level'] == level:
+                return preference
+        return None

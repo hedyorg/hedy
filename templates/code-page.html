@@ -1,6 +1,6 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-<div id="commands-window-total" class="right-hand-shadow flex-none">
+<div id="commands-window-total" class="right-hand-shadow flex-none {% if not example_programs %} hidden {% endif %}">
     <div>
       <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
     </div>

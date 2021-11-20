@@ -19,6 +19,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=check_in_list,
             test_name=self.name()
@@ -34,6 +35,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -51,6 +53,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -70,6 +73,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -87,6 +91,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -111,6 +116,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -123,6 +129,66 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             exception=hedy.exceptions.InvalidArgumentTypeException,
             test_name=self.name()
+        )
+
+    #add/remove tests
+    def test_add_to_list(self):
+        code = textwrap.dedent("""\
+        color is ask 'what is your favorite color? '
+        colors is ['green', 'red', 'blue']
+        add color to colors
+        print colors[random]""")
+
+        expected = textwrap.dedent("""\
+        color = input('what is your favorite color? ')
+        try:
+          color = int(color)
+        except ValueError:
+          try:
+            color = float(color)
+          except ValueError:
+            pass
+        colors = ['green', 'red', 'blue']
+        colors.append(color)
+        print(f'{random.choice(colors)}')""")
+
+        self.multi_level_tester(
+          code=code,
+          max_level=17,
+          expected=expected,
+          test_name=self.name()
+        )
+
+    def test_remove_from_list(self):
+        code = textwrap.dedent("""\
+        colors is ['green', 'red', 'blue']
+        color is ask 'what color to remove?'
+        remove color from colors
+        print colors[random]""")
+
+        expected = textwrap.dedent("""\
+        colors = ['green', 'red', 'blue']
+        color = input('what color to remove?')
+        try:
+          color = int(color)
+        except ValueError:
+          try:
+            color = float(color)
+          except ValueError:
+            pass
+        try:
+            colors.remove(color)
+        except:
+           pass
+        print(f'{random.choice(colors)}')""")
+
+
+        self.multi_level_tester(
+          code=code,
+          max_level=17,
+          expected=expected,
+          test_name=self.name()
         )

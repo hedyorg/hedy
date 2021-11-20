@@ -502,37 +502,6 @@
 #                print('Está certo!')
 #            else:
 #                print('Não, está errado!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Preparados ou não, aqui vou eu!'
-#    intro_text: "Agora vamos mudar um pouco as coisas com a indentação. Cada vez que precisarmos de indentação, temos de colocar `:` na linha antes da indentação."
-#    commands:
-#    -   explanation: "Quando usamos um `for`, temos de colocar `:` após a instrução `for`!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Preparados ou não, aqui vou eu!'
-#    -   explanation: "Precisamos fazer a mesma coisa para todas as instruções `if`."
-#        example: "if cor is verde:'"
-#        demo_code: |-
-#            cor is verde
-#            if cor is verde:
-#                print 'A cor é verde.'
-#            else:
-#                print 'A cor não é verde.'
-#    -   explanation: "Vamos mostrar um novo comando que pode ser usado: `elif`. `elif` significa \"else if\". Começamos por verificar se o `if` é verdadeiro, se não for o caso, verificamos em seguida o `elif`, e se esse também não for verdadeiro, avançamos para o `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a é 1'
-#            elif a is 2:
-#                print 'a é 2'
-#            else:
-#                print 'a não é 1 nem 2'
 14:
     start_code: |-
         idade is ask 'Quantos anos você tem?'
@@ -615,3 +584,34 @@
             fruta is ['banana', 'maçã', 'cereja']
             qualquerfruta is fruta[random]
             print qualquerfruta 
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Preparados ou não, aqui vou eu!'
+    intro_text: "Agora vamos mudar um pouco as coisas com a indentação. Cada vez que precisarmos de indentação, temos de colocar `:` na linha antes da indentação."
+    commands:
+    -   explanation: "Quando usamos um `for`, temos de colocar `:` após a instrução `for`!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print 'Preparados ou não, aqui vou eu!'
+    -   explanation: "Precisamos fazer a mesma coisa para todas as instruções `if`."
+        example: "if cor is verde:'"
+        demo_code: |-
+            cor is ask 'Qual a sua cor favorita?'
+            if cor is verde:
+                print 'A cor é verde.'
+            else:
+                print 'A cor não é verde.'
+    -   explanation: "Vamos mostrar um novo comando que pode ser usado: `elif`. `elif` significa \"else if\". Começamos por verificar se o `if` é verdadeiro, se não for o caso, verificamos em seguida o `elif`, e se esse também não for verdadeiro, avançamos para o `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a é 1'
+            elif a is 2:
+                print 'a é 2'
+            else:
+                print 'a não é 1 nem 2'
