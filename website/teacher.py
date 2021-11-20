@@ -85,7 +85,7 @@ def routes (app, database):
     def update_class (user, class_id):
         if not is_teacher(user):
             return 'Only teachers can update classes', 403
-            
+
         body = request.json
         # Validations
         if not isinstance(body, dict):
