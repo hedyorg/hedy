@@ -165,6 +165,7 @@ class TestsLevel12(HedyTester):
     if 'red' in items
         print 'found!'""")
     self.multi_level_tester(
+      max_level=16,
       code=code,
       exception=hedy.exceptions.RequiredArgumentTypeException,
       test_name=self.name()

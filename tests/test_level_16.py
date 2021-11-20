@@ -190,8 +190,6 @@ class TestsLevel16(HedyTester):
         color is [5, 6, 7]
         if 1 is color
             print 'success!'""")
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            test_name=self.name()
-        )
+
+        with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException):
+            hedy.transpile(code, self.level)

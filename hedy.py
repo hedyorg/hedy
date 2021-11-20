@@ -93,6 +93,7 @@ commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
                       23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
                       }
 
+command_turn_literals = ['right', 'left']
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -105,7 +106,8 @@ commands_and_types_per_level = {
         1: [HedyType.string, HedyType.integer],  # until level 11 integers can be used as strings
         12: [HedyType.string]
     },
-    Command.turn: {1: ['right', 'left', HedyType.integer]},  # turn command accepts the literals `right` and `left`
+    Command.turn: {1: command_turn_literals + [HedyType.integer],
+                   2: [HedyType.integer]},
     Command.forward: {1: [HedyType.integer]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
@@ -360,9 +362,11 @@ class TypeValidator(Transformer):
     def turn(self, tree):
         if tree.children:
             name = tree.children[0].children[0]
-            # The `turn` command accepts the literal values 'left' and 'right'. However, if there are
-            #  variables with such names, they take precedence and we need to type check them.
-            if name not in ['left', 'right'] or is_variable(name, self.lookup):
+            if self.level > 1 and name in command_turn_literals:
+                # TODO: needs different error message
+                exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=name,
+                                                        allowed_types=get_allowed_types(Command.turn, self.level))
+            if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type(tree.children, Command.turn)
         return self.to_typed_tree(tree)
 
@@ -509,7 +513,7 @@ class TypeValidator(Transformer):
         if len(allowed_types) == 1:
             variable = variable.children[0]
             # TODO: the exception could be reused not only for lists
-            if allowed_types[0] == 'list':
+            if allowed_types[0] == HedyType.list:
                 raise exceptions.RequiredArgumentTypeException(command=command, variable=variable,
                                                                required_type=allowed_types[0])
 
@@ -796,19 +800,17 @@ class ConvertToPython_1(Transformer):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
 
-        argument = args[0]
-        if is_variable(argument, self.lookup):  # is the argument a variable? if so, use that
-            return f"t.right({argument})"
-        elif argument.isnumeric():  # numbers can also be passed through
-            return f"t.right({argument})"
-        elif argument == 'left':
+        arg = args[0]
+        if is_variable(arg, self.lookup) or arg.isnumeric():
+            return f"t.right({arg})"
+        elif arg == 'left':
             return "t.left(90)"
-        elif argument == 'right':
+        elif arg == 'right':
             return "t.right(90)"
         else:
-            raise exceptions.InvalidArgumentTypeException(command='turn', invalid_type='',
-                                                          allowed_types=get_allowed_types('turn', self.level),
-                                                          invalid_argument=argument)
+            # the TypeValidator should protect against reaching this line:
+            raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Command.turn, self.level))
 
 
 # todo: could be moved into the transpiler class
@@ -921,6 +923,18 @@ class ConvertToPython_2(ConvertToPython_1):
             parameter = args[0]
 
         return self.make_forward(parameter)
+
+    def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)"
+
+        arg = args[0]
+        if is_variable(arg, self.lookup) or arg.isnumeric():
+            return f"t.right({arg})"
+
+        # the TypeValidator should protect against reaching this line:
+        raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
+                                                      allowed_types=get_allowed_types(Command.turn, self.level))
 
     def ask(self, args):
         var = args[0]

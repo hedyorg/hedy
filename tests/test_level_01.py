@@ -151,7 +151,7 @@ class TestsLevel1(HedyTester):
     t.forward(50)
     time.sleep(0.1)""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
@@ -165,7 +165,7 @@ class TestsLevel1(HedyTester):
        time.sleep(0.1)""")
 
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
@@ -175,7 +175,7 @@ class TestsLevel1(HedyTester):
   def test_forward_with_text_gives_type_error(self):
     code = "forward lalalala"
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
@@ -196,7 +196,7 @@ class TestsLevel1(HedyTester):
     code = "turn"
     expected = "t.right(90)"
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
@@ -206,30 +206,26 @@ class TestsLevel1(HedyTester):
   def test_one_turn_right(self):
     code = "turn right"
     expected = "t.right(90)"
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle(),
-      test_name=self.name()
-    )
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_one_turn_left(self):
     code = "turn left"
     expected = "t.left(90)"
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle(),
-      test_name=self.name()
-    )
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(True, result.has_turtle)
 
   def test_turn_number(self):
     code = "turn 180"
     expected = "t.right(180)"
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
@@ -239,7 +235,7 @@ class TestsLevel1(HedyTester):
   def test_one_turn_with_text_gives_type_error(self):
     code = "turn koekoek"
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()

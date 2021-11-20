@@ -1,5 +1,6 @@
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel2(HedyTester):
@@ -248,7 +249,7 @@ class TestsLevel2(HedyTester):
     )
 
   #turn tests
-  def test_turn_number_var(self):
+  def test_turn_with_number_var(self):
     code = textwrap.dedent("""\
       direction is 70
       turn direction""")
@@ -256,58 +257,38 @@ class TestsLevel2(HedyTester):
       direction = '70'
       t.right(direction)""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
       test_name=self.name()
     )
 
-  def test_turn_string_var(self):
+  def test_turn_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
       direction is ten
       turn direction""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
-  def test_turn_var_called_left_takes_precedence(self):
-    code = textwrap.dedent("""\
-      left is 180
-      turn left""")
-    expected = textwrap.dedent("""\
-      left = '180'
-      t.right(left)""")
+  @parameterized.expand(['left', 'right'])
+  def test_one_turn_with_literal_string_gives_type_error(self, arg):
+    code = f"turn {arg}"
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle(),
-      test_name=self.name()
-    )
-
-  def test_turn_var_called_right_takes_precedence(self):
-    code = textwrap.dedent("""\
-      right is 180
-      turn right""")
-    expected = textwrap.dedent("""\
-      right = '180'
-      t.right(right)""")
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_turtle(),
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
   # issue #792
   def test_turn_right_number_gives_type_error(self):
     self.multi_level_tester(
-      max_level=10,
+      max_level=self.max_turtle_level,
       code="turn right 90",
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
@@ -323,20 +304,19 @@ class TestsLevel2(HedyTester):
       t.forward(a)
       time.sleep(0.1)""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
       test_name=self.name()
     )
 
-
   def test_forward_with_string_variable_gives_type_error(self):
     code = textwrap.dedent("""\
       a is test
       forward a""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()

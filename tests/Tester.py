@@ -23,6 +23,7 @@ class Snippet:
 class HedyTester(unittest.TestCase):
   level = None
   max_Hedy_level = 23
+  max_turtle_level = 10
 
   @staticmethod
   @contextmanager
