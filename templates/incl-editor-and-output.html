@@ -84,7 +84,8 @@
       <br>
       <div class="flex justify-between">
         <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{run_code_button}}</button>
-        {% if show_edit_button %}
+          <img src="/images/lightbulb-hint.jpg" onclick="hedyApp.modalStepOne()" class="cursor-pointer" id="repair_button" style="height: 5rem; visibility: hidden; position: absolute; margin-left: 19rem; margin-top: -2rem;">
+            {% if show_edit_button %}
         <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{edit_code_button}}</a>
         {% endif %}
       </div>
@@ -97,10 +98,10 @@
     <div class="order-5">
       <br>
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-        {% if prev_level %}
+        {% if prev_level and not hide_prev_level %}
           <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{regress_button}} {{ prev_level }}</button>
         {% endif %}
-        {% if next_level %}
+        {% if next_level and not hide_next_level %}
             <button class="green-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
         {% endif %}
       </div>
@@ -110,7 +111,7 @@
 <div class="mx-auto w-64 border-gray-400 border-2 rounded-full py-2 px-4">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
-      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode()" class="sr-only" />
+      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode('{% if hide_commands == True %}true{% else %}false{% endif %}')" class="sr-only" />
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
       <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition" style="top: -5px;"></div>
     </div>

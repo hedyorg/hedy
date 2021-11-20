@@ -3,34 +3,43 @@
 {% block main %}
 <div class="px-8">
   <h2>{{auth.class_overview}}: {{class_info.name}}</h2>
-  <table class="table-auto">
-    <tr class="font-bold">
-      <td class="p-2">{{auth.username}}</td>
-      <td class="p-2">{{auth.last_login}}</td>
-      <td class="p-2">{{auth.highest_level_reached}}</td>
-      <td class="p-2">{{auth.number_programs}}</td>
-      <td class="p-2">{{auth.programs}}</td>
-      <td class="p-2">{{auth.latest_shared_program}}</td>
-      <td class="p-2">{{auth.remove_student}}</td>
-    </tr>
-    {% for student in class_info.students %}
-      <tr>
-        <td class="p-2">{{student.username}}</td>
-        <td class="p-2">{{student.last_login}}</td>
-        <td class="p-2">{{student.highest_level}}</td>
-        <td class="p-2">{{student.programs}}</td>
-        <td class="p-2"><a href="{{localize_link ('/programs?user=' + student.username)}}">{{auth.programs}}</a></td>
-        <td class="p-2">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-        <td class="p-2"><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove_student}}</a></td>
-      </tr>
-    {% endfor %}
-  </table>
-  <p>{{auth.class_link}}: <a href="{{class_info.link}}"<span class="text-blue-500">{{class_info.link}}</span></a></p>
-  <br>
-  <button class="green-btn mr-4" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
-  <button class="green-btn mr-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
-  <button class="red-btn mr-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
-  <br><br>
-  <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+  <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+      <table class="table-auto mb-4 w-full">
+      <thead>
+        <tr class="font-bold text-left">
+          <th class="text-blue-600">{{auth.username}}</th>
+          <th class="text-blue-600">{{auth.last_login}}</th>
+          <th class="text-blue-600">{{auth.highest_level_reached}}</th>
+          <th class="text-blue-600">{{auth.number_programs}}</th>
+          <th class="text-blue-600">{{auth.programs}}</th>
+          <th class="text-blue-600">{{auth.latest_shared_program}}</th>
+          <th class="text-blue-600">{{auth.remove_student}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in class_info.students %}
+          <tr class="text-left my-2">
+            <td>{{student.username}}</td>
+            <td>{{student.last_login}}</td>
+            <td>{{student.highest_level}}</td>
+            <td>{{student.programs}}</td>
+            <td><a href="{{localize_link ('/programs?user=' + student.username)}}">{{student.username}}'s {{auth.page}}</a></td>
+            <td>{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
+            <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove}} {{student.username}}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+  </div>
+  <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
+  <div class="mt-4 flex flex-row">
+    <button class="green-btn" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
+    <button class="green-btn ml-auto mx-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
+    <button class="red-btn" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
+  </div>
+  <div class="mt-4">
+    <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+    <button class="green-btn" onclick="window.location.href = '{{localize_link ('/customize-class/' + class_info.id)}}'">{{ auth.customize_class }}</button>
+  </div>
 </div>
 {% endblock %}

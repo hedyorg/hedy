@@ -84,7 +84,7 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_forloop(self):
+  def test_for_loop_with_print(self):
     code = textwrap.dedent("""\
     for i in range 1 to 10
       print i
@@ -100,6 +100,19 @@ class TestsLevel11(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
+  def test_for_loop_with_assignment(self):
+    code = textwrap.dedent("""\
+      for i in range 1 to 10
+        a is i + 1""")
+    expected = textwrap.dedent("""\
+      step = 1 if int(1) < int(10) else -1
+      for i in range(int(1), int(10) + step, step):
+        a = int(i) + int(1)""")
+
+    result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
   def test_reverse_range(self):
     code = textwrap.dedent("""\

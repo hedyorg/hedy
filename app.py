@@ -291,6 +291,73 @@ def echo_session_vars_main():
         return 'This endpoint is only meant for E2E tests', 400
     return jsonify({'session': dict(session), 'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
+@app.route('/fix-code', methods=['POST'])
+def fix_code():
+    body = request.json
+    if not body:
+        return "body must be an object", 400
+    if 'code' not in body:
+        return "body.code must be a string", 400
+    if 'level' not in body:
+        return "body.level must be a string", 400
+    if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
+        return "if present, body.adventure_name must be a string", 400
+
+    code = body['code']
+    level = int(body['level'])
+
+    # Language should come principally from the request body,
+    # but we'll fall back to browser default if it's missing for whatever
+    # reason.
+    lang = body.get('lang', g.lang)
+
+    # true if kid enabled the read aloud option
+    read_aloud = body.get('read_aloud', False)
+
+    response = {}
+    username = current_user()['username'] or None
+
+    querylog.log_value(level=level, lang=lang, session_id=session_id(), username=username)
+
+    try:
+        hedy_errors = TRANSLATIONS.get_translations(lang, 'HedyErrorMessages')
+        with querylog.log_time('transpile'):
+
+            try:
+                transpile_result = hedy.transpile(code, level)
+                response = "OK"
+            except hedy.exceptions.FtfyException as ex:
+                # The code was fixed with a warning
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['FixedCode'] = ex.fixed_code
+                response['Location'] = ex.error_location
+                transpile_result = ex.fixed_result
+
+    except hedy.exceptions.HedyException as ex:
+        traceback.print_exc()
+        response = hedy_error_to_response(ex, hedy_errors)
+
+    except Exception as E:
+        traceback.print_exc()
+        print(f"error transpiling {code}")
+        response["Error"] = str(E)
+    querylog.log_value(server_error=response.get('Error'))
+    parse_logger.log({
+        'session': session_id(),
+        'date': str(datetime.datetime.now()),
+        'level': level,
+        'lang': lang,
+        'code': code,
+        'server_error': response.get('Error'),
+        'version': version(),
+        'username': username,
+        'read_aloud': read_aloud,
+        'is_test': 1 if os.getenv('IS_TEST_ENV') else None,
+        'adventure_name': body.get('adventure_name', None)
+    })
+
+    return jsonify(response)
+
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
@@ -324,17 +391,27 @@ def parse():
         with querylog.log_time('transpile'):
 
             try:
-                transpile_result = hedy.transpile(code, level)
-            except hedy.exceptions.FtfyException as ex:
-                # The code was fixed with a warning
+                transpile_result = hedy.transpile(code, level, lang)
+            except hedy.exceptions.InvalidSpaceException as ex:
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
-
-        if transpile_result.has_turtle:
-            response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
-            response['has_turtle'] = True
-        else:
-            response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
+            except hedy.exceptions.InvalidCommandException as ex:
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
+                transpile_result = ex.fixed_result
+            except hedy.exceptions.FtfyException as ex:
+                response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
+                response['Location'] = ex.error_location
+                transpile_result = ex.fixed_result
+        try:
+            if transpile_result.has_turtle:
+                response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
+                response['has_turtle'] = True
+            else:
+                response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
+        except:
+            pass
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -376,6 +453,9 @@ def translate_error(code, translations, arguments):
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
+        if k == "guessed_command":
+            arguments[k] = hedy.style_closest_command(v)
+
         if k in arguments_that_require_translation:
             if isinstance(v, list):
                 arguments[k] = translate_list(translations, v)
@@ -570,7 +650,7 @@ def quiz_finished(level):
     g.prefix = '/hedy'
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
-                           total_score=session.get('total_score', 0),
+                           total_score= round(session.get('total_score', 0) / quiz.max_score(quiz_data) * 100),
                            menu=render_main_menu('adventures'),
                            quiz=quiz_data, level=int(level) + 1, questions=quiz_data['questions'],
                            next_assignment=1,
@@ -626,8 +706,8 @@ def submit_answer(level_source, question_nr, attempt):
             answer=chosen_option)
 
     if is_correct:
-        score = quiz.correct_answer_score(question, attempt)
-        session['total_score'] = session.get('total_score', 0) + score
+        score = quiz.correct_answer_score(question)
+        session['total_score'] = session.get('total_score',0) + score
         session['correct_answer'] = session.get('correct_answer', 0) + 1
 
         return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
@@ -740,6 +820,7 @@ def adventure_page(adventure_name, level):
         translations=TRANSLATIONS,
         version=version(),
         adventures=adventures_for_level,
+        restrictions='',
         # The relevant loaded program will be available to client-side js and it will be loaded by js.
         loaded_program='',
         adventure_name=adventure_name)
@@ -780,9 +861,10 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(g.lang, level)
+    adventures, restrictions = get_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
-    if level not in level_defaults_for_lang.levels:
+
+    if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
         return utils.page_404 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_level'))
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
@@ -795,8 +877,48 @@ def index(level, step):
         translations=TRANSLATIONS,
         version=version(),
         adventures=adventures,
+        restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
+
+
+def get_restrictions(adventures, user, level):
+    restrictions = {}
+    found_restrictions = False
+    if user:
+        student_classes = DATABASE.get_student_classes(user)
+        if student_classes:
+            level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level)
+            if level_preferences:
+                found_restrictions = True
+                display_adventures = []
+                for adventure in adventures:
+                    if adventure['short_name'] in level_preferences['adventures']:
+                        display_adventures.append(adventure)
+                restrictions['amount_next_level'] = level_preferences['progress']
+                restrictions['example_programs'] = level_preferences['example_programs']
+                restrictions['hide_level'] = level_preferences['hide']
+                prev_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level - 1)
+                next_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level + 1)
+                print(next_level_preferences)
+                if prev_level_preferences:
+                    restrictions['hide_prev_level'] = prev_level_preferences['hide']
+                else:
+                    restrictions['hide_prev_level'] = False
+                if next_level_preferences:
+                    restrictions['hide_next_level'] = next_level_preferences['hide']
+                else:
+                    restrictions['hide_next_level'] = False
+
+    if not found_restrictions:
+        display_adventures = adventures
+        restrictions['amount_next_level'] = 0
+        restrictions['example_programs'] = True
+        restrictions['hide_level'] = False
+        restrictions['hide_prev_level'] = False
+        restrictions['hide_next_level'] = False
+
+    return display_adventures, restrictions
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):
@@ -1109,10 +1231,12 @@ def translate_fromto(source, target):
     source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
     source_levels = YamlFile.for_file(f'coursedata/level-defaults/{source}.yaml').to_dict()
     source_texts = YamlFile.for_file(f'coursedata/texts/{source}.yaml').to_dict()
+    source_keywords = YamlFile.for_file(f'coursedata/keywords/{source}.yaml').to_dict()
 
     target_adventures = YamlFile.for_file(f'coursedata/adventures/{target}.yaml').to_dict()
     target_levels = YamlFile.for_file(f'coursedata/level-defaults/{target}.yaml').to_dict()
     target_texts = YamlFile.for_file(f'coursedata/texts/{target}.yaml').to_dict()
+    target_keywords = YamlFile.for_file(f'coursedata/keywords/{target}.yaml').to_dict()
 
     files =[]
 
@@ -1130,6 +1254,11 @@ def translate_fromto(source, target):
       'Adventures',
       f'adventures/{target}.yaml',
       translating.struct_to_sections(source_adventures, target_adventures)))
+
+    files.append(translating.TranslatableFile(
+      'Keywords',
+      f'keywords/{target}.yaml',
+      translating.struct_to_sections(source_keywords, target_keywords)))
 
     return render_template('translate-fromto.html',
         source_lang=source,
