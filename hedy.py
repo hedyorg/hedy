@@ -486,7 +486,7 @@ class TypeValidator(Transformer):
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
-    def substraction(self, tree):
+    def subtraction(self, tree):
         return self.to_sum_typed_tree(tree, Command.sum)
 
     def addition(self, tree):
@@ -1153,7 +1153,7 @@ class ConvertToPython_6(ConvertToPython_5):
     def addition(self, args):
         return self.process_calculation(args, '+')
 
-    def substraction(self, args):
+    def subtraction(self, args):
         return self.process_calculation(args, '-')
 
     def multiplication(self, args):
