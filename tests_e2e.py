@@ -62,7 +62,7 @@ def request(method, path, headers={}, body=''):
 
 class AuthHelper():
     @staticmethod
-    def makeUsername():
+    def make_username():
         # We create usernames with a random component so that if a test fails, we don't have to do a cleaning of the DB so that the test suite can run again
         # This also allows us to run concurrent tests without having username conflicts.
         username = 'user' + str(random.randint(10000, 100000))
@@ -70,9 +70,9 @@ class AuthHelper():
 
     # If user with `username` exists, return it. Otherwise, create it.
     @staticmethod
-    def assertUserExists(username):
+    def assert_user_exists(username):
         if not isinstance(username, str):
-            raise Exception('AuthHelper.assertUserExists - Invalid username: ' + str(username))
+            raise Exception('AuthHelper.assert_user_exists - Invalid username: ' + str(username))
 
         if username in USERS:
             return USERS[username]
@@ -86,41 +86,43 @@ class AuthHelper():
 
     # Returns the first created user, if any; otherwise, creates one.
     @staticmethod
-    def getAnyUser():
+    def get_any_user():
         if len(USERS.keys()) > 0:
             return USERS[next(iter(USERS))]
-        return AuthHelper.assertUserExists(AuthHelper.makeUsername())
+        return AuthHelper.assert_user_exists(AuthHelper.make_username())
 
     # Returns the first logged in user, if any; otherwise, logs in a user; if no user exists, creates and then logs in the user.
     @staticmethod
-    def getAnyLoggedUser():
+    def get_any_logged_user():
         for user in USERS:
             if 'cookie' in user:
                 return user
 
         # If there's no logged in user, we login the user
-        user = AuthHelper.getAnyUser()
-        return AuthHelper.loginUser(user['username'])
+        user = AuthHelper.get_any_user()
+        return AuthHelper.login_user(user['username'])
 
     @staticmethod
-    def loginUser(username):
+    def login_user(username):
         user = USERS[username]
+        if 'cookie' in user:
+            return user
         response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']})
-        cookie = AuthHelper.getHedyCookie(response['headers']['Set-Cookie'])
+        cookie = AuthHelper.get_hedy_cookie(response['headers']['Set-Cookie'])
 
         # The cookie value must be set to `hedy={{SESSION}};` so that it can be used as a Cookie header in subsequent requests
         USERS[user['username']]['cookie'] = CONFIG['session']['cookie_name'] + '=' + cookie.value + ';'
         return user
 
     @staticmethod
-    def assertUserIsLogged(username):
-        AuthHelper.assertUserExists(username)
-        return AuthHelper.loginUser(username)
+    def assert_user_is_logged(username):
+        AuthHelper.assert_user_exists(username)
+        return AuthHelper.login_user(username)
 
     @staticmethod
-    def getHedyCookie(cookieString):
+    def get_hedy_cookie(cookie_string):
         cookie = SimpleCookie()
-        cookie.load(cookieString)
+        cookie.load(cookie_string)
 
         for key, cookie in cookie.items():
             if key == CONFIG['session']['cookie_name']:
@@ -129,9 +131,11 @@ class AuthHelper():
 # *** TESTS ***
 
 class TestAuth(unittest.TestCase):
-    def test_InvalidSignups(self):
-        username = AuthHelper.makeUsername()
-        invalid_bodies =[
+    def test_invalid_signups(self):
+        # GIVEN a valid username
+        username = AuthHelper.make_username()
+        # WHEN attempting signups with invalid bodies
+        invalid_bodies = [
             '',
            [],
             {},
@@ -151,23 +155,30 @@ class TestAuth(unittest.TestCase):
         ]
         for invalid_body in invalid_bodies:
             response = request('post', 'auth/signup', {}, invalid_body)
+            # THEN receive an invalid response code from the server
             self.assertEqual(response['code'], 400)
 
-    def test_Signup(self):
-        username = AuthHelper.makeUsername()
+    def test_signup(self):
+        # GIVEN a valid username and signup body
+        username = AuthHelper.make_username()
         body = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
 
+        # WHEN signing up a new user
         response = request('post', 'auth/signup', {}, body)
+
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
+        # THEN receive a body containing a token
         self.assertIsInstance(response['body'], dict)
         self.assertIsInstance(response['body']['token'], str)
 
-        # Store the user for use in upcoming tests
+        # THEN Store the user and its token for upcoming tests
         USERS[username] = body
         USERS[username]['verify_token'] = response['body']['token']
 
-    def test_InvalidLogin(self):
-        invalid_bodies =[
+    def test_invalid_login(self):
+        # WHEN attempting logins with invalid bodies
+        invalid_bodies = [
             '',
            [],
             {},
@@ -177,30 +188,35 @@ class TestAuth(unittest.TestCase):
         ]
         for invalid_body in invalid_bodies:
             response = request('post', 'auth/login', {}, invalid_body)
+            # THEN receive an invalid response code from the server
             self.assertEqual(response['code'], 400)
 
-    def test_Login(self):
-        user = AuthHelper.getAnyUser()
+    def test_login(self):
+        # GIVEN an existing user
+        user = AuthHelper.get_any_user()
+
+        # WHEN logging in the user
         response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']})
 
-        # Validate response
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
 
-        # Validate cookie in response
+        # THEN validate the cookie sent in the response
         self.assertIsInstance(response['headers']['Set-Cookie'], str)
-        hedyCookie = AuthHelper.getHedyCookie(response['headers']['Set-Cookie'])
-        self.assertNotEqual(hedyCookie, None)
-        self.assertEqual(hedyCookie['httponly'], True)
-        self.assertEqual(hedyCookie['path'], '/')
-        self.assertEqual(hedyCookie['samesite'], 'Lax,')
+        hedy_cookie = AuthHelper.get_hedy_cookie(response['headers']['Set-Cookie'])
+        self.assertNotEqual(hedy_cookie, None)
+        self.assertEqual(hedy_cookie['httponly'], True)
+        self.assertEqual(hedy_cookie['path'], '/')
+        self.assertEqual(hedy_cookie['samesite'], 'Lax,')
 
-    def test_InvalidVerifyEmail(self):
-        # We create a new user to ensure that the verification flow hasn't been done by the user yet
-        username = AuthHelper.makeUsername()
-        user = AuthHelper.assertUserExists(username)
+    def test_invalid_verify_email(self):
+        # GIVEN a new user
+        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
+        username = AuthHelper.make_username()
+        user = AuthHelper.assert_user_exists(username)
 
-        # Send malformed verifications
-        invalid_verifications =[
+        # WHEN submitting invalid verifications
+        invalid_verifications = [
             # Missing token
             {'username': username},
             # Missing username
@@ -209,10 +225,11 @@ class TestAuth(unittest.TestCase):
 
         for invalid_verification in invalid_verifications:
             response = request('get', 'auth/verify?' + urllib.parse.urlencode(invalid_verification))
+            # THEN receive an invalid response code from the server
             self.assertEqual(response['code'], 400)
 
-        # Send well-formed verifications with invalid values
-        incorrect_verifications =[
+        # WHEN submitting well-formed verifications with invalid values
+        incorrect_verifications = [
             # Invalid username
             {'username': 'foobar', 'token': user['verify_token']},
             # Invalid token
@@ -221,61 +238,80 @@ class TestAuth(unittest.TestCase):
 
         for incorrect_verification in incorrect_verifications:
             response = request('get', 'auth/verify?' + urllib.parse.urlencode(incorrect_verification))
+            # THEN receive a forbidden response code from the server
             self.assertEqual(response['code'], 403)
 
-    def test_VerifyEmail(self):
-        # We create a new user to ensure that the verification flow hasn't been done by the user yet
-        username = AuthHelper.makeUsername()
-        user = AuthHelper.assertUserExists(username)
-        # Attempt verification, operation should be successful
+    def test_verify_email(self):
+        # GIVEN a new user
+        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
+        username = AuthHelper.make_username()
+        user = AuthHelper.assert_user_exists(username)
+
+        # WHEN attepting to verify the user
         response = request('get', 'auth/verify?' + urllib.parse.urlencode({'username': username, 'token': user['verify_token']}))
+
+        # THEN receive a redirect from the server taking us to `/`
         self.assertEqual(response['code'], 302)
         self.assertEqual(response['headers']['location'], HOST)
 
-        # Attempt verification again, operation should be idempotent
+        # WHEN attepting to verify the user again (the operation should be idempotent)
         response = request('get', 'auth/verify?' + urllib.parse.urlencode({'username': username, 'token': user['verify_token']}))
+
+        # THEN (again) receive a redirect from the server taking us to `/`
         self.assertEqual(response['code'], 302)
         self.assertEqual(response['headers']['location'], HOST)
 
-        # Remove token from user since it's already been used.
+        # THEN remove token from user since it's already been used.
         USERS[user['username']].pop('verify_token')
 
-        # Retrieve profile to see that the user is no longer marked with `verification_pending`
-        AuthHelper.assertUserIsLogged (username)
-        profile = request ('get', 'profile', {'cookie': user ['cookie']}, '') ['body']
-        self.assertNotIn ('verification_pending', profile)
+        # WHEN retrieving profile to see that the user is no longer marked with `verification_pending`
+        AuthHelper.assert_user_is_logged(username)
+        profile = request('get', 'profile', {'cookie': user['cookie']}, '')['body']
 
-    def test_Logout(self):
-        user = AuthHelper.getAnyLoggedUser()
+        # THEN check that the `verification_pending` has been removed from the user profile
+        self.assertNotIn('verification_pending', profile)
 
+    def test_logout(self):
+        # GIVEN a logged in user
+        user = AuthHelper.get_any_logged_user()
+
+        # WHEN logging out the user
         response = request('post', 'auth/logout', {'cookie': user['cookie']}, '')
+
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
 
-        # Verify that cookie is no longer valid by retrieving profile, which requires login
+        # WHEN retrieving the user profile with the same cookie
         response = request('get', 'profile', {'cookie': user['cookie']}, '')
+        # THEN receive a forbidden response code from the server
         self.assertEqual(response['code'], 403)
 
-        # Remove cookie from user to avoid generating issues in subsequent tests
+        # THEN remove the cookie from user since it has already been deleted in the server
         USERS[user['username']].pop('cookie')
 
-    def test_DestroyAccount(self):
-        user = AuthHelper.getAnyLoggedUser()
+    def test_destroy_account(self):
+        # GIVEN a logged in user
+        user = AuthHelper.get_any_logged_user()
 
+        # WHEN deleting the user account
         response = request('post', 'auth/destroy', {'cookie': user['cookie']}, '')
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
 
-        # Verify that cookie is no longer valid by retrieving profile, which requires login
+        # WHEN retrieving the profile of the user
         response = request('get', 'profile', {'cookie': user['cookie']}, '')
+        # THEN receive a forbidden response code from the server
         self.assertEqual(response['code'], 403)
 
-        # Remove user to avoid generating issues in subsequent tests
+        # THEN remove user since it has already been deleted in the server
         USERS.pop(user['username'])
 
-    def test_InvalidChangePassword(self):
-        user = AuthHelper.getAnyLoggedUser()
+    def test_invalid_change_password(self):
+        # GIVEN a logged in user
+        user = AuthHelper.get_any_logged_user()
 
-        # Send malformed payloads
-        invalid_payloads =[
+        # WHEN attempting signups with invalid bodies
+        invalid_bodies = [
             '',
            [],
             {},
@@ -285,57 +321,70 @@ class TestAuth(unittest.TestCase):
             {'old_password': 'pass1', 'new_password': 'short'},
         ]
 
-        for invalid_payload in invalid_payloads:
-            response = request('post', 'auth/change_password', {'cookie': user['cookie']}, invalid_payload)
+        for invalid_body in invalid_bodies:
+            response = request('post', 'auth/change_password', {'cookie': user['cookie']}, invalid_body)
+            # THEN receive an invalid response code from the server
             self.assertEqual(response['code'], 400)
 
-        # Attempt to change password without sending the correct old password
+        # WHEN attempting to change password without sending the correct old password
         response = request('post', 'auth/change_password', {'cookie': user['cookie']}, {'old_password': 'password', 'new_password': user['password'] + 'foo'})
+        # THEN receive an invalid response code from the server
         self.assertEqual(response['code'], 403)
 
-    def test_ChangePassword(self):
+    def test_change_password(self):
         # GIVEN a logged in user
-        user = AuthHelper.getAnyLoggedUser()
+        user = AuthHelper.get_any_logged_user()
+
+        # WHEN attempting to change the user's password
         new_password = 'pas1234'
         response = request('post', 'auth/change_password', {'cookie': user['cookie']}, {'old_password': user['password'], 'new_password': 'pas1234'})
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
 
         # WHEN attempting to login with old password
         response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']})
 
-        # THEN
+        # THEN receive a forbidden response code from the server
         self.assertEqual(response['code'], 403)
 
         # GIVEN the same user
 
         # WHEN attempting to login with new password
         response = request('post', 'auth/login', {}, {'username': user['username'], 'password': new_password})
+
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
 
         # THEN update password on user
         USERS[user['username']]['password'] = new_password
 
-    def test_ProfileGet (self):
-        # We create a new user to ensure that the user has a new profile
-        user = AuthHelper.assertUserIsLogged (AuthHelper.makeUsername ())
+    def test_profile_get(self):
+        # GIVEN a new user
+        # (we create a new user to ensure that the user has a clean profile)
+        user = AuthHelper.assert_user_is_logged(AuthHelper.make_username())
 
-        response = request ('get', 'profile', {'cookie': user ['cookie']}, '')
-        self.assertEqual (response ['code'], 200)
+        # WHEN retrieving the user profile
+        response = request('get', 'profile', {'cookie': user['cookie']}, '')
 
-        profile = response ['body']
-        self.assertIsInstance (profile, dict)
-        self.assertEqual (profile ['username'], user ['username']),
-        self.assertEqual (profile ['email'],    user ['email']),
-        self.assertEqual (profile ['verification_pending'], True)
-        self.assertIsInstance (profile ['student_classes'], list)
-        self.assertEqual (len (profile ['student_classes']), 0)
-        self.assertIsInstance (profile ['session_expires_at'], int)
+        # THEN receive an OK response code from the server
+        self.assertEqual(response['code'], 200)
 
-    def test_InvalidProfileModify (self):
-        user = AuthHelper.getAnyLoggedUser ()
+        # THEN check that the fields returned by the server have the correct values
+        profile = response['body']
+        self.assertIsInstance(profile, dict)
+        self.assertEqual(profile['username'], user['username']),
+        self.assertEqual(profile['email'],    user['email']),
+        self.assertEqual(profile['verification_pending'], True)
+        self.assertIsInstance(profile['student_classes'], list)
+        self.assertEqual(len(profile['student_classes']), 0)
+        self.assertIsInstance(profile['session_expires_at'], int)
 
-        # Send malformed payloads
-        invalid_payloads = [
+    def test_invalid_profile_modify(self):
+        # GIVEN a logged in user
+        user = AuthHelper.get_any_logged_user()
+
+        # WHEN attempting profile modifications with invalid bodies
+        invalid_bodies = [
             '',
             [],
             {'email': 'foobar'},
@@ -351,14 +400,17 @@ class TestAuth(unittest.TestCase):
             {'experience_languages': ['python', 'foo']}
         ]
 
-        for invalid_payload in invalid_payloads:
-            response = request ('post', 'profile', {'cookie': user ['cookie']}, invalid_payload)
-            self.assertEqual (response ['code'], 400)
+        for invalid_body in invalid_bodies:
+            response = request('post', 'profile', {'cookie': user['cookie']}, invalid_body)
+            # THEN receive an invalid response code from the server
+            self.assertEqual(response['code'], 400)
 
-    def test_ProfileModify (self):
-        # We create a new user to ensure that the user has a new profile
-        user = AuthHelper.assertUserIsLogged (AuthHelper.makeUsername ())
+    def test_profile_modify(self):
+        # GIVEN a new user
+        # (we create a new user to ensure that the user has a clean profile)
+        user = AuthHelper.assert_user_is_logged(AuthHelper.make_username())
 
+        # WHEN submitting valid profile changes
         profile_changes = {
            'birth_year': 1989,
            'country': 'NL',
@@ -369,52 +421,68 @@ class TestAuth(unittest.TestCase):
 
         for key in profile_changes:
             body = {}
-            body [key] = profile_changes [key]
-            response = request ('post', 'profile', {'cookie': user ['cookie']}, body)
-            self.assertEqual (response ['code'], 200)
+            body[key] = profile_changes[key]
+            response = request('post', 'profile', {'cookie': user['cookie']}, body)
+            # THEN receive an OK response code from the server
+            self.assertEqual(response['code'], 200)
 
-            profile = request ('get', 'profile', {'cookie': user ['cookie']}, '') ['body']
-            self.assertEqual (profile [key], profile_changes [key])
+            # WHEN retrieving the profile
+            profile = request('get', 'profile', {'cookie': user['cookie']}, '')['body']
+            # THEN confirm that our modification has been stored by the server and returned in the latest version of the profile
+            self.assertEqual(profile[key], profile_changes[key])
 
-        # We check email change separately since it involves a flow with a token
-        response = request ('post', 'profile', {'cookie': user ['cookie']}, {'email': user ['username'] + '@newhedy.com'})
-        self.assertIsInstance (response ['body'] ['token'], str)
+        # WHEN updating the user's email
+        # (we check email change separately since it involves a flow with a token)
+        response = request('post', 'profile', {'cookie': user['cookie']}, {'email': user['username'] + '@newhedy.com'})
 
-        # Update email & token on user
-        USERS [user ['username']] ['email'] = user ['username'] + '@newhedy.com'
-        USERS [user ['username']] ['verify_token'] = response ['body'] ['token']
+        # THEN receive an OK response code from the server
+        self.assertEqual(response['code'], 200)
+        # THEN confirm that the server replies with an email verification token
+        self.assertIsInstance(response['body']['token'], str)
 
-    def test_InvalidRecoverPassword (self):
-        user = AuthHelper.getAnyUser ()
+        # THEN update the email & email verification token on user
+        USERS[user['username']]['email'] = user['username'] + '@newhedy.com'
+        USERS[user['username']]['verify_token'] = response['body']['token']
 
-        # Send malformed payloads
-        invalid_payloads = [
+    def test_invalid_recover_password(self):
+        # GIVEN an existing user
+        user = AuthHelper.get_any_user()
+
+        # WHEN attempting a password recovery with invalid bodies
+        invalid_bodies = [
             '',
             [],
             {},
             {'username': 1}
         ]
 
-        for invalid_payload in invalid_payloads:
-            response = request ('post', 'auth/recover', {}, invalid_payload)
-            self.assertEqual (response ['code'], 400)
+        for invalid_body in invalid_bodies:
+            response = request('post', 'auth/recover', {}, invalid_body)
+            # THEN receive an invalid response code from the server
+            self.assertEqual(response['code'], 400)
 
-        # No such user
-        response = request ('post', 'auth/recover', {}, {'username': AuthHelper.makeUsername ()})
-        self.assertEqual (response ['code'], 403)
+        # WHEN attempting a password recovery with a non-existing username
+        response = request('post', 'auth/recover', {}, {'username': AuthHelper.make_username()})
+        # THEN receive a forbidden response code from the server
+        self.assertEqual(response['code'], 403)
 
-    def test_RecoverPassword (self):
-        user = AuthHelper.getAnyUser ()
+    def test_recover_password(self):
+        # GIVEN an existing user
+        user = AuthHelper.get_any_user()
 
-        response = request ('post', 'auth/recover', {}, {'username': user ['username']})
-        self.assertEqual (response ['code'], 200)
-        self.assertIsInstance (response ['body'] ['token'], str)
+        # WHEN attempting a password recovery
+        response = request('post', 'auth/recover', {}, {'username': user['username']})
+        # THEN receive an OK response code from the server
+        self.assertEqual(response['code'], 200)
+        # THEN check that we have received a password recovery token from the server
+        self.assertIsInstance(response['body']['token'], str)
 
-    def test_InvalidResetPassword (self):
-        user = AuthHelper.getAnyUser ()
+    def test_invalid_reset_password(self):
+        # GIVEN an existing user
+        user = AuthHelper.get_any_user()
 
-        # Send malformed payloads
-        invalid_payloads = [
+        # WHEN attempting a password reset with invalid bodies
+        invalid_bodies = [
             '',
             [],
             {},
@@ -425,48 +493,60 @@ class TestAuth(unittest.TestCase):
             {'username': 'foobar', 'token': 'some', 'password': 'short'}
         ]
 
-        for invalid_payload in invalid_payloads:
-            response = request ('post', 'auth/reset', {}, invalid_payload)
-            self.assertEqual (response ['code'], 400)
+        for invalid_body in invalid_bodies:
+            response = request('post', 'auth/reset', {}, invalid_body)
+            # THEN receive an invalid response code from the server
+            self.assertEqual(response['code'], 400)
 
-        # No such token
-        response = request ('post', 'auth/reset', {}, {'username': user ['username'], 'password': '123456', 'token': 'foobar'})
-        self.assertEqual (response ['code'], 403)
-
-    def test_ResetPassword (self):
-        user = AuthHelper.getAnyUser ()
-
-        recover_token = request ('post', 'auth/recover', {}, {'username': user ['username']}) ['body'] ['token']
-
-        response = request ('post', 'auth/reset', {},   {'username': user ['username'], 'password': user ['password'] + '1', 'token': recover_token})
-        self.assertEqual (response ['code'], 200)
-
-        # Update user's password and attempt login with new password
-        USERS [user ['username']] ['password'] = user ['password'] + '1'
-        response = request ('post', 'auth/login', {}, {'username': user ['username'], 'password': user ['password']})
-        self.assertEqual (response ['code'], 200)
-
-class TestProgram(unittest.TestCase):
-    def test_GetPrograms(self):
-        user = AuthHelper.getAnyLoggedUser()
-
-        # Get programs but without sending a cookie
-        response = request('get', 'programs_list', {}, '')
-        # Response should send a redirect to the login page
+        # WHEN attempting a password reset with an invalid token
+        response = request('post', 'auth/reset', {}, {'username': user['username'], 'password': '123456', 'token': 'foobar'})
+        # THEN receive a forbidden response code from the server
         self.assertEqual(response['code'], 403)
 
-        # Get programs sending a cookie
-        response = request('get', 'programs_list', {'cookie': user['cookie']}, '')
-        # Response should be an object of the shape `{programs:[...]}`.
+    def test_reset_password(self):
+        # GIVEN an existing user
+        user = AuthHelper.get_any_user()
+
+        # WHEN attempting a password reset with a valid username & token combination
+        new_password = 'pas1234'
+        recover_token = request('post', 'auth/recover', {}, {'username': user['username']})['body']['token']
+        response = request('post', 'auth/reset', {},   {'username': user['username'], 'password': new_password, 'token': recover_token})
+
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
+
+        # WHEN attempting a login with the new password
+        response = request('post', 'auth/login', {}, {'username': user['username'], 'password': new_password})
+        # THEN receive an OK response code from the server
+        self.assertEqual(response['code'], 200)
+
+        # THEN update user's password and attempt login with new password
+        USERS [user['username']]['password'] = new_password
+
+class TestProgram(unittest.TestCase):
+    def test_get_programs(self):
+        # GIVEN a logged in user
+        user = AuthHelper.get_any_logged_user()
+
+        # WHEN retrieving own programs but without sending a cookie
+        response = request('get', 'programs_list', {}, '')
+        # THEN receive a forbidden response code from the server
+        self.assertEqual(response['code'], 403)
+
+        # WHEN retrieving own programs sending a cookie
+        response = request('get', 'programs_list', {'cookie': user['cookie']}, '')
+        # THEN receive an OK response code from the server
+        self.assertEqual(response['code'], 200)
+        # THEN verify that the server sent a body that is an object of the shape `{programs:[...]}`.
         self.assertIsInstance(response['body'], dict)
         self.assertIsInstance(response['body']['programs'], list)
 
-    def test_InvalidCreateProgram(self):
-        user = AuthHelper.getAnyLoggedUser()
+    def test_invalid_create_program(self):
+        # GIVEN a logged in user
+        user = AuthHelper.get_any_logged_user()
 
-        # Send malformed payloads
-        invalid_payloads =[
+        # WHEN attempting to create an invalid program
+        invalid_bodies = [
             '',
            [],
             {},
@@ -479,20 +559,27 @@ class TestProgram(unittest.TestCase):
             {'code': 'hello world', 'name': 'program 1', 'level': 1, 'adventure_name': 1},
         ]
 
-        for invalid_payload in invalid_payloads:
-            response = request('post', 'programs', {'cookie': user['cookie']}, invalid_payload)
+        for invalid_body in invalid_bodies:
+            response = request('post', 'programs', {'cookie': user['cookie']}, invalid_body)
+            # THEN receive an invalid response code from the server
             self.assertEqual(response['code'], 400)
 
-    def test_CreateProgram(self):
-        # We create a new user to ensure that the user has no programs
-        user = AuthHelper.assertUserIsLogged(AuthHelper.makeUsername())
+    def test_create_program(self):
+        # GIVEN a new user
+        # (we create a new user to ensure that the user has no programs yet)
+        user = AuthHelper.assert_user_is_logged(AuthHelper.make_username())
 
+        # WHEN submitting a valid program
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         response = request('post', 'programs', {'cookie': user['cookie']}, program)
+
+        # THEN receive an OK response code from the server
         self.assertEqual(response['code'], 200)
 
-        # Get programs after saving program
+        # WHEN retrieving programs after saving a program
         response = request('get', 'programs_list', {'cookie': user['cookie']}, '')
+
+        # THEN verify that the program we just saved is in the list
         saved_programs = response['body']['programs']
         self.assertEqual(len(saved_programs), 1)
         saved_program = saved_programs[0]
@@ -500,3 +587,17 @@ class TestProgram(unittest.TestCase):
             self.assertEqual(program[key], saved_program[key])
 
     # TODO: add further programs tests
+
+# *** CLEANUP ***
+
+# We delete all the test users we created during the tests.
+# For this purpose, we use a pytest fixture. This requires us to use the `request` variable, without any possible renaming.
+# For this reason, we must rename our `request` function to `Request` so it will be referenceable from within the fixture.
+Request = request
+@pytest.fixture(scope='session', autouse=True)
+def DeleteAllTestUsers(request):
+    def InnerFunction():
+        for username in USERS:
+            AuthHelper.assert_user_is_logged(username)
+            Request('post', 'auth/destroy', {'cookie': USERS [username]['cookie']}, '')
+    request.addfinalizer(InnerFunction)
