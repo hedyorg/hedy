@@ -19,6 +19,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=check_in_list,
             test_name=self.name()
@@ -34,6 +35,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -51,6 +53,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -70,6 +73,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -87,6 +91,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -111,6 +116,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
             test_name=self.name()
@@ -123,6 +129,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=17,
             exception=hedy.exceptions.InvalidArgumentTypeException,
             test_name=self.name()
         )
@@ -150,6 +157,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
           code=code,
+          max_level=17,
           expected=expected,
           test_name=self.name()
         )
@@ -180,6 +188,7 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
           code=code,
+          max_level=17,
           expected=expected,
           test_name=self.name()
         )

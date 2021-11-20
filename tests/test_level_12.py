@@ -17,6 +17,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       test_name=self.name()
     )
@@ -73,6 +74,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -120,6 +122,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -132,6 +135,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
@@ -143,6 +147,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
@@ -192,6 +197,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -205,6 +211,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -218,6 +225,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -234,6 +242,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -252,6 +261,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -271,6 +281,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -290,6 +301,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=check_output,
       test_name=self.name()
@@ -309,6 +321,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=check_output,
       test_name=self.name()
@@ -323,6 +336,7 @@ class TestsLevel12(HedyTester):
             print(f'{name}')""")
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -337,6 +351,7 @@ class TestsLevel12(HedyTester):
             print(f'hallo {name}')""")
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -353,6 +368,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -382,6 +398,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -398,6 +415,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -416,6 +434,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -602,6 +621,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       exception=hedy.exceptions.UnquotedAssignTextException,
       test_name=self.name()
     )
@@ -629,6 +649,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=lambda x: self.run_code(x) == "11",
       test_name=self.name()

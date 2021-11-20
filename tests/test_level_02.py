@@ -433,6 +433,7 @@ class TestsLevel2(HedyTester):
     self.assertEqual('Wrong Level', context.exception.error_code)
   def test_ask_without_argument(self):
     self.multi_level_tester(
+      max_level=17,
       code="name is ask",
       exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()

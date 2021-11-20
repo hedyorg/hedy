@@ -94,13 +94,16 @@ class InputTooBigException(HedyException):
             lines_of_code=lines_of_code,
             max_lines=max_lines)
 
-class InvalidCommandException(HedyException):
-    def __init__(self, level, invalid_command, guessed_command, line_number):
+class InvalidCommandException(FtfyException):
+    def __init__(self, level, invalid_command, guessed_command, line_number, fixed_code, fixed_result):
         super().__init__('Invalid',
             invalid_command=invalid_command,
             level=level,
             guessed_command=guessed_command,
-            line_number=line_number)
+            line_number=line_number,
+            fixed_code=fixed_code,
+            fixed_result=fixed_result)
+        self.location = [line_number]
 
 
 class IncompleteCommandException(HedyException):

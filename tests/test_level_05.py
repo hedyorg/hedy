@@ -371,7 +371,7 @@ class TestsLevel5(HedyTester):
     with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
-    self.assertEqual('<span class="command-highlighted">print</span>', str(context.exception.arguments['guessed_command']))
+    self.assertEqual('print', str(context.exception.arguments['guessed_command']))
   def test_if_with_print_backtick(self):
     code = textwrap.dedent("""\
     name is ask 'ποιό είναι το όνομά σου;'
