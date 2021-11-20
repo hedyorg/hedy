@@ -16,9 +16,13 @@ def keywords_to_dict(to_lang="nl"):
         if line[0] != '/':
             keywords_from_withoutlvl.append(line)
 
+    keywords_to_withoutlvl = []
+    for line in keywords_to:
+        if line[0] != '/':
+            keywords_to_withoutlvl.append(line)
+
     for line in range(len(keywords_from_withoutlvl)):
-        if keywords_from[line][0] != '/':
-            keywords[(keywords_from[line].split('"'))[1]] = keywords_to[line].split('"')[1]
+        keywords[(keywords_from_withoutlvl[line].split('"'))[1]] = keywords_to_withoutlvl[line].split('"')[1]
 
     return keywords
 
@@ -93,3 +97,6 @@ class ConvertToLang1(Transformer):
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
+
+code = translate_keywords('print Hallo welkom bij Hedy\nask hoe heet je\necho','en','nl', level=1)
+translate_keywords(code,'nl','en', level=1)

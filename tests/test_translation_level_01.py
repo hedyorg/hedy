@@ -9,7 +9,15 @@ def check_local_lang_bool(func):
             return
 
         return func(self)
+
     return inner
+
+
+    # tests should be ordered as follows:
+    # * Translation from English to Dutch
+    # * Translation from Dutch to English
+    # * Translation to several languages
+    # * Error handling
 
 
 class TestsTranslationLevel1(HedyTester):
@@ -18,109 +26,163 @@ class TestsTranslationLevel1(HedyTester):
     keywords_to = hedy_translation.keywords_to_dict('nl')
 
     @check_local_lang_bool
-    def test_print(self):
+    def test_print_english_dutch(self):
         code = 'print Hallo welkom bij Hedy!'
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = 'vraag Hallo welkom bij Hedy!'
+        expected = 'print Hallo welkom bij Hedy!'
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_print_multiple_lines(self):
-        result = hedy_translation.translate_keywords(
-            f"{self.keywords_from['print']} Hallo welkom bij Hedy!\n{self.keywords_from['print']} veel plezier", "en",
-            "nl", self.level)
-        expected = f"{self.keywords_to['print']} Hallo welkom bij Hedy!\n{self.keywords_to['print']} veel plezier"
+    def test_ask_english_dutch(self):
+        code = "ask Hallo welkom bij Hedy!"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "vraag Hallo welkom bij Hedy!"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_print_kewords(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['print']} print ask echo", "en", "nl", self.level)
-        expected = f"{self.keywords_to['print']} print ask echo"
+    def test_echo_english_dutch(self):
+        code = "ask Hallo welkom bij Hedy!\necho"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "vraag Hallo welkom bij Hedy!\nherhaal"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_ask(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['ask']} Hallo welkom bij Hedy!", "en", "nl", self.level)
-        expected = f"{self.keywords_to['ask']} Hallo welkom bij Hedy!"
+    def test_ask_echo_english_dutch(self):
+        code = 'print Hallo welkom bij Hedy\nvraag hoe heet je\nherhaal'
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = 'print Hallo welkom bij Hedy\nask hoe heet je\necho'
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_ask_multiple_lines(self):
-        result = hedy_translation.translate_keywords(
-            f"{self.keywords_from['ask']} Hallo welkom bij Hedy!\n{self.keywords_from['ask']} veel plezier", "en", "nl",
-            self.level)
-        expected = f"{self.keywords_to['ask']} Hallo welkom bij Hedy!\n{self.keywords_to['ask']} veel plezier"
+    def test_print_kewords_english_dutch(self):
+        code = "print print ask echo"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "print print ask echo"
+
+        self.assertEqual(result, expected)
+
+
+    @check_local_lang_bool
+    def test_forward_english_dutch(self):
+        code = "forward 50"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "vooruit 50"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_ask_kewords(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['ask']} print ask echo", "en", "nl", self.level)
-        expected = f"{self.keywords_to['ask']} print ask echo"
+    def test_turn_english_dutch(self):
+        code = "turn 50"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "draai 50"
+
+        self.assertEqual(result, expected)
+
+
+
+    @check_local_lang_bool
+    def test_print_dutch_english(self):
+        code = 'print Hallo welkom bij Hedy!'
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = 'print Hallo welkom bij Hedy!'
+
+        self.assertEqual(result, expected)
+
+
+    @check_local_lang_bool
+    def test_ask_dutch_english(self):
+        code = "vraag Hallo welkom bij Hedy!\nvraag veel plezier"
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = "ask Hallo welkom bij Hedy!\nask veel plezier"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_echo(self):
-        result = hedy_translation.translate_keywords(
-            f"{self.keywords_from['ask']} Hallo welkom bij Hedy!\n{self.keywords_from['echo']}", "en", "nl", self.level)
-        expected = f"{self.keywords_to['ask']} Hallo welkom bij Hedy!\n{self.keywords_to['echo']}"
+    def test_echo_dutch_english(self):
+        code = "vraag stel je vraag\nherhaal tekst"
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = "ask stel je vraag\necho tekst"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_echo_text(self):
-        result = hedy_translation.translate_keywords(
-            f"{self.keywords_from['ask']} stel je vraag\n{self.keywords_from['echo']} tekst", "en", "nl", self.level)
-        expected = f"{self.keywords_to['ask']} stel je vraag\n{self.keywords_to['echo']} tekst"
+    def test_ask_echo_dutch_english(self):
+        code = 'vraag Hallo welkom bij Hedy!\nherhaal hoi'
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = 'ask Hallo welkom bij Hedy!\necho hoi'
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_forward(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['forward']} 50", "en", "nl", self.level)
-        expected = f"{self.keywords_to['forward']} 50"
+    def test_ask_kewords_dutch_english(self):
+        code = "vraag print ask echo"
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = "ask print ask echo"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
-    def test_turn(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['turn']} left", "en", "nl", self.level)
-        expected = f"{self.keywords_to['turn']} left"
+    def test_turn_dutch_english(self):
+        code = "draai left"
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = "turn left"
 
         self.assertEqual(result, expected)
+
+
 
     @check_local_lang_bool
-    def test_turn_value(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['turn']} 50", "en", "nl", self.level)
-        expected = f"{self.keywords_to['turn']} 50"
+    def test_translate_back(self):
+        code = 'print Hallo welkom bij Hedy\nask hoe heet je\necho'
 
-        self.assertEqual(result, expected)
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
+
+        self.assertEqual(code, result)
+
+
 
     @check_local_lang_bool
     def test_invalid(self):
-        result = hedy_translation.translate_keywords(f"hallo", "en", "nl", self.level)
-        expected = f"hallo"
+        code = "hallo"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "hallo"
 
         self.assertEqual(result, expected)
 
     # No translation because of the invalid space error
     @check_local_lang_bool
     def test_invalid_space(self):
-        result = hedy_translation.translate_keywords(f" {self.keywords_from['print']} Hedy", "en", "nl", self.level)
-        expected = f" {self.keywords_from['print']} Hedy"
+        code = " ask Hedy"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = " ask Hedy"
 
         self.assertEqual(result, expected)
 
     @check_local_lang_bool
     def no_argument_ask(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_to['ask']}", "en", "nl", self.level)
-        expected = f"{self.keywords_to['ask']}"
+        code = "ask"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "ask"
 
         self.assertEqual(result, expected)
-
