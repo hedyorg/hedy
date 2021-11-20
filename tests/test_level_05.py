@@ -313,6 +313,20 @@ class TestsLevel5(HedyTester):
     self.assertEqual('found!', HedyTester.run_code(result))
   # todo would be good to make combinations with if and turtle
 
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b c is 1""")
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if a == b:
+      c = '1'""")
+    result = hedy.transpile(code, self.level)
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is red
@@ -320,7 +334,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=7,
       code=code,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 

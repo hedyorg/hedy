@@ -231,11 +231,10 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
     items is 'red'
     if 'red' in items:
-        print 'found!'""")
+        a is 1""")
     self.multi_level_tester(
-      max_level=17,
       code=code,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
@@ -243,11 +242,22 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent("""\
       color is [5, 6, 7]
       if 1 is color:
-          print 'success!'""")
+          a is 1""")
     self.multi_level_tester(
-      max_level=17,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_incompatible_types_gives_error(self):
+    code = textwrap.dedent("""\
+    a is 'test'
+    b is 15
+    if a is b:
+      c is 1""")
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.InvalidTypeCombinationException,
       test_name=self.name()
     )
 

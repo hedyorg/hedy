@@ -121,36 +121,6 @@ class TestsLevel2(HedyTester):
     expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to \\", expected_output)
 
-    def test_print_list_access(self):
-      code = textwrap.dedent("""\
-      animals is cat, dog, platypus
-      print animals at random""")
-
-      expected = textwrap.dedent("""\
-      animals = ['cat', 'dog', 'platypus']
-      print(f'{random.choice(animals)}')""")
-
-      self.multi_level_tester(
-        code=code,
-        max_level=10,
-        expected=expected,
-        test_name=self.name(),
-        extra_check_function=self.is_not_turtle()
-      )
-
-    # issue #745
-    def test_print_list_gives_type_error(self):
-      code = textwrap.dedent("""\
-      plaatsen is een stad, een  dorp, een strand
-      print plaatsen""")
-
-      self.multi_level_tester(
-        code=code,
-        max_level=10,
-        exception=hedy.exceptions.InvalidArgumentTypeException,
-        test_name=self.name()
-      )
-
   #is tests
   def test_assign(self):
     result = hedy.transpile("naam is Felienne", self.level)
@@ -290,7 +260,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code="turn right 90",
-      exception=hedy.exceptions.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentException,
       test_name=self.name()
     )
 

@@ -88,19 +88,6 @@ class TestsLevel4(HedyTester):
       test_name=self.name()
     )
 
-  # issue #745
-  def test_print_list(self):
-    code = textwrap.dedent("""\
-        plaatsen is een stad, een  dorp, een strand
-        print 'test' plaatsen""")
-
-    self.multi_level_tester(
-      code=code,
-      max_level=10,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
   def test_ask_Spanish(self):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
@@ -139,17 +126,19 @@ class TestsLevel4(HedyTester):
         extra_check_function=self.is_not_turtle(),
         test_name=self.name()
     )
+
   def test_ask_with_list_gives_type_error(self):
     code = textwrap.dedent("""\
     colors is orange, blue, green
     favorite is ask 'Is your fav color' colors""")
 
     self.multi_level_tester(
-        max_level=10,
+        max_level=11,
         code=code,
         exception=hedy.exceptions.InvalidArgumentTypeException,
         test_name=self.name()
     )
+
   def test_ask_with_string_var(self):
     code = textwrap.dedent("""\
     color is orange
@@ -356,18 +345,6 @@ class TestsLevel4(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  def test_ask_assign_list(self):
-    code = textwrap.dedent("""\
-    color is gree, blue
-    choice is ask 'Is your favorite color one of: ' color""")
-
-    self.multi_level_tester(
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      max_level=10,
-      test_name=self.name()
-    )
-
   def test_forward_ask(self):
     code = textwrap.dedent("""\
     afstand is ask 'hoe ver dan?'
@@ -377,7 +354,7 @@ class TestsLevel4(HedyTester):
     t.forward(afstand)
     time.sleep(0.1)""")
     self.multi_level_tester(
-      max_level=7,
+      max_level=self.max_turtle_level,
       code=code,
       expected=expected,
       extra_check_function=self.is_turtle(),
@@ -461,7 +438,7 @@ class TestsLevel4(HedyTester):
     b = 'a'
     print(f'{a}{b}')""")  # TODO: @Felienne, in level 2, there is a space between {a} {b}, not {a}{b}. Is this expected?
     self.multi_level_tester(
-      max_level=4,
+      max_level=11,
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),

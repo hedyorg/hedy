@@ -41,8 +41,10 @@ class Command:
     in_list = 'in'
     equality = 'is'
     for_loop = 'for'
-    sum = 'sum'
     addition = 'addition'
+    subtraction = 'subtraction'
+    multiplication = 'multiplication'
+    division = 'division'
     list_access = 'at random'
 
 
@@ -117,14 +119,22 @@ commands_and_types_per_level = {
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.float, HedyType.boolean]},
-    Command.sum: {
-        6: [HedyType.integer],
-        12: [HedyType.integer, HedyType.float],
-    },
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.float]},
     Command.addition: {
         6: [HedyType.integer],
         12: [HedyType.string, HedyType.integer, HedyType.float]
+    },
+    Command.subtraction: {
+        1: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
+    },
+    Command.multiplication: {
+        1: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
+    },
+    Command.division: {
+        1: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
     },
     Command.for_loop: {11: [HedyType.integer]}
 }
@@ -372,10 +382,6 @@ class TypeValidator(Transformer):
     def turn(self, tree):
         if tree.children:
             name = tree.children[0].children[0]
-            if self.level > 1 and name in command_turn_literals:
-                # TODO: needs different error message
-                exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=name,
-                                                        allowed_types=get_allowed_types(Command.turn, self.level))
             if self.level > 1 or name not in command_turn_literals:
                 self.validate_args_type(tree.children, Command.turn)
         return self.to_typed_tree(tree)
@@ -434,8 +440,9 @@ class TypeValidator(Transformer):
             rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
             prom_left_type, prom_right_type = promote_types([left_type, right_type], rules)
             if prom_left_type != prom_right_type:
-                raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type,
-                                                              invalid_argument='', allowed_types=allowed_types)
+                left_arg = tree.children[0].children[0]
+                right_arg = tree.children[1].children[0]
+                raise exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def repeat_list(self, tree):
@@ -487,16 +494,16 @@ class TypeValidator(Transformer):
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
     def subtraction(self, tree):
-        return self.to_sum_typed_tree(tree, Command.sum)
+        return self.to_sum_typed_tree(tree, Command.subtraction)
 
     def addition(self, tree):
         return self.to_sum_typed_tree(tree, Command.addition)
 
     def multiplication(self, tree):
-        return self.to_sum_typed_tree(tree, Command.sum)
+        return self.to_sum_typed_tree(tree, Command.multiplication)
 
     def division(self, tree):
-        return self.to_sum_typed_tree(tree, Command.sum)
+        return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
         expr_type = self.get_sum_type(tree, command)
@@ -515,28 +522,18 @@ class TypeValidator(Transformer):
         prom_left_type, prom_right_type = promote_types([left_type, right_type], rules)
 
         if prom_left_type != prom_right_type:
-            # TODO: probably this requires a separate exception
-            raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type, invalid_argument='',
-                                                          allowed_types=allowed_types)
+            left_arg = tree.children[0].children[0]
+            right_arg = tree.children[1].children[0]
+            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
         return prom_left_type
 
     def check_type_allowed(self, command, allowed_types, tree):
         arg_type = self.get_type(tree)
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
-            self.raise_invalid_type_error(allowed_types, command, tree, arg_type)
+            variable = tree.children[0]
+            raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
+                                                          invalid_argument=variable, allowed_types=allowed_types)
         return arg_type
-
-    def raise_invalid_type_error(self, allowed_types, command, variable, used_invalid_type):
-        # we first try to raise if we expect 1 thing exactly for more precise error messages
-        if len(allowed_types) == 1:
-            variable = variable.children[0]
-            # TODO: the exception could be reused not only for lists
-            if allowed_types[0] == HedyType.list:
-                raise exceptions.RequiredArgumentTypeException(command=command, variable=variable,
-                                                               required_type=allowed_types[0])
-
-        raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=used_invalid_type,
-                                                      invalid_argument='', allowed_types=allowed_types)
 
     def validate_args_type(self, children, command):
         allowed_types = get_allowed_types(command, self.level)
@@ -1879,13 +1876,12 @@ def is_program_valid(program_root, input_string, level, lang):
                     except exceptions.HedyException:
                         # The fixed code contains another error. Only report the original error for now.
                         pass
-            if closest == None:  # we couldn't find a suggestion because the command itself was found
-                # making the error super-specific for the turn command for now
-                # is it possible to have a generic and meaningful syntax error message for different commands?
-                if invalid_command == 'turn':
-                    raise hedy.exceptions.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
-                                                                       allowed_types=['right', 'left', 'number'],
-                                                                       invalid_argument=''.join(invalid_info.arguments))
+            if closest is None:  # we couldn't find a suggestion because the command itself was found
+                if invalid_command == Command.turn:
+                    arg = ''.join(invalid_info.arguments).strip()
+                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
+                                                                   allowed_types=get_allowed_types(Command.turn, level),
+                                                                   invalid_argument=arg)
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,

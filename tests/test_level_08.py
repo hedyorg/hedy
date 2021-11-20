@@ -21,6 +21,24 @@ class TestsLevel8(HedyTester):
 
     self.assertEqual(expected, result.code)
 
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b
+      c is 1""")
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if str(a) == str(b):
+      c = '1'""")
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
     items is red
@@ -29,7 +47,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 

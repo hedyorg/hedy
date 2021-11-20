@@ -36,15 +36,17 @@ class TestsLevel3(HedyTester):
 
 
   # issue #745
-  def test_print_list(self):
+  def test_print_list_gives_type_error(self):
     code = textwrap.dedent("""\
         plaatsen is een stad, een  dorp, een strand
-        print test plaatsen""")
+        print plaatsen""")
 
-    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
-      result = hedy.transpile(code, self.level)
-
-    self.assertEqual('Invalid Argument Type', context.exception.error_code)
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
@@ -107,6 +109,23 @@ class TestsLevel3(HedyTester):
 
     expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
+
+  def test_print_list_access(self):
+    code = textwrap.dedent("""\
+    animals is cat, dog, platypus
+    print animals at random""")
+
+    expected = textwrap.dedent("""\
+    animals = ['cat', 'dog', 'platypus']
+    print(f'{random.choice(animals)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected,
+      test_name=self.name(),
+      extra_check_function=self.is_not_turtle()
+    )
 
   #is tests
   def test_assign(self):
@@ -260,15 +279,6 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
-  # issue #792
-  def test_turn_right_number(self):
-    self.multi_level_tester(
-      max_level=10,
-      code="turn right 90",
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
   #forward tests
   def test_forward_without_argument(self):
     code = textwrap.dedent("""\
@@ -280,22 +290,13 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-  def test_forward_with_string_variable(self):
-    code = textwrap.dedent("""\
-        a is test
-        forward a""")
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
+
   def test_forward_with_list_variable(self):
     code = textwrap.dedent("""\
         a is 1, 2, 3
         forward a""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
@@ -505,7 +506,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
 
@@ -518,7 +519,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
   #negative tests
@@ -536,14 +537,15 @@ class TestsLevel3(HedyTester):
       exception=hedy.exceptions.IncompleteCommandException,
       test_name=self.name()
     )
-  def test_random_from_string(self):
+
+  def test_random_from_string_gives_type_error(self):
     code = textwrap.dedent("""\
       items is aap noot mies
       print items at random""")
     self.multi_level_tester(
       code=code,
-      max_level=4,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
+      max_level=5,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
       test_name=self.name()
     )
   def test_random_undefined_var(self):
