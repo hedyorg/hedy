@@ -19,9 +19,10 @@ class TestsTranslationLevel1(HedyTester):
 
     @check_local_lang_bool
     def test_print(self):
-        result = hedy_translation.translate_keywords(f"{self.keywords_from['print']} Hallo welkom bij Hedy!", "en", "nl",
-                                         self.level)
-        expected = f"{self.keywords_to['print']} Hallo welkom bij Hedy!"
+        code = 'print Hallo welkom bij Hedy!'
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = 'vraag Hallo welkom bij Hedy!'
 
         self.assertEqual(result, expected)
 
@@ -38,6 +39,8 @@ class TestsTranslationLevel1(HedyTester):
     def test_print_kewords(self):
         result = hedy_translation.translate_keywords(f"{self.keywords_from['print']} print ask echo", "en", "nl", self.level)
         expected = f"{self.keywords_to['print']} print ask echo"
+
+        self.assertEqual(result, expected)
 
     @check_local_lang_bool
     def test_ask(self):
