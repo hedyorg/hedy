@@ -9,7 +9,6 @@ import hedy_content
 TRANSLATIONS = hedyweb.Translations ()
 from config import config
 cookie_name     = config ['session'] ['cookie_name']
-import sys
 
 def routes (app, database):
     global DATABASE
@@ -55,6 +54,7 @@ def routes (app, database):
     def create_class (user):
         if not is_teacher(user):
             return 'Only teachers can create classes', 403
+
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -85,6 +85,7 @@ def routes (app, database):
     def update_class (user, class_id):
         if not is_teacher(user):
             return 'Only teachers can update classes', 403
+            
         body = request.json
         # Validations
         if not isinstance(body, dict):
