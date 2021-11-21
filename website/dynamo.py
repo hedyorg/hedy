@@ -1,5 +1,6 @@
 import functools
 import boto3
+import copy
 import numbers
 from abc import ABCMeta
 import os
@@ -220,16 +221,27 @@ class AwsDynamoStorage(TableStorage):
         return self._decode(result.get('Item', None))
 
     def query(self, table_name, key, sort_key=None, reverse=False):
-        # DynamoDB knows what the sort key is already so it doesn't need to use the passed field
+        eq_conditions, special_conditions = DynamoCondition.partition(key, sort_key)
+        validate_only_sort_key(special_conditions, sort_key)
 
-        key_expression = ' AND '.join(f'{field} = :{field}' for field in key.keys())
-        key_values = { f':{field}': DDB_SERIALIZER.serialize(key[field]) for field in key.keys() }
+        # We must escape field names with a '#' because Dynamo is unhappy
+        # with fields called 'level' etc: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+        # This escapes too much, but at least it's easy.
+
+        key_expression = ' AND '.join(
+            [f'#{field} = :{field}' for field in eq_conditions.keys()] +
+            [cond.to_dynamo_expression(field) for field, cond in special_conditions.items()])
+
+        key_values = { f':{field}': DDB_SERIALIZER.serialize(key[field]) for field in eq_conditions.keys() }
+        for field, cond in special_conditions.items():
+            key_values.update(cond.to_dynamo_values(field))
 
         result = self.db.query(
             TableName=self.db_prefix + '-' + table_name,
             KeyConditionExpression=key_expression,
             ExpressionAttributeValues=key_values,
-            ScanIndexForward=not reverse)
+            ScanIndexForward=not reverse,
+            ExpressionAttributeNames={'#' + field: field for field in key.keys()})
         return list(map(self._decode, result.get('Items', [])))
 
     def query_index(self, table_name, index_name, key, reverse=False):
@@ -239,9 +251,10 @@ class AwsDynamoStorage(TableStorage):
         result = self.db.query(
             TableName = self.db_prefix + '-' + table_name,
             IndexName = index_name,
-            KeyConditionExpression = key_field + ' = :value',
+            KeyConditionExpression = f'#{key_field} = :value',
             ExpressionAttributeValues = {':value': {'S': key_value}},
-            ScanIndexForward = not reverse)
+            ScanIndexForward = not reverse,
+            ExpressionAttributeNames={'#' + field: field for field in key.keys()})
 
         return list(map(self._decode, result.get('Items', [])))
 
@@ -332,8 +345,11 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def query(self, table_name, key, sort_key=None, reverse=False):
+        eq_conditions, special_conditions = DynamoCondition.partition(key, sort_key)
+        validate_only_sort_key(special_conditions, sort_key)
+
         records = self.tables.get(table_name, [])
-        filtered = [r for r in records if self._matches(r, key)]
+        filtered = [r for r in records if self._query_matches(r, eq_conditions, special_conditions)]
 
         if sort_key:
             filtered.sort(key=lambda x: x[sort_key])
@@ -341,7 +357,7 @@ class MemoryStorage(TableStorage):
         if reverse:
             filtered.reverse()
 
-        return filtered
+        return copy.copy(filtered)
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, key, reverse=False):
@@ -352,9 +368,9 @@ class MemoryStorage(TableStorage):
         records = self.tables.setdefault(table_name, [])
         index = self._find_index(records, key)
         if index is None:
-            records.append(data)
+            records.append(copy.copy(data))
         else:
-            records[index] = data
+            records[index] = copy.copy(data)
         self._flush()
 
     @lock.synchronized
@@ -418,16 +434,20 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def scan(self, table_name):
-        return self.tables.get(table_name, [])
+        return copy.copy(self.tables.get(table_name, []))
 
     def _find_index(self, records, key):
         for i, v in enumerate(records):
-            if self._matches(v, key):
+            if self._eq_matches(v, key):
                 return i
         return None
 
-    def _matches(self, record, key):
+    def _eq_matches(self, record, key):
         return all(record.get(k) == v for k, v in key.items())
+
+    def _query_matches(self, record, eq, conds):
+        return (all(record.get(k) == v for k, v in eq.items())
+            and all(cond.matches(record.get(k)) for k, cond in conds.items()))
 
     def _flush(self):
         if self.filename:
@@ -455,6 +475,7 @@ class IndexLookup:
 class DynamoUpdate:
     def to_dynamo(self):
         raise NotImplementedError()
+
 
 class DynamoIncrement(DynamoUpdate):
     def __init__(self, delta=1):
@@ -515,6 +536,60 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
                 'Value': { 'SS': list(self.elements) },
             }
 
+
+class DynamoCondition:
+    """Base class for Query conditions.
+
+    These encode any type of comparison supported by Dynamo except equality.
+
+    Conditions only apply to sort keys.
+    """
+    def to_dynamo_expression(self, _field_name):
+        """Render expression part of Dynamo query."""
+        raise NotImplementedError()
+
+    def to_dynamo_values(self, _field_name):
+        """Render values for the Dynamo expression."""
+        raise NotImplementedError()
+
+    def matches(self, value):
+        """Whether or not the given value matches the condition (for in-memory db)."""
+        raise NotImplementedError()
+
+    @staticmethod
+    def partition(key, sort_key):
+        """Partition a dictionary into 2 dictionaries.
+
+        The first one will contain all elements for which the values are
+        NOT of type DynamoCondition. The other one will contain all the elements
+        for which the value ARE DynamoConditions.
+        """
+        eq_conditions = { k: v for k, v in key.items() if not isinstance(v, DynamoCondition) }
+        special_conditions = { k: v for k, v in key.items() if isinstance(v, DynamoCondition) }
+
+        return (eq_conditions, special_conditions)
+
+
+class Between(DynamoCondition):
+    """Assert that a value is between two other values."""
+
+    def __init__(self, minval, maxval):
+        self.minval = minval
+        self.maxval = maxval
+
+    def to_dynamo_expression(self, field_name):
+        return f'#{field_name} BETWEEN :{field_name}_min AND :{field_name}_max'
+
+    def to_dynamo_values(self, field_name):
+        return {
+            f':{field_name}_min': DDB_SERIALIZER.serialize(self.minval),
+            f':{field_name}_max': DDB_SERIALIZER.serialize(self.maxval),
+        }
+
+    def matches(self, value):
+        return self.minval <= value <= self.maxval
+
+
 def replace_decimals(obj):
     """
     Replace Decimals with native Python values.
@@ -555,3 +630,9 @@ class CustomEncoder(json.JSONEncoder):
         if obj.get('$type') == 'set':
             return set(obj['elements'])
         return obj
+
+
+def validate_only_sort_key(conds, sort_key):
+    """Check that only the sort key is used in the given key conditions."""
+    if set(conds.keys()) - set([sort_key]):
+        raise RuntimeError(f'Conditions only allowed on sort key {sort_key}, got: {list(conds)}')
