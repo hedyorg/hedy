@@ -24,95 +24,123 @@ class TestsTranslationLevel2(HedyTester):
     level = 2
 
     def test_print(self):
-        result = hedy_translation.translate_keywords("print Hallo welkom bij Hedy!", "nl", "en", self.level)
+        code = "print Hallo welkom bij Hedy!"
+
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "print Hallo welkom bij Hedy!"
 
         self.assertEqual(result, expected)
 
-    def test_print_multiple_lines(self):
-        result = hedy_translation.translate_keywords("print Hallo welkom bij Hedy!\nprint veel plezier", "en", "nl", self.level)
-        expected = "print Hallo welkom bij Hedy!\nprint veel plezier"
+    def test_print_kewords(self):
+        code = "print print ask echo"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = "print print ask echo"
 
         self.assertEqual(result, expected)
 
-    def test_print_kewords(self):
-        result = hedy_translation.translate_keywords("print print ask echo", "en", "nl", self.level)
-        expected = "print print ask echo"
+    def test_ask_assign_dutch_english(self):
+        code = "mens is vraag Hallo welkom bij Hedy!"
 
-    def test_ask_assign(self):
-        result = hedy_translation.translate_keywords("mens is vraag Hallo welkom bij Hedy!", "nl", "en", self.level)
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "mens is ask Hallo welkom bij Hedy!"
 
         self.assertEqual(result, expected)
 
+    def test_ask_assign_english_dutch(self):
+        code = "mens is ask Hallo welkom bij Hedy!"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = "mens is vraag Hallo welkom bij Hedy!"
+
+        self.assertEqual(result, expected)
+
     def test_ask_multiple_lines(self):
-        result = hedy_translation.translate_keywords("welkom is ask Hallo welkom bij Hedy!\nplezier is ask veel plezier", "en", "nl", self.level)
+        code = "welkom is ask Hallo welkom bij Hedy!\nplezier is ask veel plezier"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "welkom is vraag Hallo welkom bij Hedy!\nplezier is vraag veel plezier"
 
         self.assertEqual(result, expected)
 
     def test_ask_kewords(self):
-        result = hedy_translation.translate_keywords("hedy is vraag print ask echo", "en", "nl", self.level)
+        code = "hedy is vraag print ask echo"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "hedy is vraag print ask echo"
 
         self.assertEqual(result, expected)
 
     def test_ask_print(self):
-        result = hedy_translation.translate_keywords("hedy is hello\nprint hedy", "en", "nl", self.level)
+        code = "hedy is hello\nprint hedy"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "hedy is hello\nprint hedy"
 
         self.assertEqual(result, expected)
 
     def test_assign_list(self):
-        result = hedy_translation.translate_keywords("mens is papa mama oma", "en", "nl", self.level)
+        code = "mens is papa mama oma"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "mens is papa mama oma"
 
         self.assertEqual(result, expected)
 
-    def test_acces_list(self):
-        result = hedy_translation.translate_keywords("mens is papa mama oma\nprint mens at random", "en", "nl", self.level)
+    def test_acces_list_english_dutch(self):
+        code = "mens is papa mama oma\nprint mens at random"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "mens is papa mama oma\nprint mens opplek willekeurig"
 
         self.assertEqual(result, expected)
 
-    def test_forward(self):
-        result = hedy_translation.translate_keywords("forward 50", "en", "nl", self.level)
-        expected = "vooruit 50"
+    def test_acces_list_dutch_english(self):
+        code = "mens is papa mama oma\nprint mens opplek willekeurig"
 
-        self.assertEqual(result, expected)
-
-    def test_turn(self):
-        result = hedy_translation.translate_keywords("turn left", "en", "nl", self.level)
-        expected = "draai left"
-
-        self.assertEqual(result, expected)
-
-    def test_turn_value(self):
-        result = hedy_translation.translate_keywords("turn 50", "en", "nl", self.level)
-        expected = "draai 50"
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+        expected = "mens is papa mama oma\nprint mens at random"
 
         self.assertEqual(result, expected)
 
     def test_forward_assigned_value(self):
-        result = hedy_translation.translate_keywords("value is 50\nforward value", "en", "nl", self.level)
+        code = "value is 50\nforward value"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "value is 50\nvooruit value"
 
         self.assertEqual(result, expected)
 
+    def test_translate_back(self):
+        code = "print welkom bij Hedy\nnaam is ask what is your name\nprint naam"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+
+        expected = "print welkom bij Hedy\nnaam is ask what is your name\nprint naam"
+
+        self.assertEqual(result, expected)
+
     def test_invalid(self):
-        result = hedy_translation.translate_keywords("hallo", "en", "nl", self.level)
+        code = "hallo"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "hallo"
 
         self.assertEqual(result, expected)
 
     def test_invalid_space(self):
-        result = hedy_translation.translate_keywords(" print Hedy", "en", "nl", self.level)
+        code = " print Hedy"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = " print Hedy"
 
         self.assertEqual(result, expected)
 
     def no_argument_ask(self):
-        result = hedy_translation.translate_keywords("ask", "en", "nl", self.level)
+        code = "ask"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "vraag"
 
         self.assertEqual(result, expected)
