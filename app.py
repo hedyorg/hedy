@@ -446,14 +446,14 @@ def hedy_error_to_response(ex, translations):
 
 
 def translate_error(code, translations, arguments):
-    arguments_that_require_translation = ['allowed_types', 'invalid_type', 'required_type', 'character_found', 'concept', 'tip']
-
+    arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found', 'concept', 'tip']
+    arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2']
     # fetch the error template
     error_template = translations[code]
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
-        if k == "guessed_command":
+        if k in arguments_that_require_highlighting:
             arguments[k] = hedy.style_closest_command(v)
 
         if k in arguments_that_require_translation:
@@ -465,12 +465,15 @@ def translate_error(code, translations, arguments):
     return error_template.format(**arguments)
 
 def translate_list(translations, args):
-    if len(args) > 1:
-        # TODO: is this correct syntax for all supported languages?
-        return f"{', '.join([translations.get(a, a) for a in args[0:-1]])}" \
+    translated_args = [translations.get(a, a) for a in args]
+    # Deduplication is needed because diff values could be translated to the same value, e.g. int and float => a number
+    translated_args = list(dict.fromkeys(translated_args))
+
+    if len(translated_args) > 1:
+        return f"{', '.join(translated_args[0:-1])}" \
                f" {translations.get('or', 'or')} " \
-               f"{translations.get(args[-1], args[-1])}"
-    return ''.join([translations.get(a, a) for a in args])
+               f"{translated_args[-1]}"
+    return ''.join(translated_args)
 
 @app.route('/report_error', methods=['POST'])
 def report_error():

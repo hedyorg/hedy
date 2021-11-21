@@ -1,5 +1,6 @@
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel6(HedyTester):
@@ -23,17 +24,11 @@ class TestsLevel6(HedyTester):
       test_name=self.name()
     )
 
-  def test_unsupported_float_with_dot(self):
+  @parameterized.expand(['1.5', '1,5'])
+  def test_calculation_with_unsupported_float_gives_error(self, number):
     self.multi_level_tester(
-      max_level=10,
-      code="print 1.5 + 1",
-      exception=hedy.exceptions.UnsupportedFloatException,
-      test_name=self.name()
-    )
-  def test_unsupported_float_with_comma(self):
-    self.multi_level_tester(
-      max_level=10,
-      code="print 1,5 + 1",
+      max_level=11,
+      code=f"print {number} + 1",
       exception=hedy.exceptions.UnsupportedFloatException,
       test_name=self.name()
     )
@@ -251,6 +246,29 @@ class TestsLevel6(HedyTester):
     self.assertEqual(False, result.has_turtle)
     self.assertEqual("0", HedyTester.run_code(result))
 
+  def test_calc_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is test
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_calc_with_list_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is one, two
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   # combined tests
   def test_print_else(self):
@@ -339,6 +357,23 @@ class TestsLevel6(HedyTester):
       code=code,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
+
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b c is 1""")
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if str(a) == str(b):
+      c = '1'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      expected=expected,
       test_name=self.name()
     )
 
