@@ -426,7 +426,6 @@ class TestsLevel4(HedyTester):
     self.assertEqual(True, hedy.hash_needed('héyyy'))
     self.assertEqual(False, hedy.hash_needed('heyyy'))
 
-
   def test_chained_assignments(self):
     code = textwrap.dedent("""\
     a is dog
@@ -436,7 +435,7 @@ class TestsLevel4(HedyTester):
     expected = textwrap.dedent("""\
     a = 'dog'
     b = 'a'
-    print(f'{a}{b}')""")  # TODO: @Felienne, in level 2, there is a space between {a} {b}, not {a}{b}. Is this expected?
+    print(f'{a}{b}')""")
     self.multi_level_tester(
       max_level=11,
       code=code,
@@ -444,11 +443,3 @@ class TestsLevel4(HedyTester):
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
-
-
-
-
-
-
-
-

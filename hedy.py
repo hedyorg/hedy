@@ -116,8 +116,9 @@ commands_and_types_per_level = {
         16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
     },
     Command.ask: {
-        1: [HedyType.string, HedyType.integer],  # until level 11 integers can be used as strings
-        12: [HedyType.string]
+        1: [HedyType.string, HedyType.integer],
+        12: [HedyType.string, HedyType.integer, HedyType.float],
+        16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
     },
     Command.turn: {1: command_turn_literals + [HedyType.integer],
                    2: [HedyType.integer]},
@@ -148,7 +149,7 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
     Command.bigger: {14: [HedyType.integer, HedyType.float]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float]}
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -373,29 +374,29 @@ class TypeValidator(Transformer):
         self.level = level
 
     def print(self, tree):
-        self.validate_args_type(tree.children, Command.print)
+        self.validate_args_type_allowed(tree.children, Command.print)
         return self.to_typed_tree(tree)
 
     def ask(self, tree):
         if self.level > 1:
             self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
-        self.validate_args_type(tree.children[1:], Command.ask)
+        self.validate_args_type_allowed(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.any)
 
     def input(self, tree):
-        self.validate_args_type(tree.children[1:], Command.ask)
+        self.validate_args_type_allowed(tree.children[1:], Command.ask)
         return self.to_typed_tree(tree, HedyType.any)
 
     def forward(self, tree):
         if tree.children:
-            self.validate_args_type(tree.children, Command.forward)
+            self.validate_args_type_allowed(tree.children, Command.forward)
         return self.to_typed_tree(tree)
 
     def turn(self, tree):
         if tree.children:
             name = tree.children[0].children[0]
             if self.level > 1 or name not in command_turn_literals:
-                self.validate_args_type(tree.children, Command.turn)
+                self.validate_args_type_allowed(tree.children, Command.turn)
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
@@ -409,7 +410,7 @@ class TypeValidator(Transformer):
 
     # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
-        self.validate_args_type(tree.children[0], Command.list_access)
+        self.validate_args_type_allowed(tree.children[0], Command.list_access)
 
         list_name = hash_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
@@ -426,32 +427,20 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree)
 
     def add(self, tree):
-        self.validate_args_type(tree.children[1], Command.add_to_list)
+        self.validate_args_type_allowed(tree.children[1], Command.add_to_list)
         return self.to_typed_tree(tree)
 
     def remove(self, tree):
-        self.validate_args_type(tree.children[1], Command.remove_from_list)
+        self.validate_args_type_allowed(tree.children[1], Command.remove_from_list)
         return self.to_typed_tree(tree)
 
     def in_list_check(self, tree):
-        self.validate_args_type(tree.children[1], Command.in_list)
+        self.validate_args_type_allowed(tree.children[1], Command.in_list)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
-        command = Command.equality
-        allowed_types = get_allowed_types(command, self.level)
-
-        left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
-        right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
-
-        if not self.ignore_type(left_type) and not self.ignore_type(right_type):
-            # Until level 12, numbers should be converted to strings in equality checks
-            rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
-            prom_left_type, prom_right_type = promote_types([left_type, right_type], rules)
-            if prom_left_type != prom_right_type:
-                left_arg = tree.children[0].children[0]
-                right_arg = tree.children[1].children[0]
-                raise exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
+        rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
+        self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def repeat_list(self, tree):
@@ -515,26 +504,8 @@ class TypeValidator(Transformer):
         return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
-        expr_type = self.get_sum_type(tree, command)
-        return TypedTree(tree.data, tree.children, tree.meta, expr_type)
-
-    def get_sum_type(self, tree, command):
-        allowed_types = get_allowed_types(command, self.level)
-
-        left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
-        right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
-
-        if self.ignore_type(left_type) or self.ignore_type(right_type):
-            return HedyType.any
-
-        rules = [int_to_float]
-        prom_left_type, prom_right_type = promote_types([left_type, right_type], rules)
-
-        if prom_left_type != prom_right_type:
-            left_arg = tree.children[0].children[0]
-            right_arg = tree.children[1].children[0]
-            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
-        return prom_left_type
+        prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, [int_to_float])
+        return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 
     def smaller(self, tree):
         return self.to_comparison_tree(Command.smaller, tree)
@@ -549,13 +520,37 @@ class TypeValidator(Transformer):
         return self.to_comparison_tree(Command.bigger_equal, tree)
 
     def not_equal(self, tree):
-        return self.to_comparison_tree(Command.not_equal, tree)
+        self.validate_args_type_allowed(tree.children, Command.not_equal)
+        return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[0])
         self.check_type_allowed(command, allowed_types, tree.children[1])
         return self.to_typed_tree(tree, HedyType.boolean)
+
+    def validate_binary_command_args_type(self, command, tree, type_promotion_rules):
+        allowed_types = get_allowed_types(command, self.level)
+
+        left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
+        right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
+
+        if self.ignore_type(left_type) or self.ignore_type(right_type):
+            return HedyType.any, HedyType.any
+
+        prom_left_type, prom_right_type = promote_types([left_type, right_type], type_promotion_rules)
+
+        if prom_left_type != prom_right_type:
+            left_arg = tree.children[0].children[0]
+            right_arg = tree.children[1].children[0]
+            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
+        return prom_left_type, prom_right_type
+
+    def validate_args_type_allowed(self, children, command):
+        allowed_types = get_allowed_types(command, self.level)
+        children = children if type(children) is list else [children]
+        for child in children:
+            self.check_type_allowed(command, allowed_types, child)
 
     def check_type_allowed(self, command, allowed_types, tree):
         arg_type = self.get_type(tree)
@@ -564,12 +559,6 @@ class TypeValidator(Transformer):
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
                                                           invalid_argument=variable, allowed_types=allowed_types)
         return arg_type
-
-    def validate_args_type(self, children, command):
-        allowed_types = get_allowed_types(command, self.level)
-        children = children if type(children) is list else [children]
-        for child in children:
-            self.check_type_allowed(command, allowed_types, child)
 
     def get_type(self, tree):
         # TypedTree with type 'None' and 'string' could be in the lookup
@@ -1631,7 +1620,7 @@ def get_suggestions_for_language(lang):
 
         for item, doc in documents.items():
          suggestions[item] = doc
-    
+
     return suggestions
 
 
@@ -1910,7 +1899,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, get_suggestions_for_language(lang)[level])
+            closest = closest_command(invalid_command, get_suggestions_for_language('en')[level])
             fixed_code = None
             result = None
             if closest:

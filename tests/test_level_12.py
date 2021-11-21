@@ -130,15 +130,27 @@ class TestsLevel12(HedyTester):
     )
 
   @parameterized.expand(['10', '10.0'])
-  def test_ask_with_number_var_gives_type_error(self, number):
+  def test_ask_with_number_var(self, number):
     code = textwrap.dedent(f"""\
       number is {number}
       favorite is ask 'Is your fav number' number""")
 
+    expected = textwrap.dedent(f"""\
+      number = {number}
+      favorite = input('Is your fav number'+number)
+      try:
+        favorite = int(favorite)
+      except ValueError:
+        try:
+          favorite = float(favorite)
+        except ValueError:
+          pass""")
+
     self.multi_level_tester(
       code=code,
       max_level=17,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
 

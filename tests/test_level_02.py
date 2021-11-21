@@ -419,5 +419,20 @@ class TestsLevel2(HedyTester):
       test_name=self.name()
     )
 
+  def test_chained_assignments(self):
+    code = textwrap.dedent("""\
+    a is dog
+    b is a
+    print a b""")
 
-
+    expected = textwrap.dedent("""\
+    a = 'dog'
+    b = 'a'
+    print(f'{a} {b}')""")
+    self.multi_level_tester(
+      max_level=3,
+      code=code,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
