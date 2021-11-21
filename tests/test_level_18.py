@@ -172,13 +172,28 @@ class TestsLevel18(HedyTester):
         test_name=self.name()
       )
 
-    def test_input_disallows_printing_lists(self):
+    def test_input_with_list(self):
       code = textwrap.dedent("""
       color is ['green', 'blue']
       choice is input('Is your favorite color one of: ' color)""")
 
-      with self.assertRaises(hedy.hedy.exceptions.InvalidArgumentTypeException):
-        hedy.transpile(code, self.level)
+      expected = textwrap.dedent("""\
+      color = ['green', 'blue']
+      choice = input('Is your favorite color one of: '+color)
+      try:
+        choice = int(choice)
+      except ValueError:
+        try:
+          choice = float(choice)
+        except ValueError:
+          pass""")
+
+      self.multi_level_tester(
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_not_turtle(),
+          test_name=self.name()
+      )
 
     # negative tests
     def test_var_undefined_error_message(self):

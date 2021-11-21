@@ -122,15 +122,26 @@ class TestsLevel16(HedyTester):
             test_name=self.name()
         )
 
-    def test_ask_with_list_gives_type_error(self):
+    def test_ask_with_list(self):
         code = textwrap.dedent("""\
         colors is ['orange', 'blue', 'green']
         favorite is ask 'Is your fav color' colors""")
 
+        expected = textwrap.dedent("""\
+        colors = ['orange', 'blue', 'green']
+        favorite = input('Is your fav color'+colors)
+        try:
+          favorite = int(favorite)
+        except ValueError:
+          try:
+            favorite = float(favorite)
+          except ValueError:
+            pass""")
+
         self.multi_level_tester(
             code=code,
             max_level=17,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
+            expected=expected,
             test_name=self.name()
         )
 
@@ -185,10 +196,18 @@ class TestsLevel16(HedyTester):
            pass
         print(f'{random.choice(colors)}')""")
 
-
         self.multi_level_tester(
           code=code,
           max_level=17,
           expected=expected,
           test_name=self.name()
         )
+
+    def test_equality_with_list_gives_error(self):
+        code = textwrap.dedent("""\
+        color is [5, 6, 7]
+        if 1 is color
+            print 'success!'""")
+
+        with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException):
+            hedy.transpile(code, self.level)

@@ -66,18 +66,27 @@ class UndefinedVarException(HedyException):
         super().__init__('Var Undefined',
             name=name)
 
-class RequiredArgumentTypeException(HedyException):
-    def __init__(self, command, variable, required_type):
-        super().__init__('Required Argument Type',
-            command=command,
-            variable=variable,
-            required_type=required_type)
-
 class InvalidArgumentTypeException(HedyException):
     def __init__(self, command, invalid_type, allowed_types, invalid_argument):
         super().__init__('Invalid Argument Type',
             command=command,
             invalid_type=invalid_type,
+            allowed_types=allowed_types,
+            invalid_argument=invalid_argument)
+
+class InvalidTypeCombinationException(HedyException):
+    def __init__(self, operation, arg1, arg2, type1, type2):
+        super().__init__('Invalid Type Combination',
+            operation=operation,
+            invalid_argument=arg1,
+            invalid_argument_2=arg2,
+            invalid_type=type1,
+            invalid_type_2=type2)
+
+class InvalidArgumentException(HedyException):
+    def __init__(self, command, allowed_types, invalid_argument):
+        super().__init__('Invalid Argument',
+            command=command,
             allowed_types=allowed_types,
             invalid_argument=invalid_argument)
 
