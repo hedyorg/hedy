@@ -541,10 +541,10 @@ def programs_page(request):
     from_user = request.args.get('user') or None
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return "unauthorized", 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), username, g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
-            return "unauthorized", 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), username, g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_enrolled'))
 
     texts=TRANSLATIONS.get_translations(g.lang, 'Programs')
     ui=TRANSLATIONS.get_translations(g.lang, 'ui')
@@ -1025,7 +1025,8 @@ def main_page(page):
                                    auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher, **front_matter)
         else:
-            return "unauthorized", 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
+
 
     return render_template('main-page.html', mkd=markdown, menu=menu, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
 

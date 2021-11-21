@@ -12,6 +12,8 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
+
+import yaml
 import program_repair
 
 # Some useful constants
@@ -1606,6 +1608,22 @@ def create_grammar(level, lang="en"):
 
     return result
 
+def get_suggestions_for_language(lang):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "suggestions-" + str(lang) + ".yaml"
+    if not (path.isfile(path.join(script_dir, "grammars", filename))):
+        filename = "suggestions-en.yaml"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        documents = yaml.full_load(file)
+
+        suggestions = {}
+
+        for item, doc in documents.items():
+         suggestions[item] = doc
+
+    return suggestions
+
+
 def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
@@ -1881,7 +1899,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, commands_per_level[level])
+            closest = closest_command(invalid_command, get_suggestions_for_language(lang)[level])
             fixed_code = None
             result = None
             if closest:
