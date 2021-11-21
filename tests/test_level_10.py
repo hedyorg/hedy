@@ -44,7 +44,7 @@ class TestsLevel10(HedyTester):
       code = textwrap.dedent("""\
       dieren is hond, kat, papegaai
       voor dier in dieren
-        drukaf dier""")
+        print dier""")
 
       result = hedy.transpile(code, self.level, lang="nl")
 

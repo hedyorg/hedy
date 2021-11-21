@@ -1,12 +1,13 @@
 // adds comparisons
 
-condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
+condition: (equality_check | in_list_check | smaller | bigger | not_equal | smaller_equal | bigger_equal)
 
 //smaller and smaller_equal could be merged or refactored to minimize overlap?
+//also (var | text_in_quotes | NUMBER) could be one rule for all these (and for equality_check?)
 
-smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
-bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
-smaller_equal: (textwithoutspaces | list_access) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access)
-bigger_equal: (textwithoutspaces | list_access) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access)
-not_equal: (textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (textwithoutspaces | list_access)
+smaller: (var | text_in_quotes | NUMBER) _SPACE? _SMALLER _SPACE? (var | text_in_quotes | NUMBER)
+bigger: (var | text_in_quotes | NUMBER) _SPACE? _LARGER _SPACE? (var | text_in_quotes | NUMBER)
+smaller_equal: (var | text_in_quotes | NUMBER) _SPACE? _SMALLER_EQUALS _SPACE? (var | text_in_quotes | NUMBER)
+bigger_equal: (var | text_in_quotes | NUMBER) _SPACE? _LARGER_EQUALS _SPACE? (var | text_in_quotes | NUMBER)
+not_equal: (var | text_in_quotes | NUMBER) _SPACE? _NOT_EQUALS _SPACE? (var | text_in_quotes | NUMBER)
 

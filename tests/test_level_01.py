@@ -91,13 +91,13 @@ class TestsLevel1(HedyTester):
     self.assertEqual(False, result.has_turtle)
   if local_keywords_enabled:
     def test_print_dutch(self):
-      result = hedy.transpile("drukaf Hallo welkom bij Hedy!", self.level, lang="nl")
+      result = hedy.transpile("print Hallo welkom bij Hedy!", self.level, lang="nl")
       expected = "print('Hallo welkom bij Hedy!')"
       self.assertEqual(expected, result.code)
       self.assertEqual(False, result.has_turtle)
       self.assertEqual('Hallo welkom bij Hedy!', HedyTester.run_code(result))
-    def test_print_dutch_error(self):
-      code = textwrap.dedent("""print Hallo welkom bij Hedy!""")
+    def test_ask_dutch_error(self):
+      code = textwrap.dedent("""ask Heb je er zin?""")
 
       with self.assertRaises(hedy.exceptions.ParseException) as context:
         result = hedy.transpile(code, self.level, lang="nl")
