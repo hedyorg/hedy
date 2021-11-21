@@ -20,14 +20,15 @@ def routes (app, database):
     @requires_login
     def get_classes (user):
         if not is_teacher(user):
-            return 'Only teachers can retrieve classes', 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('retrieve_class'))
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
     @app.route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
+        app.logger.info('This is info output')
         if not is_teacher(user):
-            return 'Only teachers can retrieve classes', 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('retrieve_class'))
         Class = DATABASE.get_class (class_id)
         if not Class or Class ['teacher'] != user ['username']:
             return utils.page_404 (TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('no_such_class'))
@@ -166,7 +167,7 @@ def routes (app, database):
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):
-            return 'Only teachers can retrieve classes', 403
+            return utils.page_403 (TRANSLATIONS, render_main_menu('hedy'), current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('retrieve_class'))
         Class = DATABASE.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.page_404(TRANSLATIONS, render_main_menu('my-profile'), current_user()['username'], g.lang,
