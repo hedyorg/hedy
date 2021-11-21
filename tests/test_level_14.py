@@ -88,7 +88,7 @@ class TestsLevel14(HedyTester):
       test_name=self.name()
     )
 
-  @parameterized.expand(HedyTester.comparison_commands)
+  @parameterized.expand(HedyTester.number_comparisons_commands)
   def test_comparison_with_string_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\
       a is 'text'
@@ -99,6 +99,24 @@ class TestsLevel14(HedyTester):
       code=code,
       max_level=16,
       exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_not_equal_with_string(self):
+    code = textwrap.dedent(f"""\
+      a is 'text'
+      if a != 12
+          b is 1""")
+
+    expected = textwrap.dedent(f"""\
+      a = 'text'
+      if str(a).zfill(100)!=str(12).zfill(100):
+        b = 1""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
       test_name=self.name()
     )
 

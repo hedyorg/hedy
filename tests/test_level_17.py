@@ -285,7 +285,7 @@ class TestsLevel17(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
 
-  @parameterized.expand(HedyTester.comparison_commands)
+  @parameterized.expand(HedyTester.number_comparisons_commands)
   def test_smaller_with_string_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\
       a is 'text'

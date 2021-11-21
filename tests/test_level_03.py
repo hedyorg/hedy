@@ -571,6 +571,3 @@ class TestsLevel3(HedyTester):
       exception=hedy.exceptions.WrongLevelException,
       test_name=self.name()
     )
-
-
-
