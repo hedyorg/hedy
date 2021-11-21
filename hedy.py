@@ -12,6 +12,8 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
+
+import yaml
 import program_repair
 
 # Some useful constants
@@ -49,34 +51,6 @@ class HedyType:
     list = 'list'
     float = 'float'
     boolean = 'boolean'
-
-
-# Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
-                      2: ['print', 'ask', 'is', 'turn', 'forward'],
-                      3: ['print', 'ask', 'is', 'turn', 'forward'],
-                      4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
-                      5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      7: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      8: ['print', 'ask', 'is', 'if', 'for', 'turn', 'forward'],
-                      9: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      11: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      12: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      14: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      16: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
-                      }
-
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -1522,6 +1496,22 @@ def create_grammar(level, lang="en"):
 
     return result
 
+def get_suggestions_for_language(lang):
+    script_dir = path.abspath(path.dirname(__file__))
+    filename = "suggestions-" + str(lang) + ".yaml"
+    if not (path.isfile(path.join(script_dir, "grammars", filename))):
+        filename = "suggestions-en.yaml"
+    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
+        documents = yaml.full_load(file)
+
+        suggestions = {}
+
+        for item, doc in documents.items():
+         suggestions[item] = doc
+    
+    return suggestions
+
+
 def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
@@ -1797,7 +1787,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, commands_per_level[level])
+            closest = closest_command(invalid_command, get_suggestions_for_language(lang)[level])
             fixed_code = None
             result = None
             if closest:
