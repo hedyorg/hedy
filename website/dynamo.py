@@ -1,5 +1,6 @@
 import functools
 import boto3
+import copy
 import numbers
 from abc import ABCMeta
 import os
@@ -356,7 +357,7 @@ class MemoryStorage(TableStorage):
         if reverse:
             filtered.reverse()
 
-        return filtered
+        return copy.copy(filtered)
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, key, reverse=False):
@@ -367,9 +368,9 @@ class MemoryStorage(TableStorage):
         records = self.tables.setdefault(table_name, [])
         index = self._find_index(records, key)
         if index is None:
-            records.append(data)
+            records.append(copy.copy(data))
         else:
-            records[index] = data
+            records[index] = copy.copy(data)
         self._flush()
 
     @lock.synchronized
@@ -433,7 +434,7 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def scan(self, table_name):
-        return self.tables.get(table_name, [])
+        return copy.copy(self.tables.get(table_name, []))
 
     def _find_index(self, records, key):
         for i, v in enumerate(records):
