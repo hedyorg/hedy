@@ -1,6 +1,7 @@
 
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel12(HedyTester):
@@ -128,21 +129,10 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
-  def test_ask_with_integer_var(self):
-    code = textwrap.dedent("""\
-      number is 10
-      favorite is ask 'Is your fav number' number""")
-
-    self.multi_level_tester(
-      code=code,
-      max_level=17,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
-  def test_ask_with_float_var(self):
-    code = textwrap.dedent("""\
-      number is 3.14
+  @parameterized.expand(['10', '10.0'])
+  def test_ask_with_number_var_gives_type_error(self, number):
+    code = textwrap.dedent(f"""\
+      number is {number}
       favorite is ask 'Is your fav number' number""")
 
     self.multi_level_tester(
@@ -161,6 +151,43 @@ class TestsLevel12(HedyTester):
       max_level=14,
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_if_in_list_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is 'red'
+    if 'red' in items
+        print 'found!'""")
+    self.multi_level_tester(
+      max_level=16,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+    color is 5, 6, 7
+    if 1 is color
+        print 'success!'""")
+    self.multi_level_tester(
+      max_level=15,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_incompatible_types_gives_error(self):
+    code = textwrap.dedent("""\
+    a is 'test'
+    b is 15
+    if a is b
+      c is 1""")
+    self.multi_level_tester(
+      max_level=16,
+      code=code,
+      exception=hedy.exceptions.InvalidTypeCombinationException,
       test_name=self.name()
     )
 
@@ -350,14 +377,14 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
-  def test_calc_string_and_int(self):
+  def test_calc_string_and_int_gives_type_error(self):
     code = textwrap.dedent("""\
-            x is 'test1'
-            y is x + 1""")
+      x is 'test1'
+      y is x + 1""")
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidTypeCombinationException,
       test_name=self.name()
     )
 

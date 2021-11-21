@@ -192,3 +192,13 @@ class TestsLevel16(HedyTester):
           expected=expected,
           test_name=self.name()
         )
+
+
+    def test_equality_with_list_gives_error(self):
+        code = textwrap.dedent("""\
+        color is [5, 6, 7]
+        if 1 is color
+            print 'success!'""")
+
+        with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException):
+            hedy.transpile(code, self.level)

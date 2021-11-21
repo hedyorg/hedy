@@ -789,8 +789,10 @@ adventures:
                     ```
 
                 start_code: |-
-                    forward 50
-                    turn left
+                    print Turtle race!
+                    angle is 90
+                    turn angle
+                    forward 25
             8:
                 story_text: |-
                     ## Rajzoljunk
@@ -913,8 +915,9 @@ adventures:
                     forward 25
                     ```
                 start_code: |-
-                    forward 50
-                    turn left
+                    angles is 10, 50, 90, 150, 250
+                    turn angles at random
+                    forward 25
     fortune:
         name: Jósnő
         description: Hadd jósolja meg Hedy a jövőt
@@ -1279,24 +1282,25 @@ adventures:
                     Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
                     A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
                 start_code: print Menjünk a következő szintre!
-            10:
-                story_text: |-
-                    ## Mi a következő lépés?
-                    A kódod egyre jobban hasonlít egy python kódra, remek! A 9. szinten megtanulsz egy újabb kis lépést, hogy még inkább hasonlítson a pythonra.
-                    Egy másik nagyszerű dolog, amit a 9. szinten tanulsz, egy új parancs. A 8. szinten észrevehetted, hogy néha használhatsz egy másik "else" utasítást a kódban.
-                    Például:
-                    ```
-                    print 'Mi van ma ebédre?'
-                    lehetosegek is pizza, broccoli, green beans
-                    valasztott is lehetosegek at random
-                    if lehetosegek is pizza
-                        print 'Nyami! Pizza!'
-                    else
-                        print 'Jaj...'
-                    ```
-                    Ebben a kódban jó lenne, ha lenne 2x egy másik, hogy legyen egy lehetőség a brokkolihoz és egy a zöldbabhoz. A 9. szint az "elif" új paranccsal érkezik, amely ezt lehetővé teszi!
-                    Tehát nézd meg a következő szintet most!
-                start_code: print 'Menjünk a következő szintre!'
+# The sample code makes an invalid equality check, commenting out for now
+#            10:
+#                story_text: |-
+#                    ## Mi a következő lépés?
+#                    A kódod egyre jobban hasonlít egy python kódra, remek! A 9. szinten megtanulsz egy újabb kis lépést, hogy még inkább hasonlítson a pythonra.
+#                    Egy másik nagyszerű dolog, amit a 9. szinten tanulsz, egy új parancs. A 8. szinten észrevehetted, hogy néha használhatsz egy másik "else" utasítást a kódban.
+#                    Például:
+#                    ```
+#                    print 'Mi van ma ebédre?'
+#                    lehetosegek is pizza, broccoli, green beans
+#                    valasztott is lehetosegek at random
+#                    if lehetosegek is pizza
+#                        print 'Nyami! Pizza!'
+#                    else
+#                        print 'Jaj...'
+#                    ```
+#                    Ebben a kódban jó lenne, ha lenne 2x egy másik, hogy legyen egy lehetőség a brokkolihoz és egy a zöldbabhoz. A 9. szint az "elif" új paranccsal érkezik, amely ezt lehetővé teszi!
+#                    Tehát nézd meg a következő szintet most!
+#                start_code: print 'Menjünk a következő szintre!'
             8:
                 story_text: |-
                     ## Mi a következő lépés?
