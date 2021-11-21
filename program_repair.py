@@ -1,17 +1,20 @@
 def calc_index(input_string, line, column):
     """"returns the index of char at (line, column) from input_string"""
+    # calc_index('print \'hello\'\nprint ,', 2, 7)
+    #                                    ^
+    # will return index 20 such that input_string[20] points to the same char at line 2 column 7
     # lark starts counting line and column from 1
     current_line = 1
     current_index = column - 1
 
     for char in input_string:
+        if current_line == line:
+            break
+            
         if char == '\n':
             current_line += 1
 
         current_index += 1
-
-        if current_line == line:
-            break
 
     return current_index
 
