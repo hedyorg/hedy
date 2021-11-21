@@ -134,7 +134,7 @@ class TestsLevel8(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    antwoord = input('Hoeveel is 10 plus 10?')
+    antwoord = input(f'Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
       print(f'Goedzo!')
       print(f'Het antwoord was inderdaad {antwoord}')

@@ -1,6 +1,7 @@
 command: print | ask | turtle | assign | sleep | invalid_space | ask_dep_2 | echo_dep_2 | comment | invalid
 
-print: _PRINT (_SPACE (_SPACE | textwithoutspaces | punctuation)*)?
+print: _PRINT (_SPACE _print_argument)?
+_print_argument: (_SPACE | textwithoutspaces | punctuation)*
 ask: var _SPACE _IS _SPACE _ASK (_SPACE + (_SPACE | text_ask | punctuation)*)?
 
 //level 1 deprecated commands, for now manually added for better errors

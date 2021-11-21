@@ -31,7 +31,7 @@ class TestsLevel17(HedyTester):
         print 'Het antwoord moest zijn ' antwoord""")
 
     expected = textwrap.dedent("""\
-    antwoord = input('Hoeveel is 10 plus 10?')
+    antwoord = input(f'Hoeveel is 10 plus 10?')
     try:
       antwoord = int(antwoord)
     except ValueError:
@@ -166,7 +166,7 @@ class TestsLevel17(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(0) < int(10) else -1
     for i in range(int(0), int(10) + step, step):
-      antwoord = input('Wat is 5*5')
+      antwoord = input(f'Wat is 5*5')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -269,7 +269,7 @@ class TestsLevel17(HedyTester):
       if leeftijd {comparison} 12:
           print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
-      leeftijd = input('Hoe oud ben jij?')
+      leeftijd = input(f'Hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:

@@ -13,7 +13,7 @@ class TestsLevel13(HedyTester):
       if naam is 'Felienne' and leeftijd is 37
           print 'hallo jij!'""")
     expected = textwrap.dedent("""\
-      naam = input('hoe heet jij?')
+      naam = input(f'hoe heet jij?')
       try:
         naam = int(naam)
       except ValueError:
@@ -21,7 +21,7 @@ class TestsLevel13(HedyTester):
           naam = float(naam)
         except ValueError:
           pass
-      leeftijd = input('hoe oud ben jij?')
+      leeftijd = input(f'hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:

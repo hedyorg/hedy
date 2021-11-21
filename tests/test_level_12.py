@@ -61,7 +61,7 @@ class TestsLevel12(HedyTester):
     sparen is prijs - gespaard
     print 'hallo' sparen""")
     expected = textwrap.dedent("""\
-    prijs = input('hoeveel?')
+    prijs = input(f'hoeveel?')
     try:
       prijs = int(prijs)
     except ValueError:
@@ -88,7 +88,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
       colors = ['orange', 'blue', 'green']
-      favorite = input('Is your fav color'+colors[1-1])
+      favorite = input(f'Is your fav color{colors[1-1]}')
       try:
         favorite = int(favorite)
       except ValueError:
@@ -112,7 +112,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
       color = 'orange'
-      favorite = input('Is your fav color'+color)
+      favorite = input(f'Is your fav color{color}')
       try:
         favorite = int(favorite)
       except ValueError:
@@ -137,7 +137,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent(f"""\
       number = {number}
-      favorite = input('Is your fav number'+number)
+      favorite = input(f'Is your fav number{{number}}')
       try:
         favorite = int(favorite)
       except ValueError:
@@ -549,7 +549,7 @@ class TestsLevel12(HedyTester):
         print 'Het antwoord moest zijn ' antwoord""")
 
     expected = textwrap.dedent("""\
-    antwoord = input('Hoeveel is 10 plus 10?')
+    antwoord = input(f'Hoeveel is 10 plus 10?')
     try:
       antwoord = int(antwoord)
     except ValueError:
@@ -579,7 +579,7 @@ class TestsLevel12(HedyTester):
     print colors at random""")
 
     expected = textwrap.dedent("""\
-    color = input('what is your favorite color? ')
+    color = input(f'what is your favorite color? ')
     try:
       color = int(color)
     except ValueError:
@@ -606,7 +606,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
     colors = ['green', 'red', 'blue']
-    color = input('what color to remove?')
+    color = input(f'what color to remove?')
     try:
       color = int(color)
     except ValueError:
