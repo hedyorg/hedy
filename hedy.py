@@ -1899,7 +1899,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, get_suggestions_for_language(lang)[level])
+            closest = closest_command(invalid_command, get_suggestions_for_language('en')[level])
             fixed_code = None
             result = None
             if closest:
