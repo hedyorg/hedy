@@ -40,7 +40,7 @@ class TestsLevel18(HedyTester):
         leeftijd is input('Hoe oud ben jij?')
         print(leeftijd)""")
         expected = textwrap.dedent("""\
-        leeftijd = input('Hoe oud ben jij?')
+        leeftijd = input(f'Hoe oud ben jij?')
         try:
           leeftijd = int(leeftijd)
         except ValueError:
@@ -108,7 +108,7 @@ class TestsLevel18(HedyTester):
           print('Het antwoord moest zijn', antwoord)""")
 
       expected = textwrap.dedent("""\
-      antwoord = input('Hoeveel is 10 plus 10?')
+      antwoord = input(f'Hoeveel is 10 plus 10?')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -179,7 +179,7 @@ class TestsLevel18(HedyTester):
 
       expected = textwrap.dedent("""\
       color = ['green', 'blue']
-      choice = input('Is your favorite color one of: '+color)
+      choice = input(f'Is your favorite color one of: {color}')
       try:
         choice = int(choice)
       except ValueError:

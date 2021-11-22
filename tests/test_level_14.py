@@ -13,7 +13,7 @@ class TestsLevel14(HedyTester):
       if leeftijd {comparison} 12
           print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
-      leeftijd = input('Hoe oud ben jij?')
+      leeftijd = input(f'Hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -41,7 +41,7 @@ class TestsLevel14(HedyTester):
       else
           print 'Dan ben je ouder dan ik!'""")
     expected = textwrap.dedent(f"""\
-      leeftijd = input('Hoe oud ben jij?')
+      leeftijd = input(f'Hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -69,7 +69,7 @@ class TestsLevel14(HedyTester):
     if leeftijd{comparison}12
       print 'Dan ben je jonger dan ik!'""")
     expected = textwrap.dedent(f"""\
-    leeftijd = input('Hoe oud ben jij?')
+    leeftijd = input(f'Hoe oud ben jij?')
     try:
       leeftijd = int(leeftijd)
     except ValueError:

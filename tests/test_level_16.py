@@ -105,7 +105,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input('Is your fav color'+colors[1-1])
+        favorite = input(f'Is your fav color{colors[1-1]}')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -129,7 +129,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['orange', 'blue', 'green']
-        favorite = input('Is your fav color'+colors)
+        favorite = input(f'Is your fav color{colors}')
         try:
           favorite = int(favorite)
         except ValueError:
@@ -154,7 +154,7 @@ class TestsLevel16(HedyTester):
         print colors[random]""")
 
         expected = textwrap.dedent("""\
-        color = input('what is your favorite color? ')
+        color = input(f'what is your favorite color? ')
         try:
           color = int(color)
         except ValueError:
@@ -182,7 +182,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['green', 'red', 'blue']
-        color = input('what color to remove?')
+        color = input(f'what color to remove?')
         try:
           color = int(color)
         except ValueError:

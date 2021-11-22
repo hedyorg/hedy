@@ -92,7 +92,7 @@ class TestsLevel4(HedyTester):
     code = textwrap.dedent("""\
     color is ask 'Cuál es tu color favorito?'""")
     expected = textwrap.dedent("""\
-    color = input('Cuál es tu color favorito?')""")
+    color = input(f'Cuál es tu color favorito?')""")
     self.multi_level_tester(
       max_level=10,
       code=code,
@@ -113,11 +113,11 @@ class TestsLevel4(HedyTester):
   def test_ask_with_list_var(self):
     code = textwrap.dedent("""\
     colors is orange, blue, green
-    favorite is ask 'Is your fav color' colors at random""")
+    favorite is ask 'Is your fav color ' colors at random""")
 
     expected = textwrap.dedent("""\
     colors = ['orange', 'blue', 'green']
-    favorite = input('Is your fav color'+random.choice(colors))""")
+    favorite = input(f'Is your fav color {random.choice(colors)}')""")
 
     self.multi_level_tester(
         max_level=10,
@@ -142,11 +142,11 @@ class TestsLevel4(HedyTester):
   def test_ask_with_string_var(self):
     code = textwrap.dedent("""\
     color is orange
-    favorite is ask 'Is your fav color' color""")
+    favorite is ask 'Is your fav color ' color""")
 
     expected = textwrap.dedent("""\
     color = 'orange'
-    favorite = input('Is your fav color'+color)""")
+    favorite = input(f'Is your fav color {color}')""")
 
     self.multi_level_tester(
         max_level=10,
@@ -162,7 +162,7 @@ class TestsLevel4(HedyTester):
 
     expected = textwrap.dedent("""\
     number = '10'
-    favorite = input('Is your fav number'+number)""")
+    favorite = input(f'Is your fav number{number}')""")
 
     self.multi_level_tester(
         max_level=10,
@@ -224,7 +224,7 @@ class TestsLevel4(HedyTester):
     print colors at random""")
 
     expected = textwrap.dedent("""\
-    color = input('what is your favorite color? ')
+    color = input(f'what is your favorite color? ')
     colors = ['green', 'red', 'blue']
     colors.append(color)
     print(f'{random.choice(colors)}')""")
@@ -244,7 +244,7 @@ class TestsLevel4(HedyTester):
 
     expected = textwrap.dedent("""\
     colors = ['green', 'red', 'blue']
-    color = input('what color to remove?')
+    color = input(f'what color to remove?')
     try:
         colors.remove(color)
     except:
@@ -323,7 +323,7 @@ class TestsLevel4(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    kleur = input('wat is je lievelingskleur?')
+    kleur = input(f'wat is je lievelingskleur?')
     print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.assertEqual(expected, result.code)
@@ -332,14 +332,14 @@ class TestsLevel4(HedyTester):
 
     code = textwrap.dedent("""
     ding is kleur
-    kleur is ask 'Wat is je lievelings' ding
+    kleur is ask 'Wat is je lievelings ' ding
     print 'Jouw favoriet is dus ' kleur""")
 
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     ding = 'kleur'
-    kleur = input('Wat is je lievelings'+ding)
+    kleur = input(f'Wat is je lievelings {ding}')
     print(f'Jouw favoriet is dus {kleur}')""")
 
     self.assertEqual(expected, result.code)
@@ -350,7 +350,7 @@ class TestsLevel4(HedyTester):
     afstand is ask 'hoe ver dan?'
     forward afstand""")
     expected = textwrap.dedent("""\
-    afstand = input('hoe ver dan?')
+    afstand = input(f'hoe ver dan?')
     t.forward(afstand)
     time.sleep(0.1)""")
     self.multi_level_tester(

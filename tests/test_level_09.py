@@ -74,7 +74,7 @@ class TestsLevel9(HedyTester):
     print(f'kassabon')
     prijs = '0'
     for i in range(int(7)):
-      ingredient = input('wat wil je kopen?')
+      ingredient = input(f'wat wil je kopen?')
       if str(ingredient) == str('appel'):
         prijs = int(prijs) + int(1)
     print(f'Dat is in totaal {prijs} euro.')""")
@@ -130,7 +130,7 @@ class TestsLevel9(HedyTester):
 
     expected = textwrap.dedent("""\
     for i in range(int(3)):
-      food = input('What do you want?')
+      food = input(f'What do you want?')
       if str(food) == str('pizza'):
         print(f'nice!')
       else:

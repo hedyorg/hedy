@@ -805,8 +805,12 @@ class ConvertToPython_1(Transformer):
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-
         return "print('" + argument + "')"
+
+    def ask(self, args):
+        argument = process_characters_needing_escape(args[0])
+        return "answer = input('" + argument + "')"
+
     def echo(self, args):
         if len(args) == 0:
             return "print(answer)" #no arguments, just print answer
@@ -816,10 +820,6 @@ class ConvertToPython_1(Transformer):
 
     def comment(self, args):
         return f"#{''.join(args)}"
-
-    def ask(self, args):
-        argument = process_characters_needing_escape(args[0])
-        return "answer = input('" + argument + "')"
 
     def forward(self, args):
         if len(args) == 0:
@@ -947,6 +947,11 @@ class ConvertToPython_2(ConvertToPython_1):
 
         return f"print(f'{argument_string}')"
 
+    def ask(self, args):
+        var = args[0]
+        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
+        return f'{var} = input(' + '+'.join(all_parameters) + ")"
+
     def forward(self, args):
         if len(args) == 0:
             return self.make_forward(50)
@@ -971,10 +976,6 @@ class ConvertToPython_2(ConvertToPython_1):
         raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
                                                       allowed_types=get_allowed_types(Command.turn, self.level))
 
-    def ask(self, args):
-        var = args[0]
-        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")"
     def assign(self, args):
         parameter = args[0]
         value = args[1]
@@ -1063,23 +1064,25 @@ class ConvertToPython_4(ConvertToPython_3):
             first_unquoted_var = unquoted_args[0]
             raise exceptions.UndefinedVarException(name=first_unquoted_var)
 
-    def print(self, args):
+    def print_ask_args(self, args):
         args = self.check_print_arguments(args)
-        argument_string = ''
+        result = ''
         for argument in args:
-            argument = argument.replace("'", '') #no quotes needed in fstring
-            argument_string += process_variable_for_fstring(argument, self.lookup)
+            argument = argument.replace("'", '')  # no quotes needed in fstring
+            result += process_variable_for_fstring(argument, self.lookup)
+        return result
 
+    def print(self, args):
+        argument_string = self.print_ask_args(args)
         return f"print(f'{argument_string}')"
-
-
-    def print_nq(self, args):
-        return ConvertToPython_2.print(self, args)
 
     def ask(self, args):
         var = args[0]
-        remaining_args = args[1:]
-        return f'{var} = input(' + '+'.join(remaining_args) + ")"
+        argument_string = self.print_ask_args(args[1:])
+        return f"{var} = input(f'{argument_string}')"
+
+    def print_nq(self, args):
+        return ConvertToPython_2.print(self, args)
 
 def indent(s):
     lines = s.split('\n')
@@ -1117,7 +1120,7 @@ else:
 @hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
 
-    def print(self, args):
+    def print_ask_args(self, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args)
 
@@ -1125,13 +1128,12 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                args_new.append("{" + a.children[0] + "}")
+                args_new.append("{" + get_value(a) + "}")
             else:
-                a = a.replace("'", "") #no quotes needed in fstring
+                a = a.replace("'", "")  # no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
 
-        arguments = ''.join(args_new)
-        return "print(f'" + arguments + "')"
+        return ''.join(args_new)
 
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -1273,22 +1275,19 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             return f'{argument}'
 
-
     def ask(self, args):
         var = args[0]
-        remaining_args = args[1:]
+        assign = super().ask(args)
 
-        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
-
-        tryblock = textwrap.dedent(f"""
+        return textwrap.dedent(f"""\
+        {assign}
         try:
           {var} = int({var})
         except ValueError:
           try:
             {var} = float({var})
           except ValueError:
-            pass""") #no number? leave as string
-        return assign + tryblock
+            pass""")  # no number? leave as string
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -1299,21 +1298,6 @@ class ConvertToPython_12(ConvertToPython_11):
         args = [self.process_token_or_tree(a) for a in args]
 
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
-
-    def print(self, args):
-        # TODO: new type checking is needed for string assignment
-        self.check_var_usage(args)
-
-        args_new = []
-        for a in args:
-            if isinstance(a, Tree):
-                args_new.append("{" + get_value(a) + "}")
-            else:
-                a = a.replace("'", "")  # no quotes needed in fstring
-                args_new.append(process_variable_for_fstring(a, self.lookup))
-
-        arguments = ''.join(args_new)
-        return "print(f'" + arguments + "')"
 
     def text_in_quotes(self, args):
         text = args[0]
@@ -1421,20 +1405,7 @@ class ConvertToPython_18(ConvertToPython_17):
     # this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
 
     def input(self, args):
-        var = args[0]
-        remaining_args = args[1:]
-
-        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
-
-        tryblock = textwrap.dedent(f"""
-        try:
-          {var} = int({var})
-        except ValueError:
-          try:
-            {var} = float({var})
-          except ValueError:
-            pass""")  # no number? leave as string
-        return assign + tryblock
+        return self.ask(args)
 
 # @hedy_transpiler(level=13)
 # class ConvertToPython_13(ConvertToPython_12):

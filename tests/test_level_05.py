@@ -114,7 +114,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    kleur = input('wat is je lievelingskleur?')
+    kleur = input(f'wat is je lievelingskleur?')
     print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.assertEqual(expected, result.code)
@@ -146,7 +146,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    kleur = input('Wat is je lievelingskleur?')
+    kleur = input(f'Wat is je lievelingskleur?')
     if kleur == 'groen':
       print(f'mooi!')
     else:

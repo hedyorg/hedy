@@ -41,7 +41,7 @@ class TestsLevel6(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    antwoord = input('wat is je lievelingskleur?')""")
+    antwoord = input(f'wat is je lievelingskleur?')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
