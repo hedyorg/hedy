@@ -304,30 +304,31 @@
                 forward 50
 10:
     start_code: |-
-        animals is dog, cat, blobfish
-        for animal in animals
+        animais is dog, cat, blobfish
+        for animal in animais
           print 'I love ' animal
     intro_text: |
-        In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-        `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+        Neste nível vamos aprender uma nova palavra chamada `for`. Com `for` você pode fazer uma lista e
+        usar todos os elementos. `for` cria um bloco, assim como `repeat` e `if`, de modo que todas as
+        linhas dentro do bloco precisam começar com espaços.
 
         ## Example Hedy code
         ```
-        animals is dog, cat, blobfish
-        for animal in animals
+        animais is dog, cat, blobfish
+        for animal in animais
           print 'I love ' animal
         ```
     commands:
     -   name: "print"
-        explanation: "Print something. Remember to use a quotation mark for literal printing."
-        example: "Example: print '5 times 5 is ' 5 * 5"
-        demo_code: "print '5 times 5 is ' 5 * 5"
-    -   name: "for with a list"
-        explanation: "print all things in a list "
-        example: "Example: for dier in dieren"
+        explanation: "Exiba algo. Lembre de usar as aspas para exibir literais."
+        example: "Exemplo: print '5 vezes 5 is ' 5 * 5"
+        demo_code: "print '5 vezes 5 is ' 5 * 5"
+    -   name: "for com lista"
+        explanation: "exibir tudo de uma lista"
+        example: "Exemplo: for animal in animais"
         demo_code: |-
-            animals is dog, cat, blobfish
-            for animal in animals
+            animais is dog, cat, blobfish
+            for animal in animais
               print 'I love ' animal
 11:
     start_code: |-
