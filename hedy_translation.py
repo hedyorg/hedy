@@ -211,5 +211,25 @@ class ConvertToLang4(ConvertToLang3):
     def in_list_check(self, args):
         return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
 
+@hedy_translator(level=5)
+class ConvertToLang5(ConvertToLang4):
 
+    def addition(self, args):
+        return args[0] + " + " + args[1]
+
+    def substraction(self, args):
+        return args[0] + " - " + args[1]
+
+    def multiplication(self, args):
+        return args[0] + " * " + args[1]
+
+    def division(self, args):
+        return args[0] + " / " + args[1]
+
+@hedy_translator(level=6)
+class ConvertToLang6(ConvertToLang5):
+    def repeat(self, args):
+        return self.keywords["repeat"] + " " + args[0] + " " + self.keywords["times"] + " " + args[1]
+    
+    
 translate_keywords("naam is papa, mama, oma\nif papa in naam print 'ho'", "en", "nl", level=4)
