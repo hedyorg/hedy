@@ -200,8 +200,8 @@ class TestsLevel2(HedyTester):
 
   #sleep tests
   def test_sleep_with_number(self):
-    code = "sleep 2"
-    expected = "time.sleep(2)"
+    code = "sleep 1"
+    expected = "time.sleep(1)"
 
     self.multi_level_tester(
       code=code,
