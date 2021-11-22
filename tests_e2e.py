@@ -152,25 +152,74 @@ class AuthHelper(unittest.TestCase):
         else:
             self.cookie = None
 
-    def post_data(self, path, body, expect_http_code=200):
+    def post_data(self, path, body, expect_http_code=200, no_cookie=False, return_headers=False):
         headers = {}
-        if hasattr(self, 'cookie') and self.cookie:
+        if no_cookie == False and hasattr(self, 'cookie') and self.cookie:
             headers['cookie'] = self.cookie
 
         response = request('post', path, headers, body)
         self.assertEqual(response['code'], expect_http_code)
-        return response['body']
+        if return_headers:
+            return response['headers']
+        else:
+            return response['body']
 
-    def get_data(self, path, expect_http_code=200):
+    def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
         headers = {}
-        if hasattr(self, 'cookie') and self.cookie:
+        if no_cookie == False and hasattr(self, 'cookie') and self.cookie:
             headers['cookie'] = self.cookie
 
         response = request('get', path, headers, '')
         self.assertEqual(response['code'], expect_http_code)
-        return response['body']
+        if return_headers:
+            return response['headers']
+        else:
+            return response['body']
 
 # *** TESTS ***
+
+class TestPages(AuthHelper):
+    def test_get_main_page(self):
+        # WHEN attempting to get the main page
+        # THEN receive an OK response code from the server
+        self.get_data('/')
+
+    def test_get_admin_page(self):
+        # WHEN attempting to get the admin page
+        # THEN receive an OK response code from the server
+        # (Note: this only happens in a dev environment)
+        self.get_data('/admin')
+
+class TestSessionVariables(AuthHelper):
+    def test_get_session_variables(self):
+        # WHEN getting session variables from the main environment
+        body = self.get_data('/session_main')
+
+        # THEN the body should contain a `session` with `session_id` and a `proxy_enabled` field
+        self.assertIn('session', body)
+        self.assertIn('session_id', body['session'])
+        self.assertIn('proxy_enabled', body)
+
+        session = body['session']
+        proxy_enabled = body['proxy_enabled']
+
+        # WHEN getting session variables from the test environment
+        test_body = self.get_data('/session_test')
+        if not proxy_enabled:
+            # If proxying to test is disabled, there is nothing else to test.
+            return
+
+        # THEN the body should contain a `session` with `session_id` and a `test_session` field
+        self.assertIn('session', test_body)
+        self.assertIn('session_id', test_body['session'])
+        self.assertIn('test_session', test_body['session'])
+        self.assertEquals(test_body['session']['session_id'], session['id'])
+
+        # WHEN getting session variables from the main environment
+        body = self.get_data('/session_main')
+        # THEN the body should have a session with a session_id that is still the same and a `test_session` field as well
+        self.assertEqual(body['session']['session_id'], session['id'])
+        self.assertEqual(body['session']['test_session'], test_body['session']['session_id'])
 
 class TestAuth(AuthHelper):
     def test_invalid_signups(self):
@@ -235,15 +284,12 @@ class TestAuth(AuthHelper):
         self.given_any_user()
 
         # WHEN logging in the user
-        # Note: we don't use self.post_data because we want to get the headers (rather than the body) in order to validate it
-        response = request('post', 'auth/login', {}, {'username': self.username, 'password': self.user['password']})
-
         # THEN receive an OK response code from the server
-        self.assertEqual(response['code'], 200)
+        headers = self.post_data('auth/login', {'username': self.username, 'password': self.user['password']}, return_headers=True)
 
         # THEN validate the cookie sent in the response
-        self.assertIsInstance(response['headers']['Set-Cookie'], str)
-        hedy_cookie = self.get_hedy_cookie(response['headers']['Set-Cookie'])
+        self.assertIsInstance(headers['Set-Cookie'], str)
+        hedy_cookie = self.get_hedy_cookie(headers['Set-Cookie'])
         self.assertNotEqual(hedy_cookie, None)
         self.assertEqual(hedy_cookie['httponly'], True)
         self.assertEqual(hedy_cookie['path'], '/')
@@ -284,20 +330,14 @@ class TestAuth(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN attepting to verify the user
-        # Note: we don't use self.get_data because we want to get the headers (rather than the body) in order to validate it
-        response = request('get', 'auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}))
-
         # THEN receive a redirect from the server taking us to `/`
-        self.assertEqual(response['code'], 302)
-        self.assertEqual(response['headers']['location'], HOST)
+        headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
+        self.assertEqual(headers['location'], HOST)
 
         # WHEN attepting to verify the user again (the operation should be idempotent)
-        # Note: we don't use self.get_data because we want to get the headers (rather than the body) in order to validate it
-        response = request('get', 'auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}))
-
         # THEN (again) receive a redirect from the server taking us to `/`
-        self.assertEqual(response['code'], 302)
-        self.assertEqual(response['headers']['location'], HOST)
+        headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
+        self.assertEqual(headers['location'], HOST)
 
         # WHEN retrieving profile to see that the user is no longer marked with `verification_pending`
         self.assert_user_is_logged(self.username)
@@ -537,20 +577,22 @@ class TestAuth(AuthHelper):
         self.user['password'] = new_password
 
 class TestProgram(AuthHelper):
-    def test_get_programs(self):
+    def test_invalid_get_programs(self):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
         # WHEN retrieving own programs but without sending a cookie
-        # Note: we don't use self.get_data because we want to send no cookie in the headers
-        response = request('get', 'programs_list', {}, '')
-
         # THEN receive a forbidden response code from the server
-        self.assertEqual(response['code'], 403)
+        self.get_data('programs_list', expect_http_code=403, no_cookie=True)
+
+    def test_get_programs(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
 
         # WHEN retrieving own programs sending a cookie
         # THEN receive an OK response code from the server
         body = self.get_data('programs_list')
+
         # THEN verify that the server sent a body that is an object of the shape `{programs:[...]}`.
         self.assertIsInstance(body, dict)
         self.assertIsInstance(body['programs'], list)
@@ -562,7 +604,7 @@ class TestProgram(AuthHelper):
         # WHEN attempting to create an invalid program
         invalid_bodies = [
             '',
-           [],
+            [],
             {},
             {'code': 1},
             {'code':['1']},
@@ -577,6 +619,10 @@ class TestProgram(AuthHelper):
             # THEN receive an invalid response code from the server
             self.post_data('programs', invalid_body, expect_http_code=400)
 
+        # WHEN submitting a program without being logged in
+        # THEN receive a forbidden response code from the server
+        self.post_data('programs', {'code': 'hello world', 'name': 'program 1', 'level': 1}, expect_http_code=403, no_cookie=True)
+
     def test_create_program(self):
         # GIVEN a new user
         # (we create a new user to ensure that the user has no programs yet)
@@ -585,7 +631,11 @@ class TestProgram(AuthHelper):
         # WHEN submitting a valid program
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
         # THEN receive an OK response code from the server
-        self.post_data('programs', program)
+        program = self.post_data('programs', program)
+        # THEN verify that the returned program has both a name and an id
+        self.assertIsInstance(program, dict)
+        self.assertIsInstance(program['id'], str)
+        self.assertIsInstance(program['name'], str)
 
         # WHEN retrieving programs after saving a program
         saved_programs = self.get_data('programs_list')['programs']
@@ -596,7 +646,123 @@ class TestProgram(AuthHelper):
         for key in program:
             self.assertEqual(program[key], saved_program[key])
 
-    # TODO: add further programs tests
+    def test_invalid_make_program_public(self):
+        # GIVEN a logged in user
+        self.given_user_is_logged_in()
+
+        # WHEN attempting to share a program with an invalid body
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'code': 1},
+            {'code':['1']},
+            {'code': 'hello world'},
+            {'code': 'hello world', 'name': 1},
+            {'code': 'hello world', 'name': 'program 1'},
+            {'code': 'hello world', 'name': 'program 1', 'level': '1'},
+            {'code': 'hello world', 'name': 'program 1', 'level': 1, 'adventure_name': 1},
+        ]
+
+        for invalid_body in invalid_bodies:
+            # THEN receive an invalid response code from the server
+            self.post_data('programs/share', invalid_body, expect_http_code=400)
+
+        # WHEN sharing a program without being logged in
+        # THEN receive a forbidden response code from the server
+        self.post_data('programs/share', {'id': '123456', 'public': True}, expect_http_code=403, no_cookie=True)
+
+        # WHEN sharing a program that does not exist
+        # THEN receive a not found response code from the server
+        self.post_data('programs/share', {'id': '123456', 'public': True}, expect_http_code=404)
+
+    def test_valid_make_program_public(self):
+        # GIVEN a logged in user with at least one program
+        self.given_user_is_logged_in()
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program_id = self.post_data('programs', program)['id']
+
+        # WHEN making a program public
+        # THEN receive an OK response code from the server
+        self.post_data('programs/share', {'id': program_id, 'public': True})
+
+        saved_programs = self.get_data('programs_list')['programs']
+        for program in saved_programs:
+            if program['id'] != program_id:
+                continue
+            # THEN the program must have its `public` field enabled
+            self.assertEqual(program['public'], 1)
+
+        # GIVEN another user
+        self.given_fresh_user_is_logged_in()
+        # WHEN requesting a public program
+        # THEN receive an OK response code from the server
+        self.get_data('hedy/1/' + program_id)
+
+    def test_valid_make_program_private(self):
+        # GIVEN a logged in user with at least one public program
+        self.given_user_is_logged_in()
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program_id = self.post_data('programs', program)['id']
+        self.post_data('programs/share', {'id': program_id, 'public': True})
+
+        # WHEN making a program private
+        # THEN receive an OK response code from the server
+        self.post_data('programs/share', {'id': program_id, 'public': False})
+
+        saved_programs = self.get_data('programs_list')['programs']
+        for program in saved_programs:
+            if program['id'] != program_id:
+                continue
+            # THEN the program must have no `public` field
+            self.assertNotIn('public', program)
+
+        # GIVEN another user
+        self.given_fresh_user_is_logged_in()
+        # WHEN requesting a public program
+        # THEN receive a not found response code from the server
+        self.get_data('hedy/1/' + program_id, expect_http_code=404)
+
+    def test_invalid_delete_program(self):
+        # GIVEN a logged in user with at least one program
+        self.given_user_is_logged_in()
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        self.post_data('programs', program)['id']
+        program_id = '123456'
+
+        # WHEN deleting a program that does not exist
+        # THEN receive a not ound response code from the server
+        self.get_data('programs/delete/' + program_id, expect_http_code=404)
+
+    def test_valid_delete_program(self):
+        # GIVEN a logged in user with at least one program
+        self.given_user_is_logged_in()
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program_id = self.post_data('programs', program)['id']
+
+        # WHEN deleting a program
+        # THEN receive an OK response code from the server
+        headers = self.get_data('programs/delete/' + program_id, expect_http_code=302, return_headers=True)
+        # THEN verify that the header has a `location` header pointing to `/programs`
+        self.assertEqual(headers['location'], HOST + 'programs')
+
+        saved_programs = self.get_data('programs_list')['programs']
+        for program in saved_programs:
+            # THEN the program should not be any longer in the list of programs
+            self.assertNotEqual(program['id'], program_id)
+
+    def test_destroy_account_with_programs(self):
+        # GIVEN a logged in user with at least one program
+        self.given_user_is_logged_in()
+        program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        program_id = self.post_data('programs', program)['id']
+
+        # WHEN deleting the user account
+        # THEN receive an OK response code from the server
+        self.post_data('auth/destroy', '')
+
+        # FINALLY remove user since it has already been deleted in the server
+        USERS.pop(self.username)
 
 # *** CLEANUP ***
 
