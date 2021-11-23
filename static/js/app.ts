@@ -790,7 +790,7 @@ export function get_trimmed_code() {
   return theGlobalEditor?.getValue();
 }
 
-export function confetti_cannon(){
+export function confetti_cannon(level: number){
   const canvas = document.getElementById('confetti');
   if (canvas) {
     canvas.classList.remove('hidden');
@@ -798,9 +798,12 @@ export function confetti_cannon(){
     const jsConfetti = new JSConfetti({canvas})
     // timeout for the confetti to fall down
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
+    console.log(level);
     var emojilist = [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫'], ['🌸']];
     jsConfetti.addConfetti({
-      emojis: emojilist[0],
+      emojis: emojilist[0], // now it shows the rainbow-emoji, but if you
+                            // change '0' to 'level' for example, it might
+                            // show another emoji
       emojiSize: 100,
       confettiNumber: 30,
     });
