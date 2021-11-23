@@ -8,7 +8,7 @@ USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
-PREFERENCES = dynamo.Table(storage, 'preferences', 'id')
+CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -228,29 +228,29 @@ class Database:
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CLASSES.delete({'id': Class ['id']})
-        PREFERENCES.delete({'id': Class['id']})
+        CUSTOMIZATIONS.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
-    def update_preferences_class(self, class_id, preferences):
-        preferences['id'] = class_id
-        PREFERENCES.create(preferences)
+    def update_preferences_class(self, class_id, customizations):
+        customizations['id'] = class_id
+        CUSTOMIZATIONS.create(customizations)
 
     def get_preferences_class(self, class_id):
         levels = []
-        preferences = PREFERENCES.get_many({'id': class_id})
-        for level in preferences:
+        customizations = CUSTOMIZATIONS.get_many({'id': class_id})
+        for level in customizations:
             levels.append(level)
         temp = {}
-        for preference in preferences:
-            temp[preference['level']] = preference
-            temp[preference['level']].pop('level', None)
+        for customization in customizations:
+            temp[customization['level']] = customization
+            temp[customization['level']].pop('level', None)
         return temp
 
     def get_level_preferences_class(self, class_id, level):
-        preferences = PREFERENCES.get_many({'id': class_id})
-        for preference in preferences:
-            if preference['level'] == level:
-                return preference
+        customizations = CUSTOMIZATIONS.get_many({'id': class_id})
+        for customization in customizations:
+            if customization['level'] == level:
+                return customization
         return None
