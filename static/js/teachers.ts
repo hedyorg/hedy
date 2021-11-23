@@ -119,23 +119,34 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
-     let toggle_example_programs = false;
-     let toggle_level = false;
+     let max_level = 22; // Todo: We have to retrieve this value dynamically (some way!)
+     let example_programs = false;
+     let hide_level = false;
+     let hide_prev_level = false;
+     let hide_next_level = false;
+
      if ($('#hide_level' + level).prop('checked')) {
-       toggle_level = true;
+       hide_level = true;
      }
      if ($('#example_programs' + level).prop('checked')) {
-       toggle_example_programs = true;
+       example_programs = true;
      }
-
+     if (level > 1 && $('#hide_level' + (level-1)).prop('checked')) {
+       hide_prev_level = true;
+     }
+    if (level < max_level && $('#hide_level' + (level+1)).prop('checked')) {
+       hide_next_level = true;
+    }
 
      $.ajax({
        type: 'PUT',
        url: '/customize-class/' + id,
        data: JSON.stringify({
          adventures: selected_adventures,
-         example_programs: toggle_example_programs,
-         hide_level: toggle_level,
+         example_programs: example_programs,
+         hide_level: hide_level,
+         hide_prev_level: hide_prev_level,
+         hide_next_level: hide_next_level,
          level: level
        }),
        contentType: 'application/json',

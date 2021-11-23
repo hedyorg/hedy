@@ -235,6 +235,20 @@ class Database:
 
     def update_customizations_class(self, customizations):
         CUSTOMIZATIONS.put(customizations)
+        if customizations['level'] > 1:
+            try:
+                prev_level = CUSTOMIZATIONS.get({'id': customizations['id'], 'level': customizations['level']-1})
+                prev_level['hide_next_level'] = customizations['hide']
+                CUSTOMIZATIONS.put(prev_level)
+            except:
+                pass
+        if customizations['level'] < 22: #Todo: Same issue, we have to retrieve max_level in some way
+            try:
+                next_level = CUSTOMIZATIONS.get({'id': customizations['id'], 'level': customizations['level']+1})
+                next_level['hide_prev_level'] = customizations['hide']
+                CUSTOMIZATIONS.put(next_level)
+            except:
+                pass
 
     def get_customizations_class(self, class_id):
         customizations = {}

@@ -197,6 +197,10 @@ def routes (app, database):
             return 'amount of example programs must be an integer', 400
         if not isinstance(body.get('hide_level'), bool):
             return 'level switch must be a boolean', 400
+        if not isinstance(body.get('hide_prev_level'), bool):
+            return 'level switch must be a boolean', 400
+        if not isinstance(body.get('hide_next_level'), bool):
+            return 'level switch must be a boolean', 400
         if not isinstance(int(body.get('level')), int):
             return 'level must ben an integer', 400
 
@@ -210,6 +214,9 @@ def routes (app, database):
         customizations['adventures'] = body.get('adventures')
         customizations['example_programs'] = body.get('example_programs')
         customizations['hide'] = body.get('hide_level')
+        customizations['hide_prev_level'] = body.get('hide_prev_level')
+        customizations['hide_next_level'] = body.get('hide_next_level')
+
 
         Class = DATABASE.update_customizations_class(customizations)
 
