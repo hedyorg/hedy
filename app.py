@@ -935,7 +935,7 @@ def main_page(page):
         return programs_page(request)
 
     if page == 'landing-page':
-        return render_template('landing-page.html', user=current_user()['username'], auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+        return render_template('landing-page.html', user=current_user()['username'],auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
 
     # Default to English if requested language is not available
     effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'

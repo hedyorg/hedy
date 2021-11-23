@@ -2,19 +2,20 @@
 
 {% block main %}
 <div class="px-8">
-    <h2>Welkom {{ user }}!</h2>
+    <h2>{{ text.welcome }} {{ user }}!</h2>
     <div id="landing_page_text" class="mt-4 w-3/4">
+        {{ text.intro_text }}
     </div>
     <div class="mt-8 w-full flex flex-row justify-around">
-        <div class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;">
-            <h3>Start met programmeren</h3>
-        </div>
-        <div class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;">
-            <h3>Voeg een klas toe</h3>
-        </div>
-        <div class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;">
-            <h3>Doet iets anders...</h3>
-        </div>
+        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('/hedy')}}">
+            <div><h3>{{ text.start_programming }}</h3></div>
+        </a>
+        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('for-teachers')}}">
+            <div><h3>{{ text.create_class }}</h3></div>
+        </a>
+        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('learn-more')}}">
+            <div><h3>{{ text.read_docs }}</h3></div>
+        </a>
     </div>
 </div>
 {% endblock %}
