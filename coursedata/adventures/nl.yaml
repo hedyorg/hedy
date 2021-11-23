@@ -392,10 +392,10 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
+                    turn right
                     forward 50
                     turn left
                     forward 50
-                    turn right
                     ```
                 start_code: "forward 50\nturn right"
             2:
@@ -416,6 +416,25 @@ adventures:
                     turn hoek
                     forward 25
                     turn hoek
+                    forward 25
+                    ```
+
+                start_code: |
+                    print Schildpaddenrace!
+                    hoek is 90
+                    turn hoek
+                    forward 25
+            3:
+                story_text: |
+                    ## Zoekende schildpad
+                    Ook bij je teken-schildpad kun je `random` gebruiken! Dan loopt hij steeds een ander pad.
+                    Kies met `at random` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
+
+                    ## Voorbeeld Hedy code
+
+                    ```
+                    hoeken is 10, 50, 90, 150, 250
+                    turn hoeken at random
                     forward 25
                     ```
 
@@ -456,7 +475,7 @@ adventures:
             7:
                 story_text: |
                     ## Tekenen maar
-                    In level 6 kun je één regel code herhalen met `repeat`.
+                    In level 7 kun je één regel code herhalen met `repeat`.
 
                     ## Voorbeeld Hedy code
                     ```
@@ -470,7 +489,7 @@ adventures:
             6:
                 story_text: |
                     ## Tekenen maar
-                    In level 5 kun je gaan rekenen en kun je daarmee verschillende figuren tekenen.
+                    In level 6 kun je gaan rekenen en kun je daarmee verschillende figuren tekenen.
                     Misschien heb je op school al geleerd dat een heel rondje rond draaien 360 graden is. Zo niet, dan weet je het nu!
                     Daarom gebruik je voor een vierkant ook 90 graden. 360 gedeeld door 4 is 90.
                     Nu we met Hedy kunnen rekenen, kunnen we alle figuren tekenen die we maar willen!
@@ -498,13 +517,14 @@ adventures:
             5:
                 story_text: |
                     ## Tekenen maar
-                    In level 4 kun je met `if` een keuze maken. Bijvoorbeeld tussen verschillende soorten figuren.
+                    In level 5 kun je met `if` een keuze maken. Bijvoorbeeld tussen verschillende soorten figuren.
 
                     ## Voorbeeld Hedy code
                     ```
                     print 'Figuren tekenen'
                     figuur is ask 'Wil je een driehoek of een vierkant?'
-                    if figuur is driehoek hoek is 120 else hoek is 90
+                    if figuur is driehoek hoek is 120
+                    else hoek is 90
                     turn hoek
                     forward 25
                     turn hoek
@@ -523,7 +543,7 @@ adventures:
             4:
                 story_text: |
                     ## Tekenen maar
-                    In level 3 moet je aanhalingstekens gebruiken bij `print` en `ask`. Ook bij het tekenen dus!
+                    In level 4 moet je aanhalingstekens gebruiken bij `print` en `ask`. Ook bij het tekenen dus!
 
                     ## Voorbeeld Hedy code
                     ```
@@ -541,25 +561,7 @@ adventures:
                     turn hoek
                     forward 25
 
-            3:
-                story_text: |
-                    ## Zoekende schildpad
-                    Ook bij je teken-schildpad kun je `random` gebruiken! Dan loopt hij steeds een ander pad.
-                    Kies met `at random` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
 
-                    ## Voorbeeld Hedy code
-
-                    ```
-                    hoeken is 10, 50, 90, 150, 250
-                    turn hoeken at random
-                    forward 25
-                    ```
-
-                start_code: |
-                    print Schildpaddenrace!
-                    hoek is 90
-                    turn hoek
-                    forward 25
     dishes:
         name: "Afwas?"
         description: "Gebruik de computer om te kijken wie de afwas doet (Start op level 2)"
