@@ -948,8 +948,7 @@ def main_page(page):
     user = current_user()
 
     if page == 'landing-page':
-        print("Dit gaat goed!")
-        return render_template('landing-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+        return render_template('landing-page.html', mkd=markdown, user=user, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
 
     if page == 'for-teachers':
         if is_teacher(user):

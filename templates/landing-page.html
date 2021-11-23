@@ -2,6 +2,20 @@
 
 {% block main %}
 <div class="px-8">
-    Dit is een test
+    <h2>Welkom {{ user['username'] }}!</h2>
+    <div id="landing_page_text" class="mt-4 w-3/4">
+        {{ mkd|commonmark }}
+    </div>
+    <div class="mt-8 w-full flex flex-row justify-around">
+        <div class="w-1/4 border-2 border-gray-400" style="height: 20em;">
+
+        </div>
+        <div class="w-1/4 border-2 border-gray-400" style="height: 20em;">
+
+        </div>
+        <div class="w-1/4 border-2 border-gray-400" style="height: 20em;">
+
+        </div>
+    </div>
 </div>
 {% endblock %}
