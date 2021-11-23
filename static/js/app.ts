@@ -815,7 +815,8 @@ export function modalStepOne(level: number){
 
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
-  modal.alert(editor);
+  let title = ErrorMessages['Program_repair'];
+  modal.alert(editor, 0, title);
 }
  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
