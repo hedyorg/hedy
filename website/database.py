@@ -238,10 +238,7 @@ class Database:
         CUSTOMIZATIONS.create(customizations)
 
     def get_preferences_class(self, class_id):
-        levels = []
         customizations = CUSTOMIZATIONS.get_many({'id': class_id})
-        for level in customizations:
-            levels.append(level)
         temp = {}
         for customization in customizations:
             temp[customization['level']] = customization
