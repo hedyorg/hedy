@@ -214,7 +214,7 @@ def routes (app, database):
         customizations['example_programs'] = body.get('example_programs')
         customizations['hide'] = body.get('hide_level')
 
-        Class = DATABASE.update_customizations_class(class_id, customizations)
+        Class = DATABASE.update_customizations_class(customizations)
 
         return {}, 200
 

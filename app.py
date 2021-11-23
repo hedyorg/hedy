@@ -822,7 +822,7 @@ def get_restrictions(adventures, user, level):
     if user:
         student_classes = DATABASE.get_student_classes(user)
         if student_classes:
-            level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level)
+            level_preferences = DATABASE.get_level_customizations_class(student_classes[0]['id'], level)
             if level_preferences:
                 found_restrictions = True
                 display_adventures = []
@@ -832,8 +832,8 @@ def get_restrictions(adventures, user, level):
                 restrictions['amount_next_level'] = level_preferences['progress']
                 restrictions['example_programs'] = level_preferences['example_programs']
                 restrictions['hide_level'] = level_preferences['hide']
-                prev_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level - 1)
-                next_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level + 1)
+                prev_level_preferences = DATABASE.get_level_customizations_class(student_classes[0]['id'], level - 1)
+                next_level_preferences = DATABASE.get_level_customizations_class(student_classes[0]['id'], level + 1)
                 print(next_level_preferences)
                 if prev_level_preferences:
                     restrictions['hide_prev_level'] = prev_level_preferences['hide']
