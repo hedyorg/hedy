@@ -233,20 +233,18 @@ class Database:
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
-    def update_preferences_class(self, class_id, customizations):
-        customizations['id'] = class_id
+    def update_customizations_class(self, customizations):
         CUSTOMIZATIONS.create(customizations)
 
-    def get_preferences_class(self, class_id):
+    def get_customizations_class(self, class_id):
         customizations = CUSTOMIZATIONS.get_many({'id': class_id})
         temp = {}
         for customization in customizations:
             temp[customization['level']] = customization
         return temp
 
-    def get_level_preferences_class(self, class_id, level):
+    def get_level_customizations_class(self, class_id, level):
         try:
-            customization = CUSTOMIZATIONS.get({'id': class_id, 'level': level})
-            return customization
+            return CUSTOMIZATIONS.get({'id': class_id, 'level': level})
         except:
             return None

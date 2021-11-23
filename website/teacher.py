@@ -175,7 +175,7 @@ def routes (app, database):
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
-        preferences = DATABASE.get_preferences_class(class_id)
+        preferences = DATABASE.get_customizations_class(class_id)
 
         return render_template('customize-class.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
                                ui=TRANSLATIONS.get_translations(g.lang, 'ui'),
@@ -206,14 +206,15 @@ def routes (app, database):
         if not Class or Class['teacher'] != user['username']:
             return 'No such class', 404
 
-        preferences = {}
-        preferences['level'] = int(body.get('level'))
-        preferences['adventures'] = body.get('adventures')
-        preferences['progress'] = body.get('next_level')
-        preferences['example_programs'] = body.get('example_programs')
-        preferences['hide'] = body.get('hide_level')
+        customizations = {}
+        customizations['id'] = class_id
+        customizations['level'] = int(body.get('level'))
+        customizations['adventures'] = body.get('adventures')
+        customizations['progress'] = body.get('next_level')
+        customizations['example_programs'] = body.get('example_programs')
+        customizations['hide'] = body.get('hide_level')
 
-        Class = DATABASE.update_preferences_class(class_id, preferences)
+        Class = DATABASE.update_customizations_class(class_id, customizations)
 
         return {}, 200
 
