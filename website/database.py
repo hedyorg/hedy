@@ -234,7 +234,7 @@ class Database:
         return CLASSES.get({'link': link_id})
 
     def update_customizations_class(self, customizations):
-        CUSTOMIZATIONS.create(customizations)
+        CUSTOMIZATIONS.put(customizations)
 
     def get_customizations_class(self, class_id):
         customizations = CUSTOMIZATIONS.get_many({'id': class_id})
