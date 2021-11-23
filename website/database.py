@@ -245,8 +245,8 @@ class Database:
         return temp
 
     def get_level_preferences_class(self, class_id, level):
-        customizations = CUSTOMIZATIONS.get_many({'id': class_id})
-        for customization in customizations:
-            if customization['level'] == level:
-                return customization
-        return None
+        try:
+            customization = CUSTOMIZATIONS.get({'id': class_id, 'level': level})
+            return customization
+        except:
+            return None
