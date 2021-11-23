@@ -245,7 +245,6 @@ class Database:
         temp = {}
         for customization in customizations:
             temp[customization['level']] = customization
-            temp[customization['level']].pop('level', None)
         return temp
 
     def get_level_preferences_class(self, class_id, level):
