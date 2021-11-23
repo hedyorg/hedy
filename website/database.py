@@ -253,10 +253,8 @@ class Database:
         return customizations
 
     def get_level_customizations_class(self, class_id, level):
-        try:
-            return CUSTOMIZATIONS.get({'id': class_id, 'level': level})
-        except:
-            return None
+        customizations = CUSTOMIZATIONS.get({'id': class_id, 'level': level})
+        return customizations if customizations else None
 
     def get_student_restrictions(self, adventures, user, level):
         restrictions = {}
