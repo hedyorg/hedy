@@ -8,6 +8,28 @@ USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
+
+# Customizations contains the class customizations made by a teacher on a specific class/level combination.
+# Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
+# Example of structure:
+#     {
+#       "id": "db192a35efbc492ca5d1ad9ccd3e5b26",
+#       "level": 1,
+#       "adventures": [
+#         "story",
+#         "turtle",
+#         "rock",
+#         "fortune",
+#         "restaurant",
+#         "haunted",
+#         "next",
+#         "end"
+#       ],
+#       "example_programs": true,
+#       "hide": false,
+#       "hide_prev_level": false,
+#       "hide_next_level": false
+#     }
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 
 # Information on quizzes. We will update this record in-place as the user completes
