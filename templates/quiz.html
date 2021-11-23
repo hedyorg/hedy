@@ -2,18 +2,17 @@
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
-    <div class="px-6 bg-blue-200 border-b-8 border-blue-600" >
-        <div class="flex justify-around bg-blue-200">
-            <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-start bg-blue-600 p-4 m-8"> Level {{ quiz.level }} </div>
-            {% if questionStatus == 'false' %}
-                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-red-600 p-4 m-8">Onjuist!</div>
-            {% elif questionStatus== 'start'%}
-                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8">Vraag {{question_nr }}</div>
-            {% else %}
-                <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-green-600 p-4 m-8">Juist</div>
-            {% endif %}
-
-            <div class="font-slab italic text-white text-xl font-normal rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8"> {{ correct }} van de {{ questions|length }} vragen goed</div>
-        </div>
-    </div>
+    <link rel="stylesheet" href="{{ static('/css/progress-bar.css') }}">
+		<div class="stage-wrapper">
+			<div class="stage-item"></div>
+			<div class="stage-item "></div>
+			<div class="stage-item "></div>
+            <div class="stage-item stage-active"><p class="pl-4 text-xs">Vraag 1 </br> Poging 2</p></div>
+			<div class="stage-item"></div>
+			<div class="stage-item"></div>
+			<div class="stage-item"></div>
+		</div>
 {% block question %}{% endblock %}
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script  src="progressbar-function.js"></script>

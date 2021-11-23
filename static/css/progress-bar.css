@@ -1,0 +1,73 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+.stage-wrapper {
+  display: flex;
+  margin: 0 10px 10px 0;
+}
+.stage-wrapper:hover div:not(.stage-active) {
+  background-color: #bee3f8ba;
+}
+.stage-wrapper:hover div:not(.stage-active):after {
+  border-left-color: #bee3f8ba;
+}
+
+.stage-item {
+  background-color: #bababa;
+  border-color: #bababa;
+  color: #fff;
+  flex-basis: 100%;
+  height: 30px;
+  font-size: 16px;
+  padding: 4px 0px 4px 22px;
+  position: relative;
+}
+.stage-item:before,
+.stage-item:after {
+  border: solid transparent;
+  content: " ";
+  left: 100%;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+}
+.stage-item:after {
+  border-left-color: inherit;
+  border-width: 12px;
+  margin-top: -12px;
+}
+.stage-item:before {
+  border-color: rgba(255, 255, 255, 0);
+  border-left-color: #fff;
+  border-width: 14px;
+  margin-top: -14px;
+
+}
+.stage-item.stage-active {
+  background-color: #4299e1;
+  height: 60px; !important;
+}
+.stage-item.stage-active:after {
+  border-left-color: #4299e1;
+  left: 100%;
+  top: 25%; !important;
+  z-index: 2;
+}
+.stage-item:hover {
+  background-color: #bee3f8ba;
+}
+.stage-item:hover:after {
+  border-left-color: #bee3f8ba;
+}
+.stage-item:hover ~ div {
+  background-color:#bee3f8ba;
+}
+.stage-item:hover ~ div:after {
+  border-left-color: #bee3f8ba;
+}
+.stage-item:hover ~ div:not(.stage-active) {
+  background-color: #bababa;
+}
+.stage-item:hover ~ div:not(.stage-active):after {
+  border-left-color: #bababa;
+}
