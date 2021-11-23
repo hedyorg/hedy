@@ -119,7 +119,6 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
-     let max_level = 22; // Todo: We have to retrieve this value dynamically (some way!)
      let example_programs = false;
      let hide_level = false;
      let hide_prev_level = false;
@@ -131,12 +130,12 @@ export function save_level_settings(id: string, level: number) {
      if ($('#example_programs' + level).prop('checked')) {
        example_programs = true;
      }
-     if (level > 1 && $('#hide_level' + (level-1)).prop('checked')) {
+     if ($('#hide_level' + (level-1)).prop('checked')) {
        hide_prev_level = true;
      }
-    if (level < max_level && $('#hide_level' + (level+1)).prop('checked')) {
+     if ($('#hide_level' + (level+1)).prop('checked')) {
        hide_next_level = true;
-    }
+     }
 
      $.ajax({
        type: 'PUT',

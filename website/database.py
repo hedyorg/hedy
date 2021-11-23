@@ -241,10 +241,10 @@ class Database:
     def update_customizations_class(self, level_customizations):
         CUSTOMIZATIONS.put(level_customizations)
         for customization in CUSTOMIZATIONS.get_many({'id': level_customizations['id']}):
-            if customization['level'] == level_customizations['level']-1:
+            if customization['level'] == (level_customizations['level']-1):
                 customization['hide_next_level'] = level_customizations['hide']
                 CUSTOMIZATIONS.put(customization)
-            elif customization['level'] == level_customizations['level']+1:
+            elif customization['level'] == (level_customizations['level']+1):
                 customization['hide_prev_level'] = level_customizations['hide']
                 CUSTOMIZATIONS.put(customization)
 

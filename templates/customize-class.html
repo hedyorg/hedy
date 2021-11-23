@@ -4,26 +4,12 @@
 <div class="px-8">
  <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
  <div class="mt-4 w-full" id="explanation_text">
-     <!--
-     Kies een level en selecteer vervolgens de mogelijkheden die je wilt voor bovenstaande klas.
-     Het is mogelijk om per level specifieke "adventures" te selecteren die beschikbaar zijn voor de studenten.
-     Ook is er een optie om een restrictie te zetten op het aantal "example programs" dat de studenten kunnen gebruiken.
-     Na het bereiken van de limiet zullen deze automatisch verdwijnen.
-     Daarnaast kun je instellen hoeveel correcte programma's er nodig zijn voordat het volgende level beschikbaar komt.
-     Of een level compleet verbergen.
-     -->
  </div>
  <div class="mt-4 text-center" id="customize_level_button_container">
      {% for level in levels %}
          <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} mr-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
      {% endfor %}
  </div>
- <!--
- This is where the magic happens, when a user presses a level button retrieve the corresponding info from the db
- Then update the info when the corresponding button is pressed.
- It would be best to store this js functionality in in teachers.ts
- But, for now we can store it below (temporary!)
- -->
  <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
      <div class="mt-4 flex flex-row">
          <div class="mr-4 w-1/2" id="adventure_selector">
