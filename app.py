@@ -796,7 +796,7 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures, restrictions = get_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
+    adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
@@ -814,34 +814,6 @@ def index(level, step):
         restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
-
-
-def get_restrictions(adventures, user, level):
-    restrictions = {}
-    found_restrictions = False
-    if user:
-        student_classes = DATABASE.get_student_classes(user)
-        if student_classes:
-            level_preferences = DATABASE.get_level_customizations_class(student_classes[0]['id'], level)
-            if level_preferences:
-                found_restrictions = True
-                display_adventures = []
-                for adventure in adventures:
-                    if adventure['short_name'] in level_preferences['adventures']:
-                        display_adventures.append(adventure)
-                restrictions['example_programs'] = level_preferences['example_programs']
-                restrictions['hide_level'] = level_preferences['hide']
-                restrictions['hide_prev_level'] = level_preferences['hide_prev_level']
-                restrictions['hide_next_level'] = level_preferences['hide_next_level']
-
-    if not found_restrictions:
-        display_adventures = adventures
-        restrictions['example_programs'] = True
-        restrictions['hide_level'] = False
-        restrictions['hide_prev_level'] = False
-        restrictions['hide_next_level'] = False
-
-    return display_adventures, restrictions
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):

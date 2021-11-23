@@ -259,3 +259,30 @@ class Database:
             return CUSTOMIZATIONS.get({'id': class_id, 'level': level})
         except:
             return None
+
+    def get_student_restrictions(self, adventures, user, level):
+        restrictions = {}
+        found_restrictions = False
+        if user:
+            student_classes = self.get_student_classes(user)
+            if student_classes:
+                level_preferences = self.get_level_customizations_class(student_classes[0]['id'], level)
+                if level_preferences:
+                    found_restrictions = True
+                    display_adventures = []
+                    for adventure in adventures:
+                        if adventure['short_name'] in level_preferences['adventures']:
+                            display_adventures.append(adventure)
+                    restrictions['example_programs'] = level_preferences['example_programs']
+                    restrictions['hide_level'] = level_preferences['hide']
+                    restrictions['hide_prev_level'] = level_preferences['hide_prev_level']
+                    restrictions['hide_next_level'] = level_preferences['hide_next_level']
+
+        if not found_restrictions:
+            display_adventures = adventures
+            restrictions['example_programs'] = True
+            restrictions['hide_level'] = False
+            restrictions['hide_prev_level'] = False
+            restrictions['hide_next_level'] = False
+
+        return display_adventures, restrictions
