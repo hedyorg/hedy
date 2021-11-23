@@ -2,9 +2,8 @@
 
 {% block main %}
 <div class="px-8">
-    <h2>Welkom {{ user['username'] }}!</h2>
+    <h2>Welkom {{ user }}!</h2>
     <div id="landing_page_text" class="mt-4 w-3/4">
-        {{ mkd|commonmark }}
     </div>
     <div class="mt-8 w-full flex flex-row justify-around">
         <div class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;">

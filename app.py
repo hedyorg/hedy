@@ -934,6 +934,9 @@ def main_page(page):
     if page == 'programs':
         return programs_page(request)
 
+    if page == 'landing-page':
+        return render_template('landing-page.html', user=current_user()['username'], auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+
     # Default to English if requested language is not available
     effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'
 
@@ -946,9 +949,6 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     user = current_user()
-
-    if page == 'landing-page':
-        return render_template('landing-page.html', mkd=markdown, user=user, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
 
     if page == 'for-teachers':
         if is_teacher(user):
