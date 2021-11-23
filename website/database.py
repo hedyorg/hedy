@@ -266,9 +266,7 @@ class Database:
                 if level_preferences:
                     found_restrictions = True
                     display_adventures = []
-                    for adventure in all_adventures:
-                        if adventure['short_name'] in level_preferences['adventures']:
-                            display_adventures.append(adventure)
+                    display_adventures = [a for a in all_adventures if a['short_name'] in level_preferences['adventures']]
                     restrictions['example_programs'] = level_preferences['example_programs']
                     restrictions['hide_level'] = level_preferences['hide']
                     restrictions['hide_prev_level'] = level_preferences['hide_prev_level']
