@@ -227,10 +227,10 @@ class Database:
         for student_id in Class.get ('students', []):
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
-        CLASSES.delete({'id': Class ['id']})
-
         for customization in CUSTOMIZATIONS.get_many({'id': Class['id']}):
-            Database.remove_customizations_class(self, customization['id'], customization['level'])
+            Database.remove_customizations_class(self, Class['id'], customization['level'])
+
+        CLASSES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
