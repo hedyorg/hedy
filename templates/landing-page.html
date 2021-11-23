@@ -10,9 +10,15 @@
         <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('/hedy')}}">
             <div><h3>{{ text.start_programming }}</h3></div>
         </a>
+        {% if is_teacher %}
         <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('for-teachers')}}">
             <div><h3>{{ text.create_class }}</h3></div>
         </a>
+        {% else %}
+        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="#">
+            <div><h3>Todo...</h3></div>
+        </a>
+        {% endif %}
         <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('learn-more')}}">
             <div><h3>{{ text.read_docs }}</h3></div>
         </a>
