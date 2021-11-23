@@ -237,11 +237,10 @@ class Database:
         CUSTOMIZATIONS.put(customizations)
 
     def get_customizations_class(self, class_id):
-        customizations = CUSTOMIZATIONS.get_many({'id': class_id})
-        temp = {}
-        for customization in customizations:
-            temp[customization['level']] = customization
-        return temp
+        customizations = {}
+        for customization in CUSTOMIZATIONS.get_many({'id': class_id}):
+            customizations[customization['level']] = customization
+        return customizations
 
     def get_level_customizations_class(self, class_id, level):
         try:
