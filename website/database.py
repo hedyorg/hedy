@@ -244,7 +244,7 @@ class Database:
             if customization['level'] == level_customizations['level']-1:
                 customization['hide_next_level'] = level_customizations['hide']
                 CUSTOMIZATIONS.put(customization)
-            if customization['level'] == level_customizations['level']+1:
+            elif customization['level'] == level_customizations['level']+1:
                 customization['hide_prev_level'] = level_customizations['hide']
                 CUSTOMIZATIONS.put(customization)
 
