@@ -294,7 +294,7 @@ def routes(app, database):
 
         # If user is verified, succeed anyway
         if not 'verification_pending' in user:
-            return redirect('/')
+            return redirect('/landing-page')
 
         if token != user['verification_pending']:
             return 'invalid username/token', 403
