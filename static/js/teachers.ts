@@ -119,23 +119,10 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
-     let hide_level = false;
-     let example_programs = false;
-     let hide_prev_level = false;
-     let hide_next_level = false;
-
-     if ($('#hide_level' + level).prop('checked')) {
-       hide_level = true;
-     }
-     if ($('#example_programs' + level).prop('checked')) {
-       example_programs = true;
-     }
-     if ($('#hide_level' + (+level-1)).prop('checked')) {
-       hide_prev_level = true;
-     }
-     if ($('#hide_level' + (+level+1)).prop('checked')) {
-       hide_next_level = true;
-     }
+     const hide_level = !!$(`#hide_level${level}`).prop('checked');
+     const hide_next_level = !!$(`#hide_level${level - 1}`).prop('checked');
+     const example_programs = !!$(`#example_programs${level}`).prop('checked');
+     const hide_prev_level = !!$(`#hide_level${level - 1}`).prop('checked');
 
      $.ajax({
        type: 'PUT',
