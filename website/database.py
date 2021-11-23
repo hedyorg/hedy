@@ -228,10 +228,15 @@ class Database:
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
         CLASSES.delete({'id': Class ['id']})
-        CUSTOMIZATIONS.delete({'id': Class['id']})
+
+        for customization in CUSTOMIZATIONS.get_many({'id': Class['id']}):
+            Database.remove_customizations_class(customization['id'], customization['level'])
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
+
+    def remove_customizations_class(self, class_id, level):
+        CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
 
     def update_customizations_class(self, level_customizations):
         CUSTOMIZATIONS.put(level_customizations)
