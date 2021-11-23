@@ -119,8 +119,8 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
-     let example_programs = false;
      let hide_level = false;
+     let example_programs = false;
      let hide_prev_level = false;
      let hide_next_level = false;
 
@@ -130,10 +130,10 @@ export function save_level_settings(id: string, level: number) {
      if ($('#example_programs' + level).prop('checked')) {
        example_programs = true;
      }
-     if ($('#hide_level' + (level-1)).prop('checked')) {
+     if ($('#hide_level' + (+level-1)).prop('checked')) {
        hide_prev_level = true;
      }
-     if ($('#hide_level' + (level+1)).prop('checked')) {
+     if ($('#hide_level' + (+level+1)).prop('checked')) {
        hide_next_level = true;
      }
 
