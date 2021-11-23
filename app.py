@@ -946,6 +946,11 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     user = current_user()
+
+    if page == 'landing-page':
+        print("Dit gaat goed!")
+        return render_template('landing-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+
     if page == 'for-teachers':
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
@@ -956,7 +961,6 @@ def main_page(page):
                                    welcome_teacher=welcome_teacher, **front_matter)
         else:
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
-
 
     return render_template('main-page.html', mkd=markdown, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
 
