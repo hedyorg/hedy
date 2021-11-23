@@ -922,7 +922,6 @@ function createModal(level:number ){
     return editor;
   }
 export function toggle_developers_mode(example_programs: boolean) {
-  console.log(example_programs);
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
