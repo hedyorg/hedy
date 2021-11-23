@@ -16,7 +16,7 @@ export function create_class() {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(_response) {
-      location.reload ();
+      window.location.pathname = '/customize-class/' + _response.id ;
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
         modal.alert(auth.texts['class_name_duplicate']);

@@ -76,7 +76,7 @@ def routes (app, database):
 
         DATABASE.store_class (Class)
 
-        return {}, 200
+        return {'id': Class['id']}, 200
 
     @app.route('/class/<class_id>', methods=['PUT'])
     @requires_login
