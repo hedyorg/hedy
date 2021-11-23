@@ -256,7 +256,7 @@ class Database:
         customizations = CUSTOMIZATIONS.get({'id': class_id, 'level': level})
         return customizations if customizations else None
 
-    def get_student_restrictions(self, adventures, user, level):
+    def get_student_restrictions(self, all_adventures, user, level):
         restrictions = {}
         found_restrictions = False
         if user:
@@ -266,7 +266,7 @@ class Database:
                 if level_preferences:
                     found_restrictions = True
                     display_adventures = []
-                    for adventure in adventures:
+                    for adventure in all_adventures:
                         if adventure['short_name'] in level_preferences['adventures']:
                             display_adventures.append(adventure)
                     restrictions['example_programs'] = level_preferences['example_programs']
@@ -275,7 +275,7 @@ class Database:
                     restrictions['hide_next_level'] = level_preferences['hide_next_level']
 
         if not found_restrictions:
-            display_adventures = adventures
+            display_adventures = all_adventures
             restrictions['example_programs'] = True
             restrictions['hide_level'] = False
             restrictions['hide_prev_level'] = False
