@@ -193,8 +193,6 @@ def routes (app, database):
         # Validations
         if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not isinstance(int(body.get('next_level')), int):
-            return 'amount of correct programs must be an integer', 400
         if not isinstance(body.get('example_programs'), bool):
             return 'amount of example programs must be an integer', 400
         if not isinstance(body.get('hide_level'), bool):
@@ -210,7 +208,6 @@ def routes (app, database):
         customizations['id'] = class_id
         customizations['level'] = int(body.get('level'))
         customizations['adventures'] = body.get('adventures')
-        customizations['progress'] = body.get('next_level')
         customizations['example_programs'] = body.get('example_programs')
         customizations['hide'] = body.get('hide_level')
 

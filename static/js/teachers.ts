@@ -119,7 +119,6 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
-     let progress = $('#progress'+ level).val();
      let toggle_example_programs = false;
      let toggle_level = false;
      if ($('#hide_level' + level).prop('checked')) {
@@ -135,7 +134,6 @@ export function save_level_settings(id: string, level: number) {
        url: '/customize-class/' + id,
        data: JSON.stringify({
          adventures: selected_adventures,
-         next_level: progress,
          example_programs: toggle_example_programs,
          hide_level: toggle_level,
          level: level
@@ -156,7 +154,6 @@ export function save_level_settings(id: string, level: number) {
              $(this).find(':input').prop("checked", true);
          }
      });
-     $('#progress'+ level).val(5);
      $('#example_programs' + level).prop("checked", true);
      $('#hide_level' + level).prop("checked", false);
  }
