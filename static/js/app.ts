@@ -798,7 +798,11 @@ export function confetti_cannon(){
     const jsConfetti = new JSConfetti({canvas})
     // timeout for the confetti to fall down
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
-    jsConfetti.addConfetti();
+    jsConfetti.addConfetti({
+      emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+      emojiSize: 100,
+      confettiNumber: 30,
+    });
 
     const confettiButton = document.getElementById('confetti-button');
     if (confettiButton) {
