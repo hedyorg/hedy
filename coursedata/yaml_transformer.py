@@ -1,3 +1,4 @@
+from pathlib import Path
 import os
 import copy
 import utils
@@ -14,9 +15,10 @@ def transform_yaml_to_lark(only_new_lang=True):
   Args:
       only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
   """
-  input_path = '../coursedata/keywords/'
-  current_grammar_path = '../grammars/'
-  output_path = '../grammars-transformed/'
+  input_path = './coursedata/keywords/'
+  current_grammar_path = './grammars/'
+  output_path = './grammars-transformed/'
+  Path(output_path).mkdir(parents=True, exist_ok=True)
 
   yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
                     os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
@@ -41,7 +43,9 @@ def transform_yaml_to_lark(only_new_lang=True):
 
     lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
 
-    with open(lark_filesname_with_path, 'w') as f:
+    with open(lark_filesname_with_path, 'w+') as f:
+      list_of_translations = []
+      
       for idx, command_combo in enumerate(command_combinations):
         try:
           command = list(command_combo.keys())[0]
@@ -49,10 +53,16 @@ def transform_yaml_to_lark(only_new_lang=True):
         except IndexError:
           command = list(default_command_combinations[idx].keys())[0]
           translation = default_command_combinations[idx][command]
-
-        if command != "random":
+          
+        if yaml_lang != 'en':
+          if translation in list_of_translations:
+            raise ValueError(f'{translation} is a duplicate translation. This is not desired when creating lark files')
+          else:
+            list_of_translations.append(translation)
+        
+        if command != 'random':
           command_upper = command.upper()
-          command = "_" + command_upper
+          command = '_' + command_upper
 
         f.write(f'{command}: "{translation}" \n')
 
@@ -126,5 +136,5 @@ def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
-# transform_yaml_to_lark(False)
-transform_levels_in_all_YAMLs('colon', 17)
+transform_yaml_to_lark(False)
+# transform_levels_in_all_YAMLs('colon', 17)
