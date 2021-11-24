@@ -15,9 +15,9 @@ def transform_yaml_to_lark(only_new_lang=True):
   Args:
       only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
   """
-  input_path = './coursedata/keywords/'
-  current_grammar_path = './grammars/'
-  output_path = './grammars-transformed/'
+  input_path = '../coursedata/keywords/'
+  current_grammar_path = '../grammars/'
+  output_path = '../grammars-transformed/'
   Path(output_path).mkdir(parents=True, exist_ok=True)
 
   yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
