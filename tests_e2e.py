@@ -2,6 +2,7 @@
 import threading
 import random
 import json
+import re
 import urllib.parse
 from http.cookies import SimpleCookie
 
@@ -17,14 +18,12 @@ from config import config as CONFIG
 # *** GLOBAL VARIABLES ***
 
 HOST = 'http://localhost:' + str(CONFIG['port']) + '/'
-# This dict has global scope and holds all created users and their still current sessions(as cookies), for convenient reuse wherever needed
+# This dict has global scope and holds all created users and their still current sessions (as cookies), for convenient reuse wherever needed
 USERS = {}
-# This dict is used to transmit data from test to test
-STATE = {}
 
 # *** HELPERS ***
 
-def request(method, path, headers={}, body=''):
+def request(method, path, headers={}, body='', user=None):
 
     if method not in['get', 'post', 'put', 'delete']:
         raise Exception('request - Invalid method: ' + str(method))
@@ -39,7 +38,17 @@ def request(method, path, headers={}, body=''):
 
     start = utils.timems()
 
-    request = getattr(requests, method)(HOST + path, headers=headers, data=body)
+    cookies = None
+    if user:
+        if not 'cookies' in user:
+            user['cookies'] = requests.cookies.RequestsCookieJar()
+        cookies = user['cookies']
+
+    request = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies)
+
+    # Remember all cookies in the cookie jar
+    if user:
+        user['cookies'].update(request.cookies)
 
     response = {'time': utils.timems() - start}
 
@@ -75,7 +84,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
-        response = request('post', 'auth/signup', {}, body)
+        response = request('post', 'auth/signup', {}, body, user=body)
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
         # In this case, we get a 403. We invoke the function recursively.
@@ -97,7 +106,7 @@ class AuthHelper(unittest.TestCase):
     # Returns the first logged in user, if any; otherwise, logs in a user; if no user exists, creates and then logs in the user.
     def get_any_logged_user(self):
         for user in USERS:
-            if 'cookie' in user:
+            if 'cookies' in user:
                 return user
 
         # If there's no logged in user, we login the user
@@ -106,13 +115,9 @@ class AuthHelper(unittest.TestCase):
 
     def login_user(self, username):
         user = USERS[username]
-        if 'cookie' in user:
+        if 'cookies' in user:
             return user
-        response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']})
-        cookie = self.get_hedy_cookie(response['headers']['Set-Cookie'])
-
-        # The cookie value must be set to `hedy={{SESSION}};` so that it can be used as a Cookie header in subsequent requests
-        USERS[user['username']]['cookie'] = CONFIG['session']['cookie_name'] + '=' + cookie.value + ';'
+        response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']}, user=user)
         return user
 
     def assert_user_is_logged(self, username):
@@ -131,33 +136,25 @@ class AuthHelper(unittest.TestCase):
         username = self.make_username()
         self.user = self.assert_user_is_logged(username)
         self.username = username
-        if 'cookie' in self.user:
-            self.cookie = self.user['cookie']
-        else:
-            self.cookie = None
 
     def given_user_is_logged_in(self):
         self.user = self.get_any_logged_user()
         self.username = self.user['username']
-        if 'cookie' in self.user:
-            self.cookie = self.user['cookie']
-        else:
-            self.cookie = None
 
     def given_any_user(self):
         self.user = self.get_any_user()
         self.username = self.user['username']
-        if 'cookie' in self.user:
-            self.cookie = self.user['cookie']
-        else:
-            self.cookie = None
 
-    def post_data(self, path, body, expect_http_code=200, no_cookie=False, return_headers=False):
-        headers = {}
-        if no_cookie == False and hasattr(self, 'cookie') and self.cookie:
-            headers['cookie'] = self.cookie
+    def switch_user(self, user):
+        self.user = user
+        self.username = self.user['username']
 
-        response = request('post', path, headers, body)
+    def post_data(self, path, body, expect_http_code=200, no_cookie=False, return_headers=False, put_data=False):
+        user = None
+        if hasattr (self, 'user') and not no_cookie:
+            user = self.user
+
+        response = request('put' if put_data else 'post', path, body=body, user=user)
         self.assertEqual(response['code'], expect_http_code)
         if return_headers:
             return response['headers']
@@ -165,11 +162,11 @@ class AuthHelper(unittest.TestCase):
             return response['body']
 
     def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
-        headers = {}
-        if no_cookie == False and hasattr(self, 'cookie') and self.cookie:
-            headers['cookie'] = self.cookie
+        user = None
+        if hasattr (self, 'user') and not no_cookie:
+            user = self.user
 
-        response = request('get', path, headers, '')
+        response = request('get', path, body='', user=user)
         self.assertEqual(response['code'], expect_http_code)
         if return_headers:
             return response['headers']
@@ -347,7 +344,7 @@ class TestAuth(AuthHelper):
         self.assertNotIn('verification_pending', profile)
 
         # FINALLY remove token from user since it's already been used.
-        self.user.pop('cookie')
+        self.user.pop('verify_token')
 
     def test_logout(self):
         # GIVEN a logged in user
@@ -360,9 +357,6 @@ class TestAuth(AuthHelper):
         # WHEN retrieving the user profile with the same cookie
         # THEN receive a forbidden response code from the server
         self.get_data('profile', expect_http_code=403)
-
-        # FINALLY remove the cookie from user since it has already been deleted in the server
-        self.user.pop('cookie')
 
     def test_destroy_account(self):
         # GIVEN a logged in user
@@ -427,7 +421,7 @@ class TestAuth(AuthHelper):
     def test_profile_get(self):
         # GIVEN a new user
         # (we create a new user to ensure that the user has a clean profile)
-        self.given_user_is_logged_in()
+        self.given_fresh_user_is_logged_in()
 
         # WHEN retrieving the user profile
         # THEN receive an OK response code from the server
@@ -764,17 +758,237 @@ class TestProgram(AuthHelper):
         # FINALLY remove user since it has already been deleted in the server
         USERS.pop(self.username)
 
-# *** CLEANUP ***
+class TestClasses(AuthHelper):
+    def test_invalid_create_class(self):
+        # GIVEN a new user
+        # (we create a new user to ensure that the user has no teacher permissions yet)
+        self.given_fresh_user_is_logged_in()
 
-# We delete all the test users we created during the tests.
-# For this purpose, we use a pytest fixture. This requires us to use the `request` variable, without any possible renaming.
-# For this reason, we must rename our `request` function to `Request` so it will be referenceable from within the fixture.
-Request = request
-@pytest.fixture(scope='session', autouse=True)
-def DeleteAllTestUsers(request):
-    def InnerFunction():
-        auth_helper = AuthHelper()
-        for username in USERS:
-            auth_helper.assert_user_is_logged(username)
-            Request('post', 'auth/destroy', {'cookie': USERS [username]['cookie']}, '')
-    request.addfinalizer(InnerFunction)
+        # WHEN creating a class without teacher permissions
+        # THEN receive a forbidden response code from the server
+        self.post_data('class', {'name': 'class1'}, expect_http_code=403)
+
+        # WHEN marking the user as teacher
+        # THEN receive an OK response code from the server
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+
+        # GIVEN a user with teacher permissions
+
+        # WHEN attempting to create a class with an invalid body
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'name': 1},
+            {'name': ['foobar']}
+        ]
+
+        for invalid_body in invalid_bodies:
+            # THEN receive an invalid response code from the server
+            self.post_data('class', invalid_body, expect_http_code=400)
+
+    def test_create_class(self):
+        # GIVEN a user with teacher permissions
+        # (we create a new user to ensure that the user has no classes yet)
+        self.given_fresh_user_is_logged_in()
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+
+        # WHEN retrieving the list of classes
+        class_list = self.get_data('classes')
+
+        # THEN receive a body containing an empty list
+        self.assertIsInstance(class_list, list)
+        self.assertEqual(len(class_list), 0)
+
+        # WHEN creating a class
+        # THEN receive an OK response code with the server
+        self.post_data('class', {'name': 'class1'})
+
+        # GIVEN a class already saved
+        # WHEN retrieving the list of classes
+        class_list = self.get_data('classes')
+        # THEN receive a body containing an list with one element
+        self.assertEqual(len(class_list), 1)
+
+        # THEN validate the fields of the class
+        Class = class_list[0]
+        self.assertIsInstance(Class, dict)
+        self.assertIsInstance(Class['id'], str)
+        self.assertIsInstance(Class['date'], int)
+        self.assertIsInstance(Class['link'], str)
+        self.assertEqual(Class['name'], 'class1')
+        self.assertIsInstance(Class['students'], list)
+        self.assertEqual(len(Class['students']), 0)
+        self.assertEqual(Class['teacher'], self.username)
+
+        # WHEN retrieving the class
+        # THEN receive an OK response code from the server
+        Class = self.get_data('class/' + Class['id'])
+
+        # THEN validate the fields of the class
+        self.assertIsInstance(Class, dict)
+        self.assertIsInstance(Class['id'], str)
+        self.assertIsInstance(Class['link'], str)
+        self.assertEqual(Class['name'], 'class1')
+        self.assertIsInstance(Class['students'], list)
+        self.assertEqual(len(Class['students']), 0)
+
+    def test_invalid_update_class(self):
+        # GIVEN a user with teacher permissions and a class
+        self.given_user_is_logged_in()
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes') [0]
+
+        # WHEN attempting to update a class with no cookie
+        # THEN receive a forbidden status code from the server
+        self.post_data('class/' + Class['id'], {'name': 'class2'}, expect_http_code=403, put_data=True, no_cookie=True)
+
+        # WHEN attempting to update a class that does not exist
+        # THEN receive a not found status code from the server
+        self.post_data('class/foo', {'name': 'class2'}, expect_http_code=404, put_data=True)
+
+        # WHEN attempting to update a class with an invalid body
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'name': 1},
+            {'name': ['foobar']}
+        ]
+
+        for invalid_body in invalid_bodies:
+            # THEN receive an invalid response code from the server
+            self.post_data('class/' + Class['id'], invalid_body, expect_http_code=400, put_data=True)
+
+    def test_update_class(self):
+        # GIVEN a user with teacher permissions and a class
+        self.given_user_is_logged_in()
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes') [0]
+
+        # WHEN attempting to update a class
+        # THEN receive an OK status code from the server
+        self.post_data('class/' + Class['id'], {'name': 'class2'}, put_data=True)
+
+        # WHEN retrieving the class
+        # THEN receive an OK response code from the server
+        Class = self.get_data('class/' + Class['id'])
+
+        # THEN the name of the class should be updated
+        self.assertEqual(Class['name'], 'class2')
+
+    def test_join_class(self):
+        # GIVEN a teacher
+        self.given_user_is_logged_in()
+        teacher = self.user
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        # GIVEN a class
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes') [0]
+
+        # GIVEN a student (user without teacher permissions)
+        self.given_fresh_user_is_logged_in()
+        student = self.user
+
+        # WHEN attempting to join a class without being logged in
+        # THEN receive a forbidden status code from the server
+        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], no_cookie=True, expect_http_code=403)
+
+        # WHEN retrieving the short link of a class
+        # THEN receive a redirect to `class/ID/join/LINK`
+        body = self.get_data('hedy/l/' + Class['link'], expect_http_code=302)
+        if not re.search(HOST + 'class/' + Class['id'] + '/prejoin/' + Class['link'], body):
+            raise Exception('Invalid or missing redirect link')
+
+        # WHEN joining a class
+        # THEN receive a redirect to `class/ID/join/LINK`
+        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        if not re.search(HOST + 'my-profile', body):
+            raise Exception('Invalid redirect')
+
+        # WHEN joining a class again (idempotent call)
+        # THEN receive a redirect to `class/ID/join/LINK`
+        body = self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        if not re.search(HOST + 'my-profile', body):
+            raise Exception('Invalid redirect')
+
+        # WHEN getting own profile after joining a class
+        profile = self.get_data('profile')
+        # THEN verify that the class is there and contains the right fields
+        self.assertIsInstance(profile['student_classes'], list)
+        self.assertEqual(len(profile['student_classes']), 1)
+        student_class = profile['student_classes'][0]
+        self.assertIsInstance(student_class, dict)
+        self.assertEqual(student_class['id'], Class['id'])
+        self.assertEqual(student_class['name'], Class['name'])
+
+    def test_see_students_in_class(self):
+        # GIVEN a teacher
+        self.given_user_is_logged_in()
+        teacher = self.user
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        # GIVEN a class
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes') [0]
+
+        # GIVEN a student (user without teacher permissions) that has joined the class
+        self.given_fresh_user_is_logged_in()
+        student = self.user
+        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+
+        # GIVEN the aforementioned teacher
+        self.switch_user(teacher)
+
+        # WHEN retrieving the class with a student in it
+        Class_data = self.get_data('class/' + Class['id'])
+        # THEN the class should contain a student with valid fields
+        self.assertEqual(len(Class_data['students']), 1)
+        class_student = Class_data['students'][0]
+        self.assertEqual(class_student['highest_level'], 0)
+        self.assertEqual(class_student['programs'], 0)
+        self.assertEqual(class_student['latest_shared'], None)
+        self.assertIsInstance(class_student['last_login'], str)
+        self.assertEqual(class_student['username'], student['username'])
+
+        # WHEN retrieving the student's programs
+        # THEN receive an OK response code from the server
+        body = self.get_data('programs?user=' + student['username'], expect_http_code=200)
+
+    def test_see_students_with_programs_in_class(self):
+        # GIVEN a teacher
+        self.given_user_is_logged_in()
+        teacher = self.user
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        # GIVEN a class
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes') [0]
+
+        # GIVEN a student (user without teacher permissions) that has joined the class and has a public program
+        self.given_fresh_user_is_logged_in()
+        student = self.user
+        self.get_data('class/' + Class['id'] + '/join/' + Class['link'], expect_http_code=302)
+        # GIVEN a student with two programs, one public and one private
+        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1}
+        public_program_id = self.post_data('programs', public_program)['id']
+        self.post_data('programs/share', {'id': public_program_id, 'public': True})
+        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2}
+        private_program_id = self.post_data('programs', private_program)['id']
+
+        # GIVEN the aforementioned teacher
+        self.switch_user(teacher)
+
+        # WHEN retrieving the class with a student in it
+        Class_data = self.get_data('class/' + Class['id'])
+        # THEN the class should contain a student with valid fields
+        self.assertEqual(len(Class_data['students']), 1)
+
+
+# *** CLEANUP OF USERS CREATED DURING THE TESTS ***
+
+def tearDownModule ():
+    auth_helper = AuthHelper()
+    for username in USERS:
+        auth_helper.assert_user_is_logged(username)
+        request('post', 'auth/destroy', user=USERS[username])
