@@ -935,7 +935,10 @@ def main_page(page):
         return programs_page(request)
 
     if page == 'landing-page':
-        return render_template('landing-page.html', user=current_user()['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+        if current_user()['username']:
+            return render_template('landing-page.html', user=current_user()['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+        else:
+            return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
 
     # Default to English if requested language is not available
     effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'

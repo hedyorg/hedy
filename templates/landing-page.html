@@ -7,23 +7,23 @@
         {{ text.intro_text }}
     </div>
     <div class="mt-8 w-full flex flex-row justify-around" style="height: 20rem;">
-        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
             <img src="#" class="h-32">
             <div class="mt-4">
                 Very short text...
             </div>
-            <button class="green-btn" onclick='location.href="{{localize_link ('/hedy')}}"'>{{ text.start_programming }}</button>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/hedy')}}"'>{{ text.start_programming }}</button>
         </div>
         {% if is_teacher %}
-        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
             <img src="#" class="h-32">
             <div class="mt-4">
                 Very short text...
             </div>
-            <button class="green-btn" onclick='location.href="{{localize_link ('for-teachers')}}"'>{{ text.create_class }}</button>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('for-teachers')}}"'>{{ text.create_class }}</button>
         </div>
         {% else %}
-        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
             <img src="#" class="h-32">
             <div class="mt-4">
                 Very short text...
@@ -31,12 +31,12 @@
             <button class="green-btn mt-4" onclick='location.href="#"'>{{ text.read_docs }}</button>
         </div>
         {% endif %}
-        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
             <img src="#" class="h-32">
             <div class="mt-4">
                 Very short text...
             </div>
-            <button class="green-btn" onclick='location.href="{{localize_link ('learn-more')}}"'>{{ text.read_docs }}</button>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('learn-more')}}"'>{{ text.read_docs }}</button>
         </div>
     </div>
 </div>
