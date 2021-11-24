@@ -670,7 +670,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').empty();
+    $('#turtlecanvas').hide();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
@@ -692,6 +692,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
         event.preventDefault();
         $('#inline-modal').hide();
+        if (hasTurtle) {
+          $('#turtlecanvas').show();
+        }
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
         // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
@@ -815,7 +818,8 @@ export function modalStepOne(level: number){
 
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
-  modal.alert(editor);
+  let title = ErrorMessages['Program_repair'];
+  modal.alert(editor, 0, title);
 }
  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
