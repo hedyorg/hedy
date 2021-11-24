@@ -670,7 +670,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').empty();
+    $('#turtlecanvas').hide();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
@@ -692,6 +692,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
         event.preventDefault();
         $('#inline-modal').hide();
+        if (hasTurtle) {
+          $('#turtlecanvas').show();
+        }
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
         // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
