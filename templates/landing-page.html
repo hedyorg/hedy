@@ -6,22 +6,38 @@
     <div id="landing_page_text" class="mt-4 w-3/4">
         {{ text.intro_text }}
     </div>
-    <div class="mt-8 w-full flex flex-row justify-around">
-        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('/hedy')}}">
-            <div><h3>{{ text.start_programming }}</h3></div>
-        </a>
+    <div class="mt-8 w-full flex flex-row justify-around" style="height: 20rem;">
+        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+            <img src="#" class="h-32">
+            <div class="mt-4">
+                Very short text...
+            </div>
+            <button class="green-btn" onclick='location.href="{{localize_link ('/hedy')}}"'>{{ text.start_programming }}</button>
+        </div>
         {% if is_teacher %}
-        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('for-teachers')}}">
-            <div><h3>{{ text.create_class }}</h3></div>
-        </a>
+        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+            <img src="#" class="h-32">
+            <div class="mt-4">
+                Very short text...
+            </div>
+            <button class="green-btn" onclick='location.href="{{localize_link ('for-teachers')}}"'>{{ text.create_class }}</button>
+        </div>
         {% else %}
-        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="#">
-            <div><h3>Todo...</h3></div>
-        </a>
+        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+            <img src="#" class="h-32">
+            <div class="mt-4">
+                Very short text...
+            </div>
+            <button class="green-btn mt-4" onclick='location.href="#"'>{{ text.read_docs }}</button>
+        </div>
         {% endif %}
-        <a class="w-1/4 border-2 border-gray-400 flex flex-row items-center justify-center" style="height: 20em;" href="{{localize_link ('learn-more')}}">
-            <div><h3>{{ text.read_docs }}</h3></div>
-        </a>
+        <div class="w-1/4 border-2 border-gray-400 flex flex-col items-center justify-center">
+            <img src="#" class="h-32">
+            <div class="mt-4">
+                Very short text...
+            </div>
+            <button class="green-btn" onclick='location.href="{{localize_link ('learn-more')}}"'>{{ text.read_docs }}</button>
+        </div>
     </div>
 </div>
 {% endblock %}
