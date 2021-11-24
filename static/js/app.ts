@@ -925,13 +925,13 @@ function createModal(level:number ){
     });
     return editor;
   }
-export function toggle_developers_mode(hide_commands: boolean) {
+export function toggle_developers_mode(example_programs: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
   } else {
       // If the example programs are hidden by class customization: keep hidden!
-      if (hide_commands) {
+      if (example_programs) {
         $('#commands-window-total').show();
       }
       $('#adventures').show();
