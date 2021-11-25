@@ -477,7 +477,7 @@ def suite (username):
         ['share public program', 'post', '/programs/share', {}, lambda state: {'id': state ['public_program'], 'public': True}, 200],
         ['create private program after public program', 'post', '/programs', {}, {'code': 'print Hello world', 'name': 'Private program 1', 'level': 1}, 200],
         ['login as teacher', 'post', '/auth/login', {}, {'username': 'teacher-' + username, 'password': 'foobar'}, 200],
-        ['get class with a student with a shared program', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass4],
+        ['get class with a student with a shared program', 'get', lambda state: '/for-teachers/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass4],
         ['get classes after student shared a program', 'get', '/classes', {}, {}, 200, getTeacherClasses4],
         ['remove non-existing student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'foo', {}, {}, 200],
         ['remove student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
