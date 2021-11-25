@@ -5,6 +5,7 @@ import { modal, error, success } from './modal';
 import { auth } from './auth';
 
 export let theGlobalEditor: AceAjax.Editor;
+export let theModalEditor: AceAjax.Editor;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -198,7 +199,7 @@ export function runit(level: string, lang: string, cb: () => void) {
     var code = get_trimmed_code();
 
     clearErrors(editor);
-
+    removeBulb();
     console.log('Original program:\n', code);
     $.ajax({
       type: 'POST',
@@ -215,28 +216,87 @@ export function runit(level: string, lang: string, cb: () => void) {
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning) {
+        fix_code(level, lang);
+        showBulb(level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           // Location can be either [row, col] or just [row].
-
+          // @ts-ignore
+          fix_code(level, lang);
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
         return;
       }
-      if (response.Code){
-        console.log("success!");
+      if (response.Code && !response.Error && !response.Warning) {
+        removeBulb();
         var allsuccessmessages = ErrorMessages['Transpile_success'];
         var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
         success.show(allsuccessmessages[randomnum]);
       }
-      runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
+        runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
       });
+    }).fail(function(xhr) {
+      console.error(xhr);
+      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+      if (xhr.readyState < 4) {
+        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
+      } else {
+        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
+      }
+    });
+
+  } catch (e: any) {
+    console.error(e);
+    error.show(ErrorMessages['Other_error'], e.message);
+  }
+}
+function showBulb(level: string){
+  let parsedlevel = parseInt(level);
+  if(parsedlevel <= 2){
+    const repair_button = document.getElementById("repair_button")!;
+    repair_button.style.visibility = "visible";
+    repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
+  }
+
+}
+
+function removeBulb(){
+    const repair_button = document.getElementById("repair_button")!;
+    repair_button.style.visibility = "hidden";
+}
+
+export function fix_code(level: string, lang: string){
+
+  if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
+
+  if (reloadOnExpiredSession ()) return;
+
+  try {
+    level = level.toString();
+    var code = get_trimmed_code();
+    $.ajax({
+      type: 'POST',
+      url: '/fix-code',
+      data: JSON.stringify({
+        level: level,
+        code: code,
+        lang: lang,
+        read_aloud : !!$('#speak_dropdown').val(),
+        adventure_name: window.State.adventure_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response: any) {
+      if (response.FixedCode){
+        sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+        showBulb(level);
+      }
     }).fail(function(xhr) {
       console.error(xhr);
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
@@ -610,7 +670,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').empty();
+    $('#turtlecanvas').hide();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
@@ -632,6 +692,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
         event.preventDefault();
         $('#inline-modal').hide();
+        if (hasTurtle) {
+          $('#turtlecanvas').show();
+        }
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
         // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
@@ -747,9 +810,133 @@ export function confetti_cannon(){
   }
 }
 
-export function toggle_developers_mode() {
-  $('#commands-window-total').toggle();
-  $('#adventures').toggle();
+export function modalStepOne(level: number){
+  createModal(level);
+  let modal_editor = $('#modal-editor');
+  initializeModalEditor(modal_editor);
+}
+
+function createModal(level:number ){
+  let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
+  let title = ErrorMessages['Program_repair'];
+  modal.alert(editor, 0, title);
+}
+ function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
+    const editor = ace.edit(element);
+    editor.setTheme("ace/theme/monokai");
+    if (isReadOnly) {
+      editor.setOptions({
+        readOnly: true,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
+    }
+
+    // a variable which turns on(1) highlighter or turns it off(0)
+    var highlighter = 1;
+
+    if (highlighter == 1) {
+      // Everything turns into 'ace/mode/levelX', except what's in
+      // this table. Yes the numbers are strings. That's just JavaScript for you.
+      if (window.State.level) {
+        const mode = getHighlighter(parseInt(window.State.level));
+        editor.session.setMode(mode);
+      }
+    }
+    return editor;
+  }
+
+  function initializeModalEditor($editor: JQuery) {
+    if (!$editor.length) return;
+    // We expose the editor globally so it's available to other functions for resizing
+    let editor = turnIntoAceEditor($editor.get(0)!, true);
+    theModalEditor = editor;
+    error.setEditor(editor);
+    //small timeout to make sure the call with fixed code is complete.
+    setTimeout(function(){}, 2000);
+
+    window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+    // Load existing code from session, if it exists
+    const storage = window.sessionStorage;
+    if (storage) {
+      const levelKey = $editor.data('lskey');
+        let tempIndex = 0;
+        let resultString = "";
+
+        if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
+          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+          let tempString = ""
+          for (let i = 0; i < resultString.length + 1; i++) {
+            setTimeout(function() {
+              editor.setValue(tempString,tempIndex);
+              tempString += resultString[tempIndex];
+              tempIndex++;
+            }, 150 * i);
+          }
+        }
+        else{
+          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+          editor.setValue(resultString);
+        }
+    }
+
+    window.onbeforeunload = () => {
+      // The browser doesn't show this message, rather it shows a default message.
+      if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
+        return auth.texts['unsaved_changes'];
+      } else {
+        return undefined;
+      }
+    };
+
+    // *** KEYBOARD SHORTCUTS ***
+
+    let altPressed: boolean | undefined;
+
+    // alt is 18, enter is 13
+    window.addEventListener ('keydown', function (ev) {
+      const keyCode = ev.keyCode;
+      if (keyCode === 18) {
+        altPressed = true;
+        return;
+      }
+      if (keyCode === 13 && altPressed) {
+        if (!window.State.level || !window.State.lang) {
+          throw new Error('Oh no');
+        }
+        runit (window.State.level, window.State.lang, function () {
+          $ ('#output').focus ();
+        });
+      }
+      // We don't use jquery because it doesn't return true for this equality check.
+      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+        editor.focus ();
+        editor.navigateFileEnd ();
+      }
+    });
+    window.addEventListener ('keyup', function (ev) {
+      const keyCode = ev.keyCode;
+      if (keyCode === 18) {
+        altPressed = false;
+        return;
+      }
+    });
+    return editor;
+  }
+export function toggle_developers_mode(example_programs: boolean) {
+  if ($('#developers_toggle').is(":checked")) {
+      $('#commands-window-total').hide();
+      $('#adventures').hide();
+  } else {
+      // If the example programs are hidden by class customization: keep hidden!
+      if (example_programs) {
+        $('#commands-window-total').show();
+      }
+      $('#adventures').show();
+  }
+
   if ($('#adventures').is(":hidden")) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");

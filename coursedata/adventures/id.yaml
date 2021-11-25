@@ -562,18 +562,14 @@ adventures:
                     pilihan is batu, gunting, kertas
                     pil_komputer is _
                     pil_kamu is ask Apa yang kamu pilih?
-                    print 'kamu memilih' _
-                    print 'komputer memilih' _
+                    print 'kamu memilih ' _
+                    print 'komputer memilih ' _
                     if _ is _ print 'seri' else print 'tidak seri'
                     if pil_kamu is batu and pil_komputer is kertas print 'komputer menang'
                     ```
 
                     Pertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. 
 
-                    Lalu salin baris terakhir beberapa kali dan lengkapi skenario perbandingan lainnya dengan baik.
-
-                    Sekarang kamu sudah menyelesaikan permainan batu gunting kertas kamu sendiri! Ini sedikit kompleks dengan semua skenario perbandingan kan?
-                    Kita akan membuatnya lebih mudah pada level berikutnya.
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             4:
                 story_text: |-
@@ -1263,24 +1259,25 @@ adventures:
                     Tentu kamu ingin menampilkan 'nama saya adalah Sophie', tapi Hedy menampilkan 'Sophie saya adalah Sophie'.
                     Pada level 3, masalah ini dapat dipecahkan dengan tanda kutip satu.
                 start_code: print 'Ayo bergerak ke level berikutnya!'
-            10:
-                story_text: |-
-                    ## Apa berikutnya?
-                    Kode kamu sekarang terlihat semakin mirip dengan kode Python. Bagus! Pada level 9 kamu akan belajar satu langkah lagi untuk membuat kode kamu semakin mirip Python.
-                    Hal menarik lain yang akan kamu pelajari di level 9 adalah perintah baru. Pada level 8, kamu mungkin sadar bahwa kamu kadang perlu menggunakan perintah `else` lebih dari satu.
-                    Sebagai contoh:
-                    ```
-                    print 'Apa menu untuk makan malam hari ini?'
-                    pilihan is pizza, brokoli, kacang hijau
-                    terpilih is pilihan at random
-                    if pilihan is pizza
-                        print 'Nyam! Pizza!'
-                    else
-                        print 'Wew...'
-                    ```
-                    Kode ini sebaiknya memiliki dua perintah `else` jadi kamu dapat membuat satu respon eksklusif untuk brokoli dan satu lagi untuk kacang hijau. Level 9 mengenalkan perintah baru `elif` yang dapat memfasilitasi hal ini!
-                    Maka mari kita cek level berikutnya!
-                start_code: print 'Ayo bergerak ke level berikutnya!'
+# The sample code makes an invalid equality check, commenting out for now
+#            10:
+#                story_text: |-
+#                    ## Apa berikutnya?
+#                    Kode kamu sekarang terlihat semakin mirip dengan kode Python. Bagus! Pada level 9 kamu akan belajar satu langkah lagi untuk membuat kode kamu semakin mirip Python.
+#                    Hal menarik lain yang akan kamu pelajari di level 9 adalah perintah baru. Pada level 8, kamu mungkin sadar bahwa kamu kadang perlu menggunakan perintah `else` lebih dari satu.
+#                    Sebagai contoh:
+#                    ```
+#                    print 'Apa menu untuk makan malam hari ini?'
+#                    pilihan is pizza, brokoli, kacang hijau
+#                    terpilih is pilihan at random
+#                    if pilihan is pizza
+#                        print 'Nyam! Pizza!'
+#                    else
+#                        print 'Wew...'
+#                    ```
+#                    Kode ini sebaiknya memiliki dua perintah `else` jadi kamu dapat membuat satu respon eksklusif untuk brokoli dan satu lagi untuk kacang hijau. Level 9 mengenalkan perintah baru `elif` yang dapat memfasilitasi hal ini!
+#                    Maka mari kita cek level berikutnya!
+#                start_code: print 'Ayo bergerak ke level berikutnya!'
             8:
                 story_text: |-
                     ## Apa berikutnya?

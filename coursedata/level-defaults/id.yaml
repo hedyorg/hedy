@@ -455,37 +455,6 @@
 #            else:
 #                print('Tidak, itu salah!')
 #
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Siap atau tidak, aku datang!'
-#    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
-#    commands:
-#    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
-#        example: 'for i in range 1 to 10:'
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Siap atau tidak, aku datang!'
-#    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
-#        example: 'if warna is hijau:'
-#        demo_code: |-
-#            warna is hijau
-#            if warna is hijau:
-#                print 'Warnanya hijau'
-#            else:
-#                print 'Warnanya bukan hijau'
-#    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
-#        example: 'elif a is 5:'
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a bernilai 1'
-#            elif a is 2:
-#                print 'a bernilai 2'
-#            else:
-#                print 'a bukan bernilai 1 atau 2'
 14:
     start_code: |-
         umur is ask 'Berapa umur mu?'
@@ -561,3 +530,34 @@
             buah is ['apel', 'pisang', 'ceri']
             buahacak is buah[random]
             print buahacak 
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Siap atau tidak, aku datang!'
+    intro_text: Kali ini kita akan menggati proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
+    commands:
+    -   explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
+        example: 'for i in range 1 to 10:'
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Siap atau tidak, aku datang!'
+    -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
+        example: 'if warna is hijau:'
+        demo_code: |-
+            warna is 'hijau'
+            if warna is hijau:
+                print 'Warnanya hijau'
+            else:
+                print 'Warnanya bukan hijau'
+    -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
+        example: 'elif a is 5:'
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a bernilai 1'
+            elif a is 2:
+                print 'a bernilai 2'
+            else:
+                print 'a bukan bernilai 1 atau 2'

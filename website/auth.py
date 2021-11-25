@@ -557,7 +557,7 @@ for name in logging.Logger.manager.loggerDict.keys():
         logging.getLogger(name).setLevel(logging.CRITICAL)
 
 # https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
-email_client = boto3.client('ses', region_name = config['email']['region'], aws_access_key_id = os.getenv('AWS_SES_ACCESS_KEY'), aws_secret_access_key = os.getenv('AWS_SES_SECRET_KEY'))
+email_client = boto3.client('ses', region_name = config['email']['region'])
 
 @querylog.timed
 def send_email(recipient, subject, body_plain, body_html):
@@ -602,11 +602,11 @@ def send_email_template(template, email, link):
 
     send_email(email, subject, body_plain, body_html)
 
-def auth_templates(page, lang, menu, request):
+def auth_templates(page, lang, request):
     if page == 'my-profile':
-        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, current_page='my-profile')
+        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
+        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403

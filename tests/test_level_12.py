@@ -1,6 +1,7 @@
 
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel12(HedyTester):
@@ -17,6 +18,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       test_name=self.name()
     )
@@ -59,7 +61,7 @@ class TestsLevel12(HedyTester):
     sparen is prijs - gespaard
     print 'hallo' sparen""")
     expected = textwrap.dedent("""\
-    prijs = input('hoeveel?')
+    prijs = input(f'hoeveel?')
     try:
       prijs = int(prijs)
     except ValueError:
@@ -73,6 +75,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -85,7 +88,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
       colors = ['orange', 'blue', 'green']
-      favorite = input('Is your fav color'+colors[1-1])
+      favorite = input(f'Is your fav color{colors[1-1]}')
       try:
         favorite = int(favorite)
       except ValueError:
@@ -109,7 +112,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
       color = 'orange'
-      favorite = input('Is your fav color'+color)
+      favorite = input(f'Is your fav color{color}')
       try:
         favorite = int(favorite)
       except ValueError:
@@ -120,30 +123,34 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
 
-  def test_ask_with_integer_var(self):
-    code = textwrap.dedent("""\
-      number is 10
+  @parameterized.expand(['10', '10.0'])
+  def test_ask_with_number_var(self, number):
+    code = textwrap.dedent(f"""\
+      number is {number}
       favorite is ask 'Is your fav number' number""")
+
+    expected = textwrap.dedent(f"""\
+      number = {number}
+      favorite = input(f'Is your fav number{{number}}')
+      try:
+        favorite = int(favorite)
+      except ValueError:
+        try:
+          favorite = float(favorite)
+        except ValueError:
+          pass""")
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
-  def test_ask_with_float_var(self):
-    code = textwrap.dedent("""\
-      number is 3.14
-      favorite is ask 'Is your fav number' number""")
-
-    self.multi_level_tester(
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
+      max_level=17,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
 
@@ -159,6 +166,43 @@ class TestsLevel12(HedyTester):
       test_name=self.name()
     )
 
+  def test_if_in_list_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is 'red'
+    if 'red' in items
+        print 'found!'""")
+    self.multi_level_tester(
+      max_level=16,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+    color is 5, 6, 7
+    if 1 is color
+        print 'success!'""")
+    self.multi_level_tester(
+      max_level=15,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_incompatible_types_gives_error(self):
+    code = textwrap.dedent("""\
+    a is 'test'
+    b is 15
+    if a is b
+      c is 1""")
+    self.multi_level_tester(
+      max_level=16,
+      code=code,
+      exception=hedy.exceptions.InvalidTypeCombinationException,
+      test_name=self.name()
+    )
+
   # new calculations
   def test_int_addition_directly(self):
     code = textwrap.dedent("""\
@@ -168,6 +212,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -181,6 +226,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -194,6 +240,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -210,6 +257,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -228,6 +276,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -247,6 +296,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -266,6 +316,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=check_output,
       test_name=self.name()
@@ -285,6 +336,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=check_output,
       test_name=self.name()
@@ -299,6 +351,7 @@ class TestsLevel12(HedyTester):
             print(f'{name}')""")
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -313,6 +366,7 @@ class TestsLevel12(HedyTester):
             print(f'hallo {name}')""")
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -329,19 +383,20 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
 
-  def test_calc_string_and_int(self):
+  def test_calc_string_and_int_gives_type_error(self):
     code = textwrap.dedent("""\
-            x is 'test1'
-            y is x + 1""")
+      x is 'test1'
+      y is x + 1""")
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
+      exception=hedy.exceptions.InvalidTypeCombinationException,
       test_name=self.name()
     )
 
@@ -358,6 +413,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -374,28 +430,30 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
     )
 
-  def test_access_variable_before_definition(self):
-    code = textwrap.dedent("""\
-            a is b
-            b is 3
-            print a""")
-
-    expected = textwrap.dedent("""\
-            a = b
-            b = 3
-            print(f'{a}')""")
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
-    )
+  # def test_access_variable_before_definition(self):
+  #   code = textwrap.dedent("""\
+  #           a is b
+  #           b is 3
+  #           print a""")
+  #
+  #   expected = textwrap.dedent("""\
+  #           a = b
+  #           b = 3
+  #           print(f'{a}')""")
+  #
+  #   self.multi_level_tester(
+  #     code=code,
+  #     max_level=17,
+  #     expected=expected,
+  #     extra_check_function=self.is_not_turtle(),
+  #     test_name=self.name()
+  #   )
 
   def test_list_creation_with_spaces(self):
     code = textwrap.dedent("""\
@@ -491,7 +549,7 @@ class TestsLevel12(HedyTester):
         print 'Het antwoord moest zijn ' antwoord""")
 
     expected = textwrap.dedent("""\
-    antwoord = input('Hoeveel is 10 plus 10?')
+    antwoord = input(f'Hoeveel is 10 plus 10?')
     try:
       antwoord = int(antwoord)
     except ValueError:
@@ -512,6 +570,64 @@ class TestsLevel12(HedyTester):
     self.assertEqual(False, result.has_turtle)
 
 
+  #add/remove tests
+  def test_add_to_list(self):
+    code = textwrap.dedent("""\
+    color is ask 'what is your favorite color? '
+    colors is 'green', 'red', 'blue'
+    add color to colors
+    print colors at random""")
+
+    expected = textwrap.dedent("""\
+    color = input(f'what is your favorite color? ')
+    try:
+      color = int(color)
+    except ValueError:
+      try:
+        color = float(color)
+      except ValueError:
+        pass
+    colors = ['green', 'red', 'blue']
+    colors.append(color)
+    print(f'{random.choice(colors)}')""")
+
+    self.multi_level_tester(
+      max_level=15,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+  def test_remove_from_list(self):
+    code = textwrap.dedent("""\
+    colors is 'green', 'red', 'blue'
+    color is ask 'what color to remove?'
+    remove color from colors
+    print colors at random""")
+
+    expected = textwrap.dedent("""\
+    colors = ['green', 'red', 'blue']
+    color = input(f'what color to remove?')
+    try:
+      color = int(color)
+    except ValueError:
+      try:
+        color = float(color)
+      except ValueError:
+        pass
+    try:
+        colors.remove(color)
+    except:
+       pass
+    print(f'{random.choice(colors)}')""")
+
+
+    self.multi_level_tester(
+      max_level=15,
+      code=code,
+      expected=expected,
+      test_name=self.name()
+    )
+
   # negative tests
   def test_assign_string_without_quotes(self):
     code = textwrap.dedent("""\
@@ -520,6 +636,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       exception=hedy.exceptions.UnquotedAssignTextException,
       test_name=self.name()
     )
@@ -547,18 +664,19 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=17,
       expected=expected,
       extra_check_function=lambda x: self.run_code(x) == "11",
       test_name=self.name()
     )
 
-  def test_cyclic_var_reference_does_not_give_error(self):
-    code = "b is b + 1"
-
-    expected = "b = b + 1"
-
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      test_name=self.name()
-    )
+  # def test_cyclic_var_reference_does_not_give_error(self):
+  #   code = "b is b + 1"
+  #
+  #   expected = "b = b + 1"
+  #
+  #   self.multi_level_tester(
+  #     code=code,
+  #     expected=expected,
+  #     test_name=self.name()
+  #   )

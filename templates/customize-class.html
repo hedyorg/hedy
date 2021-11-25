@@ -1,0 +1,86 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+ <h2>{{auth.customize_class}}: {{class_info.name}}</h2>
+ <div class="mt-4 w-full" id="explanation_text">
+ </div>
+ <div class="mt-4 text-center" id="customize_level_button_container">
+     {% for level in levels %}
+         <button class="{% if level == 1 %} blue-btn {% else %} green-btn {% endif %} mr-4 mt-2 w-32" id="test" level="{{ level }}">{{ui.level_title}} {{ level }}</button>
+     {% endfor %}
+ </div>
+ <div class="mt-4 border-gray-400 border-2 pb-4 px-4" id="level_settings">
+     <div class="mt-4 flex flex-row">
+         <div class="mr-4 w-1/2" id="adventure_selector">
+             <h4>{{auth.available_adventures}}</h4>
+             <form>
+                 <div class="flex flex-row items-center">
+                 <ul class="inline-block w-1/2 list-none ml-0 pl-4" id="adventures_overview">
+                     {% for key_name, name_levels in adventures.items() %}
+                         {% for name, levels in name_levels.items() %}
+                             {% for level in levels %}
+                                 <li {% if level != 1 %} class="hidden" {% endif %} level="{{level}}" id="{{key_name}}">
+                                     <input type="checkbox" name="adventures" class="mr-4" value="" {% if preferences[level] and key_name not in preferences[level]['adventures'] %} unchecked {% else %} checked {% endif %}>
+                                     <label style>{{ name }}</label>
+                                 </li>
+                             {% endfor %}
+                         {% endfor %}
+                     {% endfor %}
+                 </ul>
+                 </div>
+             </form>
+         </div>
+         {% for level in levels %}
+             <div class="other_settings {% if level != 1 %} hidden {% endif %}" level="{{level}}">
+                <h4>{{auth.other_settings}}</h4>
+                     <div class="mb-4">
+                         <label class="inline-block w-3/4" for="example_programs">{{auth.example_programs}}</label><input type="checkbox" id="example_programs{{ level }}" name="example_program"
+                                                                                                                value=""{% if preferences[level] and not preferences[level]['example_programs'] %}unchecked{% else %}checked{% endif %}>
+                     </div>
+                     <div class="mb-4">
+                         <label class="inline-block w-3/4" for="hide_level">{{auth.hide_level}}</label><input type="checkbox" id="hide_level{{ level }}" name="hide_level"
+                                                                                                              value="" {% if preferences[level] and preferences[level]['hide'] %}checked{% endif %}>
+                     </div>
+             </div>
+         {% endfor %}
+     </div>
+     <div class="mt-4">
+         <button class="blue-btn" onclick="hedyApp.save_level_settings ('{{class_info.id}}', level)">{{auth.save}}</button>
+         <button class="red-btn" onclick="hedyApp.reset_level_preferences (level)">{{auth.reset}}</button>
+     </div>
+ </div>
+ <div class="mt-4">
+        <button class="green-btn" onclick="window.location.href = '{{localize_link ('/class/' + class_info.id)}}'">{{auth.back_to_class}}</button>
+ </div>
+</div>
+<script>
+ let level = 1;
+ $('#customize_level_button_container button').click(function(){
+     $("button[level='" + level + "']").removeClass('blue-btn');
+     $("button[level='" + level + "']").addClass('green-btn');
+
+     $(this).removeClass('green-btn');
+     $(this).addClass('blue-btn');
+
+     level = this.getAttribute('level');
+     $('#level_settings').hide();
+     $('.other_settings').each(function() {
+         $(this).hide();
+     });
+     $('#adventures_overview li').each(function() {
+         $(this).hide();
+         if (this.getAttribute('level') == level) {
+             $(this).show();
+         }
+     });
+     $('#level_settings').show();
+     $('.other_settings').each(function() {
+         if (this.getAttribute('level') == level) {
+             $(this).show();
+         }
+     });
+
+ });
+</script>
+{% endblock %}

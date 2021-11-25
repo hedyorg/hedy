@@ -1,5 +1,6 @@
 import unittest
 import hedy
+import app
 import sys
 import io
 from contextlib import contextmanager
@@ -19,10 +20,12 @@ class Snippet:
     self.name = f'{self.language}-{self.level}-{self.field_name}'
 
 
-
 class HedyTester(unittest.TestCase):
   level = None
   max_Hedy_level = 23
+  max_turtle_level = 10
+  number_comparisons_commands = ['>', '>=', '<', '<=']
+  comparison_commands = number_comparisons_commands + ['!=']
 
   @staticmethod
   @contextmanager
@@ -37,7 +40,10 @@ class HedyTester(unittest.TestCase):
 
   @staticmethod
   def run_code(parse_result):
-    code = "import random\n" + parse_result.code
+    if parse_result.has_turtle:
+      code = app.TURTLE_PREFIX_CODE + parse_result.code
+    else:
+      code = app.NORMAL_PREFIX_CODE + parse_result.code
     with HedyTester.captured_output() as (out, err):
       exec(code)
     return out.getvalue().strip()
@@ -58,8 +64,14 @@ class HedyTester(unittest.TestCase):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
-    #ensure we never test levels above the max (sueful for debugging)
+    # ensure we never test levels above the max (useful for debugging)
     max_level = min(max_level, hedy.HEDY_MAX_LEVEL)
+
+    # make it clear in the output this is a multilevel tester
+    print('\n\n\n')
+    print('-----------------')
+    print('Multi-level test!')
+    print('\n')
 
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
@@ -70,6 +82,8 @@ class HedyTester(unittest.TestCase):
       if expected is not None:
         result = hedy.transpile(code, level)
         self.assertEqual(expected, result.code)
+        self.assertTrue(self.validate_Python_code(result))
+
 
       if extra_check_function is not None:
         self.assertTrue(extra_check_function(result))
@@ -93,3 +107,17 @@ class HedyTester(unittest.TestCase):
       return False
     return True
 
+  @staticmethod
+  def validate_Python_code(parseresult):
+    # Code used in the Adventure and Level Defaults tester to validate Hedy code
+
+    try:
+        if not parseresult.has_turtle: #ouput from turtle cannot be captured
+          output = HedyTester.run_code(parseresult)
+    except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
+      pass
+    except OSError as E:
+      return True # programs with ask cannot be tested with output :(
+    except Exception as E:
+      return False
+    return True

@@ -14,7 +14,7 @@ class TestsLevel15(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = 0
     while str(antwoord).zfill(100)!=str(25).zfill(100):
-      antwoord = input(\'Wat is 5 keer 5?\')
+      antwoord = input(f'Wat is 5 keer 5?')
       try:
         antwoord = int(antwoord)
       except ValueError:
@@ -26,6 +26,7 @@ class TestsLevel15(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()
@@ -40,7 +41,7 @@ class TestsLevel15(HedyTester):
     expected = textwrap.dedent("""\
     getal = 0
     while str(getal).zfill(100)<str(100000).zfill(100):
-      getal = input('HOGER!!!!!')
+      getal = input(f'HOGER!!!!!')
       try:
         getal = int(getal)
       except ValueError:
@@ -52,6 +53,7 @@ class TestsLevel15(HedyTester):
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
       extra_check_function=self.is_not_turtle(),
       test_name=self.name()

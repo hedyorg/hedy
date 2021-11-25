@@ -114,7 +114,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    kleur = input('wat is je lievelingskleur?')
+    kleur = input(f'wat is je lievelingskleur?')
     print(f'jouw lievelingskleur is dus{kleur}!')""")
 
     self.assertEqual(expected, result.code)
@@ -146,7 +146,7 @@ class TestsLevel5(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    kleur = input('Wat is je lievelingskleur?')
+    kleur = input(f'Wat is je lievelingskleur?')
     if kleur == 'groen':
       print(f'mooi!')
     else:
@@ -254,8 +254,8 @@ class TestsLevel5(HedyTester):
     )
   def test_print_if_linebreak_statement(self):
     # Breaking an if statement and its following statement should be
-    # permited until level 7 
-    
+    # permited until level 7
+
     code = textwrap.dedent("""\
     people is 1, 2, 3, 3
     dishwasher is people at random
@@ -277,24 +277,6 @@ class TestsLevel5(HedyTester):
       test_name=self.name(),
       extra_check_function=self.is_not_turtle()
     )
-  def test_print_if_else_and_var(self):
-
-    code = textwrap.dedent("""\
-    jouwkeuze is steen
-    computerkeuze is schaar
-    if computerkeuze is schaar and jouwkeuze is steen print 'jij wint'""")
-
-    result = hedy.transpile(code, self.level)
-
-    expected = textwrap.dedent("""\
-    jouwkeuze = 'steen'
-    computerkeuze = 'schaar'
-    if computerkeuze == 'schaar' and jouwkeuze == 'steen':
-      print(f'jij wint')""")
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual(HedyTester.run_code(result), 'jij wint')
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -331,7 +313,41 @@ class TestsLevel5(HedyTester):
     self.assertEqual('found!', HedyTester.run_code(result))
   # todo would be good to make combinations with if and turtle
 
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b c is 1""")
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if a == b:
+      c = '1'""")
+    result = hedy.transpile(code, self.level)
+    self.assertEqual(expected, result.code)
+    self.assertEqual(False, result.has_turtle)
 
+  def test_if_in_list_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is red
+    if red in items print 'found!'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
+
+  def test_equality_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+    color is 5, 6, 7
+    if red is color print 'success!'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
   #negative tests
   def test_indent_gives_parse_error(self):
@@ -344,6 +360,8 @@ class TestsLevel5(HedyTester):
     with self.assertRaises(hedy.exceptions.ParseException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Parse', context.exception.error_code)
+    self.assertEqual(4, context.exception.error_location[0])
+    self.assertEqual(1, context.exception.error_location[1])
   def test_if_print_has_no_turtle(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -369,7 +387,7 @@ class TestsLevel5(HedyTester):
     with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
-    self.assertEqual('<span class="command-highlighted">print</span>', str(context.exception.arguments['guessed_command']))
+    self.assertEqual('print', str(context.exception.arguments['guessed_command']))
   def test_if_with_print_backtick(self):
     code = textwrap.dedent("""\
     name is ask 'ποιό είναι το όνομά σου;'

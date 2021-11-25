@@ -1,8 +1,12 @@
-// Adds brackets to for and print and changes ask to input
+// adds round brackets in print() and range(), and changes ask to input
 
-command: print | ifs (elifs)* elses? | input | for_loop | assign_list | list_access_var | assign
+command: print | ifs (elifs)* elses? | input | for_loop | repeat_list | while_loop | assign_list | add | remove | sleep | list_access_var | assign | comment
 
-print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))* _RIGHT_BRACKET)?
+
+print: _PRINT (_SPACE* _LEFT_BRACKET _SPACE* (quoted_text | list_access | var_access | sum) (_SPACE* _COMMA _SPACE* (quoted_text | list_access | var_access | sum))* _SPACE* _RIGHT_BRACKET _SPACE*)?
+
+
+
 input: var _SPACE _IS _SPACE _INPUT _LEFT_BRACKET  (quoted_text | list_access | var_access | sum) (_SPACE (quoted_text | list_access | var_access | sum))*  _RIGHT_BRACKET
 
 // todo: some of these vars sould alse be var_access (things that do not define like the loop var)
