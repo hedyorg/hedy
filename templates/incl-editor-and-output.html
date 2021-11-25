@@ -111,7 +111,7 @@
 <div class="mx-auto w-64 border-gray-400 border-2 rounded-full py-2 px-4">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
-      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode('{% if hide_commands == True %}true{% else %}false{% endif %}')" class="sr-only" />
+      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode({% if example_programs %}true{% else %}false{% endif %})" class="sr-only" />
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
       <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition" style="top: -5px;"></div>
     </div>

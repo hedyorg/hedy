@@ -93,6 +93,10 @@ class Table:
         querylog.log_counter(f'db_create:{self.table_name}')
         self.storage.put(self.table_name, self._extract_key(data), data)
 
+    def put(self, data):
+        """An alias for 'create', if calling create reads uncomfortably."""
+        return self.create(data)
+
     @querylog.timed_as('db_update')
     def update(self, key, updates):
         """Update select fields of a given record.
