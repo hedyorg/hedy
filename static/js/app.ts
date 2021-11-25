@@ -670,7 +670,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
     Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').empty();
+    $('#turtlecanvas').hide();
     return new Promise(function(ok) {
 
       window.State.disable_run = true;
@@ -692,6 +692,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
 
         event.preventDefault();
         $('#inline-modal').hide();
+        if (hasTurtle) {
+          $('#turtlecanvas').show();
+        }
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
         // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
@@ -922,13 +925,13 @@ function createModal(level:number ){
     });
     return editor;
   }
-export function toggle_developers_mode(hide_commands: boolean) {
+export function toggle_developers_mode(example_programs: boolean) {
   if ($('#developers_toggle').is(":checked")) {
       $('#commands-window-total').hide();
       $('#adventures').hide();
   } else {
       // If the example programs are hidden by class customization: keep hidden!
-      if (hide_commands) {
+      if (example_programs) {
         $('#commands-window-total').show();
       }
       $('#adventures').show();

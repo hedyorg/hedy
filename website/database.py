@@ -8,7 +8,29 @@ USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
-PREFERENCES = dynamo.Table(storage, 'preferences', 'id')
+
+# Customizations contains the class customizations made by a teacher on a specific class/level combination.
+# Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
+# Example of structure:
+#     {
+#       "id": "db192a35efbc492ca5d1ad9ccd3e5b26",
+#       "level": 1,
+#       "adventures": [
+#         "story",
+#         "turtle",
+#         "rock",
+#         "fortune",
+#         "restaurant",
+#         "haunted",
+#         "next",
+#         "end"
+#       ],
+#       "example_programs": true,
+#       "hide": false,
+#       "hide_prev_level": false,
+#       "hide_next_level": false
+#     }
+CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -227,30 +249,56 @@ class Database:
         for student_id in Class.get ('students', []):
             Database.remove_student_from_class (self, Class ['id'], student_id)
 
-        CLASSES.delete({'id': Class ['id']})
-        PREFERENCES.delete({'id': Class['id']})
+        CUSTOMIZATIONS.del_many({'id': Class['id']})
+        CLASSES.delete({'id': Class['id']})
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
 
-    def update_preferences_class(self, class_id, preferences):
-        preferences['id'] = class_id
-        PREFERENCES.create(preferences)
+    def remove_customizations_class(self, class_id, level):
+        CUSTOMIZATIONS.delete({'id': class_id, 'level': level})
 
-    def get_preferences_class(self, class_id):
-        levels = []
-        preferences = PREFERENCES.get_many({'id': class_id})
-        for level in preferences:
-            levels.append(level)
-        temp = {}
-        for preference in preferences:
-            temp[preference['level']] = preference
-            temp[preference['level']].pop('level', None)
-        return temp
+    def update_customizations_class(self, level_customizations):
+        CUSTOMIZATIONS.put(level_customizations)
+        for customization in CUSTOMIZATIONS.get_many({'id': level_customizations['id']}):
+            if customization['level'] == (level_customizations['level']-1):
+                customization['hide_next_level'] = level_customizations['hide']
+                CUSTOMIZATIONS.put(customization)
+            elif customization['level'] == (level_customizations['level']+1):
+                customization['hide_prev_level'] = level_customizations['hide']
+                CUSTOMIZATIONS.put(customization)
 
-    def get_level_preferences_class(self, class_id, level):
-        preferences = PREFERENCES.get_many({'id': class_id})
-        for preference in preferences:
-            if preference['level'] == level:
-                return preference
-        return None
+    def get_customizations_class(self, class_id):
+        customizations = {}
+        for customization in CUSTOMIZATIONS.get_many({'id': class_id}):
+            customizations[customization['level']] = customization
+        return customizations
+
+    def get_level_customizations_class(self, class_id, level):
+        customizations = CUSTOMIZATIONS.get({'id': class_id, 'level': level})
+        return customizations if customizations else None
+
+    def get_student_restrictions(self, all_adventures, user, level):
+        restrictions = {}
+        found_restrictions = False
+        if user:
+            student_classes = self.get_student_classes(user)
+            if student_classes:
+                level_preferences = self.get_level_customizations_class(student_classes[0]['id'], level)
+                if level_preferences:
+                    found_restrictions = True
+                    display_adventures = []
+                    display_adventures = [a for a in all_adventures if a['short_name'] in level_preferences['adventures']]
+                    restrictions['example_programs'] = level_preferences['example_programs']
+                    restrictions['hide_level'] = level_preferences['hide']
+                    restrictions['hide_prev_level'] = level_preferences['hide_prev_level']
+                    restrictions['hide_next_level'] = level_preferences['hide_next_level']
+
+        if not found_restrictions:
+            display_adventures = all_adventures
+            restrictions['example_programs'] = True
+            restrictions['hide_level'] = False
+            restrictions['hide_prev_level'] = False
+            restrictions['hide_next_level'] = False
+
+        return display_adventures, restrictions
