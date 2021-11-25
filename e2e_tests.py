@@ -482,7 +482,7 @@ def suite (username):
         ['remove non-existing student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'foo', {}, {}, 200],
         ['remove student from class', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
         ['remove student from class again (idempotent call)', 'delete', lambda state: '/class/' + state ['classes'] [0] ['id'] + '/student/' + 'student-' + username, {}, {}, 200],
-        ['get class that is now again empty', 'get', lambda state: '/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
+        ['get class that is now again empty', 'get', lambda state: '/for-teachers/class/' + state ['classes'] [0] ['id'], {}, {}, 200, getClass2],
         ['get student programs if student is no longer in teacher\'s class', 'get', lambda state: '/programs?user=' + state ['student'] ['username'], {}, {}, 403],
         ['login as student', 'post', '/auth/login', {}, {'username': 'student-' + username, 'password': 'foobar'}, 200],
         ['get profile after being removed from class', 'get', '/profile', {}, {}, 200, getStudentClasses2],
