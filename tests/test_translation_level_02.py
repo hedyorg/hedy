@@ -130,7 +130,7 @@ class TestsTranslationLevel2(HedyTester):
         code = "echo Hedy"
 
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = "herhaal Hedy"
+        expected = "echo Hedy"
 
         self.assertEqual(result, expected)
 
