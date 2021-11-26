@@ -21,7 +21,7 @@ def routes (app, database):
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('retrieve_class'))
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
-    @app.route('/class/<class_id>', methods=['GET'])
+    @app.route('/for-teachers/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
         app.logger.info('This is info output')
@@ -160,7 +160,7 @@ def routes (app, database):
 
         return {}, 200
 
-    @app.route('/customize-class/<class_id>', methods=['GET'])
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):
