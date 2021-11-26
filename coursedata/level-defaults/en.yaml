@@ -52,10 +52,6 @@
         ```
 
         Print still works as in level 1, and you no longer need `echo`.
-
-        In level 2 you can also make a list. You can have the computer choose something random from the list. You do that with `at random`.
-
-        You find all the codes of level 2 in the left bar. There are also tabs with assignments.
     start_code: "print hello world!"
     commands:
     -   name: "is"
@@ -77,13 +73,24 @@
             turn angle
             forward 100
         name: is - turtle
+3:
+    intro_text: |
+        In level 3 you can also make a list. You can let the computer choose something random from the list. You do that with `at random`.
+        ```
+        animals is dog, cat, kangaroo
+        print animals at random
+        ```
+
+        You find all the codes of level 3 in the left bar. There are also tabs with assignments.
+    start_code: "print hello world!"
+    commands:
     -   name: choose_random
         explanation: Choose a random word from a group with `at` and `random`
         example: 'Example: animals is dog, cat, kangaroo.'
         demo_code: |-
             animals is dog, cat, kangaroo
             print animals at random
-3:
+4:
     start_code: "print 'Hello world'"
     intro_text: |
         In level 3 `ask` and `print` have changed.
@@ -114,7 +121,7 @@
         demo_code: |-
             color is ask 'What is your favorite color?'
             print color ' is your favorite!'
-4:
+5:
     start_code: |-
         name is ask 'what is your name?'
         if name is Hedy print 'cool!' else print 'meh'
@@ -184,7 +191,7 @@
             pretty_colors is green, yellow
             color is ask 'What is your favorite color?'
             if color in pretty_colors print 'pretty!' else print 'meh'
-5:
+6:
     start_code: "print '5 times 5 is ' 5 * 5"
     intro_text: |
         `ask`, `print` and `if` still work as in level 4.
@@ -218,7 +225,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy is fun!'"
     intro_text: |
         `ask`, `print` and `if` work exactly like they did in level 4 and 5.
@@ -249,7 +256,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Hello folks'
@@ -288,7 +295,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -330,7 +337,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -357,7 +364,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-10:
+11:
     start_code: |-
         for counter in range 1 to 5
             print counter
@@ -380,12 +387,12 @@
             else
                 print 'Oops!'
                 print 'The answer is 10'
-11:
+12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
     intro_text: |
-        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the . for decimal numbers.
 
         For this level on you will also have to use quotation marks when storing a text with `is`:
 
@@ -418,7 +425,35 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
+13:
+    start_code: |-
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
+    commands:
+    -   name: "And"
+        explanation: "Both statements (left and right of the `and`) need to be correct."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            answer1 is ask 'What is 3+2?'
+            answer2 is ask 'What is 2+2?'
+            if answer1 is 5 and answer2 is 4
+                print 'Both answers are correct!'
+            else
+                print 'At least one answer is wrong!'
+    -   name: "Or"
+        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            answer1 is ask 'What is 3+2?'
+            answer2 is ask 'What is 2+2?'
+            if answer1 is 5 or answer2 is 4
+                print 'At least one answer is correct!'
+            else
+                print 'Both answers are wrong!'
+14:
     start_code: |-
         age is ask 'How old are you?'
         if age < 13
@@ -441,10 +476,11 @@
             age is ask 'How old are you?'
             if age > 13
                 print 'You are older than me!'
-13:
+
+15:
     start_code: |-
         answer is 0
-        while correct_answer != 25:
+        while answer != 25
             answer is ask 'What is 5 times 5?'
         print 'A correct answer has been given'
     intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
@@ -454,7 +490,7 @@
         example: "Example: while correct_answer is False"
         demo_code: |-
             answer is 0
-            while correct_answer != 25:
+            while correct_answer != 25
                 answer is ask 'What is 5 times 5?'
             print 'A correct answer has been given'
     -   name: "Smaller while"
@@ -467,7 +503,7 @@
                 count is count + 1
             print 'We are done'
 
-14:
+16:
     start_code: |-
         fruit is ['apple', 'banana', 'cherry']
         print fruit 
@@ -494,37 +530,7 @@
             randomfruit is fruit[random]
             print randomfruit 
 
-#15:
-#    start_code: |-
-#        you_are_still_here is False
-#        are_you_still_here is input('Are you still here? yes or no?')
-#        if are_you_still_here is yes:
-#            you_are_still_here is True
-#        answer is input('What is 5*5?')
-#        if you_are_still_here is True and answer is 25:
-#            print('You said yes and gave a good answer')
-#    intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
-#    commands:
-#    -   name: "And"
-#        explanation: "Both statements (left and right of the `and`) need to be correct."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#            answer1 is input('What is 3+2?')
-#            answer2 is input('What is 2+2?')
-#            if answer1 is 5 and answer2 is 4:
-#                print('Both answers are correct!')
-#            else:
-#                print('At least one answer is wrong!')
-#    -   name: "Or"
-#        explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#            answer1 is input('What is 3+2?')
-#            answer2 is input('What is 2+2?')
-#            if answer1 is 5 or answer2 is 4:
-#                print('At least one answer is correct!')
-#            else:
-#                print('Both answers are wrong!')
+
 #16:
 #    start_code: |-
 #        # This is a program that is going to ask a couple of math questions
@@ -604,37 +610,37 @@
 #                print('That is correct!')
 #            else:
 #                print('No, that is wrong!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Ready or not, here I come!'
-#    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation."
-#    commands:
-#    -   name: "print"
-#        explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Ready or not, here I come!'
-#    -   name: "if"
-#        explanation: "We need to do the same with all of our `if` statements"
-#        example: "if colour is green:'"
-#        demo_code: |-
-#            colour is green
-#            if colour is green:
-#                print 'The colour is green'
-#            else:
-#                print 'The colour is not green'
-#    -   name: "elif"
-#        explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is not 1 or 2'
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Ready or not, here I come!'
+    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation."
+    commands:
+    -   name: "print"
+        explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print 'Ready or not, here I come!'
+    -   name: "if"
+        explanation: "We need to do the same with all of our `if` statements"
+        example: "if colour is green:'"
+        demo_code: |-
+            colour is ask 'What is your favorite color?'
+            if colour is green:
+                print 'Your favorite colour is green'
+            else:
+                print 'Your favorite colour is not green'
+    -   name: "elif"
+        explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is not 1 or 2'

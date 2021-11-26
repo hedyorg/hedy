@@ -156,6 +156,10 @@ class AuthHelper(unittest.TestCase):
         self.given_user_is_logged_in()
         self.make_current_user_teacher()
 
+    def given_fresh_teacher_is_logged_in(self):
+        self.given_fresh_user_is_logged_in()
+        self.make_current_user_teacher()
+
     def given_any_user(self):
         self.user = self.get_any_user()
 
@@ -831,7 +835,7 @@ class TestClasses(AuthHelper):
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
-        Class = self.get_data('class/' + Class['id'])
+        Class = self.get_data('for-teachers/class/' + Class['id'])
 
         # THEN validate the fields of the class
         self.assertIsInstance(Class, dict)
@@ -880,7 +884,7 @@ class TestClasses(AuthHelper):
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
-        Class = self.get_data('class/' + Class['id'])
+        Class = self.get_data('for-teachers/class/' + Class['id'])
 
         # THEN the name of the class should be updated
         self.assertEqual(Class['name'], 'class2')
@@ -930,8 +934,8 @@ class TestClasses(AuthHelper):
         self.assertEqual(student_class['name'], Class['name'])
 
     def test_see_students_in_class(self):
-        # GIVEN a teacher
-        self.given_teacher_is_logged_in()
+        # GIVEN a teacher (no classes yet)
+        self.given_fresh_teacher_is_logged_in()
         teacher = self.user
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
@@ -946,7 +950,7 @@ class TestClasses(AuthHelper):
         self.switch_user(teacher)
 
         # WHEN retrieving the class with a student in it
-        Class_data = self.get_data('class/' + Class['id'])
+        Class_data = self.get_data('for-teachers/class/' + Class['id'])
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
@@ -961,8 +965,8 @@ class TestClasses(AuthHelper):
         body = self.get_data('programs?user=' + student['username'], expect_http_code=200)
 
     def test_see_students_with_programs_in_class(self):
-        # GIVEN a teacher
-        self.given_teacher_is_logged_in()
+        # GIVEN a teacher (no classes yet)
+        self.given_fresh_teacher_is_logged_in()
         teacher = self.user
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
@@ -983,7 +987,7 @@ class TestClasses(AuthHelper):
         self.switch_user(teacher)
 
         # WHEN retrieving the class with a student in it
-        Class_data = self.get_data('class/' + Class['id'])
+        Class_data = self.get_data('for-teachers/class/' + Class['id'])
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
 

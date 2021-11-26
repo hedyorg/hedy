@@ -1,92 +1,135 @@
+import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
-
 class TestsLevel14(HedyTester):
-    level = 14
+  level = 14
 
-    def test_print_list_var(self):
-        code = textwrap.dedent("""\
-            dieren is ['Hond', 'Kat', 'Kangoeroe']
-            print dieren[1]""")
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparisons(self, comparison):
+    code = textwrap.dedent(f"""\
+      leeftijd is ask 'Hoe oud ben jij?'
+      if leeftijd {comparison} 12
+          print 'Dan ben je jonger dan ik!'""")
+    expected = textwrap.dedent(f"""\
+      leeftijd = input(f'Hoe oud ben jij?')
+      try:
+        leeftijd = int(leeftijd)
+      except ValueError:
+        try:
+          leeftijd = float(leeftijd)
+        except ValueError:
+          pass
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+        print(f'Dan ben je jonger dan ik!')""")
 
-        expected = textwrap.dedent("""\
-            dieren = ['Hond', 'Kat', 'Kangoeroe']
-            print(f'{dieren[1-1]}')""")
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparisons_else(self, comparison):
+    code = textwrap.dedent(f"""\
+      leeftijd is ask 'Hoe oud ben jij?'
+      if leeftijd {comparison} 12
+          print 'Dan ben je jonger dan ik!'
+      else
+          print 'Dan ben je ouder dan ik!'""")
+    expected = textwrap.dedent(f"""\
+      leeftijd = input(f'Hoe oud ben jij?')
+      try:
+        leeftijd = int(leeftijd)
+      except ValueError:
+        try:
+          leeftijd = float(leeftijd)
+        except ValueError:
+          pass
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+        print(f'Dan ben je jonger dan ik!')
+      else:
+        print(f'Dan ben je ouder dan ik!')""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=check_in_list,
-            test_name=self.name()
-        )
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
-    def test_print_list_access(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers'] 
-            print fruit[1]""")
-        expected = textwrap.dedent("""\
-            fruit = ['banaan', 'appel', 'kers']
-            print(f'{fruit[1-1]}')""")
+  @parameterized.expand(HedyTester.comparison_commands)
+  def tests_smaller_no_spaces(self, comparison):
+    code = textwrap.dedent(f"""\
+    leeftijd is ask 'Hoe oud ben jij?'
+    if leeftijd{comparison}12
+      print 'Dan ben je jonger dan ik!'""")
+    expected = textwrap.dedent(f"""\
+    leeftijd = input(f'Hoe oud ben jij?')
+    try:
+      leeftijd = int(leeftijd)
+    except ValueError:
+      try:
+        leeftijd = float(leeftijd)
+      except ValueError:
+        pass
+    if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+      print(f'Dan ben je jonger dan ik!')""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
-        )
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      extra_check_function=self.is_not_turtle(),
+      test_name=self.name()
+    )
 
-    def test_list_access_var(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            eerstefruit is fruit[1]
-            print eerstefruit""")
-        expected = textwrap.dedent("""\
-            fruit = ['banaan', 'appel', 'kers']
-            eerstefruit = fruit[1-1]
-            print(f'{eerstefruit}')""")
+  @parameterized.expand(HedyTester.number_comparisons_commands)
+  def test_comparison_with_string_gives_type_error(self, comparison):
+    code = textwrap.dedent(f"""\
+      a is 'text'
+      if a {comparison} 12
+          b is 1""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
-        )
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
 
-    def test_access_plus(self):
-        code = textwrap.dedent("""\
-            lijst is [1, 2, 3]
-            optellen is lijst[1] + lijst[2]
-            optellen is optellen + lijst[3]
-            print optellen""")
-        expected = textwrap.dedent("""\
-            lijst = [1, 2, 3]
-            optellen = lijst[1-1] + lijst[2-1]
-            optellen = optellen + lijst[3-1]
-            print(f'{optellen}')""")
+  def test_not_equal_with_string(self):
+    code = textwrap.dedent(f"""\
+      a is 'text'
+      if a != 12
+          b is 1""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
-        )
+    expected = textwrap.dedent(f"""\
+      a = 'text'
+      if str(a).zfill(100)!=str(12).zfill(100):
+        b = 1""")
 
-    def test_list_access_random(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            randomfruit is fruit[random]
-            print randomfruit""")
-        expected = textwrap.dedent("""\
-            fruit = ['banaan', 'appel', 'kers']
-            randomfruit = random.choice(fruit)
-            print(f'{randomfruit}')""")
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      test_name=self.name()
+    )
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
-        )
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparison_with_list_gives_type_error(self, comparison):
+    code = textwrap.dedent(f"""\
+      a is 1, 2, 3
+      if a {comparison} 12
+          b is 1""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=15,
+      exception=hedy.exceptions.InvalidArgumentTypeException,
+      test_name=self.name()
+    )
