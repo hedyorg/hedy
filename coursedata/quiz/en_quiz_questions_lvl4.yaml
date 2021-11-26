@@ -2,203 +2,173 @@
 level: 4
 questions:
   1:
-    question_text: "Whcih statement is true?"
+    question_text: "Which of these is true?"
     code: "..."
     mp_choice_options:
-    - "option_text": "In level 4 print works differently than in level 3"
-      "feedback": "No, there have been no changes!"
-    - "option_text": "In level 4 ask works differently than in level 3"
-      "feedback": "No, there have been no changes!"
-    - "option_text": "In level 4 both print and ask work differently than in level\
-        \ 3 "
-      "feedback": "No, there have been no changes!"
-    - "option_text": "In level 4 neither print nor ask works differently than in level\
-        \ 3"
-      "feedback": "That's right!."
-    correct_answer: "D"
-    hint: "There are no changes in the existing commands."
+    - "option_text": "print and ask now need quotation marks"
+      "feedback": "That's right"
+    - "option_text": "Only print needs quotation marks"
+      "feedback": "Ask needs quotation makrs too!"
+    - "option_text": "At random doesn't work anymore in level 4"
+      "feedback": "At random still works"
+    - "option_text": "At random now needs quotation marks"
+      "feedback": "No, but 2 other commands do."
+    correct_answer: "A"
+    hint: "In level 4 you need quotation marks for 2 commands."
     question_score: 10
   2:
-    question_text: "What appears in your output screen when you type in the name Hedy?"
-    code: |-
-      name is ask 'What is your name?'
-      if name is Hedy print 'fun' else print 'less fun'
+    question_text: "Which code uses the proper quotation marks?"
+    code: "..."
     mp_choice_options:
-    - "option_text": "fun"
-      "feedback": "That's right!"
-    - "option_text": "less fun"
-      "feedback": "If the name is Hedy, it will say 'fun''"
-    - "option_text": "Hedy "
-      "feedback": "Nee, it doesn't print the name"
-    - "option_text": "Error"
-      "feedback": "Fortunately not!"
-    correct_answer: "A"
-    hint: "if name is Hedy print ...?"
+    - "code": " print `hello` "
+      "feedback": "This quotation mark is scewed, you need a straight one."
+    - "code": " print 'hello' "
+      "feedback": "Correct"
+    - "code": " print \" hello \" "
+      "feedback": "these are double quotation marks, you need single ones."
+    - "code": " print , hello, "
+      "feedback": "This is a comma, you need quotation marks."
+    correct_answer: "B"
+    hint: "Pick the right quotation marks."
     question_score: 10
   3:
-    question_text: "What is the right password"
-    code: |-
-      password is ask 'What is the password?'
-      if password is SECRET print 'Correct!'
-      else print 'ALARM! INTRUDER!'
+    question_text: "Where are the quotation amrks used correctly?"
+    code: "..."
     mp_choice_options:
-    - "option_text": "Correct!"
-      "feedback": "This is printed when you type in the correct password"
-    - "option_text": "SECRET"
-      "feedback": "That's right!'"
-    - "option_text": "password"
-      "feedback": "The password isn't password..."
-    - "option_text": "ALARM INTRUDER"
-      "feedback": "This is printed when you type in the incorrect password!"
-    correct_answer: "B"
-    hint: "if password is ... print 'Correct!'!'"
+    - "code": " print Hi Im Hedy"
+      "feedback": "Add quotation marks please!"
+    - "code": " print 'Hi Im Hedy"
+      "feedback": "Both before and after the words you want to print should be a quotation\
+        \ mark."
+    - "code": " 'print Hi Im Hedy' "
+      "feedback": "the first quotation mark should be behind the word print"
+    - "code": " print 'Hi Im Hedy'"
+      "feedback": "Perfect!"
+    correct_answer: "D"
+    hint: "Bothe before and after the words you want to print should be a quotation\
+      \ mark. "
     question_score: 10
   4:
-    question_text: "What does Hedy print when you type in the wrong password?"
-    code: |-
-      password is ask 'What is the password?'
-      if password is SECRET print 'Correct!'
-      else print 'ALARM! INTRUDER!'
+    question_text: "Which statement is true?"
+    code: "..."
     mp_choice_options:
-    - "option_text": "Goood"
-      "feedback": "That's being printed if the correct answer is given, not the wrong\
-        \ one..."
-    - "option_text": "SECRET"
-      "feedback": "That's the right answer"
-    - "option_text": "Wrong! "
-      "feedback": "No, this is not what Hedy will print"
-    - "option_text": "ALARM! INTRUDER!"
-      "feedback": "Great job!"
-    correct_answer: "D"
-    hint: "Your computer will sound the alarm for intruders!"
+    - "option_text": "You need quotation marks around the word print, like this: 'print'."
+      "feedback": "The quotation marks shouldn't be around teh command itself."
+    - "option_text": "You need quotation marks around the words you want to print. "
+      "feedback": "Super!"
+    - "option_text": "You do not need quotation marks when using the ask command"
+      "feedback": "Both print and ask require quotation marks"
+    - "option_text": "You can choose yourself whether to use quotation marks or not."
+      "feedback": "Unfortunately, Hedy is more strict than that."
+    correct_answer: "B"
+    hint: "From level 4 on you need to use quotation marks."
     question_score: 10
   5:
-    question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
+    question_text: "What has to be changed in order for the game to work?"
     code: |-
-      password is ask 'What is the password?'
-      if password is SECRET print 'Correct!'
-      else print 'ALARM! INTRUDER!'
+      options is rock, paper, scissors
+      print 'options at random'
     mp_choice_options:
-    - "option_text": "Because it needs to be in captitals, so SECRET"
-      "feedback": "Indeed!"
-    - "option_text": "Because the password is alarm"
-      "feedback": "Nee, dat is niet het wachtwoord."
-    - "option_text": "Because it's spelled secert. "
-      "feedback": "That's not how you spell secret"
-    - "option_text": "Because Hedy makes a mistake"
-      "feedback": "No, Hedy is right"
-    correct_answer: "A"
-    hint: "The spelling of the word has to be the exact same."
+    - "code": " 'print options at random'"
+      "feedback": "Never put the quotation mark in front of the print command."
+    - "code": " print 'options' at random "
+      "feedback": " Options is a variable. You don't litterally want to print 'options\
+        \ at random'."
+    - "code": " print options at random"
+      "feedback": "That's right"
+    - "option_text": "Nothing, the game already works!"
+      "feedback": "Kijk goed! Er zit wel een fout in!"
+    correct_answer: "C"
+    hint: "You don't want Hedy to literally print 'options at random, you want it\
+      \ to print 'rock' or 'paper' or 'scissors'."
     question_score: 10
   6:
-    question_text: "Which word should be on the place of the question mark in the\
-      \ last line?"
+    question_text: "What whould be a good next line in this code?"
     code: |-
-      print 'Im Hedy the football fortune teller!'
-      print 'I will predict what place your team will end up!'
-      club is ask 'Which club is your favorite?'
-      if club is ajax print 'Ajax is going to win of course!'
-      ? print 'Sorry, your club is gonna be in last place...'
+      prices is 1 dollar, 100 dollar, 1 million dollar
     mp_choice_options:
-    - "option_text": ""
-      "code": "if"
-      "feedback": "if is already in the line above"
-    - "option_text": ""
-      "code": "at random"
-      "feedback": "No, you need else."
-    - "option_text": ""
-      "code": "else"
-      "feedback": "Great!"
-    - "option_text": ""
-      "code": "print"
-      "feedback": "Print is already there, we need a word before it!"
-    correct_answer: "C"
-    hint: "In level 4 you learn 2 new commands, if and ...?"
+    - "code": " print 'You win...' prices at random"
+      "feedback": "Great! You get it!"
+    - "code": "print You win... 'prices at random' "
+      "feedback": "Hedy will literally print 'prices at random'"
+    - "code": "print You win... prices at random"
+      "feedback": " You need some quotation marks! "
+    - "code": "print 'You win... prices at random'"
+      "feedback": "Hedy will literally print 'prices at random''"
+    correct_answer: "A"
+    hint: "Think carefully: what is a variable and should be outside of the quotation\
+      \ marks? And what are normal words that should be inside?."
     question_score: 10
   7:
-    question_text: "Which word should be in the place of the question mark?"
+    question_text: "What's wrong with this code?"
     code: |-
-      print 'I can predict if you will be a millionair or not!'
-      name is ask 'Whats your name?'
-      if name is Hedy print 'You will be a millionair!'
-      else ? 'Unfortunately... No big money for you.'
+      question is ask What do you want to know?
+      answers is yes, no, maybe
+      print answers at random
     mp_choice_options:
-    - "option_text": ""
-      "code": "if"
-      "feedback": "if is in the line above."
-    - "option_text": ""
-      "code": "at random"
-      "feedback": "No, you dont need at random."
-    - "option_text": ""
-      "code": "else"
-      "feedback": "It already said else"
-    - "option_text": ""
-      "code": "print"
-      "feedback": "Awesome!"
-    correct_answer: "D"
-    hint: "After else a print command follows"
+    - "option_text": "Quotation marks are missing in line 1"
+      "feedback": "Correct!"
+    - "option_text": "Quotation marks are missing in line 2"
+      "feedback": "A variable doesn't need quoates"
+    - "option_text": "Quotation marks are missing in line 3"
+      "feedback": " You don't want Hedy to literally print 'answers at random' so\
+        \ no quotation marks needed here!"
+    - "option_text": "Nothing, this code is good as is!"
+      "feedback": "Look carefully. You missed a mistake!"
+    correct_answer: "A"
+    hint: "Check each line on whether they'd need quotation marks or not."
     question_score: 10
   8:
-    question_text: "Which word should be on the place of the question mark?"
+    question_text: "What would be a good next line for this code?"
     code: |-
-      animal is ask 'What is your favorite animal?'
-      if ? is penguin print 'Thats my favorite animal too!'
-      else print 'Cool! I like penguins.'
+      print 'Welcome at the money show!'
+      print 'in front of you are 3 doors'
+      door is ask 'Which door do you choose?'
     mp_choice_options:
-    - "option_text": ""
-      "code": "favorite animal"
-      "feedback": "Thats not the variable name."
-    - "option_text": ""
-      "code": "animal"
-      "feedback": "Great job!"
-    - "option_text": ""
-      "code": "if"
-      "feedback": "If is already there"
-    - "option_text": ""
-      "code": "print"
-      "feedback": "No, that's not it."
-    correct_answer: "B"
-    hint: "What the variable name?"
+    - "option_text": "print So you pick door door"
+      "feedback": "We need quotation marks"
+    - "option_text": "print 'So you pick ' door door"
+      "feedback": "If the player chooses door 3, Hedy will say 'So you pick 3 3"
+    - "option_text": "print 'So you pick door ' door"
+      "feedback": "Super! "
+    - "option_text": "print 'So you pick door door'"
+      "feedback": "Hedy will literally print 'So you pick door door"
+    correct_answer: "C"
+    hint: "The second word door should be replaced with the number, the first should\
+      \ still be the word door..."
     question_score: 10
   9:
-    question_text: "Which door should you choose to escape??"
+    question_text: "What will nver appear in your output screen? "
     code: |-
-      print 'Escape from the haunted house!'
-      print 'There are 3 doors in front of you'
-      door is ask 'Which door do you choose?'
-      monsters is vampire, werewolf, giant spider
-      if door is 2 print 'Yay, you can escape!'
-      else print 'You are being devoured by a... ' monsters at random
+      clubs is Real Madrid, Bayern Munchen, Manchester United, Ajax
+      print clubs at random ' is going the win the champions league'
     mp_choice_options:
-    - "option_text": "1"
-      "feedback": "Bad choice! You're being eaten"
-    - "option_text": "2"
-      "feedback": "Super! You escaped!"
-    - "option_text": "3"
-      "feedback": "Bad choice! You're being eaten."
-    - "option_text": "It's a trap, you will always be eaten!"
-      "feedback": "Luckily not!"
-    correct_answer: "B"
-    hint: "One of the doors will keep you safe.."
+    - "option_text": "Ajax is going to win the champions league"
+      "feedback": "Hedy could print that"
+    - "option_text": "Real Madrid is going to win the champions league"
+      "feedback": "Hedy could print that"
+    - "option_text": "Bayerb Munchen is going to win the champions league"
+      "feedback": "Hedy could print that"
+    - "option_text": "FC Barcelona is going to win the champions league"
+      "feedback": "That's right. It's not in the list"
+    correct_answer: "D"
+    hint: "What are Hedy's options to randomly pick from?"
     question_score: 10
   10:
-    question_text: "Which monster is standing behind door 1?"
+    question_text: "Which statement is true?"
     code: |-
-      print 'Escape from the haunted house!'
-      print 'There are 3 doors in front of you'
-      door is ask 'Which door do you choose?'
-      monsters is vampire, werewolf, giant spider
-      if door is 2 print 'Yay, you can escape!'
-      else print 'You are being devoured by a... ' monsters at random
+      people is mom, dad, Emma, Sophie
+      print The dishes are done by...
+      print people at random
     mp_choice_options:
-    - "option_text": "Hedy picks a random monster each time."
-      "feedback": "Geweldig!"
-    - "option_text": "vampire"
-      "feedback": "Not always..."
-    - "option_text": "werewolf"
-      "feedback": "Not always..."
-    - "option_text": "giant spider"
-      "feedback": "Not always..."
-    correct_answer: "A"
-    hint: "Mind the last 3 words... monsters at random..."
+    - "option_text": "Quotation marks are missing in line 1"
+      "feedback": "A list doens't need quotation marks"
+    - "option_text": "Quotation marks are missing in line 2"
+      "feedback": "Correct"
+    - "option_text": "Quotation marks are missing in both line 2 and 3"
+      "feedback": "Line 3 doens't need quotation marks because it's not printed litterally"
+    - "option_text": "Nothing, this code has no mistakes"
+      "feedback": "You missed one!"
+    correct_answer: "B"
+    hint: "One line needs quotation marks, because you want it to be printed literally."
     question_score: 10

@@ -2,217 +2,203 @@
 level: 5
 questions:
   1:
-    question_text: "How many lines can you repeat at once with the repeat command\
-      \ at this level?"
+    question_text: "Which statement is true?"
     code: "..."
     mp_choice_options:
-    - "option_text": "0"
-      "feedback": "No you can repeat a line."
-    - "option_text": "1"
-      "feedback": "Correct, one line at a time"
-    - "option_text": "2"
-      "feedback": "In this level only one line at a time"
-    - "option_text": "infinite"
-      "feedback": "In this level you can only repeat one line at a time"
-    correct_answer: "B"
-    hint: "You can only repeat 1 line at a time"
+    - "option_text": "In level 5 print works differently than in level 4"
+      "feedback": "No, there have been no changes!"
+    - "option_text": "In level 5 ask works differently than in level 4"
+      "feedback": "No, there have been no changes!"
+    - "option_text": "In level 5 both print and ask work differently than in level\
+        \ 3 "
+      "feedback": "No, there have been no changes!"
+    - "option_text": "In level 5 neither print nor ask works differently than in level\
+        \ 3"
+      "feedback": "That's right!."
+    correct_answer: "D"
+    hint: "There are no changes in the existing commands."
     question_score: 10
   2:
-    question_text: "Which code is right?"
-    code: "..."
+    question_text: "What appears in your output screen when you type in the name Hedy?"
+    code: |-
+      name is ask 'What is your name?'
+      if name is Hedy print 'fun' else print 'less fun'
     mp_choice_options:
-    -
-      "code": " print 100 times 'hello' "
-      "feedback": "repeat 100 times print 'hello'."
-    -
-      "code": " print repeat 100 times 'hello' "
-      "feedback": "repeat 100 times print 'hello'"
-    -
-      "code": "repeat 'hello' 100 times \""
-      "feedback": "repeat 100 times print 'hello'"
-    -
-      "code": " repeat 100 times print 'hello' "
+    - "option_text": "fun"
       "feedback": "That's right!"
-    correct_answer: "D"
-    hint: "First the repeat command, then the print command"
+    - "option_text": "less fun"
+      "feedback": "If the name is Hedy, it will say 'fun''"
+    - "option_text": "Hedy "
+      "feedback": "Nee, it doesn't print the name"
+    - "option_text": "Error"
+      "feedback": "Fortunately not!"
+    correct_answer: "A"
+    hint: "if name is Hedy print ...?"
     question_score: 10
   3:
-    question_text: "Is this code right or wrong?"
-    code: "repeat 100 times 'Hello!'"
+    question_text: "What is the right password"
+    code: |-
+      password is ask 'What is the password?'
+      if password is SECRET print 'Correct!'
+      else print 'ALARM! INTRUDER!'
     mp_choice_options:
-    - "option_text": "Right"
-      "feedback": "No a word is missing"
-    - "option_text": "Wrong, the word repeat is missing"
-      "feedback": "The word repeat is there, another word is missing"
-    - "option_text": "Wrong, the word times is missing"
-      "feedback": "The word times is there, another word is missing."
-    - "option_text": "Wrong, the word print is missing"
-      "feedback": "Correct"
+    - "option_text": "Correct!"
+      "feedback": "This is printed when you type in the correct password"
+    - "option_text": "SECRET"
+      "feedback": "That's right!'"
+    - "option_text": "password"
+      "feedback": "The password isn't password..."
+    - "option_text": "ALARM INTRUDER"
+      "feedback": "This is printed when you type in the incorrect password!"
     correct_answer: "B"
-    hint: "It should be: repeat 100 times print 'Hello'"
+    hint: "if password is ... print 'Correct!'!'"
     question_score: 10
   4:
-    question_text: "Which word is wrong in the code?"
+    question_text: "What does Hedy print when you type in the wrong password?"
     code: |-
-      print 'I'm blue'
-      repeat 7 times print 'da ba dee, da ba da'
+      password is ask 'What is the password?'
+      if password is SECRET print 'Correct!'
+      else print 'ALARM! INTRUDER!'
     mp_choice_options:
-    -
-      "code": "I'm"
-      "feedback": "That's right!"
-    -
-      "code": "print"
-      "feedback": "print is spelled correctcly"
-    -
-      "code": "repeat"
-      "feedback": "repeat is spelled correctcly"
-    -
-      "code": "times"
-      "feedback": "times is spelled correctcly"
-    correct_answer: "A"
-    hint: "I'm is wrong, you can't use apostrophes"
+    - "option_text": "Goood"
+      "feedback": "That's being printed if the correct answer is given, not the wrong\
+        \ one..."
+    - "option_text": "SECRET"
+      "feedback": "That's the right answer"
+    - "option_text": "Wrong! "
+      "feedback": "No, this is not what Hedy will print"
+    - "option_text": "ALARM! INTRUDER!"
+      "feedback": "Great job!"
+    correct_answer: "D"
+    hint: "Your computer will sound the alarm for intruders!"
     question_score: 10
   5:
-    question_text: "Is this code right or wrong?"
+    question_text: "Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?"
     code: |-
-      repeat 100 print 'Hedy is awesome!'
+      password is ask 'What is the password?'
+      if password is SECRET print 'Correct!'
+      else print 'ALARM! INTRUDER!'
     mp_choice_options:
-    - "option_text": "Goed"
-    - "option_text": "Fout"
+    - "option_text": "Because it needs to be in captitals, so SECRET"
+      "feedback": "Indeed!"
+    - "option_text": "Because the password is alarm"
+      "feedback": "Nee, dat is niet het wachtwoord."
+    - "option_text": "Because it's spelled secert. "
+      "feedback": "That's not how you spell secret"
+    - "option_text": "Because Hedy makes a mistake"
+      "feedback": "No, Hedy is right"
     correct_answer: "A"
-    hint: "De code is correct!"
+    hint: "The spelling of the word has to be the exact same."
     question_score: 10
   6:
-    question_text: "What will be the output from this code?"
+    question_text: "Which word should be on the place of the question mark in the\
+      \ last line?"
     code: |-
-      print 'The wheels on the bus go'
-      repeat 3 times print ' round and round'
+      print 'Im Hedy the football fortune teller!'
+      print 'I will predict what place your team will end up!'
+      club is ask 'Which club is your favorite?'
+      if club is ajax print 'Ajax is going to win of course!'
+      ? print 'Sorry, your club is gonna be in last place...'
     mp_choice_options:
-    -
-      "code": "the wheels on the bus go\nround and round"
-      "feedback": "Only the second line is repeated 3 times"
-    -
-      "code": "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the\
-        \ bus go\nround and round"
-      "feedback": "Only the second line is repeated 3 times"
-    -
-      "code": "the wheels on the bus go\nround and round\nthe wheels on the bus go\n\
-        round and round\nthe wheels on the bus go\nround and round"
-      "feedback": "Only the second line is repeated 3 times"
-    -
-      "code": "the wheels on the bus go\nround and round\nround and round\nround and\
-        \ round"
-      "feedback": "All though the town! Perfect!"
-    correct_answer: "D"
-    hint: "Only 'round and round' is repeated 3 times."
+    - "option_text": ""
+      "code": "if"
+      "feedback": "if is already in the line above"
+    - "option_text": ""
+      "code": "at random"
+      "feedback": "No, you need else."
+    - "option_text": ""
+      "code": "else"
+      "feedback": "Great!"
+    - "option_text": ""
+      "code": "print"
+      "feedback": "Print is already there, we need a word before it!"
+    correct_answer: "C"
+    hint: "In level 5 you learn 2 new commands, if and ...?"
     question_score: 10
   7:
-    question_text: "What will be the output from this code?"
+    question_text: "Which word should be in the place of the question mark?"
     code: |-
-      repeat 2 times 'We will'
-      print 'ROCK YOU!'
+      print 'I can predict if you will be a millionair or not!'
+      name is ask 'Whats your name?'
+      if name is Hedy print 'You will be a millionair!'
+      else ? 'Unfortunately... No big money for you.'
     mp_choice_options:
-    -
-      "code": "We will We will\nROCK YOU!"
-      "feedback": "'We will' won't appear twice in the same line"
-    -
-      "code": "We will\nWe will\nROCK YOU!"
-      "feedback": "Great!"
-    -
-      "code": "We will\nROCK YOU!\nWe will\nROCK YOU!"
-      "feedback": "ROCK YOU! won't be repeated"
-    -
-      "code": "We will\nROCK YOU!"
-      "feedback": "Mind the repeat command"
-    correct_answer: "B"
-    hint: "Mind the repeat command."
+    - "option_text": ""
+      "code": "if"
+      "feedback": "if is in the line above."
+    - "option_text": ""
+      "code": "at random"
+      "feedback": "No, you dont need at random."
+    - "option_text": ""
+      "code": "else"
+      "feedback": "It already said else"
+    - "option_text": ""
+      "code": "print"
+      "feedback": "Awesome!"
+    correct_answer: "D"
+    hint: "After else a print command follows"
     question_score: 10
   8:
-    question_text: "What Hedy code belongs to this output?"
+    question_text: "Which word should be on the place of the question mark?"
     code: |-
-      Here comes the sun
-      Do do do do
-      Here comes the sun
-      And I say
-      Its alright
+      animal is ask 'What is your favorite animal?'
+      if ? is penguin print 'Thats my favorite animal too!'
+      else print 'Cool! I like penguins.'
     mp_choice_options:
-    -
-      "code": "print 'Here comes the sun'\nprint 'Do do do do'\nprint 'Here comes\
-        \ the sun'\nprint 'And I say'\nprint 'Its alright'"
-      "feedback": "Perfect, you can't use the repeat command here."
-    -
-      "code": "repeat 2 times print 'Here comes the sun'\nprint 'And I say'\nprint\
-        \ 'Its alright'"
-      "feedback": "Where did the 'Do do do do' go?"
-    -
-      "code": "repeat 2 times print 'Here comes the sun'\nprint 'Do do do do'\nprint\
-        \ 'And I say'\nprint 'Its alright'"
-      "feedback": "This is not in the right order"
-    -
-      "code": "repeat 2 times print 'Here comes the sun'\nrepeat 2 times print 'Do\
-        \ do'\nprint 'And I say'\nprint 'Its alright'"
-      "feedback": "This is not in the right order"
-    correct_answer: "D"
-    hint: "Repeat can only be used if you want the exact same line 2 (or more) times\
-      \ in a row."
+    - "option_text": ""
+      "code": "favorite animal"
+      "feedback": "Thats not the variable name."
+    - "option_text": ""
+      "code": "animal"
+      "feedback": "Great job!"
+    - "option_text": ""
+      "code": "if"
+      "feedback": "If is already there"
+    - "option_text": ""
+      "code": "print"
+      "feedback": "No, that's not it."
+    correct_answer: "B"
+    hint: "What the variable name?"
     question_score: 10
   9:
-    question_text: "What Hedy code belongs to this output?"
+    question_text: "Which door should you choose to escape??"
     code: |-
-      Batman was flying though Gotham.
-      When suddenly he heard someone screaming...
-      Help!
-      Help!
-      Help!
-      Please help me!
+      print 'Escape from the haunted house!'
+      print 'There are 3 doors in front of you'
+      door is ask 'Which door do you choose?'
+      monsters is vampire, werewolf, giant spider
+      if door is 2 print 'Yay, you can escape!'
+      else print 'You are being devoured by a... ' monsters at random
     mp_choice_options:
-    -
-      "code": "print 'Batman was flying though Gotham. '\nprint 'When suddenly he\
-        \ heard someone screaming...'\nprint 'Help!'\nrepeat 3 times print 'Please\
-        \ help me!'"
-      "feedback": "You repeated the wrong line"
-    -
-      "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
-        \ heard someone screaming...'\nrepeat 3 times 'Help!'\nprint 'Please help\
-        \ me!'\nfeedback: \"You missed the word print in line 3\""
-    -
-      "code": "print Batman was flying though Gotham.\nprint When suddenly he heard\
-        \ someone screaming...\nrepeat 3 times print Help!\nprint Please help me!"
-      "feedback": "You forgot about the quotation marks"
-    -
-      "code": "print 'Batman was flying though Gotham.' \nprint 'When suddenly he\
-        \ heard someone screaming...'\nrepeat 3 times print 'Help!'\nprint 'Please\
-        \ help me!'"
-      "feedback": "Perfect"
-    correct_answer: "D"
-    hint: "'Help!' is repeated 3 times."
+    - "option_text": "1"
+      "feedback": "Bad choice! You're being eaten"
+    - "option_text": "2"
+      "feedback": "Super! You escaped!"
+    - "option_text": "3"
+      "feedback": "Bad choice! You're being eaten."
+    - "option_text": "It's a trap, you will always be eaten!"
+      "feedback": "Luckily not!"
+    correct_answer: "B"
+    hint: "One of the doors will keep you safe.."
     question_score: 10
   10:
-    question_text: "What Hedy code belongs to this output?"
+    question_text: "Which monster is standing behind door 1?"
     code: |-
-      if youre happy and you know it clap your hands
-      if youre happy and you know it clap your hands
-      if youre happy and you know it and you really want to show it
-      if youre happy and you know it clap your hands
+      print 'Escape from the haunted house!'
+      print 'There are 3 doors in front of you'
+      door is ask 'Which door do you choose?'
+      monsters is vampire, werewolf, giant spider
+      if door is 2 print 'Yay, you can escape!'
+      else print 'You are being devoured by a... ' monsters at random
     mp_choice_options:
-    -
-      "code": "repeat 2 times 'if youre happy and you know it clap your hands'\nprint\
-        \ 'if youre happy and you know it and you really want to show it'\nprint 'if\
-        \ youre happy and you know it clap your hands'"
-      "feedback": "Almost! the first line needs an extra word"
-    -
-      "code": "repeat 2 times print 'if youre happy and you know it clap your hands'\n\
-        print 'if youre happy and you know it and you really want to show it'\nprint\
-        \ 'if youre happy and you know it clap your hands'"
-      "feedback": "Great!"
-    -
-      "code": "repeat 3 times print 'if youre happy and you know it clap your hands'\n\
-        print 'if youre happy and you know it and you really want to show it'"
-      "feedback": "This is not in the right order."
-    -
-      "code": "repeat 4 times 'if youre happy and you know it'\nrepeat 2 times 'clap\
-        \ your hands'\nprint 'and you really want to show it'\nprint 'clap your hands'"
-      "feedback": "This is not in the right order."
-    correct_answer: "B"
-    hint: "Mind the order of the sentences."
+    - "option_text": "Hedy picks a random monster each time."
+      "feedback": "Geweldig!"
+    - "option_text": "vampire"
+      "feedback": "Not always..."
+    - "option_text": "werewolf"
+      "feedback": "Not always..."
+    - "option_text": "giant spider"
+      "feedback": "Not always..."
+    correct_answer: "A"
+    hint: "Mind the last 3 words... monsters at random..."
     question_score: 10
