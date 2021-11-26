@@ -1889,7 +1889,7 @@ def is_program_valid(program_root, input_string, level, lang):
                                                                    allowed_types=get_allowed_types(Command.turn, level),
                                                                    invalid_argument=arg)
                 # clearly the error message here should be better or it should be a different one!
-                raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
+                raise exceptions.ParseException(level=level, location=[line, '?'], found=invalid_command)
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
                                                      guessed_command=closest, line_number=line,
                                                      fixed_code=fixed_code, fixed_result=result)

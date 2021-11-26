@@ -388,6 +388,8 @@ class TestsLevel4(HedyTester):
       result = hedy.transpile(code, self.level)
 
     self.assertEqual('Parse', context.exception.error_code)
+    self.assertEqual(1, context.exception.error_location[0])
+    self.assertEqual('?', context.exception.error_location[1])
   def test_missing_opening_quote(self):
     code = textwrap.dedent("""\
       print hallo wereld'""")

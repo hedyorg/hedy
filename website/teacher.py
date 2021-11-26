@@ -21,7 +21,7 @@ def routes (app, database):
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('retrieve_class'))
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
-    @app.route('/class/<class_id>', methods=['GET'])
+    @app.route('/for-teachers/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
         app.logger.info('This is info output')
@@ -76,7 +76,7 @@ def routes (app, database):
 
         DATABASE.store_class (Class)
 
-        return {}, 200
+        return {'id': Class['id']}, 200
 
     @app.route('/class/<class_id>', methods=['PUT'])
     @requires_login
@@ -160,7 +160,7 @@ def routes (app, database):
 
         return {}, 200
 
-    @app.route('/customize-class/<class_id>', methods=['GET'])
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):
@@ -175,7 +175,7 @@ def routes (app, database):
         else:
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
         levels = hedy_content.LevelDefaults(g.lang).levels
-        preferences = DATABASE.get_preferences_class(class_id)
+        preferences = DATABASE.get_customizations_class(class_id)
 
         return render_template('customize-class.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
                                ui=TRANSLATIONS.get_translations(g.lang, 'ui'),
@@ -193,11 +193,13 @@ def routes (app, database):
         # Validations
         if not isinstance(body, dict):
             return 'body must be an object', 400
-        if not isinstance(int(body.get('next_level')), int):
-            return 'amount of correct programs must be an integer', 400
         if not isinstance(body.get('example_programs'), bool):
             return 'amount of example programs must be an integer', 400
         if not isinstance(body.get('hide_level'), bool):
+            return 'level switch must be a boolean', 400
+        if not isinstance(body.get('hide_prev_level'), bool):
+            return 'level switch must be a boolean', 400
+        if not isinstance(body.get('hide_next_level'), bool):
             return 'level switch must be a boolean', 400
         if not isinstance(int(body.get('level')), int):
             return 'level must ben an integer', 400
@@ -206,14 +208,17 @@ def routes (app, database):
         if not Class or Class['teacher'] != user['username']:
             return 'No such class', 404
 
-        preferences = {}
-        preferences['level'] = int(body.get('level'))
-        preferences['adventures'] = body.get('adventures')
-        preferences['progress'] = body.get('next_level')
-        preferences['example_programs'] = body.get('example_programs')
-        preferences['hide'] = body.get('hide_level')
+        customizations = {}
+        customizations['id'] = class_id
+        customizations['level'] = int(body.get('level'))
+        customizations['adventures'] = body.get('adventures')
+        customizations['example_programs'] = body.get('example_programs')
+        customizations['hide'] = body.get('hide_level')
+        customizations['hide_prev_level'] = body.get('hide_prev_level')
+        customizations['hide_next_level'] = body.get('hide_next_level')
 
-        Class = DATABASE.update_preferences_class(class_id, preferences)
+
+        Class = DATABASE.update_customizations_class(customizations)
 
         return {}, 200
 
