@@ -1663,32 +1663,8 @@ def translate_characters(s, lang):
 # this method is used to make it more clear to kids what is meant in error messages
 # for example ' ' is hard to read, space is easier
 # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
-    if s == ' ':
-        word = 'space'
-    elif s == ',':
-        word = 'comma'
-    elif s == '?':
-        word = 'question mark'
-    elif s == '\n':
-        word = 'newline'
-    elif s == '.':
-        word = 'period'
-    elif s == '!':
-        word = 'exclamation mark'
-    elif s == '*':
-        word = 'star'
-    elif s == "'":
-        word = 'single quotes'
-    elif s == '"':
-        word = 'double quotes'
-    elif s == '/':
-        word = 'slash'
-    elif s == '-':
-        word = 'dash'
-    elif s >= 'a' and s <= 'z' or s >= 'A' and s <= 'Z':
-        return s
     try:
-        return hedy_translation.translate_character_localized(word, lang)
+        return hedy_translation.translate_character_localized(s, lang)
     except Exception:
         return s 
 

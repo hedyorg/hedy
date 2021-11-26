@@ -18,14 +18,18 @@ def translate_character_localized(character, lang):
     """Returns a word for a given character, which can be used for error messages. 
        The word depends on the given language. 
     """
-    path_characters = "../coursedata/texts"
+    dict_character_word = {' ': 'space', ',': 'comma', '?': 'question mark',
+                           '\n': 'newline', '.': 'period', '!': 'exclamation mark',
+                           '*': 'star', "'": 'single quotes', '"': 'double quotes', 
+                           '/': 'slash', '-': 'dash'}
+    path_characters = "./coursedata/texts"
     
     if hedy.local_keywords_enabled:
         try:
-            return get_character(character, path_characters, lang)
+            return get_character(dict_character_word[character], path_characters, lang)
         except Exception:
             pass        
-    return get_character(character, path_characters, "en")
+    return get_character(dict_character_word[character], path_characters, "en")
 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""

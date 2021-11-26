@@ -27,7 +27,7 @@ class TestsTranslationLevel1(HedyTester):
 
     @check_local_lang_bool
     def test_character_translation_dutch(self):
-        word = 'period'
+        word = '.'
         
         result = hedy_translation.translate_character_localized(word, 'nl')
         expected = 'een punt'
