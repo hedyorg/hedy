@@ -18,7 +18,7 @@ def translate_character_localized(character, lang):
     """Returns a word for a given character, which can be used for error messages. 
        The word depends on the given language. 
     """
-    path_characters = "./coursedata/texts"
+    path_characters = "../coursedata/texts"
     
     if hedy.local_keywords_enabled:
         try:
