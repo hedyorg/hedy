@@ -800,14 +800,14 @@ export function confetti_cannon(level: number){
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
     let adventures = $('#adventures');
     let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
-    let customLevels = ['rock', 'haunted', 'fortune', 'restaurant']
+    let customLevels = ['turtle', 'rock', 'haunted', 'fortune', 'restaurant']
 
     if(customLevels.includes(currentAdventure!)){
       let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
       jsConfetti.addConfetti({
         emojis: currentAdventureConfetti,
-        emojiSize: 90,
-        confettiNumber: 40,
+        emojiSize: 45,
+        confettiNumber: 100,
       });
     }
 
@@ -825,16 +825,18 @@ export function confetti_cannon(level: number){
 function getConfettiForAdventure(adventure: string){
 
   switch (adventure) {
+    case 'turtle':
+      return [['🐢']];
     case 'rock':
-      return [['✂'], ['📜'], ['⛰️']];
+      return [['✂️'], ['📜'], ['🪨']];
     case 'haunted':
       return [['🦇'], ['👻'], ['🎃']];
     case 'restaurant':
-      return [['🧆'], ['🍝'], ['🍮'], ['🍰']];
+      return [['🍣'], ['🍝'], ['🍕'], ['🍰']];
     case 'fortune':
-      return [['🔮'], ['✨'], ['💫']];
+      return [['🔮'], ['✨'], ['🧞‍♂️']];
   }
-  return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫'], ['🌸']];
+  return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
 export function modalStepOne(level: number){
