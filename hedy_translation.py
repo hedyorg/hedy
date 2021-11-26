@@ -1,9 +1,31 @@
 from lark import Transformer, Tree
 import hedy
+import os 
+import yaml 
 
 
 TRANSPILER_LOOKUP = {}
 
+def get_character(character, path_characters, lang):
+    yaml_filesname_with_path = os.path.join(path_characters, lang + '.yaml')
+            
+    with open(yaml_filesname_with_path, 'r') as stream:
+        yaml_dict = yaml.safe_load(stream)
+            
+    return yaml_dict['HedyErrorMessages'][character]
+    
+def translate_character_localized(character, lang):
+    """Returns a word for a given character, which can be used for error messages. 
+       The word depends on the given language. 
+    """
+    path_characters = "./coursedata/texts"
+    
+    if hedy.local_keywords_enabled:
+        try:
+            return get_character(character, path_characters, lang)
+        except Exception:
+            pass        
+    return get_character(character, path_characters, "en")
 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""

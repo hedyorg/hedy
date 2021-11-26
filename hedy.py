@@ -12,6 +12,7 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
+import hedy_translation
 
 import yaml
 import program_repair
@@ -1658,40 +1659,42 @@ def transpile(input_string, level, lang="en"):
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
 
-def translate_characters(s):
+def translate_characters(s, lang):
 # this method is used to make it more clear to kids what is meant in error messages
 # for example ' ' is hard to read, space is easier
 # this could (should?) be localized so we can call a ' "Hoge komma" for example (Felienne, dd Feb 25, 2021)
     if s == ' ':
-        return 'space'
+        word = 'space'
     elif s == ',':
-        return 'comma'
+        word = 'comma'
     elif s == '?':
-        return 'question mark'
+        word = 'question mark'
     elif s == '\n':
-        return 'newline'
+        word = 'newline'
     elif s == '.':
-        return 'period'
+        word = 'period'
     elif s == '!':
-        return 'exclamation mark'
+        word = 'exclamation mark'
     elif s == '*':
-        return 'star'
+        word = 'star'
     elif s == "'":
-        return 'single quotes'
+        word = 'single quotes'
     elif s == '"':
-        return 'double quotes'
+        word = 'double quotes'
     elif s == '/':
-        return 'slash'
+        word = 'slash'
     elif s == '-':
-        return 'dash'
+        word = 'dash'
     elif s >= 'a' and s <= 'z' or s >= 'A' and s <= 'Z':
         return s
-    else:
-        return s
+    try:
+        return hedy_translation.translate_character_localized(word, lang)
+    except Exception:
+        return s 
 
 
-def beautify_parse_error(character_found):
-    character_found = translate_characters(character_found)
+def beautify_parse_error(character_found, lang):
+    character_found = translate_characters(character_found, lang)
     return character_found
 
 def find_indent_length(line):
@@ -1826,7 +1829,7 @@ def parse_input(input_string, level, lang):
         try:
             location = e.line, e.column
             characters_expected = str(e.allowed) #not yet in use, could be used in the future (when our parser rules are better organize, now it says ANON*__12 etc way too often!)
-            character_found = beautify_parse_error(e.char)
+            character_found = beautify_parse_error(e.char, lang)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
             raise exceptions.ParseException(level=level, location=location, found=character_found) from e
