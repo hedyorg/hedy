@@ -7,13 +7,6 @@
         {{ text.intro_text }}
     </div>
     <div class="mt-8 w-full flex flex-row justify-around" style="height: 20rem;">
-        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
-            <img src="#" class="h-32">
-            <div class="mt-4">
-                Very short text...
-            </div>
-            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/hedy')}}"'>{{ text.start_programming }}</button>
-        </div>
         {% if is_teacher %}
         <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
             <img src="#" class="h-32">
@@ -24,20 +17,28 @@
         </div>
         {% else %}
         <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
-            <img src="#" class="h-32">
+            <img src="/images/Hedy-logo.png" class="h-32">
             <div class="mt-4">
-                Very short text...
+                {{ text.general_text }}
             </div>
-            <button class="green-btn mt-4" onclick='location.href="#"'>{{ text.read_docs }}</button>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/hedy')}}"'>{{ text.start_programming }}</button>
         </div>
-        {% endif %}
         <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
-            <img src="#" class="h-32">
+            <img src="/images/story.png" class="h-32">
             <div class="mt-4">
-                Very short text...
+                {{ text.story_text }}
             </div>
-            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('learn-more')}}"'>{{ text.read_docs }}</button>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/hedy')}}#story"'>{{ text.start_programming }}</button>
         </div>
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
+            <img src="/images/turtle.png" class="h-32">
+            <div class="mt-4">
+                {{ text.turtle_text }}
+            </div>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/hedy')}}#turtle"'>{{ text.start_programming }}</button>
+        </div>
+
+        {% endif %}
     </div>
 </div>
 {% endblock %}
