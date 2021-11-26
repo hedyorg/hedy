@@ -842,10 +842,10 @@ def view_program(id):
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
     arguments_dict['menu'] = True
-    arguments_dict['auth'] = TRANSLATIONS.get_translations(lang, 'Auth')
+    arguments_dict['auth'] = TRANSLATIONS.get_translations(g.lang, 'Auth')
     arguments_dict['username'] = user.get('username', None)
     arguments_dict['is_teacher'] = is_teacher(user)
-    arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
+    arguments_dict.update(**TRANSLATIONS.get_translations(g.lang, 'ui'))
 
     return render_template("view-program-page.html", **arguments_dict)
 
@@ -1162,7 +1162,7 @@ def translate_fromto(source, target):
       translating.struct_to_sections(source_adventures, target_adventures)))
 
     files.append(translating.TranslatableFile(
-      'Keywords',
+      'Keywords (make sure there are no duplicate translations of keywords)',
       f'keywords/{target}.yaml',
       translating.struct_to_sections(source_keywords, target_keywords)))
 
