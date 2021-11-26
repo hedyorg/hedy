@@ -230,13 +230,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-      if (response.Code && !response.Error && !response.Warning) {
-        removeBulb();
-        var allsuccessmessages = ErrorMessages['Transpile_success'];
-        var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-        success.show(allsuccessmessages[randomnum]);
-      }
-        runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
+        runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
@@ -571,7 +565,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
+function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
 
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
@@ -619,11 +613,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(_mod) {
     console.log('Program executed');
+
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
     window.State.programsInExecution--;
+    if(!hasWarnings) {
+      showSuccesMessage();
+    }
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -816,6 +814,12 @@ export function modalStepOne(level: number){
   initializeModalEditor(modal_editor);
 }
 
+function showSuccesMessage(){
+  removeBulb();
+  var allsuccessmessages = ErrorMessages['Transpile_success'];
+  var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
+  success.show(allsuccessmessages[randomnum]);
+}
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ErrorMessages['Program_repair'];
