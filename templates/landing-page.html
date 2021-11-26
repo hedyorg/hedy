@@ -9,12 +9,27 @@
     <div class="mt-8 w-full flex flex-row justify-around" style="height: 20rem;">
         {% if is_teacher %}
         <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
-            <img src="#" class="h-32">
+            <img src="/images/Hedy-logo.png" class="h-32">
             <div class="mt-4">
-                Very short text...
+                {{ text.general_text }}
             </div>
-            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('for-teachers')}}"'>{{ text.create_class }}</button>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/hedy')}}"'>{{ text.start_programming }}</button>
         </div>
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
+            <img src="/images/class.jpeg" class="h-32">
+            <div class="mt-4">
+                {{ text.create_class_text }}
+            </div>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/for-teachers')}}"'>{{ text.create_class }}</button>
+        </div>
+        <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
+            <img src="/images/404.jpeg" class="h-32">
+            <div class="mt-4">
+                {{ text.read_docs_text }}
+            </div>
+            <button class="green-btn mt-4" onclick='location.href="{{localize_link ('/for-teachers')}}"'>{{ text.read_docs }}</button>
+        </div>
+
         {% else %}
         <div class="border-2 border-gray-400 flex flex-col items-center justify-center mx-4">
             <img src="/images/Hedy-logo.png" class="h-32">
