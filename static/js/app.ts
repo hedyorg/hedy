@@ -798,21 +798,43 @@ export function confetti_cannon(level: number){
     const jsConfetti = new JSConfetti({canvas})
     // timeout for the confetti to fall down
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
-    console.log(level);
-    var emojilist = [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫'], ['🌸']];
-    jsConfetti.addConfetti({
-      emojis: emojilist[0], // now it shows the rainbow-emoji, but if you
-                            // change '0' to 'level' for example, it might
-                            // show another emoji
-      emojiSize: 100,
-      confettiNumber: 30,
-    });
+    let adventures = $('#adventures');
+    let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
+    let customLevels = ['rock', 'haunted', 'fortune', 'restaurant']
+
+    if(customLevels.includes(currentAdventure!)){
+      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+      jsConfetti.addConfetti({
+        emojis: currentAdventureConfetti,
+        emojiSize: 90,
+        confettiNumber: 40,
+      });
+    }
+
+    else{
+      jsConfetti.addConfetti();
+    }
 
     const confettiButton = document.getElementById('confetti-button');
     if (confettiButton) {
       confettiButton.classList.add('hidden');
     }
   }
+}
+
+function getConfettiForAdventure(adventure: string){
+
+  switch (adventure) {
+    case 'rock':
+      return [['✂'], ['📜'], ['⛰️']];
+    case 'haunted':
+      return [['🦇'], ['👻'], ['🎃']];
+    case 'restaurant':
+      return [['🧆'], ['🍝'], ['🍮'], ['🍰']];
+    case 'fortune':
+      return [['🔮'], ['✨'], ['💫']];
+  }
+  return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫'], ['🌸']];
 }
 
 export function modalStepOne(level: number){
