@@ -1168,7 +1168,7 @@ def translate_fromto(source, target):
       translating.struct_to_sections(source_adventures, target_adventures)))
 
     files.append(translating.TranslatableFile(
-      'Keywords',
+      'Keywords (make sure there are no duplicate translations of keywords)',
       f'keywords/{target}.yaml',
       translating.struct_to_sections(source_keywords, target_keywords)))
 
