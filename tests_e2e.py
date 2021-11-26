@@ -1,5 +1,6 @@
 # *** NATIVE DEPENDENCIES ***
-import threading
+import os
+import collections
 import random
 import json
 import re
@@ -7,7 +8,6 @@ import urllib.parse
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***
-import pytest
 import unittest
 import requests
 
@@ -17,13 +17,15 @@ from config import config as CONFIG
 
 # *** GLOBAL VARIABLES ***
 
-HOST = 'http://localhost:' + str(CONFIG['port']) + '/'
+HOST = os.getenv('ENDPOINT', 'http://localhost:' + str(CONFIG['port']) + '/')
+if not HOST.endswith('/'): HOST += '/'
+
 # This dict has global scope and holds all created users and their still current sessions (as cookies), for convenient reuse wherever needed
 USERS = {}
 
 # *** HELPERS ***
 
-def request(method, path, headers={}, body='', user=None):
+def request(method, path, headers={}, body='', cookies=None):
 
     if method not in['get', 'post', 'put', 'delete']:
         raise Exception('request - Invalid method: ' + str(method))
@@ -38,38 +40,46 @@ def request(method, path, headers={}, body='', user=None):
 
     start = utils.timems()
 
-    cookies = None
-    if user:
-        if not 'cookies' in user:
-            user['cookies'] = requests.cookies.RequestsCookieJar()
-        cookies = user['cookies']
-
-    request = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies)
+    response = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies)
 
     # Remember all cookies in the cookie jar
-    if user:
-        user['cookies'].update(request.cookies)
+    if cookies is not None:
+        cookies.update(response.cookies)
 
-    response = {'time': utils.timems() - start}
+    ret = {'time': utils.timems() - start}
 
-    if request.history and request.history[0]:
+    if response.history and response.history[0]:
         # This code branch will be executed if there is a redirect
-        response['code']    = request.history[0].status_code
-        response['headers'] = request.history[0].headers
-        if getattr(request.history[0], '_content'):
+        ret['code']    = response.history[0].status_code
+        ret['headers'] = response.history[0].headers
+        if getattr(response.history[0], '_content'):
             # We can assume that bodies returned from redirected responses are always plain text, since no JSON endpoint in the server is reachable through a redirect.
-            response['body'] = getattr(request.history[0], '_content').decode('utf-8')
+            ret['body'] = getattr(response.history[0], '_content').decode('utf-8')
     else:
-        response['code']    = request.status_code
-        response['headers'] = request.headers
-        if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
-            response['body'] = request.json()
+        ret['code']    = response.status_code
+        ret['headers'] = response.headers
+        if 'Content-Type' in response.headers and response.headers['Content-Type'] == 'application/json':
+            ret['body'] = response.json()
         else:
-            response['body'] = request.text
+            ret['body'] = response.text
 
-    return response
+    return ret
 
 class AuthHelper(unittest.TestCase):
+    def setUp(self):
+        """SetUp gets called on a fresh instance of this object, before each test.
+
+        We have a collection of users in the USER global array. However, we store
+        the cookies for individual users, so that cookies from different sessions don't
+        interfere with each other (i.e., every user must login again in each test).
+        """
+        self.user_cookies = collections.defaultdict(requests.cookies.RequestsCookieJar)
+        self.user = None
+
+    @property
+    def username(self):
+        return self.user['username'] if self.user else None
+
     def make_username(self):
         # We create usernames with a random component so that if a test fails, we don't have to do a cleaning of the DB so that the test suite can run again
         # This also allows us to run concurrent tests without having username conflicts.
@@ -84,7 +94,7 @@ class AuthHelper(unittest.TestCase):
         if username in USERS:
             return USERS[username]
         body = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
-        response = request('post', 'auth/signup', {}, body, user=body)
+        response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
         # In this case, we get a 403. We invoke the function recursively.
@@ -103,26 +113,21 @@ class AuthHelper(unittest.TestCase):
             return USERS[next(iter(USERS))]
         return self.assert_user_exists(self.make_username())
 
-    # Returns the first logged in user, if any; otherwise, logs in a user; if no user exists, creates and then logs in the user.
     def get_any_logged_user(self):
-        for user in USERS:
-            if 'cookies' in user:
-                return user
-
         # If there's no logged in user, we login the user
         user = self.get_any_user()
         return self.login_user(user['username'])
 
     def login_user(self, username):
+        """Login another user. Does not BECOME that user for all subsequent request."""
+        self.assert_user_exists(username)
         user = USERS[username]
-        if 'cookies' in user:
-            return user
-        response = request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']}, user=user)
+        request('post', 'auth/login', {}, {'username': user['username'], 'password': user['password']}, cookies=self.user_cookies[username])
         return user
 
-    def assert_user_is_logged(self, username):
-        self.assert_user_exists(username)
-        return self.login_user(username)
+    def given_specific_user_is_logged_in(self, username):
+        """Become this specific user for all subsequent calls."""
+        self.user = self.login_user(username)
 
     def get_hedy_cookie(self, cookie_string):
         cookie = SimpleCookie()
@@ -134,44 +139,45 @@ class AuthHelper(unittest.TestCase):
 
     def given_fresh_user_is_logged_in(self):
         username = self.make_username()
-        self.user = self.assert_user_is_logged(username)
-        self.username = username
+        self.user = self.login_user(username)
+
+    def make_current_user_teacher(self):
+        """Mark the current user as teacher.
+
+        Need to log in again to refresh the session.
+        """
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        return self.login_user(self.username)
 
     def given_user_is_logged_in(self):
         self.user = self.get_any_logged_user()
-        self.username = self.user['username']
+
+    def given_teacher_is_logged_in(self):
+        self.given_user_is_logged_in()
+        self.make_current_user_teacher()
 
     def given_any_user(self):
         self.user = self.get_any_user()
-        self.username = self.user['username']
 
     def switch_user(self, user):
-        self.user = user
-        self.username = self.user['username']
+        self.user = self.login_user(user['username'])
 
     def post_data(self, path, body, expect_http_code=200, no_cookie=False, return_headers=False, put_data=False):
-        user = None
-        if hasattr (self, 'user') and not no_cookie:
-            user = self.user
+        cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
 
-        response = request('put' if put_data else 'post', path, body=body, user=user)
-        self.assertEqual(response['code'], expect_http_code)
-        if return_headers:
-            return response['headers']
-        else:
-            return response['body']
+        method = 'put' if put_data else 'post'
+        response = request(method, path, body=body, cookies=cookies)
+        self.assertEqual(response['code'], expect_http_code, f'While {method}ing {body} to {path} (user: {self.username})')
+
+        return response['headers'] if return_headers else response['body']
 
     def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
-        user = None
-        if hasattr (self, 'user') and not no_cookie:
-            user = self.user
+        cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
+        response = request('get', path, body='', cookies=cookies)
 
-        response = request('get', path, body='', user=user)
-        self.assertEqual(response['code'], expect_http_code)
-        if return_headers:
-            return response['headers']
-        else:
-            return response['body']
+        self.assertEqual(response['code'], expect_http_code, f'While reading {path} (user: {self.username})')
+
+        return response['headers'] if return_headers else response['body']
 
 # *** TESTS ***
 
@@ -247,20 +253,20 @@ class TestAuth(AuthHelper):
 
     def test_signup(self):
         # GIVEN a valid username and signup body
-        self.username = self.make_username()
-        self.user = {'username': self.username, 'email': self.username + '@hedy.com', 'password': 'foobar'}
+        username = self.make_username()
+        user = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
-        body = self.post_data('auth/signup', self.user)
+        body = self.post_data('auth/signup', user)
 
         # THEN receive a body containing a token
         self.assertIsInstance(body, dict)
         self.assertIsInstance(body['token'], str)
 
         # FINALLY Store the user and its token for upcoming tests
-        self.user['verify_token'] = body['token']
-        USERS[self.username] = self.user
+        user['verify_token'] = body['token']
+        USERS[username] = user
 
     def test_invalid_login(self):
         # WHEN attempting logins with invalid bodies
@@ -337,7 +343,7 @@ class TestAuth(AuthHelper):
         self.assertEqual(headers['location'], HOST)
 
         # WHEN retrieving profile to see that the user is no longer marked with `verification_pending`
-        self.assert_user_is_logged(self.username)
+        self.given_specific_user_is_logged_in(self.username)
         profile = self.get_data('profile')
 
         # THEN check that the `verification_pending` has been removed from the user profile
@@ -394,7 +400,10 @@ class TestAuth(AuthHelper):
 
         # WHEN attempting to change password without sending the correct old password
         # THEN receive an invalid response code from the server
-        self.post_data('auth/change_password', {'old_password': 'password', 'new_password': self.user['password'] + 'foo'}, expect_http_code=403)
+        self.post_data('auth/change_password', {
+            'old_password': 'password',
+            'new_password': self.user['password'] + 'foo'
+        }, expect_http_code=403)
 
     def test_change_password(self):
         # GIVEN a logged in user
@@ -769,8 +778,7 @@ class TestClasses(AuthHelper):
         self.post_data('class', {'name': 'class1'}, expect_http_code=403)
 
         # WHEN marking the user as teacher
-        # THEN receive an OK response code from the server
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.make_current_user_teacher()
 
         # GIVEN a user with teacher permissions
 
@@ -790,8 +798,7 @@ class TestClasses(AuthHelper):
     def test_create_class(self):
         # GIVEN a user with teacher permissions
         # (we create a new user to ensure that the user has no classes yet)
-        self.given_fresh_user_is_logged_in()
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.given_teacher_is_logged_in()
 
         # WHEN retrieving the list of classes
         class_list = self.get_data('classes')
@@ -835,8 +842,7 @@ class TestClasses(AuthHelper):
 
     def test_invalid_update_class(self):
         # GIVEN a user with teacher permissions and a class
-        self.given_user_is_logged_in()
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.given_teacher_is_logged_in()
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
 
@@ -863,8 +869,7 @@ class TestClasses(AuthHelper):
 
     def test_update_class(self):
         # GIVEN a user with teacher permissions and a class
-        self.given_user_is_logged_in()
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.given_teacher_is_logged_in()
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
 
@@ -881,9 +886,8 @@ class TestClasses(AuthHelper):
 
     def test_join_class(self):
         # GIVEN a teacher
-        self.given_user_is_logged_in()
-        teacher = self.user
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.given_teacher_is_logged_in()
+
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
@@ -926,9 +930,8 @@ class TestClasses(AuthHelper):
 
     def test_see_students_in_class(self):
         # GIVEN a teacher
-        self.given_user_is_logged_in()
+        self.given_teacher_is_logged_in()
         teacher = self.user
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
@@ -958,9 +961,8 @@ class TestClasses(AuthHelper):
 
     def test_see_students_with_programs_in_class(self):
         # GIVEN a teacher
-        self.given_user_is_logged_in()
+        self.given_teacher_is_logged_in()
         teacher = self.user
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes') [0]
@@ -989,6 +991,7 @@ class TestClasses(AuthHelper):
 
 def tearDownModule ():
     auth_helper = AuthHelper()
+    auth_helper.setUp()
     for username in USERS:
-        auth_helper.assert_user_is_logged(username)
-        request('post', 'auth/destroy', user=USERS[username])
+        auth_helper.given_specific_user_is_logged_in(username)
+        auth_helper.post_data('auth/destroy', {})
