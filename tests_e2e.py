@@ -179,6 +179,12 @@ class AuthHelper(unittest.TestCase):
 
         return response['headers'] if return_headers else response['body']
 
+    def destroy_current_user(self):
+        assert self.username is not None
+        self.post_data('auth/destroy', '')
+        # Remove any records of this user
+        USERS.pop(self.username)
+
 # *** TESTS ***
 
 class TestPages(AuthHelper):
@@ -370,14 +376,11 @@ class TestAuth(AuthHelper):
 
         # WHEN deleting the user account
         # THEN receive an OK response code from the server
-        self.post_data('auth/destroy', '')
+        self.destroy_current_user()
 
         # WHEN retrieving the profile of the user
         # THEN receive a forbidden response code from the server
         self.get_data('profile', expect_http_code=403)
-
-        # FINALLY remove user since it has already been deleted in the server
-        USERS.pop(self.username)
 
     def test_invalid_change_password(self):
         # GIVEN a logged in user
@@ -762,10 +765,8 @@ class TestProgram(AuthHelper):
 
         # WHEN deleting the user account
         # THEN receive an OK response code from the server
-        self.post_data('auth/destroy', '')
+        self.destroy_current_user()
 
-        # FINALLY remove user since it has already been deleted in the server
-        USERS.pop(self.username)
 
 class TestClasses(AuthHelper):
     def test_invalid_create_class(self):
@@ -992,6 +993,6 @@ class TestClasses(AuthHelper):
 def tearDownModule ():
     auth_helper = AuthHelper()
     auth_helper.setUp()
-    for username in USERS:
+    for username in USERS.copy():
         auth_helper.given_specific_user_is_logged_in(username)
-        auth_helper.post_data('auth/destroy', {})
+        auth_helper.destroy_current_user()
