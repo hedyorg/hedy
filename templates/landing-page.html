@@ -4,9 +4,7 @@
 <div class="px-8">
     <h2>{{ text.welcome }} {{ user }}!</h2>
     <div id="landing_page_text" class="mt-4 w-3/4">
-        {{ text.intro_text }}
-        <br><br>
-        {{ text.choice_text }}
+        {{ text.intro_text|commonmark}}
     </div>
     <div class="mt-8 w-full flex flex-row justify-around" style="height: 20rem;">
         {% if is_teacher %}
