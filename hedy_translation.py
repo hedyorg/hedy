@@ -22,7 +22,7 @@ def translate_character_localized(character, lang):
                            '\n': 'newline', '.': 'period', '!': 'exclamation mark',
                            '*': 'star', "'": 'single quotes', '"': 'double quotes', 
                            '/': 'slash', '-': 'dash'}
-    path_characters = "./coursedata/texts"
+    path_characters = "../coursedata/texts"
     
     if hedy.local_keywords_enabled:
         try:
