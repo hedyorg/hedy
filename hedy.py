@@ -174,12 +174,12 @@ def hash_needed(name):
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
+    name = name.name if type(name) is LookupEntry else name
     if hash_needed(name):
         # hash "illegal" var names
         # being reservered keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
         # prepend with v for when hash starts with a number
-
         hash_object = hashlib.md5(name.encode())
         return "v" + hash_object.hexdigest()
     else:
@@ -361,7 +361,10 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree)
 
     def add_to_lookup(self, name, tree, skip_hashing=False):
-        self.lookup.append(LookupEntry(name, tree, skip_hashing))
+        entry = LookupEntry(name, tree, skip_hashing)
+        hashed_name = hash_var(entry)
+        entry.name = hashed_name
+        self.lookup.append(entry)
 
 
 # The transformer traverses the whole AST and infers the type of each node. It alters the lookup table entries with
@@ -474,7 +477,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.string)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree, HedyType.string)
+        return self.to_typed_tree(tree.children[0], HedyType.string)
 
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
@@ -561,8 +564,9 @@ class TypeValidator(Transformer):
         return arg_type
 
     def get_type(self, tree):
-        # TypedTree with type 'None' and 'string' could be in the lookup
-        if tree.type_ in [HedyType.none, HedyType.string]:
+        # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
+        # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
+        if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
             if in_lookup:
                 return type_in_lookup
@@ -574,7 +578,7 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == name and not entry.inferred:
+            if entry.name == hash_var(name) and not entry.inferred:
                 entry.type_ = inferred_type
                 entry.inferred = True
 
@@ -588,7 +592,7 @@ class TypeValidator(Transformer):
     #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
         # TODO: we should not just take the first match, take into account var reassignments
-        matches = [entry for entry in self.lookup if entry.name == name]
+        matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
         if matches:
             if not matches[0].inferred:
                 if matches[0].inferring:
@@ -851,7 +855,7 @@ class ConvertToPython_1(Transformer):
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
-    return name in all_names
+    return hash_var(name) in all_names
 
 
 def get_value(arg):
@@ -1911,9 +1915,7 @@ def create_lookup_table(abstract_syntax_tree, level):
 
     TypeValidator(entries, level).transform(abstract_syntax_tree)
 
-    # For now the lookup table should contain the entries with their names in plain text and hashed
-    return entries + [LookupEntry(hash_var(e.name), e.tree, e.skip_hashing, e.type_)
-                      for e in entries if not e.skip_hashing]
+    return entries
 
 
 def transpile_inner(input_string, level, lang="en"):
