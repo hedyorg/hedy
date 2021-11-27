@@ -33,7 +33,7 @@
   </div>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
-    <button class="green-btn" onclick="window.location.href = '{{localize_link ('/customize-class/' + class_info.id)}}'">{{ auth.customize_class }}</button>
+    <button class="green-btn" onclick="window.location.href = '{{localize_link ('/for-teachers/customize-class/' + class_info.id)}}'">{{ auth.customize_class }}</button>
     <button class="green-btn mx-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
     <button class="green-btn" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
   </div>

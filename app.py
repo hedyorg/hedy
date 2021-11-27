@@ -1123,7 +1123,7 @@ def share_unshare_program(user):
     if not isinstance(body.get('id'), str):
         return 'id must be a string', 400
     if not isinstance(body.get('public'), bool):
-        return 'public must be a string', 400
+        return 'public must be a boolean', 400
 
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
@@ -1162,7 +1162,7 @@ def translate_fromto(source, target):
       translating.struct_to_sections(source_adventures, target_adventures)))
 
     files.append(translating.TranslatableFile(
-      'Keywords',
+      'Keywords (make sure there are no duplicate translations of keywords)',
       f'keywords/{target}.yaml',
       translating.struct_to_sections(source_keywords, target_keywords)))
 
