@@ -268,7 +268,7 @@ def routes(app, database):
             resp = make_response({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
-            send_email_template('welcome_verify', email, os.getenv('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
             resp = make_response({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
@@ -388,7 +388,7 @@ def routes(app, database):
                 if is_testing_request(request):
                    resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email, os.getenv('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+                    send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
         username = user['username']
 
@@ -448,7 +448,7 @@ def routes(app, database):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'], os.getenv('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
+            send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
             return '', 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -545,7 +545,7 @@ def routes(app, database):
         if is_testing_request(request):
            resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'], os.getenv('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
         return '', 200
 
@@ -632,3 +632,19 @@ def auth_templates(page, lang, request):
             counter = counter + 1
 
         return render_template('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations(lang, 'Auth'))
+
+
+def email_base_url():
+    """Return the base URL for the current site, without trailing slash.
+
+    You only need to call this function to format links for emails. Links that get
+    shown in HTML pages can start with a `/` and not include the host and they will
+    still work correctly.
+
+    Will use the environment variable BASE_URL if set, otherwise will guess using
+    the current Flask request.
+    """
+    from_env = os.getenv('BASE_URL')
+    if from_env:
+        return from_env.rstrip('/')
+    return request.host_url

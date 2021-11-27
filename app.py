@@ -1,10 +1,10 @@
+# coding=utf-8
 import sys
 from website.yaml_file import YamlFile
 if(sys.version_info.major < 3 or sys.version_info.minor < 6):
     print('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 
-# coding=utf-8
 import datetime
 import collections
 import hedy
@@ -1129,7 +1129,7 @@ def share_unshare_program(user):
     if not isinstance(body.get('id'), str):
         return 'id must be a string', 400
     if not isinstance(body.get('public'), bool):
-        return 'public must be a string', 400
+        return 'public must be a boolean', 400
 
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
