@@ -60,12 +60,12 @@ questions:
       if password is SECRET print 'Correct!'
       else print 'ALARM! INTRUDER!'
     mp_choice_options:
-    - "option_text": "Goood"
+    - "option_text": "Correct"
       "feedback": "That's being printed if the correct answer is given, not the wrong\
         \ one..."
     - "option_text": "SECRET"
-      "feedback": "That's the right answer"
-    - "option_text": "Wrong! "
+      "feedback": "That's not the right answer"
+    - "option_text": "Wrong!"
       "feedback": "No, this is not what Hedy will print"
     - "option_text": "ALARM! INTRUDER!"
       "feedback": "Great job!"
@@ -79,16 +79,16 @@ questions:
       if password is SECRET print 'Correct!'
       else print 'ALARM! INTRUDER!'
     mp_choice_options:
-    - "option_text": "Because it needs to be in captitals, so SECRET"
+    - "option_text": "Because it needs to be in capitals, so SECRET"
       "feedback": "Indeed!"
     - "option_text": "Because the password is alarm"
-      "feedback": "Nee, dat is niet het wachtwoord."
+      "feedback": "No, this is not the password."
     - "option_text": "Because it's spelled secert. "
       "feedback": "That's not how you spell secret"
     - "option_text": "Because Hedy makes a mistake"
       "feedback": "No, Hedy is right"
     correct_answer: "A"
-    hint: "The spelling of the word has to be the exact same."
+    hint: "The spelling of the word has to be exactly the same."
     question_score: 10
   6:
     question_text: "Which word should be on the place of the question mark in the\
@@ -128,10 +128,10 @@ questions:
       "feedback": "if is in the line above."
     - "option_text": ""
       "code": "at random"
-      "feedback": "No, you dont need at random."
+      "feedback": "No, you don't need at random."
     - "option_text": ""
       "code": "else"
-      "feedback": "It already said else"
+      "feedback": "There already is an else command"
     - "option_text": ""
       "code": "print"
       "feedback": "Awesome!"
@@ -147,7 +147,7 @@ questions:
     mp_choice_options:
     - "option_text": ""
       "code": "favorite animal"
-      "feedback": "Thats not the variable name."
+      "feedback": "That's not the variable name."
     - "option_text": ""
       "code": "animal"
       "feedback": "Great job!"
@@ -192,7 +192,7 @@ questions:
       else print 'You are being devoured by a... ' monsters at random
     mp_choice_options:
     - "option_text": "Hedy picks a random monster each time."
-      "feedback": "Geweldig!"
+      "feedback": "Awesome!"
     - "option_text": "vampire"
       "feedback": "Not always..."
     - "option_text": "werewolf"
