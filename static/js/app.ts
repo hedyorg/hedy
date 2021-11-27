@@ -185,6 +185,17 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
+export function correct_commands(level: any, code: string) {
+  var necessary_commands = ErrorMessages['Necessary_commands'][level];
+  
+  for ( var i = 0; i < necessary_commands.length; i++ ) {
+    if ( code.includes(necessary_commands[i]) ) {
+      return true
+    }
+  }
+  return false
+}
+
 export function runit(level: string, lang: string, cb: () => void) {
   if (window.State.disable_run) return modal.alert (auth.texts['answer_question']);
 
@@ -226,22 +237,20 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-      if (response.Code){ 
-        var necessary_commands = { 
-            1: ["print","ask","echo","forward","turn"], 
-            2: ["is","ask"],
-            3: ["at","random"] };
-        for ( var i = 0; i < necessary_commands[parseInt(level)].length; i++ ) {
-          if ( code.includes(necessary_commands[parseInt(level)][i]) ) {
-            console.log("success!");
-            var allsuccessmessages = ErrorMessages['Transpile_success'];
+      if (response.Code){
+        if ( correct_commands(level, code) ) {
+          console.log("success!");
+          var allsuccessmessages = ErrorMessages['Transpile_success'];
+          if ( typeof allsuccessmessages === 'object' ) {
             var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
             success.show(allsuccessmessages[randomnum]);
-            break;
           }
           else {
-            success.show("Your code works, but you forgot to use the newly learned commands!");
-          }
+            success.show(allsuccessmessages);
+          }        
+        }
+        else {
+          success.show(ErrorMessages['Transpile_incomplete']);
         }
       }
       runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {

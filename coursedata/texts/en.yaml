@@ -47,6 +47,7 @@ ClientErrorMessages:
       - "Well done!"
       - "Excellent!"
       - "You did great!"
+    Transpile_incomplete: "Your code works, but you forgot to use the newly learned commands!"
     Transpile_warning: "Warning!"
     Transpile_error: "We can't run your program."
     Connection_error: "We couldn't reach the server."
@@ -56,6 +57,16 @@ ClientErrorMessages:
     CheckInternet: "Have a look if your Internet connection is working properly?"
     ServerError: "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hedy@felienne.com. In the mean time, try something a little different and take another look at the examples. Thanks!"
     Program_too_long: "Your program takes too long to run."
+    Necessary_commands:
+        1:
+            - "print"
+            - "ask"
+            - "echo"
+            - "forward"
+            - "turn"
+        2:
+            - "is"
+            - "ask"
 HedyErrorMessages:
     Empty Program: "You created an empty program. Type Hedy code in the left field and try again"
     Wrong Level: "That was correct Hedy code, but not at the right level. You wrote {offending_keyword} for level {working_level}. Tip: {tip}"
