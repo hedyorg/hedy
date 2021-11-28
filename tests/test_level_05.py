@@ -244,8 +244,8 @@ class TestsLevel5(HedyTester):
     )
   def test_print_if_linebreak_statement(self):
     # Breaking an if statement and its following statement should be
-    # permited until level 7 
-    
+    # permited until level 7
+
     code = textwrap.dedent("""\
     people is 1, 2, 3, 3
     dishwasher is people at random
@@ -346,6 +346,8 @@ class TestsLevel5(HedyTester):
     with self.assertRaises(hedy.exceptions.ParseException) as context:
       result = hedy.transpile(code, self.level)
     self.assertEqual('Parse', context.exception.error_code)
+    self.assertEqual(4, context.exception.error_location[0])
+    self.assertEqual(1, context.exception.error_location[1])
   def test_if_print_has_no_turtle(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
