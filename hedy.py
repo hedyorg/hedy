@@ -806,6 +806,10 @@ class ConvertToPython_1(Transformer):
         return ''.join([str(c) for c in args])
     def integer(self, args):
         return str(args[0])
+
+    def number(self, args):
+        return str(args[0])
+
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
@@ -829,7 +833,7 @@ class ConvertToPython_1(Transformer):
         if len(args) == 0:
             return self.make_forward(50)
 
-        parameter = int(get_value(args[0]))
+        parameter = int(args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -857,25 +861,14 @@ def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
     return hash_var(name) in all_names
 
-
-def get_value(arg):
-    # TODO: this func compensates for the mixed approach of handling leaf nodes, e.g. text => string and
-    #  integer => Tree('integer', ['5']). Ideally, they will be handled in the same manner
-    if isinstance(arg, Tree):
-        if type(arg.children) is list:
-            return arg.children[0]
-        return arg.children
-    return arg
-
 def process_variable(arg, lookup):
     #processes a variable by hashing and escaping when needed
-    name = get_value(arg)
-    if is_variable(name, lookup):
-        return hash_var(name)
-    elif is_quoted(name): #sometimes kids accidentally quote strings, then we do not want them quoted again
-        return f"{name}"
+    if is_variable(arg, lookup):
+        return hash_var(arg)
+    elif is_quoted(arg): #sometimes kids accidentally quote strings, then we do not want them quoted again
+        return f"{arg}"
     else:
-        return f"'{name}'"
+        return f"'{arg}'"
 
 def process_variable_for_fstring(name, lookup):
     if is_variable(name, lookup):
@@ -960,8 +953,8 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return self.make_forward(50)
 
-        if is_int(get_value(args[0])):
-            parameter = int(get_value(args[0]))
+        if is_int(args[0]):
+            parameter = int(args[0])
         else:
             # if not an int, then it is a variable
             parameter = args[0]
@@ -1016,7 +1009,7 @@ def make_f_string(args, lookup):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + get_value(a) + "'" for a in args[1:]]
+        values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
@@ -1132,7 +1125,7 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                args_new.append("{" + get_value(a) + "}")
+                args_new.append("{" + a.children[0] + "}")
             else:
                 a = a.replace("'", "")  # no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
@@ -1205,7 +1198,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def repeat(self, args):
         all_lines = [indent(x) for x in args[1:]]
-        return "for i in range(int(" + str(get_value(args[0])) + ")):\n" + "\n".join(all_lines)
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1243,8 +1236,8 @@ class ConvertToPython_11(ConvertToPython_10):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({get_value(args[1])}) < int({get_value(args[2])}) else -1
-for {args[0]} in range(int({get_value(args[1])}), int({get_value(args[2])}) + {stepvar_name}, {stepvar_name}):
+        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
+for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
