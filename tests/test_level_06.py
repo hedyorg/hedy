@@ -376,14 +376,11 @@ class TestsLevel6(HedyTester):
       extra_check_function=lambda x: self.run_code(x) == "11"
     )
 
-  # def test_cyclic_var_reference_does_not_give_error(self):
-  #   code = "b is b + 1"
-  #
-  #   expected = "b = int(b) + int(1)"
-  #
-  #   self.multi_level_tester(
-  #     code=code,
-  #     max_level=11,
-  #     expected=expected,
-  #     test_name=self.name()
-  #   )
+  def test_cyclic_var_definition_gives_error(self):
+    code = "b is b + 1"
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.CyclicVariableDefinitionException,
+      test_name=self.name()
+    )

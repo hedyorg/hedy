@@ -274,21 +274,23 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
-  def test_add_string_vars(self):
+  def test_add_3_string_vars(self):
     code = textwrap.dedent("""\
             getal1 is '5'
             getal2 is '6'
-            print 'dat is dan: ' getal1 + getal2""")
+            getal3 is '7'
+            print 'dat is dan: ' getal1 + getal2 + getal3""")
     expected = textwrap.dedent("""\
             getal1 = '5'
             getal2 = '6'
-            print(f'dat is dan: {getal1 + getal2}')""")
+            getal3 = '7'
+            print(f'dat is dan: {getal1 + getal2 + getal3}')""")
 
-    check_output = (lambda x: HedyTester.run_code(x) == 'dat is dan: 56')
+    check_output = (lambda x: HedyTester.run_code(x) == 'dat is dan: 567')
 
     self.multi_level_tester(
       code=code,
-      max_level=17,
+      max_level=12,
       expected=expected,
       extra_check_function=check_output
     )
@@ -624,14 +626,3 @@ class TestsLevel12(HedyTester):
       expected=expected,
       extra_check_function=lambda x: self.run_code(x) == "11"
     )
-
-  # def test_cyclic_var_reference_does_not_give_error(self):
-  #   code = "b is b + 1"
-  #
-  #   expected = "b = b + 1"
-  #
-  #   self.multi_level_tester(
-  #     code=code,
-  #     expected=expected,
-  #     test_name=self.name()
-  #   )
