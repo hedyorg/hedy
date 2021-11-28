@@ -381,6 +381,5 @@ class TestsLevel6(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.CyclicVariableDefinitionException,
-      test_name=self.name()
+      exception=hedy.exceptions.CyclicVariableDefinitionException
     )
