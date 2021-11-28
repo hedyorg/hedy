@@ -776,8 +776,8 @@ export function prompt_unsaved(cb: () => void) {
   modal.confirm(auth.texts['unsaved_changes'], cb);
 }
 
-export function load_quiz(level: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+export function load_quiz(level: string, lang: string) {
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '?lang=' + lang + '"></iframe>');
 }
 
 export function get_trimmed_code() {
