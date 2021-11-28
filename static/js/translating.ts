@@ -30,19 +30,27 @@ function resizeArea(el: JQuery | HTMLElement) {
 }
 
 var VISIBLE_TRANSLATIONS = true;
-const TRANSLATIONS = $('.translated-input').filter((_, el) => el.textLength > 0 && $(el).parent().parent().find('.original-text')[0].textContent !== el.textContent)
+const TRANSLATIONS = $('.translated-input').filter(function(_, el) {
+  return el.textContent !== null &&
+         el.textContent.length > 0 &&
+         $(el).parent().parent().find('.original-text')[0].textContent !== el.textContent
+});
 
 $('#show-hide-missing-translations').click(function() {
     if (VISIBLE_TRANSLATIONS) {
-      TRANSLATIONS.each((_, el) => $(el).parent().parent().hide() );
+      TRANSLATIONS.each(function(_, el) {
+        $(el).parent().parent().hide();
+      });
       $('tr.bg-purple-200').hide();
       VISIBLE_TRANSLATIONS = false;
       $(this)[0].innerText = 'Show all translations';
     } else {
-      TRANSLATIONS.each((_, el) => $(el).parent().parent().show() );
-        $('tr.bg-purple-200').show();
-        VISIBLE_TRANSLATIONS = true;
-        $(this)[0].innerText = 'Show only missing translations';
+      TRANSLATIONS.each(function(_, el) {
+        $(el).parent().parent().show();
+      });
+      $('tr.bg-purple-200').show();
+      VISIBLE_TRANSLATIONS = true;
+      $(this)[0].innerText = 'Show only missing translations';
     }
 })
 
