@@ -5,191 +5,187 @@ questions:
     question_text: "Wat is waar?"
     code: "..."
     mp_choice_options:
-    - "option_text": "In level 4 werkt print anders dan in level 3"
-      "feedback": "print werkt nog hetzelfde"
-    - "option_text": "In level 4 werkt ask anders dan in level 3"
-      "feedback": "ask werkt nog hetzelfde"
-    - "option_text": "In level 4 werken print en ask anders dan in level 3 "
-      "feedback": "Nee hoor, ze werken hetzelfde!"
-    - "option_text": "In level 4 werken print en ask nog hetzelfde als in level 3"
-      "feedback": "Klopt!."
-    correct_answer: "D"
-    hint: "Er is alleen een commando bijgekomen."
+    - "option_text": "In level 4 werkt print anders"
+      "feedback": "Correct, je hebt aanhalingstekens nodig"
+    - "option_text": "In level 4 werkt ask anders dan in level 2"
+      "feedback": "Ask werkt nog hetzelfde"
+    - "option_text": "In level 4 werkt at random anders dan in level 2 "
+      "feedback": "At random werkt nog hetzelfde"
+    - "option_text": "In level 4 werkt alles nog hetzelfde als in level 2"
+      "feedback": "Nee, een commando is anders."
+    correct_answer: "A"
+    hint: "Je hebt vanaf level 4 aanhalingstekens nodig bij een commando."
     question_score: 10
   2:
-    question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als\
-      \ naam?"
-    code: |-
-      naam is ask Hoe heet je?
-      if naam is Hedy print 'leuk' else print 'minder leuk'
+    question_text: "Welk aanhalingsteken gebruik je bij het print commando?"
+    code: "..."
     mp_choice_options:
-    - "option_text": "leuk"
-      "feedback": "Klopt!"
-    - "option_text": "minder leuk"
-      "feedback": "Als de naam Hedy is, zegt Hedy juist 'leuk'"
-    - "option_text": "Hedy "
-      "feedback": "Nee, er staat niet print naam"
-    - "option_text": "Error"
-      "feedback": "Gelukkig niet!"
-    correct_answer: "A"
-    hint: "Als je naam Hedy is, wat wordt er dan geprint..?"
+    -
+      "code": " ` "
+      "feedback": "Dit is het schuine aanhalingsteken, je hebt een rechte nodig."
+    -
+      "code": " ' "
+      "feedback": "Juist!"
+    -
+      "code": " \" "
+      "feedback": "Dit zijn de dubbele aanhalingstekens, je hebt de enkele nodig"
+    -
+      "code": " , "
+      "feedback": "Dit is een komma, je hebt een hoge komma nodig."
+    correct_answer: "B"
+    hint: "Kies het goede aanhalingsteken."
     question_score: 10
   3:
-    question_text: "Wat is het goede wachtwoord?"
-    code: |-
-      wachtwoord is ask Wat is het wachtwoord?
-      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+    question_text: "Waar zijn de aanhanlingstekens goed gebruikt?"
+    code: "..."
     mp_choice_options:
-    - "option_text": "Goed"
-      "feedback": "Goed wordt geprint als je het juiste wachtwoord invult, maar het\
-        \ is niet het wachtwoord"
-    - "option_text": "GEHEIM"
-      "feedback": "Klopt!'"
-    - "option_text": "wachtwoord "
-      "feedback": "het wachtwoord is niet wachtwoord"
-    - "option_text": "ALARM INDRINGER"
-      "feedback": "Dat wordt er geprint als je het foute antwoord intypt!"
-    correct_answer: "B"
-    hint: "if wachtwoord is ... print 'Goed!'"
+    -
+      "code": " print Hoi ik ben Hedy"
+      "feedback": "Vanaf level 4 heb je aanhalingstekens nodig"
+    -
+      "code": " print 'Hoi ik ben Hedy"
+      "feedback": "Er moet ook een aanhalingsteken achter"
+    -
+      "code": " 'print Hoi ik ben Hedy' "
+      "feedback": "Het eerste aanhalingsteken moet na het commando print"
+    -
+      "code": " print 'Hoi ik ben Hedy'"
+      "feedback": "Perfect!"
+    correct_answer: "D"
+    hint: "Er moet een aanhalingsteken voor en een achter de tekst die je wil printen. "
     question_score: 10
   4:
-    question_text: "Wat print Hedy als je een fout wachtwoord intypt?"
-    code: |-
-      wachtwoord is ask Wat is het wachtwoord?
-      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+    question_text: "Welke stelling is waar?"
+    code: "..."
     mp_choice_options:
-    - "option_text": "Goed"
-      "feedback": "Dat wordt geprint bij een goed antwoord, niet bij een foute.."
-    - "option_text": "GEHEIM"
-      "feedback": "Dat is het juiste wachtwoord."
-    - "option_text": "fout "
-      "feedback": "Nee, Hedy print wat anders..."
-    - "option_text": "ALARM! INDRINGER!"
-      "feedback": "Juist!"
-    correct_answer: "D"
-    hint: "Als je een fout wachtwoord intypt slaat je computer alarm!"
+    - "option_text": "Als je een tekst wil printen moeten er dubbele aanhalingstekens\
+        \ voor en na de tekst staan."
+      "feedback": "Enkele aanhalingstekens zijn genoeg"
+    - "option_text": "Als je een tekst wil printen moeten er enkele aanhalingstekens\
+        \ voor en na de tekst staan."
+      "feedback": "Super!"
+    - "option_text": "Als je een vraag wil stellen heb je geen aanhalingstekens nodig"
+      "feedback": "Zowel bij ask als print heb je enkele aanhalingstekens nodig voor\
+        \ en na de tekst"
+    - "option_text": "Je mag zelf kiezen of je aanhalingstekens gebruikt of niet."
+      "feedback": "Helaas is Hedy strenger dan dat."
+    correct_answer: "B"
+    hint: "Je hebt vanaf level 4 aanhalingstekens nodig als je een tekst wil printen."
     question_score: 10
   5:
-    question_text: "Waarom zegt Hedy 'ALARM! INDRINGER!' als je 'geheim' antwoordt\
-      \ op de vraag?"
+    question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige optie\
+      \ te printen?"
     code: |-
-      wachtwoord is ask Wat is het wachtwoord?
-      if wachtwoord is GEHEIM print 'Goed!' else print 'ALARM! INDRINGER!'
+      opties is steen, papier, schaar
+      print 'opties at random'
     mp_choice_options:
-    - "option_text": "Omdat je het in hoofdletters moet typen, dus GEHEIM"
-      "feedback": "Klopt!"
-    - "option_text": "Omdat het wachtwoord 'alarm' is"
-      "feedback": "Nee, dat is niet het wachtwoord."
-    - "option_text": "Omdat het gehijm is, met lange ij. "
-      "feedback": "Nee, zo spel je dat woord niet"
-    - "option_text": "Omdat Hedy een fout maakt"
-      "feedback": "Nee hoor, dat is geen fout!"
-    correct_answer: "A"
-    hint: "De spelling moet precies hetzelfde zijn."
+    -
+      "code": " 'print opties at random'"
+      "feedback": "Een aanhalingsteken moet nooit voor het print commando."
+    -
+      "code": " print 'opties' at random "
+      "feedback": " Opties is een variabele. Je wil niet letterlijk het woord opties\
+        \ printen."
+    -
+      "code": " print opties at random"
+      "feedback": "Heel goed"
+    - "option_text": "Niets, de code is goed!"
+      "feedback": "Kijk goed! Er zit wel een fout in!"
+    correct_answer: "C"
+    hint: "Je wil niet dat er letterlijk 'opties at random' geprint wordt, je wil\
+      \ dat Hedy 'steen' 'papier' of 'schaar' print."
     question_score: 10
   6:
-    question_text: "Welk woord mist op de plek van het vraagteken?"
+    question_text: "Wat zou een goede tweede regel zijn na deze eerste regel?"
     code: |-
-      print 'Hoi ik ben Hedy de voetbalvoorspeller!'
-      print 'Ik kan voorspellen op welke plek jouw club eindigt!'
-      club is ask Voor welke club ben je?
-      if club is ajax print 'Ajax wordt eerste natuurlijk!' ? print 'Helaas jouw club wordt laatste...'
+      prijzen is 1 euro, 100 euro, 1 miljoen euro
     mp_choice_options:
-    - "option_text": ""
-      "code": "if"
-      "feedback": "Nee, if staat vooraan de zin."
-    - "option_text": ""
-      "code": "at random"
-      "feedback": "Nee, je hebt hier else nodig."
-    - "option_text": ""
-      "code": "else"
-      "feedback": "Goed!"
-    - "option_text": ""
-      "code": "print"
-      "feedback": "Er staat al print!"
-    correct_answer: "C"
-    hint: "In level 4 leer je 2 nieuwe commando's if en ...?"
+    -
+      "code": " print 'Jij wint...' prijzen at random"
+      "feedback": "Super! Jij begrijpt het!"
+    -
+      "code": "print Jij wint... 'prijzen at random' "
+      "feedback": "Nu print Hedy letterlijk 'prijzen at random'"
+    -
+      "code": "print Jij wint... prijzen at random"
+      "feedback": " Je hebt wel aanhalingstekens nodig! "
+    -
+      "code": "print 'Jij wint... prijzen at random'"
+      "feedback": "Nu print Hedy letterlijk 'prijzen at random'"
+    correct_answer: "A"
+    hint: "Bedenk goed wat je wil dat Hedy letterlijk print, en wat een variabele\
+      \ is."
     question_score: 10
   7:
-    question_text: "Welk woord mist op de plek van het vraagteken?"
+    question_text: "Wat is er mis met deze code?"
     code: |-
-      print 'Ik kan voorspellen of jij miljonair wordt!'
-      naam is ask Hoe heet jij?
-      if naam is Hedy print 'Jij wordt miljonair!' else ? 'Helaas, geen miljoen voor jou.'
+      vraag is ask Wat wil je weten?
+      antwoorden is ja, nee, misschien
+      print antwoorden at random
     mp_choice_options:
-    - "option_text": ""
-      "code": "if"
-      "feedback": "Nee, if staat vooraan de zin."
-    - "option_text": ""
-      "code": "at random"
-      "feedback": "Nee, die heb je hier niet nodig."
-    - "option_text": ""
-      "code": "else"
-      "feedback": "Er staat al else"
-    - "option_text": ""
-      "code": "print"
-      "feedback": "Top!"
-    correct_answer: "D"
-    hint: "Na else volgt nog een print"
+    - "option_text": "Er missen aanhalingstekens in regel 1"
+      "feedback": "Juist, bij ask heb je aanhalingstekens nodig"
+    - "option_text": "Er missen aanhalingstekens in regel 2"
+      "feedback": "een variabele heeft geen aanhalingstekens nodig"
+    - "option_text": "Er missen aanhalingstekens in regel 3"
+      "feedback": " Je wil niet dat er letterlijk 'antwoorden at random' worst geprint,\
+        \ dus geen aanhalingstekens hier!"
+    - "option_text": "Niets! Deze code is goed!"
+      "feedback": "Kijk goed! Er zit wel een fout in!"
+    correct_answer: "A"
+    hint: "Bekijk regel voor regel of er aanhalingstekens nodig zijn."
     question_score: 10
   8:
-    question_text: "Welk woord mist op de plek van het vraagteken?"
+    question_text: "Wat zou een goede volgende regel zijn voor deze code?"
     code: |-
-      dier is ask Wat is je lievelingsdier?
-      if ? is pinguin print 'Dat is ook mijn lievelingsdier!' else print 'Ik houd meer van pinguins.'
+      print 'Welkom bij de prijzenshow!'
+      print 'Voor je staan 3 deuren'
+      deur is ask 'Welke deur kies je?'
     mp_choice_options:
-    - "option_text": ""
-      "code": "lievelingsdier"
-      "feedback": "Dat is niet de naam van de variabele."
-    - "option_text": ""
-      "code": "dier"
-      "feedback": "Knap hoor!"
-    - "option_text": ""
-      "code": "if"
-      "feedback": "Er staat al if"
-    - "option_text": ""
-      "code": "print"
-      "feedback": "Nee, dat is hem niet.."
-    correct_answer: "B"
-    hint: "Wat is de naam van de variabele?"
+    - "option_text": "print Dus jij kiest deur deur"
+      "feedback": "Er zijn aanhalingstekens nodig in deze zin"
+    - "option_text": "print 'Dus jij kiest ' deur deur"
+      "feedback": "Als de speler nu deur 3 kiest, print Hedy: Dus jij kiest 3 3"
+    - "option_text": "print 'Dus jij kiest deur ' deur"
+      "feedback": "Super! "
+    - "option_text": "print 'Dus jij kiest deur deur'"
+      "feedback": "Hedy print nu letterlijk: Dus jij kiest deur deur"
+    correct_answer: "C"
+    hint: "Je wil dat het tweede woord deur vervangen wordt door het nummertje dat\
+      \ de speler kiest. Dus het tweede woord deur moet buiten de aanhalingstekens"
     question_score: 10
   9:
-    question_text: "Met welke deur ontsnap je uit dit spookhuis?"
+    question_text: "Wat zou er niet op het uitvoerscherm kunnen verschijnen?"
     code: |-
-      print 'Ontsnap uit het spookhuis!'
-      print 'Voor je staan 3 deuren'
-      deur is ask Welke deur kies jij?
-      monsters is vampier, weerwolf, reuzespin
-      if deur is 2 print 'Joepie! Je ontsnapt!' else print 'Je wordt opgegeten door een... ' monsters at random
+      voetbalclubs is Ajax, FC Utrecht, PSV, Feyenoord, FC Twente, sc Heerenveen
+      print 'De beste club is..' voetbalclubs at random
     mp_choice_options:
-    - "option_text": "1"
-      "feedback": "Helaas... Jij wordt opgepeuzeld..."
-    - "option_text": "2"
-      "feedback": "Super! Ontsnapt!"
-    - "option_text": "3"
-      "feedback": "Helaas... Jij wordt opgepeuzeld..."
-    - "option_text": "Het is een valstrik, je wordt altijd opgegeten!"
-      "feedback": "Gelukkig niet!"
-    correct_answer: "B"
-    hint: "Bij een van de deuren kom je geen monsters tegen..."
+    - "option_text": "De beste club is... Ajax"
+      "feedback": "Dit zou wel kunnen"
+    - "option_text": "De beste club is... PSV"
+      "feedback": "Dit zou wel kunnen"
+    - "option_text": "De beste club is... Feyenoord"
+      "feedback": "Dit zou wel kunnen"
+    - "option_text": "De beste club is... AZ"
+      "feedback": "Klopt! Die staat niet in het rijtje!"
+    correct_answer: "D"
+    hint: "Kijk goed waar Hedy uit kan kiezen"
     question_score: 10
   10:
-    question_text: "Wat voor monster eet je op als je deur 1 kiest?"
+    question_text: "Wat is waar?"
     code: |-
-      print 'Ontsnap uit het spookhuis!'
-      print 'Voor je staan 3 deuren'
-      deur is ask Welke deur kies jij?
-      monsters is vampier, weerwolf, reuzespin
-      if deur is 2 print 'Joepie! je ontsnapt!' else print 'Je wordt opgegeten door een... ' monsters at random
+      mensen is mama, papa, Emma, Sophie
+      print De afwas wordt gedaan door...
+      print mensen at random
     mp_choice_options:
-    - "option_text": "Hedy kiest steeds een random monster dat je opeet."
-      "feedback": "Geweldig!"
-    - "option_text": "vampier"
-      "feedback": "Niet altijd..."
-    - "option_text": "weerwolf"
-      "feedback": "Niet altijd..."
-    - "option_text": "reuzespin"
-      "feedback": "Niet altijd..."
-    correct_answer: "A"
-    hint: "kijk goed naar de laatste drie woorden: monsters at random"
+    - "option_text": "Er missen aanhalingstekens in regel 1"
+      "feedback": "Dit rijtje heeft geen aanhalingstekens nodig"
+    - "option_text": "Er missen aanhalingstekens in regel 2"
+      "feedback": "Correct!"
+    - "option_text": "Er missen aanhalingstekens in regel 3"
+      "feedback": "Deze regel hoeft niet letterlijk geprint en dus geen aanhalingstekens"
+    - "option_text": "Niets deze code is goed!"
+      "feedback": "Helaas er missen toch ergens "
+    correct_answer: "B"
+    hint: "Er missen aanhalingstekens bij een print commando."
     question_score: 10
