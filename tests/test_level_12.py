@@ -671,14 +671,3 @@ class TestsLevel12(HedyTester):
       extra_check_function=lambda x: self.run_code(x) == "11",
       test_name=self.name()
     )
-
-  # def test_cyclic_var_reference_does_not_give_error(self):
-  #   code = "b is b + 1"
-  #
-  #   expected = "b = b + 1"
-  #
-  #   self.multi_level_tester(
-  #     code=code,
-  #     expected=expected,
-  #     test_name=self.name()
-  #   )

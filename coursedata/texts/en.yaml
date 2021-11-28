@@ -73,6 +73,7 @@ HedyErrorMessages:
     Unquoted Text: "Be careful. If you ask or print something the text should start and finish with a quotation mark. You forgot one somewhere."
     Unquoted Assignment: " From this level, you need to place texts to the right of the `is` between quotes. You forgot that for the text {text}."
     Var Undefined: "You tried to print the variable {name}, but you did not set it. It is also possible that you were trying to print the word {name} but forgot quotation marks."
+    Cyclic Var Definition: "The name {variable} needs to be set before you can use it on the right-hand side of the is command"
     Lonely Echo: "You used an echo before an ask, or an echo without an ask. First ask for input, then echo."
     Unexpected Indentation: "You used too many spaces in line {line_number}. You used {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces more than the line before."
     No Indentation: "You used too few spaces in line {line_number}. You used {leading_spaces} spaces, which is not enough. Start every new block with {indent_size} spaces more than the line before."

@@ -259,8 +259,7 @@ class LookupEntry:
     tree: Tree
     skip_hashing: bool
     type_: str = None
-    inferred: bool = False  # types of lookup entries are inferred on demand
-    inferring: bool = False  # used to detect cyclic type inference
+    currently_inferring: bool = False  # used to detect cyclic type inference
 
 
 class TypedTree(Tree):
@@ -578,9 +577,8 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == hash_var(name) and not entry.inferred:
+            if entry.name == hash_var(name) and not entry.type_:
                 entry.type_ = inferred_type
-                entry.inferred = True
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
     #  be inferred. However, there are valid cases in which the lookup entries will be accessed before their type
@@ -591,19 +589,20 @@ class TypeValidator(Transformer):
     #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
     #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
-        # TODO: we should not just take the first match, take into account var reassignments
         matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
         if matches:
-            if not matches[0].inferred:
-                if matches[0].inferring:
-                    # TODO we know at this point there is a cyclic var reference, e.g. b = b + 1, for now do not raise
-                    matches[0].inferring = False
-                    matches[0].type_ = HedyType.any
-                    matches[0].inferred = True
+            # TODO: we should not just take the first match, take into account var reassignments
+            match = matches[0]
+            if not match.type_:
+                if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
+                    raise exceptions.CyclicVariableDefinitionException(variable=match.name)
                 else:
-                    matches[0].inferring = True
-                    TypeValidator(self.lookup, self.level).transform(matches[0].tree)
-                    matches[0].inferring = False
+                    match.currently_inferring = True
+                    try:
+                        TypeValidator(self.lookup, self.level).transform(match.tree)
+                    except VisitError as ex:
+                        raise ex.orig_exc
+                    match.currently_inferring = False
 
             return True, self.lookup_type_fallback(matches[0].type_)
         return False, None
