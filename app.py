@@ -1,10 +1,10 @@
+# coding=utf-8
 import sys
 from website.yaml_file import YamlFile
 if(sys.version_info.major < 3 or sys.version_info.minor < 6):
     print('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 
-# coding=utf-8
 import datetime
 import collections
 import hedy
@@ -796,7 +796,7 @@ def index(level, step):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures, restrictions = get_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
+    adventures, restrictions = DATABASE.get_student_restrictions(load_adventures_per_level(g.lang, level), current_user()['username'], level)
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
@@ -814,45 +814,6 @@ def index(level, step):
         restrictions=restrictions,
         loaded_program=loaded_program,
         adventure_name=adventure_name)
-
-
-def get_restrictions(adventures, user, level):
-    restrictions = {}
-    found_restrictions = False
-    if user:
-        student_classes = DATABASE.get_student_classes(user)
-        if student_classes:
-            level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level)
-            if level_preferences:
-                found_restrictions = True
-                display_adventures = []
-                for adventure in adventures:
-                    if adventure['short_name'] in level_preferences['adventures']:
-                        display_adventures.append(adventure)
-                restrictions['amount_next_level'] = level_preferences['progress']
-                restrictions['example_programs'] = level_preferences['example_programs']
-                restrictions['hide_level'] = level_preferences['hide']
-                prev_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level - 1)
-                next_level_preferences = DATABASE.get_level_preferences_class(student_classes[0]['id'], level + 1)
-                print(next_level_preferences)
-                if prev_level_preferences:
-                    restrictions['hide_prev_level'] = prev_level_preferences['hide']
-                else:
-                    restrictions['hide_prev_level'] = False
-                if next_level_preferences:
-                    restrictions['hide_next_level'] = next_level_preferences['hide']
-                else:
-                    restrictions['hide_next_level'] = False
-
-    if not found_restrictions:
-        display_adventures = adventures
-        restrictions['amount_next_level'] = 0
-        restrictions['example_programs'] = True
-        restrictions['hide_level'] = False
-        restrictions['hide_prev_level'] = False
-        restrictions['hide_next_level'] = False
-
-    return display_adventures, restrictions
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 def view_program(id):
@@ -881,10 +842,10 @@ def view_program(id):
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
     arguments_dict['menu'] = True
-    arguments_dict['auth'] = TRANSLATIONS.get_translations(lang, 'Auth')
+    arguments_dict['auth'] = TRANSLATIONS.get_translations(g.lang, 'Auth')
     arguments_dict['username'] = user.get('username', None)
     arguments_dict['is_teacher'] = is_teacher(user)
-    arguments_dict.update(**TRANSLATIONS.get_translations(lang, 'ui'))
+    arguments_dict.update(**TRANSLATIONS.get_translations(g.lang, 'ui'))
 
     return render_template("view-program-page.html", **arguments_dict)
 
@@ -1162,7 +1123,7 @@ def share_unshare_program(user):
     if not isinstance(body.get('id'), str):
         return 'id must be a string', 400
     if not isinstance(body.get('public'), bool):
-        return 'public must be a string', 400
+        return 'public must be a boolean', 400
 
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
@@ -1201,7 +1162,7 @@ def translate_fromto(source, target):
       translating.struct_to_sections(source_adventures, target_adventures)))
 
     files.append(translating.TranslatableFile(
-      'Keywords',
+      'Keywords (make sure there are no duplicate translations of keywords)',
       f'keywords/{target}.yaml',
       translating.struct_to_sections(source_keywords, target_keywords)))
 
