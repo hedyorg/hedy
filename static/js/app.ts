@@ -185,15 +185,19 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
-export function correct_commands(level: any, code: string) {
-  var necessary_commands = ErrorMessages['Necessary_commands'][level];
-  
-  for ( var i = 0; i < necessary_commands.length; i++ ) {
-    if ( code.includes(necessary_commands[i]) ) {
-      return true
+export function newly_learned_subjects(level: any, code: string) {
+  try {
+    var necessary_commands = ErrorMessages['New_subjects'][level];
+    for ( var i = 0; i < necessary_commands.length; i++ ) {
+      if ( code.includes(necessary_commands[i]) ) {
+        return true
+      }
     }
+    return false
   }
-  return false
+  catch(err) {
+    return true
+  }
 }
 
 export function runit(level: string, lang: string, cb: () => void) {
@@ -238,18 +242,19 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.Code){
-        if ( correct_commands(level, code) ) {
+        if ( newly_learned_subjects(level, code) ) {
           console.log("success!");
           var allsuccessmessages = ErrorMessages['Transpile_success'];
-          if ( typeof allsuccessmessages === 'object' ) {
-            var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-            success.show(allsuccessmessages[randomnum]);
-          }
-          else {
-            success.show(allsuccessmessages);
-          }        
+          if ( typeof allsuccessmessages === 'object' ) { //
+            var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length); //
+            success.show(allsuccessmessages[randomnum]); //
+          } //
+          else { //
+            success.show(allsuccessmessages); //
+          } //
         }
         else {
+          console.log("incomplete!")
           success.show(ErrorMessages['Transpile_incomplete']);
         }
       }
