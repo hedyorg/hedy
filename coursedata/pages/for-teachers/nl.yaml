@@ -104,3 +104,180 @@ sections:
                     Van fouten kun je leren en dat geldt al helemaal bij programmeren!
                     Fouten maken is onvermijdelijk en helemaal niet erg, maar het kan als leerkracht soms nog knap lastig zijn om foutjes van leerlingen op te sporen en op te lossen.
                     Vooral als de codes door de levels heen almaar langer worden... Daarom hebben wij hier per level een lijst gemaakt van de meest gemaakte fouten door leerlingen en de oplossingen.
+            level_1:
+                title: "Veelgemaakte fouten in level 1"
+                text: |
+                    In level 1 zijn dit veelgemaakte fouten door de leerlingen:
+
+                    - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print. Los dit op door het juiste commando vooraan de regel te typen.
+                    - Leerlingen typen de commando's met een hoofdletter, waardoor de commando's niet meer werken. Commando's moeten getypt worden in kleine letters.
+                    - Soms krijgen de leerlingen meldingen van de browser dat Hedy niet werkt. De oplossing is om de pagina opnieuw te laden.
+
+                    Tekenturtle:
+                    - De leerlingen laten het pijltje soms uit beeld lopen, waardoor ze denken dat de code het niet doet. Gebruik in dat geval kleinere getallen.
+                    - De leerlingen weten niet hoe de turtle achteruit kan lopen. Dit kan door de turtle mingetallen te laten lopen, bijvoorbeeld -100.
+            level_2:
+                title: "Veelgemaakte fouten in level 2"
+                text: |
+                    In level 2 zijn dit veelgemaakte fouten door de leerlingen:
+
+                    - Leerlingen maken spelfouten in de commando's.
+                    - Leerlingen vergeten bij ask de variabele eerst te noemen en gebruiken ask hetzelfde als in level 1. Vanaf level 2 heeft een ask commando altijd eerst een variabelenaam en een is nodig.
+                    Bijvoorbeeld `ask Hoe heet je?` oplossing:  `naam is ask Hoe heet je?`
+                    - Leerlingen vergeten de commando's te typen en schrijven bijvoorbeeld code's zonder te beginnen met print.
+                    - Leerlingen gebruiken het commando echo, maar dat werkt alleen in level 1. In level 2 kun je het gegeven antwoord herhalen door de variabele te gebruiken.
+                    - Leerlingen gebruiken geen komma's bij het maken van een opsomming.
+                    Bijvoorbeeld: `dieren is hond kat` oplossing: `dieren is hond, kat`
+                    - Leerlingen gebruiken komma's na een printcommando, dit kan niet.
+                    Bijvoorbeeld: `print Hallo, ik ben Hedy.` oplossing: `print Hallo ik ben Hedy`
+                    - Leerlingen gebruiken de naam van hun variabele ook als woord in een print commando, maar dat kan pas vanaf level 3.
+                    Bijvoorbeeld:
+                    <pre class="no-copy-button" id="2">
+                    dier is hond, kat, koe
+                    print Het leukste dier is…
+                    print dier at random
+                    </pre>
+                    In regel 2 van deze code staat het woord dier, terwijl dat ook de naam van de variabele is. Los dit op door de variabele een andere naam te geven, bijvoorbeeld:
+                    <pre class="no-copy-button" id="2">
+                    dieren is hond, kat, koe
+                    print Het leukste dier is...
+                    print dieren at random
+                    </pre>
+            level_3:
+                title: "Veelgemaakte fouten in level 3"
+                text: |
+                    In level 3 zijn dit veelgemaakte fouten door de leerlingen:
+
+                    - Dezelfde fouten als bij level 2.
+                    - Leerlingen vergeten de aanhalingstekens aan beide kanten te zetten.
+                    Bijvoorbeeld: `print 'Hallo ` Oplossing: `print 'Hallo'`
+                    - Leerlingen gebruiken de verkeerde aanhalingstekens. Het correcte aanhalingsteken is ' deze vindt je op de meeste toetsenborden naast de enterknop. Andere aanhalingstekens zoals de dubbele aanhalingstekens &quot; of het schuine aanhalingsteken ` (op de meeste toetsenborden linksboven samen met ~).
+                    - Leerlingen vergeten dat ook bij ask aanhalingstekens gebruikt moeten worden.
+                    Bijvoorbeeld: `naam is ask Hoe heet je?` oplossing `naam is ask 'Hoe heet je?'`
+                    - Leerlingen gebruiken hoge komma's na een print commando. Bijvoorbeeld:
+                    <pre class="no-copy-button" id="3">
+                    print 'Er lopen twee oma's door het park'
+                    </pre>
+                    Oplossing: Gebruik de andere hoge komma (naast de 1 toets met het ~)
+                    <pre class="no-copy-button" id="3">
+                    print 'Er lopen twee oma`s door het park'
+                    </pre>
+                    Oplossing 2: Gebruik geen hoge komma en spel het woord fout.
+                    <pre class="no-copy-button" id="3">
+                    print 'Er lopen twee omas door het park'
+                    </pre>
+            level_4:
+                title: "Veelgemaakte fouten in level 4"
+                text: |
+                    In level 4 zijn dit veelgemaakte fouten door de leerlingen:
+
+                    - Fout: Leerlingen vergeten het woord print bij een if commando.
+
+                    <pre class="no-copy-button" id="4">
+                    if naam is Hedy 'leuk'
+                    else 'minder leuk!'
+                    </pre>
+                    Oplossing: gebruik twee keer een print commando na een if commando
+                    <pre class="no-copy-button" id="4">
+                    if naam is Hedy print 'leuk'
+                    else print 'minder leuk!'
+                    </pre>
+
+                    - Fout: Leerlingen gebruiken twee verschillende namen voor dezelfde variabele.
+                    <pre class="no-copy-button" id="4">
+                    paard is ask 'Hoe heet jouw paard?'
+                    if naam is Bonfire print 'leuk'
+                    else print 'minder leuk!'
+                    </pre>
+
+                    Oplossing: Gebruik altijd dezelfde naam voor een variabele. Controleer ook of de variabelenaam enkelvoud of meervoud is, daar lees je gemakkelijk overheen (antwoord/antwoorden).
+                    <pre class="no-copy-button" id="4">
+                    paard is ask 'Hoe heet jouw paard?'
+                    if paard is Bonfire print 'leuk'
+                    else print 'minder leuk!'
+                    </pre>
+
+                    - Fout: Leerlingen vergeten beide aanhalingstekens bij de print commando's.
+                    <pre class="no-copy-button" id="4">
+                    if naam is Hedy print leuk
+                    else print 'minder leuk!
+                    </pre>
+                    Oplossing: Gebruik altijd twee aanhalingstekens per printcommando, een vooraan en een achteraan.
+                    <pre class="no-copy-button" id="4">
+                    if naam is Hedy print 'leuk'
+                    else print 'minder leuk!'
+                    </pre>
+
+                    - Fout: Leerlingen gebruiken aanhalingstekens rond de naam van de variabele.
+                    <pre class="no-copy-button" id="4">
+                    if 'naam' is 'Hedy' print 'leuk'
+                    else print 'minder leuk!'
+                    </pre>
+                    Oplossing: rond een variabele moeten geen aanhalingstekens.
+                    <pre class="no-copy-button" id="4">
+                    if naam is Hedy print 'leuk'
+                    else print 'minder leuk!'
+                    </pre>
+
+                    - Fout: Leerlingen geven variabelen namen met meerdere woorden.
+                    <pre class="no-copy-button" id="4">
+                    gekozen deur is ask 'Welke deur kies jij?'
+                    </pre>
+                    Oplossing: Een variabelenaam mag maar een woord zijn.
+                    <pre class="no-copy-button" id="4">
+                    gekozendeur is ask 'Welke deur kies jij?'
+                    </pre>
+
+                    - Fout: Leerlingen willen dat bij de if meerdere antwoorden goed zijn.
+                    <pre class="no-copy-button" id="4">
+                    if naam is Jesse, David, Souf print 'jij bent grappig' else print 'jij bent niet grappig'
+                    </pre>
+                    Oplossing: Dit mag helaas niet, je mag maar een naam kiezen per if commando. Je kunt wel meerdere if commando's toevoegen zoals het voorbeeld hieronder:
+                    <pre class="no-copy-button" id="4">
+                    naam is ask hoe heet jij?
+
+                    if naam is Jesse print 'leuk'
+
+                    if naam is David print 'leuk'
+
+                    if naam is Souf print 'leuk'
+                    </pre>
+                    Alternatieve oplossing: Je kunt ook een lijstje maken met vrienden en Hedy laten controleren of het antwoord in het lijstje staat met in.
+                    <pre class="no-copy-button" id="4">
+                    vrienden is Jesse, David, Souf
+                    naam is ask 'Wie ben jij?'
+                    if naam in vrienden print 'leuk'
+                    else print 'minder leuk'
+                    </pre>
+                    - Fout: De leerlingen vullen bij ask hetzelfde in als bij de variabelenaam, dus de variabele wordt de zelfde waarde als de variabelenaam. In het voorbeeld hieronder was bijvoorbeeld het wachtwoord 'wachtwoord'
+                    <pre class="no-copy-button" id="4">
+                    wachtwoord is ask 'Wat is het wachtwoord?'
+                    if wachtwoord is wachtwoord print 'Je mag er door!'
+                    else print 'Verboden toegang!'
+                    </pre>
+                    Oplossing: Kies een andere naam voor je variabele
+                    <pre class="no-copy-button" id="4">
+                    geheimwachtwoord is ask 'Wat is het wachtwoord?'
+                    if geheimwachtwoord is wachtwoord print 'Je mag er door!' else print 'Verboden toegang!'
+                    </pre>
+
+                    - Fout: Leerlingen gebruiken hoge komma's na een print commando.
+                    <pre class="no-copy-button" id="4">
+                    print 'Er lopen twee oma's door het park'
+                    </pre>
+                    Oplossing: Gebruik de andere hoge komma (naast de 1 toets met het ~)
+                    <pre class="no-copy-button" id="4">
+                    print 'Er lopen twee oma`s door het park'
+                    </pre>
+                    Oplossing 2: Gebruik geen hoge komma en spel het woord fout.
+                    <pre class="no-copy-button" id="4">
+                    print 'Er lopen twee omas door het park'
+                    </pre>
+            level_5:
+                title: "Veelgemaakte fouten in level 5"
+                text: |
+                    In level 5 zijn dit veelgemaakte fouten door de leerlingen:
+
+                    - Dezelfde fouten als in level 4 (zie level 4)
+                    - De leerlingen vergeten vaak een woord in het commando: repeat 3 times print. Voornamelijk het woord 'times' of het woord 'print' worden vaak vergeten.
+                    - Het woord repeat wordt vaak fout gespeld (bijvoorbeeld, repeet, repaet of repeate).
