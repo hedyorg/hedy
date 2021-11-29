@@ -19,8 +19,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   # issue #745
@@ -32,8 +31,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=14,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_print_list_access(self):
@@ -48,9 +46,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=14,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
 
   # ask tests
@@ -76,9 +72,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_ask_with_list_var(self):
@@ -100,9 +94,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=14,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_ask_with_string_var(self):
@@ -124,9 +116,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   @parameterized.expand(['10', '10.0'])
@@ -149,9 +139,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_ask_with_list_gives_type_error(self):
@@ -162,8 +150,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=14,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_if_in_list_with_string_var_gives_type_error(self):
@@ -174,8 +161,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=16,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_list_gives_error(self):
@@ -186,8 +172,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=15,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_incompatible_types_gives_error(self):
@@ -199,8 +184,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=16,
       code=code,
-      exception=hedy.exceptions.InvalidTypeCombinationException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidTypeCombinationException
     )
 
   # new calculations
@@ -213,9 +197,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_float_addition_directly(self):
@@ -227,9 +209,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_float_addition_with_string(self):
@@ -241,9 +221,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_float_addition_in_var(self):
@@ -258,9 +236,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_float_addition_with_var(self):
@@ -277,9 +253,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_store_calc_in_var(self):
@@ -297,9 +271,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_add_3_string_vars(self):
@@ -320,8 +292,7 @@ class TestsLevel12(HedyTester):
       code=code,
       max_level=12,
       expected=expected,
-      extra_check_function=check_output,
-      test_name=self.name()
+      extra_check_function=check_output
     )
 
   def test_add_int_vars(self):
@@ -340,8 +311,7 @@ class TestsLevel12(HedyTester):
       code=code,
       max_level=17,
       expected=expected,
-      extra_check_function=check_output,
-      test_name=self.name()
+      extra_check_function=check_output
     )
 
   def test_assign_string_with_quotes(self):
@@ -354,9 +324,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_assign_string_with_quotes_and_string_value(self):
@@ -369,9 +337,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_print_multiple_calcs(self):
@@ -386,9 +352,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_calc_string_and_int_gives_type_error(self):
@@ -398,8 +362,7 @@ class TestsLevel12(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidTypeCombinationException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidTypeCombinationException
     )
 
   def test_print_chained_assignments(self):
@@ -416,9 +379,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_assign_calc(self):
@@ -433,9 +394,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   # def test_access_variable_before_definition(self):
@@ -596,8 +555,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=15,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
@@ -626,8 +584,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       max_level=15,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   # negative tests
@@ -639,8 +596,7 @@ class TestsLevel12(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      exception=hedy.exceptions.UnquotedAssignTextException,
-      test_name=self.name()
+      exception=hedy.exceptions.UnquotedAssignTextException
     )
   
   def test_list_creation(self):
@@ -668,6 +624,5 @@ class TestsLevel12(HedyTester):
       code=code,
       max_level=17,
       expected=expected,
-      extra_check_function=lambda x: self.run_code(x) == "11",
-      test_name=self.name()
+      extra_check_function=lambda x: self.run_code(x) == "11"
     )

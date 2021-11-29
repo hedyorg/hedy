@@ -205,8 +205,7 @@ class TestsLevel2(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
   def test_sleep_without_number(self):
     code = "sleep"
@@ -214,8 +213,7 @@ class TestsLevel2(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   #turn tests
@@ -230,8 +228,7 @@ class TestsLevel2(HedyTester):
       max_level=self.max_turtle_level,
       code=code,
       expected=expected,
-      extra_check_function=self.is_turtle(),
-      test_name=self.name()
+      extra_check_function=self.is_turtle()
     )
 
   def test_turn_with_string_var_gives_type_error(self):
@@ -241,8 +238,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   @parameterized.expand(['left', 'right'])
@@ -251,8 +247,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   # issue #792
@@ -260,8 +255,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code="turn right 90",
-      exception=hedy.exceptions.InvalidArgumentException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentException
     )
 
   #forward tests
@@ -277,8 +271,7 @@ class TestsLevel2(HedyTester):
       max_level=self.max_turtle_level,
       code=code,
       expected=expected,
-      extra_check_function=self.is_turtle(),
-      test_name=self.name()
+      extra_check_function=self.is_turtle()
     )
 
   def test_forward_with_string_variable_gives_type_error(self):
@@ -288,8 +281,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
 
@@ -405,8 +397,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=17,
       code="name is ask",
-      exception=hedy.exceptions.IncompleteCommandException,
-      test_name=self.name()
+      exception=hedy.exceptions.IncompleteCommandException
     )
 
   def test_ask_level_2(self):
@@ -415,8 +406,7 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=2,
-      exception=hedy.exceptions.WrongLevelException,
-      test_name=self.name()
+      exception=hedy.exceptions.WrongLevelException
     )
 
   def test_chained_assignments(self):
@@ -432,7 +422,5 @@ class TestsLevel2(HedyTester):
     self.multi_level_tester(
       max_level=3,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )

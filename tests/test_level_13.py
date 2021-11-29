@@ -35,9 +35,7 @@ class TestsLevel13(HedyTester):
     self.multi_level_tester(
       max_level=16,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_or(self):
@@ -51,9 +49,7 @@ class TestsLevel13(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
 

@@ -124,8 +124,7 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       max_level=17,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_allow_space_before_colon(self):
@@ -147,8 +146,7 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_if_under_else_in_for(self):
@@ -235,8 +233,7 @@ class TestsLevel17(HedyTester):
         a is 1""")
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_list_gives_error(self):
@@ -246,8 +243,7 @@ class TestsLevel17(HedyTester):
           a is 1""")
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_incompatible_types_gives_error(self):
@@ -258,8 +254,7 @@ class TestsLevel17(HedyTester):
       c is 1""")
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidTypeCombinationException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidTypeCombinationException
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -294,6 +289,5 @@ class TestsLevel17(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
