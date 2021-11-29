@@ -21,7 +21,7 @@
   <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
 </div>
 <div class="w-full mt-4">
-    <h2>{{ texts['title'] }}</h2>
+    <h2 class="text-center">{{ texts['title'] }}</h2>
     <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
     {% for section_key, section in texts['sections'].items() %}
         <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection('{{section_key}}')">{{section.title}}</button>
