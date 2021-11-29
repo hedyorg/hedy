@@ -23,10 +23,11 @@
 <div class="w-full text-center mt-4">
 <h2>{{ texts['title'] }}</h2>
 {% for section_key, section in texts['sections'].items() %}
-    <h3>{{ section['title'] }}</h3>
-    <p>
-        {{ section['text'] }}
-    </p>
+    <h3>{{ section.title }}</h3>
+    {% for subsection_key, subsection in section['text'].items() %}
+        <h4>{{ subsection['title'] }}</h4>
+        <p>{{ subsection['text'] }}</p>
+    {% endfor %}
 {% endfor %}
 </div>
 
