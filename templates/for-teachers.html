@@ -21,8 +21,10 @@
   <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
 </div>
 <div class="w-full text-center mt-4">
-<h2>Hedy Docs</h2>
-{{ texts['text1'] }}
+<h2>{{ texts['title'] }}</h2>
+{% for section in texts['sections'] %}
+Test<br><br>
+{% endfor %}
 </div>
 
 <script>

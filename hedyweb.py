@@ -31,7 +31,7 @@ class Translations:
     return d
 
   def get_page_translations(self, language, page):
-    text_files = glob.glob('coursedata/pages/' + page + '*.yaml')
+    text_files = glob.glob('coursedata/pages/' + page + '/*.yaml')
     texts = {}
     for file in text_files:
       lang = path.splitext(path.basename(file))[0]
