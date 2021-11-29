@@ -83,9 +83,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_identifies_backtick_inside_conditional(self):
@@ -173,9 +171,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_print_if_else_with_line_break_after_condition(self):
     # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
@@ -197,9 +193,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_if_else_newline_list_assigment_print(self):
     # line breaks after conditional should be allowed in if-elses until level 7 when we start with indentation
@@ -222,9 +216,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
 
 
@@ -248,9 +240,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_print_if_linebreak_statement(self):
     # Breaking an if statement and its following statement should be
@@ -273,9 +263,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_print_if_assign(self):
     code = textwrap.dedent("""\
@@ -334,8 +322,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=7,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_list_gives_error(self):
@@ -345,8 +332,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=7,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   #negative tests
@@ -375,8 +361,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      exception=hedy.exceptions.InvalidCommandException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidCommandException
     )
 
     #we don't have a function now for testing more exceptoion logic
@@ -396,8 +381,7 @@ class TestsLevel5(HedyTester):
     self.multi_level_tester(
       max_level=4,
       code=code,
-      exception=hedy.exceptions.UnquotedTextException,
-      test_name=self.name()
+      exception=hedy.exceptions.UnquotedTextException
     )
 
   # def test_list_find_issue(self):

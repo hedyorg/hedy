@@ -40,9 +40,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=10,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_print_two_spaces(self):
     code = "print        'hallo!'"
@@ -53,9 +51,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_print_with_slashes(self):
     code = "print 'Welcome to \\'"
@@ -83,9 +79,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_ask_Spanish(self):
@@ -96,9 +90,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
   def test_ask_without_quotes(self):
     code = textwrap.dedent("""
@@ -123,8 +115,7 @@ class TestsLevel4(HedyTester):
         max_level=10,
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
     )
 
   def test_ask_with_list_gives_type_error(self):
@@ -135,8 +126,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
         max_level=11,
         code=code,
-        exception=hedy.exceptions.InvalidArgumentTypeException,
-        test_name=self.name()
+        exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_ask_with_string_var(self):
@@ -152,8 +142,7 @@ class TestsLevel4(HedyTester):
         max_level=10,
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
     )
   def test_ask_with_integer_var(self):
     code = textwrap.dedent("""\
@@ -168,8 +157,7 @@ class TestsLevel4(HedyTester):
         max_level=10,
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
     )
 
   # is - assign tests
@@ -232,8 +220,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
@@ -255,8 +242,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
 
@@ -357,8 +343,7 @@ class TestsLevel4(HedyTester):
       max_level=self.max_turtle_level,
       code=code,
       expected=expected,
-      extra_check_function=self.is_turtle(),
-      test_name=self.name()
+      extra_check_function=self.is_turtle()
     )
 
 
@@ -371,8 +356,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.UndefinedVarException,
-      max_level=10,
-      test_name=self.name()
+      max_level=10
     )
 
     # deze extra check functie kan nu niet mee omdat die altijd op result werkt
@@ -405,7 +389,6 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=4,
-      test_name=self.name(),
       exception=hedy.exceptions.UndefinedVarException,
     )
   def test_print_Spanish(self):
@@ -417,9 +400,7 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=11,
-      test_name=self.name(),
-      expected=expected,
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
 
   #assorti
@@ -441,7 +422,5 @@ class TestsLevel4(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )

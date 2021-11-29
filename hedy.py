@@ -174,12 +174,12 @@ def hash_needed(name):
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
+    name = name.name if type(name) is LookupEntry else name
     if hash_needed(name):
         # hash "illegal" var names
         # being reservered keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
         # prepend with v for when hash starts with a number
-
         hash_object = hashlib.md5(name.encode())
         return "v" + hash_object.hexdigest()
     else:
@@ -259,8 +259,7 @@ class LookupEntry:
     tree: Tree
     skip_hashing: bool
     type_: str = None
-    inferred: bool = False  # types of lookup entries are inferred on demand
-    inferring: bool = False  # used to detect cyclic type inference
+    currently_inferring: bool = False  # used to detect cyclic type inference
 
 
 class TypedTree(Tree):
@@ -361,7 +360,10 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree)
 
     def add_to_lookup(self, name, tree, skip_hashing=False):
-        self.lookup.append(LookupEntry(name, tree, skip_hashing))
+        entry = LookupEntry(name, tree, skip_hashing)
+        hashed_name = hash_var(entry)
+        entry.name = hashed_name
+        self.lookup.append(entry)
 
 
 # The transformer traverses the whole AST and infers the type of each node. It alters the lookup table entries with
@@ -474,7 +476,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.string)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree, HedyType.string)
+        return self.to_typed_tree(tree.children[0], HedyType.string)
 
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
@@ -561,8 +563,9 @@ class TypeValidator(Transformer):
         return arg_type
 
     def get_type(self, tree):
-        # TypedTree with type 'None' and 'string' could be in the lookup
-        if tree.type_ in [HedyType.none, HedyType.string]:
+        # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
+        # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
+        if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
             if in_lookup:
                 return type_in_lookup
@@ -574,9 +577,8 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == name and not entry.inferred:
+            if entry.name == hash_var(name) and not entry.type_:
                 entry.type_ = inferred_type
-                entry.inferred = True
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
     #  be inferred. However, there are valid cases in which the lookup entries will be accessed before their type
@@ -587,19 +589,20 @@ class TypeValidator(Transformer):
     #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
     #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
-        # TODO: we should not just take the first match, take into account var reassignments
-        matches = [entry for entry in self.lookup if entry.name == name]
+        matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
         if matches:
-            if not matches[0].inferred:
-                if matches[0].inferring:
-                    # TODO we know at this point there is a cyclic var reference, e.g. b = b + 1, for now do not raise
-                    matches[0].inferring = False
-                    matches[0].type_ = HedyType.any
-                    matches[0].inferred = True
+            # TODO: we should not just take the first match, take into account var reassignments
+            match = matches[0]
+            if not match.type_:
+                if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
+                    raise exceptions.CyclicVariableDefinitionException(variable=match.name)
                 else:
-                    matches[0].inferring = True
-                    TypeValidator(self.lookup, self.level).transform(matches[0].tree)
-                    matches[0].inferring = False
+                    match.currently_inferring = True
+                    try:
+                        TypeValidator(self.lookup, self.level).transform(match.tree)
+                    except VisitError as ex:
+                        raise ex.orig_exc
+                    match.currently_inferring = False
 
             return True, self.lookup_type_fallback(matches[0].type_)
         return False, None
@@ -802,6 +805,10 @@ class ConvertToPython_1(Transformer):
         return ''.join([str(c) for c in args])
     def integer(self, args):
         return str(args[0])
+
+    def number(self, args):
+        return str(args[0])
+
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
@@ -825,7 +832,7 @@ class ConvertToPython_1(Transformer):
         if len(args) == 0:
             return self.make_forward(50)
 
-        parameter = int(get_value(args[0]))
+        parameter = int(args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -851,27 +858,16 @@ class ConvertToPython_1(Transformer):
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
-    return name in all_names
-
-
-def get_value(arg):
-    # TODO: this func compensates for the mixed approach of handling leaf nodes, e.g. text => string and
-    #  integer => Tree('integer', ['5']). Ideally, they will be handled in the same manner
-    if isinstance(arg, Tree):
-        if type(arg.children) is list:
-            return arg.children[0]
-        return arg.children
-    return arg
+    return hash_var(name) in all_names
 
 def process_variable(arg, lookup):
     #processes a variable by hashing and escaping when needed
-    name = get_value(arg)
-    if is_variable(name, lookup):
-        return hash_var(name)
-    elif is_quoted(name): #sometimes kids accidentally quote strings, then we do not want them quoted again
-        return f"{name}"
+    if is_variable(arg, lookup):
+        return hash_var(arg)
+    elif is_quoted(arg): #sometimes kids accidentally quote strings, then we do not want them quoted again
+        return f"{arg}"
     else:
-        return f"'{name}'"
+        return f"'{arg}'"
 
 def process_variable_for_fstring(name, lookup):
     if is_variable(name, lookup):
@@ -956,8 +952,8 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return self.make_forward(50)
 
-        if is_int(get_value(args[0])):
-            parameter = int(get_value(args[0]))
+        if is_int(args[0]):
+            parameter = int(args[0])
         else:
             # if not an int, then it is a variable
             parameter = args[0]
@@ -1012,7 +1008,7 @@ def make_f_string(args, lookup):
 class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, args):
         parameter = args[0]
-        values = ["'" + get_value(a) + "'" for a in args[1:]]
+        values = ["'" + a + "'" for a in args[1:]]
         return parameter + " = [" + ", ".join(values) + "]"
     def list_access(self, args):
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
@@ -1128,7 +1124,7 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                args_new.append("{" + get_value(a) + "}")
+                args_new.append("{" + a.children[0] + "}")
             else:
                 a = a.replace("'", "")  # no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
@@ -1201,7 +1197,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def repeat(self, args):
         all_lines = [indent(x) for x in args[1:]]
-        return "for i in range(int(" + str(get_value(args[0])) + ")):\n" + "\n".join(all_lines)
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1239,8 +1235,8 @@ class ConvertToPython_11(ConvertToPython_10):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({get_value(args[1])}) < int({get_value(args[2])}) else -1
-for {args[0]} in range(int({get_value(args[1])}), int({get_value(args[2])}) + {stepvar_name}, {stepvar_name}):
+        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
+for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
@@ -1911,9 +1907,7 @@ def create_lookup_table(abstract_syntax_tree, level):
 
     TypeValidator(entries, level).transform(abstract_syntax_tree)
 
-    # For now the lookup table should contain the entries with their names in plain text and hashed
-    return entries + [LookupEntry(hash_var(e.name), e.tree, e.skip_hashing, e.type_)
-                      for e in entries if not e.skip_hashing]
+    return entries
 
 
 def transpile_inner(input_string, level, lang="en"):
