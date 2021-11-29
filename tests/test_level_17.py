@@ -54,13 +54,13 @@ class TestsLevel17(HedyTester):
   def test_for_loop(self):
     code = textwrap.dedent("""\
     a is 2
-    a is 3
+    b is 3
     for a in range 2 to 4:
       a is a + 2
       b is b + 2""")
     expected = textwrap.dedent("""\
     a = 2
-    a = 3
+    b = 3
     step = 1 if int(2) < int(4) else -1
     for a in range(int(2), int(4) + step, step):
       a = a + 2

@@ -66,6 +66,11 @@ class UndefinedVarException(HedyException):
         super().__init__('Var Undefined',
             name=name)
 
+class CyclicVariableDefinitionException(HedyException):
+    def __init__(self, variable):
+        super().__init__('Cyclic Var Definition',
+                         variable=variable)
+
 class InvalidArgumentTypeException(HedyException):
     def __init__(self, command, invalid_type, allowed_types, invalid_argument):
         super().__init__('Invalid Argument Type',
