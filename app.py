@@ -1050,21 +1050,6 @@ def split_markdown_front_matter(md):
 
     return front_matter, parts[1]
 
-def split_teacher_docs(contents):
-    tags = utils.markdown_to_html_tags(contents)
-    sections =[]
-    for tag in tags:
-        # Sections are divided by h2 tags
-        if re.match('^<h2>', str(tag)):
-            tag = tag.contents[0]
-            # We strip `page_title: ` from the first title
-            if len(sections) == 0:
-                tag = tag.replace('page_title: ', '')
-            sections.append({'title': tag, 'content': ''})
-        else:
-            sections[-1]['content'] += str(tag)
-    return sections
-
 def render_main_menu(current_page):
     """Render a list of(caption, href, selected, color) from the main menu."""
     return[dict(
