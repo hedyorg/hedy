@@ -799,13 +799,47 @@ export function confetti_cannon(){
     const jsConfetti = new JSConfetti({canvas})
     // timeout for the confetti to fall down
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
-    jsConfetti.addConfetti();
+    let adventures = $('#adventures');
+    let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
+    let customLevels = ['turtle', 'rock', 'haunted', 'fortune', 'restaurant']
+
+    if(customLevels.includes(currentAdventure!)){
+      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+
+      // @ts-ignore
+      jsConfetti.addConfetti({
+        emojis: currentAdventureConfetti,
+        emojiSize: 45,
+        confettiNumber: 100,
+      });
+    }
+
+    else{
+      jsConfetti.addConfetti();
+    }
 
     const confettiButton = document.getElementById('confetti-button');
     if (confettiButton) {
       confettiButton.classList.add('hidden');
     }
   }
+}
+
+function getConfettiForAdventure(adventure: string){
+
+  switch (adventure) {
+    case 'turtle':
+      return [['🐢']];
+    case 'rock':
+      return [['✂️'], ['📜'], ['🪨']];
+    case 'haunted':
+      return [['🦇'], ['👻'], ['🎃']];
+    case 'restaurant':
+      return [['🍣'], ['🍝'], ['🍕'], ['🍰']];
+    case 'fortune':
+      return [['🔮'], ['✨'], ['🧞‍♂️']];
+  }
+  return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
 export function modalStepOne(level: number){
