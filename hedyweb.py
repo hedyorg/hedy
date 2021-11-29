@@ -30,17 +30,16 @@ class Translations:
     d.update(**self.data.get(language, {}).get(section, {}))
     return d
 
-  def get_text_translations(self, language, page):
-    texts = glob.glob('coursedata/pages/' + page + '/*.yaml')
-    dict_text = {}
-    for trans_file in texts:
-        lang = path.splitext(path.basename(trans_file))[0]
-        dict_text[lang] = YamlFile.for_file(trans_file)
-    d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(dict_text.get('en', {}))
-    d.update(dict_text.get(language, {}))
-    return d
-
+  def get_page_translations(self, language, page):
+    text_files = glob.glob('coursedata/pages/' + page + '*.yaml')
+    texts = {}
+    for file in text_files:
+      lang = path.splitext(path.basename(file))[0]
+      texts[lang] = YamlFile.for_file(file)
+    text = collections.defaultdict(lambda: 'Unknown Exception')
+    text.update(texts.get('en', {}))
+    text.update(texts.get(language, {}))
+    return text
 
 def render_code_editor_with_tabs(level_defaults, max_level, level_number, translations, version, loaded_program, adventures, restrictions, adventure_name):
   user = current_user()
