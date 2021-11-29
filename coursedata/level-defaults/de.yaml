@@ -40,10 +40,6 @@
         ```
 
         `print` funktioniert immer noch wie in Level 1, und Du benötigst `echo` nicht mehr.
-
-        In Level 2 kannst Du auch eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `at random` (es bedeutet zufällig und man spricht es "ät rän-dum" aus).
-
-        Du findest alle Befehle des Level 2 in der linken Leiste. Weitere Aufgaben findest du auf den folgenden Tabs.
     start_code: "print Hallo Welt!"
     commands:
     -   name: "is"
@@ -58,13 +54,25 @@
         demo_code: |-
             farbe is ask Was ist deine Lieblingsfarbe?
             print Du magst am liebsten farbe
+3:
+    intro_text: |
+        In Level 3 kannst Du auch eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `at random` (es bedeutet zufällig und man spricht es "ät rän-dum" aus).
+
+        ```
+        tiere is Hund, Katze, Känguru
+        print tiere at random
+        ```
+
+        Du findest alle Befehle des Level 3 in der linken Leiste. Weitere Aufgaben findest du auf den folgenden Tabs.
+    start_code: "print Hallo Welt!"
+    commands:
     -   name: "choose_random"
         explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus."
         example: "Beispiel: tiere is Hund, Katze, Känguru."
         demo_code: |-
             tiere is Hund, Katze, Känguru
             print tiere at random
-3:
+4:
     start_code: "print 'Hallo Welt'"
     intro_text: |
         In Level 3 `print` und `ask` ändern.
@@ -95,7 +103,7 @@
         demo_code: |-
             farbe is ask 'Was ist deine Lieblingsfarbe?'
             print 'Du magst am liebsten ' farbe
-4:
+5:
     start_code: |-
         name is ask 'Wie heisst du?'
         if name is Hedy print 'Toll!' else print 'Blöd'
@@ -133,7 +141,7 @@
         demo_code: |-
             farbe is ask 'Was ist deine Lieblingsfarbe?'
             if farbe is grün print 'Hübsch!' else print 'Bäh'
-5:
+6:
     start_code: "print '5 mal 5 ist ' 5 * 5"
     intro_text: |
         `ask`,` print` und `if` funktionieren immer noch wie in Level 4.
@@ -168,7 +176,7 @@
             angles is ask 'How many angles?'
             angle is 360 / angles
             forward 50
-6:
+7:
     start_code: "repeat 3 times print 'Hedy macht Spaß!'"
     intro_text: |
         `ask`, `print` und `if` funktionieren genau wie in Stufe 4 und 5.
@@ -204,7 +212,7 @@
         example: "Example: repeat 3 times forward 10"
         demo_code: |-
             repeat 3 times forward 10
-7:
+8:
     start_code: |-
         repeat 5 times
             print 'Hello Leute'
@@ -237,7 +245,7 @@
             else
                 print 'Ups!'
                 print 'Die Antwort is 10'
-8:
+9:
     start_code: |-
         repeat 3 times
             food is ask 'What do you want?'
@@ -279,7 +287,7 @@
             repeat 4 times
                 turn 90
                 forward 50
-9:
+10:
     start_code: |-
         animals is dog, cat, blobfish
         for animal in animals
@@ -306,7 +314,7 @@
             animals is dog, cat, blobfish
             for animal in animals
               print 'I love ' animal
-10:
+11:
     start_code: |-
         for i in range 1 to 10
             print i
@@ -324,7 +332,7 @@
             for i in range 1 to 10
               print i
             print 'Bereit oder nicht, hier komme ich!'
-11:
+12:
     start_code: |-
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
@@ -362,7 +370,67 @@
             print 'Two and a half plus two and a half is...'
             print answer
 
-12:
+13:
+    start_code: |-
+        name is ask 'what is your name?'
+        leeftijd is ask 'what is your age?'
+        if name is 'Hedy' and age is 2
+            print 'You are the real Hedy!'
+    intro_text: |-
+        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
+        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
+        Du kannst auch `oder` verwenden.
+        Dann muss nur eine Aussage richtig sein.
+    commands:
+    -   name: "`and`"
+        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
+        example: "if 3+2 is 5 and 2+2 is 4"
+        demo_code: |-
+            antwort1 is ask 'Was ergibt 3+2?'
+            antwort2 is ask 'Was ergibt 2+2?'
+            if antwort1 is 5 and antwort2 is 4
+                print 'Beide Antworten sind richtig!'
+            else
+                print 'Mindestens eine Antwort ist falsch.'
+    -   name: "`or`"
+        explanation: |-
+            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
+            Wenn beide richtig sind, ist es auch in Ordnung.
+        example: "if 3+2 is 5 or 2+2 is 4"
+        demo_code: |-
+            antwort1 is ask 'Was ergibt 3+2?'
+            antwort2 is ask 'Was ergibt 2+2?'
+            if antwort1 is 5 or antwort2 is 4
+                print 'Mindestens eine Antwort ist richtig!'
+            else
+                print 'Beide Antworten sind falsch.'
+#16:
+#    start_code: |-
+#        # Dieses Programm wird ein paar mathematische Fragen stellen
+#        for i in range(1,10):
+#            # Wir werden die Multiplikationstabelle der 5 abfragen
+#            antwort is input('Was ergibt ' i ' mal 5?')
+#            # Wir prüfen ob die Antwort mit unserer übereinstimmt
+#            korrekte_antwort is i * 5
+#            if antwort is korrekte_antwort:
+#                print(antwort ' ist korrekt!')
+#            else:
+#                print('Das ist falsch. Die richtige Antwort lautet: ' i*5)
+#    intro_text: |-
+#        Wenn du größere Programme erstellst, brauchst du einen Weg, um dir zu merken, was jedes Codestück tut.
+#        Wir verwenden dafür Kommentare.
+#        Ein Kommentar sieht folgendermaßen aus:\n ` # Dies ist ein Kommentar`.
+#        Alles nach dem `#` wird für den Code unsichtbar.
+#    commands:
+#    -   name: "Kommentar"
+#        explanation: "Wir können Kommentare platzieren, wo immer wir wollen."
+#        example: "# Dies ist ein Kommentar"
+#        demo_code: |-
+#            # Dieses Programm gibt Hallo! aus
+#            # Es ist in Hedy erstellt worden
+#            # Es macht nichts außer Hallo! zu auszugeben
+#            print('Hallo!')
+14:
     start_code: |-
         alter is ask 'Wie alt bist du?'
         if alter < 13
@@ -393,10 +461,10 @@
             alter is ask 'Wie alt bist du?'
             if alter > 13
                 print 'Du bist älter als ich!'
-13:
+15:
     start_code: |-
         antwort is 0
-        while antwort != 25:
+        while antwort != 25
             antwort is ask 'Wieviel ist 5 mal 5?'
             print 'Das ist die richtge Antwort!'
     intro_text: |-
@@ -410,7 +478,7 @@
         example: "while richtige_antwort is False"
         demo_code: |-
             antwort is 0
-            while antwort != 25:
+            while antwort != 25
                 antwort is ask 'Wieviel ist 5 mal 5?'
                 print 'Das ist die richtge Antwort!'
     -   name: "while mit Ungleichungen"
@@ -425,7 +493,7 @@
                 print 'Wir machen dies noch ' 3 - zaehler ' mal.'
                 zaehler is zaehler + 1
             print 'Wir sind fertig!'
-14:
+16:
     start_code: |-
         fruechte is ['Apfel', 'Banane', 'Kirsche']
         print fruechte
@@ -459,102 +527,39 @@
             zufaellige_frucht is fruechte[random]
             print zufaellige_frucht
 
-#15:
-#    start_code: |-
-#        du_bist_noch_hier is False
-#        bist_du_noch_hier is input('Bist du noch hier? ja oder nein?')
-#        if bist_du_noch_hier is ja:
-#            du_bist_noch_hier is True
-#        antwort is input('Wieviel ist 5*5')
-#        if du_bist_noch_hier is True and antwort is 25:
-#            print('Du hast ja gesagt und die richtige Antwort gegeben!')
-#    intro_text: |-
-#        Wir werden jetzt `and` und `or` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `if` verwenden, sondern kannst `und` und `oder` benutzen.
-#        Wenn du `und` verwendest, müssen beide Angaben, links und rechts vom `und`, wahr sein.
-#        Du kannst auch `oder` verwenden.
-#        Dann muss nur eine Aussage richtig sein.
-#    commands:
-#    -   name: "`and`"
-#        explanation: "Beide Angaben (links und rechts vom `and`) müssen richtig sein."
-#        example: "if 3+2 is 5 and 2+2 is 4"
-#        demo_code: |-
-#            antwort1 is input('Was ergibt 3+2?')
-#            antwort2 is input('Was ergibt 2+2?')
-#            if antwort1 is 5 and antwort2 is 4:
-#                print('Beide Antworten sind richtig!')
-#            else:
-#                print('Mindestens eine Antwort ist falsch.')
-#    -   name: "`or`"
-#        explanation: |-
-#            Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein.
-#            Wenn beide richtig sind, ist es auch in Ordnung.
-#        example: "if 3+2 is 5 or 2+2 is 4"
-#        demo_code: |-
-#            antwort1 is input('Was ergibt 3+2?')
-#            antwort2 is input('Was ergibt 2+2?')
-#            if antwort1 is 5 or antwort2 is 4:
-#                print('Mindestens eine Antwort ist richtig!')
-#            else:
-#                print('Beide Antworten sind falsch.')
-#16:
-#    start_code: |-
-#        # Dieses Programm wird ein paar mathematische Fragen stellen
-#        for i in range(1,10):
-#            # Wir werden die Multiplikationstabelle der 5 abfragen
-#            antwort is input('Was ergibt ' i ' mal 5?')
-#            # Wir prüfen ob die Antwort mit unserer übereinstimmt
-#            korrekte_antwort is i * 5
-#            if antwort is korrekte_antwort:
-#                print(antwort ' ist korrekt!')
-#            else:
-#                print('Das ist falsch. Die richtige Antwort lautet: ' i*5)
-#    intro_text: |-
-#        Wenn du größere Programme erstellst, brauchst du einen Weg, um dir zu merken, was jedes Codestück tut.
-#        Wir verwenden dafür Kommentare.
-#        Ein Kommentar sieht folgendermaßen aus:\n ` # Dies ist ein Kommentar`.
-#        Alles nach dem `#` wird für den Code unsichtbar.
-#    commands:
-#    -   name: "Kommentar"
-#        explanation: "Wir können Kommentare platzieren, wo immer wir wollen."
-#        example: "# Dies ist ein Kommentar"
-#        demo_code: |-
-#            # Dieses Programm gibt Hallo! aus
-#            # Es ist in Hedy erstellt worden
-#            # Es macht nichts außer Hallo! zu auszugeben
-#            print('Hallo!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Bereit oder nicht, hier komme ich!'
-#    intro_text: |-
-#        Jetzt werden wir ein wenig an der Einrückung ändern.
-#        Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
-#    commands:
-#    -   explanation: "Wenn wir ein `for` verwenden, müssen wir ein `:` hinter die `for`-Anweisung setzen!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Bereit oder nicht, hier komme ich!'
-#    -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
-#        example: "if farbe is grün:'"
-#        demo_code: |-
-#            farbe is grün
-#            if farbe is grün:
-#                print 'Die Farbe ist grün.'
-#            else:
-#                print 'Die Farbe ist nicht grün.'
-#    -   explanation: |-
-#            Wir zeigen euch einen neuen Befehl, den ihr verwenden könnt: `elif`.
-#            `elif` steht für \"else if\".
-#            Wir überprüfen zuerst, ob das `if` korrekt ist, wenn das nicht wahr ist, überprüfen wir das `elif` und wenn das auch nicht wahr ist, gehen wir zum `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a ist 1'
-#            elif a is 2:
-#                print 'a ist 2'
-#            else:
-#                print 'a ist nicht 1 oder 2'
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Bereit oder nicht, hier komme ich!'
+    intro_text: |-
+        Jetzt werden wir ein wenig an der Einrückung ändern.
+        Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
+    commands:
+    -   explanation: "Wenn wir ein `for` verwenden, müssen wir ein `:` hinter die `for`-Anweisung setzen!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print 'Bereit oder nicht, hier komme ich!'
+    -   explanation: "Wir müssen dasselbe mit allen unseren `if`-Anweisungen tun."
+        example: "if farbe is grün:'"
+        demo_code: |-
+            farbe is ask 'Was ist deine Lieblingsfarbe?'
+            if farbe is grün:
+                print 'Die Farbe ist grün.'
+            else:
+                print 'Die Farbe ist nicht grün.'
+    -   explanation: |-
+            Wir zeigen euch einen neuen Befehl, den ihr verwenden könnt: `elif`.
+            `elif` steht für \"else if\".
+            Wir überprüfen zuerst, ob das `if` korrekt ist, wenn das nicht wahr ist, überprüfen wir das `elif` und wenn das auch nicht wahr ist, gehen wir zum `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a ist 1'
+            elif a is 2:
+                print 'a ist 2'
+            else:
+                print 'a ist nicht 1 oder 2'

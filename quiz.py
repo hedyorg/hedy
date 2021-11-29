@@ -12,8 +12,13 @@ from website.yaml_file import YamlFile
 MAX_ATTEMPTS = 3
 
 
-def quiz_data_file_for(level):
-    return YamlFile.for_file(f'coursedata/quiz/quiz_questions_lvl{level}.yaml')
+def quiz_data_file_for(lang, level):
+    quiz_file = YamlFile.for_file(f'coursedata/quizzes/{lang}.yaml')
+    if not quiz_file.exists():
+        return None
+    if level not in quiz_file['levels'].keys():
+        return None
+    return quiz_file['levels'][level]
 
 
 def get_question(quiz_data, question_number):
@@ -21,11 +26,12 @@ def get_question(quiz_data, question_number):
 
     Return None if no such question.
     """
-    return quiz_data['questions'].get(question_number)
+    return quiz_data.get(question_number)
 
 
 def is_correct_answer(question, letter):
     return question['correct_answer'] == letter
+
 
 def get_correct_answer(question):
     """Return the correct answer option from a question."""
@@ -40,11 +46,21 @@ def get_hint(question, letter):
 
 def highest_question(quiz_data):
     """Return the highest possible question for the given level."""
-    return len(quiz_data['questions'])
+    return len(quiz_data)
 
 
-def correct_answer_score(question, attempt_count):
-    return (MAX_ATTEMPTS - attempt_count) * 0.5 * question['question_score']
+def correct_answer_score(question):
+    return question['question_score']
+
+
+def max_score(quiz_data):
+    index = 1
+    max_score = 0
+    for question_key, question_value in quiz_data.items():
+        index = index + 1
+        max_score = max_score + question_value['question_score']
+    return max_score
+
 
 def question_options_for(question):
     """Return a list with a set of answers to the question.
