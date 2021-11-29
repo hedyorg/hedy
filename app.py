@@ -929,7 +929,7 @@ def main_page(page):
             session['welcome-teacher'] = False
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
-            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), texts=for_teacher_translations, teacher_classes=teacher_classes, welcome_teacher=welcome_teacher)
+            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=for_teacher_translations, teacher_classes=teacher_classes, welcome_teacher=welcome_teacher)
         else:
             return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang,
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
