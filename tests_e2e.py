@@ -350,7 +350,7 @@ class TestAuth(AuthHelper):
         # WHEN attepting to verify the user again (the operation should be idempotent)
         # THEN (again) receive a redirect from the server taking us to `/`
         headers = self.get_data('auth/verify?' + urllib.parse.urlencode({'username': self.username, 'token': self.user['verify_token']}), expect_http_code=302, return_headers=True)
-        self.assertEqual(headers['location'], HOST)
+        self.assertEqual(headers['location'], HOST + 'landing-page')
 
         # WHEN retrieving profile to see that the user is no longer marked with `verification_pending`
         self.given_specific_user_is_logged_in(self.username)
