@@ -32,12 +32,13 @@ class Translations:
 
   def get_text_translations(self, language, page):
     texts = glob.glob('coursedata/pages/' + page + '/*.yaml')
+    dict_text = {}
     for trans_file in texts:
         lang = path.splitext(path.basename(trans_file))[0]
-        self.data[lang] = YamlFile.for_file(trans_file)
+        dict_text[lang] = YamlFile.for_file(trans_file)
     d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(**self.data.get('en', {}))
-    d.update(**self.data.get(language, {}))
+    d.update(dict_text.get('en', {}))
+    d.update(dict_text.get(language, {}))
     return d
 
 
