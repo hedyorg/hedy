@@ -16,7 +16,7 @@ export function create_class() {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(_response) {
-      location.reload ();
+      window.location.pathname = '/customize-class/' + _response.id ;
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
         modal.alert(auth.texts['class_name_duplicate']);
@@ -110,4 +110,48 @@ export function remove_student(class_id: string, student_id: string) {
     });
   });
 }
+
+export function save_level_settings(id: string, level: number) {
+     let selected_adventures: (string | null)[] = [];
+     $('#adventures_overview li').each(function() {
+         if ($(this).is(':visible') && $(this).find(':input').prop('checked')) {
+             selected_adventures.push(this.getAttribute('id'));
+         }
+     });
+
+     const hide_level = !!$(`#hide_level${level}`).prop('checked');
+     const hide_next_level = !!$(`#hide_level${level - 1}`).prop('checked');
+     const example_programs = !!$(`#example_programs${level}`).prop('checked');
+     const hide_prev_level = !!$(`#hide_level${level - 1}`).prop('checked');
+
+     $.ajax({
+       type: 'PUT',
+       url: '/customize-class/' + id,
+       data: JSON.stringify({
+         adventures: selected_adventures,
+         example_programs: example_programs,
+         hide_level: hide_level,
+         hide_prev_level: hide_prev_level,
+         hide_next_level: hide_next_level,
+         level: level
+       }),
+       contentType: 'application/json',
+       dataType: 'json'
+     }).done(function(_response) {
+       location.reload ();
+     }).fail(function(err) {
+       console.error(err);
+       error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+     });
+ }
+
+ export  function reset_level_preferences(level: number) {
+     $('#adventures_overview li').each(function() {
+         if ($(this).is(':visible')) {
+             $(this).find(':input').prop("checked", true);
+         }
+     });
+     $('#example_programs' + level).prop("checked", true);
+     $('#hide_level' + level).prop("checked", false);
+ }
 

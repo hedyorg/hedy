@@ -1,12 +1,17 @@
-// adds comparisons
 
-condition: (equality_check|in_list_check|smaller|bigger|not_equal|smaller_equal|bigger_equal)
+//assigning a string now must be done with quotes
+assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
+assign_list: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) ((_COMMA _SPACE|_COMMA) (text_in_quotes|NUMBER))+
 
-//smaller and smaller_equal could be merged or refactored to minimize overlap?
+?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
 
-smaller: (textwithoutspaces | list_access) _SPACE _SMALLER _SPACE (textwithoutspaces | list_access)
-bigger: (textwithoutspaces | list_access) _SPACE _LARGER _SPACE(textwithoutspaces | list_access)
-smaller_equal: (textwithoutspaces | list_access) _SPACE _SMALLER_EQUALS _SPACE (textwithoutspaces | list_access)
-bigger_equal: (textwithoutspaces | list_access) _SPACE _LARGER_EQUALS _SPACE (textwithoutspaces | list_access)
-not_equal: (textwithoutspaces | list_access) _SPACE _NOT_EQUALS _SPACE (textwithoutspaces | list_access)
+//conditions with strings now also use quotes:
+condition: (equality_check | in_list_check)
 
+equality_check: (var | text_in_quotes | NUMBER) _SPACE _IS _SPACE (var | text_in_quotes | NUMBER)
+in_list_check: (var | text_in_quotes | NUMBER) _SPACE _IN _SPACE var
+
+
+invalid: "Supercalifragilisticexpialidocious" //invalid node should be deleted but this probably never matches anything :D
+textwithspaces: /(?:[^\n,' ]| (?!else))+/ -> text //anything can be parsed except for a newline and a comma for list separators, and now single quotes
+text_in_quotes: _SINGLE_QUOTE textwithspaces _SINGLE_QUOTE

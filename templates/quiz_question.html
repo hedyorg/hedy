@@ -12,10 +12,10 @@
 
             function changeHint() {
                 const btn = document.getElementById("hint-button");
-                if (btn.innerText === "Hint?") {
+                if (btn.innerText === "{{ ui.hint }}") {
                     btn.innerText = document.getElementById('hidden-hint').textContent;
                 } else {
-                    btn.innerText = "Hint?";
+                    btn.innerText = "{{ ui.hint }}";
                 }
             }
 
@@ -24,8 +24,7 @@
     <body>
     <div>
         <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab">
-            <p class="font-semibold">Vraag {{ question_nr }}</p>
-            <p> / {{ questions|length }} - Poging {{ attempt }} </p>
+            <p> {{ ui.question }} {{ question_nr }} / {{ questions|length }} - {{ ui.attempt }} {{ attempt }} </p>
         </div>
 
         <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center font-slab">
@@ -39,7 +38,7 @@
                 {{wrong_answer_hint}}
             </div>
         {% endif %}
-        <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt) }}" method="POST">
+        <form action="{{ url_for('submit_answer', level_source=level_source, question_nr=question_nr, attempt=attempt, lang=lang) }}" method="POST">
             <div class="grid gap-1 rounded-t-xl">
                 {% set counter = namespace(value=0) %}
                 {% for row in question.mp_choice_options|batch(2) %}
@@ -123,10 +122,10 @@
                     </div>
                     {% if is_last_attempt %}
                         <input class="green-btn ml-1" type="submit" name="submit-button"
-                               value="Ga naar het antwoord" disabled="disabled">
+                               value="{{ ui.go_to_answer }}" disabled="disabled">
                     {% else %}
                         <input class="green-btn ml-1" type="submit" name="submit-button"
-                               value="Beantwoord vraag {{ question_nr }}" disabled="disabled">
+                               value="{{ ui.submit_answer }} {{ question_nr }}" disabled="disabled">
                     {% endif %}
                 </div>
         </form>
