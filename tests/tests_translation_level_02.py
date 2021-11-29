@@ -23,6 +23,7 @@ def check_local_lang_bool(func):
 class TestsTranslationLevel2(HedyTester):
     level = 2
 
+    @check_local_lang_bool
     def test_print(self):
         code = "print Hallo welkom bij Hedy!"
 
@@ -31,6 +32,7 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
+    @check_local_lang_bool
     def test_print_kewords(self):
         code = "print print ask echo"
 
@@ -39,14 +41,7 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
-    def test_ask_assign_dutch_english(self):
-        code = "mens is vraag Hallo welkom bij Hedy!"
-
-        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
-        expected = "mens is ask Hallo welkom bij Hedy!"
-
-        self.assertEqual(result, expected)
-
+    @check_local_lang_bool
     def test_ask_assign_english_dutch(self):
         code = "mens is ask Hallo welkom bij Hedy!"
 
@@ -55,14 +50,25 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
-    def test_ask_multiple_lines(self):
-        code = "welkom is ask Hallo welkom bij Hedy!\nplezier is ask veel plezier"
+    @check_local_lang_bool
+    def test_forward_assigned_value_english_dutch(self):
+        code = "value is 50\nforward value"
 
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = "welkom is vraag Hallo welkom bij Hedy!\nplezier is vraag veel plezier"
+        expected = "value is 50\nvooruit value"
 
         self.assertEqual(result, expected)
 
+    @check_local_lang_bool
+    def test_print_var_text(self):
+        code = "welkom is Hallo welkom bij Hedy\nprint welkom Veel plezier"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = "welkom is Hallo welkom bij Hedy\nprint welkom Veel plezier"
+
+        self.assertEqual(result, expected)
+
+    @check_local_lang_bool
     def test_ask_kewords(self):
         code = "hedy is vraag print ask echo"
 
@@ -71,6 +77,7 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
+    @check_local_lang_bool
     def test_ask_print(self):
         code = "hedy is hello\nprint hedy"
 
@@ -79,48 +86,28 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
-    def test_assign_list(self):
-        code = "mens is papa mama oma"
-
-        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = "mens is papa mama oma"
-
-        self.assertEqual(result, expected)
-
-    def test_acces_list_english_dutch(self):
-        code = "mens is papa mama oma\nprint mens at random"
-
-        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = "mens is papa mama oma\nprint mens opplek willekeurig"
-
-        self.assertEqual(result, expected)
-
-    def test_acces_list_dutch_english(self):
-        code = "mens is papa mama oma\nprint mens opplek willekeurig"
+    @check_local_lang_bool
+    def test_ask_assign_dutch_english(self):
+        code = "mens is vraag Hallo welkom bij Hedy!"
 
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
-        expected = "mens is papa mama oma\nprint mens at random"
+        expected = "mens is ask Hallo welkom bij Hedy!"
 
         self.assertEqual(result, expected)
 
-    def test_forward_assigned_value(self):
-        code = "value is 50\nforward value"
 
-        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = "value is 50\nvooruit value"
-
-        self.assertEqual(result, expected)
-
+    @check_local_lang_bool
     def test_translate_back(self):
         code = "print welkom bij Hedy\nnaam is ask what is your name\nprint naam"
 
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+        result = hedy_translation.translate_keywords(result, "nl", "en", self.level)
 
         expected = "print welkom bij Hedy\nnaam is ask what is your name\nprint naam"
 
         self.assertEqual(result, expected)
 
+    @check_local_lang_bool
     def test_invalid(self):
         code = "hallo"
 
@@ -129,6 +116,7 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
+    @check_local_lang_bool
     def test_invalid_space(self):
         code = " print Hedy"
 
@@ -137,10 +125,29 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(result, expected)
 
-    def no_argument_ask(self):
+    @check_local_lang_bool
+    def test_echo(self):
+        code = "echo Hedy"
+
+        result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
+        expected = "echo Hedy"
+
+        self.assertEqual(result, expected)
+
+    @check_local_lang_bool
+    def no_argument_ask_english(self):
         code = "ask"
 
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
         expected = "vraag"
+
+        self.assertEqual(result, expected)
+
+    @check_local_lang_bool
+    def no_argument_ask_dutch(self):
+        code = "vraag"
+
+        result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
+        expected = "ask"
 
         self.assertEqual(result, expected)

@@ -25,7 +25,7 @@ class JsonBinLogger:
         collection = os.getenv('JSONBIN_COLLECTION_ID')
 
         if key is None or collection is None:
-            logger.warn('Set JSONBIN_SECRET_KEY and JSONBIN_COLLECTION_ID if you want to log (disabled for now)')
+            logger.warning('Set JSONBIN_SECRET_KEY and JSONBIN_COLLECTION_ID if you want to log (disabled for now)')
             return NullJsonbinLogger()
         return JsonBinLogger(key, collection)
 
