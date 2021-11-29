@@ -7,7 +7,6 @@ from contextlib import contextmanager
 import inspect
 import unittest
 
-
 class Snippet:
   def __init__(self, filename, level, field_name, code, adventure_name=None):
     self.filename = filename
@@ -22,7 +21,6 @@ class Snippet:
 
 class HedyTester(unittest.TestCase):
   level = None
-  max_Hedy_level = 23
   max_turtle_level = 10
   number_comparisons_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparisons_commands + ['!=']
@@ -57,10 +55,7 @@ class HedyTester(unittest.TestCase):
   def is_turtle(self):
     return (lambda x: x.has_turtle)
 
-  def multi_level_tester(self, test_name, code, max_level=max_Hedy_level, expected=None, exception=None, extra_check_function=None):
-    # TODO: test_name could be stored in __init__ of test method
-    #  if we created our own method (not sure it that is worth it?)
-
+  def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None):
     # used to test the same code snippet over multiple levels
     # Use exception to check for an exception
 
@@ -76,19 +71,25 @@ class HedyTester(unittest.TestCase):
     # Or use expect to check for an expected Python program
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
-      if exception is not None:
-        with self.assertRaises(exception) as context:
-          result = hedy.transpile(code, level)
-      if expected is not None:
+      self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function)
+      print('Passed for level {level}')
+
+  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None):
+    if level is None: # no level set (from the multi-tester)? grap current level from class
+      level = self.level
+    if extra_check_function is None: # most programs have no turtle so make that the default
+      extra_check_function = self.is_not_turtle()
+    if exception is not None:
+      with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level)
-        self.assertEqual(expected, result.code)
-        self.assertTrue(self.validate_Python_code(result))
-
-
+    if expected is not None:
+      result = hedy.transpile(code, level)
+      self.assertEqual(expected, result.code)
+      self.assertTrue(self.validate_Python_code(result))
+      if output is not None:
+        self.assertEqual(output, HedyTester.run_code(result))
       if extra_check_function is not None:
         self.assertTrue(extra_check_function(result))
-
-      print(f'{test_name} passed for level {level}')
 
   @staticmethod
   def validate_Hedy_code(snippet):
