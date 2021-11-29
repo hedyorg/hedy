@@ -791,7 +791,7 @@ export function get_trimmed_code() {
   return theGlobalEditor?.getValue();
 }
 
-export function confetti_cannon(level: number){
+export function confetti_cannon(){
   const canvas = document.getElementById('confetti');
   if (canvas) {
     canvas.classList.remove('hidden');
@@ -805,6 +805,8 @@ export function confetti_cannon(level: number){
 
     if(customLevels.includes(currentAdventure!)){
       let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+
+      // @ts-ignore
       jsConfetti.addConfetti({
         emojis: currentAdventureConfetti,
         emojiSize: 45,
