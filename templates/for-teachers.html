@@ -24,7 +24,7 @@
     <h2 class="text-center">{{ texts['title'] }}</h2>
     <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
     {% for section_key, section in texts['sections'].items() %}
-        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection('{{section_key}}')">{{section.title}}</button>
+        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{section_key}}')">{{section.title}}</button>
     {% endfor %}
     </div>
     {% for section_key, section in texts['sections'].items() %}
@@ -43,22 +43,5 @@
     hedyApp.modal.alert('{{auth.teacher_welcome}}');
   };
 {% endif %}
-function showSection(section_key) {
-   $(".section-button").each(function(){
-       if ($(this).hasClass('blue-btn')) {
-           $(this).removeClass("blue-btn");
-           $(this).addClass("green-btn");
-       }
-   });
-   if ($ ('#section-' + section_key).is (':visible')) {
-       $("#button-" + section_key).removeClass("blue-btn");
-       $("#button-" + section_key).addClass("green-btn");
-       return $ ('.section').hide ();
-   }
-   $("#button-" + section_key).removeClass("green-btn");
-   $("#button-" + section_key).addClass("blue-btn");
-   $ ('.section').hide ();
-   $ ('#section-' + section_key).toggle ();
-}
 </script>
 {% endblock %}
