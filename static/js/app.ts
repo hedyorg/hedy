@@ -193,6 +193,7 @@ export function runit(level: string, lang: string, cb: () => void) {
 
   const outputDiv = $('#output');
   outputDiv.empty();
+  $('#turtlecanvas').empty();
 
   error.hide();
   success.hide();
