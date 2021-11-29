@@ -921,9 +921,6 @@ def main_page(page):
             return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
 
     user = current_user()
-
-    print(TRANSLATIONS.get_text_translations(g.lang, page))
-
     if page == 'for-teachers':
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
