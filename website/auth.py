@@ -268,7 +268,7 @@ def routes(app, database):
             resp = make_response({'username': username, 'token': hashed_token})
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
-            send_email_template('welcome_verify', email, os.getenv('BASE_URL', 'http://localhost') + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(hashed_token))
             resp = make_response({})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
@@ -294,7 +294,7 @@ def routes(app, database):
 
         # If user is verified, succeed anyway
         if not 'verification_pending' in user:
-            return redirect('/')
+            return redirect('/landing-page')
 
         if token != user['verification_pending']:
             return 'invalid username/token', 403
@@ -388,7 +388,7 @@ def routes(app, database):
                 if is_testing_request(request):
                    resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email, os.getenv('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+                    send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
         username = user['username']
 
@@ -448,7 +448,7 @@ def routes(app, database):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'], os.getenv('BASE_URL') + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
+            send_email_template('recover_password', user['email'], email_base_url() + '/reset?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(token))
             return '', 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -545,7 +545,7 @@ def routes(app, database):
         if is_testing_request(request):
            resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'], os.getenv('BASE_URL') + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+            send_email_template('welcome_verify', body['email'], email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
 
         return '', 200
 
@@ -557,7 +557,7 @@ for name in logging.Logger.manager.loggerDict.keys():
         logging.getLogger(name).setLevel(logging.CRITICAL)
 
 # https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
-email_client = boto3.client('ses', region_name = config['email']['region'], aws_access_key_id = os.getenv('AWS_SES_ACCESS_KEY'), aws_secret_access_key = os.getenv('AWS_SES_SECRET_KEY'))
+email_client = boto3.client('ses', region_name = config['email']['region'])
 
 @querylog.timed
 def send_email(recipient, subject, body_plain, body_html):
@@ -599,11 +599,11 @@ def send_email_template(template, email, link):
 
     send_email(email, subject, body_plain, body_html)
 
-def auth_templates(page, lang, menu, request):
+def auth_templates(page, lang, request):
     if page == 'my-profile':
-        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, current_page='my-profile')
+        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), menu=menu, is_teacher=False, current_page='login')
+        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
@@ -629,3 +629,19 @@ def auth_templates(page, lang, menu, request):
             counter = counter + 1
 
         return render_template('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations(lang, 'Auth'))
+
+
+def email_base_url():
+    """Return the base URL for the current site, without trailing slash.
+
+    You only need to call this function to format links for emails. Links that get
+    shown in HTML pages can start with a `/` and not include the host and they will
+    still work correctly.
+
+    Will use the environment variable BASE_URL if set, otherwise will guess using
+    the current Flask request.
+    """
+    from_env = os.getenv('BASE_URL')
+    if from_env:
+        return from_env.rstrip('/')
+    return request.host_url

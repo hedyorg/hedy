@@ -1,10 +1,11 @@
 from lark import Transformer, Tree
 import hedy
-
+import yaml 
 
 TRANSPILER_LOOKUP = {}
 
-
+def keywords_to_dict(to_lang='nl'):
+    path_keywords = 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     keywords = {}
@@ -26,7 +27,7 @@ def keywords_to_dict(to_lang="nl"):
 
     return keywords
 
-
+print(keywords_to_dict())
 def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     parser = hedy.get_parser(level, from_lang)

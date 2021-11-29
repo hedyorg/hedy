@@ -3,26 +3,27 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "level": {
-      "type": "integer",
-      "description": "Level number of the quiz"
-    },
-    "questions": {
+    "levels": {
       "type": "object",
-      "description": "Questions for the Hedy Quiz, key/value map",
+      "description": "Levels with questions for the Hedy Quiz",
       "additionalProperties": {
-        "$ref": "#/Question"
+        "$ref": "#/Level"
       }
     }
   },
   "required": [
-    "level",
-    "questions"
+    "levels"
   ],
+  "Level": {
+    "type": "object",
+    "additionalProperties": {
+      "$ref": "#/Question"
+    }
+  },
   "Question": {
     "type": "object",
     "properties": {
-      "option_text": {
+      "question_text": {
         "type": "string"
       },
       "code": {
@@ -33,24 +34,25 @@
         "items": {
           "$ref": "#/Option"
         }
+      },
+      "correct_answer": {
+        "type": "string",
+        "enum": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "hint": {
+        "type": "string"
+      },
+      "question_score": {
+        "type": "integer"
       }
     },
-    "correct_answer": {
-      "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ]
-    },
-    "hint": {
-      "type": "string"
-    },
-    "question_score": {
-      "type": "integer"
-    },
     "required": [
+      "question_text",
       "mp_choice_options",
       "correct_answer",
       "question_score"
