@@ -20,15 +20,21 @@
   {% endif %}
   <button class="green-btn mt-4" onclick="hedyApp.create_class ()">{{auth.create_class}}</button>
 </div>
-<div class="w-full text-center mt-4">
-<h2>{{ texts['title'] }}</h2>
-{% for section_key, section in texts['sections'].items() %}
-    <h3>{{ section.title }}</h3>
-    {% for subsection_key, subsection in section['text'].items() %}
-        <h4>{{ subsection['title'] }}</h4>
-        <p>{{ subsection['text'] }}</p>
+<div class="w-full mt-4">
+    <h2>{{ texts['title'] }}</h2>
+    <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
+    {% for section_key, section in texts['sections'].items() %}
+        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="showSection('{{section_key}}')">{{section.title}}</button>
     {% endfor %}
-{% endfor %}
+    </div>
+    {% for section_key, section in texts['sections'].items() %}
+        <div class="section hidden turn-pre-into-ace" id="section-{{section_key}}">
+        {% for subsection_key, subsection in section['text'].items() %}
+            <h4>{{ subsection['title'] }}</h4>
+            <p>{{ subsection['text']|commonmark }}</p>
+        {% endfor %}
+        </div>
+    {% endfor %}
 </div>
 
 <script>
@@ -37,4 +43,22 @@
     hedyApp.modal.alert('{{auth.teacher_welcome}}');
   };
 {% endif %}
+function showSection(section_key) {
+   $(".section-button").each(function(){
+       if ($(this).hasClass('blue-btn')) {
+           $(this).removeClass("blue-btn");
+           $(this).addClass("green-btn");
+       }
+   });
+   if ($ ('#section-' + section_key).is (':visible')) {
+       $("#button-" + section_key).removeClass("blue-btn");
+       $("#button-" + section_key).addClass("green-btn");
+       return $ ('.section').hide ();
+   }
+   $("#button-" + section_key).removeClass("green-btn");
+   $("#button-" + section_key).addClass("blue-btn");
+   $ ('.section').hide ();
+   $ ('#section-' + section_key).toggle ();
+}
+</script>
 {% endblock %}
