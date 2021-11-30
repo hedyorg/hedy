@@ -165,7 +165,7 @@ def localizing_command_per_level(lang, level):
     en_commands = commands_per_level[level].copy()
     lang_commands = hedy_translation.translate_list_keywords(en_commands, 'en', lang)
     # if we allow multiple keyword languages:
-    # en_lang_commands = list(set(en_commands + lang_commands))
+    # lang_commands = list(set(en_commands + lang_commands))
             
     return lang_commands
 
