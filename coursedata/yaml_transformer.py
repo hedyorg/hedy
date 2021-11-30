@@ -34,25 +34,19 @@ def transform_yaml_to_lark(only_new_lang=True):
     default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
 
     with open(default_yaml_with_path, 'r') as stream:
-      yaml_default_dict = yaml.safe_load(stream)
-    default_command_combinations = yaml_default_dict['commands']
+      default_command_combinations = yaml.safe_load(stream)
 
     with open(yaml_filesname_with_path, 'r') as stream:
-      yaml_dict = yaml.safe_load(stream)
-    command_combinations = yaml_dict['commands']
+      command_combinations = yaml.safe_load(stream)
 
     lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
 
     with open(lark_filesname_with_path, 'w+') as f:
       list_of_translations = []
       
-      for idx, command_combo in enumerate(command_combinations):
-        try:
-          command = list(command_combo.keys())[0]
-          translation = command_combo[command]
-        except IndexError:
-          command = list(default_command_combinations[idx].keys())[0]
-          translation = default_command_combinations[idx][command]
+      for command, translation in command_combinations.items():      
+        if translation == '':
+          translation = default_command_combinations[command]
           
         if yaml_lang != 'en':
           if translation in list_of_translations:
