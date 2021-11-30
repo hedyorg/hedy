@@ -859,6 +859,21 @@ def view_program(id):
 
     if ("submitted" in result and result['submitted']):
         arguments_dict['show_edit_button'] = False
+        texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
+        now = timems()
+        program_age = now - result['date']
+        if program_age < 1000 * 60 * 60:
+            measure = texts['minutes']
+            date = round(program_age / (1000 * 60))
+        elif program_age < 1000 * 60 * 60 * 24:
+            measure = texts['hours']
+            date = round(program_age / (1000 * 60 * 60))
+        else:
+            measure = texts['days']
+            date = round(program_age / (1000 * 60 * 60 * 24))
+        arguments_dict['submitted_header'] = texts['submitted_header']
+        arguments_dict['last_edited'] = texts['last_edited']
+        arguments_dict['program_timestamp'] = texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2']
     else:
         arguments_dict['show_edit_button'] = True
 
@@ -949,7 +964,6 @@ def main_page(page):
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
 
     return render_template('main-page.html', mkd=markdown, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
-
 
 def session_id():
     """Returns or sets the current session ID."""
