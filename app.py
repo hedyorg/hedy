@@ -1157,6 +1157,22 @@ def share_unshare_program(user):
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     return jsonify({'id': body['id']})
 
+@app.route('/programs/submit', methods=['POST'])
+@requires_login
+def submit_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+    if not result or result['username'] != user['username']:
+        return 'No such program!', 404
+
+    #DATABASE.submit_program_by_id(body['id'])
+    #return jsonify({})
+
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
     source_adventures = YamlFile.for_file(f'coursedata/adventures/{source}.yaml').to_dict()
