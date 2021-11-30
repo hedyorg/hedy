@@ -565,7 +565,7 @@ def programs_page(request):
             measure = texts['days']
             date = round(program_age /(1000 * 60 * 60 * 24))
 
-        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'public': item.get('public')})
+        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
     return render_template('programs.html', texts=texts, ui=ui, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
 
@@ -856,7 +856,11 @@ def view_program(id):
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['loaded_program'] = result
     arguments_dict['editor_readonly'] = True
-    arguments_dict['show_edit_button'] = True
+
+    if ("submitted" in result and result['submitted']):
+        arguments_dict['show_edit_button'] = False
+    else:
+        arguments_dict['show_edit_button'] = True
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
@@ -1156,6 +1160,22 @@ def share_unshare_program(user):
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     return jsonify({'id': body['id']})
+
+@app.route('/programs/submit', methods=['POST'])
+@requires_login
+def submit_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+    if not result or result['username'] != user['username']:
+        return 'No such program!', 404
+
+    DATABASE.submit_program_by_id(body['id'])
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
