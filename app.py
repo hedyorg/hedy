@@ -811,6 +811,13 @@ def index(level, step):
         if not result:
             return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_program'))
         # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
+        # Todo: Here we have to make some updates
+        # We should also retrieve the program id and store this in the dict
+        # Then if we try to store a program with an already existing id: return overwrite warning
+        # If we try to store a program with unique id but non-unique name: return duplicate name error (prevent!)
+        # ID retrieval and sending to front-end should be done here
+        # Checking and updating should be done on database function on program update
+
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
