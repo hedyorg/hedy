@@ -510,7 +510,7 @@ export function share_program (level: number, lang: string, id: string | true, P
 
 }
 
-export function submit_program (id: string, shared: Boolean) {
+export function submit_program (id: string, shared: boolean) {
   // We have to update the db to mark a program as "submitted"
   // Then we have to call a "freeze()" function to disable functionality of program table
   // Enable the open button, but use the share interface if done so (unable to edit)
@@ -518,6 +518,7 @@ export function submit_program (id: string, shared: Boolean) {
   // -  If a student tries to direct link to the assignment we have to throw a 403 error
   // -  Because they are no longer allowed to look at the program at hand
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  console.log(shared);
   if (! shared) return modal.alert (auth.texts['must_be_shared']);
 
   $.ajax({
@@ -529,8 +530,7 @@ export function submit_program (id: string, shared: Boolean) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(_response) {
-    console.log("Todo...");
-    // If we get a .done response: "freeze()" the selected program
+    location.reload ();
   });
 }
 

@@ -1170,8 +1170,8 @@ def submit_program(user):
     if not result or result['username'] != user['username']:
         return 'No such program!', 404
 
-    #DATABASE.submit_program_by_id(body['id'])
-    #return jsonify({})
+    DATABASE.submit_program_by_id(body['id'])
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
