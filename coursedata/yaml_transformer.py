@@ -1,3 +1,4 @@
+from pathlib import Path
 import os
 import copy
 import utils
@@ -17,6 +18,7 @@ def transform_yaml_to_lark(only_new_lang=True):
   input_path = '../coursedata/keywords/'
   current_grammar_path = '../grammars/'
   output_path = '../grammars-transformed/'
+  Path(output_path).mkdir(parents=True, exist_ok=True)
 
   yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
                     os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
@@ -32,27 +34,29 @@ def transform_yaml_to_lark(only_new_lang=True):
     default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
 
     with open(default_yaml_with_path, 'r') as stream:
-      yaml_default_dict = yaml.safe_load(stream)
-    default_command_combinations = yaml_default_dict['commands']
+      default_command_combinations = yaml.safe_load(stream)
 
     with open(yaml_filesname_with_path, 'r') as stream:
-      yaml_dict = yaml.safe_load(stream)
-    command_combinations = yaml_dict['commands']
+      command_combinations = yaml.safe_load(stream)
 
     lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
 
-    with open(lark_filesname_with_path, 'w') as f:
-      for idx, command_combo in enumerate(command_combinations):
-        try:
-          command = list(command_combo.keys())[0]
-          translation = command_combo[command]
-        except IndexError:
-          command = list(default_command_combinations[idx].keys())[0]
-          translation = default_command_combinations[idx][command]
-
-        if command != "random":
+    with open(lark_filesname_with_path, 'w+') as f:
+      list_of_translations = []
+      
+      for command, translation in command_combinations.items():      
+        if translation == '':
+          translation = default_command_combinations[command]
+          
+        if yaml_lang != 'en':
+          if translation in list_of_translations:
+            raise ValueError(f'{translation} is a duplicate translation. This is not desired when creating lark files')
+          else:
+            list_of_translations.append(translation)
+        
+        if command != 'random':
           command_upper = command.upper()
-          command = "_" + command_upper
+          command = '_' + command_upper
 
         f.write(f'{command}: "{translation}" \n')
 
@@ -126,5 +130,5 @@ def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
-# transform_yaml_to_lark(False)
-transform_levels_in_all_YAMLs('colon', 17)
+transform_yaml_to_lark(False)
+# transform_levels_in_all_YAMLs('colon', 17)

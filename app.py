@@ -1,10 +1,10 @@
+# coding=utf-8
 import sys
 from website.yaml_file import YamlFile
 if(sys.version_info.major < 3 or sys.version_info.minor < 6):
     print('Hedy requires Python 3.6 or newer to run. However, your version of Python is', '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
     quit()
 
-# coding=utf-8
 import datetime
 import collections
 import hedy
@@ -447,7 +447,7 @@ def hedy_error_to_response(ex, translations):
 
 def translate_error(code, translations, arguments):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found', 'concept', 'tip']
-    arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2']
+    arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2', 'variable']
     # fetch the error template
     error_template = translations[code]
 
@@ -565,54 +565,54 @@ def programs_page(request):
             measure = texts['days']
             date = round(program_age /(1000 * 60 * 60 * 24))
 
-        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'public': item.get('public')})
+        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
     return render_template('programs.html', texts=texts, ui=ui, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
 
 @app.route('/quiz/start/<int:level>', methods=['GET'])
 def get_quiz_start(level):
-    if not config.get('quiz-enabled') and g.lang != 'nl':
-        return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, 'Hedy quiz disabled!', menu=False)
-    else:
-        g.prefix = '/hedy'
+    if not is_quiz_enabled():
+        return quiz_disabled_error()
 
-        # A unique identifier to record the answers under
-        session['quiz-attempt-id'] = uuid.uuid4().hex
+    g.prefix = '/hedy'
 
-        # Sets the values of total_score and correct on the beginning of the quiz at 0
-        session['total_score'] = 0
-        session['correct_answer'] = 0
+    # A unique identifier to record the answers under
+    session['quiz-attempt-id'] = uuid.uuid4().hex
 
-        return render_template('startquiz.html', level=level, next_assignment=1,
-                               auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+    # Sets the values of total_score and correct on the beginning of the quiz at 0
+    session['total_score'] = 0
+    session['correct_answer'] = 0
+
+    return render_template('startquiz.html', level=level, next_assignment=1, lang=g.lang,
+                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
 
 # Quiz mode
 # Fill in the filename as source
 @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>', methods=['GET'], defaults={'attempt': 1})
 @app.route('/quiz/quiz_questions/<int:level_source>/<int:question_nr>/<int:attempt>', methods=['GET'])
 def get_quiz(level_source, question_nr, attempt):
-    if not config.get('quiz-enabled') and g.lang != 'nl':
-        return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, 'Hedy quiz disabled!', menu=False)
+    if not is_quiz_enabled():
+        return quiz_disabled_error()
 
     # If we don't have an attempt ID yet, redirect to the start page
     if not session.get('quiz-attempt-id'):
-        return redirect(url_for('get_quiz_start', level=level_source))
+        return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
     # Reading the yaml file
-    quiz_data = quiz.quiz_data_file_for(level_source)
-    if not quiz_data.exists():
-        return 'No quiz yaml file found for this level', 404
+    questions = quiz.quiz_data_file_for(g.lang, level_source)
+    if not questions:
+        return no_quiz_data_error()
 
     # set globals
     g.prefix = '/hedy'
 
-    questionStatus = 'start' if attempt == 1 else 'false'
+    question_status = 'start' if attempt == 1 else 'false'
 
-    if question_nr > quiz.highest_question(quiz_data):
+    if question_nr > quiz.highest_question(questions):
         # We're done!
-        return redirect(url_for('quiz_finished', level=level_source))
+        return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
 
-    question = quiz.get_question(quiz_data, question_nr)
+    question = quiz.get_question(questions, question_nr)
     question_obj = quiz.question_options_for(question)
 
     # Read from session. Don't remove yet: If the user refreshes the
@@ -622,50 +622,52 @@ def get_quiz(level_source, question_nr, attempt):
     wrong_answer_hint = session.get('wrong_answer_hint', None)
 
     return render_template('quiz_question.html',
-                           quiz=quiz_data,
                            level_source=level_source,
-                           questionStatus=questionStatus,
-                           questions=quiz_data['questions'],
+                           questionStatus=question_status,
+                           questions=questions,
                            question_options=question_obj,
                            chosen_option=chosen_option,
                            wrong_answer_hint=wrong_answer_hint,
                            question=question,
                            question_nr=question_nr,
                            correct=session.get('correct_answer'),
-                           attempt = attempt,
+                           attempt=attempt,
                            is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
-                           auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+                           lang=g.lang,
+                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
 
 
 @app.route('/quiz/finished/<int:level>', methods=['GET'])
 def quiz_finished(level):
     """Results page at the end of the quiz."""
-    if not config.get('quiz-enabled') and g.lang != 'nl':
-        return utils.page_404 (TRANSLATIONS, current_user() ['username'], g.lang, 'Hedy quiz disabled!', menu=False)
+    if not is_quiz_enabled():
+        return quiz_disabled_error()
 
     # Reading the yaml file
-    quiz_data = quiz.quiz_data_file_for(level)
-    if not quiz_data.exists():
-        return 'No quiz yaml file found for this level', 404
+    questions = quiz.quiz_data_file_for(g.lang, level)
+    if not questions:
+        return no_quiz_data_error()
 
     # set globals
     g.prefix = '/hedy'
 
     return render_template('endquiz.html', correct=session.get('correct_answer', 0),
-                           total_score= round(session.get('total_score', 0) / quiz.max_score(quiz_data) * 100),
-                           quiz=quiz_data, level=int(level) + 1, questions=quiz_data['questions'],
+                           total_score=round(session.get('total_score', 0) / quiz.max_score(questions) * 100),
+                           level_source=level,
+                           level=int(level) + 1,
+                           questions=questions,
                            next_assignment=1,
-                           auth=TRANSLATIONS.get_translations (g.lang, 'Auth'))
+                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
 
 
 @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
 def submit_answer(level_source, question_nr, attempt):
-    if not config['quiz-enabled'] and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+    if not is_quiz_enabled():
+        return quiz_disabled_error()
 
     # If we don't have an attempt ID yet, redirect to the start page
     if not session.get('quiz-attempt-id'):
-        return redirect(url_for('get_quiz_start', level=level_source))
+        return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
     # Get the chosen option from the request form with radio buttons
     # This looks like '1-B' or '5-C' or what have you.
@@ -675,16 +677,16 @@ def submit_answer(level_source, question_nr, attempt):
     chosen_option = request.form["radio_option"]
     chosen_option = chosen_option.split('-')[1]
 
-    # Reading yaml file
-    quiz_data = quiz.quiz_data_file_for(level_source)
-    if not quiz_data.exists():
-        return 'No quiz yaml file found for this level', 404
+    # Reading the yaml file
+    questions = quiz.quiz_data_file_for(g.lang, level_source)
+    if not questions:
+        return no_quiz_data_error()
 
     # Convert question_nr to an integer
     q_nr = int(question_nr)
 
     # Convert the corresponding chosen option to the index of an option
-    question = quiz.get_question(quiz_data, q_nr)
+    question = quiz.get_question(questions, q_nr)
 
     is_correct = quiz.is_correct_answer(question, chosen_option)
 
@@ -700,40 +702,42 @@ def submit_answer(level_source, question_nr, attempt):
     username = current_user()['username'] or f'anonymous:{session_id()}'
 
     DATABASE.record_quiz_answer(session['quiz-attempt-id'],
-            username=username,
-            level=level_source,
-            is_correct=is_correct,
-            question_number=question_nr,
-            answer=chosen_option)
+                                username=username,
+                                level=level_source,
+                                is_correct=is_correct,
+                                question_number=question_nr,
+                                answer=chosen_option)
 
     if is_correct:
         score = quiz.correct_answer_score(question)
-        session['total_score'] = session.get('total_score',0) + score
+        session['total_score'] = session.get('total_score', 0) + score
         session['correct_answer'] = session.get('correct_answer', 0) + 1
 
-        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
+        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
 
     # Not a correct answer. You can try again if you haven't hit your max attempts yet.
     if attempt >= quiz.MAX_ATTEMPTS:
-        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr))
+        return redirect(url_for('quiz_feedback', level_source=level_source, question_nr=question_nr, lang=g.lang))
 
     # Redirect to the display page to try again
-    return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr, attempt=attempt + 1))
+    return redirect(url_for('get_quiz', chosen_option=chosen_option, level_source=level_source, question_nr=question_nr,
+                            attempt=attempt + 1, lang=g.lang))
 
 @app.route('/quiz/feedback/<int:level_source>/<int:question_nr>', methods=["GET"])
 def quiz_feedback(level_source, question_nr):
-    if not config['quiz-enabled'] and g.lang != 'nl':
-        return 'Hedy quiz disabled!', 404
+    if not is_quiz_enabled():
+        return quiz_disabled_error()
 
     # If we don't have an attempt ID yet, redirect to the start page
     if not session.get('quiz-attempt-id'):
-        return redirect(url_for('get_quiz_start', level=level_source))
+        return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-    quiz_data = quiz.quiz_data_file_for(level_source)
-    if not quiz_data.exists():
-        return 'No quiz yaml file found for this level', 404
+    # Reading the yaml file
+    questions = quiz.quiz_data_file_for(g.lang, level_source)
+    if not questions:
+        return no_quiz_data_error()
 
-    question = quiz.get_question(quiz_data, question_nr)
+    question = quiz.get_question(questions, question_nr)
 
 
     # Read from session and remove the variables from it (this is the
@@ -748,8 +752,8 @@ def quiz_feedback(level_source, question_nr):
 
     question_options = quiz.question_options_for(question)
 
-    return render_template('feedback.html', quiz=quiz_data, question=question,
-                           questions=quiz_data['questions'],
+    return render_template('feedback.html', question=question,
+                           questions=questions,
                            question_options=question_options,
                            level_source=level_source,
                            question_nr=question_nr,
@@ -758,7 +762,22 @@ def quiz_feedback(level_source, question_nr):
                            wrong_answer_hint=wrong_answer_hint,
                            index_option=index_option,
                            correct_option=correct_option,
-                           auth=TRANSLATIONS.data[g.lang]['Auth'])
+                           lang=g.lang,
+                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
+
+
+def is_quiz_enabled():
+    return config.get('quiz-enabled')
+
+
+def quiz_disabled_error():
+    return utils.page_404(TRANSLATIONS, current_user()['username'], g.lang, 'Hedy quiz disabled!', menu=False)
+
+
+def no_quiz_data_error():
+    return utils.page_404(TRANSLATIONS, current_user()['username'], g.lang, 'No quiz data found for this level',
+                          menu=False)
+
 
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'step': 1})
@@ -837,7 +856,11 @@ def view_program(id):
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['loaded_program'] = result
     arguments_dict['editor_readonly'] = True
-    arguments_dict['show_edit_button'] = True
+
+    if ("submitted" in result and result['submitted']):
+        arguments_dict['show_edit_button'] = False
+    else:
+        arguments_dict['show_edit_button'] = True
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
@@ -895,6 +918,12 @@ def main_page(page):
     if page == 'programs':
         return programs_page(request)
 
+    if page == 'landing-page':
+        if current_user()['username']:
+            return render_template('landing-page.html', user=current_user()['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+        else:
+            return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
+
     # Default to English if requested language is not available
     effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'
 
@@ -907,6 +936,7 @@ def main_page(page):
     front_matter, markdown = split_markdown_front_matter(contents)
 
     user = current_user()
+
     if page == 'for-teachers':
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
@@ -917,7 +947,6 @@ def main_page(page):
                                    welcome_teacher=welcome_teacher, **front_matter)
         else:
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
-
 
     return render_template('main-page.html', mkd=markdown, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
 
@@ -1123,7 +1152,7 @@ def share_unshare_program(user):
     if not isinstance(body.get('id'), str):
         return 'id must be a string', 400
     if not isinstance(body.get('public'), bool):
-        return 'public must be a string', 400
+        return 'public must be a boolean', 400
 
     result = DATABASE.program_by_id(body['id'])
     if not result or result['username'] != user['username']:
@@ -1131,6 +1160,22 @@ def share_unshare_program(user):
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
     return jsonify({'id': body['id']})
+
+@app.route('/programs/submit', methods=['POST'])
+@requires_login
+def submit_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('id'), str):
+        return 'id must be a string', 400
+
+    result = DATABASE.program_by_id(body['id'])
+    if not result or result['username'] != user['username']:
+        return 'No such program!', 404
+
+    DATABASE.submit_program_by_id(body['id'])
+    return jsonify({})
 
 @app.route('/translate/<source>/<target>')
 def translate_fromto(source, target):
@@ -1162,7 +1207,7 @@ def translate_fromto(source, target):
       translating.struct_to_sections(source_adventures, target_adventures)))
 
     files.append(translating.TranslatableFile(
-      'Keywords',
+      'Keywords (make sure there are no duplicate translations of keywords)',
       f'keywords/{target}.yaml',
       translating.struct_to_sections(source_keywords, target_keywords)))
 

@@ -191,6 +191,10 @@ export function runit(level: string, lang: string, cb: () => void) {
 
   if (reloadOnExpiredSession ()) return;
 
+  const outputDiv = $('#output');
+  outputDiv.empty();
+  $('#turtlecanvas').empty();
+
   error.hide();
   success.hide();
   try {
@@ -230,13 +234,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
-      if (response.Code && !response.Error && !response.Warning) {
-        removeBulb();
-        var allsuccessmessages = ErrorMessages['Transpile_success'];
-        var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-        success.show(allsuccessmessages[randomnum]);
-      }
-        runPythonProgram(response.Code, response.has_turtle, cb).catch(function(err) {
+        runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
         reportClientError(level, code, err.message);
@@ -512,6 +510,30 @@ export function share_program (level: number, lang: string, id: string | true, P
 
 }
 
+export function submit_program (id: string, shared: boolean) {
+  // We have to update the db to mark a program as "submitted"
+  // Then we have to call a "freeze()" function to disable functionality of program table
+  // Enable the open button, but use the share interface if done so (unable to edit)
+  // It gets more complex:
+  // -  If a student tries to direct link to the assignment we have to throw a 403 error
+  // -  Because they are no longer allowed to look at the program at hand
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  console.log(shared);
+  if (! shared) return modal.alert (auth.texts['must_be_shared']);
+
+  $.ajax({
+    type: 'POST',
+    url: '/programs/submit',
+    data: JSON.stringify({
+      id: id
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(_response) {
+    location.reload ();
+  });
+}
+
 export function copy_to_clipboard (string: string, noAlert: boolean) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -571,7 +593,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
+function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
 
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
@@ -619,11 +641,15 @@ function runPythonProgram(code: string, hasTurtle: boolean, cb: () => void) {
     return Sk.importMainWithBody("<stdin>", false, code, true);
   }).then(function(_mod) {
     console.log('Program executed');
+
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
     window.State.programsInExecution--;
+    if(!hasWarnings) {
+      showSuccesMessage();
+    }
     if (cb) cb ();
   }).catch(function(err) {
     // Extract error message from error
@@ -778,8 +804,8 @@ export function prompt_unsaved(cb: () => void) {
   modal.confirm(auth.texts['unsaved_changes'], cb);
 }
 
-export function load_quiz(level: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+export function load_quiz(level: string, lang: string) {
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '?lang=' + lang + '"></iframe>');
 }
 
 export function get_trimmed_code() {
@@ -801,7 +827,24 @@ export function confetti_cannon(){
     const jsConfetti = new JSConfetti({canvas})
     // timeout for the confetti to fall down
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
-    jsConfetti.addConfetti();
+    let adventures = $('#adventures');
+    let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
+    let customLevels = ['turtle', 'rock', 'haunted', 'fortune', 'restaurant']
+
+    if(customLevels.includes(currentAdventure!)){
+      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+
+      // @ts-ignore
+      jsConfetti.addConfetti({
+        emojis: currentAdventureConfetti,
+        emojiSize: 45,
+        confettiNumber: 100,
+      });
+    }
+
+    else{
+      jsConfetti.addConfetti();
+    }
 
     const confettiButton = document.getElementById('confetti-button');
     if (confettiButton) {
@@ -810,12 +853,35 @@ export function confetti_cannon(){
   }
 }
 
+function getConfettiForAdventure(adventure: string){
+
+  switch (adventure) {
+    case 'turtle':
+      return [['🐢']];
+    case 'rock':
+      return [['✂️'], ['📜'], ['🪨']];
+    case 'haunted':
+      return [['🦇'], ['👻'], ['🎃']];
+    case 'restaurant':
+      return [['🍣'], ['🍝'], ['🍕'], ['🍰']];
+    case 'fortune':
+      return [['🔮'], ['✨'], ['🧞‍♂️']];
+  }
+  return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
+}
+
 export function modalStepOne(level: number){
   createModal(level);
   let modal_editor = $('#modal-editor');
   initializeModalEditor(modal_editor);
 }
 
+function showSuccesMessage(){
+  removeBulb();
+  var allsuccessmessages = ErrorMessages['Transpile_success'];
+  var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
+  success.show(allsuccessmessages[randomnum]);
+}
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ErrorMessages['Program_repair'];

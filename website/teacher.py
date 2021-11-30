@@ -21,7 +21,7 @@ def routes (app, database):
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('retrieve_class'))
         return jsonify (DATABASE.get_teacher_classes (user ['username'], True))
 
-    @app.route('/class/<class_id>', methods=['GET'])
+    @app.route('/for-teachers/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class (user, class_id):
         app.logger.info('This is info output')
@@ -38,14 +38,14 @@ def routes (app, database):
             sorted_public_programs = list(sorted([program for program in programs if program.get ('public')], key=lambda p: p['date']))
             if sorted_public_programs:
                 latest_shared = sorted_public_programs[-1]
-                latest_shared['link'] = os.getenv ('BASE_URL') + f"/hedy/{latest_shared['id']}/view"
+                latest_shared['link'] = f"/hedy/{latest_shared['id']}/view"
             else:
                 latest_shared = None
             students.append ({'username': student_username, 'last_login': utils.datetotimeordate (utils.mstoisostring (student ['last_login'])), 'programs': len (programs), 'highest_level': highest_level, 'latest_shared': latest_shared})
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), current_page='for-teachers', class_info={'students': students, 'link': os.getenv ('BASE_URL') + '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', auth=TRANSLATIONS.get_translations (g.lang, 'Auth'), current_page='for-teachers', class_info={'students': students, 'link': '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -133,7 +133,7 @@ def routes (app, database):
             auth=TRANSLATIONS.get_translations (g.lang, 'Auth'),
             current_page='my-profile',
             class_info={
-                'link': os.getenv ('BASE_URL') + '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + g.lang,
+                'link': '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + g.lang,
                 'name': Class ['name'],
             })
 
@@ -160,7 +160,7 @@ def routes (app, database):
 
         return {}, 200
 
-    @app.route('/customize-class/<class_id>', methods=['GET'])
+    @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
     @requires_login
     def get_class_info(user, class_id):
         if not is_teacher(user):

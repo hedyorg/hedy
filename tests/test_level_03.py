@@ -44,8 +44,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=11,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_print_multiple_lines(self):
@@ -122,9 +121,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=11,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
 
   #is tests
@@ -236,8 +233,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
   def test_sleep_without_number(self):
     code = "sleep"
@@ -245,8 +241,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   #turn tests
@@ -298,8 +293,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   #markup tests
@@ -391,8 +385,7 @@ class TestsLevel3(HedyTester):
       max_level=10,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
+      extra_check_function=check_in_list
     )
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
@@ -450,8 +443,7 @@ class TestsLevel3(HedyTester):
       max_level=10,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
+      extra_check_function=check_in_list
     )
 
   #add/remove tests
@@ -471,8 +463,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=3,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
   def test_remove_from_list(self):
     code = textwrap.dedent("""\
@@ -493,8 +484,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=3,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_add_to_list_with_string_var_gives_error(self):
@@ -506,8 +496,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_remove_from_list_with_string_var_gives_error(self):
@@ -519,8 +508,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
   #negative tests
   def test_echo_no_longer_in_use(self):
@@ -534,8 +522,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code="name is ask",
       max_level=10,
-      exception=hedy.exceptions.IncompleteCommandException,
-      test_name=self.name()
+      exception=hedy.exceptions.IncompleteCommandException
     )
 
   def test_random_from_string_gives_type_error(self):
@@ -545,8 +532,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=5,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
   def test_random_undefined_var(self):
     # todo could be added for higher levels but that is a lot of variations so I am not doing it now :) (FH, oct 2021)
@@ -556,8 +542,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=10,
-      exception=hedy.exceptions.UndefinedVarException,
-      test_name=self.name()
+      exception=hedy.exceptions.UndefinedVarException
     )
 
   def test_ask_level_2(self):
@@ -568,6 +553,5 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=2,
-      exception=hedy.exceptions.WrongLevelException,
-      test_name=self.name()
+      exception=hedy.exceptions.WrongLevelException
     )

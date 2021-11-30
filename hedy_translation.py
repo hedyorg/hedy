@@ -1,41 +1,30 @@
 from lark import Transformer, Tree
-from hedy import get_keywords_for_language, ExtractAST, get_parser
-
+import hedy
+import yaml 
+import os 
 
 TRANSPILER_LOOKUP = {}
 
 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    keywords = {}
-    keywords_from = get_keywords_for_language("en").replace("\n\n", "\n").splitlines()
+    keywords_path = './coursedata/keywords/'
+    yaml_filesname_with_path = os.path.join(keywords_path, to_lang + '.yaml')
+    
+    with open(yaml_filesname_with_path, 'r') as stream:
+      command_combinations = yaml.safe_load(stream)
 
-    keywords_to = get_keywords_for_language(to_lang).replace("\n\n", "\n").splitlines()
-    keywords_from_withoutlvl = []
-    for line in keywords_from:
-        if line[0] != '/':
-            keywords_from_withoutlvl.append(line)
-
-    keywords_to_withoutlvl = []
-    for line in keywords_to:
-        if line[0] != '/':
-            keywords_to_withoutlvl.append(line)
-
-    for line in range(len(keywords_from_withoutlvl)):
-        keywords[(keywords_from_withoutlvl[line].split('"'))[1]] = keywords_to_withoutlvl[line].split('"')[1]
-
-    return keywords
-
+    return command_combinations
 
 def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
-    parser = get_parser(level, from_lang)
+    parser = hedy.get_parser(level, from_lang)
 
     punctuation_symbols = ['!', '?', '.']
 
     keywordDict = keywords_to_dict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
-    abstract_syntaxtree = ExtractAST().transform(program_root)
+    abstract_syntaxtree = hedy.ExtractAST().transform(program_root)
     translator = TRANSPILER_LOOKUP[level]
     abstract_syntaxtree = translator(keywordDict, punctuation_symbols).transform(program_root)
 
@@ -97,3 +86,50 @@ class ConvertToLang1(Transformer):
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
+
+@hedy_translator(level=2)
+class ConvertToLang2(ConvertToLang1):
+
+    def assign(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + ''.join([str(c) for c in args[1:]])
+
+    def print(self, args):
+
+        argument_string = ""
+        i = 0
+
+        for argument in args:
+            # escape quotes if kids accidentally use them at level 2
+            argument = hedy.process_characters_needing_escape(argument)
+
+            # final argument and punctuation arguments do not have to be separated with a space, other do
+            if i == len(args) - 1 or args[i + 1] in self.punctuation_symbols:
+                space = ''
+            else:
+                space = " "
+
+            argument_string += argument + space
+
+            i = i + 1
+
+        return self.keywords["print"] + " " + argument_string
+
+    def punctuation(self, args):
+        return ''.join([str(c) for c in args])
+
+    def var(self, args):
+        var = args[0]
+        all_parameters = ["'" + hedy.process_characters_needing_escape(a) + "'" for a in args[1:]]
+        return var + ''.join(all_parameters)
+
+    def ask(self, args):
+        var = args[0]
+        all_parameters = [hedy.process_characters_needing_escape(a) for a in args]
+
+        return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(all_parameters[1:])
+
+    def ask_dep_2(self, args):
+        return self.keywords["ask"] + " " + ''.join([str(c) for c in args])
+
+    def echo_dep_2(self, args):
+        return self.keywords["echo"] + " " + ''.join([str(c) for c in args])

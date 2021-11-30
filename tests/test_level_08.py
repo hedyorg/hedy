@@ -35,8 +35,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_if_in_list_with_string_var_gives_type_error(self):
@@ -47,8 +46,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_list_gives_error(self):
@@ -59,8 +57,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       max_level=11,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_repeat_with_indent(self):
@@ -183,8 +180,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       max_level=9,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_issue_297(self):
@@ -243,8 +239,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
 
