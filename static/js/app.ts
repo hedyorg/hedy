@@ -620,6 +620,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
+  } else {
+    // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
+    $('#turtlecanvas').show();
   }
 
   Sk.configure({
