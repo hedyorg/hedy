@@ -29,7 +29,7 @@
     </div>
     {% for section_key, section in content['sections'].items() %}
         <div class="section hidden turn-pre-into-ace" id="section-{{section_key}}">
-        {% for subsection_key, subsection in section['text'].items() %}
+        {% for subsection_key, subsection in section['subsections'].items() %}
             <h4>{{ subsection['title'] }}</h4>
             <p>{{ subsection['text']|commonmark }}</p>
         {% endfor %}
