@@ -554,20 +554,24 @@ def programs_page(request):
     programs =[]
     now = timems()
     for item in result:
-        program_age = now - item['date']
-        if program_age < 1000 * 60 * 60:
-            measure = texts['minutes']
-            date = round(program_age /(1000 * 60))
-        elif program_age < 1000 * 60 * 60 * 24:
-            measure = texts['hours']
-            date = round(program_age /(1000 * 60 * 60))
-        else:
-            measure = texts['days']
-            date = round(program_age /(1000 * 60 * 60 * 24))
-
+        date, measure = get_user_formatted_timestamp(texts, now, item['date'])
         programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
     return render_template('programs.html', texts=texts, ui=ui, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
+
+
+def get_user_formatted_timestamp(texts, now, date):
+    program_age = now - date
+    if program_age < 1000 * 60 * 60:
+        measure = texts['minutes']
+        date = round(program_age /(1000 * 60))
+    elif program_age < 1000 * 60 * 60 * 24:
+        measure = texts['hours']
+        date = round(program_age /(1000 * 60 * 60))
+    else:
+        measure = texts['days']
+        date = round(program_age /(1000 * 60 * 60 * 24))
+    return date, measure
 
 @app.route('/quiz/start/<int:level>', methods=['GET'])
 def get_quiz_start(level):
@@ -857,8 +861,13 @@ def view_program(id):
     arguments_dict['loaded_program'] = result
     arguments_dict['editor_readonly'] = True
 
-    if ("submitted" in result and result['submitted']):
+    if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
+        texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
+        now = timems()
+        arguments_dict['submitted_header'] = texts['submitted_header']
+        arguments_dict['last_edited'] = texts['last_edited']
+        arguments_dict['program_timestamp'] = datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')
     else:
         arguments_dict['show_edit_button'] = True
 
@@ -949,7 +958,6 @@ def main_page(page):
             return utils.page_403 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
 
     return render_template('main-page.html', mkd=markdown, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
-
 
 def session_id():
     """Returns or sets the current session ID."""
