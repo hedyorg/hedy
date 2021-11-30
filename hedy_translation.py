@@ -6,33 +6,28 @@ import os
 TRANSPILER_LOOKUP = {}
 
 
-def translate_list_keywords(commands, from_lang, to_lang):
-    """ Returns the translated list of the argument 'commands'
+def get_list_keywords(commands, to_lang):
+    """ Returns a list with the local keywords of the argument 'commands'
     """
-    if from_lang == to_lang:
-        return commands
     
     translation_commands = []
     path_keywords = "./coursedata/keywords"
     
-    from_yaml_filesname_with_path = os.path.join(path_keywords, from_lang + '.yaml')
-    to_yaml_filesname_with_path = os.path.join(path_keywords, to_lang + '.yaml')\
-          
+    to_yaml_filesname_with_path = os.path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = os.path.join(path_keywords, 'en' + '.yaml')
+    
+    with open(en_yaml_filesname_with_path, 'r') as stream:
+        en_yaml_dict = yaml.safe_load(stream)
+    
     try:
-        with open(from_yaml_filesname_with_path, 'r') as stream:
-            from_yaml_dict = yaml.safe_load(stream)
+        with open(to_yaml_filesname_with_path, 'r') as stream:
+            to_yaml_dict = yaml.safe_load(stream)
         for command in commands: 
-            try:
-                english_command = list(from_yaml_dict.keys())[list(from_yaml_dict.values()).index(command)]       
-
-                with open(to_yaml_filesname_with_path, 'r') as stream:
-                    to_yaml_dict = yaml.safe_load(stream)
-        
-                    translation_command = to_yaml_dict[english_command]
-                    translation_commands.append(translation_command)
-                
+            try:                   
+                translation_command = to_yaml_dict[command]
+                translation_commands.append(translation_command)               
             except Exception:
-                translation_commands.append(command)
+                translation_commands.append(en_yaml_dict[command])
     except Exception:
         return commands
     
