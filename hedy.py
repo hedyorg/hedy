@@ -250,6 +250,7 @@ class InvalidInfo:
     command: str = ''
     arguments: list = field(default_factory=list)
     line: int = 0
+    column: int = 0
 
 
 # used in to construct lookup table entries and infer their type
@@ -695,32 +696,32 @@ class UsesTurtle(Transformer):
 
 
 
-
+@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
-    def program(self, args):
+    def program(self, args, meta):
         if len(args) == 0:
             return False, InvalidInfo("empty program"), 1
         return super().program(args)
 
-    def invalid_space(self, args):
+    def invalid_space(self, args, meta):
         # return space to indicate that line starts in a space
-        return False, InvalidInfo(" ")
+        return False, InvalidInfo(" ", line=meta.line, column=meta.column)
 
-    def print_nq(self, args):
+    def print_nq(self, args, meta):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes")
+        return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
 
-    def invalid(self, args):
+    def invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
-        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]])
+        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
 
-    def unsupported_number(self, args):
-        error = InvalidInfo('unsupported number', arguments=[str(args[0])])
+    def unsupported_number(self, args, meta):
+        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error
 
     #other rules are inherited from Filter
@@ -1644,7 +1645,7 @@ def get_parser(level, lang="en"):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True) #ambiguity='explicit'
+    ret = Lark(grammar, regex=True, propagate_positions=True) #ambiguity='explicit'
     PARSER_CACHE[key] = ret
     return ret
 
