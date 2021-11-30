@@ -7,7 +7,10 @@
   {% else %}<h2>{{texts.recent}}</h2>{% endif %}
   <div class="programs w-full">
   {% for program in programs %}
-    <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+    <div class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4">
+        {% if program.submitted %}
+            <h3 class="mt-0 mb-4 text-red-500">{{ texts.submitted_header }}</h3>
+        {% endif %}
         <table class="table-auto mb-4">
         <thead>
             <tr class="text-left">
@@ -32,6 +35,11 @@
           <pre>{{program.code | truncate (50) }}</pre>
         </div>
         <div id="program_button_container" class="flex flex-row">
+        {% if program.submitted %}
+            <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.open }}</button>
+            <button class="red-btn mx-2" onclick="hedyApp.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</button>
+            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'))">{{ texts.copy_link_to_share }}</button>
+        {% else %}
             <a href="{{localize_link ('/hedy/' + program.level|string + '/' + program.id)}}"><button class="green-btn">{{ texts.open }}</button></a>
             <button class="red-btn mx-2" onclick="hedyApp.modal.confirm ('{{ texts.delete_confirm }}', function () {window.open ('/programs/delete/{{program.id}}', '_self')})">{{ texts.delete }}</button>
               {% if program.public %}
@@ -41,6 +49,7 @@
               {% else %}
                   <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{ texts.share_confirm }}', function () {hedyApp.share_program ({{program.level}}, '{{g.lang}}', '{{program.id}}', true, true)})">{{ texts.share}}</button>
               {% endif %}
+        {% endif %}
         </div>
     </div>
     <br>

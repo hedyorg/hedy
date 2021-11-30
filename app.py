@@ -565,7 +565,7 @@ def programs_page(request):
             measure = texts['days']
             date = round(program_age /(1000 * 60 * 60 * 24))
 
-        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'public': item.get('public')})
+        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
     return render_template('programs.html', texts=texts, ui=ui, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
 
