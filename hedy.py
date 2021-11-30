@@ -158,7 +158,7 @@ characters_that_need_escaping = ["\\", "'"]
 
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
-def localizing_command_per_level(lang, level):
+def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         return commands_per_level[level]
 
@@ -1861,7 +1861,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, localizing_command_per_level(lang, level))
+            closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
             fixed_code = None
             result = None
             if closest:
