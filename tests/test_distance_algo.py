@@ -1,5 +1,6 @@
 import unittest
 import hedy
+from test_translating import check_local_lang_bool
 
 class TestsHelperFunctions(unittest.TestCase):
 
@@ -69,8 +70,9 @@ class TestsHelperFunctions(unittest.TestCase):
     closest = hedy.closest_command(invalid_command, keywords_en_level_1)
     self.assertEqual('echo', closest)
 
+  @check_local_lang_bool
   def test_ask_command_nl(self):
     invalid_command = "vrag wat is er?"
-    keywords_en_level_1 = hedy.get_suggestions_for_language('nl',1)
-    closest = hedy.closest_command(invalid_command, keywords_en_level_1)
+    keywords_nl_level_1 = hedy.get_suggestions_for_language('nl',1)
+    closest = hedy.closest_command(invalid_command, keywords_nl_level_1)
     self.assertEqual('vraag', closest)

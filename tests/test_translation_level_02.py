@@ -1,16 +1,6 @@
-import hedy
+from test_translating import check_local_lang_bool
 from test_level_01 import HedyTester
 import hedy_translation
-
-
-def check_local_lang_bool(func):
-    def inner(self):
-        if not hedy.local_keywords_enabled:
-            return
-
-        return func(self)
-
-    return inner
 
 
     # tests should be ordered as follows:
