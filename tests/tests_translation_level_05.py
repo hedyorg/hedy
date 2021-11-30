@@ -62,6 +62,15 @@ class TestsTranslationLevel5(HedyTester):
 
         self.assertEqual(result, expected)
 
+    @check_local_lang_bool
+    def test_in_list_english_dutch(self):
+        code = "if color in pretty_colors print 'pretty!'"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = "als color in pretty_colors print 'pretty!'"
+
+        self.assertEqual(result, expected)
+
 
     @check_local_lang_bool
     def test_print_dutch_english(self):
@@ -96,5 +105,14 @@ class TestsTranslationLevel5(HedyTester):
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "if answer is far forward 100 else forward 5"
+
+        self.assertEqual(result, expected)
+
+    @check_local_lang_bool
+    def test_in_list_dutch_english(self):
+        code = "als hond in dieren print 'Cute!'"
+
+        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
+        expected = "if hond in dieren print 'Cute!'"
 
         self.assertEqual(result, expected)
