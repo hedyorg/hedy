@@ -9,7 +9,7 @@
   {% for program in programs %}
     <div class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4">
         {% if program.submitted %}
-            <h3 class="mt-0 mb-4 text-red-500">{{ texts.submitted_header }}</h3>
+            <h3 class="mt-0 mb-4 text-red-500 text-center">{{ texts.submitted_header }}</h3>
         {% endif %}
         <table class="table-auto mb-4">
         <thead>
