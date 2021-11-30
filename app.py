@@ -856,7 +856,11 @@ def view_program(id):
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['loaded_program'] = result
     arguments_dict['editor_readonly'] = True
-    arguments_dict['show_edit_button'] = True
+
+    if ("submitted" in result and result['submitted']):
+        arguments_dict['show_edit_button'] = False
+    else:
+        arguments_dict['show_edit_button'] = True
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
