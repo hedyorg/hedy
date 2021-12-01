@@ -648,11 +648,9 @@ class Filter(Transformer):
         if all(bool_arguments):
             return [True] #all complete
         else:
-            command_num = 1
             for a in args:
                 if not a[0]:
-                    return False, a[1], command_num
-                command_num += 1
+                    return False, a[1]
 
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
@@ -703,7 +701,7 @@ class IsValid(Filter):
     # tree is transformed to a node of [Bool, args, command number]
     def program(self, args, meta):
         if len(args) == 0:
-            return False, InvalidInfo("empty program"), 1
+            return False, InvalidInfo("empty program")
         return super().program(args)
 
     def invalid_space(self, args, meta):
@@ -736,29 +734,31 @@ def valid_echo(ast):
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
 
+@v_args(meta=True)
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
-    # print, ask an echo can miss arguments and then are not complete
+    # print, ask and echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
 
-    def ask(self, args):
+
+    def ask(self, args, meta):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
-        incomplete = (args == [] and self.level==1) or (len(args) == 1 and self.level >= 2)
-        return not incomplete, 'ask'
-    def print(self, args):
-        return args != [], 'print'
-    def input(self, args):
-        return args != [], 'input'
-    def length(self, args):
-        return args != [], 'len'
-    def print_nq(self, args):
-        return args != [], 'print level 2'
-    def echo(self, args):
+        incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
+        return not incomplete, ('ask', meta.line)
+    def print(self, args, meta):
+        return args != [], ('print', meta.line)
+    def input(self, args, meta):
+        return args != [], ('input', meta.line)
+    def length(self, args, meta):
+        return args != [], ('len', meta.line)
+    def print_nq(self, args, meta):
+        return args != [], ('print level 2', meta.line)
+    def echo(self, args, meta):
         #echo may miss an argument
-        return True, 'echo'
+        return True, ('echo', meta.line)
 
     #other rules are inherited from Filter
 
@@ -1833,19 +1833,22 @@ def parse_input(input_string, level, lang):
 
 
 def is_program_valid(program_root, input_string, level, lang):
-    # IsValid returns (True,) or (False, args, line)
+    # IsValid returns (True,) or (False, args)
     is_valid = IsValid().transform(program_root)
 
     if not is_valid[0]:
-        _, invalid_info, line = is_valid
+        _, invalid_info = is_valid
 
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
         if isinstance(invalid_info, list):
             invalid_info = invalid_info[0]
+
+        line = invalid_info.line
         if invalid_info.error_type == ' ':
-            #the error here is a space at the beginning of a line, we can fix that!
+
+            # the error here is a space at the beginning of a line, we can fix that!
             fixed_code = program_repair.remove_leading_spaces(input_string)
             if fixed_code != input_string: #only if we have made a successful fix
                 try:
@@ -1895,8 +1898,9 @@ def is_program_valid(program_root, input_string, level, lang):
 def is_program_complete(abstract_syntax_tree, level):
     is_complete = IsComplete(level).transform(abstract_syntax_tree)
     if not is_complete[0]:
-        incomplete_command = is_complete[1][0]
-        line = is_complete[2]
+        incomplete_command_and_line = is_complete[1][0]
+        incomplete_command = incomplete_command_and_line[0]
+        line = incomplete_command_and_line[1]
         raise exceptions.IncompleteCommandException(incomplete_command=incomplete_command, level=level,
                                                     line_number=line)
 
