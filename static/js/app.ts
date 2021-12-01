@@ -376,24 +376,8 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
-  error.hide();
-  success.hide();
-
-  if (reloadOnExpiredSession ()) return;
-
-  try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
-    window.State.unsaved_changes = false;
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+  window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
     // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
@@ -401,24 +385,6 @@ export function saveit(level: number | [number, string], lang: string, name: str
        adventure_name = level [1];
        level = level [0];
     }
-
-    //First we check if the name already exists, if so: return an overwrite warning!
-    $.ajax({
-      type: 'POST',
-      url: '/programs/duplicate-check',
-      data: JSON.stringify({
-        name:  name
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response['duplicate']) {
-        modal.confirm (auth.texts['overwrite_warning'], function () {
-          console.log("We gaan door!");
-        });
-      }
-    });
-
 
     $.ajax({
       type: 'POST',
@@ -459,6 +425,42 @@ export function saveit(level: number | [number, string], lang: string, name: str
          localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
          window.location.pathname = '/login';
+      }
+    });
+}
+
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+  error.hide();
+  success.hide();
+
+  if (reloadOnExpiredSession ()) return;
+
+  try {
+    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
+    if (! auth.profile) {
+       return modal.confirm (auth.texts['save_prompt'], function () {
+         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         window.location.pathname = '/login';
+       });
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/programs/duplicate-check',
+      data: JSON.stringify({
+        name:  name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response['duplicate']) {
+        modal.confirm (auth.texts['overwrite_warning'], function () {
+          storeProgram(level, lang, name, code, cb);
+        });
+      } else {
+         storeProgram(level, lang, name, code, cb);
       }
     });
   } catch (e: any) {
