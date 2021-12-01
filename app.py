@@ -1113,8 +1113,8 @@ def check_duplicate_program(user):
     programs = DATABASE.programs_for_user(user['username'])
     for program in programs:
         if program['name'] == body['name']:
-            return jsonify({'program_id': program['id']})
-    return jsonify({})
+            return jsonify({'duplicate': True})
+    return jsonify({'duplicate': False})
 
 @app.route('/programs', methods=['POST'])
 @requires_login
@@ -1127,8 +1127,6 @@ def save_program(user):
         return 'code must be a string', 400
     if not isinstance(body.get('name'), str):
         return 'name must be a string', 400
-    if not isinstance(body.get('id'), str):
-        return 'id must be a string', 400
     if not isinstance(body.get('level'), int):
         return 'level must be an integer', 400
     if 'adventure_name' in body:
@@ -1138,9 +1136,14 @@ def save_program(user):
     # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    if len(body['id'] >= 1):
-        overwrite = True
-        program_id = body['id']
+    programs = DATABASE.programs_for_user(user['username'])
+    program_id = uuid.uuid4().hex
+    overwrite = False
+    for program in programs:
+        if program['name'] == body['name']:
+            overwrite = True
+            program_id = program['id']
+            break
 
     stored_program = {
         'id': program_id,
