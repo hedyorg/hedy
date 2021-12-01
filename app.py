@@ -1108,6 +1108,21 @@ def delete_program(user, program_id):
     DATABASE.increase_user_program_count(user['username'], -1)
     return redirect('/programs')
 
+@app.route('/programs/duplicate-check', methods=['POST'])
+@requires_login
+def check_duplicate_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('name'), str):
+        return 'name must be a string', 400
+
+    programs = DATABASE.programs_for_user(user['username'])
+    for program in programs:
+        if program['name'] == body['name']:
+            return jsonify({'duplicate': True})
+    return jsonify({'duplicate': False})
+
 @app.route('/programs', methods=['POST'])
 @requires_login
 def save_program(user):

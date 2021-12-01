@@ -402,6 +402,24 @@ export function saveit(level: number | [number, string], lang: string, name: str
        level = level [0];
     }
 
+    //First we check if the name already exists, if so: return an overwrite warning!
+    $.ajax({
+      type: 'POST',
+      url: '/programs/duplicate-check',
+      data: JSON.stringify({
+        name:  name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response['duplicate']) {
+        modal.confirm (auth.texts['overwrite_warning'], function () {
+          console.log("We gaan door!");
+        });
+      }
+    });
+
+
     $.ajax({
       type: 'POST',
       url: '/programs',
