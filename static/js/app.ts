@@ -376,7 +376,7 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, id: string, cb?: (err: any, resp?: any) => void) {
   window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
@@ -394,6 +394,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
         lang:  lang,
         name:  name,
         code:  code,
+        id: id,
         adventure_name: adventure_name
       }),
       contentType: 'application/json',
@@ -455,12 +456,12 @@ export function saveit(level: number | [number, string], lang: string, name: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response['duplicate']) {
+      if (response['program_id']) {
         modal.confirm (auth.texts['overwrite_warning'], function () {
-          storeProgram(level, lang, name, code, cb);
+          storeProgram(level, lang, name, code, response['program_id'], cb);
         });
       } else {
-         storeProgram(level, lang, name, code, cb);
+         storeProgram(level, lang, name, code, "", cb);
       }
     });
   } catch (e: any) {
