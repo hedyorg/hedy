@@ -1138,7 +1138,7 @@ def save_program(user):
     # We check if a program with a name `xyz` exists in the database for the username.
     # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
     # For now, we bring all existing programs for the user and then search within them for repeated names.
-    if len(body['id'] > 1):
+    if len(body['id'] >= 1):
         overwrite = True
         program_id = body['id']
 
