@@ -639,6 +639,8 @@ def are_all_arguments_true(args):
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
 # TODO: this could also use a default lark rule like AllAssignmentCommands does now
+
+# TODO: maybe this could use meta (with v_args) instead of both inheritors?
 class Filter(Transformer):
     def __default__(self, args, children, meta):
         return are_all_arguments_true(children)
