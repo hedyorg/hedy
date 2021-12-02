@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="px-8 py-12 relative">
+<div class="px-8 py-12 relative text-xl">
     <a class="github-fork-ribbon left-top" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <div class="px-8">
       <div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
@@ -13,10 +13,10 @@
             <a href="/hedy"><button class="green-btn text-white px-8 py-4">{{ content.try_it }}</button></a>
         </div>
       </div>
-      <div id="main_page_content" class="text-lg">
+      <div id="main_page_content">
           {% for section in content['sections'] %}
           <h2>{{ section['title'] }}</h2>
-          <p>{{ section['text']|commonmark }}</p>
+          <p>{{ section['text'] | commonmark }}</p>
           {% endfor %}
       </div>
     </div>
