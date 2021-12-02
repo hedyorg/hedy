@@ -240,6 +240,36 @@ adventures:
                         else
                             print 'Nope they are not at the ' location
                     print 'Now you can enter the house!'
+            13:
+                story_text: |
+                    ## Story
+                    By using the `and` and `or` commands, you can shorten your stories. For example, check out the dragon story.
+
+                    ## Example Hedy code
+                    ```
+                    sword is 'lost'
+                    game is 'on'
+                    print 'Our hero is walking through the forest'
+                    print 'The path splits two ways'
+                    for i in range 0 to 2
+                        if game is 'on'
+                            path is ask 'Which path should she choose?'
+                            if path is 'left' and sword is 'found'
+                                print 'Our hero comes across a dragon!'
+                                print 'Luckily our hero has a sword to defeat the beast!'
+                                game is 'over'
+                            if path is 'left' and sword is 'lost'
+                                print 'Our hero finds a dragon, but she doesnt have any weapons!'
+                                print 'Our hero is beaten by the dragon...'
+                                print 'Try again'
+                                game is 'over'
+                            if path is 'right' and sword is 'found'
+                                print 'You have already found the sword. There is nothing left here.'
+                                print 'She walks back'
+                            if path is 'right' and sword is 'lost'
+                                print 'Our hero finds a sword'
+                                print 'This could come in very handy'
+                                sword is 'found'
                     ```
                 start_code: ""
     songs:
@@ -894,6 +924,24 @@ adventures:
                         if computer_choice is 'rock' and your_choice is 'paper'
                             print 'You win!'
                             won is 'yes'
+            13:
+                story_text: |
+                    ## Rock, paper, scissors
+                    With the `and` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+
+                    ## Example Hedy code
+                    ```
+                    options is 'rock', 'paper', 'scissors'
+                    your_choice is ask 'What do you choose?'
+                    computer_choice is options at random
+                    print 'You choose ' your_choice
+                    print 'The computer chooses ' computer_choice
+                    if computer_choice is your_choice
+                        print 'Tie'
+                    if computer_choice is 'rock' and your_choice is 'paper'
+                        print 'Jij wint!'
+                    if computer_choice is 'rock' and your_choice is 'scissors'
+                        print 'The computer wins!'
                     ```
                 start_code: ""
     calculator:
@@ -1347,6 +1395,27 @@ adventures:
                         print order
                         more is ask 'Would you like to order anything else?'
                     print 'Thank you!'
+            13:
+                story_text: |
+                    ## Restaurant
+                    In this level we can use the new commands to upgrade our restaurant.
+
+                    ## Example Hedy code with the `and` command
+                    ```
+                    price is 10
+                    food is ask 'What would you like to eat?'
+                    drinks is ask 'What would you like to drink?'
+                    if food is 'sandwich' and drinks is 'juice'
+                        print 'Thats our discount menu'
+                        price is price - 3
+                    print 'That will be ' price ' dollars'
+                    ```
+
+                    ## Example Hedy code with the `or` command
+                    ```
+                    drinks is ask 'What would you like to drink?'
+                    if drinks is 'water' or drinks is 'juice'
+                        print 'Thats a healthy choice'
                     ```
                 start_code: ""
     fortune:
