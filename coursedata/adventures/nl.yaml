@@ -1032,6 +1032,28 @@ adventures:
                     else print 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "print 'Welkom bij jouw rekenmachine'"
+            15:
+                story_text: |
+                    ## Rekenmachine
+                    In het rekenspelletje dat je een aantal levels terug hebt leren maken, kun je de `while` loop toevoegen.
+                    Hierdoor mag de speler pas door naar de volgende vraag als het goede antwoord gegeven is.
+                    ## Voobeeld Hedy code
+                    ```
+                    score is 0
+                    for i in range 0 to 9
+                        getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        getal1 is getallen at random
+                        getal2 is getallen at random
+                        goedeantwoord is getal1 * getal2
+                        antwoord is 0
+                        while antwoord != goedeantwoord
+                            print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
+                            antwoord is ask 'Vul hier het antwoord in:'
+                            print 'Jouw antwoord is ' antwoord
+                        print 'Goedzo!'
+                    print 'Je hebt gewonnen!'
+                    ```
+                start_code: ""
     fortune:
         name: "Waarzegger"
         description: "Laat Hedy jouw toekomst voorspellen"

@@ -1009,6 +1009,29 @@ adventures:
                     ```
 
                 start_code: "print 'Welcome to this calculator!'"
+            15:
+                story_text: |
+                    ## Rekenmachine
+                    You can add the `while` loop to the calculator game you've learned to make in a previous level.
+                    This makes sure the player can't continue to the next question if they answer incorrectly.
+
+                    ## Example Hedy code
+                    ```
+                    score is 0
+                    for i in range 0 to 9
+                        numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number1 is numbers at random
+                        number2 is numbers at random
+                        correct is number1 * number2
+                        answer is 0
+                        while answer != correct
+                            print 'How much is ' number1 ' times ' number2 '?'
+                            answer is ask 'Fill in your answer:'
+                            print 'Your answer is ' answer
+                        print 'Good job!'
+                    print 'You win!'
+                    ```
+                start_code: ""
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
