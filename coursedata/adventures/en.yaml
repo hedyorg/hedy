@@ -768,6 +768,24 @@ adventures:
                     ```
 
                 start_code: "print What will the die indicate this time?"
+            15:
+                story_text: |
+                    ## Dice
+                    In this game you have to throw 6 in as little tries as possible.
+
+                    ## Example Hedy Code
+                    ```
+                    options is 1,2,3,4,5,6
+                    print 'Throw 6 as fast as you can!'
+                    thrown is 0
+                    tries is 0
+                    while thrown != 6
+                        thrown is options at random
+                        print 'You threw ' thrown
+                        tries is tries + 1
+                    print 'Yes! You have thrown 6 in ' tries ' tries.'
+                    ```
+                start_code: ""
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"

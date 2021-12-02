@@ -791,6 +791,24 @@ adventures:
                     Dat werkt niet goed! Dan krijg je: ik koos uit de [1, 2, 3, 4, 5, regenworm]. Dat kun je in level 3 oplossen.
 
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+            15:
+                story_text: |
+                    ## Dobbelstenen
+                    In dit dobbelspelletje moet je 6 gooien in zo min mogelijk beurten.
+
+                    ## Voobeeld Hedy Code
+                    ```
+                    opties is 1,2,3,4,5,6
+                    print 'Gooi 6 in zo min mogelijk beurten!'
+                    gegooid is 0
+                    pogingen is 0
+                    while gegooid != 6
+                        gegooid is opties at random
+                        print 'je gooide ' gegooid
+                        pogingen is pogingen + 1
+                    print 'Hoera! Je hebt 6 gegooid in ' pogingen ' pogingen.'
+                    ```
+                start_code: ""
     rock:
         name: "Steen, schaar, papier"
         description: "Maak jouw eigen steen, schaar, papier spel"
