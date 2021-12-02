@@ -944,6 +944,7 @@ def main_page(page):
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        print(for_teacher_translations)
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
@@ -954,7 +955,11 @@ def main_page(page):
             return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang,
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
 
+    print("Hier komen we!")
+    print(page)
+    print(g.lang)
     main_page_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+    print("Nu kom de mag")
     return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=main_page_translations)
 
 def session_id():

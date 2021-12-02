@@ -23,15 +23,15 @@
 <div class="w-full mt-4">
     <h2 class="text-center">{{ content['title'] }}</h2>
     <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
-    {% for section_key, section in content['sections'].items() %}
-        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{section_key}}" onclick="hedyApp.show_doc_section('{{section_key}}')">{{section.title}}</button>
+    {% for section in content['sections'] %}
+        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{section_key}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
     {% endfor %}
     </div>
-    {% for section_key, section in content['sections'].items() %}
-        <div class="section hidden turn-pre-into-ace" id="section-{{section_key}}">
-        {% for subsection_key, subsection in section['subsections'].items() %}
-            <h4>{{ subsection['title'] }}</h4>
-            <p>{{ subsection['text']|commonmark }}</p>
+    {% for section in content['sections'] %}
+        <div class="section hidden turn-pre-into-ace" id="section-{{loop.index}}">
+        {% for subsection in section['subsections'] %}
+            <h4>{{ subsection.title }}</h4>
+            <p>{{ subsection.text|commonmark }}</p>
         {% endfor %}
         </div>
     {% endfor %}
