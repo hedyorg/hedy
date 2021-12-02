@@ -11,7 +11,7 @@ def get_list_keywords(commands, to_lang):
     """
     
     translation_commands = []
-    path_keywords = "../coursedata/keywords"
+    path_keywords = "coursedata/keywords"
     
     to_yaml_filesname_with_path = os.path.join(path_keywords, to_lang + '.yaml')
     en_yaml_filesname_with_path = os.path.join(path_keywords, 'en' + '.yaml')
