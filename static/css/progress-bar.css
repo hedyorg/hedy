@@ -1,17 +1,26 @@
+.container{
+     max-width:100%!important;
+}
+
 .clearfix:after {
-  clear: both;
-  content: "";
-  display: block;
-  height: 0;
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
 }
 
 .arrow-steps {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     line-height: 3;
     width:100%;
 }
 
 .step {
+    display: flex;
+    flex:1;
+    justify-content: space-around;
     border-radius:5px;
     font-size: 14px;
     text-align: center;
@@ -19,7 +28,6 @@
     cursor: default;
     float: left;
     position: relative;
-    width: 10%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
