@@ -155,23 +155,6 @@ class ConvertToLang3(ConvertToLang2):
 
 @hedy_translator(level=4)
 class ConvertToLang4(ConvertToLang3):
-    def check_print_arguments(self, args):
-        # this function checks whether arguments of a print are valid
-        # we can print if all arguments are either quoted OR they are all variables
-
-        quoted_args = [a for a in args if hedy.is_quoted(a)]
-        unquoted_args = [a for a in args if not hedy.is_quoted(a)]
-        unquoted_in_lookup = [hedy.is_variable(a, self.lookup) for a in unquoted_args]
-
-        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
-            return args
-        else:
-            # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
-            first_unquoted_var = unquoted_args[0]
-            raise hedy.exceptions.UndefinedVarException(name=first_unquoted_var)
 
     def print(self, args):
         i = 0
@@ -206,3 +189,5 @@ class ConvertToLang5(ConvertToLang4):
 
     def in_list_check(self, args):
         return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
+
+translate_keywords("hedy is hi\nprint 'hallo ' hedy", level=4)
