@@ -230,6 +230,37 @@ adventures:
                     ```
 
                 start_code: "print 'Hier komt straks jouw verhaal!'"
+            13:
+                story_text: |
+                    ## Verhaal
+                    Door `and` en `or` te gebruiken kun je je codes een stuk inkorten. Neem bijvoorbeeld het verhaal over de draak uit de vorige levels.
+
+                    ## Voorbeeld Hedy Code
+                    ```
+                    zwaard is 'kwijt'
+                    spel is 'aan'
+                    print 'Onze held loopt door het bos'
+                    print 'Ineens komt ze bij een splitsing...'
+                    for i in range 0 to 2
+                        if spel is 'aan'
+                            pad is ask 'Welk pad moet onze held kiezen?'
+                            if pad is 'links' and zwaard is 'gevonden'
+                                print 'Onze held komt een draak tegen op het pad!'
+                                print 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
+                                spel is 'over'
+                            if pad is 'links' and zwaard is 'kwijt'
+                                print 'Onze held vindt een draak, maar ze heeft geen wapens!'
+                                print 'Onze held wordt met huid en haar verslonden...'
+                                spel is 'over'
+                            if pad is 'rechts' and zwaard is 'gevonden'
+                                print 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
+                                print 'Ze loopt terug'
+                            if pad is 'rechts' and zwaard is 'kwijt'
+                                print 'Onze held vindt een zwaard'
+                                print 'Die kan nog goed van pas komen'
+                                zwaard is 'gevonden'
+                    ```
+                start_code: ""
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "
