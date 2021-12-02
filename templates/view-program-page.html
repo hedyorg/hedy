@@ -1,8 +1,15 @@
 {% extends "layout.html" %}
 {% block body %}
 <div style="height: 30px;"></div>
-<div tabindex="0" class="flex-grow p-8">
+<div tabindex="0" class="flex-grow px-8">
+  {% if loaded_program.submitted %}
+      <div class="text-center">
+        <h2>{{submitted_header}}</h2>
+        <h3>{{last_edited}}: {{program_timestamp}}</h3>
+      </div>
+  {% endif %}
   <h1>{{loaded_program.name}}</h1>
+  <h2 class="mt-0">{{level_title}} {{level}}</h2>
   <div>{{by}} <strong>{{loaded_program.username}}</strong></div>
   {% include "incl-editor-and-output.html" %}
 </div>

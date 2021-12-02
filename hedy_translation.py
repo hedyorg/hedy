@@ -1,31 +1,20 @@
 from lark import Transformer, Tree
 import hedy
-
+import yaml 
+import os 
 
 TRANSPILER_LOOKUP = {}
 
 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    keywords = {}
-    keywords_from = hedy.get_keywords_for_language("en").replace("\n\n", "\n").splitlines()
+    keywords_path = './coursedata/keywords/'
+    yaml_filesname_with_path = os.path.join(keywords_path, to_lang + '.yaml')
+    
+    with open(yaml_filesname_with_path, 'r') as stream:
+      command_combinations = yaml.safe_load(stream)
 
-    keywords_to = hedy.get_keywords_for_language(to_lang).replace("\n\n", "\n").splitlines()
-    keywords_from_withoutlvl = []
-    for line in keywords_from:
-        if line[0] != '/':
-            keywords_from_withoutlvl.append(line)
-
-    keywords_to_withoutlvl = []
-    for line in keywords_to:
-        if line[0] != '/':
-            keywords_to_withoutlvl.append(line)
-
-    for line in range(len(keywords_from_withoutlvl)):
-        keywords[(keywords_from_withoutlvl[line].split('"'))[1]] = keywords_to_withoutlvl[line].split('"')[1]
-
-    return keywords
-
+    return command_combinations
 
 def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""

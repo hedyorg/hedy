@@ -1,38 +1,23 @@
-def calc_index(input_string, line, column):
-    """"returns the index of char at (line, column) from input_string"""
-    # calc_index('print \'hello\'\nprint ,', 2, 7)
-    #                                    ^
-    # will return index 20 such that input_string[20] points to the same char at line 2 column 7
-    # lark starts counting line and column from 1
-    current_line = 1
-    current_index = column - 1
+def insert(input_string, line, column, new_string):
+    """"insert new_string at (line, column)"""
+    rows = input_string.splitlines()
+    rows[line] = rows[line][:column + 1] + new_string + rows[line][column + 1:]
 
-    for char in input_string:
-        if current_line == line:
-            break
-            
-        if char == '\n':
-            current_line += 1
-
-        current_index += 1
-
-    return current_index
+    return '\n'.join(rows)
 
 
-def insert(input_string, index, new_string):
-    """"insert new_string at input_string[index]"""
-    return input_string[:index + 1] + new_string + input_string[index + 1:]
+def delete(input_string, line, column, length):
+    """"delete length chars starting at (line, column)"""
+    rows = input_string.splitlines()
+    rows[line] = rows[line][:column] + rows[line][column + length:]
+
+    return '\n'.join(rows)
 
 
-def delete(input_string, index, length):
-    """"delete length chars from input_string[index]"""
-    return input_string[:index + 1] + input_string[index + 1 + length:]
-
-
-def replace(input_string, index, length, new_string):
-    """"replace at input_string[index] length chars with new_string"""
-    result = delete(input_string, index, length)
-    result = insert(result, index, new_string)
+def replace(input_string, line, column, length, new_string):
+    """"replace at (line, column) length chars with new_string"""
+    result = delete(input_string, line, column, length)
+    result = insert(result, line, column, new_string)
 
     return result
 
