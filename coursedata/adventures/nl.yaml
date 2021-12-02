@@ -1426,7 +1426,6 @@ adventures:
                         prijs is prijs + 1
                     ```
                 start_code: "print 'Welkom bij McHedy!' "
-
             7:
                 story_text: |
                     ## Restaurant level 6
@@ -1550,6 +1549,29 @@ adventures:
 
                     ## Uitdaging
                     Kun jij de restaurants nog leuker maken?
+                start_code: ""
+            13:
+                story_text: |
+                    ## Restaurant
+                    In dit level leer je nieuwe commando's om je code nog verder uit te breiden.
+
+                    ## Voorbeeld Hedy code met `and` commando
+                    ```
+                    prijs is 10
+                    eten is ask 'Wat wil je eten?'
+                    drinken is ask 'Wat wil je drinken?'
+                    if eten is 'broodje' and drinken is 'sap'
+                        print 'Dat is ons voordeelmenu'
+                        prijs is prijs - 3
+                    print 'Dat wordt dan ' prijs ' euro'
+                    ```
+
+                    ## Example Hedy code met het `or` commando
+                    ```
+                    drinken is ask 'Wat wil je drinken?'
+                    if drinken is 'water' or drinken is 'juice'
+                        print 'Dat is een gezonde keuze!'
+                    ```
                 start_code: ""
     haunted:
         name: "Spookhuis"

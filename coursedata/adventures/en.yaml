@@ -1299,6 +1299,29 @@ adventures:
                     ## Challenge
                     Can you think of any fun additions in your restaurant code?
                 start_code: ""
+            13:
+                story_text: |
+                    ## Restaurant
+                    In this level we can use the new commands to upgrade our restaurant.
+
+                    ## Example Hedy code with the `and` command
+                    ```
+                    price is 10
+                    food is ask 'What would you like to eat?'
+                    drinks is ask 'What would you like to drink?'
+                    if food is 'sandwich' and drinks is 'juice'
+                        print 'Thats our discount menu'
+                        price is price - 3
+                    print 'That will be ' price ' dollars'
+                    ```
+
+                    ## Example Hedy code with the `or` command
+                    ```
+                    drinks is ask 'What would you like to drink?'
+                    if drinks is 'water' or drinks is 'juice'
+                        print 'Thats a healthy choice'
+                    ```
+                start_code: ""
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
