@@ -510,6 +510,30 @@ export function share_program (level: number, lang: string, id: string | true, P
 
 }
 
+export function submit_program (id: string, shared: boolean) {
+  // We have to update the db to mark a program as "submitted"
+  // Then we have to call a "freeze()" function to disable functionality of program table
+  // Enable the open button, but use the share interface if done so (unable to edit)
+  // It gets more complex:
+  // -  If a student tries to direct link to the assignment we have to throw a 403 error
+  // -  Because they are no longer allowed to look at the program at hand
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  console.log(shared);
+  if (! shared) return modal.alert (auth.texts['must_be_shared']);
+
+  $.ajax({
+    type: 'POST',
+    url: '/programs/submit',
+    data: JSON.stringify({
+      id: id
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(_response) {
+    location.reload ();
+  });
+}
+
 export function copy_to_clipboard (string: string, noAlert: boolean) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -596,6 +620,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
+  } else {
+    // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
+    $('#turtlecanvas').show();
   }
 
   Sk.configure({
