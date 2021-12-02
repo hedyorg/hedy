@@ -948,6 +948,10 @@ def main_page(page):
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
 
 
+    # Here is when the magic happens
+    # Todo: Remove all .md depencies and re-write to .yaml files
+    # Great thing: the PageTranslations function is already written
+
     # Default to English if requested language is not available
     effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'
 
