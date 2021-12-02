@@ -7,56 +7,41 @@
 
 .arrow-steps {
     display: block;
+    line-height: 3;
+    width:100%;
 }
 
-.arrow-steps .step {
+.step {
+    border-radius:5px;
     font-size: 14px;
     text-align: center;
     color: #777;
     cursor: default;
     float: left;
     position: relative;
-    width: 15%;
+    width: 10%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
      user-select: none;
+    margin: 3px;
 }
 
-
-.step:nth-child(even) .pre-step {
-    background-color:#edf2f7;
-    position: relative;
-    width:100%;
-    z-index: 0;
-
-}
-
-.step:nth-child(odd) .pre-step {
-    background-color:#bbbfc4;
-    position: relative;
-    width:100%;
-    z-index: 0;
-}
-
-
-.step:nth-child(even) .post-step {
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
+.step:nth-child(even){
     background-color: #bbbfc4;
     position: relative;
-    width: 100%;
     z-index: 10;
-
+    text-align: center;
+    font-size: 14px;
+    color: #eeecec;
 }
 
 
-.step:nth-child(odd) .post-step {
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
+.step:nth-child(odd){
     background-color: #edf2f7;
     position: relative;
-    width: 100%;
     z-index: 10;
-
+    text-align: center;
+    font-size: 14px;
+    color: #777;
 }
