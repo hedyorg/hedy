@@ -873,6 +873,29 @@ adventures:
                     print choices at random
                     ```
                 start_code: "print Welcome to your own rock scissors paper!"
+            15:
+                story_text: |
+                    ## Rock, Paper, Scissors
+                    Play until you beat the computer! But first, finish the example code...
+
+                    ## Example Hedy code
+                    ```
+                    won is 'no'
+                    options is 'rock', 'paper', 'scissors'
+                    while won is 'no'
+                        your_choice is ask 'What do you choose?'
+                        computer_choice is options at random
+                        print 'you chose ' your_choice
+                        print 'the computer chose ' computer_choice
+                        if computer_choice is your_choice
+                            print 'Tie!'
+                        if computer_choice is 'rock' and your_choice is 'scissors'
+                            print 'You lose!'
+                        if computer_choice is 'rock' and your_choice is 'paper'
+                            print 'You win!'
+                            won is 'yes'
+                    ```
+                start_code: ""
     calculator:
         name: "Calculator"
         description: "Create a calculator"
