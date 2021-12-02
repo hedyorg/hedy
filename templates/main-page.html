@@ -13,8 +13,11 @@
             <a href="/hedy"><button class="green-btn text-white px-8 py-4">{{ content.try_it }}</button></a>
         </div>
       </div>
-      <div id="main_page_content">
-          TEST
+      <div id="main_page_content" class="text-lg">
+          {% for section in content['sections'] %}
+          <h2>{{ section['title'] }}</h2>
+          <p>{{ section['text']|commonmark }}</p>
+          {% endfor %}
       </div>
     </div>
 </div>

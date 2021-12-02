@@ -12,20 +12,11 @@ page_title: Welkom bij Hedy!
 
 ## Wat is een graduele programmeertaal?
 
-Programmeren is lastig te leren. Niet dat het nou perse zo lastig is hoor! Maar je moet een hoop codes uit je hoofd leren. Net als bij leren lezen, moet je ook een hoop oefenen.
-Nu lees jij deze zinnen zonder problemen. Maar misschien weet je nog wel dat het in groep 3 nog lettertje per lettertje ging.
-Zo is het bij programmeren ook, met wat oefening kan het jou zeker lukken.
 
-Het fijne van Hedy is dat Hedy een *graduele* programmeertaal is. Dat betekent dat je niet alle regels tegelijk hoeft te leren. Dat gaat namelijk stap voor stap. De eerste levels hebben nog maar weinig regels, zodat je rustig kan wennen aan programmeren.
-Ieder level voegen we nieuwe regels toe, en zo leer je steeds nieuwe *commando's*. Commando's zijn opdrachten die een computer kan lezen.
 
 ## Waarom is Hedy gradueel?
 
-In deze video legt Felienne, de maker van Hedy, er meer over uit. Deze video is op dit moment alleen nog in het Engels beschikbaar.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
 
 ## Voor wie is Hedy bedoeld?
 
