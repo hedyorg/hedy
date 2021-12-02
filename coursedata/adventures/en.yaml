@@ -1269,6 +1269,22 @@ adventures:
                     ## Challenge
                     Can you think of any fun additions in your restaurant code?
                 start_code: ""
+            15:
+                story_text: |
+                    ## Restaurant
+                    With the `while` you can make sure your costumers can keep adding orders until they are done.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Welcome at McHedy'
+                    more is 'yes'
+                    while more is 'yes'
+                        order is ask 'What would you like to order?'
+                        print order
+                        more is ask 'Would you like to order anything else?'
+                    print 'Thank you!'
+                    ```
+                start_code: ""
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
