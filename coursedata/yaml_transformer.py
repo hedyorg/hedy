@@ -8,6 +8,8 @@ import yaml
 def nop(s):
   return s
 
+def set_local():
+  hedy.local_keywords_enabled = True
 
 def transform_yaml_to_lark(only_new_lang=True):
   """Creates a lark file in ./grammars/ for  all yaml files located in ./coursedata/keywords/.
