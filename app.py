@@ -865,9 +865,11 @@ def view_program(id):
         arguments_dict['show_edit_button'] = False
         texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
         now = timems()
+        date, measure = get_user_formatted_timestamp(texts, now, result['date'])
+        arguments_dict['program_age'] = texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2']
+        arguments_dict['program_timestamp'] = datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S') + " GMT"
         arguments_dict['submitted_header'] = texts['submitted_header']
         arguments_dict['last_edited'] = texts['last_edited']
-        arguments_dict['program_timestamp'] = datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')
     else:
         arguments_dict['show_edit_button'] = True
 

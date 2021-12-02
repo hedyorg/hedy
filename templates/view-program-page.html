@@ -5,7 +5,7 @@
   {% if loaded_program.submitted %}
       <div class="text-center">
         <h2>{{submitted_header}}</h2>
-        <h3>{{last_edited}}: {{program_timestamp}}</h3>
+        <h3 class="inline-block mt-0">{{last_edited}}: {{program_timestamp}}</h3> - {{program_age}}
       </div>
   {% endif %}
   <h1>{{loaded_program.name}}</h1>
