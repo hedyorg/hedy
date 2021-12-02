@@ -16,7 +16,7 @@ def keywords_to_dict(to_lang="nl"):
 
     return command_combinations
 
-def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
+def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     parser = hedy.get_parser(level, from_lang)
 
