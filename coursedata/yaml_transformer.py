@@ -18,9 +18,9 @@ def transform_yaml_to_lark(only_new_lang=True):
   Args:
       only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
   """
-  input_path = '../coursedata/keywords/'
-  current_grammar_path = '../grammars/'
-  output_path = '../grammars-transformed/'
+  input_path = './coursedata/keywords/'
+  current_grammar_path = './grammars/'
+  output_path = './grammars-transformed/'
   Path(output_path).mkdir(parents=True, exist_ok=True)
 
   yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
@@ -133,5 +133,5 @@ def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
-transform_yaml_to_lark(False)
+# transform_yaml_to_lark(False)
 # transform_levels_in_all_YAMLs('colon', 17)
