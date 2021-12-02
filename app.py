@@ -926,7 +926,7 @@ def main_page(page):
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang);
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
-            session['welcome-teacher'] = False
+            session.pop('welcome-teacher', None)
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
             return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=for_teacher_translations, teacher_classes=teacher_classes, welcome_teacher=welcome_teacher)
