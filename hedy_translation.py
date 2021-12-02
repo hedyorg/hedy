@@ -155,7 +155,7 @@ class ConvertToLang3(ConvertToLang2):
 
 @hedy_translator(level=4)
 class ConvertToLang4(ConvertToLang3):
-
+    
     def print(self, args):
         i = 0
         #    self.check_args_type_allowed(args, 'print', self.level)
@@ -189,5 +189,3 @@ class ConvertToLang5(ConvertToLang4):
 
     def in_list_check(self, args):
         return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
-
-translate_keywords("hedy is hi\nprint 'hallo ' hedy", level=4)
