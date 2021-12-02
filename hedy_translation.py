@@ -87,6 +87,7 @@ class ConvertToLang1(Transformer):
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
 
+
 @hedy_translator(level=2)
 class ConvertToLang2(ConvertToLang1):
 
@@ -133,3 +134,75 @@ class ConvertToLang2(ConvertToLang1):
 
     def echo_dep_2(self, args):
         return self.keywords["echo"] + " " + ''.join([str(c) for c in args])
+
+
+@hedy_translator(level=3)
+class ConvertToLang3(ConvertToLang2):
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+
+    def var_access(self, args):
+        return ''.join([str(c) for c in args])
+
+    def assign_list(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+
+    def list_access(self, args):
+        return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
+
+
+@hedy_translator(level=4)
+class ConvertToLang4(ConvertToLang3):
+    def check_print_arguments(self, args):
+        # this function checks whether arguments of a print are valid
+        # we can print if all arguments are either quoted OR they are all variables
+
+        quoted_args = [a for a in args if hedy.is_quoted(a)]
+        unquoted_args = [a for a in args if not hedy.is_quoted(a)]
+        unquoted_in_lookup = [hedy.is_variable(a, self.lookup) for a in unquoted_args]
+
+        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
+            # all good? return for further processing
+            return args
+        else:
+            # return first name with issue
+            # note this is where issue #832 can be addressed by checking whether
+            # first_unquoted_var ius similar to something in the lookup list
+            first_unquoted_var = unquoted_args[0]
+            raise hedy.exceptions.UndefinedVarException(name=first_unquoted_var)
+
+    def print(self, args):
+        i = 0
+        #    self.check_args_type_allowed(args, 'print', self.level)
+        argument_string = ""
+        for argument in args:
+            if i == len(args) or args[i] in self.punctuation_symbols:
+                space = ''
+            else:
+                space = " "
+            argument_string += space + argument
+            i += 1
+        return self.keywords["print"] + argument_string
+
+    def print_nq(self, args):
+        return ConvertToLang2.print(self, args)
+
+
+@hedy_translator(level=5)
+class ConvertToLang5(ConvertToLang4):
+    def ifs(self, args):
+        return self.keywords["if"] + " " + ''.join([str(c) for c in args])
+
+    def ifelse(self, args):
+        return self.keywords["if"] + " " + args[0] + args[1] + " " + self.keywords["else"] + " " + args[2]
+
+    def condition(self, args):
+        return ' and '.join(args)
+
+    def equality_check(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "
+
+    def in_list_check(self, args):
+        return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
