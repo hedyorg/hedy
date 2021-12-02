@@ -20,6 +20,46 @@ class TestsLevel8(HedyTester):
       print(f'koekoek')""")
 
     self.assertEqual(expected, result.code)
+
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b
+      c is 1""")
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if str(a) == str(b):
+      c = '1'""")
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      expected=expected
+    )
+
+  def test_if_in_list_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+    items is red
+    if red in items
+        print 'found!'""")
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  def test_equality_with_list_gives_error(self):
+    code = textwrap.dedent("""\
+    color is 5, 6, 7
+    if red is color
+        print 'success!'""")
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_repeat_with_indent(self):
     code = textwrap.dedent("""\
     repeat 5 times
@@ -91,7 +131,7 @@ class TestsLevel8(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    antwoord = input('Hoeveel is 10 plus 10?')
+    antwoord = input(f'Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
       print(f'Goedzo!')
       print(f'Het antwoord was inderdaad {antwoord}')
@@ -140,8 +180,7 @@ class TestsLevel8(HedyTester):
     self.multi_level_tester(
       max_level=9,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_issue_297(self):
@@ -199,8 +238,8 @@ class TestsLevel8(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      max_level=16,
+      expected=expected
     )
 
 

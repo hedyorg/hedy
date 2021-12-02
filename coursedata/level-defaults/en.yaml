@@ -392,7 +392,7 @@
         print 'decimal numbers now need to use a dot'
         print 2.5 + 2.5
     intro_text: |
-        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
+        So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the . for decimal numbers.
 
         For this level on you will also have to use quotation marks when storing a text with `is`:
 
@@ -610,37 +610,37 @@
 #                print('That is correct!')
 #            else:
 #                print('No, that is wrong!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Ready or not, here I come!'
-#    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation."
-#    commands:
-#    -   name: "print"
-#        explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 12:
-#                print i
-#            print 'Ready or not, here I come!'
-#    -   name: "if"
-#        explanation: "We need to do the same with all of our `if` statements"
-#        example: "if colour is green:'"
-#        demo_code: |-
-#            colour is green
-#            if colour is green:
-#                print 'The colour is green'
-#            else:
-#                print 'The colour is not green'
-#    -   name: "elif"
-#        explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is not 1 or 2'
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Ready or not, here I come!'
+    intro_text: "Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation."
+    commands:
+    -   name: "print"
+        explanation: "When we use a `for`, we need to put a `:` behind the `for` statement!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 12:
+                print i
+            print 'Ready or not, here I come!'
+    -   name: "if"
+        explanation: "We need to do the same with all of our `if` statements"
+        example: "if colour is green:'"
+        demo_code: |-
+            colour is ask 'What is your favorite color?'
+            if colour is green:
+                print 'Your favorite colour is green'
+            else:
+                print 'Your favorite colour is not green'
+    -   name: "elif"
+        explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is not 1 or 2'

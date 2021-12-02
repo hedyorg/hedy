@@ -1,5 +1,6 @@
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel6(HedyTester):
@@ -19,23 +20,15 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
-  def test_unsupported_float_with_dot(self):
+  @parameterized.expand(['1.5', '1,5'])
+  def test_calculation_with_unsupported_float_gives_error(self, number):
     self.multi_level_tester(
-      max_level=10,
-      code="print 1.5 + 1",
-      exception=hedy.exceptions.UnsupportedFloatException,
-      test_name=self.name()
-    )
-  def test_unsupported_float_with_comma(self):
-    self.multi_level_tester(
-      max_level=10,
-      code="print 1,5 + 1",
-      exception=hedy.exceptions.UnsupportedFloatException,
-      test_name=self.name()
+      max_level=11,
+      code=f"print {number} + 1",
+      exception=hedy.exceptions.UnsupportedFloatException
     )
 
   #ask tests
@@ -46,7 +39,7 @@ class TestsLevel6(HedyTester):
     result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
-    antwoord = input('wat is je lievelingskleur?')""")
+    antwoord = input(f'wat is je lievelingskleur?')""")
 
     self.assertEqual(expected, result.code)
     self.assertEqual(False, result.has_turtle)
@@ -71,9 +64,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_print_if_else_with_line_break_and_space(self):
     # line breaks should be allowed in if-elses until level 7 when we start with indentation
@@ -95,9 +86,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
   def test_if_else_with_space(self):
     #this code has a space at the end of line 2
@@ -116,9 +105,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected,
-      test_name=self.name(),
-      extra_check_function=self.is_not_turtle()
+      expected=expected
     )
 
   # calculation tests
@@ -195,9 +182,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=10,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_calc_vars(self):
@@ -251,6 +236,27 @@ class TestsLevel6(HedyTester):
     self.assertEqual(False, result.has_turtle)
     self.assertEqual("0", HedyTester.run_code(result))
 
+  def test_calc_with_string_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is test
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  def test_calc_with_list_var_gives_type_error(self):
+    code = textwrap.dedent("""\
+      a is one, two
+      print a + 2""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
 
   # combined tests
   def test_print_else(self):
@@ -292,9 +298,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
   def test_ifelse_calc_vars(self):
     code =  textwrap.dedent("""\
@@ -316,9 +320,7 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_if_calc_vars(self):
@@ -337,9 +339,23 @@ class TestsLevel6(HedyTester):
     self.multi_level_tester(
       max_level=6,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
+    )
+
+  def test_equality_promotes_int_to_string(self):
+    code = textwrap.dedent("""\
+    a is test
+    b is 15
+    if a is b c is 1""")
+    expected = textwrap.dedent("""\
+    a = 'test'
+    b = '15'
+    if str(a) == str(b):
+      c = '1'""")
+    self.multi_level_tester(
+      max_level=7,
+      code=code,
+      expected=expected
     )
 
   def test_calc_chained_vars(self):
@@ -357,18 +373,13 @@ class TestsLevel6(HedyTester):
       code=code,
       max_level=11,
       expected=expected,
-      extra_check_function=lambda x: self.run_code(x) == "11",
-      test_name=self.name()
+      extra_check_function=lambda x: self.run_code(x) == "11"
     )
 
-  def test_cyclic_var_reference_does_not_give_error(self):
+  def test_cyclic_var_definition_gives_error(self):
     code = "b is b + 1"
-
-    expected = "b = int(b) + int(1)"
 
     self.multi_level_tester(
       code=code,
-      max_level=11,
-      expected=expected,
-      test_name=self.name()
+      exception=hedy.exceptions.CyclicVariableDefinitionException
     )

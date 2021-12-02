@@ -36,15 +36,16 @@ class TestsLevel3(HedyTester):
 
 
   # issue #745
-  def test_print_list(self):
+  def test_print_list_gives_type_error(self):
     code = textwrap.dedent("""\
         plaatsen is een stad, een  dorp, een strand
-        print test plaatsen""")
+        print plaatsen""")
 
-    with self.assertRaises(hedy.exceptions.InvalidArgumentTypeException) as context:
-      result = hedy.transpile(code, self.level)
-
-    self.assertEqual('Invalid Argument Type', context.exception.error_code)
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
 
   def test_print_multiple_lines(self):
     code = textwrap.dedent("""\
@@ -107,6 +108,21 @@ class TestsLevel3(HedyTester):
 
     expected_output = HedyTester.run_code(result)
     self.assertEqual("Welcome to O/ceanView", expected_output)
+
+  def test_print_list_access(self):
+    code = textwrap.dedent("""\
+    animals is cat, dog, platypus
+    print animals at random""")
+
+    expected = textwrap.dedent("""\
+    animals = ['cat', 'dog', 'platypus']
+    print(f'{random.choice(animals)}')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected
+    )
 
   #is tests
   def test_assign(self):
@@ -217,8 +233,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
   def test_sleep_without_number(self):
     code = "sleep"
@@ -226,8 +241,7 @@ class TestsLevel3(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   #turn tests
@@ -260,15 +274,6 @@ class TestsLevel3(HedyTester):
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
 
-  # issue #792
-  def test_turn_right_number(self):
-    self.multi_level_tester(
-      max_level=10,
-      code="turn right 90",
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
-
   #forward tests
   def test_forward_without_argument(self):
     code = textwrap.dedent("""\
@@ -280,25 +285,15 @@ class TestsLevel3(HedyTester):
 
     self.assertEqual(expected, result.code)
     self.assertEqual(True, result.has_turtle)
-  def test_forward_with_string_variable(self):
-    code = textwrap.dedent("""\
-        a is test
-        forward a""")
-    self.multi_level_tester(
-      max_level=9,
-      code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
-    )
+
   def test_forward_with_list_variable(self):
     code = textwrap.dedent("""\
         a is 1, 2, 3
         forward a""")
     self.multi_level_tester(
-      max_level=9,
+      max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   #markup tests
@@ -390,8 +385,7 @@ class TestsLevel3(HedyTester):
       max_level=10,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
+      extra_check_function=check_in_list
     )
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
@@ -449,10 +443,73 @@ class TestsLevel3(HedyTester):
       max_level=10,
       code=code,
       expected=expected,
-      extra_check_function=check_in_list,
-      test_name=self.name()
+      extra_check_function=check_in_list
     )
 
+  #add/remove tests
+  def test_add_to_list(self):
+    code = textwrap.dedent("""\
+    color is ask what is your favorite color? 
+    colors is green, red, blue
+    add color to colors
+    print colors at random""")
+
+    expected = textwrap.dedent("""\
+    color = input('what is your favorite color'+'?')
+    colors = ['green', 'red', 'blue']
+    colors.append(color)
+    print(f'{random.choice(colors)}')""")
+
+    self.multi_level_tester(
+      max_level=3,
+      code=code,
+      expected=expected
+    )
+  def test_remove_from_list(self):
+    code = textwrap.dedent("""\
+    colors is green, red, blue
+    color is ask what color to remove?
+    remove color from colors
+    print colors at random""")
+
+    expected = textwrap.dedent("""\
+    colors = ['green', 'red', 'blue']
+    color = input('what color to remove'+'?')
+    try:
+        colors.remove(color)
+    except:
+       pass
+    print(f'{random.choice(colors)}')""")
+
+    self.multi_level_tester(
+      max_level=3,
+      code=code,
+      expected=expected
+    )
+
+  def test_add_to_list_with_string_var_gives_error(self):
+    code = textwrap.dedent("""\
+    color is yellow 
+    colors is green, red, blue
+    add colors to color""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
+  def test_remove_from_list_with_string_var_gives_error(self):
+    code = textwrap.dedent("""\
+    color is yellow 
+    colors is green, red, blue
+    remove colors from color""")
+
+    self.multi_level_tester(
+      max_level=11,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
   #negative tests
   def test_echo_no_longer_in_use(self):
     code = textwrap.dedent("""\
@@ -465,18 +522,17 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code="name is ask",
       max_level=10,
-      exception=hedy.exceptions.IncompleteCommandException,
-      test_name=self.name()
+      exception=hedy.exceptions.IncompleteCommandException
     )
-  def test_random_from_string(self):
+
+  def test_random_from_string_gives_type_error(self):
     code = textwrap.dedent("""\
       items is aap noot mies
       print items at random""")
     self.multi_level_tester(
       code=code,
-      max_level=4,
-      exception=hedy.exceptions.RequiredArgumentTypeException,
-      test_name=self.name()
+      max_level=5,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
   def test_random_undefined_var(self):
     # todo could be added for higher levels but that is a lot of variations so I am not doing it now :) (FH, oct 2021)
@@ -486,8 +542,7 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=10,
-      exception=hedy.exceptions.UndefinedVarException,
-      test_name=self.name()
+      exception=hedy.exceptions.UndefinedVarException
     )
 
   def test_ask_level_2(self):
@@ -498,9 +553,5 @@ class TestsLevel3(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=2,
-      exception=hedy.exceptions.WrongLevelException,
-      test_name=self.name()
+      exception=hedy.exceptions.WrongLevelException
     )
-
-
-

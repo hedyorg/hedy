@@ -199,12 +199,17 @@ def markdown_to_html_tags(markdown):
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
-def page_404(translations, menu, lang, username, *page_error):
+def page_403(translations, lang, username, *page_error, menu=True):
+    if page_error:
+        page_error = page_error[0]
+    return render_template("403.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 403
+
+def page_404(translations, lang, username, *page_error, menu=True):
     if page_error:
         page_error = page_error[0]
     return render_template("404.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 404
 
-def page_500(translations, menu, lang, username, *page_error):
+def page_500(translations, lang, username, *page_error, menu=True):
     if page_error:
         page_error = page_error[0]
     return render_template("500.html", menu=menu, username=username, auth=translations.get_translations(lang, 'Auth'), ui=translations.get_translations(lang, 'ui'), page_error=page_error or ''), 500

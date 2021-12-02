@@ -73,7 +73,7 @@ docker build -t hedy .
 and then:
 
 ```bash
-docker run -it --rm -p 5000:5000 hedy
+docker run -it --rm -p 8080:8080 hedy
 ```
 
 ## Running Hedy files from the command line

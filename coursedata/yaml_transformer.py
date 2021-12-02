@@ -1,13 +1,68 @@
+from pathlib import Path
 import os
 import copy
 import utils
+import yaml
 
 def nop(s):
   return s
 
+
+def transform_yaml_to_lark(only_new_lang=True):
+  """Creates a lark file in ./grammars/ for  all yaml files located in ./coursedata/keywords/.
+  If a keyword is not yet translated, it will use the English translation of the keyword
+
+  Args:
+      only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
+  """
+  input_path = '../coursedata/keywords/'
+  current_grammar_path = '../grammars/'
+  output_path = '../grammars-transformed/'
+  Path(output_path).mkdir(parents=True, exist_ok=True)
+
+  yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
+                    os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
+
+  lark_languages = [f.replace('keywords-', '').replace('.lark', '') for f in os.listdir(current_grammar_path) if
+                    os.path.isfile(os.path.join(current_grammar_path, f)) and f.startswith('keywords')]
+
+  for yaml_lang in yaml_languages:
+    if yaml_lang in lark_languages:
+      if only_new_lang:
+        continue
+    yaml_filesname_with_path = os.path.join(input_path, yaml_lang + '.yaml')
+    default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
+
+    with open(default_yaml_with_path, 'r') as stream:
+      default_command_combinations = yaml.safe_load(stream)
+
+    with open(yaml_filesname_with_path, 'r') as stream:
+      command_combinations = yaml.safe_load(stream)
+
+    lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
+
+    with open(lark_filesname_with_path, 'w+') as f:
+      list_of_translations = []
+      
+      for command, translation in command_combinations.items():      
+        if translation == '':
+          translation = default_command_combinations[command]
+          
+        if yaml_lang != 'en':
+          if translation in list_of_translations:
+            raise ValueError(f'{translation} is a duplicate translation. This is not desired when creating lark files')
+          else:
+            list_of_translations.append(translation)
+        
+        if command != 'random':
+          command_upper = command.upper()
+          command = '_' + command_upper
+
+        f.write(f'{command}: "{translation}" \n')
+
 def transform_level_defaults(old_level, new_level=None, function=nop):
   input_path = '../coursedata/level-defaults'
-  output_path = '../coursedata/level-defaults/'
+  output_path = '../coursedata/level-defaults-transformed/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
@@ -41,7 +96,7 @@ def transform_level_defaults(old_level, new_level=None, function=nop):
 
 def transform_adventures(old_level, new_level=None, function=nop):
   input_path = '../coursedata/adventures'
-  output_path = '../coursedata/adventures/'
+  output_path = '../coursedata/adventures-transformed/'
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
@@ -67,66 +122,13 @@ def transform_adventures(old_level, new_level=None, function=nop):
 def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
   # Set the current directory to the root Hedy folder
   os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
-  # transform_level_defaults(old_level, new_level, function)
+  transform_level_defaults(old_level, new_level, function)
   # WARNING: adventure do not properly use the transformer function yet!
-  transform_adventures(old_level, new_level, function=nop)
-
-
-def remove_brackets(s):
-  return s.replace('(', ' ').replace(')', '').replace(':', '').replace('input', 'ask')
-
-def transform_yaml_to_lark(only_new_lang=True):
-  """Creates a lark file in ./grammars/ for  all yaml files located in ./coursedata/keywords/.
-  If a keyword is not yet translated, it will use the English translation of the keyword
-  
-  Args:
-      only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
-  """
-  input_path = '../coursedata/keywords/'
-  current_grammar_path = '../grammars/'
-  output_path = '../grammars-transformed/'
-  
-  yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
-                     os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
-  
-  lark_languages = [f.replace('keywords-', '').replace('.lark', '') for f in os.listdir(current_grammar_path) if
-                     os.path.isfile(os.path.join(current_grammar_path, f)) and f.startswith('keywords')]
-
-  for yaml_lang in yaml_languages:
-    if yaml_lang in lark_languages:
-      if only_new_lang:
-        continue
-    yaml_filesname_with_path = os.path.join(input_path, yaml_lang + '.yaml')
-    default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
-    
-    with open(default_yaml_with_path, 'r') as stream:
-      yaml_default_dict = yaml.safe_load(stream)
-    default_command_combinations = yaml_default_dict['commands']
-    
-    with open(yaml_filesname_with_path, 'r') as stream:
-      yaml_dict = yaml.safe_load(stream)      
-    command_combinations = yaml_dict['commands']
-    
-    lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
-
-    with open(lark_filesname_with_path, 'w') as f:
-      for idx, command_combo in enumerate(command_combinations):
-        try: 
-          command = list(command_combo.keys())[0]
-          translation = command_combo[command]
-        except IndexError:
-          command = list(default_command_combinations[idx].keys())[0]
-          translation = default_command_combinations[idx][command]
-          
-        if command != "random":
-          command_upper = command.upper()
-          command = "_" + command_upper
-        
-        f.write(f'{command}: "{translation}" \n')
+  # transform_adventures(old_level, new_level, function=nop)
 
 
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
 transform_yaml_to_lark(False)
-transform_levels_in_all_YAMLs(2, 3)
+# transform_levels_in_all_YAMLs('colon', 17)

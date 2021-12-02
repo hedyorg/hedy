@@ -16,7 +16,7 @@ export function create_class() {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(_response) {
-      location.reload ();
+      window.location.pathname = '/customize-class/' + _response.id ;
     }).fail(function(err) {
       if (err.responseText == "duplicate") {
         modal.alert(auth.texts['class_name_duplicate']);
@@ -119,25 +119,20 @@ export function save_level_settings(id: string, level: number) {
          }
      });
 
-     let progress = $('#progress'+ level).val();
-     let toggle_example_programs = false;
-     let toggle_level = false;
-     if ($('#hide_level' + level).prop('checked')) {
-       toggle_level = true;
-     }
-     if ($('#example_programs' + level).prop('checked')) {
-       toggle_example_programs = true;
-     }
-
+     const hide_level = !!$(`#hide_level${level}`).prop('checked');
+     const hide_next_level = !!$(`#hide_level${level - 1}`).prop('checked');
+     const example_programs = !!$(`#example_programs${level}`).prop('checked');
+     const hide_prev_level = !!$(`#hide_level${level - 1}`).prop('checked');
 
      $.ajax({
        type: 'PUT',
        url: '/customize-class/' + id,
        data: JSON.stringify({
          adventures: selected_adventures,
-         next_level: progress,
-         example_programs: toggle_example_programs,
-         hide_level: toggle_level,
+         example_programs: example_programs,
+         hide_level: hide_level,
+         hide_prev_level: hide_prev_level,
+         hide_next_level: hide_next_level,
          level: level
        }),
        contentType: 'application/json',
@@ -156,7 +151,6 @@ export function save_level_settings(id: string, level: number) {
              $(this).find(':input').prop("checked", true);
          }
      });
-     $('#progress'+ level).val(5);
      $('#example_programs' + level).prop("checked", true);
      $('#hide_level' + level).prop("checked", false);
  }

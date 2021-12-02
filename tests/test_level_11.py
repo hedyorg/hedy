@@ -30,7 +30,7 @@ class TestsLevel11(HedyTester):
         print 'Het antwoord moest zijn ' antwoord""")
 
     expected = textwrap.dedent("""\
-    antwoord = input('Hoeveel is 10 plus 10?')
+    antwoord = input(f'Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
       print(f'Goedzo!')
       print(f'Het antwoord was inderdaad {antwoord}')
@@ -48,13 +48,13 @@ class TestsLevel11(HedyTester):
   def test_for_loop(self):
     code = textwrap.dedent("""\
     a is 2
-    a is 3
+    b is 3
     for a in range 2 to 4
       a is a + 2
       b is b + 2""")
     expected = textwrap.dedent("""\
     a = '2'
-    a = '3'
+    b = '3'
     step = 1 if int(2) < int(4) else -1
     for a in range(int(2), int(4) + step, step):
       a = int(a) + int(2)
@@ -145,7 +145,7 @@ class TestsLevel11(HedyTester):
     expected = textwrap.dedent("""\
     step = 1 if int(0) < int(10) else -1
     for i in range(int(0), int(10) + step, step):
-      antwoord = input('Wat is 5*5')
+      antwoord = input(f'Wat is 5*5')
       if str(antwoord) == str('24'):
         print(f'Dat is fout!')
       else:
@@ -171,7 +171,7 @@ class TestsLevel11(HedyTester):
     expected = textwrap.dedent("""\
       step = 1 if int(0) < int(10) else -1
       for i in range(int(0), int(10) + step, step):
-        antwoord = input('Wat is 5*5')
+        antwoord = input(f'Wat is 5*5')
         if str(antwoord) == str('24'):
           print(f'fout')
       print(f'klaar met for loop')""")

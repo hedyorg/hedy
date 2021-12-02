@@ -1,17 +1,19 @@
 import hedy
 import textwrap
+from parameterized import parameterized
 from test_level_01 import HedyTester
 
 class TestsLevel14(HedyTester):
   level = 14
 
-  def tests_smaller(self):
-    code = textwrap.dedent("""\
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparisons(self, comparison):
+    code = textwrap.dedent(f"""\
       leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd < 12
+      if leeftijd {comparison} 12
           print 'Dan ben je jonger dan ik!'""")
-    expected = textwrap.dedent("""\
-      leeftijd = input('Hoe oud ben jij?')
+    expected = textwrap.dedent(f"""\
+      leeftijd = input(f'Hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -19,47 +21,26 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if str(leeftijd).zfill(100)<str(12).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
     self.multi_level_tester(
       code=code,
+      max_level=16,
       expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
-    )
-  def tests_bigger(self):
-    code = textwrap.dedent("""\
-      leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd > 12
-          print 'Dan ben je ouder dan ik!'""")
-    expected = textwrap.dedent("""\
-      leeftijd = input('Hoe oud ben jij?')
-      try:
-        leeftijd = int(leeftijd)
-      except ValueError:
-        try:
-          leeftijd = float(leeftijd)
-        except ValueError:
-          pass
-      if str(leeftijd).zfill(100)>str(12).zfill(100):
-        print(f'Dan ben je ouder dan ik!')""")
 
-    self.multi_level_tester(
-      code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
     )
-  def tests_smaller_else(self):
-    code = textwrap.dedent("""\
+
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparisons_else(self, comparison):
+    code = textwrap.dedent(f"""\
       leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd < 12
+      if leeftijd {comparison} 12
           print 'Dan ben je jonger dan ik!'
       else
           print 'Dan ben je ouder dan ik!'""")
-    expected = textwrap.dedent("""\
-      leeftijd = input('Hoe oud ben jij?')
+    expected = textwrap.dedent(f"""\
+      leeftijd = input(f'Hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -67,116 +48,80 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if str(leeftijd).zfill(100)<str(12).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')
       else:
         print(f'Dan ben je ouder dan ik!')""")
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      max_level=16,
+      expected=expected
     )
 
-  def test_not_equal(self):
-      code = textwrap.dedent("""\
-        land is ask 'In welk land woon jij?'
-        if land != Nederland
-            print 'Cool!'
-        else
-            print 'Ik kom ook uit Nederland!'""")
-      expected = textwrap.dedent("""\
-        land = input('In welk land woon jij?')
-        try:
-          land = int(land)
-        except ValueError:
-          try:
-            land = float(land)
-          except ValueError:
-            pass
-        if str(land).zfill(100)!='Nederland'.zfill(100):
-          print(f'Cool!')
-        else:
-          print(f'Ik kom ook uit Nederland!')""")
-      self.multi_level_tester(
-
-        code=code,
-        expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
-      )
-
-  def tests_smaller_equal(self):
-    code = textwrap.dedent("""\
-      leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd <= 12
-          print 'Dan ben je jonger dan ik!'""")
-    expected = textwrap.dedent("""\
-      leeftijd = input('Hoe oud ben jij?')
+  @parameterized.expand(HedyTester.comparison_commands)
+  def tests_smaller_no_spaces(self, comparison):
+    code = textwrap.dedent(f"""\
+    leeftijd is ask 'Hoe oud ben jij?'
+    if leeftijd{comparison}12
+      print 'Dan ben je jonger dan ik!'""")
+    expected = textwrap.dedent(f"""\
+    leeftijd = input(f'Hoe oud ben jij?')
+    try:
+      leeftijd = int(leeftijd)
+    except ValueError:
       try:
-        leeftijd = int(leeftijd)
+        leeftijd = float(leeftijd)
       except ValueError:
-        try:
-          leeftijd = float(leeftijd)
-        except ValueError:
-          pass
-      if str(leeftijd).zfill(100)<=str(12).zfill(100):
-        print(f'Dan ben je jonger dan ik!')""")
+        pass
+    if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+      print(f'Dan ben je jonger dan ik!')""")
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      max_level=16,
+      expected=expected
     )
-  def tests_bigger_equal(self):
-    code = textwrap.dedent("""\
-      leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd >= 12
-          print 'Dan ben je ouder dan ik!'""")
-    expected = textwrap.dedent("""\
-      leeftijd = input('Hoe oud ben jij?')
-      try:
-        leeftijd = int(leeftijd)
-      except ValueError:
-        try:
-          leeftijd = float(leeftijd)
-        except ValueError:
-          pass
-      if str(leeftijd).zfill(100)>=str(12).zfill(100):
-        print(f'Dan ben je ouder dan ik!')""")
+
+  @parameterized.expand(HedyTester.number_comparisons_commands)
+  def test_comparison_with_string_gives_type_error(self, comparison):
+    code = textwrap.dedent(f"""\
+      a is 'text'
+      if a {comparison} 12
+          b is 1""")
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      max_level=16,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
-  def tests_smaller_equal_else(self):
-    code = textwrap.dedent("""\
-      leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd <= 12
-          print 'Dan ben je jonger dan ik!'
-      else
-          print 'Dan ben je ouder dan ik!'""")
-    expected = textwrap.dedent("""\
-      leeftijd = input('Hoe oud ben jij?')
-      try:
-        leeftijd = int(leeftijd)
-      except ValueError:
-        try:
-          leeftijd = float(leeftijd)
-        except ValueError:
-          pass
-      if str(leeftijd).zfill(100)<=str(12).zfill(100):
-        print(f'Dan ben je jonger dan ik!')
-      else:
-        print(f'Dan ben je ouder dan ik!')""")
+
+  def test_not_equal_with_string(self):
+    code = textwrap.dedent(f"""\
+      a is 'text'
+      if a != 12
+          b is 1""")
+
+    expected = textwrap.dedent(f"""\
+      a = 'text'
+      if str(a).zfill(100)!=str(12).zfill(100):
+        b = 1""")
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      max_level=16,
+      expected=expected
+    )
+
+  @parameterized.expand(HedyTester.comparison_commands)
+  def test_comparison_with_list_gives_type_error(self, comparison):
+    code = textwrap.dedent(f"""\
+      a is 1, 2, 3
+      if a {comparison} 12
+          b is 1""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=15,
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )

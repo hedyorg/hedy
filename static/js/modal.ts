@@ -23,8 +23,16 @@ class Modal {
     $('#modal-confirm').hide();
   }
 
-  public alert(message: string, timeoutMs?: number) {
-    $('#modal-alert-text').text(message);
+  public alert(message: string, timeoutMs?: number,  title: string = '',) {
+    if(title != '') {
+      $('#modal-alert-title').html(title);
+      $('#modal-alert-title').removeClass('hidden');
+    }
+    else{
+      $('#modal-alert-title').html('');
+      $('#modal-alert-title').addClass('hidden');
+    }
+    $('#modal-alert-text').html(message);
     this.show();
     $('#modal-alert').show();
     if (timeoutMs) setTimeout(() => this.hide(), timeoutMs);
