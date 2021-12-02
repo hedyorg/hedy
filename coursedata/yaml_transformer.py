@@ -1,3 +1,6 @@
+import hedy 
+import hedy_translation
+
 from pathlib import Path
 import os
 import copy
@@ -130,7 +133,7 @@ def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
-transform_yaml_to_lark(False)
+# transform_yaml_to_lark(False)
 # transform_levels_in_all_YAMLs('colon', 17)
 
 def transform_yaml_keywords(lang):
@@ -159,10 +162,10 @@ def transform_yaml_keywords(lang):
                 elif value4 == 'start_code':
                   translated_code = translate_start_code(key3, value4)
                   
-
+print(hedy_translation.keywords_to_dict("nl"))
     
 
-  def translate_story_text(level, story_text):
+  # def translate_story_text(level, story_text):
 
 
-  def translate_start_code(level, story_text):
+  # def translate_start_code(level, story_text):
