@@ -132,3 +132,37 @@ def remove_brackets(s):
 
 transform_yaml_to_lark(False)
 # transform_levels_in_all_YAMLs('colon', 17)
+
+def transform_yaml_keywords(lang):
+  input_path = '../coursedata/adventures'
+  output_path = '../coursedata/adventures-transformed/'
+
+  yaml_filesnames = [f for f in os.listdir(input_path) if
+                     os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
+
+  for filename in yaml_filesnames:
+    if filename == lang + '.yaml':
+      yaml_filesnames_with_path = os.path.join(input_path, lang + '.yaml')
+
+  with open(yaml_filesnames_with_path, 'r') as stream:
+    yaml_dict = yaml.safe_load(stream)
+
+  for key, value in yaml_dict.items():
+    if key == 'adventures':
+      for key1, value1 in value.items():
+        for key2, value2 in value1.items():
+          if key2 == 'levels':
+            for key3, value3 in value2.items():
+              for key4, value4 in value3.items():
+                if value4 == 'story_text':
+                  translated_code = translate_story_text(key3, value4)
+                elif value4 == 'start_code':
+                  translated_code = translate_start_code(key3, value4)
+                  
+
+    
+
+  def translate_story_text(level, story_text):
+
+
+  def translate_start_code(level, story_text):
