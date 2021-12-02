@@ -927,20 +927,21 @@ def main_page(page):
     if page == 'programs':
         return programs_page(request)
 
-    #This line is redundant as we already do a dict update with 'en' if the language doesn't exist!
-    #effective_lang = g.lang if path.isfile(f'coursedata/pages/{page}-{g.lang}.yaml') else 'en'
-
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('learn-more.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=learn_more_translations)
+        return render_template('learn-more.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                               content=learn_more_translations)
 
     user = current_user()
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+            return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(user),
+                                   auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                                   text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
-            return utils.page_403(TRANSLATIONS, user['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
+            return utils.page_403(TRANSLATIONS, user['username'], g.lang,
+                                  TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -950,17 +951,16 @@ def main_page(page):
             session.pop('welcome-teacher', None)
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
-            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=for_teacher_translations, teacher_classes=teacher_classes, welcome_teacher=welcome_teacher)
+            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                                   content=for_teacher_translations, teacher_classes=teacher_classes,
+                                   welcome_teacher=welcome_teacher)
         else:
             return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang,
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
 
-    print("Hier komen we!")
-    print(page)
-    print(g.lang)
     main_page_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-    print("Nu kom de mag")
-    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=main_page_translations)
+    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                           content=main_page_translations)
 
 def session_id():
     """Returns or sets the current session ID."""
