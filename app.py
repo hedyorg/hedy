@@ -927,6 +927,13 @@ def main_page(page):
     if page == 'programs':
         return programs_page(request)
 
+    #This line is redundant as we already do a dict update with 'en' if the language doesn't exist!
+    #effective_lang = g.lang if path.isfile(f'coursedata/pages/{page}-{g.lang}.yaml') else 'en'
+
+    if page == 'learn-more':
+        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('learn-more.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=learn_more_translations)
+
     if page == 'landing-page':
         if current_user()['username']:
             return render_template('landing-page.html', user=current_user()['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
@@ -936,7 +943,7 @@ def main_page(page):
     user = current_user()
 
     if page == 'for-teachers':
-        for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang);
+        for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
@@ -948,24 +955,7 @@ def main_page(page):
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
 
 
-    # Here is when the magic happens
-    # Todo: Remove all .md depencies and re-write to .yaml files
-    # Great thing: the PageTranslations function is already written
-
-    # Default to English if requested language is not available
-    effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'
-
-    try:
-        with open(f'main/{page}-{effective_lang}.md', 'r', encoding='utf-8') as f:
-            contents = f.read()
-    except IOError:
-        abort(404)
-
-    front_matter, markdown = split_markdown_front_matter(contents)
-
-
-
-    return render_template('main-page.html', mkd=markdown, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
+    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
 
 def session_id():
     """Returns or sets the current session ID."""
