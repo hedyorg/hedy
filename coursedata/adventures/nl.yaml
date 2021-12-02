@@ -890,6 +890,26 @@ adventures:
                     Ook in level 2 kun je de `ask` weer gebruiken, dus probeer maar eens of jij jouw keuze en de keuze van de computer kan printen!
                     Let wel goed op, omdat de `ask` nu anders werkt dan in level 1. Er moet een naam voor.
                 start_code: "print Welkom bij jouw eigen steen schaar papier!"
+            13:
+                story_text: |
+                    ## Steen, papier, schaar
+                    Met het `and` commando kun je steen, papier, schaar veel netter programmeren. Kijk maar eens naar de voorbeeldcode en probeer hem zelf af te maken!
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    opties is 'steen', 'papier', 'schaar'
+                    jouw_keuze is ask 'Wat kies jij?'
+                    computer_keuze is opties at random
+                    print 'Jij kiest ' jouw_keuze
+                    print 'De computer kiest ' computer_keuze
+                    if computer_keuze is jouw_keuze
+                        print 'Gelijkspel'
+                    if computer_keuze is 'steen' and jouw_keuze is 'papier'
+                        print 'Jij wint!'
+                    if computer_keuze is 'steen' and jouw_keuze is 'schaar'
+                        print 'De computer wint!'
+                    ```
+                start_code: ""
     calculator:
         name: "Rekenmachine"
         description: "Maak een rekenmachine"
