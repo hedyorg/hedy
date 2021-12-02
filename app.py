@@ -934,13 +934,13 @@ def main_page(page):
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=learn_more_translations)
 
-    if page == 'landing-page':
-        if current_user()['username']:
-            return render_template('landing-page.html', user=current_user()['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
-        else:
-            return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
-
     user = current_user()
+
+    if page == 'landing-page':
+        if user['username']:
+            return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+        else:
+            return utils.page_403(TRANSLATIONS, user['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -954,8 +954,8 @@ def main_page(page):
             return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang,
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
 
-
-    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'))
+    main_page_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=main_page_translations)
 
 def session_id():
     """Returns or sets the current session ID."""

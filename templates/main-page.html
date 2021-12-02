@@ -2,12 +2,20 @@
 
 {% block body %}
 <div class="px-8 py-12 relative">
-<a class="github-fork-ribbon left-top" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
-<div class="px-8">
-  <div class="markdown">
-    {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-    {{ mkd|commonmark }}
-  </div>
-</div>
+    <a class="github-fork-ribbon left-top" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+    <div class="px-8">
+      <div class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px; position: relative;">
+        <div class="flex-1">
+            <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">Hedy</h1>
+            <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">Een graduele programmeertaal</h2>
+        </div>
+        <div class="flex-none">
+            <a href="/hedy?lang=nl"><button class="green-btn text-white px-8 py-4">Probeer het uit</button></a>
+        </div>
+      </div>
+      <div id="main_page_content">
+          TEST
+      </div>
+    </div>
 </div>
 {% endblock %}
