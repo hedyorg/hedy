@@ -154,7 +154,6 @@ adventures:
                     ```
                     In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: ""
-
             7:
                 story_text: |
                     ## Verhaal
@@ -230,6 +229,28 @@ adventures:
                     ```
 
                 start_code: "print 'Hier komt straks jouw verhaal!'"
+            15:
+                    story_text: |
+                        ## Verhaal
+                        In dit level kun je de `while` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `while spelletje is 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
+                        Of je kunt `while zwaard is 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
+
+                        ## Voorbeeld Hedy code
+                        ```
+                        sleutels is 'kwijt'
+                        print 'Je staat in de voortuin en bent je sleutels kwijt.'
+                        print 'Waar ga je zoeken?'
+                        print 'kies uit: boom, steen, bloembed, brievenbus'
+                        while sleutels is 'kwijt'
+                            locatie is ask 'Waar wil je zoeken?'
+                            if locatie is 'bloembed'
+                                print 'Hier zijn ze!'
+                                sleutels is 'gevonden'
+                            else
+                                print 'Helaas, ze liggen niet bij de ' locatie
+                        print 'Nu kun je het huis in!'
+                        ```
+                    start_code: ""
     songs:
         name: "Zing een liedje!"
         description: "Print een liedje "

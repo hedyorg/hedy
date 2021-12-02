@@ -220,6 +220,28 @@ adventures:
                     print He now hears the sound of an animals at random
                     ```
                 start_code: "print Your story"
+            15:
+                story_text: |
+                    ## Story
+                    Using the `while` loop can make your stories more interesting. For example, you can use `while game is 'on'` so you can play until the game is over.
+                    Or you can use `while sword is 'lost'` so the player can't continu the game until they have found something.
+
+                    ## Example Hedy code
+                    ```
+                    keys is 'lost'
+                    print 'You are standing in your garden and you have lost your keys.'
+                    print 'Where do you want to look for them?'
+                    print 'You can choose: tree, flowerbed, rock, postbox'
+                    while keys is 'lost'
+                        location is ask 'Where do you want to look?'
+                        if location is 'flowerbed'
+                            print 'Here they are!'
+                            keys is 'found'
+                        else
+                            print 'Nope they are not at the ' location
+                    print 'Now you can enter the house!'
+                    ```
+                start_code: ""
     songs:
         name: "Sing a song!"
         description: "Print a song"
