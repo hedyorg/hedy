@@ -141,8 +141,7 @@ class TestsLevel2(HedyTester):
 
     expected = textwrap.dedent("""\
     v79de0191e90551f058d466c5e8c267ff = 'kutya'
-    print(f'{v79de0191e90551f058d466c5e8c267ff}')
-    """)
+    print(f'{v79de0191e90551f058d466c5e8c267ff}')""")
 
     self.single_level_tester(code=code, expected=expected)
   def test_ask_with_comma(self):
@@ -277,7 +276,7 @@ class TestsLevel2(HedyTester):
     afstand = input('hoe ver dan'+'?')
     t.forward(afstand)
     time.sleep(0.1)""")
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
 
   def test_turn_ask(self):
@@ -291,7 +290,7 @@ class TestsLevel2(HedyTester):
     direction = input('Where to turn'+'?')
     t.right(direction)""")
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
     naam is Hedy
