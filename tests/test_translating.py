@@ -1,6 +1,18 @@
 import unittest
 import utils
+import hedy
 from website import translating
+
+
+def check_local_lang_bool(func):
+  def inner(self):
+    if not hedy.local_keywords_enabled:
+      return
+
+    return func(self)
+
+  return inner
+
 
 class TestTranslating(unittest.TestCase):
   def test_change_nested_records(self):
