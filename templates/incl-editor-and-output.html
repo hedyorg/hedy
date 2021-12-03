@@ -73,7 +73,7 @@
           <form>
             <div class="my-2 flex">
               <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ enter_text }}">
-              <input type="submit" class="green-btn ml-3" value="{{ enter }}"></p>
+              <input type="submit" onclick="ScrollOutputToBottom()" class="green-btn ml-3" value="{{ enter }}"></p>
             </div>
           </form>
         </div>
@@ -118,3 +118,10 @@
     <div class="ml-3">{{ developers_mode }}</div>
   </label>
 </div>
+<script>
+function ScrollOutputToBottom()
+{
+$("#output").animate({ scrollTop: $(document).height() }, "slow");
+  return false;
+}
+</script>

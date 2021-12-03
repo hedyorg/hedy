@@ -111,6 +111,25 @@ export function remove_student(class_id: string, student_id: string) {
   });
 }
 
+export function show_doc_section(section_key: string) {
+  $(".section-button").each(function(){
+       if ($(this).hasClass('blue-btn')) {
+           $(this).removeClass("blue-btn");
+           $(this).addClass("green-btn");
+       }
+   });
+   if ($ ('#section-' + section_key).is (':visible')) {
+       $("#button-" + section_key).removeClass("blue-btn");
+       $("#button-" + section_key).addClass("green-btn");
+       $ ('.section').hide ();
+   } else {
+     $("#button-" + section_key).removeClass("green-btn");
+     $("#button-" + section_key).addClass("blue-btn");
+     $('.section').hide();
+     $('#section-' + section_key).toggle();
+   }
+}
+
 export function save_level_settings(id: string, level: number) {
      let selected_adventures: (string | null)[] = [];
      $('#adventures_overview li').each(function() {
