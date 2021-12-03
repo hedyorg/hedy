@@ -50,10 +50,13 @@ class HedyTester(unittest.TestCase):
     return inspect.stack()[1][3]
 
   def is_not_turtle(self):
-    return (lambda x: not x.has_turtle)
+    return (lambda result: not result.has_turtle)
 
   def is_turtle(self):
-    return (lambda x: x.has_turtle)
+    return (lambda result: result.has_turtle)
+
+  def result_in(self, list):
+    return (lambda result: HedyTester.run_code(result) in list)
 
   def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None):
     # used to test the same code snippet over multiple levels
