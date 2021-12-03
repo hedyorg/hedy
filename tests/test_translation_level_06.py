@@ -44,7 +44,7 @@ class TestsTranslationLevel6(HedyTester):
 
     @check_local_lang_bool
     def test_translate_back(self):
-        code ="print 13 / 4"
+        code ="breuk is 13 / 4"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)

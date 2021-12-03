@@ -23,10 +23,11 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     punctuation_symbols = ['!', '?', '.']
 
-    input_string = hedy.preprocess_blocks(input_string, level)
+    if level > 7:
+        input_string = hedy.preprocess_blocks(input_string, level)
     keywordDict = keywords_to_dict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
-    abstract_syntaxtree = hedy.ExtractAST().transform(program_root)
+    hedy.ExtractAST().transform(program_root)
     translator = TRANSPILER_LOOKUP[level]
     abstract_syntaxtree = translator(keywordDict, punctuation_symbols).transform(program_root)
 
@@ -250,8 +251,6 @@ class ConvertToLang10(ConvertToLang9):
         return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + args[1] + indent(args[2:])
 
 
-code = "animals is cat, dog\n" \
-       "for animal in animals\n" \
-       "   print animal"
-result = translate_keywords(code, from_lang="en", to_lang="nl", level=10)
+code = " print hoi hallo"
+result = translate_keywords(code, from_lang="en", to_lang="nl", level=1)
 
