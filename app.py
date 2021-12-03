@@ -19,7 +19,7 @@ from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher, update_is_teacher
+from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -169,11 +169,36 @@ app.url_map.strict_slashes = False
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
-# Set session id if not already set. This must be done as one of the first things,
-# so the function should be defined high up.
 @app.before_request
-def set_session_cookie():
+def before_request_begin_logging():
+    """Initialize the query logging.
+
+    This needs to happen as one of the first things, as the database calls
+    etc. depend on it.
+    """
+    path = (str(request.path) + '?' + str(request.query_string)) if request.query_string else str(request.path)
+    querylog.begin_global_log_record(path=path, method=request.method)
+
+@app.after_request
+def after_request_log_status(response):
+    querylog.log_value(http_code=response.status_code)
+    return response
+
+
+@app.before_request
+def initialize_session():
+    """Make sure the session is initialized.
+
+    - Each session gets a unique session ID, so we can tell user sessions apart
+      and know what programs get submitted after each other.
+    - If the user has a cookie with a long-lived login token, log them in from
+      that cookie (copy the user info into the session for efficient access
+      later on).
+    """
+    # Invoke session_id() for its side effect
     session_id()
+    login_user_from_token_cookie()
+
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -206,7 +231,9 @@ if utils.is_production():
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 else:
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', uuid.uuid4().hex)
+    # The value doesn't matter for dev environments, but it needs to be a constant
+    # so that our cookies don't get invalidated every time we restart the server.
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'WeAreDeveloping')
 
 if utils.is_heroku():
     app.config.update(
@@ -243,22 +270,11 @@ def setup_language():
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
-
-@app.before_request
-def before_request_begin_logging():
-    path = (str(request.path) + '?' + str(request.query_string)) if request.query_string else str(request.path)
-    querylog.begin_global_log_record(path=path, method=request.method)
-
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
     user = current_user()
     return dict(username=user.get('username', ''), is_teacher=is_teacher(user), is_admin=is_admin(user))
-
-@app.after_request
-def after_request_log_status(response):
-    querylog.log_value(http_code=response.status_code)
-    return response
 
 @app.after_request
 def set_security_headers(response):
@@ -529,8 +545,6 @@ def version_page():
         commit=commit)
 
 def programs_page(request):
-    print(session)
-    print(current_user())
     user = current_user()
     username = user['username']
     if not username:
@@ -865,9 +879,11 @@ def view_program(id):
         arguments_dict['show_edit_button'] = False
         texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
         now = timems()
+        date, measure = get_user_formatted_timestamp(texts, now, result['date'])
+        arguments_dict['program_age'] = f"{texts['ago-1']} {date} {measure} {texts['ago-2']}"
+        arguments_dict['program_timestamp'] = f"{datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')} GMT"
         arguments_dict['submitted_header'] = texts['submitted_header']
         arguments_dict['last_edited'] = texts['last_edited']
-        arguments_dict['program_timestamp'] = datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')
     else:
         arguments_dict['show_edit_button'] = True
 
