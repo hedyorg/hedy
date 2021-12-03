@@ -259,8 +259,7 @@ class TestsLevel1(HedyTester):
       answer = input('Wat is je lievelingskleur')
       print('je lievelingskleur is '+answer)""")
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_not_turtle())
+      self.single_level_tester(code=code, expected=expected)
   def test_forward_turn_combined(self):
     code = "forward 50\nturn\nforward 100"
     expected = textwrap.dedent("""\
@@ -281,19 +280,16 @@ class TestsLevel1(HedyTester):
     code = "print Hallo welkom bij Hedy! "
     expected = "print('Hallo welkom bij Hedy! ')"
     self.single_level_tester(code=code, expected=expected,
-                             extra_check_function=self.is_not_turtle(),
                              output='Hallo welkom bij Hedy!')
 
   # negative tests
   def test_lines_with_space_gives_invalid(self):
     code = " print Hallo welkom bij Hedy! "
-    self.single_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException,
-                             extra_check_function=self.is_not_turtle())
+    self.single_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException)
 
   def test_lines_with_spaces_gives_invalid(self):
     code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
-    self.single_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException,
-                             extra_check_function=self.is_not_turtle())
+    self.single_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException)
 
   def test_word_plus_period_gives_invalid(self):
     with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
