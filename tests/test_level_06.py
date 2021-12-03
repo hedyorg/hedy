@@ -41,8 +41,7 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
     antwoord = input(f'wat is je lievelingskleur?')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.single_level_tester(code=code, expected=expected)
 
   #if tests
   def test_print_if_else_with_line_break(self):
@@ -117,10 +116,7 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
     print(f'5 keer 5 is {int(5) * int(5)}')""")
 
-    result = hedy.transpile(code, self.level)
-
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.single_level_tester(code=code, expected=expected)
   def test_print_multiple_calcs(self):
     code = textwrap.dedent("""\
     print '5 keer 5 keer 5 is ' 5 * 5 * 5""")
@@ -128,52 +124,37 @@ class TestsLevel6(HedyTester):
     expected = textwrap.dedent("""\
     print(f'5 keer 5 keer 5 is {int(5) * int(5) * int(5)}')""")
 
-    result = hedy.transpile(code, self.level)
-    self.assertEqual(expected, result.code)
+    output = '5 keer 5 keer 5 is 125'
+    self.single_level_tester(code=code, expected=expected, output=output)
 
-    output = HedyTester.run_code(result)
-    self.assertEqual(output, '5 keer 5 keer 5 is 125')
-    self.assertEqual(False, result.has_turtle)
   def test_calc_print(self):
     code = textwrap.dedent("""\
     nummer is 4 + 5
     print nummer""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     nummer = int(4) + int(5)
     print(f'{nummer}')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual("9", HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output='9')
+
   def test_calc_assign(self):
     code = "nummer is 4 + 5"
-    result = hedy.transpile(code, self.level)
-
     expected = "nummer = int(4) + int(5)"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.single_level_tester(code=code, expected=expected)
   def test_calc_without_space(self):
     code = "nummer is 4+5"
-    result = hedy.transpile(code, self.level)
-
     expected = "nummer = int(4) + int(5)"
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+    self.single_level_tester(code=code, expected=expected)
   def test_assign_calc(self):
     code = textwrap.dedent("""\
     var is 5
     print var + 5""")
-
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     var = '5'
     print(f'{int(var) + int(5)}')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_assign_parses_periods(self):
     code = "period is ."
@@ -192,49 +173,38 @@ class TestsLevel6(HedyTester):
     getal is nummer * nummertwee
     print getal""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
     getal = int(nummer) * int(nummertwee)
     print(f'{getal}')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output='30')
+
   def test_calc_vars_print(self):
     code = textwrap.dedent("""\
     nummer is 5
     nummertwee is 6
     print nummer * nummertwee""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
     print(f'{int(nummer) * int(nummertwee)}')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual("30", HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output='30')
   def test_calc_vars_print_divide(self):
     code = textwrap.dedent("""\
     nummer is 5
     nummertwee is 6
     print nummer / nummertwee""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     nummer = '5'
     nummertwee = '6'
     print(f'{int(nummer) // int(nummertwee)}')""")
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
-    self.assertEqual("0", HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output='0')
 
   def test_calc_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
