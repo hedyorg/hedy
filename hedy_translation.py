@@ -34,6 +34,7 @@ def get_list_keywords(commands, to_lang):
     
     return translation_commands
 
+
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     keywords_path = './coursedata/keywords/'
@@ -51,10 +52,11 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     punctuation_symbols = ['!', '?', '.']
 
+    keywordDict = keywords_to_dict(to_lang)
     if level > 7:
         input_string = hedy.preprocess_blocks(input_string, level)
-    keywordDict = keywords_to_dict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
+
     hedy.ExtractAST().transform(program_root)
     translator = TRANSPILER_LOOKUP[level]
     abstract_syntaxtree = translator(keywordDict, punctuation_symbols).transform(program_root)
@@ -71,6 +73,13 @@ def hedy_translator(level):
     return decorating
 
 
+def indent(s):
+    newIndent = ""
+    for line in s:
+        lines = line.split('\n')
+        newIndent += ''.join(['\n    ' + l for l in lines])
+    return newIndent
+
 @hedy_translator(level=1)
 class ConvertToLang1(Transformer):
 
@@ -80,7 +89,7 @@ class ConvertToLang1(Transformer):
         __class__.level = 1
 
     def command(self, args):
-        return ''.join([str(c) for c in args])
+        return args[0]
 
     def program(self, args):
         return '\n'.join([str(c) for c in args])
@@ -225,6 +234,7 @@ class ConvertToLang5(ConvertToLang4):
 
 @hedy_translator(level=6)
 class ConvertToLang6(ConvertToLang5):
+
     def addition(self, args):
         return args[0] + " + " + args[1]
 
@@ -243,3 +253,28 @@ class ConvertToLang7(ConvertToLang6):
     def repeat(self, args):
         return self.keywords["repeat"] + " " + args[0] + " " + self.keywords["times"] + " " + args[1]
 
+
+@hedy_translator(level=8)
+class ConvertToLang8(ConvertToLang7):
+    def command(self, args):
+        return '\n'.join([str(c) for c in args])
+
+    def repeat(self, args):
+        return self.keywords["repeat"] + " " + args[0] + " " + self.keywords["times"] + indent(args[1:])
+
+    def ifs(self, args):
+        return self.keywords["if"] + " " + args[0] + indent(args[1:])
+
+    def elses(self, args):
+        return self.keywords["else"] + indent(args[0:])
+
+    def equality_check(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]])
+
+    def end_block(self, args):
+        return args
+
+
+@hedy_translator(level=9)
+class ConvertToLang9(ConvertToLang8):
+    pass
