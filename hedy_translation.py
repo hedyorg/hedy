@@ -1,7 +1,7 @@
 from lark import Transformer, Tree
 import hedy
 import yaml
-import os
+from os import path
 
 TRANSPILER_LOOKUP = {}
 
@@ -11,10 +11,11 @@ def get_list_keywords(commands, to_lang):
     """
     
     translation_commands = []
-    path_keywords = "../coursedata/keywords"
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
     
-    to_yaml_filesname_with_path = os.path.join(path_keywords, to_lang + '.yaml')
-    en_yaml_filesname_with_path = os.path.join(path_keywords, 'en' + '.yaml')
+    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
     
     with open(en_yaml_filesname_with_path, 'r') as stream:
         en_yaml_dict = yaml.safe_load(stream)
