@@ -1,6 +1,7 @@
 import unittest
 import hedy 
 import utils
+import hedy
 from website import translating
 
 def check_local_lang_bool(func):
