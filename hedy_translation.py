@@ -1,30 +1,61 @@
 from lark import Transformer, Tree
 import hedy
-import yaml 
-import os 
+import yaml
+from os import path
 
 TRANSPILER_LOOKUP = {}
 
 
+def get_list_keywords(commands, to_lang):
+    """ Returns a list with the local keywords of the argument 'commands'
+    """
+    
+    translation_commands = []
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
+    
+    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
+    
+    with open(en_yaml_filesname_with_path, 'r') as stream:
+        en_yaml_dict = yaml.safe_load(stream)
+    
+    try:
+        with open(to_yaml_filesname_with_path, 'r') as stream:
+            to_yaml_dict = yaml.safe_load(stream)
+        for command in commands: 
+            try:                   
+                translation_command = to_yaml_dict[command]
+                translation_commands.append(translation_command)               
+            except Exception:
+                translation_commands.append(en_yaml_dict[command])
+    except Exception:
+        return commands
+    
+    return translation_commands
+
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     keywords_path = './coursedata/keywords/'
-    yaml_filesname_with_path = os.path.join(keywords_path, to_lang + '.yaml')
-    
+    yaml_filesname_with_path = path.join(keywords_path, to_lang + '.yaml')
+
     with open(yaml_filesname_with_path, 'r') as stream:
-      command_combinations = yaml.safe_load(stream)
+        command_combinations = yaml.safe_load(stream)
 
     return command_combinations
 
-def translate_keywords(input_string, from_lang="nl", to_lang="nl", level=1):
+
+def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     parser = hedy.get_parser(level, from_lang)
 
     punctuation_symbols = ['!', '?', '.']
 
+    if level > 7:
+        input_string = hedy.preprocess_blocks(input_string, level)
     keywordDict = keywords_to_dict(to_lang)
     program_root = parser.parse(input_string + '\n').children[0]
-    abstract_syntaxtree = hedy.ExtractAST().transform(program_root)
+    hedy.ExtractAST().transform(program_root)
     translator = TRANSPILER_LOOKUP[level]
     abstract_syntaxtree = translator(keywordDict, punctuation_symbols).transform(program_root)
 
@@ -49,7 +80,7 @@ class ConvertToLang1(Transformer):
         __class__.level = 1
 
     def command(self, args):
-        return args[0]
+        return ''.join([str(c) for c in args])
 
     def program(self, args):
         return '\n'.join([str(c) for c in args])
@@ -86,6 +117,7 @@ class ConvertToLang1(Transformer):
 
     def __default__(self, data, children, meta):
         return Tree(data, children, meta)
+
 
 @hedy_translator(level=2)
 class ConvertToLang2(ConvertToLang1):
@@ -126,10 +158,88 @@ class ConvertToLang2(ConvertToLang1):
         var = args[0]
         all_parameters = [hedy.process_characters_needing_escape(a) for a in args]
 
-        return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(all_parameters[1:])
+        return all_parameters[0] + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(
+            all_parameters[1:])
 
     def ask_dep_2(self, args):
         return self.keywords["ask"] + " " + ''.join([str(c) for c in args])
 
     def echo_dep_2(self, args):
         return self.keywords["echo"] + " " + ''.join([str(c) for c in args])
+
+
+@hedy_translator(level=3)
+class ConvertToLang3(ConvertToLang2):
+    def ask(self, args):
+        var = args[0]
+        remaining_args = args[1:]
+        return var + " " + self.keywords["is"] + " " + self.keywords["ask"] + " " + ''.join(remaining_args)
+
+    def var_access(self, args):
+        return ''.join([str(c) for c in args])
+
+    def assign_list(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + ', '.join([str(c) for c in args[1:]])
+
+    def list_access(self, args):
+        return args[0] + " " + self.keywords["at"] + " " + ''.join([str(c) for c in args[1:]])
+
+
+@hedy_translator(level=4)
+class ConvertToLang4(ConvertToLang3):
+
+    def print(self, args):
+        i = 0
+        #    self.check_args_type_allowed(args, 'print', self.level)
+        argument_string = ""
+        for argument in args:
+            if i == len(args) or args[i] in self.punctuation_symbols:
+                space = ''
+            else:
+                space = " "
+            argument_string += space + argument
+            i += 1
+        return self.keywords["print"] + argument_string
+
+    def print_nq(self, args):
+        return ConvertToLang2.print(self, args)
+
+
+@hedy_translator(level=5)
+class ConvertToLang5(ConvertToLang4):
+    def ifs(self, args):
+        return self.keywords["if"] + " " + ''.join([str(c) for c in args])
+
+    def ifelse(self, args):
+        return self.keywords["if"] + " " + args[0] + args[1] + " " + self.keywords["else"] + " " + args[2]
+
+    def condition(self, args):
+        return ' and '.join(args)
+
+    def equality_check(self, args):
+        return args[0] + " " + self.keywords["is"] + " " + " ".join([str(c) for c in args[1:]]) + " "
+
+    def in_list_check(self, args):
+        return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]]) + " "
+
+
+@hedy_translator(level=6)
+class ConvertToLang6(ConvertToLang5):
+    def addition(self, args):
+        return args[0] + " + " + args[1]
+
+    def substraction(self, args):
+        return args[0] + " - " + args[1]
+
+    def multiplication(self, args):
+        return args[0] + " * " + args[1]
+
+    def division(self, args):
+        return args[0] + " / " + args[1]
+
+
+@hedy_translator(level=7)
+class ConvertToLang7(ConvertToLang6):
+    def repeat(self, args):
+        return self.keywords["repeat"] + " " + args[0] + " " + self.keywords["times"] + " " + args[1]
+

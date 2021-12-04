@@ -19,7 +19,7 @@ from ruamel import yaml
 from flask_commonmark import Commonmark
 from werkzeug.urls import url_encode
 from config import config
-from website.auth import auth_templates, current_user, requires_login, is_admin, is_teacher, update_is_teacher
+from website.auth import auth_templates, current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 import utils
 import textwrap
@@ -155,7 +155,7 @@ def load_adventures_per_level(lang, level):
     return all_adventures
 
 # Load main menu(do it once, can be cached)
-with open(f'main/menu.json', 'r', encoding='utf-8') as f:
+with open(f'menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
 
 logging.basicConfig(
@@ -169,11 +169,36 @@ app.url_map.strict_slashes = False
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
-# Set session id if not already set. This must be done as one of the first things,
-# so the function should be defined high up.
 @app.before_request
-def set_session_cookie():
+def before_request_begin_logging():
+    """Initialize the query logging.
+
+    This needs to happen as one of the first things, as the database calls
+    etc. depend on it.
+    """
+    path = (str(request.path) + '?' + str(request.query_string)) if request.query_string else str(request.path)
+    querylog.begin_global_log_record(path=path, method=request.method)
+
+@app.after_request
+def after_request_log_status(response):
+    querylog.log_value(http_code=response.status_code)
+    return response
+
+
+@app.before_request
+def initialize_session():
+    """Make sure the session is initialized.
+
+    - Each session gets a unique session ID, so we can tell user sessions apart
+      and know what programs get submitted after each other.
+    - If the user has a cookie with a long-lived login token, log them in from
+      that cookie (copy the user info into the session for efficient access
+      later on).
+    """
+    # Invoke session_id() for its side effect
     session_id()
+    login_user_from_token_cookie()
+
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -206,7 +231,9 @@ if utils.is_production():
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 else:
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', uuid.uuid4().hex)
+    # The value doesn't matter for dev environments, but it needs to be a constant
+    # so that our cookies don't get invalidated every time we restart the server.
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'WeAreDeveloping')
 
 if utils.is_heroku():
     app.config.update(
@@ -243,22 +270,11 @@ def setup_language():
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
-
-@app.before_request
-def before_request_begin_logging():
-    path = (str(request.path) + '?' + str(request.query_string)) if request.query_string else str(request.path)
-    querylog.begin_global_log_record(path=path, method=request.method)
-
 # A context processor injects variables in the context that are available to all templates.
 @app.context_processor
 def enrich_context_with_user_info():
     user = current_user()
     return dict(username=user.get('username', ''), is_teacher=is_teacher(user), is_admin=is_admin(user))
-
-@app.after_request
-def after_request_log_status(response):
-    querylog.log_value(http_code=response.status_code)
-    return response
 
 @app.after_request
 def set_security_headers(response):
@@ -529,8 +545,6 @@ def version_page():
         commit=commit)
 
 def programs_page(request):
-    print(session)
-    print(current_user())
     user = current_user()
     username = user['username']
     if not username:
@@ -810,7 +824,7 @@ def index(level, step):
         result = DATABASE.program_by_id(step)
         if not result:
             return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_program'))
-        # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
+
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
@@ -865,9 +879,11 @@ def view_program(id):
         arguments_dict['show_edit_button'] = False
         texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
         now = timems()
+        date, measure = get_user_formatted_timestamp(texts, now, result['date'])
+        arguments_dict['program_age'] = f"{texts['ago-1']} {date} {measure} {texts['ago-2']}"
+        arguments_dict['program_timestamp'] = f"{datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')} GMT"
         arguments_dict['submitted_header'] = texts['submitted_header']
         arguments_dict['last_edited'] = texts['last_edited']
-        arguments_dict['program_timestamp'] = datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')
     else:
         arguments_dict['show_edit_button'] = True
 
@@ -927,41 +943,40 @@ def main_page(page):
     if page == 'programs':
         return programs_page(request)
 
-    if page == 'landing-page':
-        if current_user()['username']:
-            return render_template('landing-page.html', user=current_user()['username'], is_teacher=is_teacher(current_user()), auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
-        else:
-            return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
+    if page == 'learn-more':
+        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('learn-more.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                               content=learn_more_translations)
 
     user = current_user()
 
+    if page == 'landing-page':
+        if user['username']:
+            return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(user),
+                                   auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                                   text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+        else:
+            return utils.page_403(TRANSLATIONS, user['username'], g.lang,
+                                  TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
+
     if page == 'for-teachers':
-        for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang);
+        for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        print(for_teacher_translations)
         if is_teacher(user):
             welcome_teacher = session.get('welcome-teacher') or False
             session.pop('welcome-teacher', None)
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
-            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), content=for_teacher_translations, teacher_classes=teacher_classes, welcome_teacher=welcome_teacher)
+            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                                   content=for_teacher_translations, teacher_classes=teacher_classes,
+                                   welcome_teacher=welcome_teacher)
         else:
             return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang,
                                   TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
 
-
-    # Default to English if requested language is not available
-    effective_lang = g.lang if path.isfile(f'main/{page}-{g.lang}.md') else 'en'
-
-    try:
-        with open(f'main/{page}-{effective_lang}.md', 'r', encoding='utf-8') as f:
-            contents = f.read()
-    except IOError:
-        abort(404)
-
-    front_matter, markdown = split_markdown_front_matter(contents)
-
-
-
-    return render_template('main-page.html', mkd=markdown, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), **front_matter)
+    main_page_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+                           content=main_page_translations)
 
 def session_id():
     """Returns or sets the current session ID."""
@@ -1089,6 +1104,21 @@ def delete_program(user, program_id):
     DATABASE.delete_program_by_id(program_id)
     DATABASE.increase_user_program_count(user['username'], -1)
     return redirect('/programs')
+
+@app.route('/programs/duplicate-check', methods=['POST'])
+@requires_login
+def check_duplicate_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('name'), str):
+        return 'name must be a string', 400
+
+    programs = DATABASE.programs_for_user(user['username'])
+    for program in programs:
+        if program['name'] == body['name']:
+            return jsonify({'duplicate': True})
+    return jsonify({'duplicate': False})
 
 @app.route('/programs', methods=['POST'])
 @requires_login
