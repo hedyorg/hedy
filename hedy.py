@@ -12,8 +12,7 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
-
-import yaml
+import hedy_translation
 import program_repair
 
 # Some useful constants
@@ -81,28 +80,28 @@ def promote_types(types, rules):
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
-                      2: ['print', 'ask', 'is', 'turn', 'forward'],
-                      3: ['print', 'ask', 'is', 'turn', 'forward'],
-                      4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
-                      5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      7: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      8: ['print', 'ask', 'is', 'if', 'for', 'turn', 'forward'],
-                      9: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      11: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      12: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      14: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      16: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
+                      2: ['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
+                      3: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'remove'],
+                      4: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove'],
+                      5: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else'],
+                      6: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else'],
+                      7: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      8: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      9: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      10: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      11: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      12: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
+                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
+                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif'],
+                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      19: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      20: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      21: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      22: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      23: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input']
                       }
 
 # TODO: these need to be taken from the translated grammar keywords based on the language
@@ -157,6 +156,17 @@ commands_and_types_per_level = {
 characters_that_need_escaping = ["\\", "'"]
 
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
+
+def get_suggestions_for_language(lang, level):
+    if not local_keywords_enabled:
+        lang = 'en'
+
+    en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
+    lang_commands = hedy_translation.get_list_keywords(commands_per_level[level], lang)
+    # if we allow multiple keyword languages:
+    # lang_commands = list(set(en_commands + lang_commands))
+            
+    return lang_commands
 
 def hash_needed(name):
     # this function is now applied on something str sometimes Assignment
@@ -1578,22 +1588,6 @@ def create_grammar(level, lang="en"):
 
     return result
 
-def get_suggestions_for_language(lang):
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "suggestions-" + str(lang) + ".yaml"
-    if not (path.isfile(path.join(script_dir, "grammars", filename))):
-        filename = "suggestions-en.yaml"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        documents = yaml.full_load(file)
-
-        suggestions = {}
-
-        for item, doc in documents.items():
-         suggestions[item] = doc
-
-    return suggestions
-
-
 def save_total_grammar_file(level, grammar, lang):
     # Load Lark grammars relative to directory of current file
     script_dir = path.abspath(path.dirname(__file__))
@@ -1872,7 +1866,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, get_suggestions_for_language('en')[level])
+            closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
             fixed_code = None
             result = None
             if closest:
