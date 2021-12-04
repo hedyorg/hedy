@@ -37,7 +37,7 @@ def get_list_keywords(commands, to_lang):
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     keywords_path = './coursedata/keywords/'
-    yaml_filesname_with_path = os.path.join(keywords_path, to_lang + '.yaml')
+    yaml_filesname_with_path = path.join(keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:
         command_combinations = yaml.safe_load(stream)
