@@ -1,15 +1,43 @@
 from lark import Transformer, Tree
 import hedy
 import yaml
-import os
+from os import path
 
 TRANSPILER_LOOKUP = {}
 
 
+def get_list_keywords(commands, to_lang):
+    """ Returns a list with the local keywords of the argument 'commands'
+    """
+    
+    translation_commands = []
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
+    
+    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
+    
+    with open(en_yaml_filesname_with_path, 'r') as stream:
+        en_yaml_dict = yaml.safe_load(stream)
+    
+    try:
+        with open(to_yaml_filesname_with_path, 'r') as stream:
+            to_yaml_dict = yaml.safe_load(stream)
+        for command in commands: 
+            try:                   
+                translation_command = to_yaml_dict[command]
+                translation_commands.append(translation_command)               
+            except Exception:
+                translation_commands.append(en_yaml_dict[command])
+    except Exception:
+        return commands
+    
+    return translation_commands
+
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     keywords_path = './coursedata/keywords/'
-    yaml_filesname_with_path = os.path.join(keywords_path, to_lang + '.yaml')
+    yaml_filesname_with_path = path.join(keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:
         command_combinations = yaml.safe_load(stream)

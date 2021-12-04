@@ -1,4 +1,4 @@
-import hedy
+from test_translating import check_local_lang_bool
 from test_level_01 import HedyTester
 import hedy_translation
 from test_translating import check_local_lang_bool
