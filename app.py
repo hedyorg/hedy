@@ -155,7 +155,7 @@ def load_adventures_per_level(lang, level):
     return all_adventures
 
 # Load main menu(do it once, can be cached)
-with open(f'main/menu.json', 'r', encoding='utf-8') as f:
+with open(f'menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
 
 logging.basicConfig(
@@ -824,7 +824,7 @@ def index(level, step):
         result = DATABASE.program_by_id(step)
         if not result:
             return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_program'))
-        # If the program is not public, allow only the owner of the program, the admin user and the teacher users to access the program
+
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
@@ -1104,6 +1104,21 @@ def delete_program(user, program_id):
     DATABASE.delete_program_by_id(program_id)
     DATABASE.increase_user_program_count(user['username'], -1)
     return redirect('/programs')
+
+@app.route('/programs/duplicate-check', methods=['POST'])
+@requires_login
+def check_duplicate_program(user):
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('name'), str):
+        return 'name must be a string', 400
+
+    programs = DATABASE.programs_for_user(user['username'])
+    for program in programs:
+        if program['name'] == body['name']:
+            return jsonify({'duplicate': True})
+    return jsonify({'duplicate': False})
 
 @app.route('/programs', methods=['POST'])
 @requires_login
