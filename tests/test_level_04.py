@@ -364,7 +364,7 @@ class TestsLevel4(HedyTester):
     # self.assertEqual('name', context.exception.arguments['name'])
 
   def test_issue_375(self):
-    code = textwrap.dedent("""
+    code = textwrap.dedent("""\
       is Foobar
       print welcome""")
 

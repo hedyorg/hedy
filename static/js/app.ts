@@ -887,6 +887,11 @@ function getConfettiForAdventure(adventure: string){
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
+export function ScrollOutputToBottom(){
+$("#output").animate({ scrollTop: $(document).height() }, "slow");
+  return false;
+}
+
 export function modalStepOne(level: number){
   createModal(level);
   let modal_editor = $('#modal-editor');

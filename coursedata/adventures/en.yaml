@@ -220,6 +220,59 @@ adventures:
                     print He now hears the sound of an animals at random
                     ```
                 start_code: "print Your story"
+            15:
+                story_text: |
+                    ## Story
+                    Using the `while` loop can make your stories more interesting. For example, you can use `while game is 'on'` so you can play until the game is over.
+                    Or you can use `while sword is 'lost'` so the player can't continu the game until they have found something.
+
+                    ## Example Hedy code
+                    ```
+                    keys is 'lost'
+                    print 'You are standing in your garden and you have lost your keys.'
+                    print 'Where do you want to look for them?'
+                    print 'You can choose: tree, flowerbed, rock, postbox'
+                    while keys is 'lost'
+                        location is ask 'Where do you want to look?'
+                        if location is 'flowerbed'
+                            print 'Here they are!'
+                            keys is 'found'
+                        else
+                            print 'Nope they are not at the ' location
+                    print 'Now you can enter the house!'
+                start_code: ""
+            13:
+                story_text: |
+                    ## Story
+                    By using the `and` and `or` commands, you can shorten your stories. For example, check out the dragon story.
+
+                    ## Example Hedy code
+                    ```
+                    sword is 'lost'
+                    game is 'on'
+                    print 'Our hero is walking through the forest'
+                    print 'The path splits two ways'
+                    for i in range 0 to 2
+                        if game is 'on'
+                            path is ask 'Which path should she choose?'
+                            if path is 'left' and sword is 'found'
+                                print 'Our hero comes across a dragon!'
+                                print 'Luckily our hero has a sword to defeat the beast!'
+                                game is 'over'
+                            if path is 'left' and sword is 'lost'
+                                print 'Our hero finds a dragon, but she doesnt have any weapons!'
+                                print 'Our hero is beaten by the dragon...'
+                                print 'Try again'
+                                game is 'over'
+                            if path is 'right' and sword is 'found'
+                                print 'You have already found the sword. There is nothing left here.'
+                                print 'She walks back'
+                            if path is 'right' and sword is 'lost'
+                                print 'Our hero finds a sword'
+                                print 'This could come in very handy'
+                                sword is 'found'
+                    ```
+                start_code: ""
     songs:
         name: "Sing a song!"
         description: "Print a song"
@@ -746,6 +799,24 @@ adventures:
                     ```
 
                 start_code: "print What will the die indicate this time?"
+            15:
+                story_text: |
+                    ## Dice
+                    In this game you have to throw 6 in as little tries as possible.
+
+                    ## Example Hedy Code
+                    ```
+                    options is 1, 2, 3, 4, 5, 6
+                    print 'Throw 6 as fast as you can!'
+                    thrown is 0
+                    tries is 0
+                    while thrown != 6
+                        thrown is options at random
+                        print 'You threw ' thrown
+                        tries is tries + 1
+                    print 'Yes! You have thrown 6 in ' tries ' tries.'
+                    ```
+                start_code: ""
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
@@ -833,6 +904,48 @@ adventures:
                     print choices at random
                     ```
                 start_code: "print Welcome to your own rock scissors paper!"
+            15:
+                story_text: |
+                    ## Rock, Paper, Scissors
+                    Play until you beat the computer! But first, finish the example code...
+
+                    ## Example Hedy code
+                    ```
+                    won is 'no'
+                    options is 'rock', 'paper', 'scissors'
+                    while won is 'no'
+                        your_choice is ask 'What do you choose?'
+                        computer_choice is options at random
+                        print 'you chose ' your_choice
+                        print 'the computer chose ' computer_choice
+                        if computer_choice is your_choice
+                            print 'Tie!'
+                        if computer_choice is 'rock' and your_choice is 'scissors'
+                            print 'You lose!'
+                        if computer_choice is 'rock' and your_choice is 'paper'
+                            print 'You win!'
+                            won is 'yes'
+                start_code: ""
+            13:
+                story_text: |
+                    ## Rock, paper, scissors
+                    With the `and` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+
+                    ## Example Hedy code
+                    ```
+                    options is 'rock', 'paper', 'scissors'
+                    your_choice is ask 'What do you choose?'
+                    computer_choice is options at random
+                    print 'You choose ' your_choice
+                    print 'The computer chooses ' computer_choice
+                    if computer_choice is your_choice
+                        print 'Tie'
+                    if computer_choice is 'rock' and your_choice is 'paper'
+                        print 'Jij wint!'
+                    if computer_choice is 'rock' and your_choice is 'scissors'
+                        print 'The computer wins!'
+                    ```
+                start_code: ""
     calculator:
         name: "Calculator"
         description: "Create a calculator"
@@ -946,6 +1059,29 @@ adventures:
                     ```
 
                 start_code: "print 'Welcome to this calculator!'"
+            15:
+                story_text: |
+                    ## Calculator
+                    You can add the `while` loop to the calculator game you've learned to make in a previous level.
+                    This makes sure the player can't continue to the next question if they answer incorrectly.
+
+                    ## Example Hedy code
+                    ```
+                    score is 0
+                    for i in range 0 to 9
+                        numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number1 is numbers at random
+                        number2 is numbers at random
+                        correct is number1 * number2
+                        answer is 0
+                        while answer != correct
+                            print 'How much is ' number1 ' times ' number2 '?'
+                            answer is ask 'Fill in your answer:'
+                            print 'Your answer is ' answer
+                        print 'Good job!'
+                    print 'You win!'
+                    ```
+                start_code: ""
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
@@ -1246,6 +1382,44 @@ adventures:
 
                     ## Challenge
                     Can you think of any fun additions in your restaurant code?
+                start_code: ""
+            15:
+                story_text: |
+                    ## Restaurant
+                    With the `while` you can make sure your costumers can keep adding orders until they are done.
+
+                    ## Example Hedy code
+                    ```
+                    print 'Welcome at McHedy'
+                    more is 'yes'
+                    while more is 'yes'
+                        order is ask 'What would you like to order?'
+                        print order
+                        more is ask 'Would you like to order anything else?'
+                    print 'Thank you!'
+                start_code: ""
+            13:
+                story_text: |
+                    ## Restaurant
+                    In this level we can use the new commands to upgrade our restaurant.
+
+                    ## Example Hedy code with the `and` command
+                    ```
+                    price is 10
+                    food is ask 'What would you like to eat?'
+                    drinks is ask 'What would you like to drink?'
+                    if food is 'sandwich' and drinks is 'juice'
+                        print 'Thats our discount menu'
+                        price is price - 3
+                    print 'That will be ' price ' dollars'
+                    ```
+
+                    ## Example Hedy code with the `or` command
+                    ```
+                    drinks is ask 'What would you like to drink?'
+                    if drinks is 'water' or drinks is 'juice'
+                        print 'Thats a healthy choice'
+                    ```
                 start_code: ""
     fortune:
         name: "Fortune teller"
@@ -1605,7 +1779,7 @@ adventures:
                     ```
                     print 'Escape from the haunted house!'
                     print 'There are 3 doors in front of you...'
-                    doors is 1,2,3
+                    doors is 1, 2, 3
                     monsters is werewolf, mummy, vampire, zombie
                     chosendoor is ask 'Which door do you choose?'
                     print 'You chose door...' chosendoor
