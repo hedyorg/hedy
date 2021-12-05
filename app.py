@@ -267,6 +267,10 @@ def setup_language():
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
 
+    # Also get the 'ui' translations into a global object for this language, these
+    # are used a lot so we can clean up a fair bit by initializing here.
+    g.ui_texts = TRANSLATIONS.get_translations(lang, 'ui')
+
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
     logging.warning('Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
@@ -275,6 +279,17 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     return dict(username=user.get('username', ''), is_teacher=is_teacher(user), is_admin=is_admin(user))
+
+@app.context_processor
+def enricht_context_with_translations():
+    """Adds dicts with translations to the global template context.
+
+    For some reason these are held in various different sections in the YAMLs.
+    """
+    texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
+    ui = TRANSLATIONS.get_translations(g.lang, 'ui')
+    auth = TRANSLATIONS.get_translations(g.lang, 'Auth')
+    return dict(texts=texts, ui=ui, auth=auth)
 
 @app.after_request
 def set_security_headers(response):
@@ -555,26 +570,25 @@ def programs_page(request):
     from_user = request.args.get('user') or None
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.page_403 (TRANSLATIONS, username, g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_teacher'))
+            return utils.page_403 (ui_message='not_teacher')
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
-            return utils.page_403 (TRANSLATIONS, username, g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('not_enrolled'))
+            return utils.page_403 (ui_message='not_enrolled')
 
-    texts=TRANSLATIONS.get_translations(g.lang, 'Programs')
-    ui=TRANSLATIONS.get_translations(g.lang, 'ui')
     adventures = load_adventure_for_language(g.lang)
 
     result = DATABASE.programs_for_user(from_user or username)
-    programs =[]
+    programs = []
     now = timems()
     for item in result:
-        date, measure = get_user_formatted_timestamp(texts, now, item['date'])
-        programs.append({'id': item['id'], 'code': item['code'], 'date': texts['ago-1'] + ' ' + str(date) + ' ' + measure + ' ' + texts['ago-2'], 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
+        date = get_user_formatted_age(now, item['date'])
+        programs.append({'id': item['id'], 'code': item['code'], 'date': date, 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
-    return render_template('programs.html', texts=texts, ui=ui, auth=TRANSLATIONS.get_translations(g.lang, 'Auth'), programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
+    return render_template('programs.html', programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
 
 
-def get_user_formatted_timestamp(texts, now, date):
+def get_user_formatted_age(now, date):
+    texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
     program_age = now - date
     if program_age < 1000 * 60 * 60:
         measure = texts['minutes']
@@ -585,7 +599,8 @@ def get_user_formatted_timestamp(texts, now, date):
     else:
         measure = texts['days']
         date = round(program_age /(1000 * 60 * 60 * 24))
-    return date, measure
+
+    return f"{texts['ago-1']} {date} {measure} {texts['ago-2']}"
 
 @app.route('/quiz/start/<int:level>', methods=['GET'])
 def get_quiz_start(level):
@@ -601,8 +616,7 @@ def get_quiz_start(level):
     session['total_score'] = 0
     session['correct_answer'] = 0
 
-    return render_template('startquiz.html', level=level, next_assignment=1, lang=g.lang,
-                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
+    return render_template('startquiz.html', level=level, next_assignment=1)
 
 # Quiz mode
 # Fill in the filename as source
@@ -651,8 +665,7 @@ def get_quiz(level_source, question_nr, attempt):
                            correct=session.get('correct_answer'),
                            attempt=attempt,
                            is_last_attempt=attempt == quiz.MAX_ATTEMPTS,
-                           lang=g.lang,
-                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
+                           lang=g.lang)
 
 
 @app.route('/quiz/finished/<int:level>', methods=['GET'])
@@ -674,8 +687,7 @@ def quiz_finished(level):
                            level_source=level,
                            level=int(level) + 1,
                            questions=questions,
-                           next_assignment=1,
-                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
+                           next_assignment=1)
 
 
 @app.route('/quiz/submit_answer/<int:level_source>/<int:question_nr>/<int:attempt>', methods=["POST"])
@@ -780,8 +792,7 @@ def quiz_feedback(level_source, question_nr):
                            wrong_answer_hint=wrong_answer_hint,
                            index_option=index_option,
                            correct_option=correct_option,
-                           lang=g.lang,
-                           ui=TRANSLATIONS.get_translations(g.lang, 'ui'))
+                           lang=g.lang)
 
 
 def is_quiz_enabled():
@@ -789,12 +800,11 @@ def is_quiz_enabled():
 
 
 def quiz_disabled_error():
-    return utils.page_404(TRANSLATIONS, current_user()['username'], g.lang, 'Hedy quiz disabled!', menu=False)
+    return utils.page_404('Hedy quiz disabled!', menu=False)
 
 
 def no_quiz_data_error():
-    return utils.page_404(TRANSLATIONS, current_user()['username'], g.lang, 'No quiz data found for this level',
-                          menu=False)
+    return utils.page_404('No quiz data found for this level', menu=False)
 
 
 # routing to index.html
@@ -810,9 +820,9 @@ def index(level, step):
         try:
             g.level = level = int(level)
         except:
-            return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_level'))
+            return utils.page_404 (ui_message='no_such_level')
     else:
-        return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_level'))
+        return utils.page_404 (ui_message='no_such_level')
 
     g.prefix = '/hedy'
 
@@ -823,12 +833,12 @@ def index(level, step):
     if step and isinstance(step, str) and len(step) > 2:
         result = DATABASE.program_by_id(step)
         if not result:
-            return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_program'))
+            return utils.page_404 (ui_message='no_such_program')
 
         user = current_user()
         public_program = 'public' in result and result['public']
         if not public_program and user['username'] != result['username'] and not is_admin(user) and not is_teacher(user):
-            return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_program'))
+            return utils.page_404 (ui_message='no_such_program')
         loaded_program = {'code': result['code'], 'name': result['name'], 'adventure_name': result.get('adventure_name')}
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
@@ -837,7 +847,7 @@ def index(level, step):
     level_defaults_for_lang = LEVEL_DEFAULTS[g.lang]
 
     if level not in level_defaults_for_lang.levels or restrictions['hide_level']:
-        return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_level'))
+        return utils.page_404 (ui_message='no_such_level')
     defaults = level_defaults_for_lang.get_defaults_for_level(level)
     max_level = level_defaults_for_lang.max_level()
 
@@ -845,7 +855,6 @@ def index(level, step):
         level_defaults=defaults,
         max_level=max_level,
         level_number=level,
-        translations=TRANSLATIONS,
         version=version(),
         adventures=adventures,
         restrictions=restrictions,
@@ -860,7 +869,7 @@ def view_program(id):
 
     result = DATABASE.program_by_id(id)
     if not result:
-        return utils.page_404 (TRANSLATIONS, user['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('no_such_program'))
+        return utils.page_404 (ui_message='no_such_program')
 
     # If we asked for a specific language, use that, otherwise use the language
     # of the program's author.
@@ -877,23 +886,17 @@ def view_program(id):
 
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
-        texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
         now = timems()
-        date, measure = get_user_formatted_timestamp(texts, now, result['date'])
-        arguments_dict['program_age'] = f"{texts['ago-1']} {date} {measure} {texts['ago-2']}"
+        arguments_dict['program_age'] = get_user_formatted_age(now, result['date'])
         arguments_dict['program_timestamp'] = f"{datetime.datetime.fromtimestamp(result['date']/1000.0).strftime('%d-%m-%Y, %H:%M:%S')} GMT"
-        arguments_dict['submitted_header'] = texts['submitted_header']
-        arguments_dict['last_edited'] = texts['last_edited']
     else:
         arguments_dict['show_edit_button'] = True
 
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
     arguments_dict['menu'] = True
-    arguments_dict['auth'] = TRANSLATIONS.get_translations(g.lang, 'Auth')
     arguments_dict['username'] = user.get('username', None)
     arguments_dict['is_teacher'] = is_teacher(user)
-    arguments_dict.update(**TRANSLATIONS.get_translations(g.lang, 'ui'))
 
     return render_template("view-program-page.html", **arguments_dict)
 
@@ -919,13 +922,13 @@ def client_messages():
 
 @app.errorhandler(404)
 def not_found(exception):
-    return utils.page_404 (TRANSLATIONS, current_user()['username'], g.lang, TRANSLATIONS.get_translations (g.lang, 'ui').get ('page_not_found'))
+    return utils.page_404 (ui_message='page_not_found')
 
 @app.errorhandler(500)
 def internal_error(exception):
     import traceback
     print(traceback.format_exc())
-    return utils.page_500 (TRANSLATIONS, current_user()['username'], g.lang)
+    return utils.page_500 ()
 
 @app.route('/index.html')
 @app.route('/')
@@ -945,7 +948,7 @@ def main_page(page):
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('learn-more.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+        return render_template('learn-more.html',
                                content=learn_more_translations)
 
     user = current_user()
@@ -953,11 +956,9 @@ def main_page(page):
     if page == 'landing-page':
         if user['username']:
             return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(user),
-                                   auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
                                    text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
-            return utils.page_403(TRANSLATIONS, user['username'], g.lang,
-                                  TRANSLATIONS.get_translations(g.lang, 'ui').get('not_user'))
+            return utils.page_403(ui_message='not_user')
 
     if page == 'for-teachers':
         for_teacher_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
@@ -967,15 +968,14 @@ def main_page(page):
             session.pop('welcome-teacher', None)
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
-            return render_template('for-teachers.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+            return render_template('for-teachers.html',
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher)
         else:
-            return utils.page_403(TRANSLATIONS, current_user()['username'], g.lang,
-                                  TRANSLATIONS.get_translations(g.lang, 'ui').get('not_teacher'))
+            return utils.page_403(ui_message='not_teacher')
 
     main_page_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-    return render_template('main-page.html', auth=TRANSLATIONS.get_translations(g.lang, 'Auth'),
+    return render_template('main-page.html',
                            content=main_page_translations)
 
 def session_id():
@@ -1271,10 +1271,9 @@ def teacher_invitation(code):
     lang = g.lang
 
     if os.getenv('TEACHER_INVITE_CODE') != code:
-        return utils.page_404(TRANSLATIONS, user['username'], lang,
-                              TRANSLATIONS.get_translations(g.lang, 'ui').get('invalid_teacher_invitation_code'))
+        return utils.page_404(ui_message='invalid_teacher_invitation_code')
     if not user['username']:
-        return render_template('teacher-invitation.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'))
+        return render_template('teacher-invitation.html')
 
     update_is_teacher(user)
 
