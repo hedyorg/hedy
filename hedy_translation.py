@@ -52,7 +52,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     punctuation_symbols = ['!', '?', '.']
 
-    keywordDict = keywords_to_dict(to_lang)
+    keyword_dict = keywords_to_dict(to_lang)
     if level > 7:
         input_string = hedy.preprocess_blocks(input_string, level)
     program_root = parser.parse(input_string + '\n').children[0]
