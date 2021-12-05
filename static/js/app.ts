@@ -245,13 +245,15 @@ export function runit(level: string, lang: string, cb: () => void) {
         if ( newly_learned_subjects(level, code) ) {
           console.log("success!");
           var allsuccessmessages = ErrorMessages['Transpile_success'];
-          if ( typeof allsuccessmessages === 'object' ) { //
-            var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length); //
-            success.show(allsuccessmessages[randomnum]); //
-          } //
-          else { //
-            success.show(allsuccessmessages); //
-          } //
+          if ( typeof allsuccessmessages === 'object' ) { 
+            // If there is a list of succes messages
+            var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length); 
+            success.show(allsuccessmessages[randomnum]); 
+          } 
+          else { 
+            // If there is only one succes message
+            success.show(allsuccessmessages); 
+          } 
         }
         else {
           console.log("incomplete!")
