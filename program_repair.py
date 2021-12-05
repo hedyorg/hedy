@@ -1,7 +1,7 @@
 def insert(input_string, line, column, new_string):
-    """"insert new_string at (line, column)"""
+    """"insert new_string before (line, column)"""
     rows = input_string.splitlines()
-    rows[line] = rows[line][:column + 1] + new_string + rows[line][column + 1:]
+    rows[line] = rows[line][:column] + new_string + rows[line][column:]
 
     return '\n'.join(rows)
 
@@ -23,5 +23,18 @@ def replace(input_string, line, column, length, new_string):
 
 
 def remove_leading_spaces(input_string):
-    # the only repair we can do now is remove leading spaces, more can be added!
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
+
+
+def remove_unexpected_char(input_string, line, column):
+    return delete(input_string, line, column, 1)
+
+
+# TODO: check if the user tried to print a variable
+def add_missing_quote(input_string, line, column, length):
+    if input_string.splitlines()[line][column] == '\'':
+        # add quote at the end
+        return insert(input_string, line, column + length, '\'')
+    else:
+        # add quote at the beginning
+        return insert(input_string, line, column, '\'')

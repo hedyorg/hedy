@@ -165,7 +165,7 @@ def get_suggestions_for_language(lang, level):
     lang_commands = hedy_translation.get_list_keywords(commands_per_level[level], lang)
     # if we allow multiple keyword languages:
     # lang_commands = list(set(en_commands + lang_commands))
-            
+
     return lang_commands
 
 def hash_needed(name):
@@ -665,16 +665,25 @@ class Filter(Transformer):
                     return False, a[1]
 
     #leafs are treated differently, they are True + their arguments flattened
-    def var(self, args):
-        return True, ''.join([str(c) for c in args])
-    def random(self, args):
-        return True, 'random'
-    def punctuation(self, args):
-        return True, ''.join([c for c in args])
-    def number(self, args):
-        return True, ''.join([c for c in args])
-    def text(self, args):
-        return all(args), ''.join([c for c in args])
+    @v_args(meta=True)
+    def var(self, args, meta):
+        return True, ''.join([str(c) for c in args]), meta
+
+    @v_args(meta=True)
+    def random(self, args, meta):
+        return True, 'random', meta
+
+    @v_args(meta=True)
+    def punctuation(self, args, meta):
+        return True, ''.join([c for c in args]), meta
+
+    @v_args(meta=True)
+    def number(self, args, meta):
+        return True, ''.join([c for c in args]), meta
+
+    @v_args(meta=True)
+    def text(self, args, meta):
+        return all(args), ''.join([c for c in args]), meta
 
 class UsesTurtle(Transformer):
     # returns true if Forward or Turn are in the tree, false otherwise
@@ -705,33 +714,33 @@ class UsesTurtle(Transformer):
         return False
 
 
-
-@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
-    def program(self, args, meta):
+    def program(self, args):
         if len(args) == 0:
             return False, InvalidInfo("empty program")
         return super().program(args)
 
-    def invalid_space(self, args, meta):
+    def invalid_space(self, args):
         # return space to indicate that line starts in a space
-        return False, InvalidInfo(" ", line=meta.line, column=meta.column)
+        return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column)
 
-    def print_nq(self, args, meta):
+    def print_nq(self, args):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
+        print('nq', args)
+        return False, InvalidInfo("print without quotes", arguments=args[0][1],
+                                  line=args[0][2].line, column=args[0][2].column)
 
-    def invalid(self, args, meta):
+    def invalid(self, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
-        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
+        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], args[0][2].line, args[0][2].column)
         return False, error
 
-    def unsupported_number(self, args, meta):
-        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
+    def unsupported_number(self, args):
+        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=args[0][2].line, column=args[0][2].column)
         return False, error
 
     #other rules are inherited from Filter
@@ -745,6 +754,7 @@ def valid_echo(ast):
 
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
+
 
 @v_args(meta=True)
 class IsComplete(Filter):
@@ -1822,6 +1832,14 @@ def parse_input(input_string, level, lang):
             character_found = beautify_parse_error(e.char)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
+            fixed_code = program_repair.remove_unexpected_char(input_string, location[0] - 1, location[1] - 1)
+            if fixed_code != input_string:  # only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, level)
+                    result = fixed_result
+                except exceptions.HedyException:
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
             raise exceptions.ParseException(level=level, location=location, found=character_found) from e
         except UnexpectedEOF:
             # this one can't be beautified (for now), so give up :)
@@ -1842,6 +1860,7 @@ def is_program_valid(program_root, input_string, level, lang):
             invalid_info = invalid_info[0]
 
         line = invalid_info.line
+        column = invalid_info.column
         if invalid_info.error_type == ' ':
 
             # the error here is a space at the beginning of a line, we can fix that!
@@ -1859,6 +1878,14 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
+            fixed_code = program_repair.add_missing_quote(input_string, line - 1, column - 1, len(invalid_info.arguments))
+            if fixed_code != input_string:  # only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, level)
+                    result = fixed_result
+                except exceptions.HedyException:
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
             raise exceptions.UnquotedTextException(level=level)
         elif invalid_info.error_type == 'empty program':
             raise exceptions.EmptyProgramException()
