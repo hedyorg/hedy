@@ -59,7 +59,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
     hedy.ExtractAST().transform(program_root)
     translator = TRANSPILER_LOOKUP[level]
-    abstract_syntaxtree = translator(keywordDict, punctuation_symbols).transform(program_root)
+    abstract_syntaxtree = translator(keyword_dict, punctuation_symbols).transform(program_root)
 
     return abstract_syntaxtree
 
