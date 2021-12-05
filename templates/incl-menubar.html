@@ -14,8 +14,9 @@
       {% endif %}
     {% endfor %}
     {% if username %}
-      <a class="menubar-btn {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/my-profile')}}">{{auth.profile}}</a>
-      <a class="menubar-btn {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/programs')}}">{{auth.program_header}}</a>
+      <div class="flex-grow"></div>
+      <a class="menubar-btn {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/my-profile')}}"><span class="fas fa-fw fa-user"></span> {{username}}</a>
+      <a class="menubar-btn {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/programs')}}"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
     {% endif %}
     {% if not username %}
       <a class="menubar-btn {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
