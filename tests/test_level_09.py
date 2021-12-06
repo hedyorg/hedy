@@ -12,51 +12,46 @@ class TestsLevel9(HedyTester):
     if naam is Hedy
         print 'koekoek'""")
 
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
   def test_repeat_with_indent(self):
     code = textwrap.dedent("""\
     repeat 5 times
       print 'koekoek'""")
 
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
       print(f'koekoek')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
     repeat n times
         print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
       print(f'me wants a cookie!')""")
 
-    self.assertEqual(expected, result.code)
-
-    expected_output = textwrap.dedent("""\
+    output = textwrap.dedent("""\
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output=output)
 
-  # neesting
+  # nesting
 
   def test_issue_902(self):
     code = textwrap.dedent("""\
@@ -68,8 +63,6 @@ class TestsLevel9(HedyTester):
         prijs is prijs + 1
     print 'Dat is in totaal ' prijs ' euro.'""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     print(f'kassabon')
     prijs = '0'
@@ -78,7 +71,7 @@ class TestsLevel9(HedyTester):
       if str(ingredient) == str('appel'):
         prijs = int(prijs) + int(1)
     print(f'Dat is in totaal {prijs} euro.')""")
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
@@ -87,7 +80,6 @@ class TestsLevel9(HedyTester):
         repeat 3 times
             print 'mooi'""")
 
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     kleur = 'groen'
@@ -95,7 +87,7 @@ class TestsLevel9(HedyTester):
       for i in range(int(3)):
         print(f'mooi')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_issue_396(self):
     code = textwrap.dedent("""\
@@ -105,7 +97,6 @@ class TestsLevel9(HedyTester):
         else
             print 'lalala'""")
 
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
@@ -114,7 +105,7 @@ class TestsLevel9(HedyTester):
       else:
         print(f'lalala')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_empty_line_with_whitespace(self):
     code = textwrap.dedent("""\
@@ -126,7 +117,6 @@ class TestsLevel9(HedyTester):
       else
         print 'pizza is better'""")
 
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     for i in range(int(3)):
@@ -136,7 +126,7 @@ class TestsLevel9(HedyTester):
       else:
         print(f'pizza is better')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
 
 
