@@ -871,29 +871,9 @@ export function confetti_cannon(){
 }
 
 function getConfettiForAdventure(adventure: string){
-
-  switch (adventure) {
-    case 'turtle':
-      let turtleEmoji = Array.from(ErrorMessages['Emoji_turtle'])
-      return turtleEmoji;
-    case 'rock':
-      let rockEmoji = Array.from(ErrorMessages['Emoji_rock'])
-      return rockEmoji;
-    case 'haunted':
-      let hauntedEmoji = Array.from(ErrorMessages['Emoji_haunted'])
-      return hauntedEmoji;
-    case 'restaurant':
-      let restaurantEmoji = Array.from(ErrorMessages['Emoji_restaurant'])
-      return restaurantEmoji;
-    case 'fortune':
-      let fortuneEmoji = Array.from(ErrorMessages['Emoji_fortune'])
-      return fortuneEmoji;
-    case 'songs':
-      let songEmoji = Array.from(ErrorMessages['Emoji_song'])
-      return songEmoji;
-    case 'dice':
-      let diceEmoji = Array.from(ErrorMessages['Emoji_dice'])
-      return diceEmoji;
+  let emoji = Array.from(ErrorMessages[adventure])
+  if (emoji != null){
+    return emoji;
   }
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
