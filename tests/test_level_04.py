@@ -88,10 +88,9 @@ class TestsLevel4(HedyTester):
     kleur is ask Wat is je lievelingskleur'
     print 'Jouw favoriet is dus ' kleur""")
 
-    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
-  
+    self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
 
-    self.assertEqual('Unquoted Text', context.exception.error_code)  # hier moet nog we een andere foutmelding komen!
+
   def test_ask_with_list_var(self):
     code = textwrap.dedent("""\
     colors is orange, blue, green
@@ -333,19 +332,19 @@ class TestsLevel4(HedyTester):
       print welcome""")
 
     with self.assertRaises(hedy.exceptions.ParseException) as context:
-  
+      result = hedy.transpile(code, self.level)
 
     self.assertEqual('Parse', context.exception.error_code)
     self.assertEqual(1, context.exception.error_location[0])
     self.assertEqual('?', context.exception.error_location[1])
+
   def test_missing_opening_quote(self):
     code = textwrap.dedent("""\
       print hallo wereld'""")
 
-    with self.assertRaises(hedy.exceptions.UnquotedTextException) as context:
+    self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
   
 
-    self.assertEqual('Unquoted Text', context.exception.error_code)
   def test_missing_all_quotes(self):
     code = textwrap.dedent("""\
       print hallo wereld""")

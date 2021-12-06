@@ -318,10 +318,11 @@ class TestsLevel5(HedyTester):
         print 'Its a tie!'""")
 
     with self.assertRaises(hedy.exceptions.ParseException) as context:
-  
+      result = hedy.transpile(code, self.level)
     self.assertEqual('Parse', context.exception.error_code)
     self.assertEqual(4, context.exception.error_location[0])
     self.assertEqual(1, context.exception.error_location[1])
+
   def test_if_print_has_no_turtle(self):
     code = textwrap.dedent("""\
     jouwkeuze is schaar
@@ -344,9 +345,10 @@ class TestsLevel5(HedyTester):
     code = "pront 'Hedy is leuk!'"
 
     with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
-  
+        result = hedy.transpile(code, self.level)
     self.assertEqual('Invalid', context.exception.error_code)
     self.assertEqual('print', str(context.exception.arguments['guessed_command']))
+
   def test_if_with_print_backtick(self):
     code = textwrap.dedent("""\
     name is ask 'ποιό είναι το όνομά σου;'
@@ -359,7 +361,8 @@ class TestsLevel5(HedyTester):
     )
 
   # def test_list_find_issue(self):
-  #   #'list' object has no attribute 'find'
+  #   #'list' object has no attribute 'find'?
+  # add 'TODO' for searchability, not sure this is still a thing?
   #   # FH dd sept 2021 for later fixing!
   #   code = textwrap.dedent("""\
   #     নাম is ask আপনার নাম কি?
