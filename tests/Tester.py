@@ -75,7 +75,7 @@ class HedyTester(unittest.TestCase):
     # In the second case, you can also pass an extra function to check
     for level in range(self.level, max_level + 1):
       self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function)
-      print('Passed for level {level}')
+      print(f'Passed for level {level}')
 
   def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None):
     if level is None: # no level set (from the multi-tester)? grap current level from class
