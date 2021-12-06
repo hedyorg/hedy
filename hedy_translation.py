@@ -276,5 +276,23 @@ class ConvertToLang8(ConvertToLang7):
 
 
 @hedy_translator(level=9)
-class ConvertToLang9(ConvertToLang8):
-    pass
+@hedy_translator(level=10)
+class ConvertToLang9_10(ConvertToLang8):
+
+    def repeat_list(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + args[1] + indent(args[2:])
+
+
+@hedy_translator(level=11)
+class ConvertToLang11(ConvertToLang9_10):
+    def for_loop(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
+               self.keywords["range"] + " " + args[1] + " " + self.keywords["to"] + " " + args[2] + indent(args[3:])
+
+
+@hedy_translator(level=12)
+class ConvertToLang12(ConvertToLang11):
+
+    def text_in_quotes(self, args):
+        return ''.join(["'" + str(c) + "'" for c in args])
+
