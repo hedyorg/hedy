@@ -238,8 +238,6 @@ class TestsLevel6(HedyTester):
       else punten is punten + worp
       print 'dat zijn dan ' punten""")
 
-  
-
       expected = textwrap.dedent("""\
       keuzes = ['1', '2', '3', '4', '5', 'regenworm']
       punten = '0'
@@ -250,8 +248,7 @@ class TestsLevel6(HedyTester):
         punten = int(punten) + int(worp)
       print(f'dat zijn dan {punten}')""")
 
-      self.assertEqual(expected, result.code)
-      self.assertEqual(False, result.has_turtle)
+      self.single_level_tester(code=code, expected=expected)
   def test_ifelse_should_go_before_assign(self):
     code = textwrap.dedent("""\
     kleur is geel
@@ -271,7 +268,7 @@ class TestsLevel6(HedyTester):
       expected=expected
     )
   def test_ifelse_calc_vars(self):
-    code =  textwrap.dedent("""\
+    code = textwrap.dedent("""\
     cmp is 1
     test is 2
     acu is 0
