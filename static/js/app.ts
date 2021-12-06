@@ -846,7 +846,7 @@ export function confetti_cannon(){
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
     let adventures = $('#adventures');
     let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
-    let customLevels = ['turtle', 'rock', 'haunted', 'fortune', 'restaurant']
+    var customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
 
     if(customLevels.includes(currentAdventure!)){
       let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
@@ -874,15 +874,26 @@ function getConfettiForAdventure(adventure: string){
 
   switch (adventure) {
     case 'turtle':
-      return [['🐢']];
+      let turtleEmoji = Array.from(ErrorMessages['Emoji_turtle'])
+      return turtleEmoji;
     case 'rock':
-      return [['✂️'], ['📜'], ['🪨']];
+      let rockEmoji = Array.from(ErrorMessages['Emoji_rock'])
+      return rockEmoji;
     case 'haunted':
-      return [['🦇'], ['👻'], ['🎃']];
+      let hauntedEmoji = Array.from(ErrorMessages['Emoji_haunted'])
+      return hauntedEmoji;
     case 'restaurant':
-      return [['🍣'], ['🍝'], ['🍕'], ['🍰']];
+      let restaurantEmoji = Array.from(ErrorMessages['Emoji_restaurant'])
+      return restaurantEmoji;
     case 'fortune':
-      return [['🔮'], ['✨'], ['🧞‍♂️']];
+      let fortuneEmoji = Array.from(ErrorMessages['Emoji_fortune'])
+      return fortuneEmoji;
+    case 'songs':
+      let songEmoji = Array.from(ErrorMessages['Emoji_song'])
+      return songEmoji;
+    case 'dice':
+      let diceEmoji = Array.from(ErrorMessages['Emoji_dice'])
+      return diceEmoji;
   }
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
