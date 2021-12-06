@@ -278,3 +278,6 @@ class ConvertToLang8(ConvertToLang7):
 @hedy_translator(level=9)
 class ConvertToLang9(ConvertToLang8):
     pass
+
+if __name__ == '__main__':
+    print(translate_keywords('ask hallo', 'en', 'nl', 1))

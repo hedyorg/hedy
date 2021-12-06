@@ -1,4 +1,8 @@
-import hedy 
+# some_file.py
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, 'C:\hedy')
+
 import hedy_translation
 
 from pathlib import Path
@@ -136,36 +140,68 @@ def remove_brackets(s):
 # transform_yaml_to_lark(False)
 # transform_levels_in_all_YAMLs('colon', 17)
 
-def transform_yaml_keywords(lang):
-  input_path = '../coursedata/adventures'
-  output_path = '../coursedata/adventures-transformed/'
+def translate_story_text(level, story_text, from_lang, to_lang)
+  story_text_list = story_text.splitlines()
+  transformed_story_text = []
+  translating = False
+  translate_list = []
+  
+  for line in story_text_list:
+    line_list = line.split()
+        
+    for index, word in enumerate(line_list):
+      if word.startswith('`') and word.endswith('`'):
+        translated_word = word 
+        transformed_story_text.append(translated_word)
+      
+      if word == '```':
+        if not translating:
+          translating = True
+        else:
+          text_to_be_translated = ''.join(translate_list)
+          translated_text = hedy_translation.translate_keywords(text_to_be_translated)
+          translating = False
+      
+      if translating: 
+        if index != len(line_list):
+          translate_list.append(word + ' ')
+      else:
+        if index != len(line_list):
+          transformed_story_text.append(word + ' ')
+    
+    if translating:
+      translate_list.append('\n')
+      
+    transformed_story_text.append('\n')  
+  
+  
+  print(''.join(transformed_story_text))    
+
+
+def transform_yaml_keywords(lang = 'all'):
+  input_path = './coursedata/adventures'
+  output_path = './coursedata/adventures-transformed/'
+  Path(output_path).mkdir(parents=True, exist_ok=True)
 
   yaml_filesnames = [f for f in os.listdir(input_path) if
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
   for filename in yaml_filesnames:
-    if filename == lang + '.yaml':
-      yaml_filesnames_with_path = os.path.join(input_path, lang + '.yaml')
+    if filename == lang + '.yaml' or lang == 'all':      
+      yaml_filesnames_with_path = os.path.join(input_path, filename)
 
-  with open(yaml_filesnames_with_path, 'r') as stream:
-    yaml_dict = yaml.safe_load(stream)
+      with open(yaml_filesnames_with_path, 'r') as stream:
+        yaml_dict = yaml.safe_load(stream)
 
-  for key, value in yaml_dict.items():
-    if key == 'adventures':
-      for key1, value1 in value.items():
-        for key2, value2 in value1.items():
-          if key2 == 'levels':
-            for key3, value3 in value2.items():
-              for key4, value4 in value3.items():
-                if value4 == 'story_text':
-                  translated_code = translate_story_text(key3, value4)
-                elif value4 == 'start_code':
-                  translated_code = translate_start_code(key3, value4)
+      for adventure, adventure_values in yaml_dict['adventures'].items():
+        levels = adventure_values['levels']
+        for level_number, level_value in levels.items():
+          story_text = level_value['story_text']
+          start_code = level_value['start_code']
+          if level_number == 1 and adventure == 'story':
+            translate_story_text(level_number, story_text, 'en', filename)
+          # translate_start_code(level_number, start_code)
                   
-print(hedy_translation.keywords_to_dict("nl"))
-    
-
-  # def translate_story_text(level, story_text):
-
+transform_yaml_keywords('en')
 
   # def translate_start_code(level, story_text):
