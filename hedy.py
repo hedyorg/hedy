@@ -24,8 +24,6 @@ LEVEL_STARTING_INDENTATION = 8
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = 'pytest' in sys.argv[0] or environ['GITHUB_WORKFLOW'] == 'Unit tests' # If this is True, only the keywords in the specified language can be used for now
 
-raise Exception(environ['GITHUB_WORKFLOW'] == 'Unit tests')
-
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
