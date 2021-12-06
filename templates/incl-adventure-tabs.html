@@ -1,7 +1,7 @@
       {# TABS #}
       <div id="adventures">
         <div class="flex cursor-pointer flex-end">
-        <a tabindex="0" href="#" data-tab="level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ level_title }} {{ level_nr }}</a>
+        <a tabindex="0" href="#" data-tab="level" class="block text-black no-underline font-light tab tab-selected" tabindex="0">{{ ui.level_title }} {{ level_nr }}</a>
         {% for assignment in adventures %}
           {% if assignment.short_name != 'level' %}
             <a tabindex="0" href="#" data-tab="{{assignment.short_name}}" class="text-black no-underline font-light tab" tabindex="0">{{ assignment.name }}</a>
@@ -23,7 +23,7 @@
               <div>
               {{ assignment.text|commonmark }}
               {% if assignment.short_name == 'end' %}
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}}, '{{g.lang}}')">
+                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ ui.go_to_quiz }}" onclick="hedyApp.load_quiz ({{level_nr}}, '{{g.lang}}')">
               {% endif %}
               </div>
               <div class="clear-right"></div>
