@@ -3,7 +3,7 @@ import textwrap
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, environ
 
 import hedy
 import utils
@@ -22,7 +22,7 @@ MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
-local_keywords_enabled = False or 'pytest' in sys.argv[0] # If this is True, only the keywords in the specified language can be used for now
+local_keywords_enabled = False or 'pytest' in sys.argv[0] or environ['GITHUB_ACTIONS'] # If this is True, only the keywords in the specified language can be used for now
 
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
