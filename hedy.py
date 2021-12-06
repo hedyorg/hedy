@@ -12,8 +12,8 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
-import hedy_translation
 import program_repair
+import yaml
 
 # Some useful constants
 HEDY_MAX_LEVEL = 18
@@ -157,16 +157,47 @@ characters_that_need_escaping = ["\\", "'"]
 
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
+
+def get_list_keywords(commands, to_lang):
+    """ Returns a list with the local keywords of the argument 'commands'
+    """
+
+    translation_commands = []
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
+
+    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
+
+    with open(en_yaml_filesname_with_path, 'r') as stream:
+        en_yaml_dict = yaml.safe_load(stream)
+
+    try:
+        with open(to_yaml_filesname_with_path, 'r') as stream:
+            to_yaml_dict = yaml.safe_load(stream)
+        for command in commands:
+            try:
+                translation_command = to_yaml_dict[command]
+                translation_commands.append(translation_command)
+            except Exception:
+                translation_commands.append(en_yaml_dict[command])
+    except Exception:
+        return commands
+
+    return translation_commands
+
+
 def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
-    lang_commands = hedy_translation.get_list_keywords(commands_per_level[level], lang)
+    en_commands = get_list_keywords(commands_per_level[level], 'en')
+    lang_commands = get_list_keywords(commands_per_level[level], lang)
     # if we allow multiple keyword languages:
     # lang_commands = list(set(en_commands + lang_commands))
             
     return lang_commands
+
 
 def hash_needed(name):
     # this function is now applied on something str sometimes Assignment
