@@ -958,8 +958,7 @@ def main_page(page):
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(user),
-                                   text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+            return render_template('landing-page.html', text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
             return utils.page_403(ui_message='not_user')
 
