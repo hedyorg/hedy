@@ -36,7 +36,6 @@ class TestsLevel9(HedyTester):
     repeat n times
         print 'me wants a cookie!'""")
 
-
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):

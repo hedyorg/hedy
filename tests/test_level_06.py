@@ -36,7 +36,7 @@ class TestsLevel6(HedyTester):
     code = textwrap.dedent("""\
     antwoord is ask 'wat is je lievelingskleur?'""")
 
-    result = hedy.transpile(code, self.level)
+
 
     expected = textwrap.dedent("""\
     antwoord = input(f'wat is je lievelingskleur?')""")
@@ -238,7 +238,7 @@ class TestsLevel6(HedyTester):
       else punten is punten + worp
       print 'dat zijn dan ' punten""")
 
-      result = hedy.transpile(code, self.level)
+  
 
       expected = textwrap.dedent("""\
       keuzes = ['1', '2', '3', '4', '5', 'regenworm']

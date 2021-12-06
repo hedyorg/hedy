@@ -318,7 +318,7 @@ class TestsLevel5(HedyTester):
         print 'Its a tie!'""")
 
     with self.assertRaises(hedy.exceptions.ParseException) as context:
-      result = hedy.transpile(code, self.level)
+  
     self.assertEqual('Parse', context.exception.error_code)
     self.assertEqual(4, context.exception.error_location[0])
     self.assertEqual(1, context.exception.error_location[1])
@@ -344,7 +344,7 @@ class TestsLevel5(HedyTester):
     code = "pront 'Hedy is leuk!'"
 
     with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
-      result = hedy.transpile(code, self.level)
+  
     self.assertEqual('Invalid', context.exception.error_code)
     self.assertEqual('print', str(context.exception.arguments['guessed_command']))
   def test_if_with_print_backtick(self):
