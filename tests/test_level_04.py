@@ -334,6 +334,7 @@ class TestsLevel4(HedyTester):
     with self.assertRaises(hedy.exceptions.ParseException) as context:
       result = hedy.transpile(code, self.level)
 
+    #todo these could be tested in an extra_function too?
     self.assertEqual('Parse', context.exception.error_code)
     self.assertEqual(1, context.exception.error_location[0])
     self.assertEqual('?', context.exception.error_location[1])
