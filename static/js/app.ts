@@ -931,19 +931,30 @@ function createModal(level:number ){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
-        let tempIndex = 0;
         let resultString = "";
 
         if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
           resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
-          let tempString = ""
-          for (let i = 0; i < resultString.length + 1; i++) {
-            setTimeout(function() {
-              editor.setValue(tempString,tempIndex);
-              tempString += resultString[tempIndex];
-              tempIndex++;
-            }, 150 * i);
-          }
+          let foutString = storage.getItem("{lvl}".replace("{lvl}", levelKey));
+          editor.setValue(foutString);
+          let cursorlocatie = 0;
+            for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
+              if (resultString[i] !== foutString[i]) {
+                console.log("fout naar", i);
+                editor.clearSelection()
+                editor.moveCursorTo(0, i);
+                cursorlocatie = i+1;
+                console.log(editor.getCursorPosition())
+                break;
+              }
+            }
+          setTimeout(function (){
+            editor.setValue(resultString);
+            editor.clearSelection()
+            editor.moveCursorTo(0,cursorlocatie);
+            console.log(cursorlocatie);
+            console.log(editor.getCursorPosition())
+          }, 1000);
         }
         else{
           resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
