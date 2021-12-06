@@ -974,7 +974,11 @@ def main_page(page):
         else:
             return utils.page_403(ui_message='not_teacher')
 
-    main_page_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+    requested_page = hedyweb.PageTranslations(page)
+    if not requested_page.exists():
+        abort(404)
+
+    main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html',
                            content=main_page_translations)
 
