@@ -12,14 +12,12 @@ class TestsLevel10(HedyTester):
     for dier in dieren
       print dier""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
       print(f'{dier}')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
   def test_for_list_multiple_lines(self):
     code = textwrap.dedent("""\
     familie is baby, mommy, daddy, grandpa, grandma
@@ -29,8 +27,6 @@ class TestsLevel10(HedyTester):
       print shark ' shark tudutudutudu'
       print shark ' shark'""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']
     for shark in familie:
@@ -39,7 +35,7 @@ class TestsLevel10(HedyTester):
       print(f'{shark} shark tudutudutudu')
       print(f'{shark} shark')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
     
   @check_local_lang_bool
   def test_for_list_dutch(self):
@@ -48,11 +44,9 @@ class TestsLevel10(HedyTester):
     voor dier in dieren
       print dier""")
 
-    result = hedy.transpile(code, self.level, lang="nl")
-
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
       print(f'{dier}')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)

@@ -2,19 +2,15 @@
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
-    <div class="px-6 bg-blue-200 border-b-8 border-blue-600" >
+    <div class="px-6 bg-blue-200" >
         <div class="flex justify-around bg-blue-200">
-            <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-start bg-blue-600 p-4 m-8"> {{ ui.level_title }} {{ level_source }} </div>
             {% if questionStatus == 'false' %}
-                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-red-600 p-4 m-8">{{ ui.incorrect }}</div>
+                 <div class="font-slab text-white text-2xl font-bold rounded-full flex items-center justify-self-end bg-red-600 p-2 m-2">{{ ui.incorrect }}</div>
             {% elif questionStatus== 'start'%}
-                 <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8"> {{ ui.question }} {{ question_nr }}</div>
+                 <div class="font-slab text-white text-2xl font-bold rounded-full flex items-center justify-self-end bg-blue-600 p-2 m-2"> {{ ui.question }} {{ question_nr }}</div>
             {% else %}
-                <div class="font-slab text-white text-4xl font-bold rounded-full flex items-center justify-self-end bg-green-600 p-4 m-8">{{ ui.correct }}</div>
+                <div class="font-slab text-white text-2xl font-bold rounded-full flex items-center justify-self-end bg-green-600 p-2 m-2">{{ ui.correct }}</div>
             {% endif %}
-
-            <div class="font-slab italic text-white text-xl font-normal rounded-full flex items-center justify-self-end bg-blue-600 p-4 m-8"> {{ correct }}
-                {{ ui.from_number_of_questions }} {{ questions|length }} {{ ui.answered_correctly }}</div>
         </div>
     </div>
 {% block question %}{% endblock %}
