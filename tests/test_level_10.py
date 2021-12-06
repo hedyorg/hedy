@@ -42,11 +42,11 @@ class TestsLevel10(HedyTester):
     code = textwrap.dedent("""\
     dieren is hond, kat, papegaai
     voor dier in dieren
-      print dier""")
+        print dier""")
 
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
-      print(f'{dier}')""")
+        print(f'{dier}')""")
 
     self.single_level_tester(code=code, expected=expected)
