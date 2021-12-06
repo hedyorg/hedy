@@ -29,7 +29,7 @@
       </div>
         <a class="text-white text-xl" onclick="hedyApp.auth.logout ()"><span class="fas fa-fw fa-sign-out-alt"></span></a>
     {% else %}
-      <a class="menubar-btn {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
+      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
       <div class="dropdown inline-block relative ml-auto py-2 z-40">
       <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
         <span class="mr-1">{{ current_language().sym }}</span>
