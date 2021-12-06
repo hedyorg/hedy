@@ -584,7 +584,7 @@ def programs_page(request):
         date = get_user_formatted_age(now, item['date'])
         programs.append({'id': item['id'], 'code': item['code'], 'date': date, 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
-    return render_template('programs.html', programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
+    return render_template('programs.html', programs=programs, current_page='my-profile', from_user=from_user, adventures=adventures)
 
 
 def get_user_formatted_age(now, date):
