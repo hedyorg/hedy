@@ -72,8 +72,8 @@
           <!--Body-->
           <form>
             <div class="my-2 flex">
-              <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ enter_text }}">
-              <input type="submit" onclick="ScrollOutputToBottom()" class="green-btn ml-3" value="{{ enter }}"></p>
+              <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{ ui.enter_text }}">
+              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="green-btn ml-3" value="{{ ui.enter }}"></p>
             </div>
           </form>
         </div>
@@ -83,14 +83,14 @@
     <div class="order-2 lg:order-4">
       <br>
       <div class="flex justify-between">
-        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{run_code_button}} </button>
+        <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}')">{{ui.run_code_button}} </button>
           <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="cursor-pointer" id="repair_button" style="height: 7rem; visibility: hidden; position: absolute; margin-left: 24rem; margin-top: -2rem;">
           {% if show_edit_button %}
-        <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{edit_code_button}}</a>
+        <a href="/hedy/{{level}}/{{program_id}}" class="btn blue-btn">{{ui.edit_code_button}}</a>
         {% endif %}
       </div>
       <div id="speak_container" class="hidden mt-4">
-        <label for="speak_dropdown">{{read_code_label}} </label><select id="speak_dropdown" class="p-2 border-grey border">
+        <label for="speak_dropdown">{{ui.read_code_label}} </label><select id="speak_dropdown" class="p-2 border-grey border">
           <option value="">🤫</option>
         </select>
       </div>
@@ -99,10 +99,10 @@
       <br>
       <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
         {% if prev_level and not hide_prev_level %}
-          <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{regress_button}} {{ prev_level }}</button>
+          <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{ui.regress_button}} {{ prev_level }}</button>
         {% endif %}
         {% if next_level and not hide_next_level %}
-            <button class="green-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ advance_button }} {{ next_level }}</button>
+            <button class="green-btn ml-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{ ui.advance_button }} {{ next_level }}</button>
         {% endif %}
       </div>
     </div>
@@ -115,13 +115,6 @@
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
       <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition" style="top: -5px;"></div>
     </div>
-    <div class="ml-3">{{ developers_mode }}</div>
+    <div class="ml-3">{{ ui.developers_mode }}</div>
   </label>
 </div>
-<script>
-function ScrollOutputToBottom()
-{
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
-}
-</script>

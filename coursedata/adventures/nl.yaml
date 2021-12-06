@@ -154,7 +154,6 @@ adventures:
                     ```
                     In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: ""
-
             7:
                 story_text: |
                     ## Verhaal
@@ -230,6 +229,28 @@ adventures:
                     ```
 
                 start_code: "print 'Hier komt straks jouw verhaal!'"
+            15:
+                    story_text: |
+                        ## Verhaal
+                        In dit level kun je de `while` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `while spelletje is 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
+                        Of je kunt `while zwaard is 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
+
+                        ## Voorbeeld Hedy code
+                        ```
+                        sleutels is 'kwijt'
+                        print 'Je staat in de voortuin en bent je sleutels kwijt.'
+                        print 'Waar ga je zoeken?'
+                        print 'kies uit: boom, steen, bloembed, brievenbus'
+                        while sleutels is 'kwijt'
+                            locatie is ask 'Waar wil je zoeken?'
+                            if locatie is 'bloembed'
+                                print 'Hier zijn ze!'
+                                sleutels is 'gevonden'
+                            else
+                                print 'Helaas, ze liggen niet bij de ' locatie
+                        print 'Nu kun je het huis in!'
+                        ```
+                    start_code: ""
             13:
                 story_text: |
                     ## Verhaal
@@ -801,6 +822,24 @@ adventures:
                     Dat werkt niet goed! Dan krijg je: ik koos uit de [1, 2, 3, 4, 5, regenworm]. Dat kun je in level 3 oplossen.
 
                 start_code: "print Wat zal de dobbelsteen deze keer aangeven?"
+            15:
+                story_text: |
+                    ## Dobbelstenen
+                    In dit dobbelspelletje moet je 6 gooien in zo min mogelijk beurten.
+
+                    ## Voobeeld Hedy Code
+                    ```
+                    opties is 1, 2, 3, 4, 5, 6
+                    print 'Gooi 6 in zo min mogelijk beurten!'
+                    gegooid is 0
+                    pogingen is 0
+                    while gegooid != 6
+                        gegooid is opties at random
+                        print 'Jij gooide ' gegooid
+                        pogingen is pogingen + 1
+                    print 'Hoera! Je hebt 6 gegooid in ' pogingen ' pogingen.'
+                    ```
+                start_code: ""
     rock:
         name: "Steen, schaar, papier"
         description: "Maak jouw eigen steen, schaar, papier spel"
@@ -890,6 +929,28 @@ adventures:
                     Ook in level 2 kun je de `ask` weer gebruiken, dus probeer maar eens of jij jouw keuze en de keuze van de computer kan printen!
                     Let wel goed op, omdat de `ask` nu anders werkt dan in level 1. Er moet een naam voor.
                 start_code: "print Welkom bij jouw eigen steen schaar papier!"
+            15:
+                story_text: |
+                    ## Steen, papier, schaar
+                    Speel tot je de compuetr verslaat! Maar maak eerst de voorbeeld code af...
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    gewonnen is 'nee'
+                    options is 'steen', 'papier', 'schaar'
+                    while gewonnen is 'nee'
+                        jouw_keuze is ask 'Wat kies jij?'
+                        computer_keuze is options at random
+                        print 'jij koos ' jouw_keuze
+                        print 'de computer koos ' computer_keuze
+                        if computer_keuze is jouw_keuze
+                            print 'Gelijkspel!'
+                        if computer_keuze is 'steen' and jouw_keuze is 'schaar'
+                            print 'Je verliest!'
+                        if computer_keuze is 'steen' and jouw_keuze is 'papier'
+                            print 'Je wint!'
+                            gewonnen is 'ja'
+                start_code: ""
             13:
                 story_text: |
                     ## Steen, papier, schaar
@@ -1021,6 +1082,28 @@ adventures:
                     else print 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "print 'Welkom bij jouw rekenmachine'"
+            15:
+                story_text: |
+                    ## Rekenmachine
+                    In het rekenspelletje dat je een aantal levels terug hebt leren maken, kun je de `while` loop toevoegen.
+                    Hierdoor mag de speler pas door naar de volgende vraag als het goede antwoord gegeven is.
+                    ## Voobeeld Hedy code
+                    ```
+                    score is 0
+                    for i in range 0 to 9
+                        getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        getal1 is getallen at random
+                        getal2 is getallen at random
+                        goedeantwoord is getal1 * getal2
+                        antwoord is 0
+                        while antwoord != goedeantwoord
+                            print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
+                            antwoord is ask 'Vul hier het antwoord in:'
+                            print 'Jouw antwoord is ' antwoord
+                        print 'Goedzo!'
+                    print 'Je hebt gewonnen!'
+                    ```
+                start_code: ""
     fortune:
         name: "Waarzegger"
         description: "Laat Hedy jouw toekomst voorspellen"
@@ -1549,6 +1632,21 @@ adventures:
 
                     ## Uitdaging
                     Kun jij de restaurants nog leuker maken?
+                start_code: ""
+            15:
+                story_text: |
+                    ## Restaurant
+                    Met de `while` kun je zorgen dat je klanten kunnen blijven bestellen tot ze klaar zijn.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    print 'Welkom bij McHedy'
+                    meer is 'ja'
+                    while meer is 'ja'
+                        bestelling is ask 'Wat wil je bestellen?'
+                        print bestelling
+                        meer is ask 'Wilt u nog iets bestellen?'
+                    print 'Bedankt!'
                 start_code: ""
             13:
                 story_text: |

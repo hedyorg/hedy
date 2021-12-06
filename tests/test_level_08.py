@@ -12,14 +12,12 @@ class TestsLevel8(HedyTester):
     if naam is Hedy
         print 'koekoek'""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
   def test_equality_promotes_int_to_string(self):
     code = textwrap.dedent("""\
@@ -64,60 +62,52 @@ class TestsLevel8(HedyTester):
     code = textwrap.dedent("""\
     repeat 5 times
       print 'koekoek'""")
-
-    result = hedy.transpile(code, self.level)
-
+ 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
       print(f'koekoek')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
   def test_repeat_with_variable_print(self):
     code = textwrap.dedent("""\
     n is 5
     repeat n times
         print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, self.level)
-
+ 
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
       print(f'me wants a cookie!')""")
 
-    self.assertEqual(expected, result.code)
-
-    expected_output = textwrap.dedent("""\
+    output = textwrap.dedent("""\
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output=output)
   def test_repeat_with_non_latin_variable_print(self):
     code = textwrap.dedent("""\
     állatok is 5
     repeat állatok times
         print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     v79de0191e90551f058d466c5e8c267ff = '5'
     for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
       print(f'me wants a cookie!')""")
 
-    self.assertEqual(expected, result.code)
-
-    expected_output = textwrap.dedent("""\
+    output = textwrap.dedent("""\
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output=output)
+
   def test_if_else(self):
     code = textwrap.dedent("""\
     antwoord is ask 'Hoeveel is 10 plus 10?'
@@ -128,8 +118,6 @@ class TestsLevel8(HedyTester):
         print 'Foutje'
         print 'Het antwoord moest zijn ' antwoord""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     antwoord = input(f'Hoeveel is 10 plus 10?')
     if str(antwoord) == str('20'):
@@ -139,28 +127,25 @@ class TestsLevel8(HedyTester):
       print(f'Foutje')
       print(f'Het antwoord moest zijn {antwoord}')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
   def test_repeat_basic_print(self):
     code = textwrap.dedent("""\
     repeat 5 times
       print 'me wants a cookie!'""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     for i in range(int(5)):
       print(f'me wants a cookie!')""")
 
-    self.assertEqual(expected, result.code)
-
-    expected_output = textwrap.dedent("""\
+    output = textwrap.dedent("""\
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!
     me wants a cookie!""")
 
-    self.assertEqual(expected_output, HedyTester.run_code(result))
+    self.single_level_tester(code=code, expected=expected, output=output)
+
   def test_allow_space_after_else_line(self):
     #todo should work up to 11??
     code = textwrap.dedent("""\
@@ -190,15 +175,13 @@ class TestsLevel8(HedyTester):
       print count ' times 12 is ' count*12
       count is count + 1""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     count = '1'
     for i in range(int(12)):
       print(f'{count} times 12 is {int(count) * int(12)}')
       count = int(count) + int(1)""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
 
   # negative tests
 
@@ -212,8 +195,8 @@ class TestsLevel8(HedyTester):
             prijs is prijs + 1
     print 'Dat is in totaal ' prijs ' euro.'""")
 
-    with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
-      result = hedy.transpile(code, self.level)
+    self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+
   def test_repeat_nested_in_if(self):
     code = textwrap.dedent("""\
     kleur is groen
@@ -221,16 +204,13 @@ class TestsLevel8(HedyTester):
         repeat 3 times
             print 'mooi'""")
 
-    with self.assertRaises(hedy.exceptions.LockedLanguageFeatureException) as context:
-      result = hedy.transpile(code, self.level)
+    self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
 
 
   def test_quote_in_if(self):
     code = textwrap.dedent("""\
     if eten is 'pizza'
       print 'lekker'""")
-
-    result = hedy.transpile(code, self.level)
 
     expected = textwrap.dedent("""\
     if str('eten') == str('pizza'):
@@ -242,21 +222,18 @@ class TestsLevel8(HedyTester):
       expected=expected
     )
 
+  def test_level_8_no_indentation(self):
+    # gives the right exception for all levels even though it misses brackets
+    # because the indent check happens before parsing
+    code = textwrap.dedent("""\
+    antwoord is ask Hoeveel is 10 keer tien?
+    if antwoord is 100
+    print 'goed zo'
+    else
+    print 'bah slecht'""")
 
-# (so this should fail, for now)
-# at one point we want a real "Indent" error and a better error message
-# for this!
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.NoIndentationException)
 
-# def test_level_7_no_indentation(self):
-#   #test that we get a parse error here
-#   code = textwrap.dedent("""\
-#   antwoord is ask Hoeveel is 10 keer tien?
-#   if antwoord is 100
-#   print 'goed zo'
-#   else
-#   print 'bah slecht'""")
-#
-#   with self.assertRaises(Exception) as context:
-#     result = hedy.transpile(code, self.level)
-#   self.assertEqual(str(context.exception), 'Parse')
 
