@@ -38,8 +38,12 @@ class PageTranslations:
       lang = path.splitext(path.basename(file))[0]
       self.data[lang] = YamlFile.for_file(file)
 
+  def exists(self):
+    """Whether or not any data was found for this page."""
+    return len(self.data) > 0
+
   def get_page_translations(self, language):
-    d = collections.defaultdict(lambda: 'Unknown Exception')
+    d = collections.defaultdict(lambda: '')
     d.update(**self.data.get('en', {}))
     d.update(**self.data.get(language, {}))
     return d
