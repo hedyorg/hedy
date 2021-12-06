@@ -38,3 +38,22 @@ def add_missing_quote(input_string, line, column, length):
     else:
         # add quote at the beginning
         return insert(input_string, line, column, '\'')
+
+
+def define_var_low_level(input_string, variable):
+    # put "variable is Hello" at the beginning
+    return insert(input_string, 0, 0, variable + ' is Hello\n')
+
+
+def define_var_high_level(input_string, variable):
+    # put "variable is 'Hello'" at the beginning
+    return insert(input_string, 0, 0, variable + ' is \'Hello\'\n')
+
+
+def fix_indent(input_string, line, leading_spaces, indent_size):
+    if leading_spaces < indent_size:
+        # not enough spaces
+        return insert(input_string, line, 0, ' ' * (indent_size - leading_spaces))
+    else:
+        # too many spaces
+        return delete(input_string, line, 0, leading_spaces - indent_size)

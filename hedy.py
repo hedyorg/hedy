@@ -1747,9 +1747,11 @@ def preprocess_blocks(code, level):
             if (leading_spaces % indent_size) != 0:
                 # there is inconsistent indentation, not sure if that is too much or too little!
                 if leading_spaces < current_number_of_indents * indent_size:
+                    fixed_code = program_repair.fix_indent(code, line_number - 1, leading_spaces, indent_size)
                     raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                                  indent_size=indent_size)
                 else:
+                    fixed_code = program_repair.fix_indent(code, line_number - 1, leading_spaces, indent_size)
                     raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                                  indent_size=indent_size)
 
@@ -1758,6 +1760,7 @@ def preprocess_blocks(code, level):
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
+            fixed_code = program_repair.fix_indent(code, line_number - 1, leading_spaces, indent_size)
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                          indent_size=indent_size)
 
@@ -1767,6 +1770,7 @@ def preprocess_blocks(code, level):
             next_line_needs_indentation = False
 
         if current_number_of_indents - previous_number_of_indents > 1:
+            fixed_code = program_repair.fix_indent(code, line_number - 1, leading_spaces, indent_size)
             raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                             indent_size=indent_size)
 
@@ -1833,13 +1837,6 @@ def parse_input(input_string, level, lang):
             # print(e.args[0])
             # print(location, character_found, characters_expected)
             fixed_code = program_repair.remove_unexpected_char(input_string, location[0] - 1, location[1] - 1)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                try:
-                    fixed_result = transpile_inner(fixed_code, level)
-                    result = fixed_result
-                except exceptions.HedyException:
-                    # The fixed code contains another error. Only report the original error for now.
-                    pass
             raise exceptions.ParseException(level=level, location=location, found=character_found) from e
         except UnexpectedEOF:
             # this one can't be beautified (for now), so give up :)
@@ -1879,13 +1876,6 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             fixed_code = program_repair.add_missing_quote(input_string, line - 1, column - 1, len(invalid_info.arguments))
-            if fixed_code != input_string:  # only if we have made a successful fix
-                try:
-                    fixed_result = transpile_inner(fixed_code, level)
-                    result = fixed_result
-                except exceptions.HedyException:
-                    # The fixed code contains another error. Only report the original error for now.
-                    pass
             raise exceptions.UnquotedTextException(level=level)
         elif invalid_info.error_type == 'empty program':
             raise exceptions.EmptyProgramException()
