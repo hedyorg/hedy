@@ -6,24 +6,25 @@
     </div>
     {% block menu %}
     {% for item in main_menu_entries() %}
-      {% if item.short_name != 'for-teachers' or is_teacher %}
         <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{localize_link (item.href)}}">
           {{ item.caption }}
         </a>
-      {% endif %}
     {% endfor %}
     {% if username %}
-      <div class="dropdown inline-block relative ml-auto py-2 z-40">
-        <a class="menubar-btn ml-auto {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/my-profile')}}">
+      <a class="menubar-btn ml-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/programs')}}"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
+      <div class="dropdown inline-block relative py-2 z-40">
+        <a class="menubar-btn {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/my-profile')}}">
           <span class="fas fa-fw fa-user"></span> {{username}}
         </a>
         <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 mt-2 list-none ml-0 right-0 w-48" style="border-width: 1px;">
           <a class="no-underline" href="{{localize_link ('/my-profile')}}">
               <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block language">{{auth.profile}}</li>
           </a>
-          <a class="no-underline" href="{{localize_link ('/programs')}}">
-              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block language" >{{auth.program_header}}</li>
-          </a>
+          {% if is_teacher %}
+              <a class="no-underline" href="{{localize_link ('/for-teachers')}}">
+                  <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block language">{{auth.for_teachers}}</li>
+              </a>
+          {% endif %}
         </ul>
       </div>
         <a class="text-white text-xl" onclick="hedyApp.auth.logout ()"><span class="fas fa-fw fa-sign-out-alt"></span></a>
