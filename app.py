@@ -158,6 +158,9 @@ def load_adventures_per_level(lang, level):
 with open(f'menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
 
+with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
+    page_names_json = json.load(f)
+
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
@@ -979,7 +982,7 @@ def main_page(page):
         abort(404)
 
     main_page_translations = requested_page.get_page_translations(g.lang)
-    return render_template('main-page.html',
+    return render_template('main-page.html', page_title=get_page_name('start'),
                            content=main_page_translations)
 
 def session_id():
@@ -1080,6 +1083,10 @@ def split_markdown_front_matter(md):
       return {}, md
 
     return front_matter, parts[1]
+
+def get_page_name(current_page):
+    current_page_translations = page_names_json.get(current_page)
+    return current_page_translations.get(g.lang, current_page_translations.get("en"))
 
 def render_main_menu(current_page):
     """Render a list of(caption, href, selected, color) from the main menu."""
