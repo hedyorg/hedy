@@ -93,9 +93,6 @@ def update_is_teacher(user, is_teacher_value=1):
         send_email_template('welcome_teacher', user['email'], '')
 
 
-# The translations are imported here because current_user above is used by hedyweb.py and we need to avoid circular dependencies
-import hedyweb
-TRANSLATIONS = hedyweb.Translations()
 EMAILS = YamlFile.for_file('website/emails.yaml')
 
 # Thanks to https://stackoverflow.com/a/34499643
@@ -621,9 +618,9 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, lang, request):
     if page == 'my-profile':
-        return render_template('profile.html', auth=TRANSLATIONS.get_translations(lang, 'Auth'), current_page='my-profile')
+        return render_template('profile.html', current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
-        return render_template(page + '.html',  auth=TRANSLATIONS.get_translations(lang, 'Auth'), is_teacher=False, current_page='login')
+        return render_template(page + '.html',  is_teacher=False, current_page='login')
     if page == 'admin':
         if not is_testing_request(request) and not is_admin(current_user()):
             return 'unauthorized', 403
@@ -648,7 +645,7 @@ def auth_templates(page, lang, request):
             user['index'] = counter
             counter = counter + 1
 
-        return render_template('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count(), auth=TRANSLATIONS.get_translations(lang, 'Auth'))
+        return render_template('admin.html', users=userdata, program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
 
 
 def email_base_url():
