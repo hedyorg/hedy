@@ -2,13 +2,13 @@
 {% block levelbody %}
 <div id="commands-window-total" class="right-hand-shadow flex-none {% if not example_programs %} hidden {% endif %}">
     <div>
-      <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ hide_commands }}</button>
+      <button class="green-btn absolute mt-1 ml-1" id="toggle-button" onclick="toggleCommands();">&#8592; {{ ui.hide_commands }}</button>
     </div>
     <div style="width: 250px;" id="commands-window">
       <div id="command_window_content">
           <div class="p-3 shadow-md">
             <div></div>
-            <h2>{{ commands_title }}</h2>
+            <h2>{{ ui.commands_title }}</h2>
           </div>
           <div>
             {% for command in commands %}
@@ -21,7 +21,7 @@
                   {# placeholder to make button go right, was originally in use for the example code 3#}
                 </div>
                 <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-                  onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{try_button}}</button>
+                  onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{ui.try_button}}</button>
               </div>
             </div>
             {% endfor %}
@@ -51,7 +51,7 @@
     window.State = {};
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
-    window.State.level_title = "{{ level_title }}";
+    window.State.level_title = "{{ ui.level_title }}";
     {% if username %}
         window.State.examples_left = 20;
     {% endif %}
@@ -65,7 +65,7 @@
     window.State.adventures = {{ adventures|tojson }};
     window.State.default_program = {{start_code|tojson }};
     window.State.loaded_program = {{ loaded_program|tojson }};
-    window.State.default_program_name = {{ (level_title + ' ' + level_nr)|tojson }};
+    window.State.default_program_name = {{ (ui.level_title + ' ' + level_nr)|tojson }};
     function toggleCommands() {
         if ($('#commands-window').width() == 250) {
             $('#toggle-button').html('&#8594;');
@@ -74,7 +74,7 @@
            width: "55px",
             }, 500 );
         } else {
-            $('#toggle-button').html('&#8592; ' + '{{ hide_commands }}');
+            $('#toggle-button').html('&#8592; ' + '{{ ui.hide_commands }}');
             $( "#commands-window" ).animate({
            width: "250px",
             }, 500 );

@@ -376,24 +376,8 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
-  error.hide();
-  success.hide();
-
-  if (reloadOnExpiredSession ()) return;
-
-  try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
-    window.State.unsaved_changes = false;
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+  window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
     // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
@@ -441,6 +425,42 @@ export function saveit(level: number | [number, string], lang: string, name: str
          localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
          window.location.pathname = '/login';
+      }
+    });
+}
+
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+  error.hide();
+  success.hide();
+
+  if (reloadOnExpiredSession ()) return;
+
+  try {
+    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
+    if (! auth.profile) {
+       return modal.confirm (auth.texts['save_prompt'], function () {
+         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         window.location.pathname = '/login';
+       });
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/programs/duplicate-check',
+      data: JSON.stringify({
+        name:  name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response['duplicate']) {
+        modal.confirm (auth.texts['overwrite_warning'], function () {
+          storeProgram(level, lang, name, code, cb);
+        });
+      } else {
+         storeProgram(level, lang, name, code, cb);
       }
     });
   } catch (e: any) {
@@ -511,12 +531,6 @@ export function share_program (level: number, lang: string, id: string | true, P
 }
 
 export function submit_program (id: string, shared: boolean) {
-  // We have to update the db to mark a program as "submitted"
-  // Then we have to call a "freeze()" function to disable functionality of program table
-  // Enable the open button, but use the share interface if done so (unable to edit)
-  // It gets more complex:
-  // -  If a student tries to direct link to the assignment we have to throw a 403 error
-  // -  Because they are no longer allowed to look at the program at hand
   if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
   console.log(shared);
   if (! shared) return modal.alert (auth.texts['must_be_shared']);
@@ -871,6 +885,11 @@ function getConfettiForAdventure(adventure: string){
       return [['🔮'], ['✨'], ['🧞‍♂️']];
   }
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
+}
+
+export function ScrollOutputToBottom(){
+$("#output").animate({ scrollTop: $(document).height() }, "slow");
+  return false;
 }
 
 export function modalStepOne(level: number){
