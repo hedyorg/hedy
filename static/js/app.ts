@@ -846,7 +846,7 @@ export function confetti_cannon(){
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
     let adventures = $('#adventures');
     let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
-    var customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
+    let customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
 
     if(customLevels.includes(currentAdventure!)){
       let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
