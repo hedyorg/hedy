@@ -10,6 +10,7 @@ import os
 import copy
 import utils
 import yaml
+import textwrap
 
 def nop(s):
   return s
@@ -140,57 +141,76 @@ def remove_brackets(s):
 # transform_yaml_to_lark(False)
 # transform_levels_in_all_YAMLs('colon', 17)
 
+def translate_command(command, from_lang, to_lang):
+  """ Returns the translated command, does not account for multiple translations.
+  """
+  if from_lang == to_lang:
+      return command
+
+  path_keywords = "./coursedata/keywords"
+
+  from_yaml_filesname_with_path = os.path.join(path_keywords, from_lang + '.yaml')
+  to_yaml_filesname_with_path = os.path.join(path_keywords, to_lang + '.yaml')\
+
+  try:
+      with open(from_yaml_filesname_with_path, 'r') as stream:
+          from_yaml_dict = yaml.safe_load(stream)
+      
+
+      english_command = list(from_yaml_dict.keys())[list(from_yaml_dict.values()).index(command)]       
+
+      with open(to_yaml_filesname_with_path, 'r') as stream:
+        to_yaml_dict = yaml.safe_load(stream)
+
+        translation_command = to_yaml_dict[english_command]
+        return translation_command
+  
+  except Exception:
+      return command
+
 def translate_story_text(level, story_text, from_lang, to_lang):
-  print(story_text)
   story_text_list = story_text.splitlines()
   transformed_story_text = []
   translating = False
   translate_list = []
   
   for line in story_text_list:
-    line_list = line.split()
-        
-    for index, word in enumerate(line_list):
-      # if word.startswith('`') and word.endswith('`'):
-      #   translated_word = word 
-      #   transformed_story_text.append(translated_word)
-      
-      if word == '```':
-        
-        if not translating:
-          transformed_story_text.append(word)
-          transformed_story_text.append('\n')  
-          translating = True
-        else:
-          text_to_be_translated = ''.join(translate_list)
-
-          translated_text = hedy_translation.translate_keywords(text_to_be_translated, from_lang, to_lang, level)
-
-          transformed_story_text.append(translated_text)
-          translate_list = []
-          translating = False
-          transformed_story_text.append('\n')  
-          transformed_story_text.append(word)
+    if translating: 
+      if line == '```':
+        text_to_be_translated = ''.join(translate_list)
+        translated_text = hedy_translation.translate_keywords(text_to_be_translated, from_lang, to_lang, level)
+        transformed_story_text.append(translated_text)
+        translate_list = []
+        transformed_story_text.append('\n')  
+        transformed_story_text.append(word)
+        transformed_story_text.append('\n')  
+        translating = False
         continue
-      
-      if translating: 
-        translate_list.append(word)
-        if index != len(line_list) - 1:
-          translate_list.append(' ')
-          
-      else:
+      translate_list.append(line + '\n')
+        
+    if not translating: 
+      line_list = line.split()
+      for index, word in enumerate(line_list):
+        if word.startswith('`') and word.count('`') == 2 and word != "```":
+          wordlist = word.split('`') 
+          word = wordlist[1].removeprefix('`')
+          translated_word = translate_command(word, from_lang, to_lang)
+          translated_word = f'`{translated_word}`{wordlist[2]}'
+          transformed_story_text.append(translated_word)
+          if index != len(line_list) - 1:
+            transformed_story_text.append(' ')
+          continue
+        
+        if word == '```':
+          transformed_story_text.append(word)
+          translating = True
+          continue
+            
         transformed_story_text.append(word)
         if index != len(line_list) - 1:
           transformed_story_text.append(' ')
-    
-    if translating:
-      translate_list.append('\n')
-    else:
+      
       transformed_story_text.append('\n')  
-  
-  
-  print(''.join(transformed_story_text))    
-
 
 def transform_yaml_keywords(lang = 'all'):
   input_path = './coursedata/adventures'
@@ -212,7 +232,7 @@ def transform_yaml_keywords(lang = 'all'):
         for level_number, level_value in levels.items():
           story_text = level_value['story_text']
           start_code = level_value['start_code']
-          if level_number == 1 and adventure == 'story':
+          if level_number < 9 and adventure == 'story':
             translate_story_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
           # translate_start_code(level_number, start_code)
                   

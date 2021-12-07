@@ -2,6 +2,7 @@ from lark import Transformer, Tree
 import hedy
 import yaml
 from os import path
+import textwrap
 
 TRANSPILER_LOOKUP = {}
 
@@ -280,4 +281,11 @@ class ConvertToLang9(ConvertToLang8):
     pass
 
 if __name__ == '__main__':
-    print(translate_keywords('ask hallo', 'en', 'nl', 1))
+    code = textwrap.dedent("""\
+    naam is ask 'Wie loopt er in het bos?'
+    print naam ' loopt door het bos'
+    print naam ' komt een monster tegen'
+    einde is ask 'Wil je een goed of slecht einde?'
+    if einde is goed print naam ' pakt het zwaard en het monster rent snel weg'
+    else print 'Het monster eet ' naam ' op'""")
+    print(translate_keywords(code, 'en', 'nl', 5))
