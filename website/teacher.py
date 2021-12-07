@@ -45,7 +45,9 @@ def routes (app, database):
 
         if utils.is_testing_request (request):
             return jsonify ({'students': students, 'link': Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
-        return render_template ('class-overview.html', current_page='for-teachers', class_info={'students': students, 'link': '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
+        return render_template ('class-overview.html', current_page='for-teachers',
+                                page_title=hedyweb.get_page_title('class overview'),
+                                class_info={'students': students, 'link': '/hedy/l/' + Class ['link'], 'name': Class ['name'], 'id': Class ['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -126,10 +128,11 @@ def routes (app, database):
             token = DATABASE.get_token(request.cookies.get (cookie_name))
             if token:
                 if token ['username'] in Class.get ('students', []):
-                    return render_template ('class-already-joined.html', current_page='my-profile', class_info={'name': Class ['name']})
+                    return render_template ('class-already-joined.html', page_title=hedyweb.get_page_title('join class'),
+                                            current_page='my-profile', class_info={'name': Class ['name']})
                 user = DATABASE.user_by_username(token ['username'])
 
-        return render_template ('class-prejoin.html',
+        return render_template ('class-prejoin.html', page_title=hedyweb.get_page_title('join class'),
             current_page='my-profile',
             class_info={
                 'link': '/class/' + Class ['id'] + '/join/' + Class ['link'] + '?lang=' + g.lang,
@@ -175,7 +178,7 @@ def routes (app, database):
         levels = hedy_content.LevelDefaults(g.lang).levels
         preferences = DATABASE.get_customizations_class(class_id)
 
-        return render_template('customize-class.html',
+        return render_template('customize-class.html', page_title=hedyweb.get_page_title('customize class'),
                                class_info={'name': Class['name'], 'id': Class['id']}, levels=levels,
                                adventures=adventures, preferences=preferences, current_page='for-teachers')
 
