@@ -10,7 +10,7 @@ TRANSPILER_LOOKUP = {}
 
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    base = dirname(__file__)
+    base = path.abspath(path.dirname(__file__))
 
     keywords_path = 'coursedata/keywords/'
     yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
