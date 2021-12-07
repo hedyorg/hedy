@@ -1,7 +1,8 @@
 import hedy
 import textwrap
 from test_level_01 import HedyTester
-from hedy import local_keywords_enabled
+from test_translating import check_local_lang_bool
+
 class TestsLevel10(HedyTester):
   level = 10
   
@@ -11,14 +12,12 @@ class TestsLevel10(HedyTester):
     for dier in dieren
       print dier""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
       print(f'{dier}')""")
 
-    self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)
   def test_for_list_multiple_lines(self):
     code = textwrap.dedent("""\
     familie is baby, mommy, daddy, grandpa, grandma
@@ -28,8 +27,6 @@ class TestsLevel10(HedyTester):
       print shark ' shark tudutudutudu'
       print shark ' shark'""")
 
-    result = hedy.transpile(code, self.level)
-
     expected = textwrap.dedent("""\
     familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']
     for shark in familie:
@@ -38,19 +35,18 @@ class TestsLevel10(HedyTester):
       print(f'{shark} shark tudutudutudu')
       print(f'{shark} shark')""")
 
-    self.assertEqual(expected, result.code)
-  if local_keywords_enabled: 
-    def test_for_list_dutch(self):
-      code = textwrap.dedent("""\
-      dieren is hond, kat, papegaai
-      voor dier in dieren
-        print dier""")
+    self.single_level_tester(code=code, expected=expected)
+    
+  @check_local_lang_bool
+  def test_for_list_dutch(self):
+    code = textwrap.dedent("""\
+    dieren is hond, kat, papegaai
+    voor dier in dieren
+      print dier""")
 
-      result = hedy.transpile(code, self.level, lang="nl")
+    expected = textwrap.dedent("""\
+    dieren = ['hond', 'kat', 'papegaai']
+    for dier in dieren:
+      print(f'{dier}')""")
 
-      expected = textwrap.dedent("""\
-      dieren = ['hond', 'kat', 'papegaai']
-      for dier in dieren:
-        print(f'{dier}')""")
-
-      self.assertEqual(expected, result.code)
+    self.single_level_tester(code=code, expected=expected)

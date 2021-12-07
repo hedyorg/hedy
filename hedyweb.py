@@ -1,4 +1,6 @@
 import collections
+import json
+
 from website.yaml_file import YamlFile
 import attr
 import glob
@@ -30,12 +32,41 @@ class Translations:
     d.update(**self.data.get(language, {}).get(section, {}))
     return d
 
+class PageTranslations:
+  def __init__(self, page):
+    self.data = {}
+    translations = glob.glob('coursedata/pages/' + page + '/*.yaml')
+    for file in translations:
+      lang = path.splitext(path.basename(file))[0]
+      self.data[lang] = YamlFile.for_file(file)
 
-def render_code_editor_with_tabs(level_defaults, max_level, level_number, translations, version, loaded_program, adventures, restrictions, adventure_name):
+  def exists(self):
+    """Whether or not any data was found for this page."""
+    return len(self.data) > 0
+
+  def get_page_translations(self, language):
+    d = collections.defaultdict(lambda: '')
+    d.update(**self.data.get('en', {}))
+    d.update(**self.data.get(language, {}))
+    return d
+
+with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
+    page_titles_json = json.load(f)
+
+
+def get_page_title(current_page):
+  current_page = page_titles_json[current_page]
+  if current_page:
+    return current_page.get(g.lang, current_page.get("en"))
+  else:
+    return page_titles_json['start'].get("en")
+
+
+def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, restrictions, adventure_name):
   user = current_user()
 
   if not level_defaults:
-    return utils.page_404 (translations, user['username'], g.lang, translations.get_translations (g.lang, 'ui').get ('no_such_level'))
+    return utils.page_404 (ui_message='no_such_level')
 
 
   arguments_dict = {}
@@ -52,15 +83,11 @@ def render_code_editor_with_tabs(level_defaults, max_level, level_number, transl
   arguments_dict['latest'] = version
   arguments_dict['selected_page'] = 'code'
   arguments_dict['page_title'] = f'Level {level_number} – Hedy'
-  arguments_dict['auth'] = translations.get_translations (g.lang, 'Auth')
   arguments_dict['username'] = user['username']
   arguments_dict['is_teacher'] = is_teacher(user)
   arguments_dict['loaded_program'] = loaded_program
   arguments_dict['adventures'] = adventures
   arguments_dict['adventure_name'] = adventure_name
-
-  # Translations
-  arguments_dict.update(**translations.get_translations(g.lang, 'ui'))
 
   # Merge level defaults into adventures so it is rendered as the first tab
   arguments_dict.update(**attr.asdict(level_defaults))
