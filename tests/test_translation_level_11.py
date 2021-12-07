@@ -18,28 +18,28 @@ class TestsTranslationLevel11(HedyTester):
 
     def test_for_in_english_dutch(self):
         code = textwrap.dedent("""\
-                                for counter in range 1 to 5
-                                    print counter""")
+        for counter in range 1 to 5
+            print counter""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-                                    voor counter in bereik 1 tot 5
-                                        print counter""")
+        voor counter in bereik 1 tot 5
+            print counter""")
 
         self.assertEqual(result, expected)
 
     def test_for_in_dutch_english(self):
         code = textwrap.dedent("""\
-                                nummer is vraag 'hoe oud ben je'
-                                voor counter in bereik 1 tot 5
-                                    voor count in bereik nummer tot 0
-                                        print 'hoi' counter""")
+        nummer is vraag 'hoe oud ben je'
+        voor counter in bereik 1 tot 5
+            voor count in bereik nummer tot 0
+                print 'hoi' counter""")
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = textwrap.dedent("""\
-                                    nummer is ask 'hoe oud ben je'
-                                    for counter in range 1 to 5
-                                        for count in range nummer to 0
-                                            print 'hoi' counter""")
+        nummer is ask 'hoe oud ben je'
+        for counter in range 1 to 5
+            for count in range nummer to 0
+                print 'hoi' counter""")
 
         self.assertEqual(result, expected)

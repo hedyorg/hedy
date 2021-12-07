@@ -17,68 +17,68 @@ class TestsTranslationLevel9(HedyTester):
 
     def test_double_repeat_indent_english_dutch(self):
         code = textwrap.dedent("""\
-                                repeat 3 times
-                                    repeat 5 times
-                                        print 'hi'""")
+        repeat 3 times
+            repeat 5 times
+                print 'hi'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-                                    herhaal 3 keer
-                                        herhaal 5 keer
-                                            print 'hi'""")
+        herhaal 3 keer
+            herhaal 5 keer
+                print 'hi'""")
 
         self.assertEqual(result, expected)
 
     def test_repeat_ifelse_english_dutch(self):
         code = textwrap.dedent("""\
-                                repeat 3 times
-                                    if naam is hedy
-                                        print 'hello'
-                                    else
-                                        repeat 2 times
-                                            print 'oh'""")
+        repeat 3 times
+            if naam is hedy
+                print 'hello'
+            else
+                repeat 2 times
+                    print 'oh'""")
 
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-                                    herhaal 3 keer
-                                        als naam is hedy
-                                            print 'hello'
-                                        anders
-                                            herhaal 2 keer
-                                                print 'oh'""")
+        herhaal 3 keer
+            als naam is hedy
+                print 'hello'
+            anders
+                herhaal 2 keer
+                    print 'oh'""")
 
         self.assertEqual(result, expected)
 
     def test_multiple_ifelse_dutch_english(self):
         code = textwrap.dedent("""\
-                                als 10 is 10
-                                    als 2 is 3
-                                        print 'wat raar'
-                                    anders
-                                        print 'gelukkig'""")
+        als 10 is 10
+            als 2 is 3
+                print 'wat raar'
+            anders
+                print 'gelukkig'""")
 
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = textwrap.dedent("""\
-                                    if 10 is 10
-                                        if 2 is 3
-                                            print 'wat raar'
-                                        else
-                                            print 'gelukkig'""")
+        if 10 is 10
+            if 2 is 3
+                print 'wat raar'
+            else
+                print 'gelukkig'""")
 
         self.assertEqual(result, expected)
 
     def test_indent_translate_back(self):
         code = textwrap.dedent("""\
-                                naam is hedy
-                                if naam is hedy
-                                    repeat 4 times
-                                        print 'Hallo Hedy'
-                                        print 'Hoe gaat het?'
-                                else
-                                    repeat 5 times
-                                        print '5 keer'""")
+        naam is hedy
+        if naam is hedy
+            repeat 4 times
+                print 'Hallo Hedy'
+                print 'Hoe gaat het?'
+        else
+            repeat 5 times
+                print '5 keer'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)

@@ -32,14 +32,14 @@ class TestsTranslationLevel11(HedyTester):
 
     def test_text_in_quotes_ifs_english_dutch(self):
         code = textwrap.dedent("""\
-                                naam is 'hedy'
-                                if naam is 'hedy'
-                                    print 'hallo ' naam""")
+        naam is 'hedy'
+        if naam is 'hedy'
+            print 'hallo ' naam""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-                                    naam is 'hedy'
-                                    als naam is 'hedy'
-                                        print 'hallo ' naam""")
+        naam is 'hedy'
+        als naam is 'hedy'
+            print 'hallo ' naam""")
 
         self.assertEqual(result, expected)
