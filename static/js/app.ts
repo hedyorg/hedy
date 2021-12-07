@@ -164,10 +164,10 @@ export let theModalEditor: AceAjax.Editor;
 
 function getHighlighter(level: number) {
   const modeExceptions: Record<string, string> = {
-        '9': 'ace/mode/level9and10',
-        '10': 'ace/mode/level9and10',
-        '18': 'ace/mode/level18and19',
-        '19': 'ace/mode/level18and19',
+        '9': 'ace/mode/level9and10' + window.State.lang,
+        '10': 'ace/mode/level9and10' + window.State.lang,
+        '18': 'ace/mode/level18and19' + window.State.lang,
+        '19': 'ace/mode/level18and19' + window.State.lang,
       };
   return modeExceptions[level] || `ace/mode/level` + level + window.State.lang;
 }
