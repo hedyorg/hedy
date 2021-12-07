@@ -281,7 +281,7 @@ def enrich_context_with_user_info():
     return dict(username=user.get('username', ''), is_teacher=is_teacher(user), is_admin=is_admin(user))
 
 @app.context_processor
-def enricht_context_with_translations():
+def enrich_context_with_translations():
     """Adds dicts with translations to the global template context.
 
     For some reason these are held in various different sections in the YAMLs.
