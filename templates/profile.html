@@ -56,6 +56,7 @@
     </div>
     <div class="mb-4 clear-both">
         <button type="submit" class="green-btn mt-4">{{auth.update_profile}}</button>
+        <button class="red-btn ml-3" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
     </div>
     <div class="mb-4">
         <div id="error" class="flex-0 mt-8 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert" style="display: none;"></div>
@@ -84,5 +85,4 @@
     <button type="submit" class="green-btn mt-4">{{auth.change_password}}</button>
   </form>
   <!--<button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button> -->
-  <button class="red-btn" onclick="hedyApp.auth.destroy ()">{{auth.destroy}}</button>
 {% endblock %}
