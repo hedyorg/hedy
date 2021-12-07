@@ -158,6 +158,9 @@ def load_adventures_per_level(lang, level):
 with open(f'menu.json', 'r', encoding='utf-8') as f:
     main_menu_json = json.load(f)
 
+with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
+    page_titles_json = json.load(f)
+
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)-8s: %(message)s')
@@ -1080,6 +1083,7 @@ def split_markdown_front_matter(md):
 
     return front_matter, parts[1]
 
+
 def render_main_menu(current_page):
     """Render a list of(caption, href, selected, color) from the main menu."""
     return[dict(
@@ -1089,6 +1093,11 @@ def render_main_menu(current_page):
         accent_color=item.get('accent_color', 'white'),
         short_name=item['_']
     ) for item in main_menu_json['nav']]
+
+
+def get_page_title(current_page):
+    current_page = page_titles_json[current_page]
+    return current_page.get(g.lang, current_page.get("en"))
 
 # *** PROGRAMS ***
 
