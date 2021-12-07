@@ -277,36 +277,6 @@ $ ('.auth input').get ().map (function (el) {
   el.addEventListener ('input', () => auth.clear_error());
 });
 
-// We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
-$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
-  if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
-
-  auth.profile = response;
-  if ($ ('#profile').html ()) {
-    $ ('#username').html (response.username);
-    $ ('#email').val (response.email);
-    $ ('#birth_year').val (response.birth_year);
-    $ ('#gender').val (response.gender);
-    $ ('#country').val (response.country);
-    if (response.prog_experience) {
-      $ ('input[name=has_experience][value="' + response.prog_experience + '"]').prop ('checked', true);
-      if (response.prog_experience === 'yes') $ ('#languages').show ();
-    }
-    (response.experience_languages || []).map (function (lang: string) {
-       $ ('input[name=languages][value="' + lang + '"]').prop ('checked', true);
-    });
-    if (! jQuery.isEmptyObject(response.student_classes)) {
-      $ ('#student_classes ul').html ((response.student_classes || []).map (function (Class: Class) {
-        return '<li>' + auth.entityify (Class.name) + '</li>';
-      }).join (''));
-    } else {
-      $ ('#student_classes').hide();
-    }
-  }
-}).fail (function (_response) {
-  if (window.location.pathname.indexOf ('/my-profile') !== -1) auth.redirect ('login');
-});
-
 if (window.location.pathname === '/reset') {
   const query = window.location.search.slice (1).split ('&');
   const params: Record<string, string> = {};
@@ -336,10 +306,6 @@ $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
    e.preventDefault ();
    return false;
 });
-
-interface Class {
-  name: string;
-}
 
 /**
  * After login:
