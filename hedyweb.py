@@ -61,6 +61,7 @@ def get_page_title(current_page):
   else:
     return page_titles_json['start'].get("en")
 
+
 def render_code_editor_with_tabs(level_defaults, max_level, level_number, version, loaded_program, adventures, restrictions, adventure_name):
   user = current_user()
 
