@@ -618,10 +618,6 @@ def send_email_template(template, email, link):
 
 def auth_templates(page, page_title, lang, request):
     if page == 'my-profile':
-        # We want to re-structure this a bit:
-        # - When logging in, retrieve all user information and set in context_processor()
-        # - Then, it will be reachable from every page; which is great
-        # - Enabling us to get current lang from user preferences
         return render_template('profile.html', page_title=page_title, current_page='my-profile')
     if page in['signup', 'login', 'recover', 'reset']:
         return render_template(page + '.html', page_title=page_title, is_teacher=False, current_page='login')
