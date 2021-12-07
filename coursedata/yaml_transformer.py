@@ -1,7 +1,7 @@
 # some_file.py
 import sys
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, 'C:\hedy')
+sys.path.insert(1,r'C:\Users\teund\OneDrive\Documenten\Informatica en Economie\Jaar 3\hedy')
 
 import hedy_translation
 
@@ -140,7 +140,8 @@ def remove_brackets(s):
 # transform_yaml_to_lark(False)
 # transform_levels_in_all_YAMLs('colon', 17)
 
-def translate_story_text(level, story_text, from_lang, to_lang)
+def translate_story_text(level, story_text, from_lang, to_lang):
+  print(story_text)
   story_text_list = story_text.splitlines()
   transformed_story_text = []
   translating = False
@@ -150,29 +151,42 @@ def translate_story_text(level, story_text, from_lang, to_lang)
     line_list = line.split()
         
     for index, word in enumerate(line_list):
-      if word.startswith('`') and word.endswith('`'):
-        translated_word = word 
-        transformed_story_text.append(translated_word)
+      # if word.startswith('`') and word.endswith('`'):
+      #   translated_word = word 
+      #   transformed_story_text.append(translated_word)
       
       if word == '```':
+        
         if not translating:
+          transformed_story_text.append(word)
+          transformed_story_text.append('\n')  
           translating = True
         else:
           text_to_be_translated = ''.join(translate_list)
-          translated_text = hedy_translation.translate_keywords(text_to_be_translated)
+
+          translated_text = hedy_translation.translate_keywords(text_to_be_translated, from_lang, to_lang, level)
+
+          transformed_story_text.append(translated_text)
+          translate_list = []
           translating = False
+          transformed_story_text.append('\n')  
+          transformed_story_text.append(word)
+        continue
       
       if translating: 
-        if index != len(line_list):
-          translate_list.append(word + ' ')
+        translate_list.append(word)
+        if index != len(line_list) - 1:
+          translate_list.append(' ')
+          
       else:
-        if index != len(line_list):
-          transformed_story_text.append(word + ' ')
+        transformed_story_text.append(word)
+        if index != len(line_list) - 1:
+          transformed_story_text.append(' ')
     
     if translating:
       translate_list.append('\n')
-      
-    transformed_story_text.append('\n')  
+    else:
+      transformed_story_text.append('\n')  
   
   
   print(''.join(transformed_story_text))    
@@ -199,9 +213,9 @@ def transform_yaml_keywords(lang = 'all'):
           story_text = level_value['story_text']
           start_code = level_value['start_code']
           if level_number == 1 and adventure == 'story':
-            translate_story_text(level_number, story_text, 'en', filename)
+            translate_story_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
           # translate_start_code(level_number, start_code)
                   
-transform_yaml_keywords('en')
+transform_yaml_keywords('nl')
 
   # def translate_start_code(level, story_text):
