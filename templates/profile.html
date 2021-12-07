@@ -1,6 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
+  <h2 class="px-8 mb-4">{{auth.profile_overview}}</h2>
   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
   <div id="statistics" class="px-8 mb-4 hidden">
       <p>Show some user statistics...</p>
