@@ -3,8 +3,8 @@
 {% block main %}
   <h2 class="px-8 mb-4">{{auth.profile_overview}}</h2>
   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
-  <div id="statistics" class="px-8 mb-4 hidden">
-      <p>Show some user statistics...</p>
+  <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
+    <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.statistics}}</h2>
   </div>
   {% if user_classes %}
       <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
@@ -22,15 +22,15 @@
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.profile}}</h2>
     <div class="mb-4">
         <label for="username">{{auth.username}}</label>
-        <strong id="username">{{user_data['username']}}</strong>
+        <strong id="username"></strong>
     </div>
     <div class="mb-4">
         <label for="email">{{auth.email}}</label>
-        <input id="email" class="inline-block w-1/2" value="{{user_data['email']}}">
+        <input id="email" class="inline-block w-1/2">
     </div>
     <div class="mb-4">
         <label for="birth_year">{{auth.birth_year}}</label>
-        <input id="birth_year" class="inline-block w-1/2" value="{{user_data['birth_year']}}" type="number">
+        <input id="birth_year" class="inline-block w-1/2" type="number">
     </div>
     <div class="mb-4">
         <label for="gender">{{auth.gender}}</label>
