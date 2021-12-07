@@ -1874,7 +1874,7 @@ def is_program_valid(program_root, input_string, level, lang):
             elif closest is None:
                 # FH note to self (7-dec-21) for tomorrow:
                 # check if any of the other words are (like?) a command
-                raise exceptions.MissingCommandException(level=level, location=[line, column])
+                raise exceptions.MissingCommandException(level=level, line_number=line)
 
             else:
 
