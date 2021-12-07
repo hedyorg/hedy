@@ -21,7 +21,7 @@ MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
-local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
+local_keywords_enabled = True # If this is True, only the keywords in the specified language can be used for now
 
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
@@ -163,10 +163,9 @@ def get_suggestions_for_language(lang, level):
 
     en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
     lang_commands = hedy_translation.get_list_keywords(commands_per_level[level], lang)
-    # if we allow multiple keyword languages:
-    # lang_commands = list(set(en_commands + lang_commands))
+    en_lang_commands = list(set(en_commands + lang_commands))
             
-    return lang_commands
+    return en_lang_commands
 
 def hash_needed(name):
     # this function is now applied on something str sometimes Assignment
