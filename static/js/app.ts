@@ -1,5 +1,6 @@
 // It's important that this file gets loaded first
-import './syntaxModesRules';
+import './syntaxModesRules-en';
+import './syntaxModesRules-nl';
 
 import { modal, error, success } from './modal';
 import { auth } from './auth';
@@ -168,7 +169,7 @@ function getHighlighter(level: number) {
         '18': 'ace/mode/level18and19',
         '19': 'ace/mode/level18and19',
       };
-  return modeExceptions[level] || `ace/mode/level` + level;
+  return modeExceptions[level] || `ace/mode/level` + level + window.State.lang;
 }
 
 function reloadOnExpiredSession () {

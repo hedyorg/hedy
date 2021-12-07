@@ -1,3 +1,31 @@
+//Generated through generate-highlighter.sh
+var _PRINT='print';
+var _ASK='vraag';
+var _ECHO='echo';
+var _FORWARD='vooruit';
+var _TURN='draai';
+var _IS='is';
+var _SLEEP='slaap';
+var _ADD_LIST='voeg';
+var _TO_LIST='toe aan';
+var _REMOVE='verwijder';
+var _FROM='uit';
+var _AT='op';
+var _RANDOM='willekeurig';
+var _IN='in';
+var _IF='als';
+var _ELSE='anders';
+var _AND='en';
+var _REPEAT='herhaal';
+var _TIMES='keer';
+var _FOR='voor';
+var _RANGE='bereik';
+var _TO='tot';
+var _STEP='stap';
+var _ELIF='alsanders';
+var _INPUT='invoer';
+var _OR='of';
+var _WHILE='zolang';
 interface Rule {
   readonly regex: string;
   readonly token: string | string[];
@@ -49,12 +77,12 @@ const LEVELS = [
       rule_printSpace('gobble'),
       rule_turtle(),
       recognize('start', {
-        regex: keywordWithSpace('echo'),
+        regex: keywordWithSpace(_ECHO),
         token: 'keyword',
         next: 'gobble',
       }),
       recognize('start', {
-        regex: keywordWithSpace('ask'),
+        regex: keywordWithSpace(_ASK),
         token: 'keyword',
         next: 'gobble',
       }),
@@ -406,7 +434,7 @@ function pipe(val: any, ...fns: Array<(x: any) => any>) {
  */
 function rule_printSpace(next?: string) {
   return recognize('start', {
-    regex: keywordWithSpace('print'),
+    regex: keywordWithSpace(_PRINT),
     token: 'keyword',
     next: next ?? 'start',
   });
@@ -417,7 +445,7 @@ function rule_printSpace(next?: string) {
  */
 function rule_isAsk(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( is ask )',
+    regex: '(\\w+)( ' + _IS + ' ' + _ASK + ')',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -428,7 +456,7 @@ function rule_isAsk(next?: string) {
  */
 function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( is )',
+    regex: '(\\w+)( ' + _IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -439,7 +467,7 @@ function rule_is(next?: string) {
  */
 function rule_printParen() {
   return recognize('start', {
-    regex: '(print)(\\()',
+    regex: '(' + _PRINT + ')(\\()',
     token: ['keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -448,12 +476,13 @@ function rule_printParen() {
 function rule_turtle() {
     return comp(
       recognize('start', {
-        regex: 'turn (left|right)?',
+        // Note: left and right are not yet keywords
+        regex: _TURN + ' (left|right)?',
         token: 'keyword',
         next: 'start',
       }),
       recognize('start', {
-        regex: 'forward',
+        regex: _FORWARD,
         token: 'keyword',
         next: 'start',
       })
@@ -478,7 +507,7 @@ function rule_sleep() {
  */
 function rule_isInputParen() {
   return recognize('start', {
-    regex: '(\\w+)( is input)(\\()',
+    regex: '(\\w+)( ' + _IS + ' ' + _INPUT + ')(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -511,16 +540,16 @@ function rule_expressions() {
 function rule_ifElseOneLine() {
   return comp(
     recognize('start', {
-      regex: keywordWithSpace('if'),
+      regex: keywordWithSpace(_IF),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: keywordWithSpace('else'),
+      regex: keywordWithSpace(_ELSE),
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((is)|(in))'),
+      regex: keywordWithSpace('((' + _IS + ')|(' + _IN + '))'),
       token: 'keyword',
       next: 'start',
     }),
@@ -530,16 +559,16 @@ function rule_ifElseOneLine() {
 function rule_ifElse() {
   return comp(
     recognize('start', {
-      regex: keywordWithSpace('if'),
+      regex: keywordWithSpace(_IF),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: '\\b' + 'else' + '\\b',
+      regex: '\\b' + _ELSE + '\\b',
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((is)|(in))'),
+      regex: keywordWithSpace('((' + _IS + ')|(' + _IN + '))'),
       token: 'keyword',
       next: 'start',
     }),
@@ -571,28 +600,28 @@ function rule_arithmetic() {
  */
 function rule_repeat() {
   return recognize('start', {
-    regex: '(repeat)( \\w+ )(times)',
+    regex: '(' + _REPEAT + ')( \\w+ )(' + _TIMES + ')',
     token: ['keyword', 'text', 'keyword'],
   });
 }
 
 function rule_for(){
   return recognize('start', {
-    regex: '(for )(\\w+)( in )(\\w+)',
+    regex: '(' + _FOR + ' )(\\w+)( ' + _IN + ' )(\\w+)',
     token: ['keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRange() {
   return recognize('start', {
-    regex: '(for )(\\w+)( in range )(\\w+)( to )(\\w+)',
+    regex: '(' + _FOR + ' )(\\w+)( ' + _IN + ' ' + _RANGE + ' )(\\w+)( to )(\\w+)',
     token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
   });
 }
 
 function rule_forRangeParen() {
   return recognize('start', {
-    regex: '(for )(\\w+)( in range)(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    regex: '(' + _FOR + ' )(\\w+)( ' + _IN + ' ' + _RANGE + ')(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
     token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
   });
 }
@@ -623,7 +652,7 @@ if ((window as any).define) {
   for (const level of LEVELS) {
 
     // This is a local definition of the file 'ace/mode/level1.js', etc.
-    define('ace/mode/' + level.name, [], function(require, exports, _module) {
+    define('ace/mode/' + level.name + 'nl', [], function(require, exports, _module) {
       var oop = require('ace/lib/oop');
       var TextMode = require('ace/mode/text').Mode;
       var TextHighlightRules = require('ace/mode/text_highlight_rules').TextHighlightRules;
