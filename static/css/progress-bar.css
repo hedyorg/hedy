@@ -13,7 +13,6 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    line-height: 3;
     width:100%;
 }
 
@@ -32,6 +31,7 @@
     -ms-user-select: none;
      user-select: none;
     margin: 3px;
+    align-items: center;
 }
 
 .step-text {
@@ -42,11 +42,13 @@
 .current .step-text{
     color:white!important;
     text-decoration: none;
+    vertical-align: middle;
 }
 
 .current{
     color: #fff;
     background-color: #3182ce!important;
+    min-height: 4rem;
 }
 
 .step:nth-child(even){
@@ -68,9 +70,20 @@
 
 .fas {
     font-size: 2.5rem;
-    background-color: rgba(47, 133, 90, 0.4);
+}
 
 .fa-check{
     color: #2f855a;
 }
 
+.fa-times{
+    color: #aa0000;
+}
+
+.check{
+    background-color: #c6f6d5 !important;
+}
+
+.incorrect{
+    background-color: rgba(170, 0, 0, 0.3) !important;
+}
