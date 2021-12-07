@@ -161,9 +161,9 @@ def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
     lang_commands = hedy_translation.get_list_keywords(commands_per_level[level], lang)
     # if we allow multiple keyword languages:
+    # en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
     # lang_commands = list(set(en_commands + lang_commands))
             
     return lang_commands
@@ -195,25 +195,11 @@ def hash_var(name):
     else:
         return name
 
-def closest_command(invalid_command, known_commands):
-    # First search for 100% match of known commands
-    #
-    #  closest_command() searches for known commands in an invalid command.
-    #
-    #  It will return the known command which is closest positioned at the beginning.
-    #  It will return '' if the invalid command does not contain any known command.
-    #
-    min_position = len(invalid_command)
-    min_command = ''
-    for known_command in known_commands:
-        position = invalid_command.find(known_command)
-        if position != -1 and position < min_position:
-            min_position = position
-            min_command = known_command
+def closest_command(invalid_command, known_commands, threshold=2):
+    #  closest_command() searches for a similar command (distance smaller than threshold)
+    #  returns None if the invalid command does not contain any known command.
 
-    # If not found, search for partial match of know commands
-    if min_command == '':
-        min_command = closest_command_with_min_distance(invalid_command, known_commands)
+    min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
 
     # Check if we are not returning the found command
     # In that case we have no suggestion
@@ -227,18 +213,20 @@ def closest_command(invalid_command, known_commands):
 def style_closest_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
-def closest_command_with_min_distance(command, commands):
-    #simple string distance, could be more sophisticated MACHINE LEARNING!
-    min = 1000
-    min_command = ''
-    for c in commands:
-        min_c = minimum_distance(c, command)
-        if min_c < min:
-            min = min_c
-            min_command = c
-    return min_command
+def closest_command_with_min_distance(invalid_command, commands, threshold):
+    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
 
-def minimum_distance(s1, s2):
+    minimum_distance = 1000
+    closest_command = None
+    for command in commands:
+        minimum_distance_for_command = calculate_minimum_distance(command, invalid_command)
+        if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
+            minimum_distance = minimum_distance_for_command
+            closest_command = command
+
+    return closest_command
+
+def calculate_minimum_distance(s1, s2):
     """Return string distance between 2 strings."""
     if len(s1) > len(s2):
         s1, s2 = s2, s1
