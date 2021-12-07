@@ -1849,6 +1849,7 @@ def is_program_valid(program_root, input_string, level, lang):
             invalid_info = invalid_info[0]
 
         line = invalid_info.line
+        column = invalid_info.column
         if invalid_info.error_type == ' ':
 
             # the error here is a space at the beginning of a line, we can fix that!
