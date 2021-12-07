@@ -416,25 +416,6 @@ def routes(app, database):
 
         return jsonify(resp)
 
-    @app.route('/profile', methods=['GET'])
-    @requires_login
-    def get_profile(user):
-        # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
-        user = DATABASE.user_by_username(user['username'])
-
-        output = {'username': user['username'], 'email': user['email']}
-        for field in['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
-            if field in user:
-                output[field] = user[field]
-        if 'verification_pending' in user:
-            output['verification_pending'] = True
-
-        output['student_classes'] = DATABASE.get_student_classes(user['username'])
-
-        output['session_expires_at'] = timems() + session_length * 1000
-
-        return jsonify(output), 200
-
     @app.route('/auth/recover', methods=['POST'])
     def recover():
         body = request.json

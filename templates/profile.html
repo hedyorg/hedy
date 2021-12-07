@@ -15,15 +15,15 @@
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.profile}}</h2>
     <div class="mb-4">
         <label for="username">{{auth.username}}</label>
-        <strong id="username"></strong>
+        <strong id="username">{{user_data['username']}}</strong>
     </div>
     <div class="mb-4">
         <label for="email">{{auth.email}}</label>
-        <input id="email" class="inline-block w-1/2">
+        <input id="email" class="inline-block w-1/2" value="{{user_data['email']}}">
     </div>
     <div class="mb-4">
         <label for="birth_year">{{auth.birth_year}}</label>
-        <input id="birth_year" class="inline-block w-1/2" type="number">
+        <input id="birth_year" class="inline-block w-1/2" value="{{user_data['birth_year']}}" type="number">
     </div>
     <div class="mb-4">
         <label for="gender">{{auth.gender}}</label>
