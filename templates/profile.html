@@ -28,10 +28,10 @@
     <div class="mb-4">
         <label for="gender">{{auth.gender}}</label>
         <select id="gender">
-          <option value="">{{auth.select}}</option>
-          <option value="f">{{auth.female}}</option>
-          <option value="m">{{auth.male}}</option>
-          <option value="o">{{auth.other}}</option>
+          <option value="" {% if user_data['gender'] == "" %} selected {% endif %}>{{auth.select}}</option>
+          <option value="f"{% if user_data['gender'] == "f" %} selected {% endif %}>{{auth.female}}</option>
+          <option value="m"{% if user_data['gender'] == "m" %} selected {% endif %}>{{auth.male}}</option>
+          <option value="o"{% if user_data['gender'] == "o" %} selected {% endif %}>{{auth.other}}</option>
         </select>
     </div>
     <div class="mb-4">
@@ -40,18 +40,18 @@
     </div>
     <div class="mb-4">
       <label for="has_experience" class="inline-block float-left">{{auth.programming_experience}}</label>
-      <input class="pl-4" type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
-      <input class="pl-4" type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
+      <input class="pl-4" type="radio" name="has_experience" {% if user_data['prog_experience'] == "yes" %} checked {% endif %} value="yes" onclick="$ ('#languages').show ()"><span class="pl-2">{{auth.yes}}</span><br>
+      <input class="pl-4" type="radio" name="has_experience" {% if user_data['prog_experience'] == "no" %} checked {% endif %} value="no" onclick="$ ('#languages').hide ()"><span class="pl-2">{{auth.no}}</span>
     </div>
-    <div class="clear-both hidden mb-4" id="languages">
+    <div class="clear-both {% if user_data['prog_experience'] == "no" %} hidden {% endif %} mb-4" id="languages">
       <div class="mb-4">
         <label class="inline-block float-left">{{auth.languages}}</label>
       </div>
       <div class="float-left mb-4">
-        <input type="checkbox" name="languages" value="scratch"><span class="pl-2">Scratch</span><br>
-        <input type="checkbox" name="languages" value="other_block"><span class="pl-2">{{auth.other_block}}</span><br>
-        <input type="checkbox" name="languages" value="python"><span class="pl-2">Python</span><br>
-        <input type="checkbox" name="languages" value="other_text"><span class="pl-2">{{auth.other_text}}</span><br>
+        <input type="checkbox" name="languages" value="scratch" {% if "scratch" in user_data['experience_languages'] %} checked {% endif %}><span class="pl-2">Scratch</span><br>
+        <input type="checkbox" name="languages" value="other_block" {% if "other_block" in user_data['experience_languages'] %} checked {% endif %}><span class="pl-2">{{auth.other_block}}</span><br>
+        <input type="checkbox" name="languages" value="python" {% if "python" in user_data['experience_languages'] %} checked {% endif %}><span class="pl-2">Python</span><br>
+        <input type="checkbox" name="languages" value="other_text" {% if "other_text" in user_data['experience_languages'] %} checked {% endif %}><span class="pl-2">{{auth.other_text}}</span><br>
       </div>
     </div>
     <div class="mb-4 clear-both">
