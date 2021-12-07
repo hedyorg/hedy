@@ -584,7 +584,8 @@ def programs_page(request):
         date = get_user_formatted_age(now, item['date'])
         programs.append({'id': item['id'], 'code': item['code'], 'date': date, 'level': item['level'], 'name': item['name'], 'adventure_name': item.get('adventure_name'), 'submitted': item.get('submitted'), 'public': item.get('public')})
 
-    return render_template('programs.html', programs=programs, current_page='programs', from_user=from_user, adventures=adventures)
+    return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
+                           current_page='programs', from_user=from_user, adventures=adventures)
 
 
 def get_user_formatted_age(now, date):
@@ -941,22 +942,22 @@ def main_page(page):
         abort(404)
 
     if page in['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
-        return auth_templates(page, g.lang, request)
+        return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
 
     if page == 'programs':
         return programs_page(request)
 
     if page == 'learn-more':
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('learn-more.html',
+        return render_template('learn-more.html', page_title=hedyweb.get_page_title(page),
                                content=learn_more_translations)
 
     user = current_user()
 
     if page == 'landing-page':
         if user['username']:
-            return render_template('landing-page.html', user=user['username'], is_teacher=is_teacher(user),
-                                   text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
+            return render_template('landing-page.html', page_title=hedyweb.get_page_title(page),
+                                text=TRANSLATIONS.get_translations(g.lang, 'Landing_page'))
         else:
             return utils.page_403(ui_message='not_user')
 
@@ -969,6 +970,7 @@ def main_page(page):
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
             return render_template('for-teachers.html', current_page='my-profile',
+                                   page_title=hedyweb.get_page_title(page),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher)
         else:
@@ -979,7 +981,7 @@ def main_page(page):
         abort(404)
 
     main_page_translations = requested_page.get_page_translations(g.lang)
-    return render_template('main-page.html',
+    return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
                            content=main_page_translations)
 
 def session_id():
@@ -1080,6 +1082,7 @@ def split_markdown_front_matter(md):
       return {}, md
 
     return front_matter, parts[1]
+
 
 def render_main_menu(current_page):
     """Render a list of(caption, href, selected, color) from the main menu."""
