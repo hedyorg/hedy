@@ -8,19 +8,19 @@ class TestsKeywordSuggestions(unittest.TestCase):
     invalid_command = "print"
     keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
     closest = hedy.closest_command(invalid_command, keywords_en_level_1)
-    self.assertEqual(None, closest)
+    self.assertEqual('keyword', closest)
 
   def test_self_command_ask(self):
     invalid_command = "ask"
     keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
     closest = hedy.closest_command(invalid_command, keywords_en_level_1)
-    self.assertEqual(None, closest)
+    self.assertEqual('keyword', closest)
 
   def test_self_command_echo(self):
     invalid_command = "echo"
     keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
     closest = hedy.closest_command(invalid_command, keywords_en_level_1)
-    self.assertEqual(None, closest)
+    self.assertEqual('keyword', closest)
 
   def test_print_difference_1(self):
     invalid_command = "pront"

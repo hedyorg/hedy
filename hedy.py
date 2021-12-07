@@ -196,8 +196,10 @@ def hash_var(name):
         return name
 
 def closest_command(invalid_command, known_commands, threshold=2):
-    #  closest_command() searches for a similar command (distance smaller than threshold)
-    #  returns None if the invalid command does not contain any known command.
+    # closest_command() searches for a similar command (distance smaller than threshold)
+    # TODO: make the result value be tuple instead of a ugly None & string mix
+    # returns None if the invalid command does not contain any known command.
+    # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
 
     min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
 
@@ -206,7 +208,7 @@ def closest_command(invalid_command, known_commands, threshold=2):
     # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
 
     if min_command == invalid_command:
-        return None
+        return 'keyword'
     return min_command
 
 
@@ -715,6 +717,8 @@ class IsValid(Filter):
     def invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
+
+
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
 
@@ -1818,7 +1822,9 @@ def parse_input(input_string, level, lang):
 
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
-    is_valid = IsValid().transform(program_root)
+    instance = IsValid()
+    instance.level = level # could be done in a constructor once we are sure we will go this way
+    is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
         _, invalid_info = is_valid
@@ -1830,6 +1836,7 @@ def is_program_valid(program_root, input_string, level, lang):
             invalid_info = invalid_info[0]
 
         line = invalid_info.line
+        column = invalid_info.column
         if invalid_info.error_type == ' ':
 
             # the error here is a space at the beginning of a line, we can fix that!
@@ -1855,9 +1862,24 @@ def is_program_valid(program_root, input_string, level, lang):
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
-            fixed_code = None
-            result = None
-            if closest:
+
+            if closest == 'keyword':  # we couldn't find a suggestion
+                if invalid_command == Command.turn:
+                    arg = ''.join(invalid_info.arguments).strip()
+                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
+                                                                   allowed_types=get_allowed_types(Command.turn, level),
+                                                                   invalid_argument=arg)
+                # clearly the error message here should be better or it should be a different one!
+                raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
+            elif closest is None:
+                # FH note to self (7-dec-21) for tomorrow:
+                # check if any of the other words are (like?) a command
+                raise exceptions.MissingCommandException(level=level, location=[line, column])
+
+            else:
+
+                fixed_code = None
+                result = None
                 fixed_code = input_string.replace(invalid_command, closest)
                 if fixed_code != input_string:  # only if we have made a successful fix
                     try:
@@ -1866,14 +1888,7 @@ def is_program_valid(program_root, input_string, level, lang):
                     except exceptions.HedyException:
                         # The fixed code contains another error. Only report the original error for now.
                         pass
-            if closest is None:  # we couldn't find a suggestion because the command itself was found
-                if invalid_command == Command.turn:
-                    arg = ''.join(invalid_info.arguments).strip()
-                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
-                                                                   allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg)
-                # clearly the error message here should be better or it should be a different one!
-                raise exceptions.ParseException(level=level, location=[line, '?'], found=invalid_command)
+
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
                                                      guessed_command=closest, line_number=line,
                                                      fixed_code=fixed_code, fixed_result=result)

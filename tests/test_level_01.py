@@ -286,14 +286,14 @@ class TestsLevel1(HedyTester):
 
   def test_word_plus_period_gives_invalid(self):
     code = "word."
-    self.single_level_tester(code, exception=hedy.exceptions.InvalidCommandException)
+    self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
   def test_empty_gives_exception(self):
     self.single_level_tester("", exception=hedy.exceptions.EmptyProgramException)
 
   def test_non_keyword_gives_Invalid(self):
     code = "groen"
-    self.single_level_tester(code, exception=hedy.exceptions.InvalidCommandException)
+    self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
   def test_lonely_echo_gives_LonelyEcho(self):
     code = "echo wat dan?"
