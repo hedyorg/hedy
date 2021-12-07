@@ -5,6 +5,9 @@
   <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#statistics').toggle()">{{auth.statistics}}</h1>
   <div id="statistics" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
     <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.statistics}}</h2>
+    <ul>
+        <li>{{auth.number_programs}}: <b>{{ user_data['program_count']}}</b></li>
+    </ul>
   </div>
   {% if user_classes %}
       <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
