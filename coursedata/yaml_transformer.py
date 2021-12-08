@@ -179,6 +179,7 @@ def translate_text(level, story_text, from_lang, to_lang):
       if line == '```':
         text_to_be_translated = ''.join(translate_list)
         translated_text = hedy_translation.translate_keywords(text_to_be_translated, from_lang, to_lang, level)
+        translated_text.replace('dummy', '_')
         transformed_story_text.append(translated_text)
         translate_list = []
         transformed_story_text.append('\n')  
@@ -186,6 +187,8 @@ def translate_text(level, story_text, from_lang, to_lang):
         transformed_story_text.append('\n')  
         translating = False
         continue
+      if '_' in line:
+        line = line.replace('_', 'dummy')
       translate_list.append(line + '\n')
         
     if not translating: 
@@ -211,11 +214,10 @@ def translate_text(level, story_text, from_lang, to_lang):
           transformed_story_text.append(' ')
       
       transformed_story_text.append('\n')  
+      
+  return ''.join(transformed_story_text)
 
-def translate_start_code(level, start_code, from_lang, to_lang):
-  print(start_code)
-
-def transform_yaml_keywords(lang = 'all'):
+def transform_yaml_keywords_adventures(lang = 'all'):
   input_path = './coursedata/adventures'
   output_path = './coursedata/adventures-transformed/'
   Path(output_path).mkdir(parents=True, exist_ok=True)
@@ -224,11 +226,14 @@ def transform_yaml_keywords(lang = 'all'):
                      os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
   for filename in yaml_filesnames:
-    if filename == lang + '.yaml' or lang == 'all':      
+    
+    if filename == lang + '.yaml' or lang == 'all':   
       yaml_filesnames_with_path = os.path.join(input_path, filename)
 
       with open(yaml_filesnames_with_path, 'r') as stream:
         yaml_dict = yaml.safe_load(stream)
+      
+      transformed_dict = copy.deepcopy(yaml_dict)
 
       for adventure, adventure_values in yaml_dict['adventures'].items():
         levels = adventure_values['levels']
@@ -236,17 +241,24 @@ def transform_yaml_keywords(lang = 'all'):
           story_text = level_value['story_text']
           start_code = level_value['start_code']
           
-          if level_number < 9 and adventure == 'story':
-            print(level_number)
-            print(start_code)
-            translated_story_text = translate_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
-            if start_code != "":
+          if level_number < 17:
+            print(story_text)
+            if story_text != '':          
+              translated_story_text = translate_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
+            else:
+              translated_story_text = ''
+            print(f'Level: {level_number}\nTranslated Story Text: {translated_story_text}\n')
+            transformed_dict['adventures'][adventure]['levels'][level_number]['story_text'] = translated_story_text
+            if start_code != '':
               translated_start_code = hedy_translation.translate_keywords(start_code, 'en', filename.removesuffix('.yaml'), level_number)
             else:
-              translated_start_code = ""
-            print(translated_start_code)
+              translated_start_code = ''
+            transformed_dict['adventures'][adventure]['levels'][level_number]['start_code'] = f'"{translated_start_code}"'
+            
+      with open(output_path + filename, 'w') as f:
+        f.write(utils.dump_yaml_rt(transformed_dict))
 
 
-transform_yaml_keywords('nl')
+transform_yaml_keywords_adventures('nl')
 
   # def translate_start_code(level, story_text):

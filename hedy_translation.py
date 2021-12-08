@@ -117,9 +117,6 @@ class ConvertToLang2(ConvertToLang1):
         i = 0
 
         for argument in args:
-            # escape quotes if kids accidentally use them at level 2
-            argument = hedy.process_characters_needing_escape(argument)
-
             # final argument and punctuation arguments do not have to be separated with a space, other do
             if i == len(args) - 1 or args[i + 1] in self.punctuation_symbols:
                 space = ''
@@ -350,3 +347,16 @@ class ConvertToLang17(ConvertToLang16):
 
     def elifs(self, args):
         return self.keywords["elif"] + " " + args[0] + ":" + indent(args[1:])
+
+if __name__ == '__main__':
+    code = textwrap.dedent("""\
+    antwoord is ask 'Heb je zin om naar het volgende level te gaan?'
+    if antwoord is ja
+        repeat 3 times
+            print 'Hoera!'
+            print 'Op naar het volgende level!'
+    if antwoord is nee
+        print 'blijf dan maar lekker hier'""")
+    level = 7
+    output = translate_keywords(code, 'en', 'nl', level)
+    print(f'Code: {code} \nLevel: {level} \nTranslation: {output}')
