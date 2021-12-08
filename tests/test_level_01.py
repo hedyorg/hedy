@@ -97,13 +97,6 @@ class TestsLevel1(HedyTester):
     self.single_level_tester(code=code, expected=expected, output=output)
 
 
-  def test_ask_dutch_error(self):
-    code = textwrap.dedent("""ask Heb je er zin?""")
-
-    with self.assertRaises(hedy.exceptions.MissingCommandException) as context:
-      result = hedy.transpile(code, self.level, lang="nl")
-
-
   # ask tests
   def test_ask(self):
     code = "ask wat is je lievelingskleur?"
@@ -119,6 +112,12 @@ class TestsLevel1(HedyTester):
 
     expected = textwrap.dedent("""\
     answer = input('\\'Welcome to OceanView?\\'')""")
+
+    self.single_level_tester(code=code, expected=expected)
+    
+  def test_ask_dutch(self):
+    code = "ask Heb je er zin in?"
+    expected = "answer = input('Heb je er zin in?')"
 
     self.single_level_tester(code=code, expected=expected)
 
