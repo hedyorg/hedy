@@ -1,7 +1,7 @@
 def insert(input_string, line, column, new_string):
     """"insert new_string at (line, column)"""
     rows = input_string.splitlines()
-    rows[line] = rows[line][:column + 1] + new_string + rows[line][column + 1:]
+    rows[line] = rows[line][:column] + new_string + rows[line][column:]
 
     return '\n'.join(rows)
 
@@ -29,3 +29,12 @@ def remove_leading_spaces(input_string):
 
 def remove_unexpected_char(input_string, line, column):
     return delete(input_string, line - 1, column - 1, 1)
+
+
+def fix_indent(input_string, line, leading_spaces, indent_size):
+    if leading_spaces < indent_size:
+        # not enough spaces, add spaces
+        return insert(input_string, line - 1, 0, ' ' * (indent_size - leading_spaces))
+    else:
+        # too many spaces, remove spaces
+        return delete(input_string, line - 1, 0, leading_spaces - indent_size)

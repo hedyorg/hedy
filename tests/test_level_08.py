@@ -236,4 +236,32 @@ class TestsLevel8(HedyTester):
       code=code,
       exception=hedy.exceptions.NoIndentationException)
 
+  def test_repair_too_few_indents(self):
+    code = textwrap.dedent("""\
+    repeat 5 times
+         print('repair')
+      print('me')""")
+    expected = textwrap.dedent("""\
+    repeat 5 times
+         print('repair')
+         print('me')""")
 
+    with self.assertRaises(hedy.exceptions.NoIndentationException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, context.exception.fixed_code)
+
+  def test_repair_too_many_indents(self):
+    code = textwrap.dedent("""\
+    repeat 5 times
+      print('repair')
+         print('me')""")
+    expected = textwrap.dedent("""\
+    repeat 5 times
+      print('repair')
+      print('me')""")
+
+    with self.assertRaises(hedy.exceptions.IndentationException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual(expected, context.exception.fixed_code)
