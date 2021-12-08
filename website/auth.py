@@ -14,6 +14,7 @@ from botocore.exceptions import ClientError as email_error, NoCredentialsError
 import json
 import requests
 from website import querylog, database
+import hashlib
 
 TOKEN_COOKIE_NAME = config['session']['cookie_name']
 session_length    = config['session']['session_length'] * 60
@@ -21,6 +22,26 @@ session_length    = config['session']['session_length'] * 60
 env = os.getenv('HEROKU_APP_NAME')
 
 DATABASE: database.Database = None
+
+MAILCHIMP_API_URL = None
+if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
+    # The domain in the path is the server name, which is contained in the Mailchimp API key
+    MAILCHIMP_API_URL = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID')
+    MAILCHIMP_API_HEADERS = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
+
+def mailchimp_subscribe_user(email):
+    request_body = {'email_address': email, 'status': 'subscribed'}
+    r = requests.post(MAILCHIMP_API_URL + '/members', headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+
+    subscription_error = None
+    if r.status_code != 200 and r.status_code != 400:
+       subscription_error = True
+    # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
+    if r.status_code == 400 and not re.match('.*already a list member', r.text):
+       subscription_error = True
+    # If there's an error in subscription through the API, we report it to the main email address
+    if subscription_error:
+        send_email(config['email']['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str(r.status_code) + '    Body:' + r.text + '</pre>')
 
 @querylog.timed
 def check_password(password, hash):
@@ -227,23 +248,9 @@ def routes(app, database):
 
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] == True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
-            if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
-                # The first domain in the path is the server name, which is contained in the Mailchimp API key
-                request_path = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID') + '/members'
-                request_headers = {'Content-Type': 'application/json', 'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
-                request_body = {'email_address': email, 'status': 'subscribed'}
-                r = requests.post(request_path, headers=request_headers, data=json.dumps(request_body))
-
-                subscription_error = None
-                if r.status_code != 200 and r.status_code != 400:
-                   subscription_error = True
-                # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-                if r.status_code == 400 and not re.match('.*already a list member', r.text):
-                   subscription_error = True
-                # If there's an error in subscription through the API, we report it to the main email address
-                if subscription_error:
-                    send_email(config['email']['sender'], 'ERROR - Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p><pre>Status:' + str(r.status_code) + '    Body:' + r.text + '</pre>')
-            # Otherwise, we send an email to notify about this to the main email address
+            if MAILCHIMP_API_URL:
+                mailchimp_subscribe_user(email)
+            # Otherwise, we send an email to notify about the subscription to the main email address
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', email, '<p>' + email + '</p>')
 
@@ -400,6 +407,16 @@ def routes(app, database):
                    resp = {'username': user['username'], 'token': hashed_token}
                 else:
                     send_email_template('welcome_verify', email, email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token))
+
+                # We check whether the user is in the Mailchimp list.
+                if not is_testing_request(request) and MAILCHIMP_API_URL:
+                    # We hash the email with md5 to avoid emails with unescaped characters triggering errors
+                    request_path = MAILCHIMP_API_URL + '/members/' + hashlib.md5(user['email'].encode('utf-8')).hexdigest()
+                    r = requests.get(request_path, headers=MAILCHIMP_API_HEADERS)
+                    # If user is subscribed, we remove the old email from the list and add the new one
+                    if r.status_code == 200:
+                        r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
+                        mailchimp_subscribe_user(email)
 
         username = user['username']
 
