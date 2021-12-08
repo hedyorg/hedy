@@ -1,3 +1,6 @@
+import textwrap
+from os.path import dirname
+
 from lark import Transformer, Tree
 import hedy
 import yaml
@@ -5,40 +8,12 @@ from os import path
 
 TRANSPILER_LOOKUP = {}
 
-
-def get_list_keywords(commands, to_lang):
-    """ Returns a list with the local keywords of the argument 'commands'
-    """
-    
-    translation_commands = []
-    dir = path.abspath(path.dirname(__file__))
-    path_keywords = dir + "/coursedata/keywords"
-    
-    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
-    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
-    
-    with open(en_yaml_filesname_with_path, 'r') as stream:
-        en_yaml_dict = yaml.safe_load(stream)
-    
-    try:
-        with open(to_yaml_filesname_with_path, 'r') as stream:
-            to_yaml_dict = yaml.safe_load(stream)
-        for command in commands: 
-            try:                   
-                translation_command = to_yaml_dict[command]
-                translation_commands.append(translation_command)               
-            except Exception:
-                translation_commands.append(en_yaml_dict[command])
-    except Exception:
-        return commands
-    
-    return translation_commands
-
-
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    keywords_path = './coursedata/keywords/'
-    yaml_filesname_with_path = path.join(keywords_path, to_lang + '.yaml')
+    base = path.abspath(path.dirname(__file__))
+
+    keywords_path = 'coursedata/keywords/'
+    yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:
         command_combinations = yaml.safe_load(stream)
@@ -276,5 +251,22 @@ class ConvertToLang8(ConvertToLang7):
 
 
 @hedy_translator(level=9)
-class ConvertToLang9(ConvertToLang8):
-    pass
+@hedy_translator(level=10)
+class ConvertToLang9_10(ConvertToLang8):
+
+    def repeat_list(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + args[1] + indent(args[2:])
+
+
+@hedy_translator(level=11)
+class ConvertToLang11(ConvertToLang9_10):
+    def for_loop(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
+               self.keywords["range"] + " " + args[1] + " " + self.keywords["to"] + " " + args[2] + indent(args[3:])
+
+
+@hedy_translator(level=12)
+class ConvertToLang12(ConvertToLang11):
+
+    def text_in_quotes(self, args):
+        return ''.join(["'" + str(c) + "'" for c in args])
