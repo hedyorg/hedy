@@ -120,8 +120,6 @@ export const auth = {
           : undefined,
       };
 
-      console.log(payload);
-
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts['signup_success']);
 
