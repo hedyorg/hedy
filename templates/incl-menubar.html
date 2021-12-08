@@ -25,7 +25,7 @@
                   <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-chalkboard-teacher mr-4"></span>{{auth.for_teachers}}</li>
               </a>
           {% endif %}
-          <a class="no-underline" onclick="hedyApp.auth.logout ()">
+          <a class="no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();">
               <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-fw fa-sign-out-alt mr-4"></span> {{auth.logout}}</li>
           </a>
         </ul>
