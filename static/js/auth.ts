@@ -279,7 +279,6 @@ $ ('.auth input').get ().map (function (el) {
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
 
-
 if (window.location.pathname === '/reset') {
   const query = window.location.search.slice (1).split ('&');
   const params: Record<string, string> = {};
