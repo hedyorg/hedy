@@ -288,8 +288,13 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 @app.context_processor
 def enrich_context_with_user_info():
     user = current_user()
-    return dict(username=user.get('username', ''), is_teacher=is_teacher(user), is_admin=is_admin(user))
-
+    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
+    if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
+        user_data = DATABASE.user_by_username(user.get('username'))
+        data['user_data'] = user_data
+        if user_data['classes']:
+            data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
+    return data
 
 @app.context_processor
 def enricht_context_with_translations():
