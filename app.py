@@ -1024,10 +1024,9 @@ def main_page(page):
 
 @app.route('/change_language', methods=['POST'])
 def change_language():
-    print("We gaan de taal veranderen!")
     body = request.json
     session['lang'] = body.get('lang')
-    return jsonify({})
+    return jsonify({'succes': 200})
 
 
 def session_id():

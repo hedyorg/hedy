@@ -1028,7 +1028,7 @@ export function toggle_developers_mode(example_programs: boolean) {
 }
 
 export function change_language(lang: string) {
-  console.log("We gaan de taal veranderen...");
+  console.log("Wij worden aangeroepen!");
   $.ajax({
     type: 'POST',
     url: '/change_language',
@@ -1037,6 +1037,11 @@ export function change_language(lang: string) {
     }),
     contentType: 'application/json',
     dataType: 'json'
-  });
-  location.reload();
+  }).done(function(response: any) {
+      if (response.succes){
+        setTimeout (function () {location.reload ()}, 200);
+      }
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
 }
