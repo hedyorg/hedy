@@ -25,7 +25,7 @@
             <td>{{student.programs}}</td>
             <td><a href="/programs?user={{student.username}}">{{student.username}}'s {{auth.page}}</a></td>
             <td>{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-            <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove}} {{student.username}}</a></td>
+            <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}', false)">{{auth.remove}} {{student.username}}</a></td>
           </tr>
         {% endfor %}
       </tbody>

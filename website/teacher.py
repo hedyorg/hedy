@@ -155,7 +155,7 @@ def routes (app, database):
     def leave_class (user, class_id, student_id):
 
         Class = DATABASE.get_class (class_id)
-        if not Class or Class ['teacher'] != user ['username']:
+        if not Class or Class ['teacher'] != user ['username'] or student_id != user ['username']:
             return 'No such class', 404
 
         DATABASE.remove_student_from_class (Class ['id'], student_id)
