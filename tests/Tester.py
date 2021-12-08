@@ -1,6 +1,6 @@
 import unittest
-import hedy
 import app
+import hedy
 import sys
 import io
 from contextlib import contextmanager

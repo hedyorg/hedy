@@ -25,13 +25,13 @@ class TestsLevel3(HedyTester):
     print(f'Hallo welkom bij Hedy!')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_comma(self):
     code = "print welkom bij steen, schaar, papier"
     expected = textwrap.dedent("""\
     print(f'welkom bij steen, schaar, papier')""")
 
     self.single_level_tester(code=code, expected=expected)
-
 
   # issue #745
   def test_print_list_gives_type_error(self):
@@ -59,6 +59,7 @@ class TestsLevel3(HedyTester):
     Mooi hoor""")
 
     self.single_level_tester(code=code, expected=expected, output=output)
+
   def test_print_spaces(self):
     code = "print        hallo!"
     
@@ -66,6 +67,7 @@ class TestsLevel3(HedyTester):
     print(f'hallo!')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_asterisk(self):
     code = "print *Jouw* favoriet is dus kleur"
     
@@ -73,6 +75,7 @@ class TestsLevel3(HedyTester):
     print(f'*Jouw* favoriet is dus kleur')""")
 
     self.single_level_tester(code=code, expected=expected)
+
   def test_print_quotes(self):
     code = "print 'Welcome to OceanView!'"
     
@@ -343,6 +346,18 @@ class TestsLevel3(HedyTester):
       expected=expected,
       extra_check_function=check_in_list
     )
+
+  def test_misspell_at(self):
+    code = textwrap.dedent("""\
+    dieren is Hond, Kat, Kangoeroe
+    print dieren ad random""")
+
+    self.multi_level_tester(
+      max_level=10,
+      code=code,
+      exception=hedy.exceptions.InvalidArgumentTypeException
+    )
+
   def test_assign_print_punctuation(self):
     code = textwrap.dedent("""\
     naam is Hedy
