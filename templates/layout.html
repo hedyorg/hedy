@@ -44,7 +44,7 @@
       {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-      {% if not user_data['language'] %}
+      {% if not 'language' in user_data %}
           <h3 class="text-white text-center bg-red-600 mt-1 mb-1 border-red-500 py-4">{{auth.set_preferred_lang}}</h3>
       {% endif %}
       {% block body %}{% endblock %}
