@@ -13,11 +13,11 @@
        <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#classes').toggle()">{{auth.student_classes}}</h1>
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
            <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.student_classes}}</h2>
-           <ul>
            {% for user_class in user_classes %}
-             <li>{{ user_class['name']}}</li>
+             <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row">
+                <h1 class="inline-block w-1/2">{{ user_class['name']}}</h1><button class="red-btn ml-auto" onclick="hedyApp.auth.leave_class ()">{{auth.leave_class}}</button>
+             </div>
            {% endfor %}
-           </ul>
        </div>
    {% endif %}
    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{auth.profile}}</h1>
