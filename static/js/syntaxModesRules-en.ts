@@ -650,7 +650,7 @@ if ((window as any).define) {
   // Define the modes based on the level definitions above
   for (const level of LEVELS) {
 
-    // This is a local definition of the file 'ace/mode/level1.js', etc.
+    // This is a local definition of the file 'ace/mode/level1-en.js', etc.
     define('ace/mode/' + level.name + 'en', [], function(require, exports, _module) {
       var oop = require('ace/lib/oop');
       var TextMode = require('ace/mode/text').Mode;
