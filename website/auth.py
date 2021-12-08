@@ -378,6 +378,9 @@ def routes(app, database):
         if 'birth_year' in body:
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                 return 'birth_year must be a year between 1900 and ' + str(datetime.datetime.now().year), 400
+        if 'language' in body:
+            if not isinstance(body.get('language'), str):
+                return 'language must be a valid language', 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return 'body.gender must be m/f/o', 400
@@ -409,7 +412,7 @@ def routes(app, database):
         username = user['username']
 
         updates = {}
-        for field in['country', 'birth_year', 'gender', 'prog_experience', 'experience_languages']:
+        for field in['country', 'birth_year', 'gender', 'language', 'prog_experience', 'experience_languages']:
            if field in body:
                if field == 'experience_languages' and len(body[field]) == 0:
                    updates[field] = None
