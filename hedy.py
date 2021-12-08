@@ -24,7 +24,7 @@ LEVEL_STARTING_INDENTATION = 8
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = 'pytest' in sys.argv[0] or ('GITHUB_WORKFLOW' in environ and environ['GITHUB_WORKFLOW'] == 'Unit tests') # If this is True, only the keywords in the specified language can be used for now
 
-#dictionary to store transpilers
+# dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
@@ -192,9 +192,10 @@ def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    en_commands = get_list_keywords(commands_per_level[level], 'en')
     lang_commands = get_list_keywords(commands_per_level[level], lang)
+
     # if we allow multiple keyword languages:
+    # en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
     # lang_commands = list(set(en_commands + lang_commands))
             
     return lang_commands
@@ -227,50 +228,40 @@ def hash_var(name):
     else:
         return name
 
-def closest_command(invalid_command, known_commands):
-    # First search for 100% match of known commands
-    #
-    #  closest_command() searches for known commands in an invalid command.
-    #
-    #  It will return the known command which is closest positioned at the beginning.
-    #  It will return '' if the invalid command does not contain any known command.
-    #
-    min_position = len(invalid_command)
-    min_command = ''
-    for known_command in known_commands:
-        position = invalid_command.find(known_command)
-        if position != -1 and position < min_position:
-            min_position = position
-            min_command = known_command
+def closest_command(invalid_command, known_commands, threshold=2):
+    # closest_command() searches for a similar command (distance smaller than threshold)
+    # TODO: make the result value be tuple instead of a ugly None & string mix
+    # returns None if the invalid command does not contain any known command.
+    # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
 
-    # If not found, search for partial match of know commands
-    if min_command == '':
-        min_command = closest_command_with_min_distance(invalid_command, known_commands)
+    min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
 
     # Check if we are not returning the found command
     # In that case we have no suggestion
     # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
 
     if min_command == invalid_command:
-        return None
+        return 'keyword'
     return min_command
 
 
 def style_closest_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
-def closest_command_with_min_distance(command, commands):
-    #simple string distance, could be more sophisticated MACHINE LEARNING!
-    min = 1000
-    min_command = ''
-    for c in commands:
-        min_c = minimum_distance(c, command)
-        if min_c < min:
-            min = min_c
-            min_command = c
-    return min_command
+def closest_command_with_min_distance(invalid_command, commands, threshold):
+    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
 
-def minimum_distance(s1, s2):
+    minimum_distance = 1000
+    closest_command = None
+    for command in commands:
+        minimum_distance_for_command = calculate_minimum_distance(command, invalid_command)
+        if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
+            minimum_distance = minimum_distance_for_command
+            closest_command = command
+
+    return closest_command
+
+def calculate_minimum_distance(s1, s2):
     """Return string distance between 2 strings."""
     if len(s1) > len(s2):
         s1, s2 = s2, s1
@@ -759,6 +750,8 @@ class IsValid(Filter):
     def invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
+
+
         error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
 
@@ -1863,7 +1856,9 @@ def parse_input(input_string, level, lang):
 
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
-    is_valid = IsValid().transform(program_root)
+    instance = IsValid()
+    instance.level = level # could be done in a constructor once we are sure we will go this way
+    is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
         _, invalid_info = is_valid
@@ -1875,6 +1870,7 @@ def is_program_valid(program_root, input_string, level, lang):
             invalid_info = invalid_info[0]
 
         line = invalid_info.line
+        column = invalid_info.column
         if invalid_info.error_type == ' ':
 
             # the error here is a space at the beginning of a line, we can fix that!
@@ -1900,9 +1896,22 @@ def is_program_valid(program_root, input_string, level, lang):
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
-            fixed_code = None
-            result = None
-            if closest:
+
+            if closest == 'keyword':  # we couldn't find a suggestion
+                if invalid_command == Command.turn:
+                    arg = ''.join(invalid_info.arguments).strip()
+                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
+                                                                   allowed_types=get_allowed_types(Command.turn, level),
+                                                                   invalid_argument=arg)
+                # clearly the error message here should be better or it should be a different one!
+                raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
+            elif closest is None:
+                raise exceptions.MissingCommandException(level=level, line_number=line)
+
+            else:
+
+                fixed_code = None
+                result = None
                 fixed_code = input_string.replace(invalid_command, closest)
                 if fixed_code != input_string:  # only if we have made a successful fix
                     try:
@@ -1911,14 +1920,7 @@ def is_program_valid(program_root, input_string, level, lang):
                     except exceptions.HedyException:
                         # The fixed code contains another error. Only report the original error for now.
                         pass
-            if closest is None:  # we couldn't find a suggestion because the command itself was found
-                if invalid_command == Command.turn:
-                    arg = ''.join(invalid_info.arguments).strip()
-                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
-                                                                   allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg)
-                # clearly the error message here should be better or it should be a different one!
-                raise exceptions.ParseException(level=level, location=[line, '?'], found=invalid_command)
+
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
                                                      guessed_command=closest, line_number=line,
                                                      fixed_code=fixed_code, fixed_result=result)
