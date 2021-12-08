@@ -268,10 +268,6 @@ def setup_language():
     # header to do language negotiation.
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
-    else:
-        print("Er is al een taal gevonden...")
-        print(session['lang'])
-
     g.lang = session['lang']
 
     # Check that requested language is supported, otherwise return 404
@@ -280,7 +276,7 @@ def setup_language():
 
     # Also get the 'ui' translations into a global object for this language, these
     # are used a lot so we can clean up a fair bit by initializing here.
-    g.ui_texts = TRANSLATIONS.get_translations(lang, 'ui')
+    g.ui_texts = TRANSLATIONS.get_translations(g.lang, 'ui')
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
@@ -1028,6 +1024,7 @@ def main_page(page):
 
 @app.route('/change_language', methods=['POST'])
 def change_language():
+    print("We gaan de taal veranderen!")
     body = request.json
     session['lang'] = body.get('lang')
     return jsonify({})

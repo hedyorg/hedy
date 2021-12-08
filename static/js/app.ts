@@ -1027,7 +1027,7 @@ export function toggle_developers_mode(example_programs: boolean) {
   }
 }
 
-export function change_language(lang: boolean) {
+export function change_language(lang: string) {
   console.log("We gaan de taal veranderen...");
   $.ajax({
     type: 'POST',
