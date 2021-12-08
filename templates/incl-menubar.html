@@ -1,6 +1,6 @@
 <nav class="bg-blue-500 px-4 text-white flex flex-row items-center">
     <div class="py-1 mr-6">
-      <a href="{{localize_link ('/')}}">
+      <a href="/">
         <img src="{{static('/images/Hedy-logo.png')}}" style="width: 2.5em;"/>
       </a>
     </div>
@@ -8,18 +8,18 @@
     {% block menu %}
     {% for item in main_menu_entries() %}
       {% if item.short_name != 'for-teachers' or is_teacher %}
-        <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{localize_link (item.href)}}">
+        <a class="menubar-btn {% if item.selected %}border-{{item.accent_color}}{% else %}border-transparent{% endif %} " href="{{item.href}}">
           {{ item.caption }}
         </a>
       {% endif %}
     {% endfor %}
     {% if username %}
       <div class="flex-grow"></div>
-      <a class="menubar-btn {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/my-profile')}}"><span class="fas fa-fw fa-user"></span> {{username}}</a>
-      <a class="menubar-btn {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/programs')}}"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
+      <a class="menubar-btn {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="/my-profile"><span class="fas fa-fw fa-user"></span> {{username}}</a>
+      <a class="menubar-btn {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{auth.program_header}}</a>
     {% endif %}
     {% if not username %}
-      <a class="menubar-btn {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="{{localize_link ('/login')}}">{{auth.login}}</a>
+      <a class="menubar-btn {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{auth.login}}</a>
     {% endif %}
     {% endblock %}
     <div class="dropdown inline-block relative ml-auto py-2 z-40">

@@ -258,6 +258,7 @@ def setup_language():
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation.
     lang = request.cookies.get('lang')
+    print("The current language is..." + str(lang))
     if not lang:
         lang = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
 
@@ -1036,16 +1037,6 @@ def hedy_link(level_nr, assignment_nr, subpage=None, lang=None):
 def other_languages():
     cl = g.lang
     return[make_lang_obj(l) for l in ALL_LANGUAGES.keys() if l != cl]
-
-@app.template_global()
-def localize_link(url):
-    lang = g.lang
-    if not lang:
-        return url
-    if '?' in url:
-        return url + '&lang=' + lang
-    else:
-        return url + '?lang=' + lang
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
