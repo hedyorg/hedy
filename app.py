@@ -291,9 +291,11 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
         user_data = DATABASE.user_by_username(user.get('username'))
-        print(user_data)
+        if 'language' in user_data:
+            if user_data['language'] in ALL_LANGUAGES.keys():
+                g.lang = session['lang'] = user_data['language']
         data['user_data'] = user_data
-        if user_data['classes']:
+        if 'classes' in user_data:
             data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
     return data
 

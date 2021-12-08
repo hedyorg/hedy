@@ -13,6 +13,7 @@ interface User {
   email?: string;
   password?: string;
   birth_year?: number;
+  language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
@@ -26,6 +27,7 @@ interface UserForm {
   email?: string;
   password?: string;
   birth_year?: string;
+  language?: string,
   country?: string;
   gender?: string;
   subscribe?: string;
@@ -107,6 +109,7 @@ export const auth = {
         email: values.email,
         password: values.password,
         birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
+        language: values.language ? values.language : undefined,
         country: values.country ? values.country : undefined,
         gender: values.gender ? values.gender : undefined,
         subscribe: $('#subscribe').prop('checked'),
@@ -116,6 +119,8 @@ export const auth = {
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
           : undefined,
       };
+
+      console.log(payload);
 
       $.ajax ({type: 'POST', url: '/auth/signup', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts['signup_success']);
