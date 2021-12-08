@@ -36,17 +36,4 @@ class TestsLevel10(HedyTester):
       print(f'{shark} shark')""")
 
     self.single_level_tester(code=code, expected=expected)
-    
-  @check_local_lang_bool
-  def test_for_list_dutch(self):
-    code = textwrap.dedent("""\
-    dieren is hond, kat, papegaai
-    voor dier in dieren
-      print dier""")
 
-    expected = textwrap.dedent("""\
-    dieren = ['hond', 'kat', 'papegaai']
-    for dier in dieren:
-      print(f'{dier}')""")
-
-    self.single_level_tester(code=code, expected=expected)

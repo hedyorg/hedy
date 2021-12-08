@@ -1,7 +1,7 @@
 import hedy
 import textwrap
 from Tester import HedyTester
-from test_translating import check_local_lang_bool
+
 
 
 class TestsLevel1(HedyTester):
@@ -89,24 +89,20 @@ class TestsLevel1(HedyTester):
     print('hallo!')""")
 
     self.single_level_tester(code=code, expected=expected)
-    
-  @check_local_lang_bool
+
   def test_print_dutch(self):
     code = "print Hallo welkom bij Hedy!"
     expected = "print('Hallo welkom bij Hedy!')"
     output = 'Hallo welkom bij Hedy!'
     self.single_level_tester(code=code, expected=expected, output=output)
 
-  
-  @check_local_lang_bool
+
   def test_ask_dutch_error(self):
     code = textwrap.dedent("""ask Heb je er zin?""")
 
-    with self.assertRaises(hedy.exceptions.ParseException) as context:
+    with self.assertRaises(hedy.exceptions.MissingCommandException) as context:
       result = hedy.transpile(code, self.level, lang="nl")
-    self.assertEqual('Parse', context.exception.error_code)
-    self.assertEqual(1, context.exception.error_location[0])
-    self.assertEqual('?', context.exception.error_location[1])
+
 
   # ask tests
   def test_ask(self):
@@ -286,14 +282,14 @@ class TestsLevel1(HedyTester):
 
   def test_word_plus_period_gives_invalid(self):
     code = "word."
-    self.single_level_tester(code, exception=hedy.exceptions.InvalidCommandException)
+    self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
   def test_empty_gives_exception(self):
     self.single_level_tester("", exception=hedy.exceptions.EmptyProgramException)
 
   def test_non_keyword_gives_Invalid(self):
     code = "groen"
-    self.single_level_tester(code, exception=hedy.exceptions.InvalidCommandException)
+    self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
 
   def test_lonely_echo_gives_LonelyEcho(self):
     code = "echo wat dan?"
