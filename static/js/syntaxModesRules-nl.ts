@@ -1,4 +1,3 @@
-//Generated through generate-highlighter.sh
 var _PRINT='print';
 var _ASK='vraag';
 var _ECHO='echo';
