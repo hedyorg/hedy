@@ -1028,7 +1028,6 @@ export function toggle_developers_mode(example_programs: boolean) {
 }
 
 export function change_language(lang: string) {
-  console.log("Wij worden aangeroepen!");
   $.ajax({
     type: 'POST',
     url: '/change_language',
@@ -1039,7 +1038,7 @@ export function change_language(lang: string) {
     dataType: 'json'
   }).done(function(response: any) {
       if (response.succes){
-        location.reload ();
+        location.reload();
       }
     }).fail(function(xhr) {
       console.error(xhr);
