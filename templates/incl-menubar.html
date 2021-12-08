@@ -31,7 +31,7 @@
         </ul>
       </div>
     {% else %}
-      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="'/login'">{{auth.login}}</a>
+      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{auth.login}}</a>
     {% endif %}
       <div class="dropdown inline-block relative {% if not username %} ml-auto {% endif %} py-2 z-40">
           <button class="bg-blue-400 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
