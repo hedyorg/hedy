@@ -24,7 +24,7 @@ LEVEL_STARTING_INDENTATION = 8
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = 'pytest' in sys.argv[0] or ('GITHUB_WORKFLOW' in environ and environ['GITHUB_WORKFLOW'] == 'Unit tests') # If this is True, only the keywords in the specified language can be used for now
 
-#dictionary to store transpilers
+# dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
@@ -1906,8 +1906,6 @@ def is_program_valid(program_root, input_string, level, lang):
                 # clearly the error message here should be better or it should be a different one!
                 raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
             elif closest is None:
-                # FH note to self (7-dec-21) for tomorrow:
-                # check if any of the other words are (like?) a command
                 raise exceptions.MissingCommandException(level=level, line_number=line)
 
             else:
