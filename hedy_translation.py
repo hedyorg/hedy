@@ -1,3 +1,6 @@
+import textwrap
+from os.path import dirname
+
 from lark import Transformer, Tree
 import hedy
 import yaml
@@ -6,40 +9,12 @@ import textwrap
 
 TRANSPILER_LOOKUP = {}
 
-
-def get_list_keywords(commands, to_lang):
-    """ Returns a list with the local keywords of the argument 'commands'
-    """
-    
-    translation_commands = []
-    dir = path.abspath(path.dirname(__file__))
-    path_keywords = dir + "/coursedata/keywords"
-    
-    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
-    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
-    
-    with open(en_yaml_filesname_with_path, 'r') as stream:
-        en_yaml_dict = yaml.safe_load(stream)
-    
-    try:
-        with open(to_yaml_filesname_with_path, 'r') as stream:
-            to_yaml_dict = yaml.safe_load(stream)
-        for command in commands: 
-            try:                   
-                translation_command = to_yaml_dict[command]
-                translation_commands.append(translation_command)               
-            except Exception:
-                translation_commands.append(en_yaml_dict[command])
-    except Exception:
-        return commands
-    
-    return translation_commands
-
-
 def keywords_to_dict(to_lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    keywords_path = './coursedata/keywords/'
-    yaml_filesname_with_path = path.join(keywords_path, to_lang + '.yaml')
+    base = path.abspath(path.dirname(__file__))
+
+    keywords_path = 'coursedata/keywords/'
+    yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r') as stream:
         command_combinations = yaml.safe_load(stream)
@@ -54,8 +29,9 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     punctuation_symbols = ['!', '?', '.']
 
     keyword_dict = keywords_to_dict(to_lang)
-    if level > 7:
-        input_string = hedy.preprocess_blocks(input_string, level)
+
+    input_string = hedy.process_input_string(input_string, level)
+
     program_root = parser.parse(input_string + '\n').children[0]
 
     hedy.ExtractAST().transform(program_root)
@@ -277,6 +253,100 @@ class ConvertToLang8(ConvertToLang7):
 
 
 @hedy_translator(level=9)
-class ConvertToLang9(ConvertToLang8):
-    pass
+@hedy_translator(level=10)
+class ConvertToLang9_10(ConvertToLang8):
 
+    def repeat_list(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + args[1] + indent(args[2:])
+
+
+@hedy_translator(level=11)
+class ConvertToLang11(ConvertToLang9_10):
+    def for_loop(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
+               self.keywords["range"] + " " + args[1] + " " + self.keywords["to"] + " " + args[2] + indent(args[3:])
+
+
+@hedy_translator(level=12)
+class ConvertToLang12(ConvertToLang11):
+
+    def text_in_quotes(self, args):
+        return ''.join(["'" + str(c) + "'" for c in args])
+
+
+@hedy_translator(level=13)
+class ConvertToLang13(ConvertToLang12):
+
+    def andcondition(self, args):
+        returnString = args[0]
+        for arg in args[1:]:
+            returnString += " " + self.keywords["and"] + " " + arg
+        return returnString
+
+    def orcondition(self, args):
+        returnString = args[0]
+        for arg in args[1:]:
+            returnString += " " + self.keywords["or"] + " " + arg
+        return returnString
+
+    def in_list_check(self, args):
+        return args[0] + " " + self.keywords["in"] + " " + ''.join([str(c) for c in args[1:]])
+
+
+@hedy_translator(level=14)
+class ConvertToLang14(ConvertToLang13):
+
+    def bigger(self, args):
+        return args[0] + " > " + args[1]
+
+    def smaller(self, args):
+        return args[0] + " < " + args[1]
+
+    def bigger_equal(self, args):
+        return args[0] + " >= " + args[1]
+
+    def smaller_equal(self, args):
+        return args[0] + " <= " + args[1]
+
+    def not_equal(self,args):
+        return args[0] + " != " + args[1]
+
+
+@hedy_translator(level=15)
+class ConvertToLang15(ConvertToLang14):
+
+    def while_loop(self, args):
+        return self.keywords["while"] + " " + args[0] + indent(args[1:])
+
+
+@hedy_translator(level=16)
+class ConvertToLang16(ConvertToLang15):
+
+    def assign_list(self, args):
+        return args[0] + " " + self.keywords["is"] + " [" + ', '.join([str(c) for c in args[1:]]) + "]"
+
+    def list_access(self, args):
+        return args[0] + "[" + ''.join([str(c) for c in args[1:]]) + "]"
+
+
+@hedy_translator(level=17)
+class ConvertToLang17(ConvertToLang16):
+
+    def for_loop(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + \
+               self.keywords["range"] + " " + args[1] + " " + self.keywords["to"] + " " + args[2] + ":" + indent(args[3:])
+
+    def while_loop(self, args):
+        return self.keywords["while"] + " " + args[0] + ":" + indent(args[1:])
+
+    def repeat_list(self, args):
+        return self.keywords["for"] + " " + args[0] + " " + self.keywords["in"] + " " + args[1] + ":" + indent(args[2:])
+
+    def ifs(self, args):
+        return self.keywords["if"] + " " + args[0] + ":" + indent(args[1:])
+
+    def elses(self, args):
+        return self.keywords["else"] + ":" + indent(args[0:])
+
+    def elifs(self, args):
+        return self.keywords["elif"] + " " + args[0] + ":" + indent(args[1:])

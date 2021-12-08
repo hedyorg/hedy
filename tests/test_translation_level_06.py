@@ -1,7 +1,6 @@
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
-from test_translating import check_local_lang_bool
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -15,7 +14,6 @@ class TestsTranslationLevel6(HedyTester):
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
 
-    @check_local_lang_bool
     def test_multiplication(self):
         code = "vermenigvuldiging is 3 * 8"
 
@@ -24,7 +22,6 @@ class TestsTranslationLevel6(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_addition(self):
         code = "print 'Hallo welkom bij Hedy' 5 + 7"
 
@@ -33,7 +30,6 @@ class TestsTranslationLevel6(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_division_dutch_english(self):
         code = "angle is 360 / angles"
 
@@ -42,7 +38,6 @@ class TestsTranslationLevel6(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_translate_back(self):
         code ="breuk is 13 / 4"
 
