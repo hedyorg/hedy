@@ -53,13 +53,16 @@ class InvalidSpaceException(FtfyException):
             fixed_result=fixed_result)
 
 class ParseException(HedyException):
-    def __init__(self, level, location, found):
+    def __init__(self, level, location, found, fixed_code):
         super().__init__('Parse',
             level=level,
             location=location,
             found=found,
             # 'character_found' for backwards compatibility
             character_found=found)
+
+        #TODO (FH, 8 dec 21) many exceptions now support fixed code maybe we should move it to hedyexception?
+        self.fixed_code = fixed_code
 
 class UndefinedVarException(HedyException):
     def __init__(self, name):
