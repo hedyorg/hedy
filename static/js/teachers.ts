@@ -95,12 +95,12 @@ export function join_class(link: string, name: string, noRedirect=false) {
 }
 
 export function remove_student(class_id: string, student_id: string, self_removal: boolean) {
-  let confirm_text= ""
-    if (self_removal) {
-      confirm_text = auth.texts['self_removal_prompt']
-    }  else {
-      confirm_text = auth.texts['remove_student_prompt']
-    }
+  let confirm_text;
+  if (self_removal) {
+    confirm_text = auth.texts['self_removal_prompt'];
+  } else {
+    confirm_text = auth.texts['remove_student_prompt'];
+  }
   modal.confirm (confirm_text, function () {
     $.ajax({
       type: 'DELETE',
