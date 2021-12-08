@@ -168,7 +168,7 @@ def translate_command(command, from_lang, to_lang):
   except Exception:
       return command
 
-def translate_story_text(level, story_text, from_lang, to_lang):
+def translate_text(level, story_text, from_lang, to_lang):
   story_text_list = story_text.splitlines()
   transformed_story_text = []
   translating = False
@@ -212,6 +212,9 @@ def translate_story_text(level, story_text, from_lang, to_lang):
       
       transformed_story_text.append('\n')  
 
+def translate_start_code(level, start_code, from_lang, to_lang):
+  print(start_code)
+
 def transform_yaml_keywords(lang = 'all'):
   input_path = './coursedata/adventures'
   output_path = './coursedata/adventures-transformed/'
@@ -232,10 +235,18 @@ def transform_yaml_keywords(lang = 'all'):
         for level_number, level_value in levels.items():
           story_text = level_value['story_text']
           start_code = level_value['start_code']
+          
           if level_number < 9 and adventure == 'story':
-            translate_story_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
-          # translate_start_code(level_number, start_code)
-                  
+            print(level_number)
+            print(start_code)
+            translated_story_text = translate_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
+            if start_code != "":
+              translated_start_code = hedy_translation.translate_keywords(start_code, 'en', filename.removesuffix('.yaml'), level_number)
+            else:
+              translated_start_code = ""
+            print(translated_start_code)
+
+
 transform_yaml_keywords('nl')
 
   # def translate_start_code(level, story_text):
