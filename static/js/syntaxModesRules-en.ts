@@ -6,26 +6,28 @@ var _FORWARD='forward';
 var _TURN='turn'; 
 var _IS='is';
 var _SLEEP='sleep';
-var _ADD_LIST='add';
-var _TO_LIST='to';
-var _REMOVE='remove';
-var _FROM='from';
 var _AT='at'; 
 var _RANDOM='random'; 
 var _IN='in'; 
 var _IF='if';
 var _ELSE='else'; 
-var _AND='and'; 
 var _REPEAT='repeat';
 var _TIMES='times'; 
 var _FOR='for'; 
 var _RANGE='range';
+var _INPUT='input';
+/* These keywords currently don't have highlighing rules, but are also listed in the .lark files
+var _OR='or';
+var _WHILE='while';
+var _ADD_LIST='add';
+var _TO_LIST='to';
+var _REMOVE='remove';
+var _FROM='from';
 var _TO='to';
 var _STEP='step';
 var _ELIF='elif';
-var _INPUT='input';
-var _OR='or';
-var _WHILE='while';
+var _AND='and'; 
+*/
 
 const LEVELS = [
   {

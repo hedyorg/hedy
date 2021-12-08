@@ -6,26 +6,28 @@ var _FORWARD='vooruit';
 var _TURN='draai';
 var _IS='is';
 var _SLEEP='slaap';
-var _ADD_LIST='voeg';
-var _TO_LIST='toe aan';
-var _REMOVE='verwijder';
-var _FROM='uit';
 var _AT='op';
 var _RANDOM='willekeurig';
 var _IN='in';
 var _IF='als';
 var _ELSE='anders';
-var _AND='en';
 var _REPEAT='herhaal';
 var _TIMES='keer';
 var _FOR='voor';
 var _RANGE='bereik';
+var _INPUT='invoer';
+/* These keywords currently don't have highlighing rules, but are also listed in the .lark files
+var _OR='of';
+var _WHILE='zolang';
+var _ADD_LIST='voeg';
+var _TO_LIST='toe aan';
+var _REMOVE='verwijder';
+var _FROM='uit';
 var _TO='tot';
 var _STEP='stap';
 var _ELIF='alsanders';
-var _INPUT='invoer';
-var _OR='of';
-var _WHILE='zolang';
+var _AND='en';
+*/
 
 const LEVELS = [
   {
