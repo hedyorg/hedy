@@ -1,5 +1,7 @@
 _print_argument: (_SPACE | quoted_text | list_access | var_access | sum)*
-assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE textwithoutspaces
+
+ask: var _SPACE (_IS|_EQUALS) _SPACE _ASK (_SPACE _print_argument)?
+assign: var _SPACE (_IS|_EQUALS) _SPACE sum | var _SPACE (_IS|_EQUALS) _SPACE textwithoutspaces
 ?sum: product | sum _SPACE* _ADD _SPACE* product -> addition | sum _SPACE* _SUBTRACT _SPACE* product -> subtraction
 ?product: atom | product _SPACE* _MULTIPLY _SPACE* atom -> multiplication | product _SPACE* _DIVIDE _SPACE* atom -> division
 ?atom: INT | var_access | unsupported_number //TODO: means we cannot assign strings with spaces? would we want that?

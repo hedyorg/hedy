@@ -162,16 +162,16 @@
         demo_code: "print '5 per 5 è ' 5 * 5"
     -   name: "ask e if con calcoli"
         explanation: "Chiedi di fare un calcolo e giudicalo."
-        example: "Esempio: risposta is ask 'Quanto fa 10 più 10?'"
+        example: "Esempio: risposta = ask 'Quanto fa 10 più 10?'"
         demo_code: |-
-            risposta is ask 'Quanto fa 10 più 10?'
+            risposta = ask 'Quanto fa 10 più 10?'
             if risposta is 20 print 'Yes!' else print 'Ops'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy è divertente!'"
@@ -190,15 +190,15 @@
         demo_code: "print 'Ciao benvenuta/o su Hedy.'"
     -   name: "ask"
         explanation: "Chiedi qualcosa con `ask`."
-        example: "Esempio: colore is ask 'Qual è il tuo colore preferito?'"
+        example: "Esempio: colore = ask 'Qual è il tuo colore preferito?'"
         demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
+            colore = ask 'Qual è il tuo colore preferito?'
             print colore ' è il tuo preferito!'
     -   name: "if"
         explanation: "Fai una scelta con `if`."
         example: "Esempio: if colore is verde print 'carino!' else print 'mah'"
         demo_code: |-
-            colore is ask 'Qual è il tuo colore preferito?'
+            colore = ask 'Qual è il tuo colore preferito?'
             if colore is verde print 'carino!' else print 'mah'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -229,9 +229,9 @@
         demo_code: "print '5 volte 5 è ' 5 * 5"
     -   name: "if con più righe"
         explanation: "Chiedi la risposta per una somma e controlla se è corretta. Ora possiamo scrivere due righe."
-        example: "Esempio: risposta is ask 'Quanto fa 5 più 5?'"
+        example: "Esempio: risposta = ask 'Quanto fa 5 più 5?'"
         demo_code: |-
-            risposta is ask 'Quanto fa 5 più 5?'
+            risposta = ask 'Quanto fa 5 più 5?'
             if risposta is 10
                 print 'Ben fatto!'
                 print 'Esatto, la risposta corretta era ' risposta
