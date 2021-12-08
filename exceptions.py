@@ -53,7 +53,7 @@ class InvalidSpaceException(FtfyException):
             fixed_result=fixed_result)
 
 class ParseException(HedyException):
-    def __init__(self, level, location, found, fixed_code):
+    def __init__(self, level, location, found, fixed_code=None):
         super().__init__('Parse',
             level=level,
             location=location,
