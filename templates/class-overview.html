@@ -23,7 +23,7 @@
             <td>{{student.last_login}}</td>
             <td>{{student.highest_level}}</td>
             <td>{{student.programs}}</td>
-            <td><a href="{{localize_link ('/programs?user=' + student.username)}}">{{student.username}}'s {{auth.page}}</a></td>
+            <td><a href="/programs?user={{student.username}}">{{student.username}}'s {{auth.page}}</a></td>
             <td>{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
             <td><a href="#" onclick="hedyApp.remove_student ('{{class_info.id}}', '{{student.username}}')">{{auth.remove}} {{student.username}}</a></td>
           </tr>
@@ -33,12 +33,12 @@
   </div>
   <p>{{auth.class_link}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
   <div class="mt-4 flex flex-row">
-    <button class="green-btn" onclick="window.location.href = '{{localize_link ('/for-teachers/customize-class/' + class_info.id)}}'">{{ auth.customize_class }}</button>
+    <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{ auth.customize_class }}</button>
     <button class="green-btn mx-4" onclick="hedyApp.rename_class ('{{class_info.id}}')">{{auth.rename_class}}</button>
     <button class="green-btn" onclick="hedyApp.copy_to_clipboard ('{{class_info.link}}')">{{auth.copy_class_link}}</button>
   </div>
   <div class="mt-4 flex flex-row">
-    <button class="blue-btn" onclick="window.location.href = '{{localize_link ('/for-teachers')}}'">{{auth.back_to_class_list}}</button>
+    <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{auth.back_to_class_list}}</button>
     <button class="red-btn ml-4" onclick="hedyApp.delete_class ('{{class_info.id}}')">{{auth.delete_class}}</button>
   </div>
 </div>

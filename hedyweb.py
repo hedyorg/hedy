@@ -50,11 +50,10 @@ class PageTranslations:
     d.update(**self.data.get(language, {}))
     return d
 
-with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
+def get_page_title(current_page):
+  with open(f'coursedata/pages/pages.json', 'r', encoding='utf-8') as f:
     page_titles_json = json.load(f)
 
-
-def get_page_title(current_page):
   current_page = page_titles_json[current_page]
   if current_page:
     return current_page.get(g.lang, current_page.get("en"))
