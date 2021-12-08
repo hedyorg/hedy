@@ -14,8 +14,8 @@
        <div id="classes" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 w-3/4 hidden">
            <h2 class="mb-4 pb-4 border-b-2 inline-block w-3/4">{{auth.student_classes}}</h2>
            {% for user_class in user_classes %}
-             <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row">
-                <h1 class="inline-block w-1/2">{{ user_class['name']}}</h1><button class="red-btn ml-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{auth.leave_class}}</button>
+             <div id="student_class" class="border-2 rounded-lg border-gray-400 px-4 py-4 flex flex-row mb-4">
+                <p class="text-3xl text-blue-600 inline-block w-1/2">{{ user_class['name']}}</p><button class="red-btn ml-auto" onclick="hedyApp.remove_student('{{user_class['id']}}', '{{user_data['username']}}', true)">{{auth.leave_class}}</button>
              </div>
            {% endfor %}
        </div>
