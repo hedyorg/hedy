@@ -258,7 +258,6 @@ def setup_language():
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation.
     lang = request.cookies.get('lang')
-    print("The current language is..." + str(lang))
     if not lang:
         lang = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
 
@@ -903,8 +902,6 @@ def view_program(id):
     return render_template("view-program-page.html", **arguments_dict)
 
 
-
-
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     error_messages = TRANSLATIONS.get_translations(g.lang, "ClientErrorMessages")
@@ -983,6 +980,22 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=hedyweb.get_page_title('start'),
                            content=main_page_translations)
+
+
+@app.route('/change_language', methods=['POST'])
+def change_language():
+    body = request.json
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('lang'), str):
+        return 'language must be a string', 400
+
+    if body.get('lang') not in ALL_LANGUAGES.keys():
+        return "Language " + body.get('lang') + " not supported", 404
+
+    resp = make_response()
+    resp.set_cookie('lang', body.get('lang'))
+    return resp
 
 def session_id():
     """Returns or sets the current session ID."""
