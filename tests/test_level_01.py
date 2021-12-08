@@ -100,10 +100,8 @@ class TestsLevel1(HedyTester):
   def test_ask_dutch_error(self):
     code = textwrap.dedent("""ask Heb je er zin?""")
 
-    with self.assertRaises(hedy.exceptions.InvalidCommandException) as context:
+    with self.assertRaises(hedy.exceptions.MissingCommandException) as context:
       result = hedy.transpile(code, self.level, lang="nl")
-    self.assertEqual('Invalid', context.exception.error_code)
-    self.assertEqual(1, context.exception.error_location[0])
 
 
   # ask tests
