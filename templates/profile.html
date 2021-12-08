@@ -36,6 +36,15 @@
         <input id="birth_year" class="inline-block w-1/2" type="number">
     </div>
     <div class="mb-4">
+        <label for="language">{{auth.preferred_language}}</label>
+        <select id="language">
+            <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
+            {% for language in other_languages() %}
+                <option value="{{language.lang}}">{{language.sym}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4">
         <label for="gender">{{auth.gender}}</label>
         <select id="gender">
           <option value="">{{auth.select}}</option>
