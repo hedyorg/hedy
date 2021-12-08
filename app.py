@@ -1070,7 +1070,7 @@ def nl2br(x):
 
 
 @app.template_global()
-def hedy_link(level_nr, assignment_nr, subpage=None, lang=None):
+def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
     parts = [g.prefix]
     parts.append('/' + str(level_nr))
@@ -1078,8 +1078,6 @@ def hedy_link(level_nr, assignment_nr, subpage=None, lang=None):
         parts.append('/' + str(assignment_nr if assignment_nr else '1'))
     if subpage and subpage != 'code':
         parts.append('/' + subpage)
-    parts.append('?')
-    parts.append('lang=' + (lang if lang else g.lang))
     return ''.join(parts)
 
 
