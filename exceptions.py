@@ -122,6 +122,12 @@ class InvalidCommandException(FtfyException):
             fixed_result=fixed_result)
         self.location = [line_number]
 
+class MissingCommandException(HedyException):
+    def __init__(self, level, line_number):
+        super().__init__('Missing Command',
+            level=level,
+            line_number=line_number)
+
 
 class IncompleteCommandException(HedyException):
     def __init__(self, incomplete_command, level, line_number):
