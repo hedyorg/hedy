@@ -1007,7 +1007,8 @@ def main_page(page):
             session.pop('welcome-teacher', None)
             teacher_classes = [] if not current_user()['username'] else DATABASE.get_teacher_classes(
                 current_user()['username'], True)
-            return render_template('for-teachers.html', page_title=hedyweb.get_page_title(page),
+            return render_template('for-teachers.html', current_page='my-profile',
+                                   page_title=hedyweb.get_page_title(page),
                                    content=for_teacher_translations, teacher_classes=teacher_classes,
                                    welcome_teacher=welcome_teacher)
         else:

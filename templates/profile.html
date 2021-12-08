@@ -7,7 +7,7 @@
       <ul class="list-none" style="margin: 0"></ul>
     </div>
   {% endif %}
-  <h2 class="pl-8">{{auth.profile}} <button class="green-btn text-xl" onclick="hedyApp.auth.logout ()">{{auth.logout}}</button></h2>
+  <h2 class="pl-8">{{auth.profile}}</h2>
   <form class="js-validated-form auth bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4" id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
     <div class="mb-4">
         <label for="username">{{auth.username}}</label>
