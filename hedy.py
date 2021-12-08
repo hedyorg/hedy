@@ -3,7 +3,7 @@ import textwrap
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, environ
 
 import hedy
 import utils
@@ -12,8 +12,9 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
-import hedy_translation
 import program_repair
+import yaml
+import sys
 
 # Some useful constants
 HEDY_MAX_LEVEL = 18
@@ -21,7 +22,7 @@ MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
-local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
+local_keywords_enabled = 'pytest' in sys.argv[0] or ('GITHUB_WORKFLOW' in environ and environ['GITHUB_WORKFLOW'] == 'Unit tests') # If this is True, only the keywords in the specified language can be used for now
 
 #dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
@@ -157,16 +158,48 @@ characters_that_need_escaping = ["\\", "'"]
 
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
+
+def get_list_keywords(commands, to_lang):
+    """ Returns a list with the local keywords of the argument 'commands'
+    """
+
+    translation_commands = []
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
+
+    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
+
+    with open(en_yaml_filesname_with_path, 'r') as stream:
+        en_yaml_dict = yaml.safe_load(stream)
+
+    try:
+        with open(to_yaml_filesname_with_path, 'r') as stream:
+            to_yaml_dict = yaml.safe_load(stream)
+        for command in commands:
+            try:
+                translation_command = to_yaml_dict[command]
+                translation_commands.append(translation_command)
+            except Exception:
+                translation_commands.append(en_yaml_dict[command])
+    except Exception:
+        return commands
+
+    return translation_commands
+
+
 def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    lang_commands = hedy_translation.get_list_keywords(commands_per_level[level], lang)
+    lang_commands = get_list_keywords(commands_per_level[level], lang)
+
     # if we allow multiple keyword languages:
     # en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
     # lang_commands = list(set(en_commands + lang_commands))
             
     return lang_commands
+
 
 def hash_needed(name):
     # this function is now applied on something str sometimes Assignment
