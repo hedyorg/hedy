@@ -377,6 +377,15 @@ class TestsLevel4(HedyTester):
       expected=expected
     )
 
+  def test_repair(self):
+    code = "print ,'Hello'"
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual("print 'Hello'", context.exception.fixed_code)
+
+
+
   #assorti
   def test_detect_accented_chars(self):
     self.assertEqual(True, hedy.hash_needed('éyyy'))
