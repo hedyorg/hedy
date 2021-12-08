@@ -30,7 +30,7 @@
       <ul class="dropdown-menu absolute hidden text-white rounded bg-blue-400 mt-2 pt-1 list-none ml-0 right-0 w-48">
           <li class="p-2"><input id="search_language" placeholder="{{ui.search}}" class="border-2 text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></li>
         {% for lang in other_languages() %}
-        <a class="no-underline" href="{{ modify_query(lang=lang.lang) }}"><li class="hover:bg-blue-600 text-white py-2 px-4 block border-b border-black language">{{ lang.sym }}</li></a>
+        <a class="no-underline" onclick="hedyApp.change_language ('{{lang.lang}}')"><li class="hover:bg-blue-600 text-white py-2 px-4 block border-b border-black language">{{ lang.sym }}</li></a>
         {% endfor %}
       </ul>
     </div>

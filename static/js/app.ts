@@ -1026,3 +1026,17 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#code_output').height('22rem');
   }
 }
+
+export function change_language(lang: boolean) {
+  console.log("We gaan de taal veranderen...");
+  $.ajax({
+    type: 'POST',
+    url: '/change_language',
+    data: JSON.stringify({
+      lang: lang
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  });
+  location.reload();
+}
