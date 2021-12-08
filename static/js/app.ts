@@ -1039,7 +1039,7 @@ export function change_language(lang: string) {
     dataType: 'json'
   }).done(function(response: any) {
       if (response.succes){
-        setTimeout (function () {location.reload ()}, 200);
+        location.reload ();
       }
     }).fail(function(xhr) {
       console.error(xhr);
