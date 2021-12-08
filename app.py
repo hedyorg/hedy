@@ -257,7 +257,7 @@ def setup_language():
     #
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation.
-    lang = request.args.get('lang')
+    lang = request.cookies.get('lang')
     if not lang:
         lang = request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')
 
