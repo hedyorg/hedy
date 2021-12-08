@@ -25,3 +25,7 @@ def replace(input_string, line, column, length, new_string):
 def remove_leading_spaces(input_string):
     # the only repair we can do now is remove leading spaces, more can be added!
     return '\n'.join([x.lstrip() for x in input_string.split('\n')])
+
+
+def remove_unexpected_char(input_string, line, column):
+    return delete(input_string, line - 1, column - 1, 1)

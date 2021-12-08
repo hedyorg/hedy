@@ -1,7 +1,6 @@
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
-from test_translating import check_local_lang_bool
 
 
     # tests should be ordered as follows:
@@ -13,7 +12,6 @@ from test_translating import check_local_lang_bool
 class TestsTranslationLevel3(HedyTester):
     level = 3
 
-    @check_local_lang_bool
     def test_assign_list(self):
         code = "animals is dog, cat, kangaroo"
 
@@ -22,7 +20,6 @@ class TestsTranslationLevel3(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_at_random(self):
         code = "print animals at random"
 
@@ -31,7 +28,6 @@ class TestsTranslationLevel3(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_assign_list_nl_en(self):
         code = "actie is drukaf, echo, vraag"
 
@@ -40,7 +36,6 @@ class TestsTranslationLevel3(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_at_random_nl_en(self):
         code = "print echo op willekeurig"
 

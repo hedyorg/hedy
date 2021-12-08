@@ -1,7 +1,5 @@
-from test_translating import check_local_lang_bool
 from test_level_01 import HedyTester
 import hedy_translation
-from test_translating import check_local_lang_bool
 
     # tests should be ordered as follows:
     # * Translation from English to Dutch
@@ -14,7 +12,6 @@ class TestsTranslationLevel1(HedyTester):
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
 
-    @check_local_lang_bool
     def test_print_english_dutch(self):
         code = 'print Hallo welkom bij Hedy!'
 
@@ -23,7 +20,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_ask_english_dutch(self):
         code = "ask Hallo welkom bij Hedy!"
 
@@ -32,7 +28,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_echo_english_dutch(self):
         code = "ask Hallo welkom bij Hedy!\necho"
 
@@ -41,7 +36,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_ask_echo_english_dutch(self):
         code = 'print Hallo welkom bij Hedy\'\'\nvraag hoe heet je\necho'
 
@@ -50,7 +44,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_print_kewords_english_dutch(self):
         code = "print print ask echo"
 
@@ -60,7 +53,6 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(result, expected)
 
 
-    @check_local_lang_bool
     def test_forward_english_dutch(self):
         code = "forward 50"
 
@@ -69,7 +61,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_turn_english_dutch(self):
         code = "turn 50"
 
@@ -80,7 +71,6 @@ class TestsTranslationLevel1(HedyTester):
 
 
 
-    @check_local_lang_bool
     def test_print_dutch_english(self):
         code = 'print Hallo welkom bij Hedy!'
 
@@ -90,7 +80,6 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(result, expected)
 
 
-    @check_local_lang_bool
     def test_ask_dutch_english(self):
         code = "vraag Hallo welkom bij Hedy!\nvraag veel plezier"
 
@@ -99,7 +88,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_echo_dutch_english(self):
         code = "vraag stel je vraag\necho tekst"
 
@@ -108,7 +96,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_ask_echo_dutch_english(self):
         code = 'vraag Hallo welkom bij Hedy!\necho hoi'
 
@@ -117,7 +104,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_ask_kewords_dutch_english(self):
         code = "vraag print ask echo"
 
@@ -126,7 +112,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_turn_dutch_english(self):
         code = "draai left"
 
@@ -137,7 +122,6 @@ class TestsTranslationLevel1(HedyTester):
 
 
 
-    @check_local_lang_bool
     def test_translate_back(self):
         code = 'print Hallo welkom bij Hedy\nask hoe heet je\necho'
 
@@ -148,7 +132,6 @@ class TestsTranslationLevel1(HedyTester):
 
 
 
-    @check_local_lang_bool
     def test_invalid(self):
         code = "hallo"
 
@@ -158,7 +141,6 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(result, expected)
 
     # No translation because of the invalid space error
-    @check_local_lang_bool
     def test_invalid_space(self):
         code = " ask Hedy"
 
@@ -167,7 +149,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def no_argument_ask(self):
         code = "ask"
 
