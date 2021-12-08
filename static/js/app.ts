@@ -1,4 +1,5 @@
 // It's important that this file gets loaded first
+import './syntaxRules';
 import './syntaxModesRules-en';
 import './syntaxModesRules-nl';
 
