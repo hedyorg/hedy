@@ -1,7 +1,6 @@
 import hedy
 from test_level_01 import HedyTester
 import hedy_translation
-from test_translating import check_local_lang_bool
 
 
 # tests should be ordered as follows:
@@ -16,7 +15,6 @@ class TestsTranslationLevel7(HedyTester):
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
 
-    @check_local_lang_bool
     def test_repeat_english_dutch(self):
         code = "repeat 3 times print 'Hedy is fun!'"
 
@@ -25,7 +23,6 @@ class TestsTranslationLevel7(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_repeat2_english_dutch(self):
         code = "repeat 2 times print name"
 
@@ -34,7 +31,6 @@ class TestsTranslationLevel7(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_repeat_dutch_english(self):
         code = "herhaal 3 keer print 'Hedy is fun!'"
 
@@ -43,7 +39,6 @@ class TestsTranslationLevel7(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_repeat2_dutch_english(self):
         code = "herhaal 2 keer print ask"
 
@@ -52,7 +47,6 @@ class TestsTranslationLevel7(HedyTester):
 
         self.assertEqual(result, expected)
 
-    @check_local_lang_bool
     def test_translate_back(self):
         code = "repeat 4 times print 'Welcome to Hedy'"
 
