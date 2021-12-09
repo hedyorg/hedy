@@ -182,6 +182,7 @@ export const auth = {
       auth.clear_error ();
       $.ajax ({type: 'POST', url: '/profile', data: JSON.stringify (payload), contentType: 'application/json; charset=utf-8'}).done (function () {
         auth.success (auth.texts['profile_updated']);
+        setTimeout (function () {location.reload ()}, 500);
       }).fail (function (response) {
         auth.error (auth.texts['ajax_error'] + ' ' + response.responseText);
       });
