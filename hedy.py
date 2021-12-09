@@ -1577,9 +1577,26 @@ def merge_grammars(grammar_text_1, grammar_text_2):
             name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
             if name_1 == name_2:
                 override_found = True
-                new_rule = line_2
-                # this rule is now in the grammar, remove form this list
-                remaining_rules_grammar_2.remove(new_rule)
+                # Check if the rule is adding or substracting new rules
+                has_add = definition_2.startswith("+=")
+                has_sub = "-=" in definition_2                
+                if has_add and has_sub:
+                    print(line_1)
+                    print(line_2)
+                    definition_2 = definition_2[3:]
+                    add_list, sub_list = definition_2.split("-=")
+                    orig_cmd_list     = [command.strip() for command in definition_1.split('|')]                    
+                    unwanted_cmd_list = [command.strip() for command in sub_list.split('|')]                    
+                    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]                    
+                    result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
+                    # join together the new rules and the remaining rules                    
+                    new_rule = f"{name_1}: {result_cmd_list} | {add_list}"
+                elif has_add and not has_sub:
+                    new_rule = f"{name_1}: {definition_2[3:]} | {definition_1}"
+                else:
+                    new_rule = line_2
+                #Already procesed so remove it
+                remaining_rules_grammar_2.remove(line_2)
                 break
 
         # new rule found? print that. nothing found? print org rule
