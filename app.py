@@ -848,7 +848,7 @@ def no_quiz_data_error():
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    if re.match('\d', level):
+    if re.match('\\d', level):
         try:
             g.level = level = int(level)
         except:
