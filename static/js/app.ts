@@ -931,23 +931,43 @@ function createModal(level:number ){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
+        let tempIndex = 0;
         let resultString = "";
 
         if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
           resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+          let tempString = ""
           let foutString = storage.getItem("{lvl}".replace("{lvl}", levelKey));
           editor.setValue(foutString);
-          let cursorlocatie = 0;
-            for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
-              if (resultString[i] !== foutString[i]) {
-                console.log("fout naar", i);
-                editor.clearSelection()
-                editor.moveCursorTo(0, i);
-                cursorlocatie = i+1;
-                console.log(editor.getCursorPosition())
-                break;
+
+          /*setTimeout(function(){ //Code typ vanaf de fout
+            for (let i = 0; i < resultString.length + 1; i++) {
+              if (resultString[i]===foutString[i]) {
+                editor.setValue(tempString,tempIndex);
+                tempString += resultString[tempIndex];
+                tempIndex++;
+              }
+              else{
+                setTimeout(function () {
+                  editor.setValue(tempString,tempIndex);
+                  tempString += resultString[tempIndex];
+                  tempIndex++;
+                }, 150 * i);
               }
             }
+          }, 2000);*/
+
+          let cursorlocatie = 0; //Code insert goede code en plaats cursor
+          for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
+            if (resultString[i] !== foutString[i]) {
+              console.log("fout naar", i);
+              editor.clearSelection()
+              editor.moveCursorTo(0, i);
+              cursorlocatie = i+1;
+              console.log(editor.getCursorPosition())
+              break;
+            }
+          }
           setTimeout(function (){
             editor.setValue(resultString);
             editor.clearSelection()
