@@ -874,6 +874,25 @@ adventures:
                         print speler ' kiest ' keuzes at random
                     ```
                 start_code: ""
+            9:
+                story_text: |
+                    ## Steen, apper, schaar
+                    In dit level kun je het hele steen, papier, schaar programma maken door de if commando's in elkaar te zetten!
+                    ## Voorbeeld Hedy code
+                    ```
+                    keuzes is steen, papier, schaar
+                    jouw_keuze is ask 'Wat kies jij?'
+                    print 'Jij kiest ' jouw_keuze
+                    computer_keuze is keuzes at random
+                    print 'De computer kiest ' computer_keuze
+                    if computer_keuze is jouw_keuze
+                        print 'Gelijkspel'
+                    if computer_keuze is 'steen'
+                        if jouw_keuze is 'papier'
+                            print 'Jij wint!'
+                        if jouw_keuze is 'schaar'
+                            print 'De computer wint!'
+                start_code: ""
             5:
                 story_text: |
                     ## Steen, schaar, papier in level 4
@@ -929,6 +948,17 @@ adventures:
                     Ook in level 2 kun je de `ask` weer gebruiken, dus probeer maar eens of jij jouw keuze en de keuze van de computer kan printen!
                     Let wel goed op, omdat de `ask` nu anders werkt dan in level 1. Er moet een naam voor.
                 start_code: "print Welkom bij jouw eigen steen schaar papier!"
+            2:
+                story_text: |
+                    ## Steen, papier, schaar
+                    In dit level kun je variabelen gebruiken om alvast een stukje van de spelletje te programmeren. In het volgende level leer je het spelletje maken.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    keuze is (vul hier steen papier of schaar in)
+                    print ik kies keuze
+                    ```
+                start_code: ""
             15:
                 story_text: |
                     ## Steen, papier, schaar
