@@ -1,8 +1,3 @@
-# some_file.py
-import sys
-# insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1,r'C:\Users\teund\OneDrive\Documenten\Informatica en Economie\Jaar 3\hedy')
-
 import hedy_translation
 
 from pathlib import Path
@@ -10,7 +5,6 @@ import os
 import copy
 import utils
 import yaml
-import textwrap
 
 def nop(s):
   return s
@@ -147,7 +141,7 @@ def translate_command(command, from_lang, to_lang):
   if from_lang == to_lang:
       return command
 
-  path_keywords = "./coursedata/keywords"
+  path_keywords = "../coursedata/keywords"
 
   from_yaml_filesname_with_path = os.path.join(path_keywords, from_lang + '.yaml')
   to_yaml_filesname_with_path = os.path.join(path_keywords, to_lang + '.yaml')\
@@ -172,6 +166,7 @@ def translate_text(level, story_text, from_lang, to_lang):
   story_text_list = story_text.splitlines()
   transformed_story_text = []
   translating = False
+  capitalize = False
   translate_list = []
   
   for line in story_text_list:
@@ -195,9 +190,18 @@ def translate_text(level, story_text, from_lang, to_lang):
       line_list = line.split()
       for index, word in enumerate(line_list):
         if word.startswith('`') and word.count('`') == 2 and word != "```":
+          if word[1].isupper():
+            capitalize = True
+            word = word.replace(word[1], word[1].lower())
+            
           wordlist = word.split('`') 
           word = wordlist[1].removeprefix('`')
           translated_word = translate_command(word, from_lang, to_lang)
+          
+          if capitalize:
+            translated_word = translated_word.capitalize()
+            capitalize = False
+            
           translated_word = f'`{translated_word}`{wordlist[2]}'
           transformed_story_text.append(translated_word)
           if index != len(line_list) - 1:
@@ -241,13 +245,13 @@ def transform_yaml_keywords_adventures(lang = 'all'):
           story_text = level_value['story_text']
           start_code = level_value['start_code']
           
-          if level_number < 17:
-            print(story_text)
+          if level_number <= 17: # For now, there is only a translation structure available for levels 1 - 17
+
             if story_text != '':          
               translated_story_text = translate_text(level_number, story_text, 'en', filename.removesuffix('.yaml'))
             else:
               translated_story_text = ''
-            print(f'Level: {level_number}\nTranslated Story Text: {translated_story_text}\n')
+
             transformed_dict['adventures'][adventure]['levels'][level_number]['story_text'] = translated_story_text
             if start_code != '':
               translated_start_code = hedy_translation.translate_keywords(start_code, 'en', filename.removesuffix('.yaml'), level_number)
@@ -257,8 +261,60 @@ def transform_yaml_keywords_adventures(lang = 'all'):
             
       with open(output_path + filename, 'w') as f:
         f.write(utils.dump_yaml_rt(transformed_dict))
+        
+def transform_yaml_keywords_level_defaults(lang = 'all'):
+  input_path = '../coursedata/level-defaults'
+  output_path = '../coursedata/level-defaults-transformed/'
+  Path(output_path).mkdir(parents=True, exist_ok=True)
 
+  yaml_filesnames = [f for f in os.listdir(input_path) if
+                     os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
-transform_yaml_keywords_adventures('nl')
+  for filename in yaml_filesnames:
+    
+    if filename == lang + '.yaml' or lang == 'all':   
+      yaml_filesnames_with_path = os.path.join(input_path, filename)
+      
+      lang_yaml = filename.removesuffix('.yaml')
+      
+      with open(yaml_filesnames_with_path, 'r') as stream:
+        yaml_dict = yaml.safe_load(stream)
+      
+      transformed_dict = copy.deepcopy(yaml_dict)
 
-  # def translate_start_code(level, story_text):
+      for level_number, number_values in yaml_dict.items():
+        intro_text = number_values['intro_text']
+        start_code = number_values['start_code']
+        
+        if level_number < 17:
+          
+          if intro_text != '':      
+            translated_intro_text = translate_text(level_number, intro_text, 'en', lang_yaml)
+          else:
+            translated_intro_text = ''
+          transformed_dict[level_number]['intro_text'] = translated_intro_text
+          if start_code != '':
+            translated_start_code = hedy_translation.translate_keywords(start_code, 'en', lang_yaml, level_number)
+          else:
+            translated_start_code = ''
+          transformed_dict[level_number]['start_code'] = translated_start_code
+
+          for command in number_values['commands']:
+            name = command['name']
+            translated_name = translate_command(name, 'en', lang_yaml)
+            if name == translated_name:
+              translated_name = translate_text(level_number, name, 'en', lang_yaml)
+            transformed_dict[level_number]['commands'][0]['name'] = translated_name
+              
+            explanation = command['explanation']
+            translated_explanation = translate_text(level_number, explanation, 'en', lang_yaml)
+            transformed_dict[level_number]['commands'][0]['explanation'] = translated_explanation
+
+            demo_code = command['demo_code']
+            translated_demo_code = hedy_translation.translate_keywords(demo_code, 'en', lang_yaml, level_number)
+            transformed_dict[level_number]['commands'][0]['demo_code'] = translated_demo_code
+      
+      with open(output_path + filename, 'w') as f:
+          f.write(utils.dump_yaml_rt(transformed_dict))
+
+transform_yaml_keywords_level_defaults('nl')

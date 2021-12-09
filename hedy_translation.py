@@ -212,7 +212,7 @@ class ConvertToLang6(ConvertToLang5):
     def addition(self, args):
         return args[0] + " + " + args[1]
 
-    def substraction(self, args):
+    def subtraction(self, args):
         return args[0] + " - " + args[1]
 
     def multiplication(self, args):
@@ -348,15 +348,3 @@ class ConvertToLang17(ConvertToLang16):
     def elifs(self, args):
         return self.keywords["elif"] + " " + args[0] + ":" + indent(args[1:])
 
-if __name__ == '__main__':
-    code = textwrap.dedent("""\
-    antwoord is ask 'Heb je zin om naar het volgende level te gaan?'
-    if antwoord is ja
-        repeat 3 times
-            print 'Hoera!'
-            print 'Op naar het volgende level!'
-    if antwoord is nee
-        print 'blijf dan maar lekker hier'""")
-    level = 7
-    output = translate_keywords(code, 'en', 'nl', level)
-    print(f'Code: {code} \nLevel: {level} \nTranslation: {output}')
