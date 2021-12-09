@@ -1581,8 +1581,6 @@ def merge_grammars(grammar_text_1, grammar_text_2):
                 has_add = definition_2.startswith("+=")
                 has_sub = "-=" in definition_2                
                 if has_add and has_sub:
-                    print(line_1)
-                    print(line_2)
                     definition_2 = definition_2[3:]
                     add_list, sub_list = definition_2.split("-=")
                     orig_cmd_list     = [command.strip() for command in definition_1.split('|')]                    
