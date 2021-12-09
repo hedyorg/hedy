@@ -266,6 +266,6 @@ class TestsLevel8(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.NoIndentationException,
+      exception=hedy.exceptions.IndentationException,
       extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
     )
