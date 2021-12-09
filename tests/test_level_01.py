@@ -169,8 +169,7 @@ class TestsLevel1(HedyTester):
     self.multi_level_tester(
       max_level=self.max_turtle_level,
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      extra_check_function=self.is_turtle()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_multiple_forward_without_arguments(self):

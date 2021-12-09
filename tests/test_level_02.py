@@ -332,6 +332,8 @@ class TestsLevel2(HedyTester):
     with self.assertRaises(hedy.exceptions.WrongLevelException) as context:
       hedy.transpile(code, self.level)
     self.assertEqual('Wrong Level', context.exception.error_code)
+
+
   def test_ask_without_argument(self):
     self.multi_level_tester(
       max_level=17,
