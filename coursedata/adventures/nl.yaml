@@ -1925,6 +1925,33 @@ adventures:
                         print 'Jij hoort in club B'
                     ```
                 start_code: ""
+    language:
+        name: Woordjes leren
+        description: Maak je eigen programma om woordjes te leren in een vreemde taal
+        image: hauntedhouse.png
+        default_save_name: language
+        levels:
+            16:
+                story_text: |
+                    ## Leer een nieuwe taal
+                    Maak je eigen programma om woordjes te leren in een vreemde taal.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    franswoord is ['bonjour', 'ordinateur', 'pomme de terre']
+                    vertaling is ['hallo', 'computer', 'aardappel']
+                    score is 0
+                    for i in range 1 to 3
+                        antwoord is ask 'Wat betekent ' franswoord[i] '?'
+                        correct is vertaling[i]
+                        if antwoord is correct
+                            print 'Correct!'
+                            score is score + 1
+                        else
+                            print 'Fout, ' franswoord[i] ' betekent ' vertaling[i]
+                    print 'Je hebt ' score ' goede antwoorden gegeven.'
+                    ```
+                start_code: ""
     next:
         name: "Vooruitblik"
         description: "Vooruitblik"
