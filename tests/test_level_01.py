@@ -90,11 +90,14 @@ class TestsLevel1(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
-  def test_print_dutch(self):
+  def test_print_nl(self):
     code = "print Hallo welkom bij Hedy!"
     expected = "print('Hallo welkom bij Hedy!')"
     output = 'Hallo welkom bij Hedy!'
-    self.single_level_tester(code=code, expected=expected, output=output)
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             output=output,
+                             lang='nl')
 
 
   # ask tests
@@ -115,11 +118,38 @@ class TestsLevel1(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
     
-  def test_ask_dutch(self):
+  def test_ask_nl_code_transpiled_in_nl(self):
+    code = "vraag Heb je er zin in?"
+    expected = "answer = input('Heb je er zin in?')"
+
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             lang='nl')
+
+  def test_ask_en_code_transpiled_in_nl(self):
     code = "ask Heb je er zin in?"
     expected = "answer = input('Heb je er zin in?')"
 
-    self.single_level_tester(code=code, expected=expected)
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             lang='nl')
+
+  def test_mixes_languages_nl_en(self):
+    code = textwrap.dedent("""\
+    vraag Heb je er zin in?
+    echo
+    ask are you sure?
+    print mooizo!""")
+
+    expected = textwrap.dedent("""\
+    answer = input('Heb je er zin in?')
+    print(answer)
+    answer = input('are you sure?')
+    print('mooizo!')""")
+
+    self.single_level_tester(code=code,
+                             expected=expected,
+                             lang='nl')
 
   # echo tests
   def test_echo_without_argument(self):
