@@ -1220,6 +1220,8 @@ class ConvertToPython_7(ConvertToPython_6):
         var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
         command = args[1]
+        if command.startswith("print"):
+            command += "\ntime.sleep(0.1)"
         return f"""for {var_name} in range(int({str(times)})):
 {indent(command)}"""
 
