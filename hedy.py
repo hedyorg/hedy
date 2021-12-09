@@ -178,12 +178,12 @@ def get_list_keywords(commands, to_lang):
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
             try:
-                translation_command = to_yaml_dict[command]
-                translation_commands.append(translation_command)
+                translation_commands.append(to_yaml_dict[command])
             except Exception:
                 translation_commands.append(en_yaml_dict[command])
     except Exception:
-        return commands
+        for command in commands:
+            translation_commands.append(en_yaml_dict[command])
 
     return translation_commands
 
@@ -195,10 +195,10 @@ def get_suggestions_for_language(lang, level):
     lang_commands = get_list_keywords(commands_per_level[level], lang)
 
     # if we allow multiple keyword languages:
-    # en_commands = hedy_translation.get_list_keywords(commands_per_level[level], 'en')
-    # lang_commands = list(set(en_commands + lang_commands))
+    en_commands = get_list_keywords(commands_per_level[level], 'en')
+    en_lang_commands = list(set(en_commands + lang_commands))
             
-    return lang_commands
+    return en_lang_commands
 
 
 def hash_needed(name):
