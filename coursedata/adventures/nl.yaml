@@ -382,7 +382,6 @@ adventures:
                         print 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
                     ```
                 start_code: ""
-
             7:
                 story_text: |
                     ## Liedjes
@@ -426,6 +425,42 @@ adventures:
                     Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
                     Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
                 start_code: "print 'Baby shark'"
+            16:
+                story_text: |
+                    ## Zing een lied!
+                    Maak het nog makkelijker om een liedje te programmeren zoals old MacDonald! Je kunt nu de dieren en hun geluiden aan elkaar koppelen, door ze op dezelfde plaats in het lijstje te zetten.
+                    Ook de Dronken Zeeman gaat lekker snel in dit level! Je hebt maar 5 regels nodig voor het gehele lied. Kijk maar!
+
+                    ## Old MacDonald
+                    ```
+                    dieren is ['big', 'hond', 'koe']
+                    geluid is ['knor', 'woef', 'boe']
+                    for i in range 1 to 3
+                        dier is dieren[i]
+                        geluid is geluiden[i]
+                        print 'Old MacDonald had een wei'
+                        print 'hi ja hi ja ho!'
+                        print 'En in die wei daar stond een ' dier
+                        print 'hi ja hi ja ho!'
+                        print 'met een ' geluid geluid ' hier'
+                        print 'en een ' geluid geluid ' daar'
+                        print 'hier een ' geluid
+                        print 'daar een ' geluid
+                        print 'overal een ' geluid geluid
+                    ```
+
+                    ## Dronken Zeeman
+                    ```
+                    coupletten is ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
+                    for couplet in coupletten
+                        for i in range 1 to 3
+                            print couplet
+                        print 's morgens in de vroegte'
+                        for i in range 1 to 3
+                            print 'HELA HUP! daar gaat ie!'
+                        print 's morgens in de vroegte'
+                    ```
+                start_code: ""
     turtle:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"

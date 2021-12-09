@@ -414,6 +414,42 @@ adventures:
                     You can now repeat lines 2 to 9 as many times as you want by copying the lines.
 
                 start_code: "print 'Baby shark'"
+            16:
+                story_text: |
+                    ## Sing a song!
+                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in teh same place in the list.
+                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+
+                    ## Old MacDonald
+                    ```
+                    animals is ['pig', 'dog', 'cow']
+                    sounds is ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal is animals[i]
+                        sound is sounds[i]
+                        print 'Old McDonald had a farm'
+                        print 'E I E I O!'
+                        print 'and on that farm he had a ' animal
+                        print 'E I E I O!'
+                        print 'with a ' sound sound ' here'
+                        print 'and a ' sound sound ' there'
+                        print 'here a ' sound
+                        print 'there a ' sound
+                        print 'everywhere a ' sound sound
+                    ```
+
+                    ## Drunken Sailor
+                    ```
+                    lines is ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    for line in lines
+                        for i in range 1 to 3
+                            print line
+                        print 'early in the morning'
+                        for i in range 1 to 3
+                            print 'way hay and up she rises'
+                        print 'early in the morning'
+                    ```
+                start_code: ""
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
