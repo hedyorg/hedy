@@ -923,7 +923,8 @@ function createModal(level:number ){
     theModalEditor = editor;
     error.setEditor(editor);
     //small timeout to make sure the call with fixed code is complete.
-    setTimeout(function(){}, 2000);
+    setTimeout(function () {
+    }, 2000);
 
     window.Range = ace.require('ace/range').Range // get reference to ace/range
 
@@ -931,8 +932,36 @@ function createModal(level:number ){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
+      let tempIndex = 0;
+      let resultString = "";
 
-      let resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+      if (storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))) {
+        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey)) ?? "";
+        let tempString = ""
+        let foutString = storage.getItem("{lvl}".replace("{lvl}", levelKey));
+        editor.setValue(foutString);
+
+        let cursorlocatie = 0; //Code insert goede code en plaats cursor
+        for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
+          if (resultString[i] !== foutString[i]) {
+            console.log("fout naar", i);
+            editor.clearSelection()
+            editor.moveCursorTo(0, i);
+            cursorlocatie = i + 1;
+            console.log(editor.getCursorPosition())
+            break;
+          }
+        }
+        setTimeout(function () {
+          editor.setValue(resultString);
+          editor.clearSelection()
+          editor.moveCursorTo(0, cursorlocatie);
+          console.log(cursorlocatie);
+          console.log(editor.getCursorPosition())
+        }, 1000);
+      }
+
+      /*let resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
       let wrongString = storage.getItem("{lvl}".replace("{lvl}", levelKey))?? "";
       let smallString = ""; let bigString = "";
       if ( resultString.length < wrongString.length ) {
@@ -978,13 +1007,14 @@ function createModal(level:number ){
           console.log(cursorlocatie);
           console.log(editor.getCursorPosition())
         }, 1000);
-      }
-      else{
-        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+      }*/
+
+
+      else {
+        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey)) ?? "";
         editor.setValue(resultString);
       }
     }
-
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
       if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
