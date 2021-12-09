@@ -932,82 +932,30 @@ function createModal(level:number ){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
-      let tempIndex = 0;
-      let resultString = "";
+      let resultString = ""; //String for the repaired code
+      let wrongString = ""; //String for the old code
 
       if (storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))) {
         resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey)) ?? "";
-        let tempString = ""
-        let foutString = storage.getItem("{lvl}".replace("{lvl}", levelKey));
-        editor.setValue(foutString);
+        wrongString = storage.getItem("{lvl}".replace("{lvl}", levelKey))?? "";
+        editor.setValue(wrongString);
 
-        let cursorlocatie = 0; //Code insert goede code en plaats cursor
-        for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
-          if (resultString[i] !== foutString[i]) {
-            console.log("fout naar", i);
+        //Checks if the strings are the same, to find where the repair changes were made
+        let cursorLocation = 0;
+        for (let i = 0; i < resultString.length + 1; i++) {
+          if (resultString[i] !== wrongString[i]) { //Checks difference in strings
             editor.clearSelection()
             editor.moveCursorTo(0, i);
-            cursorlocatie = i + 1;
-            console.log(editor.getCursorPosition())
+            cursorLocation = i + 1;
             break;
           }
         }
         setTimeout(function () {
           editor.setValue(resultString);
           editor.clearSelection()
-          editor.moveCursorTo(0, cursorlocatie);
-          console.log(cursorlocatie);
-          console.log(editor.getCursorPosition())
+          editor.moveCursorTo(0, cursorLocation);
         }, 1000);
       }
-
-      /*let resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
-      let wrongString = storage.getItem("{lvl}".replace("{lvl}", levelKey))?? "";
-      let smallString = ""; let bigString = "";
-      if ( resultString.length < wrongString.length ) {
-        smallString = resultString;
-        bigString = wrongString;
-      }
-      else {
-        smallString = wrongString;
-        bigString = resultString;
-      }
-
-      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-        let differenceStrings = "";
-        var i = 0; 
-        var j = 0;
-        while (j < bigString.length) {
-          if (smallString[i] != bigString[j] || i == smallString.length ) {
-            differenceStrings += bigString[j];
-          }
-          else {
-            i++;
-          }
-          j++;
-        }
-        console.log(differenceStrings);
-
-        editor.setValue(wrongString);
-        let cursorlocatie = 0;
-          for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
-            if (resultString[i] !== wrongString[i]) {
-              console.log("fout naar", i);
-              editor.clearSelection()
-              editor.moveCursorTo(0, i);
-              cursorlocatie = i+1;
-              console.log(editor.getCursorPosition())
-              break;
-            }
-          }
-        setTimeout(function (){
-          editor.setValue(resultString);
-          editor.clearSelection()
-          editor.moveCursorTo(0,cursorlocatie);
-          console.log(cursorlocatie);
-          console.log(editor.getCursorPosition())
-        }, 1000);
-      }*/
 
 
       else {
