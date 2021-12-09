@@ -931,35 +931,58 @@ function createModal(level:number ){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
-        let resultString = "";
 
-        if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
-          let foutString = storage.getItem("{lvl}".replace("{lvl}", levelKey));
-          editor.setValue(foutString);
-          let cursorlocatie = 0;
-            for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
-              if (resultString[i] !== foutString[i]) {
-                console.log("fout naar", i);
-                editor.clearSelection()
-                editor.moveCursorTo(0, i);
-                cursorlocatie = i+1;
-                console.log(editor.getCursorPosition())
-                break;
-              }
+      let resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+      let wrongString = storage.getItem("{lvl}".replace("{lvl}", levelKey))?? "";
+      let smallString = ""; let bigString = "";
+      if ( resultString.length < wrongString.length ) {
+        smallString = resultString;
+        bigString = wrongString;
+      }
+      else {
+        smallString = wrongString;
+        bigString = resultString;
+      }
+
+      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
+        let differenceStrings = "";
+        var i = 0; 
+        var j = 0;
+        while (j < bigString.length) {
+          if (smallString[i] != bigString[j] || i == smallString.length ) {
+            differenceStrings += bigString[j];
+          }
+          else {
+            i++;
+          }
+          j++;
+        }
+        console.log(differenceStrings);
+
+        editor.setValue(wrongString);
+        let cursorlocatie = 0;
+          for (let i = 0; i < resultString.length + 1; i++) { //Checks location difference
+            if (resultString[i] !== wrongString[i]) {
+              console.log("fout naar", i);
+              editor.clearSelection()
+              editor.moveCursorTo(0, i);
+              cursorlocatie = i+1;
+              console.log(editor.getCursorPosition())
+              break;
             }
-          setTimeout(function (){
-            editor.setValue(resultString);
-            editor.clearSelection()
-            editor.moveCursorTo(0,cursorlocatie);
-            console.log(cursorlocatie);
-            console.log(editor.getCursorPosition())
-          }, 1000);
-        }
-        else{
-          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+          }
+        setTimeout(function (){
           editor.setValue(resultString);
-        }
+          editor.clearSelection()
+          editor.moveCursorTo(0,cursorlocatie);
+          console.log(cursorlocatie);
+          console.log(editor.getCursorPosition())
+        }, 1000);
+      }
+      else{
+        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+        editor.setValue(resultString);
+      }
     }
 
     window.onbeforeunload = () => {
