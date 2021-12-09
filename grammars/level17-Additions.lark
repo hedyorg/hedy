@@ -1,6 +1,6 @@
 // We add the : at the end of if and else and elif and for/while
 
-command: print | ifs (elifs)* elses? | ask | for_loop | repeat_list | while_loop| assign_list | add | remove | sleep | list_access_var | assign | comment
+command:+= ifs (elifs)* elses? -= ifs elses?
 
 //spaces are allowed before and after colon
 //TODO: this could be an attribute on the rule that we add in the merger
