@@ -161,18 +161,20 @@ class CodePlaceholdersPresentException(HedyException):
         super().__init__('Has Blanks')
 
 class NoIndentationException(HedyException):
-    def __init__(self, line_number, leading_spaces, indent_size):
+    def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('No Indentation',
             line_number=line_number,
             leading_spaces=leading_spaces,
             indent_size=indent_size)
+        self.fixed_code = fixed_code
 
 class IndentationException(HedyException):
-    def __init__(self, line_number, leading_spaces, indent_size):
+    def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('Unexpected Indentation',
             line_number=line_number,
             leading_spaces=leading_spaces,
             indent_size=indent_size)
+        self.fixed_code = fixed_code
 
 class UnsupportedFloatException(HedyException):
     def __init__(self, value):
