@@ -1858,6 +1858,41 @@ adventures:
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it?
                 start_code: ""
+            16:
+                story_text: |
+                    ## Haunted House Game
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code!
+
+                    ## Example Hedy Code
+                    ```
+                    numbers is [1, 2, 3]
+                    i is numbers[random]
+                    hint is ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters is ['zombie', 'witch', 'vampire']
+                    badfate is ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    goodfate is ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons is ['ham', 'lighter', 'garlic']
+                    print 'Youre standing in front of an old mension'
+                    print 'Something is not right here'
+                    print 'You hear ' hint[i]
+                    print 'Youre going to explore it'
+                    print 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
+                    yourweapon is ask 'What do you bring with you?'
+                    print 'With your ' yourweapon ' you enter the living room'
+                    print 'There you find a ' monsters[i]
+                    neededweapon is weapons[i]
+                    if yourweapon is neededweapon
+                        print 'You use your ' yourweapon
+                        print goodfate[i]
+                        print 'YOU WIN!'
+                    else
+                        print 'You have chosen the wrong weapon...'
+                        print badfate[i]
+                        print 'GAME OVER'
+                    ```
+                start_code: ""
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!

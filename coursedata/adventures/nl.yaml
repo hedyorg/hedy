@@ -1884,6 +1884,41 @@ adventures:
 
 
                 start_code: "print Ontsnap uit het spookhuis!"
+            16:
+                story_text: |
+                    ## Haunted House Game
+                    Deze spookhuisgame gebruikt de connectie tussen de verschillende lijstjes, die je in dit level kunt gebruiken.
+                    Bijvoorbeeld: alle eigenschappen die bij de zombie horen staan als eerste in alle lijstjes, de heks als tweede en de vampier derde.
+                    Kijk maar naar de code.
+
+                    ## Example Hedy Code
+                    ```
+                    getallen is [1, 2, 3]
+                    i is getallen[random]
+                    hint is ['gegrom', 'kakelende lach', 'vleermuis gefladder']
+                    monsters is ['zombie', 'heks', 'vampier']
+                    noodlot is ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
+                    goedlot is ['Je gooit de ham naar de zombie die er lekker aan begint te knagen.', 'Je zet de gordijnen in de fik. De heks vlucht, bang voor het vuur', 'De vampier haat knoflook en vlucht weg']
+                    wapens is ['ham', 'aansteker', 'knoflook']
+                    print 'Je staat bij een oude verlaten villa'
+                    print 'Iets is hier niet pluis...'
+                    print 'Je hoort ' hint[i]
+                    print 'Je gaat op ontdekking'
+                    print 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
+                    jouwwapen is ask 'Wat neem je mee?'
+                    print 'Met je ' jouwwapen ' loop je door naar de woonkamer'
+                    print 'Daar zie je een ' monsters[i]
+                    benodigdewapen is wapens[i]
+                    if jouwwapen is benodigdewapen
+                        print 'Je gebruikt je ' jouwwapen
+                        print goedlot[i]
+                        print 'Jij wint!'
+                    else
+                        print 'Je hebt helaas het verkeerde wapen'
+                        print noodlot[i]
+                        print 'GAME OVER'
+                    ```
+                start_code: ""
     piggybank:
         name: Spaarvarken
         description: Tel je zakgeld!
