@@ -80,18 +80,21 @@ class HedyTester(unittest.TestCase):
   def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None):
     if level is None: # no level set (from the multi-tester)? grap current level from class
       level = self.level
-    if extra_check_function is None: # most programs have no turtle so make that the default
-      extra_check_function = self.is_not_turtle()
     if exception is not None:
       with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level)
+      if extra_check_function is not None:
+        self.assertTrue(extra_check_function(context))
+
+    if extra_check_function is None: # most programs have no turtle so make that the default
+      extra_check_function = self.is_not_turtle()
+
     if expected is not None:
       result = hedy.transpile(code, level)
       self.assertEqual(expected, result.code)
       self.assertTrue(self.validate_Python_code(result))
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))
-      if extra_check_function is not None:
         self.assertTrue(extra_check_function(result))
 
   @staticmethod

@@ -1762,19 +1762,22 @@ def preprocess_blocks(code, level):
             if (leading_spaces % indent_size) != 0:
                 # there is inconsistent indentation, not sure if that is too much or too little!
                 if leading_spaces < current_number_of_indents * indent_size:
+                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
                     raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size)
+                                                                 indent_size=indent_size, fixed_code=fixed_code)
                 else:
+                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
                     raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size)
+                                                                 indent_size=indent_size, fixed_code=fixed_code)
 
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=indent_size)
+                                                         indent_size=indent_size, fixed_code=fixed_code)
 
         if needs_indentation(line):
             next_line_needs_indentation = True
@@ -1782,8 +1785,9 @@ def preprocess_blocks(code, level):
             next_line_needs_indentation = False
 
         if current_number_of_indents - previous_number_of_indents > 1:
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                            indent_size=indent_size)
+                                            indent_size=indent_size, fixed_code=fixed_code)
 
 
 
