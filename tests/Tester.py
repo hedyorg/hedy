@@ -85,6 +85,9 @@ class HedyTester(unittest.TestCase):
     if exception is not None:
       with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level)
+      if extra_check_function is not None:
+        self.assertTrue(extra_check_function(context))
+
     if expected is not None:
       result = hedy.transpile(code, level)
       self.assertEqual(expected, result.code)
