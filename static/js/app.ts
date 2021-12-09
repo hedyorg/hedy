@@ -244,10 +244,10 @@ export function runit(level: string, lang: string, cb: () => void) {
       if (response.Code){
         if ( newly_learned_subjects(level, code) ) {
           console.log("success!");
-          var allsuccessmessages = ErrorMessages['Transpile_success'];
+          let allsuccessmessages: string = ErrorMessages['Transpile_success'];
+          var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
           if ( typeof allsuccessmessages === 'object' ) { 
             // If there is a list of succes messages
-            var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length); 
             success.show(allsuccessmessages[randomnum]); 
           } 
           else { 
