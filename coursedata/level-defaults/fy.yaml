@@ -94,7 +94,7 @@
 4:
     start_code: "print 'oant moarn'"
     intro_text: |
-        Yn level 3 binne `ask` en `print` feroare.
+        Yn level 4 binne `ask` en `print` feroare.
 
         Tekst dytst letterlik printe wolst, moatst no tusken oanhellingstekens sette.
 
@@ -127,9 +127,9 @@
         namme is ask 'Wat is dyn namme?'
         if namme is Hedy print 'leuk' else print 'minder leuk!'
     intro_text: |
-        `ask` en `print` wurkje noch lykas yn level 3.
+        `ask` en `print` wurkje noch lykas yn level 4.
 
-        Yn level 4 is der wat nijs, de `if`! If is Ingelsk foar 'as'. Mei de `if` kinst in kar (keus) meitsje tusken twa ferskillende opsjes.
+        Yn level 5 is der wat nijs, de `if`! If is Ingelsk foar 'as'. Mei de `if` kinst in kar (keus) meitsje tusken twa ferskillende opsjes.
 
         ## Foarbyld Hedy koade
         ```
@@ -149,7 +149,7 @@
 
         ## Opjeften wurde dreger
 
-        Ek yn level 4 wurde de opjeften yn de tabkes stadichoan wat dreger. Doch se dus fan links nei rjochts.
+        Ek yn level 5 wurde de opjeften yn de tabkes stadichoan wat dreger. Doch se dus fan links nei rjochts.
 
     commands:
     -   name: "print"
@@ -177,7 +177,7 @@
 6:
     start_code: "print '5 kear 5 is ' 5 * 5"
     intro_text: |
-        `ask`, `print` en `if` wurkje noch lykas yn level 4.
+        `ask`, `print` en `if` wurkje noch lykas yn level 5.
         Mar yn Level 5 is der wat nijs, kinst no ek rekkenje.
 
         De plus is maklik, dy skriuwst as by rekkenjen: `5 + 5` bygelyks. De min giet krekt sa, dat is `5 - 5`.
@@ -211,8 +211,8 @@
 7:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
     intro_text: |
-        `ask`, `print` en `if` wurkje noch lykas yn level 4 en 5.
-        Mar yn Level 6 is er eat nijs: de `repeat`.
+        `ask`, `print` en `if` wurkje noch lykas yn level 5 en 6.
+        Mar yn Level 7 is er eat nijs: de `repeat`.
         Met `repeat` kinst koade in tal kear werhelje.
 
         ## Foarbyld Hedy koade
@@ -521,45 +521,6 @@
 #                print('Dat is goed!')
 #            else:
 #                print('Spitich leave, dat is fout!')
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Wie niet weg is is gezien'
-#    intro_text: |-
-#        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
-#        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
-#    commands:
-#    -   name: "for met :"
-#        explanation: "By `for` moatst no in `:` efteroan sette!"
-#        example: "for i in range 1 to 10:"
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Wie niet weg is is gezien'
-#    -   name: "if met :"
-#        explanation: "We moatte itselde dwaan mei al ús `if`"
-#        example: "if kleur is grien:"
-#        demo_code: |-
-#            kleur is grien
-#            if kleur is grien:
-#                print 'De kleur is grien'
-#            else:
-#                print 'De kleur is net grien'
-#    -   name: "(Optioneel) elif"
-#        explanation: |-
-#            Meist ek in nij kommando brûke: `elif`.
-#            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-#            en als dy net wier is dan giest nei de `else`.
-#        example: "elif a is 5:"
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a is 1'
-#            elif a is 2:
-#                print 'a is 2'
-#            else:
-#                print 'a is net 1 of 2'
 14:
     start_code: |-
         leeftyd is ask 'Hoe âld bisto?'
@@ -637,3 +598,42 @@
             fruit is ['apel', 'banaan', 'kjers']
             randomfruit is fruit[random]
             print randomfruit 
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Wie niet weg is is gezien'
+    intro_text: |-
+        No feroarje wy noch in lyts stikje dat te dwaan hat mei it ynspringjen.
+        Eltse kear dat wy ynspringe moatte wy in ':' der efter sette.
+    commands:
+    -   name: "for met :"
+        explanation: "By `for` moatst no in `:` efteroan sette!"
+        example: "for i in range 1 to 10:"
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Wie niet weg is is gezien'
+    -   name: "if met :"
+        explanation: "We moatte itselde dwaan mei al ús `if`"
+        example: "if kleur is grien:"
+        demo_code: |-
+            kleur is ask 'Wat is dyn favorite kleur?'
+            if kleur is grien:
+                print 'De kleur is grien'
+            else:
+                print 'De kleur is net grien'
+    -   name: "(Optioneel) elif"
+        explanation: |-
+            Meist ek in nij kommando brûke: `elif`.
+            `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
+            en als dy net wier is dan giest nei de `else`.
+        example: "elif a is 5:"
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a is 1'
+            elif a is 2:
+                print 'a is 2'
+            else:
+                print 'a is net 1 of 2'

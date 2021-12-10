@@ -86,3 +86,32 @@ previous level. *Addition* files can add new grammar rules or override existing 
 To get the grammar of a concrete level, Hedy takes the grammar of level 1 and merges consecutively all the changes
 specified in the *Addition* files until the required level is reached. The final merged grammars for all levels
 are generated in the `/grammars-Total` folder.
+
+### Type System
+
+Hedy has a rudimentary type system created to provide better error messages to end users. The
+type system performs type inferring, type validation and lookup table enrichment before transpilation happens.
+Note that if in the future the transpiler still does not require any of the lookup table enrichments done by the type
+system, type validation and transpiling can run in parallel.
+
+The type system requires as input a lookup table containing the names of all variable definitions, which it later
+enriches with their inferred types. The supported types are `string`, `integer`, `float`, `list`, `boolean`, `any` and
+`none`. The type `any` is used when types cannot be inferred and is ignored in all type validations. The lookup table 
+is also used by the transpiler to differentiate literals from expressions, e.g. the literal 'text' vs a variable called
+'text'. Because of that the lookup table does not contain only variable definitions, but also all expressions that need 
+to be escaped, e.g. variable access such as `animals[0]`.
+
+The lookup table is created and enriched in two separate steps. The first traversal of the abstract syntax tree puts in
+the lookup table the entries required by the transpiler along with a reference to the sub-tree needed to infer their 
+type. For example, the line `a is 1` will add the following entry `{name: 'a', tree: {data='integer', children:['1']}}`
+The second traversal of the abstract syntax tree is performed to infer the types of expressions, store the inferred 
+types of variables in the lookup table, and perform type validation. If during the second step the type system 
+encounters a variable with type that has not been inferred yet, it will use the tree stored in the lookup entry to infer
+its type. Note that there are valid scenarios in which the lookup entries will be accessed before their type is inferred. 
+This is the case with for loops:
+
+    for i in 1 to 10
+        print i
+
+In the above case, `print i` is visited before the definition of i in the for loop. To mitigate the issue, the lookup
+entry tree is used to infer the type of `i`. There is a guard against cyclic definitions, e.g. `b is b + 1`. 

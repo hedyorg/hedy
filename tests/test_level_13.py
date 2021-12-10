@@ -13,7 +13,7 @@ class TestsLevel13(HedyTester):
       if naam is 'Felienne' and leeftijd is 37
           print 'hallo jij!'""")
     expected = textwrap.dedent("""\
-      naam = input('hoe heet jij?')
+      naam = input(f'hoe heet jij?')
       try:
         naam = int(naam)
       except ValueError:
@@ -21,7 +21,7 @@ class TestsLevel13(HedyTester):
           naam = float(naam)
         except ValueError:
           pass
-      leeftijd = input('hoe oud ben jij?')
+      leeftijd = input(f'hoe oud ben jij?')
       try:
         leeftijd = int(leeftijd)
       except ValueError:
@@ -33,10 +33,9 @@ class TestsLevel13(HedyTester):
         print(f'hallo jij!')""")
 
     self.multi_level_tester(
+      max_level=16,
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   def test_or(self):
@@ -49,9 +48,8 @@ class TestsLevel13(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      max_level=16,
+      expected=expected
     )
 
 

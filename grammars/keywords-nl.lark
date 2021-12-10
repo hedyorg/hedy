@@ -1,45 +1,28 @@
-//symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
-
-_PRINT : "drukaf"
-_ASK : "vraag"
-_ECHO : "herhaal"
-_FORWARD : "vooruit"
-_TURN: "draai"
-
-//level 2
+_PRINT: "print"
+_ASK: "vraag" | "ask"
+_ECHO: "echo"
+_FORWARD: "vooruit" | "forward"
+_TURN: "draai" | "turn"
 _IS: "is"
-_AT: "opplek"
-random : "willekeurig" //random needs to appear in the tree for further processing so does not start with _ or is uppercase
-_SLEEP: "slaap"
-
-//level 4
+_SLEEP: "slaap" | "sleep"
+_ADD_LIST: "voeg" | "add"
+_TO_LIST: "toe aan" | "to"
+_REMOVE: "verwijder" | "remove"
+_FROM: "uit" | "from"
+_AT: "op" | "at"
+random: "willekeurig" | "random"
 _IN: "in"
-_IF: "als"
-_ELSE: "anders"
-_AND: "en"
-
-//level 5
-_REPEAT: "herhaal"
-_TIMES: "keer"
-
-//level 8
-_FOR: "voor"
-_RANGE: "bereik"
-_TO: "tot"
-_STEP: "stap"
-
-//level 9
-_ELIF: "anders"
-
-//level 11
-_INPUT: "invoer"
-
-//level 14
-_OR: "of"
-
-//level 17
-_WHILE: "zolang"
-
-//level 19
-_LENGTH: "lengte"
-
+_IF: "als" | "if"
+_ELSE: "anders" | "else"
+_AND: "en" | "and"
+_REPEAT: "herhaal" | "repeat"
+_TIMES: "keer" | "times"
+_FOR: "voor" | "for"
+_RANGE: "bereik" | "range"
+_TO: "tot" | "to"
+_STEP: "stap" | "step"
+_ELIF: "alsanders" | "elif"
+_INPUT: "invoer" | "input"
+_OR: "of" | "or"
+_WHILE: "zolang" | "while"
+_LENGTH: "lengte" | "length"

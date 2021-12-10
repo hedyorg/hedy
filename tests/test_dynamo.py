@@ -1,5 +1,6 @@
 from website import dynamo
 import unittest
+from unittest import mock
 import os
 import contextlib
 
@@ -59,8 +60,8 @@ class TestDynamoAbstraction(unittest.TestCase):
       self.assertEqual(final['values'], set(['a', 'b', 'c']))
 
 
-class TestDynamoWithSortKeys(unittest.TestCase):
-  """Test that the operations work on a table with a sort key."""
+class TestSortKeysInMemory(unittest.TestCase):
+  """Test that the operations work on an in-memory table with a sort key."""
   def setUp(self):
     self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', partition_key='id', sort_key='sort')
 
@@ -95,6 +96,42 @@ class TestDynamoWithSortKeys(unittest.TestCase):
 
     ret = self.table.get(dict(id='key', sort='s'))
     self.assertEqual(ret, dict(id='key', sort='s', x='x', y='y'))
+
+  def test_between_query(self):
+    self.table.create({ 'id': 'key', 'sort': 1, 'x': 'x' })
+    self.table.create({ 'id': 'key', 'sort': 2, 'x': 'y' })
+    self.table.create({ 'id': 'key', 'sort': 3, 'x': 'z' })
+
+    ret = self.table.get_many({
+      'id': 'key',
+      'sort': dynamo.Between(2, 5),
+    })
+    self.assertEqual(ret, [
+      { 'id': 'key', 'sort': 2, 'x': 'y' },
+      { 'id': 'key', 'sort': 3, 'x': 'z' },
+    ])
+
+
+class TestSortKeysAgainstAws(unittest.TestCase):
+  """Test that the operations send out appropriate Dynamo requests."""
+  def setUp(self):
+    self.db = mock.Mock()
+    self.table = dynamo.Table(dynamo.AwsDynamoStorage(self.db, ''), 'table', partition_key='id', sort_key='sort')
+
+    self.db.query.return_value = { 'Items': [] }
+
+  def test_between_query(self):
+    self.table.get_many({
+      'id': 'key',
+      'sort': dynamo.Between(2, 5),
+    })
+    self.db.query.assert_called_with(
+      KeyConditionExpression='#id = :id AND #sort BETWEEN :sort_min AND :sort_max',
+      ExpressionAttributeValues={':id': {'S': 'key'}, ':sort_min': {'N': '2'}, ':sort_max': {'N': '5'}},
+      ExpressionAttributeNames={'#id': 'id', '#sort': 'sort'},
+      TableName=mock.ANY,
+      ScanIndexForward=mock.ANY)
+
 
 def try_to_delete(filename):
   if os.path.exists(filename):

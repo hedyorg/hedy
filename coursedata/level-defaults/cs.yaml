@@ -67,7 +67,7 @@
     start_code: print 'Ahoj světe!'
     intro_text: |4
 
-        V úrovni 3 se mění `ask` a `print`.
+        V úrovni 4 se mění `ask` a `print`.
 
         Text, který chceš vytisknout, teď musíš dát do uvozovek.
 
@@ -97,9 +97,9 @@
         jmeno is ask 'Jak se jmenuješ?'
         if jmeno is Hedy print 'Super!' else print 'Ok, tebe neznám.'
     intro_text: |-
-        `ask` a` print` fungují stále jako na úrovni 3.
+        `ask` a` print` fungují stále jako na úrovni 4.
 
-         V úrovni 4 máme něco nového, je to `if`! Pomocí `if` si můžeš vybrat ze dvou různých možností.
+         V úrovni 5 máme něco nového, je to `if`! Pomocí `if` si můžeš vybrat ze dvou různých možností.
 
          ## Příklad kódu v Hedy
          ```
@@ -129,8 +129,8 @@
 6:
     start_code: print '5 krát 5 je ' 5 * 5
     intro_text: |-
-        `ask`,` print` a `if` stále fungují jako na úrovních 4.
-         V úrovni 5 je ale něco nového, nyní můžeš také počítat!
+        `ask`,` print` a `if` stále fungují jako na úrovních 5.
+         V úrovni 6 je ale něco nového, nyní můžeš také počítat!
 
          Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
 
@@ -161,8 +161,8 @@
 7:
     start_code: repeat 3 times print 'Hedy je zábavná!'
     intro_text: |-
-        `ask`, `print` a `if` fungují stejně jako na úrovni 4 a 6.
-        Úroveň 6 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
+        `ask`, `print` a `if` fungují stejně jako na úrovni 5 a 6.
+        Úroveň 7 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
         ## Příklad kódu v Hedy
         ```
         repeat 3 times print 'Hedy je zábavná!'
@@ -456,37 +456,6 @@
 #                print('Ale ne, špatně!')
 #
 
-#colon:
-#    start_code: |-
-#        for i in range 1 to 10:
-#            print i
-#        print 'Už jdu!'
-#    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
-#    commands:
-#    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
-#        example: 'for i in range 1 to 10:'
-#        demo_code: |-
-#            for i in range 1 to 10:
-#                print i
-#            print 'Už jdu!'
-#    -   explanation: To stejné musíme udělat i u `if`.
-#        example: 'if barva is zelená:'
-#        demo_code: |-
-#            barva is zelená
-#            if barva is zelená:
-#                print 'Barva je zelená.'
-#            else:
-#                print 'Barva není zelená.'
-#    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
-#        example: 'elif a is 5:'
-#        demo_code: |-
-#            a is 2
-#            if a is 1:
-#                print 'a je 1'
-#            elif a is 2:
-#                print 'a je 2'
-#            else:
-#                print 'a není ani 1 ani 2'
 14:
     start_code: |-
         vek is ask 'Kolik je ti let?'
@@ -564,3 +533,34 @@
             ovoce is ['jablko', 'banán', 'třešně']
             nahodneovoce is ovoce[random]
             print nahodneovoce
+17:
+    start_code: |-
+        for i in range 1 to 10:
+            print i
+        print 'Už jdu!'
+    intro_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
+    commands:
+    -   explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
+        example: 'for i in range 1 to 10:'
+        demo_code: |-
+            for i in range 1 to 10:
+                print i
+            print 'Už jdu!'
+    -   explanation: To stejné musíme udělat i u `if`.
+        example: 'if barva is zelená:'
+        demo_code: |-
+            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            if barva is zelená:
+                print 'Barva je zelená.'
+            else:
+                print 'Barva není zelená.'
+    -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+        example: 'elif a is 5:'
+        demo_code: |-
+            a is 2
+            if a is 1:
+                print 'a je 1'
+            elif a is 2:
+                print 'a je 2'
+            else:
+                print 'a není ani 1 ani 2'

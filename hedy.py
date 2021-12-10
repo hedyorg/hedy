@@ -3,7 +3,7 @@ import textwrap
 from lark import Lark
 from lark.exceptions import LarkError, UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, environ
 
 import hedy
 import utils
@@ -12,69 +12,194 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 import exceptions
+import program_repair
+import yaml
+import sys
 
 # Some useful constants
-HEDY_MAX_LEVEL = 16
+HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
 
 # Boolean variables to allow code which is under construction to not be executed
-local_keywords_enabled = False # If this is True, only the keywords in the specified language can be used for now
+local_keywords_enabled = 'pytest' in sys.argv[0] or ('GITHUB_WORKFLOW' in environ and environ['GITHUB_WORKFLOW'] == 'Unit tests') # If this is True, only the keywords in the specified language can be used for now
 
-#dictionary to store transpilers
+# dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
+
+# TODO: in error messages we need to translate the names of the commands to the used language
+class Command:
+    print = 'print'
+    ask = 'ask'
+    echo = 'echo'
+    turn = 'turn'
+    forward = 'forward'
+    add_to_list = 'add to list'
+    remove_from_list = 'remove from list'
+    list_access = 'at random'
+    in_list = 'in list'
+    equality = 'is (equality)'
+    for_loop = 'for'
+    addition = 'addition'
+    subtraction = 'subtraction'
+    multiplication = 'multiplication'
+    division = 'division'
+    smaller = '<'
+    smaller_equal = '<='
+    bigger = '>'
+    bigger_equal = '>='
+    not_equal = '!='
+
+
+class HedyType:
+    any = 'any'
+    none = 'none'
+    string = 'string'
+    integer = 'integer'
+    list = 'list'
+    float = 'float'
+    boolean = 'boolean'
+
+
+# Type promotion rules are used to implicitly convert one type to another, e.g. integer should be auto converted
+# to float in 1 + 1.5. Additionally, before level 12, we want to convert numbers to strings, e.g. in equality checks.
+int_to_float = (HedyType.integer, HedyType.float)
+int_to_string = (HedyType.integer, HedyType.string)
+float_to_string = (HedyType.float, HedyType.string)
+
+
+def promote_types(types, rules):
+    for (from_type, to_type) in rules:
+        if to_type in types:
+            types = [to_type if t == from_type else t for t in types]
+    return types
+
+
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['print', 'ask', 'echo', 'turn', 'forward'] ,
-                      2: ['print', 'ask', 'is', 'turn', 'forward'],
-                      3: ['print', 'ask', 'is', 'turn', 'forward'],
-                      4: ['print', 'ask', 'is', 'if', 'turn', 'forward'],
-                      5: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      6: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      7: ['print', 'ask', 'is', 'if', 'repeat', 'turn', 'forward'],
-                      8: ['print', 'ask', 'is', 'if', 'for', 'turn', 'forward'],
-                      9: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      10: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      11: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      12: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      13: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      14: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      15: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      16: ['print', 'ask', 'is', 'if', 'for', 'elif', 'turn', 'forward'],
-                      17: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      18: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      19: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      20: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      21: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      22: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward'],
-                      23: ['print', 'ask', 'is', 'if', 'for', 'elif', 'while', 'turn', 'forward']
+                      2: ['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
+                      3: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'remove'],
+                      4: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove'],
+                      5: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else'],
+                      6: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else'],
+                      7: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      8: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      9: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat'],
+                      10: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      11: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      12: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      13: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      14: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in'],
+                      15: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
+                      16: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while'],
+                      17: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif'],
+                      18: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      19: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      20: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      21: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      22: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input'],
+                      23: ['print', 'ask', 'is', 'turn', 'forward', 'sleep', 'add_list', 'to_list', 'from', 'at', 'random', 'and', 'remove', 'if', 'else', 'repeat', 'for', 'in', 'while', 'elif', 'input']
                       }
+
+# TODO: these need to be taken from the translated grammar keywords based on the language
+command_turn_literals = ['right', 'left']
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
-    1: {'print': ['string', 'integer'],
-        'ask': ['string'],
-        'turn': ['string', 'integer'],
-        'forward': ['integer']},
-    2: {'at random': ['list']},
-    5: {'sum': ['integer'],
-        'addition': ['integer', 'float']},
-    10: {'for_loop': ['integer']},
-    11: {'sum': ['integer', 'float'],
-         'addition': ['integer', 'float', 'string'],
-         'print': ['string', 'integer', 'float']},
-    12: {'input': ['string']},
-    13: {'print': ['string', 'integer', 'float', 'list']}
-  }
+    Command.print: {
+        1: [HedyType.string, HedyType.integer],
+        12: [HedyType.string, HedyType.integer, HedyType.float],
+        16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
+    },
+    Command.ask: {
+        1: [HedyType.string, HedyType.integer],
+        12: [HedyType.string, HedyType.integer, HedyType.float],
+        16: [HedyType.string, HedyType.integer, HedyType.float, HedyType.list]
+    },
+    Command.turn: {1: command_turn_literals + [HedyType.integer],
+                   2: [HedyType.integer]},
+    Command.forward: {1: [HedyType.integer]},
+    Command.list_access: {1: [HedyType.list]},
+    Command.in_list: {1: [HedyType.list]},
+    Command.add_to_list: {1: [HedyType.list]},
+    Command.remove_from_list: {1: [HedyType.list]},
+    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.float]},
+    Command.addition: {
+        6: [HedyType.integer],
+        12: [HedyType.string, HedyType.integer, HedyType.float]
+    },
+    Command.subtraction: {
+        1: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
+    },
+    Command.multiplication: {
+        1: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
+    },
+    Command.division: {
+        1: [HedyType.integer],
+        12: [HedyType.integer, HedyType.float],
+    },
+    Command.for_loop: {11: [HedyType.integer]},
+    Command.smaller: {14: [HedyType.integer, HedyType.float]},
+    Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
+    Command.bigger: {14: [HedyType.integer, HedyType.float]},
+    Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string]}
+}
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
 # \ also needs to be escaped because it eats the next character
 characters_that_need_escaping = ["\\", "'"]
 
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
+
+
+def get_list_keywords(commands, to_lang):
+    """ Returns a list with the local keywords of the argument 'commands'
+    """
+
+    translation_commands = []
+    dir = path.abspath(path.dirname(__file__))
+    path_keywords = dir + "/coursedata/keywords"
+
+    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
+    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
+
+    with open(en_yaml_filesname_with_path, 'r') as stream:
+        en_yaml_dict = yaml.safe_load(stream)
+
+    try:
+        with open(to_yaml_filesname_with_path, 'r') as stream:
+            to_yaml_dict = yaml.safe_load(stream)
+        for command in commands:
+            try:
+                translation_commands.append(to_yaml_dict[command])
+            except Exception:
+                translation_commands.append(en_yaml_dict[command])
+    except Exception:
+        for command in commands:
+            translation_commands.append(en_yaml_dict[command])
+
+    return translation_commands
+
+
+def get_suggestions_for_language(lang, level):
+    if not local_keywords_enabled:
+        lang = 'en'
+
+    lang_commands = get_list_keywords(commands_per_level[level], lang)
+
+    # if we allow multiple keyword languages:
+    en_commands = get_list_keywords(commands_per_level[level], 'en')
+    en_lang_commands = list(set(en_commands + lang_commands))
+            
+    return en_lang_commands
+
 
 def hash_needed(name):
     # this function is now applied on something str sometimes Assignment
@@ -92,61 +217,51 @@ def hash_needed(name):
     return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
 
 def hash_var(name):
+    name = name.name if type(name) is LookupEntry else name
     if hash_needed(name):
         # hash "illegal" var names
         # being reservered keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
         # prepend with v for when hash starts with a number
-
         hash_object = hashlib.md5(name.encode())
         return "v" + hash_object.hexdigest()
     else:
         return name
 
-def closest_command(invalid_command, known_commands):
-    # First search for 100% match of known commands
-    #
-    #  closest_command() searches for known commands in an invalid command.
-    #
-    #  It will return the known command which is closest positioned at the beginning.
-    #  It will return '' if the invalid command does not contain any known command.
-    #
-    min_position = len(invalid_command)
-    min_command = ''
-    for known_command in known_commands:
-        position = invalid_command.find(known_command)
-        if position != -1 and position < min_position:
-            min_position = position
-            min_command = known_command
+def closest_command(invalid_command, known_commands, threshold=2):
+    # closest_command() searches for a similar command (distance smaller than threshold)
+    # TODO: make the result value be tuple instead of a ugly None & string mix
+    # returns None if the invalid command does not contain any known command.
+    # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
 
-    # If not found, search for partial match of know commands
-    if min_command == '':
-        min_command = closest_command_with_min_distance(invalid_command, known_commands)
+    min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
 
     # Check if we are not returning the found command
     # In that case we have no suggestion
     # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
 
     if min_command == invalid_command:
-        return None
-    return style_closest_command(min_command)
+        return 'keyword'
+    return min_command
 
 
 def style_closest_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
-def closest_command_with_min_distance(command, commands):
-    #simple string distance, could be more sophisticated MACHINE LEARNING!
-    min = 1000
-    min_command = ''
-    for c in commands:
-        min_c = minimum_distance(c, command)
-        if min_c < min:
-            min = min_c
-            min_command = c
-    return min_command
+def closest_command_with_min_distance(invalid_command, commands, threshold):
+    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
 
-def minimum_distance(s1, s2):
+    minimum_distance = 1000
+    closest_command = None
+    for command in commands:
+        minimum_distance_for_command = calculate_minimum_distance(command, invalid_command)
+        if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
+            minimum_distance = minimum_distance_for_command
+            closest_command = command
+
+    return closest_command
+
+def calculate_minimum_distance(s1, s2):
     """Return string distance between 2 strings."""
     if len(s1) > len(s2):
         s1, s2 = s2, s1
@@ -168,6 +283,7 @@ class InvalidInfo:
     command: str = ''
     arguments: list = field(default_factory=list)
     line: int = 0
+    column: int = 0
 
 
 # used in to construct lookup table entries and infer their type
@@ -177,6 +293,7 @@ class LookupEntry:
     tree: Tree
     skip_hashing: bool
     type_: str = None
+    currently_inferring: bool = False  # used to detect cyclic type inference
 
 
 class TypedTree(Tree):
@@ -257,7 +374,7 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(name, tree, True)
 
     def list_access_var(self, tree):
-        self.add_to_lookup(tree.children[0].children[0], tree, True)
+        self.add_to_lookup(tree.children[0].children[0], tree)
 
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, True)
@@ -277,167 +394,263 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree)
 
     def add_to_lookup(self, name, tree, skip_hashing=False):
-        self.lookup.append(LookupEntry(name, tree, skip_hashing))
+        entry = LookupEntry(name, tree, skip_hashing)
+        hashed_name = hash_var(entry)
+        entry.name = hashed_name
+        self.lookup.append(entry)
 
 
-# The transformer infers the type of the partial trees collected in the lookup entries. The type 'any' is used when the
-# type cannot be inferred, and the type 'None' is used when the node does not have a return type, e.g. a command.
-# The transformer is meant to be non-intrusive and avoid false positives. However, it will raise an error if the type
-# of a lookup entry is inferred and it is obviously wrong, e.g:
-# a is 'test'
-# b is a + 1
+# The transformer traverses the whole AST and infers the type of each node. It alters the lookup table entries with
+# their inferred type. It also performs type validation for commands, e.g. 'text' + 1 results in error.
 @v_args(tree=True)
-class TypeInferrer(Transformer):
+class TypeValidator(Transformer):
     def __init__(self, lookup, level):
         super().__init__()
         self.lookup = lookup
         self.level = level
 
+    def print(self, tree):
+        self.validate_args_type_allowed(tree.children, Command.print)
+        return self.to_typed_tree(tree)
+
     def ask(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        if self.level > 1:
+            self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        self.validate_args_type_allowed(tree.children[1:], Command.ask)
+        return self.to_typed_tree(tree, HedyType.any)
 
     def input(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.validate_args_type_allowed(tree.children[1:], Command.ask)
+        return self.to_typed_tree(tree, HedyType.any)
+
+    def forward(self, tree):
+        if tree.children:
+            self.validate_args_type_allowed(tree.children, Command.forward)
+        return self.to_typed_tree(tree)
+
+    def turn(self, tree):
+        if tree.children:
+            name = tree.children[0].children[0]
+            if self.level > 1 or name not in command_turn_literals:
+                self.validate_args_type_allowed(tree.children, Command.turn)
+        return self.to_typed_tree(tree)
+
+    def assign(self, tree):
+        type_ = self.get_type(tree.children[1])
+        self.save_type_to_lookup(tree.children[0].children[0], type_)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def assign_list(self, tree):
-        return self.to_typed_tree(tree, 'list')
+        self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
+        return self.to_typed_tree(tree, HedyType.list)
 
     # TODO: list_access, list_access_var and repeat_list types can be inferred but for now use 'any'
     def list_access(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.validate_args_type_allowed(tree.children[0], Command.list_access)
+
+        list_name = hash_var(tree.children[0].children[0])
+        if tree.children[1] == 'random':
+            name = f'random.choice({list_name})'
+        else:
+            # We want list access to be 1-based instead of 0-based, hence the -1
+            name = f'{list_name}[{tree.children[1]}-1]'
+        self.save_type_to_lookup(name, HedyType.any)
+
+        return self.to_typed_tree(tree, HedyType.any)
 
     def list_access_var(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        return self.to_typed_tree(tree)
+
+    def add(self, tree):
+        self.validate_args_type_allowed(tree.children[1], Command.add_to_list)
+        return self.to_typed_tree(tree)
+
+    def remove(self, tree):
+        self.validate_args_type_allowed(tree.children[1], Command.remove_from_list)
+        return self.to_typed_tree(tree)
+
+    def in_list_check(self, tree):
+        self.validate_args_type_allowed(tree.children[1], Command.in_list)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def equality_check(self, tree):
+        rules = [int_to_float, int_to_string, float_to_string] if self.level < 12 else [int_to_float]
+        self.validate_binary_command_args_type(Command.equality, tree, rules)
+        return self.to_typed_tree(tree, HedyType.boolean)
 
     def repeat_list(self, tree):
-        return self.to_typed_tree(tree, 'any')
+        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def for_loop(self, tree):
-        command = 'for_loop'
+        command = Command.for_loop
         allowed_types = get_allowed_types(command, self.level)
 
         start_type = self.check_type_allowed(command, allowed_types, tree.children[1])
         self.check_type_allowed(command, allowed_types, tree.children[2])
 
-        return self.to_typed_tree(tree, start_type)
+        iterator = str(tree.children[0])
+        self.save_type_to_lookup(iterator, start_type)
+
+        return self.to_typed_tree(tree, HedyType.none)
 
     def integer(self, tree):
-        return self.to_typed_tree(tree, 'integer')
+        return self.to_typed_tree(tree, HedyType.integer)
 
     def text(self, tree):
-        return self.to_typed_tree(tree, 'string')
+        # under level 12 integers appear as text, so we parse them
+        if self.level < 12:
+            type_ = HedyType.integer if is_int(tree.children[0]) else HedyType.string
+        else:
+            type_ = HedyType.string
+        return self.to_typed_tree(tree, type_)
+
+    def punctuation(self, tree):
+        return self.to_typed_tree(tree, HedyType.string)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree, 'string')
+        return self.to_typed_tree(tree.children[0], HedyType.string)
 
     def var_access(self, tree):
-        return self.to_typed_tree(tree, 'string')
+        return self.to_typed_tree(tree, HedyType.string)
 
     def var(self, tree):
-        type_ = self.get_type(tree)
-        return self.to_typed_tree(tree, type_)
+        return self.to_typed_tree(tree, HedyType.none)
 
     def number(self, tree):
         number = tree.children[0]
         if is_int(number):
-            return self.to_typed_tree(tree, 'integer')
+            return self.to_typed_tree(tree, HedyType.integer)
         if is_float(number):
-            return self.to_typed_tree(tree, 'float')
+            return self.to_typed_tree(tree, HedyType.float)
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
-    def substraction(self, tree):
-        return self.to_sum_typed_tree(tree, 'sum')
+    def subtraction(self, tree):
+        return self.to_sum_typed_tree(tree, Command.subtraction)
 
     def addition(self, tree):
-        return self.to_sum_typed_tree(tree, 'addition')
+        return self.to_sum_typed_tree(tree, Command.addition)
 
     def multiplication(self, tree):
-        return self.to_sum_typed_tree(tree, 'sum')
+        return self.to_sum_typed_tree(tree, Command.multiplication)
 
     def division(self, tree):
-        return self.to_sum_typed_tree(tree, 'sum')
+        return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
-        expr_type = self.get_sum_type(tree, command)
-        return TypedTree(tree.data, tree.children, tree.meta, expr_type)
+        prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, [int_to_float])
+        return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 
-    def get_sum_type(self, tree, command):
+    def smaller(self, tree):
+        return self.to_comparison_tree(Command.smaller, tree)
+
+    def smaller_equal(self, tree):
+        return self.to_comparison_tree(Command.smaller_equal, tree)
+
+    def bigger(self, tree):
+        return self.to_comparison_tree(Command.bigger, tree)
+
+    def bigger_equal(self, tree):
+        return self.to_comparison_tree(Command.bigger_equal, tree)
+
+    def not_equal(self, tree):
+        self.validate_args_type_allowed(tree.children, Command.not_equal)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def to_comparison_tree(self, command, tree):
+        allowed_types = get_allowed_types(command, self.level)
+        self.check_type_allowed(command, allowed_types, tree.children[0])
+        self.check_type_allowed(command, allowed_types, tree.children[1])
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def validate_binary_command_args_type(self, command, tree, type_promotion_rules):
         allowed_types = get_allowed_types(command, self.level)
 
         left_type = self.check_type_allowed(command, allowed_types, tree.children[0])
         right_type = self.check_type_allowed(command, allowed_types, tree.children[1])
 
         if self.ignore_type(left_type) or self.ignore_type(right_type):
-            return 'any'
+            return HedyType.any, HedyType.any
 
-        if (left_type == 'string' or right_type == 'string') and left_type != right_type:
-            # TODO: probably this requires a separate exception
-            raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=right_type, invalid_argument='',
-                                                          allowed_types=allowed_types)
-        if left_type == 'float' or right_type == 'float':
-            return 'float'
+        prom_left_type, prom_right_type = promote_types([left_type, right_type], type_promotion_rules)
 
-        return left_type
+        if prom_left_type != prom_right_type:
+            left_arg = tree.children[0].children[0]
+            right_arg = tree.children[1].children[0]
+            raise hedy.exceptions.InvalidTypeCombinationException(command, left_arg, right_arg, left_type, right_type)
+        return prom_left_type, prom_right_type
 
-    def get_type(self, tree):
-        if type(tree) is TypedTree:
-            # TypedTree with type 'None' and 'string' could be in the lookup
-            if tree.type_ in ['None', 'string']:
-                in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
-                if in_lookup:
-                    return type_in_lookup
-            # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
-            return tree.type_
-        else:
-            name = tree.children[0] if type(tree) is Tree else str(tree)
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(name)
-            if in_lookup:
-                return type_in_lookup
-            # For now default to 'string' type
-            return 'string'
+    def validate_args_type_allowed(self, children, command):
+        allowed_types = get_allowed_types(command, self.level)
+        children = children if type(children) is list else [children]
+        for child in children:
+            self.check_type_allowed(command, allowed_types, child)
 
     def check_type_allowed(self, command, allowed_types, tree):
         arg_type = self.get_type(tree)
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
-            raise_invalid_type_error(allowed_types, command, str(tree), arg_type)
+            variable = tree.children[0]
+            raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
+                                                          invalid_argument=variable, allowed_types=allowed_types)
         return arg_type
 
-    def ignore_type(self, type_):
-        return type_ in ['any', 'None']
+    def get_type(self, tree):
+        # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
+        # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
+        if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
+            if in_lookup:
+                return type_in_lookup
+        # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
+        return tree.type_
 
+    def ignore_type(self, type_):
+        return type_ in [HedyType.any, HedyType.none]
+
+    def save_type_to_lookup(self, name, inferred_type):
+        for entry in self.lookup:
+            if entry.name == hash_var(name) and not entry.type_:
+                entry.type_ = inferred_type
+
+    # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
+    #  be inferred. However, there are valid cases in which the lookup entries will be accessed before their type
+    #  is inferred. This is the case with for loops:
+    #      for i in 1 to 10
+    #          print i
+    #  In the above case, we visit `print i`, before the definition of i in the for cycle. In this case, the tree of
+    #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
+    #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
-        # TODO: we should not just take the first match
-        matches = [entry for entry in self.lookup if entry.name == name]
+        matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
         if matches:
+            # TODO: we should not just take the first match, take into account var reassignments
+            match = matches[0]
+            if not match.type_:
+                if match.currently_inferring:  # there is a cyclic var reference, e.g. b = b + 1
+                    raise exceptions.CyclicVariableDefinitionException(variable=match.name)
+                else:
+                    match.currently_inferring = True
+                    try:
+                        TypeValidator(self.lookup, self.level).transform(match.tree)
+                    except VisitError as ex:
+                        raise ex.orig_exc
+                    match.currently_inferring = False
+
             return True, self.lookup_type_fallback(matches[0].type_)
-        hashed_matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
-        if hashed_matches:
-            return True, self.lookup_type_fallback(hashed_matches[0].type_)
         return False, None
 
     def lookup_type_fallback(self, type_in_lookup):
         # If the entry is in the lookup table but its type has not been evaluated yet, then most probably this is a
         # variable referenced before it is defined. In this case, we rely on python to return an error. For now.
-        return 'any' if type_in_lookup is None else type_in_lookup
+        return HedyType.any if type_in_lookup is None else type_in_lookup
 
-    def to_typed_tree(self, tree, type_='None'):
+    def to_typed_tree(self, tree, type_=HedyType.none):
         return TypedTree(tree.data, tree.children, tree.meta, type_)
 
     def __default__(self, data, children, meta):
-        return TypedTree(data, children, meta, 'None')
-
-
-def raise_invalid_type_error(allowed_types, command, variable, used_invalid_type):
-    # we first try to raise if we expect 1 thing exactly for more precise error messages
-    if len(allowed_types) == 1:
-        # TODO: the exception could be reused not only for lists
-        if allowed_types[0] == 'list':
-            raise exceptions.RequiredArgumentTypeException(command=command, variable=variable,
-                                                           required_type=allowed_types[0])
-
-    raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=used_invalid_type,
-                                                  invalid_argument='', allowed_types=allowed_types)
+        return TypedTree(data, children, meta, HedyType.none)
 
 
 def flatten_list_of_lists_to_list(args):
@@ -459,6 +672,8 @@ def are_all_arguments_true(args):
 # this class contains code shared between IsValid and IsComplete, which are quite similar
 # because both filter out some types of 'wrong' nodes
 # TODO: this could also use a default lark rule like AllAssignmentCommands does now
+
+# TODO: maybe this could use meta (with v_args) instead of both inheritors?
 class Filter(Transformer):
     def __default__(self, args, children, meta):
         return are_all_arguments_true(children)
@@ -468,11 +683,9 @@ class Filter(Transformer):
         if all(bool_arguments):
             return [True] #all complete
         else:
-            command_num = 1
             for a in args:
                 if not a[0]:
-                    return False, a[1], command_num
-                command_num += 1
+                    return False, a[1]
 
     #leafs are treated differently, they are True + their arguments flattened
     def var(self, args):
@@ -516,32 +729,34 @@ class UsesTurtle(Transformer):
 
 
 
-
+@v_args(meta=True)
 class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
-    def program(self, args):
+    def program(self, args, meta):
         if len(args) == 0:
-            return False, InvalidInfo("empty program"), 1
+            return False, InvalidInfo("empty program")
         return super().program(args)
 
-    def invalid_space(self, args):
+    def invalid_space(self, args, meta):
         # return space to indicate that line starts in a space
-        return False, InvalidInfo(" ")
+        return False, InvalidInfo(" ", line=meta.line, column=meta.column)
 
-    def print_nq(self, args):
+    def print_nq(self, args, meta):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes")
+        return False, InvalidInfo("print without quotes", line=meta.line, column=meta.column)
 
-    def invalid(self, args):
+    def invalid(self, args, meta):
         # TODO: this will not work for misspelling 'at', needs to be improved!
         # TODO: add more information to the InvalidInfo
-        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]])
+
+
+        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
         return False, error
 
-    def unsupported_number(self, args):
-        error = InvalidInfo('unsupported number', arguments=[str(args[0])])
+    def unsupported_number(self, args, meta):
+        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error
 
     #other rules are inherited from Filter
@@ -556,29 +771,31 @@ def valid_echo(ast):
     #otherwise, both have to be in the list and echo shold come after
     return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index('echo') > command_names.index('ask')
 
+@v_args(meta=True)
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
-    # print, ask an echo can miss arguments and then are not complete
+    # print, ask and echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
 
-    def ask(self, args):
+
+    def ask(self, args, meta):
         # in level 1 ask without arguments means args == []
         # in level 2 and up, ask without arguments is a list of 1, namely the var name
-        incomplete = (args == [] and self.level==1) or (len(args) == 1 and self.level >= 2)
-        return not incomplete, 'ask'
-    def print(self, args):
-        return args != [], 'print'
-    def input(self, args):
-        return args != [], 'input'
-    def length(self, args):
-        return args != [], 'len'
-    def print_nq(self, args):
-        return args != [], 'print level 2'
-    def echo(self, args):
+        incomplete = (args == [] and self.level == 1) or (len(args) == 1 and self.level >= 2)
+        return not incomplete, ('ask', meta.line)
+    def print(self, args, meta):
+        return args != [], ('print', meta.line)
+    def input(self, args, meta):
+        return args != [], ('input', meta.line)
+    def length(self, args, meta):
+        return args != [], ('len', meta.line)
+    def print_nq(self, args, meta):
+        return args != [], ('print level 2', meta.line)
+    def echo(self, args, meta):
         #echo may miss an argument
-        return True, 'echo'
+        return True, ('echo', meta.line)
 
     #other rules are inherited from Filter
 
@@ -591,8 +808,7 @@ def process_characters_needing_escape(value):
 
 def get_allowed_types(command, level):
     # get only the allowed types of the command for all levels before the requested level
-    allowed = [values[command] for key, values in commands_and_types_per_level.items()
-               if command in values and key <= level]
+    allowed = [values for key, values in commands_and_types_per_level[command].items() if key <= level]
     # use the allowed types of the highest level available
     return allowed[-1] if allowed else []
 
@@ -627,11 +843,19 @@ class ConvertToPython_1(Transformer):
         return ''.join([str(c) for c in args])
     def integer(self, args):
         return str(args[0])
+
+    def number(self, args):
+        return str(args[0])
+
     def print(self, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-
         return "print('" + argument + "')"
+
+    def ask(self, args):
+        argument = process_characters_needing_escape(args[0])
+        return "answer = input('" + argument + "')"
+
     def echo(self, args):
         if len(args) == 0:
             return "print(answer)" #no arguments, just print answer
@@ -642,17 +866,11 @@ class ConvertToPython_1(Transformer):
     def comment(self, args):
         return f"#{''.join(args)}"
 
-    def ask(self, args):
-        argument = process_characters_needing_escape(args[0])
-        return "answer = input('" + argument + "')"
-
     def forward(self, args):
         if len(args) == 0:
             return self.make_forward(50)
 
-        self.check_args_type_allowed(args, 'forward', self.level)
-
-        parameter = int(get_value(args[0]))
+        parameter = int(args[0])
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
@@ -660,78 +878,34 @@ class ConvertToPython_1(Transformer):
 
     def turn(self, args):
         if len(args) == 0:
-            return "t.right(90)" #no arguments works, and means a right turn
+            return "t.right(90)"  # no arguments defaults to a right turn
 
-        argument = args[0]
-        if is_variable(argument, self.lookup):        #is the argument a variable? if so, use that
-            return f"t.right({argument})"
-        elif argument.isnumeric():         #numbers can also be passed through
-            return f"t.right({argument})"
-        elif argument == 'left':
+        arg = args[0]
+        if is_variable(arg, self.lookup) or arg.isnumeric():
+            return f"t.right({arg})"
+        elif arg == 'left':
             return "t.left(90)"
-        elif argument == 'right':
+        elif arg == 'right':
             return "t.right(90)"
         else:
-            raise exceptions.InvalidArgumentTypeException(command='turn', invalid_type='',
-                                                            allowed_types=['right', 'left', 'number'],
-                                                            invalid_argument=argument)
+            # the TypeValidator should protect against reaching this line:
+            raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Command.turn, self.level))
 
-    def check_args_type_allowed(self, args, command, level):
-        allowed_types = get_allowed_types(command, level)
-        for arg in args:
-            assignment = self.find_in_lookup(arg)
-            if assignment:
-                if assignment.type_ not in ['any'] and assignment.type_ not in allowed_types:
-                    raise_invalid_type_error(allowed_types, command, assignment.name, assignment.type_)
-            else:
-                type_ = self.get_arg_type(arg)
-                if type_ not in ['any'] and type_ not in allowed_types:
-                    raise exceptions.InvalidArgumentTypeException(command=command, invalid_type='',
-                                                                  allowed_types=allowed_types,
-                                                                  invalid_argument=arg if isinstance(arg, str) else args[0].children[0])
-
-    def get_arg_type(self, arg):
-        # TODO: Improve type inferring logic. For now, fallback to 'any' which means no type checks will be done if
-        #  the arg is a Tree. Note that we do not have access to the TypeInferrer logic (and we cannot use it to
-        #  determine the type since we do not have the full Tree object here). Maybe we can still reuse some logic?
-        if type(arg) is Tree:
-            return 'any'
-        if is_int(arg):
-            return 'integer'
-        if is_float(arg):
-            return 'float'
-        return 'string'
-
-
-    def find_in_lookup(self, variable):
-        lookup_vars = [a for a in self.lookup if a.name == variable]
-        # this now grabs the last occurrence, once we have slicing we want to be more precise!
-        return lookup_vars[-1] if lookup_vars else None
 
 # todo: could be moved into the transpiler class
 def is_variable(name, lookup):
     all_names = [a.name for a in lookup]
-    return name in all_names
-
-
-def get_value(arg):
-    # TODO: this func compensates for the mixed approach of handling leaf nodes, e.g. text => string and
-    #  integer => Tree('integer', ['5']). Ideally, they will be handled in the same manner
-    if isinstance(arg, Tree):
-        if type(arg.children) is list:
-            return arg.children[0]
-        return arg.children
-    return arg
+    return hash_var(name) in all_names
 
 def process_variable(arg, lookup):
     #processes a variable by hashing and escaping when needed
-    name = get_value(arg)
-    if is_variable(name, lookup):
-        return hash_var(name)
-    elif is_quoted(name): #sometimes kids accidentally quote strings, then we do not want them quoted again
-        return f"{name}"
+    if is_variable(arg, lookup):
+        return hash_var(arg)
+    elif is_quoted(arg): #sometimes kids accidentally quote strings, then we do not want them quoted again
+        return f"{arg}"
     else:
-        return f"'{name}'"
+        return f"'{arg}'"
 
 def process_variable_for_fstring(name, lookup):
     if is_variable(name, lookup):
@@ -749,7 +923,6 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"'{name}'.zfill(100)"
 
 @hedy_transpiler(level=2)
-@hedy_transpiler(level=3)
 class ConvertToPython_2(ConvertToPython_1):
 
     def ask_dep_2(self, args):
@@ -789,9 +962,6 @@ class ConvertToPython_2(ConvertToPython_1):
         name = args[0]
         return hash_var(name)
     def print(self, args):
-        # grab the allowed arguments from the dictionary
-        self.check_args_type_allowed(args, 'print', self.level)
-
         argument_string = ""
         i = 0
 
@@ -811,29 +981,35 @@ class ConvertToPython_2(ConvertToPython_1):
 
         return f"print(f'{argument_string}')"
 
-    def forward(self, args):
-        if len(args) == 0:
-            return self.make_forward(50)
-
-        self.check_args_type_allowed(args, 'forward', self.level)
-
-        # if the parameter is a number, use it as is
-        # otherwise, see if we got a defined variable. if not, give an error
-        try:
-            parameter = int(get_value(args[0]))
-        except:
-            if is_variable(args[0], self.lookup):
-                parameter = args[0]
-            else:
-                raise exceptions.InvalidArgumentTypeException(command='forward', invalid_type='',
-                                                   allowed_types=get_allowed_types('forward', self.level),
-                                                   invalid_argument=args[0])
-        return self.make_forward(parameter)
-
     def ask(self, args):
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
         return f'{var} = input(' + '+'.join(all_parameters) + ")"
+
+    def forward(self, args):
+        if len(args) == 0:
+            return self.make_forward(50)
+
+        if is_int(args[0]):
+            parameter = int(args[0])
+        else:
+            # if not an int, then it is a variable
+            parameter = args[0]
+
+        return self.make_forward(parameter)
+
+    def turn(self, args):
+        if len(args) == 0:
+            return "t.right(90)"
+
+        arg = args[0]
+        if is_variable(arg, self.lookup) or arg.isnumeric():
+            return f"t.right({arg})"
+
+        # the TypeValidator should protect against reaching this line:
+        raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
+                                                      allowed_types=get_allowed_types(Command.turn, self.level))
+
     def assign(self, args):
         parameter = args[0]
         value = args[1]
@@ -841,20 +1017,6 @@ class ConvertToPython_2(ConvertToPython_1):
         value = process_characters_needing_escape(value)
         return parameter + " = '" + value + "'"
 
-    def assign_list(self, args):
-        parameter = args[0]
-        values = ["'" + get_value(a) + "'" for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
-
-    def list_access(self, args):
-        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
-        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-        self.check_args_type_allowed([args[0]], 'at random', self.level)
-
-        if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
-        else:
-            return args[0] + '[' + args[1] + '-1]'
 
     def sleep(self, args):
         if args == []:
@@ -880,10 +1042,37 @@ def make_f_string(args, lookup):
 
     return f"print(f'{argument_string}')"
 
+@hedy_transpiler(level=3)
+class ConvertToPython_3(ConvertToPython_2):
+    def assign_list(self, args):
+        parameter = args[0]
+        values = ["'" + a + "'" for a in args[1:]]
+        return parameter + " = [" + ", ".join(values) + "]"
+    def list_access(self, args):
+        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
+        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
+
+        if args[1] == 'random':
+            return 'random.choice(' + args[0] + ')'
+        else:
+            return args[0] + '[' + args[1] + '-1]'
+    def add(self, args):
+        var = args[0]
+        list = args[1]
+        return f"{list}.append({var})"
+    def remove(self, args):
+        var = args[0]
+        list = args[1]
+        return textwrap.dedent(f"""\
+        try:
+            {list}.remove({var})
+        except:
+           pass""")
+
 
 #TODO: punctuation chars not be needed for level2 and up anymore, could be removed
 @hedy_transpiler(level=4)
-class ConvertToPython_4(ConvertToPython_2):
+class ConvertToPython_4(ConvertToPython_3):
 
     def var_access(self, args):
         name = args[0]
@@ -909,26 +1098,25 @@ class ConvertToPython_4(ConvertToPython_2):
             first_unquoted_var = unquoted_args[0]
             raise exceptions.UndefinedVarException(name=first_unquoted_var)
 
-    def print(self, args):
+    def print_ask_args(self, args):
         args = self.check_print_arguments(args)
-        self.check_args_type_allowed(args, 'print', self.level)
-        argument_string = ''
+        result = ''
         for argument in args:
-            argument = argument.replace("'", '') #no quotes needed in fstring
-            argument_string += process_variable_for_fstring(argument, self.lookup)
+            argument = argument.replace("'", '')  # no quotes needed in fstring
+            result += process_variable_for_fstring(argument, self.lookup)
+        return result
 
+    def print(self, args):
+        argument_string = self.print_ask_args(args)
         return f"print(f'{argument_string}')"
 
+    def ask(self, args):
+        var = args[0]
+        argument_string = self.print_ask_args(args[1:])
+        return f"{var} = input(f'{argument_string}')"
 
     def print_nq(self, args):
         return ConvertToPython_2.print(self, args)
-
-    def ask(self, args):
-        args_new = []
-        var = args[0]
-        remaining_args = args[1:]
-        self.check_args_type_allowed(remaining_args, 'ask', self.level)
-        return f'{var} = input(' + '+'.join(remaining_args) + ")"
 
 def indent(s):
     lines = s.split('\n')
@@ -966,10 +1154,9 @@ else:
 @hedy_transpiler(level=6)
 class ConvertToPython_6(ConvertToPython_5):
 
-    def print(self, args):
+    def print_ask_args(self, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args)
-        self.check_args_type_allowed(args, 'print', self.level)
 
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
@@ -977,11 +1164,10 @@ class ConvertToPython_6(ConvertToPython_5):
             if isinstance(a, Tree):
                 args_new.append("{" + a.children[0] + "}")
             else:
-                a = a.replace("'", "") #no quotes needed in fstring
+                a = a.replace("'", "")  # no quotes needed in fstring
                 args_new.append(process_variable_for_fstring(a, self.lookup))
 
-        arguments = ''.join(args_new)
-        return "print(f'" + arguments + "')"
+        return ''.join(args_new)
 
     def equality_check(self, args):
         arg0 = process_variable(args[0], self.lookup)
@@ -1013,15 +1199,13 @@ class ConvertToPython_6(ConvertToPython_5):
         # for trees we need to grap the inner string
         # for tokens we add int around them
 
-        self.check_args_type_allowed(args, 'sum', self.level)
-
         args = [self.process_token_or_tree(a) for a in args]
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def addition(self, args):
         return self.process_calculation(args, '+')
 
-    def substraction(self, args):
+    def subtraction(self, args):
         return self.process_calculation(args, '-')
 
     def multiplication(self, args):
@@ -1051,7 +1235,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def repeat(self, args):
         all_lines = [indent(x) for x in args[1:]]
-        return "for i in range(int(" + str(get_value(args[0])) + ")):\n" + "\n".join(all_lines)
+        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1089,8 +1273,8 @@ class ConvertToPython_11(ConvertToPython_10):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({get_value(args[1])}) < int({get_value(args[2])}) else -1
-for {args[0]} in range(int({get_value(args[1])}), int({get_value(args[2])}) + {stepvar_name}, {stepvar_name}):
+        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
+for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
@@ -1125,23 +1309,19 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             return f'{argument}'
 
-
     def ask(self, args):
         var = args[0]
-        remaining_args = args[1:]
-        self.check_args_type_allowed(remaining_args, 'ask', self.level)
+        assign = super().ask(args)
 
-        assign = f'{var} = input(' + '+'.join(remaining_args) + ")"
-
-        tryblock = textwrap.dedent(f"""
+        return textwrap.dedent(f"""\
+        {assign}
         try:
           {var} = int({var})
         except ValueError:
           try:
             {var} = float({var})
           except ValueError:
-            pass""") #no number? leave as string
-        return assign + tryblock
+            pass""")  # no number? leave as string
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -1152,22 +1332,6 @@ class ConvertToPython_12(ConvertToPython_11):
         args = [self.process_token_or_tree(a) for a in args]
 
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
-
-    def print(self, args):
-        # TODO: new type checking is needed for string assignment
-        self.check_var_usage(args)
-        self.check_args_type_allowed(args, 'print', self.level)
-
-        args_new = []
-        for a in args:
-            if isinstance(a, Tree):
-                args_new.append("{" + get_value(a) + "}")
-            else:
-                a = a.replace("'", "")  # no quotes needed in fstring
-                args_new.append(process_variable_for_fstring(a, self.lookup))
-
-        arguments = ''.join(args_new)
-        return "print(f'" + arguments + "')"
 
     def text_in_quotes(self, args):
         text = args[0]
@@ -1262,32 +1426,21 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
 
+@hedy_transpiler(level=17)
+class ConvertToPython_17(ConvertToPython_16):
+    def elifs(self, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
 
-# @hedy_transpiler(level=10)
-# @hedy_transpiler(level=11)
-# class ConvertToPython_10_11(ConvertToPython_9):
-#     def elifs(self, args):
-#         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-#         all_lines = [indent(x) for x in args[1:]]
-#         return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
-#
-# @hedy_transpiler(level=12)
-# class ConvertToPython_12(ConvertToPython_10_11):
-#     def input(self, args):
-#         args_new = []
-#         var = args[0]
-#         arguments = args[1:]
-#         self.check_arg_types(arguments, 'input', self.level)
-#         for a in arguments:
-#             if type(a) is Tree:
-#                 args_new.append(f'str({a.children})')
-#             elif "'" not in a:
-#                 args_new.append(f'str({a})')
-#             else:
-#                 args_new.append(a)
-#
-#         return f'{var} = input(' + '+'.join(args_new) + ")"
-#
+@hedy_transpiler(level=18)
+class ConvertToPython_18(ConvertToPython_17):
+    # FH, nov 2021
+    # this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
+
+    def input(self, args):
+        return self.ask(args)
+
 # @hedy_transpiler(level=13)
 # class ConvertToPython_13(ConvertToPython_12):
 #     def print(self, args):
@@ -1488,13 +1641,13 @@ def get_full_grammar_for_level(level):
 
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
-    try: 
-        if not local_keywords_enabled: 
+    try:
+        if not local_keywords_enabled:
             raise FileNotFoundError("Local keywords are not enabled")
         filename = "keywords-" + str(language) + ".lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             grammar_text = file.read()
-    except FileNotFoundError: 
+    except FileNotFoundError:
         filename = "keywords-en.lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             grammar_text = file.read()
@@ -1513,7 +1666,7 @@ def get_parser(level, lang="en"):
     if existing and not utils.is_debug_mode():
         return existing
     grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True) #ambiguity='explicit'
+    ret = Lark(grammar, regex=True, propagate_positions=True) #ambiguity='explicit'
     PARSER_CACHE[key] = ret
     return ret
 
@@ -1522,13 +1675,6 @@ ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
 def transpile(input_string, level, lang="en"):
     transpile_result = transpile_inner(input_string, level, lang)
     return transpile_result
-
-
-
-
-def repair(input_string):
-    #the only repair we can do now is remove leading spaces, more can be added!
-    return '\n'.join([x.lstrip() for x in input_string.split('\n')])
 
 def translate_characters(s):
 # this method is used to make it more clear to kids what is meant in error messages
@@ -1616,19 +1762,22 @@ def preprocess_blocks(code, level):
             if (leading_spaces % indent_size) != 0:
                 # there is inconsistent indentation, not sure if that is too much or too little!
                 if leading_spaces < current_number_of_indents * indent_size:
+                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
                     raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size)
+                                                                 indent_size=indent_size, fixed_code=fixed_code)
                 else:
+                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
                     raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size)
+                                                                 indent_size=indent_size, fixed_code=fixed_code)
 
             current_number_of_indents = leading_spaces // indent_size
             if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=indent_size)
+                                                         indent_size=indent_size, fixed_code=fixed_code)
 
         if needs_indentation(line):
             next_line_needs_indentation = True
@@ -1636,8 +1785,9 @@ def preprocess_blocks(code, level):
             next_line_needs_indentation = False
 
         if current_number_of_indents - previous_number_of_indents > 1:
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                            indent_size=indent_size)
+                                            indent_size=indent_size, fixed_code=fixed_code)
 
 
 
@@ -1701,31 +1851,45 @@ def parse_input(input_string, level, lang):
             character_found = beautify_parse_error(e.char)
             # print(e.args[0])
             # print(location, character_found, characters_expected)
-            raise exceptions.ParseException(level=level, location=location, found=character_found) from e
+            fixed_code = program_repair.remove_unexpected_char(input_string, location[0], location[1])
+            raise exceptions.ParseException(level=level, location=location, found=character_found, fixed_code=fixed_code) from e
         except UnexpectedEOF:
             # this one can't be beautified (for now), so give up :)
             raise e
 
 
 def is_program_valid(program_root, input_string, level, lang):
-    # IsValid returns (True,) or (False, args, line)
-    is_valid = IsValid().transform(program_root)
+    # IsValid returns (True,) or (False, args)
+    instance = IsValid()
+    instance.level = level # could be done in a constructor once we are sure we will go this way
+    is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
-        _, invalid_info, line = is_valid
+        _, invalid_info = is_valid
 
         # Apparently, sometimes 'args' is a string, sometimes it's a list of
         # strings ( are these production rule names?). If it's a list of
         # strings, just take the first string and proceed.
         if isinstance(invalid_info, list):
             invalid_info = invalid_info[0]
+
+        line = invalid_info.line
+        column = invalid_info.column
         if invalid_info.error_type == ' ':
+
             # the error here is a space at the beginning of a line, we can fix that!
-            fixed_code = repair(input_string)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                result = transpile_inner(fixed_code, level, lang)
-            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code,
-                                                   fixed_result=result)
+            fixed_code = program_repair.remove_leading_spaces(input_string)
+            if fixed_code != input_string: #only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, level, lang)
+                    result = fixed_result
+                    raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+                except exceptions.HedyException:
+                    invalid_info.error_type = None
+                    transpile_inner(fixed_code, level)
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
+            raise exceptions.InvalidSpaceException(level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
@@ -1735,25 +1899,43 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
             invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, commands_per_level[level])
-            if closest == None:  # we couldn't find a suggestion because the command itself was found
-                # making the error super-specific for the turn command for now
-                # is it possible to have a generic and meaningful syntax error message for different commands?
-                if invalid_command == 'turn':
-                    raise hedy.exceptions.InvalidArgumentTypeException(command=invalid_info.command, invalid_type='',
-                                                                       allowed_types=['right', 'left', 'number'],
-                                                                       invalid_argument=''.join(invalid_info.arguments))
+            closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
+
+            if closest == 'keyword':  # we couldn't find a suggestion
+                if invalid_command == Command.turn:
+                    arg = ''.join(invalid_info.arguments).strip()
+                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
+                                                                   allowed_types=get_allowed_types(Command.turn, level),
+                                                                   invalid_argument=arg)
                 # clearly the error message here should be better or it should be a different one!
-                raise exceptions.ParseException(level=level, location=["?", "?"], found=invalid_command)
+                raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
+            elif closest is None:
+                raise exceptions.MissingCommandException(level=level, line_number=line)
+
+            else:
+
+                fixed_code = None
+                result = None
+                fixed_code = input_string.replace(invalid_command, closest)
+                if fixed_code != input_string:  # only if we have made a successful fix
+                    try:
+                        fixed_result = transpile_inner(fixed_code, level)
+                        result = fixed_result
+                    except exceptions.HedyException:
+                        # The fixed code contains another error. Only report the original error for now.
+                        pass
+
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
-                                                     guessed_command=closest, line_number=line)
+                                                     guessed_command=closest, line_number=line,
+                                                     fixed_code=fixed_code, fixed_result=result)
 
 
 def is_program_complete(abstract_syntax_tree, level):
     is_complete = IsComplete(level).transform(abstract_syntax_tree)
     if not is_complete[0]:
-        incomplete_command = is_complete[1][0]
-        line = is_complete[2]
+        incomplete_command_and_line = is_complete[1][0]
+        incomplete_command = incomplete_command_and_line[0]
+        line = incomplete_command_and_line[1]
         raise exceptions.IncompleteCommandException(incomplete_command=incomplete_command, level=level,
                                                     line_number=line)
 
@@ -1763,12 +1945,9 @@ def create_lookup_table(abstract_syntax_tree, level):
     visitor.visit_topdown(abstract_syntax_tree)
     entries = visitor.lookup
 
-    for entry in entries:
-        typed_tree = TypeInferrer(entries, level).transform(entry.tree)
-        entry.type_ = typed_tree.type_
+    TypeValidator(entries, level).transform(abstract_syntax_tree)
 
-    # For now the lookup table should contain the entries with their names in plain text and hashed
-    return entries + [LookupEntry(hash_var(e.name), e.tree, e.skip_hashing, e.type_) for e in entries]
+    return entries
 
 
 def transpile_inner(input_string, level, lang="en"):
@@ -1812,7 +1991,7 @@ def transpile_inner(input_string, level, lang="en"):
 
 
 def execute(input_string, level):
-    python = transpile(input_string, level)    
+    python = transpile(input_string, level)
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
