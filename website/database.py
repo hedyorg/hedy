@@ -98,6 +98,9 @@ class Database:
         """Store a program."""
         PROGRAMS.update({'id': id}, {'public': 1 if public else None})
 
+    def submit_program_by_id(self, id):
+        PROGRAMS.update({'id': id}, {'submitted': True})
+
     def delete_program_by_id(self, id):
         """Delete a program by id."""
         PROGRAMS.delete({'id': id})

@@ -28,18 +28,21 @@ $pajv validate \
     --errors=text \
     -s "adventures.schema.json" \
     -d "*.yaml"
+echo "------> Adventure yaml files are valid"
 
 cd ../level-defaults/
 $pajv validate \
     --errors=text \
     -s "levels.schema.json" \
     -d "*.yaml"
+echo "------> Level default yaml files are valid"
 
-cd ../quiz/
+cd ../quizzes/
 $pajv validate \
     --errors=text \
-    -s "quiz_questions.schema.json" \
+    -s "quizzes.schema.json" \
     -d "*.yaml"
+echo "------> Quiz yaml files are valid"
 
 
 # Validate-texts is producing a lot of noise and it will never fail the build outright

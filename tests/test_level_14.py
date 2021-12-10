@@ -28,8 +28,7 @@ class TestsLevel14(HedyTester):
       code=code,
       max_level=16,
       expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -57,9 +56,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -83,9 +80,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      expected=expected,
-      extra_check_function=self.is_not_turtle(),
-      test_name=self.name()
+      expected=expected
     )
 
   @parameterized.expand(HedyTester.number_comparisons_commands)
@@ -98,8 +93,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_not_equal_with_string(self):
@@ -116,8 +110,7 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=16,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -130,6 +123,5 @@ class TestsLevel14(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=15,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )

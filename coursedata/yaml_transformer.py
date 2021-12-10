@@ -9,11 +9,11 @@ def nop(s):
 
 
 def transform_yaml_to_lark(only_new_lang=True):
-  """Creates a lark file in ./grammars/ for  all yaml files located in ./coursedata/keywords/.
+  """Creates a lark file in ../grammars/ for  all yaml files located in ../coursedata/keywords/.
   If a keyword is not yet translated, it will use the English translation of the keyword
 
   Args:
-      only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
+      only_new_lang (bool, optional): Specifies if only a lark file should be created for a new keyword language or for all languages. Defaults to True.
   """
   input_path = '../coursedata/keywords/'
   current_grammar_path = '../grammars/'
@@ -34,25 +34,21 @@ def transform_yaml_to_lark(only_new_lang=True):
     default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
 
     with open(default_yaml_with_path, 'r') as stream:
-      yaml_default_dict = yaml.safe_load(stream)
-    default_command_combinations = yaml_default_dict['commands']
+      en_command_combinations = yaml.safe_load(stream)
 
     with open(yaml_filesname_with_path, 'r') as stream:
-      yaml_dict = yaml.safe_load(stream)
-    command_combinations = yaml_dict['commands']
+      command_combinations = yaml.safe_load(stream)
 
     lark_filesname_with_path = os.path.join(output_path, 'keywords-' + yaml_lang + '.lark')
 
     with open(lark_filesname_with_path, 'w+') as f:
       list_of_translations = []
       
-      for idx, command_combo in enumerate(command_combinations):
-        try:
-          command = list(command_combo.keys())[0]
-          translation = command_combo[command]
-        except IndexError:
-          command = list(default_command_combinations[idx].keys())[0]
-          translation = default_command_combinations[idx][command]
+      for command, translation in command_combinations.items():   
+        en_translation = en_command_combinations[command]
+        
+        if translation == '':
+          translation = en_translation
           
         if yaml_lang != 'en':
           if translation in list_of_translations:
@@ -64,7 +60,10 @@ def transform_yaml_to_lark(only_new_lang=True):
           command_upper = command.upper()
           command = '_' + command_upper
 
-        f.write(f'{command}: "{translation}" \n')
+        if translation != en_translation:
+          f.write(f'{command}: "{translation}" | "{en_translation}"\n')
+        else:
+          f.write(f'{command}: "{translation}"\n')
 
 def transform_level_defaults(old_level, new_level=None, function=nop):
   input_path = '../coursedata/level-defaults'

@@ -191,6 +191,10 @@ export function runit(level: string, lang: string, cb: () => void) {
 
   if (reloadOnExpiredSession ()) return;
 
+  const outputDiv = $('#output');
+  outputDiv.empty();
+  $('#turtlecanvas').empty();
+
   error.hide();
   success.hide();
   try {
@@ -372,24 +376,8 @@ export function tryPaletteCode(exampleCode: string) {
   window.State.unsaved_changes = false;
 }
 
-export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
-  error.hide();
-  success.hide();
-
-  if (reloadOnExpiredSession ()) return;
-
-  try {
-    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
-    if (! auth.profile) {
-       return modal.confirm (auth.texts['save_prompt'], function () {
-         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
-         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
-         window.location.pathname = '/login';
-       });
-    }
-
-    window.State.unsaved_changes = false;
+function storeProgram(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+  window.State.unsaved_changes = false;
 
     var adventure_name = window.State.adventure_name;
     // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
@@ -437,6 +425,42 @@ export function saveit(level: number | [number, string], lang: string, name: str
          localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
          localStorage.setItem ('hedy-save-redirect', 'hedy');
          window.location.pathname = '/login';
+      }
+    });
+}
+
+export function saveit(level: number | [number, string], lang: string, name: string, code: string, cb?: (err: any, resp?: any) => void) {
+  error.hide();
+  success.hide();
+
+  if (reloadOnExpiredSession ()) return;
+
+  try {
+    // If there's no session but we want to save the program, we store the program data in localStorage and redirect to /login.
+    if (! auth.profile) {
+       return modal.confirm (auth.texts['save_prompt'], function () {
+         // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
+         if (window.State && window.State.adventure_name && !Array.isArray(level)) level = [level, window.State.adventure_name];
+         localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code]));
+         window.location.pathname = '/login';
+       });
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/programs/duplicate-check',
+      data: JSON.stringify({
+        name:  name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response['duplicate']) {
+        modal.confirm (auth.texts['overwrite_warning'], function () {
+          storeProgram(level, lang, name, code, cb);
+        });
+      } else {
+         storeProgram(level, lang, name, code, cb);
       }
     });
   } catch (e: any) {
@@ -504,6 +528,24 @@ export function share_program (level: number, lang: string, id: string | true, P
       share(resp.id);
     });
 
+}
+
+export function submit_program (id: string, shared: boolean) {
+  if (! auth.profile) return modal.alert (auth.texts['must_be_logged']);
+  console.log(shared);
+  if (! shared) return modal.alert (auth.texts['must_be_shared']);
+
+  $.ajax({
+    type: 'POST',
+    url: '/programs/submit',
+    data: JSON.stringify({
+      id: id
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(_response) {
+    location.reload ();
+  });
 }
 
 export function copy_to_clipboard (string: string, noAlert: boolean) {
@@ -592,6 +634,9 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
+  } else {
+    // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
+    $('#turtlecanvas').show();
   }
 
   Sk.configure({
@@ -776,8 +821,8 @@ export function prompt_unsaved(cb: () => void) {
   modal.confirm(auth.texts['unsaved_changes'], cb);
 }
 
-export function load_quiz(level: string) {
-  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+export function load_quiz(level: string, lang: string) {
+  $('*[data-tabtarget="end"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '?lang=' + lang + '"></iframe>');
 }
 
 export function get_trimmed_code() {
@@ -799,13 +844,43 @@ export function confetti_cannon(){
     const jsConfetti = new JSConfetti({canvas})
     // timeout for the confetti to fall down
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
-    jsConfetti.addConfetti();
+    let adventures = $('#adventures');
+    let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
+    let customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
+
+    if(customLevels.includes(currentAdventure!)){
+      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+
+      // @ts-ignore
+      jsConfetti.addConfetti({
+        emojis: currentAdventureConfetti,
+        emojiSize: 45,
+        confettiNumber: 100,
+      });
+    }
+
+    else{
+      jsConfetti.addConfetti();
+    }
 
     const confettiButton = document.getElementById('confetti-button');
     if (confettiButton) {
       confettiButton.classList.add('hidden');
     }
   }
+}
+
+function getConfettiForAdventure(adventure: string){
+  let emoji = Array.from(ErrorMessages[adventure])
+  if (emoji != null){
+    return emoji;
+  }
+  return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
+}
+
+export function ScrollOutputToBottom(){
+$("#output").animate({ scrollTop: $(document).height() }, "slow");
+  return false;
 }
 
 export function modalStepOne(level: number){
@@ -950,4 +1025,22 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
   }
+}
+
+export function change_language(lang: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/change_language',
+    data: JSON.stringify({
+      lang: lang
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response: any) {
+      if (response.succes){
+        location.reload();
+      }
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
 }

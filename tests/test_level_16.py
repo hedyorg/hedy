@@ -21,8 +21,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=check_in_list,
-            test_name=self.name()
+            extra_check_function=check_in_list
         )
 
     def test_print_list_access(self):
@@ -37,8 +36,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
+            extra_check_function=self.is_not_turtle()
         )
 
     def test_list_access_var(self):
@@ -55,8 +53,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
+            extra_check_function=self.is_not_turtle()
         )
 
     def test_access_plus(self):
@@ -75,8 +72,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
+            extra_check_function=self.is_not_turtle()
         )
 
     def test_list_access_random(self):
@@ -93,8 +89,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
+            extra_check_function=self.is_not_turtle()
         )
 
     # ask tests
@@ -118,8 +113,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
-            extra_check_function=self.is_not_turtle(),
-            test_name=self.name()
+            extra_check_function=self.is_not_turtle()
         )
 
     def test_ask_with_list(self):
@@ -141,8 +135,7 @@ class TestsLevel16(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
-            expected=expected,
-            test_name=self.name()
+            expected=expected
         )
 
     #add/remove tests
@@ -169,8 +162,7 @@ class TestsLevel16(HedyTester):
         self.multi_level_tester(
           code=code,
           max_level=17,
-          expected=expected,
-          test_name=self.name()
+          expected=expected
         )
 
     def test_remove_from_list(self):
@@ -199,8 +191,7 @@ class TestsLevel16(HedyTester):
         self.multi_level_tester(
           code=code,
           max_level=17,
-          expected=expected,
-          test_name=self.name()
+          expected=expected
         )
 
     def test_equality_with_list_gives_error(self):
