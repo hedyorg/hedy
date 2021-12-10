@@ -414,10 +414,46 @@ adventures:
                     You can now repeat lines 2 to 9 as many times as you want by copying the lines.
 
                 start_code: "print 'Baby shark'"
+            16:
+                story_text: |
+                    ## Sing a song!
+                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in teh same place in the list.
+                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+
+                    ## Old MacDonald
+                    ```
+                    animals is ['pig', 'dog', 'cow']
+                    sounds is ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal is animals[i]
+                        sound is sounds[i]
+                        print 'Old McDonald had a farm'
+                        print 'E I E I O!'
+                        print 'and on that farm he had a ' animal
+                        print 'E I E I O!'
+                        print 'with a ' sound sound ' here'
+                        print 'and a ' sound sound ' there'
+                        print 'here a ' sound
+                        print 'there a ' sound
+                        print 'everywhere a ' sound sound
+                    ```
+
+                    ## Drunken Sailor
+                    ```
+                    lines is ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    for line in lines
+                        for i in range 1 to 3
+                            print line
+                        print 'early in the morning'
+                        for i in range 1 to 3
+                            print 'way hay and up she rises'
+                        print 'early in the morning'
+                    ```
+                start_code: ""
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
-        image: "turtle.png"
+        image: "turtle.gif"
         default_save_name: "turtle"
         levels:
             1:
@@ -1812,6 +1848,41 @@ adventures:
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it?
                 start_code: ""
+            16:
+                story_text: |
+                    ## Haunted House Game
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code!
+
+                    ## Example Hedy Code
+                    ```
+                    numbers is [1, 2, 3]
+                    i is numbers[random]
+                    hint is ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters is ['zombie', 'witch', 'vampire']
+                    badfate is ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    goodfate is ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons is ['ham', 'lighter', 'garlic']
+                    print 'Youre standing in front of an old mension'
+                    print 'Something is not right here'
+                    print 'You hear ' hint[i]
+                    print 'Youre going to explore it'
+                    print 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
+                    yourweapon is ask 'What do you bring with you?'
+                    print 'With your ' yourweapon ' you enter the living room'
+                    print 'There you find a ' monsters[i]
+                    neededweapon is weapons[i]
+                    if yourweapon is neededweapon
+                        print 'You use your ' yourweapon
+                        print goodfate[i]
+                        print 'YOU WIN!'
+                    else
+                        print 'You have chosen the wrong weapon...'
+                        print badfate[i]
+                        print 'GAME OVER'
+                    ```
+                start_code: ""
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
@@ -1887,6 +1958,33 @@ adventures:
                         print 'You belong to the B club'
                     ```
 
+                start_code: ""
+    language:
+        name: Language
+        description: Practice words in a foreign language
+        image: hauntedhouse.png
+        default_save_name: language
+        levels:
+            16:
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+
+                    ## Example Hedy code
+                    ```
+                    frenchwords is ['bonjour', 'ordinateur', 'pomme de terre']
+                    translation is ['hello', 'computer', 'potato']
+                    score is 0
+                    for i in range 1 to 3
+                        answer is ask 'What does ' frenchwords[i] ' mean?'
+                        correct is translation[i]
+                        if answer is correct
+                            print 'Correct!'
+                            score is score + 1
+                        else
+                            print 'Wrong, ' frenchwords[i] ' means ' translation[i]
+                    print 'You gave ' score ' correct answers.'
+                    ```
                 start_code: ""
     next:
         name: "What's next?"

@@ -422,10 +422,46 @@ adventures:
                     Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
                     Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
                 start_code: "print 'Baby shark'"
+            16:
+                story_text: |
+                    ## Zing een lied!
+                    Maak het nog makkelijker om een liedje te programmeren zoals old MacDonald! Je kunt nu de dieren en hun geluiden aan elkaar koppelen, door ze op dezelfde plaats in het lijstje te zetten.
+                    Ook de Dronken Zeeman gaat lekker snel in dit level! Je hebt maar 5 regels nodig voor het gehele lied. Kijk maar!
+
+                    ## Old MacDonald
+                    ```
+                    dieren is ['big', 'hond', 'koe']
+                    geluiden is ['knor', 'woef', 'boe']
+                    for i in range 1 to 3
+                        dier is dieren[i]
+                        geluid is geluiden[i]
+                        print 'Old MacDonald had een wei'
+                        print 'hi ja hi ja ho!'
+                        print 'En in die wei daar stond een ' dier
+                        print 'hi ja hi ja ho!'
+                        print 'met een ' geluid geluid ' hier'
+                        print 'en een ' geluid geluid ' daar'
+                        print 'hier een ' geluid
+                        print 'daar een ' geluid
+                        print 'overal een ' geluid geluid
+                    ```
+
+                    ## Dronken Zeeman
+                    ```
+                    coupletten is ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
+                    for couplet in coupletten
+                        for i in range 1 to 3
+                            print couplet
+                        print 's morgens in de vroegte'
+                        for i in range 1 to 3
+                            print 'HELA HUP! daar gaat ie!'
+                        print 's morgens in de vroegte'
+                    ```
+                start_code: ""
     turtle:
         name: "Tekenen"
         description: "Maak jouw eigen tekening"
-        image: "turtle.png"
+        image: "turtle.gif"
         default_save_name: "schildpad"
         levels:
             1:
@@ -1824,6 +1860,41 @@ adventures:
                     In prijzenshows kiest de kandidaat een deur of een koffertje en vindt daarin een grote prijs (of niets natuurlijk...).
                     Kun jij een prijzenshow bouwen?
                 start_code: "print Ontsnap uit het spookhuis!"
+            16:
+                story_text: |
+                    ## Haunted House Game
+                    Deze spookhuisgame gebruikt de connectie tussen de verschillende lijstjes, die je in dit level kunt gebruiken.
+                    Bijvoorbeeld: alle eigenschappen die bij de zombie horen staan als eerste in alle lijstjes, de heks als tweede en de vampier derde.
+                    Kijk maar naar de code.
+
+                    ## Example Hedy Code
+                    ```
+                    getallen is [1, 2, 3]
+                    i is getallen[random]
+                    hint is ['gegrom', 'kakelende lach', 'vleermuis gefladder']
+                    monsters is ['zombie', 'heks', 'vampier']
+                    noodlot is ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
+                    goedlot is ['Je gooit de ham naar de zombie die er lekker aan begint te knagen.', 'Je zet de gordijnen in de fik. De heks vlucht, bang voor het vuur', 'De vampier haat knoflook en vlucht weg']
+                    wapens is ['ham', 'aansteker', 'knoflook']
+                    print 'Je staat bij een oude verlaten villa'
+                    print 'Iets is hier niet pluis...'
+                    print 'Je hoort ' hint[i]
+                    print 'Je gaat op ontdekking'
+                    print 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
+                    jouwwapen is ask 'Wat neem je mee?'
+                    print 'Met je ' jouwwapen ' loop je door naar de woonkamer'
+                    print 'Daar zie je een ' monsters[i]
+                    benodigdewapen is wapens[i]
+                    if jouwwapen is benodigdewapen
+                        print 'Je gebruikt je ' jouwwapen
+                        print goedlot[i]
+                        print 'Jij wint!'
+                    else
+                        print 'Je hebt helaas het verkeerde wapen'
+                        print noodlot[i]
+                        print 'GAME OVER'
+                    ```
+                start_code: ""
     piggybank:
         name: Spaarvarken
         description: Tel je zakgeld!
@@ -1898,6 +1969,33 @@ adventures:
                         print 'Jij hoort in club A'
                     if punten_b > punten_a
                         print 'Jij hoort in club B'
+                    ```
+                start_code: ""
+    language:
+        name: Woordjes leren
+        description: Maak je eigen programma om woordjes te leren in een vreemde taal
+        image: hauntedhouse.png
+        default_save_name: language
+        levels:
+            16:
+                story_text: |
+                    ## Leer een nieuwe taal
+                    Maak je eigen programma om woordjes te leren in een vreemde taal.
+
+                    ## Voorbeeld Hedy code
+                    ```
+                    franswoord is ['bonjour', 'ordinateur', 'pomme de terre']
+                    vertaling is ['hallo', 'computer', 'aardappel']
+                    score is 0
+                    for i in range 1 to 3
+                        antwoord is ask 'Wat betekent ' franswoord[i] '?'
+                        correct is vertaling[i]
+                        if antwoord is correct
+                            print 'Correct!'
+                            score is score + 1
+                        else
+                            print 'Fout, ' franswoord[i] ' betekent ' vertaling[i]
+                    print 'Je hebt ' score ' goede antwoorden gegeven.'
                     ```
                 start_code: ""
     next:
