@@ -1,6 +1,6 @@
 program: _EOL* (command | invalid) (_SPACE)* (_EOL+ (command | invalid) (_SPACE)*)* _EOL* //lines may end on spaces and might be separated by many newlines
-// add and remove assign because it should at the end
-command:+= ifelse | ifs  |  list_access_var | assign -= invalid | ask_no_quotes > assign
+//placing assing at the end
+command:+= ifelse | ifs  |  list_access_var -= invalid | ask_no_quotes > assign
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
 
 list_access_var: var _SPACE _IS _SPACE var _SPACE _AT _SPACE (INT | random)
