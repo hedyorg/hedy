@@ -151,13 +151,13 @@
     -   explanation: "Pergunta por um cálculo e verifica se está correcto."
         example: "Exemplo: resultado is ask Quanto é 10 mais 10?"
         demo_code: |-
-            resultado is ask 'Quanto é 10 mais 10?'
+            resultado = ask 'Quanto é 10 mais 10?'
             if resultado is 20 print 'Sim!' else print 'Oops'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
+            angles = ask 'How many angles?'
             angle = 360 / angles
             forward 50
 7:
@@ -513,13 +513,13 @@
                 resultado = ask 'Quanto é 5 vezes 5?'
             print 'Foi dada a resposta correcta.'
     -   name: "while menor"
-        explanation: "Também podemos utilizar o ciclo `while` com `<` e `>`. Mas cuidado, tens de mudar o número para que ciclo termine. Fazemos isso agora com contagem is contagem + 1."
+        explanation: "Também podemos utilizar o ciclo `while` com `<` e `>`. Mas cuidado, tens de mudar o número para que ciclo termine. Fazemos isso agora com contagem = contagem + 1."
         example: "Por exemplo: while count < 3"
         demo_code: |-
             contagem = 1
             while contagem < 3
                 print 'Fazemos isto mais ' 3 - contagem ' vezes.'
-                contagem is contagem + 1
+                contagem = contagem + 1
             print 'Acabamos!'
 
 16:
@@ -535,18 +535,18 @@
             print fruta 
     -   name: "Obtém um elemento da lista."
         explanation: "Para obter um elemento da lista usamos [número], pelo que, fruta[1] significa: obtém a primeira fruta da lista!"
-        example: "Por exemplo: primeirafruta is fruta[1]"
+        example: "Por exemplo: primeirafruta = fruta[1]"
         demo_code: |-
             fruta = ['banana', 'maçã', 'cereja']
-            primeirafruta is fruta[1]
+            primeirafruta = fruta[1]
             print primeirafruta 
     -   name: "Obtém um elemento aleatório da lista."
         explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
-        example: "For example: randomfruit is fruit[random]"
+        example: "For example: qualquer_fruta = fruit[random]"
         demo_code: |-
             fruta = ['banana', 'maçã', 'cereja']
-            qualquerfruta is fruta[random]
-            print qualquerfruta 
+            qualquer_fruta = fruta[random]
+            print qualquer_fruta
 17:
     start_code: |-
         for i in range 1 to 10:

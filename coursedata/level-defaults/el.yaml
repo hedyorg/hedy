@@ -443,13 +443,13 @@
                 answer = ask 'Πόσο κάνει 5 φορές το 5;'
             print 'Δόθηκε η σωστή απάντηση'
     -   name: Μικρότερο while
-        explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `while` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count is count + 1.
+        explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `while` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
         example: 'Για παράδειγμα: while count < 3'
         demo_code: |-
             count = 1
             while count < 3
                 print 'Το κάνουμε αυτό ' 3 - count ' ακόμα φορές'
-                count is count + 1
+                count = count + 1
             print 'Τελειώσαμε'
 16:
     start_code: |-
@@ -472,11 +472,11 @@
             print firstfruit 
     -   name: 'Πάρε ένα τυχαίο αντικείμενο από μία λίστα'
         explanation: 'Για να πάρουμε ένα τυχαίο αντικείμενο από τη λίστα χρησιμοποιούμε [random] έτσι fruit[random] σημαίνει, πάρε ένα τυχαίο φρούτο από τη λίστα!'
-        example: 'Για παράδειγμα: randomfruit is fruit[random]'
+        example: 'Για παράδειγμα: random_fruit = fruit[random]'
         demo_code: |-
             fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-            randomfruit is fruit[random]
-            print randomfruit 
+            random_fruit = fruit[random]
+            print random_fruit
 17:
     start_code: |-
         for i in range 1 to 10:

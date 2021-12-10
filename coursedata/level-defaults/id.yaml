@@ -330,7 +330,7 @@
 
         Untuk angka, kamu tidak perlu menggunakan kutip satu untuk `is`:
         ```
-        skor is 25
+        skor = 25
         print 'Kamu mendapatkan ' skor
         ```
     commands:
@@ -495,13 +495,13 @@
                 jawaban = ask 'Apa hasil 5 kali 5?'
             print 'Sebuah jawaban benar telah diberikan'
     -   name: Pengulangan while dengan cakupan lebih kecil
-        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
+        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang = pembilang + 1` untuk sekarang.
         example: 'Sebagai contoh: while pembilang < 3'
         demo_code: |-
             pembilang = 1
             while pembilang < 3
                 print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
-                pembilang is pembilang + 1
+                pembilang = pembilang + 1
             print 'Kita selesai'
 
 16:
@@ -521,15 +521,15 @@
         example: 'Sebagai contoh: buahpertama is buah[1]'
         demo_code: |-
             buah = ['apel', 'pisang', 'ceri']
-            buahpertama is buah[1]
+            buahpertama = buah[1]
             print buahpertama 
     -   name: Mengambil sebuah nilai dari dalam list secara acak
         explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
         example: 'Sebagai contoh: buahacak is buah[random]'
         demo_code: |-
             buah = ['apel', 'pisang', 'ceri']
-            buahacak is buah[random]
-            print buahacak 
+            buaha_cak = buah[random]
+            print buaha_cak
 17:
     start_code: |-
         for i in range 1 to 10:
@@ -546,7 +546,7 @@
     -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
         example: 'if warna is hijau:'
         demo_code: |-
-            warna is 'hijau'
+            warna = 'hijau'
             if warna is hijau:
                 print 'Warnanya hijau'
             else:

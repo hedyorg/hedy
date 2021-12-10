@@ -360,7 +360,7 @@
 
         Para números, não se usa aspas simples no `is`:
         ```
-        pontuação is 25
+        pontuação = 25
         print 'Você marcou ' pontuação
         ```
 # Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
@@ -554,13 +554,13 @@
         explanation: |-
             Também podemos utilizar o ciclo `while` com `<` e `>`. Mas
             cuidado, é preciso mudar o número para que ciclo termine.
-            Aqui nós fazemos isso com `contagem is contagem + 1`.
+            Aqui nós fazemos isso com `contagem = contagem + 1`.
         example: "Por exemplo: while contagem < 3"
         demo_code: |-
             contagem = 1
             while contagem < 3
                 print 'Fazemos isto mais ' 3 - contagem ' vezes.'
-                contagem is contagem + 1
+                contagem = contagem + 1
             print 'Acabamos!'
 
 16:
@@ -579,15 +579,15 @@
         example: "Por exemplo: primeirafruta is fruta[1]"
         demo_code: |-
             fruta = ['banana', 'maçã', 'cereja']
-            primeirafruta is fruta[1]
-            print primeirafruta 
+            primeira_fruta = fruta[1]
+            print primeira_fruta
     -   name: "Obtém um elemento aleatório da lista."
         explanation: "Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!"
         example: "For example: randomfruit is fruit[random]"
         demo_code: |-
             fruta = ['banana', 'maçã', 'cereja']
-            qualquerfruta is fruta[random]
-            print qualquerfruta 
+            qualquer_fruta = fruta[random]
+            print qualquer_fruta
 17:
     start_code: |-
         for i in range 1 to 10:

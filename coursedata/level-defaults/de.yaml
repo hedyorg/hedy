@@ -483,13 +483,13 @@
         explanation: |-
             Wir können die "while"-Schleife auch mit "<" und ">" verwenden.
             Beachte, dass du die Zahl ändern musst, damit die Schleife endet.
-            Wir machen das hier mit `zaehler is zaehler + 1`.
+            Wir machen das hier mit `zaehler = zaehler + 1`.
         example: "while zaehler < 3"
         demo_code: |-
             zaehler = 1
             while zaehler < 3
                 print 'Wir machen dies noch ' 3 - zaehler ' mal.'
-                zaehler is zaehler + 1
+                zaehler = zaehler + 1
             print 'Wir sind fertig!'
 16:
     start_code: |-
@@ -510,19 +510,19 @@
         explanation: |-
             Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`.
             Mit `fruechte[1]` erhalten wir also die erste Frucht aus der Liste.
-        example: "erste_frucht is fruechte[1]"
+        example: "erste_frucht = fruechte[1]"
         demo_code: |-
             fruechte = ['Apfel', 'Banane', 'Kirsche']
-            erste_frucht is fruechte[1]
+            erste_frucht = fruechte[1]
             print erste_frucht
     -   name: "Nimm ein zufälliges Element aus einer Liste"
         explanation: |-
             Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`.
             Mit fruechte[random] erhalten wir also eine zufällige Frucht aus der Liste.
-        example: "zufaellige_frucht is fruechte[random]"
+        example: "zufaellige_frucht = fruechte[random]"
         demo_code: |-
             fruechte = ['Apfel', 'Banane', 'Kirsche']
-            zufaellige_frucht is fruechte[random]
+            zufaellige_frucht = fruechte[random]
             print zufaellige_frucht
 
 17:

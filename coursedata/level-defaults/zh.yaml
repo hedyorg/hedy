@@ -394,13 +394,13 @@
                 answer = ask '5乘以5等于几?'
             print '已经给出了一个很好的答案'
     -   name: "Smaller while (直到小于)"
-        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
+        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count = count + 1 来达到这个目的."
         example: "例如: while count < 3"
         demo_code: |-
             count = 1
             while count < 3
                 print '我们计算 ' 3 - count ' 的次数更多了'
-                count is count + 1
+                count = count + 1
             print '我们完成啦'
 16:
     start_code: |-
@@ -422,11 +422,11 @@
             print firstfruit 
     -   name: "从一个列表中随机选择元素"
         explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
-        example: "例如: randomfruit is fruit[random]"
+        example: "例如: random_fruit = fruit[random]"
         demo_code: |-
             fruit = ['香蕉', '苹果', '樱桃']
-            randomfruit is fruit[random]
-            print randomfruit 
+            random_fruit = fruit[random]
+            print random_fruit
 17:
     start_code: |-
         for i in range 1 to 10:
@@ -443,7 +443,7 @@
     -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
         example: "if colour is 绿色:'"
         demo_code: |-
-            colour is '绿色'
+            colour = '绿色'
             if colour is 绿色:
                 print 'The colour 是绿色'
             else:

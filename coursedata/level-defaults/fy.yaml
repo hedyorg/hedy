@@ -206,7 +206,7 @@
         example: "Foarbyld: hoeken = ask 'hoefolle hoeken kriget dit figuur?'"
         demo_code: |-
             hoeken = ask 'Hoefolle hoeken kriget dit figuur?'
-            hoek is 360 / hoeken
+            hoek = 360 / hoeken
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy is leuk!'"
@@ -569,7 +569,7 @@
             tel = 1
             while tel < 3
                 print 'Dit is de ' tel 'e kear'
-                tel is tel + 1
+                tel = tel + 1
             print 'We zijn klaar'
 
 16:
@@ -592,12 +592,12 @@
             earstefruit = fruit[1]
             print earstefruit 
     -   name: "Nim in willekeurich ding út 'e list"
-        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in random fruit út 'e list!"
-        example: "Foarbyld: randomfruit is fruit[random]"
+        explanation: "Om in willekeurich ding út 'e list te nimmen, brûke we [random]. Dus fruit[random] pakt in willekeurich fruit út 'e list!"
+        example: "Foarbyld: random_fruit is fruit[random]"
         demo_code: |-
             fruit = ['apel', 'banaan', 'kjers']
-            randomfruit is fruit[random]
-            print randomfruit 
+            random_fruit = fruit[random]
+            print random_fruit
 17:
     start_code: |-
         for i in range 1 to 10:

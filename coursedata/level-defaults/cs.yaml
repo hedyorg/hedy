@@ -506,7 +506,7 @@
             pocet = 1
             while pocet < 3
                 print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
-                pocet is pocet + 1
+                pocet = pocet + 1
             print 'Hotovo'
 16:
     start_code: |-
@@ -521,18 +521,18 @@
             print ovoce
     -   name: Vyber položku ze seznamu.
         explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
-        example: 'Příklad: prvniovoce is ovoce[1]'
+        example: 'Příklad: prvniovoce = ovoce[1]'
         demo_code: |-
             ovoce = ['jablko', 'banán', 'třešně']
-            prvniovoce is ovoce[1]
-            print prvniovoce
+            prvni_ovoce = ovoce[1]
+            print prvni_ovoce
     -   name: Získej náhodnou položku ze seznamu.
         explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
         example: 'Příklad: nahodneovoce is ovoce[random]'
         demo_code: |-
             ovoce = ['jablko', 'banán', 'třešně']
-            nahodneovoce is ovoce[random]
-            print nahodneovoce
+            nahodne_ovoce = ovoce[random]
+            print nahodne_ovoce
 17:
     start_code: |-
         for i in range 1 to 10:
