@@ -1803,11 +1803,11 @@ adventures:
                     ```
                     print 'Escape from the haunted house!'
                     print 'There are 3 doors in front of you...'
-                    doors = 1, 2, 3
-                    monsters = werewolf, mummy, vampire, zombie
-                    chosen_door = ask 'Which door do you choose?'
-                    print 'You chose door...' chosendoor
-                    correct_door = doors at random
+                    doors is 1, 2, 3
+                    monsters is werewolf, mummy, vampire, zombie
+                    chosen_door is ask 'Which door do you choose?'
+                    print 'You chose door...' chosen_door
+                    correct_door is doors at random
                     if chosen_door is correct_door print 'Great! Youve escaped!'
                     else print 'Oh no! You are being eaten by a...' monsters at random
                     ```
