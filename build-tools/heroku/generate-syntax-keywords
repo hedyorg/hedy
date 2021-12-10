@@ -1,14 +1,15 @@
 #!/bin/bash
 #Takes the keywords from coursedata/keywords/'lang'.yaml and creates a syntaxLang-'lang'.ts file for that language
 #How to use: add the argument for which language you want when using the script, e.g. 'generate-syntax-keywords en' for english
-#Note that for the highlighter to work you will still need to import syntaxLang-'lang'.ts in index.ts and app.ts
+#Note that for the highlighter to work you will still need to import syntaxLang-'lang'.ts in index.ts and app.ts,
+#as well as properly integrate it into syntaxModesRules.ts (so importing it properly and placing it in the switch statement for language)
 
 set -eu
 root=$(cd $(dirname $0)/../.. && pwd)
 
 cd $root
 
-#This line mainly exists in order to ensure the file is overwritten instead of being appended to
+#Ensures the file is overwritten instead of being appended to when updating keywords
 echo "//Generated through generate-syntax-keywords
 export const LANG_"$1 "= {" > static/js/syntaxLang-$1.ts
 

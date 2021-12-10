@@ -1,13 +1,14 @@
-import * as keys_en from './syntaxLang-en';
-import * as keys_nl from './syntaxLang-nl';
+import {LANG_en} from './syntaxLang-en';
+import {LANG_nl} from './syntaxLang-nl';
 
+// Sets the current keywords based on the current language
 var currentLang;
 switch(window.State.lang){
   case 'nl':
-    currentLang = keys_nl.LANG_nl;
+    currentLang = LANG_nl;
     break;
   default:
-    currentLang = keys_en.LANG_en;
+    currentLang = LANG_en;
     break;
 }
 
@@ -481,10 +482,6 @@ function rule_sleep(_SLEEP: string) {
     }
   )
 }
-
-
-
-
 
 /**
  * Add an 'is input' rule with brackets
