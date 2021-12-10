@@ -1,5 +1,4 @@
-//Add and remove invalid because it should be at the end
-command:+= assign_list | add | remove | invalid -= invalid   
+command:+= assign_list | add | remove > invalid   
 _print_argument: (_SPACE | list_access | textwithoutspaces | punctuation)*
 
 assign_list: var _SPACE _IS _SPACE text_list ((_COMMA _SPACE|_COMMA) text_list)+

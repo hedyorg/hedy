@@ -1577,20 +1577,34 @@ def merge_grammars(grammar_text_1, grammar_text_2):
             name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
             if name_1 == name_2:
                 override_found = True
-                # Check if the rule is adding or substracting new rules
-                has_add = definition_2.startswith("+=")
-                has_sub = "-=" in definition_2                
-                if has_add and has_sub:
-                    definition_2 = definition_2[3:]
-                    add_list, sub_list = definition_2.split("-=")
-                    orig_cmd_list     = [command.strip() for command in definition_1.split('|')]                    
-                    unwanted_cmd_list = [command.strip() for command in sub_list.split('|')]                    
-                    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]                    
-                    result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
-                    # join together the new rules and the remaining rules                    
+                # Check if the rule is adding or substracting new rules                
+                has_add_op  = definition_2.startswith('+=') 
+                has_sub_op = has_add_op and '-='  in definition_2
+                has_last_op = has_add_op and '>'  in definition_2
+                if has_sub_op:
+                    # Get the rules we need to substract
+                    part_list = definition_2.split('-=')
+                    add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+                    add_list = add_list[3:]  
+                    # Get the rules that need to be last
+                    sub_list = sub_list.split('>')  
+                    sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
+                    sub_list = sub_list + '|' + last_list
+                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
+                elif has_add_op:
+                     # Get the rules that need to be last
+                    part_list = definition_2.split('>')
+                    add_list, sub_list =  (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+                    add_list = add_list[3:]
+                    last_list = sub_list
+                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
+                else:
+                    result_cmd_list = definition_1
+
+                if has_last_op:
+                    new_rule = f"{name_1}: {result_cmd_list} | {add_list} | {last_list}"
+                elif has_add_op:
                     new_rule = f"{name_1}: {result_cmd_list} | {add_list}"
-                elif has_add and not has_sub:
-                    new_rule = f"{name_1}: {definition_2[3:]} | {definition_1}"
                 else:
                     new_rule = line_2
                 #Already procesed so remove it
@@ -1611,6 +1625,12 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     merged_grammar = sorted(merged_grammar)
     return '\n'.join(merged_grammar)
 
+def get_remaining_rules(orig_def, sub_def):
+    orig_cmd_list     = [command.strip() for command in orig_def.split('|')]                    
+    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]                    
+    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]                    
+    result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
+    return result_cmd_list
 
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
