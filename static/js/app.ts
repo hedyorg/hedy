@@ -1,17 +1,13 @@
 // It's important that this file gets loaded first
-import './syntaxRules';
-import './syntaxModesRules-en';
-import './syntaxModesRules-nl';
+import './syntaxLang-en';
+import './syntaxLang-nl';
+import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
 import { auth } from './auth';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
-
-// Determines whether keywords from other languages are highlighted
-// Set to True in order to use other imported highlight rules
-var local_keywords_highlights_enabled = false;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -168,23 +164,13 @@ var local_keywords_highlights_enabled = false;
 })();
 
 function getHighlighter(level: number) {
-  if(local_keywords_highlights_enabled){
-    const modeExceptions: Record<string, string> = {
-          '9': 'ace/mode/level9and10' + window.State.lang,
-          '10': 'ace/mode/level9and10' + window.State.lang,
-          '18': 'ace/mode/level18and19' + window.State.lang,
-          '19': 'ace/mode/level18and19' + window.State.lang,
-        };
-    return modeExceptions[level] || `ace/mode/level` + level + window.State.lang;
-  } else {
-    const modeExceptions: Record<string, string> = {
-          '9': 'ace/mode/level9and10' + 'en',
-          '10': 'ace/mode/level9and10' + 'en',
-          '18': 'ace/mode/level18and19' + 'en',
-          '19': 'ace/mode/level18and19' + 'en',
-        };
-    return modeExceptions[level] || `ace/mode/level` + level + 'en';
-  }
+  const modeExceptions: Record<string, string> = {
+        '9': 'ace/mode/level9and10',
+        '10': 'ace/mode/level9and10',
+        '18': 'ace/mode/level18and19',
+        '19': 'ace/mode/level18and19',
+      };
+  return modeExceptions[level] || `ace/mode/level` + level;
 }
 
 function reloadOnExpiredSession () {

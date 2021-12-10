@@ -10,7 +10,7 @@ cd $root
 
 #This line mainly exists in order to ensure the file is overwritten instead of being appended to
 echo "//Generated through generate-syntax-keywords
-const LANG_"$1 "= {" > static/js/syntaxLang-$1.ts
+export const LANG_"$1 "= {" > static/js/syntaxLang-$1.ts
 
 #Searches for the keywords in the yaml files and writes them to the highlighter with the correct syntax
 regex='(.\S*): ((\w| \w)*)'
@@ -18,13 +18,13 @@ if [ $1 == 'en' ]
 then
     cat ./coursedata/keywords/en.yaml | while read line; do
         [[ "$line" =~ $regex ]]
-        echo ${line/${BASH_REMATCH[0]}/_${BASH_REMATCH[1]^^}:\'${BASH_REMATCH[2]}\',} >> static/js/syntaxLang-$1.ts
+        echo ${line/${BASH_REMATCH[0]}/\'_${BASH_REMATCH[1]^^}\':\'${BASH_REMATCH[2]}\',} >> static/js/syntaxLang-$1.ts
     done
 else
     linenr=0
     cat ./coursedata/keywords/$1.yaml | while read line; do
         [[ "$line" =~ $regex ]]
-        newline=${line/${BASH_REMATCH[0]}/_${BASH_REMATCH[1]^^}:\'(?:${BASH_REMATCH[2]}\|}
+        newline=${line/${BASH_REMATCH[0]}/\'_${BASH_REMATCH[1]^^}\':\'(?:${BASH_REMATCH[2]}\|}
         #searches for the correct line in en.yaml, parses and appends the english keywords, then finishes the sentence
         linenr=$(( linenr+1 ))
         engline=$(sed "${linenr}q;d" ./coursedata/keywords/en.yaml)

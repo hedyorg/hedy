@@ -1,9 +1,9 @@
 export * from './modal';
 export * from './app';
 export * from './auth';
-import './syntaxRules';
-import './syntaxModesRules-en';
-import './syntaxModesRules-nl';
+import './syntaxLang-en';
+import './syntaxLang-nl';
+import './syntaxModesRules';
 import './tabs';
 import './translating';
 export * from './teachers';
