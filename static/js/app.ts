@@ -915,6 +915,24 @@ function createModal(level:number ){
     }
     return editor;
   }
+  function goToCursorLocationAndFix(editor: AceAjax.Editor, cursorLocation: AceAjax.Position, wrongString :string, correctString: string){
+    let tempIndex = 0;
+    let row = cursorLocation.row;
+    let column = cursorLocation.column;
+    let tempLocation = wrongString.length
+    for(let i = wrongString.length; i >= column; i--){
+      setTimeout(function() {
+        tempLocation--;
+        tempIndex++;
+        editor.moveCursorTo(row,tempLocation);
+        if(tempLocation == column){
+          editor.setValue(correctString, tempLocation);
+        }
+
+      }, 150 * (i + tempIndex));
+    }
+  }
+
 
   function initializeModalEditor($editor: JQuery) {
     if (!$editor.length) return;
@@ -923,8 +941,7 @@ function createModal(level:number ){
     theModalEditor = editor;
     error.setEditor(editor);
     //small timeout to make sure the call with fixed code is complete.
-    setTimeout(function () {
-    }, 2000);
+    setTimeout(function(){}, 2000);
 
     window.Range = ace.require('ace/range').Range // get reference to ace/range
 
@@ -932,36 +949,28 @@ function createModal(level:number ){
     const storage = window.sessionStorage;
     if (storage) {
       const levelKey = $editor.data('lskey');
-      let resultString = ""; //String for the repaired code
-      let wrongString = ""; //String for the old code
+        let resultString = "";
 
-      if (storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))) {
-        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey)) ?? "";
-        wrongString = storage.getItem("{lvl}".replace("{lvl}", levelKey))?? "";
-        editor.setValue(wrongString);
+        if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
+          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+          let wrongInput = storage.getItem("{lvl}".replace("{lvl}", levelKey)) ?? "";
+          let cursorPostition = editor.getCursorPosition();
 
-        //Checks if the strings are the same, to find where the repair changes were made
-        let cursorLocation = 0;
-        for (let i = 0; i < resultString.length + 1; i++) {
-          if (resultString[i] !== wrongString[i]) { //Checks difference in strings
-            editor.clearSelection()
-            editor.moveCursorTo(0, i);
-            cursorLocation = i + 1;
-            break;
+          for (let i = 0; i <= resultString.length + 1; i++) { //Checks location difference
+            if (resultString[i] !== wrongInput[i] ) {
+              cursorPostition = editor.getCursorPosition();
+              cursorPostition.column = i + 1;
+              break;
+            }
           }
+          editor.setValue(wrongInput, wrongInput.length);
+
+          goToCursorLocationAndFix(editor, cursorPostition, wrongInput, resultString);
         }
-        setTimeout(function () {
+        else{
+          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
           editor.setValue(resultString);
-          editor.clearSelection()
-          editor.moveCursorTo(0, cursorLocation);
-        }, 1000);
-      }
-
-
-      else {
-        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey)) ?? "";
-        editor.setValue(resultString);
-      }
+        }
     }
     window.onbeforeunload = () => {
       // The browser doesn't show this message, rather it shows a default message.
