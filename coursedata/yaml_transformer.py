@@ -9,11 +9,11 @@ def nop(s):
 
 
 def transform_yaml_to_lark(only_new_lang=True):
-  """Creates a lark file in ./grammars/ for  all yaml files located in ./coursedata/keywords/.
+  """Creates a lark file in ../grammars/ for  all yaml files located in ../coursedata/keywords/.
   If a keyword is not yet translated, it will use the English translation of the keyword
 
   Args:
-      only_new_lang (bool, optional): Specifies if only a lark file should be created for a new language or for all languages. Defaults to True.
+      only_new_lang (bool, optional): Specifies if only a lark file should be created for a new keyword language or for all languages. Defaults to True.
   """
   input_path = '../coursedata/keywords/'
   current_grammar_path = '../grammars/'
@@ -34,7 +34,7 @@ def transform_yaml_to_lark(only_new_lang=True):
     default_yaml_with_path = os.path.join(input_path, 'en' + '.yaml')
 
     with open(default_yaml_with_path, 'r') as stream:
-      default_command_combinations = yaml.safe_load(stream)
+      en_command_combinations = yaml.safe_load(stream)
 
     with open(yaml_filesname_with_path, 'r') as stream:
       command_combinations = yaml.safe_load(stream)
@@ -44,9 +44,11 @@ def transform_yaml_to_lark(only_new_lang=True):
     with open(lark_filesname_with_path, 'w+') as f:
       list_of_translations = []
       
-      for command, translation in command_combinations.items():      
+      for command, translation in command_combinations.items():   
+        en_translation = en_command_combinations[command]
+        
         if translation == '':
-          translation = default_command_combinations[command]
+          translation = en_translation
           
         if yaml_lang != 'en':
           if translation in list_of_translations:
@@ -58,7 +60,10 @@ def transform_yaml_to_lark(only_new_lang=True):
           command_upper = command.upper()
           command = '_' + command_upper
 
-        f.write(f'{command}: "{translation}" \n')
+        if translation != en_translation:
+          f.write(f'{command}: "{translation}" | "{en_translation}"\n')
+        else:
+          f.write(f'{command}: "{translation}"\n')
 
 def transform_level_defaults(old_level, new_level=None, function=nop):
   input_path = '../coursedata/level-defaults'
