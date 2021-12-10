@@ -15,8 +15,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
       )
 
     def test_print_var_brackets(self):
@@ -31,8 +30,7 @@ class TestsLevel18(HedyTester):
         self.multi_level_tester(
           code=code,
           expected=expected,
-          extra_check_function=self.is_not_turtle(),
-          test_name=self.name()
+          extra_check_function=self.is_not_turtle()
         )
 
     def test_input(self):
@@ -54,8 +52,7 @@ class TestsLevel18(HedyTester):
           max_level=20,
           code=code,
           expected=expected,
-          extra_check_function=self.is_not_turtle(),
-          test_name=self.name()
+          extra_check_function=self.is_not_turtle()
         )
 
     # issue also in level 17, leaving for now.
@@ -126,8 +123,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
       )
 
     def test_for_loop(self):
@@ -148,8 +144,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
       )
 
     def test_for_nesting(self):
@@ -168,8 +163,7 @@ class TestsLevel18(HedyTester):
 
         code=code,
         expected=expected,
-        extra_check_function=self.is_not_turtle(),
-        test_name=self.name()
+        extra_check_function=self.is_not_turtle()
       )
 
     def test_input_with_list(self):
@@ -191,8 +185,7 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
           code=code,
           expected=expected,
-          extra_check_function=self.is_not_turtle(),
-          test_name=self.name()
+          extra_check_function=self.is_not_turtle()
       )
 
     # negative tests
@@ -203,8 +196,7 @@ class TestsLevel18(HedyTester):
 
       self.multi_level_tester(
         code=code,
-        exception=hedy.exceptions.UndefinedVarException,
-        test_name=self.name()
+        exception=hedy.exceptions.UndefinedVarException
       )
 
       # deze extra check functie kan nu niet mee omdat die altijd op result werkt

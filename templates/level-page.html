@@ -3,14 +3,14 @@
 {% block body %}
 <div id="level-header" class="pl-8 py-2 bg-blue-200 flex items-center">
   <div class="tracking-wide text-xl font-thin py-2 mr-8 mt-1 whitespace-no-wrap">
-    {{ level_title }} {{ level_nr }}
+    {{ ui.level_title }} {{ level_nr }}
     &nbsp;
-    {% if assignment_nr %} · {{ step_title }} {{ assignment_nr }} {% endif %}
+    {% if assignment_nr %} · {{ ui.step_title }} {{ assignment_nr }} {% endif %}
   </div>
   <div class="w-full flex items-center justify-end ml-auto mr-4">
-    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (level_title + ' ' + level_nr)}}">
-    <input type="submit" class="green-btn mx-2" value="{{ save_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code());">
-    <input type="submit" class="green-btn mx-2" value="{{ share_code_button }}" onclick="hedyApp.share_program({{ level }}, '{{ g.lang }}', true, true);">
+    <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (ui.level_title + ' ' + level_nr)}}">
+    <input type="submit" class="green-btn mx-2" value="{{ ui.save_code_button }}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code());">
+    <input type="submit" class="green-btn mx-2" value="{{ ui.share_code_button }}" onclick="hedyApp.share_program({{ level }}, '{{ g.lang }}', true, true);">
   </div>
 </div>
 

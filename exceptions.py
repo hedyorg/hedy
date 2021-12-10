@@ -53,7 +53,7 @@ class InvalidSpaceException(FtfyException):
             fixed_result=fixed_result)
 
 class ParseException(HedyException):
-    def __init__(self, level, location, found):
+    def __init__(self, level, location, found, fixed_code=None):
         super().__init__('Parse',
             level=level,
             location=location,
@@ -61,10 +61,18 @@ class ParseException(HedyException):
             # 'character_found' for backwards compatibility
             character_found=found)
 
+        #TODO (FH, 8 dec 21) many exceptions now support fixed code maybe we should move it to hedyexception?
+        self.fixed_code = fixed_code
+
 class UndefinedVarException(HedyException):
     def __init__(self, name):
         super().__init__('Var Undefined',
             name=name)
+
+class CyclicVariableDefinitionException(HedyException):
+    def __init__(self, variable):
+        super().__init__('Cyclic Var Definition',
+                         variable=variable)
 
 class InvalidArgumentTypeException(HedyException):
     def __init__(self, command, invalid_type, allowed_types, invalid_argument):
@@ -114,6 +122,12 @@ class InvalidCommandException(FtfyException):
             fixed_result=fixed_result)
         self.location = [line_number]
 
+class MissingCommandException(HedyException):
+    def __init__(self, level, line_number):
+        super().__init__('Missing Command',
+            level=level,
+            line_number=line_number)
+
 
 class IncompleteCommandException(HedyException):
     def __init__(self, incomplete_command, level, line_number):
@@ -147,18 +161,20 @@ class CodePlaceholdersPresentException(HedyException):
         super().__init__('Has Blanks')
 
 class NoIndentationException(HedyException):
-    def __init__(self, line_number, leading_spaces, indent_size):
+    def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('No Indentation',
             line_number=line_number,
             leading_spaces=leading_spaces,
             indent_size=indent_size)
+        self.fixed_code = fixed_code
 
 class IndentationException(HedyException):
-    def __init__(self, line_number, leading_spaces, indent_size):
+    def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('Unexpected Indentation',
             line_number=line_number,
             leading_spaces=leading_spaces,
             indent_size=indent_size)
+        self.fixed_code = fixed_code
 
 class UnsupportedFloatException(HedyException):
     def __init__(self, value):

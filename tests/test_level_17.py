@@ -15,10 +15,9 @@ class TestsLevel17(HedyTester):
     naam = 'Hedy'
     if str(naam) == str('Hedy'):
       print(f'koekoek')""")
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_else(self):
     code = textwrap.dedent("""\
@@ -46,30 +45,28 @@ class TestsLevel17(HedyTester):
       print(f'Foutje')
       print(f'Het antwoord moest zijn {antwoord}')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_for_loop(self):
     code = textwrap.dedent("""\
     a is 2
-    a is 3
+    b is 3
     for a in range 2 to 4:
       a is a + 2
       b is b + 2""")
     expected = textwrap.dedent("""\
     a = 2
-    a = 3
+    b = 3
     step = 1 if int(2) < int(4) else -1
     for a in range(int(2), int(4) + step, step):
       a = a + 2
       b = b + 2""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if__else(self):
     code = textwrap.dedent("""\
@@ -85,10 +82,9 @@ class TestsLevel17(HedyTester):
     else:
       x = 222""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_forloop(self):
     code = textwrap.dedent("""\
@@ -101,10 +97,9 @@ class TestsLevel17(HedyTester):
       print(f'{i}')
     print(f'wie niet weg is is gezien')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_allow_space_after_else_line(self):
     code = textwrap.dedent("""\
@@ -124,8 +119,7 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       max_level=17,
       code=code,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_allow_space_before_colon(self):
@@ -147,8 +141,7 @@ class TestsLevel17(HedyTester):
     self.multi_level_tester(
       code=code,
       max_level=17,
-      expected=expected,
-      test_name=self.name()
+      expected=expected
     )
 
   def test_if_under_else_in_for(self):
@@ -181,10 +174,9 @@ class TestsLevel17(HedyTester):
       if str(antwoord) == str('25'):
         i = 10""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_elif(self):
     code = textwrap.dedent("""\
@@ -200,10 +192,9 @@ class TestsLevel17(HedyTester):
       elif str(a) == str('2'):
         x = 222""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_with_multiple_elifs(self):
     code = textwrap.dedent("""\
@@ -223,10 +214,9 @@ class TestsLevel17(HedyTester):
       elif str(a) == str('2'):
         x = 222""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   def test_if_in_list_with_string_var_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -235,8 +225,7 @@ class TestsLevel17(HedyTester):
         a is 1""")
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_list_gives_error(self):
@@ -246,8 +235,7 @@ class TestsLevel17(HedyTester):
           a is 1""")
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
   def test_equality_with_incompatible_types_gives_error(self):
@@ -258,8 +246,7 @@ class TestsLevel17(HedyTester):
       c is 1""")
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidTypeCombinationException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidTypeCombinationException
     )
 
   @parameterized.expand(HedyTester.comparison_commands)
@@ -280,10 +267,9 @@ class TestsLevel17(HedyTester):
       if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'Dan ben je jonger dan ik!')""")
 
-    result = hedy.transpile(code, self.level)
 
-    self.assertEqual(expected, result.code)
-    self.assertEqual(False, result.has_turtle)
+
+    self.single_level_tester(code=code, expected=expected)
 
   @parameterized.expand(HedyTester.number_comparisons_commands)
   def test_smaller_with_string_gives_type_error(self, comparison):
@@ -294,6 +280,5 @@ class TestsLevel17(HedyTester):
 
     self.multi_level_tester(
       code=code,
-      exception=hedy.exceptions.InvalidArgumentTypeException,
-      test_name=self.name()
+      exception=hedy.exceptions.InvalidArgumentTypeException
     )

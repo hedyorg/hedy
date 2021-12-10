@@ -326,6 +326,10 @@ if (window.location.pathname === '/signup') {
     if (login_username.match ('@')) $ ('#email').val (login_username);
     else                            $ ('#username').val (login_username);
   }
+  const redirect = localStorage.getItem('hedy-save-redirect');
+  if (redirect && redirect.includes('invite')) {
+    $ ('#is_teacher_div').hide();
+  }
 }
 
 $ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
