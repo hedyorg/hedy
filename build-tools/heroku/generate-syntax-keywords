@@ -18,15 +18,15 @@ regex='(.\S*): ((\w| \w)*)'
 if [ $1 == 'en' ]
 then
     cat ./coursedata/keywords/en.yaml | while read line; do
-        [[ "$line" =~ $regex ]]
+        [[ "$line" =~ $regex ]] #Compares the line being read to the regex and split it off into arguments ${BASH_REMATCH} 1 through 3
         echo ${line/${BASH_REMATCH[0]}/\'_${BASH_REMATCH[1]^^}\':\'${BASH_REMATCH[2]}\',} >> static/js/syntaxLang-$1.ts
     done
 else
     linenr=0
     cat ./coursedata/keywords/$1.yaml | while read line; do
-        [[ "$line" =~ $regex ]]
+        [[ "$line" =~ $regex ]] #Compares the line being read to the regex and split it off into arguments ${BASH_REMATCH} 1 through 3
         newline=${line/${BASH_REMATCH[0]}/\'_${BASH_REMATCH[1]^^}\':\'(?:${BASH_REMATCH[2]}\|}
-        #searches for the correct line in en.yaml, parses and appends the english keywords, then finishes the sentence
+        #searches for the equivalent to the current line in en.yaml, parses and appends the english keywords, then finishes the sentence
         linenr=$(( linenr+1 ))
         engline=$(sed "${linenr}q;d" ./coursedata/keywords/en.yaml)
         [[ "$engline" =~ $regex ]]
