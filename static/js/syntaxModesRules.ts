@@ -4,8 +4,37 @@ import {LANG_nl} from './syntaxLang-nl';
 // Set this to true to use keywords from languages other than english
 var localKeywordsEnable = false;
 
-// Sets the current keywords based on the current language
-var currentLang;
+// Contains the current keywords based on the current language
+var currentLang: { 
+  _PRINT: string; 
+  _IS: string; 
+  _ASK: string; 
+  _ECHO: string; 
+  _FORWARD: string; 
+  _TURN: string; 
+  _SLEEP: string; 
+  _ADD_LIST: string; 
+  _TO_LIST: string; 
+  _REMOVE: string; 
+  _FROM: string; 
+  _AT: string; 
+  _RANDOM: string; 
+  _IN: string; 
+  _IF: string; 
+  _ELSE: string; 
+  _AND: string; 
+  _REPEAT: string; 
+  _TIMES: string; 
+  _FOR: string; 
+  _RANGE: string; 
+  _TO: string; 
+  _STEP: string; 
+  _ELIF: string; 
+  _INPUT: string; 
+  _OR: string; 
+  _WHILE: string; 
+  _LENGTH: string; 
+};
 if(localKeywordsEnable){
   switch(window.State.lang){
     case 'nl':
@@ -33,7 +62,7 @@ type Rules = Record<string, Rule[]>;
 //   to another state to avoid highlighting something.
 // - 'expression_eol' is the state to contain arbitrary values that will always eat the rest of the line
 // - 'gobble' is the state that will eat whatever is left in the line and go back to 'start'
-function baseRules(_AT: string, _RANDOM: string): Rules {
+function baseRules(): Rules {
   return {
     // gobble is a state in which we can read anything (.*), used after print
     gobble: [
@@ -52,7 +81,7 @@ function baseRules(_AT: string, _RANDOM: string): Rules {
         token: 'constant.character',
       },
       {
-        regex: _AT + ' ' + _RANDOM,
+        regex: currentLang._AT + ' ' + currentLang._RANDOM,
         token: 'keyword'
       },
       {
@@ -66,9 +95,9 @@ function baseRules(_AT: string, _RANDOM: string): Rules {
 const LEVELS = [
   {
     name: 'level1',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT,'gobble'),
-      rule_turtle(currentLang._TURN,currentLang._FORWARD),
+    rules: pipe(baseRules(),
+      rule_printSpace('gobble'),
+      rule_turtle(),
       recognize('start', {
         regex: keywordWithSpace(currentLang._ECHO),
         token: 'keyword',
@@ -84,126 +113,126 @@ const LEVELS = [
   {
     // Adds lists and 'at random'
     name: 'level2',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
 
-      rule_printSpace(currentLang._PRINT,'expression_eol'),
-      rule_isAsk(currentLang._IS,currentLang._ASK,'gobble'),
-      rule_is(currentLang._IS,'gobble'),
-      rule_turtle(currentLang._TURN,currentLang._FORWARD),
-      rule_sleep(currentLang._SLEEP),
+      rule_printSpace('expression_eol'),
+      rule_isAsk('gobble'),
+      rule_is('gobble'),
+      rule_turtle(),
+      rule_sleep(),
 
     ),
   },
   {
     // Adds quoted text
     name: 'level3',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_turtle(currentLang._TURN,currentLang._FORWARD),
-      rule_printSpace(currentLang._PRINT,'expression_eol'),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
+    rules: pipe(baseRules(),
+      rule_turtle(),
+      rule_printSpace('expression_eol'),
+      rule_isAsk(),
+      rule_is(),
     ),
   },
   {
     // Adds if/else
     name: 'level4',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
-      rule_ifElseOneLine(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElseOneLine(),
+      rule_expressions(),
     ),
   },
   {
     // Adds repeat
     name: 'level5',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
-      rule_ifElseOneLine(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
-      rule_repeat(currentLang._REPEAT,currentLang._TIMES),
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElseOneLine(),
+      rule_expressions(),
+      rule_repeat(),
     ),
   },
   {
     // Adds arithmetic
     name: 'level6',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
-      rule_ifElseOneLine(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
-      rule_repeat(currentLang._REPEAT,currentLang._TIMES),
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElseOneLine(),
+      rule_expressions(),
+      rule_repeat(),
       rule_arithmetic(),
     ),
   },
   {
     // Adds indented blocks -- no changes to highlighter necessary
     name: 'level7',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
-      rule_repeat(currentLang._REPEAT,currentLang._TIMES),
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
+      rule_repeat(),
       rule_arithmetic(),
     ),
   },
   {
     // Replaces 'repeat' with 'for'
     name: 'level8',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_for(currentLang._FOR,currentLang._IN)
+      rule_for()
     ),
   },
   {
     // Replaces 'repeat' with 'for'
     name: 'level9and10',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-    rule_printSpace(currentLang._PRINT),
-    rule_isAsk(currentLang._IS,currentLang._ASK),
-    rule_is(currentLang._IS),
-    rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-    rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+    rule_printSpace(),
+    rule_isAsk(),
+    rule_is(),
+    rule_ifElse(),
+    rule_expressions(),
     rule_arithmetic(),
-    rule_forRange(currentLang._FOR,currentLang._IN,currentLang._RANGE),
-    rule_for(currentLang._FOR,currentLang._IN)
+    rule_forRange(),
+    rule_for()
     ),
   },
   {
     // Nesting of 'for' loops (no changes necessary)
     name: 'level11',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printSpace(currentLang._PRINT),
-      rule_isAsk(currentLang._IS,currentLang._ASK),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printSpace(),
+      rule_isAsk(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRange(currentLang._FOR,currentLang._IN,currentLang._RANGE),
+      rule_forRange(),
     ),
   },
   {
     // Adding fncall parens
     name: 'level12',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR,currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
 // ----------------------------------------------------------------
@@ -211,134 +240,134 @@ const LEVELS = [
 // ----------------------------------------------------------------
   {
     name: 'level11',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR,currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level13',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR,currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level14',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF, currentLang._ELSE, currentLang._IS, currentLang._IN),
-      rule_expressions(currentLang._AT, currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN, currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level15',
-    rules: pipe(baseRules(currentLang._AT, currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN, currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level16',
-    rules: pipe(baseRules(currentLang._AT, currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR,currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level17',
-    rules: pipe(baseRules(currentLang._AT, currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS, currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level18and19',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level20',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level21',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level22',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
   {
     name: 'level23',
-    rules: pipe(baseRules(currentLang._AT,currentLang._RANDOM),
-      rule_printParen(currentLang._PRINT),
-      rule_isInputParen(currentLang._IS,currentLang._INPUT),
-      rule_is(currentLang._IS),
-      rule_ifElse(currentLang._IF,currentLang._ELSE,currentLang._IS,currentLang._IN),
-      rule_expressions(currentLang._AT,currentLang._RANDOM),
+    rules: pipe(baseRules(),
+      rule_printParen(),
+      rule_isInputParen(),
+      rule_is(),
+      rule_ifElse(),
+      rule_expressions(),
       rule_arithmetic(),
-      rule_forRangeParen(currentLang._FOR, currentLang._IN,currentLang._RANGE),
+      rule_forRangeParen(),
     ),
   },
 ];
@@ -424,9 +453,9 @@ function pipe(val: any, ...fns: Array<(x: any) => any>) {
 /**
  * Add a 'print' rule, going to the indicated 'next' state (start if omitted)
  */
-function rule_printSpace(_PRINT: string, next?: string) {
+function rule_printSpace(next?: string) {
   return recognize('start', {
-    regex: keywordWithSpace(_PRINT),
+    regex: keywordWithSpace(currentLang._PRINT),
     token: 'keyword',
     next: next ?? 'start',
   });
@@ -435,9 +464,9 @@ function rule_printSpace(_PRINT: string, next?: string) {
 /**
  * Add an 'is ask' rule, going to the indicated 'next' state (expression_eol if omitted)
  */
-function rule_isAsk(_IS: string, _ASK: string, next?: string) {
+function rule_isAsk(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + _IS + ' ' + _ASK + ')',
+    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._ASK + ')',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -446,9 +475,9 @@ function rule_isAsk(_IS: string, _ASK: string, next?: string) {
 /**
  * Add an 'is' rule, going to the indicated 'next' state (expression_eol if omitted)
  */
-function rule_is(_IS: string, next?: string) {
+function rule_is(next?: string) {
   return recognize('start', {
-    regex: '(\\w+)( ' + _IS + ' )',
+    regex: '(\\w+)( ' + currentLang._IS + ' )',
     token: ['text', 'keyword'],
     next: next ?? 'expression_eol',
   });
@@ -457,33 +486,33 @@ function rule_is(_IS: string, next?: string) {
 /**
  * Add a 'print' rule with brackets
  */
-function rule_printParen(_PRINT: string) {
+function rule_printParen() {
   return recognize('start', {
-    regex: '(' + _PRINT + ')(\\()',
+    regex: '(' + currentLang._PRINT + ')(\\()',
     token: ['keyword', 'paren.lparen'],
     next: 'start'
   });
 }
 
-function rule_turtle(_TURN: string, _FORWARD: string) {
+function rule_turtle() {
     return comp(
       recognize('start', {
         // Note: left and right are not yet keywords
-        regex: _TURN + ' (left|right)?',
+        regex: currentLang._TURN + ' (left|right)?',
         token: 'keyword',
         next: 'start',
       }),
       recognize('start', {
-        regex: _FORWARD,
+        regex: currentLang._FORWARD,
         token: 'keyword',
         next: 'start',
       })
     )
 }
 
-function rule_sleep(_SLEEP: string) {
+function rule_sleep() {
   return recognize('start', {
-      regex: _SLEEP,
+      regex: currentLang._SLEEP,
       token: 'keyword',
       next: 'start',
     }
@@ -493,9 +522,9 @@ function rule_sleep(_SLEEP: string) {
 /**
  * Add an 'is input' rule with brackets
  */
-function rule_isInputParen(_IS: string, _INPUT: string) {
+function rule_isInputParen() {
   return recognize('start', {
-    regex: '(\\w+)( ' + _IS + ' ' + _INPUT + ')(\\()',
+    regex: '(\\w+)( ' + currentLang._IS + ' ' + currentLang._INPUT + ')(\\()',
     token: ['text', 'keyword', 'paren.lparen'],
     next: 'start'
   });
@@ -504,14 +533,14 @@ function rule_isInputParen(_IS: string, _INPUT: string) {
 /**
  * Recognize expressions as part of the 'start' state
  */
-function rule_expressions(_AT: string, _RANDOM: string) {
+function rule_expressions() {
   return comp(
     recognize('start', {
       regex: "'[^']*'",
       token: 'constant.character',
     }),
     recognize('start', {
-      regex: _AT + _RANDOM,
+      regex: currentLang._AT + currentLang._RANDOM,
       token: 'keyword'
     }),
     recognize('start', {
@@ -525,38 +554,38 @@ function rule_expressions(_AT: string, _RANDOM: string) {
 /**
  * Add highlighting for if/else, also add a condition
  */
-function rule_ifElseOneLine(_IF: string, _ELSE: string, _IS: string, _IN: string) {
+function rule_ifElseOneLine() {
   return comp(
     recognize('start', {
-      regex: keywordWithSpace(_IF),
+      regex: keywordWithSpace(currentLang._IF),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: keywordWithSpace(_ELSE),
+      regex: keywordWithSpace(currentLang._ELSE),
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((' + _IS + ')|(' + _IN + '))'),
+      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
       token: 'keyword',
       next: 'start',
     }),
   );
 }
 
-function rule_ifElse(_IF: string, _ELSE: string, _IS: string, _IN: string) {
+function rule_ifElse() {
   return comp(
     recognize('start', {
-      regex: keywordWithSpace(_IF),
+      regex: keywordWithSpace(currentLang._IF),
       token: 'keyword',
       next: 'condition',
     }),
     recognize('start', {
-      regex: '\\b' + _ELSE + '\\b',
+      regex: '\\b' + currentLang._ELSE + '\\b',
       token: 'keyword',
     }),
     recognize('condition', {
-      regex: keywordWithSpace('((' + _IS + ')|(' + _IN + '))'),
+      regex: keywordWithSpace('((' + currentLang._IS + ')|(' + currentLang._IN + '))'),
       token: 'keyword',
       next: 'start',
     }),
@@ -586,30 +615,30 @@ function rule_arithmetic() {
 /**
  * Add highlighting for repeat
  */
-function rule_repeat(_REPEAT: string, _TIMES: string) {
+function rule_repeat() {
   return recognize('start', {
-    regex: '(' + _REPEAT + ')( \\w+ )(' + _TIMES + ')',
+    regex: '(' + currentLang._REPEAT + ')( \\w+ )(' + currentLang._TIMES + ')',
     token: ['keyword', 'text', 'keyword'],
   });
 }
 
-function rule_for(_FOR: string, _IN: string){
+function rule_for(){
   return recognize('start', {
-    regex: '(' + _FOR + ' )(\\w+)( ' + _IN + ' )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' )(\\w+)',
     token: ['keyword', 'text', 'keyword', 'text'],
   });
 }
 
-function rule_forRange(_FOR: string, _IN: string, _RANGE: string) {
+function rule_forRange() {
   return recognize('start', {
-    regex: '(' + _FOR + ' )(\\w+)( ' + _IN + ' ' + _RANGE + ' )(\\w+)( to )(\\w+)',
+    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ' )(\\w+)( to )(\\w+)',
     token: ['keyword', 'text', 'keyword', 'text', 'keyword', 'text'],
   });
 }
 
-function rule_forRangeParen(_FOR: string, _IN: string, _RANGE: string) {
+function rule_forRangeParen() {
   return recognize('start', {
-    regex: '(' + _FOR + ' )(\\w+)( ' + _IN + ' ' + _RANGE + ')(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
+    regex: '(' + currentLang._FOR + ' )(\\w+)( ' + currentLang._IN + ' ' + currentLang._RANGE + ')(\\()([\\s\\w]+)(,)([\\s\\w]+)(\\))',
     token: ['keyword', 'text', 'keyword', 'paren.lparen', 'text', 'punctuation.operator', 'text', 'paren.rparen'],
   });
 }
