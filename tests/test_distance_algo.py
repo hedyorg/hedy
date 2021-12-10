@@ -57,4 +57,4 @@ class TestsKeywordSuggestions(unittest.TestCase):
     invalid_command = "ask"
     keywords_nl_level_1 = hedy.get_suggestions_for_language('nl', 1)
     closest = hedy.closest_command(invalid_command, keywords_nl_level_1)
-    self.assertEqual(None, closest)
+    self.assertEqual('keyword', closest)
