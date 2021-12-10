@@ -42,9 +42,6 @@ _EOL: "\r"?"\n"
 text: /([^\n]+)/ -> text //anything can be parsed except for a newline
 textwithoutspaces: /([^\n *+-\/]+)/ -> text //anything can be parsed except for spaces (plus: a newline)
 
-%import common.DIGIT
-%import common.WS_INLINE
-%import common.NEWLINE
 %import common.SIGNED_INT -> INT
 %import common.NUMBER -> NUMBER
 
