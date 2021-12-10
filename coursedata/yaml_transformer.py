@@ -227,8 +227,8 @@ def translate_text(level, story_text, from_lang, to_lang):
   return ''.join(transformed_story_text)
 
 def transform_yaml_keywords_adventures(lang = 'all'):
-  input_path = './coursedata/adventures'
-  output_path = './coursedata/adventures-transformed/'
+  input_path = '../coursedata/adventures'
+  output_path = '../coursedata/adventures-transformed/'
   Path(output_path).mkdir(parents=True, exist_ok=True)
 
   yaml_filesnames = [f for f in os.listdir(input_path) if
@@ -304,20 +304,20 @@ def transform_yaml_keywords_level_defaults(lang = 'all'):
             translated_start_code = ''
           transformed_dict[level_number]['start_code'] = translated_start_code
 
-          for command in number_values['commands']:
+          for index, command in enumerate(number_values['commands']):
             name = command['name']
             translated_name = translate_command(name, 'en', lang_yaml)
             if name == translated_name:
               translated_name = translate_text(level_number, name, 'en', lang_yaml)
-            transformed_dict[level_number]['commands'][0]['name'] = translated_name
+            transformed_dict[level_number]['commands'][index]['name'] = translated_name
               
             explanation = command['explanation']
             translated_explanation = translate_text(level_number, explanation, 'en', lang_yaml)
-            transformed_dict[level_number]['commands'][0]['explanation'] = translated_explanation
+            transformed_dict[level_number]['commands'][index]['explanation'] = translated_explanation
 
             demo_code = command['demo_code']
             translated_demo_code = hedy_translation.translate_keywords(demo_code, 'en', lang_yaml, level_number)
-            transformed_dict[level_number]['commands'][0]['demo_code'] = translated_demo_code
+            transformed_dict[level_number]['commands'][index]['demo_code'] = translated_demo_code
       
       with open(output_path + filename, 'w') as f:
           f.write(utils.dump_yaml_rt(transformed_dict))
