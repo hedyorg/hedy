@@ -264,7 +264,7 @@ class TestAuth(AuthHelper):
     def test_signup(self):
         # GIVEN a valid username and signup body
         username = self.make_username()
-        user = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar', 'language': 'nl'}
+        user = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar'}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server
