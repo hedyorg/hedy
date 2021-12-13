@@ -447,7 +447,6 @@ class TestAuth(AuthHelper):
         self.assertIsInstance(profile, dict)
         self.assertEqual(profile['username'], self.username),
         self.assertEqual(profile['email'],    self.user['email']),
-        self.assertEqual(profile['language'], str)
         self.assertEqual(profile['verification_pending'], True)
         self.assertIsInstance(profile['student_classes'], list)
         self.assertEqual(len(profile['student_classes']), 0)
@@ -488,7 +487,6 @@ class TestAuth(AuthHelper):
            'birth_year': 1989,
            'country': 'NL',
            'gender': 'o',
-           'language': 'nl',
            'prog_experience': 'yes',
            'experience_languages': ['python', 'other_block']
         }
