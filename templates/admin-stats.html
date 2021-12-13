@@ -1,0 +1,26 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="px-8">
+  <h2>Total programs: {{ program_count }}</h2>
+    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats('week', this)">Past week</a> |
+    <a href="#" class="stats-period-toggle" onclick="hedyApp.auth.getProgramStats('month', this)">Past month</a>
+    <div id="stats-spinner" class="flex justify-center items-center h-64">
+      <div
+        class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400"
+      ></div>
+    </div>
+    <div id="stats-data" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+      <div class="flex flex-col order-1">
+        <div class="w-full flex-1 flex flex-col">
+          <canvas id="runsChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+      <div class="flex flex-col order-2">
+        <div class="w-full flex-1 flex flex-col">
+          <canvas id="exceptionsChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

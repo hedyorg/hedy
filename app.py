@@ -452,7 +452,8 @@ def parse():
         with querylog.log_time('transpile'):
 
             try:
-                transpile_result = hedy.transpile(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang)
+                # TODO:
                 if username:
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -462,7 +463,6 @@ def parse():
                 transpile_result = ex.fixed_result
             except hedy.exceptions.InvalidCommandException as ex:
                 response['Error'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
-                response['Location'] = ex.error_location
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
             except hedy.exceptions.FtfyException as ex:
@@ -505,6 +505,27 @@ def parse():
     })
 
     return jsonify(response)
+
+
+def transpile_add_stats(code, level, lang_):
+    username = current_user()['username'] or None
+    try:
+        result = hedy.transpile(code, level, lang_)
+        add_program_stats(username, level)
+        return result
+    except Exception as ex:
+        add_program_stats(username, level, str(ex.__class__.__name__))
+        raise
+
+
+def add_program_stats(username, level, ex=None):
+    if username:  # for now keep stats for logged users only
+        try:
+            DATABASE.add_program_stats(username, level, ex)
+        except Exception as ex:
+            # Adding stats should not cause failure. Log and continue.
+            querylog.log_value(server_error=ex)
+
 
 def hedy_error_to_response(ex, translations):
     return {
@@ -647,6 +668,53 @@ def programs_page(request):
     return render_template('programs.html', programs=programs, page_title=hedyweb.get_page_title('programs'),
                            current_page='programs', from_user=from_user, adventures=adventures)
 
+@app.route('/program-stats')
+def get_program_stats():
+    start_date = request.args.get('start_date', default=None, type=str)
+    end_date = request.args.get('end_date', default=None, type=str)
+
+    user = current_user()
+    if not is_admin(user):
+        return utils.page_403(ui_message='unauthorized')
+
+    data = DATABASE.get_all_program_stats(start_date, end_date)
+    processed_data = _program_runs_stats(data)
+    response = [{'level': k, 'data': v} for k, v in processed_data.items()]
+    response.sort(key=lambda el: el['level'])
+    return jsonify(response)
+
+def _program_runs_stats(data):
+    result = {}
+    for rec in data:
+        level = rec['level']
+        result[level] = _process_program_runs_rec(result.get(level), rec)
+    _add_error_rate(result)
+    return result
+
+def _process_program_runs_rec(data, rec):
+    if not data:
+        data = {'failed_runs': 0, 'successful_runs': 0}
+
+    successes = rec.get('successful_runs')
+    if successes:
+        data['successful_runs'] += successes
+
+    for k, v in _filter_exceptions(rec).items():
+        if not data.get(k):
+            data[k] = 0
+        data[k] += v
+        data['failed_runs'] += v
+
+    return data
+
+def _filter_exceptions(s):
+    return {k: v for k, v in s.items() if k.lower().endswith('exception')}
+
+def _add_error_rate(data):
+    for k, v in data.items():
+        fails = v['failed_runs']
+        successes = v['successful_runs']
+        v['error_rate'] = fails / (successes + fails)
 
 def get_user_formatted_age(now, date):
     texts = TRANSLATIONS.get_translations(g.lang, 'Programs')
@@ -1058,6 +1126,11 @@ def main_page(page):
                                    welcome_teacher=welcome_teacher)
         else:
             return utils.page_403(ui_message='not_teacher')
+
+    if page == 'stats':
+        if not is_admin(current_user()):
+            return utils.page_403(ui_message='unauthorized')
+        return render_template('admin-stats.html')
 
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():

@@ -1,13 +1,16 @@
 from utils import timems, times
+from datetime import date
 from . import dynamo
+import functools
+import operator
 
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=['email'])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.Key('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id')
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=['username'])
-CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'link'])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.Key('username')])
+CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.Key(v) for v in ['teacher', 'link']])
 
 # Customizations contains the class customizations made by a teacher on a specific class/level combination.
 # Each entry stores a unique class_id / level combination and the selected adventures, example programs and/or hiding of level
@@ -54,6 +57,18 @@ ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 #
 QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
 
+# Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
+# per day and updated in place. Uses a composite partition key 'username#level' and 'date' as a sort key. Structure:
+# {
+#   "username#level": "hedy#1",
+#   "date": '2025-12-31',
+#   "successful_runs": 10,
+#   "InvalidCommandException": 3,
+#   "InvalidSpaceException": 2
+# }
+#
+PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='username#level', sort_key='date',
+                             indexed_fields=[dynamo.Key('username', 'date')])
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -307,6 +322,35 @@ class Database:
             restrictions['hide_next_level'] = False
 
         return display_adventures, restrictions
+
+    def add_program_stats(self, username, level, exception):
+        key = {"username#level": f'{username}#{level}', 'date': date.today().isoformat()}
+
+        add_attributes = {exception: dynamo.DynamoIncrement(), 'username': username} if exception else \
+            {'successful_runs': dynamo.DynamoIncrement(), 'username': username}
+
+        return PROGRAM_STATS.update(key, add_attributes)
+
+    def get_program_stats(self, users, start_date=None, end_date=None):
+        start = start_date or '2021-01-01'
+        end = end_date or date.today().isoformat()
+
+        data = [PROGRAM_STATS.get_many({'username': u, 'date': dynamo.Between(start, end)}, sort_key='date') for u in users]
+        flat_data = functools.reduce(operator.iconcat, data, [])
+        return [self._split_combined_key(d) for d in flat_data]
+
+    # Expensive and only available for admins
+    # Check once again if there is a way to query based on date only
+    def get_all_program_stats(self, start_date=None, end_date=None):
+        start = start_date or '2021-01-01'
+        end = end_date or date.today().isoformat()
+        entries = PROGRAM_STATS.scan()
+        return [self._split_combined_key(e) for e in entries if e['date'] and start <= e['date'] <= end]
+
+    def _split_combined_key(self, e):
+        [_, level] = e[PROGRAM_STATS.partition_key].split('#')
+        e['level'] = level
+        return e
 
     def progress_by_username(self, username):
         return ACHIEVEMENTS.get({'username': username})
