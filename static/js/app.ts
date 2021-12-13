@@ -1,4 +1,6 @@
 // It's important that this file gets loaded first
+import './syntaxLang-en';
+import './syntaxLang-nl';
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
@@ -846,7 +848,7 @@ export function confetti_cannon(){
     setTimeout(function(){canvas.classList.add('hidden')}, 3000);
     let adventures = $('#adventures');
     let currentAdventure = $(adventures).find('.tab-selected').attr('data-tab');
-    let customLevels = ['turtle', 'rock', 'haunted', 'fortune', 'restaurant']
+    let customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
 
     if(customLevels.includes(currentAdventure!)){
       let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
@@ -871,18 +873,9 @@ export function confetti_cannon(){
 }
 
 function getConfettiForAdventure(adventure: string){
-
-  switch (adventure) {
-    case 'turtle':
-      return [['🐢']];
-    case 'rock':
-      return [['✂️'], ['📜'], ['🪨']];
-    case 'haunted':
-      return [['🦇'], ['👻'], ['🎃']];
-    case 'restaurant':
-      return [['🍣'], ['🍝'], ['🍕'], ['🍰']];
-    case 'fortune':
-      return [['🔮'], ['✨'], ['🧞‍♂️']];
+  let emoji = Array.from(ErrorMessages[adventure])
+  if (emoji != null){
+    return emoji;
   }
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
@@ -1034,4 +1027,22 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
   }
+}
+
+export function change_language(lang: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/change_language',
+    data: JSON.stringify({
+      lang: lang
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function(response: any) {
+      if (response.succes){
+        location.reload();
+      }
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
 }

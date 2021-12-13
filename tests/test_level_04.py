@@ -337,7 +337,7 @@ class TestsLevel4(HedyTester):
     #todo these could be tested in an extra_function too?
     self.assertEqual('Parse', context.exception.error_code)
     self.assertEqual(1, context.exception.error_location[0])
-    self.assertEqual('?', context.exception.error_location[1])
+    self.assertEqual(1, context.exception.error_location[1])
 
   def test_missing_opening_quote(self):
     code = textwrap.dedent("""\
@@ -345,16 +345,26 @@ class TestsLevel4(HedyTester):
 
     self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
   
-
   def test_missing_all_quotes(self):
     code = textwrap.dedent("""\
       print hallo wereld""")
 
     self.multi_level_tester(
       code=code,
-      max_level=4,
+      max_level=17,
       exception=hedy.exceptions.UndefinedVarException,
     )
+
+  def test_no_keyword_detected(self):
+    code = textwrap.dedent("""\
+      'competitie die gaan we winnen'""")
+
+    self.multi_level_tester(
+      code=code,
+      exception=hedy.exceptions.MissingCommandException,
+      max_level=11 # todo we should update the grammar of level 12 so this also works
+    )
+
   def test_print_Spanish(self):
     code = textwrap.dedent("""\
     print 'Cuál es tu color favorito?'""")
@@ -366,6 +376,15 @@ class TestsLevel4(HedyTester):
       max_level=11,
       expected=expected
     )
+
+  def test_repair(self):
+    code = "print ,'Hello'"
+    with self.assertRaises(hedy.exceptions.ParseException) as context:
+      result = hedy.transpile(code, self.level)
+
+    self.assertEqual("print 'Hello'", context.exception.fixed_code)
+
+
 
   #assorti
   def test_detect_accented_chars(self):
