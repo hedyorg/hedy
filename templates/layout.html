@@ -45,7 +45,7 @@
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% if username and not 'language' in user_data %}
-          <h3 class="text-white text-center bg-red-600 mt-1 mb-1 border-red-500 py-4">{{auth.set_preferred_lang}}</h3>
+          <h3 class="text-black text-center bg-yellow-300 mt-1 mb-1 border-red-500 py-4">{{auth.set_preferred_lang}}</h3>
       {% endif %}
       {% block body %}{% endblock %}
 
