@@ -433,9 +433,11 @@ class TestsLevel12(HedyTester):
       for i in range(int(1), int(2) + step, step):
         print(f'if youre happy and you know it')
         print(f'{action}')
+        time.sleep(0.1)
       print(f'if youre happy and you know it and you really want to show it')
       print(f'if youre happy and you know it')
-      print(f'{action}')""")
+      print(f'{action}')
+      time.sleep(0.1)""")
 
 
     self.single_level_tester(code=code, expected=expected)

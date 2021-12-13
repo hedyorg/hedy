@@ -874,7 +874,7 @@ class ConvertToPython_1(Transformer):
         return self.make_forward(parameter)
 
     def make_forward(self, parameter):
-        return f"t.forward({parameter})""\ntime.sleep(0.1)"
+        return sleep_after(f"t.forward({parameter})", False)
 
     def turn(self, args):
         if len(args) == 0:
@@ -1214,14 +1214,22 @@ class ConvertToPython_6(ConvertToPython_5):
     def division(self, args):
         return self.process_calculation(args, '//')
 
+def sleep_after(commands, indent=True):
+    lines = commands.split()
+    if lines[-1] == "time.sleep(0.1)": #we don't sleep double so skip if final line is a sleep already
+        return commands
+
+    sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
+    return commands + "\n" + sleep_command
+
 @hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, args):
         var_name = self.get_fresh_var('i')
         times = process_variable(args[0], self.lookup)
         command = args[1]
-        if command.startswith("print"):
-            command += "\ntime.sleep(0.1)"
+        # in level 7, repeats can only have 1 line as their arguments
+        command = sleep_after(command, False)
         return f"""for {var_name} in range(int({str(times)})):
 {indent(command)}"""
 
@@ -1237,7 +1245,10 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def repeat(self, args):
         all_lines = [indent(x) for x in args[1:]]
-        return "for i in range(int(" + str(args[0]) + ")):\n" + "\n".join(all_lines)
+        body = "\n".join(all_lines)
+        body = sleep_after(body)
+
+        return "for i in range(int(" + str(args[0]) + ")):\n" + body
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1267,6 +1278,8 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
       body = "\n".join([indent(x) for x in args[2:]])
 
+      body = sleep_after(body, True)
+
       return f"for {args[0]} in {args[1]}:\n{body}"
 
 @hedy_transpiler(level=11)
@@ -1274,6 +1287,7 @@ class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = "\n".join([indent(x) for x in args[3:]])
+        body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
         return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
 for {args[0]} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
@@ -1416,7 +1430,9 @@ class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [indent(x) for x in args[1:]]
-        return "while " + args[0] + ":\n"+"\n".join(all_lines)
+        body = "\n".join(all_lines)
+        body = sleep_after(body)
+        return "while " + args[0] + ":\n" + body
 
 @hedy_transpiler(level=16)
 class ConvertToPython_16(ConvertToPython_15):
@@ -1438,7 +1454,7 @@ class ConvertToPython_17(ConvertToPython_16):
 @hedy_transpiler(level=18)
 class ConvertToPython_18(ConvertToPython_17):
     # FH, nov 2021
-    # this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
+    # todo: this is an exact duplicate of ask form level 12, if we rename the rules to have the same name, this code could be deleted
 
     def input(self, args):
         return self.ask(args)

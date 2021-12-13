@@ -65,7 +65,8 @@ class TestsLevel8(HedyTester):
  
     expected = textwrap.dedent("""\
     for i in range(int(5)):
-      print(f'koekoek')""")
+      print(f'koekoek')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
   def test_repeat_with_variable_print(self):
@@ -78,7 +79,8 @@ class TestsLevel8(HedyTester):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -97,7 +99,8 @@ class TestsLevel8(HedyTester):
     expected = textwrap.dedent("""\
     v79de0191e90551f058d466c5e8c267ff = '5'
     for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -135,7 +138,8 @@ class TestsLevel8(HedyTester):
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -179,7 +183,8 @@ class TestsLevel8(HedyTester):
     count = '1'
     for i in range(int(12)):
       print(f'{count} times 12 is {int(count) * int(12)}')
-      count = int(count) + int(1)""")
+      count = int(count) + int(1)
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 
