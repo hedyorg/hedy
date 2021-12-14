@@ -238,7 +238,7 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.Achievements) {
-        response.Achievements.forEach(showAchievement);
+        response.Achievements.forEach(showAchievement, false);
       }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
@@ -270,12 +270,22 @@ function showBulb(level: string){
 
 }
 
-export function showAchievement(value: string){
+export function showAchievement(value: string, reload: boolean){
   $('#achievement_reached_title').text('"' + value + '"');
    $('#achievement_pop-up').fadeIn(1000);
    setTimeout(function(){
     $('#achievement_pop-up').fadeOut(1000);
+    if (reload) {
+      location.reload();
+    }
    }, 4000);
+   if (reload) {
+     console.log("We willen een reload!");
+     setTimeout(function() {
+       console.log("Die gebeurt hier...");
+
+     }, 7000);
+   }
 }
 
 function removeBulb(){
@@ -415,14 +425,11 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     }).done(function(response) {
       // The auth functions use this callback function.
       if (cb) return response.Error ? cb (response) : cb (null, response);
-      if (response.Warning) {
-        error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
-      }
-      if (response.Error) {
-        error.show(ErrorMessages['Transpile_error'], response.Error);
-        return;
-      }
+
       modal.alert (auth.texts['save_success_detail'], 4000);
+      if (response.achievements) {
+        response.achievements.forEach(showAchievement, true);
+      }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
       // The name of the program might have been changed by the server, so we use the name stated by the server.
@@ -549,6 +556,8 @@ export function submit_program (id: string, shared: boolean) {
   console.log(shared);
   if (! shared) return modal.alert (auth.texts['must_be_shared']);
 
+  console.log("Let's submit this program!");
+
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
@@ -558,7 +567,9 @@ export function submit_program (id: string, shared: boolean) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(_response) {
-    location.reload ();
+    if (_response.achievements) {
+      _response.achievements.forEach(showAchievement, true);
+    }
   });
 }
 
