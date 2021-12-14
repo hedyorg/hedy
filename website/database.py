@@ -31,6 +31,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=['teacher', 'lin
 #       "hide_next_level": false
 #     }
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id', sort_key='level')
+ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -305,3 +306,11 @@ class Database:
             restrictions['hide_next_level'] = False
 
         return display_adventures, restrictions
+
+    def achievements_by_username(self, user):
+        return ACHIEVEMENTS.get({'username': user})
+
+    def update_achievements_by_username(self, user, achievements):
+        if user != achievements['user']:
+            return
+        CUSTOMIZATIONS.put(achievements)
