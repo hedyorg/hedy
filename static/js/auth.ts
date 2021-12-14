@@ -94,6 +94,8 @@ export const auth = {
       if (! values.email?.match (auth.emailRegex)) return auth.error (auth.texts['valid_email'], 'email');
       if (values.email !== values.mail_repeat) return auth.error (auth.texts['repeat_match_email'],    'mail_repeat');
 
+      if (! values.language) return auth.error (auth.texts['please_language'], 'language');
+
       if (! values.password) return auth.error (auth.texts['please_password'], 'password');
       if (values.password.length < 6) return auth.error (auth.texts['password_six'], 'password');
       if (values.password !== values.password_repeat) return auth.error (auth.texts['repeat_match_password'], 'password_repeat');

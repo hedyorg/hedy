@@ -253,7 +253,9 @@ class TestAuth(AuthHelper):
             {'username': username, 'password': 'foo'},
             {'username': username, 'password': 'foobar'},
             {'username': username, 'password': 'foobar', 'email': 'me@something'},
-            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience':[2]},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': 123},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': True},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}
         ]
