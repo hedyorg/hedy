@@ -1,4 +1,5 @@
-command: print | repeat | ifs elses? | turtle | ask | assign_list | add | remove | sleep | list_access_var | assign | comment  //placing assign at the end means print is will print 'is' and print is Felienne will print 'is Felienne'
+command:+= ifs elses? -= ifelse| ifs
+//placing assign at the end means print is will print 'is' and print is Felienne will print 'is Felienne'
 
 repeat: _REPEAT _SPACE (INT | var) _SPACE _TIMES _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
