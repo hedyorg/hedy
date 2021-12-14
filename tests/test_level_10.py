@@ -15,7 +15,8 @@ class TestsLevel10(HedyTester):
     expected = textwrap.dedent("""\
     dieren = ['hond', 'kat', 'papegaai']
     for dier in dieren:
-      print(f'{dier}')""")
+      print(f'{dier}')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
   def test_for_list_multiple_lines(self):
@@ -33,7 +34,8 @@ class TestsLevel10(HedyTester):
       print(f'{shark} shark tudutudutudu')
       print(f'{shark} shark tudutudutudu')
       print(f'{shark} shark tudutudutudu')
-      print(f'{shark} shark')""")
+      print(f'{shark} shark')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 

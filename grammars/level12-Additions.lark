@@ -1,7 +1,7 @@
 
 //assigning a string now must be done with quotes
-assign: var _SPACE _IS _SPACE sum | var _SPACE _IS _SPACE text_in_quotes
-assign_list: var _SPACE _IS _SPACE (text_in_quotes|NUMBER) ((_COMMA _SPACE|_COMMA) (text_in_quotes|NUMBER))+
+assign: var _SPACE (_IS|_EQUALS) _SPACE sum | var _SPACE (_IS|_EQUALS) _SPACE text_in_quotes
+assign_list: var _SPACE (_IS|_EQUALS) _SPACE (text_in_quotes|NUMBER) ((_COMMA _SPACE|_COMMA) (text_in_quotes|NUMBER))+
 
 ?atom: NUMBER | var //unsupported numbers are gone, we can now allow floats with NUMBER
 

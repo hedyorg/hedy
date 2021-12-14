@@ -71,14 +71,14 @@
         example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
         demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
     -   explanation: "Uliza maswali ya hesabu na hakikisha majibu yako sahihi."
-        example: "Mfano: answer is ask '10 jumlisha 10 ni sawa sawa na?'"
-        demo_code: "jibu is ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
+        example: "Mfano: answer = ask '10 jumlisha 10 ni sawa sawa na?'"
+        demo_code: "jibu = ask '10 jumlisha 10 ni sawa sawa na?'\nif jibu is 20 print 'Sahihi!' else print 'Sio Sahihi'"
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy ni furaha!'"
@@ -88,11 +88,11 @@
         example: "Mfano: print 'Jambo! karibu Hedy.'"
         demo_code: "print 'Jambo! karibu Hedy.'"
     -   explanation: "Uliza maswali kwa kutumia neno `ask`."
-        example: "Mfano: mji is ask 'Unaishi wapi?'"
-        demo_code: "mji is ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
+        example: "Mfano: mji = ask 'Unaishi wapi?'"
+        demo_code: "mji = ask 'Unaishi wapi?'\nprint mji ', ndo ninapoishi pia.'"
     -   explanation: "Fanya uamuzi kwa kutumia neno `if`"
         example: "Mfano: if gari is Nissan print 'Ni gari' else print 'sio gari'"
-        demo_code: "jibu is ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
+        demo_code: "jibu = ask 'Unapenda nchi yako?'\nif jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'"
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
         example: "Example: repeat 3 times forward 10"
@@ -106,8 +106,8 @@
         example: "Mfano: print '5 mara 5 ni sawa sawa na ' 5 * 5"
         demo_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
     -   explanation: "Uliza jibu ya kujumlisha numberi na kuhakikisha jibu iko sahihi. Sasa tunaweza kuchapisha(print) mstari mbili kwa pamoja."
-        example: "Mfano: jibu is ask '5 jumlisha 5 ni sawa sawa na?'"
-        demo_code: "jibu is ask '5 jumlisha 5 ni sawa sawa na?'\nif jibu is 10\n    print 'Vizuri sana!'\n    print 'Kwakweli, jibu ilikuwa ' jibu\nelse\n    print 'Sio sahihi!'\n    print 'Jibu ilikuwa 10'"
+        example: "Mfano: jibu = ask '5 jumlisha 5 ni sawa sawa na?'"
+        demo_code: "jibu = ask '5 jumlisha 5 ni sawa sawa na?'\nif jibu is 10\n    print 'Vizuri sana!'\n    print 'Kwakweli, jibu ilikuwa ' jibu\nelse\n    print 'Sio sahihi!'\n    print 'Jibu ilikuwa 10'"
 10:
     start_code: |-
         animals is dog, cat, blobfish
@@ -147,23 +147,26 @@
             print 'Tayari au la, nakuja!'
 16:
     start_code: |-
-        matunda is ['embe', 'machungwa', 'ndizi']
+        matunda = ['embe', 'machungwa', 'ndizi']
         print matunda 
     intro_text: "Tutatumia mabano ya aina ya [ ] tukitaka kujenga orodha. Sasa tutatakiwa kutumia fungua semi na funga semi ya aina '' katika orodha(list). "
     commands:
     -   explanation: "Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha."
-        example: "Mfano: matunda is ['embe', 'machungwa', 'ndizi']"
+        example: "Mfano: matunda = ['embe', 'machungwa', 'ndizi']"
         demo_code: |-
-            matunda is ['embe', 'machungwa', 'ndizi']
-            print matunda 
+            matunda = ['embe', 'machungwa', 'ndizi']
+            print matunda
     -   name: "Chagua kitu kutoka kwenye orodha."
         explanation: "Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha."
-        example: "Mfano: matundayaywanya is matunda[1]"
-        demo_code: "matunda is ['embe', 'machungwa', 'ndizi']\nmatundayaywanya is matunda[1]\nprint matundayaywanya "
+        example: "Mfano: matundayaywanya = matunda[1]"
+        demo_code: "matunda = ['embe', 'machungwa', 'ndizi']\nmatundayaywanya = matunda[1]\nprint matundayaywanya "
     -   name: "Kuchagua matunda nasibu kutoka kwa orodha"
         explanation: "Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha."
-        example: "Mfano matundanasibu is matunda[random]"
-        demo_code: "matunda is ['embe', 'machungwa', 'ndizi']\nmatundanasibu is matunda[random]\nprint matundanasibu "
+        example: "Mfano matundanasibu = matunda[random]"
+        demo_code: |-
+            matunda = ['embe', 'machungwa', 'ndizi']
+            matunda_nasibu = matunda[random]
+            print matunda_nasibu
 #12-old:
 #    start_code: "umri is input('Una miaka mingapi?')\nprint('Kumbe umri wako in:')\nfor i in range(0,umri):\n    print(i)"
 #    intro_text: "Tutanza kutumia mabano na tutabadilike mfumo wa kutumia as! Tutatumia input badala ya ask. Mfumo wa tukumia print, input na for, tutatumia mabano ya aina ya ()."
@@ -186,7 +189,19 @@
         demo_code: "for i in range 1 to 12:\n    print i\nprint 'Tayari au la, nakuja!'"
     -   explanation: "Tunatakiwa kufuata hii mfumo pia tukitumia kauli ya `if`"
         example: "if rangi is kijani:'"
-        demo_code: "rangi is 'kijani'\nif rangi is kijani:\n    print 'Rangi ni ya Kijani'\nelse:\n    print 'Rangi sio ya Kijani'"
+        demo_code: |-
+            rangi = 'kijani'
+            if rangi is kijani:
+                print 'Rangi ni ya Kijani'
+            else:
+                print 'Rangi sio ya Kijani'
     -   explanation: "Tutawa fundisha mfumo mpya ambacho utafuata ikitaka kutumia: `elif`. `elif` ikimaanisha \"else if\". Tuananza kucheki kama `if` ni sahihi, kama sio kweli, tutacheki `elif` na kama sio kweli pia tutacheki `else`."
         example: "elif a is 5:"
-        demo_code: "a is 2\nif a is 1:\n    print 'a ni 1'\nelif a is 2:\n    print 'a ni 2'\nelse:\n    print 'a sio 1 wala 2'"
+        demo_code: |-
+            a = 2
+            if a is 1:
+                print 'a ni 1'
+            elif a is 2:
+                print 'a ni 2'
+            else:
+                print 'a sio 1 wala 2'

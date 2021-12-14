@@ -56,7 +56,7 @@ adventures:
 
                     ## Voorbeeld Hedy Code
                     ```
-                    naam is 'De Koningin van Engeland'
+                    naam = 'De Koningin van Engeland'
                     print naam ' zat te genieten van een lekker taartje, toen plotseling...'
                     ```
                 start_code: ""
@@ -67,7 +67,7 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    dieren is rode vogel, zwart schaap, groene kikker, gele eend, klein kind
+                    dieren = rode vogel, zwart schaap, groene kikker, gele eend, klein kind
                     print 'Beertje bruin'
                     print 'Beertje bruin'
                     print 'Wat zie jij daar?'
@@ -88,11 +88,11 @@ adventures:
                     ## Voorbeeld Simpele Hedy Code
                     ```
                     print 'Robin loopt door de stad'
-                    locatie is ask 'Gaat Robin een winkel in of gaat ze naar huis?'
+                    locatie = ask 'Gaat Robin een winkel in of gaat ze naar huis?'
                     if locatie is winkel
                         print 'Ze stapt de winkel binnen'
                         print 'Robin ziet een interessant boek.'
-                        boek is ask 'Koopt Robin het boek?'
+                        boek = ask 'Koopt Robin het boek?'
                         if boek is ja
                             print 'Robin koopt het boek en gaat naar huis'
                         else
@@ -107,27 +107,27 @@ adventures:
 
                     ## Uitgebreide code
                     ```
-                    zwaard is kwijt
-                    spel is aan
+                    zwaard = kwijt
+                    spel = aan
                     print 'Onze held loopt door het bos'
                     print 'Ineens komt ze bij een splitsing...'
                     repeat 2 times
                         if spel is aan
-                            pad is ask 'Welk pad moet onze held kiezen?'
+                            pad = ask 'Welk pad moet onze held kiezen?'
                             if pad is links
                                 if zwaard is gevonden
                                     print 'Onze held komt een draak tegen op het pad!'
                                     print 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
-                                    spel is over
+                                    spel = over
                                 else
                                     print 'Onze held vindt een draak, maar ze heeft geen wapens!'
                                     print 'Onze held wordt met huid en haar verslonden...'
-                                    spel is over
+                                    spel = over
                             if pad is rechts
                                 if zwaard is kwijt
                                     print 'Onze held vindt een zwaard'
                                     print 'Die kan nog goed van pas komen'
-                                    zwaard is gevonden
+                                    zwaard = gevonden
                                 else
                                     print 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
                                     print 'Ze loopt terug'
@@ -141,10 +141,10 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    hoofdpersoon is ask 'Hoe heet de hoofdpersoon in dit verhaal?'
+                    hoofdpersoon = ask 'Hoe heet de hoofdpersoon in dit verhaal?'
                     print hoofdpersoon ' loopt door het bos'
                     print hoofdpersoon ' hoort plotseling een geluid!'
-                    dapper is ask 'Gaat 'hoofdpersoon ' op het geluid af?'
+                    dapper = ask 'Gaat 'hoofdpersoon ' op het geluid af?'
                     if dapper is ja
                         print 'Dapper stapt ' hoofdpersoon ' op het geluid af'
                         print _
@@ -234,15 +234,15 @@ adventures:
 
                         ## Voorbeeld Hedy code
                         ```
-                        sleutels is 'kwijt'
+                        sleutels = 'kwijt'
                         print 'Je staat in de voortuin en bent je sleutels kwijt.'
                         print 'Waar ga je zoeken?'
                         print 'kies uit: boom, steen, bloembed, brievenbus'
                         while sleutels is 'kwijt'
-                            locatie is ask 'Waar wil je zoeken?'
+                            locatie = ask 'Waar wil je zoeken?'
                             if locatie is 'bloembed'
                                 print 'Hier zijn ze!'
-                                sleutels is 'gevonden'
+                                sleutels = 'gevonden'
                             else
                                 print 'Helaas, ze liggen niet bij de ' locatie
                         print 'Nu kun je het huis in!'
@@ -255,28 +255,28 @@ adventures:
 
                     ## Voorbeeld Hedy Code
                     ```
-                    zwaard is 'kwijt'
-                    spel is 'aan'
+                    zwaard = 'kwijt'
+                    spel = 'aan'
                     print 'Onze held loopt door het bos'
                     print 'Ineens komt ze bij een splitsing...'
                     for i in range 0 to 2
                         if spel is 'aan'
-                            pad is ask 'Welk pad moet onze held kiezen?'
+                            pad = ask 'Welk pad moet onze held kiezen?'
                             if pad is 'links' and zwaard is 'gevonden'
                                 print 'Onze held komt een draak tegen op het pad!'
                                 print 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
-                                spel is 'over'
+                                spel = 'over'
                             if pad is 'links' and zwaard is 'kwijt'
                                 print 'Onze held vindt een draak, maar ze heeft geen wapens!'
                                 print 'Onze held wordt met huid en haar verslonden...'
-                                spel is 'over'
+                                spel = 'over'
                             if pad is 'rechts' and zwaard is 'gevonden'
                                 print 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
                                 print 'Ze loopt terug'
                             if pad is 'rechts' and zwaard is 'kwijt'
                                 print 'Onze held vindt een zwaard'
                                 print 'Die kan nog goed van pas komen'
-                                zwaard is 'gevonden'
+                                zwaard = 'gevonden'
                     ```
                 start_code: ""
     songs:
@@ -291,7 +291,7 @@ adventures:
                     In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'. Kijk maar:
                     ## Voorbeeld Hedy code
                     ```
-                    actions is 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     for action in actions
                         for i in range 1 to 2
                             print 'if youre happy and you know it'
@@ -331,7 +331,7 @@ adventures:
 
                     ## Baby Shark
                     ```
-                    familie is baby, mommy, daddy, grandpa, grandma
+                    familie = baby, mommy, daddy, grandpa, grandma
                     for shark in familie
                       print shark ' shark tudutudutudu'
                       print shark ' shark tudutudutudu'
@@ -341,14 +341,14 @@ adventures:
 
                     ## Old McDonald
                     ```
-                    dieren is big, hond, koe
+                    dieren = big, hond, koe
                     for dier in dieren
                         if dier is big
-                            geluid is knor
+                            geluid = knor
                         if dier is hond
-                            geluid is woef
+                            geluid = woef
                         if dier is koe
-                            geluid is boe
+                            geluid = boe
                         print 'De oude boer die had een wei'
                         print 'hi ja hi ja ho!'
                         print 'En in die wei daar stond een ' dier
@@ -368,7 +368,7 @@ adventures:
                     ## Cowboy Billie Boem
                     ```
                     repeat 3 times
-                        dier is ask 'Welk dier kies je?'
+                        dier = ask 'Welk dier kies je?'
                         print 'En wie rijdt er op zijn ' dier ' door de prairie?'
                         print 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
                         print 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
@@ -407,14 +407,14 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    couplet is 1
+                    couplet = 1
                     print 'Ik heb het potje met vet'
                     print 'al op de tafel gezet'
                     print 'Ik heb het'
                     print 'potje, potje, potje, potje... '
                     print 'veeeeeet'
                     print 'al op de tafel gezet'
-                    couplet is couplet + 1
+                    couplet = couplet + 1
                     print 'Door naar het ' couplet 'e couplet'
                     ```
                     Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt, door de regels te kopiëren.
@@ -430,11 +430,11 @@ adventures:
 
                     ## Old MacDonald
                     ```
-                    dieren is ['big', 'hond', 'koe']
-                    geluiden is ['knor', 'woef', 'boe']
+                    dieren = ['big', 'hond', 'koe']
+                    geluiden = ['knor', 'woef', 'boe']
                     for i in range 1 to 3
-                        dier is dieren[i]
-                        geluid is geluiden[i]
+                        dier = dieren[i]
+                        geluid = geluiden[i]
                         print 'Old MacDonald had een wei'
                         print 'hi ja hi ja ho!'
                         print 'En in die wei daar stond een ' dier
@@ -448,7 +448,7 @@ adventures:
 
                     ## Dronken Zeeman
                     ```
-                    coupletten is ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
+                    coupletten = ['wat zullen we doen met de dronken zeeman?', 'hang hem aan de mast om uit te waaien', 'stop hem met zijn kop in een emmer water', 'dat zullen we doen met de dronken zeeman']
                     for couplet in coupletten
                         for i in range 1 to 3
                             print couplet
@@ -535,7 +535,7 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    hoek is 90
+                    hoek = 90
                     repeat 10 times
                         turn hoek
                         forward 50
@@ -547,14 +547,14 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
-                    hoek is 360 / hoeken
+                    hoeken = ask 'Hoeveel hoeken krijgt dit figuur?'
+                    hoek = 360 / hoeken
                     repeat hoeken times
                         turn _
                         forward_
                     ```
                 start_code: |
-                    hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
+                    hoeken = ask 'Hoeveel hoeken krijgt dit figuur?'
 
             7:
                 story_text: |
@@ -580,8 +580,8 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    hoeken is ask 'Hoeveel hoeken krijgt dit figuur?'
-                    hoek is 360 / hoeken
+                    hoeken = ask 'Hoeveel hoeken krijgt dit figuur?'
+                    hoek = 360 / hoeken
                     forward 50
                     turn hoek
                     forward 50
@@ -659,8 +659,8 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    dagen is maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
-                    namen is mama, papa, Emma, Sophie
+                    dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
+                    namen = mama, papa, Emma, Sophie
                     for dag in dagen
                         print namen at random ' doet de afwas op ' dag
                     ```
@@ -672,7 +672,7 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    mensen is mama, papa, Emma, Sophie
+                    mensen = mama, papa, Emma, Sophie
                     repeat _ _ print 'de afwasser is ' _
                     ```
                 start_code: "print 'Wie doet de afwas?'"
@@ -683,11 +683,11 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    mensen is mama, papa, Emma, Sophie
-                    emma_wast_af is 0
-                    afwasser is mensen at random
+                    mensen = mama, papa, Emma, Sophie
+                    emma_wast_af = 0
+                    afwasser = mensen at random
                     print 'De afwasser is ' afwasser
-                    if afwasser is Emma emma_wast_af is emma_wast_af + 1
+                    if afwasser is Emma emma_wast_af = emma_wast_af + 1
                     print 'Emma gaat deze week ' emma_wast_af ' keer afwassen'
                     ```
 
@@ -758,8 +758,8 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    spelers is Anne, Jonneke, Jessie, Ilona
-                    keuzes is 1, 2, 3, 4, 5, 6
+                    spelers = Anne, Jonneke, Jessie, Ilona
+                    keuzes = 1, 2, 3, 4, 5, 6
                     for speler in spelers
                         print speler ' gooit ' keuzes at random
                     ```
@@ -787,12 +787,12 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    keuzes is 1, 2, 3, 4, 5, regenworm
-                    punten is 0
-                    worp is keuzes at random
+                    keuzes = 1, 2, 3, 4, 5, regenworm
+                    punten = 0
+                    worp = keuzes at random
                     print 'je gooide ' worp
-                    if worp is regenworm punten is punten + 5
-                    else punten is punten + worp
+                    if worp is regenworm punten = punten + 5
+                    else punten = punten + worp
                     print 'dat zijn dan ' punten ' punten'
                     ```
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
@@ -850,14 +850,14 @@ adventures:
 
                     ## Voobeeld Hedy Code
                     ```
-                    opties is 1, 2, 3, 4, 5, 6
+                    opties = 1, 2, 3, 4, 5, 6
                     print 'Gooi 6 in zo min mogelijk beurten!'
-                    gegooid is 0
-                    pogingen is 0
+                    gegooid = 0
+                    pogingen = 0
                     while gegooid != 6
-                        gegooid is opties at random
+                        gegooid = opties at random
                         print 'Jij gooide ' gegooid
-                        pogingen is pogingen + 1
+                        pogingen = pogingen + 1
                     print 'Hoera! Je hebt 6 gegooid in ' pogingen ' pogingen.'
                     ```
                 start_code: ""
@@ -888,8 +888,8 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    keuzes is steen, papier, schaar
-                    spelers is Marleen, Michael
+                    keuzes = steen, papier, schaar
+                    spelers = Marleen, Michael
                     for speler in spelers
                         print speler ' kiest ' keuzes at random
                     ```
@@ -949,11 +949,11 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    gewonnen is 'nee'
-                    options is 'steen', 'papier', 'schaar'
+                    gewonnen = 'nee'
+                    opties = 'steen', 'papier', 'schaar'
                     while gewonnen is 'nee'
-                        jouw_keuze is ask 'Wat kies jij?'
-                        computer_keuze is options at random
+                        jouw_keuze = ask 'Wat kies jij?'
+                        computer_keuze = opties at random
                         print 'jij koos ' jouw_keuze
                         print 'de computer koos ' computer_keuze
                         if computer_keuze is jouw_keuze
@@ -962,7 +962,7 @@ adventures:
                             print 'Je verliest!'
                         if computer_keuze is 'steen' and jouw_keuze is 'papier'
                             print 'Je wint!'
-                            gewonnen is 'ja'
+                            gewonnen = 'ja'
                 start_code: ""
             13:
                 story_text: |
@@ -971,9 +971,9 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    opties is 'steen', 'papier', 'schaar'
-                    jouw_keuze is ask 'Wat kies jij?'
-                    computer_keuze is opties at random
+                    opties = 'steen', 'papier', 'schaar'
+                    jouw_keuze = ask 'Wat kies jij?'
+                    computer_keuze = opties at random
                     print 'Jij kiest ' jouw_keuze
                     print 'De computer kiest ' computer_keuze
                     if computer_keuze is jouw_keuze
@@ -998,19 +998,19 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Raad mijn getal'
-                    getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    getal is getallen at random
-                    spel is 'aan'
+                    getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    getal = getallen at random
+                    spel = 'aan'
                     for i in range 1 to 10
                         if spel is 'aan'
-                            gok is ask 'Welk getal denk je?'
+                            gok = ask 'Welk getal denk je?'
                             if gok > getal
                                 print 'Lager!'
                             if gok < getal
                                 print 'Hoger!'
                             if gok is getal
                                 print 'Hoera!'
-                                spel is 'af'
+                                spel = 'af'
                 start_code: ""
             12:
                 story_text: |
@@ -1019,9 +1019,9 @@ adventures:
 
                     ## Voorbeeld Hedy Code
                     ```
-                    getal1 is ask 'Wat is het eerste getal?'
-                    getal2 is ask 'Wat is het tweede getal?'
-                    antwoord is getal1 + getal2
+                    getal1 = ask 'Wat is het eerste getal?'
+                    getal2 = ask 'Wat is het tweede getal?'
+                    antwoord = getal1 + getal2
                     print getal1 ' plus ' getal2 ' is ' antwoord
                     ```
                 start_code: ""
@@ -1033,11 +1033,11 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    nummers is 1, 2, 3
+                    nummers = 1, 2, 3
                     for nummer1 in nummers
                         for nummer2 in nummers
-                            antwoord is ask 'Hoeveel is ' nummer2 ' keer ' nummer1 '?'
-                            goed is nummer1 * nummer2
+                            antwoord = ask 'Hoeveel is ' nummer2 ' keer ' nummer1 '?'
+                            goed = nummer1 * nummer2
                             if antwoord is goed
                                 print 'Goedzo!'
                             else
@@ -1051,17 +1051,17 @@ adventures:
 
                     ## Voorbeeld Hedycode
                     ```
-                    score is 0
+                    score = 0
                     repeat 10 times
-                        getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        getal1 is getallen at random
-                        getal2 is getallen at random
-                        goedeantwoord is getal1 * getal2
+                        getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        getal1 = getallen at random
+                        getal2 = getallen at random
+                        goede_antwoord = getal1 * getal2
                         print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
-                        antwoord is ask 'Vul hier het antwoord in:'
+                        antwoord = ask 'Vul hier het antwoord in:'
                         print 'Jouw antwoord is ' antwoord
-                        if antwoord is goedeantwoord
-                            score is score +1
+                        if antwoord is goede_antwoord
+                            score = score +1
                     print 'Je score is ' score
                     ```
                 start_code: ""
@@ -1072,8 +1072,8 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    goedeantwoord is 11 * 27
-                    antwoord is ask 'Hoeveel is 11 keer 27?'
+                    goedeantwoord = 11 * 27
+                    antwoord = ask 'Hoeveel is 11 keer 27?'
                     if antwoord is goedeantwoord print 'goedzo'
                     else print 'Foutje! Het was ' goedeantwoord
                     ```
@@ -1085,12 +1085,12 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    tafels is 4, 5, 6, 8
-                    keer is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    tafel is tafels at random
-                    keergetal is keer at random
-                    goede_antwoord is tafel * keergetal
-                    antwoord is ask 'hoeveel is ' tafel ' keer ' keergetal '?'
+                    tafels = 4, 5, 6, 8
+                    keer = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    tafel = tafels at random
+                    keergetal = keer at random
+                    goede_antwoord = tafel * keergetal
+                    antwoord = ask 'hoeveel is ' tafel ' keer ' keergetal '?'
                     if antwoord is goede_antwoord print 'goedzo'
                     else print 'foutje! het was ' goede_antwoord
                     ```
@@ -1102,16 +1102,16 @@ adventures:
                     Hierdoor mag de speler pas door naar de volgende vraag als het goede antwoord gegeven is.
                     ## Voobeeld Hedy code
                     ```
-                    score is 0
+                    score = 0
                     for i in range 0 to 9
-                        getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        getal1 is getallen at random
-                        getal2 is getallen at random
-                        goedeantwoord is getal1 * getal2
-                        antwoord is 0
+                        getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        getal1 = getallen at random
+                        getal2 = getallen at random
+                        goedeantwoord = getal1 * getal2
+                        antwoord = 0
                         while antwoord != goedeantwoord
                             print 'Hoeveel is ' getal1 ' keer ' getal2 '?'
-                            antwoord is ask 'Vul hier het antwoord in:'
+                            antwoord = ask 'Vul hier het antwoord in:'
                             print 'Jouw antwoord is ' antwoord
                         print 'Goedzo!'
                     print 'Je hebt gewonnen!'
@@ -1153,7 +1153,7 @@ adventures:
 
                     ## Voorbeeld Hedy Code
                     ```
-                    voorspellingen is 'je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil'
+                    voorspellingen = 'je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil'
                     print 'Ik pak mijn glazen bol erbij...'
                     print 'Ik zie... Ik zie...'
                     print voorspellingen at random
@@ -1166,10 +1166,10 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    huizen is villa, apartement, krot, rijtjeshuis
-                    liefdes is niemand, een prins(es), zomaar iemand, je ware liefde
-                    huisdieren is hond, cavia, olifant
-                    namen is Jenna, Ryan, Jim
+                    huizen = villa, apartement, krot, rijtjeshuis
+                    liefdes = niemand, een prins(es), zomaar iemand, je ware liefde
+                    huisdieren = hond, cavia, olifant
+                    namen = Jenna, Ryan, Jim
                     for naam in namen
                         print naam ' woont in een ' huizen at random
                         print naam ' trouwt met ' liefdes at random
@@ -1178,10 +1178,10 @@ adventures:
 
                     ## Voorbeeld Hedy code - Harry Potter
                     ```
-                    huizen is Griffoendor, Zwadderich, Huffelpuf, Ravenklauw
-                    vakken is toverdranken, verweer tegen de zwarte kunsten, bezweringen, transfiguratie
-                    angsten is Voldemort, Spinnen, falen bij je SLIJMBALLEN
-                    namen is Harry, Ron, Hermelien
+                    huizen = Griffoendor, Zwadderich, Huffelpuf, Ravenklauw
+                    vakken = toverdranken, verweer tegen de zwarte kunsten, bezweringen, transfiguratie
+                    angsten = Voldemort, Spinnen, falen bij je SLIJMBALLEN
+                    namen = Harry, Ron, Hermelien
                     for naam in namen
                         print naam ' wordt gesorteerd in ' huizen at random
                         print naam ' is goed in ' vakken at random
@@ -1200,9 +1200,9 @@ adventures:
                     ```
                     print 'Ik ben Hedy de waarzegger!'
                     print 'Je mag 3 vragen stellen!'
-                    antwoorden is ja, nee, misschien
+                    antwoorden = ja, nee, misschien
                     repeat 3 times
-                        vraag is ask 'Wat wil je weten?'
+                        vraag = ask 'Wat wil je weten?'
                         print vraag
                         print antwoorden at random
                     ```
@@ -1216,8 +1216,8 @@ adventures:
                     ```
                     print 'Ik ben Hedy de waarzegger'
                     print 'Je mag 3 vragen stellen!'
-                    repeat 3 times vraag is ask 'Wat wil je weten?'
-                    antwoorden is ja, nee, misschien
+                    repeat 3 times vraag = ask 'Wat wil je weten?'
+                    antwoorden = ja, nee, misschien
                     repeat 3 times print 'Mijn glazen bol zegt... ' antwoorden at random
                     ```
 
@@ -1242,11 +1242,11 @@ adventures:
                     ```
                     print 'Ik ben Hedy de Waarzegger!'
                     print 'Ik kan voorspellen hoeveel kinderen je later krijgt!'
-                    leeftijd is ask 'Hoe oud ben je?'
-                    brusjes is ask 'Hoeveel broers/zussen heb je?'
-                    lengte is ask 'Hoe lang ben je (in cm)?'
-                    kinderen is lengte / leeftijd
-                    kinderen is kinderen - brusjes
+                    leeftijd = ask 'Hoe oud ben je?'
+                    brusjes = ask 'Hoeveel broers/zussen heb je?'
+                    lengte = ask 'Hoe lang ben je (in cm)?'
+                    kinderen = lengte / leeftijd
+                    kinderen = kinderen - brusjes
                     print 'Jij krijgt later... '
                     print kinderen ' kinderen!'
                     ```
@@ -1259,11 +1259,11 @@ adventures:
                     ```
                     print 'Ik ben Hedy de malle waarzegger!'
                     print 'Ik ga voorspellen hoe slim jij bent!'
-                    ajax is ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
-                    bananen is ask 'Hoeveel bananen heb jij deze week gegeten?'
-                    hygiene is ask 'Hoevaak heb jij je handen al gewassen vandaag?'
-                    resultaat is bananen + hygiene
-                    resultaat is resultaat * ajax
+                    ajax = ask 'Op een schaal van 0 tot 10 hoeveel houd jij van Ajax?'
+                    bananen = ask 'Hoeveel bananen heb jij deze week gegeten?'
+                    hygiene = ask 'Hoevaak heb jij je handen al gewassen vandaag?'
+                    resultaat = bananen + hygiene
+                    resultaat = resultaat * ajax
                     print 'Jij bent ' resultaat 'procent slim.'
                     ```
                 start_code: ""
@@ -1381,17 +1381,17 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    prijs is 0
-                    eten is ask 'Wat wil je eten?'
-                    drinken is ask 'Wat wil je drinken?'
+                    prijs = 0
+                    eten = ask 'Wat wil je eten?'
+                    drinken = ask 'Wat wil je drinken?'
                     if eten is 'hamburger'
-                        prijs is prijs + 6.50
+                        prijs = prijs + 6.50
                     if food is 'pizza'
-                        prijs is prijs + 5.75
+                        prijs = prijs + 5.75
                     if drinks is 'water'
-                        prijs is prijs + 1.20
+                        prijs = prijs + 1.20
                     if drink is 'frisdrank'
-                        prijs is prijs + 2.35
+                        prijs = prijs + 2.35
                     print 'Dat wordt dan ' prijs ' euro, alsjeblieft'
                     ```
                 start_code: ""
@@ -1404,17 +1404,17 @@ adventures:
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
-                    mensen is ask 'Voor hoeveel personen wilt u bestellen?'
+                    mensen = ask 'Voor hoeveel personen wilt u bestellen?'
                     for i in range 1 to mensen
                         print i 'e bestelling:'
-                        eten is ask 'Wat wilt u eten?'
+                        eten = ask 'Wat wilt u eten?'
                         print eten
                         if eten is patat
-                            saus is ask 'Wat voor saus wil je?'
+                            saus = ask 'Wat voor saus wil je?'
                             print saus
-                        drinken is ask 'Wat wilt u drinken?'
+                        drinken = ask 'Wat wilt u drinken?'
                         print drinken
-                    prijs is 4 * mensen
+                    prijs = 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
                     ## Uitdaging
@@ -1427,23 +1427,23 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    gangen is voorgerecht, hoofdgerecht, nagerecht
+                    gangen = voorgerecht, hoofdgerecht, nagerecht
                     for gang in gangen
-                        eten is ask 'Wat wilt u bestellen als ' gang '?'
+                        eten = ask 'Wat wilt u bestellen als ' gang '?'
                         print eten ' wordt uw ' gang
                     ```
 
                     ## Voorbeeld Hedy code
                     Dit kun je uiteraard ook voor meerdere mensen toepassen!
                     ```
-                    gangen is voorgerecht, hoofdgerecht, nagerecht
-                    namen is Timon, Onno
+                    gangen = voorgerecht, hoofdgerecht, nagerecht
+                    namen = Timon, Onno
                     for naam in namen
                         for gang in gangen
-                            eten is ask naam ', Wat wil jij bestellen als ' gang '?'
+                            eten = ask naam ', Wat wil jij bestellen als ' gang '?'
                             print naam ' bestelt ' eten ' als ' gang
                     ```
-                start_code: "gangen is voorgerecht, hoofdgerecht, nagerecht"
+                start_code: "gangen = voorgerecht, hoofdgerecht, nagerecht"
             9:
                 story_text: |
                     ## Restaurant
@@ -1452,21 +1452,21 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Welkom bij restaurant Hedy'
-                    mensen is ask 'Met hoeveel mensen bent u vanavond?'
-                    prijs is 0
+                    mensen = ask 'Met hoeveel mensen bent u vanavond?'
+                    prijs = 0
                     repeat people times
-                        eten is ask 'Wat wilt u eten?'
+                        eten = ask 'Wat wilt u eten?'
                         print eten
                         if eten is friet
-                            prijs is prijs + 3
-                            saus is ask 'Welke saus wilt u daarbij?'
+                            prijs = prijs + 3
+                            saus = ask 'Welke saus wilt u daarbij?'
                             if saus is geen
                                 print 'zonder saus'
                             else
-                                prijs is prijs + 1
+                                prijs = prijs + 1
                                 print 'met ' saus
                         if eten is pizza
-                            prijs is prijs + 7
+                            prijs = prijs + 7
                         print 'Dat is dan ' prijs ' euro'
                         print 'Eet smakelijk!'
                     ```
@@ -1481,13 +1481,13 @@ adventures:
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
-                    mensen is ask 'Voor hoeveel personen wilt u bestellen?'
+                    mensen = ask 'Voor hoeveel personen wilt u bestellen?'
                     repeat mensen times
-                        eten is ask 'Wat wilt u eten?'
+                        eten = ask 'Wat wilt u eten?'
                         print eten
-                        drinken is ask 'Wat wilt u drinken?'
+                        drinken = ask 'Wat wilt u drinken?'
                         print drinken
-                    prijs is 4 * mensen
+                    prijs = 4 * mensen
                     print 'Dat wordt dan ' prijs ' euro!'
                     ```
 
@@ -1498,28 +1498,28 @@ adventures:
                     ```
                     print 'Welkom bij McHedy!'
                     print 'U kunt hier uw bestelling doorgeven'
-                    eten is ask 'Wat wilt u eten?'
+                    eten = ask 'Wat wilt u eten?'
                     print eten
                     if eten is patat
-                        saus is ask 'Wat voor saus wil je?'
+                        saus = ask 'Wat voor saus wil je?'
                         print saus
-                    drinken is ask 'Wat wilt u drinken?'
+                    drinken = ask 'Wat wilt u drinken?'
                     if drinken is cola
-                        light is ask 'Normaal of light?'
+                        light = ask 'Normaal of light?'
                         print drinken light
                     print 'Bedankt voor uw bestelling!'
                     ```
 
                     ## Uitdaging prijzen
-                    De prijs is nu altijd 4 euro per persoon, kun jij nog een andere manier bedenken om de prijs te berekenen?
+                    De prijs = nu altijd 4 euro per persoon, kun jij nog een andere manier bedenken om de prijs te berekenen?
                     Bijvoorbeeld:
 
                     ```
-                    prijs is 0
+                    prijs = 0
                     if eten is patat
-                        prijs is prijs + 3
+                        prijs = prijs + 3
                     if drinken is cola
-                        prijs is prijs + 1
+                        prijs = prijs + 1
                     ```
                 start_code: "print 'Welkom bij McHedy!' "
             7:
@@ -1530,8 +1530,8 @@ adventures:
                     ## Voorbeeld Hedy Code
                     ```
                     print 'Welkom bij restaurant Hedy'
-                    mensen is ask 'Voor hoeveel personen wilt u bestellen vandaag?'
-                    repeat mensen times eten is ask 'Wat wilt u bestellen?'
+                    mensen = ask 'Voor hoeveel personen wilt u bestellen vandaag?'
+                    repeat mensen times eten = ask 'Wat wilt u bestellen?'
                     print 'Bedankt voor uw bestelling!'
                     ```
                     Nu kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet.
@@ -1548,11 +1548,11 @@ adventures:
                       print 'Welkom bij McHedy'
                       print 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
                       print 'U krijgt frietjes en drinken bij uw bestelling. '
-                      eten is ask 'Wat wilt u bestellen?'
-                      prijs is 0
-                      if eten is hamburger prijs is 8
-                      if eten is kroket prijs is 6
-                      if eten is kaassoufle prijs is 5
+                      eten = ask 'Wat wilt u bestellen?'
+                      prijs = 0
+                      if eten is hamburger prijs = 8
+                      if eten is kroket prijs = 6
+                      if eten is kaassoufle prijs = 5
                       print 'U heeft een ' eten ' besteld'
                       print 'Dat is dan ' prijs ' euro, alstublieft!'
                       print 'Bedankt en eet smakelijk!'
@@ -1569,17 +1569,17 @@ adventures:
                       print 'Onze voorgerechten zijn salade, soep of carpaccio'
                       print 'Onze hoofdgerechten zijn pizza, lasagne, of spaghetti'
                       print 'Onze toetjes zijn brownie, ijsje, of milkshake'
-                      voorgerecht is ask 'Welk voorgerecht wilt u?'
-                      hoofdgerecht is ask 'Welk hoofdgerecht wilt u?'
-                      nagerecht is ask 'Welk nagerecht wilt u?'
-                      prijs is 0
-                      if voorgerecht is soep prijs is prijs + 6 else prijs is prijs + 7
-                      if hoofdgerecht is pizza prijs is prijs + 10
-                      if hoofdgerecht is lasagne prijs is prijs + 12
-                      if hoofdgerecht is spaghetti prijs is prijs + 8
-                      if nagerecht is brownie prijs is prijs + 7
-                      if nagerecht is ijsje prijs is prijs + 5
-                      if nagerecht is milkshake prijs is prijs + 4
+                      voorgerecht = ask 'Welk voorgerecht wilt u?'
+                      hoofdgerecht = ask 'Welk hoofdgerecht wilt u?'
+                      nagerecht = ask 'Welk nagerecht wilt u?'
+                      prijs = 0
+                      if voorgerecht is soep prijs = prijs + 6 else prijs = prijs + 7
+                      if hoofdgerecht is pizza prijs = prijs + 10
+                      if hoofdgerecht is lasagne prijs = prijs + 12
+                      if hoofdgerecht is spaghetti prijs = prijs + 8
+                      if nagerecht is brownie prijs = prijs + 7
+                      if nagerecht is ijsje prijs = prijs + 5
+                      if nagerecht is milkshake prijs = prijs + 4
                       print 'Dit heb je besteld: ' voorgerecht ' , ' hoofdgerecht ' en ' nagerecht
                       print 'Dat wordt dan ' prijs ' euro, alstublieft.'
                       print 'Bedankt en eet smakelijk!'
@@ -1622,7 +1622,7 @@ adventures:
             4:
                 story_text: |
                     ## Restaurant
-                    Lukt het jou om = aanhalingstekens toe te voegen aan je restaurantcode?
+                    Lukt het jou om aanhalingstekens toe te voegen aan je restaurantcode?
                 start_code: ""
             3:
                 story_text: |
@@ -1654,11 +1654,11 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Welkom bij McHedy'
-                    meer is 'ja'
+                    meer = 'ja'
                     while meer is 'ja'
-                        bestelling is ask 'Wat wil je bestellen?'
+                        bestelling = ask 'Wat wil je bestellen?'
                         print bestelling
-                        meer is ask 'Wilt u nog iets bestellen?'
+                        meer = ask 'Wilt u nog iets bestellen?'
                     print 'Bedankt!'
                 start_code: ""
             13:
@@ -1668,18 +1668,18 @@ adventures:
 
                     ## Voorbeeld Hedy code met `and` commando
                     ```
-                    prijs is 10
-                    eten is ask 'Wat wil je eten?'
-                    drinken is ask 'Wat wil je drinken?'
+                    prijs = 10
+                    eten = ask 'Wat wil je eten?'
+                    drinken = ask 'Wat wil je drinken?'
                     if eten is 'broodje' and drinken is 'sap'
                         print 'Dat is ons voordeelmenu'
-                        prijs is prijs - 3
+                        prijs = prijs - 3
                     print 'Dat wordt dan ' prijs ' euro'
                     ```
 
                     ## Voorbeeld Hedy code met het `or` commando
                     ```
-                    drinken is ask 'Wat wil je drinken?'
+                    drinken = ask 'Wat wil je drinken?'
                     if drinken is 'water' or drinken is 'sap'
                         print 'Dat is een gezonde keuze!'
                     ```
@@ -1723,14 +1723,14 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Ontsnap uit het spookhuis'
-                    levens is 3
-                    deuren is 1, 2, 3
-                    monsters is 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
+                    levens = 3
+                    deuren = 1, 2, 3
+                    monsters = 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
                     for i in range 1 to 10
                         if lives > 0
-                            goede_deur is deuren at random
-                            monster is monsters at random
-                            gekozen_deur is ask 'Welke deur kies jij?'
+                            goede_deur = deuren at random
+                            monster = monsters at random
+                            gekozen_deur = ask 'Welke deur kies jij?'
                             if goede_deur is gekozen_deur
                                 print 'Je hebt de goede deur gekozen'
                             else
@@ -1739,7 +1739,7 @@ adventures:
                                     print 'Pffieuw.... Hij slaapt'
                                 else
                                     print 'Je hebt een leven kwijt!'
-                                    levens is levens -1
+                                    levens = levens -1
                         else
                             print 'GAME OVER'
                     ```
@@ -1754,21 +1754,21 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Ontsnap uit het spookhuis!'
-                    speler is levend
-                    deuren is 1, 2, 3
-                    monsters is zombie, vampier, mummy, reuzespin
+                    speler = levend
+                    deuren = 1, 2, 3
+                    monsters = zombie, vampier, mummy, reuzespin
                     for i in range 1 to 3
                         if speler is levend
-                            goededeur is deuren at random
+                            goededeur = deuren at random
                             print 'Kamer ' i
                             print 'Voor je staan drie deuren...'
-                            gekozendeur is ask 'Welke deur kies je?'
+                            gekozendeur = ask 'Welke deur kies je?'
                             print 'Jij kiest deur...' gekozendeur
                             if gekozendeur is goededeur
                                 print 'Gelukkig! Geen monster!'
                             else
                                 print 'Je wordt opgegeten door een... ' monsters at random
-                                speler is dood
+                                speler = dood
                         else
                             print 'GAME OVER'
                     if speler is levend
@@ -1785,20 +1785,20 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Ontsnap uit het spookhuis!'
-                    speler is levend
-                    deuren is 1, 2, 3
-                    monsters is zombie, vampier, mummy, reuzespin
+                    speler = levend
+                    deuren = 1, 2, 3
+                    monsters = zombie, vampier, mummy, reuzespin
                     repeat 3 times
                         if speler is levend
-                            goededeur is deuren at random
+                            goededeur = deuren at random
                             print 'Voor je staan drie deuren...'
-                            gekozendeur is ask 'Welke deur kies je?'
+                            gekozendeur = ask 'Welke deur kies je?'
                             print 'Jij kiest deur...' gekozendeur
                             if gekozendeur is goededeur
                                 print 'Gelukkig! Geen monster!'
                             else
                                 print 'Je wordt opgegeten door een... ' monsters at random
-                                speler is dood
+                                speler = dood
                         else
                             print 'GAME OVER'
                     if speler is levend
@@ -1869,24 +1869,24 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    getallen is [1, 2, 3]
+                    getallen = [1, 2, 3]
                     i is getallen[random]
-                    hint is ['gegrom', 'kakelende lach', 'vleermuis gefladder']
-                    monsters is ['zombie', 'heks', 'vampier']
-                    noodlot is ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
-                    goedlot is ['Je gooit de ham naar de zombie die er lekker aan begint te knagen.', 'Je zet de gordijnen in de fik. De heks vlucht, bang voor het vuur', 'De vampier haat knoflook en vlucht weg']
-                    wapens is ['ham', 'aansteker', 'knoflook']
+                    hint = ['gegrom', 'kakelende lach', 'vleermuis gefladder']
+                    monsters = ['zombie', 'heks', 'vampier']
+                    noodlot = ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
+                    goedlot = ['Je gooit de ham naar de zombie die er lekker aan begint te knagen.', 'Je zet de gordijnen in de fik. De heks vlucht, bang voor het vuur', 'De vampier haat knoflook en vlucht weg']
+                    wapens = ['ham', 'aansteker', 'knoflook']
                     print 'Je staat bij een oude verlaten villa'
                     print 'Iets is hier niet pluis...'
                     print 'Je hoort ' hint[i]
                     print 'Je gaat op ontdekking'
                     print 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
-                    jouwwapen is ask 'Wat neem je mee?'
-                    print 'Met je ' jouwwapen ' loop je door naar de woonkamer'
+                    jouw_wapen = ask 'Wat neem je mee?'
+                    print 'Met je ' jouw_wapen ' loop je door naar de woonkamer'
                     print 'Daar zie je een ' monsters[i]
-                    benodigdewapen is wapens[i]
-                    if jouwwapen is benodigdewapen
-                        print 'Je gebruikt je ' jouwwapen
+                    benodigde_wapen = wapens[i]
+                    if jouw_wapen is benodigde_wapen
+                        print 'Je gebruikt je ' jouw_wapen
                         print goedlot[i]
                         print 'Jij wint!'
                     else
@@ -1908,11 +1908,11 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    geld is ask 'Hoeveel geld heb je al gespaard?'
-                    wens is ask 'Hoeveel geld heb je nodig?'
-                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
-                    sparen is wens - geld
-                    weken is sparen / zakgeld
+                    geld = ask 'Hoeveel geld heb je al gespaard?'
+                    wens = ask 'Hoeveel geld heb je nodig?'
+                    zakgeld = ask 'Hoeveel zakgeld krijg je per week?'
+                    sparen = wens - geld
+                    weken = sparen / zakgeld
                     if wens > geld
                         print 'Helaas even doorsparen!'
                         print 'Je moet nog ' weken ' weken.'
@@ -1929,12 +1929,12 @@ adventures:
                     ## Voorbeeld Hedy Code
                     ```
                     print 'Het digitale spaarvarken'
-                    wens is ask 'Wat zou je graag willen hebben?'
-                    prijs is ask 'Hoeveel kost dat?'
-                    gespaard is ask 'Hoeveel geld heb je al gespaard?'
-                    zakgeld is ask 'Hoeveel zakgeld krijg je per week?'
-                    sparen is prijs - gespaard
-                    weken is sparen / zakgeld
+                    wens = ask 'Wat zou je graag willen hebben?'
+                    prijs = ask 'Hoeveel kost dat?'
+                    gespaard = ask 'Hoeveel geld heb je al gespaard?'
+                    zakgeld = ask 'Hoeveel zakgeld krijg je per week?'
+                    sparen = prijs - gespaard
+                    weken = sparen / zakgeld
                     print 'Je kunt over ' weken ' weken een ' wens ' kopen!'
                     ```
                 start_code: ""
@@ -1953,16 +1953,16 @@ adventures:
                     ## Voorbeeld Hedy code
                     ```
                     print 'Maak je eigen quiz'
-                    punten_a is 0
-                    punten_b is 0
+                    punten_a = 0
+                    punten_b = 0
                     print 'Vraag'
                     print 'Antwoordoptie A'
                     print 'Antwoordoptie B'
-                    antwoord is ask 'Welk antwoord?'
+                    antwoord = ask 'Welk antwoord?'
                     if antwoord is 'A'
-                        punten_a is punten_a + 1
+                        punten_a = punten_a + 1
                     if antwoord is 'B'
-                        punten_b is punten_b + 1
+                        punten_b = punten_b + 1
                     print 'Einde van de quiz!'
                     print 'We kijken naar de resultaten!'
                     if punten_a > punten_b
@@ -1984,15 +1984,15 @@ adventures:
 
                     ## Voorbeeld Hedy code
                     ```
-                    franswoord is ['bonjour', 'ordinateur', 'pomme de terre']
-                    vertaling is ['hallo', 'computer', 'aardappel']
-                    score is 0
+                    franswoord = ['bonjour', 'ordinateur', 'pomme de terre']
+                    vertaling = ['hallo', 'computer', 'aardappel']
+                    score = 0
                     for i in range 1 to 3
-                        antwoord is ask 'Wat betekent ' franswoord[i] '?'
-                        correct is vertaling[i]
+                        antwoord = ask 'Wat betekent ' franswoord[i] '?'
+                        correct = vertaling[i]
                         if antwoord is correct
                             print 'Correct!'
-                            score is score + 1
+                            score = score + 1
                         else
                             print 'Fout, ' franswoord[i] ' betekent ' vertaling[i]
                     print 'Je hebt ' score ' goede antwoorden gegeven.'
@@ -2112,7 +2112,7 @@ adventures:
                     Vanaf het volgende level mag dit wel! Let op: Je moet dan dus wel dubbel inspringen!
 
                     ```
-                    antwoord is ask 'Heb je zin om naar het volgende level te gaan?'
+                    antwoord = ask 'Heb je zin om naar het volgende level te gaan?'
                     if antwoord is ja
                         repeat 3 times
                             print 'Hoera!'
@@ -2154,7 +2154,7 @@ adventures:
 
                     Daarnaast mag je meerdere woorden opslaan in een variabele door aanhalingstekens te gebruiken. Zoals dit:
                     ```
-                    naam is ask 'Hoe heet je favoriete tekenfilmfiguur?'
+                    naam = ask 'Hoe heet je favoriete tekenfilmfiguur?'
                     if naam is 'Spongebob Squarepants'
                         print 'Gaaf ik houd ook van Spongebob!'
                     if naam is 'Ash Ketchum'
@@ -2184,7 +2184,7 @@ adventures:
                     In de vorige levels heb je geleerd hoe je het if-commando gebruikt, maar wat nog niet kon is kijken of een getal groter of kleiner dan een ander getal is.
                     In het volgende level kan dat wel, kijk maar eens naar dit voorbeeld!
                     ```
-                    cijfer is ask 'Wat is je cijfer voor de toets?'
+                    cijfer = ask 'Wat is je cijfer voor de toets?'
                     if cijfer < 5.5
                         print 'Hoera! Een voldoende!'
                     else
@@ -2229,10 +2229,6 @@ adventures:
                     Wow! Wat ben je al ver gekomen! In het volgende level maken we onze code weer een beetje 'echter' door print m=nog meer op Python te laten lijken.
                     Benieuwd...? Klik dan maar verder!
                 start_code: "print 'Op naar het volgende level!'"
-
-
-
-
 
 
     end:
