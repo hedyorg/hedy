@@ -397,6 +397,13 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_calc_assign_equals(self):
+    code = "nummer = 4 + 5"
+    expected = "nummer = 4 + 5"
+    self.multi_level_tester(
+      code=code,
+      expected=expected)
+
   # def test_access_variable_before_definition(self):
   #   code = textwrap.dedent("""\
   #           a is b
