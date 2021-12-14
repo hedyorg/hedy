@@ -16,7 +16,7 @@
                             <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-5 block" style="left: 50%; transform: translate(-50%, 0%);">
                         </div>
                         <div class="w-40 h-full opacity-0 hover:opacity-75 hover:bg-gray-900 rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                            <p>{% if category.title != "Hidden" %}{{ achievement.text }}{% else %}???{% endif %}</p>
+                            <p>{{ achievement.text }}</p>
                         </div>
                         <div class="text-center flex items-center justify-center h-16">
                             <p>{{ achievement.title }}</p>
