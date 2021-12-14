@@ -9,9 +9,9 @@
             <h3>{{ subcategory.title }}</h3>
             <div class="flex flex-row w-full">
             {% for achievement in subcategory.achievements %}
-                <div class="w-40 border-gray-400 border-2 rounded-lg mr-4" title="{{ achievement.title }}">
+                <div class="w-40 border-gray-400 border-2 rounded-lg mr-4 relative bg-gray-400" title="{{ achievement.title }}">
                     <img src="{{static('/images/' + achievement.image)}}">
-                    <p class="hidden">{{ achievement.text }}</p>
+                    <div class="w-40 h-full opacity-0 hover:opacity-100 inset-0 absolute z-10 text-center mt-8 px-4 text-white ">{{ achievement.text }}</div>
                     <p class="text-center">{{ achievement.title }}</p>
                 </div>
             {% endfor %}
