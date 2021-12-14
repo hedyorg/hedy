@@ -279,13 +279,6 @@ export function showAchievement(value: string, reload: boolean){
       location.reload();
     }
    }, 4000);
-   if (reload) {
-     console.log("We willen een reload!");
-     setTimeout(function() {
-       console.log("Die gebeurt hier...");
-
-     }, 7000);
-   }
 }
 
 function removeBulb(){
