@@ -200,12 +200,21 @@
 
          The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
          That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+
          ## Example Hedy code
          ```
          print '5 plus 5 is ' 5 + 5
          print '5 minus 5 is ' 5 - 5
          print '5 times 5 is ' 5 * 5
          ```
+
+         We also make a change in storing! You may now use `=` instead of `is` when we store a name or a number, like this:
+
+         ```
+         name = Hedy
+         answer = 20 + 4
+         ```
+
     commands:
     -   name: "print"
         explanation: "Print exactly using quotation marks"
@@ -215,14 +224,14 @@
         explanation: "Ask for a calculation and check whether it is correct."
         example: "Example: answer is ask 'What is 10 plus 10?'"
         demo_code: |-
-            answer is ask 'What is 10 plus 10?'
+            answer = ask 'What is 10 plus 10?'
             if answer is 20 print 'Yes!' else print 'Oops'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
         example: "Example: angles is ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy is fun!'"
@@ -240,15 +249,15 @@
         demo_code: "print 'Hello welcome to Hedy.'"
     -   name: "ask"
         explanation: "Ask something with `ask`."
-        example: "Example: color is ask 'What is your favorite color?'"
+        example: "Example: color = ask 'What is your favorite color?'"
         demo_code: |-
-            color is ask 'What is your favorite color?'
+            color = ask 'What is your favorite color?'
             print color ' is your favorite!'
     -   name: "if"
         explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: |-
-            color is ask 'What is your favorite color?'
+            color = ask 'What is your favorite color?'
             if color is green print 'pretty!' else print 'meh'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -280,7 +289,7 @@
         explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
         example: "Example: answer is ask 'What is 5 plus 5?'"
         demo_code: |-
-            answer is ask 'What is 5 plus 5?'
+            answer = ask 'What is 5 plus 5?'
             if answer is 10
                 print 'Well done!'
                 print 'Indeed, the answer was ' answer
@@ -297,7 +306,7 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -310,7 +319,7 @@
         ## Example Hedy code
         ```
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -320,9 +329,9 @@
     commands:
     -   name: "`if` with multiple lines"
         explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+        example: "Example: answer = ask 'What is 20 plus 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
+            answer = ask 'What is 20 plus 20?'
             if answer is 20
                 print 'Well done!!'
                 print 'The answer is indeed' answer
@@ -377,9 +386,9 @@
                 print counter
     -   name: "ask"
         explanation: "Ask for the answer to a sum and check if it is correct. We can now print 2 lines."
-        example: "Example: answer is ask 'What is 5 plus 5?'"
+        example: "Example: answer = ask 'What is 5 plus 5?'"
         demo_code: |-
-            answer is ask 'What is 5 plus 5?'
+            answer = ask 'What is 5 plus 5?'
             if answer is 10
                 print 'Well done!'
                 print 'Indeed, the answer was ' answer
@@ -396,13 +405,13 @@
         For this level on you will also have to use quotation marks when storing a text with `is`:
 
         ```
-        name is 'Hedy'
+        name = 'Hedy'
         print 'Hello ' name
         ```
 
         For numbers, you do not use quotation marks in the `is`:
         ```
-        score is 25
+        score = 25
         print 'You got ' score
         ```
 # Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
@@ -416,17 +425,17 @@
             print 2.5 + 2.5
     -   name: "float in var"
         explanation: "Storing a calculation with decimals"
-        example: "antwoord is 2.5 + 2.5"
+        example: "antwoord = 2.5 + 2.5"
         demo_code: |
-            answer is 2.5 + 2.5
+            answer = 2.5 + 2.5
             print 'Calculate away!'
             print 'Two and a half plus two and a half is...'
             print answer
 
 13:
     start_code: |-
-        name is ask 'what is your name?'
-        leeftijd is ask 'what is your age?'
+        name = ask 'what is your name?'
+        leeftijd = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "We are now going to learn `and` and `or`! If you want to check two statements, you don't have to use two if's but can use `and` and `or`. If you use `and`, both statements, left and right of the `and` need to be true. We can also use `or`. Then only one statement needs to be correct."
@@ -435,8 +444,8 @@
         explanation: "Both statements (left and right of the `and`) need to be correct."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            answer1 is ask 'What is 3+2?'
-            answer2 is ask 'What is 2+2?'
+            answer1 = ask 'What is 3+2?'
+            answer2 = ask 'What is 2+2?'
             if answer1 is 5 and answer2 is 4
                 print 'Both answers are correct!'
             else
@@ -445,15 +454,15 @@
         explanation: "`Or` At least 1 of the two statements left and right of the `or`, needs to be correct, if both are correct, it is also fine."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            answer1 is ask 'What is 3+2?'
-            answer2 is ask 'What is 2+2?'
+            answer1 = ask 'What is 3+2?'
+            answer2 = ask 'What is 2+2?'
             if answer1 is 5 or answer2 is 4
                 print 'At least one answer is correct!'
             else
                 print 'Both answers are wrong!'
 14:
     start_code: |-
-        age is ask 'How old are you?'
+        age = ask 'How old are you?'
         if age < 13
             print 'You are younger than me!'
         else
@@ -464,22 +473,22 @@
         explanation: "We use the `<` to check if the first number is smaller than the second number. For example if we want to see if a variable is smaller than 15, we use `variable < 15`"
         example: "For example: age < 12"
         demo_code: |-
-            age is ask 'How old are you?'
+            age = ask 'How old are you?'
             if age < 13
                 print 'You are younger than me!'
     -   name: "Bigger"
         explanation: "We use the `>` to check if the first number is bigger than the second number. For example if we want to see if a variable is bigger than 15, we use `variable > 15`."
         example: "For example: age > 12"
         demo_code: |-
-            age is ask 'How old are you?'
+            age = ask 'How old are you?'
             if age > 13
                 print 'You are older than me!'
 
 15:
     start_code: |-
-        answer is 0
+        answer = 0
         while answer != 25
-            answer is ask 'What is 5 times 5?'
+            answer = ask 'What is 5 times 5?'
         print 'A correct answer has been given'
     intro_text: "We are going to learn a new loop, the `while` loop! We continue the loop as long as the statement is true/valid! So at the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop never ends!"
     commands:
@@ -487,46 +496,46 @@
         explanation: "We can use the `while` loop with `True` and `False`"
         example: "Example: while correct_answer is False"
         demo_code: |-
-            answer is 0
+            answer = 0
             while correct_answer != 25
-                answer is ask 'What is 5 times 5?'
+                answer = ask 'What is 5 times 5?'
             print 'A correct answer has been given'
     -   name: "Smaller while"
-        explanation: "We can also use the `while` loop with `<` and `>`. Be careful, you need to change the number so the loop ends. We do that with count is count + 1 now."
+        explanation: "We can also use the `while` loop with `<` and `>`. Be careful, you need to change the number so the loop ends. We do that with count = count + 1 now."
         example: "For example: while count < 3"
         demo_code: |-
-            count is 1
+            count = 1
             while count < 3
                 print 'We do this ' 3 - count ' more times'
-                count is count + 1
+                count = count + 1
             print 'We are done'
 
 16:
     start_code: |-
-        fruit is ['apple', 'banana', 'cherry']
+        fruit = ['apple', 'banana', 'cherry']
         print fruit 
     intro_text: "We are going to put square brackets around lists! Also we now need to put single quotation marks (') around items in lists. "
     commands:
     -   name: "square brackets"
         explanation: "We are going to put square brackets around lists! We also need to put ' around items in lists."
-        example: "For example: fruit is ['apple', 'banana', 'cherry']"
+        example: "For example: fruit = ['apple', 'banana', 'cherry']"
         demo_code: |-
-            fruit is ['apple', 'banana', 'cherry']
+            fruit = ['apple', 'banana', 'cherry']
             print fruit 
     -   name: "Get an item from a list"
         explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
-        example: "For example: firstfruit is fruit[1]"
+        example: "For example: firstfruit = fruit[1]"
         demo_code: |-
-            fruit is ['banana', 'apple', 'cherry']
-            firstfruit is fruit[1]
+            fruit = ['banana', 'apple', 'cherry']
+            firstfruit = fruit[1]
             print firstfruit 
     -   name: "Get a random item from a list"
         explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
-        example: "For example: randomfruit is fruit[random]"
+        example: "For example: random_fruit is fruit[random]"
         demo_code: |-
-            fruit is ['banana', 'apple', 'cherry']
-            randomfruit is fruit[random]
-            print randomfruit 
+            fruit = ['banana', 'apple', 'cherry']
+            random_fruit = fruit[random]
+            print random_fruit
 
 
 #16:
@@ -555,7 +564,7 @@
 #            print('Ηello!')
 #20:
 #    start_code: |-
-#        fruit is ['apple', 'banana', 'cherry']
+#        fruit = ['apple', 'banana', 'cherry']
 #        for i in range(1, 3):
 #            print(fruit[i])
 #    intro_text: "We can also see everything in a list with the for loop. Because there are three things in the list, we take the loop from 1 to 3. Now we print everything in the loop."
@@ -564,7 +573,7 @@
 #        explanation: "With `length` we can see the size of a list. The list in the example is 3 because there are three things in the list"
 #        example: "length(list)"
 #        demo_code: |-
-#            fruit is ['apple', 'banana', 'cherry']
+#            fruit = ['apple', 'banana', 'cherry']
 #            print('length of list is ' length(fruit))
 #            for i in range(1, length(fruit)):
 #                print(fruit[i])
@@ -626,7 +635,7 @@
         explanation: "We need to do the same with all of our `if` statements"
         example: "if colour is green:'"
         demo_code: |-
-            colour is ask 'What is your favorite color?'
+            colour = ask 'What is your favorite color?'
             if colour is green:
                 print 'Your favorite colour is green'
             else:
@@ -635,7 +644,7 @@
         explanation: "We will show you a new command that you are allowed to use: `elif`. `elif` means \"else if\". We start with checking if the `if` is correct, if that one is not true, we check the `elif` and if that one is also not true, we go to the `else`."
         example: "elif a is 5:"
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a is 1'
             elif a is 2:

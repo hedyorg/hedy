@@ -52,7 +52,7 @@ def transform_yaml_to_lark(only_new_lang=True):
           
         if yaml_lang != 'en':
           if translation in list_of_translations:
-            raise ValueError(f'{translation} is a duplicate translation. This is not desired when creating lark files')
+            print(f'Warning! {translation} is a duplicate translation. This is not desired when creating lark files')
           else:
             list_of_translations.append(translation)
         
@@ -135,5 +135,5 @@ def transform_levels_in_all_YAMLs(old_level, new_level=None, function=nop):
 def remove_brackets(s):
   return s.replace('(', ' ').replace(')', '')
 
-transform_yaml_to_lark(False)
+transform_yaml_to_lark(True)
 # transform_levels_in_all_YAMLs('colon', 17)

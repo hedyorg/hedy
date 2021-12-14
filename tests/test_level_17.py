@@ -62,7 +62,8 @@ class TestsLevel17(HedyTester):
     step = 1 if int(2) < int(4) else -1
     for a in range(int(2), int(4) + step, step):
       a = a + 2
-      b = b + 2""")
+      b = b + 2
+      time.sleep(0.1)""")
 
 
 
@@ -95,6 +96,7 @@ class TestsLevel17(HedyTester):
     step = 1 if int(1) < int(10) else -1
     for i in range(int(1), int(10) + step, step):
       print(f'{i}')
+      time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
 
@@ -172,7 +174,8 @@ class TestsLevel17(HedyTester):
       else:
         print(f'Dat is goed!')
       if str(antwoord) == str('25'):
-        i = 10""")
+        i = 10
+      time.sleep(0.1)""")
 
 
 

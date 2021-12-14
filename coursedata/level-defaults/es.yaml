@@ -166,16 +166,16 @@
         demo_code: "print '5 multiplicado por 5 es ' 5 * 5"
     -   name: "ask e if con operaciones"
         explanation: "Pregunta por una operación y comprueba que sea correcta."
-        example: "Ejemplo: respuesta is ask ¿Cuánto es 10 más 10?"
+        example: "Ejemplo: respuesta = ask ¿Cuánto es 10 más 10?"
         demo_code: |-
-            resultado is ask '¿Cuánto es 10 más 10?'
+            resultado = ask '¿Cuánto es 10 más 10?'
             if resultado is 20 print '¡¡Correcto!!' else print '¡Casi!, inténtalo otra vez'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Hedy es divertido!'"
@@ -194,15 +194,15 @@
         demo_code: "print 'Hola bienvenido a Hedy.'"
     -   name: "ask"
         explanation: "Preguntar algo con `ask`."
-        example: "Ejemplo: color is ask '¿Cuál es tu color favorito?'"
+        example: "Ejemplo: color = ask '¿Cuál es tu color favorito?'"
         demo_code: |-
-            color is ask '¿Cuál es tu color favorito?'
+            color = ask '¿Cuál es tu color favorito?'
             print 'Tu color favorito es el ' color
     -   name: "if"
         explanation: "Tomar una decisión con `if`."
         example: "Ejemplo: if color is verde print '¡qué bonito!' else print 'no es tan bonito'"
         demo_code: |-
-            color is ask '¿Cuál es tu color favorito?'
+            color = ask '¿Cuál es tu color favorito?'
             if color is verde print '¡qué bonito!' else print 'no es tan bonito'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -232,9 +232,9 @@
         demo_code: "print '5 multiplicado por 5 es ' 5 * 5"
     -   name: "`if` con varias líneas"
         explanation: "Pregunta por la respuesta de una suma y comprueba el resultado. Ahora podemos mostrar 2 líneas."
-        example: "Ejemplo: resultado is ask '¿Cuánto es 5 más 5?'"
+        example: "Ejemplo: resultado = ask '¿Cuánto es 5 más 5?'"
         demo_code: |-
-            resultado is ask '¿Cuánto es 5 más 5?'
+            resultado = ask '¿Cuánto es 5 más 5?'
             if resultado is 10
                 print '¡Muy bien!'
                 print 'Efectivamente, la respuesta es ' resultado
