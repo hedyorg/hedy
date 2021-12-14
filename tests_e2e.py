@@ -489,7 +489,6 @@ class TestAuth(AuthHelper):
            'birth_year': 1989,
            'country': 'NL',
            'gender': 'o',
-           'language': 'nl',
            'prog_experience': 'yes',
            'experience_languages': ['python', 'other_block']
         }
