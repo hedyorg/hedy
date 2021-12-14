@@ -9,7 +9,7 @@
             <h3>{{ subcategory.title }}</h3>
             <div class="flex flex-row w-full">
             {% for achievement in subcategory.achievements %}
-                {% if achievement.title in achievements_reached %}
+                {% if achievement.title in user_achievements %}
                     <div class="w-40 rounded-lg mr-4 relative bg-blue-200">
                         <div class="relative h-40">
                             <img src="{{static('/images/' + achievement.image)}}" class="absolute">

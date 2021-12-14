@@ -3,7 +3,7 @@ import {LANG_es} from './syntaxLang-es';
 import {LANG_nl} from './syntaxLang-nl';
 
 // Set this to true to use keywords from languages other than english
-var localKeywordsEnable = true;
+var localKeywordsEnable = false;
 
 // Contains the current keywords based on the current language
 var currentLang: { 

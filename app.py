@@ -608,13 +608,9 @@ def achievements_page():
         return redirect(url, code=302)
 
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
-    user_achievements = DATABASE.achievements_by_username(user.get('username'))
-    if not user_achievements:
-        user_achievements = []
 
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
-                           achievements=achievement_translations, achievements_reached=user_achievements,
-                           current_page='my-profile')
+                           achievements=achievement_translations, current_page='my-profile')
 
 def programs_page(request):
     user = current_user()
@@ -1251,6 +1247,7 @@ def save_program(user):
     DATABASE.store_program(stored_program)
     if not overwrite:
         DATABASE.increase_user_program_count(user['username'])
+        DATABASE.increase_user_save_count(user['username'])
 
     return jsonify({'name': body['name'], 'id': program_id})
 
@@ -1271,7 +1268,6 @@ def share_unshare_program(user):
         return 'No such program!', 404
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
-    DATABASE.increase_user_save_count(user['username'])
     return jsonify({'id': body['id']})
 
 
