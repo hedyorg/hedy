@@ -35,7 +35,7 @@ from flask_compress import Compress
 # Hedy-specific modules
 import hedy_content
 import hedyweb
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database
+from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import quiz
 
 # Set the current directory to the root Hedy folder
@@ -77,7 +77,7 @@ for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
 
 TRANSLATIONS = hedyweb.Translations()
-
+ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
 # Define code that will be used if some turtle command is present
@@ -474,6 +474,12 @@ def parse():
         except:
             pass
 
+        # If we have earned new achievements -> add to db and return names to front-end
+        if username and ACHIEVEMENTS.verify_new_achievements(username):
+            response['Achievements'] = ACHIEVEMENTS.get_earned_achievements()
+            print(response)
+
+
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex, hedy_errors)
@@ -498,9 +504,6 @@ def parse():
     })
 
     return jsonify(response)
-
-def add_achievement_to_user(username, achievement):
-    DATABASE.add_achievement_to_username(username, achievement)
 
 def hedy_error_to_response(ex, translations):
     return {
