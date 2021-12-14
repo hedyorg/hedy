@@ -25,6 +25,14 @@
             <label class="inline-block w-1/2" for="birth_year">{{auth.birth_year}}</label><input class="inline-block w-1/2 px-2 py-1 border-2 border-gray-400" id="birth_year" name="birth_year" placeholder="1995" type="number">
         </div>
         <div class="mb-4">
+            <label class="inline-block w-1/2" for="language">{{auth.preferred_language}}</label><select class="inline-block w-1/2" id="language" name="language">
+                <option value="{{ current_language().lang}}" selected>{{current_language().sym}}</option>
+                {% for language in other_languages() %}
+                    <option value="{{language.lang}}">{{language.sym}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-4">
             <label class="inline-block w-1/2" for="gender">{{auth.gender}}</label><select class="inline-block w-1/2" id="gender" name="gender">
               <option value="" selected disabled hidden>{{auth.select}}</option>
               <option value="f">{{auth.female}}</option>

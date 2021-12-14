@@ -150,16 +150,16 @@
         example: "例如: print '5乘以5等于 ' 5 * 5"
         demo_code: "print '5乘以5等于 ' 5 * 5"
     -   explanation: "用ask提问计算题的答案然后用if-else条件语句检查答案是否正确。."
-        example: "例如: answer is ask 10加10等于几?"
+        example: "例如: answer = ask 10加10等于几?"
         demo_code: |-
-            answer is ask '10加10等于几?'
+            answer = ask '10加10等于几?'
             if answer is 20 print '做得好!' else print '糟糕,算错啦'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print '海迪很好玩!'"
@@ -175,19 +175,19 @@
         example: "例如: print '你好欢迎来到海迪.'"
         demo_code: "print '你好欢迎来到海迪.'"
     -   explanation: "Ask的意思是提问，用`ask`提出问题."
-        example: "例如: color is ask 你最喜欢的颜色是什么?"
+        example: "例如: color = ask 你最喜欢的颜色是什么?"
         demo_code: |-
-            color is ask '你最喜欢的颜色是什么?'
+            color = ask '你最喜欢的颜色是什么?'
             print color ' is your favorite!'
     -   explanation: "Make a choice with `if`"
         example: "Example: if color is green print 'pretty!' else print 'meh'"
         demo_code: |-
-            color is ask '你最喜欢的颜色是什么?'
+            color = ask '你最喜欢的颜色是什么?'
             if color is green print 'pretty!' else print 'meh'
     -   explanation: "`repeat` and `if` combined"
         example: "Example: if color is green repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
-            color is ask '你最喜欢的颜色是什么?'
+            color = ask '你最喜欢的颜色是什么?'
             if color is 绿色 repeat 3 times print '漂亮!' else repeat 5 times print '呵呵'
 
 8:
@@ -211,9 +211,9 @@
         example: "Example: print '5乘以5等于 ' 5 * 5"
         demo_code: "print '5乘以5等于 ' 5 * 5"
     -   explanation: "使用ask提问加法运算的答案然后检查答案是否正确. 我们现在可以打印两行代码了."
-        example: "例如: answer is ask 5加5等于几?"
+        example: "例如: answer = ask 5加5等于几?"
         demo_code: |-
-            answer is ask '5加5等于几?'
+            answer = ask '5加5等于几?'
             if answer is 10
                 print '做得好!'
                 print '的确, 答案就是 ' answer
@@ -223,7 +223,7 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -236,7 +236,7 @@
         ## Example Hedy code
         ```
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -246,9 +246,9 @@
     commands:
     -   name: "`if` with multiple lines"
         explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+        example: "Example: answer = ask 'What is 20 plus 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
+            answer = ask 'What is 20 plus 20?'
             if answer is 20
                 print 'Well done!!'
                 print 'The answer is indeed' answer
@@ -305,8 +305,8 @@
 
 13:
     start_code: |-
-        name is ask 'what is your name?'
-        leeftijd is ask 'what is your age?'
+        name = ask 'what is your name?'
+        leeftijd = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "我们将要学习 `and` (且)和 `or`(或)! 如果你想判断两个语句，你不需要使用两个if，但可以使用`and`(且)和`or`(或). 如果你要用`and`那么'and`的左边和右边的两个语句都需要为真. 我们也可以使用`or'那么'or`的左边和右边的两个语句中只需要有一个语句是正确的."
@@ -315,8 +315,8 @@
         explanation: "'and`的左边和右边的两个语句都必须是正确的."
         example: "if 3+2 is 5 and 2+2 is 4"
         demo_code: |-
-            answer1 is ask '3+2等于几?'
-            answer2 is ask '2+2等于几?'
+            answer1 = ask '3+2等于几?'
+            answer2 = ask '2+2等于几?'
             if answer1 is 5 and answer2 is 4
                 print '这两个答案都正确!'
             else
@@ -325,8 +325,8 @@
         explanation: " 在`or`(或)的左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的."
         example: "if 3+2 is 5 or 2+2 is 4"
         demo_code: |-
-            answer1 is ask '3+2等于几?'
-            answer2 is ask '2+2等于几?'
+            answer1 = ask '3+2等于几?'
+            answer2 = ask '2+2等于几?'
             if answer1 is 5 or answer2 is 4
                 print '至少有一个答案是正确的!'
             else
@@ -356,7 +356,7 @@
 #
 14:
     start_code: |-
-        age is ask '你今年几岁了?'
+        age = ask '你今年几岁了?'
         if age < 13
             print '你比我年纪小!'
         else
@@ -367,21 +367,21 @@
         explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字. 例如，如果我们想要知道变量(variable)是否小于15，那么我们就可以用 `variable < 15`"
         example: "例如: age < 13"
         demo_code: |-
-            age is ask '你今年几岁了?'
+            age = ask '你今年几岁了?'
             if age < 13
                 print '你比我年纪小!'
     -   name: "Bigger 大于"
         explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字. 例如如果我们想要知道变量(variable)是否大于15, 那么我就可以用 `variable > 15`"
         example: "例如: age > 13"
         demo_code: |-
-            age is ask '你今年几岁了?'
+            age = ask '你今年几岁了?'
             if age > 13
                 print '你比我年纪大!'
 15:
     start_code: |-
-        answer is 0
+        answer = 0
         while correct_answer != 25
-            answer is ask '5乘以5等于几?'
+            answer = ask '5乘以5等于几?'
         print '已经给出了一个很好的答案'
     intro_text: "我们将要学习一个新的循环, 就是`while` 循环! 只要语句为真/有效，我们就不停的执行循环语句! 因此在范例代码中, 我们一直不停的执行循环语句直到一个正确的答案被给出. 如果正确答案一直没有被给出, 这个循环语句就不会结束!"
     commands:
@@ -389,44 +389,44 @@
         explanation: "我们可以将`while` 循环语句和`True` 和 `False`一起使用"
         example: "例如: while correct_answer is False"
         demo_code: |-
-            answer is 0
+            answer = 0
             while correct_answer != 25
-                answer is ask '5乘以5等于几?'
+                answer = ask '5乘以5等于几?'
             print '已经给出了一个很好的答案'
     -   name: "Smaller while (直到小于)"
-        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count is count + 1 来达到这个目的."
+        explanation: "我们也可以将`while` 循环语句和小于号 `<` 和大于号 `>`一起使用. 注意, 你需要改变数字以便循环结束. 我们现在是用count = count + 1 来达到这个目的."
         example: "例如: while count < 3"
         demo_code: |-
-            count is 1
+            count = 1
             while count < 3
                 print '我们计算 ' 3 - count ' 的次数更多了'
-                count is count + 1
+                count = count + 1
             print '我们完成啦'
 16:
     start_code: |-
-        fruit is ['苹果', '香蕉', '樱桃']
+        fruit = ['苹果', '香蕉', '樱桃']
         print fruit 
     intro_text: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
     commands:
     -   explanation: "我们现在要把列表(list)的内容用中括号括起来！我们现在也需要把列表里面的每一个元素都用单引号(')标示清楚."
-        example: "例如: fruit is ['苹果', '香蕉', '樱桃']"
+        example: "例如: fruit = ['苹果', '香蕉', '樱桃']"
         demo_code: |-
-            fruit is ['苹果', '香蕉', '樱桃']
+            fruit = ['苹果', '香蕉', '樱桃']
             print fruit 
     -   name: "从一个列表中检索元素"
         explanation: "我们用[数字]从一个列表中检索元素，因此 fruit[1] 的意思就是从列表fruit中检索第一个元素t!"
-        example: "例如: firstfruit is fruit[1]"
+        example: "例如: firstfruit = fruit[1]"
         demo_code: |-
-            fruit is ['香蕉', '苹果', '樱桃']
-            firstfruit is fruit[1]
+            fruit = ['香蕉', '苹果', '樱桃']
+            firstfruit = fruit[1]
             print firstfruit 
     -   name: "从一个列表中随机选择元素"
         explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
-        example: "例如: randomfruit is fruit[random]"
+        example: "例如: random_fruit = fruit[random]"
         demo_code: |-
-            fruit is ['香蕉', '苹果', '樱桃']
-            randomfruit is fruit[random]
-            print randomfruit 
+            fruit = ['香蕉', '苹果', '樱桃']
+            random_fruit = fruit[random]
+            print random_fruit
 17:
     start_code: |-
         for i in range 1 to 10:
@@ -443,7 +443,7 @@
     -   explanation: "我们需要对所有的 `if`条件语句做同样的处理."
         example: "if colour is 绿色:'"
         demo_code: |-
-            colour is '绿色'
+            colour = '绿色'
             if colour is 绿色:
                 print 'The colour 是绿色'
             else:
@@ -451,7 +451,7 @@
     -   explanation: "我们将向你展示一个允许你使用的新命令: `elif`. `elif` 的意思是否则如果 \"else if\". 我们首先判断 `if`条件是否正确, 如果这个条件不正确, 那我们就判断 `elif` 条件是否正确，如果这个条件也不正确, 那我们就执行 `else`语句."
         example: "elif a is 5:"
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a 是 1'
             elif a is 2:

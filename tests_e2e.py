@@ -253,7 +253,9 @@ class TestAuth(AuthHelper):
             {'username': username, 'password': 'foo'},
             {'username': username, 'password': 'foobar'},
             {'username': username, 'password': 'foobar', 'email': 'me@something'},
-            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience':[2]},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': 123},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': True},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}
         ]
@@ -466,6 +468,8 @@ class TestAuth(AuthHelper):
             {'country': 'Netherlands'},
             {'gender': 0},
             {'gender': 'a'},
+            {'language': True},
+            {'language': 123},
             {'prog_experience': 1},
             {'prog_experience': 'foo'},
             {'prog_experience': True},

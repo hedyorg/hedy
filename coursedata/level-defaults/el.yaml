@@ -153,16 +153,16 @@
         demo_code: "print '5 επί 5 είναι ' 5 * 5"
     -   name: 'Οι `ask` και `if` με υπολογισμούς'
         explanation: 'Ρώτησε σχετικά με έναν υπολογισμό και έλεγξε ότι είναι σωστός.'
-        example: "Παράδειγμα: answer is ask 'Πόσο είναι 10 + 10;'"
+        example: "Παράδειγμα: answer = ask 'Πόσο είναι 10 + 10;'"
         demo_code: |-
-            answer is ask 'Πόσο είναι 10 + 10;'
+            answer = ask 'Πόσο είναι 10 + 10;'
             if answer is 20 print 'Ναι!' else print 'Ουπς'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
@@ -181,15 +181,15 @@
         demo_code: "print 'Γειά, καλωσήλθες στη Hedy.'"
     -   name: 'ask'
         explanation: 'Ρώτησε κάτι με την `ask`.'
-        example: "Παράδειγμα: color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;"
+        example: "Παράδειγμα: color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;"
         demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
+            color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
             print 'το ' color ' είναι το αγαπημένο σου!'
     -   name: 'if'
         explanation: 'Κάνε μια επιλογή με την `if`'
         example: "Παράδειγμα: if color is green print 'όμορφο!' else print 'έτσι κι έτσι'"
         demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
+            color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -221,9 +221,9 @@
         demo_code: "print '5 επί 5 ίσον με ' 5 * 5"
     -   name: 'Η `if` με πολλαπλές γραμμές'
         explanation: 'Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.'
-        example: "'Παράδειγμα: answer is ask 'Πόσο είναι 5 συν 5?'"
+        example: "'Παράδειγμα: answer = ask 'Πόσο είναι 5 συν 5?'"
         demo_code: |-
-            answer is ask 'Πόσο είναι 5 συν 5;'
+            answer = ask 'Πόσο είναι 5 συν 5;'
             if answer is 10
                 print 'Μπράβο!'
                 print 'Πράγματι, η απάντηση ήταν ' answer
@@ -233,7 +233,7 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -246,7 +246,7 @@
         ## Example Hedy code
         ```
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -256,9 +256,9 @@
     commands:
     -   name: "`if` with multiple lines"
         explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+        example: "Example: answer = ask 'What is 20 plus 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
+            answer = ask 'What is 20 plus 20?'
             if answer is 20
                 print 'Well done!!'
                 print 'The answer is indeed' answer
@@ -323,15 +323,16 @@
         For this level on you will also have to use quotation marks when storing a text with `is`:
 
         ```
-        name is 'Hedy'
+        name = 'Hedy'
         print 'Hello ' name
         ```
 
         For numbers, you do not use quotation marks in the `is`:
         ```
-        score is 25
+        score = 25
         print 'You got ' score
         ```
+
     commands:
     -   name: "float directly"
         explanation: "Calculation with decimals"
@@ -342,17 +343,17 @@
             print 2.5 + 2.5
     -   name: "float in var"
         explanation: "Storing a calculation with decimals"
-        example: "antwoord is 2.5 + 2.5"
+        example: "antwoord = 2.5 + 2.5"
         demo_code: |
-            answer is 2.5 + 2.5
+            answer = 2.5 + 2.5
             print 'Calculate away!'
             print 'Two and a half plus two and a half is...'
             print answer
 
 13:
     start_code: |-
-        name is ask 'what is your name?'
-        leeftijd is ask 'what is your age?'
+        name = ask 'what is your name?'
+        leeftijd = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: Τώρα θα μάθουμε τα `and` και `or`! Αν θέλεις να ελέγξεις δύο δηλώσεις, δεν χρειάζεται να χρησιμοποίησεις δύο if αλλά μπορείς να χρησιμοποιήσεις τα `and` και `or`. Αν χρησιμοποιήσεις τo `and`, και οι δύο προτάσεις, αριστερά και δεξιά από το `and` θα πρέπει να είναι αληθείς. Μπορούμε επίσης να χρησιμοποιήσουμε το `or`. Τότε, μόνο μια πρόταση χρειάζεται να είναι αληθής.
@@ -361,8 +362,8 @@
         explanation: Και οι δύο προτάσεις (αριστερά και δεξιά από το `and`) πρέπει να είναι αληθείς.
         example: if 3+2 is 5 and 2+2 is 4
         demo_code: |-
-            answer1 is ask 'Πόσο κάνει 3+2;'
-            answer2 is ask 'Πόσο κάνει 2+2;'
+            answer1 = ask 'Πόσο κάνει 3+2;'
+            answer2 = ask 'Πόσο κάνει 2+2;'
             if answer1 is 5 and answer2 is 4
                 print 'Και οι δύο απαντήσεις είναι σωστές!'
             else
@@ -371,8 +372,8 @@
         explanation: '`Or` Τουλάχιστον 1 από τις προτάσεις αριστερά και δεξιά από το `or`, οφείλει να είναι αληθής, αν και οι δύο είναι σωστές και αυτό είναι μια χαρά.'
         example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
-            answer1 is ask 'Πόσο κάνει 3+2;'
-            answer2 is ask 'Πόσο κάνει 2+2;'
+            answer1 = ask 'Πόσο κάνει 3+2;'
+            answer2 = ask 'Πόσο κάνει 2+2;'
             if answer1 is 5 or answer2 is 4
                 print 'Τουλάχιστον μία απάντηση είναι σωστή!'
             else
@@ -404,7 +405,7 @@
 #            print('γειά!')
 14:
     start_code: |-
-        age is ask 'Πόσο χρονών είσαι;'
+        age = ask 'Πόσο χρονών είσαι;'
         if age < 13
             print 'Είσαι νεότερη από εμένα!'
         else
@@ -415,21 +416,21 @@
         explanation: Χρησιμοποιούμε το `<` για να ελέγξουμε αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μικρότερη από 15, χρησιμοποιούμε `variable < 15`
         example: 'Για παράδειγμα: age < 13'
         demo_code: |-
-            age is ask 'Πόσο χρονών είσαι;'
+            age = ask 'Πόσο χρονών είσαι;'
             if age < 13
                 print 'Είσαι νεότερη από εμένα!'
     -   name: Μεγαλύτερο
         explanation: Χρησιμοποιούμε το `>` για να ελέγξουμε αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μεγαλύτερη από 15, χρησιμοποιούμε `variable > 15`
         example: 'Για παράδειγμα: age > 13'
         demo_code: |-
-            age is ask 'Πόσο χρονών είσαι;'
+            age = ask 'Πόσο χρονών είσαι;'
             if age > 13
                 print 'Είσαι μεγαλύτερη από εμένα!'
 15:
     start_code: |-
-        answer is 0
+        answer = 0
         while answer != 25
-            answer is ask 'Πόσο κάνει 5 φορές το 5;'
+            answer = ask 'Πόσο κάνει 5 φορές το 5;'
         print 'Δόθηκε η σωστή απάντηση'
     intro_text: Θα μάθουμε ένα νέο βρόχο, το βρόχο `while`! Συνεχίζουμε το βρόχο για όσο η πρόταση είναι αληθής/ορθή! Έτσι στο παράδειγμα κώδικα, συνεχίζουμε ώσπου να δοθεί μια σωστή απάντηση. Αν δε δοθεί ποτέ η σωστή απάντηση, ο βρόχος δε θα σταματήσει ποτέ!
     commands:
@@ -437,45 +438,45 @@
         explanation: Μπορούμε να χρησιμοποιήσουμε το βρόχο `while` με το `True` και `False`
         example: 'Παράδειγμα: while correct_answer is False'
         demo_code: |-
-            answer is 0
+            answer = 0
             while answer != 25
-                answer is ask 'Πόσο κάνει 5 φορές το 5;'
+                answer = ask 'Πόσο κάνει 5 φορές το 5;'
             print 'Δόθηκε η σωστή απάντηση'
     -   name: Μικρότερο while
-        explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `while` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count is count + 1.
+        explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `while` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
         example: 'Για παράδειγμα: while count < 3'
         demo_code: |-
-            count is 1
+            count = 1
             while count < 3
                 print 'Το κάνουμε αυτό ' 3 - count ' ακόμα φορές'
-                count is count + 1
+                count = count + 1
             print 'Τελειώσαμε'
 16:
     start_code: |-
-        fruit is ['μήλο', 'μπανάνα', 'κεράσι']
+        fruit = ['μήλο', 'μπανάνα', 'κεράσι']
         print fruit 
     intro_text: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες. "
     commands:
     -   name: 'Αγκύλες γύρω από λίστες'
         explanation: "Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες."
-        example: "Για παράδειγμα: fruit is ['μήλο', 'μπανάνα', 'κεράσι']"
+        example: "Για παράδειγμα: fruit = ['μήλο', 'μπανάνα', 'κεράσι']"
         demo_code: |-
-            fruit is ['μήλο', 'μπανάνα', 'κεράσι']
+            fruit = ['μήλο', 'μπανάνα', 'κεράσι']
             print fruit 
     -   name: 'Πάρε ένα αντικείμενο από μία λίστα'
         explanation: 'Για να πάρουμε ένα αντικείμενο από μια λίστα χρησιμοποιούμε [αριθμός] έτσι fruit[1] σημαίνει, πάρε το πρώτο φρούτο από τη λίστα!'
-        example: 'Για παράδειγμα: firstfruit is fruit[1]'
+        example: 'Για παράδειγμα: firstfruit = fruit[1]'
         demo_code: |-
-            fruit is ['μήλο', 'μπανάνα', 'κεράσι']
-            firstfruit is fruit[1]
+            fruit = ['μήλο', 'μπανάνα', 'κεράσι']
+            firstfruit = fruit[1]
             print firstfruit 
     -   name: 'Πάρε ένα τυχαίο αντικείμενο από μία λίστα'
         explanation: 'Για να πάρουμε ένα τυχαίο αντικείμενο από τη λίστα χρησιμοποιούμε [random] έτσι fruit[random] σημαίνει, πάρε ένα τυχαίο φρούτο από τη λίστα!'
-        example: 'Για παράδειγμα: randomfruit is fruit[random]'
+        example: 'Για παράδειγμα: random_fruit = fruit[random]'
         demo_code: |-
-            fruit is ['μήλο', 'μπανάνα', 'κεράσι']
-            randomfruit is fruit[random]
-            print randomfruit 
+            fruit = ['μήλο', 'μπανάνα', 'κεράσι']
+            random_fruit = fruit[random]
+            print random_fruit
 17:
     start_code: |-
         for i in range 1 to 10:
@@ -494,7 +495,7 @@
         explanation: 'Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`'
         example: "if color is πράσινο:'"
         demo_code: |-
-            color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
+            color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
             if color is πράσινο:
                 print 'To χρώμα είναι πράσινο'
             else:
@@ -503,7 +504,7 @@
         explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
         example: 'elif a is 5:'
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a is 1'
             elif a is 2:
