@@ -1,5 +1,6 @@
 // It's important that this file gets loaded first
 import './syntaxLang-en';
+import './syntaxLang-es';
 import './syntaxLang-nl';
 import './syntaxModesRules';
 
@@ -1026,6 +1027,17 @@ export function toggle_developers_mode(example_programs: boolean) {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+  }
+}
+
+export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
+  $('#profile').toggle();
+  if ($('#profile').is(":visible")) {
+      $('#username').html(username);
+      $('#email').val(mail);
+      $('#birth_year').val(birth_year);
+      $('#gender').val(gender);
+      $('#country').val(country);
   }
 }
 

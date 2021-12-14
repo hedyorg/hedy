@@ -3,5 +3,4 @@
 ?atom: NUMBER | var | list_access | unsupported_number
 list_access: var _LEFT_SQUARE_BRACKET (INT | random | var) _RIGHT_SQUARE_BRACKET
 change_list_item: var _LEFT_SQUARE_BRACKET (INT | var) _RIGHT_SQUARE_BRACKET _SPACE _EQUALS _SPACE (var | textwithoutspaces)
-list_access_var: var _SPACE _EQUALS _SPACE var _LEFT_SQUARE_BRACKET (INT | random | var) _RIGHT_SQUARE_BRACKET
-assign_list: var _SPACE _IS _SPACE _LEFT_SQUARE_BRACKET (quoted_text | NUMBER) (_COMMA _SPACE? (quoted_text | NUMBER))+ _RIGHT_SQUARE_BRACKET
+assign_list: var _SPACE (_IS|_EQUALS) _SPACE _LEFT_SQUARE_BRACKET (quoted_text | INT) (_COMMA _SPACE? (quoted_text | INT))+ _RIGHT_SQUARE_BRACKET
