@@ -549,8 +549,6 @@ export function submit_program (id: string, shared: boolean) {
   console.log(shared);
   if (! shared) return modal.alert (auth.texts['must_be_shared']);
 
-  console.log("Let's submit this program!");
-
   $.ajax({
     type: 'POST',
     url: '/programs/submit',
