@@ -133,11 +133,11 @@ adventures:
 
                     ## Példa Hedy kódra
                     ```
-                    verssor is 99
+                    verssor = 99
                     print verssor ' üveg sör a falon'
                     print verssor ' üveg sör'
                     print 'Vegyél egyet, add tovább'
-                    verssor is verssor - 1
+                    verssor = verssor - 1
                     print verssor 'üveg sör a falon'
                     ```
             7:
@@ -169,11 +169,11 @@ adventures:
 
                     ## Példa Hedy kódr
                     ```
-                    verssor is 99
+                    verssor = 99
                     print verssor ' üveg sör a falon'
                     print verssor ' üveg sör'
                     print 'Vegyél egyet, add tovább'
-                    verssor is verssor - 1
+                    verssor = verssor - 1
                     print verssor ' üveg sör a falon'
                     ```
                     Most megismételheted a 2–9. Sort, ahányszor csak akarod, a sorok másolásával.
@@ -209,11 +209,11 @@ adventures:
 
                     ## Példa Hedy kód
                     ```
-                    emberek is anya, apa, Edit, Gizi
-                    edit_mosogat is 0
-                    mosogato is emberek at random
+                    emberek = anya, apa, Edit, Gizi
+                    edit_mosogat = 0
+                    mosogato = emberek at random
                     print 'A mosogató' mosogato
-                    if mosogato is Edit edit_mosogat is edit_mosogat + 1
+                    if mosogato is Edit edit_mosogat = edit_mosogat + 1
                     print 'Edit ezen a héten' edit_mosogat 'alkalommal mosogatott'
                     ```
 
@@ -311,11 +311,11 @@ adventures:
 
                     ## Példa Hedy kód
                     ```
-                    dobasok is 1, 2, 3, 4, 5, giliszta
-                    pontok is 0
-                    dobas is dobasok at random
+                    dobasok = 1, 2, 3, 4, 5, giliszta
+                    pontok = 0
+                    dobas = dobasok at random
                     print 'a dobásod' dobas
-                    if dobas is giliszta pontok is pontok + 5 else pontok is pontok + dobas
+                    if dobas is giliszta pontok = pontok + 5 else pontok = pontok + dobas
                     print 'Pontok:' pontok
                     ```
 
@@ -469,17 +469,17 @@ adventures:
 
                     ## Példa Hedy kód
                     ```
-                    pontszam is 0
+                    pontszam = 0
                     repeat 10 times
-                        szamok is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        szam1 is szamok at random
-                        szam2 is szamok at random
-                        helyesvalasz is szam1 * szam2
+                        szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        szam1 = szamok at random
+                        szam2 = szamok at random
+                        helyesvalasz = szam1 * szam2
                         print 'Mennyi ' szam1 ' * ' szam2 '?'
-                        valasz is ask 'Gépeld ide a válaszodat...'
+                        valasz = ask 'Gépeld ide a válaszodat...'
                         print 'A válaszod: ' valasz
                         if valasz is helyesvalasz
-                            pontszam is pontszam + 1
+                            pontszam = pontszam + 1
                     print 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
                     ```
                 start_code: print 'Üdvözölünk a számológépnél!'
@@ -490,8 +490,8 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    jo_valasz is 11 * 27
-                    valasz is ask 'Mennyi 11 és 27 szorzata?'
+                    jo_valasz = 11 * 27
+                    valasz = ask 'Mennyi 11 és 27 szorzata?'
                     if valasz is jo_valasz print 'nagyszerű!'
                     else print 'Nem jó! Ennyi: ' jo_valasz
                     ```
@@ -501,12 +501,12 @@ adventures:
                     Így válassz ki pár táblázatot a gyakorláshoz, és ettől mindig más eredményt kapsz
                     ## Példa Hedy kód
                     ```
-                    tablazat is 4, 5, 6, 8
-                    szamok is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    tabla is tablazat at random
-                    szam is szamok at random
-                    jo_valasz is tabla * szam
-                    valasz is ask 'Mennyi ' tabla ' és ' szam ' szorzata?'
+                    tablazat = 4, 5, 6, 8
+                    szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    tabla = tablazat at random
+                    szam = szamok at random
+                    jo_valasz = tabla * szam
+                    valasz = ask 'Mennyi ' tabla ' és ' szam ' szorzata?'
                     if valasz is jo_valasz print 'rendben'
                     else print 'hiba! ennyi: ' jo_valasz
                     ```
@@ -747,7 +747,7 @@ adventures:
     turtle:
         name: Teknős
         description: Készíts saját rajzot
-        image: turtle.png
+        image: turtle.gif
         default_save_name: teknős
         levels:
             1:

@@ -147,16 +147,16 @@
         example: "Příklad: print '5 krát 5 je ' 5 * 5"
         demo_code: print '5 krát 5 je ' 5 * 5
     -   explanation: Zadej příklad a ověř výsledek.
-        example: "Příklad: vysledek is ask 'Kolik je 10 plus 10?'"
+        example: "Příklad: vysledek = ask 'Kolik je 10 plus 10?'"
         demo_code: |-
-            vysledek is ask 'Kolik je 10 plus 10?'
+            vysledek = ask 'Kolik je 10 plus 10?'
             if answer is 20 print 'Ano!' else print 'Těsně  vedle...'
     -   name: "`ask` and `if` turtle"
         explanation: "Ask the user how many angles they want"
-        example: "Example: angles is ask 'How many angles?'"
+        example: "Example: angles = ask 'How many angles?'"
         demo_code: |-
-            angles is ask 'How many angles?'
-            angle is 360 / angles
+            angles = ask 'How many angles?'
+            angle = 360 / angles
             forward 50
 7:
     start_code: repeat 3 times print 'Hedy je zábavná!'
@@ -172,14 +172,14 @@
         example: "Příklad: print 'Ahoj, vítej v Hedy!'"
         demo_code: print 'Ahoj, vítej v Hedy!'
     -   explanation: Zopakuj si příkaz `ask`.
-        example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
+        example: 'Příklad: barva = ask Jaká je tvoje nejoblíbenější barva?'
         demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
             print barva ' je tvoje nejoblíbenější barva.'
     -   explanation: Rozhodni se pomocí `if`.
         example: "Příklad: if barva is růžová print 'Moje taky!' else print 'Fuj...'"
         demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is růžová print 'Moje taky!' else print 'Fuj...'
     -   name: "repeat - turtle"
         explanation: "Repeat a line of code with `repeat`."
@@ -208,9 +208,9 @@
         example: "Příklad: print '5 krát 5 je ' 5 * 5"
         demo_code: print '5 krát 5 je ' 5 * 5
     -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: "Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
+        example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
         demo_code: |-
-            vysledek is ask 'Kolik je 5 plus 5?'
+            vysledek = ask 'Kolik je 5 plus 5?'
             if vysledek is 10
                 print 'Skvělá práce!'
                 print 'Výsledek opravdu je ' vysledek
@@ -220,7 +220,7 @@
 9:
     start_code: |-
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -233,7 +233,7 @@
         ## Example Hedy code
         ```
         repeat 3 times
-            food is ask 'What do you want?'
+            food = ask 'What do you want?'
             if food is 'pizza'
                 print 'nice!'
             else
@@ -243,9 +243,9 @@
     commands:
     -   name: "`if` with multiple lines"
         explanation: "The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines."
-        example: "Example: answer is ask 'What is 20 plus 20?'"
+        example: "Example: answer = ask 'What is 20 plus 20?'"
         demo_code: |-
-            answer is ask 'What is 20 plus 20?'
+            answer = ask 'What is 20 plus 20?'
             if answer is 20
                 print 'Well done!!'
                 print 'The answer is indeed' answer
@@ -299,9 +299,9 @@
             for pocitadlo in range 1  to 5
                 print pocitadlo
     -   explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-        example: "Příklad: vysledek is ask 'Kolik je 5 plus 5?'"
+        example: "Příklad: vysledek = ask 'Kolik je 5 plus 5?'"
         demo_code: |-
-            vysledek is ask 'Kolik je 5 plus 5?'
+            vysledek = ask 'Kolik je 5 plus 5?'
             if vysledek is 10
                 print 'Skvělá práce!'
                 print 'Výsledek opravdu je ' vysledek
@@ -318,13 +318,13 @@
         For this level on you will also have to use quotation marks when storing a text with `is`:
 
         ```
-        name is 'Hedy'
+        name = 'Hedy'
         print 'Hello ' name
         ```
 
         For numbers, you do not use quotation marks in the `is`:
         ```
-        score is 25
+        score = 25
         print 'You got ' score
         ```
 # Marleen, deze tekst hierboven en commands hieronder moet voor Engels nog uitgebreid worden (zoals bij Nederlands)
@@ -339,17 +339,17 @@
             print 2.5 + 2.5
     -   name: "float in var"
         explanation: "Storing a calculation with decimals"
-        example: "antwoord is 2.5 + 2.5"
+        example: "antwoord = 2.5 + 2.5"
         demo_code: |
-            answer is 2.5 + 2.5
+            answer = 2.5 + 2.5
             print 'Calculate away!'
             print 'Two and a half plus two and a half is...'
             print answer
 
 13:
     start_code: |-
-        name is ask 'what is your name?'
-        leeftijd is ask 'what is your age?'
+        name = ask 'what is your name?'
+        leeftijd = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
@@ -358,8 +358,8 @@
         explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
         example: if 3+2 is 5 and 2+2 is 4
         demo_code: |-
-            odpoved1 is ask 'Kolik je 3 + 2?'
-            odpoved2 is ask 'Kolik je 2 + 2?'
+            odpoved1 = ask 'Kolik je 3 + 2?'
+            odpoved2 = ask 'Kolik je 2 + 2?'
             if odpoved1 is 5 and odpoved2 is 4
                 print 'Obě odpovědi jsou správně!'
             else
@@ -368,8 +368,8 @@
         explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
         example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
-            odpoved1 is ask 'Kolik je 3 + 2?'
-            odpoved2 is ask 'Kolik je 2 + 2?'
+            odpoved1 = ask 'Kolik je 3 + 2?'
+            odpoved2 = ask 'Kolik je 2 + 2?'
             if odpoved1 is 5 or odpoved2 is 4
                 print 'Alespoň jedna odpověď je správně!'
             else
@@ -398,7 +398,7 @@
 #            print('Ahoj!')
 #20:
 #    start_code: |-
-#        ovoce is ['jablko', 'banán', 'třešeň']
+#        ovoce = ['jablko', 'banán', 'třešeň']
 #        for i in range(1, 3):
 #            print(ovoce[i])
 #    intro_text: Pomocí cyklu se taky můžeme podívat, co všechno v seznamu máme. Protože jsou v našem seznamu 3 věci, poběží náš cyklus od 1 do 3. Teď vše v cyklu vypíšeme.
@@ -407,7 +407,7 @@
 #        explanation: Pomocí `length` (česky délka) můžeme zjistit délku seznamu. V příkladu je délka seznamu 3, protože obsahuje 3 položky.
 #        example: 'Příklad: length(list)'
 #        demo_code: |-
-#            ovoce is ['jablko', 'banán', 'třešeň']
+#            ovoce = ['jablko', 'banán', 'třešeň']
 #            print('Délka seznamu je ' length(ovoce))
 #            for i in range(1, length(ovoce)):
 #                print(ovoce[i])
@@ -458,7 +458,7 @@
 
 14:
     start_code: |-
-        vek is ask 'Kolik je ti let?'
+        vek = ask 'Kolik je ti let?'
         if vek < 13
             print 'Jsi mladší než já!'
         else
@@ -472,21 +472,21 @@
         explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
         example: 'Příklad: vek < 13'
         demo_code: |-
-            vek is ask 'Kolik je ti let?'
+            vek = ask 'Kolik je ti let?'
             if vek < 13
                 print 'Jsi mladší než já!'
     -   name: Větší
         explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
         example: 'Příklad: vek > 13'
         demo_code: |-
-            vek is ask 'Kolik je ti let?'
+            vek = ask 'Kolik je ti let?'
             if vek > 13
                 print 'Jsi mladší než já!'
 15:
     start_code: |-
-        odpoved is 0
+        odpoved = 0
         while spravna_odpoved != 25
-            odpoved is ask 'Kolik je 5 * 5?'
+            odpoved = ask 'Kolik je 5 * 5?'
         print 'Dostala jsem správnou odpověď!'
 
     intro_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
@@ -495,44 +495,44 @@
         explanation: Můžeme použít `while` cyklus s `True` a `False`.
         example: 'Příklad: while spravna_odpoved is False'
         demo_code: |-
-            odpoved is 0
+            odpoved = 0
             while spravna_odpoved != 25
-                odpoved is ask 'Kolik je 5 * 5?'
+                odpoved = ask 'Kolik je 5 * 5?'
             print 'Dostala jsem správnou odpověď!'
     -   name: While s operátory menší/větší než
         explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
         example: 'Příklad: while pocet < 3'
         demo_code: |-
-            pocet is 1
+            pocet = 1
             while pocet < 3
                 print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
-                pocet is pocet + 1
+                pocet = pocet + 1
             print 'Hotovo'
 16:
     start_code: |-
-        ovoce is ['jablko', 'banán', 'třešně']
+        ovoce = ['jablko', 'banán', 'třešně']
         print ovoce
     intro_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
     commands:
     -   explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
-        example: "Příklad: ovoce is ['jablko', 'banán', 'třešně']"
+        example: "Příklad: ovoce = ['jablko', 'banán', 'třešně']"
         demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
+            ovoce = ['jablko', 'banán', 'třešně']
             print ovoce
     -   name: Vyber položku ze seznamu.
         explanation: Abychom dostali položku ze seznamu, použijeme [číslo], takže ovoce[1] nám vrátí prvního člena seznamu!
-        example: 'Příklad: prvniovoce is ovoce[1]'
+        example: 'Příklad: prvniovoce = ovoce[1]'
         demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            prvniovoce is ovoce[1]
-            print prvniovoce
+            ovoce = ['jablko', 'banán', 'třešně']
+            prvni_ovoce = ovoce[1]
+            print prvni_ovoce
     -   name: Získej náhodnou položku ze seznamu.
         explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
         example: 'Příklad: nahodneovoce is ovoce[random]'
         demo_code: |-
-            ovoce is ['jablko', 'banán', 'třešně']
-            nahodneovoce is ovoce[random]
-            print nahodneovoce
+            ovoce = ['jablko', 'banán', 'třešně']
+            nahodne_ovoce = ovoce[random]
+            print nahodne_ovoce
 17:
     start_code: |-
         for i in range 1 to 10:
@@ -549,7 +549,7 @@
     -   explanation: To stejné musíme udělat i u `if`.
         example: 'if barva is zelená:'
         demo_code: |-
-            barva is ask 'Jaká je tvoje nejoblíbenější barva?'
+            barva = ask 'Jaká je tvoje nejoblíbenější barva?'
             if barva is zelená:
                 print 'Barva je zelená.'
             else:
@@ -557,7 +557,7 @@
     -   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
         example: 'elif a is 5:'
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a je 1'
             elif a is 2:

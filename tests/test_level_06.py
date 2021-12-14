@@ -228,6 +228,15 @@ class TestsLevel6(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+  #assign with =
+  def test_calc_assign_equals(self):
+    code = "nummer = 4 + 5"
+    expected = "nummer = int(4) + int(5)"
+    self.multi_level_tester(
+      code=code,
+      max_level=11,
+      expected=expected)
+
   # combined tests
   def test_print_else(self):
       code = textwrap.dedent("""\
