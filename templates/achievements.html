@@ -1,5 +1,22 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<h1>Achievements page</h1>
+<h1>{{ achievements.title }}</h1>
+    {% for category in achievements.categories %}
+    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.title}}').toggle()">{{category.title}}</h1>
+        <div class="hidden pl-4 mt-4 mb-4" id="{{ category.title }}">
+        {% for subcategory in category.subcategory %}
+            <h3>{{ subcategory.title }}</h3>
+            <div class="flex flex-row w-full">
+            {% for achievement in subcategory.achievements %}
+                <div class="w-40 border-gray-400 border-2 rounded-lg mr-4" title="{{ achievement.title }}">
+                    <img src="{{static('/images/' + achievement.image)}}">
+                    <p class="hidden">{{ achievement.text }}</p>
+                    <p class="text-center">{{ achievement.title }}</p>
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}
