@@ -468,6 +468,8 @@ class TestAuth(AuthHelper):
             {'country': 'Netherlands'},
             {'gender': 0},
             {'gender': 'a'},
+            {'language': True},
+            {'language': 123},
             {'prog_experience': 1},
             {'prog_experience': 'foo'},
             {'prog_experience': True},
