@@ -297,6 +297,9 @@ def enrich_context_with_user_info():
         data['user_data'] = user_data
         if 'classes' in user_data:
             data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
+        user_achievements = DATABASE.achievements_by_username(user.get('username'))
+        if user_achievements:
+            data['user_achievements'] = user_achievements
     return data
 
 @app.context_processor
@@ -496,6 +499,8 @@ def parse():
 
     return jsonify(response)
 
+def add_achievement_to_user(username, achievement):
+    DATABASE.add_achievement_to_username(username, achievement)
 
 def hedy_error_to_response(ex, translations):
     return {
@@ -604,9 +609,8 @@ def achievements_page():
 
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
     user_achievements = DATABASE.achievements_by_username(user.get('username'))
-    if "achieved" in user_achievements:
-        user_achievements = user_achievements['achieved']
-    print(user_achievements)
+    if not user_achievements:
+        user_achievements = []
 
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
                            achievements=achievement_translations, achievements_reached=user_achievements,
