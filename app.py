@@ -602,10 +602,12 @@ def achievements_page():
         return redirect(url, code=302)
 
     achievement_translations = hedyweb.PageTranslations('achievements').get_page_translations(g.lang)
-    achievements = DATABASE.user_by_username(user.get('username'))['achievements']
+    achievements_reached = DATABASE.user_by_username(user.get('username'))['achievements']
+    print(achievements_reached)
 
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'),
-                           achievements=achievement_translations, current_page='my-profile')
+                           achievements=achievement_translations, achievements_reached=achievements_reached,
+                           current_page='my-profile')
 
 def programs_page(request):
     user = current_user()
