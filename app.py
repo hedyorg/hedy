@@ -496,6 +496,11 @@ def parse():
     return jsonify(response)
 
 
+def update_achievements(user, response):
+    current_achievements = DATABASE.achievements_by_username(user)
+    return None
+
+
 def hedy_error_to_response(ex, translations):
     return {
         "Error": translate_error(ex.error_code, translations, ex.arguments),
@@ -1376,6 +1381,12 @@ auth.routes(app, DATABASE)
 from website import teacher
 
 teacher.routes(app, DATABASE)
+
+# *** ACHIEVEMENTS BACKEND
+
+from website import achievements
+
+achievements.routes(app, DATABASE)
 
 
 # *** START SERVER ***
