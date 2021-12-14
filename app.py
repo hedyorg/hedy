@@ -593,7 +593,17 @@ def version_page():
                            commit=commit)
 
 
-def achievements_page(request):
+def achievements_page():
+    user = current_user()
+    username = user['username']
+    if not username:
+        # redirect users to /login if they are not logged in
+        url = request.url.replace('/my-achievements', '/login')
+        return redirect(url, code=302)
+
+    total_achievements = {} #Read this from a .yaml file or something
+    achievements = DATABASE.user_by_username(user.get('username'))['achievements']
+
     return render_template('achievements.html', page_title=hedyweb.get_page_title('achievements'), current_page='my-profile')
 
 def programs_page(request):
@@ -993,8 +1003,8 @@ def main_page(page):
     if page in ['signup', 'login', 'my-profile', 'recover', 'reset', 'admin']:
         return auth_templates(page, hedyweb.get_page_title(page), g.lang, request)
 
-    if page =="my-achievements":
-        return achievements_page(request)
+    if page == "my-achievements":
+        return achievements_page()
 
     if page == 'programs':
         return programs_page(request)
