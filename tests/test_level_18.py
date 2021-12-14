@@ -139,7 +139,8 @@ class TestsLevel18(HedyTester):
       step = 1 if int(2) < int(4) else -1
       for a in range(int(2), int(4) + step, step):
         a = a + 2
-        b = b + 2""")
+        b = b + 2
+        time.sleep(0.1)""")
 
       self.multi_level_tester(
         code=code,
@@ -157,7 +158,8 @@ class TestsLevel18(HedyTester):
       for i in range(int(1), int(3) + step, step):
         step = 1 if int(1) < int(4) else -1
         for j in range(int(1), int(4) + step, step):
-          print(f'rondje: {i} tel: {j}')""")
+          print(f'rondje: {i} tel: {j}')
+          time.sleep(0.1)""")
 
       self.multi_level_tester(
 

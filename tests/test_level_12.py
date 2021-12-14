@@ -397,6 +397,13 @@ class TestsLevel12(HedyTester):
       expected=expected
     )
 
+  def test_calc_assign_equals(self):
+    code = "nummer = 4 + 5"
+    expected = "nummer = 4 + 5"
+    self.multi_level_tester(
+      code=code,
+      expected=expected)
+
   # def test_access_variable_before_definition(self):
   #   code = textwrap.dedent("""\
   #           a is b
@@ -433,9 +440,11 @@ class TestsLevel12(HedyTester):
       for i in range(int(1), int(2) + step, step):
         print(f'if youre happy and you know it')
         print(f'{action}')
+        time.sleep(0.1)
       print(f'if youre happy and you know it and you really want to show it')
       print(f'if youre happy and you know it')
-      print(f'{action}')""")
+      print(f'{action}')
+      time.sleep(0.1)""")
 
 
     self.single_level_tester(code=code, expected=expected)
