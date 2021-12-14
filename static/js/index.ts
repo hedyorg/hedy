@@ -3,6 +3,7 @@ export * from './app';
 export * from './auth';
 import './syntaxLang-en';
 import './syntaxLang-nl';
+import './syntaxLang-es';
 import './syntaxModesRules';
 import './tabs';
 import './translating';
