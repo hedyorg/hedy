@@ -54,6 +54,7 @@ ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 #
 QUIZ_ANSWERS = dynamo.Table(storage, 'quizAnswers', partition_key='user', sort_key='levelAttempt')
 
+
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
@@ -307,10 +308,14 @@ class Database:
 
         return display_adventures, restrictions
 
-    def achievements_by_username(self, user):
-        return ACHIEVEMENTS.get({'username': user})
+    def achievements_by_username(self, username):
+        return ACHIEVEMENTS.get({'username': username})
 
-    def update_achievements_by_username(self, user, achievements):
-        if user != achievements['user']:
-            return
-        CUSTOMIZATIONS.put(achievements)
+    def increase_user_run_count(self, username):
+        return ACHIEVEMENTS.update({'username': username}, {'run_programs': dynamo.DynamoIncrement(1)})
+
+    def increase_user_save_count(self, username):
+        return ACHIEVEMENTS.update({'username': username}, {'saved_programs': dynamo.DynamoIncrement(1)})
+
+    def increase_user_submit_count(self, username):
+        return ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})

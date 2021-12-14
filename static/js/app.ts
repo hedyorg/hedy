@@ -611,10 +611,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
-  // Parsing has gone fine -> Check for achievements
-  console.log("We runnen het programma!");
-  achievementReached("Getting Started I", "Run 1 Hedy program");
-
   // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
   // Please see note at the top of the `outf` function.
   if (! window.State.programsInExecution) window.State.programsInExecution = 0;
@@ -893,15 +889,6 @@ export function modalStepOne(level: number){
   createModal(level);
   let modal_editor = $('#modal-editor');
   initializeModalEditor(modal_editor);
-}
-
-function achievementReached(title: string, text: string){
-  $('#achievement_reached_title').text('"' + title + '"');
-  $('#achievement_reached_text').text(text);
-  $('#achievement_pop-up').fadeIn(1000);
-  setTimeout(function(){
-   $('#achievement_pop-up').fadeOut(1000);
-  }, 4000);
 }
 
 function showSuccesMessage(){

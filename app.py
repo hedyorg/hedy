@@ -449,6 +449,7 @@ def parse():
 
             try:
                 transpile_result = hedy.transpile(code, level, lang)
+                DATABASE.increase_user_run_count(username)
             except hedy.exceptions.InvalidSpaceException as ex:
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
@@ -494,11 +495,6 @@ def parse():
     })
 
     return jsonify(response)
-
-
-def update_achievements(user, response):
-    current_achievements = DATABASE.achievements_by_username(user)
-    return None
 
 
 def hedy_error_to_response(ex, translations):
@@ -1288,6 +1284,7 @@ def submit_program(user):
         return 'No such program!', 404
 
     DATABASE.submit_program_by_id(body['id'])
+    DATABASE.increase_user_submit_count(user['username'])
     return jsonify({})
 
 
@@ -1381,12 +1378,6 @@ auth.routes(app, DATABASE)
 from website import teacher
 
 teacher.routes(app, DATABASE)
-
-# *** ACHIEVEMENTS BACKEND
-
-from website import achievements
-
-achievements.routes(app, DATABASE)
 
 
 # *** START SERVER ***
