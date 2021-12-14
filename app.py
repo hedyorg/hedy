@@ -1267,6 +1267,7 @@ def share_unshare_program(user):
         return 'No such program!', 404
 
     DATABASE.set_program_public_by_id(body['id'], bool(body['public']))
+    DATABASE.increase_user_save_count(user['username'])
     return jsonify({'id': body['id']})
 
 
