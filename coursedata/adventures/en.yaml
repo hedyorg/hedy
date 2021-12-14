@@ -57,7 +57,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    name is 'The Queen of England'
+                    name = 'The Queen of England'
                     print name ' was eating a piece of cake, when suddenly...'
                     ```
                 start_code: ""
@@ -68,7 +68,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    animals is red bird, black sheep, green frog, yellow duck, little child
+                    animals = red bird, black sheep, green frog, yellow duck, little child
                     print 'brown bear'
                     print 'brown bear'
                     print 'What do you see?'
@@ -88,11 +88,11 @@ adventures:
                     ## Example Simple Hedy Code
                     ```
                     print 'Robin is walking downtown'
-                    location is ask 'Is Robin going into a shop, or does she go home?'
+                    location = ask 'Is Robin going into a shop, or does she go home?'
                     if location is shop
                         print 'She enters the shop.'
                         print 'Robin sees an interesting looking book'
-                        book is ask 'Does Robin buy the book?'
+                        book = ask 'Does Robin buy the book?'
                         if book is yes
                             print 'Robin buys the book and goes home'
                         else
@@ -106,28 +106,28 @@ adventures:
 
                     ## Elaborate code
                     ```
-                    sword is lost
-                    game is on
+                    sword = lost
+                    game = on
                     print 'Our hero is walking through the forest'
                     print 'The path splits two ways'
                     repeat 2 times
                         if game is on
-                            path is ask 'Which path should she choose?'
+                            path = ask 'Which path should she choose?'
                             if path is left
                                 if sword is found
                                     print 'Our hero comes across a dragon!'
                                     print 'Luckily our hero has a sword to defeat the beast!'
-                                    game is over
+                                    game = over
                                 else
                                     print 'Our hero finds a dragon, but she doesnt have any weapons!'
                                     print 'Our hero is beaten by the dragon...'
                                     print 'Try again'
-                                    game is over
+                                    game = over
                             if path is right
                                 if sword is lost
                                     print 'Our hero finds a sword'
                                     print 'This could come in very handy'
-                                    sword is found
+                                    sword = found
                                 else
                                     print 'You have already found the sword. There is nothing left here.'
                                     print 'She walks back'
@@ -141,7 +141,7 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'OH NO! The T-rex is closing in!'
-                    end is ask 'Do you want a happy or a sad ending?'
+                    end = ask 'Do you want a happy or a sad ending?'
                     if end is happy
                         print 'Just in time Richard jumps back into the time machine!'
                         print 'Michael types in the code and...'
@@ -228,15 +228,15 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    keys is 'lost'
+                    keys = 'lost'
                     print 'You are standing in your garden and you have lost your keys.'
                     print 'Where do you want to look for them?'
                     print 'You can choose: tree, flowerbed, rock, postbox'
                     while keys is 'lost'
-                        location is ask 'Where do you want to look?'
+                        location = ask 'Where do you want to look?'
                         if location is 'flowerbed'
                             print 'Here they are!'
-                            keys is 'found'
+                            keys = 'found'
                         else
                             print 'Nope they are not at the ' location
                     print 'Now you can enter the house!'
@@ -248,29 +248,29 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    sword is 'lost'
-                    game is 'on'
+                    sword = 'lost'
+                    game = 'on'
                     print 'Our hero is walking through the forest'
                     print 'The path splits two ways'
                     for i in range 0 to 2
                         if game is 'on'
-                            path is ask 'Which path should she choose?'
+                            path = ask 'Which path should she choose?'
                             if path is 'left' and sword is 'found'
                                 print 'Our hero comes across a dragon!'
                                 print 'Luckily our hero has a sword to defeat the beast!'
-                                game is 'over'
+                                game = 'over'
                             if path is 'left' and sword is 'lost'
                                 print 'Our hero finds a dragon, but she doesnt have any weapons!'
                                 print 'Our hero is beaten by the dragon...'
                                 print 'Try again'
-                                game is 'over'
+                                game = 'over'
                             if path is 'right' and sword is 'found'
                                 print 'You have already found the sword. There is nothing left here.'
                                 print 'She walks back'
                             if path is 'right' and sword is 'lost'
                                 print 'Our hero finds a sword'
                                 print 'This could come in very handy'
-                                sword is 'found'
+                                sword = 'found'
                     ```
                 start_code: ""
     songs:
@@ -285,7 +285,7 @@ adventures:
                     In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
                     ## Example Hedy code
                     ```
-                    actions is 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     for action in actions
                         for i in range 1 to 2
                             print 'if youre happy and you know it'
@@ -321,7 +321,7 @@ adventures:
 
                     ## 5 Little Monkeys Jumping on the bed
                     ```
-                    monkeys is 5, 4, 3, 2
+                    monkeys = 5, 4, 3, 2
                     for monkey in monkeys
                         print monkey ' little monkeys jumping on the bed'
                         print 'One fell off and bumped his head'
@@ -331,7 +331,7 @@ adventures:
 
                     ## Baby Shark
                     ```
-                    sharks is baby, mommy, daddy, grandma, grandpa
+                    sharks = baby, mommy, daddy, grandma, grandpa
                     for shark in sharks
                         print shark 'tututututudu'
                         print shark 'tututututudu'
@@ -340,14 +340,14 @@ adventures:
                     ```
                     ## Old McDonald
                     ```
-                    animals is pig, dog, cow
+                    animals = pig, dog, cow
                     for animal in animals
                         if animal is pig
-                            sound is oink
+                            sound = oink
                         if animal is dog
-                            sound is woof
+                            sound = woof
                         if animal is cow
-                            sound is moo
+                            sound = moo
                         print 'Old McDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
@@ -366,12 +366,12 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    verse is 99
+                    verse = 99
                     repeat 99 times
                         print verse ' bottles of beer on the wall'
                         print verse ' bottles of beer'
                         print 'Take one down, pass it around'
-                        verse is verse - 1
+                        verse = verse - 1
                         print verse ' bottles of beer on the wall'
                     ```
                 start_code: ""
@@ -403,11 +403,11 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    verse is 99
+                    verse = 99
                     print verse ' bottles of beer on the wall'
                     print verse ' bottles of beer'
                     print 'Take one down, pass it around'
-                    verse is verse - 1
+                    verse = verse - 1
                     print verse ' bottles of beer on the wall'
                     ```
 
@@ -422,11 +422,11 @@ adventures:
 
                     ## Old MacDonald
                     ```
-                    animals is ['pig', 'dog', 'cow']
-                    sounds is ['oink', 'woof', 'moo']
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
                     for i in range 1 to 3
-                        animal is animals[i]
-                        sound is sounds[i]
+                        animal = animals[i]
+                        sound = sounds[i]
                         print 'Old McDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
@@ -440,7 +440,7 @@ adventures:
 
                     ## Drunken Sailor
                     ```
-                    lines is ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     for line in lines
                         for i in range 1 to 3
                             print line
@@ -571,7 +571,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    angle is 90
+                    angle = 90
                     repeat 10 times
                         turn angle
                         forward 50
@@ -583,14 +583,14 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    angles is ask 'How many angles should I draw?'
-                    angle is 360 / angles
+                    angles = ask 'How many angles should I draw?'
+                    angle = 360 / angles
                     repeat angle times
                         turn _
                         forward _
                     ```
                 start_code: |
-                    hoeken is ask 'How many angles should I draw?'
+                    hoeken = ask 'How many angles should I draw?'
             7:
                 story_text: |
                     ## Let's draw
@@ -615,8 +615,8 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    angles is ask 'How many angles do you want?'
-                    angle is 360 / angles
+                    angles = ask 'How many angles do you want?'
+                    angle = 360 / angles
                     forward 50
                     turn angle
                     forward 50
@@ -645,8 +645,8 @@ adventures:
 
                     ## Hedy code example
                     ```
-                    days is Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names is mom, dad, Emma, Sophie
+                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                    names = mom, dad, Emma, Sophie
                     for day in days
                         print names at random ' does the dishes on ' day
                     ```
@@ -658,7 +658,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    people is mom, dad, Emma, Sophie
+                    people = mom, dad, Emma, Sophie
                     repeat _ _ print 'the dishwasher is' _
                     ```
                 start_code: "print 'Who does the dishes?'"
@@ -669,11 +669,11 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    people is mom, dad, Emma, Sophie
-                    emma_washes is 0
-                    dishwasher is people at random
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people at random
                     print 'The dishwasher is' dishwasher
-                    if dishwasher is Emma emma_washes is emma_washes + 1
+                    if dishwasher is Emma emma_washes = emma_washes + 1
                     print 'Emma will do the dishes this week' emma_washes 'times'
                     ```
 
@@ -739,8 +739,8 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    players is Ann, John, Jesse
-                    choices is 1, 2, 3, 4, 5, 6
+                    players = Ann, John, Jesse
+                    choices = 1, 2, 3, 4, 5, 6
                     for player in players
                         print player ' throws ' choices at random
                     ```
@@ -755,7 +755,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
+                    choices = 1, 2, 3, 4, 5, earthworm
                     repeat _ _ print _ _ _
                     ```
                 start_code: "print 'What will the die indicate this time?'"
@@ -768,11 +768,11 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    choices is 1, 2, 3, 4, 5, earthworm
-                    points is 0
-                    throw is choices at random
+                    choices = 1, 2, 3, 4, 5, earthworm
+                    points = 0
+                    throw = choices at random
                     print 'you threw' throw
-                    if throw is earthworm points is points + 5 else points is points + throw
+                    if throw is earthworm points = points + 5 else points = points + throw
                     print 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
@@ -835,14 +835,14 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    options is 1, 2, 3, 4, 5, 6
+                    options = 1, 2, 3, 4, 5, 6
                     print 'Throw 6 as fast as you can!'
-                    thrown is 0
-                    tries is 0
+                    thrown = 0
+                    tries = 0
                     while thrown != 6
-                        thrown is options at random
+                        thrown = options at random
                         print 'You threw ' thrown
-                        tries is tries + 1
+                        tries = tries + 1
                     print 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: ""
@@ -875,8 +875,8 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    choices is rock, paper, scissors
-                    players is Marleen, Michael
+                    choices = rock, paper, scissors
+                    players = Marleen, Michael
                     for player in players
                          print player ' chooses ' choices at random
                     ```
@@ -893,7 +893,7 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    options is rock, paper, scissors
+                    options = rock, paper, scissors
                     computer_choice is _
                     choice is ask What do you choose?
                     print 'you chose ' _
@@ -938,11 +938,11 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    won is 'no'
-                    options is 'rock', 'paper', 'scissors'
+                    won = 'no'
+                    options = 'rock', 'paper', 'scissors'
                     while won is 'no'
-                        your_choice is ask 'What do you choose?'
-                        computer_choice is options at random
+                        your_choice = ask 'What do you choose?'
+                        computer_choice = options at random
                         print 'you chose ' your_choice
                         print 'the computer chose ' computer_choice
                         if computer_choice is your_choice
@@ -951,7 +951,7 @@ adventures:
                             print 'You lose!'
                         if computer_choice is 'rock' and your_choice is 'paper'
                             print 'You win!'
-                            won is 'yes'
+                            won = 'yes'
                 start_code: ""
             13:
                 story_text: |
@@ -960,9 +960,9 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    options is 'rock', 'paper', 'scissors'
-                    your_choice is ask 'What do you choose?'
-                    computer_choice is options at random
+                    options = 'rock', 'paper', 'scissors'
+                    your_choice = ask 'What do you choose?'
+                    computer_choice = options at random
                     print 'You choose ' your_choice
                     print 'The computer chooses ' computer_choice
                     if computer_choice is your_choice
@@ -987,21 +987,19 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Guess which number'
-                    numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number is numbers at random
-                    game is 'on'
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number = numbers at random
+                    game = 'on'
                     for i in range 1 to 10
                         if game is 'on'
-                            guess is ask 'Which number do you think it is?'
+                            guess = ask 'Which number do you think it is?'
                             if guess > number
                                 print 'Lower!'
                             if guess < number
                                 print 'Higher!'
                             if guess is number
                                 print 'You win!'
-                                game is 'over'
-
-
+                                game = 'over'
                 start_code: ""
             12:
                 story_text: |
@@ -1010,9 +1008,9 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    number1 is ask 'What is the first number?'
-                    number2 is ask 'What is the second number?'
-                    answer is number1 + number2
+                    number1 = ask 'What is the first number?'
+                    number2 = ask 'What is the second number?'
+                    answer = number1 + number2
                     print number1 ' plus ' number2 ' is ' answer
                 start_code: ""
             10:
@@ -1023,11 +1021,11 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    numbers is 1, 2, 3
+                    numbers = 1, 2, 3
                     for number1 in numbers
                         for number2 in numbers
-                            answer is ask 'How much is ' number2 ' times ' number1 '?'
-                            correct is number1 * number2
+                            answer = ask 'How much is ' number2 ' times ' number1 '?'
+                            correct = number1 * number2
                             if answer is correct
                                 print 'Great job!'
                             else
@@ -1041,17 +1039,17 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    score is 0
+                    score = 0
                     repeat 10 times
-                        numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 is numbers at random
-                        number2 is numbers at random
-                        correctanswer is number1 * number2
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number1 = numbers at random
+                        number2 = numbers at random
+                        correct_answer = number1 * number2
                         print 'What is ' number1 ' times ' number2 '?'
-                        answer is ask 'Type your answer here...'
+                        answer = ask 'Type your answer here...'
                         print 'Your answer is' answer
-                        if answer is correctanswer
-                            score is score + 1
+                        if answer is correct_answer
+                            score = score + 1
                     print 'Great job! Your score is... ' score ' out of 10!'
                     ```
                 start_code: "print 'Welcome to this calculator!'"
@@ -1062,8 +1060,8 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    correct_answer is 11 * 27
-                    answer is ask 'How much is 11 times 27?'
+                    correct_answer = 11 * 27
+                    answer = ask 'How much is 11 times 27?'
                     if answer is correct_answer print 'good job!'
                     else print 'Wrong! It was ' correct_answer
                     ```
@@ -1074,12 +1072,12 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    tables is 4, 5, 6, 8
-                    numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table is tables at random
-                    number is numbers at random
-                    correct_answer is table * number
-                    answer is ask 'how much is ' table ' times ' number '?'
+                    tables = 4, 5, 6, 8
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    table = tables at random
+                    number = numbers at random
+                    correct_answer = table * number
+                    answer = ask 'how much is ' table ' times ' number '?'
                     if answer is correct_answer print 'okay'
                     else print 'mistake! it was ' correct_answer
                     ```
@@ -1093,16 +1091,16 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    score is 0
+                    score = 0
                     for i in range 0 to 9
-                        numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 is numbers at random
-                        number2 is numbers at random
-                        correct is number1 * number2
-                        answer is 0
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number1 = numbers at random
+                        number2 = numbers at random
+                        correct = number1 * number2
+                        answer = 0
                         while answer != correct
                             print 'How much is ' number1 ' times ' number2 '?'
-                            answer is ask 'Fill in your answer:'
+                            answer = ask 'Fill in your answer:'
                             print 'Your answer is ' answer
                         print 'Good job!'
                     print 'You win!'
@@ -1157,17 +1155,17 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    price is 0
-                    food is ask 'What would you like to order?'
-                    drinks is ask 'What would you like to drink?'
+                    price = 0
+                    food = ask 'What would you like to order?'
+                    drinks = ask 'What would you like to drink?'
                     if food is 'hamburger'
-                        price is price + 6.50
+                        price = price + 6.50
                     if food is 'pizza'
-                        price is price + 5.75
+                        price = price + 5.75
                     if drinks is 'water'
-                        price is price + 1.20
+                        price = price + 1.20
                     if drink is 'soda'
-                        price is price + 2.35
+                        price = price + 2.35
                     print 'That will be ' price ' dollar, please'
                     ```
                 start_code: ""
@@ -1179,17 +1177,17 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Welcome to Restaurant Hedy!'
-                    people is ask 'For how many people would you like to order?'
+                    people = ask 'For how many people would you like to order?'
                     for i in range 1 to people
                         print 'Order number ' i
-                        food is ask 'What would you like to eat?'
+                        food = ask 'What would you like to eat?'
                         print food
                         if food is fries
-                            sauce is ask 'What kind of sauce would you like with that?'
+                            sauce = ask 'What kind of sauce would you like with that?'
                             print sauce
-                        drinks is ask 'What would you like to drink?'
+                        drinks = ask 'What would you like to drink?'
                         print drinks
-                    price is 4 * people
+                    price = 4 * people
                     print 'That will be ' price ' dollars, please!'
                     ```
                 start_code: ""
@@ -1200,22 +1198,22 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    courses is appetizer, main course, dessert
+                    courses = appetizer, main course, dessert
                     for course in courses
-                        food is ask 'What would you like to eat as your ' course '?'
+                        food = ask 'What would you like to eat as your ' course '?'
                         print food ' will be your ' course
                     ```
                     ## Example Hedy code
                     Of course, you could also order for multiple people!
                     ```
-                    courses is appetizer, main course, dessert
-                    names is Timon, Onno
+                    courses = appetizer, main course, dessert
+                    names = Timon, Onno
                     for name in names
                         for course in courses
-                            food is ask name ', what would you like to eat as your ' course '?'
+                            food = ask name ', what would you like to eat as your ' course '?'
                             print name ' orders ' food ' as their ' course
                     ```
-                start_code: "courses is appetizer, main course, dessert"
+                start_code: "courses = appetizer, main course, dessert"
             9:
                 story_text: |
                     ## Restaurant
@@ -1226,22 +1224,22 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Welcome to Hedys restaurant!'
-                    people is ask 'How many people will be joining us today?'
+                    people = ask 'How many people will be joining us today?'
                     print 'Great!'
-                    price is 0
+                    price = 0
                     repeat people times
-                        food is ask 'What would you like to order?'
+                        food = ask 'What would you like to order?'
                         print food
                         if food is fries
-                            price is price + 3
-                            sauce is ask 'What kind of sauce would you like with your fries?'
+                            price = price + 3
+                            sauce = ask 'What kind of sauce would you like with your fries?'
                             if sauce is no
                                 print 'no sauce'
                             else
-                                price is price + 1
+                                price = price + 1
                                 print 'with ' sauce
                         if food is pizza
-                            price is price + 4
+                            price = price + 4
                     print 'That will be ' price ' dollar'
                     print 'Enjoy your meal!'
                     ```
@@ -1253,10 +1251,10 @@ adventures:
 
                     ```
                     print 'Welcome to Hedys restaurant!'
-                    people is ask 'How many people will be joining us today?'
+                    people = ask 'How many people will be joining us today?'
                     print 'Great!'
                     repeat people times
-                        food is ask 'What would you like to order?'
+                        food = ask 'What would you like to order?'
                         print food
                     print 'Thank you for ordering!'
                     print 'Enjoy your meal!'
@@ -1273,8 +1271,8 @@ adventures:
 
                     ```
                     print 'Welcome to Hedys restaurant!'
-                    people is ask 'How many people are joining us today?'
-                    repeat people times food is ask 'What would you like to eat?'
+                    people = ask 'How many people are joining us today?'
+                    repeat people times food = ask 'What would you like to eat?'
                     print 'Thanks for your order! Its coming right up!'
                     ```
                 start_code: ""
@@ -1289,11 +1287,11 @@ adventures:
                     print 'Welcome to Hedys restaurant'
                     print 'Here is our menu:'
                     print 'Our main courses are pizza, lasagne, or spaghetti'
-                    main is ask 'Which main course would you like?'
-                    price is 0
-                    if main is pizza price is 10
-                    if main is lasagne price is 12
-                    if main is spaghetti price is 8
+                    main = ask 'Which main course would you like?'
+                    price = 0
+                    if main is pizza price = 10
+                    if main is lasagne price = 12
+                    if main is spaghetti price = 8
                     print 'You have ordered ' main
                     print 'That will be ' price ' dollars, please'
                     print 'Thank you, enjoy your meal!'
@@ -1308,17 +1306,17 @@ adventures:
                     print 'Our starters are salad, soup, or carpaccio'
                     print 'Our main courses are pizza, lasagne, or spaghetti'
                     print 'Our desserts are brownie, icecream, or milkshake'
-                    starter is ask 'Which starter would you like to have?'
-                    main is ask 'Which main course would you like?'
-                    dessert is ask 'Which dessert do you pick?'
-                    price is 0
-                    if starter is soup price is price + 6 else price is price + 7
-                    if main is pizza price is price + 10
-                    if main is lasagne price is price + 12
-                    if main is spaghetti price is price + 8
-                    if dessert is brownie price is price + 7
-                    if dessert is icecream price is price + 5
-                    if dessert is milkshake price is price + 4
+                    starter = ask 'Which starter would you like to have?'
+                    main = ask 'Which main course would you like?'
+                    dessert = ask 'Which dessert do you pick?'
+                    price = 0
+                    if starter is soup price = price + 6 else price = price + 7
+                    if main is pizza price = price + 10
+                    if main is lasagne price = price + 12
+                    if main is spaghetti price = price + 8
+                    if dessert is brownie price = price + 7
+                    if dessert is icecream price = price + 5
+                    if dessert is milkshake price = price + 4
                     print 'You have ordered ' starter ' , ' main ' and ' dessert
                     print 'That will be ' price ' dollars, please'
                     print 'Thank you, enjoy your meal!'
@@ -1417,11 +1415,11 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Welcome at McHedy'
-                    more is 'yes'
+                    more = 'yes'
                     while more is 'yes'
-                        order is ask 'What would you like to order?'
+                        order = ask 'What would you like to order?'
                         print order
-                        more is ask 'Would you like to order anything else?'
+                        more = ask 'Would you like to order anything else?'
                     print 'Thank you!'
                 start_code: ""
             13:
@@ -1431,18 +1429,18 @@ adventures:
 
                     ## Example Hedy code with the `and` command
                     ```
-                    price is 10
-                    food is ask 'What would you like to eat?'
-                    drinks is ask 'What would you like to drink?'
+                    price = 10
+                    food = ask 'What would you like to eat?'
+                    drinks = ask 'What would you like to drink?'
                     if food is 'sandwich' and drinks is 'juice'
                         print 'Thats our discount menu'
-                        price is price - 3
+                        price = price - 3
                     print 'That will be ' price ' dollars'
                     ```
 
                     ## Example Hedy code with the `or` command
                     ```
-                    drinks is ask 'What would you like to drink?'
+                    drinks = ask 'What would you like to drink?'
                     if drinks is 'water' or drinks is 'juice'
                         print 'Thats a healthy choice'
                     ```
@@ -1486,7 +1484,7 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    fortunes is 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
+                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
                     print 'I will take a look in my crystall ball for your future.'
                     print 'I see... I see...'
                     print fortunes at random
@@ -1499,10 +1497,10 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    houses is mansion, apartment, shack, house
-                    loves is nobody, a royal, their neighbour, their true love
-                    pets is dog, cat, elephant
-                    names is Jenna, Ryan, Jim
+                    houses = mansion, apartment, shack, house
+                    loves = nobody, a royal, their neighbour, their true love
+                    pets = dog, cat, elephant
+                    names = Jenna, Ryan, Jim
                     for name in names
                         print name ' lives in a ' houses at random
                         print name ' will marry ' loves at random
@@ -1511,10 +1509,10 @@ adventures:
 
                     ## Example Hedy Code - Harry Potter
                     ```
-                    houses is Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects is potions, defence against the dark arts, charms, transfiguration
-                    fears is Voldemort, spiders, failing your OWL test
-                    names is Harry, Ron, Hermione
+                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
+                    subjects = potions, defence against the dark arts, charms, transfiguration
+                    fears = Voldemort, spiders, failing your OWL test
+                    names = Harry, Ron, Hermione
                     for name in names
                         print name ' is placed in ' houses at random
                         print name ' is great at ' subjects at random
@@ -1532,9 +1530,9 @@ adventures:
                     ```
                     print 'I am Hedy the fortune teller!'
                     print 'You can ask me 3 questions.'
-                    answers is yes, no, maybe
+                    answers = yes, no, maybe
                     repeat 3 times
-                       question is ask 'What do you want to know?'
+                       question = ask 'What do you want to know?'
                        print question
                        print 'My crystal ball says...' answers at random
                     ```
@@ -1548,8 +1546,8 @@ adventures:
                     ```
                     print 'Im Hedy the fortune teller!'
                     print 'You can ask 3 questions!'
-                    repeat 3 times question is ask 'What do you want to know?'
-                    answer is yes, no, maybe
+                    repeat 3 times question = ask 'What do you want to know?'
+                    answer = yes, no, maybe
                     repeat 3 times print 'My crystal ball says... ' answer at random
                     ```
 
@@ -1574,11 +1572,11 @@ adventures:
                     ```
                     print 'I am Hedy the fortune teller!'
                     print 'I can predict how many kids youll get when you grow up!'
-                    age is ask 'How old are you?'
-                    siblings is ask 'How many siblings do you have?'
-                    length is ask 'How tall are you in centimetres?'
-                    kids is length / age
-                    kids is kids - siblings
+                    age = ask 'How old are you?'
+                    siblings = ask 'How many siblings do you have?'
+                    length = ask 'How tall are you in centimetres?'
+                    kids = length / age
+                    kids = kids - siblings
                     print 'You will get ...'
                     print kids ' kids!'
                     ```
@@ -1589,11 +1587,11 @@ adventures:
                     ```
                     print 'Im Hedy the silly fortune teller!'
                     print 'I will predict how smart you are!'
-                    football is ask 'On a scale 1-10 how much do you love football?'
-                    bananas is ask 'How many bananas did you eat this week?'
-                    hygiene is ask 'How many times did you wash your hands today?'
-                    result is bananas + hygiene
-                    result is result * football
+                    football = ask 'On a scale 1-10 how much do you love football?'
+                    bananas = ask 'How many bananas did you eat this week?'
+                    hygiene = ask 'How many times did you wash your hands today?'
+                    result = bananas + hygiene
+                    result = result * football
                     print 'You are ' result ' percent smart.'
                     ```
                 start_code: ""
@@ -1714,14 +1712,14 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Escape from the haunted house'
-                    lives is 3
-                    doors is 1, 2, 3
-                    monsters is 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     for i in range 1 to 10
                         if lives > 0
-                            good_door is doors at random
-                            monster is monsters at random
-                            chosen_door is ask 'Which door do you choose?'
+                            good_door = doors at random
+                            monster = monsters at random
+                            chosen_door = ask 'Which door do you choose?'
                             if good_door is chosen_door
                                 print 'You have chosen the correct door'
                             else
@@ -1730,7 +1728,7 @@ adventures:
                                     print 'Pffieuw.... Its asleep'
                                 else
                                     print 'You lose one life'
-                                    lives is lives -1
+                                    lives = lives -1
                         else
                             print 'GAME OVER'
                     ```
@@ -1744,19 +1742,19 @@ adventures:
                     ```
                     print 'Escape from the Haunted House!'
                     player is alive
-                    doors is 1, 2, 3
-                    monsters is zombie, vampire, giant spider
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
                     for i in range 1 to 3
                         if player is alive
-                            correctdoor is doors at random
+                            correct_door = doors at random
                             print 'Room ' i
                             print 'There are 3 doors in front of you...'
-                            chosendoor is ask 'Which door do you choose?'
-                            if chosendoor is correctdoor
+                            chosendoor = ask 'Which door do you choose?'
+                            if chosendoor is correct_door
                                 print 'No monsters here!'
                             else
                                 print 'You are eaten by a ' monsters at random
-                                player is dead
+                                player = dead
                         else
                             print 'GAME OVER'
                     if player is alive
@@ -1771,19 +1769,19 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Escape from the Haunted House!'
-                    player is alive
-                    doors is 1, 2, 3
-                    monsters is zombie, vampire, giant spider
+                    player = alive
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
                     repeat 3 times
                         if player is alive
-                            correctdoor is doors at random
+                            correct_door is doors at random
                             print 'There are 3 doors in front of you...'
-                            chosendoor is ask 'Which door do you choose?'
-                            if chosendoor is correctdoor
+                            chosen_door = ask 'Which door do you choose?'
+                            if chosen_door is correct_door
                                 print 'No monsters here!'
                             else
                                 print 'You are eaten by a ' monsters at random
-                                player is dead
+                                player = dead
                         else
                             print 'GAME OVER'
                     if player is alive
@@ -1807,10 +1805,10 @@ adventures:
                     print 'There are 3 doors in front of you...'
                     doors is 1, 2, 3
                     monsters is werewolf, mummy, vampire, zombie
-                    chosendoor is ask 'Which door do you choose?'
-                    print 'You chose door...' chosendoor
-                    correctdoor is doors at random
-                    if chosendoor is correctdoor print 'Great! Youve escaped!'
+                    chosen_door is ask 'Which door do you choose?'
+                    print 'You chose door...' chosen_door
+                    correct_door is doors at random
+                    if chosen_door is correct_door print 'Great! Youve escaped!'
                     else print 'Oh no! You are being eaten by a...' monsters at random
                     ```
 
@@ -1857,29 +1855,29 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    numbers is [1, 2, 3]
-                    i is numbers[random]
-                    hint is ['growling', 'a cackling laugh', 'fluttering batwings']
-                    monsters is ['zombie', 'witch', 'vampire']
-                    badfate is ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
-                    goodfate is ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
-                    weapons is ['ham', 'lighter', 'garlic']
+                    numbers = [1, 2, 3]
+                    i = numbers[random]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
                     print 'Youre standing in front of an old mension'
                     print 'Something is not right here'
                     print 'You hear ' hint[i]
                     print 'Youre going to explore it'
                     print 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
-                    yourweapon is ask 'What do you bring with you?'
-                    print 'With your ' yourweapon ' you enter the living room'
+                    your_weapon = ask 'What do you bring with you?'
+                    print 'With your ' your_weapon ' you enter the living room'
                     print 'There you find a ' monsters[i]
-                    neededweapon is weapons[i]
-                    if yourweapon is neededweapon
-                        print 'You use your ' yourweapon
-                        print goodfate[i]
+                    needed_weapon = weapons[i]
+                    if your_weapon is needed_weapon
+                        print 'You use your ' your_weapon
+                        print good_fate[i]
                         print 'YOU WIN!'
                     else
                         print 'You have chosen the wrong weapon...'
-                        print badfate[i]
+                        print bad_fate[i]
                         print 'GAME OVER'
                     ```
                 start_code: ""
@@ -1896,11 +1894,11 @@ adventures:
 
                     ## Example Hedy Code
                     ```
-                    money is ask 'How much money have you saved?'
-                    wish is ask 'How much money do you need?'
-                    allowance is ask 'How much pocket money do you get each week?'
-                    to_save is wish - money
-                    weeks is to_save / allowance
+                    money = ask 'How much money have you saved?'
+                    wish = ask 'How much money do you need?'
+                    allowance = ask 'How much pocket money do you get each week?'
+                    to_save = wish - money
+                    weeks = to_save / allowance
                     if wish > money
                         print 'You need to save up some more!'
                         print 'Youll need ' weeks ' more weeks.'
@@ -1917,12 +1915,12 @@ adventures:
                     ## Example Hedy Code
                     ```
                     print 'The digital piggy bank'
-                    wish is ask 'What would you like to buy?'
-                    price is ask 'How much does that cost?'
-                    saved is ask 'How much money have you saved already?'
-                    allowance is ask 'How much pocket money do you get per week?'
-                    to_save is price - saved
-                    weeks is to_save / allowance
+                    wish = ask 'What would you like to buy?'
+                    price = ask 'How much does that cost?'
+                    saved = ask 'How much money have you saved already?'
+                    allowance = ask 'How much pocket money do you get per week?'
+                    to_save = price - saved
+                    weeks = to_save / allowance
                     print 'You can buy a ' wish ' in ' weeks ' weeks.'
                 start_code: ""
     quizmaster:
@@ -1940,16 +1938,16 @@ adventures:
                     ## Example Hedy code
                     ```
                     print 'Make your own quiz'
-                    points_a is 0
-                    points_b is 0
+                    points_a = 0
+                    points_b = 0
                     print 'Question'
                     print 'Answeroption A'
                     print 'Answeroption B'
-                    answer is ask 'Which answer?'
+                    answer = ask 'Which answer?'
                     if answer is 'A'
-                        points_a is points_a + 1
+                        points_a = points_a + 1
                     if answer is 'B'
-                        points_b is points_b + 1
+                        points_b = points_b + 1
                     print 'End of the quiz!'
                     print 'Lets see the results!'
                     if points_a > points_b
@@ -1972,17 +1970,17 @@ adventures:
 
                     ## Example Hedy code
                     ```
-                    frenchwords is ['bonjour', 'ordinateur', 'pomme de terre']
-                    translation is ['hello', 'computer', 'potato']
-                    score is 0
+                    french_words = ['bonjour', 'ordinateur', 'pomme de terre']
+                    translation = ['hello', 'computer', 'potato']
+                    score = 0
                     for i in range 1 to 3
-                        answer is ask 'What does ' frenchwords[i] ' mean?'
-                        correct is translation[i]
+                        answer = ask 'What does ' french_words[i] ' mean?'
+                        correct = translation[i]
                         if answer is correct
                             print 'Correct!'
-                            score is score + 1
+                            score = score + 1
                         else
-                            print 'Wrong, ' frenchwords[i] ' means ' translation[i]
+                            print 'Wrong, ' french_words[i] ' means ' translation[i]
                     print 'You gave ' score ' correct answers.'
                     ```
                 start_code: ""
@@ -2091,9 +2089,9 @@ adventures:
 
                     For example:
                     ```
-                    answer is 'Would you like something to drink?'
+                    answer = ask 'Would you like something to drink?'
                     if answer is yes
-                        drinks is ask 'What would you like to drink?'
+                        drinks = ask 'What would you like to drink?'
                     if drinks is _
                             print 'We are out of that'
                     else

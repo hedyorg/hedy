@@ -41,8 +41,8 @@ class TestsLevel16(HedyTester):
 
     def test_list_access_var(self):
         code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            eerstefruit is fruit[1]
+            fruit = ['banaan', 'appel', 'kers']
+            eerstefruit = fruit[1]
             print eerstefruit""")
         expected = textwrap.dedent("""\
             fruit = ['banaan', 'appel', 'kers']

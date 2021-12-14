@@ -159,9 +159,9 @@
         example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
         demo_code: print '5 kali 5 adalah ' 5 * 5
     -   explanation: Tanyakan hasil suatu perhitungan dan cek apakah hasilnya benar
-        example: "Contoh: jawaban is ask 'Apa hasil dari 10 tambah 10?'"
+        example: "Contoh: jawaban = ask 'Apa hasil dari 10 tambah 10?'"
         demo_code: |-
-            jawaban is ask 'Apa hasil dari 10 tambah 10?'
+            jawaban = ask 'Apa hasil dari 10 tambah 10?'
             if jawaban is 20 print 'Yeah!' else print 'Ups'
 7:
     start_code: repeat 3 times print 'Hedy itu menyenangkan!'
@@ -178,19 +178,19 @@
         example: "Contoh: print 'Halo selamat datang di Hedy'"
         demo_code: print 'Halo selamat datang di Hedy'
     -   explanation: Tanyakan sesuatu dengan `ask`
-        example: "Contoh: warna is ask 'Apa warna favoritmu?'"
+        example: "Contoh: warna = ask 'Apa warna favoritmu?'"
         demo_code: |-
-            warna is ask 'Apa warna favoritmu?'
+            warna = ask 'Apa warna favoritmu?'
             print warna ' adalah warna favoritmu!'
     -   explanation: Ambillah sebuah pilihan dengan `if`
         example: "Contoh: if warna is hijau print 'cantik!' else print 'meh!'"
         demo_code: |-
-            warna is ask 'Apa warna favorit kamu?'
+            warna = ask 'Apa warna favorit kamu?'
             if warna is hijau print 'cantik!' else print 'meh!'
     -   explanation: Gabungan `repeat` dan `if`
         example: "Contoh: if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'"
         demo_code: |-
-            warna is ask 'Apa warna favoritmu?'
+            warna = ask 'Apa warna favoritmu?'
             if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
 8:
     start_code: |-
@@ -214,9 +214,9 @@
         example: "Contoh: print '5 kali 5 adalah ' 5 * 5"
         demo_code: print '5 kali 5 adalah ' 5 * 5
     -   explanation: Tanyakan jawaban dari sebuah penjumlahan dan cek apakah itu benar. Kita sekarang bisa menampilkan dua baris.
-        example: "Contoh: jawaban is ask 'Apa hasil dari 5 tambah 5?'"
+        example: "Contoh: jawaban = ask 'Apa hasil dari 5 tambah 5?'"
         demo_code: |-
-            jawaban is ask 'Apa hasil dari 5 tambah 5?'
+            jawaban = ask 'Apa hasil dari 5 tambah 5?'
             if jawaban is 10
                 print 'Kerja bagus!'
                 print 'Betul, jawabannya adalah ' jawaban
@@ -226,7 +226,7 @@
 9:
     start_code: |-
         repeat 3 times
-            makanan is ask 'Apa yang kamu mau?'
+            makanan = ask 'Apa yang kamu mau?'
             if makanan is 'pizza'
                 print 'bagus!'
             else
@@ -239,7 +239,7 @@
         ## Contoh kode Hedy
         ```
         repeat 3 times
-            makanan is ask 'Apa yang kamu mau?'
+            makanan = ask 'Apa yang kamu mau?'
             if makanan is 'pizza'
                 print 'bagus!'
             else
@@ -248,9 +248,9 @@
     commands:
     -   name: '`if` dengan beberapa baris'
         explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.
-        example: "Contoh: jawaban is ask 'Apa hasil dari 20 tambah 20?'"
+        example: "Contoh: jawaban = ask 'Apa hasil dari 20 tambah 20?'"
         demo_code: |-
-            jawaban is ask 'Apa hasil dari 20 tambah 20?'
+            jawaban = ask 'Apa hasil dari 20 tambah 20?'
             if jawaban is 20
                 print 'Bagus!!'
                 print 'Jawabannya betul' jawaban
@@ -304,9 +304,9 @@
             for pembilang in range 1 to 5
                 print pembilang
     -   explanation: Tanyakan jawaban dari sebuah penjumlahan dan cek apakah itu benar. Kita sekarang bisa menampilkan dua baris.
-        example: "Contoh: jawaban is ask 'Apa hasil dari 5 tambah 5?'"
+        example: "Contoh: jawaban = ask 'Apa hasil dari 5 tambah 5?'"
         demo_code: |-
-            jawaban is ask 'Apa hasil dari 5 tambah 5?'
+            jawaban = ask 'Apa hasil dari 5 tambah 5?'
             if jawaban is 10
                 print 'Kerja bagus!'
                 print 'Betul, jawabannya adalah ' jawaban
@@ -324,13 +324,13 @@
         Pada level ini kamu juga perlu menggunakan kutip satu ketika menyimpan teks dengan `is`:
 
         ```
-        nama is 'Hedy'
+        nama = 'Hedy'
         print 'Halo ' nama
         ```
 
         Untuk angka, kamu tidak perlu menggunakan kutip satu untuk `is`:
         ```
-        skor is 25
+        skor = 25
         print 'Kamu mendapatkan ' skor
         ```
     commands:
@@ -343,16 +343,16 @@
             print 2.5 + 2.5
     -   name: desimal di variabel
         explanation: Menyimpan hasil perhitungan desimal
-        example: hasil is 2.5 + 2.5
+        example: hasil = 2.5 + 2.5
         demo_code: |-
-            jawaban is 2.5 + 2.5
+            jawaban = 2.5 + 2.5
             print 'Hitung langsung!'
             print 'Dua setengah tambah dua setengah adalah...'
             print jawaban
 13:
     start_code: |-
-        name is ask 'what is your name?'
-        leeftijd is ask 'what is your age?'
+        name = ask 'what is your name?'
+        leeftijd = ask 'what is your age?'
         if name is 'Hedy' and age is 2
             print 'You are the real Hedy!'
     intro_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
@@ -361,8 +361,8 @@
         explanation: Kedua kondisi (kiri dan kanan dari perintah `and`) harus bernilai benar
         example: if 3+2 is 5 and 2+2 is 4
         demo_code: |-
-            jawaban1 is ask 'Apa hasil dari 3+2?'
-            jawaban2 is ask 'Apa hasil dari 2+2?'
+            jawaban1 = ask 'Apa hasil dari 3+2?'
+            jawaban2 = ask 'Apa hasil dari 2+2?'
             if jawaban1 is 5 and jawaban2 is 4
                 print 'Kedua jawaban benar!'
             else
@@ -371,8 +371,8 @@
         explanation: Perintah `or` memastikan bahwa paling tidak satu dari dua kondisi yang diberikan di kiri dan kanan `or` harus terpenuhi. Keduanya terpenuhi pun tidak masalah.
         example: if 3+2 is 5 or 2+2 is 4
         demo_code: |-
-            jawaban1 is ask 'Apa hasil dari 3+2?'
-            jawaban2 is ask 'Apa hasil dari 2+2?'
+            jawaban1 = ask 'Apa hasil dari 3+2?'
+            jawaban2 = ask 'Apa hasil dari 2+2?'
             if jawaban1 is 5 or jawaban2 is 4
                 print 'Paling tidak salah satu jawaban benar!'
             else
@@ -401,7 +401,7 @@
 #            print('Halo!')
 #20:
 #    start_code: |-
-#        buah is ['apel', 'pisang', 'ceri']
+#        buah = ['apel', 'pisang', 'ceri']
 #        for i in range(1, 3):
 #            print(buah[i])
 #    intro_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
@@ -410,7 +410,7 @@
 #        explanation: Dengan `length` kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
 #        example: length(list)
 #        demo_code: |-
-#            buah is ['apel', 'pisang', 'ceri']
+#            buah = ['apel', 'pisang', 'ceri']
 #            print('Ukuran dari sebuah list adalah ' length(buah))
 #            for i in range(1, length(buah)):
 #                print(buah[i])
@@ -457,7 +457,7 @@
 #
 14:
     start_code: |-
-        umur is ask 'Berapa umur mu?'
+        umur = ask 'Berapa umur mu?'
         if umur < 13
             print 'Kamu lebih muda daripada aku!'
         else
@@ -468,21 +468,21 @@
         explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
         example: 'Sebagai contoh: umur < 12'
         demo_code: |-
-            umur is ask 'Berapa umur mu?'
+            umur = ask 'Berapa umur mu?'
             if umur < 13
                 print 'Kamu lebih muda daripada aku!'
     -   name: Lebih besar
         explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
         example: 'Sebagai contoh: umur > 12'
         demo_code: |-
-            umur is ask 'Berapa umur mu?'
+            umur = ask 'Berapa umur mu?'
             if umur > 13
                 print 'Kamu lebih tua daripada aku!'
 15:
     start_code: |-
-        jawaban is 0
+        jawaban = 0
         while jawaban != 25
-            jawaban is ask 'Apa hasil 5 kali 5?'
+            jawaban = ask 'Apa hasil 5 kali 5?'
         print 'Sebuah jawaban benar telah diberikan'
     intro_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
     commands:
@@ -490,46 +490,46 @@
         explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
         example: 'Contoh: while jawaban_benar is False'
         demo_code: |-
-            jawaban is 0
+            jawaban = 0
             while jawaban != 25
-                jawaban is ask 'Apa hasil 5 kali 5?'
+                jawaban = ask 'Apa hasil 5 kali 5?'
             print 'Sebuah jawaban benar telah diberikan'
     -   name: Pengulangan while dengan cakupan lebih kecil
-        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang is pembilang + 1` untuk sekarang.
+        explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang = pembilang + 1` untuk sekarang.
         example: 'Sebagai contoh: while pembilang < 3'
         demo_code: |-
-            pembilang is 1
+            pembilang = 1
             while pembilang < 3
                 print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
-                pembilang is pembilang + 1
+                pembilang = pembilang + 1
             print 'Kita selesai'
 
 16:
     start_code: |-
-        buah is ['apel', 'pisang', 'ceri']
+        buah = ['apel', 'pisang', 'ceri']
         print buah 
     intro_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
     commands:
     -   name: Kurung siku
         explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-        example: "Sebagai contoh: buah is ['apel', 'pisang', 'ceri']"
+        example: "Sebagai contoh: buah = ['apel', 'pisang', 'ceri']"
         demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
+            buah = ['apel', 'pisang', 'ceri']
             print buah 
     -   name: Mengambil sebuah nilai dari dalam list
         explanation: Untuk mengambil sebuah nilai dalam list, kita menggunakan [posisi] jadi buah[1] artinya mengambil buah pertama dari dalam list!
         example: 'Sebagai contoh: buahpertama is buah[1]'
         demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            buahpertama is buah[1]
+            buah = ['apel', 'pisang', 'ceri']
+            buahpertama = buah[1]
             print buahpertama 
     -   name: Mengambil sebuah nilai dari dalam list secara acak
         explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
         example: 'Sebagai contoh: buahacak is buah[random]'
         demo_code: |-
-            buah is ['apel', 'pisang', 'ceri']
-            buahacak is buah[random]
-            print buahacak 
+            buah = ['apel', 'pisang', 'ceri']
+            buaha_cak = buah[random]
+            print buaha_cak
 17:
     start_code: |-
         for i in range 1 to 10:
@@ -546,7 +546,7 @@
     -   explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
         example: 'if warna is hijau:'
         demo_code: |-
-            warna is 'hijau'
+            warna = 'hijau'
             if warna is hijau:
                 print 'Warnanya hijau'
             else:
@@ -554,7 +554,7 @@
     -   explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
         example: 'elif a is 5:'
         demo_code: |-
-            a is 2
+            a = 2
             if a is 1:
                 print 'a bernilai 1'
             elif a is 2:
