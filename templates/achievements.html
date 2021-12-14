@@ -3,7 +3,7 @@
 {% block main %}
     <h2 class="px-8 mb-4">{{achievements.title}}</h2>
     {% for category in achievements.categories %}
-    <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.title}}').toggle()">{{category.title}}</h1>
+        <h1 class="bg-blue-200 pl-8 py-2 mb-4 rounded-lg text-3xl" onclick="$ ('#{{category.title}}').toggle()">{{category.title}}</h1>
         <div class="hidden pl-4 mt-4 mb-4" id="{{ category.title }}">
         {% for subcategory in category.subcategory %}
             <h3>{{ subcategory.title }}</h3>
@@ -12,7 +12,7 @@
                 <div class="w-40 border-gray-500 rounded-lg mr-4 relative bg-gray-500">
                     <img src="{{static('/images/' + achievement.image)}}">
                     <div class="w-40 h-full opacity-0 hover:opacity-75 hover:bg-gray-900 rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                        <p>{{ achievement.text }}</p>
+                        <p>{% if category.title != "Hidden" %}{{ achievement.text }}{% else %}???{% endif %}</p>
                     </div>
                     <div class="text-center flex items-center justify-center h-16">
                         <p>{{ achievement.title }}</p>
