@@ -237,6 +237,9 @@ export function runit(level: string, lang: string, cb: () => void) {
         }
         return;
       }
+      if (response.Achievements) {
+        response.Achievements.forEach(showAchievement);
+      }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
         error.show(ErrorMessages['Execute_error'], err.message);
@@ -265,6 +268,14 @@ function showBulb(level: string){
     repair_button.onclick = function(e){ e.preventDefault();  modalStepOne(parsedlevel)};
   }
 
+}
+
+export function showAchievement(value: string){
+  $('#achievement_reached_title').text('"' + value + '"');
+   $('#achievement_pop-up').fadeIn(1000);
+   setTimeout(function(){
+    $('#achievement_pop-up').fadeOut(1000);
+   }, 4000);
 }
 
 function removeBulb(){
