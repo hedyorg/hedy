@@ -17,6 +17,9 @@
           <span class="fas fa-fw fa-user"></span> {{username}}
         </a>
         <ul class="dropdown-menu absolute hidden text-white rounded-lg border-black bg-blue-400 list-none ml-0 right-0 mt-12 mr-4" style="border-width: 1px; width: max-content;">
+          <a class="no-underline" href="/my-achievements">
+              <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-trophy mr-4"></span> {{auth.achievements}}</li>
+          </a>
           <a class="no-underline" href="/my-profile">
               <li class="hover:bg-blue-600 text-white rounded-lg py-2 px-4 block"><span class="fas fa-user-cog mr-4"></span> {{auth.profile}}</li>
           </a>
