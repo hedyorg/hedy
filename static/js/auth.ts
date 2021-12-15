@@ -170,9 +170,9 @@ export const auth = {
       const payload: User = {
         email: values['email'],
         birth_year: values.birth_year ? parseInt(values['birth_year']) : undefined,
+        country: values['country'] ? values.country : undefined,
+        gender: values['gender'] ? values.gender : undefined,
         language: values.language,
-        country: values['country'],
-        gender: values['gender'],
         prog_experience: $ ('input[name=has_experience]:checked').val() as 'yes' | 'no',
         experience_languages: $('#languages').is(':visible')
           ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
