@@ -149,7 +149,7 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
     Command.bigger: {14: [HedyType.integer, HedyType.float]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string]}
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.list]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -556,7 +556,7 @@ class TypeValidator(Transformer):
         return self.to_comparison_tree(Command.bigger_equal, tree)
 
     def not_equal(self, tree):
-        self.validate_args_type_allowed(tree.children, Command.not_equal)
+        self.validate_binary_command_args_type(Command.not_equal, tree, [int_to_float])
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
