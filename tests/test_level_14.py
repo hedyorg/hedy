@@ -97,6 +97,7 @@ class TestsLevel14(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+
   @parameterized.expand(HedyTester.number_comparisons_commands)
   def test_comparison_with_list_gives_type_error(self, comparison):
     code = textwrap.dedent(f"""\

@@ -919,6 +919,8 @@ def process_variable_for_fstring_padded(name, lookup):
         return f"str({hash_var(name)}).zfill(100)"
     elif is_float(name):
         return f"str({name}).zfill(100)"
+    elif is_quoted(name):
+        return f"{name}.zfill(100)"
     else:
         return f"'{name}'.zfill(100)"
 
