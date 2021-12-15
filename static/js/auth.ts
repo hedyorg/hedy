@@ -285,6 +285,10 @@ $ ('.auth input').get ().map (function (el) {
 });
 
 // We use GET /profile to see if we're logged in since we use HTTP only cookies and cannot check from javascript.
+$.ajax ({type: 'GET', url: '/profile'}).done (function (response) {
+   if (['/signup', '/login'].indexOf (window.location.pathname) !== -1) auth.redirect ('my-profile');
+   auth.profile = response;
+});
 
 if (window.location.pathname === '/reset') {
   const query = window.location.search.slice (1).split ('&');
