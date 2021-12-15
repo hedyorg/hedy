@@ -149,7 +149,7 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float]},
     Command.bigger: {14: [HedyType.integer, HedyType.float]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string]}
+    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.list]}
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -201,32 +201,32 @@ def get_suggestions_for_language(lang, level):
     return en_lang_commands
 
 
-def hash_needed(name):
-    # this function is now applied on something str sometimes Assignment
-    # no pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
-
-    if not isinstance(name, str):
-        name = name.name
+def hash_needed(var):
+    # this function now sometimes gets a str and sometimes - a LookupEntry
+    # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
 
     # some elements are not names but processed names, i.e. random.choice(dieren)
     # they should not be hashed
     # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(name) is LookupEntry and name.skip_hashing) or (isinstance(name, str) and '[' in name or '(' in name):
+    if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
         return False
 
-    return name in reserved_words or character_skulpt_cannot_parse.search(name) != None
+    var_name = var.name if type(var) is LookupEntry else var
 
-def hash_var(name):
-    name = name.name if type(name) is LookupEntry else name
-    if hash_needed(name):
+    return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
+
+
+def hash_var(var):
+    var_name = var.name if type(var) is LookupEntry else var
+    if hash_needed(var):
         # hash "illegal" var names
-        # being reservered keywords
+        # being reserved keywords
         # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
         # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(name.encode())
+        hash_object = hashlib.md5(var_name.encode())
         return "v" + hash_object.hexdigest()
     else:
-        return name
+        return var_name
 
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
@@ -556,7 +556,7 @@ class TypeValidator(Transformer):
         return self.to_comparison_tree(Command.bigger_equal, tree)
 
     def not_equal(self, tree):
-        self.validate_args_type_allowed(tree.children, Command.not_equal)
+        self.validate_binary_command_args_type(Command.not_equal, tree, [int_to_float])
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
@@ -1083,25 +1083,8 @@ class ConvertToPython_4(ConvertToPython_3):
     def text(self, args):
         return ''.join([str(c) for c in args])
 
-    def check_print_arguments(self, args):
-        # this function checks whether arguments of a print are valid
-        # we can print if all arguments are either quoted OR they are all variables
-
-        unquoted_args = [a for a in args if not is_quoted(a)]
-        unquoted_in_lookup = [is_variable(a, self.lookup) for a in unquoted_args]
-
-        if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
-            return args
-        else:
-            # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
-
     def print_ask_args(self, args):
-        args = self.check_print_arguments(args)
+        args = self.check_var_usage(args)
         result = ''
         for argument in args:
             argument = argument.replace("'", '')  # no quotes needed in fstring
