@@ -96,6 +96,20 @@ class TestsLevel14(HedyTester):
       exception=hedy.exceptions.InvalidArgumentTypeException
     )
 
+  def test_not_equal_string_literal(self):
+    code = textwrap.dedent(f"""\
+      if 'quoted' != 'string'
+        sleep 0""")
+    expected = textwrap.dedent(f"""\
+      if 'quoted'.zfill(100)!='string'.zfill(100):
+        time.sleep(0)""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected
+    )
+
   def test_not_equal_with_string(self):
     code = textwrap.dedent(f"""\
       a is 'text'
