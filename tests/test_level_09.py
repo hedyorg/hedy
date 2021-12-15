@@ -27,7 +27,8 @@ class TestsLevel9(HedyTester):
 
     expected = textwrap.dedent("""\
     for i in range(int(5)):
-      print(f'koekoek')""")
+      print(f'koekoek')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
   def test_repeat_with_variable_print(self):
@@ -39,7 +40,8 @@ class TestsLevel9(HedyTester):
     expected = textwrap.dedent("""\
     n = '5'
     for i in range(int(n)):
-      print(f'me wants a cookie!')""")
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
 
     output = textwrap.dedent("""\
     me wants a cookie!
@@ -69,6 +71,7 @@ class TestsLevel9(HedyTester):
       ingredient = input(f'wat wil je kopen?')
       if str(ingredient) == str('appel'):
         prijs = int(prijs) + int(1)
+      time.sleep(0.1)
     print(f'Dat is in totaal {prijs} euro.')""")
     self.single_level_tester(code=code, expected=expected)
 
@@ -84,7 +87,8 @@ class TestsLevel9(HedyTester):
     kleur = 'groen'
     if str(kleur) == str('groen'):
       for i in range(int(3)):
-        print(f'mooi')""")
+        print(f'mooi')
+        time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -102,7 +106,8 @@ class TestsLevel9(HedyTester):
       if str('antwoord2') == str('10'):
         print(f'Goedzo')
       else:
-        print(f'lalala')""")
+        print(f'lalala')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 
@@ -123,7 +128,8 @@ class TestsLevel9(HedyTester):
       if str(food) == str('pizza'):
         print(f'nice!')
       else:
-        print(f'pizza is better')""")
+        print(f'pizza is better')
+      time.sleep(0.1)""")
 
     self.single_level_tester(code=code, expected=expected)
 

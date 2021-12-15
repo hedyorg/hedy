@@ -288,8 +288,16 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 @app.context_processor
 def enrich_context_with_user_info():
     user = current_user()
-    return dict(username=user.get('username', ''), is_teacher=is_teacher(user), is_admin=is_admin(user))
-
+    data = {'username': user.get('username', ''), 'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
+    if len(data['username']) > 0: #If so, there is a user -> Retrieve all relevant info
+        user_data = DATABASE.user_by_username(user.get('username'))
+        if 'language' in user_data:
+            if user_data['language'] in ALL_LANGUAGES.keys():
+                g.lang = session['lang'] = user_data['language']
+        data['user_data'] = user_data
+        if 'classes' in user_data:
+            data['user_classes'] = DATABASE.get_student_classes(user.get('username'))
+    return data
 
 @app.context_processor
 def enricht_context_with_translations():
@@ -848,7 +856,7 @@ def no_quiz_data_error():
 @app.route('/hedy/<level>', methods=['GET'], defaults={'step': 1})
 @app.route('/hedy/<level>/<step>', methods=['GET'])
 def index(level, step):
-    if re.match('\d', level):
+    if re.match('\\d', level):
         try:
             g.level = level = int(level)
         except:
