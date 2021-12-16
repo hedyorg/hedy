@@ -107,6 +107,10 @@ class Achievements:
     def check_code_achievements(self, code):
         if "ask" in code:
             self.achieved.append("did_you_say_please")
+            if code.count("ask") >= 5:
+                self.achieved.append("talk-talk-talk")
+        if "Hedy" in code:
+            self.achieved.append("hedy_honor")
 
     def check_response_achievements(self, code, response):
         if 'has_turtle' in response and response['has_turtle']:

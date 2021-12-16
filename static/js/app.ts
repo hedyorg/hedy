@@ -270,6 +270,23 @@ function showBulb(level: string){
 
 }
 
+function pushAchievement(achievement: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/achievements',
+    data: JSON.stringify({
+      achievement: achievement
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+    }).done(function(response: any) {
+      if (response.achievements) {
+        console.log(response.achievements);
+        showAchievements(response.achievements, false);
+      }
+  });
+}
+
 function showAchievements(achievements: any[], reload: boolean) {
   fnAsync(achievements, 0);
   if (reload) {
@@ -682,26 +699,13 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
     timeoutMsg: function () {
-      $.ajax({
-        type: 'POST',
-        url: '/achievements',
-        data: JSON.stringify({
-          achievement: "hedy_hacking"
-        }),
-        contentType: 'application/json',
-        dataType: 'json'
-        }).done(function(response: any) {
-          if (response.achievements) {
-            console.log(response.achievements);
-            showAchievements(response.achievements, false);
-          }
-        });
+      pushAchievement("hedy_hacking");
       return ErrorMessages ['Program_too_long']},
     // Give up after three seconds of execution, there might be an infinite loop.
     // This function can be customized later to yield different timeouts for different levels.
     execLimit: (function () {
       // const level = window.State.level;
-      return ((hasTurtle) ? 1000 : 3000);
+      return ((hasTurtle) ? 20000 : 3000);
     }) ()
   });
 
@@ -712,6 +716,7 @@ function runPythonProgram(code: string, hasTurtle: boolean, hasWarnings: boolean
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      pushAchievement("error_or_empty");
       error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
     }
     window.State.programsInExecution--;

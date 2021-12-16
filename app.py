@@ -453,7 +453,8 @@ def parse():
 
             try:
                 transpile_result = hedy.transpile(code, level, lang)
-                DATABASE.increase_user_run_count(username)
+                if username:
+                    DATABASE.increase_user_run_count(username)
             except hedy.exceptions.InvalidSpaceException as ex:
                 response['Warning'] = translate_error(ex.error_code, hedy_errors, ex.arguments)
                 response['Location'] = ex.error_location
