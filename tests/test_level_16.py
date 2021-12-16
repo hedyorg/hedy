@@ -94,6 +94,26 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
+    def test_access_in_condition(self):
+        code = textwrap.dedent("""\
+            luiaard = 'luiaard'
+            dieren is ['aap', 'goat', 'fish']
+            if luiaard is dieren[1]
+                print 'ja'""")
+
+        expected = textwrap.dedent("""\
+            lijst = [1, 2, 3]
+            optellen = lijst[1-1] + lijst[2-1]
+            optellen = optellen + lijst[3-1]
+            print(f'{optellen}')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=self.is_not_turtle()
+        )
+
     # ask tests
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
