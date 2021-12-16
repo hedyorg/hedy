@@ -11,7 +11,7 @@ class Achievements:
     def verify_new_achievements(self, username):
         achievements_data = self.DATABASE.progress_by_username(username)
         reached_achievements = self.check_all_achievements(achievements_data)
-        self.new_achieved = list(set(reached_achievements) - set(achievements_data['achieved']))
+        self.new_achieved = [i for i in reached_achievements + achievements_data['achieved'] if i not in achievements_data['achieved']]
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
                 self.DATABASE.add_achievement_to_username(username, achievement)
