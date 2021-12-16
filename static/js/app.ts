@@ -238,7 +238,8 @@ export function runit(level: string, lang: string, cb: () => void) {
         return;
       }
       if (response.Achievements) {
-        response.Achievements.forEach(showAchievement, false);
+        console.log(response.Achievements);
+        response.Achievements.forEach(showAchievement);
       }
         runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         console.log(err)
@@ -270,15 +271,11 @@ function showBulb(level: string){
 
 }
 
-function showAchievement(value: string, reload: boolean){
+function showAchievement(value: string){
   $('#achievement_reached_title').text('"' + value + '"');
   $('#achievement_pop-up').fadeIn(1000, function () {
     setTimeout(function(){
-      $('#achievement_pop-up').fadeOut(1000, function () {
-        if (reload) {
-        location.reload();
-      }
-      });
+      $('#achievement_pop-up').fadeOut(1000);
      }, 4000);
   });
 
@@ -424,7 +421,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 
       modal.alert (auth.texts['save_success_detail'], 4000);
       if (response.achievements) {
-        showAchievement(response.achievements, true);
+        response.achievements.forEach(showAchievement);
       }
       // If we succeed, we need to update the default program name & program for the currently selected tab.
       // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
@@ -562,7 +559,7 @@ export function submit_program (id: string, shared: boolean) {
     dataType: 'json'
   }).done(function(_response) {
     if (_response.achievements) {
-      showAchievement(_response.achievements, true);
+      _response.achievements.forEach(showAchievement);
     }
   });
 }
