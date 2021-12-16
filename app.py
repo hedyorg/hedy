@@ -477,8 +477,6 @@ def parse():
 
         # If we have earned new achievements -> add to db and return names to front-end
         if username and ACHIEVEMENTS.verify_new_achievements(username, code, response):
-            print("We pakken die achievement!")
-            print(ACHIEVEMENTS.get_earned_achievements(g.lang))
             response['achievements'] = ACHIEVEMENTS.get_earned_achievements(g.lang)
 
     except hedy.exceptions.HedyException as ex:

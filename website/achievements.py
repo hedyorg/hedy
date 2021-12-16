@@ -21,9 +21,7 @@ class Achievements:
             self.check_code_achievements(code)
         if response:
             self.check_response_achievements(code, response)
-        print(self.achieved)
         self.new_achieved = [i for i in self.achieved if i not in achievements_data['achieved']]
-        print(self.new_achieved)
         if len(self.new_achieved) > 0:
             for achievement in self.new_achieved:
                 self.DATABASE.add_achievement_to_username(username, achievement)
@@ -83,14 +81,9 @@ class Achievements:
         if 'has_turtle' in response and response['has_turtle']:
             self.achieved.append("ninja_turtle")
         if 'Error' in response and response['Error']:
-            print("Dit gebeurt!")
-            print(code)
-            print(self.previous_code)
             self.consecutive_errors += 1
             if self.previous_code == code:
-                print("Ze zijn gelijk!")
                 self.identical_consecutive_errors += 1
-                print(self.identical_consecutive_errors)
             if self.identical_consecutive_errors >= 3:
                 self.achieved.append("programming_panic")
             self.previous_code = code
