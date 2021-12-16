@@ -78,6 +78,7 @@ for lang in ALL_LANGUAGES.keys():
 
 TRANSLATIONS = hedyweb.Translations()
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
+print(ACHIEVEMENTS_TRANSLATIONS.get_translations("nl"))
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
