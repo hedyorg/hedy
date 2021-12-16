@@ -94,9 +94,6 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    # todo (FH. 16 dec 2021): we now add list access comparison in level 16, but this could be earlier in principle
-    # if we see a use for it?
-    # `if luiaard is dieren at 1` would also be possible
     def test_access_in_condition(self):
         code = textwrap.dedent("""\
             luiaard = 'luiaard'
@@ -110,9 +107,8 @@ class TestsLevel16(HedyTester):
             if str(luiaard) == str(dieren[1-1]):
               print(f'ja')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            max_level=17,
             expected=expected,
             extra_check_function=self.is_not_turtle()
         )
